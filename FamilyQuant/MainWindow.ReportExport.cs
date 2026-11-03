@@ -18,6 +18,7 @@ public partial class MainWindow
     public static Action<ReportExportWindow>? ReportExportPresenterOverride { get; set; }
     public static Func<IReadOnlyList<QuantRow>, QuantManifest, FamilyClusterFile, string, ReportDocument>? ReportDocumentFactoryOverride { get; set; }
     public static Action<string, ReportDocument, ReportSelection, OperationContext>? ReportFileStagerOverride { get; set; }
+    public static Action<int>? ReportPublicationStepOverride { get; set; }
 
     private async void MenuItemExportReport_Click(object sender, RoutedEventArgs e)
     {
@@ -48,12 +49,14 @@ public partial class MainWindow
         }
         string scratchParent = Path.Combine(Path.GetTempPath(), "FamilyQuant.ReportExports");
         string scratch = Path.Combine(scratchParent, Guid.NewGuid().ToString("N"));
-        string? stagedFile = null;
+        string? publicationStage = null, publicationParent = null;
+        bool keepPublicationStage = false;
         try
         {
             FamilyClusterFile snapshot;
             QuantRow[] capturedRows;
             ReportDocument document;
+            ReportProjectExport prepared;
             using (var operation = Operations.Begin("Prepare report"))
             {
                 operation.Context.Report("report-attribution", "Waiting for family attribution");
@@ -66,7 +69,8 @@ public partial class MainWindow
                 var captured = await Task.Run(() => (File: FamilyClusterFile.FromJsonText(curation.ToJsonText()), Rows: rows.ToArray()));
                 snapshot = captured.File; capturedRows = captured.Rows;
                 RequireSameProject();
-                document = await PrepareReportDocumentAsync(capturedRows, manifest, snapshot, Path.Combine(scratch, "preview"), operation.Context);
+                prepared = await PrepareReportDocumentAsync(capturedRows, manifest, snapshot, Path.Combine(scratch, "preview"), operation.Context);
+                document = prepared.Document;
                 operation.Context.ThrowIfCancellationRequested();
                 RequireSameProject();
             }
@@ -104,34 +108,52 @@ public partial class MainWindow
             using (var operation = Operations.Begin("Export report"))
             {
                 if (threshold != previousThreshold)
-                    document = await PrepareReportDocumentAsync(capturedRows, manifest, snapshot, Path.Combine(scratch, "selected"), operation.Context);
+                {
+                    prepared = await PrepareReportDocumentAsync(capturedRows, manifest, snapshot, Path.Combine(scratch, "selected"), operation.Context);
+                    document = prepared.Document;
+                }
                 RequireSameProject();
                 operation.Context.ThrowIfCancellationRequested();
-                Directory.CreateDirectory(Path.GetDirectoryName(fullPath)!);
-                stagedFile = Path.Combine(Path.GetDirectoryName(fullPath)!, ".fq-report-" + Guid.NewGuid().ToString("N") + ".docx");
-                string stage = stagedFile;
+                publicationParent = Path.GetDirectoryName(fullPath)!;
+                Directory.CreateDirectory(publicationParent);
+                publicationStage = Path.Combine(publicationParent, ".fq-report-" + Guid.NewGuid().ToString("N"));
+                Directory.CreateDirectory(publicationStage);
+                string stage = Path.Combine(publicationStage, Path.GetFileName(fullPath));
+                string workbookStage = ReportSupplementWorkbook.PathForReport(stage);
                 var stager = ReportFileStagerOverride;
-                operation.Context.Report("report-write", "Writing the selected report sections and figures");
+                operation.Context.Report("report-write", "Writing the selected report and supplement workbook");
                 await Task.Run(() =>
                 {
-                    if (stager != null) stager(stage, document, selected, operation.Context);
-                    else WordReportWriter.Write(stage, document, selected);
+                    if (stager != null)
+                    {
+                        stager(stage, document, selected, operation.Context);
+                        operation.Context.ThrowIfCancellationRequested();
+                        ReportSupplementWorkbook.Write(workbookStage, document, prepared.SupplementSheets, selected);
+                    }
+                    else
+                    {
+                        WordReportWriter.Write(stage, document, selected);
+                        operation.Context.ThrowIfCancellationRequested();
+                        ReportSupplementWorkbook.Write(workbookStage, document, prepared.SupplementSheets, selected);
+                    }
                 });
                 operation.Context.ThrowIfCancellationRequested();
                 RequireSameProject();
-                operation.Context.Report("report-publish", "Publishing the completed Word report", 1, 1);
-                operation.Context.Commit(() => File.Move(stage, fullPath, true));
-                StatusModel.ShowMessage("Report exported to " + fullPath + ". Save the project to keep any changed report details or choices.");
+                operation.Context.Report("report-publish", "Publishing the Word report and supplement workbook", 1, 1);
+                ReportArtifactPublication.Publish(stage, workbookStage, fullPath, operation.Context, ReportPublicationStepOverride);
+                StatusModel.ShowMessage("Report exported to " + fullPath + " with " + Path.GetFileName(ReportSupplementWorkbook.PathForReport(fullPath))
+                    + ". Save the project to keep any changed report details or choices.");
             }
             return true;
         }
         catch (OperationCanceledException)
         {
-            StatusModel.ShowMessage("Report export cancelled. The previous report file was kept.");
+            StatusModel.ShowMessage("Report export cancelled. The previous report files were kept.");
             return false;
         }
         catch (Exception exception)
         {
+            keepPublicationStage = exception is ReportPublicationRecoveryException;
             string guidance = exception is IOException or UnauthorizedAccessException
                 ? " Check that the destination is writable and that the report is closed in other applications." : "";
             ShellMessages.Report(this, "The report could not be exported. " + exception.Message + guidance, "Export report", image: MessageBoxImage.Error);
@@ -139,8 +161,10 @@ public partial class MainWindow
         }
         finally
         {
-            if (stagedFile != null)
-                try { if (File.Exists(stagedFile)) File.Delete(stagedFile); } catch (IOException) { } catch (UnauthorizedAccessException) { }
+            if (!keepPublicationStage && publicationStage != null && publicationParent != null
+                && string.Equals(Path.GetDirectoryName(Path.GetFullPath(publicationStage)), Path.GetFullPath(publicationParent), StringComparison.OrdinalIgnoreCase)
+                && Path.GetFileName(publicationStage).StartsWith(".fq-report-", StringComparison.Ordinal))
+                try { if (Directory.Exists(publicationStage)) Directory.Delete(publicationStage, true); } catch (IOException) { } catch (UnauthorizedAccessException) { }
             // Only this command's freshly created GUID folder is eligible for recursive cleanup.
             if (string.Equals(Path.GetDirectoryName(Path.GetFullPath(scratch)), Path.GetFullPath(scratchParent), StringComparison.OrdinalIgnoreCase))
                 try { if (Directory.Exists(scratch)) Directory.Delete(scratch, true); } catch (IOException) { } catch (UnauthorizedAccessException) { }
@@ -149,17 +173,27 @@ public partial class MainWindow
         }
     }
 
-    private static async Task<ReportDocument> PrepareReportDocumentAsync(IReadOnlyList<QuantRow> rows,
+    private static async Task<ReportProjectExport> PrepareReportDocumentAsync(IReadOnlyList<QuantRow> rows,
         QuantManifest manifest, FamilyClusterFile snapshot, string folder, OperationContext operation)
     {
-        ReportDocument? prepared = null;
+        ReportProjectExport? prepared = null;
         var factory = ReportDocumentFactoryOverride;
         operation.Report("report-prepare", "Preparing report sections and figures");
         await AppOperationFiles.RunSta(() =>
         {
             operation.ThrowIfCancellationRequested();
-            prepared = factory != null ? factory(rows, manifest, snapshot, folder)
-                : ReportProjectExporter.Build(rows, manifest, snapshot, folder, snapshot.ReportDetails, snapshot.ReportInputProvenance).Document;
+            if (factory != null) prepared = new(factory(rows, manifest, snapshot, folder), new Dictionary<string, string>(StringComparer.Ordinal), Array.Empty<ReportPlacedFigure>());
+            else
+            {
+                prepared = ReportProjectExporter.Build(rows, manifest, snapshot, folder, snapshot.ReportDetails, snapshot.ReportInputProvenance);
+                // The published carrier precedes RS's final J6b Build wiring. Use the owner's
+                // layout while the carrier is empty; a populated carrier is already compact.
+                if (prepared.SupplementSheets.Count == 0 && prepared.CsvExports.Count > 0)
+                {
+                    var layout = ReportSupplementLayout.Apply(prepared.Document, prepared.CsvExports);
+                    prepared = prepared with { Document = layout.Document, SupplementSheets = layout.Sheets };
+                }
+            }
             operation.ThrowIfCancellationRequested();
         });
         return prepared ?? throw new InvalidOperationException("Report preparation returned no document.");

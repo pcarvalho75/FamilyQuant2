@@ -194,6 +194,34 @@
                                     </DataGrid>
                                 </DockPanel>
                             </TabItem>
+                            <TabItem Header="Panel links" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}">
+                                <DockPanel>
+                                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                                        <Button Content="Use link choices" Click="UpdatePanelLinks_Click" IsEnabled="{Binding CanUpdatePanelLinks}"
+                                                ToolTip="Store choices in the grouping recipe."/>
+                                        <TextBlock Text="Confirm ambiguous links, then update the proposal." VerticalAlignment="Center" Margin="12,0,0,0"/>
+                                    </StackPanel>
+                                    <DataGrid x:Name="panelLinksGrid" ItemsSource="{Binding Evidence.PanelLinks}" AutoGenerateColumns="False"
+                                              CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Source family" Binding="{Binding SourceFamily}" IsReadOnly="True" Width="180"/>
+                                            <DataGridTextColumn Header="Domain combination" Binding="{Binding Architecture}" IsReadOnly="True" Width="180"/>
+                                            <DataGridTextColumn Header="Candidate keys" Binding="{Binding Candidates}" IsReadOnly="True" Width="180"/>
+                                            <DataGridTextColumn Header="Reviewed accessions" Binding="{Binding SupportingAccessions}" IsReadOnly="True" Width="200"/>
+                                            <DataGridTemplateColumn Header="User choice" Width="200">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <ComboBox ItemsSource="{Binding Options}" DisplayMemberPath="DisplayName"
+                                                                  SelectedItem="{Binding SelectedOption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                  ToolTip="Choose a family or leave outside."/>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTextColumn Header="Status" Binding="{Binding State}" IsReadOnly="True" Width="180"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </DockPanel>
+                            </TabItem>
                             <TabItem Header="Architecture"><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>
                             <TabItem Header="Left out">
                                 <DataGrid x:Name="leftOutGrid" ItemsSource="{Binding Evidence.LeftOut}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"

@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using FamilyQuant.Panels;
 
 namespace FamilyQuant;
 
@@ -17,6 +18,9 @@ public sealed class EvidenceGroupingSession
     private readonly string sourceFingerprint;
     private readonly string sourceMetadata;
     private readonly HashSet<int> sourceLocks;
+    private readonly string sourcePanel;
+    private FamilyPanel? reviewPanel;
+    private string lastScope = "";
     private readonly Func<IReadOnlyList<FastaItemExtended>, IReadOnlyList<NeighbourReference>, NeighbourSearch> search;
     private readonly Func<FamilyClusterFile, CancellationToken, Task<EvidenceTaskProposal>> discoverTask;
     private EvidenceTaskProposal? taskProposal;
@@ -35,6 +39,8 @@ public sealed class EvidenceGroupingSession
         sourceFingerprint = EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems);
         sourceMetadata = JsonSerializer.Serialize(file.EvidenceSource);
         sourceLocks = new HashSet<int>(file.LockedUserIds);
+        sourcePanel = JsonSerializer.Serialize(file.FamilyPanel);
+        reviewPanel = file.FamilyPanel == null ? null : FamilyPanelValidation.Clone(file.FamilyPanel);
         this.search = search ?? ((queries, references) => NearestReviewed.Search(queries, references));
         this.discoverTask = discoverTask ?? ((source, token) => EvidenceTaskDiscovery.DiscoverAsync(source, cancellationToken: token));
     }
@@ -61,14 +67,28 @@ public sealed class EvidenceGroupingSession
         var options = new EvidenceClassificationOptions { ScopeTerms = WordCluster.ParseKeywords(scope) };
         if (options.ScopeTerms.Count == 0) throw new ArgumentException("Type at least one scope word or phrase.", nameof(scope));
         var taskChoice = taskProposal == null ? null : EvidenceTaskDiscovery.Confirm(file, taskProposal, options.ScopeTerms);
-        var references = NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms));
+        var references = reviewPanel == null ? NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms))
+            : PanelEvidenceClassifier.References(file, options);
         var result = search(NearestReviewed.Targets(file), references);
-        var proposal = EvidenceClassifier.Propose(file.MyExtendedFastaItems, options, result.ByQuery(), NearestReviewed.ReferenceEvidence(file));
-        proposal = CoherenceCheck.Flag(proposal, file.MyExtendedFastaItems, CoherenceCheck.Learn(file));
+        var proposal = reviewPanel == null
+            ? CoherenceCheck.Flag(EvidenceClassifier.Propose(file.MyExtendedFastaItems, options, result.ByQuery(), NearestReviewed.ReferenceEvidence(file)),
+                file.MyExtendedFastaItems, CoherenceCheck.Learn(file))
+            : PanelEvidenceClassifier.Propose(file, options, result, references, reviewPanel);
         var presentation = EvidenceProposalPresentation.Present(proposal, file);
         EnsureCurrent();
         Search = result; References = references.ToArray(); Proposal = proposal; checkedMotif = null; confirmedTask = taskChoice;
+        lastScope = scope;
         return presentation;
+    }
+
+    public EvidenceReviewInput ConfirmPanelLinks(IReadOnlyList<PanelFamilyLinkSelection> choices)
+    {
+        EnsureCurrent();
+        if (reviewPanel == null || Proposal?.PanelContext == null) throw new InvalidOperationException("Build a panel proposal first.");
+        var previous = reviewPanel;
+        reviewPanel = PanelEvidenceClassifier.ConfirmLinks(reviewPanel, Proposal.PanelContext.Links, choices);
+        try { return Propose(lastScope); }
+        catch { reviewPanel = previous; throw; }
     }
 
     public string CountMotif(string pattern)
@@ -103,6 +123,7 @@ public sealed class EvidenceGroupingSession
             SessionReferences = References,
             CheckedMotifs = motifs,
             ConfirmedTask = confirmedTask,
+            FamilyPanel = Proposal?.PanelContext == null ? null : reviewPanel,
             ArchitectureChoices = (selection.ArchitectureChoices ?? Array.Empty<ReviewArchitectureChoice>()).Select(a =>
                 new EvidenceArchitectureChoice { Family = a.Family, ArchitectureKey = a.ArchitectureKey, Name = a.Name, Split = a.Split }).ToArray()
         };
@@ -112,7 +133,8 @@ public sealed class EvidenceGroupingSession
     private void EnsureCurrent()
     {
         if (sourceFingerprint != EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems)
-            || sourceMetadata != JsonSerializer.Serialize(file.EvidenceSource) || !sourceLocks.SetEquals(file.LockedUserIds))
+            || sourceMetadata != JsonSerializer.Serialize(file.EvidenceSource) || !sourceLocks.SetEquals(file.LockedUserIds)
+            || sourcePanel != JsonSerializer.Serialize(file.FamilyPanel))
             throw new InvalidOperationException("The document changed while the review was open. Close it and build a new proposal.");
     }
 }

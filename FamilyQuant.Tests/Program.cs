@@ -224,7 +224,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => EvidenceStorageTests(workDir));
             suite.Add(() => DomainPositionTests(Path.Combine(workDir, "domain-positions")));
             suite.Add(() => PanelSpreadsheetTests(Path.Combine(workDir, "panel-spreadsheet")));
-            suite.AddWithApplication(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
+            suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());
             suite.Add(() => EvidenceCoverageTests());

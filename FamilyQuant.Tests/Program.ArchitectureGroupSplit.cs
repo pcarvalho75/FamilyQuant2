@@ -68,7 +68,8 @@ internal static partial class Program
                     Check(theme + " the existing bulk split API still selects every supplied group", model.Capture().All(c => c.Split));
                     model.Split = false;
                     Check(theme + " clearing the bulk choice clears every group", model.Capture().All(c => !c.Split));
-                    ((TabControl)window.FindName("evidenceTabs")).SelectedIndex = 1;
+                    var tabs = (TabControl)window.FindName("evidenceTabs");
+                    tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(tab => tab.Content is ArchitectureReviewControl);
                     window.Show(); PumpDispatcher();
                     var control = (ArchitectureReviewControl)window.FindName("architectureReview");
                     var table = (DataGrid)control.FindName("groupGrid");

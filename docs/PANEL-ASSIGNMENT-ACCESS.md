@@ -24,6 +24,10 @@ row's Decision. Outside members have no applied panel key. Two keys in one
 UserID, or a mixture of a panel key and outside members, flag HasConflict and
 ConflictingUserIds; no single key is guessed. Stale data return no usable map,
 and may include a diagnostic about conflicting stored labels in current UserIDs.
+An applied NotAFamily key and decision remain in UserFamilies so the report
+places that UserID in ExcludedFamilies. Excluded rows still have no measured
+membership in PanelRows. Excluded keys mixed with an included key or outside
+members remain conflicts, rather than excluding or measuring the whole group.
 
 `PanelRows` includes every original row, including NotAFamily and
 MergeIntoAnotherFamily. It preserves the original decision and merge target,
