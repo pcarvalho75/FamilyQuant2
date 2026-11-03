@@ -198,7 +198,7 @@ public static class ReportFigureRenderer
                 "Horizontal position runs from stricter to looser identity. The left axis counts non-contaminant target connected components; "
                     + "the right axis is the percentage of families mixing target and decoy. Family mixing is not an identification FDR. "
                     + "A marked floor is the lowest identity in the uninterrupted clean range from the strictest recorded threshold, not an optimum or a guarantee against target-target fusions. "
-                    + (floor.HasValue ? "The file's dotted line and the clean-range floor are separate reference points." : "No clean-range floor is drawn for these data."),
+                    + (floor.HasValue ? "The recorded file identity and the clean-range floor are separate reference points." : "No clean-range floor is drawn for these data."),
                 () => new IdentityScanChart(manifest.PresentationIdentitySweep,
                     curation.ClusteringIdentity > 0 ? curation.ClusteringIdentity : null),
                 scanFacts.ToArray());
