@@ -155,6 +155,21 @@ internal static partial class Program
             Func<Task> noCommit = () => { reviews++; return Task.CompletedTask; };
             bool notCommitted = PanelSubclassRefresh.ReviewThenRecomputeAsync(true, true, () => familyCurrent, () => true, noCommit, refresh).GetAwaiter().GetResult();
             Check("J1d cancelled or incomplete family review does not recompute subclasses", !notCommitted && reviews == 1 && refreshes == 0);
+            familyCurrent = false; reviews = refreshes = 0;
+            bool alreadyUpdated = PanelSubclassRefresh.ReviewThenRecomputeAsync(true, true, () => familyCurrent,
+                () => true, review, refresh, () => true).GetAwaiter().GetResult();
+            Check("J1d family review that already updated subclasses does not run them twice",
+                alreadyUpdated && reviews == 1 && refreshes == 0);
+            familyCurrent = false; reviews = refreshes = 0;
+            bool reviewRefreshFailed = PanelSubclassRefresh.ReviewThenRecomputeAsync(true, true, () => familyCurrent,
+                () => true, review, refresh, () => false).GetAwaiter().GetResult();
+            Check("J1d failed or cancelled review refresh is not silently retried",
+                !reviewRefreshFailed && reviews == 1 && refreshes == 0);
+            familyCurrent = true; reviews = refreshes = 0;
+            bool subclassOnlyUpdated = PanelSubclassRefresh.ReviewThenRecomputeAsync(false, true, () => familyCurrent,
+                () => true, review, refresh, () => false).GetAwaiter().GetResult();
+            Check("J1d subclass-only edits refresh without another family review",
+                subclassOnlyUpdated && reviews == 0 && refreshes == 1);
         }
     }
     private sealed class PanelPfamFixture : IPanelPfamReview
