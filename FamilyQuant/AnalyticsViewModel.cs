@@ -95,8 +95,16 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     }
 
     public void ShowStatus(string message) => Status = message;
-    public IReadOnlyList<AnalyticsFigure> BuildCompositionFigures() => StoredCompositionFigures.Build(manifest,
-        Families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description));
+    public IReadOnlyList<AnalyticsFigure> BuildCompositionFigures(bool strict = false)
+    {
+        try { return StoredCompositionFigures.Build(manifest,
+            Families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description), project: curation); }
+        catch (Exception error) when (!strict && error is ArgumentException or InvalidOperationException)
+        {
+            Status = "Stored composition figures are unavailable. " + error.Message;
+            return Array.Empty<AnalyticsFigure>();
+        }
+    }
     public string ExportUnavailableReason => ExportKind switch
     {
         ResultsExportKind.Homology => "Nothing was exported: no homology search result is stored, so there are no assignments to write. Open De novo and press Search first, then return to Results.",
@@ -170,8 +178,9 @@ public sealed class AnalyticsViewModel : ScreenViewModel
             ResultsExportKind.Summary => path => File.WriteAllText(path, AnalyticsCsv.BuildSummaryCsv(Data!.Fractions, Data.Grouped)),
             ResultsExportKind.Peptides => path => File.WriteAllText(path, AnalyticsCsv.BuildPeptideCsv(Data!.Peptides)),
             ResultsExportKind.Figures => path => {
+                var composition = BuildCompositionFigures(strict: true);
                 var written = AnalyticsFigures.Save(Data!, Families, path, top, asPercent);
-                foreach (var figure in BuildCompositionFigures())
+                foreach (var figure in composition)
                 {
                     string figurePath = Path.Combine(path, figure.FileName);
                     File.WriteAllBytes(figurePath, FamilyCompositionFigures.RenderPng(figure));
