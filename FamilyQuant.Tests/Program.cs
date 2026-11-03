@@ -222,6 +222,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => DesktopWorldChecks());
             suite.Add(() => EvidenceTaskTests());
             suite.Add(() => EvidenceClassifierTests());
+            suite.AddWithApplication(() => FamilyPanelSubclassTests());
             suite.Add(() => EvidenceDeliveryFixtureTests(workDir));
             suite.Add(() => EvidenceArchitectureTests());
             suite.Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
