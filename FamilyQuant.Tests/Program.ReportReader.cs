@@ -41,6 +41,7 @@ internal static partial class Program
                 && n.Label.Contains("de novo", StringComparison.Ordinal) && n.Value == data.DeNovoCount));
         ReportReaderTableTests();
         ReportReaderNativeTests(data);
+        ReportReaderQualificationTests(data);
     }
 
     private static void ReportReaderTableTests()
@@ -111,4 +112,62 @@ internal static partial class Program
         DrawingGroup group => group.Children.SelectMany(ReaderGlyphs),
         _ => Array.Empty<GlyphRunDrawing>(),
     };
+
+    private static void ReportReaderQualificationTests(AnalyticsData data)
+    {
+        data.Grouped!.DetectedPeptideLikeArea = 300;
+        data.Grouped.DetectedAreaMultiplyCharged = 200;
+        data.Grouped.DetectedAreaSinglyCharged = 100;
+        var names = new[] { DeNovoSource.DenovoOnly.DisplayName, DeNovoSource.DeNovoAll.DisplayName, DeNovoSource.DeepNovo.DisplayName,
+            DeNovoVariantComparison.OnlyPlusDeepNovoVariantName, DeNovoVariantComparison.AllPlusDeepNovoVariantName };
+        var variants = names.Select((name, i) => new DeNovoVariantSummary
+        {
+            Variant = name, Sources = i < 3 ? name : (i == 3 ? names[0] : names[1]) + " + " + names[2],
+            GenerationId = "reader", GeneratedUtc = "2026-01-01", DatasetFingerprint = "reader", DeNovoInputFingerprint = name,
+            QuantitationSettings = "reader", AppVersion = "reader", IdentifiedFractionOfTic = .28,
+            DeNovoModelEstimateFractionOfTic = .1 + i * .01, CombinedModelEstimateFractionOfTic = .38 + i * .01,
+        }).ToList();
+        var manifest = new QuantManifest
+        {
+            PresentationDeNovoVariants = variants,
+            DeNovoCallerAgreement = new DeNovoAgreementResult { PeaksObservedMinimumConfidence = 50, DeepNovoObservedMinimumConfidence = 60 },
+            DeNovoAcceptedScoreScatter = new DeNovoAcceptedScoreScatter
+            {
+                PeaksMinimumAcceptedScore = 80, DeepNovoMinimumAcceptedScore = 75,
+                Points = new() { new() { ScanNumber = 1, Charge = 2, PeaksCleanSequence = "ACDEFGHIK", DeepNovoCleanSequence = "ACDEFGHIK", StrictSequenceMatch = true } },
+            },
+            PresentationIdentitySweep = new()
+            {
+                new() { Identity = 95, Groups = 3, TargetGroups = 2, MixedGroups = 0 },
+                new() { Identity = 75, Groups = 3, TargetGroups = 2, MixedGroups = 0 },
+                new() { Identity = 70, Groups = 2, TargetGroups = 2, MixedGroups = 1, Score = .5 },
+            },
+        };
+        var plan = ReportFigureRenderer.Plan(data, manifest, new FamilyClusterFile { ClusteringIdentity = 70 }, null);
+        ReportChart Figure(string file) => plan.Charts.Single(c => c.FileName == file);
+        var recovery = Figure(AnalyticsFigures.RecoveryFile);
+        Check("recovery caption carries the complete charge caveat and recorded split",
+            recovery.Caption.Contains(Ms1EnvelopeDetector.SinglyChargedCaveat, StringComparison.Ordinal)
+            && recovery.CaptionInput!.Numbers.Any(n => n.Label.Contains("z >= 2", StringComparison.Ordinal) && n.Value == 20)
+            && recovery.CaptionInput.Numbers.Any(n => n.Label.Contains("z = 1", StringComparison.Ordinal) && n.Value == 10));
+        var raw = Figure(PresentationFigures.DeNovoAgreementFile);
+        Check("raw caller caption names imported population and observed source floors",
+            raw.Caption.Contains("downstream quantitation filters are not applied", StringComparison.Ordinal)
+            && raw.CaptionInput!.Numbers.Any(n => n.Label.Contains("observed", StringComparison.OrdinalIgnoreCase) && n.Value == 50));
+        var accepted = Figure(PresentationFigures.DeNovoAcceptedScoreScatterFile);
+        Check("accepted-pair caption names complete source filters and source-specific gates",
+            accepted.Caption.Contains(manifest.DeNovoAcceptedScoreScatter.PeaksFilterDescription, StringComparison.Ordinal)
+            && accepted.Caption.Contains(DeNovoAcceptedScoreScatter.ScoreScaleCaveat, StringComparison.Ordinal)
+            && accepted.CaptionInput!.Numbers.Any(n => n.Label.Contains("cutoff", StringComparison.OrdinalIgnoreCase) && n.Value == 75));
+        var identity = Figure("identity_scan.png");
+        Check("identity caption explains both axes and records the floor separately from this file",
+            identity.Caption.Contains("not an identification FDR", StringComparison.Ordinal)
+            && identity.CaptionInput!.Numbers.Any(n => n.Label.Contains("floor", StringComparison.OrdinalIgnoreCase) && n.Value == 75)
+            && identity.CaptionInput.Numbers.Any(n => n.Label.Contains("file", StringComparison.OrdinalIgnoreCase) && n.Value == 70));
+        Check("variant caption distinguishes model sensitivity from run uncertainty",
+            Figure(PresentationFigures.DeNovoVariantComparisonFile).Caption.Contains("not run-to-run SD or a confidence interval", StringComparison.Ordinal));
+        Check("source-effect caption names the exact union rather than the separate headline variant",
+            Figure(PresentationFigures.DeNovoTalkComparisonFile).Caption.Contains(DeNovoVariantComparison.OnlyPlusDeepNovoVariantName, StringComparison.Ordinal)
+            && Figure(PresentationFigures.DeNovoTalkComparisonFile).Caption.Contains(DeNovoVariantComparison.AllPlusDeepNovoVariantName, StringComparison.Ordinal));
+    }
 }

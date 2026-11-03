@@ -169,18 +169,32 @@ public static class ReportFigureRenderer
             Add(ReportSectionIds.Sensitivity, PresentationFigures.IdentitySweepFile, "Identity sensitivity",
                 "The identity scan recorded in this project, without recomputing clustering.", () => new ReferenceIdentitySweepChart(manifest.PresentationIdentitySweep, identity),
                 new("Stored identity thresholds", manifest.PresentationIdentitySweep.Count, "thresholds", "0"), new("Highlighted identity", identity, "%"));
+            var scanFacts = new List<CaptionNumber> { new("Stored identity thresholds", manifest.PresentationIdentitySweep.Count, "thresholds", "0") };
+            if (curation.ClusteringIdentity > 0) scanFacts.Add(new("This file's clustering identity", curation.ClusteringIdentity, "%"));
+            bool hasDecoys = manifest.PresentationIdentitySweep.Any(r => r.Groups > r.TargetGroups || r.MixedGroups > 0);
+            int? floor = hasDecoys && manifest.PresentationIdentitySweep.Max(r => r.Score) > 0
+                ? IdentityScanPlot.CleanFloor(manifest.PresentationIdentitySweep) : null;
+            if (floor.HasValue) scanFacts.Add(new("Recorded clean-range floor", floor.Value, "%"));
             Add(ReportSectionIds.Sensitivity, "identity_scan.png", "Identity scan",
-                "The saved identity scan in the program's identity-window view.", () => new IdentityScanChart(manifest.PresentationIdentitySweep,
+                "Horizontal position runs from stricter to looser identity. The left axis counts non-contaminant target connected components; "
+                    + "the right axis is the percentage of families mixing target and decoy. Family mixing is not an identification FDR. "
+                    + "A marked floor is the lowest identity in the uninterrupted clean range from the strictest recorded threshold, not an optimum or a guarantee against target-target fusions. "
+                    + (floor.HasValue ? "The file's dotted line and the clean-range floor are separate reference points." : "No clean-range floor is drawn for these data."),
+                () => new IdentityScanChart(manifest.PresentationIdentitySweep,
                     curation.ClusteringIdentity > 0 ? curation.ClusteringIdentity : null),
-                new CaptionNumber("Stored identity thresholds", manifest.PresentationIdentitySweep.Count, "thresholds", "0"));
+                scanFacts.ToArray());
         }
         else Missing(ReportSectionIds.Sensitivity, "Identity sensitivity");
         if (manifest.DeNovoCallerAgreement is { } agreement)
         {
             agreement.Validate();
             Add(ReportSectionIds.Quality, PresentationFigures.DeNovoAgreementFile, "De novo caller agreement",
-                "Stored caller agreement under the chart's source-specific gates and precursor matching rule.", () => new DeNovoAgreementChart(agreement),
-                new("Precursor-qualified comparisons", agreement.Total, "comparisons", "0"), new("Identical comparisons", agreement.Identical, "comparisons", "0"));
+                "Population: " + agreement.PopulationDefinition + ". Observed source floors describe the imported exports, not configured acceptance cutoffs. "
+                    + "This comparison is separate from the jointly accepted source-score population. Pairing: " + agreement.PrimaryPairGate,
+                () => new DeNovoAgreementChart(agreement),
+                new("Precursor-qualified comparisons", agreement.Total, "comparisons", "0"), new("Identical comparisons", agreement.Identical, "comparisons", "0"),
+                new("Observed PEAKS confidence floor", agreement.PeaksObservedMinimumConfidence),
+                new("Observed DeepNovo confidence floor", agreement.DeepNovoObservedMinimumConfidence));
         }
         else Missing(ReportSectionIds.Quality, "De novo caller agreement");
         if (manifest.DeNovoSourceVenn is { } venn)
@@ -195,20 +209,30 @@ public static class ReportFigureRenderer
         if (manifest.DeNovoAcceptedScoreScatter is { Total: > 0 } scatter)
         {
             scatter.Validate();
+            var acceptedFacts = new List<CaptionNumber> { new("Accepted source-pair comparisons", scatter.Total, "comparisons", "0"),
+                new("Identical PTM-cleaned accepted pairs", scatter.Matches, "comparisons", "0"),
+                new("Identical share of accepted pairs", 100 * scatter.MatchFraction, "%") };
+            if (scatter.PeaksMinimumAcceptedScore is double peaksCutoff) acceptedFacts.Add(new("Recorded PEAKS acceptance cutoff", peaksCutoff));
+            if (scatter.DeepNovoMinimumAcceptedScore is double deepCutoff) acceptedFacts.Add(new("Recorded DeepNovo acceptance cutoff", deepCutoff));
             Add(ReportSectionIds.Quality, PresentationFigures.DeNovoAcceptedScoreScatterFile, "Accepted source scores",
-                "Accepted precursor hypotheses on separate source-native axes, labelled by sequence agreement.", () => new DeNovoAcceptedScoreScatterChart(scatter),
-                new CaptionNumber("Accepted source-pair comparisons", scatter.Total, "comparisons", "0"));
+                "Only compatible precursor hypotheses accepted by both complete source filters are shown; this differs from all imported export calls. "
+                    + scatter.PeaksFilterDescription + ". " + scatter.DeepNovoFilterDescription + ". " + DeNovoAcceptedScoreScatter.ScoreScaleCaveat,
+                () => new DeNovoAcceptedScoreScatterChart(scatter), acceptedFacts.ToArray());
         }
         else Missing(ReportSectionIds.Quality, "Accepted source score scatter");
         if (manifest.PresentationDeNovoVariants.Count > 0)
         {
             DeNovoVariantComparison.ValidateTalkVariantSet(manifest.PresentationDeNovoVariants);
             Add(ReportSectionIds.Sensitivity, PresentationFigures.DeNovoVariantComparisonFile, "Stored source variants",
-                "The source variants actually computed and recorded in this project.", () => new DeNovoVariantComparisonChart(manifest.PresentationDeNovoVariants),
+                "The source variants actually computed and recorded in this project. Red whiskers compare fixed-bin and pooled-ratio envelope models; "
+                    + "they show model sensitivity, not run-to-run SD or a confidence interval.", () => new DeNovoVariantComparisonChart(manifest.PresentationDeNovoVariants),
                 new CaptionNumber("Stored source variants", manifest.PresentationDeNovoVariants.Count, "variants", "0"));
             var comparison = DeNovoTalkComparison.Build(manifest.PresentationDeNovoVariants);
             Add(ReportSectionIds.Sensitivity, PresentationFigures.DeNovoTalkComparisonFile, "Source effect comparison",
-                "The program's comparison of the stored, provenance-matched source variants on one common search baseline.", () => new DeNovoTalkComparisonChart(comparison),
+                "The program's comparison of the stored, provenance-matched source variants on one common search baseline. "
+                    + "The Both callers bar uses " + DeNovoVariantComparison.OnlyPlusDeepNovoVariantName
+                    + " (PEAKS de-novo-only plus DeepNovo). " + DeNovoVariantComparison.AllPlusDeepNovoVariantName
+                    + " includes PEAKS-all and is a separate variant; its headline must not be substituted for the bar shown here.", () => new DeNovoTalkComparisonChart(comparison),
                 new CaptionNumber("Stored source variants", manifest.PresentationDeNovoVariants.Count, "variants", "0"));
         }
         else Missing(ReportSectionIds.Sensitivity, "Source variant comparison");
