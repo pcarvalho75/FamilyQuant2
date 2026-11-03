@@ -154,9 +154,14 @@ internal static partial class Program
                     if (content.Parent is Panel panel) panel.Children.Remove(content);
                     else if (content.Parent is ContentControl parent) parent.Content = null;
                     else if (content.Parent is Decorator decorator) decorator.Child = null;
-                    var grid = (Grid)shell.FindName("GridApp"); grid.Children.Clear(); grid.Children.Add(content);
-                    Set(shell, "cgc", field == "cgc" ? content : null); Set(shell, "dnc", field == "dnc" ? content : null);
-                    SecondaryCall(shell, shell.GetType(), "UpdateGuide"); PumpDispatcher();
+                    // Seed the owned family document, then use each version's actual presenter.
+                    // The presenter must clear inactive Home/Results state before workflow Help is read.
+                    if (field == "cgc") Set(shell, "cgc", content);
+                    if (shell is MainWindow native)
+                        native.NavigationModel.RequestNavigate(field == "cgc" ? ShellDestination.Families : ShellDestination.DeNovo);
+                    else if (field == "cgc") SecondaryCall(shell, shell.GetType(), "ShowCurationOrOpen");
+                    else SecondaryCall(shell, shell.GetType(), "MenuItemDeNovo_Click", shell, new RoutedEventArgs());
+                    PumpDispatcher();
                 }
                 string Open(Window shell, string menu)
                 {
@@ -172,6 +177,7 @@ internal static partial class Program
                 {
                     Mount(oldMain, old, "cgc"); Mount(main, current, "cgc");
                     string familyBefore = Open(oldMain, "MenuItemHowToRead"), familyActual = Open(main, "MenuItemHowToRead");
+                    string familyWorkflowBefore = Open(oldMain, "MenuItemWhereAmI"), familyWorkflowActual = Open(main, "MenuItemWhereAmI");
                     var oldDn = (UserControl)Activator.CreateInstance(legacy.GetType("FamilyQuant.DeNovoControl", true)!)!; var dn = new DeNovoControl();
                     Mount(oldMain, oldDn, "dnc"); Mount(main, dn, "dnc");
                     string dnBefore = Open(oldMain, "MenuItemHowToRead"), dnActual = Open(main, "MenuItemHowToRead");
@@ -181,9 +187,16 @@ internal static partial class Program
                     R(["C4526422A15C", "D36A80A151FF"], "native shell context Help", context,
                         new { familyBefore, dnBefore }, new { familyActual, dnActual });
                     string workflowBefore = Open(oldMain, "MenuItemWhereAmI"), workflowActual = Open(main, "MenuItemWhereAmI");
-                    R(["8921B21922FE", "4B1A5D805051"], "native shell workflow Help", workflowBefore.Contains("WHAT DO I DO FIRST?", StringComparison.Ordinal)
-                        && workflowActual.Contains("WHAT DO I DO FIRST?", StringComparison.Ordinal) && workflowBefore.Contains("You are at:", StringComparison.Ordinal)
-                        && workflowActual.Contains("You are at:", StringComparison.Ordinal), workflowBefore, workflowActual);
+                    R(["8921B21922FE", "4B1A5D805051"], "native shell workflow Help", familyWorkflowBefore.Contains("You are at: Step 2 of 4", StringComparison.Ordinal)
+                        && familyWorkflowBefore.Contains("Families loaded.", StringComparison.Ordinal)
+                        && familyWorkflowActual.Contains("You are at: Families |", StringComparison.Ordinal)
+                        && familyWorkflowActual.Contains("Families loaded.", StringComparison.Ordinal)
+                        && workflowBefore.Contains("You are at: De Novo evidence", StringComparison.Ordinal)
+                        && workflowActual.Contains("You are at: De novo |", StringComparison.Ordinal)
+                        && workflowActual.Contains("A separate workflow: select PEAKS or DeepNovo", StringComparison.Ordinal)
+                        && !familyWorkflowActual.Contains("You are at: Start", StringComparison.Ordinal)
+                        && !workflowActual.Contains("You are at: Start", StringComparison.Ordinal),
+                        new { families = familyWorkflowBefore, deNovo = workflowBefore }, new { families = familyWorkflowActual, deNovo = workflowActual });
                     Mount(main, current, "cgc"); string f1 = "";
                     Capture(() => ApplicationCommands.Help.Execute(null, main), window => f1 = WalkTree(window).OfType<TextBox>().Single().Text);
                     R(["DE649731E000", "380C31A423D5", "7696D63AAAAF"], "native Families F1 command routes to owned denominator Help",
