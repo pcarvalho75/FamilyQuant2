@@ -99,8 +99,12 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     public void ShowStatus(string message) => Status = message;
     public IReadOnlyList<AnalyticsFigure> BuildCompositionFigures(bool strict = false)
     {
-        try { return StoredCompositionFigures.Build(manifest,
-            Families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description), project: curation); }
+        try
+        {
+            if (curation != null) FamilyStudyMembership.RequireCurrent(curation, manifest);
+            return StoredCompositionFigures.Build(manifest,
+                Families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description), project: curation);
+        }
         catch (Exception error) when (!strict && error is ArgumentException or InvalidOperationException)
         {
             Status = "Stored composition figures are unavailable. " + error.Message;

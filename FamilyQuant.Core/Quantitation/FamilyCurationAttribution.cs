@@ -124,6 +124,7 @@ namespace FamilyQuant
             Homology.HomologyOptions effective = hits.EffectiveOptions;
             var attribution = new PeptideFamilyAttribution
             {
+                MembershipSha256 = FamilyStudyMembership.Fingerprint(curation),
                 IdentityThreshold = hits.IdentityThreshold,
                 EffectiveOptions = effective,
                 IdentifiedOptions = hits.IdentifiedOptions,

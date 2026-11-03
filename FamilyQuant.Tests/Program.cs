@@ -89,6 +89,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => RoundTripTests(workDir));
             suite.Section("Word-based reclustering invariants");
             suite.Add(() => WordClusterTests());
+            suite.AddWithApplication(() => DeNovoSourceProposalTests());
+            suite.AddWithApplication(() => FamilyStudyMembershipTests());
             suite.Add(() => QuantifyViewModelTests(workDir));
             suite.Add(() => BusyOperationTests(workDir));
             suite.Add(() => ShellDialogTests(workDir));
@@ -133,6 +135,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => HomologyTests.Run(Check));
             suite.Section("Family world (B1) - a de novo tag credited to UniProt families, on a fixture");
             suite.Add(() => FamilyWorldCheck.RunFixtures(Check));
+            suite.Add(() => FamilyWorldRateTests());
             suite.Add(() => FamilyWorldComputeTests());
             suite.Section("De novo reconciliation against the real .sepr2 - the request's items 3 to 5");
             suite.Add(() => ReconciliationRealTests(args.Length > 2 ? args[2] : null, args.Length > 3 ? args[3] : null, workDir), DeNovoScreenCensus);
@@ -225,6 +228,16 @@ namespace FamilyQuant.Tests
             suite.Add(() => DomainPositionTests(Path.Combine(workDir, "domain-positions")));
             suite.Add(() => PanelSpreadsheetTests(Path.Combine(workDir, "panel-spreadsheet")));
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
+            suite.Section("Panel, threshold, template and report Help");
+            suite.Add(() => PanelAuditTests());
+            suite.Add(() => PanelAuditCurrentTests());
+            suite.Add(() => ReportThresholdTests());
+            suite.Add(() => ReportThresholdPolicyTests());
+            suite.Add(() => PanelTemplateTests());
+            suite.AddWithApplication(() => PanelEditorTests());
+            suite.AddWithApplication(() => PanelEditorTemplateRoundtripTests());
+            suite.Add(() => AnalysisHelpTests());
+            suite.Add(() => SuiteMergeGuardTests());
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());
             suite.Add(() => EvidenceCoverageTests());
@@ -264,6 +277,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => FamilyNamingTests());
             suite.Section("Family composition - shared peptides counted once; the Full XIC column, its options and export");
             suite.Add(() => FamilyCompositionTests());
+            suite.Add(() => FullXicStorageTests());
             suite.Add(() => QuantitationStageTests());
             suite.AddWithApplication(() => FullXicColumnUiTests(workDir));
             suite.Section("De Novo screen - import, filter, reconcile and the review queue");

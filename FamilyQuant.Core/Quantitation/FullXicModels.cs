@@ -42,8 +42,12 @@ namespace FamilyQuant
         public bool ExportSpectrumComparisonCsv { get; set; } = true;
 
         /// <summary>Optional explicit output path for the spectrum comparison CSV. Null/empty writes
-        /// <see cref="SpectrumComparisonTable.DefaultFileName"/> into the RAW/data directory.</summary>
+        /// <see cref="SpectrumComparisonTable.DefaultFileName"/> into per-user output storage.</summary>
         public string? SpectrumComparisonCsvPath { get; set; }
+
+        /// <summary>Optional cache/output root outside the acquisition folder. Null uses per-user
+        /// application data, scoped by the acquisition folder to avoid same-name run collisions.</summary>
+        public string? CacheDirectory { get; set; }
 
         /// <summary>The confidence criteria the de novo export is filtered by before extraction. Ignored
         /// when no de novo directory is given.</summary>
@@ -133,12 +137,18 @@ namespace FamilyQuant
         /// <summary>Attempts the optional, convenience CSV export without turning an output-path failure
         /// into a failed quantitation. The complete spectrum table remains in the result and will be
         /// persisted by the next .fqproj save, so the user can retry/export it from the DataGrid.</summary>
-        public bool TryExportSpectrumComparisonCsv(string path)
+        public bool TryExportSpectrumComparisonCsv(string path) => TryExportSpectrumComparisonCsvOutsideRaw(path, null);
+
+        /// <summary>Automatic Compute export protects the acquisition directory, including an explicit
+        /// path that points back into it. A refused CSV never loses the computed table.</summary>
+        public bool TryExportSpectrumComparisonCsvOutsideRaw(string path, string? rawDirectory)
         {
             SpectrumComparisonCsvPath = string.Empty;
             SpectrumComparisonCsvError = string.Empty;
             try
             {
+                if (rawDirectory != null && FullXicStoragePaths.IsInRawDirectory(path, rawDirectory))
+                    throw new ArgumentException("Choose a CSV output path outside the RAW acquisition folder.", nameof(path));
                 SpectrumComparisonCsvPath = SpectrumComparisonTable.SaveCsv(
                     path, SpectrumComparisonRows);
                 Notes.Add("Spectrum evidence table: " + SpectrumComparisonCsvPath);

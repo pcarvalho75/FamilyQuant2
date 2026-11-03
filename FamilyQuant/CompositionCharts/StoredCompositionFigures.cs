@@ -11,6 +11,9 @@ public static class StoredCompositionFigures
     {
         if (manifest?.FamilyRunShares == null && manifest?.FamilySubclassParts == null
             && manifest?.FamilyPeptideLocalization == null) return Array.Empty<AnalyticsFigure>();
+        if (project != null) FamilyStudyMembership.RequireCurrent(project, manifest);
+        FamilyStudyMembership.RequireCompatible(manifest.FamilyRunShares, manifest.FamilyProteinCounts,
+            manifest.FamilySubclassParts, manifest.FamilyPeptideLocalization);
         var means = manifest.FamilyRunShares == null
             ? new FamilyCompositionData(Array.Empty<FamilyCompositionValue>(), "Per-run shares unavailable")
             : StoredCompositionChartData.FromRunShares(manifest.FamilyRunShares, manifest.FamilyProteinCounts, labels);

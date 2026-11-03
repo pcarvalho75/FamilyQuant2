@@ -95,9 +95,9 @@ namespace FamilyQuant
             if (options.ExportSpectrumComparisonCsv)
             {
                 string tablePath = string.IsNullOrWhiteSpace(options.SpectrumComparisonCsvPath)
-                    ? Path.Combine(rawDirectory, SpectrumComparisonTable.DefaultFileName)
+                    ? new FullXicStoragePaths(rawDirectory, options.CacheDirectory).SpectrumComparisonCsvPath
                     : options.SpectrumComparisonCsvPath!;
-                result.TryExportSpectrumComparisonCsv(tablePath);
+                result.TryExportSpectrumComparisonCsvOutsideRaw(tablePath, rawDirectory);
             }
 
             // Q6: fold the detected peptide-like estimate into the manifest's derived section (measured

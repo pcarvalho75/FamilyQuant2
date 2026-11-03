@@ -61,7 +61,7 @@ internal static partial class Program
         Check("J2c output is identical under en-US and pt-BR", us == br);
         Check("J2c emits one row per target including unassigned proteins", lines.Length == 3);
         var row = ParseCsvLine(lines[1]);
-        Check("J2c recorded annotation is not asserted as assignment evidence", row[4] == "" && row[5] == "" && row[7].Contains("Recorded only", StringComparison.Ordinal));
+        Check("J2c recorded annotation is not asserted as assignment evidence", row[4] == "" && row[5] == "Synthetic applied assignment" && row[7].Contains("Recorded only", StringComparison.Ordinal));
         Check("J2c preserves quoted names, panel labels and the subclass reason",
             row.Contains("P12345") && row.Contains("Name, first") && row.Contains("Family, A")
             && row.Contains("Part \"one\"") && row.Any(x => x.Contains("user-defined subclass rule", StringComparison.Ordinal)));

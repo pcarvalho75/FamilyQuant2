@@ -241,7 +241,7 @@ internal static partial class Program
         { ProteinIndex = i, Identifier = p.SequenceIdentifier, FamilyUserId = p.UserID,
             PanelFamilyKey = p.UserID < 3 ? "alpha" : "beta", IsApplied = true, Reason = "Fixture verified assignment" }).ToList();
         var map = PanelAssignmentEvidenceStore.BuildFamilyMap(project.FamilyPanel, project.PanelProteinAssignments);
-        manifest.FamilyProteinCounts = new FamilyProteinCountsResult { Families = new()
+        manifest.FamilyProteinCounts = new FamilyProteinCountsResult { MembershipSha256 = FamilyStudyMembership.Fingerprint(project), Families = new()
         { new() { FamilyUserId = 1, GreedyProteinCount = 1, UniquePeptideProteinCount = 1 },
             new() { FamilyUserId = 2, GreedyProteinCount = 2, UniquePeptideProteinCount = 1 },
             new() { FamilyUserId = 3, GreedyProteinCount = 3, UniquePeptideProteinCount = 2 } } };

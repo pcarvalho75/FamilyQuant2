@@ -94,7 +94,6 @@ The program, not a script, puts every database protein in a panel family.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J2c | Per-protein audit export: accession, family, subclass, evidence used and why, for Ana to check in Excel | L | 0.5 | 🟢 | J6b | CSV opens in Excel under pt-BR and en-US with the same columns | T1 | | 0 | 0 | |
 
 ### W3 Subclasses
 
@@ -117,7 +116,6 @@ SVMP P-I, P-II, P-III and "class not resolved"; PLA2 D49 and K49; the parts of a
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J6f | Report sections with checkboxes: the Export report screen lists every section and figure, each with a checkbox, all ticked by default; the choice is stored in the project and the document holds exactly the ticked parts | M | 1 | 🟢 | J6e | Native test: unticking a section removes it and only it; the choice survives reopen | SH | | 0 | 0 | |
 
 ### W7 The analysis
 
@@ -127,10 +125,6 @@ SVMP P-I, P-II, P-III and "class not resolved"; PLA2 D49 and K49; the parts of a
 | J7b | Interpretation, written into the project notes, quoting only the report's numbers, read against Ana's panel | M | 1.5 | J7a | J7c | A second reader checks every number against the report | OP | | 0 | 0 | |
 | J7c | Final export and delivery: every number in the document traced to a program export, then the Word report, the project and the family panel written to `C:/Users/paulo/Desktop/AnaG/Bjararaca/Relatorio`, nothing else in Ana's folders touched | M | 1 | J7b | J7d | Reviewer's trace table with 0 mismatches | OP | | 0 | 0 | |
 | J7d | Release 2.1.0, so Ana can make the same report, on Paulo's word | L | 0.5 | J7c | | The release names the version the report prints | EV | | 0 | 0 | |
-| J9 | Compute writes its cache and spectrum CSV to a per-user cache folder (or one the user chooses), never beside the RAW files, so a read-only or shared data folder works; old caches still found | M | 1 | 🟢 | J7a | Native Compute on a read-only RAW folder succeeds; the same numbers as before; the RAW folder unchanged | FL | | 0 | 0 | |
-| J10 | The de novo source picker reads which exports the chosen folder holds and proposes the matching source, so a folder of .denovo.csv files proposes "de novo all" | L | 0.5 | 🟢 | J7a | Fixture folders for each source; the person can still change it | FL | | 0 | 0 | |
-| J11 | Family-world decoy rates never print above 100%: when a family's credited envelope is too small to give a rate, the row says so, with the counts beside it | L | 0.5 | 🟢 | J6b | The snaclec-like case (decoy envelope over a near-zero credit) prints "too little credited signal" with its counts | FL | | 0 | 0 | |
-| J14 | Stored family studies follow the current grouping: per-run shares, toxin counts, subclass and domain parts carry the fingerprint of the family membership they were computed on; after a regrouping the program rebuilds them from the stored peptide table (no RAW reading), or the report refuses them with a plain message | M | 1.5 | 🟢 | J7a | Regroup a computed project: the stored studies are rebuilt to the new families, or refused, never joined by UserID alone; a fixture where UserIDs are reused for different families | FL | | 0 | 0 | |
 | J15 | Re-prove the feature-ledger rows that mission J's changes left without a current receipt, by re-running their own producers, so the full gate before release passes with every retained row VERIFIED | M | 1 | 🟢 | J7d | `--feature-ledger-check` passes on the merged tip with no stale receipt; no row's state or wording changed by hand | T1 | | 0 | 0 | |
 
 ## Critical path

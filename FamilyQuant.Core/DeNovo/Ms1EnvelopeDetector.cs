@@ -191,7 +191,7 @@ namespace FamilyQuant.DeNovo
         /// </summary>
         public static Ms1EnvelopeDetectionResult DetectRun(
             string rawPath, string? cachePath = null, Action<string>? progress = null,
-            string? sourceFingerprint = null)
+            string? sourceFingerprint = null, string? legacyCachePath = null)
         {
             if (string.IsNullOrWhiteSpace(rawPath))
                 throw new ArgumentException("A RAW file path is required.", nameof(rawPath));
@@ -207,6 +207,11 @@ namespace FamilyQuant.DeNovo
                 progress?.Invoke(runName + ": resolved isotope-series diagnostic answered from the cache (" +
                     cached.DetectedEnvelopeCount.ToString("N0", CultureInfo.InvariantCulture) + " envelope(s)).");
                 return cached;
+            }
+            if (legacyCachePath != null && TryLoadCache(legacyCachePath, runName, fingerprint, out var legacy) && legacy != null)
+            {
+                progress?.Invoke(runName + ": resolved isotope-series diagnostic answered from the legacy cache (read only).");
+                return legacy;
             }
 
             progress?.Invoke(runName + ": loading MS1 spectra to detect resolved isotope series...");

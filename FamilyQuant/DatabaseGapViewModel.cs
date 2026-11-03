@@ -13,15 +13,17 @@ public sealed record DatabaseGapGlobalRow(string Label, double Envelope);
 public sealed class DatabaseGapDisplayRow
 {
     public FamilyWorldCompositionRow Data { get; }
+    private readonly FamilyWorldFamilySummary? decoyEvidence;
     public string FamilyLabel => Label(Data);
     public static string Label(FamilyWorldCompositionRow row) => row.Kind == FamilyWorldCompositionRow.CuratedKind
         && row.CuratedUserIds.Count > 0 ? row.Family + " (group " + string.Join(", ", row.CuratedUserIds) + ")" : row.Family;
     public string Kind => Data.Kind == FamilyWorldCompositionRow.CuratedKind ? "Curated group" : "UniProt family";
-    public string DecoyRate => Data.WorldDecoyRate is double value ? value.ToString("P6", CultureInfo.CurrentCulture) : "Not recorded";
+    public string DecoyRate => FamilyWorldDecoyRates.Format(FamilyWorldDecoyRates.ForComposition(Data, decoyEvidence), CultureInfo.CurrentCulture, "P6");
     public string RightRate { get; }
-    public DatabaseGapDisplayRow(FamilyWorldCompositionRow data, int minimumKnownCredits)
+    public DatabaseGapDisplayRow(FamilyWorldCompositionRow data, int minimumKnownCredits, FamilyWorldFamilySummary? decoyEvidence = null)
     {
         Data = data;
+        this.decoyEvidence = decoyEvidence;
         string counts = " (" + data.WorldKnownCreditedTrue.ToString(CultureInfo.CurrentCulture) + "/"
             + data.WorldKnownCredited.ToString(CultureInfo.CurrentCulture) + ")";
         RightRate = data.WorldKnownCredited >= minimumKnownCredits && data.WorldRightRate is double rate
@@ -36,7 +38,7 @@ public sealed class DatabaseGapLengthRow
     public bool HasTable { get; }
     public FamilyWorldLengthEstimate? Data { get; }
     public string LandedShare => Data == null ? "Not stored" : Data.LandedFraction.ToString("P2", CultureInfo.CurrentCulture);
-    public string DecoyRate => Data == null ? "Not stored" : Data.DecoyRate?.ToString("P2", CultureInfo.CurrentCulture) ?? "Not recorded";
+    public string DecoyRate => Data == null ? "Not stored" : FamilyWorldDecoyRates.Format(FamilyWorldDecoyRates.ForEstimate(Data), CultureInfo.CurrentCulture);
     public string KnownAnswerRight => Data == null ? "Not stored" : (Data.RightRate?.ToString("P2", CultureInfo.CurrentCulture) ?? "Not recorded")
         + " (" + Data.KnownRight.ToString("N0", CultureInfo.CurrentCulture) + "/" + Data.KnownLanded.ToString("N0", CultureInfo.CurrentCulture) + ")";
     public string Availability => HasTable ? "Stored table" : "Not computed";
@@ -127,7 +129,8 @@ public sealed class DatabaseGapViewModel : ScreenViewModel
             .OrderByDescending(r => r.WorldDeNovoEnvelope).ThenBy(r => r.Kind, StringComparer.Ordinal)
             .ThenBy(r => r.Family, StringComparer.OrdinalIgnoreCase).ThenBy(r => r.Family, StringComparer.Ordinal)
             .ThenBy(r => r.CuratedUserIds.FirstOrDefault()).ToArray();
-        Rows = ChartRows.Select(r => new DatabaseGapDisplayRow(r, Summary!.MinimumKnownCredits)).ToArray();
+        Rows = ChartRows.Select(r => new DatabaseGapDisplayRow(r, Summary!.MinimumKnownCredits,
+            Summary.Families.FirstOrDefault(f => string.Equals(f.Family, r.Family, StringComparison.OrdinalIgnoreCase)))).ToArray();
         GlobalRows = !HasData ? Array.Empty<DatabaseGapGlobalRow>() : new[] {
             new DatabaseGapGlobalRow("Global unexplained de novo", Summary!.UnexplainedEnvelope),
             new DatabaseGapGlobalRow("Identified, shared between families", Summary.SharedIdentifiedEnvelope),

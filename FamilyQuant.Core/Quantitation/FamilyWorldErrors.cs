@@ -71,8 +71,12 @@ namespace FamilyQuant
         public int Peptides { get; set; }
         public int UniquePeptides { get; set; }
         public double DecoyEnvelope { get; set; }
-        /// <summary>Decoy envelope over credited envelope; null when nothing was credited.</summary>
-        public double? DecoyRate { get; set; }
+        /// <summary>Decoy envelope over credited envelope when supported in [0,1]. The status names
+        /// absent/non-finite credit or decoy domination; underlying envelopes remain available.</summary>
+        private double? decoyRate;
+        public double? DecoyRate { get => FamilyWorldDecoyRates.Recorded(decoyRate, CreditedEnvelope, DecoyEnvelope); set => decoyRate = value; }
+        [JsonIgnore] public string DecoyRateStatus => FamilyWorldDecoyRates.Status(CreditedEnvelope, DecoyEnvelope, decoyRate);
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int? DecoyPeptides { get; set; }
         /// <summary>Known answers whose family is this one, how many landed on a family, and how many were right.</summary>
         public int KnownPairs { get; set; }
         public int KnownLanded { get; set; }
@@ -110,7 +114,19 @@ namespace FamilyQuant
         /// <summary>De novo peptides only the family world places in this family: the database gap.</summary>
         public double WorldDeNovoEnvelope { get; set; }
         public int WorldDeNovoPeptides { get; set; }
-        public double? WorldDecoyRate { get; set; }
+        private double? worldDecoyRate;
+        public double? WorldDecoyRate { get => FamilyWorldDecoyRates.Recorded(worldDecoyRate); set => worldDecoyRate = value; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int? WorldTargetPeptides { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int? WorldDecoyPeptides { get; set; }
+        private string? worldDecoyRateUnavailableReason;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? WorldDecoyRateUnavailableReason
+        {
+            get => FamilyWorldDecoyRates.Recorded(worldDecoyRate).HasValue ? null
+                : worldDecoyRate is > 1 ? FamilyWorldDecoyRates.DecoyExceedsCredited : worldDecoyRateUnavailableReason;
+            set => worldDecoyRateUnavailableReason = value;
+        }
+        [JsonIgnore] public string WorldDecoyRateStatus => FamilyWorldDecoyRates.RecordedStatus(worldDecoyRate, WorldDecoyRateUnavailableReason);
         public int WorldKnownCredited { get; set; }
         public int WorldKnownCreditedTrue { get; set; }
         public double? WorldRightRate { get; set; }
@@ -130,8 +146,12 @@ namespace FamilyQuant
         /// <summary>CreditedEnvelope over ResidualEnvelope.</summary>
         public double LandedFraction { get; set; }
         public double DecoyEnvelope { get; set; }
-        /// <summary>DecoyEnvelope over CreditedEnvelope; null when nothing was credited.</summary>
-        public double? DecoyRate { get; set; }
+        /// <summary>DecoyEnvelope over CreditedEnvelope only when the rate is supported in [0,1].</summary>
+        private double? decoyRate;
+        public double? DecoyRate { get => FamilyWorldDecoyRates.Recorded(decoyRate, CreditedEnvelope, DecoyEnvelope); set => decoyRate = value; }
+        [JsonIgnore] public string DecoyRateStatus => FamilyWorldDecoyRates.Status(CreditedEnvelope, DecoyEnvelope, decoyRate);
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int? TargetPeptides { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int? DecoyPeptides { get; set; }
         public int KnownLanded { get; set; }
         public int KnownRight { get; set; }
         /// <summary>KnownRight over KnownLanded; null when no known answer landed.</summary>
@@ -208,6 +228,7 @@ namespace FamilyQuant
             string Num(double v) => v.ToString("R", CultureInfo.InvariantCulture);
             string Opt(double? v) => v.HasValue ? Num(v.Value) : string.Empty;
             string Int(int v) => v.ToString(CultureInfo.InvariantCulture);
+            string Count(int? v) => v.HasValue ? Int(v.Value) : "not recorded";
             string Fraction(double v) => MeasuredTotalEnvelope > 0 ? Num(v / MeasuredTotalEnvelope) : string.Empty;
             string Q(string v) => CsvFormatting.AlwaysQuoted(v);
             string rule = Q(CompositionRules + " | " + Rules);
@@ -217,17 +238,21 @@ namespace FamilyQuant
                 "row", "kind", "family", "curated_user_ids", "identified_envelope", "database_de_novo_envelope",
                 "family_world_de_novo_envelope", "total_envelope", "fraction_of_measured_total", "family_world_decoy_rate",
                 "family_world_known_credited", "family_world_known_credited_true", "family_world_right_rate",
-                "family_world_evidence", "rule",
+                "family_world_evidence", "rule", "family_world_decoy_rate_status", "family_world_target_peptides", "family_world_decoy_peptides",
             }.Select(Q))).Append('\n');
             foreach (FamilyWorldCompositionRow r in Composition)
+            {
+                var evidence = FamilyWorldDecoyRates.ForComposition(r, Families.FirstOrDefault(f => string.Equals(f.Family, r.Family, StringComparison.OrdinalIgnoreCase)));
                 csv.Append(string.Join(",", Q("family"), Q(r.Kind), Q(r.Family),
                     Q(string.Join(" ", r.CuratedUserIds.Select(id => id.ToString(CultureInfo.InvariantCulture)))),
                     Num(r.IdentifiedEnvelope), Num(r.DatabaseDeNovoEnvelope), Num(r.WorldDeNovoEnvelope), Num(r.TotalEnvelope),
                     Fraction(r.TotalEnvelope), Opt(r.WorldDecoyRate), Int(r.WorldKnownCredited), Int(r.WorldKnownCreditedTrue),
-                    Opt(r.WorldRightRate), Q(r.WorldEvidence), rule)).Append('\n');
+                    Opt(r.WorldRightRate), Q(r.WorldEvidence), rule, Q(evidence.Status), Count(evidence.TargetPeptides), Count(evidence.DecoyPeptides))).Append('\n');
+            }
             void Global(string label, double envelope) =>
                 csv.Append(string.Join(",", Q("global"), Q(string.Empty), Q(label), Q(string.Empty), string.Empty, string.Empty, string.Empty,
-                    Num(envelope), Fraction(envelope), string.Empty, string.Empty, string.Empty, string.Empty, Q(string.Empty), rule)).Append('\n');
+                    Num(envelope), Fraction(envelope), string.Empty, string.Empty, string.Empty, string.Empty, Q(string.Empty), rule,
+                    Q(string.Empty), string.Empty, string.Empty)).Append('\n');
             Global("identified, shared between families", SharedIdentifiedEnvelope);
             Global("de novo in the database, shared between families", SharedDatabaseDeNovoEnvelope);
             Global("de novo in the family world, shared between families", SharedEnvelope);
@@ -245,6 +270,7 @@ namespace FamilyQuant
             string Num(double v) => v.ToString("R", CultureInfo.InvariantCulture);
             string Opt(double? v) => v.HasValue ? Num(v.Value) : string.Empty;
             string Int(int v) => v.ToString(CultureInfo.InvariantCulture);
+            string Count(int? v) => v.HasValue ? Int(v.Value) : "not recorded";
             string Fraction(double v) => ResidualEnvelope > 0 ? Num(v / ResidualEnvelope) : string.Empty;
             string Q(string v) => CsvFormatting.AlwaysQuoted(v);
             string rule = Q(Rules);
@@ -253,16 +279,17 @@ namespace FamilyQuant
             {
                 "row", "family", "envelope", "fraction_of_unattributed", "split_envelope", "credited_envelope_every_family",
                 "peptides", "unique_peptides", "decoy_envelope", "decoy_rate", "known_credited", "known_credited_true",
-                "right_rate", "evidence", "world_proteins_hit", "rule",
+                "right_rate", "evidence", "world_proteins_hit", "rule", "decoy_rate_status", "target_peptides", "decoy_peptides",
             }.Select(Q))).Append('\n');
             foreach (FamilyWorldFamilySummary f in Families)
                 csv.Append(string.Join(",", Q("family"), Q(f.Family), Num(f.UniqueEnvelope), Fraction(f.UniqueEnvelope), Num(f.SplitEnvelope),
                     Num(f.CreditedEnvelope), Int(f.Peptides), Int(f.UniquePeptides), Num(f.DecoyEnvelope), Opt(f.DecoyRate),
-                    Int(f.KnownCredited), Int(f.KnownCreditedTrue), Opt(f.RightRate), Q(f.Evidence), Int(f.WorldProteins.Count), rule)).Append('\n');
+                    Int(f.KnownCredited), Int(f.KnownCreditedTrue), Opt(f.RightRate), Q(f.Evidence), Int(f.WorldProteins.Count), rule,
+                    Q(f.DecoyRateStatus), Int(f.Peptides), Count(f.DecoyPeptides))).Append('\n');
             foreach (FamilyWorldOutcomeSummary o in Outcomes.Where(o => o.Outcome != nameof(FamilyWorldOutcome.Credited)))
                 csv.Append(string.Join(",", Q("closing"), Q(FamilyWorldErrors.OutcomeLabel(o.Outcome)), Num(o.Envelope), Fraction(o.Envelope),
                     string.Empty, string.Empty, Int(o.Peptides), string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
-                    string.Empty, string.Empty, string.Empty, rule)).Append('\n');
+                    string.Empty, string.Empty, string.Empty, rule, Q(string.Empty), string.Empty, string.Empty)).Append('\n');
             return csv.ToString();
         }
     }
@@ -300,7 +327,9 @@ namespace FamilyQuant
                 CreditedEnvelope = credited,
                 LandedFraction = table.ResidualEnvelope > 0 ? credited / table.ResidualEnvelope : 0,
                 DecoyEnvelope = decoy,
-                DecoyRate = credited > 0 ? decoy / credited : null,
+                DecoyRate = FamilyWorldDecoyRates.Calculate(credited, decoy),
+                TargetPeptides = table.Outcomes.Where(o => o.Outcome == nameof(FamilyWorldOutcome.Credited)).Sum(o => o.Peptides),
+                DecoyPeptides = table.Outcomes.Where(o => o.Outcome == nameof(FamilyWorldOutcome.Decoy)).Sum(o => o.Peptides),
                 KnownLanded = table.KnownLanded,
                 KnownRight = table.KnownRight,
                 RightRate = table.KnownLanded > 0 ? table.KnownRight / (double)table.KnownLanded : null,
@@ -509,6 +538,9 @@ namespace FamilyQuant
                 row.WorldDeNovoEnvelope = f.UniqueEnvelope;
                 row.WorldDeNovoPeptides = f.UniquePeptides;
                 row.WorldDecoyRate = f.DecoyRate;
+                row.WorldDecoyRateUnavailableReason = f.DecoyRate.HasValue ? null : f.DecoyRateStatus;
+                row.WorldTargetPeptides = f.Peptides;
+                row.WorldDecoyPeptides = f.DecoyPeptides;
                 row.WorldKnownCredited = f.KnownCredited;
                 row.WorldKnownCreditedTrue = f.KnownCreditedTrue;
                 row.WorldRightRate = f.RightRate;
@@ -576,6 +608,7 @@ namespace FamilyQuant
                 row.Peptides = f.Peptides;
                 row.UniquePeptides = f.UniquePeptides;
                 row.DecoyEnvelope = f.DecoyEnvelope;
+                row.DecoyPeptides = f.DecoyPeptides;
                 row.WorldProteins = f.Proteins.ToList();
             }
             foreach (FamilyWorldKnownAnswer a in known)
@@ -597,7 +630,8 @@ namespace FamilyQuant
             }
             foreach (FamilyWorldFamilySummary row in rows.Values)
             {
-                row.DecoyRate = row.CreditedEnvelope > 0 ? row.DecoyEnvelope / row.CreditedEnvelope : null;
+                row.DecoyRate = FamilyWorldDecoyRates.Calculate(row.CreditedEnvelope, row.DecoyEnvelope);
+                row.DecoyPeptides ??= 0;
                 if (row.KnownCredited >= minimumKnownCredits)
                 {
                     row.RightRate = row.KnownCreditedTrue / (double)row.KnownCredited;

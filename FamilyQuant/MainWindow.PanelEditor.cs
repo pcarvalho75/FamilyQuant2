@@ -20,7 +20,11 @@ public partial class MainWindow
         try
         {
             bool updated = await PanelSubclassRefresh.ReviewThenRecomputeAsync(familyStale, subclassesChanged,
-                FamilyRulesCurrent, () => false, reviewFamilies: null, () => SubclassAssignmentRunner.RecomputeSubclassesAsync(host));
+                FamilyRulesCurrent,
+                () => ShellMessages.Report(this, "Family assignments need review after this panel change. Review them now?",
+                    "Family panel", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes,
+                host.ReviewEvidenceAsync, () => SubclassAssignmentRunner.RecomputeSubclassesAsync(host, combineWithPreviousUndo: true),
+                () => SubclassAssignment.IsCurrent(host.fcf));
             if (subclassesChanged && !updated && !FamilyRulesCurrent()) host.ReportPanelRefreshPending();
         }
         catch (Exception ex) { host.ReportPanelRefreshFailure(ex.Message); }

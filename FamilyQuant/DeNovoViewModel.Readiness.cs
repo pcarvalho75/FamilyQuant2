@@ -13,7 +13,7 @@ public sealed partial class DeNovoViewModel
         if (observedMode != Filters.ModeTag)
         {
             observedMode = Filters.ModeTag;
-            if (LastImport != null) SourceChanged();
+            if (LastImport != null && !changingImportSource) SourceChanged();
             SourcePathChanged();
         }
         base.ChildChanged(name);
