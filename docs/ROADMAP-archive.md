@@ -451,6 +451,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J33c | J33 reviewed and merged | L | 0.2 | 🟢 | J37a, J40 | Approved; gate green | T2 | | 0 | 0 | |
 | J37a | A confirmed family link keeps a short note on why, saved with the project and printed in the report's method | L | 0.5 | 🟢 | J37b | Survives save and reopen; appears in the method table | T2 | | 0 | 0 | |
 | J37b | J37 reviewed and merged | L | 0.2 | J37a | | Approved; gate green | T2 | | 0 | 0 | |
+| J27d | J27 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | FL | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 
