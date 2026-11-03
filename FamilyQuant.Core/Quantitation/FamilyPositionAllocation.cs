@@ -160,7 +160,7 @@ public static partial class FamilyCompositionStudy
                     if (features.Count == 0) { Add(OutsidePositionKey, "Outside named products", 1); continue; }
                     int narrowest = features.Min(f => f.End!.Value - f.Start!.Value);
                     var leaves = features.Where(f => f.End!.Value - f.Start!.Value == narrowest)
-                        .GroupBy(f => "feature:" + JsonSerializer.Serialize(new[] { f.Type, f.Description }), StringComparer.Ordinal).ToList();
+                        .GroupBy(FeaturePartKey, StringComparer.Ordinal).ToList();
                     if (leaves.Count != 1) Add(string.Empty, PositionUnresolved, 1);
                     else
                     {
