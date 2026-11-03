@@ -24,7 +24,7 @@ internal sealed class SuiteCommandCoverage
     private static readonly Dictionary<ushort, OpCode> Instructions = typeof(OpCodes)
         .GetFields(BindingFlags.Public | BindingFlags.Static).Where(field => field.FieldType == typeof(OpCode))
         .Select(field => (OpCode)field.GetValue(null)!).ToDictionary(code => unchecked((ushort)code.Value));
-    private readonly Dictionary<MethodInfo, MethodInfo[]> references = new();
+    private readonly Dictionary<(MethodInfo Method, bool CallsOnly), MethodInfo[]> references = new();
     private readonly Assembly assembly = typeof(Program).Assembly;
 
     internal static string Key(MethodInfo method) => method.DeclaringType!.FullName + "." + method.Name
@@ -34,16 +34,35 @@ internal sealed class SuiteCommandCoverage
     internal HashSet<string> SuiteFixtures(IEnumerable<Delegate> bodies)
     {
         var result = new HashSet<string>(StringComparer.Ordinal);
+        var pending = new Stack<MethodInfo>();
         foreach (Delegate body in bodies)
         {
             // A method-group entry is itself the fixture. A lambda entry calls its fixture methods.
             if (!body.Method.Name.StartsWith("<", StringComparison.Ordinal)) result.Add(Key(body.Method));
             else
-                foreach (var method in References(body.Method).Where(method => method.DeclaringType?.Assembly == assembly
+                foreach (var method in References(body.Method, callsOnly: true).Where(method => method.DeclaringType?.Assembly == assembly
                     && !method.Name.StartsWith("<", StringComparison.Ordinal) && !SharedHelper(method))) result.Add(Key(method));
+            pending.Push(body.Method);
+        }
+        var visited = new HashSet<MethodInfo>();
+        while (pending.TryPop(out var method))
+        {
+            if (!visited.Add(method) || method.DeclaringType?.Assembly != assembly || SharedHelper(method)
+                || method.DeclaringType == typeof(Program) && method.Name is "DefaultSuite" or "RunSuite" or "Main") continue;
+            if (AssertionFixture(method)) result.Add(Key(method));
+            // Calls below an aggregate count; merely creating an unused delegate does not.
+            foreach (var called in References(method, callsOnly: true)) pending.Push(called);
+            var state = method.GetCustomAttribute<AsyncStateMachineAttribute>()?.StateMachineType;
+            if (state?.GetMethod("MoveNext", BindingFlags.NonPublic | BindingFlags.Instance) is { } move) pending.Push(move);
         }
         return result;
     }
+
+    private bool AssertionFixture(MethodInfo method) => !method.Name.StartsWith("<", StringComparison.Ordinal)
+        && method.DeclaringType?.IsDefined(typeof(CompilerGeneratedAttribute), false) != true
+        && !method.Name.StartsWith("Run", StringComparison.Ordinal)
+        && (method.Name.EndsWith("Tests", StringComparison.Ordinal) || method.Name.EndsWith("Checks", StringComparison.Ordinal))
+        && References(method).Any(called => called.DeclaringType == typeof(Program) && called.Name == "Check");
 
     private HashSet<string> ReachableFixtures(MethodInfo start, HashSet<string> suiteFixtures)
     {
@@ -57,10 +76,7 @@ internal sealed class SuiteCommandCoverage
             if (SharedHelper(method)) continue;
             // Stop at fixture boundaries even if that fixture is missing from the suite. Otherwise
             // one enrolled helper could conceal another, unenrolled fixture in the same command.
-            bool assertionFixture = !method.Name.StartsWith("Run", StringComparison.Ordinal)
-                && (method.Name.EndsWith("Tests", StringComparison.Ordinal) || method.Name.EndsWith("Checks", StringComparison.Ordinal))
-                && References(method).Any(called => called.DeclaringType == typeof(Program) && called.Name == "Check");
-            if (suiteFixtures.Contains(key) || assertionFixture) { found.Add(key); continue; }
+            if (suiteFixtures.Contains(key) || AssertionFixture(method)) { found.Add(key); continue; }
             // Auditing or constructing a suite must never count as invoking its fixtures.
             if (method.DeclaringType == typeof(Program) && method.Name is "DefaultSuite" or "RunSuite" or "Main") continue;
             foreach (var called in References(method)) pending.Push(called);
@@ -110,9 +126,9 @@ internal sealed class SuiteCommandCoverage
         return rows;
     }
 
-    private MethodInfo[] References(MethodInfo method)
+    private MethodInfo[] References(MethodInfo method, bool callsOnly = false)
     {
-        if (references.TryGetValue(method, out var cached)) return cached;
+        if (references.TryGetValue((method, callsOnly), out var cached)) return cached;
         var result = new List<MethodInfo>();
         byte[] bytes = method.GetMethodBody()?.GetILAsByteArray() ?? Array.Empty<byte>();
         for (int offset = 0; offset < bytes.Length;)
@@ -129,13 +145,14 @@ internal sealed class SuiteCommandCoverage
                 OperandType.InlineSwitch => checked(4 + BitConverter.ToInt32(bytes, offset) * 4),
                 _ => 4,
             };
-            if (code.OperandType == OperandType.InlineMethod && method.Module.ResolveMethod(BitConverter.ToInt32(bytes, offset),
+            if (code.OperandType == OperandType.InlineMethod && (!callsOnly || code == OpCodes.Call || code == OpCodes.Callvirt)
+                && method.Module.ResolveMethod(BitConverter.ToInt32(bytes, offset),
                 method.DeclaringType?.GetGenericArguments(), method.IsGenericMethod ? method.GetGenericArguments() : null) is MethodInfo called)
                 result.Add(called);
             offset = checked(offset + size);
             if (offset > bytes.Length) throw new InvalidDataException("A compiled command instruction extends past its method body.");
         }
-        return references[method] = result.Distinct().ToArray();
+        return references[(method, callsOnly)] = result.Distinct().ToArray();
     }
 
     internal static string Listing(IReadOnlyList<SuiteCommandCoverageRow> rows)
