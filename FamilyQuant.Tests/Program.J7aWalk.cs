@@ -34,7 +34,56 @@ internal static partial class Program
      new("--j7a-report-probe", 10464, TestCommandPhase.Raw,
         args => args.Length > 0 && args[0] == "--j7a-report-probe", (args, _) => J7aReportProbe(args)),
      new("--j7b-walk", 10465, TestCommandPhase.Raw,
-        args => args.Length > 0 && args[0] == "--j7b-walk", (args, _) => J7bWalk(args))];
+        args => args.Length > 0 && args[0] == "--j7b-walk", (args, _) => J7bWalk(args)),
+     new("--j45-walk", 10468, TestCommandPhase.Raw,
+        args => args.Length > 0 && args[0] == "--j45-walk", (args, _) => J45Walk(args))];
+
+    // J45 through the shell: open the project, then File > Export > Interpretation input (Markdown) twice to two files
+    // and compare their bytes.
+    private static int J45Walk(string[] args)
+    {
+        if (args.Length != 3) throw new ArgumentException("Use --j45-walk <project.fqproj> <new-output>.");
+        string output = Path.GetFullPath(args[2]); Directory.CreateDirectory(output);
+        string logPath = Path.Combine(output, "j45-walk.log");
+        if (!NativeProofDesktop.IsPrivate) return NativeProofDesktop.Run(args, logPath, 14_400_000);
+        using var log = new StreamWriter(logPath, append: true) { AutoFlush = true };
+        var previousOut = Console.Out; Console.SetOut(log); Console.SetError(log);
+        void Say(string text) => Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) + " " + text);
+        MainWindow? shell = null; string target = "";
+        try
+        {
+            EnsureApplication();
+            SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+            MainWindow.ShellSettingsPathOverride = Path.Combine(output, "shell-preferences.json");
+            MainWindow.UnsavedProjectChoiceOverride = () => UnsavedProjectChoice.Discard;
+            ShellMessages.Presenter = (_, message) => { Say("Shell message: " + message.Text.Replace("\n", " | ")); return MessageBoxResult.OK; };
+            ShellDialogs.FilePresenter = (_, id, dialog) => { Say("File dialog " + id + ": " + dialog.FileName + " -> " + target); dialog.FileName = target; return true; };
+            Say("J45 walk: " + args[1] + " (" + TestFileHash.Upper(args[1]) + ")");
+            shell = new MainWindow { Left = -30000, Top = -30000, ShowActivated = false, ShowInTaskbar = false,
+                WindowStartupLocation = WindowStartupLocation.Manual, Width = 1440, Height = 1000 };
+            shell.Show(); PumpDispatcher();
+            if (!shell.OpenProjectPath(args[1])) throw new InvalidOperationException("The shell did not open the project.");
+            J7aWaitIdle(shell, TimeSpan.FromHours(2));
+            var item = (MenuItem)shell.FindName("MenuItemExportInterpretationInput");
+            var files = new List<string>();
+            foreach (string name in new[] { "interpretation-input.md", "interpretation-input-repeat.md" })
+            {
+                target = Path.Combine(output, name);
+                var watch = Stopwatch.StartNew();
+                item.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+                bool written = J7aWait(shell.InterpretationInputTask!, TimeSpan.FromMinutes(30));
+                Say("Export " + name + ": " + written + " in " + watch.Elapsed.TotalSeconds.ToString("F1", CultureInfo.InvariantCulture) + " s; "
+                    + (File.Exists(target) ? new FileInfo(target).Length + " bytes, SHA-256 " + TestFileHash.Upper(target) : "no file"));
+                if (written) files.Add(target);
+            }
+            bool same = files.Count == 2 && File.ReadAllBytes(files[0]).AsSpan().SequenceEqual(File.ReadAllBytes(files[1]));
+            Say("Both exports byte-identical: " + same);
+            Say("J45 walk finished.");
+            return same ? 0 : 1;
+        }
+        catch (Exception ex) { Say("FAILED " + ex); return 1; }
+        finally { ShellDialogs.FilePresenter = null; shell?.Close(); Console.SetOut(previousOut); }
+    }
 
     // J7b through the shell: open the project, show Families and export its composition and protein table, then, when an
     // interpretation file is given, File > Report details writes it into the written-interpretation field (the other

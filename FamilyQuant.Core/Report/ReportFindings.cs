@@ -39,6 +39,11 @@ public static class ReportFindings
 
     public static (ReportSection Section, string Csv)? FromProject(FamilyClusterFile curation, QuantManifest manifest,
         FamilyReportThresholdResult? grouping, IReadOnlyDictionary<int, string> labels)
+        => InputFromProject(curation, manifest, grouping, labels) is { } input ? Build(input) : null;
+
+    /// <summary>The project's stored facts as the summary reads them; null without stored shares or a grouping.</summary>
+    public static ReportFindingsInput? InputFromProject(FamilyClusterFile curation, QuantManifest manifest,
+        FamilyReportThresholdResult? grouping, IReadOnlyDictionary<int, string> labels)
     {
         ArgumentNullException.ThrowIfNull(curation);
         ArgumentNullException.ThrowIfNull(manifest);
@@ -53,14 +58,42 @@ public static class ReportFindings
                 if (assignment.IsApplied && !string.IsNullOrEmpty(assignment.PanelFamilyKey))
                     members[assignment.PanelFamilyKey] = members.GetValueOrDefault(assignment.PanelFamilyKey) + 1;
         }
-        return Build(new ReportFindingsInput
+        return new ReportFindingsInput
         {
             Shares = manifest.FamilyRunShares, Grouping = grouping, Counts = manifest.FamilyProteinCounts, Subclasses = manifest.FamilySubclassParts,
             Labels = labels, Panel = curation.FamilyPanel, PanelKeyByUserId = keys, MembersByPanelKey = members,
             ScopeTerms = curation.EvidenceRecipe?.Options.ScopeTerms ?? Array.Empty<string>(),
             Links = curation.FamilyPanel?.EvidenceLinks ?? new List<FamilyPanelEvidenceLink>(),
             DeNovoInputs = manifest.DeNovoInputs,
-        });
+        };
+    }
+
+    /// <summary>The effective panel family of a group, after merges; null without a panel or an unambiguous key.</summary>
+    public static FamilyPanelFamily? PanelFamily(ReportFindingsInput input, int userId)
+    {
+        if (input.Panel is not { } panel || input.PanelKeyByUserId.GetValueOrDefault(userId) is not { } key) return null;
+        string? effective = FamilyPanelValidation.ResolveFamilyKey(panel, key);
+        return effective == null ? null : panel.Families.Single(f => f.Key == effective);
+    }
+
+    /// <summary>Panel keys of quantified panel families with database members and no peptide observed, most members first.</summary>
+    public static IReadOnlyList<string> UnobservedPanelKeys(ReportFindingsInput input)
+    {
+        if (input.Panel == null) return Array.Empty<string>();
+        return input.Shares.Families.Where(f => f.NoPeptideObserved && input.PanelKeyByUserId.GetValueOrDefault(f.FamilyUserId) is { } key
+                && PanelFamily(input, f.FamilyUserId)?.Decision == FamilyPanelDecision.Quantify && input.MembersByPanelKey.GetValueOrDefault(key) > 0)
+            .Select(f => input.PanelKeyByUserId[f.FamilyUserId]!).Distinct(StringComparer.Ordinal)
+            .OrderByDescending(k => input.MembersByPanelKey[k]).ThenBy(k => k, StringComparer.Ordinal).ToList();
+    }
+
+    /// <summary>The subclass parts the summary states: families whose panel family carries subclass rules (elsewhere every
+    /// part is unresolved by construction), never a family under Others (named only in the supplement, D35), largest family signal first.</summary>
+    public static IReadOnlyList<FamilySignalBreakdown> StatedSubclassParts(ReportFindingsInput input)
+    {
+        var hidden = input.Grouping.OtherFamilies.Select(f => f.FamilyUserId).ToHashSet();
+        return (input.Subclasses?.Families ?? new()).Where(f => f.Parts.Count > 0 && f.FamilySignal > 0 && !hidden.Contains(f.FamilyUserId)
+                && PanelFamily(input, f.FamilyUserId)?.Subclasses.Count > 0)
+            .OrderByDescending(f => f.FamilySignal).ThenBy(f => f.FamilyUserId).ToList();
     }
 
     public static (ReportSection Section, string Csv) Build(ReportFindingsInput input)
@@ -75,17 +108,8 @@ public static class ReportFindings
         }
         void Say(string id, string text) => blocks.Add(new ReportParagraph("findings:" + id, text));
         string Name(int userId) => input.Labels.TryGetValue(userId, out string? label) ? label : Integer(userId);
-        // The effective panel family of a group, after merges; null without a panel or an unambiguous key.
-        FamilyPanelFamily? PanelFamily(int userId)
-        {
-            if (input.Panel is not { } panel || input.PanelKeyByUserId.GetValueOrDefault(userId) is not { } key) return null;
-            string? effective = FamilyPanelValidation.ResolveFamilyKey(panel, key);
-            return effective == null ? null : panel.Families.Single(f => f.Key == effective);
-        }
         var grouping = input.Grouping;
         string threshold = Percent(grouping.Threshold);
-        // Families under Others are named only in the supplement, never in the document text (D35).
-        var hidden = grouping.OtherFamilies.Select(f => f.FamilyUserId).ToHashSet();
 
         var listed = grouping.ListedFamilies.Where(f => f.MeanShare.HasValue)
             .OrderByDescending(f => f.MeanShare).ThenBy(f => f.FamilyUserId).ToList();
@@ -138,10 +162,7 @@ public static class ReportFindings
 
         if (input.Panel is { } panel)
         {
-            var unobserved = input.Shares.Families.Where(f => f.NoPeptideObserved && input.PanelKeyByUserId.GetValueOrDefault(f.FamilyUserId) is { } key
-                    && PanelFamily(f.FamilyUserId)?.Decision == FamilyPanelDecision.Quantify && input.MembersByPanelKey.GetValueOrDefault(key) > 0)
-                .Select(f => input.PanelKeyByUserId[f.FamilyUserId]!).Distinct(StringComparer.Ordinal)
-                .OrderByDescending(k => input.MembersByPanelKey[k]).ThenBy(k => k, StringComparer.Ordinal).ToList();
+            var unobserved = UnobservedPanelKeys(input);
             if (unobserved.Count > 0)
             {
                 foreach (string key in unobserved)
@@ -154,10 +175,7 @@ public static class ReportFindings
         }
 
         bool anyUnresolved = false;
-        // Only families whose panel family carries subclass rules; elsewhere every part is unresolved by construction.
-        foreach (var family in (input.Subclasses?.Families ?? new()).Where(f => f.Parts.Count > 0 && f.FamilySignal > 0 && !hidden.Contains(f.FamilyUserId)
-                         && PanelFamily(f.FamilyUserId)?.Subclasses.Count > 0)
-                     .OrderByDescending(f => f.FamilySignal).ThenBy(f => f.FamilyUserId))
+        foreach (var family in StatedSubclassParts(input))
         {
             string name = Name(family.FamilyUserId);
             anyUnresolved |= family.Parts.Any(p => p.IsUnresolved && p.ShareOfFamily > 0);
