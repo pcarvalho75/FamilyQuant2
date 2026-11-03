@@ -43,12 +43,31 @@ namespace FamilyQuant
         /// A failure is noted and never loses the quantitation.
         /// </summary>
         public static void AttachToCompute(FamilyClusterFile? curation, FullXicComputeResult result)
+            => AttachToComputeCore(curation, result, null);
+
+        /// <summary>Compute already attributed these same rows. Keep that complete map inside this
+        /// operation rather than repeating its two searches. Other callers retain the fresh route.</summary>
+        internal static void AttachToComputeWithAttribution(FamilyClusterFile? curation, FullXicComputeResult result,
+            PeptideFamilyAttribution? attribution) => AttachToComputeCore(curation, result, attribution);
+
+        private static void AttachToComputeCore(FamilyClusterFile? curation, FullXicComputeResult result,
+            PeptideFamilyAttribution? attribution)
         {
             if (result == null) throw new ArgumentNullException(nameof(result));
             if (curation?.EvidenceSource?.FamilyWorld == null) return;
             try
             {
-                FamilyWorldSummary table = FamilyWorldAnalysis.FromStoredWorld(result.Rows, curation, result.SpectrumComparisonRows).Summary;
+                FamilyWorldSummary table;
+                if (attribution != null && attribution.MembershipSha256 == FamilyStudyMembership.Fingerprint(curation))
+                {
+                    FamilyWorldSnapshot snapshot = FamilyWorldFetcher.Stored(curation);
+                    FamilyPeptideAttribution firstPass = FamilyEnvelopeQuant.AttributePeptides(
+                        FamilyEnvelopeQuant.PreparePeptides(result.Rows), attribution);
+                    table = RunPrepared(firstPass, curation, result.SpectrumComparisonRows, FamilyWorld.FromSnapshot(snapshot),
+                        snapshot.Release, null, null, FamilyWorldErrors.DefaultMinimumKnownCredits, null,
+                        FamilyWorldOptions.LengthChoices).Summary;
+                }
+                else table = FromStoredWorld(result.Rows, curation, result.SpectrumComparisonRows).Summary;
                 result.Manifest.FamilyWorldResult = table;
                 double landed = table.ResidualEnvelope > 0
                     ? table.Outcomes.Where(o => o.Outcome == nameof(FamilyWorldOutcome.Credited)).Sum(o => o.Envelope) / table.ResidualEnvelope : 0;
@@ -86,6 +105,15 @@ namespace FamilyQuant
             List<QuantRow> rowList = rows.Where(r => r != null).ToList();
             PeptideFamilyAttribution attribution = FamilyEnvelopeQuant.BuildAttributionFromCuration(rowList, curation);
             FamilyPeptideAttribution firstPass = FamilyEnvelopeQuant.AttributePeptides(FamilyEnvelopeQuant.PreparePeptides(rowList), attribution);
+            return RunPrepared(firstPass, curation, spectra, world, worldRelease, ownSpecies, options,
+                minimumKnownCredits, operation, lengths);
+        }
+
+        private static FamilyWorldAnalysisResult RunPrepared(FamilyPeptideAttribution firstPass, FamilyClusterFile curation,
+            IEnumerable<SpectrumComparisonRow> spectra, FamilyWorld world, string worldRelease,
+            Func<FamilyWorldProtein, bool>? ownSpecies, FamilyWorldOptions? options, int minimumKnownCredits,
+            OperationContext? operation, IReadOnlyList<int>? lengths)
+        {
             options ??= new FamilyWorldOptions();
             if (lengths == null || lengths.Count == 0)
             {

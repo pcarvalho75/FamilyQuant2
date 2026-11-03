@@ -65,6 +65,31 @@ internal static partial class Program
             && Math.Abs(table.Composition.Sum(r => r.TotalEnvelope) + table.SharedIdentifiedEnvelope + table.SharedDatabaseDeNovoEnvelope
                 + table.SharedEnvelope + table.UnattributedIdentifiedEnvelope + table.UnexplainedEnvelope - table.MeasuredTotalEnvelope) < 1e-9);
 
+        var reuseMethod = typeof(FamilyWorldAnalysis).GetMethod("AttachToComputeWithAttribution",
+            System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
+        Check("J38 Compute can pass its complete curation attribution into the world analysis", reuseMethod != null);
+        if (reuseMethod != null)
+        {
+            var attribution = FamilyEnvelopeQuant.BuildAttributionFromCuration(attached.Rows, file);
+            var reused = new FullXicComputeResult { Rows = attached.Rows, SpectrumComparisonRows = attached.SpectrumComparisonRows,
+                Manifest = new QuantManifest() };
+            reuseMethod.Invoke(null, new object?[] { file, reused, attribution });
+            Check("J38 reused attribution preserves every stored world field and note",
+                System.Text.Json.JsonSerializer.Serialize(reused.Manifest.FamilyWorldResult) == System.Text.Json.JsonSerializer.Serialize(table)
+                && reused.Notes.SequenceEqual(attached.Notes));
+            var regrouped = FamilyClusterFile.FromJsonText(file.ToJsonText());
+            regrouped.MyExtendedFastaItems[0].UserID += 1000;
+            var fresh = new FullXicComputeResult { Rows = attached.Rows, SpectrumComparisonRows = attached.SpectrumComparisonRows,
+                Manifest = new QuantManifest() };
+            var stale = new FullXicComputeResult { Rows = attached.Rows, SpectrumComparisonRows = attached.SpectrumComparisonRows,
+                Manifest = new QuantManifest() };
+            FamilyWorldAnalysis.AttachToCompute(regrouped, fresh);
+            reuseMethod.Invoke(null, new object?[] { regrouped, stale, attribution });
+            Check("J38 stale grouping rejects reuse and retains the ordinary fresh-search result",
+                System.Text.Json.JsonSerializer.Serialize(stale.Manifest.FamilyWorldResult)
+                == System.Text.Json.JsonSerializer.Serialize(fresh.Manifest.FamilyWorldResult) && stale.Notes.SequenceEqual(fresh.Notes));
+        }
+
         FullXicComputeResult plain = Computed();
         FamilyWorldAnalysis.AttachToCompute(TaskFile(), plain);
         Check("Compute family world: without a stored world nothing is attached and nothing is said",

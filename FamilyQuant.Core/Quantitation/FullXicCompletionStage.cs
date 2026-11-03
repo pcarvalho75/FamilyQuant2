@@ -101,7 +101,7 @@ namespace FamilyQuant
             manifest.SpectrumComparisonRows = result.SpectrumComparisonRows;
             manifest.DeNovoAcceptedScoreScatter = DeNovoAcceptedScoreScatterStudy.Build(
                 result.SpectrumComparisonRows, manifest.DeNovoSourceScoreDistributions);
-            FamilyWorldAnalysis.AttachToCompute(options.FamilyCuration, result);
+            FamilyWorldAnalysis.AttachToComputeWithAttribution(options.FamilyCuration, result, familyAttribution);
             if (options.ExportSpectrumComparisonCsv)
             {
                 string tablePath = string.IsNullOrWhiteSpace(options.SpectrumComparisonCsvPath)
