@@ -5,356 +5,356 @@
   "runs": [
     {
       "id": "native",
-      "command": "C:\\FamilyQuant-wt2\\terra1\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-results-export-facts D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261103-001001-terra1\\results-export-facts \u00222026-11-03 00:13:05 -0800\u0022",
-      "executedAt": "2026-11-03 00:13:05 -0800",
-      "commit": "9dc3bb854ca3b048750f548bd6243b5c64c707a0",
+      "command": "C:\\FamilyQuant-wt2\\terra1\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-results-export-facts D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261103-013000-terra1\\results-export-facts \u00222026-11-03 01:32:53 -0800\u0022",
+      "executedAt": "2026-11-03 01:32:53 -0800",
+      "commit": "7a231c0104e5ca2a9f8c518c0aaf8593a2ed8972",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\actual-facts.json",
-          "sha256": "AE715BAD6952FB06CDD6A1685811616673543EB1569C4B818619749075AD3787"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\actual-facts.json",
+          "sha256": "A5FD349CEFE7C463A74F8EFB1B4EEEB38300A033D5A45C91CA0A29572980E72F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\executed\\FamilyQuant.Core.dll",
-          "sha256": "65BCEB231336E82E0CA4C57F82B74C67F84739554F5EFCA02A1FFC7557E4E6EC"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\executed\\FamilyQuant.Core.dll",
+          "sha256": "E5C7BAF7E12F4E28AAC51960DA2E9E5B628696B95B2537EE4953E95B7C142E9A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "257A4322D9D517D659D7B5D1A27D84D099D900BF2BEDC167F11A040E15ADBDE3"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "87E72637B2823DE2238B57CE682D92234CE31508A52FB2AD552CB105C0A91816"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\executed\\FamilyQuant.Tests\\Program.Commands.ResultsExportFacts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\executed\\FamilyQuant.Tests\\Program.Commands.ResultsExportFacts.cs",
           "sha256": "A464D0E50E9CB56933F447B164625A9AC762BE81B022A0146F0EA90D01A7813A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\executed\\FamilyQuant.Tests\\Program.ResultsExportFactProof.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\executed\\FamilyQuant.Tests\\Program.ResultsExportFactProof.cs",
           "sha256": "AE0319678CEF71C2B6600463439B43768C1FA23AC8EE10F30C4E833790501A5E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\executed\\FamilyQuant.Tests\\Program.ResultsExportFacts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\executed\\FamilyQuant.Tests\\Program.ResultsExportFacts.cs",
           "sha256": "2853DA25F62A828A68C57F02BDC762A0B7CE89189C24B1370D24D9947C822359"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\executed\\FamilyQuant2.dll",
-          "sha256": "7E0C4A9A25BAAF7B505DD44550A630D316E162BF2C0A0F9F5E3E8FECE31143D0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\executed\\FamilyQuant2.dll",
+          "sha256": "DECBFB068BB6B7EB77DB498D2B6B7BF749C7A6B19F06C826ABE1C47C90F0E47A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\executed\\FamilyQuant\\AnalyticsControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\executed\\FamilyQuant\\AnalyticsControl.xaml",
           "sha256": "7BA4AEFB5D15AE50EBD4854F91D4958574D43AC61E0B621F645F2A0EF37CD4B8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\executed\\FamilyQuant\\AnalyticsControl.xaml.cs",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\executed\\FamilyQuant\\AnalyticsControl.xaml.cs",
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\executed\\FamilyQuant\\AnalyticsViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\executed\\FamilyQuant\\AnalyticsViewModel.cs",
           "sha256": "FB90AF66F9C1CFC3A4D5248EEF223A84C6CB9A4B4B984019975B8BBD0AFD9342"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\executed\\frozen\\AnalyticsControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\executed\\frozen\\AnalyticsControl.xaml.cs",
           "sha256": "4E760B397BE1979AED87D871D661D5264975113F77E4A65A59FE6150B015FB71"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\README_presentation_evidence.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\README_presentation_evidence.txt",
           "sha256": "B1A084015096C5563C18DDB7127D1173997FF14D4E7D59723063DC8529C74C7E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\database_search_concordance.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\database_search_concordance.csv",
           "sha256": "468087C1370977FCBB399D752592C511508D8804993327AAF94B74742E7FAAC1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\de_novo_alternative_triage.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\de_novo_alternative_triage.csv",
           "sha256": "EF46A5DDB1B2F4C766FA6AD4DF4C61AADA9B3BA521318804E143A705EAFDD9DE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\de_novo_identification_consolidation.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\de_novo_identification_consolidation.csv",
           "sha256": "6EA1FAFD223F1FD8AF0EB70721B5E9E2C0AFD93592A050962F227388BDCB4BF2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\de_novo_inputs.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\de_novo_inputs.csv",
           "sha256": "DD3B9DF8507890474522BCBC88C568076ED0E530F7C03AC69C489D6C6EE94803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\de_novo_score_distribution.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\de_novo_score_distribution.csv",
           "sha256": "39D792AC3412338D9119EDD95CC67B2F94764BBD2B99B76754B510F96B17769C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\de_novo_source_score_distributions.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\de_novo_source_score_distributions.csv",
           "sha256": "24CBE2AF231C9695B41AB6E57939BFD870B2D55CEAC21BD884553C9FB7A1DF1F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\de_novo_source_score_distributions.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\de_novo_source_score_distributions.json",
           "sha256": "5289AF927B0072684DC0562C64F8C860FD602C308B93770AFEC4A296B5955855"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\family_attribution.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\family_attribution.csv",
           "sha256": "14B916D52EE58344718472C31B1B6ECC637FBBE74BF542E8F1585E92F1D02FCE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\family_composition.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\family_composition.csv",
           "sha256": "CC4BA55252A088C8A2EC5C7BDCBFBDA369213FA680C0306F24ADF071B9E34AD0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\family_source_sequence_counts.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\family_source_sequence_counts.csv",
           "sha256": "EA3C633D5D631ABE8153CFB7A1935BB60BC716FC13421E071A6D25A8294353F8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\database_search_concordance.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\database_search_concordance.png",
           "sha256": "43182FE779492DBD0FACE7FC6262AC84E1974A2CF4335E8F8621B931F06A3443"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\de_novo_alternative_triage.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\de_novo_alternative_triage.png",
           "sha256": "B45A83C7DA874298E49104DF006C6D853812E8D4C3AFAC6E1411121425252688"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\de_novo_consolidation.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\de_novo_consolidation.png",
           "sha256": "9A6996B4A9FAF8736D0E67477D06FFCF23BF92D491ABCAFF30E22424A2D59448"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\de_novo_score_distribution.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\de_novo_score_distribution.png",
           "sha256": "7F260BD5073E7CEA056412E808578412ACBEB426294BFDAF7A0234B497644853"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\family_contribution.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\family_contribution.png",
           "sha256": "D1B0B6F48330A4C452A66CFC1D714C11FFB99B2A563D527B73F6E51FFB8DACE6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\family_signal_vs_denovo_share.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\family_signal_vs_denovo_share.png",
           "sha256": "7556AEE36101B51B39F8B0D72C70B20A7A0987266193D727446302B963E1B30D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\family_source_sequence_counts.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\family_source_sequence_counts.png",
           "sha256": "6D2CE512BBE6E083EF43FD9BA14F72E20F856C67F37FC0426BA7F3A96B9E8916"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\identity_sweep.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\identity_sweep.png",
           "sha256": "0A952B5EE03A2C903775C3EB92E18F5CE52235EFFC8C77FA72248C30D378B381"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\peptide_representatives.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\peptide_representatives.png",
           "sha256": "3D54C5D691A850DA79B4D0D2AA8DF056C83FC08623C52C73F0E59127FB9DFFCE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\reference_envelope_model_diagnostics.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\reference_envelope_model_diagnostics.png",
           "sha256": "FBC1052360997C9991D2714675DBA91A706E70B21158AB22118E6735AA5C5034"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\signal_by_run.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\signal_by_run.png",
           "sha256": "63CDDFDE34835970045D46047C9F240F6A91617BD5DBA929AD2ED38F509FCA3D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\signal_uplift.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\figures\\signal_uplift.png",
           "sha256": "F3502A606307C73508326B87B5E4DF7991094F1B8CDAE3956A1B74256F43794E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\identity_sweep.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\identity_sweep.csv",
           "sha256": "8363F76ACB51AFF1292AA7D6D4365713DEA0A9D762653E4D56E5C5A3625361D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\peptide_representatives.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\peptide_representatives.csv",
           "sha256": "8EFE5E27B91FE800DA509F825C8EA1D135939649F0EEA787076D77EC57792369"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\presentation_plot_data.json",
-          "sha256": "FF99BADE994F310F83F178FECE9027F105977A8DDFE80392061ED7D84A527D4A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\presentation_plot_data.json",
+          "sha256": "C7040E90273FEF6EEB2B236099CA9726A1DAFA18FB678C77EEA7F9D57B4AB172"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\reference_envelope_model_diagnostics.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\reference_envelope_model_diagnostics.csv",
           "sha256": "A881F44706F797B83BF4FA843453C58AA8AA17DF2A8DCFD6DE0FEC7E1D7D3297"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\signal_by_run.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\signal_by_run.csv",
           "sha256": "6FF199B1AB9D37D30DACEB239FCE50E2E77CCE728F4F42F2EB55126B5245C007"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\signal_uplift.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\signal_uplift.csv",
           "sha256": "16AE5319DD0568CF27D550BF3EF79471D5F86A0FEA9936DD97FD9279E3C1866E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-1\\spectrum_evidence_comparison.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-1\\spectrum_evidence_comparison.csv",
           "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\README_presentation_evidence.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\README_presentation_evidence.txt",
           "sha256": "B1A084015096C5563C18DDB7127D1173997FF14D4E7D59723063DC8529C74C7E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\database_search_concordance.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\database_search_concordance.csv",
           "sha256": "468087C1370977FCBB399D752592C511508D8804993327AAF94B74742E7FAAC1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\de_novo_alternative_triage.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\de_novo_alternative_triage.csv",
           "sha256": "EF46A5DDB1B2F4C766FA6AD4DF4C61AADA9B3BA521318804E143A705EAFDD9DE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\de_novo_identification_consolidation.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\de_novo_identification_consolidation.csv",
           "sha256": "6EA1FAFD223F1FD8AF0EB70721B5E9E2C0AFD93592A050962F227388BDCB4BF2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\de_novo_inputs.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\de_novo_inputs.csv",
           "sha256": "DD3B9DF8507890474522BCBC88C568076ED0E530F7C03AC69C489D6C6EE94803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\de_novo_score_distribution.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\de_novo_score_distribution.csv",
           "sha256": "39D792AC3412338D9119EDD95CC67B2F94764BBD2B99B76754B510F96B17769C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\de_novo_source_score_distributions.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\de_novo_source_score_distributions.csv",
           "sha256": "24CBE2AF231C9695B41AB6E57939BFD870B2D55CEAC21BD884553C9FB7A1DF1F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\de_novo_source_score_distributions.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\de_novo_source_score_distributions.json",
           "sha256": "5289AF927B0072684DC0562C64F8C860FD602C308B93770AFEC4A296B5955855"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\family_attribution.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\family_attribution.csv",
           "sha256": "14B916D52EE58344718472C31B1B6ECC637FBBE74BF542E8F1585E92F1D02FCE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\family_composition.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\family_composition.csv",
           "sha256": "CC4BA55252A088C8A2EC5C7BDCBFBDA369213FA680C0306F24ADF071B9E34AD0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\family_source_sequence_counts.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\family_source_sequence_counts.csv",
           "sha256": "EA3C633D5D631ABE8153CFB7A1935BB60BC716FC13421E071A6D25A8294353F8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\database_search_concordance.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\database_search_concordance.png",
           "sha256": "43182FE779492DBD0FACE7FC6262AC84E1974A2CF4335E8F8621B931F06A3443"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\de_novo_alternative_triage.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\de_novo_alternative_triage.png",
           "sha256": "B45A83C7DA874298E49104DF006C6D853812E8D4C3AFAC6E1411121425252688"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\de_novo_consolidation.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\de_novo_consolidation.png",
           "sha256": "9A6996B4A9FAF8736D0E67477D06FFCF23BF92D491ABCAFF30E22424A2D59448"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\de_novo_score_distribution.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\de_novo_score_distribution.png",
           "sha256": "7F260BD5073E7CEA056412E808578412ACBEB426294BFDAF7A0234B497644853"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\family_contribution.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\family_contribution.png",
           "sha256": "D1B0B6F48330A4C452A66CFC1D714C11FFB99B2A563D527B73F6E51FFB8DACE6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\family_signal_vs_denovo_share.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\family_signal_vs_denovo_share.png",
           "sha256": "7556AEE36101B51B39F8B0D72C70B20A7A0987266193D727446302B963E1B30D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\family_source_sequence_counts.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\family_source_sequence_counts.png",
           "sha256": "6D2CE512BBE6E083EF43FD9BA14F72E20F856C67F37FC0426BA7F3A96B9E8916"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\identity_sweep.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\identity_sweep.png",
           "sha256": "0A952B5EE03A2C903775C3EB92E18F5CE52235EFFC8C77FA72248C30D378B381"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\peptide_representatives.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\peptide_representatives.png",
           "sha256": "3D54C5D691A850DA79B4D0D2AA8DF056C83FC08623C52C73F0E59127FB9DFFCE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\reference_envelope_model_diagnostics.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\reference_envelope_model_diagnostics.png",
           "sha256": "FBC1052360997C9991D2714675DBA91A706E70B21158AB22118E6735AA5C5034"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\signal_by_run.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\signal_by_run.png",
           "sha256": "63CDDFDE34835970045D46047C9F240F6A91617BD5DBA929AD2ED38F509FCA3D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\signal_uplift.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\figures\\signal_uplift.png",
           "sha256": "F3502A606307C73508326B87B5E4DF7991094F1B8CDAE3956A1B74256F43794E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\identity_sweep.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\identity_sweep.csv",
           "sha256": "8363F76ACB51AFF1292AA7D6D4365713DEA0A9D762653E4D56E5C5A3625361D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\peptide_representatives.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\peptide_representatives.csv",
           "sha256": "8EFE5E27B91FE800DA509F825C8EA1D135939649F0EEA787076D77EC57792369"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\presentation_plot_data.json",
-          "sha256": "997844837C13ACAB4C5AFC91D10AB7ADD44AA694B28F8F85BF745350A6CC1463"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\presentation_plot_data.json",
+          "sha256": "F8B3BD1693E5E413B6C7D79F4982A427258A693B0361523484BF1FFE604C6676"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\reference_envelope_model_diagnostics.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\reference_envelope_model_diagnostics.csv",
           "sha256": "A881F44706F797B83BF4FA843453C58AA8AA17DF2A8DCFD6DE0FEC7E1D7D3297"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\signal_by_run.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\signal_by_run.csv",
           "sha256": "6FF199B1AB9D37D30DACEB239FCE50E2E77CCE728F4F42F2EB55126B5245C007"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\signal_uplift.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\signal_uplift.csv",
           "sha256": "16AE5319DD0568CF27D550BF3EF79471D5F86A0FEA9936DD97FD9279E3C1866E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2\\spectrum_evidence_comparison.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2\\spectrum_evidence_comparison.csv",
           "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-1\\family_contribution.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-1\\family_contribution.png",
           "sha256": "1F17F77841FA0635C3C4687B7C82341D0B26FB0FB8600302D2B43FB7E966C775"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-1\\isotopes_credited.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-1\\isotopes_credited.png",
           "sha256": "EC37E6C2C5317C6D5725FFE603899281EB30C5ABBBCB0FDE853221F3CE83A861"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-1\\percent_ion_current_by_mass.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-1\\percent_ion_current_by_mass.png",
           "sha256": "BF72819CF40C8C40BC9B098E1131C51AAC9CCEE7CD81EC5C9E48149DE2699270"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-1\\recovery.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-1\\recovery.png",
           "sha256": "B3C8710717B3D959912BA79F47C83AA1C82F1D78DDDE698C73C098FF299FC080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-1\\xic_by_mass.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-1\\xic_by_mass.png",
           "sha256": "C799CA03E4E223CCE223660C3D70C5D2609D1F297B7CF93E1EF14DE7B2CB06A8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2\\family_contribution.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2\\family_contribution.png",
           "sha256": "1F17F77841FA0635C3C4687B7C82341D0B26FB0FB8600302D2B43FB7E966C775"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2\\isotopes_credited.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2\\isotopes_credited.png",
           "sha256": "EC37E6C2C5317C6D5725FFE603899281EB30C5ABBBCB0FDE853221F3CE83A861"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2\\percent_ion_current_by_mass.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2\\percent_ion_current_by_mass.png",
           "sha256": "BF72819CF40C8C40BC9B098E1131C51AAC9CCEE7CD81EC5C9E48149DE2699270"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2\\recovery.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2\\recovery.png",
           "sha256": "B3C8710717B3D959912BA79F47C83AA1C82F1D78DDDE698C73C098FF299FC080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2\\xic_by_mass.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2\\xic_by_mass.png",
           "sha256": "C799CA03E4E223CCE223660C3D70C5D2609D1F297B7CF93E1EF14DE7B2CB06A8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Peptides-1",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Peptides-1",
           "sha256": "1EB272F504B26BF2ECBC35843E378B2B9675C512AE94C6F811ACA454571C9185"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Peptides-2",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Peptides-2",
           "sha256": "1EB272F504B26BF2ECBC35843E378B2B9675C512AE94C6F811ACA454571C9185"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Summary-1",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Summary-1",
           "sha256": "25F983A1AAB49B72A8882A0E7B1B65598B2855BF907B9462EA06332A220CFF2F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Summary-2",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Summary-2",
           "sha256": "25F983A1AAB49B72A8882A0E7B1B65598B2855BF907B9462EA06332A220CFF2F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\blocked-parent",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\blocked-parent",
           "sha256": "CA67BD59CC4116AC80DB5F64CBF4747F26BA929C85E8CC689A6123368D08719B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\proofs.log",
           "sha256": "0A0E7DF0CA4D1921F00AD9CD828169518D76456D3687B9BA336EF822DBF53E56"
         }
       ],
@@ -373,7 +373,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -397,7 +397,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -421,7 +421,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -445,7 +445,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -469,7 +469,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -493,7 +493,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -517,7 +517,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -541,7 +541,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -565,7 +565,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -576,7 +576,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:322 \u0022the per-peptide analytics table\u0022 -\u003E native export writes and describes the selected table: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Peptides-2: the per-peptide analytics table. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:322 \u0022the per-peptide analytics table\u0022 -\u003E native export writes and describes the selected table: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Peptides-2: the per-peptide analytics table. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-0BC049DEB5A7",
@@ -589,7 +589,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -613,7 +613,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -637,7 +637,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -648,7 +648,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:330 \u0022the per-run and grouped fraction summary\u0022 -\u003E native export writes and describes the selected table: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Summary-2: the per-run and grouped fraction summary. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:330 \u0022the per-run and grouped fraction summary\u0022 -\u003E native export writes and describes the selected table: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Summary-2: the per-run and grouped fraction summary. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-9D66691AFCB8",
@@ -661,7 +661,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -685,7 +685,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -709,7 +709,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -733,7 +733,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -757,7 +757,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -768,7 +768,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:363 \u0022Written to \u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:363 \u0022Written to \u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-1DBADFEEA403",
@@ -781,7 +781,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -792,7 +792,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:363 \u0022: \u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:363 \u0022: \u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-7CB0CFA7513A",
@@ -805,7 +805,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -816,7 +816,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:364 \u0022N0\u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:364 \u0022N0\u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-9DBFE36FE814",
@@ -829,7 +829,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -840,7 +840,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:364 \u0022 figure(s) - \u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:364 \u0022 figure(s) - \u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-DAA0E12A7E8C",
@@ -853,7 +853,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -864,7 +864,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:365 \u0022, \u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:365 \u0022, \u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-396781C7139F",
@@ -877,7 +877,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -888,7 +888,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:365 \u0022. Each is \u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:365 \u0022. Each is \u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-1F3F3E8670AD",
@@ -901,7 +901,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -912,7 +912,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:367 \u0022N0\u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:367 \u0022N0\u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-5FC5AE2E18DD",
@@ -925,7 +925,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -936,7 +936,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:367 \u0022 by \u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:367 \u0022 by \u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-F68B9E725182",
@@ -949,7 +949,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -960,7 +960,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:369 \u0022N0\u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:369 \u0022N0\u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-E84CFC14C601",
@@ -973,7 +973,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -984,7 +984,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:370 \u0022 device pixels, which is crisp on a projector. Nothing on screen changed.\u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:370 \u0022 device pixels, which is crisp on a projector. Nothing on screen changed.\u0022 -\u003E figure success gives real count, filenames, pixel size, projector palette and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Figures-2: 5 PNG figure(s): xic_by_mass.png, isotopes_credited.png, percent_ion_current_by_mass.png, family_contribution.png, recovery.png. Standard figures are 1920 by 1080 device pixels; composition figures expand vertically to retain every label. All use the Light projector palette. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-78512CC645F6",
@@ -997,7 +997,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1008,7 +1008,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:374 \u0022The figures could not be written, so nothing was saved. Reason \u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Cannot create \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\blocked-parent\u0027 because a file or directory with the same name already exists. Next step: check that you can write to that folder and that no PNG of the same name is open in another program, then save again."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:374 \u0022The figures could not be written, so nothing was saved. Reason \u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Cannot create \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\blocked-parent\u0027 because a file or directory with the same name already exists. Next step: check that you can write to that folder and that no PNG of the same name is open in another program, then save again."
     },
     {
       "observationId": "FQ15-64EA32DE4D6F",
@@ -1021,7 +1021,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1032,7 +1032,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:375 \u0022given by the program: \u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Cannot create \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\blocked-parent\u0027 because a file or directory with the same name already exists. Next step: check that you can write to that folder and that no PNG of the same name is open in another program, then save again."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:375 \u0022given by the program: \u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Cannot create \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\blocked-parent\u0027 because a file or directory with the same name already exists. Next step: check that you can write to that folder and that no PNG of the same name is open in another program, then save again."
     },
     {
       "observationId": "FQ15-20BC077B0895",
@@ -1045,7 +1045,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1056,7 +1056,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:375 \u0022 Next step: check that you can write to that \u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Cannot create \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\blocked-parent\u0027 because a file or directory with the same name already exists. Next step: check that you can write to that folder and that no PNG of the same name is open in another program, then save again."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:375 \u0022 Next step: check that you can write to that \u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Cannot create \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\blocked-parent\u0027 because a file or directory with the same name already exists. Next step: check that you can write to that folder and that no PNG of the same name is open in another program, then save again."
     },
     {
       "observationId": "FQ15-7789750E1CF9",
@@ -1069,7 +1069,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1080,7 +1080,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:376 \u0022folder and that no PNG of the same name is open in another program, then save again.\u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Cannot create \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\blocked-parent\u0027 because a file or directory with the same name already exists. Next step: check that you can write to that folder and that no PNG of the same name is open in another program, then save again."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:376 \u0022folder and that no PNG of the same name is open in another program, then save again.\u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Cannot create \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\blocked-parent\u0027 because a file or directory with the same name already exists. Next step: check that you can write to that folder and that no PNG of the same name is open in another program, then save again."
     },
     {
       "observationId": "FQ15-716ADCCA568C",
@@ -1093,7 +1093,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1117,7 +1117,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1141,7 +1141,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1165,7 +1165,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1189,7 +1189,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1200,7 +1200,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:403 \u0022Written to \u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:403 \u0022Written to \u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-5090C7D6412F",
@@ -1213,7 +1213,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1224,7 +1224,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:403 \u0022: \u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:403 \u0022: \u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-0936BA0DC6CF",
@@ -1237,7 +1237,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1248,7 +1248,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:404 \u0022N0\u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:404 \u0022N0\u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-2871145B18A2",
@@ -1261,7 +1261,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1272,7 +1272,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:405 \u0022 FamilyQuant plot(s) plus \u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:405 \u0022 FamilyQuant plot(s) plus \u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-19D21B123FB6",
@@ -1285,7 +1285,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1296,7 +1296,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:406 \u0022N0\u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:406 \u0022N0\u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-EF49FDC822E4",
@@ -1309,7 +1309,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1320,7 +1320,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:407 \u0022 numeric/definition file(s). The PNGs are 1920 by 1080 in the light projector palette; \u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:407 \u0022 numeric/definition file(s). The PNGs are 1920 by 1080 in the light projector palette; \u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-C6C2C2F66829",
@@ -1333,7 +1333,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1344,7 +1344,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:408 \u0022the CSV and JSON files contain the exact plotted numbers.\u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:408 \u0022the CSV and JSON files contain the exact plotted numbers.\u0022 -\u003E complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\EvidencePack-2: 12 FamilyQuant PNG plot(s) plus 18 numeric/definition file(s). The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-A2D69233CBC7",
@@ -1357,7 +1357,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1381,7 +1381,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1405,7 +1405,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1429,7 +1429,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1453,7 +1453,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1477,7 +1477,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1501,7 +1501,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1525,7 +1525,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1536,7 +1536,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:446 \u0022Written to \u0022 -\u003E CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Peptides-2: the per-peptide analytics table. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged.; CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Summary-2: the per-run and grouped fraction summary. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:446 \u0022Written to \u0022 -\u003E CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Peptides-2: the per-peptide analytics table. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged.; CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Summary-2: the per-run and grouped fraction summary. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-5E413458166D",
@@ -1549,7 +1549,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1560,7 +1560,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:446 \u0022: \u0022 -\u003E CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Peptides-2: the per-peptide analytics table. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged.; CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Summary-2: the per-run and grouped fraction summary. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:446 \u0022: \u0022 -\u003E CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Peptides-2: the per-peptide analytics table. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged.; CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Summary-2: the per-run and grouped fraction summary. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-AA5D9F6C1742",
@@ -1573,7 +1573,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1584,7 +1584,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:446 \u0022. Numbers use a dot for \u0022 -\u003E CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Peptides-2: the per-peptide analytics table. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged.; CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Summary-2: the per-run and grouped fraction summary. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:446 \u0022. Numbers use a dot for \u0022 -\u003E CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Peptides-2: the per-peptide analytics table. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged.; CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Summary-2: the per-run and grouped fraction summary. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-988D6F88E020",
@@ -1597,7 +1597,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1608,7 +1608,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:447 \u0022the decimal separator whatever your machine\u0027s language is, so any program can read them. \u0022 -\u003E CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Peptides-2: the per-peptide analytics table. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged.; CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Summary-2: the per-run and grouped fraction summary. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:447 \u0022the decimal separator whatever your machine\u0027s language is, so any program can read them. \u0022 -\u003E CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Peptides-2: the per-peptide analytics table. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged.; CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Summary-2: the per-run and grouped fraction summary. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-CA91D10B9451",
@@ -1621,7 +1621,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1632,7 +1632,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:448 \u0022Nothing on screen changed.\u0022 -\u003E CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Peptides-2: the per-peptide analytics table. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged.; CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\Summary-2: the per-run and grouped fraction summary. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:448 \u0022Nothing on screen changed.\u0022 -\u003E CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Peptides-2: the per-peptide analytics table. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged.; CSV success names its path, invariant decimals and unchanged charts: Written to D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\Summary-2: the per-run and grouped fraction summary. Numbers use a dot for the decimal separator regardless of your machine\u0027s language. Charts and family choices are unchanged."
     },
     {
       "observationId": "FQ15-25C5AF297613",
@@ -1645,7 +1645,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1656,7 +1656,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:452 \u0022The file could not be written, so nothing was exported. Reason given \u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Could not find a part of the path \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\blocked-parent\\.fq-export-ceb5d1a90ed34af5b6c706db70c019f3\u0027. Next step: check that the CSV is not open in Excel and that you can write to that folder, then export again."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:452 \u0022The file could not be written, so nothing was exported. Reason given \u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Could not find a part of the path \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\blocked-parent\\.fq-export-df05e32ccd824130a337aad4bb0b7c87\u0027. Next step: check that the CSV is not open in Excel and that you can write to that folder, then export again."
     },
     {
       "observationId": "FQ15-6C73094314C0",
@@ -1669,7 +1669,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1680,7 +1680,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:453 \u0022by the program: \u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Could not find a part of the path \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\blocked-parent\\.fq-export-ceb5d1a90ed34af5b6c706db70c019f3\u0027. Next step: check that the CSV is not open in Excel and that you can write to that folder, then export again."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:453 \u0022by the program: \u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Could not find a part of the path \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\blocked-parent\\.fq-export-df05e32ccd824130a337aad4bb0b7c87\u0027. Next step: check that the CSV is not open in Excel and that you can write to that folder, then export again."
     },
     {
       "observationId": "FQ15-081C3DB19C0F",
@@ -1693,7 +1693,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1704,7 +1704,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:453 \u0022 Next step: check that it is not already open in Excel \u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Could not find a part of the path \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\blocked-parent\\.fq-export-ceb5d1a90ed34af5b6c706db70c019f3\u0027. Next step: check that the CSV is not open in Excel and that you can write to that folder, then export again."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:453 \u0022 Next step: check that it is not already open in Excel \u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Could not find a part of the path \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\blocked-parent\\.fq-export-df05e32ccd824130a337aad4bb0b7c87\u0027. Next step: check that the CSV is not open in Excel and that you can write to that folder, then export again."
     },
     {
       "observationId": "FQ15-601168A47FB3",
@@ -1717,7 +1717,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Results empty view and native export messages",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -1728,7 +1728,7 @@
       "proofs": [],
       "note": "Semantic fact preservation in current wording, not old literal equality. Native complete pack success and refused/incomplete pack are separate checks.",
       "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:454 \u0022and that you can write to that folder, then export again.\u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Could not find a part of the path \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\native\\blocked-parent\\.fq-export-ceb5d1a90ed34af5b6c706db70c019f3\u0027. Next step: check that the CSV is not open in Excel and that you can write to that folder, then export again."
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:454 \u0022and that you can write to that folder, then export again.\u0022 -\u003E IO refusal keeps existing files and gives the reason and specific recovery advice: The export did not finish. Reason given by the program: Could not find a part of the path \u0027D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\native\\blocked-parent\\.fq-export-df05e32ccd824130a337aad4bb0b7c87\u0027. Next step: check that the CSV is not open in Excel and that you can write to that folder, then export again."
     }
   ],
   "kindReceipts": [
@@ -1741,7 +1741,7 @@
           "kind": "test",
           "target": "ResultsExportFactsCommand",
           "assertion": "RS export kind code fact: every listed observation has its own passing native fact check",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -1755,7 +1755,7 @@
           "kind": "test",
           "target": "ResultsExportFactsCommand",
           "assertion": "RS export kind format/export: every listed observation has its own passing native fact check",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\results-export-facts\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\results-export-facts\\proofs.log",
           "inspectedBy": ""
         }
       ]

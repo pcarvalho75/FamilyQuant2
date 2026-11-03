@@ -5,276 +5,276 @@
   "runs": [
     {
       "id": "native",
-      "command": "C:\\FamilyQuant-wt2\\terra1\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-file-contracts D:/FamilyQuant-data/out-floater/formats/cohort-ready D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-refresh\\20261103-001001-terra1\\fl-file-contracts \u00222026-11-03 00:12:07 -0800\u0022",
-      "executedAt": "2026-11-03 00:12:07 -0800",
-      "commit": "9dc3bb854ca3b048750f548bd6243b5c64c707a0",
+      "command": "C:\\FamilyQuant-wt2\\terra1\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-file-contracts D:/FamilyQuant-data/out-floater/formats/cohort-ready D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-refresh\\20261103-013000-terra1\\fl-file-contracts \u00222026-11-03 01:31:50 -0800\u0022",
+      "executedAt": "2026-11-03 01:31:50 -0800",
+      "commit": "7a231c0104e5ca2a9f8c518c0aaf8593a2ed8972",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\cohort-wording.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\cohort-wording.tsv",
           "sha256": "C5954E1A1E381540E9CDAF010CEADEBA382EF1BC9B0BEBEBFFB7D3BF773B887A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\annotation-claims.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\annotation-claims.json",
           "sha256": "EFFD5221036C48D22E95D75330627C1EE33A19F6313EDD59AB1292C04E84A6AF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\current-FamilyQuant_DeNovo_Homology.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\current-FamilyQuant_DeNovo_Homology.csv",
           "sha256": "A5962F2D3824C220AB0F688A5315FF12EC87F45A4861DF12CC338474B0D9D9DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\current-FamilyQuant_Report.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\current-FamilyQuant_Report.csv",
           "sha256": "DD0747F6C5B695EDD3B05B8FE05D37622CBA488403F496116E32B89BCBC77D11"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\current-three_way_partition.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\current-three_way_partition.csv",
           "sha256": "23532F38370FF0746380B73ED2CD46082CD377C008EBDB2FEF0E25F227D5F20A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\current.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\current.fcf",
           "sha256": "1C6FFF68737D0F11CB8B3A1A70085CEB01F65D9D0EE6A0F1D1CEA4F032D34EB5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\frozen-FamilyQuant_DeNovo_Homology.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\frozen-FamilyQuant_DeNovo_Homology.csv",
           "sha256": "A5962F2D3824C220AB0F688A5315FF12EC87F45A4861DF12CC338474B0D9D9DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\frozen-FamilyQuant_Report.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\frozen-FamilyQuant_Report.csv",
           "sha256": "DD0747F6C5B695EDD3B05B8FE05D37622CBA488403F496116E32B89BCBC77D11"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\frozen-three_way_partition.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\frozen-three_way_partition.csv",
           "sha256": "23532F38370FF0746380B73ED2CD46082CD377C008EBDB2FEF0E25F227D5F20A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\frozen.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\frozen.fcf",
           "sha256": "C40057789E9105B99E2F4D1BD59FBD80AA4E25FBC12D962864C95692209F925D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\homology-screen-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\homology-screen-current.csv",
           "sha256": "A5962F2D3824C220AB0F688A5315FF12EC87F45A4861DF12CC338474B0D9D9DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\homology-screen-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\homology-screen-frozen.csv",
           "sha256": "A5962F2D3824C220AB0F688A5315FF12EC87F45A4861DF12CC338474B0D9D9DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\partition-screen-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\partition-screen-current.csv",
           "sha256": "23532F38370FF0746380B73ED2CD46082CD377C008EBDB2FEF0E25F227D5F20A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\partition-screen-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\partition-screen-frozen.csv",
           "sha256": "23532F38370FF0746380B73ED2CD46082CD377C008EBDB2FEF0E25F227D5F20A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\screen-dialogs.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\screen-dialogs.json",
           "sha256": "13725A4CF8945E2C86EFA15CFDEA31D290EB9F387C25D54CD68174152A6CA95A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\en-US\\screen-injections.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\en-US\\screen-injections.json",
           "sha256": "1AF378DCF3048301DA6C4705683C6615A77B0432C538EEB7DEBD8BE210F7CABF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core.dll",
-          "sha256": "65BCEB231336E82E0CA4C57F82B74C67F84739554F5EFCA02A1FFC7557E4E6EC"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core.dll",
+          "sha256": "E5C7BAF7E12F4E28AAC51960DA2E9E5B628696B95B2537EE4953E95B7C142E9A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\CsvReport.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\CsvReport.cs",
           "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\DeNovo\\ThreeWayPartition.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\DeNovo\\ThreeWayPartition.cs",
           "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\FamilyClusterScoring.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\FamilyClusterScoring.cs",
           "sha256": "F033C9FDCB15D2F282CFF64BC12F301D0275346DB5C82F9EA983340F9340CE51"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\FamilyEnvelopeQuant.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\FamilyEnvelopeQuant.cs",
           "sha256": "7B53E0420601A778C712575295B3386173DD7BF3ECBBB8BE88F2F9577ADBE19D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\FamilyNaming.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\FamilyNaming.cs",
           "sha256": "9B817ED6F1C6AF80A2FFC59A242638F7625A53F2AC1680E1D8CA7A853A0508D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\FamilyQuantFile.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\FamilyQuantFile.cs",
           "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\HomologyCsv.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\HomologyCsv.cs",
           "sha256": "BEAEC2438CC98B7D359C5225B38129C4E2397372CCEBE0A33F95ACA8345F17DF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\SequenceLabels.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Core\\SequenceLabels.cs",
           "sha256": "63ED669CB9BCBC03B1C5C762F9545146EE649E9F883B5813B9BF4F6AF5522CF8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "257A4322D9D517D659D7B5D1A27D84D099D900BF2BEDC167F11A040E15ADBDE3"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "87E72637B2823DE2238B57CE682D92234CE31508A52FB2AD552CB105C0A91816"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.Reporting.cs",
           "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.cs",
           "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.Commands.SecondaryLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.Commands.SecondaryLedger.cs",
           "sha256": "F38C27B0A3B11CDFD6D6FECC4ED8F00C0E1B1B24E2C3D5C8916E6106C703CCC1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.DeNovoLedgerWorkflow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.DeNovoLedgerWorkflow.cs",
           "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.FileContractScreens.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.FileContractScreens.cs",
           "sha256": "FEC71954BE9EA8CDB420E23832A9187244F7DF1E9DEFC0954C9D1514767F34BB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.FileContractWording.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.FileContractWording.cs",
           "sha256": "3B4F0ACC47E52571E4730D13F20933DD6D0BC4539ED808DA4480E9F838579BB3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.FileContracts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.FileContracts.cs",
           "sha256": "C66844B20464329F5BF2917708D018E240D024E04DE3B7EFF3C955F9C5D11BB3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.LedgerPreservation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.LedgerPreservation.cs",
           "sha256": "999E13B7BF67353AF11E001FAF28CF71A51AB03299D24116C86C47474D1D7406"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.SecondaryInjectedMethod.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.SecondaryInjectedMethod.cs",
           "sha256": "23A7781DDBD6E2B6299FB12C9F31A083CC4FF42C290513848F61EA4CEF31E2D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.SecondaryRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.SecondaryRuntime.cs",
           "sha256": "439510C542365268BC9C6A065E2EC0E5DFE3900B26D68F69614F0542043E82AD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.SecondaryWording.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant.Tests\\Program.SecondaryWording.cs",
           "sha256": "0AF2A4A0972995B2AFF951C52497A2A9A7D9ED30AF120EF29B887DECAFFD405C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant2.dll",
-          "sha256": "7E0C4A9A25BAAF7B505DD44550A630D316E162BF2C0A0F9F5E3E8FECE31143D0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant2.dll",
+          "sha256": "DECBFB068BB6B7EB77DB498D2B6B7BF749C7A6B19F06C826ABE1C47C90F0E47A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant\\AnalyticsControl.xaml.cs",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant\\AnalyticsControl.xaml.cs",
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant\\AnalyticsViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant\\AnalyticsViewModel.cs",
           "sha256": "FB90AF66F9C1CFC3A4D5248EEF223A84C6CB9A4B4B984019975B8BBD0AFD9342"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant\\DeNovoControl.Compatibility.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant\\DeNovoControl.Compatibility.cs",
           "sha256": "BB45BCACC7C63869B4B22F63EE16C6572D12F7F2A2C9B589686B2DE2BC15479C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant\\DeNovo\\ThreeWayWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant\\DeNovo\\ThreeWayWindow.cs",
           "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant\\USearch.Actions.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant\\USearch.Actions.cs",
           "sha256": "1BA6FB66F542B2BB332DF02D6CF58524AD259AC73DE93D8A6CDD4CDC932C1826"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant\\USearch.Presentation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant\\USearch.Presentation.cs",
           "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\FamilyQuant\\USearch.Report.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\FamilyQuant\\USearch.Report.cs",
           "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\audit\\mapping.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\audit\\mapping.json",
           "sha256": "72013D1B74FC3ACDBE7D97E0606227A26D4F1527F6DDCFDCAD0B83404BC59FAA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\audit\\report.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\audit\\report.json",
           "sha256": "1C7EC20E3F7A6DFD4B80A3DF362E5C667E1ACBCE70792A44844ADDDD6AFFC306"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\executed\\frozen\\FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\executed\\frozen\\FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.json",
           "sha256": "BC30015AD11AC169FDC1B29D3966C1C78FAB1A0424A408F55CB4EDAB1095CD32"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "sha256": "B91E6A2ADFE9269B858E617DE66704D06E846669E2DC7C4268CA9678B876941F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\annotation-claims.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\annotation-claims.json",
           "sha256": "EFFD5221036C48D22E95D75330627C1EE33A19F6313EDD59AB1292C04E84A6AF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\current-FamilyQuant_DeNovo_Homology.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\current-FamilyQuant_DeNovo_Homology.csv",
           "sha256": "A5962F2D3824C220AB0F688A5315FF12EC87F45A4861DF12CC338474B0D9D9DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\current-FamilyQuant_Report.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\current-FamilyQuant_Report.csv",
           "sha256": "DD0747F6C5B695EDD3B05B8FE05D37622CBA488403F496116E32B89BCBC77D11"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\current-three_way_partition.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\current-three_way_partition.csv",
           "sha256": "23532F38370FF0746380B73ED2CD46082CD377C008EBDB2FEF0E25F227D5F20A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\current.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\current.fcf",
           "sha256": "1C6FFF68737D0F11CB8B3A1A70085CEB01F65D9D0EE6A0F1D1CEA4F032D34EB5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\frozen-FamilyQuant_DeNovo_Homology.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\frozen-FamilyQuant_DeNovo_Homology.csv",
           "sha256": "A5962F2D3824C220AB0F688A5315FF12EC87F45A4861DF12CC338474B0D9D9DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\frozen-FamilyQuant_Report.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\frozen-FamilyQuant_Report.csv",
           "sha256": "DD0747F6C5B695EDD3B05B8FE05D37622CBA488403F496116E32B89BCBC77D11"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\frozen-three_way_partition.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\frozen-three_way_partition.csv",
           "sha256": "23532F38370FF0746380B73ED2CD46082CD377C008EBDB2FEF0E25F227D5F20A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\frozen.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\frozen.fcf",
           "sha256": "C40057789E9105B99E2F4D1BD59FBD80AA4E25FBC12D962864C95692209F925D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\homology-screen-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\homology-screen-current.csv",
           "sha256": "A5962F2D3824C220AB0F688A5315FF12EC87F45A4861DF12CC338474B0D9D9DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\homology-screen-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\homology-screen-frozen.csv",
           "sha256": "A5962F2D3824C220AB0F688A5315FF12EC87F45A4861DF12CC338474B0D9D9DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\partition-screen-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\partition-screen-current.csv",
           "sha256": "23532F38370FF0746380B73ED2CD46082CD377C008EBDB2FEF0E25F227D5F20A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\partition-screen-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\partition-screen-frozen.csv",
           "sha256": "23532F38370FF0746380B73ED2CD46082CD377C008EBDB2FEF0E25F227D5F20A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\screen-dialogs.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\screen-dialogs.json",
           "sha256": "13725A4CF8945E2C86EFA15CFDEA31D290EB9F387C25D54CD68174152A6CA95A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\pt-BR\\screen-injections.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\pt-BR\\screen-injections.json",
           "sha256": "1AF378DCF3048301DA6C4705683C6615A77B0432C538EEB7DEBD8BE210F7CABF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\target-audit.json",
-          "sha256": "12B962C9B21641EC554A1A4044C0B634EA632BD0745B3946028379896769507E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\target-audit.json",
+          "sha256": "70B5B9AE496650B725A026BFF7CFB536F4749899004F44D5BEEAAD7BF77EF1AD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\wording-file-gaps.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\wording-file-gaps.tsv",
           "sha256": "585159DE9DE09FFA2A111E90623C2C0AE2FF1596B4552F5F4D0D69AFB06EA43B"
         }
       ],
@@ -303,7 +303,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native file writers, partition/Results export routes, annotation quantitation/name invariance and persisted accession marker",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -367,7 +367,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native file writers, partition/Results export routes, annotation quantitation/name invariance and persisted accession marker",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -431,7 +431,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native file writers, partition/Results export routes, annotation quantitation/name invariance and persisted accession marker",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -495,7 +495,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native file writers, partition/Results export routes, annotation quantitation/name invariance and persisted accession marker",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -559,7 +559,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native file writers, partition/Results export routes, annotation quantitation/name invariance and persisted accession marker",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -623,7 +623,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native file writers, partition/Results export routes, annotation quantitation/name invariance and persisted accession marker",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -687,7 +687,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native file writers, partition/Results export routes, annotation quantitation/name invariance and persisted accession marker",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -751,7 +751,7 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native file writers, partition/Results export routes, annotation quantitation/name invariance and persisted accession marker",
-          "sha256": "ED633A35D3B0BCFE4D815030A6280AC4B6EA2357C2EF5A0A8553EBCC8F80179D"
+          "sha256": "4BD2B930B7AE3BDE1F9117D811AB0446D15AD6B467CF063662DDE828085DDFEB"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
@@ -805,7 +805,7 @@
           "kind": "test",
           "target": "FileContractCommand",
           "assertion": "native partition-screen: chooser filename/filter, cancelled destination and accepted file route agree en-US",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -813,7 +813,7 @@
           "kind": "test",
           "target": "FileContractCommand",
           "assertion": "native partition-screen: chooser filename/filter, cancelled destination and accepted file route agree pt-BR",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -821,7 +821,7 @@
           "kind": "test",
           "target": "FileContractCommand",
           "assertion": "native frozen/current file bytes en-US/partition-screen",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -829,7 +829,7 @@
           "kind": "test",
           "target": "FileContractCommand",
           "assertion": "native frozen/current file bytes pt-BR/partition-screen",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "inspectedBy": ""
         }
       ]
@@ -843,7 +843,7 @@
           "kind": "test",
           "target": "FileContractCommand",
           "assertion": "native homology-screen: chooser filename/filter, cancelled destination and accepted file route agree en-US",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -851,7 +851,7 @@
           "kind": "test",
           "target": "FileContractCommand",
           "assertion": "native homology-screen: chooser filename/filter, cancelled destination and accepted file route agree pt-BR",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -859,7 +859,7 @@
           "kind": "test",
           "target": "FileContractCommand",
           "assertion": "native frozen/current file bytes en-US/homology-screen",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -867,7 +867,7 @@
           "kind": "test",
           "target": "FileContractCommand",
           "assertion": "native frozen/current file bytes pt-BR/homology-screen",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "inspectedBy": ""
         }
       ]
@@ -881,7 +881,7 @@
           "kind": "test",
           "target": "FileContractCommand",
           "assertion": "native annotation FCF/CSV storage, family naming and nonzero quantitation invariance en-US",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -889,7 +889,7 @@
           "kind": "test",
           "target": "FileContractCommand",
           "assertion": "native annotation FCF/CSV storage, family naming and nonzero quantitation invariance pt-BR",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "inspectedBy": ""
         }
       ]
@@ -903,7 +903,7 @@
           "kind": "test",
           "target": "FileContractCommand",
           "assertion": "native accession marker survives file writes and frozen reopen en-US",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -911,7 +911,7 @@
           "kind": "test",
           "target": "FileContractCommand",
           "assertion": "native accession marker survives file writes and frozen reopen pt-BR",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\fl-file-contracts\\files.log",
           "inspectedBy": ""
         }
       ]
