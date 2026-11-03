@@ -102,7 +102,9 @@ public static class ReportProjectExporter
         if (sourceWorld != null && studies.Figures.Any(f => f.Figure.Id.StartsWith("figure:family_signal_sources", StringComparison.Ordinal)))
             exports.Add("family_sources_support.csv", ReportStudyExports.SourceSupport(sourceWorld));
         var layout = ReportSupplementLayout.Apply(document, exports);
-        return new(layout.Document, exports, figures) { SupplementSheets = layout.Sheets.Concat(ReportCaptionTrace.Build(document, figureCaptions)).ToArray(), Selection = curation.ReportSelection };
+        exports.Add(FigureLayout.DetailFileName, studies.FigureDetailsCsv);
+        return new(layout.Document, exports, figures) { SupplementSheets = layout.Sheets.Concat(studies.FigureDetailSheets)
+            .Concat(ReportCaptionTrace.Build(document, figureCaptions)).ToArray(), Selection = curation.ReportSelection };
     }
 
     public static void Write(ReportProjectExport export, string docxPath, ReportSelection? selection = null)

@@ -198,9 +198,11 @@ public sealed class AnalyticsViewModel : ScreenViewModel
                         File.WriteAllBytes(figurePath, FamilyCompositionFigures.RenderPng(figure));
                         written.Add(figurePath);
                     }
+                    using (var details = new StreamWriter(Path.Combine(path, FigureLayout.DetailFileName), false, new System.Text.UTF8Encoding(false)))
+                        FigureDetailsCsv.Write(details, composition);
                     describe(written.Count.ToString("N0", CultureInfo.InvariantCulture) + " PNG figure(s): " +
                         string.Join(", ", written.Select(Path.GetFileName)) + ". Standard figures are 1920 by 1080 device pixels; " +
-                        "composition figures expand vertically to retain every label. All use the Light projector palette");
+                        "large references are bounded, with complete data in " + FigureLayout.DetailFileName + ". All use the Light projector palette");
                 }
                 finally { CultureInfo.CurrentCulture = culture; CultureInfo.CurrentUICulture = uiCulture; }
             },

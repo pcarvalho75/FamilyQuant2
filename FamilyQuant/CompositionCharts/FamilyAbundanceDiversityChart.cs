@@ -9,14 +9,19 @@ namespace FamilyQuant;
 public sealed record FamilyDiversityPoint(string Key, string Label, double SharePercent, int ProteinCount, int Index);
 
 /// <summary>Abundance is supplied mean share, diversity is the supplied greedy explanatory protein count.</summary>
-public sealed class FamilyAbundanceDiversityChart : CompositionDrawingBase
+public sealed class FamilyAbundanceDiversityChart : CompositionDrawingBase, IFigureDetails
 {
     private readonly FamilyCompositionData data;
     public FamilyCompositionData Data => data;
     public IReadOnlyList<FamilyDiversityPoint> Points { get; }
     public IReadOnlyList<FamilyCompositionValue> UnavailableFamilies { get; }
+    public IReadOnlyList<(FamilyCompositionValue Row, int Index)> ReferenceRows { get; }
+    public int UnavailableReferenceCount => Math.Min(data.UnavailableFamilies.Count, FigureLayout.DiversityReferences - ReferenceRows.Count);
+    public string DetailNotice => data.Families.Count + data.UnavailableFamilies.Count > FigureLayout.DiversityReferences
+        ? "First " + FigureLayout.DiversityReferences + " reference rows by share; all available points retained. " + FigureLayout.FullReference : "";
     public static double RecommendedHeight(FamilyCompositionData data) =>
-        Math.Max(540, 160 + (data.Families.Count + data.UnavailableFamilies.Count) * 31);
+        Math.Max(540, (data.Families.Count + data.UnavailableFamilies.Count > FigureLayout.DiversityReferences ? 190 : 160)
+            + Math.Min(FigureLayout.DiversityReferences, data.Families.Count + data.UnavailableFamilies.Count) * 31);
 
     public FamilyAbundanceDiversityChart(FamilyCompositionData data)
     {
@@ -24,6 +29,10 @@ public sealed class FamilyAbundanceDiversityChart : CompositionDrawingBase
         Points = Array.AsReadOnly(data.Families.Select((r, i) => (r, i)).Where(p => p.r.GreedyProteinCount.HasValue)
             .Select(p => new FamilyDiversityPoint(p.r.Key, p.r.Label, p.r.MeanPercent, p.r.GreedyProteinCount!.Value, p.i + 1)).ToArray());
         UnavailableFamilies = Array.AsReadOnly(data.Families.Where(r => !r.GreedyProteinCount.HasValue).ToArray());
+        var reference = data.Families.Select((r, i) => (Row: r, Index: i + 1));
+        if (data.Families.Count > FigureLayout.DiversityReferences)
+            reference = reference.OrderByDescending(r => r.Row.MeanPercent).ThenBy(r => r.Row.Key, StringComparer.Ordinal);
+        ReferenceRows = Array.AsReadOnly(reference.Take(FigureLayout.DiversityReferences).ToArray());
     }
 
     protected override void OnRender(DrawingContext dc)
@@ -71,17 +80,18 @@ public sealed class FamilyAbundanceDiversityChart : CompositionDrawingBase
             }
         }
         Label(dc, "Family reference", legendLeft, 94, ActualWidth - legendLeft - 26, 12, true);
-        for (int i = 0; i < data.Families.Count; i++)
+        for (int i = 0; i < ReferenceRows.Count; i++)
         {
-            var row = data.Families[i]; double y = 120 + i * 31;
-            Label(dc, (i + 1) + ". " + row.Label, legendLeft, y, ActualWidth - legendLeft - 26, 12);
+            var row = ReferenceRows[i].Row; double y = 120 + i * 31;
+            Label(dc, ReferenceRows[i].Index + ". " + row.Label, legendLeft, y, ActualWidth - legendLeft - 26, 12);
             string count = row.GreedyProteinCount is int n ? n + " proteins (greedy estimate)" : "protein count unavailable";
             if (row.UnexplainedPeptideCount > 0) count += "; unexplained peptides: " + row.UnexplainedPeptideCount;
             Label(dc, Number(row.MeanPercent) + "% | " + count, legendLeft, y + 15, ActualWidth - legendLeft - 26, 10, brush: palette.Muted);
         }
-        for (int i = 0; i < data.UnavailableFamilies.Count; i++)
+        for (int i = 0; i < UnavailableReferenceCount; i++)
             Label(dc, data.UnavailableFamilies[i] + ": share unavailable", legendLeft,
-                120 + (data.Families.Count + i) * 31, ActualWidth - legendLeft - 26, 11, brush: palette.Muted);
+                120 + (ReferenceRows.Count + i) * 31, ActualWidth - legendLeft - 26, 11, brush: palette.Muted);
+        if (DetailNotice.Length > 0) Label(dc, DetailNotice, 26, ActualHeight - 46, ActualWidth - 52, 11, brush: palette.Muted);
         Label(dc, "Counts approximate the minimum database-protein set. Coincident points are retained; missing counts are listed, not plotted.",
             26, ActualHeight - 25, ActualWidth - 52, 11, brush: palette.Muted);
     }

@@ -12,10 +12,10 @@ public static partial class FamilyCompositionFigures
 {
     public static List<AnalyticsFigure> Build(FamilyCompositionData data, FamilyCompositionData? pooledSubclasses = null) => new()
     {
-        new("family_composition.png", new FamilyCompositionChart(data), Math.Max(540, 190 + data.Families.Count * 52)),
+        new("family_composition.png", new FamilyCompositionChart(data), FamilyCompositionChart.RecommendedHeight(data)),
         new("family_subclasses.png", new FamilySubclassChart(pooledSubclasses ??
             new FamilyCompositionData(Array.Empty<FamilyCompositionValue>(), "Stored subclass breakdown unavailable", false)),
-            Math.Max(540, 190 + (pooledSubclasses?.Families.Sum(r => Math.Max(64, 37 + r.Subclasses.Count * 18)) ?? 0)))
+            pooledSubclasses == null ? 540 : FamilySubclassChart.RecommendedHeight(pooledSubclasses))
     };
 
     public static byte[] RenderPng(AnalyticsFigure figure)
@@ -37,7 +37,9 @@ public static partial class FamilyCompositionFigures
     public static IReadOnlyList<string> Save(FamilyCompositionData data, string folder, FamilyCompositionData? pooledSubclasses = null)
     {
         Directory.CreateDirectory(folder);
-        return Build(data, pooledSubclasses).Select(f =>
+        var figures = Build(data, pooledSubclasses);
+        File.WriteAllText(Path.Combine(folder, FigureLayout.DetailFileName), FigureDetailsCsv.Build(figures));
+        return figures.Select(f =>
         {
             string path = Path.Combine(folder, f.FileName); File.WriteAllBytes(path, RenderPng(f)); return path;
         }).ToArray();
