@@ -136,7 +136,7 @@ public static class ReportSupplementLayout
         _ => ReportSectionIds.Results,
     };
 
-    private static string SheetName(string id, string title)
+    internal static string SheetName(string id, string title)
     {
         string suffix = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(id)))[..6];
         string clean = new(title.Select(c => "[]:*?/\\'".Contains(c) || char.IsControl(c) ? '_' : c).ToArray());

@@ -67,6 +67,7 @@ public static class ReportSupplementWorkbook
         foreach (var section in document.Sections)
             if (string.IsNullOrWhiteSpace(section.Id) || !owners.TryAdd(section.Id, section.Title))
                 throw new ArgumentException("Report section ids must be nonempty and unique.", nameof(document));
+        sheets = ReportTableSupplements.Complete(document, sheets);
         var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ContentsName };
         var ids = new HashSet<string>(StringComparer.Ordinal);
         foreach (var sheet in sheets)
