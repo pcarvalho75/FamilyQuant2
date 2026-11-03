@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -34,7 +34,7 @@ internal static partial class Program
         };
         var input = new FamilyRunSharesResult
         {
-            Runs = new() { new() { Run = "a" }, new() { Run = "b" } },
+            Runs = new() { new() { Run = "a", AssignedSignal = 100, MeasuredSignal = 100 }, new() { Run = "b", AssignedSignal = 100, MeasuredSignal = 100 } },
             Families = new() { Row(1, .001, .0005, .0015), Row(2, .0008, .0014, .0002),
                 Row(3, .0004, .0006, .0002), Row(4, null, null, null) }
         };
@@ -47,7 +47,7 @@ internal static partial class Program
             result.OthersRuns.Count == 2 && Math.Abs(result.OthersRuns[0].ShareOfAssignedSignal!.Value - .002) < 1e-12
             && Math.Abs(result.OthersRuns[1].ShareOfAssignedSignal!.Value - .0004) < 1e-12
             && Math.Abs(result.OthersMeanShare!.Value - .0012) < 1e-12);
-        var missing = new FamilyRunSharesResult { Runs = new() { new() { Run = "a" }, new() { Run = "b" } },
+        var missing = new FamilyRunSharesResult { Runs = new() { new() { Run = "a", AssignedSignal = 100, MeasuredSignal = 100 }, new() { Run = "b", AssignedSignal = 100, MeasuredSignal = 100 } },
             Families = new() { Row(5, .0001, .0001, null) } };
         var incomplete = (FamilyReportThresholdResult)build.Invoke(null, new object[] { missing, .001 })!;
         Check("J5c missing run shares remain unavailable instead of being treated as zero",
@@ -55,6 +55,27 @@ internal static partial class Program
         bool rejected = false;
         try { FamilyReportThreshold.Build(input, double.NaN); } catch (ArgumentOutOfRangeException) { rejected = true; }
         Check("J5c rejects an invalid threshold", rejected);
+        var emptyOthers = new FamilyRunSharesResult
+        {
+            Runs = new() { new() { Run = "a", AssignedSignal = 10, MeasuredSignal = 0 },
+                new() { Run = "b", AssignedSignal = 0, MeasuredSignal = 0 },
+                new() { Run = "c", AssignedSignal = 0, MeasuredSignal = 20 } },
+            Families = new() { Row(1, 1, 1, null) }
+        };
+        var emptyResult = FamilyReportThreshold.Build(emptyOthers, .001);
+        Check("J5c empty others respects unavailable assigned and measured denominators",
+            emptyResult.OtherFamilies.Count == 0 && emptyResult.OthersRuns[0].ShareOfAssignedSignal == 0
+            && emptyResult.OthersRuns[0].ShareOfMeasuredSignal == null
+            && emptyResult.OthersRuns[1].ShareOfAssignedSignal == null && emptyResult.OthersRuns[1].ShareOfMeasuredSignal == null
+            && emptyResult.OthersRuns[2].ShareOfAssignedSignal == null && emptyResult.OthersRuns[2].ShareOfMeasuredSignal == 0);
+        var inconsistent = Row(5, .0001, .0001, null);
+        inconsistent.Runs[0].ShareOfMeasuredSignal = .0001;
+        var noDenominators = new FamilyRunSharesResult { Runs = new() { new() { Run = "a", AssignedSignal = 0, MeasuredSignal = 0 },
+            new() { Run = "b", AssignedSignal = 1, MeasuredSignal = 1 } }, Families = new() { inconsistent } };
+        var nonemptyResult = FamilyReportThreshold.Build(noDenominators, .001);
+        Check("J5c nonempty others also respects unavailable denominators",
+            nonemptyResult.OtherFamilies.Count == 1 && nonemptyResult.OthersRuns[0].ShareOfAssignedSignal == null
+            && nonemptyResult.OthersRuns[0].ShareOfMeasuredSignal == null);
         var project = new FamilyClusterFile();
         Check("J5c default threshold is 0.1 percent", setting.GetValue(project) == null && FamilyReportThreshold.Build(input, project).Threshold == .001);
         setting.SetValue(project, .025);
