@@ -32,3 +32,10 @@ then opens the computed fixture twice to check a search and a verified cache hit
 Stored quantitation, spectrum rows and every manifest field are compared byte for byte
 with the native no-progress baseline, apart from the two computation timestamp fields.
 This synthetic/cache proof does not establish fresh acquisition reproduction.
+
+The worker-only windowless measurement command is `--measure-compute-progress <config.json>`.
+Its configuration names `Project`, `Raw`, `Sepro`, `DeNovo`, `Cache` and a fresh `Output`.
+Mutable paths must be inside the lane's owned proof folder; shared lab inputs are read only.
+It checks complete validated precursor and detector cache coverage before Compute so a missing
+entry cannot unexpectedly load a full MS1 map. It writes the actual PID, timestamped steps,
+per-step gaps, peak memory, saved project and input-preservation result.
