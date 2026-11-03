@@ -36,7 +36,8 @@ public static partial class SubclassAssignment
         FamilyPanel panel = file.FamilyPanel ?? throw new InvalidOperationException("A family panel is required.");
         FamilyPanelValidation.Validate(panel);
         string panelFingerprint = PanelDerivedDataCurrentness.Fingerprint(panel);
-        if (file.PanelProteinAssignments == null || file.PanelProteinAssignmentsPanelFingerprint != panelFingerprint)
+        string familyFingerprint = PanelDerivedDataCurrentness.FamilyFingerprint(panel);
+        if (file.PanelProteinAssignments == null || file.PanelProteinAssignmentsPanelFingerprint != familyFingerprint)
             throw new InvalidOperationException("Panel family assignments are missing or do not match the current panel rules.");
         string sourceBefore = SourceFingerprint(file, options, panelFingerprint);
         var proteins = file.MyExtendedFastaItems;
@@ -146,6 +147,8 @@ public static partial class SubclassAssignment
                 else row = sharedRows![index];
                 if ((row.Tier != EvidenceTier.ReviewedNeighbour && row.Tier != EvidenceTier.UnannotatedNeighbour)
                     || row.Neighbour == null || row.Neighbour.TiedFamilies.Count > 0
+                    || (proteins[index].Evidence?.Accession is { Length: > 0 } accession
+                        && string.Equals(NearestReviewed.EntryAccession(accession), NearestReviewed.EntryAccession(row.Neighbour.Accession), StringComparison.Ordinal))
                     || !referenceLabels.TryGetValue(row.Neighbour.Reference, out var reference)
                     || reference.PanelFamilyKey != labels[index].PanelFamilyKey)
                 {

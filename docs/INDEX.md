@@ -14,6 +14,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
 | [Quantitation stages](QUANTITATION-PIPELINE.md) | Full-XIC stage contracts, second-pass residual seam and focused parity checker |
+| [Panel subclasses](PANEL-SUBCLASSES.md) | User-defined subclass rules, currentness, reviewed transfer and leave-one-out measurement |
 | [De novo engine](DENOVO-ENGINE.md) | Reader/result boundaries, Core selections and review tables, focused real-data parity |
 | [Project formats](PROJECT-FORMATS.md) | Versioned schema/codecs, legacy container rules and frozen-reader FCF proof |
 | [Clustering refactor](CLUSTERING-REFACTOR.md) | Result contracts and bounded frozen/current comparison |
@@ -107,6 +108,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-feedback-facts <output>` | Y9 normal curation/load/export/alignment routes and 39-row factcheck TSV; R4c Quantify completion, Build running guidance and redundancy tooltip with a separate five-row TSV, on a private desktop |
 | `--desktop-world-walk <copied-project> <copied-raw-folder> <copied-sepr2> <copied-denovo-root> <output> <confirmed-scope>` | Private desktop real-data fetch/scope dialog, production Compute, Database gap and native CSV/FASTA exports; uses only copies |
 | `--test-quantitation-stages` | Prepared-peptide assignments, cross-side suppression, residual calibration, rollup and deterministic CSV |
+| `--test-family-panel` | Panel and subclass fixtures, safe publication, native runner and report sections |
+| `--subclass-leave-one-out <project.fqproj> <new-output-directory>` | Current-assignment reviewed-subfamily measurement, per-target CSV and summary JSON; input project unchanged |
 | `--test-denovo-engine` | Core retained selection/review-table contracts and existing reader/reconciliation/source-aware fixtures |
 | `--test-project-formats` | Schema contract and existing versioned project round-trip/refusal fixtures |
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |

@@ -115,7 +115,7 @@ internal static partial class Program
                     ProteinIndex = x.i, Identifier = x.p.SequenceIdentifier, FamilyUserId = x.p.UserID,
                     IsApplied = x.p.SequenceIdentifier != "Q-outside", PanelFamilyKey = x.p.SequenceIdentifier == "Q-outside" ? null : family.Key,
                 }).ToList();
-            file.PanelProteinAssignmentsPanelFingerprint = PanelDerivedDataCurrentness.Fingerprint(file.FamilyPanel);
+            file.PanelProteinAssignmentsPanelFingerprint = PanelDerivedDataCurrentness.FamilyFingerprint(file.FamilyPanel);
             file.PanelProteinAssignmentsFingerprint = "synthetic-stand-in";
             return file;
         }
@@ -130,12 +130,16 @@ internal static partial class Program
             && labels.All(r => !string.IsNullOrWhiteSpace(r.Reason)));
         Check("J3a carries a qualifying reviewed subclass to an in-scope unreviewed target", labels
             .Any(r => r.Identifier == "Q-one" && r.SubclassKey == "part-a" && r.Status == ProteinSubclassStatus.Assigned));
+        var aliasedSelf = Fixture(false);
+        aliasedSelf.MyExtendedFastaItems[1].Evidence!.Accession = "R-one";
+        Check("J3a never carries a subclass from the query's own evidence accession", Labels(Candidate(aliasedSelf))
+            .Any(r => r.Identifier == "Q-one" && r.Status == ProteinSubclassStatus.Unknown));
         Check("J3a requires the existing domain gate for an unannotated target", labels
             .Any(r => r.Identifier == "Q-no-domains" && r.Status == ProteinSubclassStatus.Unknown));
         Check("J3a leaves unapplied family assignments Unknown", labels
             .Any(r => r.Identifier == "Q-outside" && r.Status == ProteinSubclassStatus.Unknown));
-        Check("J3a records the current panel fingerprint", result?.GetType().GetProperty("PanelFingerprint")?.GetValue(result) as string
-            == fixture.PanelProteinAssignmentsPanelFingerprint);
+        Check("J3a records the current full panel fingerprint", result?.GetType().GetProperty("PanelFingerprint")?.GetValue(result) as string
+            == PanelDerivedDataCurrentness.Fingerprint(fixture.FamilyPanel!));
         var tiedLabels = Labels(Candidate(Fixture(true)));
         Check("J3a refuses equally near reviewed references with different subclasses", tiedLabels
             .Any(r => r.Identifier == "Q-one" && r.Status == ProteinSubclassStatus.Unknown && !string.IsNullOrWhiteSpace(r.Reason)));
@@ -161,7 +165,7 @@ internal static partial class Program
         differentRules.FamilyPanel!.Families[0].Subclasses.Single(s => s.Key == "fragment").ReportAsSubclassKey = "part-a";
         differentRules.MyExtendedFastaItems.Last().Evidence!.Pfam = new()
             { new() { Accession = "common" }, new() { Accession = "domain-c" } };
-        differentRules.PanelProteinAssignmentsPanelFingerprint = PanelDerivedDataCurrentness.Fingerprint(differentRules.FamilyPanel);
+        differentRules.PanelProteinAssignmentsPanelFingerprint = PanelDerivedDataCurrentness.FamilyFingerprint(differentRules.FamilyPanel);
         Check("J3a does not choose one tied source rule when the same reported subclass has different rules", Labels(Candidate(differentRules))
             .Any(r => r.Identifier == "Q-one" && r.Status == ProteinSubclassStatus.Unknown));
         var unannotated = Fixture(false);
@@ -184,7 +188,7 @@ internal static partial class Program
         Check("J3a does not carry an absence-dependent subclass when fragment status is unavailable", Labels(Candidate(unknownTarget))
             .Any(r => r.Identifier == "Q-one" && r.Status == ProteinSubclassStatus.Unknown));
         var stale = Fixture(false);
-        stale.FamilyPanel!.Families[0].Subclasses[0].RequiredPfam.Add("new-rule");
+        stale.FamilyPanel!.Families[0].Pfam.Add(new FamilyPanelDomain { Accession = "new-family-domain" });
         bool refused = false;
         try { Candidate(stale); }
         catch (System.Reflection.TargetInvocationException e) when (e.InnerException is InvalidOperationException) { refused = true; }
@@ -225,10 +229,16 @@ internal static partial class Program
         var commitMethod = type?.GetMethod("CommitCandidate", new[] { typeof(FamilyClusterFile), typeof(SubclassAssignmentCandidate) });
         var currentMethod = type?.GetMethod("IsCurrent", new[] { typeof(FamilyClusterFile) });
         Check("J3a provides guarded candidate publication and currentness checks", commitMethod != null && currentMethod != null);
+        var changedPanelText = Fixture(false); MakeAssignmentsCurrent(changedPanelText);
+        var textCandidate = Candidate(changedPanelText);
+        changedPanelText.FamilyPanel!.Families[0].DisplayName = "Updated user text";
+        commitMethod?.Invoke(null, new[] { changedPanelText, textCandidate });
+        Check("J3a recipe captures current panel text when committing subclass labels",
+            changedPanelText.EvidenceRecipe?.FamilyPanel?.Families[0].DisplayName == "Updated user text");
         object? fresh = Candidate(current);
         object? applied = commitMethod?.Invoke(null, new[] { current, fresh });
         Check("J3a publishes every label and its fingerprints to project and recipe", applied != null
-            && current.ProteinSubclassLabels?.Count == 4 && current.ProteinSubclassLabelsPanelFingerprint == current.PanelProteinAssignmentsPanelFingerprint
+            && current.ProteinSubclassLabels?.Count == 4 && current.ProteinSubclassLabelsPanelFingerprint == PanelDerivedDataCurrentness.Fingerprint(current.FamilyPanel!)
             && current.ProteinSubclassLabelsFingerprint != null && current.EvidenceRecipe?.ProteinSubclassLabelsFingerprint == current.ProteinSubclassLabelsFingerprint
             && JsonSerializer.Serialize(current.ProteinSubclassLabels) == JsonSerializer.Serialize(current.EvidenceRecipe?.ProteinSubclassLabels)
             && (bool?)currentMethod?.Invoke(null, new object[] { current }) == true);
@@ -257,6 +267,21 @@ internal static partial class Program
         try { commitMethod?.Invoke(null, new[] { tampered, tamperedCandidate }); }
         catch (System.Reflection.TargetInvocationException e) when (e.InnerException is InvalidOperationException) { tamperRefused = true; }
         Check("J3a refuses a candidate modified after computation", tamperRefused && tampered.ProteinSubclassLabels == null);
+        var subclassEdit = Fixture(false); MakeAssignmentsCurrent(subclassEdit);
+        SubclassAssignment.CommitCandidate(subclassEdit, SubclassAssignment.ComputeCurrent(subclassEdit));
+        subclassEdit.FamilyPanel!.Families[0].Subclasses[0].UniProtSubfamilies.Add("New user term");
+        bool familyStillCurrent = PanelAssignmentEvidenceStore.Current(subclassEdit) != null;
+        bool subclassStale = !SubclassAssignment.IsCurrent(subclassEdit);
+        Check("J3a subclass-only edits preserve current family assignments but stale subclass labels", familyStillCurrent && subclassStale);
+        bool editRecomputed = false;
+        if (familyStillCurrent)
+        {
+            var updated = SubclassAssignment.ComputeCurrent(subclassEdit);
+            SubclassAssignment.CommitCandidate(subclassEdit, updated);
+            editRecomputed = SubclassAssignment.IsCurrent(subclassEdit)
+                && subclassEdit.EvidenceRecipe!.FamilyPanel!.Families[0].Subclasses[0].UniProtSubfamilies.Contains("New user term");
+        }
+        Check("J3a recomputation after a subclass edit records updated rules in the recipe", editRecomputed);
         var cancelled = Fixture(false); MakeAssignmentsCurrent(cancelled);
         var cancelledCandidate = Candidate(cancelled);
         var commitWithContext = type?.GetMethod("CommitCandidate", new[] { typeof(FamilyClusterFile), typeof(SubclassAssignmentCandidate),

@@ -37,6 +37,8 @@ public static partial class SubclassAssignment
             VerifyCandidate(file, candidate);
             // Preserve non-scientific recipe edits made while the candidate was being prepared.
             var recipe = EvidenceApply.Clone(file.EvidenceRecipe!);
+            // The panel editor may have changed subclass rules or report text since family grouping.
+            recipe.FamilyPanel = FamilyPanelValidation.Clone(file.FamilyPanel!);
             recipe.ProteinSubclassLabels = EvidenceApply.Clone(labels);
             recipe.ProteinSubclassLabelsPanelFingerprint = candidate.PanelFingerprint;
             recipe.ProteinSubclassLabelsFingerprint = fingerprint;
