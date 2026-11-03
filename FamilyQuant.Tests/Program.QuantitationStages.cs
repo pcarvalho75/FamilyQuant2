@@ -14,6 +14,8 @@ namespace FamilyQuant.Tests
             FamilySubclassStudyTests();
             FamilyRunSharesStudyTests();
             FamilyProteinCountsStudyTests();
+            FamilyPositionStudyTests();
+            FamilyPositionNativeTests();
             var rows = new List<QuantRow>
             {
                 Qr("identified", "r1", 1, 2, "PEPTLDEK", 10, 30),
