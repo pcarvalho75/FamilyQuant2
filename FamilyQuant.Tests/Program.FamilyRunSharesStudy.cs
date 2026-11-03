@@ -75,6 +75,20 @@ internal static partial class Program
                 .Any(r => r.ShareOfAssignedSignal == 0.25 && r.ShareOfMeasuredSignal == 0.125 && r.ShareOfTic == 0.0625) == true);
         Check("a missing TIC is unavailable rather than substituted with peptide signal",
             manifest.FamilyRunShares?.Families.All(f => f.Runs.Count(r => r.ShareOfTic == null) == 1) == true);
+        var measured = FamilyCompositionStudy.BuildRunShares(attribution).Families.Single(f => f.FamilyUserId == 1);
+        Check("measured-signal statistics use their own run shares and sample SD",
+            measured.MeanShareOfMeasuredSignal == 0.25
+            && Math.Abs(measured.StandardDeviationOfMeasuredSignal.GetValueOrDefault() - Math.Sqrt(0.03125)) < 1e-15);
+        var completeTic = FamilyCompositionStudy.BuildRunShares(attribution,
+            perRunTic: new Dictionary<string, double> { ["RUNA.RAW"] = 16, ["runb.raw"] = 8 }).Families.Single(f => f.FamilyUserId == 1);
+        Check("TIC statistics use complete per-file TIC shares and their sample SD",
+            completeTic.MeanShareOfTic == 0.21875
+            && Math.Abs(completeTic.StandardDeviationOfTic.GetValueOrDefault() - Math.Sqrt(0.048828125)) < 1e-15);
+        Check("secondary means and SDs are unavailable if any run lacks that share",
+            result.Families.All(f => f.MeanShareOfMeasuredSignal == null && f.StandardDeviationOfMeasuredSignal == null)
+            && manifest.FamilyRunShares!.Families.All(f => f.MeanShareOfTic == null && f.StandardDeviationOfTic == null));
+        Check("one measured run has a secondary mean but no sample SD",
+            one.Families[0].MeanShareOfMeasuredSignal == 1 && one.Families[0].StandardDeviationOfMeasuredSignal == null);
         var unequal = new[]
         {
             Qr("identified", "A", 1, 2, "AAAAAAAK", 1, 1), Qr("identified", "A", 2, 2, "CCCCCCCK", 99, 99),
