@@ -161,5 +161,25 @@ internal static partial class Program
         try { order = string.Join(",", ReportDocumentBuilder.Build(new FamilyClusterFile(), new QuantManifest()).Sections.Select(s => s.Id)); }
         catch (Exception ex) { order = ex.GetType().Name + ": " + ex.Message; }
         Check("J44 the base document places Summary of findings right after Summary", order.Contains(ReportSectionIds.Summary + "," + ReportSectionIds.Findings + ",", StringComparison.Ordinal), order);
+
+        // J44d: the numbers table becomes a workbook reference paragraph; Word keeps it on the page of the last sentence.
+        var baseDocument = ReportDocumentBuilder.Build(new FamilyClusterFile(), new QuantManifest());
+        var laidOut = ReportSupplementLayout.Apply(baseDocument with { Sections = baseDocument.Sections.Select(s => s.Id == ReportSectionIds.Findings ? section : s).ToList() },
+            new Dictionary<string, string> { [ReportFindings.CsvFile] = csv });
+        using var word = DocumentFormat.OpenXml.Packaging.WordprocessingDocument.Open(new System.IO.MemoryStream(WordReportWriter.BuildBytes(laidOut.Document)), false);
+        var written = word.MainDocumentPart!.Document!.Body!.Elements<DocumentFormat.OpenXml.Wordprocessing.Paragraph>().ToList();
+        int last = written.FindIndex(p => p.InnerText == Text("choices"));
+        bool Keeps(DocumentFormat.OpenXml.Wordprocessing.Paragraph p) => p.ParagraphProperties?.KeepNext != null && p.ParagraphProperties.KeepLines != null;
+        Check("J44d the last summary sentence keeps with the workbook reference that follows it", last >= 0 && last + 1 < written.Count && Keeps(written[last])
+            && written[last + 1].InnerText.StartsWith("Numbers in the summary of findings. See the companion supplement workbook, sheet '", StringComparison.Ordinal),
+            last < 0 ? "sentence not found" : written[Math.Min(last + 1, written.Count - 1)].InnerText);
+        string? After(DocumentFormat.OpenXml.Wordprocessing.Paragraph p) => p.ParagraphProperties?.SpacingBetweenLines?.After?.Value;
+        var first = written.Single(p => p.InnerText == Text("listed:1"));
+        var lastListed = written.Single(p => p.InnerText == Text("listed:2"));
+        Check("J44d the listed families read as one compact list: no space after each item but the last", After(first) == "0" && After(lastListed) == null,
+            "first " + After(first) + ", last " + After(lastListed));
+        var statements = section.Blocks.OfType<ReportParagraph>().Where(p => p.Id is not ("findings:choices" or "findings:listed:1")).Select(p => p.Text).ToHashSet(StringComparer.Ordinal);
+        Check("J44d no other summary paragraph changes its properties, and the text is unchanged", written.Where(p => statements.Contains(p.InnerText)).Count() == statements.Count
+            && written.Where(p => statements.Contains(p.InnerText)).All(p => !Keeps(p) && After(p) == null) && Text("choices") == "Analysis choices in force: evidence scope phrases \"term one\", \"term two\"; 2 confirmed panel links (notes: user note); report threshold 0.1%; de novo source \"source one\" with score at least 80.");
     }
 }
