@@ -30,9 +30,15 @@ abundance or experimental identifications.
 Functional scope is proposed as the most frequent keyword in UniProt's molecular-function category
 (`KW-9992`). The category comes from the live keyword vocabulary; the code contains no biological
 keyword list. All keywords, counts and provider categories remain available for review. Ties use
-ordinal keyword order. If there is no eligible keyword, the proposal contains no scope. The program
-does not substitute a guessed term. Taxonomy and vocabulary must report the same nonempty release.
-The proposal separately records releases of the stored keyword evidence.
+ordinal keyword order. A second suggestion can come from the most common phrase in the reviewed
+proteins' stored tissue-specificity text. It counts each reviewed accession at most once per phrase,
+ignores negated clauses and parenthetical annotations, and uses deterministic ordinal tie-breaking.
+When duplicate records for one accession disagree, only phrases present in every copy can receive
+that accession's vote. General grammatical words separate phrases; no tissue name is hard-coded.
+The phrase is a review suggestion, not proof of sample origin. If no keyword is eligible, a tissue
+phrase may be the only suggestion; if neither exists, no scope is invented. Taxonomy and vocabulary
+must report the same nonempty release. The proposal separately records releases of the stored
+keyword evidence.
 
 The distinction between functional, location, structural and technical categories follows the
 [UniProt keyword API](https://www.uniprot.org/api-documentation/support-data). A more frequent
