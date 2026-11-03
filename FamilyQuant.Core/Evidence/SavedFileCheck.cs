@@ -71,8 +71,14 @@ namespace FamilyQuant.Evidence
         }));
         private static string Locks(FamilyClusterFile file) => Hash(file.LockedUserIds.OrderBy(i => i));
         private static string Source(FamilyClusterFile file) => Hash(new { file.SourceSha256, file.SourceSequenceCount });
-        private static string Curation(FamilyClusterFile file) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(file.ToJsonText())));
-        private static string Hash<T>(T value) => Convert.ToHexString(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(value)));
+        private static string Curation(FamilyClusterFile file) => file.JsonContentSha256();
+        private static string Hash<T>(T value)
+        {
+            using var hash = SHA256.Create();
+            using var stream = new CryptoStream(Stream.Null, hash, CryptoStreamMode.Write);
+            JsonSerializer.Serialize(stream, value); stream.FlushFinalBlock();
+            return Convert.ToHexString(hash.Hash!);
+        }
     }
 }
 

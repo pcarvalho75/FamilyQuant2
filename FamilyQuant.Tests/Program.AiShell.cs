@@ -55,6 +55,9 @@ internal static partial class Program
         var project = new FamilyClusterFile { ReportDetails = new ReportDetails { Title = "User study", WrittenInterpretation = "Original interpretation" },
             MyExtendedFastaItems = new() { new() { SequenceIdentifier = "AI_FIXTURE", Sequence = "TTACDEFGHIKGG", Description = "Fixture", UserID = 1, USearchID = 1 } } };
         var manifest = new QuantManifest { PerRunTic = new() { ["fixture"] = 100000 }, FamilyMapping = new() { MinIdentity = .99, Method = "Fixture mapping" } };
+        manifest.FamilyRunShares = new FamilyRunSharesResult { MembershipSha256 = FamilyStudyMembership.Fingerprint(project),
+            Families = new() { new() { FamilyUserId = 1, MeanShare = .125, AvailableRunCount = 1 } },
+            Runs = new() { new() { Run = "fixture", AssignedSignal = 100, MeasuredSignal = 200 } } };
         ProjectStore.WriteFqproj(path, project, new[] { Qr("identified", "fixture", 1, 2, "ACDEFGHIK", 100, 150) }, manifest);
         string beforeHash = TestFileHash.Upper(path);
         var store = new AiKeyStore(Path.Combine(root, "key.bin"));
@@ -73,6 +76,7 @@ internal static partial class Program
         {
             shell.Show(); PumpDispatcher(); shell.OpenProjectPath(path); WaitForReportFixture(shell);
             var control = ((Grid)shell.FindName("GridApp")).Children.OfType<ClusterGenerationControl>().Single();
+            string j45Text = ReportInterpretationInput.FromProject(control.fcf, manifest, AppVersionInfo.Current());
             Check("J46 the native command without a key sends nothing", !FinishReportCommand(shell.DraftInterpretationAsync()) && transport.Calls == 0);
             store.Save("fixture-key");
             MainWindow.AiPreviewOverride = (_, _) => false;
@@ -89,6 +93,8 @@ internal static partial class Program
             Check("J46 native accept saves labelled text and the exact preview fingerprint", applied && transport.Calls == 2
                 && transport.Prompt == preview && saved?.WrittenInterpretation.StartsWith("AI draft (model ", StringComparison.Ordinal) == true
                 && saved.AiInterpretation?.InputSha256 == Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(preview))));
+            Check("J46d native transport sends J45 export bytes without modification", System.Text.Encoding.UTF8.GetBytes(transport.Prompt)
+                .SequenceEqual(System.Text.Encoding.UTF8.GetBytes(j45Text)));
             control.ViewModel.Undo();
             Check("J46 native Undo restores the previous interpretation", control.fcf.ReportDetails?.WrittenInterpretation == "Original interpretation");
             var previous = control.fcf.ReportDetails!;

@@ -77,6 +77,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ExportProteinNameTests());
             suite.Section("Core operation outcomes, progress and cancellation");
             suite.Add(() => CoreOperationTests(workDir));
+            suite.Add(() => StreamingSaveTests(Path.Combine(workDir, "streaming-save")));
             suite.Section("Display filters and the family counter");
             suite.Add(() => FilterTests());
             suite.Section("Target/decoy scoring arithmetic");
@@ -250,6 +251,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => AiInterpretationInputTests());
             suite.Add(() => AiKeyOfferTests());
             suite.AddWithApplication(() => AiShellTests());
+            suite.Add(() => AiJ45ParityTests());
+            suite.AddWithApplication(() => AiAssistantHelpTests());
             suite.Add(() => SuiteMergeGuardTests());
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());

@@ -1,6 +1,5 @@
 using FamilyQuant.Ai;
 using FamilyQuant.Report;
-using FamilyQuant.Panels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -22,37 +21,20 @@ internal static partial class Program
 
     private static void AiInterpretationInputTests()
     {
-        var details = new ReportDetails { Title = "Study title", SampleDescription = "Sample note", Workflow = "User procedure" };
-        var table = new ReportTable("fixture", "Observed numbers", new[] { "family", "share_fraction", "count" },
-            new IReadOnlyList<string>[] { new[] { "User group", "0.125", "3" } }, "Measured values");
-        var sections = new[] { new ReportSection("methods", "Analysis choices", new ReportBlock[] { new ReportParagraph("p", "User choice"), table }) };
+        var (project, manifest) = AiJ45ProjectFixture();
+        var value = AiInterpretationInputBuilder.BuildProject(project, manifest);
+        Check("J46d AI preview contains user details and the J45 stored result table", value.Text.Contains("Study title", StringComparison.Ordinal)
+            && value.Text.Contains("User procedure", StringComparison.Ordinal) && value.Text.Contains("12.5", StringComparison.Ordinal));
+        Check("J46d AI number check gets J45's exact numeric cells", value.Cells.Any(cell => cell.Column == "Mean share (%)" && cell.Value == "12.5"));
+        Check("J46d AI input does not include raw database sequences", !value.Text.Contains("ACDEFGHIK", StringComparison.Ordinal));
+        var previous = CultureInfo.CurrentCulture;
         try
         {
-            var value = AiInterpretationInputBuilder.Build(details, sections);
-            Check("J46 preview contains the user details, choice and exact table data", new[] { "Study title", "Sample note", "User procedure", "Analysis choices", "User choice", "User group", "0.125", "Measured values" }
-                .All(item => value.Text.Contains(item, StringComparison.Ordinal)));
-            Check("J46 numeric trace uses the same exact table cells sent in preview", value.Cells.Contains(("share_fraction", "0.125")) && value.Cells.Contains(("count", "3")));
-            var previous = CultureInfo.CurrentCulture;
-            try
-            {
-                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR"); string br = AiInterpretationInputBuilder.Build(details, sections).Text;
-                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
-                Check("J46 preview bytes do not change with current culture", br == AiInterpretationInputBuilder.Build(details, sections).Text);
-            }
-            finally { CultureInfo.CurrentCulture = previous; }
-            var project = new FamilyClusterFile { ReportDetails = details,
-                FamilyPanel = new FamilyPanel { Families = new() { new() { Key = "family-a", DisplayName = "User group", TextFields = new() { new() { Name = "Notes", Text = "Panel note" } } } } },
-                MyExtendedFastaItems = new() { new() { SequenceIdentifier = "fixture-protein", Sequence = "SENSITIVESEQUENCE", UserID = 1 } } };
-            var projectInput = AiInterpretationInputBuilder.BuildProject(project, new QuantManifest());
-            Check("J46 project input includes the user's panel and methods without raw sequences", projectInput.Text.Contains("Panel note", StringComparison.Ordinal)
-                && projectInput.Text.Contains("User procedure", StringComparison.Ordinal) && !projectInput.Text.Contains("SENSITIVESEQUENCE", StringComparison.Ordinal));
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR"); string br = AiInterpretationInputBuilder.BuildProject(project, manifest).Text;
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+            Check("J46d AI input is culture-invariant J45 output", br == AiInterpretationInputBuilder.BuildProject(project, manifest).Text
+                && br == ReportInterpretationInput.FromProject(project, manifest, AppVersionInfo.Current()));
         }
-        catch
-        {
-            Check("J46 preview contains the user details, choice and exact table data", false);
-            Check("J46 numeric trace uses the same exact table cells sent in preview", false);
-            Check("J46 preview bytes do not change with current culture", false);
-            Check("J46 project input includes the user's panel and methods without raw sequences", false);
-        }
+        finally { CultureInfo.CurrentCulture = previous; }
     }
 }
