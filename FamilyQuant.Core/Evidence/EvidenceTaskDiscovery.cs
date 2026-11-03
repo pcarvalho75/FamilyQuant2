@@ -48,7 +48,7 @@ public sealed class EvidenceTaskChoice
     public List<string> ScopeTerms { get; set; } = new();
 }
 
-public static class EvidenceTaskDiscovery
+public static partial class EvidenceTaskDiscovery
 {
     // UniProt's ontology category identifier for molecular function, not a list of biological terms.
     // Functional scope is suggested independently of location, structure and technical annotation.
@@ -59,7 +59,8 @@ public static class EvidenceTaskDiscovery
     /// <summary>Read-only discovery. The nearest common taxonomic family is preferred; otherwise the
     /// deepest common ancestor is offered. Keyword counts use distinct reviewed accessions in the file,
     /// each counted once per keyword. The most frequent keyword in UniProt's molecular-function
-    /// category is offered as functional scope. No scope is applied until a person confirms it.</summary>
+    /// category is offered as functional scope, followed by a phrase from reviewed tissue evidence.
+    /// No scope is applied until a person confirms it.</summary>
     public static async Task<EvidenceTaskProposal> DiscoverAsync(FamilyClusterFile file, HttpMessageHandler? handler = null,
         IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default)
     {
@@ -106,9 +107,10 @@ public static class EvidenceTaskDiscovery
         var common = lineages[0].Where(t => lineages.All(path => path.Any(p => p.TaxonId == t.TaxonId))).ToList();
         EvidenceTaxon clade = common.LastOrDefault(t => t.Rank == "family") ?? common.LastOrDefault()
             ?? throw new InvalidDataException("The file's taxa have no shared lineage in UniProt. No clade was guessed.");
-        var reviewed = proteins.Where(p => p.Evidence?.Reviewed == true
+        var reviewedGroups = proteins.Where(p => p.Evidence?.Reviewed == true
                 && p.Evidence.Accession == FamilyNaming.Accession(p.SequenceIdentifier).Split('-')[0])
-            .GroupBy(p => p.Evidence!.Accession, StringComparer.Ordinal).Select(g => g.First()).ToList();
+            .GroupBy(p => p.Evidence!.Accession, StringComparer.Ordinal).ToList();
+        var reviewed = reviewedGroups.Select(g => g.First()).ToList();
         // Duplicate accessions cannot silently select contradictory keyword observations.
         foreach (var group in proteins.Where(p => p.Evidence?.Reviewed == true).GroupBy(p => p.Evidence!.Accession, StringComparer.Ordinal))
             if (group.Select(p => JsonSerializer.Serialize(p.Evidence!.Keywords.OrderBy(k => k, StringComparer.Ordinal))).Distinct().Count() > 1)
@@ -138,6 +140,9 @@ public static class EvidenceTaskDiscovery
         }
         cancellationToken.ThrowIfCancellationRequested();
         if (fingerprint != SourceFingerprint(file)) throw new InvalidDataException("The file changed during task discovery. No task was proposed.");
+        var proposedScope = keywords.Where(k => k.CategoryId == FunctionalScopeCategoryId).Take(1).Select(k => k.Keyword).ToList();
+        string? tissue = CommonTissuePhrase(reviewedGroups);
+        if (tissue != null && !proposedScope.Contains(tissue, StringComparer.OrdinalIgnoreCase)) proposedScope.Add(tissue);
         return new EvidenceTaskProposal
         {
             SourceFingerprint = fingerprint, Provider = "UniProt", Release = release ?? string.Empty,
@@ -145,7 +150,7 @@ public static class EvidenceTaskDiscovery
                 .Distinct(StringComparer.Ordinal).OrderBy(r => r, StringComparer.Ordinal).ToList(),
             TargetProteins = proteins.Count, IgnoredContaminants = targets.Count - proteins.Count,
             ReviewedProteins = reviewed.Count, Taxa = taxa, Clade = clade, Keywords = keywords,
-            ProposedScopeTerms = keywords.Where(k => k.CategoryId == FunctionalScopeCategoryId).Take(1).Select(k => k.Keyword).ToList(),
+            ProposedScopeTerms = proposedScope,
         };
     }
 
