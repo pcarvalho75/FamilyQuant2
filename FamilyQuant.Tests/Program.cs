@@ -320,11 +320,14 @@ namespace FamilyQuant.Tests
             suite.Add(() => WordReportTests(null));
             suite.Add(() => ReportNumberTraceTests());
             suite.AddWithApplication(() => ReportStoredChecks());
+            suite.Add(() => ReportPairedSummaryTests());
             suite.AddWithApplication(() => ReportSupplementChecks(null));
             suite.Add(() => ReportTableSheetTests(null));
+            suite.Add(FamilyUnobservedTests);
             suite.AddWithApplication(() => ReportFigureTests(Path.Combine(workDir, "report-figures")));
             suite.AddWithApplication(() => WordReportDraftTests());
             suite.AddWithApplication(() => ReportAssemblyChecks(Path.Combine(workDir, "report-assembly")));
+            suite.AddWithApplication(() => ReportWordOthersChecks(Path.Combine(workDir, "report-word-others")));
             suite.Add(() => QuantitationPanelTests(Path.Combine(workDir, "quantitation-panel")));
             suite.Add(() => ArchitectureGroupSplitTests());
             suite.Add(() => ArchitectureMemberViewTests());
