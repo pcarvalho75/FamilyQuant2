@@ -162,6 +162,11 @@ namespace FamilyQuant
         {
             FamilyClusterFile loaded = JsonSerializer.Deserialize<FamilyClusterFile>(theFile)
                 ?? throw new InvalidDataException("The text is not a valid Family Cluster File.");
+            return FinishJsonLoad(loaded, theFile.Contains("\"LockedUserIds\""));
+        }
+
+        private static FamilyClusterFile FinishJsonLoad(FamilyClusterFile loaded, bool hasLockField)
+        {
 
             // Migration for files written before curation locks existed - but ONLY for files that
             // never went through a reclustering. In a never-reclustered file the two ids start equal,
@@ -178,7 +183,7 @@ namespace FamilyQuant
             // the reliable witnesses. The residual, documented in the release notes: curation typed
             // into a 1.0.8.0 file AFTER a reclustering cannot be told apart from the renumbering and
             // does not arrive locked - re-typing the number once in the current build locks it.
-            if (!theFile.Contains("\"LockedUserIds\"")
+            if (!hasLockField
                 && loaded.WordSimilarity == null && !loaded.IsKeywordSuperCluster)
             {
                 foreach (var item in loaded.MyExtendedFastaItems)

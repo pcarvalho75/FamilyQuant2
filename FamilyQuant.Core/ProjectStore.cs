@@ -113,7 +113,9 @@ namespace FamilyQuant
                 using (var fileStream = new FileStream(temp, FileMode.Create, FileAccess.Write, FileShare.None))
                 using (var zip = new ZipArchive(fileStream, ZipArchiveMode.Create))
                 {
-                    ProjectArchiveEntries.WriteTextEntry(zip, CurationEntryName, fcf.ToJsonText(), CompressionLevel.Optimal, operation);
+                    operation?.ThrowIfCancellationRequested();
+                    using (Stream curationStream = zip.CreateEntry(CurationEntryName, CompressionLevel.Optimal).Open())
+                        fcf.WriteJsonUtf8(curationStream);
                     ProjectQuantCodec.Write(zip, rows, operation);
                     if (spectrumRows.Count > 0) ProjectSpectrumCodec.Write(zip, spectrumRows, operation);
                     ProjectArchiveEntries.WriteTextEntry(zip, ManifestEntryName,
@@ -156,7 +158,7 @@ namespace FamilyQuant
             using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
             using var zip = new ZipArchive(fileStream, ZipArchiveMode.Read);
 
-            string curationText = ProjectArchiveEntries.ReadTextEntry(zip, CurationEntryName, operation)
+            ZipArchiveEntry curationEntry = zip.GetEntry(CurationEntryName)
                 ?? throw new InvalidDataException(
                     "\"" + path + "\" is not a valid FamilyQuant project: its " + CurationEntryName +
                     " entry is missing.");
@@ -166,7 +168,7 @@ namespace FamilyQuant
                     "\"" + path + "\" is not a valid FamilyQuant project: its " + ManifestEntryName +
                     " entry is missing.");
 
-            FamilyClusterFile fcf = FamilyClusterFile.FromJsonText(curationText);
+            FamilyClusterFile fcf = FamilyClusterFile.ReadJsonUtf8(curationEntry.Open);
 
             QuantManifest manifest = ProjectManifestCodec.Read(manifestText)
                 ?? throw new InvalidDataException(
