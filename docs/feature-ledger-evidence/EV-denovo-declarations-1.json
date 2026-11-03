@@ -5,101 +5,101 @@
   "runs": [
     {
       "id": "EV-denovo-declarations",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-denovo-ledger D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations \u00222026-11-02 15:54:30 -0800\u0022",
-      "executedAt": "2026-11-02 15:54:30 -0800",
-      "commit": "eb0acabd982305bfb16fd8d5dd5d62c9f74b37c5",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-denovo-ledger D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations \u00222026-11-02 17:46:22 -0800\u0022",
+      "executedAt": "2026-11-02 17:46:22 -0800",
+      "commit": "0255e09ed407d2a8153e26bc9317281c2df8774e",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\comparisons.log",
           "sha256": "5FA09B2913ADDE594B3A8B99E2EC299046EEF2C986D30299D1EB28CE3E020FA8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\comparisons.json",
           "sha256": "050D41C53D1240A673F4F8A50110AC994B619ECAF966E3591BAFB6BDA108B1C0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoControl.Compatibility.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoControl.Compatibility.cs",
           "sha256": "BB45BCACC7C63869B4B22F63EE16C6572D12F7F2A2C9B589686B2DE2BC15479C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoControl.Dialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoControl.Dialogs.cs",
           "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoControl.Files.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoControl.Files.cs",
           "sha256": "A894899A775DE9BC762B0069DCE26314631BE060B82892F480A5EA3D88B7CD14"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoControl.Tables.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoControl.Tables.cs",
           "sha256": "5B2292689F03600BD8FB482588343C0A24DF674B1A4D909588FD9BF747BA296A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
           "sha256": "4BB5BDADAE2498ADD500A9A5DBBE93748A1D7F8707950CD749EF0F3BD6B770A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoControl.xaml",
           "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoFilterControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant_DeNovoFilterControl.xaml",
           "sha256": "C5F5FD8218E9862B6C3279B39686CBB8E287F809D11483BF4B20BD9EF6381E41"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_Program.DeNovoLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_Program.DeNovoLedger.cs",
           "sha256": "E9B6D9A40F09CB9141A071CA58D8B376729299E1420410E922E458751A170206"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_Program.Commands.DeNovoLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_Program.Commands.DeNovoLedger.cs",
           "sha256": "B4116A6A47B9A014A4E1ED11F17B94E802EFB7151158BDAC6DE1F226557F741F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRuntime.cs",
           "sha256": "E22B29DA8275597B3578912FF943695F72DB2643B1FFB6C29238F7E943BD5F65"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerWorkflow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerWorkflow.cs",
           "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRefusals.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRefusals.cs",
           "sha256": "52CFC17EFCE971ED19E8459C97433A0F0CC2EB5D8595F7ADEDC561A23D37E54D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_FeatureLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_FeatureLedger.cs",
           "sha256": "AD0C3159448A0945A99AC10C8C7474F78DE35DA5B4B97C520196079FB510689A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests_FeatureLedgerEvidence.cs",
           "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\frozen_FamilyQuant_DeNovoControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\frozen_FamilyQuant_DeNovoControl.xaml",
           "sha256": "E7F6B72A22E658A4CFCBD4BD6FDC3DF42AAC0F0DEBAA5EF8B3CA337B736F51BF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\frozen_FamilyQuant_DeNovoControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\frozen_FamilyQuant_DeNovoControl.xaml.cs",
           "sha256": "16D617F16382298A4A60238100D58B65CE03A6562C4B3F0B5B37C629E70A40BF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "D0E5572100A55A7C66F38100607A315B72ED15B010ABF8F817864CFAA9B46D5E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "661F0CB7809E1866C73DE96EF1FC7F1453325D70D6A950EE454AE056FEDC042E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant2.dll",
-          "sha256": "F7ED28D6D08D1DB4C5291451C7B0B434E7C0AADA8D9D27E22E06B3256275E25B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant2.dll",
+          "sha256": "9B6C4DBC3D3851BB668F6BC15C8268CBB55413DC1155DFEAE9D316E1A00610A7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Core.dll",
-          "sha256": "BD748D986CA2EAB684305F700DE4F9A5F8A4A56F9B4822E02DDB4E8E21DF9D64"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\executed\\FamilyQuant.Core.dll",
+          "sha256": "F8F2936F4B51F1EBE9C1FE18ED1B27D2C9DF922317E94B6418E68E62AF722441"
         }
       ],
       "workingDirectory": "C:\\FamilyQuant-gate"
@@ -1335,7 +1335,7 @@
           "kind": "test",
           "target": "DeNovoLedgerDeclarationsCommand",
           "assertion": "De novo declaration kind option/copy: every listed frozen/current declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -1349,7 +1349,7 @@
           "kind": "test",
           "target": "DeNovoLedgerDeclarationsCommand",
           "assertion": "De novo declaration kind tooltip: every listed frozen/current declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -1363,7 +1363,7 @@
           "kind": "test",
           "target": "DeNovoLedgerDeclarationsCommand",
           "assertion": "De novo declaration kind column: every listed frozen/current declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -1377,7 +1377,7 @@
           "kind": "test",
           "target": "DeNovoLedgerDeclarationsCommand",
           "assertion": "De novo declaration kind code fact: every listed frozen/current declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -1391,7 +1391,7 @@
           "kind": "test",
           "target": "DeNovoLedgerDeclarationsCommand",
           "assertion": "De novo declaration kind format/export: every listed frozen/current declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-declarations\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\denovo-declarations\\comparisons.log",
           "inspectedBy": ""
         }
       ]

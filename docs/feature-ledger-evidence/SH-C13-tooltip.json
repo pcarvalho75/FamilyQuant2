@@ -5,16 +5,16 @@
   "runs": [
     {
       "id": "declarations",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-declaration-compare D:/FamilyQuant-data/out-shell/N3/source C:\\FamilyQuant-gate D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\shell-tooltip-declarations SH-C13-tooltip FamilyQuant/MainWindow.xaml \u00222026-11-02 13:05:59 -0800\u0022",
-      "executedAt": "2026-11-02 13:05:59 -0800",
-      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-declaration-compare D:/FamilyQuant-data/out-shell/N3/source C:\\FamilyQuant-gate D:/FamilyQuant-data/out-refresh\\20261102-174442-FamilyQuant-gate\\shell-tooltip-declarations SH-C13-tooltip FamilyQuant/MainWindow.xaml \u00222026-11-02 17:47:36 -0800\u0022",
+      "executedAt": "2026-11-02 17:47:36 -0800",
+      "commit": "0255e09ed407d2a8153e26bc9317281c2df8774e",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.log",
           "sha256": "04F8B3F7EF578BB800A3D167185DD4A93BDC1924A23D37AB85800F815E9296C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.json",
           "sha256": "98C65AD25B6E3A844579B48F6BC40A0382C9A0CB29B991E079E3A673DC2B8D14"
         }
       ],
@@ -2257,7 +2257,7 @@
           "kind": "test",
           "target": "LedgerDeclarationCommand",
           "assertion": "declaration kind option/copy: every listed named property agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.log",
           "inspectedBy": ""
         }
       ]

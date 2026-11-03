@@ -5,140 +5,140 @@
   "runs": [
     {
       "id": "native",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-cache D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache \u00222026-11-02 13:04:22 -0800\u0022",
-      "executedAt": "2026-11-02 13:04:22 -0800",
-      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-cache D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache \u00222026-11-02 17:45:18 -0800\u0022",
+      "executedAt": "2026-11-02 17:45:18 -0800",
+      "commit": "0255e09ed407d2a8153e26bc9317281c2df8774e",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\proofs.log",
-          "sha256": "FE37BFC492B8AC13FEFCE06F6DC74FD6E74BFAB14FD0ED120FBDC0F855CDA599"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\proofs.log",
+          "sha256": "4785CC4868A2016F8EFE7BF94B54472EF32E9099CA7CD1912A5A50F80E09DB45"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\actual-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\actual-values.json",
           "sha256": "D4BA12749E3BFB79E8DCC4ADFB92E96EB6417309A218DCDCEF1A7CD546129470"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
           "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
           "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
           "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
           "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
           "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
           "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
           "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\frozen\\FamilyQuant/DeNovo/DeNovoXicCache.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\frozen\\FamilyQuant/DeNovo/DeNovoXicCache.cs",
           "sha256": "28896247F0957D4D244802E5E41968B264CD075F3EC2381A1498B19D996AEEA1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\frozen\\FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\frozen\\FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs",
           "sha256": "2BE7652D4FB2F3C44801773D52BA3787BAD054CA004D29CEA9ADAA9745654CA2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "338CB1ED8EE1B52F92368A79B99A6C1D2789A40AE07801AAB7226AA8B8A528A4"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "661F0CB7809E1866C73DE96EF1FC7F1453325D70D6A950EE454AE056FEDC042E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Core.dll",
-          "sha256": "B3DE904BB50477ACCB982BDE2CE437BA6962BB1DA44E7D260B992D1E188837BC"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\executed\\FamilyQuant.Core.dll",
+          "sha256": "F8F2936F4B51F1EBE9C1FE18ED1B27D2C9DF922317E94B6418E68E62AF722441"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\frozen-ReferenceGoldenHost.dll",
-          "sha256": "0BF395FCF7CD43A602F5FF4BC684193F4C399729CB51D1692BA9612D38C25847"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "9253534977DED86EABA63F1040D90FBD9D9B0B9B28E051FB8B41D43B9DD3247A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\frozen-ReferenceGoldenHost.exe",
-          "sha256": "AD9AC8D65257A86320558DCB7CD3F9D3CCEAAFD439F38E6CA0A60E9EF476748C"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "0C53C9B67AAD80FC5A51A3957BAE0E570EF9CA7BAD57831B5907C5936049A4AA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\frozen-host.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\frozen-host.log",
           "sha256": "0E65B3EC7E70149A79E307FA3EE325666029EB8DB36D88675E62806C2360CADB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\current\\blocked-ms1.json.tmp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\current\\blocked-ms1.json.tmp",
           "sha256": "C20FFFD9198FC88300FF30679E721169B74CF632E2D611489653DCDD73A385EF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\current\\blocked-xic.json.tmp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\current\\blocked-xic.json.tmp",
           "sha256": "E744A499BCFEB2354CDE24384BB9FF079F95D81CB994DEDF0E36C10638DC938B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\current\\ms1.canonical.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\current\\ms1.canonical.json",
           "sha256": "26DACFC452C055D6F9D06CF3305937F0ECC60C828F94424FB4E8A74B6702D5FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\current\\ms1.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\current\\ms1.json",
           "sha256": "C20FFFD9198FC88300FF30679E721169B74CF632E2D611489653DCDD73A385EF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\current\\staging.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\current\\staging.json",
           "sha256": "14EC035F4C65A7EB2D60A3253FA88B955502CEEC3F067BCA6B8A46BB307FA33B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\current\\xic.canonical.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\current\\xic.canonical.json",
           "sha256": "B2BFBE12B1B669706499DDC9F54717B332FF5D3EC0803AA7B33D0637ECB2E6DE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\current\\xic.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\current\\xic.json",
           "sha256": "E744A499BCFEB2354CDE24384BB9FF079F95D81CB994DEDF0E36C10638DC938B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\frozen\\blocked-ms1.json.tmp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\frozen\\blocked-ms1.json.tmp",
           "sha256": "B84F06B833D8794C8D00BFAEA21A37B8D1CA7E82F599FF7F4D8FD275532F1726"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\frozen\\blocked-xic.json.tmp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\frozen\\blocked-xic.json.tmp",
           "sha256": "4AAFEBA830214D1B02F3B7233429A172B63B3621A35D13227E0AC462FFA4615F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\frozen\\ms1.canonical.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\frozen\\ms1.canonical.json",
           "sha256": "26DACFC452C055D6F9D06CF3305937F0ECC60C828F94424FB4E8A74B6702D5FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\frozen\\ms1.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\frozen\\ms1.json",
           "sha256": "B84F06B833D8794C8D00BFAEA21A37B8D1CA7E82F599FF7F4D8FD275532F1726"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\frozen\\staging.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\frozen\\staging.json",
           "sha256": "14EC035F4C65A7EB2D60A3253FA88B955502CEEC3F067BCA6B8A46BB307FA33B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\frozen\\xic.canonical.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\frozen\\xic.canonical.json",
           "sha256": "B2BFBE12B1B669706499DDC9F54717B332FF5D3EC0803AA7B33D0637ECB2E6DE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\frozen\\xic.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\frozen\\xic.json",
           "sha256": "4AAFEBA830214D1B02F3B7233429A172B63B3621A35D13227E0AC462FFA4615F"
         }
       ],
@@ -289,30 +289,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-export-storage-fact",
       "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:678 \u0022detectedCountByCharge\u0022; native write/reopen compares top-level cache key detectedCountByCharge and its complete fixture value; expected [0,1,2,0,0,0]; actual [0,1,2,0,0,0]"
-    },
-    {
-      "observationId": "FQ15-26A8A749B3B6",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
-          "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
-          "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-2749F7FD71F8",
@@ -603,30 +579,6 @@
       "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:682 \u0022detectedCountSinglyCharged\u0022; native write/reopen compares top-level cache key detectedCountSinglyCharged and its complete fixture value; expected 1; actual 1"
     },
     {
-      "observationId": "FQ15-8ECD8B6595F3",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
-          "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
-          "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-914981428DB1",
       "implementation": [
         {
@@ -795,30 +747,6 @@
       "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:669 \u0022minScansPerFeature\u0022; native write/reopen compares top-level cache key minScansPerFeature and its complete fixture value; expected 2; actual 2"
     },
     {
-      "observationId": "FQ15-CBD8C887A5B3",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
-          "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
-          "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-F37912D44F30",
       "implementation": [
         {
@@ -901,7 +829,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-cache-wire kind export/storage fact: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-cache\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-cache\\proofs.log",
           "inspectedBy": ""
         }
       ]

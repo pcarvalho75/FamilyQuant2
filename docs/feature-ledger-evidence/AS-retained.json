@@ -5,24 +5,24 @@
   "runs": [
     {
       "id": "AS-member-comparison",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-shell/N5-final-20261101-224706/audit-a/mapping.json D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\assay-retained AS-retained \u00222026-11-02 13:04:29 -0800\u0022",
-      "executedAt": "2026-11-02 13:04:29 -0800",
-      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-shell/N5-final-20261101-224706/audit-a/mapping.json D:/FamilyQuant-data/out-refresh\\20261102-174442-FamilyQuant-gate\\assay-retained AS-retained \u00222026-11-02 17:45:28 -0800\u0022",
+      "executedAt": "2026-11-02 17:45:28 -0800",
+      "commit": "0255e09ed407d2a8153e26bc9317281c2df8774e",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-retained\\comparisons.log",
           "sha256": "CC24A591B25DFAAD7B5CF9BC7A946D295C5D154A529BC5FCF9247C72522C95CC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-retained\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-retained\\comparisons.json",
           "sha256": "CD6EA963A025AEE80E50DE9AA3640AB259C52FAF4C7ED63DC4B3035117496BB5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-retained\\unproven.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-retained\\unproven.tsv",
           "sha256": "78B0DB4A789FF349ABD31FB69F762F47DED9E882EEDDDB17DD8A58437F22ED98"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-retained\\counts-by-source.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-retained\\counts-by-source.tsv",
           "sha256": "A413D11601DB7A3CD708C013922D0AE9B873C7CA196C752B1A53BEA449C06AA8"
         },
         {
@@ -30,20 +30,20 @@
           "sha256": "DE1EDBDA53D9EE54B672F5820ED85D94087F2C0671270E08CBFF3FCD02F2A352"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-retained\\executed\\Program.LedgerAssayComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-retained\\executed\\Program.LedgerAssayComparison.cs",
           "sha256": "A68676F37892744747170ECFBFE8F332FABCFEA05E5997BE5E39E55390E9654F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-retained\\executed\\Program.Commands.AssayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-retained\\executed\\Program.Commands.AssayLedger.cs",
           "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-retained\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-retained\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-retained\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "338CB1ED8EE1B52F92368A79B99A6C1D2789A40AE07801AAB7226AA8B8A528A4"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-retained\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "661F0CB7809E1866C73DE96EF1FC7F1453325D70D6A950EE454AE056FEDC042E"
         }
       ],
       "workingDirectory": "C:\\FamilyQuant-gate"
@@ -15457,7 +15457,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind code fact: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -15471,7 +15471,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind export/storage fact: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -15485,7 +15485,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind format/export: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ]
