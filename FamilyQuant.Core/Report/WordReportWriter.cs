@@ -91,7 +91,13 @@ public static class WordReportWriter
                     switch (block)
                     {
                         case ReportParagraph paragraph:
-                            foreach (string line in Lines(paragraph.Text)) body.Append(Paragraph(line));
+                            foreach (string line in Lines(paragraph.Text))
+                            {
+                                var written = Paragraph(line);
+                                if (paragraph.KeepWithNext) written.ParagraphProperties!.Append(new W.KeepNext(), new W.KeepLines());
+                                if (paragraph.Compact) written.ParagraphProperties!.Append(new W.SpacingBetweenLines { After = "0" });
+                                body.Append(written);
+                            }
                             break;
                         case ReportTable { SupplementOnly: true }:
                             break;
