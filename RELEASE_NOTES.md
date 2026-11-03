@@ -4,6 +4,80 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.0 (release candidate, not published)
+
+This candidate includes the accepted family analysis and reporting work for 2.1.0.
+Publication waits for the full release gate and the final project export. The program,
+report and deployment profile identify this version as 2.1.0.0.
+
+- **Your own family panel.** Import a spreadsheet by choosing its columns and mapping each
+  decision to Quantify, Report under others, Not a family or Merge into another family.
+  Edit the panel, save a reusable spreadsheet template, and keep names, domain lists,
+  subclass rules, literature text, notes and sources in the project. Pfam checking lists
+  accession/name mismatches and reports when an online check is unavailable.
+- **Families by evidence, with confirmation.** Source families and domain combinations
+  are linked to your panel from reviewed evidence. Ambiguous links are shown for you to
+  confirm once and save with an explanatory note. Accompanying domains distinguish shared
+  domains. Proteins without qualifying evidence remain outside the panel families. Apply
+  is one undoable change; the audit records each protein's evidence and reason.
+- **Subclasses and unresolved signal.** Define subclasses with required and absent domains
+  or source subfamily text. Eligible reviewed-reference evidence can carry a subclass to
+  another protein. Peptides reach the deepest level they distinguish; unresolved signal
+  stays labelled within its family.
+- **Run statistics and panel-family totals.** Family shares are available for each run,
+  with mean, standard deviation and coefficient of variation. Protein counts show a
+  labelled greedy database-protein estimate and support from proteins' own peptides.
+  Panel-family briefs and exports use stored totals for effective panel families, including
+  merged groups; candidate keys are combined before shared-peptide credit. The existing
+  headline and source-group studies retain their stated units. Abundance and database-protein
+  diversity stay separate, with the estimate and denominator printed beside the share.
+- **Composition and coverage figures.** Family and subclass charts, a family/subclass ring,
+  abundance against protein diversity, signal-source comparisons and protein coverage maps
+  use stored results. Captions explain the figures and include values from those results.
+  Large figure exports are bounded or paged, with detail data retained when a figure is capped.
+- **A Word report and its supplement.** File > Export report lets you choose sections and
+  figures and saves those choices. The companion `<report>_supplement.xlsx` retains detailed
+  protein, peptide, run and audit tables, plus printed inputs and settings. Long list values
+  move to item sheets linked to their original row, while the original cell gives the item
+  count and sheet reference. Word tables fit their headers and keep rows and their
+  captions together. Native table cells and scientific values are retained.
+- **A program-written Summary of findings.** Fixed templates report values, counts, ranks,
+  ranges and available comparisons from stored studies. Statements appear only when their
+  data exist. The supplement holds the numbers used by the summary. The program supplies
+  this section without an AI service.
+- **Saved report details and methods.** Title, authors, sample description, workflow,
+  database kind and written interpretation are saved with the project. Input names, hashes
+  and recorded search settings supply the methods. The report prints the running version.
+  A saved reporting threshold, initially 0.1%, drives the same Others membership in tables
+  and family briefs; the detailed list remains in the supplement.
+- **Numbers that can be traced.** A command checks numeric text in the Word file against
+  companion CSV/workbook cells and lists unmatched values with their context. Family-rule
+  leave-one-out measurements and reasoned differences from a prior grouping can also be
+  exported. File > Export > Interpretation input (Markdown) writes report details, the
+  panel, stored results and methods as one plain file for an assistant of your choice.
+- **Optional AI drafts under your control.** Help > AI assistant key lets you add, test,
+  replace or remove your Anthropic key, protected for your Windows user. You can import a
+  key file beside a project. Draft interpretation with AI shows the input before a request,
+  checks returned numbers and requires your review before adding a labelled draft to Report
+  details. Its preview matches the Interpretation input export, and number checks read
+  the exported table cells. The key is kept outside saved projects and reports.
+- **Progress and reusable search results.** Compute and project opening show counted phases,
+  live elapsed clocks and cancellation, with timestamped operation logs. Report export
+  names the current section, figure or sheet and its counts. Matching stored inputs and
+  search settings allow attribution and source census results to be reused. Compute also
+  reuses its current attribution for the family-world pass instead of repeating the search.
+  Online evidence requests are batched for larger reference sets, retaining provenance.
+- **Saving larger projects.** Curation JSON is streamed through saving and saved-file
+  checks, reducing memory use while retaining its existing format.
+- **Fixes found during real-data work.** Compute caches and spectrum exports use a per-user
+  folder. The de novo picker recognizes files in the selected folder. Family-world quality
+  rows explain when credited signal is too small for a rate. New report/audit protein names
+  omit the header's organism tail. Export becomes available when attribution finishes;
+  report-thread handling and diagnostic messages cover full-project exports. A completed
+  study shows zero with "no peptide observed" when no peptide reaches a family; an unavailable
+  result retains its reason. Help
+  explains the panel-to-report workflow, scope phrases, progress, cached reopening and link notes.
+
 ## 2.0 development update (not published)
 
 FamilyQuant 2.0 continues as a separate installation beside 1.5. Release acceptance remains
