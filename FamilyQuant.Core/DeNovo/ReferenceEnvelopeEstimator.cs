@@ -127,12 +127,14 @@ namespace FamilyQuant.DeNovo
             result.SensitivityUpperEstimate = Math.Max(
                 result.FixedBinDeNovoEstimate, result.PooledRatioDeNovoEstimate);
 
+            var membersByBin = new List<NativePeptideQuant>[MassBinUpperBounds.Length];
             double lower = 0.0;
             for (int bin = 0; bin < MassBinUpperBounds.Length; bin++)
             {
                 int current = bin;
                 List<NativePeptideQuant> members = identified
                     .Where(p => BinOf(p.MonoisotopicMass) == current).ToList();
+                membersByBin[bin] = members;
                 double m0 = members.Sum(p => p.AreaM0);
                 double envelope = members.Sum(p => p.EnvelopeSum);
                 result.Bins.Add(new ReferenceEnvelopeBinDiagnostic
@@ -156,12 +158,23 @@ namespace FamilyQuant.DeNovo
             double observedTotal = 0.0;
             foreach (NativePeptideQuant heldOut in identified)
             {
-                List<NativePeptideQuant> peers = identified.Where(p => !ReferenceEquals(p, heldOut)).ToList();
-                double peerPooled = PooledRatio(peers);
                 int bin = BinOf(heldOut.MonoisotopicMass);
-                double peerM0 = peers.Where(p => BinOf(p.MonoisotopicMass) == bin).Sum(p => p.AreaM0);
-                double peerEnvelope = peers.Where(p => BinOf(p.MonoisotopicMass) == bin).Sum(p => p.EnvelopeSum);
-                double ratio = SafeRatio(peerEnvelope, peerM0, peerPooled);
+                // The bin lists retain the original order. Keep the exact same Sum operation and
+                // remove all occurrences of the held-out reference, just as the original loop did.
+                // Subtracting one value from a precomputed total would change floating-point results.
+                List<NativePeptideQuant> members = membersByBin[bin];
+                double peerM0 = members.Where(p => !ReferenceEquals(p, heldOut)).Sum(p => p.AreaM0);
+                double peerEnvelope = members.Where(p => !ReferenceEquals(p, heldOut)).Sum(p => p.EnvelopeSum);
+                double localRatio = peerM0 > 0 ? peerEnvelope / peerM0 : double.NaN;
+                double ratio;
+                if (double.IsFinite(localRatio)) ratio = Math.Max(1.0, localRatio);
+                else
+                {
+                    // Only an unsupported/invalid local ratio uses the pooled fallback. Preserve
+                    // its old peer order and calculation when it is actually needed.
+                    List<NativePeptideQuant> peers = identified.Where(p => !ReferenceEquals(p, heldOut)).ToList();
+                    ratio = SafeRatio(peerEnvelope, peerM0, PooledRatio(peers));
+                }
                 double predicted = heldOut.AreaM0 * ratio;
                 double error = predicted - heldOut.EnvelopeSum;
                 absoluteError += Math.Abs(error);
