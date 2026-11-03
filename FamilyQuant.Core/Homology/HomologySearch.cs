@@ -88,22 +88,30 @@ namespace FamilyQuant.Homology
             if (progressLabel != null) operation?.Report(progressStage, progressLabel, 0, queries.Count);
             object progressGate = new object();
             var parallelOptions = new ParallelOptions { CancellationToken = operation?.CancellationToken ?? CancellationToken.None };
-            Parallel.For(0, queries.Count, parallelOptions, i =>
+            try
             {
-                (string Raw, string Normalized, string? Rejection) query = queries[i];
+                Parallel.For(0, queries.Count, parallelOptions, i =>
+                {
+                    (string Raw, string Normalized, string? Rejection) query = queries[i];
 
-                results[i] = query.Rejection != null
-                    ? new HomologyResult(query.Raw, string.Empty, query.Rejection,
-                        Array.Empty<HomologyHit>(), false, false, 0, false)
-                    : SearchNormalized(query.Raw, query.Normalized, database, opts, operation, positionalIndex);
-                if (operation != null)
-                    lock (progressGate)
-                    {
-                        if (++completed % progressBatchSize == 0 || completed == queries.Count)
-                            operation.Report(progressStage, progressLabel == null ? "Searched peptide queries" : progressLabel + " "
-                                + completed.ToString(CultureInfo.InvariantCulture) + " of " + queries.Count.ToString(CultureInfo.InvariantCulture), completed, queries.Count);
-                    }
-            });
+                    results[i] = query.Rejection != null
+                        ? new HomologyResult(query.Raw, string.Empty, query.Rejection,
+                            Array.Empty<HomologyHit>(), false, false, 0, false)
+                        : SearchNormalized(query.Raw, query.Normalized, database, opts, operation, positionalIndex);
+                    if (operation != null)
+                        lock (progressGate)
+                        {
+                            if (++completed % progressBatchSize == 0 || completed == queries.Count)
+                                operation.Report(progressStage, progressLabel == null ? "Searched peptide queries" : progressLabel + " "
+                                    + completed.ToString(CultureInfo.InvariantCulture) + " of " + queries.Count.ToString(CultureInfo.InvariantCulture), completed, queries.Count);
+                        }
+                });
+            }
+            finally
+            {
+                // Parallel.For has joined every worker; no returned result refers to postings.
+                positionalIndex?.Release();
+            }
 
             return new List<HomologyResult>(results);
         }
@@ -528,6 +536,8 @@ namespace FamilyQuant.Homology
                 }
             }
 
+            internal void Release() => Array.Clear(postings);
+
             private readonly record struct PostingCursor(int QueryOffset, int NextPosting);
 
             internal List<GateHit> PassingProteins(string query, char[] foldedQuery, char[] fold,
@@ -577,6 +587,7 @@ namespace FamilyQuant.Homology
                     if (identity == query.Length) exactOffset = start;
                 }
                 CompleteProtein();
+                Array.Clear(buckets); // Do not leave posting references in worker-local closure state.
                 return passed;
 
                 void CompleteProtein()
