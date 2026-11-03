@@ -5,184 +5,184 @@
   "runs": [
     {
       "id": "EV-threeway",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --isolated-native-proof --prove-threeway D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway \u00222026-11-02 15:27:54 -0800\u0022",
-      "executedAt": "2026-11-02 15:27:54 -0800",
-      "commit": "c8b13e88c43dc4f00299cdf2d27b24315528be67",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --isolated-native-proof --prove-threeway D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway \u00222026-11-02 17:03:53 -0800\u0022",
+      "executedAt": "2026-11-02 17:03:53 -0800",
+      "commit": "195978ab59361dc83418563bf9cbd373a1500686",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\comparisons.log",
           "sha256": "9C950FC7D7B9D4BD5A61083756D9FC21EFBE6C47E49496ED741F3B2B58944646"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\comparisons.json",
           "sha256": "2AB99AB4B397C7A44685319379FFBCE038EABAC71A5D0486E26EDE5AB4AC4CDE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Core_DeNovo_ThreeWayPartition.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Core_DeNovo_ThreeWayPartition.cs",
           "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant_DeNovo_ThreeWayChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant_DeNovo_ThreeWayChart.cs",
           "sha256": "19F9F13A529D85160EF4E5ABE462ED7762374B37CB94205487BE98D4328FF601"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant_DeNovo_ThreeWayWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant_DeNovo_ThreeWayWindow.cs",
           "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant_ChartDrawingBase.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant_ChartDrawingBase.cs",
           "sha256": "D217B023C2A53E6B480245F226E0FC9A5CFC810BAF2115EE1D1624D248A6CFA4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant_ShellDialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant_ShellDialogs.cs",
           "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_Program.ThreeWayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_Program.ThreeWayLedger.cs",
           "sha256": "5C73548681969030FC01DA48BEE2E7FA1AB02D0EC835DB7FFB3D92E1DD92A149"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_NativeProofDesktop.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_NativeProofDesktop.cs",
           "sha256": "E00BADD2FB785CB1750FDD704AF7F9D93C040CD1A5BE59ABDF864C91FEE7B3AF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_NativeOwnedDialogDriver.cs",
-          "sha256": "26D033FCB83984AE8F13651C7F6CEDB4B991EFB701826DD407010F34AE434E6C"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_NativeOwnedDialogDriver.cs",
+          "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_Program.DeNovoLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_Program.DeNovoLedger.cs",
           "sha256": "E9B6D9A40F09CB9141A071CA58D8B376729299E1420410E922E458751A170206"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_Program.Commands.DeNovoLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_Program.Commands.DeNovoLedger.cs",
           "sha256": "B4116A6A47B9A014A4E1ED11F17B94E802EFB7151158BDAC6DE1F226557F741F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRuntime.cs",
           "sha256": "E22B29DA8275597B3578912FF943695F72DB2643B1FFB6C29238F7E943BD5F65"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerWorkflow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerWorkflow.cs",
           "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRefusals.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRefusals.cs",
           "sha256": "52CFC17EFCE971ED19E8459C97433A0F0CC2EB5D8595F7ADEDC561A23D37E54D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_FeatureLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_FeatureLedger.cs",
           "sha256": "AD0C3159448A0945A99AC10C8C7474F78DE35DA5B4B97C520196079FB510689A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests_FeatureLedgerEvidence.cs",
           "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\frozen_FamilyQuant_DeNovoControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\frozen_FamilyQuant_DeNovoControl.xaml",
           "sha256": "E7F6B72A22E658A4CFCBD4BD6FDC3DF42AAC0F0DEBAA5EF8B3CA337B736F51BF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\frozen_FamilyQuant_DeNovoControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\frozen_FamilyQuant_DeNovoControl.xaml.cs",
           "sha256": "16D617F16382298A4A60238100D58B65CE03A6562C4B3F0B5B37C629E70A40BF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "6973C11D3D97B387E46A476A27367967E0650E1D919F7E72794A63272AED15BA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "B43B50E264A70B663BD3C9B3B08D12F56896092187B4C806C1CC512D16B9E1C1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant2.dll",
-          "sha256": "8B369B7B5712FA4246AD82C762D59B07B84730C4B2F0CD88EF93B5D7B0B98A70"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant2.dll",
+          "sha256": "0BCB360AD78A47A467A843B941A877356068E8B185FC3342A131A7C5F1BF6D0C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Core.dll",
-          "sha256": "6A383E518F8CCCA811D60197256B259F9221E75407BD73D3B57A66439B8DF4BF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\executed\\FamilyQuant.Core.dll",
+          "sha256": "2715F1E0E0B3E7030E251BF5FB144F8807F1568B226C62DF98D0D7846C269A1E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\en-US-frozen-api.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\en-US-frozen-api.csv",
           "sha256": "C9505C5166F28939F1261C22ADD450C1C5DB1014C390D7F86A2FCF80A4C0B126"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\en-US-frozen-chosen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\en-US-frozen-chosen.csv",
           "sha256": "C9505C5166F28939F1261C22ADD450C1C5DB1014C390D7F86A2FCF80A4C0B126"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\en-US-frozen-values.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\en-US-frozen-values.png",
           "sha256": "5BD54D67E63E40B8E422073D6A654008461C3CF7D17A5AB751524DFBE5706A55"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\en-US-frozen-empty.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\en-US-frozen-empty.png",
           "sha256": "E324483C9D18FE9CE6491C00DFBA43C95FB0003EEA60F536B2A56CB0F2A46C43"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\en-US-current-api.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\en-US-current-api.csv",
           "sha256": "C9505C5166F28939F1261C22ADD450C1C5DB1014C390D7F86A2FCF80A4C0B126"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\en-US-current-chosen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\en-US-current-chosen.csv",
           "sha256": "C9505C5166F28939F1261C22ADD450C1C5DB1014C390D7F86A2FCF80A4C0B126"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\en-US-current-values.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\en-US-current-values.png",
           "sha256": "7540AF5232403193DD20B1160CD4818FF044235E8E69D44D40697080FBEFD204"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\en-US-current-empty.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\en-US-current-empty.png",
           "sha256": "A91148368494AC9893FA129226B83724A36BCD61205BB433A6BA41705D66BD06"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\fr-FR-frozen-api.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\fr-FR-frozen-api.csv",
           "sha256": "C9505C5166F28939F1261C22ADD450C1C5DB1014C390D7F86A2FCF80A4C0B126"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\fr-FR-frozen-chosen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\fr-FR-frozen-chosen.csv",
           "sha256": "C9505C5166F28939F1261C22ADD450C1C5DB1014C390D7F86A2FCF80A4C0B126"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\fr-FR-frozen-values.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\fr-FR-frozen-values.png",
           "sha256": "43FB6CF3405EA38DE9BBDEA1C53FA2A739EA820C67351055EC53000602BCC386"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\fr-FR-frozen-empty.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\fr-FR-frozen-empty.png",
           "sha256": "E324483C9D18FE9CE6491C00DFBA43C95FB0003EEA60F536B2A56CB0F2A46C43"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\fr-FR-current-api.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\fr-FR-current-api.csv",
           "sha256": "C9505C5166F28939F1261C22ADD450C1C5DB1014C390D7F86A2FCF80A4C0B126"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\fr-FR-current-chosen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\fr-FR-current-chosen.csv",
           "sha256": "C9505C5166F28939F1261C22ADD450C1C5DB1014C390D7F86A2FCF80A4C0B126"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\fr-FR-current-values.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\fr-FR-current-values.png",
           "sha256": "39154E45CFB31C23401F7FA70D67723FE21EF10E14B98C88F5A224E7B8E1597E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\fr-FR-current-empty.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\fr-FR-current-empty.png",
           "sha256": "A91148368494AC9893FA129226B83724A36BCD61205BB433A6BA41705D66BD06"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\threeway-data.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\threeway-data.json",
           "sha256": "1C5BCD08F89110F4D0845E6C63472D5E0142AC5CC57CDFB6AA62AC4764191DA3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\frozen_ThreeWayChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\frozen_ThreeWayChart.cs",
           "sha256": "FFA65943CE62A142F2AC540BB9C4E1B68937450EA2163545851455A15D8D5A58"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\frozen_ThreeWayPartition.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\frozen_ThreeWayPartition.cs",
           "sha256": "93A2DE151FF17493C8DB7A70AD067C9B68140377009E576032CADC48CC78B477"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\frozen_ThreeWayWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\frozen_ThreeWayWindow.cs",
           "sha256": "0F4A00A02A788A72DE9A980B231E4B98B92EF5D9CD3F35369841B6B69C8B8D74"
         }
       ],
@@ -231,7 +231,7 @@
         {
           "path": "FamilyQuant.Tests/NativeOwnedDialogDriver.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "26D033FCB83984AE8F13651C7F6CEDB4B991EFB701826DD407010F34AE434E6C"
+          "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         }
       ],
       "proofs": [],
@@ -280,7 +280,7 @@
         {
           "path": "FamilyQuant.Tests/NativeOwnedDialogDriver.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "26D033FCB83984AE8F13651C7F6CEDB4B991EFB701826DD407010F34AE434E6C"
+          "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         }
       ],
       "proofs": [],
@@ -329,7 +329,7 @@
         {
           "path": "FamilyQuant.Tests/NativeOwnedDialogDriver.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "26D033FCB83984AE8F13651C7F6CEDB4B991EFB701826DD407010F34AE434E6C"
+          "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         }
       ],
       "proofs": [],
@@ -378,7 +378,7 @@
         {
           "path": "FamilyQuant.Tests/NativeOwnedDialogDriver.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "26D033FCB83984AE8F13651C7F6CEDB4B991EFB701826DD407010F34AE434E6C"
+          "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         }
       ],
       "proofs": [],
@@ -427,7 +427,7 @@
         {
           "path": "FamilyQuant.Tests/NativeOwnedDialogDriver.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "26D033FCB83984AE8F13651C7F6CEDB4B991EFB701826DD407010F34AE434E6C"
+          "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         }
       ],
       "proofs": [],
@@ -476,7 +476,7 @@
         {
           "path": "FamilyQuant.Tests/NativeOwnedDialogDriver.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "26D033FCB83984AE8F13651C7F6CEDB4B991EFB701826DD407010F34AE434E6C"
+          "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         }
       ],
       "proofs": [],
@@ -525,7 +525,7 @@
         {
           "path": "FamilyQuant.Tests/NativeOwnedDialogDriver.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "26D033FCB83984AE8F13651C7F6CEDB4B991EFB701826DD407010F34AE434E6C"
+          "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         }
       ],
       "proofs": [],
@@ -544,7 +544,7 @@
           "kind": "test",
           "target": "ThreeWayLedgerProof",
           "assertion": "Whole three-way numeric, CSV and native window Save/cancel contract passed in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -558,7 +558,7 @@
           "kind": "test",
           "target": "ThreeWayLedgerProof",
           "assertion": "Whole three-way numeric, CSV and native window Save/cancel contract passed in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -572,7 +572,7 @@
           "kind": "test",
           "target": "ThreeWayLedgerProof",
           "assertion": "Whole three-way numeric, CSV and native window Save/cancel contract passed in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-152728-FamilyQuant-gate\\ev-threeway\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-170333-FamilyQuant-gate\\ev-threeway\\comparisons.log",
           "inspectedBy": ""
         }
       ]

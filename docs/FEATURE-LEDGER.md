@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN retained rows: **26**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5445**; OPEN retained rows: **15**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -380,7 +380,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-1DD0C23A46B1 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:184 | Button ButtonSuperCluster | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-1DD0C23A46B1 |
 | FQ15-AA5164A600DE | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:184 | ButtonSuperCluster.Content = Create Super Cluster | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-AA5164A600DE |
 | FQ15-D3695665884F | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:185 | ButtonSuperCluster.Click = ButtonSuperCluster_Click | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-D3695665884F |
-| FQ15-0F3C5F5D43F5 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:185 | ButtonSuperCluster.IsEnabled = False | render:03-curation | OPEN | pending |
+| FQ15-0F3C5F5D43F5 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:185 | ButtonSuperCluster.IsEnabled = False | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-0F3C5F5D43F5 |
 | FQ15-CF4118C913D1 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:186 | ButtonSuperCluster.ToolTip = Shows every protein that would join, each with a tick, before anything changes, then gathers the ticked ones into one family, and Undo steps it back. Disabled until you type a keyword in the box to the left. | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-CF4118C913D1 |
 | FQ15-79D69E00F881 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:205 | Label.Content = Selected rows: | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-79D69E00F881 |
 | FQ15-9341741EB757 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:206 | Label.ToolTip = Changes every row you have selected in the table at once, instead of one row at a time. | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-9341741EB757 |
@@ -583,7 +583,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-096C041B090E | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:582 | "Why: the project was exported before PatternLab wrote down which divisor it " | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-096C041B090E |
 | FQ15-6C89A4C935C2 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:583 | "used, so it carries no per-run totals at all. Re-exporting it from XQuant " | render:03-curation | OPEN | pending |
 | FQ15-273B67957802 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:584 | "records the divisor and every run's totals, and this mode then becomes " | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-273B67957802 |
-| FQ15-6EF740A445CE | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:585 | "available." | render:03-curation | OPEN | pending |
+| FQ15-6EF740A445CE | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:585 | "available." | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour2:FQ15-6EF740A445CE |
 | FQ15-8BAA6A95F82C | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:588 | "The project loaded correctly and the table is already showing numbers.\n\n" | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-8BAA6A95F82C |
 | FQ15-6355E948918B | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:589 | "One of the four reporting modes, \"" | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-6355E948918B |
 | FQ15-092234152503 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:590 | "\", is greyed out for it.\n\n" | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-092234152503 |
@@ -1415,7 +1415,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-4712D0663AE7 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:626 | ButtonDeNovoHelp.ToolTip = Opens the help page for this screen in a window you can keep open. It explains the source, the three filters, the reconciliation and the review queue. | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-4712D0663AE7 |
 | FQ15-E97749D4FBD7 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:630 | TextBlockDeNovoStatus.ToolTip = What is on screen and what to do next. Refused values, empty folders and unreadable files are reported here, not in pop-ups. | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-E97749D4FBD7 |
 | FQ15-2C97986F49B6 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:224 | "Step 1 of 5 \u00B7 Nothing imported yet. Choose a de novo source and its export folder, " | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-2C97986F49B6 |
-| FQ15-56EFD9B009FD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:225 | "check the three confidence filters, and press \"Load and filter\". Layers 2 to 5 stay " | render:06-denovo-advanced | OPEN | pending |
+| FQ15-56EFD9B009FD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:225 | "check the three confidence filters, and press \"Load and filter\". Layers 2 to 5 stay " | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-56EFD9B009FD |
 | FQ15-36B91CD8D874 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:226 | "blocked until a filter pass has kept at least one row, because there would be nothing " | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-36B91CD8D874 |
 | FQ15-44D78614B3B0 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:227 | "to reconcile, extract, search or partition." | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-44D78614B3B0 |
 | FQ15-29D6899AC930 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:248 | "Set the source, folder and three filters here, and re-apply them as often as you like." | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-29D6899AC930 |
@@ -1578,7 +1578,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-50D78F955352 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:865 | "Package chosen: " | test:DeNovoCommandEvidence | VERIFIED | evidence:EV-denovo-commands-1:FQ15-50D78F955352 |
 | FQ15-66E8A7C104BB | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:866 | ". Next step: press Reconcile. Reading a real package takes a while, and the " | test:DeNovoCommandEvidence | VERIFIED | evidence:EV-denovo-commands-1:FQ15-66E8A7C104BB |
 | FQ15-8A3FE99F899F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:867 | "screen is disabled while it is read." | test:DeNovoCommandEvidence | VERIFIED | evidence:EV-denovo-commands-1:FQ15-8A3FE99F899F |
-| FQ15-48FB6F4B7D66 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:912 | "Nothing was reconciled: no de novo rows have been kept, so there is nothing " | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-48FB6F4B7D66 |
+| FQ15-48FB6F4B7D66 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:912 | "Nothing was reconciled: no de novo rows have been kept, so there is nothing " | test:ShellBehaviour | OPEN | pending: execution evidence missing or stale |
 | FQ15-EEAE18669485 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:913 | "to join. Next step: import the selected de novo export in Step 1 first." | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-EEAE18669485 |
 | FQ15-4C022BBC59E5 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:922 | "Nothing was reconciled: " | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-4C022BBC59E5 |
 | FQ15-881A29BF5EF9 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:923 | "no SEPro package has been chosen yet." | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-881A29BF5EF9 |
@@ -1633,7 +1633,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-2F1943F151BD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1031 | "N0" | test:DeNovoLedgerRefusalsCommand | VERIFIED | evidence:EV-denovo-refusals-1:FQ15-2F1943F151BD |
 | FQ15-9FADDFA46BAD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1034 | "N0" | test:DeNovoLedgerRefusalsCommand | VERIFIED | evidence:EV-denovo-refusals-1:FQ15-9FADDFA46BAD |
 | FQ15-3A03B46544B3 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1042 | "There is no reconciliation to export; run one in Layer 2 first." | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-3A03B46544B3 |
-| FQ15-8504F0703DBD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1051 | "There is no reconciliation to export; run one in Layer 2 first." | render:06-denovo-advanced | OPEN | pending |
+| FQ15-8504F0703DBD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1051 | "There is no reconciliation to export; run one in Layer 2 first." | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour2:FQ15-8504F0703DBD |
 | FQ15-14EF12F7CDE7 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1059 | "There is no overlap study to export; run a reconciliation in Step 2 first." | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-14EF12F7CDE7 |
 | FQ15-6CF0E14054FF | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1068 | "FamilyQuant_DeNovo_Summary.csv" | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-6CF0E14054FF |
 | FQ15-40D8097A6172 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1068 | "Save the per-run verdict summary as CSV" | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-40D8097A6172 |
@@ -1661,7 +1661,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-0B80DA4AC931 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1141 | "familyquant_denovo_cache" | test:DeNovoLedgerRefusalsCommand | VERIFIED | evidence:EV-denovo-refusals-1:FQ15-0B80DA4AC931 |
 | FQ15-559419114576 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1158 | "denovo_xic_" | test:DeNovoLedgerRefusalsCommand | VERIFIED | evidence:EV-denovo-refusals-1:FQ15-559419114576 |
 | FQ15-1261C8386BA2 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1158 | ".json" | test:DeNovoLedgerRefusalsCommand | VERIFIED | evidence:EV-denovo-refusals-1:FQ15-1261C8386BA2 |
-| FQ15-7497282283CE | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1170 | "run" | render:06-denovo-advanced | OPEN | pending |
+| FQ15-7497282283CE | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1170 | "run" | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-7497282283CE |
 | FQ15-CBB0FB1278B5 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1221 | "*.raw" | test:DeNovoLedgerRefusalsCommand | VERIFIED | evidence:EV-denovo-refusals-1:FQ15-CBB0FB1278B5 |
 | FQ15-0E55F1153027 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1242 | ".raw" | test:DeNovoLedgerRefusalsCommand | VERIFIED | evidence:EV-denovo-refusals-1:FQ15-0E55F1153027 |
 | FQ15-638BCF7E6784 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1279 | "No reconciliation yet. Which kept run found which .raw appears here." | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-638BCF7E6784 |
@@ -3977,13 +3977,13 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-D6942502EDAD | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:56 | MenuItemHelp.Header = Help | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-D6942502EDAD |
 | FQ15-7C5612C5D068 | IMPROVE | control | FamilyQuant/MainWindow.xaml:57 | MenuItem MenuItemHowToRead | test:LedgerTextPreservedCommand | VERIFIED | evidence:N6a-text:FQ15-7C5612C5D068 |
 | FQ15-F07F017EF771 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:57 | MenuItemHowToRead.Header = How to read these numbers | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-F07F017EF771 |
-| FQ15-D36A80A151FF | KEEP | handler | FamilyQuant/MainWindow.xaml:57 | MenuItemHowToRead.Click = MenuItemHowToRead_Click | render:01-home | OPEN | pending |
+| FQ15-D36A80A151FF | KEEP | handler | FamilyQuant/MainWindow.xaml:57 | MenuItemHowToRead.Click = MenuItemHowToRead_Click | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-D36A80A151FF |
 | FQ15-34708753E1F6 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:58 | MenuItemHowToRead.ToolTip = Explains every number the program shows, such as what the percentages are of and what a shared peptide is. On the De Novo screen it opens that screen's own help. | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-34708753E1F6 |
 | FQ15-92FDC5469A5B | IMPROVE | control | FamilyQuant/MainWindow.xaml:59 | MenuItem MenuItemWhereAmI | test:LedgerTextPreservedCommand | VERIFIED | evidence:N6a-text:FQ15-92FDC5469A5B |
 | FQ15-8D5FBCC18545 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:59 | MenuItemWhereAmI.Header = What do I do first? | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-8D5FBCC18545 |
-| FQ15-4B1A5D805051 | KEEP | handler | FamilyQuant/MainWindow.xaml:59 | MenuItemWhereAmI.Click = MenuItemWhereAmI_Click | render:01-home | OPEN | pending |
+| FQ15-4B1A5D805051 | KEEP | handler | FamilyQuant/MainWindow.xaml:59 | MenuItemWhereAmI.Click = MenuItemWhereAmI_Click | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-4B1A5D805051 |
 | FQ15-FCF24F202E4B | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:60 | MenuItemWhereAmI.ToolTip = Lists the order of work, from a protein database to an exported table, and what each step needs. The de novo review at the end is optional. | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-FCF24F202E4B |
-| FQ15-18DC9493B812 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:70 | TextBlockGuide.ToolTip = Shows where you are in the workflow and what to do next. It updates as you go. | render:01-home | OPEN | pending: execution evidence missing or stale |
+| FQ15-18DC9493B812 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:70 | TextBlockGuide.ToolTip = Shows where you are in the workflow and what to do next. It updates as you go. | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-18DC9493B812 |
 | FQ15-B4108C63AE7B | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:130 | "No project open." | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-B4108C63AE7B |
 | FQ15-A37F6028953D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:186 | "Home \u00B7 The whole flow in four steps, plus the optional de novo side-branch. " | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-A37F6028953D |
 | FQ15-FF63C6DC71DE | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:187 | " Pick a step below, or open a project in step 2 to light up " | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-FF63C6DC71DE |
@@ -4196,8 +4196,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-0AD0CE6F978B | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:598 | private void MenuItemComputeXic_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-0AD0CE6F978B |
 | FQ15-65700BDA90F3 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:713 | private async void MenuItemSpectrumComparison_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-65700BDA90F3 |
 | FQ15-A79FAB873090 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:759 | private void MenuItemReanotateSEPro_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-A79FAB873090 |
-| FQ15-C4526422A15C | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:841 | private void MenuItemHowToRead_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
-| FQ15-8921B21922FE | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:865 | private void MenuItemWhereAmI_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
+| FQ15-C4526422A15C | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:841 | private void MenuItemHowToRead_Click(object sender, RoutedEventArgs e) | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-C4526422A15C |
+| FQ15-8921B21922FE | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:865 | private void MenuItemWhereAmI_Click(object sender, RoutedEventArgs e) | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-8921B21922FE |
 | FQ15-CC6338717408 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:79 | "% of whole chromatogram (TIC)" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-CC6338717408 |
 | FQ15-CF6242EC1B06 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:80 | "% of extracted peptide signal" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-CF6242EC1B06 |
 | FQ15-D7814E39110C | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:81 | "% of charge-restricted signal" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-D7814E39110C |
@@ -5589,7 +5589,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-C6B03035EC8E | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:44 | "Already running" | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-C6B03035EC8E |
 | FQ15-95FF9241616A | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:55 | "Working \u00B7 " | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-95FF9241616A |
 | FQ15-A5848F93B253 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:55 | " This runs USEARCH and cannot be interrupted; " | render:02-build | OPEN | pending |
-| FQ15-7AC0BC9F0603 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:56 | "the buttons come back when it finishes." | render:02-build | OPEN | pending |
+| FQ15-7AC0BC9F0603 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:56 | "the buttons come back when it finishes." | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-7AC0BC9F0603 |
 | FQ15-FEFB7367FD8C | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:79 | "Step 1 of 4 \u00B7 Pick a protein database and press \"Input a FASTA file\". That writes a " | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-FEFB7367FD8C |
 | FQ15-5A8FC191A0CF | KEEP | format/export | FamilyQuant/USearch.xaml.cs:80 | "Family Cluster File (.fcf) beside it, which you then open with File \u00B7 Load Family " | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-5A8FC191A0CF |
 | FQ15-F8E23411BA47 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:81 | "Cluster File." | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-F8E23411BA47 |
@@ -5713,7 +5713,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-7F5D121CAE28 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:367 | "Choose the FASTA to remove redundant sequences from" | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-7F5D121CAE28 |
 | FQ15-9EFCC84CCA4E | KEEP | format/export | FamilyQuant/USearch.xaml.cs:375 | "_NO_REDUNDANCY.fasta" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-9EFCC84CCA4E |
 | FQ15-3B50E44350B4 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:383 | "Working \u00B7 removing redundant sequences from " | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-3B50E44350B4 |
-| FQ15-3385D4BF21BC | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:384 | ". The original order and headers are kept; the buttons come back when it finishes." | render:02-build | OPEN | pending |
+| FQ15-3385D4BF21BC | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:384 | ". The original order and headers are kept; the buttons come back when it finishes." | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-3385D4BF21BC |
 | FQ15-08A48106FA52 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:394 | "N0" | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-08A48106FA52 |
 | FQ15-E52A3DE9EC22 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:394 | " sequences went in and " | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-E52A3DE9EC22 |
 | FQ15-1806195BBDE7 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:395 | "N0" | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-1806195BBDE7 |
