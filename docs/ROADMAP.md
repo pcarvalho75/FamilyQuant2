@@ -111,8 +111,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 | K9 | Full gate on the candidate: every ledger receipt current (quick gates defer them) | M | 0.5 | K8 | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
 | K10 | The unpacked candidate exports the final project's report through the real menu | L | 0.3 | K9, K6 | K11 | Files and times recorded | EV | | 0 | 0 | |
 | K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | K10 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
-| K12 | Install check rehearsed now on the published 2.0.0: download from GitHub, SHA-256, unpack, open a project, Check for updates | L | 0.3 | 🟢 | K13 | A written install log | EV | | 0 | 0 | |
-| K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | K11, K12 | | Both pass | EV | | 0 | 0 | |
+| K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | K11 | | Both pass | EV | | 0 | 0 | |
 
 ### W5 Ana's report delivered
 
@@ -147,9 +146,7 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 | J33c | J33 reviewed and merged | L | 0.2 | 🟢 | J37a, J40 | Approved; gate green | T2 | | 0 | 0 | |
 | J37a | A confirmed family link keeps a short note on why, saved with the project and printed in the report's method | L | 0.5 | J33c | J37b | Survives save and reopen; appears in the method table | T2 | | 0 | 0 | |
 | J37b | J37 reviewed and merged | L | 0.2 | J37a | | Approved; gate green | T2 | | 0 | 0 | |
-| J27b | One total per panel family: the program computes and stores the per-panel-family totals when several families share a panel family (contract posted) | M | 1 | 🟢 | J27c | A fixture's stored totals credit a shared peptide once | FL | | 0 | 0 | |
-| J27c | The per-family briefs and new exports read those totals; the headline keeps its unit (D40) | M | 0.5 | J27b | J27d | Old exports unchanged; new exports added | FL | | 0 | 0 | |
-| J27d | J27 reviewed and merged | L | 0.2 | J27c | | Approved; gate green | FL | | 0 | 0 | |
+| J27d | J27 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | FL | | 0 | 0 | |
 | J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | J33c, J35c | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
 
 ## Critical path
