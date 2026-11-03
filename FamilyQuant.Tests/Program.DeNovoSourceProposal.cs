@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 
@@ -102,5 +104,46 @@ internal static partial class Program
         automatic.DeNovoDirectory = only;
         PumpDispatcher();
         Check("the native source picker can override automatic detection", automatic.Filters.ModeTag == "deepnovo");
+
+        var previous = new DeNovoImport { RowsRead = 1, Kept = new() { new() { Peptide = "PEPTIDEK" } } };
+        var pending = new TaskCompletionSource<DeNovoImport>();
+        var inspection = new DeNovoViewModel { ImportDirectory = all, ImportOverride = (_, _) => pending.Task };
+        inspection.ApplyImport(previous);
+        string originalCriteria = JsonSerializer.Serialize(inspection.Criteria);
+        string originalProposal = inspection.Filters.SourceProposalText;
+        Task importing = inspection.ImportAsync();
+        Check("an automatic import proposal retains the prior evidence until replacement is published",
+            inspection.Filters.ModeTag == "peaks-all" && ReferenceEquals(inspection.LastImport, previous) && inspection.IsBusy);
+        inspection.Operations.Cancel();
+        pending.SetResult(new DeNovoImport());
+        FinishBusyTask(importing);
+        Check("cancelled automatic selection restores the prior source, criteria and evidence",
+            ReferenceEquals(inspection.LastImport, previous) && JsonSerializer.Serialize(inspection.Criteria) == originalCriteria
+            && inspection.Filters.ModeTag == "peaks-only" && inspection.Filters.SourceProposalText == originalProposal
+            && inspection.Status.StartsWith("Cancelled", StringComparison.Ordinal) && inspection.CanEdit);
+        var replacement = new DeNovoImport { RowsRead = 2, Kept = new() { new() { Peptide = "PEPTIDEK" } } };
+        inspection.ImportOverride = (_, _) => Task.FromResult(replacement);
+        FinishBusyTask(inspection.ImportAsync());
+        Check("retry after Cancel still automatically selects and publishes the detected source",
+            inspection.Filters.ModeTag == "peaks-all" && ReferenceEquals(inspection.LastImport, replacement)
+            && replacement.SourceId == DeNovoSource.DeNovoAll.Id && inspection.CanEdit);
+        inspection.Filters.ModeTag = "deepnovo";
+        Check("an explicit source change still clears the previous inspection", inspection.LastImport == null);
+
+        var failed = new DeNovoViewModel { ImportDirectory = deep,
+            ImportOverride = (_, _) => Task.FromException<DeNovoImport>(new IOException("Owned import failure")) };
+        failed.Filters.DeepNovoMinimumScore = "77.5";
+        failed.ApplyImport(previous);
+        string previousCriteria = JsonSerializer.Serialize(failed.Criteria);
+        FinishBusyTask(failed.ImportAsync());
+        Check("a failed import rolls back its automatic source and native criteria without clearing evidence",
+            failed.Filters.ModeTag == "peaks-only" && failed.Filters.DeepNovoMinimumScore == "77.5"
+            && JsonSerializer.Serialize(failed.Criteria) == previousCriteria && ReferenceEquals(failed.LastImport, previous)
+            && failed.Status.Contains("Owned import failure", StringComparison.Ordinal) && failed.CanEdit);
+        failed.Filters.DeepNovoMinimumScore = "not a score";
+        FinishBusyTask(failed.ImportAsync());
+        Check("invalid proposed-source criteria preserve the original source and evidence before import",
+            failed.Filters.ModeTag == "peaks-only" && ReferenceEquals(failed.LastImport, previous)
+            && JsonSerializer.Serialize(failed.Criteria) == previousCriteria && failed.CanEdit && !failed.Operations.IsBusy);
     }
 }

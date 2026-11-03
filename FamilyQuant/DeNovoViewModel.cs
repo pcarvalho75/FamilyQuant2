@@ -24,15 +24,31 @@ public sealed partial class DeNovoViewModel : DeNovoSession
     });
     public DeNovoViewModel(DeNovoFilterViewModel? filters = null) : base(filters) => observedMode = Filters.ModeTag;
 
+    private bool changingImportSource;
+    private void ChangeImportSource(Action change)
+    {
+        changingImportSource = true;
+        try { change(); }
+        finally { changingImportSource = false; }
+    }
+
         public async Task ImportAsync()
         {
             if (IsBusy || Operations.IsBusy) return;
             // The criteria in force before this pass. A pass that imports nothing puts them back:
             // see RestoreCriteria.
             DeNovoFilterCriteria previousCriteria = Criteria;
+            string previousSource = Filters.ModeTag, previousProposal = Filters.SourceProposalText;
+            string RestoreImportSettings()
+            {
+                ChangeImportSource(() => Filters.RestoreSourceProposal(previousSource, previousProposal));
+                return RestoreCriteria(previousCriteria);
+            }
 
-            Filters.ProposeSourceForDirectory(ImportDirectory.Trim());
-            if (!ReadCriteriaFromBoxes()) return;   // Refuse() has already said which box, and why
+            // A proposal is pending until ApplyImport publishes replacement evidence. It must not
+            // trigger the explicit source-change reset before this pass can fail or be cancelled.
+            ChangeImportSource(() => Filters.ProposeSourceForDirectory(ImportDirectory.Trim()));
+            if (!ReadCriteriaFromBoxes()) { RestoreImportSettings(); return; }
 
             string directory = ImportDirectory.Trim();
             DeNovoSource source = ActiveDeNovoSource;
@@ -43,7 +59,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
                     "Nothing was imported: " + (directory.Length == 0
                         ? "no folder has been chosen yet."
                         : "the folder \"" + directory + "\" does not exist or cannot be reached.") +
-                    RestoreCriteria(previousCriteria) +
+                    RestoreImportSettings() +
                     " Next step: press Browse and pick the folder holding the selected de novo export.");
                 return;
             }
@@ -83,14 +99,14 @@ public sealed partial class DeNovoViewModel : DeNovoSession
             }
             catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
             {
-                SetStatus("Cancelled. Previous evidence and results were kept." + RestoreCriteria(previousCriteria));
+                SetStatus("Cancelled. Previous evidence and results were kept." + RestoreImportSettings());
             }
             catch (Exception ex)
             {
                 SetStatus(
                     "The export could not be read, so nothing was imported and the screen still shows " +
                     "whatever it showed before. Reason given by the program: " + ex.Message +
-                    RestoreCriteria(previousCriteria) +
+                    RestoreImportSettings() +
                     " Next step: check that the folder really holds the selected export and that its files are " +
                     "not open in another program, then press \"Load and filter\" again.");
             }

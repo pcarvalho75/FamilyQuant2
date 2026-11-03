@@ -32,6 +32,12 @@ public sealed class DeNovoFilterViewModel : ScreenViewModel
         }
         finally { applyingProposal = false; }
     }
+    internal void RestoreSourceProposal(string previousMode, string previousMessage)
+    {
+        applyingProposal = true;
+        try { ModeTag = previousMode; SourceProposalText = previousMessage; }
+        finally { applyingProposal = false; }
+    }
     public string PeaksMinimumAlc { get => peaks; set => Set(ref peaks, value); }
     public string DeepNovoMinimumScore { get => deep; set => Set(ref deep, value); }
     public string MinimumLength { get => length; set => Set(ref length, value); }
