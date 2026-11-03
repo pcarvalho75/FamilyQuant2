@@ -541,6 +541,7 @@ namespace FamilyQuant.Tests
         private static void EvidenceClassifierTests()
         {
             FamilyPanelTests();
+            PanelPfamTests();
             string[] suppliedNames = { "Alpha family", "Beta family", "unseen example family" };
             Check("evidence guard rejects a planted family literal from supplied data",
                 EvidenceRuleGuard.Violations("Family = \"unseen example family\";", suppliedNames).Count > 0);

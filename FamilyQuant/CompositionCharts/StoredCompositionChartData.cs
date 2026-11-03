@@ -25,7 +25,7 @@ public static class StoredCompositionChartData
                 Array.Empty<FamilySubclassValue>(), count?.GreedyProteinCount, count?.UniquePeptideProteinCount,
                 count?.UnexplainedPeptides.Count));
         }
-        return new FamilyCompositionData(rows, "Mean per-run share of signal credited to families (" + shares.Policy + ")",
+        return new FamilyCompositionData(rows, "Mean per-run share of signal credited to families (" + shares.Policy.ShortName() + ")",
             unavailableFamilies: unavailable);
     }
 
@@ -54,7 +54,7 @@ public static class StoredCompositionChartData
                     string.IsNullOrWhiteSpace(p.Label) ? "Subclass not resolved" : p.Label, 100 * p.Signal / denominator)).ToArray(),
                 null, null);
         });
-        return new FamilyCompositionData(rows, "Pooled share of signal credited to families (" + parts.Policy + ")", false);
+        return new FamilyCompositionData(rows, "Pooled share of signal credited to families (" + parts.Policy.ShortName() + ")", false);
     }
 
     private static string Name(int id, IReadOnlyDictionary<int, string>? labels) =>
