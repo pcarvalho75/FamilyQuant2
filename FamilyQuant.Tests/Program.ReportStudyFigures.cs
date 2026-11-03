@@ -144,10 +144,6 @@ internal static partial class Program
         assignments.Add(new() { FamilyUserId = 4, PanelFamilyKey = "b", IsApplied = true });
         assignments.Add(new() { FamilyUserId = 5, PanelFamilyKey = "x", IsApplied = true });
         var map = PanelAssignmentEvidenceStore.BuildFamilyMap(project.FamilyPanel, assignments);
-        // Authoritative producer stand-in retaining the explicit excluded panel key.
-        var memberships = map.UserFamilies.ToDictionary(p => p.Key, p => p.Value);
-        memberships[5] = new() { FamilyUserId = 5, PanelFamilyKey = "x", PanelKeys = new[] { "x" }, Decision = FamilyPanelDecision.NotAFamily };
-        map = new() { IsCurrent = true, UserFamilies = memberships, PanelRows = map.PanelRows, ConflictingUserIds = map.ConflictingUserIds };
         var shares = new FamilyRunSharesResult { Runs = new() {
             new() { Run = "r1", AssignedSignal = 100 }, new() { Run = "r2", AssignedSignal = 1000 } } };
         var parts = new FamilySubclassPartsResult();
