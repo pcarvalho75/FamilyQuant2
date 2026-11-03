@@ -5,60 +5,60 @@
   "runs": [
     {
       "id": "SH-behaviour3",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-shell-behaviour3 D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-shell/behaviour3/scope.json D:/FamilyQuant-data/out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3 \u00222026-11-02 17:47:37 -0800\u0022",
-      "executedAt": "2026-11-02 17:47:37 -0800",
-      "commit": "0255e09ed407d2a8153e26bc9317281c2df8774e",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-shell-behaviour3 D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-shell/behaviour3/scope.json D:/FamilyQuant-data/out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3 \u00222026-11-02 18:29:23 -0800\u0022",
+      "executedAt": "2026-11-02 18:29:23 -0800",
+      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\facts.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\facts.json",
           "sha256": "CC2392E14BC7E5E179C2D4DC3CEBB0C8CE681914F5C31A6E9AB5276A36040952"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\proofs.log",
           "sha256": "26A0B9F7868FB2209F1E214DE7EFBFAA86923068CA74D1B77E6C53C9A1362955"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\executed\\FamilyQuant.Core.dll",
-          "sha256": "F8F2936F4B51F1EBE9C1FE18ED1B27D2C9DF922317E94B6418E68E62AF722441"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\executed\\FamilyQuant.Core.dll",
+          "sha256": "BB2B0CAA4935237DB0CAE13B8BC6177D08BDFB963839063CE2B5D5E240F9B4BA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\executed\\FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\executed\\FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "661F0CB7809E1866C73DE96EF1FC7F1453325D70D6A950EE454AE056FEDC042E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "6F2762D3760DB80C7EF95E01791ADDCF311D2A58137A9797910B10F57606C080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\executed\\FamilyQuant2.dll",
-          "sha256": "9B6C4DBC3D3851BB668F6BC15C8268CBB55413DC1155DFEAE9D316E1A00610A7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\executed\\FamilyQuant2.dll",
+          "sha256": "FA5B9E3A6B3879ADA83165E6E6CC644E900DB0E72E59E11263D15871663B55AD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\executed\\NativeOwnedDialogDriver.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\executed\\NativeOwnedDialogDriver.cs",
           "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\executed\\Program.Commands.ShellBehaviour.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\executed\\Program.Commands.ShellBehaviour.cs",
           "sha256": "B5D4623943E15E6EFC12495F695BB8150DEC92903F747335B5CDD9192EE4237A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\executed\\Program.SecondarySuperRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\executed\\Program.SecondarySuperRuntime.cs",
           "sha256": "7BC597762989B17730C639AFC8142657A03FB4975AB76EEE8852E9EB0CC9B352"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\executed\\Program.ShellBehaviour.Build.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\executed\\Program.ShellBehaviour.Build.cs",
           "sha256": "E6E9E40CAD65C7D01184D388ECE0FF777701401BCE2F0C7FAD37EF7C7ADD0329"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\executed\\Program.ShellBehaviour.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\executed\\Program.ShellBehaviour.cs",
           "sha256": "4754F1433B6470E46038587CC08A1FE3CE5B8121DD9FFCE36B77EBFF7C6C9EEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\executed\\Program.ShellBehaviour.Curation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\executed\\Program.ShellBehaviour.Curation.cs",
           "sha256": "8C8492A48BF3096F3B4DE5D3A950AD2542DBBBE741A5257524627FB694E5D60C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\executed\\scope.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\executed\\scope.json",
           "sha256": "7C457C42FCFB598410B5B538C949C01B00A270984B736CE21B2F80FB3A51B4E7"
         }
       ],
@@ -107,7 +107,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -422,7 +422,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -468,6 +468,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -672,7 +677,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -860,6 +865,11 @@
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
         },
         {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
+        },
+        {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "native behaviour fixture",
           "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
@@ -931,7 +941,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour empty-import reconciliation guard",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour3\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour3\\proofs.log",
           "inspectedBy": ""
         }
       ],

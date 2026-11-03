@@ -5,164 +5,164 @@
   "runs": [
     {
       "id": "native",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-spectrum-exports D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports \u00222026-11-02 17:45:42 -0800\u0022",
-      "executedAt": "2026-11-02 17:45:42 -0800",
-      "commit": "0255e09ed407d2a8153e26bc9317281c2df8774e",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-spectrum-exports D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports \u00222026-11-02 18:26:10 -0800\u0022",
+      "executedAt": "2026-11-02 18:26:10 -0800",
+      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\proofs.log",
           "sha256": "6D1F85C1E24E990E266AF85F96979C7E260EC36C8FB4D3602736143946CCECC2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\actual-values.json",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\actual-values.json",
           "sha256": "9DEC1822E1219BB2A2669B2E46E8673E4E612B4D9100C1A5EC0EA70DD71ED8E6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
           "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
           "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/AssaySpectrumExportComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/AssaySpectrumExportComparison.cs",
           "sha256": "E80F211242CB4A86F38EEFCD3B00BD8389B746ACF207B3A5F359D5A4DA4F230D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
           "sha256": "157C955F947789AA5BA5759EA3B37D762EA6A5E693AB49345BDE540C420CC036"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
           "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
           "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
           "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/Program.AssaySpectrumExport.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/Program.AssaySpectrumExport.cs",
           "sha256": "5FF792AFE282C7D49C8D95B2C53A1AF55BCDE6C231AC627DFBB92CD27F8148B7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/Program.AssaySpectrumExportLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/Program.AssaySpectrumExportLedger.cs",
           "sha256": "B35A76B0DF2D163E65367A0389DB422602233CC8C9B171551DDD6A6BB94C08E3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
           "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/AppOperationFiles.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/AppOperationFiles.cs",
           "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/AppOperationHost.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/AppOperationHost.cs",
           "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/ChartImageExporter.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/ChartImageExporter.cs",
           "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/PresentationFigures.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/PresentationFigures.cs",
           "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/SecondaryWindows.ViewModels.cs",
           "sha256": "87BB4D589ACF49B3CDF635B485D60D07DA6CAB0B9B4B99E7367D44FA52C97743"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/ShellDialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/ShellDialogs.cs",
           "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/SpectrumComparisonWindow.Exports.cs",
           "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/SpectrumComparisonWindow.View.cs",
           "sha256": "BEA0A617E0850EE56C477D63D69FC08E939E8A9232673A2E09353330561E6A9B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/SpectrumComparisonWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant/SpectrumComparisonWindow.cs",
           "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\frozen\\FamilyQuant/SpectrumComparisonWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\frozen\\FamilyQuant/SpectrumComparisonWindow.cs",
           "sha256": "76DD3FE0949EFB7239FDBBCF9163FB78F06EDE5F008D3CC6CC391D9734C88BF2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "661F0CB7809E1866C73DE96EF1FC7F1453325D70D6A950EE454AE056FEDC042E"
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "6F2762D3760DB80C7EF95E01791ADDCF311D2A58137A9797910B10F57606C080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Core.dll",
-          "sha256": "F8F2936F4B51F1EBE9C1FE18ED1B27D2C9DF922317E94B6418E68E62AF722441"
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.Core.dll",
+          "sha256": "BB2B0CAA4935237DB0CAE13B8BC6177D08BDFB963839063CE2B5D5E240F9B4BA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.dll",
-          "sha256": "9B6C4DBC3D3851BB668F6BC15C8268CBB55413DC1155DFEAE9D316E1A00610A7"
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\executed\\FamilyQuant.dll",
+          "sha256": "FA5B9E3A6B3879ADA83165E6E6CC644E900DB0E72E59E11263D15871663B55AD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\export-anchors.json",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\export-anchors.json",
           "sha256": "96284D6BA00B2C65F9B24D85CC1B3C869AF7690AA5D86426A41A7733854E929E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\exports\\csv-dialog-cancel\\fixture.csv",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\exports\\csv-dialog-cancel\\fixture.csv",
           "sha256": "6DCBD7ECD454C48A13FDEDB794477ABDA1914078BF4492766C1341D3EFF390CB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\exports\\csv-failure\\blocked",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\exports\\csv-failure\\blocked",
           "sha256": "521E7C3FDDB6B94CF80CC2B03B0897766D892583D1D336F60DAE7A1AB794E145"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\exports\\csv-operation-cancel\\fixture.csv",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\exports\\csv-operation-cancel\\fixture.csv",
           "sha256": "6DCBD7ECD454C48A13FDEDB794477ABDA1914078BF4492766C1341D3EFF390CB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\exports\\csv-success\\fixture.csv",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\exports\\csv-success\\fixture.csv",
           "sha256": "0E6C55808E04AFD450A2718EE046852B7BF0348D0CA61FF34E6B8C1102E7EECB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\exports\\export-actuals.json",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\exports\\export-actuals.json",
           "sha256": "A629667D1FFEC2337E31CB73FC54482352115A58FAFD69028D13C26359EF319C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\exports\\plot-dialog-cancel\\fixture.png",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\exports\\plot-dialog-cancel\\fixture.png",
           "sha256": "6DCBD7ECD454C48A13FDEDB794477ABDA1914078BF4492766C1341D3EFF390CB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\exports\\plot-failure\\blocked",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\exports\\plot-failure\\blocked",
           "sha256": "521E7C3FDDB6B94CF80CC2B03B0897766D892583D1D336F60DAE7A1AB794E145"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\exports\\plot-operation-cancel\\fixture.png",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\exports\\plot-operation-cancel\\fixture.png",
           "sha256": "6DCBD7ECD454C48A13FDEDB794477ABDA1914078BF4492766C1341D3EFF390CB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\exports\\plot-success\\fixture.csv",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\exports\\plot-success\\fixture.csv",
           "sha256": "D4C4C64BD96FA1CD93868D3A4929A25E97B96068E0FA2EDAEB8B399D4CCE9329"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\exports\\plot-success\\fixture.png",
+          "path": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\exports\\plot-success\\fixture.png",
           "sha256": "462A8D620C9FF5B211D2458B30B6163DB5266646B3F742B4D68FF26D995BA072"
         }
       ],
@@ -1906,7 +1906,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-spectrum-exports kind code fact: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -1920,7 +1920,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-spectrum-exports kind format/export: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-174442-FamilyQuant-gate-as-spectrum-exports\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\refresh\\20261102-182444-FamilyQuant-gate-as-spectrum-exports\\proofs.log",
           "inspectedBy": ""
         }
       ]

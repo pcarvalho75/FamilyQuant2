@@ -5,56 +5,56 @@
   "runs": [
     {
       "id": "text-tool",
-      "command": "D:\\FamilyQuant-wt\\opus\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-181656-opus\\text-preserved \u00222026-11-02 18:17:19 -0800\u0022",
-      "executedAt": "2026-11-02 18:17:19 -0800",
-      "commit": "c309a81f21957a0c2173559851948d238f70cabe",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved \u00222026-11-02 18:28:25 -0800\u0022",
+      "executedAt": "2026-11-02 18:28:25 -0800",
+      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\text.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\text.log",
           "sha256": "6A241CF774F24A0DF037C132BD5C3AA96F642CC743A12BDB1310322BA12BD733"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\text.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\text.json",
           "sha256": "B07E9E97732EAFBFE528DA5C67FABE94D289B6B311C680925CA7A5FAF14792AB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\executed\\FamilyQuant2.dll",
-          "sha256": "22B7A419479EB289913A43DCA19D07880DBEAD9979E6493245C01A7B93F25E84"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant2.dll",
+          "sha256": "FA5B9E3A6B3879ADA83165E6E6CC644E900DB0E72E59E11263D15871663B55AD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\executed\\FamilyQuant2.pdb",
-          "sha256": "A5BDA6F408BA2220186F7F3F00A89DC8970A01816E8EFF4EF09BD6CBAF044B95"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant2.pdb",
+          "sha256": "5F66E2E1E5C82C6A5B5C1E3DCBF5BDAF744AB3917E5E8A07BC82E1AB2723FFAE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\executed\\FamilyQuant.Core.dll",
-          "sha256": "B1CE0E25034AACC0937BE4227D8CFB3CA5A7B960698C48E7A97AC2CA2ACCBB4A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Core.dll",
+          "sha256": "BB2B0CAA4935237DB0CAE13B8BC6177D08BDFB963839063CE2B5D5E240F9B4BA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\executed\\FamilyQuant.Core.pdb",
-          "sha256": "0731C6BB25838C5D8F9FEB1959CAEC3062B07DE8E33FE570CB7BD1D2CD64FC23"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Core.pdb",
+          "sha256": "FFD294FB887A3CD895CE3D0362201A6531824F5114BC85F173C8601A4970D710"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "A278726F17D011640742A8ADA9A75C9D96CED00062E14331CE8DCBB5ED584F58"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "6F2762D3760DB80C7EF95E01791ADDCF311D2A58137A9797910B10F57606C080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
-          "sha256": "40749D66ED26DC35C43262C6E458E1EE5BDF021D0A3926D326DD10348E8C4BB5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
+          "sha256": "2CB78207901A4D7ACADF502A2EA634EFA79F3C1FC984986B33E5559BAD99FD21"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
-          "sha256": "66668B2CC2C3438D33BD19F81EB0FB7B6FFBFC22E9F7BD83BA1BCEC9AE9A9A26"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
+          "sha256": "5DF4825EB752822347F0BCA69799D5F85074B6233EC741A6F9FC8186AE2BD721"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
           "sha256": "76B82F938173EA4E342000A363089B287BD5B2A897FDC8872B5EDB5319BB2F12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\opus"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -1343,7 +1343,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind code fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1357,7 +1357,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind control: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1371,7 +1371,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind help fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1385,7 +1385,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind option/copy: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1399,7 +1399,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind tooltip: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-181656-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
