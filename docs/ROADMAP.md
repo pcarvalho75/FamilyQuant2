@@ -105,7 +105,6 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J43 | With a panel in use, the headline and composition figures use the per-panel-family totals (D40, B): before and after shown on a real project with several families in one panel family, science review, the old unit kept in the supplement | M | 1 | 🟢 | | Red then green on a multi-family fixture; before/after table on a real project; reviewed | FL | | 0 | 0 | |
 
 ## Critical path
 
