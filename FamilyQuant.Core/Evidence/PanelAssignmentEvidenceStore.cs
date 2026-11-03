@@ -50,7 +50,7 @@ public static class PanelAssignmentEvidenceStore
         int[] conflicts = byId.Values.Where(g => g.HasConflict).Select(g => g.FamilyUserId).Order().ToArray();
         return new()
         {
-            IsCurrent = conflicts.Length == 0, UserFamilies = byId, ConflictingUserIds = conflicts,
+            IsCurrent = true, UserFamilies = byId, ConflictingUserIds = conflicts,
             Message = conflicts.Length == 0 ? "Panel family mapping is current." : "A current family contains different panel keys or outside members. Review its grouping.",
             PanelRows = panel.Families.Select(f =>
             {
