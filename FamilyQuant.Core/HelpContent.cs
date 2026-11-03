@@ -339,6 +339,8 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine(HelpWorkflowFacts.FilesAndNavigation);
             sb.AppendLine(HelpWorkflowFacts.Families);
+            sb.AppendLine();
+            sb.AppendLine(PanelReportHelp.Build());
             return sb.ToString();
         }
 

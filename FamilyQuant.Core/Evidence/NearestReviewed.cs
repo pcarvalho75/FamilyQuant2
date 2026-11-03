@@ -27,6 +27,18 @@ namespace FamilyQuant.Evidence
         public ProteinEvidence? Evidence { get; init; }
     }
 
+    /// <summary>An equally close reviewed reference. Identity equals the main hit; alignment and
+    /// coverage remain this reference's own. Kept even when its source family text is identical.</summary>
+    public sealed class NearestNeighbourTie
+    {
+        public string Accession { get; init; } = string.Empty;
+        public string Reference { get; init; } = string.Empty;
+        public string Family { get; init; } = string.Empty;
+        public int AlignmentLength { get; init; }
+        public int ReferenceLength { get; init; }
+        public int? QueryAlignedResidues { get; init; }
+    }
+
     /// <summary>The nearest reviewed protein of one protein of the file, never the protein itself.</summary>
     public sealed class NearestNeighbour
     {
@@ -57,6 +69,8 @@ namespace FamilyQuant.Evidence
         /// differs, and an empty entry is a reviewed protein with no single family. A tie across families
         /// is reported, never settled by the tie-break.</summary>
         public List<string> TiedFamilies { get; init; } = new List<string>();
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<NearestNeighbourTie>? TiedReferences { get; init; }
     }
 
     /// <summary>One search as stored with the evidence: its parameters, what it searched, and the answers.</summary>
@@ -65,6 +79,8 @@ namespace FamilyQuant.Evidence
         public string Method { get; init; } = NearestReviewed.Method;
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? CoverageMethod { get; init; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? TieMethod { get; init; }
         public double MinIdentityPercent { get; init; }
         public int MinQueryAlignedPercent { get; init; }
         public int Queries { get; init; }
@@ -94,6 +110,7 @@ namespace FamilyQuant.Evidence
     public static class NearestReviewed
     {
         public const string QueryCoverageMethod = "Non-gap query letters in native qrow / full query length, v1";
+        public const string ReferenceTieMethod = "All equally close reviewed references, including identical source-family labels, v1";
         public static string CoverageRuleText(int minimumPercent) => "At least " + minimumPercent.ToString(CultureInfo.InvariantCulture)
             + " percent of the query's residues occur in the alignment; inserted gap columns do not count.";
         public const string Method = "USEARCH search_global, every pair aligned, best hit by identity, never the same entry";
@@ -226,6 +243,12 @@ namespace FamilyQuant.Evidence
                 ReferenceLength = best.ReferenceLength,
                 QueryAlignedResidues = best.QueryAlignedResidues,
                 TiedFamilies = tied,
+                TiedReferences = kept.Skip(1).Where(h => Math.Abs(h.IdentityPercent - best.IdentityPercent) <= IdentityEpsilon)
+                    .Select(h => new NearestNeighbourTie
+                    {
+                        Accession = h.Reference.Accession, Reference = h.Reference.Identifier, Family = h.Reference.Family,
+                        AlignmentLength = h.AlignmentLength, ReferenceLength = h.ReferenceLength, QueryAlignedResidues = h.QueryAlignedResidues,
+                    }).ToList() is { Count: > 0 } alternatives ? alternatives : null,
             };
         }
 
@@ -258,6 +281,7 @@ namespace FamilyQuant.Evidence
             string referenceHash = ReferenceFingerprint(panel);
             string key = string.Join("|", Method,
                 QueryCoverageMethod,
+                ReferenceTieMethod,
                 minIdentityPercent.ToString("R", CultureInfo.InvariantCulture),
                 minQueryAlignedPercent.ToString(CultureInfo.InvariantCulture), queryHash, referenceHash);
 
@@ -275,6 +299,7 @@ namespace FamilyQuant.Evidence
             return new NeighbourSearch
             {
                 CoverageMethod = QueryCoverageMethod,
+                TieMethod = ReferenceTieMethod,
                 MinIdentityPercent = minIdentityPercent,
                 MinQueryAlignedPercent = minQueryAlignedPercent,
                 Queries = searched.Count,

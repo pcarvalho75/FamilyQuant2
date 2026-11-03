@@ -215,16 +215,9 @@ public partial class PanelEditorWindow : Window
         catch (OperationCanceledException) when (operation.Context.IsCancellationRequested) { PfamStatus.Text = "Check cancelled."; }
         catch (Exception ex) { PfamStatus.Text = "The panel could not be checked: " + ex.Message; }
     }
-    private void Help_Click(object sender, RoutedEventArgs e) => TextReportWindow.Show("Family panel help",
-        "A panel describes the families and optional subclasses used in this project. Add or remove rows, " +
-        "enter a unique key and name, select a decision, and separate multiple Pfam or subclass keys with semicolons. " +
-        "A merge needs the key of another family. Existing domain and subclass details stay with unchanged keys.\n\n" +
-        "To import a spreadsheet, choose its sheet and header row, preview the columns, and select the columns for " +
-        "the family key, name, decision and optional Pfam codes. Map every source decision, including a target key " +
-        "for a merge, then preview the panel. Applying the panel stores it in the project as one change; Undo restores " +
-        "the previous panel. Save the project to keep it.\n\n" +
-        "Save panel as spreadsheet writes a reusable template with Families and Subclasses sheets. " +
-        "The template retains panel details that do not appear in the table. Import the template to restore them.", this, wrap: true);
+    private void Help_Click(object sender, RoutedEventArgs e) =>
+        TextReportWindow.Show("Family panel help", PanelReportHelp.Panel, this, wrap: true);
+
     private async void SaveTemplate_Click(object sender, RoutedEventArgs e)
     {
         FamilyGrid.CommitEdit(DataGridEditingUnit.Cell, true);

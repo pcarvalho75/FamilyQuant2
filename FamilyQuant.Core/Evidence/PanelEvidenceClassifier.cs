@@ -22,6 +22,7 @@ public sealed class PanelFamilyLinkSelection
 {
     public string LinkKey { get; init; } = string.Empty;
     public string? PanelFamilyKey { get; init; }
+    public string Source { get; init; } = string.Empty;
 }
 
 public sealed class PanelEvidenceContext

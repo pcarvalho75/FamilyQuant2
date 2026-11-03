@@ -27,7 +27,12 @@ namespace FamilyQuant
         {
             ArgumentNullException.ThrowIfNull(file);
             ArgumentNullException.ThrowIfNull(assignments);
-            var labels = (file.ProteinSubclassLabels ?? new List<ProteinSubclassLabel>()).ToDictionary(x => x.ProteinIndex);
+            bool subclassCurrent = SubclassAssignment.IsCurrent(file);
+            var labels = (subclassCurrent ? file.ProteinSubclassLabels! : new List<ProteinSubclassLabel>()).ToDictionary(x => x.ProteinIndex);
+            var currentAssignments = PanelAssignmentEvidenceStore.Current(file);
+            var currentByIndex = currentAssignments?.ToDictionary(x => x.ProteinIndex) ?? new Dictionary<int, PanelProteinAssignment>();
+            var conflicts = currentAssignments == null || file.FamilyPanel == null ? new HashSet<int>()
+                : PanelAssignmentEvidenceStore.BuildFamilyMap(file.FamilyPanel, currentAssignments).ConflictingUserIds.ToHashSet();
             var audit = assignments.ToDictionary(x => x.ProteinIndex);
             foreach (var pair in labels.Select(x => (x.Key, x.Value.Identifier)).Concat(audit.Select(x => (x.Key, x.Value.Identifier))))
             {
@@ -45,12 +50,17 @@ namespace FamilyQuant
                 if (SequenceLabels.IsDecoy(item.SequenceIdentifier ?? string.Empty)) continue;
                 labels.TryGetValue(i, out var label);
                 audit.TryGetValue(i, out var assignment);
+                currentByIndex.TryGetValue(i, out var currentFamily);
                 if ((label != null && label.Identifier != item.SequenceIdentifier)
                     || (assignment != null && assignment.Identifier != item.SequenceIdentifier))
                     throw new InvalidOperationException("Protein audit data does not match the current protein list.");
                 FamilyPanelFamily? family = null;
-                if (label?.PanelFamilyKey != null)
-                    family = file.FamilyPanel?.Families.SingleOrDefault(x => x.Key == label.PanelFamilyKey)
+                string? familyKey = conflicts.Contains(item.UserID) ? null : label?.PanelFamilyKey
+                    ?? (currentFamily?.IsApplied == true ? currentFamily.PanelFamilyKey : null);
+                if (familyKey != null && file.FamilyPanel != null)
+                    familyKey = FamilyPanelValidation.ResolveFamilyKey(file.FamilyPanel, familyKey);
+                if (familyKey != null)
+                    family = file.FamilyPanel?.Families.SingleOrDefault(x => x.Key == familyKey)
                         ?? throw new InvalidOperationException("A protein label refers to a missing panel family.");
                 FamilyPanelSubclass? subclass = null;
                 if (label?.SubclassKey != null)
@@ -64,7 +74,8 @@ namespace FamilyQuant
                     recorded.Add("Pfam: " + string.Join("; ", evidence.Pfam.Select(x => x.Accession)));
                 Append(FamilyNaming.Accession(item.SequenceIdentifier), ProteinNameFormatting.ForNewOutput(item.Description),
                     family?.DisplayName, subclass?.DisplayName, assignment?.EvidenceUsed, assignment?.Reason,
-                    label?.Reason, string.Join(" | ", recorded));
+                    conflicts.Contains(item.UserID) ? "The current User ID has conflicting panel family or outside members."
+                        : label?.Reason ?? (subclassCurrent ? "" : "Subclass labels are unavailable or out of date."), string.Join(" | ", recorded));
             }
             return csv.ToString();
         }
