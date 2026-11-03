@@ -283,7 +283,7 @@ namespace FamilyQuant
 
     /// <summary>The homology hits of a quant's peptides against a curation's proteins, independent of the
     /// family numbers (<see cref="FamilyEnvelopeQuant.SearchCuration"/>).</summary>
-    public sealed class CurationHomologyHits
+    public sealed partial class CurationHomologyHits
     {
         public double IdentityThreshold { get; internal set; }
         internal Homology.HomologyOptions EffectiveOptions { get; set; } = new Homology.HomologyOptions();

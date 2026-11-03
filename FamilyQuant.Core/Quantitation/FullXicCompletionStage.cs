@@ -61,7 +61,10 @@ namespace FamilyQuant
                     FamilyEnvelopeQuant.PreparePeptides(result.Rows), familyAttribution);
                 FamilyCompositionStudy.StoreRunShares(manifest, assigned);
                 if (familyHits != null && options.FamilyCuration != null)
+                {
                     FamilyCompositionStudy.StoreSubclassesFromCuration(manifest, assigned, familyHits, options.FamilyCuration);
+                    FamilyCompositionStudy.StorePositionsFromCuration(manifest, assigned, familyHits, options.FamilyCuration);
+                }
                 if (options.FamilyCuration != null)
                 {
                     try
