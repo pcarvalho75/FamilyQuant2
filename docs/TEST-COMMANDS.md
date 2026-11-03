@@ -70,3 +70,25 @@ The S6/B3 integration adds four flags in Evidence and Shell providers. Its synta
 67 incoming predicates, handlers, phases and precedence rules, plus 221 ordinary-suite statements
 in order. Build had zero warnings/errors; dispatch passed 21/0/0, B3 18/0/0, S6 38/0/0 and the
 integrated quick suite 2454/0/17. The existing `--shell-checks` also retains S6's new busy check.
+
+## The default run as a table, and shards (J8)
+
+The ordinary suite is an ordered table built by `DefaultSuite` in `Program.cs`: one entry per former call,
+under the former section headings, each call keeping the `EnsureApplication()` that preceded it
+(`AddWithApplication`). A run without `--shard` executes exactly the former calls in the former order and
+prints the same headings. A lane adds a check as before, by adding one `suite.Add(...)` line in place.
+
+`--shard k/N` (0 <= k < N) may appear anywhere in the arguments. It is removed, with its value, after the dot
+normalization and both command dispatches and before any positional data slot is read, so
+`. . <deNovoRoot> <acquisitionRoot> --shard 2/6` and `--shard 2/6` both work. Shard k runs the entries whose
+index mod N is k. A group key keeps entries together when a later one reads what an earlier one left in a
+static field (the run 01 de novo extraction read by the identified-envelope section, and the reconciliation,
+three-way and homology censuses read by the De novo screen on real data); the group follows its first entry.
+In a shard, an entry that came after the serial run's first `EnsureApplication()` gets the Application created
+first if its shard has none yet; nothing else is added. Every shard ends with the usual summary line and exits
+0 only when nothing failed, and names its three longest entries just before that line.
+
+Each shard needs its own `TEMP` and `TMP`; the suite's fixture folder lives under the temp path. The shards
+also share the per-user `%LOCALAPPDATA%/FamilyQuant2` folder: the extracted USEARCH executable (read, and
+written only when missing) and the real `shell.json` and `appearance.json`, which the suite's shell and theme
+checks redirect to their own fixture paths and only read for the unchanged-profile check.
