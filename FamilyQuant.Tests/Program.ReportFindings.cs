@@ -173,8 +173,13 @@ internal static partial class Program
         Check("J44d the last summary sentence keeps with the workbook reference that follows it", last >= 0 && last + 1 < written.Count && Keeps(written[last])
             && written[last + 1].InnerText.StartsWith("Numbers in the summary of findings. See the companion supplement workbook, sheet '", StringComparison.Ordinal),
             last < 0 ? "sentence not found" : written[Math.Min(last + 1, written.Count - 1)].InnerText);
-        var statements = section.Blocks.OfType<ReportParagraph>().Where(p => p.Id != "findings:choices").Select(p => p.Text).ToHashSet(StringComparer.Ordinal);
+        string? After(DocumentFormat.OpenXml.Wordprocessing.Paragraph p) => p.ParagraphProperties?.SpacingBetweenLines?.After?.Value;
+        var first = written.Single(p => p.InnerText == Text("listed:1"));
+        var lastListed = written.Single(p => p.InnerText == Text("listed:2"));
+        Check("J44d the listed families read as one compact list: no space after each item but the last", After(first) == "0" && After(lastListed) == null,
+            "first " + After(first) + ", last " + After(lastListed));
+        var statements = section.Blocks.OfType<ReportParagraph>().Where(p => p.Id is not ("findings:choices" or "findings:listed:1")).Select(p => p.Text).ToHashSet(StringComparer.Ordinal);
         Check("J44d no other summary paragraph changes its properties, and the text is unchanged", written.Where(p => statements.Contains(p.InnerText)).Count() == statements.Count
-            && written.Where(p => statements.Contains(p.InnerText)).All(p => !Keeps(p)) && Text("choices") == "Analysis choices in force: evidence scope phrases \"term one\", \"term two\"; 2 confirmed panel links (notes: user note); report threshold 0.1%; de novo source \"source one\" with score at least 80.");
+            && written.Where(p => statements.Contains(p.InnerText)).All(p => !Keeps(p) && After(p) == null) && Text("choices") == "Analysis choices in force: evidence scope phrases \"term one\", \"term two\"; 2 confirmed panel links (notes: user note); report threshold 0.1%; de novo source \"source one\" with score at least 80.");
     }
 }

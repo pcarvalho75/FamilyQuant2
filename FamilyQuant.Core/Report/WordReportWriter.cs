@@ -95,6 +95,7 @@ public static class WordReportWriter
                             {
                                 var written = Paragraph(line);
                                 if (paragraph.KeepWithNext) written.ParagraphProperties!.Append(new W.KeepNext(), new W.KeepLines());
+                                if (paragraph.Compact) written.ParagraphProperties!.Append(new W.SpacingBetweenLines { After = "0" });
                                 body.Append(written);
                             }
                             break;

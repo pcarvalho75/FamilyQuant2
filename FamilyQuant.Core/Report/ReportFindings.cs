@@ -106,7 +106,8 @@ public static class ReportFindings
             numbers.Add(new[] { statement, quantity, value });
             return value;
         }
-        void Say(string id, string text, bool keepWithNext = false) => blocks.Add(new ReportParagraph("findings:" + id, text) { KeepWithNext = keepWithNext });
+        void Say(string id, string text, bool keepWithNext = false, bool compact = false) =>
+            blocks.Add(new ReportParagraph("findings:" + id, text) { KeepWithNext = keepWithNext, Compact = compact });
         // Protein-name text as the rest of the report prints it: the header's OS= field and what follows are left out (J12).
         string Name(int userId) => input.Labels.TryGetValue(userId, out string? label) ? ProteinNameFormatting.ForNewOutput(label) : Integer(userId);
         var grouping = input.Grouping;
@@ -120,7 +121,7 @@ public static class ReportFindings
             Record("listed", "report threshold (%)", threshold);
             Say("listed", Record("listed", "families above the threshold", Integer(listed.Count)) + (listed.Count == 1 ? " family is" : " families are")
                 + " above the report threshold of " + threshold + "% of the credited family signal. In headline order, each with the mean of per-run shares, the sample SD in percentage points and the greedy estimate of database proteins:");
-            // One paragraph per family, so each reads on its own.
+            // One paragraph per family, so each reads on its own; set close together as one list.
             foreach (var f in listed)
             {
                 string name = Name(f.FamilyUserId);
@@ -129,7 +130,7 @@ public static class ReportFindings
                 string proteins = counts.TryGetValue(f.FamilyUserId, out var count)
                     ? Record("listed", name + " greedy protein estimate", Integer(count.GreedyProteinCount)) + (count.GreedyProteinCount == 1 ? " protein" : " proteins")
                     : "protein estimate unavailable";
-                Say("listed:" + Integer(f.FamilyUserId), name + ": " + mean + "% (" + sd + "; " + proteins + ").");
+                Say("listed:" + Integer(f.FamilyUserId), name + ": " + mean + "% (" + sd + "; " + proteins + ").", compact: f != listed[^1]);
             }
             var cvs = listed.Where(f => f.CoefficientOfVariation.HasValue).Select(f => f.CoefficientOfVariation!.Value).ToList();
             if (cvs.Count > 0)

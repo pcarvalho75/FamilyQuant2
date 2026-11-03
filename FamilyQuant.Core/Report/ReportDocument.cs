@@ -26,6 +26,8 @@ public sealed record ReportParagraph(string Id, string Text) : ReportBlock(Id)
 {
     /// <summary>Word keeps this paragraph on the page of the block that follows it.</summary>
     public bool KeepWithNext { get; init; }
+    /// <summary>Word writes no space after this paragraph, so consecutive items read as one list.</summary>
+    public bool Compact { get; init; }
 }
 
 /// <summary>Cells contain the exact invariant strings used by the program's corresponding export.</summary>
