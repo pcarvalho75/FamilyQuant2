@@ -19,7 +19,7 @@ public partial class MainWindow
             {
                 StatusModel.ShowMessage("Report details updated. Undo restores the previous text. Save the project to keep the details.");
             }
-        }));
+        }, project.fcf.ReportInputProvenance));
     }
 
     private void MenuItemReportDetails_Click(object sender, RoutedEventArgs e)
