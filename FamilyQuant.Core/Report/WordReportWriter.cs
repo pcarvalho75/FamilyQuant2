@@ -50,6 +50,8 @@ public static class WordReportWriter
             main.Document = new W.Document(body);
             var styles = main.AddNewPart<StyleDefinitionsPart>("rIdStyles");
             styles.Styles = Styles();
+            var settings = main.AddNewPart<DocumentSettingsPart>("rIdSettings");
+            settings.Settings = new W.Settings(new W.UpdateFieldsOnOpen { Val = true });
             uint imageId = 0;
             for (int index = 0; index < sections.Count; index++)
             {
@@ -74,8 +76,13 @@ public static class WordReportWriter
                     for (int other = 0; other < sections.Count; other++)
                     {
                         if (sections[other].Id is ReportSectionIds.Title or ReportSectionIds.Contents) continue;
-                        body.Append(new W.Paragraph(new W.Hyperlink(new W.Run(new W.Text(sections[other].Title)))
-                        { Anchor = "section_" + other.ToString(CultureInfo.InvariantCulture) }));
+                        string target = "section_" + other.ToString(CultureInfo.InvariantCulture);
+                        body.Append(new W.Paragraph(
+                            new W.ParagraphProperties(new W.Tabs(new W.TabStop
+                                { Val = W.TabStopValues.Right, Leader = W.TabStopLeaderCharValues.Dot, Position = PageWidth })),
+                            new W.Hyperlink(new W.Run(new W.Text(sections[other].Title))) { Anchor = target },
+                            new W.Run(new W.TabChar()),
+                            new W.SimpleField(new W.Run(new W.Text("?"))) { Instruction = "PAGEREF " + target + " \\h" }));
                     }
                 }
                 foreach (var block in section.Blocks.Where(b => !excluded.Contains(b.Id)))

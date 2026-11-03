@@ -16,9 +16,15 @@ public static class ReportDocumentBuilder
         ArgumentNullException.ThrowIfNull(manifest);
         details ??= curation.ReportDetails ?? new ReportDetails();
         methodFacts ??= curation.ReportInputProvenance;
+        var titleBlocks = new List<ReportBlock>();
+        if (!string.IsNullOrWhiteSpace(details.SampleDescription))
+            titleBlocks.Add(new ReportParagraph("report-sample", "Sample: " + details.SampleDescription));
+        if (manifest.UpdatedUtc != default)
+            titleBlocks.Add(new ReportParagraph("report-snapshot-date", "Quantitation snapshot: "
+                + manifest.UpdatedUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)));
         var factories = new (string Title, Func<ReportSection> Build)[]
         {
-            ("Title", () => new(ReportSectionIds.Title, "Title", Array.Empty<ReportBlock>())),
+            ("Title", () => new(ReportSectionIds.Title, "Title", titleBlocks)),
             ("Contents", () => new(ReportSectionIds.Contents, "Contents", Array.Empty<ReportBlock>())),
             ("Summary", () => new(ReportSectionIds.Summary, "Summary", Array.Empty<ReportBlock>())),
             ("Methods", () => ReportMethods.Build(curation, manifest, details, methodFacts)),
@@ -26,7 +32,8 @@ public static class ReportDocumentBuilder
             ("Quality", () => new(ReportSectionIds.Quality, "Quality", Array.Empty<ReportBlock>())),
             ("Sensitivity", () => new(ReportSectionIds.Sensitivity, "Sensitivity", Array.Empty<ReportBlock>())),
             ("Database gap", () => new(ReportSectionIds.DatabaseGap, "Database gap", Array.Empty<ReportBlock>())),
-            ("Interpretation", () => new(ReportSectionIds.Interpretation, "Interpretation", new ReportBlock[] { new ReportParagraph("interpretation-text", details.WrittenInterpretation) })),
+            ("Interpretation", () => new(ReportSectionIds.Interpretation, "Interpretation", new ReportBlock[] { new ReportParagraph("interpretation-text",
+                string.IsNullOrWhiteSpace(details.WrittenInterpretation) ? "No written interpretation is stored in this project." : details.WrittenInterpretation) })),
             ("Supplements", () => new(ReportSectionIds.Supplements, "Supplements", Array.Empty<ReportBlock>())),
         };
         int total = factories.Length + additionalSectionCount;

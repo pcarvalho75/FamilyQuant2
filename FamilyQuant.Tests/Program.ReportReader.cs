@@ -15,14 +15,14 @@ internal static partial class Program
     [TestCommandTable]
     private static IEnumerable<TestCommand> ReportReaderCommandTable() =>
     [new("--test-report-reader", 440, TestCommandPhase.Raw,
-        args => args.Length > 0 && args[0] == "--test-report-reader", (_, _) =>
+        args => args.Length > 0 && args[0] == "--test-report-reader", (args, _) =>
         {
-            ReportReaderTests();
+            ReportReaderTests(args.Length > 1 ? args[1] : Path.Combine(Path.GetTempPath(), "reader-proof"));
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         })];
 
-    private static void ReportReaderTests()
+    private static void ReportReaderTests(string output)
     {
         Section("Report reader - labelled counting grains and print layout");
         EnsureApplication();
@@ -42,7 +42,8 @@ internal static partial class Program
         ReportReaderTableTests();
         ReportReaderNativeTests(data);
         ReportReaderQualificationTests(data);
-        ReportReaderFamilyTests(data);
+        var families = ReportReaderFamilyTests(data);
+        ReportReaderDocumentTests(data, families, output);
     }
 
     private static void ReportReaderTableTests()
@@ -172,7 +173,7 @@ internal static partial class Program
             && Figure(PresentationFigures.DeNovoTalkComparisonFile).Caption.Contains(DeNovoVariantComparison.AllPlusDeepNovoVariantName, StringComparison.Ordinal));
     }
 
-    private static void ReportReaderFamilyTests(AnalyticsData data)
+    private static FamilyEnvelopeQuantResult ReportReaderFamilyTests(AnalyticsData data)
     {
         var families = FamilyFixture(12);
         foreach (var family in families.Families)
@@ -211,5 +212,45 @@ internal static partial class Program
             Check(chart.FileName + " " + theme + " full name labels remain in bounds",
                 glyphs.All(g => g.Bounds.Left >= 0 && g.Bounds.Right <= chart.Width && g.Bounds.Top >= 0 && g.Bounds.Bottom <= chart.Height));
         }
+        return families;
+    }
+
+    private static void ReportReaderDocumentTests(AnalyticsData data, FamilyEnvelopeQuantResult families, string output)
+    {
+        var manifest = new QuantManifest { UpdatedUtc = new DateTime(2026, 1, 2, 3, 4, 5, DateTimeKind.Utc) };
+        for (int index = 0; index < 6; index++) manifest.DeNovoInputs.Add(new()
+        {
+            SourceId = "synthetic-" + index, SourceDisplayName = "Synthetic source " + index,
+            ConfidenceField = "Native confidence", MinimumConfidence = 80, SourcePriority = index,
+            RawRows = 100, RowsPassingSourceFilter = 80,
+            FilePath = "C:/Synthetic inputs/Long input folder/Acquisition with technical replicate number " + index + "/source.denovo.csv",
+        });
+        var curation = new FamilyClusterFile { ReportDetails = new()
+        {
+            Title = "Synthetic J34 reader fixture", Authors = "Synthetic author", SampleDescription = "Synthetic sample",
+        } };
+        var packet = ReportProjectExporter.Build(SyntheticAnalyticsRows(), manifest, curation, Path.Combine(output, "figures"),
+            familyResults: families, analyticsData: data);
+        Check("Database gap unavailability is printed once",
+            packet.Document.Sections.Single(s => s.Id == ReportSectionIds.DatabaseGap).Blocks.OfType<ReportParagraph>()
+                .Count(p => p.Text.StartsWith("Database gap:", StringComparison.OrdinalIgnoreCase)) == 1);
+        var cover = packet.Document.Sections.Single(s => s.Id == ReportSectionIds.Title).Blocks.OfType<ReportParagraph>().ToArray();
+        Check("cover prints the stored sample and snapshot date without inventing metadata",
+            cover.Any(p => p.Text.Contains("Synthetic sample", StringComparison.Ordinal))
+            && cover.Any(p => p.Text.Contains("2026-01-02", StringComparison.Ordinal)));
+        Check("empty interpretation has an explicit missing-text notice",
+            packet.Document.Sections.Single(s => s.Id == ReportSectionIds.Interpretation).Blocks.OfType<ReportParagraph>()
+                .Any(p => p.Text.Contains("No written interpretation", StringComparison.Ordinal)));
+        byte[] bytes = WordReportWriter.BuildBytes(packet.Document);
+        using var zip = new ZipArchive(new MemoryStream(bytes));
+        using var reader = new StreamReader(zip.GetEntry("word/document.xml")!.Open());
+        var xml = XDocument.Parse(reader.ReadToEnd());
+        XNamespace w = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
+        Check("print contents carry page-reference fields with real heading bookmarks",
+            xml.Descendants(w + "fldSimple").Any(f => ((string?)f.Attribute(w + "instr"))?.StartsWith("PAGEREF ", StringComparison.Ordinal) == true)
+            && zip.GetEntry("word/settings.xml") != null);
+        ReportProjectExporter.Write(packet, Path.Combine(output, "reader-proof.docx"));
+        Check("native reader proof writes Word and complete workbook",
+            File.Exists(Path.Combine(output, "reader-proof.docx")) && File.Exists(Path.Combine(output, "reader-proof_supplement.xlsx")));
     }
 }
