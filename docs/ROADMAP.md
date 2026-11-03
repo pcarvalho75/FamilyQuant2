@@ -83,8 +83,6 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J41b | J41 reviewed and merged | L | 0.2 | 🟢 | J30c, J32c | Approved; gate green | FL | | 0 | 0 | |
-| J30b | The fixed export runs to the end on a copy of the full-run project through the real command | M | 0.5 | 🟢 | J30c | Word report and supplement written; times reported | RS | | 0 | 0 | |
-| J24c | Export progress on the full-run project, read from J30b's real export (which runs with the merged progress): the longest gap between two steps named | L | 0.3 | J30b | K14 | `READY` names the longest gap and its step | RS | | 0 | 0 | |
 | J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | 🟢 | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
 | J36b | Delivery rehearsal on the first full-run project into a staging folder | L | 0.3 | 🟢 | J36c | Summary with hashes and the trace's count | RS | | 0 | 0 | |
 | J36c | J36 reviewed and merged | L | 0.2 | J36b | K17 | Approved; gate green | RS | | 0 | 0 | |
@@ -106,7 +104,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J24c, J34c, J44b | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
+| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J34c, J44b | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
 | K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, J36c, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
@@ -117,11 +115,9 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J35a | Progress for Compute and opening: every phase counted against a known total, the current item, elapsed time and time since the last step, all logged | M | 0.6 | 🟢 | J35b | A fixture Compute records every phase once, in order | SH | | 0 | 0 | |
-| J35b | Progress on the full-run project: the longest gap between two steps named | L | 0.3 | J35a | J35c | `READY` names the longest gap and its phase | SH | | 0 | 0 | |
+| J35b | Progress on the full-run project: the longest gap between two steps named | L | 0.3 | 🟢 | J35c | `READY` names the longest gap and its phase | SH | | 0 | 0 | |
 | J35c | J35 reviewed and merged | L | 0.2 | J35b | J40 | Approved; gate green | SH | | 0 | 0 | |
-| J38a | Measure: time of each homology search call in one Compute (world pass, two world-error searches, attribution, two census searches): queries, candidates per query, seconds, cores | M | 0.5 | 🟢 | J38b | `FINDING J38` table | AS | | 0 | 0 | |
-| J38b | CPU profile of the slowest call: its top functions with file:line | M | 0.4 | J38a | J38c | The profile posted | AS | | 0 | 0 | |
+| J38b | CPU profile of the slowest call: its top functions with file:line | M | 0.4 | 🟢 | J38c | The profile posted | AS | | 0 | 0 | |
 | J38c | First fix: an identified peptide found exactly in a protein needs no scoring of the other candidates (proved from the scorer first) | H | 1 | J38b | J38d | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
 | J38d | Second fix, as the measurement says: one seed index shared by the searches on the same proteins, or the J28 cache pattern for the other searches | M | 1 | J38c | J38e | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
 | J38e | Compute before and after on the full-run copy | L | 0.3 | J38d | J38f | Both times; stored results byte-identical | AS | | 0 | 0 | |
