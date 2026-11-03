@@ -36,7 +36,8 @@ public static partial class FamilyCompositionStudy
             Policy = policy,
             Method = "Per-file primary family signal / sum of credited family signal; measured-peptide and recorded " +
                 "RAW TIC shares are separate. Family-world-only signal excluded. Arithmetic mean of available run " +
-                "shares, sample SD (n-1), CV = SD / mean. Zero denominators and undefined statistics are unavailable.",
+                "shares, sample SD (n-1), CV = SD / mean. Zero denominators and undefined statistics are unavailable. " +
+                "Pooled share uses all runs pooled; pooled-minus-mean is its signed difference from the per-run mean.",
             Families = attribution.Peptides.SelectMany(a => a.FamilyUserIds).Distinct().OrderBy(id => id)
                 .Select(id => new FamilyRunShareSummary { FamilyUserId = id }).ToList(),
         };
