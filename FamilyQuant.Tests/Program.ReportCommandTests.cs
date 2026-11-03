@@ -128,7 +128,7 @@ internal static partial class Program
             // comparison, and pin the empty-list sheets/references that the native command publishes.
             var expectedSheets = ReportListSheets.Complete(expectedExport.SupplementSheets)
                 .Where(sheet => sheet.OwnerSectionId != ReportSectionIds.Quality).ToArray();
-            Check("published companion contains exactly the selected production sheets", workbookCells.Count == 20
+            Check("published companion contains exactly the selected production sheets", workbookCells.Count == expectedSheets.Length + 1
                 && workbookCells.ContainsKey("List Evidence recorded_2B25AB")
                 && workbookCells.ContainsKey("List Family evidence use_8EB293")
                 && workbookCells.Keys.ToHashSet(StringComparer.Ordinal)
