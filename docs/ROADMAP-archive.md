@@ -251,4 +251,12 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J5c | Report threshold: families under a user-set share (default 0.1%) go to "others", and the list is kept | L | 0.5 | 🟢 | J6b | Fixture; the threshold is stored | T1 | | 0 | 0 | |
 | J5h | Where each family's signal came from: identified, de novo in the database and de novo found only in the family world, stacked per family | M | 1 | 🟢 | J6b | Native PNG in both themes; parts equal the stored result table | T2 | | 0 | 0 | |
+| J5a | Per run: each family's share in each RAW, and the mean, SD and CV over runs | M | 1.5 | 🟢 | J5d, J6b, J7a | Each run's parts sum to that run's total; fixture | FL | | 0 | 0 | |
+| J5b | Toxin count per family: the fewest database proteins that explain the family's peptides, and the proteins with a peptide of their own; definitions on screen and in exports | M | 1.5 | 🟢 | J6b, J7a | Fixture with a known minimal set | FL | | 0 | 0 | |
+
+### W3 Subclasses
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J3b | Credit each peptide to the deepest level it is unique to: a subclass when only that subclass holds it, else "family, subclass not resolved"; each family's parts sum to the family | H | 2 | 🟢 | J5d, J6b, J7a | Closure test bit for bit; family totals and golden unchanged | FL | | 0 | 0 | |
 
