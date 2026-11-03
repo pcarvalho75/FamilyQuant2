@@ -1,10 +1,10 @@
 # Recorded Paulo wording rulings
 
 `--ledger-apply-rulings <fresh-output> <date>` reads the shared wording TSV and
-the four recorded rules under `D:/FamilyQuant-data/reviews`. It writes one
+the five recorded rules under `D:/FamilyQuant-data/reviews`. It writes one
 `Paulo-rulings` register. Import it with the ordinary native evidence importer.
 The rule source is pinned to SHA256
-`3C6B1EC5979F0B593A609D0555AB84BC5EC05FCC60B370A647E11030993A8605`.
+`667874EC14E7AC206787190CCB1B01D7612A82CE9DC7FD35B33EDECD47324AB1`.
 Changing the rules requires reviewing this producer before another application.
 
 The dedicated `ruling` proof includes the full rule, old wording and new wording.
@@ -46,6 +46,13 @@ a DROP, export/storage and format/export rows never close this way, and a row Ru
 1 closes stays Rule 1. A missing or empty file closes nothing. Paulo fills the file;
 a superseded row that removes something the user could do stays open and goes to
 him one by one.
+
+Rule 5: a row tagged as a file-format row only because its sentence mentions a file
+is a wording row. The group file lists such a row once as `message`, beside at most
+one closing group. A message row lifts only the export-kind guard: it then closes
+under Rule 1 with a kept verdict and a live witness, or under rule 4 with its closing
+group (superseded). Every other guard stays, and an export row not listed as message
+stays open. A claim about what a file contains stays a row for a real run.
 
 Duplicate TSV entries are evaluated by observation ID in stable ordinal order.
 One eligible decision closes that observation; otherwise one reasoned decision

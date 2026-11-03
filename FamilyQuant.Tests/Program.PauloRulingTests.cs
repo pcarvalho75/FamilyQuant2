@@ -64,7 +64,7 @@ internal static partial class Program
             && LedgerPauloRulings.ReadGroupRulings(groupEmpty).Count == 0 && LedgerPauloRulings.ReadGroupRulings(groupHeader).Count == 0);
         bool badRefused = false;
         try { LedgerPauloRulings.ReadGroupRulings(groupBad); } catch (InvalidDataException) { badRefused = true; }
-        Check("a group ruling must be fragment, format or superseded", badRefused);
+        Check("a group ruling must be fragment, format, superseded or message", badRefused);
         string groupFormat = Path.Combine(groupFolder, "format.tsv");
         File.WriteAllText(groupFormat, "row_id\tgroup\tnote\n" + row.Id + "\tformat\tN0 counts keep digit grouping.\n");
         Check("a format group ruling is read with its note", LedgerPauloRulings.ReadGroupRulings(groupFormat) is { Count: 1 } formatRead
@@ -110,6 +110,42 @@ internal static partial class Program
         var dropFormat = LedgerPauloRulings.Evaluate(dropInput, drop, LedgerRulingLiveText.Find, facts,
             new Dictionary<string, LedgerPauloRulings.GroupRuling>(StringComparer.Ordinal) { [drop.Id] = new("format", "Synthetic.") });
         Check("an approved DROP stays a DROP under a format group ruling", !dropFormat.Closed && dropFormat.Reason == "Approved DROP is not a wording ruling.");
+        // Rule 5: a row listed as message lifts only the export-kind guard. It then needs a kept verdict and a live witness under
+        // Rule 1, or a closing group (superseded) under rule 4; every other guard stays, and an export row not listed stays open.
+        Check("the pinned rules record Paulo's rule 5 on file-format rows", File.ReadAllLines(LedgerPauloRulings.RulesPath)
+            .Any(line => line.StartsWith("Rule 5, Paulo 2026-11-02:", StringComparison.Ordinal) && line.Contains("file-format row", StringComparison.Ordinal)));
+        string groupMessage = Path.Combine(groupFolder, "message.tsv"), groupMessageOnly = Path.Combine(groupFolder, "message-only.tsv"),
+            groupTwoClosing = Path.Combine(groupFolder, "two-closing.tsv"), groupTwoMessages = Path.Combine(groupFolder, "two-messages.tsv");
+        File.WriteAllText(groupMessage, "row_id\tgroup\tnote\n" + row.Id + "\tmessage\t\n" + unverified.Input.Id + "\tmessage\t\n"
+            + unverified.Input.Id + "\tsuperseded\tThe export moved to Results.\n" + drop.Id + "\tmessage\t\n" + drop.Id + "\tsuperseded\tSynthetic.\n");
+        File.WriteAllText(groupMessageOnly, "row_id\tgroup\tnote\n" + unverified.Input.Id + "\tmessage\t\n");
+        File.WriteAllText(groupTwoClosing, "row_id\tgroup\tnote\n" + row.Id + "\tfragment\t\n" + row.Id + "\tsuperseded\tSynthetic.\n");
+        File.WriteAllText(groupTwoMessages, "row_id\tgroup\tnote\n" + row.Id + "\tmessage\t\n" + row.Id + "\tmessage\t\n");
+        Dictionary<string, LedgerPauloRulings.GroupRuling>? messages = null, messageOnly = null;
+        try { messages = LedgerPauloRulings.ReadGroupRulings(groupMessage); messageOnly = LedgerPauloRulings.ReadGroupRulings(groupMessageOnly); }
+        catch (InvalidDataException) { }
+        Check("a message entry is read alone or beside one closing group", messages is { Count: 3 } && messageOnly is { Count: 1 });
+        bool Refused(string path) { try { LedgerPauloRulings.ReadGroupRulings(path); return false; } catch (InvalidDataException) { return true; } }
+        Check("a row cannot carry two closing groups or two message entries", Refused(groupTwoClosing) && Refused(groupTwoMessages));
+        if (messages != null && messageOnly != null)
+        {
+            var exportRow = row with { Kind = "format/export" };
+            Check("a message row of export kind with a kept verdict and a live witness closes under Rule 1",
+                LedgerPauloRulings.Evaluate(input, exportRow, LedgerRulingLiveText.Find, facts, messages) is { Closed: true, Rule: "1" });
+            Check("the same export row not listed as message stays open",
+                LedgerPauloRulings.Evaluate(input, exportRow, LedgerRulingLiveText.Find, facts, fragment) is { Closed: false, Reason: "Export/storage and format/export rows require execution." });
+            var unverifiedExport = unverified.Row! with { Kind = "format/export" };
+            Check("a message row with a superseded entry closes under rule 4 with that reason",
+                LedgerPauloRulings.Evaluate(unverified.Input, unverifiedExport, LedgerRulingLiveText.Find, facts, messages)
+                    is { Closed: true, Rule: "4", Reason: "Paulo group ruling: superseded, The export moved to Results." });
+            Check("a message row without a kept verdict or a closing group stays open",
+                !LedgerPauloRulings.Evaluate(unverified.Input, unverifiedExport, LedgerRulingLiveText.Find, facts, messageOnly).Closed);
+            Check("message lifts only the export guard: a handler row stays outside the wording rules",
+                LedgerPauloRulings.Evaluate(input, row with { Kind = "handler" }, LedgerRulingLiveText.Find, facts, messages)
+                    is { Closed: false, Reason: "Behavior/control/handler/binding row is outside wording rules." });
+            Check("an approved DROP stays a DROP when listed as message and superseded",
+                LedgerPauloRulings.Evaluate(dropInput, drop, LedgerRulingLiveText.Find, facts, messages) is { Closed: false, Reason: "Approved DROP is not a wording ruling." });
+        }
         foreach (string kind in new[] { "format/export", "export/storage fact", "handler", "handler definition", "control", "shortcut" })
             Check("ruling cannot replace " + kind + " execution", !Decide(input, row with { Kind = kind }).Closed);
         // Frozen App.xaml:46 sets only Foreground. The first Style also has a

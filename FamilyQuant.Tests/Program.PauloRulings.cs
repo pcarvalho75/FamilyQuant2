@@ -53,9 +53,11 @@ internal static partial class Program
             { byId.TryGetValue(input.Id, out var row); return !LedgerPauloRulings.Evaluate(input with { NewText = "" }, row, LedgerRulingLiveText.Find, factChecks).Closed; }));
             Check("every accepted wording ruling has an independent kept fact verdict", decisions.Where(decision => decision.Closed && decision.Rule is "1" or "3")
                 .All(decision => factChecks.TryGetValue(decision.Id, out var fact) && fact.Verdict == "kept"));
-            Check("every rule-4 closure is listed in the pinned group ruling and is no DROP or execution row", decisions.Where(decision => decision.Closed && decision.Rule == "4")
-                .All(decision => groupRulings.ContainsKey(decision.Id) && byId.TryGetValue(decision.Id, out var observed) && !FeatureLedger.IsApprovedDrop(observed)
-                    && observed.Kind is not ("export/storage fact" or "format/export")));
+            Check("every rule-4 closure is listed in the pinned group ruling and is no DROP or unlisted execution row", decisions.Where(decision => decision.Closed && decision.Rule == "4")
+                .All(decision => groupRulings.TryGetValue(decision.Id, out var listed) && listed.Group.Length > 0 && byId.TryGetValue(decision.Id, out var observed)
+                    && !FeatureLedger.IsApprovedDrop(observed) && (observed.Kind is not ("export/storage fact" or "format/export") || listed.Message)));
+            Check("every closed export-kind row is listed as message (Rule 5)", decisions.Where(decision => decision.Closed && byId.TryGetValue(decision.Id, out var observed)
+                && observed.Kind is "export/storage fact" or "format/export").All(decision => groupRulings.TryGetValue(decision.Id, out var listed) && listed.Message));
             if (groupRulings.Count == 0)
                 Check("with no group ruling from Paulo, no row closes under rule 4", decisions.All(decision => decision.Rule != "4"));
             Console.WriteLine("Group ruling: " + (groupFile.Length > 0 ? groupRulings.Count.ToString(CultureInfo.InvariantCulture) + " listed rows, "
