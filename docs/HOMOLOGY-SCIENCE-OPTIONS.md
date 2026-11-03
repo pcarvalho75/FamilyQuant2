@@ -69,3 +69,15 @@ the stored world/known-answer data; they do not run full Compute. J42's protein
 family LOO is a separate path and is reported as invariant when that path and
 its inputs are unchanged. De novo correctness is measured on the native
 PSM/tag known-answer pairs and the stored Database gap rules.
+
+The native `--replay-current-homology-capture` command verifies captured file
+hashes, replays the current engine and compares every scientific result byte.
+With all options OFF, all five verified J38 calls passed: see
+`D:/FamilyQuant-data/out-assay/j47-off-capture-replay/validation.json`.
+
+Cached world APIs accept complete, verified search-result dictionaries and fail
+on a missing required query. `RunLengthsFromResults`, `KnownAnswersFromResults`,
+`CreditFromResults` and `CompleteLengthsFromResults` reuse the original aggregate,
+error-rate and composition code. Native fixture comparisons preserve every pass
+and summary byte. These entry points do not extract RAW data or silently treat a
+missing search as no signal.

@@ -20,13 +20,19 @@ internal static partial class Program
         {
             if (args.Length != 4) throw new ArgumentException("Use --replay-homology-capture <capture> <fresh-output> <expected-call-count>.");
             return ReplayHomologyCapture(args[1], args[2], int.Parse(args[3], CultureInfo.InvariantCulture));
+        }),
+        new("--replay-current-homology-capture", 17, TestCommandPhase.Raw,
+        args => args.Length > 0 && args[0] == "--replay-current-homology-capture", (args, _) =>
+        {
+            if (args.Length != 4) throw new ArgumentException("Use --replay-current-homology-capture <capture> <fresh-output> <expected-call-count>.");
+            return ReplayHomologyCapture(args[1], args[2], int.Parse(args[3], CultureInfo.InvariantCulture), current: true);
         })];
 
     private sealed record CapturedProtein(string Id, string Sequence);
     private sealed record CapturedSearch(int Call, int Queries, int Proteins, int SeedLength, bool HasSeedIndex,
         string DatabaseSha256, string QueriesSha256, string OptionsSha256, string ResultsSha256);
 
-    private static int ReplayHomologyCapture(string captureDirectory, string outputDirectory, int expectedCalls)
+    private static int ReplayHomologyCapture(string captureDirectory, string outputDirectory, int expectedCalls, bool current = false)
     {
         string capture = Path.GetFullPath(captureDirectory), output = Path.GetFullPath(outputDirectory);
         if (Directory.Exists(output) || File.Exists(output)) throw new IOException("Use a fresh replay output folder.");
@@ -37,7 +43,7 @@ internal static partial class Program
         bool allEqual = true;
         foreach (string directory in calls)
         {
-            var result = ReplayCapturedSearch(directory, output);
+            var result = ReplayCapturedSearch(directory, output, current);
             report.Add(result.Report); allEqual &= result.Equal;
             File.WriteAllText(Path.Combine(output, "validation.json"), JsonSerializer.Serialize(new
                 { ExpectedCalls = expectedCalls, CompletedCalls = report.Count, AllEqual = allEqual, Calls = report },
@@ -48,7 +54,7 @@ internal static partial class Program
     }
 
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-    private static (bool Equal, object Report) ReplayCapturedSearch(string directory, string output)
+    private static (bool Equal, object Report) ReplayCapturedSearch(string directory, string output, bool current)
     {
         string Hash(string name)
         {
@@ -75,7 +81,7 @@ internal static partial class Program
         TimeSpan cpuStart = process.TotalProcessorTime;
         var watch = Stopwatch.StartNew();
 #pragma warning disable CS0618 // Explicit equivalence replay against the frozen reference.
-        var actual = HomologyMapper.Search(queries, database, options);
+        var actual = current ? HomologySearch.Search(queries, database, options) : HomologyMapper.Search(queries, database, options);
 #pragma warning restore CS0618
         watch.Stop();
         // The recorder uses this exact field order. Both identities, matched residues and both
@@ -93,6 +99,7 @@ internal static partial class Program
         string before = Convert.ToHexString(SHA256.HashData(bytes)), after = Convert.ToHexString(SHA256.HashData(expected));
         if (!equal) File.WriteAllBytes(Path.Combine(output, "mismatch-old-" + metadata.Call + ".json"), bytes);
         return (equal, new { metadata.Call, metadata.Queries, metadata.Proteins, Hits = actual.Sum(r => r.Hits.Count),
+            Engine = current ? "HomologySearch science OFF" : "Frozen HomologyMapper",
             Equal = equal, BeforeSha256 = before, AfterSha256 = after, LegacySeconds = watch.Elapsed.TotalSeconds,
             LegacyCpuSeconds = (process.TotalProcessorTime - cpuStart).TotalSeconds,
             CapturedDatabaseSha256 = metadata.DatabaseSha256, CapturedQueriesSha256 = metadata.QueriesSha256,
