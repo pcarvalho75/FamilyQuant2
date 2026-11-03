@@ -19,6 +19,8 @@ namespace FamilyQuant
         public string Run { get; set; } = string.Empty;
         public double AssignedSignal { get; set; }
         public double MeasuredSignal { get; set; }
+        /// <summary>Recorded RAW total ion current, separate from measured peptide signal.</summary>
+        public double? TotalIonCurrent { get; set; }
     }
 
     public sealed class FamilyRunShare
@@ -29,6 +31,8 @@ namespace FamilyQuant
         public double? ShareOfAssignedSignal { get; set; }
         /// <summary>Null when this run has no measured peptide signal. This is not a TIC share.</summary>
         public double? ShareOfMeasuredSignal { get; set; }
+        /// <summary>Null unless this file has a positive recorded RAW total ion current.</summary>
+        public double? ShareOfTic { get; set; }
     }
 
     public sealed class FamilyRunShareSummary
@@ -41,6 +45,18 @@ namespace FamilyQuant
         public double? StandardDeviation { get; set; }
         /// <summary>Sample SD / mean, as a ratio; null when SD is unavailable or mean is zero.</summary>
         public double? CoefficientOfVariation { get; set; }
+        /// <summary>All runs pooled, on the existing primary family basis; separate from the run mean.</summary>
+        public double PooledSignal { get; set; }
+        public double? PooledShare { get; set; }
+        /// <summary>PooledShare minus MeanShare; both shares use the assigned-family denominator.</summary>
+        public double? PooledMinusMeanShare { get; set; }
+        /// <summary>Arithmetic mean and sample SD of measured-peptide shares; both null if any run
+        /// lacks the share. As elsewhere, sample SD needs at least two runs.</summary>
+        public double? MeanShareOfMeasuredSignal { get; set; }
+        public double? StandardDeviationOfMeasuredSignal { get; set; }
+        /// <summary>Separate RAW TIC statistics, present only when every run has a TIC share.</summary>
+        public double? MeanShareOfTic { get; set; }
+        public double? StandardDeviationOfTic { get; set; }
     }
 
     /// <summary>Database-protein diversity, not a gene or proteoform count. Greedy set cover is an
@@ -59,6 +75,10 @@ namespace FamilyQuant
         public int ObservedPeptideCount { get; set; }
         public List<string> SelectedProteinIdentifiers { get; set; } = new();
         public List<string> UnexplainedPeptides { get; set; } = new();
+        /// <summary>False means the greedy count explains only the supported subset. Report the
+        /// unexplained count beside the estimate; it is not a complete explanation of all observations.</summary>
+        public bool ExplainsAllObservedPeptides => UnexplainedPeptides.Count == 0;
+        public int ExplainedPeptideCount => ObservedPeptideCount - UnexplainedPeptides.Count;
     }
 
     /// <summary>A partition of credited family signal. A missing key with IsUnresolved=true denotes

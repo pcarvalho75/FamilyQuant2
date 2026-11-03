@@ -18,6 +18,8 @@
                           ToolTip="Builds families from a FASTA or target-decoy database. Save the open project before starting a different database."/>
                 <MenuItem x:Name="MenuItemLoadFQC" Header="Open" Command="Open" InputGestureText="Ctrl+O"
                           ToolTip="Opens a FamilyQuant project or an older Family Cluster File. Save your current changes first."/>
+                <MenuItem x:Name="MenuItemFamilyPanel" Header="Import family panel" Click="MenuItemFamilyPanel_Click" IsEnabled="False"
+                          ToolTip="Import or edit a family panel for the open project."/>
                 <Separator/>
                 <MenuItem x:Name="MenuItemSaveProject" Header="Save" Command="Save" InputGestureText="Ctrl+S" IsEnabled="False"
                           ToolTip="Saves the open project's families and stored quantitation. Disabled until a project is loaded."/>
@@ -36,6 +38,8 @@
                 </MenuItem>
                 <MenuItem x:Name="MenuItemReportDetails" Header="Report details" Click="MenuItemReportDetails_Click" IsEnabled="False"
                           ToolTip="Edit the study description and written interpretation saved with the project. Disabled until a project is open."/>
+                <MenuItem x:Name="MenuItemExportReport" Header="Export report" Click="MenuItemExportReport_Click"
+                          ToolTip="Write a Word report from stored Results and selected sections or figures. Compute full XIC first when no Results are stored."/>
                 <MenuItem x:Name="MenuItemRecent" Header="Recent projects" SubmenuOpened="MenuItemRecent_SubmenuOpened"
                           ToolTip="Reopens a recent project or Family Cluster File. Missing files remain listed with their paths."/>
                 <Separator/>

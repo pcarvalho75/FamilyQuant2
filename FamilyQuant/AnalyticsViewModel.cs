@@ -95,6 +95,8 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     }
 
     public void ShowStatus(string message) => Status = message;
+    public IReadOnlyList<AnalyticsFigure> BuildCompositionFigures() => StoredCompositionFigures.Build(manifest,
+        Families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description));
     public string ExportUnavailableReason => ExportKind switch
     {
         ResultsExportKind.Homology => "Nothing was exported: no homology search result is stored, so there are no assignments to write. Open De novo and press Search first, then return to Results.",
@@ -169,8 +171,15 @@ public sealed class AnalyticsViewModel : ScreenViewModel
             ResultsExportKind.Peptides => path => File.WriteAllText(path, AnalyticsCsv.BuildPeptideCsv(Data!.Peptides)),
             ResultsExportKind.Figures => path => {
                 var written = AnalyticsFigures.Save(Data!, Families, path, top, asPercent);
+                foreach (var figure in BuildCompositionFigures())
+                {
+                    string figurePath = Path.Combine(path, figure.FileName);
+                    File.WriteAllBytes(figurePath, FamilyCompositionFigures.RenderPng(figure));
+                    written.Add(figurePath);
+                }
                 describe(written.Count.ToString("N0", CultureInfo.CurrentCulture) + " PNG figure(s): " +
-                    string.Join(", ", written.Select(Path.GetFileName)) + ". Each is 1920 by 1080 device pixels in the Light projector palette");
+                    string.Join(", ", written.Select(Path.GetFileName)) + ". Standard figures are 1920 by 1080 device pixels; " +
+                    "composition figures expand vertically to retain every label. All use the Light projector palette");
             },
             ResultsExportKind.EvidencePack => path => {
                 var written = PresentationEvidencePack.Save(Data!, manifest!, curation!, Families!, path);
