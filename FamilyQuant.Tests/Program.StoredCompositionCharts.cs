@@ -4,6 +4,7 @@ using FamilyQuant.Evidence.Positions;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Globalization;
 using System.Linq;
 
 namespace FamilyQuant.Tests;
@@ -48,6 +49,23 @@ internal static partial class Program
             control.ViewModel.BuildCompositionFigures(strict: true).Where(f => f.Chart is FamilyRingChart or ProteinCoverageMapChart).All(f =>
                 File.Exists(Path.Combine(export, f.FileName))
                 && File.ReadAllBytes(Path.Combine(export, f.FileName)).SequenceEqual(FamilyCompositionFigures.RenderPng(f))));
+        var baselinePngs = Directory.GetFiles(export, "*.png").ToDictionary(p => Path.GetFileName(p)!, File.ReadAllBytes, StringComparer.Ordinal);
+        var culture = CultureInfo.CurrentCulture; var uiCulture = CultureInfo.CurrentUICulture;
+        try
+        {
+            foreach (string locale in new[] { "en-US", "pt-BR" })
+            {
+                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo(locale); CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(locale);
+                string localeFolder = Path.Combine(folder, "all-figures-" + locale);
+                control.ViewModel.Export(localeFolder);
+                Check(locale + " every Results PNG, including legacy charts, equals the invariant export",
+                    baselinePngs.All(p => File.Exists(Path.Combine(localeFolder, p.Key))
+                        && File.ReadAllBytes(Path.Combine(localeFolder, p.Key)).SequenceEqual(p.Value)));
+                Check(locale + " Results export restores caller display cultures",
+                    CultureInfo.CurrentCulture.Name == locale && CultureInfo.CurrentUICulture.Name == locale);
+            }
+        }
+        finally { CultureInfo.CurrentCulture = culture; CultureInfo.CurrentUICulture = uiCulture; }
         manifest.FamilyPeptideLocalization!.Families[0].Proteins[0].ProteinSequenceSha256 = new string('0', 64);
         Check("equal protein length cannot override a stale localization sequence hash",
             Throws<InvalidOperationException>(() => ProteinCoverageFigures.FromStored(manifest.FamilyPeptideLocalization, project)));

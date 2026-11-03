@@ -178,17 +178,25 @@ public sealed class AnalyticsViewModel : ScreenViewModel
             ResultsExportKind.Summary => path => File.WriteAllText(path, AnalyticsCsv.BuildSummaryCsv(Data!.Fractions, Data.Grouped)),
             ResultsExportKind.Peptides => path => File.WriteAllText(path, AnalyticsCsv.BuildPeptideCsv(Data!.Peptides)),
             ResultsExportKind.Figures => path => {
-                var composition = BuildCompositionFigures(strict: true);
-                var written = AnalyticsFigures.Save(Data!, Families, path, top, asPercent);
-                foreach (var figure in composition)
+                var culture = CultureInfo.CurrentCulture;
+                var uiCulture = CultureInfo.CurrentUICulture;
+                try
                 {
-                    string figurePath = Path.Combine(path, figure.FileName);
-                    File.WriteAllBytes(figurePath, FamilyCompositionFigures.RenderPng(figure));
-                    written.Add(figurePath);
+                    CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+                    CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
+                    var composition = BuildCompositionFigures(strict: true);
+                    var written = AnalyticsFigures.Save(Data!, Families, path, top, asPercent);
+                    foreach (var figure in composition)
+                    {
+                        string figurePath = Path.Combine(path, figure.FileName);
+                        File.WriteAllBytes(figurePath, FamilyCompositionFigures.RenderPng(figure));
+                        written.Add(figurePath);
+                    }
+                    describe(written.Count.ToString("N0", CultureInfo.InvariantCulture) + " PNG figure(s): " +
+                        string.Join(", ", written.Select(Path.GetFileName)) + ". Standard figures are 1920 by 1080 device pixels; " +
+                        "composition figures expand vertically to retain every label. All use the Light projector palette");
                 }
-                describe(written.Count.ToString("N0", CultureInfo.CurrentCulture) + " PNG figure(s): " +
-                    string.Join(", ", written.Select(Path.GetFileName)) + ". Standard figures are 1920 by 1080 device pixels; " +
-                    "composition figures expand vertically to retain every label. All use the Light projector palette");
+                finally { CultureInfo.CurrentCulture = culture; CultureInfo.CurrentUICulture = uiCulture; }
             },
             ResultsExportKind.EvidencePack => path => {
                 var written = PresentationEvidencePack.Save(Data!, manifest!, curation!, Families!, path);
