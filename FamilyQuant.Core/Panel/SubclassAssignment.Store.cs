@@ -14,8 +14,10 @@ public static partial class SubclassAssignment
     public static SubclassAssignmentCandidate ComputeCurrent(FamilyClusterFile file, OperationContext? operation = null)
     {
         PanelAssignmentEvidenceStore.RequireCurrent(file);
-        var candidate = BuildCandidate(file, file.EvidenceRecipe!.Options, operation);
+        var resolver = PanelEvidenceClassifier.CreateCurrentResolver(file);
+        var candidate = BuildCandidateCore(file, file.EvidenceRecipe!.Options, operation, null, resolver);
         VerifyCandidate(file, candidate);
+        if (!resolver.IsCurrent(file)) throw new InvalidOperationException("Panel-family evidence changed during subclass computation.");
         return candidate;
     }
 
@@ -73,7 +75,7 @@ public static partial class SubclassAssignment
         PanelAssignmentEvidenceStore.RequireCurrent(file);
         string panel = PanelDerivedDataCurrentness.Fingerprint(file.FamilyPanel!);
         string source = SourceFingerprint(file, file.EvidenceRecipe!.Options, panel);
-        if (candidate.PanelFingerprint != panel || candidate.SourceFingerprint != source
+        if (!candidate.UsesCurrentResolver || candidate.PanelFingerprint != panel || candidate.SourceFingerprint != source
             || candidate.ContentFingerprint != LabelFingerprint(candidate.SourceFingerprint, candidate.Labels))
             throw new InvalidOperationException("Subclass evidence changed. Rebuild the subclass candidate.");
     }
