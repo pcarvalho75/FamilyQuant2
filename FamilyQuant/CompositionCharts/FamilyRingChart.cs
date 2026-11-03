@@ -47,7 +47,7 @@ public sealed partial class FamilyRingChart : CompositionDrawingBase, IFigureDet
             double sweep = family.Percent * 3.6;
             Brush familyFill = family.IsUnassigned ? palette.Remainder : Series(i);
             if (sweep > 0)
-                dc.DrawGeometry(familyFill, sweep >= 2 ? new Pen(palette.Backdrop, 1.2) : null,
+                dc.DrawGeometry(familyFill, DetailNotice.Length == 0 || sweep >= 2 ? new Pen(palette.Backdrop, 1.2) : null,
                     FamilyRingPlot.Annulus(center, radius * .48, radius * .74, angle, sweep));
             double partAngle = angle;
             for (int j = 0; j < family.Parts.Count; j++)
@@ -55,7 +55,7 @@ public sealed partial class FamilyRingChart : CompositionDrawingBase, IFigureDet
                 var part = family.Parts[j]; double partSweep = part.Percent * 3.6;
                 Brush fill = part.IsUnresolved ? palette.Remainder : Series(i + j);
                 if (partSweep > 0)
-                    dc.DrawGeometry(fill, partSweep >= 2 ? new Pen(palette.Backdrop, 1) : null,
+                    dc.DrawGeometry(fill, DetailNotice.Length == 0 || partSweep >= 2 ? new Pen(palette.Backdrop, 1) : null,
                         FamilyRingPlot.Annulus(center, radius * .78, radius, partAngle, partSweep));
                 partAngle += partSweep;
             }

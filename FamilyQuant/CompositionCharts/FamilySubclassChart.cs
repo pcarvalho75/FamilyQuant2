@@ -44,7 +44,7 @@ public sealed class FamilySubclassChart : CompositionDrawingBase, IFigureDetails
                 var part = row.Subclasses[i];
                 double width = (right - left) * part.Percent / maximum;
                 Brush fill = string.IsNullOrEmpty(part.Key) ? palette.Remainder : Series(i);
-                if (width > 0) dc.DrawRectangle(fill, width >= 2 ? new Pen(palette.Backdrop, .7) : null, new Rect(x, y, width, 23));
+                if (width > 0) dc.DrawRectangle(fill, DetailNotice.Length == 0 || width >= 2 ? new Pen(palette.Backdrop, .7) : null, new Rect(x, y, width, 23));
                 if (i < FigureLayout.SubclassReferences)
                 {
                     dc.DrawRectangle(fill, null, new Rect(left, y + 33 + i * 18, 7, 7));
