@@ -12,6 +12,7 @@ public sealed record FamilyDiversityPoint(string Key, string Label, double Share
 public sealed class FamilyAbundanceDiversityChart : CompositionDrawingBase
 {
     private readonly FamilyCompositionData data;
+    public FamilyCompositionData Data => data;
     public IReadOnlyList<FamilyDiversityPoint> Points { get; }
     public IReadOnlyList<FamilyCompositionValue> UnavailableFamilies { get; }
     public static double RecommendedHeight(FamilyCompositionData data) =>

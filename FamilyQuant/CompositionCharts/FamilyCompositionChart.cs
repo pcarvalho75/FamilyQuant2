@@ -10,6 +10,7 @@ namespace FamilyQuant;
 public sealed class FamilyCompositionChart : CompositionDrawingBase
 {
     private readonly FamilyCompositionData data;
+    public FamilyCompositionData Data => data;
     public IReadOnlyList<FamilyCompositionValue> Rows => data.Families;
     public double AxisMinimum => Rows.Count == 0 ? 0 : Math.Min(0, Math.Floor(Rows.Min(r => r.MeanPercent - (r.SdPercent ?? 0)) / 10) * 10);
     public FamilyCompositionChart(FamilyCompositionData data) => this.data = data ?? throw new ArgumentNullException(nameof(data));

@@ -1,4 +1,5 @@
 using System;
+using FamilyQuant.Report.Captions;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
@@ -33,7 +34,8 @@ public abstract class CompositionDrawingBase : ChartDrawingBase, IPalettedChart
         _ => palette.DeNovo
     };
 
-    protected static string Number(double value, string format = "0.##") => value.ToString(format, CultureInfo.CurrentCulture);
+    protected static string Number(double value, string? format = null) =>
+        ReportCaptionBuilder.Number(value, CultureInfo.CurrentCulture, format);
 
     protected void PercentAxis(DrawingContext dc, double left, double right, double top, double bottom, double maximum,
         double minimum = 0)
