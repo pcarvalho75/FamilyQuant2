@@ -15,6 +15,10 @@ English `READ-ME.txt`, and records checks in `delivery-checks.json`. The console
 sizes, SHA-256 values, readable Office XML-part counts and the trace's `NOT FOUND` count. A
 nonzero unmatched count gives exit code 1 and retains the files for review.
 
+The trace records `AMBIGUOUS` when equal numeric cells have no unique named subject. These rows
+have no selected source citation. The console and `delivery-checks.json` report this count separately;
+zero `NOT FOUND` does not close ambiguous citations. Exit status still depends on `NOT FOUND`.
+
 The panel must match the SHA-256 recorded in the project. The command resolves its recorded
 absolute path, a same-folder basename or recorded workbook input paths. Use `--panel` when a
 project records only a basename that is no longer beside it. A different workbook is refused.

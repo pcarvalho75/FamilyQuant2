@@ -121,6 +121,9 @@ internal static partial class Program
         Check("panel lookup refuses a different workbook hash", Throws<InvalidDataException>(() => DeliveryRehearsal.ResolvePanel(project, "panel.xlsx", new string('0', 64), workbook, Array.Empty<string>())));
         var result = StageDelivery(project, Path.Combine(folder, "staging"), null, false, inputFolder);
         Check("real delivery rehearsal trace has no unmatched tokens", result.NotFound == 0);
+        Check("delivery reports ambiguous citations separately from missing tokens", result.Summary.Contains("Trace AMBIGUOUS: " + result.Ambiguous.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal)
+            && JsonDocument.Parse(File.ReadAllText(Path.Combine(result.Root, "delivery-checks.json"))).RootElement.GetProperty("Ambiguous").GetInt32() == result.Ambiguous
+            && File.ReadAllText(Path.Combine(result.Root, "READ-ME.txt")).Contains("Trace AMBIGUOUS count: " + result.Ambiguous.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal));
         Check("delivery contains project panel report workbook trace and read-me", result.Files.Count == 6 && result.Files.All(f => f.Bytes > 0 && f.Sha256.Length == 64));
         Check("all report workbook and panel XML parts are readable", result.Files.Where(f => f.File.EndsWith(".docx", StringComparison.Ordinal) || f.File.EndsWith(".xlsx", StringComparison.Ordinal)).All(f => f.XmlParts > 0));
         Check("delivery keeps both original inputs unchanged", original == DeliveryWorkspace.Sha256(project) && originalPanel == DeliveryWorkspace.Sha256(workbook));
