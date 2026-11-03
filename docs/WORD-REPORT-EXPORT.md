@@ -3,6 +3,8 @@
 The command requires stored Full XIC Results. A missing project or missing Results gives
 the next action before opening an output chooser. Report details, input provenance, section
 and figure choices, and the report threshold come from the open project.
+File commands refresh when a shared operation begins or ends, including automatic family
+attribution after opening a project. They become available without visiting another menu.
 
 Preparation uses the shared operation host and waits for family attribution. The production
 `ReportProjectExporter` builds sections and pinned Light PNGs on an owned STA thread from a
@@ -34,6 +36,7 @@ Focused checks after a Release build:
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --test-report-selection
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --test-report-command <fresh-output>
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --test-report-progress <fresh-output>
+& ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --test-project-command-ready <fresh-output>
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --report-export-screens <fresh-output>
 ```
 
