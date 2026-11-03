@@ -113,7 +113,9 @@ namespace FamilyQuant
                 using (var fileStream = new FileStream(temp, FileMode.Create, FileAccess.Write, FileShare.None))
                 using (var zip = new ZipArchive(fileStream, ZipArchiveMode.Create))
                 {
-                    ProjectArchiveEntries.WriteTextEntry(zip, CurationEntryName, fcf.ToJsonText(), CompressionLevel.Optimal, operation);
+                    operation?.ThrowIfCancellationRequested();
+                    using (Stream curationStream = zip.CreateEntry(CurationEntryName, CompressionLevel.Optimal).Open())
+                        fcf.WriteJsonUtf8(curationStream);
                     ProjectQuantCodec.Write(zip, rows, operation);
                     if (spectrumRows.Count > 0) ProjectSpectrumCodec.Write(zip, spectrumRows, operation);
                     ProjectArchiveEntries.WriteTextEntry(zip, ManifestEntryName,
