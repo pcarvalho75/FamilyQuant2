@@ -14,7 +14,10 @@ namespace FamilyQuant.Report;
 public sealed record ReportChart(string SectionId, string FileName, string Title, string Caption,
     Func<FrameworkElement> CreateChart, double Width = ChartImageExporter.DefaultLayoutWidth,
     double Height = ChartImageExporter.DefaultLayoutHeight, FigureCaptionInput? CaptionInput = null);
-public sealed record ReportFigureAvailability(string SectionId, string Title, string Reason);
+public sealed record ReportFigureAvailability(string SectionId, string Title, string Reason)
+{
+    public bool SupplementOnly { get; init; }
+}
 public sealed record ReportFigurePlan(IReadOnlyList<ReportChart> Charts, IReadOnlyList<ReportFigureAvailability> Unavailable);
 public sealed record ReportPlacedFigure(string SectionId, ReportFigure Figure);
 
