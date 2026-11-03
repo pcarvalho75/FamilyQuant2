@@ -158,7 +158,15 @@ internal static class ReportNumberTrace
                     var previous = paragraph.PreviousSibling();
                     while (previous is Paragraph prior && prior.ParagraphProperties?.ParagraphStyleId?.Val?.Value == "Caption")
                         previous = previous.PreviousSibling();
-                    captionTable = previous as Table;
+                    var next = paragraph.NextSibling();
+                    while (next is Paragraph following && following.ParagraphProperties?.ParagraphStyleId?.Val?.Value == "Caption")
+                        next = next.NextSibling();
+                    var precedingTable = previous as Table;
+                    var followingTable = next as Table;
+                    // A caption may precede its table or follow an older export's table.
+                    // Require exactly one adjacent owner; never infer ownership from matching numbers.
+                    if (precedingTable == null || followingTable == null)
+                        captionTable = precedingTable ?? followingTable;
                 }
                 foreach (Match token in Tokens.Matches(text))
                 {
@@ -175,7 +183,7 @@ internal static class ReportNumberTrace
                         int actual = rowCount ? (tableRows?.Length ?? 0) - 1 : tableRows?.FirstOrDefault()?.Elements<TableCell>().Count() ?? -1;
                         bool agrees = actual >= 0 && value == actual.ToString(CultureInfo.InvariantCulture);
                         category = agrees ? (rowCount ? "TABLE ROWS" : "TABLE COLUMNS") : "NOT FOUND";
-                        matchKind = captionTable == null ? "no preceding Word table" : "Word table " + (rowCount ? "rows: " : "columns: ") + actual.ToString(CultureInfo.InvariantCulture);
+                        matchKind = captionTable == null ? "no unique adjacent Word table" : "Word table " + (rowCount ? "rows: " : "columns: ") + actual.ToString(CultureInfo.InvariantCulture);
                     }
                     if (category.Length == 0)
                     {
