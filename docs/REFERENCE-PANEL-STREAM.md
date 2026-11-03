@@ -2,8 +2,8 @@
 
 `ReferencePanelFetcher.FetchAsync` uses UniProt's `uniprotkb/stream` endpoint. It sorts and
 case-folds the families found in the file, combines the previous `family:"..."` clauses with
-OR, and splits only when adding a clause would take the complete escaped URL above 7,000
-characters. No family, taxon or protein list is built into the rule. An empty selection makes
+OR, and splits when adding a clause would take the complete escaped URL above 7,000
+characters or exceed UniProt's 100-condition query limit. No family, taxon or protein list is built into the rule. An empty selection makes
 no requests.
 
 The requested fields are unchanged from the paged route. Every entry goes through the same

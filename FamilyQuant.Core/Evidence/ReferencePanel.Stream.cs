@@ -14,6 +14,8 @@ public static partial class ReferencePanelFetcher
     // Leave room for the request line and intermediaries' usual 8 KB limit. Measure the escaped URL,
     // including fields, rather than guessing a family count or depending on the organism's vocabulary.
     private const int MaximumStreamUrlLength = 7000;
+    // UniProt also limits a combined query to 100 OR conditions, even below its URL limit.
+    private const int MaximumFamiliesPerStream = 100;
     private static readonly string StreamEndpoint = Endpoint.Replace("/search?format=json&size=500", "/stream?format=json", StringComparison.Ordinal);
     private const string CountEndpoint = "https://rest.uniprot.org/uniprotkb/search?format=json&size=0&fields=accession&query=";
 
@@ -108,7 +110,8 @@ public static partial class ReferencePanelFetcher
         foreach (string family in families)
         {
             current.Add(family);
-            if (StreamEndpoint.Length + Uri.EscapeDataString(StreamQuery(current)).Length <= MaximumStreamUrlLength) continue;
+            if (current.Count <= MaximumFamiliesPerStream
+                && StreamEndpoint.Length + Uri.EscapeDataString(StreamQuery(current)).Length <= MaximumStreamUrlLength) continue;
             current.RemoveAt(current.Count - 1);
             if (current.Count > 0) batches.Add(current);
             current = new List<string> { family };

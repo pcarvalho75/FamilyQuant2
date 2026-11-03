@@ -86,6 +86,12 @@ internal static partial class Program
         Check("J17 family progress and cancellation checkpoints remain ordered through batching",
             progress.Select(p => p.CompletedBatches).SequenceEqual(Enumerable.Range(0, longFamilies.Length + 1))
             && progress.All(p => p.TotalBatches == longFamilies.Length));
+        using var shortQuery = new StreamPanelHandler { Reply = _ => (PanelPage(), "2026_03", 0) };
+        ReferencePanelFetcher.FetchAsync(Enumerable.Range(0, 201).Select(i => "F" + i.ToString("D3", System.Globalization.CultureInfo.InvariantCulture)
+            + " family").ToArray(), shortQuery).GetAwaiter().GetResult();
+        Check("J17 respects UniProt's 100-condition limit even when more fit in the URL",
+            shortQuery.Requests.Count == 6 && shortQuery.Requests.All(u =>
+                System.Text.RegularExpressions.Regex.Matches(Uri.UnescapeDataString(u.Query), @"\(family:").Count <= 100));
 
         foreach (string failure in new[] { "missing count", "wrong count", "count release", "stream release", "changed release", "malformed stream", "unreviewed entry" })
         {
