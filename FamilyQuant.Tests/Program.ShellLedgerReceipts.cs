@@ -18,9 +18,10 @@ internal static partial class Program
 
     private static int ShellLedgerComparisonCommand(string[] args)
     {
-        if (args.Length != 4 || !DateTimeOffset.TryParse(args[3], CultureInfo.InvariantCulture,
+        if (args.Length is < 4 or > 6 || args.Length == 6 && args[5] != "--negative-control"
+            || !DateTimeOffset.TryParse(args[3], CultureInfo.InvariantCulture,
             DateTimeStyles.AllowWhiteSpaces, out _))
-            throw new ArgumentException("Supply frozen source root, fresh output and date timestamp.");
+            throw new ArgumentException("Supply frozen source root, fresh output and date timestamp, optionally the frozen app folder and --negative-control.");
         string root = FindLedgerRoot()!, frozenRoot = Path.GetFullPath(args[1]), output = Path.GetFullPath(args[2]);
         if (Directory.Exists(output) || File.Exists(output)) throw new IOException("Comparison output must be fresh.");
         var inventory = JsonSerializer.Deserialize<FeatureLedger.Inventory>(File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!;
@@ -46,6 +47,7 @@ internal static partial class Program
         var results = new List<ShellLedgerComparison>();
         var assertions = new Dictionary<string, string>(StringComparer.Ordinal);
         var curationRuntime = new Dictionary<string, string>(StringComparer.Ordinal);
+        var compositionRuntime = new ShellCompositionEvidence(new(StringComparer.Ordinal), new());
         var original = Console.Out;
         using var transcript = new StringWriter(CultureInfo.InvariantCulture);
         try
@@ -103,6 +105,8 @@ internal static partial class Program
                     && row.Kind == fact.Item1 && row.Detail == fact.Item2);
                 curationRuntime.Add(observation.Id, fact.Item3);
             }
+            if (args.Length >= 5)
+                compositionRuntime = ProveShellComposition(Path.Combine(frozenRoot, "FamilyQuant/CsvReport.cs"), args[4], output, cohort, args.Length == 6);
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         }
         finally { Console.SetOut(original); }
@@ -112,11 +116,17 @@ internal static partial class Program
         string runtimeData = Path.Combine(output, "curation-runtime.json");
         FeatureLedgerEvidence.WriteJson(runtimeData, curationRuntime.OrderBy(pair => pair.Key, StringComparer.Ordinal)
             .Select(pair => new { observationId = pair.Key, assertion = pair.Value }));
+        if (failed != 0)
+        {
+            Console.WriteLine("No ledger register published because an executed proof failed.");
+            return 1;
+        }
         var artifacts = new List<FeatureLedgerEvidence.Artifact>
         { new(log, FeatureLedgerEvidence.Hash(log)), new(data, FeatureLedgerEvidence.Hash(data)), new(runtimeData, FeatureLedgerEvidence.Hash(runtimeData)) };
+        artifacts.AddRange(compositionRuntime.Artifacts.Select(path => new FeatureLedgerEvidence.Artifact(path, FeatureLedgerEvidence.Hash(path))));
         string snapshot = Path.Combine(output, "executed");
         Directory.CreateDirectory(snapshot);
-        foreach (string source in new[] { "Program.ShellLedgerReceipts.cs", "Program.ShellLedgerComparison.cs",
+        foreach (string source in new[] { "Program.ShellLedgerReceipts.cs", "Program.ShellLedgerComparison.cs", "Program.ShellCompositionProof.cs",
             "Program.Commands.LedgerDeclarations.cs", "Program.CurationScreen.cs", "LedgerDeclarationComparison.cs", "LedgerMemberFactComparison.cs", "FeatureLedgerEvidence.Reporting.cs" })
         {
             string path = Path.Combine(snapshot, source);
@@ -141,7 +151,15 @@ internal static partial class Program
         foreach (string step in new[] { "SH", "C1" })
         {
             var selected = results.Where(result => (result.Source.Contains("ClusterGenerationControl", StringComparison.Ordinal) ? "C1" : "SH") == step).ToArray();
-            var rows = selected.Select(result => curationRuntime.TryGetValue(result.Id, out string? runtimeAssertion)
+            var rows = selected.Select(result => compositionRuntime.Assertions.TryGetValue(result.Id, out string? compositionAssertion)
+                ? new FeatureLedgerEvidence.Row(result.Id, ShellCompositionSources.Select(path => new FeatureLedgerEvidence.Implementation(path,
+                    path == "FamilyQuant.Core/CsvReport.cs" ? HistoricalCompositionMember + "; native public historical overload"
+                        : "Native historical composition CSV dependency", FeatureLedgerEvidence.Hash(Path.Combine(root, path)))).ToList(),
+                    new() { new("shell-declarations", "test", nameof(ProveShellComposition), compositionAssertion, log, "") },
+                    "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+                    Compared: result.Source + ":" + result.Line.ToString(CultureInfo.InvariantCulture) + " " + result.Before
+                        + "; frozen member " + result.FrozenMember + "; exact native file bytes and observed literal, including empty and nonpositive-denominator cases")
+                : curationRuntime.TryGetValue(result.Id, out string? runtimeAssertion)
                 ? new FeatureLedgerEvidence.Row(result.Id, new[] { "FamilyQuant/ClusterGenerationControl.xaml", "FamilyQuant/ClusterGenerationControl.xaml.cs",
                     "FamilyQuant/ClusterGenerationControl.Presentation.cs", "FamilyQuant/CurationViewModel.cs" }
                     .Select(path => new FeatureLedgerEvidence.Implementation(path,
@@ -166,7 +184,9 @@ internal static partial class Program
                 new FeatureLedgerEvidence.Register(1, step, FeatureLedger.ReferenceCommit, new() { run }, rows, receipts));
             Console.WriteLine(step + ": " + selected.Count(result => result.Matched).ToString(CultureInfo.InvariantCulture)
                 + " matched declarations; " + selected.Count(result => curationRuntime.ContainsKey(result.Id)).ToString(CultureInfo.InvariantCulture)
-                + " native interaction proofs; " + selected.Count(result => !result.Matched && !curationRuntime.ContainsKey(result.Id)).ToString(CultureInfo.InvariantCulture) + " remain unproven.");
+                + " native interaction proofs; " + selected.Count(result => compositionRuntime.Assertions.ContainsKey(result.Id)).ToString(CultureInfo.InvariantCulture)
+                + " native composition facts; " + selected.Count(result => !result.Matched && !curationRuntime.ContainsKey(result.Id)
+                    && !compositionRuntime.Assertions.ContainsKey(result.Id)).ToString(CultureInfo.InvariantCulture) + " remain unproven.");
         }
         return failed == 0 ? 0 : 1;
     }
