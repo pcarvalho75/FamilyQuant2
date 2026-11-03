@@ -438,6 +438,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J32c | Export timing on the full-run copy: the attribution step with the cache warm, its sub-steps timed | L | 0.3 | J41b | J32d, J39 | `READY` with the sub-step times before and after | T1 | | 0 | 0 | |
 | J41a | No list in one cell: on Ana's project the supplement refused to write because one cell, a family's 1,970 unexplained peptide sequences, is 38,388 characters (Excel's limit is 32,767); a list goes to its own one-row-per-item sheet, the Word file and CSVs keep their counts | M | 0.5 | 🟢 | J41b, J30b | A fixture with a list longer than Excel's limit writes the workbook; every item is in the list sheet; nothing is truncated | FL | | 0 | 0 | |
 | J32d | J32 reviewed and merged | L | 0.2 | 🟢 | K14 | Approved; gate green | T1 | | 0 | 0 | |
+| J36a | Delivery command built and tested on a small computed project: export, trace, project, panel, read-me, checks, nothing written outside its folder | M | 0.5 | 🟢 | J36b | Fixture run passes | RS | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 
