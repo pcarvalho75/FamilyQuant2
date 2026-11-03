@@ -184,7 +184,8 @@ public static class WordReportWriter
     private static W.Table Table(ReportTable data)
     {
         data = ReportListSheets.WordView(data);
-        int[] widths = ReportTableLayout.Widths(data, PageWidth);
+        var layout = ReportTableLayout.Create(data, PageWidth);
+        int[] widths = layout.Widths;
         var result = new W.Table(new W.TableProperties(new W.TableWidth { Width = PageWidth.ToString(CultureInfo.InvariantCulture), Type = W.TableWidthUnitValues.Dxa },
             new W.TableLayout { Type = W.TableLayoutValues.Fixed },
             new W.TableCellMarginDefault(new W.TopMargin { Width = "40", Type = W.TableWidthUnitValues.Dxa },
@@ -205,8 +206,12 @@ public static class WordReportWriter
                     var paragraph = Paragraph(line);
                     if (keepNext) paragraph.ParagraphProperties!.Append(new W.KeepNext());
                     paragraph.ParagraphProperties!.Append(new W.KeepLines());
-                    if (header) paragraph.GetFirstChild<W.Run>()!.PrependChild(new W.RunProperties(new W.Bold()));
-                    else if (double.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out _))
+                    var runProperties = new W.RunProperties();
+                    if (header) runProperties.Append(new W.Bold());
+                    if (layout.FontHalfPoints < 22)
+                        runProperties.Append(new W.FontSize { Val = layout.FontHalfPoints.ToString(CultureInfo.InvariantCulture) });
+                    if (runProperties.HasChildren) paragraph.GetFirstChild<W.Run>()!.PrependChild(runProperties);
+                    if (!header && double.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out _))
                         paragraph.ParagraphProperties!.Append(new W.Justification { Val = W.JustificationValues.Right });
                     cell.Append(paragraph);
                 }
