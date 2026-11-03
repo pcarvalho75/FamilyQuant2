@@ -5,61 +5,61 @@
   "runs": [
     {
       "id": "shell-declarations",
-      "command": "C:\\FamilyQuant-wt2\\terra1\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-234342-terra1\\shell-compare \u00222026-11-02 23:47:46 -0800\u0022",
-      "executedAt": "2026-11-02 23:47:46 -0800",
-      "commit": "f25f216fa174989478989cefc1c925a41ac8c760",
+      "command": "C:\\FamilyQuant-wt2\\terra1\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261103-001001-terra1\\shell-compare \u00222026-11-03 00:13:14 -0800\u0022",
+      "executedAt": "2026-11-03 00:13:14 -0800",
+      "commit": "9dc3bb854ca3b048750f548bd6243b5c64c707a0",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
-          "sha256": "6E2FC1C285797B04CD40173760BB02C74834533D9CDCEF564C4870AB0A2AC5DA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
+          "sha256": "A7C2B507D6BB6DF07ED22CA679655E3CAE603ECBBD40ACC61E88A10C47809F90"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.json",
-          "sha256": "32E29184EDCFC4BFA11BD829AB498821A316F9EC51D83180417837A112F13C36"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.json",
+          "sha256": "21A724BCF39857ACB71BACD481D0A04AE7340FC8360A4CF4F791611945BACC2C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\curation-runtime.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\curation-runtime.json",
           "sha256": "4EF1BCE9EAFF5985013CD15A6B1CBFA29C34D7D42702007E522840A20879D128"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
           "sha256": "6C0E1250A4A019C4937A0CABEF9BA9078213B35E597781407B767279490D3EF3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
           "sha256": "869FC668090431A23D08E8ED109B95BC937D9A6B94DE63E11E86672852649FEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
           "sha256": "5F18F4DD7E56E601368051AAD44866736DE2FA60C17A5550F4A330C98DABB3D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\executed\\Program.CurationScreen.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\executed\\Program.CurationScreen.cs",
           "sha256": "42C2CC3D48F2E59DC8E48D06915FE933C6A025F48972FDC3FB0458A0284FA2FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
           "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "217772BEAB68CBD36D0F7153F2B045C548878FEAB310CA58A32217341A216A69"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "257A4322D9D517D659D7B5D1A27D84D099D900BF2BEDC167F11A040E15ADBDE3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\executed\\FamilyQuant2.dll",
-          "sha256": "5C05808C8C63EACFF0335F19694A21D1C0C708F5D3CB2EA13BB97C09CD935FAD"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\executed\\FamilyQuant2.dll",
+          "sha256": "7E0C4A9A25BAAF7B505DD44550A630D316E162BF2C0A0F9F5E3E8FECE31143D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\executed\\FamilyQuant.Core.dll",
-          "sha256": "81B37B2BD86A4F5A0884E43ED1101B7E67F20D63596F2B3E0E2ABDBBECAE8151"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\executed\\FamilyQuant.Core.dll",
+          "sha256": "65BCEB231336E82E0CA4C57F82B74C67F84739554F5EFCA02A1FFC7557E4E6EC"
         }
       ],
       "workingDirectory": "C:\\FamilyQuant-wt2\\terra1"
@@ -157,7 +157,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "a native protein annotation edit marks the document and records one Undo step",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -2150,7 +2150,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation shows accession in Locus while retaining the complete protein identifier",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -2937,7 +2937,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "a native protein annotation edit marks the document and records one Undo step",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3630,7 +3630,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3741,7 +3741,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation hides search IDs and decoys by default while keeping all document rows",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3902,7 +3902,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation hides search IDs and decoys by default while keeping all document rows",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4369,7 +4369,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation always shows its table without Controls or Data Browser tabs",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4460,7 +4460,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation shows accession in Locus while retaining the complete protein identifier",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4563,7 +4563,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4628,7 +4628,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5171,7 +5171,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind code fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5185,7 +5185,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind column: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5199,7 +5199,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind option/copy: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5213,7 +5213,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind tooltip: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
