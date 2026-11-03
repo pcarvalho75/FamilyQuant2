@@ -53,6 +53,11 @@ namespace FamilyQuant
                         "marks family mapping as unavailable and the project curation remains intact.");
                 }
             }
+            if (familyAttribution != null)
+            {
+                FamilyCompositionStudy.StoreRunShares(manifest, FamilyEnvelopeQuant.AttributePeptides(
+                    FamilyEnvelopeQuant.PreparePeptides(result.Rows), familyAttribution));
+            }
             result.SpectrumComparisonRows = SpectrumComparisonTable.Build(
                 deNovoImport.AllSourceRows.Where(r => !string.Equals(r.SourceId,
                     DeNovoSource.DeepNovo.Id, StringComparison.OrdinalIgnoreCase)),

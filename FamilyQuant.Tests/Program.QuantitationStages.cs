@@ -12,6 +12,7 @@ namespace FamilyQuant.Tests
         private static void QuantitationStageTests()
         {
             FamilySubclassStudyTests();
+            FamilyRunSharesStudyTests();
             var rows = new List<QuantRow>
             {
                 Qr("identified", "r1", 1, 2, "PEPTLDEK", 10, 30),

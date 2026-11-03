@@ -19,6 +19,8 @@ namespace FamilyQuant
         public string Run { get; set; } = string.Empty;
         public double AssignedSignal { get; set; }
         public double MeasuredSignal { get; set; }
+        /// <summary>Recorded RAW total ion current, separate from measured peptide signal.</summary>
+        public double? TotalIonCurrent { get; set; }
     }
 
     public sealed class FamilyRunShare
@@ -29,6 +31,8 @@ namespace FamilyQuant
         public double? ShareOfAssignedSignal { get; set; }
         /// <summary>Null when this run has no measured peptide signal. This is not a TIC share.</summary>
         public double? ShareOfMeasuredSignal { get; set; }
+        /// <summary>Null unless this file has a positive recorded RAW total ion current.</summary>
+        public double? ShareOfTic { get; set; }
     }
 
     public sealed class FamilyRunShareSummary
@@ -41,6 +45,11 @@ namespace FamilyQuant
         public double? StandardDeviation { get; set; }
         /// <summary>Sample SD / mean, as a ratio; null when SD is unavailable or mean is zero.</summary>
         public double? CoefficientOfVariation { get; set; }
+        /// <summary>All runs pooled, on the existing primary family basis; separate from the run mean.</summary>
+        public double PooledSignal { get; set; }
+        public double? PooledShare { get; set; }
+        /// <summary>PooledShare minus MeanShare; both shares use the assigned-family denominator.</summary>
+        public double? PooledMinusMeanShare { get; set; }
     }
 
     /// <summary>Database-protein diversity, not a gene or proteoform count. Greedy set cover is an
