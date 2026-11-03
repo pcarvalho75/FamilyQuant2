@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
 
 namespace FamilyQuant.Homology
 {
@@ -472,28 +471,35 @@ namespace FamilyQuant.Homology
                 .ToList();
         }
 
-        private static readonly ConditionalWeakTable<HomologyDatabase, IndexHolder> Indexes = new();
-        private sealed class IndexHolder { internal PositionalIndex? Index; }
-
+        // The index belongs to this Search, not the caller's long-lived attribution database.
         private static PositionalIndex GetIndex(HomologyDatabase database, OperationContext? operation)
-        {
-            IndexHolder holder = Indexes.GetValue(database, _ => new IndexHolder());
-            lock (holder)
-            {
-                operation?.ThrowIfCancellationRequested();
-                // A cancelled build is never published or cached as a permanent failure.
-                return holder.Index ??= new PositionalIndex(database, operation);
-            }
-        }
+            => new PositionalIndex(database, operation);
 
         private sealed class PositionalIndex
         {
-            private readonly ulong[][] postings = new ulong[1 << 15][];
+            private readonly PostingBucket[] postings = new PostingBucket[1 << 15];
+            private readonly record struct PostingBucket(uint[]? Compact, ulong[]? Wide)
+            {
+                internal int Length => Compact?.Length ?? Wide!.Length;
+                internal ulong Read(int index)
+                {
+                    if (Compact == null) return Wide![index];
+                    uint packed = Compact[index];
+                    return ((ulong)(packed >> 16) << 32) | (packed & 65535u);
+                }
+                internal void Store(int index, int protein, int position)
+                {
+                    if (Compact != null) Compact[index] = ((uint)protein << 16) | (uint)position;
+                    else Wide![index] = ((ulong)(uint)protein << 32) | (uint)position;
+                }
+            }
             private static readonly byte[] Codes = BuildCodes();
             private static readonly byte UnknownCode = (byte)PamMatrix.ScoringIndexOf(PamMatrix.UnknownSymbol);
 
             internal PositionalIndex(HomologyDatabase database, OperationContext? operation)
             {
+                bool compact = database.Proteins.Count <= 65536
+                    && database.Proteins.All(p => p.Sequence.Length <= 65536);
                 int[] counts = new int[postings.Length];
                 foreach (HomologyProtein protein in database.Proteins)
                 {
@@ -505,7 +511,9 @@ namespace FamilyQuant.Homology
                     }
                 }
                 for (int key = 0; key < counts.Length; key++)
-                    postings[key] = counts[key] == 0 ? Array.Empty<ulong>() : new ulong[counts[key]];
+                    postings[key] = compact
+                        ? new PostingBucket(counts[key] == 0 ? Array.Empty<uint>() : new uint[counts[key]], null)
+                        : new PostingBucket(null, counts[key] == 0 ? Array.Empty<ulong>() : new ulong[counts[key]]);
                 Array.Clear(counts);
                 for (int protein = 0; protein < database.Proteins.Count; protein++)
                 {
@@ -515,7 +523,7 @@ namespace FamilyQuant.Homology
                     {
                         if ((offset & 4095) == 0) operation?.ThrowIfCancellationRequested();
                         uint key = Pack(sequence, offset);
-                        postings[key][counts[key]++] = ((ulong)(uint)protein << 32) | (uint)offset;
+                        postings[key].Store(counts[key]++, protein, offset);
                     }
                 }
             }
@@ -531,7 +539,7 @@ namespace FamilyQuant.Homology
                 // (protein,start) keys consecutively. Scratch is O(L), independent of database size;
                 // no allocating diagonal dictionary, dense position array or all-window list.
                 int grams = query.Length - 2;
-                var buckets = new ulong[grams][];
+                var buckets = new PostingBucket[grams];
                 var merge = new PriorityQueue<PostingCursor, ulong>(grams);
                 int visited = 0;
                 for (int offset = 0; offset < grams; offset++)
@@ -578,11 +586,11 @@ namespace FamilyQuant.Homology
                 }
                 void EnqueueNext(int queryOffset, int index)
                 {
-                    ulong[] bucket = buckets[queryOffset];
+                    PostingBucket bucket = buckets[queryOffset];
                     while (index < bucket.Length)
                     {
                         if ((++visited & 4095) == 0) operation?.ThrowIfCancellationRequested();
-                        ulong occurrence = bucket[index++];
+                        ulong occurrence = bucket.Read(index++);
                         int protein = (int)(occurrence >> 32);
                         int start = (int)(uint)occurrence - queryOffset;
                         if (start < 0 || start > database.Proteins[protein].Sequence.Length - query.Length) continue;

@@ -69,6 +69,11 @@ namespace FamilyQuant.Tests
                 Console.WriteLine, detectedCachePathFor: run => Path.Combine(cache, "detected_" + run + ".json"));
             watch.Stop();
             double cpuSeconds = (process.TotalProcessorTime - cpuStart).TotalSeconds;
+            File.WriteAllLines(Path.Combine(output, "notes.txt"), result.Notes, new UTF8Encoding(false));
+            if (curation.MyExtendedFastaItems.Count > 0 && result.Rows.Count > 0 && result.Manifest.FamilyMapping == null)
+                throw new InvalidDataException("Snapshot family mapping is unavailable: " + string.Join(" | ", result.Notes));
+            if (curation.EvidenceSource?.FamilyWorld != null && result.Manifest.FamilyWorldResult == null)
+                throw new InvalidDataException("Snapshot family world is unavailable: " + string.Join(" | ", result.Notes));
             Console.WriteLine("Compute completed: " + watch.Elapsed.TotalSeconds.ToString("F3", CultureInfo.InvariantCulture)
                 + " seconds wall; " + cpuSeconds.ToString("F3", CultureInfo.InvariantCulture) + " seconds CPU.");
             process.Refresh();
