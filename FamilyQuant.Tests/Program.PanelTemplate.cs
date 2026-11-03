@@ -82,6 +82,21 @@ internal static partial class Program
                     { CellReference = "I2", DataType = DocumentFormat.OpenXml.Spreadsheet.CellValues.InlineString });
                 row.Append(new DocumentFormat.OpenXml.Spreadsheet.Cell(new DocumentFormat.OpenXml.Spreadsheet.InlineString(new DocumentFormat.OpenXml.Spreadsheet.Text("new text")))
                     { CellReference = "I3", DataType = DocumentFormat.OpenXml.Spreadsheet.CellValues.InlineString });
+                var addedFamily = new DocumentFormat.OpenXml.Spreadsheet.Row { RowIndex = 4 };
+                string[] values = { "", "b", "Family B", "Quantify", "", "PF88888", "", "", "added note" };
+                for (int i = 0; i < values.Length; i++) addedFamily.Append(new DocumentFormat.OpenXml.Spreadsheet.Cell(
+                    new DocumentFormat.OpenXml.Spreadsheet.InlineString(new DocumentFormat.OpenXml.Spreadsheet.Text(values[i])))
+                    { CellReference = ((char)('A' + i)).ToString() + "4", DataType = DocumentFormat.OpenXml.Spreadsheet.CellValues.InlineString });
+                part.Worksheet.GetFirstChild<DocumentFormat.OpenXml.Spreadsheet.SheetData>()!.Append(addedFamily);
+                var subSheet = wb.Workbook.Sheets!.Elements<DocumentFormat.OpenXml.Spreadsheet.Sheet>().Single(x => x.Name == "Subclasses");
+                var subPart = (DocumentFormat.OpenXml.Packaging.WorksheetPart)wb.GetPartById(subSheet.Id!);
+                var addedPart = new DocumentFormat.OpenXml.Spreadsheet.Row { RowIndex = 3 };
+                string[] subValues = { "", "b", "part2", "Part 2", "PF88888", "", "", "" };
+                for (int i = 0; i < subValues.Length; i++) addedPart.Append(new DocumentFormat.OpenXml.Spreadsheet.Cell(
+                    new DocumentFormat.OpenXml.Spreadsheet.InlineString(new DocumentFormat.OpenXml.Spreadsheet.Text(subValues[i])))
+                    { CellReference = ((char)('A' + i)).ToString() + "3", DataType = DocumentFormat.OpenXml.Spreadsheet.CellValues.InlineString });
+                subPart.Worksheet!.GetFirstChild<DocumentFormat.OpenXml.Spreadsheet.SheetData>()!.Append(addedPart);
+                subPart.Worksheet.Save();
                 part.Worksheet.Save();
             }
             var edited = (FamilyPanel)read.Invoke(null, new object[] { path })!;
@@ -89,6 +104,10 @@ internal static partial class Program
                 edited.Families[0].DisplayName == "Edited family" && edited.Families[0].Names[0].Text == "name"
                 && edited.Families[0].Subclasses[0].RequiredPfam[0] == "PF00001" && edited.Import!.SourceName == "original.xlsx");
             Check("J1e retains a user-added text column", edited.Families[0].TextFields.Any(x => x.Name == "Extra note" && x.Text == "new text"));
+            var added = edited.Families.Single(x => x.Key == "b");
+            Check("J1e imports newly added family and subclass rows", added.DisplayName == "Family B"
+                && added.Pfam.Single().Accession == "PF88888" && added.Subclasses.Single().RequiredPfam.Single() == "PF88888"
+                && added.TextFields.Any(x => x.Name == "Extra note" && x.Text == "added note"));
         }
         finally { if (File.Exists(path)) File.Delete(path); }
     }
