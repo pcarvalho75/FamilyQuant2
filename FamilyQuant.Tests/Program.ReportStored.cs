@@ -45,6 +45,10 @@ internal static partial class Program
                     new() { PartKey = "part", Label = "Supplied subclass", Signal = 80, ShareOfFamily = .4 },
                     new() { IsUnresolved = true, Label = "Subclass not resolved", Signal = 120, ShareOfFamily = .6 },
                 } },
+                new() { FamilyUserId = 2, FamilySignal = 300, Parts = new()
+                {
+                    new() { IsUnresolved = true, Label = "Subclass not resolved", Signal = 300, ShareOfFamily = 1 },
+                } },
             } },
         };
         var source = ReportCurrentResults.Build(new AnalyticsData(), manifest, null);
