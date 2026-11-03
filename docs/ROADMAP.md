@@ -98,6 +98,7 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J47b | Validation of each science option on the full-run project: target-decoy rates at the gate, the Database gap error rates, the leave-one-out family check (J42: 966 right, 12 wrong, 95 abstained), and what changes in the headline; Paulo decides which become default (Paulo, 11-03 13:15: no recomputing everything: validate by replaying FQAssay's captured five search inputs and the cached attribution, one full Compute only for the options chosen as defaults) | M | 1 | 🟢 | | A before/after table per option; science review | AS | | 0 | 0 | |
+| J47c | The tag-gate option made fast enough to validate: a conservative weighted seed prefilter (the replay of one search ran over 30 minutes because weighted profiles fell back to full window scans), proven equal to the brute path, then its J47b row (known answers, decoy rates, headline); it stays OFF until Paulo chooses | M | 1 | J47a | | Prefilter equals brute on fixtures; OFF replay still equal; the tag row added to the J47b table | AS | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 
