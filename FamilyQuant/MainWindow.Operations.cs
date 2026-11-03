@@ -15,6 +15,7 @@ public partial class MainWindow
         {
             bool wasEnabled = MainMenu.IsEnabled;
             MainMenu.IsEnabled = GridApp.IsEnabled = NavigationRail.IsEnabled = !Operations.IsBusy;
+            if (wasEnabled != MainMenu.IsEnabled) RefreshShellMenuState();
             if (wasEnabled && Operations.IsBusy)
             {
                 focusBeforeOperation = Keyboard.FocusedElement;

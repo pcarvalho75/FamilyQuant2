@@ -15,11 +15,16 @@
               <local:BusyLogo x:Name="AnimatedLogo" IsActive="{Binding IsBusy}" Margin="0,0,0,24"/>
               <StackPanel Grid.Row="1">
                 <TextBlock Text="{Binding Title}" FontSize="20" FontWeight="SemiBold" TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding Message}" Margin="0,12,0,16" TextWrapping="Wrap"/>
-                <ProgressBar Height="6" Minimum="0" Maximum="100" Value="{Binding Percent, Mode=OneWay}" IsIndeterminate="{Binding IsIndeterminate}"
+                <TextBlock x:Name="OperationCurrentItem" Text="{Binding Message}" Margin="0,12,0,16" TextWrapping="Wrap"/>
+                <ProgressBar x:Name="OperationProgressBar" Height="6" Minimum="0" Maximum="100" Value="{Binding Percent, Mode=OneWay}" IsIndeterminate="{Binding IsIndeterminate}"
                              ToolTip="Shows progress for the current operation when its total is known."/>
-                <Button Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Right" Margin="0,20,0,0"
-                        ToolTip="Requests cancellation after the current phase. Previous results stay available."/>
+                <TextBlock x:Name="OperationElapsed" Text="{Binding ElapsedText}" Margin="0,12,0,0"/>
+                <TextBlock x:Name="OperationSinceLastStep" Text="{Binding SinceLastStepText}" Margin="0,4,0,0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                  <Button Content="Operation log" Click="OperationLog_Click" Margin="0,0,8,0" ToolTip="Read the timestamped steps recorded for this operation."/>
+                  <Button x:Name="CancelOperationButton" Content="Cancel" Command="{Binding CancelCommand}"
+                          ToolTip="Requests cancellation after the current phase. Previous results stay available."/>
+                </StackPanel>
               </StackPanel>
             </Grid>
         </Border>
