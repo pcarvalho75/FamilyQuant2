@@ -324,6 +324,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => WordReportTests(null));
             suite.Add(() => ReportNumberTraceTests());
             suite.AddWithApplication(() => ReportStoredChecks());
+            suite.AddWithApplication(() => ReportAttributionCacheTests());
             suite.Add(() => ReportPairedSummaryTests());
             suite.AddWithApplication(() => ReportSupplementChecks(null));
             suite.Add(() => ReportTableSheetTests(null));
