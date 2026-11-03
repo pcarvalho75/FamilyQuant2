@@ -220,4 +220,5 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | R4c | Every finding fixed and gated | M | 0.5 | R4a | R3b | No open finding | Orchestrator | not started | 0% | 0% | T+2 |
 | R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | R4c, N6s, Y10 | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+0 |
 | R3c | Release candidate: versions, a release zip, and the program run from that unpacked zip | M | 0.3 | 🟢 | R5a | The zip opens a saved project on this machine with no install. No install on this machine (Paulo), so a clean machine stays untested | Orchestrator | not started | 0% | 0% | T+0 |
+| R5a | FamilyQuant 2.0 final published | L | 0 | 🟢 | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+0 |
 

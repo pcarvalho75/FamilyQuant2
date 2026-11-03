@@ -100,8 +100,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R5a | FamilyQuant 2.0 final published | L | 0 | 🟢 | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+0 |
-| R5b | Archive this roadmap | L | 0.1 | R5a | Done | Archive committed | Orchestrator | not started | 0% | 0% | T+0 |
+| R5b | Archive this roadmap | L | 0.1 | 🟢 | Done | Archive committed | Orchestrator | not started | 0% | 0% | T+0 |
 
 ### W6 Paper numbers (no release depends on these)
 
