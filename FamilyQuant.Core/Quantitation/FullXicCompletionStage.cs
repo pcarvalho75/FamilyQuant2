@@ -16,9 +16,9 @@ namespace FamilyQuant
             FullXicComputeResult result, IReadOnlyList<RawScanPrecursorMetadata> rawPrecursorMetadata, OperationContext? operation = null)
         {
             operation?.Report("compute-phase", "Phase 3 of 5: Preparing stored studies", 3, 5);
-            operation?.Report("compute-study", "Preparing stored studies", 0, 13);
+            operation?.Report("compute-study", "Preparing stored studies", 0, 14);
             void Study(int index, string title) => operation?.Report("compute-study", "Stored study "
-                + index.ToString(CultureInfo.InvariantCulture) + " of 13: " + title, index, 13);
+                + index.ToString(CultureInfo.InvariantCulture) + " of 14: " + title, index, 14);
             string rawDirectory = input.RawDirectory;
             List<PatternLabPsm> psms = input.Psms;
             FullXicSourceInput deNovoImport = input.Sources;
@@ -35,7 +35,7 @@ namespace FamilyQuant
             // reopening RAW files or silently refitting a different reference set.
             Study(2, "Reference-envelope diagnostics");
             manifest.ReferenceEnvelopeModelDiagnostics = ReferenceEnvelopeEstimator.Evaluate(
-                NativeQuantFractions.DedupToPeptides(result.Rows));
+                NativeQuantFractions.DedupToPeptides(result.Rows), operation);
 
             // The complete table is built while every source call and the RAW-selected precursor
             // metadata are still available, then persisted in the project. Rebuilding from QuantRow
@@ -93,6 +93,7 @@ namespace FamilyQuant
                 }
                 Study(8, "Unobserved-family status");
                 if (options.FamilyCuration != null) FamilyUnobservedStudies.Store(options.FamilyCuration, manifest);
+                Study(9, "Effective panel-family studies");
                 if (options.FamilyCuration != null && familyHits != null)
                 {
                     try { EffectivePanelFamilyStudy.StoreIfNeeded(manifest, assigned, familyHits, options.FamilyCuration); }
@@ -107,8 +108,9 @@ namespace FamilyQuant
             {
                 Study(5, "Subclass parts unavailable"); Study(6, "Position and domain parts unavailable");
                 Study(7, "Protein explanation counts unavailable"); Study(8, "Unobserved-family status unavailable");
+                Study(9, "Effective panel-family studies unavailable");
             }
-            Study(9, "Spectrum comparison");
+            Study(10, "Spectrum comparison");
             result.SpectrumComparisonRows = SpectrumComparisonTable.Build(
                 deNovoImport.AllSourceRows.Where(r => !string.Equals(r.SourceId,
                     DeNovoSource.DeepNovo.Id, StringComparison.OrdinalIgnoreCase)),
@@ -117,13 +119,13 @@ namespace FamilyQuant
                 psms, result.Rows, familyAttribution: familyAttribution,
                 rawPrecursors: rawPrecursorMetadata,
                 perRunTic: manifest.PerRunTic,
-                acceptedDeNovoRows: deNovoImport.AcceptedSourceRows);
+                acceptedDeNovoRows: deNovoImport.AcceptedSourceRows, operation: operation);
             manifest.SpectrumComparisonRows = result.SpectrumComparisonRows;
-            Study(10, "Accepted de novo score comparison");
+            Study(11, "Accepted de novo score comparison");
             manifest.DeNovoAcceptedScoreScatter = DeNovoAcceptedScoreScatterStudy.Build(
                 result.SpectrumComparisonRows, manifest.DeNovoSourceScoreDistributions);
             operation?.Report("compute-phase", "Phase 4 of 5: Family world", 4, 5);
-            Study(11, "Family world");
+            Study(12, "Family world");
             FamilyWorldAnalysis.AttachToCompute(options.FamilyCuration, result, operation);
             operation?.Report("compute-phase", "Phase 5 of 5: Completing stored results", 5, 5);
             if (options.ExportSpectrumComparisonCsv)
@@ -137,7 +139,7 @@ namespace FamilyQuant
             // Q6: fold the detected peptide-like estimate into the manifest's derived section (measured
             // area, derived fraction), so the .fqproj carries the middle level of the decomposition beside
             // the assigned fractions it sits above.
-            Study(12, "Resolved isotope-series fractions");
+            Study(13, "Resolved isotope-series fractions");
             NativeQuantFractions.ApplyDetectedToManifest(manifest, result.Detected);
 
             // The identified-but-not-quantified block, named in the status line even when it is zero: a
@@ -158,7 +160,7 @@ namespace FamilyQuant
                     (d.UnderSampledIsEstimate ? " - includes an ESTIMATE for single-point clusters" : string.Empty));
             }
 
-            Study(13, "Total ion current summary");
+            Study(14, "Total ion current summary");
             result.TicShareSummary = FullXicComputer.DescribeTicShares(manifest.DerivedFractions);
 
             manifest.UpdatedUtc = DateTime.UtcNow;

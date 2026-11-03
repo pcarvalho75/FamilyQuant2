@@ -59,9 +59,40 @@ internal static partial class Program
             {
                 CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo(language); CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture;
                 ComputeProgressFixture(Path.Combine(folder, language));
+                ComputeLongStudyProgressTests();
             }
         }
         finally { CultureInfo.CurrentCulture = oldCulture; CultureInfo.CurrentUICulture = oldUi; }
+    }
+
+    private sealed class ComputeProgressCollector : IProgress<OperationProgress>
+    {
+        public List<OperationProgress> Items { get; } = new();
+        public void Report(OperationProgress value) => Items.Add(value);
+    }
+
+    private static void ComputeLongStudyProgressTests()
+    {
+        var rows = Enumerable.Range(1, 260).Select(index => Qr("identified", "reference_" + index.ToString(CultureInfo.InvariantCulture),
+            index, 2, "ACDEFGHIK", 10 + index, 20 + index)).ToArray();
+        var peptides = NativeQuantFractions.DedupToPeptides(rows);
+        string before = ReferenceEnvelopeEstimator.ToCsv(ReferenceEnvelopeEstimator.Evaluate(peptides));
+        var progress = new ComputeProgressCollector(); var operation = new OperationContext(progress: progress);
+        string after = ReferenceEnvelopeEstimator.ToCsv(ReferenceEnvelopeEstimator.Evaluate(peptides, operation));
+        bool Batches(string stage)
+        {
+            var items = progress.Items.Where(item => item.Stage == stage).ToArray();
+            return items.Length == 4 && items[0].Completed == 0 && items.All(item => item.Total == 260)
+                && items.Skip(1).Select(item => item.Completed).SequenceEqual(new long?[] { 128, 256, 260 });
+        }
+        Check("J35 reference diagnostics updates every representative batch without changing any diagnostic byte", Batches("reference-validation") && before == after);
+        string original = SpectrumComparisonTable.ToCsv(SpectrumComparisonTable.Build(Array.Empty<PeaksDeNovoRow>(), Array.Empty<PeaksDeNovoRow>(),
+            Array.Empty<PatternLabPsm>(), rows));
+        progress.Items.Clear();
+        string counted = SpectrumComparisonTable.ToCsv(SpectrumComparisonTable.Build(Array.Empty<PeaksDeNovoRow>(), Array.Empty<PeaksDeNovoRow>(),
+            Array.Empty<PatternLabPsm>(), rows, operation: operation));
+        Check("J35 spectrum comparison updates inside reference evaluation and row assembly without changing any CSV byte",
+            Batches("spectrum-reference-validation") && Batches("spectrum-rows") && original == counted);
     }
 
     private static void ComputeProgressFixture(string folder)
@@ -160,7 +191,7 @@ internal static partial class Program
                     && all.Where(item => item.Completed > 0).Select(item => item.Completed!.Value).SequenceEqual(Enumerable.Range(1, count).Select(value => (long)value))
                     && all.All(item => item.Total == count));
             }
-            Series("compute-phase", 5); Series("compute-run", 2); Series("compute-study", 13); Series("source-study", 10); Series("world-phase", 5);
+            Series("compute-phase", 5); Series("compute-run", 2); Series("compute-study", 14); Series("source-study", 10); Series("world-phase", 5);
             Check("J35 every counted Compute phase reaches its declared total", steps.Where(item => item.Total > 0).GroupBy(item => item.Stage).All(group =>
                 group.First().Completed == 0 && group.Last().Completed == group.First().Total && group.All(item => item.Total == group.First().Total)
                 && group.Zip(group.Skip(1), (previous, next) => next.Completed >= previous.Completed).All(value => value)));
