@@ -277,6 +277,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => FamilyNamingTests());
             suite.Section("Family composition - shared peptides counted once; the Full XIC column, its options and export");
             suite.Add(() => FamilyCompositionTests());
+            suite.Add(() => CurationHomologyCacheTests());
             suite.Add(() => FullXicStorageTests());
             suite.Add(() => QuantitationStageTests());
             suite.AddWithApplication(() => FullXicColumnUiTests(workDir));

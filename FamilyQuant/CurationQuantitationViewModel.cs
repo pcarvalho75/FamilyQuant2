@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using FamilyQuant.Operations;
 
 namespace FamilyQuant;
 
@@ -38,6 +39,8 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
     private int fullXicRuns;
     private string? fullXicTicRefusal;
     private string? fullXicProteinFingerprint;
+    // Kept per view model so focused tests can use a private cache without changing the program default.
+    private string? fullXicCacheDirectory = null;
     private int fullXicGeneration;
     private bool fullXicPending;
     // Each item's User ID AND annotation: the annotation names its family (FamilyNaming), so an
@@ -88,11 +91,19 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
     /// </summary>
     private static FullXicPrepared PrepareFullXic(IReadOnlyList<QuantRow> rows,
         IReadOnlyDictionary<string, double>? perRunTic, FamilyClusterFile proteins)
+        => PrepareFullXic(rows, perRunTic, proteins, null, null);
+
+    private static FullXicPrepared PrepareFullXic(IReadOnlyList<QuantRow> rows,
+        IReadOnlyDictionary<string, double>? perRunTic, FamilyClusterFile proteins, OperationContext? operation,
+        string? cacheDirectory)
     {
         var prepared = new FullXicPrepared
         {
             Peptides = FamilyEnvelopeQuant.PreparePeptides(rows),
-            Hits = FamilyEnvelopeQuant.SearchCuration(rows, proteins),
+            Hits = CurationHomologyCache.GetOrSearch(rows, proteins, cacheDirectory, progress: operation == null ? null : hit =>
+                operation.Report("attribution", hit ? "Peptide-to-protein hits read from the cache"
+                    : "Searching the stored peptide sequences against the proteins"),
+                cancellationToken: operation?.CancellationToken ?? default),
             // Once per quantitation, here off the interface thread: protein content never changes
             // during curation, so a regrouping does not invalidate it.
             ProteinFingerprint = FamilyEnvelopeQuant.ProteinSetFingerprint(proteins),
