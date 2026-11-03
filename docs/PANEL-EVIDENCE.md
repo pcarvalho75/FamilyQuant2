@@ -42,3 +42,17 @@ PanelFamilyKey on every supplied choice (null means leave outside); unresolved
 links are refused. It writes the assigned project, exact recipe-replay check,
 current assignment facts/map, per-family database-protein counts and every
 outside target with its reason. Database-protein counts are not toxin diversity.
+
+The completed native packet is
+`D:/FamilyQuant-data/out-evidence/J2-20261102-215129/applied-final/`.
+It records 2,562 applied database proteins and 29,215 outside targets. Current
+family evidence, current subclass labels and exact recipe replay passed (3/0/0).
+All 13 ambiguous link choices are input data attributed to Ana's consensus,
+tab 4. The imported panel currently has no executable subclass definitions,
+so the subclass runner stores explicit Unknown labels without an empty search.
+The full analysis supplies those definitions separately through the panel.
+
+`family-assignment-counts.csv` lists every panel row; merged rows alias their
+effective target and are not added twice. `outside-panel.csv` lists every
+outside protein and reason. The earlier interrupted run is not a completed
+acceptance packet.
