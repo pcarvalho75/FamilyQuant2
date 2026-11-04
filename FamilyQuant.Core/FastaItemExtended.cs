@@ -10,7 +10,26 @@ namespace FamilyQuant
     public class FastaItemExtended : FastaItem
     {
         public int USearchID { get; set; }
-        public int UserID { get; set; }
+        private int userId;
+        private bool hasUserId;
+
+        // Keep the existing integer API for scientific/curation callers. JSON presence is
+        // separate: a missing assignment must not silently become the real family zero.
+        [System.Text.Json.Serialization.JsonIgnore]
+        public int UserID { get => userId; set { userId = value; hasUserId = true; } }
+
+        [System.Text.Json.Serialization.JsonInclude]
+        [System.Text.Json.Serialization.JsonPropertyName("UserID")]
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        private int? StoredUserId
+        {
+            get => hasUserId ? userId : null;
+            set { userId = value.GetValueOrDefault(); hasUserId = value.HasValue; }
+        }
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        [System.ComponentModel.Browsable(false)]
+        public bool HasUserId => hasUserId;
         public string UserAnnotation { get; set; } = string.Empty;
 
         /// <summary>The protein's Pfam domains by name, joined with <see cref="ProteinDomains.Separator"/>;

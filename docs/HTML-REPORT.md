@@ -61,12 +61,25 @@ A label's Property is the measure ID, Format is null, Scale is 1. A tick's Prope
 `axis-plain`, Scale is 1; the known measure must support that scale, and all other reference slots
 are empty. Source recipes bind exact text, unit and raw geometry for the number trace.
 
-`databaseEntries` and `databaseGap` are reserved IDs, offered only when an existing, explicitly
-family-keyed source is available. The report's source-sequence census counts distinct peptides,
-not database protein records; it cannot supply a database-entry population. Global source-record
-counts and UniProt-family gap rows without a curated-family key are not substituted. The current
-producer therefore omits those measures. `proteins` remains the native greedy protein estimate,
-distinct from the searched database's population.
+The D55 database-entry population is read by `FamilyDatabaseEntryCounts.Read` from the project's
+stored curation, without Compute or search. Each eligible stored database record is one entry;
+equal sequences are not deduplicated. The existing `SequenceLabels` identifier helpers exclude
+decoys and contaminants. A recorded UserID is its source family; zero is a real family, while
+a missing UserID is unassigned and excluded. Assignment presence roundtrips separately from the
+legacy integer API, preserving the serialized values of normally assigned records.
+
+The read-only view exposes source UserID counts and effective panel-key counts. It uses the
+same slots as `EffectivePanelFamilyStudy`, so aliases and complete member-family unions follow
+the native collapse. An unlinked source family is not added to a panel key. Conflicting panel
+keys and all keys touched by a conflicted source family are unavailable (null), never zero or
+a partial count; their members do not enter another union. An otherwise known family with no
+remaining eligible entries has a real zero. Stale panel mapping is unavailable. Reading changes
+neither curation nor saved studies. Canonical Others is an aggregate and is not plotted.
+
+`databaseEntries` uses this population, not the peptide source census or greedy explanation.
+Its payload integration is separate from the read-only view. `databaseGap` remains reserved when
+there is no explicit curated-family key. `proteins` remains the native greedy protein estimate,
+distinct from the searched database population. Existing measured values and rounding stay literal.
 
 `title`, `authors`, `interpretation`, all family/run/part names, and metric properties are field
 IDs, not display text. Missing IDs or null values mean unavailable; they never imply zero.

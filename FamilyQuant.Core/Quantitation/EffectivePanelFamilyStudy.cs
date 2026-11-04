@@ -89,7 +89,7 @@ public static partial class EffectivePanelFamilyStudy
     private static bool IsPanelFamily(PanelFamilyUserMap family) => !family.HasConflict && family.PanelFamilyKey != null
         && family.Decision is FamilyPanelDecision.Quantify or FamilyPanelDecision.ReportUnderOthers;
 
-    private static List<EffectivePanelFamilySlot> Slots(FamilyClusterFile curation, PanelFamilyMap map)
+    internal static List<EffectivePanelFamilySlot> Slots(FamilyClusterFile curation, PanelFamilyMap map)
     {
         var targets = curation.MyExtendedFastaItems.Where(p => !SequenceLabels.IsDecoy(p.SequenceIdentifier)).ToList();
         var names = FamilyNaming.Names(targets);
