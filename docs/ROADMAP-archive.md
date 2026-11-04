@@ -745,4 +745,5 @@ Paulo agreed these at the restart, 2026-11-01.
 | V3a | The 2.1.6 Setup.exe and zip with SHA256, built from the integrated commit while the suite runs; package check | L | 0.2 | V1a, V1b, V1c, V2b | V3c | Setup test mode reports 2.1.6.0; package check PASS | RL | | 0 | 0 | |
 | V3b | README reads 2.1.6 with a short what's new | L | 0.1 | 🟢 | V3c | Synthetic only; reviewed in V2a | RL | | 0 | 0 | |
 | V3c | v2.1.6 published as Latest; README pushed | L | 0.1 | V2c, V3a, V3b | V3d | GitHub digests equal the package | Orchestrator | | 0 | 0 | |
+| V3d | Update check on the public files: an installed 2.1.5 shows the banner for 2.1.6 | L | 0.2 | 🟢 | | PASS | RL | | 0 | 0 | |
 

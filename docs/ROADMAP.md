@@ -62,7 +62,6 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| V3d | Update check on the public files: an installed 2.1.5 shows the banner for 2.1.6 | L | 0.2 | 🟢 | | PASS | RL | | 0 | 0 | |
 
 ## Critical path
 
