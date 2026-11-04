@@ -1766,6 +1766,35 @@
           display: none !important;
         }
       }
+      .dialog-head {
+        position: sticky;
+        top: 0;
+        background: var(--surface);
+        z-index: 1;
+      }
+      @media print {
+        .rank-row {
+          padding-top: 6px;
+          padding-bottom: 6px;
+          margin-bottom: 0;
+        }
+        .rank-chart {
+          height: 25px !important;
+        }
+        .rank-track,
+        .rank-fill {
+          top: 11px !important;
+        }
+        .rank-point {
+          top: 5px !important;
+          width: 16px;
+          height: 16px;
+        }
+        .rank-point::after {
+          left: 2px;
+          top: 2px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -2069,6 +2098,12 @@
         });
         dialog.addEventListener("close", () => {
           dialog.classList.remove("figure-dialog");
+          // The native close event is queued. Keep any focus the user has already moved.
+          if (
+            document.activeElement !== document.body &&
+            !dialog.contains(document.activeElement)
+          )
+            return;
           const target = returnFocus?.isConnected
             ? returnFocus
             : Array.from(document.querySelectorAll(".metric-button")).find(
@@ -3030,7 +3065,7 @@
           help(
             "runs-info",
             "Reading the run points",
-            "Points show runs; the line shows the mean.",
+            "Points show runs. Spread uses stored SD.",
           );
           help(
             "signal-info",
