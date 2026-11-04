@@ -45,6 +45,9 @@ internal static partial class Program
         {
             string resultPath = Path.Combine(root, "result-" + (++sequence) + ".json");
             var start = new ProcessStartInfo(executable) { UseShellExecute = false, CreateNoWindow = true, WorkingDirectory = root };
+            string temporary = Path.Combine(root, "temp"); Directory.CreateDirectory(temporary);
+            start.Environment["DOTNET_BUNDLE_EXTRACT_BASE_DIR"] = Path.Combine(root, "bundle-cache");
+            start.Environment["TEMP"] = temporary; start.Environment["TMP"] = temporary;
             foreach (string arg in new[] { "/silent", "/test-mode", "/test-root=" + root, "/dir=" + target, "/result=" + resultPath }.Concat(extra))
                 start.ArgumentList.Add(arg);
             using var process = Process.Start(start) ?? throw new IOException("The owned test-mode Setup process did not start.");

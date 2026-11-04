@@ -21,11 +21,12 @@ public sealed class SetupPayload(PayloadManifest manifest, Func<Stream> openZip)
         foreach (var entry in archive.Entries)
         {
             token.ThrowIfCancellationRequested();
+            string relative = entry.FullName.Replace('\\', '/');
             if (((entry.ExternalAttributes >> 16) & 0xF000) == 0xA000 || (entry.ExternalAttributes & (int)FileAttributes.ReparsePoint) != 0)
                 throw new IOException("The package contains a file link.");
-            if (entry.FullName.EndsWith('/')) { _ = SetupPaths.FileIn(stage, entry.FullName.TrimEnd('/')); continue; }
-            string path = SetupPaths.FileIn(stage, entry.FullName);
-            if (!seen.Add(entry.FullName) || !expected.TryGetValue(entry.FullName, out var file) || entry.Length != file.Length)
+            if (relative.EndsWith('/')) { _ = SetupPaths.FileIn(stage, relative.TrimEnd('/')); continue; }
+            string path = SetupPaths.FileIn(stage, relative);
+            if (!seen.Add(relative) || !expected.TryGetValue(relative, out var file) || entry.Length != file.Length)
                 throw new IOException("The package contents differ from its file list.");
             Directory.CreateDirectory(Path.GetDirectoryName(path)!);
             using (var source = entry.Open())

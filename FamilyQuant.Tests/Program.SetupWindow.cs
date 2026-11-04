@@ -17,7 +17,7 @@ internal static partial class Program
     private static void SetupWindowTests()
     {
         EnsureApplication();
-        try { foreach (string message in InstallerWindowPreview.CheckInteractions()) Check(message, true); }
+        try { foreach (string message in InstallerWindowPreview.CheckInteractions()) Check(message.StartsWith("PASS ", StringComparison.Ordinal) ? message[5..] : message, true); }
         catch (Exception error) { Check("installer window fake-controller interactions", false, error.ToString()); }
     }
 }

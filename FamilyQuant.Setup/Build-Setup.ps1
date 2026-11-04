@@ -7,6 +7,8 @@ param(
 )
 $ErrorActionPreference='Stop'
 $env:DOTNET_PROCESSOR_COUNT='4'
+$env:DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE='1'
+$env:DOTNET_CLI_TELEMETRY_OPTOUT='1'
 $publish=[IO.Path]::GetFullPath($PublishFolder).TrimEnd('\','/')
 $output=[IO.Path]::GetFullPath($OutputFolder).TrimEnd('\','/')
 if (-not (Test-Path -LiteralPath $publish -PathType Container)) { throw 'PublishFolder must be the self-contained app folder.' }
@@ -53,9 +55,11 @@ $seen=New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]:
 $archive=[IO.Compression.ZipFile]::OpenRead($zip)
 try {
     foreach($entry in $archive.Entries) {
-        $name=$entry.FullName
+        # Windows PowerShell's .NET Framework ZIP writer uses backslashes. Normalize for the
+        # same manifest lookup without changing the ZIP bytes embedded by the release packager.
+        $name=$entry.FullName.Replace('\','/')
         if($name.EndsWith('/')) { continue }
-        if($name.StartsWith('/') -or $name.Contains('\') -or $name.Contains(':') -or ($name.Split('/') -contains '..') -or
+        if($name.StartsWith('/') -or $name.Contains(':') -or ($name.Split('/') -contains '..') -or
             -not $seen.Add($name) -or -not $expected.ContainsKey($name)) { throw ('Unexpected ZIP path: '+$name) }
         $file=$expected[$name]
         $stream=$entry.Open();$sha=[Security.Cryptography.SHA256]::Create()

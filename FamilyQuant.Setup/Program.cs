@@ -48,8 +48,14 @@ internal static class Program
             // Parse has confined this output to the test root. Revalidate after the operation too.
             _ = SetupCommandLine.Parse(SetupCommandLine.Arguments(options).ToArray());
             Directory.CreateDirectory(Path.GetDirectoryName(options.ResultFile)!);
-            File.WriteAllText(options.ResultFile, JsonSerializer.Serialize(new { result.Success, result.ExitCode, result.Message, result.Directory,
-                ProcessId = Environment.ProcessId }, SetupProduct.Json));
+            string temporary = options.ResultFile + "." + Guid.NewGuid().ToString("N") + ".tmp";
+            try
+            {
+                File.WriteAllText(temporary, JsonSerializer.Serialize(new { result.Success, result.ExitCode, result.Message, result.Directory,
+                    ProcessId = Environment.ProcessId }, SetupProduct.Json));
+                File.Move(temporary, options.ResultFile, true);
+            }
+            finally { if (File.Exists(temporary)) File.Delete(temporary); }
         }
         else if (options.Silent)
         {

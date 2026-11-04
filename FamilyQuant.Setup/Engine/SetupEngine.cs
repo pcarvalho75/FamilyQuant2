@@ -150,7 +150,8 @@ public sealed class SetupEngine(ISetupPlatform platform, string setupExecutable,
             throw;
         }
         finally { if (!recovery) Cleanup(parent, removed, ".FamilyQuant2-remove-"); }
-        SetupPaths.RemoveEmptyDirectories(target, manifest.Directories);
+        try { SetupPaths.RemoveEmptyDirectories(target, manifest.Directories); }
+        catch (IOException) { } catch (UnauthorizedAccessException) { } // Files/integration already committed; keep busy empty folders.
         try { progress?.Report(new("Program removed. Your user data and changed files were kept.", 1, 1)); } catch { }
 
         void MoveToRemoved(string relative)

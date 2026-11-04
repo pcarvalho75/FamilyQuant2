@@ -43,13 +43,13 @@ internal static partial class Program
         public void Launch(string directory) => throw new InvalidOperationException("A setup test must not launch an application.");
     }
 
-    private static SetupPayload SetupFixturePayload(string version = "2.1.3.0", Dictionary<string, string>? contents = null)
+    private static SetupPayload SetupFixturePayload(string version = "2.1.3.0", Dictionary<string, string>? contents = null, bool windowsZip = false)
     {
         contents ??= new(StringComparer.Ordinal) { [SetupProduct.AppExe] = "new program " + version, ["lib/runtime.dll"] = "new library" };
         using var memory = new MemoryStream();
         using (var zip = new ZipArchive(memory, ZipArchiveMode.Create, true))
             foreach (var item in contents)
-            { using var writer = new StreamWriter(zip.CreateEntry(item.Key).Open(), new UTF8Encoding(false)); writer.Write(item.Value); }
+            { using var writer = new StreamWriter(zip.CreateEntry(windowsZip ? item.Key.Replace('/', '\\') : item.Key).Open(), new UTF8Encoding(false)); writer.Write(item.Value); }
         byte[] bytes = memory.ToArray();
         var files = contents.Select(item => new PayloadFile(item.Key, Encoding.UTF8.GetByteCount(item.Value),
             Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(item.Value))))).ToArray();
@@ -155,6 +155,8 @@ internal static partial class Program
             && Throws<ArgumentException>(() => SetupCommandLine.Parse(new[] { "/payload=sidecar.zip" })));
         Check("setup test-mode CLI requires explicit temp root and confined directory", Throws<ArgumentException>(() => SetupCommandLine.Parse(new[] { "/test-mode" }))
             && Throws<ArgumentException>(() => SetupCommandLine.Parse(new[] { "/test-mode", "/test-root=" + options.TestRoot, "/dir=" + output })));
+        item = Case("windows-zip"); item.Engine.Install(SetupFixturePayload(windowsZip: true), item.Target, false);
+        Check("setup accepts the Windows ZIP separator form while retaining manifest path checks", File.ReadAllText(Path.Combine(item.Target, "lib", "runtime.dll")) == "new library");
     }
     private sealed class SetupProgressAction(Action<SetupProgress> report) : IProgress<SetupProgress> { public void Report(SetupProgress value) => report(value); }
 }

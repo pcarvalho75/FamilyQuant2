@@ -8,6 +8,8 @@ public static class SetupPaths
             throw new IOException("Choose a full local folder path.");
         string full = Path.TrimEndingDirectorySeparator(Path.GetFullPath(path));
         if (Same(full, Path.GetPathRoot(full)!)) throw new IOException("Choose a program folder, not a drive root.");
+        foreach (string part in full[Path.GetPathRoot(full)!.Length..].Split(Path.DirectorySeparatorChar))
+            if (part.EndsWith('.') || part.EndsWith(' ')) throw new IOException("Folder names must not end with a dot or space.");
         CheckAncestors(full);
         return full;
     }
