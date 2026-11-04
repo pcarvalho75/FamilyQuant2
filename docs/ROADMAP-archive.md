@@ -542,3 +542,23 @@ Paulo agreed these at the restart, 2026-11-01.
 | K22 | Published: v2.1.1 on pcarvalho75/FamilyQuant2-releases with zip, .sha256 and notes (D44) | L | 0.1 | K21 | K23 | The release page is live and Latest; downloaded zip hash equals K21 | Orchestrator | | 0 | 0 | |
 | K23 | Install check on 2.1.1 from GitHub; 2.1.0's Check for updates finds 2.1.1 | L | 0.2 | 🟢 | | Both pass | EV | | 0 | 0 | |
 
+### W2 The page (FQLook)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M2a | Template shell, layout and theme roles, committed as the embedded resource | L | 0.2 | 🟢 | M2b, M1h | Template commit on fq/look; 0 warnings | LK | | 0 | 0 | |
+| M2b | Binding: reads the payload and prints only its display strings, each marked with its field id | L | 0.1 | M2a, M1b | M2c, M2d, M2e, M2f, M2g | Renders the real sample with no field mismatch | LK | | 0 | 0 | |
+| M2c | Header with file links and the theme toggle; the hero band of highlights; a few short "i" pop-ups, no paragraphs | L | 0.2 | M2b | M2i | Renders light and dark; no text block longer than two lines | LK | | 0 | 0 | |
+| M2d | The composition ring, with drill-down and back | M | 0.3 | M2b | M2i | Click, keyboard and back all work | LK | | 0 | 0 | |
+| M2e | Ranked families with each run as a point | M | 0.2 | M2b, M1e | M2i | Every run point has its pop-up | LK | | 0 | 0 | |
+| M2f | The selected-family panel: proteins, peptides and the coverage strip | M | 0.2 | M2b, M1g | M2i | Selecting a family fills the panel | LK | | 0 | 0 | |
+| M2g | Measured signal and Database gap views | L | 0.2 | M2b, M1f | M2i | Both render from the payload | LK | | 0 | 0 | |
+| M2i | Phone layout, print, reduced motion, keyboard and focus | L | 0.2 | M2c, M2d, M2e, M2f, M2g | M2j | 390 px usable; print preview clean; Tab reaches everything | LK | | 0 | 0 | |
+
+### W1 Data and export (FQResults, FQShell and FQAssay)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M1b | The data contract: payload types and docs/HTML-REPORT.md, committed after the one seam round | L | 0.1 | M1a | M1d, M2b | Contract commit on fq/results; FQLook accepted (20:01) | RS | | 0 | 0 | |
+| M1c | A real sample from Ana's stored results, no Compute | L | 0.1 | M1a | M2b | payload-sample.json with every value bound to its Word cell | RS | | 0 | 0 | |
+
