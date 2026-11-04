@@ -2433,12 +2433,106 @@
                 ),
               );
           }
-          document.querySelector('#evidence-section').hidden = true;
-          document.querySelector('#others-section').hidden = true;
+          function renderSignal() {
+            const host = $("signal-panel"),
+              runs = (data.creditedRuns || []).filter(
+                (r) => exists(r.name) && exists(r.share),
+              );
+            host.append(node("h3", "", "Credited family signal"));
+            for (const r of runs) {
+              const row = node("div", "signal-run"),
+                label = node("div", "signal-run-label");
+              label.append(field(r.name), field(r.share, "strong"));
+              row.append(label);
+              const v = val(r.share);
+              if (v !== null && v >= 0 && v <= 100) {
+                const track = node("div", "signal-run-track"),
+                  fill = node("div", "signal-run-fill");
+                fill.style.width = v + "%";
+                track.append(fill);
+                row.append(track);
+              }
+              host.append(row);
+            }
+            host.append(
+              node(
+                "p",
+                "fine-print",
+                runs.length
+                  ? "Of the whole measured signal, shown separately for each run."
+                  : "Whole-measured signal shares were not included in this report selection.",
+              ),
+            );
+            const gap = $("gap-panel");
+            gap.append(node("h3", "", "Database gap"));
+            const rows = (data.databaseGap || []).filter(
+              (r) => exists(r.name) && exists(r.fraction),
+            );
+            for (const r of rows.slice(0, 6)) {
+              const row = node("div", "gap-row"),
+                track = node("div", "gap-track"),
+                fill = node("div", "gap-fill");
+              fill.style.background = "var(--s3)";
+              const v = val(r.fraction);
+              if (v !== null && v >= 0 && v <= 1)
+                fill.style.width = v * 100 + "%";
+              track.append(fill);
+              const value = field(r.fraction);
+              value.className = "gap-value";
+              row.append(field(r.name), track, value);
+              gap.append(row);
+            }
+            gap.append(
+              node(
+                "p",
+                "fine-print",
+                rows.length
+                  ? "Native fractions from the stored gap analysis. Each row has its own reference total."
+                  : "No stored database-gap comparison is available in this selection.",
+              ),
+            );
+            if (rows.length) {
+              const b = node(
+                "button",
+                "quiet-button",
+                "Read the gap comparisons",
+              );
+              b.onclick = () => {
+                const dl = node("dl");
+                for (const r of rows)
+                  dl.append(field(r.name, "dt"), field(r.fraction, "dd"));
+                popup("Database gap", [
+                  node(
+                    "p",
+                    "",
+                    "A fraction describes a share of its stated reference total. These are separate comparisons; their values are not parts of a composition.",
+                  ),
+                  dl,
+                ]);
+              };
+              gap.append(b);
+            }
+          }
+          const others = ordered.filter((f) => f.isOthers);
+          $("others-section").hidden = !others.length;
+          for (const f of others) {
+            const b = node("button", "family-chip");
+            b.append(
+              field(f.name),
+              document.createTextNode(" "),
+              field(f.mean),
+            );
+            b.onclick = () => {
+              select(f);
+              $("family-detail").scrollIntoView({ block: "start" });
+            };
+            $("others-list").append(b);
+          }
           document.querySelector('#method-section').hidden = true;
           renderRing();
           renderRanking();
           renderFamily();
+          renderSignal();
           $("app").hidden = false;
         } catch (error) {
           $("load-error").hidden = false;
