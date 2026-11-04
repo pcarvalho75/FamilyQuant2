@@ -81,8 +81,6 @@ Nobody reviews their own work; a finding is fixed by its owner and checked again
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M3e | Desk gate and merge to master | L | 0.2 | 🟢 | M3f | Gate green; master pushed | Orchestrator | | 0 | 0 | |
-| M3f | Paulo sees the page and the screenshots | L | 0.1 | M3e | M4a, M5a | Paulo's OK or his changes | Paulo | | 0 | 0 | |
 
 ### W4 Release 2.1.2 (Paulo's word given at 21:47: publish when W1 to W3 are done, D49)
 
@@ -98,7 +96,7 @@ The same chain as 2.1.1.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M5a | report.html into Ana's Relatorio folder, exported from her delivered project with no Compute | L | 0.2 | M3f |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
+| M5a | report.html into Ana's Relatorio folder, exported from her delivered project with no Compute | L | 0.2 | 🟢 |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
 
 ### W6 The README on GitHub for 2.1.2
 
