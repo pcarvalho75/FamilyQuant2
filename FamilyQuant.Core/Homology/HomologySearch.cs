@@ -88,6 +88,7 @@ namespace FamilyQuant.Homology
                     || tagErrors && opts.Strategy == HomologySearchStrategy.Auto && database.HasSeedIndex
                         && database.Proteins.Count >= opts.BruteForceProteinLimit && !opts.KQEquivalent)
                 ? GetIndex(database, operation) : null;
+            if (tagErrors) positionalIndex?.PrepareWeightedSeeds(database, operation);
             HomologyResult[] results = new HomologyResult[queries.Count];
 
             // Parallel over QUERIES, never inside one: each slot is written by exactly one task, so
@@ -583,7 +584,11 @@ namespace FamilyQuant.Homology
                 }
             }
 
-            internal void Release() => Array.Clear(postings);
+            internal void Release()
+            {
+                Array.Clear(postings);
+                ReleaseWeightedSeeds();
+            }
 
             private readonly record struct PostingCursor(int QueryOffset, int NextPosting);
 

@@ -27,6 +27,12 @@ public static partial class HomologySearch
                 indexed = true;
                 index.VisitCandidateWindows(variant.Sequence, database, (int)threshold, operation, Evaluate);
             }
+            else if (index != null && options.Strategy == HomologySearchStrategy.Auto && !options.KQEquivalent
+                && TryWeightedSeeds(variant.Weights, options.MinIdentity, out int gram, out int[] offsets))
+            {
+                indexed = true;
+                index.VisitWeightedSeedWindows(variant.Sequence, database, gram, offsets, operation, Evaluate);
+            }
             else
             {
                 for (int protein = 0; protein < database.Proteins.Count; protein++)
