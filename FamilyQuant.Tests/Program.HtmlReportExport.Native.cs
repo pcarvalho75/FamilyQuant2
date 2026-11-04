@@ -29,6 +29,18 @@ internal static partial class Program
         Check("HTML excluded family section omits its details while retaining the selected Results headline",
             main.Parts.Count > 0 && headline.Parts.Count == 0 && headline.Coverage.Count == 0
             && hidden.Fields[headline.Mean!].Text == included.Fields[main.Mean!].Text);
+        Check("HTML coverage closure uses selected native source figures for the collapsed family", main.Coverage.Count > 0
+            && main.Coverage.All(coverage => export.Document.Sections.SelectMany(section => section.Blocks).OfType<ReportFigure>()
+                .Any(figure => figure.Id == coverage.SourceFigureId)));
+        string? figureId = main.Coverage.FirstOrDefault()?.SourceFigureId;
+        if (figureId != null)
+        {
+            var excludedFigure = HtmlReportPayloadBuilder.Build(export.Document, export.SupplementSheets,
+                new() { ExcludedIds = new[] { figureId } }, export.HtmlContext);
+            Check("HTML coverage closure receives current figure exclusions before allocating fields",
+                excludedFigure.Composition.Families.SelectMany(family => family.Coverage).All(coverage => coverage.SourceFigureId != figureId)
+                && excludedFigure.Fields.Values.All(field => field.Source.Figure != figureId));
+        }
     }
 
     private static void HtmlReportNativeExportTests(string output)
@@ -92,6 +104,8 @@ internal static partial class Program
                     && !Directory.EnumerateDirectories(output, ".fq-report-*").Any());
             }
             finally { shell.Operations.ProgressReported -= cancelHtml; }
+            Check("native HTML export repeats identical bytes from the same open project", FinishReportCommand(shell.ExportReportAsync())
+                && previous[2].SequenceEqual(File.ReadAllBytes(targets[2])));
             Check("native HTML export and cancellation never save the source project", FileFingerprint.Sha256(input) == sourceHash);
         }
         finally

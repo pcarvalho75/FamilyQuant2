@@ -28,6 +28,7 @@ public static class ReportProjectExporter
     {
         if (rows.Count == 0) throw new InvalidOperationException("No full XIC results are stored. Compute and save results before exporting a report.");
         FamilyStudyMembership.RequireCurrent(curation, manifest);
+        var sourceStudies = manifest;
         void Data(int item, string title) => operation?.Report("report-data", "Data step " + item.ToString(CultureInfo.InvariantCulture)
             + " of 8: " + title, item, 8);
         operation?.Report("report-data", "Preparing stored report data", 0, 8);
@@ -177,6 +178,16 @@ public static class ReportProjectExporter
                 StoredStudies = compositionBasis.Studies, PanelKeys = panelKeys,
                 FigureDetailsCsv = studies.FigureDetailsCsv,
                 FamilySections = panelKeys.ToDictionary(pair => pair.Key, pair => ReportSectionIds.FamilyPrefix + pair.Value, StringComparer.Ordinal),
+                World = sourceWorld, SourceGrouping = compositionBasis.SourceMembership(),
+                CoverageProvider = (id, addField, currentSelection) =>
+                {
+                    if (!int.TryParse(id, NumberStyles.Integer, CultureInfo.InvariantCulture, out int familyId)
+                        || !compositionBasis.SourceUserIds.TryGetValue(familyId, out var sourceIds))
+                        return Array.Empty<HtmlReportCoverage>();
+                    string? owner = panelKeys.TryGetValue(id, out string? key) ? ReportSectionIds.FamilyPrefix + key : null;
+                    return HtmlReportCoverageBuilder.Build(layout.Document, curation, sourceStudies, sourceIds,
+                        addField, currentSelection, owner);
+                },
             },
         };
     }

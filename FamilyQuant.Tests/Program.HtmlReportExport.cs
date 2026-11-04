@@ -128,14 +128,16 @@ internal static partial class Program
         project.ReportThreshold = 0;
         var listed = ReportProjectExporter.Build(rows, manifest, project, Path.Combine(output, "listed"), familyResults: families);
         Check("HTML production export carries the prepared stored-study composition context", listed.HtmlContext.StoredStudies?.FamilyRunShares != null
-            && !listed.HtmlContext.UsesPanel && listed.HtmlContext.IsIdentity);
+            && !listed.HtmlContext.UsesPanel && listed.HtmlContext.IsIdentity
+            && ReferenceEquals(listed.HtmlContext.World, manifest.FamilyWorldResult));
         var listedPayload = HtmlReportPayloadBuilder.Build(listed.Document, listed.SupplementSheets, context: listed.HtmlContext);
         project.ReportThreshold = 1;
         var folded = ReportProjectExporter.Build(rows, manifest, project, Path.Combine(output, "folded"), familyResults: families);
         var foldedPayload = HtmlReportPayloadBuilder.Build(folded.Document, folded.SupplementSheets, context: folded.HtmlContext);
         Check("HTML uses the updated native Others threshold without a second membership rule",
             listedPayload.Composition.Families.Count > foldedPayload.Composition.Families.Count
-            && foldedPayload.Composition.Families.Count == 1 && foldedPayload.Composition.Families[0].IsOthers);
+            && foldedPayload.Composition.Families.Count == 1 && foldedPayload.Composition.Families[0].IsOthers
+            && folded.HtmlContext.SourceGrouping?.OtherFamilies.Count == manifest.FamilyRunShares!.Families.Count);
         manifest.FamilyRunShares!.Policy = SharedPeptidePolicy.CountInEveryFamily;
         manifest.FamilySubclassParts!.Policy = SharedPeptidePolicy.CountInEveryFamily;
         var overlap = ReportProjectExporter.Build(rows, manifest, project, Path.Combine(output, "overlap"), familyResults: families);
@@ -216,5 +218,17 @@ internal static partial class Program
         catch (UnauthorizedAccessException) { renameFailed = true; }
         Check("an actual third rename failure rolls back the new Word and workbook", renameFailed && !operation.HasCommitted
             && !File.Exists(fixture.Targets[0]) && !File.Exists(fixture.Targets[1]));
+        fixture = Fixture("previous-version-pair", true);
+        File.Delete(fixture.Targets[2]);
+        using var mixedCancel = new CancellationTokenSource();
+        bool mixedCancelled = false;
+        try
+        {
+            ReportArtifactPublication.Publish(fixture.Staged[0], fixture.Staged[1], fixture.Targets[0], new(mixedCancel.Token),
+                step => { if (step == 3) mixedCancel.Cancel(); });
+        }
+        catch (OperationCanceledException) { mixedCancelled = true; }
+        Check("Cancel restores a previous-version Word/workbook pair and removes newly added HTML", mixedCancelled
+            && fixture.Targets.Take(2).All(path => File.ReadAllText(path) == "old " + Path.GetFileName(path)) && !File.Exists(fixture.Targets[2]));
     }
 }
