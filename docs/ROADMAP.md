@@ -108,9 +108,7 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K20a | K20's ledger refresh lost the 80 Core-X5-runtime rows because the core-xic-runtime producer failed 3 facts (FQ15-55D93E7970D7, FQ15-74FDFA70A6DD, FQ15-8BF6E74D83EA: 'completion credits all matching synthetic User families and reports the identity') after J47d (the note now says 'under the recorded mapping policy', and score tier is the default): say whether wording or crediting changed; keep the legacy fact proved under an explicit OFF policy if it is the 2.0 behaviour, prove the new default separately, or record a reasoned ledger ruling under D43; no guard weakened | M | 0.5 | 🟢 | K20 | Refresh on a master copy with --include-raw: 80 of 80 back, core-xic-runtime 82/0 | AS | | 0 | 0 | |
-| K20 | Full release gate on the 2.1.1 commit after J47d and K19: ledger refresh and the full suite | M | 0.3 | K20a | K21 | Ledger 5,460 of 5,460, suite green | Orchestrator | | 0 | 0 | |
-| K21 | The 2.1.1 package from that exact commit, and its real-menu export of a copy of Ana's project (K10's runner) | L | 0.3 | K20 | K22 | Zip and SHA256; export passes with the Summary of findings | EV | | 0 | 0 | |
+| K21 | The 2.1.1 package from that exact commit, and its real-menu export of a copy of Ana's project (K10's runner) | L | 0.3 | 🟢 | K22 | Zip and SHA256; export passes with the Summary of findings | EV | | 0 | 0 | |
 | K22 | Published: v2.1.1 on pcarvalho75/FamilyQuant2-releases with zip, .sha256 and notes (D44) | L | 0.1 | K21 | K23 | The release page is live and Latest; downloaded zip hash equals K21 | Orchestrator | | 0 | 0 | |
 | K23 | Install check on 2.1.1 from GitHub; 2.1.0's Check for updates finds 2.1.1 | L | 0.2 | K22 | | Both pass | EV | | 0 | 0 | |
 
