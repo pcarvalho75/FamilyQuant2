@@ -39,23 +39,35 @@ public static class HtmlReportAxisTicks
             field = new(definition.Label, null, "", source);
             return true;
         }
-        if (source.Kind != "axis-tick" || source.Format != "G3" || path.Length is < 3 or > 4
+        if (source.Kind != "axis-tick" || source.Format != "axis-plain" || path.Length is < 3 or > 4
             || !CanonicalInteger(path[2], out int exponent) || exponent is < -323 or > 308) return false;
         double value = Math.Pow(10, exponent);
         if (!(value > 0) || !double.IsFinite(value)) return false;
+        int multiple = 1;
         if (definition.Scale == "log")
         {
             if (path.Length != 3 || path[1] != "log10") return false;
         }
         else
         {
-            if (path.Length != 4 || path[1] != "linear" || !CanonicalInteger(path[3], out int multiple)
+            if (path.Length != 4 || path[1] != "linear" || !CanonicalInteger(path[3], out multiple)
                 || multiple is < 0 or > 10) return false;
             value *= multiple;
             if (!double.IsFinite(value)) return false;
         }
-        field = new(value.ToString("G3", CultureInfo.InvariantCulture), value, definition.Unit, source);
+        field = new(PlainDecimal(exponent, multiple), value, definition.Unit, source);
         return true;
+    }
+
+    private static string PlainDecimal(int exponent, int multiple)
+    {
+        if (multiple == 0) return "0";
+        string digits = multiple.ToString(CultureInfo.InvariantCulture);
+        if (exponent >= 0) return digits + new string('0', exponent);
+        int point = digits.Length + exponent;
+        // Render the exact decimal tick recipe, not a binary product's rounding noise.
+        string text = point > 0 ? digits.Insert(point, ".") : "0." + new string('0', -point) + digits;
+        return text.TrimEnd('0').TrimEnd('.');
     }
 
     private static bool CanonicalInteger(string text, out int value) => int.TryParse(text,

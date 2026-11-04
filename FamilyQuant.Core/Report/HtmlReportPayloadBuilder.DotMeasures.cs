@@ -33,7 +33,7 @@ public static partial class HtmlReportPayloadBuilder
                 var ticks = new List<string>();
                 void Tick(string recipe)
                 {
-                    var source = new HtmlReportReference { Kind = "axis-tick", Property = measure.Id + "/" + recipe, Format = "G3" };
+                    var source = new HtmlReportReference { Kind = "axis-tick", Property = measure.Id + "/" + recipe, Format = "axis-plain" };
                     if (HtmlReportAxisTicks.TryResolve(source, out _)) ticks.Add(AxisField(source));
                 }
                 string Integer(int value) => value.ToString(CultureInfo.InvariantCulture);
