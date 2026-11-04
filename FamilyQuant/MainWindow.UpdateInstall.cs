@@ -67,7 +67,7 @@ public partial class MainWindow
                 if (process == null) throw new InvalidOperationException("The installer could not be started.");
             approvedClose = true;
             if (CloseForUpdateOverride != null) CloseForUpdateOverride();
-            else Close();
+            else Application.Current.Shutdown(); // Exit even if a secondary window is still open: Setup waits for this PID.
             return true;
         }
         catch (OperationCanceledException)

@@ -23,7 +23,7 @@ checks the declared length and GitHub's SHA256 digest when supplied. Failed, inc
 cancelled files never become the executable target. Checking and downloading do not execute code
 in Core. The shell honors the ordinary Save/Discard/Cancel choice before downloading. It launches
 the completed installer with `/silent`, `/dir=<current install folder>`, and `/waitpid=<own PID>`,
-then closes FamilyQuant. A failed launch leaves the app open. The installer owns the bounded
+then shuts down FamilyQuant, including secondary windows. A failed launch leaves the app open. The installer owns the bounded
 60-second process wait, running-app guard and replacement (M7a).
 
 `FamilyQuant.Tests.exe --test-update-check <fresh-output>` runs the existing checker tests plus
