@@ -68,7 +68,6 @@ Paulo's word: publish when done, no questions (D49, D51). Ana should find it whe
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | M4e | Install check from GitHub; 2.1.1 Check for updates offers 2.1.2 | L | 0.2 | 🟢 |  | Both pass | EV | | 0 | 0 | |
-| M5b | Stage the files Paulo can send Ana: the final report.html of her project and the updated READ-ME with the 2.1.2 link and SHA (outside her folder) | L | 0.1 | 🟢 |  | D:/FamilyQuant-data/out-desk/M5-for-Ana holds both with SHA256 | Orchestrator | | 0 | 0 | |
 
 ### W2 Release 2.1.3: the installer and automatic updates
 
@@ -91,7 +90,7 @@ Paulo, 23:50 to 23:57 (D52): a real installer, Help > Install update, and a chec
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M5a | report.html into Ana's Relatorio folder (the desk never writes there without his word) | L | 0.1 | M5b |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
+| M5a | report.html into Ana's Relatorio folder (the desk never writes there without his word) | L | 0.1 | 🟢 |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
 
 ## Critical path
 
