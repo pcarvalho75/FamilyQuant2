@@ -46,6 +46,8 @@ aggregate; its hidden names are not embedded.
 
 `creditedRuns` shows the existing credited-family share of whole measured signal by run.
 `databaseGap` contains native fraction values (unit `fraction`, not a newly calculated percentage).
+Its G3 short field keeps that same Word unit; the exact native fraction stays on the original
+field for the pop-up. A page must not turn a Word fraction into a printed percentage itself.
 `highlights` contains name/value/nullable description field IDs, only from project-level
 values already printed in the report summary. No total is calculated from family rows.
 `methods` contains field IDs for each step title and fact name/value. `quality`,
