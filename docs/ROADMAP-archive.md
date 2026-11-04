@@ -656,3 +656,10 @@ Paulo agreed these at the restart, 2026-11-01.
 | G3c | Version 2.1.4 in all three places and the release notes: the database-entries axis, shown for old projects with no Compute | L | 0.2 | 🟢 | G3e | Versions read 2.1.4.0; notes claim only what landed | AS | | 0 | 0 | |
 | G3e | Review of the version and notes (G3c) | L | 0.1 | G3c | G3d | APPROVED | GR3 | | 0 | 0 | |
 
+### W4 Release 2.1.4
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| G4c | README for 2.1.4: what's new, the dot plot paragraph with database entries, the new synthetic dark screenshot; reads 2.1.4 throughout. Text now, image after G2b | L | 0.3 | 🟢 | G4d | Synthetic data only; links to releases/latest | T2 | | 0 | 0 | |
+| G4d | Review of the README (G4c) | L | 0.1 | G4c, G2b | G4e | APPROVED | GR3 | | 0 | 0 | |
+
