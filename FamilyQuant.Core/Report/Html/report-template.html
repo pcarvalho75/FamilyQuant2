@@ -1837,6 +1837,38 @@
           dialog.classList.toggle("figure-dialog", wide);
           dialog.showModal();
         }
+        let theme = "system";
+        const systemTheme = matchMedia("(prefers-color-scheme: dark)");
+        function setTheme(value) {
+          theme = value;
+          if (value === "system") delete document.documentElement.dataset.theme;
+          else document.documentElement.dataset.theme = value;
+          $("theme-label").textContent =
+            value === "system"
+              ? "System theme"
+              : value === "light"
+                ? "Light theme"
+                : "Dark theme";
+          $("theme-toggle").setAttribute(
+            "aria-label",
+            "Theme: " + value + ". Change theme",
+          );
+        }
+        $("theme-toggle").onclick = () => {
+          const effective =
+            theme === "system"
+              ? systemTheme.matches
+                ? "dark"
+                : "light"
+              : theme;
+          setTheme(effective === "dark" ? "light" : "dark");
+        };
+        // A normal click toggles light/dark; the context menu restores the system preference.
+        $("theme-toggle").addEventListener("contextmenu", (e) => {
+          e.preventDefault();
+          setTheme("system");
+        });
+        $("print-button").onclick = () => window.print();
         try {
           const data = JSON.parse($("fq-data").textContent);
           if (data.schema !== "familyquant-report-html/v1" || !data.fields)
@@ -1869,6 +1901,25 @@
             $(id).replaceChildren(field(f));
           }
           $("project-title").textContent = "Explore your results";
+          function safeLink(key, fallback) {
+            const s = data.links?.[key];
+            return typeof s === "string" &&
+              /^[^\\/:?#]+\.(docx|xlsx)$/i.test(s) &&
+              s !== ".."
+              ? "./" + s
+              : "./" + fallback;
+          }
+          for (const id of ["word-link", "footer-word"])
+            $(id).href = safeLink("word", "report.docx");
+          for (const id of ["workbook-link", "footer-workbook"])
+            $(id).href = safeLink("workbook", "report_supplement.xlsx");
+          if (exists(data.title)) {
+            bind("project-title", data.title);
+            document.title = text(data.title) + " | FamilyQuant";
+          } else $("project-title").textContent = "Explore your results";
+          if (exists(data.authors)) bind("project-subtitle", data.authors);
+          else $("project-subtitle").hidden = true;
+          $("snapshot").textContent = "Saved analysis";
           const colors = [
             "var(--s1)",
             "var(--s2)",
@@ -1897,7 +1948,25 @@
             kind: null,
           };
           const additive = data.composition?.isAdditive === true;
-          document.querySelector('#headline').hidden = true;
+          const highlights = data.highlights || [];
+          for (const h of highlights) {
+            if (!exists(h.name) || !exists(h.value)) continue;
+            const item = node("div", "headline-item"),
+              v = field(h.value, "div"),
+              label = node("div", "headline-label");
+            v.className = "headline-value";
+            label.append(field(h.name));
+            if (exists(h.description)) {
+              const b = node("button", "info", "i");
+              b.setAttribute("aria-label", "About " + text(h.name));
+              b.onclick = () =>
+                popup(field(h.name), [field(h.description, "p")]);
+              label.append(b);
+            }
+            item.append(v, label);
+            $("headline").append(item);
+          }
+          $("headline").hidden = !$("headline").childElementCount;
           document.querySelector('section[aria-labelledby="composition-title"]').hidden = true;
           document.querySelector('#family-detail').hidden = true;
           document.querySelector('#evidence-section').hidden = true;
