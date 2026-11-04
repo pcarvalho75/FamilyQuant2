@@ -4,6 +4,18 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.2 (release candidate, not published)
+
+- **An interactive HTML report.** File > Export report now writes `report.html`
+  beside the Word report and its supplement, from the same stored results. Explore
+  composition and subclasses, compare runs, and open family cards for coverage,
+  credited signal and the Database gap. Pop-ups show exact values.
+- **Offline viewing.** Open the self-contained page offline in any modern browser.
+  It includes light and dark themes, phone layouts and a print view. The Word
+  report is unchanged.
+- **Existing projects.** A project computed with 2.1.1 gets the page on its
+  next Export report, with no Compute needed.
+
 ## 2.1.1 (release candidate, not published)
 
 The program, report and deployment profile identify this version as 2.1.1.0.
