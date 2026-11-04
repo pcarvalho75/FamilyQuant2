@@ -17,11 +17,14 @@ internal static partial class Program
     [new("--compare-homology-science-studies", 22, TestCommandPhase.Raw,
         args => args.Length > 0 && args[0] == "--compare-homology-science-studies", (args, _) =>
         {
-            if (args.Length is not (6 or 7)) throw new ArgumentException("Use --compare-homology-science-studies <project> <off> <tier> <length> [tag] <fresh-output>.");
-            return CompareHomologyScienceStudies(args[1], args.Skip(2).Take(args.Length - 3).ToArray(), args[^1]);
+            int reference = Array.IndexOf(args, "--reference-project");
+            int count = reference < 0 ? args.Length : reference;
+            if (count is not (6 or 7) || reference >= 0 && reference != args.Length - 2)
+                throw new ArgumentException("Use --compare-homology-science-studies <project> <off> <tier> <length> [tag] <fresh-output> [--reference-project <delivered-project>].");
+            return CompareHomologyScienceStudies(args[1], args.Skip(2).Take(count - 3).ToArray(), args[count - 1], reference < 0 ? null : args[^1]);
         })];
 
-    private static int CompareHomologyScienceStudies(string project, string[] directories, string output)
+    private static int CompareHomologyScienceStudies(string project, string[] directories, string output, string? referenceProject)
     {
         output = Path.GetFullPath(output);
         if (!output.StartsWith(@"D:\FamilyQuant-data\out-assay\", StringComparison.OrdinalIgnoreCase)
@@ -30,6 +33,14 @@ internal static partial class Program
         if (Directory.Exists(output) || File.Exists(output)) throw new IOException("Fresh comparison output required.");
         string projectSha = StudyHash(project);
         var saved = ProjectStore.ReadFqproj(project);
+        string cohort = "This table uses the earlier J38 study curation: " + ComparisonCohort(saved.fcf, saved.manifest)
+            + ". Its share changes apply to this curation only, not another delivered-project headline.";
+        if (referenceProject != null)
+        {
+            var reference = ProjectStore.ReadFqproj(referenceProject);
+            cohort += " The selected delivered reference is a different cohort: " + ComparisonCohort(reference.fcf, reference.manifest)
+                + ". Use the separately verified J47d delivered-project before/after row for the actual release effect; do not quote this historical table as that row.";
+        }
         var targets = saved.fcf.MyExtendedFastaItems.Where(p => p != null
             && !(p.SequenceIdentifier ?? "").StartsWith(HomologyOptions.DefaultDecoyLabel, StringComparison.Ordinal)).ToList();
         var names = FamilyNaming.Names(targets);
@@ -106,7 +117,8 @@ internal static partial class Program
             throw new InvalidDataException("J42 reference inputs differ between studies.");
         Directory.CreateDirectory(output);
         var decision = new StringBuilder("# RESULT J47b\n\n");
-        decision.AppendLine("Separate-option cached replay. All defaults stay OFF; Paulo chooses after science review. The tag gate is deferred to J47c when absent. Known-answer abstained means known pairs that did not land, including below-minimum-length or unsupported queries. Gate counts are distinct normalized queries and can overlap. Gap peptide counts use run/sequence/charge measurements. Family shares are arithmetic per-run means as percent of credited primary family signal; deltas are percentage points from OFF. Families listed in any option under the native threshold/panel-decision rule are included, so a threshold crossing remains visible.");
+        decision.AppendLine(cohort + "\n");
+        decision.AppendLine("Historical separate-option cached replay, measured before the default decision recorded in J47d. The tag gate is deferred to J47c when absent. Known-answer abstained means known pairs that did not land, including below-minimum-length or unsupported queries. Gate counts are distinct normalized queries and can overlap. Gap peptide counts use run/sequence/charge measurements. Family shares are arithmetic per-run means as percent of credited primary family signal; deltas are percentage points from OFF. Families listed in any option under the native threshold/panel-decision rule are included, so a threshold crossing remains visible.");
         decision.Append("\n| Metric | "); decision.Append(string.Join(" | ", labels.Take(directories.Length))); decision.AppendLine(" |\n|---|" + string.Join("|", Enumerable.Repeat("---:", directories.Length)) + "|");
         void Row(string metric, Func<int, string> value) => decision.AppendLine("| " + Escape(metric) + " | " + string.Join(" | ", Enumerable.Range(0, directories.Length).Select(value)) + " |");
         JsonElement DefaultWorld(int i) => headlines[i].GetProperty("World").EnumerateArray().Single(r => r.GetProperty("MinimumTagLength").GetInt32() == saved.manifest.FamilyWorldResult!.MinimumTagLength);
@@ -154,7 +166,8 @@ internal static partial class Program
         }
         StudyWrite(Path.Combine(output, "multiplicity.json"), multiplicities);
         var text = new StringBuilder("# J47 separate-option replay comparison\n\n");
-        text.AppendLine("Produced by FamilyQuant.Tests from the five verified actual-Compute search captures and unchanged saved quantitation. No full Compute or RAW extraction. Each option is enabled alone; every production default remains OFF. The OFF run matches all five certified scientific hashes and the available stored native quantitative views.");
+        text.AppendLine(cohort + "\n");
+        text.AppendLine("Produced by FamilyQuant.Tests from the five verified actual-Compute search captures and unchanged saved quantitation. No full Compute or RAW extraction. Each option was measured alone before the later default decision in J47d. The OFF run matches all five certified scientific hashes and the available stored native quantitative views.");
         text.AppendLine("\nGate counts below are distinct normalized query counts with at least one protein of that side reaching the identity gate, before PAM competition/tiering. A query can reach both sides. D/T at the gate is descriptive, not FDR. Protein multiplicity is the mean retained proteins over all queries, including unmatched queries. Identified calls 1 and 4 retain their certified results in all experiments.");
         text.AppendLine("\n| Option | Call | Queries | Target gate | Decoy gate | Gate D/T | Target wins | Decoy wins | Retained proteins/query | Abstained calibration | Confidence coverage |\n|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|");
         for (int i = 0; i < summaries.Count; i++)
@@ -236,5 +249,14 @@ internal static partial class Program
         static string Percent(double? value) => value.HasValue && double.IsFinite(value.Value) ? Number(100 * value.Value) : "unavailable";
         static string Fraction(double numerator, double denominator) => denominator > 0 ? Percent(numerator / denominator) + "%" : "unavailable";
         static string Escape(string value) => value.Replace("|", "\\|").Replace("\r", " ").Replace("\n", " ");
+    }
+
+    private static string ComparisonCohort(FamilyClusterFile curation, QuantManifest manifest)
+    {
+        var top = manifest.FamilyRunShares!.Families.OrderByDescending(f => f.MeanShare).First();
+        var labels = FamilyNaming.Names(curation.MyExtendedFastaItems.Where(p => !SequenceLabels.IsDecoy(p.SequenceIdentifier)));
+        return "membership " + FamilyStudyMembership.Fingerprint(curation) + "; leading family " + labels.GetValueOrDefault(top.FamilyUserId, "")
+            + ", UserID " + top.FamilyUserId.ToString(CultureInfo.InvariantCulture) + ", assigned mean "
+            + (100 * top.MeanShare!.Value).ToString("0.000000", CultureInfo.InvariantCulture) + "%";
     }
 }
