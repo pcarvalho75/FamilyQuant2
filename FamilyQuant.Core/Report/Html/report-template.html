@@ -2172,11 +2172,138 @@
             );
             $("composition-legend").append(legend);
           }
+          function renderRanking() {
+            const host = $("family-ranking");
+            host.replaceChildren();
+            const matches = ordered.filter((f) =>
+              text(f.name)
+                .toLocaleLowerCase()
+                .includes(state.query.toLocaleLowerCase()),
+            );
+            const shown =
+              state.all || state.query ? matches : matches.slice(0, 10);
+            const maximum = Math.max(
+              ...ordered.flatMap((f) => [
+                val(f.mean) ?? 0,
+                ...(f.runs || []).map((r) => val(r.share) ?? 0),
+              ]),
+              1,
+            );
+            const runNames = new Map();
+            for (const f of shown) {
+              const row = node("div", "rank-row");
+              const name = node("button", "rank-name");
+              name.append(field(f.name));
+              name.setAttribute("aria-pressed", String(f === state.selected));
+              name.onclick = () => select(f);
+              const chart = node("span", "rank-chart");
+              const track = node("span", "rank-track");
+              track.setAttribute("aria-hidden", "true");
+              chart.append(track);
+              const fill = node("span", "rank-fill");
+              fill.setAttribute("aria-hidden", "true");
+              fill.style.width =
+                Math.max(0, (val(f.mean) ?? 0) / maximum) * 100 + "%";
+              fill.style.background = familyColor(f);
+              chart.append(fill);
+              (f.runs || []).forEach((r, i) => {
+                if (val(r.share) === null) return;
+                const dot = node("button", "rank-point");
+                dot.style.left =
+                  Math.max(0, val(r.share) / maximum) * 100 + "%";
+                dot.style.setProperty(
+                  "--dot-fill",
+                  i % 3 === 1 ? "var(--surface)" : "var(--ink)",
+                );
+                dot.style.setProperty(
+                  "--dot-border",
+                  i % 3 === 1 ? "var(--ink)" : "var(--surface)",
+                );
+                dot.style.setProperty(
+                  "--dot-radius",
+                  i % 3 === 2 ? "2px" : "50%",
+                );
+                const label = node("span", "sr-only");
+                label.append(
+                  field(r.name),
+                  document.createTextNode(": "),
+                  field(r.share),
+                );
+                dot.append(label);
+                dot.onclick = () => {
+                  const dl = node("dl");
+                  dl.append(
+                    node("dt", "", "Share of credited family signal"),
+                    field(r.share, "dd"),
+                  );
+                  if (exists(r.measured))
+                    dl.append(
+                      node("dt", "", "Share of whole measured signal"),
+                      field(r.measured, "dd"),
+                    );
+                  popup(field(r.name), [field(f.name, "p"), dl]);
+                };
+                chart.append(dot);
+                if (exists(r.name)) runNames.set(r.name, i);
+              });
+              const value = field(f.mean);
+              value.className = "rank-value";
+              row.append(name, chart, value);
+              host.append(row);
+            }
+            if (!shown.length)
+              host.append(
+                node(
+                  "p",
+                  "empty",
+                  state.query
+                    ? "No matching families. Try another name."
+                    : "No family values were included in this report selection.",
+                ),
+              );
+            $("ranking-note").textContent =
+              "Mean share of credited family signal";
+            $("all-families-button").hidden =
+              ordered.length <= 10 || !!state.query;
+            $("all-families-button").textContent = state.all
+              ? "Show leading families"
+              : "View all families";
+            $("rank-scale").replaceChildren();
+            const key = $("run-key");
+            key.replaceChildren();
+            for (const [id, i] of runNames) {
+              const e = node("span"),
+                marker = node(
+                  "span",
+                  "run-marker" +
+                    (i % 3 === 1 ? " outline" : i % 3 === 2 ? " square" : ""),
+                );
+              e.append(marker, field(id));
+              key.append(e);
+            }
+            if (!runNames.size)
+              key.append(
+                node(
+                  "span",
+                  "",
+                  "Per-run points unavailable in this selection",
+                ),
+              );
+          }
+          $("family-search").oninput = (e) => {
+            state.query = e.target.value;
+            renderRanking();
+          };
+          $("all-families-button").onclick = () => {
+            state.all = !state.all;
+            renderRanking();
+          };
           document.querySelector('#family-detail').hidden = true;
           document.querySelector('#evidence-section').hidden = true;
           document.querySelector('#others-section').hidden = true;
           document.querySelector('#method-section').hidden = true;
           renderRing();
+          renderRanking();
           $("app").hidden = false;
         } catch (error) {
           $("load-error").hidden = false;
