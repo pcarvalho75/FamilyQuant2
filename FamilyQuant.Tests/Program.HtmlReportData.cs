@@ -65,6 +65,23 @@ internal static partial class Program
             HtmlReportPayloadBuilder.Build(bad.Document, Array.Empty<ReportSupplementSheet>(), context: bad.Context)));
         HtmlReportSeriesTests();
         HtmlReportSummaryTests();
+        HtmlRunLabelTests();
+    }
+
+    private static void HtmlRunLabelTests()
+    {
+        var fixture = HtmlDataFixture();
+        string[] names = { "acquisition_240min_01", "acquisition_240min_02", "acquisition_240min_03" };
+        fixture.Context.StoredStudies!.FamilyRunShares!.Runs.AddRange(names.Select(name => new FamilyRunTotal { Run = name }));
+        var table = new ReportTable("family-run-shares", "Runs", new[] { "family_user_id", "run", "assigned_signal_pct" },
+            names.Select(name => (IReadOnlyList<string>)new[] { "7", name, "38.5988" }).ToArray(), "");
+        var model = HtmlReportPayloadBuilder.Build(fixture.Document,
+            new[] { new ReportSupplementSheet(table.Id, ReportSectionIds.Results, "Run names", table) }, context: fixture.Context);
+        var labels = model.Composition.Families[0].Runs.Select(run => model.Fields[run.Name]).ToArray();
+        Check("HTML run labels use shortest distinct endings while preserving full pop-up names", labels.Select(f => f.Text).SequenceEqual(names)
+            && labels.Select(f => model.Fields[f.Short!].Text).SequenceEqual(new[] { "01", "02", "03" }));
+        Check("HTML short run names are source-bound labels rather than new numeric results", labels.All(f => model.Fields[f.Short!].Value == null
+            && model.Fields[f.Short!].Source is { Kind: "workbook-cell", Sheet: "Run names", Format: "run-suffix" }));
     }
 
     private static void HtmlReportSummaryTests()

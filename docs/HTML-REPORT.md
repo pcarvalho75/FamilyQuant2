@@ -29,6 +29,9 @@ D47 adds optional `short` to a field: it is another field ID, with G3 display te
 by C# from the native value. Charts print that short field; pop-ups print the original exact
 field. The short field has its own checked source/format, avoiding double rounding from a
 Word display when a full-precision workbook or stored-study value exists. Both are traced.
+Run-name fields also have a short field ID: a shortest distinct natural-token ending, retaining
+leading zeros. Its value is null (a label), and format `run-suffix` binds it to the complete run
+name source cell. The full name remains the exact pop-up field. Shared run labels reuse field IDs.
 Methods and quality facts remain empty under D47; the page is plots, labels and short info.
 
 `title`, `authors`, `interpretation`, all family/run/part names, and metric properties are field
