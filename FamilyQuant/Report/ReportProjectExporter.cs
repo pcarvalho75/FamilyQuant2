@@ -15,6 +15,7 @@ public sealed record ReportProjectExport(ReportDocument Document, IReadOnlyDicti
 {
     public IReadOnlyList<ReportSupplementSheet> SupplementSheets { get; init; } = Array.Empty<ReportSupplementSheet>();
     public ReportSelection? Selection { get; init; }
+    public HtmlReportContext HtmlContext { get; init; } = new();
 }
 
 /// <summary>Program-owned saved-project route shared by the shell and reproducibility command.</summary>
@@ -179,9 +180,37 @@ public static class ReportProjectExporter
                 + export.CsvExports.Count.ToString(CultureInfo.InvariantCulture) + ": " + csv.Key, written, export.CsvExports.Count);
             File.WriteAllText(Path.Combine(folder, csv.Key), csv.Value, new UTF8Encoding(false));
         }
-        string workbook = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(docxPath))!, Path.GetFileNameWithoutExtension(docxPath) + "_supplement.xlsx");
-        File.WriteAllBytes(workbook, operation == null ? ReportSupplementWorkbook.BuildBytes(export.Document, export.SupplementSheets, selection)
-            : ReportSupplementWorkbook.BuildBytes(export.Document, export.SupplementSheets, selection, operation));
-        WordReportWriter.Write(docxPath, export.Document, selection, operation);
+        string destination = Path.GetFullPath(docxPath);
+        string parent = Path.GetDirectoryName(destination)!;
+        string stage = Path.Combine(parent, ".fq-report-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(stage);
+        bool recovery = false;
+        try
+        {
+            string word = Path.Combine(stage, Path.GetFileName(destination));
+            string workbook = ReportSupplementWorkbook.PathForReport(word);
+            File.WriteAllBytes(workbook, operation == null ? ReportSupplementWorkbook.BuildBytes(export.Document, export.SupplementSheets, selection)
+                : ReportSupplementWorkbook.BuildBytes(export.Document, export.SupplementSheets, selection, operation));
+            File.WriteAllBytes(word, WordReportWriter.BuildBytes(export.Document, selection, operation));
+            WriteHtml(export, word, selection, operation);
+            ReportArtifactPublication.Publish(word, workbook, destination, operation ?? new OperationContext());
+        }
+        catch (ReportPublicationRecoveryException) { recovery = true; throw; }
+        finally
+        {
+            if (!recovery && string.Equals(Path.GetDirectoryName(Path.GetFullPath(stage)), parent, StringComparison.OrdinalIgnoreCase)
+                && Path.GetFileName(stage).StartsWith(".fq-report-", StringComparison.Ordinal))
+                try { Directory.Delete(stage, true); } catch (IOException) { } catch (UnauthorizedAccessException) { }
+        }
+    }
+
+    public static void WriteHtml(ReportProjectExport export, string wordPath, ReportSelection? selection = null, OperationContext? operation = null)
+    {
+        operation?.Report("report-html", "Writing the interactive HTML report", 0, 1);
+        operation?.ThrowIfCancellationRequested();
+        var payload = HtmlReportPayloadBuilder.Build(export.Document, export.SupplementSheets, selection ?? export.Selection,
+            export.HtmlContext, Path.GetFileName(wordPath));
+        HtmlReportWriter.Write(HtmlReportWriter.PathForReport(wordPath), payload, operation);
+        operation?.Report("report-html", "Interactive HTML report written", 1, 1);
     }
 }

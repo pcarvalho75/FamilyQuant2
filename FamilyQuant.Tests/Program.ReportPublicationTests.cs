@@ -25,6 +25,7 @@ internal static partial class Program
             Directory.CreateDirectory(stage);
             string word = Path.Combine(stage, "report.docx"), book = ReportSupplementWorkbook.PathForReport(word);
             File.WriteAllText(word, "new word bytes"); File.WriteAllText(book, "new workbook bytes");
+            File.WriteAllText(HtmlReportWriter.PathForReport(word), "new HTML bytes");
             return (word, book, Path.Combine(folder, "report.docx"));
         }
         var pair = Fixture("success");

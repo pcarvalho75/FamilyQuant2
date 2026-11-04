@@ -140,13 +140,14 @@ public partial class MainWindow
                     }
                     operation.Context.ThrowIfCancellationRequested();
                     File.WriteAllBytes(workbookStage, ReportSupplementWorkbook.BuildBytes(document, prepared.SupplementSheets, selected, operation.Context));
+                    ReportProjectExporter.WriteHtml(prepared, stage, selected, operation.Context);
                 });
                 operation.Context.ThrowIfCancellationRequested();
                 RequireSameProject();
-                operation.Context.Report("report-publish", "Publishing the Word report and supplement workbook", 0, 2);
+                operation.Context.Report("report-publish", "Publishing the Word report, supplement workbook and HTML report", 0, 3);
                 ReportArtifactPublication.Publish(stage, workbookStage, fullPath, operation.Context, step =>
                 {
-                    operation.Context.Report("report-publish", step == 1 ? "Published Word report" : "Published supplement workbook", step, 2);
+                    operation.Context.Report("report-publish", step == 1 ? "Published Word report" : step == 2 ? "Published supplement workbook" : "Published HTML report", step, 3);
                     ReportPublicationStepOverride?.Invoke(step);
                 });
                 StatusModel.ShowMessage("Report exported to " + fullPath + " with " + Path.GetFileName(ReportSupplementWorkbook.PathForReport(fullPath))
