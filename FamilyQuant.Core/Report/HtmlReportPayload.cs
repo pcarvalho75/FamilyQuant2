@@ -29,7 +29,11 @@ public sealed record HtmlReportLinks
     public string Workbook { get; init; } = "report_supplement.xlsx";
 }
 
-public sealed record HtmlReportField(string Text, double? Value, string Unit, HtmlReportReference Source);
+public sealed record HtmlReportField(string Text, double? Value, string Unit, HtmlReportReference Source)
+{
+    /// <summary>Optional field ID for a program-rounded chart label. This field keeps exact text.</summary>
+    public string? Short { get; init; }
+}
 
 /// <summary>Table/row/column are one-based, including the header row. Word tables count
 /// only printed tables. Format and Scale describe existing display conversion, never analysis.</summary>
@@ -43,6 +47,11 @@ public sealed record HtmlReportReference
     public string? Property { get; init; }
     public string? Figure { get; init; }
     public string? Format { get; init; }
+    public string? Family { get; init; }
+    public string? Study { get; init; }
+    public string? Run { get; init; }
+    public string? ParagraphText { get; init; }
+    public int Occurrence { get; init; }
     public double Scale { get; init; } = 1;
 }
 
@@ -109,4 +118,8 @@ public sealed record HtmlReportContext
     public IReadOnlyDictionary<string, string> PanelKeys { get; init; }
         = new Dictionary<string, string>(StringComparer.Ordinal);
     public QuantManifest? StoredStudies { get; init; }
+    public string FigureDetailsCsv { get; init; } = "";
+    public FamilyReportThresholdResult? SourceGrouping { get; init; }
+    public FamilyWorldSummary? World { get; init; }
+    public Func<string, Func<string, HtmlReportReference, string, double?, string>, ReportSelection?, IReadOnlyList<HtmlReportCoverage>>? CoverageProvider { get; init; }
 }

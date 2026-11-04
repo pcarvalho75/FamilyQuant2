@@ -25,6 +25,12 @@ formatted raw value, computed total, array length, percentage or counter. Every 
 must carry `data-fq-field="<id>"`, including SVG text, hover cards and dialog content. Use textContent
 or DOM text nodes for all data. Labels containing digits are fields too.
 
+D47 adds optional `short` to a field: it is another field ID, with G3 display text rounded
+by C# from the native value. Charts print that short field; pop-ups print the original exact
+field. The short field has its own checked source/format, avoiding double rounding from a
+Word display when a full-precision workbook or stored-study value exists. Both are traced.
+Methods and quality facts remain empty under D47; the page is plots, labels and short info.
+
 `title`, `authors`, `interpretation`, all family/run/part names, and metric properties are field
 IDs, not display text. Missing IDs or null values mean unavailable; they never imply zero.
 `composition.families` has name, mean, sd, cv, wholeMeasured, proteins, uniqueProteins, peptides,
@@ -61,3 +67,12 @@ or `figure-caption`. Table/row/column are one-based and include the header row. 
 may carry G6 formatting and a presentation scale; these are checked against the native cell.
 The number trace will dispatch on HTML and verify these bindings against the sibling Word and
 workbook, using the existing numeric-token/classification machinery.
+
+Stored-only labels or full-precision fallbacks use `stored-value` with an RFC6901 Property
+pointer rooted at `/manifest` or `/project`. The shared trace resolves these from the saved
+project copy, never by running Compute. G3 short fields retain the native value's scale.
+The C# context's optional coverage-provider callback receives family ID, field allocator and
+the current selection; it must filter before allocating fields, keeping excluded data out of JSON.
+`word-text` additionally carries ParagraphText and Occurrence (zero-based among Word paragraphs
+with exactly that text). Allocation locates/validates the actual selected Word package paragraphs;
+an ambiguous fragment or missing occurrence is refused. The Word writer is not changed.
