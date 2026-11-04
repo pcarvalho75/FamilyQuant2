@@ -4,6 +4,17 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.5 (release candidate, not published)
+
+- **A guided Families screen.** The Grouping panel shows the steps in order:
+  Fetch evidence, Group by evidence, Fetch family world and Compute full XIC.
+  It highlights the next step and shows each step's status.
+- **Help with missing evidence.** Group by evidence offers to download evidence
+  first when the project has none. Review grouping explains why it cannot
+  suggest a scope.
+- **Counted grouping progress.** The Read grouping task screen counts the taxa
+  it asks UniProt about.
+
 ## 2.1.4 (release candidate, not published)
 
 - **Database entries in the dot plot.** The interactive report's dot plot can
