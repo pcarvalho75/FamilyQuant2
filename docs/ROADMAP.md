@@ -96,7 +96,7 @@ Nobody reviews their own work; a finding is fixed by its owner and checked again
 | M3e | Desk gate and merge to master | L | 0.2 | M3d, M3h | M3f | Gate green; master pushed | Orchestrator | | 0 | 0 | |
 | M3f | Paulo sees the page and the screenshots | L | 0.1 | M3e | M4a, M5a | Paulo's OK or his changes | Paulo | | 0 | 0 | |
 
-### W4 Release 2.1.2 (only on Paulo's word)
+### W4 Release 2.1.2 (Paulo's word given at 21:47: publish when W1 to W3 are done, D49)
 
 The same chain as 2.1.1.
 
@@ -147,6 +147,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D46 | The HTML report | Built now beside the Word report, from the same stored values, offline and self-contained; release and delivery after Paulo sees it. Paulo, 11-03 19:20 ("just get it going"); roadmap asked for at 19:52 |
 | D47 | Scope of the HTML page | Plots, not text: no methods or quality text, short pop-ups only, short rounded labels with the exact value in the pop-up; no design review (Paulo judges it at M3f; FQReview2 checks the template's code only); coverage as the native figure unless positions are stored. Paulo, 20:15, after the 9-hour question |
 | D48 | Prepare the release and the delivery ahead | Yes: version 2.1.2 and notes on a branch now, the final export for Ana staged outside her folder; publishing and delivery still wait for Paulo's word after he sees the page. Paulo, 21:39 ("yes") |
+| D49 | When to publish 2.1.2 | No early freeze: finish every step of W1 to W3, then publish on GitHub (W4) without waiting for another word; delivery to Ana (W5) still waits for his word. Paulo, 21:47 ("we will do the project until the end and then publish it in github") |
 
 ## Risks and triggers
 
