@@ -108,7 +108,6 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K23 | Install check on 2.1.1 from GitHub; 2.1.0's Check for updates finds 2.1.1 | L | 0.2 | 🟢 | | Both pass | EV | | 0 | 0 | |
 
 ## Critical path
 

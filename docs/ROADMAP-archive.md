@@ -539,4 +539,5 @@ Paulo agreed these at the restart, 2026-11-01.
 | K20 | Full release gate on the 2.1.1 commit after J47d and K19: ledger refresh and the full suite | M | 0.3 | K20a | K21 | Ledger 5,460 of 5,460, suite green | Orchestrator | | 0 | 0 | |
 | K21 | The 2.1.1 package from that exact commit, and its real-menu export of a copy of Ana's project (K10's runner) | L | 0.3 | 🟢 | K22 | Zip and SHA256; export passes with the Summary of findings | EV | | 0 | 0 | |
 | K22 | Published: v2.1.1 on pcarvalho75/FamilyQuant2-releases with zip, .sha256 and notes (D44) | L | 0.1 | K21 | K23 | The release page is live and Latest; downloaded zip hash equals K21 | Orchestrator | | 0 | 0 | |
+| K23 | Install check on 2.1.1 from GitHub; 2.1.0's Check for updates finds 2.1.1 | L | 0.2 | 🟢 | | Both pass | EV | | 0 | 0 | |
 
