@@ -5,24 +5,24 @@
   "runs": [
     {
       "id": "AS-member-comparison",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-shell/N5-final-20261101-224706/audit-a/mapping.json D:/FamilyQuant-data/out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained AS-retained \u00222026-11-03 14:06:35 -0800\u0022 D:/FamilyQuant-data/reference-1.5.0.6/app",
-      "executedAt": "2026-11-03 14:06:35 -0800",
-      "commit": "3ab0bd7d5da0dc6900afda91c85ea5985fffa0ae",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-shell/N5-final-20261101-224706/audit-a/mapping.json D:/FamilyQuant-data/out-refresh\\20261103-165518-assay\\assay-retained AS-retained \u00222026-11-03 16:55:50 -0800\u0022 D:/FamilyQuant-data/reference-1.5.0.6/app",
+      "executedAt": "2026-11-03 16:55:50 -0800",
+      "commit": "d4f70fd42dcc26698987e37401811e082f6b3197",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\comparisons.log",
           "sha256": "320530EDF3F859ACDB5BC04DD3B4954875BF00E199DA68925813F12DDF6113C6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\comparisons.json",
           "sha256": "CC4485F8E8C50176668EB25EBAB5D98966B1999AFCD40662720A09509595E5D5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\unproven.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\unproven.tsv",
           "sha256": "D4DA04308053F0D19CC450F2095B3836F0556C395AE8A4174EC37CEDD246CFC7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\counts-by-source.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\counts-by-source.tsv",
           "sha256": "31628BF02B143073C1E875FA459F70A12EC1DFCEB14AD1F884FAF1AABAB74D61"
         },
         {
@@ -30,191 +30,191 @@
           "sha256": "DE1EDBDA53D9EE54B672F5820ED85D94087F2C0671270E08CBFF3FCD02F2A352"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-single-0-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\en-US-single-0-frozen.csv",
           "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-single-0-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\en-US-single-0-current.csv",
           "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-single-1-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\en-US-single-1-frozen.csv",
           "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-single-1-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\en-US-single-1-current.csv",
           "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-multiple-0-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\en-US-multiple-0-frozen.csv",
           "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-multiple-0-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\en-US-multiple-0-current.csv",
           "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-multiple-1-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\en-US-multiple-1-frozen.csv",
           "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-multiple-1-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\en-US-multiple-1-current.csv",
           "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-empty-0-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\en-US-empty-0-frozen.csv",
           "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-empty-0-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\en-US-empty-0-current.csv",
           "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-empty-1-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\en-US-empty-1-frozen.csv",
           "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-empty-1-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\en-US-empty-1-current.csv",
           "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-single-0-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\pt-BR-single-0-frozen.csv",
           "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-single-0-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\pt-BR-single-0-current.csv",
           "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-single-1-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\pt-BR-single-1-frozen.csv",
           "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-single-1-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\pt-BR-single-1-current.csv",
           "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-multiple-0-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\pt-BR-multiple-0-frozen.csv",
           "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-multiple-0-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\pt-BR-multiple-0-current.csv",
           "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-multiple-1-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\pt-BR-multiple-1-frozen.csv",
           "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-multiple-1-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\pt-BR-multiple-1-current.csv",
           "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-empty-0-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\pt-BR-empty-0-frozen.csv",
           "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-empty-0-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\pt-BR-empty-0-current.csv",
           "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-empty-1-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\pt-BR-empty-1-frozen.csv",
           "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-empty-1-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\pt-BR-empty-1-current.csv",
           "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\outcomes.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\outcomes.json",
           "sha256": "D2F92CFD6C055A0737AB1C6B51CBD718928389E65612DFDFA7071338B10A0B91"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\injections.json",
-          "sha256": "9C80B433D722651BC7FED67F7D3610CA6FE021660B8C1E151A8C5C26F38A0DD3"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\injections.json",
+          "sha256": "48B58A53A961A4C992DC7FE73EA7E44F4D2DA9B6FE7DFE29280804D6DC64D026"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\inputs.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\inputs.json",
           "sha256": "36C3B46147435C0D29E1D4C16915D46F4A6A2C077A9AFFBE3BA0EE118B36DDDA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\frozen-SpectrumComparisonTable.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\frozen-SpectrumComparisonTable.cs",
           "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\spectrum-native\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\Program.LedgerAssayComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\Program.LedgerAssayComparison.cs",
           "sha256": "02F38BB3F048A73C1B1C373E814A31B4428CC9DF2E38318370E070B8B9F279E9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\Program.Commands.AssayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\Program.Commands.AssayLedger.cs",
           "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\SpectrumComparisonTable.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\SpectrumComparisonTable.cs",
           "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\QuantRow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\QuantRow.cs",
           "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\DeNovoReconciler.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\DeNovoReconciler.cs",
           "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\NativeQuantFractions.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\NativeQuantFractions.cs",
           "sha256": "1B584F17E5D5796993F127A35D75354F178185E9C84536C96198D50908FCCB4E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\PeptidoformIdentity.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\PeptidoformIdentity.cs",
           "sha256": "1AE27580D2FD1A5325D0FD126414E855EFF0A14E3EC4CB8FBA875840EB48D9B9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\DeNovoSource.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\DeNovoSource.cs",
           "sha256": "F5D28EB3D7DC60C34D4288ED4C55EBB7C8878D8ECC015842B907469BC4267D3C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\SeproPsmAdapter.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\SeproPsmAdapter.cs",
           "sha256": "00B9CFF5C8A4A5CFD7714F3CC076FF44DB00BAAB13EB02153A11B890F9696C40"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\DeNovoSourceRows.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\DeNovoSourceRows.cs",
           "sha256": "14F011D7B49E7F486F87D6FECB385DF819EE8CF8D929E3C22F577DE884AE49B2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\CoreOperation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\CoreOperation.cs",
           "sha256": "FBE4D0DE84DA1C37A62AA6BD314ADE9E76EBAB801B101733565ADB3C51757BB4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\Program.LedgerAssaySpectrumProof.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\Program.LedgerAssaySpectrumProof.cs",
           "sha256": "02E5523530C4E88911AFDE3D5C1A946ADFB1051CD57FFC6B7E433E5D95BB8E18"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\Program.SecondaryInjectedMethod.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\Program.SecondaryInjectedMethod.cs",
           "sha256": "23A7781DDBD6E2B6299FB12C9F31A083CC4FF42C290513848F61EA4CEF31E2D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\Program.DeNovoLedgerWorkflow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\Program.DeNovoLedgerWorkflow.cs",
           "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "49C720B5ECD30B7BD86E4443AF12603A99D50EDB0B2DDB51AEA09C11775DCE64"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "2B9CC4F338F66ADC12A96558DC81C1168C77A1F64EC51A4B858F4FD22A0555F9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\FamilyQuant.Core.dll",
-          "sha256": "597BF4DBBF66E40BB6FB46AE769CACCBFDC51BEE0874A5E043377A282237B68B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\executed\\FamilyQuant.Core.dll",
+          "sha256": "A833B10A087C334BFCB75BED61E900D1ACD67CA496A3FF1B2450764CA6917364"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-gate"
+      "workingDirectory": "D:\\FamilyQuant-wt\\assay"
     }
   ],
   "rows": [
@@ -1572,7 +1572,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -2144,7 +2144,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -2158,7 +2158,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public const string Method",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -2330,7 +2330,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -3086,7 +3086,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -3540,7 +3540,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -4774,7 +4774,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -5104,7 +5104,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::private static void Metric ( StringBuilder b , string name , double value , string definition )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -5286,7 +5286,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -6450,7 +6450,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeDiagnostics::public void Validate ( )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -6478,7 +6478,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -6584,7 +6584,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -6804,7 +6804,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -7826,7 +7826,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeDiagnostics::public void Validate ( )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -7876,7 +7876,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -7890,7 +7890,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -7988,7 +7988,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -8052,7 +8052,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -8270,7 +8270,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -8312,7 +8312,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -8574,7 +8574,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -9280,7 +9280,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeDiagnostics::public void Validate ( )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -9536,7 +9536,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -9592,7 +9592,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::private static string Num ( double value )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -10036,7 +10036,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public const string ProvenanceLabel",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -10432,7 +10432,7 @@
           "kind": "test",
           "target": "ProveAssaySpectrumFacts",
           "assertion": "K9b native fallback fact FQ15-AB0D120CA773: exact frozen/current claim field observed and full CSV bytes equal in both cultures with progress absent/present",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -10584,7 +10584,7 @@
           "kind": "test",
           "target": "ProveAssaySpectrumFacts",
           "assertion": "K9b native fallback fact FQ15-ABD9B82A59A3: exact frozen/current claim field observed and full CSV bytes equal in both cultures with progress absent/present",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -11434,7 +11434,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public const string ProvenanceLabel",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -11498,7 +11498,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -12098,7 +12098,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -12896,7 +12896,7 @@
           "kind": "test",
           "target": "ProveAssaySpectrumFacts",
           "assertion": "K9b native fallback fact FQ15-CE9FF8A983EE: exact frozen/current claim field observed and full CSV bytes equal in both cultures with progress absent/present",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -13102,7 +13102,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::private static void Metric ( StringBuilder b , string name , double value , string definition )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -13524,7 +13524,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -14054,7 +14054,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -15412,7 +15412,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
+          "sha256": "1611134BF34F30C204B8B40FB186B9BEDB194B5FDD3F5E9EBD0A3333AC36D0B5"
         }
       ],
       "proofs": [],
@@ -15763,7 +15763,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind code fact: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -15777,7 +15777,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind export/storage fact: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -15791,7 +15791,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind format/export: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ]

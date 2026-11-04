@@ -54,7 +54,9 @@ namespace FamilyQuant
                     familyAttribution = FamilyEnvelopeQuant.AttributeHits(familyHits, options.FamilyCuration);
                     manifest.FamilyMapping = FamilyEnvelopeQuant.ProvenanceForScience(options.FamilyCuration,
                         familyAttribution.IdentityThreshold, mappingOptions.Science);
-                    result.Notes.Add("Spectrum-table family attribution: retained User families under the recorded mapping policy at " +
+                    result.Notes.Add((mappingOptions.Science?.AnyEnabled == true
+                        ? "Spectrum-table family attribution: retained User families under the recorded mapping policy at "
+                        : "Spectrum-table family attribution: every matching User family at ") +
                         familyAttribution.IdentityThreshold.ToString("P0", CultureInfo.InvariantCulture) +
                         " homology identity; shared peptides retain all memberships.");
                 }
