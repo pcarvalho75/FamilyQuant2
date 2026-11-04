@@ -88,7 +88,6 @@ Published when every check is green, like 2.1.2 and 2.1.3 (D56).
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G5b | Deliver report.html and the READ-ME into her Relatorio folder (Paulo's word given, D57) | L | 0.1 | 🟢 | | Delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
 
 ## Critical path
 
