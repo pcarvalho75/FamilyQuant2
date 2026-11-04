@@ -99,7 +99,8 @@ Nobody reviews their own work; a finding is fixed by its owner and checked again
 | M3a | Code review of FQResults' lane as it lands: contract, producers, proof | M | 0.2 | 🟢 | M3d | APPROVED, or findings sent to the owner | GR | | 0 | 0 | |
 | M3b | Code review of FQShell's and FQAssay's lanes as they land: writer, export, tests, coverage, trace tests | M | 0.2 | M1h | M3d | APPROVED, or findings sent to the owner | GR3 | | 0 | 0 | |
 | M3c | Code review of FQLook's template as it lands: no client number formatting, no network, no innerHTML with data, keyboard reach (Paulo judges the design himself at M3f) | M | 0.2 | 🟢 | M3d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
-| M3d | Owners fix the review findings; the reviewer checks again | L | 0.2 | M3a, M3b, M3c | M3e | Every finding closed | RS | | 0 | 0 | |
+| M3g | Opus review (FQOpus, Paulo's Fiocruz account), batched: the final page exported from Ana's project, every number against the Word report it wrote (K14), plus the design check of FQLook's render | M | 0.3 | M1p, M2j | M3d | APPROVED, or findings sent to the owners | OP | | 0 | 0 | |
+| M3d | Owners fix the review findings; the reviewer checks again | L | 0.2 | M3a, M3b, M3c, M3g | M3e | Every finding closed | RS | | 0 | 0 | |
 | M3e | Desk gate and merge to master | L | 0.2 | M3d | M3f | Gate green; master pushed | Orchestrator | | 0 | 0 | |
 | M3f | Paulo sees the page and the screenshots | L | 0.1 | M3e | M4a, M5a | Paulo's OK or his changes | Paulo | | 0 | 0 | |
 
@@ -123,7 +124,7 @@ The same chain as 2.1.1.
 
 ## Critical path
 
-M1b, M1d, the producers M1e to M1g, the writer M1h and export M1i, the tests, then the proof M1o (which also needs FQLook's page, M2a to M2j), the reviews M3a and M3b, the fixes M3d, the gate M3e and Paulo's look M3f. Reviewers: FQReview, FQReview2 and FQReview3 (hired 20:45 on Paulo's "hire a new grok reviewer"). The release (W4) and the delivery to Ana (W5) start only on his word.
+M1b, M1d, the producers M1e to M1g, the writer M1h and export M1i, the tests, then the proof M1o (which also needs FQLook's page, M2a to M2j), the reviews M3a and M3b, the fixes M3d, the gate M3e and Paulo's look M3f. Reviewers: FQReview, FQReview2 and FQReview3 (hired 20:45 on Paulo's "hire a new grok reviewer"), and FQOpus for the final page (20:52, "put the opus carvalho paulo as a reviewer"). The release (W4) and the delivery to Ana (W5) start only on his word.
 
 ## Paulo's decisions
 
