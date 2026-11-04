@@ -110,6 +110,9 @@ public static class InstallerWindowPreview
         void Check(bool condition, string description) { Require(condition, description); checks.Add("PASS " + description); }
         var fresh = new PreviewController();
         var window = new InstallerWindow(fresh);
+        Check(window.Icon is BitmapSource { PixelWidth: > 0 }, "Setup assembly icon loads independently of its executable host");
+        Check(window.TitleBrand.Source is BitmapSource { PixelWidth: > 0 }, "Setup assembly title brand image loads independently of its host");
+        Check(window.WelcomeBrand.Source is BitmapSource { PixelWidth: > 0 }, "Setup assembly welcome brand image loads independently of its host");
         Check(fresh.Installs == 0 && fresh.Uninstalls == 0 && fresh.Launches == 0, "construction never installs, uninstalls or launches");
         Check(window.FolderBox.Text == fresh.DefaultDirectory, "new install uses the controller default folder");
         Check(window.ThemeButton.Content.Equals("Light"), "dark is the default and light is available");
