@@ -118,5 +118,6 @@ internal static partial class Program
         Check("M157 gap short labels retain the native fraction unit and scale", Run() == 1); fields["gapShort"] = old;
         Check("M157 valid leading-zero suffix and same-unit gap label trace with zero missing", Run() == 0);
         Check("M1m trace does not rewrite either source package", beforeWord == FileFingerprint.Sha256(word) && beforeBook == FileFingerprint.Sha256(book));
+        HtmlAxisNumberTraceTests();
     }
 }

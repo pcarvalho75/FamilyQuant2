@@ -75,4 +75,7 @@ text or geometry produce `NOT FOUND` and exit code 1. No input package is rewrit
 Run-name short fields use `run-suffix`: their value stays null, their source must equal the
 full-name source, and their text must be its suffix. Leading zeros remain text. Database gap
 short labels use G3 while retaining the native fraction unit and scale.
+Dot-plot axis labels and ticks use the shared `HtmlReportAxisTicks.TryResolve` contract.
+Their text, geometry value and unit must match its result. Every `dotMeasures` label,
+tick and per-family value ID is checked; each missing ID retains its own trace error.
 `--test-html-number-trace` runs positive and negative fixtures and is enrolled in the suite.
