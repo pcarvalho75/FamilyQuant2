@@ -2053,6 +2053,9 @@
           for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
           return e;
         };
+        let interaction = "keyboard";
+        document.addEventListener("pointerdown",event=>{interaction=event.pointerType;},true);
+        document.addEventListener("keydown",()=>{interaction="keyboard";},true);
         const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
         function motion(element, frames, duration = 180) {
           if (!reducedMotion.matches)
@@ -2265,7 +2268,7 @@
                 $("ring-value").replaceChildren(metric(current.mean));
                 bind("ring-name", current.name);
               }
-              if (current) renderFamily(current);
+
             });
           }
           const additive = data.composition?.isAdditive === true;
@@ -2470,9 +2473,9 @@
               path.setAttribute("role", "button");
               if (item.family) {
                 path.dataset.family = item.family.id;
-                path.onpointerenter = () => preview(item.family);
-                path.onpointerleave = () => preview(null);
-                path.onfocus = () => preview(item.family);
+                path.onpointerenter = event => {if(event.pointerType === "mouse") preview(item.family);};
+                path.onpointerleave = event => {if(event.pointerType === "mouse") preview(null);};
+                path.onfocus = () => {if(interaction === "keyboard") preview(item.family);};
                 path.onblur = () => preview(null);
               }
               const title = svg("title", {
@@ -2550,13 +2553,14 @@
             for (const f of shown) {
               const row = node("div", "rank-row");
               row.dataset.family = f.id;
-              row.onpointerenter = () => preview(f);
-              row.onpointerleave = () => preview(null);
+              row.onclick = event => {if(!event.target.closest("button"))select(f);};
+              row.onpointerenter = event => {if(event.pointerType === "mouse") preview(f);};
+              row.onpointerleave = event => {if(event.pointerType === "mouse") preview(null);};
               const name = node("button", "rank-name");
               name.append(field(f.name));
               name.setAttribute("aria-pressed", String(f === state.selected));
               name.onclick = () => select(f);
-              name.onfocus = () => preview(f);
+              name.onfocus = () => {if(interaction === "keyboard") preview(f);};
               name.onblur = () => preview(null);
               const chart = node("span", "rank-chart");
               const pointHeight = Math.max(25, (f.runs || []).length * 14 + 10);
@@ -2622,8 +2626,8 @@
                   $("chart-hover").hidden = true;
                 };
                 dot.setAttribute("aria-describedby", "chart-hover");
-                dot.onpointerenter = hover;
-                dot.onfocus = hover;
+                dot.onpointerenter = event => {if(event.pointerType === "mouse")hover();};
+                dot.onfocus = () => {if(interaction === "keyboard")hover();};
                 dot.onpointerleave = hide;
                 dot.onblur = hide;
                 dot.onclick = () => {
