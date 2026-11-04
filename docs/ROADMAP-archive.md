@@ -599,3 +599,10 @@ Paulo agreed these at the restart, 2026-11-01.
 | M6c | Review of the README and images: facts against the program, the synthetic-data rule, plain words | L | 0.2 | M6e | M6d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
 | M6d | README pushed to pcarvalho75/FamilyQuant2-releases main (Paulo: as soon as possible); links use releases/latest | L | 0.1 | M6c |  | Live page reads correctly; images load | Orchestrator | | 0 | 0 | |
 
+### W4 Release 2.1.2 (Paulo's word given at 21:47: publish when W1 to W3 are done, D49)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M4a | Prepared now on a branch (Paulo 21:39): version 2.1.2 and release notes | L | 0.3 | 🟢 | M4b | Version in every place K19 changed; notes claim only what is on master | EV | | 0 | 0 | |
+| M4b | Full release gate on the 2.1.2 commit | M | 0.3 | M4a | M4c | Ledger 5,460 of 5,460, full suite green | Orchestrator | | 0 | 0 | |
+

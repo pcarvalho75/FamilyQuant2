@@ -91,9 +91,7 @@ The same chain as 2.1.1.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M4a | Prepared now on a branch (Paulo 21:39): version 2.1.2 and release notes | L | 0.3 | 🟢 | M4b | Version in every place K19 changed; notes claim only what is on master | EV | | 0 | 0 | |
-| M4b | Full release gate on the 2.1.2 commit | M | 0.3 | M4a | M4c | Ledger 5,460 of 5,460, full suite green | Orchestrator | | 0 | 0 | |
-| M4c | The 2.1.2 package and its real-menu export of a copy of Ana's project | L | 0.3 | M4b | M4d | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
+| M4c | The 2.1.2 package and its real-menu export of a copy of Ana's project | L | 0.3 | 🟢 | M4d | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
 | M4d | v2.1.2 published on FamilyQuant2-releases | L | 0.1 | M4c | M4e | Release page live and Latest; downloaded zip hash equals M4c | Orchestrator | | 0 | 0 | |
 | M4e | Install check from GitHub; 2.1.1 offers 2.1.2 | L | 0.2 | M4d |  | Both pass | EV | | 0 | 0 | |
 
