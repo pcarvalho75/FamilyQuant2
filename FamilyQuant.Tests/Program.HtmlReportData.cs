@@ -111,8 +111,8 @@ internal static partial class Program
         { Run = "run-a", ShareOfAssignedSignal = .385988123456, ShareOfMeasuredSignal = .3234 });
         var runs = new ReportTable("family-run-shares", "Run values", new[] { "family_user_id", "family", "run", "assigned_signal_pct", "measured_peptide_signal_pct", "assigned_signal_fraction", "measured_peptide_signal_fraction" },
             new IReadOnlyList<string>[] { new[] { "7", "Cedar", "run-a", "38.5988", "32.34", "0.385988123456", "0.3234" } }, "");
-        var parts = new ReportTable("subclass-parts", "Pooled parts", new[] { "family_user_id", "part", "within_family_pct", "within_family_fraction" },
-            new IReadOnlyList<string>[] { new[] { "7", "Class A", "60", "0.6" }, new[] { "7", "Not resolved", "40", "0.4" } }, "");
+        var parts = new ReportTable("subclass-parts", "Pooled parts", new[] { "family_user_id", "part", "within_family_pct", "within_family_fraction", "unresolved" },
+            new IReadOnlyList<string>[] { new[] { "7", "Class A", "60", "0.6", "1" }, new[] { "7", "Not resolved", "40", "0.4", "0" } }, "");
         var counts = new ReportTable("protein-counts", "Counts", new[] { "family_user_id", "observed_peptides" }, new IReadOnlyList<string>[] { new[] { "7", "9" } }, "");
         var sheets = new[] { new ReportSupplementSheet(runs.Id, ReportSectionIds.Results, "Runs", runs),
             new ReportSupplementSheet(parts.Id, ReportSectionIds.Results, "Parts", parts), new ReportSupplementSheet(counts.Id, ReportSectionIds.Results, "Counts", counts) };
@@ -125,6 +125,7 @@ internal static partial class Program
             && model.Fields[run.Short].Source is { Sheet: "Runs", Column: 6, Scale: 100, Format: "G3" });
         Check("HTML preserves pooled within-family parts independently of the headline mean", family.Parts.Count == 2
             && model.Fields[family.Parts[0].Share!].Text == "60" && model.Fields[family.Parts[1].Share!].Text == "40");
+        Check("HTML unresolved hatch follows the native flag rather than a part's display label", family.Parts[0].IsUnresolved && !family.Parts[1].IsUnresolved);
         Check("HTML peptide evidence count stays separate from the database-protein estimate", model.Fields[family.Peptides!].Text == "9" && model.Fields[family.Proteins!].Text == "225");
         var owned = fixture.Document with { Sections = fixture.Document.Sections.Append(
             new ReportSection("family:cedar", "Cedar", Array.Empty<ReportBlock>())).ToArray() };

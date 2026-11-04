@@ -81,7 +81,7 @@ public sealed record HtmlReportFamily
 }
 
 public sealed record HtmlFamilyRun(string Name, string? Share, string? Measured);
-public sealed record HtmlFamilyPart(string Kind, string Name, string? Share);
+public sealed record HtmlFamilyPart(string Kind, string Name, string? Share, bool IsUnresolved = false);
 public sealed record HtmlRunCredit(string Name, string Share);
 public sealed record HtmlGapRow(string Name, string Fraction);
 public sealed record HtmlReportHighlight(string Name, string Value, string? Description);
