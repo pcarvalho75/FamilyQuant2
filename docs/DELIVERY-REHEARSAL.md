@@ -9,8 +9,8 @@ FamilyQuant.Tests.exe --delivery-rehearsal <computed.fqproj> <staging-folder> [-
 ```
 
 The target must be a dedicated empty folder unless `--allow-nonempty` is intentional. The command
-copies `project.fqproj` and `family-panel.xlsx`, publishes `report.docx` and
-`report_supplement.xlsx`, runs the J18 numeric-token trace into `trace.csv`, writes a plain
+copies `project.fqproj` and `family-panel.xlsx`, publishes `report.docx`,
+`report_supplement.xlsx` and the offline graphical `report.html`, runs the J18 numeric-token trace into `trace.csv`, writes a plain
 English `READ-ME.txt`, and records checks in `delivery-checks.json`. The console summary gives
 sizes, SHA-256 values, readable Office XML-part counts and the trace's `NOT FOUND` count. A
 nonzero unmatched count gives exit code 1 and retains the files for review.
@@ -36,7 +36,7 @@ SHA-256. Project and panel input hashes are also rechecked independently. This i
 checking of the source tree; RAW files are never copied by this command.
 
 `delivery-checks.json` lists every command-created file present at audit time, including scratch.
-Its own final size/hash is printed after writing, avoiding a self-referential hash. The six
+Its own final size/hash is printed after writing, avoiding a self-referential hash. The seven
 recipient files are listed separately. A numeric match remains a trace aid, not a biological
 validation or proof of a particular figure's semantic provenance.
 

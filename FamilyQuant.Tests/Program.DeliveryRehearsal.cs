@@ -124,7 +124,8 @@ internal static partial class Program
         Check("delivery reports ambiguous citations separately from missing tokens", result.Summary.Contains("Trace AMBIGUOUS: " + result.Ambiguous.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal)
             && JsonDocument.Parse(File.ReadAllText(Path.Combine(result.Root, "delivery-checks.json"))).RootElement.GetProperty("Ambiguous").GetInt32() == result.Ambiguous
             && File.ReadAllText(Path.Combine(result.Root, "READ-ME.txt")).Contains("Trace AMBIGUOUS count: " + result.Ambiguous.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal));
-        Check("delivery contains project panel report workbook trace and read-me", result.Files.Count == 6 && result.Files.All(f => f.Bytes > 0 && f.Sha256.Length == 64));
+        Check("delivery contains project panel Word HTML workbook trace and read-me", result.Files.Count == 7
+            && result.Files.Any(f => f.File == "report.html") && result.Files.All(f => f.Bytes > 0 && f.Sha256.Length == 64));
         Check("all report workbook and panel XML parts are readable", result.Files.Where(f => f.File.EndsWith(".docx", StringComparison.Ordinal) || f.File.EndsWith(".xlsx", StringComparison.Ordinal)).All(f => f.XmlParts > 0));
         Check("delivery keeps both original inputs unchanged", original == DeliveryWorkspace.Sha256(project) && originalPanel == DeliveryWorkspace.Sha256(workbook));
         Check("staged saved project and panel match their original input bytes", result.Files.Single(f => f.File == "project.fqproj").Sha256 == original

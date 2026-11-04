@@ -19,10 +19,10 @@ public sealed class ReportExportWindow : Window
         + "Apply your choices and save the project to keep them for the next export. Cancel discards the checkbox draft. "
         + "The report threshold is a percentage of assigned signal, stored as a fraction from zero to one. When the composition study is available, families with a mean share below it "
         + "are grouped under Others, as are families marked Report under others. The default is 0.1 percent. "
-        + "Report details hold the study description and your written interpretation. File > Export report writes a Word document from stored Results; "
+        + "Report details hold the study description and your written interpretation. File > Export report writes Word, a supplement workbook and an interactive HTML page from stored Results; "
         + "compute Results first when they are missing. Figures use the Light export palette. The shared wait screen provides Cancel before publication, "
-        + "keeping the previous report files. Long detail tables are in the same-name _supplement.xlsx workbook. Word and workbook are published together; "
-        + "section choices also control workbook sheets. Exporting does not save the project; use File > Save to keep changed details, choices and threshold."
+        + "keeping the previous report files. Long detail tables are in the same-name _supplement.xlsx workbook. The .html file opens offline in a browser. All three files are published together; "
+        + "section choices also control workbook sheets and HTML content. Exporting does not save the project; use File > Save to keep changed details, choices and threshold."
         + "\n\n" + PanelReportHelp.Report;
 
     public ReportExportWindow(ReportExportViewModel model, Action<ReportSelection, double> apply, string actionText = "Save choices")

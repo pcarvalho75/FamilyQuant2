@@ -33,6 +33,7 @@ internal static class DeliveryRehearsal
         if (export(project, nativeFolder) != 0) throw new InvalidOperationException("The real report command failed; its work files are retained.");
         stage.Move(nativeRelative + "/report.docx", "report.docx", allowNonempty);
         stage.Move(nativeRelative + "/report_supplement.xlsx", "report_supplement.xlsx", allowNonempty);
+        stage.Move(nativeRelative + "/report.html", "report.html", allowNonempty);
         string trace = stage.PathFor("trace.csv");
         int traceExit = ReportNumberTrace.Run(stage.PathFor("report.docx"), stage.PathFor(".work/trace-sources"), trace);
         stage.Writes.Add(trace);
@@ -46,7 +47,7 @@ internal static class DeliveryRehearsal
         if (sourceHash != DeliveryWorkspace.Sha256(input) || sourceHash != DeliveryWorkspace.Sha256(project) || panelHash != DeliveryWorkspace.Sha256(panel))
             throw new InvalidDataException("A source project or panel changed during delivery rehearsal.");
         stage.AssertWritesInside();
-        string[] names = { "project.fqproj", "family-panel.xlsx", "report.docx", "report_supplement.xlsx", "trace.csv", "READ-ME.txt" };
+        string[] names = { "project.fqproj", "family-panel.xlsx", "report.docx", "report_supplement.xlsx", "report.html", "trace.csv", "READ-ME.txt" };
         var files = names.Select(name =>
         {
             string path = stage.PathFor(name);
@@ -102,13 +103,14 @@ internal static class DeliveryRehearsal
 
     private static string ReadMe(string version, string date, int notFound, int ambiguous) =>
         "FamilyQuant report files\nGenerated " + date + " with program version " + version + ".\n\n"
-        + "report.docx is the report. report_supplement.xlsx holds its detailed tables. project.fqproj is the saved computed project. "
+        + "report.docx is the report. report.html is its interactive graphical summary; open it in a browser, including offline. "
+        + "report_supplement.xlsx holds its detailed tables. project.fqproj is the saved computed project. "
         + "family-panel.xlsx is the exact panel workbook recorded by that project. trace.csv records the report's numeric-token checks. "
         + "delivery-checks.json records file sizes and SHA-256 values. The .work folder retains the rehearsal's diagnostic files.\n\n"
         + "Open project.fqproj in FamilyQuant 2.1.0 using File > Open, then look at Results. "
         + "Help > What do I do first? describes the full path. To change the panel, use File > Import family panel, review its columns and decisions, "
         + "and apply the panel. Review the evidence grouping and refresh computed Results when the program asks. "
-        + "Use File > Export report to choose sections and figures, change Report threshold (%) if wanted, and write a new report and supplement. "
+        + "Use File > Export report to choose sections and figures, change Report threshold (%) if wanted, and write new Word, HTML and supplement files together. "
         + "File > Save keeps changed panel choices, report details and threshold.\n\n"
         + "Trace NOT FOUND count: " + notFound.ToString(CultureInfo.InvariantCulture)
         + ". Trace AMBIGUOUS count: " + ambiguous.ToString(CultureInfo.InvariantCulture)
