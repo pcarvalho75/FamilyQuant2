@@ -619,4 +619,12 @@ Paulo agreed these at the restart, 2026-11-01.
 | M4c | The 2.1.2 package from master and its real-menu export of a copy of Ana's project (K21 runner) | L | 0.2 | 🟢 | M4d | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
 | M4d | v2.1.2 published on FamilyQuant2-releases with the zip, its .sha256 and the notes | L | 0.1 | M4c | M4e, M5b | Release page live and Latest; downloaded zip hash equals M4c | Orchestrator | | 0 | 0 | |
 | M5b | Stage the files Paulo can send Ana: the final report.html of her project and the updated READ-ME with the 2.1.2 link and SHA (outside her folder) | L | 0.1 | 🟢 |  | D:/FamilyQuant-data/out-desk/M5-for-Ana holds both with SHA256 | Orchestrator | | 0 | 0 | |
+| M4e | Install check from GitHub; 2.1.1 Check for updates offers 2.1.2 | L | 0.2 | 🟢 |  | Both pass | EV | | 0 | 0 | |
+
+### W2 Release 2.1.3: the installer and automatic updates
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M7b | Help > Install update (downloads and runs the Setup quietly) and a background check at every start with a non-blocking banner when a later version exists; a setting to turn it off | M | 0.5 | 🟢 | M7f | DONE; fake-network tests green | FL | | 0 | 0 | |
+| M7f | Review of the update check and Install update (M7b) | M | 0.2 | M7b | M7h | APPROVED, or fixes by the owner and re-checked | GR3 | | 0 | 0 | |
 

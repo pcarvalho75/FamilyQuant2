@@ -39,6 +39,7 @@ namespace FamilyQuant
             Title += " " + AppVersion();
             InitializeDocumentLifecycle();
             InitializeWindowPreferences();
+            InitializeUpdateChecks();
             ShowHome();
         }
 

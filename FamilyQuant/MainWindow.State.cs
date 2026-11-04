@@ -15,6 +15,7 @@ public sealed class ShellSessionState
     public double WindowWidth { get; set; } = 1024;
     public double WindowHeight { get; set; } = 768;
     public bool WindowMaximized { get; set; }
+    public bool CheckForUpdatesAtStartup { get; set; } = true;
 
     public void Remember(string path, bool hasStoredResults = false)
     {

@@ -9,6 +9,7 @@
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -103,12 +104,29 @@
                 <MenuItem x:Name="MenuItemWhereAmI" Header="What do I do first?" Click="MenuItemWhereAmI_Click"
                           ToolTip="Lists the complete workflow and what each step needs. De novo review is optional."/>
                 <MenuItem x:Name="MenuItemCheckForUpdates" Header="Check for updates" Click="MenuItemCheckForUpdates_Click"
-                          ToolTip="Asks GitHub for the latest public release, only when you choose it. A newer version opens its release page on request; nothing is installed."/>
+                          ToolTip="Asks GitHub for the latest public release. Downloading or opening its page needs your click."/>
+                <MenuItem x:Name="MenuItemInstallUpdate" Header="Install update" Click="MenuItemInstallUpdate_Click"
+                          ToolTip="Checks for a newer release, downloads its installer and closes FamilyQuant to install it."/>
+                <MenuItem x:Name="MenuItemAutomaticUpdateChecks" Header="Check for updates at startup" IsCheckable="True"
+                          Click="MenuItemAutomaticUpdateChecks_Click" ToolTip="Quietly checks at every start. Downloads only when you choose Install update."/>
             </MenuItem>
         </Menu>
         <!-- The first thing a new user sees. It says what to do, in order, and it stays until a Family
              Cluster File is opened - the sequence used to be discoverable only by trying every menu. -->
-        <Border x:Name="BorderGuide" Grid.Row="2" Background="{DynamicResource SubtleBrush}"
+        <Border x:Name="UpdateAvailableBanner" Grid.Row="1" Visibility="Collapsed" Background="{DynamicResource SubtleBrush}" Padding="12,8">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button x:Name="ButtonInstallAvailableUpdate" Content="Install update" Click="ButtonInstallAvailableUpdate_Click"
+                            Style="{DynamicResource PrimaryButton}" Margin="12,0,8,0" ToolTip="Downloads the installer and closes FamilyQuant to install the update."/>
+                    <Button x:Name="ButtonOpenAvailableRelease" Content="Open release page" Click="ButtonOpenAvailableRelease_Click"
+                            Margin="0,0,8,0" ToolTip="Opens this release in your browser."/>
+                    <Button Content="Dismiss" x:Name="ButtonDismissUpdate" Click="ButtonDismissUpdate_Click"
+                            ToolTip="Hides this notice until the next start or manual check."/>
+                </StackPanel>
+                <TextBlock x:Name="TextUpdateAvailable" VerticalAlignment="Center" TextWrapping="Wrap"/>
+            </DockPanel>
+        </Border>
+        <Border x:Name="BorderGuide" Grid.Row="3" Background="{DynamicResource SubtleBrush}"
                 Padding="12,8">
             <TextBlock x:Name="TextBlockGuide" Text="{Binding Text}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource MutedBrush}" FontSize="12"
                        ToolTip="Shows the current view, project and operation in one line. Help contains the workflow and full status details."/>
@@ -116,11 +134,11 @@
         <!-- The task-oriented home screen is swapped in here by the constructor and is the default view.
              The other four views (clustering, curation, de novo, analytics) replace it in turn, and Home
              on the menu brings it back. -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions><ColumnDefinition Width="184"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
             <local:ShellNavigationRail x:Name="NavigationRail"/>
             <Grid x:Name="GridApp" Grid.Column="1" Background="{DynamicResource CanvasBrush}"/>
         </Grid>
-        <local:BusyOverlay x:Name="ShellBusyOverlay" Grid.RowSpan="3" Panel.ZIndex="100"/>
+        <local:BusyOverlay x:Name="ShellBusyOverlay" Grid.RowSpan="4" Panel.ZIndex="100"/>
     </Grid>
 </Window>
