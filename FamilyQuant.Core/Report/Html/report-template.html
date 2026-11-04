@@ -1269,7 +1269,6 @@
         .search,
         .more,
         .theme-control,
-        .family-chip,
         .family-intro > .quiet-button {
           display: none !important;
         }
@@ -1543,6 +1542,143 @@
           opacity: 1;
         }
       }
+      .info {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+      }
+      .family-name {
+        min-width: 0;
+        flex: 1;
+      }
+      .family-name h2 {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      .subclass-segment {
+        min-height: 24px;
+      }
+      .subclass-bars {
+        height: 24px;
+      }
+      @media (max-width: 700px) {
+        .family-intro {
+          flex-wrap: wrap;
+        }
+        .family-name {
+          flex-basis: 100%;
+        }
+        .family-intro > .quiet-button {
+          padding-left: 0;
+        }
+      }
+      @media (forced-colors: active) {
+        .ring-slice {
+          forced-color-adjust: none;
+        }
+        .swatch {
+          forced-color-adjust: none;
+        }
+        .rank-fill,
+        .signal-run-fill,
+        .gap-fill,
+        .subclass-segment {
+          forced-color-adjust: none;
+        }
+        .rank-point::after {
+          background: CanvasText;
+          border-color: Canvas;
+        }
+      }
+      .detail-grid:has(> div[hidden]),
+      .evidence-grid:has(> div[hidden]) {
+        grid-template-columns: 1fr;
+      }
+      .coverage-meta {
+        font-size: 12px;
+        margin: 0;
+        align-items: baseline;
+        overflow-wrap: anywhere;
+      }
+      .domain {
+        background: var(--s3);
+        opacity: 1;
+      }
+      .peptide {
+        background: var(--s2);
+      }
+      .domain:hover,
+      .peptide:hover {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        z-index: 1;
+      }
+      .coverage-track {
+        margin-top: 20px;
+      }
+      .coverage-hover {
+        position: fixed;
+        z-index: 8;
+        background: var(--surface);
+        border: 1px solid var(--edge);
+        border-radius: 9px;
+        box-shadow: var(--shadow);
+        padding: 12px 14px;
+        width: min(300px, calc(100vw - 24px));
+        font-size: 13px;
+        overflow-wrap: anywhere;
+        pointer-events: none;
+      }
+      .coverage-hover > span {
+        display: block;
+      }
+      .coverage-hover > span + span {
+        color: var(--muted);
+        margin-top: 4px;
+      }
+      .domain,
+      .peptide {
+        min-width: 3px;
+      }
+      .ring-name > span, .rank-name > span {
+        display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+      }
+      .rank-row.is-preview {
+        box-shadow: inset 3px 0 var(--accent);
+        background: var(--selection);
+      }
+      .rank-toolbar {
+        gap: 8px;
+      }
+      .rank-toolbar h3 {
+        flex: 1;
+      }
+      .rank-toolbar > .quiet-button {
+        font-size: 12px;
+        padding: 7px 9px;
+      }
+      .ring-slice {
+        transition:
+          opacity 0.16s,
+          filter 0.16s;
+      }
+      .signal-run-fill,
+      .subclass-segment,
+      .rank-fill {
+        transition:
+          width 0.18s,
+          background 0.18s;
+      }
+      @media print {
+        .skip {display:none!important}
+        .family-chip {color:var(--ink)}
+        .coverage-hover {
+          display: none !important;
+        }
+        #rank-sort {
+          display: none !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1649,6 +1785,13 @@
               <div class="rank-toolbar">
                 <h3>Across the runs</h3>
                 <button
+                  class="quiet-button"
+                  id="rank-sort"
+                  aria-label="Sort families by run-to-run spread"
+                >
+                  Sort: share
+                </button>
+                <button
                   class="info"
                   id="runs-info"
                   aria-label="How to read the run points"
@@ -1745,19 +1888,6 @@
           </div>
           <div class="others-list" id="others-list"></div>
         </section>
-        <section
-          class="section"
-          id="method-section"
-          aria-labelledby="method-title"
-        >
-          <div class="section-title">
-            <h2 id="method-title">From evidence to composition</h2>
-            <a id="workbook-link" href="report_supplement.xlsx"
-              >Open data workbook</a
-            >
-          </div>
-          <ol class="pipeline" id="pipeline"></ol>
-        </section>
         <footer class="footer">
           <p id="footer-meta"></p>
           <div class="footer-links">
@@ -1787,6 +1917,8 @@
       </div>
       <div class="dialog-body" id="dialog-body"></div>
     </dialog>
+    <div id="coverage-hover" class="coverage-hover" role="tooltip" hidden></div>
+    <div id="chart-hover" class="coverage-hover" role="tooltip" hidden></div>
     <script id="fq-data" type="application/json"></script>
     <script>
       "use strict";
@@ -1804,6 +1936,14 @@
           for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
           return e;
         };
+        const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+        function motion(element, frames, duration = 180) {
+          if (!reducedMotion.matches)
+            element.animate(frames, {
+              duration,
+              easing: "cubic-bezier(.2,.8,.2,1)",
+            });
+        }
         const dialog = $("detail-dialog");
         let returnFocus = null;
         function closeDialog() {
@@ -1812,6 +1952,23 @@
           returnFocus?.focus();
         }
         $("dialog-close").onclick = closeDialog;
+        dialog.addEventListener("keydown", (event) => {
+          if (event.key !== "Tab") return;
+          const controls = Array.from(
+            dialog.querySelectorAll(
+              'button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled),[tabindex]:not([tabindex="-1"])',
+            ),
+          ).filter((e) => e.getClientRects().length);
+          const first = controls[0],
+            last = controls[controls.length - 1];
+          if (
+            (!event.shiftKey && document.activeElement === last) ||
+            (event.shiftKey && document.activeElement === first)
+          ) {
+            event.preventDefault();
+            (event.shiftKey ? last : first)?.focus();
+          }
+        });
         dialog.addEventListener("click", (e) => {
           if (e.target === dialog) {
             const r = dialog.getBoundingClientRect();
@@ -1863,11 +2020,6 @@
               : theme;
           setTheme(effective === "dark" ? "light" : "dark");
         };
-        // A normal click toggles light/dark; the context menu restores the system preference.
-        $("theme-toggle").addEventListener("contextmenu", (e) => {
-          e.preventDefault();
-          setTheme("system");
-        });
         $("print-button").onclick = () => window.print();
         try {
           const data = JSON.parse($("fq-data").textContent);
@@ -1892,8 +2044,7 @@
                 fields[id].text +
                 (unit && fields[id].unit ? " " + fields[id].unit : "");
             } else {
-              e.textContent = "Unavailable";
-              e.classList.add("muted");
+              e.hidden = true;
             }
             return e;
           }
@@ -1911,7 +2062,7 @@
           }
           for (const id of ["word-link", "footer-word"])
             $(id).href = safeLink("word", "report.docx");
-          for (const id of ["workbook-link", "footer-workbook"])
+          for (const id of ["footer-workbook"])
             $(id).href = safeLink("workbook", "report_supplement.xlsx");
           if (exists(data.title)) {
             bind("project-title", data.title);
@@ -1946,7 +2097,35 @@
             all: false,
             query: "",
             kind: null,
+            sort: "share",
           };
+          let hoverFrame = null;
+          function preview(f) {
+            if (hoverFrame !== null) cancelAnimationFrame(hoverFrame);
+            hoverFrame = requestAnimationFrame(() => {
+              hoverFrame = null;
+              const current = f || state.selected;
+              for (const path of $("composition-ring").querySelectorAll(
+                "[data-family]",
+              ))
+                path.classList.toggle(
+                  "dim",
+                  path.dataset.family !== current?.id,
+                );
+              for (const row of $("family-ranking").querySelectorAll(
+                "[data-family]",
+              ))
+                row.classList.toggle(
+                  "is-preview",
+                  !!f && row.dataset.family === f.id,
+                );
+              if (!state.drill && current) {
+                bind("ring-value", current.mean);
+                bind("ring-name", current.name);
+              }
+              if (current) renderFamily(current);
+            });
+          }
           const additive = data.composition?.isAdditive === true;
           const highlights = data.highlights || [];
           for (const h of highlights) {
@@ -1972,7 +2151,7 @@
               node(
                 "p",
                 "notice",
-                "Family contributions overlap in this analysis. Compare the values individually; a composition ring would imply a shared whole.",
+                "Overlapping contributions. Compare family values individually.",
               ),
             );
           function groupedParts(f) {
@@ -1996,20 +2175,29 @@
                   : "Within-family parts";
           }
           function select(f, drill = false) {
+            if (hoverFrame !== null) {
+              cancelAnimationFrame(hoverFrame);
+              hoverFrame = null;
+            }
+            const focus = document.activeElement;
+            const fromRank = focus?.classList.contains("rank-name");
+            const fromRing = focus?.classList.contains("ring-slice");
             state.selected = f;
             state.kind = null;
             state.drill = drill && groupedParts(f).size > 0;
             renderRing();
             if (typeof renderRanking === "function") renderRanking();
             if (typeof renderFamily === "function") renderFamily();
+            if (fromRank)
+              $("family-ranking")
+                .querySelector('.rank-name[aria-pressed="true"]')
+                ?.focus({ preventScroll: true });
+            if (fromRing && state.drill)
+              $("reset-composition").focus({ preventScroll: true });
           }
           function partDialog(p) {
             popup(field(p.name), [
-              node(
-                "p",
-                "",
-                "Pooled within-family share. This combines the stored signal across runs before calculating a share within this family. It is a different reference from the mean per-run share in the overview.",
-              ),
+              node("p", "", "Pooled share within this family."),
               field(p.share, "p"),
             ]);
           }
@@ -2022,10 +2210,10 @@
             $("composition-legend").replaceChildren();
             const f = state.selected,
               groups = f ? groupedParts(f) : new Map();
-            if (!f) {
-              $("ring-name").textContent = "Composition unavailable";
-              $("composition-basis").textContent =
-                "No family contribution values were included in this report selection.";
+            if (!f || !ordered.some((item) => val(item.mean) !== null)) {
+              document.querySelector(
+                'section[aria-labelledby="composition-title"]',
+              ).hidden = true;
               reset.hidden = true;
               return;
             }
@@ -2052,15 +2240,13 @@
                   : groups.keys().next().value;
               state.kind = kind;
               crumb.append(document.createTextNode(" / "), field(f.name));
-              items = groups
-                .get(kind)
-                .map((p, i) => ({
-                  id: p.name,
-                  name: p.name,
-                  share: p.share,
-                  color: colors[i % colors.length],
-                  part: p,
-                }));
+              items = groups.get(kind).map((p, i) => ({
+                id: p.name,
+                name: p.name,
+                share: p.share,
+                color: colors[i % colors.length],
+                part: p,
+              }));
               $("composition-basis").textContent =
                 "Pooled within-family shares. " + partTitle(kind) + ".";
               $("ring-value").textContent = "";
@@ -2134,9 +2320,19 @@
                 "ring-slice" +
                   (!state.drill && item.family !== f ? " dim" : ""),
               );
-              if (proportion > 0.999999) path.style.stroke = item.color;
+              if (proportion > 0.999999) {
+                path.style.stroke = item.color;
+                path.style.strokeWidth = "42";
+              }
               path.setAttribute("tabindex", "0");
               path.setAttribute("role", "button");
+              if (item.family) {
+                path.dataset.family = item.family.id;
+                path.onpointerenter = () => preview(item.family);
+                path.onpointerleave = () => preview(null);
+                path.onfocus = () => preview(item.family);
+                path.onblur = () => preview(null);
+              }
               const title = svg("title", {
                 id: "ring-label-" + i,
                 "data-fq-field": item.name,
@@ -2171,11 +2367,30 @@
               ),
             );
             $("composition-legend").append(legend);
+            motion(ring, [
+              { opacity: 0.5, transform: "scale(.98)" },
+              { opacity: 1, transform: "scale(1)" },
+            ]);
           }
           function renderRanking() {
             const host = $("family-ranking");
+            const oldPositions = new Map(
+              Array.from(host.children).map((e) => [
+                e.dataset.family,
+                e.getBoundingClientRect().top,
+              ]),
+            );
             host.replaceChildren();
-            const matches = ordered.filter((f) =>
+            const ranked =
+              state.sort === "spread"
+                ? ordered
+                    .slice()
+                    .sort(
+                      (a, b) =>
+                        (val(b.sd) ?? -Infinity) - (val(a.sd) ?? -Infinity),
+                    )
+                : ordered;
+            const matches = ranked.filter((f) =>
               text(f.name)
                 .toLocaleLowerCase()
                 .includes(state.query.toLocaleLowerCase()),
@@ -2192,10 +2407,15 @@
             const runNames = new Map();
             for (const f of shown) {
               const row = node("div", "rank-row");
+              row.dataset.family = f.id;
+              row.onpointerenter = () => preview(f);
+              row.onpointerleave = () => preview(null);
               const name = node("button", "rank-name");
               name.append(field(f.name));
               name.setAttribute("aria-pressed", String(f === state.selected));
               name.onclick = () => select(f);
+              name.onfocus = () => preview(f);
+              name.onblur = () => preview(null);
               const chart = node("span", "rank-chart");
               const track = node("span", "rank-track");
               track.setAttribute("aria-hidden", "true");
@@ -2230,7 +2450,39 @@
                   field(r.share),
                 );
                 dot.append(label);
+                const hover = () => {
+                  preview(f);
+                  const tip = $("chart-hover");
+                  tip.replaceChildren(field(r.name), field(r.share));
+                  tip.hidden = false;
+                  const rect = dot.getBoundingClientRect();
+                  tip.style.left =
+                    Math.max(
+                      12,
+                      Math.min(
+                        rect.left,
+                        innerWidth - Math.min(300, innerWidth - 24) - 12,
+                      ),
+                    ) + "px";
+                  tip.style.top =
+                    Math.max(
+                      12,
+                      Math.min(
+                        rect.bottom + 9,
+                        innerHeight - tip.offsetHeight - 12,
+                      ),
+                    ) + "px";
+                };
+                const hide = () => {
+                  $("chart-hover").hidden = true;
+                };
+                dot.setAttribute("aria-describedby", "chart-hover");
+                dot.onpointerenter = hover;
+                dot.onfocus = hover;
+                dot.onpointerleave = hide;
+                dot.onblur = hide;
                 dot.onclick = () => {
+                  hide();
                   const dl = node("dl");
                   dl.append(
                     node("dt", "", "Share of credited family signal"),
@@ -2250,19 +2502,29 @@
               value.className = "rank-value";
               row.append(name, chart, value);
               host.append(row);
+              const previous = oldPositions.get(f.id);
+              if (previous !== undefined) {
+                const shift = previous - row.getBoundingClientRect().top;
+                if (Math.abs(shift) > 1)
+                  motion(row, [
+                    { transform: `translateY(${shift}px)` },
+                    { transform: "translateY(0)" },
+                  ]);
+              }
             }
-            if (!shown.length)
-              host.append(
-                node(
-                  "p",
-                  "empty",
-                  state.query
-                    ? "No matching families. Try another name."
-                    : "No family values were included in this report selection.",
-                ),
-              );
+            if (!shown.length && state.query)
+              host.append(node("p", "empty", "No matching families."));
             $("ranking-note").textContent =
               "Mean share of credited family signal";
+            $("rank-sort").hidden = !ordered.some((f) => val(f.sd) !== null);
+            $("rank-sort").textContent =
+              state.sort === "spread" ? "Sort: spread" : "Sort: share";
+            $("rank-sort").setAttribute(
+              "aria-label",
+              state.sort === "spread"
+                ? "Sort families by mean share"
+                : "Sort families by run-to-run spread",
+            );
             $("all-families-button").hidden =
               ordered.length <= 10 || !!state.query;
             $("all-families-button").textContent = state.all
@@ -2281,14 +2543,6 @@
               e.append(marker, field(id));
               key.append(e);
             }
-            if (!runNames.size)
-              key.append(
-                node(
-                  "span",
-                  "",
-                  "Per-run points unavailable in this selection",
-                ),
-              );
           }
           $("family-search").oninput = (e) => {
             state.query = e.target.value;
@@ -2296,6 +2550,10 @@
           };
           $("all-families-button").onclick = () => {
             state.all = !state.all;
+            renderRanking();
+          };
+          $("rank-sort").onclick = () => {
+            state.sort = state.sort === "share" ? "spread" : "share";
             renderRanking();
           };
           function stat(host, label, id) {
@@ -2321,7 +2579,7 @@
               node(
                 "p",
                 "",
-                "The family share describes abundance. Protein and peptide counts describe the evidence and diversity; they are separate quantities.",
+                "Abundance and protein diversity are separate measures.",
               ),
               dl,
             );
@@ -2357,13 +2615,11 @@
               full.loading = "eager";
               full.className = "full-figure";
               content.push(full);
-              if (exists(fig.caption)) content.push(field(fig.caption, "p"));
               popup(field(fig.title), content, true);
             };
             host.append(button);
           }
-          function renderFamily() {
-            const f = state.selected;
+          function renderFamily(f = state.selected) {
             $("family-detail").hidden = !f;
             if (!f) return;
             bind("family-title", f.name);
@@ -2409,34 +2665,140 @@
                 node("p", "fine-print", "Pooled shares within this family."),
               );
             }
-            if (!groups.size)
-              parts.append(
-                node("h3", "", "Within-family detail"),
-                node(
-                  "p",
-                  "fine-print",
-                  "No within-family parts were included in this report selection.",
-                ),
-              );
+            parts.hidden = !groups.size;
             const coverage = $("coverage-content");
             coverage.replaceChildren();
-            $("protein-select").hidden = true;
             $("protein-panel").querySelector("h3").textContent =
               "Sequence coverage";
-            for (const fig of f.coverage || []) figureCard(fig, coverage, true);
-            if (!coverage.childElementCount)
-              coverage.append(
-                node(
-                  "p",
-                  "empty",
-                  "No positioned coverage figure is available in this report selection.",
-                ),
+            const positions = (f.coverage || []).filter(
+              (item) =>
+                (Number.isInteger(item.length) &&
+                  item.length > 0 &&
+                  ((item.peptides || []).length ||
+                    (item.domains || []).length)) ||
+                (typeof item.png === "string" &&
+                  item.png.startsWith("data:image/png;base64,")),
+            );
+            const selector = $("protein-select");
+            selector.replaceChildren();
+            for (const [i, item] of positions.entries()) {
+              const option = field(
+                exists(item.protein) ? item.protein : item.title,
+                "option",
               );
+              option.value = i;
+              selector.append(option);
+            }
+            selector.hidden = positions.length < 2;
+            const draw = () => {
+              coverage.replaceChildren();
+              const item =
+                positions[
+                  selector.selectedIndex < 0 ? 0 : selector.selectedIndex
+                ];
+              if (!item) return;
+              if (!(Number.isInteger(item.length) && item.length > 0)) {
+                figureCard(item, coverage, true);
+                return;
+              }
+              const meta = node("div", "coverage-meta");
+              if (exists(item.protein)) meta.append(field(item.protein));
+              if (exists(item.lengthLabel))
+                meta.append(field(item.lengthLabel));
+              const track = node("div", "coverage-track");
+              track.dataset.fqCoverage = item.sourceFigureId;
+              track.append(node("span", "sequence-line"));
+              const addSpans = (spans, kind) => {
+                for (const span of spans || []) {
+                  if (
+                    !Number.isInteger(span.start) ||
+                    !Number.isInteger(span.end) ||
+                    span.start < 1 ||
+                    span.end < span.start ||
+                    span.end > item.length ||
+                    !exists(span.label)
+                  )
+                    continue;
+                  const b = node("button", kind);
+                  b.style.left = ((span.start - 1) / item.length) * 100 + "%";
+                  b.style.width =
+                    ((span.end - span.start + 1) / item.length) * 100 + "%";
+                  const accessible = node("span", "sr-only");
+                  accessible.append(field(span.label));
+                  if (exists(span.range))
+                    accessible.append(
+                      document.createTextNode(" "),
+                      field(span.range),
+                    );
+                  b.append(accessible);
+                  const show = () => {
+                    const tip = $("coverage-hover");
+                    tip.replaceChildren(field(span.label));
+                    if (exists(span.range)) tip.append(field(span.range));
+                    tip.hidden = false;
+                    const r = b.getBoundingClientRect();
+                    tip.style.left =
+                      Math.max(
+                        12,
+                        Math.min(
+                          r.left,
+                          innerWidth - Math.min(300, innerWidth - 24) - 12,
+                        ),
+                      ) + "px";
+                    tip.style.top =
+                      Math.max(
+                        12,
+                        Math.min(
+                          r.bottom + 9,
+                          innerHeight - tip.offsetHeight - 12,
+                        ),
+                      ) + "px";
+                  };
+                  const hide = () => {
+                    $("coverage-hover").hidden = true;
+                  };
+                  b.setAttribute("aria-describedby", "coverage-hover");
+                  b.onpointerenter = show;
+                  b.onfocus = show;
+                  b.onpointerleave = hide;
+                  b.onblur = hide;
+                  b.onclick = () => {
+                    hide();
+                    const detail = [field(span.label, "p")];
+                    if (exists(span.range)) detail.push(field(span.range, "p"));
+                    popup(
+                      kind === "domain"
+                        ? "Positioned annotation"
+                        : "Observed peptide",
+                      detail,
+                    );
+                  };
+                  track.append(b);
+                }
+              };
+              addSpans(item.domains, "domain");
+              addSpans(item.peptides, "peptide");
+              const legend = node("div", "legend");
+              for (const [label, color] of [
+                ["Positioned annotations", "var(--s3)"],
+                ["Observed peptides", "var(--s2)"],
+              ]) {
+                const entry = node("span", "legend-item"),
+                  sw = node("span", "swatch");
+                sw.style.background = color;
+                entry.append(sw, node("span", "", label));
+                legend.append(entry);
+              }
+              coverage.append(meta, track, legend);
+            };
+            selector.onchange = draw;
+            draw();
+            $("protein-panel").hidden = !positions.length;
           }
           function renderSignal() {
             const host = $("signal-panel"),
               runs = (data.creditedRuns || []).filter(
-                (r) => exists(r.name) && exists(r.share),
+                (r) => exists(r.name) && val(r.share) !== null,
               );
             host.append(node("h3", "", "Credited family signal"));
             for (const r of runs) {
@@ -2455,18 +2817,12 @@
               host.append(row);
             }
             host.append(
-              node(
-                "p",
-                "fine-print",
-                runs.length
-                  ? "Of the whole measured signal, shown separately for each run."
-                  : "Whole-measured signal shares were not included in this report selection.",
-              ),
+              node("p", "fine-print", "Of whole measured signal, by run."),
             );
             const gap = $("gap-panel");
             gap.append(node("h3", "", "Database gap"));
             const rows = (data.databaseGap || []).filter(
-              (r) => exists(r.name) && exists(r.fraction),
+              (r) => exists(r.name) && val(r.fraction) !== null,
             );
             for (const r of rows.slice(0, 6)) {
               const row = node("div", "gap-row"),
@@ -2486,9 +2842,7 @@
               node(
                 "p",
                 "fine-print",
-                rows.length
-                  ? "Native fractions from the stored gap analysis. Each row has its own reference total."
-                  : "No stored database-gap comparison is available in this selection.",
+                "Each fraction uses its own reference total.",
               ),
             );
             if (rows.length) {
@@ -2505,15 +2859,20 @@
                   node(
                     "p",
                     "",
-                    "A fraction describes a share of its stated reference total. These are separate comparisons; their values are not parts of a composition.",
+                    "Read each fraction against its own reference total.",
                   ),
                   dl,
                 ]);
               };
               gap.append(b);
             }
+            host.hidden = !runs.length;
+            gap.hidden = !rows.length;
+            $("evidence-section").hidden = host.hidden && gap.hidden;
           }
-          const others = ordered.filter((f) => f.isOthers);
+          const others = ordered.filter(
+            (f) => f.isOthers && val(f.mean) !== null,
+          );
           $("others-section").hidden = !others.length;
           for (const f of others) {
             const b = node("button", "family-chip");
@@ -2534,67 +2893,38 @@
           help(
             "composition-info",
             "Reading the family landscape",
-            "The ring shows contributions to credited family signal. Select a segment or a family in the list. Mean family shares and pooled within-family parts use different reference totals; their labels identify which view you are reading.",
+            "Mean shares of credited family signal. Select a family to explore.",
           );
           help(
             "runs-info",
             "Reading the run points",
-            "Each point is a stored family share in a run. The line behind it shows the mean. Points close together indicate similar shares across these runs. This view describes consistency, not statistical significance or biological variation.",
+            "Points show runs; the line shows the mean.",
           );
           help(
             "signal-info",
             "The reference total matters",
-            "Family composition is expressed relative to signal credited to families. The credited-signal view instead compares that signal with the whole measured signal in each run. These are different reference totals.",
+            "Credited signal compared with whole measured signal.",
           );
           help(
             "others-info",
             "The smaller contributions",
-            "Others is the aggregate retained by the report's threshold rule. This page does not unpack names hidden by that rule. The data workbook and full report retain the project's available detail.",
+            "Families grouped by the report's threshold rule.",
           );
-          const iconPaths = [
-            "M4 6h16M4 12h16M4 18h16M8 4v16",
-            "M4 18l5-7 5 3 6-10M4 21h17",
-            "M5 4h14v16H5ZM9 8h6M9 12h6M9 16h3",
-            "M4 19V9M10 19V5M16 19v-7M22 19V3",
-            "M4 6h16M7 12h10M10 18h4",
-          ];
-          $("method-section").hidden = !(data.methods || []).length;
-          for (const [i, step] of (data.methods || []).entries()) {
-            const li = node("li"),
-              b = node("button"),
-              ic = svg("svg", { viewBox: "0 0 24 24", "aria-hidden": "true" });
-            ic.append(svg("path", { d: iconPaths[i % iconPaths.length] }));
-            b.append(ic, field(step.title));
-            b.onclick = () => {
-              const dl = node("dl");
-              for (const f of step.facts || [])
-                dl.append(field(f.name, "dt"), field(f.value, "dd"));
-              popup(field(step.title), [dl]);
-            };
-            li.append(b);
-            $("pipeline").append(li);
-          }
-          const figures = [
-            ...(data.quality || []),
-            ...(data.sensitivity || []),
-          ];
-          if (figures.length) {
-            const section = node("section", "section"),
-              head = node("div", "section-title");
-            head.append(node("h2", "", "Quality and sensitivity"));
-            const grid = node("div", "figure-grid");
-            figures.forEach((f) => figureCard(f, grid));
-            section.append(head, grid);
-            $("method-section").after(section);
-          }
-          $("footer-meta").textContent =
-            "FamilyQuant · A visual guide to the saved analysis";
-          if (exists(data.interpretation)) {
-            const b = node("button", "quiet-button", "Read the interpretation");
-            b.onclick = () =>
-              popup("Interpretation", [field(data.interpretation, "p")]);
-            $("footer-meta").append(document.createTextNode(" "), b);
-          }
+          $("footer-meta").textContent = "FamilyQuant";
+          let printState = null;
+          window.addEventListener("beforeprint", () => {
+            printState = { all: state.all, query: state.query };
+            state.all = true;
+            state.query = "";
+            renderRanking();
+          });
+          window.addEventListener("afterprint", () => {
+            if (printState) {
+              Object.assign(state, printState);
+              printState = null;
+              renderRanking();
+            }
+          });
           renderRing();
           renderRanking();
           renderFamily();
