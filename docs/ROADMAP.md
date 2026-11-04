@@ -74,7 +74,7 @@ The program side (FQShell joined at 20:30 on Paulo's "hire 1 more sol worker so 
 | M1e | Producer: per-run shares and the parts within each family | L | 0.2 | M1d | M2e, M1m | Runs and parts filled for every family that has them | RS | | 0 | 0 | |
 | M1f | Producer: highlights, measured signal by run and the Database gap (no methods or quality text: the page is plots) | L | 0.2 | M1d | M2c, M2g, M1m | Each printed value is a field bound to its stored value or Word cell | RS | | 0 | 0 | |
 | M1g | Producer: coverage, with live positions when the stored results hold them, else the native figure | M | 0.2 | M1d | M2f, M1m | Coverage filled; the commit says which form and why | AS | | 0 | 0 | |
-| M1h | Writer: fills the template once, with safe JSON escaping and byte-identical output | L | 0.2 | M1d, M2a | M1i | report.html written from a test project | SH | | 0 | 0 | |
+| M1h | Writer: fills the template once, with safe JSON escaping and byte-identical output | L | 0.2 | M1d | M1i | report.html written from a test project | SH | | 0 | 0 | |
 | M1i | Export: report.html staged and published with the Word report and supplement, all or nothing | M | 0.2 | M1h | M1j, M1k | Three files appear together; cancel keeps the old ones | SH | | 0 | 0 | |
 | M1j | Export: the section choices and the others threshold reach the page | L | 0.1 | M1i | M1l | An unchecked section is absent from the page | SH | | 0 | 0 | |
 | M1k | Delivery rehearsal writes the page; the status message, Help text and docs name it | L | 0.1 | M1i | M1o | Rehearsal output holds report.html | SH | | 0 | 0 | |
@@ -89,15 +89,7 @@ Plots, not text (Paulo, 20:15: "this html page is basically plots, this is not s
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M2a | Template shell, layout and theme roles, committed as the embedded resource | L | 0.2 | 🟢 | M2b, M1h | Template commit on fq/look; 0 warnings | LK | | 0 | 0 | |
-| M2b | Binding: reads the payload and prints only its display strings, each marked with its field id | L | 0.1 | M2a, M1b | M2c, M2d, M2e, M2f, M2g | Renders the real sample with no field mismatch | LK | | 0 | 0 | |
-| M2c | Header with file links and the theme toggle; the hero band of highlights; a few short "i" pop-ups, no paragraphs | L | 0.2 | M2b | M2i | Renders light and dark; no text block longer than two lines | LK | | 0 | 0 | |
-| M2d | The composition ring, with drill-down and back | M | 0.3 | M2b | M2i | Click, keyboard and back all work | LK | | 0 | 0 | |
-| M2e | Ranked families with each run as a point | M | 0.2 | M2b, M1e | M2i | Every run point has its pop-up | LK | | 0 | 0 | |
-| M2f | The selected-family panel: proteins, peptides and the coverage strip | M | 0.2 | M2b, M1g | M2i | Selecting a family fills the panel | LK | | 0 | 0 | |
-| M2g | Measured signal and Database gap views | L | 0.2 | M2b, M1f | M2i | Both render from the payload | LK | | 0 | 0 | |
-| M2i | Phone layout, print, reduced motion, keyboard and focus | L | 0.2 | M2c, M2d, M2e, M2f, M2g | M2j | 390 px usable; print preview clean; Tab reaches everything | LK | | 0 | 0 | |
-| M2j | Design pass on Ana's full sample: renders at 1440 and 390 px, light and dark, pop-ups open; READY M2 | M | 0.3 | M2i | M1o, M3b | Screenshots posted with the changes listed | LK | | 0 | 0 | |
+| M2j | Design pass on Ana's full sample: renders at 1440 and 390 px, light and dark, pop-ups open; READY M2 | M | 0.3 | 🟢 | M1o, M3b | Screenshots posted with the changes listed | LK | | 0 | 0 | |
 
 ### W3 Review and merge
 
@@ -107,7 +99,7 @@ Nobody reviews their own work; a finding is fixed by its owner and checked again
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | M3a | Code review of FQResults' lane as it lands: contract, producers, proof | M | 0.2 | M1b | M3d | APPROVED, or findings sent to the owner | GR | | 0 | 0 | |
 | M3b | Code review of FQShell's and FQAssay's lanes as they land: writer, export, tests, coverage, trace tests | M | 0.2 | M1h | M3d | APPROVED, or findings sent to the owner | GR3 | | 0 | 0 | |
-| M3c | Code review of FQLook's template as it lands: no client number formatting, no network, no innerHTML with data, keyboard reach (Paulo judges the design himself at M3f) | M | 0.2 | M2a | M3d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
+| M3c | Code review of FQLook's template as it lands: no client number formatting, no network, no innerHTML with data, keyboard reach (Paulo judges the design himself at M3f) | M | 0.2 | 🟢 | M3d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
 | M3d | Owners fix the review findings; the reviewer checks again | L | 0.2 | M3a, M3b, M3c | M3e | Every finding closed | RS | | 0 | 0 | |
 | M3e | Desk gate and merge to master | L | 0.2 | M3d | M3f | Gate green; master pushed | Orchestrator | | 0 | 0 | |
 | M3f | Paulo sees the page and the screenshots | L | 0.1 | M3e | M4a, M5a | Paulo's OK or his changes | Paulo | | 0 | 0 | |
