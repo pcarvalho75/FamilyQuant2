@@ -555,3 +555,10 @@ Paulo agreed these at the restart, 2026-11-01.
 | M2g | Measured signal and Database gap views | L | 0.2 | M2b, M1f | M2i | Both render from the payload | LK | | 0 | 0 | |
 | M2i | Phone layout, print, reduced motion, keyboard and focus | L | 0.2 | M2c, M2d, M2e, M2f, M2g | M2j | 390 px usable; print preview clean; Tab reaches everything | LK | | 0 | 0 | |
 
+### W1 Data and export (FQResults, FQShell and FQAssay)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M1b | The data contract: payload types and docs/HTML-REPORT.md, committed after the one seam round | L | 0.1 | M1a | M1d, M2b | Contract commit on fq/results; FQLook accepted (20:01) | RS | | 0 | 0 | |
+| M1c | A real sample from Ana's stored results, no Compute | L | 0.1 | M1a | M2b | payload-sample.json with every value bound to its Word cell | RS | | 0 | 0 | |
+
