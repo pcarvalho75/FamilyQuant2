@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
+    <EmbeddedResource Include="Report/Html/report-template.html" LogicalName="FamilyQuant.Report.Html.Template" />
   </ItemGroup>
 
   <ItemGroup>
