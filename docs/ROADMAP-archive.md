@@ -587,6 +587,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | M3c | Code review of FQLook's template as it lands: no client number formatting, no network, no innerHTML with data, keyboard reach (Paulo judges the design himself at M3f) | M | 0.2 | 🟢 | M3d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
 | M3d | Owners fix the review findings; the reviewer checks again | L | 0.2 | M3a, M3b, M3c, M3g | M3e | Every finding closed | RS | | 0 | 0 | |
 | M3h | Integration rehearsal: every 20 to 30 min, merge the lane heads in a scratch tree, build, quick suite, export Ana's page, trace and render, so clashes show before the gate | L | 0.3 | 🟢 | M3e | Each round posted; the last round green with both READY posts in | AS | | 0 | 0 | |
+| M3g | Opus review (FQOpus, Paulo's Fiocruz account), batched: the final page exported from Ana's project, every number against the Word report it wrote (K14), plus the design check of FQLook's render | M | 0.3 | 🟢 | M3d | APPROVED, or findings sent to the owners | OP | | 0 | 0 | |
 
 ### W6 The README on GitHub for 2.1.2
 

@@ -82,7 +82,6 @@ Nobody reviews their own work; a finding is fixed by its owner and checked again
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M3g | Opus review (FQOpus, Paulo's Fiocruz account), batched: the final page exported from Ana's project, every number against the Word report it wrote (K14), plus the design check of FQLook's render | M | 0.3 | 🟢 | M3d | APPROVED, or findings sent to the owners | OP | | 0 | 0 | |
 | M3e | Desk gate and merge to master | L | 0.2 | 🟢 | M3f | Gate green; master pushed | Orchestrator | | 0 | 0 | |
 | M3f | Paulo sees the page and the screenshots | L | 0.1 | M3e | M4a, M5a | Paulo's OK or his changes | Paulo | | 0 | 0 | |
 
