@@ -1,9 +1,9 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 7, 2026-11-03 19:55, the interactive HTML report. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
+Version 8, 2026-11-04 00:05, the two releases of the night. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
 Finished rows leave this file and go to `docs/ROADMAP-archive.md`; the needle restarts at zero with each version.
 
-Version 6 delivered 85 steps (in the archive): Ana's report with the corrected scope, releases 2.1.0 and 2.1.1 on GitHub, the new HomologySearch (Compute about 80 s instead of about 600 s), score tier on by default, and the last clarity fixes. Version 7 is one new piece Paulo asked for after reading the Word report: a simplified, graphical, interactive report.html written beside it from the same stored results. The release and the delivery to Ana wait on Paulo's word after he has seen the page.
+Version 7 delivered 42 steps (in the archive): the interactive report.html written beside the Word report (data contract, producers with short labels, writer, three-file export, trace with 0 NOT FOUND on Ana's real export, the page with FQOpus' design critique, a dot plot with selectable axes, all reviews and gates), the 2.1.2 version and release gate, and the public README with manual and screenshots. Version 8 is what remains: publish 2.1.2 tonight, then 2.1.3 with a real installer and automatic updates, both without questions while Paulo sleeps (D51, D52).
 
 ## The goal, in Paulo's words
 
@@ -59,69 +59,47 @@ Flow of one step: the owner posts `READY <step> <commit>`; the orchestrator assi
 
 ## Workstreams
 
-Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. The graph follows the Blocked by column. A small step lands when its owner posts DONE with a commit; it counts as done when a reviewer approves it.
+Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. The graph follows the Blocked by column. A step lands when its owner posts DONE with a commit; it is done when a reviewer approves it and it is merged.
 
-### W1 Data and export (FQResults, FQShell and FQAssay)
+### W1 Release 2.1.2 tonight
 
-The program side (FQShell joined at 20:30 on Paulo's "hire 1 more sol worker so we can speed things", FQAssay at 20:40 on "hire an additional sol worker"): what the page is fed, how it is written and exported, and the proof that every number is the stored one.
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W2 The page (FQLook)
-
-Plots, not text (Paulo, 20:15: "this html page is basically plots, this is not supposed to be a bible text like the report"). One self-contained template: inline CSS, JS and SVG, offline, no library; it prints only the display strings it is given.
+Paulo's word: publish when done, no questions (D49, D51). Ana should find it when she wakes.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M8a | Final traced export of Ana's copied project on master 6ad3856 (dot plot included): guarded, cache hits only, trace, screenshots | L | 0.2 | 🟢 | M4c | READY M1 with 0 NOT FOUND and unchanged inputs | RS | | 0 | 0 | |
+| M4c | The 2.1.2 package from master and its real-menu export of a copy of Ana's project (K21 runner) | L | 0.2 | M8a | M4d | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
+| M4d | v2.1.2 published on FamilyQuant2-releases with the zip, its .sha256 and the notes | L | 0.1 | M4c | M4e, M5b | Release page live and Latest; downloaded zip hash equals M4c | Orchestrator | | 0 | 0 | |
+| M4e | Install check from GitHub; 2.1.1 Check for updates offers 2.1.2 | L | 0.2 | M4d |  | Both pass | EV | | 0 | 0 | |
+| M5b | Stage the files Paulo can send Ana: the final report.html of her project and the updated READ-ME with the 2.1.2 link and SHA (outside her folder) | L | 0.1 | M4d |  | D:/FamilyQuant-data/out-desk/M5-for-Ana holds both with SHA256 | Orchestrator | | 0 | 0 | |
+| M6f | README screenshots: the Export report dialog with descriptive figure titles from a synthetic project, every image in dark mode | L | 0.2 | 🟢 | M6g | All images dark, synthetic, under 300 KB | T2 | | 0 | 0 | |
+| M6g | Check and push the M6f screenshots | L | 0.1 | M6f |  | FQReview3 approves; desk pushes; live page looked at | Orchestrator | | 0 | 0 | |
 
-### W3 Review and merge
+### W2 Release 2.1.3: the installer and automatic updates
 
-Nobody reviews their own work; a finding is fixed by its owner and checked again.
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W4 Release 2.1.2 (Paulo's word given at 21:47: publish when W1 to W3 are done, D49)
-
-The same chain as 2.1.1.
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M4c | The 2.1.2 package and its real-menu export of a copy of Ana's project | L | 0.3 | 🟢 | M4d | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
-| M4d | v2.1.2 published on FamilyQuant2-releases | L | 0.1 | M4c | M4e | Release page live and Latest; downloaded zip hash equals M4c | Orchestrator | | 0 | 0 | |
-| M4e | Install check from GitHub; 2.1.1 offers 2.1.2 | L | 0.2 | M4d |  | Both pass | EV | | 0 | 0 | |
-
-### W5 Delivery to Ana (only on Paulo's word)
+Paulo, 23:50 to 23:57 (D52): a real installer, Help > Install update, and a check at every start with a notice on screen; published when every check is green.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M5a | report.html into Ana's Relatorio folder, exported from her delivered project with no Compute | L | 0.2 | 🟢 |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
+| M7a | FamilyQuant2-Setup.exe built in .NET (no third-party tool, no download): per-user install, Start menu shortcut, Apps & features uninstall, upgrade in place keeping data, quiet mode; tests in test mode only (D31) | M | 0.6 | 🟢 | M7d | DONE with the build command; tests green | SH | | 0 | 0 | |
+| M7b | Help > Install update (downloads and runs the Setup quietly) and a background check at every start with a non-blocking banner when a later version exists; a setting to turn it off | M | 0.5 | 🟢 | M7f | DONE; fake-network tests green | FL | | 0 | 0 | |
+| M7c | Version 2.1.3, release notes (installer, unsigned-installer note, automatic check) and a package script that builds the zip and the Setup.exe with SHA256 | L | 0.4 | 🟢 | M7g | DONE; package commands ready | AS | | 0 | 0 | |
+| M7d | Review of the installer (M7a) | M | 0.2 | M7a | M7h | APPROVED, or fixes by the owner and re-checked | GR | | 0 | 0 | |
+| M7f | Review of the update check and Install update (M7b) | M | 0.2 | M7b | M7h | APPROVED, or fixes by the owner and re-checked | GR3 | | 0 | 0 | |
+| M7g | Review of the 2.1.3 version, notes and package script (M7c) | L | 0.1 | M7c | M7h | APPROVED, or fixes by the owner and re-checked | GR2 | | 0 | 0 | |
+| M7h | Full gate on the 2.1.3 commit (ledger refresh and suite) | M | 0.3 | M7d, M7f, M7g, M4d | M7i | Ledger 5,460 of 5,460; suite green | Orchestrator | | 0 | 0 | |
+| M7i | The 2.1.3 zip and Setup.exe from that commit; Setup.exe in test mode extracts and the app reports 2.1.3 | L | 0.2 | M7h | M7e | Both files with SHA256; test-mode install passes | AS | | 0 | 0 | |
+| M7e | v2.1.3 published with the Setup.exe and the zip; README install section updated for the installer and pushed | L | 0.2 | M7i |  | Release live and Latest; hashes equal M7i; README live | Orchestrator | | 0 | 0 | |
 
-### W6 The README on GitHub for 2.1.2
-
-Paulo, 22:10: "a significantly improved readme in github about the latest version with a manual, screenshots, step by step", "devoted to 2.1.2", "as soon as possible, release this page". Public repository: synthetic data only.
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M6f | README screenshots (Paulo 23:52 and 23:55): the Export report dialog with descriptive figure titles from a synthetic project, and every screenshot in dark mode | L | 0.2 | 🟢 | M6g | All images dark, synthetic, under 300 KB; dialog lists figures by what they show | T2 | | 0 | 0 | |
-| M6g | Check and push the M6f screenshots | L | 0.1 | M6f | | FQReview3 approves; desk pushes; live page looked at | Orchestrator | | 0 | 0 | |
-
-### W7 Release 2.1.3: the installer and automatic updates
-
-Paulo, 23:50: "i want the installer, so please rush through it so that 2.1.3 has the installer"; 23:57: Help > Install update, and a check at every start with a notice on screen.
+### W3 Held for Paulo's word
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M7a | FamilyQuant2-Setup.exe in .NET (no third-party tool, no download): per-user install, Start menu shortcut, Apps & features uninstall, upgrade in place keeping data, quiet mode; tests in test mode only (D31) | M | 0.6 | 🟢 | M7c, M7b | DONE posted with the build command; tests green | SH | | 0 | 0 | |
-| M7b | Updates (Paulo 23:57): Help > Install update downloads and runs the Setup quietly; every start checks in the background and shows a non-blocking banner when a later version exists; setting to turn it off | M | 0.5 | 🟢 | M7d | DONE posted; fake-network tests green | FL | | 0 | 0 | |
-| M7c | 2.1.3: version, release notes (installer, unsigned-installer note, automatic check), and a package script that builds the zip and the Setup.exe with SHA256 | L | 0.4 | 🟢 | M7d | DONE posted; package commands ready | AS | | 0 | 0 | |
-| M7d | Reviews of M7a, M7b, M7c, then gate (full) on the 2.1.3 commit | M | 0.4 | M7a, M7b, M7c | M7e | APPROVED by a different reviewer each; gate green | Orchestrator | | 0 | 0 | |
-| M7e | Publish v2.1.3 with the Setup.exe and the zip; install check of the Setup.exe in test mode; README install section updated | L | 0.3 | M7d |  | Release live; Setup.exe hash equals the package; README pushed | Orchestrator | | 0 | 0 | |
+| M5a | report.html into Ana's Relatorio folder (the desk never writes there without his word) | L | 0.1 | M5b |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
 
 ## Critical path
 
-M1b, M1d, the producers M1e to M1g, the writer M1h and export M1i, the tests, then the proof M1o (which also needs FQLook's page, M2a to M2j), the reviews M3a and M3b, the fixes M3d, the gate M3e and Paulo's look M3f. Reviewers: FQReview, FQReview2 and FQReview3 (hired 20:45 on Paulo's "hire a new grok reviewer"), and FQOpus for the final page (20:52, "put the opus carvalho paulo as a reviewer"). The release (W4) and the delivery to Ana (W5) start only on his word.
+2.1.2: M8a, M4c, M4d (publish), M4e; M5b and the README screenshots (M6f, M6g) run beside it. 2.1.3: M7a, M7b and M7c in parallel now, their three reviews, the full gate M7h after 2.1.2 is out, the package M7i and the publish M7e. M5a stays held.
 
 ## Paulo's decisions
 
