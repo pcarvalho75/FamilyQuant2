@@ -105,8 +105,8 @@ Nobody reviews their own work; a finding is fixed by its owner and checked again
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M3a | Code review of the contract and producers as they land | M | 0.2 | M1g | M3d | APPROVED, or findings sent to the owner | GR | | 0 | 0 | |
-| M3b | Code review of FQShell's writer, export and tests, and FQResults' trace tests and proof | M | 0.2 | M1p | M3d | APPROVED, or findings sent to the owner | GR | | 0 | 0 | |
+| M3a | Code review of FQResults' lane as it lands: contract, producers, proof | M | 0.2 | M1b | M3d | APPROVED, or findings sent to the owner | GR | | 0 | 0 | |
+| M3b | Code review of FQShell's and FQAssay's lanes as they land: writer, export, tests, coverage, trace tests | M | 0.2 | M1h | M3d | APPROVED, or findings sent to the owner | GR3 | | 0 | 0 | |
 | M3c | Code review of FQLook's template as it lands: no client number formatting, no network, no innerHTML with data, keyboard reach (Paulo judges the design himself at M3f) | M | 0.2 | M2a | M3d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
 | M3d | Owners fix the review findings; the reviewer checks again | L | 0.2 | M3a, M3b, M3c | M3e | Every finding closed | RS | | 0 | 0 | |
 | M3e | Desk gate and merge to master | L | 0.2 | M3d | M3f | Gate green; master pushed | Orchestrator | | 0 | 0 | |
@@ -132,7 +132,7 @@ The same chain as 2.1.1.
 
 ## Critical path
 
-M1b, M1d, the producers M1e to M1g, the writer M1h and export M1i, the tests, then the proof M1o (which also needs FQLook's page, M2a to M2j), the reviews M3a and M3b, the fixes M3d, the gate M3e and Paulo's look M3f. The release (W4) and the delivery to Ana (W5) start only on his word.
+M1b, M1d, the producers M1e to M1g, the writer M1h and export M1i, the tests, then the proof M1o (which also needs FQLook's page, M2a to M2j), the reviews M3a and M3b, the fixes M3d, the gate M3e and Paulo's look M3f. Reviewers: FQReview, FQReview2 and FQReview3 (hired 20:45 on Paulo's "hire a new grok reviewer"). The release (W4) and the delivery to Ana (W5) start only on his word.
 
 ## Paulo's decisions
 
