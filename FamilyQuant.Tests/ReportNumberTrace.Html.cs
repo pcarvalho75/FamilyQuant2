@@ -101,6 +101,7 @@ internal static partial class ReportNumberTrace
         }
         var bindings = new Dictionary<string, HtmlBound>(StringComparer.Ordinal);
         var errors = new Dictionary<string, string>(StringComparer.Ordinal);
+        var databaseEntries = new DatabaseEntryBindings(project, manifest);
         foreach (var pair in payload.Fields)
         {
             try
@@ -140,6 +141,13 @@ internal static partial class ReportNumberTrace
             if (!payload.Fields.ContainsKey(id)) errors[location] = "Missing field ID: " + id;
         foreach (var measure in payload.DotMeasures)
         {
+            if (measure.Id == "databaseEntries")
+                foreach (var value in measure.Values)
+                {
+                    var owner = payload.Composition.Families.SingleOrDefault(f => f.Id == value.Key);
+                    if (owner == null || owner.IsOthers || owner.DatabaseEntries != value.Value)
+                        errors[value.Value] = "Database measure value is not that headline family's count field.";
+                }
             if (payload.Fields.TryGetValue(measure.Label, out var label)
                 && (label.Source.Kind != "axis-label" || label.Source.Property != measure.Id))
                 errors[measure.Label] = "Axis label is not bound to this measure.";
@@ -148,6 +156,13 @@ internal static partial class ReportNumberTrace
                     && (tick.Source.Kind != "axis-tick" || tick.Source.Property?.StartsWith(measure.Id + "/", StringComparison.Ordinal) != true))
                     errors[id] = "Axis tick is not bound to this measure.";
         }
+        foreach (var family in payload.Composition.Families)
+            if (family.DatabaseEntries is string id && payload.Fields.TryGetValue(id, out var field))
+            {
+                try { databaseEntries.CheckFamily(family, field); }
+                catch (Exception e) when (e is ArgumentException or InvalidDataException or InvalidOperationException or KeyNotFoundException)
+                { errors[id] = e.Message; }
+            }
         foreach (var gap in payload.DatabaseGap)
             if (payload.Fields.TryGetValue(gap.Fraction, out var fraction)
                 && (fraction.Unit != "fraction" || fraction.Source.Scale != 1 || fraction.Short == null
@@ -213,6 +228,7 @@ internal static partial class ReportNumberTrace
         HtmlBound Resolve(HtmlReportReference source, HtmlReportField field)
         {
             if (!double.IsFinite(source.Scale)) throw new InvalidDataException("Non-finite display scale.");
+            if (source.Kind == "database-entry-count") return databaseEntries.Resolve(source, field);
             if (source.Kind is "axis-label" or "axis-tick")
             {
                 if (!HtmlReportAxisTicks.TryResolve(source, out var resolved) || resolved == null)
@@ -281,7 +297,7 @@ internal static partial class ReportNumberTrace
         var ids = new List<string?> { p.Title, p.Authors, p.Interpretation };
         foreach (var f in p.Composition.Families)
         {
-            ids.AddRange(new[] { f.Name, f.Mean, f.Sd, f.Cv, f.WholeMeasured, f.Proteins, f.UniqueProteins, f.Peptides });
+            ids.AddRange(new[] { f.Name, f.Mean, f.Sd, f.Cv, f.WholeMeasured, f.Proteins, f.UniqueProteins, f.Peptides, f.DatabaseEntries });
             foreach (var r in f.Runs) ids.AddRange(new[] { r.Name, r.Share, r.Measured });
             foreach (var part in f.Parts) ids.AddRange(new[] { part.Name, part.Share });
             foreach (var c in f.Coverage) { ids.AddRange(new[] { c.Title, c.Caption, c.Protein, c.LengthLabel }); foreach (var s in c.Peptides.Concat(c.Domains)) ids.AddRange(new[] { s.Label, s.Range }); }
