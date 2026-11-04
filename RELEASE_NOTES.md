@@ -4,6 +4,36 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.1 (release candidate, not published)
+
+The program, report and deployment profile identify this version as 2.1.1.0.
+This candidate awaits the release gate and packaged report export.
+
+- **Faster Compute.** A new search engine reduced Compute from about 600 seconds
+  to about 80 seconds on the same full-run project and machine, with lower peak
+  memory use. The search change preserved the stored scientific results byte for
+  byte; timings on other projects depend on their inputs and machine.
+- **One headline total per panel family.** When your panel groups several families,
+  the headline and composition figures now use their combined panel-family total.
+  A peptide shared within that panel family is credited once. The supplement keeps
+  the original family-level results as well.
+- **More precise number checks.** The report's number check uses the family, run or
+  option named beside a number to find its source cell. If several unrelated cells
+  have the same value and the subject cannot resolve them, it reports an ambiguous
+  match rather than citing the first equal cell.
+- **Homology science options.** Score tier is on by default: it credits a de novo
+  peptide only to proteins tied at its best score. Some family shares can therefore
+  move slightly after Compute. The per-length and tag gates are available but off
+  by default.
+- **More release checks.** Additional automated checks now run before release,
+  including family-panel behavior, analysis options and report exports.
+
+**Projects computed with 2.1.0.** Opening a saved project keeps its stored results
+and report values until you run Compute; opening alone does not apply the new
+best-score rule. When you compute in 2.1.1, de novo family credit uses the best
+protein-score tier and a separate cache entry, while identified-peptide rules stay
+the same.
+
 ## 2.1.0 (release candidate, not published)
 
 This candidate includes the accepted family analysis and reporting work for 2.1.0.
