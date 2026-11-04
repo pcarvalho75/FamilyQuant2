@@ -120,6 +120,7 @@ public static class InstallerWindowPreview
         window.FolderBox.Text = @"D:\Apps\FamilyQuant2";
         Click(window.PrimaryButton);
         Check(window.OptionsPanel.Visibility == Visibility.Visible, "folder continues to options");
+        Check(window.FolderNote.Text == "Only your Windows account uses this installation.", "valid folder clears its earlier validation warning");
         window.DesktopOption.IsChecked = true;
         var install = window.ExecuteOperationAsync();
         PumpUntil(() => install.IsCompleted);
@@ -184,6 +185,13 @@ public static class InstallerWindowPreview
         Check(held.Canceled && window.PageTitle.Text == "Setup was canceled", "cancel reaches the engine token and exposes retry");
         window.Close();
 
+        held = new PreviewController { Hold = true, ReturnCanceledResult = true };
+        window = new InstallerWindow(held);
+        operation = window.ExecuteOperationAsync(); Click(window.CancelButton);
+        PumpUntil(() => operation.IsCompleted); operation.GetAwaiter().GetResult();
+        Check(window.PageTitle.Text == "Setup was canceled" && window.ErrorMessage.Text == "Setup cancelled. Previous program files were kept.", "controller canceled result keeps its message and canceled title");
+        window.Close();
+
         held = new PreviewController { Hold = true };
         window = new InstallerWindow(held);
         var closed = false;
@@ -213,6 +221,7 @@ public static class InstallerWindowPreview
         public bool Hold { get; init; }
         public bool Fail { get; init; }
         public bool LaunchThrows { get; init; }
+        public bool ReturnCanceledResult { get; init; }
         public bool Canceled { get; private set; }
         public int Installs { get; private set; }
         public int Uninstalls { get; private set; }
@@ -239,7 +248,12 @@ public static class InstallerWindowPreview
                 else await Task.Yield();
                 return Fail ? new SetupResult(false, 1, "No files were changed. Try a different folder.") : new SetupResult(true, 0, "Complete", directory);
             }
-            catch (OperationCanceledException) { Canceled = true; throw; }
+            catch (OperationCanceledException)
+            {
+                Canceled = true;
+                if (ReturnCanceledResult) return new SetupResult(false, 1, "Setup cancelled. Previous program files were kept.", directory);
+                throw;
+            }
         }
         public void Launch(string directory)
         {
