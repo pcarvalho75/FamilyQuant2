@@ -107,6 +107,8 @@ Paulo, 22:10: "a significantly improved readme in github about the latest versio
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M6f | README screenshots (Paulo 23:52 and 23:55): the Export report dialog with descriptive figure titles from a synthetic project, and every screenshot in dark mode | L | 0.2 | 🟢 | M6g | All images dark, synthetic, under 300 KB; dialog lists figures by what they show | T2 | | 0 | 0 | |
+| M6g | Check and push the M6f screenshots | L | 0.1 | M6f | | FQReview3 approves; desk pushes; live page looked at | Orchestrator | | 0 | 0 | |
 
 ## Critical path
 
