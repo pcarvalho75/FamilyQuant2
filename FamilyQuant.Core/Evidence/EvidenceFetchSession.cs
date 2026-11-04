@@ -24,6 +24,13 @@ public static class EvidenceFetchSession
     public const string ProgressStage = "Evidence fetch";
     public const string EvidenceStage = "Protein evidence";
 
+    internal static FastaItemExtended CloneProteinForFetch(FastaItemExtended source) => new()
+    {
+        SequenceIdentifier = source.SequenceIdentifier, Sequence = source.Sequence, Description = source.Description,
+        AssignmentState = source.AssignmentState, USearchID = source.USearchID, UserAnnotation = source.UserAnnotation,
+        Domains = source.Domains, Evidence = EvidenceApply.Clone(source.Evidence),
+    };
+
     public static Task<EvidenceFetchOutcome> FetchAsync(FamilyClusterFile file, HttpMessageHandler? handler = null,
         IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default,
         IReadOnlyCollection<string>? positionAccessions = null) =>
@@ -49,12 +56,7 @@ public static class EvidenceFetchSession
         {
             DomainSource = file.DomainSource,
             EvidenceSource = EvidenceApply.Clone(file.EvidenceSource),
-            MyExtendedFastaItems = originals.Select(p => new FastaItemExtended
-            {
-                SequenceIdentifier = p.SequenceIdentifier, Sequence = p.Sequence, Description = p.Description,
-                UserID = p.UserID, USearchID = p.USearchID, UserAnnotation = p.UserAnnotation,
-                Domains = p.Domains, Evidence = EvidenceApply.Clone(p.Evidence),
-            }).ToList(),
+            MyExtendedFastaItems = originals.Select(CloneProteinForFetch).ToList(),
         };
         var stagedEvidence = staged.MyExtendedFastaItems.Select(p => p.Evidence).ToArray();
         operation.ThrowIfCancellationRequested();

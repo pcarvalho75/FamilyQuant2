@@ -5,7 +5,7 @@ namespace FamilyQuant
 {
     public sealed partial class GroupingSnapshot
     {
-        private (FastaItemExtended Protein, int UserId, int SearchId, string Annotation)[]? evidenceRows;
+        private (FastaItemExtended Protein, FamilyAssignmentState Assignment, int SearchId, string Annotation)[]? evidenceRows;
         private Evidence.EvidenceRecipe? evidenceRecipe;
         private FamilyClusterFile? evidenceFile;
         private Evidence.EvidenceProvenance? evidenceSource;
@@ -23,7 +23,7 @@ namespace FamilyQuant
             ArgumentNullException.ThrowIfNull(file);
             GroupingSnapshot snapshot = Capture(file);
             snapshot.evidenceFile = file;
-            snapshot.evidenceRows = file.MyExtendedFastaItems.Select(p => (p, p.UserID, p.USearchID, p.UserAnnotation)).ToArray();
+            snapshot.evidenceRows = file.MyExtendedFastaItems.Select(p => (p, p.AssignmentState, p.USearchID, p.UserAnnotation)).ToArray();
             snapshot.evidenceRecipe = file.EvidenceRecipe == null ? null : Evidence.EvidenceApply.Clone(file.EvidenceRecipe);
             snapshot.evidenceSource = file.EvidenceSource == null ? null : Evidence.EvidenceApply.Clone(file.EvidenceSource);
             snapshot.evidenceMotifs = file.Motifs == null ? null : Evidence.EvidenceApply.Clone(file.Motifs);
@@ -52,7 +52,7 @@ namespace FamilyQuant
             // Position and object identity preserve repeated identifiers, including decoys, exactly.
             foreach (var row in evidenceRows)
             {
-                row.Protein.UserID = row.UserId;
+                row.Protein.AssignmentState = row.Assignment;
                 row.Protein.USearchID = row.SearchId;
                 row.Protein.UserAnnotation = row.Annotation;
             }

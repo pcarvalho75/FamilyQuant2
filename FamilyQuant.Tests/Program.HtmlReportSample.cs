@@ -44,7 +44,13 @@ internal static partial class Program
         var layout = ReportSupplementLayout.Apply(document, packet.CsvExports);
         var sheets = ReportTableSupplements.Complete(layout.Document, layout.Sheets);
         var context = new HtmlReportContext { StoredStudies = basis.Studies, UsesPanel = basis.UsesPanel,
-            IsIdentity = basis.IsIdentity, IsAdditive = basis.Studies.FamilyRunShares?.Policy != SharedPeptidePolicy.CountInEveryFamily };
+            IsIdentity = basis.IsIdentity, IsAdditive = basis.Studies.FamilyRunShares?.Policy != SharedPeptidePolicy.CountInEveryFamily,
+            DatabaseEntryCounts = FamilyDatabaseEntryCounts.Read(file),
+            SourceUserIds = basis.SourceUserIds,
+            ConflictingFamilyIds = basis.Map?.ConflictingUserIds ?? Array.Empty<int>(),
+            PanelKeys = basis.Map?.UserFamilies.Values.Where(f => !f.HasConflict && f.PanelFamilyKey != null)
+                .ToDictionary(f => f.FamilyUserId.ToString(System.Globalization.CultureInfo.InvariantCulture), f => f.PanelFamilyKey!, StringComparer.Ordinal)
+                ?? new Dictionary<string, string>(StringComparer.Ordinal) };
         var payload = HtmlReportPayloadBuilder.Build(layout.Document, sheets, file.ReportSelection, context);
         var actual = payload.Composition.Families.Select(f => (Name: payload.Fields[f.Name].Text,
             Mean: f.Mean == null ? "" : payload.Fields[f.Mean].Text)).ToArray();

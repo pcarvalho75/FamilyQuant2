@@ -74,8 +74,14 @@ public static partial class HtmlReportPayloadBuilder
                 // D47: this is a plot-first page. No methods/quality prose or interpretation block.
                 Fields = fields,
             };
-            // Append presentation-only fields after every existing report binding, retaining IDs.
-            return payload with { DotMeasures = DotMeasures(families) };
+            // Preserve all old bindings and axis IDs before appending the new stored-source view.
+            var measures = DotMeasures(families);
+            var withEntries = DatabaseEntryFamilies(families);
+            return payload with
+            {
+                Composition = payload.Composition with { Families = withEntries },
+                DotMeasures = measures.Concat(DotMeasures(withEntries, databaseOnly: true)).ToArray(),
+            };
         }
 
         private bool HasBlock(string id) => !excluded.Contains(id) && sections.Values.Any(s => s.Blocks.Any(b => b.Id == id));
