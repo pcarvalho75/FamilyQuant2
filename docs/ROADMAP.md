@@ -52,26 +52,17 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| V1a | Unavailable files are not shown in Recent projects (Start page and the File menu's recent list); they stay stored and come back when the file is reachable again | L | 0.2 | 🟢 | V2a | A missing path is hidden, an existing one shown; the stored list is unchanged | PN | | 0 | 0 | |
-| V1b | Remove a project from the list: right-click "Remove from recent projects", a small x at the top right of each entry (muted, the danger colour on hover) and the Delete key; it removes the entry from the stored list only and never touches the file | L | 0.3 | 🟢 | V2a | All three ways remove only the entry; the file is untouched; the change survives a restart | PN | | 0 | 0 | |
-| V1c | Tests never write the user's own recent list: every test that opens a project through the main window uses an isolated session state | L | 0.2 | 🟢 | V2a | After the suite, the user's recent list is unchanged | GD | | 0 | 0 | |
 
 ### W2 Review, version and the one test
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| V2b | Version 2.1.6 in every place 2.1.5 was set, and the 2.1.6 notes | L | 0.1 | 🟢 | V2a | Versions read 2.1.6.0; notes claim only what landed | RL | | 0 | 0 | |
-| V2a | One review of the whole change (V1a, V1b, V1c, V2b) | L | 0.2 | V1a, V1b, V1c, V2b | V2c | APPROVED, or fixes by the owners and re-checked | DS | | 0 | 0 | |
-| V2c | The full functional suite on the integrated 2.1.6 commit (receipts deferred, D61) | M | 0.2 | V2a | V3a | Every check green | Orchestrator | | 0 | 0 | |
 
 ### W3 Release 2.1.6
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| V3a | The 2.1.6 Setup.exe and zip with SHA256, built from the integrated commit while the suite runs; package check | L | 0.2 | V1a, V1b, V1c, V2b | V3c | Setup test mode reports 2.1.6.0; package check PASS | RL | | 0 | 0 | |
-| V3b | README reads 2.1.6 with a short what's new | L | 0.1 | 🟢 | V3c | Synthetic only; reviewed in V2a | RL | | 0 | 0 | |
-| V3c | v2.1.6 published as Latest; README pushed | L | 0.1 | V2c, V3a, V3b | V3d | GitHub digests equal the package | Orchestrator | | 0 | 0 | |
-| V3d | Update check on the public files: an installed 2.1.5 shows the banner for 2.1.6 | L | 0.2 | V3c | | PASS | RL | | 0 | 0 | |
+| V3d | Update check on the public files: an installed 2.1.5 shows the banner for 2.1.6 | L | 0.2 | 🟢 | | PASS | RL | | 0 | 0 | |
 
 ## Critical path
 
