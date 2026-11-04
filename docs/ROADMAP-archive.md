@@ -674,6 +674,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | G4a | The 2.1.4 Setup.exe and zip, each with its SHA256, from the gate commit | L | 0.2 | 🟢 | G4b, G5a | Setup.exe in test mode extracts and the app reports 2.1.4.0 | AS | | 0 | 0 | |
 | G4b | Package check before publishing: every file equal to the build; EXE and DLL versions 2.1.4.0 | L | 0.2 | G4a | G4e | PASS | EV | | 0 | 0 | |
 | G4e | v2.1.4 published as Latest with the Setup.exe, the zip and their .sha256 files; README pushed | L | 0.2 | 🟢 | G4f, G5b | Downloaded assets match their SHA256; README live and read | Orchestrator | | 0 | 0 | |
+| G4f | Update check on the public files: an installed 2.1.3 (test root) shows the banner for 2.1.4 and Install update runs the Setup in test mode | L | 0.3 | 🟢 | | PASS on every stage | EV | | 0 | 0 | |
 
 ### W5 Ana's page
 

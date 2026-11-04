@@ -81,7 +81,6 @@ Published when every check is green, like 2.1.2 and 2.1.3 (D56).
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G4f | Update check on the public files: an installed 2.1.3 (test root) shows the banner for 2.1.4 and Install update runs the Setup in test mode | L | 0.3 | 🟢 | | PASS on every stage | EV | | 0 | 0 | |
 
 ### W5 Ana's page
 
