@@ -38,10 +38,10 @@ Version 8 delivered 18 steps (in the archive): 2.1.2 (the interactive report.htm
 | FQReview (GR) | Grok 4.7 xhigh | Science and code review of the count. Never edits product code. OUT since 07:13 (Grok balance exhausted). | `D:/FamilyQuant-wt/review` |
 | FQReview2 (GR2) | Grok 4.7 xhigh | Code review of the payload, trace and page. Never edits product code. OUT since 07:13 (Grok balance exhausted). | `D:/FamilyQuant-wt/review2` |
 | FQReview3 (GR3) | Grok 4.7 xhigh | Review of the version, notes and README. Never edits product code. OUT since 07:13 (Grok balance exhausted). | `D:/FamilyQuant-wt/review3` |
-| FQReviewJF (JF) | Opus 5.5 on Juliana's account (D53) | Every review since 07:13. Never edits product code. | `D:/FamilyQuant-wt/review-jf` |
-| FQReviewDS (DS) | DeepSeek V4.1 Flash (D58) | Second, independent reviews; code and synthetic data only, never Ana's data. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
+| FQReviewJF (JF) | Opus 5.5 on Juliana's account (D53) | Reviews from 07:13 to 09:56; stood down by Paulo (D59). Never edits product code. | `D:/FamilyQuant-wt/review-jf` |
+| FQReviewDS (DS) | DeepSeek V4.1 Flash (D58, D59) | Every review from 09:56 on, exclusively; code and synthetic data only, never Ana's data. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
 
-The Grok reviewers ran out of credit at 07:13, so D53 holds: FQReviewJF (Opus on Juliana's account) reviews Sol work, a Sol reviews any Opus work, and FQReviewDS gives second reviews (D58).
+The Grok reviewers ran out of credit at 07:13, so D53 holds: FQReviewJF (Opus on Juliana's account) reviewed Sol work until 09:56; since then every review goes exclusively through FQReviewDS (D58, D59).
 
 Flow of one step: the owner posts `READY <step> <commit>`; the orchestrator assigns a reviewer in `D:/FamilyQuant-data/reviews/CLAIMS.md`; the reviewer posts `APPROVED` or `REJECTED`; a rejection is the owner's next commit, checked by another reviewer; the orchestrator gates, merges and closes the row.
 
@@ -137,6 +137,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D56 | Publish 2.1.4 | When every check is green, like D49 and D52; the update banner of 2.1.3 then offers it. Desk, 11-04 06:45, following D49 and D52 |
 | D57 | Deliver Ana's new page (G5b) | Yes: the desk delivers report.html and the 2.1.4 READ-ME into her Relatorio folder as soon as G5a is staged and its checks pass, backing up the current copies first and checking her other files unchanged by hash. Paulo, 11-04 08:23 ("yes you may") |
 | D58 | DeepSeek on the team | DeepSeek V4.1 Flash joins as a second reviewer while Grok is out, on code and synthetic data only (its API is hosted in China; Ana's data never goes to it). Paulo, 11-04 09:20 ("grok is out but deepseek 4.1 is back as a reviewer, bring him to the team") |
+| D59 | Who reviews | Every review goes exclusively through the DeepSeek reviewer FQReviewDS; Juliana's Opus reviewer is not used for now. Paulo, 11-04 09:56 ("lets not use julianas reviewer yet, all reviews go exlcusively through the deepseek worker") |
 
 ## Risks and triggers
 
