@@ -73,9 +73,12 @@ namespace FamilyQuant
                 TaskScope = facts; Changed(nameof(TaskScope)); Changed(nameof(HasTaskScope));
                 TaskScopeExpanded = true;
                 // Preserve every supplied phrase through the same parser used by the grouping command.
-                string suggested = string.Join(", ", facts.ProposedScopeTerms.Select(t => "\"" + t + "\""));
+                string suggested = facts.ReviewedProteins == 0 ? ""
+                    : string.Join(", ", facts.ProposedScopeTerms.Select(t => "\"" + t + "\""));
                 if (string.IsNullOrWhiteSpace(ScopeText)) ScopeText = suggested;
-                Status = "Review the database taxa, keyword counts and suggested scope, then confirm or edit the scope with Update proposal.";
+                Status = facts.ReviewedProteins == 0
+                    ? "No scope can be suggested: this project has no UniProt evidence yet. Fetch evidence first, or type a scope."
+                    : "Review the database taxa, keyword counts and suggested scope, then confirm or edit the scope with Update proposal.";
             }
             catch (OperationCanceledException) { if (request == generation) Status = "Task discovery cancelled. You may enter a manual scope."; }
             catch (Exception ex) { if (request == generation) Status = ex.Message; }
