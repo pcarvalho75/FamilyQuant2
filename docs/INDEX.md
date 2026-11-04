@@ -15,6 +15,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Compute and open progress](COMPUTE-PROGRESS.md) | Counted phases, live clocks, timestamped logs and native parity check |
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
+| [Checking and installing updates](UPDATE-INSTALL.md) | Optional startup notice, explicit installer action, trusted download hosts and fake-network checks |
 | [Quantitation stages](QUANTITATION-PIPELINE.md) | Full-XIC stage contracts, second-pass residual seam and focused parity checker |
 | [Compute homology performance](COMPUTE-HOMOLOGY-PERFORMANCE.md) | Matched full-data timing and stored-byte proof for attribution reuse |
 | [Experimental homology options](HOMOLOGY-SCIENCE-OPTIONS.md) | Default-OFF science options, certified five-search parity, selected-input cached replay/comparison and J43 headline basis |

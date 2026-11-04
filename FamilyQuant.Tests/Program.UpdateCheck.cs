@@ -91,6 +91,7 @@ internal static partial class Program
             EventManager.RegisterClassHandler(typeof(Window), FrameworkElement.LoadedEvent, new RoutedEventHandler((sender, _) =>
             { if (sender is Window window) OffscreenProofWindow(window); }), true);
             UpdateCheckNativeTests();
+            UpdateStartupAndInstallNativeTests(output);
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }
