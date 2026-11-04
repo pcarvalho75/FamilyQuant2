@@ -108,9 +108,7 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K21 | The 2.1.1 package from that exact commit, and its real-menu export of a copy of Ana's project (K10's runner) | L | 0.3 | 🟢 | K22 | Zip and SHA256; export passes with the Summary of findings | EV | | 0 | 0 | |
-| K22 | Published: v2.1.1 on pcarvalho75/FamilyQuant2-releases with zip, .sha256 and notes (D44) | L | 0.1 | K21 | K23 | The release page is live and Latest; downloaded zip hash equals K21 | Orchestrator | | 0 | 0 | |
-| K23 | Install check on 2.1.1 from GitHub; 2.1.0's Check for updates finds 2.1.1 | L | 0.2 | K22 | | Both pass | EV | | 0 | 0 | |
+| K23 | Install check on 2.1.1 from GitHub; 2.1.0's Check for updates finds 2.1.1 | L | 0.2 | 🟢 | | Both pass | EV | | 0 | 0 | |
 
 ## Critical path
 
