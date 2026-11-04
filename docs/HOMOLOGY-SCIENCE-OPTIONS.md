@@ -122,8 +122,8 @@ counts distinct queries with an admitted protein on each side and allows overlap
 it is not a statistical error estimate. Database-gap envelope ratios and strict
 known-answer wrong/landed rates retain their separate native denominators.
 
-`--compare-homology-science-studies <project> <off> <tier> <length> <tag> <fresh-output>`
-requires four completed packets with the same project SHA, the approved separate
+`--compare-homology-science-studies <project> <off> <tier> <length> [tag] <fresh-output>`
+requires three or four completed packets with the same project SHA, the approved separate
 settings and retained identified/OFF search hashes. It writes a before/after
 Markdown table and JSON for headlines, every family share and multiplicity.
 Multiplicity uses the native `MapToFamilies` target-member join. It copies J42's
@@ -138,3 +138,12 @@ was reused without arithmetic. Native panel-headline CSVs and complete panel-uni
 shares/source membership are retained separately. A one-to-one panel preserves
 each option's measured share deltas under J43; a multi-source panel uses the
 computed collapsed bundle and cannot silently fall back to the old unit.
+
+Under desk M135, J47b reports OFF, score tier and length calibration immediately;
+the tag replay and weighted-seed work are J47c. `decision-table.md` puts the
+known-answer right/wrong/non-landed counts, gate target/decoy counts, gap errors,
+J43 listed-family changes, original timed search cost and user meaning in one
+side-by-side table. Original replay timers exclude import/loading/completion and
+use certified identified-hit reuse on ON runs, so they are not a controlled
+speed comparison. A family listed in any compared option remains visible when
+it crosses the user's threshold.
