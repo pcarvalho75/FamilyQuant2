@@ -67,13 +67,10 @@ Paulo's word: publish when done, no questions (D49, D51). Ana should find it whe
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M8a | Final traced export of Ana's copied project on master 6ad3856 (dot plot included): guarded, cache hits only, trace, screenshots | L | 0.2 | 🟢 | M4c | READY M1 with 0 NOT FOUND and unchanged inputs | RS | | 0 | 0 | |
-| M4c | The 2.1.2 package from master and its real-menu export of a copy of Ana's project (K21 runner) | L | 0.2 | M8a | M4d | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
+| M4c | The 2.1.2 package from master and its real-menu export of a copy of Ana's project (K21 runner) | L | 0.2 | 🟢 | M4d | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
 | M4d | v2.1.2 published on FamilyQuant2-releases with the zip, its .sha256 and the notes | L | 0.1 | M4c | M4e, M5b | Release page live and Latest; downloaded zip hash equals M4c | Orchestrator | | 0 | 0 | |
 | M4e | Install check from GitHub; 2.1.1 Check for updates offers 2.1.2 | L | 0.2 | M4d |  | Both pass | EV | | 0 | 0 | |
 | M5b | Stage the files Paulo can send Ana: the final report.html of her project and the updated READ-ME with the 2.1.2 link and SHA (outside her folder) | L | 0.1 | M4d |  | D:/FamilyQuant-data/out-desk/M5-for-Ana holds both with SHA256 | Orchestrator | | 0 | 0 | |
-| M6f | README screenshots: the Export report dialog with descriptive figure titles from a synthetic project, every image in dark mode | L | 0.2 | 🟢 | M6g | All images dark, synthetic, under 300 KB | T2 | | 0 | 0 | |
-| M6g | Check and push the M6f screenshots | L | 0.1 | M6f |  | FQReview3 approves; desk pushes; live page looked at | Orchestrator | | 0 | 0 | |
 
 ### W2 Release 2.1.3: the installer and automatic updates
 
@@ -135,6 +132,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D50 | The public README | FQTerra2 writes a README devoted to 2.1.2 with a manual and screenshots from synthetic data only; the desk pushes it as soon as it is reviewed, before the release, with links to releases/latest. Paulo, 22:10 to 22:13 |
 | D51 | The night run | Paulo goes to sleep (23:57: "when you finish this project please confirm you will upload it ... i cant have questions asked"). The desk finishes W2 to W4 and publishes 2.1.2 on GitHub with no further questions. The database-entries axis waits for the next version, so the release is not delayed before the collaborator wakes. W5 (writing into Ana's folder) stays held without his word; the staged page waits outside her folder. Paulo, 23:57 |
 | D52 | 2.1.3 tonight | An installer built in .NET (no download, no install on this PC: tested in test mode), Help > Install update and a start-up update notice; published when every check is green, like 2.1.2 (D51). Paulo, 23:50 to 23:57 |
+| D53 | Reviewer fallback tonight | If a Grok reviewer runs out of credit, an Opus 5.5 reviewer on Juliana's account (juliana.fischer@fiocruz.br, LPEC team, engine opusjf) reviews the Sol builders' work, read-only and batched; any work an Opus writes is reviewed by a Sol. Paulo's own Fiocruz account (96 percent weekly) only if Juliana's is out too. Paulo, 00:05 and 00:03 |
 
 ## Risks and triggers
 
