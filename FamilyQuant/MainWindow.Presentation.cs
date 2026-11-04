@@ -239,6 +239,7 @@ public partial class MainWindow
 
                 // The curation table's Full XIC column follows the new quantitation at once (the users
                 // asked for the numbers in the table as well as in Analytics).
+                owner.cgc.SetFullXicMappingProvenance(owner.loadedManifest?.FamilyMapping);
                 _ = owner.cgc.SetFullXicQuantAsync(owner.loadedQuant, owner.loadedManifest?.PerRunTic);
 
                 // Started from the Home card, the banner and the guide still said "no full XIC computed

@@ -165,6 +165,8 @@ namespace FamilyQuant
     public sealed class FamilyWorldSummary
     {
         public string Method { get; set; } = string.Empty;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public HomologyScienceOptions? Science { get; set; }
         public string KnownAnswerMethod { get; set; } = string.Empty;
         public string Rules { get; set; } = string.Empty;
         public int MinimumTagLength { get; set; }
@@ -596,6 +598,7 @@ namespace FamilyQuant
             var summary = new FamilyWorldSummary
             {
                 Method = pass.Method,
+                Science = pass.Science?.Clone(),
                 KnownAnswerMethod = KnownAnswerMethod,
                 Rules = FamilyWorldPass.RuleText(pass),
                 MinimumTagLength = pass.MinimumTagLength,

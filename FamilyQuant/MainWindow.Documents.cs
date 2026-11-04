@@ -86,6 +86,7 @@ public partial class MainWindow
                 owner.GridApp.Children.Add(owner.cgc);
 
                 // A .fqproj carries its own quantitation: the curation table shows it at once.
+                owner.cgc.SetFullXicMappingProvenance(owner.loadedManifest?.FamilyMapping);
                 _ = owner.cgc.SetFullXicQuantAsync(owner.loadedQuant, owner.loadedManifest?.PerRunTic, started, operationLogPath);
 
                 owner.RefreshProjectCommandAvailability(resetSpectrum: true);

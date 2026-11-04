@@ -30,7 +30,8 @@ public sealed partial class CurationQuantitationViewModel
             var rowCopy = rows.ToList();
             var ticCopy = perRunTic?.ToDictionary(p => p.Key, p => p.Value);
             var proteins = ProteinSnapshot();
-            var prepared = await Task.Run(() => PrepareFullXic(rowCopy, ticCopy, proteins, operation, fullXicCacheDirectory), operation.CancellationToken);
+            var mappingOptions = fullXicMappingOptions.Clone();
+            var prepared = await Task.Run(() => PrepareFullXic(rowCopy, ticCopy, proteins, operation, fullXicCacheDirectory, mappingOptions), operation.CancellationToken);
             operation.ThrowIfCancellationRequested();
             if (generation != fullXicGeneration) return false;
             operation.Report("attribution", "Full-XIC family attribution prepared", 1, 1);

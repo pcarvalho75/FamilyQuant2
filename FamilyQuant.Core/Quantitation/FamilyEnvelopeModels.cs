@@ -279,6 +279,9 @@ namespace FamilyQuant
         public string ProteinSetSha256 { get; set; } = string.Empty;
         public double MinIdentity { get; set; }
         public string Method { get; set; } = string.Empty;
+        /// <summary>Absent in legacy projects: retain their original OFF semantics on reopen.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public Homology.HomologyScienceOptions? Science { get; set; }
     }
 
     /// <summary>The homology hits of a quant's peptides against a curation's proteins, independent of the

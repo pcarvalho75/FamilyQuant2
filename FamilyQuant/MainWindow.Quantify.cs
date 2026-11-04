@@ -46,7 +46,8 @@ public partial class MainWindow
             loadedCuration!.ReportInputProvenance = model.CompletedInputProvenance;
             lastSpectrumComparisonCsvPath = result.SpectrumComparisonCsvPath;
             RefreshProjectCommandAvailability(spectrumAvailable: result.SpectrumComparisonRows.Count > 0 || loadedQuant.Count > 0);
-            _ = cgc!.SetFullXicQuantAsync(loadedQuant, loadedManifest.PerRunTic, model.OperationStartedAtUtc, model.OperationLogPath);
+            cgc!.SetFullXicMappingProvenance(loadedManifest.FamilyMapping);
+            _ = cgc.SetFullXicQuantAsync(loadedQuant, loadedManifest.PerRunTic, model.OperationStartedAtUtc, model.OperationLogPath);
             DocumentState.MarkModified();
             UpdateGuide();
             StatusModel.ShowMessage(model.RunSummary + "\n" + model.Details);
@@ -60,6 +61,7 @@ public partial class MainWindow
 
     private string QuantifyHelpText() => quantify == null ? "" :
         "Quantify reads the selected RAW folder and SEPro package with the shared de novo filters.\n\n" +
+        HomologyMigrationHelp.Text + "\n\n" +
         quantify.ViewModel.Basis + "\n\n" + quantify.ViewModel.BasisDetails + "\n\n" +
         quantify.ViewModel.RunSummary + "\n\n" + quantify.ViewModel.Details;
 }

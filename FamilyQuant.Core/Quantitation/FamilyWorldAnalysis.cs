@@ -75,7 +75,7 @@ namespace FamilyQuant
                     FamilyPeptideAttribution firstPass = FamilyEnvelopeQuant.AttributePeptides(
                         FamilyEnvelopeQuant.PreparePeptides(result.Rows), attribution);
                     table = RunPrepared(firstPass, curation, result.SpectrumComparisonRows, FamilyWorld.FromSnapshot(snapshot),
-                        snapshot.Release, null, null, FamilyWorldErrors.DefaultMinimumKnownCredits, operation,
+                        snapshot.Release, null, new FamilyWorldOptions { Science = attribution.EffectiveOptions.Science?.Clone() }, FamilyWorldErrors.DefaultMinimumKnownCredits, operation,
                         FamilyWorldOptions.LengthChoices).Summary;
                 }
                 else table = FromStoredWorld(result.Rows, curation, result.SpectrumComparisonRows, operation).Summary;

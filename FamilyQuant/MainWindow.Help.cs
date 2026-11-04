@@ -198,6 +198,7 @@ public partial class MainWindow
                 "   elapsed time and time since the last step. Where a known total is available,\n" +
                 "   the progress line counts completed work. Operation log shows recorded steps.\n" +
                 "   Produces: stored Results for the project and its report.\n" +
+                "   " + HomologyMigrationHelp.Text + "\n" +
                 "   A quantitative panel family marked no peptide observed has no peptide observed\n" +
                 "   in the completed study. This is not proof that the family is absent.\n" +
                 "   In Families > Quantitation use Full XIC > Share of and Shared peptides.\n" +
