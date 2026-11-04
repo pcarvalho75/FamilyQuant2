@@ -111,6 +111,17 @@ The same chain as 2.1.1.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | M5a | report.html into Ana's Relatorio folder, exported from her delivered project with no Compute | L | 0.2 | M3f |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
 
+### W6 The README on GitHub for 2.1.2
+
+Paulo, 22:10: "a significantly improved readme in github about the latest version with a manual, screenshots, step by step", "devoted to 2.1.2", "as soon as possible, release this page". Public repository: synthetic data only.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M6b | README text for 2.1.2: what it is, what is new, install, a step-by-step manual, troubleshooting; HTML-page screenshots from synthetic data only | M | 0.4 | 🟢 | M6c | Reads end to end; every menu name checked against the code; no real data, names, paths or keys | T2 | | 0 | 0 | |
+| M6a | App screenshots from the program's synthetic screen fixtures (--screens --screen-finish), 8 to 12, cropped, under about 300 KB each | M | 0.3 | 🟢 | M6c | Every image looked at; no real data | T2 | | 0 | 0 | |
+| M6c | Review of the README and images: facts against the program, the synthetic-data rule, plain words | L | 0.2 | M6a, M6b | M6d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
+| M6d | README pushed to pcarvalho75/FamilyQuant2-releases main (Paulo: as soon as possible); links use releases/latest | L | 0.1 | M6c |  | Live page reads correctly; images load | Orchestrator | | 0 | 0 | |
+
 ## Critical path
 
 M1b, M1d, the producers M1e to M1g, the writer M1h and export M1i, the tests, then the proof M1o (which also needs FQLook's page, M2a to M2j), the reviews M3a and M3b, the fixes M3d, the gate M3e and Paulo's look M3f. Reviewers: FQReview, FQReview2 and FQReview3 (hired 20:45 on Paulo's "hire a new grok reviewer"), and FQOpus for the final page (20:52, "put the opus carvalho paulo as a reviewer"). The release (W4) and the delivery to Ana (W5) start only on his word.
@@ -145,6 +156,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D47 | Scope of the HTML page | Plots, not text: no methods or quality text, short pop-ups only, short rounded labels with the exact value in the pop-up; no design review (Paulo judges it at M3f; FQReview2 checks the template's code only); coverage as the native figure unless positions are stored. Paulo, 20:15, after the 9-hour question |
 | D48 | Prepare the release and the delivery ahead | Yes: version 2.1.2 and notes on a branch now, the final export for Ana staged outside her folder; publishing and delivery still wait for Paulo's word after he sees the page. Paulo, 21:39 ("yes") |
 | D49 | When to publish 2.1.2 | No early freeze: finish every step of W1 to W3, then publish on GitHub (W4) without waiting for another word; delivery to Ana (W5) still waits for his word. Paulo, 21:47 ("we will do the project until the end and then publish it in github") |
+| D50 | The public README | FQTerra2 writes a README devoted to 2.1.2 with a manual and screenshots from synthetic data only; the desk pushes it as soon as it is reviewed, before the release, with links to releases/latest. Paulo, 22:10 to 22:13 |
 
 ## Risks and triggers
 
