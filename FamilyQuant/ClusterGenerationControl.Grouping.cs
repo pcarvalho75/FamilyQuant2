@@ -1,6 +1,3 @@
-using System.Windows;
-using System.Windows.Controls;
-
 namespace FamilyQuant;
 
 public partial class ClusterGenerationControl

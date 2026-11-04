@@ -11,6 +11,12 @@ public sealed partial class CurationViewModel
     public bool HasAppliedEvidenceGrouping => Document.EvidenceRecipe != null;
     public bool HasStoredFamilyWorld { get; private set; }
     public bool HasComputedFullXic { get; private set; }
+    public string EvidenceStepStatus => !HasStoredEvidence ? "Not yet"
+        : string.IsNullOrWhiteSpace(Document.EvidenceSource!.Release) ? "Downloaded (UniProt release not recorded)"
+        : "Downloaded (UniProt " + Document.EvidenceSource.Release.Trim() + ")";
+    public string EvidenceGroupingStepStatus => HasAppliedEvidenceGrouping ? "Applied" : "Not yet";
+    public string FamilyWorldStepStatus => HasStoredFamilyWorld ? "Downloaded" : "Not yet";
+    public string FullXicStepStatus => HasComputedFullXic ? "Computed" : "Not yet";
     public int NextGroupingStep => !HasStoredEvidence ? 1 : !HasAppliedEvidenceGrouping ? 2
         : !HasStoredFamilyWorld ? 3 : !HasComputedFullXic ? 4 : 0;
 
@@ -22,6 +28,7 @@ public sealed partial class CurationViewModel
         if (HasComputedFullXic == computed) return;
         HasComputedFullXic = computed;
         Changed(nameof(HasComputedFullXic));
+        Changed(nameof(FullXicStepStatus));
         Changed(nameof(NextGroupingStep));
     }
 
@@ -43,6 +50,9 @@ public sealed partial class CurationViewModel
         Changed(nameof(HasStoredEvidence));
         Changed(nameof(HasAppliedEvidenceGrouping));
         Changed(nameof(HasStoredFamilyWorld));
+        Changed(nameof(EvidenceStepStatus));
+        Changed(nameof(EvidenceGroupingStepStatus));
+        Changed(nameof(FamilyWorldStepStatus));
         Changed(nameof(NextGroupingStep));
     }
 }
