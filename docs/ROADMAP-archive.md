@@ -609,3 +609,10 @@ Paulo agreed these at the restart, 2026-11-01.
 | M4a | Prepared now on a branch (Paulo 21:39): version 2.1.2 and release notes | L | 0.3 | 🟢 | M4b | Version in every place K19 changed; notes claim only what is on master | EV | | 0 | 0 | |
 | M4b | Full release gate on the 2.1.2 commit | M | 0.3 | M4a | M4c | Ledger 5,460 of 5,460, full suite green | Orchestrator | | 0 | 0 | |
 
+### W1 Release 2.1.2 tonight
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M6f | README screenshots: the Export report dialog with descriptive figure titles from a synthetic project, every image in dark mode | L | 0.2 | 🟢 | M6g | All images dark, synthetic, under 300 KB | T2 | | 0 | 0 | |
+| M6g | Check and push the M6f screenshots | L | 0.1 | M6f |  | FQReview3 approves; desk pushes; live page looked at | Orchestrator | | 0 | 0 | |
+
