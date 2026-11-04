@@ -501,6 +501,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J38e | Compute before and after on the full-run copy | L | 0.3 | J38d | J38f | Both times; stored results byte-identical | AS | | 0 | 0 | |
 | J38f | J38 reviewed and merged | L | 0.2 | J38e | | Approved; gate green | AS | | 0 | 0 | |
 | J47a | Fable's science options in HomologySearch, each off by default: a decoy-calibrated identity gate per tag length; isobaric-swap folding for de novo tags (N/GG, Q/AG, equal-mass pair order, K/Q) weighted by PEAKS per-residue confidence; crediting families by score tier with the multiplicity reported | M | 1.5 | 🟢 | J47b | Options off: byte-identical; options on: their own tests | AS | | 0 | 0 | |
+| J47b | Validation of each science option on the full-run project: target-decoy rates at the gate, the Database gap error rates, the leave-one-out family check (J42: 966 right, 12 wrong, 95 abstained), and what changes in the headline; Paulo decides which become default (Paulo, 11-03 13:15: no recomputing everything: validate by replaying FQAssay's captured five search inputs and the cached attribution, one full Compute only for the options chosen as defaults) | M | 1 | 🟢 | | A before/after table per option; science review | AS | | 0 | 0 | |
 
 ### W2 The interpretation
 
@@ -527,4 +528,11 @@ Paulo agreed these at the restart, 2026-11-01.
 | K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | 🟢 | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | 🟢 | K17 | No blocking item | LK | | 0 | 0 | |
 | K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
+
+### W8 Release 2.1.1
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J47d | Score tier ON by default (D43): one commit; say what a project computed with 2.1.0 shows when opened in 2.1.1 (stored results kept until Compute? the attribution cache key changes?) and put it in Help and the release notes; one full Compute of the full-run copy to confirm the expected share shifts (the only full Compute, per Paulo 13:15) | L | 0.5 | 🟢 | K20 | Default ON in code and tests; the one Compute matches J47b's score-tier row; per-length and tag gates OFF | AS | | 0 | 0 | |
+| K19 | Version 2.1.1 everywhere the program shows or checks it, plus 2.1.1 release notes (J38d new search engine and its speed, J43, J49, K8c, the science options with score tier on by default), plain user wording | L | 0.3 | 🟢 | K20 | Version pins green; notes claim only what is on master | EV | | 0 | 0 | |
 
