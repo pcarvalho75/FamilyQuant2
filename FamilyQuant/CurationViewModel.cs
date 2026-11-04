@@ -49,6 +49,7 @@ public sealed partial class CurationViewModel : ScreenViewModel
         RefreshFamilies();
         Changed(nameof(Rows)); Changed(nameof(FamilyCounter)); Changed(nameof(LockSummary)); Changed(nameof(CanUndo));
         Changed(nameof(FamilyWorldState));
+        RefreshGroupingWorkflow();
     }
     public void PushUndo(IEnumerable<FastaItemExtended>? annotations = null)
     {

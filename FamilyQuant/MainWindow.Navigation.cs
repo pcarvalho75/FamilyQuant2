@@ -46,6 +46,7 @@ public partial class MainWindow
     private void MenuItemComputeXic_Click(object sender, RoutedEventArgs e) => NavigationModel.RequestNavigate(ShellDestination.Quantify);
     private void RefreshNavigationState()
     {
+        cgc?.ViewModel.SetQuantManifest(loadedManifest);
         NavigationModel.UpdateProjectState(cgc != null, saveInProgress || analyticsInProgress || IsQuantifyBusy || Operations.IsBusy);
         NavigationModel.SetHomologyState(latestHomologyResult != null);
         NavigationModel.SetDocument(cgc?.fcf, lastFcfPath, loadedQuant.Count > 0);

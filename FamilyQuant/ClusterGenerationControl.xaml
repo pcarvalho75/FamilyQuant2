@@ -98,7 +98,7 @@
             <StackPanel>
                 <GroupBox Header="Grouping" Margin="0,0,0,10">
                     <StackPanel>
-                        <Button x:Name="ButtonFetchDomains" Content="1  Fetch evidence" Style="{DynamicResource PrimaryButton}" Click="ButtonFetchDomains_Click"
+                        <Button x:Name="ButtonFetchDomains" Content="1  Fetch evidence" Click="ButtonFetchDomains_Click"
                                 ToolTip="Fetch protein evidence and reviewed references from UniProt for offline review. Save the file to keep the fetched evidence."/>
                         <Button x:Name="ButtonEvidenceGrouping" Content="2  Group by evidence"
                                 Click="ButtonEvidenceGrouping_Click" ToolTip="Review the evidence proposal and protein selections before applying. Cancel keeps the current grouping unchanged."/>
