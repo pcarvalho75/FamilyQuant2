@@ -1,5 +1,23 @@
 # Report number trace
 
+Database-entry fields use `database-entry-count` references to the stored curation collection.
+The resolver calls the read-only D55 core count view once per trace. It checks canonical UserID
+or effective panel key, invariant integer text, raw count, empty unit, Scale 1 and empty unrelated
+locator/format slots. Headline association uses the same `ReportCompositionBasis`, including an
+unkeyed collapsed slot's single source UserID; slot IDs are never parsed as source families.
+Unavailable/conflicted populations, Others, dangling count IDs and mismatched values-map entries
+are rejected. Reading the trace runs no Compute/search and changes no curation or saved studies.
+
+G1d executed evidence is in `D:/FamilyQuant-data/out-results/G1d/native/`: `proof.json`,
+`html-trace.csv` and `stored-export.log`. The guarded native export read the paired copied
+project in `G1d/inputs-213` (SHA-256 `3D9DDBBACCE4E62D0DAC4EC9F66DC34B08566B6E02B74E5D17973B6917906081`).
+It recorded both required cache hits, 4,414 bound fields, 6,437 trace rows and zero NOT FOUND.
+Fourteen database count fields resolve to their stored populations; Others has no count.
+All 15 headline labels and means equal the copied delivered Word report. Input hashes and
+the stored snapshot stayed unchanged, and HTML preserved the native Word/workbook bytes.
+All 4,395 pre-existing HTML fields also compare identical to the paired baseline.
+These artifacts prove the added ledger contract; they do not alter frozen FQ15 receipts.
+
 `--trace-report-numbers <report.docx> <sidecar-folder> <output.csv>` reads the report and its
 native CSVs/companion workbook without writing those inputs. This is an audit aid; it does
 not calculate or validate scientific results.

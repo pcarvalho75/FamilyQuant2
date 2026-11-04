@@ -5777,3 +5777,13 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5460**; OPEN r
 | FQ15-4DBD74B16598 | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:156 | "de novo (" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-4DBD74B16598 |
 | FQ15-0559798839A5 | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:156 | "N0" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-0559798839A5 |
 | FQ15-E73B1EF0C64E | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:156 | ")" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-E73B1EF0C64E |
+
+## Added contracts after the frozen source
+
+These are additions, not replacements or drops of frozen FQ15 observations. The named DefaultSuite
+checks guard the contract and its presence. Executed native proof is recorded separately for review;
+adding this row does not change any frozen disposition, scan hash or receipt verification state.
+
+| ID | Change | Preserved contract | Executable evidence target |
+|---|---|---|---|
+| FQ2-DATABASE-ENTRIES | ADD | Stored-curation target-entry population by recorded UserID or canonical effective panel key; exclude decoys/contaminants, retain zero, omit unassigned/conflicting/Others values; no Compute/search or changes to prior measurements | test:DatabaseEntryTraceTests; test:DatabaseEntryCountTests; test:HtmlDatabaseEntryTests; native guarded export and HTML trace |
