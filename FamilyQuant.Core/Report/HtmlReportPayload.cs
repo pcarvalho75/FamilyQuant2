@@ -15,6 +15,7 @@ public sealed record HtmlReportPayload
     public HtmlComposition Composition { get; init; } = new();
     public IReadOnlyList<HtmlRunCredit> CreditedRuns { get; init; } = Array.Empty<HtmlRunCredit>();
     public IReadOnlyList<HtmlGapRow> DatabaseGap { get; init; } = Array.Empty<HtmlGapRow>();
+    public IReadOnlyList<HtmlDotMeasure> DotMeasures { get; init; } = Array.Empty<HtmlDotMeasure>();
     public IReadOnlyList<HtmlMethodStep> Methods { get; init; } = Array.Empty<HtmlMethodStep>();
     public IReadOnlyList<HtmlReportFigure> Quality { get; init; } = Array.Empty<HtmlReportFigure>();
     public IReadOnlyList<HtmlReportFigure> Sensitivity { get; init; } = Array.Empty<HtmlReportFigure>();
@@ -84,6 +85,10 @@ public sealed record HtmlFamilyRun(string Name, string? Share, string? Measured)
 public sealed record HtmlFamilyPart(string Kind, string Name, string? Share, bool IsUnresolved = false);
 public sealed record HtmlRunCredit(string Name, string Share);
 public sealed record HtmlGapRow(string Name, string Fraction);
+/// <summary>Label and Ticks are field IDs; Values maps family IDs to existing exact field IDs.
+/// Scale controls geometry only. Missing values are absent; recorded zero remains available.</summary>
+public sealed record HtmlDotMeasure(string Id, string Label, string Unit, string Scale,
+    IReadOnlyList<string> Ticks, IReadOnlyDictionary<string, string> Values);
 public sealed record HtmlReportHighlight(string Name, string Value, string? Description);
 /// <summary>Title, fact Name and fact Value are all field IDs.</summary>
 public sealed record HtmlMethodStep(string Id, string Title, IReadOnlyList<HtmlReportFact> Facts);

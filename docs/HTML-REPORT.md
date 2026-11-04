@@ -34,6 +34,37 @@ leading zeros. Its value is null (a label), and format `run-suffix` binds it to 
 name source cell. The full name remains the exact pop-up field. Shared run labels reuse field IDs.
 Methods and quality facts remain empty under D47; the page is plots, labels and short info.
 
+`dotMeasures` is an optional array for the single configurable evidence dot plot. Each entry
+has `{id,label,unit,scale,ticks,values}`. `label` and every item of `ticks` are ordinary field IDs;
+`values` maps a family ID to its EXISTING exact field ID, preserving the same short/exact popup
+pair. `scale` is `log` for mean share and counts, `linear` for SD/CV. No sums, ratios, fits or
+new scientific observations are introduced. The browser uses raw values only for geometry and
+prints the supplied strings. The available IDs, in stable order, are `mean`, `peptides`,
+`proteins`, `uniqueProteins`, `sd`, `cv`; omit an entry with no available family values.
+Canonical Others is not an individual dot. Missing, negative or nonfinite values are absent;
+recorded zero remains available and must not be described as missing, even on a log axis.
+
+Program-made log ticks are powers of ten bracketing the positive range, with one extra upper
+decade for a single exact-decade value. An all-zero log measure has ticks 1 and 10, while its
+zero-valued families retain their exact values for edge rendering/tooltips. Linear ticks start
+at zero with a power-of-ten step through the upper range. At floating-point extremes only
+finite representable ticks are emitted; the plot must also include its actual value extents.
+All tick strings are invariant C# G3; raw tick values use the measure's units (share is percent).
+
+`axis-label` and `axis-tick` references are explicit presentation constants, not Word cells or
+stored observations. `HtmlReportAxisTicks.TryResolve` is their shared strict native validator.
+A label's Property is the measure ID, Format is null, Scale is 1. A tick's Property is
+`<id>/log10/<exponent>` or `<id>/linear/<exponent>/<multiple>` (multiple 0 through 10), Format is
+`G3`, Scale is 1; the known measure must support that scale, and all other reference slots
+are empty. Source recipes bind exact text, unit and raw geometry for the number trace.
+
+`databaseEntries` and `databaseGap` are reserved IDs, offered only when an existing, explicitly
+family-keyed source is available. The report's source-sequence census counts distinct peptides,
+not database protein records; it cannot supply a database-entry population. Global source-record
+counts and UniProt-family gap rows without a curated-family key are not substituted. The current
+producer therefore omits those measures. `proteins` remains the native greedy protein estimate,
+distinct from the searched database's population.
+
 `title`, `authors`, `interpretation`, all family/run/part names, and metric properties are field
 IDs, not display text. Missing IDs or null values mean unavailable; they never imply zero.
 `composition.families` has name, mean, sd, cv, wholeMeasured, proteins, uniqueProteins, peptides,
