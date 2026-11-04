@@ -75,13 +75,11 @@ Paulo, 23:50 to 23:57 (D52): a real installer, Help > Install update, and a chec
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | M7a | FamilyQuant2-Setup.exe built in .NET (no third-party tool, no download): per-user install, Start menu shortcut, Apps & features uninstall, upgrade in place keeping data, quiet mode; tests in test mode only (D31) | M | 0.6 | 🟢 | M7d | DONE with the build command; tests green | SH | | 0 | 0 | |
-| M7b | Help > Install update (downloads and runs the Setup quietly) and a background check at every start with a non-blocking banner when a later version exists; a setting to turn it off | M | 0.5 | 🟢 | M7f | DONE; fake-network tests green | FL | | 0 | 0 | |
 | M7c | Version 2.1.3, release notes (installer, unsigned-installer note, automatic check) and a package script that builds the zip and the Setup.exe with SHA256 | L | 0.4 | 🟢 | M7g | DONE; package commands ready | AS | | 0 | 0 | |
 | M7j | The installer's window (split from M7a for speed): welcome, folder, options, progress, done and launch, running-app and errors, uninstall view, upgrade wording, in the FamilyQuant look | M | 0.4 | 🟢 | M7d | DONE with dark and light screenshots | LK | | 0 | 0 | |
 | M7d | Review of the installer engine and window (M7a, M7j) | M | 0.2 | M7a, M7j | M7h | APPROVED, or fixes by the owner and re-checked | GR | | 0 | 0 | |
-| M7f | Review of the update check and Install update (M7b) | M | 0.2 | M7b | M7h | APPROVED, or fixes by the owner and re-checked | GR3 | | 0 | 0 | |
 | M7g | Review of the 2.1.3 version, notes and package script (M7c) | L | 0.1 | M7c | M7h | APPROVED, or fixes by the owner and re-checked | GR2 | | 0 | 0 | |
-| M7h | Full gate on the 2.1.3 commit (ledger refresh and suite) | M | 0.3 | M7d, M7f, M7g | M7i | Ledger 5,460 of 5,460; suite green | Orchestrator | | 0 | 0 | |
+| M7h | Full gate on the 2.1.3 commit (ledger refresh and suite) | M | 0.3 | M7d, M7g | M7i | Ledger 5,460 of 5,460; suite green | Orchestrator | | 0 | 0 | |
 | M7i | The 2.1.3 zip and Setup.exe from that commit; Setup.exe in test mode extracts and the app reports 2.1.3 | L | 0.2 | M7h | M7e | Both files with SHA256; test-mode install passes | AS | | 0 | 0 | |
 | M7e | v2.1.3 published with the Setup.exe and the zip; README reads 2.1.3 throughout (Paulo 00:11), with the installer section, pushed | L | 0.2 | M7i |  | Release live and Latest; hashes equal M7i; README live | Orchestrator | | 0 | 0 | |
 
