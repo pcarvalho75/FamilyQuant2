@@ -15,6 +15,7 @@ public partial class ClusterGenerationControl
     public HttpMessageHandler? FamilyWorldHandlerOverride { get; set; }
     public HttpMessageHandler? FamilyWorldTaskHandlerOverride { get; set; }
     public Func<EvidenceTaskProposal, EvidenceTaskChoice?>? ConfirmFamilyWorldScopeOverride { get; set; }
+    public Func<bool>? ConfirmFamilyWorldGroupingOfferOverride { get; set; }
     public Task FamilyWorldFetchCompletion { get; private set; } = Task.CompletedTask;
 
     private async void ButtonFetchFamilyWorld_Click(object sender, RoutedEventArgs e)
@@ -26,10 +27,13 @@ public partial class ClusterGenerationControl
     private async Task FetchFamilyWorldWithGroupingOfferAsync()
     {
         if (familyWorldFetchRunning || Operations.IsBusy) return;
-        if (ConfirmedFamilyWorldTask() == null)
+        if (ConfirmedFamilyWorldTask() == null
+            && (ConfirmFamilyWorldGroupingOfferOverride != null || Window.GetWindow(this) != null))
         {
-            if (ConfirmGroupingPrerequisite("Fetch family world",
-                "Confirm a task and scope with Group by evidence first?", "Open Group by evidence"))
+            bool openGrouping = ConfirmFamilyWorldGroupingOfferOverride?.Invoke()
+                ?? ConfirmGroupingPrerequisite("Fetch family world",
+                    "Confirm a task and scope with Group by evidence first?", "Open Group by evidence");
+            if (openGrouping)
                 await ReviewEvidenceWithFetchOfferAsync();
             return;
         }

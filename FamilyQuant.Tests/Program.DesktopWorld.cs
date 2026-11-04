@@ -39,6 +39,25 @@ internal static partial class Program
         WaitDesktopWorld(noEvidenceScreen.FetchFamilyWorldAsync());
         Check("Y8 a missing evidence prerequisite leaves the file unchanged", noEvidenceBytes == withoutEvidence.ToJsonText()
             && !noEvidenceScreen.Operations.IsBusy && withoutEvidence.EvidenceSource?.FamilyWorld == null);
+        foreach (bool openGrouping in new[] { false, true })
+        {
+            var file = TaskFile();
+            var screen = new ClusterGenerationControl(file);
+            using var taxonomy = new TaskTaxonomyHandler();
+            using var fetch = new WorldFetchHandler();
+            screen.FamilyWorldTaskHandlerOverride = taxonomy;
+            screen.FamilyWorldHandlerOverride = fetch;
+            int offers = 0, reviews = 0;
+            screen.ConfirmFamilyWorldGroupingOfferOverride = () => { offers++; return openGrouping; };
+            screen.ConfirmEvidenceReviewOverride = _ => { reviews++; return null; };
+            screen.ConfirmFamilyWorldScopeOverride = _ => throw new InvalidOperationException("An answered grouping offer must not fall through to scope confirmation.");
+            string before = file.ToJsonText();
+            ((Button)screen.FindName("ButtonFetchFamilyWorld")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            WaitDesktopWorld(screen.FamilyWorldFetchCompletion);
+            Check("Y8 actual button answers the grouping offer: " + (openGrouping ? "open review" : "cancel"),
+                offers == 1 && reviews == (openGrouping ? 1 : 0) && fetch.Requests == 0
+                && before == file.ToJsonText() && !screen.Operations.IsBusy && screen.IsEnabled);
+        }
         foreach (string scenario in new[] { "confirm cancelled", "fetch cancelled", "HTTP failure", "success" })
         {
             var file = TaskFile();
