@@ -67,10 +67,7 @@ Paulo's word: publish when done, no questions (D49, D51). Ana should find it whe
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M4c | The 2.1.2 package from master and its real-menu export of a copy of Ana's project (K21 runner) | L | 0.2 | 🟢 | M4d | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
-| M4d | v2.1.2 published on FamilyQuant2-releases with the zip, its .sha256 and the notes | L | 0.1 | M4c | M4e, M5b | Release page live and Latest; downloaded zip hash equals M4c | Orchestrator | | 0 | 0 | |
-| M4e | Install check from GitHub; 2.1.1 Check for updates offers 2.1.2 | L | 0.2 | M4d |  | Both pass | EV | | 0 | 0 | |
-| M5b | Stage the files Paulo can send Ana: the final report.html of her project and the updated READ-ME with the 2.1.2 link and SHA (outside her folder) | L | 0.1 | M4d |  | D:/FamilyQuant-data/out-desk/M5-for-Ana holds both with SHA256 | Orchestrator | | 0 | 0 | |
+| M4e | Install check from GitHub; 2.1.1 Check for updates offers 2.1.2 | L | 0.2 | 🟢 |  | Both pass | EV | | 0 | 0 | |
 
 ### W2 Release 2.1.3: the installer and automatic updates
 
@@ -85,7 +82,7 @@ Paulo, 23:50 to 23:57 (D52): a real installer, Help > Install update, and a chec
 | M7d | Review of the installer engine and window (M7a, M7j) | M | 0.2 | M7a, M7j | M7h | APPROVED, or fixes by the owner and re-checked | GR | | 0 | 0 | |
 | M7f | Review of the update check and Install update (M7b) | M | 0.2 | M7b | M7h | APPROVED, or fixes by the owner and re-checked | GR3 | | 0 | 0 | |
 | M7g | Review of the 2.1.3 version, notes and package script (M7c) | L | 0.1 | M7c | M7h | APPROVED, or fixes by the owner and re-checked | GR2 | | 0 | 0 | |
-| M7h | Full gate on the 2.1.3 commit (ledger refresh and suite) | M | 0.3 | M7d, M7f, M7g, M4d | M7i | Ledger 5,460 of 5,460; suite green | Orchestrator | | 0 | 0 | |
+| M7h | Full gate on the 2.1.3 commit (ledger refresh and suite) | M | 0.3 | M7d, M7f, M7g | M7i | Ledger 5,460 of 5,460; suite green | Orchestrator | | 0 | 0 | |
 | M7i | The 2.1.3 zip and Setup.exe from that commit; Setup.exe in test mode extracts and the app reports 2.1.3 | L | 0.2 | M7h | M7e | Both files with SHA256; test-mode install passes | AS | | 0 | 0 | |
 | M7e | v2.1.3 published with the Setup.exe and the zip; README reads 2.1.3 throughout (Paulo 00:11), with the installer section, pushed | L | 0.2 | M7i |  | Release live and Latest; hashes equal M7i; README live | Orchestrator | | 0 | 0 | |
 
@@ -93,7 +90,7 @@ Paulo, 23:50 to 23:57 (D52): a real installer, Help > Install update, and a chec
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M5a | report.html into Ana's Relatorio folder (the desk never writes there without his word) | L | 0.1 | M5b |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
+| M5a | report.html into Ana's Relatorio folder (the desk never writes there without his word) | L | 0.1 | 🟢 |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
 
 ## Critical path
 
