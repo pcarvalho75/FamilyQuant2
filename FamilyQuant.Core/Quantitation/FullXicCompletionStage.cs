@@ -47,12 +47,14 @@ namespace FamilyQuant
             {
                 try
                 {
-                    familyHits = FamilyEnvelopeQuant.SearchCuration(
-                        result.Rows, options.FamilyCuration, operation: operation);
+                    var mappingOptions = (options.FamilyMappingOptions ?? Homology.HomologyDefaults.ForNewCompute()).Clone();
+                    string? familyCache = string.IsNullOrWhiteSpace(options.CacheDirectory) ? null : Path.Combine(options.CacheDirectory, "curation-homology");
+                    familyHits = CurationHomologyCache.GetOrSearch(result.Rows, options.FamilyCuration,
+                        familyCache, mappingOptions, cancellationToken: operation?.CancellationToken ?? default, operation: operation);
                     familyAttribution = FamilyEnvelopeQuant.AttributeHits(familyHits, options.FamilyCuration);
-                    manifest.FamilyMapping = FamilyEnvelopeQuant.ProvenanceFor(options.FamilyCuration,
-                        familyAttribution.IdentityThreshold);
-                    result.Notes.Add("Spectrum-table family attribution: every matching User family at " +
+                    manifest.FamilyMapping = FamilyEnvelopeQuant.ProvenanceForScience(options.FamilyCuration,
+                        familyAttribution.IdentityThreshold, mappingOptions.Science);
+                    result.Notes.Add("Spectrum-table family attribution: retained User families under the recorded mapping policy at " +
                         familyAttribution.IdentityThreshold.ToString("P0", CultureInfo.InvariantCulture) +
                         " homology identity; shared peptides retain all memberships.");
                 }

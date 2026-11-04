@@ -57,12 +57,21 @@ namespace FamilyQuant
         /// <summary>The provenance to record for a mapping made on <paramref name="curation"/>, or null when
         /// the curation repeats a protein identifier (then no later re-join can be vouched for).</summary>
         public static FamilyMappingProvenance? ProvenanceFor(FamilyClusterFile curation, double minIdentity) =>
+            ProvenanceForScience(curation, minIdentity, null);
+
+        public static FamilyMappingProvenance? ProvenanceForScience(FamilyClusterFile curation, double minIdentity,
+            Homology.HomologyScienceOptions? science) =>
             HasRepeatedProteinIdentifiers(curation) ? null : new FamilyMappingProvenance
             {
                 ProteinSetSha256 = ProteinSetFingerprint(curation),
                 MinIdentity = minIdentity,
-                Method = AttributionMethod,
+                Method = AttributionMethodFor(science),
+                Science = science?.AnyEnabled == true ? science.Clone() : null,
             };
+
+        public static string AttributionMethodFor(Homology.HomologyScienceOptions? science) => science?.AnyEnabled == true
+            ? "identified peptides: target proteins tied at the best homology score; de novo peptides: retained target proteins under the recorded identity and score-tier options; both after target-decoy competition, joined on User IDs; v4 2026-11-03"
+            : AttributionMethod;
 
         /// <summary>
         /// Brings a stored spectrum table's family columns in line with the CURRENT family numbers, but only
@@ -84,7 +93,7 @@ namespace FamilyQuant
             string? keptBecause = provenance == null || string.IsNullOrEmpty(provenance.Method)
                 ? "mapped at Compute by an earlier FamilyQuant that did not record what it searched, or on a " +
                   "curation that repeats a protein identifier"
-                : !string.Equals(provenance.Method, AttributionMethod, StringComparison.Ordinal)
+                : !string.Equals(provenance.Method, AttributionMethodFor(provenance.Science), StringComparison.Ordinal)
                     ? "mapped at Compute with an earlier attribution method"
                     : HasRepeatedProteinIdentifiers(curation)
                         ? "the open curation repeats a protein identifier, so the families cannot be re-joined unambiguously"

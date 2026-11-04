@@ -41,6 +41,9 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
     private string? fullXicProteinFingerprint;
     // Kept per view model so focused tests can use a private cache without changing the program default.
     private string? fullXicCacheDirectory = null;
+    private Homology.HomologyOptions fullXicMappingOptions = new();
+    public void SetFullXicMappingProvenance(FamilyMappingProvenance? mapping) =>
+        fullXicMappingOptions = Homology.HomologyDefaults.ForStoredMapping(mapping);
     private int fullXicGeneration;
     private bool fullXicPending;
     // Each item's User ID AND annotation: the annotation names its family (FamilyNaming), so an
@@ -91,16 +94,20 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
     /// </summary>
     private static FullXicPrepared PrepareFullXic(IReadOnlyList<QuantRow> rows,
         IReadOnlyDictionary<string, double>? perRunTic, FamilyClusterFile proteins)
-        => PrepareFullXic(rows, perRunTic, proteins, null, null);
+        => PrepareFullXic(rows, perRunTic, proteins, null, null, null);
 
     private static FullXicPrepared PrepareFullXic(IReadOnlyList<QuantRow> rows,
         IReadOnlyDictionary<string, double>? perRunTic, FamilyClusterFile proteins, OperationContext? operation,
-        string? cacheDirectory)
+        string? cacheDirectory) => PrepareFullXic(rows, perRunTic, proteins, operation, cacheDirectory, null);
+
+    private static FullXicPrepared PrepareFullXic(IReadOnlyList<QuantRow> rows,
+        IReadOnlyDictionary<string, double>? perRunTic, FamilyClusterFile proteins, OperationContext? operation,
+        string? cacheDirectory, Homology.HomologyOptions? mappingOptions)
     {
         var prepared = new FullXicPrepared
         {
             Peptides = FamilyEnvelopeQuant.PreparePeptides(rows),
-            Hits = CurationHomologyCache.GetOrSearch(rows, proteins, cacheDirectory,
+            Hits = CurationHomologyCache.GetOrSearch(rows, proteins, cacheDirectory, mappingOptions,
                 cancellationToken: operation?.CancellationToken ?? default, operation: operation),
             // Once per quantitation, here off the interface thread: protein content never changes
             // during curation, so a regrouping does not invalidate it.
@@ -156,7 +163,7 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
         {
             try
             {
-                prepared = PrepareFullXic(rows.ToList(), perRunTic, ProteinSnapshot());
+                prepared = PrepareFullXic(rows.ToList(), perRunTic, ProteinSnapshot(), null, fullXicCacheDirectory, fullXicMappingOptions.Clone());
             }
             catch (Exception ex) { error = ex.Message; }
         }
@@ -213,10 +220,11 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
         List<QuantRow> rowCopy = rows.ToList();
         Dictionary<string, double>? ticCopy = perRunTic?.ToDictionary(kv => kv.Key, kv => kv.Value);
         FamilyClusterFile proteins = ProteinSnapshot();
+        var mappingOptions = fullXicMappingOptions.Clone();
 
         FullXicPrepared? prepared = null;
         string? error = null;
-        try { prepared = await Task.Run(() => PrepareFullXic(rowCopy, ticCopy, proteins)); }
+        try { prepared = await Task.Run(() => PrepareFullXic(rowCopy, ticCopy, proteins, null, fullXicCacheDirectory, mappingOptions)); }
         catch (Exception ex) { error = ex.Message; }
 
         if (generation != fullXicGeneration) return;   // a newer quantitation was attached meanwhile

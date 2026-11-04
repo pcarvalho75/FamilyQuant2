@@ -66,7 +66,7 @@ public static class FamilySensitivityStudy
         var peptides = FamilyEnvelopeQuant.PreparePeptides(rows);
         double gate = EffectiveIdentity(source);
         if (!double.IsFinite(gate) || gate is < 0 or > 1) throw new InvalidDataException("The recorded family identity gate is invalid.");
-        mapping ??= FamilyEnvelopeQuant.BuildAttributionFromCuration(rows, curation, new Homology.HomologyOptions { MinIdentity = gate });
+        mapping ??= FamilyEnvelopeQuant.BuildAttributionFromCuration(rows, curation, Homology.HomologyDefaults.ForStoredMapping(source.FamilyMapping));
         if (mapping.MembershipSha256 != null && mapping.MembershipSha256 != FamilyStudyMembership.Fingerprint(curation))
             throw new InvalidDataException(FamilyStudyMembership.ChangedMessage);
         if (mapping.IdentityThreshold != gate) throw new InvalidDataException("The cached attribution differs from the recorded family identity gate.");
@@ -81,7 +81,7 @@ public static class FamilySensitivityStudy
             Label = filters.Count == 0 ? "No de novo cutoff recorded" : string.Join("; ", filters.Select(f => f.SourceId + ": " + f.Field + " >= " + f.Cutoff.ToString("0.###", CultureInfo.InvariantCulture))),
             SourceSha256 = projectSha256 ?? rowsHash,
             DeNovoInputs = JsonSerializer.Deserialize<List<DeNovoInputManifest>>(JsonSerializer.Serialize(source.DeNovoInputs))!,
-            Mapping = FamilyEnvelopeQuant.ProvenanceFor(curation, mapping.IdentityThreshold),
+            Mapping = FamilyEnvelopeQuant.ProvenanceForScience(curation, mapping.IdentityThreshold, source.FamilyMapping?.Science),
         };
         foreach (var policy in Enum.GetValues<SharedPeptidePolicy>())
         {
@@ -139,7 +139,9 @@ public static class FamilySensitivityStudy
         return Hash(JsonSerializer.Serialize(new
         {
             source.IsotopeCount, source.MinPointsForQuant, source.Ppm, source.Ms1Tolerance,
-            Identity = EffectiveIdentity(source), Attribution = FamilyEnvelopeQuant.AttributionMethod,
+            Identity = EffectiveIdentity(source), Attribution = source.FamilyMapping?.Science?.AnyEnabled == true
+                ? FamilyEnvelopeQuant.AttributionMethodFor(source.FamilyMapping.Science) + JsonSerializer.Serialize(source.FamilyMapping.Science)
+                : FamilyEnvelopeQuant.AttributionMethod,
             Inputs = source.ScientificInputFingerprints.Select(p => JsonSerializer.Serialize(new
                 { Kind = Path.GetExtension(p.Key).ToUpperInvariant(), Run = Path.GetExtension(p.Key).Equals(".raw", StringComparison.OrdinalIgnoreCase)
                     ? DeNovoReconciler.NormalizeRunName(p.Key).ToUpperInvariant() : string.Empty, Sha256 = p.Value.ToUpperInvariant() }))
