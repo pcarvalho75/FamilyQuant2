@@ -61,9 +61,9 @@ Flow of one step: the owner posts `READY <step> <commit>`; the orchestrator assi
 
 Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. The graph follows the Blocked by column. A small step lands when its owner posts DONE with a commit; it counts as done when a reviewer approves it.
 
-### W1 Data and export (FQResults)
+### W1 Data and export (FQResults and FQShell)
 
-The program side: what the page is fed, how it is written and exported, and the proof that every number is the stored one.
+The program side (FQShell joined at 20:30 on Paulo's "hire 1 more sol worker so we can speed things"): what the page is fed, how it is written and exported, and the proof that every number is the stored one.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
@@ -74,11 +74,11 @@ The program side: what the page is fed, how it is written and exported, and the 
 | M1e | Producer: per-run shares and the parts within each family | L | 0.2 | M1d | M2e, M1m | Runs and parts filled for every family that has them | RS | | 0 | 0 | |
 | M1f | Producer: highlights, measured signal by run and the Database gap (no methods or quality text: the page is plots) | L | 0.2 | M1d | M2c, M2g, M1m | Each printed value is a field bound to its stored value or Word cell | RS | | 0 | 0 | |
 | M1g | Producer: coverage, with live positions when the stored results hold them, else the native figure | M | 0.2 | M1d | M2f, M1m | Coverage filled; the commit says which form and why | RS | | 0 | 0 | |
-| M1h | Writer: fills the template once, with safe JSON escaping and byte-identical output | L | 0.2 | M1d, M2a | M1i | report.html written from a test project | RS | | 0 | 0 | |
-| M1i | Export: report.html staged and published with the Word report and supplement, all or nothing | M | 0.2 | M1h | M1j, M1k | Three files appear together; cancel keeps the old ones | RS | | 0 | 0 | |
-| M1j | Export: the section choices and the others threshold reach the page | L | 0.1 | M1i | M1l | An unchecked section is absent from the page | RS | | 0 | 0 | |
-| M1k | Delivery rehearsal writes the page; the status message, Help text and docs name it | L | 0.1 | M1i | M1o | Rehearsal output holds report.html | RS | | 0 | 0 | |
-| M1l | Tests: identical bytes for the same project; names and </script> escaped; excluded sections absent; three-file publication and cancel | M | 0.2 | M1j | M1o | Tests in the suite and green | RS | | 0 | 0 | |
+| M1h | Writer: fills the template once, with safe JSON escaping and byte-identical output | L | 0.2 | M1d, M2a | M1i | report.html written from a test project | SH | | 0 | 0 | |
+| M1i | Export: report.html staged and published with the Word report and supplement, all or nothing | M | 0.2 | M1h | M1j, M1k | Three files appear together; cancel keeps the old ones | SH | | 0 | 0 | |
+| M1j | Export: the section choices and the others threshold reach the page | L | 0.1 | M1i | M1l | An unchecked section is absent from the page | SH | | 0 | 0 | |
+| M1k | Delivery rehearsal writes the page; the status message, Help text and docs name it | L | 0.1 | M1i | M1o | Rehearsal output holds report.html | SH | | 0 | 0 | |
+| M1l | Tests: identical bytes for the same project; names and </script> escaped; excluded sections absent; three-file publication and cancel | M | 0.2 | M1j | M1o | Tests in the suite and green | SH | | 0 | 0 | |
 | M1m | Tests: every printed number, pop-ups included, traces to a stored value or a Word cell | M | 0.2 | M1e, M1f, M1g | M1o | Trace test green; 0 NOT FOUND | RS | | 0 | 0 | |
 | M1o | Proof on Ana's delivered project copy, no Compute: export the page with FQLook's template | M | 0.2 | M1k, M1l, M1m, M2j | M1p | SVMP 38.5988% and every share match her report; 0 NOT FOUND | RS | | 0 | 0 | |
 | M1p | Build 0 warnings and quick suite green on the merged branch; READY M1 | L | 0.1 | M1o | M3b | READY M1 posted with the counts | RS | | 0 | 0 | |
@@ -106,8 +106,9 @@ Nobody reviews their own work; a finding is fixed by its owner and checked again
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | M3a | Code review of the contract and producers as they land | M | 0.4 | M1g | M3d | APPROVED, or findings sent to the owner | GR | | 0 | 0 | |
-| M3b | Code review of the writer, export, tests and FQLook's template (Paulo judges the design himself at M3f) | M | 0.2 | M1p, M2j | M3d | APPROVED, or findings sent to the owner | GR | | 0 | 0 | |
-| M3d | Owners fix the review findings; the reviewer checks again | L | 0.2 | M3a, M3b | M3e | Every finding closed | RS | | 0 | 0 | |
+| M3b | Code review of FQShell's writer, export and tests, and FQResults' trace tests and proof | M | 0.2 | M1p | M3d | APPROVED, or findings sent to the owner | GR | | 0 | 0 | |
+| M3c | Code review of FQLook's template as it lands: no client number formatting, no network, no innerHTML with data, keyboard reach (Paulo judges the design himself at M3f) | M | 0.2 | M2a | M3d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
+| M3d | Owners fix the review findings; the reviewer checks again | L | 0.2 | M3a, M3b, M3c | M3e | Every finding closed | RS | | 0 | 0 | |
 | M3e | Desk gate and merge to master | L | 0.2 | M3d | M3f | Gate green; master pushed | Orchestrator | | 0 | 0 | |
 | M3f | Paulo sees the page and the screenshots | L | 0.1 | M3e | M4a, M5a | Paulo's OK or his changes | Paulo | | 0 | 0 | |
 
@@ -160,7 +161,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D44 | Publish 2.1.1 today | Yes: after J47d and the version bump, through the same full gate, package, real-menu export and install checks as 2.1.0. Paulo, 11-03 15:40 |
 | D45 | The tag-gate option on this roadmap | Finish J47c (fast prefilter, its J47b row) in parallel with 2.1.1; it stays OFF by default whatever it shows. Paulo, 11-03 15:40 |
 | D46 | The HTML report | Built now beside the Word report, from the same stored values, offline and self-contained; release and delivery after Paulo sees it. Paulo, 11-03 19:20 ("just get it going"); roadmap asked for at 19:52 |
-| D47 | Scope of the HTML page | Plots, not text: no methods or quality text, short pop-ups only, short rounded labels with the exact value in the pop-up; no separate design review (Paulo judges it at M3f); coverage as the native figure unless positions are stored. Paulo, 20:15, after the 9-hour question |
+| D47 | Scope of the HTML page | Plots, not text: no methods or quality text, short pop-ups only, short rounded labels with the exact value in the pop-up; no design review (Paulo judges it at M3f; FQReview2 checks the template's code only); coverage as the native figure unless positions are stored. Paulo, 20:15, after the 9-hour question |
 
 ## Risks and triggers
 
