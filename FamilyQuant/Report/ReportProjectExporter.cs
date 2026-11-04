@@ -164,7 +164,20 @@ public static class ReportProjectExporter
         exports.Add(FigureLayout.DetailFileName, studies.FigureDetailsCsv);
         var sheets = layout.Sheets.Concat(ReportStudyFigures.CombineFigureSupplements(studies.FigureDetailSheets,
             ReportCaptionTrace.Build(document, figureCaptions))).ToArray();
-        return new(layout.Document, exports, figures) { SupplementSheets = ReportTableSupplements.Complete(layout.Document, sheets), Selection = curation.ReportSelection };
+        var panelKeys = compositionBasis.Map?.UserFamilies.Values.Where(f => !f.HasConflict && f.PanelFamilyKey != null)
+            .ToDictionary(f => f.FamilyUserId.ToString(CultureInfo.InvariantCulture), f => f.PanelFamilyKey!, StringComparer.Ordinal)
+            ?? new Dictionary<string, string>(StringComparer.Ordinal);
+        return new(layout.Document, exports, figures)
+        {
+            SupplementSheets = ReportTableSupplements.Complete(layout.Document, sheets), Selection = curation.ReportSelection,
+            HtmlContext = new()
+            {
+                UsesPanel = compositionBasis.UsesPanel, IsIdentity = compositionBasis.IsIdentity,
+                IsAdditive = compositionBasis.Studies.FamilyRunShares?.Policy != SharedPeptidePolicy.CountInEveryFamily,
+                StoredStudies = compositionBasis.Studies, PanelKeys = panelKeys,
+                FamilySections = panelKeys.ToDictionary(pair => pair.Key, pair => ReportSectionIds.FamilyPrefix + pair.Value, StringComparer.Ordinal),
+            },
+        };
     }
 
     public static void Write(ReportProjectExport export, string docxPath, ReportSelection? selection = null, OperationContext? operation = null)

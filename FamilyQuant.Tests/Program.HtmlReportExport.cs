@@ -78,6 +78,58 @@ internal static partial class Program
         Check("prepared report export publishes Word workbook and HTML with one final commit", exportOperation.HasCommitted
             && File.Exists(word) && File.Exists(ReportSupplementWorkbook.PathForReport(word)) && File.Exists(HtmlReportWriter.PathForReport(word))
             && !Directory.EnumerateDirectories(output, ".fq-report-*").Any());
+        HtmlReportSelectionTests(Path.Combine(output, "selection"));
+    }
+
+    private static HtmlReportPayload ReadHtmlPayload(string path)
+    {
+        string html = File.ReadAllText(path);
+        const string marker = "<script id=\"fq-data\" type=\"application/json\">";
+        int start = html.IndexOf(marker, StringComparison.Ordinal) + marker.Length;
+        int end = html.IndexOf("</script>", start, StringComparison.Ordinal);
+        return JsonSerializer.Deserialize<HtmlReportPayload>(html[start..end], new JsonSerializerOptions
+            { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })!;
+    }
+
+    private static void HtmlReportSelectionTests(string output)
+    {
+        Directory.CreateDirectory(output);
+        var fixture = HtmlFixture();
+        var selected = new ReportSelection { ExcludedIds = new[] { ReportSectionIds.Results, ReportSectionIds.Title } };
+        var prepared = new ReportProjectExport(fixture.Document, new Dictionary<string, string>(), Array.Empty<ReportPlacedFigure>())
+            { HtmlContext = fixture.Context, Selection = selected };
+        string path = Path.Combine(output, "selected.docx");
+        ReportProjectExporter.WriteHtml(prepared, path);
+        var hidden = ReadHtmlPayload(HtmlReportWriter.PathForReport(path));
+        Check("HTML export passes saved section choices and removes their private fields", hidden.Title == null && hidden.Authors == null
+            && hidden.Composition.Families.Count == 0 && hidden.Fields.Count == 0);
+        ReportProjectExporter.WriteHtml(prepared, path, new());
+        var included = ReadHtmlPayload(HtmlReportWriter.PathForReport(path));
+        Check("HTML export passes the explicit draft choice ahead of the saved choice", included.Title != null && included.Composition.Families.Count == 2);
+        byte[] original = File.ReadAllBytes(HtmlReportWriter.PathForReport(path));
+        ReportProjectExporter.WriteHtml(prepared, path, new());
+        Check("HTML export repeats identical bytes for the same prepared project", original.SequenceEqual(File.ReadAllBytes(HtmlReportWriter.PathForReport(path))));
+
+        EnsureApplication();
+        var (manifest, project, _) = ReportStudyFigureFixture();
+        project.FamilyPanel = null; project.PanelProteinAssignments = null; project.ProteinSubclassLabels = null;
+        var rows = SyntheticAnalyticsRows();
+        var families = FamilyFixture(3);
+        project.ReportThreshold = 0;
+        var listed = ReportProjectExporter.Build(rows, manifest, project, Path.Combine(output, "listed"), familyResults: families);
+        Check("HTML production export carries the prepared stored-study composition context", listed.HtmlContext.StoredStudies?.FamilyRunShares != null
+            && !listed.HtmlContext.UsesPanel && listed.HtmlContext.IsIdentity);
+        var listedPayload = HtmlReportPayloadBuilder.Build(listed.Document, listed.SupplementSheets, context: listed.HtmlContext);
+        project.ReportThreshold = 1;
+        var folded = ReportProjectExporter.Build(rows, manifest, project, Path.Combine(output, "folded"), familyResults: families);
+        var foldedPayload = HtmlReportPayloadBuilder.Build(folded.Document, folded.SupplementSheets, context: folded.HtmlContext);
+        Check("HTML uses the updated native Others threshold without a second membership rule",
+            listedPayload.Composition.Families.Count > foldedPayload.Composition.Families.Count
+            && foldedPayload.Composition.Families.Count == 1 && foldedPayload.Composition.Families[0].IsOthers);
+        manifest.FamilyRunShares!.Policy = SharedPeptidePolicy.CountInEveryFamily;
+        manifest.FamilySubclassParts!.Policy = SharedPeptidePolicy.CountInEveryFamily;
+        var overlap = ReportProjectExporter.Build(rows, manifest, project, Path.Combine(output, "overlap"), familyResults: families);
+        Check("HTML production context preserves the nonadditive shared-peptide policy", !overlap.HtmlContext.IsAdditive);
     }
 
     private static void HtmlReportPublicationTests(string output)
