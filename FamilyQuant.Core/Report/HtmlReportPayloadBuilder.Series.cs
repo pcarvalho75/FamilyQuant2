@@ -70,7 +70,7 @@ public static partial class HtmlReportPayloadBuilder
                     {
                         int run = Column(frame, "run"); if (run < 0) continue;
                         var stored = summary?.Runs.SingleOrDefault(r => r.Run == frame.Table.Rows[row][run]);
-                        string name = Cell(frame, row, run);
+                        string name = RunField(frame, row, run);
                         runs.Add(new(name,
                             NativeCell(frame, row, "assigned_signal_pct", "%", fractionColumn: "assigned_signal_fraction", stored: stored?.ShareOfAssignedSignal * 100),
                             NativeCell(frame, row, "measured_peptide_signal_pct", "%", fractionColumn: "measured_peptide_signal_fraction", stored: stored?.ShareOfMeasuredSignal * 100)));

@@ -71,7 +71,7 @@ public static partial class HtmlReportPayloadBuilder
                         int col = totals == null ? -1 : Column(totals, "run", "Run");
                         if (totals != null && col >= 0)
                             for (int r = 0; r < totals.Table.Rows.Count; r++)
-                                if (totals.Table.Rows[r][col] == run.Run) { name = Cell(totals, r, col); break; }
+                                if (totals.Table.Rows[r][col] == run.Run) { name = RunField(totals, r, col); break; }
                     }
                     if (name != null) result.Add(new(name, share));
                     break;
@@ -95,7 +95,7 @@ public static partial class HtmlReportPayloadBuilder
                 string text = frame.Table.Rows[row][fraction];
                 if (!double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out double value) || !double.IsFinite(value)) continue;
                 string field = Add(text, frame.Reference(row, fraction), "fraction", value);
-                AddShort(field, 100 * value, frame.Reference(row, fraction) with { Scale = 100 }, "%");
+                AddShort(field, value, frame.Reference(row, fraction), "fraction");
                 result.Add(new(Cell(frame, row, name), field));
             }
             return result;

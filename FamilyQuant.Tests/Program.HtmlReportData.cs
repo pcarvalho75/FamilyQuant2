@@ -65,6 +65,23 @@ internal static partial class Program
             HtmlReportPayloadBuilder.Build(bad.Document, Array.Empty<ReportSupplementSheet>(), context: bad.Context)));
         HtmlReportSeriesTests();
         HtmlReportSummaryTests();
+        HtmlRunLabelTests();
+    }
+
+    private static void HtmlRunLabelTests()
+    {
+        var fixture = HtmlDataFixture();
+        string[] names = { "acquisition_240min_01", "acquisition_240min_02", "acquisition_240min_03" };
+        fixture.Context.StoredStudies!.FamilyRunShares!.Runs.AddRange(names.Select(name => new FamilyRunTotal { Run = name }));
+        var table = new ReportTable("family-run-shares", "Runs", new[] { "family_user_id", "run", "assigned_signal_pct" },
+            names.Select(name => (IReadOnlyList<string>)new[] { "7", name, "38.5988" }).ToArray(), "");
+        var model = HtmlReportPayloadBuilder.Build(fixture.Document,
+            new[] { new ReportSupplementSheet(table.Id, ReportSectionIds.Results, "Run names", table) }, context: fixture.Context);
+        var labels = model.Composition.Families[0].Runs.Select(run => model.Fields[run.Name]).ToArray();
+        Check("HTML run labels use shortest distinct endings while preserving full pop-up names", labels.Select(f => f.Text).SequenceEqual(names)
+            && labels.Select(f => model.Fields[f.Short!].Text).SequenceEqual(new[] { "01", "02", "03" }));
+        Check("HTML short run names are source-bound labels rather than new numeric results", labels.All(f => model.Fields[f.Short!].Value == null
+            && model.Fields[f.Short!].Source is { Kind: "workbook-cell", Sheet: "Run names", Format: "run-suffix" }));
     }
 
     private static void HtmlReportSummaryTests()
@@ -77,7 +94,7 @@ internal static partial class Program
         var totals = new ReportTable("family-run-totals", "Totals", new[] { "run", "assigned_family_signal", "measured_peptide_signal" },
             new IReadOnlyList<string>[] { new[] { "run-a", "83.8674", "100" } }, "");
         var gap = new ReportTable("database-gap-table", "Database gap", new[] { "Family or global row", "Fraction of measured signal" },
-            new IReadOnlyList<string>[] { new[] { "Cedar", "0.125" } }, "");
+            new IReadOnlyList<string>[] { new[] { "Cedar", "0.123456789" } }, "");
         var document = fixture.Document with { Sections = fixture.Document.Sections.Concat(new[]
         {
             new ReportSection(ReportSectionIds.Findings, "Summary of findings", new ReportBlock[] { new ReportParagraph(findings.Id, "Companion data") }),
@@ -91,8 +108,8 @@ internal static partial class Program
         Check("HTML credited share uses the existing per-run report statistic", model.CreditedRuns.Count == 1
             && model.Fields[model.CreditedRuns[0].Share].Text == "83.8674");
         var fraction = model.Fields[model.DatabaseGap[0].Fraction];
-        Check("HTML gap exact fraction and short percentage retain the explicit display scale", fraction.Text == "0.125" && fraction.Short != null
-            && model.Fields[fraction.Short].Text == "12.5" && model.Fields[fraction.Short].Unit == "%" && model.Fields[fraction.Short].Source.Scale == 100);
+        Check("HTML gap short label keeps the Word fraction unit and exact value for pop-ups", fraction.Text == "0.123456789" && fraction.Short != null
+            && model.Fields[fraction.Short].Text == "0.123" && model.Fields[fraction.Short].Unit == "fraction" && model.Fields[fraction.Short].Source.Scale == 1);
         Check("D47 HTML producer emits no methods or quality prose", model.Methods.Count == 0 && model.Quality.Count == 0 && model.Interpretation == null);
         var repeated = document with { Sections = document.Sections.Select(s => s.Id == ReportSectionIds.Results
             ? s with { Blocks = s.Blocks.Concat(new ReportBlock[] { new ReportParagraph("first", "Observed 14 units."), new ReportParagraph("second", "Observed 14 units.") }).ToArray() } : s).ToArray() };
