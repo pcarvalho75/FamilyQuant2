@@ -616,4 +616,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | M6f | README screenshots: the Export report dialog with descriptive figure titles from a synthetic project, every image in dark mode | L | 0.2 | 🟢 | M6g | All images dark, synthetic, under 300 KB | T2 | | 0 | 0 | |
 | M6g | Check and push the M6f screenshots | L | 0.1 | M6f |  | FQReview3 approves; desk pushes; live page looked at | Orchestrator | | 0 | 0 | |
 | M8a | Final traced export of Ana's copied project on master 6ad3856 (dot plot included): guarded, cache hits only, trace, screenshots | L | 0.2 | 🟢 | M4c | READY M1 with 0 NOT FOUND and unchanged inputs | RS | | 0 | 0 | |
+| M4c | The 2.1.2 package from master and its real-menu export of a copy of Ana's project (K21 runner) | L | 0.2 | 🟢 | M4d | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
+| M4d | v2.1.2 published on FamilyQuant2-releases with the zip, its .sha256 and the notes | L | 0.1 | M4c | M4e, M5b | Release page live and Latest; downloaded zip hash equals M4c | Orchestrator | | 0 | 0 | |
+| M5b | Stage the files Paulo can send Ana: the final report.html of her project and the updated READ-ME with the 2.1.2 link and SHA (outside her folder) | L | 0.1 | 🟢 |  | D:/FamilyQuant-data/out-desk/M5-for-Ana holds both with SHA256 | Orchestrator | | 0 | 0 | |
 
