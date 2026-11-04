@@ -670,4 +670,12 @@ Paulo agreed these at the restart, 2026-11-01.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | G4c | README for 2.1.4: what's new, the dot plot paragraph with database entries, the new synthetic dark screenshot; reads 2.1.4 throughout. Text now, image after G2b | L | 0.3 | 🟢 | G4d | Synthetic data only; links to releases/latest | T2 | | 0 | 0 | |
 | G4d | Review of the README (G4c) | L | 0.1 | G4c, G2b | G4e | APPROVED | GR3 | | 0 | 0 | |
+| G4a | The 2.1.4 Setup.exe and zip, each with its SHA256, from the gate commit | L | 0.2 | 🟢 | G4b, G5a | Setup.exe in test mode extracts and the app reports 2.1.4.0 | AS | | 0 | 0 | |
+| G4b | Package check before publishing: every file equal to the build; EXE and DLL versions 2.1.4.0 | L | 0.2 | G4a | G4e | PASS | EV | | 0 | 0 | |
+
+### W5 Ana's page
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| G5a | Ana's page with the new axis: export with the 2.1.4 build from a copy of her project outside her folder, traced; staged in `D:/FamilyQuant-data/out-desk/G5-for-Ana` with a READ-ME for 2.1.4 | L | 0.3 | G4a | G5b | Trace 0 NOT FOUND; her Word and supplement numbers equal the delivered ones; SHA256SUMS written | EV | | 0 | 0 | |
 

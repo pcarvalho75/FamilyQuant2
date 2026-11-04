@@ -82,17 +82,14 @@ Published when every check is green, like 2.1.2 and 2.1.3 (D56).
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G4a | The 2.1.4 Setup.exe and zip, each with its SHA256, from the gate commit | L | 0.2 | 🟢 | G4b, G5a | Setup.exe in test mode extracts and the app reports 2.1.4.0 | AS | | 0 | 0 | |
-| G4b | Package check before publishing: every file equal to the build; EXE and DLL versions 2.1.4.0 | L | 0.2 | G4a | G4e | PASS | EV | | 0 | 0 | |
-| G4e | v2.1.4 published as Latest with the Setup.exe, the zip and their .sha256 files; README pushed | L | 0.2 | G4b | G4f, G5b | Downloaded assets match their SHA256; README live and read | Orchestrator | | 0 | 0 | |
+| G4e | v2.1.4 published as Latest with the Setup.exe, the zip and their .sha256 files; README pushed | L | 0.2 | 🟢 | G4f, G5b | Downloaded assets match their SHA256; README live and read | Orchestrator | | 0 | 0 | |
 | G4f | Update check on the public files: an installed 2.1.3 (test root) shows the banner for 2.1.4 and Install update runs the Setup in test mode | L | 0.3 | G4e | | PASS on every stage | EV | | 0 | 0 | |
 
 ### W5 Ana's page
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G5a | Ana's page with the new axis: export with the 2.1.4 build from a copy of her project outside her folder, traced; staged in `D:/FamilyQuant-data/out-desk/G5-for-Ana` with a READ-ME for 2.1.4 | L | 0.3 | G4a | G5b | Trace 0 NOT FOUND; her Word and supplement numbers equal the delivered ones; SHA256SUMS written | EV | | 0 | 0 | |
-| G5b | Deliver report.html and the READ-ME into her Relatorio folder (Paulo's word given, D57) | L | 0.1 | G5a, G4e | | Delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
+| G5b | Deliver report.html and the READ-ME into her Relatorio folder (Paulo's word given, D57) | L | 0.1 | G4e | | Delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
 
 ## Critical path
 
