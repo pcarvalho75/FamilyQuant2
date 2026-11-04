@@ -33,13 +33,7 @@ internal static partial class Program
         using var log = new StreamWriter(stage.PathFor("stored-export.log"), false, new UTF8Encoding(false)) { AutoFlush = true };
         var gate = new object();
         void Log(string text) { lock (gate) { log.WriteLine(text); Console.WriteLine(text); } }
-        var operation = new OperationContext(progress: new HtmlProofProgress(p =>
-        {
-            Log(p.Stage + ": " + p.Message);
-            if (p.Message.Contains("cache miss", StringComparison.OrdinalIgnoreCase)
-                || p.Stage == "attribution-cache" && p.Message.StartsWith("Searching", StringComparison.Ordinal))
-                throw new OperationCanceledException("Stored-only proof stopped before a cache-miss search. No Compute is authorized.");
-        }));
+        var operation = HtmlStoredOnlyOperation(Log);
         try
         {
             var (curation, rows, manifest) = ProjectStore.ReadFqproj(project);
@@ -48,7 +42,8 @@ internal static partial class Program
             var hits = CurationHomologyCache.GetOrSearch(rows, curation, options: HomologyDefaults.ForStoredMapping(manifest.FamilyMapping),
                 progress: hit => { Log("primary retained-hit cache " + (hit ? "hit" : "miss"));
                     if (!hit) throw new OperationCanceledException("Stored-only proof stopped before a primary cache-miss search. No Compute is authorized."); });
-            var families = FamilyEnvelopeQuant.BuildFromAttribution(rows, FamilyEnvelopeQuant.AttributeHits(hits, curation), operation);
+            string censusCache = Path.Combine(ApplicationPaths.LocalDataDirectory, FullXicComputer.CacheFolderName, "source-census");
+            var families = HtmlStoredCensusFamilies(rows, FamilyEnvelopeQuant.AttributeHits(hits, curation), operation, censusCache);
             EnsureApplication();
             ReportProjectExport? prepared = null;
             AppOperationFiles.RunSta(() => prepared = ReportProjectExporter.Build(rows, manifest, curation,
@@ -113,5 +108,28 @@ internal static partial class Program
             new JsonSerializerOptions { NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals });
         stream.FlushFinalBlock();
         return Convert.ToHexString(hash.Hash!);
+    }
+
+    private static OperationContext HtmlStoredOnlyOperation(Action<string>? log = null, Action<OperationProgress>? observe = null)
+        => new(progress: new HtmlProofProgress(p =>
+        {
+            observe?.Invoke(p); log?.Invoke(p.Stage + ": " + p.Message);
+            if (p.Message.Contains("cache miss", StringComparison.OrdinalIgnoreCase)
+                || p.Stage == "attribution-cache" && p.Message.StartsWith("Searching", StringComparison.Ordinal))
+                throw new OperationCanceledException("Stored-only proof stopped before a cache-miss search. No Compute is authorized.");
+            if (p.Stage is "report-census-identified-start" or "report-census-denovo-start"
+                && !p.Message.EndsWith("cached", StringComparison.Ordinal))
+                throw new OperationCanceledException("Stored-only proof stopped before an uncached census search-start phase.");
+        }));
+
+    private static FamilyEnvelopeQuantResult HtmlStoredCensusFamilies(IReadOnlyList<QuantRow> rows,
+        PeptideFamilyAttribution attribution, OperationContext operation, string censusCache)
+    {
+        if (string.IsNullOrWhiteSpace(censusCache) || !Path.IsPathFullyQualified(censusCache) || !Directory.Exists(censusCache))
+            throw new OperationCanceledException("The explicit stored source-census cache directory is absent. No search is authorized.");
+        // Four arguments deliberately select the independently keyed cached census path. A missing,
+        // stale or corrupt entry reports its miss before invoking the search delegate, which the
+        // synchronous operation guard refuses. The three-argument uncached overload is forbidden.
+        return FamilyEnvelopeQuant.BuildFromAttribution(rows, attribution, operation, censusCache);
     }
 }
