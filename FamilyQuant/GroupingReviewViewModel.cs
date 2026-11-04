@@ -20,7 +20,7 @@ namespace FamilyQuant
         private int generation;
         private readonly Func<string, EvidenceReviewInput>? propose;
         private readonly Func<string, string>? motif;
-        private readonly Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask;
+        private readonly Func<IProgress<FetchProgress>?, CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask;
         private readonly Func<IReadOnlyList<PanelFamilyLinkSelection>, EvidenceReviewInput>? confirmPanelLinks;
         private CancellationTokenSource? discoveryCancellation;
         public EvidenceTaskScopeInput? TaskScope { get; private set; }
@@ -49,17 +49,20 @@ namespace FamilyQuant
             Func<string, EvidenceReviewInput>? propose = null, Func<string, string>? motif = null,
             string initialScope = "", bool evidenceMode = false,
             Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask = null,
-            Func<IReadOnlyList<PanelFamilyLinkSelection>, EvidenceReviewInput>? confirmPanelLinks = null)
+            Func<IReadOnlyList<PanelFamilyLinkSelection>, EvidenceReviewInput>? confirmPanelLinks = null,
+            Func<IProgress<FetchProgress>?, CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTaskWithProgress = null)
         {
             Keyword = new KeywordReviewViewModel(keyword); this.propose = propose; this.motif = motif;
-            this.discoverTask = discoverTask;
+            this.discoverTask = discoverTaskWithProgress ?? (discoverTask == null ? null : (_, token) => discoverTask(token));
             this.confirmPanelLinks = confirmPanelLinks;
             scopeText = initialScope; proposalScope = initialScope;
             Keyword.PropertyChanged += (_, _) => NotifySummary();
             SetEvidence(input);
             modeIndex = input != null || evidenceMode ? 1 : 0;
         }
-        public async Task DiscoverTaskAsync()
+        public Task DiscoverTaskAsync() => DiscoverTaskAsync(null);
+
+        public async Task DiscoverTaskAsync(IProgress<FetchProgress>? progress)
         {
             if (!CanDiscoverTask) return;
             int request = ++generation;
@@ -68,7 +71,7 @@ namespace FamilyQuant
             IsBusy = true; Status = "Reading the database taxonomy, reviewed keywords and tissue annotations...";
             try
             {
-                var facts = await discoverTask!(cancellation.Token);
+                var facts = await discoverTask!(progress, cancellation.Token);
                 if (request != generation || cancellation.IsCancellationRequested) return;
                 TaskScope = facts; Changed(nameof(TaskScope)); Changed(nameof(HasTaskScope));
                 TaskScopeExpanded = true;

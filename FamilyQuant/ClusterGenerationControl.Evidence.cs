@@ -91,7 +91,8 @@ public partial class ClusterGenerationControl
         Window? owner = Window.GetWindow(this);
         if (owner == null) return false;
         var window = new SuperClusterPreviewWindow(preview, null, session.Propose, session.CountMotif,
-            evidenceMode: startWithEvidence, discoverTask: session.DiscoverTaskAsync, confirmPanelLinks: session.ConfirmPanelLinks) { Owner = owner };
+            evidenceMode: startWithEvidence, confirmPanelLinks: session.ConfirmPanelLinks,
+            discoverTaskWithProgress: session.DiscoverTaskAsync) { Owner = owner };
         window.ShowDialog();
         if (!window.Confirmed) return false;
         if (!window.IsEvidenceMode) return true;

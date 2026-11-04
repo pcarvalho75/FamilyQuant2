@@ -22,7 +22,7 @@ public sealed class EvidenceGroupingSession
     private FamilyPanel? reviewPanel;
     private string lastScope = "";
     private readonly Func<IReadOnlyList<FastaItemExtended>, IReadOnlyList<NeighbourReference>, NeighbourSearch> search;
-    private readonly Func<FamilyClusterFile, CancellationToken, Task<EvidenceTaskProposal>> discoverTask;
+    private readonly Func<FamilyClusterFile, CancellationToken, Task<EvidenceTaskProposal>>? discoverTask;
     private EvidenceTaskProposal? taskProposal;
     private EvidenceTaskChoice? confirmedTask;
     public EvidenceProposal? Proposal { get; private set; }
@@ -42,13 +42,18 @@ public sealed class EvidenceGroupingSession
         sourcePanel = JsonSerializer.Serialize(file.FamilyPanel);
         reviewPanel = file.FamilyPanel == null ? null : FamilyPanelValidation.Clone(file.FamilyPanel);
         this.search = search ?? ((queries, references) => NearestReviewed.Search(queries, references));
-        this.discoverTask = discoverTask ?? ((source, token) => EvidenceTaskDiscovery.DiscoverAsync(source, cancellationToken: token));
+        this.discoverTask = discoverTask;
     }
 
-    public async Task<EvidenceTaskScopeInput> DiscoverTaskAsync(CancellationToken cancellationToken = default)
+    public Task<EvidenceTaskScopeInput> DiscoverTaskAsync(CancellationToken cancellationToken = default) =>
+        DiscoverTaskAsync(null, cancellationToken);
+
+    public async Task<EvidenceTaskScopeInput> DiscoverTaskAsync(IProgress<FetchProgress>? progress, CancellationToken cancellationToken = default)
     {
         EnsureCurrent();
-        var task = await discoverTask(file, cancellationToken).ConfigureAwait(false);
+        var task = discoverTask == null
+            ? await EvidenceTaskDiscovery.DiscoverAsync(file, progress: progress, cancellationToken: cancellationToken).ConfigureAwait(false)
+            : await discoverTask(file, cancellationToken).ConfigureAwait(false);
         cancellationToken.ThrowIfCancellationRequested();
         EnsureCurrent();
         taskProposal = task;
