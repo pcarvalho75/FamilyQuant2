@@ -69,7 +69,6 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| U4f | Update check on the public files: an installed 2.1.4 (test root) shows the banner for 2.1.5 and Install update runs the Setup in test mode | L | 0.3 | 🟢 | | PASS on every stage | RL | | 0 | 0 | |
 
 ## Critical path
 
