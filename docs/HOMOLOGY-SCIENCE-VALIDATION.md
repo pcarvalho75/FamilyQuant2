@@ -14,6 +14,14 @@ de novo curation, residual-world and leave-species-out known-answer searches.
 
 Quantitation is reused from
 `j38-measure-01/discotech-clean10-after/search-after-10/computed.fqproj`.
+This is the **earlier J38 study curation**, membership
+`42A6AE21B65347249B2F9711EE759B2A87EDF297472E2A1C6355DBB707C21E71`:
+metalloprotease UserID 40421, mean assigned share 39.142608%. It is a different
+cohort from Ana's delivered curation, membership
+`D31CFBBFC32AB7D3262EBD442FDCC44CDE38D13C468719A0A74C5ED754355A2C`,
+UserID 40425, mean assigned share 38.598758%. The different working memberships
+change unique-family credit and its denominator. The historical J47b table's
+share changes must not be quoted as her delivered-project headline.
 Its SHA256 is `4F913079F0568C528B8BE42E4DF748E69FEBE67E23DA34E91709F36889AF670B`.
 The native study checks that the input project remains unchanged. It uses the
 J28 compact-cache codec/hot path and J38c prepared-peptide attribution, then the
@@ -82,3 +90,18 @@ all numerical rows, denominators, original runtime sources and native J43 shares
 Desk M135 moved the tag measurement and weighted-seed validation to J47c. That
 measurement is still running under its existing guard. J47b is a result for
 review, not a science approval or a choice of production defaults.
+
+The actual delivered-curation score-tier row is the ONE full Compute validated
+for J47d, commit `c98070333ef4472aac0f6d6396f5fdc5ec97ead8`:
+`D:/FamilyQuant-data/out-assay/j47d-01/actual-proof-01/before-after.md` and
+`validation.json`. Its whole native family-share object exactly equals the
+certified-hit rejoin onto that delivered curation. Metalloprotease changes from
+38.598758% to 38.504225%, rather than the historical J38 row. Opening the delivered
+project on master preserves its original headline; new score-tier credit applies
+on explicit Compute. These distinct cohorts and the actual J47d row are retained
+for the 2.1.1 notes.
+
+For a labelled historical table, add `--reference-project <delivered-project-copy>`
+after the comparer arguments. Both generated tables then print each project's
+native membership SHA, leading-family UserID and assigned mean from its stored
+results; the wording is not a numerical constant substituted into the output.
