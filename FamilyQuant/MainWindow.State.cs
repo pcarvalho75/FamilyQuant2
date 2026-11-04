@@ -26,6 +26,9 @@ public sealed class ShellSessionState
         else if (string.Equals(LastResultProject, full, StringComparison.OrdinalIgnoreCase)) LastResultProject = null;
     }
 
+    public bool RemoveRecentProject(string path) =>
+        RecentProjects.RemoveAll(p => string.Equals(p, path, StringComparison.OrdinalIgnoreCase)) > 0;
+
     public static ShellSessionState Load(string path)
     {
         try
@@ -86,6 +89,15 @@ public partial class MainWindow
         RefreshRecentMenu();
         home?.SetRecentProjects(shellState.RecentProjects);
         home?.SetLastResult(shellState.LastResultProject, loadedQuant.Count > 0);
+    }
+
+    private void RemoveRecentProject(string path)
+    {
+        if (!shellState.RemoveRecentProject(path)) return;
+        string? error = persistShellSettings ? shellState.Save(shellSettingsPath) : null;
+        RefreshRecentMenu();
+        home?.SetRecentProjects(shellState.RecentProjects);
+        if (error != null) StatusModel.ShowMessage(error);
     }
 
     private async void ShowLastResult()

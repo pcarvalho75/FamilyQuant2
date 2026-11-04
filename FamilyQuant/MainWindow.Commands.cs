@@ -90,16 +90,25 @@ public partial class MainWindow
     private void RefreshRecentMenu()
     {
         MenuItemRecent.Items.Clear();
-        foreach (string path in shellState.RecentProjects)
+        foreach (string path in shellState.RecentProjects.Where(File.Exists))
         {
-            bool exists = File.Exists(path);
             var item = new MenuItem
             {
-                Header = Path.GetFileName(path).Replace("_", "__"), IsEnabled = exists,
-                ToolTip = exists ? "Opens this recent project: " + path : "This file is unavailable. Last path: " + path,
+                Header = Path.GetFileName(path).Replace("_", "__"),
+                ToolTip = "Opens this recent project: " + path,
                 Tag = path
             };
             item.Click += async (_, _) => await OpenProjectSafelyAsync(path);
+            var remove = new MenuItem { Header = "Remove from recent projects", InputGestureText = "Delete",
+                ToolTip = "Removes this entry from the saved list and keeps the file." };
+            remove.Click += (_, e) => { e.Handled = true; RemoveRecentProject(path); };
+            item.ContextMenu = new ContextMenu { Items = { remove } };
+            item.PreviewKeyDown += (_, e) =>
+            {
+                if (e.Key != Key.Delete || Keyboard.Modifiers != ModifierKeys.None) return;
+                e.Handled = true;
+                RemoveRecentProject(path);
+            };
             MenuItemRecent.Items.Add(item);
         }
         if (MenuItemRecent.Items.Count == 0)
