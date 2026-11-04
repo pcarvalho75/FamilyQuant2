@@ -80,9 +80,7 @@ What a family's database entries are is ruled in D55; G1a checks the ruling agai
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | G3a | Review of the count (G1b): the rule against D55 and the code | M | 0.2 | G1b | G3d | APPROVED, or fixes by the owner checked by another reviewer | GR | | 0 | 0 | |
 | G3b | Review of the payload, trace and page defaults (G1c, G1d, G2a) | M | 0.2 | G1d, G2a | G3d | APPROVED, or fixes by the owner checked by another reviewer | GR2 | | 0 | 0 | |
-| G3c | Version 2.1.4 in all three places and the release notes: the database-entries axis, shown for old projects with no Compute | L | 0.2 | 🟢 | G3e | Versions read 2.1.4.0; notes claim only what landed | AS | | 0 | 0 | |
-| G3e | Review of the version and notes (G3c) | L | 0.1 | G3c | G3d | APPROVED | GR3 | | 0 | 0 | |
-| G3d | Full gate on the integrated 2.1.4 commit: ledger refresh and the full suite | M | 0.4 | G1e, G2b, G3a, G3b, G3e | G4a | Every ledger row proved; full suite green | Orchestrator | | 0 | 0 | |
+| G3d | Full gate on the integrated 2.1.4 commit: ledger refresh and the full suite | M | 0.4 | G1e, G2b, G3a, G3b | G4a | Every ledger row proved; full suite green | Orchestrator | | 0 | 0 | |
 
 ### W4 Release 2.1.4
 

@@ -648,3 +648,10 @@ Paulo agreed these at the restart, 2026-11-01.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | G1a | Science check of ruling D55: read the curation code and confirm that UserID is the family assignment of a database entry, that decoys and contaminants are left out, that a panel family takes the distinct union of its member families, and that Others is not plotted | L | 0.2 | 🟢 | G1b | APPROVED, or a corrected rule the desk adopts before G1b merges | GR | | 0 | 0 | |
 
+### W3 Reviews and the gate
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| G3c | Version 2.1.4 in all three places and the release notes: the database-entries axis, shown for old projects with no Compute | L | 0.2 | 🟢 | G3e | Versions read 2.1.4.0; notes claim only what landed | AS | | 0 | 0 | |
+| G3e | Review of the version and notes (G3c) | L | 0.1 | G3c | G3d | APPROVED | GR3 | | 0 | 0 | |
+
