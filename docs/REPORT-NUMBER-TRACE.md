@@ -72,4 +72,7 @@ zero-based occurrence among identical paragraphs locate `word-text` references i
 Coverage endpoints and sequence lengths must equal the stored values; fallback PNG bytes
 must equal the corresponding Word figure. Missing IDs, invalid references and mismatched
 text or geometry produce `NOT FOUND` and exit code 1. No input package is rewritten.
+Run-name short fields use `run-suffix`: their value stays null, their source must equal the
+full-name source, and their text must be its suffix. Leading zeros remain text. Database gap
+short labels use G3 while retaining the native fraction unit and scale.
 `--test-html-number-trace` runs positive and negative fixtures and is enrolled in the suite.

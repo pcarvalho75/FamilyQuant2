@@ -41,7 +41,8 @@ internal static partial class Program
             { table, new ReportParagraph("note1", paragraph), new ReportParagraph("note2", paragraph), nativeFigure }) } };
         WordReportWriter.Write(word, doc);
         ReportSupplementWorkbook.Write(book, doc, new[] { new ReportSupplementSheet("native", ReportSectionIds.Results, "Data",
-            new ReportTable("native-values", "Native", new[] { "Name", "Fraction" }, new IReadOnlyList<string>[] { new[] { "run1", "0.125" } }, "Native")) });
+            new ReportTable("native-values", "Native", new[] { "Name", "Fraction" }, new IReadOnlyList<string>[]
+            { new[] { "acquisition_01", "0.125" }, new[] { "acquisition_01", "0.25" } }, "Native")) });
         var project = new FamilyClusterFile { MyExtendedFastaItems = new() { new() { SequenceIdentifier = "protein1", Sequence = "ACDEFG", UserID = 7 } } };
         var manifest = new QuantManifest { FamilyRunShares = new FamilyRunSharesResult { Families = new()
         { new() { FamilyUserId = 7, MeanShare = stored } } } };
@@ -59,13 +60,18 @@ internal static partial class Program
                 new() { Kind = "stored-value", Property = "/manifest/FamilyRunShares/Families/0/MeanShare", Format = "G3", Scale = 100 }),
             ["hover"] = new("12.5", 12.5, "%", new() { Kind = "workbook-cell", Sheet = "Data", Row = 2, Column = 2, Scale = 100, Format = "G6" }),
             ["paragraph"] = new("0.1%", null, "%", new() { Kind = "word-text", ParagraphText = paragraph, Occurrence = 1 }),
+            ["runName"] = new("acquisition_01", null, "", new() { Kind = "workbook-cell", Sheet = "Data", Row = 2, Column = 1 }) { Short = "runSuffix" },
+            ["runSuffix"] = new("01", null, "", new() { Kind = "workbook-cell", Sheet = "Data", Row = 2, Column = 1, Format = "run-suffix" }),
+            ["gap"] = new("0.125", .125, "fraction", new() { Kind = "workbook-cell", Sheet = "Data", Row = 2, Column = 2 }) { Short = "gapShort" },
+            ["gapShort"] = new("0.125", .125, "fraction", new() { Kind = "workbook-cell", Sheet = "Data", Row = 2, Column = 2, Format = "G3" }),
         };
         string Add(string text, HtmlReportReference source, string unit, double? value)
         { string key = "coverage" + fields.Count; fields.Add(key, new(text, value, unit, source)); return key; }
         var coverage = HtmlReportCoverageBuilder.Build(doc, project, manifest, new[] { 7 }, Add).Single();
         var family = new HtmlReportFamily { Id = "7", Name = "name", Mean = "exact", Coverage = new[] { coverage } };
         var payload = new HtmlReportPayload { Title = "title", Authors = "author", Fields = fields,
-            Composition = new() { Families = new[] { family } } };
+            Composition = new() { Families = new[] { family with { Runs = new[] { new HtmlFamilyRun("runName", "hover", null) } } } },
+            DatabaseGap = new[] { new HtmlGapRow("name", "gap") } };
         string beforeWord = FileFingerprint.Sha256(word), beforeBook = FileFingerprint.Sha256(book);
         int Run(HtmlReportPayload? other = null) => ReportNumberTrace.RunHtmlBindings(other ?? payload, word, book, project, manifest, output);
         Check("M1m exact Word/workbook/stored/short bindings have zero NOT FOUND", Run() == 0 && !File.ReadAllText(output).Contains("NOT FOUND", StringComparison.Ordinal));
@@ -102,6 +108,15 @@ internal static partial class Program
         bool projectRefused = false;
         try { ReportNumberTrace.RunHtml(html, root, projectPath, projectPath); } catch (IOException) { projectRefused = true; }
         Check("M1m trace refuses its source project as output before reading or writing it", projectRefused && !File.Exists(projectPath));
+        old = fields["runSuffix"]; fields["runSuffix"] = old with { Text = "02" };
+        Check("M157 rejects a short run label that is not a suffix", Run() == 1); fields["runSuffix"] = old;
+        fields["runSuffix"] = old with { Value = 1 };
+        Check("M157 treats a leading-zero run suffix as text, never as a numeric value", Run() == 1); fields["runSuffix"] = old;
+        fields["runSuffix"] = old with { Source = old.Source with { Row = 3 } };
+        Check("M157 suffix and full name share the exact source even when another cell is equal", Run() == 1); fields["runSuffix"] = old;
+        old = fields["gapShort"]; fields["gapShort"] = old with { Text = "12.5", Value = 12.5, Unit = "%", Source = old.Source with { Scale = 100 } };
+        Check("M157 gap short labels retain the native fraction unit and scale", Run() == 1); fields["gapShort"] = old;
+        Check("M157 valid leading-zero suffix and same-unit gap label trace with zero missing", Run() == 0);
         Check("M1m trace does not rewrite either source package", beforeWord == FileFingerprint.Sha256(word) && beforeBook == FileFingerprint.Sha256(book));
     }
 }

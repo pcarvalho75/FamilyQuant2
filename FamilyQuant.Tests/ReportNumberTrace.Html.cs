@@ -121,6 +121,13 @@ internal static partial class ReportNumberTrace
             {
                 if (!bindings.TryGetValue(field.Short, out var shortBound) || payload.Fields[field.Short].Short != null)
                     errors[pair.Key] = "Short field missing, invalid or cyclic.";
+                else if (payload.Fields[field.Short].Source.Format == "run-suffix")
+                {
+                    var label = payload.Fields[field.Short];
+                    if (field.Value.HasValue || label.Value.HasValue || (field.Source with { Format = null }) != (label.Source with { Format = null })
+                        || !N(field.Text).EndsWith(N(label.Text), StringComparison.Ordinal))
+                        errors[pair.Key] = "Short run label must be a text suffix bound to the same full-name source.";
+                }
                 else if (payload.Fields[field.Short].Source.Format != "G3" || !shortBound.Number.HasValue)
                     errors[pair.Key] = "Short label must be the program's G3 formatting of a numeric source.";
                 else if (field.Value.HasValue && field.Value != shortBound.Number && field.Value != bound.Number)
@@ -131,6 +138,12 @@ internal static partial class ReportNumberTrace
         }
         foreach (var (location, id) in FieldReferences(payload))
             if (!payload.Fields.ContainsKey(id)) errors[location] = "Missing field ID: " + id;
+        foreach (var gap in payload.DatabaseGap)
+            if (payload.Fields.TryGetValue(gap.Fraction, out var fraction)
+                && (fraction.Unit != "fraction" || fraction.Source.Scale != 1 || fraction.Short == null
+                    || !payload.Fields.TryGetValue(fraction.Short, out var compact) || compact.Unit != "fraction"
+                    || compact.Source.Scale != 1 || compact.Source.Format != "G3"))
+                errors[gap.Fraction] = "Database gap short label must retain the native fraction unit and scale.";
         foreach (var family in payload.Composition.Families)
             foreach (var coverage in family.Coverage)
             {
@@ -146,7 +159,7 @@ internal static partial class ReportNumberTrace
             {
                 bool found = !errors.TryGetValue(pair.Key, out string? reason);
                 var bound = bindings.GetValueOrDefault(pair.Key);
-                var tokens = Tokens.Matches(pair.Value.Text).Cast<Match>().ToArray();
+                var tokens = pair.Value.Source.Format == "run-suffix" ? Array.Empty<Match>() : Tokens.Matches(pair.Value.Text).Cast<Match>().ToArray();
                 var values = tokens.Length == 0 ? new[] { pair.Value.Text } : tokens.Select(m => m.Value);
                 foreach (string value in values) Write(new[] { "html field " + pair.Key, value, found ? "MATCH" : "NOT FOUND", bound?.Source ?? "", bound?.Cell ?? "",
                     found ? "explicit " + pair.Value.Source.Kind + (pair.Value.Source.Format == null ? "" : " format " + pair.Value.Source.Format) : reason!, pair.Value.Text, pair.Key, found ? "1" : "0" });
@@ -231,6 +244,13 @@ internal static partial class ReportNumberTrace
                     if (ordinal < 0 || ordinal >= equal.Length || !equal[ordinal].Contains(field.Text, StringComparison.Ordinal)) throw new InvalidDataException("Exact Word paragraph/ordinal field not found.");
                     text = field.Text; address = "paragraph occurrence " + ordinal; break;
                 default: throw new InvalidDataException("Unknown HTML source kind: " + source.Kind);
+            }
+            if (source.Format == "run-suffix")
+            {
+                if (source.Kind is not ("word-cell" or "workbook-cell") || source.Scale != 1 || field.Value.HasValue
+                    || string.IsNullOrEmpty(field.Text) || !text.EndsWith(N(field.Text), StringComparison.Ordinal))
+                    throw new InvalidDataException("Run suffix must be text from the bound full run name.");
+                return new(N(field.Text), null, source.Kind == "workbook-cell" ? Path.GetFileName(workbookPath) : Path.GetFileName(wordPath), address);
             }
             double? numeric = double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out double parsed) && double.IsFinite(parsed) ? parsed * source.Scale : null;
             string display = source.Format == null && source.Scale == 1 ? text : numeric?.ToString(source.Format ?? "G6", CultureInfo.InvariantCulture) ?? throw new InvalidDataException("Numeric source is unavailable.");
