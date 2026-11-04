@@ -67,7 +67,6 @@ Paulo's word: publish when done, no questions (D49, D51). Ana should find it whe
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M4e | Install check from GitHub; 2.1.1 Check for updates offers 2.1.2 | L | 0.2 | 🟢 |  | Both pass | EV | | 0 | 0 | |
 
 ### W2 Release 2.1.3: the installer and automatic updates
 
