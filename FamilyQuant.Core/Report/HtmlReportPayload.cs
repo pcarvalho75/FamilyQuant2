@@ -125,6 +125,9 @@ public sealed record HtmlReportContext
         = new Dictionary<string, string>(StringComparer.Ordinal);
     public QuantManifest? StoredStudies { get; init; }
     public FamilyDatabaseEntryCountView? DatabaseEntryCounts { get; init; }
+    public IReadOnlyDictionary<int, IReadOnlyList<int>> SourceUserIds { get; init; }
+        = new Dictionary<int, IReadOnlyList<int>>();
+    public IReadOnlyList<int> ConflictingFamilyIds { get; init; } = Array.Empty<int>();
     public string FigureDetailsCsv { get; init; } = "";
     public FamilyReportThresholdResult? SourceGrouping { get; init; }
     public FamilyWorldSummary? World { get; init; }

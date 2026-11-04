@@ -68,6 +68,23 @@ internal static partial class Program
         var unavailable = Build(panelContext with { DatabaseEntryCounts = FamilyDatabaseEntryCounts.Read(DatabaseEntryFixture(true)) }, document: panelDocument);
         Check("conflicted panel population is unavailable, never zero or a partial value", unavailable.Composition.Families[0].DatabaseEntries == null
             && unavailable.DotMeasures.All(m => m.Id != "databaseEntries"));
+        var unkeyed = panelContext with { IsIdentity = true, PanelKeys = new Dictionary<string, string>(),
+            DatabaseEntryCounts = FamilyDatabaseEntryCounts.Read(project) };
+        var identityOutside = Build(unkeyed, document: panelDocument);
+        var identityField = identityOutside.Composition.Families[0].DatabaseEntries;
+        Check("a listed unkeyed family in an identity panel report retains its source UserID count", identityField != null
+            && identityOutside.Fields[identityField] is { Text: "2", Value: 2, Source: { Study: "UserID", Family: "7" } });
+        var collapsedOutsideContext = unkeyed with { IsIdentity = false,
+            DatabaseEntryCounts = FamilyDatabaseEntryCounts.Read(DatabaseEntryFixture()),
+            SourceUserIds = new Dictionary<int, IReadOnlyList<int>> { [7] = new[] { 99 } } };
+        var collapsedOutside = Build(collapsedOutsideContext, document: panelDocument);
+        var collapsedField = collapsedOutside.Composition.Families[0].DatabaseEntries;
+        Check("an unkeyed collapsed slot resolves its single source UserID and never uses the slot as a UserID", collapsedField != null
+            && collapsedOutside.Fields[collapsedField] is { Text: "1", Value: 1, Source: { Study: "UserID", Family: "99" } });
+        var conflictOutside = Build(unkeyed with { ConflictingFamilyIds = new[] { 7 } }, document: panelDocument);
+        Check("the unkeyed fallback does not turn a conflict into an available value", conflictOutside.Composition.Families[0].DatabaseEntries == null);
+        var unknownSlot = Build(unkeyed with { IsIdentity = false }, document: panelDocument);
+        Check("a collapsed slot without canonical single-source membership stays unavailable", unknownSlot.Composition.Families[0].DatabaseEntries == null);
         Check("no curation count view means no invented measure", baseline.DotMeasures.All(m => m.Id != "databaseEntries")
             && baseline.Composition.Families.All(f => f.DatabaseEntries == null));
         var prior = CultureInfo.CurrentCulture; var priorUi = CultureInfo.CurrentUICulture;

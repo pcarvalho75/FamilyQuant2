@@ -15,19 +15,25 @@ public static partial class HtmlReportPayloadBuilder
             return families.Select(family =>
             {
                 if (family.IsOthers) return family;
+                if (!int.TryParse(family.Id, NumberStyles.Integer, CultureInfo.InvariantCulture, out int familyId)) return family;
+                if (context.UsesPanel && (!view.PanelMappingCurrent || context.ConflictingFamilyIds.Contains(familyId))) return family;
                 int? count;
                 string sourceFamily, basis;
-                if (context.UsesPanel)
+                if (context.UsesPanel && context.PanelKeys.TryGetValue(family.Id, out string? key))
                 {
-                    if (!view.PanelMappingCurrent || !context.PanelKeys.TryGetValue(family.Id, out string? key)
-                        || !view.ByPanelKey.TryGetValue(key, out count) || !count.HasValue) return family;
+                    if (!view.ByPanelKey.TryGetValue(key, out count) || !count.HasValue) return family;
                     sourceFamily = key; basis = "panel-key";
                 }
                 else
                 {
-                    if (!int.TryParse(family.Id, NumberStyles.Integer, CultureInfo.InvariantCulture, out int id)
-                        || !view.ByUserId.TryGetValue(id, out int value)) return family;
-                    count = value; sourceFamily = id.ToString(CultureInfo.InvariantCulture); basis = "UserID";
+                    int sourceId = familyId;
+                    if (context.UsesPanel && !context.IsIdentity)
+                    {
+                        if (!context.SourceUserIds.TryGetValue(familyId, out var sourceIds) || sourceIds.Count != 1) return family;
+                        sourceId = sourceIds[0];
+                    }
+                    if (!view.ByUserId.TryGetValue(sourceId, out int value)) return family;
+                    count = value; sourceFamily = sourceId.ToString(CultureInfo.InvariantCulture); basis = "UserID";
                 }
                 string field = Add(count.Value.ToString(CultureInfo.InvariantCulture), new()
                 {

@@ -85,6 +85,9 @@ Existing field/axis IDs and values are allocated first and stay unchanged. Count
 Kind `database-entry-count`, Property `/project/MyExtendedFastaItems`, Study `UserID` or `panel-key`,
 and Family equal to the recorded source ID or effective key. All other locators are empty, Scale
 is 1 and text is an invariant integer; this is a count of stored records, not a stored peptide result.
+Listed, non-conflict rows without a panel key retain their own source-family count. In identity
+mode the row ID is its UserID; in collapsed mode the row must have exactly one canonical source
+UserID in `ReportCompositionBasis.SourceUserIds`. A study slot is never interpreted as a UserID.
 `databaseGap` remains reserved when
 there is no explicit curated-family key. `proteins` remains the native greedy protein estimate,
 distinct from the searched database population. Existing measured values and rounding stay literal.
