@@ -62,24 +62,21 @@ What a family's database entries are is ruled in D55; G1a checks the ruling agai
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G1b | Core: a read-only, family-keyed count of database entries from the stored curation, collapsed to effective panel keys the way EffectivePanelFamilyStudy collapses UserIDs; no Compute, no search, saved studies untouched | M | 0.5 | 🟢 | G1c, G3a | KnownAnswers test in DefaultSuite, red then green: decoy, contaminant, unassigned entry, a panel family of two families; rule written in docs/HTML-REPORT.md | RS | | 0 | 0 | |
-| G1c | Payload: `databaseEntries` offered in dotMeasures whenever the count exists, log scale with program-made ticks, every value a bound field | L | 0.3 | G1b | G1d, G1e, G2b | Synthetic payload lists the measure; existing payload tests unchanged | RS | | 0 | 0 | |
-| G1d | Number trace and ledger: the new fields resolve to their stored source; one ledger row for the measure | M | 0.3 | G1c | G3b | Trace of Ana's copied project: 0 NOT FOUND; ledger row proved | RS | | 0 | 0 | |
-| G1e | Old projects: a copy of Ana's project, outside her folder, opened in the new build exports the axis with no Compute, and the Word report and supplement numbers equal the 2.1.3 export | L | 0.3 | G1c | G3d | Axis present; compare output attached; every number equal | EV | | 0 | 0 | |
+| G1d | Number trace and ledger: the new fields resolve to their stored source; one ledger row for the measure | M | 0.3 | 🟢 | G3b | Trace of Ana's copied project: 0 NOT FOUND; ledger row proved | RS | | 0 | 0 | |
+| G1e | Old projects: a copy of Ana's project, outside her folder, opened in the new build exports the axis with no Compute, and the Word report and supplement numbers equal the 2.1.3 export | L | 0.3 | 🟢 | G3d | Axis present; compare output attached; every number equal | EV | | 0 | 0 | |
 
 ### W2 The page (FQLook)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G2b | Page checks on the merged payload: the synthetic page and Ana's real page, light and dark, phone width; the selector lists the axis; no console errors; README screenshot taken | L | 0.2 | G1c | G3d, G4c | Screenshots in `D:/FamilyQuant-data/out-look/G2b` | LK | | 0 | 0 | |
+| G2b | Page checks on the merged payload: the synthetic page and Ana's real page, light and dark, phone width; the selector lists the axis; no console errors; README screenshot taken | L | 0.2 | 🟢 | G3d, G4c | Screenshots in `D:/FamilyQuant-data/out-look/G2b` | LK | | 0 | 0 | |
 
 ### W3 Reviews and the gate
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G3a | Review of the count (G1b): the rule against D55 and the code | M | 0.2 | G1b | G3d | APPROVED, or fixes by the owner checked by another reviewer | GR | | 0 | 0 | |
 | G3b | Review of the payload, trace and page defaults (G1c, G1d, G2a) | M | 0.2 | G1d | G3d | APPROVED, or fixes by the owner checked by another reviewer | GR2 | | 0 | 0 | |
-| G3d | Full gate on the integrated 2.1.4 commit: ledger refresh and the full suite | M | 0.4 | G1e, G2b, G3a, G3b | G4a | Every ledger row proved; full suite green | Orchestrator | | 0 | 0 | |
+| G3d | Full gate on the integrated 2.1.4 commit: ledger refresh and the full suite | M | 0.4 | G1e, G2b, G3b | G4a | Every ledger row proved; full suite green | Orchestrator | | 0 | 0 | |
 
 ### W4 Release 2.1.4
 
