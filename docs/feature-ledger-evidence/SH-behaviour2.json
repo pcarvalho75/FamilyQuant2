@@ -5,124 +5,124 @@
   "runs": [
     {
       "id": "SH-behaviour2",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-shell-behaviour2 D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/reviews/behaviour2-FQShell.json D:/FamilyQuant-data/out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2 \u00222026-11-04 01:22:50 -0800\u0022",
-      "executedAt": "2026-11-04 01:22:50 -0800",
-      "commit": "b8490e0188d1bcd70b24d06334097bc1cb9a1c36",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-shell-behaviour2 D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/reviews/behaviour2-FQShell.json D:/FamilyQuant-data/out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2 \u00222026-11-04 09:23:58 -0800\u0022",
+      "executedAt": "2026-11-04 09:23:58 -0800",
+      "commit": "f671acb6a1b058c193d986ec6c6e90a2cf8b6117",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\cancel-current-pairs.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\cancel-current-pairs.tsv",
           "sha256": "F1F054F0EAE5F1922409B0EEC6CA40E4BBBD65FD1E15C1279C83E8A906A796CA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\cancel-frozen-pairs.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\cancel-frozen-pairs.tsv",
           "sha256": "58A5DB4477B65DD74694B865E61D42E3838B8F5B60F55E02E6AE599D21C4F267"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\cancel-observation.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\cancel-observation.json",
           "sha256": "3D6C8072DFE3DE24C724D0AAE5D25112DBD809267240521AE6707FF78E38C746"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\cancel-phase.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\cancel-phase.fasta",
           "sha256": "A000A133AC37853C88BA2B37F685DBA97B065E13F78405D739F7D252DB9033F3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\current-redundancy.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\current-redundancy.fasta",
           "sha256": "6DDA81C868625321A08ADCE69ADA611C1CCE3CF664C1C2FD04609DEC10B7975E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\facts.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\facts.json",
           "sha256": "132B06D1C0B6FE09170A55AC9CE489E3FB8AB0A443AB086C5D9C92907A9D13B7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\frozen-redundancy.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\frozen-redundancy.fasta",
           "sha256": "6DDA81C868625321A08ADCE69ADA611C1CCE3CF664C1C2FD04609DEC10B7975E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\legacy-no-totals.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\legacy-no-totals.plp",
           "sha256": "3002883B446199897ECEF55BF74529144349CBFF8CBE507A29D4166A4E1B81B2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\owned-usearch-ad20698c1b1149c19029daa5d21b8d0d.exe",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\owned-usearch-fbabd604239d415296c62f25a0585a34.exe",
           "sha256": "CFB6A77FF0CABCF9D7334EE298A1DF22B2351A54C65418F0EB93F3913A10ACD3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
-          "sha256": "3B29E4252CF84B345E735409C4674F761BC3FC86ABB76C1E660C6984F95AE599"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "sha256": "E7CB9F40F772D279606BF2E4E35CE9ACF57F679C1EE11F0DED337D1527111EE2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\recorded-totals.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\recorded-totals.plp",
           "sha256": "A95B6A2FAD8989547C939FDE4A5AC2AF9DDB32394547586B42BFEA5DEA0D5615"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\redundancy.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\redundancy.fasta",
           "sha256": "9D60C254FC184669C6F8E4BCE440947712C33BF36615C5BF6F6EF79F8EE56108"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\redundancy_NO_REDUNDANCY.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\redundancy_NO_REDUNDANCY.fasta",
           "sha256": "6DDA81C868625321A08ADCE69ADA611C1CCE3CF664C1C2FD04609DEC10B7975E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\wording-grouping-copy-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\wording-grouping-copy-Dark.tsv",
           "sha256": "EAA3F6B4A60693AD4FADDD0A700611819747ADF0974979A47FD0D0C3F17C173A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\wording-grouping-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\wording-grouping-Dark.tsv",
           "sha256": "21F0D14C57E7067F2E130797C36FE8DF849E6C4619671313998D997E1B62FC49"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant.Core.dll",
-          "sha256": "F7E5F73967F0ED2856E024AA97C68432EF4DB9ECC521E7DA111F155F5A3D7FBF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant.Core.dll",
+          "sha256": "22613AA440A1805895DA8F2ED4C022601B9BB6F7BFEC276689170923C7E23477"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "5786FAE3A3D5ECFBDE6D426060801AF15D27526BADEFBE5B95DCB8CC9CA5AACF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "7B81FBDCAE4FCE14E0EBF7859D773C067418628B6794BD1E31322526F0E131A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant2.dll",
-          "sha256": "C62C7AB3FEBD68E9564C1D6F86B59991675F9C458AE1D85830FCBB20618EA790"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant2.dll",
+          "sha256": "5D2717A7112AE75F472F93B761A306021ACA000785532328C6D75D5FD0C904D2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\executed\\NativeOwnedDialogDriver.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\executed\\NativeOwnedDialogDriver.cs",
           "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.Commands.ShellBehaviour.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.Commands.ShellBehaviour.cs",
           "sha256": "B5D4623943E15E6EFC12495F695BB8150DEC92903F747335B5CDD9192EE4237A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.SecondarySuperRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.SecondarySuperRuntime.cs",
           "sha256": "7BC597762989B17730C639AFC8142657A03FB4975AB76EEE8852E9EB0CC9B352"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.ShellBehaviour.Build.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.ShellBehaviour.Build.cs",
           "sha256": "E6E9E40CAD65C7D01184D388ECE0FF777701401BCE2F0C7FAD37EF7C7ADD0329"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.ShellBehaviour.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.ShellBehaviour.cs",
           "sha256": "4754F1433B6470E46038587CC08A1FE3CE5B8121DD9FFCE36B77EBFF7C6C9EEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.ShellBehaviour.Curation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.ShellBehaviour.Curation.cs",
           "sha256": "8C8492A48BF3096F3B4DE5D3A950AD2542DBBBE741A5257524627FB694E5D60C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\executed\\scope.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\executed\\scope.json",
           "sha256": "B798C4909900BA2083F44F1B238111C618721D17B493A9FDE56853631D2896D7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\prerequisite-import\\owned.raw.denovoOnly.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\prerequisite-import\\owned.raw.denovoOnly.csv",
           "sha256": "8BEB433E54CAF3BD23D87548C1F21B0AF5D6033D185544D464D489050CA78ACD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\cache-current\\familyquant_denovo_cache\\denovo_xic_run.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\cache-current\\familyquant_denovo_cache\\denovo_xic_run.json",
           "sha256": "04243B992B7D14C2449C3908CDAFB2ADEA30B986F603BFCCC6E79CA41ED869FE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\cache-frozen\\familyquant_denovo_cache\\denovo_xic_run.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\cache-frozen\\familyquant_denovo_cache\\denovo_xic_run.json",
           "sha256": "3E1FB4DD6B6E95B44710EE7B779B4D906E740429758C96A119E4DFA5EC042475"
         }
       ],
@@ -986,7 +986,7 @@
         {
           "path": "FamilyQuant.Core/FastaItemExtended.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+          "sha256": "7F5760BC99791E00EF8DA31071B29D4BBE902152E9A9568DF7BF4A9A5C637D23"
         },
         {
           "path": "FamilyQuant.Core/FileFingerprint.cs",
@@ -1006,7 +1006,7 @@
         {
           "path": "FamilyQuant.Core/GroupingSnapshot.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "90E736FD66258F3AAE4C3473DE225188021E3EE79E885A3A3CF4F426D47B1D2C"
+          "sha256": "347631D033B652EF3858BC834DD4A3B34BA0C7725BA4A29A7872E10F8A46BCF0"
         },
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
@@ -1185,7 +1185,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour blank keyword Apply gate",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -2065,7 +2065,7 @@
         {
           "path": "FamilyQuant.Core/FastaItemExtended.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+          "sha256": "7F5760BC99791E00EF8DA31071B29D4BBE902152E9A9568DF7BF4A9A5C637D23"
         },
         {
           "path": "FamilyQuant.Core/FileFingerprint.cs",
@@ -2085,7 +2085,7 @@
         {
           "path": "FamilyQuant.Core/GroupingSnapshot.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "90E736FD66258F3AAE4C3473DE225188021E3EE79E885A3A3CF4F426D47B1D2C"
+          "sha256": "347631D033B652EF3858BC834DD4A3B34BA0C7725BA4A29A7872E10F8A46BCF0"
         },
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
@@ -2264,7 +2264,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native legacy re-export advice and recorded-totals availability",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -3136,7 +3136,7 @@
         {
           "path": "FamilyQuant.Core/FastaItemExtended.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+          "sha256": "7F5760BC99791E00EF8DA31071B29D4BBE902152E9A9568DF7BF4A9A5C637D23"
         },
         {
           "path": "FamilyQuant.Core/FileFingerprint.cs",
@@ -3156,7 +3156,7 @@
         {
           "path": "FamilyQuant.Core/GroupingSnapshot.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "90E736FD66258F3AAE4C3473DE225188021E3EE79E885A3A3CF4F426D47B1D2C"
+          "sha256": "347631D033B652EF3858BC834DD4A3B34BA0C7725BA4A29A7872E10F8A46BCF0"
         },
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
@@ -3335,7 +3335,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour retained reconciliation and search filtering prerequisites",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -4199,7 +4199,7 @@
         {
           "path": "FamilyQuant.Core/FastaItemExtended.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+          "sha256": "7F5760BC99791E00EF8DA31071B29D4BBE902152E9A9568DF7BF4A9A5C637D23"
         },
         {
           "path": "FamilyQuant.Core/FileFingerprint.cs",
@@ -4219,7 +4219,7 @@
         {
           "path": "FamilyQuant.Core/GroupingSnapshot.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "90E736FD66258F3AAE4C3473DE225188021E3EE79E885A3A3CF4F426D47B1D2C"
+          "sha256": "347631D033B652EF3858BC834DD4A3B34BA0C7725BA4A29A7872E10F8A46BCF0"
         },
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
@@ -4398,7 +4398,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour empty reconciliation export writer guard",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -5262,7 +5262,7 @@
         {
           "path": "FamilyQuant.Core/FastaItemExtended.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+          "sha256": "7F5760BC99791E00EF8DA31071B29D4BBE902152E9A9568DF7BF4A9A5C637D23"
         },
         {
           "path": "FamilyQuant.Core/FileFingerprint.cs",
@@ -5282,7 +5282,7 @@
         {
           "path": "FamilyQuant.Core/GroupingSnapshot.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "90E736FD66258F3AAE4C3473DE225188021E3EE79E885A3A3CF4F426D47B1D2C"
+          "sha256": "347631D033B652EF3858BC834DD4A3B34BA0C7725BA4A29A7872E10F8A46BCF0"
         },
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
@@ -5461,7 +5461,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour empty-run native cache artifact fallback",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -6325,7 +6325,7 @@
         {
           "path": "FamilyQuant.Core/FastaItemExtended.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+          "sha256": "7F5760BC99791E00EF8DA31071B29D4BBE902152E9A9568DF7BF4A9A5C637D23"
         },
         {
           "path": "FamilyQuant.Core/FileFingerprint.cs",
@@ -6345,7 +6345,7 @@
         {
           "path": "FamilyQuant.Core/GroupingSnapshot.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "90E736FD66258F3AAE4C3473DE225188021E3EE79E885A3A3CF4F426D47B1D2C"
+          "sha256": "347631D033B652EF3858BC834DD4A3B34BA0C7725BA4A29A7872E10F8A46BCF0"
         },
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
@@ -6524,7 +6524,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native shell context Help",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -7388,7 +7388,7 @@
         {
           "path": "FamilyQuant.Core/FastaItemExtended.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+          "sha256": "7F5760BC99791E00EF8DA31071B29D4BBE902152E9A9568DF7BF4A9A5C637D23"
         },
         {
           "path": "FamilyQuant.Core/FileFingerprint.cs",
@@ -7408,7 +7408,7 @@
         {
           "path": "FamilyQuant.Core/GroupingSnapshot.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "90E736FD66258F3AAE4C3473DE225188021E3EE79E885A3A3CF4F426D47B1D2C"
+          "sha256": "347631D033B652EF3858BC834DD4A3B34BA0C7725BA4A29A7872E10F8A46BCF0"
         },
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
@@ -7587,7 +7587,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native shell workflow Help",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -8451,7 +8451,7 @@
         {
           "path": "FamilyQuant.Core/FastaItemExtended.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+          "sha256": "7F5760BC99791E00EF8DA31071B29D4BBE902152E9A9568DF7BF4A9A5C637D23"
         },
         {
           "path": "FamilyQuant.Core/FileFingerprint.cs",
@@ -8471,7 +8471,7 @@
         {
           "path": "FamilyQuant.Core/GroupingSnapshot.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "90E736FD66258F3AAE4C3473DE225188021E3EE79E885A3A3CF4F426D47B1D2C"
+          "sha256": "347631D033B652EF3858BC834DD4A3B34BA0C7725BA4A29A7872E10F8A46BCF0"
         },
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
@@ -8650,7 +8650,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native Families and De novo next-step workflow Help",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -9514,7 +9514,7 @@
         {
           "path": "FamilyQuant.Core/FastaItemExtended.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+          "sha256": "7F5760BC99791E00EF8DA31071B29D4BBE902152E9A9568DF7BF4A9A5C637D23"
         },
         {
           "path": "FamilyQuant.Core/FileFingerprint.cs",
@@ -9534,7 +9534,7 @@
         {
           "path": "FamilyQuant.Core/GroupingSnapshot.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "90E736FD66258F3AAE4C3473DE225188021E3EE79E885A3A3CF4F426D47B1D2C"
+          "sha256": "347631D033B652EF3858BC834DD4A3B34BA0C7725BA4A29A7872E10F8A46BCF0"
         },
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
@@ -9713,7 +9713,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native shell context Help",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -10577,7 +10577,7 @@
         {
           "path": "FamilyQuant.Core/FastaItemExtended.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+          "sha256": "7F5760BC99791E00EF8DA31071B29D4BBE902152E9A9568DF7BF4A9A5C637D23"
         },
         {
           "path": "FamilyQuant.Core/FileFingerprint.cs",
@@ -10597,7 +10597,7 @@
         {
           "path": "FamilyQuant.Core/GroupingSnapshot.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "90E736FD66258F3AAE4C3473DE225188021E3EE79E885A3A3CF4F426D47B1D2C"
+          "sha256": "347631D033B652EF3858BC834DD4A3B34BA0C7725BA4A29A7872E10F8A46BCF0"
         },
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
@@ -10776,7 +10776,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native shell workflow Help",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -11648,7 +11648,7 @@
         {
           "path": "FamilyQuant.Core/FastaItemExtended.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+          "sha256": "7F5760BC99791E00EF8DA31071B29D4BBE902152E9A9568DF7BF4A9A5C637D23"
         },
         {
           "path": "FamilyQuant.Core/FileFingerprint.cs",
@@ -11668,7 +11668,7 @@
         {
           "path": "FamilyQuant.Core/GroupingSnapshot.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "90E736FD66258F3AAE4C3473DE225188021E3EE79E885A3A3CF4F426D47B1D2C"
+          "sha256": "347631D033B652EF3858BC834DD4A3B34BA0C7725BA4A29A7872E10F8A46BCF0"
         },
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
@@ -11847,7 +11847,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native redundancy completion returns controls and preserves headers",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -12711,7 +12711,7 @@
         {
           "path": "FamilyQuant.Core/FastaItemExtended.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+          "sha256": "7F5760BC99791E00EF8DA31071B29D4BBE902152E9A9568DF7BF4A9A5C637D23"
         },
         {
           "path": "FamilyQuant.Core/FileFingerprint.cs",
@@ -12731,7 +12731,7 @@
         {
           "path": "FamilyQuant.Core/GroupingSnapshot.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "90E736FD66258F3AAE4C3473DE225188021E3EE79E885A3A3CF4F426D47B1D2C"
+          "sha256": "347631D033B652EF3858BC834DD4A3B34BA0C7725BA4A29A7872E10F8A46BCF0"
         },
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
@@ -12910,7 +12910,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native redundancy completion returns controls and preserves headers",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-092333-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
