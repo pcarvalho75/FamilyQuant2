@@ -22,11 +22,20 @@ and full stack there, while the dialog keeps the short message.
 
 Accepted options mark the project changed. A changed threshold rebuilds the report from
 the updated setting. The production Word writer prepares a file beside its destination;
-the shell checks cancellation and the current project before one final paired publication.
-The Word document and same-base `_supplement.xlsx` workbook are staged together. Cancel or
-failure between renames rolls back both artifacts, retaining recovery copies if restoration
+the shell checks cancellation and the current project before one final publication.
+The Word document, same-base `_supplement.xlsx` workbook and `.html` page are staged together.
+For `report.docx`, the companion files are `report_supplement.xlsx` and `report.html`. Cancel or
+failure between any of the three renames rolls back all artifacts, retaining recovery copies if restoration
 itself fails. A replaced project preserves previous reports. A Word report cannot replace
 the open project. Export does not save the project.
+
+The HTML page is an offline graphical summary of the selected prepared report, with short
+pop-ups and links to its sibling Word/workbook files. Section and figure exclusions pass to
+the native payload builder, and a changed Others threshold rebuilds the same prepared report
+used by all three outputs. No new analysis runs in the HTML writer. The writer loads the
+embedded template and inserts one safely encoded JSON payload; user strings cannot close
+the data script or become markup. Fixed property/field order, LF newlines and UTF-8 without
+a byte-order mark give identical bytes for the same payload, independent of display culture.
 
 The report menu is distinct from File > Export > Panel audit (CSV).
 
@@ -50,6 +59,7 @@ Focused checks after a Release build:
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --test-report-selection
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --test-report-command <fresh-output>
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --test-report-progress <fresh-output>
+& ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --test-html-report-export <fresh-output>
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --test-project-command-ready <fresh-output>
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --report-export-screens <fresh-output>
 ```
@@ -57,10 +67,11 @@ Focused checks after a Release build:
 The native command fixture writes a real Word document through the menu and production
 builder/writer, checks its stored details, sources, selected sections and all published workbook
 cells, reopens the choices, and exercises file-chooser cancellation, shared Cancel between the
-two publications, old-pair restoration and stale-project refusal. It uses
+publications, restoration and stale-project refusal. The HTML checks cancel and fail after
+each of the three publication boundaries, and cover escaping, repeatability and selection. It uses
 labelled synthetic stored Results and reads no RAW file. The section/figure checker also
 compares selected Word packages and the retained original PNG bytes.
 
 The progress fixture checks every counted section, figure and sheet, the live wait screen,
-timestamped logs, byte-identical output, cancellation preserving both previous files, and
+timestamped logs, byte-identical output, cancellation preserving previous files, and
 diagnostics from a failing stager. It is also registered once in `DefaultSuite`.

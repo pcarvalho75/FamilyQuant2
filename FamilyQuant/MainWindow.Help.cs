@@ -229,7 +229,8 @@ public partial class MainWindow
                 "   reuse current family attribution and cached matches when the inputs still match.\n" +
                 "   Summary of findings states the stored values in fixed sentences; its numbers are\n" +
                 "   also listed in the supplement.\n" +
-                "   Produces: a Word report and a companion supplement workbook beside it.\n" +
+                "   Produces: a Word report, a companion supplement workbook and an interactive\n" +
+                "   HTML report beside it. Open the HTML file in a browser; it works offline.\n" +
                 "   Long lists have their own supplement sheets, one row per item; the report points\n" +
                 "   to those sheets and CSV exports retain their values. Report narrative is written by the program from\n" +
                 "   project data, without AI. Your panel and report details also appear in the report.\n" +
