@@ -587,3 +587,9 @@ Paulo agreed these at the restart, 2026-11-01.
 | M3d | Owners fix the review findings; the reviewer checks again | L | 0.2 | M3a, M3b, M3c, M3g | M3e | Every finding closed | RS | | 0 | 0 | |
 | M3h | Integration rehearsal: every 20 to 30 min, merge the lane heads in a scratch tree, build, quick suite, export Ana's page, trace and render, so clashes show before the gate | L | 0.3 | 🟢 | M3e | Each round posted; the last round green with both READY posts in | AS | | 0 | 0 | |
 
+### W6 The README on GitHub for 2.1.2
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M6b | README text for 2.1.2: what it is, what is new, install, a step-by-step manual, troubleshooting; HTML-page screenshots from synthetic data only | M | 0.4 | 🟢 | M6c | Reads end to end; every menu name checked against the code; no real data, names, paths or keys | T2 | | 0 | 0 | |
+
