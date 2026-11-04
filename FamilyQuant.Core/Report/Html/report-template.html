@@ -4247,13 +4247,12 @@
               );
               body.append(row);
               if (
-                measure.id === "mean" &&
                 exists(id) &&
-                exists(fields[id].short) &&
-                text(fields[id].short) !== text(id)
+                val(id) !== null &&
+                exists(fields[id].short)
               ) {
                 const exact = node("div", "dot-tip-row dot-tip-exact");
-                exact.append(node("span", "", "Exact report share"), field(id));
+                exact.append(node("span", "", "Exact value"), field(id));
                 body.append(exact);
               }
             }
@@ -4708,7 +4707,7 @@
                 node(
                   "p",
                   "",
-                  "Unplottable values sit at the edge as hollow dots.",
+                  "Missing values or values outside the chosen scale sit at the edge as hollow dots. A recorded zero size appears as a hollow ring at its plotted position.",
                 ),
               ]);
             $("dot-tooltip").addEventListener("keydown", (event) => {
