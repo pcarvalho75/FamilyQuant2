@@ -109,6 +109,18 @@ Paulo, 22:10: "a significantly improved readme in github about the latest versio
 | M6f | README screenshots (Paulo 23:52 and 23:55): the Export report dialog with descriptive figure titles from a synthetic project, and every screenshot in dark mode | L | 0.2 | 🟢 | M6g | All images dark, synthetic, under 300 KB; dialog lists figures by what they show | T2 | | 0 | 0 | |
 | M6g | Check and push the M6f screenshots | L | 0.1 | M6f | | FQReview3 approves; desk pushes; live page looked at | Orchestrator | | 0 | 0 | |
 
+### W7 Release 2.1.3: the installer and automatic updates
+
+Paulo, 23:50: "i want the installer, so please rush through it so that 2.1.3 has the installer"; 23:57: Help > Install update, and a check at every start with a notice on screen.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M7a | FamilyQuant2-Setup.exe in .NET (no third-party tool, no download): per-user install, Start menu shortcut, Apps & features uninstall, upgrade in place keeping data, quiet mode; tests in test mode only (D31) | M | 0.6 | 🟢 | M7c, M7b | DONE posted with the build command; tests green | SH | | 0 | 0 | |
+| M7b | Updates (Paulo 23:57): Help > Install update downloads and runs the Setup quietly; every start checks in the background and shows a non-blocking banner when a later version exists; setting to turn it off | M | 0.5 | 🟢 | M7d | DONE posted; fake-network tests green | FL | | 0 | 0 | |
+| M7c | 2.1.3: version, release notes (installer, unsigned-installer note, automatic check), and a package script that builds the zip and the Setup.exe with SHA256 | L | 0.4 | 🟢 | M7d | DONE posted; package commands ready | AS | | 0 | 0 | |
+| M7d | Reviews of M7a, M7b, M7c, then gate (full) on the 2.1.3 commit | M | 0.4 | M7a, M7b, M7c | M7e | APPROVED by a different reviewer each; gate green | Orchestrator | | 0 | 0 | |
+| M7e | Publish v2.1.3 with the Setup.exe and the zip; install check of the Setup.exe in test mode; README install section updated | L | 0.3 | M7d |  | Release live; Setup.exe hash equals the package; README pushed | Orchestrator | | 0 | 0 | |
+
 ## Critical path
 
 M1b, M1d, the producers M1e to M1g, the writer M1h and export M1i, the tests, then the proof M1o (which also needs FQLook's page, M2a to M2j), the reviews M3a and M3b, the fixes M3d, the gate M3e and Paulo's look M3f. Reviewers: FQReview, FQReview2 and FQReview3 (hired 20:45 on Paulo's "hire a new grok reviewer"), and FQOpus for the final page (20:52, "put the opus carvalho paulo as a reviewer"). The release (W4) and the delivery to Ana (W5) start only on his word.
@@ -145,6 +157,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D49 | When to publish 2.1.2 | No early freeze: finish every step of W1 to W3, then publish on GitHub (W4) without waiting for another word; delivery to Ana (W5) still waits for his word. Paulo, 21:47 ("we will do the project until the end and then publish it in github") |
 | D50 | The public README | FQTerra2 writes a README devoted to 2.1.2 with a manual and screenshots from synthetic data only; the desk pushes it as soon as it is reviewed, before the release, with links to releases/latest. Paulo, 22:10 to 22:13 |
 | D51 | The night run | Paulo goes to sleep (23:57: "when you finish this project please confirm you will upload it ... i cant have questions asked"). The desk finishes W2 to W4 and publishes 2.1.2 on GitHub with no further questions. The database-entries axis waits for the next version, so the release is not delayed before the collaborator wakes. W5 (writing into Ana's folder) stays held without his word; the staged page waits outside her folder. Paulo, 23:57 |
+| D52 | 2.1.3 tonight | An installer built in .NET (no download, no install on this PC: tested in test mode), Help > Install update and a start-up update notice; published when every check is green, like 2.1.2 (D51). Paulo, 23:50 to 23:57 |
 
 ## Risks and triggers
 
