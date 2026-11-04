@@ -1330,7 +1330,7 @@
         white-space: nowrap;
       }
       .ring-slice.dim {
-        opacity: 0.42;
+        opacity: 0.85;
       }
       .coverage-figure {
         display: block;
@@ -1629,6 +1629,11 @@
         overflow-wrap: anywhere;
         pointer-events: none;
       }
+      .coverage-hover {
+        width: max-content;
+        min-width: 120px;
+        max-width: min(300px, calc(100vw - 24px));
+      }
       .coverage-hover > span {
         display: block;
       }
@@ -1640,9 +1645,62 @@
       .peptide {
         min-width: 3px;
       }
-      .ring-name > span, .rank-name > span {
-        display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+      .ring-name > span,
+      .rank-name > span {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
+      .metric-button {
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        padding: 0;
+        text-align: inherit;
+        border-radius: 3px;
+      }
+      .rank-value.metric-button,
+      .gap-value.metric-button {
+        text-align: right;
+      }
+      .metric-button:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        text-decoration-color: var(--accent);
+      }
+      .ring-center .metric-button {
+        pointer-events: auto;
+      }
+      .headline-value.metric-button {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.04em;
+      }
+      .rank-value.metric-button {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .gap-value.metric-button {
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .rank-row {
+        transition: background 0.12s;
+      }
+      @media (max-width: 700px) {
+        .headline-value.metric-button {
+          font-size: 28px;
+        }
+        .rank-value.metric-button {
+          font-size: 13px;
+        }
+        .gap-value.metric-button {
+          font-size: 12px;
+        }
+      }
+
       .rank-row.is-preview {
         box-shadow: inset 3px 0 var(--accent);
         background: var(--selection);
@@ -1670,8 +1728,12 @@
           background 0.18s;
       }
       @media print {
-        .skip {display:none!important}
-        .family-chip {color:var(--ink)}
+        .skip {
+          display: none !important;
+        }
+        .family-chip {
+          color: var(--ink);
+        }
         .coverage-hover {
           display: none !important;
         }
@@ -1917,6 +1979,7 @@
       </div>
       <div class="dialog-body" id="dialog-body"></div>
     </dialog>
+    <span id="metric-action" class="sr-only">Show the exact report value</span>
     <div id="coverage-hover" class="coverage-hover" role="tooltip" hidden></div>
     <div id="chart-hover" class="coverage-hover" role="tooltip" hidden></div>
     <script id="fq-data" type="application/json"></script>
@@ -1948,8 +2011,6 @@
         let returnFocus = null;
         function closeDialog() {
           dialog.close();
-          dialog.classList.remove("figure-dialog");
-          returnFocus?.focus();
         }
         $("dialog-close").onclick = closeDialog;
         dialog.addEventListener("keydown", (event) => {
@@ -1981,9 +2042,14 @@
               closeDialog();
           }
         });
-        dialog.addEventListener("cancel", () => {
+        dialog.addEventListener("close", () => {
           dialog.classList.remove("figure-dialog");
-          returnFocus?.focus();
+          const target = returnFocus?.isConnected
+            ? returnFocus
+            : Array.from(document.querySelectorAll(".metric-button")).find(
+                (e) => e.dataset.metric === returnFocus?.dataset.metric,
+              );
+          (target || $("main")).focus({ preventScroll: true });
         });
         function popup(title, content, wide = false) {
           returnFocus = document.activeElement;
@@ -2052,6 +2118,21 @@
             $(id).replaceChildren(field(f));
           }
           $("project-title").textContent = "Explore your results";
+          function displayField(id, tag = "span") {
+            return field(
+              exists(id) && exists(fields[id].short) ? fields[id].short : id,
+              tag,
+            );
+          }
+          function metric(id, tag = "span") {
+            const button = node("button", "metric-button");
+            button.dataset.metric = id;
+            button.setAttribute("aria-describedby", "metric-action");
+            button.append(displayField(id, tag));
+            button.onclick = () =>
+              popup("Exact report value", [field(id, "p")]);
+            return button;
+          }
           function safeLink(key, fallback) {
             const s = data.links?.[key];
             return typeof s === "string" &&
@@ -2066,7 +2147,8 @@
             $(id).href = safeLink("workbook", "report_supplement.xlsx");
           if (exists(data.title)) {
             bind("project-title", data.title);
-            document.title = text(data.title) + " | FamilyQuant";
+            document.title = text(data.title);
+            document.querySelector("title").dataset.fqField = data.title;
           } else $("project-title").textContent = "Explore your results";
           if (exists(data.authors)) bind("project-subtitle", data.authors);
           else $("project-subtitle").hidden = true;
@@ -2120,7 +2202,7 @@
                   !!f && row.dataset.family === f.id,
                 );
               if (!state.drill && current) {
-                bind("ring-value", current.mean);
+                $("ring-value").replaceChildren(metric(current.mean));
                 bind("ring-name", current.name);
               }
               if (current) renderFamily(current);
@@ -2131,9 +2213,9 @@
           for (const h of highlights) {
             if (!exists(h.name) || !exists(h.value)) continue;
             const item = node("div", "headline-item"),
-              v = field(h.value, "div"),
+              v = metric(h.value),
               label = node("div", "headline-label");
-            v.className = "headline-value";
+            v.className = "headline-value metric-button";
             label.append(field(h.name));
             if (exists(h.description)) {
               const b = node("button", "info", "i");
@@ -2270,7 +2352,7 @@
               $("composition-basis").textContent =
                 data.composition?.basis ||
                 "Mean of per-run shares of credited family signal";
-              bind("ring-value", f.mean);
+              $("ring-value").replaceChildren(metric(f.mean));
               bind("ring-name", f.name);
               reset.hidden = !groups.size;
               reset.textContent = "Explore parts";
@@ -2447,22 +2529,19 @@
                 label.append(
                   field(r.name),
                   document.createTextNode(": "),
-                  field(r.share),
+                  displayField(r.share),
                 );
                 dot.append(label);
                 const hover = () => {
                   preview(f);
                   const tip = $("chart-hover");
-                  tip.replaceChildren(field(r.name), field(r.share));
+                  tip.replaceChildren(field(r.name), displayField(r.share));
                   tip.hidden = false;
                   const rect = dot.getBoundingClientRect();
                   tip.style.left =
                     Math.max(
                       12,
-                      Math.min(
-                        rect.left,
-                        innerWidth - Math.min(300, innerWidth - 24) - 12,
-                      ),
+                      Math.min(rect.left, innerWidth - tip.offsetWidth - 12),
                     ) + "px";
                   tip.style.top =
                     Math.max(
@@ -2498,8 +2577,8 @@
                 chart.append(dot);
                 if (exists(r.name)) runNames.set(r.name, i);
               });
-              const value = field(f.mean);
-              value.className = "rank-value";
+              const value = metric(f.mean);
+              value.className = "rank-value metric-button";
               row.append(name, chart, value);
               host.append(row);
               const previous = oldPositions.get(f.id);
@@ -2559,7 +2638,7 @@
           function stat(host, label, id) {
             if (!exists(id)) return;
             const e = node("div", "mini-stat");
-            e.append(field(id, "strong"), node("small", "", label));
+            e.append(metric(id, "strong"), node("small", "", label));
             host.append(e);
           }
           function familyDialog(f) {
@@ -2619,7 +2698,11 @@
             };
             host.append(button);
           }
+          let renderedFamily = null;
           function renderFamily(f = state.selected) {
+            if (renderedFamily === f) return;
+            renderedFamily = f;
+            motion($("family-detail"), [{ opacity: 0.6 }, { opacity: 1 }], 110);
             $("family-detail").hidden = !f;
             if (!f) return;
             bind("family-title", f.name);
@@ -2656,7 +2739,7 @@
                   sw = node("span", "swatch");
                 sw.style.background = colors[i % colors.length];
                 name.append(sw, field(p.name));
-                row.append(name, field(p.share));
+                row.append(name, metric(p.share));
                 list.append(row);
               });
               parts.append(
@@ -2740,10 +2823,7 @@
                     tip.style.left =
                       Math.max(
                         12,
-                        Math.min(
-                          r.left,
-                          innerWidth - Math.min(300, innerWidth - 24) - 12,
-                        ),
+                        Math.min(r.left, innerWidth - tip.offsetWidth - 12),
                       ) + "px";
                     tip.style.top =
                       Math.max(
@@ -2804,7 +2884,7 @@
             for (const r of runs) {
               const row = node("div", "signal-run"),
                 label = node("div", "signal-run-label");
-              label.append(field(r.name), field(r.share, "strong"));
+              label.append(field(r.name), metric(r.share, "strong"));
               row.append(label);
               const v = val(r.share);
               if (v !== null && v >= 0 && v <= 100) {
@@ -2833,8 +2913,8 @@
               if (v !== null && v >= 0 && v <= 1)
                 fill.style.width = v * 100 + "%";
               track.append(fill);
-              const value = field(r.fraction);
-              value.className = "gap-value";
+              const value = metric(r.fraction);
+              value.className = "gap-value metric-button";
               row.append(field(r.name), track, value);
               gap.append(row);
             }
@@ -2879,7 +2959,7 @@
             b.append(
               field(f.name),
               document.createTextNode(" "),
-              field(f.mean),
+              displayField(f.mean),
             );
             b.onclick = () => {
               select(f);
