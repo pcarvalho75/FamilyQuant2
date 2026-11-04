@@ -6,7 +6,7 @@ using System.IO;
 
 namespace FamilyQuant;
 
-/// <summary>A paired export could not be fully rolled back. Keep its private staging folder for recovery.</summary>
+/// <summary>An export could not be fully rolled back. Keep its private staging folder for recovery.</summary>
 public sealed class ReportPublicationRecoveryException : IOException
 {
     public string RecoveryDirectory { get; }
@@ -15,7 +15,7 @@ public sealed class ReportPublicationRecoveryException : IOException
         => RecoveryDirectory = directory;
 }
 
-/// <summary>Publishes the staged Word/workbook pair in one operation commit. A failure or cancellation
+/// <summary>Publishes staged Word, workbook and HTML in one operation commit. A failure or cancellation
 /// between renames restores previous files and removes new files. A late successful commit wins Cancel.</summary>
 public static class ReportArtifactPublication
 {
@@ -24,19 +24,24 @@ public static class ReportArtifactPublication
     {
         ArgumentNullException.ThrowIfNull(operation);
         string stageWord = Path.GetFullPath(stagedWord), stageBook = Path.GetFullPath(stagedWorkbook);
+        string stageHtml = HtmlReportWriter.PathForReport(stageWord);
         string destinationWord = Path.GetFullPath(wordDestination), destinationBook = ReportSupplementWorkbook.PathForReport(destinationWord);
+        string destinationHtml = HtmlReportWriter.PathForReport(destinationWord);
         string directory = Path.GetDirectoryName(stageWord)!;
-        if (!File.Exists(stageWord) || !File.Exists(stageBook)) throw new FileNotFoundException("The staged Word report and supplement workbook must both be complete before publication.");
+        if (!File.Exists(stageWord) || !File.Exists(stageBook) || !File.Exists(stageHtml))
+            throw new FileNotFoundException("The staged Word report, supplement workbook and HTML report must all be complete before publication.");
         if (!string.Equals(directory, Path.GetDirectoryName(stageBook), StringComparison.OrdinalIgnoreCase)
             || !string.Equals(Path.GetPathRoot(directory), Path.GetPathRoot(destinationWord), StringComparison.OrdinalIgnoreCase)
             || string.Equals(stageWord, destinationWord, StringComparison.OrdinalIgnoreCase)
             || string.Equals(stageBook, destinationBook, StringComparison.OrdinalIgnoreCase))
             throw new ArgumentException("Report artifacts must be staged together beside their destination on the same volume.");
-        var source = new[] { stageWord, stageBook };
-        var destination = new[] { destinationWord, destinationBook };
-        var backup = new[] { Path.Combine(directory, ".previous-word-" + Guid.NewGuid().ToString("N")), Path.Combine(directory, ".previous-workbook-" + Guid.NewGuid().ToString("N")) };
-        var published = new bool[2];
-        var existed = new bool[2];
+        var source = new[] { stageWord, stageBook, stageHtml };
+        var destination = new[] { destinationWord, destinationBook, destinationHtml };
+        var backup = new[] { Path.Combine(directory, ".previous-word-" + Guid.NewGuid().ToString("N")),
+            Path.Combine(directory, ".previous-workbook-" + Guid.NewGuid().ToString("N")),
+            Path.Combine(directory, ".previous-html-" + Guid.NewGuid().ToString("N")) };
+        var published = new bool[source.Length];
+        var existed = new bool[source.Length];
         bool recovery = false;
         try
         {
@@ -44,13 +49,13 @@ public static class ReportArtifactPublication
             {
                 try
                 {
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 0; i < source.Length; i++)
                     {
                         operation.ThrowIfCancellationRequested();
                         existed[i] = File.Exists(destination[i]);
                         if (existed[i]) File.Copy(destination[i], backup[i]);
                     }
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 0; i < source.Length; i++)
                     {
                         operation.ThrowIfCancellationRequested();
                         File.Move(source[i], destination[i], true);
@@ -62,7 +67,7 @@ public static class ReportArtifactPublication
                 catch (Exception failure)
                 {
                     var failures = new List<Exception> { failure };
-                    for (int i = 1; i >= 0; i--)
+                    for (int i = source.Length - 1; i >= 0; i--)
                     {
                         if (!published[i]) continue;
                         try

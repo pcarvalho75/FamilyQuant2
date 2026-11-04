@@ -15,6 +15,7 @@ public sealed record ReportProjectExport(ReportDocument Document, IReadOnlyDicti
 {
     public IReadOnlyList<ReportSupplementSheet> SupplementSheets { get; init; } = Array.Empty<ReportSupplementSheet>();
     public ReportSelection? Selection { get; init; }
+    public HtmlReportContext HtmlContext { get; init; } = new();
 }
 
 /// <summary>Program-owned saved-project route shared by the shell and reproducibility command.</summary>
@@ -27,6 +28,7 @@ public static class ReportProjectExporter
     {
         if (rows.Count == 0) throw new InvalidOperationException("No full XIC results are stored. Compute and save results before exporting a report.");
         FamilyStudyMembership.RequireCurrent(curation, manifest);
+        var sourceStudies = manifest;
         void Data(int item, string title) => operation?.Report("report-data", "Data step " + item.ToString(CultureInfo.InvariantCulture)
             + " of 8: " + title, item, 8);
         operation?.Report("report-data", "Preparing stored report data", 0, 8);
@@ -163,7 +165,31 @@ public static class ReportProjectExporter
         exports.Add(FigureLayout.DetailFileName, studies.FigureDetailsCsv);
         var sheets = layout.Sheets.Concat(ReportStudyFigures.CombineFigureSupplements(studies.FigureDetailSheets,
             ReportCaptionTrace.Build(document, figureCaptions))).ToArray();
-        return new(layout.Document, exports, figures) { SupplementSheets = ReportTableSupplements.Complete(layout.Document, sheets), Selection = curation.ReportSelection };
+        var panelKeys = compositionBasis.Map?.UserFamilies.Values.Where(f => !f.HasConflict && f.PanelFamilyKey != null)
+            .ToDictionary(f => f.FamilyUserId.ToString(CultureInfo.InvariantCulture), f => f.PanelFamilyKey!, StringComparer.Ordinal)
+            ?? new Dictionary<string, string>(StringComparer.Ordinal);
+        return new(layout.Document, exports, figures)
+        {
+            SupplementSheets = ReportTableSupplements.Complete(layout.Document, sheets), Selection = curation.ReportSelection,
+            HtmlContext = new()
+            {
+                UsesPanel = compositionBasis.UsesPanel, IsIdentity = compositionBasis.IsIdentity,
+                IsAdditive = compositionBasis.Studies.FamilyRunShares?.Policy != SharedPeptidePolicy.CountInEveryFamily,
+                StoredStudies = compositionBasis.Studies, PanelKeys = panelKeys,
+                FigureDetailsCsv = studies.FigureDetailsCsv,
+                FamilySections = panelKeys.ToDictionary(pair => pair.Key, pair => ReportSectionIds.FamilyPrefix + pair.Value, StringComparer.Ordinal),
+                World = sourceWorld, SourceGrouping = compositionBasis.SourceMembership(),
+                CoverageProvider = (id, addField, currentSelection) =>
+                {
+                    if (!int.TryParse(id, NumberStyles.Integer, CultureInfo.InvariantCulture, out int familyId)
+                        || !compositionBasis.SourceUserIds.TryGetValue(familyId, out var sourceIds))
+                        return Array.Empty<HtmlReportCoverage>();
+                    string? owner = panelKeys.TryGetValue(id, out string? key) ? ReportSectionIds.FamilyPrefix + key : null;
+                    return HtmlReportCoverageBuilder.Build(layout.Document, curation, sourceStudies, sourceIds,
+                        addField, currentSelection, owner);
+                },
+            },
+        };
     }
 
     public static void Write(ReportProjectExport export, string docxPath, ReportSelection? selection = null, OperationContext? operation = null)
@@ -179,9 +205,37 @@ public static class ReportProjectExporter
                 + export.CsvExports.Count.ToString(CultureInfo.InvariantCulture) + ": " + csv.Key, written, export.CsvExports.Count);
             File.WriteAllText(Path.Combine(folder, csv.Key), csv.Value, new UTF8Encoding(false));
         }
-        string workbook = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(docxPath))!, Path.GetFileNameWithoutExtension(docxPath) + "_supplement.xlsx");
-        File.WriteAllBytes(workbook, operation == null ? ReportSupplementWorkbook.BuildBytes(export.Document, export.SupplementSheets, selection)
-            : ReportSupplementWorkbook.BuildBytes(export.Document, export.SupplementSheets, selection, operation));
-        WordReportWriter.Write(docxPath, export.Document, selection, operation);
+        string destination = Path.GetFullPath(docxPath);
+        string parent = Path.GetDirectoryName(destination)!;
+        string stage = Path.Combine(parent, ".fq-report-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(stage);
+        bool recovery = false;
+        try
+        {
+            string word = Path.Combine(stage, Path.GetFileName(destination));
+            string workbook = ReportSupplementWorkbook.PathForReport(word);
+            File.WriteAllBytes(workbook, operation == null ? ReportSupplementWorkbook.BuildBytes(export.Document, export.SupplementSheets, selection)
+                : ReportSupplementWorkbook.BuildBytes(export.Document, export.SupplementSheets, selection, operation));
+            File.WriteAllBytes(word, WordReportWriter.BuildBytes(export.Document, selection, operation));
+            WriteHtml(export, word, selection, operation);
+            ReportArtifactPublication.Publish(word, workbook, destination, operation ?? new OperationContext());
+        }
+        catch (ReportPublicationRecoveryException) { recovery = true; throw; }
+        finally
+        {
+            if (!recovery && string.Equals(Path.GetDirectoryName(Path.GetFullPath(stage)), parent, StringComparison.OrdinalIgnoreCase)
+                && Path.GetFileName(stage).StartsWith(".fq-report-", StringComparison.Ordinal))
+                try { Directory.Delete(stage, true); } catch (IOException) { } catch (UnauthorizedAccessException) { }
+        }
+    }
+
+    public static void WriteHtml(ReportProjectExport export, string wordPath, ReportSelection? selection = null, OperationContext? operation = null)
+    {
+        operation?.Report("report-html", "Writing the interactive HTML report", 0, 1);
+        operation?.ThrowIfCancellationRequested();
+        var payload = HtmlReportPayloadBuilder.Build(export.Document, export.SupplementSheets, selection ?? export.Selection,
+            export.HtmlContext, Path.GetFileName(wordPath));
+        HtmlReportWriter.Write(HtmlReportWriter.PathForReport(wordPath), payload, operation);
+        operation?.Report("report-html", "Interactive HTML report written", 1, 1);
     }
 }
