@@ -59,35 +59,82 @@ Flow of one step: the owner posts `READY <step> <commit>`; the orchestrator assi
 
 ## Workstreams
 
-Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. The graph follows the Blocked by column.
+Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. The graph follows the Blocked by column. A small step lands when its owner posts DONE with a commit; it counts as done when a reviewer approves it.
 
-### W1 The interactive HTML report
+### W1 Data and export (FQResults)
 
-The friendly front door to the same results: mostly graphics, explanations in pop-ups, one offline file beside report.docx. FQResults owns the data and the program side, FQLook the page; the seam is the payload (M1b).
+The program side: what the page is fed, how it is written and exported, and the proof that every number is the stored one.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M1a | Baseline: fq/results on current master, Release build and quick suite green before any change | L | 0.2 | 🟢 | M1b | 0 warnings; quick suite green (ledger receipts deferred to the full gate as always) | RS | | 0 | 0 | |
-| M1b | Data contract: the payload of every number and label the page shows, as Word-rounded display strings, with a sample from Ana's stored results (no Compute); one seam round with FQLook | M | 0.7 | M1a | M1d, M1f | Schema committed; sample at out-results/M1/payload-sample.json; FQLook answered | RS | | 0 | 0 | |
-| M1c | The page, first version: one self-contained template (inline CSS, JS and SVG, offline, no library): key numbers, composition chart to drill into, ranked families with each run as a point, family cards with coverage strips, signal and Database gap visuals, method with pop-ups | H | 2.0 | 🟢 | M1f | Template committed, 0 warnings; renders the stand-in payload | LK | | 0 | 0 | |
-| M1d | Export wiring: File > Export report writes report.html beside the Word report and supplement, all or nothing, with the section choices and the others threshold; delivery rehearsal too; status, Help and docs | M | 1.0 | M1b | M1e | A real-menu export writes three files; cancel leaves the old ones | RS | | 0 | 0 | |
-| M1e | Tests: same project gives byte-identical HTML; every printed number, pop-ups included, traces to a stored value or Word cell; user text escaped; excluded sections absent; three-file publication | M | 1.0 | M1d | M1g | New tests in the suite and green | RS | | 0 | 0 | |
-| M1f | Design passes: headless renders at 1440 px and 390 px, light and dark, a pop-up open, on Ana's sample; iterate until it is good | M | 1.0 | M1b, M1c | M1g | Screenshots in out-look/M1c/screens with the changes listed | LK | | 0 | 0 | |
-| M1g | Proof on Ana's delivered project copy, no Compute: export report.html and check it against her delivered report | M | 0.7 | M1e, M1f | M1h, M1i | SVMP 38.5988% and every share match; 0 NOT FOUND; build and quick suite green; READY M1 | RS | | 0 | 0 | |
-| M1h | Code review of the writer, wiring and tests | M | 0.5 | M1g | M1j | APPROVED, or fixes made by the owner and re-checked | GR | | 0 | 0 | |
-| M1i | Numbers and design review of the page on Ana's export (pop-ups, phone, dark, print, offline) | M | 0.5 | M1g | M1j | APPROVED, or fixes made by the owner and re-checked | GR2 | | 0 | 0 | |
-| M1j | Desk gate and merge to master | L | 0.3 | M1h, M1i | M1k | Gate green; master pushed | Orchestrator | | 0 | 0 | |
-| M1k | Paulo sees the page and the screenshots | L | 0.2 | M1j | M1l, M1q | Paulo's OK or his changes | Paulo | | 0 | 0 | |
-| M1l | On Paulo's word: version 2.1.2 and release notes | L | 0.3 | M1k | M1m | Version in every place K19 changed; notes claim only what is on master | EV | | 0 | 0 | |
-| M1m | On Paulo's word: full release gate on the 2.1.2 commit | M | 0.3 | M1l | M1n | Ledger 5,460 of 5,460, full suite green | Orchestrator | | 0 | 0 | |
-| M1n | On Paulo's word: the 2.1.2 package and its real-menu export of a copy of Ana's project | L | 0.3 | M1m | M1o | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
-| M1o | On Paulo's word: v2.1.2 published on FamilyQuant2-releases | L | 0.1 | M1n | M1p | Release page live and Latest; downloaded zip hash equals M1n | Orchestrator | | 0 | 0 | |
-| M1p | On Paulo's word: install check from GitHub; 2.1.1 offers 2.1.2 | L | 0.2 | M1o |  | Both pass | EV | | 0 | 0 | |
-| M1q | On Paulo's word: report.html into Ana's Relatorio folder, exported from her delivered project with no Compute | L | 0.2 | M1k |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
+| M1a | Baseline: fq/results on current master; build and quick suite green before any change | L | 0.2 | 🟢 | M1b, M1c | 0 warnings; quick suite green | RS | | 0 | 0 | |
+| M1b | The data contract: payload types and docs/HTML-REPORT.md, committed after the one seam round | L | 0.2 | M1a | M1d, M2b | Contract commit on fq/results; FQLook accepted (20:01) | RS | | 0 | 0 | |
+| M1c | A real sample from Ana's stored results, no Compute | L | 0.2 | M1a | M2b | payload-sample.json with every value bound to its Word cell | RS | | 0 | 0 | |
+| M1d | Producer: the headline composition and family rows (names, shares, SD, CV, proteins, peptides) from the prepared report | M | 0.4 | M1b | M1e, M1f, M1g, M1h | Builds; sample regenerated by the program, not by hand | RS | | 0 | 0 | |
+| M1e | Producer: per-run shares and the parts within each family | L | 0.3 | M1d | M2e, M1m | Runs and parts filled for every family that has them | RS | | 0 | 0 | |
+| M1f | Producer: highlights, measured signal by run, Database gap, methods and quality facts | M | 0.4 | M1d | M2c, M2g, M1m | Each printed value is a field bound to its Word cell | RS | | 0 | 0 | |
+| M1g | Producer: coverage, with live positions when the stored results hold them, else the native figure | M | 0.4 | M1d | M2f, M1m | Coverage filled; the commit says which form and why | RS | | 0 | 0 | |
+| M1h | Writer: fills the template once, with safe JSON escaping and byte-identical output | L | 0.3 | M1d, M2a | M1i, M1l | report.html written from a test project | RS | | 0 | 0 | |
+| M1i | Export: report.html staged and published with the Word report and supplement, all or nothing | M | 0.4 | M1h | M1j, M1k, M1n | Three files appear together; cancel keeps the old ones | RS | | 0 | 0 | |
+| M1j | Export: the section choices and the others threshold reach the page | L | 0.2 | M1i | M1n | An unchecked section is absent from the page | RS | | 0 | 0 | |
+| M1k | Delivery rehearsal writes the page; the status message, Help text and docs name it | L | 0.2 | M1i | M1o | Rehearsal output holds report.html | RS | | 0 | 0 | |
+| M1l | Tests: identical bytes for the same project; names and </script> escaped | L | 0.3 | M1h | M1o | Tests in the suite and green | RS | | 0 | 0 | |
+| M1m | Tests: every printed number, pop-ups included, traces to a stored value or a Word cell | M | 0.4 | M1e, M1f, M1g | M1o | Trace test green; 0 NOT FOUND | RS | | 0 | 0 | |
+| M1n | Tests: excluded sections absent; three-file publication and cancel | L | 0.3 | M1j | M1o | Tests in the suite and green | RS | | 0 | 0 | |
+| M1o | Proof on Ana's delivered project copy, no Compute: export the page with FQLook's template | M | 0.4 | M1k, M1l, M1m, M1n, M2j | M1p | SVMP 38.5988% and every share match her report; 0 NOT FOUND | RS | | 0 | 0 | |
+| M1p | Build 0 warnings and quick suite green on the merged branch; READY M1 | L | 0.2 | M1o | M3b, M3c | READY M1 posted with the counts | RS | | 0 | 0 | |
+
+### W2 The page (FQLook)
+
+One self-contained template: inline CSS, JS and SVG, offline, no library; it prints only the display strings it is given.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M2a | Template shell, layout and theme roles, committed as the embedded resource | L | 0.2 | 🟢 | M2b, M1h | Template commit on fq/look; 0 warnings | LK | | 0 | 0 | |
+| M2b | Binding: reads the payload and prints only its display strings, each marked with its field id | L | 0.2 | M2a, M1b | M2c, M2d, M2e, M2f, M2g, M2h | Renders the real sample with no field mismatch | LK | | 0 | 0 | |
+| M2c | Header with file links and the theme toggle; the hero band of highlights | L | 0.3 | M2b | M2i | Renders light and dark | LK | | 0 | 0 | |
+| M2d | The composition ring, with drill-down and back | M | 0.5 | M2b | M2i | Click, keyboard and back all work | LK | | 0 | 0 | |
+| M2e | Ranked families with each run as a point | M | 0.4 | M2b, M1e | M2i | Every run point has its pop-up | LK | | 0 | 0 | |
+| M2f | The selected-family panel: proteins, peptides and the coverage strip | M | 0.4 | M2b, M1g | M2i | Selecting a family fills the panel | LK | | 0 | 0 | |
+| M2g | Measured signal and Database gap views | L | 0.3 | M2b, M1f | M2i | Both render from the payload | LK | | 0 | 0 | |
+| M2h | The method pipeline and the term pop-ups | L | 0.3 | M2b | M2i | Every step and term opens its pop-up | LK | | 0 | 0 | |
+| M2i | Phone layout, print, reduced motion, keyboard and focus | L | 0.3 | M2c, M2d, M2e, M2f, M2g, M2h | M2j | 390 px usable; print preview clean; Tab reaches everything | LK | | 0 | 0 | |
+| M2j | Design pass on Ana's full sample: renders at 1440 and 390 px, light and dark, pop-ups open; READY M2 | M | 0.6 | M2i | M1o, M3c | Screenshots posted with the changes listed | LK | | 0 | 0 | |
+
+### W3 Review and merge
+
+Nobody reviews their own work; a finding is fixed by its owner and checked again.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M3a | Code review of the contract and producers as they land | M | 0.4 | M1g | M3d | APPROVED, or findings sent to the owner | GR | | 0 | 0 | |
+| M3b | Code review of the writer, export and tests | M | 0.4 | M1p | M3d | APPROVED, or findings sent to the owner | GR | | 0 | 0 | |
+| M3c | Numbers and design review of the page on Ana's export: pop-ups, phone, dark, print, offline | M | 0.5 | M1p, M2j | M3d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
+| M3d | Owners fix the review findings; the reviewer checks again | L | 0.3 | M3a, M3b, M3c | M3e | Every finding closed | RS | | 0 | 0 | |
+| M3e | Desk gate and merge to master | L | 0.3 | M3d | M3f | Gate green; master pushed | Orchestrator | | 0 | 0 | |
+| M3f | Paulo sees the page and the screenshots | L | 0.2 | M3e | M4a, M5a | Paulo's OK or his changes | Paulo | | 0 | 0 | |
+
+### W4 Release 2.1.2 (only on Paulo's word)
+
+The same chain as 2.1.1.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M4a | Version 2.1.2 and release notes | L | 0.3 | M3f | M4b | Version in every place K19 changed; notes claim only what is on master | EV | | 0 | 0 | |
+| M4b | Full release gate on the 2.1.2 commit | M | 0.3 | M4a | M4c | Ledger 5,460 of 5,460, full suite green | Orchestrator | | 0 | 0 | |
+| M4c | The 2.1.2 package and its real-menu export of a copy of Ana's project | L | 0.3 | M4b | M4d | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
+| M4d | v2.1.2 published on FamilyQuant2-releases | L | 0.1 | M4c | M4e | Release page live and Latest; downloaded zip hash equals M4c | Orchestrator | | 0 | 0 | |
+| M4e | Install check from GitHub; 2.1.1 offers 2.1.2 | L | 0.2 | M4d |  | Both pass | EV | | 0 | 0 | |
+
+### W5 Delivery to Ana (only on Paulo's word)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M5a | report.html into Ana's Relatorio folder, exported from her delivered project with no Compute | L | 0.2 | M3f |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
 
 ## Critical path
 
-M1a, M1b, M1d, M1e, then M1g (which also needs FQLook's M1c and M1f), the two reviews M1h and M1i, the gate M1j, and Paulo's look M1k. The release (M1l to M1p) and the delivery to Ana (M1q) start only on his word.
+M1b, M1d, the producers M1e to M1g, the writer M1h and export M1i, the tests, then the proof M1o (which also needs FQLook's page, M2a to M2j), the reviews M3a to M3c, the fixes M3d, the gate M3e and Paulo's look M3f. The release (W4) and the delivery to Ana (W5) start only on his word.
 
 ## Paulo's decisions
 
@@ -127,6 +174,6 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | A quick gate hides a stale ledger receipt | K9's full gate fails on receipts | The owner of the row re-proves it before the candidate is published |
 | The release does not install on Ana's machine | K12 or K13 fails | Fix before K11 or publish 2.1.1; 2.0.0 and 1.5 stay installable |
 | A test leaves files that fail the next gate | A failure names output the commit cannot make | The suite empties each shard's folder before a run (11-03); suspect leftovers first |
-| The page shows a number the Word report does not | M1e or M1g finds a printed number with no stored source | No merge; the page prints only payload display strings (M1b) |
+| The page shows a number the Word report does not | M1m or M1o finds a printed number with no stored source | No merge; the page prints only payload display strings (M1b) |
 | Ana's folder is touched | Any file under AnaG changes outside Relatorio | Stop and restore; checked before and after K17 |
 | The machine is shared by several large runs | A run's time grows past its estimate | The desk reorders unstarted work; never stops a running run |
