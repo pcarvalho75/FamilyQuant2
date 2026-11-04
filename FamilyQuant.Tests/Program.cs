@@ -40,6 +40,7 @@ namespace FamilyQuant.Tests
         [STAThread] // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            IsolateShellSessionState();
             if (TestCommandRegistry.TryRun(args, TestCommandPhase.Raw, string.Empty, out int rawExit))
                 return rawExit;
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
@@ -58,6 +59,24 @@ namespace FamilyQuant.Tests
             Console.WriteLine();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
+        }
+
+        private static void IsolateShellSessionState()
+        {
+            string root = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests", "shell-state", Guid.NewGuid().ToString("N"));
+            void Isolate(Assembly assembly)
+            {
+                var shell = assembly.GetType("FamilyQuant.MainWindow");
+                if (shell == null) return;
+                // Frozen comparison shells have their own statics. Isolate them before any window is constructed too.
+                var settings = shell.GetProperty("ShellSettingsPathOverride", BindingFlags.Public | BindingFlags.Static);
+                if (settings?.CanWrite != true)
+                    throw new InvalidOperationException("The shell test assembly must expose an isolated settings path.");
+                settings.SetValue(null, Path.Combine(root, assembly.ManifestModule.ModuleVersionId.ToString("N"), "shell.json"));
+            }
+            Isolate(typeof(MainWindow).Assembly);
+            AppDomain.CurrentDomain.AssemblyLoad += (_, loaded) => Isolate(loaded.LoadedAssembly);
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()) Isolate(assembly);
         }
 
         // Later real-data checks read what earlier ones left in static fields, so each group stays in one shard.
