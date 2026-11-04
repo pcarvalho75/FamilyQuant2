@@ -59,3 +59,17 @@ and `<output>.comparison.json` beside the revised trace. The native C# harness l
 changed status/source/cell and every ambiguous row, including original CSV row numbers and
 full context. It refuses misaligned token identities and input/output collisions. The JSON
 records both input trace hashes. Comparison does not change the missing-number exit status.
+
+For the offline HTML companion, use `--trace-html-report-numbers <report.html>
+<native-source-folder> <copied-project.fqproj> <output.csv>`. The existing
+`--trace-report-numbers` command also accepts HTML and discovers a sibling `project.fqproj`.
+The HTML route retains the same trace CSV columns and numeric tokenizer. It checks every
+payload field, including pop-ups and short labels, against its explicit Word, workbook or
+stored-project reference. It never searches for a coincidentally equal number elsewhere.
+Stored references resolve persisted writable properties only. Scale and format must reproduce
+the display text; short labels use the unrounded source value. Exact paragraph text and the
+zero-based occurrence among identical paragraphs locate `word-text` references in Word.
+Coverage endpoints and sequence lengths must equal the stored values; fallback PNG bytes
+must equal the corresponding Word figure. Missing IDs, invalid references and mismatched
+text or geometry produce `NOT FOUND` and exit code 1. No input package is rewritten.
+`--test-html-number-trace` runs positive and negative fixtures and is enrolled in the suite.

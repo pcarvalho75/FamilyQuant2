@@ -342,6 +342,8 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-report-number-trace", "FamilyQuant.Tests.Program.ReportNumberTraceTests()"),
         SuiteCommandRule.Covered("--test-html-report-data", "FamilyQuant.Tests.Program.HtmlReportDataTests()"),
         SuiteCommandRule.Covered("--test-html-coverage", "FamilyQuant.Tests.Program.HtmlCoverageTests()"),
+        SuiteCommandRule.Covered("--test-html-number-trace", "FamilyQuant.Tests.Program.HtmlNumberTraceTests()"),
+        SuiteCommandRule.Excluded("--trace-html-report-numbers", "Selected HTML trace requires sibling native Word/workbook and the copied source project; validates explicit bindings and display conversions, never computes scientific results."),
         SuiteCommandRule.Excluded("--inspect-html-coverage-source", "Selected-input read-only inspection requires a copied stored project and fresh owned output; it reports available stored geometry without Compute or evidence fetching."),
         SuiteCommandRule.Excluded("--html-payload-sample", "Requires explicit copied project/delivered Word and fresh output; a stored-only native payload proof, not a default fixture."),
         SuiteCommandRule.Covered("--test-report-numeric-layout", "FamilyQuant.Tests.Program.ReportNumericLayoutTests(System.String)"),
