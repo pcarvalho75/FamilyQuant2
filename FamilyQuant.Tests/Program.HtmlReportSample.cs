@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text;
+using System.Text.RegularExpressions;
 using W = DocumentFormat.OpenXml.Wordprocessing;
 
 namespace FamilyQuant.Tests;
@@ -20,6 +22,7 @@ internal static partial class Program
     /// Uses the normal stored-study report builders; never opens the UI, searches or calls Compute.</summary>
     private static int HtmlReportSample(string[] args)
     {
+        if (args.Length == 4 && args[1] == "--from-export") return HtmlPayloadFromExport(args[2], args[3]);
         if (args.Length != 5) throw new ArgumentException("Use --html-payload-sample <copied-project> <copied-delivered-word> <fresh-source-folder> <payload.json>.");
         string project = Path.GetFullPath(args[1]), delivered = Path.GetFullPath(args[2]), output = Path.GetFullPath(args[4]);
         if (output.Equals(project, StringComparison.OrdinalIgnoreCase) || output.Equals(delivered, StringComparison.OrdinalIgnoreCase))
@@ -63,6 +66,26 @@ internal static partial class Program
         }, new JsonSerializerOptions { WriteIndented = true }));
         Console.WriteLine("PASS native stored-only payload: " + actual.Length + " headline rows, " + payload.Fields.Count
             + " bound fields; every headline label/mean equals delivered Word; source hashes unchanged. " + output);
+        return 0;
+    }
+
+    private static int HtmlPayloadFromExport(string htmlPath, string outputPath)
+    {
+        string input = Path.GetFullPath(htmlPath), output = Path.GetFullPath(outputPath);
+        if (input.Equals(output, StringComparison.OrdinalIgnoreCase) || Path.GetExtension(output) != ".json")
+            throw new IOException("Use a separate JSON sample path.");
+        string before = DeliveryWorkspace.Sha256(input);
+        var matches = Regex.Matches(File.ReadAllText(input), "<script\\b(?=[^>]*\\bid\\s*=\\s*[\"']fq-data[\"'])[^>]*>(?<json>.*?)</script\\s*>",
+            RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        if (matches.Count != 1) throw new InvalidDataException("The native export must contain one payload.");
+        string json = matches[0].Groups["json"].Value;
+        using var document = JsonDocument.Parse(json);
+        if (document.RootElement.GetProperty("schema").GetString() != "familyquant-report-html/v1")
+            throw new InvalidDataException("Unexpected native HTML schema.");
+        File.WriteAllText(output, json, new UTF8Encoding(false));
+        if (before != DeliveryWorkspace.Sha256(input)) throw new InvalidDataException("The source HTML changed.");
+        Console.WriteLine("PASS native-export payload sample: " + document.RootElement.GetProperty("fields").EnumerateObject().Count()
+            + " exact bound fields copied by the program; source HTML unchanged. " + output);
         return 0;
     }
 
