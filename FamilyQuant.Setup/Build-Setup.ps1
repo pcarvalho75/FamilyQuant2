@@ -20,8 +20,8 @@ foreach ($name in @('FamilyQuant2.exe','FamilyQuant2.dll','FamilyQuant2.runtimec
 }
 $info=[Diagnostics.FileVersionInfo]::GetVersionInfo($app)
 $version=[Version]$info.FileVersion
-if ($info.ProductName -ne 'FamilyQuant2' -or -not $info.ProductVersion.StartsWith($version.ToString(),[StringComparison]::Ordinal)
-    -or [Reflection.AssemblyName]::GetAssemblyName($assembly).Version -ne $version) { throw 'Payload EXE/DLL version metadata differs.' }
+if ($info.ProductName -ne 'FamilyQuant2' -or -not $info.ProductVersion.StartsWith($version.ToString(),[StringComparison]::Ordinal) -or
+    [Reflection.AssemblyName]::GetAssemblyName($assembly).Version -ne $version) { throw 'Payload EXE/DLL version metadata differs.' }
 $tag=('{0}.{1}.{2}' -f $version.Major,$version.Minor,$version.Build)
 if ($version.Revision -gt 0) { $tag+='.'+$version.Revision }
 $asset=Join-Path $output ('FamilyQuant2-'+$tag+'-Setup.exe')
@@ -55,8 +55,8 @@ try {
     foreach($entry in $archive.Entries) {
         $name=$entry.FullName
         if($name.EndsWith('/')) { continue }
-        if($name.StartsWith('/') -or $name.Contains('\') -or $name.Contains(':') -or ($name.Split('/') -contains '..')
-            -or -not $seen.Add($name) -or -not $expected.ContainsKey($name)) { throw ('Unexpected ZIP path: '+$name) }
+        if($name.StartsWith('/') -or $name.Contains('\') -or $name.Contains(':') -or ($name.Split('/') -contains '..') -or
+            -not $seen.Add($name) -or -not $expected.ContainsKey($name)) { throw ('Unexpected ZIP path: '+$name) }
         $file=$expected[$name]
         $stream=$entry.Open();$sha=[Security.Cryptography.SHA256]::Create()
         try { $hash=[BitConverter]::ToString($sha.ComputeHash($stream)).Replace('-','') } finally { $sha.Dispose();$stream.Dispose() }
