@@ -641,3 +641,10 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | M5a | report.html into Ana's Relatorio folder (the desk never writes there without his word) | L | 0.1 | 🟢 |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
+
+### W1 The count (FQResults, FQEvidence)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| G1a | Science check of ruling D55: read the curation code and confirm that UserID is the family assignment of a database entry, that decoys and contaminants are left out, that a panel family takes the distinct union of its member families, and that Others is not plotted | L | 0.2 | 🟢 | G1b | APPROVED, or a corrected rule the desk adopts before G1b merges | GR | | 0 | 0 | |
+

@@ -62,7 +62,6 @@ What a family's database entries are is ruled in D55; G1a checks the ruling agai
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G1a | Science check of ruling D55: read the curation code and confirm that UserID is the family assignment of a database entry, that decoys and contaminants are left out, that a panel family takes the distinct union of its member families, and that Others is not plotted | L | 0.2 | 🟢 | G1b | APPROVED, or a corrected rule the desk adopts before G1b merges | GR | | 0 | 0 | |
 | G1b | Core: a read-only, family-keyed count of database entries from the stored curation, collapsed to effective panel keys the way EffectivePanelFamilyStudy collapses UserIDs; no Compute, no search, saved studies untouched | M | 0.5 | 🟢 | G1c, G3a | KnownAnswers test in DefaultSuite, red then green: decoy, contaminant, unassigned entry, a panel family of two families; rule written in docs/HTML-REPORT.md | RS | | 0 | 0 | |
 | G1c | Payload: `databaseEntries` offered in dotMeasures whenever the count exists, log scale with program-made ticks, every value a bound field | L | 0.3 | G1b | G1d, G1e, G2b | Synthetic payload lists the measure; existing payload tests unchanged | RS | | 0 | 0 | |
 | G1d | Number trace and ledger: the new fields resolve to their stored source; one ledger row for the measure | M | 0.3 | G1c | G3b | Trace of Ana's copied project: 0 NOT FOUND; ledger row proved | RS | | 0 | 0 | |
