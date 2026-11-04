@@ -5,88 +5,88 @@
   "runs": [
     {
       "id": "native-shell-metadata",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-native D:/FamilyQuant-data/out-shell/N3/source C:\\FamilyQuant-gate\\FamilyQuant.Tests\\ReferenceGoldenHost\\bin\\Release\\net10.0-windows7.0\\ReferenceGoldenHost.exe D:/FamilyQuant-data/out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native \u00222026-11-03 23:39:33 -0800\u0022 D:/FamilyQuant-data/out-refresh\\20261103-233813-FamilyQuant-gate\\inputs\\C1-runtime.json",
-      "executedAt": "2026-11-03 23:39:33 -0800",
-      "commit": "2fc9abea89fb9a0173f957deb456c3611d49defe",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-native D:/FamilyQuant-data/out-shell/N3/source C:\\FamilyQuant-gate\\FamilyQuant.Tests\\ReferenceGoldenHost\\bin\\Release\\net10.0-windows7.0\\ReferenceGoldenHost.exe D:/FamilyQuant-data/out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native \u00222026-11-04 01:22:55 -0800\u0022 D:/FamilyQuant-data/out-refresh\\20261104-012212-FamilyQuant-gate\\inputs\\C1-runtime.json",
+      "executedAt": "2026-11-04 01:22:55 -0800",
+      "commit": "b8490e0188d1bcd70b24d06334097bc1cb9a1c36",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\comparisons.log",
           "sha256": "4B45E35C1E8B88506960E568CE701DB57D75F01B8CA1C92368CE61C2894C463F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\frozen.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\frozen.json",
           "sha256": "49A31F693A6AD63BC47DC370CA9BDA06BD5E85F6D032DBCC05CC4A724759CAC4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\current.json",
-          "sha256": "4B175D6F70B2B7593648FA26AE83D206E3ECCB9B8678AC5073CFB96BA3C7C60D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\current.json",
+          "sha256": "D477D1DE18A90E2F3B6E0DFCF664A7ECE56BB1A4CA385541F5CB5BA90C9473D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\comparisons.json",
           "sha256": "B6CDC4DB6097BB8B3CFE6BA9B358DB76C2C1835C332AD5BDBA555B0F0C99D4DF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\frozen.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\frozen.log",
           "sha256": "4104A3EC66E1C8FA2AF2A8105ACC570C9B6EDB3AC01DA030B45E8BCB97542C6B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\inputs\\C1-runtime.json",
-          "sha256": "3362DC68D02F13A418BDEE4EE0A3B7B87D8ADBBF9F39546C26FC3E5447EEC38E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\inputs\\C1-runtime.json",
+          "sha256": "177A6564F2842F67CD2B64950221BBBB3268456A875420E4EE4B930E710C0283"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataSnapshot.cs",
           "sha256": "47D494FBC5FF481A950E8F491C3B3009C3AA90B0A9FE5E1E6A024FB39D655A89"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataSnapshot.Home.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataSnapshot.Home.cs",
           "sha256": "B6638F24407CBD00BDA4EC05C339B4BA5ACCC96705B0C69C829128833A1E8B2C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataComparison.cs",
           "sha256": "9C63F9AF014EDD2F6B6A8D00095475832C3E59AADC9229FDB6A4EA17AD84159B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_Program.ShellMetadata.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_Program.ShellMetadata.cs",
           "sha256": "6AD7281C3B583750E33E151A82F6B5F001E2FC382F90D0A0FDD9AAE5A571AB00"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_Program.ShellMetadataReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_Program.ShellMetadataReceipts.cs",
           "sha256": "090760DA59AE80A322F8A36C300DB790E3AFF4740EA31F3AF9CB9EB72D47E0E9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_Program.Commands.ShellMetadata.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_Program.Commands.ShellMetadata.cs",
           "sha256": "9333F90441B310A545C0EF69B28F3EE6BB8EEC195846EB0950519FB7E129A4B9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ReferenceGoldenHost_Program.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ReferenceGoldenHost_Program.cs",
           "sha256": "B35CF2C9532E821E92B73DDE08E8AFFDC407C15C465CB486A98F75C56C4FA125"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ReferenceGoldenHost_ReferenceGoldenHost.csproj",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ReferenceGoldenHost_ReferenceGoldenHost.csproj",
           "sha256": "6E765AC6228BB73AFE487547FBDBF7F1404E7CFB0B496989607707CBB1B5828E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "28CB32BD8B321F06E688663FDD7D6E27B99AFBE7A19AC6CD981630F4C04B2286"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "5786FAE3A3D5ECFBDE6D426060801AF15D27526BADEFBE5B95DCB8CC9CA5AACF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant2.dll",
-          "sha256": "458E3D8F96F69903FA8D7740AF7FB061D5C54136AAB89DE97BFFB6309482A7A6"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant2.dll",
+          "sha256": "C62C7AB3FEBD68E9564C1D6F86B59991675F9C458AE1D85830FCBB20618EA790"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Core.dll",
-          "sha256": "11CDCAB7518EA2FB63CFCFA44088833C738BAB27C1B2DF05F62625BC69C8EE0D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Core.dll",
+          "sha256": "F7E5F73967F0ED2856E024AA97C68432EF4DB9ECC521E7DA111F155F5A3D7FBF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\ReferenceGoldenHost.exe",
-          "sha256": "15B3670445D7DB36A8A3D6CD8384E216CC6B120F64CD674118162EDFCE7A151D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\ReferenceGoldenHost.exe",
+          "sha256": "F28DA9CBF17ADB8AB8AB98A3C63F0D95CF9031D4B0DE8DFE82ACF40CB52FBBB6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\ReferenceGoldenHost.dll",
-          "sha256": "EB7D5E7AD413F750E87087DF2FD5CBB3CB4D973306D93FA1CC39C0CDC3D31DB5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\ReferenceGoldenHost.dll",
+          "sha256": "177604784B1B4B545CBBE8311FE02071A2FD95ED91F8311ED221ED5E7A96B4FA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         }
       ],
@@ -274,7 +274,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItemSaveFCF.IsEnabled = False",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -284,7 +284,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItemSaveFCF.IsEnabled = False",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItemSaveFCF.IsEnabled = False",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItemSaveFCF.IsEnabled = False",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -299,12 +309,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItemSaveFCF.IsEnabled = False",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItemSaveFCF.IsEnabled = False",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -825,7 +835,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemAnalytics",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -835,7 +845,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemAnalytics",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemAnalytics",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemAnalytics",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -850,12 +870,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItem MenuItemAnalytics",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemAnalytics",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -1136,7 +1156,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemComputeXic",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -1146,7 +1166,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemComputeXic",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemComputeXic",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemComputeXic",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -1161,12 +1191,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItem MenuItemComputeXic",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemComputeXic",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -2138,7 +2168,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemSaveProject",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -2148,7 +2178,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemSaveProject",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemSaveProject",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemSaveProject",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -2163,12 +2203,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItem MenuItemSaveProject",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemSaveProject",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -2546,7 +2586,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItemReanotateSEPro.IsEnabled = False",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -2556,7 +2596,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItemReanotateSEPro.IsEnabled = False",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItemReanotateSEPro.IsEnabled = False",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItemReanotateSEPro.IsEnabled = False",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -2571,12 +2621,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItemReanotateSEPro.IsEnabled = False",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItemReanotateSEPro.IsEnabled = False",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -3144,7 +3194,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemHome",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -3154,7 +3204,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemHome",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemHome",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemHome",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -3169,12 +3229,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItem MenuItemHome",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemHome",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -3665,7 +3725,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemReanotateSEPro",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -3675,7 +3735,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemReanotateSEPro",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemReanotateSEPro",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemReanotateSEPro",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -3690,12 +3760,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItem MenuItemReanotateSEPro",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemReanotateSEPro",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -3911,7 +3981,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItemComputeXic.IsEnabled = False",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -3921,7 +3991,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItemComputeXic.IsEnabled = False",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItemComputeXic.IsEnabled = False",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItemComputeXic.IsEnabled = False",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -3936,12 +4016,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItemComputeXic.IsEnabled = False",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItemComputeXic.IsEnabled = False",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -4125,7 +4205,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemRunUSearch",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -4135,7 +4215,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemRunUSearch",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemRunUSearch",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemRunUSearch",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -4150,12 +4240,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItem MenuItemRunUSearch",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemRunUSearch",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -4592,7 +4682,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemDeNovo",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -4602,7 +4692,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemDeNovo",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemDeNovo",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemDeNovo",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -4617,12 +4717,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItem MenuItemDeNovo",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemDeNovo",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -5170,7 +5270,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemSaveFCF",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -5180,7 +5280,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemSaveFCF",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemSaveFCF",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemSaveFCF",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -5195,12 +5305,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItem MenuItemSaveFCF",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemSaveFCF",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -5400,7 +5510,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemLoadFQC",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -5410,7 +5520,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemLoadFQC",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemLoadFQC",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemLoadFQC",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -5425,12 +5545,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItem MenuItemLoadFQC",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemLoadFQC",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -5630,7 +5750,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemSpectrumComparison",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -5640,7 +5760,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemSpectrumComparison",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemSpectrumComparison",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItem MenuItemSpectrumComparison",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -5655,12 +5785,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItem MenuItemSpectrumComparison",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItem MenuItemSpectrumComparison",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -5860,7 +5990,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItemSaveProject.IsEnabled = False",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -5870,7 +6000,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItemSaveProject.IsEnabled = False",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItemSaveProject.IsEnabled = False",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItemSaveProject.IsEnabled = False",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -5885,12 +6025,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItemSaveProject.IsEnabled = False",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItemSaveProject.IsEnabled = False",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -6074,7 +6214,7 @@
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "compiled native metadata for MenuItemSpectrumComparison.IsEnabled = False",
-          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
@@ -6084,7 +6224,17 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "compiled native metadata for MenuItemSpectrumComparison.IsEnabled = False",
-          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
+          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
+          "symbol": "compiled native metadata for MenuItemSpectrumComparison.IsEnabled = False",
+          "sha256": "7E5A851FF24FAB63C345D7CB24BE63DED15839A7C12CAB3BB74482FD793D1694"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
+          "symbol": "compiled native metadata for MenuItemSpectrumComparison.IsEnabled = False",
+          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -6099,12 +6249,12 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled native metadata for MenuItemSpectrumComparison.IsEnabled = False",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
           "symbol": "compiled native metadata for MenuItemSpectrumComparison.IsEnabled = False",
-          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+          "sha256": "A0BB6CAE7743BA66756F19BE6B68EA18C3363D5BC3ACB0A2C979F649985CCAB9"
         },
         {
           "path": "FamilyQuant/Themes/Branding.xaml",
@@ -7182,7 +7332,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind option/copy: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -7196,7 +7346,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind handler: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -7210,7 +7360,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind control: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -7224,7 +7374,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind code fact: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -7238,7 +7388,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind handler definition: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-233813-FamilyQuant-gate\\shell-native\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]

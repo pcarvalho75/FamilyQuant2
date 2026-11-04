@@ -5,56 +5,56 @@
   "runs": [
     {
       "id": "text-tool",
-      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261103-165518-assay\\text-preserved \u00222026-11-03 16:57:12 -0800\u0022",
-      "executedAt": "2026-11-03 16:57:12 -0800",
-      "commit": "d4f70fd42dcc26698987e37401811e082f6b3197",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved \u00222026-11-04 01:31:58 -0800\u0022",
+      "executedAt": "2026-11-04 01:31:58 -0800",
+      "commit": "b8490e0188d1bcd70b24d06334097bc1cb9a1c36",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.log",
-          "sha256": "8AD1F37C1CDDFB077ECD4C06ADB998C83C6314A1203095550675400B0823388B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\text.log",
+          "sha256": "C86EEC63F7E252DA0390ABD0C25EB6B95059C523AC5EA4E0EFE23BECA4719575"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.json",
-          "sha256": "A134DA951739100D47C52F70F1948885E8A6E894C88DE3D8B0873249AF426CE9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\text.json",
+          "sha256": "959EE97172482CAB5A73800270CFD573632A7E7C480C8248FDB272F9D5883911"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant2.dll",
-          "sha256": "A3FB813739F652F2C410A56EAE642455885EFDCA754573C9CC7FECC47282ECF9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant2.dll",
+          "sha256": "C62C7AB3FEBD68E9564C1D6F86B59991675F9C458AE1D85830FCBB20618EA790"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant2.pdb",
-          "sha256": "4B4DEC5344F4D55BA08929466F681704DA076668985E63A766CD331309CA3D33"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant2.pdb",
+          "sha256": "305EF907B13681C9D059EDD55E0520D6C33B8C8CE1291B6127310123C204FB8B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Core.dll",
-          "sha256": "A833B10A087C334BFCB75BED61E900D1ACD67CA496A3FF1B2450764CA6917364"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Core.dll",
+          "sha256": "F7E5F73967F0ED2856E024AA97C68432EF4DB9ECC521E7DA111F155F5A3D7FBF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Core.pdb",
-          "sha256": "13B93CB16B590C83A18FD2B0961370CAAA44DF8826E4AF5E0FC7B64975F05B89"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Core.pdb",
+          "sha256": "A4994709B638D42625BFD63FD81CF4AC50E475C2441379A9621CFA86F5A56907"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "2B9CC4F338F66ADC12A96558DC81C1168C77A1F64EC51A4B858F4FD22A0555F9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "5786FAE3A3D5ECFBDE6D426060801AF15D27526BADEFBE5B95DCB8CC9CA5AACF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
           "sha256": "2CB78207901A4D7ACADF502A2EA634EFA79F3C1FC984986B33E5559BAD99FD21"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
           "sha256": "5DF4825EB752822347F0BCA69799D5F85074B6233EC741A6F9FC8186AE2BD721"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
           "sha256": "76B82F938173EA4E342000A363089B287BD5B2A897FDC8872B5EDB5319BB2F12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "7FFE973E1D4F66812812B051DAB78C93169902380838CFA92C011F86B1C3A02D"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\assay"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -154,7 +154,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Every row is hidden by a filter, so there is nothing to export. Clear the Search box and untick the ...\u0022 (SHA256 662D7CBA25E5E1B3) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022Every row is hidden by a filter, so there is nothing to export. Clear the Search box and untick the ...\u0022 (SHA256 662D7CBA25E5E1B3) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-1E6D90635150",
@@ -224,7 +224,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Every row is hidden by a filter, so there is nothing to export. Clear the Search box and untick the ...\u0022 (SHA256 662D7CBA25E5E1B3) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022Every row is hidden by a filter, so there is nothing to export. Clear the Search box and untick the ...\u0022 (SHA256 662D7CBA25E5E1B3) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-23ADE20F7269",
@@ -302,7 +302,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled XAML mainwindow.baml: MenuItem MenuItemHelp",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         }
       ],
       "proofs": [],
@@ -406,7 +406,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The full XIC is being attributed to the families. These options become live when it finishes.\u0022 (SHA256 D9C5B4F5AAF06320) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022The full XIC is being attributed to the families. These options become live when it finishes.\u0022 (SHA256 D9C5B4F5AAF06320) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-419C21525F0E",
@@ -476,7 +476,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022no quantitation yet\u0022 (SHA256 9026DAD7EA31679B) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022no quantitation yet\u0022 (SHA256 9026DAD7EA31679B) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-4DBFE465A7B8",
@@ -490,7 +490,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022press Recalculate\u0022 (SHA256 6D6CAC71EEA7C47D) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022press Recalculate\u0022 (SHA256 6D6CAC71EEA7C47D) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-4EA6BDD226D3",
@@ -532,7 +532,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The options changed since the table was last calculated. Press Recalculate to apply them.\u0022 (SHA256 0595A5EE7A551B55) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022The options changed since the table was last calculated. Press Recalculate to apply them.\u0022 (SHA256 0595A5EE7A551B55) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-53666841AC8F",
@@ -588,7 +588,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The table matches the options selected here.\u0022 (SHA256 F8F0DE9B9294D434) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022The table matches the options selected here.\u0022 (SHA256 F8F0DE9B9294D434) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-603C70DEE702",
@@ -686,7 +686,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022no visible rows\u0022 (SHA256 3FAC03FECC5219CD) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022no visible rows\u0022 (SHA256 3FAC03FECC5219CD) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-7A6177A9566E",
@@ -722,7 +722,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled XAML mainwindow.baml: MenuItem MenuItemHowToRead",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         }
       ],
       "proofs": [],
@@ -770,7 +770,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Free text of your own. It is saved in the .fcf and written to the CSV, and it affects no calculation...\u0022 (SHA256 2044478F94DDB604) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
+      "compared": "frozen literal \u0022Free text of your own. It is saved in the .fcf and written to the CSV, and it affects no calculation...\u0022 (SHA256 2044478F94DDB604) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-8327789B8931",
@@ -798,7 +798,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Your own family number, the only editable id. Type the same number in two rows to merge their famili...\u0022 (SHA256 C6A3DF6D916ECE40) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
+      "compared": "frozen literal \u0022Your own family number, the only editable id. Type the same number in two rows to merge their famili...\u0022 (SHA256 C6A3DF6D916ECE40) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-8BA6DEDE6604",
@@ -840,7 +840,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Full XIC, % of quantified signal\u0022 (SHA256 8DD424659F4DC493) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateColumnHeaders() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateColumnHeaders; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
+      "compared": "frozen literal \u0022Full XIC, % of quantified signal\u0022 (SHA256 8DD424659F4DC493) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateColumnHeaders() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateColumnHeaders or ClusterGenerationControl.UpdateColumnHeaders; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-8F346233E32A",
@@ -854,7 +854,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The sum of the protein\u0027s residue masses in daltons, without the terminal water. Add 18.011 Da for th...\u0022 (SHA256 B7FBBD75E6982B71) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
+      "compared": "frozen literal \u0022The sum of the protein\u0027s residue masses in daltons, without the terminal water. Add 18.011 Da for th...\u0022 (SHA256 B7FBBD75E6982B71) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-91BC81E5F2FB",
@@ -868,7 +868,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it equals User I...\u0022 (SHA256 85498388F5C8F8DF) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
+      "compared": "frozen literal \u0022The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it equals User I...\u0022 (SHA256 85498388F5C8F8DF) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-91DFEE84C0F4",
@@ -890,7 +890,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled XAML mainwindow.baml: MenuItem MenuItemWhereAmI",
-          "sha256": "EB4F98F3B5212CF38D16855614567B6EB98A77BE6500325815409F3532D65D54"
+          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
         }
       ],
       "proofs": [],
@@ -938,7 +938,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The families are loaded and can be merged further here.\u0022 (SHA256 BF6C71B0C80D6810) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022The families are loaded and can be merged further here.\u0022 (SHA256 BF6C71B0C80D6810) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-97A05E3D113A",
@@ -966,7 +966,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The full XIC is being attributed to the families. These options become live when it finishes.\u0022 (SHA256 D9C5B4F5AAF06320) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022The full XIC is being attributed to the families. These options become live when it finishes.\u0022 (SHA256 D9C5B4F5AAF06320) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-A32884827D7E",
@@ -1008,7 +1008,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The options changed since the table was last calculated. Press Recalculate to apply them.\u0022 (SHA256 0595A5EE7A551B55) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022The options changed since the table was last calculated. Press Recalculate to apply them.\u0022 (SHA256 0595A5EE7A551B55) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-AA44039ABC34",
@@ -1064,7 +1064,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Your own family number, the only editable id. Type the same number in two rows to merge their famili...\u0022 (SHA256 C6A3DF6D916ECE40) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
+      "compared": "frozen literal \u0022Your own family number, the only editable id. Type the same number in two rows to merge their famili...\u0022 (SHA256 C6A3DF6D916ECE40) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-B6DF500A0081",
@@ -1078,7 +1078,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it equals User I...\u0022 (SHA256 85498388F5C8F8DF) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
+      "compared": "frozen literal \u0022The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it equals User I...\u0022 (SHA256 85498388F5C8F8DF) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-B94E167A6C05",
@@ -1092,7 +1092,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Full XIC, % of TIC\u0022 (SHA256 4A51A680A66FC5F2) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateColumnHeaders() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateColumnHeaders; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
+      "compared": "frozen literal \u0022Full XIC, % of TIC\u0022 (SHA256 4A51A680A66FC5F2) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateColumnHeaders() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateColumnHeaders or ClusterGenerationControl.UpdateColumnHeaders; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-BB1AEEA9162E",
@@ -1162,7 +1162,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The sum of the protein\u0027s residue masses in daltons, without the terminal water. Add 18.011 Da for th...\u0022 (SHA256 B7FBBD75E6982B71) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
+      "compared": "frozen literal \u0022The sum of the protein\u0027s residue masses in daltons, without the terminal water. Add 18.011 Da for th...\u0022 (SHA256 B7FBBD75E6982B71) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-CBBE24CC9A82",
@@ -1218,7 +1218,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022A PatternLab project is loaded and its peptides have been matched to these families.\u0022 (SHA256 259ECE3699A843BD) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022A PatternLab project is loaded and its peptides have been matched to these families.\u0022 (SHA256 259ECE3699A843BD) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-DECB5B0B5910",
@@ -1246,7 +1246,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The filters below decide which rows are shown, and an export writes exactly those.\u0022 (SHA256 75F09B1D5DF1E753) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+      "compared": "frozen literal \u0022The filters below decide which rows are shown, and an export writes exactly those.\u0022 (SHA256 75F09B1D5DF1E753) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates or ClusterGenerationControl.UpdateLayerStates or CurationQuantitationViewModel.RefreshFullXicShares or HelpContent.Build; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass131_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-E868054F5CDA",
@@ -1343,7 +1343,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind code fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1357,7 +1357,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind control: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1371,7 +1371,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind help fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1385,7 +1385,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind option/copy: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1399,7 +1399,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind tooltip: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-013125-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
