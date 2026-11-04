@@ -25,6 +25,12 @@ formatted raw value, computed total, array length, percentage or counter. Every 
 must carry `data-fq-field="<id>"`, including SVG text, hover cards and dialog content. Use textContent
 or DOM text nodes for all data. Labels containing digits are fields too.
 
+D47 adds optional `short` to a field: it is another field ID, with G3 display text rounded
+by C# from the native value. Charts print that short field; pop-ups print the original exact
+field. The short field has its own checked source/format, avoiding double rounding from a
+Word display when a full-precision workbook or stored-study value exists. Both are traced.
+Methods and quality facts remain empty under D47; the page is plots, labels and short info.
+
 `title`, `authors`, `interpretation`, all family/run/part names, and metric properties are field
 IDs, not display text. Missing IDs or null values mean unavailable; they never imply zero.
 `composition.families` has name, mean, sd, cv, wholeMeasured, proteins, uniqueProteins, peptides,
