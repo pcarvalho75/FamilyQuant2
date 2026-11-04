@@ -636,3 +636,8 @@ Paulo agreed these at the restart, 2026-11-01.
 | M7i | The 2.1.3 zip and Setup.exe from that commit; Setup.exe in test mode extracts and the app reports 2.1.3 | L | 0.2 | 🟢 | M7e | Both files with SHA256; test-mode install passes | AS | | 0 | 0 | |
 | M7e | v2.1.3 published with the Setup.exe and the zip; README reads 2.1.3 throughout (Paulo 00:11), with the installer section, pushed | L | 0.2 | 🟢 |  | Release live and Latest; hashes equal M7i; README live | Orchestrator | | 0 | 0 | |
 
+### W3 Held for Paulo's word (version 8)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M5a | report.html into Ana's Relatorio folder (the desk never writes there without his word) | L | 0.1 | 🟢 |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |

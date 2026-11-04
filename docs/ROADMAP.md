@@ -1,18 +1,14 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 8, 2026-11-04 00:05, the two releases of the night. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
+Version 9, 2026-11-04 06:45, release 2.1.4. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
 Finished rows leave this file and go to `docs/ROADMAP-archive.md`; the needle restarts at zero with each version.
 
-Version 7 delivered 42 steps (in the archive): the interactive report.html written beside the Word report (data contract, producers with short labels, writer, three-file export, trace with 0 NOT FOUND on Ana's real export, the page with FQOpus' design critique, a dot plot with selectable axes, all reviews and gates), the 2.1.2 version and release gate, and the public README with manual and screenshots. Version 8 is what remains: publish 2.1.2 tonight, then 2.1.3 with a real installer and automatic updates, both without questions while Paulo sleeps (D51, D52).
+Version 8 delivered 18 steps (in the archive): 2.1.2 (the interactive report.html with the dot plot) and 2.1.3 (the Setup.exe installer, Help > Install update, the start-up update banner) published on GitHub overnight, the README for 2.1.3, and Ana's new page with a 2.1.3 READ-ME delivered into her Relatorio folder at 06:29. Version 9 is what remains: the dot plot's database-entries axis, which D51 moved to the next version, shipped as 2.1.4 (D54).
 
 ## The goal, in Paulo's words
 
-- Mission J, 11-02: "the ultimate test for this progrm ... make a very cool and complete analysis ... generate a complet word document. if you need a feature that this program does not do you implement it in the program", "she wants a qauntitative description of the families", "by the end of this project i would like a report in the directory where anas files are. there should be a simple way to input the families"
-- 11-03: "i would like to hand her the software as well so she can experiment", "we publish it in github and she installs it from there"
-- 11-03: "there needs to be a detiled progress bar for generating this report or else we cant tell if the software stalled", "yes, improve on reporting"
-- 11-03: "can you think of a way to optimize the compute ... what is consuming it so much", "we need this to speed up things"
-- 11-03: "i would also like to see the steps more frgmented (small steps) so I can actually sense the progress and make sure we are not hitting a wall"
-- 11-03 19:20: "i went through the report and its something very complicated and extensive to read... we could also generate side by side a simplified report which is an html, its mostly graphical related, interactive and awesomely cool! not alot of text, maybe pop-ups, but mostly graphical oriented and needs to be awesome and very nicely crafted and appealing with professional design"
+- 11-03 22:23 to 22:32: "a cool report is not a cool report without a dotplot", "entries in the db versus ion current ... the dot size could also represent something and different families could have different colors ... mouse over could display a tool tip", "allow users to select what is in each axis or size"
+- 11-04 06:38: "include that feature in the html, cleand the roadmap, geenerate the new one with detailed steps and get to work"
 - Standing: "using python scripts was cheating, every result passed to ana needs to be through the software", "things need to look slick and clean"
 
 ## Rules every worker follows
@@ -24,27 +20,26 @@ Version 7 delivered 42 steps (in the archive): the interactive report.html writt
 5. **Deployable at every merge.** One step per commit, with its test; tests go into DefaultSuite. Builders and reviewers run focused checks; the gate runs the whole suite.
 6. **A step counts as done only after a reviewer approves it, it is merged and the gate is green.**
 7. **A family panel is user data.** Ana's families, domains, subclasses and decisions live in her file and the project, never in code.
-8. **Never write inside `C:/Users/paulo/Desktop/AnaG`** except the final delivery to `AnaG/Bjararaca/Relatorio` (step K17).
-9. **The code repository stays private.** Releases go out as a zip on the public releases-only repository (D31, D32).
+8. **Never write inside `C:/Users/paulo/Desktop/AnaG`** except a delivery to `AnaG/Bjararaca/Relatorio` on Paulo's word (step G5b).
+9. **The code repository stays private.** Releases go out as a Setup.exe and a zip on the public releases-only repository (D31, D32).
 10. **No em dashes or en dashes** in anything written, UI text included.
 11. **Steps stay small.** A step that hides several pieces of work is split, so the needle shows real progress (Paulo, 11-02 and 11-03).
 
 ## The team
 
-| Name | Engine | Role | Worktree |
+| Name | Engine | Role in version 9 | Worktree |
 |---|---|---|---|
-| Orchestrator | Claude, main session | Assigns, gates, merges, publishes on Paulo's word, keeps this file true. Writes no product code. | |
-| FQOpus (OP) | Opus 5.5 xhigh | Runs Ana's analysis through the program, the interpretation and the delivery | `D:/FamilyQuant-wt/opus` |
-| FQEvidence (EV) | Sol 6.1 xhigh | The 2.1.0 release: candidate, unpacked checks, install check from GitHub | `D:/FamilyQuant-wt/evidence` |
-| FQResults (RS) | Sol 6.1 xhigh | The report export fix and the delivery command | `C:/FamilyQuant-wt2/results` |
-| FQShell (SH) | Sol 6.1 xhigh | Progress for Export report, Compute and opening | `D:/FamilyQuant-wt/shell` |
-| FQLook (LK) | Sol 6.1 xhigh | Figures on large projects and the report's look | `D:/FamilyQuant-wt/look` |
-| FQAssay (AS) | Sol 6.1 xhigh | The faster fetch and Compute speed | `D:/FamilyQuant-wt/assay` |
-| FQFloater (FL) | Sol 6.1 xhigh | One total per panel family | `C:/FamilyQuant-wt2/floater` |
-| FQTerra1 (T1), FQTerra2 (T2) | GPT-6.1 Terra xhigh | Export speed, number trace; scope clarity, link notes, Help | `C:/FamilyQuant-wt2/terra1`, `terra2` |
-| FQReview (GR) | Grok 4.7 xhigh | Main and science reviewer. Never edits product code. | `D:/FamilyQuant-wt/review` |
-| FQReview2 (GR2) | Grok 4.7 xhigh | Second reviewer. Never edits product code. | `D:/FamilyQuant-wt/review2` |
-| FQKimi (KM) | Kimi | Batch reviewer, at most 15 calls in 5 hours and 5 reviews an hour. Never edits product code. | `D:/FamilyQuant-wt/kimi` |
+| Orchestrator | Claude, main session | Assigns, gates, merges, publishes, keeps this file and the board true. Writes no product code. | |
+| FQResults (RS) | Sol 6.1 xhigh | The family database-entry count, its payload fields and number trace; Ana's new page | `C:/FamilyQuant-wt2/results` |
+| FQLook (LK) | Sol 6.1 xhigh | The dot plot defaults and the page checks | `D:/FamilyQuant-wt/look` |
+| FQAssay (AS) | Sol 6.1 xhigh | Version 2.1.4, release notes, the Setup.exe and zip | `D:/FamilyQuant-wt/assay` |
+| FQEvidence (EV) | Sol 6.1 xhigh | The old-project check, the package check, the update check from GitHub | `D:/FamilyQuant-wt/evidence` |
+| FQTerra2 (T2) | GPT-6.1 Terra xhigh | The README for 2.1.4 | `C:/FamilyQuant-wt2/terra2` |
+| FQReview (GR) | Grok 4.7 xhigh | Science and code review of the count. Never edits product code. | `D:/FamilyQuant-wt/review` |
+| FQReview2 (GR2) | Grok 4.7 xhigh | Code review of the payload, trace and page. Never edits product code. | `D:/FamilyQuant-wt/review2` |
+| FQReview3 (GR3) | Grok 4.7 xhigh | Review of the version, notes and README. Never edits product code. | `D:/FamilyQuant-wt/review3` |
+
+If a Grok reviewer runs out of credit, D53 holds: an Opus on Juliana's account reviews Sol work, a Sol reviews any Opus work.
 
 Flow of one step: the owner posts `READY <step> <commit>`; the orchestrator assigns a reviewer in `D:/FamilyQuant-data/reviews/CLAIMS.md`; the reviewer posts `APPROVED` or `REJECTED`; a rejection is the owner's next commit, checked by another reviewer; the orchestrator gates, merges and closes the row.
 
@@ -61,34 +56,64 @@ Flow of one step: the owner posts `READY <step> <commit>`; the orchestrator assi
 
 Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. The graph follows the Blocked by column. A step lands when its owner posts DONE with a commit; it is done when a reviewer approves it and it is merged.
 
-### W1 Release 2.1.2 tonight
+### W1 The count (FQResults, FQEvidence)
 
-Paulo's word: publish when done, no questions (D49, D51). Ana should find it when she wakes.
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W2 Release 2.1.3: the installer and automatic updates
-
-Paulo, 23:50 to 23:57 (D52): a real installer, Help > Install update, and a check at every start with a notice on screen; published when every check is green.
+What a family's database entries are is ruled in D55; G1a checks the ruling against the code before G1b merges.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| G1a | Science check of ruling D55: read the curation code and confirm that UserID is the family assignment of a database entry, that decoys and contaminants are left out, that a panel family takes the distinct union of its member families, and that Others is not plotted | L | 0.2 | 🟢 | G1b | APPROVED, or a corrected rule the desk adopts before G1b merges | GR | | 0 | 0 | |
+| G1b | Core: a read-only, family-keyed count of database entries from the stored curation, collapsed to effective panel keys the way EffectivePanelFamilyStudy collapses UserIDs; no Compute, no search, saved studies untouched | M | 0.5 | 🟢 | G1c, G3a | KnownAnswers test in DefaultSuite, red then green: decoy, contaminant, unassigned entry, a panel family of two families; rule written in docs/HTML-REPORT.md | RS | | 0 | 0 | |
+| G1c | Payload: `databaseEntries` offered in dotMeasures whenever the count exists, log scale with program-made ticks, every value a bound field | L | 0.3 | G1b | G1d, G1e, G2b | Synthetic payload lists the measure; existing payload tests unchanged | RS | | 0 | 0 | |
+| G1d | Number trace and ledger: the new fields resolve to their stored source; one ledger row for the measure | M | 0.3 | G1c | G3b | Trace of Ana's copied project: 0 NOT FOUND; ledger row proved | RS | | 0 | 0 | |
+| G1e | Old projects: a copy of Ana's project, outside her folder, opened in the new build exports the axis with no Compute, and the Word report and supplement numbers equal the 2.1.3 export | L | 0.3 | G1c | G3d | Axis present; compare output attached; every number equal | EV | | 0 | 0 | |
 
-### W3 Held for Paulo's word
+### W2 The page (FQLook)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M5a | report.html into Ana's Relatorio folder (the desk never writes there without his word) | L | 0.1 | 🟢 |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
+| G2a | Default axes as Paulo first asked: X database entries, Y mean ion current share, Size proteins with their own peptide, when all three exist; otherwise today's defaults. The tooltip lists database entries. Built now against an injected stand-in payload | L | 0.3 | 🟢 | G2b, G3b | Test of the default choice for both cases; page tests green | LK | | 0 | 0 | |
+| G2b | Page checks on the merged payload: the synthetic page and Ana's real page, light and dark, phone width; the selector lists the axis; no console errors; README screenshot taken | L | 0.2 | G2a, G1c | G3d, G4c | Screenshots in `D:/FamilyQuant-data/out-look/G2b` | LK | | 0 | 0 | |
+
+### W3 Reviews and the gate
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| G3a | Review of the count (G1b): the rule against D55 and the code | M | 0.2 | G1b | G3d | APPROVED, or fixes by the owner checked by another reviewer | GR | | 0 | 0 | |
+| G3b | Review of the payload, trace and page defaults (G1c, G1d, G2a) | M | 0.2 | G1d, G2a | G3d | APPROVED, or fixes by the owner checked by another reviewer | GR2 | | 0 | 0 | |
+| G3c | Version 2.1.4 in all three places and the release notes: the database-entries axis, shown for old projects with no Compute | L | 0.2 | 🟢 | G3e | Versions read 2.1.4.0; notes claim only what landed | AS | | 0 | 0 | |
+| G3e | Review of the version and notes (G3c) | L | 0.1 | G3c | G3d | APPROVED | GR3 | | 0 | 0 | |
+| G3d | Full gate on the integrated 2.1.4 commit: ledger refresh and the full suite | M | 0.4 | G1e, G2b, G3a, G3b, G3e | G4a | Every ledger row proved; full suite green | Orchestrator | | 0 | 0 | |
+
+### W4 Release 2.1.4
+
+Published when every check is green, like 2.1.2 and 2.1.3 (D56).
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| G4a | The 2.1.4 Setup.exe and zip, each with its SHA256, from the gate commit | L | 0.2 | G3d | G4b, G5a | Setup.exe in test mode extracts and the app reports 2.1.4.0 | AS | | 0 | 0 | |
+| G4b | Package check before publishing: every file equal to the build; EXE and DLL versions 2.1.4.0 | L | 0.2 | G4a | G4e | PASS | EV | | 0 | 0 | |
+| G4c | README for 2.1.4: what's new, the dot plot paragraph with database entries, the new synthetic dark screenshot; reads 2.1.4 throughout. Text now, image after G2b | L | 0.3 | 🟢 | G4d | Synthetic data only; links to releases/latest | T2 | | 0 | 0 | |
+| G4d | Review of the README (G4c) | L | 0.1 | G4c, G2b | G4e | APPROVED | GR3 | | 0 | 0 | |
+| G4e | v2.1.4 published as Latest with the Setup.exe, the zip and their .sha256 files; README pushed | L | 0.2 | G4b, G4d | G4f, G5b | Downloaded assets match their SHA256; README live and read | Orchestrator | | 0 | 0 | |
+| G4f | Update check on the public files: an installed 2.1.3 (test root) shows the banner for 2.1.4 and Install update runs the Setup in test mode | L | 0.3 | G4e | | PASS on every stage | EV | | 0 | 0 | |
+
+### W5 Ana's page
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| G5a | Ana's page with the new axis: export with the 2.1.4 build from a copy of her project outside her folder, traced; staged in `D:/FamilyQuant-data/out-desk/G5-for-Ana` with a READ-ME for 2.1.4 | L | 0.3 | G4a | G5b | Trace 0 NOT FOUND; her Word and supplement numbers equal the delivered ones; SHA256SUMS written | RS | | 0 | 0 | |
+| G5b | Deliver report.html and the READ-ME into her Relatorio folder, on Paulo's word | L | 0.1 | G5a, G4e | | Delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
 
 ## Critical path
 
-2.1.2: M8a, M4c, M4d (publish), M4e; M5b and the README screenshots (M6f, M6g) run beside it. 2.1.3: M7a, M7b and M7c in parallel now, their three reviews, the full gate M7h after 2.1.2 is out, the package M7i and the publish M7e. M5a stays held.
+G1b, G1c, G1d, the review G3b, the full gate G3d, the package G4a and its check G4b, the publish G4e, then G4f and Ana's page G5a. G1a, G2a, G3c and G4c start now beside it. Rough wall-clock estimate: 3 to 4 hours from 06:45, a range from the 11-04 night's pace, never a promise.
 
 ## Paulo's decisions
 
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
+| D57 | Deliver Ana's new page (G5b) into her Relatorio folder when it is staged | Held: the desk never writes there without his word | G5b |
 
 ### Decisions in force
 
@@ -119,17 +144,18 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D51 | The night run | Paulo goes to sleep (23:57: "when you finish this project please confirm you will upload it ... i cant have questions asked"). The desk finishes W2 to W4 and publishes 2.1.2 on GitHub with no further questions. The database-entries axis waits for the next version, so the release is not delayed before the collaborator wakes. W5 (writing into Ana's folder) stays held without his word; the staged page waits outside her folder. Paulo, 23:57 |
 | D52 | 2.1.3 tonight | An installer built in .NET (no download, no install on this PC: tested in test mode), Help > Install update and a start-up update notice; published when every check is green, like 2.1.2 (D51). Paulo, 23:50 to 23:57 |
 | D53 | Reviewer fallback tonight | If a Grok reviewer runs out of credit, an Opus 5.5 reviewer on Juliana's account (juliana.fischer@fiocruz.br, LPEC team, engine opusjf) reviews the Sol builders' work, read-only and batched; any work an Opus writes is reviewed by a Sol. Paulo's own Fiocruz account (96 percent weekly) only if Juliana's is out too. Paulo, 00:05 and 00:03 |
+| D54 | The database-entries axis | Ships in the HTML report as 2.1.4 now, with a new roadmap of small steps. Paulo, 11-04 06:38 ("include that feature in the html ... get to work") |
+| D55 | What a family's database entries are | The number of target entries of the project's database that the curation assigns to the family (their UserID); decoys and contaminants left out; a panel family counts the distinct entries of all its member families; Others is not plotted. Read from the stored curation, so an old project shows the axis without Compute. Desk, 11-04 06:45; checked by G1a |
+| D56 | Publish 2.1.4 | When every check is green, like D49 and D52; the update banner of 2.1.3 then offers it. Desk, 11-04 06:45, following D49 and D52 |
 
 ## Risks and triggers
 
 | Risk | Trigger | Response |
 |---|---|---|
-| The export fails on the real project in another way | J30b or K14 stops with an error | The export log now carries the full stack (J24); the owner fixes it as the next commit; Paulo hears the new time at once |
-| The corrected scope pulls in a protein that is not a venom protein | K3 lists one | The desk rules before K6; the report's method names the scope |
-| A speed change moves a number | Any stored result differs from before | No merge; the change goes back (rule 4) |
-| A quick gate hides a stale ledger receipt | K9's full gate fails on receipts | The owner of the row re-proves it before the candidate is published |
-| The release does not install on Ana's machine | K12 or K13 fails | Fix before K11 or publish 2.1.1; 2.0.0 and 1.5 stay installable |
-| A test leaves files that fail the next gate | A failure names output the commit cannot make | The suite empties each shard's folder before a run (11-03); suspect leftovers first |
-| The page shows a number the Word report does not | M1m or M1o finds a printed number with no stored source | No merge; the page prints only payload display strings (M1b) |
-| Ana's folder is touched | Any file under AnaG changes outside Relatorio | Stop and restore; checked before and after K17 |
-| The machine is shared by several large runs | A run's time grows past its estimate | The desk reorders unstarted work; never stops a running run |
+| The rule counts the wrong entries | G1a or G3a finds a decoy, a contaminant or another family's entry in a count | The desk corrects D55 before G1b merges; the owner fixes it as the next commit |
+| The new axis moves another number | G1e finds any Word or supplement number different from the 2.1.3 export | No merge; the change goes back (rule 4) |
+| The page shows a number with no stored source | G1d's trace finds a NOT FOUND | No merge; the page prints only payload display strings |
+| A quick gate hides a stale ledger receipt | G3d fails on receipts | The row's owner re-proves it; refresh_ledger.py reruns a lost register once |
+| GitHub fails during the upload | A 404 or 500 while the release is a draft | Retry the failed asset; never force; publish only when every asset matches |
+| A reviewer runs out of credit | A Grok call fails on balance | D53: Opus on Juliana's account reviews Sol work |
+| Ana's folder is touched | Any file under AnaG changes before Paulo's word | Stop and restore; checked before and after G5b |
