@@ -350,6 +350,8 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => InterpretationInputTests());
             suite.Add(() => ReportNumberTraceTests());
             suite.Add(() => HtmlReportDataTests());
+            suite.Add(() => SetupTests(Path.Combine(workDir, "setup")));
+            suite.AddWithApplication(() => SetupWindowTests());
             suite.Add(() => HtmlCoverageTests());
             suite.Add(() => HtmlNumberTraceTests());
             suite.Add(() => HtmlStoredProofGuardTests());

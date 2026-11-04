@@ -4,6 +4,20 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.3 (release candidate, not published)
+
+- **A Windows installer.** Install FamilyQuant for your Windows user account,
+  without administrator access. The installer adds a Start menu shortcut; remove
+  it through Windows Apps & features. Upgrades replace the program in place while
+  keeping your projects and application data.
+- **An unsigned installer.** Windows may show "Windows protected your PC".
+  Choose **More info > Run anyway** to continue with the installer.
+- **Updates when you start.** Each start checks for a newer version in the
+  background. A non-blocking notice offers one click to install it. You can also
+  use **Help > Install update**, or turn start-up checks off in settings.
+- **The zip is still available.** People who prefer to extract and run the
+  portable package can continue to use the zip download.
+
 ## 2.1.2 (release candidate, not published)
 
 - **An interactive HTML report.** File > Export report now writes `report.html`
