@@ -17,7 +17,7 @@ internal static partial class Program
         return failed == 0 ? 0 : 1;
     })];
 
-    private static (ReportDocument Document, HtmlReportContext Context) HtmlFixture()
+    private static (ReportDocument Document, HtmlReportContext Context) HtmlDataFixture()
     {
         const double mean = .385988123456;
         var table = new ReportTable("family-run-means", "Headline family composition: mean of per-run shares",
@@ -38,7 +38,7 @@ internal static partial class Program
     private static void HtmlReportDataTests()
     {
         Section("M1 source-bound graphical report data");
-        var fixture = HtmlFixture();
+        var fixture = HtmlDataFixture();
         byte[] word = WordReportWriter.BuildBytes(fixture.Document);
         var model = HtmlReportPayloadBuilder.Build(fixture.Document, Array.Empty<ReportSupplementSheet>(), context: fixture.Context);
         var family = model.Composition.Families[0];
@@ -55,5 +55,38 @@ internal static partial class Program
             && hidden.Fields.Values.All(f => !f.Text.Contains("Cedar", StringComparison.Ordinal)));
         Check("HTML output links retain relative file identity safely", HtmlReportPayloadBuilder.Build(fixture.Document,
             Array.Empty<ReportSupplementSheet>(), wordFileName: "A & report.docx").Links.Word == "A%20%26%20report.docx");
+        var mean = model.Fields[family.Mean!];
+        Check("HTML chart share has a separate program-rounded short field", mean.Short != null && model.Fields[mean.Short].Text == "38.6"
+            && model.Fields[mean.Short].Source is { Kind: "stored-family", Property: "mean", Family: "7", Scale: 100, Format: "G3" }
+            && mean.Text == "38.5988");
+        var bad = HtmlDataFixture();
+        bad.Context.StoredStudies!.FamilyRunShares!.Families[0].MeanShare = .4;
+        Check("HTML refuses a stored quantity that disagrees with the prepared Word value", Throws<System.IO.InvalidDataException>(() =>
+            HtmlReportPayloadBuilder.Build(bad.Document, Array.Empty<ReportSupplementSheet>(), context: bad.Context)));
+        HtmlReportSeriesTests();
+    }
+
+    private static void HtmlReportSeriesTests()
+    {
+        var fixture = HtmlDataFixture();
+        fixture.Context.StoredStudies!.FamilyRunShares!.Families[0].Runs.Add(new()
+        { Run = "run-a", ShareOfAssignedSignal = .385988123456, ShareOfMeasuredSignal = .3234 });
+        var runs = new ReportTable("family-run-shares", "Run values", new[] { "family_user_id", "family", "run", "assigned_signal_pct", "measured_peptide_signal_pct", "assigned_signal_fraction", "measured_peptide_signal_fraction" },
+            new IReadOnlyList<string>[] { new[] { "7", "Cedar", "run-a", "38.5988", "32.34", "0.385988123456", "0.3234" } }, "");
+        var parts = new ReportTable("subclass-parts", "Pooled parts", new[] { "family_user_id", "part", "within_family_pct", "within_family_fraction" },
+            new IReadOnlyList<string>[] { new[] { "7", "Class A", "60", "0.6" }, new[] { "7", "Not resolved", "40", "0.4" } }, "");
+        var counts = new ReportTable("protein-counts", "Counts", new[] { "family_user_id", "observed_peptides" }, new IReadOnlyList<string>[] { new[] { "7", "9" } }, "");
+        var sheets = new[] { new ReportSupplementSheet(runs.Id, ReportSectionIds.Results, "Runs", runs),
+            new ReportSupplementSheet(parts.Id, ReportSectionIds.Results, "Parts", parts), new ReportSupplementSheet(counts.Id, ReportSectionIds.Results, "Counts", counts) };
+        var model = HtmlReportPayloadBuilder.Build(fixture.Document, sheets, context: fixture.Context);
+        var family = model.Composition.Families[0];
+        var run = model.Fields[family.Runs[0].Share!];
+        Check("HTML run points keep their native exact label and unrounded geometry", family.Runs.Count == 1 && run.Text == "38.5988" && run.Value == .385988123456 * 100
+            && run.Source is { Kind: "workbook-cell", Sheet: "Runs", Row: 2, Column: 4 });
+        Check("HTML short run label binds to the native stored fraction", run.Short != null && model.Fields[run.Short].Text == "38.6"
+            && model.Fields[run.Short].Source is { Sheet: "Runs", Column: 6, Scale: 100, Format: "G3" });
+        Check("HTML preserves pooled within-family parts independently of the headline mean", family.Parts.Count == 2
+            && model.Fields[family.Parts[0].Share!].Text == "60" && model.Fields[family.Parts[1].Share!].Text == "40");
+        Check("HTML peptide evidence count stays separate from the database-protein estimate", model.Fields[family.Peptides!].Text == "9" && model.Fields[family.Proteins!].Text == "225");
     }
 }
