@@ -50,6 +50,8 @@ public sealed record HtmlReportReference
     public string? Family { get; init; }
     public string? Study { get; init; }
     public string? Run { get; init; }
+    public string? ParagraphText { get; init; }
+    public int Occurrence { get; init; }
     public double Scale { get; init; } = 1;
 }
 
@@ -117,4 +119,7 @@ public sealed record HtmlReportContext
         = new Dictionary<string, string>(StringComparer.Ordinal);
     public QuantManifest? StoredStudies { get; init; }
     public string FigureDetailsCsv { get; init; } = "";
+    public FamilyReportThresholdResult? SourceGrouping { get; init; }
+    public FamilyWorldSummary? World { get; init; }
+    public Func<string, Func<string, HtmlReportReference, string, double?, string>, ReportSelection?, IReadOnlyList<HtmlReportCoverage>>? CoverageProvider { get; init; }
 }
