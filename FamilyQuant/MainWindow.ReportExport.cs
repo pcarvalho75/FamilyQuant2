@@ -126,7 +126,7 @@ public partial class MainWindow
                 string stage = Path.Combine(publicationStage, Path.GetFileName(fullPath));
                 string workbookStage = ReportSupplementWorkbook.PathForReport(stage);
                 var stager = ReportFileStagerOverride;
-                operation.Context.Report("report-write", "Writing the selected report and supplement workbook", 0, 1);
+                operation.Context.Report("report-write", "Writing the selected Word report, supplement workbook and HTML report", 0, 1);
                 await Task.Run(() =>
                 {
                     if (stager != null)
@@ -140,16 +140,18 @@ public partial class MainWindow
                     }
                     operation.Context.ThrowIfCancellationRequested();
                     File.WriteAllBytes(workbookStage, ReportSupplementWorkbook.BuildBytes(document, prepared.SupplementSheets, selected, operation.Context));
+                    ReportProjectExporter.WriteHtml(prepared, stage, selected, operation.Context);
                 });
                 operation.Context.ThrowIfCancellationRequested();
                 RequireSameProject();
-                operation.Context.Report("report-publish", "Publishing the Word report and supplement workbook", 0, 2);
+                operation.Context.Report("report-publish", "Publishing the Word report, supplement workbook and HTML report", 0, 3);
                 ReportArtifactPublication.Publish(stage, workbookStage, fullPath, operation.Context, step =>
                 {
-                    operation.Context.Report("report-publish", step == 1 ? "Published Word report" : "Published supplement workbook", step, 2);
+                    operation.Context.Report("report-publish", step == 1 ? "Published Word report" : step == 2 ? "Published supplement workbook" : "Published HTML report", step, 3);
                     ReportPublicationStepOverride?.Invoke(step);
                 });
                 StatusModel.ShowMessage("Report exported to " + fullPath + " with " + Path.GetFileName(ReportSupplementWorkbook.PathForReport(fullPath))
+                    + " and " + Path.GetFileName(HtmlReportWriter.PathForReport(fullPath))
                     + ". Save the project to keep any changed report details or choices.");
             }
             return true;
@@ -213,7 +215,7 @@ public partial class MainWindow
     private string? ChooseReportPath()
     {
         if (SelectReportPathOverride != null) return SelectReportPathOverride();
-        var dialog = new SaveFileDialog { Title = "Export Word report", Filter = "Word report (*.docx)|*.docx", DefaultExt = ".docx", AddExtension = true, FileName = "Report.docx" };
+        var dialog = new SaveFileDialog { Title = "Export report", Filter = "Word report (*.docx)|*.docx", DefaultExt = ".docx", AddExtension = true, FileName = "Report.docx" };
         return ShellDialogs.ShowFile(this, "report.word", dialog) ? dialog.FileName : null;
     }
 }
