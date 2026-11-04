@@ -71,6 +71,11 @@ namespace FamilyQuant.Evidence
     /// </summary>
     public static class ValidationReport
     {
+        internal static FastaItemExtended CloneProteinForValidation(FastaItemExtended source) => new()
+        {
+            SequenceIdentifier = source.SequenceIdentifier, Description = source.Description, Sequence = source.Sequence,
+            AssignmentState = source.AssignmentState, USearchID = source.USearchID, Domains = source.Domains, Evidence = source.Evidence,
+        };
         public const double DefaultLeaveOneOutIdentityPercent = 60.0;
 
         /// <summary>A protein's families as one label: every membership, case folded, sorted.</summary>
@@ -181,15 +186,11 @@ namespace FamilyQuant.Evidence
         public static List<FastaItemExtended> ReclusterRoute(IReadOnlyList<FastaItemExtended> items, double threshold,
             string keywords, string excludeWords, ISet<int>? locked = null)
         {
-            List<FastaItemExtended> copies = items.Select(i => new FastaItemExtended
-            {
-                SequenceIdentifier = i.SequenceIdentifier, Description = i.Description, Sequence = i.Sequence,
-                UserID = i.UserID, USearchID = i.USearchID, Domains = i.Domains, Evidence = i.Evidence,
-            }).ToList();
+            List<FastaItemExtended> copies = items.Select(CloneProteinForValidation).ToList();
             List<List<int>> groups = new WordCluster(copies, new List<string>()).GroupByWords(threshold, locked ?? new HashSet<int>());
             Dictionary<int, int> mapping = WordCluster.BuildStableMapping(groups);
             foreach (FastaItemExtended copy in copies)
-                if (mapping.TryGetValue(copy.UserID, out int merged)) copy.UserID = merged;
+                if (mapping.TryGetValue(copy.UserID, out int merged)) copy.AssignmentState = copy.AssignmentState with { UserID = merged };
             var taken = new HashSet<string>(WordsRoute(copies, keywords, excludeWords, locked).Select(c => c.SequenceIdentifier), StringComparer.Ordinal);
             return items.Where(i => taken.Contains(i.SequenceIdentifier)).ToList();
         }

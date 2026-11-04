@@ -30,6 +30,15 @@ namespace FamilyQuant
         [System.Text.Json.Serialization.JsonIgnore]
         [System.ComponentModel.Browsable(false)]
         public bool HasUserId => hasUserId;
+
+        // Copy/undo carries both parts literally. The public setter still denotes an
+        // intentional assignment, including an explicit assignment to family zero.
+        [System.Text.Json.Serialization.JsonIgnore]
+        internal FamilyAssignmentState AssignmentState
+        {
+            get => new(userId, hasUserId);
+            set { userId = value.UserID; hasUserId = value.IsAssigned; }
+        }
         public string UserAnnotation { get; set; } = string.Empty;
 
         /// <summary>The protein's Pfam domains by name, joined with <see cref="ProteinDomains.Separator"/>;
@@ -51,4 +60,6 @@ namespace FamilyQuant
         public double? FullXicShare { get; set; }
 
     }
+
+    internal readonly record struct FamilyAssignmentState(int UserID, bool IsAssigned);
 }

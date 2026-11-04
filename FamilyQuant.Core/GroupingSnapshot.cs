@@ -24,6 +24,7 @@ namespace FamilyQuant
         // family ids move, the identifier does not). A repeated identifier keeps its last value, matching
         // how the file itself would read after a save/load.
         private readonly Dictionary<string, (int UserId, int USearchId)> ids;
+        private readonly HashSet<string> unassignedUserIds = new();
         private readonly HashSet<int> lockedUserIds;
         private readonly double? wordSimilarity;
         private readonly bool isKeywordSuperCluster;
@@ -66,12 +67,16 @@ namespace FamilyQuant
                     notes[item.SequenceIdentifier] = item.UserAnnotation ?? string.Empty;
             }
 
-            return new GroupingSnapshot(
+            var snapshot = new GroupingSnapshot(
                 ids,
                 new HashSet<int>(fcf.LockedUserIds),
                 fcf.WordSimilarity,
                 fcf.IsKeywordSuperCluster,
                 notes);
+            foreach (var item in fcf.MyExtendedFastaItems)
+                if (item.HasUserId) snapshot.unassignedUserIds.Remove(item.SequenceIdentifier);
+                else snapshot.unassignedUserIds.Add(item.SequenceIdentifier);
+            return snapshot;
         }
 
         /// <summary>
@@ -88,7 +93,7 @@ namespace FamilyQuant
                 {
                     // A literal restore: both ids go back regardless of the lock state, because a lock
                     // is itself part of the state being restored.
-                    item.UserID = snap.UserId;
+                    item.AssignmentState = new(snap.UserId, !unassignedUserIds.Contains(item.SequenceIdentifier));
                     item.USearchID = snap.USearchId;
                 }
 

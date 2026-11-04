@@ -19,6 +19,12 @@ public static partial class EffectivePanelFamilyStudy
         "Assigned-signal denominators use this collapsed candidate universe; original UserID studies are separate.";
     public const string ChangedMessage = "The saved effective panel-family studies do not match the current source membership or panel mapping. Compute the effective panel-family study again.";
 
+    internal static FastaItemExtended CloneProteinForStudy(FastaItemExtended source, int mappedFamily) => new()
+    {
+        SequenceIdentifier = source.SequenceIdentifier, Sequence = source.Sequence,
+        AssignmentState = source.AssignmentState with { UserID = mappedFamily }, Evidence = source.Evidence,
+    };
+
     public static EffectivePanelFamilyResult Build(FamilyPeptideAttribution attribution, CurationHomologyHits hits,
         FamilyClusterFile curation, IEnumerable<string>? runs = null, IReadOnlyDictionary<string, double>? perRunTic = null,
         SharedPeptidePolicy policy = SharedPeptidePolicy.FamilyUnique)
@@ -38,11 +44,8 @@ public static partial class EffectivePanelFamilyStudy
                 throw new ArgumentException("The peptide attribution and retained protein hits do not agree.", nameof(hits));
         var collapsed = new FamilyPeptideAttribution(attribution.Peptides.Select(p => new FamilyAttributedPeptide(p.Peptide,
             p.FamilyUserIds.Select(id => remap[id]).Distinct().Order().ToArray())).ToList()) { MembershipSha256 = membership };
-        var grouped = new FamilyClusterFile { MyExtendedFastaItems = curation.MyExtendedFastaItems.Select(p => new FastaItemExtended
-        {
-            SequenceIdentifier = p.SequenceIdentifier, Sequence = p.Sequence, UserID = remap.GetValueOrDefault(p.UserID),
-            Evidence = p.Evidence,
-        }).ToList() };
+        var grouped = new FamilyClusterFile { MyExtendedFastaItems = curation.MyExtendedFastaItems
+            .Select(p => CloneProteinForStudy(p, remap.GetValueOrDefault(p.UserID))).ToList() };
         var result = new EffectivePanelFamilyResult
         {
             MembershipSha256 = membership, PanelMapSha256 = MapFingerprint(curation, map), Method = Method, Policy = policy, Families = slots,
