@@ -718,4 +718,6 @@ Paulo agreed these at the restart, 2026-11-01.
 | U4a | The 2.1.5 Setup.exe and zip with SHA256 from the gate commit | L | 0.2 | U3d | U4b | Setup.exe in test mode extracts and the app reports 2.1.5.0 | RL | | 0 | 0 | |
 | U4b | Package check: every file equal to the build; EXE and DLL versions 2.1.5.0 | L | 0.2 | U4a | U4e | PASS | RL | | 0 | 0 | |
 | U4e | v2.1.5 published as Latest with the Setup.exe, the zip and their .sha256 files; README pushed | L | 0.2 | U4b, U4d | U4f | GitHub digests equal the package; README live | Orchestrator | | 0 | 0 | |
+| U4c | README: the step-by-step guide follows the numbered order; a new synthetic dark screenshot of the Grouping panel; reads 2.1.5 | L | 0.3 | 🟢 | U4d | Synthetic data only; links to releases/latest | RL | | 0 | 0 | |
+| U4d | Review of the README | L | 0.1 | U4c | U4e | APPROVED | DS | | 0 | 0 | |
 

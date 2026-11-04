@@ -69,8 +69,6 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| U4c | README: the step-by-step guide follows the numbered order; a new synthetic dark screenshot of the Grouping panel; reads 2.1.5 | L | 0.3 | 🟢 | U4d | Synthetic data only; links to releases/latest | RL | | 0 | 0 | |
-| U4d | Review of the README | L | 0.1 | U4c | U4e | APPROVED | DS | | 0 | 0 | |
 | U4f | Update check on the public files: an installed 2.1.4 (test root) shows the banner for 2.1.5 and Install update runs the Setup in test mode | L | 0.3 | 🟢 | | PASS on every stage | RL | | 0 | 0 | |
 
 ## Critical path
