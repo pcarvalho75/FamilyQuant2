@@ -349,6 +349,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReportFindingsTests());
             suite.AddWithApplication(() => InterpretationInputTests());
             suite.Add(() => ReportNumberTraceTests());
+            suite.Add(() => HtmlReportDataTests());
             suite.AddWithApplication(() => ReportStoredChecks());
             suite.AddWithApplication(() => ReportAttributionCacheTests());
             suite.AddWithApplication(() => ReportSourceCensusCacheTests());
