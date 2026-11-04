@@ -73,6 +73,23 @@ internal static partial class Program
             HomologySearch.Search(new[] { "ANAAAA" }, idDb, new HomologyOptions { MinIdentity = 1, TopHitsPerPeptide = 100, BruteForceProteinLimit = 0 }),
             HomologySearch.Search(new[] { "ANAAAA" }, idDb, named)) == string.Empty);
 
+        foreach (var profile in new[]
+        {
+            new double[] { 100, 100, 100, 100, 0, 0, 0, 0 },
+            new double[] { 100, 100, 0, 100, 100, 0, 0, 0 },
+            new double[] { 100, 0, 100, 0, 100, 0, 100, 0 },
+        })
+        {
+            const string query = "ACDEFGHI";
+            var fixture = HomologyDatabase.Build(new[] { ("target", "XX" + query + "YY"), ("Reverse_other", "WVTSRQPN") });
+            var indexOptions = Options(0.8, new() { Enabled = true, MaximumRewrites = 0, LocalConfidenceBySequence = new() { [query] = profile } });
+            var bruteOptions = indexOptions.Clone(); bruteOptions.Strategy = HomologySearchStrategy.BruteForce;
+            var fast = HomologySearch.SearchOne(query, fixture, indexOptions);
+            var slow = HomologySearch.SearchOne(query, fixture, bruteOptions);
+            Check("J47 sparse weights use a proved exact block when the global q3 count cannot", fast.UsedSeedIndex);
+            Check("J47 sparse weighted seed retains every scientific hit and gate alignment", HomologySearchEquivalence.Difference([slow], [fast]).Length == 0
+                && System.Text.Json.JsonSerializer.Serialize(slow.ScienceAudit) == System.Text.Json.JsonSerializer.Serialize(fast.ScienceAudit));
+        }
         var random = new Random(4702);
         const string alphabet = "ARNDCQEGHILKMFPSTWYV";
         for (int length = 6; length <= 20; length++)
@@ -88,6 +105,22 @@ internal static partial class Program
             string difference = HomologySearchEquivalence.Difference(HomologySearch.Search([query], fixture, bruteOptions),
                 HomologySearch.Search([query], fixture, indexOptions));
             Check($"J47 weighted/variant diagonal prefilter retains exact brute result length={length}", difference.Length == 0, difference);
+        }
+        for (int trial = 0; trial < 30; trial++)
+        {
+            int length = 6 + trial % 15;
+            var entries = Enumerable.Range(0, 12).Select(i => ((i % 3 == 0 ? "Reverse_" : "target-") + i,
+                new string(Enumerable.Range(0, 35).Select(_ => alphabet[random.Next(alphabet.Length)]).ToArray()))).ToArray();
+            string query = entries[1].Item2.Substring(2, length);
+            var profile = Enumerable.Range(0, length).Select(i => i % 2 == 0 ? (trial % 3 == 0 ? 0.000000001 : random.Next(1, 100) + 0.125) : 0).ToArray();
+            var fastOptions = Options(trial % 3 == 0 ? 1 : trial % 3 == 1 ? 0.8 : Math.BitIncrement(0.8),
+                new() { Enabled = true, LocalConfidenceBySequence = new() { [query] = profile } });
+            var slowOptions = fastOptions.Clone(); slowOptions.Strategy = HomologySearchStrategy.BruteForce;
+            var fixture = HomologyDatabase.Build(entries);
+            var fast = HomologySearch.Search([query], fixture, fastOptions); var slow = HomologySearch.Search([query], fixture, slowOptions);
+            string difference = HomologySearchEquivalence.Difference(slow, fast);
+            Check($"J47 sparse/rounding weighted seed equals brute trial={trial}", difference.Length == 0
+                && System.Text.Json.JsonSerializer.Serialize(slow[0].ScienceAudit) == System.Text.Json.JsonSerializer.Serialize(fast[0].ScienceAudit), difference);
         }
     }
 }

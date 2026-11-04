@@ -1,6 +1,7 @@
 # Experimental homology science options (J47)
 
-All three options are off by default. `HomologyOptions.Science == null`, or a
+New full Compute uses the D43 zero-margin score-tier default; length calibration
+and tag rewrites remain OFF. Base `HomologyOptions.Science == null`, or a
 clone with all experimental flags disabled, preserves the J38 search and its
 serialized options/results. Identified queries retain their original rule.
 Enabled callers explicitly name `Identified` or `DeNovo`; the role is never
@@ -9,7 +10,8 @@ inferred from a tag's letters or an organism.
 The contract separates a decoy-calibrated length gate, a confidence-weighted
 isobaric identity gate, and a PAM score tier. Each receives its own implementation
 commit and fixtures. Scientific parameter choices are under desk review; no
-option is being promoted to a production default.
+length or tag option is being promoted to a production default. The later D43
+score-tier decision is recorded in [the migration contract](HOMOLOGY-DEFAULT-MIGRATION.md).
 
 Desk ruling M122 fixes the first experiments: length floor 0.8 (tighten only),
 explicit abstention below support, per-search/per-length support and gate, no FDR
@@ -147,3 +149,52 @@ side-by-side table. Original replay timers exclude import/loading/completion and
 use certified identified-hit reuse on ON runs, so they are not a controlled
 speed comparison. A family listed in any compared option remains visible when
 it crosses the user's threshold.
+
+J47c adds a weighted disjoint-seed proof only when the ordinary q3 match-count
+bound cannot help. For a disjoint block, any mismatch loses at least its minimum
+position weight. If selected blocks' summed minima exceed the allowed lost weight
+plus a conservative positive-sum rounding margin, at least one block must match
+exactly. A dynamic program selects disjoint blocks, trying lengths 3, 2 and 1;
+ordered posting merges visit their candidate windows once. Exact weighted gate
+verification still chooses admission and the winning alignment; PAM still scores
+the original tag. Unsupported bounds retain the exhaustive path. One-/two-residue
+postings build lazily only for enabled tag searches, are immutable across query
+workers and clear after all workers join. OFF searches do not build them.
+
+Sparse and rounding-boundary fixtures compare every scientific hit and complete
+experimental audit with the exhaustive scan. A fresh five-call OFF replay is
+required as well. This is an execution optimization, not a different gate or
+confidence policy.
+
+For the actual tag replay, `CompareMeasuredDirectory` names the completed earlier
+packet. The new run performs the searches, then requires equal scientific bytes
+and the complete per-query gate audit; only the renamed adjacent-rule wording is
+normalized. The native study records these equality flags for all five calls.
+`--j47d-rejoin-headlines` optionally accepts the completed tag packet as its last
+argument to project its measured hits onto the delivered curation without another
+search or full Compute. That tag column enables the tag option alone; interaction
+with the newly chosen score-tier default has not been measured.
+
+J47c executed proof is under
+`D:/FamilyQuant-data/out-assay/j47-science-01/discotech-seed01/j47c-tag-01/`.
+All five scientific result shapes and full gate audits equal the completed original
+tag packet, with only the renamed adjacent-rule text normalized. Native search
+times for de novo calls 2/3/5 were 114.3373511 / 9.336467 / 2.8453145 seconds;
+the corresponding original times were 5364.4069631 / 511.7969687 / 91.5730833.
+The extra equality comparisons occur outside those search timers. Both jobs
+completed within the owned 9.5 GiB guard; no heap cap or forced collection was used.
+
+The complete four-option historical table is
+`j47-science-01/j47c-four-options-01/decision-table.md` under the same worker
+output root. It explicitly separates the earlier study curation from the delivered
+one. The tag experiment gives 817 right / 62 wrong / 5381 non-landed known pairs,
+7.053470% wrong among landed pairs, and a 65.836180% gap decoy/credited-envelope
+ratio. These coverage/error tradeoffs do not promote it to a default.
+
+`D:/FamilyQuant-data/out-assay/j47c-delivered-projection-02/` contains the separate
+delivered-curation headline projection. Its native accepted-PEAKS profiles must
+match the measured profile hash before they enter the replay cache key. OFF exactly
+reproduces saved shares, all four compact entries pass native hot-cache readback,
+and no search or full Compute runs. Tag-only projected metalloprotease share is
+39.400520% versus 38.598758% OFF; that is not the release default's verified
+38.504225% score-tier result and is not a combined-options experiment. Tag stays OFF.
