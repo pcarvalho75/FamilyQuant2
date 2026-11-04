@@ -1788,6 +1788,127 @@
       <div class="dialog-body" id="dialog-body"></div>
     </dialog>
     <script id="fq-data" type="application/json"></script>
-    <!-- The payload binding is added in M2b. -->
+    <script>
+      "use strict";
+      // Payload binding follows the M1 schema. Scientific numbers are never formatted in this page.
+      (() => {
+        const $ = (id) => document.getElementById(id);
+        const node = (tag, cls, text) => {
+          const e = document.createElement(tag);
+          if (cls) e.className = cls;
+          if (text !== undefined) e.textContent = text;
+          return e;
+        };
+        const svg = (tag, attrs = {}) => {
+          const e = document.createElementNS("http://www.w3.org/2000/svg", tag);
+          for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+          return e;
+        };
+        const dialog = $("detail-dialog");
+        let returnFocus = null;
+        function closeDialog() {
+          dialog.close();
+          dialog.classList.remove("figure-dialog");
+          returnFocus?.focus();
+        }
+        $("dialog-close").onclick = closeDialog;
+        dialog.addEventListener("click", (e) => {
+          if (e.target === dialog) {
+            const r = dialog.getBoundingClientRect();
+            if (
+              e.clientX < r.left ||
+              e.clientX > r.right ||
+              e.clientY < r.top ||
+              e.clientY > r.bottom
+            )
+              closeDialog();
+          }
+        });
+        dialog.addEventListener("cancel", () => {
+          dialog.classList.remove("figure-dialog");
+          returnFocus?.focus();
+        });
+        function popup(title, content, wide = false) {
+          returnFocus = document.activeElement;
+          $("dialog-title").replaceChildren(
+            typeof title === "string" ? document.createTextNode(title) : title,
+          );
+          $("dialog-body").replaceChildren(...content);
+          dialog.classList.toggle("figure-dialog", wide);
+          dialog.showModal();
+        }
+        try {
+          const data = JSON.parse($("fq-data").textContent);
+          if (data.schema !== "familyquant-report-html/v1" || !data.fields)
+            throw new Error("Unsupported report schema");
+          const fields = data.fields,
+            exists = (id) =>
+              typeof id === "string" &&
+              Object.prototype.hasOwnProperty.call(fields, id),
+            val = (id) =>
+              exists(id) &&
+              typeof fields[id].value === "number" &&
+              Number.isFinite(fields[id].value)
+                ? fields[id].value
+                : null;
+          const text = (id) => (exists(id) ? fields[id].text : "");
+          function field(id, tag = "span", unit = true) {
+            const e = node(tag);
+            if (exists(id)) {
+              e.dataset.fqField = id;
+              e.textContent =
+                fields[id].text +
+                (unit && fields[id].unit ? " " + fields[id].unit : "");
+            } else {
+              e.textContent = "Unavailable";
+              e.classList.add("muted");
+            }
+            return e;
+          }
+          function bind(id, f) {
+            $(id).replaceChildren(field(f));
+          }
+          $("project-title").textContent = "Explore your results";
+          const colors = [
+            "var(--s1)",
+            "var(--s2)",
+            "var(--s3)",
+            "var(--s4)",
+            "var(--s5)",
+            "var(--s6)",
+          ];
+          const families = (data.composition?.families || []).filter((f) =>
+            exists(f.name),
+          );
+          const ordered = families
+            .slice()
+            .sort(
+              (a, b) => (val(b.mean) ?? -Infinity) - (val(a.mean) ?? -Infinity),
+            );
+          const familyColor = (f) =>
+            f.isOthers
+              ? "var(--s6)"
+              : colors[Math.max(0, ordered.indexOf(f)) % colors.length];
+          const state = {
+            selected: ordered.find((f) => !f.isOthers) || ordered[0],
+            drill: false,
+            all: false,
+            query: "",
+            kind: null,
+          };
+          const additive = data.composition?.isAdditive === true;
+          document.querySelector('#headline').hidden = true;
+          document.querySelector('section[aria-labelledby="composition-title"]').hidden = true;
+          document.querySelector('#family-detail').hidden = true;
+          document.querySelector('#evidence-section').hidden = true;
+          document.querySelector('#others-section').hidden = true;
+          document.querySelector('#method-section').hidden = true;
+          $("app").hidden = false;
+        } catch (error) {
+          $("load-error").hidden = false;
+          console.error("FamilyQuant report could not be displayed", error);
+        }
+      })();
+    </script>
   </body>
 </html>
