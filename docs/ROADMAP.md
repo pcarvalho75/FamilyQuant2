@@ -91,8 +91,9 @@ Nobody reviews their own work; a finding is fixed by its owner and checked again
 | M3b | Code review of FQShell's and FQAssay's lanes as they land: writer, export, tests, coverage, trace tests | M | 0.2 | 🟢 | M3d | APPROVED, or findings sent to the owner | GR3 | | 0 | 0 | |
 | M3c | Code review of FQLook's template as it lands: no client number formatting, no network, no innerHTML with data, keyboard reach (Paulo judges the design himself at M3f) | M | 0.2 | 🟢 | M3d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
 | M3g | Opus review (FQOpus, Paulo's Fiocruz account), batched: the final page exported from Ana's project, every number against the Word report it wrote (K14), plus the design check of FQLook's render | M | 0.3 | M1p, M2j | M3d | APPROVED, or findings sent to the owners | OP | | 0 | 0 | |
+| M3h | Integration rehearsal: every 20 to 30 min, merge the lane heads in a scratch tree, build, quick suite, export Ana's page, trace and render, so clashes show before the gate | L | 0.3 | 🟢 | M3e | Each round posted; the last round green with both READY posts in | AS | | 0 | 0 | |
 | M3d | Owners fix the review findings; the reviewer checks again | L | 0.2 | M3a, M3b, M3c, M3g | M3e | Every finding closed | RS | | 0 | 0 | |
-| M3e | Desk gate and merge to master | L | 0.2 | M3d | M3f | Gate green; master pushed | Orchestrator | | 0 | 0 | |
+| M3e | Desk gate and merge to master | L | 0.2 | M3d, M3h | M3f | Gate green; master pushed | Orchestrator | | 0 | 0 | |
 | M3f | Paulo sees the page and the screenshots | L | 0.1 | M3e | M4a, M5a | Paulo's OK or his changes | Paulo | | 0 | 0 | |
 
 ### W4 Release 2.1.2 (only on Paulo's word)
@@ -101,7 +102,7 @@ The same chain as 2.1.1.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M4a | Version 2.1.2 and release notes | L | 0.3 | M3f | M4b | Version in every place K19 changed; notes claim only what is on master | EV | | 0 | 0 | |
+| M4a | Prepared now on a branch (Paulo 21:39): version 2.1.2 and release notes | L | 0.3 | 🟢 | M4b | Version in every place K19 changed; notes claim only what is on master | EV | | 0 | 0 | |
 | M4b | Full release gate on the 2.1.2 commit | M | 0.3 | M4a | M4c | Ledger 5,460 of 5,460, full suite green | Orchestrator | | 0 | 0 | |
 | M4c | The 2.1.2 package and its real-menu export of a copy of Ana's project | L | 0.3 | M4b | M4d | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
 | M4d | v2.1.2 published on FamilyQuant2-releases | L | 0.1 | M4c | M4e | Release page live and Latest; downloaded zip hash equals M4c | Orchestrator | | 0 | 0 | |
@@ -145,6 +146,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D45 | The tag-gate option on this roadmap | Finish J47c (fast prefilter, its J47b row) in parallel with 2.1.1; it stays OFF by default whatever it shows. Paulo, 11-03 15:40 |
 | D46 | The HTML report | Built now beside the Word report, from the same stored values, offline and self-contained; release and delivery after Paulo sees it. Paulo, 11-03 19:20 ("just get it going"); roadmap asked for at 19:52 |
 | D47 | Scope of the HTML page | Plots, not text: no methods or quality text, short pop-ups only, short rounded labels with the exact value in the pop-up; no design review (Paulo judges it at M3f; FQReview2 checks the template's code only); coverage as the native figure unless positions are stored. Paulo, 20:15, after the 9-hour question |
+| D48 | Prepare the release and the delivery ahead | Yes: version 2.1.2 and notes on a branch now, the final export for Ana staged outside her folder; publishing and delivery still wait for Paulo's word after he sees the page. Paulo, 21:39 ("yes") |
 
 ## Risks and triggers
 
