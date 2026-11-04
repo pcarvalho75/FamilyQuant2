@@ -67,7 +67,6 @@ The program side (FQShell joined at 20:30 on Paulo's "hire 1 more sol worker so 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M1q | Data for the dot plot: database entries per family from the stored results, if held, as bound fields, plus the list of selectable measures with their scale and program-made tick labels | L | 0.3 | 🟢 | M2l | DONE posted; documented in docs/HTML-REPORT.md; no search or Compute | RS | | 0 | 0 | |
 
 ### W2 The page (FQLook)
 
@@ -75,7 +74,7 @@ Plots, not text (Paulo, 20:15: "this html page is basically plots, this is not s
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M2l | The dot plot (Paulo 22:23, 22:27, 22:32): database entries against ion current by default, with X, Y and Size selectable from the per-family measures; family colours, tooltips, linked selection | M | 0.4 | M1q | M3e | Renders on Ana's real page and the synthetic one; FQReview2 approves | LK | | 0 | 0 | |
+| M2l | The dot plot (Paulo 22:23, 22:27, 22:32): database entries against ion current by default, with X, Y and Size selectable from the per-family measures; family colours, tooltips, linked selection | M | 0.4 | 🟢 | M3e | Renders on Ana's real page and the synthetic one; FQReview2 approves | LK | | 0 | 0 | |
 
 ### W3 Review and merge
 
