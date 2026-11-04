@@ -347,6 +347,8 @@ namespace FamilyQuant
     public sealed class FamilyWorldPassResult
     {
         public string Method { get; init; } = FamilyWorldPass.Method;
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public HomologyScienceOptions? Science { get; init; }
         public int MinimumTagLength { get; init; }
         public double MinIdentity { get; init; }
         public IReadOnlyList<string> CreditableFamilies { get; init; } = Array.Empty<string>();
@@ -467,6 +469,10 @@ namespace FamilyQuant
         {
             var result = new FamilyWorldPassResult
             {
+                Method = options.Science?.AnyEnabled == true
+                    ? "family world pass v2: residual de novo tags, identity and original-query PAM30MS under recorded search options; retained targets after target-decoy competition credit families in scope; 2026-11-03"
+                    : Method,
+                Science = options.Science?.AnyEnabled == true ? options.Science.Clone() : null,
                 MinimumTagLength = minimumTagLength,
                 MinIdentity = options.MinIdentity,
                 CreditableFamilies = creditable,
@@ -537,7 +543,9 @@ namespace FamilyQuant
             (100 * result.MinIdentity).ToString("0.##", CultureInfo.InvariantCulture) + "% gapless identity; reversed copies as decoys; only families " +
             "in scope can be credited (" + result.CreditableFamilies.Count.ToString(CultureInfo.InvariantCulture) + "); " +
             "a family is credited, never a protein; a family row holds its own peptides and a peptide reaching several " +
-            "families is counted once, in the shared row; fractions of the unattributed envelope";
+            "families is counted once, in the shared row; fractions of the unattributed envelope" +
+            (result.Science?.ScoreTier is { Enabled: true } tier ? "; target proteins retained within " +
+                tier.MaximumPamScoreDrop.ToString(CultureInfo.InvariantCulture) + " PAM units of the best score after competition" : string.Empty);
 
         /// <summary>
         /// The new export. One row per credited family (its unique part, the part split equally, the overlapping

@@ -484,6 +484,7 @@ namespace FamilyQuant
         {
             SyncQuantitationChoices(); Quantitation.SetFullXicQuant(rows, perRunTic);
         }
+        public void SetFullXicMappingProvenance(FamilyMappingProvenance? mapping) => Quantitation.SetFullXicMappingProvenance(mapping);
         public Task SetFullXicQuantAsync(IReadOnlyList<QuantRow>? rows, IReadOnlyDictionary<string, double>? perRunTic,
             DateTimeOffset? startedAtUtc = null, string? operationLogPath = null)
         {

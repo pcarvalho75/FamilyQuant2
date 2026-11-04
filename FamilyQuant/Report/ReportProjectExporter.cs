@@ -37,8 +37,7 @@ public static class ReportProjectExporter
             _ = ReportCompositionBasis.Select(curation, manifest);
         var data = analyticsData ?? AnalyticsBuilder.Build(rows, manifest.PerRunTic);
         if (analyticsData == null && manifest.DerivedFractions.Count > 0) NativeQuantFractions.ApplyDetectedToFractions(data.Fractions, data.Grouped, manifest.DerivedFractions);
-        var options = new Homology.HomologyOptions();
-        if (manifest.FamilyMapping != null) options.MinIdentity = manifest.FamilyMapping.MinIdentity;
+        var options = Homology.HomologyDefaults.ForStoredMapping(manifest.FamilyMapping);
         Data(2, "Attributing current families");
         var families = familyResults;
         if (families == null && curation.MyExtendedFastaItems.Count > 0)

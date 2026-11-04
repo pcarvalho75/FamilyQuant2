@@ -19,8 +19,8 @@ namespace FamilyQuant.Tests
 
         internal static int Run(string[] args)
         {
-            if (args.Length != 6)
-                throw new ArgumentException("Supply project.fqproj, RAW folder, de novo folder, empty output folder and cache folder.");
+            if (args.Length is not (6 or 7) || args.Length == 7 && !Version.TryParse(args[6], out _))
+                throw new ArgumentException("Supply project.fqproj, RAW folder, de novo folder, empty output folder, cache folder and optional recorded app version.");
             string output = Path.GetFullPath(args[4]);
             if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any())
                 throw new IOException("The snapshot output folder must be empty: " + output);
@@ -48,7 +48,8 @@ namespace FamilyQuant.Tests
                 MinPointsForQuant = previous.MinPointsForQuant,
                 Ppm = previous.Ppm,
                 Ms1Tolerance = previous.Ms1Tolerance,
-                AppVersion = previous.AppVersion,
+                AppVersion = args.Length == 7 ? args[6] : previous.AppVersion,
+                CacheDirectory = cache,
                 FamilyCuration = curation,
                 DeNovoSelections = selections,
                 DeNovoCriteria = new DeNovoFilterCriteria

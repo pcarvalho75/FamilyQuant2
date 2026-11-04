@@ -36,6 +36,10 @@ namespace FamilyQuant
         /// still valid without it; rows then state explicitly that family mapping was not supplied.</summary>
         public FamilyClusterFile? FamilyCuration { get; set; }
 
+        /// <summary>Current Compute policy. A caller can explicitly provide legacy OFF options;
+        /// saved projects retain their recorded mapping policy until a new Compute.</summary>
+        public Homology.HomologyOptions? FamilyMappingOptions { get; set; } = Homology.HomologyDefaults.ForNewCompute();
+
         /// <summary>Write the spectrum-level source/search/quant comparison CSV after a successful
         /// computation. On by default; this is the inspectable table behind the DataGrid and the
         /// de-novo-effect plots.</summary>
