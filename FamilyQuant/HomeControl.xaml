@@ -3,6 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Background="{DynamicResource CanvasBrush}" FontFamily="{DynamicResource UiFont}"
              FontSize="{DynamicResource BodySize}">
+    <UserControl.Resources>
+        <Style x:Key="RecentProjectRemoveButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Width" Value="28"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"/>
+                    <Setter Property="Background" Value="{DynamicResource HoverBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Margin="24" MaxWidth="1160" HorizontalAlignment="Stretch">
             <DockPanel Margin="0,0,0,20">
@@ -58,13 +78,20 @@
                         <ItemsControl x:Name="RecentProjectsList">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Click="RecentProject_Click" IsEnabled="{Binding Exists}" ToolTip="{Binding ToolTip}" HorizontalContentAlignment="Stretch" Margin="0,0,0,6">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <Grid Margin="0,0,0,6" PreviewKeyDown="RecentProject_PreviewKeyDown">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                        <Grid.ContextMenu>
+                                            <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                                                <MenuItem Header="Remove from recent projects" InputGestureText="Delete" Click="RemoveRecentProject_Click"
+                                                          ToolTip="Removes this entry from the saved list and keeps the file."/>
+                                            </ContextMenu>
+                                        </Grid.ContextMenu>
+                                        <Button Click="RecentProject_Click" IsEnabled="{Binding Exists}" ToolTip="{Binding ToolTip}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0,0,4,0">
                                             <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource TextBrush}"/>
-                                            <TextBlock Grid.Column="1" Text="{Binding Availability}" Foreground="{DynamicResource MutedBrush}" Margin="10,0,0,0" FontSize="{DynamicResource CaptionSize}"/>
-                                        </Grid>
-                                    </Button>
+                                        </Button>
+                                        <Button Grid.Column="1" Content="×" Click="RemoveRecentProject_Click" Style="{StaticResource RecentProjectRemoveButton}"
+                                                ToolTip="Remove from recent projects" AutomationProperties.Name="Remove from recent projects"/>
+                                    </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

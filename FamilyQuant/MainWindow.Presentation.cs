@@ -38,6 +38,7 @@ public partial class MainWindow
             owner.home = new HomeControl { UseShellNavigationRail = true };
             owner.home.OpenRequested += () => owner.MenuItemCluster_Click(owner, new RoutedEventArgs());
             owner.home.OpenPathRequested += async path => await owner.OpenProjectSafelyAsync(path);
+            owner.home.RemoveRecentProjectRequested += owner.RemoveRecentProject;
             owner.home.LastResultRequested += owner.ShowLastResult;
             owner.home.BuildFamiliesRequested += () => owner.MenuRunUSearch_Click(owner, new RoutedEventArgs());
             owner.home.CurateRequested += owner.ShowCurationOrOpen;

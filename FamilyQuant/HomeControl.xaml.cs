@@ -1,5 +1,7 @@
 using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace FamilyQuant
 {
@@ -18,6 +20,7 @@ namespace FamilyQuant
         public HomeViewModel ViewModel { get; } = new();
         public event Action? OpenRequested;
         public event Action<string>? OpenPathRequested;
+        public event Action<string>? RemoveRecentProjectRequested;
         public event Action? LastResultRequested;
         public bool UseShellNavigationRail
         {
@@ -81,6 +84,21 @@ namespace FamilyQuant
         private void RecentProject_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (sender is Button { DataContext: HomeRecentProject { Exists: true } recent }) OpenPathRequested?.Invoke(recent.Path);
+        }
+
+        private void RemoveRecentProject_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is not FrameworkElement { DataContext: HomeRecentProject recent }) return;
+            e.Handled = true;
+            RemoveRecentProjectRequested?.Invoke(recent.Path);
+        }
+
+        private void RecentProject_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Delete || Keyboard.Modifiers != ModifierKeys.None
+                || sender is not FrameworkElement { DataContext: HomeRecentProject recent }) return;
+            e.Handled = true;
+            RemoveRecentProjectRequested?.Invoke(recent.Path);
         }
 
         private void ButtonHomeBuild_Click(object sender, System.Windows.RoutedEventArgs e)

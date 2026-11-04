@@ -99,6 +99,16 @@ public partial class MainWindow
                 Tag = path
             };
             item.Click += async (_, _) => await OpenProjectSafelyAsync(path);
+            var remove = new MenuItem { Header = "Remove from recent projects", InputGestureText = "Delete",
+                ToolTip = "Removes this entry from the saved list and keeps the file." };
+            remove.Click += (_, e) => { e.Handled = true; RemoveRecentProject(path); };
+            item.ContextMenu = new ContextMenu { Items = { remove } };
+            item.PreviewKeyDown += (_, e) =>
+            {
+                if (e.Key != Key.Delete || Keyboard.Modifiers != ModifierKeys.None) return;
+                e.Handled = true;
+                RemoveRecentProject(path);
+            };
             MenuItemRecent.Items.Add(item);
         }
         if (MenuItemRecent.Items.Count == 0)
