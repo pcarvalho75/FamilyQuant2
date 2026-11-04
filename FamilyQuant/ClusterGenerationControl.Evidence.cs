@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace FamilyQuant;
 
@@ -15,7 +16,42 @@ public partial class ClusterGenerationControl
     public Func<EvidenceGroupingSession, EvidenceReviewSelection?>? ConfirmEvidenceReviewOverride { get; set; }
     public event EventHandler? DocumentChanged;
 
-    private async void ButtonEvidenceGrouping_Click(object sender, RoutedEventArgs e) => await ReviewEvidenceAsync();
+    private async void ButtonEvidenceGrouping_Click(object sender, RoutedEventArgs e) => await ReviewEvidenceWithFetchOfferAsync();
+
+    private async Task ReviewEvidenceWithFetchOfferAsync()
+    {
+        if (evidenceReviewRunning || evidenceFetchRunning || superClusterRunning || Operations.IsBusy) return;
+        if (!HasStoredProteinEvidence())
+        {
+            if (!ConfirmGroupingPrerequisite("Group by evidence",
+                "This project has no UniProt evidence yet. Download it now?", "Download and continue")) return;
+            await FetchProteinEvidenceAsync();
+            if (!HasStoredProteinEvidence()) return;
+        }
+        await ReviewEvidenceAsync();
+    }
+
+    private bool HasStoredProteinEvidence() => NearestReviewed.Targets(fcf)
+        .Any(p => !SequenceLabels.IsContaminant(p.SequenceIdentifier) && p.Evidence != null);
+
+    private bool ConfirmGroupingPrerequisite(string title, string message, string action)
+    {
+        var owner = Window.GetWindow(this);
+        if (owner == null) return false;
+        var dialog = new Window { Title = title, Owner = owner, Width = 560, SizeToContent = SizeToContent.Height,
+            ResizeMode = ResizeMode.NoResize, WindowStartupLocation = WindowStartupLocation.CenterOwner, ShowInTaskbar = false };
+        SecondaryWindowView.Theme(dialog);
+        var proceed = new Button { Content = action, IsDefault = true, Margin = new Thickness(0, 0, 8, 0) };
+        proceed.SetResourceReference(StyleProperty, "PrimaryButton");
+        proceed.Click += (_, _) => dialog.DialogResult = true;
+        var cancel = new Button { Content = "Cancel", IsCancel = true };
+        var buttons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right };
+        buttons.Children.Add(proceed); buttons.Children.Add(cancel);
+        var panel = new StackPanel();
+        panel.Children.Add(SecondaryWindowView.Text(message)); panel.Children.Add(buttons);
+        dialog.Content = SecondaryWindowView.Frame(panel);
+        return dialog.ShowDialog() == true;
+    }
 
     public Task ReviewEvidenceAsync() => AppOperationHost.OnUi(this, ReviewEvidenceCoreAsync);
 
@@ -55,7 +91,8 @@ public partial class ClusterGenerationControl
         Window? owner = Window.GetWindow(this);
         if (owner == null) return false;
         var window = new SuperClusterPreviewWindow(preview, null, session.Propose, session.CountMotif,
-            evidenceMode: startWithEvidence, discoverTask: session.DiscoverTaskAsync, confirmPanelLinks: session.ConfirmPanelLinks) { Owner = owner };
+            evidenceMode: startWithEvidence, confirmPanelLinks: session.ConfirmPanelLinks,
+            discoverTaskWithProgress: session.DiscoverTaskAsync) { Owner = owner };
         window.ShowDialog();
         if (!window.Confirmed) return false;
         if (!window.IsEvidenceMode) return true;

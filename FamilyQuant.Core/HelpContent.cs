@@ -19,6 +19,12 @@ namespace FamilyQuant
     /// </summary>
     public static class HelpContent
     {
+        public const string GroupingOrder =
+            "1. Fetch evidence: download UniProt annotations for the project's proteins.\n" +
+            "2. Group by evidence: review the scope and proposal, then Apply grouping.\n" +
+            "3. Fetch family world: download family references for the confirmed task and scope.\n" +
+            "4. Compute full XIC: open Quantify to measure peptide signal from the RAW files.\n";
+
         /// <summary>
         /// <paramref name="profile"/> is null before a project is loaded; the text then explains what the
         /// choice WILL be rather than claiming a denominator the program cannot yet name.
@@ -46,7 +52,7 @@ namespace FamilyQuant
             sb.AppendLine("   a FASTA or target-decoy (.T-R) database. That writes a Family");
             sb.AppendLine("   Cluster File (.fcf) next to the database: proteins grouped into families.");
             sb.AppendLine("2. File > Open opens that .fcf in Families, where you");
-            sb.AppendLine("   can merge families further by description words or by keyword.");
+            sb.AppendLine("   follow the numbered Grouping order below before quantitation.");
             sb.AppendLine("3. Analysis > Compute full XIC opens Quantify for the primary quantitation route.");
             sb.AppendLine("   In Families, PatternLab (optional) offers Load PatternLab project for a .plp. It");
             sb.AppendLine("   must have been exported at PEPTIDE level - a protein-level export has nothing");
@@ -193,6 +199,13 @@ namespace FamilyQuant
             sb.AppendLine("TIC reporting available when those totals are present; the other reporting modes");
             sb.AppendLine("remain usable while that mode is greyed out.");
             sb.AppendLine();
+            sb.AppendLine("GROUPING");
+            sb.AppendLine("--------");
+            sb.AppendLine(GroupingOrder);
+            sb.AppendLine("Fetch evidence stores annotations for grouping; Fetch family world stores reference");
+            sb.AppendLine("sequences for Database gap. Both need an internet connection when downloading.");
+            sb.AppendLine("Save the project to keep the evidence, applied grouping and family world.");
+            sb.AppendLine();
             sb.AppendLine("CURATING BY HAND: UNDO, KEYWORD REVIEW, SEARCH-SCOPED RECLUSTERING");
             sb.AppendLine("------------------------------------------------------------------------");
             sb.AppendLine("Undo steps back through the changes you make in Families, one at a time, without");
@@ -243,7 +256,7 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine("Fetch family world uses the confirmed database task and scope from Group by evidence.");
             sb.AppendLine("Fetch evidence first to supply the database's family annotations.");
-            sb.AppendLine("If no matching task is confirmed, it reads the database and asks you to confirm the scope first.");
+            sb.AppendLine("If no matching task and scope are confirmed, it offers to open Group by evidence first.");
             sb.AppendLine("The screen shows the stored release, scope, protein count and size. Cancel or a failed fetch");
             sb.AppendLine("keeps the previous file. Save the project to keep the world for offline use. Compute uses the");
             sb.AppendLine("stored world to populate Database gap, where credited tags can suggest FASTA additions.");
@@ -251,6 +264,9 @@ namespace FamilyQuant
             sb.AppendLine("Group by evidence opens the Evidence tab of Review grouping. Confirm the scope,");
             sb.AppendLine("then review the supplied families, reasons, flags and protein ticks before Apply");
             sb.AppendLine("grouping; the review's Help explains its architecture, motif and left-out views.");
+            sb.AppendLine("If the project has no stored UniProt evidence, Download and continue runs Fetch evidence");
+            sb.AppendLine("before opening the review; Cancel leaves the project unchanged. If no reviewed accession");
+            sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");
             sb.AppendLine("Cancelling leaves the open grouping unchanged and adds no Undo step.");
             sb.AppendLine();
             sb.AppendLine("In Review grouping and the Families protein table, right-click to copy a UniProt code or");

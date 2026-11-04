@@ -135,6 +135,8 @@
                         <TextBlock DockPanel.Dock="Left" Text="Scope" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Words to match in the evidence keywords and tissue fields. These are user choices, never a built-in family list."/>
                     </DockPanel>
+                    <TextBlock Text="{Binding Status}" Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
+                               TextWrapping="NoWrap" Margin="0,8,0,0" ToolTip="{Binding Status}"/>
                     <TextBlock x:Name="TextBlockQueryCoverageRule" Text="{x:Static local:EvidenceProposalPresentation.QueryCoverageRule}"
                                Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,8,0,0" TextWrapping="Wrap"/>
                     </StackPanel>
@@ -283,7 +285,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <TextBlock Grid.Row="2" Text="{Binding Status}" Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Margin="0,8,0,0" ToolTip="{Binding Status}"/>
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
             <Button Content="Help" Click="Help_Click" ToolTip="Explains scope, evidence tiers, flags, keyword matching, domains and the review choices. It does not change the open document."/>
             <Button x:Name="createButton" Content="Apply grouping" Style="{DynamicResource PrimaryButton}" IsEnabled="{Binding CanConfirm}" IsDefault="True" Click="Create_Click"

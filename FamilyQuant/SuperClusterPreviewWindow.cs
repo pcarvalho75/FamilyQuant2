@@ -24,10 +24,11 @@ namespace FamilyQuant
             Func<string, EvidenceReviewInput>? propose, Func<string, string>? motif = null,
             string initialScope = "", bool evidenceMode = false,
             Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask = null,
-            Func<IReadOnlyList<PanelFamilyLinkSelection>, EvidenceReviewInput>? confirmPanelLinks = null)
+            Func<IReadOnlyList<PanelFamilyLinkSelection>, EvidenceReviewInput>? confirmPanelLinks = null,
+            Func<IProgress<FetchProgress>?, CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTaskWithProgress = null)
         {
             InitializeComponent();
-            model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask, confirmPanelLinks);
+            model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask, confirmPanelLinks, discoverTaskWithProgress);
             Loaded += async (_, _) => await DiscoverInitialTaskAsync();
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
@@ -45,13 +46,13 @@ namespace FamilyQuant
         private async Task DiscoverInitialTaskAsync()
         {
             if (model.ModeIndex == 1 && model.TaskDiscoveryAvailable && !model.HasTaskScope)
-                await RunReviewAsync("Read grouping task", model.DiscoverTaskAsync);
+                await RunReviewAsync("Read grouping task", model.DiscoverTaskAsync, taskDiscovery: true);
         }
         private async void ReviewModeChanged(object sender, SelectionChangedEventArgs e)
         {
             if (IsLoaded && ReferenceEquals(e.OriginalSource, sender)) await DiscoverInitialTaskAsync();
         }
-        private async void DiscoverTask_Click(object sender, RoutedEventArgs e) => await RunReviewAsync("Read grouping task", model.DiscoverTaskAsync);
+        private async void DiscoverTask_Click(object sender, RoutedEventArgs e) => await RunReviewAsync("Read grouping task", model.DiscoverTaskAsync, taskDiscovery: true);
         private void RestoreSort()
         {
             grid.Items.SortDescriptions.Clear();

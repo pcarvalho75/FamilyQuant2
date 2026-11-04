@@ -143,6 +143,7 @@ public partial class MainWindow
                 "WHAT DO I DO FIRST?\n" +
                 "===================\n\n" +
                 "You are at: " + owner.StatusModel.Text + "\n\n" + owner.StatusModel.ContextHelp + "\n\n" +
+                "IN FAMILIES, FOLLOW THIS ORDER\n" + HelpContent.GroupingOrder + "\n" +
                 "STEP 1 · Group the proteins into families\n" +
                 "   Menu: File > New from database\n" +
                 "   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\n" +
