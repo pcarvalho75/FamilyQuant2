@@ -72,9 +72,13 @@ internal static partial class Program
         string unavailable = Path.Combine(workDir, "start-missing.fqproj");
         new FamilyClusterFile().Save(available);
         if (File.Exists(unavailable)) File.Delete(unavailable);
-        model.SetRecentProjects(new[] { available, unavailable, available }, path => path == available);
-        Check("start model keeps recent order, availability and distinct paths", model.RecentProjects.Count == 2
-            && model.RecentProjects[0].Exists && !model.RecentProjects[1].Exists && model.RecentProjects[1].ToolTip.Contains(unavailable));
+        var recentState = new ShellSessionState { RecentProjects = new() { available, unavailable } };
+        var storedRecentPaths = recentState.RecentProjects.ToArray();
+        model.SetRecentProjects(recentState.RecentProjects.Append(available), path => path == available);
+        Check("start model keeps recent order, availability and distinct paths",
+            model.RecentProjects.Select(p => p.Path).SequenceEqual(new[] { available })
+            && model.RecentProjects.All(p => p.Exists && p.ToolTip.Contains(p.Path))
+            && recentState.RecentProjects.SequenceEqual(storedRecentPaths));
         model.SetLastResult(unavailable, false, _ => false);
         Check("a missing saved result stays readable and disabled", !model.HasLastResult && model.LastResultText.Contains("unavailable"));
         model.SetLastResult(null, true);
@@ -117,8 +121,11 @@ internal static partial class Program
         PumpDispatcher();
         string? chosen = null;
         home.OpenPathRequested += path => chosen = path;
-        var recentButtons = WalkTree(home).OfType<Button>().Where(b => b.DataContext is HomeRecentProject).ToArray();
-        Check("recent project rows are real keyboard-focusable buttons", recentButtons.Length == 2 && recentButtons.All(b => b.Focusable));
+        var recentRows = ((ItemsControl)home.FindName("RecentProjectsList")).Items.Cast<HomeRecentProject>().ToArray();
+        var recentButtons = WalkTree(home).OfType<Button>().Where(b => b.DataContext is HomeRecentProject recent
+            && b.ToolTip as string == recent.ToolTip).ToArray();
+        Check("recent project rows are real keyboard-focusable buttons", recentRows.Length == 1 && recentRows[0].Path == available
+            && recentButtons.Length == recentRows.Length && recentButtons.All(b => b.Focusable));
         foreach (var button in recentButtons) button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         Check("only an available recent row raises an open request", chosen == available);
         CheckTooltipCoverage("Start page", home);
