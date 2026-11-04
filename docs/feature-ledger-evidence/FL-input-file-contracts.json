@@ -5,152 +5,152 @@
   "runs": [
     {
       "id": "native",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --isolated-native-proof --ledger-input-file-contracts D:/FamilyQuant-data/reference-1.5.0.6/app C:/Users/paulo/Desktop/FamilyQuant/PLVI.sepr2 D:/FamilyQuant-data/out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts \u00222026-11-03 14:08:12 -0800\u0022",
-      "executedAt": "2026-11-03 14:08:12 -0800",
-      "commit": "3ab0bd7d5da0dc6900afda91c85ea5985fffa0ae",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --isolated-native-proof --ledger-input-file-contracts D:/FamilyQuant-data/reference-1.5.0.6/app C:/Users/paulo/Desktop/FamilyQuant/PLVI.sepr2 D:/FamilyQuant-data/out-refresh\\20261103-165518-assay\\fl-input-file-contracts \u00222026-11-03 16:56:42 -0800\u0022",
+      "executedAt": "2026-11-03 16:56:42 -0800",
+      "commit": "d4f70fd42dcc26698987e37401811e082f6b3197",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\chooser-injections.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\chooser-injections.json",
           "sha256": "22BD80333D2B4FCD8D3BA3CA666608E0C0DF6104AC8C5EC92931D5E66A08D661"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\chooser-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\chooser-values.json",
           "sha256": "3290EABDC55B226496953CC8FA13B5BBFAE0266DD976DF42ECEA3B0E53A9FE89"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\FamilyQuant.Core.dll",
-          "sha256": "597BF4DBBF66E40BB6FB46AE769CACCBFDC51BEE0874A5E043377A282237B68B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\FamilyQuant.Core.dll",
+          "sha256": "A833B10A087C334BFCB75BED61E900D1ACD67CA496A3FF1B2450764CA6917364"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\FamilyQuant.Core\\DeNovo\\SeproPsmAdapter.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\FamilyQuant.Core\\DeNovo\\SeproPsmAdapter.cs",
           "sha256": "00B9CFF5C8A4A5CFD7714F3CC076FF44DB00BAAB13EB02153A11B890F9696C40"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\FamilyQuant.Core\\FamilyQuantFile.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\FamilyQuant.Core\\FamilyQuantFile.cs",
           "sha256": "C9BB89706722E647147AA5055D016485C2049BE81CB2B8AC8CB90928A02B9F45"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "49C720B5ECD30B7BD86E4443AF12603A99D50EDB0B2DDB51AEA09C11775DCE64"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "2B9CC4F338F66ADC12A96558DC81C1168C77A1F64EC51A4B858F4FD22A0555F9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\FamilyQuant.Tests\\NativeOwnedDialogDriver.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\FamilyQuant.Tests\\NativeOwnedDialogDriver.cs",
           "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\FamilyQuant.Tests\\NativeProofDesktop.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\FamilyQuant.Tests\\NativeProofDesktop.cs",
           "sha256": "E00BADD2FB785CB1750FDD704AF7F9D93C040CD1A5BE59ABDF864C91FEE7B3AF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\FamilyQuant.Tests\\Program.DeNovoCommandProbe.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\FamilyQuant.Tests\\Program.DeNovoCommandProbe.cs",
           "sha256": "B8C6DAC56C2F6DA74202F8659842EC9BF9C5D4BE247955F5DACCED0A8D340E54"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\FamilyQuant.Tests\\Program.InputFileContracts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\FamilyQuant.Tests\\Program.InputFileContracts.cs",
           "sha256": "AD8747DEC7B9693AC80484AC375C5673224E690CF15912A3502DCFEB5CC6C80F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\FamilyQuant.Tests\\Program.SecondaryInjectedMethod.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\FamilyQuant.Tests\\Program.SecondaryInjectedMethod.cs",
           "sha256": "23A7781DDBD6E2B6299FB12C9F31A083CC4FF42C290513848F61EA4CEF31E2D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\FamilyQuant2.dll",
-          "sha256": "2451E1F61FE7AD28EA2398FDA096EC1E99D532BA9C159F63DB791F9B6B908B9D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\FamilyQuant2.dll",
+          "sha256": "A3FB813739F652F2C410A56EAE642455885EFDCA754573C9CC7FECC47282ECF9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\FamilyQuant\\ClusterGenerationControl.xaml.cs",
-          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\FamilyQuant\\ClusterGenerationControl.xaml.cs",
+          "sha256": "F48CAEFDA7802EA4219B09DD9922EA9227549D0DF7C37B360A69143ECDF19018"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\FamilyQuant\\DeNovoControl.Dialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\FamilyQuant\\DeNovoControl.Dialogs.cs",
           "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\executed\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\executed\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\inputs.log",
-          "sha256": "51C18D80DB79ADCC469A9ADB5BED8412E7F2EFC61E736CAC1A5F57653B97A5B9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\inputs.log",
+          "sha256": "27965CF5254F56B704AB67E24F4DA93ACED1C026FFCA67DB69A942CAD9F91A11"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\plp\\current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\plp\\current.csv",
           "sha256": "64468B5163D08E2958A132214028D7D7D6E12978ED7520380BE2F931ED6EF204"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\plp\\frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\plp\\frozen.csv",
           "sha256": "64468B5163D08E2958A132214028D7D7D6E12978ED7520380BE2F931ED6EF204"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\plp\\injections.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\plp\\injections.json",
           "sha256": "02E7C6A9DC61083DFF6C2D85ACAF0314C6DF5535E707269F965B5277A4BBA2BF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\plp\\input.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\plp\\input.plp",
           "sha256": "D89E4677E8B0DA29E68AC8E8C1A7FB2DE6C93461CEDDAD5E3B72391E77737470"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\previous-target-audit.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\previous-target-audit.json",
           "sha256": "0F0A5A4723B6E7CC1E91D51B8F4A6E6B66F21EFB56DD1030179E451A26419EAF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\readers\\broken.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\readers\\broken.fcf",
           "sha256": "40B5CAFE045B9C9E31A1C3FDCFBC89F934906FF06A6276B55C2A0E517BE21655"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\readers\\broken.sepr2",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\readers\\broken.sepr2",
           "sha256": "AE4B3280E56E2FAF83F414A6E3DABE9D5FBE18976544C05FED121ACCB85B53FC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\readers\\changed-copy-facts-41.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\readers\\changed-copy-facts-41.json",
           "sha256": "81FE8205331B7ED5E04C0E2976A3B6B9353511876C21A964D42607B868DF991B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\readers\\command-fixture.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\readers\\command-fixture.fcf",
           "sha256": "4A6B0747004C95B6E37C12A4215A215D1DA7CB108D512E6C4F8ADE7892FF51A5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\readers\\command-probe.json",
-          "sha256": "B858BD146E166592FB3CEF626EA5380E8E82FD59E729FF1AD05F574E6A3502CE"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\readers\\command-probe.json",
+          "sha256": "55BF454F9E76CB6D161A9A647F28D06EBA1F48BCB8D42288EA478AA72C8D7FA8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\readers\\current-overlap.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\readers\\current-overlap.csv",
           "sha256": "18079E7C827227AD1368FC52BF7778724F9C3C20548B7DECA691C868880393F9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\readers\\current-review.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\readers\\current-review.csv",
           "sha256": "80A651CC3199752C8B2BA80EF57457418EBAFDD2EA7EEBA89393B168E0EFF0B8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\readers\\current-summary.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\readers\\current-summary.csv",
           "sha256": "3EE9B927F77A7F06D8482CD27C286769907907764CFA2C7E738171F04174039F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\readers\\frozen-overlap.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\readers\\frozen-overlap.csv",
           "sha256": "18079E7C827227AD1368FC52BF7778724F9C3C20548B7DECA691C868880393F9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\readers\\frozen-review.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\readers\\frozen-review.csv",
           "sha256": "80A651CC3199752C8B2BA80EF57457418EBAFDD2EA7EEBA89393B168E0EFF0B8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\readers\\frozen-summary.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\readers\\frozen-summary.csv",
           "sha256": "3EE9B927F77A7F06D8482CD27C286769907907764CFA2C7E738171F04174039F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\readers\\imports\\20220624_Bjararaca_1ug_3step-240min_01.raw.denovoOnly.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\readers\\imports\\20220624_Bjararaca_1ug_3step-240min_01.raw.denovoOnly.csv",
           "sha256": "77B1C1860D09DFDCEADC031719AFB235157EBE97C01E65DDFEF4E4574E19D627"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\target-audit.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\target-audit.json",
           "sha256": "7AFB89256CC14DF6400B4834C35A9441CEB542AEBC769A998CD78A4A514E0E0A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\wording-input-captions.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\wording-input-captions.tsv",
           "sha256": "B06E92ABBF340D358F398A392FF41CA21298A2372387A681944333483E2DE13B"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-gate"
+      "workingDirectory": "D:\\FamilyQuant-wt\\assay"
     }
   ],
   "rows": [
@@ -165,7 +165,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Executed native input chooser/reader path",
-          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
+          "sha256": "F48CAEFDA7802EA4219B09DD9922EA9227549D0DF7C37B360A69143ECDF19018"
         },
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
@@ -184,7 +184,7 @@
           "kind": "test",
           "target": "InputFileCommand",
           "assertion": "input SEPro chooser retains legacy extension and accept/cancel path with actual readers",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\inputs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\inputs.log",
           "inspectedBy": ""
         }
       ],
@@ -203,7 +203,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Executed native input chooser/reader path",
-          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
+          "sha256": "F48CAEFDA7802EA4219B09DD9922EA9227549D0DF7C37B360A69143ECDF19018"
         },
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
@@ -222,7 +222,7 @@
           "kind": "test",
           "target": "InputFileCommand",
           "assertion": "input FCF chooser retains legacy extension and accept/cancel path with actual readers",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\inputs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\inputs.log",
           "inspectedBy": ""
         }
       ],
@@ -241,7 +241,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Executed native input chooser/reader path",
-          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
+          "sha256": "F48CAEFDA7802EA4219B09DD9922EA9227549D0DF7C37B360A69143ECDF19018"
         },
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
@@ -260,7 +260,7 @@
           "kind": "test",
           "target": "InputFileCommand",
           "assertion": "input PLP chooser and actual loaded/exported quantitation agree",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\fl-input-file-contracts\\inputs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\fl-input-file-contracts\\inputs.log",
           "inspectedBy": ""
         }
       ],
