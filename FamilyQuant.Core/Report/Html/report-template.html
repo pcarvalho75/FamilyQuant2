@@ -2528,7 +2528,73 @@
             };
             $("others-list").append(b);
           }
-          document.querySelector('#method-section').hidden = true;
+          function help(id, title, body) {
+            $(id).onclick = () => popup(title, [node("p", "", body)]);
+          }
+          help(
+            "composition-info",
+            "Reading the family landscape",
+            "The ring shows contributions to credited family signal. Select a segment or a family in the list. Mean family shares and pooled within-family parts use different reference totals; their labels identify which view you are reading.",
+          );
+          help(
+            "runs-info",
+            "Reading the run points",
+            "Each point is a stored family share in a run. The line behind it shows the mean. Points close together indicate similar shares across these runs. This view describes consistency, not statistical significance or biological variation.",
+          );
+          help(
+            "signal-info",
+            "The reference total matters",
+            "Family composition is expressed relative to signal credited to families. The credited-signal view instead compares that signal with the whole measured signal in each run. These are different reference totals.",
+          );
+          help(
+            "others-info",
+            "The smaller contributions",
+            "Others is the aggregate retained by the report's threshold rule. This page does not unpack names hidden by that rule. The data workbook and full report retain the project's available detail.",
+          );
+          const iconPaths = [
+            "M4 6h16M4 12h16M4 18h16M8 4v16",
+            "M4 18l5-7 5 3 6-10M4 21h17",
+            "M5 4h14v16H5ZM9 8h6M9 12h6M9 16h3",
+            "M4 19V9M10 19V5M16 19v-7M22 19V3",
+            "M4 6h16M7 12h10M10 18h4",
+          ];
+          $("method-section").hidden = !(data.methods || []).length;
+          for (const [i, step] of (data.methods || []).entries()) {
+            const li = node("li"),
+              b = node("button"),
+              ic = svg("svg", { viewBox: "0 0 24 24", "aria-hidden": "true" });
+            ic.append(svg("path", { d: iconPaths[i % iconPaths.length] }));
+            b.append(ic, field(step.title));
+            b.onclick = () => {
+              const dl = node("dl");
+              for (const f of step.facts || [])
+                dl.append(field(f.name, "dt"), field(f.value, "dd"));
+              popup(field(step.title), [dl]);
+            };
+            li.append(b);
+            $("pipeline").append(li);
+          }
+          const figures = [
+            ...(data.quality || []),
+            ...(data.sensitivity || []),
+          ];
+          if (figures.length) {
+            const section = node("section", "section"),
+              head = node("div", "section-title");
+            head.append(node("h2", "", "Quality and sensitivity"));
+            const grid = node("div", "figure-grid");
+            figures.forEach((f) => figureCard(f, grid));
+            section.append(head, grid);
+            $("method-section").after(section);
+          }
+          $("footer-meta").textContent =
+            "FamilyQuant · A visual guide to the saved analysis";
+          if (exists(data.interpretation)) {
+            const b = node("button", "quiet-button", "Read the interpretation");
+            b.onclick = () =>
+              popup("Interpretation", [field(data.interpretation, "p")]);
+            $("footer-meta").append(document.createTextNode(" "), b);
+          }
           renderRing();
           renderRanking();
           renderFamily();
