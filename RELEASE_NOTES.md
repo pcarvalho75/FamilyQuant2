@@ -4,6 +4,14 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.6 (release candidate, not published)
+
+- **A clean Recent projects list.** Files that are unavailable are hidden from
+  the list. They appear again when the files are reachable.
+- **Remove an entry.** Right-click and choose **Remove from recent projects**,
+  use the small **x** on an entry, or select it and press **Delete**. These actions
+  remove only the list entry and never touch the project file.
+
 ## 2.1.5 (release candidate, not published)
 
 - **A guided Families screen.** The Grouping panel shows the steps in order:
