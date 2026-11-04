@@ -75,6 +75,7 @@ public sealed record HtmlReportFamily
     public string? Proteins { get; init; }
     public string? UniqueProteins { get; init; }
     public string? Peptides { get; init; }
+    public string? DatabaseEntries { get; init; }
     public bool IsOthers { get; init; }
     public IReadOnlyList<HtmlFamilyRun> Runs { get; init; } = Array.Empty<HtmlFamilyRun>();
     public IReadOnlyList<HtmlFamilyPart> Parts { get; init; } = Array.Empty<HtmlFamilyPart>();
@@ -123,6 +124,7 @@ public sealed record HtmlReportContext
     public IReadOnlyDictionary<string, string> PanelKeys { get; init; }
         = new Dictionary<string, string>(StringComparer.Ordinal);
     public QuantManifest? StoredStudies { get; init; }
+    public FamilyDatabaseEntryCountView? DatabaseEntryCounts { get; init; }
     public string FigureDetailsCsv { get; init; } = "";
     public FamilyReportThresholdResult? SourceGrouping { get; init; }
     public FamilyWorldSummary? World { get; init; }

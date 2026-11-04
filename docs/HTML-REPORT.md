@@ -77,7 +77,15 @@ remaining eligible entries has a real zero. Stale panel mapping is unavailable. 
 neither curation nor saved studies. Canonical Others is an aggregate and is not plotted.
 
 `databaseEntries` uses this population, not the peptide source census or greedy explanation.
-Its payload integration is separate from the read-only view. `databaseGap` remains reserved when
+The prepared report supplies this read-only view to the HTML context. Every available non-Others
+headline family gets a `databaseEntries` field ID; the existing `HtmlDotMeasure` record exposes
+it through its family-ID values map, with log scale and program-made plain-decimal ticks. A zero
+is included, an unavailable/conflicted key is omitted, and no count view means no invented measure.
+Existing field/axis IDs and values are allocated first and stay unchanged. Count references use
+Kind `database-entry-count`, Property `/project/MyExtendedFastaItems`, Study `UserID` or `panel-key`,
+and Family equal to the recorded source ID or effective key. All other locators are empty, Scale
+is 1 and text is an invariant integer; this is a count of stored records, not a stored peptide result.
+`databaseGap` remains reserved when
 there is no explicit curated-family key. `proteins` remains the native greedy protein estimate,
 distinct from the searched database population. Existing measured values and rounding stay literal.
 

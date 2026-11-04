@@ -351,6 +351,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReportNumberTraceTests());
             suite.Add(() => HtmlReportDataTests());
             suite.Add(() => DatabaseEntryCountTests(null));
+            suite.Add(() => HtmlDatabaseEntryTests());
             suite.Add(() => SetupTests(Path.Combine(workDir, "setup")));
             suite.AddWithApplication(() => SetupWindowTests());
             suite.Add(() => HtmlCoverageTests());

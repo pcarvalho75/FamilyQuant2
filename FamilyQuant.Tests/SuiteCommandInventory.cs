@@ -342,6 +342,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-report-number-trace", "FamilyQuant.Tests.Program.ReportNumberTraceTests()"),
         SuiteCommandRule.Covered("--test-html-report-data", "FamilyQuant.Tests.Program.HtmlReportDataTests()"),
         SuiteCommandRule.Covered("--test-database-entry-counts", "FamilyQuant.Tests.Program.DatabaseEntryCountTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-database-entries", "FamilyQuant.Tests.Program.HtmlDatabaseEntryTests()"),
         SuiteCommandRule.Covered("--test-setup", "FamilyQuant.Tests.Program.SetupTests(System.String)"),
         SuiteCommandRule.Covered("--test-setup-window", "FamilyQuant.Tests.Program.SetupWindowTests()"),
         SuiteCommandRule.Excluded("--test-setup-native", "Requires an explicitly built embedded Setup asset and a fresh LocalAppData Temp root; executes only /test-mode with fake machine integration and reads installed EXE/DLL version metadata without starting the app."),

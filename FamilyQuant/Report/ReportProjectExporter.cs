@@ -176,6 +176,7 @@ public static class ReportProjectExporter
                 UsesPanel = compositionBasis.UsesPanel, IsIdentity = compositionBasis.IsIdentity,
                 IsAdditive = compositionBasis.Studies.FamilyRunShares?.Policy != SharedPeptidePolicy.CountInEveryFamily,
                 StoredStudies = compositionBasis.Studies, PanelKeys = panelKeys,
+                DatabaseEntryCounts = FamilyDatabaseEntryCounts.Read(curation),
                 FigureDetailsCsv = studies.FigureDetailsCsv,
                 FamilySections = panelKeys.ToDictionary(pair => pair.Key, pair => ReportSectionIds.FamilyPrefix + pair.Value, StringComparer.Ordinal),
                 World = sourceWorld, SourceGrouping = compositionBasis.SourceMembership(),

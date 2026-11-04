@@ -9,7 +9,7 @@ public static partial class HtmlReportPayloadBuilder
 {
     private sealed partial class Builder
     {
-        private IReadOnlyList<HtmlDotMeasure> DotMeasures(IReadOnlyList<HtmlReportFamily> families)
+        private IReadOnlyList<HtmlDotMeasure> DotMeasures(IReadOnlyList<HtmlReportFamily> families, bool databaseOnly = false)
         {
             var result = new List<HtmlDotMeasure>();
             foreach (var measure in new (string Id, Func<HtmlReportFamily, string?> Field)[]
@@ -17,8 +17,10 @@ public static partial class HtmlReportPayloadBuilder
                 ("mean", family => family.Mean), ("peptides", family => family.Peptides),
                 ("proteins", family => family.Proteins), ("uniqueProteins", family => family.UniqueProteins),
                 ("sd", family => family.Sd), ("cv", family => family.Cv),
+                ("databaseEntries", family => family.DatabaseEntries),
             })
             {
+                if ((measure.Id == "databaseEntries") != databaseOnly) continue;
                 var values = new SortedDictionary<string, string>(StringComparer.Ordinal);
                 foreach (var family in families.Where(f => !f.IsOthers))
                 {
