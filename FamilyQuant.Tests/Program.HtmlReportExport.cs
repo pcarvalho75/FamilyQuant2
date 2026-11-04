@@ -66,7 +66,7 @@ internal static partial class Program
         }
         finally { CultureInfo.CurrentCulture = culture; }
         HtmlReportPublicationTests(Path.Combine(output, "publication"));
-        var source = HtmlFixture();
+        var source = HtmlExportFixture();
         // This writer fixture has display cells only; its producer-only partial native recipe is not a workbook recipe.
         var exportDocument = source.Document with { Sections = source.Document.Sections.Select(section => section with
             { Blocks = section.Blocks.Select(block => block is ReportTable table ? table with { SupplementSource = null } : block).ToArray() }).ToArray() };
@@ -91,10 +91,21 @@ internal static partial class Program
             { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })!;
     }
 
+    private static (ReportDocument Document, HtmlReportContext Context) HtmlExportFixture()
+    {
+        var table = new ReportTable("family-run-means", "Headline composition", new[] { "Family", "Mean share (%)" },
+            new IReadOnlyList<string>[] { new[] { "Cedar </script> ensemble", "38.5988" }, new[] { "Others", "0.491774" } }, "Stored fixture values");
+        return (new ReportDocument { Title = "Interactive fixture <&>", Authors = "Author <name>", Sections = new[]
+        {
+            new ReportSection(ReportSectionIds.Title, "Title", Array.Empty<ReportBlock>()),
+            new ReportSection(ReportSectionIds.Results, "Results", new ReportBlock[] { table }),
+        } }, new());
+    }
+
     private static void HtmlReportSelectionTests(string output)
     {
         Directory.CreateDirectory(output);
-        var fixture = HtmlFixture();
+        var fixture = HtmlExportFixture();
         var selected = new ReportSelection { ExcludedIds = new[] { ReportSectionIds.Results, ReportSectionIds.Title } };
         var prepared = new ReportProjectExport(fixture.Document, new Dictionary<string, string>(), Array.Empty<ReportPlacedFigure>())
             { HtmlContext = fixture.Context, Selection = selected };
