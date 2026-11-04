@@ -74,7 +74,6 @@ Paulo, 23:50 to 23:57 (D52): a real installer, Help > Install update, and a chec
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M7e | v2.1.3 published with the Setup.exe and the zip; README reads 2.1.3 throughout (Paulo 00:11), with the installer section, pushed | L | 0.2 | 🟢 |  | Release live and Latest; hashes equal M7i; README live | Orchestrator | | 0 | 0 | |
 
 ### W3 Held for Paulo's word
 

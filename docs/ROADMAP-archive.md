@@ -634,4 +634,5 @@ Paulo agreed these at the restart, 2026-11-01.
 | M7g | Review of the 2.1.3 version, notes and package script (M7c) | L | 0.1 | M7c | M7h | APPROVED, or fixes by the owner and re-checked | GR2 | | 0 | 0 | |
 | M7h | Full gate on the 2.1.3 commit (ledger refresh and suite) | M | 0.3 | M7d, M7g | M7i | Ledger 5,460 of 5,460; suite green | Orchestrator | | 0 | 0 | |
 | M7i | The 2.1.3 zip and Setup.exe from that commit; Setup.exe in test mode extracts and the app reports 2.1.3 | L | 0.2 | 🟢 | M7e | Both files with SHA256; test-mode install passes | AS | | 0 | 0 | |
+| M7e | v2.1.3 published with the Setup.exe and the zip; README reads 2.1.3 throughout (Paulo 00:11), with the installer section, pushed | L | 0.2 | 🟢 |  | Release live and Latest; hashes equal M7i; README live | Orchestrator | | 0 | 0 | |
 
