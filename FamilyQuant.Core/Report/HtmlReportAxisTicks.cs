@@ -1,0 +1,64 @@
+using System;
+using System.Globalization;
+
+namespace FamilyQuant.Report;
+
+/// <summary>Presentation constants, not scientific observations. The producer and number trace
+/// share this strict resolver; neither browser formatting nor pretend Word sources are needed.</summary>
+public static class HtmlReportAxisTicks
+{
+    internal static bool Known(string id) => id is "mean" or "peptides" or "proteins" or "uniqueProteins"
+        or "sd" or "cv" or "databaseEntries" or "databaseGap";
+
+    internal static (string Label, string Unit, string Scale) Definition(string id) => id switch
+    {
+        "mean" => ("Mean ion current share", "%", "log"),
+        "peptides" => ("Peptides", "", "log"),
+        "proteins" => ("Protein estimate (greedy)", "", "log"),
+        "uniqueProteins" => ("Proteins with own peptide", "", "log"),
+        "sd" => ("Run-to-run SD", "pp", "linear"),
+        "cv" => ("CV", "%", "linear"),
+        "databaseEntries" => ("Database entries", "", "log"),
+        "databaseGap" => ("Database gap fraction", "fraction", "log"),
+        _ => throw new ArgumentException("Unknown dot measure.", nameof(id)),
+    };
+
+    public static bool TryResolve(HtmlReportReference source, out HtmlReportField field)
+    {
+        field = null!;
+        if (source == null || source.Scale != 1 || source.Property == null
+            || source.Table != null || source.Row != null || source.Column != null || source.Sheet != null
+            || source.Figure != null || source.Family != null || source.Study != null || source.Run != null
+            || source.ParagraphText != null || source.Occurrence != 0) return false;
+        string[] path = source.Property.Split('/');
+        if (!Known(path[0])) return false;
+        var definition = Definition(path[0]);
+        if (source.Kind == "axis-label")
+        {
+            if (path.Length != 1 || source.Format != null) return false;
+            field = new(definition.Label, null, "", source);
+            return true;
+        }
+        if (source.Kind != "axis-tick" || source.Format != "G3" || path.Length is < 3 or > 4
+            || !CanonicalInteger(path[2], out int exponent) || exponent is < -323 or > 308) return false;
+        double value = Math.Pow(10, exponent);
+        if (!(value > 0) || !double.IsFinite(value)) return false;
+        if (definition.Scale == "log")
+        {
+            if (path.Length != 3 || path[1] != "log10") return false;
+        }
+        else
+        {
+            if (path.Length != 4 || path[1] != "linear" || !CanonicalInteger(path[3], out int multiple)
+                || multiple is < 0 or > 10) return false;
+            value *= multiple;
+            if (!double.IsFinite(value)) return false;
+        }
+        field = new(value.ToString("G3", CultureInfo.InvariantCulture), value, definition.Unit, source);
+        return true;
+    }
+
+    private static bool CanonicalInteger(string text, out int value) => int.TryParse(text,
+        NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out value)
+        && value.ToString(CultureInfo.InvariantCulture) == text;
+}
