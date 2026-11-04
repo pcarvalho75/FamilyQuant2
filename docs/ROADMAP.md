@@ -67,6 +67,7 @@ The program side (FQShell joined at 20:30 on Paulo's "hire 1 more sol worker so 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M1q | Data for the dot plot: database entries per family from the stored results, if held, as bound fields, plus program-made axis tick labels for both log axes | L | 0.2 | 🟢 | M2l | DONE posted; documented in docs/HTML-REPORT.md; no search or Compute | RS | | 0 | 0 | |
 | M1a | Baseline: fq/results on current master; build and quick suite green before any change | L | 0.2 | 🟢 | M1b, M1c | 0 warnings; quick suite green | RS | | 0 | 0 | |
 | M1o | Proof on Ana's delivered project copy, no Compute: export the page with FQLook's template | M | 0.2 | 🟢 | M1p | SVMP 38.5988% and every share match her report; 0 NOT FOUND | RS | | 0 | 0 | |
 | M1p | Build 0 warnings and quick suite green on the merged branch; READY M1 | L | 0.1 | M1o | M3b | READY M1 posted with the counts | RS | | 0 | 0 | |
@@ -77,6 +78,7 @@ Plots, not text (Paulo, 20:15: "this html page is basically plots, this is not s
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M2l | The dot plot (Paulo 22:23 and 22:27): database entries against ion current, one dot per family, both axes log, dot area protein groups, family colours, tooltips, linked selection | M | 0.3 | M1q | M3e | Renders on Ana's real page and the synthetic one; FQReview2 approves | LK | | 0 | 0 | |
 
 ### W3 Review and merge
 
