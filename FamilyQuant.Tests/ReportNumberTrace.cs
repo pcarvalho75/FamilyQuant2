@@ -30,6 +30,7 @@ internal static partial class ReportNumberTrace
 
     internal static int Run(string documentPath, string folder, string outputPath)
     {
+        if (Path.GetExtension(documentPath).Equals(".html", StringComparison.OrdinalIgnoreCase)) return RunHtml(documentPath, folder, outputPath);
         string doc = Path.GetFullPath(documentPath), source = Path.GetFullPath(folder), output = Path.GetFullPath(outputPath);
         if (!File.Exists(doc)) throw new FileNotFoundException("Report document not found.", doc);
         string workbook = ReportSupplementWorkbook.PathForReport(doc);
