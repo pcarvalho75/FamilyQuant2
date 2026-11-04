@@ -554,6 +554,8 @@ Paulo agreed these at the restart, 2026-11-01.
 | M2f | The selected-family panel: proteins, peptides and the coverage strip | M | 0.2 | M2b, M1g | M2i | Selecting a family fills the panel | LK | | 0 | 0 | |
 | M2g | Measured signal and Database gap views | L | 0.2 | M2b, M1f | M2i | Both render from the payload | LK | | 0 | 0 | |
 | M2i | Phone layout, print, reduced motion, keyboard and focus | L | 0.2 | M2c, M2d, M2e, M2f, M2g | M2j | 390 px usable; print preview clean; Tab reaches everything | LK | | 0 | 0 | |
+| M2j | Design pass on Ana's full sample: renders at 1440 and 390 px, light and dark, pop-ups open; READY M2 | M | 0.3 | 🟢 | M1o, M3b | Screenshots posted with the changes listed | LK | | 0 | 0 | |
+| M2k | Design critique by FQOpus (Opus 5.5, Paulo's Fiocruz account): renders on Ana's data, a ranked punch list, top five marked do now; FQLook applies them | L | 0.3 | 🟢 | M2j | PUNCHLIST posted; FQOpus approves FQLook's next render | OP | | 0 | 0 | |
 
 ### W1 Data and export (FQResults, FQShell and FQAssay)
 
@@ -570,4 +572,5 @@ Paulo agreed these at the restart, 2026-11-01.
 | M1j | Export: the section choices and the others threshold reach the page | L | 0.1 | M1i | M1l | An unchecked section is absent from the page | SH | | 0 | 0 | |
 | M1k | Delivery rehearsal writes the page; the status message, Help text and docs name it | L | 0.1 | M1i | M1o | Rehearsal output holds report.html | SH | | 0 | 0 | |
 | M1l | Tests: identical bytes for the same project; names and </script> escaped; excluded sections absent; three-file publication and cancel | M | 0.2 | M1j | M1o | Tests in the suite and green | SH | | 0 | 0 | |
+| M1m | Tests: every printed number, pop-ups included, traces to a stored value or a Word cell | M | 0.2 | 🟢 | M1o | Trace test green; 0 NOT FOUND | AS | | 0 | 0 | |
 

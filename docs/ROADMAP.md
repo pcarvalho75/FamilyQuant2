@@ -68,8 +68,7 @@ The program side (FQShell joined at 20:30 on Paulo's "hire 1 more sol worker so 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | M1a | Baseline: fq/results on current master; build and quick suite green before any change | L | 0.2 | 🟢 | M1b, M1c | 0 warnings; quick suite green | RS | | 0 | 0 | |
-| M1m | Tests: every printed number, pop-ups included, traces to a stored value or a Word cell | M | 0.2 | 🟢 | M1o | Trace test green; 0 NOT FOUND | AS | | 0 | 0 | |
-| M1o | Proof on Ana's delivered project copy, no Compute: export the page with FQLook's template | M | 0.2 | M1m, M2j | M1p | SVMP 38.5988% and every share match her report; 0 NOT FOUND | RS | | 0 | 0 | |
+| M1o | Proof on Ana's delivered project copy, no Compute: export the page with FQLook's template | M | 0.2 | 🟢 | M1p | SVMP 38.5988% and every share match her report; 0 NOT FOUND | RS | | 0 | 0 | |
 | M1p | Build 0 warnings and quick suite green on the merged branch; READY M1 | L | 0.1 | M1o | M3b | READY M1 posted with the counts | RS | | 0 | 0 | |
 
 ### W2 The page (FQLook)
@@ -78,8 +77,6 @@ Plots, not text (Paulo, 20:15: "this html page is basically plots, this is not s
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M2k | Design critique by FQOpus (Opus 5.5, Paulo's Fiocruz account): renders on Ana's data, a ranked punch list, top five marked do now; FQLook applies them | L | 0.3 | 🟢 | M2j | PUNCHLIST posted; FQOpus approves FQLook's next render | OP | | 0 | 0 | |
-| M2j | Design pass on Ana's full sample: renders at 1440 and 390 px, light and dark, pop-ups open; READY M2 | M | 0.3 | 🟢 | M1o, M3b | Screenshots posted with the changes listed | LK | | 0 | 0 | |
 
 ### W3 Review and merge
 
@@ -90,7 +87,7 @@ Nobody reviews their own work; a finding is fixed by its owner and checked again
 | M3a | Code review of FQResults' lane as it lands: contract, producers, proof | M | 0.2 | 🟢 | M3d | APPROVED, or findings sent to the owner | GR | | 0 | 0 | |
 | M3b | Code review of FQShell's and FQAssay's lanes as they land: writer, export, tests, coverage, trace tests | M | 0.2 | 🟢 | M3d | APPROVED, or findings sent to the owner | GR3 | | 0 | 0 | |
 | M3c | Code review of FQLook's template as it lands: no client number formatting, no network, no innerHTML with data, keyboard reach (Paulo judges the design himself at M3f) | M | 0.2 | 🟢 | M3d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
-| M3g | Opus review (FQOpus, Paulo's Fiocruz account), batched: the final page exported from Ana's project, every number against the Word report it wrote (K14), plus the design check of FQLook's render | M | 0.3 | M1p, M2j | M3d | APPROVED, or findings sent to the owners | OP | | 0 | 0 | |
+| M3g | Opus review (FQOpus, Paulo's Fiocruz account), batched: the final page exported from Ana's project, every number against the Word report it wrote (K14), plus the design check of FQLook's render | M | 0.3 | M1p | M3d | APPROVED, or findings sent to the owners | OP | | 0 | 0 | |
 | M3h | Integration rehearsal: every 20 to 30 min, merge the lane heads in a scratch tree, build, quick suite, export Ana's page, trace and render, so clashes show before the gate | L | 0.3 | 🟢 | M3e | Each round posted; the last round green with both READY posts in | AS | | 0 | 0 | |
 | M3d | Owners fix the review findings; the reviewer checks again | L | 0.2 | M3a, M3b, M3c, M3g | M3e | Every finding closed | RS | | 0 | 0 | |
 | M3e | Desk gate and merge to master | L | 0.2 | M3d, M3h | M3f | Gate green; master pushed | Orchestrator | | 0 | 0 | |

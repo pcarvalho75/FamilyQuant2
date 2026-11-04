@@ -14,6 +14,22 @@ public static class HtmlReportStoredValues
 {
     public static string Display(HtmlReportReference source, FamilyClusterFile project, QuantManifest manifest)
     {
+        object value = Read(source, project, manifest);
+        return source.Format switch
+        {
+            "range" => Range(value),
+            "domain-label" when value is PfamDomainPosition p => (p.Name.Length > 0 ? p.Name + " " : "") + p.Accession,
+            "feature-label" when value is ProteinFeaturePosition p => p.Type + (p.Description.Length > 0 ? ": " + p.Description : ""),
+            _ when value is string text && source.Format == null && source.Scale == 1 => text,
+            _ when value is IFormattable number && value is not Enum && value is not DateTime && value is not DateTimeOffset
+                => source.Scale == 1 ? number.ToString(source.Format, CultureInfo.InvariantCulture)
+                    : (Convert.ToDouble(value, CultureInfo.InvariantCulture) * source.Scale).ToString(source.Format ?? "G6", CultureInfo.InvariantCulture),
+            _ => throw new ArgumentException("Unsupported stored display conversion."),
+        };
+    }
+
+    public static object Read(HtmlReportReference source, FamilyClusterFile project, QuantManifest manifest)
+    {
         if (source.Kind != "stored-value" || source.Property == null || !source.Property.StartsWith("/", StringComparison.Ordinal))
             throw new ArgumentException("A stored-value JSON pointer is required.");
         string[] path = source.Property.Split('/').Skip(1).Select(p => p.Replace("~1", "/", StringComparison.Ordinal).Replace("~0", "~", StringComparison.Ordinal)).ToArray();
@@ -29,24 +45,14 @@ public static class HtmlReportStoredValues
             else
             {
                 var property = value?.GetType().GetProperty(part, BindingFlags.Instance | BindingFlags.Public);
-                if (property == null || property.SetMethod == null || property.GetIndexParameters().Length != 0
+                if (property == null || property.SetMethod?.IsPublic != true || property.GetIndexParameters().Length != 0
                     || property.GetCustomAttribute<JsonIgnoreAttribute>() is { Condition: JsonIgnoreCondition.Always })
                     throw new ArgumentException("Stored source property is unavailable or derived.");
                 value = property.GetValue(value);
             }
             if (value == null) throw new ArgumentException("Stored source value is unavailable.");
         }
-        return source.Format switch
-        {
-            "range" => Range(value!),
-            "domain-label" when value is PfamDomainPosition p => (p.Name.Length > 0 ? p.Name + " " : "") + p.Accession,
-            "feature-label" when value is ProteinFeaturePosition p => p.Type + (p.Description.Length > 0 ? ": " + p.Description : ""),
-            _ when value is string text && source.Format == null && source.Scale == 1 => text,
-            _ when value is IFormattable number && value is not Enum && value is not DateTime && value is not DateTimeOffset
-                => source.Scale == 1 ? number.ToString(source.Format, CultureInfo.InvariantCulture)
-                    : (Convert.ToDouble(value, CultureInfo.InvariantCulture) * source.Scale).ToString(source.Format ?? "G6", CultureInfo.InvariantCulture),
-            _ => throw new ArgumentException("Unsupported stored display conversion."),
-        };
+        return value ?? throw new ArgumentException("Stored source value is unavailable.");
     }
 
     private static string Range(object value)
