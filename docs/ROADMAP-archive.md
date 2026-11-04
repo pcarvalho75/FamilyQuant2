@@ -663,6 +663,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | G3a | Review of the count (G1b): the rule against D55 and the code | M | 0.2 | G1b | G3d | APPROVED, or fixes by the owner checked by another reviewer | GR | | 0 | 0 | |
 | G3b | Review of the payload, trace and page defaults (G1c, G1d, G2a) | M | 0.2 | G1d | G3d | APPROVED, or fixes by the owner checked by another reviewer | GR2 | | 0 | 0 | |
 | G3d | Full gate on the integrated 2.1.4 commit: ledger refresh and the full suite | M | 0.4 | 🟢 | G4a | Every ledger row proved; full suite green | Orchestrator | | 0 | 0 | |
+| G3f | Ledger generator keeps the added-contracts section (found by FQReviewDS at 09:33: --feature-ledger-generate drops the FQ2 row, as the gate's render did in 68c4691). Test project only; does not hold the release | L | 0.3 | 🟢 |  | --feature-ledger-generate keeps the FQ2 row byte for byte; FQ15 rows, scan and receipts unchanged; whole quick suite green; FQReviewDS approves | RS | | 0 | 0 | |
 
 ### W4 Release 2.1.4
 

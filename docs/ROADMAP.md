@@ -74,7 +74,6 @@ What a family's database entries are is ruled in D55; G1a checks the ruling agai
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G3f | Ledger generator keeps the added-contracts section (found by FQReviewDS at 09:33: --feature-ledger-generate drops the FQ2 row, as the gate's render did in 68c4691). Test project only; does not hold the release | L | 0.3 | 🟢 |  | --feature-ledger-generate keeps the FQ2 row byte for byte; FQ15 rows, scan and receipts unchanged; whole quick suite green; FQReviewDS approves | RS | | 0 | 0 | |
 
 ### W4 Release 2.1.4
 
