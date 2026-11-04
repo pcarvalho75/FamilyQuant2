@@ -1,15 +1,15 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 9, 2026-11-04 06:45, release 2.1.4. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
+Version 10, 2026-11-04 11:25, release 2.1.5: a guided order for the Families screen. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
 Finished rows leave this file and go to `docs/ROADMAP-archive.md`; the needle restarts at zero with each version.
 
-Version 8 delivered 18 steps (in the archive): 2.1.2 (the interactive report.html with the dot plot) and 2.1.3 (the Setup.exe installer, Help > Install update, the start-up update banner) published on GitHub overnight, the README for 2.1.3, and Ana's new page with a 2.1.3 READ-ME delivered into her Relatorio folder at 06:29. Version 9 is what remains: the dot plot's database-entries axis, which D51 moved to the next version, shipped as 2.1.4 (D54).
+Version 9 delivered 22 steps (in the archive): the dot plot's database-entries axis, published as 2.1.4 at 10:05, the README for 2.1.4, and Ana's new page delivered at 10:09. Version 10 is what Ana's first session showed: she pressed Group by evidence before Fetch evidence, got an empty scope with no reason given, and could not tell what Fetch evidence and Fetch family world are for.
 
-## The goal, in Paulo's words
+## The goal, in Paulo's and Ana's words
 
-- 11-03 22:23 to 22:32: "a cool report is not a cool report without a dotplot", "entries in the db versus ion current ... the dot size could also represent something and different families could have different colors ... mouse over could display a tool tip", "allow users to select what is in each axis or size"
-- 11-04 06:38: "include that feature in the html, cleand the roadmap, geenerate the new one with detailed steps and get to work"
-- Standing: "using python scripts was cheating, every result passed to ana needs to be through the software", "things need to look slick and clean"
+- Ana, 11-04 11:10: "melhor colocar os botões na ordem: Fetch evidence, Group by evidence, Apply grouping, Fetch family world e por fim o Compute"
+- Paulo, 11-04 11:12: "what can we do to let the software more intuitive in the sense so other users dont make the same mistakes"
+- Paulo, 11-04 11:18: "can you get a worer on this asap, i guess these should be simple changes, mostly gui"
 
 ## Rules every worker follows
 
@@ -20,30 +20,22 @@ Version 8 delivered 18 steps (in the archive): 2.1.2 (the interactive report.htm
 5. **Deployable at every merge.** One step per commit, with its test; tests go into DefaultSuite. Builders and reviewers run focused checks; the gate runs the whole suite.
 6. **A step counts as done only after a reviewer approves it, it is merged and the gate is green.**
 7. **A family panel is user data.** Ana's families, domains, subclasses and decisions live in her file and the project, never in code.
-8. **Never write inside `C:/Users/paulo/Desktop/AnaG`** except a delivery to `AnaG/Bjararaca/Relatorio` on Paulo's word (step G5b).
+8. **Never write inside `C:/Users/paulo/Desktop/AnaG`** except a delivery to `AnaG/Bjararaca/Relatorio` on Paulo's word.
 9. **The code repository stays private.** Releases go out as a Setup.exe and a zip on the public releases-only repository (D31, D32).
 10. **No em dashes or en dashes** in anything written, UI text included.
 11. **Steps stay small.** A step that hides several pieces of work is split, so the needle shows real progress (Paulo, 11-02 and 11-03).
 
 ## The team
 
-| Name | Engine | Role in version 9 | Worktree |
+| Name | Engine | Role in version 10 | Worktree |
 |---|---|---|---|
 | Orchestrator | Claude, main session | Assigns, gates, merges, publishes, keeps this file and the board true. Writes no product code. | |
-| FQResults (RS) | Sol 6.1 xhigh | The family database-entry count, its payload fields and number trace; Ana's new page | `C:/FamilyQuant-wt2/results` |
-| FQLook (LK) | Sol 6.1 xhigh | The dot plot defaults and the page checks | `D:/FamilyQuant-wt/look` |
-| FQAssay (AS) | Sol 6.1 xhigh | Version 2.1.4, release notes, the Setup.exe and zip | `D:/FamilyQuant-wt/assay` |
-| FQEvidence (EV) | Sol 6.1 xhigh | The old-project check, the package check, the update check from GitHub | `D:/FamilyQuant-wt/evidence` |
-| FQTerra2 (T2) | GPT-6.1 Terra xhigh | The README for 2.1.4 | `C:/FamilyQuant-wt2/terra2` |
-| FQReview (GR) | Grok 4.7 xhigh | Science and code review of the count. Never edits product code. OUT since 07:13 (Grok balance exhausted). | `D:/FamilyQuant-wt/review` |
-| FQReview2 (GR2) | Grok 4.7 xhigh | Code review of the payload, trace and page. Never edits product code. OUT since 07:13 (Grok balance exhausted). | `D:/FamilyQuant-wt/review2` |
-| FQReview3 (GR3) | Grok 4.7 xhigh | Review of the version, notes and README. Never edits product code. OUT since 07:13 (Grok balance exhausted). | `D:/FamilyQuant-wt/review3` |
-| FQReviewJF (JF) | Opus 5.5 on Juliana's account (D53) | Reviews from 07:13 to 09:56; stood down by Paulo (D59). Never edits product code. | `D:/FamilyQuant-wt/review-jf` |
-| FQReviewDS (DS) | DeepSeek V4.1 Flash (D58, D59) | Every review from 09:56 on, exclusively; code and synthetic data only, never Ana's data. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
+| FQPanel (PN) | Sol 6.1 xhigh | W1: the Grouping panel's numbered order, next-step highlight, step status and tooltips | `D:/FamilyQuant-wt/panel` |
+| FQGuard (GD) | Sol 6.1 xhigh | W2: the missing-input offers, the empty-scope explanation, counted progress, Help | `D:/FamilyQuant-wt/guard` |
+| FQRelease (RL) | Sol 6.1 xhigh | W3 and W4: version 2.1.5, notes, README, package, package check, update check | `D:/FamilyQuant-wt/release` |
+| FQReviewDS (DS) | DeepSeek V4.1 Flash | Every review (D59); code and synthetic data only, never Ana's data. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
 
-The Grok reviewers ran out of credit at 07:13, so D53 holds: FQReviewJF (Opus on Juliana's account) reviewed Sol work until 09:56; since then every review goes exclusively through FQReviewDS (D58, D59).
-
-Flow of one step: the owner posts `READY <step> <commit>`; the orchestrator assigns a reviewer in `D:/FamilyQuant-data/reviews/CLAIMS.md`; the reviewer posts `APPROVED` or `REJECTED`; a rejection is the owner's next commit, checked by another reviewer; the orchestrator gates, merges and closes the row.
+Flow of one step: the owner posts `READY <step> <commit>`; FQReviewDS posts `APPROVED` or `REJECTED`; a rejection is the owner's next commit; the orchestrator gates, merges and closes the row.
 
 ## Design rules for the look (hard requirements)
 
@@ -58,38 +50,48 @@ Flow of one step: the owner posts `READY <step> <commit>`; the orchestrator assi
 
 Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. The graph follows the Blocked by column. A step lands when its owner posts DONE with a commit; it is done when a reviewer approves it and it is merged.
 
-### W1 The count (FQResults, FQEvidence)
-
-What a family's database entries are is ruled in D55; G1a checks the ruling against the code before G1b merges.
+### W1 The Grouping panel in Ana's order (FQPanel)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| U1a | Numbered order in the Grouping panel: 1 Fetch evidence, 2 Group by evidence (its review ends with Apply grouping), 3 Fetch family world, 4 Compute full XIC (opens Quantify); Group by keywords and Align selected move below as quiet alternatives. Layout only | L | 0.3 | 🟢 | U1b, U1c, U1d | Screen harness renders, light and dark; every button keeps its click handler; existing tests green | PN | | 0 | 0 | |
+| U1b | Next-step highlight: the one primary (blue) button is the first step not yet done, from the project's stored state (evidence stored, grouping applied, family world stored, full XIC computed) | M | 0.4 | U1a | U3a | Test of the rule for each of the five states; one primary button at a time | PN | | 0 | 0 | |
+| U1c | A short status under each step: evidence downloaded with its UniProt release or not yet, grouping applied or not yet, family world downloaded or not yet, full XIC computed or not yet; replaces the lone "Family world" line | L | 0.3 | U1a | U3a | Test of each status text; no number or word that names an organism, venom, toxin or sample | PN | | 0 | 0 | |
+| U1d | One-line tooltips per step: what it needs first and roughly how long it takes | L | 0.1 | U1a | U3a | Every step's tooltip says what it needs first | PN | | 0 | 0 | |
 
-### W2 The page (FQLook)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W3 Reviews and the gate
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W4 Release 2.1.4
-
-Published when every check is green, like 2.1.2 and 2.1.3 (D56).
+### W2 Guards, messages and Help (FQGuard)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| U2a | Missing-input offers: Group by evidence on a project with no stored evidence asks "This project has no UniProt evidence yet. Download it now?" with Download and continue (runs Fetch evidence, then opens the review) or Cancel; Fetch family world without a confirmed scope offers to open Group by evidence first | M | 0.5 | 🟢 | U3b | Tests for both offers, both answers; Cancel changes nothing | GD | | 0 | 0 | |
+| U2b | Review grouping: when no reviewed accession is counted, say why where the suggestion would be ("No scope can be suggested: this project has no UniProt evidence yet. Fetch evidence first, or type a scope.") | L | 0.2 | 🟢 | U3b | Test of the message; no organism, venom or toxin word (D21) | GD | | 0 | 0 | |
+| U2c | Counted progress on the Read grouping task screen ("Asking UniProt about taxon 12 of 87", "Needs an internet connection"), from the progress the discovery already reports | L | 0.3 | 🟢 | U3b | Test that the count reaches the busy screen | GD | | 0 | 0 | |
+| U2d | Help: "What do I do first?" and the Grouping section describe the numbered order | L | 0.2 | U1a | U3b | Help text matches the panel; no organism, venom or toxin word | GD | | 0 | 0 | |
 
-### W5 Ana's page
+### W3 Reviews, version and the gate
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| U3a | Review of the panel (U1a to U1d) | M | 0.2 | U1b, U1c, U1d | U3d | APPROVED, or fixes by the owner and re-checked | DS | | 0 | 0 | |
+| U3b | Review of the guards, messages and Help (U2a to U2d) | M | 0.2 | U2a, U2b, U2c, U2d | U3d | APPROVED, or fixes by the owner and re-checked | DS | | 0 | 0 | |
+| U3c | Version 2.1.5 in every place 2.1.4 was set, packaging defaults included, and the 2.1.5 notes | L | 0.2 | 🟢 | U3e | Versions read 2.1.5.0; notes claim only what landed | RL | | 0 | 0 | |
+| U3e | Review of the version and notes | L | 0.1 | U3c | U3d | APPROVED | DS | | 0 | 0 | |
+| U3d | Full gate on the integrated 2.1.5 commit: ledger refresh and the full real-data suite | M | 0.4 | U3a, U3b, U3e | U4a | Every ledger row proved; full suite green | Orchestrator | | 0 | 0 | |
+
+### W4 Release 2.1.5
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| U4a | The 2.1.5 Setup.exe and zip with SHA256 from the gate commit | L | 0.2 | U3d | U4b | Setup.exe in test mode extracts and the app reports 2.1.5.0 | RL | | 0 | 0 | |
+| U4b | Package check: every file equal to the build; EXE and DLL versions 2.1.5.0 | L | 0.2 | U4a | U4e | PASS | RL | | 0 | 0 | |
+| U4c | README: the step-by-step guide follows the numbered order; a new synthetic dark screenshot of the Grouping panel; reads 2.1.5 | L | 0.3 | U1a | U4d | Synthetic data only; links to releases/latest | RL | | 0 | 0 | |
+| U4d | Review of the README | L | 0.1 | U4c | U4e | APPROVED | DS | | 0 | 0 | |
+| U4e | v2.1.5 published as Latest with the Setup.exe, the zip and their .sha256 files; README pushed | L | 0.2 | U4b, U4d | U4f | GitHub digests equal the package; README live | Orchestrator | | 0 | 0 | |
+| U4f | Update check on the public files: an installed 2.1.4 (test root) shows the banner for 2.1.5 and Install update runs the Setup in test mode | L | 0.3 | U4e | | PASS on every stage | RL | | 0 | 0 | |
 
 ## Critical path
 
-G1b, G1c, G1d, the review G3b, the full gate G3d, the package G4a and its check G4b, the publish G4e, then G4f and Ana's page G5a. G1a, G2a, G3c and G4c start now beside it. Rough wall-clock estimate: 3 to 4 hours from 06:45, a range from the 11-04 night's pace, never a promise.
+W1 and W2 run in parallel from now, U3c beside them; their reviews U3a and U3b; the full gate U3d; the package U4a and its check U4b; the publish U4e; the update check U4f. Rough wall-clock estimate: 2 to 3 hours from 11:25, a range, never a promise.
 
 ## Paulo's decisions
 
@@ -131,15 +133,14 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D57 | Deliver Ana's new page (G5b) | Yes: the desk delivers report.html and the 2.1.4 READ-ME into her Relatorio folder as soon as G5a is staged and its checks pass, backing up the current copies first and checking her other files unchanged by hash. Paulo, 11-04 08:23 ("yes you may") |
 | D58 | DeepSeek on the team | DeepSeek V4.1 Flash joins as a second reviewer while Grok is out, on code and synthetic data only (its API is hosted in China; Ana's data never goes to it). Paulo, 11-04 09:20 ("grok is out but deepseek 4.1 is back as a reviewer, bring him to the team") |
 | D59 | Who reviews | Every review goes exclusively through the DeepSeek reviewer FQReviewDS; Juliana's Opus reviewer is not used for now. Paulo, 11-04 09:56 ("lets not use julianas reviewer yet, all reviews go exlcusively through the deepseek worker") |
+| D60 | A guided order for the Families screen | Built now as 2.1.5 with Ana's order (Fetch evidence, Group by evidence, Apply grouping, Fetch family world, Compute), a moving next-step highlight, step status, offers for a missing input, an explanation for an empty scope and counted progress; published when every check is green, like D56. Paulo, 11-04 11:18 ("can you get a worer on this asap"), after Ana 11:10 |
 
 ## Risks and triggers
 
 | Risk | Trigger | Response |
 |---|---|---|
-| The rule counts the wrong entries | G1a or G3a finds a decoy, a contaminant or another family's entry in a count | The desk corrects D55 before G1b merges; the owner fixes it as the next commit |
-| The new axis moves another number | G1e finds any Word or supplement number different from the 2.1.3 export | No merge; the change goes back (rule 4) |
-| The page shows a number with no stored source | G1d's trace finds a NOT FOUND | No merge; the page prints only payload display strings |
-| A quick gate hides a stale ledger receipt | G3d fails on receipts | The row's owner re-proves it; refresh_ledger.py reruns a lost register once |
-| GitHub fails during the upload | A 404 or 500 while the release is a draft | Retry the failed asset; never force; publish only when every asset matches |
-| A reviewer runs out of credit | A Grok call fails on balance | D53: Opus on Juliana's account reviews Sol work |
-| Ana's folder is touched | Any file under AnaG changes before Paulo's word | Stop and restore; checked before and after G5b |
+| A moved button loses its handler or a test pins the old layout | The screen harness or a test fails after U1a | The owner fixes it as the next commit; no behaviour change is accepted in a layout step |
+| The highlight rule reads a state the project does not store | U1b's test cannot set a state from a saved project | Rule from stored state only; anything else stays "not yet" |
+| UI text names an organism, venom or toxin | The D21 test fails | No merge; the text is rewritten |
+| A feature-ledger row pins an old label or tooltip | The full gate loses a ledger row | The owner re-proves the row, or the desk rules it an intended wording change before the gate |
+| The DeepSeek balance runs low | The launcher refuses below USD 2 | Paulo tops it up; no other reviewer is used without his word (D59) |
