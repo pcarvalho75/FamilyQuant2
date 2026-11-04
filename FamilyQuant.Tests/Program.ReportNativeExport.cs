@@ -98,11 +98,12 @@ internal static partial class Program
             if (longest != null) Log("Longest export gap " + longest.Seconds.ToString("F3", System.Globalization.CultureInfo.InvariantCulture)
                 + " s: " + longest.PreviousStage + " / " + longest.PreviousMessage + " -> " + longest.NextStage + " / " + longest.NextMessage);
             string workbook = ReportSupplementWorkbook.PathForReport(report);
-            if (!success || !File.Exists(report) || !File.Exists(workbook)) throw new InvalidOperationException("Native report export failed; inspect command.log.");
+            string html = HtmlReportWriter.PathForReport(report);
+            if (!success || !File.Exists(report) || !File.Exists(workbook) || !File.Exists(html)) throw new InvalidOperationException("Native report export failed; inspect command.log.");
             string after = FileFingerprint.Sha256(projectPath);
             if (after != before) throw new InvalidOperationException("Export changed its source project.");
             File.WriteAllText(Path.Combine(output, "result.json"), JsonSerializer.Serialize(new { Project = projectPath, SourceSha256 = before,
-                Report = report, Workbook = workbook, OpenSeconds = openSeconds, ExportSeconds = exportSeconds, TotalSeconds = total.Elapsed.TotalSeconds,
+                Report = report, Workbook = workbook, Html = html, OpenSeconds = openSeconds, ExportSeconds = exportSeconds, TotalSeconds = total.Elapsed.TotalSeconds,
                 ReportSha256 = FileFingerprint.Sha256(report), WorkbookSha256 = FileFingerprint.Sha256(workbook), SourceUnchanged = true,
                 ProgramStateDirectory = ApplicationPaths.LocalDataDirectory, LongestProgressGap = longest }, new JsonSerializerOptions { WriteIndented = true }));
             Log("Export succeeded in " + exportSeconds + " s; Word and supplement published; source unchanged");

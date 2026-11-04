@@ -68,15 +68,8 @@ The program side (FQShell joined at 20:30 on Paulo's "hire 1 more sol worker so 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | M1a | Baseline: fq/results on current master; build and quick suite green before any change | L | 0.2 | 🟢 | M1b, M1c | 0 warnings; quick suite green | RS | | 0 | 0 | |
-| M1f | Producer: highlights, measured signal by run and the Database gap (no methods or quality text: the page is plots) | L | 0.2 | 🟢 | M2c, M2g, M1m | Each printed value is a field bound to its stored value or Word cell | RS | | 0 | 0 | |
-| M1g | Producer: coverage, with live positions when the stored results hold them, else the native figure | M | 0.2 | 🟢 | M2f, M1m | Coverage filled; the commit says which form and why | AS | | 0 | 0 | |
-| M1h | Writer: fills the template once, with safe JSON escaping and byte-identical output | L | 0.2 | 🟢 | M1i | report.html written from a test project | SH | | 0 | 0 | |
-| M1i | Export: report.html staged and published with the Word report and supplement, all or nothing | M | 0.2 | M1h | M1j, M1k | Three files appear together; cancel keeps the old ones | SH | | 0 | 0 | |
-| M1j | Export: the section choices and the others threshold reach the page | L | 0.1 | M1i | M1l | An unchecked section is absent from the page | SH | | 0 | 0 | |
-| M1k | Delivery rehearsal writes the page; the status message, Help text and docs name it | L | 0.1 | M1i | M1o | Rehearsal output holds report.html | SH | | 0 | 0 | |
-| M1l | Tests: identical bytes for the same project; names and </script> escaped; excluded sections absent; three-file publication and cancel | M | 0.2 | M1j | M1o | Tests in the suite and green | SH | | 0 | 0 | |
-| M1m | Tests: every printed number, pop-ups included, traces to a stored value or a Word cell | M | 0.2 | M1f, M1g | M1o | Trace test green; 0 NOT FOUND | AS | | 0 | 0 | |
-| M1o | Proof on Ana's delivered project copy, no Compute: export the page with FQLook's template | M | 0.2 | M1k, M1l, M1m, M2j | M1p | SVMP 38.5988% and every share match her report; 0 NOT FOUND | RS | | 0 | 0 | |
+| M1m | Tests: every printed number, pop-ups included, traces to a stored value or a Word cell | M | 0.2 | 🟢 | M1o | Trace test green; 0 NOT FOUND | AS | | 0 | 0 | |
+| M1o | Proof on Ana's delivered project copy, no Compute: export the page with FQLook's template | M | 0.2 | M1m, M2j | M1p | SVMP 38.5988% and every share match her report; 0 NOT FOUND | RS | | 0 | 0 | |
 | M1p | Build 0 warnings and quick suite green on the merged branch; READY M1 | L | 0.1 | M1o | M3b | READY M1 posted with the counts | RS | | 0 | 0 | |
 
 ### W2 The page (FQLook)
@@ -95,7 +88,7 @@ Nobody reviews their own work; a finding is fixed by its owner and checked again
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | M3a | Code review of FQResults' lane as it lands: contract, producers, proof | M | 0.2 | 🟢 | M3d | APPROVED, or findings sent to the owner | GR | | 0 | 0 | |
-| M3b | Code review of FQShell's and FQAssay's lanes as they land: writer, export, tests, coverage, trace tests | M | 0.2 | M1h | M3d | APPROVED, or findings sent to the owner | GR3 | | 0 | 0 | |
+| M3b | Code review of FQShell's and FQAssay's lanes as they land: writer, export, tests, coverage, trace tests | M | 0.2 | 🟢 | M3d | APPROVED, or findings sent to the owner | GR3 | | 0 | 0 | |
 | M3c | Code review of FQLook's template as it lands: no client number formatting, no network, no innerHTML with data, keyboard reach (Paulo judges the design himself at M3f) | M | 0.2 | 🟢 | M3d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
 | M3g | Opus review (FQOpus, Paulo's Fiocruz account), batched: the final page exported from Ana's project, every number against the Word report it wrote (K14), plus the design check of FQLook's render | M | 0.3 | M1p, M2j | M3d | APPROVED, or findings sent to the owners | OP | | 0 | 0 | |
 | M3d | Owners fix the review findings; the reviewer checks again | L | 0.2 | M3a, M3b, M3c, M3g | M3e | Every finding closed | RS | | 0 | 0 | |
