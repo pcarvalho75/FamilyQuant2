@@ -66,11 +66,8 @@ internal static partial class Program
         }
         finally { CultureInfo.CurrentCulture = culture; }
         HtmlReportPublicationTests(Path.Combine(output, "publication"));
-        var source = HtmlFixture();
-        // This writer fixture has display cells only; its producer-only partial native recipe is not a workbook recipe.
-        var exportDocument = source.Document with { Sections = source.Document.Sections.Select(section => section with
-            { Blocks = section.Blocks.Select(block => block is ReportTable table ? table with { SupplementSource = null } : block).ToArray() }).ToArray() };
-        var prepared = new ReportProjectExport(exportDocument, new Dictionary<string, string>(), Array.Empty<ReportPlacedFigure>())
+        var source = HtmlExportFixture();
+        var prepared = new ReportProjectExport(source.Document, new Dictionary<string, string>(), Array.Empty<ReportPlacedFigure>())
             { HtmlContext = source.Context };
         string word = Path.Combine(output, "prepared.docx");
         var exportOperation = new OperationContext();
@@ -79,6 +76,8 @@ internal static partial class Program
             && File.Exists(word) && File.Exists(ReportSupplementWorkbook.PathForReport(word)) && File.Exists(HtmlReportWriter.PathForReport(word))
             && !Directory.EnumerateDirectories(output, ".fq-report-*").Any());
         HtmlReportSelectionTests(Path.Combine(output, "selection"));
+        HtmlReportPanelSelectionTests(Path.Combine(output, "panel-selection"));
+        HtmlReportNativeExportTests(Path.Combine(output, "native"));
     }
 
     private static HtmlReportPayload ReadHtmlPayload(string path)
@@ -91,10 +90,21 @@ internal static partial class Program
             { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })!;
     }
 
+    private static (ReportDocument Document, HtmlReportContext Context) HtmlExportFixture()
+    {
+        var table = new ReportTable("family-run-means", "Headline composition", new[] { "Family", "Mean share (%)" },
+            new IReadOnlyList<string>[] { new[] { "Cedar </script> ensemble", "38.5988" }, new[] { "Others", "0.491774" } }, "Stored fixture values");
+        return (new ReportDocument { Title = "Interactive fixture <&>", Authors = "Author <name>", Sections = new[]
+        {
+            new ReportSection(ReportSectionIds.Title, "Title", Array.Empty<ReportBlock>()),
+            new ReportSection(ReportSectionIds.Results, "Results", new ReportBlock[] { table }),
+        } }, new());
+    }
+
     private static void HtmlReportSelectionTests(string output)
     {
         Directory.CreateDirectory(output);
-        var fixture = HtmlFixture();
+        var fixture = HtmlExportFixture();
         var selected = new ReportSelection { ExcludedIds = new[] { ReportSectionIds.Results, ReportSectionIds.Title } };
         var prepared = new ReportProjectExport(fixture.Document, new Dictionary<string, string>(), Array.Empty<ReportPlacedFigure>())
             { HtmlContext = fixture.Context, Selection = selected };
@@ -194,5 +204,17 @@ internal static partial class Program
             Check("HTML failure restores all three previous files at boundary " + boundary, failedPublication && !operation.HasCommitted
                 && fixture.Targets.All(path => File.ReadAllText(path) == "old " + Path.GetFileName(path)));
         }
+        fixture = Fixture("html-rename-failure", false);
+        bool renameFailed = false;
+        operation = new();
+        try
+        {
+            ReportArtifactPublication.Publish(fixture.Staged[0], fixture.Staged[1], fixture.Targets[0], operation,
+                step => { if (step == 2) Directory.CreateDirectory(fixture.Targets[2]); });
+        }
+        catch (IOException) { renameFailed = true; }
+        catch (UnauthorizedAccessException) { renameFailed = true; }
+        Check("an actual third rename failure rolls back the new Word and workbook", renameFailed && !operation.HasCommitted
+            && !File.Exists(fixture.Targets[0]) && !File.Exists(fixture.Targets[1]));
     }
 }
