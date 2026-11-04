@@ -62,20 +62,17 @@ What a family's database entries are is ruled in D55; G1a checks the ruling agai
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G1d | Number trace and ledger: the new fields resolve to their stored source; one ledger row for the measure | M | 0.3 | 🟢 | G3b | Trace of Ana's copied project: 0 NOT FOUND; ledger row proved | RS | | 0 | 0 | |
 
 ### W2 The page (FQLook)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G2b | Page checks on the merged payload: the synthetic page and Ana's real page, light and dark, phone width; the selector lists the axis; no console errors; README screenshot taken | L | 0.2 | 🟢 | G3d, G4c | Screenshots in `D:/FamilyQuant-data/out-look/G2b` | LK | | 0 | 0 | |
 
 ### W3 Reviews and the gate
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G3b | Review of the payload, trace and page defaults (G1c, G1d, G2a) | M | 0.2 | G1d | G3d | APPROVED, or fixes by the owner checked by another reviewer | GR2 | | 0 | 0 | |
-| G3d | Full gate on the integrated 2.1.4 commit: ledger refresh and the full suite | M | 0.4 | G2b, G3b | G4a | Every ledger row proved; full suite green | Orchestrator | | 0 | 0 | |
+| G3d | Full gate on the integrated 2.1.4 commit: ledger refresh and the full suite | M | 0.4 | 🟢 | G4a | Every ledger row proved; full suite green | Orchestrator | | 0 | 0 | |
 
 ### W4 Release 2.1.4
 
