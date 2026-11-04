@@ -52,10 +52,12 @@ internal static class FeatureLedger
     {
         Inventory inventory = Scan(sourceRoot);
         string docs = Path.Combine(repoRoot, "docs");
+        string ledger = Path.Combine(docs, "FEATURE-LEDGER.md");
+        string markdown = Markdown(inventory, File.Exists(ledger) ? File.ReadAllText(ledger) : null);
         Directory.CreateDirectory(docs);
         File.WriteAllText(Path.Combine(docs, "feature-ledger-scan.json"),
             JsonSerializer.Serialize(inventory, JsonOptions) + "\n", new UTF8Encoding(false));
-        File.WriteAllText(Path.Combine(docs, "FEATURE-LEDGER.md"), Markdown(inventory), new UTF8Encoding(false));
+        File.WriteAllText(ledger, markdown, new UTF8Encoding(false));
         Console.WriteLine($"Feature ledger: {inventory.Files.Count} source files, {inventory.Observations.Count} observations and rows.");
         return 0;
     }
@@ -262,6 +264,18 @@ internal static class FeatureLedger
                 (drop ? " | APPROVED_DROP | " + DropApproval + " |" : " | OPEN | pending |"));
         }
         return md.ToString().Replace("\r\n", "\n");
+    }
+
+    /// <summary>The existing added-contracts tail is its single source of truth. Preserve its text and line
+    /// endings verbatim after the unchanged frozen renderer; never infer additions from frozen observations.</summary>
+    internal static string Markdown(Inventory inventory, string? existingMarkdown)
+    {
+        var sections = Regex.Matches(existingMarkdown ?? "", @"^## Added contracts after the frozen source\r?$",
+            RegexOptions.Multiline | RegexOptions.CultureInvariant);
+        if (sections.Count > 1)
+            throw new InvalidDataException("The ledger has multiple added-contracts sections; regeneration cannot choose one.");
+        // Validate before Generate writes either output. Frozen rendering retains its documented OPEN reset.
+        return Markdown(inventory) + (sections.Count == 0 ? "" : "\n" + existingMarkdown![sections[0].Index..]);
     }
 
     /// <summary>Set to <see cref="ReceiptsReleaseOnlyValue"/>, quick gates skip the receipt-currency checks of the
