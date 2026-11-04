@@ -593,4 +593,5 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | M6b | README text for 2.1.2: what it is, what is new, install, a step-by-step manual, troubleshooting; HTML-page screenshots from synthetic data only | M | 0.4 | 🟢 | M6c | Reads end to end; every menu name checked against the code; no real data, names, paths or keys | T2 | | 0 | 0 | |
+| M6a | App screenshots from the program's synthetic screen fixtures (--screens --screen-finish), 8 to 12, cropped, under about 300 KB each | M | 0.3 | 🟢 | M6c | Every image looked at; no real data | T2 | | 0 | 0 | |
 

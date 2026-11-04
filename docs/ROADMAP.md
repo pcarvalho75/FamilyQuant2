@@ -111,8 +111,7 @@ Paulo, 22:10: "a significantly improved readme in github about the latest versio
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | M6e | The dot plot in the README (Paulo 22:30): a short paragraph and one synthetic screenshot with a tooltip open | L | 0.1 | M2l | M6c | Small commit; README still reads end to end | T2 | | 0 | 0 | |
-| M6a | App screenshots from the program's synthetic screen fixtures (--screens --screen-finish), 8 to 12, cropped, under about 300 KB each | M | 0.3 | 🟢 | M6c | Every image looked at; no real data | T2 | | 0 | 0 | |
-| M6c | Review of the README and images: facts against the program, the synthetic-data rule, plain words | L | 0.2 | M6a, M6e | M6d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
+| M6c | Review of the README and images: facts against the program, the synthetic-data rule, plain words | L | 0.2 | M6e | M6d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
 | M6d | README pushed to pcarvalho75/FamilyQuant2-releases main (Paulo: as soon as possible); links use releases/latest | L | 0.1 | M6c |  | Live page reads correctly; images load | Orchestrator | | 0 | 0 | |
 
 ## Critical path
