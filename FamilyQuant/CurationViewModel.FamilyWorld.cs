@@ -38,6 +38,7 @@ public sealed partial class CurationViewModel
         // The Core fetch owns the single atomic commit, including source and cancellation checks.
         await FamilyWorldFetcher.FetchAndStoreAsync(Document, task, operation, handler);
         Changed(nameof(FamilyWorldState));
+        RefreshGroupingWorkflow();
         DocumentChanged?.Invoke(this, EventArgs.Empty);
     }
 }

@@ -118,6 +118,7 @@ namespace FamilyQuant
             undoStack = ViewModel.UndoStack;
             DataContext = ViewModel;
             InitializeFamilyView();
+            InitializeGroupingWorkflow();
             QuantitationPanel.DataContext = Quantitation;
             ViewModel.DocumentChanged += (_, _) => DocumentChanged?.Invoke(this, EventArgs.Empty);
             Quantitation.Refreshed += (_, _) => UpdateGUI();
