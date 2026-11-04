@@ -19,8 +19,32 @@ public partial class ClusterGenerationControl
 
     private async void ButtonFetchFamilyWorld_Click(object sender, RoutedEventArgs e)
     {
-        FamilyWorldFetchCompletion = FetchFamilyWorldAsync();
+        FamilyWorldFetchCompletion = FetchFamilyWorldWithGroupingOfferAsync();
         await FamilyWorldFetchCompletion;
+    }
+
+    private async Task FetchFamilyWorldWithGroupingOfferAsync()
+    {
+        if (familyWorldFetchRunning || Operations.IsBusy) return;
+        if (ConfirmedFamilyWorldTask() == null)
+        {
+            if (ConfirmGroupingPrerequisite("Fetch family world",
+                "Confirm a task and scope with Group by evidence first?", "Open Group by evidence"))
+                await ReviewEvidenceWithFetchOfferAsync();
+            return;
+        }
+        await FetchFamilyWorldAsync();
+    }
+
+    private EvidenceTaskChoice? ConfirmedFamilyWorldTask()
+    {
+        foreach (var choice in new[] { fcf.EvidenceRecipe?.ConfirmedTask, fcf.EvidenceSource?.FamilyWorld?.Task })
+        {
+            if (choice == null) continue;
+            try { return EvidenceTaskDiscovery.Confirm(fcf, choice.Proposal, choice.ScopeTerms); }
+            catch (InvalidOperationException) { }
+        }
+        return null;
     }
 
     public Task FetchFamilyWorldAsync() => AppOperationHost.OnUi(this, FetchFamilyWorldCoreAsync);
@@ -37,12 +61,7 @@ public partial class ClusterGenerationControl
                 SetCurationOperationStatus("Fetch evidence first so the database task and annotated families can be read.");
                 return;
             }
-            EvidenceTaskChoice? choice = fcf.EvidenceRecipe?.ConfirmedTask ?? fcf.EvidenceSource?.FamilyWorld?.Task;
-            if (choice != null)
-            {
-                try { choice = EvidenceTaskDiscovery.Confirm(fcf, choice.Proposal, choice.ScopeTerms); }
-                catch (InvalidOperationException) { choice = null; }
-            }
+            EvidenceTaskChoice? choice = ConfirmedFamilyWorldTask();
             if (choice == null)
             {
                 EvidenceTaskProposal? proposal = null;
