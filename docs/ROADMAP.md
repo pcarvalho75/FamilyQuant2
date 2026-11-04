@@ -68,7 +68,6 @@ The program side (FQShell joined at 20:30 on Paulo's "hire 1 more sol worker so 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | M1q | Data for the dot plot: database entries per family from the stored results, if held, as bound fields, plus the list of selectable measures with their scale and program-made tick labels | L | 0.3 | 🟢 | M2l | DONE posted; documented in docs/HTML-REPORT.md; no search or Compute | RS | | 0 | 0 | |
-| M1a | Baseline: fq/results on current master; build and quick suite green before any change | L | 0.2 | 🟢 | M1b, M1c | 0 warnings; quick suite green | RS | | 0 | 0 | |
 
 ### W2 The page (FQLook)
 

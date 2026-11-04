@@ -575,6 +575,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | M1m | Tests: every printed number, pop-ups included, traces to a stored value or a Word cell | M | 0.2 | 🟢 | M1o | Trace test green; 0 NOT FOUND | AS | | 0 | 0 | |
 | M1o | Proof on Ana's delivered project copy, no Compute: export the page with FQLook's template | M | 0.2 | 🟢 | M1p | SVMP 38.5988% and every share match her report; 0 NOT FOUND | RS | | 0 | 0 | |
 | M1p | Build 0 warnings and quick suite green on the merged branch; READY M1 | L | 0.1 | M1o | M3b | READY M1 posted with the counts | RS | | 0 | 0 | |
+| M1a | Baseline: fq/results on current master; build and quick suite green before any change | L | 0.2 | 🟢 | M1b, M1c | 0 warnings; quick suite green | RS | | 0 | 0 | |
 
 ### W3 Review and merge
 
