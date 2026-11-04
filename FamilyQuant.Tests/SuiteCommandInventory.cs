@@ -343,6 +343,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-html-report-data", "FamilyQuant.Tests.Program.HtmlReportDataTests()"),
         SuiteCommandRule.Covered("--test-html-coverage", "FamilyQuant.Tests.Program.HtmlCoverageTests()"),
         SuiteCommandRule.Excluded("--inspect-html-coverage-source", "Selected-input read-only inspection requires a copied stored project and fresh owned output; it reports available stored geometry without Compute or evidence fetching."),
+        SuiteCommandRule.Excluded("--html-payload-sample", "Requires explicit copied project/delivered Word and fresh output; a stored-only native payload proof, not a default fixture."),
         SuiteCommandRule.Covered("--test-report-numeric-layout", "FamilyQuant.Tests.Program.ReportNumericLayoutTests(System.String)"),
         SuiteCommandRule.Covered("--test-report-table-pagination", "FamilyQuant.Tests.Program.ReportTablePaginationTests(System.String)"),
         SuiteCommandRule.Covered("--test-report-paired-summary", "FamilyQuant.Tests.Program.ReportPairedSummaryTests()"),
