@@ -1,15 +1,13 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 10, 2026-11-04 11:25, release 2.1.5: a guided order for the Families screen. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
+Version 11, 2026-11-04 12:30, release 2.1.6: a clean Recent projects list. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
 Finished rows leave this file and go to `docs/ROADMAP-archive.md`; the needle restarts at zero with each version.
 
-Version 9 delivered 22 steps (in the archive): the dot plot's database-entries axis, published as 2.1.4 at 10:05, the README for 2.1.4, and Ana's new page delivered at 10:09. Version 10 is what Ana's first session showed: she pressed Group by evidence before Fetch evidence, got an empty scope with no reason given, and could not tell what Fetch evidence and Fetch family world are for.
+Version 10 delivered 19 steps (in the archive): the guided Families screen, published as 2.1.5 at 12:05, its README and the update check from 2.1.4. Version 11 is Paulo's request on the Start page.
 
-## The goal, in Paulo's and Ana's words
+## The goal, in Paulo's words
 
-- Ana, 11-04 11:10: "melhor colocar os botões na ordem: Fetch evidence, Group by evidence, Apply grouping, Fetch family world e por fim o Compute"
-- Paulo, 11-04 11:12: "what can we do to let the software more intuitive in the sense so other users dont make the same mistakes"
-- Paulo, 11-04 11:18: "can you get a worer on this asap, i guess these should be simple changes, mostly gui"
+- 11-04 12:28: "inn the recent projects, if the file is unavailable it should be excluded. we should also have an option to exclude projects if we wish to, maybe a right click or a small red x in the upper right, put that feature in and redeploy"
 
 ## Rules every worker follows
 
@@ -27,15 +25,15 @@ Version 9 delivered 22 steps (in the archive): the dot plot's database-entries a
 
 ## The team
 
-| Name | Engine | Role in version 10 | Worktree |
+| Name | Engine | Role in version 11 | Worktree |
 |---|---|---|---|
-| Orchestrator | Claude, main session | Assigns, gates, merges, publishes, keeps this file and the board true. Writes no product code. | |
-| FQPanel (PN) | Sol 6.1 xhigh | W1: the Grouping panel's numbered order, next-step highlight, step status and tooltips | `D:/FamilyQuant-wt/panel` |
-| FQGuard (GD) | Sol 6.1 xhigh | W2: the missing-input offers, the empty-scope explanation, counted progress, Help | `D:/FamilyQuant-wt/guard` |
-| FQRelease (RL) | Sol 6.1 xhigh | W3 and W4: version 2.1.5, notes, README, package, package check, update check | `D:/FamilyQuant-wt/release` |
-| FQReviewDS (DS) | DeepSeek V4.1 Flash | Every review (D59); code and synthetic data only, never Ana's data. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
+| Orchestrator | Claude, main session | Assigns, merges, runs the one test at the end, publishes, keeps this file and the board true. Writes no product code. | |
+| FQPanel (PN) | Sol 6.1 xhigh | W1: the Recent projects list on the Start page | `D:/FamilyQuant-wt/panel` |
+| FQGuard (GD) | Sol 6.1 xhigh | W1: tests never write the user's own recent list | `D:/FamilyQuant-wt/guard` |
+| FQRelease (RL) | Sol 6.1 xhigh | W2 and W3: version 2.1.6, notes, README, package, checks | `D:/FamilyQuant-wt/release` |
+| FQReviewDS (DS) | DeepSeek V4.1 Flash | The one review (D59); code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
 
-Flow of one step: the owner posts `READY <step> <commit>`; FQReviewDS posts `APPROVED` or `REJECTED`; a rejection is the owner's next commit; the orchestrator gates, merges and closes the row.
+As for 2.1.5 (Paulo, 11:26): no per-step tests; one DeepSeek review and one full functional suite at the end (D61 applies: ledger receipts deferred until the ledger evidence is rebuilt).
 
 ## Design rules for the look (hard requirements)
 
@@ -48,31 +46,36 @@ Flow of one step: the owner posts `READY <step> <commit>`; FQReviewDS posts `APP
 
 ## Workstreams
 
-Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. The graph follows the Blocked by column. A step lands when its owner posts DONE with a commit; it is done when a reviewer approves it and it is merged.
+Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. A step is done when it is reviewed, merged and through the one test at the end.
 
-### W1 The Grouping panel in Ana's order (FQPanel)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W2 Guards, messages and Help (FQGuard)
+### W1 Recent projects (FQPanel, FQGuard)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| V1a | Unavailable files are not shown in Recent projects (Start page and the File menu's recent list); they stay stored and come back when the file is reachable again | L | 0.2 | 🟢 | V2a | A missing path is hidden, an existing one shown; the stored list is unchanged | PN | | 0 | 0 | |
+| V1b | Remove a project from the list: right-click "Remove from recent projects", a small x at the top right of each entry (muted, the danger colour on hover) and the Delete key; it removes the entry from the stored list only and never touches the file | L | 0.3 | 🟢 | V2a | All three ways remove only the entry; the file is untouched; the change survives a restart | PN | | 0 | 0 | |
+| V1c | Tests never write the user's own recent list: every test that opens a project through the main window uses an isolated session state | L | 0.2 | 🟢 | V2a | After the suite, the user's recent list is unchanged | GD | | 0 | 0 | |
 
-### W3 Reviews, version and the gate
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W4 Release 2.1.5
+### W2 Review, version and the one test
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| V2b | Version 2.1.6 in every place 2.1.5 was set, and the 2.1.6 notes | L | 0.1 | 🟢 | V2a | Versions read 2.1.6.0; notes claim only what landed | RL | | 0 | 0 | |
+| V2a | One review of the whole change (V1a, V1b, V1c, V2b) | L | 0.2 | V1a, V1b, V1c, V2b | V2c | APPROVED, or fixes by the owners and re-checked | DS | | 0 | 0 | |
+| V2c | The full functional suite on the integrated 2.1.6 commit (receipts deferred, D61) | M | 0.2 | V2a | V3a | Every check green | Orchestrator | | 0 | 0 | |
+
+### W3 Release 2.1.6
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| V3a | The 2.1.6 Setup.exe and zip with SHA256, built from the integrated commit while the suite runs; package check | L | 0.2 | V1a, V1b, V1c, V2b | V3c | Setup test mode reports 2.1.6.0; package check PASS | RL | | 0 | 0 | |
+| V3b | README reads 2.1.6 with a short what's new | L | 0.1 | 🟢 | V3c | Synthetic only; reviewed in V2a | RL | | 0 | 0 | |
+| V3c | v2.1.6 published as Latest; README pushed | L | 0.1 | V2c, V3a, V3b | V3d | GitHub digests equal the package | Orchestrator | | 0 | 0 | |
+| V3d | Update check on the public files: an installed 2.1.5 shows the banner for 2.1.6 | L | 0.2 | V3c | | PASS | RL | | 0 | 0 | |
 
 ## Critical path
 
-W1 and W2 run in parallel from now, U3c beside them; their reviews U3a and U3b; the full gate U3d; the package U4a and its check U4b; the publish U4e; the update check U4f. Rough wall-clock estimate: 2 to 3 hours from 11:25, a range, never a promise.
+V1a, V1b, V1c and V2b in parallel now; the one review V2a and the one suite V2c in parallel with the package V3a; publish V3c; update check V3d. Rough wall-clock estimate: 45 to 75 minutes from 12:30, a range, never a promise.
 
 ## Paulo's decisions
 
@@ -116,13 +119,12 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D59 | Who reviews | Every review goes exclusively through the DeepSeek reviewer FQReviewDS; Juliana's Opus reviewer is not used for now. Paulo, 11-04 09:56 ("lets not use julianas reviewer yet, all reviews go exlcusively through the deepseek worker") |
 | D60 | A guided order for the Families screen | Built now as 2.1.5 with Ana's order (Fetch evidence, Group by evidence, Apply grouping, Fetch family world, Compute), a moving next-step highlight, step status, offers for a missing input, an explanation for an empty scope and counted progress; published when every check is green, like D56. Paulo, 11-04 11:18 ("can you get a worer on this asap"), after Ana 11:10 |
 | D61 | Releasing 2.1.5 without the ledger re-proof | The desk's cleanup deleted the evidence files the feature-ledger producers read, so every receipt went stale (desk mistake, 11:40). 2.1.5 ships on the full functional suite (every check, real data included, receipts deferred) and FQReviewDS's review; the ledger stays as proved for 2.1.4 at 9c03db8 the same morning; the release notes say so. Rebuilding the ledger evidence inside the repository follows as its own step. Paulo, 11-04 11:44 ("a") |
+| D62 | A clean Recent projects list | Built now as 2.1.6: unavailable files hidden, removal by right-click, a small x and Delete, and tests isolated from the user's list; same fast mode and test approach as 2.1.5 (D61); published when green. Paulo, 11-04 12:28 ("put that feature in and redeploy") |
 
 ## Risks and triggers
 
 | Risk | Trigger | Response |
 |---|---|---|
-| A moved button loses its handler or a test pins the old layout | The screen harness or a test fails after U1a | The owner fixes it as the next commit; no behaviour change is accepted in a layout step |
-| The highlight rule reads a state the project does not store | U1b's test cannot set a state from a saved project | Rule from stored state only; anything else stays "not yet" |
-| UI text names an organism, venom or toxin | The D21 test fails | No merge; the text is rewritten |
-| A feature-ledger row pins an old label or tooltip | The full gate loses a ledger row | The owner re-proves the row, or the desk rules it an intended wording change before the gate |
-| The DeepSeek balance runs low | The launcher refuses below USD 2 | Paulo tops it up; no other reviewer is used without his word (D59) |
+| A hidden entry is lost for good | A file on an unplugged drive is removed instead of hidden | Hiding never deletes the stored entry; only the user's remove does |
+| A test still writes the user's state | The user's recent list changes after the suite | V1c is not done until it does not |
+| A ledger row pins the old Start page text | The full suite fails on a ledger or layout check | The owner fixes it as the next commit, as in 2.1.5 |
