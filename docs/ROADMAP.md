@@ -67,6 +67,7 @@ The program side (FQShell joined at 20:30 on Paulo's "hire 1 more sol worker so 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M1q | Data for the dot plot: database entries per family from the stored results, if held, as bound fields, plus the list of selectable measures with their scale and program-made tick labels | L | 0.3 | 🟢 | M2l | DONE posted; documented in docs/HTML-REPORT.md; no search or Compute | RS | | 0 | 0 | |
 | M1a | Baseline: fq/results on current master; build and quick suite green before any change | L | 0.2 | 🟢 | M1b, M1c | 0 warnings; quick suite green | RS | | 0 | 0 | |
 | M1o | Proof on Ana's delivered project copy, no Compute: export the page with FQLook's template | M | 0.2 | 🟢 | M1p | SVMP 38.5988% and every share match her report; 0 NOT FOUND | RS | | 0 | 0 | |
 | M1p | Build 0 warnings and quick suite green on the merged branch; READY M1 | L | 0.1 | M1o | M3b | READY M1 posted with the counts | RS | | 0 | 0 | |
@@ -77,6 +78,7 @@ Plots, not text (Paulo, 20:15: "this html page is basically plots, this is not s
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M2l | The dot plot (Paulo 22:23, 22:27, 22:32): database entries against ion current by default, with X, Y and Size selectable from the per-family measures; family colours, tooltips, linked selection | M | 0.4 | M1q | M3e | Renders on Ana's real page and the synthetic one; FQReview2 approves | LK | | 0 | 0 | |
 
 ### W3 Review and merge
 
@@ -117,9 +119,10 @@ Paulo, 22:10: "a significantly improved readme in github about the latest versio
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M6e | The dot plot in the README (Paulo 22:30): a short paragraph and one synthetic screenshot with a tooltip open | L | 0.1 | M2l | M6c | Small commit; README still reads end to end | T2 | | 0 | 0 | |
 | M6b | README text for 2.1.2: what it is, what is new, install, a step-by-step manual, troubleshooting; HTML-page screenshots from synthetic data only | M | 0.4 | 🟢 | M6c | Reads end to end; every menu name checked against the code; no real data, names, paths or keys | T2 | | 0 | 0 | |
 | M6a | App screenshots from the program's synthetic screen fixtures (--screens --screen-finish), 8 to 12, cropped, under about 300 KB each | M | 0.3 | 🟢 | M6c | Every image looked at; no real data | T2 | | 0 | 0 | |
-| M6c | Review of the README and images: facts against the program, the synthetic-data rule, plain words | L | 0.2 | M6a, M6b | M6d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
+| M6c | Review of the README and images: facts against the program, the synthetic-data rule, plain words | L | 0.2 | M6a, M6b, M6e | M6d | APPROVED, or findings sent to the owner | GR2 | | 0 | 0 | |
 | M6d | README pushed to pcarvalho75/FamilyQuant2-releases main (Paulo: as soon as possible); links use releases/latest | L | 0.1 | M6c |  | Live page reads correctly; images load | Orchestrator | | 0 | 0 | |
 
 ## Critical path
