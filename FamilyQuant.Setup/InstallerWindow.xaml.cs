@@ -27,7 +27,7 @@ public partial class InstallerWindow : Window
         _controller = controller ?? throw new ArgumentNullException(nameof(controller));
         InitializeComponent();
         SetTheme(true);
-        Icon = System.Windows.Media.Imaging.BitmapFrame.Create(new Uri("pack://application:,,,/FamilyQuant.ico"));
+        Icon = System.Windows.Media.Imaging.BitmapFrame.Create(new Uri("pack://application:,,,/FamilyQuant2-Setup;component/FamilyQuant.ico"));
         Closing += OnClosing;
         PreviewKeyDown += OnPreviewKeyDown;
         VersionLabel.Text = "VERSION " + _controller.PayloadVersion;
@@ -201,7 +201,7 @@ public partial class InstallerWindow : Window
                 _removed = _controller.Options.Uninstall;
                 ShowPage(SetupPage.Done);
             }
-            else ShowError("Setup could not finish", result.Message);
+            else ShowError(_operationCancellation.IsCancellationRequested ? "Setup was canceled" : "Setup could not finish", result.Message);
         }
         catch (OperationCanceledException)
         {
@@ -243,6 +243,7 @@ public partial class InstallerWindow : Window
             if (!Path.IsPathFullyQualified(FolderBox.Text.Trim())) throw new ArgumentException();
             _directory = Path.GetFullPath(FolderBox.Text.Trim());
             FolderBox.Text = _directory;
+            FolderNote.Text = IsUpgrade ? "Your current installation is updated in place." : "Only your Windows account uses this installation.";
             return true;
         }
         catch (Exception error) when (error is ArgumentException or NotSupportedException or PathTooLongException)
