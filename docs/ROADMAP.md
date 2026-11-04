@@ -1,9 +1,9 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 6, 2026-11-03 07:35, the end of mission J. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
+Version 7, 2026-11-03 19:55, the interactive HTML report. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
 Finished rows leave this file and go to `docs/ROADMAP-archive.md`; the needle restarts at zero with each version.
 
-Version 5 delivered 52 steps (in the archive): the family panel, families by evidence, subclasses, the numbers Ana asked for, the Word report and its supplement, the number trace, faster reopen and the first full run on her data. Version 6 is what remains, cut into small steps so the needle moves with real progress: Ana's report with the corrected CTL scope (D39), the 2.1.0 release on GitHub for her to install, a report export that works and is fast on her project, a visible and faster Compute, and the last clarity fixes. Each code piece ends with its own "reviewed and merged" step.
+Version 6 delivered 85 steps (in the archive): Ana's report with the corrected scope, releases 2.1.0 and 2.1.1 on GitHub, the new HomologySearch (Compute about 80 s instead of about 600 s), score tier on by default, and the last clarity fixes. Version 7 is one new piece Paulo asked for after reading the Word report: a simplified, graphical, interactive report.html written beside it from the same stored results. The release and the delivery to Ana wait on Paulo's word after he has seen the page.
 
 ## The goal, in Paulo's words
 
@@ -12,6 +12,7 @@ Version 5 delivered 52 steps (in the archive): the family panel, families by evi
 - 11-03: "there needs to be a detiled progress bar for generating this report or else we cant tell if the software stalled", "yes, improve on reporting"
 - 11-03: "can you think of a way to optimize the compute ... what is consuming it so much", "we need this to speed up things"
 - 11-03: "i would also like to see the steps more frgmented (small steps) so I can actually sense the progress and make sure we are not hitting a wall"
+- 11-03 19:20: "i went through the report and its something very complicated and extensive to read... we could also generate side by side a simplified report which is an html, its mostly graphical related, interactive and awesomely cool! not alot of text, maybe pop-ups, but mostly graphical oriented and needs to be awesome and very nicely crafted and appealing with professional design"
 - Standing: "using python scripts was cheating, every result passed to ana needs to be through the software", "things need to look slick and clean"
 
 ## Rules every worker follows
@@ -60,57 +61,33 @@ Flow of one step: the owner posts `READY <step> <commit>`; the orchestrator assi
 
 Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. The graph follows the Blocked by column.
 
-### W1 Ana's analysis with the corrected scope
+### W1 The interactive HTML report
 
-The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so the panel's galactose-binding lectins join CTL, and its science check.
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W2 The interpretation
+The friendly front door to the same results: mostly graphics, explanations in pop-ups, one offline file beside report.docx. FQResults owns the data and the program side, FQLook the page; the seam is the payload (M1b).
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W3 The report export works and is fast
-
-The export failed on Ana's project (a figure read the on-screen palette from the report's thread), repeated 15 minutes of work, and drew figures too large to save.
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W4 Release 2.1.0 on GitHub
-
-Ana installs it from the public releases page (D31); the desk publishes on Paulo's word, given 11-03.
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W5 Ana's report delivered
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W6 Compute fast and visible
-
-Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent for most of it, and opening a project searched for 10 to 22 minutes (now cached, J28).
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W7 Clear reasons and totals
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W8 Release 2.1.1
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| M1a | Baseline: fq/results on current master, Release build and quick suite green before any change | L | 0.2 | 🟢 | M1b | 0 warnings; quick suite green (ledger receipts deferred to the full gate as always) | RS | | 0 | 0 | |
+| M1b | Data contract: the payload of every number and label the page shows, as Word-rounded display strings, with a sample from Ana's stored results (no Compute); one seam round with FQLook | M | 0.7 | M1a | M1d, M1f | Schema committed; sample at out-results/M1/payload-sample.json; FQLook answered | RS | | 0 | 0 | |
+| M1c | The page, first version: one self-contained template (inline CSS, JS and SVG, offline, no library): key numbers, composition chart to drill into, ranked families with each run as a point, family cards with coverage strips, signal and Database gap visuals, method with pop-ups | H | 2.0 | 🟢 | M1f | Template committed, 0 warnings; renders the stand-in payload | LK | | 0 | 0 | |
+| M1d | Export wiring: File > Export report writes report.html beside the Word report and supplement, all or nothing, with the section choices and the others threshold; delivery rehearsal too; status, Help and docs | M | 1.0 | M1b | M1e | A real-menu export writes three files; cancel leaves the old ones | RS | | 0 | 0 | |
+| M1e | Tests: same project gives byte-identical HTML; every printed number, pop-ups included, traces to a stored value or Word cell; user text escaped; excluded sections absent; three-file publication | M | 1.0 | M1d | M1g | New tests in the suite and green | RS | | 0 | 0 | |
+| M1f | Design passes: headless renders at 1440 px and 390 px, light and dark, a pop-up open, on Ana's sample; iterate until it is good | M | 1.0 | M1b, M1c | M1g | Screenshots in out-look/M1c/screens with the changes listed | LK | | 0 | 0 | |
+| M1g | Proof on Ana's delivered project copy, no Compute: export report.html and check it against her delivered report | M | 0.7 | M1e, M1f | M1h, M1i | SVMP 38.5988% and every share match; 0 NOT FOUND; build and quick suite green; READY M1 | RS | | 0 | 0 | |
+| M1h | Code review of the writer, wiring and tests | M | 0.5 | M1g | M1j | APPROVED, or fixes made by the owner and re-checked | GR | | 0 | 0 | |
+| M1i | Numbers and design review of the page on Ana's export (pop-ups, phone, dark, print, offline) | M | 0.5 | M1g | M1j | APPROVED, or fixes made by the owner and re-checked | GR2 | | 0 | 0 | |
+| M1j | Desk gate and merge to master | L | 0.3 | M1h, M1i | M1k | Gate green; master pushed | Orchestrator | | 0 | 0 | |
+| M1k | Paulo sees the page and the screenshots | L | 0.2 | M1j | M1l, M1q | Paulo's OK or his changes | Paulo | | 0 | 0 | |
+| M1l | On Paulo's word: version 2.1.2 and release notes | L | 0.3 | M1k | M1m | Version in every place K19 changed; notes claim only what is on master | EV | | 0 | 0 | |
+| M1m | On Paulo's word: full release gate on the 2.1.2 commit | M | 0.3 | M1l | M1n | Ledger 5,460 of 5,460, full suite green | Orchestrator | | 0 | 0 | |
+| M1n | On Paulo's word: the 2.1.2 package and its real-menu export of a copy of Ana's project | L | 0.3 | M1m | M1o | Zip and SHA256; export writes all three files | EV | | 0 | 0 | |
+| M1o | On Paulo's word: v2.1.2 published on FamilyQuant2-releases | L | 0.1 | M1n | M1p | Release page live and Latest; downloaded zip hash equals M1n | Orchestrator | | 0 | 0 | |
+| M1p | On Paulo's word: install check from GitHub; 2.1.1 offers 2.1.2 | L | 0.2 | M1o |  | Both pass | EV | | 0 | 0 | |
+| M1q | On Paulo's word: report.html into Ana's Relatorio folder, exported from her delivered project with no Compute | L | 0.2 | M1k |  | File delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
 
 ## Critical path
 
-Ana's report: K1, K2, K4, K6, then K14 (which also needs J30c, J24c, J16b, J32d, J34c), K15 and K16, then K17. The release runs beside it: K8, K9, K10, K11, and K17 links the published release. Compute speed (W6) and the clarity steps (W7) ship in 2.1.0 if they land before the candidate (K8), otherwise in 2.1.1.
+M1a, M1b, M1d, M1e, then M1g (which also needs FQLook's M1c and M1f), the two reviews M1h and M1i, the gate M1j, and Paulo's look M1k. The release (M1l to M1p) and the delivery to Ana (M1q) start only on his word.
 
 ## Paulo's decisions
 
@@ -138,6 +115,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D43 | Defaults of the homology science options (J47b) | A: score tier ON by default, per-length gate OFF, tag gate OFF until J47c is measured (FQReview's science review agreed). Paulo, 11-03 15:40 ("i agree with you on all") |
 | D44 | Publish 2.1.1 today | Yes: after J47d and the version bump, through the same full gate, package, real-menu export and install checks as 2.1.0. Paulo, 11-03 15:40 |
 | D45 | The tag-gate option on this roadmap | Finish J47c (fast prefilter, its J47b row) in parallel with 2.1.1; it stays OFF by default whatever it shows. Paulo, 11-03 15:40 |
+| D46 | The HTML report | Built now beside the Word report, from the same stored values, offline and self-contained; release and delivery after Paulo sees it. Paulo, 11-03 19:20 ("just get it going"); roadmap asked for at 19:52 |
 
 ## Risks and triggers
 
@@ -149,5 +127,6 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | A quick gate hides a stale ledger receipt | K9's full gate fails on receipts | The owner of the row re-proves it before the candidate is published |
 | The release does not install on Ana's machine | K12 or K13 fails | Fix before K11 or publish 2.1.1; 2.0.0 and 1.5 stay installable |
 | A test leaves files that fail the next gate | A failure names output the commit cannot make | The suite empties each shard's folder before a run (11-03); suspect leftovers first |
+| The page shows a number the Word report does not | M1e or M1g finds a printed number with no stored source | No merge; the page prints only payload display strings (M1b) |
 | Ana's folder is touched | Any file under AnaG changes outside Relatorio | Stop and restore; checked before and after K17 |
 | The machine is shared by several large runs | A run's time grows past its estimate | The desk reorders unstarted work; never stops a running run |
