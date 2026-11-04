@@ -138,6 +138,16 @@ internal static partial class ReportNumberTrace
         }
         foreach (var (location, id) in FieldReferences(payload))
             if (!payload.Fields.ContainsKey(id)) errors[location] = "Missing field ID: " + id;
+        foreach (var measure in payload.DotMeasures)
+        {
+            if (payload.Fields.TryGetValue(measure.Label, out var label)
+                && (label.Source.Kind != "axis-label" || label.Source.Property != measure.Id))
+                errors[measure.Label] = "Axis label is not bound to this measure.";
+            foreach (string id in measure.Ticks)
+                if (payload.Fields.TryGetValue(id, out var tick)
+                    && (tick.Source.Kind != "axis-tick" || tick.Source.Property?.StartsWith(measure.Id + "/", StringComparison.Ordinal) != true))
+                    errors[id] = "Axis tick is not bound to this measure.";
+        }
         foreach (var gap in payload.DatabaseGap)
             if (payload.Fields.TryGetValue(gap.Fraction, out var fraction)
                 && (fraction.Unit != "fraction" || fraction.Source.Scale != 1 || fraction.Short == null
@@ -203,6 +213,14 @@ internal static partial class ReportNumberTrace
         HtmlBound Resolve(HtmlReportReference source, HtmlReportField field)
         {
             if (!double.IsFinite(source.Scale)) throw new InvalidDataException("Non-finite display scale.");
+            if (source.Kind is "axis-label" or "axis-tick")
+            {
+                if (!HtmlReportAxisTicks.TryResolve(source, out var resolved) || resolved == null)
+                    throw new InvalidDataException("Unknown or invalid axis source recipe.");
+                if (field.Value != resolved.Value || field.Unit != resolved.Unit)
+                    throw new InvalidDataException("Axis value or unit differs from the shared resolver.");
+                return new(N(resolved.Text), resolved.Value, "axis", source.Property ?? "");
+            }
             if (source.Kind is "stored-value" or "stored-family")
             {
                 if (project == null || manifest == null) throw new InvalidDataException("Stored field requires its source project.");
@@ -269,11 +287,17 @@ internal static partial class ReportNumberTrace
             foreach (var c in f.Coverage) { ids.AddRange(new[] { c.Title, c.Caption, c.Protein, c.LengthLabel }); foreach (var s in c.Peptides.Concat(c.Domains)) ids.AddRange(new[] { s.Label, s.Range }); }
         }
         foreach (var h in p.Highlights) ids.AddRange(new[] { h.Name, h.Value, h.Description });
+        foreach (var measure in p.DotMeasures)
+        {
+            ids.Add(measure.Label);
+            ids.AddRange(measure.Ticks);
+            ids.AddRange(measure.Values.Values);
+        }
         foreach (var r in p.CreditedRuns) ids.AddRange(new[] { r.Name, r.Share });
         foreach (var g in p.DatabaseGap) ids.AddRange(new[] { g.Name, g.Fraction });
         foreach (var m in p.Methods) { ids.Add(m.Title); foreach (var f in m.Facts) ids.AddRange(new[] { f.Name, f.Value }); }
         foreach (var f in p.Quality.Concat(p.Sensitivity)) ids.AddRange(new[] { f.Title, f.Caption });
-        return ids.Where(id => id != null).Select(id => ("HTML reference", id!));
+        return ids.Where(id => id != null).Select(id => ("HTML reference " + id, id!));
     }
     private static string N(string text) => text.Replace("\r\n", "\n", StringComparison.Ordinal).Replace('\r', '\n');
 }
