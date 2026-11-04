@@ -87,7 +87,7 @@ public static partial class HtmlReportPayloadBuilder
                         if (name < 0 || kind < 0) continue;
                         string partKind = frame.Table.Rows[row][kind];
                         if (excluded.Contains(partKind == "Subclass" ? "subclass-parts" : partKind == "Domain" ? "domain-parts" : "product-parts")) continue;
-                        parts.Add(new(partKind, Cell(frame, row, name), NativeCell(frame, row, "within_family_fraction", "%", 100)));
+                        parts.Add(new(partKind, Cell(frame, row, name), NativeCell(frame, row, "within_family_fraction", "%", 100), Unresolved(frame, row)));
                     }
             }
             else
@@ -97,7 +97,7 @@ public static partial class HtmlReportPayloadBuilder
                     foreach (int row in FamilyRows(frame, family.Id))
                     {
                         int name = Column(frame, "part"); if (name < 0) continue;
-                        parts.Add(new(source.Kind, Cell(frame, row, name), NativeCell(frame, row, "within_family_pct", "%", fractionColumn: "within_family_fraction")));
+                        parts.Add(new(source.Kind, Cell(frame, row, name), NativeCell(frame, row, "within_family_pct", "%", fractionColumn: "within_family_fraction"), Unresolved(frame, row)));
                     }
                 }
             string? peptides = null;
@@ -113,6 +113,14 @@ public static partial class HtmlReportPayloadBuilder
                 { cv = NativeCell(means, row, "cv_pct", "%", fractionColumn: "cv_ratio", stored: summary?.CoefficientOfVariation * 100); break; }
             var coverage = context.CoverageProvider?.Invoke(family.Id, Add, selection) ?? Array.Empty<HtmlReportCoverage>();
             return family with { Runs = runs, Parts = parts, Peptides = peptides, Cv = cv, Coverage = coverage };
+        }
+
+        private static bool Unresolved(Frame frame, int row)
+        {
+            int flag = Column(frame, "unresolved");
+            if (flag >= 0) return frame.Table.Rows[row][flag] == "1" || bool.TryParse(frame.Table.Rows[row][flag], out bool value) && value;
+            int key = Column(frame, "part_key");
+            return key >= 0 && frame.Table.Rows[row][key].Length == 0;
         }
     }
 }

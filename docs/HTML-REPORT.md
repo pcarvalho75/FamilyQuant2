@@ -36,8 +36,10 @@ IDs, not display text. Missing IDs or null values mean unavailable; they never i
 `composition.families` has name, mean, sd, cv, wholeMeasured, proteins, uniqueProteins, peptides,
 isOthers, runs, parts and coverage. Run entries have name/share/measured field IDs. Parts have a
 fixed kind and name/share field IDs; their percentages are pooled within-family values, not
-mean per-run shares. The page must state that basis when drilling. IsAdditive=false forbids a
-normalized composition view. Canonical Others is one aggregate; its hidden names are not embedded.
+mean per-run shares. Optional isUnresolved comes only from the native unresolved flag or missing
+native part key, never the displayed name, and may drive hatching. The page must state that basis
+when drilling. IsAdditive=false forbids a normalized composition view. Canonical Others is one
+aggregate; its hidden names are not embedded.
 
 `creditedRuns` shows the existing credited-family share of whole measured signal by run.
 `databaseGap` contains native fraction values (unit `fraction`, not a newly calculated percentage).
