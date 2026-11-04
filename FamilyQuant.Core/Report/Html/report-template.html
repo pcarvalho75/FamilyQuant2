@@ -1967,11 +1967,216 @@
             $("headline").append(item);
           }
           $("headline").hidden = !$("headline").childElementCount;
-          document.querySelector('section[aria-labelledby="composition-title"]').hidden = true;
+          if (!additive && families.length)
+            $("notices").append(
+              node(
+                "p",
+                "notice",
+                "Family contributions overlap in this analysis. Compare the values individually; a composition ring would imply a shared whole.",
+              ),
+            );
+          function groupedParts(f) {
+            const groups = new Map();
+            for (const p of f.parts || []) {
+              if (!exists(p.name) || val(p.share) === null) continue;
+              const k = p.kind || "parts";
+              if (!groups.has(k)) groups.set(k, []);
+              groups.get(k).push(p);
+            }
+            return groups;
+          }
+          function partTitle(kind) {
+            const k = String(kind).toLowerCase();
+            return k.includes("subclass")
+              ? "Subclasses"
+              : k.includes("domain")
+                ? "Domain parts"
+                : k.includes("mature")
+                  ? "Mature-product parts"
+                  : "Within-family parts";
+          }
+          function select(f, drill = false) {
+            state.selected = f;
+            state.kind = null;
+            state.drill = drill && groupedParts(f).size > 0;
+            renderRing();
+            if (typeof renderRanking === "function") renderRanking();
+            if (typeof renderFamily === "function") renderFamily();
+          }
+          function partDialog(p) {
+            popup(field(p.name), [
+              node(
+                "p",
+                "",
+                "Pooled within-family share. This combines the stored signal across runs before calculating a share within this family. It is a different reference from the mean per-run share in the overview.",
+              ),
+              field(p.share, "p"),
+            ]);
+          }
+          function renderRing() {
+            const ring = $("composition-ring"),
+              crumb = $("breadcrumb"),
+              reset = $("reset-composition");
+            ring.replaceChildren();
+            crumb.replaceChildren();
+            $("composition-legend").replaceChildren();
+            const f = state.selected,
+              groups = f ? groupedParts(f) : new Map();
+            if (!f) {
+              $("ring-name").textContent = "Composition unavailable";
+              $("composition-basis").textContent =
+                "No family contribution values were included in this report selection.";
+              reset.hidden = true;
+              return;
+            }
+            if (!additive) {
+              ring.parentElement.hidden = true;
+              crumb.textContent = "Compare the family values";
+              $("composition-basis").textContent =
+                "Overlapping contributions are shown individually.";
+              reset.hidden = true;
+              return;
+            }
+            ring.parentElement.hidden = false;
+            const back = node("button", "", "All families");
+            back.onclick = () => {
+              state.drill = false;
+              renderRing();
+            };
+            crumb.append(back);
+            let items = [];
+            if (state.drill && groups.size) {
+              const kind =
+                state.kind && groups.has(state.kind)
+                  ? state.kind
+                  : groups.keys().next().value;
+              state.kind = kind;
+              crumb.append(document.createTextNode(" / "), field(f.name));
+              items = groups
+                .get(kind)
+                .map((p, i) => ({
+                  id: p.name,
+                  name: p.name,
+                  share: p.share,
+                  color: colors[i % colors.length],
+                  part: p,
+                }));
+              $("composition-basis").textContent =
+                "Pooled within-family shares. " + partTitle(kind) + ".";
+              $("ring-value").textContent = "";
+              bind("ring-name", f.name);
+              reset.textContent = "Back";
+              reset.hidden = false;
+              reset.onclick = () => {
+                state.drill = false;
+                renderRing();
+              };
+            } else {
+              items = ordered
+                .filter((x) => (val(x.mean) ?? 0) > 0)
+                .map((x) => ({
+                  id: x.id,
+                  name: x.name,
+                  share: x.mean,
+                  color: familyColor(x),
+                  family: x,
+                }));
+              $("composition-basis").textContent =
+                data.composition?.basis ||
+                "Mean of per-run shares of credited family signal";
+              bind("ring-value", f.mean);
+              bind("ring-name", f.name);
+              reset.hidden = !groups.size;
+              reset.textContent = "Explore parts";
+              reset.onclick = () => {
+                state.drill = true;
+                renderRing();
+              };
+            }
+            const sum = items.reduce(
+              (s, x) => s + Math.max(0, val(x.share) ?? 0),
+              0,
+            );
+            ring.append(
+              svg("circle", { cx: 160, cy: 160, r: 122, class: "ring-base" }),
+            );
+            let angle = -Math.PI / 2;
+            const point = (a, r) => [
+              160 + Math.cos(a) * r,
+              160 + Math.sin(a) * r,
+            ];
+            items.forEach((item, i) => {
+              const proportion = (val(item.share) ?? 0) / sum;
+              if (!(proportion > 0)) return;
+              const end = angle + proportion * Math.PI * 2;
+              const a = point(angle, 143),
+                b = point(end, 143),
+                c = point(end, 101),
+                d = point(angle, 101);
+              let path;
+              if (proportion > 0.999999) {
+                path = svg("circle", {
+                  cx: 160,
+                  cy: 160,
+                  r: 122,
+                  fill: "none",
+                  stroke: item.color,
+                  "stroke-width": 42,
+                });
+              } else {
+                path = svg("path", {
+                  d: `M${a} A143,143 0 ${end - angle > Math.PI ? 1 : 0} 1 ${b} L${c} A101,101 0 ${end - angle > Math.PI ? 1 : 0} 0 ${d} Z`,
+                  fill: item.color,
+                });
+              }
+              path.setAttribute(
+                "class",
+                "ring-slice" +
+                  (!state.drill && item.family !== f ? " dim" : ""),
+              );
+              if (proportion > 0.999999) path.style.stroke = item.color;
+              path.setAttribute("tabindex", "0");
+              path.setAttribute("role", "button");
+              const title = svg("title", {
+                id: "ring-label-" + i,
+                "data-fq-field": item.name,
+              });
+              title.textContent = text(item.name);
+              path.append(title);
+              path.setAttribute("aria-labelledby", title.id);
+              const action = () =>
+                item.part ? partDialog(item.part) : select(item.family, true);
+              path.addEventListener("click", action);
+              path.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  action();
+                }
+              });
+              ring.append(path);
+              angle = end;
+            });
+            // Legend describes geometry without requiring hue alone to convey the selected family.
+            const legend = node("div", "legend-item");
+            const sw = node("span", "swatch");
+            sw.style.background = state.drill ? "var(--s2)" : familyColor(f);
+            legend.append(
+              sw,
+              node(
+                "span",
+                "",
+                state.drill
+                  ? "Select a part for its reference total"
+                  : "Selected family highlighted",
+              ),
+            );
+            $("composition-legend").append(legend);
+          }
           document.querySelector('#family-detail').hidden = true;
           document.querySelector('#evidence-section').hidden = true;
           document.querySelector('#others-section').hidden = true;
           document.querySelector('#method-section').hidden = true;
+          renderRing();
           $("app").hidden = false;
         } catch (error) {
           $("load-error").hidden = false;
