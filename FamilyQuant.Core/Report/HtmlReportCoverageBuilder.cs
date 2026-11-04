@@ -94,8 +94,8 @@ public static class HtmlReportCoverageBuilder
                 for (int f = 0; f < positions.Features.Count; f++)
                 {
                     var feature = positions.Features[f];
-                    if (!feature.Start.HasValue || !feature.End.HasValue || !feature.StartModifier.Equals("EXACT", StringComparison.OrdinalIgnoreCase)
-                        || !feature.EndModifier.Equals("EXACT", StringComparison.OrdinalIgnoreCase)) continue;
+                    if (!feature.Start.HasValue || !feature.End.HasValue || !string.Equals(feature.StartModifier, "EXACT", StringComparison.OrdinalIgnoreCase)
+                        || !string.Equals(feature.EndModifier, "EXACT", StringComparison.OrdinalIgnoreCase)) continue;
                     Validate(feature.Start.Value, feature.End.Value, ranked.ProteinLength);
                     string path = positionPath + "/Features/" + I(f);
                     domainSpans.Add(new(feature.Start.Value, feature.End.Value, feature.Type + (feature.Description.Length > 0 ? ": " + feature.Description : ""), path, "feature-label", path, "feature"));
