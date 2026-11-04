@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using DocumentFormat.OpenXml.Packaging;
+using W = DocumentFormat.OpenXml.Wordprocessing;
 
 namespace FamilyQuant.Report;
 
@@ -26,6 +28,7 @@ public static partial class HtmlReportPayloadBuilder
         }
         private readonly ReportDocument document;
         private readonly HtmlReportContext context;
+        private readonly ReportSelection? selection;
         private readonly HtmlReportLinks links;
         private readonly HashSet<string> excluded;
         private readonly Dictionary<string, Frame> frames = new(StringComparer.Ordinal);
@@ -33,12 +36,14 @@ public static partial class HtmlReportPayloadBuilder
         private readonly Dictionary<string, ReportSection> sections = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, HtmlReportField> fields = new(StringComparer.Ordinal);
         private readonly Dictionary<string, ReportTable> nativeTables = new(StringComparer.Ordinal);
+        private string[]? wordParagraphs;
 
         internal Builder(ReportDocument document, IReadOnlyList<ReportSupplementSheet> sheets,
             ReportSelection? selection, HtmlReportContext context, string wordFileName)
         {
             this.document = document ?? throw new ArgumentNullException(nameof(document));
             this.context = context;
+            this.selection = selection;
             excluded = new(selection?.ExcludedIds ?? Array.Empty<string>(), StringComparer.Ordinal);
             string name = Path.GetFileName(wordFileName);
             links = new() { Word = Uri.EscapeDataString(name), Workbook = Uri.EscapeDataString(Path.GetFileNameWithoutExtension(name) + "_supplement.xlsx") };
@@ -55,24 +60,55 @@ public static partial class HtmlReportPayloadBuilder
                     frames[table.Id] = new(ReportListSheets.WordView(table), section.Id, ++tableIndex, null);
         }
 
-        internal HtmlReportPayload Build() => new()
+        internal HtmlReportPayload Build()
         {
-            Title = sections.ContainsKey(ReportSectionIds.Title) ? Add(document.Title, new() { Kind = "word-property", Property = "Title" }) : null,
-            Authors = sections.ContainsKey(ReportSectionIds.Title) && document.Authors.Length > 0
-                ? Add(document.Authors, new() { Kind = "word-property", Property = "Creator" }) : null,
-            Links = links,
-            Composition = new() { IsAdditive = context.IsAdditive && !HasBlock("composition-overlap-warning"), Families = Families() },
-            Fields = fields,
-        };
+            string? title = sections.ContainsKey(ReportSectionIds.Title) ? Add(document.Title, new() { Kind = "word-property", Property = "Title" }) : null;
+            string? authors = sections.ContainsKey(ReportSectionIds.Title) && document.Authors.Length > 0
+                ? Add(document.Authors, new() { Kind = "word-property", Property = "Creator" }) : null;
+            var families = Families();
+            return new()
+            {
+                Title = title, Authors = authors, Links = links,
+                Composition = new() { IsAdditive = context.IsAdditive && !HasBlock("composition-overlap-warning"), Families = families },
+                Highlights = Highlights(), CreditedRuns = CreditedRuns(families), DatabaseGap = DatabaseGap(),
+                // D47: this is a plot-first page. No methods/quality prose or interpretation block.
+                Fields = fields,
+            };
+        }
 
         private bool HasBlock(string id) => !excluded.Contains(id) && sections.Values.Any(s => s.Blocks.Any(b => b.Id == id));
 
         private string Add(string text, HtmlReportReference source, string unit = "", double? value = null)
         {
             if (value.HasValue && !double.IsFinite(value.Value)) throw new InvalidDataException("A stored HTML quantity is not finite.");
+            if (source.Kind == "word-text") source = LocateParagraph(text, source);
             string id = "f" + (fields.Count + 1).ToString("D4", CultureInfo.InvariantCulture);
             fields.Add(id, new(text.Replace("\r\n", "\n", StringComparison.Ordinal).Replace('\r', '\n'), value, unit, source));
             return id;
+        }
+
+        private HtmlReportReference LocateParagraph(string text, HtmlReportReference source)
+        {
+            if (wordParagraphs == null)
+            {
+                using var memory = new MemoryStream(WordReportWriter.BuildBytes(document, selection));
+                using var word = WordprocessingDocument.Open(memory, false);
+                wordParagraphs = word.MainDocumentPart!.Document!.Body!.Descendants<W.Paragraph>().Select(p => p.InnerText).ToArray();
+            }
+            string? paragraph = source.ParagraphText;
+            if (paragraph == null)
+            {
+                if (wordParagraphs.Contains(text, StringComparer.Ordinal)) paragraph = text;
+                else
+                {
+                    var candidates = wordParagraphs.Where(p => p.Contains(text, StringComparison.Ordinal)).Distinct(StringComparer.Ordinal).ToArray();
+                    if (candidates.Length == 1) paragraph = candidates[0];
+                }
+            }
+            if (paragraph == null || source.Occurrence < 0 || !paragraph.Contains(text, StringComparison.Ordinal)
+                || wordParagraphs.Count(p => p == paragraph) <= source.Occurrence)
+                throw new InvalidDataException("A word-text field needs an exact, unambiguous paragraph and valid occurrence.");
+            return source with { ParagraphText = paragraph };
         }
 
         private string Cell(Frame frame, int row, int column, string unit = "", double? stored = null,
@@ -100,9 +136,9 @@ public static partial class HtmlReportPayloadBuilder
             return id;
         }
 
-        private void AddShort(string exact, double nativeValue, HtmlReportReference nativeSource)
+        private void AddShort(string exact, double nativeValue, HtmlReportReference nativeSource, string? unit = null)
         {
-            string shortId = Add(nativeValue.ToString("G3", CultureInfo.InvariantCulture), nativeSource with { Format = "G3" }, fields[exact].Unit, nativeValue);
+            string shortId = Add(nativeValue.ToString("G3", CultureInfo.InvariantCulture), nativeSource with { Format = "G3" }, unit ?? fields[exact].Unit, nativeValue);
             fields[exact] = fields[exact] with { Short = shortId };
         }
 
@@ -120,8 +156,14 @@ public static partial class HtmlReportPayloadBuilder
             if (column < 0 || frame.Table.Rows[row][column].Length == 0) return null;
             if (stored.HasValue && frame.Table.Rows[row][column] != stored.Value.ToString("G6", CultureInfo.InvariantCulture))
                 throw new InvalidDataException("The exact Word share does not match its stored quantity and display rule.");
-            var source = stored.HasValue ? new HtmlReportReference { Kind = "stored-family", Family = family,
-                Study = context.UsesPanel && !context.IsIdentity ? "effective" : "source", Property = property, Scale = 100 } : null;
+            HtmlReportReference? source = null;
+            if (stored.HasValue && context.StoredStudies?.FamilyRunShares is { } shares)
+            {
+                int index = shares.Families.FindIndex(f => f.FamilyUserId.ToString(CultureInfo.InvariantCulture) == family);
+                string member = property switch { "mean" => "MeanShare", "sd" => "StandardDeviation", "whole" => "MeanShareOfMeasuredSignal", "cv" => "CoefficientOfVariation", _ => throw new ArgumentException("Unknown stored share property.") };
+                source = new() { Kind = "stored-value", Property = "/manifest/" + (context.UsesPanel && !context.IsIdentity
+                    ? "EffectivePanelFamilies/RunShares" : "FamilyRunShares") + "/Families/" + index.ToString(CultureInfo.InvariantCulture) + "/" + member, Scale = 100 };
+            }
             return Cell(frame, row, column, unit, stored, source);
         }
 

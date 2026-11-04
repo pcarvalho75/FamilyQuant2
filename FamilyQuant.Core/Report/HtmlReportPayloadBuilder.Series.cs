@@ -25,7 +25,7 @@ public static partial class HtmlReportPayloadBuilder
         }
 
         private string? NativeCell(Frame frame, int row, string column, string unit = "", double scale = 1,
-            string? fractionColumn = null, double? stored = null)
+            string? fractionColumn = null, double? stored = null, bool shortLabel = true)
         {
             int col = Column(frame, column);
             if (col < 0 || frame.Table.Rows[row][col].Length == 0) return null;
@@ -42,7 +42,7 @@ public static partial class HtmlReportPayloadBuilder
                 }
             }
             string id = Add(text, reference, unit, value);
-            if (value.HasValue && unit is "%" or "pp" or "fraction")
+            if (shortLabel && value.HasValue && unit is "%" or "pp" or "fraction")
             {
                 HtmlReportReference precision = reference;
                 double shortValue = value.Value;
@@ -111,7 +111,8 @@ public static partial class HtmlReportPayloadBuilder
             if (means != null)
                 foreach (int row in FamilyRows(means, family.Id))
                 { cv = NativeCell(means, row, "cv_pct", "%", fractionColumn: "cv_ratio", stored: summary?.CoefficientOfVariation * 100); break; }
-            return family with { Runs = runs, Parts = parts, Peptides = peptides, Cv = cv };
+            var coverage = context.CoverageProvider?.Invoke(family.Id, Add, selection) ?? Array.Empty<HtmlReportCoverage>();
+            return family with { Runs = runs, Parts = parts, Peptides = peptides, Cv = cv, Coverage = coverage };
         }
     }
 }
