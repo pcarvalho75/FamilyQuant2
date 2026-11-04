@@ -20,7 +20,7 @@ internal static partial class Program
      new("--j47d-rejoin-headlines", 22, TestCommandPhase.Raw,
         args => args.Length > 0 && args[0] == "--j47d-rejoin-headlines", (args, _) =>
         {
-            if (args.Length != 4) throw new ArgumentException("Use --j47d-rejoin-headlines <owned-project-copy> <completed-study-root> <fresh-output>.");
+            if (args.Length is not (4 or 5)) throw new ArgumentException("Use --j47d-rejoin-headlines <owned-project-copy> <completed-study-root> <fresh-output> [completed-tag-packet].");
             string output = Path.GetFullPath(args[3]);
             if (!output.StartsWith(@"D:\FamilyQuant-data\out-assay\", StringComparison.OrdinalIgnoreCase) || Directory.Exists(output))
                 throw new IOException("Fresh owned expected-row output required.");
@@ -28,16 +28,22 @@ internal static partial class Program
             string projectSha = StudyHash(args[1]);
             var saved = ProjectStore.ReadFqproj(args[1]);
             var database = HomologyDatabase.Build(saved.fcf.MyExtendedFastaItems, buildSeedIndex: false);
-            var modes = new[] { ("off-04", "OFF"), ("tier-02", "score-tier"), ("length-02", "length") };
+            var canonical = StudyRead<JsonElement>(Path.Combine(args[2], "off-04", "validation.json"));
+            var canonicalConfig = canonical.GetProperty("Config").Deserialize<HomologyStudyConfig>(HomologyStudyJson)!;
+            var modes = new List<(string Folder, string Label)> { ("off-04", "OFF"), ("tier-02", "score-tier"), ("length-02", "length") };
+            if (args.Length == 5) modes.Add((Path.GetFullPath(args[4]), "tag"));
             var summaries = new List<FamilyRunSharesResult>();
             var facts = new List<object>();
             foreach (var (folder, label) in modes)
             {
-                string packet = Path.Combine(args[2], folder);
+                string packet = Path.IsPathRooted(folder) ? folder : Path.Combine(args[2], folder);
                 var validation = StudyRead<JsonElement>(Path.Combine(packet, "validation.json"));
                 if (!validation.GetProperty("Complete").GetBoolean()) throw new InvalidDataException("Completed measured packet required.");
                 var config = validation.GetProperty("Config").Deserialize<HomologyStudyConfig>(HomologyStudyJson)!;
-                var sourceProteins = StudyRead<List<CapturedProtein>>(Path.Combine(config.Capture, config.CurationDeNovoCall.ToString("D2", CultureInfo.InvariantCulture), "database.json.gz"));
+                if (validation.GetProperty("ProjectSha256").GetString() != canonical.GetProperty("ProjectSha256").GetString())
+                    throw new InvalidDataException("Measured packets use different source projects.");
+                string capture = Directory.Exists(config.Capture) ? config.Capture : canonicalConfig.Capture;
+                var sourceProteins = StudyRead<List<CapturedProtein>>(Path.Combine(capture, config.CurationDeNovoCall.ToString("D2", CultureInfo.InvariantCulture), "database.json.gz"));
                 var captureFile = new FamilyClusterFile { MyExtendedFastaItems = sourceProteins.Select(p => new FastaItemExtended
                     { SequenceIdentifier = p.Id, Sequence = p.Sequence }).ToList() };
                 if (FamilyEnvelopeQuant.ProteinSetFingerprint(captureFile) != FamilyEnvelopeQuant.ProteinSetFingerprint(saved.fcf))
@@ -50,6 +56,14 @@ internal static partial class Program
                         throw new InvalidDataException("Measured scientific result payload changed.");
                 var options = label == "score-tier" ? HomologyDefaults.ForNewCompute() : new HomologyOptions { Science = config.Science?.Clone() };
                 if (options.Science != null) options.Science.QueryRole = HomologyQueryRole.DeNovo;
+                if (options.Science?.TagErrors is { Enabled: true, WeightByLocalConfidence: true } tag)
+                {
+                    var profiles = StudyConfidenceProfiles(canonicalConfig.DeNovoDirectory, saved.manifest);
+                    string profileSha = Convert.ToHexString(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(profiles.Profiles)));
+                    if (profileSha != StudyRead<JsonElement>(Path.Combine(packet, "confidence-summary.json")).GetProperty("ProfilesSha256").GetString())
+                        throw new InvalidDataException("Delivered projection confidence profiles differ from the measured tag inputs.");
+                    tag.LocalConfidenceBySequence = profiles.Profiles;
+                }
                 if (label == "score-tier" && options.Science?.ScoreTier is not { Enabled: true, MaximumPamScoreDrop: 0 })
                     throw new InvalidDataException("Current Compute default is not the approved score tier.");
                 string cache = Path.Combine(output, label + "-cache");
@@ -76,7 +90,9 @@ internal static partial class Program
                     MembershipSha256 = FamilyStudyMembership.Fingerprint(saved.fcf), Science = options.Science });
             }
             var labels = FamilyNaming.Names(saved.fcf.MyExtendedFastaItems.Where(p => !SequenceLabels.IsDecoy(p.SequenceIdentifier)));
-            var text = new StringBuilder("# Ana delivered-curation expected headlines\n\nNative certified-hit rejoin, no search or full Compute. Percent of assigned primary family signal, arithmetic per-run mean; signed deltas are percentage points from OFF.\n\n| Current family | OFF % | Score tier % (delta pp) | Length % (delta pp) |\n|---|---:|---:|---:|\n");
+            var text = new StringBuilder("# Delivered-curation expected headlines\n\nNative certified-hit rejoin, no search or full Compute. Percent of assigned primary family signal, arithmetic per-run mean; signed deltas are percentage points from OFF. Each option is enabled alone, so the tag column is not a tag-plus-current-score-default interaction study.\n\n| Current family | "
+                + string.Join(" | ", modes.Select((m, i) => m.Label + (i == 0 ? " %" : " % (delta pp)")))
+                + " |\n|---|" + string.Join("|", modes.Select(_ => "---:")) + "|\n");
             var maps = summaries.Select(s => s.Families.ToDictionary(f => f.FamilyUserId)).ToArray();
             foreach (int family in maps.SelectMany(m => m.Keys).Distinct().OrderByDescending(id => maps[0].GetValueOrDefault(id)?.MeanShare))
             {

@@ -35,6 +35,7 @@ internal static partial class Program
         public string J42Audit { get; set; } = "";
         public string J42Provenance { get; set; } = "";
         public string ReuseResultsDirectory { get; set; } = "";
+        public string CompareMeasuredDirectory { get; set; } = "";
     }
     private sealed record StudyStoredHit(string ProteinId, int Offset, int Score, double IdentityFraction,
         double GateIdentityFraction, string MatchedSubsequence, bool IsDecoy);
@@ -104,6 +105,14 @@ internal static partial class Program
         var referenceCalls = certified.GetProperty("Calls").EnumerateArray().ToDictionary(c => c.GetProperty("Call").GetInt32());
         string projectSha = StudyHash(config.Project);
         var saved = ProjectStore.ReadFqproj(config.Project);
+        if (config.CompareMeasuredDirectory.Length > 0)
+        {
+            var prior = StudyRead<JsonElement>(Path.Combine(config.CompareMeasuredDirectory, "validation.json"));
+            var priorConfig = prior.GetProperty("Config").Deserialize<HomologyStudyConfig>(HomologyStudyJson)!;
+            if (!prior.GetProperty("Complete").GetBoolean() || prior.GetProperty("ProjectSha256").GetString() != projectSha
+                || JsonSerializer.Serialize(priorConfig.Science, HomologyStudyJson) != JsonSerializer.Serialize(config.Science, HomologyStudyJson))
+                throw new InvalidDataException("Measured comparison requires the same completed project and science settings.");
+        }
         HomologyScienceOptions? science = config.Science?.AnyEnabled == true ? config.Science.Clone() : null;
         Dictionary<int, JsonElement>? measuredCalls = null;
         if (config.ReuseResultsDirectory.Length > 0)
@@ -161,6 +170,17 @@ internal static partial class Program
             timer.Stop(); results[meta.Call] = found;
             byte[] bytes = StudyScientificBytes(found);
             string digest = Convert.ToHexString(SHA256.HashData(bytes));
+            bool? comparedScience = null, comparedAudit = null;
+            if (config.CompareMeasuredDirectory.Length > 0)
+            {
+                var prior = StudyRestoreResults(Path.Combine(config.CompareMeasuredDirectory, "results-" + meta.Call + ".json.gz"));
+                comparedScience = bytes.SequenceEqual(StudyScientificBytes(prior));
+                comparedAudit = found.Count == prior.Count && Enumerable.Range(0, found.Count).All(i =>
+                    JsonSerializer.Serialize(NormalizedTagAudit(found[i].ScienceAudit), HomologyStudyJson)
+                    == JsonSerializer.Serialize(NormalizedTagAudit(prior[i].ScienceAudit), HomologyStudyJson));
+                if (comparedScience != true || comparedAudit != true)
+                    throw new InvalidDataException("Measured tag scientific fields or full gate audits differ for call " + meta.Call);
+            }
             if (measuredCalls != null && (!measuredCalls.TryGetValue(meta.Call, out var measured)
                 || measured.GetProperty("ScientificSha256").GetString() != digest))
                 throw new InvalidDataException("Reused measured search scientific payload differs from its completed packet.");
@@ -170,6 +190,7 @@ internal static partial class Program
             StudyWrite(Path.Combine(output, "results-" + meta.Call + ".json.gz"), found);
             var report = new { meta.Call, meta.Queries, meta.Proteins, Role = role.ToString(), ReusedCertifiedIdentified = reused,
                 ReusedMeasuredResults = measuredCalls != null,
+                EqualToMeasuredScience = comparedScience, EqualToMeasuredAuditApartFromRuleWording = comparedAudit,
                 Seconds = timer.Elapsed.TotalSeconds, ScientificSha256 = digest, EqualToReference = equal,
                 TargetGateQueries = found.Count(StudyTargetGate),
                 DecoyGateQueries = found.Count(StudyDecoyGate),
@@ -280,6 +301,12 @@ internal static partial class Program
         && (r.ScienceAudit?.GateTargetProteins > 0 || r.Hits.Any(h => !h.IsDecoy) || r.TargetsSuppressedByDecoyCompetition);
     private static bool StudyDecoyGate(HomologyResult r) => r.ScienceAudit?.LengthCalibration is not { IdentityGate: null }
         && (r.ScienceAudit?.GateDecoyProteins > 0 || r.Hits.Any(h => h.IsDecoy) || r.DecoysSuppressed);
+
+    private static HomologyScienceAudit? NormalizedTagAudit(HomologyScienceAudit? audit) => audit == null ? null : audit with
+    {
+        GateAlignments = audit.GateAlignments?.Select(a => a.Rule == "Adjacent equal-mass order"
+            ? a with { Rule = "adjacent order swap (same pair mass)" } : a).ToArray(),
+    };
 
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
     private static HomologyConfidenceProfiles StudyConfidenceProfiles(string directory, QuantManifest manifest)
