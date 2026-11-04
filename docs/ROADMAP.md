@@ -38,10 +38,10 @@ Version 8 delivered 18 steps (in the archive): 2.1.2 (the interactive report.htm
 | FQReview (GR) | Grok 4.7 xhigh | Science and code review of the count. Never edits product code. OUT since 07:13 (Grok balance exhausted). | `D:/FamilyQuant-wt/review` |
 | FQReview2 (GR2) | Grok 4.7 xhigh | Code review of the payload, trace and page. Never edits product code. OUT since 07:13 (Grok balance exhausted). | `D:/FamilyQuant-wt/review2` |
 | FQReview3 (GR3) | Grok 4.7 xhigh | Review of the version, notes and README. Never edits product code. OUT since 07:13 (Grok balance exhausted). | `D:/FamilyQuant-wt/review3` |
-| FQReviewJF (JF) | Opus 5.5 on Juliana's account (D53) | Every review since 07:13. Never edits product code. | `D:/FamilyQuant-wt/review-jf` |
-| FQReviewDS (DS) | DeepSeek V4.1 Flash (D58) | Second, independent reviews; code and synthetic data only, never Ana's data. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
+| FQReviewJF (JF) | Opus 5.5 on Juliana's account (D53) | Reviews from 07:13 to 09:56; stood down by Paulo (D59). Never edits product code. | `D:/FamilyQuant-wt/review-jf` |
+| FQReviewDS (DS) | DeepSeek V4.1 Flash (D58, D59) | Every review from 09:56 on, exclusively; code and synthetic data only, never Ana's data. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
 
-The Grok reviewers ran out of credit at 07:13, so D53 holds: FQReviewJF (Opus on Juliana's account) reviews Sol work, a Sol reviews any Opus work, and FQReviewDS gives second reviews (D58).
+The Grok reviewers ran out of credit at 07:13, so D53 holds: FQReviewJF (Opus on Juliana's account) reviewed Sol work until 09:56; since then every review goes exclusively through FQReviewDS (D58, D59).
 
 Flow of one step: the owner posts `READY <step> <commit>`; the orchestrator assigns a reviewer in `D:/FamilyQuant-data/reviews/CLAIMS.md`; the reviewer posts `APPROVED` or `REJECTED`; a rejection is the owner's next commit, checked by another reviewer; the orchestrator gates, merges and closes the row.
 
@@ -82,17 +82,12 @@ Published when every check is green, like 2.1.2 and 2.1.3 (D56).
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G4a | The 2.1.4 Setup.exe and zip, each with its SHA256, from the gate commit | L | 0.2 | 🟢 | G4b, G5a | Setup.exe in test mode extracts and the app reports 2.1.4.0 | AS | | 0 | 0 | |
-| G4b | Package check before publishing: every file equal to the build; EXE and DLL versions 2.1.4.0 | L | 0.2 | G4a | G4e | PASS | EV | | 0 | 0 | |
-| G4e | v2.1.4 published as Latest with the Setup.exe, the zip and their .sha256 files; README pushed | L | 0.2 | G4b | G4f, G5b | Downloaded assets match their SHA256; README live and read | Orchestrator | | 0 | 0 | |
-| G4f | Update check on the public files: an installed 2.1.3 (test root) shows the banner for 2.1.4 and Install update runs the Setup in test mode | L | 0.3 | G4e | | PASS on every stage | EV | | 0 | 0 | |
+| G4f | Update check on the public files: an installed 2.1.3 (test root) shows the banner for 2.1.4 and Install update runs the Setup in test mode | L | 0.3 | 🟢 | | PASS on every stage | EV | | 0 | 0 | |
 
 ### W5 Ana's page
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| G5a | Ana's page with the new axis: export with the 2.1.4 build from a copy of her project outside her folder, traced; staged in `D:/FamilyQuant-data/out-desk/G5-for-Ana` with a READ-ME for 2.1.4 | L | 0.3 | G4a | G5b | Trace 0 NOT FOUND; her Word and supplement numbers equal the delivered ones; SHA256SUMS written | EV | | 0 | 0 | |
-| G5b | Deliver report.html and the READ-ME into her Relatorio folder (Paulo's word given, D57) | L | 0.1 | G5a, G4e | | Delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
 
 ## Critical path
 
@@ -137,6 +132,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D56 | Publish 2.1.4 | When every check is green, like D49 and D52; the update banner of 2.1.3 then offers it. Desk, 11-04 06:45, following D49 and D52 |
 | D57 | Deliver Ana's new page (G5b) | Yes: the desk delivers report.html and the 2.1.4 READ-ME into her Relatorio folder as soon as G5a is staged and its checks pass, backing up the current copies first and checking her other files unchanged by hash. Paulo, 11-04 08:23 ("yes you may") |
 | D58 | DeepSeek on the team | DeepSeek V4.1 Flash joins as a second reviewer while Grok is out, on code and synthetic data only (its API is hosted in China; Ana's data never goes to it). Paulo, 11-04 09:20 ("grok is out but deepseek 4.1 is back as a reviewer, bring him to the team") |
+| D59 | Who reviews | Every review goes exclusively through the DeepSeek reviewer FQReviewDS; Juliana's Opus reviewer is not used for now. Paulo, 11-04 09:56 ("lets not use julianas reviewer yet, all reviews go exlcusively through the deepseek worker") |
 
 ## Risks and triggers
 
