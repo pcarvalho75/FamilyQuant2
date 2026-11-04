@@ -1,13 +1,13 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 11, 2026-11-04 12:30, release 2.1.6: a clean Recent projects list. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
+Version 11, 2026-11-04 13:20, release 2.1.6: a clean Recent projects list. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
 Finished rows leave this file and go to `docs/ROADMAP-archive.md`; the needle restarts at zero with each version.
 
 Version 10 delivered 19 steps (in the archive): the guided Families screen, published as 2.1.5 at 12:05, its README and the update check from 2.1.4. Version 11 is Paulo's request on the Start page.
 
 ## The goal, in Paulo's words
 
-- 11-04 12:28: "inn the recent projects, if the file is unavailable it should be excluded. we should also have an option to exclude projects if we wish to, maybe a right click or a small red x in the upper right, put that feature in and redeploy"
+- 11-04 13:19: "inn the recent projects, if the file is unavailable it should be excluded. we should also have an option to exclude projects if we wish to, maybe a right click or a small red x in the upper right, put that feature in and redeploy"
 
 ## Rules every worker follows
 
@@ -75,7 +75,7 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 
 ## Critical path
 
-V1a, V1b, V1c and V2b in parallel now; the one review V2a and the one suite V2c in parallel with the package V3a; publish V3c; update check V3d. Rough wall-clock estimate: 45 to 75 minutes from 12:30, a range, never a promise.
+V1a, V1b, V1c and V2b in parallel now; the one review V2a and the one suite V2c in parallel with the package V3a; publish V3c; update check V3d. Rough wall-clock estimate: 45 to 75 minutes from 13:20, a range, never a promise.
 
 ## Paulo's decisions
 
@@ -119,7 +119,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D59 | Who reviews | Every review goes exclusively through the DeepSeek reviewer FQReviewDS; Juliana's Opus reviewer is not used for now. Paulo, 11-04 09:56 ("lets not use julianas reviewer yet, all reviews go exlcusively through the deepseek worker") |
 | D60 | A guided order for the Families screen | Built now as 2.1.5 with Ana's order (Fetch evidence, Group by evidence, Apply grouping, Fetch family world, Compute), a moving next-step highlight, step status, offers for a missing input, an explanation for an empty scope and counted progress; published when every check is green, like D56. Paulo, 11-04 11:18 ("can you get a worer on this asap"), after Ana 11:10 |
 | D61 | Releasing 2.1.5 without the ledger re-proof | The desk's cleanup deleted the evidence files the feature-ledger producers read, so every receipt went stale (desk mistake, 11:40). 2.1.5 ships on the full functional suite (every check, real data included, receipts deferred) and FQReviewDS's review; the ledger stays as proved for 2.1.4 at 9c03db8 the same morning; the release notes say so. Rebuilding the ledger evidence inside the repository follows as its own step. Paulo, 11-04 11:44 ("a") |
-| D62 | A clean Recent projects list | Built now as 2.1.6: unavailable files hidden, removal by right-click, a small x and Delete, and tests isolated from the user's list; same fast mode and test approach as 2.1.5 (D61); published when green. Paulo, 11-04 12:28 ("put that feature in and redeploy") |
+| D62 | A clean Recent projects list | Built now as 2.1.6: unavailable files hidden, removal by right-click, a small x and Delete, and tests isolated from the user's list; same fast mode and test approach as 2.1.5 (D61); published when green. Paulo, 11-04 13:19 ("put that feature in and redeploy") |
 
 ## Risks and triggers
 
