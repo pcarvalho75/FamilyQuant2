@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>FamilyQuant2-Setup</AssemblyName>
+    <RootNamespace>FamilyQuant.Setup</RootNamespace>
+    <ApplicationIcon>../FamilyQuant/Assets/Brand/FamilyQuant.ico</ApplicationIcon>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(SetupPayloadZip)" LogicalName="FamilyQuant.Setup.Payload.zip" Condition="'$(SetupPayloadZip)' != ''" />
+    <EmbeddedResource Include="$(SetupPayloadManifest)" LogicalName="FamilyQuant.Setup.Payload.json" Condition="'$(SetupPayloadManifest)' != ''" />
+    <Resource Include="../FamilyQuant/Assets/Brand/FamilyQuant.ico" Link="FamilyQuant.ico" />
+  </ItemGroup>
+</Project>
