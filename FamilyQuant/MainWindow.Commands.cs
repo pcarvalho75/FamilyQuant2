@@ -90,13 +90,12 @@ public partial class MainWindow
     private void RefreshRecentMenu()
     {
         MenuItemRecent.Items.Clear();
-        foreach (string path in shellState.RecentProjects)
+        foreach (string path in shellState.RecentProjects.Where(File.Exists))
         {
-            bool exists = File.Exists(path);
             var item = new MenuItem
             {
-                Header = Path.GetFileName(path).Replace("_", "__"), IsEnabled = exists,
-                ToolTip = exists ? "Opens this recent project: " + path : "This file is unavailable. Last path: " + path,
+                Header = Path.GetFileName(path).Replace("_", "__"),
+                ToolTip = "Opens this recent project: " + path,
                 Tag = path
             };
             item.Click += async (_, _) => await OpenProjectSafelyAsync(path);

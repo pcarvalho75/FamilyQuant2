@@ -38,8 +38,8 @@ public sealed class HomeViewModel : INotifyPropertyChanged
     {
         exists ??= File.Exists;
         RecentProjects.Clear();
-        foreach (string path in paths.Where(p => !string.IsNullOrWhiteSpace(p)).Distinct(StringComparer.OrdinalIgnoreCase).Take(10))
-            RecentProjects.Add(new HomeRecentProject(path, Path.GetFileName(path), exists(path)));
+        foreach (string path in paths.Where(p => !string.IsNullOrWhiteSpace(p)).Distinct(StringComparer.OrdinalIgnoreCase).Take(10).Where(exists))
+            RecentProjects.Add(new HomeRecentProject(path, Path.GetFileName(path), true));
         Changed();
     }
 
