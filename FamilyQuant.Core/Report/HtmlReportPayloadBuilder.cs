@@ -75,22 +75,54 @@ public static partial class HtmlReportPayloadBuilder
             return id;
         }
 
-        private string Cell(Frame frame, int row, int column, string unit = "", double? stored = null)
+        private string Cell(Frame frame, int row, int column, string unit = "", double? stored = null,
+            HtmlReportReference? storedSource = null)
         {
             string text = frame.Table.Rows[row][column];
-            double? number = stored;
-            // Only structured cells are parsed, never prose. Typed stored geometry takes precedence.
-            if (!number.HasValue && double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out double parsed)
-                && double.IsFinite(parsed)) number = parsed;
-            return Add(text, frame.Reference(row, column), unit, number);
+            double? number = null;
+            HtmlReportReference precision = storedSource ?? frame.Reference(row, column);
+            // Only structured cells are parsed, never prose; missing display values stay missing.
+            if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out double parsed) && double.IsFinite(parsed))
+            {
+                number = stored ?? parsed;
+                if (frame.WordTable.HasValue && workbookFrames.TryGetValue(frame.Table.Id, out var workbook)
+                    && row < workbook.Table.Rows.Count && column < workbook.Table.Columns.Count
+                    && workbook.Table.Columns[column].Contains("(unrounded; Word:", StringComparison.Ordinal)
+                    && double.TryParse(workbook.Table.Rows[row][column], NumberStyles.Float, CultureInfo.InvariantCulture, out double native)
+                    && double.IsFinite(native))
+                {
+                    if (stored.HasValue && native != stored.Value) throw new InvalidDataException("HTML geometry and its native unrounded cell differ.");
+                    number = native; precision = workbook.Reference(row, column);
+                }
+            }
+            string id = Add(text, frame.Reference(row, column), unit, number);
+            if (number.HasValue && unit is "%" or "pp" or "fraction") AddShort(id, number.Value, precision);
+            return id;
+        }
+
+        private void AddShort(string exact, double nativeValue, HtmlReportReference nativeSource)
+        {
+            string shortId = Add(nativeValue.ToString("G3", CultureInfo.InvariantCulture), nativeSource with { Format = "G3" }, fields[exact].Unit, nativeValue);
+            fields[exact] = fields[exact] with { Short = shortId };
         }
 
         private static int Column(Frame frame, params string[] names)
         {
             for (int i = 0; i < frame.Table.Columns.Count; i++)
                 if (names.Any(name => frame.Table.Columns[i].Equals(name, StringComparison.OrdinalIgnoreCase)
-                    || frame.Table.Columns[i].StartsWith(name + " (Word:", StringComparison.OrdinalIgnoreCase))) return i;
+                    || frame.Table.Columns[i].StartsWith(name + " (", StringComparison.OrdinalIgnoreCase))) return i;
             return -1;
+        }
+
+        private string? ShareCell(Frame frame, int row, string unit, double? stored, string family, string property, params string[] names)
+        {
+            int column = Column(frame, names);
+            if (column < 0 || frame.Table.Rows[row][column].Length == 0) return null;
+            if (stored.HasValue && frame.Table.Rows[row][column] != stored.Value.ToString("G6", CultureInfo.InvariantCulture))
+                throw new InvalidDataException("The exact Word share does not match its stored quantity and display rule.");
+            var source = stored.HasValue ? new HtmlReportReference { Kind = "stored-family", Family = family,
+                Study = context.UsesPanel && !context.IsIdentity ? "effective" : "source", Property = property, Scale = 100 } : null;
+            return Cell(frame, row, column, unit, stored, source);
         }
 
         private string? OptionalCell(Frame frame, int row, string unit, double? stored, params string[] names)
@@ -134,15 +166,16 @@ public static partial class HtmlReportPayloadBuilder
                 FamilyRunShareSummary? summary = null;
                 if (stored != null) stored.TryGetValue(key, out summary);
                 // Preserve native row order and canonical Others. Never introduce a second fold or a top-N rule.
-                result.Add(new()
+                var family = new HtmlReportFamily
                 {
                     Id = key, IsOthers = others, Name = Cell(headline, row, nameColumn),
-                    Mean = OptionalCell(headline, row, "%", summary?.MeanShare * 100, "Mean share (%)", "mean_pct"),
-                    Sd = OptionalCell(headline, row, "pp", summary?.StandardDeviation * 100, "Sample SD (pp)", "sample_sd_pct"),
-                    WholeMeasured = OptionalCell(headline, row, "%", summary?.MeanShareOfMeasuredSignal * 100, "Whole measured (%)", "mean_measured_pct"),
+                    Mean = ShareCell(headline, row, "%", summary?.MeanShare * 100, key, "mean", "Mean share (%)", "mean_pct"),
+                    Sd = ShareCell(headline, row, "pp", summary?.StandardDeviation * 100, key, "sd", "Sample SD (pp)", "sample_sd_pct"),
+                    WholeMeasured = ShareCell(headline, row, "%", summary?.MeanShareOfMeasuredSignal * 100, key, "whole", "Whole measured (%)", "mean_measured_pct"),
                     Proteins = OptionalCell(headline, row, "", null, "Proteins needed (greedy)", "greedy_protein_estimate"),
                     UniqueProteins = OptionalCell(headline, row, "", null, "Proteins with own peptide", "unique_peptide_proteins"),
-                });
+                };
+                result.Add(FamilyDetails(family, summary));
             }
             return result;
         }
