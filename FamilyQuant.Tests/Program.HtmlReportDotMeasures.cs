@@ -32,7 +32,7 @@ internal static partial class Program
                 new[] { "mean", "peptides", "proteins", "uniqueProteins", "sd", "cv" }));
         Check("share and peptide log ticks bracket their stored ranges with invariant labels",
             Ticks(model, "mean").SequenceEqual(new[] { "0.001", "0.01", "0.1", "1", "10", "100" })
-            && Ticks(model, "peptides").SequenceEqual(new[] { "1", "10", "100", "1E+03", "1E+04" })
+            && Ticks(model, "peptides").SequenceEqual(new[] { "1", "10", "100", "1000", "10000" })
             && Measure(model, "peptides").GetProperty("ticks").EnumerateArray().Select(t => model.Fields[t.GetString()!].Value)
                 .SequenceEqual(new double?[] { 1, 10, 100, 1000, 10000 }));
         Check("SD is linear with zero and program-made ticks, not a logarithmic axis", Measure(model, "sd").ValueKind == JsonValueKind.Object
@@ -44,7 +44,7 @@ internal static partial class Program
             && !HasFamily(mean, "others"));
         Check("axis labels and ticks identify presentation constants rather than pretend Word cells",
             model.Fields.Values.Any(f => f.Source.Kind == "axis-label")
-            && model.Fields.Values.Any(f => f.Source.Kind == "axis-tick" && f.Value is > 0 && f.Source.Format == "G3"));
+            && model.Fields.Values.Any(f => f.Source.Kind == "axis-tick" && f.Value is > 0 && f.Source.Format == "axis-plain"));
         var hidden = Build(new() { ExcludedIds = new[] { ReportSectionIds.Results } });
         Check("unselected Results emit neither dot measures nor their axis fields", List(hidden).ValueKind == JsonValueKind.Array
             && List(hidden).GetArrayLength() == 0 && !hidden.Fields.Values.Any(f => f.Source.Kind.StartsWith("axis-", StringComparison.Ordinal)));
@@ -58,18 +58,23 @@ internal static partial class Program
             !HasFamily(Measure(zeros, "peptides"), "7") && HasFamily(Measure(zeros, "peptides"), "8")
             && zeros.Fields[Measure(zeros, "peptides").GetProperty("values").GetProperty("8").GetString()!].Value == 0
             && Ticks(zeros, "peptides").SequenceEqual(new[] { "1", "10" }));
-        var tick = new HtmlReportReference { Kind = "axis-tick", Property = "mean/log10/-1", Format = "G3" };
+        var tick = new HtmlReportReference { Kind = "axis-tick", Property = "mean/log10/-1", Format = "axis-plain" };
         Check("shared axis resolver binds exact native text, units and geometry", HtmlReportAxisTicks.TryResolve(tick, out var resolved)
             && resolved is { Text: "0.1", Value: .1, Unit: "%" }
             && HtmlReportAxisTicks.TryResolve(new() { Kind = "axis-label", Property = "proteins" }, out var label)
             && label is { Text: "Protein estimate (greedy)", Value: null, Unit: "" });
         Check("shared axis resolver refuses forged scale, locator, recipe or measure", new[]
         {
-            tick with { Scale = 100 }, tick with { Row = 1 }, tick with { Format = null },
+            tick with { Scale = 100 }, tick with { Row = 1 }, tick with { Format = null }, tick with { Format = "G3" },
             tick with { Property = "mean/log10/+1" }, tick with { Property = "mean/log10/309" },
             tick with { Property = "sd/log10/0" }, tick with { Property = "cv/linear/0/11" },
             tick with { Property = "unknown/log10/1" }, tick with { Kind = "word-cell" },
         }.All(source => !HtmlReportAxisTicks.TryResolve(source, out _)));
+        Check("axis text uses plain integers and exact decimal steps without scientific or binary-noise strings",
+            HtmlReportAxisTicks.TryResolve(tick with { Property = "proteins/log10/3" }, out var thousand) && thousand.Text == "1000"
+            && HtmlReportAxisTicks.TryResolve(tick with { Property = "sd/linear/-2/3" }, out var small) && small.Text == "0.03"
+            && HtmlReportAxisTicks.TryResolve(tick with { Property = "sd/linear/-2/0" }, out var zero) && zero.Text == "0"
+            && HtmlReportAxisTicks.TryResolve(tick with { Property = "sd/linear/-1/10" }, out var one) && one.Text == "1");
         var priorCulture = CultureInfo.CurrentCulture; var priorUi = CultureInfo.CurrentUICulture;
         try
         {

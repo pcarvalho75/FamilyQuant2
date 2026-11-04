@@ -49,13 +49,16 @@ decade for a single exact-decade value. An all-zero log measure has ticks 1 and 
 zero-valued families retain their exact values for edge rendering/tooltips. Linear ticks start
 at zero with a power-of-ten step through the upper range. At floating-point extremes only
 finite representable ticks are emitted; the plot must also include its actual value extents.
-All tick strings are invariant C# G3; raw tick values use the measure's units (share is percent).
+All tick strings are plain invariant C# decimal text: count ticks print `1000`, not scientific
+notation, and linear steps print `0.03` without binary rounding noise. Trailing fractional zeros
+are removed; tiny nonzero ticks never round to zero. Measured-value short fields remain G3.
+Raw tick values use the measure's units (share is percent).
 
 `axis-label` and `axis-tick` references are explicit presentation constants, not Word cells or
 stored observations. `HtmlReportAxisTicks.TryResolve` is their shared strict native validator.
 A label's Property is the measure ID, Format is null, Scale is 1. A tick's Property is
 `<id>/log10/<exponent>` or `<id>/linear/<exponent>/<multiple>` (multiple 0 through 10), Format is
-`G3`, Scale is 1; the known measure must support that scale, and all other reference slots
+`axis-plain`, Scale is 1; the known measure must support that scale, and all other reference slots
 are empty. Source recipes bind exact text, unit and raw geometry for the number trace.
 
 `databaseEntries` and `databaseGap` are reserved IDs, offered only when an existing, explicitly
