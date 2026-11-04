@@ -683,3 +683,39 @@ Paulo agreed these at the restart, 2026-11-01.
 | G5a | Ana's page with the new axis: export with the 2.1.4 build from a copy of her project outside her folder, traced; staged in `D:/FamilyQuant-data/out-desk/G5-for-Ana` with a READ-ME for 2.1.4 | L | 0.3 | G4a | G5b | Trace 0 NOT FOUND; her Word and supplement numbers equal the delivered ones; SHA256SUMS written | EV | | 0 | 0 | |
 | G5b | Deliver report.html and the READ-ME into her Relatorio folder (Paulo's word given, D57) | L | 0.1 | 🟢 | | Delivered; her other files unchanged by hash | Orchestrator | | 0 | 0 | |
 
+### W1 The Grouping panel in Ana's order (FQPanel)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| U1a | Numbered order in the Grouping panel: 1 Fetch evidence, 2 Group by evidence (its review ends with Apply grouping), 3 Fetch family world, 4 Compute full XIC (opens Quantify); Group by keywords and Align selected move below as quiet alternatives. Layout only | L | 0.3 | 🟢 | U1b, U1c, U1d | Screen harness renders, light and dark; every button keeps its click handler; existing tests green | PN | | 0 | 0 | |
+| U1b | Next-step highlight: the one primary (blue) button is the first step not yet done, from the project's stored state (evidence stored, grouping applied, family world stored, full XIC computed) | M | 0.4 | U1a | U3a | Test of the rule for each of the five states; one primary button at a time | PN | | 0 | 0 | |
+| U1c | A short status under each step: evidence downloaded with its UniProt release or not yet, grouping applied or not yet, family world downloaded or not yet, full XIC computed or not yet; replaces the lone "Family world" line | L | 0.3 | U1a | U3a | Test of each status text; no number or word that names an organism, venom, toxin or sample | PN | | 0 | 0 | |
+| U1d | One-line tooltips per step: what it needs first and roughly how long it takes | L | 0.1 | U1a | U3a | Every step's tooltip says what it needs first | PN | | 0 | 0 | |
+
+### W2 Guards, messages and Help (FQGuard)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| U2a | Missing-input offers: Group by evidence on a project with no stored evidence asks "This project has no UniProt evidence yet. Download it now?" with Download and continue (runs Fetch evidence, then opens the review) or Cancel; Fetch family world without a confirmed scope offers to open Group by evidence first | M | 0.5 | 🟢 | U3b | Tests for both offers, both answers; Cancel changes nothing | GD | | 0 | 0 | |
+| U2b | Review grouping: when no reviewed accession is counted, say why where the suggestion would be ("No scope can be suggested: this project has no UniProt evidence yet. Fetch evidence first, or type a scope.") | L | 0.2 | 🟢 | U3b | Test of the message; no organism, venom or toxin word (D21) | GD | | 0 | 0 | |
+| U2c | Counted progress on the Read grouping task screen ("Asking UniProt about taxon 12 of 87", "Needs an internet connection"), from the progress the discovery already reports | L | 0.3 | 🟢 | U3b | Test that the count reaches the busy screen | GD | | 0 | 0 | |
+| U2d | Help: "What do I do first?" and the Grouping section describe the numbered order | L | 0.2 | U1a | U3b | Help text matches the panel; no organism, venom or toxin word | GD | | 0 | 0 | |
+
+### W3 Reviews, version and the gate
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| U3a | Review of the panel (U1a to U1d) | M | 0.2 | U1b, U1c, U1d | U3d | APPROVED, or fixes by the owner and re-checked | DS | | 0 | 0 | |
+| U3b | Review of the guards, messages and Help (U2a to U2d) | M | 0.2 | U2a, U2b, U2c, U2d | U3d | APPROVED, or fixes by the owner and re-checked | DS | | 0 | 0 | |
+| U3c | Version 2.1.5 in every place 2.1.4 was set, packaging defaults included, and the 2.1.5 notes | L | 0.2 | 🟢 | U3e | Versions read 2.1.5.0; notes claim only what landed | RL | | 0 | 0 | |
+| U3e | Review of the version and notes | L | 0.1 | U3c | U3d | APPROVED | DS | | 0 | 0 | |
+| U3d | Full gate on the integrated 2.1.5 commit: ledger refresh and the full real-data suite | M | 0.4 | U3a, U3b, U3e | U4a | Every ledger row proved; full suite green | Orchestrator | | 0 | 0 | |
+
+### W4 Release 2.1.5
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| U4a | The 2.1.5 Setup.exe and zip with SHA256 from the gate commit | L | 0.2 | U3d | U4b | Setup.exe in test mode extracts and the app reports 2.1.5.0 | RL | | 0 | 0 | |
+| U4b | Package check: every file equal to the build; EXE and DLL versions 2.1.5.0 | L | 0.2 | U4a | U4e | PASS | RL | | 0 | 0 | |
+| U4e | v2.1.5 published as Latest with the Setup.exe, the zip and their .sha256 files; README pushed | L | 0.2 | U4b, U4d | U4f | GitHub digests equal the package; README live | Orchestrator | | 0 | 0 | |
+
