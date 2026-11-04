@@ -70,6 +70,11 @@ internal static partial class Program
         catch (OperationCanceledException) { stopped = true; }
         Check("Y10 pre-cancelled check sends nothing", stopped && untouched.Requests == 0);
         Check("Y10 release repository is one AppVersionInfo constant", typeof(AppVersionInfo).GetField("ReleaseRepository")?.GetRawConstantValue() as string == repository);
+        using var installerHttp = new UpdateHttpHandler { Reply = _ => Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+        { Content = new StringContent("{\"tag_name\":\"v2.0.1\",\"html_url\":\"https://github.com/pcarvalho75/FamilyQuant2-releases/releases/tag/v2.0.1\",\"assets\":[{\"name\":\"FamilyQuant2-2.0.1-Setup.exe\",\"browser_download_url\":\"https://github.com/pcarvalho75/FamilyQuant2-releases/releases/download/v2.0.1/FamilyQuant2-2.0.1-Setup.exe\",\"size\":3}]}" ) }) };
+        var installable = ReleaseUpdateChecker.CheckAsync(repository, "2.0.0", new OperationContext(), installerHttp).GetAwaiter().GetResult();
+        Check("M7b newer release retains the versioned installer asset", typeof(ReleaseUpdateResult).GetProperty("Installer")?.GetValue(installable) != null);
+        UpdateInstallTests();
     }
 
     private static int UpdateCheckCommand(string[] args, string workDir)
