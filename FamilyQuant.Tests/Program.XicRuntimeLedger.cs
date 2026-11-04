@@ -196,7 +196,10 @@ internal static partial class Program
                 Sequence = "ACDEFGHIK", IsotopeAreas = new[] { 1d, 2d }, EnvelopeSum = 3 } };
             var curated = new FamilyClusterFile { MyExtendedFastaItems = new() { new() { SequenceIdentifier = "fixture-a", Sequence = "ACDEFGHIK", UserID = 41 },
                 new() { SequenceIdentifier = "fixture-b", Sequence = "ACDEFGHIK", UserID = 42 } } };
-            var familyOptions = new FullXicOptions { ExportSpectrumComparisonCsv = false, FamilyCuration = curated };
+            // This register preserves the 2.0 KEEP fact. D43's current default is tested
+            // separately by HomologyDefaultMigrationTests, including de novo narrowing.
+            var familyOptions = new FullXicOptions { ExportSpectrumComparisonCsv = false, FamilyCuration = curated,
+                FamilyMappingOptions = new Homology.HomologyOptions() };
             var familyResult = Complete(new FullXicComputeResult { Rows = baseRows.ToList() }, familyOptions);
             double identity = FamilyEnvelopeQuant.BuildAttributionFromCuration(baseRows, curated).IdentityThreshold;
             string familyNote = At(617) + identity.ToString(At(618), CultureInfo.InvariantCulture) + At(619);

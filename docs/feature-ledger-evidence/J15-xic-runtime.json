@@ -5,132 +5,132 @@
   "runs": [
     {
       "id": "native",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-xic-messages-runtime D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime \u00222026-11-03 14:08:33 -0800\u0022 C:/Users/paulo/Desktop/FamilyQuant/BrProt_Talk/all\u002BDeepNovo/scientific_results.fqproj",
-      "executedAt": "2026-11-03 14:08:33 -0800",
-      "commit": "3ab0bd7d5da0dc6900afda91c85ea5985fffa0ae",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-xic-messages-runtime D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime \u00222026-11-03 16:56:44 -0800\u0022 C:/Users/paulo/Desktop/FamilyQuant/BrProt_Talk/all\u002BDeepNovo/scientific_results.fqproj",
+      "executedAt": "2026-11-03 16:56:44 -0800",
+      "commit": "d4f70fd42dcc26698987e37401811e082f6b3197",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\blocked",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\blocked",
           "sha256": "B759B38D13723DCDF16174E452CE48DDAD4CA1E0540EABA93975962A09C4C2C0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\detector-progress.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\detector-progress.json",
           "sha256": "9DF3A47B839DF991973855FF2E495A7812E8A839087AB468DE42D304AEE75AD2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\FamilyQuant.Core\\DeNovo\\DeNovoXicExtractor.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\FamilyQuant.Core\\DeNovo\\DeNovoXicExtractor.cs",
           "sha256": "C0489202D2146269F181FE3CDC32141E2E4A365F25FC371C5DDAF18AD969B13C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\FamilyQuant.Core\\DeNovo\\Ms1EnvelopeDetector.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\FamilyQuant.Core\\DeNovo\\Ms1EnvelopeDetector.cs",
           "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\FamilyQuant.Core\\DeNovo\\SpectrumComparisonTable.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\FamilyQuant.Core\\DeNovo\\SpectrumComparisonTable.cs",
           "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\FamilyQuant.Core\\FileFingerprint.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\FamilyQuant.Core\\FileFingerprint.cs",
           "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\FamilyQuant.Core\\Quantitation\\FullXicModels.cs",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\FamilyQuant.Core\\Quantitation\\FullXicModels.cs",
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\FamilyQuant.Core\\Quantitation\\FullXicStoragePaths.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\FamilyQuant.Core\\Quantitation\\FullXicStoragePaths.cs",
           "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\FamilyQuant.Tests\\FeatureLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\FamilyQuant.Tests\\FeatureLedger.cs",
           "sha256": "78FE61453A7E6FB7BE49D0FAA403B56D1918D53E6FD1C44663712D4F5B75AB03"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.Reporting.cs",
           "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.cs",
           "sha256": "7FFE973E1D4F66812812B051DAB78C93169902380838CFA92C011F86B1C3A02D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\FamilyQuant.Tests\\Program.J15XicMessages.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\FamilyQuant.Tests\\Program.J15XicMessages.cs",
           "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\FamilyQuant.Tests\\Program.LedgerPreservation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\FamilyQuant.Tests\\Program.LedgerPreservation.cs",
           "sha256": "999E13B7BF67353AF11E001FAF28CF71A51AB03299D24116C86C47474D1D7406"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\FamilyQuant.Tests\\TestCommandRegistry.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\FamilyQuant.Tests\\TestCommandRegistry.cs",
           "sha256": "CDBE959710FB0FD128381AE9F57A6BAE82E68B84D4D76AFB3E0AB6EA43D11BA5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\binaries\\FamilyQuant.Core.dll",
-          "sha256": "597BF4DBBF66E40BB6FB46AE769CACCBFDC51BEE0874A5E043377A282237B68B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\binaries\\FamilyQuant.Core.dll",
+          "sha256": "A833B10A087C334BFCB75BED61E900D1ACD67CA496A3FF1B2450764CA6917364"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\binaries\\FamilyQuant.Tests.dll",
-          "sha256": "49C720B5ECD30B7BD86E4443AF12603A99D50EDB0B2DDB51AEA09C11775DCE64"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\binaries\\FamilyQuant.Tests.dll",
+          "sha256": "2B9CC4F338F66ADC12A96558DC81C1168C77A1F64EC51A4B858F4FD22A0555F9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\binaries\\PatternTools.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\binaries\\PatternTools.dll",
           "sha256": "C36CC8957FFA977E16A8447F0D808BBD7E710BAB09B50EEC5172D8942987E1F6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\binaries\\ThermoFisher.CommonCore.Data.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\binaries\\ThermoFisher.CommonCore.Data.dll",
           "sha256": "A992D587580F5470F01B6EA3072131E686C63D21C0222BCF9A067E255466238B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\binaries\\ThermoFisher.CommonCore.RawFileReader.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\binaries\\ThermoFisher.CommonCore.RawFileReader.dll",
           "sha256": "665754874B055DBAB975FC3DC3FC366D2296D18323ACE801C5F72F933FEB46F9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\docs\\feature-ledger-scan.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\docs\\feature-ledger-scan.json",
           "sha256": "CD811F554E3E7101B12871AB603C765603FBBE8320BC173C466726A1862234AC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\frozen\\FamilyQuant\\DeNovo\\Ms1EnvelopeDetector.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\frozen\\FamilyQuant\\DeNovo\\Ms1EnvelopeDetector.cs",
           "sha256": "2BE7652D4FB2F3C44801773D52BA3787BAD054CA004D29CEA9ADAA9745654CA2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\executed\\frozen\\FamilyQuant\\FullXicComputer.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\executed\\frozen\\FamilyQuant\\FullXicComputer.cs",
           "sha256": "ED72573B31BCFD68FEE783807A692C51452FD98B4B039B93E9BCBBC9A198BA58"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\native-cases-canonical.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\native-cases-canonical.json",
           "sha256": "DA95641359BDE20A36C57F9DB79E7A738DE1D6E2D1C2C2F7E2678F51B6C02BCF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\native-cases-raw.json",
-          "sha256": "0B5EB84BE7EEF04DA1E87F8A1D37D75E7517F1491C3816C4F7E86E83553DB42F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\native-cases-raw.json",
+          "sha256": "66B8F953A1133FD6DC617BFA023376723D74AD1DE8E1A10D8417CE2BA3425AA7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\proofs.log",
           "sha256": "A26B8E6E16099D0AFCDC212DA296E4A3E39176497821CAD3C5261ECEC3AF86A5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\readonly-input.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\readonly-input.json",
           "sha256": "C14104BC29F80D95BE811812468349EFE8C7DB557880EB4A2921577AECF62446"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\spectrum.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\spectrum.csv",
           "sha256": "DA72C33C7536DBEB6839F65ABE834F4D0E73BB78FA67238674368B883A6C2BA3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\synthetic-detector.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\synthetic-detector.json",
           "sha256": "35E74C19732AA64779E003F526655A29BA954D3F256426A0D7EF1438C2E7E90A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\synthetic.raw",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\synthetic.raw",
           "sha256": "D8983BEA6F5AFB2274DABFD6DD077DC5BBA5DDC95B4630598E8D3A5FBEEC66D5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\uncached-detector.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\uncached-detector.json",
           "sha256": "463A35E6C54E9BC5C689A9E8E0A65DD2746FDCE7FF31772F3BBB3B671734F49F"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-gate"
+      "workingDirectory": "D:\\FamilyQuant-wt\\assay"
     }
   ],
   "rows": [
@@ -160,7 +160,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -204,7 +204,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -248,7 +248,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -292,7 +292,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -336,7 +336,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -380,7 +380,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -424,7 +424,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -468,7 +468,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -512,7 +512,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -556,7 +556,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -600,7 +600,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -644,7 +644,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -688,7 +688,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -732,7 +732,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -776,7 +776,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -820,7 +820,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -864,7 +864,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -908,7 +908,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -952,7 +952,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -996,7 +996,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -1040,7 +1040,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
-          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
+          "sha256": "3106E57F61143E5733A381127BA976FDC2566AC4E17B8F848BD5E139D78757FD"
         },
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
@@ -1069,7 +1069,7 @@
           "kind": "test",
           "target": "XicMessagesCommand",
           "assertion": "J15-xic-runtime kind export/storage fact: every assigned native branch and complete message passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -1083,7 +1083,7 @@
           "kind": "test",
           "target": "XicMessagesCommand",
           "assertion": "J15-xic-runtime kind format/export: every assigned native branch and complete message passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\j15-xic-messages-runtime\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\j15-xic-messages-runtime\\proofs.log",
           "inspectedBy": ""
         }
       ]

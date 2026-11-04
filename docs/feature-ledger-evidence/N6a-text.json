@@ -5,56 +5,56 @@
   "runs": [
     {
       "id": "text-tool",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved \u00222026-11-03 14:08:50 -0800\u0022",
-      "executedAt": "2026-11-03 14:08:50 -0800",
-      "commit": "3ab0bd7d5da0dc6900afda91c85ea5985fffa0ae",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261103-165518-assay\\text-preserved \u00222026-11-03 16:57:12 -0800\u0022",
+      "executedAt": "2026-11-03 16:57:12 -0800",
+      "commit": "d4f70fd42dcc26698987e37401811e082f6b3197",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\text.log",
-          "sha256": "1A2A5FE78D270B4CA90CF5362283307CF3AFB1EC319D9A42027187F284090466"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.log",
+          "sha256": "8AD1F37C1CDDFB077ECD4C06ADB998C83C6314A1203095550675400B0823388B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\text.json",
-          "sha256": "13720366FCF02448997FB39AC7FFDAFFF42FA8424E8CBFD8A1FBA75C6473259B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.json",
+          "sha256": "A134DA951739100D47C52F70F1948885E8A6E894C88DE3D8B0873249AF426CE9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant2.dll",
-          "sha256": "2451E1F61FE7AD28EA2398FDA096EC1E99D532BA9C159F63DB791F9B6B908B9D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant2.dll",
+          "sha256": "A3FB813739F652F2C410A56EAE642455885EFDCA754573C9CC7FECC47282ECF9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant2.pdb",
-          "sha256": "7539F8D5795B7902E70DAE40EB0C63847B881ED1670D6A4FDA5744C6ED6AEC90"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant2.pdb",
+          "sha256": "4B4DEC5344F4D55BA08929466F681704DA076668985E63A766CD331309CA3D33"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Core.dll",
-          "sha256": "597BF4DBBF66E40BB6FB46AE769CACCBFDC51BEE0874A5E043377A282237B68B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Core.dll",
+          "sha256": "A833B10A087C334BFCB75BED61E900D1ACD67CA496A3FF1B2450764CA6917364"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Core.pdb",
-          "sha256": "107A6D0A90878DF01C2474A375BBD845B667C345AE298D7BB56FEC811D14BABD"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Core.pdb",
+          "sha256": "13B93CB16B590C83A18FD2B0961370CAAA44DF8826E4AF5E0FC7B64975F05B89"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "49C720B5ECD30B7BD86E4443AF12603A99D50EDB0B2DDB51AEA09C11775DCE64"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "2B9CC4F338F66ADC12A96558DC81C1168C77A1F64EC51A4B858F4FD22A0555F9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
           "sha256": "2CB78207901A4D7ACADF502A2EA634EFA79F3C1FC984986B33E5559BAD99FD21"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
           "sha256": "5DF4825EB752822347F0BCA69799D5F85074B6233EC741A6F9FC8186AE2BD721"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
           "sha256": "76B82F938173EA4E342000A363089B287BD5B2A897FDC8872B5EDB5319BB2F12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "7FFE973E1D4F66812812B051DAB78C93169902380838CFA92C011F86B1C3A02D"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-gate"
+      "workingDirectory": "D:\\FamilyQuant-wt\\assay"
     }
   ],
   "rows": [
@@ -64,13 +64,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::AfterRegrouping()",
-          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
+          "sha256": "F48CAEFDA7802EA4219B09DD9922EA9227549D0DF7C37B360A69143ECDF19018"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass197_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
+      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass198_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
     },
     {
       "observationId": "FQ15-053B8D2DA30E",
@@ -162,13 +162,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::AfterRegrouping()",
-          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
+          "sha256": "F48CAEFDA7802EA4219B09DD9922EA9227549D0DF7C37B360A69143ECDF19018"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass197_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
+      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass198_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
     },
     {
       "observationId": "FQ15-1EA3C134F3CD",
@@ -176,7 +176,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::DataGridResultGrid_CellEditEnding(Object,System.Windows.Controls.DataGridCellEditEndingEventArgs)",
-          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
+          "sha256": "F48CAEFDA7802EA4219B09DD9922EA9227549D0DF7C37B360A69143ECDF19018"
         }
       ],
       "proofs": [],
@@ -260,13 +260,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::AfterRegrouping()",
-          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
+          "sha256": "F48CAEFDA7802EA4219B09DD9922EA9227549D0DF7C37B360A69143ECDF19018"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Regrouped, but not recalculated\u0022 (SHA256 A4622A4D2C50551F) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass197_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
+      "compared": "frozen literal \u0022Regrouped, but not recalculated\u0022 (SHA256 A4622A4D2C50551F) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass198_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
     },
     {
       "observationId": "FQ15-26CEF1599F8D",
@@ -358,13 +358,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::AfterRegrouping()",
-          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
+          "sha256": "F48CAEFDA7802EA4219B09DD9922EA9227549D0DF7C37B360A69143ECDF19018"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass197_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
+      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass198_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
     },
     {
       "observationId": "FQ15-3CCA2EC1F845",
@@ -442,13 +442,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::AfterRegrouping()",
-          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
+          "sha256": "F48CAEFDA7802EA4219B09DD9922EA9227549D0DF7C37B360A69143ECDF19018"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass197_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
+      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass198_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
     },
     {
       "observationId": "FQ15-47E6689D468D",
@@ -498,13 +498,13 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "FamilyQuant.MainWindow/ShellViewPresenter::PresentCompute()",
-          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
+          "sha256": "039ED92782FD25B4FD5D63DAF1901BFFE60B81F27DEA7644F5CC86952ECA08E7"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The spectrum comparison CSV has already been written to?\u0022 (SHA256 419A401725BFC5B3) verbatim in FamilyQuant2.dll FamilyQuant.MainWindow/ShellViewPresenter::PresentCompute() [FamilyQuant/MainWindow.Presentation.cs]; feature member MainWindow.MenuItemComputeXic_Click or ShellViewPresenter.PresentCompute; reached as delegate FamilyQuant.MainWindow::\u003CInitializeNavigation\u003Eb__98_0(FamilyQuant.ShellDestination), 3 steps from the entry point"
+      "compared": "frozen literal \u0022The spectrum comparison CSV has already been written to?\u0022 (SHA256 419A401725BFC5B3) verbatim in FamilyQuant2.dll FamilyQuant.MainWindow/ShellViewPresenter::PresentCompute() [FamilyQuant/MainWindow.Presentation.cs]; feature member MainWindow.MenuItemComputeXic_Click or \u003CComputeAsync\u003Ed__98.MoveNext or ShellViewPresenter.PresentCompute; reached as delegate FamilyQuant.MainWindow::\u003CInitializeNavigation\u003Eb__98_0(FamilyQuant.ShellDestination), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-4ED9B41C0295",
@@ -708,13 +708,13 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "FamilyQuant.MainWindow/ShellViewPresenter::PresentCompute()",
-          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
+          "sha256": "039ED92782FD25B4FD5D63DAF1901BFFE60B81F27DEA7644F5CC86952ECA08E7"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022 quant row(s) were computed and are now held by the project.??\u0022 (SHA256 FD98FB44110F0410) verbatim in FamilyQuant2.dll FamilyQuant.MainWindow/ShellViewPresenter::PresentCompute() [FamilyQuant/MainWindow.Presentation.cs]; feature member MainWindow.MenuItemComputeXic_Click or ShellViewPresenter.PresentCompute; reached as delegate FamilyQuant.MainWindow::\u003CInitializeNavigation\u003Eb__98_0(FamilyQuant.ShellDestination), 3 steps from the entry point"
+      "compared": "frozen literal \u0022 quant row(s) were computed and are now held by the project.??\u0022 (SHA256 FD98FB44110F0410) verbatim in FamilyQuant2.dll FamilyQuant.MainWindow/ShellViewPresenter::PresentCompute() [FamilyQuant/MainWindow.Presentation.cs]; feature member MainWindow.MenuItemComputeXic_Click or \u003CComputeAsync\u003Ed__98.MoveNext or ShellViewPresenter.PresentCompute; reached as delegate FamilyQuant.MainWindow::\u003CInitializeNavigation\u003Eb__98_0(FamilyQuant.ShellDestination), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-7C5612C5D068",
@@ -806,7 +806,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::DataGridResultGrid_CellEditEnding(Object,System.Windows.Controls.DataGridCellEditEndingEventArgs)",
-          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
+          "sha256": "F48CAEFDA7802EA4219B09DD9922EA9227549D0DF7C37B360A69143ECDF19018"
         }
       ],
       "proofs": [],
@@ -918,7 +918,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::DataGridResultGrid_CellEditEnding(Object,System.Windows.Controls.DataGridCellEditEndingEventArgs)",
-          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
+          "sha256": "F48CAEFDA7802EA4219B09DD9922EA9227549D0DF7C37B360A69143ECDF19018"
         }
       ],
       "proofs": [],
@@ -1343,7 +1343,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind code fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1357,7 +1357,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind control: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1371,7 +1371,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind help fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1385,7 +1385,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind option/copy: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1399,7 +1399,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind tooltip: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-165518-assay\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
