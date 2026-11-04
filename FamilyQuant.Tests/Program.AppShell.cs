@@ -106,8 +106,8 @@ namespace FamilyQuant.Tests
 
         private static void DeploymentIdentityTests()
         {
-            Check("the prepared application assembly is version 2.1.3.0",
-                typeof(AppVersionInfo).Assembly.GetName().Version == new Version(2, 1, 3, 0));
+            Check("the prepared application assembly is version 2.1.4.0",
+                typeof(AppVersionInfo).Assembly.GetName().Version == new Version(2, 1, 4, 0));
 
             DirectoryInfo? root = new DirectoryInfo(AppContext.BaseDirectory);
             while (root != null && !File.Exists(Path.Combine(root.FullName, "FamilyQuant2.sln")))
@@ -125,15 +125,15 @@ namespace FamilyQuant.Tests
 
             Check("assembly and file versions match the prepared deployment version",
                 new[] { "Version", "AssemblyVersion", "FileVersion" }
-                    .All(name => Property(project, name) == "2.1.3.0") &&
-                Property(project, "Title") == "FamilyQuant 2.1.3" &&
-                Property(profile, "ApplicationVersion") == "2.1.3.0" &&
+                    .All(name => Property(project, name) == "2.1.4.0") &&
+                Property(project, "Title") == "FamilyQuant 2.1.4" &&
+                Property(profile, "ApplicationVersion") == "2.1.4.0" &&
                 Property(profile, "ApplicationRevision") == "0");
             const string install = "http://patternlabforproteomics.org/familyquant2/";
             Check("2.x installs and updates from its separate address",
                 Property(profile, "InstallUrl") == install && Property(profile, "UpdateUrl") == install);
             Check("the installed product has its own Start menu identity",
-                Property(profile, "ProductName") == "FamilyQuant 2.1.3");
+                Property(profile, "ProductName") == "FamilyQuant 2.1.4");
             Check("automatic foreground updates stay enabled",
                 string.Equals(Property(profile, "UpdateEnabled"), "true", StringComparison.OrdinalIgnoreCase) &&
                 Property(profile, "UpdateMode") == "Foreground");

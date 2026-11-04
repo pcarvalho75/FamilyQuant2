@@ -557,6 +557,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | M2j | Design pass on Ana's full sample: renders at 1440 and 390 px, light and dark, pop-ups open; READY M2 | M | 0.3 | 🟢 | M1o, M3b | Screenshots posted with the changes listed | LK | | 0 | 0 | |
 | M2k | Design critique by FQOpus (Opus 5.5, Paulo's Fiocruz account): renders on Ana's data, a ranked punch list, top five marked do now; FQLook applies them | L | 0.3 | 🟢 | M2j | PUNCHLIST posted; FQOpus approves FQLook's next render | OP | | 0 | 0 | |
 | M2l | The dot plot (Paulo 22:23, 22:27, 22:32): database entries against ion current by default, with X, Y and Size selectable from the per-family measures; family colours, tooltips, linked selection | M | 0.4 | 🟢 | M3e | Renders on Ana's real page and the synthetic one; FQReview2 approves | LK | | 0 | 0 | |
+| G2a | Default axes as Paulo first asked: X database entries, Y mean ion current share, Size proteins with their own peptide, when all three exist; otherwise today's defaults. The tooltip lists database entries. Built now against an injected stand-in payload | L | 0.3 | 🟢 | G2b, G3b | Test of the default choice for both cases; page tests green | LK | | 0 | 0 | |
 
 ### W1 Data and export (FQResults, FQShell and FQAssay)
 
@@ -647,4 +648,11 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | G1a | Science check of ruling D55: read the curation code and confirm that UserID is the family assignment of a database entry, that decoys and contaminants are left out, that a panel family takes the distinct union of its member families, and that Others is not plotted | L | 0.2 | 🟢 | G1b | APPROVED, or a corrected rule the desk adopts before G1b merges | GR | | 0 | 0 | |
+
+### W3 Reviews and the gate
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| G3c | Version 2.1.4 in all three places and the release notes: the database-entries axis, shown for old projects with no Compute | L | 0.2 | 🟢 | G3e | Versions read 2.1.4.0; notes claim only what landed | AS | | 0 | 0 | |
+| G3e | Review of the version and notes (G3c) | L | 0.1 | G3c | G3d | APPROVED | GR3 | | 0 | 0 | |
 

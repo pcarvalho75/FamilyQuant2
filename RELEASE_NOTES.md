@@ -4,6 +4,15 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.4 (release candidate, not published)
+
+- **Database entries in the dot plot.** The interactive report's dot plot can
+  show each family's database entries on X, Y or Size. When the project has these
+  counts, it opens with database entries against mean ion current share.
+- **Existing projects.** Use **File > Export report** to show the new axis in an
+  existing project's interactive report, with no Compute needed. Stored and
+  printed numbers are unchanged.
+
 ## 2.1.3 (release candidate, not published)
 
 - **A Windows installer.** Install FamilyQuant for your Windows user account,

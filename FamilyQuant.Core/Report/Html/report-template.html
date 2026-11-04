@@ -4683,12 +4683,16 @@
             }
             const firstAvailable = (...ids) =>
               ids.find((id) => dotMeasure(id)) || dotMeasures[0].id;
-            dotState.x = firstAvailable(
-              "proteins",
-              "databaseEntries",
-              "peptides",
-              "uniqueProteins",
-            );
+            dotState.x = ["databaseEntries", "mean", "uniqueProteins"].every(
+              (id) => dotMeasure(id),
+            )
+              ? "databaseEntries"
+              : firstAvailable(
+                  "proteins",
+                  "databaseEntries",
+                  "peptides",
+                  "uniqueProteins",
+                );
             dotState.y = firstAvailable("mean");
             dotState.size = firstAvailable(
               "uniqueProteins",

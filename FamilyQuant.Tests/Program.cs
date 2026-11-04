@@ -352,6 +352,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => HtmlReportDataTests());
             suite.Add(() => DatabaseEntryCountTests(null));
             suite.Add(() => HtmlDatabaseEntryTests());
+            suite.Add(() => HtmlDotDefaultsTests(Path.Combine(workDir, "html-dot-defaults")));
             suite.Add(() => SetupTests(Path.Combine(workDir, "setup")));
             suite.AddWithApplication(() => SetupWindowTests());
             suite.Add(() => HtmlCoverageTests());
