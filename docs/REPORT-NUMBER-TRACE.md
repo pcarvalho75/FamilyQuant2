@@ -78,4 +78,7 @@ short labels use G3 while retaining the native fraction unit and scale.
 Dot-plot axis labels and ticks use the shared `HtmlReportAxisTicks.TryResolve` contract.
 Their text, geometry value and unit must match its result. Every `dotMeasures` label,
 tick and per-family value ID is checked; each missing ID retains its own trace error.
+Axis ticks use `axis-plain`: exact plain integer/decimal labels from their recipe, with raw
+geometry retained. Scientific notation and binary rounding noise are rejected; measured-value
+G3 short labels keep their existing format.
 `--test-html-number-trace` runs positive and negative fixtures and is enrolled in the suite.
