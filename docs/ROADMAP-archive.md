@@ -556,6 +556,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | M2i | Phone layout, print, reduced motion, keyboard and focus | L | 0.2 | M2c, M2d, M2e, M2f, M2g | M2j | 390 px usable; print preview clean; Tab reaches everything | LK | | 0 | 0 | |
 | M2j | Design pass on Ana's full sample: renders at 1440 and 390 px, light and dark, pop-ups open; READY M2 | M | 0.3 | 🟢 | M1o, M3b | Screenshots posted with the changes listed | LK | | 0 | 0 | |
 | M2k | Design critique by FQOpus (Opus 5.5, Paulo's Fiocruz account): renders on Ana's data, a ranked punch list, top five marked do now; FQLook applies them | L | 0.3 | 🟢 | M2j | PUNCHLIST posted; FQOpus approves FQLook's next render | OP | | 0 | 0 | |
+| M2l | The dot plot (Paulo 22:23, 22:27, 22:32): database entries against ion current by default, with X, Y and Size selectable from the per-family measures; family colours, tooltips, linked selection | M | 0.4 | 🟢 | M3e | Renders on Ana's real page and the synthetic one; FQReview2 approves | LK | | 0 | 0 | |
 
 ### W1 Data and export (FQResults, FQShell and FQAssay)
 

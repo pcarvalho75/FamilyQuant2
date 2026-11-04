@@ -74,7 +74,6 @@ Plots, not text (Paulo, 20:15: "this html page is basically plots, this is not s
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| M2l | The dot plot (Paulo 22:23, 22:27, 22:32): database entries against ion current by default, with X, Y and Size selectable from the per-family measures; family colours, tooltips, linked selection | M | 0.4 | 🟢 | M3e | Renders on Ana's real page and the synthetic one; FQReview2 approves | LK | | 0 | 0 | |
 
 ### W3 Review and merge
 
