@@ -88,5 +88,14 @@ internal static partial class Program
         Check("HTML preserves pooled within-family parts independently of the headline mean", family.Parts.Count == 2
             && model.Fields[family.Parts[0].Share!].Text == "60" && model.Fields[family.Parts[1].Share!].Text == "40");
         Check("HTML peptide evidence count stays separate from the database-protein estimate", model.Fields[family.Peptides!].Text == "9" && model.Fields[family.Proteins!].Text == "225");
+        var owned = fixture.Document with { Sections = fixture.Document.Sections.Append(
+            new ReportSection("family:cedar", "Cedar", Array.Empty<ReportBlock>())).ToArray() };
+        var context = fixture.Context with { FamilySections = new Dictionary<string, string> { ["7"] = "family:cedar" } };
+        var omitted = HtmlReportPayloadBuilder.Build(owned, sheets, new() { ExcludedIds = new[] { "family:cedar" } }, context);
+        var retained = omitted.Composition.Families[0];
+        Check("unchecked family owner keeps the Results headline but omits all detail fields", retained.Mean != null
+            && omitted.Fields[retained.Mean].Text == "38.5988" && retained.Parts.Count == 0 && retained.Runs.Count == 0
+            && retained.Coverage.Count == 0 && retained.Peptides == null
+            && omitted.Fields.Values.All(f => f.Text != "Class A" && f.Text != "run-a"));
     }
 }

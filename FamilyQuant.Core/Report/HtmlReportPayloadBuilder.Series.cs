@@ -57,6 +57,9 @@ public static partial class HtmlReportPayloadBuilder
         private HtmlReportFamily FamilyDetails(HtmlReportFamily family, FamilyRunShareSummary? summary)
         {
             if (family.IsOthers) return family;
+            // A selected Results headline is independent of the family-detail checkbox. Do not
+            // allocate any detail fields for an excluded family owner, even from global worksheets.
+            if (context.FamilySections.TryGetValue(family.Id, out var owner) && !sections.ContainsKey(owner)) return family;
             var runs = new List<HtmlFamilyRun>();
             if (!excluded.Contains("family-run-shares"))
             {
