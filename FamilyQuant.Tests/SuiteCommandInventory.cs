@@ -345,6 +345,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-assignment-presence-copies", "FamilyQuant.Tests.Program.AssignmentPresenceCopyTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-database-entries", "FamilyQuant.Tests.Program.HtmlDatabaseEntryTests()"),
         SuiteCommandRule.Covered("--test-database-entry-trace", "FamilyQuant.Tests.Program.DatabaseEntryTraceTests(System.String)"),
+        SuiteCommandRule.Covered("--test-ledger-added-contracts", "FamilyQuant.Tests.Program.LedgerAddedContractsTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-dot-defaults", "FamilyQuant.Tests.Program.HtmlDotDefaultsTests(System.String)"),
         SuiteCommandRule.Covered("--test-setup", "FamilyQuant.Tests.Program.SetupTests(System.String)"),
         SuiteCommandRule.Covered("--test-setup-window", "FamilyQuant.Tests.Program.SetupWindowTests()"),

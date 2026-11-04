@@ -396,6 +396,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => { if (FeatureLedgerReady()) FeatureLedgerReceiptGuardTests(); });
             suite.Add(() => { if (FeatureLedgerReady()) FeatureLedgerReceiptFixtureTests(); });
             suite.Add(() => { if (FeatureLedgerReady()) LedgerImportBatchTests(); });
+            suite.Add(() => LedgerAddedContractsTests(null));
             suite.Add(() => { if (FeatureLedgerReady()) ShellMetadataComparisonTests(); });
             suite.Add(() => { if (FeatureLedgerReady()) ShellMessageFrameTests(); });
             suite.Add(() => { if (FeatureLedgerReady()) FeatureLedgerLiveTests(); });
