@@ -2298,12 +2298,147 @@
             state.all = !state.all;
             renderRanking();
           };
-          document.querySelector('#family-detail').hidden = true;
+          function stat(host, label, id) {
+            if (!exists(id)) return;
+            const e = node("div", "mini-stat");
+            e.append(field(id, "strong"), node("small", "", label));
+            host.append(e);
+          }
+          function familyDialog(f) {
+            const content = [];
+            const dl = node("dl");
+            for (const [label, id] of [
+              ["Mean share of credited family signal", f.mean],
+              ["Run-to-run standard deviation", f.sd],
+              ["Coefficient of variation", f.cv],
+              ["Share of whole measured signal", f.wholeMeasured],
+              ["Protein groups", f.proteins],
+              ["Family-unique protein groups", f.uniqueProteins],
+              ["Peptides", f.peptides],
+            ])
+              if (exists(id)) dl.append(node("dt", "", label), field(id, "dd"));
+            content.push(
+              node(
+                "p",
+                "",
+                "The family share describes abundance. Protein and peptide counts describe the evidence and diversity; they are separate quantities.",
+              ),
+              dl,
+            );
+            if (f.runs?.length) {
+              content.push(node("h3", "", "By run"));
+              const runs = node("dl");
+              for (const r of f.runs)
+                runs.append(field(r.name, "dt"), field(r.share, "dd"));
+              content.push(runs);
+            }
+            popup(field(f.name), content);
+          }
+          function figureCard(fig, host, compact = false) {
+            if (
+              !exists(fig.title) ||
+              typeof fig.png !== "string" ||
+              !/^data:image\/png;base64,[A-Za-z0-9+/=\r\n]+$/.test(fig.png)
+            )
+              return;
+            const button = node(
+              "button",
+              compact ? "coverage-figure" : "figure-card",
+            );
+            const img = node("img");
+            img.src = fig.png;
+            img.alt = "";
+            img.dataset.fqFigure = fig.sourceFigureId;
+            img.loading = "lazy";
+            button.append(img, field(fig.title, "span"));
+            button.onclick = () => {
+              const content = [];
+              const full = img.cloneNode();
+              full.loading = "eager";
+              full.className = "full-figure";
+              content.push(full);
+              if (exists(fig.caption)) content.push(field(fig.caption, "p"));
+              popup(field(fig.title), content, true);
+            };
+            host.append(button);
+          }
+          function renderFamily() {
+            const f = state.selected;
+            $("family-detail").hidden = !f;
+            if (!f) return;
+            bind("family-title", f.name);
+            $("family-color").style.background = familyColor(f);
+            $("family-info").onclick = () => familyDialog(f);
+            const stats = $("family-stats");
+            stats.replaceChildren();
+            stat(stats, "Mean family share", f.mean);
+            stat(stats, "Run-to-run SD", f.sd);
+            stat(stats, "Protein groups", f.proteins);
+            stat(stats, "Peptides", f.peptides);
+            const parts = $("subclasses");
+            parts.replaceChildren();
+            const groups = groupedParts(f);
+            for (const [kind, items] of groups) {
+              parts.append(node("h3", "", partTitle(kind)));
+              const bars = node("div", "subclass-bars"),
+                list = node("div", "subclass-list");
+              const total = items.reduce(
+                (s, p) => s + Math.max(0, val(p.share) ?? 0),
+                0,
+              );
+              items.forEach((p, i) => {
+                const b = node("button", "subclass-segment");
+                b.style.background = colors[i % colors.length];
+                b.style.flexGrow = Math.max(0, val(p.share) ?? 0) / total;
+                const label = field(p.name);
+                label.className = "sr-only";
+                b.append(label);
+                b.onclick = () => partDialog(p);
+                bars.append(b);
+                const row = node("div", "subclass-row"),
+                  name = node("span"),
+                  sw = node("span", "swatch");
+                sw.style.background = colors[i % colors.length];
+                name.append(sw, field(p.name));
+                row.append(name, field(p.share));
+                list.append(row);
+              });
+              parts.append(
+                bars,
+                list,
+                node("p", "fine-print", "Pooled shares within this family."),
+              );
+            }
+            if (!groups.size)
+              parts.append(
+                node("h3", "", "Within-family detail"),
+                node(
+                  "p",
+                  "fine-print",
+                  "No within-family parts were included in this report selection.",
+                ),
+              );
+            const coverage = $("coverage-content");
+            coverage.replaceChildren();
+            $("protein-select").hidden = true;
+            $("protein-panel").querySelector("h3").textContent =
+              "Sequence coverage";
+            for (const fig of f.coverage || []) figureCard(fig, coverage, true);
+            if (!coverage.childElementCount)
+              coverage.append(
+                node(
+                  "p",
+                  "empty",
+                  "No positioned coverage figure is available in this report selection.",
+                ),
+              );
+          }
           document.querySelector('#evidence-section').hidden = true;
           document.querySelector('#others-section').hidden = true;
           document.querySelector('#method-section').hidden = true;
           renderRing();
           renderRanking();
+          renderFamily();
           $("app").hidden = false;
         } catch (error) {
           $("load-error").hidden = false;
