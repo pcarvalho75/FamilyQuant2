@@ -1741,6 +1741,31 @@
           display: none !important;
         }
       }
+      .metric-button {
+        min-height: 24px;
+      }
+      .rank-name,
+      .rank-value.metric-button {
+        min-height: 28px;
+      }
+      .protein-selector h3 {
+        min-width: 0;
+        flex: 1;
+      }
+      .protein-selector select {
+        min-width: 0;
+        max-width: 55%;
+      }
+      .positions-button {
+        font-size: 12px;
+        padding: 8px 0;
+        margin-top: 6px;
+      }
+      @media print {
+        .positions-button {
+          display: none !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -2499,18 +2524,24 @@
               name.onfocus = () => preview(f);
               name.onblur = () => preview(null);
               const chart = node("span", "rank-chart");
+              const pointHeight = Math.max(25, (f.runs || []).length * 14 + 10);
+              chart.style.height = pointHeight + "px";
+
               const track = node("span", "rank-track");
               track.setAttribute("aria-hidden", "true");
+              track.style.top = pointHeight / 2 - 2 + "px";
               chart.append(track);
               const fill = node("span", "rank-fill");
               fill.setAttribute("aria-hidden", "true");
               fill.style.width =
                 Math.max(0, (val(f.mean) ?? 0) / maximum) * 100 + "%";
               fill.style.background = familyColor(f);
+              fill.style.top = pointHeight / 2 - 2 + "px";
               chart.append(fill);
               (f.runs || []).forEach((r, i) => {
                 if (val(r.share) === null) return;
                 const dot = node("button", "rank-point");
+                dot.style.top = i * 14 + "px";
                 dot.style.left =
                   Math.max(0, val(r.share) / maximum) * 100 + "%";
                 dot.style.setProperty(
@@ -2575,7 +2606,8 @@
                   popup(field(r.name), [field(f.name, "p"), dl]);
                 };
                 chart.append(dot);
-                if (exists(r.name)) runNames.set(r.name, i);
+                if (exists(r.name) && !runNames.has(text(r.name)))
+                  runNames.set(text(r.name), { id: r.name, index: i });
               });
               const value = metric(f.mean);
               value.className = "rank-value metric-button";
@@ -2612,7 +2644,7 @@
             $("rank-scale").replaceChildren();
             const key = $("run-key");
             key.replaceChildren();
-            for (const [id, i] of runNames) {
+            for (const { id, index: i } of runNames.values()) {
               const e = node("span"),
                 marker = node(
                   "span",
@@ -2870,6 +2902,26 @@
                 legend.append(entry);
               }
               coverage.append(meta, track, legend);
+              const inspect = node(
+                "button",
+                "quiet-button positions-button",
+                "Inspect positions",
+              );
+              inspect.onclick = () => {
+                const list = node("dl");
+                for (const span of [
+                  ...(item.domains || []),
+                  ...(item.peptides || []),
+                ]) {
+                  if (!exists(span.label)) continue;
+                  list.append(field(span.label, "dt"));
+                  if (exists(span.range)) list.append(field(span.range, "dd"));
+                }
+                popup(field(exists(item.protein) ? item.protein : item.title), [
+                  list,
+                ]);
+              };
+              coverage.append(inspect);
             };
             selector.onchange = draw;
             draw();
