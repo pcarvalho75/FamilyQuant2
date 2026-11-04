@@ -66,7 +66,7 @@ public static partial class HtmlReportPayloadBuilder
             string? authors = sections.ContainsKey(ReportSectionIds.Title) && document.Authors.Length > 0
                 ? Add(document.Authors, new() { Kind = "word-property", Property = "Creator" }) : null;
             var families = Families();
-            return new()
+            var payload = new HtmlReportPayload
             {
                 Title = title, Authors = authors, Links = links,
                 Composition = new() { IsAdditive = context.IsAdditive && !HasBlock("composition-overlap-warning"), Families = families },
@@ -74,6 +74,8 @@ public static partial class HtmlReportPayloadBuilder
                 // D47: this is a plot-first page. No methods/quality prose or interpretation block.
                 Fields = fields,
             };
+            // Append presentation-only fields after every existing report binding, retaining IDs.
+            return payload with { DotMeasures = DotMeasures(families) };
         }
 
         private bool HasBlock(string id) => !excluded.Contains(id) && sections.Values.Any(s => s.Blocks.Any(b => b.Id == id));

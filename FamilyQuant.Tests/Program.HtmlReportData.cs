@@ -66,6 +66,7 @@ internal static partial class Program
         HtmlReportSeriesTests();
         HtmlReportSummaryTests();
         HtmlRunLabelTests();
+        HtmlDotMeasureTests();
     }
 
     private static void HtmlRunLabelTests()
