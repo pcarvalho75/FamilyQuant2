@@ -68,6 +68,16 @@ internal static partial class Program
             ReportProjectExporter.Write(prepared, word, operation: operation);
             if (!File.Exists(html) || !expectedWord.SequenceEqual(File.ReadAllBytes(word)) || !expectedBook.SequenceEqual(File.ReadAllBytes(workbook)))
                 throw new InvalidDataException("The three-file export is incomplete or HTML changed the Word/workbook bytes.");
+            if (projectHash != DeliveryWorkspace.Sha256(project) || deliveredHash != DeliveryWorkspace.Sha256(delivered)
+                || snapshot != HtmlStoredSnapshot(curation, rows, manifest))
+                throw new InvalidDataException("An input changed during the stored-only export.");
+            stage.WriteText("export-proof.json", JsonSerializer.Serialize(new { ProjectSha256 = projectHash, DeliveredWordSha256 = deliveredHash,
+                StoredSnapshotSha256 = snapshot, InputsUnchanged = true, AllHeadlineLabelsAndMeansEqualDeliveredWord = true,
+                HeadlineRows = actual.Length, WordBytesUnchangedByHtml = true, WorkbookBytesUnchangedByHtml = true,
+                HtmlBytes = new FileInfo(html).Length, HtmlSha256 = DeliveryWorkspace.Sha256(html),
+                Mode = "Stored results and retained hits only; cache-miss searches refused; no UI open or Compute" }, new JsonSerializerOptions { WriteIndented = true }));
+            if (typeof(ReportNumberTrace).GetMethod("RunHtml", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic) == null)
+            { Log("EXPORT COMPLETE; HTML trace awaits its owned source dependency. Not claiming M1o complete."); return 4; }
             int traceExit = ReportNumberTrace.Run(html, Path.GetDirectoryName(project)!, stage.PathFor("html-trace.csv"));
             if (projectHash != DeliveryWorkspace.Sha256(project) || deliveredHash != DeliveryWorkspace.Sha256(delivered)
                 || snapshot != HtmlStoredSnapshot(curation, rows, manifest))
@@ -99,7 +109,8 @@ internal static partial class Program
     {
         using var hash = SHA256.Create();
         using var stream = new CryptoStream(Stream.Null, hash, CryptoStreamMode.Write);
-        JsonSerializer.Serialize(stream, new { Project = curation.ToJsonText(), Rows = rows, Manifest = manifest });
+        JsonSerializer.Serialize(stream, new { Project = curation.JsonContentSha256(), Rows = rows, Manifest = manifest },
+            new JsonSerializerOptions { NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals });
         stream.FlushFinalBlock();
         return Convert.ToHexString(hash.Hash!);
     }
