@@ -42,7 +42,8 @@ Version 11 delivered 10 steps (in the archive): the clean Recent projects list, 
 | Orchestrator | Claude, main session | Assigns, merges, routes reviews, runs the suite once per release, publishes, keeps this file and the board true. Writes no product code. | |
 | FQFetch (FE) | Sol 6.1 xhigh | W1 Fetch evidence that keeps its work (2.1.7); then W5 Families layout and W6 de novo (2.1.8); then W8 release 2.1.8 | `D:/FamilyQuant-wt/fetch` |
 | FQHome (HM) | Sol 6.1 xhigh | W2 Update and Setup and W3 Close project (2.1.7); W7 release 2.1.7; then W4 Home and one name per thing (2.1.8) | `D:/FamilyQuant-wt/home` |
-| FQKimi (KM) | Kimi Code (K3.1 Pro) | The reviewer (D64), in batches of at most 8; code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-kimi` |
+| FQKimi (KM) | Kimi Code (K3.1 Pro) | Reviewer (D64), with FQReviewDS; the desk gives each finished step to whichever reviewer is free, in batches of at most 8; code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-kimi` |
+| FQReviewDS (DS) | DeepSeek V4.1 Flash | Second reviewer (D67); code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
 
 Kimi limits (Paulo, 11-01 and 11-02): one Kimi instance at a time across every project, at most 15 calls in any rolling 5 hours and 5 reviews in any rolling hour, no subagents. Orion runs its own Kimi worker at times; the desk launches FQKimi only when no other Kimi worker runs.
 
@@ -187,6 +188,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D63 | Ana's suggestions of 11-05 | All built as the desk proposed, in two releases, each published when every check is green (like D56 and D62): 2.1.7 = Fetch evidence that keeps its work and resumes, the update reopens the app, Setup compares versions, File > Close project; 2.1.8 = Home with five numbered steps and one name per thing (Ana's names, Analysis becomes Tools), the Families layout, USearch ID shown, the de novo Help page. Paulo, 11-05 12:21 ("lets ready every suggestion from ana as you suggested") |
 | D64 | Who builds and reviews | Two Sol 6.1 builders, FQFetch and FQHome, and one Kimi reviewer, FQKimi, in batches; this replaces D59 (DeepSeek only). Kimi, like DeepSeek (D58), sees code and synthetic data only. Paulo, 11-05 12:21 ("2 sol workers and 1 kimi reviewer") |
 | D66 | The same-scan conflict | Measured first on the real-data set (Z6a), then Paulo decides (D65); nothing changes before. Paulo, 11-05 12:21, accepting the desk's pick |
+| D67 | More hands | Paulo, 11-05 12:38: "hire one more worker, an opus worker from this account, and also hire deepseek as a second reviewer". DeepSeek FQReviewDS joined at 12:41 (code and synthetic data only, as D58). The Opus on the Fiocruz account could not start at 12:42: its weekly limit is reached until 11-06 08:00; W4 stays with FQHome until Paulo chooses another engine |
 
 ## Risks and triggers
 
