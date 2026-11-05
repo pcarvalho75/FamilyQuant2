@@ -6,7 +6,7 @@ namespace FamilyQuant.Setup.Engine;
 public sealed class TestSetupPlatform : ISetupPlatform
 {
     public sealed record State(InstallRegistration? Registration = null, bool StartMenu = false, bool Desktop = false,
-        bool Running = false, bool WaitExited = true, bool Launched = false);
+        bool Running = false, bool WaitExited = true, bool Launched = false, int LaunchCount = 0);
     private readonly string statePath;
     public string Root { get; }
     public string UserDataDirectory => Path.Combine(Root, "user-data");
@@ -50,5 +50,5 @@ public sealed class TestSetupPlatform : ISetupPlatform
         var version = System.Diagnostics.FileVersionInfo.GetVersionInfo(appPath);
         return version.ProductName == SetupProduct.Id && Version.TryParse(version.FileVersion, out var value) ? value : null;
     }
-    public void Launch(string directory) => SetState(Current with { Launched = true });
+    public void Launch(string directory) => SetState(Current with { Launched = true, LaunchCount = Current.LaunchCount + 1 });
 }

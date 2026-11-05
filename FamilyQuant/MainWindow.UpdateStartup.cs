@@ -24,11 +24,21 @@ public partial class MainWindow
         {
             if (startupUpdateScheduled) return;
             startupUpdateScheduled = true;
+            if (System.Reflection.Assembly.GetEntryAssembly() == typeof(MainWindow).Assembly)
+                ShowUpdateCompletionNotice(AppContext.BaseDirectory, AppVersionInfo.Current());
             // Harness-created windows cannot make live requests, even when testing saved preferences.
             if (System.Reflection.Assembly.GetEntryAssembly() != typeof(MainWindow).Assembly && UpdateCheckHandlerOverride == null) return;
             StartupUpdateCheckTask = CheckForUpdatesAtStartupAsync();
         };
         Closed += (_, _) => updateWindowLifetime.Cancel();
+    }
+
+    public bool ShowUpdateCompletionNotice(string directory, string currentVersion)
+    {
+        string? message = Deployment.UpdateCompletionMarker.Consume(directory, currentVersion);
+        if (message == null) return false;
+        StatusModel.ShowMessage(message);
+        return true;
     }
 
     private async Task CheckForUpdatesAtStartupAsync()

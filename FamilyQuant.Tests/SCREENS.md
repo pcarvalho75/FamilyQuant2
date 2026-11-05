@@ -33,6 +33,12 @@ does not save a profile preference.
 Add `--screen-shell-status` to hide curation's inline status banner through the
 same `UseShellStatusBar` property the shell uses. The manifest records this flag.
 
+Add `--screen-update-complete` to show a synthetic once-only update completion
+notice on Home through the normal marker consumer. No application is installed.
+
+Add `--screen-close-project` to open and close a synthetic project before the Home
+capture. This checks the post-close screen and dependent sidebar states.
+
 `screens.json` lists all 56 PNGs, input paths and SHA-256 hashes, runtime and OS.
 A failed capture or changed input returns a nonzero exit code and does not write
 a successful manifest. Run into a fresh step directory for review provenance.
