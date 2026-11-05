@@ -11,6 +11,12 @@ internal static partial class Program
     private static IEnumerable<TestCommand> EvidenceCommandTable() =>
     [
         new("--test-evidence-fetch-atomic", 1, TestCommandPhase.Raw, EvidenceAtomicRequested, RunEvidenceAtomic),
+        new("--test-evidence-resume", 1, TestCommandPhase.Raw, args => args.Contains("--test-evidence-resume", StringComparer.Ordinal), (_, workDir) =>
+        {
+            EvidenceResumeTests(workDir);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
         new("--test-uniprot-retry", 1, TestCommandPhase.Raw, args => args.Contains("--test-uniprot-retry", StringComparer.Ordinal), (_, _) =>
         {
             UniProtRetryTests();

@@ -34,29 +34,45 @@ public static partial class ReferencePanelFetcher
         client.Timeout = TimeSpan.FromSeconds(100);
         client.DefaultRequestHeaders.UserAgent.ParseAdd("FamilyQuant");
         client.DefaultRequestHeaders.AcceptEncoding.ParseAdd("gzip");
+        var cache = batches.Count == 0 ? null : await UniProtBatchCache.OpenAsync(
+            string.Join("\n", batches.Select(b => StreamEndpoint + Uri.EscapeDataString(StreamQuery(b)))),
+            client, handler, options, message => Report(message), cancellationToken, expectedRelease).ConfigureAwait(false);
+        release = cache?.Release;
         Report();
         foreach (List<string> batch in batches)
         {
             cancellationToken.ThrowIfCancellationRequested();
             string query = Uri.EscapeDataString(StreamQuery(batch));
             int announced;
-            // Stream replies omit X-Total-Results. A zero-row search of the identical query supplies
-            // the completeness count without downloading another copy of any protein evidence.
-            using (HttpResponseMessage count = await GetWithRetry(client, CountEndpoint + query, cancellationToken, options,
-                message => Report(message)).ConfigureAwait(false))
+            string url = StreamEndpoint + query;
+            var saved = cache == null ? null : await cache.ReadAsync(url, cancellationToken).ConfigureAwait(false);
+            string json;
+            if (saved == null)
             {
-                CheckRelease(count);
-                if (!count.Headers.TryGetValues("x-total-results", out IEnumerable<string>? totals)
-                    || !int.TryParse(totals.FirstOrDefault(), NumberStyles.None, CultureInfo.InvariantCulture, out announced)
-                    || announced < 0)
-                    throw new InvalidDataException("UniProt omitted the reviewed entry count. No panel was made.");
+                // Stream replies omit X-Total-Results. A zero-row search of the identical query supplies
+                // the completeness count without downloading another copy of any protein evidence.
+                using (HttpResponseMessage count = await GetWithRetry(client, CountEndpoint + query, cancellationToken, options,
+                    message => Report(message)).ConfigureAwait(false))
+                {
+                    CheckRelease(count);
+                    if (!count.Headers.TryGetValues("x-total-results", out IEnumerable<string>? totals)
+                        || !int.TryParse(totals.FirstOrDefault(), NumberStyles.None, CultureInfo.InvariantCulture, out announced)
+                        || announced < 0)
+                        throw new InvalidDataException("UniProt omitted the reviewed entry count. No panel was made.");
+                }
+                using HttpResponseMessage response = await GetWithRetry(client, url, cancellationToken, options,
+                    message => Report(message)).ConfigureAwait(false);
+                CheckRelease(response);
+                if (NextPage(response) != null)
+                    throw new InvalidDataException("UniProt returned an incomplete stream. No panel was made.");
+                json = await ReadStreamJson(response.Content, cancellationToken).ConfigureAwait(false);
             }
-            using HttpResponseMessage response = await GetWithRetry(client, StreamEndpoint + query, cancellationToken, options,
-                message => Report(message)).ConfigureAwait(false);
-            CheckRelease(response);
-            if (NextPage(response) != null)
-                throw new InvalidDataException("UniProt returned an incomplete stream. No panel was made.");
-            string json = await ReadStreamJson(response.Content, cancellationToken).ConfigureAwait(false);
+            else
+            {
+                announced = saved.Announced ?? throw new InvalidDataException("A saved panel batch has no completeness count.");
+                json = saved.Json;
+                Report("Resuming saved reference panel batches");
+            }
             Dictionary<string, ProteinEvidence> parsed = EvidenceFetcher.Parse(json);
             var membership = batch.ToHashSet(StringComparer.OrdinalIgnoreCase);
             int delivered = 0;
@@ -76,6 +92,7 @@ public static partial class ReferencePanelFetcher
             if (announced != delivered)
                 throw new InvalidDataException("UniProt announced " + announced.ToString(CultureInfo.InvariantCulture)
                     + " reviewed entries and delivered " + delivered.ToString(CultureInfo.InvariantCulture) + ". No panel was made.");
+            if (cache != null && saved == null) await cache.StoreAsync(url, json, announced, cancellationToken).ConfigureAwait(false);
             received += delivered;
             for (int i = 0; i < batch.Count; i++)
             {
@@ -87,7 +104,7 @@ public static partial class ReferencePanelFetcher
         cancellationToken.ThrowIfCancellationRequested();
         return new ReferencePanel
         {
-            Provider = "UniProt", Release = release ?? string.Empty, RetrievedAtUtc = DateTimeOffset.UtcNow,
+            Provider = "UniProt", Release = release ?? string.Empty, RetrievedAtUtc = cache?.RetrievedAtUtc ?? options?.UtcNow() ?? DateTimeOffset.UtcNow,
             Families = asked, Entries = entries.Values.ToList(),
         };
 

@@ -7,4 +7,6 @@ namespace FamilyQuant.Evidence;
 public sealed class UniProtFetchOptions
 {
     public Func<TimeSpan, CancellationToken, Task> DelayAsync { get; init; } = Task.Delay;
+    public string? ResumeDirectory { get; init; }
+    public Func<DateTimeOffset> UtcNow { get; init; } = () => DateTimeOffset.UtcNow;
 }

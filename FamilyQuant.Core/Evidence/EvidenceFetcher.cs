@@ -182,15 +182,29 @@ namespace FamilyQuant.Evidence
             using HttpClient client = handler == null ? new HttpClient() : new HttpClient(handler, disposeHandler: false);
             client.Timeout = TimeSpan.FromSeconds(100);
             client.DefaultRequestHeaders.UserAgent.ParseAdd("FamilyQuant");
+            var cache = await UniProtBatchCache.OpenAsync(string.Join("\n", batches.Select(b => Endpoint + string.Join(",", b))),
+                client, handler, options, message => Report(0, message), cancellationToken).ConfigureAwait(false);
+            release = cache?.Release;
             Report(0);
             for (int index = 0; index < batches.Count; index++)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 List<string> batch = batches[index];
-                using HttpResponseMessage response = await GetWithRetry(client, Endpoint + string.Join(",", batch), cancellationToken,
-                    options, message => Report(index, message))
-                    .ConfigureAwait(false);
-                string body = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                string url = Endpoint + string.Join(",", batch);
+                var saved = cache == null ? null : await cache.ReadAsync(url, cancellationToken).ConfigureAwait(false);
+                string body, currentRelease;
+                if (saved == null)
+                {
+                    using HttpResponseMessage response = await GetWithRetry(client, url, cancellationToken,
+                        options, message => Report(index, message)).ConfigureAwait(false);
+                    body = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                    currentRelease = UniProtHttp.Release(response);
+                }
+                else
+                {
+                    body = saved.Json; currentRelease = saved.Release;
+                    Report(index, "Resuming saved protein evidence batches");
+                }
                 Dictionary<string, ProteinEvidence> parsed = Parse(body);
                 int matched = 0;
                 foreach (string accession in batch)
@@ -202,14 +216,15 @@ namespace FamilyQuant.Evidence
                         matched++;
                     }
                 if (matched == 0) throw new InvalidDataException("UniProt answered about none of the accessions in a requested batch.");
-                string currentRelease = UniProtHttp.Release(response);
                 if (currentRelease.Length == 0)
                     throw new InvalidDataException("UniProt omitted its release. No evidence was applied.");
                 if (release != null && release != currentRelease)
                     throw new InvalidDataException("The UniProt release changed between batches. No evidence was applied.");
                 release = currentRelease;
+                if (cache != null && saved == null) await cache.StoreAsync(url, body, null, cancellationToken).ConfigureAwait(false);
                 var featureSource = Positions.ProteinPositionFetcher.Source("UniProt", currentRelease,
                     Endpoint + string.Join(",", batch), body);
+                featureSource.RetrievedAtUtc = cache?.RetrievedAtUtc ?? options?.UtcNow() ?? featureSource.RetrievedAtUtc;
                 foreach (var evidence in parsed.Values.Distinct())
                     if (evidence.Positions != null) evidence.Positions.FeatureSource = featureSource;
                 Report(index + 1);
@@ -244,7 +259,7 @@ namespace FamilyQuant.Evidence
             result.WithDomains = found.Values.Count(e => e.Pfam.Count > 0);
             result.Provenance = new EvidenceProvenance
             {
-                Provider = "UniProt", Release = release ?? string.Empty, RetrievedAtUtc = DateTimeOffset.UtcNow,
+                Provider = "UniProt", Release = release ?? string.Empty, RetrievedAtUtc = cache?.RetrievedAtUtc ?? options?.UtcNow() ?? DateTimeOffset.UtcNow,
                 UnresolvedAccessions = result.Missing == 0 ? null : batches.SelectMany(b => b).Where(a => !found.ContainsKey(a)).ToList(),
             };
             var source = new EvidenceRecordSource
