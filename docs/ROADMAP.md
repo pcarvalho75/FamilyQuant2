@@ -84,11 +84,15 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z8e2 | An installed 2.1.7 test root shows the 2.1.8 banner and updates in test mode | L | 0.1 | Z8e1 | Z8e3 | PASS | HM | | 0 | 0 | |
 | Z8e3 | The app reopens once and says it was updated to 2.1.8 | L | 0.05 | Z8e2 | | PASS | HM | | 0 | 0 | |
 
-### W1b A follow-up for the next release (FQFetch)
+### W1b Follow-ups for the next release (FQFetch, FQHome)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | Z1f | The resume cache uses short file names, so its paths stay well under 260 characters on any user profile; tests clean their own temporary files | L | 0.3 | Z8a2 | | Longest cache path measured; reviewed | FE | | 0 | 0 | |
+| Z1g | Two exported presentation figures still name the organism and its venom in their captions (`FamilyQuant/PresentationFigures.cs:1854` and `:2020`, found by FQOpus); neutral wording, and the D21 check stops skipping that file for caption text | L | 0.2 | 🟢 | Z1j | No organism, venom or sample word in any exported figure text; the check goes red on a planted word | FE | | 0 | 0 | |
+| Z1h | A flaky suite check: the Full XIC column attach expects PENDING before READY and failed 2 of about 10 runs on a timing race (FQOpus); make it wait for the state instead of racing | L | 0.2 | 🟢 | Z1j | 20 runs in a row green | FE | | 0 | 0 | |
+| Z1i | The public README's Families, Quantify and Results screenshots re-captured from 2.1.8 (synthetic data), so every picture shows the new names | L | 0.2 | Z8e3 | Z1j | Every README image matches 2.1.8 | HM | | 0 | 0 | |
+| Z1j | The follow-ups ship in the next release when Paulo asks for one | L | 0 | Z1f, Z1g, Z1h, Z1i | | Paulo's word | Paulo | | 0 | 0 | |
 
 ### W9a The website: study and design (FQSite)
 
