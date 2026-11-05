@@ -9,7 +9,12 @@
              xmlns:numeric="clr-namespace:FamilyQuant"
              mc:Ignorable="d" FontSize="{DynamicResource BodySize}"
              d:DesignHeight="450" d:DesignWidth="1024">
-    <UserControl.Resources><local:AccessionTextConverter x:Key="AccessionText"/></UserControl.Resources>
+    <UserControl.Resources>
+        <local:AccessionTextConverter x:Key="AccessionText"/>
+        <Style x:Key="FamilyNumberText" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
 
     <Grid Background="{DynamicResource CanvasBrush}" Margin="12">
         <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition Width="340"/></Grid.ColumnDefinitions>
@@ -43,7 +48,8 @@
                                               ToolTip="Protect this family from automatic grouping, or remove that protection. Undo reverses this lock change."/>
                                 </DataTemplate></DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="ID" Width="50" MinWidth="50" IsReadOnly="True" Binding="{Binding FamilyId}"/>
+                            <DataGridTextColumn x:Name="ColumnFamilyId" Header="ID" Width="50" MinWidth="50" IsReadOnly="True"
+                                                ElementStyle="{StaticResource FamilyNumberText}" Binding="{Binding FamilyId}"/>
                             <DataGridTextColumn x:Name="ColumnFamilyName" Header="Family name" Width="*" MinWidth="160" Binding="{Binding Name}"/>
                             <DataGridTextColumn x:Name="ColumnFamilyProteins" Header="Proteins" Width="70" MinWidth="70" theme:TableAppearance.FullTextPath="CountHelp" IsReadOnly="True" Binding="{Binding Proteins}"/>
                             <DataGridTextColumn x:Name="ColumnFamilyFullXic" Header="Full XIC share" Width="110" MinWidth="110" IsReadOnly="True" Binding="{Binding FullXicShare, StringFormat=P3}"/>
@@ -60,7 +66,7 @@
                           AlternatingRowBackground="{DynamicResource SubtleBrush}" GridLinesVisibility="None">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="ColumnUSearchId" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Visibility="Collapsed" Header="USearch ID" Width="90" MinWidth="90" Binding="{Binding Path=USearchID}" />
+                                            Visibility="Visible" Header="USearch ID" Width="90" MinWidth="90" Binding="{Binding Path=USearchID}" />
                         <DataGridTextColumn x:Name="ColumnUserId" CanUserReorder="True" CanUserResize="True" CanUserSort="True"
                                             Header="User ID" Width="80" MinWidth="80" Binding="{Binding Path=UserID, Mode=TwoWay}" />
                         <DataGridTextColumn x:Name="ColumnLocus" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
@@ -207,7 +213,7 @@
                         <CheckBox x:Name="CheckBoxShowXICOnly" Content="Show quantified families only"
                                   Checked="CheckBoxShowXICOnly_CheckedChanged" Unchecked="CheckBoxShowXICOnly_CheckedChanged"
                                   ToolTip="Hide families whose PatternLab share is zero. Display filtering never changes percentages or the saved proteins."/>
-                        <CheckBox x:Name="CheckBoxShowSearchIds" Content="Show USearch ID"
+                        <CheckBox x:Name="CheckBoxShowSearchIds" Content="Show USearch ID" IsChecked="True"
                                   Checked="SearchIdVisibility_Changed" Unchecked="SearchIdVisibility_Changed"
                                   ToolTip="Show the last automatic family number beside the curated number. Hiding this column keeps the stored IDs."/>
                         <Button x:Name="ButtonSaveReport" Content="Export to CSV" Click="ButtonSaveReport_Click"

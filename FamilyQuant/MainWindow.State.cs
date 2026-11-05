@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace FamilyQuant;
 
-/// <summary>Navigation preferences only. Project and scientific data never enter this file.</summary>
+/// <summary>Navigation and display preferences only. Project and scientific data never enter this file.</summary>
 public sealed class ShellSessionState
 {
     public List<string> RecentProjects { get; set; } = new();
@@ -16,6 +16,7 @@ public sealed class ShellSessionState
     public double WindowHeight { get; set; } = 768;
     public bool WindowMaximized { get; set; }
     public bool CheckForUpdatesAtStartup { get; set; } = true;
+    public bool? ShowSearchIds { get; set; }
 
     public void Remember(string path, bool hasStoredResults = false)
     {
