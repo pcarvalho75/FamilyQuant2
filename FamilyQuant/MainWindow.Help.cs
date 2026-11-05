@@ -32,7 +32,7 @@ public partial class MainWindow
                 return
                     "Results. A read-only view of this project's own full-envelope quantitation: the XIC " +
                     "by mass, the isotopes credited per peptide, the percent of ion current by mass, what " +
-                    "each family contributes, and the recovery of the total ion current. These analytics graphs can be " +
+                    "each family contributes, and the recovery of the total ion current. These Results graphs can be " +
                     "saved as a projector-sized PNG. It changes no family and reads no RAW. If it says " +
                     "there is nothing to analyse, use Quantify first. The open " +
                     "project stays open: File > Save saves it from here, and View > Families " +
@@ -44,7 +44,7 @@ public partial class MainWindow
             if (owner.dnc != null)
             {
                 return
-                    "De Novo evidence · A separate workflow: select PEAKS or DeepNovo, apply the three " +
+                    WorkflowNames.DeNovoReview + " · An optional, separate workflow: select PEAKS or DeepNovo, apply the three " +
                     "source-aware filters, and reconcile the accepted calls with PatternLab by file, " +
                     "scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The " +
                     "status line at the bottom of the screen says what to do next, and the Help button " +
@@ -261,8 +261,8 @@ public partial class MainWindow
                 // The de novo screen is a separate workflow and is written as one: it is numbered
                 // OPTIONAL rather than as a fifth step, because nothing above it needs it and it needs
                 // nothing above it except, for family attribution, a Family Cluster File.
-                "OPTIONAL · Review de novo evidence\n" +
-                "   Menu: Analysis > De novo evidence\n" +
+                "OPTIONAL · 5 De novo review\n" +
+                "   Open: 5 De novo review on Home or the sidebar (Alt+5)\n" +
                 "   A separate workflow, not a step of the four above. It changes no family, no User ID\n" +
                 "   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\n" +
                 "   how the selected de novo calls relate to PatternLab. Its two core steps are:\n" +

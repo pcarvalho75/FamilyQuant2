@@ -53,7 +53,8 @@ internal static partial class Program
             Check("rail lists the five numbered steps in Home's order, Build families first", main.NavigationModel.Items.Select(i => i.Destination).SequenceEqual(new[]
                 { ShellDestination.Build, ShellDestination.Families, ShellDestination.Quantify, ShellDestination.Results, ShellDestination.DeNovo })
                 && main.NavigationModel.Items.Select(i => i.Number).SequenceEqual(new[] { 1, 2, 3, 4, 5 })
-                && main.NavigationModel.Items[0].Label == WorkflowNames.BuildFamilies);
+                && main.NavigationModel.Items.Where(i => i.Number != 2).Select(i => i.Label)
+                    .SequenceEqual(WorkflowNames.Steps.Where(step => step.Number != 2).Select(step => step.Name)));
             var routeKeys = Enumerable.Range(0, 6).Select(index => main.InputBindings.OfType<KeyBinding>()
                 .SingleOrDefault(binding => binding.Key == Key.D0 + index && binding.Modifiers == ModifierKeys.Alt
                     && binding.Command == MainWindow.NavigateShellCommand)?.CommandParameter).ToArray();
@@ -79,11 +80,13 @@ internal static partial class Program
             Route(ShellDestination.Start);
             Route(ShellDestination.Results);
             PumpDispatcher();
-            Check("rail Results reaches Analytics and preserves the open project", host.Children.OfType<AnalyticsControl>().Any()
-                && main.NavigationModel.Current == ShellDestination.Results);
+            Check("rail Results reaches Results under its one name and preserves the open project", host.Children.OfType<AnalyticsControl>().Any()
+                && main.NavigationModel.Current == ShellDestination.Results && main.StatusModel.Text.StartsWith(WorkflowNames.Results + " |", StringComparison.Ordinal)
+                && ((MenuItem)main.FindName("MenuItemAnalytics")).Header as string == WorkflowNames.Results, main.StatusModel.Text);
             Route(ShellDestination.DeNovo);
-            Check("rail De novo reaches its existing screen", host.Children.OfType<DeNovoControl>().Any()
-                && main.NavigationModel.Current == ShellDestination.DeNovo);
+            Check("rail De novo review reaches its existing screen under its one name", host.Children.OfType<DeNovoControl>().Any()
+                && main.NavigationModel.Current == ShellDestination.DeNovo && main.StatusModel.Text.StartsWith(WorkflowNames.DeNovoReview + " |", StringComparison.Ordinal)
+                && ((MenuItem)main.FindName("MenuItemDeNovo")).Header as string == WorkflowNames.DeNovoReview, main.StatusModel.Text);
             Route(ShellDestination.Quantify);
             Check("rail Quantify reaches the existing dialog without starting a computation", computeDialogs == 1
                 && host.Children.OfType<DeNovoControl>().Any());

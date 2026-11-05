@@ -218,7 +218,7 @@ internal static partial class Program
             (Menu: "MenuItemSaveProject", Case: "project-success", Header: "Save", Definition: true),
             (Menu: "MenuItemSaveFCF", Case: "fcf-success", Header: "Families for FamilyQuant 1.5 (.fcf)", Definition: true),
             (Menu: "MenuItemComputeXic", Case: "quantify", Header: WorkflowNames.Quantify, Definition: true),
-            (Menu: "MenuItemDeNovo", Case: "denovo", Header: "De novo evidence", Definition: true),
+            (Menu: "MenuItemDeNovo", Case: "denovo", Header: WorkflowNames.DeNovoReview, Definition: true),
             (Menu: "MenuItemAnalytics", Case: "results", Header: "Results", Definition: true),
             (Menu: "MenuItemReanotateSEPro", Case: "sepro-success", Header: "Reannotate SEPro", Definition: true)
         };

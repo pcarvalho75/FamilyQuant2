@@ -86,7 +86,7 @@
                           ToolTip="Measures identified and kept de novo precursors from RAW files with the full isotope envelope. Disabled until a project is loaded."/>
                 <MenuItem x:Name="MenuItemAnalytics" Header="Results" Click="MenuItemAnalytics_Click"
                           ToolTip="Shows the project's stored quantitation and its exports. Use Quantify first when no results are stored."/>
-                <MenuItem x:Name="MenuItemDeNovo" Header="De novo evidence" Click="MenuItemDeNovo_Click"
+                <MenuItem x:Name="MenuItemDeNovo" Header="De novo review" Click="MenuItemDeNovo_Click"
                           ToolTip="Imports, filters and compares PEAKS or DeepNovo evidence with PatternLab. It changes no family or quantitation."/>
                 <MenuItem x:Name="MenuItemSpectrumComparison" Header="Spectrum comparison" Click="MenuItemSpectrumComparison_Click" IsEnabled="False"
                           ToolTip="Shows the source comparison table and its existing CSV and score plot exports. Disabled until spectrum evidence is loaded."/>

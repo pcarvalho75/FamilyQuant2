@@ -73,8 +73,9 @@ public partial class MainWindow
                 : dnc != null ? ShellDestination.DeNovo : families ? ShellDestination.Families
                 : usearch != null ? ShellDestination.Build : ShellDestination.Start);
             AttachStatusSource(usearch != null && GridApp.Children.Contains(usearch) ? usearch : families ? cgc : null);
-            string stage = IsQuantifyVisible ? "Quantify" : home != null ? WorkflowNames.Home : analytics != null ? "Results" : dnc != null ? "De novo"
-                : families ? "Families" : usearch != null ? "Build families" : WorkflowNames.Home;
+            string stage = IsQuantifyVisible ? WorkflowNames.Quantify : home != null ? WorkflowNames.Home : analytics != null ? WorkflowNames.Results
+                : dnc != null ? WorkflowNames.DeNovoReview
+                : families ? "Families" : usearch != null ? WorkflowNames.BuildFamilies : WorkflowNames.Home;
             string project = cgc != null ? Path.GetFileName(lastFcfPath) ?? "Open project" : "No project open";
             if (cgc != null && DocumentState.IsModified) project += " *";
             string activity = IsQuantifyVisible ? quantify!.ViewModel.Status : SourceStatus("ShellStatusText");

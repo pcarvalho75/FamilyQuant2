@@ -748,7 +748,7 @@ namespace FamilyQuant.Tests
                 helpButton.IsEnabled);
 
             Check("the page it opens is the de novo page, built from the criteria in force",
-                screen.HelpText().Contains("THE DE NOVO EVIDENCE SCREEN")
+                screen.HelpText().Contains("THE DE NOVO REVIEW SCREEN")
                 && screen.HelpText().Contains("Minimum length (" + screen.Criteria.MinLength + " residues)"));
             string deepNovoHelp = HelpContent.BuildDeNovo(screen.Criteria, DeNovoSource.DeepNovo);
             Check("DeepNovo help uses SCORE terminology without borrowing the PEAKS-only census",

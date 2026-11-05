@@ -45,9 +45,9 @@ public sealed class ShellViewModel : INotifyPropertyChanged
     {
         new ShellNavigationItem(ShellDestination.Build, 1, WorkflowNames.BuildFamilies),
         new ShellNavigationItem(ShellDestination.Families, 2, "Families"),
-        new ShellNavigationItem(ShellDestination.Quantify, 3, "Quantify"),
-        new ShellNavigationItem(ShellDestination.Results, 4, "Results"),
-        new ShellNavigationItem(ShellDestination.DeNovo, 5, "De novo")
+        new ShellNavigationItem(ShellDestination.Quantify, 3, WorkflowNames.Quantify),
+        new ShellNavigationItem(ShellDestination.Results, 4, WorkflowNames.Results),
+        new ShellNavigationItem(ShellDestination.DeNovo, 5, WorkflowNames.DeNovoReview)
     };
     public event Action<ShellDestination>? NavigationRequested;
     public event PropertyChangedEventHandler? PropertyChanged;

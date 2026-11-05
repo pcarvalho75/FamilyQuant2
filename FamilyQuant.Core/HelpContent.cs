@@ -14,7 +14,7 @@ namespace FamilyQuant
     /// families do not add up to 100%, what a shared peptide is, and why the Divide and Conquer identity
     /// is a floor rather than a recommendation.
     ///
-    /// <see cref="BuildDeNovo"/> is the second page, for the de novo evidence screen. Two pages and not
+    /// <see cref="BuildDeNovo"/> is the second page, for the De novo review screen. Two pages and not
     /// one: they are two workflows, and neither page's text applies to the other's screen.
     /// </summary>
     public static class HelpContent
@@ -361,7 +361,7 @@ namespace FamilyQuant
         }
 
         /// <summary>
-        /// The de novo evidence screen's own help, opened by its Help button and by the main window's
+        /// The De novo review screen's own help, opened by its Help button and by the main window's
         /// Help menu while that screen is the one on display.
         ///
         /// It is a separate page rather than a section of <see cref="Build"/> because it is a separate
@@ -393,8 +393,8 @@ namespace FamilyQuant
                 : confidenceName;
             var sb = new StringBuilder();
 
-            sb.AppendLine("THE DE NOVO EVIDENCE SCREEN");
-            sb.AppendLine("===========================");
+            sb.AppendLine("THE DE NOVO REVIEW SCREEN (OPTIONAL)");
+            sb.AppendLine("====================================");
             sb.AppendLine("Selected source: " + sourceName + " (" + source.FileGlob + "; " +
                           confidenceName + ").");
             sb.AppendLine();
