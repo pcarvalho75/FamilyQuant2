@@ -15,6 +15,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Compute and open progress](COMPUTE-PROGRESS.md) | Counted phases, live clocks, timestamped logs and native parity check |
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
+| [Workflow names](WORKFLOW-NAMES.md) | One name per step (Home, the five numbered steps, Tools), retired names and the old-name check |
 | [Checking and installing updates](UPDATE-INSTALL.md) | Optional startup notice, explicit installer action, trusted download hosts and fake-network checks |
 | [Quantitation stages](QUANTITATION-PIPELINE.md) | Full-XIC stage contracts, second-pass residual seam and focused parity checker |
 | [Compute homology performance](COMPUTE-HOMOLOGY-PERFORMANCE.md) | Matched full-data timing and stored-byte proof for attribution reuse |
@@ -172,7 +173,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-architecture-group-split [output-dir]` | Native per-key split choices, retained bulk choice, unsplit members staying together, exact recipe replay and optional synthetic captures |
 | `--test-report-study-boundary` | Report-only operation ownership, retained Core models and screen dependencies |
 | `--report-study-snapshot <new-output-dir>` | Six native synthetic text/PNG fixtures for source-move parity |
-| `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
+| `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration, secondary views and the workflow names check |
 | `--test-shell-workflow` | Current workflow Help routes and retained quantitation facts through the shell status checks |
 | `--test-shell-evidence-cancel` | Shared Cancel reaches active protein/panel HTTP requests; staged publication, failure and late Cancel |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |

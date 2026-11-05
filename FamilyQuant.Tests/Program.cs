@@ -424,6 +424,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ShellStatusTests(workDir));
             suite.Add(() => HomeStartTests(workDir));
             suite.Add(() => ShellNavigationTests(workDir));
+            suite.Add(() => WorkflowNameTests());
             suite.Add(() => AppCommandReuseTests(workDir));
             suite.Add(() => ShellProjectOperationTests(workDir));
             suite.Add(() => ShellSavingTests(workDir));
