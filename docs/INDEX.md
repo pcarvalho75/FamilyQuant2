@@ -108,6 +108,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-uniprot-retry` | Injected patient waits, HTTP refusal, timeout recovery and cancellation |
 | `--test-evidence-resume` | Completed batches, release invalidation, corrupt cache refusal and byte parity |
 | `--test-panel-recovery` | Split refused batches, incomplete-panel readers, Retry panel UI and inherited retry progress |
+| `--test-same-scan-conflicts` | Native precursor-cluster conflict measurement, hidden de novo quantities, collapse and suppression |
+| `--same-scan-conflicts <project> <sepr2> <PEAKS-root> <output> <date-timestamp> <run-label>` | Read-only PEAKS ALC80 measurement, aggregate counts/shares and exact command only; no source rows |
 | `--test-reference-panel-stream` | Bulk query batching, exact paged-route entry parity, release/count failures, Cancel and panel operation checks |
 | `--reference-panel-parity-live <input.fcf> <new-output>` | Full-source live evidence fetch and both reviewed-panel routes, timings, per-entry hashes and offline project reopening |
 | `--test-evidence-coverage` | Native alignment-row interpretation, counterfactual chooser and honest audit labels |

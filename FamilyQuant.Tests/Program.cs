@@ -287,6 +287,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelRecoveryTests(workDir));
             suite.AddWithApplication(() => PanelRetryUiTests());
             suite.Add(() => InheritedRetryProgressTests());
+            suite.Add(() => SameScanConflictTests());
             suite.Add(() => EvidenceCoverageTests());
             suite.Add(() => QueryResidueCoverageTests());
             suite.Add(() => FamilyWorldFetchTests());
