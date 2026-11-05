@@ -85,6 +85,7 @@ internal static partial class Program
 
             var criteria = saved.manifest.DeNovoSourceScoreDistributions.First();
             var options = new FullXicOptions { AppVersion = saved.manifest.AppVersion, FamilyCuration = saved.fcf,
+                PatternLabWinsScanConflicts = saved.manifest.PatternLabWinsScanConflicts ?? false,
                 IsotopeCount = saved.manifest.IsotopeCount, MinPointsForQuant = saved.manifest.MinPointsForQuant,
                 Ppm = saved.manifest.Ppm, Ms1Tolerance = saved.manifest.Ms1Tolerance, CacheDirectory = cache,
                 SpectrumComparisonCsvPath = Path.Combine(output, "spectrum.csv"),

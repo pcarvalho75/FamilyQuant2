@@ -38,7 +38,8 @@ public static partial class SpectrumComparisonTable
             operation?.ThrowIfCancellationRequested();
             if (cluster.Charge <= 0 || !(cluster.OpeningMz > 0)) continue;
             var identification = Ranked(cluster.Claims.Where(c => c.Kind == ClaimKind.PatternLab)).FirstOrDefault();
-            if (identification == null || identification.Charge <= 0 || !(identification.Mz > 0)) continue;
+            if (identification == null || string.IsNullOrWhiteSpace(identification.Sequence)
+                || identification.Charge <= 0 || !(identification.Mz > 0)) continue;
             foreach (var claim in cluster.Claims)
             {
                 var quant = claim.Quant;

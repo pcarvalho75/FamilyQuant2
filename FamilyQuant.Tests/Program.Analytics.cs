@@ -360,6 +360,8 @@ namespace FamilyQuant.Tests
             {
                 IsotopeCount = DeNovoXicExtractor.DefaultEnvelopeIsotopeCount,
                 AppVersion = "test-q4",
+                // This is a historical numeric parity check, not the new-Compute default check.
+                PatternLabWinsScanConflicts = false,
                 // Restricted to _01: the partial spectrum table goes to the harness, not the data directory.
                 SpectrumComparisonCsvPath = Path.Combine(workDir, "q4_run01_spectrum_evidence.csv"),
             };

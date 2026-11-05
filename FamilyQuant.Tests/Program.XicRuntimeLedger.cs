@@ -20,6 +20,7 @@ internal static partial class Program
         public int MinPointsForQuant { get; set; }
         public double Ppm { get; set; }
         public int Ms1Tolerance { get; set; }
+        public bool? PatternLabWinsScanConflicts { get; set; }
         public Dictionary<string, string> ScientificInputFingerprints { get; set; } = new();
         public List<DeNovoInputManifest> DeNovoInputs { get; set; } = new();
         public List<DeNovoSourceScoreDistribution> DeNovoSourceScoreDistributions { get; set; } = new();
@@ -98,6 +99,7 @@ internal static partial class Program
             .Select(value => new DeNovoSourceSelection(DeNovoSource.FromId(value.SourceId)!, value.MinimumConfidence, value.SourcePriority)).ToList();
         var distribution = stored.DeNovoSourceScoreDistributions.First();
         var options = new FullXicOptions { IsotopeCount = stored.IsotopeCount, MinPointsForQuant = stored.MinPointsForQuant,
+            PatternLabWinsScanConflicts = stored.PatternLabWinsScanConflicts ?? false,
             Ppm = stored.Ppm, Ms1Tolerance = stored.Ms1Tolerance, ExportSpectrumComparisonCsv = false,
             CacheDirectory = Path.Combine(Path.GetDirectoryName(output)!, "xic-owned-output"),
             DeNovoSelections = selections, DeNovoCriteria = new() { MinLength = distribution.MinLength,
@@ -199,6 +201,7 @@ internal static partial class Program
             // This register preserves the 2.0 KEEP fact. D43's current default is tested
             // separately by HomologyDefaultMigrationTests, including de novo narrowing.
             var familyOptions = new FullXicOptions { ExportSpectrumComparisonCsv = false, FamilyCuration = curated,
+                PatternLabWinsScanConflicts = stored.PatternLabWinsScanConflicts ?? false,
                 FamilyMappingOptions = new Homology.HomologyOptions() };
             var familyResult = Complete(new FullXicComputeResult { Rows = baseRows.ToList() }, familyOptions);
             double identity = FamilyEnvelopeQuant.BuildAttributionFromCuration(baseRows, curated).IdentityThreshold;
@@ -211,7 +214,8 @@ internal static partial class Program
             Exception? mappingError = Capture(() => FamilyEnvelopeQuant.BuildAttributionFromCuration(baseRows, invalidCuration));
             string beforeRows = JsonSerializer.Serialize(baseRows), beforeCuration = invalidCuration.ToJsonText();
             var failedMapping = Complete(new FullXicComputeResult { Rows = baseRows.ToList() },
-                new FullXicOptions { ExportSpectrumComparisonCsv = false, FamilyCuration = invalidCuration });
+                new FullXicOptions { ExportSpectrumComparisonCsv = false, FamilyCuration = invalidCuration,
+                    PatternLabWinsScanConflicts = stored.PatternLabWinsScanConflicts ?? false });
             string mappingWarning = At(623) + mappingError!.GetType().Name + At(624, 0) + mappingError.Message + At(624, 1) + At(625);
             Add(623, 625, "mapping failure warns while preserving quantitation and curation", mappingWarning, string.Join(";", failedMapping.Notes),
                 failedMapping.Notes.Contains(mappingWarning) && JsonSerializer.Serialize(failedMapping.Rows) == beforeRows
@@ -223,7 +227,8 @@ internal static partial class Program
                 Charge = 2, PrecursorMz = 500.25, Sequence = Sequence(index), IsotopeAreas = new[] { 1d, 2d }, EnvelopeSum = 3,
                 UnderSampledArea = 0.125, UnderSampledIsEstimate = true }).ToList();
             var underResult = new FullXicComputeResult { Rows = underRows }; underResult.Manifest.PerRunTic["fixture"] = 10000;
-            Complete(underResult, new FullXicOptions { ExportSpectrumComparisonCsv = false, MinPointsForQuant = 3 });
+            Complete(underResult, new FullXicOptions { ExportSpectrumComparisonCsv = false, MinPointsForQuant = 3,
+                PatternLabWinsScanConflicts = stored.PatternLabWinsScanConflicts ?? false });
             double underArea = underRows.Count * 0.125;
             string underNote = "fixture" + At(659) + "3" + At(661) + underRows.Count.ToString(At(663, 0), CultureInfo.InvariantCulture)
                 + At(663, 1) + underArea.ToString(At(664), CultureInfo.InvariantCulture) + At(666, 0)
