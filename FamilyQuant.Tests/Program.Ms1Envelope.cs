@@ -154,6 +154,8 @@ namespace FamilyQuant.Tests
             {
                 IsotopeCount = DeNovoXicExtractor.DefaultEnvelopeIsotopeCount,
                 AppVersion = "test-q6",
+                // Frozen reference quantities were computed before D65.
+                PatternLabWinsScanConflicts = false,
                 // Restricted to _01: the partial spectrum table goes to the harness, not the data directory.
                 SpectrumComparisonCsvPath = Path.Combine(workDir, "q6_run01_spectrum_evidence.csv"),
             };

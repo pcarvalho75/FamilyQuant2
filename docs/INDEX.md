@@ -111,6 +111,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-panel-recovery` | Split refused batches, incomplete-panel readers, Retry panel UI and inherited retry progress |
 | `--test-same-scan-conflicts` | Native precursor-cluster conflict measurement, hidden de novo quantities, collapse and suppression |
 | `--test-patternlab-priority` | D65 scan rule, ON/OFF known answers, persisted choice, report rule and Compute request forwarding |
+| `--test-reference-quantitation <PEAKS-root> <RAW-root> <owned-scratch>` | Four historical real-data reference checks on their explicit pre-D65 OFF basis; supplied caches may be copied into owned scratch |
 | `--patternlab-priority-replay <project> <sepr2> <PEAKS-root> <output> <date-timestamp>` | Native before/after replay of stored anchors with current family mapping; aggregate counts/shares only |
 | `--same-scan-conflicts <project> <sepr2> <PEAKS-root> <output> <date-timestamp> <run-label>` | Read-only PEAKS ALC80 measurement, aggregate counts/shares and exact command only; no source rows |
 | `--test-reference-panel-stream` | Bulk query batching, exact paged-route entry parity, release/count failures, Cancel and panel operation checks |

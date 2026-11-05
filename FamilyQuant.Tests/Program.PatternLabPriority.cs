@@ -53,6 +53,15 @@ internal static partial class Program
         Check("Z6c a chain of near precursor masses does not merge incompatible hypotheses", !nonChaining.Rows.Contains(near) && nonChaining.Rows.Contains(far));
         Check("Z6c an identification wins even when it yielded no stored identified XIC", SpectrumComparisonTable.ApplyPatternLabConflictRule(
             Array.Empty<PeaksDeNovoRow>(), new[] { psm }, new[] { deNovo }, true).Rows.Count == 0);
+        foreach (string missing in new[] { "", " " })
+        {
+            var emptyPsm = new PatternLabPsm { FileName = "fixture", ScanNumber = 10, Sequence = missing, ChargeState = 2, PrecursorMz = 500, XCorr = 9 };
+            var noIdentification = SpectrumComparisonTable.ApplyPatternLabConflictRule(Array.Empty<PeaksDeNovoRow>(), new[] { emptyPsm }, new[] { deNovo }, true);
+            Check("Z6c an empty winning PatternLab sequence cannot exclude a de novo anchor", noIdentification.ExcludedAnchors == 0 && noIdentification.Rows.Single() == deNovo);
+        }
+        var lowerPsm = new PatternLabPsm { FileName = "fixture", ScanNumber = 10, Sequence = deNovo.Sequence, ChargeState = 2, PrecursorMz = 500, XCorr = 3 };
+        Check("Z6c matching a lower-XCorr PSM does not override the winning identification", SpectrumComparisonTable.ApplyPatternLabConflictRule(
+            Array.Empty<PeaksDeNovoRow>(), new[] { psm, lowerPsm }, new[] { deNovo }, true).ExcludedAnchors == 1);
         var nonconflictingAnchor = PriorityQuant(NativeQuantFractions.SideDeNovo, 11, deNovo.Sequence, m0: 2);
         var remaining = SpectrumComparisonTable.ApplyPatternLabConflictRule(Array.Empty<PeaksDeNovoRow>(), new[] { psm }, new[] { identified, deNovo, nonconflictingAnchor }, true);
         var tics = new Dictionary<string, double> { ["fixture"] = 100 };

@@ -232,6 +232,24 @@ namespace FamilyQuant.Tests
                     ? Path.Combine(talkFolder, SpectrumComparisonTable.DefaultFileName)
                     : Path.GetFullPath(spectrumComparisonCsvPath),
             };
+            // Recreating this reference deliverable keeps its recorded policy. An unrecorded or
+            // first historical reference is pre-D65 OFF; the application default is tested separately.
+            bool referenceScanRule = false;
+            string previousReference = Path.Combine(talkFolder, ProjectFileName);
+            if (File.Exists(previousReference))
+            {
+                using var archive = System.IO.Compression.ZipFile.OpenRead(previousReference);
+                using var stream = (archive.GetEntry(ProjectStore.ManifestEntryName)
+                    ?? throw new InvalidDataException("The existing reference project has no manifest.")).Open();
+                using var manifest = JsonDocument.Parse(stream);
+                if (manifest.RootElement.TryGetProperty("PatternLabWinsScanConflicts", out var choice))
+                {
+                    if (choice.ValueKind is not (JsonValueKind.True or JsonValueKind.False or JsonValueKind.Null))
+                        throw new InvalidDataException("The recorded same-scan rule is not a valid choice.");
+                    referenceScanRule = choice.ValueKind == JsonValueKind.True;
+                }
+            }
+            typeof(FullXicOptions).GetProperty("PatternLabWinsScanConflicts")?.SetValue(options, referenceScanRule);
             var requestedSources = new List<DeNovoSource> { deNovoSource };
             if (additionalDeNovoSources != null) requestedSources.AddRange(additionalDeNovoSources);
             options.DeNovoSelections = requestedSources.Select((source, priority) =>

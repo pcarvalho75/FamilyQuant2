@@ -206,6 +206,8 @@ namespace FamilyQuant.Tests
             {
                 IsotopeCount = DeNovoXicExtractor.DefaultEnvelopeIsotopeCount,
                 AppVersion = "test",
+                // This historical reference check predates D65; keep its frozen OFF basis.
+                PatternLabWinsScanConflicts = false,
                 // This gate restricts extraction to _01, so its spectrum table would credit quant for
                 // _01 only. The default export path is rawDirectory (the shared data directory), where the
                 // talk lanes write the COMPLETE three-run spectrum_evidence_comparison.csv. Route this

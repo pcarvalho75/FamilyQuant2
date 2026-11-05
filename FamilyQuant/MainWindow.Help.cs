@@ -8,6 +8,9 @@ namespace FamilyQuant;
 
 public partial class MainWindow
 {
+    private void MenuItemDeNovoWorkflowHelp_Click(object sender, RoutedEventArgs e) =>
+        TextReportWindow.Show(DeNovoWorkflowHelp.Title, DeNovoWorkflowHelp.Build(), this);
+
     private sealed class ShellHelpPresenter
     {
         private readonly MainWindow owner;
