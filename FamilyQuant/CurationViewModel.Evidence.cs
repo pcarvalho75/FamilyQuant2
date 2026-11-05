@@ -48,7 +48,7 @@ public sealed partial class CurationViewModel
     private sealed class CurationFetchProgress(OperationContext operation) : IProgress<FetchProgress>
     {
         public void Report(FetchProgress value) => operation.Report("evidence",
-            "Fetching evidence: " + value.CompletedBatches.ToString(CultureInfo.CurrentCulture) + " of "
+            value.Message.Length > 0 ? value.Message : "Fetching evidence: " + value.CompletedBatches.ToString(CultureInfo.CurrentCulture) + " of "
             + value.TotalBatches.ToString(CultureInfo.CurrentCulture) + " batches or families; "
             + value.Found.ToString("N0", CultureInfo.CurrentCulture) + " entries received.", value.CompletedBatches, value.TotalBatches);
     }

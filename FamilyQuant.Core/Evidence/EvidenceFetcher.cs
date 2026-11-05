@@ -17,6 +17,7 @@ namespace FamilyQuant.Evidence
         public int TotalBatches { get; init; }
         public int Asked { get; init; }
         public int Found { get; init; }
+        public string Message { get; init; } = string.Empty;
     }
 
     public sealed class EvidenceFetchResult
@@ -36,7 +37,7 @@ namespace FamilyQuant.Evidence
     {
         private const string Endpoint = "https://rest.uniprot.org/uniprotkb/accessions?format=json&size=500&fields="
             + "accession,reviewed,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence,ft_chain,ft_peptide,ft_propep,ft_signal&accessions=";
-        private const int Attempts = 3;
+        private const int Attempts = 5;
         private static readonly Regex MembershipStart = new Regex(@"\bbelongs\s+to\s+(?:the\s+)?",
             RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         private static readonly Regex HierarchyBreak = new Regex(@"(?<=family)[.;,]\s*",
@@ -161,7 +162,8 @@ namespace FamilyQuant.Evidence
 
         public static async Task<EvidenceFetchResult> FetchAsync(FamilyClusterFile file,
             HttpMessageHandler? handler = null, IProgress<FetchProgress>? progress = null,
-            CancellationToken cancellationToken = default, IReadOnlyCollection<string>? positionAccessions = null)
+            CancellationToken cancellationToken = default, IReadOnlyCollection<string>? positionAccessions = null,
+            UniProtFetchOptions? options = null)
         {
             if (file == null) throw new ArgumentNullException(nameof(file));
             var positionScope = (positionAccessions ?? Array.Empty<string>()).ToHashSet(StringComparer.Ordinal);
@@ -185,7 +187,8 @@ namespace FamilyQuant.Evidence
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 List<string> batch = batches[index];
-                using HttpResponseMessage response = await GetWithRetry(client, Endpoint + string.Join(",", batch), cancellationToken)
+                using HttpResponseMessage response = await GetWithRetry(client, Endpoint + string.Join(",", batch), cancellationToken,
+                    options, message => Report(index, message))
                     .ConfigureAwait(false);
                 string body = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
                 Dictionary<string, ProteinEvidence> parsed = Parse(body);
@@ -275,13 +278,14 @@ namespace FamilyQuant.Evidence
             file.DomainSource = result.Source;
             return result;
 
-            void Report(int completed) => progress?.Report(new FetchProgress
+            void Report(int completed, string message = "") => progress?.Report(new FetchProgress
             {
-                CompletedBatches = completed, TotalBatches = batches.Count, Asked = result.Asked, Found = found.Count,
+                CompletedBatches = completed, TotalBatches = batches.Count, Asked = result.Asked, Found = found.Count, Message = message,
             });
         }
 
-        private static Task<HttpResponseMessage> GetWithRetry(HttpClient client, string url, CancellationToken cancellationToken) =>
-            UniProtHttp.GetWithRetryAsync(client, url, Attempts, status => "UniProt refused the evidence batch (HTTP " + status.ToString(System.Globalization.CultureInfo.InvariantCulture) + ").", cancellationToken);
+        private static Task<HttpResponseMessage> GetWithRetry(HttpClient client, string url, CancellationToken cancellationToken,
+            UniProtFetchOptions? options = null, Action<string>? retryProgress = null) =>
+            UniProtHttp.GetWithRetryAsync(client, url, Attempts, status => "UniProt refused the evidence batch (HTTP " + status.ToString(System.Globalization.CultureInfo.InvariantCulture) + ").", cancellationToken, options, retryProgress);
     }
 }

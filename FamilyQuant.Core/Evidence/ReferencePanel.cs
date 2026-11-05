@@ -52,7 +52,7 @@ namespace FamilyQuant.Evidence
     {
         private const string Endpoint = "https://rest.uniprot.org/uniprotkb/search?format=json&size=500&fields="
             + "accession,reviewed,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence&query=";
-        private const int Attempts = 3;
+        private const int Attempts = 5;
 
         /// <summary>Every family named by a target's evidence, optionally only those of targets in a scope
         /// the caller chose; case folded, sorted. Read from the data, so the program holds no family list.</summary>
@@ -85,10 +85,11 @@ namespace FamilyQuant.Evidence
         /// </summary>
         public static async Task<ReferencePanel> FetchAsync(IReadOnlyList<string> families,
             HttpMessageHandler? handler = null, IProgress<FetchProgress>? progress = null,
-            CancellationToken cancellationToken = default, bool usePagedComparison = false, string? expectedRelease = null)
+            CancellationToken cancellationToken = default, bool usePagedComparison = false, string? expectedRelease = null,
+            UniProtFetchOptions? options = null)
         {
             if (!usePagedComparison)
-                return await FetchStreamsAsync(families, handler, progress, cancellationToken, expectedRelease).ConfigureAwait(false);
+                return await FetchStreamsAsync(families, handler, progress, cancellationToken, expectedRelease, options).ConfigureAwait(false);
             List<string> asked = families.Where(f => !string.IsNullOrWhiteSpace(f))
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal).ToList();
@@ -108,7 +109,8 @@ namespace FamilyQuant.Evidence
                 while (url != null)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    using HttpResponseMessage response = await GetWithRetry(client, url, cancellationToken).ConfigureAwait(false);
+                    using HttpResponseMessage response = await GetWithRetry(client, url, cancellationToken, options,
+                        message => Report(index, message)).ConfigureAwait(false);
                     string currentRelease = UniProtHttp.Release(response);
                     if (currentRelease.Length == 0)
                         throw new InvalidDataException("UniProt omitted its release. No panel was made.");
@@ -157,9 +159,9 @@ namespace FamilyQuant.Evidence
                 Entries = entries.Values.ToList(),
             };
 
-            void Report(int done) => progress?.Report(new FetchProgress
+            void Report(int done, string message = "") => progress?.Report(new FetchProgress
             {
-                CompletedBatches = done, TotalBatches = asked.Count, Asked = received, Found = entries.Count,
+                CompletedBatches = done, TotalBatches = asked.Count, Asked = received, Found = entries.Count, Message = message,
             });
         }
 
@@ -168,9 +170,9 @@ namespace FamilyQuant.Evidence
         public static async Task<ReferencePanel> FetchAndStoreAsync(FamilyClusterFile file,
             Func<ProteinEvidence, bool>? inScope = null, HttpMessageHandler? handler = null,
             IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default,
-            bool usePagedComparison = false, string? expectedRelease = null)
+            bool usePagedComparison = false, string? expectedRelease = null, UniProtFetchOptions? options = null)
         {
-            ReferencePanel panel = await FetchAsync(FamiliesFound(file, inScope), handler, progress, cancellationToken, usePagedComparison, expectedRelease)
+            ReferencePanel panel = await FetchAsync(FamiliesFound(file, inScope), handler, progress, cancellationToken, usePagedComparison, expectedRelease, options)
                 .ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
             file.EvidenceSource ??= new EvidenceProvenance();
@@ -185,12 +187,12 @@ namespace FamilyQuant.Evidence
         /// context, and the panel kept with the file only by the final commit, so a cancel or a failure leaves
         /// the file as it was. Run it through CoreOperation.RunAsync.</summary>
         public static async Task<ReferencePanel> FetchAndStoreAsync(FamilyClusterFile file, OperationContext operation,
-            Func<ProteinEvidence, bool>? inScope = null, HttpMessageHandler? handler = null)
+            Func<ProteinEvidence, bool>? inScope = null, HttpMessageHandler? handler = null, UniProtFetchOptions? options = null)
         {
             ArgumentNullException.ThrowIfNull(operation);
             List<string> families = FamiliesFound(file, inScope);
             ReferencePanel panel = await FetchAsync(families, handler, new OperationFetchProgress(operation),
-                operation.CancellationToken).ConfigureAwait(false);
+                operation.CancellationToken, options: options).ConfigureAwait(false);
             operation.Commit(() =>
             {
                 file.EvidenceSource ??= new EvidenceProvenance();
@@ -206,7 +208,7 @@ namespace FamilyQuant.Evidence
             public OperationFetchProgress(OperationContext operation) => this.operation = operation;
 
             public void Report(FetchProgress value) => operation.Report(ProgressStage,
-                "Fetched " + value.CompletedBatches.ToString(CultureInfo.InvariantCulture) + " of "
+                value.Message.Length > 0 ? value.Message : "Fetched " + value.CompletedBatches.ToString(CultureInfo.InvariantCulture) + " of "
                 + value.TotalBatches.ToString(CultureInfo.InvariantCulture) + " families, "
                 + value.Found.ToString("N0", CultureInfo.InvariantCulture) + " reviewed proteins kept",
                 value.CompletedBatches, value.TotalBatches);
@@ -256,7 +258,8 @@ namespace FamilyQuant.Evidence
         private static readonly Regex NextLink = new Regex("<([^>]*)>\\s*;\\s*rel=\"next\"",
             RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
-        private static Task<HttpResponseMessage> GetWithRetry(HttpClient client, string url, CancellationToken cancellationToken) =>
-            UniProtHttp.GetWithRetryAsync(client, url, Attempts, status => "UniProt refused a panel page (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No panel was made.", cancellationToken);
+        private static Task<HttpResponseMessage> GetWithRetry(HttpClient client, string url, CancellationToken cancellationToken,
+            UniProtFetchOptions? options = null, Action<string>? retryProgress = null) =>
+            UniProtHttp.GetWithRetryAsync(client, url, Attempts, status => "UniProt refused a panel page (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No panel was made.", cancellationToken, options, retryProgress);
     }
 }

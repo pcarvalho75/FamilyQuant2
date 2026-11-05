@@ -34,14 +34,14 @@ public static class EvidenceFetchSession
 
     public static Task<EvidenceFetchOutcome> FetchAsync(FamilyClusterFile file, HttpMessageHandler? handler = null,
         IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default,
-        IReadOnlyCollection<string>? positionAccessions = null) =>
-        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, positionAccessions);
+        IReadOnlyCollection<string>? positionAccessions = null, UniProtFetchOptions? options = null) =>
+        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, positionAccessions, options);
 
     public static Task<EvidenceFetchOutcome> FetchAsync(FamilyClusterFile file, OperationContext operation,
-        HttpMessageHandler? handler = null, IReadOnlyCollection<string>? positionAccessions = null) => FetchStagedAsync(file, operation, handler, null, positionAccessions);
+        HttpMessageHandler? handler = null, IReadOnlyCollection<string>? positionAccessions = null, UniProtFetchOptions? options = null) => FetchStagedAsync(file, operation, handler, null, positionAccessions, options);
 
     private static async Task<EvidenceFetchOutcome> FetchStagedAsync(FamilyClusterFile file, OperationContext operation,
-        HttpMessageHandler? handler, IProgress<FetchProgress>? progress, IReadOnlyCollection<string>? positionAccessions)
+        HttpMessageHandler? handler, IProgress<FetchProgress>? progress, IReadOnlyCollection<string>? positionAccessions, UniProtFetchOptions? options)
     {
         ArgumentNullException.ThrowIfNull(file);
         ArgumentNullException.ThrowIfNull(operation);
@@ -62,7 +62,7 @@ public static class EvidenceFetchSession
         var stagedEvidence = staged.MyExtendedFastaItems.Select(p => p.Evidence).ToArray();
         operation.ThrowIfCancellationRequested();
         var evidence = await EvidenceFetcher.FetchAsync(staged, handler,
-            new FetchStageProgress(operation, EvidenceStage, progress), operation.CancellationToken, positionAccessions).ConfigureAwait(false);
+            new FetchStageProgress(operation, EvidenceStage, progress), operation.CancellationToken, positionAccessions, options).ConfigureAwait(false);
         ReferencePanel? panel = null;
         Exception? panelFailure = null;
         var families = ReferencePanelFetcher.FamiliesFound(staged);
@@ -73,7 +73,7 @@ public static class EvidenceFetchSession
                 panel = await ReferencePanelFetcher.FetchAndStoreAsync(staged, handler: handler,
                     progress: new FetchStageProgress(operation, ReferencePanelFetcher.ProgressStage, progress),
                     cancellationToken: operation.CancellationToken,
-                    expectedRelease: evidence.Asked > 0 ? evidence.Provenance.Release : null).ConfigureAwait(false);
+                    expectedRelease: evidence.Asked > 0 ? evidence.Provenance.Release : null, options: options).ConfigureAwait(false);
             }
             catch (Exception ex) when (ex is HttpRequestException or JsonException or InvalidDataException)
             {
@@ -123,7 +123,7 @@ public static class EvidenceFetchSession
     {
         public void Report(FetchProgress value)
         {
-            operation.Report(stage, value.CompletedBatches.ToString(CultureInfo.InvariantCulture) + " of "
+            operation.Report(stage, value.Message.Length > 0 ? value.Message : value.CompletedBatches.ToString(CultureInfo.InvariantCulture) + " of "
                 + value.TotalBatches.ToString(CultureInfo.InvariantCulture) + "; " + value.Found.ToString(CultureInfo.InvariantCulture)
                 + " entries received", value.CompletedBatches, value.TotalBatches);
             progress?.Report(value);

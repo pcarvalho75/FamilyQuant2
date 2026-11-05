@@ -21,7 +21,8 @@ public static partial class ReferencePanelFetcher
     private const string CountEndpoint = "https://rest.uniprot.org/uniprotkb/search?format=json&size=0&fields=accession&query=";
 
     private static async Task<ReferencePanel> FetchStreamsAsync(IReadOnlyList<string> families,
-        HttpMessageHandler? handler, IProgress<FetchProgress>? progress, CancellationToken cancellationToken, string? expectedRelease)
+        HttpMessageHandler? handler, IProgress<FetchProgress>? progress, CancellationToken cancellationToken, string? expectedRelease,
+        UniProtFetchOptions? options)
     {
         var asked = families.Where(f => !string.IsNullOrWhiteSpace(f)).Distinct(StringComparer.OrdinalIgnoreCase)
             .OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal).ToList();
@@ -41,7 +42,8 @@ public static partial class ReferencePanelFetcher
             int announced;
             // Stream replies omit X-Total-Results. A zero-row search of the identical query supplies
             // the completeness count without downloading another copy of any protein evidence.
-            using (HttpResponseMessage count = await GetWithRetry(client, CountEndpoint + query, cancellationToken).ConfigureAwait(false))
+            using (HttpResponseMessage count = await GetWithRetry(client, CountEndpoint + query, cancellationToken, options,
+                message => Report(message)).ConfigureAwait(false))
             {
                 CheckRelease(count);
                 if (!count.Headers.TryGetValues("x-total-results", out IEnumerable<string>? totals)
@@ -49,7 +51,8 @@ public static partial class ReferencePanelFetcher
                     || announced < 0)
                     throw new InvalidDataException("UniProt omitted the reviewed entry count. No panel was made.");
             }
-            using HttpResponseMessage response = await GetWithRetry(client, StreamEndpoint + query, cancellationToken).ConfigureAwait(false);
+            using HttpResponseMessage response = await GetWithRetry(client, StreamEndpoint + query, cancellationToken, options,
+                message => Report(message)).ConfigureAwait(false);
             CheckRelease(response);
             if (NextPage(response) != null)
                 throw new InvalidDataException("UniProt returned an incomplete stream. No panel was made.");
@@ -97,9 +100,9 @@ public static partial class ReferencePanelFetcher
                 throw new UniProtReleaseException();
             release = current;
         }
-        void Report() => progress?.Report(new FetchProgress
+        void Report(string message = "") => progress?.Report(new FetchProgress
         {
-            CompletedBatches = completed, TotalBatches = asked.Count, Asked = received, Found = entries.Count,
+            CompletedBatches = completed, TotalBatches = asked.Count, Asked = received, Found = entries.Count, Message = message,
         });
     }
 

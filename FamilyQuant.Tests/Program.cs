@@ -282,6 +282,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => SuiteMergeGuardTests());
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());
+            suite.Add(() => UniProtRetryTests());
             suite.Add(() => EvidenceCoverageTests());
             suite.Add(() => QueryResidueCoverageTests());
             suite.Add(() => FamilyWorldFetchTests());
