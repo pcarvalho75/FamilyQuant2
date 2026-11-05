@@ -37,12 +37,12 @@ function Invoke-Preflight([string]$Folder, [string]$Output, [string]$ExpectedVer
         return $LASTEXITCODE
     } finally { $ErrorActionPreference = $prior }
 }
-$current = Assets '2.1.6.0' '2.1.6'
+$current = Assets '2.1.7.0' '2.1.7'
 $currentOutput = Join-Path $root 'current-default'
 $code = Invoke-Preflight $current $currentOutput ''
-Check 'Default version accepts current 2.1.6 assets without ExpectedVersion' ($code -eq 0)
+Check 'Default version accepts current 2.1.7 assets without ExpectedVersion' ($code -eq 0)
 $proof = Get-Content -LiteralPath (Join-Path $currentOutput 'asset-preflight.json') -Raw | ConvertFrom-Json
-Check 'Default preflight records 2.1.6.0 and no execution' ($proof.Version -ceq '2.1.6.0' -and -not $proof.InstallerExecuted -and -not $proof.AppStarted)
+Check 'Default preflight records 2.1.7.0 and no execution' ($proof.Version -ceq '2.1.7.0' -and -not $proof.InstallerExecuted -and -not $proof.AppStarted)
 $previous = Assets '2.1.3.0' '2.1.3'
 $previousOutput = Join-Path $root 'previous-default'
 $code = Invoke-Preflight $previous $previousOutput ''

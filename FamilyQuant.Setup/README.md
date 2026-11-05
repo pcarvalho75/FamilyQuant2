@@ -27,21 +27,28 @@ FamilyQuant2-<version>-Setup.exe /silent /dir="<existing program folder>" /waitp
 The specified process has 60 seconds to exit. Setup then checks for a running application before
 changing files and again before replacement. It never kills the application. Exit codes are 0
 for success, 1 for failure/cancellation, 2 for invalid arguments and 3 for a running application
-or concurrent setup. Quiet mode has no window and never launches the app. It reports its message
-to stderr and `%TEMP%\FamilyQuant2-Setup-<pid>.log`.
+or concurrent setup. A successful silent `/waitpid` update reopens FamilyQuant once; exit 4
+means installation succeeded but reopening failed. A plain silent install never launches the
+app. Quiet mode has no window and reports its message to stderr and
+`%TEMP%\FamilyQuant2-Setup-<pid>.log`. The update writes a best-effort completion marker, which
+the reopened app reads and clears to show its updated version once. A marker write failure
+does not prevent reopening.
 
 All files are checksum-verified in a sibling staging folder before the installation directory
 is replaced. Integration failure rolls back both the program folder and prior registry/shortcut
 state. Upgrades preserve unlisted personal files and a quiet upgrade keeps the desktop preference.
-A recognized older portable folder can be adopted; unrelated nonempty folders and downgrades are
-refused. Do not run Setup from inside the folder it will replace.
+A recognized older portable folder can be adopted; unrelated nonempty folders are refused.
+Setup compares installed and packaged versions. When it finds a newer installed version, Setup
+offers **Open FamilyQuant** and **Install this older version** behind confirmation. An equal
+version offers **Open FamilyQuant** and **Repair**. Silent setup always refuses a downgrade.
+Do not run Setup from inside the folder it will replace.
 
 The registered `FamilyQuant2-Uninstall.exe` accepts `/uninstall /dir="<program folder>"` and
 optional `/silent`. It copies itself into a private temporary folder, starts that helper and
 exits so Windows can remove the original executable. The helper waits for the original process.
 The temporary helper is left for ordinary Windows Temp cleanup; no shell deletion command is
-used. Uninstall removes only recorded unchanged files and owned empty folders, retaining user
-data, unlisted files/folders and locally changed files.
+used. Uninstall removes recorded unchanged files, owned empty folders and any unconsumed update
+completion marker, retaining user data, unlisted files/folders and locally changed files.
 
 This installer is unsigned. Windows may show **Windows protected your PC**. For the verified
 FamilyQuant release, choose **More info > Run anyway**. Verify the release asset's SHA-256 first.
@@ -53,7 +60,7 @@ No signing or third-party installer tooling is used.
 current user's `%LOCALAPPDATA%\Temp`:
 
 ```powershell
-FamilyQuant.Tests.exe --test-setup-native <built-Setup.exe> <fresh-LocalAppData-Temp-root> 2.1.6.0
+FamilyQuant.Tests.exe --test-setup-native <built-Setup.exe> <fresh-LocalAppData-Temp-root> 2.1.7.0
 ```
 
 That command always passes `/test-mode /silent /test-root=<root> /dir=<root>/app` (plus an owned
