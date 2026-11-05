@@ -125,7 +125,7 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z9d1 | Step 1, Build families: proteins grouped by sequence identity (USearch), animated | M | 0.4 | Z9c4 | Z9d8 | True to the study | ST | | 0 | 0 | |
 | Z9d2 | Step 2a, Group by evidence: Pfam and family evidence from UniProt sorting proteins, animated | M | 0.4 | Z9c3 | Z9d8 | True to the study | ST | | 0 | 0 | |
 | Z9d3 | Step 2b, Group by words: descriptions bringing names together | L | 0.2 | Z9d2 | Z9d8 | True to the study | ST | | 0 | 0 | |
-| Z9d4 | The family world: reviewed relatives from every species showing where a family sits | M | 0.3 | Z9d2 | Z9d8 | True to the study | ST | | 0 | 0 | |
+| Z9d4 | The family world, answering Ana's question of 11-05 (why reach for relatives from other species?): the reference panel as a ruler that labels unreviewed proteins, never quantified; the optional family world for leftover de novo peptides only, shown as the Database gap, never changing the main totals | M | 0.3 | Z9d2 | Z9d8 | True to the study | ST | | 0 | 0 | |
 | Z9d5 | Step 3, Quantify: peptides landing on families, isotope envelopes rising, signal adding up | M | 0.4 | Z9c6 | Z9d8 | True to the study | ST | | 0 | 0 | |
 | Z9d6 | Step 4, Results: the report and its dot plot, what to look at | L | 0.3 | Z9d5 | Z9d8 | True to the study | ST | | 0 | 0 | |
 | Z9d7 | Step 5 and de novo: how a de novo peptide finds its family by homology, and why the database match wins a shared spectrum | M | 0.4 | Z9c5 | Z9d8 | True to the study | ST | | 0 | 0 | |
@@ -145,7 +145,7 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z9j3 | Science page, part 2, rigorous: quantitation and normalisation, de novo and homology, decoys and FDR, the PatternLab-wins rule, what the program does not do | M | 0.5 | Z9j2 | Z9g1 | Every claim from the study | ST | | 0 | 0 | |
 | Z9f1 | Install and update guide, with the Windows "More info, Run anyway" step pictured | L | 0.2 | Z9b4 | Z9g1 | Matches the release notes | ST | | 0 | 0 | |
 | Z9f2 | FAQ | L | 0.2 | Z9d8 | Z9g1 | Short answers | ST | | 0 | 0 | |
-| Z9f3 | Credits, how to cite, and the footer with the Fiocruz logo and "All rights reserved, 2026, Fundação Oswaldo Cruz (Fiocruz)" | L | 0.1 | Z9b2 | Z9g1 | Rendered in both themes | ST | | 0 | 0 | |
+| Z9f3 | Authors (Ana Gisele Neves Ferreira, Richard Hemi Valente, Paulo Costa Carvalho, Luis Miguel Muñoz; Paulo, 11-05), credits, how to cite, and the footer with the Fiocruz logo and "All rights reserved, 2026, Fundação Oswaldo Cruz (Fiocruz)" | L | 0.1 | Z9b2 | Z9g1 | Rendered in both themes | ST | | 0 | 0 | |
 
 ### W9e The website: checks and Paulo's look (FQKimi, FQSite, Paulo)
 
