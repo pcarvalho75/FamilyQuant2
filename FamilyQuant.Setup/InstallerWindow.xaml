@@ -15,7 +15,7 @@
             <Grid.RowDefinitions><RowDefinition Height="46"/><RowDefinition Height="*"/><RowDefinition Height="82"/></Grid.RowDefinitions>
             <Grid Margin="20,0,10,0">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image x:Name="TitleBrand" Width="22" Height="22" Source="pack://application:,,,/FamilyQuant2-Setup;component/Assets/Brand/FamilyQuant-mark-128.png"/>
+                    <Image x:Name="TitleBrand" Width="22" Height="22" Source="pack://application:,,,/FamilyQuant2-Setup;component/Assets/Brand/FamilyQuant-setup-128.png"/>
                     <TextBlock Text="FamilyQuant" FontWeight="SemiBold" Margin="10,0,0,0" VerticalAlignment="Center"/>
                     <TextBlock Text="Setup" Foreground="{DynamicResource MutedBrush}" Margin="10,0,0,0" VerticalAlignment="Center"/>
                 </StackPanel>
@@ -38,13 +38,15 @@
                         <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="10" Padding="24">
                             <Grid>
                                 <Grid.ColumnDefinitions><ColumnDefinition Width="64"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-                                <Image x:Name="WelcomeBrand" Width="52" Height="52" Source="pack://application:,,,/FamilyQuant2-Setup;component/Assets/Brand/FamilyQuant-mark-128.png" VerticalAlignment="Center"/>
+                                <Image x:Name="WelcomeBrand" Width="52" Height="52" Source="pack://application:,,,/FamilyQuant2-Setup;component/Assets/Brand/FamilyQuant-setup-128.png" VerticalAlignment="Center"/>
                                 <StackPanel Grid.Column="1" Margin="16,0,0,0">
                                     <TextBlock Text="Your workspace, ready to go." FontWeight="SemiBold" FontSize="17"/>
                                     <TextBlock x:Name="WelcomeSummary" Text="Installs for your Windows account." Style="{StaticResource Caption}" Margin="0,6,0,0"/>
                                 </StackPanel>
                             </Grid>
                         </Border>
+                        <Button x:Name="ExistingActionButton" Content="_Repair" Style="{StaticResource QuietButton}" HorizontalAlignment="Left"
+                                Visibility="Collapsed" Margin="0,16,0,0" Click="ExistingActionClick"/>
                     </StackPanel>
                     <StackPanel x:Name="FolderPanel" Visibility="Collapsed">
                         <Label Content="_Install folder" Target="{Binding ElementName=FolderBox}" Foreground="{DynamicResource TextBrush}" Padding="0,0,0,9"/>

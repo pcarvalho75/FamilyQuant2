@@ -383,6 +383,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => DatabaseEntryTraceTests(null));
             suite.Add(() => HtmlDotDefaultsTests(Path.Combine(workDir, "html-dot-defaults")));
             suite.Add(() => SetupTests(Path.Combine(workDir, "setup")));
+            suite.AddWithApplication(UpdateCompletionTests);
+            suite.AddWithApplication(CloseProjectTests);
             suite.AddWithApplication(() => SetupWindowTests());
             suite.Add(() => HtmlCoverageTests());
             suite.Add(() => HtmlNumberTraceTests());

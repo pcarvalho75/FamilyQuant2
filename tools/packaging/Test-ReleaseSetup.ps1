@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory=$true)][string]$PackageDirectory,
     [Parameter(Mandatory=$true)][ValidatePattern('^[0-9a-fA-F]{40}$')][string]$ExpectedCommit,
     [Parameter(Mandatory=$true)][string]$OutputDirectory,
-    [Version]$ExpectedVersion = [Version]'2.1.6.0',
+    [Version]$ExpectedVersion = [Version]'2.1.7.0',
     [ValidateRange(1,600)][int]$TimeoutSeconds = 120,
     [switch]$ValidateOnly
 )

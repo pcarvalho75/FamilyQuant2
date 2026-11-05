@@ -47,6 +47,8 @@
                           ToolTip="Optionally review project information, then request and review an AI interpretation draft."/>
                 <MenuItem x:Name="MenuItemRecent" Header="Recent projects" SubmenuOpened="MenuItemRecent_SubmenuOpened"
                           ToolTip="Reopens a recent project or Family Cluster File. Missing files remain listed with their paths."/>
+                <MenuItem x:Name="MenuItemCloseProject" Header="Close project" Click="MenuItemCloseProject_Click" IsEnabled="False"
+                          ToolTip="Closes the open project and returns to Home after Save, Discard or Cancel."/>
                 <Separator/>
                 <MenuItem Header="Exit" Command="Close" InputGestureText="Alt+F4"
                           ToolTip="Closes this application window. Save the project first to keep your changes."/>
