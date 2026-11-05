@@ -137,7 +137,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Excluded("--left-out-check", "Selected-input left out check evidence integration/study command requires its explicit stored/reference inputs or live service; ordinary synthetic fixtures do not select that evidence packet."),
         SuiteCommandRule.Excluded("--list-test-commands", "Metadata-only catalog listing, not an assertion fixture; CommandRegistryTests separately tests its stable output without treating listing as test execution."),
         SuiteCommandRule.Excluded("--logo-assets", "Generates logo assets into a caller-selected folder; it is an artifact producer rather than a pass/fail fixture."),
-        SuiteCommandRule.Excluded("--setup-logo-assets", "Generates Setup brand assets from existing tokens; SetupWindowTests verifies the embedded icon and distinct application icon."),
+        SuiteCommandRule.Excluded("--setup-logo-assets", "Generates the Setup brand assets into a caller-selected folder; an artifact producer, not a pass/fail fixture."),
         SuiteCommandRule.Excluded("--look-finish-focus", "Manual look finish focus capture pack requires an explicitly selected output/view or input; it is a capture producer rather than an ordinary pass/fail fixture."),
         SuiteCommandRule.Excluded("--look-finish-gallery", "Manual look finish gallery capture pack requires an explicitly selected output/view or input; it is a capture producer rather than an ordinary pass/fail fixture."),
         SuiteCommandRule.Excluded("--measure-compute-progress", "Opt-in measure compute progress timing measurement requires caller-selected project/cache/output and controlled machine conditions; not an ordinary fixture."),

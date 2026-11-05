@@ -11,7 +11,7 @@ internal static partial class Program
 {
     [TestCommandTable]
     private static IEnumerable<TestCommand> SetupWindowCommands() =>
-    [new(LogoAssets.SetupArgument, 10531, TestCommandPhase.Raw, args => args.Length == 2 && args[0] == LogoAssets.SetupArgument,
+    [new(LogoAssets.SetupArgument, 10531, TestCommandPhase.Raw, args => args.Length > 0 && args[0] == LogoAssets.SetupArgument,
         (args, _) => LogoAssets.Run(args)),
     new("--test-setup-window", 10497, TestCommandPhase.Raw, args => args.Length == 1 && args[0] == "--test-setup-window", (_, _) =>
     {

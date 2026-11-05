@@ -24,9 +24,10 @@ namespace FamilyQuant.Tests
             try
             {
                 bool setup = args.Contains(SetupArgument, StringComparer.Ordinal);
-                int flag = Array.FindIndex(args, a => a.Equals(setup ? SetupArgument : Argument, StringComparison.OrdinalIgnoreCase));
+                string activeArgument = setup ? SetupArgument : Argument;
+                int flag = Array.FindIndex(args, a => a.Equals(activeArgument, StringComparison.OrdinalIgnoreCase));
                 if (flag < 0 || flag + 1 >= args.Length || args[flag + 1].StartsWith("--", StringComparison.Ordinal))
-                    throw new ArgumentException(Argument + " requires an output directory.");
+                    throw new ArgumentException(activeArgument + " requires an output directory.");
                 string output = Path.GetFullPath(args[flag + 1]);
                 Directory.CreateDirectory(output);
                 app = new App { ShutdownMode = ShutdownMode.OnExplicitShutdown };
