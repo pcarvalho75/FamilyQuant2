@@ -11,6 +11,7 @@ public partial class MainWindow
     private void RefreshProjectCommandAvailability(bool? spectrumAvailable = null, bool resetSpectrum = false)
     {
         bool project = cgc != null;
+        MenuItemCloseProject.IsEnabled = project && !Operations.IsBusy && !saveInProgress && !IsQuantifyBusy;
         bool familyOrHome = cgc != null && GridApp.Children.Contains(cgc) || home != null && GridApp.Children.Contains(home);
         bool build = usearch != null && GridApp.Children.Contains(usearch);
         bool spectrum = spectrumAvailable ?? (resetSpectrum

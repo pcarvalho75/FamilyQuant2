@@ -95,7 +95,7 @@ namespace FamilyQuant.Tests
                         : theme == "dark" ? Themes.AppTheme.Dark : Themes.AppTheme.Light);
                     CaptureTheme(theme, source, project.fcf, project.quant, project.manifest, output, captures,
                         fcfPath ?? "synthetic fixture.fcf", projectPath ?? "synthetic fixture.fqproj", shellStatus, finish, finishCaptures,
-                        args.Contains("--screen-update-complete", StringComparer.Ordinal));
+                        args.Contains("--screen-update-complete", StringComparer.Ordinal), args.Contains("--screen-close-project", StringComparer.Ordinal));
                 }
                 foreach (var input in inputHashes)
                     if (FileHash(input.Key) != input.Value)
@@ -107,6 +107,7 @@ namespace FamilyQuant.Tests
                     InputSha256 = inputHashes,
                     InputsUnchanged = true,
                     UseShellStatusBar = shellStatus,
+                    ClosedProjectBeforeHome = args.Contains("--screen-close-project", StringComparer.Ordinal),
                     OperatingSystem = Environment.OSVersion.VersionString,
                     Runtime = Environment.Version.ToString(),
                     Capture = finish ? "C14 native WPF root DPI 100/125/150%; off-screen client captures; OS monitor DPI unchanged; no keyboard focus requested."
@@ -140,7 +141,7 @@ namespace FamilyQuant.Tests
 
         private static void CaptureTheme(string theme, FamilyClusterFile source, FamilyClusterFile projectFile,
             List<QuantRow> quant, QuantManifest manifest, string output, List<CaptureInfo> captures,
-            string curationPath, string projectPath, bool shellStatus, bool finish, List<FinishCapture> finishCaptures, bool updateComplete)
+            string curationPath, string projectPath, bool shellStatus, bool finish, List<FinishCapture> finishCaptures, bool updateComplete, bool closeProject)
         {
             var main = new MainWindow();
             ShowOffScreen(main);
@@ -170,6 +171,17 @@ namespace FamilyQuant.Tests
                     }
                 }
 
+                if (closeProject)
+                {
+                    string closeRoot = Path.Combine(output, "close-fixture");
+                    Directory.CreateDirectory(closeRoot);
+                    string fixture = Path.Combine(closeRoot, "Synthetic project.fcf");
+                    source.Save(fixture);
+                    if (!main.OpenProjectPath(fixture)) throw new InvalidOperationException("Close fixture did not open.");
+                    var closing = main.CloseProjectAsync();
+                    while (!closing.IsCompleted) Pump();
+                    if (!closing.GetAwaiter().GetResult()) throw new InvalidOperationException("Project did not close.");
+                }
                 if (updateComplete)
                 {
                     string markerRoot = Path.Combine(Path.GetTempPath(), "screen-update-" + Guid.NewGuid().ToString("N"));
