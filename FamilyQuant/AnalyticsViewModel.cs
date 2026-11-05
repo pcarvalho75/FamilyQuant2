@@ -113,7 +113,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     }
     public string ExportUnavailableReason => ExportKind switch
     {
-        ResultsExportKind.Homology => "Nothing was exported: no homology search result is stored, so there are no assignments to write. Open De novo and press Search first, then return to Results.",
+        ResultsExportKind.Homology => "Nothing was exported: no homology search result is stored, so there are no assignments to write. Open De novo review and press Search first, then return to Results.",
         ResultsExportKind.SuggestedAdditions => DatabaseGap.FastaState,
         ResultsExportKind.DatabaseGap => DatabaseGap.EmptyMessage,
         _ => "The selected export needs its stored result and required project evidence."

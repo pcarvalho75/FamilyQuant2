@@ -58,8 +58,9 @@ internal static partial class Program
         Check("every retired name maps to a names-table entry and never matches its own replacement",
             WorkflowNames.Retired.Select(retired => retired.OldName).SequenceEqual(new[]
                 { "Start page", "New from database", "Build from database", "Compute full XIC", "Analytics / report",
-                  "De novo evidence", "View > Families", "Analysis >" })
-            && WorkflowNames.Retired.All(retired => retired.Pattern.IsMatch(retired.OldName) && !retired.Pattern.IsMatch(retired.NewName)));
+                  "De novo evidence", "De novo", "View > Families", "Analysis >" })
+            && WorkflowNames.Retired.All(retired => retired.Pattern.IsMatch(retired.Sample) && !retired.Pattern.IsMatch(retired.NewName)
+                && !retired.Pattern.IsMatch(retired.Sample.Replace(retired.OldName, retired.NewName, StringComparison.Ordinal))));
         Check("each user-visible step and screen name is a distinct names-table entry", new[]
             { WorkflowNames.Home, WorkflowNames.BuildFamilies, WorkflowNames.CurateFamilies, WorkflowNames.GroupByEvidence,
               WorkflowNames.GroupByWords, WorkflowNames.Quantify, WorkflowNames.Results, WorkflowNames.DeNovoReview, WorkflowNames.Tools }
@@ -82,7 +83,8 @@ internal static partial class Program
                 // a comment between the parts
                 "from database."; string b = @"Open View > Families ""now"""; string c = $"{count} De Novo evidence {(ok ? "x" : "y")}";
                 string d = "THE DE NOVO EVIDENCE SCREEN"; string e = "Analysis > Reannotate SEPro"; string f = $@"Build from database {"{"}";
-                string g = "Start page\n"; string h = "Recompute full XIC; export de novo evidence; " + count + " Quantify"; }
+                string g = "Start page\n"; string h = "Recompute full XIC; export de novo evidence; " + count + " Quantify";
+                string i = "Filters shared by Quantify and De novo."; string j = "De novo sequence; De novo only: 3; Open De novo review."; }
             """";
         var xamlSites = XamlUiText("Fixture.xaml", plantedXaml).ToArray();
         var sourceSites = CSharpUiText("Fixture.cs", plantedSource).ToArray();
@@ -93,13 +95,16 @@ internal static partial class Program
             string.Join(", ", Names(xamlSites)));
         Check("the old-name check goes red on names planted in C# literals, a split literal included, never in a comment",
             Names(sourceSites).SequenceEqual(new[] { "Start page", "New from database", "Build from database", "De novo evidence",
-                "View > Families", "Analysis >" }), string.Join(", ", Names(sourceSites)));
+                "De novo", "View > Families", "Analysis >" }), string.Join(", ", Names(sourceSites)));
+        var bareStepName = WorkflowNames.Retired.Single(retired => retired.OldName == "De novo").Pattern;
+        Check("the bare step name De novo is caught as a place, never as an adjective", sourceSites
+            .Where(site => bareStepName.IsMatch(site.Text)).Select(site => site.Text).SequenceEqual(new[] { "Filters shared by Quantify and De novo." }));
         Check("split literals join with their line and escapes decode",
             sourceSites.Any(site => site.Text == "Use File > New from database." && site.Line == 3)
             && sourceSites.Any(site => site.Text == "Open View > Families \"now\"") && sourceSites.Any(site => site.Text == "Start page\n")
             && !sourceSites.Any(site => site.Text.Contains("stays a comment", StringComparison.Ordinal)));
         Check("the old-name check accepts the new names and ordinary prose", !WorkflowNames.Retired.Any(retired => retired.Pattern.IsMatch(
-            "Home; Build families; Curate families; Quantify; Results; De novo review; Tools > Spectrum comparison; "
+            "Home; Build families; Curate families; Quantify; Results; De novo review; open De novo review; Tools > Spectrum comparison; "
             + "Recompute full XIC; export de novo evidence; Families for FamilyQuant 1.5 (.fcf); Analysis")));
 
         string root = GoldenNumbers.FindRepository();

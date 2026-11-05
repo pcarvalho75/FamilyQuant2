@@ -575,7 +575,7 @@ namespace FamilyQuant
             sb.AppendLine();
 
             sb.AppendLine("The following legacy definitions remain as scientific reference for old files.");
-            sb.AppendLine("Their standalone extraction and partition controls were retired from De novo");
+            sb.AppendLine("Their standalone extraction and partition controls were retired from De novo review");
             sb.AppendLine("in 2.0; use Quantify and Results for full XIC.");
             sb.AppendLine();
             sb.AppendLine("LEGACY EXTRACTION SEMANTICS (REFERENCE)");

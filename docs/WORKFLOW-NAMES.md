@@ -37,6 +37,8 @@ Home and the sidebar.
 
 "Full XIC" stays the name of the measurement and its column; only "Compute full XIC" as the name
 of a command or screen is retired. Lower-case "de novo evidence" in a sentence is ordinary prose.
+"De novo" as an adjective (De novo sequence, De novo source) stays; the bare step name is caught
+where a sentence uses it as a place, such as "open De novo" or "shared by Quantify and De novo".
 
 ## The check
 
