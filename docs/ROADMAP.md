@@ -132,7 +132,7 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | Z8a | Version 2.1.8 and the 2.1.8 notes | L | 0.1 | Z7e | Z8c | Versions read 2.1.8.0 | FE | | 0 | 0 | |
-| Z8b | README for 2.1.8: the new Home screenshot from synthetic data, the new names | L | 0.2 | Z4b, Z8a | Z8d | Synthetic only; reviewed | FE | | 0 | 0 | |
+| Z8b | README for 2.1.8: the new Home screenshot from synthetic data, the new names | L | 0.2 | Z4b, Z8a | Z8d | Synthetic only; reviewed | OP | | 0 | 0 | |
 | Z8c | The full functional suite on the integrated 2.1.8 commit (D61 mode), after every W4 and W5 step and Z6d are approved | M | 0.2 | Z4a to Z4h, Z5a to Z5c, Z6d, Z8a | Z8d | Every check green | Orchestrator | | 0 | 0 | |
 | Z8d | The 2.1.8 Setup.exe and zip, package check, published as Latest, README pushed | L | 0.2 | Z8b, Z8c | Z8e | GitHub digests equal the package | HM, Orchestrator | | 0 | 0 | |
 | Z8e | Update check on the public files: an installed 2.1.7 updates to 2.1.8 and reopens | L | 0.2 | Z8d | | PASS | FE | HM | 0 | |
