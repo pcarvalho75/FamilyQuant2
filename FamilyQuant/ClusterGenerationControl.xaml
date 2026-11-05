@@ -106,7 +106,7 @@
                         </Grid>
                         <TextBlock Text="{Binding EvidenceStepStatus}" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
                         <Button x:Name="ButtonRetryPanel" Content="Retry panel" Click="ButtonRetryPanel_Click"
-                                Margin="28,0,0,8" HorizontalAlignment="Left" ToolTip="{Binding PanelFailureDetail}">
+                                Margin="28,0,0,8" HorizontalAlignment="Left" ToolTip="Finish the reference panel from UniProt; the protein evidence already fetched is kept.">
                             <Button.Style>
                                 <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
