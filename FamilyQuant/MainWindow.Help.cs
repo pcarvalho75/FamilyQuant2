@@ -19,14 +19,13 @@ public partial class MainWindow
         public string CurrentContextHelp()
         {
             if (owner.IsQuantifyVisible) return owner.QuantifyHelpText();
-            // The home screen is the hub, not a step of the sequence. It names the project so the through
-            // line is stated even here, where none is open.
+            // Home is the hub, not a step of the sequence. It names the project so the through line is
+            // stated even here, where none is open, and draws the five steps in the order Home lists them.
             if (owner.home != null)
             {
                 return
-                    "Start page. The family workflow and the optional de novo workflow stay available. " +
-                    owner.ProjectStatusText() + " File > Open opens a project. The navigation list keeps " +
-                    "Families, Quantify, Results and De novo within reach.";
+                    WorkflowNames.Home + ". " + owner.ProjectStatusText() + " The steps, in order: " + WorkflowNames.Flow +
+                    ". Each step opens from Home or the sidebar; File > Open opens a project.";
             }
 
             // The analytics screen is NOT a step of that sequence either: it summarises what the earlier
@@ -36,10 +35,10 @@ public partial class MainWindow
                 return
                     "Results. A read-only view of this project's own full-envelope quantitation: the XIC " +
                     "by mass, the isotopes credited per peptide, the percent of ion current by mass, what " +
-                    "each family contributes, and the recovery of the total ion current. These analytics graphs can be " +
+                    "each family contributes, and the recovery of the total ion current. These Results graphs can be " +
                     "saved as a projector-sized PNG. It changes no family and reads no RAW. If it says " +
-                    "there is nothing to analyse, use Analysis > Compute full XIC first. The open " +
-                    "project stays open: File > Save saves it from here, and View > Families " +
+                    "there is nothing to analyse, use Quantify first. The open " +
+                    "project stays open: File > Save saves it from here, and View > Curate families " +
                     "returns to it. File > Open opens a different project or Family Cluster File.\n\n" + DatabaseGapHelp.Text;
             }
 
@@ -48,20 +47,20 @@ public partial class MainWindow
             if (owner.dnc != null)
             {
                 return
-                    "De Novo evidence · A separate workflow: select PEAKS or DeepNovo, apply the three " +
+                    WorkflowNames.DeNovoReview + " · An optional, separate workflow: select PEAKS or DeepNovo, apply the three " +
                     "source-aware filters, and reconcile the accepted calls with PatternLab by file, " +
                     "scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The " +
                     "status line at the bottom of the screen says what to do next, and the Help button " +
                     "beside it explains every number this screen shows. To return to the family " +
-                    "workflow, use View > Families (the open project stays open) or File > Open " +
+                    "workflow, use View > Curate families (the open project stays open) or File > Open " +
                     "for another project or Family Cluster File.";
             }
 
             if (owner.cgc != null)
             {
                 return
-                    "Families loaded. " + owner.ProjectStatusText() + " Curate them here, then " +
-                    "Analysis > Compute full XIC gives the project its own quantitation, and Results " +
+                    WorkflowNames.CurateFamilies + ". Families loaded. " + owner.ProjectStatusText() + " Curate them here, then " +
+                    "Quantify gives the project its own quantitation, and Results " +
                     "reads it. Help · How to read these numbers explains every column.";
             }
 
@@ -74,7 +73,7 @@ public partial class MainWindow
             }
 
             return
-                "Start here. Use File > New from database to group a new database's " +
+                "Start here. Use File > Build families to group a new database's " +
                 "proteins into families. If you already have a project (.fqproj) or a Family Cluster File " +
                 "(.fcf), open it with File > Open.";
         }
@@ -146,9 +145,14 @@ public partial class MainWindow
                 "WHAT DO I DO FIRST?\n" +
                 "===================\n\n" +
                 "You are at: " + owner.StatusModel.Text + "\n\n" + owner.StatusModel.ContextHelp + "\n\n" +
-                "IN FAMILIES, FOLLOW THIS ORDER\n" + HelpContent.GroupingOrder + "\n" +
-                "STEP 1 · Group the proteins into families\n" +
-                "   Menu: File > New from database\n" +
+                "THE FIVE STEPS, AS ON HOME\n" +
+                "   " + WorkflowNames.Flow + "\n" +
+                "   Steps 1 to 4 run in order and step 5 is optional. Alt+0 opens Home; Alt+1 to Alt+5\n" +
+                "   open the steps, as the sidebar numbers them.\n\n" +
+                "STEP 2, PART A (" + WorkflowNames.GroupByEvidence.ToUpperInvariant() + "), FOLLOWS THIS ORDER IN CURATE FAMILIES\n" + HelpContent.GroupingOrder + "\n" +
+                "STEP 1 · " + WorkflowNames.BuildFamilies + " (" + WorkflowNames.BuildFamiliesMethod + ")\n" +
+                "   Menu: File > Build families\n" +
+                "   Also: 1 Build families on Home or the sidebar (Alt+1).\n" +
                 "   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\n" +
                 "   Produces: a Family Cluster File (.fcf) written next to the database.\n" +
                 "   Choose database, set identity, then Build families. 85% is the initial value. \"Scan\n" +
@@ -157,15 +161,17 @@ public partial class MainWindow
                 "   number. Find lowest identity uses Divide and Conquer to find the lowest identity\n" +
                 "   with no mixing at all. That is a floor, not a recommendation. Help > How to read\n" +
                 "   these numbers explains why.\n\n" +
-                "STEP 2 · Open the families\n" +
+                "STEP 2 · " + WorkflowNames.CurateFamilies + "\n" +
                 "   Menu: File > Open\n" +
+                "   Also: 2 Curate families on Home or the sidebar (Alt+2).\n" +
                 "   Needs: the .fcf from step 1.\n" +
-                "   You can now merge families further by their description words, or build one family\n" +
-                "   from a keyword list. Curation changes can be undone in this session. Use Save as\n" +
-                "   to keep the previous grouping in a separate project. On reopen, unchanged peptide\n" +
-                "   matches can be read from cached results; changed inputs are checked again. After\n" +
-                "   opening a project with stored Results, Export report becomes available when its\n" +
-                "   family attribution is ready.\n\n" +
+                "   Part a, Group by evidence, follows the order above. Part b, Group by words, merges\n" +
+                "   families further by their description words (Recluster by words), or builds one\n" +
+                "   family from a keyword list (Group by keywords). Curation changes can be undone in\n" +
+                "   this session. Use Save as to keep the previous grouping in a separate project. On\n" +
+                "   reopen, unchanged peptide matches can be read from cached results; changed inputs\n" +
+                "   are checked again. After opening a project with stored Results, Export report\n" +
+                "   becomes available when its family attribution is ready.\n\n" +
                 "BEFORE STEP 3 · Prepare the family panel and report\n" +
                 "   Menu: File > Import family panel\n" +
                 "   Needs: an open project and a spreadsheet with one row per family.\n" +
@@ -175,7 +181,7 @@ public partial class MainWindow
                 "   Merge into family; for a merge, enter the target family key. Preview panel.\n" +
                 "   Check Pfam reviews the panel's codes and names without changing them. Review\n" +
                 "   the results, correct the draft if needed, then choose Apply panel.\n\n" +
-                "   Menu: View > Families\n" +
+                "   Menu: View > Curate families\n" +
                 "   Needs: the panel and protein evidence. Use Fetch evidence if needed.\n" +
                 "   Choose Group by evidence, review or edit the scope, then Update proposal. In\n" +
                 "   Panel links, review ambiguous links and confirm choices with Use link choices.\n" +
@@ -194,10 +200,11 @@ public partial class MainWindow
                 "   Needs: an open project. Enter the title, authors, sample description, workflow,\n" +
                 "   kind of database and written interpretation you want, then choose Save details.\n" +
                 "   Produces: report details in the project. Continue to step 3 to compute.\n\n" +
-                "STEP 3 · Attach the quantitation\n" +
-                "   Menu: Analysis > Compute full XIC\n" +
+                "STEP 3 · " + WorkflowNames.Quantify + "\n" +
+                "   Menu: View > Quantify\n" +
+                "   Also: 3 Quantify on Home or the sidebar (Alt+3).\n" +
                 "   Needs: the RAW folder and matching identifications (.sepr2); de novo and search\n" +
-                "   settings are optional. Choose Compute full XIC in Quantify.\n" +
+                "   settings are optional. Press Quantify on that screen.\n" +
                 "   Compute and project opening show progress for each phase, the current item,\n" +
                 "   elapsed time and time since the last step. Where a known total is available,\n" +
                 "   the progress line counts completed work. Operation log shows recorded steps.\n" +
@@ -205,7 +212,7 @@ public partial class MainWindow
                 "   " + HomologyMigrationHelp.Text + "\n" +
                 "   A quantitative panel family marked no peptide observed has no peptide observed\n" +
                 "   in the completed study. This is not proof that the family is absent.\n" +
-                "   In Families > Quantitation use Full XIC > Share of and Shared peptides.\n" +
+                "   In Curate families > Quantitation use Full XIC > Share of and Shared peptides.\n" +
                 "   For the secondary source, open PatternLab (optional) and Load PatternLab project.\n" +
                 "   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\n" +
                 "   export contains nothing that can be attributed to a family, and every row will\n" +
@@ -214,12 +221,15 @@ public partial class MainWindow
                 "   share of. Choose what to do with peptides that belong to several families, then\n" +
                 "   press Recalculate. Modes the project cannot support are greyed out, each with\n" +
                 "   the reason in its own tooltip.\n\n" +
-                "STEP 4 · Take the result away\n" +
+                "STEP 4 · " + WorkflowNames.Results + "\n" +
+                "   Menu: View > Results\n" +
+                "   Also: 4 Results on Home or the sidebar (Alt+4). Results reads the stored quantitation\n" +
+                "   and draws its figures; it reads no RAW and changes no family.\n" +
                 "   Export to CSV writes exactly the rows on screen, with the shares as fractions\n" +
                 "   between 0 and 1 and a dot for the decimal separator, so any program can read them.\n" +
                 "   File > Save keeps the project for next time. File > Export also writes families\n" +
                 "   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\n" +
-                "   Analysis > Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\n" +
+                "   Tools > Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\n" +
                 "   result package, leaving the original untouched.\n\n" +
                 "EXPORT THE REPORT\n" +
                 "   Menu: File > Export report\n" +
@@ -265,8 +275,9 @@ public partial class MainWindow
                 // The de novo screen is a separate workflow and is written as one: it is numbered
                 // OPTIONAL rather than as a fifth step, because nothing above it needs it and it needs
                 // nothing above it except, for family attribution, a Family Cluster File.
-                "OPTIONAL · Review de novo evidence\n" +
-                "   Menu: Analysis > De novo evidence\n" +
+                "OPTIONAL · 5 " + WorkflowNames.DeNovoReview + "\n" +
+                "   Menu: View > De novo review\n" +
+                "   Also: 5 De novo review on Home or the sidebar (Alt+5).\n" +
                 "   A separate workflow, not a step of the four above. It changes no family, no User ID\n" +
                 "   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\n" +
                 "   how the selected de novo calls relate to PatternLab. Its two core steps are:\n" +

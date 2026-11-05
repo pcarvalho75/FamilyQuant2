@@ -233,7 +233,7 @@ public partial class ClusterGenerationControl
             bool haveQuant = CurrentPLP != null;
 
             // PatternLab source is the OPTIONAL PatternLab route. With no .plp it is not blocked, it is unused: the
-            // red "BLOCKED · no project loaded" read as an error to a user quantifying by Compute full XIC,
+            // red "BLOCKED · no project loaded" read as an error to a user quantifying with Quantify,
             // and "project" there meant a .plp, not her .fqproj.
             if (haveQuant)
                 SetBadge(QuantitationPanel.BadgeLayer2, QuantitationPanel.TextBlockLayer2State, true, null,
@@ -241,7 +241,7 @@ public partial class ClusterGenerationControl
             else
                 SetOptionalBadge(QuantitationPanel.BadgeLayer2, QuantitationPanel.TextBlockLayer2State, "no .plp loaded",
                     "Optional: a PatternLab .plp, exported at peptide level, for the 'Share of signal' " +
-                    "column. Full XIC is available separately through Analysis > Compute full XIC.");
+                    "column. Full XIC is available separately through Quantify.");
 
             bool pending = haveQuant && DisplayedMode != null &&
                            (DisplayedMode.Value != SelectedMode || DisplayedSharedPolicy != SelectedSharedPolicy);
@@ -261,7 +261,7 @@ public partial class ClusterGenerationControl
             else if (!haveQuant)
             {
                 SetBadge(QuantitationPanel.BadgeLayer3, QuantitationPanel.TextBlockLayer3State, false, "no quantitation yet",
-                    "Compute full XIC through Analysis > Compute full XIC, or use Load PatternLab project " +
+                    "Run Quantify for the full XIC, or use Load PatternLab project " +
                     "under PatternLab (optional). The source's options become available when it is loaded.");
             }
             else if (pending)
@@ -372,7 +372,7 @@ public partial class ClusterGenerationControl
                 "18.011 Da for the neutral protein mass.");
 
             ColumnFullXic.HeaderStyle = HeaderTip(
-                "This family's share of the full XIC (Analysis > Compute full XIC), the primary " +
+                "This family's share of the full XIC (from Quantify), the primary " +
                 "estimate: identified peptides measured in the RAW files plus an estimate for de novo " +
                 "peptides. Choose its denominator with Share of under Full XIC in Quantitation.");
 

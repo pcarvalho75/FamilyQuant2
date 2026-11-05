@@ -261,6 +261,7 @@ internal static partial class Program
         ShellStatusBridgeTests();
         HomeStartTests(shellWork);
         ShellNavigationTests(shellWork);
+        WorkflowNameTests();
         AppCommandReuseTests(shellWork);
         ShellProjectOperationTests(shellWork);
         ShellSavingTests(shellWork);

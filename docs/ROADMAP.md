@@ -1,11 +1,15 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 12, 2026-11-05 12:30, releases 2.1.7 and 2.1.8: Ana's suggestions of 11-05. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
+Version 13, 2026-11-05 14:31, release 2.1.8 and the FamilyQuant website, in small steps (Paulo, 14:25: "a way more detailed roadmap with many small steps ... remove all that was already accomplished and bring the needle back to zero"). Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
 Finished rows leave this file and go to `docs/ROADMAP-archive.md`; the needle restarts at zero with each version.
 
-Version 11 delivered 10 steps (in the archive): the clean Recent projects list, published as 2.1.6 at 14:21 on 11-04, and its update check. Version 12 builds every suggestion in Ana's deck `FamilyQuant_2_1_6_0_Sugestoes.pptx` (6 slides, 11-05), as the desk proposed and Paulo accepted.
+Version 12 delivered 30 steps (in the archive): 2.1.7 published at 13:54 on 11-05 (fetch keeps its work, the update reopens the app, Setup checks versions, Close project) and every 2.1.8 build step (Home and one name per thing, the Families layout, the PatternLab-wins rule, the de novo Help page). Version 13 finishes 2.1.8 and builds the website, both split into small steps.
 
 ## The goal, in Paulo's words
+
+- 11-05 14:25: "i wold like to see a way more detailed roadmap with many small steps ... remove all that was already accomplished and bring the needle back to zero"
+- 11-05 14:03 to 14:22: the website: "very very very gorgeous", "very instructional so everyone can understand", "fun and intuitive", "let the science for the paper", a separate rigorous science page, an in-depth study first
+- 11-05 13:57: "lets publish the next version asap... full throttle ahead!"
 
 - 11-05 12:21: "lets ready every suggestion from ana as you suggested also, prepare the roadmap and begin, 2 sol workers and 1 kimi reviewer"
 
@@ -60,109 +64,109 @@ Kimi limits: one Kimi instance at a time across every project, at most 15 calls 
 
 ## Workstreams
 
-Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. A step is done when a reviewer approves it; the release's full suite gates the release.
+Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. A step is done when a reviewer approves it (desk steps: when their check passes); each release ships only after its own full suite.
 
-### W1 Fetch evidence that keeps its work, 2.1.7 (FQFetch)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z1a | Protein evidence survives a panel failure: when the reference panel cannot finish, the fetched protein evidence (domains, families, source) is still applied and saved, the panel is stored as missing with its reason, and the release guard between evidence and panel still holds | H | 0.5 | 🟢 | Z1d, Z1e, Z7c | A test whose handler fails one panel batch leaves the domains applied and the panel marked missing; the file-changed and cancel guards still apply nothing | FE | | 0 | 0 | |
-| Z1b | Patient retries: server errors (5xx), 429 and timeouts retried with growing waits (about 5, 15, 45 and 120 s); the progress window says "UniProt busy, retrying in N s"; other 4xx fail at once; Cancel stops the wait | M | 0.3 | 🟢 | Z1d, Z7c | A handler that fails 3 times then answers completes; a 400 fails at once; Cancel during a wait cancels | FE | | 0 | 0 | |
-| Z1c | Resume: finished evidence and panel batches are kept on disk, keyed by query and UniProt release, so the next Fetch evidence starts from the first unfinished batch; a release change discards them | M | 0.5 | 🟢 | Z1e, Z7c | Fail at batch 25, fetch again: batches 1 to 24 are not asked again and the result equals an uninterrupted fetch byte for byte | FE | | 0 | 0 | |
-| Z1d | A batch that still fails is split in halves down to single families; a family UniProt refuses is named, and the panel is stored as incomplete with that family listed. An incomplete panel is never used as complete: the steps that read it say so and offer Retry panel | M | 0.4 | Z1a, Z1b | Z1e, Z7c | One poisoned family among 100 leaves 99 fetched, the one named; Fetch family world reports the incomplete panel instead of using it | FE | | 0 | 0 | |
-| Z1e | Plain words on failure: the status line and the result say what was kept and what is missing, for example "Protein evidence saved for 40,250 proteins. The reference panel stopped at 1 of 64 batches (UniProt server error, HTTP 500). Retry panel"; a Retry panel button on the Families screen | L | 0.2 | Z1a, Z1c, Z1d | Z7c | Message rendered dark and light with --screens; Retry panel completes a stored incomplete panel | FE | | 0 | 0 | |
-
-### W2 Update and Setup, 2.1.7 (FQHome)
+### W8 Release 2.1.8 (FQFetch, FQOpus, FQHome, Orchestrator)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z2a | After Help > Install update, Setup reopens FamilyQuant when it finishes (the `/silent /waitpid` update path only; a plain silent install does not launch); a failed install does not launch | M | 0.3 | 🟢 | Z2b, Z7c | Test-mode Setup records exactly one launch after an update and none after a failed one | HM | | 0 | 0 | |
-| Z2b | The reopened app says once "FamilyQuant was updated to 2.1.7." (a marker Setup writes, read and cleared on start) | L | 0.2 | Z2a | Z7c | Shown once after a test-mode update, not on the next start | HM | | 0 | 0 | |
-| Z2c | Setup compares versions. Installed newer than this Setup: "FamilyQuant 2.1.7 is already installed. This setup holds 2.1.4.", main button Open FamilyQuant, a quiet Install this older version behind a confirmation. Same version: "already installed" with Open FamilyQuant and Repair. The title never reads "Upgrade" to an older version. Silent mode refuses a downgrade with an exit code and a log line | M | 0.4 | 🟢 | Z7c | Test mode: older over newer shows the page and installs nothing on Open; silent downgrade exits non-zero; equal and newer cases render dark and light | HM | | 0 | 0 | |
-| Z2d | Setup has its own icon (the app mark with a download badge, from `FamilyQuant/Assets/Brand`) and its window says Setup, so it cannot be taken for the app on a desktop | L | 0.2 | 🟢 | Z7c | Setup.exe icon differs from FamilyQuant2.exe; no yellow or gold | HM | | 0 | 0 | |
+| Z8a | Version 2.1.8.0 in every place 2.1.7.0 is set, packaging defaults included | L | 0.1 | 🟢 | Z8c1 | Versions read 2.1.8.0; reviewed | FE | | 0 | 0 | |
+| Z8a2 | The 2.1.8 release notes, claiming only what landed | L | 0.1 | 🟢 | Z8c1 | Reviewed | FE | | 0 | 0 | |
+| Z8b | The public README reads 2.1.8, with the new Home screenshot and the new names | L | 0.1 | 🟢 | Z8d5 | Reviewed; synthetic only | OP | | 0 | 0 | |
+| Z8c1 | The final 2.1.8 integration: master plus every approved 2.1.8 commit | L | 0.1 | Z8a, Z8a2 | Z8c2, Z8d1 | Merged clean; build 0 warnings | Orchestrator | | 0 | 0 | |
+| Z8c2 | The full functional suite on the final integration (receipts deferred, D61) | M | 0.2 | Z8c1 | Z8d3 | Every check green | Orchestrator | | 0 | 0 | |
+| Z8d1 | The 2.1.8 Setup.exe and zip from the integration commit, Setup in test mode | L | 0.1 | Z8c1 | Z8d2 | Built with 0 warnings | HM | | 0 | 0 | |
+| Z8d2 | The package check | L | 0.1 | Z8d1 | Z8d3 | PASS | HM | | 0 | 0 | |
+| Z8d3 | Tag v2.1.8 at the tested commit, merge into master, push | L | 0.05 | Z8c2, Z8d2 | Z8d4 | Tag and master on GitHub | Orchestrator | | 0 | 0 | |
+| Z8d4 | The GitHub release draft with its four files; digests checked against the package | L | 0.1 | Z8d3 | Z8d5 | Digests equal | Orchestrator | | 0 | 0 | |
+| Z8d5 | v2.1.8 published as Latest; README pushed | L | 0.05 | Z8d4, Z8b | Z8e1 | Latest is v2.1.8 | Orchestrator | | 0 | 0 | |
+| Z8e1 | Fresh public downloads equal the published digests; 2.1.8 reports current | L | 0.1 | Z8d5 | Z8e2 | PASS | HM | | 0 | 0 | |
+| Z8e2 | An installed 2.1.7 test root shows the 2.1.8 banner and updates in test mode | L | 0.1 | Z8e1 | Z8e3 | PASS | HM | | 0 | 0 | |
+| Z8e3 | The app reopens once and says it was updated to 2.1.8 | L | 0.05 | Z8e2 | | PASS | HM | | 0 | 0 | |
 
-### W3 Close project, 2.1.7 (FQHome)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z3a | File > Close project closes the open project with the usual Save, Discard, Cancel prompt and returns to Home; disabled with no project open; the sidebar steps go back to "Open a project first" | L | 0.3 | 🟢 | Z7c | Close with unsaved changes asks; Cancel keeps the project; after close another project opens without restarting | HM | | 0 | 0 | |
-
-### W4 Home and one name per thing, 2.1.8 (FQOpus)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z4a | The names table (in `docs/` and the code): Home, 1 Build families, 2 Curate families (a Group by evidence, b Group by words), 3 Quantify, 4 Results, 5 De novo review; a suite check fails when an old name (Start page, New from database, Compute full XIC, Analytics / report, De novo evidence) appears in UI text | M | 0.3 | Z3a | Z4b to Z4h | The check goes red on a planted old name | OP | | 0 | 0 | |
-| Z4b | Home replaces Start everywhere (sidebar button, View > Home); five numbered boxes in Ana's order, each with one line, its state (ready, needs a project, done) and one button; De novo review marked optional; Open project and Recent projects stay below | M | 0.5 | Z4a | Z8c | Rendered dark and light at both sizes; each box opens its screen | OP | | 0 | 0 | |
-| Z4c | Build families replaces New from database (button, menu, Help, window title); it opens the same database clustering (Group by sequence identity, USearch) | L | 0.2 | Z4a | Z8c | No "New from database" left in UI text | OP | | 0 | 0 | |
-| Z4d | Curate families replaces Families and Open project as the step name; with no project open it asks for a project or offers Build families; inside, the 2.1.5 guided steps are part a, Group by evidence, and the description and keyword grouping is part b, Group by words | M | 0.4 | Z4a | Z8c | Both parts reachable and labelled; the 2.1.5 step order and highlight unchanged | OP | | 0 | 0 | |
-| Z4e | Quantify is the one name of the Compute full XIC screen (sidebar, menu, Help, window title, messages) | L | 0.2 | Z4a | Z8c | No "Compute full XIC" left in UI text | OP | | 0 | 0 | |
-| Z4f | Results and De novo review are the one names of their screens (sidebar, menu, Help, window titles) | L | 0.2 | Z4a | Z8c | No "De novo evidence" or bare "De novo" step name left in UI text | OP | | 0 | 0 | |
-| Z4g | The Analysis menu becomes Tools and keeps only the extra tools (Spectrum comparison, Clustering diagnostic, Reannotate SEPro); the five steps live on Home and the sidebar | L | 0.2 | Z4e, Z4f | Z8c | Menu order File, Edit, View, Tools, Help; every former Analysis command still reachable | OP | | 0 | 0 | |
-| Z4h | Help follows the five steps and the new names (`HelpContent`, `HelpWorkflowFacts`), with the flow drawn as on Home | L | 0.2 | Z4b to Z4g | Z8c | Help names match the names table check | OP | | 0 | 0 | |
-
-### W5 Families screen layout, 2.1.8 (FQHome)
+### W1b Follow-ups for the next release (FQFetch, FQHome)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z5a | The two grids' headers sit at the same height; a title above each grid: "Families" on the left, "Proteins in this family" on the right, with the selected family's name | L | 0.2 | Z1e | Z8c | Rendered dark and light at both sizes; headers aligned to the pixel | HM | | 0 | 0 | |
-| Z5b | All proteins moves to the right, above the protein grid | L | 0.1 | Z5a | Z8c | Rendered; the button keeps its behaviour | HM | | 0 | 0 | |
-| Z5c | Family numbers centred in the ID column; the USearch ID column shown by default in the protein grid | L | 0.1 | Z5a | Z8c | Rendered; a stored column choice of the user still wins | HM | | 0 | 0 | |
+| Z1f | The resume cache uses short file names, so its paths stay well under 260 characters on any user profile; tests clean their own temporary files | L | 0.3 | Z8a2 | | Longest cache path measured; reviewed | FE | | 0 | 0 | |
+| Z1g | Two exported presentation figures still name the organism and its venom in their captions (`FamilyQuant/PresentationFigures.cs:1854` and `:2020`, found by FQOpus); neutral wording, and the D21 check stops skipping that file for caption text | L | 0.2 | 🟢 | Z1j | No organism, venom or sample word in any exported figure text; the check goes red on a planted word | FE | | 0 | 0 | |
+| Z1h | A flaky suite check: the Full XIC column attach expects PENDING before READY and failed 2 of about 10 runs on a timing race (FQOpus); make it wait for the state instead of racing | L | 0.2 | 🟢 | Z1j | 20 runs in a row green | FE | | 0 | 0 | |
+| Z1i | The public README's Families, Quantify and Results screenshots re-captured from 2.1.8 (synthetic data), so every picture shows the new names | L | 0.2 | Z8e3 | Z1j | Every README image matches 2.1.8 | HM | | 0 | 0 | |
+| Z1j | The follow-ups ship in the next release when Paulo asks for one | L | 0 | Z1f, Z1g, Z1h, Z1i | | Paulo's word | Paulo | | 0 | 0 | |
 
-### W6 De novo: measure, decide, explain (FQFetch, Paulo)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z6a | Measure same-scan conflicts on the real-data set (`C:/Users/paulo/Desktop/FamilyQuant`, the three-run PEAKS export at ALC 80, D33) through the program's Spectrum comparison: scans where PatternLab and the de novo call give different sequences for the same precursor while the de novo peptide is still credited in Quantify; count, credited de novo signal involved, and its share of all de novo and of all signal, per run. No product change | M | 0.5 | Z1e | Z6b | Counts reproduced by a second run of the same command; method reviewed by FQKimi on code only | FE | | 0 | 0 | |
-| Z6b | Paulo decides what Quantify does with a same-scan conflict, from Z6a's numbers (D65): a) the PatternLab identification wins the scan, b) keep both and state it, c) another rule | L | 0 | Z6a | Z6c, Z6d | Decision logged | Paulo | | 0 | 0 | |
-| Z6c | D65 a): on a scan PatternLab identified, a de novo call with a different sequence for the same precursor gets no credit in Quantify; an option, ON by default, stored with the project and shown in the report's rules; before and after family shares on real data; ships in 2.1.8 if green, else the next release | H | 1 | Z6b | Z6d | Synthetic known answers; before and after shares on real data; code review APPROVED; science review APPROVED by FQOpus | FE | | 0 | 0 | |
-| Z6d | Help page "De novo in FamilyQuant": Ana's seven steps mapped to what the program does (what Quantify reads, de novo peptides dropped when PatternLab found the same peptide, the same-scan rule as decided, XIC of de novo peptides, homology by PepExplorer's method at 80% identity with I = L and the decoy gate) and why De novo review is optional | L | 0.3 | Z6b | Z8c | Every claim cites the code; no organism, venom or sample words | FE | | 0 | 0 | |
-
-### W7 Release 2.1.7 (FQHome, Orchestrator)
+### W9a The website: study and design (FQSite)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z7a | Version 2.1.7 in every place 2.1.6 was set, and the 2.1.7 notes (claim only what landed) | L | 0.1 | Z3a | Z7c | Versions read 2.1.7.0 | HM | | 0 | 0 | |
-| Z7b | README reads 2.1.7 with a short what's new | L | 0.1 | Z7a | Z7d | Synthetic only; reviewed | HM | | 0 | 0 | |
-| Z7c | The full functional suite on the integrated 2.1.7 commit (receipts deferred, D61), after every W1, W2 and W3 step is approved | M | 0.2 | Z1a to Z1e, Z2a to Z2d, Z3a, Z7a | Z7d | Every check green | Orchestrator | | 0 | 0 | |
-| Z7d | The 2.1.7 Setup.exe and zip with SHA256 from the integrated commit, Setup test mode, package check; then v2.1.7 published as Latest and the README pushed | L | 0.2 | Z7b, Z7c | Z7e | GitHub digests equal the package | HM, Orchestrator | | 0 | 0 | |
-| Z7e | Update check on the public files: 2.1.7 reports current; an installed 2.1.6 test root shows the banner, Install update runs the public Setup in test mode and the app is reopened (Z2a) | L | 0.2 | Z7d | | PASS | HM | | 0 | 0 | |
+| Z9a | The study: how FamilyQuant works end to end, every claim with file:line (`UNDERSTANDING.md`) | M | 1 | 🟢 | Z9a2 | FQKimi checks it against the code: APPROVED | ST | | 0 | 0 | |
+| Z9a2 | The algorithm walk-through added to the study: what each step computes, in order, and how the pieces connect (Paulo, 14:22) | M | 0.5 | Z9a | every page | Reviewed | ST | | 0 | 0 | |
+| Z9a3 | `INSPIRATION.md`: what works on the SCPBrowser and APEX pages, and how this site goes beyond them | L | 0.2 | 🟢 | Z9b1 | Written | ST | | 0 | 0 | |
+| Z9b1 | Art direction: palette from the brand (no yellow or gold), type, motion rules, light and dark; fun and friendly, never a research site | M | 0.3 | Z9a3 | Z9b2 | A one-page style sheet rendered | ST | | 0 | 0 | |
+| Z9b2 | Page skeleton: sections, sticky navigation, phone layout without sideways scroll | M | 0.3 | Z9b1 | Z9b3, Z9c1 | Rendered at desktop and phone width | ST | | 0 | 0 | |
+| Z9b3 | The hero: the animated family motif (sequences gathering into families) and one line on what FamilyQuant does | M | 0.4 | Z9b2 | Z9b4 | Rendered; respects reduced motion | ST | | 0 | 0 | |
+| Z9b4 | The download button: reads the latest release from GitHub, shows the version, falls back to the releases page | L | 0.2 | Z9b3 | Z9f1 | The link resolves; the fallback works offline | ST | | 0 | 0 | |
 
-### W8 Release 2.1.8 (FQFetch, FQHome, Orchestrator)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z8a | Version 2.1.8 and the 2.1.8 notes | L | 0.1 | Z7e | Z8c | Versions read 2.1.8.0 | FE | | 0 | 0 | |
-| Z8b | README for 2.1.8: the new Home screenshot from synthetic data, the new names | L | 0.2 | Z4b, Z8a | Z8d | Synthetic only; reviewed | FE | | 0 | 0 | |
-| Z8c | The full functional suite on the integrated 2.1.8 commit (D61 mode), after every W4 and W5 step and Z6d are approved | M | 0.2 | Z4a to Z4h, Z5a to Z5c, Z6d, Z8a | Z8d | Every check green | Orchestrator | | 0 | 0 | |
-| Z8d | The 2.1.8 Setup.exe and zip, package check, published as Latest, README pushed | L | 0.2 | Z8b, Z8c | Z8e | GitHub digests equal the package | HM, Orchestrator | | 0 | 0 | |
-| Z8e | Update check on the public files: an installed 2.1.7 updates to 2.1.8 and reopens | L | 0.2 | Z8d | | PASS | FE | HM | 0 | |
-
-### W9 The FamilyQuant website (FQSite)
+### W9b The website: the basics, one animated explainer each (FQSite)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z9a | Deep study before any page: the science documents, Help, the docs index, the key code paths (database clustering, evidence grouping, family world, full XIC quantitation, de novo and homology, the report) and every screen rendered on synthetic data; written up in `UNDERSTANDING.md` in the site folder, every claim with file:line | M | 1 | 🟢 | Z9c, Z9d, Z9e | A reviewer checks the write-up against the code: APPROVED | ST | | 0 | 0 | |
-| Z9b | Art direction, design system and the hero, fun, friendly and animated, never a research or review site (Paulo, 14:13): brand palette, type, motion, light and dark; the download button reads the latest release from GitHub (falls back to the releases page) | M | 1 | 🟢 | Z9c to Z9f | Rendered at desktop and phone width in both themes; the download link resolves | ST | | 0 | 0 | |
-| Z9c | How it works: the five steps (Build families, Curate families, Quantify, Results, De novo review), instructional, with what goes in, what comes out and what to check, illustrated and with app screenshots on synthetic data | M | 1 | Z9a, Z9b | Z9g | Every statement matches UNDERSTANDING.md | ST | | 0 | 0 | |
-| Z9d | The ideas, light and intuitive (the science stays for the paper, Paulo 14:14): why quantify by family, why read spectra two ways (database match and de novo), how de novo peptides find their family; interactive, animated explainers | H | 1.5 | Z9a, Z9b | Z9g | Every claim cites the program's behaviour | ST | | 0 | 0 | |
-| Z9d2 | How it works inside, shown and animated, light on jargon (Paulo, 14:10 and 14:14): sequences aligned and grouped into families, words grouping them, evidence from UniProt (Pfam domains and families) sorting them, peptides landing on families and their signal adding up | H | 1.5 | Z9a, Z9b | Z9g | Every statement matches UNDERSTANDING.md | ST | | 0 | 0 | |
-| Z9i | What makes FamilyQuant different, as a fun visual side-by-side ("other tools see this, FamilyQuant sees this"): protein groups, spectral counting, de novo alone, homology alone versus what FamilyQuant combines; a line or two of sources at most; no claim anyone could knock down | M | 0.5 | Z9a | Z9g | Every comparison cites a source | ST | | 0 | 0 | |
-| Z9j | A separate rigorous science page (Paulo, 14:16): every idea on the main page has a small "the science behind this" button that opens its own section of science.html, written precisely (alignment and identity, evidence and Pfam, the family world, full isotope envelopes and normalisation, PSM plus de novo, homology at 80% identity with I = L, decoys and FDR, the PatternLab-wins rule, what the program does not do), every claim from UNDERSTANDING.md, a few references | H | 1.5 | Z9a, Z9b | Z9g | Every claim cites the program; each button lands on its section | ST | | 0 | 0 | |
-| Z9e | An illustrative example, a fictitious snake venom, labelled fictitious and illustrative on every view: families, an interactive dot plot in the style of report.html, composition, the de novo contribution, the database gap | M | 1 | Z9a, Z9b | Z9g | No real sample or collaborator number anywhere | ST | | 0 | 0 | |
-| Z9f | Install and update guide, FAQ, glossary, how to cite, credits; footer with the Fiocruz logo and "All rights reserved, 2026, Fundação Oswaldo Cruz (Fiocruz)" | L | 0.5 | Z9b | Z9g | Rendered; links resolve | ST | | 0 | 0 | |
-| Z9g | Review: claims against the code (FQKimi), accessibility, phone width, both themes, speed, no real data, no em or en dashes | M | 0.5 | Z9c to Z9f, Z9d2, Z9i, Z9j | Z9h | APPROVED | KM | | 0 | 0 | |
-| Z9h | Paulo looks at it and decides where it is deployed (for example next to SCPBrowser on patternlabforproteomics.org) | L | 0 | Z9g | | Paulo's word | Paulo | | 0 | 0 | |
+| Z9c1 | What a protein, a peptide and a spectrum are: a protein cut into peptides, peptides flying through the instrument | M | 0.4 | Z9b2, Z9a2 | Z9c2 | Animation with one-line captions | ST | | 0 | 0 | |
+| Z9c2 | What homology is: relatives sharing an ancestor, shown as sequences that mostly match | M | 0.3 | Z9c1 | Z9c4 | Animation with captions | ST | | 0 | 0 | |
+| Z9c3 | What Pfam is: a catalogue of protein building blocks, coloured blocks on a protein | M | 0.3 | Z9c1 | Z9d2 | Animation with captions | ST | | 0 | 0 | |
+| Z9c4 | What alignment and sequence identity are: two sequences side by side, matches lighting up, a percentage | M | 0.3 | Z9c2 | Z9d1 | Interactive toy | ST | | 0 | 0 | |
+| Z9c5 | What de novo means, next to a database match: one spectrum read two ways | M | 0.3 | Z9c1 | Z9d7 | Animation with captions | ST | | 0 | 0 | |
+| Z9c6 | What a protein family is, and why counting by family is steadier than counting proteins | M | 0.3 | Z9c2 | Z9d5 | Animation with captions | ST | | 0 | 0 | |
+| Z9c7 | The pop-up glossary: any term on the page explains itself on hover or tap | L | 0.2 | Z9c1 | Z9g1 | Every glossary term reachable by keyboard and touch | ST | | 0 | 0 | |
+
+### W9c The website: how FamilyQuant works, step by step (FQSite)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z9d1 | Step 1, Build families: proteins grouped by sequence identity (USearch), animated | M | 0.4 | Z9c4 | Z9d8 | True to the study | ST | | 0 | 0 | |
+| Z9d2 | Step 2a, Group by evidence: Pfam and family evidence from UniProt sorting proteins, animated | M | 0.4 | Z9c3 | Z9d8 | True to the study | ST | | 0 | 0 | |
+| Z9d3 | Step 2b, Group by words: descriptions bringing names together | L | 0.2 | Z9d2 | Z9d8 | True to the study | ST | | 0 | 0 | |
+| Z9d4 | The family world: reviewed relatives from every species showing where a family sits | M | 0.3 | Z9d2 | Z9d8 | True to the study | ST | | 0 | 0 | |
+| Z9d5 | Step 3, Quantify: peptides landing on families, isotope envelopes rising, signal adding up | M | 0.4 | Z9c6 | Z9d8 | True to the study | ST | | 0 | 0 | |
+| Z9d6 | Step 4, Results: the report and its dot plot, what to look at | L | 0.3 | Z9d5 | Z9d8 | True to the study | ST | | 0 | 0 | |
+| Z9d7 | Step 5 and de novo: how a de novo peptide finds its family by homology, and why the database match wins a shared spectrum | M | 0.4 | Z9c5 | Z9d8 | True to the study | ST | | 0 | 0 | |
+| Z9d8 | The whole journey: one animation from a sample to a family pie | H | 0.6 | Z9d1 to Z9d7 | Z9g1 | Plays end to end; captions on each stage | ST | | 0 | 0 | |
+| Z9d9 | Real app screenshots (synthetic data) placed next to each step | L | 0.2 | Z9d1 to Z9d7 | Z9g1 | Synthetic only | ST | | 0 | 0 | |
+
+### W9d The website: example, difference, science page, practical (FQSite)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z9e1 | A fictitious snake venom: an invented dataset, labelled fictitious and illustrative on every view | L | 0.2 | Z9b2 | Z9e2 | No real number anywhere | ST | | 0 | 0 | |
+| Z9e2 | Its interactive dot plot, in the style of the program's report | M | 0.4 | Z9e1 | Z9e3 | Hover and axes work at phone width | ST | | 0 | 0 | |
+| Z9e3 | Its composition and the de novo contribution, animated | M | 0.3 | Z9e2 | Z9g1 | Labelled fictitious | ST | | 0 | 0 | |
+| Z9i | What makes FamilyQuant different, as a fun side-by-side ("other tools see this, FamilyQuant sees this"); a line or two of sources | M | 0.4 | Z9d8 | Z9g1 | No claim anyone could knock down | ST | | 0 | 0 | |
+| Z9j1 | The science page (science.html): its sections and anchors; a "the science behind this" button beside each idea on the main page | M | 0.3 | Z9a2 | Z9j2 | Each button lands on its section | ST | | 0 | 0 | |
+| Z9j2 | Science page, part 1, rigorous: alignment and identity, evidence and Pfam, the family world | M | 0.5 | Z9j1 | Z9g1 | Every claim from the study | ST | | 0 | 0 | |
+| Z9j3 | Science page, part 2, rigorous: quantitation and normalisation, de novo and homology, decoys and FDR, the PatternLab-wins rule, what the program does not do | M | 0.5 | Z9j2 | Z9g1 | Every claim from the study | ST | | 0 | 0 | |
+| Z9f1 | Install and update guide, with the Windows "More info, Run anyway" step pictured | L | 0.2 | Z9b4 | Z9g1 | Matches the release notes | ST | | 0 | 0 | |
+| Z9f2 | FAQ | L | 0.2 | Z9d8 | Z9g1 | Short answers | ST | | 0 | 0 | |
+| Z9f3 | Credits, how to cite, and the footer with the Fiocruz logo and "All rights reserved, 2026, Fundação Oswaldo Cruz (Fiocruz)" | L | 0.1 | Z9b2 | Z9g1 | Rendered in both themes | ST | | 0 | 0 | |
+
+### W9e The website: checks and Paulo's look (FQKimi, FQSite, Paulo)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z9g1 | Claims review: every statement on both pages against the study and the code | M | 0.4 | Z9d8, Z9e3, Z9i, Z9j3, Z9f2 | Z9h | APPROVED | KM | | 0 | 0 | |
+| Z9g2 | Phone width, both themes, keyboard and screen reader basics, reduced motion | L | 0.2 | Z9d8 | Z9h | Checked with screenshots | ST | | 0 | 0 | |
+| Z9g3 | Speed, no real data, no em or en dashes, every link resolves | L | 0.1 | Z9g1 | Z9h | Checked | ST | | 0 | 0 | |
+| Z9h | Paulo looks at it and decides where it is deployed | L | 0 | Z9g1, Z9g2, Z9g3 | | Paulo's word | Paulo | | 0 | 0 | |
 
 ## Critical path
 
-2.1.7: W1 (FQFetch) and W2 with W3 (FQHome) run in parallel now; Kimi reviews in batches as steps land; Z7a and Z7b; one suite Z7c; package and publish Z7d; update check Z7e. Rough wall-clock: 3 to 4.5 hours from 12:30, so about 15:30 to 17:00, a range, never a promise.
+2.1.8: Z8a and Z8a2 (FQFetch), the README review Z8b, then the final integration Z8c1, the suite Z8c2 with the package Z8d1 and Z8d2 in parallel, publish Z8d3 to Z8d5, update check Z8e1 to Z8e3. Rough wall-clock: 30 to 50 minutes from 14:30, a range, never a promise.
 
-2.1.8: W4 (FQHome after Z7e's package is built) and W5 with Z6a (FQFetch after W1); Z6d waits for Paulo's D65; then Z8a to Z8e. Rough wall-clock: 3 to 5 hours after 2.1.7, so this evening. Z6c ships in 2.1.8 only if it is green in time; otherwise in the next release.
+The website: the study Z9a and its walk-through Z9a2, design Z9b1 to Z9b4, then the explainers and steps (W9b, W9c) in order, the example, the difference, the science page and the practical parts, then the checks and Paulo's look. Rough wall-clock: 4 to 7 hours; one Opus builder, so the steps run in sequence.
 
 ## Paulo's decisions
 
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
+| D70 | Where the website is deployed (Z9h) | Beside SCPBrowser on patternlabforproteomics.org, as a folder Paulo uploads | When the site passes its checks |
 
 ### Decisions in force
 

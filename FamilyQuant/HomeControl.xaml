@@ -22,6 +22,41 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="HomeStepRow" TargetType="Border">
+            <Setter Property="BorderBrush" Value="{DynamicResource EdgeBrush}"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Padding" Value="0,10"/>
+        </Style>
+        <Style x:Key="HomeStepNumber" TargetType="Border">
+            <Setter Property="Width" Value="28"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Background" Value="{DynamicResource SubtleBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style x:Key="HomeStepNumberText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style x:Key="HomeStepName" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        </Style>
+        <Style x:Key="HomeStepLine" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+            <Setter Property="FontSize" Value="{DynamicResource CaptionSize}"/>
+            <Setter Property="Margin" Value="0,3,0,0"/>
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        </Style>
+        <Style x:Key="HomeStepState" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="12,0,12,0"/>
+        </Style>
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Margin="24" MaxWidth="1160" HorizontalAlignment="Stretch">
@@ -38,36 +73,91 @@
                 <StackPanel>
                     <TextBlock Text="FamilyQuant" FontSize="{DynamicResource TitleSize}" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}"
                                ToolTip="Groups a protein database into families for curation, measures full isotope envelopes from RAW and reports run recovery. One .fqproj keeps the families, User IDs, annotations and computed quantitation."/>
-                    <TextBlock Text="Four steps, one .fqproj: build, curate, measure RAW envelopes, read recovery." Margin="0,6,0,0" Foreground="{DynamicResource MutedBrush}"/>
+                    <TextBlock x:Name="TextBlockHomeLine" Text="Five steps, one .fqproj: steps 1 to 4 in order, step 5 when you need it." Margin="0,6,0,0" Foreground="{DynamicResource MutedBrush}"/>
                 </StackPanel>
             </DockPanel>
-            <WrapPanel Margin="0,0,0,24">
-                <Button x:Name="ButtonHomeOpen" Content="Open project" Click="ButtonHomeOpen_Click" Style="{DynamicResource PrimaryButton}" Margin="0,0,10,0"
-                        ToolTip="Opens a FamilyQuant project or an older Family Cluster File. Your existing files stay available."/>
-                <Button x:Name="ButtonHomeBuild" Content="New from database" Click="ButtonHomeBuild_Click"
-                        ToolTip="Builds families once per database by USearch sequence identity from a FASTA or target-decoy (.T-R) file, using File > New from database. Skip this step and open an existing .fcf or .fqproj."/>
-            </WrapPanel>
-            <Border Background="{DynamicResource SurfaceBrush}" Padding="16" Margin="0,0,0,18">
+            <Border x:Name="BorderHomeSteps" Background="{DynamicResource SurfaceBrush}" Padding="16,6,16,10" Margin="0,0,0,18">
                 <StackPanel>
-                    <TextBlock Text="Current project" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold"/>
-                    <TextBlock x:Name="TextBlockHomeProject" Margin="0,8,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Foreground="{DynamicResource MutedBrush}"
-                               ToolTip="Names the open project and whether full XIC has been computed. The status bar also tracks the current stage and project; Help explains what to do next."/>
-                    <WrapPanel x:Name="HomeProjectActions" Margin="0,12,0,0">
-                        <Button x:Name="ButtonHomeCurate" Content="Families" Click="ButtonHomeCurate_Click" Margin="0,0,8,0"
-                                ToolTip="Returns to the open project or opens a .fqproj or .fcf for merging, renaming, editing User IDs and locking families by hand. Existing edits stay in memory; opening a project enables Quantify and Results."/>
-                        <Button x:Name="ButtonHomeCompute" Click="ButtonHomeCompute_Click" Margin="0,0,8,0" IsEnabled="False"
-                                ToolTip="Analysis > Compute full XIC measures every identified peptide and kept de novo precursor from RAW full isotope envelopes and stores the result in the open project. Disabled until a project is open; Save afterwards to keep the result.">
-                            <TextBlock Text="Quantify" Foreground="{DynamicResource MutedBrush}"/>
-                        </Button>
-                        <Button x:Name="ButtonHomeAnalytics" Click="ButtonHomeAnalytics_Click" Margin="0,0,8,0" IsEnabled="False"
-                                ToolTip="Draws recovery figures with CSV and PNG export from stored full XIC; reads no RAW and recomputes nothing. Disabled until a project is open and changes no family.">
-                            <TextBlock Text="Results" Foreground="{DynamicResource MutedBrush}"/>
-                        </Button>
-                        <Button x:Name="ButtonHomeDeNovo" Content="De novo evidence" Click="ButtonHomeDeNovo_Click"
-                                ToolTip="Optional inspection only: filter PEAKS or DeepNovo calls and compare them with PatternLab in a review queue. Quantify reads de novo folders itself, so this review is not needed for quantitation and changes no family or numbers."/>
-                    </WrapPanel>
-                    <TextBlock x:Name="TextBlockProjectReason" Margin="0,8,0,0" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}"/>
+                    <Border Style="{StaticResource HomeStepRow}">
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="44"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto" MinWidth="120"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <Border Style="{StaticResource HomeStepNumber}"><TextBlock x:Name="TextBlockHomeStep1Number" Style="{StaticResource HomeStepNumberText}"/></Border>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock x:Name="TextBlockHomeStep1Name" Style="{StaticResource HomeStepName}"/>
+                                <TextBlock x:Name="TextBlockHomeStep1Method" Style="{StaticResource HomeStepLine}"/>
+                            </StackPanel>
+                            <TextBlock Grid.Column="2" x:Name="TextBlockHomeStep1State" Style="{StaticResource HomeStepState}"/>
+                            <Button Grid.Column="3" x:Name="ButtonHomeBuild" Click="ButtonHomeBuild_Click" MinWidth="150" VerticalAlignment="Center"
+                                    ToolTip="Builds families once per database by USearch sequence identity from a FASTA or target-decoy (.T-R) file. Skip this step and open an existing .fcf or .fqproj."/>
+                        </Grid>
+                    </Border>
+                    <Border Style="{StaticResource HomeStepRow}">
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="44"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto" MinWidth="120"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <Border Style="{StaticResource HomeStepNumber}"><TextBlock x:Name="TextBlockHomeStep2Number" Style="{StaticResource HomeStepNumberText}"/></Border>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock x:Name="TextBlockHomeStep2Name" Style="{StaticResource HomeStepName}"/>
+                                <TextBlock x:Name="TextBlockHomeStep2Method" Style="{StaticResource HomeStepLine}"/>
+                            </StackPanel>
+                            <TextBlock Grid.Column="2" x:Name="TextBlockHomeStep2State" Style="{StaticResource HomeStepState}"/>
+                            <Button Grid.Column="3" x:Name="ButtonHomeCurate" Click="ButtonHomeCurate_Click" MinWidth="150" VerticalAlignment="Center"
+                                    ToolTip="Returns to the open project for merging, renaming, editing User IDs and locking families by hand; with none open, asks to open a .fqproj or .fcf or build families."/>
+                        </Grid>
+                    </Border>
+                    <Border Style="{StaticResource HomeStepRow}">
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="44"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto" MinWidth="120"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <Border Style="{StaticResource HomeStepNumber}"><TextBlock x:Name="TextBlockHomeStep3Number" Style="{StaticResource HomeStepNumberText}"/></Border>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock x:Name="TextBlockHomeStep3Name" Style="{StaticResource HomeStepName}"/>
+                                <TextBlock x:Name="TextBlockHomeStep3Method" Style="{StaticResource HomeStepLine}"/>
+                            </StackPanel>
+                            <TextBlock Grid.Column="2" x:Name="TextBlockHomeStep3State" Style="{StaticResource HomeStepState}"/>
+                            <Button Grid.Column="3" x:Name="ButtonHomeCompute" Click="ButtonHomeCompute_Click" MinWidth="150" VerticalAlignment="Center"
+                                    ToolTip="Measures every identified peptide and kept de novo precursor from RAW full isotope envelopes into the open project. Disabled until a project is open; Save afterwards to keep the result."/>
+                        </Grid>
+                    </Border>
+                    <Border Style="{StaticResource HomeStepRow}">
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="44"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto" MinWidth="120"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <Border Style="{StaticResource HomeStepNumber}"><TextBlock x:Name="TextBlockHomeStep4Number" Style="{StaticResource HomeStepNumberText}"/></Border>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock x:Name="TextBlockHomeStep4Name" Style="{StaticResource HomeStepName}"/>
+                                <TextBlock x:Name="TextBlockHomeStep4Method" Style="{StaticResource HomeStepLine}"/>
+                            </StackPanel>
+                            <TextBlock Grid.Column="2" x:Name="TextBlockHomeStep4State" Style="{StaticResource HomeStepState}"/>
+                            <Button Grid.Column="3" x:Name="ButtonHomeAnalytics" Click="ButtonHomeAnalytics_Click" MinWidth="150" VerticalAlignment="Center"
+                                    ToolTip="Draws recovery figures with CSV and PNG export from stored full XIC; reads no RAW and recomputes nothing. Disabled until a project is open and changes no family."/>
+                        </Grid>
+                    </Border>
+                    <Border Padding="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="44"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto" MinWidth="120"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <Border Style="{StaticResource HomeStepNumber}"><TextBlock x:Name="TextBlockHomeStep5Number" Style="{StaticResource HomeStepNumberText}"/></Border>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="TextBlockHomeStep5Name" Style="{StaticResource HomeStepName}"/>
+                                    <TextBlock x:Name="TextBlockHomeStep5Optional" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <TextBlock x:Name="TextBlockHomeStep5Method" Style="{StaticResource HomeStepLine}"/>
+                            </StackPanel>
+                            <TextBlock Grid.Column="2" x:Name="TextBlockHomeStep5State" Style="{StaticResource HomeStepState}"/>
+                            <Button Grid.Column="3" x:Name="ButtonHomeDeNovo" Click="ButtonHomeDeNovo_Click" MinWidth="150" VerticalAlignment="Center"
+                                    ToolTip="Optional inspection only: filter PEAKS or DeepNovo calls and compare them with PatternLab in a review queue. Quantify reads de novo folders itself, so this review is not needed for quantitation and changes no family or numbers."/>
+                        </Grid>
+                    </Border>
                 </StackPanel>
+            </Border>
+            <Border Background="{DynamicResource SurfaceBrush}" Padding="16" Margin="0,0,0,18">
+                <DockPanel>
+                    <Button x:Name="ButtonHomeOpen" DockPanel.Dock="Right" Content="Open project" Click="ButtonHomeOpen_Click" VerticalAlignment="Center" Margin="12,0,0,0"
+                            ToolTip="Opens a FamilyQuant project or an older Family Cluster File. Your existing files stay available."/>
+                    <StackPanel>
+                        <TextBlock Text="Current project" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="TextBlockHomeProject" Margin="0,8,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Foreground="{DynamicResource MutedBrush}"
+                                   ToolTip="Names the open project and whether full XIC has been computed. The status bar also tracks the current step and project; Help explains what to do next."/>
+                    </StackPanel>
+                </DockPanel>
             </Border>
             <Grid>
                 <Grid.ColumnDefinitions><ColumnDefinition Width="2*"/><ColumnDefinition Width="18"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>

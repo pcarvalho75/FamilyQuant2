@@ -65,8 +65,10 @@ internal static partial class Program
             string Header(string name) => ((MenuItem)shell.FindName(name)).Header.ToString()!;
             Check("Help paths name the current File commands", new[] { "MenuItemRunUSearch", "MenuItemLoadFQC", "MenuItemSaveProject" }
                 .All(name => help.Contains("File > " + Header(name))));
-            Check("Help paths name the current Analysis commands", new[] { "MenuItemComputeXic", "MenuItemReanotateSEPro" }
-                .All(name => help.Contains("Analysis > " + Header(name))) && help.Contains(Header("MenuItemAnalytics")));
+            Check("Help paths name the current Tools commands", help.Contains(WorkflowNames.Tools + " > " + Header("MenuItemReanotateSEPro"))
+                && !help.Contains("Analysis >"));
+            Check("Help names Quantify and Results by their one step name", Header("MenuItemComputeXic") == WorkflowNames.Quantify
+                && help.Contains("from Quantify") && help.Contains(Header("MenuItemAnalytics")));
             var build = new USearchLib();
             Check("Help names the current Build action and exhaustive option", help.Contains(((Button)build.FindName("ButtonBuildFamilies")).Content.ToString()!)
                 && help.Contains(((CheckBox)build.FindName("CheckBoxExhaustiveClustering")).Content.ToString()!));

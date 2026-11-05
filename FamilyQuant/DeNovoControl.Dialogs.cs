@@ -204,7 +204,7 @@ public partial class DeNovoControl
 
             // Not wrapped: the verdict list and the provenance list are aligned columns, and reflowing
             // them at the window's width would take that alignment apart.
-            TextReportWindow.Show("FamilyQuant · De novo evidence", HelpText(),
+            TextReportWindow.Show("FamilyQuant · " + WorkflowNames.DeNovoReview, HelpText(),
                                   Window.GetWindow(this));
         }
 

@@ -362,6 +362,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ProjectCommandReadyTests(Path.Combine(workDir, "project-command-ready")));
             suite.AddWithApplication(() => ComputeProgressTests(Path.Combine(workDir, "compute-progress")));
             suite.Add(() => FamilyViewTests());
+            suite.AddWithApplication(() => FamilyGridLayoutTests());
             suite.Add(() => TableAppearanceTests());
             suite.Add(() => EvidenceReviewModelTests());
             suite.Add(() => EvidenceCoverageUiTests(Path.Combine(workDir, "evidence-coverage-ui")));
@@ -434,6 +435,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ShellStatusTests(workDir));
             suite.Add(() => HomeStartTests(workDir));
             suite.Add(() => ShellNavigationTests(workDir));
+            suite.Add(() => WorkflowNameTests());
             suite.Add(() => AppCommandReuseTests(workDir));
             suite.Add(() => ShellProjectOperationTests(workDir));
             suite.Add(() => ShellSavingTests(workDir));

@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <Menu x:Name="MainMenu" Grid.Row="0" Background="{DynamicResource SurfaceBrush}">
             <MenuItem x:Name="MenuFile" Header="File" ToolTip="Create, open, save and export your project.">
-                <MenuItem x:Name="MenuItemRunUSearch" Header="New from database" Command="New" InputGestureText="Ctrl+N"
+                <MenuItem x:Name="MenuItemRunUSearch" Header="Build families" Command="New" InputGestureText="Ctrl+N"
                           ToolTip="Builds families from a FASTA or target-decoy database. Save the open project before starting a different database."/>
                 <MenuItem x:Name="MenuItemLoadFQC" Header="Open" Command="Open" InputGestureText="Ctrl+O"
                           ToolTip="Opens a FamilyQuant project or an older Family Cluster File. Save your current changes first."/>
@@ -42,7 +42,7 @@
                 <MenuItem x:Name="MenuItemReportDetails" Header="Report details" Click="MenuItemReportDetails_Click" IsEnabled="False"
                           ToolTip="Edit the study description and written interpretation saved with the project. Disabled until a project is open."/>
                 <MenuItem x:Name="MenuItemExportReport" Header="Export report" Click="MenuItemExportReport_Click"
-                          ToolTip="Write a Word report from stored Results and selected sections or figures. Compute full XIC first when no Results are stored."/>
+                          ToolTip="Write a Word report from stored Results and selected sections or figures. Use Quantify first when no Results are stored."/>
                 <MenuItem x:Name="MenuItemAiDraft" Header="Draft interpretation with AI..." Click="MenuItemAiDraft_Click"
                           ToolTip="Optionally review project information, then request and review an AI interpretation draft."/>
                 <MenuItem x:Name="MenuItemRecent" Header="Recent projects" SubmenuOpened="MenuItemRecent_SubmenuOpened"
@@ -62,12 +62,18 @@
                 <MenuItem x:Name="MenuItemFind" Header="Find proteins" Command="Find" InputGestureText="Ctrl+F"
                           ToolTip="Focuses the family search box in the open project. Disabled until a project is loaded."/>
             </MenuItem>
-            <MenuItem Header="View" SubmenuOpened="MenuView_SubmenuOpened"
-                      ToolTip="Navigate between project views and choose the appearance or visible protein rows.">
-                <MenuItem x:Name="MenuItemHome" Header="Start page" Click="MenuItemHome_Click"
-                          ToolTip="Returns to the start page while keeping your project open. Its actions use these same menu commands."/>
-                <MenuItem x:Name="MenuItemFamilies" Header="Families" Click="MenuItemFamilies_Click"
-                          ToolTip="Returns to the current family table, or opens a project when none is loaded. Existing curation stays in memory."/>
+            <MenuItem x:Name="MenuView" Header="View" SubmenuOpened="MenuView_SubmenuOpened"
+                      ToolTip="Move between Home and the steps, and choose the appearance or visible protein rows.">
+                <MenuItem x:Name="MenuItemHome" Header="Home" Click="MenuItemHome_Click" InputGestureText="Alt+0"
+                          ToolTip="Returns to Home and its five steps while keeping your project open. Each step opens the same screen as the sidebar."/>
+                <MenuItem x:Name="MenuItemFamilies" Header="Curate families" Click="MenuItemFamilies_Click" InputGestureText="Alt+2"
+                          ToolTip="Returns to the open project's families; with none open, asks to open a project or build families. Existing curation stays in memory."/>
+                <MenuItem x:Name="MenuItemComputeXic" Header="Quantify" Click="MenuItemComputeXic_Click" IsEnabled="False" InputGestureText="Alt+3"
+                          ToolTip="Measures identified and kept de novo precursors from RAW files with the full isotope envelope. Disabled until a project is loaded."/>
+                <MenuItem x:Name="MenuItemAnalytics" Header="Results" Click="MenuItemAnalytics_Click" InputGestureText="Alt+4"
+                          ToolTip="Shows the project's stored quantitation and its exports. Use Quantify first when no results are stored."/>
+                <MenuItem x:Name="MenuItemDeNovo" Header="De novo review" Click="MenuItemDeNovo_Click" InputGestureText="Alt+5"
+                          ToolTip="Optional: imports, filters and compares PEAKS or DeepNovo evidence with PatternLab. It changes no family or quantitation."/>
                 <Separator/>
                 <MenuItem Header="Appearance" ToolTip="Choose light or dark surfaces without changing the project or its numbers.">
                     <MenuItem x:Name="MenuThemeDark" Header="Dark" IsCheckable="True" IsChecked="True" Click="MenuThemeDark_Click"
@@ -83,13 +89,7 @@
                 <MenuItem x:Name="MenuItemHideContaminants" Header="Hide contaminants" IsCheckable="True" Click="MenuItemHideContaminants_Click"
                           ToolTip="Hides contaminant rows in the family table and its CSV without changing percentages. Disabled until a project is loaded."/>
             </MenuItem>
-            <MenuItem Header="Analysis" SubmenuOpened="MenuAnalysis_SubmenuOpened" ToolTip="Compute quantitation, inspect results or review de novo evidence.">
-                <MenuItem x:Name="MenuItemComputeXic" Header="Compute full XIC" Click="MenuItemComputeXic_Click" IsEnabled="False"
-                          ToolTip="Measures identified and kept de novo precursors from RAW files with the full isotope envelope. Disabled until a project is loaded."/>
-                <MenuItem x:Name="MenuItemAnalytics" Header="Results" Click="MenuItemAnalytics_Click"
-                          ToolTip="Shows the project's stored quantitation and its exports. Compute full XIC first when no results are stored."/>
-                <MenuItem x:Name="MenuItemDeNovo" Header="De novo evidence" Click="MenuItemDeNovo_Click"
-                          ToolTip="Imports, filters and compares PEAKS or DeepNovo evidence with PatternLab. It changes no family or quantitation."/>
+            <MenuItem x:Name="MenuTools" Header="Tools" SubmenuOpened="MenuAnalysis_SubmenuOpened" ToolTip="Extra tools beside the five steps: the spectrum table, the clustering diagnostic and SEPro reannotation.">
                 <MenuItem x:Name="MenuItemSpectrumComparison" Header="Spectrum comparison" Click="MenuItemSpectrumComparison_Click" IsEnabled="False"
                           ToolTip="Shows the source comparison table and its existing CSV and score plot exports. Disabled until spectrum evidence is loaded."/>
                 <MenuItem x:Name="MenuItemClusteringDiagnostic" Header="Clustering diagnostic" Click="MenuItemClusteringDiagnostic_Click" IsEnabled="False"

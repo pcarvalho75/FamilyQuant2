@@ -190,7 +190,7 @@ namespace FamilyQuant
             if (curation == null) throw new ArgumentNullException(nameof(curation));
             if (families == null) throw new ArgumentNullException(nameof(families));
             if (manifest.DeNovoOverlap == null)
-                throw new InvalidOperationException("This project has no stored de novo/search-engine overlap study. Recompute full XIC with the configured de novo input, or reconcile it in De Novo Step 2.");
+                throw new InvalidOperationException("This project has no stored de novo/search-engine overlap study. Recompute full XIC with the configured de novo input, or reconcile it in De novo review, step 2.");
             if (!manifest.DeNovoOverlap.HasScanLevelSequenceComparison)
                 throw new InvalidOperationException("This project's overlap study predates the literal same-file/same-scan sequence comparison. Recompute full XIC with the configured de novo input before exporting the talk plots.");
             if (manifest.DeNovoScoreDistribution == null)
@@ -2690,7 +2690,7 @@ namespace FamilyQuant
 
         protected override void OnRender(DrawingContext dc)
         {
-            Ground(dc, "De novo sequence evidence across toxin families",
+            Ground(dc, "De novo sequence evidence across families",
                 "Pooled PTM-cleaned sequences; PEAKS-only, shared and DeepNovo-only sets are disjoint. Search is separate context.");
             if (ActualWidth < 700 || ActualHeight < 360) return;
 

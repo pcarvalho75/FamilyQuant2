@@ -14,7 +14,7 @@ namespace FamilyQuant
     /// families do not add up to 100%, what a shared peptide is, and why the Divide and Conquer identity
     /// is a floor rather than a recommendation.
     ///
-    /// <see cref="BuildDeNovo"/> is the second page, for the de novo evidence screen. Two pages and not
+    /// <see cref="BuildDeNovo"/> is the second page, for the De novo review screen. Two pages and not
     /// one: they are two workflows, and neither page's text applies to the other's screen.
     /// </summary>
     public static class HelpContent
@@ -23,7 +23,7 @@ namespace FamilyQuant
             "1. Fetch evidence: download UniProt annotations for the project's proteins.\n" +
             "2. Group by evidence: review the scope and proposal, then Apply grouping.\n" +
             "3. Fetch family world: download family references for the confirmed task and scope.\n" +
-            "4. Compute full XIC: open Quantify to measure peptide signal from the RAW files.\n";
+            "4. Quantify: measure peptide signal from the RAW files.\n";
 
         /// <summary>
         /// <paramref name="profile"/> is null before a project is loaded; the text then explains what the
@@ -38,7 +38,7 @@ namespace FamilyQuant
             sb.AppendLine();
 
             sb.AppendLine("HOW QUANTITATION WORKS");
-            sb.AppendLine("Two sources: the Full XIC column comes from Analysis > Compute full XIC (Quantify).");
+            sb.AppendLine("Two sources: the Full XIC column comes from Quantify.");
             sb.AppendLine("The optional PatternLab .plp supplies the 'Share of signal' column.");
             sb.AppendLine("Shared peptides applies to both columns; PatternLab share of and Recalculate apply");
             sb.AppendLine("to the .plp column. Share of under Full XIC changes that column immediately.");
@@ -48,26 +48,31 @@ namespace FamilyQuant
 
             sb.AppendLine("THE ORDER OF WORK");
             sb.AppendLine("-----------------");
-            sb.AppendLine("1. File > New from database opens Build. Choose database, then Build families on");
-            sb.AppendLine("   a FASTA or target-decoy (.T-R) database. That writes a Family");
-            sb.AppendLine("   Cluster File (.fcf) next to the database: proteins grouped into families.");
-            sb.AppendLine("2. File > Open opens that .fcf in Families, where you");
-            sb.AppendLine("   follow the numbered Grouping order below before quantitation.");
-            sb.AppendLine("3. Analysis > Compute full XIC opens Quantify for the primary quantitation route.");
-            sb.AppendLine("   In Families, PatternLab (optional) offers Load PatternLab project for a .plp. It");
+            sb.AppendLine("The five steps, as Home and the sidebar list them (steps 1 to 4 in order, 5 optional):");
+            sb.AppendLine(WorkflowNames.Flow);
+            sb.AppendLine("1. " + WorkflowNames.BuildFamilies + " groups by sequence identity with USearch: File > Build families,");
+            sb.AppendLine("   Home or the sidebar opens it. Choose database, then Build families on a FASTA or");
+            sb.AppendLine("   target-decoy (.T-R) database. That writes a Family Cluster File (.fcf) next to the");
+            sb.AppendLine("   database: proteins grouped into families.");
+            sb.AppendLine("2. " + WorkflowNames.CurateFamilies + ": File > Open opens that .fcf for curation. Part a, " + WorkflowNames.GroupByEvidence + ",");
+            sb.AppendLine("   follows the numbered Grouping order below; part b, " + WorkflowNames.GroupByWords + ", merges families by");
+            sb.AppendLine("   their description words (Recluster by words) or a keyword list (Group by keywords).");
+            sb.AppendLine("3. " + WorkflowNames.Quantify + ", on Home or the sidebar, is the primary quantitation route.");
+            sb.AppendLine("   In Curate families, PatternLab (optional) offers Load PatternLab project for a .plp. It");
             sb.AppendLine("   must have been exported at PEPTIDE level - a protein-level export has nothing");
             sb.AppendLine("   this program can attribute to a family.");
-            sb.AppendLine("4. In Quantitation, choose Shared peptides for either source. Share of applies to");
+            sb.AppendLine("   In Quantitation, choose Shared peptides for either source. Share of applies to");
             sb.AppendLine("   Full XIC immediately; PatternLab share of needs Recalculate for the .plp column.");
-            sb.AppendLine("5. File > Export writes CSV; Analysis > Reannotate SEPro stamps the family numbers back");
-            sb.AppendLine("   into a SEPro result package.");
+            sb.AppendLine("4. " + WorkflowNames.Results + " reads the stored quantitation without reading RAW. File > Export writes");
+            sb.AppendLine("   CSV; Tools > Reannotate SEPro stamps the family numbers back into a SEPro result package.");
+            sb.AppendLine("5. " + WorkflowNames.DeNovoReview + " is optional: it inspects de novo calls beside PatternLab, and");
+            sb.AppendLine("   Quantify does not need it.");
             sb.AppendLine();
             sb.AppendLine("The families and the quantitation you keep live in one FamilyQuant project file, a");
-            sb.AppendLine(".fqproj, written by File > Save. Beyond the share above, Analysis > Compute full XIC");
-            sb.AppendLine("opens Quantify, which measures each peptide's full isotope envelope straight from the RAW");
-            sb.AppendLine("and stores it in that project, and the Results screen then reads the recovery");
-            sb.AppendLine("from it. An old Family Cluster File (.fcf) still opens, with the quantitation empty");
-            sb.AppendLine("until it is computed.");
+            sb.AppendLine(".fqproj, written by File > Save. Beyond the share above, Quantify measures each");
+            sb.AppendLine("peptide's full isotope envelope straight from the RAW and stores it in that project,");
+            sb.AppendLine("and the Results screen then reads the recovery from it. An old Family Cluster File");
+            sb.AppendLine("(.fcf) still opens, with the quantitation empty until it is computed.");
             sb.AppendLine();
 
             sb.AppendLine("WHAT THE PERCENTAGE IS OF (THE DENOMINATOR)");
@@ -182,7 +187,7 @@ namespace FamilyQuant
 
             sb.AppendLine("THE FAMILY OVERVIEW AND PROTEIN TABLE");
             sb.AppendLine("-------------------------------------");
-            sb.AppendLine("Families keeps the family overview, protein table and actions beside one another.");
+            sb.AppendLine("Curate families keeps the family overview, protein table and actions beside one another.");
             sb.AppendLine("Select a family to show its proteins; All proteins restores the filtered protein");
             sb.AppendLine("list. Each overview row shows its whole-family target count and one family share,");
             sb.AppendLine("including members hidden by display filters; it never adds the repeated protein");
@@ -199,16 +204,19 @@ namespace FamilyQuant
             sb.AppendLine("TIC reporting available when those totals are present; the other reporting modes");
             sb.AppendLine("remain usable while that mode is greyed out.");
             sb.AppendLine();
-            sb.AppendLine("GROUPING");
-            sb.AppendLine("--------");
+            sb.AppendLine("GROUPING: PART A OF CURATE FAMILIES, GROUP BY EVIDENCE");
+            sb.AppendLine("------------------------------------------------------");
             sb.AppendLine(GroupingOrder);
             sb.AppendLine("Fetch evidence stores annotations for grouping; Fetch family world stores reference");
             sb.AppendLine("sequences for Database gap. Both need an internet connection when downloading.");
             sb.AppendLine("Save the project to keep the evidence, applied grouping and family world.");
             sb.AppendLine();
-            sb.AppendLine("CURATING BY HAND: UNDO, KEYWORD REVIEW, SEARCH-SCOPED RECLUSTERING");
-            sb.AppendLine("------------------------------------------------------------------------");
-            sb.AppendLine("Undo steps back through the changes you make in Families, one at a time, without");
+            sb.AppendLine("PART B OF CURATE FAMILIES, GROUP BY WORDS, AND CURATING BY HAND");
+            sb.AppendLine("----------------------------------------------------------------");
+            sb.AppendLine("Group by words merges families by their description words (Recluster by words) or builds");
+            sb.AppendLine("one family from a keyword list (Group by keywords); both are reviewed before they apply.");
+            sb.AppendLine();
+            sb.AppendLine("Undo steps back through the changes you make in Curate families, one at a time, without");
             sb.AppendLine("reloading the file. It reverses Recluster by words, Group by keywords, evidence");
             sb.AppendLine("grouping, a family name or checkbox edit, a batch edit, a User ID edit or lock removal,");
             sb.AppendLine("putting the changed family numbers, annotations and");
@@ -269,7 +277,7 @@ namespace FamilyQuant
             sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");
             sb.AppendLine("Cancelling leaves the open grouping unchanged and adds no Undo step.");
             sb.AppendLine();
-            sb.AppendLine("In Review grouping and the Families protein table, right-click to copy a UniProt code or");
+            sb.AppendLine("In Review grouping and the Curate families protein table, right-click to copy a UniProt code or");
             sb.AppendLine("description or to open its UniProt page. Ctrl+C copies the column you clicked, for");
             sb.AppendLine("every selected row, or the whole row after a click on a row number.");
             sb.AppendLine();
@@ -320,7 +328,7 @@ namespace FamilyQuant
             sb.AppendLine("                 renumbered a family by hand.");
             sb.AppendLine("User ID          your own family number. Editable: change it and the families are");
             sb.AppendLine("                 regrouped, the User column recalculated, and it is the number");
-            sb.AppendLine("                 written back by Analysis > Reannotate SEPro.");
+            sb.AppendLine("                 written back by Tools > Reannotate SEPro.");
             sb.AppendLine("User Annotation  free text, saved in the .fcf and exported. It also NAMES the family");
             sb.AppendLine("                 in the Full XIC composition CSV, the Results chart and the");
             sb.AppendLine("                 evidence pack. A family without one is named by the protein name");
@@ -362,7 +370,7 @@ namespace FamilyQuant
         }
 
         /// <summary>
-        /// The de novo evidence screen's own help, opened by its Help button and by the main window's
+        /// The De novo review screen's own help, opened by its Help button and by the main window's
         /// Help menu while that screen is the one on display.
         ///
         /// It is a separate page rather than a section of <see cref="Build"/> because it is a separate
@@ -394,8 +402,8 @@ namespace FamilyQuant
                 : confidenceName;
             var sb = new StringBuilder();
 
-            sb.AppendLine("THE DE NOVO EVIDENCE SCREEN");
-            sb.AppendLine("===========================");
+            sb.AppendLine("THE DE NOVO REVIEW SCREEN (OPTIONAL)");
+            sb.AppendLine("====================================");
             sb.AppendLine(DeNovoWorkflowHelp.Build());
             sb.AppendLine("Selected source: " + sourceName + " (" + source.FileGlob + "; " +
                           confidenceName + ").");
@@ -422,7 +430,7 @@ namespace FamilyQuant
             sb.AppendLine("agreements as a review queue.");
             sb.AppendLine("That queue is the one thing only this screen produces.");
             sb.AppendLine();
-            sb.AppendLine("Quantify (Analysis > Compute full XIC) uses the selected sources and shared filters for full");
+            sb.AppendLine("Quantify uses the selected sources and shared filters for full");
             sb.AppendLine("XIC computation and reported by Results through the .fqproj project, so the");
             sb.AppendLine("de novo set no longer has to carry the whole story on its own.");
             sb.AppendLine();
@@ -569,7 +577,7 @@ namespace FamilyQuant
             sb.AppendLine();
 
             sb.AppendLine("The following legacy definitions remain as scientific reference for old files.");
-            sb.AppendLine("Their standalone extraction and partition controls were retired from De novo");
+            sb.AppendLine("Their standalone extraction and partition controls were retired from De novo review");
             sb.AppendLine("in 2.0; use Quantify and Results for full XIC.");
             sb.AppendLine();
             sb.AppendLine("LEGACY EXTRACTION SEMANTICS (REFERENCE)");

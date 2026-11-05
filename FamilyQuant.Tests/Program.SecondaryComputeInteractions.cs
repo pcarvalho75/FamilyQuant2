@@ -91,7 +91,7 @@ internal static partial class Program
                 new { BusyBeforeCompletion = busy, EngineCalls = engineCalls, CompletedEvents = published, model.Computed, NoDeNovoFolder = capturedRequest?.DeNovoDirectory == null },
                 complete, "QuantifyControl ButtonCompute -> ComputeCommand -> ComputeAsync -> Completed");
             add(xaml, 111, 111, "visible Compute caption names the same full-XIC action and executes its bound command", "Compute / update full XIC", compute.Content,
-                complete && compute.Content as string == "Compute full XIC" && compute.IsVisible, "QuantifyControl.ButtonCompute.Content", row => row.Kind == "option/copy");
+                complete && compute.Content as string == WorkflowNames.Quantify && compute.IsVisible, "QuantifyControl.ButtonCompute.Content", row => row.Kind == "option/copy");
         }
         finally { host.Close(); old.Close(); }
         SecondaryRestoredCutoffs(legacy, add);
