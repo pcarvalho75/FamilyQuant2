@@ -690,7 +690,7 @@ namespace FamilyQuant
                     var outcome = await ViewModel.FetchEvidenceAsync(FetchDomainsHandlerOverride, operation, extraPositionFamilies, panelOnly);
                     UpdateFilteredResults();
                     string title = panelOnly ? "Retry panel" : "Fetch evidence";
-                    ShellMessages.Report(this, CurationViewModel.DescribeEvidenceFetch(outcome), title,
+                    ShellMessages.Report(this, CurationViewModel.DescribeEvidenceFetch(outcome, panelOnly), title,
                         image: outcome.PanelFailure == null ? MessageBoxImage.Information : MessageBoxImage.Warning,
                         status: SetCurationOperationStatus, showDialog: false);
                 });

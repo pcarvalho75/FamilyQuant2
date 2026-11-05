@@ -26,6 +26,7 @@ namespace FamilyQuant.Tests
             internal int ProteinRequests, PanelRequests;
             internal Action<bool, CancellationToken>? DuringRequest;
             internal string PanelRelease = "2026_03";
+            internal bool MalformedPanel;
             protected override Task<System.Net.Http.HttpResponseMessage> SendAsync(System.Net.Http.HttpRequestMessage request, CancellationToken token)
             {
                 if (request.RequestUri!.Host == "www.ebi.ac.uk")
@@ -45,6 +46,7 @@ namespace FamilyQuant.Tests
                 {"results":[{"primaryAccession":"A0A710","entryType":"UniProtKB unreviewed (TrEMBL)","sequence":{"value":"PEPTIDEK"},"keywords":[{"name":"Scope"}],"comments":[{"commentType":"SIMILARITY","texts":[{"value":"Belongs to the fixture family."}]},{"commentType":"TISSUE SPECIFICITY","texts":[{"value":"Supplied tissue fact."}]}],"uniProtKBCrossReferences":[{"database":"Pfam","id":"PF00001","properties":[{"key":"EntryName","value":"Supplied domain"}]}]}]}
                 """;
                 if (panel) json = json.Replace("A0A710", "P00001", StringComparison.Ordinal).Replace("UniProtKB unreviewed (TrEMBL)", "UniProtKB reviewed (Swiss-Prot)", StringComparison.Ordinal);
+                if (panel && MalformedPanel) json = "{\"results\":[";
                 var response = new System.Net.Http.HttpResponseMessage(panel && failPanel ? System.Net.HttpStatusCode.BadRequest : System.Net.HttpStatusCode.OK)
                     { Content = new System.Net.Http.StringContent(json) };
                 response.Headers.Add("x-uniprot-release", panel ? PanelRelease : "2026_03"); response.Headers.Add("x-total-results", "1");

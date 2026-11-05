@@ -14,10 +14,11 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
-    private sealed class ResumeUniProtHandler : HttpMessageHandler
+    internal sealed class ResumeUniProtHandler : HttpMessageHandler
     {
         internal string Release = "2026_03";
         internal string? FailMarker;
+        internal HttpStatusCode FailureStatus = HttpStatusCode.BadRequest;
         internal int Probes;
         internal List<string> Downloads { get; } = new();
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token)
@@ -33,7 +34,7 @@ internal static partial class Program
             bool stream = uri.AbsolutePath.EndsWith("/stream", StringComparison.Ordinal);
             bool evidence = query.Contains("accessions=", StringComparison.Ordinal);
             if (FailMarker != null && query.Contains(FailMarker, StringComparison.Ordinal))
-                return Task.FromResult(new HttpResponseMessage(HttpStatusCode.BadRequest));
+                return Task.FromResult(new HttpResponseMessage(FailureStatus));
             var names = evidence ? query[(query.IndexOf("accessions=", StringComparison.Ordinal) + 11)..].Split(',')
                 : Regex.Matches(query, "family:\"([^\"]+)\"").Select(m => m.Groups[1].Value).ToArray();
             if (stream || evidence) Downloads.Add(query);

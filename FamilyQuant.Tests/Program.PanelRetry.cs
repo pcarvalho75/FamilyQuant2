@@ -66,9 +66,37 @@ internal static partial class Program
             var outcome = Task.Run(() => EvidenceFetchSession.FetchAsync(incomplete, refused)).GetAwaiter().GetResult();
             string message = CurationViewModel.DescribeEvidenceFetch(outcome);
             Check("Z1e the result names the saved protein evidence, incomplete panel, HTTP reason and retry action",
-                message.Contains("Protein evidence saved for 1 proteins", StringComparison.Ordinal)
+                message.Contains("Protein evidence saved for 1 protein.", StringComparison.Ordinal)
+                && message.Contains("1 family missing", StringComparison.Ordinal) && message.Contains("1 of 1 batch", StringComparison.Ordinal)
                 && message.Contains("panel incomplete", StringComparison.Ordinal) && message.Contains("HTTP 400", StringComparison.Ordinal)
                 && message.Contains("Retry panel", StringComparison.Ordinal) && !message.Contains('\n'));
+        }
+        {
+            var local = new FamilyClusterFile { MyExtendedFastaItems = new() { new() { SequenceIdentifier = "local_entry", Sequence = "PEPTIDEK" } } };
+            using var requests = new EvidenceAndPanelHandler();
+            var outcome = Task.Run(() => EvidenceFetchSession.FetchAsync(local, requests)).GetAwaiter().GetResult();
+            Check("Z1e a normal zero-accession fetch explains its unsupported database origin",
+                CurationViewModel.DescribeEvidenceFetch(outcome).StartsWith("No protein in this file has a UniProt code.", StringComparison.Ordinal)
+                && CurationViewModel.DescribeEvidenceFetch(outcome).Contains("stays unassigned", StringComparison.Ordinal)
+                && !CurationViewModel.DescribeEvidenceFetch(outcome).Contains("Stored protein evidence kept", StringComparison.Ordinal));
+            Check("Z1e a panel-only retry explicitly names retained protein evidence",
+                CurationViewModel.DescribeEvidenceFetch(outcome, panelOnly: true).StartsWith("Stored protein evidence kept.", StringComparison.Ordinal));
+        }
+        {
+            var edited = RetryPanelFile(); var expected = FamilyClusterFile.FromJsonText(edited.ToJsonText());
+            expected.MyExtendedFastaItems[0].UserAnnotation = "User edit";
+            using var requests = new EvidenceAndPanelHandler();
+            requests.DuringRequest = (panel, _) => { if (panel) edited.MyExtendedFastaItems[0].UserAnnotation = "User edit"; };
+            Check("Z1e a file change during Retry panel rejects fetched data and preserves the user's edit",
+                Throws<InvalidDataException>(() => Task.Run(() => EvidenceFetchSession.RetryPanelAsync(edited, requests)).GetAwaiter().GetResult())
+                && edited.ToJsonText() == expected.ToJsonText());
+        }
+        {
+            var malformed = RetryPanelFile(); using var requests = new EvidenceAndPanelHandler { MalformedPanel = true };
+            var outcome = Task.Run(() => EvidenceFetchSession.FetchAsync(malformed, requests)).GetAwaiter().GetResult();
+            Check("Z1e malformed-panel fallback retains evidence and failed/total batch counts",
+                malformed.MyExtendedFastaItems[0].Domains == "Supplied domain" && outcome.Panel is { IsComplete: false, TotalBatches: 1, FailedBatches: 1 }
+                && CurationViewModel.DescribeEvidenceFetch(outcome).Contains("1 of 1 batch", StringComparison.Ordinal));
         }
     }
 

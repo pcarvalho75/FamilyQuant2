@@ -206,4 +206,10 @@ public static partial class ReferencePanelFetcher
         if (current.Count > 0) batches.Add(current);
         return batches;
     }
+
+    internal static int PlannedStreamBatchCount(List<string> families)
+    {
+        try { return StreamBatches(families).Count; }
+        catch (InvalidDataException) { return 0; }
+    }
 }

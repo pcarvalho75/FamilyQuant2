@@ -400,7 +400,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-task-order", "FamilyQuant.Tests.Program.TaskOrderRegression(System.String[])"),
         SuiteCommandRule.Covered("--test-ui-colors", "FamilyQuant.Tests.Program.UiColorTests()"),
         SuiteCommandRule.Covered("--test-ui-icons", "FamilyQuant.Tests.Program.UiIconTests()"),
-        SuiteCommandRule.Covered("--test-ui-wording", "FamilyQuant.Tests.Program.AppearanceDirectionTests()", "FamilyQuant.Tests.Program.CurationWordingTests()", "FamilyQuant.Tests.Program.DeNovoHelpContentTests()", "FamilyQuant.Tests.Program.HelpContentTests()", "FamilyQuant.Tests.Program.ReportViewTests()"),
+        SuiteCommandRule.Covered("--test-ui-wording", "FamilyQuant.Tests.Program.AppearanceDirectionTests()", "FamilyQuant.Tests.Program.CurationWordingTests()", "FamilyQuant.Tests.Program.DeNovoHelpContentTests()", "FamilyQuant.Tests.Program.HelpContentTests()", "FamilyQuant.Tests.Program.ReportViewTests()", "FamilyQuant.Tests.Program.TypographyRulesTests()"),
         SuiteCommandRule.Covered("--test-update-check", "FamilyQuant.Tests.Program.UpdateCheckCommand(System.String[],System.String)"),
         SuiteCommandRule.Covered("--test-usearch-binary", "FamilyQuant.Tests.Program.UseSearchBinaryTests(System.String)"),
         SuiteCommandRule.Covered("--test-word-report", "FamilyQuant.Tests.Program.WordReportTests(System.String)"),

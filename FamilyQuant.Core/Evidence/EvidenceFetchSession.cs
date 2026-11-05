@@ -95,6 +95,7 @@ public static class EvidenceFetchSession
                 {
                     Provider = "UniProt", Release = evidence.Provenance.Release,
                     Families = families, MissingFamilies = families.ToList(), FailureReason = ex.Message,
+                    TotalBatches = ReferencePanelFetcher.PlannedStreamBatchCount(families), FailedBatches = 1,
                 };
                 staged.EvidenceSource ??= new EvidenceProvenance();
                 staged.EvidenceSource.ReferencePanel = panel;

@@ -57,9 +57,25 @@ namespace FamilyQuant.Tests
                 && help.Contains("Pfam domains", StringComparison.Ordinal));
             string fetchSource = File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "FamilyQuant", "ClusterGenerationControl.xaml.cs"))
                 + File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "FamilyQuant", "CurationViewModel.Evidence.cs"));
+            var messages = new List<ShellMessage>();
+            void CaptureMessage(ShellMessage value) => messages.Add(value);
+            var retry = new ClusterGenerationControl(RetryPanelFile());
+            using var normalHandler = new EvidenceAndPanelHandler();
+            using var retryHandler = new EvidenceAndPanelHandler(failPanel: true);
+            control.FetchDomainsHandlerOverride = normalHandler;
+            retry.FetchDomainsHandlerOverride = retryHandler;
+            ShellMessages.Reported += CaptureMessage;
+            try
+            {
+                var normalFetch = control.FetchProteinEvidenceAsync(); FinishBusyTask(normalFetch); normalFetch.GetAwaiter().GetResult();
+                var retryFetch = retry.RetryPanelAsync(); FinishBusyTask(retryFetch); retryFetch.GetAwaiter().GetResult();
+            }
+            finally { ShellMessages.Reported -= CaptureMessage; }
+            string fetchLabel = (string)UiField<Button>(control, "ButtonFetchDomains")!.Content;
+            string retryLabel = (string)UiField<Button>(retry, "ButtonRetryPanel")!.Content;
             Check("fetch retry and dialog title name the visible fetch command",
-                fetchSource.Contains("press Fetch evidence again", StringComparison.Ordinal)
-                && fetchSource.Contains("string title = \"Fetch evidence\"", StringComparison.Ordinal)
+                messages.Any(message => message.Title == fetchLabel)
+                && messages.Any(message => message.Title == retryLabel && message.Text.Contains(retryLabel, StringComparison.Ordinal))
                 && !fetchSource.Contains("Fetch Domains", StringComparison.Ordinal));
             control.Measure(new Size(1366, 820)); control.Arrange(new Rect(0, 0, 1366, 820));
             var primaryStyle = (Style)Application.Current.FindResource("PrimaryButton");

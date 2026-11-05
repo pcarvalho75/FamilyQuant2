@@ -55,20 +55,23 @@ public sealed partial class CurationViewModel
             + value.Found.ToString("N0", CultureInfo.CurrentCulture) + " entries received.", value.CompletedBatches, value.TotalBatches);
     }
 
-    public static string DescribeEvidenceFetch(EvidenceFetchOutcome outcome)
+    public static string DescribeEvidenceFetch(EvidenceFetchOutcome outcome, bool panelOnly = false)
     {
         var result = outcome.Evidence;
-        string message = result.Asked == 0 ? "Stored protein evidence kept."
-            : "Protein evidence saved for " + result.Found.ToString("N0", CultureInfo.CurrentCulture) + " proteins."
-                + (result.Missing > 0 ? " " + result.Missing.ToString("N0", CultureInfo.CurrentCulture) + " entries kept their previous evidence." : "");
+        static string Count(int value, string singular, string plural) => value.ToString("N0", CultureInfo.CurrentCulture)
+            + " " + (value == 1 ? singular : plural);
+        string message = result.Asked == 0 ? panelOnly ? "Stored protein evidence kept."
+                : "No protein in this file has a UniProt code. A database of another origin stays unassigned."
+            : "Protein evidence saved for " + Count(result.Found, "protein", "proteins") + "."
+                + (result.Missing > 0 ? " " + Count(result.Missing, "entry kept its", "entries kept their") + " previous evidence." : "");
         if (outcome.Panel is { IsComplete: true })
-            message += " Reference panel saved for " + outcome.Panel.Families.Count.ToString("N0", CultureInfo.CurrentCulture) + " families.";
+            message += " Reference panel saved for " + Count(outcome.Panel.Families.Count, "family", "families") + ".";
         if (outcome.Panel is { IsComplete: false } panel)
         {
             var status = System.Text.RegularExpressions.Regex.Match(panel.FailureReason, @"\bHTTP [0-9]{3}\b");
-            message += " Reference panel incomplete: " + panel.MissingFamilies.Count.ToString("N0", CultureInfo.CurrentCulture)
-                + " families missing" + (panel.TotalBatches > 0 ? " in " + panel.FailedBatches.ToString("N0", CultureInfo.CurrentCulture)
-                    + " of " + panel.TotalBatches.ToString("N0", CultureInfo.CurrentCulture) + " batches" : "")
+            message += " Reference panel incomplete: " + Count(panel.MissingFamilies.Count, "family", "families")
+                + " missing" + (panel.TotalBatches > 0 ? " in " + panel.FailedBatches.ToString("N0", CultureInfo.CurrentCulture)
+                    + " of " + Count(panel.TotalBatches, "batch", "batches") : "")
                 + (status.Success ? " (" + status.Value + ")" : " (UniProt request failed)") + ". Retry panel.";
         }
         if (result.PositionAsked > 0)
