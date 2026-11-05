@@ -41,8 +41,8 @@ Version 11 delivered 10 steps (in the archive): the clean Recent projects list, 
 |---|---|---|---|
 | Orchestrator | Claude, main session | Assigns, merges, routes reviews, runs the suite once per release, publishes, keeps this file and the board true. Writes no product code. | |
 | FQFetch (FE) | Sol 6.1 xhigh | W1 Fetch evidence that keeps its work (2.1.7); then W6 de novo | `D:/FamilyQuant-wt/fetch` |
-| FQHome (HM) | Sol 6.1 xhigh | W2 Update and Setup and W3 Close project (2.1.7); W7 release 2.1.7; then W5 Families layout and W8 release 2.1.8 |
-| FQOpus (OP) | Opus 5.5, this session's Fiocruz account (D67) | W4 Home and one name per thing (2.1.8) | `C:/FamilyQuant-wt2/opus` | `D:/FamilyQuant-wt/home` |
+| FQHome (HM) | Sol 6.1 xhigh | W2 Update and Setup and W3 Close project (2.1.7); W7 release 2.1.7; then W5 Families layout and W8 release 2.1.8 | `D:/FamilyQuant-wt/home` |
+| FQOpus (OP) | Opus 5.5, this session's Fiocruz account (D67) | W4 Home and one name per thing (2.1.8) | `C:/FamilyQuant-wt2/opus` |
 | FQKimi (KM) | Kimi Code (K3.1 Pro) | Reviewer (D64), with FQReviewDS; the desk gives each finished step to whichever reviewer is free, in batches of at most 8; code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-kimi` |
 | FQReviewDS (DS) | DeepSeek V4.1 Flash | Second reviewer (D67); code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
 
