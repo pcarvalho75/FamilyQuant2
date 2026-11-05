@@ -15,6 +15,30 @@ contents, public types and calculations are unchanged.
 | `FullXicRunStage.Extract` | One matched run, prepared input, cache callbacks, pending result | Measured quant rows, TIC, RAW precursor metadata and independent detector diagnostic |
 | `FullXicCompletionStage.Complete` | Prepared input, measured result, RAW metadata | Derived fractions, reference diagnostics, family mapping, complete spectrum table, accepted-score study and optional CSV |
 
+## Same-scan conflict choice (D65)
+
+New Compute requests default `FullXicOptions.PatternLabWinsScanConflicts` to true.
+Before deriving any quantity, completion calls
+`SpectrumComparisonTable.ApplyPatternLabConflictRule` with the complete source,
+identification and measured-anchor populations. It shares the table's exact claim
+builder, top-PatternLab ranking and non-chaining, isotope-aware precursor clusters.
+A de novo anchor with a different sequence in the same scan and precursor is
+excluded; comparison removes PTMs and folds I/L. Different precursor hypotheses
+remain separate. Exclusion precedes the ordinary peptide collapse, so another
+nonconflicting anchor can still represent that peptide.
+
+Extraction requests and their caches are unchanged. The chosen rule and excluded
+anchor counts are stored in the manifest; report Methods states the recorded
+choice. A missing choice in an older project stays unrecorded, and opening or
+changing the next-request checkbox never rewrites its stored quantities. Only a
+new Compute applies the choice. OFF retains the prior conflict behavior.
+
+`--test-patternlab-priority` covers known quantities, precursor boundaries,
+persisted choices and real Compute request forwarding. The selected-input
+`--patternlab-priority-replay` reuses measured anchors and the native family-share
+producer for explicit before/after counts and aggregate shares, without RAW
+re-extraction or exporting source rows.
+
 Runs remain sequential. A missing run match refuses the operation before a RAW
 is opened or output written. Metadata, detector, family-mapping and optional CSV
 failures retain their existing distinct warning boundaries. All seven studies

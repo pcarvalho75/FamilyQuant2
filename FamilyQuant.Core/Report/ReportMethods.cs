@@ -67,6 +67,9 @@ public static class ReportMethods
         Add("Minimum points per cluster/isotope", manifest.MinPointsForQuant > 0 ? Number(manifest.MinPointsForQuant) : null);
         Add("Derived fractions method", manifest.DerivedMethod);
         Add("De novo union rule", manifest.DeNovoUnionResolutionMethod);
+        Add("Same-scan de novo conflict rule", manifest.PatternLabWinsScanConflicts.HasValue
+            ? manifest.PatternLabWinsScanConflicts.Value ? DeNovo.SpectrumComparisonTable.PatternLabConflictRule : DeNovo.SpectrumComparisonTable.KeepConflictingCallsRule
+            : null);
         Add("Family mapping method", manifest.FamilyMapping?.Method);
         Add("Family mapping minimum identity (fraction)", manifest.FamilyMapping == null ? null : Number(manifest.FamilyMapping.MinIdentity));
         Add("Family mapping protein-set SHA-256", manifest.FamilyMapping?.ProteinSetSha256);

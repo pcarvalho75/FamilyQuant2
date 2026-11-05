@@ -10,7 +10,7 @@
    <Border Background="{DynamicResource SurfaceBrush}" Padding="16" CornerRadius="6">
     <Grid IsEnabled="{Binding CanEdit}">
      <Grid.ColumnDefinitions><ColumnDefinition Width="190"/><ColumnDefinition Width="*"/><ColumnDefinition Width="100"/></Grid.ColumnDefinitions>
-     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
      <Label Content="RAW folder" ToolTip="Acquisition folder whose file names are matched to the identified runs."/>
      <TextBox x:Name="TextBoxRawDirectory" Grid.Column="1" Text="{Binding RawDirectory, UpdateSourceTrigger=PropertyChanged}"
       ToolTip="Folder containing the RAW acquisitions. Runs are matched by file name."/>
@@ -34,6 +34,9 @@
       <Label Content="Minimum points per peak" ToolTip="Required array points per isotope peak, including the two padding points." Margin="20,0,0,0"/><numeric:IntegerUpDown x:Name="IntegerUpDownMinPoints" Margin="{DynamicResource ControlPadding}" Width="70" Minimum="1" Maximum="20" Value="{Binding MinimumPoints, Mode=TwoWay}"
        ToolTip="Points per isotope peak, including two padding points; default 3. Set 1 to restore the legacy height rule."/>
      </WrapPanel>
+     <CheckBox x:Name="CheckBoxPatternLabWinsScanConflicts" Grid.Row="6" Grid.ColumnSpan="3" Margin="0,10,0,0"
+      Content="PatternLab wins conflicting precursors" IsChecked="{Binding PatternLabWinsScanConflicts, Mode=TwoWay}"
+      ToolTip="At Compute, exclude de novo calls that disagree with PatternLab on the same scan and precursor; PTMs are removed and I = L. Stored results change only after Compute."/>
     </Grid>
    </Border>
    <TextBlock Text="{Binding Basis}" ToolTip="{Binding BasisDetails}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,12,0,8"/>

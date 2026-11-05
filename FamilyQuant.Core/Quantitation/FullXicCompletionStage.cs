@@ -23,6 +23,14 @@ namespace FamilyQuant
             List<PatternLabPsm> psms = input.Psms;
             FullXicSourceInput deNovoImport = input.Sources;
             QuantManifest manifest = result.Manifest;
+            var conflictRule = SpectrumComparisonTable.ApplyPatternLabConflictRule(deNovoImport.AllSourceRows,
+                psms, result.Rows, options.PatternLabWinsScanConflicts, operation);
+            result.Rows = conflictRule.Rows;
+            manifest.PatternLabWinsScanConflicts = options.PatternLabWinsScanConflicts;
+            manifest.PatternLabConflictExcludedAnchorsByRun = conflictRule.ExcludedByRun;
+            result.Notes.Add(options.PatternLabWinsScanConflicts ? SpectrumComparisonTable.PatternLabConflictRule : SpectrumComparisonTable.KeepConflictingCallsRule);
+            if (conflictRule.ExcludedAnchors > 0)
+                result.Notes.Add("De novo anchors excluded by the same-precursor rule: " + conflictRule.ExcludedAnchors.ToString("N0", CultureInfo.InvariantCulture) + ".");
             // Q3: derive the fractions of the TIC from the raw per-peptide quant and record them in the
             // manifest, so the paper numbers persist in the .fqproj. The raw rows stay the source of
             // truth; this only reads them. The dedup collapse (one max-M+0 area per sequence, charge and

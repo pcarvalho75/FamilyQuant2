@@ -9,6 +9,8 @@ internal static class SuiteCommandInventory
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
         SuiteCommandRule.Covered("--test-same-scan-conflicts", "FamilyQuant.Tests.Program.SameScanConflictTests()"),
+        SuiteCommandRule.Covered("--test-patternlab-priority", "FamilyQuant.Tests.Program.PatternLabPriorityTests(System.String)"),
+        SuiteCommandRule.Excluded("--patternlab-priority-replay", "Explicit read-only stored-project replay writes aggregate before/after counts and family shares; synthetic rule checks are enrolled separately."),
         SuiteCommandRule.Excluded("--same-scan-conflicts", "Read-only aggregate measurement requires explicit project, SEPro package, PEAKS exports and owned output; the synthetic same-scan fixture is enrolled separately."),
         SuiteCommandRule.Covered("--test-homology-search-equivalence", "FamilyQuant.Tests.Program.HomologySearchEquivalenceTests()", "FamilyQuant.Tests.HomologyTests.Run(System.Action`3[System.String,System.Boolean,System.String])"),
         SuiteCommandRule.Covered("--test-homology-score-tier", "FamilyQuant.Tests.Program.HomologyScoreTierTests()"),

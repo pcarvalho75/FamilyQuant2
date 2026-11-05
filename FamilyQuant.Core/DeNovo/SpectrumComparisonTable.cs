@@ -149,7 +149,7 @@ namespace FamilyQuant.DeNovo
     /// are kept and shown, yet exactly one precursor/XIC/quant value is shared, and the exported
     /// PrecursorIsotopeOffsetSelected / PrecursorMatchBasis columns keep the correction auditable.
     /// </summary>
-    public static class SpectrumComparisonTable
+    public static partial class SpectrumComparisonTable
     {
         public const string DefaultFileName = "spectrum_evidence_comparison.csv";
 
@@ -321,76 +321,7 @@ namespace FamilyQuant.DeNovo
                     r.ScanNumber), StringComparer.OrdinalIgnoreCase)
                 .ToDictionary(g => g.Key, g => g.OrderByDescending(r => r.ChargeKnown)
                     .ThenByDescending(r => r.PrecursorMzKnown).First(), StringComparer.OrdinalIgnoreCase);
-            var claims = new List<Claim>();
-
-            foreach (PeaksDeNovoRow row in peaks)
-                claims.Add(SourceClaim(row, IsDeepNovo(row) ? ClaimKind.DeepNovo : ClaimKind.Peaks,
-                    true, acceptedSourceKeys == null || acceptedSourceKeys.Contains(SourceObservationKey(row))));
-            foreach (PeaksDeNovoRow row in deep)
-                claims.Add(SourceClaim(row, IsDeepNovo(row) ? ClaimKind.DeepNovo : ClaimKind.Peaks,
-                    true, acceptedSourceKeys == null || acceptedSourceKeys.Contains(SourceObservationKey(row))));
-            foreach (PatternLabPsm psm in psms) claims.Add(PatternLabClaim(psm, true));
-            var externalClaimKeys = new HashSet<string>(claims
-                .Where(c => c.IsExternalSourceObservation)
-                .Select(EquivalentClaimKey), StringComparer.Ordinal);
-
-            // Persisted quant rows supply their own sequence claims when the original CSV/.sepr2 inputs
-            // are unavailable. When those inputs ARE supplied, identical embedded evidence is skipped so
-            // a source does not count twice merely because it was persisted beside its XIC.
-            foreach (QuantRow quant in quants)
-            {
-                string run = DeNovoReconciler.NormalizeRunName(quant.Run ?? string.Empty);
-                claims.Add(new Claim
-                {
-                    Kind = ClaimKind.Quant,
-                    Run = run,
-                    Scan = quant.Scan,
-                    Charge = quant.Charge,
-                    Mz = quant.PrecursorMz,
-                    Sequence = quant.Sequence ?? string.Empty,
-                    Quant = quant,
-                });
-
-                if (string.Equals(quant.Side, NativeQuantFractions.SideIdentified,
-                    StringComparison.Ordinal))
-                {
-                    var embedded = new Claim
-                    {
-                        Kind = ClaimKind.PatternLab,
-                        Run = run,
-                        Scan = quant.Scan,
-                        Charge = quant.Charge,
-                        Mz = quant.PrecursorMz,
-                        Sequence = quant.Sequence ?? string.Empty,
-                        Score = quant.PatternLabXScore,
-                        ScoreField = "XCorr",
-                        SourceId = "patternlab",
-                        SourceDisplayName = "PatternLab",
-                    };
-                    if (!externalClaimKeys.Contains(EquivalentClaimKey(embedded))) claims.Add(embedded);
-                }
-
-                foreach (DeNovoEvidence evidence in quant.DeNovoEvidence ?? new List<DeNovoEvidence>())
-                {
-                    ClaimKind kind = string.Equals(evidence.SourceId, DeNovoSource.DeepNovo.Id,
-                        StringComparison.OrdinalIgnoreCase) ? ClaimKind.DeepNovo : ClaimKind.Peaks;
-                    var embedded = new Claim
-                    {
-                        Kind = kind,
-                        Run = run,
-                        Scan = quant.Scan,
-                        Charge = quant.Charge,
-                        Mz = quant.PrecursorMz,
-                        Sequence = evidence.Sequence ?? string.Empty,
-                        Score = evidence.ConfidenceValue,
-                        ScoreField = evidence.ConfidenceField ?? string.Empty,
-                        SourceId = evidence.SourceId ?? string.Empty,
-                        SourceDisplayName = evidence.SourceDisplayName ?? string.Empty,
-                        AcceptedByConfiguredFilters = true,
-                    };
-                    if (!externalClaimKeys.Contains(EquivalentClaimKey(embedded))) claims.Add(embedded);
-                }
-            }
+            var claims = CreateClaims(peaks, deep, psms, quants, acceptedSourceKeys);
 
             List<Cluster> clusters = BuildClusters(claims);
             Dictionary<string, int> hypothesesPerScan = clusters
@@ -819,6 +750,83 @@ namespace FamilyQuant.DeNovo
                 }
             }
             return clusters;
+        }
+
+        private static List<Claim> CreateClaims(IEnumerable<PeaksDeNovoRow> peaks, IEnumerable<PeaksDeNovoRow> deep,
+            IEnumerable<PatternLabPsm> psms, IEnumerable<QuantRow> quants, HashSet<string>? acceptedSourceKeys)
+        {
+            var claims = new List<Claim>();
+
+            foreach (PeaksDeNovoRow row in peaks)
+                claims.Add(SourceClaim(row, IsDeepNovo(row) ? ClaimKind.DeepNovo : ClaimKind.Peaks,
+                    true, acceptedSourceKeys == null || acceptedSourceKeys.Contains(SourceObservationKey(row))));
+            foreach (PeaksDeNovoRow row in deep)
+                claims.Add(SourceClaim(row, IsDeepNovo(row) ? ClaimKind.DeepNovo : ClaimKind.Peaks,
+                    true, acceptedSourceKeys == null || acceptedSourceKeys.Contains(SourceObservationKey(row))));
+            foreach (PatternLabPsm psm in psms) claims.Add(PatternLabClaim(psm, true));
+            var externalClaimKeys = new HashSet<string>(claims
+                .Where(c => c.IsExternalSourceObservation)
+                .Select(EquivalentClaimKey), StringComparer.Ordinal);
+
+            // Persisted quant rows supply their own sequence claims when the original CSV/.sepr2 inputs
+            // are unavailable. When those inputs ARE supplied, identical embedded evidence is skipped so
+            // a source does not count twice merely because it was persisted beside its XIC.
+            foreach (QuantRow quant in quants)
+            {
+                string run = DeNovoReconciler.NormalizeRunName(quant.Run ?? string.Empty);
+                claims.Add(new Claim
+                {
+                    Kind = ClaimKind.Quant,
+                    Run = run,
+                    Scan = quant.Scan,
+                    Charge = quant.Charge,
+                    Mz = quant.PrecursorMz,
+                    Sequence = quant.Sequence ?? string.Empty,
+                    Quant = quant,
+                });
+
+                if (string.Equals(quant.Side, NativeQuantFractions.SideIdentified,
+                    StringComparison.Ordinal))
+                {
+                    var embedded = new Claim
+                    {
+                        Kind = ClaimKind.PatternLab,
+                        Run = run,
+                        Scan = quant.Scan,
+                        Charge = quant.Charge,
+                        Mz = quant.PrecursorMz,
+                        Sequence = quant.Sequence ?? string.Empty,
+                        Score = quant.PatternLabXScore,
+                        ScoreField = "XCorr",
+                        SourceId = "patternlab",
+                        SourceDisplayName = "PatternLab",
+                    };
+                    if (!externalClaimKeys.Contains(EquivalentClaimKey(embedded))) claims.Add(embedded);
+                }
+
+                foreach (DeNovoEvidence evidence in quant.DeNovoEvidence ?? new List<DeNovoEvidence>())
+                {
+                    ClaimKind kind = string.Equals(evidence.SourceId, DeNovoSource.DeepNovo.Id,
+                        StringComparison.OrdinalIgnoreCase) ? ClaimKind.DeepNovo : ClaimKind.Peaks;
+                    var embedded = new Claim
+                    {
+                        Kind = kind,
+                        Run = run,
+                        Scan = quant.Scan,
+                        Charge = quant.Charge,
+                        Mz = quant.PrecursorMz,
+                        Sequence = evidence.Sequence ?? string.Empty,
+                        Score = evidence.ConfidenceValue,
+                        ScoreField = evidence.ConfidenceField ?? string.Empty,
+                        SourceId = evidence.SourceId ?? string.Empty,
+                        SourceDisplayName = evidence.SourceDisplayName ?? string.Empty,
+                        AcceptedByConfiguredFilters = true,
+                    };
+                    if (!externalClaimKeys.Contains(EquivalentClaimKey(embedded))) claims.Add(embedded);
+                }
+            }
+
+            return claims;
         }
 
         private static Claim SourceClaim(PeaksDeNovoRow row, ClaimKind kind, bool external,
