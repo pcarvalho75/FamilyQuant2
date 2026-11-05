@@ -63,10 +63,10 @@ namespace FamilyQuant.Tests
                 && file.MyExtendedFastaItems[0].Evidence != null && file.EvidenceSource?.ReferencePanel?.Entries.Count == 1
                 && file.MyExtendedFastaItems[0].UserID == 71 && file.MyExtendedFastaItems[0].USearchID == 71);
             var partial = File(); using var failing = new EvidenceAndPanelHandler(failPanel: true);
-            string beforeFailure = partial.ToJsonText(); bool refused = false;
-            try { Task.Run(() => EvidenceFetchSession.FetchAsync(partial, failing)).GetAwaiter().GetResult(); }
-            catch (System.Net.Http.HttpRequestException) { refused = true; }
-            Check("a panel failure publishes neither protein evidence nor a partial result", refused && partial.ToJsonText() == beforeFailure);
+            var incomplete = Task.Run(() => EvidenceFetchSession.FetchAsync(partial, failing)).GetAwaiter().GetResult();
+            Check("a panel failure publishes protein evidence with an explicitly missing panel",
+                incomplete.PanelFailure != null && partial.MyExtendedFastaItems[0].Domains == "Supplied domain"
+                && partial.EvidenceSource?.ReferencePanel is { IsComplete: false, Entries.Count: 0 });
             var control = new ClusterGenerationControl(File()); using var uiHandler = new EvidenceAndPanelHandler();
             control.FetchDomainsHandlerOverride = uiHandler;
             int changed = 0; control.DocumentChanged += (_, _) => changed++;

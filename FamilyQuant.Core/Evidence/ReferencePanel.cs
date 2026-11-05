@@ -35,6 +35,11 @@ namespace FamilyQuant.Evidence
 
         /// <summary>The entries, sorted by accession.</summary>
         public List<PanelEntry> Entries { get; set; } = new List<PanelEntry>();
+
+        public List<string> MissingFamilies { get; set; } = new();
+        public string FailureReason { get; set; } = string.Empty;
+        [JsonIgnore]
+        public bool IsComplete => MissingFamilies.Count == 0 && FailureReason.Length == 0;
     }
 
     public sealed partial class EvidenceProvenance
@@ -80,10 +85,10 @@ namespace FamilyQuant.Evidence
         /// </summary>
         public static async Task<ReferencePanel> FetchAsync(IReadOnlyList<string> families,
             HttpMessageHandler? handler = null, IProgress<FetchProgress>? progress = null,
-            CancellationToken cancellationToken = default, bool usePagedComparison = false)
+            CancellationToken cancellationToken = default, bool usePagedComparison = false, string? expectedRelease = null)
         {
             if (!usePagedComparison)
-                return await FetchStreamsAsync(families, handler, progress, cancellationToken).ConfigureAwait(false);
+                return await FetchStreamsAsync(families, handler, progress, cancellationToken, expectedRelease).ConfigureAwait(false);
             List<string> asked = families.Where(f => !string.IsNullOrWhiteSpace(f))
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal).ToList();
@@ -107,8 +112,10 @@ namespace FamilyQuant.Evidence
                     string currentRelease = UniProtHttp.Release(response);
                     if (currentRelease.Length == 0)
                         throw new InvalidDataException("UniProt omitted its release. No panel was made.");
+                    if (expectedRelease != null && currentRelease != expectedRelease)
+                        throw new UniProtReleaseException();
                     if (release != null && release != currentRelease)
-                        throw new InvalidDataException("The UniProt release changed while the panel was fetched. No panel was made.");
+                        throw new UniProtReleaseException();
                     release = currentRelease;
                     if (announced == null && response.Headers.TryGetValues("x-total-results", out IEnumerable<string>? totals)
                         && int.TryParse(totals.FirstOrDefault(), NumberStyles.Integer, CultureInfo.InvariantCulture, out int total))
@@ -161,9 +168,9 @@ namespace FamilyQuant.Evidence
         public static async Task<ReferencePanel> FetchAndStoreAsync(FamilyClusterFile file,
             Func<ProteinEvidence, bool>? inScope = null, HttpMessageHandler? handler = null,
             IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default,
-            bool usePagedComparison = false)
+            bool usePagedComparison = false, string? expectedRelease = null)
         {
-            ReferencePanel panel = await FetchAsync(FamiliesFound(file, inScope), handler, progress, cancellationToken, usePagedComparison)
+            ReferencePanel panel = await FetchAsync(FamiliesFound(file, inScope), handler, progress, cancellationToken, usePagedComparison, expectedRelease)
                 .ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
             file.EvidenceSource ??= new EvidenceProvenance();
@@ -209,7 +216,7 @@ namespace FamilyQuant.Evidence
         /// <paramref name="present"/> (the file's own reviewed proteins answer for themselves).</summary>
         public static List<NeighbourReference> References(ReferencePanel? panel, IEnumerable<string>? present = null)
         {
-            if (panel == null) return new List<NeighbourReference>();
+            if (panel == null || !panel.IsComplete) return new List<NeighbourReference>();
             var skip = new HashSet<string>(present ?? Array.Empty<string>(), StringComparer.Ordinal);
             return panel.Entries
                 .Where(e => e.Sequence.Length > 0 && !skip.Contains(e.Accession))

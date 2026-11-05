@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FamilyQuant.Evidence;
 
+internal sealed class UniProtReleaseException() : System.IO.IOException(
+    "The UniProt release changed between fetched batches. No evidence was applied.");
+
 internal static class UniProtHttp
 {
     internal static string Release(HttpResponseMessage response) =>

@@ -140,7 +140,7 @@ internal static partial class Program
             var file = AtomicFetchFile(); string before = file.ToJsonText();
             bool refused = false;
             try { ReferencePanelFetcher.FetchAndStoreAsync(file, handler: bad).GetAwaiter().GetResult(); }
-            catch (Exception ex) when (ex is InvalidDataException or JsonException) { refused = true; }
+            catch (Exception ex) when (ex is InvalidDataException or IOException or JsonException) { refused = true; }
             Check("J17 " + failure + " preserves the entire existing panel and file", refused && before == file.ToJsonText());
         }
         foreach (bool afterBatch in new[] { false, true })

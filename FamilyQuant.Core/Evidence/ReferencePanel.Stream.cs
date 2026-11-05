@@ -21,7 +21,7 @@ public static partial class ReferencePanelFetcher
     private const string CountEndpoint = "https://rest.uniprot.org/uniprotkb/search?format=json&size=0&fields=accession&query=";
 
     private static async Task<ReferencePanel> FetchStreamsAsync(IReadOnlyList<string> families,
-        HttpMessageHandler? handler, IProgress<FetchProgress>? progress, CancellationToken cancellationToken)
+        HttpMessageHandler? handler, IProgress<FetchProgress>? progress, CancellationToken cancellationToken, string? expectedRelease)
     {
         var asked = families.Where(f => !string.IsNullOrWhiteSpace(f)).Distinct(StringComparer.OrdinalIgnoreCase)
             .OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal).ToList();
@@ -92,8 +92,9 @@ public static partial class ReferencePanelFetcher
         {
             string current = UniProtHttp.Release(response);
             if (current.Length == 0) throw new InvalidDataException("UniProt omitted its release. No panel was made.");
+            if (expectedRelease != null && current != expectedRelease) throw new UniProtReleaseException();
             if (release != null && release != current)
-                throw new InvalidDataException("The UniProt release changed while the panel was fetched. No panel was made.");
+                throw new UniProtReleaseException();
             release = current;
         }
         void Report() => progress?.Report(new FetchProgress

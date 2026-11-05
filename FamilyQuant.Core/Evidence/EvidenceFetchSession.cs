@@ -18,7 +18,8 @@ public sealed record EvidenceFetchOutcome(EvidenceFetchResult Evidence, Referenc
 }
 
 /// <summary>Stages protein evidence and the reviewed panel without touching the open file.
-/// Only the final operation commit attaches both phases. A failure or cancellation attaches neither.</summary>
+/// Only the final operation commit attaches the result. A panel failure keeps fetched protein evidence;
+/// cancellation, a release change or a source edit attaches neither phase.</summary>
 public static class EvidenceFetchSession
 {
     public const string ProgressStage = "Evidence fetch";
@@ -63,15 +64,31 @@ public static class EvidenceFetchSession
         var evidence = await EvidenceFetcher.FetchAsync(staged, handler,
             new FetchStageProgress(operation, EvidenceStage, progress), operation.CancellationToken, positionAccessions).ConfigureAwait(false);
         ReferencePanel? panel = null;
-        if (ReferencePanelFetcher.FamiliesFound(staged).Count > 0)
+        Exception? panelFailure = null;
+        var families = ReferencePanelFetcher.FamiliesFound(staged);
+        if (families.Count > 0)
         {
-            panel = await ReferencePanelFetcher.FetchAndStoreAsync(staged, handler: handler,
-                progress: new FetchStageProgress(operation, ReferencePanelFetcher.ProgressStage, progress),
-                cancellationToken: operation.CancellationToken).ConfigureAwait(false);
-            if (evidence.Asked > 0 && evidence.Provenance.Release != panel.Release)
-                throw new InvalidDataException("The UniProt release changed between protein evidence and the panel. No evidence was applied.");
+            try
+            {
+                panel = await ReferencePanelFetcher.FetchAndStoreAsync(staged, handler: handler,
+                    progress: new FetchStageProgress(operation, ReferencePanelFetcher.ProgressStage, progress),
+                    cancellationToken: operation.CancellationToken,
+                    expectedRelease: evidence.Asked > 0 ? evidence.Provenance.Release : null).ConfigureAwait(false);
+            }
+            catch (Exception ex) when (ex is HttpRequestException or JsonException or InvalidDataException)
+            {
+                operation.ThrowIfCancellationRequested();
+                panelFailure = ex;
+                panel = new ReferencePanel
+                {
+                    Provider = "UniProt", Release = evidence.Provenance.Release,
+                    Families = families, MissingFamilies = families.ToList(), FailureReason = ex.Message,
+                };
+                staged.EvidenceSource ??= new EvidenceProvenance();
+                staged.EvidenceSource.ReferencePanel = panel;
+            }
         }
-        var outcome = new EvidenceFetchOutcome(evidence, panel, null);
+        var outcome = new EvidenceFetchOutcome(evidence, panel, panelFailure);
         operation.Report(ProgressStage, "Publishing fetched evidence and reviewed panel", 1, 1);
         operation.Commit(() =>
         {
@@ -114,5 +131,5 @@ public static class EvidenceFetchSession
         }
     }
 
-    public static bool IsFetchFailure(Exception ex) => ex is HttpRequestException or OperationCanceledException or JsonException or InvalidDataException;
+    public static bool IsFetchFailure(Exception ex) => ex is HttpRequestException or OperationCanceledException or JsonException or InvalidDataException or UniProtReleaseException;
 }

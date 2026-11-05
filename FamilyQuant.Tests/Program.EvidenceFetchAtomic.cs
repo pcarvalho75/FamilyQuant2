@@ -70,8 +70,20 @@ internal static partial class Program
             using var handler = new EvidenceAndPanelHandler(failPanel: !changedRelease);
             if (changedRelease) handler.PanelRelease = "changed release";
             var result = Run(file, handler);
-            Check("S9 " + (changedRelease ? "cross-phase release change" : "panel failure") + " leaves the complete file unchanged",
-                result.Status == OperationStatus.Failed && file.ToJsonText() == before);
+            if (changedRelease)
+                Check("S9 cross-phase release change leaves the complete file unchanged",
+                    result.Status == OperationStatus.Failed && file.ToJsonText() == before);
+            else
+            {
+                var reopened = FamilyClusterFile.FromJsonText(file.ToJsonText());
+                Check("Z1a panel failure saves protein evidence and the missing panel reason",
+                    result.Status == OperationStatus.Succeeded && result.Value.PanelFailure != null
+                    && reopened.MyExtendedFastaItems[0].Domains == "Supplied domain"
+                    && reopened.EvidenceSource?.ReferencePanel is { IsComplete: false } missing
+                    && missing.MissingFamilies.SequenceEqual(new[] { "fixture family" })
+                    && missing.FailureReason.Contains("HTTP 400", StringComparison.Ordinal)
+                    && ReferencePanelFetcher.References(missing).Count == 0);
+            }
         }
         {
             var file = AtomicFetchFile(); var originalProtein = file.MyExtendedFastaItems[0];
@@ -100,6 +112,16 @@ internal static partial class Program
             var result = Run(file, handler);
             Check("S9 a source edit during fetching is retained and refuses the stale transaction", result.Status == OperationStatus.Failed
                 && file.ToJsonText() == expected.ToJsonText());
+        }
+        {
+            var file = AtomicFetchFile();
+            using var handler = new EvidenceAndPanelHandler(failPanel: true);
+            handler.DuringRequest = (panel, _) => { if (panel) file.MyExtendedFastaItems[0].UserAnnotation = "User edit"; };
+            var expected = FamilyClusterFile.FromJsonText(file.ToJsonText());
+            expected.MyExtendedFastaItems[0].UserAnnotation = "User edit";
+            var result = Run(file, handler);
+            Check("Z1a panel failure still refuses a source edit without applying protein evidence",
+                result.Status == OperationStatus.Failed && file.ToJsonText() == expected.ToJsonText());
         }
         {
             var file = AtomicFetchFile(); file.MyExtendedFastaItems[0].SequenceIdentifier = "local_entry";
