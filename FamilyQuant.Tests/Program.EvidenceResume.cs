@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -14,6 +16,22 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
+    private sealed class FetchFixtureScratch : IDisposable
+    {
+        internal string Root { get; } = Path.Combine(Path.GetTempPath(), "fqr-" + Guid.NewGuid().ToString("N")[..10]);
+        public FetchFixtureScratch() => Directory.CreateDirectory(Root);
+        public void Dispose()
+        {
+            string temporary = Path.GetFullPath(Path.GetTempPath()).TrimEnd(Path.DirectorySeparatorChar);
+            string target = Path.GetFullPath(Root);
+            if (!string.Equals(Path.GetDirectoryName(target), temporary, StringComparison.OrdinalIgnoreCase)
+                || !Path.GetFileName(target).StartsWith("fqr-", StringComparison.Ordinal))
+                throw new InvalidOperationException("Refusing fixture cleanup outside its owned temporary directory.");
+            if (Directory.Exists(target)) Directory.Delete(target, recursive: true);
+            Check("Z1c-path the fetch fixture removes its owned scratch directory", !Directory.Exists(target));
+        }
+    }
+
     internal sealed class ResumeUniProtHandler : HttpMessageHandler
     {
         internal string Release = "2026_03";
@@ -54,7 +72,8 @@ internal static partial class Program
 
     private static void EvidenceResumeTests(string workDir)
     {
-        string root = Path.Combine(workDir, "resume-" + Guid.NewGuid().ToString("N"));
+        using var scratch = new FetchFixtureScratch();
+        string root = scratch.Root;
         UniProtFetchOptions Options(string name) => new()
         {
             ResumeDirectory = Path.Combine(root, name), UtcNow = () => DateTimeOffset.UnixEpoch,
@@ -99,11 +118,20 @@ internal static partial class Program
         Check("Z1c resumed protein evidence skips the completed request and preserves every stored byte",
             protein.Downloads.Count == 2 && protein.Probes == 2 && file.ToJsonText() == fullFile.ToJsonText());
         protein.Downloads.Clear();
-        string batchPath = Directory.GetFiles(proteinOptions.ResumeDirectory!, "*.json", SearchOption.AllDirectories)
-            .First(p => Path.GetFileName(p) != "manifest.json");
+        string batchPath = Directory.GetFiles(proteinOptions.ResumeDirectory!, "b-*.json", SearchOption.TopDirectoryOnly).First();
         System.IO.File.WriteAllText(batchPath, "{\"invalid\":true}");
         EvidenceFetcher.FetchAsync(FileFixture(), protein, options: proteinOptions).GetAwaiter().GetResult();
         Check("Z1c a corrupt saved reply is refetched instead of reused", protein.Downloads.Count == 1);
+        foreach (string field in new[] { "Scope", "Query" })
+        {
+            string candidate = Directory.GetFiles(proteinOptions.ResumeDirectory!, "b-*.json").First();
+            var record = System.Text.Json.Nodes.JsonNode.Parse(System.IO.File.ReadAllText(candidate))!;
+            record[field] = "A different full cache identity";
+            System.IO.File.WriteAllText(candidate, record.ToJsonString());
+            protein.Downloads.Clear();
+            EvidenceFetcher.FetchAsync(FileFixture(), protein, options: proteinOptions).GetAwaiter().GetResult();
+            Check("Z1c-path a shortened-name candidate with another full " + field + " is never reused", protein.Downloads.Count == 1);
+        }
         {
             string blocked = Path.Combine(root, "blocked-cache");
             Directory.CreateDirectory(root);
@@ -115,6 +143,41 @@ internal static partial class Program
             var fetched = EvidenceFetcher.FetchAsync(proteins, requests, options: blockedOptions).GetAwaiter().GetResult();
             Check("Z1e an unwritable cache location never fails panel or protein fetching",
                 withoutCache.IsComplete && withoutCache.Entries.Count == 1 && fetched.Found == 1001 && requests.Downloads.Count == 4);
+        }
+        {
+            string longRoot = Path.Combine(root, new string('p', 220 - root.Length - 1));
+            using var requests = new ResumeUniProtHandler();
+            var longOptions = new UniProtFetchOptions { ResumeDirectory = longRoot, DelayAsync = (_, _) => Task.CompletedTask };
+            var longPanel = ReferencePanelFetcher.FetchAsync(new[] { "F00000 family" }, requests, options: longOptions).GetAwaiter().GetResult();
+            string[] paths = Directory.GetFiles(longRoot, "*", SearchOption.AllDirectories);
+            Check("Z1c-path a 220-character cache root uses flat files of at most 32 characters and paths below 260",
+                longPanel.IsComplete && paths.Length == 2 && Directory.GetDirectories(longRoot).Length == 0
+                && paths.All(p => Path.GetFileName(p).Length <= 32 && p.Length < 260)
+                && Path.Combine(longRoot, new string('a', 64), new string('b', 64) + ".json").Length > 260);
+            requests.Downloads.Clear();
+            ReferencePanelFetcher.FetchAsync(new[] { "F00000 family" }, requests, options: longOptions).GetAwaiter().GetResult();
+            Check("Z1c-path the long-root fetch really resumes rather than silently falling back", requests.Downloads.Count == 0);
+        }
+        {
+            var legacyOptions = Options("legacy"); using var requests = new ResumeUniProtHandler();
+            var single = new[] { "F00000 family" };
+            var expectedLegacy = ReferencePanelFetcher.FetchAsync(single, requests, options: legacyOptions).GetAwaiter().GetResult();
+            string cached = Directory.GetFiles(legacyOptions.ResumeDirectory!, "b-*.json").Single();
+            using var reply = JsonDocument.Parse(System.IO.File.ReadAllText(cached));
+            string json = reply.RootElement.GetProperty("Json").GetString()!;
+            string endpoint = (string)typeof(ReferencePanelFetcher).GetField("StreamEndpoint", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)!.GetValue(null)!;
+            string query = endpoint + Uri.EscapeDataString((string)ReuseMethod(typeof(ReferencePanelFetcher), "StreamQuery").Invoke(null, new object[] { single })!);
+            static string Digest(string value) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(value)));
+            foreach (string path in Directory.GetFiles(legacyOptions.ResumeDirectory!, "*.json")) System.IO.File.Delete(path);
+            string previous = Path.Combine(legacyOptions.ResumeDirectory!, Digest(query)); Directory.CreateDirectory(previous);
+            System.IO.File.WriteAllText(Path.Combine(previous, "manifest.json"), JsonSerializer.Serialize(new { Release = "2026_03", RetrievedAtUtc = DateTimeOffset.UnixEpoch }));
+            System.IO.File.WriteAllText(Path.Combine(previous, Digest(query) + ".json"), JsonSerializer.Serialize(new
+                { Query = query, Release = "2026_03", Json = json, Announced = 1, Sha256 = Digest(json) }));
+            requests.Downloads.Clear();
+            var migrated = ReferencePanelFetcher.FetchAsync(single, requests, options: legacyOptions).GetAwaiter().GetResult();
+            Check("Z1c-path valid older nested batches migrate without redownloading or changing result bytes", requests.Downloads.Count == 0
+                && JsonSerializer.Serialize(migrated) == JsonSerializer.Serialize(expectedLegacy)
+                && Directory.GetFiles(legacyOptions.ResumeDirectory!, "b-*.json").Length == 1);
         }
     }
 }
