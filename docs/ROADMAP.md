@@ -27,7 +27,7 @@ Version 11 delivered 10 steps (in the archive): the clean Recent projects list, 
 3. **No function is lost.** The feature ledger is the contract: only Paulo can drop a row. A rename keeps the function; a ledger row that pins an old name is mapped in the ledger's "Added contracts after the frozen source" section, never edited to make a check pass.
 4. **Numbers stay equal unless a step says otherwise.** Only Z6c may change a number, and only after Paulo's decision, a before and after on real data and a science review.
 5. **Deployable at every merge.** One step per commit, with its test; tests go into DefaultSuite. Builders run focused checks; the desk runs the whole suite once per release (D61 mode).
-6. **A step counts as done only after a reviewer approves it, it is merged and the suite is green.**
+6. **A step counts as done when a reviewer approves it** (Paulo, 11-05 13:41: "many approvals and no green boxes?"). Each release still ships only after its own full suite (Z7c, Z8c) is green on the merged commit; a suite failure reopens the step it points to until the fix is approved.
 7. **A family panel is user data.** Ana's families, domains, subclasses and decisions live in her file and the project, never in code.
 8. **Never write inside `C:/Users/paulo/Desktop/AnaG`** except a delivery to `AnaG/Bjararaca/Relatorio` on Paulo's word.
 9. **The code repository stays private.** Releases go out as a Setup.exe and a zip on the public releases-only repository (D31, D32).
@@ -59,7 +59,7 @@ Kimi limits: one Kimi instance at a time across every project, at most 15 calls 
 
 ## Workstreams
 
-Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. A step is done when it is reviewed, merged and through the release's full suite.
+Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. A step is done when a reviewer approves it; the release's full suite gates the release.
 
 ### W1 Fetch evidence that keeps its work, 2.1.7 (FQFetch)
 
