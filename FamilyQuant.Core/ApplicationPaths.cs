@@ -11,5 +11,7 @@ namespace FamilyQuant
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DataFolderName);
 
         public static string ScratchDirectory => Path.Combine(Path.GetTempPath(), DataFolderName);
+
+        public static string EvidenceFetchCacheDirectory => Path.Combine(LocalDataDirectory, "evidence-fetch");
     }
 }

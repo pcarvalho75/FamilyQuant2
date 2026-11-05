@@ -12,6 +12,9 @@ commands. Optional `--screen-fcf` and `--screen-project` paths are read only.
 Without them, captures use a synthetic curation fixture and empty Results.
 The manifest labels those states explicitly. No RAW file is opened.
 
+Add `--screen-incomplete-panel` with synthetic inputs to capture retained protein evidence,
+the incomplete-panel status and the Retry panel button. The manifest records this fixture.
+
 The harness loads `App.InitializeComponent()`, selects the .NET 10 Fluent theme
 through `ThemeMode`, shows the real windows off screen, drains layout work, then
 draws each client area through a `VisualBrush`. Product styles remain installed,
@@ -32,6 +35,12 @@ does not save a profile preference.
 
 Add `--screen-shell-status` to hide curation's inline status banner through the
 same `UseShellStatusBar` property the shell uses. The manifest records this flag.
+
+Add `--screen-update-complete` to show a synthetic once-only update completion
+notice on Home through the normal marker consumer. No application is installed.
+
+Add `--screen-close-project` to open and close a synthetic project before the Home
+capture. This checks the post-close screen and dependent sidebar states.
 
 `screens.json` lists all 56 PNGs, input paths and SHA-256 hashes, runtime and OS.
 A failed capture or changed input returns a nonzero exit code and does not write

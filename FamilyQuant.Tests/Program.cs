@@ -282,6 +282,12 @@ namespace FamilyQuant.Tests
             suite.Add(() => SuiteMergeGuardTests());
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());
+            suite.Add(() => UniProtRetryTests());
+            suite.Add(() => EvidenceResumeTests(workDir));
+            suite.Add(() => PanelRecoveryTests(workDir));
+            suite.AddWithApplication(() => PanelRetryUiTests());
+            suite.Add(() => InheritedRetryProgressTests());
+            suite.Add(() => SameScanConflictTests());
             suite.Add(() => EvidenceCoverageTests());
             suite.Add(() => QueryResidueCoverageTests());
             suite.Add(() => FamilyWorldFetchTests());
@@ -375,6 +381,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => DatabaseEntryTraceTests(null));
             suite.Add(() => HtmlDotDefaultsTests(Path.Combine(workDir, "html-dot-defaults")));
             suite.Add(() => SetupTests(Path.Combine(workDir, "setup")));
+            suite.AddWithApplication(UpdateCompletionTests);
+            suite.AddWithApplication(CloseProjectTests);
             suite.AddWithApplication(() => SetupWindowTests());
             suite.Add(() => HtmlCoverageTests());
             suite.Add(() => HtmlNumberTraceTests());

@@ -59,6 +59,11 @@ public partial class ClusterGenerationControl
         familyWorldFetchRunning = true;
         try
         {
+            if (fcf.EvidenceSource?.ReferencePanel is { IsComplete: false })
+            {
+                SetCurationOperationStatus("The reference panel is incomplete. Retry panel before fetching the family world.");
+                return;
+            }
             if (!NearestReviewed.Targets(fcf).Any(p => !SequenceLabels.IsContaminant(p.SequenceIdentifier)
                 && p.Evidence != null && ReferencePanelFetcher.FamiliesOf(p.Evidence).Any()))
             {
@@ -91,7 +96,7 @@ public partial class ClusterGenerationControl
 
     private sealed class FamilyWorldTaskProgress(FamilyQuant.Operations.OperationContext operation) : IProgress<FetchProgress>
     {
-        public void Report(FetchProgress value) => operation.Report("task", "Reading database task: "
+        public void Report(FetchProgress value) => operation.Report("task", value.Message.Length > 0 ? value.Message : "Reading database task: "
             + value.CompletedBatches.ToString(CultureInfo.CurrentCulture) + " of "
             + value.TotalBatches.ToString(CultureInfo.CurrentCulture) + " taxa.", value.CompletedBatches, value.TotalBatches);
     }

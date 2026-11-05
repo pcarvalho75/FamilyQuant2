@@ -4,6 +4,24 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.7 (release candidate, not published)
+
+- **Keep downloaded evidence.** Fetch evidence keeps the protein evidence when
+  the reference panel cannot finish. It names any family UniProt refuses and
+  marks the panel incomplete; steps that need a complete panel do not use it as
+  complete. Use **Retry panel** on the Families screen to finish the panel.
+- **Retry and resume.** Fetch evidence waits and retries when UniProt is busy.
+  A later fetch resumes from the last finished batch for the same query and
+  UniProt release.
+- **Updates reopen the app.** **Help > Install update** reopens FamilyQuant after
+  a successful update and shows its updated version once.
+- **Setup compares versions.** An older Setup offers **Open FamilyQuant** for
+  the installed version. Installing its older version needs confirmation;
+  silent setup refuses a downgrade. The same version offers **Open FamilyQuant**
+  and **Repair**. Setup has its own download-badge icon.
+- **Close a project.** **File > Close project** offers the usual Save, Discard
+  or Cancel choice and returns to Home when the project closes.
+
 ## 2.1.6 (release candidate, not published)
 
 - **A clean Recent projects list.** Files that are unavailable are hidden from

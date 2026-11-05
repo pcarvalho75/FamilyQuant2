@@ -82,13 +82,13 @@ internal static partial class Program
             using var client = new HttpClient(handler);
             bool refused = false;
             try { ((Task<HttpResponseMessage>)ReuseMethod(type, "GetWithRetry").Invoke(null,
-                new object[] { client, "https://example.invalid/fixture", CancellationToken.None })!).GetAwaiter().GetResult(); }
+                new object?[] { client, "https://example.invalid/fixture", CancellationToken.None, null, null })!).GetAwaiter().GetResult(); }
             catch (HttpRequestException ex) { refused = ex.StatusCode == HttpStatusCode.BadRequest && ex.Message == message; }
             Check(type.Name + " retains its exact HTTP refusal and one nonretryable request", refused && handler.Calls == 1);
             using var cancellation = new CancellationTokenSource(); cancellation.Cancel();
             bool cancelled = false;
             try { ((Task<HttpResponseMessage>)ReuseMethod(type, "GetWithRetry").Invoke(null,
-                new object[] { client, "https://example.invalid/fixture", cancellation.Token })!).GetAwaiter().GetResult(); }
+                new object?[] { client, "https://example.invalid/fixture", cancellation.Token, null, null })!).GetAwaiter().GetResult(); }
             catch (OperationCanceledException) { cancelled = true; }
             Check(type.Name + " retains immediate user cancellation without another request", cancelled && handler.Calls == 1);
         }

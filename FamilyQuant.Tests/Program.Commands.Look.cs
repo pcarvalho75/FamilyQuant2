@@ -77,7 +77,9 @@ internal static partial class Program
 
     private static int RunUiWordingChecks(string[] args, string workDir)
     {
+        EnsureApplication();
         CurationWordingTests(); HelpContentTests(); DeNovoHelpContentTests(); ReportViewTests(); AppearanceDirectionTests();
+        TypographyRulesTests();
         Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         return failed == 0 ? 0 : 1;
     }

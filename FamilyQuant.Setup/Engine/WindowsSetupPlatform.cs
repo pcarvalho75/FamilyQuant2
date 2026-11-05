@@ -98,8 +98,12 @@ public sealed class WindowsSetupPlatform : ISetupPlatform
         var info = FileVersionInfo.GetVersionInfo(appPath);
         return info.ProductName == SetupProduct.Id && Version.TryParse(info.FileVersion, out var version) ? version : null;
     }
-    public void Launch(string directory) => Process.Start(new ProcessStartInfo(Path.Combine(directory, SetupProduct.AppExe))
-        { WorkingDirectory = directory, UseShellExecute = true });
+    public void Launch(string directory)
+    {
+        using var process = Process.Start(new ProcessStartInfo(Path.Combine(directory, SetupProduct.AppExe))
+            { WorkingDirectory = directory, UseShellExecute = true });
+        if (process == null) throw new IOException("FamilyQuant could not be started.");
+    }
     private static string Quote(string path) => "\"" + path + "\"";
     private static void RestoreShortcut(string path, byte[]? bytes)
     {

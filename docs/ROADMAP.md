@@ -27,7 +27,7 @@ Version 11 delivered 10 steps (in the archive): the clean Recent projects list, 
 3. **No function is lost.** The feature ledger is the contract: only Paulo can drop a row. A rename keeps the function; a ledger row that pins an old name is mapped in the ledger's "Added contracts after the frozen source" section, never edited to make a check pass.
 4. **Numbers stay equal unless a step says otherwise.** Only Z6c may change a number, and only after Paulo's decision, a before and after on real data and a science review.
 5. **Deployable at every merge.** One step per commit, with its test; tests go into DefaultSuite. Builders run focused checks; the desk runs the whole suite once per release (D61 mode).
-6. **A step counts as done only after a reviewer approves it, it is merged and the suite is green.**
+6. **A step counts as done when a reviewer approves it** (Paulo, 11-05 13:41: "many approvals and no green boxes?"). Each release still ships only after its own full suite (Z7c, Z8c) is green on the merged commit; a suite failure reopens the step it points to until the fix is approved.
 7. **A family panel is user data.** Ana's families, domains, subclasses and decisions live in her file and the project, never in code.
 8. **Never write inside `C:/Users/paulo/Desktop/AnaG`** except a delivery to `AnaG/Bjararaca/Relatorio` on Paulo's word.
 9. **The code repository stays private.** Releases go out as a Setup.exe and a zip on the public releases-only repository (D31, D32).
@@ -40,11 +40,13 @@ Version 11 delivered 10 steps (in the archive): the clean Recent projects list, 
 | Name | Engine | Role in version 12 | Worktree |
 |---|---|---|---|
 | Orchestrator | Claude, main session | Assigns, merges, routes reviews, runs the suite once per release, publishes, keeps this file and the board true. Writes no product code. | |
-| FQFetch (FE) | Sol 6.1 xhigh | W1 Fetch evidence that keeps its work (2.1.7); then W5 Families layout and W6 de novo (2.1.8); then W8 release 2.1.8 | `D:/FamilyQuant-wt/fetch` |
-| FQHome (HM) | Sol 6.1 xhigh | W2 Update and Setup and W3 Close project (2.1.7); W7 release 2.1.7; then W4 Home and one name per thing (2.1.8) | `D:/FamilyQuant-wt/home` |
-| FQKimi (KM) | Kimi Code (K3.1 Pro) | The reviewer (D64), in batches of at most 8; code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-kimi` |
+| FQFetch (FE) | Sol 6.1 xhigh | W1 Fetch evidence that keeps its work (2.1.7); then W6 de novo | `D:/FamilyQuant-wt/fetch` |
+| FQHome (HM) | Sol 6.1 xhigh | W2 Update and Setup and W3 Close project (2.1.7); W7 release 2.1.7; then W5 Families layout and W8 release 2.1.8 | `D:/FamilyQuant-wt/home` |
+| FQOpus (OP) | Opus 5.5, this session's Fiocruz account (D67) | W4 Home and one name per thing (2.1.8) | `C:/FamilyQuant-wt2/opus` |
+| FQKimi (KM) | Kimi Code (K3.1 Pro) | Reviewer (D64), with FQReviewDS; the desk gives each finished step to whichever reviewer is free, in batches of at most 8; code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-kimi` |
+| FQReviewDS (DS) | DeepSeek V4.1 Flash | Second reviewer (D67); code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
 
-Kimi limits (Paulo, 11-01 and 11-02): one Kimi instance at a time across every project, at most 15 calls in any rolling 5 hours and 5 reviews in any rolling hour, no subagents. Orion runs its own Kimi worker at times; the desk launches FQKimi only when no other Kimi worker runs.
+Kimi limits: one Kimi instance at a time across every project, at most 15 calls in any rolling 5 hours (Paulo, 11-01) and 15 reviews in any rolling hour (Paulo, 11-05 13:24: "raise kimi to 15 reviews"; it was 5 from 11-02), no subagents. Orion runs its own Kimi worker at times; the desk launches FQKimi only when no other Kimi worker runs.
 
 ## Design rules for the look (hard requirements)
 
@@ -57,7 +59,7 @@ Kimi limits (Paulo, 11-01 and 11-02): one Kimi instance at a time across every p
 
 ## Workstreams
 
-Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. A step is done when it is reviewed, merged and through the release's full suite.
+Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. A step is done when a reviewer approves it; the release's full suite gates the release.
 
 ### W1 Fetch evidence that keeps its work, 2.1.7 (FQFetch)
 
@@ -84,26 +86,26 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | Z3a | File > Close project closes the open project with the usual Save, Discard, Cancel prompt and returns to Home; disabled with no project open; the sidebar steps go back to "Open a project first" | L | 0.3 | 🟢 | Z7c | Close with unsaved changes asks; Cancel keeps the project; after close another project opens without restarting | HM | | 0 | 0 | |
 
-### W4 Home and one name per thing, 2.1.8 (FQHome)
+### W4 Home and one name per thing, 2.1.8 (FQOpus)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z4a | The names table (in `docs/` and the code): Home, 1 Build families, 2 Curate families (a Group by evidence, b Group by words), 3 Quantify, 4 Results, 5 De novo review; a suite check fails when an old name (Start page, New from database, Compute full XIC, Analytics / report, De novo evidence) appears in UI text | M | 0.3 | Z3a | Z4b to Z4h | The check goes red on a planted old name | HM | | 0 | 0 | |
-| Z4b | Home replaces Start everywhere (sidebar button, View > Home); five numbered boxes in Ana's order, each with one line, its state (ready, needs a project, done) and one button; De novo review marked optional; Open project and Recent projects stay below | M | 0.5 | Z4a | Z8c | Rendered dark and light at both sizes; each box opens its screen | HM | | 0 | 0 | |
-| Z4c | Build families replaces New from database (button, menu, Help, window title); it opens the same database clustering (Group by sequence identity, USearch) | L | 0.2 | Z4a | Z8c | No "New from database" left in UI text | HM | | 0 | 0 | |
-| Z4d | Curate families replaces Families and Open project as the step name; with no project open it asks for a project or offers Build families; inside, the 2.1.5 guided steps are part a, Group by evidence, and the description and keyword grouping is part b, Group by words | M | 0.4 | Z4a | Z8c | Both parts reachable and labelled; the 2.1.5 step order and highlight unchanged | HM | | 0 | 0 | |
-| Z4e | Quantify is the one name of the Compute full XIC screen (sidebar, menu, Help, window title, messages) | L | 0.2 | Z4a | Z8c | No "Compute full XIC" left in UI text | HM | | 0 | 0 | |
-| Z4f | Results and De novo review are the one names of their screens (sidebar, menu, Help, window titles) | L | 0.2 | Z4a | Z8c | No "De novo evidence" or bare "De novo" step name left in UI text | HM | | 0 | 0 | |
-| Z4g | The Analysis menu becomes Tools and keeps only the extra tools (Spectrum comparison, Clustering diagnostic, Reannotate SEPro); the five steps live on Home and the sidebar | L | 0.2 | Z4e, Z4f | Z8c | Menu order File, Edit, View, Tools, Help; every former Analysis command still reachable | HM | | 0 | 0 | |
-| Z4h | Help follows the five steps and the new names (`HelpContent`, `HelpWorkflowFacts`), with the flow drawn as on Home | L | 0.2 | Z4b to Z4g | Z8c | Help names match the names table check | HM | | 0 | 0 | |
+| Z4a | The names table (in `docs/` and the code): Home, 1 Build families, 2 Curate families (a Group by evidence, b Group by words), 3 Quantify, 4 Results, 5 De novo review; a suite check fails when an old name (Start page, New from database, Compute full XIC, Analytics / report, De novo evidence) appears in UI text | M | 0.3 | Z3a | Z4b to Z4h | The check goes red on a planted old name | OP | | 0 | 0 | |
+| Z4b | Home replaces Start everywhere (sidebar button, View > Home); five numbered boxes in Ana's order, each with one line, its state (ready, needs a project, done) and one button; De novo review marked optional; Open project and Recent projects stay below | M | 0.5 | Z4a | Z8c | Rendered dark and light at both sizes; each box opens its screen | OP | | 0 | 0 | |
+| Z4c | Build families replaces New from database (button, menu, Help, window title); it opens the same database clustering (Group by sequence identity, USearch) | L | 0.2 | Z4a | Z8c | No "New from database" left in UI text | OP | | 0 | 0 | |
+| Z4d | Curate families replaces Families and Open project as the step name; with no project open it asks for a project or offers Build families; inside, the 2.1.5 guided steps are part a, Group by evidence, and the description and keyword grouping is part b, Group by words | M | 0.4 | Z4a | Z8c | Both parts reachable and labelled; the 2.1.5 step order and highlight unchanged | OP | | 0 | 0 | |
+| Z4e | Quantify is the one name of the Compute full XIC screen (sidebar, menu, Help, window title, messages) | L | 0.2 | Z4a | Z8c | No "Compute full XIC" left in UI text | OP | | 0 | 0 | |
+| Z4f | Results and De novo review are the one names of their screens (sidebar, menu, Help, window titles) | L | 0.2 | Z4a | Z8c | No "De novo evidence" or bare "De novo" step name left in UI text | OP | | 0 | 0 | |
+| Z4g | The Analysis menu becomes Tools and keeps only the extra tools (Spectrum comparison, Clustering diagnostic, Reannotate SEPro); the five steps live on Home and the sidebar | L | 0.2 | Z4e, Z4f | Z8c | Menu order File, Edit, View, Tools, Help; every former Analysis command still reachable | OP | | 0 | 0 | |
+| Z4h | Help follows the five steps and the new names (`HelpContent`, `HelpWorkflowFacts`), with the flow drawn as on Home | L | 0.2 | Z4b to Z4g | Z8c | Help names match the names table check | OP | | 0 | 0 | |
 
-### W5 Families screen layout, 2.1.8 (FQFetch)
+### W5 Families screen layout, 2.1.8 (FQHome)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z5a | The two grids' headers sit at the same height; a title above each grid: "Families" on the left, "Proteins in this family" on the right, with the selected family's name | L | 0.2 | Z1e | Z8c | Rendered dark and light at both sizes; headers aligned to the pixel | FE | | 0 | 0 | |
-| Z5b | All proteins moves to the right, above the protein grid | L | 0.1 | Z5a | Z8c | Rendered; the button keeps its behaviour | FE | | 0 | 0 | |
-| Z5c | Family numbers centred in the ID column; the USearch ID column shown by default in the protein grid | L | 0.1 | Z5a | Z8c | Rendered; a stored column choice of the user still wins | FE | | 0 | 0 | |
+| Z5a | The two grids' headers sit at the same height; a title above each grid: "Families" on the left, "Proteins in this family" on the right, with the selected family's name | L | 0.2 | Z1e | Z8c | Rendered dark and light at both sizes; headers aligned to the pixel | HM | | 0 | 0 | |
+| Z5b | All proteins moves to the right, above the protein grid | L | 0.1 | Z5a | Z8c | Rendered; the button keeps its behaviour | HM | | 0 | 0 | |
+| Z5c | Family numbers centred in the ID column; the USearch ID column shown by default in the protein grid | L | 0.1 | Z5a | Z8c | Rendered; a stored column choice of the user still wins | HM | | 0 | 0 | |
 
 ### W6 De novo: measure, decide, explain (FQFetch, Paulo)
 
@@ -111,7 +113,7 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | Z6a | Measure same-scan conflicts on the real-data set (`C:/Users/paulo/Desktop/FamilyQuant`, the three-run PEAKS export at ALC 80, D33) through the program's Spectrum comparison: scans where PatternLab and the de novo call give different sequences for the same precursor while the de novo peptide is still credited in Quantify; count, credited de novo signal involved, and its share of all de novo and of all signal, per run. No product change | M | 0.5 | Z1e | Z6b | Counts reproduced by a second run of the same command; method reviewed by FQKimi on code only | FE | | 0 | 0 | |
 | Z6b | Paulo decides what Quantify does with a same-scan conflict, from Z6a's numbers (D65): a) the PatternLab identification wins the scan, b) keep both and state it, c) another rule | L | 0 | Z6a | Z6c, Z6d | Decision logged | Paulo | | 0 | 0 | |
-| Z6c | If D65 changes the rule: built as an option, before and after on real data, a science review, the default as Paulo sets it; ships in the first release after it is green | H | 1 | Z6b | Z6d | Before and after shares, science review APPROVED | FE | | 0 | 0 | |
+| Z6c | D65 a): on a scan PatternLab identified, a de novo call with a different sequence for the same precursor gets no credit in Quantify; an option, ON by default, stored with the project and shown in the report's rules; before and after family shares on real data; ships in 2.1.8 if green, else the next release | H | 1 | Z6b | Z6d | Synthetic known answers; before and after shares on real data; code review APPROVED; science review APPROVED by FQOpus | FE | | 0 | 0 | |
 | Z6d | Help page "De novo in FamilyQuant": Ana's seven steps mapped to what the program does (what Quantify reads, de novo peptides dropped when PatternLab found the same peptide, the same-scan rule as decided, XIC of de novo peptides, homology by PepExplorer's method at 80% identity with I = L and the decoy gate) and why De novo review is optional | L | 0.3 | Z6b | Z8c | Every claim cites the code; no organism, venom or sample words | FE | | 0 | 0 | |
 
 ### W7 Release 2.1.7 (FQHome, Orchestrator)
@@ -124,15 +126,15 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z7d | The 2.1.7 Setup.exe and zip with SHA256 from the integrated commit, Setup test mode, package check; then v2.1.7 published as Latest and the README pushed | L | 0.2 | Z7b, Z7c | Z7e | GitHub digests equal the package | HM, Orchestrator | | 0 | 0 | |
 | Z7e | Update check on the public files: 2.1.7 reports current; an installed 2.1.6 test root shows the banner, Install update runs the public Setup in test mode and the app is reopened (Z2a) | L | 0.2 | Z7d | | PASS | HM | | 0 | 0 | |
 
-### W8 Release 2.1.8 (FQFetch, Orchestrator)
+### W8 Release 2.1.8 (FQHome, Orchestrator)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z8a | Version 2.1.8 and the 2.1.8 notes | L | 0.1 | Z7e | Z8c | Versions read 2.1.8.0 | FE | | 0 | 0 | |
-| Z8b | README for 2.1.8: the new Home screenshot from synthetic data, the new names | L | 0.2 | Z4b, Z8a | Z8d | Synthetic only; reviewed | FE | | 0 | 0 | |
+| Z8a | Version 2.1.8 and the 2.1.8 notes | L | 0.1 | Z7e | Z8c | Versions read 2.1.8.0 | HM | | 0 | 0 | |
+| Z8b | README for 2.1.8: the new Home screenshot from synthetic data, the new names | L | 0.2 | Z4b, Z8a | Z8d | Synthetic only; reviewed | HM | | 0 | 0 | |
 | Z8c | The full functional suite on the integrated 2.1.8 commit (D61 mode), after every W4 and W5 step and Z6d are approved | M | 0.2 | Z4a to Z4h, Z5a to Z5c, Z6d, Z8a | Z8d | Every check green | Orchestrator | | 0 | 0 | |
-| Z8d | The 2.1.8 Setup.exe and zip, package check, published as Latest, README pushed | L | 0.2 | Z8b, Z8c | Z8e | GitHub digests equal the package | FE, Orchestrator | | 0 | 0 | |
-| Z8e | Update check on the public files: an installed 2.1.7 updates to 2.1.8 and reopens | L | 0.2 | Z8d | | PASS | FE | | 0 | 0 | |
+| Z8d | The 2.1.8 Setup.exe and zip, package check, published as Latest, README pushed | L | 0.2 | Z8b, Z8c | Z8e | GitHub digests equal the package | HM, Orchestrator | | 0 | 0 | |
+| Z8e | Update check on the public files: an installed 2.1.7 updates to 2.1.8 and reopens | L | 0.2 | Z8d | | PASS | FE | HM | 0 | |
 
 ## Critical path
 
@@ -144,7 +146,6 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
-| D65 | What Quantify does with a scan where PatternLab and the de novo call give different sequences (Z6b) | None: nothing changes until Paulo decides; Z6d then describes the current rule | Z6a's numbers |
 
 ### Decisions in force
 
@@ -187,6 +188,9 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D63 | Ana's suggestions of 11-05 | All built as the desk proposed, in two releases, each published when every check is green (like D56 and D62): 2.1.7 = Fetch evidence that keeps its work and resumes, the update reopens the app, Setup compares versions, File > Close project; 2.1.8 = Home with five numbered steps and one name per thing (Ana's names, Analysis becomes Tools), the Families layout, USearch ID shown, the de novo Help page. Paulo, 11-05 12:21 ("lets ready every suggestion from ana as you suggested") |
 | D64 | Who builds and reviews | Two Sol 6.1 builders, FQFetch and FQHome, and one Kimi reviewer, FQKimi, in batches; this replaces D59 (DeepSeek only). Kimi, like DeepSeek (D58), sees code and synthetic data only. Paulo, 11-05 12:21 ("2 sol workers and 1 kimi reviewer") |
 | D66 | The same-scan conflict | Measured first on the real-data set (Z6a), then Paulo decides (D65); nothing changes before. Paulo, 11-05 12:21, accepting the desk's pick |
+| D65 | A scan where PatternLab and the de novo call give different sequences for the same precursor | a) The PatternLab identification wins the scan: its FDR-controlled identification is kept and the de novo call on that scan gets no credit (Ana's step 4; it removes a double count, since both XICs measure the same precursor's ions). Z6a measured 305 to 431 such scans per run, 2.6 to 3.7% of the de novo signal and 0.35 to 0.55% of all signal at most. Built in Z6c as an option, ON by default, with before and after on real data and a science review. Paulo, 11-05 13:24 |
+| D67 | More hands | Paulo, 11-05 12:38: "hire one more worker, an opus worker from this account, and also hire deepseek as a second reviewer". DeepSeek FQReviewDS joined at 12:41 (code and synthetic data only, as D58). The Opus CLI worker hit the account's weekly CLI limit at 12:42 (resets 11-06 08:00), so FQOpus runs at 12:48 as an Opus agent of this session, on the same account (Paulo, 12:47: "an opus from this account"); it takes W4, FQHome takes W5 and W8 from FQFetch |
+| D68 | Kimi's review rate | 15 reviews in any rolling hour (was 5 from 11-02); 15 calls per rolling 5 hours and one instance unchanged. Paulo, 11-05 13:24 ("raise kimi to 15 reviews, and update that law") |
 
 ## Risks and triggers
 

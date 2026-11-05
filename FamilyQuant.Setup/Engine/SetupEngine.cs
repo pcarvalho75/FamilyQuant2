@@ -30,7 +30,7 @@ public sealed class SetupEngine(ISetupPlatform platform, string setupExecutable,
     }
 
     public void Install(SetupPayload payload, string directory, bool desktop, IProgress<SetupProgress>? progress = null,
-        CancellationToken token = default)
+        CancellationToken token = default, bool allowOlderVersion = false)
     {
         string target = ValidateTarget(directory);
         if (SetupPaths.Within(target, setupExecutable)) throw new IOException("Run Setup from outside the program folder.");
@@ -49,8 +49,8 @@ public sealed class SetupEngine(ISetupPlatform platform, string setupExecutable,
             _ = SetupPaths.Files(target).Count();
             if (existing == null && Directory.EnumerateFileSystemEntries(target).Any())
                 throw new IOException("The selected folder contains files from an unrecognized installation. Choose an empty folder.");
-            if (existing != null && Version.Parse(existing.Version) > version)
-                throw new IOException("A newer version is already installed. Keep it or uninstall it first.");
+            if (existing != null && SetupVersions.Compare(existing.Version, payload.Manifest.Version) > 0 && !allowOlderVersion)
+                throw new IOException(SetupVersions.AlreadyInstalled(existing.Version, payload.Manifest.Version));
         }
         string parent = Path.GetDirectoryName(target)!;
         Directory.CreateDirectory(parent);
@@ -131,6 +131,8 @@ public sealed class SetupEngine(ISetupPlatform platform, string setupExecutable,
                 progress?.Report(new("Removing " + file.Path, moved.Count, manifest.Files.Count + 1));
             }
             token.ThrowIfCancellationRequested();
+            if (File.Exists(SetupPaths.FileIn(target, FamilyQuant.Deployment.UpdateCompletionMarker.FileName)))
+                MoveToRemoved(FamilyQuant.Deployment.UpdateCompletionMarker.FileName);
             MoveToRemoved(SetupProduct.Manifest);
             platform.Unregister(target);
         }

@@ -11,13 +11,16 @@ public sealed partial class CurationViewModel
     public bool HasAppliedEvidenceGrouping => Document.EvidenceRecipe != null;
     public bool HasStoredFamilyWorld { get; private set; }
     public bool HasComputedFullXic { get; private set; }
+    public bool HasIncompletePanel => Document.EvidenceSource?.ReferencePanel is { IsComplete: false };
+    public string PanelFailureDetail => Document.EvidenceSource?.ReferencePanel?.FailureReason ?? string.Empty;
     public string EvidenceStepStatus => !HasStoredEvidence ? "Not yet"
+        : HasIncompletePanel ? "Protein evidence saved; panel incomplete"
         : string.IsNullOrWhiteSpace(Document.EvidenceSource!.Release) ? "Downloaded (UniProt release not recorded)"
         : "Downloaded (UniProt " + Document.EvidenceSource.Release.Trim() + ")";
     public string EvidenceGroupingStepStatus => HasAppliedEvidenceGrouping ? "Applied" : "Not yet";
-    public string FamilyWorldStepStatus => HasStoredFamilyWorld ? FamilyWorldState : "Not yet";
+    public string FamilyWorldStepStatus => HasIncompletePanel ? "Panel incomplete; Retry panel first" : HasStoredFamilyWorld ? FamilyWorldState : "Not yet";
     public string FullXicStepStatus => HasComputedFullXic ? "Computed" : "Not yet";
-    public int NextGroupingStep => !HasStoredEvidence ? 1 : !HasAppliedEvidenceGrouping ? 2
+    public int NextGroupingStep => !HasStoredEvidence || HasIncompletePanel ? 1 : !HasAppliedEvidenceGrouping ? 2
         : !HasStoredFamilyWorld ? 3 : !HasComputedFullXic ? 4 : 0;
 
     public void SetQuantManifest(QuantManifest? manifest)
@@ -48,6 +51,8 @@ public sealed partial class CurationViewModel
             }
         }
         Changed(nameof(HasStoredEvidence));
+        Changed(nameof(HasIncompletePanel));
+        Changed(nameof(PanelFailureDetail));
         Changed(nameof(HasAppliedEvidenceGrouping));
         Changed(nameof(HasStoredFamilyWorld));
         Changed(nameof(EvidenceStepStatus));

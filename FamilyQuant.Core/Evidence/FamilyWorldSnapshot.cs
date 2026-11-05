@@ -57,9 +57,10 @@ public static class FamilyWorldFetcher
         + "accession,reviewed,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence,organism_id,lineage_ids&query=";
 
     public static async Task<FamilyWorldSnapshot> FetchAndStoreAsync(FamilyClusterFile file, EvidenceTaskChoice task,
-        OperationContext operation, HttpMessageHandler? handler = null)
+        OperationContext operation, HttpMessageHandler? handler = null, UniProtFetchOptions? options = null)
     {
         ArgumentNullException.ThrowIfNull(operation);
+        ReferencePanelFetcher.RequireComplete(file.EvidenceSource?.ReferencePanel);
         EvidenceTaskDiscovery.Validate(file, task, task.ScopeTerms);
         task = EvidenceApply.Clone(task);
         var originals = file.MyExtendedFastaItems.ToArray();
@@ -91,7 +92,7 @@ public static class FamilyWorldFetcher
                     operation.ThrowIfCancellationRequested();
                     using var response = await UniProtHttp.GetWithRetryAsync(client, url, 3,
                         status => "UniProt refused the family-world page (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No world was attached.",
-                        operation.CancellationToken).ConfigureAwait(false);
+                        operation.CancellationToken, options, message => operation.Report("Family world", message)).ConfigureAwait(false);
                     string current = UniProtHttp.Release(response);
                     if (current.Length == 0 || (release != null && release != current) || current != task.Proposal.Release)
                         throw new InvalidDataException("UniProt omitted or changed the release after task confirmation. No world was attached.");
