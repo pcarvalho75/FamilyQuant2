@@ -50,9 +50,9 @@ namespace FamilyQuant.Tests
 
             var topLevel = WalkTree(main).OfType<Menu>().First().Items.Cast<MenuItem>()
                 .Select(m => m.Header as string).ToList();
-            Check("File leads the standard menu order and Analysis contains de novo evidence",
-                topLevel.SequenceEqual(new[] { "File", "Edit", "View", "Analysis", "Help" })
-                && deNovoItem.Parent is MenuItem analysisMenu && analysisMenu.Header as string == "Analysis",
+            Check("File leads the standard menu order and View holds De novo review with the other steps",
+                topLevel.SequenceEqual(WorkflowNames.MenuOrder)
+                && deNovoItem.Parent is MenuItem viewMenu && viewMenu.Header as string == "View" && deNovoItem.Header as string == WorkflowNames.DeNovoReview,
                 string.Join(" | ", topLevel));
 
             typeof(MainWindow).GetMethod("MenuItemDeNovo_Click", BindingFlags.Instance | BindingFlags.NonPublic)!

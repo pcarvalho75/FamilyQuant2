@@ -186,7 +186,7 @@ internal static partial class Program
             var quantifyMenu = (MenuItem)main.FindName("MenuItemComputeXic");
             var analysis = ((Menu)main.FindName("MainMenu")).Items.OfType<MenuItem>().Single(item => item.Items.Contains(quantifyMenu));
             Reset();
-            Record("analysis-quantify", "MenuItemComputeXic", "actual attached parent menu", analysis.Header.ToString()!, analysis.Header.ToString() == "Analysis");
+            Record("analysis-quantify", "MenuItemComputeXic", "actual attached parent menu", analysis.Header.ToString()!, analysis.Header.ToString() == "View");
             Dispatch("MenuItemHome");
 
             // Exercise only the retained shell completion adapter. This seeded typed result is not

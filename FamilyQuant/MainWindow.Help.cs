@@ -215,7 +215,7 @@ public partial class MainWindow
                 "   between 0 and 1 and a dot for the decimal separator, so any program can read them.\n" +
                 "   File > Save keeps the project for next time. File > Export also writes families\n" +
                 "   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\n" +
-                "   Analysis > Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\n" +
+                "   Tools > Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\n" +
                 "   result package, leaving the original untouched.\n\n" +
                 "EXPORT THE REPORT\n" +
                 "   Menu: File > Export report\n" +

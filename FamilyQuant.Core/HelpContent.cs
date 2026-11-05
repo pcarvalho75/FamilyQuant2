@@ -59,7 +59,7 @@ namespace FamilyQuant
             sb.AppendLine("   this program can attribute to a family.");
             sb.AppendLine("4. In Quantitation, choose Shared peptides for either source. Share of applies to");
             sb.AppendLine("   Full XIC immediately; PatternLab share of needs Recalculate for the .plp column.");
-            sb.AppendLine("5. File > Export writes CSV; Analysis > Reannotate SEPro stamps the family numbers back");
+            sb.AppendLine("5. File > Export writes CSV; Tools > Reannotate SEPro stamps the family numbers back");
             sb.AppendLine("   into a SEPro result package.");
             sb.AppendLine();
             sb.AppendLine("The families and the quantitation you keep live in one FamilyQuant project file, a");
@@ -320,7 +320,7 @@ namespace FamilyQuant
             sb.AppendLine("                 renumbered a family by hand.");
             sb.AppendLine("User ID          your own family number. Editable: change it and the families are");
             sb.AppendLine("                 regrouped, the User column recalculated, and it is the number");
-            sb.AppendLine("                 written back by Analysis > Reannotate SEPro.");
+            sb.AppendLine("                 written back by Tools > Reannotate SEPro.");
             sb.AppendLine("User Annotation  free text, saved in the .fcf and exported. It also NAMES the family");
             sb.AppendLine("                 in the Full XIC composition CSV, the Results chart and the");
             sb.AppendLine("                 evidence pack. A family without one is named by the protein name");

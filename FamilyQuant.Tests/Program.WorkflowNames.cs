@@ -22,7 +22,6 @@ internal static partial class Program
     /// </summary>
     private static readonly Dictionary<string, int> PendingRetiredNameSites = new(StringComparer.Ordinal)
     {
-        ["FamilyQuant.Core/HelpContent.cs|Analysis >"] = 2,
         ["FamilyQuant.Core/HelpContent.cs|Compute full XIC"] = 1,
         ["FamilyQuant.Core/HelpContent.cs|New from database"] = 1,
         ["FamilyQuant.Core/HelpWorkflowFacts.cs|New from database"] = 1,
@@ -31,7 +30,6 @@ internal static partial class Program
         ["FamilyQuant/ClusterGenerationControl.xaml|Build from database"] = 1,
         ["FamilyQuant/ClusterGenerationControl.xaml|Compute full XIC"] = 1,
         ["FamilyQuant/MainWindow.Documents.cs|New from database"] = 4,
-        ["FamilyQuant/MainWindow.Help.cs|Analysis >"] = 1,
         ["FamilyQuant/MainWindow.Help.cs|New from database"] = 2,
         ["FamilyQuant/MainWindow.Help.cs|View > Families"] = 3,
         ["FamilyQuant/MainWindow.xaml|Compute full XIC"] = 1,

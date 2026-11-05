@@ -141,7 +141,16 @@ internal static partial class Program
         {
             var menu = Field<Menu>("MainMenu");
             Check("shell menus use standard Windows order", string.Join(",", menu.Items.OfType<MenuItem>().Select(i => i.Header)) ==
-                "File,Edit,View,Analysis,Help");
+                string.Join(",", WorkflowNames.MenuOrder));
+            var tools = menu.Items.OfType<MenuItem>().Single(i => i.Header as string == WorkflowNames.Tools);
+            var view = menu.Items.OfType<MenuItem>().Single(i => i.Header as string == "View");
+            Check("Tools keeps only the extra tools and View holds Home and the steps", tools.Items.OfType<MenuItem>().Select(i => i.Header as string)
+                .SequenceEqual(WorkflowNames.ToolCommands) && view.Items.OfType<MenuItem>().Take(5).Select(i => i.Name).SequenceEqual(new[]
+                { "MenuItemHome", "MenuItemFamilies", "MenuItemComputeXic", "MenuItemAnalytics", "MenuItemDeNovo" }),
+                string.Join(", ", tools.Items.OfType<MenuItem>().Select(i => i.Header)));
+            Check("each former Analysis command is still reachable from a menu with its own handler", new[]
+                { "MenuItemComputeXic", "MenuItemAnalytics", "MenuItemDeNovo", "MenuItemSpectrumComparison", "MenuItemClusteringDiagnostic", "MenuItemReanotateSEPro" }
+                .All(name => main.FindName(name) is MenuItem item && item.Parent is MenuItem parent && (parent == tools || parent == view)));
             MenuCommandPreservationTests(main);
             var required = new[]
             {
