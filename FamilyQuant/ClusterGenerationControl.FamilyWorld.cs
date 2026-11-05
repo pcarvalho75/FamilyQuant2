@@ -96,7 +96,7 @@ public partial class ClusterGenerationControl
 
     private sealed class FamilyWorldTaskProgress(FamilyQuant.Operations.OperationContext operation) : IProgress<FetchProgress>
     {
-        public void Report(FetchProgress value) => operation.Report("task", "Reading database task: "
+        public void Report(FetchProgress value) => operation.Report("task", value.Message.Length > 0 ? value.Message : "Reading database task: "
             + value.CompletedBatches.ToString(CultureInfo.CurrentCulture) + " of "
             + value.TotalBatches.ToString(CultureInfo.CurrentCulture) + " taxa.", value.CompletedBatches, value.TotalBatches);
     }

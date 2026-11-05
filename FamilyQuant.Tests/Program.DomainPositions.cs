@@ -89,8 +89,11 @@ internal static partial class Program
         foreach (bool cancellation in new[] { false, true })
         {
             var unchanged = PositionFile(); string before = unchanged.ToJsonText();
-            using var failing = new PositionHandler { FailInterPro = !cancellation, CancelInterPro = cancellation };
-            bool refused = cancellation ? Throws<OperationCanceledException>(() => EvidenceFetcher.FetchAsync(unchanged, failing, positionAccessions: new[] { "P00001" }).GetAwaiter().GetResult())
+            using var stop = new CancellationTokenSource();
+            using var failing = new PositionHandler { FailInterPro = !cancellation, CancelInterPro = cancellation,
+                DuringPosition = () => { if (cancellation) stop.Cancel(); } };
+            bool refused = cancellation ? Throws<OperationCanceledException>(() => EvidenceFetcher.FetchAsync(unchanged, failing,
+                cancellationToken: stop.Token, positionAccessions: new[] { "P00001" }).GetAwaiter().GetResult())
                 : Throws<HttpRequestException>(() => EvidenceFetcher.FetchAsync(unchanged, failing, positionAccessions: new[] { "P00001" }).GetAwaiter().GetResult());
             Check("J4a: " + (cancellation ? "cancellation" : "InterPro failure") + " publishes no partial evidence", refused && before == unchanged.ToJsonText());
         }

@@ -8,6 +8,8 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-same-scan-conflicts", "FamilyQuant.Tests.Program.SameScanConflictTests()"),
+        SuiteCommandRule.Excluded("--same-scan-conflicts", "Read-only aggregate measurement requires explicit project, SEPro package, PEAKS exports and owned output; the synthetic same-scan fixture is enrolled separately."),
         SuiteCommandRule.Covered("--test-homology-search-equivalence", "FamilyQuant.Tests.Program.HomologySearchEquivalenceTests()", "FamilyQuant.Tests.HomologyTests.Run(System.Action`3[System.String,System.Boolean,System.String])"),
         SuiteCommandRule.Covered("--test-homology-score-tier", "FamilyQuant.Tests.Program.HomologyScoreTierTests()"),
         SuiteCommandRule.Covered("--test-homology-decoy-gate", "FamilyQuant.Tests.Program.HomologyDecoyGateTests()"),
@@ -274,7 +276,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-evidence-fetch-atomic", "FamilyQuant.Tests.Program.EvidenceFetchAtomicTests()", "FamilyQuant.Tests.Program.EvidenceFetchCoordinatorTests()", "FamilyQuant.Tests.Program.EvidenceFetchTests()", "FamilyQuant.Tests.Program.ProteinDomainsTests(System.String)"),
         SuiteCommandRule.Covered("--test-uniprot-retry", "FamilyQuant.Tests.Program.UniProtRetryTests()"),
         SuiteCommandRule.Covered("--test-evidence-resume", "FamilyQuant.Tests.Program.EvidenceResumeTests(System.String)"),
-        SuiteCommandRule.Covered("--test-panel-recovery", "FamilyQuant.Tests.Program.PanelRecoveryTests(System.String)"),
+        SuiteCommandRule.Covered("--test-panel-recovery", "FamilyQuant.Tests.Program.PanelRecoveryTests(System.String)", "FamilyQuant.Tests.Program.PanelRetryUiTests()", "FamilyQuant.Tests.Program.InheritedRetryProgressTests()"),
         SuiteCommandRule.Covered("--test-evidence-task", "FamilyQuant.Tests.Program.EvidenceTaskTests()"),
         SuiteCommandRule.Covered("--test-evidence-task-scope", "FamilyQuant.Tests.Program.EvidenceTaskScopeRecipeTests()", "FamilyQuant.Tests.Program.EvidenceTaskScopeTests()", "FamilyQuant.Tests.Program.EvidenceTaskScopeWindowTests(System.String)"),
         SuiteCommandRule.Covered("--test-export-protein-names", "FamilyQuant.Tests.Program.CsvTests()", "FamilyQuant.Tests.Program.ExportProteinNameTests()"),
@@ -401,7 +403,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-task-order", "FamilyQuant.Tests.Program.TaskOrderRegression(System.String[])"),
         SuiteCommandRule.Covered("--test-ui-colors", "FamilyQuant.Tests.Program.UiColorTests()"),
         SuiteCommandRule.Covered("--test-ui-icons", "FamilyQuant.Tests.Program.UiIconTests()"),
-        SuiteCommandRule.Covered("--test-ui-wording", "FamilyQuant.Tests.Program.AppearanceDirectionTests()", "FamilyQuant.Tests.Program.CurationWordingTests()", "FamilyQuant.Tests.Program.DeNovoHelpContentTests()", "FamilyQuant.Tests.Program.HelpContentTests()", "FamilyQuant.Tests.Program.ReportViewTests()"),
+        SuiteCommandRule.Covered("--test-ui-wording", "FamilyQuant.Tests.Program.AppearanceDirectionTests()", "FamilyQuant.Tests.Program.CurationWordingTests()", "FamilyQuant.Tests.Program.DeNovoHelpContentTests()", "FamilyQuant.Tests.Program.HelpContentTests()", "FamilyQuant.Tests.Program.ReportViewTests()", "FamilyQuant.Tests.Program.TypographyRulesTests()"),
         SuiteCommandRule.Covered("--test-update-check", "FamilyQuant.Tests.Program.UpdateCheckCommand(System.String[],System.String)"),
         SuiteCommandRule.Covered("--test-usearch-binary", "FamilyQuant.Tests.Program.UseSearchBinaryTests(System.String)"),
         SuiteCommandRule.Covered("--test-word-report", "FamilyQuant.Tests.Program.WordReportTests(System.String)"),

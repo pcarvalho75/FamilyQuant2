@@ -26,7 +26,8 @@ public static class ProteinPositionFetcher
         Responses = new() { new() { Url = url, Sha256 = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(body))) } },
     };
 
-    internal static async Task FetchDomainsAsync(ProteinPositionEvidence positions, HttpClient client, CancellationToken token)
+    internal static async Task FetchDomainsAsync(ProteinPositionEvidence positions, HttpClient client, CancellationToken token,
+        UniProtFetchOptions? options = null, Action<string>? retryProgress = null)
     {
         string prefix = "https://www.ebi.ac.uk/interpro/api/entry/pfam/protein/uniprot/" + Uri.EscapeDataString(positions.Accession) + "/";
         string? next = prefix + "?page_size=200";
@@ -34,7 +35,7 @@ public static class ProteinPositionFetcher
         var domains = new List<PfamDomainPosition>();
         string metadataUrl = "https://www.ebi.ac.uk/interpro/api/protein/uniprot/" + Uri.EscapeDataString(positions.Accession) + "/";
         using var metadataReply = await UniProtHttp.GetWithRetryAsync(client, metadataUrl, 3,
-            status => "InterPro refused the source sequence (HTTP " + status.ToString(CultureInfo.InvariantCulture) + ").", token).ConfigureAwait(false);
+            status => "InterPro refused the source sequence (HTTP " + status.ToString(CultureInfo.InvariantCulture) + ").", token, options, retryProgress).ConfigureAwait(false);
         string metadataBody = await metadataReply.Content.ReadAsStringAsync(token).ConfigureAwait(false);
         string metadataRelease = Release(metadataReply);
         PositionEvidenceSource source = Source("InterPro/Pfam", metadataRelease, metadataUrl, metadataBody);
@@ -54,7 +55,7 @@ public static class ProteinPositionFetcher
                 || !visited.Add(next) || visited.Count > 10000)
                 throw new InvalidDataException("InterPro supplied an invalid or repeated next-page URL. No evidence was applied.");
             using var response = await UniProtHttp.GetWithRetryAsync(client, next, 3,
-                status => "InterPro refused protein positions (HTTP " + status.ToString(CultureInfo.InvariantCulture) + ").", token).ConfigureAwait(false);
+                status => "InterPro refused protein positions (HTTP " + status.ToString(CultureInfo.InvariantCulture) + ").", token, options, retryProgress).ConfigureAwait(false);
             string body = await response.Content.ReadAsStringAsync(token).ConfigureAwait(false);
             string release = Release(response);
             var pageSource = Source("InterPro/Pfam", release, next, body);

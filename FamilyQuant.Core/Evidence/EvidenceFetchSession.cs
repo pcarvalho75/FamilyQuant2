@@ -35,13 +35,18 @@ public static class EvidenceFetchSession
     public static Task<EvidenceFetchOutcome> FetchAsync(FamilyClusterFile file, HttpMessageHandler? handler = null,
         IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default,
         IReadOnlyCollection<string>? positionAccessions = null, UniProtFetchOptions? options = null) =>
-        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, positionAccessions, options);
+        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, positionAccessions, options, false);
 
     public static Task<EvidenceFetchOutcome> FetchAsync(FamilyClusterFile file, OperationContext operation,
-        HttpMessageHandler? handler = null, IReadOnlyCollection<string>? positionAccessions = null, UniProtFetchOptions? options = null) => FetchStagedAsync(file, operation, handler, null, positionAccessions, options);
+        HttpMessageHandler? handler = null, IReadOnlyCollection<string>? positionAccessions = null, UniProtFetchOptions? options = null) => FetchStagedAsync(file, operation, handler, null, positionAccessions, options, false);
+
+    public static Task<EvidenceFetchOutcome> RetryPanelAsync(FamilyClusterFile file, HttpMessageHandler? handler = null,
+        IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default, UniProtFetchOptions? options = null) =>
+        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, null, options, true);
 
     private static async Task<EvidenceFetchOutcome> FetchStagedAsync(FamilyClusterFile file, OperationContext operation,
-        HttpMessageHandler? handler, IProgress<FetchProgress>? progress, IReadOnlyCollection<string>? positionAccessions, UniProtFetchOptions? options)
+        HttpMessageHandler? handler, IProgress<FetchProgress>? progress, IReadOnlyCollection<string>? positionAccessions, UniProtFetchOptions? options,
+        bool panelOnly)
     {
         ArgumentNullException.ThrowIfNull(file);
         ArgumentNullException.ThrowIfNull(operation);
@@ -61,7 +66,12 @@ public static class EvidenceFetchSession
         };
         var stagedEvidence = staged.MyExtendedFastaItems.Select(p => p.Evidence).ToArray();
         operation.ThrowIfCancellationRequested();
-        var evidence = await EvidenceFetcher.FetchAsync(staged, handler,
+        var evidence = panelOnly ? new EvidenceFetchResult
+        {
+            Provenance = staged.EvidenceSource ?? new EvidenceProvenance(),
+            Found = staged.MyExtendedFastaItems.Count(p => p.Evidence != null),
+            WithDomains = staged.MyExtendedFastaItems.Count(p => !string.IsNullOrWhiteSpace(p.Domains)),
+        } : await EvidenceFetcher.FetchAsync(staged, handler,
             new FetchStageProgress(operation, EvidenceStage, progress), operation.CancellationToken, positionAccessions, options).ConfigureAwait(false);
         ReferencePanel? panel = null;
         Exception? panelFailure = null;
@@ -73,7 +83,8 @@ public static class EvidenceFetchSession
                 panel = await ReferencePanelFetcher.FetchAndStoreAsync(staged, handler: handler,
                     progress: new FetchStageProgress(operation, ReferencePanelFetcher.ProgressStage, progress),
                     cancellationToken: operation.CancellationToken,
-                    expectedRelease: evidence.Asked > 0 ? evidence.Provenance.Release : null, options: options).ConfigureAwait(false);
+                    expectedRelease: (evidence.Asked > 0 || panelOnly) && evidence.Provenance.Release.Length > 0
+                        ? evidence.Provenance.Release : null, options: options).ConfigureAwait(false);
                 if (!panel.IsComplete) panelFailure = new HttpRequestException(panel.FailureReason);
             }
             catch (Exception ex) when (ex is HttpRequestException or JsonException or InvalidDataException)
@@ -84,6 +95,7 @@ public static class EvidenceFetchSession
                 {
                     Provider = "UniProt", Release = evidence.Provenance.Release,
                     Families = families, MissingFamilies = families.ToList(), FailureReason = ex.Message,
+                    TotalBatches = ReferencePanelFetcher.PlannedStreamBatchCount(families), FailedBatches = 1,
                 };
                 staged.EvidenceSource ??= new EvidenceProvenance();
                 staged.EvidenceSource.ReferencePanel = panel;

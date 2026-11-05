@@ -14,10 +14,11 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
-    private sealed class ResumeUniProtHandler : HttpMessageHandler
+    internal sealed class ResumeUniProtHandler : HttpMessageHandler
     {
         internal string Release = "2026_03";
         internal string? FailMarker;
+        internal HttpStatusCode FailureStatus = HttpStatusCode.BadRequest;
         internal int Probes;
         internal List<string> Downloads { get; } = new();
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token)
@@ -33,7 +34,7 @@ internal static partial class Program
             bool stream = uri.AbsolutePath.EndsWith("/stream", StringComparison.Ordinal);
             bool evidence = query.Contains("accessions=", StringComparison.Ordinal);
             if (FailMarker != null && query.Contains(FailMarker, StringComparison.Ordinal))
-                return Task.FromResult(new HttpResponseMessage(HttpStatusCode.BadRequest));
+                return Task.FromResult(new HttpResponseMessage(FailureStatus));
             var names = evidence ? query[(query.IndexOf("accessions=", StringComparison.Ordinal) + 11)..].Split(',')
                 : Regex.Matches(query, "family:\"([^\"]+)\"").Select(m => m.Groups[1].Value).ToArray();
             if (stream || evidence) Downloads.Add(query);
@@ -103,5 +104,17 @@ internal static partial class Program
         System.IO.File.WriteAllText(batchPath, "{\"invalid\":true}");
         EvidenceFetcher.FetchAsync(FileFixture(), protein, options: proteinOptions).GetAwaiter().GetResult();
         Check("Z1c a corrupt saved reply is refetched instead of reused", protein.Downloads.Count == 1);
+        {
+            string blocked = Path.Combine(root, "blocked-cache");
+            Directory.CreateDirectory(root);
+            System.IO.File.WriteAllText(blocked, "A file blocks directory creation for this synthetic cache location.");
+            var blockedOptions = new UniProtFetchOptions { ResumeDirectory = blocked, DelayAsync = (_, _) => Task.CompletedTask };
+            using var requests = new ResumeUniProtHandler();
+            var withoutCache = ReferencePanelFetcher.FetchAsync(new[] { "F00000 family" }, requests, options: blockedOptions).GetAwaiter().GetResult();
+            var proteins = FileFixture();
+            var fetched = EvidenceFetcher.FetchAsync(proteins, requests, options: blockedOptions).GetAwaiter().GetResult();
+            Check("Z1e an unwritable cache location never fails panel or protein fetching",
+                withoutCache.IsComplete && withoutCache.Entries.Count == 1 && fetched.Found == 1001 && requests.Downloads.Count == 4);
+        }
     }
 }

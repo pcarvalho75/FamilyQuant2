@@ -250,7 +250,8 @@ namespace FamilyQuant.Evidence
             await Parallel.ForEachAsync(requestedEvidence.Where(e => e.Positions != null), new ParallelOptions
             {
                 MaxDegreeOfParallelism = 4, CancellationToken = cancellationToken,
-            }, async (evidence, token) => await Positions.ProteinPositionFetcher.FetchDomainsAsync(evidence.Positions!, client, token).ConfigureAwait(false)).ConfigureAwait(false);
+            }, async (evidence, token) => await Positions.ProteinPositionFetcher.FetchDomainsAsync(evidence.Positions!, client, token,
+                options, message => Report(batches.Count, message)).ConfigureAwait(false)).ConfigureAwait(false);
             result.PositionFound = requestedEvidence.Count(e => e.Positions?.DomainSource != null);
             if (requestedEvidence.Select(e => e.Positions?.DomainSource?.Release).Where(r => r != null).Distinct(StringComparer.Ordinal).Count() > 1)
                 throw new InvalidDataException("The InterPro release changed between proteins. No evidence was applied.");

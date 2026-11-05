@@ -62,7 +62,7 @@ public static partial class EvidenceTaskDiscovery
     /// category is offered as functional scope, followed by a phrase from reviewed tissue evidence.
     /// No scope is applied until a person confirms it.</summary>
     public static async Task<EvidenceTaskProposal> DiscoverAsync(FamilyClusterFile file, HttpMessageHandler? handler = null,
-        IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default)
+        IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default, UniProtFetchOptions? options = null)
     {
         ArgumentNullException.ThrowIfNull(file);
         string fingerprint = SourceFingerprint(file);
@@ -84,7 +84,8 @@ public static partial class EvidenceTaskDiscovery
             cancellationToken.ThrowIfCancellationRequested();
             string url = "https://rest.uniprot.org/taxonomy/" + taxa[i].TaxonId.ToString(CultureInfo.InvariantCulture);
             using HttpResponseMessage response = await UniProtHttp.GetWithRetryAsync(client, url, 3,
-                status => "UniProt refused the taxonomy request (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No task was proposed.", cancellationToken).ConfigureAwait(false);
+                status => "UniProt refused the taxonomy request (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No task was proposed.", cancellationToken,
+                options, message => progress?.Report(new FetchProgress { Message = message, CompletedBatches = i, TotalBatches = taxa.Count })).ConfigureAwait(false);
             string current = UniProtHttp.Release(response);
             if (current.Length == 0 || (release != null && release != current))
                 throw new InvalidDataException("UniProt omitted its release or changed releases during taxonomy discovery. No task was proposed.");
@@ -122,7 +123,8 @@ public static partial class EvidenceTaskDiscovery
         {
             using HttpResponseMessage response = await UniProtHttp.GetWithRetryAsync(client,
                 "https://rest.uniprot.org/keywords/stream?query=*&format=json", 3,
-                status => "UniProt refused the keyword vocabulary (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No task was proposed.", cancellationToken).ConfigureAwait(false);
+                status => "UniProt refused the keyword vocabulary (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No task was proposed.", cancellationToken,
+                options, message => progress?.Report(new FetchProgress { Message = message, CompletedBatches = taxa.Count, TotalBatches = taxa.Count })).ConfigureAwait(false);
             if (UniProtHttp.Release(response) != release)
                 throw new InvalidDataException("The UniProt keyword vocabulary and taxonomy releases differ. No task was proposed.");
             using JsonDocument vocabulary = JsonDocument.Parse(await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));

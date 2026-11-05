@@ -12,6 +12,9 @@ commands. Optional `--screen-fcf` and `--screen-project` paths are read only.
 Without them, captures use a synthetic curation fixture and empty Results.
 The manifest labels those states explicitly. No RAW file is opened.
 
+Add `--screen-incomplete-panel` with synthetic inputs to capture retained protein evidence,
+the incomplete-panel status and the Retry panel button. The manifest records this fixture.
+
 The harness loads `App.InitializeComponent()`, selects the .NET 10 Fluent theme
 through `ThemeMode`, shows the real windows off screen, drains layout work, then
 draws each client area through a `VisualBrush`. Product styles remain installed,
