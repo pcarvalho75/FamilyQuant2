@@ -1465,7 +1465,7 @@ namespace FamilyQuant
             dc.DrawRectangle(Palette.Backdrop, null, new Rect(0, 0, ActualWidth, ActualHeight));
             DrawText(dc, "De novo peptide yield versus confidence cutoff", Palette.Ink, 21,
                 new Point(24, 16), true);
-            DrawText(dc, "Distinct clean sequences (I folded to L), three Bjararaca replicates pooled, " +
+            DrawText(dc, "Distinct clean sequences (I folded to L), three replicates pooled, " +
                 "collapsed to each tool's max confidence per sequence.", Palette.Muted, 11,
                 new Point(24, 48));
             DrawText(dc, "The two panels use DIFFERENT vertical scales: PEAKS de novo (full) is about 10x DeepNovo.",
@@ -1851,7 +1851,7 @@ namespace FamilyQuant
             dc.DrawRectangle(Palette.Backdrop, null, new Rect(0, 0, ActualWidth, ActualHeight));
             DrawText(dc, "Do PEAKS and DeepNovo agree when they call the same peptide?", Palette.Ink, 20,
                 new Point(24, 16), true);
-            DrawText(dc, "Bothrops jararaca venom, three pooled replicates. Each dot is one peptide sequence " +
+            DrawText(dc, "Three pooled replicates. Each dot is one peptide sequence " +
                 "identified by both tools; axes give each tool's own confidence.", Palette.Muted, 11,
                 new Point(24, 46));
             DrawText(dc, "Matched by modification-stripped, I=L-folded sequence, keeping the max confidence per tool.",
@@ -2017,7 +2017,7 @@ namespace FamilyQuant
         protected override void OnRender(DrawingContext dc)
         {
             dc.DrawRectangle(Palette.Backdrop, null, new Rect(0, 0, ActualWidth, ActualHeight));
-            DrawText(dc, "What each de novo source adds: set-novelty view of Bjararaca venom peptides",
+            DrawText(dc, "What each de novo source adds: set-novelty view of the peptides",
                 Palette.Ink, 19, new Point(24, 16), true);
             DrawText(dc, "Three replicates pooled; peptides matched by clean sequence (mods stripped, I folded " +
                 "to L); confidence collapsed to the max per sequence.", Palette.Muted, 11, new Point(24, 44));
