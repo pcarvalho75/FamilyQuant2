@@ -131,7 +131,7 @@
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="4" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
-                            <Button Grid.Column="1" x:Name="ButtonComputeFullXic" Content="Compute full XIC"
+                            <Button Grid.Column="1" x:Name="ButtonComputeFullXic" Content="Quantify"
                                     Command="{x:Static local:MainWindow.NavigateShellCommand}" CommandParameter="{x:Static local:ShellDestination.Quantify}"
                                     ToolTip="After Fetch family world, choose RAW files and an identification package in Quantify; computing takes minutes to hours."/>
                         </Grid>
@@ -148,7 +148,7 @@
                             <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                             <TextBlock Text="Identity" VerticalAlignment="Center" Foreground="{DynamicResource MutedBrush}"/>
                             <Label Grid.Column="1" x:Name="LabelClusterThreshold" Margin="8,0,0,0"
-                                   ToolTip="The sequence identity used when building these families. Build from database lets you choose a different threshold."/>
+                                   ToolTip="The sequence identity used when building these families. Build families lets you choose a different threshold."/>
                             <TextBlock Grid.Row="1" Text="Word similarity" VerticalAlignment="Center" Foreground="{DynamicResource MutedBrush}"/>
                             <Label Grid.Row="1" Grid.Column="1" x:Name="LabelWordSimilarity" Margin="8,0,0,0"
                                    ToolTip="The last description similarity threshold, or keywords for a keyword grouping. None means only sequence identity was used."/>

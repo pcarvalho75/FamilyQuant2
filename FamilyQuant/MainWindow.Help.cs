@@ -70,7 +70,7 @@ public partial class MainWindow
             }
 
             return
-                "Start here. Use File > New from database to group a new database's " +
+                "Start here. Use File > Build families to group a new database's " +
                 "proteins into families. If you already have a project (.fqproj) or a Family Cluster File " +
                 "(.fcf), open it with File > Open.";
         }
@@ -148,7 +148,7 @@ public partial class MainWindow
                 "   open the steps, as the sidebar numbers them.\n\n" +
                 "STEP 2, PART A (" + WorkflowNames.GroupByEvidence.ToUpperInvariant() + "), FOLLOWS THIS ORDER IN FAMILIES\n" + HelpContent.GroupingOrder + "\n" +
                 "STEP 1 · " + WorkflowNames.BuildFamilies + " (" + WorkflowNames.BuildFamiliesMethod + ")\n" +
-                "   Menu: File > New from database\n" +
+                "   Menu: File > Build families\n" +
                 "   Also: 1 Build families on Home or the sidebar (Alt+1).\n" +
                 "   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\n" +
                 "   Produces: a Family Cluster File (.fcf) written next to the database.\n" +

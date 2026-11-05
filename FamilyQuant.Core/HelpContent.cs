@@ -23,7 +23,7 @@ namespace FamilyQuant
             "1. Fetch evidence: download UniProt annotations for the project's proteins.\n" +
             "2. Group by evidence: review the scope and proposal, then Apply grouping.\n" +
             "3. Fetch family world: download family references for the confirmed task and scope.\n" +
-            "4. Compute full XIC: open Quantify to measure peptide signal from the RAW files.\n";
+            "4. Quantify: measure peptide signal from the RAW files.\n";
 
         /// <summary>
         /// <paramref name="profile"/> is null before a project is loaded; the text then explains what the
@@ -50,7 +50,7 @@ namespace FamilyQuant
             sb.AppendLine("-----------------");
             sb.AppendLine("The five steps, as Home and the sidebar list them (steps 1 to 4 in order, 5 optional):");
             sb.AppendLine(WorkflowNames.Flow);
-            sb.AppendLine("1. " + WorkflowNames.BuildFamilies + " groups by sequence identity with USearch: File > New from database,");
+            sb.AppendLine("1. " + WorkflowNames.BuildFamilies + " groups by sequence identity with USearch: File > Build families,");
             sb.AppendLine("   Home or the sidebar opens it. Choose database, then Build families on a FASTA or");
             sb.AppendLine("   target-decoy (.T-R) database. That writes a Family Cluster File (.fcf) next to the");
             sb.AppendLine("   database: proteins grouped into families.");

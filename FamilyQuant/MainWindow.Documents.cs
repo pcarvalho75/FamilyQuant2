@@ -106,7 +106,7 @@ public partial class MainWindow
                     "Reason given by the program: " + ex.Message + "\n\n" +
                     "Next step: check that this really is a .fqproj or a .fcf written by FamilyQuant and " +
                     "that it is not open in another program. If it was interrupted while being saved it " +
-                    "will have to be generated again from the database with File > New from database.",
+                    "will have to be generated again from the database with File > Build families.",
                     "Could not open the file", MessageBoxImage.Error);
                 return false;
         }
@@ -121,7 +121,7 @@ public partial class MainWindow
                 ShellMessages.Report(owner,
                     "Nothing was saved: there are no families on screen to save.\n\n" +
                     "Next step: open a Family Cluster File with File > Open, or build " +
-                    "one with File > New from database.",
+                    "one with File > Build families.",
                     "Nothing to save", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
@@ -178,7 +178,7 @@ public partial class MainWindow
                 ShellMessages.Report(owner,
                     "Nothing was saved: there is no project on screen to save.\n\n" +
                     "Next step: open a project or a Family Cluster File with File > Open, or build one " +
-                    "with File > New from database.",
+                    "with File > Build families.",
                     "Nothing to save", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
@@ -387,7 +387,7 @@ public partial class MainWindow
                         "from, so they have no family number to receive.\n\n" +
                         "This normally means the search and the clustering used different FASTA files, or " +
                         "different versions of the same one.\n\n" +
-                        "Next step: recluster the exact database the SEPro search used, with File > New from database, " +
+                        "Next step: recluster the exact database the SEPro search used, with File > Build families, " +
                         "and try again.\n\n" +
                         "Examples of the missing identifiers: " +
                         string.Join(", ", missing.Take(10)) + (missing.Count > 10 ? ", ..." : ""),
