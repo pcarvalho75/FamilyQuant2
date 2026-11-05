@@ -4,6 +4,24 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.8 (release candidate, not published)
+
+- **Home with five steps.** Follow Build families, Curate families, Quantify,
+  Results and optional De novo review in order. Curate families keeps Group by
+  evidence and Group by words together. The sidebar and Help use the same names;
+  extra analysis commands are under **Tools**.
+- **Clearer family tables.** Both grids have aligned headers and their own
+  titles. **All proteins** sits above the protein grid, family numbers are
+  centred, and **USearch ID** is shown by default. A saved column choice still
+  takes precedence.
+- **PatternLab wins conflicting precursors.** The new Quantify option starts ON.
+  The top-XCorr PatternLab claim with an available sequence wins when a de novo
+  call gives a different sequence for the same scan and precursor. Comparison
+  removes PTMs and treats I = L. The choice is stored with the computation and
+  listed in report Methods; existing stored results change only after Compute.
+- **De novo in FamilyQuant.** A dedicated Help page explains inputs, duplicate
+  credit, XICs, family homology and why De novo review is optional.
+
 ## 2.1.7 (release candidate, not published)
 
 - **Keep downloaded evidence.** Fetch evidence keeps the protein evidence when

@@ -200,8 +200,8 @@ namespace FamilyQuant.Tests
                 {
                     string markerRoot = Path.Combine(Path.GetTempPath(), "screen-update-" + Guid.NewGuid().ToString("N"));
                     Directory.CreateDirectory(markerRoot);
-                    File.WriteAllText(Path.Combine(markerRoot, ".familyquant-update-complete"), "2.1.7.0");
-                    if (!main.ShowUpdateCompletionNotice(markerRoot, "2.1.7.0")) throw new InvalidOperationException("Update notice was not shown.");
+                    File.WriteAllText(Path.Combine(markerRoot, ".familyquant-update-complete"), AppVersionInfo.Current());
+                    if (!main.ShowUpdateCompletionNotice(markerRoot, AppVersionInfo.Current())) throw new InvalidOperationException("Update notice was not shown.");
                 }
                 Capture(Screens[0], main);
                 Call(main, "MenuRunUSearch_Click", main, new RoutedEventArgs());
