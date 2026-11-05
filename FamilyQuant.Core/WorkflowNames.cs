@@ -75,7 +75,8 @@ public static class WorkflowNames
     /// The wording the names table retires. A match in user-visible text is a second name for a step.
     /// "de novo evidence" in lower case stays ordinary prose; only the capitalized screen name is retired.
     /// The bare step name De novo is caught where a sentence uses it as a place (open, from, in, and De
-    /// novo at the end of a phrase); "De novo" as an adjective, as in De novo sequence, stays.
+    /// novo at the end of a phrase, or before Step or screen); "De novo" as an adjective, as in De novo
+    /// sequence, stays.
     /// </summary>
     public static IReadOnlyList<RetiredWorkflowName> Retired { get; } = new[]
     {
@@ -86,7 +87,7 @@ public static class WorkflowNames
         new RetiredWorkflowName("Analytics / report", Results, new Regex(@"\banalytics\s*/\s*report\b", AnyCase)),
         new RetiredWorkflowName("De novo evidence", DeNovoReview,
             new Regex(@"\b(?:De [Nn]ovo [Ee]vidence|DE NOVO EVIDENCE)\b", RegexOptions.CultureInvariant)),
-        new RetiredWorkflowName("De novo", DeNovoReview, new Regex(@"\b(?i:from|open|in|and|to|the|by)\s+De [Nn]ovo\b(?=\s*(?:[.,;:)]|and\b|screen\b|$))",
+        new RetiredWorkflowName("De novo", DeNovoReview, new Regex(@"\b(?i:from|open|in|and|to|the|by)\s+De [Nn]ovo\b(?=\s*(?:[.,;:)]|and\b|(?i:screen|step)\b|$))",
             RegexOptions.CultureInvariant), "Open De novo and press Search."),
         new RetiredWorkflowName("View > Families", "View > " + CurateFamilies, new Regex(@"\bView\s*>\s*Families\b", RegexOptions.CultureInvariant)),
         new RetiredWorkflowName("Analysis >", Tools + " >", new Regex(@"\bAnalysis\s*>", RegexOptions.CultureInvariant))

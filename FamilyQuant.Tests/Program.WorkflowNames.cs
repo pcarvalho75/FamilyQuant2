@@ -84,7 +84,8 @@ internal static partial class Program
                 "from database."; string b = @"Open View > Families ""now"""; string c = $"{count} De Novo evidence {(ok ? "x" : "y")}";
                 string d = "THE DE NOVO EVIDENCE SCREEN"; string e = "Analysis > Reannotate SEPro"; string f = $@"Build from database {"{"}";
                 string g = "Start page\n"; string h = "Recompute full XIC; export de novo evidence; " + count + " Quantify";
-                string i = "Filters shared by Quantify and De novo."; string j = "De novo sequence; De novo only: 3; Open De novo review."; }
+                string i = "Filters shared by Quantify and De novo."; string j = "De novo sequence; De novo only: 3; Open De novo review.";
+                string k = "Recompute, or reconcile it in De Novo Step 2."; string l = "Or reconcile it in De novo review, step 2."; }
             """";
         var xamlSites = XamlUiText("Fixture.xaml", plantedXaml).ToArray();
         var sourceSites = CSharpUiText("Fixture.cs", plantedSource).ToArray();
@@ -98,7 +99,8 @@ internal static partial class Program
                 "De novo", "View > Families", "Analysis >" }), string.Join(", ", Names(sourceSites)));
         var bareStepName = WorkflowNames.Retired.Single(retired => retired.OldName == "De novo").Pattern;
         Check("the bare step name De novo is caught as a place, never as an adjective", sourceSites
-            .Where(site => bareStepName.IsMatch(site.Text)).Select(site => site.Text).SequenceEqual(new[] { "Filters shared by Quantify and De novo." }));
+            .Where(site => bareStepName.IsMatch(site.Text)).Select(site => site.Text).SequenceEqual(new[]
+                { "Filters shared by Quantify and De novo.", "Recompute, or reconcile it in De Novo Step 2." }));
         Check("split literals join with their line and escapes decode",
             sourceSites.Any(site => site.Text == "Use File > New from database." && site.Line == 3)
             && sourceSites.Any(site => site.Text == "Open View > Families \"now\"") && sourceSites.Any(site => site.Text == "Start page\n")
