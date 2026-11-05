@@ -212,7 +212,7 @@ internal static partial class Program
     {
         var routes = new[]
         {
-            (Menu: "MenuItemHome", Case: "home", Header: "Start page", Definition: true),
+            (Menu: "MenuItemHome", Case: "home", Header: WorkflowNames.Home, Definition: true),
             (Menu: "MenuItemRunUSearch", Case: "new", Header: "New from database", Definition: true),
             (Menu: "MenuItemLoadFQC", Case: "open-fcf", Header: "Open", Definition: true),
             (Menu: "MenuItemSaveProject", Case: "project-success", Header: "Save", Definition: true),

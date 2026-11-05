@@ -62,8 +62,8 @@
             </MenuItem>
             <MenuItem Header="View" SubmenuOpened="MenuView_SubmenuOpened"
                       ToolTip="Navigate between project views and choose the appearance or visible protein rows.">
-                <MenuItem x:Name="MenuItemHome" Header="Start page" Click="MenuItemHome_Click"
-                          ToolTip="Returns to the start page while keeping your project open. Its actions use these same menu commands."/>
+                <MenuItem x:Name="MenuItemHome" Header="Home" Click="MenuItemHome_Click" InputGestureText="Alt+0"
+                          ToolTip="Returns to Home and its five steps while keeping your project open. Each step opens the same screen as the sidebar."/>
                 <MenuItem x:Name="MenuItemFamilies" Header="Families" Click="MenuItemFamilies_Click"
                           ToolTip="Returns to the current family table, or opens a project when none is loaded. Existing curation stays in memory."/>
                 <Separator/>

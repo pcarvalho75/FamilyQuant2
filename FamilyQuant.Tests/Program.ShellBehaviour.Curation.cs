@@ -239,8 +239,8 @@ internal static partial class Program
                         && workflowBefore.Contains("You are at: De Novo evidence", StringComparison.Ordinal)
                         && workflowActual.Contains("You are at: De novo |", StringComparison.Ordinal)
                         && workflowActual.Contains("A separate workflow: select PEAKS or DeepNovo", StringComparison.Ordinal)
-                        && !familyWorkflowActual.Contains("You are at: Start", StringComparison.Ordinal)
-                        && !workflowActual.Contains("You are at: Start", StringComparison.Ordinal),
+                        && !familyWorkflowActual.Contains("You are at: Home", StringComparison.Ordinal)
+                        && !workflowActual.Contains("You are at: Home", StringComparison.Ordinal),
                         new { families = familyWorkflowBefore, deNovo = workflowBefore }, new { families = familyWorkflowActual, deNovo = workflowActual });
                     R(["18DC9493B812"], "native Families and De novo next-step workflow Help",
                         familyWorkflowBefore.Contains("Curate them here, then", StringComparison.Ordinal)

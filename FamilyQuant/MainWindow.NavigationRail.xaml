@@ -19,8 +19,8 @@
         </UserControl.Resources>
             <Border Background="{DynamicResource SurfaceBrush}" Padding="10,16">
                 <DockPanel LastChildFill="True">
-                    <Button DockPanel.Dock="Top" Content="Start" Command="{x:Static local:MainWindow.NavigateShellCommand}" CommandParameter="{x:Static local:ShellDestination.Start}" CommandTarget="{Binding RelativeSource={RelativeSource AncestorType=Window}}" HorizontalContentAlignment="Left" Margin="0,0,0,18"
-                            ToolTip="Returns to the Start page while keeping your project open. Keyboard shortcut: Alt+0."/>
+                    <Button DockPanel.Dock="Top" Content="Home" Command="{x:Static local:MainWindow.NavigateShellCommand}" CommandParameter="{x:Static local:ShellDestination.Start}" CommandTarget="{Binding RelativeSource={RelativeSource AncestorType=Window}}" HorizontalContentAlignment="Left" Margin="0,0,0,18"
+                            ToolTip="Returns to Home and its five steps while keeping your project open. Keyboard shortcut: Alt+0."/>
                     <Button DockPanel.Dock="Bottom" Content="Build from database" Margin="0,18,0,0"
                             Command="{x:Static local:MainWindow.NavigateShellCommand}" CommandParameter="{x:Static local:ShellDestination.Build}"
                             CommandTarget="{Binding RelativeSource={RelativeSource AncestorType=Window}}"

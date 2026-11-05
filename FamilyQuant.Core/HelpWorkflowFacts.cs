@@ -5,7 +5,7 @@ public static class HelpWorkflowFacts
 {
     public const string FilesAndNavigation =
         "FILES, NAVIGATION AND KEYBOARD\n" +
-        "Start actions also have menu commands; the status bar names the current stage and open project and explains what to do next. Tab and Shift+Tab move between enabled controls, and the native focus indicator marks the active control.\n\n" +
+        "Home steps also have sidebar and menu commands; the status bar names the current stage and open project and explains what to do next. Tab and Shift+Tab move between enabled controls, and the native focus indicator marks the active control.\n\n" +
         "If no project is open, nothing is saved: use File > Open for a .fqproj or .fcf, or File > New from database to build families. File and row counts use whole numbers with digit grouping and no decimal places.\n\n" +
         "File > Save keeps families, User IDs, annotations and computed quantitation together in one .fqproj; use Save as to keep the previous version. The .fcf export keeps the families and annotations without the full XIC result.\n\n" +
         "Results reads stored full-envelope quantitation, including family shares and total-ion-current recovery, without reading RAW or changing families. Compute full XIC first when the project has no stored quantitation, then save the project to keep it.\n\n" +

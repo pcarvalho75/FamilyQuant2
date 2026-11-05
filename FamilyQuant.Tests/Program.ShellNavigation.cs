@@ -77,9 +77,19 @@ internal static partial class Program
             Route(ShellDestination.Families);
             Check("returning by rail restores the same curation instance", host.Children.Count == 1 && ReferenceEquals(project, host.Children[0]));
             Route(ShellDestination.Start);
-            Check("Start remains reachable by the keyboard route", host.Children.OfType<HomeControl>().Any()
+            Check("Home remains reachable by the keyboard route", host.Children.OfType<HomeControl>().Any()
                 && main.NavigationModel.Current == ShellDestination.Start);
-            Check("hosted Start uses the rail instead of duplicate workflow cards", host.Children.OfType<HomeControl>().Single().UseShellNavigationRail);
+            var hosted = host.Children.OfType<HomeControl>().Single();
+            Check("hosted Home shows the five numbered steps beside the sidebar", new[] { "ButtonHomeBuild", "ButtonHomeCurate",
+                "ButtonHomeCompute", "ButtonHomeAnalytics", "ButtonHomeDeNovo" }.Select(name => (Button)hosted.FindName(name))
+                .Select(button => button.Visibility == Visibility.Visible ? button.Content as string : null).SequenceEqual(WorkflowNames.Steps.Select(step => step.Name))
+                && ((FrameworkElement)hosted.FindName("BorderHomeSteps")).Visibility == Visibility.Visible);
+            var rail = (ShellNavigationRail)main.FindName("NavigationRail");
+            var homeButton = WalkTree(rail).OfType<Button>().First(button => Equals(button.CommandParameter, ShellDestination.Start));
+            var homeMenu = (MenuItem)main.FindName("MenuItemHome");
+            Check("Home replaces Start on the sidebar, in View and on the status bar", homeButton.Content as string == WorkflowNames.Home
+                && homeMenu.Header as string == WorkflowNames.Home && main.StatusModel.Text.StartsWith(WorkflowNames.Home + " |", StringComparison.Ordinal),
+                homeButton.Content + "; " + homeMenu.Header + "; " + main.StatusModel.Text);
         }
         finally
         {

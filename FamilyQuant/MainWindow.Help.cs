@@ -16,14 +16,13 @@ public partial class MainWindow
         public string CurrentContextHelp()
         {
             if (owner.IsQuantifyVisible) return owner.QuantifyHelpText();
-            // The home screen is the hub, not a step of the sequence. It names the project so the through
-            // line is stated even here, where none is open.
+            // Home is the hub, not a step of the sequence. It names the project so the through line is
+            // stated even here, where none is open, and draws the five steps in the order Home lists them.
             if (owner.home != null)
             {
                 return
-                    "Start page. The family workflow and the optional de novo workflow stay available. " +
-                    owner.ProjectStatusText() + " File > Open opens a project. The navigation list keeps " +
-                    "Families, Quantify, Results and De novo within reach.";
+                    WorkflowNames.Home + ". " + owner.ProjectStatusText() + " The steps, in order: " + WorkflowNames.Flow +
+                    ". Each step opens from Home or the sidebar; File > Open opens a project.";
             }
 
             // The analytics screen is NOT a step of that sequence either: it summarises what the earlier
