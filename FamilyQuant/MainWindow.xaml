@@ -101,6 +101,8 @@
                           ToolTip="Add, test, import or remove your private API key for the optional AI draft."/>
                 <MenuItem x:Name="MenuItemHowToRead" Header="How to read these numbers" Command="Help" InputGestureText="F1"
                           ToolTip="Explains the current screen's numbers and choices, including denominators and shared peptides. F1 opens this same help."/>
+                <MenuItem x:Name="MenuItemDeNovoWorkflowHelp" Header="De novo in FamilyQuant" Click="MenuItemDeNovoWorkflowHelp_Click"
+                          ToolTip="Explains the seven steps from identifications and de novo calls to Quantify and Results."/>
                 <MenuItem x:Name="MenuItemWhereAmI" Header="What do I do first?" Click="MenuItemWhereAmI_Click"
                           ToolTip="Lists the complete workflow and what each step needs. De novo review is optional."/>
                 <MenuItem x:Name="MenuItemCheckForUpdates" Header="Check for updates" Click="MenuItemCheckForUpdates_Click"

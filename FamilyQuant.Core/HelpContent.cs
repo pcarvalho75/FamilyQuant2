@@ -355,6 +355,7 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine(HelpWorkflowFacts.FilesAndNavigation);
             sb.AppendLine(HelpWorkflowFacts.Families);
+            sb.AppendLine(DeNovoWorkflowHelp.Build());
             sb.AppendLine();
             sb.AppendLine(PanelReportHelp.Build());
             return sb.ToString();
@@ -395,6 +396,7 @@ namespace FamilyQuant
 
             sb.AppendLine("THE DE NOVO EVIDENCE SCREEN");
             sb.AppendLine("===========================");
+            sb.AppendLine(DeNovoWorkflowHelp.Build());
             sb.AppendLine("Selected source: " + sourceName + " (" + source.FileGlob + "; " +
                           confidenceName + ").");
             sb.AppendLine();
