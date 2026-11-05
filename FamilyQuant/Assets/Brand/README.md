@@ -35,3 +35,11 @@ Regenerate the derived assets after building:
 The exporter reads the compiled vector and token resources. It does not read a
 scientific project or write a profile preference. The PNG wordmark uses the native
 Windows font, while the symbol itself is entirely geometric.
+
+Setup uses `FamilyQuant-Setup.ico` and `FamilyQuant-setup-128.png`, with a download
+badge composed from the same mark and logo tokens. Its editable master is
+`FamilyQuant-setup.svg`. Regenerate only those assets with:
+
+```powershell
+./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --setup-logo-assets ./FamilyQuant/Assets/Brand
+```

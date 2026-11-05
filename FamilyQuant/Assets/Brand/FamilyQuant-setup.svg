@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img"><title>FamilyQuant Setup</title>
+<rect x="6" y="6" width="244" height="244" rx="36" fill="#284E5B"/>
+<rect x="70" y="62" width="28" height="132" rx="14" fill="#E8E8E8"/>
+<rect x="114" y="62" width="28" height="132" rx="14" fill="#49CCD6"/>
+<rect x="158" y="62" width="28" height="132" rx="14" fill="#E8E8E8"/>
+<circle cx="200" cy="200" r="50" fill="#49CCD6" stroke="#284E5B" stroke-width="8"/>
+<path d="M188,158 L212,158 212,190 226,190 200,216 174,190 188,190 Z M174,222 L226,222 226,230 174,230 Z" fill="#284E5B"/>
+</svg>

@@ -11,9 +11,10 @@ using System.Windows.Media.Imaging;
 
 namespace FamilyQuant.Tests
 {
-    internal static class LogoAssets
+    internal static partial class LogoAssets
     {
         internal const string Argument = "--logo-assets";
+        internal const string SetupArgument = "--setup-logo-assets";
         internal static readonly int[] IconSizes = { 16, 20, 24, 32, 40, 48, 64, 128, 256 };
         internal static bool IsRequested(string[] args) => args.Contains(Argument, StringComparer.OrdinalIgnoreCase);
 
@@ -22,7 +23,8 @@ namespace FamilyQuant.Tests
             App? app = null;
             try
             {
-                int flag = Array.FindIndex(args, a => a.Equals(Argument, StringComparison.OrdinalIgnoreCase));
+                bool setup = args.Contains(SetupArgument, StringComparer.Ordinal);
+                int flag = Array.FindIndex(args, a => a.Equals(setup ? SetupArgument : Argument, StringComparison.OrdinalIgnoreCase));
                 if (flag < 0 || flag + 1 >= args.Length || args[flag + 1].StartsWith("--", StringComparison.Ordinal))
                     throw new ArgumentException(Argument + " requires an output directory.");
                 string output = Path.GetFullPath(args[flag + 1]);
@@ -31,6 +33,7 @@ namespace FamilyQuant.Tests
                 app.InitializeComponent();
                 ThemeManager.Apply(AppTheme.Dark);
                 var mark = (DrawingImage)app.FindResource("StartPageLogo");
+                if (setup) { WriteSetupAssets(mark, output); return 0; }
                 if (app.FindResource("AppWindowIcon") is not BitmapFrame icon
                     || icon.Decoder == null || icon.Decoder.Frames.Count != IconSizes.Length)
                     throw new InvalidDataException("AppWindowIcon did not load the multi-size ICO resource.");

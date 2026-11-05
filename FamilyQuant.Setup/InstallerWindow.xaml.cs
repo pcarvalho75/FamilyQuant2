@@ -31,7 +31,7 @@ public partial class InstallerWindow : Window
         _controller = controller ?? throw new ArgumentNullException(nameof(controller));
         InitializeComponent();
         SetTheme(true);
-        Icon = System.Windows.Media.Imaging.BitmapFrame.Create(new Uri("pack://application:,,,/FamilyQuant2-Setup;component/FamilyQuant.ico"));
+        Icon = System.Windows.Media.Imaging.BitmapFrame.Create(new Uri("pack://application:,,,/FamilyQuant2-Setup;component/FamilyQuant-Setup.ico"));
         Closing += OnClosing;
         PreviewKeyDown += OnPreviewKeyDown;
         VersionLabel.Text = "VERSION " + _controller.PayloadVersion;

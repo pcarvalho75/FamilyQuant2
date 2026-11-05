@@ -115,6 +115,7 @@ public static partial class InstallerWindowPreview
         var fresh = new PreviewController();
         var window = new InstallerWindow(fresh);
         Check(window.Icon is BitmapSource { PixelWidth: > 0 }, "Setup assembly icon loads independently of its executable host");
+        Check(window.Title == "FamilyQuant Setup", "Setup window identifies itself in the Windows title");
         Check(window.TitleBrand.Source is BitmapSource { PixelWidth: > 0 }, "Setup assembly title brand image loads independently of its host");
         Check(window.WelcomeBrand.Source is BitmapSource { PixelWidth: > 0 }, "Setup assembly welcome brand image loads independently of its host");
         Check(fresh.Installs == 0 && fresh.Uninstalls == 0 && fresh.Launches == 0, "construction never installs, uninstalls or launches");
