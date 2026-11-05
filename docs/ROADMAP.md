@@ -46,7 +46,7 @@ Version 11 delivered 10 steps (in the archive): the clean Recent projects list, 
 | FQKimi (KM) | Kimi Code (K3.1 Pro) | Reviewer (D64), with FQReviewDS; the desk gives each finished step to whichever reviewer is free, in batches of at most 8; code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-kimi` |
 | FQReviewDS (DS) | DeepSeek V4.1 Flash | Second reviewer (D67); code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
 
-Kimi limits (Paulo, 11-01 and 11-02): one Kimi instance at a time across every project, at most 15 calls in any rolling 5 hours and 5 reviews in any rolling hour, no subagents. Orion runs its own Kimi worker at times; the desk launches FQKimi only when no other Kimi worker runs.
+Kimi limits: one Kimi instance at a time across every project, at most 15 calls in any rolling 5 hours (Paulo, 11-01) and 15 reviews in any rolling hour (Paulo, 11-05 13:24: "raise kimi to 15 reviews"; it was 5 from 11-02), no subagents. Orion runs its own Kimi worker at times; the desk launches FQKimi only when no other Kimi worker runs.
 
 ## Design rules for the look (hard requirements)
 
@@ -113,7 +113,7 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | Z6a | Measure same-scan conflicts on the real-data set (`C:/Users/paulo/Desktop/FamilyQuant`, the three-run PEAKS export at ALC 80, D33) through the program's Spectrum comparison: scans where PatternLab and the de novo call give different sequences for the same precursor while the de novo peptide is still credited in Quantify; count, credited de novo signal involved, and its share of all de novo and of all signal, per run. No product change | M | 0.5 | Z1e | Z6b | Counts reproduced by a second run of the same command; method reviewed by FQKimi on code only | FE | | 0 | 0 | |
 | Z6b | Paulo decides what Quantify does with a same-scan conflict, from Z6a's numbers (D65): a) the PatternLab identification wins the scan, b) keep both and state it, c) another rule | L | 0 | Z6a | Z6c, Z6d | Decision logged | Paulo | | 0 | 0 | |
-| Z6c | If D65 changes the rule: built as an option, before and after on real data, a science review, the default as Paulo sets it; ships in the first release after it is green | H | 1 | Z6b | Z6d | Before and after shares, science review APPROVED | FE | | 0 | 0 | |
+| Z6c | D65 a): on a scan PatternLab identified, a de novo call with a different sequence for the same precursor gets no credit in Quantify; an option, ON by default, stored with the project and shown in the report's rules; before and after family shares on real data; ships in 2.1.8 if green, else the next release | H | 1 | Z6b | Z6d | Synthetic known answers; before and after shares on real data; code review APPROVED; science review APPROVED by FQOpus | FE | | 0 | 0 | |
 | Z6d | Help page "De novo in FamilyQuant": Ana's seven steps mapped to what the program does (what Quantify reads, de novo peptides dropped when PatternLab found the same peptide, the same-scan rule as decided, XIC of de novo peptides, homology by PepExplorer's method at 80% identity with I = L and the decoy gate) and why De novo review is optional | L | 0.3 | Z6b | Z8c | Every claim cites the code; no organism, venom or sample words | FE | | 0 | 0 | |
 
 ### W7 Release 2.1.7 (FQHome, Orchestrator)
@@ -146,7 +146,6 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
-| D65 | What Quantify does with a scan where PatternLab and the de novo call give different sequences (Z6b) | None: nothing changes until Paulo decides; Z6d then describes the current rule | Z6a's numbers |
 
 ### Decisions in force
 
@@ -189,7 +188,9 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D63 | Ana's suggestions of 11-05 | All built as the desk proposed, in two releases, each published when every check is green (like D56 and D62): 2.1.7 = Fetch evidence that keeps its work and resumes, the update reopens the app, Setup compares versions, File > Close project; 2.1.8 = Home with five numbered steps and one name per thing (Ana's names, Analysis becomes Tools), the Families layout, USearch ID shown, the de novo Help page. Paulo, 11-05 12:21 ("lets ready every suggestion from ana as you suggested") |
 | D64 | Who builds and reviews | Two Sol 6.1 builders, FQFetch and FQHome, and one Kimi reviewer, FQKimi, in batches; this replaces D59 (DeepSeek only). Kimi, like DeepSeek (D58), sees code and synthetic data only. Paulo, 11-05 12:21 ("2 sol workers and 1 kimi reviewer") |
 | D66 | The same-scan conflict | Measured first on the real-data set (Z6a), then Paulo decides (D65); nothing changes before. Paulo, 11-05 12:21, accepting the desk's pick |
+| D65 | A scan where PatternLab and the de novo call give different sequences for the same precursor | a) The PatternLab identification wins the scan: its FDR-controlled identification is kept and the de novo call on that scan gets no credit (Ana's step 4; it removes a double count, since both XICs measure the same precursor's ions). Z6a measured 305 to 431 such scans per run, 2.6 to 3.7% of the de novo signal and 0.35 to 0.55% of all signal at most. Built in Z6c as an option, ON by default, with before and after on real data and a science review. Paulo, 11-05 13:24 |
 | D67 | More hands | Paulo, 11-05 12:38: "hire one more worker, an opus worker from this account, and also hire deepseek as a second reviewer". DeepSeek FQReviewDS joined at 12:41 (code and synthetic data only, as D58). The Opus CLI worker hit the account's weekly CLI limit at 12:42 (resets 11-06 08:00), so FQOpus runs at 12:48 as an Opus agent of this session, on the same account (Paulo, 12:47: "an opus from this account"); it takes W4, FQHome takes W5 and W8 from FQFetch |
+| D68 | Kimi's review rate | 15 reviews in any rolling hour (was 5 from 11-02); 15 calls per rolling 5 hours and one instance unchanged. Paulo, 11-05 13:24 ("raise kimi to 15 reviews, and update that law") |
 
 ## Risks and triggers
 
