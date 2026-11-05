@@ -12,7 +12,7 @@ namespace FamilyQuant;
 public sealed partial class CurationViewModel
 {
     public async Task<EvidenceFetchOutcome> FetchEvidenceAsync(HttpMessageHandler? handler, OperationContext operation,
-        IReadOnlyCollection<int>? additionalPositionFamilyIds = null)
+        IReadOnlyCollection<int>? additionalPositionFamilyIds = null, bool retryPanelOnly = false, UniProtFetchOptions? options = null)
     {
         operation.Report("evidence", "Preparing the evidence fetch");
         var source = Document.MyExtendedFastaItems.Select(p => (Item: p, p.SequenceIdentifier, p.Domains, p.Evidence)).ToArray();
@@ -21,8 +21,10 @@ public sealed partial class CurationViewModel
         var positionAccessions = Quantitation.PositionAccessions(additionalPositionFamilyIds);
         var prepared = await Task.Run(() => FamilyClusterFile.FromJsonText(Document.ToJsonText()), operation.CancellationToken);
         operation.ThrowIfCancellationRequested();
-        var result = await EvidenceFetchSession.FetchAsync(prepared, handler, new CurationFetchProgress(operation),
-            cancellationToken: operation.CancellationToken, positionAccessions: positionAccessions);
+        var result = retryPanelOnly
+            ? await EvidenceFetchSession.RetryPanelAsync(prepared, handler, new CurationFetchProgress(operation), operation.CancellationToken, options)
+            : await EvidenceFetchSession.FetchAsync(prepared, handler, new CurationFetchProgress(operation),
+                cancellationToken: operation.CancellationToken, positionAccessions: positionAccessions, options: options);
         operation.ThrowIfCancellationRequested();
         if (!result.Changed) return result;
         operation.Commit(() =>
@@ -48,32 +50,34 @@ public sealed partial class CurationViewModel
     private sealed class CurationFetchProgress(OperationContext operation) : IProgress<FetchProgress>
     {
         public void Report(FetchProgress value) => operation.Report("evidence",
-            "Fetching evidence: " + value.CompletedBatches.ToString(CultureInfo.CurrentCulture) + " of "
+            value.Message.Length > 0 ? value.Message : "Fetching evidence: " + value.CompletedBatches.ToString(CultureInfo.CurrentCulture) + " of "
             + value.TotalBatches.ToString(CultureInfo.CurrentCulture) + " batches or families; "
             + value.Found.ToString("N0", CultureInfo.CurrentCulture) + " entries received.", value.CompletedBatches, value.TotalBatches);
     }
 
-    public static string DescribeEvidenceFetch(EvidenceFetchOutcome outcome)
+    public static string DescribeEvidenceFetch(EvidenceFetchOutcome outcome, bool panelOnly = false)
     {
         var result = outcome.Evidence;
-        int missing = result.Asked - result.Found;
-        string message = result.Asked == 0
-            ? "No protein in this file has a UniProt code. A database of another origin stays unassigned."
-            : result.WithDomains.ToString("N0", CultureInfo.CurrentCulture) + " of " + result.Asked.ToString("N0", CultureInfo.CurrentCulture)
-                + " proteins have Pfam domains in " + result.Source + "."
-                + (missing > 0 ? " " + missing.ToString("N0", CultureInfo.CurrentCulture) + " entries were not found and kept their previous evidence." : "")
-                + " The Domains column and Search use the stored evidence. Proteins too short for Pfam may have none. Save the file to keep it.";
-        if (outcome.Panel != null)
-            message += " Reviewed reference panel: " + outcome.Panel.Entries.Count.ToString("N0", CultureInfo.CurrentCulture)
-                + " entries from " + outcome.Panel.Families.Count.ToString("N0", CultureInfo.CurrentCulture) + " families, " + outcome.Panel.Release + ". Stored for offline grouping.";
-        message += result.PositionAsked > 0
-            ? " Position coordinates: " + result.PositionFound.ToString("N0", CultureInfo.CurrentCulture) + " of "
+        static string Count(int value, string singular, string plural) => value.ToString("N0", CultureInfo.CurrentCulture)
+            + " " + (value == 1 ? singular : plural);
+        string message = result.Asked == 0 ? panelOnly ? "Stored protein evidence kept."
+                : "No protein in this file has a UniProt code. A database of another origin stays unassigned."
+            : "Protein evidence saved for " + Count(result.Found, "protein", "proteins") + "."
+                + (result.Missing > 0 ? " " + Count(result.Missing, "entry kept its", "entries kept their") + " previous evidence." : "");
+        if (outcome.Panel is { IsComplete: true })
+            message += " Reference panel saved for " + Count(outcome.Panel.Families.Count, "family", "families") + ".";
+        if (outcome.Panel is { IsComplete: false } panel)
+        {
+            var status = System.Text.RegularExpressions.Regex.Match(panel.FailureReason, @"\bHTTP [0-9]{3}\b");
+            message += " Reference panel incomplete: " + Count(panel.MissingFamilies.Count, "family", "families")
+                + " missing" + (panel.TotalBatches > 0 ? " in " + panel.FailedBatches.ToString("N0", CultureInfo.CurrentCulture)
+                    + " of " + Count(panel.TotalBatches, "batch", "batches") : "")
+                + (status.Success ? " (" + status.Value + ")" : " (UniProt request failed)") + ". Retry panel.";
+        }
+        if (result.PositionAsked > 0)
+            message += " Position coordinates: " + result.PositionFound.ToString("N0", CultureInfo.CurrentCulture) + " of "
                 + result.PositionAsked.ToString("N0", CultureInfo.CurrentCulture) + " requested proteins in "
-                + result.PositionElapsedSeconds.ToString("N1", CultureInfo.CurrentCulture) + " s. Save to use them offline."
-            : " Position coordinates are fetched for proteins with mapped peptides after Compute.";
-        if (outcome.PanelFailure != null)
-            message += (result.Asked > 0 ? " Protein evidence was fetched; the reviewed reference panel was kept unchanged. " : " Stored protein evidence and the reference panel were kept unchanged. ")
-                + "Reason: " + outcome.PanelFailure.Message + ". Check the connection and press Fetch evidence again.";
+                + result.PositionElapsedSeconds.ToString("N1", CultureInfo.CurrentCulture) + " s.";
         return message;
     }
 }

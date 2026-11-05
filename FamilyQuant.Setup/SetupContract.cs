@@ -20,7 +20,7 @@ public sealed record SetupResult(bool Success, int ExitCode, string Message, str
 
 /// <summary>LK owns InstallerWindow(ISetupController). SH owns this interface and its implementation.
 /// Progress is reported on the caller-supplied IProgress context. Call Launch only after success and
-/// the person's explicit finish-screen choice. Quiet mode uses no window and never launches the app.</summary>
+/// the person's explicit finish-screen choice. The silent waitpid update path relaunches once after success.</summary>
 public interface ISetupController
 {
     SetupOptions Options { get; }
@@ -29,7 +29,7 @@ public interface ISetupController
     ExistingInstallation? DetectExisting();
     bool IsAppRunning(string directory);
     Task<SetupResult> InstallAsync(string directory, bool desktopShortcut, IProgress<SetupProgress>? progress = null,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default, bool allowOlderVersion = false);
     Task<SetupResult> UninstallAsync(string directory, IProgress<SetupProgress>? progress = null,
         CancellationToken cancellationToken = default);
     void Launch(string directory);

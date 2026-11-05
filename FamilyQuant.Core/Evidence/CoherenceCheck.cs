@@ -60,6 +60,7 @@ namespace FamilyQuant.Evidence
         /// belongs to. Families are matched case-insensitively.</summary>
         public static Dictionary<string, FamilyProfile> Learn(FamilyClusterFile file)
         {
+            ReferencePanelFetcher.RequireComplete(file.EvidenceSource?.ReferencePanel);
             var members = new List<(string Sequence, ProteinEvidence Evidence)>();
             var seen = new HashSet<string>(StringComparer.Ordinal);
             foreach (FastaItemExtended item in NearestReviewed.Targets(file))

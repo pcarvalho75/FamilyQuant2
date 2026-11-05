@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Evidence;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -72,6 +73,18 @@ namespace FamilyQuant.Tests
                 // A failed rerun must not leave a prior success marker looking current.
                 if (File.Exists(manifestPath)) File.Delete(manifestPath);
                 var source = fcfPath == null ? Fixture() : FamilyClusterFile.Load(fcfPath);
+                bool incompletePanel = args.Contains("--screen-incomplete-panel", StringComparer.Ordinal);
+                string? evidenceFetchStatus = null;
+                if (incompletePanel)
+                {
+                    if (fcfPath != null) throw new ArgumentException("The incomplete-panel screen uses the synthetic fixture only.");
+                    for (int index = 0; index < source.MyExtendedFastaItems.Count; index++)
+                        source.MyExtendedFastaItems[index].SequenceIdentifier = "sp|P" + (index + 1).ToString("D5", CultureInfo.InvariantCulture) + "|FIXTURE";
+                    using var handler = new Program.ResumeUniProtHandler { FailMarker = "fixture family", FailureStatus = System.Net.HttpStatusCode.InternalServerError };
+                    var fetched = EvidenceFetchSession.FetchAsync(source, handler, options: new UniProtFetchOptions
+                    { DelayAsync = (_, _) => System.Threading.Tasks.Task.CompletedTask }).GetAwaiter().GetResult();
+                    evidenceFetchStatus = CurationViewModel.DescribeEvidenceFetch(fetched);
+                }
                 var project = projectPath == null
                     ? (fcf: Fixture(), quant: new List<QuantRow>(), manifest: new QuantManifest())
                     : ProjectStore.ReadFqproj(projectPath);
@@ -94,7 +107,8 @@ namespace FamilyQuant.Tests
                     Themes.ThemeManager.Apply(theme == "system" ? Themes.AppTheme.System
                         : theme == "dark" ? Themes.AppTheme.Dark : Themes.AppTheme.Light);
                     CaptureTheme(theme, source, project.fcf, project.quant, project.manifest, output, captures,
-                        fcfPath ?? "synthetic fixture.fcf", projectPath ?? "synthetic fixture.fqproj", shellStatus, finish, finishCaptures);
+                        fcfPath ?? "synthetic fixture.fcf", projectPath ?? "synthetic fixture.fqproj", shellStatus, finish, finishCaptures,
+                        args.Contains("--screen-update-complete", StringComparer.Ordinal), args.Contains("--screen-close-project", StringComparer.Ordinal), evidenceFetchStatus);
                 }
                 foreach (var input in inputHashes)
                     if (FileHash(input.Key) != input.Value)
@@ -106,6 +120,8 @@ namespace FamilyQuant.Tests
                     InputSha256 = inputHashes,
                     InputsUnchanged = true,
                     UseShellStatusBar = shellStatus,
+                    ClosedProjectBeforeHome = args.Contains("--screen-close-project", StringComparer.Ordinal),
+                    IncompletePanelFixture = incompletePanel,
                     OperatingSystem = Environment.OSVersion.VersionString,
                     Runtime = Environment.Version.ToString(),
                     Capture = finish ? "C14 native WPF root DPI 100/125/150%; off-screen client captures; OS monitor DPI unchanged; no keyboard focus requested."
@@ -139,7 +155,7 @@ namespace FamilyQuant.Tests
 
         private static void CaptureTheme(string theme, FamilyClusterFile source, FamilyClusterFile projectFile,
             List<QuantRow> quant, QuantManifest manifest, string output, List<CaptureInfo> captures,
-            string curationPath, string projectPath, bool shellStatus, bool finish, List<FinishCapture> finishCaptures)
+            string curationPath, string projectPath, bool shellStatus, bool finish, List<FinishCapture> finishCaptures, bool updateComplete, bool closeProject, string? evidenceFetchStatus)
         {
             var main = new MainWindow();
             ShowOffScreen(main);
@@ -169,6 +185,24 @@ namespace FamilyQuant.Tests
                     }
                 }
 
+                if (closeProject)
+                {
+                    string closeRoot = Path.Combine(output, "close-fixture");
+                    Directory.CreateDirectory(closeRoot);
+                    string fixture = Path.Combine(closeRoot, "Synthetic project.fcf");
+                    source.Save(fixture);
+                    if (!main.OpenProjectPath(fixture)) throw new InvalidOperationException("Close fixture did not open.");
+                    var closing = main.CloseProjectAsync();
+                    while (!closing.IsCompleted) Pump();
+                    if (!closing.GetAwaiter().GetResult()) throw new InvalidOperationException("Project did not close.");
+                }
+                if (updateComplete)
+                {
+                    string markerRoot = Path.Combine(Path.GetTempPath(), "screen-update-" + Guid.NewGuid().ToString("N"));
+                    Directory.CreateDirectory(markerRoot);
+                    File.WriteAllText(Path.Combine(markerRoot, ".familyquant-update-complete"), "2.1.7.0");
+                    if (!main.ShowUpdateCompletionNotice(markerRoot, "2.1.7.0")) throw new InvalidOperationException("Update notice was not shown.");
+                }
                 Capture(Screens[0], main);
                 Call(main, "MenuRunUSearch_Click", main, new RoutedEventArgs());
                 Capture(Screens[1], main);
@@ -191,6 +225,7 @@ namespace FamilyQuant.Tests
                     "MenuItemComputeXic", "MenuItemReanotateSEPro" })
                     Field<MenuItem>(main, command).IsEnabled = true;
                 Present(main, curation, "cgc");
+                if (evidenceFetchStatus != null) Call(curation, "SetCurationOperationStatus", evidenceFetchStatus);
                 Capture(Screens[2], main);
                 // The tab is temporary. C1 removes it; capture still works once the table is always visible.
                 var tabs = Walk(curation).OfType<TabControl>().FirstOrDefault();

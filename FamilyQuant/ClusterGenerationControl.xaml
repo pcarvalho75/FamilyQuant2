@@ -105,6 +105,15 @@
                                     ToolTip="Needs an open database and internet; about 1 to 2 minutes for 30,000 proteins."/>
                         </Grid>
                         <TextBlock Text="{Binding EvidenceStepStatus}" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
+                        <Button x:Name="ButtonRetryPanel" Content="Retry panel" Click="ButtonRetryPanel_Click"
+                                Margin="28,0,0,8" HorizontalAlignment="Left" ToolTip="Finish the reference panel from UniProt; the protein evidence already fetched is kept.">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers><DataTrigger Binding="{Binding HasIncompletePanel}" Value="True"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="2" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>

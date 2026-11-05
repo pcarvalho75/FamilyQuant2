@@ -18,7 +18,8 @@ public sealed record EvidenceFetchOutcome(EvidenceFetchResult Evidence, Referenc
 }
 
 /// <summary>Stages protein evidence and the reviewed panel without touching the open file.
-/// Only the final operation commit attaches both phases. A failure or cancellation attaches neither.</summary>
+/// Only the final operation commit attaches the result. A panel failure keeps fetched protein evidence;
+/// cancellation, a release change or a source edit attaches neither phase.</summary>
 public static class EvidenceFetchSession
 {
     public const string ProgressStage = "Evidence fetch";
@@ -33,14 +34,19 @@ public static class EvidenceFetchSession
 
     public static Task<EvidenceFetchOutcome> FetchAsync(FamilyClusterFile file, HttpMessageHandler? handler = null,
         IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default,
-        IReadOnlyCollection<string>? positionAccessions = null) =>
-        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, positionAccessions);
+        IReadOnlyCollection<string>? positionAccessions = null, UniProtFetchOptions? options = null) =>
+        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, positionAccessions, options, false);
 
     public static Task<EvidenceFetchOutcome> FetchAsync(FamilyClusterFile file, OperationContext operation,
-        HttpMessageHandler? handler = null, IReadOnlyCollection<string>? positionAccessions = null) => FetchStagedAsync(file, operation, handler, null, positionAccessions);
+        HttpMessageHandler? handler = null, IReadOnlyCollection<string>? positionAccessions = null, UniProtFetchOptions? options = null) => FetchStagedAsync(file, operation, handler, null, positionAccessions, options, false);
+
+    public static Task<EvidenceFetchOutcome> RetryPanelAsync(FamilyClusterFile file, HttpMessageHandler? handler = null,
+        IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default, UniProtFetchOptions? options = null) =>
+        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, null, options, true);
 
     private static async Task<EvidenceFetchOutcome> FetchStagedAsync(FamilyClusterFile file, OperationContext operation,
-        HttpMessageHandler? handler, IProgress<FetchProgress>? progress, IReadOnlyCollection<string>? positionAccessions)
+        HttpMessageHandler? handler, IProgress<FetchProgress>? progress, IReadOnlyCollection<string>? positionAccessions, UniProtFetchOptions? options,
+        bool panelOnly)
     {
         ArgumentNullException.ThrowIfNull(file);
         ArgumentNullException.ThrowIfNull(operation);
@@ -60,18 +66,42 @@ public static class EvidenceFetchSession
         };
         var stagedEvidence = staged.MyExtendedFastaItems.Select(p => p.Evidence).ToArray();
         operation.ThrowIfCancellationRequested();
-        var evidence = await EvidenceFetcher.FetchAsync(staged, handler,
-            new FetchStageProgress(operation, EvidenceStage, progress), operation.CancellationToken, positionAccessions).ConfigureAwait(false);
-        ReferencePanel? panel = null;
-        if (ReferencePanelFetcher.FamiliesFound(staged).Count > 0)
+        var evidence = panelOnly ? new EvidenceFetchResult
         {
-            panel = await ReferencePanelFetcher.FetchAndStoreAsync(staged, handler: handler,
-                progress: new FetchStageProgress(operation, ReferencePanelFetcher.ProgressStage, progress),
-                cancellationToken: operation.CancellationToken).ConfigureAwait(false);
-            if (evidence.Asked > 0 && evidence.Provenance.Release != panel.Release)
-                throw new InvalidDataException("The UniProt release changed between protein evidence and the panel. No evidence was applied.");
+            Provenance = staged.EvidenceSource ?? new EvidenceProvenance(),
+            Found = staged.MyExtendedFastaItems.Count(p => p.Evidence != null),
+            WithDomains = staged.MyExtendedFastaItems.Count(p => !string.IsNullOrWhiteSpace(p.Domains)),
+        } : await EvidenceFetcher.FetchAsync(staged, handler,
+            new FetchStageProgress(operation, EvidenceStage, progress), operation.CancellationToken, positionAccessions, options).ConfigureAwait(false);
+        ReferencePanel? panel = null;
+        Exception? panelFailure = null;
+        var families = ReferencePanelFetcher.FamiliesFound(staged);
+        if (families.Count > 0)
+        {
+            try
+            {
+                panel = await ReferencePanelFetcher.FetchAndStoreAsync(staged, handler: handler,
+                    progress: new FetchStageProgress(operation, ReferencePanelFetcher.ProgressStage, progress),
+                    cancellationToken: operation.CancellationToken,
+                    expectedRelease: (evidence.Asked > 0 || panelOnly) && evidence.Provenance.Release.Length > 0
+                        ? evidence.Provenance.Release : null, options: options).ConfigureAwait(false);
+                if (!panel.IsComplete) panelFailure = new HttpRequestException(panel.FailureReason);
+            }
+            catch (Exception ex) when (ex is HttpRequestException or JsonException or InvalidDataException)
+            {
+                operation.ThrowIfCancellationRequested();
+                panelFailure = ex;
+                panel = new ReferencePanel
+                {
+                    Provider = "UniProt", Release = evidence.Provenance.Release,
+                    Families = families, MissingFamilies = families.ToList(), FailureReason = ex.Message,
+                    TotalBatches = ReferencePanelFetcher.PlannedStreamBatchCount(families), FailedBatches = 1,
+                };
+                staged.EvidenceSource ??= new EvidenceProvenance();
+                staged.EvidenceSource.ReferencePanel = panel;
+            }
         }
-        var outcome = new EvidenceFetchOutcome(evidence, panel, null);
+        var outcome = new EvidenceFetchOutcome(evidence, panel, panelFailure);
         operation.Report(ProgressStage, "Publishing fetched evidence and reviewed panel", 1, 1);
         operation.Commit(() =>
         {
@@ -106,7 +136,7 @@ public static class EvidenceFetchSession
     {
         public void Report(FetchProgress value)
         {
-            operation.Report(stage, value.CompletedBatches.ToString(CultureInfo.InvariantCulture) + " of "
+            operation.Report(stage, value.Message.Length > 0 ? value.Message : value.CompletedBatches.ToString(CultureInfo.InvariantCulture) + " of "
                 + value.TotalBatches.ToString(CultureInfo.InvariantCulture) + "; " + value.Found.ToString(CultureInfo.InvariantCulture)
                 + " entries received", value.CompletedBatches, value.TotalBatches);
             progress?.Report(value);
@@ -114,5 +144,5 @@ public static class EvidenceFetchSession
         }
     }
 
-    public static bool IsFetchFailure(Exception ex) => ex is HttpRequestException or OperationCanceledException or JsonException or InvalidDataException;
+    public static bool IsFetchFailure(Exception ex) => ex is HttpRequestException or OperationCanceledException or JsonException or InvalidDataException or UniProtReleaseException;
 }

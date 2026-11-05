@@ -671,23 +671,26 @@ namespace FamilyQuant
         /// <summary>Fills every protein's Pfam domains from UniProt. They reach the file on the next save.</summary>
         private async void ButtonFetchDomains_Click(object sender, RoutedEventArgs e) => await FetchProteinEvidenceAsync();
 
-        public Task FetchProteinEvidenceAsync() => AppOperationHost.OnUi(this, FetchProteinEvidenceAsyncCore);
+        public Task FetchProteinEvidenceAsync() => AppOperationHost.OnUi(this, () => FetchProteinEvidenceAsyncCore(false));
 
-        private async Task FetchProteinEvidenceAsyncCore()
+        private async void ButtonRetryPanel_Click(object sender, RoutedEventArgs e) => await RetryPanelAsync();
+        public Task RetryPanelAsync() => AppOperationHost.OnUi(this, () => FetchProteinEvidenceAsyncCore(true));
+
+        private async Task FetchProteinEvidenceAsyncCore(bool panelOnly)
         {
             if (evidenceFetchRunning) return;
             evidenceFetchRunning = true;
             try
             {
-                await RunCurationAsync("Fetch evidence", async operation =>
+                await RunCurationAsync(panelOnly ? "Retry panel" : "Fetch evidence", async operation =>
                 {
                     var extraPositionFamilies = CheckBoxIncludeFamilyPositions.IsChecked == true
                         ? DataGridResultGrid.SelectedItems.OfType<FastaItemExtended>().Select(p => p.UserID).Distinct().ToArray()
                         : Array.Empty<int>();
-                    var outcome = await ViewModel.FetchEvidenceAsync(FetchDomainsHandlerOverride, operation, extraPositionFamilies);
+                    var outcome = await ViewModel.FetchEvidenceAsync(FetchDomainsHandlerOverride, operation, extraPositionFamilies, panelOnly);
                     UpdateFilteredResults();
-                    string title = "Fetch evidence";
-                    ShellMessages.Report(this, CurationViewModel.DescribeEvidenceFetch(outcome), title,
+                    string title = panelOnly ? "Retry panel" : "Fetch evidence";
+                    ShellMessages.Report(this, CurationViewModel.DescribeEvidenceFetch(outcome, panelOnly), title,
                         image: outcome.PanelFailure == null ? MessageBoxImage.Information : MessageBoxImage.Warning,
                         status: SetCurationOperationStatus, showDialog: false);
                 });

@@ -26,6 +26,7 @@ namespace FamilyQuant.Tests
             internal int ProteinRequests, PanelRequests;
             internal Action<bool, CancellationToken>? DuringRequest;
             internal string PanelRelease = "2026_03";
+            internal bool MalformedPanel;
             protected override Task<System.Net.Http.HttpResponseMessage> SendAsync(System.Net.Http.HttpRequestMessage request, CancellationToken token)
             {
                 if (request.RequestUri!.Host == "www.ebi.ac.uk")
@@ -45,6 +46,7 @@ namespace FamilyQuant.Tests
                 {"results":[{"primaryAccession":"A0A710","entryType":"UniProtKB unreviewed (TrEMBL)","sequence":{"value":"PEPTIDEK"},"keywords":[{"name":"Scope"}],"comments":[{"commentType":"SIMILARITY","texts":[{"value":"Belongs to the fixture family."}]},{"commentType":"TISSUE SPECIFICITY","texts":[{"value":"Supplied tissue fact."}]}],"uniProtKBCrossReferences":[{"database":"Pfam","id":"PF00001","properties":[{"key":"EntryName","value":"Supplied domain"}]}]}]}
                 """;
                 if (panel) json = json.Replace("A0A710", "P00001", StringComparison.Ordinal).Replace("UniProtKB unreviewed (TrEMBL)", "UniProtKB reviewed (Swiss-Prot)", StringComparison.Ordinal);
+                if (panel && MalformedPanel) json = "{\"results\":[";
                 var response = new System.Net.Http.HttpResponseMessage(panel && failPanel ? System.Net.HttpStatusCode.BadRequest : System.Net.HttpStatusCode.OK)
                     { Content = new System.Net.Http.StringContent(json) };
                 response.Headers.Add("x-uniprot-release", panel ? PanelRelease : "2026_03"); response.Headers.Add("x-total-results", "1");
@@ -63,10 +65,10 @@ namespace FamilyQuant.Tests
                 && file.MyExtendedFastaItems[0].Evidence != null && file.EvidenceSource?.ReferencePanel?.Entries.Count == 1
                 && file.MyExtendedFastaItems[0].UserID == 71 && file.MyExtendedFastaItems[0].USearchID == 71);
             var partial = File(); using var failing = new EvidenceAndPanelHandler(failPanel: true);
-            string beforeFailure = partial.ToJsonText(); bool refused = false;
-            try { Task.Run(() => EvidenceFetchSession.FetchAsync(partial, failing)).GetAwaiter().GetResult(); }
-            catch (System.Net.Http.HttpRequestException) { refused = true; }
-            Check("a panel failure publishes neither protein evidence nor a partial result", refused && partial.ToJsonText() == beforeFailure);
+            var incomplete = Task.Run(() => EvidenceFetchSession.FetchAsync(partial, failing)).GetAwaiter().GetResult();
+            Check("a panel failure publishes protein evidence with an explicitly missing panel",
+                incomplete.PanelFailure != null && partial.MyExtendedFastaItems[0].Domains == "Supplied domain"
+                && partial.EvidenceSource?.ReferencePanel is { IsComplete: false, Entries.Count: 0 });
             var control = new ClusterGenerationControl(File()); using var uiHandler = new EvidenceAndPanelHandler();
             control.FetchDomainsHandlerOverride = uiHandler;
             int changed = 0; control.DocumentChanged += (_, _) => changed++;
@@ -665,7 +667,8 @@ namespace FamilyQuant.Tests
         }
         private static Task<Evidence.EvidenceFetchResult> FetchEvidenceForTest(IReadOnlyCollection<FastaItemExtended> items,
             System.Net.Http.HttpMessageHandler handler) => Evidence.EvidenceFetcher.FetchAsync(
-                new FamilyClusterFile { MyExtendedFastaItems = items.ToList() }, handler);
+                new FamilyClusterFile { MyExtendedFastaItems = items.ToList() }, handler,
+                options: new Evidence.UniProtFetchOptions { DelayAsync = (_, _) => Task.CompletedTask });
 
         private static Dictionary<string, string> ParseDomainsForTest(string json) => Evidence.EvidenceFetcher.Parse(json)
             .ToDictionary(p => p.Key, p => Evidence.EvidenceFetcher.DomainNames(p.Value), StringComparer.Ordinal);
@@ -804,7 +807,8 @@ namespace FamilyQuant.Tests
             var rateLimited = new CannedUniProt((System.Net.HttpStatusCode.TooManyRequests, "busy"),
                 (System.Net.HttpStatusCode.OK, RichEvidenceReply));
             Check("an HTTP 429 batch is retried before applying complete evidence",
-                Evidence.EvidenceFetcher.FetchAsync(Fixture(1), rateLimited).GetAwaiter().GetResult().Found == 1
+                Evidence.EvidenceFetcher.FetchAsync(Fixture(1), rateLimited, options: new Evidence.UniProtFetchOptions
+                { DelayAsync = (_, _) => Task.CompletedTask }).GetAwaiter().GetResult().Found == 1
                 && rateLimited.Asked.Count == 2);
 
             static FamilyClusterFile Fixture(int count) => new FamilyClusterFile
