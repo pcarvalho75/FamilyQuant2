@@ -66,8 +66,8 @@
                       ToolTip="Move between Home and the steps, and choose the appearance or visible protein rows.">
                 <MenuItem x:Name="MenuItemHome" Header="Home" Click="MenuItemHome_Click" InputGestureText="Alt+0"
                           ToolTip="Returns to Home and its five steps while keeping your project open. Each step opens the same screen as the sidebar."/>
-                <MenuItem x:Name="MenuItemFamilies" Header="Families" Click="MenuItemFamilies_Click" InputGestureText="Alt+2"
-                          ToolTip="Returns to the current family table, or opens a project when none is loaded. Existing curation stays in memory."/>
+                <MenuItem x:Name="MenuItemFamilies" Header="Curate families" Click="MenuItemFamilies_Click" InputGestureText="Alt+2"
+                          ToolTip="Returns to the open project's families; with none open, asks to open a project or build families. Existing curation stays in memory."/>
                 <MenuItem x:Name="MenuItemComputeXic" Header="Quantify" Click="MenuItemComputeXic_Click" IsEnabled="False" InputGestureText="Alt+3"
                           ToolTip="Measures identified and kept de novo precursors from RAW files with the full isotope envelope. Disabled until a project is loaded."/>
                 <MenuItem x:Name="MenuItemAnalytics" Header="Results" Click="MenuItemAnalytics_Click" InputGestureText="Alt+4"

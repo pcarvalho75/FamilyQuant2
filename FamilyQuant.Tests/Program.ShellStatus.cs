@@ -58,7 +58,7 @@ internal static partial class Program
                 ? Flatten(workflow[quantitationStart..quantitationEnd]) : "";
             Check("workflow quantitation directions name the current screens and optional PatternLab source",
                 quantitation.Contains("Quantify", StringComparison.Ordinal)
-                && quantitation.Contains("Families > Quantitation", StringComparison.Ordinal)
+                && quantitation.Contains(WorkflowNames.CurateFamilies + " > Quantitation", StringComparison.Ordinal)
                 && quantitation.Contains("PatternLab (optional)", StringComparison.Ordinal)
                 && quantitation.Contains("Load PatternLab project", StringComparison.Ordinal));
             Check("workflow quantitation directions retire the Layer 2 and Layer 3 steps",
@@ -72,7 +72,7 @@ internal static partial class Program
                 && workflow.Contains("Build families") && workflow.Contains(build.ShellHelpText));
             typeof(MainWindow).GetMethod("MenuItemDeNovo_Click", any)!.Invoke(main, new object[] { main, new RoutedEventArgs() });
             Check("de novo status is short while its detailed navigation facts stay in Help", guide.Text.Contains("De novo")
-                && main.StatusModel.ContextHelp.Contains("View > Families") && main.StatusModel.ContextHelp.Contains("File > Open")
+                && main.StatusModel.ContextHelp.Contains("View > " + WorkflowNames.CurateFamilies) && main.StatusModel.ContextHelp.Contains("File > Open")
                 && main.StatusModel.ContextHelp.Contains("scan, charge"));
 
             bool curationContract = typeof(ClusterGenerationControl).GetProperty("ShellStatusText") != null

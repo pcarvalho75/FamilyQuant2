@@ -66,7 +66,12 @@ public partial class MainWindow
         {
             if (owner.cgc == null)
             {
-                owner.MenuItemCluster_Click(owner, new RoutedEventArgs());
+                // Curate families needs a project: ask for one, or offer Build families (Z4d).
+                switch (owner.AskCurateWithoutProject())
+                {
+                    case CurateWithoutProjectChoice.OpenProject: owner.MenuItemCluster_Click(owner, new RoutedEventArgs()); break;
+                    case CurateWithoutProjectChoice.BuildFamilies: owner.NavigationModel.RequestNavigate(ShellDestination.Build); break;
+                }
                 return;
             }
 
