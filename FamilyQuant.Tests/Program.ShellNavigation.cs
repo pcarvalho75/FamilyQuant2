@@ -50,12 +50,25 @@ internal static partial class Program
         {
             void Route(ShellDestination route) => MainWindow.NavigateShellCommand.Execute(route, main);
             var host = (Grid)main.FindName("GridApp");
-            Check("rail exposes all four workflows", main.NavigationModel.Items.Select(i => i.Destination).SequenceEqual(new[]
-                { ShellDestination.Families, ShellDestination.Quantify, ShellDestination.Results, ShellDestination.DeNovo }));
-            Check("rail has five keyboard route shortcuts", Enumerable.Range(0, 5).All(index => main.InputBindings.OfType<KeyBinding>()
-                .Any(binding => binding.Key == Key.D0 + index && binding.Modifiers == ModifierKeys.Alt
-                    && binding.Command == MainWindow.NavigateShellCommand)));
+            Check("rail lists the five numbered steps in Home's order, Build families first", main.NavigationModel.Items.Select(i => i.Destination).SequenceEqual(new[]
+                { ShellDestination.Build, ShellDestination.Families, ShellDestination.Quantify, ShellDestination.Results, ShellDestination.DeNovo })
+                && main.NavigationModel.Items.Select(i => i.Number).SequenceEqual(new[] { 1, 2, 3, 4, 5 })
+                && main.NavigationModel.Items[0].Label == WorkflowNames.BuildFamilies);
+            var routeKeys = Enumerable.Range(0, 6).Select(index => main.InputBindings.OfType<KeyBinding>()
+                .SingleOrDefault(binding => binding.Key == Key.D0 + index && binding.Modifiers == ModifierKeys.Alt
+                    && binding.Command == MainWindow.NavigateShellCommand)?.CommandParameter).ToArray();
+            Check("Alt+0 is Home and Alt+1 to Alt+5 are steps 1 to 5", routeKeys.SequenceEqual(new object?[] { ShellDestination.Start,
+                ShellDestination.Build, ShellDestination.Families, ShellDestination.Quantify, ShellDestination.Results, ShellDestination.DeNovo })
+                && main.NavigationModel.Items.All(i => i.Shortcut == "Alt+" + i.Number), string.Join(", ", routeKeys));
+            var railText = WalkTree((ShellNavigationRail)main.FindName("NavigationRail")).OfType<Button>().Select(button => button.Content as string)
+                .Where(text => text != null).ToArray();
+            Check("the sidebar has no separate Build button beside step 1", railText.SequenceEqual(new[] { WorkflowNames.Home }), string.Join(", ", railText));
             Check("keyboard Quantify is disabled before a project is open", !MainWindow.NavigateShellCommand.CanExecute(ShellDestination.Quantify, main));
+            Route(ShellDestination.Build);
+            Check("sidebar step 1 opens the Build families screen and marks itself current", host.Children.OfType<USearchLib>().Any()
+                && main.NavigationModel.Current == ShellDestination.Build && main.NavigationModel.Items[0].IsSelected
+                && main.NavigationModel.Items[0].StateText == "Current" && main.StatusModel.Text.StartsWith(WorkflowNames.BuildFamilies + " |", StringComparison.Ordinal),
+                main.StatusModel.Text);
             Route(ShellDestination.Families);
             FinishBusyOperation(main.Operations);
             var project = host.Children.OfType<ClusterGenerationControl>().Single();

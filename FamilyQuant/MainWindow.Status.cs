@@ -80,7 +80,7 @@ public partial class MainWindow
             string activity = IsQuantifyVisible ? quantify!.ViewModel.Status : SourceStatus("ShellStatusText");
             if (activity.Length == 0 && families && cgc?.FindName("TextBlockStatusLine") is TextBlock legacy) activity = legacy.Text;
             if (activity.Length == 0 && home != null)
-                activity = cgc == null ? "Use Open project or New from database to begin." : "Use Families to curate the open project, Quantify to compute, or Results to inspect stored results.";
+                activity = cgc == null ? "Use Open project or " + WorkflowNames.BuildFamilies + " to begin." : "Use Families to curate the open project, Quantify to compute, or Results to inspect stored results.";
             if (activity.StartsWith("showing: ", StringComparison.OrdinalIgnoreCase)) activity = activity[9..];
             string context = CurrentContextHelp() + "\n\n" + ProjectStatusText();
             string sourceHelp = SourceStatus("ShellHelpText");

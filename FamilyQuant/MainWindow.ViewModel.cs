@@ -6,19 +6,21 @@ namespace FamilyQuant;
 
 public enum ShellDestination { Start, Families, Quantify, Results, DeNovo, Build }
 
+/// <summary>One sidebar entry: a numbered step of the names table and its readiness.</summary>
 public sealed class ShellNavigationItem : INotifyPropertyChanged
 {
     public ShellDestination Destination { get; }
+    public int Number { get; }
     public string Label { get; }
     public bool IsEnabled { get; private set; }
     public bool IsSelected { get; private set; }
     public string StateText { get; private set; } = "";
     public string ToolTip => IsEnabled ? "Opens " + Label + " using the existing workflow. Keyboard shortcut: " + Shortcut + "."
         : StateText + ". Open a project or finish the current operation to continue.";
-    public string Shortcut => Destination switch { ShellDestination.Families => "Alt+1", ShellDestination.Quantify => "Alt+2",
-        ShellDestination.Results => "Alt+3", ShellDestination.DeNovo => "Alt+4", _ => "" };
+    /// <summary>Alt and the step number, as Home numbers the steps.</summary>
+    public string Shortcut => "Alt+" + Number.ToString(System.Globalization.CultureInfo.InvariantCulture);
     public event PropertyChangedEventHandler? PropertyChanged;
-    public ShellNavigationItem(ShellDestination destination, string label) { Destination = destination; Label = label; }
+    public ShellNavigationItem(ShellDestination destination, int number, string label) { Destination = destination; Number = number; Label = label; }
     internal void Update(bool enabled, bool selected, string reason)
     {
         IsEnabled = enabled;
@@ -38,12 +40,14 @@ public sealed class ShellViewModel : INotifyPropertyChanged
     public string? ProjectPath { get; private set; }
     public bool HasStoredResults { get; private set; }
     public bool HasHomologyResult { get; private set; }
+    /// <summary>The five steps in Home's order; Build families asks before replacing an open project.</summary>
     public IReadOnlyList<ShellNavigationItem> Items { get; } = new[]
     {
-        new ShellNavigationItem(ShellDestination.Families, "Families"),
-        new ShellNavigationItem(ShellDestination.Quantify, "Quantify"),
-        new ShellNavigationItem(ShellDestination.Results, "Results"),
-        new ShellNavigationItem(ShellDestination.DeNovo, "De novo")
+        new ShellNavigationItem(ShellDestination.Build, 1, WorkflowNames.BuildFamilies),
+        new ShellNavigationItem(ShellDestination.Families, 2, "Families"),
+        new ShellNavigationItem(ShellDestination.Quantify, 3, "Quantify"),
+        new ShellNavigationItem(ShellDestination.Results, 4, "Results"),
+        new ShellNavigationItem(ShellDestination.DeNovo, 5, "De novo")
     };
     public event Action<ShellDestination>? NavigationRequested;
     public event PropertyChangedEventHandler? PropertyChanged;
