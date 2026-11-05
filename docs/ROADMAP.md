@@ -43,6 +43,7 @@ Version 11 delivered 10 steps (in the archive): the clean Recent projects list, 
 | FQFetch (FE) | Sol 6.1 xhigh | W1 Fetch evidence that keeps its work (2.1.7); then W6 de novo | `D:/FamilyQuant-wt/fetch` |
 | FQHome (HM) | Sol 6.1 xhigh | W2 Update and Setup and W3 Close project (2.1.7); W7 release 2.1.7; then W5 Families layout and W8 release 2.1.8 | `D:/FamilyQuant-wt/home` |
 | FQOpus (OP) | Opus 5.5, this session's Fiocruz account (D67) | W4 Home and one name per thing (2.1.8) | `C:/FamilyQuant-wt2/opus` |
+| FQSite (ST) | Opus 5.5, an agent of this session on the Fiocruz account (D69) | W9 the FamilyQuant website | `C:/FamilyQuant-wt2/website` |
 | FQKimi (KM) | Kimi Code (K3.1 Pro) | Reviewer (D64), with FQReviewDS; the desk gives each finished step to whichever reviewer is free, in batches of at most 8; code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-kimi` |
 | FQReviewDS (DS) | DeepSeek V4.1 Flash | Second reviewer (D67); code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
 
@@ -136,6 +137,19 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z8d | The 2.1.8 Setup.exe and zip, package check, published as Latest, README pushed | L | 0.2 | Z8b, Z8c | Z8e | GitHub digests equal the package | HM, Orchestrator | | 0 | 0 | |
 | Z8e | Update check on the public files: an installed 2.1.7 updates to 2.1.8 and reopens | L | 0.2 | Z8d | | PASS | FE | HM | 0 | |
 
+### W9 The FamilyQuant website (FQSite)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z9a | Deep study before any page: the science documents, Help, the docs index, the key code paths (database clustering, evidence grouping, family world, full XIC quantitation, de novo and homology, the report) and every screen rendered on synthetic data; written up in `UNDERSTANDING.md` in the site folder, every claim with file:line | M | 1 | 🟢 | Z9c, Z9d, Z9e | A reviewer checks the write-up against the code: APPROVED | ST | | 0 | 0 | |
+| Z9b | Art direction, design system and the hero: brand palette, type, motion, light and dark; the download button reads the latest release from GitHub (falls back to the releases page) | M | 1 | 🟢 | Z9c to Z9f | Rendered at desktop and phone width in both themes; the download link resolves | ST | | 0 | 0 | |
+| Z9c | How it works: the five steps (Build families, Curate families, Quantify, Results, De novo review), instructional, with what goes in, what comes out and what to check, illustrated and with app screenshots on synthetic data | M | 1 | Z9a, Z9b | Z9g | Every statement matches UNDERSTANDING.md | ST | | 0 | 0 | |
+| Z9d | The science explained: why quantify by family, why peptide spectrum matches plus de novo, homology at 80% identity with I = L, decoys, the PatternLab-wins rule, full isotope envelopes; interactive explainers | H | 1.5 | Z9a, Z9b | Z9g | Every claim cites the program's behaviour | ST | | 0 | 0 | |
+| Z9e | An illustrative example, a fictitious snake venom, labelled fictitious and illustrative on every view: families, an interactive dot plot in the style of report.html, composition, the de novo contribution, the database gap | M | 1 | Z9a, Z9b | Z9g | No real sample or collaborator number anywhere | ST | | 0 | 0 | |
+| Z9f | Install and update guide, FAQ, glossary, how to cite, credits; footer with the Fiocruz logo and "All rights reserved, 2026, Fundação Oswaldo Cruz (Fiocruz)" | L | 0.5 | Z9b | Z9g | Rendered; links resolve | ST | | 0 | 0 | |
+| Z9g | Review: claims against the code (FQKimi), accessibility, phone width, both themes, speed, no real data, no em or en dashes | M | 0.5 | Z9c to Z9f | Z9h | APPROVED | KM | | 0 | 0 | |
+| Z9h | Paulo looks at it and decides where it is deployed (for example next to SCPBrowser on patternlabforproteomics.org) | L | 0 | Z9g | | Paulo's word | Paulo | | 0 | 0 | |
+
 ## Critical path
 
 2.1.7: W1 (FQFetch) and W2 with W3 (FQHome) run in parallel now; Kimi reviews in batches as steps land; Z7a and Z7b; one suite Z7c; package and publish Z7d; update check Z7e. Rough wall-clock: 3 to 4.5 hours from 12:30, so about 15:30 to 17:00, a range, never a promise.
@@ -191,6 +205,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D65 | A scan where PatternLab and the de novo call give different sequences for the same precursor | a) The PatternLab identification wins the scan: its FDR-controlled identification is kept and the de novo call on that scan gets no credit (Ana's step 4; it removes a double count, since both XICs measure the same precursor's ions). Z6a measured 305 to 431 such scans per run, 2.6 to 3.7% of the de novo signal and 0.35 to 0.55% of all signal at most. Built in Z6c as an option, ON by default, with before and after on real data and a science review. Paulo, 11-05 13:24 |
 | D67 | More hands | Paulo, 11-05 12:38: "hire one more worker, an opus worker from this account, and also hire deepseek as a second reviewer". DeepSeek FQReviewDS joined at 12:41 (code and synthetic data only, as D58). The Opus CLI worker hit the account's weekly CLI limit at 12:42 (resets 11-06 08:00), so FQOpus runs at 12:48 as an Opus agent of this session, on the same account (Paulo, 12:47: "an opus from this account"); it takes W4, FQHome takes W5 and W8 from FQFetch |
 | D68 | Kimi's review rate | 15 reviews in any rolling hour (was 5 from 11-02); 15 calls per rolling 5 hours and one instance unchanged. Paulo, 11-05 13:24 ("raise kimi to 15 reviews, and update that law") |
+| D69 | A FamilyQuant website | A gorgeous, instructional public page in the spirit of the SCPBrowser page but better: how it works, why families, why peptide spectrum matches plus de novo, a fictitious and clearly labelled snake venom example, the download link, the Fiocruz logo in the footer; built by one more Opus from this account, after a deep study of the program; ChatGPT may make art. The program itself stays general (D21); the site uses fictitious data only. Paulo, 11-05 14:05 |
 
 ## Risks and triggers
 
