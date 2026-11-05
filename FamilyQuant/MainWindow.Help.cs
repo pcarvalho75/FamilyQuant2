@@ -191,7 +191,8 @@ public partial class MainWindow
                 "   kind of database and written interpretation you want, then choose Save details.\n" +
                 "   Produces: report details in the project. Continue to step 3 to compute.\n\n" +
                 "STEP 3 · Attach the quantitation\n" +
-                "   Open: 3 Quantify on Home or the sidebar (Alt+3)\n" +
+                "   Menu: View > Quantify\n" +
+                "   Also: 3 Quantify on Home or the sidebar (Alt+3).\n" +
                 "   Needs: the RAW folder and matching identifications (.sepr2); de novo and search\n" +
                 "   settings are optional. Press Quantify on that screen.\n" +
                 "   Compute and project opening show progress for each phase, the current item,\n" +
