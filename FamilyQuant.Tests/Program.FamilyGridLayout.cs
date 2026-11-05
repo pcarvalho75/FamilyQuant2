@@ -62,7 +62,15 @@ internal static partial class Program
                     && proteins.Items.Count == 2 && (string)title.ToolTip == title.Text);
                 screen.ViewModel.SelectedFamily = screen.ViewModel.Families.Last(); PumpDispatcher();
                 Check("Z5a " + label + " selection replaces the title without stale family text", title.Text == "Proteins in this family: Second family" && proteins.Items.Count == 1);
-                screen.ViewModel.SelectedFamily = null; PumpDispatcher();
+                var all = UiField<Button>(screen, "ButtonAllProteins")!;
+                var buttonOrigin = all.TransformToAncestor(screen).Transform(new Point());
+                var proteinOrigin = proteins.TransformToAncestor(screen).Transform(new Point());
+                Check("Z5b " + label + " All proteins sits above the protein grid", buttonOrigin.X >= proteinOrigin.X
+                    && buttonOrigin.X + all.ActualWidth <= proteinOrigin.X + proteins.ActualWidth + 0.01
+                    && buttonOrigin.Y + all.ActualHeight <= rightY);
+                all.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
+                Check("Z5b " + label + " native All proteins restores every row", screen.ViewModel.SelectedFamily == null
+                    && proteins.Items.Count == 3 && file.ToJsonText() == before && screen.ViewModel.UndoStack.Count == 0);
                 Check("Z5a " + label + " clearing selection clears its name without changing curation", title.Text == "Proteins in this family" && file.ToJsonText() == before);
             }
             finally { window.Close(); }

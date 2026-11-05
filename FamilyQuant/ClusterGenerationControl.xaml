@@ -30,7 +30,7 @@
                 <TextBlock x:Name="TextBlockFamiliesTitle" Text="Families" FontWeight="SemiBold" Margin="0,0,0,8"/>
                 <TextBlock x:Name="TextBlockProteinsTitle" Grid.Column="2" Text="{Binding ProteinHeading}" FontWeight="SemiBold"
                            TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Margin="0,0,0,8" ToolTip="{Binding ProteinHeading}"/>
-                    <Button x:Name="ButtonAllProteins" Grid.Row="1" Content="All proteins" Click="AllFamilyProteins_Click" HorizontalAlignment="Left" Margin="0,0,0,8"
+                    <Button x:Name="ButtonAllProteins" Grid.Row="1" Grid.Column="2" Content="All proteins" Click="AllFamilyProteins_Click" HorizontalAlignment="Left" Margin="0,0,0,8"
                             ToolTip="Show every visible protein instead of one selected family. Your display filters and curation stay unchanged."/>
                     <DataGrid x:Name="DataGridFamilies" Grid.Row="2" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single"
                               ItemsSource="{Binding Families}" SelectedItem="{Binding SelectedFamily, Mode=TwoWay}"
