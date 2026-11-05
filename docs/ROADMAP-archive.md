@@ -747,3 +747,72 @@ Paulo agreed these at the restart, 2026-11-01.
 | V3c | v2.1.6 published as Latest; README pushed | L | 0.1 | V2c, V3a, V3b | V3d | GitHub digests equal the package | Orchestrator | | 0 | 0 | |
 | V3d | Update check on the public files: an installed 2.1.5 shows the banner for 2.1.6 | L | 0.2 | 🟢 | | PASS | RL | | 0 | 0 | |
 
+## Version 12 (2026-11-05), finished: Ana's suggestions, 2.1.7 published 13:54
+
+Releases 2.1.7 (fetch keeps its work, update reopens the app, Setup version check, Close project) and the 2.1.8 build steps; approved by FQKimi, FQReviewDS and FQOpus (science).
+
+### W1 Fetch evidence that keeps its work, 2.1.7 (FQFetch)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z1a | Protein evidence survives a panel failure: when the reference panel cannot finish, the fetched protein evidence (domains, families, source) is still applied and saved, the panel is stored as missing with its reason, and the release guard between evidence and panel still holds | H | 0.5 | 🟢 | Z1d, Z1e, Z7c | A test whose handler fails one panel batch leaves the domains applied and the panel marked missing; the file-changed and cancel guards still apply nothing | FE | | 0 | 0 | |
+| Z1b | Patient retries: server errors (5xx), 429 and timeouts retried with growing waits (about 5, 15, 45 and 120 s); the progress window says "UniProt busy, retrying in N s"; other 4xx fail at once; Cancel stops the wait | M | 0.3 | 🟢 | Z1d, Z7c | A handler that fails 3 times then answers completes; a 400 fails at once; Cancel during a wait cancels | FE | | 0 | 0 | |
+| Z1c | Resume: finished evidence and panel batches are kept on disk, keyed by query and UniProt release, so the next Fetch evidence starts from the first unfinished batch; a release change discards them | M | 0.5 | 🟢 | Z1e, Z7c | Fail at batch 25, fetch again: batches 1 to 24 are not asked again and the result equals an uninterrupted fetch byte for byte | FE | | 0 | 0 | |
+| Z1d | A batch that still fails is split in halves down to single families; a family UniProt refuses is named, and the panel is stored as incomplete with that family listed. An incomplete panel is never used as complete: the steps that read it say so and offer Retry panel | M | 0.4 | Z1a, Z1b | Z1e, Z7c | One poisoned family among 100 leaves 99 fetched, the one named; Fetch family world reports the incomplete panel instead of using it | FE | | 0 | 0 | |
+| Z1e | Plain words on failure: the status line and the result say what was kept and what is missing, for example "Protein evidence saved for 40,250 proteins. The reference panel stopped at 1 of 64 batches (UniProt server error, HTTP 500). Retry panel"; a Retry panel button on the Families screen | L | 0.2 | Z1a, Z1c, Z1d | Z7c | Message rendered dark and light with --screens; Retry panel completes a stored incomplete panel | FE | | 0 | 0 | |
+
+### W2 Update and Setup, 2.1.7 (FQHome)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z2a | After Help > Install update, Setup reopens FamilyQuant when it finishes (the `/silent /waitpid` update path only; a plain silent install does not launch); a failed install does not launch | M | 0.3 | 🟢 | Z2b, Z7c | Test-mode Setup records exactly one launch after an update and none after a failed one | HM | | 0 | 0 | |
+| Z2b | The reopened app says once "FamilyQuant was updated to 2.1.7." (a marker Setup writes, read and cleared on start) | L | 0.2 | Z2a | Z7c | Shown once after a test-mode update, not on the next start | HM | | 0 | 0 | |
+| Z2c | Setup compares versions. Installed newer than this Setup: "FamilyQuant 2.1.7 is already installed. This setup holds 2.1.4.", main button Open FamilyQuant, a quiet Install this older version behind a confirmation. Same version: "already installed" with Open FamilyQuant and Repair. The title never reads "Upgrade" to an older version. Silent mode refuses a downgrade with an exit code and a log line | M | 0.4 | 🟢 | Z7c | Test mode: older over newer shows the page and installs nothing on Open; silent downgrade exits non-zero; equal and newer cases render dark and light | HM | | 0 | 0 | |
+| Z2d | Setup has its own icon (the app mark with a download badge, from `FamilyQuant/Assets/Brand`) and its window says Setup, so it cannot be taken for the app on a desktop | L | 0.2 | 🟢 | Z7c | Setup.exe icon differs from FamilyQuant2.exe; no yellow or gold | HM | | 0 | 0 | |
+
+### W3 Close project, 2.1.7 (FQHome)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z3a | File > Close project closes the open project with the usual Save, Discard, Cancel prompt and returns to Home; disabled with no project open; the sidebar steps go back to "Open a project first" | L | 0.3 | 🟢 | Z7c | Close with unsaved changes asks; Cancel keeps the project; after close another project opens without restarting | HM | | 0 | 0 | |
+
+### W4 Home and one name per thing, 2.1.8 (FQOpus)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z4a | The names table (in `docs/` and the code): Home, 1 Build families, 2 Curate families (a Group by evidence, b Group by words), 3 Quantify, 4 Results, 5 De novo review; a suite check fails when an old name (Start page, New from database, Compute full XIC, Analytics / report, De novo evidence) appears in UI text | M | 0.3 | Z3a | Z4b to Z4h | The check goes red on a planted old name | OP | | 0 | 0 | |
+| Z4b | Home replaces Start everywhere (sidebar button, View > Home); five numbered boxes in Ana's order, each with one line, its state (ready, needs a project, done) and one button; De novo review marked optional; Open project and Recent projects stay below | M | 0.5 | Z4a | Z8c | Rendered dark and light at both sizes; each box opens its screen | OP | | 0 | 0 | |
+| Z4c | Build families replaces New from database (button, menu, Help, window title); it opens the same database clustering (Group by sequence identity, USearch) | L | 0.2 | Z4a | Z8c | No "New from database" left in UI text | OP | | 0 | 0 | |
+| Z4d | Curate families replaces Families and Open project as the step name; with no project open it asks for a project or offers Build families; inside, the 2.1.5 guided steps are part a, Group by evidence, and the description and keyword grouping is part b, Group by words | M | 0.4 | Z4a | Z8c | Both parts reachable and labelled; the 2.1.5 step order and highlight unchanged | OP | | 0 | 0 | |
+| Z4e | Quantify is the one name of the Compute full XIC screen (sidebar, menu, Help, window title, messages) | L | 0.2 | Z4a | Z8c | No "Compute full XIC" left in UI text | OP | | 0 | 0 | |
+| Z4f | Results and De novo review are the one names of their screens (sidebar, menu, Help, window titles) | L | 0.2 | Z4a | Z8c | No "De novo evidence" or bare "De novo" step name left in UI text | OP | | 0 | 0 | |
+| Z4g | The Analysis menu becomes Tools and keeps only the extra tools (Spectrum comparison, Clustering diagnostic, Reannotate SEPro); the five steps live on Home and the sidebar | L | 0.2 | Z4e, Z4f | Z8c | Menu order File, Edit, View, Tools, Help; every former Analysis command still reachable | OP | | 0 | 0 | |
+| Z4h | Help follows the five steps and the new names (`HelpContent`, `HelpWorkflowFacts`), with the flow drawn as on Home | L | 0.2 | Z4b to Z4g | Z8c | Help names match the names table check | OP | | 0 | 0 | |
+
+### W5 Families screen layout, 2.1.8 (FQHome)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z5a | The two grids' headers sit at the same height; a title above each grid: "Families" on the left, "Proteins in this family" on the right, with the selected family's name | L | 0.2 | Z1e | Z8c | Rendered dark and light at both sizes; headers aligned to the pixel | HM | | 0 | 0 | |
+| Z5b | All proteins moves to the right, above the protein grid | L | 0.1 | Z5a | Z8c | Rendered; the button keeps its behaviour | HM | | 0 | 0 | |
+| Z5c | Family numbers centred in the ID column; the USearch ID column shown by default in the protein grid | L | 0.1 | Z5a | Z8c | Rendered; a stored column choice of the user still wins | HM | | 0 | 0 | |
+
+### W6 De novo: measure, decide, explain (FQFetch, Paulo)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z6a | Measure same-scan conflicts on the real-data set (`C:/Users/paulo/Desktop/FamilyQuant`, the three-run PEAKS export at ALC 80, D33) through the program's Spectrum comparison: scans where PatternLab and the de novo call give different sequences for the same precursor while the de novo peptide is still credited in Quantify; count, credited de novo signal involved, and its share of all de novo and of all signal, per run. No product change | M | 0.5 | Z1e | Z6b | Counts reproduced by a second run of the same command; method reviewed by FQKimi on code only | FE | | 0 | 0 | |
+| Z6b | Paulo decides what Quantify does with a same-scan conflict, from Z6a's numbers (D65): a) the PatternLab identification wins the scan, b) keep both and state it, c) another rule | L | 0 | Z6a | Z6c, Z6d | Decision logged | Paulo | | 0 | 0 | |
+| Z6c | D65 a): on a scan PatternLab identified, a de novo call with a different sequence for the same precursor gets no credit in Quantify; an option, ON by default, stored with the project and shown in the report's rules; before and after family shares on real data; ships in 2.1.8 if green, else the next release | H | 1 | Z6b | Z6d | Synthetic known answers; before and after shares on real data; code review APPROVED; science review APPROVED by FQOpus | FE | | 0 | 0 | |
+| Z6d | Help page "De novo in FamilyQuant": Ana's seven steps mapped to what the program does (what Quantify reads, de novo peptides dropped when PatternLab found the same peptide, the same-scan rule as decided, XIC of de novo peptides, homology by PepExplorer's method at 80% identity with I = L and the decoy gate) and why De novo review is optional | L | 0.3 | Z6b | Z8c | Every claim cites the code; no organism, venom or sample words | FE | | 0 | 0 | |
+
+### W7 Release 2.1.7 (FQHome, Orchestrator)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z7a | Version 2.1.7 in every place 2.1.6 was set, and the 2.1.7 notes (claim only what landed) | L | 0.1 | Z3a | Z7c | Versions read 2.1.7.0 | HM | | 0 | 0 | |
+| Z7b | README reads 2.1.7 with a short what's new | L | 0.1 | Z7a | Z7d | Synthetic only; reviewed | HM | | 0 | 0 | |
+| Z7c | The full functional suite on the integrated 2.1.7 commit (receipts deferred, D61), after every W1, W2 and W3 step is approved | M | 0.2 | Z1a to Z1e, Z2a to Z2d, Z3a, Z7a | Z7d | Every check green | Orchestrator | | 0 | 0 | |
+| Z7d | The 2.1.7 Setup.exe and zip with SHA256 from the integrated commit, Setup test mode, package check; then v2.1.7 published as Latest and the README pushed | L | 0.2 | Z7b, Z7c | Z7e | GitHub digests equal the package | HM, Orchestrator | | 0 | 0 | |
+| Z7e | Update check on the public files: 2.1.7 reports current; an installed 2.1.6 test root shows the banner, Install update runs the public Setup in test mode and the app is reopened (Z2a) | L | 0.2 | Z7d | | PASS | HM | | 0 | 0 | |
+
