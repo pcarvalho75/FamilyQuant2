@@ -38,6 +38,8 @@ namespace FamilyQuant.Evidence
 
         public List<string> MissingFamilies { get; set; } = new();
         public string FailureReason { get; set; } = string.Empty;
+        public int TotalBatches { get; set; }
+        public int FailedBatches { get; set; }
         [JsonIgnore]
         public bool IsComplete => MissingFamilies.Count == 0 && FailureReason.Length == 0;
     }
@@ -78,9 +80,9 @@ namespace FamilyQuant.Evidence
 
         /// <summary>
         /// The reviewed proteins of each family, every taxon. UniProt's family search is a text search, so
-        /// an entry is kept only when one of its memberships is the family asked for. All or nothing: a
-        /// refused page, a missing release or a release that changes between pages throws and returns no
-        /// panel. Progress counts families done. The paged comparison switch retains the previous
+        /// an entry is kept only when one of its memberships is the family asked for. Refused stream
+        /// batches are split; refused singleton families are recorded as missing. Invalid data or a
+        /// changed release throws. Progress counts families processed. The paged comparison retains the previous
         /// route for the native parity checker; ordinary callers use bounded, OR-combined streams.
         /// </summary>
         public static async Task<ReferencePanel> FetchAsync(IReadOnlyList<string> families,
@@ -166,7 +168,7 @@ namespace FamilyQuant.Evidence
         }
 
         /// <summary>Fetches the panel for the families found in the file (in scope when given) and keeps it
-        /// with the file's evidence. Nothing changes in the file unless the whole panel arrives.</summary>
+        /// with the file's evidence, explicitly naming any missing families.</summary>
         public static async Task<ReferencePanel> FetchAndStoreAsync(FamilyClusterFile file,
             Func<ProteinEvidence, bool>? inScope = null, HttpMessageHandler? handler = null,
             IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default,
@@ -218,7 +220,8 @@ namespace FamilyQuant.Evidence
         /// <paramref name="present"/> (the file's own reviewed proteins answer for themselves).</summary>
         public static List<NeighbourReference> References(ReferencePanel? panel, IEnumerable<string>? present = null)
         {
-            if (panel == null || !panel.IsComplete) return new List<NeighbourReference>();
+            RequireComplete(panel);
+            if (panel == null) return new List<NeighbourReference>();
             var skip = new HashSet<string>(present ?? Array.Empty<string>(), StringComparer.Ordinal);
             return panel.Entries
                 .Where(e => e.Sequence.Length > 0 && !skip.Contains(e.Accession))
@@ -230,6 +233,13 @@ namespace FamilyQuant.Evidence
                     Evidence = e.Evidence,
                 })
                 .ToList();
+        }
+
+        public static void RequireComplete(ReferencePanel? panel)
+        {
+            if (panel is { IsComplete: false })
+                throw new InvalidDataException("The reference panel is incomplete: "
+                    + panel.MissingFamilies.Count.ToString("N0", CultureInfo.CurrentCulture) + " families are missing. Retry panel.");
         }
 
         private static IEnumerable<(string, string)> Sequences(string json)

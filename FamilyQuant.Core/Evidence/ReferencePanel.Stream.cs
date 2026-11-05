@@ -30,6 +30,8 @@ public static partial class ReferencePanelFetcher
         var entries = new SortedDictionary<string, PanelEntry>(StringComparer.Ordinal);
         string? release = null;
         int received = 0, completed = 0;
+        int failedBatches = 0;
+        var missing = new SortedDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         using HttpClient client = handler == null ? new HttpClient() : new HttpClient(handler, disposeHandler: false);
         client.Timeout = TimeSpan.FromSeconds(100);
         client.DefaultRequestHeaders.UserAgent.ParseAdd("FamilyQuant");
@@ -40,6 +42,43 @@ public static partial class ReferencePanelFetcher
         release = cache?.Release;
         Report();
         foreach (List<string> batch in batches)
+        {
+            int before = missing.Count;
+            await FetchBatch(batch).ConfigureAwait(false);
+            if (missing.Count > before) failedBatches++;
+        }
+        cancellationToken.ThrowIfCancellationRequested();
+        return new ReferencePanel
+        {
+            Provider = "UniProt", Release = release ?? string.Empty, RetrievedAtUtc = cache?.RetrievedAtUtc ?? options?.UtcNow() ?? DateTimeOffset.UtcNow,
+            Families = asked, Entries = entries.Values.ToList(), MissingFamilies = missing.Keys.ToList(),
+            FailureReason = string.Join("; ", missing.Values.Distinct(StringComparer.Ordinal)),
+            TotalBatches = batches.Count, FailedBatches = failedBatches,
+        };
+
+        async Task FetchBatch(List<string> batch)
+        {
+            try { await FetchCompleteBatch(batch).ConfigureAwait(false); }
+            catch (HttpRequestException ex)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                if (batch.Count > 1)
+                {
+                    int half = batch.Count / 2;
+                    Report("UniProt refused a batch; trying smaller family groups");
+                    await FetchBatch(batch.GetRange(0, half)).ConfigureAwait(false);
+                    await FetchBatch(batch.GetRange(half, batch.Count - half)).ConfigureAwait(false);
+                }
+                else
+                {
+                    missing.Add(batch[0], ex.Message);
+                    completed++;
+                    Report("A family could not be fetched; the reference panel will be incomplete");
+                }
+            }
+        }
+
+        async Task FetchCompleteBatch(List<string> batch)
         {
             cancellationToken.ThrowIfCancellationRequested();
             string query = Uri.EscapeDataString(StreamQuery(batch));
@@ -74,6 +113,7 @@ public static partial class ReferencePanelFetcher
                 Report("Resuming saved reference panel batches");
             }
             Dictionary<string, ProteinEvidence> parsed = EvidenceFetcher.Parse(json);
+            var batchEntries = new SortedDictionary<string, PanelEntry>(StringComparer.Ordinal);
             var membership = batch.ToHashSet(StringComparer.OrdinalIgnoreCase);
             int delivered = 0;
             foreach ((string accession, string sequence) in Sequences(json))
@@ -85,14 +125,15 @@ public static partial class ReferencePanelFetcher
                 if (evidence.Reviewed != true)
                     throw new InvalidDataException("UniProt returned an unreviewed entry to a reviewed search. No panel was made.");
                 if (!FamiliesOf(evidence).Any(membership.Contains)) continue;
-                if (sequence.Length == 0 || entries.ContainsKey(accession)) continue;
+                if (sequence.Length == 0 || batchEntries.ContainsKey(accession)) continue;
                 evidence.SimilarityAnnotations = null;
-                entries.Add(accession, new PanelEntry { Accession = accession, Sequence = sequence, Evidence = evidence });
+                batchEntries.Add(accession, new PanelEntry { Accession = accession, Sequence = sequence, Evidence = evidence });
             }
             if (announced != delivered)
                 throw new InvalidDataException("UniProt announced " + announced.ToString(CultureInfo.InvariantCulture)
                     + " reviewed entries and delivered " + delivered.ToString(CultureInfo.InvariantCulture) + ". No panel was made.");
             if (cache != null && saved == null) await cache.StoreAsync(url, json, announced, cancellationToken).ConfigureAwait(false);
+            foreach (var entry in batchEntries) entries.TryAdd(entry.Key, entry.Value);
             received += delivered;
             for (int i = 0; i < batch.Count; i++)
             {
@@ -101,13 +142,6 @@ public static partial class ReferencePanelFetcher
                 cancellationToken.ThrowIfCancellationRequested();
             }
         }
-        cancellationToken.ThrowIfCancellationRequested();
-        return new ReferencePanel
-        {
-            Provider = "UniProt", Release = release ?? string.Empty, RetrievedAtUtc = cache?.RetrievedAtUtc ?? options?.UtcNow() ?? DateTimeOffset.UtcNow,
-            Families = asked, Entries = entries.Values.ToList(),
-        };
-
         void CheckRelease(HttpResponseMessage response)
         {
             string current = UniProtHttp.Release(response);

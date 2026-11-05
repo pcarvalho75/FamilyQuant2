@@ -60,6 +60,7 @@ namespace FamilyQuant.Evidence
         {
             ArgumentNullException.ThrowIfNull(proteins);
             ArgumentNullException.ThrowIfNull(proposal);
+            ReferencePanelFetcher.RequireComplete(panel);
             if (EvidenceClassifier.Fingerprint(proteins) != proposal.SourceFingerprint)
                 throw new InvalidOperationException("The evidence proposal no longer matches the current proteins.");
             var result = new List<EvidenceArchitectureProposal>();

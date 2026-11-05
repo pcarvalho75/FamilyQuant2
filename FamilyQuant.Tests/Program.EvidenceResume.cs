@@ -63,10 +63,10 @@ internal static partial class Program
         using var interrupted = new ResumeUniProtHandler { FailMarker = "F02400 family" };
         var options = Options("panel");
         bool stopped = false;
-        try { ReferencePanelFetcher.FetchAsync(families, interrupted, options: options).GetAwaiter().GetResult(); }
-        catch (HttpRequestException) { stopped = true; }
+        var partial = ReferencePanelFetcher.FetchAsync(families, interrupted, options: options).GetAwaiter().GetResult();
+        stopped = !partial.IsComplete && partial.MissingFamilies.SequenceEqual(new[] { "F02400 family" });
         Check("Z1c panel failure after batch 24 keeps the first 24 completed batches on disk",
-            stopped && interrupted.Downloads.Count == 24 && Directory.GetFiles(options.ResumeDirectory!, "*.json", SearchOption.AllDirectories).Length == 25);
+            stopped && interrupted.Downloads.Count >= 24 && Directory.GetFiles(options.ResumeDirectory!, "*.json", SearchOption.AllDirectories).Length >= 25);
         interrupted.Downloads.Clear(); interrupted.FailMarker = null;
         var resumed = ReferencePanelFetcher.FetchAsync(families, interrupted, options: options).GetAwaiter().GetResult();
         using var uninterrupted = new ResumeUniProtHandler();

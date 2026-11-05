@@ -67,8 +67,8 @@ internal static partial class Program
             var waits = new List<double>();
             var options = new UniProtFetchOptions { DelayAsync = (wait, _) => { waits.Add(wait.TotalSeconds); return Task.CompletedTask; } };
             bool refused = false;
-            try { ReferencePanelFetcher.FetchAsync(new[] { "fixture family" }, handler, options: options).GetAwaiter().GetResult(); }
-            catch (HttpRequestException ex) { refused = ex.StatusCode == handler.Status; }
+            var incomplete = ReferencePanelFetcher.FetchAsync(new[] { "fixture family" }, handler, options: options).GetAwaiter().GetResult();
+            refused = !incomplete.IsComplete && incomplete.FailureReason.Contains("HTTP " + ((int)handler.Status).ToString(System.Globalization.CultureInfo.InvariantCulture), StringComparison.Ordinal);
             Check("Z1b " + (badRequest ? "400 fails immediately" : "exhaustion waits 5, 15, 45 and 120 seconds"),
                 refused && handler.Calls == (badRequest ? 1 : 5)
                 && waits.SequenceEqual(badRequest ? Array.Empty<double>() : new double[] { 5, 15, 45, 120 }));

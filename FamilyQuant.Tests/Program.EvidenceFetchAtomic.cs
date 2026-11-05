@@ -2,6 +2,7 @@ using FamilyQuant.Evidence;
 using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -82,7 +83,7 @@ internal static partial class Program
                     && reopened.EvidenceSource?.ReferencePanel is { IsComplete: false } missing
                     && missing.MissingFamilies.SequenceEqual(new[] { "fixture family" })
                     && missing.FailureReason.Contains("HTTP 400", StringComparison.Ordinal)
-                    && ReferencePanelFetcher.References(missing).Count == 0);
+                    && Throws<InvalidDataException>(() => ReferencePanelFetcher.References(missing)));
             }
         }
         {

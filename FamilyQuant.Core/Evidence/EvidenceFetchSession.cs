@@ -74,6 +74,7 @@ public static class EvidenceFetchSession
                     progress: new FetchStageProgress(operation, ReferencePanelFetcher.ProgressStage, progress),
                     cancellationToken: operation.CancellationToken,
                     expectedRelease: evidence.Asked > 0 ? evidence.Provenance.Release : null, options: options).ConfigureAwait(false);
+                if (!panel.IsComplete) panelFailure = new HttpRequestException(panel.FailureReason);
             }
             catch (Exception ex) when (ex is HttpRequestException or JsonException or InvalidDataException)
             {
