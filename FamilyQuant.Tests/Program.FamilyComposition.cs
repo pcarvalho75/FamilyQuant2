@@ -336,7 +336,7 @@ namespace FamilyQuant.Tests
                         && !control.HasFullXic && layer3.Text == "PENDING");
                     releaseWorker.Set();
                     bool readyVisible = WaitForState(() => pending.IsCompleted && control.HasFullXic && layer3.Text == "READY");
-                    pending.GetAwaiter().GetResult();
+                    FinishBusyTask(pending);
                     Check("the background attach fills the column when it finishes, PENDING meanwhile",
                         pendingVisible && readyVisible
                         && p1.FullXicShare is double asyncShare && Math.Abs(asyncShare - 200.0 / 400) < 1e-9,
@@ -345,8 +345,8 @@ namespace FamilyQuant.Tests
                 finally
                 {
                     releaseWorker.Set();
-                    if (pending != null && !pending.IsCompleted) FinishBusyTask(pending);
                     control.Operations.ProgressReported -= holdAttribution;
+                    if (pending != null && !pending.IsCompleted) FinishBusyTask(pending);
                 }
 
                 System.Threading.Tasks.Task superseded = control.SetFullXicQuantAsync(rows, null);
