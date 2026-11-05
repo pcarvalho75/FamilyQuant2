@@ -665,7 +665,8 @@ namespace FamilyQuant.Tests
         }
         private static Task<Evidence.EvidenceFetchResult> FetchEvidenceForTest(IReadOnlyCollection<FastaItemExtended> items,
             System.Net.Http.HttpMessageHandler handler) => Evidence.EvidenceFetcher.FetchAsync(
-                new FamilyClusterFile { MyExtendedFastaItems = items.ToList() }, handler);
+                new FamilyClusterFile { MyExtendedFastaItems = items.ToList() }, handler,
+                options: new Evidence.UniProtFetchOptions { DelayAsync = (_, _) => Task.CompletedTask });
 
         private static Dictionary<string, string> ParseDomainsForTest(string json) => Evidence.EvidenceFetcher.Parse(json)
             .ToDictionary(p => p.Key, p => Evidence.EvidenceFetcher.DomainNames(p.Value), StringComparer.Ordinal);
@@ -804,7 +805,8 @@ namespace FamilyQuant.Tests
             var rateLimited = new CannedUniProt((System.Net.HttpStatusCode.TooManyRequests, "busy"),
                 (System.Net.HttpStatusCode.OK, RichEvidenceReply));
             Check("an HTTP 429 batch is retried before applying complete evidence",
-                Evidence.EvidenceFetcher.FetchAsync(Fixture(1), rateLimited).GetAwaiter().GetResult().Found == 1
+                Evidence.EvidenceFetcher.FetchAsync(Fixture(1), rateLimited, options: new Evidence.UniProtFetchOptions
+                { DelayAsync = (_, _) => Task.CompletedTask }).GetAwaiter().GetResult().Found == 1
                 && rateLimited.Asked.Count == 2);
 
             static FamilyClusterFile Fixture(int count) => new FamilyClusterFile

@@ -41,6 +41,8 @@ internal static partial class Program
         EnsureApplication();
         EvidenceFetchAtomicTests();
         EvidenceFetchCoordinatorTests();
+        EvidenceFetchTests();
+        ProteinDomainsTests(workDir);
         Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         return failed == 0 ? 0 : 1;
     }
