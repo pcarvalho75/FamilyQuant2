@@ -61,7 +61,7 @@ namespace FamilyQuant.Tests
             Check("choosing it puts the de novo screen on display",
                 app.Children.Count == 1 && app.Children[0] is DeNovoControl);
             Check("the status names de novo while Help keeps its purpose and return path",
-                guide.Text.StartsWith(WorkflowNames.DeNovoReview + " |", StringComparison.Ordinal) && main.StatusModel.ContextHelp.Contains("View > Families")
+                guide.Text.StartsWith(WorkflowNames.DeNovoReview + " |", StringComparison.Ordinal) && main.StatusModel.ContextHelp.Contains("View > " + WorkflowNames.CurateFamilies)
                 && main.StatusModel.ContextHelp.Contains("File > Open")
                 && main.StatusModel.ContextHelp.Contains("separate workflow", StringComparison.OrdinalIgnoreCase),
                 guide.Text);

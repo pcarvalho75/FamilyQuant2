@@ -35,7 +35,7 @@ public partial class MainWindow
                     "each family contributes, and the recovery of the total ion current. These Results graphs can be " +
                     "saved as a projector-sized PNG. It changes no family and reads no RAW. If it says " +
                     "there is nothing to analyse, use Quantify first. The open " +
-                    "project stays open: File > Save saves it from here, and View > Families " +
+                    "project stays open: File > Save saves it from here, and View > Curate families " +
                     "returns to it. File > Open opens a different project or Family Cluster File.\n\n" + DatabaseGapHelp.Text;
             }
 
@@ -49,14 +49,14 @@ public partial class MainWindow
                     "scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The " +
                     "status line at the bottom of the screen says what to do next, and the Help button " +
                     "beside it explains every number this screen shows. To return to the family " +
-                    "workflow, use View > Families (the open project stays open) or File > Open " +
+                    "workflow, use View > Curate families (the open project stays open) or File > Open " +
                     "for another project or Family Cluster File.";
             }
 
             if (owner.cgc != null)
             {
                 return
-                    "Families loaded. " + owner.ProjectStatusText() + " Curate them here, then " +
+                    WorkflowNames.CurateFamilies + ". Families loaded. " + owner.ProjectStatusText() + " Curate them here, then " +
                     "Quantify gives the project its own quantitation, and Results " +
                     "reads it. Help · How to read these numbers explains every column.";
             }
@@ -146,7 +146,7 @@ public partial class MainWindow
                 "   " + WorkflowNames.Flow + "\n" +
                 "   Steps 1 to 4 run in order and step 5 is optional. Alt+0 opens Home; Alt+1 to Alt+5\n" +
                 "   open the steps, as the sidebar numbers them.\n\n" +
-                "STEP 2, PART A (" + WorkflowNames.GroupByEvidence.ToUpperInvariant() + "), FOLLOWS THIS ORDER IN FAMILIES\n" + HelpContent.GroupingOrder + "\n" +
+                "STEP 2, PART A (" + WorkflowNames.GroupByEvidence.ToUpperInvariant() + "), FOLLOWS THIS ORDER IN CURATE FAMILIES\n" + HelpContent.GroupingOrder + "\n" +
                 "STEP 1 · " + WorkflowNames.BuildFamilies + " (" + WorkflowNames.BuildFamiliesMethod + ")\n" +
                 "   Menu: File > Build families\n" +
                 "   Also: 1 Build families on Home or the sidebar (Alt+1).\n" +
@@ -178,7 +178,7 @@ public partial class MainWindow
                 "   Merge into family; for a merge, enter the target family key. Preview panel.\n" +
                 "   Check Pfam reviews the panel's codes and names without changing them. Review\n" +
                 "   the results, correct the draft if needed, then choose Apply panel.\n\n" +
-                "   Menu: View > Families\n" +
+                "   Menu: View > Curate families\n" +
                 "   Needs: the panel and protein evidence. Use Fetch evidence if needed.\n" +
                 "   Choose Group by evidence, review or edit the scope, then Update proposal. In\n" +
                 "   Panel links, review ambiguous links and confirm choices with Use link choices.\n" +
@@ -209,7 +209,7 @@ public partial class MainWindow
                 "   " + HomologyMigrationHelp.Text + "\n" +
                 "   A quantitative panel family marked no peptide observed has no peptide observed\n" +
                 "   in the completed study. This is not proof that the family is absent.\n" +
-                "   In Families > Quantitation use Full XIC > Share of and Shared peptides.\n" +
+                "   In Curate families > Quantitation use Full XIC > Share of and Shared peptides.\n" +
                 "   For the secondary source, open PatternLab (optional) and Load PatternLab project.\n" +
                 "   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\n" +
                 "   export contains nothing that can be attributed to a family, and every row will\n" +

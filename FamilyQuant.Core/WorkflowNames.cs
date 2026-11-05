@@ -76,7 +76,8 @@ public static class WorkflowNames
     /// "de novo evidence" in lower case stays ordinary prose; only the capitalized screen name is retired.
     /// The bare step name De novo is caught where a sentence uses it as a place (open, from, in, and De
     /// novo at the end of a phrase, or before Step or screen); "De novo" as an adjective, as in De novo
-    /// sequence, stays.
+    /// sequence, stays. Families as the step name is caught where a sentence uses it as a place (in Families,
+    /// use Families, Families > a panel); Families as a word for families, as in Families shown, stays.
     /// </summary>
     public static IReadOnlyList<RetiredWorkflowName> Retired { get; } = new[]
     {
@@ -90,6 +91,8 @@ public static class WorkflowNames
         new RetiredWorkflowName("De novo", DeNovoReview, new Regex(@"\b(?i:from|open|in|and|to|the|by)\s+De [Nn]ovo\b(?=\s*(?:[.,;:)]|and\b|(?i:screen|step)\b|$))",
             RegexOptions.CultureInvariant), "Open De novo and press Search."),
         new RetiredWorkflowName("View > Families", "View > " + CurateFamilies, new Regex(@"\bView\s*>\s*Families\b", RegexOptions.CultureInvariant)),
+        new RetiredWorkflowName("Families", CurateFamilies, new Regex(@"\b(?:[Ii]n|[Uu]se)\s+Families\b|\bFamilies\s*>", RegexOptions.CultureInvariant),
+            "Unlock it in Families > Quantitation."),
         new RetiredWorkflowName("Analysis >", Tools + " >", new Regex(@"\bAnalysis\s*>", RegexOptions.CultureInvariant))
     };
 }

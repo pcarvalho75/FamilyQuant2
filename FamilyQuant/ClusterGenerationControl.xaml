@@ -15,7 +15,7 @@
         <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition Width="340"/></Grid.ColumnDefinitions>
         <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
             <DockPanel Margin="0,0,0,10">
-                <TextBlock Text="Families" Style="{StaticResource PageTitle}" DockPanel.Dock="Left"/>
+                <TextBlock x:Name="TextBlockCurateTitle" Text="Curate families" Style="{StaticResource PageTitle}" DockPanel.Dock="Left"/>
                 <Label x:Name="LabelNumberOfGroups" HorizontalAlignment="Right" ToolTip="Visible families and families in the file. Display filters never change the saved grouping or percentages."/>
             </DockPanel>
             <DockPanel Grid.Row="1" Margin="0,0,0,10">
@@ -98,6 +98,8 @@
             <StackPanel>
                 <GroupBox Header="Grouping" Margin="0,0,0,10">
                     <StackPanel>
+                        <TextBlock x:Name="TextBlockPartGroupByEvidence" Text="a Group by evidence" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="4,0,4,4"
+                                   ToolTip="Part a of Curate families: the four numbered steps, in this order, from UniProt evidence to Quantify."/>
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="1" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
@@ -136,7 +138,8 @@
                                     ToolTip="After Fetch family world, choose RAW files and an identification package in Quantify; computing takes minutes to hours."/>
                         </Grid>
                         <TextBlock Text="{Binding FullXicStepStatus}" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
-                        <TextBlock Text="Other grouping" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="4,12,4,4"/>
+                        <TextBlock x:Name="TextBlockPartGroupByWords" Text="b Group by words" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="4,12,4,4"
+                                   ToolTip="Part b of Curate families: group by a keyword list here, or by description words under Recluster by words."/>
                         <Button x:Name="ButtonSuperCluster" Content="Group by keywords" Click="ButtonSuperCluster_Click"
                                 ToolTip="Enter keywords, exclusions and the match rule in the grouping review. Review the protein ticks before applying; Undo reverses the grouping."/>
                         <Button x:Name="ButtonAlignSelected" Content="Align selected" Click="ButtonAlignSelected_Click" IsEnabled="False"

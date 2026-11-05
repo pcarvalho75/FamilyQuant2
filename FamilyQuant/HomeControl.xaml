@@ -101,7 +101,7 @@
                             </StackPanel>
                             <TextBlock Grid.Column="2" x:Name="TextBlockHomeStep2State" Style="{StaticResource HomeStepState}"/>
                             <Button Grid.Column="3" x:Name="ButtonHomeCurate" Click="ButtonHomeCurate_Click" MinWidth="150" VerticalAlignment="Center"
-                                    ToolTip="Returns to the open project, or opens a .fqproj or .fcf, for merging, renaming, editing User IDs and locking families by hand. Existing edits stay in memory."/>
+                                    ToolTip="Returns to the open project for merging, renaming, editing User IDs and locking families by hand; with none open, asks to open a .fqproj or .fcf or build families."/>
                         </Grid>
                     </Border>
                     <Border Style="{StaticResource HomeStepRow}">

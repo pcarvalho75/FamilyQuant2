@@ -22,7 +22,6 @@ internal static partial class Program
     /// </summary>
     private static readonly Dictionary<string, int> PendingRetiredNameSites = new(StringComparer.Ordinal)
     {
-        ["FamilyQuant/MainWindow.Help.cs|View > Families"] = 3,
     };
 
     private static void WorkflowNameTests()
@@ -47,7 +46,7 @@ internal static partial class Program
         Check("every retired name maps to a names-table entry and never matches its own replacement",
             WorkflowNames.Retired.Select(retired => retired.OldName).SequenceEqual(new[]
                 { "Start page", "New from database", "Build from database", "Compute full XIC", "Analytics / report",
-                  "De novo evidence", "De novo", "View > Families", "Analysis >" })
+                  "De novo evidence", "De novo", "View > Families", "Families", "Analysis >" })
             && WorkflowNames.Retired.All(retired => retired.Pattern.IsMatch(retired.Sample) && !retired.Pattern.IsMatch(retired.NewName)
                 && !retired.Pattern.IsMatch(retired.Sample.Replace(retired.OldName, retired.NewName, StringComparison.Ordinal))));
         Check("each user-visible step and screen name is a distinct names-table entry", new[]
@@ -74,7 +73,8 @@ internal static partial class Program
                 string d = "THE DE NOVO EVIDENCE SCREEN"; string e = "Analysis > Reannotate SEPro"; string f = $@"Build from database {"{"}";
                 string g = "Start page\n"; string h = "Recompute full XIC; export de novo evidence; " + count + " Quantify";
                 string i = "Filters shared by Quantify and De novo."; string j = "De novo sequence; De novo only: 3; Open De novo review.";
-                string k = "Recompute, or reconcile it in De Novo Step 2."; string l = "Or reconcile it in De novo review, step 2."; }
+                string k = "Recompute, or reconcile it in De Novo Step 2."; string l = "Or reconcile it in De novo review, step 2.";
+                string m = "Unlock it in Families before including it."; string n = "Families shown: 3; unlock it in Curate families > Quantitation."; }
             """";
         var xamlSites = XamlUiText("Fixture.xaml", plantedXaml).ToArray();
         var sourceSites = CSharpUiText("Fixture.cs", plantedSource).ToArray();
@@ -85,7 +85,7 @@ internal static partial class Program
             string.Join(", ", Names(xamlSites)));
         Check("the old-name check goes red on names planted in C# literals, a split literal included, never in a comment",
             Names(sourceSites).SequenceEqual(new[] { "Start page", "New from database", "Build from database", "De novo evidence",
-                "De novo", "View > Families", "Analysis >" }), string.Join(", ", Names(sourceSites)));
+                "De novo", "View > Families", "Families", "Analysis >" }), string.Join(", ", Names(sourceSites)));
         var bareStepName = WorkflowNames.Retired.Single(retired => retired.OldName == "De novo").Pattern;
         Check("the bare step name De novo is caught as a place, never as an adjective", sourceSites
             .Where(site => bareStepName.IsMatch(site.Text)).Select(site => site.Text).SequenceEqual(new[]

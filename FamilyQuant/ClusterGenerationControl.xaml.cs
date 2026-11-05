@@ -363,7 +363,7 @@ namespace FamilyQuant
 
         private async void ButtonRecalculateQuantitation_Click(object sender, RoutedEventArgs e)
         {
-            if (CurrentPLP == null) { ShowCurationOperationResult("In Families, open Quantitation > PatternLab (optional) and press Load PatternLab project before recalculating its shares."); return; }
+            if (CurrentPLP == null) { ShowCurationOperationResult("In Curate families, open Quantitation > PatternLab (optional) and press Load PatternLab project before recalculating its shares."); return; }
             await RunCurationAsync("Recalculate family shares", async operation =>
             {
                 var prepared = await Quantitation.PrepareRecalculationAsync(SelectedMode, SelectedSharedPolicy, operation);

@@ -54,11 +54,11 @@ namespace FamilyQuant
             sb.AppendLine("   Home or the sidebar opens it. Choose database, then Build families on a FASTA or");
             sb.AppendLine("   target-decoy (.T-R) database. That writes a Family Cluster File (.fcf) next to the");
             sb.AppendLine("   database: proteins grouped into families.");
-            sb.AppendLine("2. " + WorkflowNames.CurateFamilies + ": File > Open opens that .fcf in Families. Part a, " + WorkflowNames.GroupByEvidence + ",");
+            sb.AppendLine("2. " + WorkflowNames.CurateFamilies + ": File > Open opens that .fcf for curation. Part a, " + WorkflowNames.GroupByEvidence + ",");
             sb.AppendLine("   follows the numbered Grouping order below; part b, " + WorkflowNames.GroupByWords + ", merges families by");
             sb.AppendLine("   their description words (Recluster by words) or a keyword list (Group by keywords).");
             sb.AppendLine("3. " + WorkflowNames.Quantify + ", on Home or the sidebar, is the primary quantitation route.");
-            sb.AppendLine("   In Families, PatternLab (optional) offers Load PatternLab project for a .plp. It");
+            sb.AppendLine("   In Curate families, PatternLab (optional) offers Load PatternLab project for a .plp. It");
             sb.AppendLine("   must have been exported at PEPTIDE level - a protein-level export has nothing");
             sb.AppendLine("   this program can attribute to a family.");
             sb.AppendLine("   In Quantitation, choose Shared peptides for either source. Share of applies to");
@@ -187,7 +187,7 @@ namespace FamilyQuant
 
             sb.AppendLine("THE FAMILY OVERVIEW AND PROTEIN TABLE");
             sb.AppendLine("-------------------------------------");
-            sb.AppendLine("Families keeps the family overview, protein table and actions beside one another.");
+            sb.AppendLine("Curate families keeps the family overview, protein table and actions beside one another.");
             sb.AppendLine("Select a family to show its proteins; All proteins restores the filtered protein");
             sb.AppendLine("list. Each overview row shows its whole-family target count and one family share,");
             sb.AppendLine("including members hidden by display filters; it never adds the repeated protein");
@@ -216,7 +216,7 @@ namespace FamilyQuant
             sb.AppendLine("Group by words merges families by their description words (Recluster by words) or builds");
             sb.AppendLine("one family from a keyword list (Group by keywords); both are reviewed before they apply.");
             sb.AppendLine();
-            sb.AppendLine("Undo steps back through the changes you make in Families, one at a time, without");
+            sb.AppendLine("Undo steps back through the changes you make in Curate families, one at a time, without");
             sb.AppendLine("reloading the file. It reverses Recluster by words, Group by keywords, evidence");
             sb.AppendLine("grouping, a family name or checkbox edit, a batch edit, a User ID edit or lock removal,");
             sb.AppendLine("putting the changed family numbers, annotations and");
@@ -277,7 +277,7 @@ namespace FamilyQuant
             sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");
             sb.AppendLine("Cancelling leaves the open grouping unchanged and adds no Undo step.");
             sb.AppendLine();
-            sb.AppendLine("In Review grouping and the Families protein table, right-click to copy a UniProt code or");
+            sb.AppendLine("In Review grouping and the Curate families protein table, right-click to copy a UniProt code or");
             sb.AppendLine("description or to open its UniProt page. Ctrl+C copies the column you clicked, for");
             sb.AppendLine("every selected row, or the whole row after a click on a row number.");
             sb.AppendLine();

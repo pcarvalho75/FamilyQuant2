@@ -234,7 +234,7 @@ internal static partial class Program
                     string workflowBefore = Open(oldMain, "MenuItemWhereAmI"), workflowActual = Open(main, "MenuItemWhereAmI");
                     R(["8921B21922FE", "4B1A5D805051"], "native shell workflow Help", familyWorkflowBefore.Contains("You are at: Step 2 of 4", StringComparison.Ordinal)
                         && familyWorkflowBefore.Contains("Families loaded.", StringComparison.Ordinal)
-                        && familyWorkflowActual.Contains("You are at: Families |", StringComparison.Ordinal)
+                        && familyWorkflowActual.Contains("You are at: " + WorkflowNames.CurateFamilies + " |", StringComparison.Ordinal)
                         && familyWorkflowActual.Contains("Families loaded.", StringComparison.Ordinal)
                         && workflowBefore.Contains("You are at: De Novo evidence", StringComparison.Ordinal)
                         && workflowActual.Contains("You are at: " + WorkflowNames.DeNovoReview + " |", StringComparison.Ordinal)

@@ -10,7 +10,7 @@ entry, menu item, window title, message and Help page uses these names.
 |---|---|---|---|
 | | Home | | Sidebar (Alt+0), View > Home, the status bar |
 | 1 | Build families | Group by sequence identity, USearch | Home, sidebar, File > Build families (Ctrl+N), the Build screen |
-| 2 | Curate families | a Group by evidence, b Group by words | Home, sidebar, View > Curate families, the families screen with its two parts |
+| 2 | Curate families | a Group by evidence, b Group by words | Home, sidebar (Alt+2), View > Curate families, the Curate families screen with its two parts; with no project open it asks to open one or build families |
 | 3 | Quantify | Full XIC from the RAW files | Home, sidebar, the Quantify screen and its window |
 | 4 | Results | Family shares, figures and report | Home, sidebar, the Results screen |
 | 5 | De novo review (optional) | Inspect de novo calls beside PatternLab | Home, sidebar, the De novo review screen and its Help |
@@ -39,7 +39,8 @@ Home and the sidebar.
 of a command or screen is retired. Lower-case "de novo evidence" in a sentence is ordinary prose.
 "De novo" as an adjective (De novo sequence, De novo source) stays; the bare step name is caught
 where a sentence uses it as a place, such as "open De novo", "shared by Quantify and De novo" or
-"in De Novo Step 2".
+"in De Novo Step 2". Likewise "Families" as a word (Families shown, the Families sheet of a panel)
+stays, while the step name is caught as a place: "in Families", "use Families", "Families >".
 
 ## The check
 
