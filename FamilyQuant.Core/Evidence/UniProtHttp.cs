@@ -43,7 +43,8 @@ internal static class UniProtHttp
                 response.Dispose();
             }
             int seconds = waits[Math.Min(attempt - 1, waits.Length - 1)];
-            retryProgress?.Invoke("UniProt busy, retrying in " + seconds.ToString(System.Globalization.CultureInfo.CurrentCulture) + " s");
+            string provider = new Uri(url).Host.Equals("www.ebi.ac.uk", StringComparison.OrdinalIgnoreCase) ? "InterPro" : "UniProt";
+            retryProgress?.Invoke(provider + " busy, retrying in " + seconds.ToString(System.Globalization.CultureInfo.CurrentCulture) + " s");
             cancellationToken.ThrowIfCancellationRequested();
             await (options?.DelayAsync ?? Task.Delay)(TimeSpan.FromSeconds(seconds), cancellationToken).ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();

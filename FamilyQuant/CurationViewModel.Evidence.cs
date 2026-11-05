@@ -12,7 +12,7 @@ namespace FamilyQuant;
 public sealed partial class CurationViewModel
 {
     public async Task<EvidenceFetchOutcome> FetchEvidenceAsync(HttpMessageHandler? handler, OperationContext operation,
-        IReadOnlyCollection<int>? additionalPositionFamilyIds = null)
+        IReadOnlyCollection<int>? additionalPositionFamilyIds = null, bool retryPanelOnly = false, UniProtFetchOptions? options = null)
     {
         operation.Report("evidence", "Preparing the evidence fetch");
         var source = Document.MyExtendedFastaItems.Select(p => (Item: p, p.SequenceIdentifier, p.Domains, p.Evidence)).ToArray();
@@ -21,8 +21,10 @@ public sealed partial class CurationViewModel
         var positionAccessions = Quantitation.PositionAccessions(additionalPositionFamilyIds);
         var prepared = await Task.Run(() => FamilyClusterFile.FromJsonText(Document.ToJsonText()), operation.CancellationToken);
         operation.ThrowIfCancellationRequested();
-        var result = await EvidenceFetchSession.FetchAsync(prepared, handler, new CurationFetchProgress(operation),
-            cancellationToken: operation.CancellationToken, positionAccessions: positionAccessions);
+        var result = retryPanelOnly
+            ? await EvidenceFetchSession.RetryPanelAsync(prepared, handler, new CurationFetchProgress(operation), operation.CancellationToken, options)
+            : await EvidenceFetchSession.FetchAsync(prepared, handler, new CurationFetchProgress(operation),
+                cancellationToken: operation.CancellationToken, positionAccessions: positionAccessions, options: options);
         operation.ThrowIfCancellationRequested();
         if (!result.Changed) return result;
         operation.Commit(() =>
@@ -56,24 +58,23 @@ public sealed partial class CurationViewModel
     public static string DescribeEvidenceFetch(EvidenceFetchOutcome outcome)
     {
         var result = outcome.Evidence;
-        int missing = result.Asked - result.Found;
-        string message = result.Asked == 0
-            ? "No protein in this file has a UniProt code. A database of another origin stays unassigned."
-            : result.WithDomains.ToString("N0", CultureInfo.CurrentCulture) + " of " + result.Asked.ToString("N0", CultureInfo.CurrentCulture)
-                + " proteins have Pfam domains in " + result.Source + "."
-                + (missing > 0 ? " " + missing.ToString("N0", CultureInfo.CurrentCulture) + " entries were not found and kept their previous evidence." : "")
-                + " The Domains column and Search use the stored evidence. Proteins too short for Pfam may have none. Save the file to keep it.";
+        string message = result.Asked == 0 ? "Stored protein evidence kept."
+            : "Protein evidence saved for " + result.Found.ToString("N0", CultureInfo.CurrentCulture) + " proteins."
+                + (result.Missing > 0 ? " " + result.Missing.ToString("N0", CultureInfo.CurrentCulture) + " entries kept their previous evidence." : "");
         if (outcome.Panel is { IsComplete: true })
-            message += " Reviewed reference panel: " + outcome.Panel.Entries.Count.ToString("N0", CultureInfo.CurrentCulture)
-                + " entries from " + outcome.Panel.Families.Count.ToString("N0", CultureInfo.CurrentCulture) + " families, " + outcome.Panel.Release + ". Stored for offline grouping.";
-        message += result.PositionAsked > 0
-            ? " Position coordinates: " + result.PositionFound.ToString("N0", CultureInfo.CurrentCulture) + " of "
+            message += " Reference panel saved for " + outcome.Panel.Families.Count.ToString("N0", CultureInfo.CurrentCulture) + " families.";
+        if (outcome.Panel is { IsComplete: false } panel)
+        {
+            var status = System.Text.RegularExpressions.Regex.Match(panel.FailureReason, @"\bHTTP [0-9]{3}\b");
+            message += " Reference panel incomplete: " + panel.MissingFamilies.Count.ToString("N0", CultureInfo.CurrentCulture)
+                + " families missing" + (panel.TotalBatches > 0 ? " in " + panel.FailedBatches.ToString("N0", CultureInfo.CurrentCulture)
+                    + " of " + panel.TotalBatches.ToString("N0", CultureInfo.CurrentCulture) + " batches" : "")
+                + (status.Success ? " (" + status.Value + ")" : " (UniProt request failed)") + ". Retry panel.";
+        }
+        if (result.PositionAsked > 0)
+            message += " Position coordinates: " + result.PositionFound.ToString("N0", CultureInfo.CurrentCulture) + " of "
                 + result.PositionAsked.ToString("N0", CultureInfo.CurrentCulture) + " requested proteins in "
-                + result.PositionElapsedSeconds.ToString("N1", CultureInfo.CurrentCulture) + " s. Save to use them offline."
-            : " Position coordinates are fetched for proteins with mapped peptides after Compute.";
-        if (outcome.PanelFailure != null)
-            message += (result.Asked > 0 ? " Protein evidence was saved in the document. " : " Stored protein evidence was kept. ")
-                + "The reference panel is incomplete. Reason: " + outcome.PanelFailure.Message + " Retry Fetch evidence to complete the panel.";
+                + result.PositionElapsedSeconds.ToString("N1", CultureInfo.CurrentCulture) + " s.";
         return message;
     }
 }

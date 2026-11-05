@@ -103,5 +103,17 @@ internal static partial class Program
         System.IO.File.WriteAllText(batchPath, "{\"invalid\":true}");
         EvidenceFetcher.FetchAsync(FileFixture(), protein, options: proteinOptions).GetAwaiter().GetResult();
         Check("Z1c a corrupt saved reply is refetched instead of reused", protein.Downloads.Count == 1);
+        {
+            string blocked = Path.Combine(root, "blocked-cache");
+            Directory.CreateDirectory(root);
+            System.IO.File.WriteAllText(blocked, "A file blocks directory creation for this synthetic cache location.");
+            var blockedOptions = new UniProtFetchOptions { ResumeDirectory = blocked, DelayAsync = (_, _) => Task.CompletedTask };
+            using var requests = new ResumeUniProtHandler();
+            var withoutCache = ReferencePanelFetcher.FetchAsync(new[] { "F00000 family" }, requests, options: blockedOptions).GetAwaiter().GetResult();
+            var proteins = FileFixture();
+            var fetched = EvidenceFetcher.FetchAsync(proteins, requests, options: blockedOptions).GetAwaiter().GetResult();
+            Check("Z1e an unwritable cache location never fails panel or protein fetching",
+                withoutCache.IsComplete && withoutCache.Entries.Count == 1 && fetched.Found == 1001 && requests.Downloads.Count == 4);
+        }
     }
 }

@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Evidence;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -72,6 +73,21 @@ namespace FamilyQuant.Tests
                 // A failed rerun must not leave a prior success marker looking current.
                 if (File.Exists(manifestPath)) File.Delete(manifestPath);
                 var source = fcfPath == null ? Fixture() : FamilyClusterFile.Load(fcfPath);
+                bool incompletePanel = args.Contains("--screen-incomplete-panel", StringComparer.Ordinal);
+                if (incompletePanel)
+                {
+                    if (fcfPath != null) throw new ArgumentException("The incomplete-panel screen uses the synthetic fixture only.");
+                    source.EvidenceSource = new EvidenceProvenance { Provider = "UniProt", Release = "fixture", ReferencePanel = new ReferencePanel
+                    {
+                        Provider = "UniProt", Release = "fixture", Families = new() { "Example family" }, MissingFamilies = new() { "Example family" },
+                        FailureReason = "UniProt server error, HTTP 500", TotalBatches = 64, FailedBatches = 1,
+                    } };
+                    foreach (var protein in source.MyExtendedFastaItems)
+                    {
+                        protein.Evidence = new ProteinEvidence { Family = "Example family" };
+                        protein.Domains = "Example domain";
+                    }
+                }
                 var project = projectPath == null
                     ? (fcf: Fixture(), quant: new List<QuantRow>(), manifest: new QuantManifest())
                     : ProjectStore.ReadFqproj(projectPath);
@@ -106,6 +122,7 @@ namespace FamilyQuant.Tests
                     InputSha256 = inputHashes,
                     InputsUnchanged = true,
                     UseShellStatusBar = shellStatus,
+                    IncompletePanelFixture = incompletePanel,
                     OperatingSystem = Environment.OSVersion.VersionString,
                     Runtime = Environment.Version.ToString(),
                     Capture = finish ? "C14 native WPF root DPI 100/125/150%; off-screen client captures; OS monitor DPI unchanged; no keyboard focus requested."
@@ -191,6 +208,8 @@ namespace FamilyQuant.Tests
                     "MenuItemComputeXic", "MenuItemReanotateSEPro" })
                     Field<MenuItem>(main, command).IsEnabled = true;
                 Present(main, curation, "cgc");
+                if (source.EvidenceSource?.ReferencePanel is { IsComplete: false })
+                    Call(curation, "SetCurationOperationStatus", "Protein evidence saved for 100 proteins. Reference panel incomplete: 1 family missing in 1 of 64 batches (HTTP 500). Retry panel.");
                 Capture(Screens[2], main);
                 // The tab is temporary. C1 removes it; capture still works once the table is always visible.
                 var tabs = Walk(curation).OfType<TabControl>().FirstOrDefault();

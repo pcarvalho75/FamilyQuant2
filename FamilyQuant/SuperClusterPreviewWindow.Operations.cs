@@ -32,7 +32,7 @@ public partial class SuperClusterPreviewWindow
 
     private sealed class GroupingTaskProgress(OperationContext operation) : IProgress<FetchProgress>
     {
-        public void Report(FetchProgress value) => operation.Report("taxonomy", "Asking UniProt about taxon "
+        public void Report(FetchProgress value) => operation.Report("taxonomy", value.Message.Length > 0 ? value.Message : "Asking UniProt about taxon "
             + value.CompletedBatches.ToString(CultureInfo.CurrentCulture) + " of "
             + value.TotalBatches.ToString(CultureInfo.CurrentCulture) + "\nNeeds an internet connection",
             value.CompletedBatches, value.TotalBatches);

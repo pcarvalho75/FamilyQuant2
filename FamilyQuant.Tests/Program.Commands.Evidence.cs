@@ -13,13 +13,16 @@ internal static partial class Program
         new("--test-evidence-fetch-atomic", 1, TestCommandPhase.Raw, EvidenceAtomicRequested, RunEvidenceAtomic),
         new("--test-panel-recovery", 1, TestCommandPhase.Raw, args => args.Contains("--test-panel-recovery", StringComparer.Ordinal), (_, workDir) =>
         {
-            PanelRecoveryTests(workDir);
+            EnsureApplication();
+            PanelRecoveryTests(Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests"));
+            PanelRetryUiTests();
+            InheritedRetryProgressTests();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),
         new("--test-evidence-resume", 1, TestCommandPhase.Raw, args => args.Contains("--test-evidence-resume", StringComparer.Ordinal), (_, workDir) =>
         {
-            EvidenceResumeTests(workDir);
+            EvidenceResumeTests(Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests"));
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),
@@ -48,7 +51,9 @@ internal static partial class Program
         EvidenceFetchAtomicTests();
         EvidenceFetchCoordinatorTests();
         EvidenceFetchTests();
-        ProteinDomainsTests(workDir);
+        string folder = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests", "fetch-focused");
+        Directory.CreateDirectory(folder);
+        ProteinDomainsTests(folder);
         Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         return failed == 0 ? 0 : 1;
     }
