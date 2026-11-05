@@ -24,8 +24,8 @@ internal static partial class Program
         var table = UiField<DataGrid>(screen, "DataGridResultGrid")!;
         Check("curation always shows its table without Controls or Data Browser tabs",
             !WalkTree(screen).OfType<TabControl>().Any() && table.IsVisible && table.ActualHeight > 200);
-        Check("curation hides search IDs and decoys by default while keeping all document rows",
-            UiField<DataGridTextColumn>(screen, "ColumnUSearchId")!.Visibility == Visibility.Collapsed
+        Check("curation shows search IDs and hides decoys by default while keeping all document rows",
+            UiField<DataGridTextColumn>(screen, "ColumnUSearchId")!.Visibility == Visibility.Visible
             && UiField<CheckBox>(screen, "CheckBoxExcludeReverse")!.IsChecked == true
             && table.Items.Count == 1 && file.MyExtendedFastaItems.Count == 2);
         Check("curation shows accession in Locus while retaining the complete protein identifier",

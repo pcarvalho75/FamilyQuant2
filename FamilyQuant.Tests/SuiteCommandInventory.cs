@@ -360,6 +360,8 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-setup", "FamilyQuant.Tests.Program.SetupTests(System.String)"),
         SuiteCommandRule.Covered("--test-update-completion", "FamilyQuant.Tests.Program.UpdateCompletionTests()"),
         SuiteCommandRule.Covered("--test-close-project", "FamilyQuant.Tests.Program.CloseProjectTests()"),
+        SuiteCommandRule.Covered("--test-family-grid-layout", "FamilyQuant.Tests.Program.FamilyGridLayoutTests(System.String)"),
+        SuiteCommandRule.Covered("--test-table-appearance", "FamilyQuant.Tests.Program.TableAppearanceTests()"),
         SuiteCommandRule.Covered("--test-setup-window", "FamilyQuant.Tests.Program.SetupWindowTests()"),
         SuiteCommandRule.Excluded("--test-setup-native", "Requires an explicitly built embedded Setup asset and a fresh LocalAppData Temp root; executes only /test-mode with fake machine integration and reads installed EXE/DLL version metadata without starting the app."),
         SuiteCommandRule.Covered("--test-html-coverage", "FamilyQuant.Tests.Program.HtmlCoverageTests()"),
