@@ -11,7 +11,7 @@ namespace FamilyQuant.Setup;
 /// <summary>The interactive surface only. All machine changes belong to ISetupController.</summary>
 public partial class InstallerWindow : Window
 {
-    internal enum SetupPage { Welcome, Folder, Options, Progress, Done, Uninstall, Error }
+    internal enum SetupPage { Welcome, ConfirmOlder, Folder, Options, Progress, Done, Uninstall, Error }
 
     private readonly ISetupController _controller;
     private ExistingInstallation? _existing;
@@ -20,7 +20,11 @@ public partial class InstallerWindow : Window
     private bool _busy, _dark = true, _startupError, _removed, _closeAfterCancel;
     private string _directory = "";
     public int ExitCode { get; private set; } = 1;
-    private bool IsUpgrade => _existing is not null && !_controller.Options.Uninstall;
+    private bool HasExisting => _existing is not null && !_controller.Options.Uninstall;
+    private int VersionComparison => HasExisting ? SetupVersions.Compare(_existing!.Version, _controller.PayloadVersion) : -1;
+    private bool IsUpgrade => HasExisting && VersionComparison < 0;
+    private bool IsAlreadyInstalled => HasExisting && VersionComparison >= 0;
+    private bool _allowOlderVersion;
 
     public InstallerWindow(ISetupController controller)
     {
@@ -43,9 +47,9 @@ public partial class InstallerWindow : Window
             _directory = _controller.Options.Directory ?? _existing?.Directory ?? _controller.DefaultDirectory;
             FolderBox.Text = _directory;
             DesktopOption.IsChecked = _controller.Options.DesktopShortcut;
-            FolderBox.IsReadOnly = IsUpgrade;
-            ChangeFolderButton.IsEnabled = !IsUpgrade;
-            FolderNote.Text = IsUpgrade ? "Your current installation is updated in place." : "Only your Windows account uses this installation.";
+            FolderBox.IsReadOnly = HasExisting;
+            ChangeFolderButton.IsEnabled = !HasExisting;
+            FolderNote.Text = HasExisting ? "Your current installation is changed in place." : "Only your Windows account uses this installation.";
             if (_controller.Options.Uninstall && _existing is null && _controller.Options.Directory is null)
             {
                 _startupError = true;
@@ -67,26 +71,37 @@ public partial class InstallerWindow : Window
         foreach (var panel in new[] { WelcomePanel, FolderPanel, OptionsPanel, ProgressPanel, DonePanel, UninstallPanel, ErrorPanel })
             panel.Visibility = Visibility.Collapsed;
         PanelFor(page).Visibility = Visibility.Visible;
-        BackButton.Visibility = page is SetupPage.Folder or SetupPage.Options ||
+        BackButton.Visibility = page is SetupPage.ConfirmOlder or SetupPage.Folder or SetupPage.Options ||
             (page == SetupPage.Error && !_startupError && !_launchFailed) ? Visibility.Visible : Visibility.Collapsed;
         CancelButton.Visibility = page == SetupPage.Done ? Visibility.Collapsed : Visibility.Visible;
         PrimaryButton.Visibility = page == SetupPage.Progress ? Visibility.Collapsed : Visibility.Visible;
         PrimaryButton.IsEnabled = true;
         CancelButton.IsEnabled = true;
         CancelButton.Content = page == SetupPage.Error ? "_Close" : "_Cancel";
+        ExistingActionButton.Visibility = page == SetupPage.Welcome && IsAlreadyInstalled ? Visibility.Visible : Visibility.Collapsed;
         switch (page)
         {
             case SetupPage.Welcome:
                 StepLabel.Text = "GET STARTED";
-                PageTitle.Text = IsUpgrade ? $"Upgrade FamilyQuant {_existing!.Version} to {_controller.PayloadVersion}" : "Welcome to FamilyQuant";
-                PageDescription.Text = IsUpgrade ? "Keep your workspace and bring the app up to date." : "Set up FamilyQuant for your Windows account.";
-                WelcomeSummary.Text = IsUpgrade ? "Your projects, reports and settings stay." : "No administrator account is needed.";
-                PrimaryButton.Content = "_Continue";
+                PageTitle.Text = IsAlreadyInstalled ? "FamilyQuant is already installed" : IsUpgrade
+                    ? $"Upgrade FamilyQuant {SetupVersions.Display(_existing!.Version)} to {SetupVersions.Display(_controller.PayloadVersion)}" : "Welcome to FamilyQuant";
+                PageDescription.Text = IsAlreadyInstalled ? SetupVersions.AlreadyInstalled(_existing!.Version, _controller.PayloadVersion)
+                    : IsUpgrade ? "Keep your workspace and bring the app up to date." : "Set up FamilyQuant for your Windows account.";
+                WelcomeSummary.Text = IsAlreadyInstalled ? "" : IsUpgrade ? "Your projects, reports and settings stay." : "No administrator account is needed.";
+                PrimaryButton.Content = IsAlreadyInstalled ? "_Open FamilyQuant" : "_Continue";
+                ExistingActionButton.Content = VersionComparison > 0 ? "_Install this older version" : "_Repair";
+                break;
+            case SetupPage.ConfirmOlder:
+                StepLabel.Text = "CONFIRM OLDER VERSION";
+                PageTitle.Text = "Install this older version?";
+                PageDescription.Text = $"Replace FamilyQuant {SetupVersions.Display(_existing!.Version)} with {SetupVersions.Display(_controller.PayloadVersion)}?";
+                WelcomeSummary.Text = "";
+                PrimaryButton.Content = "_Continue with older version";
                 break;
             case SetupPage.Folder:
                 StepLabel.Text = "INSTALL LOCATION";
                 PageTitle.Text = "A place for FamilyQuant";
-                PageDescription.Text = IsUpgrade ? "The upgrade uses your existing app folder." : "Choose where the app will be installed.";
+                PageDescription.Text = HasExisting ? "Setup uses your existing app folder." : "Choose where the app will be installed.";
                 PrimaryButton.Content = "_Continue";
                 break;
             case SetupPage.Options:
@@ -94,11 +109,12 @@ public partial class InstallerWindow : Window
                 PageTitle.Text = "Make it yours";
                 PageDescription.Text = "Choose a shortcut and how to finish.";
                 OptionsFolder.Text = _directory;
-                PrimaryButton.Content = IsUpgrade ? "_Upgrade" : "_Install";
+                PrimaryButton.Content = _allowOlderVersion ? "_Install older version" : IsAlreadyInstalled ? "_Repair" : IsUpgrade ? "_Upgrade" : "_Install";
                 break;
             case SetupPage.Progress:
                 StepLabel.Text = "IN PROGRESS";
-                PageTitle.Text = _controller.Options.Uninstall ? "Removing FamilyQuant" : IsUpgrade ? "Upgrading FamilyQuant" : "Installing FamilyQuant";
+                PageTitle.Text = _controller.Options.Uninstall ? "Removing FamilyQuant" : IsUpgrade ? "Upgrading FamilyQuant"
+                    : IsAlreadyInstalled && !_allowOlderVersion ? "Repairing FamilyQuant" : "Installing FamilyQuant";
                 PageDescription.Text = "Setup will let you know when it is finished.";
                 break;
             case SetupPage.Done:
@@ -125,7 +141,7 @@ public partial class InstallerWindow : Window
 
     private FrameworkElement PanelFor(SetupPage page) => page switch
     {
-        SetupPage.Welcome => WelcomePanel, SetupPage.Folder => FolderPanel, SetupPage.Options => OptionsPanel,
+        SetupPage.Welcome or SetupPage.ConfirmOlder => WelcomePanel, SetupPage.Folder => FolderPanel, SetupPage.Options => OptionsPanel,
         SetupPage.Progress => ProgressPanel, SetupPage.Done => DonePanel, SetupPage.Uninstall => UninstallPanel,
         _ => ErrorPanel
     };
@@ -146,7 +162,12 @@ public partial class InstallerWindow : Window
         if (_busy) return;
         switch (_page)
         {
-            case SetupPage.Welcome: ShowPage(SetupPage.Folder); break;
+            case SetupPage.Welcome:
+                if (IsAlreadyInstalled) { OpenExisting(); return; }
+                ShowPage(SetupPage.Folder); break;
+            case SetupPage.ConfirmOlder:
+                _allowOlderVersion = true;
+                ShowPage(SetupPage.Folder); break;
             case SetupPage.Folder:
                 if (TryReadFolder()) ShowPage(SetupPage.Options);
                 break;
@@ -193,7 +214,7 @@ public partial class InstallerWindow : Window
             var progress = new Progress<SetupProgress>(update => { if (_busy) ApplyProgress(update); });
             var result = _controller.Options.Uninstall
                 ? await _controller.UninstallAsync(_directory, progress, _operationCancellation.Token)
-                : await _controller.InstallAsync(_directory, DesktopOption.IsChecked == true, progress, _operationCancellation.Token);
+                : await _controller.InstallAsync(_directory, DesktopOption.IsChecked == true, progress, _operationCancellation.Token, _allowOlderVersion);
             ExitCode = result.ExitCode;
             if (result.Success)
             {
@@ -243,7 +264,7 @@ public partial class InstallerWindow : Window
             if (!Path.IsPathFullyQualified(FolderBox.Text.Trim())) throw new ArgumentException();
             _directory = Path.GetFullPath(FolderBox.Text.Trim());
             FolderBox.Text = _directory;
-            FolderNote.Text = IsUpgrade ? "Your current installation is updated in place." : "Only your Windows account uses this installation.";
+            FolderNote.Text = HasExisting ? "Your current installation is changed in place." : "Only your Windows account uses this installation.";
             return true;
         }
         catch (Exception error) when (error is ArgumentException or NotSupportedException or PathTooLongException)
@@ -260,12 +281,31 @@ public partial class InstallerWindow : Window
         if (Path.IsPathFullyQualified(FolderBox.Text)) dialog.InitialDirectory = FolderBox.Text;
         if (dialog.ShowDialog(this) == true) FolderBox.Text = dialog.FolderName;
     }
-    private void BackClick(object sender, RoutedEventArgs e) => ShowPage(_page switch
+    private void ExistingActionClick(object sender, RoutedEventArgs e)
+    {
+        if (_page != SetupPage.Welcome || !IsAlreadyInstalled || _busy) return;
+        ShowPage(VersionComparison > 0 ? SetupPage.ConfirmOlder : SetupPage.Folder);
+    }
+    private void OpenExisting()
+    {
+        try { _controller.Launch(_directory); ExitCode = 0; Close(); }
+        catch (Exception error)
+        {
+            _launchFailed = true;
+            ShowError("FamilyQuant could not open", "Open FamilyQuant from its shortcut.", error.Message);
+            PrimaryButton.Content = "_Finish";
+        }
+    }
+    private void BackClick(object sender, RoutedEventArgs e)
+    {
+        if (_page == SetupPage.Folder) _allowOlderVersion = false;
+        ShowPage(_page switch
     {
         SetupPage.Options => SetupPage.Folder,
         SetupPage.Error => _controller.Options.Uninstall ? SetupPage.Uninstall : SetupPage.Options,
         _ => SetupPage.Welcome
-    });
+        });
+    }
     private void CancelClick(object sender, RoutedEventArgs e)
     {
         if (_busy) RequestCancel(); else Close();

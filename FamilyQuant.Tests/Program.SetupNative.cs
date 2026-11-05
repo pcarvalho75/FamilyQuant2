@@ -95,6 +95,18 @@ internal static partial class Program
         Check("native silent upgrade over older fake install preserves data settings and desktop preference", upgraded.Exit == 0 && upgraded.Result.Success
             && platform.Current.Desktop && SetupProduct.Hash(personal) == dataHash && File.ReadAllText(extraFile) == "unlisted personal project");
         AssertMetadata("native upgrade");
+        string currentManifest = File.ReadAllText(manifestPath);
+        var nextVersion = Version.Parse(expectedVersion);
+        string newerVersion = new Version(nextVersion.Major, nextVersion.Minor, nextVersion.Build + 1, 0).ToString();
+        File.WriteAllText(manifestPath, JsonSerializer.Serialize(manifest with { Version = newerVersion }, SetupProduct.Json));
+        platform.SetState(platform.Current with { Registration = platform.Current.Registration! with { Version = newerVersion } });
+        string beforeDowngradeHash = SetupProduct.Hash(Path.Combine(target, SetupProduct.AppExe));
+        var downgrade = Run(setupExe, "/waitpid=12345");
+        Check("native silent downgrade refuses with both versions, no files changed and no launch", downgrade.Exit != 0 && !downgrade.Result.Success
+            && downgrade.Result.Message == SetupVersions.AlreadyInstalled(newerVersion, expectedVersion)
+            && SetupProduct.Hash(Path.Combine(target, SetupProduct.AppExe)) == beforeDowngradeHash && platform.Current.LaunchCount == 0);
+        File.WriteAllText(manifestPath, currentManifest);
+        platform.SetState(platform.Current with { Registration = platform.Current.Registration! with { Version = expectedVersion } });
         platform.SetState(platform.Current with { Running = true });
         string appHash = SetupProduct.Hash(Path.Combine(target, SetupProduct.AppExe));
         var running = Run(setupExe);

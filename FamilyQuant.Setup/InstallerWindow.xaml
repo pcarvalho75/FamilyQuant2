@@ -45,6 +45,8 @@
                                 </StackPanel>
                             </Grid>
                         </Border>
+                        <Button x:Name="ExistingActionButton" Content="_Repair" Style="{StaticResource QuietButton}" HorizontalAlignment="Left"
+                                Visibility="Collapsed" Margin="0,16,0,0" Click="ExistingActionClick"/>
                     </StackPanel>
                     <StackPanel x:Name="FolderPanel" Visibility="Collapsed">
                         <Label Content="_Install folder" Target="{Binding ElementName=FolderBox}" Foreground="{DynamicResource TextBrush}" Padding="0,0,0,9"/>

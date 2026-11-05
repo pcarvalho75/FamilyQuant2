@@ -29,7 +29,7 @@ public interface ISetupController
     ExistingInstallation? DetectExisting();
     bool IsAppRunning(string directory);
     Task<SetupResult> InstallAsync(string directory, bool desktopShortcut, IProgress<SetupProgress>? progress = null,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default, bool allowOlderVersion = false);
     Task<SetupResult> UninstallAsync(string directory, IProgress<SetupProgress>? progress = null,
         CancellationToken cancellationToken = default);
     void Launch(string directory);

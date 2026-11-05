@@ -8,7 +8,7 @@ using System.Windows.Threading;
 namespace FamilyQuant.Setup;
 
 /// <summary>Off-screen UI proof. This entry constructs only an inert controller, never the real engine.</summary>
-public static class InstallerWindowPreview
+public static partial class InstallerWindowPreview
 {
     /// <summary>Safe focused tests for the ordinary suite; STA thread, fake controller only, no files written.</summary>
     public static IReadOnlyList<string> CheckInteractions()
@@ -49,8 +49,11 @@ public static class InstallerWindowPreview
             {
                 var controller = new PreviewController
                 {
-                    Existing = screen.StartsWith("upgrade", StringComparison.Ordinal) || screen.StartsWith("uninstall", StringComparison.Ordinal)
+                    Existing = screen is "older" or "confirm-older" ? new(PreviewController.Folder, "2.1.7.0", true, true)
+                        : screen == "equal" ? new(PreviewController.Folder, "2.1.4.0", true, true)
+                        : screen.StartsWith("upgrade", StringComparison.Ordinal) || screen.StartsWith("uninstall", StringComparison.Ordinal)
                         ? new ExistingInstallation(PreviewController.Folder, "2.1.2", true, true) : null,
+                    PayloadVersion = screen is "older" or "equal" or "confirm-older" ? "2.1.4.0" : "2.1.3",
                     Options = new SetupOptions { Uninstall = screen.StartsWith("uninstall", StringComparison.Ordinal) }
                 };
                 var window = new InstallerWindow(controller);
@@ -88,7 +91,8 @@ public static class InstallerWindowPreview
     private static readonly string[] Screens =
     {
         "welcome", "folder", "options", "progress", "done", "running-app", "error",
-        "uninstall", "uninstall-progress", "uninstall-done", "upgrade", "upgrade-folder", "upgrade-progress", "canceled"
+        "uninstall", "uninstall-progress", "uninstall-done", "upgrade", "upgrade-folder", "upgrade-progress", "canceled",
+        "older", "equal", "confirm-older"
     };
     private static void Require(bool condition, string description)
     {
@@ -148,6 +152,7 @@ public static class InstallerWindowPreview
         window = new InstallerWindow(upgrade);
         Check(window.PageTitle.Text == "Upgrade FamilyQuant 2.1.2 to 2.1.3" && window.FolderBox.IsReadOnly && !window.ChangeFolderButton.IsEnabled, "upgrade names both versions and keeps the existing folder");
         window.Close();
+        CheckVersionChoices(checks);
         CheckFailuresAndCancellation(checks);
     }
 
@@ -217,7 +222,7 @@ public static class InstallerWindowPreview
         public const string Folder = @"C:\Users\User\AppData\Local\Programs\FamilyQuant2";
         public SetupOptions Options { get; init; } = new();
         public string DefaultDirectory => Folder;
-        public string PayloadVersion => "2.1.3";
+        public string PayloadVersion { get; init; } = "2.1.3";
         public ExistingInstallation? Existing { get; init; }
         public ExistingInstallation? DetectExisting() => Existing;
         public bool Running { get; set; }
@@ -231,10 +236,12 @@ public static class InstallerWindowPreview
         public int Launches { get; private set; }
         public string? LastDirectory { get; private set; }
         public bool Desktop { get; private set; }
+        public bool LastAllowOlderVersion { get; private set; }
         public bool IsAppRunning(string directory) => Running;
-        public async Task<SetupResult> InstallAsync(string directory, bool desktopShortcut, IProgress<SetupProgress>? progress = null, CancellationToken cancellationToken = default)
+        public async Task<SetupResult> InstallAsync(string directory, bool desktopShortcut, IProgress<SetupProgress>? progress = null,
+            CancellationToken cancellationToken = default, bool allowOlderVersion = false)
         {
-            Installs++; LastDirectory = directory; Desktop = desktopShortcut;
+            Installs++; LastDirectory = directory; Desktop = desktopShortcut; LastAllowOlderVersion = allowOlderVersion;
             return await Finish(directory, progress, cancellationToken);
         }
         public async Task<SetupResult> UninstallAsync(string directory, IProgress<SetupProgress>? progress = null, CancellationToken cancellationToken = default)
@@ -273,7 +280,8 @@ public partial class InstallerWindow
         SetTheme(dark);
         ShowPage(screen switch
         {
-            "welcome" or "upgrade" => SetupPage.Welcome,
+            "welcome" or "upgrade" or "older" or "equal" => SetupPage.Welcome,
+            "confirm-older" => SetupPage.ConfirmOlder,
             "folder" or "upgrade-folder" => SetupPage.Folder,
             "options" => SetupPage.Options,
             "progress" or "upgrade-progress" or "uninstall-progress" => SetupPage.Progress,

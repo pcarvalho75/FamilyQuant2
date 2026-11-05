@@ -94,6 +94,22 @@ internal static partial class Program
             && File.ReadAllText(Path.Combine(item.Target, "notes.txt")) == "keep notes" && item.Platform.Entry?.Version == "2.1.3.0");
         Check("setup refuses a downgrade and preserves the current installation", Throws<IOException>(() => item.Engine.Install(SetupFixturePayload("2.1.1.0"), item.Target, false))
             && item.Platform.Entry?.Version == "2.1.3.0" && File.ReadAllText(Path.Combine(item.Target, SetupProduct.AppExe)) == "new program 2.1.3.0");
+        var downgradeOptions = new SetupOptions { Silent = true, WaitPid = 42, TestMode = true,
+            TestRoot = Path.GetDirectoryName(item.Target), Directory = item.Target };
+        var downgradeController = new SetupController(downgradeOptions, SetupFixturePayload("2.1.1.0"), source, item.Platform);
+        var refused = downgradeController.InstallAsync(item.Target, false).GetAwaiter().GetResult();
+        Check("Z2c silent downgrade exits nonzero with both versions and no launch", !refused.Success && refused.ExitCode != 0
+            && refused.Message == "FamilyQuant 2.1.3 is already installed. This setup holds 2.1.1."
+            && item.Platform.Entry?.Version == "2.1.3.0" && item.Platform.LaunchCount == 0);
+        refused = downgradeController.InstallAsync(item.Target, false, allowOlderVersion: true).GetAwaiter().GetResult();
+        Check("Z2c silent API cannot bypass downgrade refusal", !refused.Success && item.Platform.Entry?.Version == "2.1.3.0");
+        downgradeController = new(downgradeOptions with { Silent = false, WaitPid = null }, SetupFixturePayload("2.1.1.0"), source, item.Platform);
+        var confirmed = downgradeController.InstallAsync(item.Target, false, allowOlderVersion: true).GetAwaiter().GetResult();
+        Check("Z2c explicitly confirmed interactive downgrade keeps user files", confirmed.Success && item.Platform.Entry?.Version == "2.1.1.0"
+            && File.ReadAllText(Path.Combine(item.Target, "notes.txt")) == "keep notes" && File.ReadAllText(item.Data) == "user data"
+            && item.Platform.LaunchCount == 0);
+        Check("Z2c version comparison normalizes missing zero parts and orders numerically", SetupVersions.Compare("2.1.3", "2.1.3.0") == 0
+            && SetupVersions.Compare("2.1.10.0", "2.1.9.0") > 0);
 
         item = Case("portable"); Directory.CreateDirectory(item.Target);
         File.WriteAllText(Path.Combine(item.Target, SetupProduct.AppExe), "older portable executable"); item.Platform.PortableVersion = new(2, 1, 2, 0);

@@ -24,9 +24,14 @@ public sealed class SetupController : ISetupController
     }
     public ExistingInstallation? DetectExisting() => engine.DetectExisting(DefaultDirectory);
     public bool IsAppRunning(string directory) => platform.IsAppRunning(directory);
-    public Task<SetupResult> InstallAsync(string directory, bool desktopShortcut, IProgress<SetupProgress>? progress = null, CancellationToken token = default)
-        => Task.Run(() => Run(directory, false, () => engine.Install(payload, directory,
-            desktopShortcut || (Options.Silent && platform.GetRegistration()?.DesktopShortcut == true), progress, token), token), CancellationToken.None);
+    public Task<SetupResult> InstallAsync(string directory, bool desktopShortcut, IProgress<SetupProgress>? progress = null, CancellationToken token = default,
+        bool allowOlderVersion = false)
+        => Task.Run(() => Run(directory, false, () =>
+        {
+            if (allowOlderVersion && Options.Silent) throw new IOException("Silent setup cannot install an older version.");
+            engine.Install(payload, directory, desktopShortcut || (Options.Silent && platform.GetRegistration()?.DesktopShortcut == true),
+                progress, token, allowOlderVersion);
+        }, token), CancellationToken.None);
     public Task<SetupResult> UninstallAsync(string directory, IProgress<SetupProgress>? progress = null, CancellationToken token = default)
         => Task.Run(() => Run(directory, true, () => engine.Uninstall(directory, progress, token), token), CancellationToken.None);
     public void Launch(string directory) => platform.Launch(directory);
