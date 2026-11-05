@@ -360,6 +360,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ProjectCommandReadyTests(Path.Combine(workDir, "project-command-ready")));
             suite.AddWithApplication(() => ComputeProgressTests(Path.Combine(workDir, "compute-progress")));
             suite.Add(() => FamilyViewTests());
+            suite.AddWithApplication(() => FamilyGridLayoutTests());
             suite.Add(() => TableAppearanceTests());
             suite.Add(() => EvidenceReviewModelTests());
             suite.Add(() => EvidenceCoverageUiTests(Path.Combine(workDir, "evidence-coverage-ui")));

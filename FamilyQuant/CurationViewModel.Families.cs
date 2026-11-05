@@ -51,7 +51,7 @@ public sealed partial class CurationViewModel
     }
     public IReadOnlyList<FastaItemExtended> SelectedFamilyProteins => SelectedFamily == null ? Rows
         : visibleFamilyMembers.TryGetValue(SelectedFamily.FamilyId, out var members) ? members : Array.Empty<FastaItemExtended>();
-    public string ProteinHeading => SelectedFamily == null ? "All visible proteins" : "Proteins in family " + SelectedFamily.FamilyId;
+    public string ProteinHeading => SelectedFamily == null ? "Proteins in this family" : "Proteins in this family: " + SelectedFamily.Name;
 
     private void RefreshFamilyIndex()
     {
