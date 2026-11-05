@@ -94,7 +94,8 @@ namespace FamilyQuant.Tests
                     Themes.ThemeManager.Apply(theme == "system" ? Themes.AppTheme.System
                         : theme == "dark" ? Themes.AppTheme.Dark : Themes.AppTheme.Light);
                     CaptureTheme(theme, source, project.fcf, project.quant, project.manifest, output, captures,
-                        fcfPath ?? "synthetic fixture.fcf", projectPath ?? "synthetic fixture.fqproj", shellStatus, finish, finishCaptures);
+                        fcfPath ?? "synthetic fixture.fcf", projectPath ?? "synthetic fixture.fqproj", shellStatus, finish, finishCaptures,
+                        args.Contains("--screen-update-complete", StringComparer.Ordinal));
                 }
                 foreach (var input in inputHashes)
                     if (FileHash(input.Key) != input.Value)
@@ -139,7 +140,7 @@ namespace FamilyQuant.Tests
 
         private static void CaptureTheme(string theme, FamilyClusterFile source, FamilyClusterFile projectFile,
             List<QuantRow> quant, QuantManifest manifest, string output, List<CaptureInfo> captures,
-            string curationPath, string projectPath, bool shellStatus, bool finish, List<FinishCapture> finishCaptures)
+            string curationPath, string projectPath, bool shellStatus, bool finish, List<FinishCapture> finishCaptures, bool updateComplete)
         {
             var main = new MainWindow();
             ShowOffScreen(main);
@@ -169,6 +170,13 @@ namespace FamilyQuant.Tests
                     }
                 }
 
+                if (updateComplete)
+                {
+                    string markerRoot = Path.Combine(Path.GetTempPath(), "screen-update-" + Guid.NewGuid().ToString("N"));
+                    Directory.CreateDirectory(markerRoot);
+                    File.WriteAllText(Path.Combine(markerRoot, ".familyquant-update-complete"), "2.1.7.0");
+                    if (!main.ShowUpdateCompletionNotice(markerRoot, "2.1.7.0")) throw new InvalidOperationException("Update notice was not shown.");
+                }
                 Capture(Screens[0], main);
                 Call(main, "MenuRunUSearch_Click", main, new RoutedEventArgs());
                 Capture(Screens[1], main);

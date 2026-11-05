@@ -39,7 +39,11 @@ public sealed class SetupController : ISetupController
             operation();
             if (!uninstall && Options.Silent && Options.WaitPid != null)
             {
-                try { platform.Launch(directory); }
+                try
+                {
+                    FamilyQuant.Deployment.UpdateCompletionMarker.Write(directory, PayloadVersion);
+                    platform.Launch(directory);
+                }
                 catch (Exception error)
                 {
                     return new(false, 4, "FamilyQuant was installed but could not reopen: " + error.Message + " Open FamilyQuant from its shortcut.", directory);

@@ -13,6 +13,7 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../FamilyQuant/Deployment/UpdateCompletionMarker.cs" Link="UpdateCompletionMarker.cs" />
     <EmbeddedResource Include="$(SetupPayloadZip)" LogicalName="FamilyQuant.Setup.Payload.zip" Condition="'$(SetupPayloadZip)' != ''" />
     <EmbeddedResource Include="$(SetupPayloadManifest)" LogicalName="FamilyQuant.Setup.Payload.json" Condition="'$(SetupPayloadManifest)' != ''" />
     <Resource Include="../FamilyQuant/Assets/Brand/FamilyQuant.ico" Link="FamilyQuant.ico" />
