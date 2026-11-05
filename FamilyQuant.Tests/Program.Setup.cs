@@ -26,7 +26,8 @@ internal static partial class Program
     {
         internal InstallRegistration? Entry;
         internal bool StartMenu, Desktop, Running, WaitExited = true, ThrowRegister, ThrowUnregister;
-        internal int RegisterCount, WaitCount, WaitSeconds;
+        internal int RegisterCount, WaitCount, WaitSeconds, LaunchCount;
+        internal bool ThrowLaunch;
         internal Version? PortableVersion;
         public string UserDataDirectory => Path.Combine(root, "user-data");
         public InstallRegistration? GetRegistration() => Entry;
@@ -40,7 +41,8 @@ internal static partial class Program
         public bool WaitForExit(int processId, TimeSpan timeout, CancellationToken token)
         { token.ThrowIfCancellationRequested(); WaitCount++; WaitSeconds = (int)timeout.TotalSeconds; return WaitExited; }
         public Version? ReadPortableVersion(string path) => File.Exists(path) ? PortableVersion : null;
-        public void Launch(string directory) => throw new InvalidOperationException("A setup test must not launch an application.");
+        public void Launch(string directory)
+        { LaunchCount++; if (ThrowLaunch) throw new IOException("Synthetic launch failure"); }
     }
 
     private static SetupPayload SetupFixturePayload(string version = "2.1.3.0", Dictionary<string, string>? contents = null, bool windowsZip = false)
@@ -136,17 +138,28 @@ internal static partial class Program
         var controller = new SetupController(options, SetupFixturePayload(), source, item.Platform);
         var result = controller.InstallAsync(item.Target, false).GetAwaiter().GetResult();
         Check("quiet waitpid timeout uses60seconds and changes nothing", !result.Success && result.ExitCode == 3 && item.Platform.WaitCount == 1
-            && item.Platform.WaitSeconds == 60 && !Directory.Exists(item.Target) && item.Platform.Entry == null && File.ReadAllText(item.Data) == "user data");
+            && item.Platform.WaitSeconds == 60 && !Directory.Exists(item.Target) && item.Platform.Entry == null && item.Platform.LaunchCount == 0 && File.ReadAllText(item.Data) == "user data");
         item.Platform.WaitExited = true; result = controller.InstallAsync(item.Target, false).GetAwaiter().GetResult();
-        Check("quiet waitpid success proceeds through the running-app guard and installs", result.Success && result.ExitCode == 0 && File.Exists(Path.Combine(item.Target, SetupProduct.AppExe)));
+        Check("quiet waitpid update installs and records exactly one launch", result.Success && result.ExitCode == 0
+            && item.Platform.LaunchCount == 1 && File.Exists(Path.Combine(item.Target, SetupProduct.AppExe)));
         item.Platform.Running = true; result = controller.InstallAsync(item.Target, false).GetAwaiter().GetResult();
-        Check("quiet mode still refuses a running app after the waited process exits", result.ExitCode == 3 && item.Platform.Entry?.Version == "2.1.3.0");
+        Check("quiet mode still refuses a running app without another launch", result.ExitCode == 3 && item.Platform.Entry?.Version == "2.1.3.0" && item.Platform.LaunchCount == 1);
+        item.Platform.Running = false; item.Platform.ThrowRegister = true;
+        result = controller.InstallAsync(item.Target, false).GetAwaiter().GetResult();
+        Check("failed update rolls back without a launch", !result.Success && item.Platform.LaunchCount == 1 && item.Platform.Entry?.Version == "2.1.3.0");
+        item.Platform.ThrowRegister = false; item.Platform.ThrowLaunch = true;
+        result = controller.InstallAsync(item.Target, false).GetAwaiter().GetResult();
+        Check("reopen failure reports the installed state and does not retry launch", result.ExitCode == 4 && item.Platform.LaunchCount == 2
+            && result.Message.Contains("was installed but could not reopen", StringComparison.Ordinal) && item.Platform.Entry?.Version == "2.1.3.0");
+        item.Platform.ThrowLaunch = false;
+        result = controller.UninstallAsync(item.Target).GetAwaiter().GetResult();
+        Check("silent waitpid uninstall never launches", result.Success && item.Platform.LaunchCount == 2);
         Check("setup command parser is available for the updater and safe test-mode CLI", typeof(SetupOptions).Assembly.GetType("FamilyQuant.Setup.SetupCommandLine") != null);
         item = Case("quiet-desktop"); item.Engine.Install(SetupFixturePayload("2.1.2.0"), item.Target, true);
         options = new() { Silent = true, TestMode = true, TestRoot = Path.GetDirectoryName(item.Target), Directory = item.Target };
         controller = new(options, SetupFixturePayload(), source, item.Platform);
         result = controller.InstallAsync(item.Target, false).GetAwaiter().GetResult();
-        Check("quiet upgrade keeps the existing desktop shortcut preference", result.Success && item.Platform.Desktop);
+        Check("plain quiet upgrade keeps desktop preference without launching", result.Success && item.Platform.Desktop && item.Platform.LaunchCount == 0);
         var parsed = SetupCommandLine.Parse(new[] { "/silent", "/test-mode", "/test-root=" + options.TestRoot, "/dir=" + item.Target, "/waitpid=42" });
         Check("setup CLI parses the closed silent directory waitpid contract", parsed.Silent && parsed.TestMode && parsed.Directory == item.Target && parsed.WaitPid == 42);
         Check("setup CLI refuses unknown duplicate and malformed process options", Throws<ArgumentException>(() => SetupCommandLine.Parse(new[] { "/silent", "/silent" }))

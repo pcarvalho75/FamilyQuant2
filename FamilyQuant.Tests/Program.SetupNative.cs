@@ -106,12 +106,12 @@ internal static partial class Program
             && SetupProduct.Hash(Path.Combine(target, SetupProduct.AppExe)) == appHash && SetupProduct.Hash(personal) == dataHash);
         platform.SetState(platform.Current with { WaitExited = true });
         var waited = Run(setupExe, "/waitpid=12345");
-        Check("native quiet waitpid exit proceeds without an app launch", waited.Exit == 0 && waited.Result.Success && !platform.Current.Launched);
+        Check("native quiet waitpid update records exactly one fake launch", waited.Exit == 0 && waited.Result.Success && platform.Current.LaunchCount == 1);
         var removed = Run(Path.Combine(target, SetupProduct.Uninstaller), "/uninstall");
         Check("native installed uninstaller relocates and removes all recorded program files", removed.Exit == 0 && removed.Result.Success
             && manifest.Files.All(file => !File.Exists(SetupPaths.FileIn(target, file.Path))) && !File.Exists(manifestPath));
         Check("native uninstall retains planted data and unlisted project, removes fake shortcut and uninstall entries", SetupProduct.Hash(personal) == dataHash
-            && File.ReadAllText(extraFile) == "unlisted personal project" && platform.Current is { Registration: null, StartMenu: false, Desktop: false, Launched: false });
+            && File.ReadAllText(extraFile) == "unlisted personal project" && platform.Current is { Registration: null, StartMenu: false, Desktop: false, LaunchCount: 1 });
         File.WriteAllText(Path.Combine(root, "native-setup-proof.json"), JsonSerializer.Serialize(new
         {
             Setup = setupExe, SetupSha256 = SetupProduct.Hash(setupExe), ExpectedVersion = expectedVersion, TestMode = true,
