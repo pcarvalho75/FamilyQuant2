@@ -56,7 +56,7 @@ internal static partial class Program
             string typo = text.Replace("Menu: File > Export report", "Menu: File > Export repot", StringComparison.Ordinal);
             Check("J21 menu check rejects a misspelled command even when its prefix is a menu", typo != text
                 && MenuLines(typo).Any(path => !knownPaths.Contains(path)));
-            var mentions = Regex.Matches(flat, @"\b(?:File|Edit|View|Analysis|Help) > ").Select(m => flat[m.Index..]).ToArray();
+            var mentions = Regex.Matches(flat, @"\b(?:File|Edit|View|Tools|Analysis|Help) > ").Select(m => flat[m.Index..]).ToArray();
             bool HasLivePrefix(string mention) => knownPaths.Any(path => path.Contains(" > ", StringComparison.Ordinal)
                 && mention.StartsWith(path, StringComparison.Ordinal)
                 && (mention.Length == path.Length || !char.IsLetterOrDigit(mention[path.Length])));

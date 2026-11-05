@@ -237,15 +237,15 @@ internal static partial class Program
                         && familyWorkflowActual.Contains("You are at: Families |", StringComparison.Ordinal)
                         && familyWorkflowActual.Contains("Families loaded.", StringComparison.Ordinal)
                         && workflowBefore.Contains("You are at: De Novo evidence", StringComparison.Ordinal)
-                        && workflowActual.Contains("You are at: De novo |", StringComparison.Ordinal)
-                        && workflowActual.Contains("A separate workflow: select PEAKS or DeepNovo", StringComparison.Ordinal)
-                        && !familyWorkflowActual.Contains("You are at: Start", StringComparison.Ordinal)
-                        && !workflowActual.Contains("You are at: Start", StringComparison.Ordinal),
+                        && workflowActual.Contains("You are at: " + WorkflowNames.DeNovoReview + " |", StringComparison.Ordinal)
+                        && workflowActual.Contains("separate workflow: select PEAKS or DeepNovo", StringComparison.Ordinal)
+                        && !familyWorkflowActual.Contains("You are at: Home", StringComparison.Ordinal)
+                        && !workflowActual.Contains("You are at: Home", StringComparison.Ordinal),
                         new { families = familyWorkflowBefore, deNovo = workflowBefore }, new { families = familyWorkflowActual, deNovo = workflowActual });
                     R(["18DC9493B812"], "native Families and De novo next-step workflow Help",
                         familyWorkflowBefore.Contains("Curate them here, then", StringComparison.Ordinal)
                         && familyWorkflowActual.Contains("Curate them here, then", StringComparison.Ordinal)
-                        && familyWorkflowActual.Contains("Analysis > Compute full XIC", StringComparison.Ordinal)
+                        && familyWorkflowActual.Contains(WorkflowNames.Quantify + " gives the project its own quantitation", StringComparison.Ordinal)
                         && familyWorkflowActual.Contains("Results", StringComparison.Ordinal)
                         && workflowBefore.Contains("select PEAKS or DeepNovo, apply the three", StringComparison.Ordinal)
                         && workflowActual.Contains("select PEAKS or DeepNovo, apply the three", StringComparison.Ordinal)

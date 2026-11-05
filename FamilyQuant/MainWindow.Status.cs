@@ -9,7 +9,7 @@ namespace FamilyQuant;
 /// <summary>Formats supplied presentation state. It calculates no scientific value.</summary>
 public sealed class ShellStatusViewModel : INotifyPropertyChanged
 {
-    private string stage = "Start", project = "No project open", activity = "";
+    private string stage = WorkflowNames.Home, project = "No project open", activity = "";
     private string contextBase = "";
     public string Text => string.Join(" | ", new[] { stage, project, activity }).Trim(' ', '|');
     public string ContextHelp { get; private set; } = "";
@@ -73,14 +73,15 @@ public partial class MainWindow
                 : dnc != null ? ShellDestination.DeNovo : families ? ShellDestination.Families
                 : usearch != null ? ShellDestination.Build : ShellDestination.Start);
             AttachStatusSource(usearch != null && GridApp.Children.Contains(usearch) ? usearch : families ? cgc : null);
-            string stage = IsQuantifyVisible ? "Quantify" : home != null ? "Start" : analytics != null ? "Results" : dnc != null ? "De novo"
-                : families ? "Families" : usearch != null ? "Build families" : "Start";
+            string stage = IsQuantifyVisible ? WorkflowNames.Quantify : home != null ? WorkflowNames.Home : analytics != null ? WorkflowNames.Results
+                : dnc != null ? WorkflowNames.DeNovoReview
+                : families ? "Families" : usearch != null ? WorkflowNames.BuildFamilies : WorkflowNames.Home;
             string project = cgc != null ? Path.GetFileName(lastFcfPath) ?? "Open project" : "No project open";
             if (cgc != null && DocumentState.IsModified) project += " *";
             string activity = IsQuantifyVisible ? quantify!.ViewModel.Status : SourceStatus("ShellStatusText");
             if (activity.Length == 0 && families && cgc?.FindName("TextBlockStatusLine") is TextBlock legacy) activity = legacy.Text;
             if (activity.Length == 0 && home != null)
-                activity = cgc == null ? "Use Open project or New from database to begin." : "Use Families to curate the open project, Quantify to compute, or Results to inspect stored results.";
+                activity = cgc == null ? "Use Open project or " + WorkflowNames.BuildFamilies + " to begin." : "Use Families to curate the open project, Quantify to compute, or Results to inspect stored results.";
             if (activity.StartsWith("showing: ", StringComparison.OrdinalIgnoreCase)) activity = activity[9..];
             string context = CurrentContextHelp() + "\n\n" + ProjectStatusText();
             string sourceHelp = SourceStatus("ShellHelpText");

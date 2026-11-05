@@ -25,7 +25,7 @@
                 <TextBlock x:Name="FullXicSourceState" DockPanel.Dock="Right" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center"/>
                 <TextBlock Text="Full XIC" FontWeight="SemiBold"/>
             </DockPanel>
-            <TextBlock x:Name="EmptyInstructions" Text="Compute full XIC in Quantify."
+            <TextBlock x:Name="EmptyInstructions" Text="Run Quantify to fill this column."
                        Foreground="{DynamicResource MutedBrush}" Margin="0,6,0,0"/>
             <TextBlock x:Name="FullXicFailureText" TextWrapping="Wrap" Foreground="{DynamicResource ErrorBrush}" FontSize="11" Margin="0,6,0,0"/>
             <StackPanel x:Name="FullXicOptions" Margin="0,8,0,0">

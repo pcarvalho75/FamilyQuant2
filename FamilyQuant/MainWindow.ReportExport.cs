@@ -34,7 +34,7 @@ public partial class MainWindow
         if (reportExportInProgress || Operations.IsBusy || saveInProgress) return false;
         if (cgc == null || loadedCuration == null || loadedManifest == null || loadedQuant.Count == 0)
         {
-            ShellMessages.Report(this, "A report needs stored Results. Open a project, use Analysis > Compute full XIC, then choose File > Export report.", "Export report");
+            ShellMessages.Report(this, "A report needs stored Results. Open a project, use Quantify, then choose File > Export report.", "Export report");
             return false;
         }
         reportExportInProgress = true;

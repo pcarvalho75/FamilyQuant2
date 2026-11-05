@@ -34,7 +34,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     public string Details { get; } = "";
     private const string MissingQuantitation = "No full XIC is stored. Results reads FamilyQuant's own full isotope-envelope quantitation. " +
         "A plain .fcf carries no quantitation, and a .fqproj saved before full XIC was ever computed carries none either. " +
-        "Load the project, open Quantify, compute full XIC, then return here to draw the graphs.";
+        "Load the project, run Quantify, then return here to draw the graphs.";
     public string EmptyMessage => MissingQuantitation + (HasHomology ? " The standalone homology snapshot can still be exported here." : "");
     public IReadOnlyList<ResultsSummaryCard> Cards { get; } = Array.Empty<ResultsSummaryCard>();
     public int FamilyTopN { get => topN; set => Set(ref topN, value); }
@@ -113,7 +113,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     }
     public string ExportUnavailableReason => ExportKind switch
     {
-        ResultsExportKind.Homology => "Nothing was exported: no homology search result is stored, so there are no assignments to write. Open De novo and press Search first, then return to Results.",
+        ResultsExportKind.Homology => "Nothing was exported: no homology search result is stored, so there are no assignments to write. Open De novo review and press Search first, then return to Results.",
         ResultsExportKind.SuggestedAdditions => DatabaseGap.FastaState,
         ResultsExportKind.DatabaseGap => DatabaseGap.EmptyMessage,
         _ => "The selected export needs its stored result and required project evidence."

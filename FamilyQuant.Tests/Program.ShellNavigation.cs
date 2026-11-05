@@ -50,12 +50,26 @@ internal static partial class Program
         {
             void Route(ShellDestination route) => MainWindow.NavigateShellCommand.Execute(route, main);
             var host = (Grid)main.FindName("GridApp");
-            Check("rail exposes all four workflows", main.NavigationModel.Items.Select(i => i.Destination).SequenceEqual(new[]
-                { ShellDestination.Families, ShellDestination.Quantify, ShellDestination.Results, ShellDestination.DeNovo }));
-            Check("rail has five keyboard route shortcuts", Enumerable.Range(0, 5).All(index => main.InputBindings.OfType<KeyBinding>()
-                .Any(binding => binding.Key == Key.D0 + index && binding.Modifiers == ModifierKeys.Alt
-                    && binding.Command == MainWindow.NavigateShellCommand)));
+            Check("rail lists the five numbered steps in Home's order, Build families first", main.NavigationModel.Items.Select(i => i.Destination).SequenceEqual(new[]
+                { ShellDestination.Build, ShellDestination.Families, ShellDestination.Quantify, ShellDestination.Results, ShellDestination.DeNovo })
+                && main.NavigationModel.Items.Select(i => i.Number).SequenceEqual(new[] { 1, 2, 3, 4, 5 })
+                && main.NavigationModel.Items.Where(i => i.Number != 2).Select(i => i.Label)
+                    .SequenceEqual(WorkflowNames.Steps.Where(step => step.Number != 2).Select(step => step.Name)));
+            var routeKeys = Enumerable.Range(0, 6).Select(index => main.InputBindings.OfType<KeyBinding>()
+                .SingleOrDefault(binding => binding.Key == Key.D0 + index && binding.Modifiers == ModifierKeys.Alt
+                    && binding.Command == MainWindow.NavigateShellCommand)?.CommandParameter).ToArray();
+            Check("Alt+0 is Home and Alt+1 to Alt+5 are steps 1 to 5", routeKeys.SequenceEqual(new object?[] { ShellDestination.Start,
+                ShellDestination.Build, ShellDestination.Families, ShellDestination.Quantify, ShellDestination.Results, ShellDestination.DeNovo })
+                && main.NavigationModel.Items.All(i => i.Shortcut == "Alt+" + i.Number), string.Join(", ", routeKeys));
+            var railText = WalkTree((ShellNavigationRail)main.FindName("NavigationRail")).OfType<Button>().Select(button => button.Content as string)
+                .Where(text => text != null).ToArray();
+            Check("the sidebar has no separate Build button beside step 1", railText.SequenceEqual(new[] { WorkflowNames.Home }), string.Join(", ", railText));
             Check("keyboard Quantify is disabled before a project is open", !MainWindow.NavigateShellCommand.CanExecute(ShellDestination.Quantify, main));
+            Route(ShellDestination.Build);
+            Check("sidebar step 1 opens the Build families screen and marks itself current", host.Children.OfType<USearchLib>().Any()
+                && main.NavigationModel.Current == ShellDestination.Build && main.NavigationModel.Items[0].IsSelected
+                && main.NavigationModel.Items[0].StateText == "Current" && main.StatusModel.Text.StartsWith(WorkflowNames.BuildFamilies + " |", StringComparison.Ordinal),
+                main.StatusModel.Text);
             Route(ShellDestination.Families);
             FinishBusyOperation(main.Operations);
             var project = host.Children.OfType<ClusterGenerationControl>().Single();
@@ -66,20 +80,32 @@ internal static partial class Program
             Route(ShellDestination.Start);
             Route(ShellDestination.Results);
             PumpDispatcher();
-            Check("rail Results reaches Analytics and preserves the open project", host.Children.OfType<AnalyticsControl>().Any()
-                && main.NavigationModel.Current == ShellDestination.Results);
+            Check("rail Results reaches Results under its one name and preserves the open project", host.Children.OfType<AnalyticsControl>().Any()
+                && main.NavigationModel.Current == ShellDestination.Results && main.StatusModel.Text.StartsWith(WorkflowNames.Results + " |", StringComparison.Ordinal)
+                && ((MenuItem)main.FindName("MenuItemAnalytics")).Header as string == WorkflowNames.Results, main.StatusModel.Text);
             Route(ShellDestination.DeNovo);
-            Check("rail De novo reaches its existing screen", host.Children.OfType<DeNovoControl>().Any()
-                && main.NavigationModel.Current == ShellDestination.DeNovo);
+            Check("rail De novo review reaches its existing screen under its one name", host.Children.OfType<DeNovoControl>().Any()
+                && main.NavigationModel.Current == ShellDestination.DeNovo && main.StatusModel.Text.StartsWith(WorkflowNames.DeNovoReview + " |", StringComparison.Ordinal)
+                && ((MenuItem)main.FindName("MenuItemDeNovo")).Header as string == WorkflowNames.DeNovoReview, main.StatusModel.Text);
             Route(ShellDestination.Quantify);
             Check("rail Quantify reaches the existing dialog without starting a computation", computeDialogs == 1
                 && host.Children.OfType<DeNovoControl>().Any());
             Route(ShellDestination.Families);
             Check("returning by rail restores the same curation instance", host.Children.Count == 1 && ReferenceEquals(project, host.Children[0]));
             Route(ShellDestination.Start);
-            Check("Start remains reachable by the keyboard route", host.Children.OfType<HomeControl>().Any()
+            Check("Home remains reachable by the keyboard route", host.Children.OfType<HomeControl>().Any()
                 && main.NavigationModel.Current == ShellDestination.Start);
-            Check("hosted Start uses the rail instead of duplicate workflow cards", host.Children.OfType<HomeControl>().Single().UseShellNavigationRail);
+            var hosted = host.Children.OfType<HomeControl>().Single();
+            Check("hosted Home shows the five numbered steps beside the sidebar", new[] { "ButtonHomeBuild", "ButtonHomeCurate",
+                "ButtonHomeCompute", "ButtonHomeAnalytics", "ButtonHomeDeNovo" }.Select(name => (Button)hosted.FindName(name))
+                .Select(button => button.Visibility == Visibility.Visible ? button.Content as string : null).SequenceEqual(WorkflowNames.Steps.Select(step => step.Name))
+                && ((FrameworkElement)hosted.FindName("BorderHomeSteps")).Visibility == Visibility.Visible);
+            var rail = (ShellNavigationRail)main.FindName("NavigationRail");
+            var homeButton = WalkTree(rail).OfType<Button>().First(button => Equals(button.CommandParameter, ShellDestination.Start));
+            var homeMenu = (MenuItem)main.FindName("MenuItemHome");
+            Check("Home replaces Start on the sidebar, in View and on the status bar", homeButton.Content as string == WorkflowNames.Home
+                && homeMenu.Header as string == WorkflowNames.Home && main.StatusModel.Text.StartsWith(WorkflowNames.Home + " |", StringComparison.Ordinal),
+                homeButton.Content + "; " + homeMenu.Header + "; " + main.StatusModel.Text);
         }
         finally
         {

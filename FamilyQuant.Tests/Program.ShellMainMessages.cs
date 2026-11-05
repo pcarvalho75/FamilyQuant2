@@ -192,7 +192,7 @@ internal static partial class Program
         string label = oldBuild.Attribute("Header")!.Value;
         var build = native.Single(record => record.Id == "new");
         var file = native.Single(record => record.Id == "file-menu");
-        if (!build.Passed || !file.Passed || build.Menu != "MenuItemRunUSearch" || build.Header != "New from database" || file.Header != "File"
+        if (!build.Passed || !file.Passed || build.Menu != "MenuItemRunUSearch" || build.Header != WorkflowNames.BuildFamilies || file.Header != "File"
             || bindings.Values.Any(value => value.Contains(label, StringComparison.Ordinal))) return false;
         string oldReference = before.Value.Contains("\"" + label + "\"", StringComparison.Ordinal) ? "\"" + label + "\"" : label;
         int first = before.Value.IndexOf(oldReference, StringComparison.Ordinal);
@@ -212,13 +212,13 @@ internal static partial class Program
     {
         var routes = new[]
         {
-            (Menu: "MenuItemHome", Case: "home", Header: "Start page", Definition: true),
-            (Menu: "MenuItemRunUSearch", Case: "new", Header: "New from database", Definition: true),
+            (Menu: "MenuItemHome", Case: "home", Header: WorkflowNames.Home, Definition: true),
+            (Menu: "MenuItemRunUSearch", Case: "new", Header: WorkflowNames.BuildFamilies, Definition: true),
             (Menu: "MenuItemLoadFQC", Case: "open-fcf", Header: "Open", Definition: true),
             (Menu: "MenuItemSaveProject", Case: "project-success", Header: "Save", Definition: true),
             (Menu: "MenuItemSaveFCF", Case: "fcf-success", Header: "Families for FamilyQuant 1.5 (.fcf)", Definition: true),
-            (Menu: "MenuItemComputeXic", Case: "quantify", Header: "Compute full XIC", Definition: true),
-            (Menu: "MenuItemDeNovo", Case: "denovo", Header: "De novo evidence", Definition: true),
+            (Menu: "MenuItemComputeXic", Case: "quantify", Header: WorkflowNames.Quantify, Definition: true),
+            (Menu: "MenuItemDeNovo", Case: "denovo", Header: WorkflowNames.DeNovoReview, Definition: true),
             (Menu: "MenuItemAnalytics", Case: "results", Header: "Results", Definition: true),
             (Menu: "MenuItemReanotateSEPro", Case: "sepro-success", Header: "Reannotate SEPro", Definition: true)
         };

@@ -50,9 +50,9 @@ namespace FamilyQuant.Tests
 
             var topLevel = WalkTree(main).OfType<Menu>().First().Items.Cast<MenuItem>()
                 .Select(m => m.Header as string).ToList();
-            Check("File leads the standard menu order and Analysis contains de novo evidence",
-                topLevel.SequenceEqual(new[] { "File", "Edit", "View", "Analysis", "Help" })
-                && deNovoItem.Parent is MenuItem analysisMenu && analysisMenu.Header as string == "Analysis",
+            Check("File leads the standard menu order and View holds De novo review with the other steps",
+                topLevel.SequenceEqual(WorkflowNames.MenuOrder)
+                && deNovoItem.Parent is MenuItem viewMenu && viewMenu.Header as string == "View" && deNovoItem.Header as string == WorkflowNames.DeNovoReview,
                 string.Join(" | ", topLevel));
 
             typeof(MainWindow).GetMethod("MenuItemDeNovo_Click", BindingFlags.Instance | BindingFlags.NonPublic)!
@@ -61,7 +61,7 @@ namespace FamilyQuant.Tests
             Check("choosing it puts the de novo screen on display",
                 app.Children.Count == 1 && app.Children[0] is DeNovoControl);
             Check("the status names de novo while Help keeps its purpose and return path",
-                guide.Text.Contains("De novo") && main.StatusModel.ContextHelp.Contains("View > Families")
+                guide.Text.StartsWith(WorkflowNames.DeNovoReview + " |", StringComparison.Ordinal) && main.StatusModel.ContextHelp.Contains("View > Families")
                 && main.StatusModel.ContextHelp.Contains("File > Open")
                 && main.StatusModel.ContextHelp.Contains("separate workflow", StringComparison.OrdinalIgnoreCase),
                 guide.Text);
@@ -87,7 +87,7 @@ namespace FamilyQuant.Tests
                 .Invoke(main, null)!;
 
             Check("the order of work carries the de novo flow as an OPTIONAL block, not as a fifth step",
-                workflow.Contains("OPTIONAL · Review de novo evidence")
+                workflow.Contains("OPTIONAL · 5 De novo review")
                 && !workflow.Contains("STEP 5"), workflow.Length.ToString());
             Check("and that block says it is a separate workflow that changes no family",
                 workflow.Contains("A separate workflow, not a step of the four above")

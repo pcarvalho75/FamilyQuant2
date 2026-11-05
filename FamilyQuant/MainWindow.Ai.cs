@@ -33,7 +33,7 @@ public partial class MainWindow
         }
         if (loadedManifest.FamilyRunShares == null)
         {
-            ShellMessages.Report(this, "The project has no stored family shares. Use Analysis > Compute full XIC and save the Results first.", "AI interpretation");
+            ShellMessages.Report(this, "The project has no stored family shares. Use Quantify and save the project first.", "AI interpretation");
             return false;
         }
         var project = cgc;

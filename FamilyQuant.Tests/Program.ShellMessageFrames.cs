@@ -55,16 +55,16 @@ internal static partial class Program
         var old = new LedgerMemberFactComparison.MessageValue(true, "Use Run USearch.", [new("\"Use Run USearch.\"", 1, true)], "");
         var routes = new[]
         {
-            new ShellRouteCase("new", "MenuItemRunUSearch", "New from database", "RoutedCommand:New", "Build view", true, [], [], ""),
+            new ShellRouteCase("new", "MenuItemRunUSearch", WorkflowNames.BuildFamilies, "RoutedCommand:New", "Build view", true, [], [], ""),
             new ShellRouteCase("file-menu", "MenuFile", "File", "attached native MenuItem", "First menu", true, [], [], "")
         };
-        Check("one report menu reference follows the executed renamed command", SameReportAfterMenuRename(old, "Use File > New from database.", new Dictionary<string, string>(), menu, routes));
-        Check("menu migration cannot change other report facts", !SameReportAfterMenuRename(old, "Different report File > New from database.", new Dictionary<string, string>(), menu, routes));
-        Check("native variable values are never rewritten as menu labels", !SameReportAfterMenuRename(old, "Use File > New from database.",
+        Check("one report menu reference follows the executed renamed command", SameReportAfterMenuRename(old, "Use File > Build families.", new Dictionary<string, string>(), menu, routes));
+        Check("menu migration cannot change other report facts", !SameReportAfterMenuRename(old, "Different report File > Build families.", new Dictionary<string, string>(), menu, routes));
+        Check("native variable values are never rewritten as menu labels", !SameReportAfterMenuRename(old, "Use File > Build families.",
             new Dictionary<string, string> { ["path"] = "Run USearch" }, menu, routes));
         Check("a wrong current header cannot satisfy the menu-reference mapping", !SameReportAfterMenuRename(old, "Use File > Wrong.",
             new Dictionary<string, string>(), menu, [routes[0] with { Header = "Wrong" }, routes[1]]));
-        Check("an unexecuted route cannot prove a report migration", !SameReportAfterMenuRename(old, "Use File > New from database.",
+        Check("an unexecuted route cannot prove a report migration", !SameReportAfterMenuRename(old, "Use File > Build families.",
             new Dictionary<string, string>(), menu, [routes[0] with { Passed = false }, routes[1]]));
     }
 }

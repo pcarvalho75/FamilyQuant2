@@ -37,7 +37,7 @@ internal static partial class Program
         ShellMessages.Presenter = (_, _) => MessageBoxResult.OK;
         var main = new MainWindow { Left = -30000, Top = -30000, ShowInTaskbar = false, ShowActivated = false };
         var menu = (MenuItem)main.FindName("MenuItemClusteringDiagnostic");
-        var analysis = ((Menu)main.FindName("MainMenu")).Items.OfType<MenuItem>().Single(item => Equals(item.Header, "Analysis"));
+        var analysis = ((Menu)main.FindName("MainMenu")).Items.OfType<MenuItem>().Single(item => Equals(item.Header, WorkflowNames.Tools));
         int runnerCalls = 0, reports = 0, folders = 0;
         ClusteringDiagnosticRequest? seen = null;
         string? shownText = null;
@@ -72,7 +72,7 @@ internal static partial class Program
         }
         try
         {
-            Check("Analysis exposes a visible Clustering diagnostic action and disables it without a project",
+            Check("Tools exposes a visible Clustering diagnostic action and disables it without a project",
                 analysis.Items.Contains(menu) && Equals(menu.Header, "Clustering diagnostic") && menu.Visibility == Visibility.Visible && !menu.IsEnabled);
             Check("diagnostic refuses a missing project without invoking its runner", !Run() && runnerCalls == 0
                 && main.StatusModel.ContextHelp.Contains("Open a saved", StringComparison.Ordinal));

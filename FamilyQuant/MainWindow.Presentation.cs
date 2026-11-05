@@ -35,7 +35,7 @@ public partial class MainWindow
             owner.analytics = null;
 
 
-            owner.home = new HomeControl { UseShellNavigationRail = true };
+            owner.home = new HomeControl();
             owner.home.OpenRequested += () => owner.MenuItemCluster_Click(owner, new RoutedEventArgs());
             owner.home.OpenPathRequested += async path => await owner.OpenProjectSafelyAsync(path);
             owner.home.RemoveRecentProjectRequested += owner.RemoveRecentProject;
@@ -46,8 +46,8 @@ public partial class MainWindow
             owner.home.AnalyticsRequested += () => owner.MenuItemAnalytics_Click(owner, new RoutedEventArgs());
             owner.home.DeNovoRequested += () => owner.MenuItemDeNovo_Click(owner, new RoutedEventArgs());
 
-            // The card state is the honest project state: with a project open, Compute and Analytics are
-            // live; with none, they stay dark until step 2 opens one.
+            // The step states are the honest project state: with a project open, Quantify and Results are
+            // live; with none, they stay dark until Curate families or Open project opens one.
             owner.home.SetProjectState(owner.cgc != null, owner.cgc != null ? owner.ProjectStatusText() : "No project open.");
             owner.home.SetRecentProjects(owner.shellState.RecentProjects);
             owner.home.SetLastResult(owner.shellState.LastResultProject, owner.cgc != null && owner.loadedQuant.Count > 0);
