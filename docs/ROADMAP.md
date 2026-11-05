@@ -46,7 +46,7 @@ Version 11 delivered 10 steps (in the archive): the clean Recent projects list, 
 | FQKimi (KM) | Kimi Code (K3.1 Pro) | Reviewer (D64), with FQReviewDS; the desk gives each finished step to whichever reviewer is free, in batches of at most 8; code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-kimi` |
 | FQReviewDS (DS) | DeepSeek V4.1 Flash | Second reviewer (D67); code and synthetic data only. Never edits product code. | `D:/FamilyQuant-wt/review-ds` |
 
-Kimi limits (Paulo, 11-01 and 11-02): one Kimi instance at a time across every project, at most 15 calls in any rolling 5 hours and 5 reviews in any rolling hour, no subagents. Orion runs its own Kimi worker at times; the desk launches FQKimi only when no other Kimi worker runs.
+Kimi limits: one Kimi instance at a time across every project, at most 15 calls in any rolling 5 hours (Paulo, 11-01) and 15 reviews in any rolling hour (Paulo, 11-05 13:24: "raise kimi to 15 reviews"; it was 5 from 11-02), no subagents. Orion runs its own Kimi worker at times; the desk launches FQKimi only when no other Kimi worker runs.
 
 ## Design rules for the look (hard requirements)
 
@@ -190,6 +190,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D66 | The same-scan conflict | Measured first on the real-data set (Z6a), then Paulo decides (D65); nothing changes before. Paulo, 11-05 12:21, accepting the desk's pick |
 | D65 | A scan where PatternLab and the de novo call give different sequences for the same precursor | a) The PatternLab identification wins the scan: its FDR-controlled identification is kept and the de novo call on that scan gets no credit (Ana's step 4; it removes a double count, since both XICs measure the same precursor's ions). Z6a measured 305 to 431 such scans per run, 2.6 to 3.7% of the de novo signal and 0.35 to 0.55% of all signal at most. Built in Z6c as an option, ON by default, with before and after on real data and a science review. Paulo, 11-05 13:24 |
 | D67 | More hands | Paulo, 11-05 12:38: "hire one more worker, an opus worker from this account, and also hire deepseek as a second reviewer". DeepSeek FQReviewDS joined at 12:41 (code and synthetic data only, as D58). The Opus CLI worker hit the account's weekly CLI limit at 12:42 (resets 11-06 08:00), so FQOpus runs at 12:48 as an Opus agent of this session, on the same account (Paulo, 12:47: "an opus from this account"); it takes W4, FQHome takes W5 and W8 from FQFetch |
+| D68 | Kimi's review rate | 15 reviews in any rolling hour (was 5 from 11-02); 15 calls per rolling 5 hours and one instance unchanged. Paulo, 11-05 13:24 ("raise kimi to 15 reviews, and update that law") |
 
 ## Risks and triggers
 
