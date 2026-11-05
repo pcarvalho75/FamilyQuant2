@@ -1,5 +1,6 @@
 using FamilyQuant.Operations;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
@@ -75,16 +76,40 @@ internal static partial class Program
         }
         {
             var document = AtomicFetchFile();
-            string before = document.ToJsonText();
             var screen = new ClusterGenerationControl(document);
+            int changed = 0;
+            screen.DocumentChanged += (_, _) => changed++;
             using var lease = screen.Operations.Begin("Fetch evidence");
             using var handler = new EvidenceAndPanelHandler(failPanel: true);
             var task = AppOperationHost.OnUi(screen, () => screen.ViewModel.FetchEvidenceAsync(handler, lease.Context));
-            bool failed = false;
+            FinishBusyTask(task);
+            var outcome = task.GetAwaiter().GetResult();
+            var reopened = FamilyClusterFile.FromJsonText(document.ToJsonText());
+            Check("Z1a shell panel failure commits protein evidence once and saves the missing panel reason",
+                outcome.PanelFailure != null && lease.Context.HasCommitted && changed == 1
+                && reopened.MyExtendedFastaItems[0].Domains == "Supplied domain"
+                && reopened.MyExtendedFastaItems[0].Evidence?.Family == "fixture family"
+                && reopened.EvidenceSource?.Release == "2026_03"
+                && reopened.EvidenceSource.ReferencePanel is { IsComplete: false } missing
+                && missing.MissingFamilies.SequenceEqual(new[] { "fixture family" })
+                && missing.FailureReason.Contains("HTTP 400", StringComparison.Ordinal));
+        }
+        {
+            var document = AtomicFetchFile();
+            var expected = FamilyClusterFile.FromJsonText(document.ToJsonText());
+            expected.MyExtendedFastaItems[0].Domains = "User edit";
+            var screen = new ClusterGenerationControl(document);
+            int changed = 0;
+            screen.DocumentChanged += (_, _) => changed++;
+            using var lease = screen.Operations.Begin("Fetch evidence");
+            using var handler = new EvidenceAndPanelHandler(failPanel: true);
+            handler.DuringRequest = (panel, _) => { if (panel) document.MyExtendedFastaItems[0].Domains = "User edit"; };
+            var task = AppOperationHost.OnUi(screen, () => screen.ViewModel.FetchEvidenceAsync(handler, lease.Context));
+            bool refused = false;
             try { FinishBusyTask(task); task.GetAwaiter().GetResult(); }
-            catch (HttpRequestException) { failed = true; }
-            Check("a failed shell panel fetch leaves the complete document unpublished",
-                failed && document.ToJsonText() == before && !lease.Context.HasCommitted);
+            catch (InvalidOperationException) { refused = true; }
+            Check("Z1a a shell source edit still rejects fetched evidence after a panel failure",
+                refused && !lease.Context.HasCommitted && changed == 0 && document.ToJsonText() == expected.ToJsonText());
         }
     }
 }

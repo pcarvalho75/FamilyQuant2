@@ -59,6 +59,11 @@ public partial class ClusterGenerationControl
         familyWorldFetchRunning = true;
         try
         {
+            if (fcf.EvidenceSource?.ReferencePanel is { IsComplete: false })
+            {
+                SetCurationOperationStatus("The reference panel is incomplete. Retry panel before fetching the family world.");
+                return;
+            }
             if (!NearestReviewed.Targets(fcf).Any(p => !SequenceLabels.IsContaminant(p.SequenceIdentifier)
                 && p.Evidence != null && ReferencePanelFetcher.FamiliesOf(p.Evidence).Any()))
             {

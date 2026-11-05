@@ -48,7 +48,7 @@ public sealed partial class CurationViewModel
     private sealed class CurationFetchProgress(OperationContext operation) : IProgress<FetchProgress>
     {
         public void Report(FetchProgress value) => operation.Report("evidence",
-            "Fetching evidence: " + value.CompletedBatches.ToString(CultureInfo.CurrentCulture) + " of "
+            value.Message.Length > 0 ? value.Message : "Fetching evidence: " + value.CompletedBatches.ToString(CultureInfo.CurrentCulture) + " of "
             + value.TotalBatches.ToString(CultureInfo.CurrentCulture) + " batches or families; "
             + value.Found.ToString("N0", CultureInfo.CurrentCulture) + " entries received.", value.CompletedBatches, value.TotalBatches);
     }
@@ -63,7 +63,7 @@ public sealed partial class CurationViewModel
                 + " proteins have Pfam domains in " + result.Source + "."
                 + (missing > 0 ? " " + missing.ToString("N0", CultureInfo.CurrentCulture) + " entries were not found and kept their previous evidence." : "")
                 + " The Domains column and Search use the stored evidence. Proteins too short for Pfam may have none. Save the file to keep it.";
-        if (outcome.Panel != null)
+        if (outcome.Panel is { IsComplete: true })
             message += " Reviewed reference panel: " + outcome.Panel.Entries.Count.ToString("N0", CultureInfo.CurrentCulture)
                 + " entries from " + outcome.Panel.Families.Count.ToString("N0", CultureInfo.CurrentCulture) + " families, " + outcome.Panel.Release + ". Stored for offline grouping.";
         message += result.PositionAsked > 0
@@ -72,8 +72,8 @@ public sealed partial class CurationViewModel
                 + result.PositionElapsedSeconds.ToString("N1", CultureInfo.CurrentCulture) + " s. Save to use them offline."
             : " Position coordinates are fetched for proteins with mapped peptides after Compute.";
         if (outcome.PanelFailure != null)
-            message += (result.Asked > 0 ? " Protein evidence was fetched; the reviewed reference panel was kept unchanged. " : " Stored protein evidence and the reference panel were kept unchanged. ")
-                + "Reason: " + outcome.PanelFailure.Message + ". Check the connection and press Fetch evidence again.";
+            message += (result.Asked > 0 ? " Protein evidence was saved in the document. " : " Stored protein evidence was kept. ")
+                + "The reference panel is incomplete. Reason: " + outcome.PanelFailure.Message + " Retry Fetch evidence to complete the panel.";
         return message;
     }
 }

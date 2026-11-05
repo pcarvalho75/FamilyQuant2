@@ -344,6 +344,7 @@ namespace FamilyQuant.Evidence
         /// or in the stored reference panel by accession for an outside entry; null when there is none.</summary>
         public static Func<NearestNeighbour, ProteinEvidence?> ReferenceEvidence(FamilyClusterFile file)
         {
+            ReferencePanelFetcher.RequireComplete(file.EvidenceSource?.ReferencePanel);
             var byIdentifier = new Dictionary<string, ProteinEvidence>(StringComparer.Ordinal);
             foreach (FastaItemExtended item in file.MyExtendedFastaItems)
                 if (item.Evidence != null && !string.IsNullOrEmpty(item.SequenceIdentifier))

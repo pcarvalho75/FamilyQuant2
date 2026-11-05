@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FamilyQuant.Evidence;
 
+internal sealed class UniProtReleaseException() : System.IO.IOException(
+    "The UniProt release changed between fetched batches. No evidence was applied.");
+
 internal static class UniProtHttp
 {
     internal static string Release(HttpResponseMessage response) =>
@@ -14,26 +17,36 @@ internal static class UniProtHttp
             ? values.FirstOrDefault() ?? string.Empty : string.Empty;
 
     internal static async Task<HttpResponseMessage> GetWithRetryAsync(HttpClient client, string url,
-        int attempts, Func<int, string> refusalMessage, CancellationToken cancellationToken)
+        int attempts, Func<int, string> refusalMessage, CancellationToken cancellationToken,
+        UniProtFetchOptions? options = null, Action<string>? retryProgress = null)
     {
+        int[] waits = [5, 15, 45, 120];
         for (int attempt = 1; ; attempt++)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             HttpResponseMessage? response = null;
             try { response = await client.GetAsync(url, cancellationToken).ConfigureAwait(false); }
             catch (HttpRequestException) when (attempt < attempts) { }
-            catch (TaskCanceledException) when (attempt < attempts && !cancellationToken.IsCancellationRequested) { }
+            catch (OperationCanceledException ex) when (!cancellationToken.IsCancellationRequested)
+            {
+                if (attempt >= attempts) throw new HttpRequestException("UniProt timed out after repeated requests.", ex);
+            }
             if (response != null)
             {
                 if (response.IsSuccessStatusCode) return response;
                 int status = (int)response.StatusCode;
-                if (attempt == attempts || (status != 429 && status < 500))
+                if (attempt >= attempts || (status != 429 && status is not (>= 500 and <= 599)))
                 {
                     response.Dispose();
                     throw new HttpRequestException(refusalMessage(status), null, response.StatusCode);
                 }
                 response.Dispose();
             }
-            await Task.Delay(TimeSpan.FromSeconds(attempt), cancellationToken).ConfigureAwait(false);
+            int seconds = waits[Math.Min(attempt - 1, waits.Length - 1)];
+            retryProgress?.Invoke("UniProt busy, retrying in " + seconds.ToString(System.Globalization.CultureInfo.CurrentCulture) + " s");
+            cancellationToken.ThrowIfCancellationRequested();
+            await (options?.DelayAsync ?? Task.Delay)(TimeSpan.FromSeconds(seconds), cancellationToken).ConfigureAwait(false);
+            cancellationToken.ThrowIfCancellationRequested();
         }
     }
 }
