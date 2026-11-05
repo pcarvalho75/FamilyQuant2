@@ -44,9 +44,13 @@ public sealed class SetupController : ISetupController
             operation();
             if (!uninstall && Options.Silent && Options.WaitPid != null)
             {
+                try { FamilyQuant.Deployment.UpdateCompletionMarker.Write(directory, PayloadVersion); }
+                catch (Exception error) when (error is IOException or UnauthorizedAccessException)
+                {
+                    System.Diagnostics.Trace.WriteLine("Update completion notice could not be saved: " + error.Message);
+                }
                 try
                 {
-                    FamilyQuant.Deployment.UpdateCompletionMarker.Write(directory, PayloadVersion);
                     platform.Launch(directory);
                 }
                 catch (Exception error)

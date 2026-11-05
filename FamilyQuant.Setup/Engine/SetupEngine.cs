@@ -131,6 +131,8 @@ public sealed class SetupEngine(ISetupPlatform platform, string setupExecutable,
                 progress?.Report(new("Removing " + file.Path, moved.Count, manifest.Files.Count + 1));
             }
             token.ThrowIfCancellationRequested();
+            if (File.Exists(SetupPaths.FileIn(target, FamilyQuant.Deployment.UpdateCompletionMarker.FileName)))
+                MoveToRemoved(FamilyQuant.Deployment.UpdateCompletionMarker.FileName);
             MoveToRemoved(SetupProduct.Manifest);
             platform.Unregister(target);
         }

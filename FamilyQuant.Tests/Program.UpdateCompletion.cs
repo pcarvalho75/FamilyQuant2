@@ -48,6 +48,16 @@ internal static partial class Program
         controller = new(options with { WaitPid = null }, SetupFixturePayload("2.1.7.0"), source, platform);
         result = controller.InstallAsync(target, false).GetAwaiter().GetResult();
         Check("Z2b plain silent installation creates no update notice", result.Success && !File.Exists(marker) && platform.Current.LaunchCount == 1);
+        File.WriteAllText(marker, "2.1.7.0");
+        result = controller.UninstallAsync(target).GetAwaiter().GetResult();
+        Check("Z2b uninstall removes an unconsumed completion marker", result.Success && !File.Exists(marker));
+        result = controller.InstallAsync(target, false).GetAwaiter().GetResult();
+        Check("Z2b reinstall succeeds in the same folder after marker cleanup", result.Success && platform.Current.LaunchCount == 1);
+        Directory.CreateDirectory(marker); // An inert path collision forces the marker write to fail.
+        controller = new(options, SetupFixturePayload("2.1.7.0"), source, platform);
+        result = controller.InstallAsync(target, false).GetAwaiter().GetResult();
+        Check("Z2b notice write failure never prevents reopening", result.Success && platform.Current.LaunchCount == 2 && Directory.Exists(marker));
+        Directory.Delete(marker);
         main.Close();
     }
 }
