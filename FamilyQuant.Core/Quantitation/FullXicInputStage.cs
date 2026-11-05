@@ -120,6 +120,7 @@ namespace FamilyQuant
                 MinPointsForQuant = options.MinPointsForQuant,
                 Ppm = options.Ppm,
                 Ms1Tolerance = options.Ms1Tolerance,
+                PatternLabWinsScanConflicts = options.PatternLabWinsScanConflicts,
                 AppVersion = options.AppVersion ?? string.Empty,
                 CreatedUtc = now,
                 UpdatedUtc = now,

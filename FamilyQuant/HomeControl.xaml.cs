@@ -1,4 +1,6 @@
 using System;
+using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -6,14 +8,16 @@ using System.Windows.Input;
 namespace FamilyQuant
 {
     /// <summary>
-    /// The task-oriented start screen, and the fifth view MainWindow swaps into GridApp. It is the default:
-    /// when none of the cluster, USearch, de novo or analytics views is on screen, this one is.
+    /// Home: the five numbered steps in Ana's order (the names table, <see cref="WorkflowNames"/>), each
+    /// with its one line, its state and one button, then the open project and the recent projects. It is
+    /// the default view MainWindow swaps into GridApp.
     ///
-    /// It owns no engine and no store. Each card is a Button whose Click raises one event; MainWindow
-    /// subscribes and calls the EXACT SAME menu handler the corresponding File or top-level command calls,
-    /// so the home is pure navigation and adds no second path into the program. Steps 3 and 4 are lit only
-    /// when a project is open, which is the same condition the matching menu commands use, so the home and
-    /// the menu never disagree. This screen raises no dialog of its own.
+    /// It owns no engine and no store. Each step button raises one event; MainWindow subscribes and
+    /// calls the EXACT SAME handler the matching menu or sidebar command calls, so Home is pure
+    /// navigation and adds no second path into the program. Quantify and Results are lit only when a
+    /// project is open, the same condition their sidebar entries use, so Home and the sidebar never
+    /// disagree. One button is primary: Open project while none is open, then the step that comes next.
+    /// This screen raises no dialog.
     /// </summary>
     public partial class HomeControl : UserControl
     {
@@ -22,40 +26,54 @@ namespace FamilyQuant
         public event Action<string>? OpenPathRequested;
         public event Action<string>? RemoveRecentProjectRequested;
         public event Action? LastResultRequested;
-        public bool UseShellNavigationRail
-        {
-            get => HomeProjectActions.Visibility == System.Windows.Visibility.Collapsed;
-            set => HomeProjectActions.Visibility = value ? System.Windows.Visibility.Collapsed : System.Windows.Visibility.Visible;
-        }
+
         /// <summary>Step 1: build families. MainWindow wires this to MenuRunUSearch_Click.</summary>
         public event Action? BuildFamiliesRequested;
 
-        /// <summary>Step 2: curate families. MainWindow wires this to MenuItemCluster_Click.</summary>
+        /// <summary>Step 2: curate families. MainWindow wires this to ShowCurationOrOpen.</summary>
         public event Action? CurateRequested;
 
-        /// <summary>Step 3: compute the full XIC. MainWindow wires this to MenuItemComputeXic_Click.</summary>
+        /// <summary>Step 3: Quantify. MainWindow wires this to MenuItemComputeXic_Click.</summary>
         public event Action? ComputeXicRequested;
 
-        /// <summary>Step 4: analytics and report. MainWindow wires this to MenuItemAnalytics_Click.</summary>
+        /// <summary>Step 4: Results. MainWindow wires this to MenuItemAnalytics_Click.</summary>
         public event Action? AnalyticsRequested;
 
-        /// <summary>The optional side-branch. MainWindow wires this to MenuItemDeNovo_Click.</summary>
+        /// <summary>Step 5, optional: De novo review. MainWindow wires this to MenuItemDeNovo_Click.</summary>
         public event Action? DeNovoRequested;
+
+        private readonly (TextBlock Number, TextBlock Name, TextBlock Method, TextBlock State, Button Action)[] stepViews;
 
         public HomeControl()
         {
             InitializeComponent();
+            stepViews = new[]
+            {
+                (TextBlockHomeStep1Number, TextBlockHomeStep1Name, TextBlockHomeStep1Method, TextBlockHomeStep1State, ButtonHomeBuild),
+                (TextBlockHomeStep2Number, TextBlockHomeStep2Name, TextBlockHomeStep2Method, TextBlockHomeStep2State, ButtonHomeCurate),
+                (TextBlockHomeStep3Number, TextBlockHomeStep3Name, TextBlockHomeStep3Method, TextBlockHomeStep3State, ButtonHomeCompute),
+                (TextBlockHomeStep4Number, TextBlockHomeStep4Name, TextBlockHomeStep4Method, TextBlockHomeStep4State, ButtonHomeAnalytics),
+                (TextBlockHomeStep5Number, TextBlockHomeStep5Name, TextBlockHomeStep5Method, TextBlockHomeStep5State, ButtonHomeDeNovo)
+            };
+            foreach (var (view, step) in stepViews.Zip(WorkflowNames.Steps))
+            {
+                view.Number.Text = step.Number.ToString(CultureInfo.CurrentCulture);
+                view.Name.Text = step.Name;
+                view.Method.Text = step.Method;
+                view.Action.Content = step.Name;
+            }
+            TextBlockHomeStep5Optional.Text = WorkflowNames.Optional;
             ViewModel.PropertyChanged += (_, _) => ApplyViewModel();
             RecentProjectsList.ItemsSource = ViewModel.RecentProjects;
 
-            // Opens with no project: steps 3 and 4 are dark until one is loaded in step 2.
+            // Opens with no project: Quantify and Results stay dark until one is open.
             SetProjectState(false, "No project open.");
         }
 
         /// <summary>
-        /// Reflects whether a project is currently open, and names it. Steps 3 and 4 (Compute and
-        /// Analytics) are enabled only when one is, because neither has anything to act on otherwise, which
-        /// is exactly the condition the File-menu commands they call already use.
+        /// Reflects whether a project is currently open, and names it. Quantify and Results are enabled
+        /// only when one is, because neither has anything to act on otherwise, which is exactly the
+        /// condition the sidebar and menu commands they call already use.
         /// </summary>
         /// <param name="projectLoaded">Whether a .fqproj or .fcf is currently open.</param>
         /// <param name="projectSummary">The line shown on the project card, e.g. the file name and whether
@@ -71,12 +89,23 @@ namespace FamilyQuant
         private void ApplyViewModel()
         {
             TextBlockHomeProject.Text = ViewModel.ProjectSummary;
-            TextBlockProjectReason.Text = ViewModel.ProjectReason;
-            ButtonHomeCompute.IsEnabled = ViewModel.HasProject;
-            ButtonHomeAnalytics.IsEnabled = ViewModel.HasProject;
+            foreach (var (view, step) in stepViews.Zip(ViewModel.Steps))
+            {
+                view.State.Text = step.State;
+                view.Action.IsEnabled = step.IsEnabled;
+                Lead(view.Action, step.IsNext);
+            }
+            Lead(ButtonHomeOpen, ViewModel.OpenProjectLeads);
             ButtonHomeLastResult.IsEnabled = ViewModel.HasLastResult;
             TextBlockLastResult.Text = ViewModel.LastResultText;
             TextBlockNoRecents.Visibility = ViewModel.HasRecents ? System.Windows.Visibility.Collapsed : System.Windows.Visibility.Visible;
+        }
+
+        /// <summary>The one primary button takes the accent style; every other button keeps the quiet default.</summary>
+        private static void Lead(Button button, bool leads)
+        {
+            if (leads) button.SetResourceReference(StyleProperty, "PrimaryButton");
+            else button.ClearValue(StyleProperty);
         }
 
         private void ButtonHomeOpen_Click(object sender, System.Windows.RoutedEventArgs e) => OpenRequested?.Invoke();

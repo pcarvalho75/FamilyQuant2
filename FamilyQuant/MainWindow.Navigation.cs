@@ -30,12 +30,12 @@ public partial class MainWindow
         CommandBindings.Add(new CommandBinding(NavigateShellCommand,
             (_, e) => { if (e.Parameter is ShellDestination destination) NavigationModel.RequestNavigate(destination); e.Handled = true; },
             (_, e) => { e.CanExecute = e.Parameter is ShellDestination destination && NavigationModel.CanNavigate(destination); e.Handled = true; }));
-        foreach (var shortcut in new[]
-        {
-            (Key.D0, ShellDestination.Start), (Key.D1, ShellDestination.Families),
-            (Key.D2, ShellDestination.Quantify), (Key.D3, ShellDestination.Results), (Key.D4, ShellDestination.DeNovo)
-        }) InputBindings.Add(new KeyBinding(NavigateShellCommand, shortcut.Item1, ModifierKeys.Alt)
-            { CommandParameter = shortcut.Item2, CommandTarget = this });
+        // Alt+0 is Home and Alt+N is step N, the numbers Home and the sidebar show.
+        InputBindings.Add(new KeyBinding(NavigateShellCommand, Key.D0, ModifierKeys.Alt)
+            { CommandParameter = ShellDestination.Start, CommandTarget = this });
+        foreach (var item in NavigationModel.Items)
+            InputBindings.Add(new KeyBinding(NavigateShellCommand, Key.D0 + item.Number, ModifierKeys.Alt)
+                { CommandParameter = item.Destination, CommandTarget = this });
     }
 
     private void ShowHome() => NavigationModel.RequestNavigate(ShellDestination.Start);

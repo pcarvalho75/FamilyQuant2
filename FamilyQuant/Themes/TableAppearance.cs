@@ -115,7 +115,8 @@ namespace FamilyQuant.Themes
                 header.Setters.Add(new Setter(Control.ForegroundProperty, new DynamicResourceExtension("MutedBrush")));
                 header.Setters.Add(new Setter(Control.BorderThicknessProperty, new Thickness(0)));
                 header.Setters.Add(new Setter(Control.PaddingProperty, new DynamicResourceExtension("TableHeaderPadding")));
-                if (numeric) header.Setters.Add(new Setter(Control.HorizontalContentAlignmentProperty, HorizontalAlignment.Right));
+                if (numeric && !SetsAlignment(original, Control.HorizontalContentAlignmentProperty))
+                    header.Setters.Add(new Setter(Control.HorizontalContentAlignmentProperty, HorizontalAlignment.Right));
                 headers[column] = (original, header, numeric);
                 writing = true;
                 try { column.HeaderStyle = header; }
@@ -138,7 +139,8 @@ namespace FamilyQuant.Themes
                     style.Setters.Add(new Setter(FrameworkElement.ToolTipProperty,
                         GetFullTextPath(column) is string path ? new Binding(path)
                             : new Binding(nameof(TextBlock.Text)) { RelativeSource = RelativeSource.Self }));
-                    if (numeric) style.Setters.Add(new Setter(TextBlock.TextAlignmentProperty, TextAlignment.Right));
+                    if (numeric && !SetsAlignment(textOriginal, TextBlock.TextAlignmentProperty))
+                        style.Setters.Add(new Setter(TextBlock.TextAlignmentProperty, TextAlignment.Right));
                     text.ElementStyle = style;
                 }
             }
@@ -163,6 +165,10 @@ namespace FamilyQuant.Themes
             }
             public void Dispose() { Detach(); grid.Loaded -= Loaded; grid.Unloaded -= Unloaded; }
         }
+
+        // A column's explicit alignment takes precedence over the numeric right-alignment default.
+        private static bool SetsAlignment(Style? style, DependencyProperty property) =>
+            style?.Setters.OfType<Setter>().Any(setter => setter.Property == property) == true;
 
         private static bool IsNumeric(DataGrid grid, DataGridColumn column)
         {

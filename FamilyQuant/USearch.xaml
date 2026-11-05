@@ -7,7 +7,7 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Margin="20">
             <TextBlock Text="Build families" FontSize="{DynamicResource TitleSize}" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold"/>
-            <TextBlock Text="Group a protein database by sequence identity." Foreground="{DynamicResource MutedBrush}" Margin="0,6,0,18"/>
+            <TextBlock Text="Group by sequence identity, USearch." Foreground="{DynamicResource MutedBrush}" Margin="0,6,0,18"/>
             <Border Background="{DynamicResource SurfaceBrush}" Padding="16" Margin="0,0,0,14">
                 <StackPanel>
                     <TextBlock Text="Database" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}" Margin="0,0,0,8"/>

@@ -37,6 +37,16 @@ public partial class MainWindow
         if (trackedCuration != null && documentChangedHandler != null)
             documentChangedEvent?.RemoveEventHandler(trackedCuration, documentChangedHandler);
         trackedCuration = control;
+        control.CheckBoxShowSearchIds.IsChecked = shellState.ShowSearchIds ?? true;
+        RoutedEventHandler rememberSearchIds = (_, _) =>
+        {
+            if (!ReferenceEquals(cgc, control)) return;
+            shellState.ShowSearchIds = control.CheckBoxShowSearchIds.IsChecked == true;
+            string? error = persistShellSettings ? shellState.Save(shellSettingsPath) : null;
+            if (error != null) StatusModel.ShowMessage(error);
+        };
+        control.CheckBoxShowSearchIds.Checked += rememberSearchIds;
+        control.CheckBoxShowSearchIds.Unchecked += rememberSearchIds;
         documentChangedEvent = control.GetType().GetEvent("DocumentChanged");
         documentChangedHandler = (_, _) => DocumentState.MarkCurationChanged();
         documentChangedEvent?.AddEventHandler(control, documentChangedHandler);

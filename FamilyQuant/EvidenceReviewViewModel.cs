@@ -44,7 +44,7 @@ namespace FamilyQuant
         public bool HasScopeAnnotation => Source.HasScopeAnnotation;
         public bool CanSelect => Source.Family.Length > 0 && !Source.IsLocked;
         public string SelectionHelp => Source.IsLocked
-            ? "This protein belongs to a locked family. Unlock it in Families before including it; it stays unticked here."
+            ? "This protein belongs to a locked family. Unlock it in Curate families before including it; it stays unticked here."
             : Source.Family.Length == 0 ? "This protein has no proposed family and stays outside the selection."
             : "Select this protein for the proposed family. Unticking leaves its current family unchanged.";
         public bool Selected

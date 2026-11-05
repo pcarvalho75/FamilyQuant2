@@ -61,6 +61,7 @@ public partial class MainWindow
 
     private string QuantifyHelpText() => quantify == null ? "" :
         "Quantify reads the selected RAW folder and SEPro package with the shared de novo filters.\n\n" +
+        DeNovoWorkflowHelp.Build() + "\n" +
         HomologyMigrationHelp.Text + "\n\n" +
         quantify.ViewModel.Basis + "\n\n" + quantify.ViewModel.BasisDetails + "\n\n" +
         quantify.ViewModel.RunSummary + "\n\n" + quantify.ViewModel.Details;

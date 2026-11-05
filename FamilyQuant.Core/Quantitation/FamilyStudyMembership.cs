@@ -18,8 +18,8 @@ public interface IFamilyMembershipStudy
 /// fingerprint which deliberately permits regrouping without re-extracting peptide signal.</summary>
 public static class FamilyStudyMembership
 {
-    public const string ChangedMessage = "The saved family results do not match the current family membership. Compute full XIC again to refresh them.";
-    public const string UnverifiedMessage = "The saved family results do not record their family membership. Compute full XIC again to refresh them.";
+    public const string ChangedMessage = "The saved family results do not match the current family membership. Run Quantify again to refresh them.";
+    public const string UnverifiedMessage = "The saved family results do not record their family membership. Run Quantify again to refresh them.";
     public static string Fingerprint(FamilyClusterFile curation)
     {
         ArgumentNullException.ThrowIfNull(curation);

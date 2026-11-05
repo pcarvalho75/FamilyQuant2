@@ -51,7 +51,7 @@ public static class ReportInterpretationInput
         ArgumentNullException.ThrowIfNull(curation);
         ArgumentNullException.ThrowIfNull(manifest);
         if (manifest.FamilyRunShares == null)
-            throw new InvalidOperationException("The project has no stored family shares. Use Analysis > Compute full XIC and save the Results first.");
+            throw new InvalidOperationException("The project has no stored family shares. Use Quantify and save the project first.");
         FamilyStudyMembership.RequireCurrent(curation, manifest);
         // The same stored view and grouping as the report: no-peptide rows first, then the canonical partition.
         manifest = FamilyUnobservedStudies.View(curation, manifest);

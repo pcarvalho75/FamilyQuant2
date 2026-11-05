@@ -60,6 +60,9 @@ namespace FamilyQuant.Tests
                 },
                 SpectrumComparisonCsvPath = Path.Combine(output, "spectrum.csv"),
             };
+            // Linked frozen hosts may not expose this newer property; their original behavior is OFF.
+            bool scanRule = previous.GetType().GetProperty("PatternLabWinsScanConflicts")?.GetValue(previous) as bool? ?? false;
+            typeof(FullXicOptions).GetProperty("PatternLabWinsScanConflicts")?.SetValue(options, scanRule);
             Console.WriteLine("Sources: " + string.Join("; ", selections.Select(s => s.Source.Id + " " + s.CutoffLabel)));
             using Process process = Process.GetCurrentProcess();
             TimeSpan cpuStart = process.TotalProcessorTime;

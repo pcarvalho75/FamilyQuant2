@@ -632,6 +632,8 @@ namespace FamilyQuant.Tests
             {
                 IsotopeCount = DeNovoXicExtractor.DefaultEnvelopeIsotopeCount,
                 AppVersion = "test-q3",
+                // Frozen reference quantities were computed before D65.
+                PatternLabWinsScanConflicts = false,
                 // Restricted to _01, so its spectrum table is partial: keep it out of the shared data
                 // directory, where it would overwrite the complete three-run table (see the Q2 gate).
                 SpectrumComparisonCsvPath = Path.Combine(workDir, "q3_run01_spectrum_evidence.csv"),

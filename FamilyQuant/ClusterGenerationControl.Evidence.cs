@@ -140,7 +140,7 @@ public partial class ClusterGenerationControl
         ShellMessages.Report(this, message, title, buttons, image, defaultResult, SetCurationOperationStatus);
 
     private void ShowCurationOperationResult(string message) =>
-        ShellMessages.Report(this, message, "Families", status: SetCurationOperationStatus, showDialog: false);
+        ShellMessages.Report(this, message, WorkflowNames.CurateFamilies, status: SetCurationOperationStatus, showDialog: false);
 
     private void SetCurationOperationStatus(string message)
     {

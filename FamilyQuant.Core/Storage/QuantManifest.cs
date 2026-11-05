@@ -54,6 +54,13 @@ namespace FamilyQuant
         /// <summary>The MS1 clustering tolerance handed to the extractor.</summary>
         public int Ms1Tolerance { get; set; }
 
+        /// <summary>Null on older projects. Stored results retain their original values until Compute.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public bool? PatternLabWinsScanConflicts { get; set; }
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public Dictionary<string, int>? PatternLabConflictExcludedAnchorsByRun { get; set; }
+
         /// <summary>Each run's total ion current, keyed by normalized run name: the denominator every
         /// fraction over these areas is taken against. Measured with no trim, the same chromatogram the
         /// rest of the project divides by.</summary>

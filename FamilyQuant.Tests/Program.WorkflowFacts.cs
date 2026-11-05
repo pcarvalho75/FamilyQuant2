@@ -15,7 +15,7 @@ internal static partial class Program
             Check("Y6 " + screen + " publishes its retained workflow facts", missing.Length == 0, string.Join("; ", missing));
         }
         var home = new HomeControl(); LayoutAt(home, new Size(1366, 900), -1);
-        Facts("Start", string.Join(" ", ScreenWording(home)), "Four steps, one .fqproj", "once per database", "Skip this step",
+        Facts("Home", string.Join(" ", ScreenWording(home)), "Five steps, one .fqproj", "once per database", "Skip this step",
             "User IDs", "Save afterwards", "reads no RAW", "inspection only", "not needed for quantitation", "whether full XIC has been computed");
         var build = new USearchLib(); LayoutAt(build, new Size(1366, 900), -1);
         Facts("Build", build.BuildHelpText() + " " + string.Join(" ", ScreenWording(build)), "higher identity gives more, smaller families",

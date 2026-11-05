@@ -76,8 +76,8 @@ internal static partial class Program
         Capture("B84C0E820934 AFA02F4AA37B", export.ToolTip.ToString()!, "Actual disabled Results Export tooltip with Homology selected; normal hover route, not only an Export guard.");
         var main = new MainWindow(); PumpDispatcher();
         string start = UiField<TextBlock>(main, "TextBlockGuide")!.Text;
-        Check("Y9 normal Start status includes next action", start.Contains("Open project", StringComparison.Ordinal) && start.Contains("New from database", StringComparison.Ordinal));
-        Capture("18DC9493B812", start, "Actual normal Start status-bar TextBlock with no project loaded.");
+        Check("Y9 normal Home status includes next action", start.Contains("Open project", StringComparison.Ordinal) && start.Contains(WorkflowNames.BuildFamilies, StringComparison.Ordinal));
+        Capture("18DC9493B812", start, "Actual normal Home status-bar TextBlock with no project loaded.");
         main.Close();
         string help = HelpContent.Build(null, NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique);
         Check("Y9 displayed Help restores legacy TIC recovery instructions", help.Contains("per-run totals", StringComparison.Ordinal)
