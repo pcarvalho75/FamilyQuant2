@@ -116,6 +116,46 @@ internal static partial class Program
             .Count(site => WorkflowNames.Retired[3].Pattern.IsMatch(site.Text));
         Check("an old name planted in the real menu fails the source check", RetiredNameProblems(planted, PendingRetiredNameSites)
             .Unexpected.Any(problem => problem.StartsWith(key, StringComparison.Ordinal)));
+        WorkflowNameHelpChecks();
+    }
+
+    /// <summary>Help follows the five steps with the names table, and draws the flow as Home lists it (Z4h).</summary>
+    private static void WorkflowNameHelpChecks()
+    {
+        EnsureApplication();
+        bool InOrder(string text, IEnumerable<string> parts)
+        {
+            int at = -1;
+            foreach (string part in parts)
+            {
+                int next = text.IndexOf(part, at + 1, StringComparison.Ordinal);
+                if (next < 0) return false;
+                at = next;
+            }
+            return true;
+        }
+        string general = HelpContent.Build(null, NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique);
+        Check("general Help draws the flow as Home lists it and numbers the five steps with the names table",
+            general.Contains(WorkflowNames.Flow, StringComparison.Ordinal)
+            && InOrder(general, WorkflowNames.Steps.Select(step => step.Number + ". " + step.Name))
+            && general.Contains("Part a, " + WorkflowNames.GroupByEvidence, StringComparison.OrdinalIgnoreCase)
+            && general.Contains("part b, " + WorkflowNames.GroupByWords, StringComparison.OrdinalIgnoreCase));
+        Check("de novo Help names its screen De novo review",
+            HelpContent.BuildDeNovo().StartsWith("THE DE NOVO REVIEW SCREEN", StringComparison.Ordinal));
+        var shell = new MainWindow();
+        try
+        {
+            string workflow = (string)typeof(MainWindow).GetMethod("WorkflowText",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.Invoke(shell, null)!;
+            Check("workflow Help draws the same flow and titles its steps with the names table", workflow.Contains(WorkflowNames.Flow, StringComparison.Ordinal)
+                && InOrder(workflow, new[] { "STEP 1 · Build families", "STEP 2 · Curate families", "STEP 3 · Quantify", "STEP 4 · Results",
+                    "OPTIONAL · 5 De novo review" }));
+            Check("each workflow step names its Home and sidebar route with the step's number and shortcut", WorkflowNames.Steps
+                .All(step => workflow.Contains("Also: " + step.NumberedName + " on Home or the sidebar (Alt+" + step.Number + ").", StringComparison.Ordinal)));
+            Check("Home's context Help draws the same flow", shell.StatusModel.ContextHelp.StartsWith(WorkflowNames.Home + ". ", StringComparison.Ordinal)
+                && shell.StatusModel.ContextHelp.Contains(WorkflowNames.Flow, StringComparison.Ordinal), shell.StatusModel.ContextHelp);
+        }
+        finally { shell.Close(); }
     }
 
     /// <summary>Counts retired-name matches in the app and Core user-visible text, keyed "file|old name".</summary>

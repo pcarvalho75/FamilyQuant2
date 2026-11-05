@@ -142,9 +142,14 @@ public partial class MainWindow
                 "WHAT DO I DO FIRST?\n" +
                 "===================\n\n" +
                 "You are at: " + owner.StatusModel.Text + "\n\n" + owner.StatusModel.ContextHelp + "\n\n" +
-                "IN FAMILIES, FOLLOW THIS ORDER\n" + HelpContent.GroupingOrder + "\n" +
-                "STEP 1 · Group the proteins into families\n" +
+                "THE FIVE STEPS, AS ON HOME\n" +
+                "   " + WorkflowNames.Flow + "\n" +
+                "   Steps 1 to 4 run in order and step 5 is optional. Alt+0 opens Home; Alt+1 to Alt+5\n" +
+                "   open the steps, as the sidebar numbers them.\n\n" +
+                "STEP 2, PART A (" + WorkflowNames.GroupByEvidence.ToUpperInvariant() + "), FOLLOWS THIS ORDER IN FAMILIES\n" + HelpContent.GroupingOrder + "\n" +
+                "STEP 1 · " + WorkflowNames.BuildFamilies + " (" + WorkflowNames.BuildFamiliesMethod + ")\n" +
                 "   Menu: File > New from database\n" +
+                "   Also: 1 Build families on Home or the sidebar (Alt+1).\n" +
                 "   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\n" +
                 "   Produces: a Family Cluster File (.fcf) written next to the database.\n" +
                 "   Choose database, set identity, then Build families. 85% is the initial value. \"Scan\n" +
@@ -153,15 +158,17 @@ public partial class MainWindow
                 "   number. Find lowest identity uses Divide and Conquer to find the lowest identity\n" +
                 "   with no mixing at all. That is a floor, not a recommendation. Help > How to read\n" +
                 "   these numbers explains why.\n\n" +
-                "STEP 2 · Open the families\n" +
+                "STEP 2 · " + WorkflowNames.CurateFamilies + "\n" +
                 "   Menu: File > Open\n" +
+                "   Also: 2 Curate families on Home or the sidebar (Alt+2).\n" +
                 "   Needs: the .fcf from step 1.\n" +
-                "   You can now merge families further by their description words, or build one family\n" +
-                "   from a keyword list. Curation changes can be undone in this session. Use Save as\n" +
-                "   to keep the previous grouping in a separate project. On reopen, unchanged peptide\n" +
-                "   matches can be read from cached results; changed inputs are checked again. After\n" +
-                "   opening a project with stored Results, Export report becomes available when its\n" +
-                "   family attribution is ready.\n\n" +
+                "   Part a, Group by evidence, follows the order above. Part b, Group by words, merges\n" +
+                "   families further by their description words (Recluster by words), or builds one\n" +
+                "   family from a keyword list (Group by keywords). Curation changes can be undone in\n" +
+                "   this session. Use Save as to keep the previous grouping in a separate project. On\n" +
+                "   reopen, unchanged peptide matches can be read from cached results; changed inputs\n" +
+                "   are checked again. After opening a project with stored Results, Export report\n" +
+                "   becomes available when its family attribution is ready.\n\n" +
                 "BEFORE STEP 3 · Prepare the family panel and report\n" +
                 "   Menu: File > Import family panel\n" +
                 "   Needs: an open project and a spreadsheet with one row per family.\n" +
@@ -190,7 +197,7 @@ public partial class MainWindow
                 "   Needs: an open project. Enter the title, authors, sample description, workflow,\n" +
                 "   kind of database and written interpretation you want, then choose Save details.\n" +
                 "   Produces: report details in the project. Continue to step 3 to compute.\n\n" +
-                "STEP 3 · Attach the quantitation\n" +
+                "STEP 3 · " + WorkflowNames.Quantify + "\n" +
                 "   Menu: View > Quantify\n" +
                 "   Also: 3 Quantify on Home or the sidebar (Alt+3).\n" +
                 "   Needs: the RAW folder and matching identifications (.sepr2); de novo and search\n" +
@@ -211,7 +218,10 @@ public partial class MainWindow
                 "   share of. Choose what to do with peptides that belong to several families, then\n" +
                 "   press Recalculate. Modes the project cannot support are greyed out, each with\n" +
                 "   the reason in its own tooltip.\n\n" +
-                "STEP 4 · Take the result away\n" +
+                "STEP 4 · " + WorkflowNames.Results + "\n" +
+                "   Menu: View > Results\n" +
+                "   Also: 4 Results on Home or the sidebar (Alt+4). Results reads the stored quantitation\n" +
+                "   and draws its figures; it reads no RAW and changes no family.\n" +
                 "   Export to CSV writes exactly the rows on screen, with the shares as fractions\n" +
                 "   between 0 and 1 and a dot for the decimal separator, so any program can read them.\n" +
                 "   File > Save keeps the project for next time. File > Export also writes families\n" +
@@ -262,8 +272,9 @@ public partial class MainWindow
                 // The de novo screen is a separate workflow and is written as one: it is numbered
                 // OPTIONAL rather than as a fifth step, because nothing above it needs it and it needs
                 // nothing above it except, for family attribution, a Family Cluster File.
-                "OPTIONAL · 5 De novo review\n" +
-                "   Open: 5 De novo review on Home or the sidebar (Alt+5)\n" +
+                "OPTIONAL · 5 " + WorkflowNames.DeNovoReview + "\n" +
+                "   Menu: View > De novo review\n" +
+                "   Also: 5 De novo review on Home or the sidebar (Alt+5).\n" +
                 "   A separate workflow, not a step of the four above. It changes no family, no User ID\n" +
                 "   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\n" +
                 "   how the selected de novo calls relate to PatternLab. Its two core steps are:\n" +
