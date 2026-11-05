@@ -24,6 +24,8 @@ public sealed class ComputeXicViewModel : ScreenViewModel
     private string raw = "", sepro = "", deNovo = "", status = "Choose the RAW folder and the identification package.", summary = "No computation yet.", details = HelpWorkflowFacts.Quantify;
     private int? isotopes = DeNovoXicExtractor.DefaultEnvelopeIsotopeCount, points = DeNovoXicExtractor.DefaultMinPointsForQuant;
     private bool busy;
+    private bool patternLabWinsScanConflicts = true;
+    public bool PatternLabWinsScanConflicts { get => patternLabWinsScanConflicts; set => Set(ref patternLabWinsScanConflicts, value); }
     private CancellationTokenSource? cancellation;
     public AppOperationHost Operations { get; set; } = new();
     public string? OperationLogPath { get; private set; }
@@ -62,6 +64,7 @@ public sealed class ComputeXicViewModel : ScreenViewModel
     {
         this.appVersion = appVersion;
         curation = familyCuration;
+        patternLabWinsScanConflicts = manifest?.PatternLabWinsScanConflicts ?? true;
         Filters = filters ?? new(manifest);
         this.compute = compute ?? RunEngine;
         ComputeCommand = new(async () => await ComputeAsync(), () => !IsBusy);
@@ -83,7 +86,8 @@ public sealed class ComputeXicViewModel : ScreenViewModel
         var request = new ComputeXicRequest(rawPath, seproPath, deNovoPath.Length == 0 ? null : deNovoPath,
             new FullXicOptions { IsotopeCount = IsotopeCount, MinPointsForQuant = MinPointsForQuant,
                 Ppm = DeNovoXicExtractor.ProductionPpm, Ms1Tolerance = DeNovoXicExtractor.ProductionMs1Tolerance,
-                AppVersion = appVersion, FamilyCuration = curation, DeNovoCriteria = criteria, DeNovoSelections = selections });
+                AppVersion = appVersion, FamilyCuration = curation, DeNovoCriteria = criteria, DeNovoSelections = selections,
+                PatternLabWinsScanConflicts = PatternLabWinsScanConflicts });
         OperationStartedAtUtc = DateTimeOffset.UtcNow; OperationLogPath = AppOperationHost.CreateLogPath("compute");
         using var operation = Operations.Begin(WorkflowNames.Quantify, OperationStartedAtUtc, OperationLogPath);
         request = request with { Operation = operation.Context };

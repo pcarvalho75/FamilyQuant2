@@ -28,6 +28,8 @@ namespace FamilyQuant
 
         public int Ms1Tolerance { get; set; } = DeNovoXicExtractor.ProductionMs1Tolerance;
 
+        public bool PatternLabWinsScanConflicts { get; set; } = true;
+
         /// <summary>The FamilyQuant version stamped into the manifest.</summary>
         public string AppVersion { get; set; } = string.Empty;
 
