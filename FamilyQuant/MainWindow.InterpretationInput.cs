@@ -25,7 +25,7 @@ public partial class MainWindow
         var manifest = loadedManifest;
         if (cgc == null || curation == null || manifest?.FamilyRunShares == null || loadedQuant.Count == 0)
         {
-            ShellMessages.Report(this, "The interpretation input needs stored Results. Use Analysis > Compute full XIC, then choose File > Export > "
+            ShellMessages.Report(this, "The interpretation input needs stored Results. Use Quantify, then choose File > Export > "
                 + "Interpretation input (Markdown).", "Export interpretation input");
             return false;
         }

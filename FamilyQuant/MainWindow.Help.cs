@@ -34,7 +34,7 @@ public partial class MainWindow
                     "by mass, the isotopes credited per peptide, the percent of ion current by mass, what " +
                     "each family contributes, and the recovery of the total ion current. These analytics graphs can be " +
                     "saved as a projector-sized PNG. It changes no family and reads no RAW. If it says " +
-                    "there is nothing to analyse, use Analysis > Compute full XIC first. The open " +
+                    "there is nothing to analyse, use Quantify first. The open " +
                     "project stays open: File > Save saves it from here, and View > Families " +
                     "returns to it. File > Open opens a different project or Family Cluster File.\n\n" + DatabaseGapHelp.Text;
             }
@@ -57,7 +57,7 @@ public partial class MainWindow
             {
                 return
                     "Families loaded. " + owner.ProjectStatusText() + " Curate them here, then " +
-                    "Analysis > Compute full XIC gives the project its own quantitation, and Results " +
+                    "Quantify gives the project its own quantitation, and Results " +
                     "reads it. Help · How to read these numbers explains every column.";
             }
 
@@ -191,9 +191,9 @@ public partial class MainWindow
                 "   kind of database and written interpretation you want, then choose Save details.\n" +
                 "   Produces: report details in the project. Continue to step 3 to compute.\n\n" +
                 "STEP 3 · Attach the quantitation\n" +
-                "   Menu: Analysis > Compute full XIC\n" +
+                "   Open: 3 Quantify on Home or the sidebar (Alt+3)\n" +
                 "   Needs: the RAW folder and matching identifications (.sepr2); de novo and search\n" +
-                "   settings are optional. Choose Compute full XIC in Quantify.\n" +
+                "   settings are optional. Press Quantify on that screen.\n" +
                 "   Compute and project opening show progress for each phase, the current item,\n" +
                 "   elapsed time and time since the last step. Where a known total is available,\n" +
                 "   the progress line counts completed work. Operation log shows recorded steps.\n" +

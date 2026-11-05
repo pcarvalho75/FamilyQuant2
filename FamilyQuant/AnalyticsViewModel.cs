@@ -34,7 +34,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     public string Details { get; } = "";
     private const string MissingQuantitation = "No full XIC is stored. Results reads FamilyQuant's own full isotope-envelope quantitation. " +
         "A plain .fcf carries no quantitation, and a .fqproj saved before full XIC was ever computed carries none either. " +
-        "Load the project, open Quantify, compute full XIC, then return here to draw the graphs.";
+        "Load the project, run Quantify, then return here to draw the graphs.";
     public string EmptyMessage => MissingQuantitation + (HasHomology ? " The standalone homology snapshot can still be exported here." : "");
     public IReadOnlyList<ResultsSummaryCard> Cards { get; } = Array.Empty<ResultsSummaryCard>();
     public int FamilyTopN { get => topN; set => Set(ref topN, value); }

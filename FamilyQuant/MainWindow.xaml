@@ -82,10 +82,10 @@
                           ToolTip="Hides contaminant rows in the family table and its CSV without changing percentages. Disabled until a project is loaded."/>
             </MenuItem>
             <MenuItem Header="Analysis" SubmenuOpened="MenuAnalysis_SubmenuOpened" ToolTip="Compute quantitation, inspect results or review de novo evidence.">
-                <MenuItem x:Name="MenuItemComputeXic" Header="Compute full XIC" Click="MenuItemComputeXic_Click" IsEnabled="False"
+                <MenuItem x:Name="MenuItemComputeXic" Header="Quantify" Click="MenuItemComputeXic_Click" IsEnabled="False"
                           ToolTip="Measures identified and kept de novo precursors from RAW files with the full isotope envelope. Disabled until a project is loaded."/>
                 <MenuItem x:Name="MenuItemAnalytics" Header="Results" Click="MenuItemAnalytics_Click"
-                          ToolTip="Shows the project's stored quantitation and its exports. Compute full XIC first when no results are stored."/>
+                          ToolTip="Shows the project's stored quantitation and its exports. Use Quantify first when no results are stored."/>
                 <MenuItem x:Name="MenuItemDeNovo" Header="De novo evidence" Click="MenuItemDeNovo_Click"
                           ToolTip="Imports, filters and compares PEAKS or DeepNovo evidence with PatternLab. It changes no family or quantitation."/>
                 <MenuItem x:Name="MenuItemSpectrumComparison" Header="Spectrum comparison" Click="MenuItemSpectrumComparison_Click" IsEnabled="False"

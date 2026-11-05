@@ -38,7 +38,7 @@
    </Border>
    <TextBlock Text="{Binding Basis}" ToolTip="{Binding BasisDetails}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,12,0,8"/>
    <StackPanel Orientation="Horizontal">
-    <Button x:Name="ButtonCompute" Content="Compute full XIC" Style="{DynamicResource PrimaryButton}" Command="{Binding ComputeCommand}"
+    <Button x:Name="ButtonCompute" Content="Quantify" Style="{DynamicResource PrimaryButton}" Command="{Binding ComputeCommand}"
      ToolTip="Compute identified and selected de novo peptide envelopes from at least a RAW folder and matching trusted .sepr2 package. Save the project afterwards to keep the completed result."/>
     <Button Content="Cancel" Command="{Binding CancelCommand}" ToolTip="Cancel at the next operation boundary. The previous project results remain available."/>
     <Button x:Name="ButtonViewSpectrumComparison" Content="Spectrum table" Click="ViewSpectrum" IsEnabled="{Binding Computed}"

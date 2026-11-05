@@ -321,8 +321,7 @@ public partial class MainWindow
             {
                 ShellMessages.Report(owner,
                     "There is no spectrum comparison table to show yet.\n\n" +
-                    "Next step: load a .fqproj that contains full quantitation, or run Analysis > Compute " +
-                    "full XIC first.",
+                    "Next step: load a .fqproj that contains full quantitation, or run Quantify first.",
                     "No spectrum table yet", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }

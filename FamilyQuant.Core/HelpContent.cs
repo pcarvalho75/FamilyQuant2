@@ -38,7 +38,7 @@ namespace FamilyQuant
             sb.AppendLine();
 
             sb.AppendLine("HOW QUANTITATION WORKS");
-            sb.AppendLine("Two sources: the Full XIC column comes from Analysis > Compute full XIC (Quantify).");
+            sb.AppendLine("Two sources: the Full XIC column comes from Quantify.");
             sb.AppendLine("The optional PatternLab .plp supplies the 'Share of signal' column.");
             sb.AppendLine("Shared peptides applies to both columns; PatternLab share of and Recalculate apply");
             sb.AppendLine("to the .plp column. Share of under Full XIC changes that column immediately.");
@@ -53,7 +53,7 @@ namespace FamilyQuant
             sb.AppendLine("   Cluster File (.fcf) next to the database: proteins grouped into families.");
             sb.AppendLine("2. File > Open opens that .fcf in Families, where you");
             sb.AppendLine("   follow the numbered Grouping order below before quantitation.");
-            sb.AppendLine("3. Analysis > Compute full XIC opens Quantify for the primary quantitation route.");
+            sb.AppendLine("3. Quantify, on Home or the sidebar, is the primary quantitation route.");
             sb.AppendLine("   In Families, PatternLab (optional) offers Load PatternLab project for a .plp. It");
             sb.AppendLine("   must have been exported at PEPTIDE level - a protein-level export has nothing");
             sb.AppendLine("   this program can attribute to a family.");
@@ -63,8 +63,8 @@ namespace FamilyQuant
             sb.AppendLine("   into a SEPro result package.");
             sb.AppendLine();
             sb.AppendLine("The families and the quantitation you keep live in one FamilyQuant project file, a");
-            sb.AppendLine(".fqproj, written by File > Save. Beyond the share above, Analysis > Compute full XIC");
-            sb.AppendLine("opens Quantify, which measures each peptide's full isotope envelope straight from the RAW");
+            sb.AppendLine(".fqproj, written by File > Save. Beyond the share above, Quantify measures each");
+            sb.AppendLine("peptide's full isotope envelope straight from the RAW");
             sb.AppendLine("and stores it in that project, and the Results screen then reads the recovery");
             sb.AppendLine("from it. An old Family Cluster File (.fcf) still opens, with the quantitation empty");
             sb.AppendLine("until it is computed.");
@@ -420,7 +420,7 @@ namespace FamilyQuant
             sb.AppendLine("agreements as a review queue.");
             sb.AppendLine("That queue is the one thing only this screen produces.");
             sb.AppendLine();
-            sb.AppendLine("Quantify (Analysis > Compute full XIC) uses the selected sources and shared filters for full");
+            sb.AppendLine("Quantify uses the selected sources and shared filters for full");
             sb.AppendLine("XIC computation and reported by Results through the .fqproj project, so the");
             sb.AppendLine("de novo set no longer has to carry the whole story on its own.");
             sb.AppendLine();

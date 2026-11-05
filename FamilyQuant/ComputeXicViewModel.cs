@@ -85,7 +85,7 @@ public sealed class ComputeXicViewModel : ScreenViewModel
                 Ppm = DeNovoXicExtractor.ProductionPpm, Ms1Tolerance = DeNovoXicExtractor.ProductionMs1Tolerance,
                 AppVersion = appVersion, FamilyCuration = curation, DeNovoCriteria = criteria, DeNovoSelections = selections });
         OperationStartedAtUtc = DateTimeOffset.UtcNow; OperationLogPath = AppOperationHost.CreateLogPath("compute");
-        using var operation = Operations.Begin("Compute full XIC", OperationStartedAtUtc, OperationLogPath);
+        using var operation = Operations.Begin(WorkflowNames.Quantify, OperationStartedAtUtc, OperationLogPath);
         request = request with { Operation = operation.Context };
         var tokenSource = CancellationTokenSource.CreateLinkedTokenSource(operation.Context.CancellationToken);
         using var tokenLifetime = tokenSource;

@@ -8,7 +8,7 @@ public static class HelpWorkflowFacts
         "Home steps also have sidebar and menu commands; the status bar names the current stage and open project and explains what to do next. Tab and Shift+Tab move between enabled controls, and the native focus indicator marks the active control.\n\n" +
         "If no project is open, nothing is saved: use File > Open for a .fqproj or .fcf, or File > New from database to build families. File and row counts use whole numbers with digit grouping and no decimal places.\n\n" +
         "File > Save keeps families, User IDs, annotations and computed quantitation together in one .fqproj; use Save as to keep the previous version. The .fcf export keeps the families and annotations without the full XIC result.\n\n" +
-        "Results reads stored full-envelope quantitation, including family shares and total-ion-current recovery, without reading RAW or changing families. Compute full XIC first when the project has no stored quantitation, then save the project to keep it.\n\n" +
+        "Results reads stored full-envelope quantitation, including family shares and total-ion-current recovery, without reading RAW or changing families. Use Quantify first when the project has no stored quantitation, then save the project to keep it.\n\n" +
         "The spectrum comparison is read-only, with one row per file, scan, charge and precursor m/z hypothesis, comparing PEAKS, DeepNovo and PatternLab. Its CSV export names the written CSV path in the completion message.\n\n";
 
     public const string Build =
@@ -35,7 +35,7 @@ public static class HelpWorkflowFacts
 
     public const string Quantify =
         "QUANTIFY WORKFLOW DETAILS\n" +
-        "Compute requires at least the RAW folder and a trusted .sepr2 identification package from the same runs; trust is required because the legacy package reader uses unsafe deserialization. Add a de novo export root if available, select its source, then Compute full XIC and save the project afterwards.\n\n" +
+        "Compute requires at least the RAW folder and a trusted .sepr2 identification package from the same runs; trust is required because the legacy package reader uses unsafe deserialization. Add a de novo export root if available, select its source, then press Quantify and save the project afterwards.\n\n" +
         "Runs match RAW acquisitions by file name and are read one acquisition at a time; the first extraction can take a while. Unchanged inputs can reuse a validated extraction cache for a second computation.\n\n" +
         "Type the folder containing .raw acquisitions in RAW folder and the .sepr2 path in Identifications. The optional de novo root is searched recursively and only the selected sources are read and filtered; leave it empty for identified peptides only.\n\n" +
         "PEAKS de novo only reads *.denovoOnly.csv, PEAKS de novo all reads *.denovo.csv and DeepNovo reads *.deepnovo.csv. PEAKS ALC and DeepNovo SCORE are different confidence scales and are never mixed: a SCORE of 80 is not a PEAKS ALC of 80, and each source has its own 0 to 100 cutoff, default 80, applying only to its own calls.\n\n" +
