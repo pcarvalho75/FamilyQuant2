@@ -17,6 +17,7 @@ internal static partial class Program
             {
                 DatabaseUpdateMatchingTests();
                 DatabaseUpdatePlacementTests();
+                DatabaseUpdatePlacementSideTests();
                 DatabaseUpdateApplyTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;

@@ -72,7 +72,8 @@ namespace FamilyQuant.DatabaseUpdate
             return new DatabaseUpdatePreview
             {
                 ProjectFingerprint = fingerprint, Comparison = comparison, Placement = placement, Rows = placement.Rows, Counts = counts,
-                DecoyCounts = Copy(placement.DecoyCounts), NameChanges = changes, EmptiedFamilies = emptied, Warnings = comparison.Warnings,
+                DecoyCounts = Copy(placement.DecoyCounts), NameChanges = changes, EmptiedFamilies = emptied,
+                Warnings = comparison.Warnings.Concat(placement.Warnings).ToArray(),
             };
         }
 

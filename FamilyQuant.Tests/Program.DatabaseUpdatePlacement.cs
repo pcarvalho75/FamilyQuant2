@@ -154,6 +154,54 @@ internal static partial class Program
             Partition(updateFamilies) + " | " + Partition(rebuilt.MyExtendedFastaItems.Select(r => (r.SequenceIdentifier, Family: r.USearchID))));
     }
 
+    /// <summary>Review findings on Z14c3b: decoys never place targets nor targets decoys, and only the explicit
+    /// exhaustive method string earns second-pass links.</summary>
+    private static void DatabaseUpdatePlacementSideTests()
+    {
+        Section("Database update: placement keeps targets and decoys apart and reads the method strictly (Z14c3b fix)");
+        string t = UpdateSequence(701, 180), u = UpdateSequence(702, 170);
+        var project = new FamilyClusterFile
+        {
+            ClusteringIdentity = 70, ClusteringMethod = USearchTools.ExhaustiveClusteringMethod, SourceSha256 = "OLD", SourceSequenceCount = 4,
+            MyExtendedFastaItems = new List<FastaItemExtended>
+            {
+                UpdateRow("sp|P70001|T1_SYN", "Tau OS=Synthetica una OX=1", t, 1),
+                UpdateRow("Reverse_sp|P70001|T1_SYN", "", UpdateReverse(t), 2),
+                UpdateRow("sp|P70002|U1_SYN", "Upsilon OS=Synthetica una OX=1", u, 3),
+                UpdateRow("Reverse_sp|P70002|U1_SYN", "", UpdateReverse(u), 4),
+            },
+        };
+        var entries = project.MyExtendedFastaItems.Select(r => new DatabaseUpdateEntry(r.SequenceIdentifier, r.Description, r.Sequence)).ToList();
+        // A target whose sequence resembles a kept decoy, and a decoy whose sequence resembles a kept target.
+        entries.Add(new DatabaseUpdateEntry("tr|Q70003|Q70003_SYN", "Odd OS=Synthetica una OX=1", UpdateMutate(UpdateReverse(u), 703, 0.08)));
+        entries.Add(new DatabaseUpdateEntry("Reverse_tr|Q70004|Q70004_SYN", "", UpdateMutate(t, 704, 0.08)));
+        entries.Add(new DatabaseUpdateEntry("tr|Q70005|Q70005_SYN", "Tau new OS=Synthetica una OX=1", UpdateMutate(t, 705, 0.08)));
+        var source = DatabaseUpdateSource.FromEntries("new.fasta", "NEW", entries);
+        var placement = DatabaseUpdatePlacer.Place(project, DatabaseUpdateComparer.Compare(project, source));
+        DatabaseUpdateAddedPlacement Of(string id) => placement.Added.Single(p => source.Records[p.NewIndex].Identifier == id);
+        Check("DU2: a target never joins a decoy family", Of("tr|Q70003|Q70003_SYN") is { Kind: DatabaseUpdatePlacementKind.NewFamily }
+            && Of("tr|Q70003|Q70003_SYN").UserId != 4, JsonSerializer.Serialize(Of("tr|Q70003|Q70003_SYN")));
+        Check("DU2: a decoy never joins a target family", Of("Reverse_tr|Q70004|Q70004_SYN") is { Kind: DatabaseUpdatePlacementKind.NewFamily }
+            && Of("Reverse_tr|Q70004|Q70004_SYN").UserId != 1, JsonSerializer.Serialize(Of("Reverse_tr|Q70004|Q70004_SYN")));
+        Check("DU2: a target still joins its target relative", Of("tr|Q70005|Q70005_SYN") is { UserId: 1, Kind: DatabaseUpdatePlacementKind.NearestKeptNeighbour });
+        Check("DU2: new families are counted per side", placement.Counts.NewFamilies == 1 && placement.DecoyCounts.NewFamilies == 1,
+            JsonSerializer.Serialize(new { placement.Counts.NewFamilies, Decoy = placement.DecoyCounts.NewFamilies }));
+
+        foreach (string method in new[] { string.Empty, "USEARCH cluster_fast (FamilyQuant 1.5)" })
+        {
+            var fixture = DatabaseUpdatePlacementFixture(exhaustive: true);
+            fixture.Project.ClusteringMethod = method;
+            var result = DatabaseUpdatePlacer.Place(fixture.Project, DatabaseUpdateComparer.Compare(fixture.Project, fixture.Source));
+            Check("DU2: a project whose method is " + (method.Length == 0 ? "empty" : "unknown") + " is placed by the fast-pass test only, and says so",
+                !result.Exhaustive && result.Added.All(p => !p.PassesSecondPass && p.OtherLinkedFamilies.Count == 0)
+                && result.Warnings.Any(w => w.Contains("fast-pass test only", StringComparison.Ordinal)), string.Join(" ", result.Warnings));
+        }
+        var explicitFixture = DatabaseUpdatePlacementFixture(exhaustive: true);
+        Check("DU2: the explicit exhaustive method earns second-pass links and no warning",
+            DatabaseUpdatePlacer.Place(explicitFixture.Project, DatabaseUpdateComparer.Compare(explicitFixture.Project, explicitFixture.Source)) is { Exhaustive: true } placed
+            && placed.Warnings.Count == 0 && placed.Added.Any(p => p.PassesSecondPass));
+    }
+
     private static string Partition(IEnumerable<(string Identifier, int Family)> members) => string.Join(" / ",
         members.GroupBy(m => m.Family).Select(g => string.Join(",", g.Select(m => m.Identifier).OrderBy(i => i, StringComparer.Ordinal)))
             .OrderBy(s => s, StringComparer.Ordinal));

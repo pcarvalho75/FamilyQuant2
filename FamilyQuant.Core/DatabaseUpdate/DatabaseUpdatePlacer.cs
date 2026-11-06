@@ -31,6 +31,8 @@ namespace FamilyQuant.DatabaseUpdate
         public IReadOnlyList<DatabaseUpdateRow> Rows { get; init; } = Array.Empty<DatabaseUpdateRow>();
         public DatabaseUpdateCounts Counts { get; init; } = new();
         public DatabaseUpdateCounts DecoyCounts { get; init; } = new();
+        /// <summary>Plain sentences for the preview, for example that only the fast-pass test was used.</summary>
+        public IReadOnlyList<string> Warnings { get; init; } = Array.Empty<string>();
     }
 
     /// <summary>
@@ -41,7 +43,9 @@ namespace FamilyQuant.DatabaseUpdate
     /// <see cref="USearchTools.PassesExhaustiveGate"/> is a second-pass link. An added protein joins the family of
     /// its best link; added proteins with no link follow the family most of their added-only relatives joined
     /// (the added set clustered by <see cref="USearchTools.Cluster"/>); the rest form new families numbered above
-    /// every number in use. Kept families are never merged and kept proteins never move.
+    /// every number in use. Kept families are never merged and kept proteins never move. Links and relatives are
+    /// only ever on the same side: targets with targets, decoys with decoys. Second-pass links exist only for a
+    /// project whose method is <see cref="USearchTools.ExhaustiveClusteringMethod"/>.
     /// </summary>
     public static class DatabaseUpdatePlacer
     {
@@ -61,7 +65,16 @@ namespace FamilyQuant.DatabaseUpdate
                 throw new InvalidOperationException("The project changed since it was compared with the new database. Compare again.");
             int identity = project.ClusteringIdentity;
             if (identity <= 0 || identity > 100) throw new InvalidDataException("The project records no clustering identity, so new proteins cannot be placed.");
-            bool exhaustive = !string.Equals(project.ClusteringMethod, USearchTools.FastClusteringMethod, StringComparison.Ordinal);
+            // Only the method string Build families writes after its second pass earns second-pass links; an empty,
+            // older or fast-only method is placed by the fast-pass test (docs/design/DATABASE-UPDATE.md section 4).
+            bool exhaustive = string.Equals(project.ClusteringMethod, USearchTools.ExhaustiveClusteringMethod, StringComparison.Ordinal);
+            var warnings = new List<string>();
+            if (!exhaustive)
+                warnings.Add(string.Equals(project.ClusteringMethod, USearchTools.FastClusteringMethod, StringComparison.Ordinal)
+                    ? "This project was built without the exhaustive second pass, so new proteins are placed by the fast-pass test only."
+                    : "This project does not record that Build families ran its exhaustive second pass ("
+                        + (string.IsNullOrWhiteSpace(project.ClusteringMethod) ? "no method recorded" : "method \"" + project.ClusteringMethod + "\"")
+                        + "), so new proteins are placed by the fast-pass test only.");
             List<FastaItemExtended> rows = project.MyExtendedFastaItems;
             IReadOnlyList<DatabaseUpdateEntry> records = comparison.Source.Records;
 
@@ -71,6 +84,10 @@ namespace FamilyQuant.DatabaseUpdate
             var changed = comparison.Matches.Where(m => m.Kind == DatabaseUpdateKind.SequenceChanged && rows[m.OldIndex].HasUserId).ToList();
             List<int> added = comparison.Added.ToList();
             var hits = new Dictionary<int, List<(int Kept, USearchTools.PairwiseEdge Edge)>>();
+            // A target never takes its family from a decoy, nor a decoy from a target (section 3).
+            bool[] keptDecoy = kept.Select(k => SequenceLabels.IsDecoy(rows[k.OldIndex].SequenceIdentifier ?? string.Empty)).ToArray();
+            bool[] queryDecoy = added.Select(j => SequenceLabels.IsDecoy(records[j].Identifier))
+                .Concat(changed.Select(m => SequenceLabels.IsDecoy(records[m.NewIndex].Identifier))).ToArray();
             if (kept.Count > 0 && (added.Count > 0 || changed.Count > 0))
             {
                 // Queries: added records first, then changed sequences; labels are positions, never headers.
@@ -89,6 +106,7 @@ namespace FamilyQuant.DatabaseUpdate
                     USearchTools.SearchGlobal(queryPath, keptPath, identity / 100.0, edge =>
                     {
                         int q = Label(edge.QueryId, 'q', queries.Count), k = Label(edge.TargetId, 'k', kept.Count);
+                        if (queryDecoy[q] != keptDecoy[k]) return;
                         if (!hits.TryGetValue(q, out var list)) hits[q] = list = new();
                         list.Add((k, edge));
                     }, operation);
@@ -126,7 +144,8 @@ namespace FamilyQuant.DatabaseUpdate
             if (unplaced.Count > 0)
             {
                 Dictionary<int, int> relatives = AddedOnlyFamilies(added.Select(j => records[j].Sequence).ToList(), identity, exhaustive, operation);
-                var byFamily = added.Select((j, q) => (j, Family: relatives[q])).GroupBy(t => t.Family)
+                // Relatives are followed only on the same side: a decoy never follows a target, nor a target a decoy.
+                var byFamily = added.Select((j, q) => (j, Family: (relatives[q], SequenceLabels.IsDecoy(records[j].Identifier)))).GroupBy(t => t.Family)
                     .OrderBy(g => g.Min(t => t.j)).ToList();
                 foreach (var group in byFamily)
                 {
@@ -176,6 +195,7 @@ namespace FamilyQuant.DatabaseUpdate
             {
                 ProjectFingerprint = comparison.ProjectFingerprint, ClusteringIdentity = identity, Exhaustive = exhaustive, Method = Method,
                 Added = added.Select(j => placed[j]).ToArray(), SequenceChecks = checks, Rows = rowsOut, Counts = counts, DecoyCounts = decoyCounts,
+                Warnings = warnings,
             };
 
             static (int, double, int, int, int) Order(DatabaseUpdateAddedPlacement p) => Rank(p);
