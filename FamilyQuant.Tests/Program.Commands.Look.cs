@@ -32,6 +32,12 @@ internal static partial class Program
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),
+        new("--test-evidence-newcomer", 53, TestCommandPhase.Raw, args => args.Contains("--test-evidence-newcomer", StringComparer.Ordinal), (args, _) =>
+        {
+            EvidenceNewcomerTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
     ];
 
     private static int RunCurationLayoutChecks(string[] args, string workDir)

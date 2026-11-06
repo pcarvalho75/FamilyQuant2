@@ -11,6 +11,8 @@ namespace FamilyQuant
     {
         public const string QueryCoverageRule =
             "At least 70 percent of the query's residues occur in the alignment; inserted gap columns do not count.";
+        public static string QueryCoverageSummary => "The comparison must cover at least "
+            + NearestReviewed.DefaultMinQueryAlignedPercent.ToString("0.##", CultureInfo.CurrentCulture) + "% of this protein's length.";
         public static EvidenceReviewInput Present(EvidenceProposal proposal, FamilyClusterFile file)
         {
             var input = Present(proposal, file.MyExtendedFastaItems, file.LockedUserIds);

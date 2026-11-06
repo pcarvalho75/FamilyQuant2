@@ -138,7 +138,7 @@
                     </DockPanel>
                     <TextBlock Text="{Binding Status}" Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
                                TextWrapping="NoWrap" Margin="0,8,0,0" ToolTip="{Binding Status}"/>
-                    <TextBlock x:Name="TextBlockQueryCoverageRule" Text="{x:Static local:EvidenceProposalPresentation.QueryCoverageRule}"
+                    <TextBlock x:Name="TextBlockQueryCoverageRule" Text="{x:Static local:EvidenceProposalPresentation.QueryCoverageSummary}" ToolTip="{x:Static local:EvidenceProposalPresentation.QueryCoverageRule}"
                                Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,8,0,0" TextWrapping="Wrap"/>
                     </StackPanel>
                     </ScrollViewer>
