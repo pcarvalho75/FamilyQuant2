@@ -87,7 +87,7 @@
             </TabItem>
             <TabItem Header="Evidence" IsEnabled="{Binding EvidenceAvailable}" ToolTip="Review classified families, protein-level reasons and flags. Disabled until an evidence proposal is available.">
                 <Grid Margin="8">
-                    <Grid.RowDefinitions><RowDefinition Height="2*" MaxHeight="260"/><RowDefinition Height="3*" MinHeight="390"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                    <Grid.RowDefinitions><RowDefinition Height="2*" MaxHeight="260"/><RowDefinition Height="3*" MinHeight="430"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10">
                     <StackPanel>
                     <DockPanel Visibility="{Binding TaskDiscoveryAvailable, Converter={StaticResource VisibleWhenTrue}}" Margin="0,0,0,8">
@@ -195,6 +195,10 @@
                                         <Button Content="Untick flagged" Click="UntickFlagged_Click" ToolTip="Clears selected proteins with a supplied evidence flag. All unflagged selections stay as they were."/>
                                         <Button Content="Tick selected" Click="EvidenceTickSelected_Click" ToolTip="Selects only the highlighted protein rows for their supplied proposed families."/>
                                         <Button Content="Untick selected" Click="EvidenceUntickSelected_Click" ToolTip="Clears only the highlighted protein rows. Their current document families stay unchanged until Apply."/>
+                                        <Button x:Name="addFamilyButton" Content="Add to family" Click="AddManualFamily_Click" IsEnabled="{Binding DataContext.CanEditManual, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                ToolTip="Assigns highlighted proteins to a proposed or new family by explicit user choice."/>
+                                        <Button x:Name="removeFamilyButton" Content="Remove from family" Click="RemoveManualFamily_Click" IsEnabled="{Binding DataContext.CanEditManual, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                ToolTip="Clears hand-added proposal choices; the automatic proposal is restored."/>
                                     </WrapPanel>
                                     <Grid>
                                     <Grid.RowDefinitions><RowDefinition Height="2*" MinHeight="120"/><RowDefinition Height="8"/><RowDefinition Height="3*" MinHeight="110"/></Grid.RowDefinitions>
@@ -218,8 +222,8 @@
                                                     <Setter Property="ToolTip" Value="{Binding FlagsHelp}"/>
                                                 </Style></DataGridTextColumn.CellStyle>
                                             </DataGridTextColumn>
-                                            <DataGridTextColumn Header="Proposed family" Width="200" MinWidth="200" IsReadOnly="True" Binding="{Binding Family}">
-                                                <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="The evidence family key; edit its output name in the family list on the left."/></Style></DataGridTextColumn.HeaderStyle>
+                                            <DataGridTextColumn Header="Proposed family" Width="200" MinWidth="200" IsReadOnly="True" Binding="{Binding FamilyDisplay}">
+                                                <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="The evidence family or hand-choice target; edit its output name in the family list on the left."/></Style></DataGridTextColumn.HeaderStyle>
                                             </DataGridTextColumn>
                                             <DataGridTextColumn Header="Reviewed relative" Width="180" MinWidth="180" IsReadOnly="True" Binding="{Binding Neighbour}"/>
                                             <DataGridTextColumn Header="Domains" Width="180" MinWidth="180" IsReadOnly="True" Binding="{Binding Domains}"/>
@@ -310,6 +314,12 @@
                             </TabItem>
                             <TabItem Header="Unassigned">
                                 <DockPanel>
+                                <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,6">
+                                    <Button x:Name="addUnassignedFamilyButton" Content="Add to family" Tag="Unassigned" Click="AddManualFamily_Click" IsEnabled="{Binding CanEditManual}"
+                                            ToolTip="Assigns highlighted proteins to a proposed or new family by explicit user choice."/>
+                                    <Button Content="Remove from family" Tag="Unassigned" Click="RemoveManualFamily_Click" IsEnabled="{Binding CanEditManual}"
+                                            ToolTip="Clears hand-added proposal choices; the automatic proposal is restored."/>
+                                </WrapPanel>
                                 <TextBlock x:Name="unassignedLegend" DockPanel.Dock="Top" FontSize="11" Foreground="{DynamicResource MutedBrush}"
                                            Text="No family proposed; these proteins keep their current families and remain available for quantitation."
                                            TextTrimming="CharacterEllipsis" Margin="0,0,0,6"

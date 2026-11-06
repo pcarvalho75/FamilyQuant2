@@ -56,6 +56,18 @@ internal static partial class Program
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),
+        new("--test-manual-family-choices", 57, TestCommandPhase.Raw, args => args.Contains("--test-manual-family-choices", StringComparer.Ordinal), (args, _) =>
+        {
+            ManualFamilyChoiceTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-manual-family-ui", 58, TestCommandPhase.Raw, args => args.Contains("--test-manual-family-ui", StringComparer.Ordinal), (args, _) =>
+        {
+            ManualFamilyUiTests(args.Length == 2 ? args[1] : null);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
     ];
 
     private static int RunCurationLayoutChecks(string[] args, string workDir)

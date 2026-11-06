@@ -106,6 +106,24 @@ public static class ReportMethods
                 "These are the user's saved choices and notes. A changed panel definition makes a choice out of date; a choice does not prove an assignment was applied."));
         }
 
+        if (curation.EvidenceRecipe?.ManualChoices is { Count: > 0 } handChoices)
+        {
+            var recipe = curation.EvidenceRecipe;
+            var assignments = recipe.Assignments.Where(a => a.Tier == EvidenceTier.AddedByHand).ToDictionary(a => a.ProteinIndex);
+            var handRows = handChoices.OrderBy(c => c.ProteinIndex).Select(choice =>
+            {
+                bool same = choice.ProteinIndex >= 0 && choice.ProteinIndex < curation.MyExtendedFastaItems.Count;
+                var protein = same ? curation.MyExtendedFastaItems[choice.ProteinIndex] : null;
+                same = same && protein!.SequenceIdentifier == choice.Identifier && ManualFamilyChoices.SequenceHash(protein.Sequence ?? "") == choice.SequenceSha256;
+                string status = !same ? "Source changed" : !choice.Selected ? "Not selected" : assignments.TryGetValue(choice.ProteinIndex, out var assignment)
+                    && protein!.UserID == assignment.FamilyId ? "Applied" : "Grouping changed";
+                string name = recipe.Families.FirstOrDefault(f => f.Family == choice.Family)?.Name ?? choice.Name;
+                return (IReadOnlyList<string>)new[] { choice.Identifier, name, choice.Note ?? "", status };
+            }).ToArray();
+            blocks.Add(new ReportTable("methods-hand-families", "Saved hand-added family choices", new[] { "Protein", "Chosen family", "User note", "Status" }, handRows,
+                "These memberships are explicit user choices, not automatic evidence. The grouping recipe retains notes and the original automatic evidence; status is checked against the current identifier, sequence and family."));
+        }
+
         var deNovoRows = manifest.DeNovoInputs.OrderBy(i => i.SourceId, StringComparer.Ordinal).ThenBy(i => i.FilePath, StringComparer.Ordinal)
             .Select(i => (IReadOnlyList<string>)new[] { i.SourceDisplayName, i.ConfidenceField, Number(i.MinimumConfidence),
                 Number(i.SourcePriority), Number(i.RawRows), Number(i.RowsPassingSourceFilter), i.FilePath }).ToArray();

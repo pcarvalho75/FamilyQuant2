@@ -22,6 +22,10 @@ namespace FamilyQuant
         private readonly Func<string, string>? motif;
         private readonly Func<IProgress<FetchProgress>?, CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask;
         private readonly Func<IReadOnlyList<PanelFamilyLinkSelection>, EvidenceReviewInput>? confirmPanelLinks;
+        private readonly Func<EvidenceManualRequest, EvidenceReviewInput>? addToFamily;
+        private readonly Func<IReadOnlyList<int>, EvidenceReviewInput>? removeFromFamily;
+        private readonly Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices;
+        private string manualFailure = "";
         private CancellationTokenSource? discoveryCancellation;
         public EvidenceTaskScopeInput? TaskScope { get; private set; }
         public bool TaskDiscoveryAvailable => discoverTask != null;
@@ -37,6 +41,7 @@ namespace FamilyQuant
         public bool CanCheckMotif => motif != null && !IsBusy && Evidence != null && !string.IsNullOrWhiteSpace(MotifPattern);
         public bool CanUpdatePanelLinks => confirmPanelLinks != null && !IsBusy && Evidence?.HasUnappliedPanelLinkChoices == true
             && Evidence.HasInvalidPanelLinkNotes == false;
+        public bool CanEditManual => Evidence != null && !IsBusy && ScopeText == proposalScope && addToFamily != null && removeFromFamily != null;
         public int ModeIndex { get => modeIndex; set { modeIndex = value; Changed(); NotifySummary(); } }
         public string ScopeText { get => scopeText; set { scopeText = value; Changed(); Changed(nameof(CanUpdateProposal)); NotifySummary(); } }
         public string MotifPattern { get => motifPattern; set { motifPattern = value; Changed(); Changed(nameof(CanCheckMotif)); NotifySummary(); } }
@@ -53,6 +58,7 @@ namespace FamilyQuant
             {
                 if (ModeIndex != 1) return "";
                 if (IsBusy) return "Please wait for the current review step to finish.";
+                if (manualFailure.Length > 0) return manualFailure;
                 if (Evidence == null) return string.IsNullOrWhiteSpace(ScopeText)
                     ? "Enter scope words, then use Update proposal." : "Use Update proposal to build the family proposal.";
                 if (ScopeText != proposalScope) return "Scope changed: use Update proposal before Apply grouping.";
@@ -64,7 +70,10 @@ namespace FamilyQuant
                 if (Evidence.Architectures.Any(a => Evidence.Families.Any(f => f.Family == a.Family && f.SelectedCount > 0) && !a.IsValid))
                     return "Enter a name for every ticked split.";
                 if (MotifPattern.Length > 0 && checkedMotifPattern != MotifPattern) return "Check the motif, or clear it, before Apply grouping.";
-                return "Ready to apply the selected proteins; File > Save keeps the change.";
+                int hand = Evidence.ManualSelectedCount;
+                return hand > 0 ? hand.ToString("N0") + (hand == 1 ? " selected protein added by hand; " : " selected proteins added by hand; ")
+                        + "Apply grouping commits the choices, File > Save keeps them."
+                    : "Ready to apply the selected proteins; File > Save keeps the change.";
             }
         }
         public GroupingReviewViewModel(SuperClusterPreview keyword, EvidenceReviewInput? input = null,
@@ -72,11 +81,15 @@ namespace FamilyQuant
             string initialScope = "", bool evidenceMode = false,
             Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask = null,
             Func<IReadOnlyList<PanelFamilyLinkSelection>, EvidenceReviewInput>? confirmPanelLinks = null,
-            Func<IProgress<FetchProgress>?, CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTaskWithProgress = null)
+            Func<IProgress<FetchProgress>?, CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTaskWithProgress = null,
+            Func<EvidenceManualRequest, EvidenceReviewInput>? addToFamily = null,
+            Func<IReadOnlyList<int>, EvidenceReviewInput>? removeFromFamily = null,
+            Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null)
         {
             Keyword = new KeywordReviewViewModel(keyword); this.propose = propose; this.motif = motif;
             this.discoverTask = discoverTaskWithProgress ?? (discoverTask == null ? null : (_, token) => discoverTask(token));
             this.confirmPanelLinks = confirmPanelLinks;
+            this.addToFamily = addToFamily; this.removeFromFamily = removeFromFamily; this.updateManualChoices = updateManualChoices;
             scopeText = initialScope; proposalScope = initialScope;
             Keyword.PropertyChanged += (_, _) => NotifySummary();
             SetEvidence(input);
@@ -129,14 +142,17 @@ namespace FamilyQuant
         {
             if (!CanUpdateProposal) return;
             string requestedScope = ScopeText;
+            var manual = Evidence?.CaptureManualChoices();
             int request = ++generation;
             IsBusy = true; Status = "Reading the stored evidence...";
             try
             {
+                if (manual?.Count > 0) updateManualChoices?.Invoke(manual);
                 var input = await Task.Run(() => propose!(requestedScope));
                 if (request != generation) return;
                 if (ScopeText != requestedScope) { Status = "Scope changed. Update the proposal before applying."; return; }
-                proposalScope = requestedScope; SetEvidence(input);
+                proposalScope = requestedScope; manualFailure = ""; SetEvidence(input);
+                RestoreManualState(manual);
                 TaskScopeExpanded = false;
                 Status = "Proposal updated. Review the ticks before applying.";
             }
@@ -190,8 +206,49 @@ namespace FamilyQuant
             if (evidence != null) evidence.PropertyChanged += EvidenceChanged;
             checkedMotifPattern = ""; MotifReport = "";
             Changed(nameof(Evidence)); Changed(nameof(EvidenceAvailable)); Changed(nameof(CanCheckMotif)); NotifySummary();
+            Changed(nameof(CanEditManual));
         }
         private void EvidenceChanged(object? sender, PropertyChangedEventArgs e) { Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); }
-        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); }
+        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); }
+
+        private void RestoreManualState(IReadOnlyList<EvidenceManualChoice>? choices)
+        {
+            foreach (var choice in choices ?? Array.Empty<EvidenceManualChoice>())
+            {
+                var row = Evidence?.Proteins.FirstOrDefault(p => p.ProteinIndex == choice.ProteinIndex);
+                if (row != null) row.Selected = choice.Selected;
+                var family = Evidence?.Families.FirstOrDefault(f => f.Family == choice.Family);
+                if (family != null) family.Name = choice.Name;
+            }
+        }
+        public void AddToFamily(EvidenceManualRequest request)
+        {
+            if (!CanEditManual) throw new InvalidOperationException("Update proposal before editing hand choices.");
+            var previous = Evidence!.CaptureReviewState();
+            if (previous.ManualChoices?.Count > 0) updateManualChoices?.Invoke(previous.ManualChoices);
+            var input = addToFamily!(request);
+            SetEvidence(input); Evidence!.RestoreReviewState(previous, forceOn: request.ProteinIndices);
+            SelectManualRow(request.ProteinIndices.First());
+            manualFailure = ""; Status = "Added " + request.ProteinIndices.Count.ToString("N0")
+                + (request.ProteinIndices.Count == 1 ? " protein by hand; " : " proteins by hand; ") + "review the choices before Apply grouping.";
+            NotifySummary();
+        }
+        public void RemoveFromFamily(IReadOnlyList<int> indices)
+        {
+            if (!CanEditManual) throw new InvalidOperationException("Update proposal before editing hand choices.");
+            var previous = Evidence!.CaptureReviewState();
+            if (previous.ManualChoices?.Count > 0) updateManualChoices?.Invoke(previous.ManualChoices);
+            var input = removeFromFamily!(indices);
+            SetEvidence(input); Evidence!.RestoreReviewState(previous, useDefaults: indices);
+            SelectManualRow(indices.First());
+            manualFailure = ""; Status = "Hand choices removed; the automatic proposal is restored for those proteins."; NotifySummary();
+        }
+        private void SelectManualRow(int index)
+        {
+            var row = Evidence!.Proteins.First(p => p.ProteinIndex == index);
+            Evidence.SelectedFamily = Evidence.Families.FirstOrDefault(f => f.Family == row.Family);
+            Evidence.SelectedProtein = row;
+        }
+        public void ReportManualFailure(string message) { manualFailure = "Hand choice not changed: " + message; Status = manualFailure; NotifySummary(); }
     }
 }

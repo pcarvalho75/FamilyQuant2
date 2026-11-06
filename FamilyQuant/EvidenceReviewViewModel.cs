@@ -10,7 +10,7 @@ namespace FamilyQuant
     public sealed record ReviewProteinInput(int ProteinIndex, string Identifier, int PreviousFamilyId,
         string Family, string Tier, string Reason, bool HasScopeAnnotation, string Neighbour,
         IReadOnlyList<string> Flags, bool SuggestedSelected, string Description = "", string Domains = "", bool IsLocked = false,
-        bool? Reviewed = null, int? Length = null, int? Cysteines = null, bool? HasPfamCalls = null);
+        bool? Reviewed = null, int? Length = null, int? Cysteines = null, bool? HasPfamCalls = null, string OriginalEvidence = "");
     public sealed record ReviewFamilyInput(string Family, string SuggestedName, int Proteins, int ReviewedProteins);
     public sealed record ReviewMarkerInput(string Accession, string Name, string Family, int FamilyCarriers, int AllCarriers,
         int LabelledCarriers = 0, double VoteFraction = 0)
@@ -27,21 +27,24 @@ namespace FamilyQuant
         IReadOnlyList<ReviewFamilyInput> Families, IReadOnlyList<ReviewMarkerInput> Markers,
         IReadOnlyList<ReviewArchitectureInput>? Architectures = null, IReadOnlyList<ReviewLeftOutInput>? LeftOut = null,
         string SourceLabel = "", string RuleSummary = "", IReadOnlyList<PanelFamilyLinkProposal>? PanelLinks = null,
-        IReadOnlyDictionary<string, string>? PanelNames = null, IReadOnlyDictionary<string, FamilyProfile>? CoherenceProfiles = null);
+        IReadOnlyDictionary<string, string>? PanelNames = null, IReadOnlyDictionary<string, FamilyProfile>? CoherenceProfiles = null,
+        IReadOnlyList<EvidenceManualChoice>? ManualChoices = null);
     public sealed record EvidenceReviewSelection(string SourceFingerprint, IReadOnlyList<int> ProteinIndices,
         IReadOnlyDictionary<string, string> Names, IReadOnlyList<ReviewArchitectureChoice>? ArchitectureChoices = null,
-        string MotifPattern = "", IReadOnlyList<EvidenceProteinOverride>? ProteinOverrides = null);
+        string MotifPattern = "", IReadOnlyList<EvidenceProteinOverride>? ProteinOverrides = null, IReadOnlyList<EvidenceManualChoice>? ManualChoices = null);
 
     public sealed class ReviewProteinRow : ScreenViewModel
     {
         private readonly Action<ReviewProteinRow, int> selectionChanged;
         private bool selected;
+        private readonly EvidenceManualChoice? manualChoice;
         public ReviewProteinInput Source { get; }
         public int ProteinIndex => Source.ProteinIndex;
         public string Identifier => Source.Identifier;
         public string Accession { get { string value = FamilyNaming.Accession(Identifier); return value.Length == 0 ? Identifier : value; } }
         public int PreviousFamilyId => Source.PreviousFamilyId;
         public string Family => Source.Family;
+        public string FamilyDisplay => manualChoice?.Name ?? Family;
         public string Tier => Source.Tier;
         public string Reason => Source.Reason;
         public string Neighbour => Source.Neighbour;
@@ -70,10 +73,11 @@ namespace FamilyQuant
                 selected = value; Changed(); selectionChanged(this, value ? 1 : -1);
             }
         }
-        internal ReviewProteinRow(ReviewProteinInput source, Action<ReviewProteinRow, int> changed, FamilyProfile? coherenceProfile = null)
+        internal ReviewProteinRow(ReviewProteinInput source, Action<ReviewProteinRow, int> changed, FamilyProfile? coherenceProfile = null, EvidenceManualChoice? manualChoice = null)
         {
             Source = source; selectionChanged = changed;
             CoherenceProfile = coherenceProfile;
+            this.manualChoice = manualChoice;
             selected = source.SuggestedSelected && CanSelect;
         }
     }
@@ -115,6 +119,8 @@ namespace FamilyQuant
     public sealed class EvidenceReviewViewModel : ScreenViewModel
     {
         private readonly Dictionary<string, ReviewFamilyRow> familyByKey;
+        private readonly Dictionary<int, ReviewProteinRow> proteinByIndex;
+        private readonly Dictionary<int, EvidenceManualChoice> manualByIndex;
         private int selectedCount;
         private int bulkDepth;
         private readonly HashSet<ReviewFamilyRow> bulkFamilies = new();
@@ -137,6 +143,7 @@ namespace FamilyQuant
         public bool HasInvalidPanelLinkNotes => PanelLinks.Any(row => !row.IsNoteValid);
         public IReadOnlyList<PanelFamilyLinkSelection> CapturePanelLinkChoices() => PanelLinks.Where(row => row.HasUnappliedChoice).Select(row => row.Capture()).ToArray();
         public int SelectedCount => selectedCount;
+        public int ManualSelectedCount => manualByIndex.Keys.Count(i => proteinByIndex[i].Selected);
         public bool CanConfirm => selectedCount > 0 && !HasUnappliedPanelLinkChoices && !HasInvalidPanelLinkNotes && PanelLinks.All(row => !row.Source.NeedsConfirmation)
             && Families.Where(f => f.SelectedCount > 0).All(f => !string.IsNullOrWhiteSpace(f.Name))
             && Architectures.Where(a => familyByKey.TryGetValue(a.Family, out var family) && family.SelectedCount > 0).All(a => a.IsValid);
@@ -175,6 +182,7 @@ namespace FamilyQuant
                 return row.Accession + " | Current family ID: " + row.PreviousFamilyId.ToString(CultureInfo.CurrentCulture)
                     + (row.CoherenceProfile == null ? "" : "\n" + CoherenceProfilePresentation.CompleteSources(row.CoherenceProfile))
                     + "\nReason: " + Supplied(row.Reason)
+                    + (row.Source.OriginalEvidence.Length == 0 ? "" : "\nAutomatic evidence before the hand choice:\n" + row.Source.OriginalEvidence)
                     + "\nFlags: " + (row.IsFlagged ? row.FlagsHelp : "None supplied")
                     + "\nReviewed relative: " + Supplied(row.Neighbour)
                     + "\nDomains: " + Supplied(row.Domains)
@@ -200,8 +208,10 @@ namespace FamilyQuant
             if (source.Proteins.Select(p => p.ProteinIndex).Distinct().Count() != source.Proteins.Count)
                 throw new ArgumentException("A proposal cannot repeat a protein index.", nameof(source));
             familyByKey = new Dictionary<string, ReviewFamilyRow>(StringComparer.Ordinal);
+            manualByIndex = (source.ManualChoices ?? Array.Empty<EvidenceManualChoice>()).ToDictionary(c => c.ProteinIndex);
             Proteins = source.Proteins.Select(p => new ReviewProteinRow(p, SelectionChanged,
-                source.CoherenceProfiles?.GetValueOrDefault(p.Family))).ToArray();
+                source.CoherenceProfiles?.GetValueOrDefault(p.Family), manualByIndex.GetValueOrDefault(p.ProteinIndex))).ToArray();
+            proteinByIndex = Proteins.ToDictionary(p => p.ProteinIndex);
             var groups = Proteins.GroupBy(p => p.Family, StringComparer.Ordinal).ToDictionary(g => g.Key, g => (IReadOnlyList<ReviewProteinRow>)g.ToArray(), StringComparer.Ordinal);
             foreach (var family in source.Families)
             {
@@ -268,7 +278,25 @@ namespace FamilyQuant
             if (!CanConfirm) throw new InvalidOperationException("Select proteins and name every selected family before applying.");
             return new EvidenceReviewSelection(Source.SourceFingerprint, Proteins.Where(p => p.Selected).Select(p => p.ProteinIndex).OrderBy(i => i).ToArray(),
                 Families.Where(f => f.SelectedCount > 0).ToDictionary(f => f.Family, f => f.Name.Trim(), StringComparer.Ordinal),
-                Architectures.SelectMany(a => a.Capture()).ToArray());
+                Architectures.SelectMany(a => a.Capture()).ToArray(), ManualChoices: CaptureManualChoices());
+        }
+        public IReadOnlyList<EvidenceManualChoice> CaptureManualChoices() => manualByIndex.Values
+            .Select(c => c with { Selected = proteinByIndex[c.ProteinIndex].Selected,
+                Name = string.IsNullOrWhiteSpace(familyByKey[c.Family].Name) ? c.Name : familyByKey[c.Family].Name.Trim() }).ToArray();
+        public EvidenceReviewSelection CaptureReviewState() => new(Source.SourceFingerprint,
+            Proteins.Where(p => p.Selected).Select(p => p.ProteinIndex).ToArray(), Families.ToDictionary(f => f.Family, f => f.Name),
+            Architectures.SelectMany(a => a.Capture()).ToArray(), ManualChoices: CaptureManualChoices());
+        public void RestoreReviewState(EvidenceReviewSelection previous, IReadOnlyCollection<int>? forceOn = null, IReadOnlyCollection<int>? useDefaults = null)
+        {
+            foreach (var family in Families) if (previous.Names.TryGetValue(family.Family, out string? name)) family.Name = name;
+            var selected = previous.ProteinIndices.ToHashSet();
+            foreach (var group in Proteins.GroupBy(row => forceOn?.Contains(row.ProteinIndex) == true
+                || (useDefaults?.Contains(row.ProteinIndex) == true ? row.Source.SuggestedSelected : selected.Contains(row.ProteinIndex)))) SetSelected(group, group.Key);
+            foreach (var choice in previous.ArchitectureChoices ?? Array.Empty<ReviewArchitectureChoice>())
+            {
+                var group = Architectures.FirstOrDefault(a => a.Family == choice.Family)?.Groups.FirstOrDefault(g => g.Key == choice.ArchitectureKey);
+                if (group != null) { group.Name = choice.Name; group.Split = choice.Split; }
+            }
         }
     }
 }
