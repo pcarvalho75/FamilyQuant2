@@ -113,6 +113,9 @@
                           ToolTip="Checks for a newer release, downloads its installer and closes FamilyQuant to install it."/>
                 <MenuItem x:Name="MenuItemAutomaticUpdateChecks" Header="Check for updates at startup" IsCheckable="True"
                           Click="MenuItemAutomaticUpdateChecks_Click" ToolTip="Quietly checks at every start. Downloads only when you choose Install update."/>
+                <Separator/>
+                <MenuItem x:Name="MenuItemOpenErrorLogs" Header="Open error logs folder" Click="MenuItemOpenErrorLogs_Click"
+                          ToolTip="Opens the folder containing unexpected-error reports you can send to the developers."/>
             </MenuItem>
         </Menu>
         <!-- The first thing a new user sees. It says what to do, in order, and it stays until a Family

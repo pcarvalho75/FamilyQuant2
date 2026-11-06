@@ -6,6 +6,7 @@
     <TargetFramework>net10.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationManifest>../FamilyQuant/app.manifest</ApplicationManifest>
     <!-- SeproPckg2.ResultPackage.Load deserialises .sepr2 with BinaryFormatter, which .NET
          disables by default; without this the de novo reconciliation cannot read the PSM list. -->
     <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>

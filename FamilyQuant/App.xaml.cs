@@ -11,9 +11,12 @@ namespace FamilyQuant
     public partial class App : Application
     {
         private static bool displayCultureApplied;
+        private CrashHandling? crashHandling;
 
         public App()
         {
+            if (Assembly.GetEntryAssembly() == typeof(App).Assembly)
+                crashHandling = new CrashHandling(this, new CrashReportStore(CrashReportStore.DefaultDirectory));
             ApplyDisplayCulture();
         }
 
@@ -27,6 +30,12 @@ namespace FamilyQuant
                 MainWindow.SetResourceReference(Window.IconProperty, "AppWindowIcon");
                 MainWindow.Show();
             }
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            crashHandling?.Dispose();
+            base.OnExit(e);
         }
 
         /// <summary>
