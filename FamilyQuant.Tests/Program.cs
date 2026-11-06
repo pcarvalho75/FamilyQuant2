@@ -307,6 +307,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ReviewedHeaderCountTests());
             suite.Add(() => OrganismEvidenceTests());
             suite.AddWithApplication(() => ScopeChangePreviewTests(Path.Combine(workDir, "scope-preview")));
+            suite.Add(() => SmartFetchRetryTests());
             suite.AddWithApplication(() => GroupingDiscoverySafetyTests());
             suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => PanelMultiScopeAuditTests());

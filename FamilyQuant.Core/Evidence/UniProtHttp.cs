@@ -21,10 +21,11 @@ internal static class UniProtHttp
         UniProtFetchOptions? options = null, Action<string>? retryProgress = null)
     {
         int[] waits = [5, 15, 45, 120];
+        int serverFailures = 0;
         for (int attempt = 1; ; attempt++)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            TimeSpan delay = TimeSpan.FromSeconds(waits[Math.Min(attempt - 1, waits.Length - 1)]);
+            TimeSpan delay = TimeSpan.FromSeconds(1);
             HttpResponseMessage? response = null;
             try { response = await client.GetAsync(url, cancellationToken).ConfigureAwait(false); }
             catch (HttpRequestException) when (attempt < attempts) { }
@@ -36,12 +37,15 @@ internal static class UniProtHttp
             {
                 if (response.IsSuccessStatusCode) return response;
                 int status = (int)response.StatusCode;
-                if (attempt >= attempts || (status != 429 && status is not (>= 500 and <= 599)))
+                if (status == 500) serverFailures++;
+                if (attempt >= attempts || serverFailures >= 2 || (status != 429 && status is not (>= 500 and <= 599)))
                 {
                     response.Dispose();
                     throw new HttpRequestException(refusalMessage(status), null, response.StatusCode);
                 }
-                if (status == 429 && response.Headers.RetryAfter is { } retryAfter)
+                if (status is 429 or 503) delay = TimeSpan.FromSeconds(waits[Math.Min(attempt - 1, waits.Length - 1)]);
+                else if (status == 500) delay = TimeSpan.Zero;
+                if (status is 429 or 503 && response.Headers.RetryAfter is { } retryAfter)
                 {
                     TimeSpan? requested = retryAfter.Delta ?? (retryAfter.Date - (options?.UtcNow() ?? DateTimeOffset.UtcNow));
                     if (requested > delay) delay = requested.Value;
