@@ -82,7 +82,8 @@ internal static partial class Program
                     Check(label + " expanded scope leaves two usable Architecture tables", groups.ActualHeight >= 110 && members.ActualHeight >= 110,
                         "groups=" + groups.ActualHeight + "; members=" + members.ActualHeight);
                     Check(label + " Architecture has a row splitter between groups and members", WalkTree(architecture).OfType<GridSplitter>()
-                        .Any(s => s.ResizeDirection == GridResizeDirection.Rows && s.ActualHeight >= 6));
+                        .Any(s => s.ResizeDirection == GridResizeDirection.Rows && s.ActualHeight >= 6 && s.Background != null
+                            && Equals(s.Background, architecture.FindResource("EdgeBrush"))));
                     if (output != null)
                     {
                         string path = Path.Combine(output, theme.ToString().ToLowerInvariant(), size.Width + "x" + size.Height, "architecture.png");

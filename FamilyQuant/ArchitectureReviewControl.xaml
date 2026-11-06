@@ -31,7 +31,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <GridSplitter Grid.Row="1" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                          Background="{DynamicResource BorderBrush}"
+                          Background="{DynamicResource EdgeBrush}"
                           ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Focusable="True"
                           ToolTip="Drag to resize the groups and selected members, or focus here and use the arrow keys."/>
             <DockPanel Grid.Row="2">
