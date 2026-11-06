@@ -22,7 +22,7 @@ internal static partial class Program
         new("--test-ui-wording", 50, TestCommandPhase.Raw, args => args.Contains("--test-ui-wording", StringComparer.Ordinal), RunUiWordingChecks),
         new("--test-evidence-review-clarity", 51, TestCommandPhase.Raw, args => args.Contains("--test-evidence-review-clarity", StringComparer.Ordinal), (args, _) =>
         {
-            EvidenceReviewClarityTests();
+            EvidenceReviewClarityTests(args.Length == 2 ? args[1] : null);
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),

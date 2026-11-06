@@ -7,7 +7,7 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
-    private static void EvidenceReviewClarityTests()
+    private static void EvidenceReviewClarityTests(string? output = null)
     {
         Section("Evidence review - warnings and choices in plain words");
         EnsureApplication();
@@ -47,5 +47,6 @@ internal static partial class Program
                 && ticks.Text.Contains("Flagged start unticked; locked stay unticked", StringComparison.Ordinal));
         }
         finally { window.Close(); }
+        EvidenceReviewFamilyLayoutTests(output);
     }
 }
