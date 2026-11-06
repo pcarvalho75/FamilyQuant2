@@ -146,7 +146,7 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z9j3 | Science page, part 2, rigorous: quantitation and normalisation, de novo and homology, decoys and FDR, the PatternLab-wins rule, what the program does not do | M | 0.5 | Z9j2 | Z9g1 | Every claim from the study | ST | | 0 | 0 | |
 | Z9f1 | Install and update guide, with the Windows "More info, Run anyway" step pictured | L | 0.2 | Z9b4 | Z9g1 | Matches the release notes | ST | | 0 | 0 | |
 | Z9f2 | FAQ | L | 0.2 | Z9d8 | Z9g1 | Short answers | ST | | 0 | 0 | |
-| Z9f3 | Authors (Ana Gisele Neves Ferreira, Richard Hemi Valente, Paulo Costa Carvalho, Luis Miguel Muñoz; Paulo, 11-05), credits, how to cite, and the footer with the Fiocruz logo and "All rights reserved, 2026, Fundação Oswaldo Cruz (Fiocruz)" | L | 0.1 | Z9b2 | Z9g1 | Rendered in both themes | ST | | 0 | 0 | |
+| Z9f3 | Authors (Ana Gisele Neves Ferreira, Richard Hemmi Valente, Paulo Costa Carvalho, Luis Miguel Muñoz; Paulo, 11-05), credits, how to cite, and the footer with the Fiocruz logo and "All rights reserved, 2026, Fundação Oswaldo Cruz (Fiocruz)" | L | 0.1 | Z9b2 | Z9g1 | Rendered in both themes | ST | | 0 | 0 | |
 
 ### W9e The website: checks and Paulo's look (FQKimi, FQSite, Paulo)
 
