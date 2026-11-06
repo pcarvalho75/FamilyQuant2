@@ -64,7 +64,9 @@ public sealed class EvidenceGroupingSession
             task.Keywords.Select(k => new ReviewTaskKeyword(k.Keyword, k.ReviewedProteins, k.CategoryName, k.CategoryId)).ToArray(),
             task.ReviewedProteins, task.ProposedScopeTerms.ToArray(), task.Release,
             "Keyword evidence releases: " + string.Join(", ", task.KeywordEvidenceReleases),
-            task.TargetProteins, task.IgnoredContaminants);
+            task.TargetProteins, task.IgnoredContaminants, task.FastaSpEntries,
+            string.Join(", ", task.ReviewStatusReleases ?? task.KeywordEvidenceReleases), task.FastaTrNowReviewed,
+            task.FastaSpNowUnreviewed, task.FastaSpUnresolved, task.RepeatedSpAccessions);
     }
 
     public EvidenceReviewInput Propose(string scope)

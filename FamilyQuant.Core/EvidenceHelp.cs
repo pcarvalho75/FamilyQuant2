@@ -19,6 +19,22 @@ namespace FamilyQuant
         public const string KeywordCountExplanation = "One protein can carry several keywords, so keyword rows are not summed. These are reviewed-entry counts, not abundance.";
         public const string CountDefinitionsHelp = "DATABASE COUNTS\n" + DatabaseEntryCountDefinition + "\n"
             + ContaminantCountDefinition + "\nKeyword rows count distinct reviewed accessions, once per keyword.\n" + KeywordCountExplanation;
+        public const string ReviewCountHelp = """
+            REVIEWED STATUS AND FASTA PREFIXES
+            Reviewed in UniProt counts distinct matching accessions marked reviewed in the
+            stored fetched evidence. The displayed release comes from that evidence. Marked
+            sp in the FASTA counts target FASTA records with an sp prefix, after contaminants
+            and decoys are excluded. That prefix records the database download's status.
+            UniProt can change a record's reviewed status in a later release. The tooltip
+            lists tr accessions now reviewed and sp accessions now unreviewed, with unresolved
+            sp records and repeated or isoform headers listed separately when present.
+
+            An accession merged into another entry can return unresolved. It contributes no
+            reviewed UniProt accession. An unresolved entry still marked tr in the FASTA
+            contributes to neither displayed reviewed count. Raw sp headers remain part of
+            the FASTA-prefix count, and repeated/isoform headers can exceed the distinct
+            reviewed-accession count.
+            """;
         public const string ScopeExpansionHelp = """
             EXTENDING THE SCOPE
             The suggested scope is a starting point. To include more proteins, select their
@@ -37,7 +53,7 @@ namespace FamilyQuant
         public static string Build(LeaveOneOutResult? validation = null, IReadOnlyList<RouteScore>? routes = null,
             string? routeFamily = null, bool panelMode = false)
         {
-            if (panelMode) return ScopeExpansionHelp + "\n\n" + CountDefinitionsHelp + "\n\n" + PanelEvidenceHelp.Build();
+            if (panelMode) return ScopeExpansionHelp + "\n\n" + CountDefinitionsHelp + "\n\n" + ReviewCountHelp + "\n\n" + PanelEvidenceHelp.Build();
             var options = new EvidenceClassificationOptions();
             var sb = new StringBuilder();
             sb.AppendLine("GROUPING BY EVIDENCE");
@@ -46,6 +62,8 @@ namespace FamilyQuant
             sb.AppendLine(ScopeExpansionHelp);
             sb.AppendLine();
             sb.AppendLine(CountDefinitionsHelp);
+            sb.AppendLine();
+            sb.AppendLine(ReviewCountHelp);
             sb.AppendLine();
             sb.AppendLine("Each protein is placed in a family by what UniProt's curators and its own sequence");
             sb.AppendLine("say, never by the words in its name. Each one gets a family, a tier and a reason.");

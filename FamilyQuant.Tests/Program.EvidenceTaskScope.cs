@@ -64,7 +64,8 @@ internal static partial class Program
         var facts = new EvidenceTaskScopeInput("Supplied clade (456)",
             new[] { new ReviewTaskTaxon("Supplied species", 123, 37, 12, 25), new ReviewTaskTaxon("Other supplied species", 124, 13, 4, 9) },
             new[] { new ReviewTaskKeyword("Supplied keyword", 11, "Molecular function", Evidence.EvidenceTaskDiscovery.FunctionalScopeCategoryId), new ReviewTaskKeyword("Other keyword", 4, "Technical term") },
-            16, new[] { "Supplied keyword" }, "fixture_release", "Synthetic presentation fixture, no scientific result.", TargetProteins: 50);
+            16, new[] { "Supplied keyword" }, "fixture_release", "Synthetic presentation fixture, no scientific result.", TargetProteins: 50,
+            FastaSpEntries: 16, ReviewStatusRelease: "fixture_release");
         try
         {
             foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })

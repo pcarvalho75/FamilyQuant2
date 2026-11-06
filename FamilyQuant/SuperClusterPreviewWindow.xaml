@@ -164,8 +164,10 @@
                             <TextBlock Text="{x:Static local:EvidenceTaskScopeInput.KeywordCountExplanation}" Foreground="{DynamicResource MutedBrush}"
                                        TextTrimming="CharacterEllipsis" Margin="0,0,0,6" ToolTip="{x:Static local:EvidenceTaskScopeInput.KeywordCountExplanation}"/>
                             <WrapPanel>
-                                <TextBlock Text="{Binding TaskScope.ReviewedProteins, StringFormat='Reviewed accessions counted: {0:N0}'}" Margin="0,0,18,0"/>
-                                <TextBlock Text="{Binding TaskScope.Release, StringFormat='UniProt release: {0}'}"/>
+                                <TextBlock x:Name="UniProtReviewedCount" Text="{Binding TaskScope.ReviewedCountText}" Margin="0,0,18,0"
+                                           ToolTip="{Binding TaskScope.ReviewDifferenceTooltip}"/>
+                                <TextBlock x:Name="FastaSpCount" Text="{Binding TaskScope.FastaSpCountText}"
+                                           ToolTip="{Binding TaskScope.ReviewDifferenceTooltip}"/>
                             </WrapPanel>
                             <WrapPanel>
                                 <TextBlock x:Name="DatabaseEntriesCount" Text="{Binding TaskScope.TargetProteins, StringFormat='Database entries counted: {0:N0}'}" Margin="0,0,18,0"

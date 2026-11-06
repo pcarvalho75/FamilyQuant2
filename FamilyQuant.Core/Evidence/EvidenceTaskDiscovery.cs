@@ -43,6 +43,18 @@ public sealed class EvidenceTaskProposal
     public int TargetProteins { get; set; }
     public int IgnoredContaminants { get; set; }
     public int ReviewedProteins { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? FastaSpEntries { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string>? ReviewStatusReleases { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string>? FastaTrNowReviewed { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string>? FastaSpNowUnreviewed { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string>? FastaSpUnresolved { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string>? RepeatedSpAccessions { get; set; }
     public List<EvidenceTaxon> Taxa { get; set; } = new();
     public EvidenceTaxon Clade { get; set; } = new();
     public List<EvidenceKeywordCount> Keywords { get; set; } = new();
@@ -145,6 +157,14 @@ public static partial class EvidenceTaskDiscovery
         var proposedScope = keywords.Where(k => k.CategoryId == FunctionalScopeCategoryId).Take(1).Select(k => k.Keyword).ToList();
         string? tissue = CommonTissuePhrase(reviewedGroups);
         if (tissue != null && !proposedScope.Contains(tissue, StringComparer.OrdinalIgnoreCase)) proposedScope.Add(tissue);
+        var spHeaders = proteins.Where(p => p.SequenceIdentifier.StartsWith("sp|", StringComparison.Ordinal)).ToList();
+        var resolvedStatus = proteins.Where(p => p.Evidence?.Reviewed != null
+            && p.Evidence.Accession == FamilyNaming.Accession(p.SequenceIdentifier).Split('-')[0]).ToList();
+        var releases = resolvedStatus.Select(p => p.Evidence!.Source?.Release ?? file.EvidenceSource?.Release ?? string.Empty)
+            .Where(r => !string.IsNullOrWhiteSpace(r)).Distinct(StringComparer.Ordinal).OrderBy(r => r, StringComparer.Ordinal).ToList();
+        if (releases.Count == 0 && !string.IsNullOrWhiteSpace(file.EvidenceSource?.Release)) releases.Add(file.EvidenceSource.Release);
+        static List<string> Accessions(IEnumerable<FastaItemExtended> rows) => rows.Select(p => FamilyNaming.Accession(p.SequenceIdentifier))
+            .Distinct(StringComparer.Ordinal).OrderBy(accession => accession, StringComparer.Ordinal).ToList();
         return new EvidenceTaskProposal
         {
             SourceFingerprint = fingerprint, Provider = "UniProt", Release = release ?? string.Empty,
@@ -152,6 +172,12 @@ public static partial class EvidenceTaskDiscovery
                 .Distinct(StringComparer.Ordinal).OrderBy(r => r, StringComparer.Ordinal).ToList(),
             TargetProteins = proteins.Count, IgnoredContaminants = targets.Count - proteins.Count,
             ReviewedProteins = reviewed.Count, Taxa = taxa, Clade = clade, Keywords = keywords,
+            FastaSpEntries = spHeaders.Count, ReviewStatusReleases = releases,
+            FastaTrNowReviewed = Accessions(reviewedGroups.SelectMany(group => group).Where(p => p.SequenceIdentifier.StartsWith("tr|", StringComparison.Ordinal))),
+            FastaSpNowUnreviewed = Accessions(resolvedStatus.Where(p => p.SequenceIdentifier.StartsWith("sp|", StringComparison.Ordinal) && p.Evidence!.Reviewed == false)),
+            FastaSpUnresolved = Accessions(spHeaders.Except(resolvedStatus)),
+            RepeatedSpAccessions = spHeaders.GroupBy(p => FamilyNaming.Accession(p.SequenceIdentifier).Split('-')[0], StringComparer.Ordinal)
+                .Where(group => group.Count() > 1).Select(group => group.Key).OrderBy(accession => accession, StringComparer.Ordinal).ToList(),
             ProposedScopeTerms = proposedScope,
         };
     }

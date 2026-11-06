@@ -95,6 +95,12 @@ internal static partial class Program
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),
+        new("--test-reviewed-header-counts", 70, TestCommandPhase.Raw, args => args.Contains("--test-reviewed-header-counts", StringComparer.Ordinal), (_, _) =>
+        {
+            ReviewedHeaderCountTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
         new("--test-taxonomy-batches", 70, TestCommandPhase.Raw, args => args.Contains("--test-taxonomy-batches", StringComparer.Ordinal), (_, workDir) =>
         {
             TaxonomyBatchTests(Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests"));
