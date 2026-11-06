@@ -62,6 +62,12 @@ namespace FamilyQuant
         }
         public Task DiscoverTaskAsync() => DiscoverTaskAsync(null);
 
+        internal void ReportOperationFailure(Exception error)
+        {
+            IsBusy = false;
+            Status = "The grouping review could not finish: " + error.Message;
+        }
+
         public async Task DiscoverTaskAsync(IProgress<FetchProgress>? progress)
         {
             if (!CanDiscoverTask) return;
