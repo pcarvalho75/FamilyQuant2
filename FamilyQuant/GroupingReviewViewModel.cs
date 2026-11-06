@@ -11,6 +11,7 @@ namespace FamilyQuant
     public sealed class GroupingReviewViewModel : ScreenViewModel
     {
         private int modeIndex;
+        private int keywordCategoryFilterIndex;
         private EvidenceReviewViewModel? evidence;
         private string scopeText = "", motifPattern = "", status = "";
         private string proposalScope = "";
@@ -26,6 +27,13 @@ namespace FamilyQuant
         public EvidenceTaskScopeInput? TaskScope { get; private set; }
         public bool TaskDiscoveryAvailable => discoverTask != null;
         public bool HasTaskScope => TaskScope != null;
+        public int KeywordCategoryFilterIndex
+        {
+            get => keywordCategoryFilterIndex;
+            set { if (Set(ref keywordCategoryFilterIndex, value == 1 ? 1 : 0)) Changed(nameof(VisibleTaskKeywords)); }
+        }
+        public IReadOnlyList<ReviewTaskKeyword> VisibleTaskKeywords => TaskScope == null ? Array.Empty<ReviewTaskKeyword>()
+            : KeywordCategoryFilterIndex == 1 ? TaskScope.Keywords.Where(keyword => keyword.IsMolecularFunction).ToArray() : TaskScope.Keywords;
         public bool CanDiscoverTask => discoverTask != null && !IsBusy;
         public bool CanEdit => !IsBusy;
         public bool TaskScopeExpanded { get => taskScopeExpanded; set => Set(ref taskScopeExpanded, value); }
@@ -85,7 +93,7 @@ namespace FamilyQuant
                 IsBusy = true; Status = "Reading the database taxonomy, reviewed keywords and tissue annotations...";
                 var facts = await discoverTask!(progress, cancellation.Token);
                 if (request != generation || cancellation.IsCancellationRequested) return;
-                TaskScope = facts; Changed(nameof(TaskScope)); Changed(nameof(HasTaskScope));
+                TaskScope = facts; Changed(nameof(TaskScope)); Changed(nameof(HasTaskScope)); Changed(nameof(VisibleTaskKeywords));
                 TaskScopeExpanded = true;
                 // Preserve every supplied phrase through the same parser used by the grouping command.
                 string suggested = facts.ReviewedProteins == 0 ? ""

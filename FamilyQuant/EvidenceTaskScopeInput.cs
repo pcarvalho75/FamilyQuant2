@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace FamilyQuant;
 
@@ -8,6 +9,8 @@ public sealed record ReviewTaskTaxon(string Name, int TaxonomyId, int? Entries =
 public sealed record ReviewTaskKeyword(string Keyword, int ReviewedProteins, string CategoryName = "", string CategoryId = "")
 {
     public string CategoryDisplay => string.IsNullOrWhiteSpace(CategoryName) ? "Unavailable (fetch evidence)" : CategoryName;
+    public bool IsMolecularFunction => CategoryId == Evidence.EvidenceTaskDiscovery.FunctionalScopeCategoryId
+        || string.IsNullOrEmpty(CategoryId) && string.Equals(CategoryName, "Molecular function", StringComparison.OrdinalIgnoreCase);
 }
 public sealed record EvidenceTaskScopeInput(string Clade, IReadOnlyList<ReviewTaskTaxon> Taxa,
     IReadOnlyList<ReviewTaskKeyword> Keywords, int ReviewedProteins, IReadOnlyList<string> ProposedScopeTerms,

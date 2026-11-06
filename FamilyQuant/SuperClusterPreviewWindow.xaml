@@ -125,7 +125,13 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 </DockPanel>
-                                <DataGrid x:Name="taskKeywordsGrid" Grid.Column="2" ItemsSource="{Binding TaskScope.Keywords}" IsReadOnly="True" AutoGenerateColumns="False"
+                                <DockPanel Grid.Column="2">
+                                <ComboBox x:Name="KeywordCategoryFilter" DockPanel.Dock="Top" SelectedIndex="{Binding KeywordCategoryFilterIndex}" IsEnabled="{Binding CanEdit}"
+                                          Margin="0,0,0,4" ToolTip="Filters the keyword table by category. Your scope and the reviewed counts are kept.">
+                                    <ComboBoxItem Content="All categories"/>
+                                    <ComboBoxItem Content="Molecular function only"/>
+                                </ComboBox>
+                                <DataGrid x:Name="taskKeywordsGrid" ItemsSource="{Binding VisibleTaskKeywords}" IsReadOnly="True" AutoGenerateColumns="False"
                                           MinColumnWidth="48"
                                           CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" MinHeight="76"
                                           ToolTip="UniProt keyword counts use distinct reviewed accessions and can overlap. Missing categories are shown as unavailable and can be filled by Fetch evidence.">
@@ -135,6 +141,7 @@
                                         <DataGridTextColumn Header="Reviewed accessions" Width="176" Binding="{Binding ReviewedProteins, StringFormat=N0}" theme:TableAppearance.Numeric="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
+                                </DockPanel>
                             </Grid>
                             <TextBlock Text="{x:Static local:EvidenceTaskScopeInput.ScopeSuggestionExplanation}" Foreground="{DynamicResource MutedBrush}"
                                        TextTrimming="CharacterEllipsis" Margin="0,2,0,6" ToolTip="{x:Static local:EvidenceTaskScopeInput.ScopeSuggestionExplanation}"/>
