@@ -312,6 +312,7 @@ namespace FamilyQuant.Tests
             suite.Section("Database update - one-to-one matching of a project with a new database file");
             suite.Add(() => DatabaseUpdateMatchingTests());
             suite.Add(() => DatabaseUpdatePlacementTests());
+            suite.Add(() => DatabaseUpdatePlacementSideTests());
             suite.Add(() => DatabaseUpdateApplyTests());
             suite.Section("Coherence check - what the reviewed members of a family ever show");
             suite.Add(() => CoherenceCheckTests());
