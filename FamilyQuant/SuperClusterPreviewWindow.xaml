@@ -141,7 +141,12 @@
                                Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,8,0,0" TextWrapping="Wrap"/>
                     </StackPanel>
                     <Grid Grid.Row="1">
+                        <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                         <Grid.ColumnDefinitions><ColumnDefinition Width="400" MinWidth="240"/><ColumnDefinition Width="10"/><ColumnDefinition MinWidth="280"/></Grid.ColumnDefinitions>
+                        <TextBlock x:Name="familyTickLegend" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,6,0,0" FontSize="11"
+                                   Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
+                                   Text="Full tick: all eligible proteins; dash: some; empty: none. Flagged start unticked; locked stay unticked."
+                                   ToolTip="Initially, proteins with a proposed family and no warning flags are ticked, unless locked. Full tick means every eligible protein is ticked, dash means some, empty means none. A family tick can include flagged proteins when you choose it; locked proteins always stay unticked."/>
                         <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Center" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext"
                                       Focusable="True" ToolTip="Drag to resize the family and protein tables, or focus here and use the arrow keys."/>
                         <DockPanel>

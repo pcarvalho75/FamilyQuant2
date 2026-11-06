@@ -81,7 +81,7 @@ namespace FamilyQuant
         public string Name { get => name; set { if (name == value) return; name = value; Changed(); changed(); } }
         public bool? Selected
         {
-            get => selectedCount == 0 ? false : selectedCount == Members.Count ? true : null;
+            get => selectedCount == 0 ? false : selectedCount == Members.Count(p => p.CanSelect) ? true : null;
             set => setSelected(Members, value == true);
         }
         internal ReviewFamilyRow(ReviewFamilyInput source, IReadOnlyList<ReviewProteinRow> members, Action changed,
