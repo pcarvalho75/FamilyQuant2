@@ -19,6 +19,7 @@ public partial class ClusterGenerationControl
     private async void ButtonEvidenceGrouping_Click(object sender, RoutedEventArgs e)
     {
         try { await ReviewEvidenceWithFetchOfferAsync(); }
+        catch (OperationCanceledException) { ShowCurationOperationResult("Cancelled. The previous document was kept."); }
         catch (Exception error) { ShowCurationOperationResult("The grouping review could not finish: " + error.Message); }
     }
 
@@ -79,6 +80,7 @@ public partial class ClusterGenerationControl
                 PerformClustering(preview);
             }
         }
+        catch (OperationCanceledException) { ShowCurationOperationResult("Cancelled. The previous document was kept."); }
         catch (Exception ex) { ShowCurationOperationResult("The grouping review could not finish: " + ex.Message); }
         finally { evidenceReviewRunning = false; }
     }
