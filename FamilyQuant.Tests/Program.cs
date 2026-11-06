@@ -309,6 +309,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReferencePanelTests(workDir));
             suite.Add(() => ReferencePanelStreamTests());
             suite.Add(() => EvidenceOperationTests());
+            suite.Section("Database update - one-to-one matching of a project with a new database file");
+            suite.Add(() => DatabaseUpdateMatchingTests());
             suite.Section("Coherence check - what the reviewed members of a family ever show");
             suite.Add(() => CoherenceCheckTests());
             suite.Add(() => E16RuleTests());
