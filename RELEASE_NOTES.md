@@ -4,6 +4,20 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.9 (release candidate, not published)
+
+- **Read database and scope.** UniProt taxonomy lookups use batched queries for
+  the species in the database. HTTP 429 replies respect the server's Retry-After
+  wait, and completed lineages are kept for a retry.
+- **Added to the open project.** Evidence messages say what was added and remind
+  you to use **File > Save** to keep it.
+- **Precise Reconcile Help.** De novo Help describes Reconcile's direct
+  precursor m/z match within 20 ppm.
+- **Neutral figure captions.** Exported presentation figures use neutral
+  caption text.
+- **Shorter cache names.** Evidence resume cache files use shorter names to
+  reduce path length.
+
 ## 2.1.8 (release candidate, not published)
 
 - **Home with five steps.** Follow Build families, Curate families, Quantify,
