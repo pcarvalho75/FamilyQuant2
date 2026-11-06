@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace FamilyQuant.Evidence
 {
-    public static class EvidenceClassifier
+    public static partial class EvidenceClassifier
     {
         private static readonly Regex Words = new Regex(@"[\p{L}\p{Nd}]+", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 

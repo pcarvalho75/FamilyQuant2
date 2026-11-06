@@ -14,6 +14,7 @@ namespace FamilyQuant;
 public sealed class EvidenceGroupingSession
 {
     private readonly FamilyClusterFile file;
+    private readonly IReadOnlyList<ScopePreviewProtein> scopePreviewProteins;
     private readonly string programVersion;
     private readonly string sourceFingerprint;
     private readonly string sourceMetadata;
@@ -35,6 +36,7 @@ public sealed class EvidenceGroupingSession
         Func<FamilyClusterFile, CancellationToken, Task<EvidenceTaskProposal>>? discoverTask = null)
     {
         this.file = file ?? throw new ArgumentNullException(nameof(file));
+        scopePreviewProteins = EvidenceClassifier.ScopePreviewSnapshot(file.MyExtendedFastaItems);
         this.programVersion = programVersion;
         sourceFingerprint = EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems);
         sourceMetadata = JsonSerializer.Serialize(file.EvidenceSource);
@@ -47,6 +49,15 @@ public sealed class EvidenceGroupingSession
 
     public Task<EvidenceTaskScopeInput> DiscoverTaskAsync(CancellationToken cancellationToken = default) =>
         DiscoverTaskAsync(null, cancellationToken);
+
+    public Task<EvidenceScopePreview> PreviewScopeAsync(string baseline, string edited, CancellationToken cancellationToken = default) => Task.Run(() =>
+    {
+        EnsureCurrent();
+        cancellationToken.ThrowIfCancellationRequested();
+        var result = EvidenceClassifier.PreviewScopeChange(scopePreviewProteins, baseline, edited, cancellationToken);
+        EnsureCurrent();
+        return result;
+    }, cancellationToken);
 
     public async Task<EvidenceTaskScopeInput> DiscoverTaskAsync(IProgress<FetchProgress>? progress, CancellationToken cancellationToken = default)
     {
