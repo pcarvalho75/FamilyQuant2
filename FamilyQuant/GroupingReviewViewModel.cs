@@ -119,7 +119,7 @@ namespace FamilyQuant
                     : string.Join(", ", facts.ProposedScopeTerms.Select(t => "\"" + t + "\""));
                 if (string.IsNullOrWhiteSpace(ScopeText)) ScopeText = suggested;
                 Status = facts.ReviewedProteins == 0
-                    ? "No scope can be suggested: this project has no UniProt evidence yet. Fetch evidence first, or type a scope."
+                    ? "No reviewed proteins were found for a suggested scope. Fetch evidence or enter a scope."
                     : "Review the database taxa, keyword counts and suggested scope, then confirm or edit the scope with Update proposal.";
             }
             catch (OperationCanceledException) { if (request == generation) Status = "Task discovery cancelled. You may enter a manual scope."; }

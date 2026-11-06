@@ -303,6 +303,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => AddKeywordScopeTests());
             suite.Add(() => ScopeExpansionHelpTests());
             suite.AddWithApplication(() => ScopeReachabilityTests());
+            suite.AddWithApplication(() => ScopeCountWordingTests());
             suite.AddWithApplication(() => GroupingDiscoverySafetyTests());
             suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => PanelMultiScopeAuditTests());

@@ -161,13 +161,17 @@
                             </Grid>
                             <TextBlock Text="{x:Static local:EvidenceTaskScopeInput.ScopeSuggestionExplanation}" Foreground="{DynamicResource MutedBrush}"
                                        TextTrimming="CharacterEllipsis" Margin="0,2,0,6" ToolTip="{x:Static local:EvidenceTaskScopeInput.ScopeSuggestionExplanation}"/>
+                            <TextBlock Text="{x:Static local:EvidenceTaskScopeInput.KeywordCountExplanation}" Foreground="{DynamicResource MutedBrush}"
+                                       TextTrimming="CharacterEllipsis" Margin="0,0,0,6" ToolTip="{x:Static local:EvidenceTaskScopeInput.KeywordCountExplanation}"/>
                             <WrapPanel>
                                 <TextBlock Text="{Binding TaskScope.ReviewedProteins, StringFormat='Reviewed accessions counted: {0:N0}'}" Margin="0,0,18,0"/>
                                 <TextBlock Text="{Binding TaskScope.Release, StringFormat='UniProt release: {0}'}"/>
                             </WrapPanel>
                             <WrapPanel>
-                                <TextBlock Text="{Binding TaskScope.TargetProteins, StringFormat='Targets counted: {0:N0}'}" Margin="0,0,18,0"/>
-                                <TextBlock Text="{Binding TaskScope.IgnoredContaminants, StringFormat='Contaminants ignored: {0:N0}'}"/>
+                                <TextBlock x:Name="DatabaseEntriesCount" Text="{Binding TaskScope.TargetProteins, StringFormat='Database entries counted: {0:N0}'}" Margin="0,0,18,0"
+                                           ToolTip="{x:Static local:EvidenceTaskScopeInput.DatabaseEntryCountDefinition}"/>
+                                <TextBlock x:Name="ExcludedContaminantsCount" Text="{Binding TaskScope.IgnoredContaminants, StringFormat='Contaminants excluded: {0:N0}'}"
+                                           ToolTip="{x:Static local:EvidenceTaskScopeInput.ContaminantCountDefinition}"/>
                             </WrapPanel>
                             <TextBlock Text="{Binding TaskScope.Note}" TextTrimming="CharacterEllipsis" ToolTip="{Binding TaskScope.Note}" Foreground="{DynamicResource MutedBrush}"/>
                         </StackPanel>

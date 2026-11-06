@@ -14,6 +14,11 @@ namespace FamilyQuant
     public static class EvidenceHelp
     {
         public const string ScopeExpansionHint = "Add to scope or use Group by words > Group by keywords. Left-out proteins keep their families for Quantify.";
+        public const string DatabaseEntryCountDefinition = "Database entries counted are target FASTA records after excluding contaminants and decoys.";
+        public const string ContaminantCountDefinition = "Contaminants excluded counts target records carrying the database contaminant prefix. Decoys are removed before this count.";
+        public const string KeywordCountExplanation = "One protein can carry several keywords, so keyword rows are not summed. These are reviewed-entry counts, not abundance.";
+        public const string CountDefinitionsHelp = "DATABASE COUNTS\n" + DatabaseEntryCountDefinition + "\n"
+            + ContaminantCountDefinition + "\nKeyword rows count distinct reviewed accessions, once per keyword.\n" + KeywordCountExplanation;
         public const string ScopeExpansionHelp = """
             EXTENDING THE SCOPE
             The suggested scope is a starting point. To include more proteins, select their
@@ -32,13 +37,15 @@ namespace FamilyQuant
         public static string Build(LeaveOneOutResult? validation = null, IReadOnlyList<RouteScore>? routes = null,
             string? routeFamily = null, bool panelMode = false)
         {
-            if (panelMode) return ScopeExpansionHelp + "\n\n" + PanelEvidenceHelp.Build();
+            if (panelMode) return ScopeExpansionHelp + "\n\n" + CountDefinitionsHelp + "\n\n" + PanelEvidenceHelp.Build();
             var options = new EvidenceClassificationOptions();
             var sb = new StringBuilder();
             sb.AppendLine("GROUPING BY EVIDENCE");
             sb.AppendLine("====================");
             sb.AppendLine();
             sb.AppendLine(ScopeExpansionHelp);
+            sb.AppendLine();
+            sb.AppendLine(CountDefinitionsHelp);
             sb.AppendLine();
             sb.AppendLine("Each protein is placed in a family by what UniProt's curators and its own sequence");
             sb.AppendLine("say, never by the words in its name. Each one gets a family, a tier and a reason.");
