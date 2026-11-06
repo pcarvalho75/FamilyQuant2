@@ -183,7 +183,9 @@ rebuild stays available (Build families).
   members with the same two tests; if none links, it is flagged "sequence changed; nearest now family N"
   and not moved.
 - Header changed: identifier and description are replaced; evidence is kept (the same accession and
-  sequence) until the next Fetch evidence.
+  sequence) until the next Fetch evidence. The same sequence under a new accession (step 2) and a
+  replacement by a longer record (step 3) keep the family, number and name but start without evidence,
+  because evidence belongs to one UniProt entry.
 
 ## 6. What changes in the file
 
