@@ -60,9 +60,11 @@ public static partial class EvidenceTaskDiscovery
     /// deepest common ancestor is offered. Keyword counts use distinct reviewed accessions in the file,
     /// each counted once per keyword. The most frequent keyword in UniProt's molecular-function
     /// category is offered as functional scope, followed by a phrase from reviewed tissue evidence.
-    /// No scope is applied until a person confirms it.</summary>
+    /// No scope is applied until a person confirms it. The per-taxon route is retained for
+    /// proposal comparison checks.</summary>
     public static async Task<EvidenceTaskProposal> DiscoverAsync(FamilyClusterFile file, HttpMessageHandler? handler = null,
-        IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default, UniProtFetchOptions? options = null)
+        IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default, UniProtFetchOptions? options = null,
+        bool usePerTaxonComparison = false)
     {
         ArgumentNullException.ThrowIfNull(file);
         string fingerprint = SourceFingerprint(file);
@@ -74,36 +76,17 @@ public static partial class EvidenceTaskDiscovery
         {
             TaxonId = g.Key, ScientificName = string.Join("; ", g.Select(h => h.ScientificName).Distinct(StringComparer.Ordinal).OrderBy(n => n, StringComparer.Ordinal)),
         }).ToList();
-        var lineages = new List<List<EvidenceTaxon>>();
-        string? release = null;
         using HttpClient client = handler == null ? new HttpClient() : new HttpClient(handler, disposeHandler: false);
         client.Timeout = TimeSpan.FromSeconds(100);
         client.DefaultRequestHeaders.UserAgent.ParseAdd("FamilyQuant");
-        for (int i = 0; i < taxa.Count; i++)
+        var (paths, release) = await FetchTaxonomyAsync(taxa.Select(t => t.TaxonId).ToList(), client, handler,
+            progress, cancellationToken, options, usePerTaxonComparison).ConfigureAwait(false);
+        var lineages = new List<List<EvidenceTaxon>>();
+        foreach (EvidenceTaxon taxon in taxa)
         {
-            cancellationToken.ThrowIfCancellationRequested();
-            string url = "https://rest.uniprot.org/taxonomy/" + taxa[i].TaxonId.ToString(CultureInfo.InvariantCulture);
-            using HttpResponseMessage response = await UniProtHttp.GetWithRetryAsync(client, url, 3,
-                status => "UniProt refused the taxonomy request (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No task was proposed.", cancellationToken,
-                options, message => progress?.Report(new FetchProgress { Message = message, CompletedBatches = i, TotalBatches = taxa.Count })).ConfigureAwait(false);
-            string current = UniProtHttp.Release(response);
-            if (current.Length == 0 || (release != null && release != current))
-                throw new InvalidDataException("UniProt omitted its release or changed releases during taxonomy discovery. No task was proposed.");
-            release = current;
-            string json = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-            using JsonDocument document = JsonDocument.Parse(json);
-            JsonElement root = document.RootElement;
-            EvidenceTaxon taxon = ReadTaxon(root);
-            if (taxon.TaxonId != taxa[i].TaxonId || !root.TryGetProperty("active", out var active) || active.ValueKind != JsonValueKind.True)
-                throw new InvalidDataException("UniProt did not return the active taxonomy entry requested. No task was proposed.");
-            if (!root.TryGetProperty("lineage", out var lineage) || lineage.ValueKind != JsonValueKind.Array)
-                throw new InvalidDataException("UniProt omitted a taxonomic lineage. No task was proposed.");
-            var path = lineage.EnumerateArray().Select(ReadTaxon).Append(taxon).ToList();
-            if (path.Select(t => t.TaxonId).Distinct().Count() != path.Count)
-                throw new InvalidDataException("UniProt returned a repeated taxon in a lineage. No task was proposed.");
+            List<EvidenceTaxon> path = paths[taxon.TaxonId];
             lineages.Add(path);
-            taxa[i].Rank = taxon.Rank;
-            progress?.Report(new FetchProgress { CompletedBatches = i + 1, TotalBatches = taxa.Count, Asked = taxa.Count, Found = i + 1 });
+            taxon.Rank = path[^1].Rank;
         }
         var common = lineages[0].Where(t => lineages.All(path => path.Any(p => p.TaxonId == t.TaxonId))).ToList();
         EvidenceTaxon clade = common.LastOrDefault(t => t.Rank == "family") ?? common.LastOrDefault()
@@ -122,7 +105,7 @@ public static partial class EvidenceTaskDiscovery
         if (keywords.Count > 0)
         {
             using HttpResponseMessage response = await UniProtHttp.GetWithRetryAsync(client,
-                "https://rest.uniprot.org/keywords/stream?query=*&format=json", 3,
+                "https://rest.uniprot.org/keywords/stream?query=*&format=json", 5,
                 status => "UniProt refused the keyword vocabulary (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No task was proposed.", cancellationToken,
                 options, message => progress?.Report(new FetchProgress { Message = message, CompletedBatches = taxa.Count, TotalBatches = taxa.Count })).ConfigureAwait(false);
             if (UniProtHttp.Release(response) != release)
@@ -245,7 +228,8 @@ public static partial class EvidenceTaskDiscovery
 
     private static EvidenceTaxon ReadTaxon(JsonElement item)
     {
-        if (!item.TryGetProperty("taxonId", out var id) || !id.TryGetInt32(out int number) || number <= 0
+        if (item.ValueKind != JsonValueKind.Object || !item.TryGetProperty("taxonId", out var id)
+            || id.ValueKind != JsonValueKind.Number || !id.TryGetInt32(out int number) || number <= 0
             || !item.TryGetProperty("scientificName", out var name) || name.ValueKind != JsonValueKind.String || string.IsNullOrWhiteSpace(name.GetString())
             || !item.TryGetProperty("rank", out var rank) || rank.ValueKind != JsonValueKind.String)
             throw new InvalidDataException("UniProt returned an incomplete taxon. No task was proposed.");

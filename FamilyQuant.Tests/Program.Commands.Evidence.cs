@@ -38,6 +38,12 @@ internal static partial class Program
         new("--evidence-task-header-audit", 65, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--evidence-task-header-audit", (args, _) => EvidenceTaskHeaderAuditCommand(args)),
         new("--test-evidence-task", 70, TestCommandPhase.Raw, EvidenceTaskTestsRequested, RunEvidenceTaskTests),
+        new("--test-taxonomy-batches", 70, TestCommandPhase.Raw, args => args.Contains("--test-taxonomy-batches", StringComparer.Ordinal), (_, workDir) =>
+        {
+            TaxonomyBatchTests(Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests"));
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
         new("--test-evidence-task-scope", 430, TestCommandPhase.Raw, EvidenceTaskScopeRequested, RunEvidenceTaskScope),
     ];
 
