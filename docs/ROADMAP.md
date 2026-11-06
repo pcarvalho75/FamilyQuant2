@@ -154,7 +154,8 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z9g1 | Claims review: every statement on both pages against the study and the code | M | 0.4 | Z9d8, Z9e3, Z9i, Z9j3, Z9f2 | Z9h | APPROVED | KM | | 0 | 0 | |
 | Z9g2 | Phone width, both themes, keyboard and screen reader basics, reduced motion | L | 0.2 | Z9d8 | Z9h | Checked with screenshots | ST | | 0 | 0 | |
 | Z9g3 | Speed, no real data, no em or en dashes, every link resolves | L | 0.1 | Z9g1 | Z9h | Checked | ST | | 0 | 0 | |
-| Z9h | Paulo looks at it and decides where it is deployed | L | 0 | Z9g1, Z9g2, Z9g3 | | Paulo's word | Paulo | | 0 | 0 | |
+| Z9k | Paulo's one fix after his look (11-05 16:08): peptides in the hero overview, and anywhere a dot stands for a peptide, drawn as short words of 4 to 6 linked amino acids instead of single dots | L | 0.3 | Z9g1 | Z9h | Rendered desktop and phone; nothing else changed | ST | | 0 | 0 | |
+| Z9h | Paulo looks at it and decides where it is deployed | L | 0 | Z9g1, Z9g2, Z9g3, Z9k | | Paulo's word | Paulo | | 0 | 0 | |
 
 ## Critical path
 
