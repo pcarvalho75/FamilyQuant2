@@ -4,6 +4,14 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.10 (release candidate)
+
+- **Group by evidence stays open.** The progress card layout has been fixed.
+  Errors in the review window are shown and logged.
+- **Error reports.** On an unexpected error, FamilyQuant saves a report in its
+  logs folder and shows where it was written. Use **Help > Open error logs
+  folder** to open the folder.
+
 ## 2.1.9 (release candidate, not published)
 
 - **Read database and scope.** UniProt taxonomy lookups use batched queries for
