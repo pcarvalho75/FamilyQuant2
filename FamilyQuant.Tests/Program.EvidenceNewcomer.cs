@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FamilyQuant.Evidence;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -70,6 +71,22 @@ internal static partial class Program
             Check("support preserves the supplied fraction and explains its denominator", marker.SupportText == .9.ToString("P1")
                 && marker.SupportHelp.Contains("18 of 20", StringComparison.Ordinal) && marker.SupportHelp.Contains("26 domain carriers", StringComparison.Ordinal)
                 && (marker with { LabelledCarriers = 0 }).SupportText == "Not supplied");
+            tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Motif counts"); PumpDispatcher();
+            var motif = (TextBlock)window.FindName("motifLegend");
+            Check("blank Motif counts gives an entry action and explains unticked members", motif.IsVisible
+                && motif.Text.Contains("Enter an amino-acid pattern", StringComparison.Ordinal)
+                && motif.ToolTip is string tip && tip.Contains("including unticked proteins", StringComparison.Ordinal));
+            var sequences = new[] {
+                new FastaItemExtended { SequenceIdentifier = "motif_one", Sequence = "ACCC" },
+                new FastaItemExtended { SequenceIdentifier = "motif_two", Sequence = "AAAA" },
+                new FastaItemExtended { SequenceIdentifier = "motif_fragment", Sequence = "CCCC", Evidence = new ProteinEvidence { Fragment = true } } };
+            var proposal = new EvidenceProposal { SourceFingerprint = EvidenceClassifier.Fingerprint(sequences), Proteins = sequences.Select((p, i) => new EvidenceProteinProposal
+                { ProteinIndex = i, Identifier = p.SequenceIdentifier, Family = "Invented family", Tier = EvidenceTier.UniProtFamily,
+                    Flags = i == 0 ? new[] { new EvidenceFlag { Code = "supplied", Message = "Starts unticked" } } : Array.Empty<EvidenceFlag>() }).ToArray() };
+            string report = EvidenceProposalPresentation.CountMotif(proposal, sequences, "C");
+            Check("motif denominator includes unticked proposals and excludes known fragments", !proposal.Proteins[0].SuggestedSelected
+                && report.Contains("Matching proteins\tProteins counted", StringComparison.Ordinal)
+                && report.Contains("Invented family\t1\t2", StringComparison.Ordinal));
         }
         finally { window.Close(); }
         var input = ReviewLayoutFixture();

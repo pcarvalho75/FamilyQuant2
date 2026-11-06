@@ -327,16 +327,21 @@
                                 </DockPanel>
                             </TabItem>
                             <TabItem Header="Motif counts">
+                                <DockPanel>
+                                <TextBlock x:Name="motifLegend" DockPanel.Dock="Top" Text="{Binding MotifSummary}" FontSize="11" Margin="0,0,0,6"
+                                           Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
+                                           ToolTip="Counts use all proposed family members, including unticked proteins; entries marked as fragments are excluded. Use amino-acid letters or a regular expression; Help lists the count and not forms."/>
                                 <TextBox Text="{Binding MotifReport, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True" TextWrapping="NoWrap"
                                          VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                                          ToolTip="Counts from the last checked motif, including each complete-protein denominator. Editing the pattern requires a new check before Apply."/>
+                                </DockPanel>
                             </TabItem>
                         </TabControl>
                     </Grid>
                     <DockPanel Grid.Row="2" Margin="0,10,0,0">
                         <Button DockPanel.Dock="Right" Content="Check motif" Click="Motif_Click" IsEnabled="{Binding CanCheckMotif}"
                                 ToolTip="Counts your motif among complete proteins in the proposed families. Build a proposal and type a pattern first."/>
-                        <TextBlock DockPanel.Dock="Left" Text="Motif" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock DockPanel.Dock="Left" Text="Motif (optional)" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox Text="{Binding MotifPattern, UpdateSourceTrigger=PropertyChanged}" ToolTip="Enter the motif pattern you want to check. Check it before Apply; the pattern is retained with the review selection."/>
                     </DockPanel>
                 </Grid>

@@ -68,7 +68,7 @@ namespace FamilyQuant
                 throw new InvalidOperationException("The file changed. Update the proposal before checking its motifs.");
             var result = MotifCheck.Count(new MotifPattern { Name = pattern, Pattern = pattern },
                 proposal.Proteins.Where(p => p.Family.Length > 0).Select(p => (p.Family, proteins[p.ProteinIndex])));
-            return "Pattern: " + result.Motif.Pattern + "\nFamily\tCarriers\tComplete proteins\n" + string.Join("\n",
+            return "Pattern: " + result.Motif.Pattern + "\nFamily\tMatching proteins\tProteins counted\n" + string.Join("\n",
                 result.Families.Select(f => f.Family + "\t" + f.Carriers.ToString(CultureInfo.CurrentCulture)
                     + "\t" + f.Complete.ToString(CultureInfo.CurrentCulture)));
         }
