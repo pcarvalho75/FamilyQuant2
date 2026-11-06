@@ -305,6 +305,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ScopeReachabilityTests());
             suite.AddWithApplication(() => ScopeCountWordingTests());
             suite.AddWithApplication(() => ReviewedHeaderCountTests());
+            suite.Add(() => OrganismEvidenceTests());
             suite.AddWithApplication(() => GroupingDiscoverySafetyTests());
             suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => PanelMultiScopeAuditTests());

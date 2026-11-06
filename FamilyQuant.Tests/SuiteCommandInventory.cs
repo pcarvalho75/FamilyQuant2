@@ -295,6 +295,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-scope-reachability", "FamilyQuant.Tests.Program.ScopeReachabilityTests()"),
         SuiteCommandRule.Covered("--test-scope-count-wording", "FamilyQuant.Tests.Program.ScopeCountWordingTests()"),
         SuiteCommandRule.Covered("--test-reviewed-header-counts", "FamilyQuant.Tests.Program.ReviewedHeaderCountTests()"),
+        SuiteCommandRule.Covered("--test-organism-evidence", "FamilyQuant.Tests.Program.OrganismEvidenceTests()"),
         SuiteCommandRule.Covered("--test-grouping-discovery-safety", "FamilyQuant.Tests.Program.GroupingDiscoverySafetyTests()"),
         SuiteCommandRule.Covered("--test-evidence-task-scope", "FamilyQuant.Tests.Program.EvidenceTaskScopeRecipeTests()", "FamilyQuant.Tests.Program.EvidenceTaskScopeTests()", "FamilyQuant.Tests.Program.EvidenceTaskScopeWindowTests(System.String)"),
         SuiteCommandRule.Covered("--test-export-protein-names", "FamilyQuant.Tests.Program.CsvTests()", "FamilyQuant.Tests.Program.ExportProteinNameTests()"),

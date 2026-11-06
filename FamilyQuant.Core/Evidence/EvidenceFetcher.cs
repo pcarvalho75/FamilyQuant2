@@ -36,7 +36,7 @@ namespace FamilyQuant.Evidence
     public static class EvidenceFetcher
     {
         private const string Endpoint = "https://rest.uniprot.org/uniprotkb/accessions?format=json&size=500&fields="
-            + "accession,reviewed,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence,ft_chain,ft_peptide,ft_propep,ft_signal&accessions=";
+            + "accession,reviewed,organism_name,organism_id,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence,ft_chain,ft_peptide,ft_propep,ft_signal&accessions=";
         private const int Attempts = 5;
         private static readonly Regex MembershipStart = new Regex(@"\bbelongs\s+to\s+(?:the\s+)?",
             RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
@@ -73,6 +73,13 @@ namespace FamilyQuant.Evidence
             string accession = item.GetProperty("primaryAccession").GetString() ?? string.Empty;
             if (accession.Length == 0) throw new JsonException("An evidence entry has no accession.");
             var evidence = new ProteinEvidence { Accession = accession, TransmembraneCount = 0, Fragment = false };
+            if (item.TryGetProperty("organism", out var organism) && organism.ValueKind == JsonValueKind.Object)
+            {
+                if (organism.TryGetProperty("scientificName", out var name) && name.ValueKind == JsonValueKind.String
+                    && !string.IsNullOrWhiteSpace(name.GetString())) evidence.OrganismName = name.GetString();
+                if (organism.TryGetProperty("taxonId", out var taxon) && taxon.ValueKind == JsonValueKind.Number
+                    && taxon.TryGetInt32(out int taxonId) && taxonId > 0) evidence.TaxonId = taxonId;
+            }
             if (item.TryGetProperty("entryType", out JsonElement entryType))
                 evidence.Reviewed = entryType.GetString() switch
                 {
