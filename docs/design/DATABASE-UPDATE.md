@@ -99,10 +99,12 @@ the threshold and aligned length at least identity/100 times the longer sequence
 uses the same two tests, at the project's own identity (`ClusteringIdentity`, FamilyQuantFile.cs:17)
 and with the exhaustive pass only if the project was built with it (`ClusteringMethod`, USearchTools.cs:275):
 
-1. Fast pass against the kept proteins. The added sequences are searched against every kept sequence
-   with `usearch -usearch_global <added> -db <kept> -id <identity> -maxaccepts 0 -maxrejects 0
-   -userfields query+target+id+alnlen+ql+tl`, the same identity test cluster_fast makes against its
-   centroids. The file does not store centroids, so every kept protein serves as a seed.
+1. Fast pass against the kept proteins. The added sequences are aligned with every kept sequence by the
+   program's existing `USearchTools.SearchGlobal` (USearchTools.cs:536-546: `-search_global`, every pair
+   aligned, `-maxaccepts 0 -maxrejects 0`, the call Group by evidence's neighbour search already makes,
+   NearestReviewed.cs:410), at the project's identity. A hit at or above the identity is the test
+   cluster_fast makes against its centroids. The file does not store centroids, so every kept protein
+   serves as a seed.
 2. Second pass. The same hits are kept as links when they pass `PassesExhaustiveGate`. The added
    proteins are also clustered among themselves with the existing `USearchTools.Cluster`.
 3. Nearest kept neighbour. An added protein with any link (its fast-pass hit or a gate link) joins the
@@ -134,9 +136,10 @@ Order. Removed rows are deleted and added rows appended at the end; kept rows ke
 ties, which go to the member met first, do not move (FamilyNaming.cs:21-22).
 
 Cost. On a synthetic database of 60,000 sequences (3,000 families of 20, lengths 150 to 600), 1,000
-added sequences searched as in step 1 took 2 seconds with the bundled USEARCH on this machine. The
-all-pairs pass of Build families grows with the square of the database; the placement grows with added
-times kept.
+added sequences aligned as in step 1 took 64 seconds with the bundled USEARCH and 4 threads on this
+machine (the indexed `-usearch_global` took 2 seconds but missed 450 of the 9,639 hits, so it is not
+proposed). The all-pairs pass of Build families grows with the square of the database; the placement
+grows with added times kept.
 
 What differs from a rebuild, said in Help and the report: the fast pass is order-sensitive, so a
 rebuild could form a few families differently; the update never moves or merges a kept protein. A
@@ -265,7 +268,7 @@ propose splitting it:
 | Step | Work | Diff | Hours |
 |---|---|---|---:|
 | Z14c3a | Core: matching and classes, the update record model, tests 1 and 9 | M | 2 |
-| Z14c3b | Core: placement (one USEARCH search method beside `Cluster`, the rules of section 4), tests 2 and 3 | H | 2.5 |
+| Z14c3b | Core: placement (`SearchGlobal` and `Cluster` reused, the rules of section 4), tests 2 and 3 | H | 2.5 |
 | Z14c3c | Core: the apply transaction (rows, names, locks, evidence clearing, the index-reader check), tests 4 to 7 | M | 2 |
 | Z14c3d | App: File > Update database, preview window, progress and Cancel, undo emptied, share column refreshed, status line, test 10 and screens | M | 2 |
 | Z14c3e | Help page and report Methods sentence and CSV, test 8 | L | 1 |
@@ -277,10 +280,10 @@ CSV beside the project instead of the preview window (about 7 hours).
 
 ## 12. What I did not verify
 
-- I did not build or run any of this; the only run was the synthetic `usearch_global` timing in section 4
-  (bundled USEARCH 11.0.667, 60,000 by 1,000 sequences, 2 seconds).
-- Whether `usearch_global`'s default identity equals `allpairs_global`'s on every alignment; both are
-  global alignments with the same default definition as far as I know, and test 3 is meant to catch a
+- I did not build or run any of this; the only runs were the synthetic timings in section 4 (bundled
+  USEARCH 11.0.667, 60,000 by 1,000 sequences).
+- Whether `search_global`'s identity equals `allpairs_global`'s on every alignment; both are global
+  alignments with the same default definition as far as I know, and test 3 is meant to catch a
   difference.
 - How Ana makes her FASTA step by step (her redundancy tool, ordering and contaminant list); section 3
   relies on the header format seen in her file and on RedundancyTools.cs.
