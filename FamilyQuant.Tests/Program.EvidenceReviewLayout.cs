@@ -48,6 +48,11 @@ internal static partial class Program
                     var grid = (DataGrid)window.FindName("familyGrid");
                     grid.ScrollIntoView(grid.Items[0]); PumpDispatcher(); window.UpdateLayout();
                     string label = theme + " " + size.Width;
+                    var flags = (DataGrid)window.FindName("evidenceGrid");
+                    var flagText = WalkTree(flags).OfType<TextBlock>().First(t => t.Text == "Longer than reviewed members");
+                    Check(label + " hovering the flag text shows guidance and original evidence detail",
+                        flagText.ToolTip is string tip && tip.Contains("Check the sequence length", StringComparison.Ordinal)
+                        && tip.Contains("Supplied evidence detail.", StringComparison.Ordinal));
                     var text = WalkTree(grid).OfType<TextBlock>().FirstOrDefault(t => t.Text == input.Families[0].SuggestedName);
                     Check(label + " long family name wraps and exposes its full tooltip", text != null && text.TextWrapping == TextWrapping.Wrap
                         && text.ToolTip as string == input.Families[0].SuggestedName && text.ActualHeight >= text.FontSize * 1.1);
