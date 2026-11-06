@@ -102,12 +102,20 @@
                             <Grid Margin="0,6,0,6" MaxHeight="140">
                                 <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition/></Grid.ColumnDefinitions>
                                 <DockPanel>
-                                <TextBlock x:Name="taskTaxaTotals" DockPanel.Dock="Bottom" Text="{Binding TaskScope.TaxaTotals}" Margin="0,4,0,0"
+                                <DockPanel DockPanel.Dock="Bottom" Margin="0,4,0,0">
+                                <Button x:Name="CopyTaskTaxaButton" DockPanel.Dock="Right" Content="Copy" Margin="8,0,0,0"
+                                        Command="ApplicationCommands.Copy" CommandTarget="{Binding ElementName=taskTaxaGrid}"
+                                        ToolTip="Copies selected taxon rows, or every row when none are selected, with column headers."/>
+                                <TextBlock x:Name="taskTaxaTotals" Text="{Binding TaskScope.TaxaTotals}" VerticalAlignment="Center"
                                            TextTrimming="CharacterEllipsis" ToolTip="Each non-contaminant target record counts once per distinct OX taxon using its FASTA prefix. Joined taxa can make row sums exceed the target count."/>
+                                </DockPanel>
                                 <DataGrid x:Name="taskTaxaGrid" ItemsSource="{Binding TaskScope.Taxa}" IsReadOnly="True" AutoGenerateColumns="False"
-                                          MinColumnWidth="48"
+                                          MinColumnWidth="48" SelectionMode="Extended" SelectionUnit="FullRow"
                                           CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" MinHeight="76"
                                           ToolTip="FASTA target entries by OX taxon, sorted by count, with sp and tr taken from the header prefix. Contaminants and decoys are excluded.">
+                                    <DataGrid.CommandBindings>
+                                        <CommandBinding Command="ApplicationCommands.Copy" Executed="CopyTaskTaxa_Executed" CanExecute="CopyTaskTaxa_CanExecute"/>
+                                    </DataGrid.CommandBindings>
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Taxon" Width="*" Binding="{Binding Name}"/>
                                         <DataGridTextColumn Header="Taxonomy ID" Width="96" Binding="{Binding TaxonomyId}" theme:TableAppearance.Numeric="True"/>
