@@ -73,6 +73,10 @@ internal static partial class Program
                     tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Architecture");
                     PumpDispatcher(); window.UpdateLayout();
                     var architecture = (ArchitectureReviewControl)window.FindName("architectureReview");
+                    var legend = architecture.FindName("architectureLegend") as TextBlock;
+                    Check(label + " Architecture explains domain groups and selected-member split on Apply", legend?.Text ==
+                        "Domain groups in this family; tick Split to give selected members their own family on Apply grouping."
+                        && legend.TextWrapping == TextWrapping.NoWrap && legend.ActualHeight > 0);
                     var groups = (DataGrid)architecture.FindName("groupGrid");
                     var members = (DataGrid)architecture.FindName("memberGrid");
                     Check(label + " expanded scope leaves two usable Architecture tables", groups.ActualHeight >= 110 && members.ActualHeight >= 110,

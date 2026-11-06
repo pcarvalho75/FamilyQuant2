@@ -4,8 +4,14 @@
     <Grid>
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/></Grid.RowDefinitions>
         <Grid.ColumnDefinitions><ColumnDefinition Width="3*"/><ColumnDefinition Width="10"/><ColumnDefinition Width="2*"/></Grid.ColumnDefinitions>
-        <CheckBox Grid.ColumnSpan="3" Content="Split all groups" IsChecked="{Binding SplitAll}" IsEnabled="{Binding CanSplit}"
+        <StackPanel Grid.ColumnSpan="3">
+        <TextBlock x:Name="architectureLegend" FontSize="11" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,6"
+                   Text="Domain groups in this family; tick Split to give selected members their own family on Apply grouping."
+                   TextTrimming="CharacterEllipsis"
+                   ToolTip="Domain groups in this family; tick Split to give selected members their own family on Apply grouping. Unticked groups stay together in the proposed family; proteins unticked in the Proteins tab keep their current family."/>
+        <CheckBox Content="Split all groups" IsChecked="{Binding SplitAll}" IsEnabled="{Binding CanSplit}"
                   Margin="0,0,0,8" ToolTip="Selects or clears every supplied architecture group. A mixed tick means only some groups leave the family."/>
+        </StackPanel>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions><RowDefinition Height="2*" MinHeight="110"/><RowDefinition Height="8"/><RowDefinition Height="3*" MinHeight="138"/></Grid.RowDefinitions>
             <DataGrid x:Name="groupGrid" ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" AutoGenerateColumns="False"
