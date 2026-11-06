@@ -156,6 +156,7 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z9g2 | Phone width, both themes, keyboard and screen reader basics, reduced motion | L | 0.2 | Z9d8 | Z9h | Checked with screenshots | ST | | 0 | 0 | |
 | Z9g3 | Speed, no real data, no em or en dashes, every link resolves | L | 0.1 | Z9g1 | Z9h | Checked | ST | | 0 | 0 | |
 | Z9k | Paulo's one fix after his look (11-05 16:08): peptides in the hero overview, and anywhere a dot stands for a peptide, drawn as short words of 4 to 6 linked amino acids instead of single dots | L | 0.3 | Z9g1 | Z9h | Rendered desktop and phone; nothing else changed | ST | | 0 | 0 | |
+| Z9l | Science correction (Paulo, 11-05 17:10): Idea 1 showed the tandem spectrum as a peptide falling apart into single amino acids; rebuilt around the real idea: the precursor mass, backbone breaks giving b and y ions, the two fragment ladders whose gaps are residue masses, and how a search engine matches ladders plus precursor mass while de novo reads the gaps; Idea 5 and science.html made consistent | M | 0.6 | 🟢 | Z9h | Science reviewed by FQKimi; renders checked | ST | | 0 | 0 | |
 | Z9h | Paulo looks at it and decides where it is deployed | L | 0 | Z9g1, Z9g2, Z9g3, Z9k | | Paulo's word | Paulo | | 0 | 0 | |
 
 ## Critical path
