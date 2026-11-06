@@ -75,13 +75,27 @@ internal static partial class Program
         }
         else if (mode == "task")
         {
-            MakeUnobservedCrashTask();
-            var deadline = Stopwatch.StartNew();
-            while (deadline.Elapsed < TimeSpan.FromSeconds(10))
+            int notification = 0;
+            EventHandler<UnobservedTaskExceptionEventArgs> observer = (_, args) =>
+                Volatile.Write(ref notification, args.Observed ? 1 : -1);
+            TaskScheduler.UnobservedTaskException += observer;
+            try
             {
-                GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect();
-                Thread.Sleep(20);
+                MakeUnobservedCrashTask();
+                var deadline = Stopwatch.StartNew();
+                while (Volatile.Read(ref notification) == 0 && deadline.Elapsed < TimeSpan.FromSeconds(10))
+                {
+                    GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect();
+                    Thread.Sleep(20);
+                }
+                bool dispatcherRunning = false;
+                Dispatcher.CurrentDispatcher.BeginInvoke((Action)(() => dispatcherRunning = true));
+                PumpDispatcher();
+                if (Volatile.Read(ref notification) != 1 || !dispatcherRunning) return 20;
+                File.WriteAllText(Path.Combine(root, "task-alive.txt"), "Observed=True; DispatcherRunning=True");
+                return 0;
             }
+            finally { TaskScheduler.UnobservedTaskException -= observer; }
         }
         else throw new ArgumentException("Unknown crash fixture mode.");
         return 20; // Only the registered fatal handler may return the expected exit 19.
@@ -107,11 +121,14 @@ internal static partial class Program
                 { process.Kill(true); process.WaitForExit(); throw new TimeoutException("Owned crash fixture timed out: " + mode); }
             }
             Task.WhenAll(stdout, stderr).GetAwaiter().GetResult();
-            Check("Z11b real " + mode + " fault reaches the fatal handler and exits", process.ExitCode == 19,
+            bool nonfatal = mode == "task";
+            Check(nonfatal ? "Z11b real task fault logs and keeps the app alive" : "Z11b real " + mode + " fault reaches the fatal handler and exits",
+                process.ExitCode == (nonfatal ? 0 : 19),
                 "exit=" + process.ExitCode + "; " + stderr.Result);
             string[] reports = Directory.Exists(Path.Combine(output, "logs"))
                 ? Directory.GetFiles(Path.Combine(output, "logs"), "crash-*.txt") : Array.Empty<string>();
-            Check("Z11b " + mode + " writes exactly one report and one notice", reports.Length == 1 && File.Exists(Path.Combine(output, "notice.txt")));
+            bool hasNotice = File.Exists(Path.Combine(output, "notice.txt"));
+            Check("Z11b " + mode + " writes one report with the appropriate notice policy", reports.Length == 1 && hasNotice == !nonfatal);
             if (reports.Length != 1) continue;
             string report = File.ReadAllText(reports[0]);
             Check("Z11b " + mode + " retains version Windows operation and complete exception stacks", report.Contains("Time: ", StringComparison.Ordinal)
@@ -121,9 +138,19 @@ internal static partial class Program
                 && report.Contains(nameof(CrashOuterProbe), StringComparison.Ordinal) && report.Contains(nameof(CrashInnerProbe), StringComparison.Ordinal));
             Check("Z11b " + mode + " excludes exception message and Data payloads", !report.Contains("PRIVATE_", StringComparison.Ordinal)
                 && !report.Contains(@"C:\private", StringComparison.Ordinal));
-            string notice = File.ReadAllText(Path.Combine(output, "notice.txt"));
-            Check("Z11b " + mode + " tells the user the actual saved report path", notice == new CrashNotice(reports[0], Path.GetDirectoryName(reports[0])!).Message
-                && !notice.Contains('\u2013') && !notice.Contains('\u2014'));
+            if (nonfatal)
+            {
+                Check("Z11b unobserved task is marked nonfatal and observed before dispatcher work continues", report.Contains("Severity: Nonfatal", StringComparison.Ordinal)
+                    && File.Exists(Path.Combine(output, "task-alive.txt"))
+                    && File.ReadAllText(Path.Combine(output, "task-alive.txt")) == "Observed=True; DispatcherRunning=True");
+            }
+            else
+            {
+                string notice = hasNotice ? File.ReadAllText(Path.Combine(output, "notice.txt")) : "";
+                Check("Z11b " + mode + " tells the user the saved fatal report path", report.Contains("Severity: Fatal", StringComparison.Ordinal)
+                    && notice == new CrashNotice(reports[0], Path.GetDirectoryName(reports[0])!).Message
+                    && !notice.Contains('\u2013') && !notice.Contains('\u2014'));
+            }
         }
 
         string failure = Path.Combine(root, "not-a-folder"); File.WriteAllText(failure, "block directory creation");
@@ -138,11 +165,33 @@ internal static partial class Program
         }
         Check("Z11b writer provider presenter and exit failures never escape or duplicate the notice", notices == 1 && exits == 1
             && failedNotice is { ReportPath: null } && !failedNotice.Message.Contains("A report was saved", StringComparison.Ordinal));
+        int quietNotices = 0, quietExits = 0;
+        using (var hooks = new CrashHandling(Application.Current, new CrashReportStore(Path.Combine(failure, "logs")),
+            _ => quietNotices++, _ => quietExits++, () => throw new InvalidOperationException(PrivateCrashPayload)))
+            hooks.Handle(new Exception(PrivateCrashPayload), CrashOrigin.UnobservedTask);
+        Check("Z11b a nonfatal report failure keeps the application running quietly", quietNotices == 0 && quietExits == 0);
         var store = new CrashReportStore(Path.Combine(root, "direct"));
         string? first = store.TryWrite(new Exception(PrivateCrashPayload), CrashOrigin.Dispatcher, PrivateCrashPayload);
         string? second = store.TryWrite(new Exception(PrivateCrashPayload), CrashOrigin.Dispatcher, null);
         Check("Z11b rapid reports cannot overwrite an earlier report", first != null && second != null && first != second && File.Exists(first) && File.Exists(second));
         Check("Z11b arbitrary operation titles cannot disclose user data", first != null && !File.ReadAllText(first).Contains("PRIVATE_", StringComparison.Ordinal));
+
+        string mixedDirectory = Path.Combine(root, "nonfatal-then-fatal");
+        int mixedNotices = 0, mixedExits = 0;
+        using (var hooks = new CrashHandling(Application.Current, new CrashReportStore(mixedDirectory),
+            _ => mixedNotices++, _ => mixedExits++))
+        {
+            hooks.Handle(new Exception(PrivateCrashPayload), CrashOrigin.UnobservedTask);
+            hooks.Handle(new Exception(PrivateCrashPayload), CrashOrigin.UnobservedTask);
+            Check("Z11b nonfatal reports keep notification and termination callbacks idle", mixedNotices == 0 && mixedExits == 0
+                && Directory.GetFiles(mixedDirectory, "crash-*.txt").Length == 2);
+            hooks.Handle(new Exception(PrivateCrashPayload), CrashOrigin.Dispatcher);
+            hooks.Handle(new Exception(PrivateCrashPayload), CrashOrigin.AppDomain);
+            var mixedReports = Directory.GetFiles(mixedDirectory, "crash-*.txt").Select(File.ReadAllText).ToArray();
+            Check("Z11b task logging preserves the later single fatal notice and exit", mixedNotices == 1 && mixedExits == 1
+                && mixedReports.Count(text => text.Contains("Severity: Nonfatal", StringComparison.Ordinal)) == 2
+                && mixedReports.Count(text => text.Contains("Severity: Fatal", StringComparison.Ordinal)) == 1);
+        }
 
         string? oldDirectory = CrashReportStore.DirectoryOverride;
         var oldOpener = CrashReportStore.FolderOpenerOverride;

@@ -46,6 +46,7 @@ public sealed class CrashReportStore
                 writer.WriteLine("FamilyQuant version: " + AppVersionInfo.Current());
                 writer.WriteLine("Windows version: " + Environment.OSVersion.VersionString);
                 writer.WriteLine("Origin: " + origin);
+                writer.WriteLine("Severity: " + (origin == CrashOrigin.UnobservedTask ? "Nonfatal" : "Fatal"));
                 writer.WriteLine("Operation: " + SafeOperation(operation));
                 writer.WriteLine("Exception messages and custom data are omitted to protect project data. Full available stacks follow.");
                 WriteExceptions(writer, error);
@@ -145,16 +146,25 @@ public sealed class CrashHandling : IDisposable
     { args.SetObserved(); Handle(args.Exception, CrashOrigin.UnobservedTask); }
     public void Handle(Exception? error, CrashOrigin origin)
     {
+        if (origin == CrashOrigin.UnobservedTask)
+        {
+            try { WriteReport(error, origin); } catch { }
+            return;
+        }
         if (Interlocked.Exchange(ref handling, 1) != 0) return;
         try
         {
-            string? title = null;
-            try { title = operation(); } catch { }
-            string? report = store.TryWrite(error, origin, title);
+            string? report = WriteReport(error, origin);
             try { notify(new(report, store.Directory)); } catch { }
         }
         catch { }
         finally { try { terminate(-1); } catch { } }
+    }
+    private string? WriteReport(Exception? error, CrashOrigin origin)
+    {
+        string? title = null;
+        try { title = operation(); } catch { }
+        return store.TryWrite(error, origin, title);
     }
     public void Dispose()
     {
