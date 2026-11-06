@@ -43,6 +43,7 @@ namespace FamilyQuant
         public string FlagsHelp => string.Join(Environment.NewLine + Environment.NewLine, Source.Flags.Select(f => EvidenceWarningText.Describe(f).Help));
         public bool IsFlagged => Source.Flags.Count > 0;
         public bool HasScopeAnnotation => Source.HasScopeAnnotation;
+        public string ScopeWordsText => Source.HasScopeAnnotation ? "Yes" : "No";
         public bool CanSelect => Source.Family.Length > 0 && !Source.IsLocked;
         public string SelectionHelp => Source.IsLocked
             ? "This protein belongs to a locked family. Unlock it in Curate families before including it; it stays unticked here."

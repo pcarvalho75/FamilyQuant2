@@ -34,6 +34,15 @@ internal static partial class Program
             model.MotifPattern = "C";
             Check("unchecked pattern explains checking or clearing it", !model.CanConfirm && model.ApplyHint.Contains("Check the motif, or clear it", StringComparison.Ordinal));
             Check("single-family headline uses the singular", model.Evidence.Summary.Contains("1 family.", StringComparison.Ordinal));
+            var familyGrid = (DataGrid)window.FindName("familyGrid");
+            Check("family counts explain total versus reviewed", familyGrid.Columns.Any(c => (string)c.Header == "Total"
+                && c.HeaderStyle.Setters.OfType<Setter>().Any(s => s.Value is string t && t.Contains("including unticked and locked", StringComparison.Ordinal)))
+                && familyGrid.Columns.Any(c => (string)c.Header == "Reviewed"));
+            var proteins = (DataGrid)window.FindName("evidenceGrid");
+            Check("protein headings use evidence and identifier words", new[] { "Evidence source", "Reviewed relative", "Scope words found", "Current family ID", "FASTA identifier" }
+                .All(h => proteins.Columns.Any(c => (string)c.Header == h)));
+            Check("protein filter is labelled and scope match retains its supplied fact", WalkTree(window).OfType<TextBlock>().Any(t => t.Text == "Find proteins")
+                && model.Evidence.Proteins.All(p => p.ScopeWordsText == (p.Source.HasScopeAnnotation ? "Yes" : "No")));
         }
         finally { window.Close(); }
     }
