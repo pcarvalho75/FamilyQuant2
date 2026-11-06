@@ -13,7 +13,7 @@ support every claim in its seven numbered paragraphs.
 | 4 | Identified-equivalent suppression uses run, peptidoform, charge and isotope-aware mass, with I/L folding and separate nonfixed PTMs | `NativeQuantFractions.CrossSideKey`, `IsCrossSideEquivalent`, `Compute`, `PeptidoformIdentity.Canonicalize`, `PrecursorMassEquivalent` |
 | 5 | RAW extraction, representative collapse, distinct primary signal bases and no missing-isotope imputation | `FullXicRunStage.Extract`, `QuantRow.FromResults`, `NativeQuantFractions.DedupToPeptides`, `ReferenceEnvelopeEstimator.Apply`, `DeNovoXicExtractor` |
 | 6 | PepExplorer-style mapping, default 0.80 identity, I/L handling, recorded score-tier choices, optional decoy identity gate and decoy tie priority | `FamilyEnvelopeQuant.SearchCuration`, `HomologyOptions.DefaultMinIdentity`, `ConsiderILSame`, `HomologyDefaults.ForNewCompute`, `HomologyScienceOptions.ScoreTier`, `HomologyScienceOptions.DecoyGate`, `HomologySearch` |
-| 7 | Completed results publish to the project and are read by Results; review is optional and does not compute project quantitation | `MainWindow.PresentQuantifyScreen`, `ProjectStore.WriteFqproj`, `AnalyticsControl`, `DeNovoControl`, `HelpWorkflowFacts.DeNovo` |
+| 7 | Completed results publish to the project and are read by Results. Optional review Reconcile matches normalized file, scan, equal reported charge and direct 20-ppm reported m/z. | `MainWindow.PresentQuantifyScreen`, `ProjectStore.WriteFqproj`, `AnalyticsControl`, `DeNovoControl`, `DeNovoReconciler.Reconcile`, `HelpWorkflowFacts.DeNovo` |
 
 The page does not assert that a decoy identity estimate independently validates
 identification accuracy. The default identity is a floor; enabled mapping gates

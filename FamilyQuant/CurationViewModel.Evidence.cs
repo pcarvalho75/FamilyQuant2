@@ -62,10 +62,11 @@ public sealed partial class CurationViewModel
             + " " + (value == 1 ? singular : plural);
         string message = result.Asked == 0 ? panelOnly ? "Stored protein evidence kept."
                 : "No protein in this file has a UniProt code. A database of another origin stays unassigned."
-            : "Protein evidence saved for " + Count(result.Found, "protein", "proteins") + "."
+            : "Protein evidence added for " + Count(result.Found, "protein", "proteins") + "."
                 + (result.Missing > 0 ? " " + Count(result.Missing, "entry kept its", "entries kept their") + " previous evidence." : "");
+        if (outcome.Changed) message += " Use File > Save to keep these changes.";
         if (outcome.Panel is { IsComplete: true })
-            message += " Reference panel saved for " + Count(outcome.Panel.Families.Count, "family", "families") + ".";
+            message += " Reference panel added for " + Count(outcome.Panel.Families.Count, "family", "families") + ".";
         if (outcome.Panel is { IsComplete: false } panel)
         {
             var status = System.Text.RegularExpressions.Regex.Match(panel.FailureReason, @"\bHTTP [0-9]{3}\b");

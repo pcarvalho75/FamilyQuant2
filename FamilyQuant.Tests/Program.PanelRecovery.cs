@@ -12,11 +12,12 @@ internal static partial class Program
 {
     private static void PanelRecoveryTests(string workDir)
     {
+        using var scratch = new FetchFixtureScratch();
         var families = Enumerable.Range(0, 100).Select(i => "F" + i.ToString("D5", System.Globalization.CultureInfo.InvariantCulture) + " family").ToArray();
         using var handler = new ResumeUniProtHandler { FailMarker = families[50] };
         var options = new UniProtFetchOptions
         {
-            ResumeDirectory = Path.Combine(workDir, "split-panel-" + Guid.NewGuid().ToString("N")),
+            ResumeDirectory = scratch.Root,
             DelayAsync = (_, _) => Task.CompletedTask,
         };
         var panel = ReferencePanelFetcher.FetchAsync(families, handler, options: options).GetAwaiter().GetResult();

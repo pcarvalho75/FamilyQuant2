@@ -96,7 +96,14 @@ internal static partial class Program
                 var state = (TextBlock)screen.FindName("TextBlockFamilyWorldState");
                 PumpDispatcher();
                 Check("Y8 state includes stored release scope count and size", state.Text.Contains("fixture") && state.Text.Contains("Leading scope")
-                    && state.Text.Contains("2 proteins") && state.Text.Contains("MB"));
+                    && state.Text.Contains("2 proteins in 1 family") && state.Text.Contains("MB")
+                    && state.Text.Contains("in the open project", StringComparison.Ordinal)
+                    && state.Text.Contains("Use File > Save", StringComparison.Ordinal));
+                string message = ((TextBlock)screen.FindName("TextBlockStatusLine")).Text;
+                Check("Z1l family-world completion explains the open-project result and File Save action",
+                    message.Contains("Family world added to the open project.", StringComparison.Ordinal)
+                    && message.Contains("Use File > Save", StringComparison.Ordinal)
+                    && !message.Contains("stored", StringComparison.OrdinalIgnoreCase));
                 string path = Path.Combine(Path.GetTempPath(), "fq-y8-" + Guid.NewGuid().ToString("N") + ".fqproj");
                 ProjectStore.WriteFqproj(path, file, Array.Empty<QuantRow>(), new QuantManifest());
                 var reopened = ProjectStore.ReadFqproj(path).fcf;

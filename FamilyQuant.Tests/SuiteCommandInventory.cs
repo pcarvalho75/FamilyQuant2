@@ -282,6 +282,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-evidence-resume", "FamilyQuant.Tests.Program.EvidenceResumeTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-recovery", "FamilyQuant.Tests.Program.PanelRecoveryTests(System.String)", "FamilyQuant.Tests.Program.PanelRetryUiTests()", "FamilyQuant.Tests.Program.InheritedRetryProgressTests()"),
         SuiteCommandRule.Covered("--test-evidence-task", "FamilyQuant.Tests.Program.EvidenceTaskTests()"),
+        SuiteCommandRule.Covered("--test-taxonomy-batches", "FamilyQuant.Tests.Program.TaxonomyBatchTests(System.String)"),
         SuiteCommandRule.Covered("--test-evidence-task-scope", "FamilyQuant.Tests.Program.EvidenceTaskScopeRecipeTests()", "FamilyQuant.Tests.Program.EvidenceTaskScopeTests()", "FamilyQuant.Tests.Program.EvidenceTaskScopeWindowTests(System.String)"),
         SuiteCommandRule.Covered("--test-export-protein-names", "FamilyQuant.Tests.Program.CsvTests()", "FamilyQuant.Tests.Program.ExportProteinNameTests()"),
         SuiteCommandRule.Covered("--test-family-composition-study", "FamilyQuant.Tests.Program.FamilySubclassStudyTests()"),

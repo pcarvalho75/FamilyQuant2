@@ -11,12 +11,16 @@ internal static partial class Program
 {
     // Product-authored copy is database independent. Loaded database names are user data.
     private static readonly Regex DatabaseSpecificCopy = new(
-        @"\b(?:venoms?|toxins?|snakes?|vipers?|Bothrops|jararaca|Viperidae|Homo\s+sapiens|Mus\s+musculus|disintegrins?|SVMPs?|Reprolysin)\b",
+        @"\b(?:venoms?|toxins?|snakes?|vipers?|Bothrops|jararaca|Bjararaca|Viperidae|Homo\s+sapiens|Mus\s+musculus|disintegrins?|SVMPs?|Reprolysin)\b",
         RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
     private static readonly Regex HistoricalSampleCopy = new(
         @"(?<![\d,])(?:35,?686|181,?643|10,?249|4,?874|4,?355|1,?020|1,?016|1,?129|1,?125|57,?956|56,?626|57,?507|19\.6%|97\.7%|98\.5%)(?![\d,])",
         RegexOptions.CultureInvariant);
+
+    private static bool ProhibitedProductCopy(string text, bool exportedFigure) =>
+        DatabaseSpecificCopy.IsMatch(text) || exportedFigure
+            && Regex.IsMatch(text, @"\bsamples?\b", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
     private static string DecodeCopy(string text) => WebUtility.HtmlDecode(Regex.Replace(text,
         @"\\(?:u([0-9a-fA-F]{4})|U([0-9a-fA-F]{8}))", match =>
@@ -29,8 +33,15 @@ internal static partial class Program
     private static void GeneralWordingTests()
     {
         Check("database-independent copy guard catches organism, venom and toxin names, including escapes",
-            new[] { "snake", "venom", "toxin", "Bothrops jararaca", "Homo sapiens", "\\u0076enom" }
+            new[] { "snake", "venom", "toxin", "Bothrops jararaca", "Bjararaca", "Homo sapiens", "\\u0076enom" }
                 .All(text => DatabaseSpecificCopy.IsMatch(DecodeCopy(text))));
+        Check("D21 exported-caption scan rejects a planted organism, venom, toxin or sample word",
+            new[] { "Bjararaca", "venom", "toxin", "sample", "\\u0076enom" }.All(word =>
+                GeneralCopyLiterals("DrawText(dc, \"" + word + "\", Palette.Ink, 20, origin);")
+                    .Any(text => ProhibitedProductCopy(text, exportedFigure: true))));
+        Check("D21 exported-caption scan permits neutral copy and ignores scientific comments",
+            !GeneralCopyLiterals("// toxin names in source data\nDrawText(dc, \"Three pooled replicates. Each dot is one peptide sequence\", Palette.Ink, 20, origin);")
+                .Any(text => ProhibitedProductCopy(text, exportedFigure: true)));
         Check("database-independent copy guard excludes comments and permits general examples",
             !GeneralCopyLiterals("// venom\n/* snake */ const string Copy = \"In a redundant database\";")
                 .Any(DatabaseSpecificCopy.IsMatch));
@@ -46,13 +57,13 @@ internal static partial class Program
         foreach (string project in new[] { "FamilyQuant", "FamilyQuant.Core" })
         foreach (string path in UiSourceFiles(Path.Combine(root, project)))
         {
-            // Protected export/deck producer. Its fixed historical text is outside product UI.
-            if (Path.GetFileName(path) == "PresentationFigures.cs") continue;
+            // Export palettes remain protected; authored caption text follows the same D21 contract.
+            bool exportedFigure = Path.GetFileName(path) == "PresentationFigures.cs";
             var copy = path.EndsWith(".xaml", StringComparison.Ordinal)
                 ? XDocument.Load(path).Descendants().SelectMany(element => element.Attributes().Select(a => a.Value)
                     .Concat(element.Nodes().OfType<XText>().Select(t => t.Value))).ToArray()
                 : GeneralCopyLiterals(File.ReadAllText(path));
-            violations.AddRange(copy.Where(text => DatabaseSpecificCopy.IsMatch(text))
+            violations.AddRange(copy.Where(text => ProhibitedProductCopy(text, exportedFigure))
                 .Select(text => Path.GetRelativePath(root, path) + ": " + text));
             sampleViolations.AddRange(copy.Where(text => HistoricalSampleCopy.IsMatch(text))
                 .Select(text => Path.GetRelativePath(root, path) + ": " + text));

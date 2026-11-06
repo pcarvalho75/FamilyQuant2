@@ -511,8 +511,9 @@ namespace FamilyQuant
             sb.AppendLine("THE FIVE VERDICTS, IN PLAIN LANGUAGE");
             sb.AppendLine("------------------------------------");
             sb.AppendLine("Reconcile first joins by normalized acquisition file and MS2 scan. It then requires");
-            sb.AppendLine("the same reported charge and precursor m/z within 20 ppm, isotope-error-aware so");
-            sb.AppendLine("the M, M+-1 and M+-2 selections of one precursor match, before comparing sequences.");
+            sb.AppendLine("the same reported charge and a direct precursor m/z match within 20 ppm before");
+            sb.AppendLine("comparing sequences. Reconcile applies the tolerance to the reported m/z values.");
+            sb.AppendLine("Quantify's PatternLab-wins rule and cross-side suppression use isotope-aware matching.");
             sb.AppendLine("Each filtered row from the selected source receives one of five verdicts:");
             sb.AppendLine();
             sb.AppendLine("De novo only        nothing in the search shares that spectrum. This is new");

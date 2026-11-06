@@ -309,20 +309,49 @@ namespace FamilyQuant.Tests
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 control.SetFullXicQuant(null, null);
-                System.Threading.Tasks.Task pending = control.SetFullXicQuantAsync(rows, null);
-                bool pendingVisible = !control.HasFullXic && layer3.Text == "PENDING";
-                var watch = System.Diagnostics.Stopwatch.StartNew();
-                while (!pending.IsCompleted && watch.Elapsed < TimeSpan.FromSeconds(60)) { PumpDispatcher(); Thread.Sleep(10); }
-                PumpDispatcher();
-                Check("the background attach fills the column when it finishes, PENDING meanwhile",
-                    pendingVisible && pending.IsCompleted && control.HasFullXic
-                    && p1.FullXicShare is double asyncShare && Math.Abs(asyncShare - 200.0 / 400) < 1e-9,
-                    layer3.Text + " / " + p1.FullXicShare);
+                using var workerEntered = new ManualResetEventSlim();
+                using var releaseWorker = new ManualResetEventSlim();
+                int holdWorker = 1;
+                EventHandler<FamilyQuant.Operations.OperationProgress> holdAttribution = (_, step) =>
+                {
+                    if (step.Stage != "attribution-cache" || step.Completed != 0
+                        || Interlocked.Exchange(ref holdWorker, 0) != 1) return;
+                    workerEntered.Set();
+                    if (!releaseWorker.Wait(TimeSpan.FromSeconds(60)))
+                        throw new TimeoutException("The attach-state fixture did not release attribution.");
+                };
+                bool WaitForState(Func<bool> state)
+                {
+                    var timeout = System.Diagnostics.Stopwatch.StartNew();
+                    while (!state() && timeout.Elapsed < TimeSpan.FromSeconds(60))
+                    { PumpDispatcher(); Thread.Sleep(1); }
+                    return state();
+                }
+                Task? pending = null;
+                control.Operations.ProgressReported += holdAttribution;
+                try
+                {
+                    pending = control.SetFullXicQuantAsync(rows, null);
+                    bool pendingVisible = WaitForState(() => workerEntered.IsSet && !pending.IsCompleted
+                        && !control.HasFullXic && layer3.Text == "PENDING");
+                    releaseWorker.Set();
+                    bool readyVisible = WaitForState(() => pending.IsCompleted && control.HasFullXic && layer3.Text == "READY");
+                    FinishBusyTask(pending);
+                    Check("the background attach fills the column when it finishes, PENDING meanwhile",
+                        pendingVisible && readyVisible
+                        && p1.FullXicShare is double asyncShare && Math.Abs(asyncShare - 200.0 / 400) < 1e-9,
+                        layer3.Text + " / " + p1.FullXicShare);
+                }
+                finally
+                {
+                    releaseWorker.Set();
+                    control.Operations.ProgressReported -= holdAttribution;
+                    if (pending != null && !pending.IsCompleted) FinishBusyTask(pending);
+                }
 
                 System.Threading.Tasks.Task superseded = control.SetFullXicQuantAsync(rows, null);
                 control.SetFullXicQuant(null, null);
-                watch.Restart();
-                while (!superseded.IsCompleted && watch.Elapsed < TimeSpan.FromSeconds(60)) { PumpDispatcher(); Thread.Sleep(10); }
+                WaitForState(() => superseded.IsCompleted);
                 PumpDispatcher();
                 Check("an attach overtaken by a newer one is discarded when it finishes",
                     superseded.IsCompleted && !control.HasFullXic && p1.FullXicShare == null);

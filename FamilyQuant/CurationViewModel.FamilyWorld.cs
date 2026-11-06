@@ -22,12 +22,14 @@ public sealed partial class CurationViewModel
             if (!ReferenceEquals(world, describedWorld))
             {
                 describedWorld = world;
-                worldDescription = "Family world stored: release " + world.Release + "; scope: "
-                    + string.Join("; ", world.Task.ScopeTerms) + "; "
-                    + world.Entries.Count.ToString("N0", CultureInfo.CurrentCulture) + " proteins in "
-                    + world.Families.Count.ToString("N0", CultureInfo.CurrentCulture) + " families; "
+                string proteinLabel = world.Entries.Count == 1 ? "protein" : "proteins";
+                string familyLabel = world.Families.Count == 1 ? "family" : "families";
+                worldDescription = "Family world in the open project (release " + world.Release + ", scope "
+                    + string.Join(", ", world.Task.ScopeTerms) + ", "
+                    + world.Entries.Count.ToString("N0", CultureInfo.CurrentCulture) + " " + proteinLabel + " in "
+                    + world.Families.Count.ToString("N0", CultureInfo.CurrentCulture) + " " + familyLabel + ", "
                     + (JsonSerializer.SerializeToUtf8Bytes(world).Length / 1048576.0).ToString("N2", CultureInfo.CurrentCulture)
-                    + " MB. Save to keep it. Compute uses this stored world.";
+                    + " MB). Use File > Save to keep it. Quantify uses this world.";
             }
             return worldDescription;
         }

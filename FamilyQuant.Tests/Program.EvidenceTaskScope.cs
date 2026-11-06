@@ -146,7 +146,7 @@ internal static partial class Program
                 while (model.IsBusy) await System.Windows.Threading.Dispatcher.Yield(System.Windows.Threading.DispatcherPriority.Background);
             });
             Check("the real B3 session discovery stays read only and supplies exact counted facts",
-                file.ToJsonText() == before && handler.Requests == 3 && model.TaskScope?.TargetProteins == 3
+                file.ToJsonText() == before && handler.Requests == 2 && model.TaskScope?.TargetProteins == 3
                 && model.TaskScope.ReviewedProteins == 2 && model.TaskScope.IgnoredContaminants == 1
                 && model.TaskScope.Keywords[0].ReviewedProteins == 2);
             var scopeBox = WalkTree(window).OfType<System.Windows.Controls.TextBox>()
@@ -173,7 +173,7 @@ internal static partial class Program
             var replay = FamilyClusterFile.FromJsonText(before);
             Evidence.EvidenceApply.ApplyRecipe(replay, applied.Recipe);
             Check("the scope-confirmed recipe replays byte exactly without another discovery request",
-                replay.ToJsonText() == file.ToJsonText() && handler.Requests == 3);
+                replay.ToJsonText() == file.ToJsonText() && handler.Requests == 2);
         }
         finally { window.Close(); PumpDispatcher(); }
     }

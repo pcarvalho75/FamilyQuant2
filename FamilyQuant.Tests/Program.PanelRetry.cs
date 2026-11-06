@@ -38,15 +38,18 @@ internal static partial class Program
         PumpDispatcher();
         Check("Z1e a reopened incomplete panel shows Retry panel and blocks the family-world step in plain words",
             ((System.Windows.Controls.Button)screen.FindName("ButtonRetryPanel")).Visibility == Visibility.Visible && screen.ViewModel.HasIncompletePanel
-            && screen.ViewModel.EvidenceStepStatus.Contains("saved", StringComparison.Ordinal)
+            && screen.ViewModel.EvidenceStepStatus.Contains("available", StringComparison.Ordinal)
             && screen.ViewModel.FamilyWorldStepStatus.Contains("Retry panel", StringComparison.Ordinal));
         var task = screen.RetryPanelAsync(); FinishBusyTask(task); task.GetAwaiter().GetResult(); PumpDispatcher();
+        string panelMessage = ((System.Windows.Controls.TextBlock)screen.FindName("TextBlockStatusLine")).Text;
         Check("Z1e the real Retry panel action finishes the panel without requesting or changing protein evidence",
             handler.ProteinRequests == 0 && handler.PanelRequests == 2 && changed == 1
             && file.EvidenceSource?.ReferencePanel is { IsComplete: true, Entries.Count: 1 }
             && file.MyExtendedFastaItems[0].Domains == "Stored domain"
             && JsonSerializer.Serialize(file.MyExtendedFastaItems[0].Evidence) == evidenceBefore
-            && ((System.Windows.Controls.Button)screen.FindName("ButtonRetryPanel")).Visibility == Visibility.Collapsed);
+            && ((System.Windows.Controls.Button)screen.FindName("ButtonRetryPanel")).Visibility == Visibility.Collapsed
+            && panelMessage.Contains("Reference panel added for 1 family.", StringComparison.Ordinal)
+            && panelMessage.Contains("Use File > Save", StringComparison.Ordinal));
         {
             var cancelled = RetryPanelFile(); string before = cancelled.ToJsonText();
             using var stop = new CancellationTokenSource(); using var requests = new EvidenceAndPanelHandler();
@@ -65,11 +68,23 @@ internal static partial class Program
             var incomplete = RetryPanelFile(); using var refused = new EvidenceAndPanelHandler(failPanel: true);
             var outcome = Task.Run(() => EvidenceFetchSession.FetchAsync(incomplete, refused)).GetAwaiter().GetResult();
             string message = CurationViewModel.DescribeEvidenceFetch(outcome);
-            Check("Z1e the result names the saved protein evidence, incomplete panel, HTTP reason and retry action",
-                message.Contains("Protein evidence saved for 1 protein.", StringComparison.Ordinal)
+            Check("Z1e the result names the added protein evidence, incomplete panel, HTTP reason and retry action",
+                message.Contains("Protein evidence added for 1 protein.", StringComparison.Ordinal)
                 && message.Contains("1 family missing", StringComparison.Ordinal) && message.Contains("1 of 1 batch", StringComparison.Ordinal)
                 && message.Contains("panel incomplete", StringComparison.Ordinal) && message.Contains("HTTP 400", StringComparison.Ordinal)
-                && message.Contains("Retry panel", StringComparison.Ordinal) && !message.Contains('\n'));
+                && message.Contains("Retry panel", StringComparison.Ordinal) && !message.Contains('\n')
+                && message.Contains("Use File > Save to keep these changes.", StringComparison.Ordinal)
+                && !message.Contains("saved", StringComparison.OrdinalIgnoreCase));
+        }
+        {
+            var complete = RetryPanelFile(); using var requests = new EvidenceAndPanelHandler();
+            var outcome = Task.Run(() => EvidenceFetchSession.FetchAsync(complete, requests)).GetAwaiter().GetResult();
+            string message = CurationViewModel.DescribeEvidenceFetch(outcome);
+            Check("Z1l a complete evidence fetch names added protein/panel data and the File Save action",
+                message.Contains("Protein evidence added for 1 protein.", StringComparison.Ordinal)
+                && message.Contains("Reference panel added for 1 family.", StringComparison.Ordinal)
+                && message.Contains("Use File > Save", StringComparison.Ordinal)
+                && !message.Contains("saved", StringComparison.OrdinalIgnoreCase));
         }
         {
             var local = new FamilyClusterFile { MyExtendedFastaItems = new() { new() { SequenceIdentifier = "local_entry", Sequence = "PEPTIDEK" } } };

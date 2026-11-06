@@ -17,6 +17,9 @@ internal static partial class Program
     private sealed class TaskTaxonomyHandler : HttpMessageHandler
     {
         internal int Requests;
+        internal List<string> Urls = new();
+        internal string Release = "fixture";
+        internal Func<string, string>? TransformTaxonomyJson;
         internal bool MissingRelease, ChangedRelease, WrongId;
         internal CancellationTokenSource? Cancel;
         internal Action? DuringRequest;
@@ -24,28 +27,41 @@ internal static partial class Program
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token)
         {
             Requests++;
+            Urls.Add(request.RequestUri!.AbsoluteUri);
             DuringRequest?.Invoke();
+            string release = ChangedRelease && Requests > 1 ? "other" : Release;
+            if (request.RequestUri!.AbsolutePath == "/uniprotkb/search")
+            {
+                var probe = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("{\"results\":[]}") };
+                if (!MissingRelease) probe.Headers.Add("x-uniprot-release", release);
+                return Task.FromResult(probe);
+            }
             if (request.RequestUri!.AbsolutePath == "/keywords/stream")
             {
                 var vocabulary = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("""
                     {"results":[{"keyword":{"name":"Leading scope","id":"KW-0001"},"category":{"name":"Molecular function","id":"KW-9992"}},
                     {"keyword":{"name":"Other","id":"KW-0002"},"category":{"name":"Technical term","id":"KW-9990"}}]}
                     """) };
-                vocabulary.Headers.Add("x-uniprot-release", "fixture");
+                if (!MissingRelease) vocabulary.Headers.Add("x-uniprot-release", release);
                 return Task.FromResult(vocabulary);
             }
-            int id = int.Parse(request.RequestUri!.Segments.Last(), CultureInfo.InvariantCulture);
+            bool batch = request.RequestUri.AbsolutePath == "/taxonomy/stream";
+            int[] ids = batch ? System.Text.RegularExpressions.Regex.Matches(Uri.UnescapeDataString(request.RequestUri.Query), @"tax_id:(\d+)")
+                .Select(m => int.Parse(m.Groups[1].Value, CultureInfo.InvariantCulture)).Reverse().ToArray()
+                : new[] { int.Parse(request.RequestUri.Segments.Last(), CultureInfo.InvariantCulture) };
+            object Entry(int id) => new
+            {
+                taxonId = WrongId ? id + 1 : id, scientificName = "Species " + id.ToString(CultureInfo.InvariantCulture), rank = "species", active = true,
+                lineage = new[] { new { taxonId = 1, scientificName = "Fixture root", rank = "superkingdom" },
+                    new { taxonId = id == DifferentFamilyTaxon ? 12 : 10, scientificName = "Fixture clade", rank = "family" },
+                    new { taxonId = id == DifferentFamilyTaxon ? 13 : 11, scientificName = "Fixture genus", rank = "genus" } },
+            };
+            string json = batch ? JsonSerializer.Serialize(new { results = ids.Select(Entry) }) : JsonSerializer.Serialize(Entry(ids.Single()));
             var response = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(JsonSerializer.Serialize(new
-                {
-                    taxonId = WrongId ? id + 1 : id, scientificName = "Species " + id.ToString(CultureInfo.InvariantCulture), rank = "species", active = true,
-                    lineage = new[] { new { taxonId = 1, scientificName = "Fixture root", rank = "superkingdom" },
-                        new { taxonId = id == DifferentFamilyTaxon ? 12 : 10, scientificName = "Fixture clade", rank = "family" },
-                        new { taxonId = id == DifferentFamilyTaxon ? 13 : 11, scientificName = "Fixture genus", rank = "genus" } },
-                })),
+                Content = new StringContent(TransformTaxonomyJson?.Invoke(json) ?? json),
             };
-            if (!MissingRelease) response.Headers.Add("x-uniprot-release", ChangedRelease && Requests > 1 ? "other" : "fixture");
+            if (!MissingRelease) response.Headers.Add("x-uniprot-release", release);
             Cancel?.Cancel();
             return Task.FromResult(response);
         }
@@ -90,7 +106,7 @@ internal static partial class Program
                 var result = EvidenceTaskDiscovery.DiscoverAsync(file, handler).GetAwaiter().GetResult();
                 Check("M48 joined " + pairs.ToString(CultureInfo.InvariantCulture) + " same-taxon pairs remain one target and one taxon observation",
                     result.TargetProteins == 3 && result.ReviewedProteins == 2 && result.Taxa.Select(t => t.TaxonId).SequenceEqual(new[] { 21, 22 })
-                    && result.Clade.TaxonId == 10 && handler.Requests == 3 && file.ToJsonText() == before);
+                    && result.Clade.TaxonId == 10 && handler.Requests == 2 && file.ToJsonText() == before);
             });
         Verify("B11 a joined target retains every parsed taxon", () =>
         {
@@ -107,7 +123,7 @@ internal static partial class Program
             Check("B11 joined different-taxon header is one target and all taxa determine the common clade",
                 proposal.TargetProteins == 3 && proposal.ReviewedProteins == 2 && proposal.Taxa.Select(taxon => taxon.TaxonId).SequenceEqual(new[] { 21, 22, 23 })
                 && proposal.Clade.TaxonId == 1 && proposal.ProposedScopeTerms.SequenceEqual(new[] { "Leading scope" })
-                && proposal.Keywords[0].ReviewedProteins == 2 && handler.Requests == 4 && file.ToJsonText() == before);
+                && proposal.Keywords[0].ReviewedProteins == 2 && handler.Requests == 2 && file.ToJsonText() == before);
             using var repeated = new TaskTaxonomyHandler { DifferentFamilyTaxon = 23 };
             Check("B11 repeated multi-taxon discovery is byte identical", JsonSerializer.Serialize(proposal)
                 == JsonSerializer.Serialize(EvidenceTaskDiscovery.DiscoverAsync(file, repeated).GetAwaiter().GetResult()));
@@ -132,13 +148,13 @@ internal static partial class Program
             string before = file.ToJsonText(); using var handler = new TaskTaxonomyHandler();
             var result = EvidenceTaskDiscovery.DiscoverAsync(file, handler).GetAwaiter().GetResult();
             Check("M48 discovery still ignores a conflicting contaminant target", result.TargetProteins == 3 && result.IgnoredContaminants == 1
-                && handler.Requests == 3 && file.ToJsonText() == before);
+                && handler.Requests == 2 && file.ToJsonText() == before);
         });
         Verify("B3 derives a clade and the leading keyword without a name rule, ignoring contaminants and decoys", () =>
         {
             var file = TaskFile(); string before = file.ToJsonText(); using var handler = new TaskTaxonomyHandler();
             var proposal = EvidenceTaskDiscovery.DiscoverAsync(file, handler).GetAwaiter().GetResult();
-            Check("B3 taxonomy and scope come from the file's data", handler.Requests == 3 && proposal.Clade.TaxonId == 10
+            Check("B3 taxonomy and scope come from the file's data", handler.Requests == 2 && proposal.Clade.TaxonId == 10
                 && proposal.Clade.ScientificName == "Fixture clade" && proposal.ProposedScopeTerms.SequenceEqual(new[] { "Leading scope" })
                 && proposal.Keywords[0].ReviewedProteins == 2 && proposal.ReviewedProteins == 2 && proposal.TargetProteins == 3
                 && proposal.IgnoredContaminants == 1 && proposal.Taxa.Select(t => t.TaxonId).SequenceEqual(new[] { 21, 22 }));

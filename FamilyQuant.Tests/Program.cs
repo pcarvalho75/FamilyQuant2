@@ -295,6 +295,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => FamilyWorldFetchTests());
             suite.Add(() => DesktopWorldChecks());
             suite.Add(() => EvidenceTaskTests());
+            suite.Add(() => TaxonomyBatchTests(workDir));
             suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => PanelMultiScopeAuditTests());
             suite.AddWithApplication(() => PanelLinkNotesTests());

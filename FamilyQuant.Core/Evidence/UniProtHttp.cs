@@ -24,6 +24,7 @@ internal static class UniProtHttp
         for (int attempt = 1; ; attempt++)
         {
             cancellationToken.ThrowIfCancellationRequested();
+            TimeSpan delay = TimeSpan.FromSeconds(waits[Math.Min(attempt - 1, waits.Length - 1)]);
             HttpResponseMessage? response = null;
             try { response = await client.GetAsync(url, cancellationToken).ConfigureAwait(false); }
             catch (HttpRequestException) when (attempt < attempts) { }
@@ -40,13 +41,17 @@ internal static class UniProtHttp
                     response.Dispose();
                     throw new HttpRequestException(refusalMessage(status), null, response.StatusCode);
                 }
+                if (status == 429 && response.Headers.RetryAfter is { } retryAfter)
+                {
+                    TimeSpan? requested = retryAfter.Delta ?? (retryAfter.Date - (options?.UtcNow() ?? DateTimeOffset.UtcNow));
+                    if (requested > delay) delay = requested.Value;
+                }
                 response.Dispose();
             }
-            int seconds = waits[Math.Min(attempt - 1, waits.Length - 1)];
             string provider = new Uri(url).Host.Equals("www.ebi.ac.uk", StringComparison.OrdinalIgnoreCase) ? "InterPro" : "UniProt";
-            retryProgress?.Invoke(provider + " busy, retrying in " + seconds.ToString(System.Globalization.CultureInfo.CurrentCulture) + " s");
+            retryProgress?.Invoke(provider + " busy, retrying in " + Math.Ceiling(delay.TotalSeconds).ToString(System.Globalization.CultureInfo.CurrentCulture) + " s");
             cancellationToken.ThrowIfCancellationRequested();
-            await (options?.DelayAsync ?? Task.Delay)(TimeSpan.FromSeconds(seconds), cancellationToken).ConfigureAwait(false);
+            await (options?.DelayAsync ?? Task.Delay)(delay, cancellationToken).ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
         }
     }

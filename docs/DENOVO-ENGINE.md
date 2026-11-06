@@ -41,8 +41,10 @@ No scientific threshold, score conversion, source cutoff or matching rule change
 - Review tables keep only comparable alternatives and weak equalities, ordered
   by ordinal run name and scan. Missing local confidence stays zero, and source
   confidence remains in its native field without conversion.
-- Reconciliation keeps its direct 20-ppm precursor comparison. The isotope-aware
-  quantitation equivalence is a different rule and was not substituted here.
+- Reconcile matches normalized file name and scan, equal reported charge and a
+  direct 20-ppm comparison of reported precursor m/z before comparing sequences.
+  Quantify's PatternLab-wins rule and cross-side suppression use isotope-aware
+  matching. The Reconcile Help paragraph follows `DeNovoReconciler.Reconcile`.
 
 ## Focused commands
 
