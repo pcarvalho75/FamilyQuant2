@@ -43,6 +43,18 @@ internal static partial class Program
                 .All(h => proteins.Columns.Any(c => (string)c.Header == h)));
             Check("protein filter is labelled and scope match retains its supplied fact", WalkTree(window).OfType<TextBlock>().Any(t => t.Text == "Find proteins")
                 && model.Evidence.Proteins.All(p => p.ScopeWordsText == (p.Source.HasScopeAnnotation ? "Yes" : "No")));
+            var tabs = (TabControl)window.FindName("evidenceTabs");
+            tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Architecture"); PumpDispatcher();
+            var architecture = (ArchitectureReviewControl)window.FindName("architectureReview");
+            var groupGrid = (DataGrid)architecture.FindName("groupGrid");
+            Check("Architecture explains size-based placement and new family names", groupGrid.Columns.Any(c => (string)c.Header == "Placed by size")
+                && groupGrid.Columns.Any(c => (string)c.Header == "Most supported domain")
+                && groupGrid.Columns.Any(c => (string)c.Header == "New family name")
+                && model.Evidence.SelectedArchitecture!.UndeterminedLabel.StartsWith("Not placed in a domain group", StringComparison.Ordinal));
+            model.Evidence.SelectedFamily = null; PumpDispatcher();
+            Check("missing Architecture data has a visible explanation instead of blank tables",
+                ((TextBlock)architecture.FindName("architectureEmpty")).IsVisible
+                && !((Grid)architecture.FindName("architectureContent")).IsVisible);
         }
         finally { window.Close(); }
     }
