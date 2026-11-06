@@ -107,7 +107,8 @@ public static partial class EvidenceTaskDiscovery
             using HttpResponseMessage response = await UniProtHttp.GetWithRetryAsync(client,
                 "https://rest.uniprot.org/keywords/stream?query=*&format=json", 5,
                 status => "UniProt refused the keyword vocabulary (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No task was proposed.", cancellationToken,
-                options, message => progress?.Report(new FetchProgress { Message = message, CompletedBatches = taxa.Count, TotalBatches = taxa.Count })).ConfigureAwait(false);
+                options, message => progress?.Report(new FetchProgress
+                { Message = message, CompletedBatches = paths.Count, TotalBatches = taxa.Count, Asked = taxa.Count, Found = paths.Count })).ConfigureAwait(false);
             if (UniProtHttp.Release(response) != release)
                 throw new InvalidDataException("The UniProt keyword vocabulary and taxonomy releases differ. No task was proposed.");
             using JsonDocument vocabulary = JsonDocument.Parse(await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));

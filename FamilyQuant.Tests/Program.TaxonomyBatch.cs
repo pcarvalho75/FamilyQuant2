@@ -1,4 +1,5 @@
 using FamilyQuant.Evidence;
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading;
@@ -81,6 +83,47 @@ internal static partial class Program
         }
         try
         {
+            foreach (int count in new[] { 87, 300 })
+            foreach (bool retryVocabulary in new[] { false, true })
+                Verify("taxa busy units", () =>
+                {
+                    var file = ManyTaxaFile(count);
+                    using var inner = new TaskTaxonomyHandler();
+                    using var handler = new TaxonomyRefusalHandler(inner) { Refuse = uri => retryVocabulary
+                        ? uri.AbsolutePath == "/keywords/stream" : IsTaxonomy(uri)
+                            && (count == 87 || Uri.UnescapeDataString(uri.Query).Contains("tax_id:121)", StringComparison.Ordinal)) };
+                    var values = new List<FetchProgress>();
+                    var groupingReports = new List<OperationProgress>(); var familyReports = new List<OperationProgress>();
+                    static IProgress<FetchProgress> Adapter(Type owner, string name, List<OperationProgress> reports) =>
+                        (IProgress<FetchProgress>)Activator.CreateInstance(owner.GetNestedType(name, BindingFlags.NonPublic)!,
+                            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null,
+                            new object[] { new OperationContext(progress: new FetchOperationProgress(reports.Add)) }, CultureInfo.InvariantCulture)!;
+                    var grouping = Adapter(typeof(SuperClusterPreviewWindow), "GroupingTaskProgress", groupingReports);
+                    var family = Adapter(typeof(ClusterGenerationControl), "FamilyWorldTaskProgress", familyReports);
+                    var progress = new InlineFetchProgress(value => { values.Add(value); grouping.Report(value); family.Report(value); });
+                    var options = new UniProtFetchOptions { DelayAsync = (_, _) => Task.CompletedTask };
+                    EvidenceTaskDiscovery.DiscoverAsync(file, handler, progress, options: options).GetAwaiter().GetResult();
+                    string scenario = count.ToString(CultureInfo.InvariantCulture) + (retryVocabulary ? " vocabulary retry" : " taxonomy retry");
+                    Check("Z1m-fix2 " + scenario + " reports finished lineages and total taxa consistently",
+                        handler.Failures == 1 && values.Count > 1 && values.All(p => p.TotalBatches == count && p.Asked == count
+                            && p.CompletedBatches == p.Found && p.CompletedBatches <= count)
+                        && values[^1].CompletedBatches == count
+                        && values.Where(p => p.Message.Length == 0).Select(p => p.CompletedBatches)
+                            .SequenceEqual(count == 87 ? new[] { 87 } : new[] { 100, 200, 300 }));
+                    Check("Z1m-fix2 " + scenario + " keeps both busy labels and logged numbers in taxa",
+                        groupingReports.Count == values.Count && familyReports.Count == values.Count
+                        && values.Select((value, i) =>
+                        {
+                            string completed = value.CompletedBatches.ToString(CultureInfo.CurrentCulture);
+                            string total = count.ToString(CultureInfo.CurrentCulture);
+                            return groupingReports[i].Completed == value.Found && groupingReports[i].Total == count
+                                && familyReports[i].Completed == value.Found && familyReports[i].Total == count
+                                && groupingReports[i].Message == (value.Message.Length > 0 ? value.Message
+                                    : "Asking UniProt about taxon " + completed + " of " + total + "\nNeeds an internet connection")
+                                && familyReports[i].Message == (value.Message.Length > 0 ? value.Message
+                                    : "Reading database task: " + completed + " of " + total + " taxa.");
+                        }).All(correct => correct));
+                });
             foreach (string culture in new[] { "en-US", "pt-BR" })
             foreach (bool sharedFamily in new[] { true, false })
                 Verify("300-taxon proposal parity", () =>
@@ -209,6 +252,7 @@ internal static partial class Program
                     Check("Z1m " + interruption + " preserves finished batches and resumes to the uninterrupted proposal",
                         refused && stored == (interruption == "keywords" ? 3 : 1) && BatchUrls(retry).Length == (interruption == "keywords" ? 0 : 2)
                         && reports.Any(p => p.Message == "Using saved taxonomy batches") && JsonSerializer.Serialize(result) == Proposal(file, baseline)
+                        && reports.All(p => p.TotalBatches == 300 && p.CompletedBatches == p.Found && p.Asked == 300)
                         && file.ToJsonText() == before);
                     Check("Z1m " + interruption + " patient waits stay bounded and cancellation stops immediately",
                         waits.SequenceEqual(interruption == "cancel" ? new double[] { 5 } : new double[] { 5, 15, 45, 120 }));
