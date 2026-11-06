@@ -51,6 +51,8 @@ The rest of this note describes reading A with these two choices.
    | Added, in new families | 28 (in 17 new families) |
    | Added, close to several families (joined the nearest, families not merged) | 5 |
    | Removed | 77 (2 families emptied) |
+   | Ambiguous, needs her choice (section 3) | 2 |
+   | Family names that would change (section 4) | 4 (3 kept by default, 1 to decide) |
 
    The table lists every protein that is not unchanged: kind, old and new identifier, family number and
    name, and for an added protein the kept protein it was placed by, with identity and aligned length.
@@ -73,21 +75,26 @@ accession (FamilyNaming.cs:87), so a decoy is keyed by the accession of the iden
 prefix (SequenceLabels.cs:7), on the decoy side. An identifier with no UniProt accession (her two
 affinity tags) is keyed by the whole identifier, as `Accession` already returns it.
 
-| Class | Rule, applied in this order | What happens |
-|---|---|---|
-| Unchanged | Same key, same sequence, same header | Nothing |
-| Header changed | Same key, same sequence, different identifier or description | Identifier and description updated; family, number, name, lock kept |
-| Sequence changed | Same key, different sequence | Sequence and header updated; family kept; flagged (section 5) |
-| Same sequence, new accession | Old key absent from the new file; its exact sequence present under a key absent from the old file | Treated as a header change (redundancy removal can pick another representative of identical sequences) |
-| Replaced by a longer record | Old key absent; its exact sequence is contained in an added record's sequence | The added record takes the old protein's family, number and name. This is what the program's own Remove redundancy does: a subset is dropped and its identifier appended to the survivor's description (RedundancyTools.cs:69-94); her file carries such headers |
-| Removed | Old key absent, and neither rule above applies | Row removed; recorded |
-| Added | New key absent from the project, and not used by a rule above | Placed (section 4) |
+Matching is one to one: every old row and every new record takes part in at most one match, and a
+match is made only when it is the only possible one on both sides. The steps run in this order, and a
+row or record matched in one step leaves the pools of the next. A target never matches a decoy.
 
-A key that occurs more than once in either file is matched by key and sequence; if that still leaves a
-choice, the update refuses and lists the keys (Build families already refuses a repeated identifier,
-USearchTools.cs:735-748). Example from Z12a1 for "Removed": A0A2H4N390 is inactive in UniProt 2026_04,
-merged into P85314, which her file already holds as `sp|P85314`; a new download will not contain it, so
-it is removed and recorded, and P85314 keeps its own family.
+| Step | Rule | Class and what happens |
+|---|---|---|
+| 1. By key | A key held by exactly one old row and exactly one new record pairs them | Unchanged (same sequence and header): nothing. Header changed (same sequence, other identifier or description): identifier and description updated; family, number, name, lock kept. Sequence changed: sequence and header updated, family kept, flagged (section 5) |
+| 1b. Repeated key | A key held by several old rows or several new records: an old row and a new record of that key with the identical sequence pair only when neither has another identical-sequence partner of that key | As step 1. Whatever is left of that key goes to the ambiguous list |
+| 2. Same sequence, new accession | Among old rows whose key is absent from the new file and new records whose key is absent from the project: a sequence held by exactly one such old row and exactly one such new record pairs them | Treated as a header change (redundancy removal can pick another representative of identical sequences) |
+| 3. Replaced by a longer record | Among the rows and records still unmatched: an old row whose sequence is contained in exactly one unmatched new record, when that new record contains no other unmatched old row, pairs with it | The new record takes the old protein's family, number and name. This is what the program's own Remove redundancy does: a subset is dropped and its identifier appended to the survivor's description (RedundancyTools.cs:69-94); her file carries such headers |
+| Ambiguous | Any case where a step finds more than one candidate on either side: two new records of one old key with no unique identical sequence, one new record containing several unmatched old rows, one old row contained in several new records, a sequence held by several unmatched rows or records | Nothing is carried over automatically. The preview lists each case with its candidates; she may pick one pair per case, which then follows step 1's outcome. Without her pick, the old row is treated as removed and the new records as added, so no old curation reaches a new record by chance |
+| Removed | An old row left unmatched and not ambiguous | Row removed; recorded |
+| Added | A new record left unmatched and not ambiguous | Placed (section 4) |
+
+The ambiguous count is shown before Apply, and Apply names how many cases will be handled as removed and
+added. Build families already refuses a repeated identifier inside one file (USearchTools.cs:735-748), so
+a repeated key can only arise from accessions shared by different identifiers (for example an isoform
+written without its suffix). Example from Z12a1 for "Removed": A0A2H4N390 is inactive in UniProt
+2026_04, merged into P85314, which her file already holds as `sp|P85314`; a new download will not contain
+it, so it is removed and recorded, and P85314 keeps its own family.
 
 ## 4. How a new protein joins a family
 
@@ -126,11 +133,22 @@ family, every new member of her curated families would arrive alone. Recommendat
 join a locked family; the family stays locked and the table counts those joins separately. She moves
 any she disagrees with by hand.
 
-Names. A family's name is the most frequent User Annotation of its members, else the most frequent
-protein name (FamilyNaming.cs:9-23, :39-56). A joining protein copies the family's annotation when the
-family is named by annotation, so the name survives even if its annotated members are later removed.
-Families named from protein descriptions follow UniProt's new descriptions; the table lists every
-family whose shown name changes.
+Names. A family's name is computed from its current members each time: the most frequent User
+Annotation of its members, else the most frequent protein name (FamilyNaming.cs:9-23, :39-56). No name is
+stored on the family, so removing members or changing descriptions can change it. The update therefore
+computes every surviving family's name before and after the planned change and shows each one that
+would change, with a "Keep the old name" tick:
+
+- Ticked by default when the old name came from a User Annotation (a name she typed, or one Group by
+  evidence wrote when she applied it, EvidenceApply.cs:317).
+- Not ticked by default when the old name came from protein descriptions; it then follows UniProt.
+
+Keeping a name writes it into the User Annotation (FastaItemExtended.cs:42) of the family's members that
+carry none, kept and joining alike, so FamilyNaming's first rule returns it. This uses the existing
+per-protein field, not a new one: the 1.5 export already writes and reads User Annotation (the frozen
+reader snapshot covers annotation, docs/PROJECT-FORMATS.md:49), so a 1.5 reader shows the same name. The
+rows whose annotation is written this way are listed in the update record. A family whose members are all
+removed has no name to keep; its last name is recorded.
 
 Order. Removed rows are deleted and added rows appended at the end; kept rows keep their order, so name
 ties, which go to the member met first, do not move (FamilyNaming.cs:21-22).
@@ -166,7 +184,7 @@ The project file (.fqproj) holds the family file as its curation.json entry, byt
 
 | Field (FamilyQuantFile.cs and FastaItemExtended.cs) | After the update |
 |---|---|
-| `MyExtendedFastaItems` | Kept rows unchanged except as section 3 says; removed rows deleted; added rows appended with `USearchID`, `UserID`, `UserAnnotation` (section 4), no evidence, no domains, `XICUser` 0 |
+| `MyExtendedFastaItems` | Kept rows unchanged except as section 3 says and except a User Annotation written to keep a family name (section 4); removed rows deleted; added rows appended with `USearchID`, `UserID`, `UserAnnotation` (section 4), no evidence, no domains, `XICUser` 0 |
 | `SourceSha256`, `SourceSequenceCount` | The new file's SHA-256 and record count |
 | `ClusteringIdentity`, `ClusteringMethod`, `WordSimilarity`, `IsKeywordSuperCluster` | Unchanged (the update is recorded separately) |
 | `LockedUserIds` | Kept; numbers of emptied families removed |
@@ -222,7 +240,8 @@ changed; kept families were not merged." The exported report folder gains databa
 |---|---|
 | The wrong file (another clade or another pipeline) | Before placement: if fewer than half of the project's target proteins are kept, it warns strongly and suggests Build families |
 | Decoys or contaminants present in one file and not the other | Refuses, naming what differs; decoys and contaminants are rows like any other and are matched and placed by the same rules |
-| A repeated accession | Refuses with the list (section 3) |
+| An ambiguous match (a repeated key, several supersets, several identical sequences) | Lists it as ambiguous; carries no curation over unless she picks the pair (section 3) |
+| A family name that would change | Shown in the preview with "Keep the old name" (section 4) |
 | Placement differs from a rebuild | Said in the preview, Help and the report; Build families remains |
 | A new protein links two curated families | Joins the nearest; listed; never merged |
 | A new protein joins a locked family she would have kept apart | Listed separately; she moves it by hand |
@@ -236,7 +255,11 @@ changed; kept families were not merged." The exported report folder gains databa
 
 1. Matching: an old and a new synthetic target-decoy FASTA with each class of section 3 (including tr to
    sp with a new entry name, an isoform, a decoy, a contaminant, an affinity tag without accession, a
-   subset replaced by its superset); every class and count asserted.
+   subset replaced by its superset); every class and count asserted. One-to-one: two new records with
+   one old key and no unique identical sequence, one new record containing two old rows, one old row
+   contained in two new records, and a sequence held by two unmatched rows each end in the ambiguous list
+   with no curation carried over; picking a pair carries exactly that one; no row or record is matched
+   twice.
 2. Placement: an added protein above the identity joins an unlocked family (UserID and USearchID); one
    joins a locked family and the lock stays; one close to two families joins the nearest and both stay
    apart; added proteins linked only to each other form one new family numbered above the maximum; an
@@ -247,7 +270,9 @@ changed; kept families were not merged." The exported report folder gains databa
    families of the new database (family numbers aside).
 4. Kept exactly: every kept row's UserID, USearchID and annotation, the lock set, panel, motifs, report
    details and row order are equal before and after; names of untouched families are equal
-   (FamilyNaming.Names); a family whose annotated members were all removed keeps its name.
+   (FamilyNaming.Names); a family whose annotated members were all removed keeps its name when ticked
+   (the default for annotation names) and falls back to its protein names when unticked; a description
+   name follows the new descriptions unless ticked; the 1.5 export shows the kept name.
 5. Out of date: FamilyStudyMembership.Problem reports the change; the spectrum refresh keeps the
    "different protein database" reason; panel assignments read as not current; the confirmed task is
    refused; evidence is cleared only for changed sequences.
