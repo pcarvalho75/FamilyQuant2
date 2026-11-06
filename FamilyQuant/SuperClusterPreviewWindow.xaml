@@ -196,7 +196,9 @@
                                         <Button Content="Tick selected" Click="EvidenceTickSelected_Click" ToolTip="Selects only the highlighted protein rows for their supplied proposed families."/>
                                         <Button Content="Untick selected" Click="EvidenceUntickSelected_Click" ToolTip="Clears only the highlighted protein rows. Their current document families stay unchanged until Apply."/>
                                     </WrapPanel>
-                                    <DataGrid x:Name="evidenceGrid" ItemsSource="{Binding VisibleProteins}" AutoGenerateColumns="False" CanUserAddRows="False"
+                                    <Grid>
+                                    <Grid.RowDefinitions><RowDefinition Height="2*" MinHeight="120"/><RowDefinition Height="8"/><RowDefinition Height="3*" MinHeight="110"/></Grid.RowDefinitions>
+                                    <DataGrid x:Name="evidenceGrid" ItemsSource="{Binding VisibleProteins}" SelectedItem="{Binding SelectedProtein, Mode=TwoWay}" AutoGenerateColumns="False" CanUserAddRows="False"
                                               CanUserDeleteRows="False" SelectionMode="Extended" ToolTip="Protein-level proposal with the supplied reason, tier and flags. Ticks and names remain review choices until Apply.">
                                         <DataGrid.RowStyle><Style TargetType="DataGridRow"><Style.Triggers>
                                             <DataTrigger Binding="{Binding IsFlagged}" Value="True">
@@ -229,6 +231,16 @@
                                             <DataGridTextColumn Header="FASTA identifier" Width="200" MinWidth="200" IsReadOnly="True" Binding="{Binding Identifier}"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
+                                    <GridSplitter Grid.Row="1" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                                  ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="{DynamicResource EdgeBrush}"
+                                                  Focusable="True" ToolTip="Drag to resize the protein table and full details, or focus here and use the arrow keys."/>
+                                    <DockPanel Grid.Row="2">
+                                        <TextBlock DockPanel.Dock="Top" Text="Selected protein details" Style="{DynamicResource CaptionText}" Margin="0,0,0,4"/>
+                                        <TextBox x:Name="proteinDetails" Text="{Binding ProteinDetails, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True"
+                                                 TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                                                 ToolTip="Full supplied reason, warning details, reviewed relative, domains, scope match and tick consequence for the selected row."/>
+                                    </DockPanel>
+                                    </Grid>
                                 </DockPanel>
                             </TabItem>
                             <TabItem Header="Panel links" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}">

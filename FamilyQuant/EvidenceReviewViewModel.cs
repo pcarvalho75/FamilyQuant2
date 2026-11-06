@@ -115,6 +115,7 @@ namespace FamilyQuant
         private int bulkDepth;
         private readonly HashSet<ReviewFamilyRow> bulkFamilies = new();
         private ReviewFamilyRow? selectedFamily;
+        private ReviewProteinRow? selectedProtein;
         private string searchText = "";
         public EvidenceReviewInput Source { get; }
         public IReadOnlyList<ReviewProteinRow> Proteins { get; }
@@ -148,10 +149,34 @@ namespace FamilyQuant
         public ReviewFamilyRow? SelectedFamily
         {
             get => selectedFamily;
-            set { if (ReferenceEquals(selectedFamily, value)) return; selectedFamily = value; Changed(); Changed(nameof(VisibleProteins)); Changed(nameof(SelectedArchitecture)); }
+            set { if (ReferenceEquals(selectedFamily, value)) return; selectedFamily = value; Changed(); RefreshVisibleProteins(); Changed(nameof(SelectedArchitecture)); }
         }
-        public string SearchText { get => searchText; set { if (searchText == value) return; searchText = value; Changed(); Changed(nameof(VisibleProteins)); } }
+        public string SearchText { get => searchText; set { if (searchText == value) return; searchText = value; Changed(); RefreshVisibleProteins(); } }
         public IEnumerable<ReviewProteinRow> VisibleProteins => (SelectedFamily?.Members ?? Proteins).Where(Matches);
+        public ReviewProteinRow? SelectedProtein
+        {
+            get => selectedProtein;
+            set { if (ReferenceEquals(selectedProtein, value)) return; selectedProtein = value; Changed(); Changed(nameof(ProteinDetails)); }
+        }
+        public string ProteinDetails
+        {
+            get
+            {
+                var row = SelectedProtein;
+                if (row == null) return "Select a protein to read its full evidence and what its tick does.";
+                string family = familyByKey.TryGetValue(row.Family, out var proposed) ? proposed.Name : row.Family;
+                string Supplied(string value) => string.IsNullOrWhiteSpace(value) ? "Not supplied" : value;
+                return row.Accession + " | Current family ID: " + row.PreviousFamilyId.ToString(CultureInfo.CurrentCulture)
+                    + "\nReason: " + Supplied(row.Reason)
+                    + "\nFlags: " + (row.IsFlagged ? row.FlagsHelp : "None supplied")
+                    + "\nReviewed relative: " + Supplied(row.Neighbour)
+                    + "\nDomains: " + Supplied(row.Domains)
+                    + "\nScope words found: " + row.ScopeWordsText
+                    + "\n" + (row.Selected ? "Ticked: joins " + family + " on Apply grouping."
+                        : "Unticked: stays in its current family and is still quantified.")
+                    + (row.Source.IsLocked ? "\n" + row.SelectionHelp : "");
+            }
+        }
 
         public EvidenceReviewViewModel(EvidenceReviewInput source)
         {
@@ -187,6 +212,13 @@ namespace FamilyQuant
             LeftOut = source.LeftOut ?? Array.Empty<ReviewLeftOutInput>();
             selectedCount = Proteins.Count(p => p.Selected);
             selectedFamily = Families.FirstOrDefault();
+            selectedProtein = VisibleProteins.FirstOrDefault();
+        }
+
+        private void RefreshVisibleProteins()
+        {
+            Changed(nameof(VisibleProteins));
+            if (SelectedProtein == null || !VisibleProteins.Contains(SelectedProtein)) SelectedProtein = VisibleProteins.FirstOrDefault();
         }
 
         private bool Matches(ReviewProteinRow row) => searchText.Length == 0 || row.Identifier.Contains(searchText, StringComparison.OrdinalIgnoreCase)
@@ -207,6 +239,7 @@ namespace FamilyQuant
         private void SelectionOrNameChanged()
         {
             Changed(nameof(SelectedCount)); Changed(nameof(CanConfirm)); Changed(nameof(Summary));
+            Changed(nameof(ProteinDetails));
         }
         public void SetSelected(IEnumerable<ReviewProteinRow> rows, bool selected)
         {

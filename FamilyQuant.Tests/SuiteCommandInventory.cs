@@ -402,6 +402,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-evidence-scope-help", "FamilyQuant.Tests.Program.EvidenceScopeHelpTests()"),
         SuiteCommandRule.Covered("--test-evidence-newcomer", "FamilyQuant.Tests.Program.EvidenceNewcomerTests()"),
         SuiteCommandRule.Covered("--test-coherence-source-details", "FamilyQuant.Tests.Program.CoherenceSourceDetailsTests()"),
+        SuiteCommandRule.Covered("--test-evidence-protein-details", "FamilyQuant.Tests.Program.EvidenceProteinDetailsTests(System.String)"),
         SuiteCommandRule.Covered("--test-scope-visibility", "FamilyQuant.Tests.Program.ScopeVisibilityTests()"),
         SuiteCommandRule.Covered("--test-shell-dialogs", "FamilyQuant.Tests.Program.BusyOperationTests(System.String)", "FamilyQuant.Tests.Program.ShellDialogTests(System.String)"),
         SuiteCommandRule.Covered("--test-shell-evidence-cancel", "FamilyQuant.Tests.Program.ShellEvidenceFetchCancellationTests()"),
