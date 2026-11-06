@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using FamilyQuant.Evidence;
 
 namespace FamilyQuant
@@ -50,6 +51,24 @@ namespace FamilyQuant
         public string MotifPattern { get => motifPattern; set { motifPattern = value; Changed(); Changed(nameof(CanCheckMotif)); NotifySummary(); } }
         public string MotifReport { get => motifReport; private set { motifReport = value; Changed(); } }
         public string Status { get => status; private set { status = value; Changed(); } }
+        public void AddScopeKeywords(IEnumerable<string> keywords)
+        {
+            if (IsBusy) return;
+            var existing = new HashSet<string>(WordCluster.ParseKeywords(ScopeText), StringComparer.OrdinalIgnoreCase);
+            var additions = new List<string>();
+            foreach (string keyword in keywords)
+            {
+                string label = Regex.Replace(keyword.Replace('"', ' ').Replace('\u201c', ' ').Replace('\u201d', ' '), @"\s+", " ").Trim();
+                string quoted = "\"" + label + "\"";
+                string? term = WordCluster.ParseKeywords(quoted).SingleOrDefault();
+                if (term != null && existing.Add(term)) additions.Add(quoted);
+            }
+            if (additions.Count == 0) return;
+            string prefix = ScopeText.TrimEnd();
+            string normalizedQuotes = prefix.Replace('\u201c', '"').Replace('\u201d', '"');
+            if (normalizedQuotes.Count(c => c == '"') % 2 != 0) prefix += "\"";
+            ScopeText = string.IsNullOrWhiteSpace(prefix) ? string.Join(", ", additions) : prefix + ", " + string.Join(", ", additions);
+        }
         public string Summary => ModeIndex == 1 ? Evidence?.Summary ?? "Set the scope and build an evidence proposal." : Keyword.Headline;
         public bool CanConfirm => !IsBusy && (ModeIndex == 1 ? Evidence?.CanConfirm == true && ScopeText == proposalScope
             && (MotifPattern.Length == 0 || checkedMotifPattern == MotifPattern) : Keyword.CanCreate);

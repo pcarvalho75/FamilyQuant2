@@ -126,15 +126,23 @@
                                 </DataGrid>
                                 </DockPanel>
                                 <DockPanel Grid.Column="2">
-                                <ComboBox x:Name="KeywordCategoryFilter" DockPanel.Dock="Top" SelectedIndex="{Binding KeywordCategoryFilterIndex}" IsEnabled="{Binding CanEdit}"
-                                          Margin="0,0,0,4" ToolTip="Filters the keyword table by category. Your scope and the reviewed counts are kept.">
+                                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,4">
+                                <Button x:Name="AddKeywordToScopeButton" DockPanel.Dock="Right" Content="Add to scope" Margin="8,0,0,0"
+                                        Command="{x:Static local:SuperClusterPreviewWindow.AddTaskKeywordsToScope}" CommandTarget="{Binding ElementName=taskKeywordsGrid}"
+                                        ToolTip="Adds the selected keywords as quoted scope phrases. Choose Update proposal to build their proposal."/>
+                                <ComboBox x:Name="KeywordCategoryFilter" SelectedIndex="{Binding KeywordCategoryFilterIndex}" IsEnabled="{Binding CanEdit}"
+                                          ToolTip="Choose all keyword categories or only Molecular function terms for this table.">
                                     <ComboBoxItem Content="All categories"/>
                                     <ComboBoxItem Content="Molecular function only"/>
                                 </ComboBox>
+                                </DockPanel>
                                 <DataGrid x:Name="taskKeywordsGrid" ItemsSource="{Binding VisibleTaskKeywords}" IsReadOnly="True" AutoGenerateColumns="False"
-                                          MinColumnWidth="48"
+                                          MinColumnWidth="48" SelectionMode="Extended" SelectionUnit="FullRow" MouseDoubleClick="TaskKeyword_DoubleClick"
                                           CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" MinHeight="76"
                                           ToolTip="UniProt keyword counts use distinct reviewed accessions and can overlap. Missing categories are shown as unavailable and can be filled by Fetch evidence.">
+                                    <DataGrid.CommandBindings>
+                                        <CommandBinding Command="{x:Static local:SuperClusterPreviewWindow.AddTaskKeywordsToScope}" CanExecute="AddScopeKeywords_CanExecute" Executed="AddScopeKeywords_Executed"/>
+                                    </DataGrid.CommandBindings>
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Keyword" Width="*" Binding="{Binding Keyword}"/>
                                         <DataGridTextColumn Header="Category" Width="146" Binding="{Binding CategoryDisplay}"/>

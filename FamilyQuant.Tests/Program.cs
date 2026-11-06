@@ -300,6 +300,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => TaskTaxaClipboardTests());
             suite.Add(() => KeywordCategoryTests());
             suite.AddWithApplication(() => KeywordCategoryFilterTests());
+            suite.AddWithApplication(() => AddKeywordScopeTests());
             suite.AddWithApplication(() => GroupingDiscoverySafetyTests());
             suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => PanelMultiScopeAuditTests());
