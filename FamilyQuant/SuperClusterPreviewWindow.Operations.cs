@@ -34,6 +34,7 @@ public partial class SuperClusterPreviewWindow
                 finally { model.PropertyChanged -= progress; }
             });
         }
+        catch (OperationCanceledException) { model.ReportOperationCancellation(); }
         catch (Exception error)
         {
             Operations.LogFailure(error);

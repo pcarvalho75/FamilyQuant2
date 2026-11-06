@@ -68,15 +68,21 @@ namespace FamilyQuant
             Status = "The grouping review could not finish: " + error.Message;
         }
 
+        internal void ReportOperationCancellation()
+        {
+            IsBusy = false;
+            Status = "Cancelled. Previous review is kept.";
+        }
+
         public async Task DiscoverTaskAsync(IProgress<FetchProgress>? progress)
         {
             if (!CanDiscoverTask) return;
             int request = ++generation;
             using var cancellation = new CancellationTokenSource();
             discoveryCancellation = cancellation;
-            IsBusy = true; Status = "Reading the database taxonomy, reviewed keywords and tissue annotations...";
             try
             {
+                IsBusy = true; Status = "Reading the database taxonomy, reviewed keywords and tissue annotations...";
                 var facts = await discoverTask!(progress, cancellation.Token);
                 if (request != generation || cancellation.IsCancellationRequested) return;
                 TaskScope = facts; Changed(nameof(TaskScope)); Changed(nameof(HasTaskScope));
