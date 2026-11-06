@@ -25,6 +25,31 @@ internal static partial class Program
                 Enumerable.Range(24, 8).Select(i => new ReviewArchitectureUndeterminedInput(i, "Supplied placement refusal")).ToArray()) });
     }
 
+    internal static SuperClusterPreviewWindow ReviewLayoutWindow(int width = 1366, int height = 768)
+    {
+        var input = ReviewLayoutFixture();
+        return new SuperClusterPreviewWindow(new SuperClusterPreview(new List<FastaItemExtended>(), null,
+            "", "", KeywordMatch.All, null, null), input, _ => input, evidenceMode: true,
+            discoverTask: _ => Task.FromResult(new EvidenceTaskScopeInput("Supplied clade",
+                Enumerable.Range(0, 5).Select(i => new ReviewTaskTaxon("Invented taxon " + i, 100 + i)).ToArray(),
+                Enumerable.Range(0, 12).Select(i => new ReviewTaskKeyword("Supplied keyword " + i, 16 - i)).ToArray(),
+                16, new[] { "Supplied function" }, "fixture-release", TargetProteins: 32)))
+        {
+            Width = width, Height = height, Left = -30000, Top = -30000,
+            WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false,
+            WindowStyle = WindowStyle.None, ResizeMode = ResizeMode.NoResize
+        };
+    }
+
+    internal static bool ReviewArchitectureFits(SuperClusterPreviewWindow window)
+    {
+        var architecture = (ArchitectureReviewControl)window.FindName("architectureReview");
+        var groups = (DataGrid)architecture.FindName("groupGrid");
+        var members = (DataGrid)architecture.FindName("memberGrid");
+        return groups.ActualHeight >= 110 && members.ActualHeight >= 110
+            && members.TranslatePoint(new Point(0, members.ActualHeight), architecture).Y <= architecture.ActualHeight + 1;
+    }
+
     private static void EvidenceReviewFamilyLayoutTests(string? output = null)
     {
         EnsureApplication();
@@ -32,21 +57,11 @@ internal static partial class Program
         try
         {
             foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
-            foreach (var size in new[] { (Width: 1366, Height: 768), (Width: 1920, Height: 1080) })
+            foreach (var size in new[] { (Width: 1024, Height: 768), (Width: 1366, Height: 768), (Width: 1920, Height: 1080) })
             {
                 Themes.ThemeManager.Apply(theme);
                 var input = ReviewLayoutFixture();
-                var window = new SuperClusterPreviewWindow(new SuperClusterPreview(new List<FastaItemExtended>(), null,
-                    "", "", KeywordMatch.All, null, null), input, _ => input, evidenceMode: true,
-                    discoverTask: _ => Task.FromResult(new EvidenceTaskScopeInput("Supplied clade",
-                        Enumerable.Range(0, 5).Select(i => new ReviewTaskTaxon("Invented taxon " + i, 100 + i)).ToArray(),
-                        Enumerable.Range(0, 12).Select(i => new ReviewTaskKeyword("Supplied keyword " + i, 16 - i)).ToArray(),
-                        16, new[] { "Supplied function" }, "fixture-release", TargetProteins: 32)))
-                {
-                    Width = size.Width, Height = size.Height, Left = -30000, Top = -30000,
-                    WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false,
-                    WindowStyle = WindowStyle.None, ResizeMode = ResizeMode.NoResize
-                };
+                var window = ReviewLayoutWindow(size.Width, size.Height);
                 try
                 {
                     window.Show(); PumpDispatcher(); window.UpdateLayout();
@@ -79,6 +94,26 @@ internal static partial class Program
                         && legend.TextWrapping == TextWrapping.NoWrap && legend.ActualHeight > 0);
                     var groups = (DataGrid)architecture.FindName("groupGrid");
                     var members = (DataGrid)architecture.FindName("memberGrid");
+                    Check(label + " screens layout gate accepts visible Architecture tables", ReviewArchitectureFits(window));
+                    if (size.Height == 768)
+                    {
+                        var scopeScroll = WalkTree(window).OfType<ScrollViewer>()
+                            .Single(s => s.Content is StackPanel panel && panel.Children.OfType<Expander>().Any());
+                        var layout = (Grid)scopeScroll.Parent;
+                        var top = layout.RowDefinitions[0]; var review = layout.RowDefinitions[1];
+                        var topHeight = top.Height; double topMax = top.MaxHeight, reviewMin = review.MinHeight;
+                        try
+                        {
+                            top.Height = GridLength.Auto; top.MaxHeight = double.PositiveInfinity; review.MinHeight = 0;
+                            window.UpdateLayout(); PumpDispatcher();
+                            Check(label + " screens gate rejects the old unbounded scope layout", !ReviewArchitectureFits(window));
+                        }
+                        finally
+                        {
+                            top.Height = topHeight; top.MaxHeight = topMax; review.MinHeight = reviewMin;
+                            window.UpdateLayout(); PumpDispatcher();
+                        }
+                    }
                     Check(label + " expanded scope leaves two usable Architecture tables", groups.ActualHeight >= 110 && members.ActualHeight >= 110,
                         "groups=" + groups.ActualHeight + "; members=" + members.ActualHeight);
                     Check(label + " Architecture has a row splitter between groups and members", WalkTree(architecture).OfType<GridSplitter>()
@@ -94,5 +129,7 @@ internal static partial class Program
             }
         }
         finally { Themes.ThemeManager.Apply(previous); }
+        Check("screens harness includes synthetic scope and Architecture states", ScreenHarness.Screens.Contains("15-evidence-scope")
+            && ScreenHarness.Screens.Contains("16-evidence-architecture"));
     }
 }

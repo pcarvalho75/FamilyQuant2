@@ -87,7 +87,7 @@
             </TabItem>
             <TabItem Header="Evidence" IsEnabled="{Binding EvidenceAvailable}" ToolTip="Review classified families, protein-level reasons and flags. Disabled until an evidence proposal is available.">
                 <Grid Margin="8">
-                    <Grid.RowDefinitions><RowDefinition Height="2*" MaxHeight="260"/><RowDefinition Height="3*" MinHeight="360"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                    <Grid.RowDefinitions><RowDefinition Height="2*" MaxHeight="260"/><RowDefinition Height="3*" MinHeight="390"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10">
                     <StackPanel>
                     <DockPanel Visibility="{Binding TaskDiscoveryAvailable, Converter={StaticResource VisibleWhenTrue}}" Margin="0,0,0,8">
