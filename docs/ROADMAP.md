@@ -93,7 +93,8 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z1h | A flaky suite check: the Full XIC column attach expects PENDING before READY and failed 2 of about 10 runs on a timing race (FQOpus); make it wait for the state instead of racing | L | 0.2 | 🟢 | Z1j | 20 runs in a row green | FE | | 0 | 0 | |
 | Z1i | The public README's Families, Quantify and Results screenshots re-captured from 2.1.8 (synthetic data), so every picture shows the new names | L | 0.2 | Z8e3 | Z1j | Every README image matches 2.1.8 | HM | | 0 | 0 | |
 | Z1k | The program's Help says the de novo reconciliation allows for isotope selection errors (`FamilyQuant.Core/HelpContent.cs:514-515`), but the code uses a direct 20 ppm m/z match (`DeNovoReconciler.cs:68-87`); correct the Help to match the code (found by FQSite, confirmed by FQReviewDS on the science page) | L | 0.1 | 🟢 | Z1j | Help matches the code; reviewed | FE | | 0 | 0 | |
-| Z1j | The follow-ups ship in the next release when Paulo asks for one | L | 0 | Z1f, Z1g, Z1h, Z1i, Z1k | | Paulo's word | Paulo | | 0 | 0 | |
+| Z1l | After Fetch evidence the status line says "Protein evidence saved for N proteins", which reads as saved to disk though nothing is written until File > Save (Ana, 11-06); say it plainly, for example "Protein evidence added for N proteins. Use File > Save to keep it.", and the same for the reference panel and family world messages | L | 0.1 | 🟢 | Z1j | Wording check green; reviewed | FE | | 0 | 0 | |
+| Z1j | The follow-ups pile up for the next major release, shipped only when Paulo asks (Paulo, 11-06: "no need to deploy now ... pile it up") | L | 0 | Z1f, Z1g, Z1h, Z1i, Z1k, Z1l | | Paulo's word | Paulo | | 0 | 0 | |
 
 ### W9a The website: study and design (FQSite)
 
