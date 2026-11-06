@@ -252,6 +252,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => EvidenceReviewClarityTests());
             suite.AddWithApplication(() => EvidenceNewcomerTests());
             suite.AddWithApplication(() => EvidenceProteinDetailsTests());
+            suite.AddWithApplication(() => CoherenceMembersUiTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
             suite.AddWithApplication(() => GridCopyTests());
             suite.AddWithApplication(() => GridCopyRowNumberTests());

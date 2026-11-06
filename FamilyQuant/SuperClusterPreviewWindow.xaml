@@ -235,7 +235,13 @@
                                                   ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="{DynamicResource EdgeBrush}"
                                                   Focusable="True" ToolTip="Drag to resize the protein table and full details, or focus here and use the arrow keys."/>
                                     <DockPanel Grid.Row="2">
-                                        <TextBlock DockPanel.Dock="Top" Text="Selected protein details" Style="{DynamicResource CaptionText}" Margin="0,0,0,4"/>
+                                        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,4">
+                                            <Button x:Name="profileMembersButton" DockPanel.Dock="Right" Content="Show members" IsEnabled="{Binding CanShowProfileMembers}"
+                                                    Visibility="{Binding CanShowProfileMembers, Converter={StaticResource VisibleWhenTrue}}"
+                                                    Click="ProfileMembers_Click" ToolTip="Lists the stored reviewed members that built this family's coherence profile; no download or proposal change."
+                                                    ToolTipService.ShowOnDisabled="True"/>
+                                            <TextBlock Text="Selected protein details" Style="{DynamicResource CaptionText}" VerticalAlignment="Center"/>
+                                        </DockPanel>
                                         <TextBox x:Name="proteinDetails" Text="{Binding ProteinDetails, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True"
                                                  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
                                                  ToolTip="Full supplied reason, warning details, reviewed relative, domains, scope match and tick consequence for the selected row."/>

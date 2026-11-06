@@ -75,11 +75,16 @@ public sealed class EvidenceGroupingSession
         var references = reviewPanel == null ? NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms))
             : PanelEvidenceClassifier.References(file, options);
         var result = search(NearestReviewed.Targets(file), references);
-        var proposal = reviewPanel == null
-            ? CoherenceCheck.Flag(EvidenceClassifier.Propose(file.MyExtendedFastaItems, options, result.ByQuery(), NearestReviewed.ReferenceEvidence(file)),
-                file.MyExtendedFastaItems, CoherenceCheck.Learn(file))
-            : PanelEvidenceClassifier.Propose(file, options, result, references, reviewPanel);
-        var presentation = EvidenceProposalPresentation.Present(proposal, file);
+        IReadOnlyDictionary<string, FamilyProfile>? profiles = null;
+        EvidenceProposal proposal;
+        if (reviewPanel == null)
+        {
+            var classified = EvidenceClassifier.Propose(file.MyExtendedFastaItems, options, result.ByQuery(), NearestReviewed.ReferenceEvidence(file));
+            profiles = CoherenceCheck.Learn(file);
+            proposal = CoherenceCheck.Flag(classified, file.MyExtendedFastaItems, profiles);
+        }
+        else proposal = PanelEvidenceClassifier.Propose(file, options, result, references, reviewPanel);
+        var presentation = EvidenceProposalPresentation.Present(proposal, file, profiles);
         EnsureCurrent();
         Search = result; References = references.ToArray(); Proposal = proposal; checkedMotif = null; confirmedTask = taskChoice;
         lastScope = scope;

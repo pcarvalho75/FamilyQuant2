@@ -86,12 +86,15 @@ namespace FamilyQuant.Evidence
                 if (seen.Add(accession))
                 {
                     var header = HeaderSpecies(item.Description);
-                    members.Add(new Member(item.Sequence, item.Evidence, accession, CoherenceMemberSource.File, header.Species, header.TaxonomyId));
+                    bool stored = !string.IsNullOrWhiteSpace(item.Evidence.OrganismName) || item.Evidence.TaxonId != null;
+                    members.Add(new Member(item.Sequence, item.Evidence, accession, CoherenceMemberSource.File,
+                        stored ? item.Evidence.OrganismName : header.Species, stored ? item.Evidence.TaxonId : header.TaxonomyId));
                 }
             }
             foreach (PanelEntry entry in file.EvidenceSource?.ReferencePanel?.Entries ?? new List<PanelEntry>())
                 if (entry.Sequence.Length > 0 && seen.Add(entry.Accession))
-                    members.Add(new Member(entry.Sequence, entry.Evidence, entry.Accession, CoherenceMemberSource.ReferencePanel));
+                    members.Add(new Member(entry.Sequence, entry.Evidence, entry.Accession, CoherenceMemberSource.ReferencePanel,
+                        entry.OrganismName, entry.TaxonId));
             return LearnMembers(members);
         }
 

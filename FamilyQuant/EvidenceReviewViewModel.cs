@@ -27,7 +27,7 @@ namespace FamilyQuant
         IReadOnlyList<ReviewFamilyInput> Families, IReadOnlyList<ReviewMarkerInput> Markers,
         IReadOnlyList<ReviewArchitectureInput>? Architectures = null, IReadOnlyList<ReviewLeftOutInput>? LeftOut = null,
         string SourceLabel = "", string RuleSummary = "", IReadOnlyList<PanelFamilyLinkProposal>? PanelLinks = null,
-        IReadOnlyDictionary<string, string>? PanelNames = null);
+        IReadOnlyDictionary<string, string>? PanelNames = null, IReadOnlyDictionary<string, FamilyProfile>? CoherenceProfiles = null);
     public sealed record EvidenceReviewSelection(string SourceFingerprint, IReadOnlyList<int> ProteinIndices,
         IReadOnlyDictionary<string, string> Names, IReadOnlyList<ReviewArchitectureChoice>? ArchitectureChoices = null,
         string MotifPattern = "", IReadOnlyList<EvidenceProteinOverride>? ProteinOverrides = null);
@@ -48,7 +48,10 @@ namespace FamilyQuant
         public string Description => Source.Description;
         public string Domains => Source.Domains;
         public string Flags => string.Join("; ", Source.Flags.Select(f => EvidenceWarningText.Describe(f).Label));
-        public string FlagsHelp => string.Join(Environment.NewLine + Environment.NewLine, Source.Flags.Select(f => EvidenceWarningText.Describe(f).Help));
+        public FamilyProfile? CoherenceProfile { get; }
+        public string FlagsHelp => string.Join(Environment.NewLine + Environment.NewLine, Source.Flags.Select(f => EvidenceWarningText.Describe(f).Help))
+            + (CoherenceProfile != null && Source.Flags.Any(f => f.StartsWith("coherence.", StringComparison.Ordinal))
+                ? Environment.NewLine + Environment.NewLine + CoherenceProfilePresentation.CompleteSources(CoherenceProfile) : "");
         public bool IsFlagged => Source.Flags.Count > 0;
         public bool HasScopeAnnotation => Source.HasScopeAnnotation;
         public string ScopeWordsText => Source.HasScopeAnnotation ? "Yes" : "No";
@@ -67,9 +70,10 @@ namespace FamilyQuant
                 selected = value; Changed(); selectionChanged(this, value ? 1 : -1);
             }
         }
-        internal ReviewProteinRow(ReviewProteinInput source, Action<ReviewProteinRow, int> changed)
+        internal ReviewProteinRow(ReviewProteinInput source, Action<ReviewProteinRow, int> changed, FamilyProfile? coherenceProfile = null)
         {
             Source = source; selectionChanged = changed;
+            CoherenceProfile = coherenceProfile;
             selected = source.SuggestedSelected && CanSelect;
         }
     }
@@ -156,8 +160,10 @@ namespace FamilyQuant
         public ReviewProteinRow? SelectedProtein
         {
             get => selectedProtein;
-            set { if (ReferenceEquals(selectedProtein, value)) return; selectedProtein = value; Changed(); Changed(nameof(ProteinDetails)); }
+            set { if (ReferenceEquals(selectedProtein, value)) return; selectedProtein = value; Changed(); Changed(nameof(ProteinDetails)); Changed(nameof(SelectedProfile)); Changed(nameof(CanShowProfileMembers)); }
         }
+        public FamilyProfile? SelectedProfile => SelectedProtein?.CoherenceProfile;
+        public bool CanShowProfileMembers => SelectedProfile?.ReviewedMembers.Count > 0;
         public string ProteinDetails
         {
             get
@@ -167,6 +173,7 @@ namespace FamilyQuant
                 string family = familyByKey.TryGetValue(row.Family, out var proposed) ? proposed.Name : row.Family;
                 string Supplied(string value) => string.IsNullOrWhiteSpace(value) ? "Not supplied" : value;
                 return row.Accession + " | Current family ID: " + row.PreviousFamilyId.ToString(CultureInfo.CurrentCulture)
+                    + (row.CoherenceProfile == null ? "" : "\n" + CoherenceProfilePresentation.CompleteSources(row.CoherenceProfile))
                     + "\nReason: " + Supplied(row.Reason)
                     + "\nFlags: " + (row.IsFlagged ? row.FlagsHelp : "None supplied")
                     + "\nReviewed relative: " + Supplied(row.Neighbour)
@@ -193,7 +200,8 @@ namespace FamilyQuant
             if (source.Proteins.Select(p => p.ProteinIndex).Distinct().Count() != source.Proteins.Count)
                 throw new ArgumentException("A proposal cannot repeat a protein index.", nameof(source));
             familyByKey = new Dictionary<string, ReviewFamilyRow>(StringComparer.Ordinal);
-            Proteins = source.Proteins.Select(p => new ReviewProteinRow(p, SelectionChanged)).ToArray();
+            Proteins = source.Proteins.Select(p => new ReviewProteinRow(p, SelectionChanged,
+                source.CoherenceProfiles?.GetValueOrDefault(p.Family))).ToArray();
             var groups = Proteins.GroupBy(p => p.Family, StringComparer.Ordinal).ToDictionary(g => g.Key, g => (IReadOnlyList<ReviewProteinRow>)g.ToArray(), StringComparer.Ordinal);
             foreach (var family in source.Families)
             {

@@ -50,6 +50,12 @@ internal static partial class Program
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),
+        new("--test-coherence-members-ui", 56, TestCommandPhase.Raw, args => args.Contains("--test-coherence-members-ui", StringComparer.Ordinal), (args, _) =>
+        {
+            CoherenceMembersUiTests(args.Length == 2 ? args[1] : null);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
     ];
 
     private static int RunCurationLayoutChecks(string[] args, string workDir)

@@ -14,12 +14,17 @@ namespace FamilyQuant
         public static string QueryCoverageSummary => "The comparison must cover at least "
             + NearestReviewed.DefaultMinQueryAlignedPercent.ToString("0.##", CultureInfo.CurrentCulture) + "% of this protein's length.";
         public static EvidenceReviewInput Present(EvidenceProposal proposal, FamilyClusterFile file)
+            => Present(proposal, file, null);
+
+        public static EvidenceReviewInput Present(EvidenceProposal proposal, FamilyClusterFile file,
+            IReadOnlyDictionary<string, FamilyProfile>? coherenceProfiles)
         {
             var input = Present(proposal, file.MyExtendedFastaItems, file.LockedUserIds);
             return input with { RuleSummary = input.RuleSummary + "\nStored motifs:\n"
                 + string.Join("\n", (file.Motifs ?? new List<MotifPattern>()).Select(m => m.Name + ": " + m.Pattern))
                 + (proposal.PanelContext == null ? "" : "\n\n" + PanelEvidenceHelp.Build()),
-                PanelNames = file.FamilyPanel?.Families.ToDictionary(f => f.Key, f => f.DisplayName, StringComparer.Ordinal) };
+                PanelNames = file.FamilyPanel?.Families.ToDictionary(f => f.Key, f => f.DisplayName, StringComparer.Ordinal),
+                CoherenceProfiles = coherenceProfiles };
         }
 
         public static EvidenceReviewInput Present(EvidenceProposal proposal, IReadOnlyList<FastaItemExtended> proteins,
