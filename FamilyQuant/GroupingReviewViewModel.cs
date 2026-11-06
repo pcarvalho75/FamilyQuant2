@@ -45,6 +45,26 @@ namespace FamilyQuant
         public string Summary => ModeIndex == 1 ? Evidence?.Summary ?? "Set the scope and build an evidence proposal." : Keyword.Headline;
         public bool CanConfirm => !IsBusy && (ModeIndex == 1 ? Evidence?.CanConfirm == true && ScopeText == proposalScope
             && (MotifPattern.Length == 0 || checkedMotifPattern == MotifPattern) : Keyword.CanCreate);
+        public string ApplyHint
+        {
+            get
+            {
+                if (ModeIndex != 1) return "";
+                if (IsBusy) return "Please wait for the current review step to finish.";
+                if (Evidence == null) return string.IsNullOrWhiteSpace(ScopeText)
+                    ? "Enter scope words, then use Update proposal." : "Use Update proposal to build the family proposal.";
+                if (ScopeText != proposalScope) return "Scope changed: use Update proposal before Apply grouping.";
+                if (Evidence.HasInvalidPanelLinkNotes) return "Enter a short single-line note for each edited panel link.";
+                if (Evidence.HasUnappliedPanelLinkChoices) return "Use link choices to update the family proposal before Apply grouping.";
+                if (Evidence.PanelLinks.Any(row => row.Source.NeedsConfirmation)) return "Choose a family or leave outside for each unresolved panel link.";
+                if (Evidence.SelectedCount == 0) return "Tick at least one unlocked protein in the family proposal.";
+                if (Evidence.Families.Any(f => f.SelectedCount > 0 && string.IsNullOrWhiteSpace(f.Name))) return "Enter a name for every selected family.";
+                if (Evidence.Architectures.Any(a => Evidence.Families.Any(f => f.Family == a.Family && f.SelectedCount > 0) && !a.IsValid))
+                    return "Enter a name for every ticked split.";
+                if (MotifPattern.Length > 0 && checkedMotifPattern != MotifPattern) return "Check the motif, or clear it, before Apply grouping.";
+                return "Ready to apply the selected proteins; File > Save keeps the change.";
+            }
+        }
         public GroupingReviewViewModel(SuperClusterPreview keyword, EvidenceReviewInput? input = null,
             Func<string, EvidenceReviewInput>? propose = null, Func<string, string>? motif = null,
             string initialScope = "", bool evidenceMode = false,
@@ -170,6 +190,6 @@ namespace FamilyQuant
             Changed(nameof(Evidence)); Changed(nameof(EvidenceAvailable)); Changed(nameof(CanCheckMotif)); NotifySummary();
         }
         private void EvidenceChanged(object? sender, PropertyChangedEventArgs e) { Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); }
-        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); }
+        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); }
     }
 }

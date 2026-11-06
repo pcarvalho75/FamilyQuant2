@@ -307,11 +307,15 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+        <DockPanel Grid.Row="3" Margin="0,12,0,0">
+        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <Button Content="Help" Click="Help_Click" ToolTip="Explains scope, evidence tiers, flags, keyword matching, domains and the review choices. It does not change the open document."/>
             <Button x:Name="createButton" Content="Apply grouping" Style="{DynamicResource PrimaryButton}" IsEnabled="{Binding CanConfirm}" IsDefault="True" Click="Create_Click"
                     ToolTip="Applies the reviewed ticks and names. Select proteins and name each selected family and split before applying."/>
             <Button Content="Cancel" IsCancel="True" Click="Cancel_Click" ToolTip="Closes the review and changes nothing in the open document. No undo step is added."/>
         </StackPanel>
+        <TextBlock x:Name="applyHint" Text="{Binding ApplyHint}" ToolTip="{Binding ApplyHint}" VerticalAlignment="Center"
+                   TextTrimming="CharacterEllipsis" Foreground="{DynamicResource MutedBrush}" Margin="0,0,12,0"/>
+        </DockPanel>
     </Grid>
 </Window>

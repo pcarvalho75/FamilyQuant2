@@ -124,8 +124,16 @@ namespace FamilyQuant
         public bool CanConfirm => selectedCount > 0 && !HasUnappliedPanelLinkChoices && !HasInvalidPanelLinkNotes && PanelLinks.All(row => !row.Source.NeedsConfirmation)
             && Families.Where(f => f.SelectedCount > 0).All(f => !string.IsNullOrWhiteSpace(f.Name))
             && Architectures.Where(a => familyByKey.TryGetValue(a.Family, out var family) && family.SelectedCount > 0).All(a => a.IsValid);
-        public string Summary => (Source.SourceLabel.Length == 0 ? "" : Source.SourceLabel + " ") + selectedCount.ToString("N0") + " proteins selected in "
-            + Families.Count(f => f.SelectedCount > 0).ToString("N0") + " families. Nothing has changed yet.";
+        public string Summary
+        {
+            get
+            {
+                int families = Families.Count(f => f.SelectedCount > 0);
+                return (Source.SourceLabel.Length == 0 ? "" : Source.SourceLabel + " ") + selectedCount.ToString("N0")
+                    + (selectedCount == 1 ? " protein selected in " : " proteins selected in ") + families.ToString("N0")
+                    + (families == 1 ? " family. Nothing has changed yet." : " families. Nothing has changed yet.");
+            }
+        }
         public ReviewFamilyRow? SelectedFamily
         {
             get => selectedFamily;

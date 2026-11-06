@@ -19,6 +19,21 @@ internal static partial class Program
             Check("coverage uses protein length words and preserves the precise definition", coverage.Text == EvidenceProposalPresentation.QueryCoverageSummary
                 && !coverage.Text.Contains("query", StringComparison.OrdinalIgnoreCase)
                 && coverage.ToolTip as string == EvidenceProposalPresentation.QueryCoverageRule);
+            var model = (GroupingReviewViewModel)window.DataContext;
+            var hint = (TextBlock)window.FindName("applyHint");
+            Check("changed scope has a visible next action beside Apply", hint.IsVisible && hint.Text == model.ApplyHint
+                && model.ApplyHint.Contains("Update proposal", StringComparison.Ordinal) && !model.CanConfirm);
+            FinishReviewWork(model.UpdateProposalAsync); PumpDispatcher();
+            Check("a ready proposal explains applying and saving", model.CanConfirm && model.ApplyHint.Contains("File > Save", StringComparison.Ordinal));
+            model.Evidence!.SetSelected(model.Evidence.Proteins, false);
+            Check("empty selection explains the missing tick", !model.CanConfirm && model.ApplyHint.Contains("Tick at least one", StringComparison.Ordinal));
+            model.Evidence.SetSelected(model.Evidence.Proteins, true);
+            model.Evidence.Families[0].Name = " ";
+            Check("missing family name explains the blocked Apply", !model.CanConfirm && model.ApplyHint.Contains("name for every selected family", StringComparison.Ordinal));
+            model.Evidence.Families[0].Name = "Supplied family";
+            model.MotifPattern = "C";
+            Check("unchecked pattern explains checking or clearing it", !model.CanConfirm && model.ApplyHint.Contains("Check the motif, or clear it", StringComparison.Ordinal));
+            Check("single-family headline uses the singular", model.Evidence.Summary.Contains("1 family.", StringComparison.Ordinal));
         }
         finally { window.Close(); }
     }
