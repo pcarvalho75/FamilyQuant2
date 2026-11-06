@@ -16,6 +16,7 @@ internal static partial class Program
             args => args.Length > 0 && args[0] == "--test-database-update", (_, _) =>
             {
                 DatabaseUpdateMatchingTests();
+                DatabaseUpdatePlacementTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }),

@@ -115,16 +115,20 @@ and with the exhaustive pass only if the project was built with it (`ClusteringM
 2. Second pass. The same hits are kept as links when they pass `PassesExhaustiveGate`. The added
    proteins are also clustered among themselves with the existing `USearchTools.Cluster`.
 3. Nearest kept neighbour. An added protein with any link (its fast-pass hit or a gate link) joins the
-   family (UserID) of its best link: highest identity, then longest alignment, then lowest family
-   number. Its USearchID is that kept protein's USearchID, so a curated split inside one automatic
-   family is respected: the new protein goes to the side it is closest to.
+   family (UserID) of its best link: a link that also passes the second-pass test first (so a perfect
+   match over a short fragment does not outrank a full-length relative), then highest identity, then
+   longest alignment, then lowest family number. Its USearchID is that kept protein's USearchID, so a
+   curated split inside one automatic family is respected: the new protein goes to the side it is
+   closest to.
 4. Its own new relatives. An added protein with no link to a kept protein, but in the same added-only
    family as placed proteins, joins the family that most of those placed relatives joined.
 5. New families. An added-only family with no placed member becomes a new family, numbered above every
    number in use (the same rule Group by evidence uses, EvidenceApply.cs:211 and :336-337), so a removed
    family's number is never reused.
-6. Never merged. Where Build families would chain two kept families through an added protein, the
-   update does not: the protein joins the nearest and the table lists it as "close to several families".
+6. Never merged. Where Build families would chain two kept families through an added protein (its
+   second-pass links reach both), the update does not: the protein joins the nearest and the table lists
+   it as "close to several families". A fast-pass hit alone never chains families in Build families, so it
+   is not listed.
 
 Locked families. A lock means automatic reclustering never merges that family into anything
 (FamilyQuantFile.cs:38-46). Adding a protein is not a merge, and Ana's Group by evidence families are all
