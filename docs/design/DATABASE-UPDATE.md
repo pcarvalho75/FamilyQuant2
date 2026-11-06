@@ -140,11 +140,16 @@ computes every surviving family's name before and after the planned change and s
 would change, with a "Keep the old name" tick:
 
 - Ticked by default when the old name came from a User Annotation (a name she typed, or one Group by
-  evidence wrote when she applied it, EvidenceApply.cs:317).
+  evidence wrote when she applied it, EvidenceApply.cs:317) and no surviving member carries a different
+  annotation.
+- Not ticked by default when a surviving member carries a different User Annotation: the preview lists
+  those members beside the family, because keeping the name replaces their annotation, and she chooses.
 - Not ticked by default when the old name came from protein descriptions; it then follows UniProt.
 
-Keeping a name writes it into the User Annotation (FastaItemExtended.cs:42) of the family's members that
-carry none, kept and joining alike, so FamilyNaming's first rule returns it. This uses the existing
+Keeping a name writes it into the User Annotation (FastaItemExtended.cs:42) of every member of the
+family, kept and joining alike, replacing any different annotation. Every member then carries the same
+annotation, so FamilyNaming's first rule returns it with no tie to break (the most frequent annotation,
+ties to the first member met, FamilyNaming.cs:44-48 and :118-137). This uses the existing
 per-protein field, not a new one: the 1.5 export already writes and reads User Annotation (the frozen
 reader snapshot covers annotation, docs/PROJECT-FORMATS.md:49), so a 1.5 reader shows the same name. The
 rows whose annotation is written this way are listed in the update record. A family whose members are all
@@ -268,11 +273,16 @@ changed; kept families were not merged." The exported report folder gains databa
    test only.
 3. Same rules: where no kept family would be merged, the update's partition equals a fresh Build
    families of the new database (family numbers aside).
-4. Kept exactly: every kept row's UserID, USearchID and annotation, the lock set, panel, motifs, report
+4. Kept exactly: every kept row's UserID, USearchID and annotation (except annotations written by a ticked Keep the old name), the lock set, panel, motifs, report
    details and row order are equal before and after; names of untouched families are equal
    (FamilyNaming.Names); a family whose annotated members were all removed keeps its name when ticked
    (the default for annotation names) and falls back to its protein names when unticked; a description
-   name follows the new descriptions unless ticked; the 1.5 export shows the kept name.
+   name follows the new descriptions unless ticked; the 1.5 export shows the kept name. Mixed
+   annotations: the old-name carriers are removed while a member with a different annotation survives
+   (the tick starts unticked, the member is listed, and ticking writes the old name on every member so
+   it wins); the same with two different surviving annotations of equal count (a tie that member order
+   would otherwise settle); and with surviving members carrying the old name and a different one at
+   equal count.
 5. Out of date: FamilyStudyMembership.Problem reports the change; the spectrum refresh keeps the
    "different protein database" reason; panel assignments read as not current; the confirmed task is
    refused; evidence is cleared only for changed sequences.
