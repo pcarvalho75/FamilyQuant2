@@ -61,6 +61,15 @@ internal static partial class Program
             Check("Left out explains its proposal-wide list and retention", leftOut.IsVisible && leftOut.Text == model.Evidence.LeftOutSummary
                 && leftOut.Text.StartsWith("0 marker carriers listed across the proposal", StringComparison.Ordinal)
                 && leftOut.ToolTip is string explanation && explanation.Contains("never removes proteins from quantitation", StringComparison.Ordinal));
+            tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Markers"); PumpDispatcher();
+            var markers = (DataGrid)window.FindName("markerGrid");
+            Check("marker support is visible before its secondary count columns", markers.Columns.ToList().FindIndex(c => (string)c.Header == "Support")
+                < markers.Columns.ToList().FindIndex(c => (string)c.Header == "Family votes")
+                && ((TextBlock)window.FindName("markerLegend")).Text.Contains("not abundance", StringComparison.Ordinal));
+            var marker = new ReviewMarkerInput("invented", "Invented domain", "Invented family", 18, 26, 20, .9);
+            Check("support preserves the supplied fraction and explains its denominator", marker.SupportText == .9.ToString("P1")
+                && marker.SupportHelp.Contains("18 of 20", StringComparison.Ordinal) && marker.SupportHelp.Contains("26 domain carriers", StringComparison.Ordinal)
+                && (marker with { LabelledCarriers = 0 }).SupportText == "Not supplied");
         }
         finally { window.Close(); }
         var input = ReviewLayoutFixture();

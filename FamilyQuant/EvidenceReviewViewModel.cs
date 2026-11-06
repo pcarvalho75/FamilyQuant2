@@ -2,6 +2,7 @@ using System;
 using FamilyQuant.Evidence;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 
 namespace FamilyQuant
 {
@@ -12,7 +13,14 @@ namespace FamilyQuant
         bool? Reviewed = null, int? Length = null, int? Cysteines = null, bool? HasPfamCalls = null);
     public sealed record ReviewFamilyInput(string Family, string SuggestedName, int Proteins, int ReviewedProteins);
     public sealed record ReviewMarkerInput(string Accession, string Name, string Family, int FamilyCarriers, int AllCarriers,
-        int LabelledCarriers = 0, double VoteFraction = 0);
+        int LabelledCarriers = 0, double VoteFraction = 0)
+    {
+        public string SupportText => LabelledCarriers > 0 ? VoteFraction.ToString("P1", CultureInfo.CurrentCulture) : "Not supplied";
+        public string SupportHelp => LabelledCarriers > 0
+            ? FamilyCarriers.ToString("N0") + " of " + LabelledCarriers.ToString("N0")
+                + " labelled scope proteins carrying this domain support this family; all " + AllCarriers.ToString("N0") + " domain carriers are counted separately."
+            : "No labelled-carrier denominator was supplied; support is unavailable.";
+    }
     public sealed record ReviewLeftOutInput(string Family, string Accession, string Identifier, string Description,
         int Length, bool? Reviewed, bool Fragment, string MarkerAccession, string MarkerName, string AssignedFamily, string Reason);
     public sealed record EvidenceReviewInput(string SourceFingerprint, IReadOnlyList<ReviewProteinInput> Proteins,

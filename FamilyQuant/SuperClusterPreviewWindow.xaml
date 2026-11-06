@@ -303,17 +303,28 @@
                                 </DockPanel>
                             </TabItem>
                             <TabItem Header="Markers">
-                                <DataGrid ItemsSource="{Binding Evidence.Markers}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ToolTip="Marker domains supplied by the classifier, with carrier counts. The view does not learn or change marker rules.">
+                                <DockPanel>
+                                <TextBlock x:Name="markerLegend" DockPanel.Dock="Top" FontSize="11" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,6"
+                                           Text="Domains that support family membership; these counts describe evidence, not abundance." TextTrimming="CharacterEllipsis"
+                                           ToolTip="Support is the supplied family vote fraction among labelled scope proteins carrying the domain. All domain carriers are a separate count."/>
+                                <DataGrid x:Name="markerGrid" ItemsSource="{Binding Evidence.Markers}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ToolTip="Marker domains supplied by the classifier, with carrier counts. The view does not learn or change marker rules.">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Accession" Width="110" MinWidth="110" Binding="{Binding Accession}"/>
                                         <DataGridTextColumn Header="Name" Width="*" MinWidth="180" Binding="{Binding Name}"/>
                                         <DataGridTextColumn Header="Family" Width="150" MinWidth="150" Binding="{Binding Family}"/>
-                                        <DataGridTextColumn Header="Family carriers" Width="150" MinWidth="150" Binding="{Binding FamilyCarriers}"/>
-                                        <DataGridTextColumn Header="All carriers" Width="130" MinWidth="130" Binding="{Binding AllCarriers}"/>
-                                        <DataGridTextColumn Header="Labelled carriers" Width="165" MinWidth="165" Binding="{Binding LabelledCarriers}"/>
-                                        <DataGridTextColumn Header="Vote fraction" Width="145" MinWidth="145" Binding="{Binding VoteFraction}"/>
+                                        <DataGridTextColumn Header="Support" Width="110" MinWidth="110" Binding="{Binding SupportText}" theme:TableAppearance.FullTextPath="SupportHelp"/>
+                                        <DataGridTextColumn Header="Family votes" Width="120" MinWidth="120" Binding="{Binding FamilyCarriers}">
+                                            <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="Scope proteins carrying this domain and labelled as this source family; the support numerator."/></Style></DataGridTextColumn.HeaderStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="Labelled votes" Width="140" MinWidth="140" Binding="{Binding LabelledCarriers}">
+                                            <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="Proteins with this domain, scope words and one source-family label; the support denominator."/></Style></DataGridTextColumn.HeaderStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="Domain carriers" Width="145" MinWidth="145" Binding="{Binding AllCarriers}">
+                                            <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="All target proteins carrying this domain, including those without scope words or a source-family label."/></Style></DataGridTextColumn.HeaderStyle>
+                                        </DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
+                                </DockPanel>
                             </TabItem>
                             <TabItem Header="Motif counts">
                                 <TextBox Text="{Binding MotifReport, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True" TextWrapping="NoWrap"
