@@ -41,7 +41,7 @@ namespace FamilyQuant
         public string ScopeText { get => scopeText; set { scopeText = value; Changed(); Changed(nameof(CanUpdateProposal)); NotifySummary(); } }
         public string MotifPattern { get => motifPattern; set { motifPattern = value; Changed(); Changed(nameof(CanCheckMotif)); NotifySummary(); } }
         public string MotifReport { get => motifReport; private set { motifReport = value; Changed(); Changed(nameof(MotifSummary)); } }
-        public string MotifSummary => MotifReport.Length == 0 ? "Enter an amino-acid pattern in Motif, then Check motif."
+        public string MotifSummary => MotifReport.Length == 0 ? "Enter a pattern, then Check motif; counts include unticked members and exclude known fragments."
             : "Counts cover all proposed family members, including unticked proteins; known fragments are excluded.";
         public string Status { get => status; private set { status = value; Changed(); } }
         public string Summary => ModeIndex == 1 ? Evidence?.Summary ?? "Set the scope and build an evidence proposal." : Keyword.Headline;

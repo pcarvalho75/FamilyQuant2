@@ -71,7 +71,8 @@ internal static partial class Program
             var markers = (DataGrid)window.FindName("markerGrid");
             Check("marker support is visible before its secondary count columns", markers.Columns.ToList().FindIndex(c => (string)c.Header == "Support")
                 < markers.Columns.ToList().FindIndex(c => (string)c.Header == "Family votes")
-                && ((TextBlock)window.FindName("markerLegend")).Text.Contains("not abundance", StringComparison.Ordinal));
+                && ((TextBlock)window.FindName("markerLegend")).Text.Contains("not abundance", StringComparison.Ordinal)
+                && ((TextBlock)window.FindName("markerLegend")).Text.Contains("family votes / labelled scope votes", StringComparison.Ordinal));
             var marker = new ReviewMarkerInput("invented", "Invented domain", "Invented family", 18, 26, 20, .9);
             Check("support preserves the supplied fraction and explains its denominator", marker.SupportText == .9.ToString("P1")
                 && marker.SupportHelp.Contains("18 of 20", StringComparison.Ordinal) && marker.SupportHelp.Contains("26 domain carriers", StringComparison.Ordinal)
@@ -79,8 +80,9 @@ internal static partial class Program
             tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Motif counts"); PumpDispatcher();
             var motif = (TextBlock)window.FindName("motifLegend");
             Check("blank Motif counts gives an entry action and explains unticked members", motif.IsVisible
-                && motif.Text.Contains("Enter an amino-acid pattern", StringComparison.Ordinal)
-                && motif.ToolTip is string tip && tip.Contains("including unticked proteins", StringComparison.Ordinal));
+                && motif.Text.Contains("Enter a pattern, then Check motif", StringComparison.Ordinal)
+                && motif.Text.Contains("include unticked members", StringComparison.Ordinal)
+                && motif.Text.Contains("exclude known fragments", StringComparison.Ordinal));
             var sequences = new[] {
                 new FastaItemExtended { SequenceIdentifier = "motif_one", Sequence = "ACCC" },
                 new FastaItemExtended { SequenceIdentifier = "motif_two", Sequence = "AAAA" },
@@ -127,6 +129,8 @@ internal static partial class Program
             tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Panel links"); PumpDispatcher();
             var grid = (DataGrid)panelWindow.FindName("panelLinksGrid");
             var choice = WalkTree(grid).OfType<ComboBox>().First();
+            var updateLine = WalkTree(panelWindow).OfType<TextBlock>().FirstOrDefault(t => t.Text == "Use link choices updates the family proposal.");
+            Check("panel update effect is explicit in visible text", updateLine?.IsVisible == true);
             Check("panel choice and status precede provenance and fit the first viewport", (string)grid.Columns[1].Header == "User choice"
                 && (string)grid.Columns[2].Header == "Status" && grid.Columns.Any(c => (string)c.Header == "Candidate families")
                 && choice.TranslatePoint(new Point(choice.ActualWidth, 0), grid).X < grid.ActualWidth - 16);

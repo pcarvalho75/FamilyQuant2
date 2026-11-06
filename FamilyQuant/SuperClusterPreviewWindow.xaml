@@ -236,7 +236,7 @@
                                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
                                         <Button Content="Use link choices" Click="UpdatePanelLinks_Click" IsEnabled="{Binding CanUpdatePanelLinks}"
                                                 ToolTip="Rebuilds the family proposal from your link choices and stored evidence; review it before Apply grouping."/>
-                                        <TextBlock Text="Choose a family or leave outside, then Use link choices." VerticalAlignment="Center" Margin="12,0,0,0"/>
+                                        <TextBlock Text="Use link choices updates the family proposal." VerticalAlignment="Center" Margin="12,0,0,0"/>
                                     </StackPanel>
                                     <DataGrid x:Name="panelLinksGrid" ItemsSource="{Binding Evidence.PanelLinks}" AutoGenerateColumns="False"
                                               CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column">
@@ -305,7 +305,7 @@
                             <TabItem Header="Markers">
                                 <DockPanel>
                                 <TextBlock x:Name="markerLegend" DockPanel.Dock="Top" FontSize="11" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,6"
-                                           Text="Domains that support family membership; these counts describe evidence, not abundance." TextTrimming="CharacterEllipsis"
+                                           Text="Support = family votes / labelled scope votes; counts describe evidence, not abundance." TextTrimming="CharacterEllipsis"
                                            ToolTip="Support is the supplied family vote fraction among labelled scope proteins carrying the domain. All domain carriers are a separate count."/>
                                 <DataGrid x:Name="markerGrid" ItemsSource="{Binding Evidence.Markers}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ToolTip="Marker domains supplied by the classifier, with carrier counts. The view does not learn or change marker rules.">
                                     <DataGrid.Columns>
