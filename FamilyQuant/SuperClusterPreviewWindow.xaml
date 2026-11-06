@@ -291,10 +291,16 @@
                                 </DockPanel>
                             </TabItem>
                             <TabItem Header="Unassigned">
+                                <DockPanel>
+                                <TextBlock x:Name="unassignedLegend" DockPanel.Dock="Top" FontSize="11" Foreground="{DynamicResource MutedBrush}"
+                                           Text="No family proposed; these proteins keep their current families and remain available for quantitation."
+                                           TextTrimming="CharacterEllipsis" Margin="0,0,0,6"
+                                           ToolTip="Unassigned means no new family was proposed; the recorded reason and warning details explain this result."/>
                                 <DataGrid x:Name="unassignedGrid" ItemsSource="{Binding Evidence.Unassigned}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"
                                           ToolTip="Proteins without a proposed family, with the supplied reasons and flags. Reviewing a row here never invents a family.">
-                                    <DataGrid.Columns><DataGridTextColumn Header="Accession" Width="180" MinWidth="180" Binding="{Binding Accession}"/><DataGridTextColumn Header="Reason" Width="*" MinWidth="200" Binding="{Binding Reason}"/><DataGridTextColumn Header="Flags" Width="180" MinWidth="180" Binding="{Binding Flags}"/><DataGridTextColumn Header="Locus" Width="200" MinWidth="200" Binding="{Binding Identifier}"/></DataGrid.Columns>
+                                    <DataGrid.Columns><DataGridTextColumn Header="Accession" Width="180" MinWidth="180" Binding="{Binding Accession}"/><DataGridTextColumn Header="Reason" Width="*" MinWidth="200" Binding="{Binding Reason}"/><DataGridTextColumn Header="Flags" Width="180" MinWidth="180" Binding="{Binding Flags}" theme:TableAppearance.FullTextPath="FlagsHelp"/><DataGridTextColumn Header="FASTA identifier" Width="200" MinWidth="200" Binding="{Binding Identifier}"/></DataGrid.Columns>
                                 </DataGrid>
+                                </DockPanel>
                             </TabItem>
                             <TabItem Header="Markers">
                                 <DataGrid ItemsSource="{Binding Evidence.Markers}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ToolTip="Marker domains supplied by the classifier, with carrier counts. The view does not learn or change marker rules.">

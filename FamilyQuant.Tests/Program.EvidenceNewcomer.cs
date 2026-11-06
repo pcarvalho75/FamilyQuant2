@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -62,5 +63,25 @@ internal static partial class Program
                 && leftOut.ToolTip is string explanation && explanation.Contains("never removes proteins from quantitation", StringComparison.Ordinal));
         }
         finally { window.Close(); }
+        var input = ReviewLayoutFixture();
+        var orphan = input.Proteins[0] with { ProteinIndex = 32, Identifier = "invented_unassigned", Family = "", SuggestedSelected = false,
+            Flags = new[] { "domain_compatibility: Supplied incompatible domain detail." } };
+        var unassignedWindow = new SuperClusterPreviewWindow(new SuperClusterPreview(new List<FastaItemExtended>(), null, "", "", KeywordMatch.All, null, null),
+            input with { Proteins = input.Proteins.Append(orphan).ToArray() }, null, evidenceMode: true)
+            { Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
+        try
+        {
+            unassignedWindow.Show(); PumpDispatcher();
+            var tabs = (TabControl)unassignedWindow.FindName("evidenceTabs");
+            tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Unassigned"); PumpDispatcher();
+            var grid = (DataGrid)unassignedWindow.FindName("unassignedGrid");
+            var flag = WalkTree(grid).OfType<TextBlock>().First(t => t.Text == "Domain compatibility");
+            Check("Unassigned warning text retains check guidance and original detail", flag.ToolTip is string help
+                && help.Contains("Check whether observed domains", StringComparison.Ordinal) && help.Contains("Supplied incompatible domain detail.", StringComparison.Ordinal));
+            var legend = (TextBlock)unassignedWindow.FindName("unassignedLegend");
+            Check("Unassigned visibly retains current families and quantitation", legend.IsVisible && legend.Text.Contains("keep their current families", StringComparison.Ordinal)
+                && legend.Text.Contains("available for quantitation", StringComparison.Ordinal) && grid.IsReadOnly);
+        }
+        finally { unassignedWindow.Close(); }
     }
 }
