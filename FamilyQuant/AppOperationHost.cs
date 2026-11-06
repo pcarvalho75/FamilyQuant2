@@ -17,6 +17,15 @@ public sealed record OperationLogEntry(DateTimeOffset Timestamp, string Stage, s
 /// <summary>One visible operation per window. A lease owns cancellation until the actual work ends.</summary>
 public sealed class AppOperationHost : ScreenViewModel
 {
+    private static WeakReference<AppOperationHost>? crashOperation;
+    internal static string? ActiveCrashOperation
+    {
+        get
+        {
+            var current = Volatile.Read(ref crashOperation);
+            return current != null && current.TryGetTarget(out var host) && host.IsBusy ? host.Title : null;
+        }
+    }
     // Programmatic/headless callers do not necessarily have WPF's message-loop context.
     // Install it only while starting the async command, then restore the caller's context.
     public static System.Threading.Tasks.Task<T> OnUi<T>(DispatcherObject view, Func<System.Threading.Tasks.Task<T>> work)
@@ -124,6 +133,7 @@ public sealed class AppOperationHost : ScreenViewModel
         }
         var lease = new OperationLease(this);
         active = lease;
+        Volatile.Write(ref crashOperation, new WeakReference<AppOperationHost>(this));
         Notify();
         return lease;
     }

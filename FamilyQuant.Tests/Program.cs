@@ -327,6 +327,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => OpenProjectNavigationTests(workDir));
             suite.Section("The title bar shows the installed (ClickOnce) version, all four parts");
             suite.AddWithApplication(() => AppVersionTests());
+            suite.AddWithApplication(CrashHandlerTests);
             suite.Section("Tooltips wrap at a readable width instead of running off the screen");
             suite.AddWithApplication(() => TooltipWrapTests());
             suite.Section("Family names - the User Annotation, else the most common protein name");
