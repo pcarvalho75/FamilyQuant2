@@ -318,6 +318,7 @@ namespace FamilyQuant.Tests
             suite.Section("Validation report - leave-one-out on reviewed proteins and the routes against their labels");
             suite.Add(() => ValidationReportTests());
             suite.AddWithApplication(() => EvidenceHelpTests());
+            suite.Add(() => EvidenceScopeHelpTests());
             suite.Section("Left-out list - marker carriers kept out of the marker's family, with why");
             suite.Add(() => LeftOutListTests());
             suite.Add(() => EvidenceExportTests());
