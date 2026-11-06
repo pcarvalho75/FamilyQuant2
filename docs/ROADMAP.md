@@ -92,7 +92,8 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z1g | Two exported presentation figures still name the organism and its venom in their captions (`FamilyQuant/PresentationFigures.cs:1854` and `:2020`, found by FQOpus); neutral wording, and the D21 check stops skipping that file for caption text | L | 0.2 | 🟢 | Z1j | No organism, venom or sample word in any exported figure text; the check goes red on a planted word | FE | | 0 | 0 | |
 | Z1h | A flaky suite check: the Full XIC column attach expects PENDING before READY and failed 2 of about 10 runs on a timing race (FQOpus); make it wait for the state instead of racing | L | 0.2 | 🟢 | Z1j | 20 runs in a row green | FE | | 0 | 0 | |
 | Z1i | The public README's Families, Quantify and Results screenshots re-captured from 2.1.8 (synthetic data), so every picture shows the new names | L | 0.2 | Z8e3 | Z1j | Every README image matches 2.1.8 | HM | | 0 | 0 | |
-| Z1j | The follow-ups ship in the next release when Paulo asks for one | L | 0 | Z1f, Z1g, Z1h, Z1i | | Paulo's word | Paulo | | 0 | 0 | |
+| Z1k | The program's Help says the de novo reconciliation allows for isotope selection errors (`FamilyQuant.Core/HelpContent.cs:514-515`), but the code uses a direct 20 ppm m/z match (`DeNovoReconciler.cs:68-87`); correct the Help to match the code (found by FQSite, confirmed by FQReviewDS on the science page) | L | 0.1 | 🟢 | Z1j | Help matches the code; reviewed | FE | | 0 | 0 | |
+| Z1j | The follow-ups ship in the next release when Paulo asks for one | L | 0 | Z1f, Z1g, Z1h, Z1i, Z1k | | Paulo's word | Paulo | | 0 | 0 | |
 
 ### W9a The website: study and design (FQSite)
 
