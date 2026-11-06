@@ -60,8 +60,13 @@ internal static partial class Program
             tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Left out"); PumpDispatcher();
             var leftOut = (TextBlock)window.FindName("leftOutLegend");
             Check("Left out explains its proposal-wide list and retention", leftOut.IsVisible && leftOut.Text == model.Evidence.LeftOutSummary
-                && leftOut.Text.StartsWith("0 marker carriers listed across the proposal", StringComparison.Ordinal)
-                && leftOut.ToolTip is string explanation && explanation.Contains("never removes proteins from quantitation", StringComparison.Ordinal));
+                && leftOut.Text.Contains("not deleted", StringComparison.OrdinalIgnoreCase)
+                && leftOut.Text.Contains("still quantified", StringComparison.Ordinal)
+                && leftOut.Text.Contains("current or assigned family", StringComparison.Ordinal)
+                && leftOut.Text.Contains("0 listed", StringComparison.Ordinal));
+            var assurance = new TextBlock { Text = leftOut.Text, FontFamily = leftOut.FontFamily, FontSize = leftOut.FontSize };
+            assurance.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            Check("Left out assurance fits the visible line without ellipsis", assurance.DesiredSize.Width <= leftOut.ActualWidth + 1);
             tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Markers"); PumpDispatcher();
             var markers = (DataGrid)window.FindName("markerGrid");
             Check("marker support is visible before its secondary count columns", markers.Columns.ToList().FindIndex(c => (string)c.Header == "Support")
