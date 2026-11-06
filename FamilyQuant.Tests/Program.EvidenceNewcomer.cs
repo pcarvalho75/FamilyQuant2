@@ -109,5 +109,27 @@ internal static partial class Program
                 && legend.Text.Contains("available for quantitation", StringComparison.Ordinal) && grid.IsReadOnly);
         }
         finally { unassignedWindow.Close(); }
+        var panelInput = input with { Architectures = Array.Empty<ReviewArchitectureInput>(), PanelLinks = new[] { new PanelFamilyLinkProposal
+            { Key = "invented-link", SourceFamily = "Invented source family", ArchitectureKey = "[\"PF-invented\"]",
+                CandidateFamilyKeys = new[] { "invented-a", "invented-b" }, SupportingAccessions = new[] { "invented_relative" } } } };
+        var panelWindow = new SuperClusterPreviewWindow(new SuperClusterPreview(new List<FastaItemExtended>(), null, "", "", KeywordMatch.All, null, null),
+            panelInput, null, evidenceMode: true)
+            { Width = 1366, Height = 768, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
+        try
+        {
+            panelWindow.Show(); PumpDispatcher();
+            var tabs = (TabControl)panelWindow.FindName("evidenceTabs");
+            tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Panel links"); PumpDispatcher();
+            var grid = (DataGrid)panelWindow.FindName("panelLinksGrid");
+            var choice = WalkTree(grid).OfType<ComboBox>().First();
+            Check("panel choice and status precede provenance and fit the first viewport", (string)grid.Columns[1].Header == "User choice"
+                && (string)grid.Columns[2].Header == "Status" && grid.Columns.Any(c => (string)c.Header == "Candidate families")
+                && choice.TranslatePoint(new Point(choice.ActualWidth, 0), grid).X < grid.ActualWidth - 16);
+            choice.SelectedIndex = 0; PumpDispatcher();
+            var model = (GroupingReviewViewModel)panelWindow.DataContext;
+            Check("visible choice retains its exact supplied family key", model.Evidence!.PanelLinks[0].SelectedOption?.Key == "invented-a"
+                && model.Evidence.HasUnappliedPanelLinkChoices && !model.CanConfirm);
+        }
+        finally { panelWindow.Close(); }
     }
 }
