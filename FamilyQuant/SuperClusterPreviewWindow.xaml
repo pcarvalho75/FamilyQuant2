@@ -94,9 +94,17 @@
                                 ToolTip="Reads UniProt taxonomy and keyword counts among reviewed accessions in this file. Review or edit the suggested scope before Update proposal."/>
                         <TextBlock Text="Database and scope" Style="{StaticResource SectionTitle}" VerticalAlignment="Center"/>
                     </DockPanel>
-                    <Expander Header="Database taxa and keyword counts" IsExpanded="{Binding TaskScopeExpanded}" Margin="0,0,0,8"
+                    <Expander x:Name="TaskCountsExpander" IsExpanded="{Binding TaskScopeExpanded}" Margin="0,0,0,8"
                               Visibility="{Binding HasTaskScope, Converter={StaticResource VisibleWhenTrue}}"
                               ToolTip="Shows the database taxa, clade and keyword counts among reviewed accessions in this file. Keyword counts can overlap and are not family shares.">
+                        <Expander.Header>
+                            <DockPanel>
+                                <Button x:Name="CollapseCountsToScopeButton" DockPanel.Dock="Right" Content="Collapse counts to edit scope" Margin="12,0,0,0"
+                                        Visibility="{Binding TaskScopeExpanded, Converter={StaticResource VisibleWhenTrue}}" Click="CollapseCountsToScope_Click"
+                                        ToolTip="Collapses the counts and brings the scope box and Update proposal into view."/>
+                                <TextBlock Text="Database taxa and keyword counts" VerticalAlignment="Center"/>
+                            </DockPanel>
+                        </Expander.Header>
                         <StackPanel Margin="0,8,0,0">
                             <TextBlock Text="{Binding TaskScope.Clade, StringFormat='Database clade: {0}'}" TextTrimming="CharacterEllipsis" ToolTip="{Binding TaskScope.Clade}"/>
                             <Grid Margin="0,6,0,6" MaxHeight="140">
@@ -168,7 +176,7 @@
                         <Button DockPanel.Dock="Right" Content="Update proposal" Click="UpdateProposal_Click" IsEnabled="{Binding CanUpdateProposal}"
                                 ToolTip="Confirms your scope words and rebuilds the proposal from stored evidence. Your open document stays unchanged until Apply."/>
                         <TextBlock DockPanel.Dock="Left" Text="Scope" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                        <TextBox Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Words to match in the evidence keywords and tissue fields. These are user choices, never a built-in family list."/>
+                        <TextBox x:Name="TaskScopeBox" Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Words to match in the evidence keywords and tissue fields. These are user choices, never a built-in family list."/>
                     </DockPanel>
                     <TextBlock Text="{x:Static local:EvidenceTaskScopeInput.ScopeExpansionHint}" Foreground="{DynamicResource MutedBrush}" Margin="0,6,0,0"
                                TextTrimming="CharacterEllipsis" ToolTip="Help explains keyword and tissue matching, manual family review, and quantitation of proteins outside the proposal."/>

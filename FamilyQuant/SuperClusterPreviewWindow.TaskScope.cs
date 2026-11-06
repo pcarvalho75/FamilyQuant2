@@ -5,12 +5,20 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace FamilyQuant;
 
 public partial class SuperClusterPreviewWindow
 {
     public static readonly RoutedUICommand AddTaskKeywordsToScope = new("Add to scope", nameof(AddTaskKeywordsToScope), typeof(SuperClusterPreviewWindow));
+
+    private void CollapseCountsToScope_Click(object sender, RoutedEventArgs args)
+    {
+        model.TaskScopeExpanded = false;
+        Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() => { TaskScopeBox.BringIntoView(); TaskScopeBox.Focus(); }));
+        args.Handled = true;
+    }
 
     private void AddScopeKeywords_CanExecute(object sender, CanExecuteRoutedEventArgs args)
     {
