@@ -87,7 +87,7 @@ public partial class ClusterGenerationControl
             await RunCurationAsync("Fetch family world", async operation =>
             {
                 await ViewModel.FetchFamilyWorldAsync(choice, operation, FamilyWorldHandlerOverride);
-                SetCurationOperationStatus("Family world stored. Save the project, then Compute to populate Database gap.");
+                SetCurationOperationStatus("Family world added to the open project. Use File > Save to keep it, then Quantify to populate Database gap.");
             });
         }
         catch (Exception ex) { SetCurationOperationStatus("Family world could not finish: " + ex.Message); }

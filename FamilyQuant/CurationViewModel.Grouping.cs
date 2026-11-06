@@ -14,7 +14,7 @@ public sealed partial class CurationViewModel
     public bool HasIncompletePanel => Document.EvidenceSource?.ReferencePanel is { IsComplete: false };
     public string PanelFailureDetail => Document.EvidenceSource?.ReferencePanel?.FailureReason ?? string.Empty;
     public string EvidenceStepStatus => !HasStoredEvidence ? "Not yet"
-        : HasIncompletePanel ? "Protein evidence saved; panel incomplete"
+        : HasIncompletePanel ? "Evidence available. Panel incomplete"
         : string.IsNullOrWhiteSpace(Document.EvidenceSource!.Release) ? "Downloaded (UniProt release not recorded)"
         : "Downloaded (UniProt " + Document.EvidenceSource.Release.Trim() + ")";
     public string EvidenceGroupingStepStatus => HasAppliedEvidenceGrouping ? "Applied" : "Not yet";
