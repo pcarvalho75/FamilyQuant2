@@ -95,7 +95,7 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z1k | The program's Help says the de novo reconciliation allows for isotope selection errors (`FamilyQuant.Core/HelpContent.cs:514-515`), but the code uses a direct 20 ppm m/z match (`DeNovoReconciler.cs:68-87`); correct the Help to match the code (found by FQSite, confirmed by FQReviewDS on the science page) | L | 0.1 | 🟢 | Z1j | Help matches the code; reviewed | FE | | 0 | 0 | |
 | Z1l | After Fetch evidence the status line says "Protein evidence saved for N proteins", which reads as saved to disk though nothing is written until File > Save (Ana, 11-06); say it plainly, for example "Protein evidence added for N proteins. Use File > Save to keep it.", and the same for the reference panel and family world messages | L | 0.1 | 🟢 | Z1j | Wording check green; reviewed | FE | | 0 | 0 | |
 | Z1m | Read database and scope asks UniProt for the taxonomy of every species in the file one request at a time (`EvidenceTaskDiscovery.cs:83-87`), hundreds for a whole-clade database, so UniProt answers HTTP 429 (too many requests) and the whole proposal is lost (Ana, 11-06). Ask for all taxa in one or a few batched queries, honour Retry-After on 429, keep the patient waits, and keep finished lineages so a retry does not start over | M | 0.4 | 🟢 | Z1j | A synthetic file with 300 taxa makes at most a few requests; a 429 with Retry-After waits and succeeds; reviewed | FE | | 0 | 0 | |
-| Z1j | The follow-ups pile up for the next major release, shipped only when Paulo asks (Paulo, 11-06: "no need to deploy now ... pile it up") | L | 0 | Z1f, Z1g, Z1h, Z1i, Z1k, Z1l, Z1m | | Paulo's word | Paulo | | 0 | 0 | |
+| Z1j | The follow-ups ship in 2.1.9 with the 429 fix (Paulo, 11-06 06:24: "please fix that and deploy a version with that fixed") | L | 0 | Z1f, Z1g, Z1h, Z1i, Z1k, Z1l, Z1m | | Paulo's word | Paulo | | 0 | 0 | |
 
 ### W9a The website: study and design (FQSite)
 
@@ -162,6 +162,18 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z9m | Build families told as Ana found clearest (11-06): the fast pass sorts by length and compares each protein only with each family's seed (so D can miss A's family though it resembles B); the second pass compares every protein with every other and joins two families when any cross pair reaches the identity over that share of the longer sequence, never splitting a first-pass join; why not all against all first (pairs grow with the square: 40,000 proteins is about 800 million pairs) | M | 0.5 | 🟢 | Z9h | Reviewed against the code; renders checked | ST | | 0 | 0 | |
 | Z9h | Paulo looks at it and decides where it is deployed | L | 0 | Z9g1, Z9g2, Z9g3, Z9k | | Paulo's word | Paulo | | 0 | 0 | |
 
+### W10 Release 2.1.9: the UniProt 429 fix and the follow-ups (FQFetch, FQHome, Orchestrator)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z10a | Version 2.1.9.0 in every place 2.1.8.0 is set, and the 2.1.9 notes claiming only what lands (Z1m and the follow-ups Z1f, Z1g, Z1k, Z1l) | L | 0.1 | 🟢 | Z10c | Reviewed | HM | | 0 | 0 | |
+| Z10b | The public README reads 2.1.9, with the re-captured screenshots of Z1i | L | 0.1 | 🟢 | Z10f | Reviewed; synthetic only | HM | | 0 | 0 | |
+| Z10c | The final 2.1.9 integration: master plus fq/fetch (Z1f to Z1m) plus the version bump | L | 0.1 | Z1m, Z10a | Z10d, Z10e | Merged clean; build 0 warnings | Orchestrator | | 0 | 0 | |
+| Z10d | The full functional suite on the integration (receipts deferred, D61) | M | 0.2 | Z10c | Z10f | Every check green | Orchestrator | | 0 | 0 | |
+| Z10e | The 2.1.9 Setup.exe and zip from the integration commit, Setup in test mode, package check | L | 0.1 | Z10c | Z10f | PASS | HM | | 0 | 0 | |
+| Z10f | Tag v2.1.9, merge into master, draft with digests checked, published as Latest, README pushed | L | 0.1 | Z10d, Z10e, Z10b | Z10g | Latest is v2.1.9 | Orchestrator | | 0 | 0 | |
+| Z10g | Update check on the public files: an installed 2.1.8 test root sees the banner, updates in test mode, reopens once | L | 0.1 | Z10f | | PASS | HM | | 0 | 0 | |
+
 ## Critical path
 
 2.1.8: Z8a and Z8a2 (FQFetch), the README review Z8b, then the final integration Z8c1, the suite Z8c2 with the package Z8d1 and Z8d2 in parallel, publish Z8d3 to Z8d5, update check Z8e1 to Z8e3. Rough wall-clock: 30 to 50 minutes from 14:30, a range, never a promise.
@@ -219,6 +231,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D68 | Kimi's review rate | 15 reviews in any rolling hour (was 5 from 11-02); 15 calls per rolling 5 hours and one instance unchanged. Paulo, 11-05 13:24 ("raise kimi to 15 reviews, and update that law") |
 | D69 | A FamilyQuant website | A gorgeous, instructional public page in the spirit of the SCPBrowser page but better: how it works, why families, why peptide spectrum matches plus de novo, a fictitious and clearly labelled snake venom example, the download link, the Fiocruz logo in the footer; built by one more Opus from this account, after a deep study of the program; ChatGPT may make art. The program itself stays general (D21); the site uses fictitious data only. Paulo, 11-05 14:05 |
 | D70 | Where the website goes | On patternlabforproteomics.org beside SCPBrowser, as a folder Paulo uploads; relative paths only, so any folder name works. The desk suggests /familyquant2/, because /familyquant/ may hold the 1.5 update files that 2.0 must never touch. Paulo, 11-05 14:47 ("yes, it will go here") |
+| D71 | Release 2.1.9 | The UniProt 429 fix for Read database and scope (Z1m) ships now with the approved follow-ups Z1f to Z1l; the Fetch evidence speed-up (domains first, smarter waits) is not in it. Paulo, 11-06 ("please fix that and deploy a version with that fixed") |
 
 ## Risks and triggers
 
