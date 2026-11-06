@@ -38,9 +38,28 @@ public sealed partial class GroupingReviewViewModel
                 scopeChangePreview.Proteins, scopeChangePreview.Reviewed, scopeChangePreview.Unreviewed, scopeChangePreview.UnknownStatus, scopeChangePreview.Additional);
         }
     }
-    public string ScopePreviewRelativeNote => "Unreviewed relatives carrying none of these words may still join through an in-scope reviewed relative at "
-        + new EvidenceClassificationOptions().UnannotatedIdentityPercent.ToString("0.##", CultureInfo.CurrentCulture)
-        + "% identity or more with compatible observed domains.";
+    public string ScopePreviewRelativeNote
+    {
+        get
+        {
+            var options = new EvidenceClassificationOptions();
+            return "Unreviewed relatives carrying none of these words may still join through an in-scope reviewed relative at "
+                + options.UnannotatedIdentityPercent.ToString("0.##", CultureInfo.CurrentCulture) + "% identity over at least "
+                + options.MinQueryAlignedPercent.ToString("0.##", CultureInfo.CurrentCulture)
+                + "% of the protein's length with overlapping, non-conflicting observed domains.";
+        }
+    }
+    public string ScopePreviewContaminantNote
+    {
+        get
+        {
+            if (scopeChangePreview == null) return "";
+            int count = scopeChangePreview.ExcludedContaminants;
+            if (count == 0) return "Contaminants are excluded because a contaminant never joins a family.";
+            return count == 1 ? "1 contaminant carrying these words is excluded. A contaminant never joins a family."
+                : count.ToString("N0", CultureInfo.CurrentCulture) + " contaminants carrying these words are excluded. A contaminant never joins a family.";
+        }
+    }
     public string ScopePreviewEmptyText => !scopePreviewBusy && scopePreviewError.Length == 0 && scopeChangePreview is { Proteins: 0 }
         ? "No stored keyword or tissue annotations match these added words." : "";
 
@@ -105,5 +124,6 @@ public sealed partial class GroupingReviewViewModel
     {
         Changed(nameof(ScopeChangePreview)); Changed(nameof(IsScopePreviewBusy)); Changed(nameof(HasScopeChangePreview));
         Changed(nameof(ScopePreviewFamilies)); Changed(nameof(ScopePreviewTerms)); Changed(nameof(ScopePreviewSummary)); Changed(nameof(ScopePreviewEmptyText));
+        Changed(nameof(ScopePreviewContaminantNote));
     }
 }

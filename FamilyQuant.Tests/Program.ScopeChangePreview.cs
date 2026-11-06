@@ -49,14 +49,19 @@ internal static partial class Program
         const string narrow = "\"baseline activity\", \"narrow activity\"";
         const string broad = "\"baseline activity\", \"narrow activity\", \"broad activity\"";
         var result = EvidenceClassifier.PreviewScopeChange(snapshot, baseline, narrow);
+        var actual = EvidenceClassifier.Propose(file.MyExtendedFastaItems, new EvidenceClassificationOptions { ScopeTerms = result.AddedTerms });
+        var realTargets = actual.Proteins.Where(row => row.HasScopeAnnotation
+            && !SequenceLabels.IsContaminant(file.MyExtendedFastaItems[row.ProteinIndex].SequenceIdentifier)).ToArray();
+        Check("Z12k1-fix preview counts match actual in-scope non-contaminant proposal targets", result.Proteins == realTargets.Length
+            && result.Reviewed == realTargets.Count(row => file.MyExtendedFastaItems[row.ProteinIndex].Evidence?.Reviewed == true));
         Check("Z12k1 added words match stored keywords and tissue with explicit review status and new-entry counts",
             result is { Proteins: 4, Reviewed: 1, Unreviewed: 2, UnknownStatus: 1, Additional: 3 }
             && result.Families.Single(f => f.Family == "Fixture family A") is { Proteins: 2, Reviewed: 1, Unreviewed: 1, Additional: 1 }
-            && result.Families.Any(f => f.Family == "Family not recorded") && file.ToJsonText() == before);
+            && result.Families.Any(f => f.Family == "Family not recorded") && result.ExcludedContaminants == 1 && file.ToJsonText() == before);
         var wider = EvidenceClassifier.PreviewScopeChange(snapshot, baseline, broad);
         Check("Z12k1 a broader word reveals the extra stored family before proposal building", wider.Proteins == 5
             && wider.Reviewed == 2 && wider.Additional == 4 && wider.Families.Any(f => f.Family == "Fixture family B"));
-        Check("Z12k1 names alone, contaminants and decoys do not enter the annotation preview", snapshot.Count == 6
+        Check("Z12k1 names alone, contaminants and decoys do not enter the annotation preview", snapshot.Count == 7 && snapshot.Count(protein => protein.Contaminant) == 1
             && result.Families.SelectMany(f => f.Examples).All(name => !name.Contains("P10006", StringComparison.Ordinal)
                 && !name.Contains("P10007", StringComparison.Ordinal) && !name.Contains("P10008", StringComparison.Ordinal)));
         var many = file.MyExtendedFastaItems.Concat(Enumerable.Range(20, 5).Select(id =>
@@ -88,7 +93,12 @@ internal static partial class Program
                 var facts = new EvidenceTaskScopeInput("Fixture clade", Array.Empty<ReviewTaskTaxon>(), new[]
                 { new ReviewTaskKeyword("narrow activity", 1), new ReviewTaskKeyword("broad activity", 1) }, 2, new[] { "baseline activity" }, "fixture");
                 int proposals = 0;
-                var window = new SuperClusterPreviewWindow(preview, null, _ => { proposals++; return GroupingReviewScreens.Fixture(12); },
+                var window = new SuperClusterPreviewWindow(preview, null, scope =>
+                {
+                    proposals++;
+                    return EvidenceProposalPresentation.Present(EvidenceClassifier.Propose(file.MyExtendedFastaItems,
+                        new EvidenceClassificationOptions { ScopeTerms = WordCluster.ParseKeywords(scope) }), file);
+                },
                     initialScope: baseline, evidenceMode: true, discoverTask: _ => Task.FromResult(facts), previewScope: session.PreviewScopeAsync)
                 { Width = size.Item1, Height = size.Item2, ShowActivated = false, ShowInTaskbar = false };
                 var model = (GroupingReviewViewModel)window.DataContext;
@@ -101,9 +111,17 @@ internal static partial class Program
                         model.ScopeChangePreview?.Proteins == 4 && !model.TaskScopeExpanded && proposals == 0 && model.CanUpdateProposal
                         && ((FrameworkElement)window.FindName("ScopeChangePreviewPanel")).IsVisible);
                     Check("Z12k1 " + theme + " " + size.Item1 + " preview explains the reviewed relative/domain route",
-                        model.ScopePreviewRelativeNote.Contains("70%", StringComparison.Ordinal) && model.ScopePreviewFamilies.Count == 3);
+                        model.ScopePreviewRelativeNote == "Unreviewed relatives carrying none of these words may still join through an in-scope reviewed relative at "
+                            + new EvidenceClassificationOptions().UnannotatedIdentityPercent.ToString("0.##", System.Globalization.CultureInfo.CurrentCulture)
+                            + "% identity over at least " + new EvidenceClassificationOptions().MinQueryAlignedPercent.ToString("0.##", System.Globalization.CultureInfo.CurrentCulture)
+                            + "% of the protein's length with overlapping, non-conflicting observed domains."
+                        && model.ScopePreviewFamilies.Count == 3);
                     FinishReviewWork(async () => await Task.Delay(350));
                     window.UpdateLayout(); PumpDispatcher();
+                    Check("Z12k1-fix " + theme + " " + size.Item1 + " preview states the matching contaminant exclusion",
+                        model.ScopeChangePreview?.ExcludedContaminants == 1
+                        && WalkTree(window).OfType<TextBlock>().Any(block => block.IsVisible
+                            && block.Text == "1 contaminant carrying these words is excluded. A contaminant never joins a family."));
                     ScreenHarness.Save(window, Path.Combine(output, "scope-preview-" + theme + "-" + size.Item1 + ".png"), size.Item1, size.Item2);
                     Check("Z12k1 " + theme + " " + size.Item1 + " capture retains the completed preview",
                         !model.IsScopePreviewBusy && model.ScopeChangePreview?.Proteins == 4);

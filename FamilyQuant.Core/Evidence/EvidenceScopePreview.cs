@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace FamilyQuant.Evidence;
 
-public sealed record ScopePreviewProtein(string Accession, string Name, ProteinEvidence? Evidence);
+public sealed record ScopePreviewProtein(string Accession, string Name, ProteinEvidence? Evidence, bool Contaminant = false);
 
 public sealed record ScopePreviewFamily(string Family, int Proteins, int Reviewed, int Unreviewed, int UnknownStatus,
     int Additional, IReadOnlyList<string> Examples)
@@ -14,12 +14,12 @@ public sealed record ScopePreviewFamily(string Family, int Proteins, int Reviewe
 }
 
 public sealed record EvidenceScopePreview(IReadOnlyList<string> AddedTerms, int Proteins, int Reviewed, int Unreviewed,
-    int UnknownStatus, int Additional, IReadOnlyList<ScopePreviewFamily> Families);
+    int UnknownStatus, int Additional, IReadOnlyList<ScopePreviewFamily> Families, int ExcludedContaminants = 0);
 
 public static partial class EvidenceClassifier
 {
     public static IReadOnlyList<ScopePreviewProtein> ScopePreviewSnapshot(IEnumerable<FastaItemExtended> proteins) => proteins
-        .Where(protein => !NearestReviewed.IsDecoy(protein) && !IsContaminant(protein))
+        .Where(protein => !NearestReviewed.IsDecoy(protein))
         .Select(protein => new ScopePreviewProtein(FamilyNaming.Accession(protein.SequenceIdentifier), FamilyNaming.ProteinName(protein.Description),
             protein.Evidence == null ? null : new ProteinEvidence
             {
@@ -27,7 +27,7 @@ public static partial class EvidenceClassifier
                 Reviewed = protein.Evidence.Accession == FamilyNaming.Accession(protein.SequenceIdentifier).Split('-')[0] ? protein.Evidence.Reviewed : null,
                 Keywords = (protein.Evidence.Keywords ?? new List<string>()).ToList(),
                 TissueSpecificity = (protein.Evidence.TissueSpecificity ?? new List<string>()).ToList(),
-            })).ToArray();
+            }, IsContaminant(protein))).ToArray();
 
     public static EvidenceScopePreview PreviewScopeChange(IReadOnlyList<ScopePreviewProtein> proteins, string baseline, string edited,
         CancellationToken cancellationToken = default)
@@ -38,10 +38,13 @@ public static partial class EvidenceClassifier
         var added = new ScopeMatcher(addedTerms);
         var previous = new ScopeMatcher(oldTerms);
         var matches = new List<(ScopePreviewProtein Protein, bool Additional)>();
+        int contaminants = 0;
         foreach (var protein in proteins)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            if (added.Matches(protein.Evidence)) matches.Add((protein, !previous.Matches(protein.Evidence)));
+            if (!added.Matches(protein.Evidence)) continue;
+            if (protein.Contaminant) { contaminants++; continue; }
+            matches.Add((protein, !previous.Matches(protein.Evidence)));
         }
         var families = matches.GroupBy(match => match.Protein.Evidence?.Family ?? string.Empty, StringComparer.OrdinalIgnoreCase)
             .Select(group => new ScopePreviewFamily(string.IsNullOrWhiteSpace(group.Key) ? "Family not recorded" : group.Key,
@@ -54,6 +57,6 @@ public static partial class EvidenceClassifier
             .ThenBy(family => family.Family, StringComparer.Ordinal).ToArray();
         return new(addedTerms, matches.Count, matches.Count(match => match.Protein.Evidence?.Reviewed == true),
             matches.Count(match => match.Protein.Evidence?.Reviewed == false), matches.Count(match => match.Protein.Evidence?.Reviewed == null),
-            matches.Count(match => match.Additional), families);
+            matches.Count(match => match.Additional), families, contaminants);
     }
 }

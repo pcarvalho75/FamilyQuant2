@@ -206,6 +206,7 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                             <TextBlock Text="{Binding ScopePreviewEmptyText}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding ScopePreviewContaminantNote}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,6,0,0"/>
                             <TextBlock Text="{Binding ScopePreviewRelativeNote}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,6,0,0"/>
                         </StackPanel>
                     </Border>
