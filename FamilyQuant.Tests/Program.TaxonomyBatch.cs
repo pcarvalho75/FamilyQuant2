@@ -46,6 +46,25 @@ internal static partial class Program
                 i % 3 == 0 ? "Other" : "Leading scope")).ToList(),
     };
 
+    private static int StoredTaxonomyBatchCount(string directory)
+    {
+        // Batch records have query, reply and integrity fields. Manifests do not.
+        // Inspect contents so both flat and legacy nested cache names are supported.
+        int count = 0;
+        foreach (string path in Directory.EnumerateFiles(directory, "*.json", SearchOption.AllDirectories))
+        {
+            using JsonDocument document = JsonDocument.Parse(File.ReadAllText(path));
+            JsonElement record = document.RootElement;
+            if (record.ValueKind == JsonValueKind.Object
+                && record.TryGetProperty("Query", out var query) && query.ValueKind == JsonValueKind.String
+                && record.TryGetProperty("Json", out var json) && json.ValueKind == JsonValueKind.String
+                && record.TryGetProperty("Sha256", out var hash) && hash.ValueKind == JsonValueKind.String
+                && record.TryGetProperty("Release", out var release) && release.ValueKind == JsonValueKind.String)
+                count++;
+        }
+        return count;
+    }
+
     private static void TaxonomyBatchTests(string workDir)
     {
         string root = Path.GetFullPath(Path.Combine(workDir, "taxonomy-batches-" + Guid.NewGuid().ToString("N")));
@@ -159,7 +178,7 @@ internal static partial class Program
                     try { EvidenceTaskDiscovery.DiscoverAsync(file, handler, options: new UniProtFetchOptions { ResumeDirectory = directory }).GetAwaiter().GetResult(); }
                     catch (InvalidDataException) { refused = true; }
                     Check("Z1m " + damage + " cannot produce a proposal, save an invalid batch or change the file",
-                        refused && Directory.GetFiles(directory, "b-*.json").Length == 0 && file.ToJsonText() == before);
+                        refused && StoredTaxonomyBatchCount(directory) == 0 && file.ToJsonText() == before);
                 });
             foreach (string interruption in new[] { "429", "503", "cancel", "keywords" })
                 Verify("resume " + interruption, () =>
@@ -183,7 +202,7 @@ internal static partial class Program
                     bool refused = false;
                     try { EvidenceTaskDiscovery.DiscoverAsync(file, handler, cancellationToken: cancel.Token, options: options).GetAwaiter().GetResult(); }
                     catch (Exception ex) when (ex is HttpRequestException or OperationCanceledException) { refused = true; }
-                    int stored = Directory.GetFiles(directory, "b-*.json").Length;
+                    int stored = StoredTaxonomyBatchCount(directory);
                     var reports = new List<FetchProgress>(); using var retry = new TaskTaxonomyHandler();
                     var result = EvidenceTaskDiscovery.DiscoverAsync(file, retry, new InlineFetchProgress(reports.Add), options: options).GetAwaiter().GetResult();
                     using var baseline = new TaskTaxonomyHandler();
@@ -196,7 +215,7 @@ internal static partial class Program
                     using var newRelease = new TaskTaxonomyHandler { Release = "next" };
                     var replaced = EvidenceTaskDiscovery.DiscoverAsync(file, newRelease, options: options).GetAwaiter().GetResult();
                     Check("Z1m a new release discards all saved lineages", BatchUrls(newRelease).Length == 3 && replaced.Release == "next"
-                        && Directory.GetFiles(directory, "b-*.json").Length == 3);
+                        && StoredTaxonomyBatchCount(directory) == 3);
                 });
             Verify("mid-fetch release guard", () =>
             {
