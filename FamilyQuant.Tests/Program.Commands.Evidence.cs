@@ -35,6 +35,15 @@ internal static partial class Program
         new("--evidence-delivery", 2, TestCommandPhase.Raw, EvidenceDeliveryRequested, RunEvidenceDelivery),
         new("--test-evidence-delivery", 3, TestCommandPhase.Raw, EvidenceDeliveryTestsRequested, RunEvidenceDeliveryTests),
         new("--evidence-task-check", 60, TestCommandPhase.Raw, EvidenceTaskCheckRequested, RunEvidenceTaskCheck),
+        new("--grouping-discovery-check", 60, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--grouping-discovery-check", (args, _) => GroupingDiscoveryCheck(args)),
+        new("--test-grouping-discovery-safety", 60, TestCommandPhase.Raw,
+            args => args.Contains("--test-grouping-discovery-safety", StringComparer.Ordinal), (_, _) =>
+            {
+                GroupingDiscoverySafetyTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }),
         new("--evidence-task-header-audit", 65, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--evidence-task-header-audit", (args, _) => EvidenceTaskHeaderAuditCommand(args)),
         new("--test-evidence-task", 70, TestCommandPhase.Raw, EvidenceTaskTestsRequested, RunEvidenceTaskTests),

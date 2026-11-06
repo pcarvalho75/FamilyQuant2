@@ -11,24 +11,35 @@ public partial class SuperClusterPreviewWindow
 {
     public AppOperationHost Operations { get; } = new();
 
-    private Task RunReviewAsync(string title, Func<Task> work, bool taskDiscovery = false) => AppOperationHost.OnUi(this, async () =>
+    private async Task RunReviewAsync(string title, Func<Task> work, bool taskDiscovery = false)
     {
-        if (Operations.IsBusy) return;
-        using var operation = Operations.Begin(title);
-        using var cancellation = operation.Context.CancellationToken.Register(() => Dispatcher.Invoke(model.CancelPending));
-        PropertyChangedEventHandler progress = (_, args) =>
-        {
-            if (args.PropertyName == nameof(GroupingReviewViewModel.Status) && !operation.Context.IsCancellationRequested)
-                operation.Context.Report("review", model.Status + (taskDiscovery ? "\nNeeds an internet connection" : ""));
-        };
-        model.PropertyChanged += progress;
         try
         {
-            if (taskDiscovery) await model.DiscoverTaskAsync(new GroupingTaskProgress(operation.Context));
-            else await work();
+            await AppOperationHost.OnUi(this, async () =>
+            {
+                if (Operations.IsBusy) return;
+                using var operation = Operations.Begin(title, operationLogPath: AppOperationHost.CreateLogPath("grouping-review"));
+                using var cancellation = operation.Context.CancellationToken.Register(() => Dispatcher.Invoke(model.CancelPending));
+                PropertyChangedEventHandler progress = (_, args) =>
+                {
+                    if (args.PropertyName == nameof(GroupingReviewViewModel.Status) && !operation.Context.IsCancellationRequested)
+                        operation.Context.Report("review", model.Status + (taskDiscovery ? "\nNeeds an internet connection" : ""));
+                };
+                model.PropertyChanged += progress;
+                try
+                {
+                    if (taskDiscovery) await model.DiscoverTaskAsync(new GroupingTaskProgress(operation.Context));
+                    else await work();
+                }
+                finally { model.PropertyChanged -= progress; }
+            });
         }
-        finally { model.PropertyChanged -= progress; }
-    });
+        catch (Exception error)
+        {
+            Operations.LogFailure(error);
+            model.ReportOperationFailure(error);
+        }
+    }
 
     private sealed class GroupingTaskProgress(OperationContext operation) : IProgress<FetchProgress>
     {

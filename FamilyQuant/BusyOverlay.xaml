@@ -10,10 +10,8 @@
     <Grid x:Name="Scrim" Background="{DynamicResource BusyScrimBrush}">
         <Border Background="{DynamicResource SurfaceBrush}" Padding="28" Margin="24" MaxWidth="520" CornerRadius="8"
                 HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid>
-              <Grid.RowDefinitions><RowDefinition Height="*" MaxHeight="244"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-              <local:BusyLogo x:Name="AnimatedLogo" IsActive="{Binding IsBusy}" Margin="0,0,0,24"/>
-              <StackPanel Grid.Row="1">
+            <DockPanel LastChildFill="True">
+              <StackPanel DockPanel.Dock="Bottom">
                 <TextBlock Text="{Binding Title}" FontSize="20" FontWeight="SemiBold" TextWrapping="Wrap"/>
                 <TextBlock x:Name="OperationCurrentItem" Text="{Binding Message}" Margin="0,12,0,16" TextWrapping="Wrap"/>
                 <ProgressBar x:Name="OperationProgressBar" Height="6" Minimum="0" Maximum="100" Value="{Binding Percent, Mode=OneWay}" IsIndeterminate="{Binding IsIndeterminate}"
@@ -26,7 +24,8 @@
                           ToolTip="Requests cancellation after the current phase. Previous results stay available."/>
                 </StackPanel>
               </StackPanel>
-            </Grid>
+              <local:BusyLogo x:Name="AnimatedLogo" IsActive="{Binding IsBusy}" MaxHeight="220" Margin="0,0,0,24"/>
+            </DockPanel>
         </Border>
     </Grid>
 </UserControl>

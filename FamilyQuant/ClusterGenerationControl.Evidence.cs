@@ -16,7 +16,11 @@ public partial class ClusterGenerationControl
     public Func<EvidenceGroupingSession, EvidenceReviewSelection?>? ConfirmEvidenceReviewOverride { get; set; }
     public event EventHandler? DocumentChanged;
 
-    private async void ButtonEvidenceGrouping_Click(object sender, RoutedEventArgs e) => await ReviewEvidenceWithFetchOfferAsync();
+    private async void ButtonEvidenceGrouping_Click(object sender, RoutedEventArgs e)
+    {
+        try { await ReviewEvidenceWithFetchOfferAsync(); }
+        catch (Exception error) { ShowCurationOperationResult("The grouping review could not finish: " + error.Message); }
+    }
 
     private async Task ReviewEvidenceWithFetchOfferAsync()
     {
