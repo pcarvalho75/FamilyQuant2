@@ -1,9 +1,9 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 13, 2026-11-05 14:31, release 2.1.8 and the FamilyQuant website, in small steps (Paulo, 14:25: "a way more detailed roadmap with many small steps ... remove all that was already accomplished and bring the needle back to zero"). Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
+Version 14, 2026-11-06 12:54, release 2.1.11: Ana's 11-06 batch, the Fetch evidence speed-up, the database update and the clearer science page, all in this round (Paulo, 11-06: "solve all these requests in a next version", "provide me the roadmap too, there is plenty of things to improve", "we need to wrap all this up in this round"). Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
 Finished rows leave this file and go to `docs/ROADMAP-archive.md`; the needle restarts at zero with each version.
 
-Version 12 delivered 30 steps (in the archive): 2.1.7 published at 13:54 on 11-05 (fetch keeps its work, the update reopens the app, Setup checks versions, Close project) and every 2.1.8 build step (Home and one name per thing, the Families layout, the PatternLab-wins rule, the de novo Help page). Version 13 finishes 2.1.8 and builds the website, both split into small steps.
+Version 13 delivered 73 steps (in the archive): 2.1.8 (11-05), 2.1.9 (the UniProt 429 fix and the follow-ups) and 2.1.10 (the Group by evidence crash and a crash log) published, and the FamilyQuant website built, reviewed and live at patternlabforproteomics.org/familyquant/ (the Scope text Z9n approved and waiting for Ana).
 
 ## The goal, in Paulo's words
 
@@ -15,14 +15,14 @@ Version 12 delivered 30 steps (in the archive): 2.1.7 published at 13:54 on 11-0
 
 ## What Ana reported, and what the desk found in the code
 
-| Slide | Ana | Found in the code (11-05) | Steps |
+| When | Ana | Found in the code | Steps |
 |---|---|---|---|
-| 1 | Fetch evidence stops ("UniProt refused a panel page (HTTP 500)") and the domain column stays empty, all morning | The fetch is all or nothing: one failed reference-panel batch (25 of 64) discards the protein evidence already downloaded (`EvidenceFetchSession.FetchStagedAsync`). Three tries, 1 s and 2 s apart (`UniProtHttp.GetWithRetryAsync`). UniProt published release 2026_04 on 11-04; it answered normally at 12:15 on 11-05 | W1 |
-| 2 | The Start screen is confusing; use Home; name the flow as in 1.5 (Build families, Curate families with Group by evidence and Group by words); add File > Close project | One thing carries up to three names; no Close project exists | W3, W4 |
-| 3 | One name per step: Quantify (not Compute full XIC), Results (not Analytics / report), De novo review (not De novo or De novo evidence); Home shows the five numbered steps | Confirmed: sidebar, Analysis menu and Help use different names for the same screens | W4 |
-| 4 | Does Quantify follow her de novo flow (PatternLab and PEAKS, same scan, keep the reliable call, XIC of de novo only, PepExplorer)? Is 80% identity used? | Quantify does the de novo work; De novo review is inspection only. A de novo peptide is dropped when PatternLab identified the same peptide (run, sequence with I = L, charge, mass). Homology is PepExplorer's method, minimum identity 0.80 (`HomologyOptions.DefaultMinIdentity`), raised by the decoy gate when it is on. A scan where PatternLab and the de novo call disagree on the sequence has no rule that picks one: possible double count, to be measured | W6 |
-| 5 | Install update closes the program with no message and does not reopen it; the next start shows "Upgrade FamilyQuant 2.1.6.0 to 2.1.4.0" | The silent update never relaunches the app (`MainWindow.UpdateInstall.cs`, Setup `/silent /waitpid`). The 2.1.4 page is an old Setup.exe (VERSION 2.1.4.0) the user opened from an icon; Setup does not compare versions (`InstallerWindow.IsUpgrade`), so Continue would downgrade | W2 |
-| 6 | Families screen: align the two grid headers, title each grid, move All proteins above the protein grid, centre the family numbers | Layout only. Her earlier question (USearch ID not shown) is answered here too | W5 |
+| 11-06 a | 1,198 headers start with sp in her FASTA; the window counts 1,199 reviewed accessions | The count is UniProt's reviewed status at fetch, not the FASTA prefix; the differing accession is not yet named | Z12a1, Z12a2 |
+| 11-06 b | Entries per species in the taxa table, reviewed (sp) and unreviewed (tr) | The table lists taxa only | Z12b1, Z12b2 |
+| 11-06 c | Say that the scope uses only Molecular function keywords | The table lists every category (Secreted, Disulfide bond...); only the suggestion is restricted (KW-9992) | Z12c1, Z12c2 |
+| 11-06 d | Can she add families by hand, for example BJ46a type metalloprotease inhibitors, not toxins but important in venom? | Yes: add their keyword to the scope, or Group by keywords; left-out proteins keep their step 1 families and are quantified | Z12c3, Z12c4 |
+| 11-06 e | The family ticks and the red rows are confusing (audio); she would like a call with Paulo | Red italic = a protein with a warning flag (EvidenceReviewViewModel.cs:43); the family tick is three-state over its eligible proteins; no legend says either | Z12d1 to Z12d3, Z12f |
+| 11-06 f | The Architecture tab does not open properly | Its tables are squashed at her window size (screenshot) | Z12e1 to Z12e3 |
 
 ## Rules every worker follows
 
@@ -66,125 +66,53 @@ Kimi limits: one Kimi instance at a time across every project, at most 15 calls 
 
 Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. A step is done when a reviewer approves it (desk steps: when their check passes); each release ships only after its own full suite.
 
-### W8 Release 2.1.8 (FQFetch, FQOpus, FQHome, Orchestrator)
+### W12 Release 2.1.11: Ana's 11-06 batch on the Group by evidence window (FQOpus, FQFetch, FQHome, Orchestrator)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z8a | Version 2.1.8.0 in every place 2.1.7.0 is set, packaging defaults included | L | 0.1 | 🟢 | Z8c1 | Versions read 2.1.8.0; reviewed | FE | | 0 | 0 | |
-| Z8a2 | The 2.1.8 release notes, claiming only what landed | L | 0.1 | 🟢 | Z8c1 | Reviewed | FE | | 0 | 0 | |
-| Z8b | The public README reads 2.1.8, with the new Home screenshot and the new names | L | 0.1 | 🟢 | Z8d5 | Reviewed; synthetic only | OP | | 0 | 0 | |
-| Z8c1 | The final 2.1.8 integration: master plus every approved 2.1.8 commit | L | 0.1 | Z8a, Z8a2 | Z8c2, Z8d1 | Merged clean; build 0 warnings | Orchestrator | | 0 | 0 | |
-| Z8c2 | The full functional suite on the final integration (receipts deferred, D61) | M | 0.2 | Z8c1 | Z8d3 | Every check green | Orchestrator | | 0 | 0 | |
-| Z8d1 | The 2.1.8 Setup.exe and zip from the integration commit, Setup in test mode | L | 0.1 | Z8c1 | Z8d2 | Built with 0 warnings | HM | | 0 | 0 | |
-| Z8d2 | The package check | L | 0.1 | Z8d1 | Z8d3 | PASS | HM | | 0 | 0 | |
-| Z8d3 | Tag v2.1.8 at the tested commit, merge into master, push | L | 0.05 | Z8c2, Z8d2 | Z8d4 | Tag and master on GitHub | Orchestrator | | 0 | 0 | |
-| Z8d4 | The GitHub release draft with its four files; digests checked against the package | L | 0.1 | Z8d3 | Z8d5 | Digests equal | Orchestrator | | 0 | 0 | |
-| Z8d5 | v2.1.8 published as Latest; README pushed | L | 0.05 | Z8d4, Z8b | Z8e1 | Latest is v2.1.8 | Orchestrator | | 0 | 0 | |
-| Z8e1 | Fresh public downloads equal the published digests; 2.1.8 reports current | L | 0.1 | Z8d5 | Z8e2 | PASS | HM | | 0 | 0 | |
-| Z8e2 | An installed 2.1.7 test root shows the 2.1.8 banner and updates in test mode | L | 0.1 | Z8e1 | Z8e3 | PASS | HM | | 0 | 0 | |
-| Z8e3 | The app reopens once and says it was updated to 2.1.8 | L | 0.05 | Z8e2 | | PASS | HM | | 0 | 0 | |
+| Z12a1 | Reviewed count (Ana: 1,198 headers start with sp in her FASTA, the window says 1,199 reviewed accessions): on her Viperidae file, find each accession counted reviewed that the FASTA does not mark sp, and why (reviewed in UniProt since the download, a merged or secondary accession, an isoform, a header format); diagnosis only, with the accession and file:line | M | 0.4 | 🟢 | Z12a2 | Cause and accession named; reviewed | OP | | 0 | 0 | |
+| Z12a2 | Show where the count comes from: "Reviewed in UniProt (release 2026_04): N" beside "Marked sp in the FASTA: M", the differing accessions in a tooltip, and the definition in Help; a code fix only if Z12a1 finds a real miscount | L | 0.3 | Z12a1 | Z12h1 | Both counts on synthetic data in a test; reviewed | FE | | 0 | 0 | |
+| Z12b1 | Taxa table: for every taxon of the database, its number of entries, reviewed (sp) and unreviewed (tr), taken from the FASTA headers (OX and the sp or tr prefix), contaminants excluded, sorted by entries, with a totals line | M | 0.5 | 🟢 | Z12b2 | Counts on a synthetic FASTA in a test; reviewed | FE | | 0 | 0 | |
+| Z12b2 | The taxa table copies to the clipboard with its columns (Ctrl+C and a Copy button), so Ana can paste it into a spreadsheet | L | 0.1 | Z12b1 | Z12h1 | Pasted rows match the grid; reviewed | FE | | 0 | 0 | |
+| Z12c1 | Keyword table: a Category column (Molecular function, Biological process, Cellular component, PTM, Ligand, Domain, Technical term and the rest, from UniProt's keyword category), and a line under the table: "The suggested scope uses the most frequent Molecular function keyword and the most frequent tissue phrase" | M | 0.4 | 🟢 | Z12c2 | Categories on synthetic evidence in a test; old projects without categories say so; reviewed | FE | | 0 | 0 | |
+| Z12c2 | A filter on the keyword table: All categories or Molecular function only | L | 0.1 | Z12c1 | Z12h1 | Filter tested; reviewed | FE | | 0 | 0 | |
+| Z12c3 | Add a keyword to the scope: double-click a keyword row, or select rows and press Add to scope, to append them quoted; then Update proposal (Ana: metalloprotease inhibitors of the BJ46a type are not toxins but must be quantified) | M | 0.3 | Z12c1 | Z12c4 | Tested; reviewed | FE | | 0 | 0 | |
+| Z12c4 | Help and the scope panel say how to bring in proteins outside the suggested scope: add their keyword to the scope, or build the family by hand with Group by words, Group by keywords; and that proteins left out of the proposal keep their step 1 families and are still quantified | L | 0.2 | Z12c3 | Z12h1 | Every claim checked against the code; reviewed | FE | | 0 | 0 | |
+| Z12d1 | Red rows explained (Ana's audio: what does the red mean?): a legend above the protein table saying a red italic row carries a warning flag, with each flag written in words (conflicting markers, domain compatibility, several source families, neighbour out of scope, neighbour refused, panel domain conflict) in the Flags column and its tooltip | M | 0.4 | 🟢 | Z12d2 | Every flag code has words; tested; reviewed | HM | | 0 | 0 | |
+| Z12d2 | Family ticks explained: a legend under the family list (a full tick: every eligible protein ticked; a dash: some; empty: none; locked proteins stay unticked) and what is ticked by default, read from the code, so the legend says what the program really does | L | 0.2 | Z12d1 | Z12d3 | Matches the code; reviewed | HM | | 0 | 0 | |
+| Z12d3 | Family list: names and the Reviewed column are not cut at the window size Ana used; the full name in a tooltip | L | 0.1 | Z12d2 | Z12h1 | Screens checked at 1366 and 1920 wide; reviewed | HM | | 0 | 0 | |
+| Z12e1 | Architecture tab (Ana: it does not open properly): its tables get usable heights at Ana's window size, with a splitter between the split table and the group members; nothing hidden behind scroll bars | M | 0.4 | 🟢 | Z12e2 | Screens checked at 1366x768 and 1920x1080, dark and light; reviewed | HM | | 0 | 0 | |
+| Z12e2 | Architecture tab says what it shows and what a tick does, in one line at the top, written from the code | L | 0.1 | Z12e1 | Z12e3 | Matches the code; reviewed | HM | | 0 | 0 | |
+| Z12e3 | The screens harness renders the scope panel and the Architecture tab on synthetic data at a small window, so a squashed layout fails a check | M | 0.3 | Z12e1 | Z12h1 | The check fails on the old layout and passes on the new; reviewed | HM | | 0 | 0 | |
+| Z12f | A newcomer's walk through the whole Group by evidence window on synthetic data: every unclear label, cut column, unexplained status line (for example "At least 70 percent of the query's residues occur in the alignment") and missing explanation, listed with file:line; the desk turns each into a small step | M | 0.5 | 🟢 | | List posted; desk made the steps | OP | | 0 | 0 | |
+| Z12h1 | Version 2.1.11.0 in every place 2.1.10.0 is set, notes claiming only what lands, README | L | 0.2 | Z12a2, Z12b2, Z12c2, Z12c4, Z12d3, Z12e3, Z13a, Z13b, Z13c, Z14b, Z14c3 | Z12h2 | Reviewed | HM | | 0 | 0 | |
+| Z12h2 | The final 2.1.11 integration and the full functional suite | M | 0.3 | Z12h1 | Z12h3 | Every check green | Orchestrator | | 0 | 0 | |
+| Z12h3 | Package, publish as Latest, update check from an installed 2.1.10 | L | 0.3 | Z12h2 | Z12i | PASS | HM, Orchestrator | | 0 | 0 | |
+| Z12i | WhatsApp to Ana with the answers to her 11-06 batch, drafted by the desk, sent by Paulo | L | 0.1 | Z12h3 | | Paulo sent it | Paulo | | 0 | 0 | |
 
-### W1b Follow-ups for the next release (FQFetch, FQHome)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z1f | The resume cache uses short file names, so its paths stay well under 260 characters on any user profile; tests clean their own temporary files | L | 0.3 | Z8a2 | | Longest cache path measured; reviewed | FE | | 0 | 0 | |
-| Z1g | Two exported presentation figures still name the organism and its venom in their captions (`FamilyQuant/PresentationFigures.cs:1854` and `:2020`, found by FQOpus); neutral wording, and the D21 check stops skipping that file for caption text | L | 0.2 | 🟢 | Z1j | No organism, venom or sample word in any exported figure text; the check goes red on a planted word | FE | | 0 | 0 | |
-| Z1h | A flaky suite check: the Full XIC column attach expects PENDING before READY and failed 2 of about 10 runs on a timing race (FQOpus); make it wait for the state instead of racing | L | 0.2 | 🟢 | Z1j | 20 runs in a row green | FE | | 0 | 0 | |
-| Z1i | The public README's Families, Quantify and Results screenshots re-captured from 2.1.8 (synthetic data), so every picture shows the new names | L | 0.2 | Z8e3 | Z1j | Every README image matches 2.1.8 | HM | | 0 | 0 | |
-| Z1k | The program's Help says the de novo reconciliation allows for isotope selection errors (`FamilyQuant.Core/HelpContent.cs:514-515`), but the code uses a direct 20 ppm m/z match (`DeNovoReconciler.cs:68-87`); correct the Help to match the code (found by FQSite, confirmed by FQReviewDS on the science page) | L | 0.1 | 🟢 | Z1j | Help matches the code; reviewed | FE | | 0 | 0 | |
-| Z1l | After Fetch evidence the status line says "Protein evidence saved for N proteins", which reads as saved to disk though nothing is written until File > Save (Ana, 11-06); say it plainly, for example "Protein evidence added for N proteins. Use File > Save to keep it.", and the same for the reference panel and family world messages | L | 0.1 | 🟢 | Z1j | Wording check green; reviewed | FE | | 0 | 0 | |
-| Z1m | Read database and scope asks UniProt for the taxonomy of every species in the file one request at a time (`EvidenceTaskDiscovery.cs:83-87`), hundreds for a whole-clade database, so UniProt answers HTTP 429 (too many requests) and the whole proposal is lost (Ana, 11-06). Ask for all taxa in one or a few batched queries, honour Retry-After on 429, keep the patient waits, and keep finished lineages so a retry does not start over | M | 0.4 | 🟢 | Z1j | A synthetic file with 300 taxa makes at most a few requests; a 429 with Retry-After waits and succeeds; reviewed | FE | | 0 | 0 | |
-| Z1j | The follow-ups ship in 2.1.9 with the 429 fix (Paulo, 11-06 06:24: "please fix that and deploy a version with that fixed") | L | 0 | Z1f, Z1g, Z1h, Z1i, Z1k, Z1l, Z1m | | Paulo's word | Paulo | | 0 | 0 | |
-
-### W9a The website: study and design (FQSite)
+### W13 Fetch evidence faster, in 2.1.11 (Ana's 54 minutes, 11-05) (FQFetch, FQOpus)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z9a | The study: how FamilyQuant works end to end, every claim with file:line (`UNDERSTANDING.md`) | M | 1 | 🟢 | Z9a2 | FQKimi checks it against the code: APPROVED | ST | | 0 | 0 | |
-| Z9a2 | The algorithm walk-through added to the study: what each step computes, in order, and how the pieces connect (Paulo, 14:22) | M | 0.5 | Z9a | every page | Reviewed | ST | | 0 | 0 | |
-| Z9a3 | `INSPIRATION.md`: what works on the SCPBrowser and APEX pages, and how this site goes beyond them | L | 0.2 | 🟢 | Z9b1 | Written | ST | | 0 | 0 | |
-| Z9b1 | Art direction: palette from the brand (no yellow or gold), type, motion rules, light and dark; fun and friendly, never a research site | M | 0.3 | Z9a3 | Z9b2 | A one-page style sheet rendered | ST | | 0 | 0 | |
-| Z9b2 | Page skeleton: sections, sticky navigation, phone layout without sideways scroll | M | 0.3 | Z9b1 | Z9b3, Z9c1 | Rendered at desktop and phone width | ST | | 0 | 0 | |
-| Z9b3 | The hero: the animated family motif (sequences gathering into families) and one line on what FamilyQuant does | M | 0.4 | Z9b2 | Z9b4 | Rendered; respects reduced motion | ST | | 0 | 0 | |
-| Z9b4 | The download button: reads the latest release from GitHub, shows the version, falls back to the releases page | L | 0.2 | Z9b3 | Z9f1 | The link resolves; the fallback works offline | ST | | 0 | 0 | |
+| Z13a | Smarter waits: long waits only for HTTP 429 and 503; a 500 repeated on the same batch splits the batch to find the one bad accession and records it with the reason, instead of waiting through every retry; nothing already downloaded is lost | M | 0.6 | Z12a2 | Z12h1 | Tested on a fake server; reviewed | FE | | 0 | 0 | |
+| Z13b | Domains first: Pfam domains fill the Domains column as soon as the protein evidence is in, before the reference panel finishes | M | 0.4 | Z13a | Z12h1 | Tested; reviewed | FE | | 0 | 0 | |
+| Z13c | Study: a reference panel for the in-scope families only. Measure the time saved and every change in the family proposal on synthetic data and Ana's file; adopt it in 2.1.11 only if no proposal changes, or on Paulo's word | M | 0.6 | Z12a1 | Z12h1 | Measured table; reviewed | OP | | 0 | 0 | |
 
-### W9b The website: the basics, one animated explainer each (FQSite)
+### W14 The later ideas and the website, in this round (FQOpus, FQHome, FQSite, Desk)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z9c1 | What a protein, a peptide and a spectrum are: a protein cut into peptides, peptides flying through the instrument | M | 0.4 | Z9b2, Z9a2 | Z9c2 | Animation with one-line captions | ST | | 0 | 0 | |
-| Z9c2 | What homology is: relatives sharing an ancestor, shown as sequences that mostly match | M | 0.3 | Z9c1 | Z9c4 | Animation with captions | ST | | 0 | 0 | |
-| Z9c3 | What Pfam is: a catalogue of protein building blocks, coloured blocks on a protein | M | 0.3 | Z9c1 | Z9d2 | Animation with captions | ST | | 0 | 0 | |
-| Z9c4 | What alignment and sequence identity are: two sequences side by side, matches lighting up, a percentage | M | 0.3 | Z9c2 | Z9d1 | Interactive toy | ST | | 0 | 0 | |
-| Z9c5 | What de novo means, next to a database match: one spectrum read two ways | M | 0.3 | Z9c1 | Z9d7 | Animation with captions | ST | | 0 | 0 | |
-| Z9c6 | What a protein family is, and why counting by family is steadier than counting proteins | M | 0.3 | Z9c2 | Z9d5 | Animation with captions | ST | | 0 | 0 | |
-| Z9c7 | The pop-up glossary: any term on the page explains itself on hover or tap | L | 0.2 | Z9c1 | Z9g1 | Every glossary term reachable by keyboard and touch | ST | | 0 | 0 | |
-
-### W9c The website: how FamilyQuant works, step by step (FQSite)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z9d1 | Step 1, Build families: proteins grouped by sequence identity (USearch), animated | M | 0.4 | Z9c4 | Z9d8 | True to the study | ST | | 0 | 0 | |
-| Z9d2 | Step 2a, Group by evidence: Pfam and family evidence from UniProt sorting proteins, animated | M | 0.4 | Z9c3 | Z9d8 | True to the study | ST | | 0 | 0 | |
-| Z9d3 | Step 2b, Group by words: descriptions bringing names together | L | 0.2 | Z9d2 | Z9d8 | True to the study | ST | | 0 | 0 | |
-| Z9d4 | The family world, answering Ana's question of 11-05 (why reach for relatives from other species?): the reference panel as a ruler that labels unreviewed proteins, never quantified; the optional family world for leftover de novo peptides only, shown as the Database gap, never changing the main totals | M | 0.3 | Z9d2 | Z9d8 | True to the study | ST | | 0 | 0 | |
-| Z9d5 | Step 3, Quantify: peptides landing on families, isotope envelopes rising, signal adding up | M | 0.4 | Z9c6 | Z9d8 | True to the study | ST | | 0 | 0 | |
-| Z9d6 | Step 4, Results: the report and its dot plot, what to look at | L | 0.3 | Z9d5 | Z9d8 | True to the study | ST | | 0 | 0 | |
-| Z9d7 | Step 5 and de novo: how a de novo peptide finds its family by homology, and why the database match wins a shared spectrum | M | 0.4 | Z9c5 | Z9d8 | True to the study | ST | | 0 | 0 | |
-| Z9d8 | The whole journey: one animation from a sample to a family pie | H | 0.6 | Z9d1 to Z9d7 | Z9g1 | Plays end to end; captions on each stage | ST | | 0 | 0 | |
-| Z9d9 | Real app screenshots (synthetic data) placed next to each step | L | 0.2 | Z9d1 to Z9d7 | Z9g1 | Synthetic only | ST | | 0 | 0 | |
-
-### W9d The website: example, difference, science page, practical (FQSite)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z9e1 | A fictitious snake venom: an invented dataset, labelled fictitious and illustrative on every view | L | 0.2 | Z9b2 | Z9e2 | No real number anywhere | ST | | 0 | 0 | |
-| Z9e2 | Its interactive dot plot, in the style of the program's report | M | 0.4 | Z9e1 | Z9e3 | Hover and axes work at phone width | ST | | 0 | 0 | |
-| Z9e3 | Its composition and the de novo contribution, animated | M | 0.3 | Z9e2 | Z9g1 | Labelled fictitious | ST | | 0 | 0 | |
-| Z9i | What makes FamilyQuant different, as a fun side-by-side ("other tools see this, FamilyQuant sees this"); a line or two of sources | M | 0.4 | Z9d8 | Z9g1 | No claim anyone could knock down | ST | | 0 | 0 | |
-| Z9j1 | The science page (science.html): its sections and anchors; a "the science behind this" button beside each idea on the main page | M | 0.3 | Z9a2 | Z9j2 | Each button lands on its section | ST | | 0 | 0 | |
-| Z9j2 | Science page, part 1, rigorous: alignment and identity, evidence and Pfam, the family world | M | 0.5 | Z9j1 | Z9g1 | Every claim from the study | ST | | 0 | 0 | |
-| Z9j3 | Science page, part 2, rigorous: quantitation and normalisation, de novo and homology, decoys and FDR, the PatternLab-wins rule, what the program does not do | M | 0.5 | Z9j2 | Z9g1 | Every claim from the study | ST | | 0 | 0 | |
-| Z9f1 | Install and update guide, with the Windows "More info, Run anyway" step pictured | L | 0.2 | Z9b4 | Z9g1 | Matches the release notes | ST | | 0 | 0 | |
-| Z9f2 | FAQ | L | 0.2 | Z9d8 | Z9g1 | Short answers | ST | | 0 | 0 | |
-| Z9f3 | Authors (Ana Gisele Neves Ferreira, Richard Hemmi Valente, Paulo Costa Carvalho, Luis Miguel Muñoz; Paulo, 11-05), credits, how to cite, and the footer with the Fiocruz logo and "All rights reserved, 2026, Fundação Oswaldo Cruz (Fiocruz)" | L | 0.1 | Z9b2 | Z9g1 | Rendered in both themes | ST | | 0 | 0 | |
-
-### W9e The website: checks and Paulo's look (FQKimi, FQSite, Paulo)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z9g1 | Claims review: every statement on both pages against the study and the code | M | 0.4 | Z9d8, Z9e3, Z9i, Z9j3, Z9f2 | Z9h | APPROVED | KM | | 0 | 0 | |
-| Z9g2 | Phone width, both themes, keyboard and screen reader basics, reduced motion | L | 0.2 | Z9d8 | Z9h | Checked with screenshots | ST | | 0 | 0 | |
-| Z9g3 | Speed, no real data, no em or en dashes, every link resolves | L | 0.1 | Z9g1 | Z9h | Checked | ST | | 0 | 0 | |
-| Z9k | Paulo's one fix after his look (11-05 16:08): peptides in the hero overview, and anywhere a dot stands for a peptide, drawn as short words of 4 to 6 linked amino acids instead of single dots | L | 0.3 | Z9g1 | Z9h | Rendered desktop and phone; nothing else changed | ST | | 0 | 0 | |
-| Z9l | Science correction (Paulo, 11-05 17:10): Idea 1 showed the tandem spectrum as a peptide falling apart into single amino acids; rebuilt around the real idea: the precursor mass, backbone breaks giving b and y ions, the two fragment ladders whose gaps are residue masses, and how a search engine matches ladders plus precursor mass while de novo reads the gaps; Idea 5 and science.html made consistent | M | 0.6 | 🟢 | Z9h | Science reviewed by FQKimi; renders checked | ST | | 0 | 0 | |
-| Z9m | Build families told as Ana found clearest (11-06): the fast pass sorts by length and compares each protein only with each family's seed (so D can miss A's family though it resembles B); the second pass compares every protein with every other and joins two families when any cross pair reaches the identity over that share of the longer sequence, never splitting a first-pass join; why not all against all first (pairs grow with the square: 40,000 proteins is about 800 million pairs) | M | 0.5 | 🟢 | Z9h | Reviewed against the code; renders checked | ST | | 0 | 0 | |
-| Z9n | The Scope explanation rewritten for clarity (Ana, 11-06: the first sentence already confuses): what a scope is, that it removes nothing, when a protein is in scope, what changes in and out of scope, and where the suggestion comes from (reviewed proteins of the file only, the molecular-function keyword, the tissue phrase); science page, main page and glossary | L | 0.3 | 🟢 | Z9h | Reviewed against the code | ST | | 0 | 0 | |
-| Z9h | Paulo looks at it and decides where it is deployed | L | 0 | Z9g1, Z9g2, Z9g3, Z9k | | Paulo's word | Paulo | | 0 | 0 | |
-
-### W10 Release 2.1.9: the UniProt 429 fix and the follow-ups (FQFetch, FQHome, Orchestrator)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z10a | Version 2.1.9.0 in every place 2.1.8.0 is set, and the 2.1.9 notes claiming only what lands (Z1m and the follow-ups Z1f, Z1g, Z1k, Z1l) | L | 0.1 | 🟢 | Z10c | Reviewed | HM | | 0 | 0 | |
-| Z10b | The public README reads 2.1.9, with the re-captured screenshots of Z1i | L | 0.1 | 🟢 | Z10f | Reviewed; synthetic only | HM | | 0 | 0 | |
-| Z10c | The final 2.1.9 integration: master plus fq/fetch (Z1f to Z1m) plus the version bump | L | 0.1 | Z1m, Z10a | Z10d, Z10e | Merged clean; build 0 warnings | Orchestrator | | 0 | 0 | |
-| Z10d | The full functional suite on the integration (receipts deferred, D61) | M | 0.2 | Z10c | Z10f | Every check green | Orchestrator | | 0 | 0 | |
-| Z10e | The 2.1.9 Setup.exe and zip from the integration commit, Setup in test mode, package check | L | 0.1 | Z10c | Z10f | PASS | HM | | 0 | 0 | |
-| Z10f | Tag v2.1.9, merge into master, draft with digests checked, published as Latest, README pushed | L | 0.1 | Z10d, Z10e, Z10b | Z10g | Latest is v2.1.9 | Orchestrator | | 0 | 0 | |
-| Z10g | Update check on the public files: an installed 2.1.8 test root sees the banner, updates in test mode, reopens once | L | 0.1 | Z10f | | PASS | HM | | 0 | 0 | |
-
-### W11 Release 2.1.10: Ana's crash and a crash log (FQFetch, FQHome, Orchestrator)
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Z11a | Ana's crash (11-06): on 2.1.9, Group by evidence closed the program a few seconds in with no message; reproduce on real data with live UniProt, fix the cause with a test that reproduces it, and make that path report errors in its window instead of closing | H | 0.6 | 🟢 | Z11c | The reproduction passes; reviewed | FE | | 0 | 0 | |
-| Z11b | A crash log: global handlers write a report (version, Windows, the full exception stack, the running operation) to a logs folder and tell the user where it is; Help > Open error logs folder (Paulo, 11-06: "is it worth putting an error log") | M | 0.4 | 🟢 | Z11c | A thrown exception writes a report; reviewed | HM | | 0 | 0 | |
-| Z11c | Version 2.1.10.0, notes and README; the final integration and the full suite | M | 0.3 | Z11a, Z11b | Z11d | Every check green | HM, Orchestrator | | 0 | 0 | |
-| Z11d | Package, publish as Latest, update check from an installed 2.1.9 | L | 0.3 | Z11c | | PASS | HM, Orchestrator | | 0 | 0 | |
+| Z14d1 | Website, science page (Ana, 11-06: "extremely confusing"): rewrite Fetch evidence, the reference panel, the nearest reviewed protein and the tiers for a biologist first. Plain words, one worked example with invented proteins (a venom protein, its reviewed relative from another species, a housekeeping protein), a small drawing of query, relative and the 50% and 70% bars; the program names (usearch, gap columns, isoforms folded, PANTHER) go into a fold for experts | M | 0.8 | 🟢 | Z14d2 | Every claim checked against UNDERSTANDING.md and the code | ST | | 0 | 0 | |
+| Z14d2 | The same plain-words pass over the rest of the Group by evidence chapter and the glossary entries it uses (reference panel, neighbour, tier, marker, flag), so no paragraph needs the code to be understood | M | 0.5 | Z14d1 | Z14a | Reviewed by FQKimi against the code | ST | | 0 | 0 | |
+| Z14a | The website's new text (Z9n, Z14d1, Z14d2) goes into the upload folder once Ana has read it; Paulo uploads | L | 0.1 | Z14d2 | | Live site checked | Desk, Paulo | | 0 | 0 | |
+| Z14b | The program's Help for Group by evidence gets the scope as four numbered steps (suggested scope, edit, Update proposal builds the family proposal, review and Apply), the same order as the website | L | 0.2 | 🟢 | Z12h1 | Matches the code; reviewed | HM | | 0 | 0 | |
+| Z14c1 | Ana's idea: update a project's database without starting over (new UniProt entries in, removed ones out, families, names and locks kept). A design note: what changes in the file, what the user sees, what is recomputed, what can go wrong | M | 0.6 | 🟢 | Z14c2 | Design note posted | OP | | 0 | 0 | |
+| Z14c2 | Paulo reads the design note and says go, or changes it | L | 0 | Z14c1 | Z14c3 | Paulo's word | Paulo | | 0 | 0 | |
+| Z14c3 | Build the database update as designed, with tests on synthetic databases (added, removed and changed entries; curated families kept) | H | 2 | Z14c2 | Z12h1 | Tests green; reviewed | OP | | 0 | 0 | |
 
 ## Critical path
+
+2.1.11 holds everything in this round (Paulo, 11-06): Ana's batch (W12), the Fetch evidence speed-up (W13) and the later ideas (W14). The longest chain is the database update: FQOpus's design note Z14c1, Paulo's word Z14c2, the build Z14c3. FQFetch runs Z12b1 to Z12c4, Z12a2, Z13a, Z13b; FQHome runs Z12d1 to Z12e3 and Z14b; FQSite rewrites the science page (Z14d1, Z14d2). Then Z12h1 to Z12h3. Rough wall-clock: 6 to 10 hours from 12:46 if Paulo answers Z14c2 quickly, a range, never a promise.
 
 2.1.8: Z8a and Z8a2 (FQFetch), the README review Z8b, then the final integration Z8c1, the suite Z8c2 with the package Z8d1 and Z8d2 in parallel, publish Z8d3 to Z8d5, update check Z8e1 to Z8e3. Rough wall-clock: 30 to 50 minutes from 14:30, a range, never a promise.
 
@@ -242,6 +170,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D69 | A FamilyQuant website | A gorgeous, instructional public page in the spirit of the SCPBrowser page but better: how it works, why families, why peptide spectrum matches plus de novo, a fictitious and clearly labelled snake venom example, the download link, the Fiocruz logo in the footer; built by one more Opus from this account, after a deep study of the program; ChatGPT may make art. The program itself stays general (D21); the site uses fictitious data only. Paulo, 11-05 14:05 |
 | D70 | Where the website goes | On patternlabforproteomics.org beside SCPBrowser, as a folder Paulo uploads; relative paths only, so any folder name works. The desk suggests /familyquant2/, because /familyquant/ may hold the 1.5 update files that 2.0 must never touch. Paulo, 11-05 14:47 ("yes, it will go here") |
 | D71 | Release 2.1.9 | The UniProt 429 fix for Read database and scope (Z1m) ships now with the approved follow-ups Z1f to Z1l; the Fetch evidence speed-up (domains first, smarter waits) is not in it. Paulo, 11-06 ("please fix that and deploy a version with that fixed") |
+| D72 | Release 2.1.11 | Ana's 11-06 batch (W12) ships as the next version; work starts now; the desk writes to Ana when it is published. Paulo, 11-06 ("solve all these requests in a next version, please begin working now... and when you are done we write to ana"; "provide me the roadmap too, there is plenty of things to improve"; "well put all this in this batch... we need to wrap all this up in this round", the Fetch evidence speed-up and the later ideas included; the science page text Ana found extremely confusing made much clearer) |
 
 ## Risks and triggers
 
