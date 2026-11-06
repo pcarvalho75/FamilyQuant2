@@ -301,6 +301,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => KeywordCategoryTests());
             suite.AddWithApplication(() => KeywordCategoryFilterTests());
             suite.AddWithApplication(() => AddKeywordScopeTests());
+            suite.Add(() => ScopeExpansionHelpTests());
             suite.AddWithApplication(() => GroupingDiscoverySafetyTests());
             suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => PanelMultiScopeAuditTests());

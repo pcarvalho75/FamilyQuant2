@@ -95,6 +95,8 @@ internal static partial class Program
                         keywords.Columns.Any(c => c.Header as string == "Category")
                         && facts.Keywords[0].CategoryDisplay == "Molecular function"
                         && WalkTree(window).OfType<System.Windows.Controls.TextBlock>().Any(t => t.Text == EvidenceTaskScopeInput.ScopeSuggestionExplanation));
+                    Check(theme + " scope panel explains how to include more proteins",
+                        WalkTree(window).OfType<System.Windows.Controls.TextBlock>().Any(t => t.Text == EvidenceHelp.ScopeExpansionHint));
                     Check(theme + " the database clade is present in the rendered view text",
                         WalkTree(window).OfType<System.Windows.Controls.TextBlock>()
                             .Any(t => t.Text == "Database clade: " + facts.Clade));

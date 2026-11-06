@@ -13,14 +13,32 @@ namespace FamilyQuant
     /// </summary>
     public static class EvidenceHelp
     {
+        public const string ScopeExpansionHint = "Add to scope or use Group by words > Group by keywords. Left-out proteins keep their families for Quantify.";
+        public const string ScopeExpansionHelp = """
+            EXTENDING THE SCOPE
+            The suggested scope is a starting point. To include more proteins, select their
+            keyword rows and choose Add to scope, or double-click a keyword row. You can also
+            type a keyword or tissue phrase in quotes. Choose Update proposal, review the
+            family and protein selections, then choose Apply grouping.
+
+            For manual family construction, open Curate families and use Group by words >
+            Group by keywords. Enter description words and review the protein ticks before
+            Apply grouping. You can keep only part of an existing family in the selection.
+
+            Proteins left out keep the families they had before the evidence proposal,
+            including their step 1 families from Build families. Quantify uses those current
+            family assignments too.
+            """;
         public static string Build(LeaveOneOutResult? validation = null, IReadOnlyList<RouteScore>? routes = null,
             string? routeFamily = null, bool panelMode = false)
         {
-            if (panelMode) return PanelEvidenceHelp.Build();
+            if (panelMode) return ScopeExpansionHelp + "\n\n" + PanelEvidenceHelp.Build();
             var options = new EvidenceClassificationOptions();
             var sb = new StringBuilder();
             sb.AppendLine("GROUPING BY EVIDENCE");
             sb.AppendLine("====================");
+            sb.AppendLine();
+            sb.AppendLine(ScopeExpansionHelp);
             sb.AppendLine();
             sb.AppendLine("Each protein is placed in a family by what UniProt's curators and its own sequence");
             sb.AppendLine("say, never by the words in its name. Each one gets a family, a tier and a reason.");

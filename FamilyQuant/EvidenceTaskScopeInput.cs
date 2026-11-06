@@ -17,6 +17,7 @@ public sealed record EvidenceTaskScopeInput(string Clade, IReadOnlyList<ReviewTa
     string Release, string Note = "", int TargetProteins = 0, int IgnoredContaminants = 0)
 {
     public const string ScopeSuggestionExplanation = "The suggested scope uses the most frequent Molecular function keyword and the most frequent tissue phrase.";
+    public static string ScopeExpansionHint => EvidenceHelp.ScopeExpansionHint;
     public string TaxaTotals => Taxa.Any(t => t.Entries == null || t.MarkedSp == null || t.MarkedTr == null)
         ? "Taxa totals unavailable"
         : $"Total entries {Taxa.Sum(t => t.Entries.GetValueOrDefault()):N0} | FASTA sp {Taxa.Sum(t => t.MarkedSp.GetValueOrDefault()):N0} | FASTA tr {Taxa.Sum(t => t.MarkedTr.GetValueOrDefault()):N0}";
