@@ -343,6 +343,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-quantitation-panel", "FamilyQuant.Tests.Program.QuantitationPanelTests(System.String)"),
         SuiteCommandRule.Covered("--test-quantitation-stages", "FamilyQuant.Tests.Program.QuantitationStageTests()"),
         SuiteCommandRule.Covered("--test-query-residue-coverage", "FamilyQuant.Tests.Program.E16RuleTests()", "FamilyQuant.Tests.Program.EvidenceClassifierTests()", "FamilyQuant.Tests.Program.EvidenceCoverageTests()", "FamilyQuant.Tests.Program.QueryResidueCoverageTests()"),
+        SuiteCommandRule.Covered("--test-database-update", "FamilyQuant.Tests.Program.DatabaseUpdateMatchingTests()"),
         SuiteCommandRule.Covered("--test-reference-panel-stream", "FamilyQuant.Tests.Program.EvidenceOperationTests()", "FamilyQuant.Tests.Program.ReferencePanelStreamTests()", "FamilyQuant.Tests.Program.ReferencePanelTests(System.String)"),
         SuiteCommandRule.Covered("--test-report-assembly", "FamilyQuant.Tests.Program.ReportAssemblyChecks(System.String)"),
         SuiteCommandRule.Covered("--test-report-attribution-cache", "FamilyQuant.Tests.Program.ReportAttributionCacheTests()"),
