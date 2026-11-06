@@ -131,5 +131,14 @@ internal static partial class Program
                 && model.Evidence.HasUnappliedPanelLinkChoices && !model.CanConfirm);
         }
         finally { panelWindow.Close(); }
+        string evidenceHelp = GroupingReviewHelp.ForMode(true);
+        Check("Evidence Help opens with the scope workflow and plain review definitions", evidenceHelp.StartsWith("GROUPING BY EVIDENCE", StringComparison.Ordinal)
+            && evidenceHelp.Contains(EvidenceScopeHelp.Build(), StringComparison.Ordinal) && evidenceHelp.Contains(EvidenceReviewTerms.Text, StringComparison.Ordinal)
+            && GroupingReviewHelp.ForMode(true, true).Contains(EvidenceReviewTerms.Text, StringComparison.Ordinal)
+            && GroupingReviewHelp.ForMode(false).StartsWith(GroupingReviewHelp.Text, StringComparison.Ordinal));
+        Check("Help distinguishes warnings from unassigned and defines counting", !evidenceHelp.Contains("stays unassigned and flagged", StringComparison.Ordinal)
+            && evidenceHelp.Contains("warning flag appears only when the analysis supplies one", StringComparison.Ordinal)
+            && evidenceHelp.Contains("entries without a fragment annotation are counted", StringComparison.Ordinal)
+            && evidenceHelp.Contains("unticked proteins keep their current family and are still quantified", StringComparison.Ordinal));
     }
 }

@@ -86,8 +86,7 @@ namespace FamilyQuant
         private void Cancel_Click(object sender, RoutedEventArgs e) { Confirmed = false; Close(); }
         private void Help_Click(object sender, RoutedEventArgs e)
         {
-            var help = TextReportWindow.Create("Grouping review help", GroupingReviewHelp.Text
-                + "\n\n" + EvidenceHelp.Build(panelMode: model.Evidence?.HasPanelRules == true)
+            var help = TextReportWindow.Create("Grouping review help", GroupingReviewHelp.ForMode(model.ModeIndex == 1, model.Evidence?.HasPanelRules == true)
                 + (model.Evidence == null ? "" : "\n\nCurrent proposal\n" + model.Evidence.Source.RuleSummary), true);
             help.Owner = this; help.WindowStartupLocation = WindowStartupLocation.CenterOwner; help.Show();
         }
