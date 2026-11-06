@@ -107,8 +107,16 @@ public static partial class EvidenceTaskDiscovery
         foreach (var group in proteins.Where(p => p.Evidence?.Reviewed == true).GroupBy(p => p.Evidence!.Accession, StringComparer.Ordinal))
             if (group.Select(p => JsonSerializer.Serialize(p.Evidence!.Keywords.OrderBy(k => k, StringComparer.Ordinal))).Distinct().Count() > 1)
                 throw new InvalidDataException("Duplicate reviewed accessions have conflicting keyword evidence. Fetch evidence again.");
+        var storedCategories = reviewed.SelectMany(p => p.Evidence!.KeywordCategories?.AsEnumerable()
+                ?? Enumerable.Empty<KeyValuePair<string, string>>())
+            .GroupBy(pair => pair.Key, StringComparer.Ordinal)
+            .ToDictionary(group => group.Key, group => group.Select(pair => pair.Value).Distinct(StringComparer.Ordinal).ToArray(), StringComparer.Ordinal);
         var keywords = reviewed.SelectMany(p => p.Evidence!.Keywords.Where(k => !string.IsNullOrWhiteSpace(k)).Distinct(StringComparer.Ordinal))
-            .GroupBy(k => k, StringComparer.Ordinal).Select(g => new EvidenceKeywordCount { Keyword = g.Key, ReviewedProteins = g.Count() })
+            .GroupBy(k => k, StringComparer.Ordinal).Select(g => new EvidenceKeywordCount
+            {
+                Keyword = g.Key, ReviewedProteins = g.Count(),
+                CategoryName = storedCategories.TryGetValue(g.Key, out var categories) && categories.Length == 1 ? categories[0] : string.Empty,
+            })
             .OrderByDescending(k => k.ReviewedProteins).ThenBy(k => k.Keyword, StringComparer.Ordinal).ToList();
         if (keywords.Count > 0)
         {

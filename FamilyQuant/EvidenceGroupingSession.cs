@@ -61,7 +61,7 @@ public sealed class EvidenceGroupingSession
             + task.Clade.TaxonId.ToString(CultureInfo.CurrentCulture) + ")",
             task.Taxa.OrderByDescending(t => t.Entries).ThenBy(t => t.TaxonId)
                 .Select(t => new ReviewTaskTaxon(t.ScientificName, t.TaxonId, t.Entries, t.MarkedSp, t.MarkedTr)).ToArray(),
-            task.Keywords.Select(k => new ReviewTaskKeyword(k.Keyword, k.ReviewedProteins)).ToArray(),
+            task.Keywords.Select(k => new ReviewTaskKeyword(k.Keyword, k.ReviewedProteins, k.CategoryName, k.CategoryId)).ToArray(),
             task.ReviewedProteins, task.ProposedScopeTerms.ToArray(), task.Release,
             "Keyword evidence releases: " + string.Join(", ", task.KeywordEvidenceReleases),
             task.TargetProteins, task.IgnoredContaminants);

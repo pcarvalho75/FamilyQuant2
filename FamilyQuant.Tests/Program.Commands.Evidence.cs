@@ -59,6 +59,12 @@ internal static partial class Program
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),
+        new("--test-keyword-categories", 70, TestCommandPhase.Raw, args => args.Contains("--test-keyword-categories", StringComparer.Ordinal), (_, _) =>
+        {
+            KeywordCategoryTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
         new("--test-taxonomy-batches", 70, TestCommandPhase.Raw, args => args.Contains("--test-taxonomy-batches", StringComparer.Ordinal), (_, workDir) =>
         {
             TaxonomyBatchTests(Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests"));

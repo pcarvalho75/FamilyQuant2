@@ -84,8 +84,22 @@ namespace FamilyQuant.Evidence
                 && description.TryGetProperty("flag", out JsonElement flag))
                 evidence.Fragment = (flag.GetString() ?? string.Empty).IndexOf("fragment", StringComparison.OrdinalIgnoreCase) >= 0;
             if (item.TryGetProperty("keywords", out JsonElement keywords))
+            {
                 evidence.Keywords = keywords.EnumerateArray().Select(k => k.GetProperty("name").GetString() ?? string.Empty)
                     .Where(k => k.Length > 0).Distinct(StringComparer.Ordinal).ToList();
+                var categories = new SortedDictionary<string, string>(StringComparer.Ordinal);
+                foreach (JsonElement keyword in keywords.EnumerateArray())
+                {
+                    string name = keyword.GetProperty("name").GetString() ?? string.Empty;
+                    if (name.Length == 0 || !keyword.TryGetProperty("category", out var category)
+                        || category.ValueKind != JsonValueKind.String || string.IsNullOrWhiteSpace(category.GetString())) continue;
+                    string value = category.GetString()!;
+                    if (categories.TryGetValue(name, out string? previous) && previous != value)
+                        throw new JsonException("UniProt returned conflicting keyword categories.");
+                    categories[name] = value;
+                }
+                if (categories.Count > 0) evidence.KeywordCategories = categories.ToDictionary(pair => pair.Key, pair => pair.Value, StringComparer.Ordinal);
+            }
             if (item.TryGetProperty("features", out JsonElement features))
                 evidence.TransmembraneCount = features.EnumerateArray()
                     .Count(f => f.GetProperty("type").GetString() == "Transmembrane");

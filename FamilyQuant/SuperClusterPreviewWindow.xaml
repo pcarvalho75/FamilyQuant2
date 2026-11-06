@@ -126,14 +126,18 @@
                                 </DataGrid>
                                 </DockPanel>
                                 <DataGrid x:Name="taskKeywordsGrid" Grid.Column="2" ItemsSource="{Binding TaskScope.Keywords}" IsReadOnly="True" AutoGenerateColumns="False"
+                                          MinColumnWidth="48"
                                           CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" MinHeight="76"
-                                          ToolTip="UniProt keyword counts among distinct reviewed accessions in this file. One accession may carry several keywords, so these rows must not be summed.">
+                                          ToolTip="UniProt keyword counts use distinct reviewed accessions and can overlap. Missing categories are shown as unavailable and can be filled by Fetch evidence.">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Keyword" Width="*" Binding="{Binding Keyword}"/>
+                                        <DataGridTextColumn Header="Category" Width="146" Binding="{Binding CategoryDisplay}"/>
                                         <DataGridTextColumn Header="Reviewed accessions" Width="176" Binding="{Binding ReviewedProteins, StringFormat=N0}" theme:TableAppearance.Numeric="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
+                            <TextBlock Text="{x:Static local:EvidenceTaskScopeInput.ScopeSuggestionExplanation}" Foreground="{DynamicResource MutedBrush}"
+                                       TextTrimming="CharacterEllipsis" Margin="0,2,0,6" ToolTip="{x:Static local:EvidenceTaskScopeInput.ScopeSuggestionExplanation}"/>
                             <WrapPanel>
                                 <TextBlock Text="{Binding TaskScope.ReviewedProteins, StringFormat='Reviewed accessions counted: {0:N0}'}" Margin="0,0,18,0"/>
                                 <TextBlock Text="{Binding TaskScope.Release, StringFormat='UniProt release: {0}'}"/>

@@ -298,6 +298,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => TaxonomyBatchTests(workDir));
             suite.Add(() => TaxaEntryCountTests());
             suite.AddWithApplication(() => TaskTaxaClipboardTests());
+            suite.Add(() => KeywordCategoryTests());
             suite.AddWithApplication(() => GroupingDiscoverySafetyTests());
             suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => PanelMultiScopeAuditTests());
