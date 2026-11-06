@@ -273,8 +273,8 @@ namespace FamilyQuant.DatabaseUpdate
             bool oldDecoys = oldKeys.Any(k => k.Side.Decoy), newDecoys = newKeys.Any(k => k.Side.Decoy);
             if (oldDecoys != newDecoys)
                 throw new InvalidDataException(oldDecoys
-                    ? "The project has decoy (Reverse_) rows and the new file has none. Make the new file the same way, as a target-decoy file."
-                    : "The new file has decoy (Reverse_) records and the project has none. Make the new file the same way as the project's database.");
+                    ? "The project has decoy (" + SequenceLabels.DecoyPrefix + ") rows and the new file has none. Make the new file the same way, as a target-decoy file."
+                    : "The new file has decoy (" + SequenceLabels.DecoyPrefix + ") records and the project has none. Make the new file the same way as the project's database.");
             bool oldContaminants = oldKeys.Any(k => k.Side.Contaminant), newContaminants = newKeys.Any(k => k.Side.Contaminant);
             if (oldContaminants != newContaminants)
                 throw new InvalidDataException(oldContaminants
