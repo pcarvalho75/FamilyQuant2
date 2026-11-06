@@ -113,6 +113,7 @@ namespace FamilyQuant
         public IReadOnlyList<ReviewFamilyRow> Families { get; }
         public IReadOnlyList<ReviewProteinRow> Unassigned { get; }
         public IReadOnlyList<ReviewLeftOutInput> LeftOut { get; }
+        public string LeftOutSummary => LeftOut.Count.ToString("N0") + " marker carriers listed across the proposal; inspect why they were placed elsewhere or left unassigned.";
         public IReadOnlyList<ArchitectureReviewViewModel> Architectures { get; }
         public ArchitectureReviewViewModel? SelectedArchitecture => Architectures.FirstOrDefault(a => a.Family == SelectedFamily?.Family);
         public IReadOnlyList<ReviewMarkerInput> Markers => Source.Markers;

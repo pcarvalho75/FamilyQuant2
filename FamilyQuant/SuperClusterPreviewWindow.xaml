@@ -268,6 +268,10 @@
                             </TabItem>
                             <TabItem Header="Architecture"><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>
                             <TabItem Header="Left out">
+                                <DockPanel>
+                                <TextBlock x:Name="leftOutLegend" DockPanel.Dock="Top" Text="{Binding Evidence.LeftOutSummary}" FontSize="11"
+                                           Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis" Margin="0,0,0,6"
+                                           ToolTip="This list never removes proteins from quantitation. A protein with no proposed family keeps its current family."/>
                                 <DataGrid x:Name="leftOutGrid" ItemsSource="{Binding Evidence.LeftOut}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"
                                           ToolTip="Proteins carrying a learned marker that were not assigned to its family, with the supplied reason. Check this list for potentially missed proteins.">
                                     <DataGrid.Columns>
@@ -281,9 +285,10 @@
                                         <DataGridTextColumn Header="Reviewed" Width="110" MinWidth="110" Binding="{Binding Reviewed}"/>
                                         <DataGridTextColumn Header="Fragment" Width="110" MinWidth="110" Binding="{Binding Fragment}"/>
                                         <DataGridTextColumn Header="Description" Width="300" MinWidth="300" Binding="{Binding Description}"/>
-                                        <DataGridTextColumn Header="Locus" Width="200" MinWidth="200" Binding="{Binding Identifier}"/>
+                                        <DataGridTextColumn Header="FASTA identifier" Width="200" MinWidth="200" Binding="{Binding Identifier}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
+                                </DockPanel>
                             </TabItem>
                             <TabItem Header="Unassigned">
                                 <DataGrid x:Name="unassignedGrid" ItemsSource="{Binding Evidence.Unassigned}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"

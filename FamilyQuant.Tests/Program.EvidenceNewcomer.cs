@@ -55,6 +55,11 @@ internal static partial class Program
             Check("missing Architecture data has a visible explanation instead of blank tables",
                 ((TextBlock)architecture.FindName("architectureEmpty")).IsVisible
                 && !((Grid)architecture.FindName("architectureContent")).IsVisible);
+            tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Left out"); PumpDispatcher();
+            var leftOut = (TextBlock)window.FindName("leftOutLegend");
+            Check("Left out explains its proposal-wide list and retention", leftOut.IsVisible && leftOut.Text == model.Evidence.LeftOutSummary
+                && leftOut.Text.StartsWith("0 marker carriers listed across the proposal", StringComparison.Ordinal)
+                && leftOut.ToolTip is string explanation && explanation.Contains("never removes proteins from quantitation", StringComparison.Ordinal));
         }
         finally { window.Close(); }
     }
