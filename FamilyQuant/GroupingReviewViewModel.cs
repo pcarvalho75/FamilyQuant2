@@ -8,7 +8,7 @@ using FamilyQuant.Evidence;
 
 namespace FamilyQuant
 {
-    public sealed class GroupingReviewViewModel : ScreenViewModel
+    public sealed partial class GroupingReviewViewModel : ScreenViewModel
     {
         private int modeIndex;
         private EvidenceReviewViewModel? evidence;
@@ -43,7 +43,15 @@ namespace FamilyQuant
             && Evidence.HasInvalidPanelLinkNotes == false;
         public bool CanEditManual => Evidence != null && !IsBusy && ScopeText == proposalScope && addToFamily != null && removeFromFamily != null;
         public int ModeIndex { get => modeIndex; set { modeIndex = value; Changed(); NotifySummary(); } }
-        public string ScopeText { get => scopeText; set { scopeText = value; Changed(); Changed(nameof(CanUpdateProposal)); NotifySummary(); } }
+        public string ScopeText
+        {
+            get => scopeText;
+            set
+            {
+                if (!Set(ref scopeText, value)) return;
+                Changed(nameof(CanUpdateProposal)); NotifySummary(); RequestScopePreview();
+            }
+        }
         public string MotifPattern { get => motifPattern; set { motifPattern = value; Changed(); Changed(nameof(CanCheckMotif)); NotifySummary(); } }
         public string MotifReport { get => motifReport; private set { motifReport = value; Changed(); Changed(nameof(MotifSummary)); } }
         public string MotifSummary => MotifReport.Length == 0 ? "Enter a pattern, then Check motif; counts include unticked members and exclude known fragments."
@@ -84,12 +92,19 @@ namespace FamilyQuant
             Func<IProgress<FetchProgress>?, CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTaskWithProgress = null,
             Func<EvidenceManualRequest, EvidenceReviewInput>? addToFamily = null,
             Func<IReadOnlyList<int>, EvidenceReviewInput>? removeFromFamily = null,
-            Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null)
+            Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null,
+            Func<string, string, CancellationToken, Task<EvidenceScopePreview>>? previewScope = null)
         {
             Keyword = new KeywordReviewViewModel(keyword); this.propose = propose; this.motif = motif;
             this.discoverTask = discoverTaskWithProgress ?? (discoverTask == null ? null : (_, token) => discoverTask(token));
             this.confirmPanelLinks = confirmPanelLinks;
+<<<<<<< HEAD
             this.addToFamily = addToFamily; this.removeFromFamily = removeFromFamily; this.updateManualChoices = updateManualChoices;
+=======
+            this.previewScope = previewScope;
+            scopePreviewBaseline = initialScope;
+            scopePreviewBaselineCaptured = !string.IsNullOrWhiteSpace(initialScope);
+>>>>>>> 1f302e17 (Z12k1 Preview added scope words from stored evidence)
             scopeText = initialScope; proposalScope = initialScope;
             Keyword.PropertyChanged += (_, _) => NotifySummary();
             SetEvidence(input);
@@ -125,7 +140,10 @@ namespace FamilyQuant
                 // Preserve every supplied phrase through the same parser used by the grouping command.
                 string suggested = facts.ReviewedProteins == 0 ? ""
                     : string.Join(", ", facts.ProposedScopeTerms.Select(t => "\"" + t + "\""));
-                if (string.IsNullOrWhiteSpace(ScopeText)) ScopeText = suggested;
+                suppressScopePreview = true;
+                try { if (string.IsNullOrWhiteSpace(ScopeText)) ScopeText = suggested; }
+                finally { suppressScopePreview = false; }
+                if (!scopePreviewBaselineCaptured) SetScopePreviewBaseline(ScopeText);
                 Status = facts.ReviewedProteins == 0
                     ? "No scope can be suggested: this project has no UniProt evidence yet. Fetch evidence first, or type a scope."
                     : "Review the database taxa, keyword counts and suggested scope, then confirm or edit the scope with Update proposal.";
@@ -153,6 +171,7 @@ namespace FamilyQuant
                 if (ScopeText != requestedScope) { Status = "Scope changed. Update the proposal before applying."; return; }
                 proposalScope = requestedScope; manualFailure = ""; SetEvidence(input);
                 RestoreManualState(manual);
+                SetScopePreviewBaseline(requestedScope);
                 TaskScopeExpanded = false;
                 Status = "Proposal updated. Review the ticks before applying.";
             }
@@ -161,6 +180,7 @@ namespace FamilyQuant
         }
         public void CancelPending()
         {
+            CancelScopePreview();
             bool wasBusy = IsBusy;
             generation++; discoveryCancellation?.Cancel(); IsBusy = false;
             if (wasBusy) Status = "Cancelled. Previous review is kept.";

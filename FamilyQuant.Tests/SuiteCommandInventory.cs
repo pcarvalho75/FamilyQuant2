@@ -287,6 +287,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-panel-recovery", "FamilyQuant.Tests.Program.PanelRecoveryTests(System.String)", "FamilyQuant.Tests.Program.PanelRetryUiTests()", "FamilyQuant.Tests.Program.InheritedRetryProgressTests()"),
         SuiteCommandRule.Covered("--test-evidence-task", "FamilyQuant.Tests.Program.EvidenceTaskTests()"),
         SuiteCommandRule.Covered("--test-taxonomy-batches", "FamilyQuant.Tests.Program.TaxonomyBatchTests(System.String)"),
+        SuiteCommandRule.Covered("--test-scope-change-preview", "FamilyQuant.Tests.Program.ScopeChangePreviewTests(System.String)"),
         SuiteCommandRule.Covered("--test-grouping-discovery-safety", "FamilyQuant.Tests.Program.GroupingDiscoverySafetyTests()"),
         SuiteCommandRule.Covered("--test-organism-evidence", "FamilyQuant.Tests.Program.OrganismEvidenceTests()"),
         SuiteCommandRule.Covered("--test-evidence-task-scope", "FamilyQuant.Tests.Program.EvidenceTaskScopeRecipeTests()", "FamilyQuant.Tests.Program.EvidenceTaskScopeTests()", "FamilyQuant.Tests.Program.EvidenceTaskScopeWindowTests(System.String)"),

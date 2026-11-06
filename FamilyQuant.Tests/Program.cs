@@ -310,6 +310,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => EvidenceTaskTests());
             suite.Add(() => TaxonomyBatchTests(workDir));
             suite.Add(() => OrganismEvidenceTests());
+            suite.AddWithApplication(() => ScopeChangePreviewTests(Path.Combine(workDir, "scope-preview")));
             suite.AddWithApplication(() => GroupingDiscoverySafetyTests());
             suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => PanelMultiScopeAuditTests());

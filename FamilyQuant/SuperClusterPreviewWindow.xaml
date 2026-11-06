@@ -136,6 +136,31 @@
                         <TextBlock DockPanel.Dock="Left" Text="Scope" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Words to match in the evidence keywords and tissue fields. These are user choices, never a built-in family list."/>
                     </DockPanel>
+                    <Border x:Name="ScopeChangePreviewPanel" Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}"
+                            Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource MutedBrush}" BorderThickness="1" CornerRadius="4" Padding="10" Margin="0,8,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Stored evidence preview" FontWeight="SemiBold"/>
+                            <TextBlock Text="{Binding ScopePreviewTerms}" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                            <TextBlock Text="{Binding ScopePreviewSummary}" TextWrapping="Wrap" Margin="0,4,0,6"/>
+                            <DataGrid x:Name="ScopePreviewFamiliesGrid" ItemsSource="{Binding ScopePreviewFamilies}" AutoGenerateColumns="False" IsReadOnly="True"
+                                      CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" MaxHeight="160" MinColumnWidth="48"
+                                      ToolTip="Matches are read from stored keywords and tissue annotations. Choose Update proposal to build and review the family choices.">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="UniProt family" Binding="{Binding Family}" Width="190"/>
+                                    <DataGridTextColumn Header="Entries" Binding="{Binding Proteins, StringFormat=N0}" Width="76" theme:TableAppearance.Numeric="True"/>
+                                    <DataGridTextColumn Header="Reviewed" Binding="{Binding Reviewed, StringFormat=N0}" Width="88" theme:TableAppearance.Numeric="True"/>
+                                    <DataGridTextColumn Header="Unreviewed" Binding="{Binding Unreviewed, StringFormat=N0}" Width="102" theme:TableAppearance.Numeric="True"/>
+                                    <DataGridTextColumn Header="Status unavailable" Binding="{Binding UnknownStatus, StringFormat=N0}" Width="144" theme:TableAppearance.Numeric="True"/>
+                                    <DataGridTextColumn Header="New matches" Binding="{Binding Additional, StringFormat=N0}" Width="120" theme:TableAppearance.Numeric="True"/>
+                                    <DataGridTextColumn Header="A few names" Binding="{Binding ExamplesText}" Width="*">
+                                        <DataGridTextColumn.ElementStyle><Style TargetType="TextBlock"><Setter Property="TextWrapping" Value="Wrap"/><Setter Property="ToolTip" Value="{Binding ExamplesText}"/></Style></DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <TextBlock Text="{Binding ScopePreviewEmptyText}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding ScopePreviewRelativeNote}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,6,0,0"/>
+                        </StackPanel>
+                    </Border>
                     <TextBlock Text="{Binding Status}" Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
                                TextWrapping="NoWrap" Margin="0,8,0,0" ToolTip="{Binding Status}"/>
                     <TextBlock x:Name="TextBlockQueryCoverageRule" Text="{x:Static local:EvidenceProposalPresentation.QueryCoverageSummary}" ToolTip="{x:Static local:EvidenceProposalPresentation.QueryCoverageRule}"
