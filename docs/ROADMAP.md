@@ -174,6 +174,15 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 | Z10f | Tag v2.1.9, merge into master, draft with digests checked, published as Latest, README pushed | L | 0.1 | Z10d, Z10e, Z10b | Z10g | Latest is v2.1.9 | Orchestrator | | 0 | 0 | |
 | Z10g | Update check on the public files: an installed 2.1.8 test root sees the banner, updates in test mode, reopens once | L | 0.1 | Z10f | | PASS | HM | | 0 | 0 | |
 
+### W11 Release 2.1.10: Ana's crash and a crash log (FQFetch, FQHome, Orchestrator)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Z11a | Ana's crash (11-06): on 2.1.9, Group by evidence closed the program a few seconds in with no message; reproduce on real data with live UniProt, fix the cause with a test that reproduces it, and make that path report errors in its window instead of closing | H | 0.6 | 🟢 | Z11c | The reproduction passes; reviewed | FE | | 0 | 0 | |
+| Z11b | A crash log: global handlers write a report (version, Windows, the full exception stack, the running operation) to a logs folder and tell the user where it is; Help > Open error logs folder (Paulo, 11-06: "is it worth putting an error log") | M | 0.4 | 🟢 | Z11c | A thrown exception writes a report; reviewed | HM | | 0 | 0 | |
+| Z11c | Version 2.1.10.0, notes and README; the final integration and the full suite | M | 0.3 | Z11a, Z11b | Z11d | Every check green | HM, Orchestrator | | 0 | 0 | |
+| Z11d | Package, publish as Latest, update check from an installed 2.1.9 | L | 0.3 | Z11c | | PASS | HM, Orchestrator | | 0 | 0 | |
+
 ## Critical path
 
 2.1.8: Z8a and Z8a2 (FQFetch), the README review Z8b, then the final integration Z8c1, the suite Z8c2 with the package Z8d1 and Z8d2 in parallel, publish Z8d3 to Z8d5, update check Z8e1 to Z8e3. Rough wall-clock: 30 to 50 minutes from 14:30, a range, never a promise.
