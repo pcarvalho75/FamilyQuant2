@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -36,7 +37,11 @@ internal static partial class Program
                 Themes.ThemeManager.Apply(theme);
                 var input = ReviewLayoutFixture();
                 var window = new SuperClusterPreviewWindow(new SuperClusterPreview(new List<FastaItemExtended>(), null,
-                    "", "", KeywordMatch.All, null, null), input, null, evidenceMode: true)
+                    "", "", KeywordMatch.All, null, null), input, _ => input, evidenceMode: true,
+                    discoverTask: _ => Task.FromResult(new EvidenceTaskScopeInput("Supplied clade",
+                        Enumerable.Range(0, 5).Select(i => new ReviewTaskTaxon("Invented taxon " + i, 100 + i)).ToArray(),
+                        Enumerable.Range(0, 12).Select(i => new ReviewTaskKeyword("Supplied keyword " + i, 16 - i)).ToArray(),
+                        16, new[] { "Supplied function" }, "fixture-release", TargetProteins: 32)))
                 {
                     Width = size.Width, Height = size.Height, Left = -30000, Top = -30000,
                     WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false,
@@ -63,6 +68,21 @@ internal static partial class Program
                     {
                         string path = Path.Combine(output, theme.ToString().ToLowerInvariant(), size.Width + "x" + size.Height, "families.png");
                         Directory.CreateDirectory(Path.GetDirectoryName(path)!); ScreenHarness.Save(window, path, size.Width, size.Height);
+                    }
+                    var tabs = (TabControl)window.FindName("evidenceTabs");
+                    tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Architecture");
+                    PumpDispatcher(); window.UpdateLayout();
+                    var architecture = (ArchitectureReviewControl)window.FindName("architectureReview");
+                    var groups = (DataGrid)architecture.FindName("groupGrid");
+                    var members = (DataGrid)architecture.FindName("memberGrid");
+                    Check(label + " expanded scope leaves two usable Architecture tables", groups.ActualHeight >= 110 && members.ActualHeight >= 110,
+                        "groups=" + groups.ActualHeight + "; members=" + members.ActualHeight);
+                    Check(label + " Architecture has a row splitter between groups and members", WalkTree(architecture).OfType<GridSplitter>()
+                        .Any(s => s.ResizeDirection == GridResizeDirection.Rows && s.ActualHeight >= 6));
+                    if (output != null)
+                    {
+                        string path = Path.Combine(output, theme.ToString().ToLowerInvariant(), size.Width + "x" + size.Height, "architecture.png");
+                        ScreenHarness.Save(window, path, size.Width, size.Height);
                     }
                 }
                 finally { window.Close(); }
