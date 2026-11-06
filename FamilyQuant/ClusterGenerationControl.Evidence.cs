@@ -99,6 +99,7 @@ public partial class ClusterGenerationControl
         var window = new SuperClusterPreviewWindow(preview, null, session.Propose, session.CountMotif,
             evidenceMode: startWithEvidence, confirmPanelLinks: session.ConfirmPanelLinks,
             discoverTaskWithProgress: session.DiscoverTaskAsync) { Owner = owner };
+        window.AlignmentSource = highlighted => FamilyQuant.Evidence.Alignment.AlignmentCandidates.Find(fcf, session.Proposal, highlighted);
         window.ShowDialog();
         if (!window.Confirmed) return false;
         if (!window.IsEvidenceMode) return true;

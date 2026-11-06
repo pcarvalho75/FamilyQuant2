@@ -170,6 +170,7 @@
                                         <Button Content="Untick flagged" Click="UntickFlagged_Click" ToolTip="Clears selected proteins with a supplied evidence flag. All unflagged selections stay as they were."/>
                                         <Button Content="Tick selected" Click="EvidenceTickSelected_Click" ToolTip="Selects only the highlighted protein rows for their supplied proposed families."/>
                                         <Button Content="Untick selected" Click="EvidenceUntickSelected_Click" ToolTip="Clears only the highlighted protein rows. Their current document families stay unchanged until Apply."/>
+                                        <Button x:Name="alignSelectedButton" Content="Align selected" Click="AlignSelected_Click" Loaded="AlignSelected_Loaded" IsEnabled="False" ToolTip="Aligns the highlighted rows, the first highlighted first, with their nearest reviewed protein and reviewed family members; nothing in the proposal changes. Highlight at least one row to use it." ToolTipService.ShowOnDisabled="True"/>
                                     </WrapPanel>
                                     <DataGrid x:Name="evidenceGrid" ItemsSource="{Binding VisibleProteins}" AutoGenerateColumns="False" CanUserAddRows="False"
                                               CanUserDeleteRows="False" SelectionMode="Extended" ToolTip="Protein-level proposal with the supplied reason, tier and flags. Ticks and names remain review choices until Apply.">
