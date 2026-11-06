@@ -49,7 +49,7 @@ public static partial class InstallerWindowPreview
             {
                 var controller = new PreviewController
                 {
-                    Existing = screen is "older" or "confirm-older" ? new(PreviewController.Folder, "2.1.8.0", true, true)
+                    Existing = screen is "older" or "confirm-older" ? new(PreviewController.Folder, "2.1.9.0", true, true)
                         : screen == "equal" ? new(PreviewController.Folder, "2.1.4.0", true, true)
                         : screen.StartsWith("upgrade", StringComparison.Ordinal) || screen.StartsWith("uninstall", StringComparison.Ordinal)
                         ? new ExistingInstallation(PreviewController.Folder, "2.1.2", true, true) : null,
