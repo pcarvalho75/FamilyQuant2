@@ -38,6 +38,12 @@ internal static partial class Program
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),
+        new("--test-coherence-source-details", 54, TestCommandPhase.Raw, args => args.Contains("--test-coherence-source-details", StringComparer.Ordinal), (args, _) =>
+        {
+            CoherenceSourceDetailsTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
     ];
 
     private static int RunCurationLayoutChecks(string[] args, string workDir)

@@ -6,6 +6,8 @@ public static class EvidenceReviewTerms
     public const string Text = "READING THE FAMILY PROPOSAL\n"
         + "Ticks: ticked proteins join the named family on Apply grouping; unticked proteins keep their current family and are still quantified.\n"
         + "Red italic: the protein carries a warning flag; read its recorded details before deciding whether to tick it.\n"
+        + "Coherence ranges combine reviewed members in your file and the reference panel from all species, each accession once with the file copy first. Each warning gives the relevant source counts; complete here means not marked as a fragment.\n"
+        + "Length and cysteine ranges use complete members; helix limits use complete members with recorded counts. Domain warnings compare all reviewed members and separately show how many complete members had domain calls.\n"
         + "Total includes unticked and locked members; Reviewed is the subset marked reviewed in stored UniProt evidence.\n"
         + "Evidence source says how the family was supported; Reason explains the decision for this protein.\n"
         + "Reviewed relative means another reviewed protein compared by sequence; identity measures similarity and coverage says how much of this protein was compared.\n"

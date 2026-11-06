@@ -313,6 +313,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => EvidenceOperationTests());
             suite.Section("Coherence check - what the reviewed members of a family ever show");
             suite.Add(() => CoherenceCheckTests());
+            suite.Add(() => CoherenceSourceDetailsTests());
             suite.Add(() => E16RuleTests());
             suite.Section("Motif check - the user's patterns counted per family on complete entries");
             suite.Add(() => MotifCheckTests(workDir));
