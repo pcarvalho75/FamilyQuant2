@@ -20,6 +20,12 @@ internal static partial class Program
         new("--test-ui-colors", 48, TestCommandPhase.Raw, args => args.Contains("--test-ui-colors", StringComparer.Ordinal), RunUiColorChecks),
         new("--test-review-wait", 49, TestCommandPhase.Raw, args => args.Contains("--test-review-wait", StringComparer.Ordinal), RunReviewWaitChecks),
         new("--test-ui-wording", 50, TestCommandPhase.Raw, args => args.Contains("--test-ui-wording", StringComparer.Ordinal), RunUiWordingChecks),
+        new("--test-evidence-review-clarity", 51, TestCommandPhase.Raw, args => args.Contains("--test-evidence-review-clarity", StringComparer.Ordinal), (args, _) =>
+        {
+            EvidenceReviewClarityTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
     ];
 
     private static int RunCurationLayoutChecks(string[] args, string workDir)

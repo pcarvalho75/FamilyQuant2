@@ -164,6 +164,10 @@
                         <TabControl x:Name="evidenceTabs" Grid.Column="2">
                             <TabItem Header="Proteins">
                                 <DockPanel DataContext="{Binding Evidence}">
+                                    <TextBlock x:Name="proteinWarningLegend" DockPanel.Dock="Top" Margin="0,0,0,6"
+                                               Text="Red italic rows carry a warning flag; hover over Flags for what to check."
+                                               Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
+                                               ToolTip="Red italic rows carry a warning flag; hover over Flags for what to check."/>
                                     <TextBox DockPanel.Dock="Top" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"
                                              ToolTip="Filters the displayed proteins by identifier, description, reason or flags. It does not change your ticks."/>
                                     <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,6">
@@ -176,7 +180,7 @@
                                         <DataGrid.RowStyle><Style TargetType="DataGridRow"><Style.Triggers>
                                             <DataTrigger Binding="{Binding IsFlagged}" Value="True">
                                                 <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"/><Setter Property="FontStyle" Value="Italic"/>
-                                                <Setter Property="ToolTip" Value="{Binding Flags}"/>
+                                                <Setter Property="ToolTip" Value="{Binding FlagsHelp}"/>
                                             </DataTrigger>
                                         </Style.Triggers></Style></DataGrid.RowStyle>
                                         <DataGrid.Columns>
@@ -184,7 +188,11 @@
                                             <DataGridTextColumn Header="Accession" Width="140" MinWidth="140" IsReadOnly="True" Binding="{Binding Accession}"/>
                                             <DataGridTextColumn Header="Tier" Width="140" MinWidth="140" IsReadOnly="True" Binding="{Binding Tier}"/>
                                             <DataGridTextColumn Header="Reason" Width="*" MinWidth="200" IsReadOnly="True" Binding="{Binding Reason}"/>
-                                            <DataGridTextColumn Header="Flags" Width="180" MinWidth="180" IsReadOnly="True" Binding="{Binding Flags}"/>
+                                            <DataGridTextColumn Header="Flags" Width="180" MinWidth="180" IsReadOnly="True" Binding="{Binding Flags}">
+                                                <DataGridTextColumn.CellStyle><Style TargetType="DataGridCell">
+                                                    <Setter Property="ToolTip" Value="{Binding FlagsHelp}"/>
+                                                </Style></DataGridTextColumn.CellStyle>
+                                            </DataGridTextColumn>
                                             <DataGridTextColumn Header="Proposed family" Width="200" MinWidth="200" IsReadOnly="True" Binding="{Binding Family}"/>
                                             <DataGridTextColumn Header="Neighbour" Width="180" MinWidth="180" IsReadOnly="True" Binding="{Binding Neighbour}"/>
                                             <DataGridTextColumn Header="Domains" Width="180" MinWidth="180" IsReadOnly="True" Binding="{Binding Domains}"/>

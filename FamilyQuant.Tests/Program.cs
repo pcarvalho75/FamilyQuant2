@@ -249,6 +249,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => UndoUiTests(workDir));
             suite.Section("Super Cluster preview - what will join, before anything changes");
             suite.Add(() => SuperClusterPreviewTests());
+            suite.AddWithApplication(() => EvidenceReviewClarityTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
             suite.AddWithApplication(() => GridCopyTests());
             suite.AddWithApplication(() => GridCopyRowNumberTests());

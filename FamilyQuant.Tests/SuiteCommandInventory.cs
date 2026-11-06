@@ -398,6 +398,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-results", "FamilyQuant.Tests.Program.ResultsViewModelTests()"),
         SuiteCommandRule.Covered("--test-results-tooltips", "FamilyQuant.Tests.Program.ResultsTooltipTests()"),
         SuiteCommandRule.Covered("--test-review-wait", "FamilyQuant.Tests.Program.ReviewWorkWaitTests()"),
+        SuiteCommandRule.Covered("--test-evidence-review-clarity", "FamilyQuant.Tests.Program.EvidenceReviewClarityTests()"),
         SuiteCommandRule.Covered("--test-scope-visibility", "FamilyQuant.Tests.Program.ScopeVisibilityTests()"),
         SuiteCommandRule.Covered("--test-shell-dialogs", "FamilyQuant.Tests.Program.BusyOperationTests(System.String)", "FamilyQuant.Tests.Program.ShellDialogTests(System.String)"),
         SuiteCommandRule.Covered("--test-shell-evidence-cancel", "FamilyQuant.Tests.Program.ShellEvidenceFetchCancellationTests()"),

@@ -39,7 +39,8 @@ namespace FamilyQuant
         public string Neighbour => Source.Neighbour;
         public string Description => Source.Description;
         public string Domains => Source.Domains;
-        public string Flags => string.Join("; ", Source.Flags);
+        public string Flags => string.Join("; ", Source.Flags.Select(f => EvidenceWarningText.Describe(f).Label));
+        public string FlagsHelp => string.Join(Environment.NewLine + Environment.NewLine, Source.Flags.Select(f => EvidenceWarningText.Describe(f).Help));
         public bool IsFlagged => Source.Flags.Count > 0;
         public bool HasScopeAnnotation => Source.HasScopeAnnotation;
         public bool CanSelect => Source.Family.Length > 0 && !Source.IsLocked;
@@ -171,7 +172,8 @@ namespace FamilyQuant
 
         private bool Matches(ReviewProteinRow row) => searchText.Length == 0 || row.Identifier.Contains(searchText, StringComparison.OrdinalIgnoreCase)
             || row.Description.Contains(searchText, StringComparison.OrdinalIgnoreCase) || row.Reason.Contains(searchText, StringComparison.OrdinalIgnoreCase)
-            || row.Flags.Contains(searchText, StringComparison.OrdinalIgnoreCase);
+            || row.Flags.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+            || row.Source.Flags.Any(f => f.Contains(searchText, StringComparison.OrdinalIgnoreCase));
         private void SelectionChanged(ReviewProteinRow row, int delta)
         {
             if (row.Family.Length == 0)
