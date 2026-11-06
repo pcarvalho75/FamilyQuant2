@@ -68,6 +68,8 @@ namespace FamilyQuant
             sb.AppendLine("5. " + WorkflowNames.DeNovoReview + " is optional: it inspects de novo calls beside PatternLab, and");
             sb.AppendLine("   Quantify does not need it.");
             sb.AppendLine();
+            sb.AppendLine(DatabaseUpdateHelp.Text);
+            sb.AppendLine();
             sb.AppendLine("The families and the quantitation you keep live in one FamilyQuant project file, a");
             sb.AppendLine(".fqproj, written by File > Save. Beyond the share above, Quantify measures each");
             sb.AppendLine("peptide's full isotope envelope straight from the RAW and stores it in that project,");

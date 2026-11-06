@@ -106,6 +106,20 @@ public static class ReportMethods
                 "These are the user's saved choices and notes. A changed panel definition makes a choice out of date; a choice does not prove an assignment was applied."));
         }
 
+        if (curation.DatabaseUpdates is { Count: > 0 } updates)
+        {
+            blocks.Add(new ReportParagraph("methods-database-update", "Database updates retain existing curation and place additions without merging existing families; exact sources, matching/placement methods and name choices are retained in the saved update records."));
+            var updateRows = updates.Select(update => (IReadOnlyList<string>)new[]
+            {
+                update.UpdatedAtUtc == default ? "Not recorded" : update.UpdatedAtUtc.ToUniversalTime().ToString("O", CultureInfo.InvariantCulture),
+                Value(update.Previous.FileName), Value(update.Previous.Sha256), Value(update.New.FileName), Value(update.New.Sha256), Value(update.Method),
+                Number(update.Counts.Added), Number(update.Counts.Removed), Number(update.Counts.SequenceChanged), Number(update.Counts.NamesKept)
+            }).ToArray();
+            blocks.Add(new ReportTable("methods-database-updates", "Saved database updates",
+                new[] { "Updated at UTC", "Previous database", "Previous SHA-256", "New database", "New SHA-256", "Recorded method", "Targets added", "Targets removed", "Target sequences changed", "Names kept" },
+                updateRows, "Counts refer to targets; decoy changes remain in the update record and per-row CSV. Values come from saved records; current defaults do not replace missing methods or source hashes."));
+        }
+
         if (curation.EvidenceRecipe?.ManualChoices is { Count: > 0 } handChoices)
         {
             var recipe = curation.EvidenceRecipe;

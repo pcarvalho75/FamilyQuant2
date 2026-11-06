@@ -68,6 +68,12 @@ internal static partial class Program
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),
+        new("--test-database-update-exports", 59, TestCommandPhase.Raw, args => args.Contains("--test-database-update-exports", StringComparer.Ordinal), (args, _) =>
+        {
+            DatabaseUpdateExportTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
     ];
 
     private static int RunCurationLayoutChecks(string[] args, string workDir)
