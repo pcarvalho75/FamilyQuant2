@@ -101,14 +101,22 @@
                             <TextBlock Text="{Binding TaskScope.Clade, StringFormat='Database clade: {0}'}" TextTrimming="CharacterEllipsis" ToolTip="{Binding TaskScope.Clade}"/>
                             <Grid Margin="0,6,0,6" MaxHeight="140">
                                 <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                <DockPanel>
+                                <TextBlock x:Name="taskTaxaTotals" DockPanel.Dock="Bottom" Text="{Binding TaskScope.TaxaTotals}" Margin="0,4,0,0"
+                                           TextTrimming="CharacterEllipsis" ToolTip="Each non-contaminant target record counts once per distinct OX taxon using its FASTA prefix. Joined taxa can make row sums exceed the target count."/>
                                 <DataGrid x:Name="taskTaxaGrid" ItemsSource="{Binding TaskScope.Taxa}" IsReadOnly="True" AutoGenerateColumns="False"
+                                          MinColumnWidth="48"
                                           CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" MinHeight="76"
-                                          ToolTip="Taxa recorded for this database, with their UniProt taxonomy identifiers.">
+                                          ToolTip="FASTA target entries by OX taxon, sorted by count, with sp and tr taken from the header prefix. Contaminants and decoys are excluded.">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Taxon" Width="*" Binding="{Binding Name}"/>
-                                        <DataGridTextColumn Header="Taxonomy ID" Width="128" Binding="{Binding TaxonomyId}" theme:TableAppearance.Numeric="True"/>
+                                        <DataGridTextColumn Header="Taxonomy ID" Width="96" Binding="{Binding TaxonomyId}" theme:TableAppearance.Numeric="True"/>
+                                        <DataGridTextColumn Header="Entries" Width="70" Binding="{Binding Entries, StringFormat=N0}" theme:TableAppearance.Numeric="True"/>
+                                        <DataGridTextColumn Header="FASTA sp" Width="76" Binding="{Binding MarkedSp, StringFormat=N0}" theme:TableAppearance.Numeric="True"/>
+                                        <DataGridTextColumn Header="FASTA tr" Width="76" Binding="{Binding MarkedTr, StringFormat=N0}" theme:TableAppearance.Numeric="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
+                                </DockPanel>
                                 <DataGrid x:Name="taskKeywordsGrid" Grid.Column="2" ItemsSource="{Binding TaskScope.Keywords}" IsReadOnly="True" AutoGenerateColumns="False"
                                           CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" MinHeight="76"
                                           ToolTip="UniProt keyword counts among distinct reviewed accessions in this file. One accession may carry several keywords, so these rows must not be summed.">

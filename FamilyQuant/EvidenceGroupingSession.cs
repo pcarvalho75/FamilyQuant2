@@ -59,7 +59,8 @@ public sealed class EvidenceGroupingSession
         taskProposal = task;
         return new EvidenceTaskScopeInput(task.Clade.ScientificName + " (" + task.Clade.Rank + ", "
             + task.Clade.TaxonId.ToString(CultureInfo.CurrentCulture) + ")",
-            task.Taxa.Select(t => new ReviewTaskTaxon(t.ScientificName, t.TaxonId)).ToArray(),
+            task.Taxa.OrderByDescending(t => t.Entries).ThenBy(t => t.TaxonId)
+                .Select(t => new ReviewTaskTaxon(t.ScientificName, t.TaxonId, t.Entries, t.MarkedSp, t.MarkedTr)).ToArray(),
             task.Keywords.Select(k => new ReviewTaskKeyword(k.Keyword, k.ReviewedProteins)).ToArray(),
             task.ReviewedProteins, task.ProposedScopeTerms.ToArray(), task.Release,
             "Keyword evidence releases: " + string.Join(", ", task.KeywordEvidenceReleases),

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,6 +17,12 @@ public sealed class EvidenceTaxon
     public int TaxonId { get; set; }
     public string ScientificName { get; set; } = string.Empty;
     public string Rank { get; set; } = string.Empty;
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? Entries { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? MarkedSp { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? MarkedTr { get; set; }
 }
 
 public sealed class EvidenceKeywordCount
@@ -75,6 +82,7 @@ public static partial class EvidenceTaskDiscovery
         var taxa = headers.GroupBy(h => h.TaxonId).OrderBy(g => g.Key).Select(g => new EvidenceTaxon
         {
             TaxonId = g.Key, ScientificName = string.Join("; ", g.Select(h => h.ScientificName).Distinct(StringComparer.Ordinal).OrderBy(n => n, StringComparer.Ordinal)),
+            Entries = g.Count(), MarkedSp = g.Sum(h => h.MarkedSp.GetValueOrDefault()), MarkedTr = g.Sum(h => h.MarkedTr.GetValueOrDefault()),
         }).ToList();
         using HttpClient client = handler == null ? new HttpClient() : new HttpClient(handler, disposeHandler: false);
         client.Timeout = TimeSpan.FromSeconds(100);
@@ -224,6 +232,8 @@ public static partial class EvidenceTaskDiscovery
         {
             TaxonId = int.Parse(match.Groups["id"].Value, NumberStyles.None, CultureInfo.InvariantCulture),
             ScientificName = match.Groups["name"].Value.Trim(),
+            Entries = 1, MarkedSp = identifier.StartsWith("sp|", StringComparison.Ordinal) ? 1 : 0,
+            MarkedTr = identifier.StartsWith("tr|", StringComparison.Ordinal) ? 1 : 0,
         }).GroupBy(taxon => taxon.TaxonId).Select(group => group.First()).ToArray();
     }
 

@@ -11,7 +11,7 @@ internal static partial class Program
     {
         Section("Evidence task scope - supplied facts, editable confirmation and late discovery");
         var input = new EvidenceTaskScopeInput("Supplied clade (456)",
-            new[] { new ReviewTaskTaxon("Supplied species", 123), new ReviewTaskTaxon("Other supplied species", 124) },
+            new[] { new ReviewTaskTaxon("Supplied species", 123, 37, 12, 25), new ReviewTaskTaxon("Other supplied species", 124, 13, 4, 9) },
             new[] { new ReviewTaskKeyword("Supplied keyword", 11), new ReviewTaskKeyword("Other keyword", 4) },
             16, new[] { "Supplied keyword" }, "fixture_release", TargetProteins: 50);
         SuperClusterPreview Keyword() => new(new System.Collections.Generic.List<FastaItemExtended>(), null,
@@ -62,7 +62,7 @@ internal static partial class Program
         System.IO.Directory.CreateDirectory(output);
         var previousTheme = Themes.ThemeManager.Current;
         var facts = new EvidenceTaskScopeInput("Supplied clade (456)",
-            new[] { new ReviewTaskTaxon("Supplied species", 123), new ReviewTaskTaxon("Other supplied species", 124) },
+            new[] { new ReviewTaskTaxon("Supplied species", 123, 37, 12, 25), new ReviewTaskTaxon("Other supplied species", 124, 13, 4, 9) },
             new[] { new ReviewTaskKeyword("Supplied keyword", 11), new ReviewTaskKeyword("Other keyword", 4) },
             16, new[] { "Supplied keyword" }, "fixture_release", "Synthetic presentation fixture, no scientific result.", TargetProteins: 50);
         try
@@ -88,6 +88,9 @@ internal static partial class Program
                         ReferenceEquals(model.TaskScope, facts) && ReferenceEquals(taxa.ItemsSource, facts.Taxa)
                         && ReferenceEquals(keywords.ItemsSource, facts.Keywords)
                         && taxa.IsReadOnly && keywords.IsReadOnly);
+                    Check(theme + " taxa table displays header counts and a totals line",
+                        taxa.Columns.Select(c => c.Header as string).SequenceEqual(new[] { "Taxon", "Taxonomy ID", "Entries", "FASTA sp", "FASTA tr" })
+                        && ((System.Windows.Controls.TextBlock)window.FindName("taskTaxaTotals")).Text == "Total entries 50 | FASTA sp 16 | FASTA tr 34");
                     Check(theme + " the database clade is present in the rendered view text",
                         WalkTree(window).OfType<System.Windows.Controls.TextBlock>()
                             .Any(t => t.Text == "Database clade: " + facts.Clade));
@@ -96,6 +99,8 @@ internal static partial class Program
                     {
                         window.Width = size.Item1; window.Height = size.Item2; PumpDispatcher();
                         Thread.Sleep(350); PumpDispatcher();
+                        Check(theme + " taxa columns fit the " + size.Item1 + " viewport",
+                            taxa.Columns.Sum(c => c.ActualWidth) <= taxa.ActualWidth + 1);
                         ScreenHarness.Save(window, System.IO.Path.Combine(output, $"scope-{theme}-{size.Item1}.png"), size.Item1, size.Item2);
                     }
                     var scopeBox = WalkTree(window).OfType<System.Windows.Controls.TextBox>()
