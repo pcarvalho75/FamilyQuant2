@@ -22,7 +22,6 @@ public static partial class EvidenceTaskDiscovery
     {
         var batches = TaxonomyBatches(taxa, perTaxonComparison);
         var paths = new Dictionary<int, List<EvidenceTaxon>>();
-        int completed = 0;
         // The comparison route retains the old single-entry payload for proposal parity checks.
         var cache = perTaxonComparison ? null : await UniProtBatchCache.OpenAsync(
             string.Join("\n", batches.Select(b => TaxonomyUrl(b, false))), client, handler, options,
@@ -52,14 +51,14 @@ public static partial class EvidenceTaskDiscovery
             token.ThrowIfCancellationRequested();
             if (saved == null && cache != null) await cache.StoreAsync(url, json, batch.Count, token).ConfigureAwait(false);
             foreach (var pair in fetched) paths.Add(pair.Key, pair.Value);
-            completed++;
             Report(saved == null ? string.Empty : "Using saved taxonomy batches");
         }
         return (paths, release ?? string.Empty);
 
         void Report(string message) => progress?.Report(new FetchProgress
         {
-            CompletedBatches = completed, TotalBatches = batches.Count, Asked = taxa.Count, Found = paths.Count, Message = message,
+            // Task discovery's existing busy labels and operation logs count taxa, not requests.
+            CompletedBatches = paths.Count, TotalBatches = taxa.Count, Asked = taxa.Count, Found = paths.Count, Message = message,
         });
     }
 
