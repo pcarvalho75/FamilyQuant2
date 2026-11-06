@@ -294,6 +294,15 @@ namespace FamilyQuant.Tests
                 help.Contains("chimeric spectrum") && help.Contains("cannot establish duplication"));
             Check("and says why charge and precursor m/z follow the scan gate",
                 help.Contains("Charge and m/z are") && help.Contains("explicit gates"));
+            string reconcileJoin = System.Text.RegularExpressions.Regex.Match(help,
+                @"Reconcile first joins.*?Each filtered row").Value;
+            Check("Reconcile Help describes its direct 20-ppm reported-m/z join",
+                reconcileJoin.Contains("direct precursor m/z match within 20 ppm", StringComparison.Ordinal)
+                && reconcileJoin.Contains("reported m/z values", StringComparison.Ordinal)
+                && !reconcileJoin.Contains("isotope-error-aware", StringComparison.Ordinal)
+                && !reconcileJoin.Contains("M+-1", StringComparison.Ordinal));
+            Check("Reconcile Help identifies Quantify's isotope-aware matching rules",
+                reconcileJoin.Contains("Quantify's PatternLab-wins rule and cross-side suppression use isotope-aware matching", StringComparison.Ordinal));
 
             // 4. What the review queue decides, and why it is manual.
             Check("the de novo page says which two verdicts reach the review queue",
