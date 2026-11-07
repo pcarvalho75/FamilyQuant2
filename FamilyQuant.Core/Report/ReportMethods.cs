@@ -56,6 +56,12 @@ public static class ReportMethods
             inputs.Select(p => (IReadOnlyList<string>)new[] { p.Key, Value(p.Value) }).ToArray(),
             inputs.Count == 0 ? "Input names and SHA-256 values were not recorded in this project." : "Content fingerprints recorded by the program for the inputs used in this project."));
 
+        if (curation.FamilyPanel?.SourceNotes is { Count: > 0 } sourceNotes)
+            blocks.Add(new ReportTable("methods-panel-source-notes", "Panel source notes", new[] { "Source sheet", "Retained text" },
+                sourceNotes.Select(note => (IReadOnlyList<string>)new[] { note.SheetName,
+                    "Original text and cell addresses are kept with the panel and shown in the panel editor." }).ToArray(),
+                "Source notes are kept as text; they do not define families, matching rules or measured quantities."));
+
         rows = new List<IReadOnlyList<string>>();
         Add("Search parameter input", facts?.SearchParameterFileName);
         if (facts?.SearchParameters.Count > 0)
