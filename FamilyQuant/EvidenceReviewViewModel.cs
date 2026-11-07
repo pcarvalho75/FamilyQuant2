@@ -169,13 +169,14 @@ namespace FamilyQuant
             get => selectedProtein;
             set { if (ReferenceEquals(selectedProtein, value)) return; selectedProtein = value; Changed(); Changed(nameof(ProteinDetails)); Changed(nameof(SelectedProfile)); Changed(nameof(CanShowProfileMembers)); }
         }
-        public FamilyProfile? SelectedProfile => SelectedProtein?.CoherenceProfile;
+        private ReviewProteinRow? DetailProtein => SelectedProtein ?? VisibleProteins.FirstOrDefault();
+        public FamilyProfile? SelectedProfile => DetailProtein?.CoherenceProfile;
         public bool CanShowProfileMembers => SelectedProfile?.ReviewedMembers.Count > 0;
         public string ProteinDetails
         {
             get
             {
-                var row = SelectedProtein;
+                var row = DetailProtein;
                 if (row == null) return "Select a protein to read its full evidence and what its tick does.";
                 string family = familyByKey.TryGetValue(row.Family, out var proposed) ? proposed.Name : row.Family;
                 string Supplied(string value) => string.IsNullOrWhiteSpace(value) ? "Not supplied" : value;
@@ -230,13 +231,13 @@ namespace FamilyQuant
             LeftOut = source.LeftOut ?? Array.Empty<ReviewLeftOutInput>();
             selectedCount = Proteins.Count(p => p.Selected);
             selectedFamily = Families.FirstOrDefault();
-            selectedProtein = VisibleProteins.FirstOrDefault();
         }
 
         private void RefreshVisibleProteins()
         {
             Changed(nameof(VisibleProteins));
-            if (SelectedProtein == null || !VisibleProteins.Contains(SelectedProtein)) SelectedProtein = VisibleProteins.FirstOrDefault();
+            if (SelectedProtein != null && !VisibleProteins.Contains(SelectedProtein)) SelectedProtein = null;
+            Changed(nameof(ProteinDetails)); Changed(nameof(SelectedProfile)); Changed(nameof(CanShowProfileMembers));
         }
 
         private bool Matches(ReviewProteinRow row) => searchText.Length == 0 || row.Identifier.Contains(searchText, StringComparison.OrdinalIgnoreCase)

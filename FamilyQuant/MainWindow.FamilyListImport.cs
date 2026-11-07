@@ -45,7 +45,7 @@ public partial class ClusterGenerationControl
     public void RefreshFamilyListImport()
     {
         UpdateUndoButton();
-        ShowCurationOperationResult("Family list updated. Review protein choices in Panel checklist; File > Save keeps the panel.");
+        ShowCurationOperationResult("Family list updated. Review protein choices in Family checklist; File > Save keeps the panel.");
     }
     public async Task OpenImportedFamilyChecklistAsync()
     {

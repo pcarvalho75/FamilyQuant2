@@ -48,6 +48,9 @@ internal static partial class Program
                 {
                     window.Show(); PumpDispatcher();
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "01-welcome");
+                    Check(label + " import uses one plain list name in its title and Help", window.Title == "Import family list"
+                        && model.Title == "Import family list" && FamilyListImportHelp.Text.StartsWith("IMPORT FAMILY LIST", StringComparison.Ordinal)
+                        && model.Status == "Nothing has changed yet.");
                     Check(label + " Welcome exposes the example and template without editing the project", ((Button)window.FindName("ExampleButton")).IsEnabled
                         && ((Button)window.FindName("TemplateButton")).IsEnabled && file.ToJsonText() == before && model.Page == 0 && !model.CanBack);
                     FinishReviewWork(() => model.LoadAsync(workbook)); PumpDispatcher();
@@ -55,6 +58,10 @@ internal static partial class Program
                         && model.Preview?.ProposedHeaderRow == ExampleFamilyList.FamilyHeaderRow() && model.CanNext
                         && ((DataGrid)window.FindName("SheetPreviewGrid")).Columns.Count == 16 && file.ToJsonText() == before);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "02-file-and-sheet");
+                    var previewGrid = (DataGrid)window.FindName("SheetPreviewGrid");
+                    Check(label + " preview keeps at least eight complete rows visible despite long source notes", WalkTree(previewGrid).OfType<DataGridRow>()
+                        .Count(r => r.IsVisible && r.TranslatePoint(new Point(), previewGrid).Y >= 0
+                            && r.TranslatePoint(new Point(), previewGrid).Y + r.ActualHeight <= previewGrid.ActualHeight - 18) >= 8);
                     model.HeaderRowText = "not a row";
                     Check(label + " an unconfirmed header edit cannot advance with an old table", !model.CanNext);
                     model.HeaderRowText = ExampleFamilyList.FamilyHeaderRow().ToString();
@@ -65,6 +72,19 @@ internal static partial class Program
                         && model.Columns.Single(c => c.Role == PanelImportFields.DisplayName).Example.Length > 0
                         && model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header.Length == 0 && model.CanNext);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns");
+                    Check(label + " Columns replaces the sheet-specific status", !model.Status.Contains("sheet and header", StringComparison.Ordinal));
+                    var colourColumn = model.ColorColumn!;
+                    colourColumn.Header = model.Columns.Single(c => c.Role == PanelImportFields.FamilyKey).Header;
+                    Check(label + " source fills open their optional section and start with usable names", ((Expander)window.FindName("ColourCategories")).IsExpanded
+                        && model.SourceColorChoices.Count > 0 && model.SourceColorChoices.All(c => c.Label.Length > 0) && model.CanNext);
+                    if (model.SourceColorChoices.Count > 0)
+                    {
+                        model.SourceColorChoices[0].Label = "My source category";
+                        model.SourceColorChoices[^1].Label = "";
+                    }
+                    Check(label + " optional colour names never block Next when cleared", model.CanNext);
+                    foreach (var colour in model.SourceColorChoices.Where(c => c.Label.Length == 0)) colour.Label = colour.ColorName;
+                    CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns-colours");
                     var decision = model.Columns.Single(c => c.Role == PanelImportFields.Decision);
                     decision.Header = decision.Headers.First(h => h.Contains("DECIS", StringComparison.OrdinalIgnoreCase));
                     Check(label + " free-text decisions remain proposals until explicitly confirmed", model.Decisions.Count == 8
@@ -72,6 +92,9 @@ internal static partial class Program
                     ((Button)window.FindName("ForwardButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                     Check(label + " disabled Next cannot silently accept decision proposals", model.Page == 2);
                     Check(label + " decision review has its own bounded table and clear page heading", model.ReviewingDecisions && model.Title == "Review spreadsheet decisions");
+                    const string decisionExplanation = "Quantify, merge, report under others or leave out; no conditional action. Your labels stay with each family.";
+                    Check(label + " decision page and Help explain all four actions and source labels in one line", model.Explanation == decisionExplanation
+                        && FamilyListImportHelp.Text.Contains(decisionExplanation, StringComparison.Ordinal) && !model.Explanation.Contains('\n'));
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns-decisions");
                     model.ConfirmDecisions();
                     Check(label + " explicit batch confirmation accepts the reviewed decision meanings", model.Decisions.All(d => d.Confirmed) && model.CanNext);
@@ -84,6 +107,7 @@ internal static partial class Program
                     model.SelectedSpecialRow.Action = FamilyPanelRowAction.Import; model.UseRowChoice();
                     Check(label + " accepting the proposed duplicate rename keeps the multi-name choice pending", newKey.Length > 0
                         && model.SpecialRows.Any(r => r.Chosen && r.Key == newKey) && !model.CanNext);
+                    Check(label + " one pending special row uses singular grammar", model.SpecialRows.Count(r => r.Blocking) != 1 || model.SpecialSummary == "1 row needs a choice");
                     model.SelectedSpecialRow = model.SpecialRows.Single(r => r.SeveralNames && r.Parts.Count == 4 && r.Blocking);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "04-special-rows");
                     var partKeys = model.SelectedSpecialRow.Parts.Select(p => p.Key).ToArray();
@@ -102,6 +126,12 @@ internal static partial class Program
                     model.SkipAllMatches();
                     Check(label + " Continue without matches records an explicit choice and no project change", model.CanNext
                         && model.MatchFamilies.All(f => f.Choice == "Skipped") && file.ToJsonText() == before);
+                    model.SelectedMatchFamily = model.MatchFamilies[0];
+                    model.SelectedMatchFamily.Choice = "Needs a choice"; model.SkipMatch();
+                    Check(label + " the last matching choice reports completion", model.Status == "Every family has a matching choice.");
+                    model.MatchFamilies[0].Choice = "Confirmed";
+                    Check(label + " one confirmed family agrees with its summary count", model.Summary.Contains("1 family confirmed", StringComparison.Ordinal));
+                    model.MatchFamilies[0].Choice = "Skipped";
                     FinishReviewWork(async () => { await model.NextAsync(); });
                     model.PanelName = "Imported example list";
                     model.Back(); model.Back();
@@ -113,6 +143,9 @@ internal static partial class Program
                         && model.SummaryFamilies.Count == model.DraftPanel!.Families.Count && curation.UndoStack.Count == 0 && file.ToJsonText() == before);
                     Check(label + " Summary includes the skipped empty row and the confirmed duplicate rename", model.Summary.Contains("1 row skipped", StringComparison.Ordinal)
                         && model.Summary.Contains("1 abbreviation renamed", StringComparison.Ordinal));
+                    Check(label + " a single confirmed match uses family grammar", !model.Summary.Contains("1 families confirmed", StringComparison.Ordinal));
+                    Check(label + " Summary includes the imported source colour category", ((DataGrid)window.FindName("SummaryGrid")).Columns.Any(c => c.Header as string == "Colour")
+                        && model.SummaryFamilies.Any(f => f.Notes.Contains("My source category", StringComparison.Ordinal)));
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "06-summary");
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " Import is one panel publication and retains every protein's state", model.Page == 6 && model.Imported && model.CanUndo
@@ -122,7 +155,8 @@ internal static partial class Program
                     var reopened = FamilyClusterFile.FromJsonText(saved);
                     Check(label + " save and reopen retain names, source choices and explicit row split", reopened.ToJsonText() == saved
                         && reopened.FamilyPanel!.Import!.RowChoices!.Any(c => c.Action == FamilyPanelRowAction.Split)
-                        && reopened.FamilyPanel.Families.Any(f => f.Names.Count > 0));
+                        && reopened.FamilyPanel.Families.Any(f => f.Names.Count > 0)
+                        && reopened.FamilyPanel.Families.Any(f => f.SourceDecision.Length > 0));
                     string bundle = Path.Combine(work, theme + "-" + size.Width + ".fqproj");
                     ProjectStore.WriteFqproj(bundle, file, new List<QuantRow>(), new QuantManifest());
                     Check(label + " the actual project bundle reopens with the imported panel and source choices intact", ProjectStore.ReadFqproj(bundle).fcf.ToJsonText() == saved);
@@ -148,6 +182,7 @@ internal static partial class Program
         PumpDispatcher();
         var content = (FrameworkElement)window.Content; content.Measure(new Size(width, height)); content.Arrange(new Rect(0, 0, width, height)); content.UpdateLayout();
         var footer = (FrameworkElement)window.FindName("WizardFooter");
+        AuditImportTooltips(window, theme + " " + width + " " + page);
         Check(theme + " " + width + " " + page + " keeps the navigation footer inside the viewport",
             footer.IsVisible && footer.TranslatePoint(new Point(), content).Y + footer.ActualHeight <= height);
         if (output == null) return;

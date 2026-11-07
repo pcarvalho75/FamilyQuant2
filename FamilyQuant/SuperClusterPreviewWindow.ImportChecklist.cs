@@ -21,7 +21,7 @@ public partial class SuperClusterPreviewWindow
     private void SelectRequestedChecklist()
     {
         if (!familyChecklistRequested) return;
-        var target = evidenceTabs.Items.OfType<TabItem>().FirstOrDefault(tab => string.Equals(tab.Header as string, "Panel checklist", StringComparison.Ordinal));
+        var target = evidenceTabs.Items.OfType<TabItem>().FirstOrDefault(tab => string.Equals(tab.Header as string, "Family checklist", StringComparison.Ordinal));
         if (target != null && target.Visibility == Visibility.Visible && model.Evidence != null)
         { evidenceTabs.SelectedItem = target; familyChecklistRequested = false; }
     }

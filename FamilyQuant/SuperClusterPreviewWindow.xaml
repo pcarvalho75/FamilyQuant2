@@ -329,7 +329,7 @@
                                     </DataGrid>
                                 </DockPanel>
                             </TabItem>
-                            <TabItem x:Name="PanelChecklistTab" Header="Panel checklist" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Review database target matches to each panel family and why matching proteins remain outside the proposal. Opening this tab changes only the view; a name or domain match alone never assigns a family.">
+                            <TabItem x:Name="PanelChecklistTab" Header="Family checklist" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Review database target matches to each panel family and why matching proteins remain outside the proposal. Opening this tab changes only the view; a name or domain match alone never assigns a family.">
                                 <Grid>
                                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                                     <TextBlock Text="Matches are database targets, not automatic assignments; match types may overlap." TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,8"/>
@@ -361,7 +361,7 @@
                                                   DisplayMemberPath="DisplayName" MinWidth="170" MaxWidth="270" Margin="0,0,8,0" ToolTip="Choose a stored keyword or tissue phrase from outside matches; initially the supplied selection, with only listed phrases allowed and no numeric unit. Selection prepares Add phrase to scope without changing scope or assignments."/>
                                         <Button x:Name="ChecklistAddScopeButton" Content="Add phrase to scope" Click="AddChecklistPhrase_Click" IsEnabled="{Binding CanAddChecklistPhrase}" Margin="0,0,8,0" ToolTip="Add the selected stored phrase to pending scope and preview matches; Update proposal is still required before Apply grouping. Disabled if no new valid phrase is selected or a review operation is running; choose an unused phrase and wait to enable it."/>
                                         <Button x:Name="ChecklistPlaceHandButton" Content="Place outside matches by hand..." Click="PlaceChecklistMatches_Click" IsEnabled="{Binding CanPlaceChecklistMatches}"
-                                                ToolTip="{Binding ChecklistHandHint}"/>
+                                                ToolTip="Opens a confirmation for adding this panel family's outside matches by hand, with the project changed only on Apply grouping and restored by Undo. Choose an included panel family with outside matches, update the proposal and unlock matching proteins to enable it."/>
                                     </WrapPanel>
                                     <TextBox x:Name="ChecklistScopePreview" Grid.Row="4" Text="{Binding ChecklistScopePreviewText, Mode=OneWay}" IsReadOnly="True"
                                              Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}" TextWrapping="Wrap" MinHeight="48" MaxHeight="88"

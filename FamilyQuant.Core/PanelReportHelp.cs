@@ -6,7 +6,7 @@ public static class PanelReportHelp
     public const string Panel = """
         FAMILY PANEL AND EVIDENCE
 
-        File > Import family panel opens a draft for the open project. Choose a
+        File > Import family list opens a draft for the open project. Choose a
         spreadsheet, sheet and header row, then select the family key, name and
         decision columns and, optionally, a Pfam column. Map every source decision
         to Quantify, Report under others, Not a family or Merge into family. A merge
@@ -23,6 +23,8 @@ public static class PanelReportHelp
         key. Apply panel commits one project change; Undo can restore the prior
         panel. Later assignment or subclass refresh operations have their own
         Undo steps. Save the project to retain the change.
+        Select a family and use Match stored names to confirm labels, then
+        Apply panel and File > Save to keep them without grouping proteins.
 
         Check Pfam compares the panel's accessions and supplied names with the
         provider. A mismatch, missing entry or unavailable check is shown; it

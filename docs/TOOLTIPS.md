@@ -33,7 +33,7 @@ setters of `ToolTipService.ShowDuration` in code-built styles are older choices 
 | Kind | Control | Tooltip |
 |---|---|---|
 | Button | Check Pfam names (panel editor) | Compares each family's Pfam names with InterPro and lists the differences. The panel is not changed. |
-| Menu item | File > Import family panel... | Opens the wizard that reads a family list from an Excel workbook. Nothing changes in the project until you confirm its last page. |
+| Menu item | File > Import family list... | Opens the wizard that reads a family list from an Excel workbook. Nothing changes in the project until you confirm its last page. |
 | Check box | Use the fills of this column as a category (import) | Turns the cell fill of the chosen column into a category, one name per fill that you type. The fill is never read as a decision. |
 | Option | One family per name (a cell listing several families) | Imports each name in the cell as its own family, with keys you can edit. Nothing changes until you confirm the import. |
 | Input box with unit, default and range | Header row (panel editor) | The row that holds the column names, counted as in Excel. Default 1; any whole number from 1. |
