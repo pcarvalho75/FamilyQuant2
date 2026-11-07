@@ -39,9 +39,10 @@ public static class ManualFamilyChoices
         {
             if (choice.ProteinIndex < 0 || choice.ProteinIndex >= file.MyExtendedFastaItems.Count) throw new ArgumentException("A hand choice no longer identifies a protein.");
             var protein = file.MyExtendedFastaItems[choice.ProteinIndex];
-            if (protein.SequenceIdentifier != choice.Identifier || SequenceHash(protein.Sequence ?? "") != choice.SequenceSha256
-                || NearestReviewed.IsDecoy(protein) || SequenceLabels.IsContaminant(protein.SequenceIdentifier))
+            if (protein.SequenceIdentifier != choice.Identifier || SequenceHash(protein.Sequence ?? "") != choice.SequenceSha256)
                 throw new ArgumentException("A hand choice does not match the target protein and sequence.");
+            if (NearestReviewed.IsDecoy(protein) || SequenceLabels.IsContaminant(protein.SequenceIdentifier))
+                throw new ArgumentException("A contaminant or decoy never joins a family, so it was not added.");
             if (string.IsNullOrWhiteSpace(choice.Family) || string.IsNullOrWhiteSpace(choice.Name) || !ValidNote(choice.Note))
                 throw new ArgumentException("Choose a family and enter a name; the optional note must be one line of at most 512 characters.");
             if (file.LockedUserIds.Contains(protein.UserID))

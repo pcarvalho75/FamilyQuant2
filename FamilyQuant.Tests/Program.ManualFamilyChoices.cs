@@ -83,6 +83,29 @@ internal static partial class Program
         catch (InvalidOperationException error) { refused = error.Message.Contains("Locked", StringComparison.Ordinal) && error.Message.Contains("Unlock", StringComparison.Ordinal); }
         Check("a mixed locked selection is refused atomically with a reason", refused && locked.ToJsonText() == lockedBefore
             && JsonSerializer.Serialize(lockedSession.Proposal) == proposalBefore);
+        const string excludedReason = "A contaminant or decoy never joins a family, so it was not added.";
+        foreach (string prefix in new[] { SequenceLabels.ContaminantPrefix, SequenceLabels.DecoyPrefix })
+        {
+            var excludedFile = ManualChoiceFile();
+            var excludedProtein = excludedFile.MyExtendedFastaItems[2];
+            excludedProtein.SequenceIdentifier = prefix + excludedProtein.SequenceIdentifier;
+            string excludedBefore = excludedFile.ToJsonText();
+            string reason = "";
+            try { ManualFamilyChoices.Validate(excludedFile, new[] { new EvidenceManualChoice { ProteinIndex = 2,
+                Identifier = excludedProtein.SequenceIdentifier, SequenceSha256 = ManualFamilyChoices.SequenceHash(excludedProtein.Sequence),
+                Family = "Invented family", Name = "Invented family" } }); }
+            catch (ArgumentException error) { reason = error.Message; }
+            Check(prefix + " hand choice explains the exclusion without claiming a data mismatch", reason == excludedReason && excludedFile.ToJsonText() == excludedBefore);
+        }
+        var contaminantFile = ManualChoiceFile();
+        contaminantFile.MyExtendedFastaItems[2].SequenceIdentifier = SequenceLabels.ContaminantPrefix + contaminantFile.MyExtendedFastaItems[2].SequenceIdentifier;
+        var contaminantSession = new EvidenceGroupingSession(contaminantFile, "manual exclusion fixture"); contaminantSession.Propose("scope");
+        string contaminantBefore = contaminantFile.ToJsonText(), contaminantProposalBefore = JsonSerializer.Serialize(contaminantSession.Proposal);
+        string contaminantReason = "";
+        try { contaminantSession.AddToFamily(new EvidenceManualRequest(new[] { 0, 2 }, "Invented family", "Invented family", false)); }
+        catch (ArgumentException error) { contaminantReason = error.Message; }
+        Check("Add to family refuses a mixed contaminant selection with the plain reason and no partial edits", contaminantReason == excludedReason
+            && contaminantFile.ToJsonText() == contaminantBefore && JsonSerializer.Serialize(contaminantSession.Proposal) == contaminantProposalBefore);
         Check("unused manual fields preserve old JSON and enum values", !JsonSerializer.Serialize(new EvidenceRecipe()).Contains("ManualChoices", StringComparison.Ordinal)
             && !JsonSerializer.Serialize(new EvidenceProteinProposal()).Contains("AutomaticEvidence", StringComparison.Ordinal)
             && (int)EvidenceTier.UnannotatedNeighbour == 4 && (int)PanelAssignmentEvidenceKind.ConfirmedLink == 8);
