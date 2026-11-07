@@ -100,6 +100,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => CoreOperationTests(workDir));
             suite.Add(() => StreamingSaveTests(Path.Combine(workDir, "streaming-save")));
             suite.Add(() => CurationStreamingCallerTests());
+            suite.Add(() => CurationProofSamplerTests());
             suite.Add(() => CurationFormat2Tests(Path.Combine(workDir, "curation-format2")));
             suite.AddWithApplication(() => RecipeCopiesTests(Path.Combine(workDir, "recipe-copies")));
             suite.Add(() => FeatureProvenanceFormatTests(Path.Combine(workDir, "feature-provenance")));

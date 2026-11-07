@@ -319,22 +319,23 @@ internal static partial class Program
     {
         GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect();
         using var process = Process.GetCurrentProcess();
-        long peak = process.PrivateMemorySize64;
-        void Sample()
+        var sampler = new CurationPrivateMemorySampler(() =>
         {
-            process.Refresh(); long current = process.PrivateMemorySize64;
-            long previous;
-            do { previous = Interlocked.Read(ref peak); if (current <= previous) return; }
-            while (Interlocked.CompareExchange(ref peak, current, previous) != previous);
-        }
-        using var timer = new Timer(_ => Sample(), null, 0, 20);
+            process.Refresh(); return process.PrivateMemorySize64;
+        });
+        sampler.Sample();
+        using var timer = new Timer(_ => sampler.Sample(), null, 0, 20);
         var watch = Stopwatch.StartNew();
         string status = "FAIL";
         try { T result = action(); status = "PASS"; return result; }
         finally
         {
-            timer.DisposeAsync().AsTask().GetAwaiter().GetResult(); Sample();
-            Console.WriteLine(FormattableString.Invariant($"MEASURE {name} status={status} seconds={watch.Elapsed.TotalSeconds:F3} sampledPeakPrivateBytes={Interlocked.Read(ref peak)}"));
+            timer.DisposeAsync().AsTask().GetAwaiter().GetResult(); sampler.Sample();
+            bool unavailable = sampler.SuccessfulSamples == 0;
+            bool samplingOnlyFailure = unavailable && status == "PASS";
+            if (samplingOnlyFailure) status = "FAIL-SAMPLING";
+            Console.WriteLine(FormattableString.Invariant($"MEASURE {name} status={status} seconds={watch.Elapsed.TotalSeconds:F3} sampledPeakPrivateBytes={sampler.Peak} successfulSamples={sampler.SuccessfulSamples} failedSamples={sampler.FailedSamples} skippedSamples={sampler.SkippedSamples} lastSampleError={sampler.LastFailure?.GetType().Name ?? "none"}"));
+            if (samplingOnlyFailure) throw new InvalidOperationException("No private-memory samples succeeded for " + name + ".", sampler.LastFailure);
         }
     }
 }
