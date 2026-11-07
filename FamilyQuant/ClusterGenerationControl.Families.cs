@@ -10,11 +10,11 @@ public partial class ClusterGenerationControl
 {
     private void ApplyFamilyHeaderTooltips()
     {
-        DataGridFamilies.Columns[0].HeaderStyle = HeaderTip("Protect the family from automatic grouping, or remove that protection. Undo restores the previous lock state.");
+        DataGridFamilies.Columns[0].HeaderStyle = HeaderTip("Protect the family from automatic grouping, or remove that protection. Undo restores the lock state; families without target proteins cannot be edited here.");
         var idHeader = HeaderTip("The current curated family number shared by these proteins. Edit protein rows to join or split membership.");
         idHeader.Setters.Add(new Setter(Control.HorizontalContentAlignmentProperty, HorizontalAlignment.Center));
         ColumnFamilyId.HeaderStyle = idHeader;
-        ColumnFamilyName.HeaderStyle = HeaderTip("The production family name uses target annotations before database descriptions. Editing annotates every target member, including filtered members, and Undo restores their previous text.");
+        ColumnFamilyName.HeaderStyle = HeaderTip("Family name starts from target annotations or database descriptions and accepts free text, including empty text, with no unit or fixed length limit. Editing annotates every target member, including filtered members, and Undo restores their previous text.");
         ColumnFamilyProteins.HeaderStyle = HeaderTip("Target proteins in the whole family, including filtered members. The cell tooltip also gives the visible row count.");
         ColumnFamilyFullXic.HeaderStyle = HeaderTip("The current production family share from full XIC, shown once for the family. The heading names its denominator.");
         ColumnFamilyPatternLab.HeaderStyle = HeaderTip("The current PatternLab family share, shown once for the family. This column appears after PatternLab shares are calculated.");
