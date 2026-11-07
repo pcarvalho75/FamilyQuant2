@@ -4,6 +4,7 @@
         xmlns:theme="clr-namespace:FamilyQuant.Themes"
         Title="Family panel" Width="1080" Height="720" MinWidth="900" MinHeight="600"
         WindowStartupLocation="CenterOwner" Background="{DynamicResource CanvasBrush}">
+    <Window.Resources><BooleanToVisibilityConverter x:Key="SourceNotesVisibility"/></Window.Resources>
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/>
@@ -20,7 +21,10 @@
             <TextBox x:Name="PanelName" Width="230" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left"
                      ToolTip="Name stored with this panel: default is its saved name or empty for a new panel, with free text, no unit or fixed length limit. Only the draft changes until Apply panel."/>
         </DockPanel>
-        <Grid Grid.Row="2">
+        <TabControl Grid.Row="2" Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}"
+                    ToolTip="Switches between the editable panel draft and the source text saved with it. Apply panel commits the draft.">
+        <TabItem Header="Families and import" ToolTip="Edits the draft families and import choices. Source notes stay unchanged.">
+        <Grid Margin="0,8,0,0">
             <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="14"/><ColumnDefinition Width="280"/></Grid.ColumnDefinitions>
             <Grid>
                 <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/>
@@ -101,6 +105,24 @@
                 </Grid>
             </Grid>
         </Grid>
+        </TabItem>
+        <TabItem x:Name="SourceNotesTab" Header="Source notes" Visibility="{Binding HasSourceNotes, Converter={StaticResource SourceNotesVisibility}}"
+                 ToolTip="Shows the source sheets accepted with this panel, including their cell addresses and original text. The notes are read only and do not define families or measured quantities.">
+            <TabControl x:Name="SourceNotesTabs" ItemsSource="{Binding SourceNotes}" Margin="0,8,0,0"
+                        ToolTip="Select a source sheet to read its saved text. This view does not change the notes, families or workbook.">
+                <TabControl.ItemTemplate>
+                    <DataTemplate><TextBlock Text="{Binding SheetName}" ToolTip="{Binding SheetName}"/></DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <TextBox Text="{Binding Text, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                                 ToolTip="Original source text with cell addresses and line breaks, saved with the panel. You can select and copy it; this view cannot edit it."/>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </TabItem>
+        </TabControl>
         <TextBlock x:Name="StatusText" Grid.Row="3" TextWrapping="Wrap" Margin="0,10,0,0" Style="{StaticResource CaptionText}"/>
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
             <Button Content="Help" Click="Help_Click" Margin="0,0,8,0" ToolTip="Explains panel keys, decisions, domain checks and applying a draft. This read-only Help changes nothing in the draft or project."/>

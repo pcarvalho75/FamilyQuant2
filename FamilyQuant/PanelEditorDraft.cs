@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using FamilyQuant.Panels;
 using FamilyQuant.Evidence;
+using FamilyQuant.Panels.Import;
 
 namespace FamilyQuant;
 
@@ -16,6 +17,8 @@ public sealed class PanelEditorDraft
     public string MatchChangeNotice { get; private set; } = "";
     public string Name { get; set; }
     public ObservableCollection<PanelEditorRow> Families { get; }
+    public IReadOnlyList<PanelWorkbookSourceNote> SourceNotes => original.SourceNotes;
+    public bool HasSourceNotes => SourceNotes.Count > 0;
 
     public PanelEditorDraft(FamilyPanel? panel)
     {
