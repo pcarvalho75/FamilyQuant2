@@ -72,7 +72,7 @@ public sealed partial class FamilyListImportViewModel
     {
         if (IsBusy || Imported) return;
         foreach (var family in MatchFamilies) RestoreOrSkip(family);
-        Status = MatchFamilies.Any(f => f.PreviouslyConfirmed) ? "Previous confirmed matches kept; new matching skipped." : "Evidence matching skipped for this import; review it in Panel checklist."; Refresh();
+        Status = MatchFamilies.Any(f => f.PreviouslyConfirmed) ? "Previous confirmed matches kept; new matching skipped." : "Evidence matching skipped for this import; review it in Family checklist."; Refresh();
     }
 
     private static void RestoreOrSkip(ImportMatchFamily family)
@@ -85,9 +85,13 @@ public sealed partial class FamilyListImportViewModel
     private void SelectNextMatch()
     {
         SelectedMatchFamily = MatchFamilies.FirstOrDefault(f => !f.Decided) ?? SelectedMatchFamily;
-        Status = MatchFamilies.Count(f => !f.Decided).ToString("N0", CultureInfo.CurrentCulture) + " families need a matching choice.";
+        Status = MatchingChoiceStatus;
         Refresh();
     }
+
+    private string MatchingChoiceStatus => MatchFamilies.Count(f => !f.Decided) is var count && count == 0
+        ? "Every family has a matching choice."
+        : Families(count) + (count == 1 ? " needs a matching choice." : " need a matching choice.");
 
     private async Task<bool> CommitAsync()
     {
@@ -126,7 +130,7 @@ public sealed partial class FamilyListImportViewModel
             FamilyPanelValidation.Validate(panel);
             if (!transaction.Import(panel, out string result)) { Status = result; return false; }
             committedPanel = FamilyPanelValidation.Clone(panel);
-            Status = result + " File > Save keeps it with the project."; GoTo(6); return true;
+            GoTo(6); Status = result + " File > Save keeps it with the project."; return true;
         }
         catch (OperationCanceledException) { Status = "Import cancelled. Nothing was changed."; return false; }
         catch (Exception error) when (error is ArgumentException or InvalidOperationException or System.IO.IOException or UnauthorizedAccessException)

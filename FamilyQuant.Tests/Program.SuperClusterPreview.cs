@@ -207,9 +207,14 @@ namespace FamilyQuant.Tests
                     Check(theme + " the family checkbox can restore its proposed proteins without selecting unassigned rows",
                         model.Evidence.SelectedCount == 31775 && !model.Evidence.Unassigned[0].Selected && !model.Evidence.Proteins[3].Selected);
                     Press("Untick flagged");
-                    familyTable.CurrentCell = new DataGridCellInfo(family, familyTable.Columns[1]); familyTable.BeginEdit(); PumpDispatcher();
-                    var editor = WalkTree(familyTable).OfType<TextBox>().First(t => t.TemplatedParent == null);
-                    editor.Text = "User family name";
+                    var nameColumn = familyTable.Columns.SingleOrDefault(c => c.SortMemberPath == nameof(ReviewFamilyRow.Name));
+                    Check(theme + " family table exposes the editable name column", nameColumn != null);
+                    if (nameColumn != null) familyTable.CurrentCell = new DataGridCellInfo(family, nameColumn);
+                    bool beganEdit = nameColumn != null && familyTable.BeginEdit(); PumpDispatcher();
+                    var editor = WalkTree(familyTable).OfType<TextBox>().FirstOrDefault(t => ReferenceEquals(t.DataContext, family)
+                        && System.Windows.Data.BindingOperations.GetBinding(t, TextBox.TextProperty)?.Path.Path == nameof(ReviewFamilyRow.Name));
+                    Check(theme + " the native family name template opens its editor", beganEdit && editor != null);
+                    if (editor != null) editor.Text = "User family name";
                     familyTable.CommitEdit(DataGridEditingUnit.Cell, true); familyTable.CommitEdit(DataGridEditingUnit.Row, true); PumpDispatcher();
                     Check(theme + " family name edits reach the selection without changing any protein facts", family.Name == "User family name"
                         && model.Evidence.Proteins[2].PreviousFamilyId == rows[2].PreviousFamilyId && model.Evidence.Proteins[2].Reason == rows[2].Reason);
@@ -244,6 +249,7 @@ namespace FamilyQuant.Tests
                     Check(theme + " Cancel returns no selection and mutates no source proposal", cancelledWindowClosed
                         && !window.Confirmed && window.EvidenceSelection == null && JsonSerializer.Serialize(input) == before);
                 }
+                catch (Exception ex) { Check(theme + " review interactions complete without an exception", false, ex.ToString()); }
                 finally { window.Close(); }
             }
             var confirmed = new SuperClusterPreviewWindow(new SuperClusterPreview(Vipers(), null, ViperKeywords, "", KeywordMatch.Any, null, null), input, null);

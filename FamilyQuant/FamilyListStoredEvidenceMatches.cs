@@ -15,7 +15,7 @@ public sealed class FamilyListStoredEvidenceMatches : IFamilyListImportMatches
     private readonly FamilyPanel previousPanel;
     public string ChangeNotice { get; private set; } = "";
     public string SourceStatus => matching.ReferencePanelComplete switch
-    { true => "Stored reference panel complete", false => "Stored reference panel incomplete", _ => "No stored reference panel" };
+    { true => "All reference entries are available.", false => "Some reference entries are unavailable; counts use the stored entries.", _ => "Only evidence stored with your database is available." };
     public FamilyListStoredEvidenceMatches(FamilyClusterFile project)
     { this.project = project; matching = new PanelEvidenceMatching(project); previousPanel = FamilyPanelValidation.Clone(project.FamilyPanel ?? new FamilyPanel()); }
 

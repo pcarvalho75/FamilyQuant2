@@ -387,8 +387,9 @@ namespace FamilyQuant.Tests
         {
             check("screen lane is opt-in and accepts a flag after positional arguments",
                 !IsRequested(Array.Empty<string>()) && IsRequested(new[] { ".", ".", Argument, "out" }), null);
-            check("screen matrix contains 14 unique views in both themes and viewport sizes",
-                Screens.Length == 14 && Screens.Distinct().Count() == 14 && Sizes.Length == 2
+            check("screen matrix contains 16 unique views including evidence scope and architecture in both themes and viewport sizes",
+                Screens.Length == 16 && Screens.Distinct().Count() == 16
+                && Screens.Contains("15-evidence-scope") && Screens.Contains("16-evidence-architecture") && Sizes.Length == 2
                 && ThemeNames(Array.Empty<string>()).Length == 2, null);
             check("System capture is opt-in and adds the Windows appearance without dropping either direction",
                 ThemeNames(new[] { "--screen-system" }).SequenceEqual(new[] { "dark", "light", "system" }), null);

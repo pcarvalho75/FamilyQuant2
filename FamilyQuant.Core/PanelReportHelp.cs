@@ -6,7 +6,7 @@ public static class PanelReportHelp
     public const string Panel = """
         FAMILY PANEL AND EVIDENCE
 
-        File > Import family panel opens a draft for the open project. Choose a
+        File > Import family list opens a draft for the open project. Choose a
         spreadsheet, sheet and header row, then select the family key, name and
         decision columns and, optionally, a Pfam column. Map every source decision
         to Quantify, Report under others, Not a family or Merge into family. A merge

@@ -15,7 +15,7 @@ namespace FamilyQuant;
 public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDisposable
 {
     public static readonly string[] StepNames = { "Welcome", "File and sheet", "Columns", "Special rows", "Evidence matches", "Summary", "Done" };
-    private static readonly string[] Titles = { "Import your family list", "Choose your spreadsheet", "Choose what each column means",
+    private static readonly string[] Titles = { "Import family list", "Choose your spreadsheet", "Choose what each column means",
         "Review special rows", "Match your list to stored evidence", "Review your family list", "Your family list is imported" };
     private static readonly string[] Explanations = {
         "Bring a spreadsheet of abbreviations and family names; review every choice before import.",
@@ -33,7 +33,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     private Task activeRead = Task.CompletedTask;
     private int readGeneration, page, headerRow = 1;
     private bool busy, updating, keepOtherSheets, reviewingDecisions;
-    private string path = "", sheet = "", panelName = "", status = "Draft only";
+    private string path = "", sheet = "", panelName = "", status = "Nothing has changed yet.";
     private string headerRowText = "1";
     private FamilyPanelImport choices = new() { ImportVersion = PanelImportRules.Current };
     private PanelSpreadsheetTable? table;
@@ -72,9 +72,9 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         (index + 1).ToString(CultureInfo.CurrentCulture) + "   " + name, index < page, index == page,
         !IsBusy && index <= page && (!Imported || index >= 5))).ToArray();
     public string Title => page == 2 && ReviewingDecisions ? "Review spreadsheet decisions" : Titles[page];
-    public string Explanation => page == 2 && ReviewingDecisions ? "Check each proposed action and its source rows, then confirm the mapping." : Explanations[page];
+    public string Explanation => page == 2 && ReviewingDecisions ? FamilyListImportHelp.DecisionsSummary : Explanations[page];
     public string StepLabel => "Step " + (page + 1).ToString(CultureInfo.CurrentCulture) + " of 7, " + StepNames[page];
-    public string ForwardLabel => page == 5 && !Imported ? "Import" : page == 6 ? "Open family checklist" : "Next";
+    public string ForwardLabel => page == 5 && !Imported ? "Import" : page == 6 ? "Family checklist" : "Next";
     public string CloseLabel => Imported ? "Close" : "Cancel";
     public bool CanBack => !IsBusy && page > 0;
     public bool CanNext => !IsBusy && (Imported || page switch
@@ -82,7 +82,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         0 => true,
         1 => table != null && int.TryParse(HeaderRowText, out int editedHeader) && table.HeaderRowNumber == editedHeader && Preview != null
             && headerRow > 0 && !Preview.Problems.Any(p => p.Severity == PanelImportSeverity.Blocking),
-        2 => MappingValid && Decisions.All(d => d.Confirmed && d.Decision != null) && SourceColorChoices.All(c => c.Label.Trim().Length > 0),
+        2 => MappingValid && Decisions.All(d => d.Confirmed && d.Decision != null),
         3 => check.CanImport && SpecialRows.All(r => !r.Blocking),
         4 => check.CanImport && MatchFamilies.All(f => f.Decided),
         5 => check.CanImport && PanelName.Trim().Length > 0,
@@ -140,6 +140,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
             Status = preview.Problems.FirstOrDefault(p => p.Severity == PanelImportSeverity.Blocking)?.Message
                 ?? (selectedRow <= 0 ? "Choose the row containing the column names." : "Check the sheet and header row before continuing.");
             Recheck(); Changed(nameof(Preview)); Changed(nameof(Sheets)); Changed(nameof(HiddenSheets));
+            Changed(nameof(HasSourceFills));
             Changed(nameof(WorkbookPath)); Changed(nameof(WorkbookName)); Changed(nameof(Sheet));
         }
         catch (OperationCanceledException) { if (generation == readGeneration) Status = "Reading cancelled."; }
@@ -179,7 +180,20 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         : page == 5 ? "Name the panel and resolve every remaining row choice." : "Complete this page before continuing.";
 
     private void GoTo(int next)
-    { page = Math.Clamp(next, 0, 6); if (page != 2) ReviewingDecisions = false; Refresh(); Changed(nameof(Title)); Changed(nameof(Explanation)); Changed(nameof(StepLabel)); }
+    {
+        page = Math.Clamp(next, 0, 6); if (page != 2) ReviewingDecisions = false;
+        Status = page switch
+        {
+            0 => "Nothing has changed yet.",
+            1 => "Check the sheet and header row before continuing.",
+            2 => "Your column choices are kept until you import.",
+            3 => SpecialSummary + ".",
+            4 => MatchingChoiceStatus,
+            5 => Imported ? "This list is already imported." : "Nothing has changed yet. Import keeps one Undo step.",
+            _ => "Family list imported. File > Save keeps it with the project."
+        };
+        Refresh(); Changed(nameof(Title)); Changed(nameof(Explanation)); Changed(nameof(StepLabel));
+    }
 
     private void Refresh()
     {

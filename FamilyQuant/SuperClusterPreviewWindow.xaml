@@ -366,7 +366,7 @@
                                     </DataGrid>
                                 </DockPanel>
                             </TabItem>
-                            <TabItem x:Name="PanelChecklistTab" Header="Panel checklist" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}">
+                            <TabItem x:Name="PanelChecklistTab" Header="Family checklist" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}">
                                 <Grid>
                                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                                     <TextBlock Text="Matches are database targets, not automatic assignments; match types may overlap." TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,8"/>
