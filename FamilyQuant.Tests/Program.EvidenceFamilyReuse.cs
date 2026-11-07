@@ -53,6 +53,26 @@ internal static partial class Program
         try { EvidenceApply.ApplyRecipe(unchanged, changedRecipe); }
         catch (ArgumentException error) { refused = error.Message.Contains("incompatible with its source", StringComparison.Ordinal); }
         Check("Z14c4 the missing-identity sentinel cannot become a replay family number", refused && unchanged.ToJsonText() == before);
+        var metadataFile = FamilyClusterFile.FromJsonText(before);
+        string originalAssignments = JsonSerializer.Serialize(recipe.Assignments);
+        string storedAssignments = JsonSerializer.Serialize(metadataFile.EvidenceRecipe!.Assignments);
+        string editedMetadataState = "";
+        var metadataProgress = new InlineOperationProgress(progress =>
+        {
+            if (progress.Stage != "evidence-apply" || progress.Completed != 1) return;
+            var identities = metadataFile.EvidenceRecipe!.FamilyIdentities!;
+            identities.Add(identities[0] with { Family = "Different supplied identity",
+                GroupKey = JsonSerializer.Serialize(new[] { "Different supplied identity", "" }) });
+            editedMetadataState = metadataFile.ToJsonText();
+        });
+        var metadataOperation = new Operations.OperationContext(progress: metadataProgress);
+        refused = false;
+        try { EvidenceApply.ApplyRecipe(metadataFile, recipe, metadataOperation); }
+        catch (ArgumentException error) { refused = error.Message.Contains("saved family identities", StringComparison.Ordinal); }
+        Check("Z14c4 metadata-only edit reaches the family identity publication guard without changing assignments",
+            refused && !metadataOperation.HasCommitted && metadataFile.ToJsonText() == editedMetadataState
+            && JsonSerializer.Serialize(recipe.Assignments) == originalAssignments
+            && JsonSerializer.Serialize(metadataFile.EvidenceRecipe!.Assignments) == storedAssignments);
 
         var coincident = ManualChoiceFile();
         ApplyReuseMembers(coincident, new[] { 0 }, "Shared supplied name");
