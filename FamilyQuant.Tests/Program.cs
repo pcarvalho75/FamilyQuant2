@@ -302,6 +302,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelWorkbookMapTests(Path.Combine(workDir, "panel-workbook-map")));
             suite.Add(() => PanelWorkbookLegendTests(Path.Combine(workDir, "panel-workbook-legend")));
             suite.AddWithApplication(() => PanelWorkbookNotesTests());
+            suite.Add(() => PanelSubclassImportTests(Path.Combine(workDir, "panel-subclass-import")));
             suite.AddWithApplication(() => ToolTipStyleTests());
             suite.AddWithApplication(() => ToolTipCheckTests());
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
