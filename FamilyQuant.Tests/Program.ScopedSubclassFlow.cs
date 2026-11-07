@@ -81,5 +81,29 @@ internal static partial class Program
         var labels = SubclassAssignment.BuildCandidate(file, options).Labels;
         Check("Z15a5 Full panel restores the unchanged subclass calculation and Apply eligibility", ready.CanConfirm && complete.FullPanelRequirement() == ""
             && labels.Count(label => label.Status == ProteinSubclassStatus.Assigned && label.SubclassKey == "invented-part") == 2);
+        file.EvidenceSource.ReferencePanel.Coverage = new() { ScopeTerms = new() { "ACTION ALPHA" }, WholeFamilies = new() { "Stored group r" } };
+        family = file.FamilyPanel.Families[0]; family.Subclasses[0].RequiredPfam.Clear();
+        var names = new EvidenceGroupingSession(file, "name-only subclass fixture");
+        var namesReady = new GroupingReviewViewModel(preview, input, _ => input, initialScope: "Action alpha", evidenceMode: true, fullPanelRequirement: names.FullPanelRequirement);
+        var namesLabels = SubclassAssignment.BuildCandidate(file, options).Labels;
+        Check("Z15a5-fix name-only subclass search needs no reviewed reference panel", namesLabels.All(label => label.Reason.StartsWith("No subclass definitions", StringComparison.Ordinal)));
+        Check("Z15a5-fix name-only definitions leave scoped Apply eligible", !ReferencePanelUseRequirements.HasSubclasses(file.FamilyPanel)
+            && names.FullPanelRequirement() == "" && namesReady.CanConfirm);
+        var namesPicker = new ReferencePanelScopeWindow(new[] { "Action alpha" }, ReferencePanelUseRequirements.HasSubclasses(file.FamilyPanel));
+        Check("Z15a5-fix name-only definitions keep the scoped fetch default", namesPicker.FullPanelBox.IsChecked != true && namesPicker.ScopeBox.IsEnabled);
+        namesPicker.Close();
+        family.Subclasses[0].UniProtSubfamilies.Add("   ");
+        Check("Z15a5-fix whitespace-only subfamily text is not an executable rule", !ReferencePanelUseRequirements.HasSubclasses(file.FamilyPanel));
+        family.Subclasses[0].AbsentPfam.Add("Invented absent domain");
+        Check("Z15a5-fix absence rules use the exact subclass search predicate", ReferencePanelUseRequirements.HasSubclasses(file.FamilyPanel)
+            && SubclassAssignment.HasExecutableDefinitions(family));
+        family.Subclasses[0].AbsentPfam.Clear(); family.Subclasses[0].UniProtSubfamilies.Add("Invented subfamily");
+        Check("Z15a5-fix source subfamily rules use the exact subclass search predicate", ReferencePanelUseRequirements.HasSubclasses(file.FamilyPanel)
+            && SubclassAssignment.HasExecutableDefinitions(family));
+        var host = new ClusterGenerationControl(file); host.ReportPanelRefreshPending();
+        var pending = (TextBlock)host.FindName("TextBlockStatusLine");
+        Check("Z15a5-fix pending executable subclass notice names Full panel", pending.Text.Contains("Choose Full panel in Fetch evidence.", StringComparison.Ordinal));
+        family.Subclasses[0].UniProtSubfamilies.Clear(); host.ReportPanelRefreshPending();
+        Check("Z15a5-fix pending name-only subclass notice does not add a false Full requirement", !pending.Text.Contains("Full panel", StringComparison.Ordinal));
     }
 }
