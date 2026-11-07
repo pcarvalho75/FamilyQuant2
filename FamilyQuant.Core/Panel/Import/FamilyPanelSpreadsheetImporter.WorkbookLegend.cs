@@ -110,7 +110,8 @@ public sealed partial class FamilyPanelSpreadsheetImporter
                 RowNumbers = group.Select(row => row.RowNumber).ToList(), LegendEntries = matched, LegendMeaning = string.Join("\n", meanings),
                 ProposedMapping = action == null ? null : new FamilyPanelDecisionMapping
                     { SourceValue = group.Key, Decision = action.Decision, MergeTargetFamilyKey = action.MergeTargetFamilyKey },
-                ExactProgramDecision = action != null && WorkbookKnownDecision(group.Key, keys) != null,
+                ExactProgramDecision = action != null && WorkbookKnownDecision(group.Key, keys) != null
+                    && !meanings.Any(meaning => WorkbookDecisionSignals(meaning, keys).NeedsReview),
                 Reason = evidence.Reason });
         }
         proposal.DecisionsState = read ? PanelWorkbookReadState.Read : PanelWorkbookReadState.NotRead;

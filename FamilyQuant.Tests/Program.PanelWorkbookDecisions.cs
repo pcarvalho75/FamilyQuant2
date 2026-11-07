@@ -113,6 +113,41 @@ internal static partial class Program
             Check("Z16a11 " + languages[language] + " qualifier matching never matches a longer base-label prefix",
                 importer.ProposeWorkbook(path).Decisions.Single(item => item.SourceValue == prefixed[0]).LegendEntries.Count == 0);
         }
+        WorkbookDecisionConfirmationTests(root);
+    }
+
+    private static void WorkbookDecisionConfirmationTests(string root)
+    {
+        string path = Path.Combine(root, "d87-confirmation.xlsx");
+        string[] labels = ["Quantify", "Not a family", "Merge into F01", "Report under others", "Keep"];
+        string[] meanings = ["Quantify only when an additional condition holds", "Not a family",
+            "Optional: merge into F01", "Optional: report under others", "Keep this entry"];
+        WriteDecisionWorkbook(path, labels, meanings);
+        var expected = new[] { (Source: labels[0], Decision: FamilyPanelDecision.Quantify),
+            (Source: labels[2], Decision: FamilyPanelDecision.MergeIntoAnotherFamily),
+            (Source: labels[3], Decision: FamilyPanelDecision.ReportUnderOthers) };
+        var hints = new FamilyPanelSpreadsheetImporter().ProposeWorkbook(path).Decisions.ToDictionary(item => item.SourceValue, StringComparer.Ordinal);
+        foreach (var (source, decision) in expected)
+            Check("Z16a11 qualified legend keeps " + source + " proposed without marking it exact",
+                hints[source].ProposedMapping?.Decision == decision && !hints[source].ExactProgramDecision);
+
+        EnsureApplication();
+        using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(ManualChoiceFile())),
+            workbookSource: new FamilyListWorkbookCoreSource());
+        FinishReviewWork(() => model.LoadAsync(path));
+        model.Columns.Single(column => column.Role == PanelImportFields.Decision).Header = model.DecisionHint;
+        FinishReviewWork(async () => { await model.NextAsync(); });
+        foreach (var (source, decision) in expected)
+        {
+            var row = model.Decisions.Single(item => item.Source == source);
+            Check("Z16a11 qualified legend leaves " + source + " unconfirmed before the press",
+                row.Decision == decision && !row.Confirmed && (decision != FamilyPanelDecision.MergeIntoAnotherFamily || row.MergeTarget == "F01"));
+        }
+        Check("Z16a11 an unconditional exact action still starts confirmed",
+            hints[labels[1]].ExactProgramDecision && model.Decisions.Single(item => item.Source == labels[1]).Confirmed);
+        model.ConfirmDecisions();
+        Check("Z16a11 the explicit confirmation press accepts the proposed actions",
+            model.Decisions.All(item => item.Confirmed) && model.CanNext);
     }
 
     private static void WriteDecisionWorkbook(string path, IReadOnlyList<string> labels, IReadOnlyList<string> meanings,
