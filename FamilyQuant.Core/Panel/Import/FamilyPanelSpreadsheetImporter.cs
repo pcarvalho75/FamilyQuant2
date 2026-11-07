@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace FamilyQuant.Panels.Import;
 
-public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreadsheetImporter
+public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreadsheetImporter, IFamilyPanelWorkbookImporter
 {
     private static readonly Regex PfamAccession = new(@"(?<![A-Za-z0-9])PF\d{5}(?!\d)", RegexOptions.CultureInvariant);
     private static readonly Regex NamedPfam = new(@"(?<name>[^;,\r\n()]+?)\s*\(\s*(?<accession>PF\d{5})(?:\.\d+)?\s*\)", RegexOptions.CultureInvariant);
