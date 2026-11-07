@@ -1,11 +1,14 @@
 using FamilyQuant.Evidence;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace FamilyQuant.Tests;
 
@@ -32,6 +35,7 @@ internal static partial class Program
     private static void PanelChecklistActionsTests(string output)
     {
         EnsureApplication(); Directory.CreateDirectory(output);
+        ChecklistPreviewLayoutWaitTests();
         var previous = Themes.ThemeManager.Current;
         try
         {
@@ -64,9 +68,8 @@ internal static partial class Program
                     Check("Z12n2 " + theme + " " + size.Item1 + " scope action previews stored evidence and requires explicit proposal update",
                         WordCluster.ParseKeywords(model.ScopeText).Contains("alternate activity") && model.ScopeChangePreview?.Proteins == 2
                         && updates == 0 && !model.CanConfirm && !model.CanPlaceChecklistMatches && file.ToJsonText() == before);
-                    FinishReviewWork(async () => await System.Threading.Tasks.Task.Delay(300));
-                    window.UpdateLayout(); PumpDispatcher();
                     var inlinePreview = (TextBox)window.FindName("ChecklistScopePreview");
+                    WaitForChecklistPreviewLayout(window, inlinePreview, "Z12n2 " + theme + " " + size.Item1, TimeSpan.FromSeconds(10));
                     Check("Z12n2 " + theme + " " + size.Item1 + " scope preview is readable next to checklist actions",
                         inlinePreview.IsVisible && inlinePreview.Text.Contains(model.ScopePreviewSummary, StringComparison.Ordinal)
                         && inlinePreview.ActualHeight >= 48 && inlinePreview.TransformToAncestor(window).Transform(new Point(0, inlinePreview.ActualHeight)).Y <= window.ActualHeight);
@@ -148,5 +151,104 @@ internal static partial class Program
         punctuationModel.AddChecklistPhrase();
         Check("Z12n2-fix punctuated phrase compares parsed forms and disables repeat Add", initiallyAvailable && !punctuationModel.CanAddChecklistPhrase
             && WordCluster.ParseKeywords(scopeAfter).Contains("alternate activity") && punctuationModel.ScopeText == scopeAfter);
+    }
+
+    private static int WaitForChecklistPreviewLayout(Window window, TextBox preview, string context, TimeSpan timeout)
+    {
+        if (timeout <= TimeSpan.Zero) throw new ArgumentOutOfRangeException(nameof(timeout));
+        window.Dispatcher.VerifyAccess();
+        var elapsed = Stopwatch.StartNew();
+        var frame = new DispatcherFrame();
+        var deadline = new DispatcherTimer(DispatcherPriority.Send, window.Dispatcher) { Interval = timeout };
+        DispatcherOperation? pendingRead = null;
+        ChecklistPreviewLayout? previous = null;
+        ChecklistPreviewLayout last = default;
+        Exception? measurementError = null;
+        TimeSpan? lastRenderTime = null;
+        int samples = 0;
+        bool settled = false, readQueued = false;
+        void StopAtDeadline(object? sender, EventArgs args) => frame.Continue = false;
+        void ReadAfterRender(object? sender, EventArgs args)
+        {
+            if (readQueued || settled) return;
+            if (args is RenderingEventArgs rendering)
+            {
+                if (lastRenderTime == rendering.RenderingTime) return;
+                lastRenderTime = rendering.RenderingTime;
+            }
+            readQueued = true;
+            pendingRead = window.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() =>
+            {
+                try
+                {
+                    window.UpdateLayout();
+                    last = new ChecklistPreviewLayout(preview.IsVisible, preview.Text, preview.ActualWidth, preview.ActualHeight,
+                        preview.TransformToAncestor(window).Transform(new Point(0, preview.ActualHeight)).Y,
+                        window.ActualWidth, window.ActualHeight,
+                        window.IsLoaded && preview.IsLoaded && window.IsMeasureValid && window.IsArrangeValid
+                            && preview.IsMeasureValid && preview.IsArrangeValid);
+                    samples++;
+                    // Separate render/idle passes must agree; a stable unreadable size still reaches the original assertion.
+                    settled = last.Visible && last.LayoutValid && previous == last;
+                    previous = last;
+                    if (settled) frame.Continue = false;
+                }
+                catch (Exception error) { measurementError = error; frame.Continue = false; }
+                finally { readQueued = false; }
+            }));
+        }
+        try
+        {
+            CompositionTarget.Rendering += ReadAfterRender;
+            deadline.Tick += StopAtDeadline; deadline.Start();
+            window.InvalidateVisual(); Dispatcher.PushFrame(frame);
+        }
+        finally
+        {
+            deadline.Stop(); deadline.Tick -= StopAtDeadline;
+            CompositionTarget.Rendering -= ReadAfterRender;
+            pendingRead?.Abort(); elapsed.Stop();
+        }
+        if (measurementError != null) throw new InvalidOperationException(context + " layout measurement failed for " + preview.Name, measurementError);
+        if (!settled)
+        {
+            string diagnostic = FormattableString.Invariant($"visible={last.Visible}, layoutValid={last.LayoutValid}, textLength={last.Text?.Length ?? 0}, ");
+            diagnostic += FormattableString.Invariant($"size={last.Width:R}x{last.Height:R}, bottom={last.Bottom:R}, window={last.WindowWidth:R}x{last.WindowHeight:R}.");
+            throw new TimeoutException(FormattableString.Invariant(
+                $"{context}: {preview.Name} layout did not settle after {elapsed.Elapsed.TotalMilliseconds:F0} ms; samples={samples}, ") + diagnostic);
+        }
+        Console.WriteLine(FormattableString.Invariant($"  {context}: layout settled after {samples} render/idle reads in {elapsed.Elapsed.TotalMilliseconds:F0} ms."));
+        return samples;
+    }
+
+    private readonly record struct ChecklistPreviewLayout(bool Visible, string Text, double Width, double Height,
+        double Bottom, double WindowWidth, double WindowHeight, bool LayoutValid);
+
+    private static void ChecklistPreviewLayoutWaitTests()
+    {
+        var preview = new TextBox { Name = "DelayedChecklistPreview", Text = "Synthetic delayed preview", Height = 72,
+            Visibility = Visibility.Hidden };
+        var window = new Window { Content = preview, Width = 360, Height = 180, ShowActivated = false, ShowInTaskbar = false };
+        bool revealed = false;
+        var reveal = new DispatcherTimer(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(700) };
+        reveal.Tick += (_, _) => { reveal.Stop(); revealed = true; preview.Visibility = Visibility.Visible; };
+        try
+        {
+            window.Show(); reveal.Start();
+            int samples = WaitForChecklistPreviewLayout(window, preview, "Z12n2b delayed preview", TimeSpan.FromSeconds(10));
+            Check("Z12n2b delayed preview waits for two matching visible layout reads", revealed && preview.IsVisible
+                && preview.ActualHeight == 72 && samples >= 2);
+            preview.Name = "NeverReadyChecklistPreview"; preview.Visibility = Visibility.Hidden;
+            bool failedLoudly = false;
+            try { WaitForChecklistPreviewLayout(window, preview, "Z12n2b never-ready preview", TimeSpan.FromMilliseconds(200)); }
+            catch (TimeoutException error)
+            {
+                failedLoudly = error.Message.Contains("NeverReadyChecklistPreview", StringComparison.Ordinal)
+                    && error.Message.Contains("did not settle", StringComparison.Ordinal)
+                    && error.Message.Contains("samples=", StringComparison.Ordinal);
+            }
+            Check("Z12n2b a never-ready preview fails with bounded layout diagnostics", failedLoudly);
+        }
+        finally { reveal.Stop(); window.Close(); PumpDispatcher(); }
     }
 }
