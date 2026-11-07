@@ -354,6 +354,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ReferencePanelScopeUiTests(Path.Combine(workDir, "reference-panel-scope-ui")));
             suite.Add(() => ReferencePanelExpansionTests(Path.Combine(workDir, "reference-panel-expansion")));
             suite.AddWithApplication(() => ReferencePanelExpansionUiTests(Path.Combine(workDir, "reference-panel-expansion-ui")));
+            suite.AddWithApplication(() => ScopedSubclassFlowTests(Path.Combine(workDir, "scoped-subclass-flow")));
             suite.Add(() => EvidenceOperationTests());
             suite.Section("Database update - one-to-one matching of a project with a new database file");
             suite.Add(() => DatabaseUpdateMatchingTests());

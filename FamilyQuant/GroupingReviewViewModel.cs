@@ -31,6 +31,8 @@ namespace FamilyQuant
         private readonly Func<string, OperationContext, Task>? fetchMissingPanel;
         private readonly Func<string, string>? panelCoverage;
         private readonly Func<string, bool>? panelCovered;
+        private readonly Func<string>? fullPanelRequirement;
+        public string FullPanelHint => fullPanelRequirement?.Invoke() ?? "";
         public bool CanFetchMissingPanel => fetchMissingPanel != null && !IsBusy && WordCluster.ParseKeywords(ScopeText).Count > 0 && panelCovered?.Invoke(ScopeText) != true;
         public bool PanelFetchAvailable => fetchMissingPanel != null;
         public string PanelCoverageText => panelCoverage?.Invoke(ScopeText) ?? "";
@@ -93,7 +95,7 @@ namespace FamilyQuant
         private static string QuoteScopeKeyword(string keyword) => "\""
             + Regex.Replace(keyword.Replace('"', ' ').Replace('\u201c', ' ').Replace('\u201d', ' '), @"\s+", " ").Trim() + "\"";
         public string Summary => ModeIndex == 1 ? Evidence?.Summary ?? "Set the scope and build an evidence proposal." : Keyword.Headline;
-        public bool CanConfirm => !IsBusy && (ModeIndex == 1 ? Evidence?.CanConfirm == true && ScopeText == proposalScope
+        public bool CanConfirm => !IsBusy && (ModeIndex == 1 ? Evidence?.CanConfirm == true && FullPanelHint.Length == 0 && ScopeText == proposalScope
             && (MotifPattern.Length == 0 || checkedMotifPattern == MotifPattern) : Keyword.CanCreate);
         public string ApplyHint
         {
@@ -101,6 +103,7 @@ namespace FamilyQuant
             {
                 if (ModeIndex != 1) return "";
                 if (IsBusy) return "Please wait for the current review step to finish.";
+                if (FullPanelHint.Length > 0) return FullPanelHint;
                 if (manualFailure.Length > 0) return manualFailure;
                 if (!string.IsNullOrWhiteSpace(ScopeText) && panelCovered?.Invoke(ScopeText) == false) return PanelCoverageText;
                 if (Evidence == null) return string.IsNullOrWhiteSpace(ScopeText)
@@ -131,7 +134,8 @@ namespace FamilyQuant
             Func<IReadOnlyList<int>, EvidenceReviewInput>? removeFromFamily = null,
             Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null,
             Func<string, Panels.PanelConfirmedEvidenceMatches, EvidenceReviewInput>? confirmPanelMatches = null,
-            Func<string, OperationContext, Task>? fetchMissingPanel = null, Func<string, string>? panelCoverage = null, Func<string, bool>? panelCovered = null)
+            Func<string, OperationContext, Task>? fetchMissingPanel = null, Func<string, string>? panelCoverage = null, Func<string, bool>? panelCovered = null,
+            Func<string>? fullPanelRequirement = null)
         {
             Keyword = new KeywordReviewViewModel(keyword); this.propose = propose; this.motif = motif;
             this.discoverTask = discoverTaskWithProgress ?? (discoverTask == null ? null : (_, token) => discoverTask(token));
@@ -143,6 +147,7 @@ namespace FamilyQuant
             this.confirmPanelMatches = confirmPanelMatches;
             this.fetchMissingPanel = fetchMissingPanel; this.panelCoverage = panelCoverage;
             this.panelCovered = panelCovered;
+            this.fullPanelRequirement = fullPanelRequirement;
             scopeText = initialScope; proposalScope = initialScope;
             Keyword.PropertyChanged += (_, _) => NotifySummary();
             SetEvidence(input);

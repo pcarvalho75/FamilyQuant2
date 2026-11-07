@@ -133,6 +133,8 @@ public sealed partial class EvidenceGroupingSession
     public EvidenceApplyResult Apply(EvidenceReviewSelection selection)
     {
         EnsureCurrent();
+        string fullRequirement = FullPanelRequirement();
+        if (fullRequirement.Length > 0) throw new InvalidOperationException(fullRequirement);
         if (selection.ManualChoices?.Count > 0 || manualChoices.Count > 0)
         {
             var membership = Proposal?.Proteins.Select(p => (p.ProteinIndex, p.Family)).ToArray();
