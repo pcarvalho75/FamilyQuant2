@@ -60,8 +60,9 @@ public sealed partial class CurationViewModel : ScreenViewModel
     public void Undo()
     {
         if (!CanUndo) return;
-        var snapshot = UndoStack[^1]; UndoStack.RemoveAt(UndoStack.Count - 1);
+        var snapshot = UndoStack[^1];
         snapshot.Restore(Document);
+        UndoStack.RemoveAt(UndoStack.Count - 1);
         NotifyDocumentChanged();
     }
     public void RecordFamilyEdit(FastaItemExtended protein, int family)
