@@ -168,7 +168,9 @@ public sealed partial class FamilyListImportViewModel
             token.ThrowIfCancellationRequested();
             if (current.SourceSha256 != expectedSource || current.Problems.Any(p => p.Severity == PanelImportSeverity.Blocking))
             { Status = "The workbook changed or could not be read. Choose it again before importing."; return false; }
-            if (KeepOtherSheets)
+            if (workbookSnapshot != null && workbookSource != null)
+                panel = workbookSource.CompletePanel(panel, workbookSnapshot);
+            else if (KeepOtherSheets)
                 foreach (string other in current.SheetNames.Where(name => name != sheet))
                 {
                     var preview = await Task.Run(() => reader.ReadPreview(path, other), token);

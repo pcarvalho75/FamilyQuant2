@@ -30,6 +30,7 @@ public partial class FamilyListImportWindow : Window
         TemplateButton.IsEnabled = templateWriter != null;
         if (templateWriter == null) TemplateButton.ToolTip = "Unavailable because this window was opened without a template writer; open File > Import family list to save the built-in template. Nothing changes in the project or workbook.";
         DecisionActionColumn.ItemsSource = FamilyListImportViewModel.DecisionOptions;
+        WorkbookRoleColumn.ItemsSource = FamilyListImportViewModel.SheetRoles;
         Model.PropertyChanged += Model_Changed;
         PreviewKeyDown += Window_KeyDown;
         Closed += (_, _) => { Model.PropertyChanged -= Model_Changed; Model.Dispose(); };
@@ -37,6 +38,11 @@ public partial class FamilyListImportWindow : Window
 
     private void Model_Changed(object? sender, PropertyChangedEventArgs e)
     {
+        if (e.PropertyName == nameof(FamilyListImportViewModel.HasWorkbookMap))
+        {
+            WorkbookTabs.SelectedItem = Model.HasWorkbookMap ? WorkbookMapTab : SheetPreviewTab;
+            DecisionMeaningColumn.Visibility = Model.HasWorkbookMap ? Visibility.Visible : Visibility.Collapsed;
+        }
         if (e.PropertyName == nameof(FamilyListImportViewModel.Preview)) BuildPreview();
         if (e.PropertyName is nameof(FamilyListImportViewModel.Page) or nameof(FamilyListImportViewModel.ReviewingDecisions))
             Dispatcher.BeginInvoke(new Action(() => { if (!closing && IsLoaded) { PageHeading.Focus(); PageHeading.BringIntoView(); } }));
@@ -192,6 +198,9 @@ public partial class FamilyListImportWindow : Window
         else if (e.Key == Key.F1) { e.Handled = true; ShowHelp(); }
     }
     private void Help_Click(object sender, RoutedEventArgs e) => ShowHelp();
+    private void WorkbookNotes_Click(object sender, RoutedEventArgs e) => TextReportWindow.Show("Workbook source notes",
+        string.Join("\n\n", Model.KeptNotes.Select(n => n.SheetName + "\n" + n.Text)), this, wrap: true);
+    private async void WorkbookFamilySheet_Click(object sender, RoutedEventArgs e) => await Model.ChooseWorkbookFamilySheetAsync();
     private void ShowHelp() => FamilyListImportGuideWindow.Show(this);
 
     private void CommitGridEdits()

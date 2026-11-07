@@ -31,6 +31,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     private readonly FamilyListImportTransaction transaction;
     private readonly IFamilyListImportMatches? matcher;
     private readonly Func<FamilyClusterFile, OperationContext, FamilyClusterFile> copyProject;
+    private readonly IFamilyListWorkbookSource? workbookSource;
     private CancellationTokenSource? operation;
     private Task activeRead = Task.CompletedTask;
     private int readGeneration, page, headerRow = 1;
@@ -99,7 +100,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public bool CanNext => !IsBusy && (Imported || page switch
     {
         0 => true,
-        1 => table != null && int.TryParse(HeaderRowText, out int editedHeader) && table.HeaderRowNumber == editedHeader && Preview != null
+        1 => !NeedsFamilySheetChoice && !WorkbookHasBlockingProblems && table != null && int.TryParse(HeaderRowText, out int editedHeader) && table.HeaderRowNumber == editedHeader && Preview != null
             && headerRow > 0 && !Preview.Problems.Any(p => p.Severity == PanelImportSeverity.Blocking),
         2 => MappingValid && Decisions.All(d => d.Confirmed && d.Decision != null),
         3 => check.CanImport && SpecialRows.All(r => !r.Blocking),
@@ -117,16 +118,19 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
 
     public FamilyListImportViewModel(FamilyListImportTransaction transaction, IPanelSheetPreviewReader? reader = null,
         IFamilyPanelSpreadsheetImporter? importer = null, IFamilyListImportMatches? matcher = null,
-        Func<FamilyClusterFile, OperationContext, FamilyClusterFile>? copyProject = null)
+        Func<FamilyClusterFile, OperationContext, FamilyClusterFile>? copyProject = null,
+        IFamilyListWorkbookSource? workbookSource = null)
     {
         this.transaction = transaction; this.reader = reader ?? new PanelSpreadsheetReader();
         this.importer = importer ?? new FamilyPanelSpreadsheetImporter(); this.matcher = matcher ?? new FamilyListStoredEvidenceMatches(transaction.Project);
         this.copyProject = copyProject ?? (static (source, context) => source.DeepCopy(context));
+        this.workbookSource = workbookSource;
         PreviousPanel = transaction.PreviousPanel;
     }
 
     public Task LoadAsync(string workbookPath, string sheetName = "", int? selectedHeaderRow = null)
     {
+        if (!string.Equals(path, workbookPath, StringComparison.OrdinalIgnoreCase)) workbookRoles.Clear();
         operation?.Cancel(); operation?.Dispose(); operation = new CancellationTokenSource();
         int generation = ++readGeneration;
         activeRead = LoadCoreAsync(workbookPath, sheetName, selectedHeaderRow, operation.Token, generation);
@@ -135,24 +139,33 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
 
     private async Task LoadCoreAsync(string workbookPath, string sheetName, int? selectedHeaderRow, CancellationToken token, int generation)
     {
-        IsBusy = true; Status = "Reading spreadsheet...";
+        IsBusy = true; Status = workbookSource == null ? "Reading spreadsheet..." : "Reading workbook...";
         try
         {
-            var preview = await Task.Run(() => reader.ReadPreview(workbookPath, sheetName), token);
+            var roles = new Dictionary<string, PanelWorkbookSheetRole>(workbookRoles, StringComparer.Ordinal);
+            var workbook = workbookSource == null ? null : await Task.Run(() => workbookSource.Read(workbookPath, roles, sheetName, token), token);
+            token.ThrowIfCancellationRequested();
+            string selectedSheet = sheetName.Length > 0 ? sheetName : workbook?.FamilySheet ?? "";
+            var suppliedSheet = workbook?.Workbook.Sheets.FirstOrDefault(s => s.SheetName == selectedSheet);
+            var preview = suppliedSheet?.Preview ?? await Task.Run(() => reader.ReadPreview(workbookPath, selectedSheet), token);
             token.ThrowIfCancellationRequested();
             int selectedRow = selectedHeaderRow ?? preview.ProposedHeaderRow;
             PanelSpreadsheetTable? loaded = selectedRow > 0 && !preview.Problems.Any(p => p.Severity == PanelImportSeverity.Blocking)
-                ? await Task.Run(() => reader.ReadTable(workbookPath, preview.SheetName, selectedRow), token) : null;
+                ? suppliedSheet?.Table is { } supplied && supplied.HeaderRowNumber == selectedRow ? supplied
+                    : await Task.Run(() => reader.ReadTable(workbookPath, preview.SheetName, selectedRow), token) : null;
             token.ThrowIfCancellationRequested();
             if (generation != readGeneration) return;
             if (loaded != null && preview.SourceSha256 != loaded.SourceSha256)
             { Status = "The workbook changed while it was being read. Choose the file again."; return; }
+            if (workbook != null && workbook.Workbook.SourceSha256 != preview.SourceSha256)
+            { Status = "The workbook changed while its sheets were being read. Choose the file again."; return; }
             updating = true;
+            SetWorkbook(workbook);
             path = workbookPath; sheet = preview.SheetName; Preview = preview; table = loaded; check = new(); HeaderRow = selectedRow;
             HeaderRowText = selectedRow.ToString(CultureInfo.CurrentCulture);
             var proposal = loaded == null ? new PanelImportProposal { Choices = new FamilyPanelImport { ImportVersion = PanelImportRules.Current } }
-                : importer.Propose(loaded);
-            choices = proposal.Choices; DecisionHint = proposal.DecisionHint; DecisionHintReason = proposal.DecisionHintReason; quantifyAllConfirmed = false;
+                : workbook != null && loaded.SheetName == workbook.FamilySheet ? workbook.FamilyProposal : importer.Propose(loaded);
+            choices = System.Text.Json.JsonSerializer.Deserialize<FamilyPanelImport>(System.Text.Json.JsonSerializer.Serialize(proposal.Choices))!; DecisionHint = proposal.DecisionHint; DecisionHintReason = proposal.DecisionHintReason; quantifyAllConfirmed = false;
             choices.RowChoices = new(); choices.ColorLabels = null;
             PanelName = Path.GetFileNameWithoutExtension(workbookPath);
             Columns.Clear(); Decisions.Clear(); SourceColorChoices.Clear(); MatchFamilies.Clear(); matchesFingerprint = ""; ReviewingDecisions = false;
@@ -232,6 +245,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         Changed(nameof(Steps)); Changed(nameof(CanEdit));
         Changed(nameof(BackToolTip)); Changed(nameof(CloseToolTip)); Changed(nameof(ForwardToolTip));
         Changed(nameof(MainColumns)); Changed(nameof(ColorColumn));
+        Changed(nameof(CanChooseFamilySheet));
         Changed(nameof(DecisionHint)); Changed(nameof(DecisionHintReason)); Changed(nameof(HasDecisionHint)); Changed(nameof(DecisionHintQuestion));
     }
 
