@@ -369,6 +369,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReferencePanelTests(workDir));
             suite.Add(() => ReferencePanelStreamTests());
             suite.Add(() => ReferencePanelScopeTests(Path.Combine(workDir, "reference-panel-scope")));
+            suite.AddWithApplication(() => ReferencePanelScopeRouteTests());
             suite.AddWithApplication(() => ReferencePanelScopeUiTests(Path.Combine(workDir, "reference-panel-scope-ui")));
             suite.Add(() => ReferencePanelExpansionTests(Path.Combine(workDir, "reference-panel-expansion")));
             suite.AddWithApplication(() => ReferencePanelExpansionUiTests(Path.Combine(workDir, "reference-panel-expansion-ui")));
