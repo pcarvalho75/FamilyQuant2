@@ -93,7 +93,9 @@ internal static partial class Program
                     string path = Path.Combine(output, kind + "-" + repeat.ToString(CultureInfo.InvariantCulture)); folders.Add(path);
                     ShellDialogs.FilePresenter = (_, _, dialog) => { dialog.FileName = path; return true; };
                     ShellDialogs.FolderPresenter = (_, _, dialog) => { dialog.FolderName = path; return true; };
+                    var exportWatch = System.Diagnostics.Stopwatch.StartNew();
                     button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); FinishBusyOperation(host);
+                    Console.WriteLine(FormattableString.Invariant($"MEASURE Results export kind={kind} repeat={repeat} seconds={exportWatch.Elapsed.TotalSeconds:F3}"));
                 }
                 string success = model.Status;
                 bool sameCharts = ReferenceEquals(data, model.Data) && chartObjects.SequenceEqual(((StackPanel)control.FindName("PanelCharts")).Children.Cast<object>());

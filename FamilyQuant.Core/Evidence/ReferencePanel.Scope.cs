@@ -66,6 +66,20 @@ public static partial class ReferencePanelFetcher
         var accumulated = NormalizeScope(covered.Concat(terms));
         full |= accumulated.Count >= MaximumFamiliesPerStream || Uri.EscapeDataString(ScopeClause(accumulated)).Length > 2500;
         bool InScope(ProteinEvidence evidence) => EvidenceClassifier.IsInScope(evidence, accumulated);
+        var closureFamilies = FamiliesFound(file, InScope)
+            .Concat(previous?.Entries.Where(entry => InScope(entry.Evidence)).SelectMany(entry => FamiliesOf(entry.Evidence)) ?? Enumerable.Empty<string>())
+            .Where(universeSet.Contains).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        bool unknownClosure = closureFamilies.Count == 0;
+        closureFamilies.UnionWith((previous?.Coverage?.WholeFamilies ?? Enumerable.Empty<string>()).Where(universeSet.Contains));
+        // Response sizes for unseen entries are unavailable. Use the known whole-family closure:
+        // the broad review moved 962,964 bytes scoped versus 489,218 full, nearly twice as much.
+        // Half the panel's families is the conservative count fallback for that duplicate transfer.
+        // With no local match the closure is unknown, so fetch full rather than risk downloading it twice.
+        string routeReason = full ? request.FullPanel ? "selected explicitly" : "scope exceeds scoped query limits"
+            : unknownClosure ? "no local family matches this scope"
+            : $"the scope covers {closureFamilies.Count} of {universe.Count} families";
+        full |= universe.Count > 0 && (unknownClosure || closureFamilies.Count * 2L >= universe.Count);
+        progress?.Report(new FetchProgress { Message = (full ? "Full panel: " : "Scoped panel: ") + routeReason });
         var whole = new HashSet<string>(previous?.Coverage?.WholeFamilies
             ?? (storedFull && full ? previous!.Families : new List<string>()), StringComparer.OrdinalIgnoreCase);
         whole.IntersectWith(universeSet);

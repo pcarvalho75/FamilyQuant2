@@ -21,7 +21,7 @@ public sealed class ImportColumnChoice : ScreenViewModel
     public bool HasChoice => Header.Length > 0;
     public string ToolTip => (Role switch
     {
-        PanelImportFields.FamilyKey => "The column holding each family's stable abbreviation; proposed from the headers, with one nonempty key per imported family.",
+        PanelImportFields.FamilyKey => "The column holding each family's stable abbreviation; proposed from the headers, with one nonempty abbreviation per imported family.",
         PanelImportFields.DisplayName => "The column holding the family name to display; proposed from the headers, with a nonempty name for each imported family.",
         PanelImportFields.OtherName => "An optional column of other-language names, proposed from the headers; Not used keeps these as original source text only.",
         PanelImportFields.Notes => "An optional column of family notes, proposed from the headers; all original columns remain available as source text.",

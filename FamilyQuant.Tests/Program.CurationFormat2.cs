@@ -164,6 +164,14 @@ internal static partial class Program
         }
     }
 
+    /// <summary>Pools a large text in its section, to reach the header limit.</summary>
+    [CurationFormatPart("test-large-pool", 902)]
+    private sealed class LargePoolTestPart : CurationFormatPart
+    {
+        public override void PrepareWrite(FamilyClusterFile file, CurationFormatContext context) =>
+            context.SetSection(this, new[] { new string('P', 200_000) });
+    }
+
     private sealed class UnmarkedTestPart : CurationFormatPart { }
 
     [CurationFormatPart("test-description-pool", 5)]
@@ -202,7 +210,7 @@ internal static partial class Program
             proteins.Add(new FastaItemExtended
             {
                 SequenceIdentifier = "tr|X" + (i + 1).ToString(CultureInfo.InvariantCulture) + "|X" + (i + 1).ToString(CultureInfo.InvariantCulture) + "_INVENT",
-                Sequence = sequences[i], Description = "Invented protein " + i.ToString(CultureInfo.InvariantCulture) + " (quotes \" and accents áê)",
+                Sequence = sequences[i], Description = "Invented protein " + i.ToString(CultureInfo.InvariantCulture) + " (quotes \" and accents \u00e1\u00ea)",
                 UserID = 1 + i % 2, USearchID = 1 + i % 2, Evidence = Evidence("X" + (i + 1).ToString(CultureInfo.InvariantCulture), sequences[i], i == 0),
             });
         foreach (var target in proteins.ToArray())
@@ -240,7 +248,7 @@ internal static partial class Program
 
         // Detection.
         Check("Z15b1 detection: a root object is format 1, a root array format 2, through a byte order mark and whitespace",
-            CurationFormat.Detect("{}") == 1 && CurationFormat.Detect("﻿ \r\n\t[") == 2 && CurationFormat.Detect("") == 1
+            CurationFormat.Detect("{}") == 1 && CurationFormat.Detect("\uFEFF \r\n\t[") == 2 && CurationFormat.Detect("") == 1
             && CurationFormat.Detect(() => new MemoryStream(new byte[] { 0xEF, 0xBB, 0xBF, (byte)' ', (byte)'[' })) == 2
             && CurationFormat.Detect(() => new MemoryStream(Encoding.Unicode.GetPreamble().Concat(Encoding.Unicode.GetBytes("{}")).ToArray())) == 1
             && CurationFormat.Detect(() => new SaveShortRead(Encoding.UTF8.GetBytes("   \n  [ ]"))) == 2);
@@ -419,6 +427,25 @@ internal static partial class Program
             var read = CurationFormat.Read(() => new SaveShortRead(bytes), synthetic);
             Check("Z15b1 the format-2 reader works through 7-byte reads, with a header section larger than its first buffer",
                 read.ToJsonText() == large.ToJsonText() && JsonNode.Parse(bytes)![0]!["Sections"]!.ToJsonString().Length > 64 * 1024);
+        }
+        // Z15b1a: the writer refuses a header the reader would refuse, before writing a byte, and names the part.
+        var largePool = CurationFormatRegistry.Discover(new[] { typeof(DescriptionPoolTestPart), typeof(LargePoolTestPart) });
+        var limited = typeof(CurationFormat).GetMethod("Write", BindingFlags.Static | BindingFlags.NonPublic,
+            new[] { typeof(FamilyClusterFile), typeof(Stream), typeof(IReadOnlyList<CurationFormatPart>), typeof(int) })!;
+        using (var refused = new MemoryStream())
+        {
+            var error = Thrown(() => limited.Invoke(null, new object?[] { fixture, refused, largePool, 128 * 1024 }));
+            Check("Z15b1a the writer refuses a header over its limit before writing, naming the part with the largest section",
+                error is InvalidOperationException && refused.Length == 0
+                && error.Message.Contains("over the 0.1 MB a reader accepts", StringComparison.Ordinal)
+                && error.Message.EndsWith("The part \"test-large-pool\" writes 0.2 MB in its section.", StringComparison.Ordinal), error?.Message);
+        }
+        using (var accepted = new MemoryStream())
+        {
+            limited.Invoke(null, new object?[] { fixture, accepted, largePool, 512 * 1024 });
+            byte[] bytes = accepted.ToArray();
+            Check("Z15b1a under the limit the same parts write, and the 64 MB limit is the reader's own",
+                CurationFormat.Read(() => new MemoryStream(bytes, false), largePool).ToJsonText() == legacyText && CurationFormat.MaxHeaderBytes == 64 << 20);
         }
         Check("Z15b1 the stored-curation helpers read and edit both layouts",
             EditAndRead(template) && EditAndRead(legacyProject));

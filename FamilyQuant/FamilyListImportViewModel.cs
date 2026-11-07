@@ -1,5 +1,6 @@
 using FamilyQuant.Panels;
 using FamilyQuant.Panels.Import;
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,6 +30,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     private readonly IFamilyPanelSpreadsheetImporter importer;
     private readonly FamilyListImportTransaction transaction;
     private readonly IFamilyListImportMatches? matcher;
+    private readonly Func<FamilyClusterFile, OperationContext, FamilyClusterFile>? copyProjectOverride;
     private CancellationTokenSource? operation;
     private Task activeRead = Task.CompletedTask;
     private int readGeneration, page, headerRow = 1;
@@ -81,10 +83,10 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public string ForwardLabel => page == 5 && !Imported ? "Import" : page == 6 ? "Family checklist" : "Next";
     public string CloseLabel => Imported ? "Close" : "Cancel";
     public bool CanBack => !IsBusy && page > 0;
-    public string BackToolTip => !CanBack ? IsBusy ? "Wait for the spreadsheet read to finish before returning; Cancel stops the read without importing."
+    public string BackToolTip => !CanBack ? IsBusy ? "Wait for the current step to finish before returning; Cancel stops it without importing."
         : "This is the first step; choose Next to select a spreadsheet, or Cancel to leave without changes."
         : "Returns to the previous step and keeps your choices; going Back does not change the project or repeat an import.";
-    public string CloseToolTip => IsBusy ? "Cancels the active read and closes after it stops; no unfinished import is applied."
+    public string CloseToolTip => IsBusy ? "Cancels the current step and closes after it stops; no unfinished import is applied."
         : Imported ? "Closes the wizard and keeps the imported list; File > Save stores it with the project, and Undo is still available in the main window."
         : "Closes the wizard and discards its draft choices; the project and workbook are unchanged.";
     public string ForwardToolTip => !CanNext ? DisabledReason + " Nothing is imported while this action is unavailable."
@@ -114,10 +116,12 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         new("One group reported under others", FamilyPanelRowAction.ReportUnderOthers) };
 
     public FamilyListImportViewModel(FamilyListImportTransaction transaction, IPanelSheetPreviewReader? reader = null,
-        IFamilyPanelSpreadsheetImporter? importer = null, IFamilyListImportMatches? matcher = null)
+        IFamilyPanelSpreadsheetImporter? importer = null, IFamilyListImportMatches? matcher = null,
+        Func<FamilyClusterFile, OperationContext, FamilyClusterFile>? copyProject = null)
     {
         this.transaction = transaction; this.reader = reader ?? new PanelSpreadsheetReader();
         this.importer = importer ?? new FamilyPanelSpreadsheetImporter(); this.matcher = matcher ?? new FamilyListStoredEvidenceMatches(transaction.Project);
+        this.copyProjectOverride = copyProject;
         PreviousPanel = transaction.PreviousPanel;
     }
 
@@ -168,7 +172,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     }
 
     public async Task CancelReadAsync()
-    { operation?.Cancel(); try { await activeRead; } catch (OperationCanceledException) { } }
+    { if (IsBusy) Status = "Cancelling the current step..."; operation?.Cancel(); try { await activeRead; } catch (OperationCanceledException) { } }
 
     public void Back()
     { if (page == 2 && ReviewingDecisions) ReviewingDecisions = false; else if (CanBack) GoTo(page - 1); }
@@ -189,14 +193,13 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         if (page == 5) { var commit = CommitAsync(); activeRead = commit; return await commit; }
         if (page == 3)
         {
-            try { PrepareMatches(); }
-            catch (Exception error) when (error is ArgumentException or InvalidOperationException)
-            { Status = error.Message; return false; }
+            var preparation = PrepareMatchesAsync(); activeRead = preparation;
+            if (!await preparation) return false;
         }
         GoTo(page + 1); return true;
     }
 
-    public string DisabledReason => IsBusy ? "Wait for the spreadsheet to finish reading, or cancel."
+    public string DisabledReason => IsBusy ? "Wait for the current step to finish, or cancel."
         : page == 1 ? "Choose a readable file, sheet and header row."
         : page == 2 ? "Choose the required columns and confirm each decision value."
         : page == 3 ? SpecialRows.FirstOrDefault(r => r.Blocking)?.Message ?? check.Problems.FirstOrDefault(p => p.Severity == PanelImportSeverity.Blocking)?.Message ?? "Review the special rows."
