@@ -42,8 +42,8 @@ internal static partial class Program
             Check("Z16a1 shipped map separates one legend, one subclass table and three notes sheets",
                 shipped.Workbook.Sheets.Count(sheet => sheet.Role == PanelWorkbookSheetRole.ColorLegend) == 1
                 && shipped.SubclassTables.Count == 1 && shipped.Workbook.Sheets.Count(sheet => sheet.Role == PanelWorkbookSheetRole.Notes) == 3);
-            Check("Z16a1 detected legend is explicitly not read yet and its full text remains kept", shipped.ColorsState == PanelWorkbookReadState.NotRead
-                && shipped.DecisionsState == PanelWorkbookReadState.NotRead && shipped.Colors.Count == 0 && shipped.Decisions.Count == 0
+            Check("Z16a1 enriched legend slots are read and their full source text remains kept", shipped.ColorsState == PanelWorkbookReadState.Read
+                && shipped.DecisionsState == PanelWorkbookReadState.Read && shipped.Colors.Count > 0 && shipped.Decisions.Count > 0
                 && shipped.Notes.Any(note => note.SheetName == shipped.Workbook.Sheets.Single(sheet => sheet.Role == PanelWorkbookSheetRole.ColorLegend).SheetName
                     && note.Text.Length > 0));
             Check("Z16a1 shipped opening proposal carries family columns, multi-family rows and Pfam facts",
