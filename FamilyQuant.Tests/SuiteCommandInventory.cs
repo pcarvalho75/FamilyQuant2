@@ -358,6 +358,8 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-reference-panel-stream", "FamilyQuant.Tests.Program.EvidenceOperationTests()", "FamilyQuant.Tests.Program.ReferencePanelStreamTests()", "FamilyQuant.Tests.Program.ReferencePanelTests(System.String)"),
         SuiteCommandRule.Covered("--test-reference-panel-scope", "FamilyQuant.Tests.Program.ReferencePanelScopeTests(System.String)"),
         SuiteCommandRule.Covered("--test-reference-panel-scope-ui", "FamilyQuant.Tests.Program.ReferencePanelScopeUiTests(System.String)"),
+        SuiteCommandRule.Covered("--test-reference-panel-expansion", "FamilyQuant.Tests.Program.ReferencePanelExpansionTests(System.String)"),
+        SuiteCommandRule.Covered("--test-reference-panel-expansion-ui", "FamilyQuant.Tests.Program.ReferencePanelExpansionUiTests(System.String)"),
         SuiteCommandRule.Covered("--test-report-assembly", "FamilyQuant.Tests.Program.ReportAssemblyChecks(System.String)"),
         SuiteCommandRule.Covered("--test-report-attribution-cache", "FamilyQuant.Tests.Program.ReportAttributionCacheTests()"),
         SuiteCommandRule.Covered("--test-report-captions", "FamilyQuant.Tests.Program.ReportCaptionTests(System.String)"),

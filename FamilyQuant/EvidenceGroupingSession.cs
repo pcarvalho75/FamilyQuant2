@@ -39,7 +39,7 @@ public sealed partial class EvidenceGroupingSession
         scopePreviewProteins = EvidenceClassifier.ScopePreviewSnapshot(file.MyExtendedFastaItems);
         this.programVersion = programVersion;
         sourceFingerprint = EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems);
-        sourceMetadata = JsonSerializer.Serialize(file.EvidenceSource);
+        sourceMetadata = MetadataFingerprint(file.EvidenceSource);
         sourceLocks = new HashSet<int>(file.LockedUserIds);
         sourcePanel = JsonSerializer.Serialize(file.FamilyPanel);
         reviewPanel = file.FamilyPanel == null ? null : FamilyPanelValidation.Clone(file.FamilyPanel);
@@ -170,7 +170,7 @@ public sealed partial class EvidenceGroupingSession
     private void EnsureCurrent()
     {
         if (sourceFingerprint != EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems)
-            || sourceMetadata != JsonSerializer.Serialize(file.EvidenceSource) || !sourceLocks.SetEquals(file.LockedUserIds)
+            || sourceMetadata != MetadataFingerprint(file.EvidenceSource) || !sourceLocks.SetEquals(file.LockedUserIds)
             || sourcePanel != JsonSerializer.Serialize(file.FamilyPanel))
             throw new InvalidOperationException("The document changed while the review was open. Close it and build a new proposal.");
     }

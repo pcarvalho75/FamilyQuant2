@@ -335,6 +335,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReferencePanelStreamTests());
             suite.Add(() => ReferencePanelScopeTests(Path.Combine(workDir, "reference-panel-scope")));
             suite.AddWithApplication(() => ReferencePanelScopeUiTests(Path.Combine(workDir, "reference-panel-scope-ui")));
+            suite.Add(() => ReferencePanelExpansionTests(Path.Combine(workDir, "reference-panel-expansion")));
+            suite.AddWithApplication(() => ReferencePanelExpansionUiTests(Path.Combine(workDir, "reference-panel-expansion-ui")));
             suite.Add(() => EvidenceOperationTests());
             suite.Section("Coherence check - what the reviewed members of a family ever show");
             suite.Add(() => CoherenceCheckTests());

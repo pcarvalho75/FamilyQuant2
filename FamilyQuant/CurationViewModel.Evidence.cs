@@ -25,6 +25,7 @@ public sealed partial class CurationViewModel
         string sourceFingerprint = EvidenceClassifier.Fingerprint(Document.MyExtendedFastaItems);
         string domainSource = Document.DomainSource;
         var evidenceSource = Document.EvidenceSource;
+        string evidenceSourceFingerprint = PanelEvidenceMatching.FingerprintSource(evidenceSource);
         SynchronizationContext? ui = SynchronizationContext.Current;
         int previewRequest = Interlocked.Increment(ref domainPreviewGeneration);
         var positionAccessions = Quantitation.PositionAccessions(additionalPositionFamilyIds);
@@ -87,7 +88,8 @@ public sealed partial class CurationViewModel
         void EnsureCurrentSource()
         {
             if (Document.MyExtendedFastaItems.Count != source.Length || Document.DomainSource != domainSource
-                || !ReferenceEquals(Document.EvidenceSource, evidenceSource) || EvidenceClassifier.Fingerprint(Document.MyExtendedFastaItems) != sourceFingerprint
+                || !ReferenceEquals(Document.EvidenceSource, evidenceSource) || PanelEvidenceMatching.FingerprintSource(Document.EvidenceSource) != evidenceSourceFingerprint
+                || EvidenceClassifier.Fingerprint(Document.MyExtendedFastaItems) != sourceFingerprint
                 || Document.MyExtendedFastaItems.Where((protein, index) => !ReferenceEquals(protein, source[index].Item)
                     || protein.SequenceIdentifier != source[index].SequenceIdentifier || protein.Sequence != source[index].Sequence
                     || protein.Description != source[index].Description || protein.Domains != source[index].Domains

@@ -11,6 +11,22 @@ public partial class SuperClusterPreviewWindow
 {
     public AppOperationHost Operations { get; } = new();
 
+    private async void FetchMissingPanel_Click(object sender, System.Windows.RoutedEventArgs e) => await FetchMissingPanelAsync();
+    public async Task FetchMissingPanelAsync()
+    {
+        try
+        {
+            await AppOperationHost.OnUi(this, async () =>
+            {
+                if (Operations.IsBusy) return;
+                using var operation = Operations.Begin("Fetch missing panel", operationLogPath: AppOperationHost.CreateLogPath("panel-scope"));
+                await model.FetchMissingPanelAsync(operation.Context);
+            });
+        }
+        catch (OperationCanceledException) { model.ReportOperationCancellation(); }
+        catch (Exception error) { Operations.LogFailure(error); model.ReportOperationFailure(error); }
+    }
+
     private async Task RunReviewAsync(string title, Func<Task> work, bool taskDiscovery = false)
     {
         try

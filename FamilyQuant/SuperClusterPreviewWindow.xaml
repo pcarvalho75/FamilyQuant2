@@ -182,9 +182,14 @@
                     <DockPanel>
                         <Button DockPanel.Dock="Right" Content="Update proposal" Click="UpdateProposal_Click" IsEnabled="{Binding CanUpdateProposal}"
                                 ToolTip="Confirms your scope words and rebuilds the proposal from stored evidence. Your open document stays unchanged until Apply."/>
+                        <Button x:Name="FetchMissingPanelButton" Content="Fetch missing panel" DockPanel.Dock="Right" Click="FetchMissingPanel_Click" Margin="0,0,8,0"
+                                Visibility="{Binding PanelFetchAvailable, Converter={StaticResource VisibleWhenTrue}}" IsEnabled="{Binding CanFetchMissingPanel}"
+                                ToolTip="Download entries missing for the current scope and store the panel. Use Update proposal before Apply grouping; this is disabled when coverage is ready, scope is empty or another step is running."/>
                         <TextBlock DockPanel.Dock="Left" Text="Scope" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox x:Name="TaskScopeBox" Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Words to match in the evidence keywords and tissue fields. These are user choices, never a built-in family list."/>
                     </DockPanel>
+                    <TextBlock Text="{Binding PanelCoverageText}" Visibility="{Binding PanelFetchAvailable, Converter={StaticResource VisibleWhenTrue}}"
+                               TextTrimming="CharacterEllipsis" ToolTip="{Binding PanelCoverageText}" Margin="0,6,0,0"/>
                     <Border x:Name="ScopeChangePreviewPanel" Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}"
                             Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource MutedBrush}" BorderThickness="1" CornerRadius="4" Padding="10" Margin="0,8,0,0">
                         <StackPanel>
