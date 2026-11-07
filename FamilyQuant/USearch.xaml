@@ -13,23 +13,17 @@
                     <TextBlock Text="Database" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}" Margin="0,0,0,8"/>
                     <Grid>
                         <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-                        <TextBox x:Name="TextBoxDatabasePath" Text="{Binding DatabasePath}" IsReadOnly="True" VerticalAlignment="Center" Margin="0,0,10,0"
-                                 ToolTip="The FASTA or target-decoy database used by every action on this screen. Choose another file to change it."/>
-                        <Button x:Name="ButtonInput" Grid.Column="1" Content="Choose database" Click="ButtonInput_Click"
-                                ToolTip="Chooses a FASTA or target-decoy database without starting a run. Build, scan and preparation use this same selected file."/>
+                        <TextBox x:Name="TextBoxDatabasePath" Text="{Binding DatabasePath}" IsReadOnly="True" VerticalAlignment="Center" Margin="0,0,10,0" ToolTip="Read-only path of the selected FASTA or target-decoy database, initially empty. Choose database changes this pending input without editing the source file or the open project."/>
+                        <Button x:Name="ButtonInput" Grid.Column="1" Content="Choose database" Click="ButtonInput_Click" ToolTip="Choose the FASTA or target-decoy database used by build, scan and preparation without starting a run. The project and files stay unchanged; wait for the current run to finish if disabled."/>
                     </Grid>
                     <WrapPanel Margin="0,14,0,12">
                         <Label Content="Identity (%)" VerticalAlignment="Center" ToolTip="Percent identity two sequences need to join a family. Higher values produce smaller families."/>
-                        <numeric:IntegerUpDown x:Name="IntegerUpDownIdentity" Value="{Binding Identity, Mode=TwoWay}" Minimum="1" Maximum="100" Width="76" Margin="8,0,18,0"
-                                           ToolTip="Sequence identity for building families, from 1 to 100 percent. The usual starting value is 85."/>
-                        <CheckBox x:Name="CheckBoxExhaustiveClustering" Content="Exhaustive second pass" IsChecked="{Binding Exhaustive, Mode=TwoWay}" VerticalAlignment="Center"
-                                  ToolTip="Aligns every sequence pair to close gaps left by the fast pass. On by default; large databases require confirmation."/>
+                        <numeric:IntegerUpDown x:Name="IntegerUpDownIdentity" Value="{Binding Identity, Mode=TwoWay}" Minimum="1" Maximum="100" Width="76" Margin="8,0,18,0" ToolTip="Identity for the next Build families request: default 85 percent, whole numbers 1 to 100; higher values usually give smaller families. Editing writes no file; wait for the current run to finish if disabled."/>
+                        <CheckBox x:Name="CheckBoxExhaustiveClustering" Content="Exhaustive second pass" IsChecked="{Binding Exhaustive, Mode=TwoWay}" VerticalAlignment="Center" ToolTip="Enable the default second pass, which joins fast-pass families through all-pairs edges meeting identity and coverage over the longer sequence. This prepares the next build or scan without changing files; wait for a current run if disabled, and expect confirmation above 10,000 sequences."/>
                     </WrapPanel>
                     <WrapPanel>
-                        <Button x:Name="ButtonBuildFamilies" Content="Build families" Click="ButtonBuildFamilies_Click" Style="{DynamicResource PrimaryButton}" Margin="0,0,10,0" IsEnabled="False"
-                                ToolTip="Groups the chosen database at this identity and writes its Family Cluster File beside it. Disabled until a database is chosen."/>
-                        <Button x:Name="ButtonCalculateFDR" Content="Check mixing (FDR)" Click="ButtonCalculateFDR_Click" IsEnabled="False"
-                                ToolTip="{x:Static core:IdentifierText.CalculateFdrToolTip}"/>
+                        <Button x:Name="ButtonBuildFamilies" Content="Build families" Click="ButtonBuildFamilies_Click" Style="{DynamicResource PrimaryButton}" Margin="0,0,10,0" IsEnabled="False" ToolTip="Group the selected database at the chosen identity and write a .fcf beside it, asking before replacing one; Undo cannot recover a replaced file. Disabled until an existing database is chosen or while a run is active; open the written file to curate it."/>
+                        <Button x:Name="ButtonCalculateFDR" Content="Check mixing (FDR)" Click="ButtonCalculateFDR_Click" IsEnabled="False" ToolTip="Report mixed target-decoy families divided by all families in the last built result, without changing files; this is a mixing score rather than statistical FDR. Disabled until Build families finishes or while a run is active; build a target-decoy database for an informative score."/>
                     </WrapPanel>
                     <TextBlock x:Name="TextBlockBuildResult" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,12,0,0"/>
                 </StackPanel>
@@ -39,30 +33,24 @@
                     <TextBlock Text="Choose identity" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}"/>
                     <WrapPanel Margin="0,10,0,12">
                         <Label Content="Allowed mixing" VerticalAlignment="Center" ToolTip="Largest accepted fraction of families mixing targets and decoys. Keep the usual value of zero."/>
-                        <numeric:DecimalUpDown x:Name="DecimalUpDownMaxFDR" Value="{Binding MaximumMixing, Mode=TwoWay}" Minimum="0" Maximum="0.5" Increment="0.01" Width="76" Margin="8,0,0,0"
-                                           ToolTip="Target-decoy mixing fraction accepted by the lowest-identity search. Default zero; a nonzero allowance can admit noisy joins."/>
+                        <numeric:DecimalUpDown x:Name="DecimalUpDownMaxFDR" Value="{Binding MaximumMixing, Mode=TwoWay}" Minimum="0" Maximum="0.5" Increment="0.01" Width="76" Margin="8,0,0,0" ToolTip="Largest allowed target-decoy family mixing fraction for Find lowest identity: default 0, range 0 to 0.5, in steps of 0.01. Editing prepares the search without writing a file; wait for a current run if disabled."/>
                     </WrapPanel>
                     <WrapPanel>
-                        <Button x:Name="ButtonScanIdentities" Content="Scan identity range" Click="ButtonScanIdentities_Click" Style="{DynamicResource PrimaryButton}" Margin="0,0,10,0" IsEnabled="False"
-                                ToolTip="Scans identities from 95 down to 10 percent and reports family counts and target-decoy mixing. Disabled until a database is chosen."/>
-                        <Button x:Name="ButtonDivideAndConquer" Content="Find lowest identity" Click="ButtonDivideAndConquer_Click" IsEnabled="False"
-                                ToolTip="Finds the lowest identity within the allowed mixing score using Divide and Conquer. Disabled until a database is chosen."/>
+                        <Button x:Name="ButtonScanIdentities" Content="Scan identity range" Click="ButtonScanIdentities_Click" Style="{DynamicResource PrimaryButton}" Margin="0,0,10,0" IsEnabled="False" ToolTip="Compare family counts and target-decoy mixing from 95 down to 10 percent identity, without writing a family file or changing the chosen identity. Disabled until an existing database is chosen or while a run is active; choose the identity after reviewing the scan."/>
+                        <Button x:Name="ButtonDivideAndConquer" Content="Find lowest identity" Click="ButtonDivideAndConquer_Click" IsEnabled="False" ToolTip="Find the lowest identity meeting the allowed mixing fraction by Divide and Conquer, reporting a floor rather than a recommended threshold or a saved family file. Disabled until an existing database is chosen or while a run is active; a meaningful search requires decoy sequences."/>
                     </WrapPanel>
                 </StackPanel>
             </Border>
-            <Expander Header="Prepare database (optional)" BorderThickness="0" Margin="0,0,0,14" Foreground="{DynamicResource TextBrush}">
+            <Expander Header="Prepare database (optional)" BorderThickness="0" Margin="0,0,0,14" Foreground="{DynamicResource TextBrush}" ToolTip="Expand the optional redundancy-removal controls. Expanding changes only this view; Remove redundancy writes a separate FASTA when requested.">
                 <Border Background="{DynamicResource SurfaceBrush}" Padding="16">
                     <WrapPanel>
                         <Label Content="Redundancy identity (%)" VerticalAlignment="Center" ToolTip="Below 100 percent, identity is the best ungapped matching-residue count as a percentage of the shorter sequence, treating I and L as equal. At 100 percent, removes exact subsets and duplicates."/>
-                        <numeric:IntegerUpDown x:Name="IntegerUpDownRedundancyIdentity" Value="{Binding RedundancyIdentity, Mode=TwoWay}" Minimum="50" Maximum="100" Width="76" Margin="8,0,12,0"
-                                           ToolTip="Identity above which sequences count as redundant. Default 100 preserves original order and removes exact subsets and duplicates."/>
-                        <Button x:Name="ButtonRemoveRedundancy" Content="Remove redundancy" Click="ButtonRemoveRedundancy_Click" IsEnabled="False"
-                                ToolTip="Writes a separate FASTA without redundant sequences, preserving order and headers. Disabled until a database is chosen; the original stays unchanged."/>
+                        <numeric:IntegerUpDown x:Name="IntegerUpDownRedundancyIdentity" Value="{Binding RedundancyIdentity, Mode=TwoWay}" Minimum="50" Maximum="100" Width="76" Margin="8,0,12,0" ToolTip="Redundancy cutoff: default 100 percent, whole numbers 50 to 100; 100 removes exact subsets and duplicates, while lower values also remove near-identical sequences with I = L. Editing prepares the next removal without writing files; wait for a current run if disabled."/>
+                        <Button x:Name="ButtonRemoveRedundancy" Content="Remove redundancy" Click="ButtonRemoveRedundancy_Click" IsEnabled="False" ToolTip="Write a separate _NO_REDUNDANCY.fasta beside the selected database, retaining original order and headers; the input stays unchanged and Undo does not remove the output. Disabled until an existing database is chosen or while a run is active."/>
                     </WrapPanel>
                 </Border>
             </Expander>
-            <Button x:Name="ButtonBuildHelp" Content="How identity and mixing work" Click="ButtonBuildHelp_Click" HorizontalAlignment="Left"
-                    ToolTip="Explains exhaustive clustering, score limitations, identity searches and order-preserving preparation. Opens the details for this screen."/>
+            <Button x:Name="ButtonBuildHelp" Content="How identity and mixing work" Click="ButtonBuildHelp_Click" HorizontalAlignment="Left" ToolTip="Open Help explaining sequence identity, exhaustive clustering, target-decoy mixing and database preparation. The project and files stay unchanged."/>
             <Border x:Name="BorderUSearchStatus" Background="{DynamicResource SubtleBrush}" Padding="10,6" Margin="0,12,0,0">
                 <TextBlock x:Name="TextBlockUSearchState" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource MutedBrush}"
                            Text="Choose a database, choose identity, then Build families."

@@ -1,26 +1,24 @@
 <UserControl x:Class="FamilyQuant.AnalyticsControl"
  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
- xmlns:local="clr-namespace:FamilyQuant"
+ xmlns:local="clr-namespace:FamilyQuant" xmlns:theme="clr-namespace:FamilyQuant.Themes"
  Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}">
  <UserControl.Resources><BooleanToVisibilityConverter x:Key="VisibleWhenTrue"/></UserControl.Resources>
  <Grid Margin="24">
   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
   <DockPanel>
    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-    <ComboBox x:Name="ComboBoxExportKind" Width="210" SelectedIndex="0" SelectionChanged="ExportChoiceChanged"
-     ToolTip="Choose which stored result or figures to export.">
-     <ComboBoxItem Content="Run summary (CSV)" ToolTip="Per-run TIC, peptide counts, envelopes and recovery shares in invariant decimal format." Tag="Summary"/>
-     <ComboBoxItem Content="Peptide table (CSV)" ToolTip="Per-peptide run, sequence, charge, mass, isotope areas, envelope and family assignments." Tag="Peptides"/>
-     <ComboBoxItem Content="Screen figures (PNG)" ToolTip="Every screen graph at 1920 by 1080 pixels in the Light palette." Tag="Figures"/>
-     <ComboBoxItem Content="Presentation evidence pack" ToolTip="Complete figures, exact CSV and JSON numbers and cutoff README. Required studies must be present." Tag="EvidencePack"/>
-     <ComboBoxItem Content="Homology assignments (CSV)" ToolTip="Export the latest standalone homology snapshot, with one row per searched peptide recording family IDs, protein IDs and ambiguity. No full XIC or open project is required." Tag="Homology"/>
-     <ComboBoxItem Content="Database gap (CSV)" ToolTip="The stored three-part family table, every global bucket and the rules in force." Tag="DatabaseGap"/>
-     <ComboBoxItem Content="Suggested additions (FASTA)" ToolTip="Exact stored world proteins hit by credited tags, for you to add and search again in PatternLab." Tag="SuggestedAdditions"/>
+    <ComboBox x:Name="ComboBoxExportKind" Width="210" SelectedIndex="0" SelectionChanged="ExportChoiceChanged" ToolTip="Choose among the listed stored tables, figures and suggested sequences; the usual initial choice is Run summary, or an available standalone result. Selecting prepares Export without writing files or changing project values.">
+     <ComboBoxItem Content="Run summary (CSV)" Tag="Summary" ToolTip="Select per-run TIC, peptide counts, envelopes and recovery shares for CSV export. A file is written only when Export is confirmed, and Undo does not remove it."/>
+     <ComboBoxItem Content="Peptide table (CSV)" Tag="Peptides" ToolTip="Select the peptide table with run, sequence, charge, mass, isotope areas, envelope and family assignments for CSV export. A file is written only when Export is confirmed, and Undo does not remove it."/>
+     <ComboBoxItem Content="Screen figures (PNG)" Tag="Figures" ToolTip="Select stored-result figures for PNG export, with standard figures at 1920 by 1080 pixels and complete data beside bounded figures. Export writes the chosen folder's files, and Undo does not remove them."/>
+     <ComboBoxItem Content="Presentation evidence pack" Tag="EvidencePack" ToolTip="Select figures, exact CSV and JSON numbers and the cutoff README for an evidence-pack export. Export writes files only when the required computed studies are present, and Undo does not remove them."/>
+     <ComboBoxItem Content="Homology assignments (CSV)" Tag="Homology" ToolTip="Select the latest standalone homology snapshot, with per-peptide protein hits, family assignments and ambiguity, for CSV export. Export writes a file without requiring full XIC, and Undo does not remove it."/>
+     <ComboBoxItem Content="Database gap (CSV)" Tag="DatabaseGap" ToolTip="Select the chosen stored Database gap family table, global buckets and recorded rules for CSV export. Export writes a file without recalculating attribution, and Undo does not remove it."/>
+     <ComboBoxItem Content="Suggested additions (FASTA)" Tag="SuggestedAdditions" ToolTip="Select exact sequences of credited tag hits from the verified matching stored family world for FASTA export. Export writes suggestions for review without changing your database, and Undo does not remove the file."/>
     </ComboBox>
     <Button x:Name="ButtonExport" Content="Export" Style="{DynamicResource PrimaryButton}" Click="ExportClicked"
-     ToolTipService.ShowOnDisabled="True"
-     ToolTip="Save the selected result in CSV or PNG format with invariant decimals. Figures use 1920 by 1080 pixels in the Light palette."/>
+     ToolTipService.ShowOnDisabled="True" ToolTip="Write the selected stored result to a file or figure folder without changing project values. Disabled until that result and its required evidence are available; Undo does not remove exported files."/>
    </StackPanel>
    <TextBlock Text="Results" FontSize="{DynamicResource TitleSize}" FontWeight="SemiBold" VerticalAlignment="Center"/>
   </DockPanel>
@@ -37,17 +35,15 @@
   </ItemsControl>
   <WrapPanel Grid.Row="2" Margin="0,0,0,10">
    <TextBlock Text="Family chart" VerticalAlignment="Center" Margin="0,0,10,0"/>
-   <ComboBox x:Name="ComboBoxFamilyTopN" Width="160" SelectionChanged="ChartChoiceChanged"
-    ToolTip="Show the largest families and combine every remaining family in one bar.">
-    <ComboBoxItem Content="Top 10 families" ToolTip="Ten families plus one bar for the rest. Suits presentation slides." Tag="10"/>
-    <ComboBoxItem Content="Top 15 families" ToolTip="Fifteen families plus one bar for the rest. This is the default." Tag="15" IsSelected="True"/>
-    <ComboBoxItem Content="Top 20 families" ToolTip="Twenty families plus one bar for the rest. Suits a paper figure." Tag="20"/>
-    <ComboBoxItem Content="Top 30 families" ToolTip="Thirty families plus one bar for the rest. Labels need more screen space." Tag="30"/>
-    <ComboBoxItem Content="All families" ToolTip="Every family retains its own bar. Scrolling may be needed for a large grouping." Tag="0"/>
+   <ComboBox x:Name="ComboBoxFamilyTopN" Width="160" SelectionChanged="ChartChoiceChanged" ToolTip="Choose separate family bars: 10, 15, 20, 30 or all families, with 15 as the default; remaining families share one bar. This changes the chart and subsequent figure exports without editing project quantities; unavailable until quantitation exists.">
+    <ComboBoxItem Content="Top 10 families" Tag="10" ToolTip="Show the ten largest families separately and combine all remaining families in one bar. This changes chart layout and subsequent figure exports without editing quantities."/>
+    <ComboBoxItem Content="Top 15 families" Tag="15" IsSelected="True" ToolTip="Show the fifteen largest families separately and combine the remainder; this is the default. This changes chart layout and subsequent figure exports without editing quantities."/>
+    <ComboBoxItem Content="Top 20 families" Tag="20" ToolTip="Show the twenty largest families separately and combine all remaining families in one bar. This changes chart layout and subsequent figure exports without editing quantities."/>
+    <ComboBoxItem Content="Top 30 families" Tag="30" ToolTip="Show the thirty largest families separately and combine all remaining families in one bar. This changes chart layout and subsequent figure exports without editing quantities."/>
+    <ComboBoxItem Content="All families" Tag="0" ToolTip="Give every family its own chart bar, allowing scrolling when needed. This changes chart layout and subsequent figure exports without editing quantities."/>
    </ComboBox>
    <CheckBox x:Name="CheckBoxFamilyPercent" Content="Percent of measured signal" Margin="16,0,0,0" VerticalAlignment="Center"
-    Checked="ChartChoiceChanged" Unchecked="ChartChoiceChanged"
-    ToolTip="Divide by the measured signal. Count-in-every-family bars can overlap and their percentages must not be summed."/>
+    Checked="ChartChoiceChanged" Unchecked="ChartChoiceChanged" ToolTip="Show family bars as percentages of measured peptide signal instead of signal amounts; full counts overlap and must not be summed. This changes charts and subsequent figure exports without editing quantities; disabled until quantitation exists."/>
   </WrapPanel>
   <ScrollViewer x:Name="ScrollAnalytics" Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
    <StackPanel>
@@ -55,12 +51,11 @@
     <Border x:Name="BorderEmpty" Background="{DynamicResource SurfaceBrush}" Padding="24" CornerRadius="6">
      <TextBlock x:Name="TextBlockEmpty" Text="{Binding EmptyMessage}" TextWrapping="Wrap"/>
     </Border>
-    <Expander Header="Numbers, provenance and method details" Visibility="{Binding HasData, Converter={StaticResource VisibleWhenTrue}}"
-     ToolTip="Every summary fact of the Results screen stays here, including denominators, source cutoffs and counting grains.">
+    <Expander Header="Numbers, provenance and method details" Visibility="{Binding HasData, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Expand stored summary facts, denominators, source cutoffs and counting grains behind Results. Only this view changes.">
      <TextBlock x:Name="TextBlockDetails" TextWrapping="Wrap" Margin="12"/>
     </Expander>
     <ContentControl x:Name="DatabaseGapHost" Margin="0,20,0,0"/>
-    <Expander Header="Sensitivity" Margin="0,16,0,0" ToolTip="Family shares under the shared-peptide policies and actual computed de novo cutoff variants.">
+    <Expander Header="Sensitivity" Margin="0,16,0,0" ToolTip="Expand family shares under the shared-peptide policies and actually computed cutoff variants. Expanding changes only this view; Calculate inside stores a sensitivity study in the project.">
      <ContentControl x:Name="SensitivityHost" Margin="12"/>
     </Expander>
     <StackPanel x:Name="PanelCharts" Margin="0,12,0,0"/>
@@ -68,12 +63,11 @@
      Visibility="{Binding HasHomology, Converter={StaticResource VisibleWhenTrue}}">
      <StackPanel>
       <TextBlock Text="{Binding HomologySummary}" TextWrapping="Wrap" Margin="0,0,0,10"/>
-      <DataGrid ItemsSource="{Binding Homology.Families}" AutoGenerateColumns="False" IsReadOnly="True" Height="220"
-       ToolTip="Families reached by the latest standalone homology search. Its CSV contains every per-peptide assignment.">
+      <DataGrid ItemsSource="{Binding Homology.Families}" AutoGenerateColumns="False" IsReadOnly="True" Height="220" ToolTip="Inspect target peptide counts by family from the latest standalone homology snapshot. Selecting or sorting rows changes only this view, and the CSV retains the per-peptide assignments.">
        <DataGrid.Columns>
-        <DataGridTextColumn Header="Family" Binding="{Binding FamilyId}" Width="90"/>
-        <DataGridTextColumn Header="Peptides" Binding="{Binding PeptideCount}" Width="100"/>
-        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+        <DataGridTextColumn Header="Family" Binding="{Binding FamilyId}" Width="90" theme:TableAppearance.HeaderToolTip="Current User ID of the family reached in the standalone homology snapshot. This is the input file's curated grouping rather than a new inferred family ID."/>
+        <DataGridTextColumn Header="Peptides" Binding="{Binding PeptideCount}" Width="100" theme:TableAppearance.HeaderToolTip="Number of distinct searched de novo peptides reaching a target in this family. A peptide reaching several families counts in each, so these counts must not be summed as distinct peptides."/>
+        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" theme:TableAppearance.HeaderToolTip="Representative description from the first target protein retained for this family in the homology snapshot."/>
        </DataGrid.Columns>
       </DataGrid>
      </StackPanel>
