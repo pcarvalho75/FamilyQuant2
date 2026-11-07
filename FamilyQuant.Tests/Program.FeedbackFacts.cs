@@ -71,7 +71,11 @@ internal static partial class Program
             && analytics.Status.Contains("Search", StringComparison.Ordinal) && analytics.Status.Contains("De novo", StringComparison.Ordinal));
         var results = new AnalyticsControl(analytics); LayoutAt(results, new Size(1366, 900), -1);
         var export = UiField<Button>(results, "ButtonExport")!;
-        Check("Y9 disabled normal Results export exposes the refusal on hover", !export.IsEnabled && export.ToolTip.ToString() == analytics.Status
+        string expectedExportTip = "Export is disabled because no standalone homology snapshot is available. Run Search in De novo review to enable it; no file or project value changes while disabled.";
+        Check("Y9 disabled normal Results export exposes the refusal on hover", !export.IsEnabled && export.ToolTip.ToString() == expectedExportTip
+            && export.ToolTip.ToString()!.Contains("no standalone homology snapshot", StringComparison.Ordinal)
+            && export.ToolTip.ToString()!.Contains("Run Search in De novo review", StringComparison.Ordinal)
+            && export.ToolTip.ToString()!.Contains("no file or project value changes", StringComparison.Ordinal)
             && ToolTipService.GetShowOnDisabled(export));
         Capture("B84C0E820934 AFA02F4AA37B", export.ToolTip.ToString()!, "Actual disabled Results Export tooltip with Homology selected; normal hover route, not only an Export guard.");
         var main = new MainWindow(); PumpDispatcher();

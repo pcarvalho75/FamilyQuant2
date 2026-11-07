@@ -48,9 +48,12 @@ namespace FamilyQuant.Tests
             Check("the resource namespace stays compatible after the project rename",
                 typeof(USearchTools).Assembly.GetManifestResourceNames()
                     .Contains("FamilyQuant.MyResources.resources"));
-            Check("the 2.x local data folder stays separate from 1.x",
-                ApplicationPaths.LocalDataDirectory == Path.Combine(
+            Check("the product's 2.x local data folder stays separate from 1.x",
+                WithProductDataPath(() => ApplicationPaths.LocalDataDirectory) == Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FamilyQuant2"));
+            Check("the active data folder respects the process test isolation override",
+                ApplicationPaths.LocalDataDirectory == (ApplicationPaths.LocalDataDirectoryOverride ?? Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FamilyQuant2")));
             Check("2.x isolates USEARCH scratch files from 1.x",
                 ApplicationPaths.ScratchDirectory == Path.Combine(Path.GetTempPath(), "FamilyQuant2"));
 
@@ -378,8 +381,18 @@ namespace FamilyQuant.Tests
                 && ThemeManager.Resolve(AppTheme.System, false) == AppTheme.Dark
                 && ThemeManager.Resolve(AppTheme.Light, false) == AppTheme.Light
                 && ThemeManager.Resolve(AppTheme.Dark, true) == AppTheme.Dark);
-            Check("appearance settings belong to the separate 2.0 profile",
-                Path.GetFileName(Path.GetDirectoryName(ThemeSettings.DefaultPath)) == ApplicationPaths.DataFolderName);
+            Check("product appearance settings belong to the separate 2.0 profile",
+                Path.GetFileName(Path.GetDirectoryName(WithProductDataPath(() => ThemeSettings.DefaultPath))) == ApplicationPaths.DataFolderName);
+            Check("active appearance settings stay in the isolated data folder",
+                Path.GetDirectoryName(ThemeSettings.DefaultPath) == ApplicationPaths.LocalDataDirectory);
+        }
+
+        // Inspect pure path getters only: no file access, dispatcher pumping or asynchronous work.
+        private static string WithProductDataPath(Func<string> read)
+        {
+            string? isolated = ApplicationPaths.LocalDataDirectoryOverride;
+            try { ApplicationPaths.LocalDataDirectoryOverride = null; return read(); }
+            finally { ApplicationPaths.LocalDataDirectoryOverride = isolated; }
         }
 
         private static void LegacySurfaceContrastTests()
