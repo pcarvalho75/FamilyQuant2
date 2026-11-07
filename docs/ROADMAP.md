@@ -93,7 +93,7 @@ Paulo, 11-07: "take a look at ... the xlsx, it was prepared by ana, there are ma
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
 | Z12n2b | The Z12n2 scope preview check waits for layout instead of a fixed 300 ms (FQFloat: "Z12n2 Dark 1366 scope preview is readable next to checklist actions", Program.PanelChecklistActions.cs:70, fails only under load, 38/0 alone twice) | L | 0.1 |  | Z12h2c | Passes under a loaded serial suite; the measure itself unchanged; reviewed | PF |  | 0 | 0 |  |
-| Z16a8b | Retake every Help and site picture once, on the release tip after the walk 2 fixes merge (11 of 14 pictures differ on the merged release, FQSite 14:44), with the sentences that describe them | L | 0.4 | Z12p2f1, Z12p2f2, Z12p2f3, Z12h2b | Z14a0, Z14a | Pictures match the wizard after Z16a11; reviewed | ST |  | 0 | 0 |  |
+| Z16a8b | Retake every Help and site picture once, on the release tip after the walk 2 fixes merge (11 of 14 pictures differ on the merged release, FQSite 14:44), with the sentences that describe them | L | 0.4 | Z12p2f1, Z12p2f2, Z12p2f3, Z12p5y1, Z12p5y2, Z12h2b | Z14a0, Z14a | Pictures match the wizard after Z16a11; reviewed | ST |  | 0 | 0 |  |
 
 ### W22 The ledger made honest for the release check (FQFetch, D88, D90)
 
