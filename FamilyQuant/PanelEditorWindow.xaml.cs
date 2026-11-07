@@ -59,7 +59,7 @@ public partial class PanelEditorWindow : Window
 
     private void RemoveFamily_Click(object sender, RoutedEventArgs e)
     {
-        if (FamilyGrid.SelectedItem is PanelEditorRow row) { Draft.Families.Remove(row); ClearPfamCheck(); }
+        if (FamilyGrid.SelectedItem is PanelEditorRow row) { Draft.Families.Remove(row); ClearPfamCheck(); UpdateMatchNotice(); }
     }
 
     private void ClearPfamCheck()
@@ -68,7 +68,12 @@ public partial class PanelEditorWindow : Window
         PfamStatus.Text = "Not checked for the current panel.";
     }
 
-    private void FamilyGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e) => ClearPfamCheck();
+    private void FamilyGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e) { ClearPfamCheck(); UpdateMatchNotice(); }
+    private void UpdateMatchNotice()
+    {
+        try { Draft.Build(); StatusText.Text = Draft.MatchChangeNotice; }
+        catch (Exception error) when (error is ArgumentException or InvalidOperationException) { }
+    }
     private void Apply_Click(object sender, RoutedEventArgs e)
     {
         FamilyGrid.CommitEdit(DataGridEditingUnit.Cell, true);
@@ -83,6 +88,7 @@ public partial class PanelEditorWindow : Window
         Draft = new PanelEditorDraft(panel);
         DataContext = Draft;
         ClearPfamCheck();
+        StatusText.Text = panel.ConfirmedMatchChangeNotice;
     }
 
     public void LoadTemplate(string path)

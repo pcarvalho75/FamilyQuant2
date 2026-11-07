@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using FamilyQuant.Panels;
+using FamilyQuant.Evidence;
 
 namespace FamilyQuant;
 
@@ -10,12 +11,16 @@ namespace FamilyQuant;
 public sealed class PanelEditorDraft
 {
     private readonly FamilyPanel original;
+    private readonly string initialMatchNotice;
+    public string MatchChangeNotice { get; private set; } = "";
     public string Name { get; set; }
     public ObservableCollection<PanelEditorRow> Families { get; }
 
     public PanelEditorDraft(FamilyPanel? panel)
     {
         original = panel == null ? new FamilyPanel() : FamilyPanelValidation.Clone(panel);
+        initialMatchNotice = panel?.ConfirmedMatchChangeNotice ?? "";
+        MatchChangeNotice = initialMatchNotice;
         Name = original.Name;
         Families = new ObservableCollection<PanelEditorRow>(original.Families.Select(f => new PanelEditorRow(f)));
     }
@@ -25,6 +30,9 @@ public sealed class PanelEditorDraft
         var result = FamilyPanelValidation.Clone(original);
         result.Name = Name ?? string.Empty;
         result.Families = Families.Select(x => x.Build()).ToList();
+        var retained = Families.Where(row => row.OriginalKey.Length > 0).ToDictionary(row => row.OriginalKey, row => row.Key, StringComparer.Ordinal);
+        result = PanelEvidenceMatching.RekeyConfirmedMatches(original, result, retained);
+        MatchChangeNotice = string.Join(" ", new[] { initialMatchNotice, result.ConfirmedMatchChangeNotice }.Where(text => text.Length > 0));
         if (result.Families.Any(x => string.IsNullOrWhiteSpace(x.DisplayName)))
             throw new ArgumentException("Every family needs a name.");
         FamilyPanelValidation.Validate(result);
@@ -37,6 +45,7 @@ public sealed class PanelEditorRow
     private readonly FamilyPanelFamily original;
     private readonly string originalPfam;
     private readonly string originalSubclasses;
+    internal string OriginalKey => original.Key;
     public string Key { get; set; }
     public string Name { get; set; }
     public FamilyPanelDecision Decision { get; set; }

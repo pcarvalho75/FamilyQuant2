@@ -16,6 +16,8 @@ public sealed record PanelConfirmedEvidenceMatches
 
 public sealed partial class FamilyPanel
 {
+    [JsonIgnore]
+    public string ConfirmedMatchChangeNotice { get; set; } = "";
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Dictionary<string, PanelConfirmedEvidenceMatches>? ConfirmedEvidenceMatches { get; set; }
 }
