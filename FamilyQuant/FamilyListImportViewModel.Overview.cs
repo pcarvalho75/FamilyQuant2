@@ -27,13 +27,13 @@ public sealed partial class FamilyListImportViewModel
     public bool CanReturnToWorkbook => WorkbookReviewEnabled && HasWorkbookMap && !Imported && !IsBusy && !reviewingWorkbook;
     public IReadOnlyCollection<string> WorkbookFamilyKeys => workbookReview?.FamilyKeys ?? Array.Empty<string>();
     public IReadOnlyList<ImportWorkbookFinding> WorkbookFindings => workbookReview?.Sections.SelectMany(section => section.Items).Select(item =>
-        new ImportWorkbookFinding(item.Id, item.Label, item.Value, StateLabel(item.State), item.Reason,
+        new ImportWorkbookFinding(item.Id, item.Label, item.Value, StateLabel(item.State), PlainWorkbookReason(item.Reason),
             string.Join("; ", item.Sources.Select(source => source.SheetName
                 + (source.RowNumbers.Count > 0 ? ", rows " + string.Join(", ", source.RowNumbers) : "")
                 + (source.Columns.Count > 0 ? ", " + string.Join(", ", source.Columns) : ""))), PageKey(item.Page))).ToArray() ?? Array.Empty<ImportWorkbookFinding>();
     public IReadOnlyList<string> WorkbookReviewProblems => (workbookReview?.Sections.SelectMany(section => section.Items)
         .Where(item => item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace)
-        .Select(item => item.Label + ": " + ReviewProblemReason(item) + " Review " + PageLabel(item.Page) + ".") ?? Array.Empty<string>())
+        .Select(item => item.Label + ": " + PlainWorkbookReason(item.Reason) + " Review " + PageLabel(item.Page) + ".") ?? Array.Empty<string>())
         .Concat(workbookAcceptance?.Items.SelectMany(item => item.Problems).Where(problem => problem.Blocking).Select(problem =>
             problem.Message.Replace(" Open " + problem.Page + ".", " Review " + PageLabel(problem.Page) + ".", StringComparison.Ordinal)) ?? Array.Empty<string>())
         .Concat(workbookReviewError.Length > 0 ? new[] { workbookReviewError } : Array.Empty<string>()).Distinct(StringComparer.Ordinal).ToArray();
@@ -42,13 +42,6 @@ public sealed partial class FamilyListImportViewModel
     public bool WorkbookHasReviewProblems => WorkbookReviewProblems.Count > 0;
     public string WorkbookReviewStatus => WorkbookHasReviewProblems ? WorkbookReviewProblems.Count + " choices need review. " + WorkbookReviewProblems[0] : "";
     public string WorkbookReviewDetails => string.Join("\n", WorkbookReviewProblems);
-    private string ReviewProblemReason(WorkbookImportItem item)
-    {
-        string? meaning = Decisions.FirstOrDefault(decision => decision.Source == item.Label)?.Meaning;
-        return meaning?.TrimEnd().EndsWith(".", StringComparison.Ordinal) == true
-            ? item.Reason.Replace("Legend meaning: " + meaning + ".", "Legend meaning: " + meaning.TrimEnd(), StringComparison.Ordinal)
-            : item.Reason;
-    }
     public IReadOnlyList<ImportWorkbookFamily> WorkbookFamilies => workbookReview?.FamilyRows.Select(row =>
         new ImportWorkbookFamily(row.Key, row.DisplayName, row.Decision is { } decision ? DecisionOptions.First(d => d.Value == decision).Label : "Choose an action",
             row.MergeTargetFamilyKey)).ToArray() ?? Array.Empty<ImportWorkbookFamily>();
@@ -84,7 +77,7 @@ public sealed partial class FamilyListImportViewModel
         WorkbookImportPage.FamilyRows => "rows", WorkbookImportPage.EvidenceMatches => "matches", WorkbookImportPage.Subclasses => "subclasses",
         WorkbookImportPage.Notes => "notes", _ => "sheets" };
     private static string PageLabel(WorkbookImportPage page) => page switch
-    { WorkbookImportPage.FileAndSheets => "File and sheet", WorkbookImportPage.FamilyRows => "Special rows", WorkbookImportPage.EvidenceMatches => "Evidence matches",
+    { WorkbookImportPage.FileAndSheets => "Workbook sheets", WorkbookImportPage.FamilyRows => "Special rows", WorkbookImportPage.EvidenceMatches => "Evidence matches",
         WorkbookImportPage.Colors => "Source categories", _ => page.ToString() };
     private static string SectionKey(WorkbookImportSectionKind kind) => kind switch
     { WorkbookImportSectionKind.Columns => "columns", WorkbookImportSectionKind.Colors => "colours", WorkbookImportSectionKind.Decisions => "decisions",
