@@ -249,6 +249,12 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => UndoUiTests(workDir));
             suite.Section("Super Cluster preview - what will join, before anything changes");
             suite.Add(() => SuperClusterPreviewTests());
+            suite.AddWithApplication(() => EvidenceReviewClarityTests());
+            suite.AddWithApplication(() => EvidenceNewcomerTests());
+            suite.AddWithApplication(() => EvidenceProteinDetailsTests());
+            suite.AddWithApplication(() => CoherenceMembersUiTests());
+            suite.Add(() => ManualFamilyChoiceTests());
+            suite.AddWithApplication(() => ManualFamilyUiTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
             suite.AddWithApplication(() => GridCopyTests());
             suite.AddWithApplication(() => GridCopyRowNumberTests());
@@ -324,12 +330,14 @@ namespace FamilyQuant.Tests
             suite.Add(() => EvidenceOperationTests());
             suite.Section("Coherence check - what the reviewed members of a family ever show");
             suite.Add(() => CoherenceCheckTests());
+            suite.Add(() => CoherenceSourceDetailsTests());
             suite.Add(() => E16RuleTests());
             suite.Section("Motif check - the user's patterns counted per family on complete entries");
             suite.Add(() => MotifCheckTests(workDir));
             suite.Section("Validation report - leave-one-out on reviewed proteins and the routes against their labels");
             suite.Add(() => ValidationReportTests());
             suite.AddWithApplication(() => EvidenceHelpTests());
+            suite.Add(() => EvidenceScopeHelpTests());
             suite.Section("Left-out list - marker carriers kept out of the marker's family, with why");
             suite.Add(() => LeftOutListTests());
             suite.Add(() => EvidenceExportTests());

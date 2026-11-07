@@ -75,7 +75,7 @@ namespace FamilyQuant
         private ReviewArchitectureMember? selectedUndetermined;
         public ReviewArchitectureMember? SelectedUndetermined { get => selectedUndetermined; set { selectedUndetermined = value; Changed(); } }
         public bool HasUndetermined => Undetermined.Count > 0;
-        public string UndeterminedLabel => "Undetermined (" + Undetermined.Count.ToString("N0") + ")";
+        public string UndeterminedLabel => "Not placed in a domain group (" + Undetermined.Count.ToString("N0") + ")";
         public bool IsValid => Groups.Where(g => g.Split).All(g => !string.IsNullOrWhiteSpace(g.Name));
         public ArchitectureReviewViewModel(ReviewArchitectureInput input, IReadOnlyDictionary<int, ReviewProteinInput> proteins, Action changed)
         {

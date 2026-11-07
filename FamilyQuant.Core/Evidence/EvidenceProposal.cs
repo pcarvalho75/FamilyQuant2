@@ -10,6 +10,7 @@ namespace FamilyQuant.Evidence
         ReviewedNeighbour,
         LearnedMarker,
         UnannotatedNeighbour,
+        AddedByHand,
     }
 
     public sealed class EvidenceClassificationOptions
@@ -29,6 +30,8 @@ namespace FamilyQuant.Evidence
 
     public sealed class EvidenceProteinProposal
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public EvidenceProteinProposal? AutomaticEvidence { get; init; }
         public int ProteinIndex { get; init; }
         public string Identifier { get; init; } = string.Empty;
         public int PreviousFamilyId { get; init; }
@@ -38,7 +41,7 @@ namespace FamilyQuant.Evidence
         public bool HasScopeAnnotation { get; init; }
         public NearestNeighbour? Neighbour { get; init; }
         public IReadOnlyList<EvidenceFlag> Flags { get; init; } = Array.Empty<EvidenceFlag>();
-        public bool SuggestedSelected => Tier != EvidenceTier.Unassigned && Flags.Count == 0;
+        public bool SuggestedSelected => Tier == EvidenceTier.AddedByHand || Tier != EvidenceTier.Unassigned && Flags.Count == 0;
     }
 
     public sealed class EvidenceFamilyProposal
@@ -62,6 +65,8 @@ namespace FamilyQuant.Evidence
 
     public sealed class EvidenceProposal
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public IReadOnlyList<EvidenceManualChoice>? ManualChoices { get; init; }
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
         public PanelEvidenceContext? PanelContext { get; init; }
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]

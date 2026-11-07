@@ -87,8 +87,9 @@
             </TabItem>
             <TabItem Header="Evidence" IsEnabled="{Binding EvidenceAvailable}" ToolTip="Review classified families, protein-level reasons and flags. Disabled until an evidence proposal is available.">
                 <Grid Margin="8">
-                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                    <StackPanel Margin="0,0,0,10">
+                    <Grid.RowDefinitions><RowDefinition Height="2*" MaxHeight="260"/><RowDefinition Height="3*" MinHeight="430"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10">
+                    <StackPanel>
                     <DockPanel Visibility="{Binding TaskDiscoveryAvailable, Converter={StaticResource VisibleWhenTrue}}" Margin="0,0,0,8">
                         <Button DockPanel.Dock="Right" Content="Read database and scope" Click="DiscoverTask_Click" IsEnabled="{Binding CanDiscoverTask}"
                                 ToolTip="Reads UniProt taxonomy and keyword counts among reviewed accessions in this file. Review or edit the suggested scope before Update proposal."/>
@@ -214,11 +215,17 @@
                                TextTrimming="CharacterEllipsis" ToolTip="Help explains keyword and tissue matching, manual family review, and quantitation of proteins outside the proposal."/>
                     <TextBlock Text="{Binding Status}" Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
                                TextWrapping="NoWrap" Margin="0,8,0,0" ToolTip="{Binding Status}"/>
-                    <TextBlock x:Name="TextBlockQueryCoverageRule" Text="{x:Static local:EvidenceProposalPresentation.QueryCoverageRule}"
+                    <TextBlock x:Name="TextBlockQueryCoverageRule" Text="{x:Static local:EvidenceProposalPresentation.QueryCoverageSummary}" ToolTip="{x:Static local:EvidenceProposalPresentation.QueryCoverageRule}"
                                Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,8,0,0" TextWrapping="Wrap"/>
                     </StackPanel>
+                    </ScrollViewer>
                     <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions><ColumnDefinition Width="400" MinWidth="240"/><ColumnDefinition Width="10"/><ColumnDefinition MinWidth="280"/></Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="2*" MinWidth="440"/><ColumnDefinition Width="10"/><ColumnDefinition Width="3*" MinWidth="280"/></Grid.ColumnDefinitions>
+                        <TextBlock x:Name="familyTickLegend" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,6,0,0" FontSize="11"
+                                   Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
+                                   Text="Full tick: all eligible proteins; dash: some; empty: none. Flagged start unticked; locked stay unticked."
+                                   ToolTip="Initially, proteins with a proposed family and no warning flags are ticked unless locked; full tick means every eligible protein, dash some, empty none. A family tick can include flagged proteins when you choose it; locked proteins always stay unticked."/>
                         <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Center" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext"
                                       Focusable="True" ToolTip="Drag to resize the family and protein tables, or focus here and use the arrow keys."/>
                         <DockPanel>
@@ -232,70 +239,121 @@
                                     <CheckBox IsThreeState="True" IsChecked="{Binding Selected, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanSelect}" HorizontalAlignment="Center"
                                               ToolTip="Select or clear the eligible proteins in this family. Locked proteins stay unticked; a mixed tick means only some proteins are selected." ToolTipService.ShowOnDisabled="True"/>
                                 </DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Family name" Width="*" MinWidth="125" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
-                                <DataGridTextColumn Header="Proteins" Width="90" MinWidth="90" IsReadOnly="True" Binding="{Binding Proteins}"/>
-                                <DataGridTextColumn Header="Reviewed" Width="100" MinWidth="100" IsReadOnly="True" Binding="{Binding ReviewedProteins}"/>
+                                <DataGridTemplateColumn Header="Family name" Width="*" MinWidth="150" SortMemberPath="Name" ClipboardContentBinding="{Binding Name}">
+                                    <DataGridTemplateColumn.CellTemplate><DataTemplate>
+                                        <TextBlock Text="{Binding Name}" TextWrapping="Wrap" ToolTip="{Binding Name}" Margin="4,2"/>
+                                    </DataTemplate></DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate><DataTemplate>
+                                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" ToolTip="{Binding Name}"/>
+                                    </DataTemplate></DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Total" Width="90" MinWidth="90" IsReadOnly="True" Binding="{Binding Proteins}">
+                                    <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="All proteins in this proposed family, including unticked and locked members."/></Style></DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Reviewed" Width="100" MinWidth="100" IsReadOnly="True" Binding="{Binding ReviewedProteins}">
+                                    <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="Proteins marked reviewed in stored UniProt evidence, including unticked members; these are part of Total."/></Style></DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                         </DockPanel>
                         <TabControl x:Name="evidenceTabs" Grid.Column="2">
                             <TabItem Header="Proteins">
                                 <DockPanel DataContext="{Binding Evidence}">
-                                    <TextBox DockPanel.Dock="Top" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"
+                                    <TextBlock x:Name="proteinWarningLegend" DockPanel.Dock="Top" Margin="0,0,0,6"
+                                               Text="Red italic rows carry a warning flag; hover over Flags for what to check."
+                                               Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
+                                               ToolTip="Red italic rows carry a warning flag; hover over Flags for what to check."/>
+                                    <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+                                    <TextBlock DockPanel.Dock="Left" Text="Find proteins" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                    <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                              ToolTip="Filters the displayed proteins by identifier, description, reason or flags. It does not change your ticks."/>
+                                    </DockPanel>
                                     <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,6">
                                         <Button Content="Untick flagged" Click="UntickFlagged_Click" ToolTip="Clears selected proteins with a supplied evidence flag. All unflagged selections stay as they were."/>
                                         <Button Content="Tick selected" Click="EvidenceTickSelected_Click" ToolTip="Selects only the highlighted protein rows for their supplied proposed families."/>
                                         <Button Content="Untick selected" Click="EvidenceUntickSelected_Click" ToolTip="Clears only the highlighted protein rows. Their current document families stay unchanged until Apply."/>
+                                        <Button x:Name="addFamilyButton" Content="Add to family" Click="AddManualFamily_Click" IsEnabled="{Binding DataContext.CanEditManual, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                ToolTip="Assigns highlighted proteins to a proposed or new family by explicit user choice."/>
+                                        <Button x:Name="removeFamilyButton" Content="Remove from family" Click="RemoveManualFamily_Click" IsEnabled="{Binding DataContext.CanEditManual, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                ToolTip="Clears hand-added proposal choices; the automatic proposal is restored."/>
                                     </WrapPanel>
-                                    <DataGrid x:Name="evidenceGrid" ItemsSource="{Binding VisibleProteins}" AutoGenerateColumns="False" CanUserAddRows="False"
+                                    <Grid>
+                                    <Grid.RowDefinitions><RowDefinition Height="2*" MinHeight="120"/><RowDefinition Height="8"/><RowDefinition Height="3*" MinHeight="110"/></Grid.RowDefinitions>
+                                    <DataGrid x:Name="evidenceGrid" ItemsSource="{Binding VisibleProteins}" SelectedItem="{Binding SelectedProtein, Mode=TwoWay}" AutoGenerateColumns="False" CanUserAddRows="False"
                                               CanUserDeleteRows="False" SelectionMode="Extended" ToolTip="Protein-level proposal with the supplied reason, tier and flags. Ticks and names remain review choices until Apply.">
                                         <DataGrid.RowStyle><Style TargetType="DataGridRow"><Style.Triggers>
                                             <DataTrigger Binding="{Binding IsFlagged}" Value="True">
                                                 <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"/><Setter Property="FontStyle" Value="Italic"/>
-                                                <Setter Property="ToolTip" Value="{Binding Flags}"/>
+                                                <Setter Property="ToolTip" Value="{Binding FlagsHelp}"/>
                                             </DataTrigger>
                                         </Style.Triggers></Style></DataGrid.RowStyle>
                                         <DataGrid.Columns>
                                             <DataGridTemplateColumn Header="Use" Width="60" MinWidth="60" IsReadOnly="True" CellTemplate="{StaticResource EvidenceTick}" ClipboardContentBinding="{Binding Identifier}"/>
                                             <DataGridTextColumn Header="Accession" Width="140" MinWidth="140" IsReadOnly="True" Binding="{Binding Accession}"/>
-                                            <DataGridTextColumn Header="Tier" Width="140" MinWidth="140" IsReadOnly="True" Binding="{Binding Tier}"/>
+                                            <DataGridTextColumn Header="Evidence source" Width="140" MinWidth="140" IsReadOnly="True" Binding="{Binding Tier}">
+                                                <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="The kind of evidence supporting the proposed family; Reason explains the decision for this protein."/></Style></DataGridTextColumn.HeaderStyle>
+                                            </DataGridTextColumn>
                                             <DataGridTextColumn Header="Reason" Width="*" MinWidth="200" IsReadOnly="True" Binding="{Binding Reason}"/>
-                                            <DataGridTextColumn Header="Flags" Width="180" MinWidth="180" IsReadOnly="True" Binding="{Binding Flags}"/>
-                                            <DataGridTextColumn Header="Proposed family" Width="200" MinWidth="200" IsReadOnly="True" Binding="{Binding Family}"/>
-                                            <DataGridTextColumn Header="Neighbour" Width="180" MinWidth="180" IsReadOnly="True" Binding="{Binding Neighbour}"/>
+                                            <DataGridTextColumn Header="Flags" Width="180" MinWidth="180" IsReadOnly="True" Binding="{Binding Flags}" theme:TableAppearance.FullTextPath="FlagsHelp">
+                                                <DataGridTextColumn.CellStyle><Style TargetType="DataGridCell">
+                                                    <Setter Property="ToolTip" Value="{Binding FlagsHelp}"/>
+                                                </Style></DataGridTextColumn.CellStyle>
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn Header="Proposed family" Width="200" MinWidth="200" IsReadOnly="True" Binding="{Binding FamilyDisplay}">
+                                                <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="The evidence family or hand-choice target; edit its output name in the family list on the left."/></Style></DataGridTextColumn.HeaderStyle>
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn Header="Reviewed relative" Width="180" MinWidth="180" IsReadOnly="True" Binding="{Binding Neighbour}"/>
                                             <DataGridTextColumn Header="Domains" Width="180" MinWidth="180" IsReadOnly="True" Binding="{Binding Domains}"/>
-                                            <DataGridTextColumn Header="Scope annotation" Width="160" MinWidth="160" IsReadOnly="True" Binding="{Binding HasScopeAnnotation}"/>
+                                            <DataGridTextColumn Header="Scope words found" Width="160" MinWidth="160" IsReadOnly="True" Binding="{Binding ScopeWordsText}">
+                                                <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="Whether stored keyword or tissue annotations match your scope words."/></Style></DataGridTextColumn.HeaderStyle>
+                                            </DataGridTextColumn>
                                             <DataGridTextColumn Header="Description" Width="300" MinWidth="300" IsReadOnly="True" Binding="{Binding Description}"/>
-                                            <DataGridTextColumn Header="Previous family" Width="145" MinWidth="145" IsReadOnly="True" Binding="{Binding PreviousFamilyId}"/>
-                                            <DataGridTextColumn Header="Locus" Width="200" MinWidth="200" IsReadOnly="True" Binding="{Binding Identifier}"/>
+                                            <DataGridTextColumn Header="Current family ID" Width="145" MinWidth="145" IsReadOnly="True" Binding="{Binding PreviousFamilyId}"/>
+                                            <DataGridTextColumn Header="FASTA identifier" Width="200" MinWidth="200" IsReadOnly="True" Binding="{Binding Identifier}"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
+                                    <GridSplitter Grid.Row="1" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                                  ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="{DynamicResource EdgeBrush}"
+                                                  Focusable="True" ToolTip="Drag to resize the protein table and full details, or focus here and use the arrow keys."/>
+                                    <DockPanel Grid.Row="2">
+                                        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,4">
+                                            <Button x:Name="profileMembersButton" DockPanel.Dock="Right" Content="Show members" IsEnabled="{Binding CanShowProfileMembers}"
+                                                    Visibility="{Binding CanShowProfileMembers, Converter={StaticResource VisibleWhenTrue}}"
+                                                    Click="ProfileMembers_Click" ToolTip="Lists the stored reviewed members that built this family's coherence profile; no download or proposal change."
+                                                    ToolTipService.ShowOnDisabled="True"/>
+                                            <TextBlock Text="Selected protein details" Style="{DynamicResource CaptionText}" VerticalAlignment="Center"/>
+                                        </DockPanel>
+                                        <TextBox x:Name="proteinDetails" Text="{Binding ProteinDetails, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True"
+                                                 TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                                                 ToolTip="Full supplied reason, warning details, reviewed relative, domains, scope match and tick consequence for the selected row."/>
+                                    </DockPanel>
+                                    </Grid>
                                 </DockPanel>
                             </TabItem>
                             <TabItem Header="Panel links" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}">
                                 <DockPanel>
                                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
                                         <Button Content="Use link choices" Click="UpdatePanelLinks_Click" IsEnabled="{Binding CanUpdatePanelLinks}"
-                                                ToolTip="Store choices in the grouping recipe."/>
-                                        <TextBlock Text="Confirm ambiguous links, then update the proposal." VerticalAlignment="Center" Margin="12,0,0,0"/>
+                                                ToolTip="Rebuilds the family proposal from your link choices and stored evidence; review it before Apply grouping."/>
+                                        <TextBlock Text="Use link choices updates the family proposal." VerticalAlignment="Center" Margin="12,0,0,0"/>
                                     </StackPanel>
                                     <DataGrid x:Name="panelLinksGrid" ItemsSource="{Binding Evidence.PanelLinks}" AutoGenerateColumns="False"
                                               CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="Source family" Binding="{Binding SourceFamily}" IsReadOnly="True" Width="180"/>
-                                            <DataGridTextColumn Header="Domain combination" Binding="{Binding Architecture}" IsReadOnly="True" Width="180"/>
-                                            <DataGridTextColumn Header="Candidate keys" Binding="{Binding Candidates}" IsReadOnly="True" Width="180"/>
-                                            <DataGridTextColumn Header="Reviewed accessions" Binding="{Binding SupportingAccessions}" IsReadOnly="True" Width="200"/>
                                             <DataGridTemplateColumn Header="User choice" Width="200">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <ComboBox ItemsSource="{Binding Options}" DisplayMemberPath="DisplayName"
                                                                   SelectedItem="{Binding SelectedOption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                                  ToolTip="Choose a family or leave outside."/>
+                                                                  ToolTip="{Binding SelectedOption.DisplayName, TargetNullValue='Choose a family or leave outside.'}"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
+                                            <DataGridTextColumn Header="Status" Binding="{Binding State}" IsReadOnly="True" Width="180"/>
+                                            <DataGridTextColumn Header="Domain combination" Binding="{Binding Architecture}" IsReadOnly="True" Width="180"/>
+                                            <DataGridTextColumn Header="Candidate families" Binding="{Binding Candidates}" IsReadOnly="True" Width="180"/>
+                                            <DataGridTextColumn Header="Reviewed accessions" Binding="{Binding SupportingAccessions}" IsReadOnly="True" Width="200"/>
                                             <DataGridTextColumn Header="Note (optional)" Binding="{Binding Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="240">
                                                 <DataGridTextColumn.CellStyle>
                                                     <Style TargetType="{x:Type DataGridCell}">
@@ -303,13 +361,16 @@
                                                     </Style>
                                                 </DataGridTextColumn.CellStyle>
                                             </DataGridTextColumn>
-                                            <DataGridTextColumn Header="Status" Binding="{Binding State}" IsReadOnly="True" Width="180"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
                                 </DockPanel>
                             </TabItem>
                             <TabItem Header="Architecture"><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>
                             <TabItem Header="Left out">
+                                <DockPanel>
+                                <TextBlock x:Name="leftOutLegend" DockPanel.Dock="Top" Text="{Binding Evidence.LeftOutSummary}" FontSize="11"
+                                           Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis" Margin="0,0,0,6"
+                                           ToolTip="Marker carriers are listed across the proposal because they were placed elsewhere or left unassigned. A protein with no proposed family keeps its current family."/>
                                 <DataGrid x:Name="leftOutGrid" ItemsSource="{Binding Evidence.LeftOut}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"
                                           ToolTip="Proteins carrying a learned marker that were not assigned to its family, with the supplied reason. Check this list for potentially missed proteins.">
                                     <DataGrid.Columns>
@@ -323,50 +384,83 @@
                                         <DataGridTextColumn Header="Reviewed" Width="110" MinWidth="110" Binding="{Binding Reviewed}"/>
                                         <DataGridTextColumn Header="Fragment" Width="110" MinWidth="110" Binding="{Binding Fragment}"/>
                                         <DataGridTextColumn Header="Description" Width="300" MinWidth="300" Binding="{Binding Description}"/>
-                                        <DataGridTextColumn Header="Locus" Width="200" MinWidth="200" Binding="{Binding Identifier}"/>
+                                        <DataGridTextColumn Header="FASTA identifier" Width="200" MinWidth="200" Binding="{Binding Identifier}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
+                                </DockPanel>
                             </TabItem>
                             <TabItem Header="Unassigned">
+                                <DockPanel>
+                                <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,6">
+                                    <Button x:Name="addUnassignedFamilyButton" Content="Add to family" Tag="Unassigned" Click="AddManualFamily_Click" IsEnabled="{Binding CanEditManual}"
+                                            ToolTip="Assigns highlighted proteins to a proposed or new family by explicit user choice."/>
+                                    <Button Content="Remove from family" Tag="Unassigned" Click="RemoveManualFamily_Click" IsEnabled="{Binding CanEditManual}"
+                                            ToolTip="Clears hand-added proposal choices; the automatic proposal is restored."/>
+                                </WrapPanel>
+                                <TextBlock x:Name="unassignedLegend" DockPanel.Dock="Top" FontSize="11" Foreground="{DynamicResource MutedBrush}"
+                                           Text="No family proposed; these proteins keep their current families and remain available for quantitation."
+                                           TextTrimming="CharacterEllipsis" Margin="0,0,0,6"
+                                           ToolTip="Unassigned means no new family was proposed; the recorded reason and warning details explain this result."/>
                                 <DataGrid x:Name="unassignedGrid" ItemsSource="{Binding Evidence.Unassigned}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"
                                           ToolTip="Proteins without a proposed family, with the supplied reasons and flags. Reviewing a row here never invents a family.">
-                                    <DataGrid.Columns><DataGridTextColumn Header="Accession" Width="180" MinWidth="180" Binding="{Binding Accession}"/><DataGridTextColumn Header="Reason" Width="*" MinWidth="200" Binding="{Binding Reason}"/><DataGridTextColumn Header="Flags" Width="180" MinWidth="180" Binding="{Binding Flags}"/><DataGridTextColumn Header="Locus" Width="200" MinWidth="200" Binding="{Binding Identifier}"/></DataGrid.Columns>
+                                    <DataGrid.Columns><DataGridTextColumn Header="Accession" Width="180" MinWidth="180" Binding="{Binding Accession}"/><DataGridTextColumn Header="Reason" Width="*" MinWidth="200" Binding="{Binding Reason}"/><DataGridTextColumn Header="Flags" Width="180" MinWidth="180" Binding="{Binding Flags}" theme:TableAppearance.FullTextPath="FlagsHelp"/><DataGridTextColumn Header="FASTA identifier" Width="200" MinWidth="200" Binding="{Binding Identifier}"/></DataGrid.Columns>
                                 </DataGrid>
+                                </DockPanel>
                             </TabItem>
                             <TabItem Header="Markers">
-                                <DataGrid ItemsSource="{Binding Evidence.Markers}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ToolTip="Marker domains supplied by the classifier, with carrier counts. The view does not learn or change marker rules.">
+                                <DockPanel>
+                                <TextBlock x:Name="markerLegend" DockPanel.Dock="Top" FontSize="11" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,6"
+                                           Text="Support = family votes / labelled scope votes; counts describe evidence, not abundance." TextTrimming="CharacterEllipsis"
+                                           ToolTip="Support is the supplied family vote fraction among labelled scope proteins carrying the domain. All domain carriers are a separate count."/>
+                                <DataGrid x:Name="markerGrid" ItemsSource="{Binding Evidence.Markers}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ToolTip="Marker domains supplied by the classifier, with carrier counts. The view does not learn or change marker rules.">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Accession" Width="110" MinWidth="110" Binding="{Binding Accession}"/>
                                         <DataGridTextColumn Header="Name" Width="*" MinWidth="180" Binding="{Binding Name}"/>
                                         <DataGridTextColumn Header="Family" Width="150" MinWidth="150" Binding="{Binding Family}"/>
-                                        <DataGridTextColumn Header="Family carriers" Width="150" MinWidth="150" Binding="{Binding FamilyCarriers}"/>
-                                        <DataGridTextColumn Header="All carriers" Width="130" MinWidth="130" Binding="{Binding AllCarriers}"/>
-                                        <DataGridTextColumn Header="Labelled carriers" Width="165" MinWidth="165" Binding="{Binding LabelledCarriers}"/>
-                                        <DataGridTextColumn Header="Vote fraction" Width="145" MinWidth="145" Binding="{Binding VoteFraction}"/>
+                                        <DataGridTextColumn Header="Support" Width="110" MinWidth="110" Binding="{Binding SupportText}" theme:TableAppearance.FullTextPath="SupportHelp"/>
+                                        <DataGridTextColumn Header="Family votes" Width="120" MinWidth="120" Binding="{Binding FamilyCarriers}">
+                                            <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="Scope proteins carrying this domain and labelled as this source family; the support numerator."/></Style></DataGridTextColumn.HeaderStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="Labelled votes" Width="140" MinWidth="140" Binding="{Binding LabelledCarriers}">
+                                            <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="Proteins with this domain, scope words and one source-family label; the support denominator."/></Style></DataGridTextColumn.HeaderStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="Domain carriers" Width="145" MinWidth="145" Binding="{Binding AllCarriers}">
+                                            <DataGridTextColumn.HeaderStyle><Style TargetType="DataGridColumnHeader"><Setter Property="ToolTip" Value="All target proteins carrying this domain, including those without scope words or a source-family label."/></Style></DataGridTextColumn.HeaderStyle>
+                                        </DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
+                                </DockPanel>
                             </TabItem>
                             <TabItem Header="Motif counts">
+                                <DockPanel>
+                                <TextBlock x:Name="motifLegend" DockPanel.Dock="Top" Text="{Binding MotifSummary}" FontSize="11" Margin="0,0,0,6"
+                                           Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
+                                           ToolTip="Counts use all proposed family members, including unticked proteins; entries marked as fragments are excluded. Use amino-acid letters or a regular expression; Help lists the count and not forms."/>
                                 <TextBox Text="{Binding MotifReport, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True" TextWrapping="NoWrap"
                                          VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                                          ToolTip="Counts from the last checked motif, including each complete-protein denominator. Editing the pattern requires a new check before Apply."/>
+                                </DockPanel>
                             </TabItem>
                         </TabControl>
                     </Grid>
                     <DockPanel Grid.Row="2" Margin="0,10,0,0">
                         <Button DockPanel.Dock="Right" Content="Check motif" Click="Motif_Click" IsEnabled="{Binding CanCheckMotif}"
                                 ToolTip="Counts your motif among complete proteins in the proposed families. Build a proposal and type a pattern first."/>
-                        <TextBlock DockPanel.Dock="Left" Text="Motif" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock DockPanel.Dock="Left" Text="Motif (optional)" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox Text="{Binding MotifPattern, UpdateSourceTrigger=PropertyChanged}" ToolTip="Enter the motif pattern you want to check. Check it before Apply; the pattern is retained with the review selection."/>
                     </DockPanel>
                 </Grid>
             </TabItem>
         </TabControl>
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+        <DockPanel Grid.Row="3" Margin="0,12,0,0">
+        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <Button Content="Help" Click="Help_Click" ToolTip="Explains scope, evidence tiers, flags, keyword matching, domains and the review choices. It does not change the open document."/>
             <Button x:Name="createButton" Content="Apply grouping" Style="{DynamicResource PrimaryButton}" IsEnabled="{Binding CanConfirm}" IsDefault="True" Click="Create_Click"
                     ToolTip="Applies the reviewed ticks and names. Select proteins and name each selected family and split before applying."/>
             <Button Content="Cancel" IsCancel="True" Click="Cancel_Click" ToolTip="Closes the review and changes nothing in the open document. No undo step is added."/>
         </StackPanel>
+        <TextBlock x:Name="applyHint" Text="{Binding ApplyHint}" ToolTip="{Binding ApplyHint}" VerticalAlignment="Center"
+                   TextTrimming="CharacterEllipsis" Foreground="{DynamicResource MutedBrush}" Margin="0,0,12,0"/>
+        </DockPanel>
     </Grid>
 </Window>

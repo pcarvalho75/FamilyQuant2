@@ -20,6 +20,54 @@ internal static partial class Program
         new("--test-ui-colors", 48, TestCommandPhase.Raw, args => args.Contains("--test-ui-colors", StringComparer.Ordinal), RunUiColorChecks),
         new("--test-review-wait", 49, TestCommandPhase.Raw, args => args.Contains("--test-review-wait", StringComparer.Ordinal), RunReviewWaitChecks),
         new("--test-ui-wording", 50, TestCommandPhase.Raw, args => args.Contains("--test-ui-wording", StringComparer.Ordinal), RunUiWordingChecks),
+        new("--test-evidence-review-clarity", 51, TestCommandPhase.Raw, args => args.Contains("--test-evidence-review-clarity", StringComparer.Ordinal), (args, _) =>
+        {
+            EvidenceReviewClarityTests(args.Length == 2 ? args[1] : null);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-evidence-scope-help", 52, TestCommandPhase.Raw, args => args.Contains("--test-evidence-scope-help", StringComparer.Ordinal), (args, _) =>
+        {
+            EvidenceScopeHelpTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-evidence-newcomer", 53, TestCommandPhase.Raw, args => args.Contains("--test-evidence-newcomer", StringComparer.Ordinal), (args, _) =>
+        {
+            EvidenceNewcomerTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-coherence-source-details", 54, TestCommandPhase.Raw, args => args.Contains("--test-coherence-source-details", StringComparer.Ordinal), (args, _) =>
+        {
+            CoherenceSourceDetailsTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-evidence-protein-details", 55, TestCommandPhase.Raw, args => args.Contains("--test-evidence-protein-details", StringComparer.Ordinal), (args, _) =>
+        {
+            EvidenceProteinDetailsTests(args.Length == 2 ? args[1] : null);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-coherence-members-ui", 56, TestCommandPhase.Raw, args => args.Contains("--test-coherence-members-ui", StringComparer.Ordinal), (args, _) =>
+        {
+            CoherenceMembersUiTests(args.Length == 2 ? args[1] : null);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-manual-family-choices", 57, TestCommandPhase.Raw, args => args.Contains("--test-manual-family-choices", StringComparer.Ordinal), (args, _) =>
+        {
+            ManualFamilyChoiceTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-manual-family-ui", 58, TestCommandPhase.Raw, args => args.Contains("--test-manual-family-ui", StringComparer.Ordinal), (args, _) =>
+        {
+            ManualFamilyUiTests(args.Length == 2 ? args[1] : null);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
     ];
 
     private static int RunCurationLayoutChecks(string[] args, string workDir)

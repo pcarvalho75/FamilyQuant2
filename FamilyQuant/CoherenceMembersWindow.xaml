@@ -1,0 +1,32 @@
+<Window x:Class="FamilyQuant.CoherenceMembersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:theme="clr-namespace:FamilyQuant.Themes" Title="Reviewed profile members" Width="1000" Height="640" MinWidth="700" MinHeight="420"
+        Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}" ShowInTaskbar="False">
+    <Grid Margin="16">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <StackPanel Margin="0,0,0,10">
+            <TextBlock Text="{Binding Title}" Style="{DynamicResource SectionTitle}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Title}"/>
+            <CheckBox x:Name="completeOnly" Content="Complete members only" IsChecked="{Binding CompleteOnly}" Margin="0,8"
+                      ToolTip="Complete means not marked as a fragment. This is the population used for length and cysteine ranges."/>
+            <TextBlock Text="{Binding Summary}" Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Summary}"/>
+        </StackPanel>
+        <DataGrid x:Name="membersGrid" Grid.Row="1" ItemsSource="{Binding VisibleMembers}" IsReadOnly="True" AutoGenerateColumns="False"
+                  CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Extended" ClipboardCopyMode="IncludeHeader"
+                  ToolTip="Stored reviewed profile members; Ctrl+C copies selected rows with their headings.">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Accession" Width="130" Binding="{Binding Accession}"/>
+                <DataGridTextColumn Header="Species" Width="*" MinWidth="180" Binding="{Binding Species}" theme:TableAppearance.FullTextPath="SpeciesHelp"/>
+                <DataGridTextColumn Header="Source" Width="130" Binding="{Binding Source}"/>
+                <DataGridTextColumn Header="Length" Width="80" Binding="{Binding Length}"/>
+                <DataGridTextColumn Header="Cysteines" Width="95" Binding="{Binding Cysteines}"/>
+                <DataGridTextColumn Header="Completeness" Width="180" Binding="{Binding Completeness}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DockPanel Grid.Row="2" Margin="0,12,0,0">
+            <Button DockPanel.Dock="Right" Content="Close" IsCancel="True" Click="Close_Click"/>
+            <TextBlock Text="Stored annotations and file headers only; missing species are shown as not recorded." VerticalAlignment="Center"
+                       TextTrimming="CharacterEllipsis" Foreground="{DynamicResource MutedBrush}"
+                       ToolTip="Species use stored UniProt metadata, with OS/OX fallback for older file entries. No species is guessed or downloaded during review."/>
+        </DockPanel>
+    </Grid>
+</Window>
