@@ -43,7 +43,7 @@
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="AutomationProperties.Name" Value="{Binding Title}"/>
                     <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ListBoxItem">
-                        <Border x:Name="ItemSurface" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" Padding="2" Margin="0,1">
+                        <Border x:Name="ItemSurface" Background="{DynamicResource ClearBrush}" BorderBrush="{DynamicResource ClearBrush}" BorderThickness="1" Padding="2" Margin="0,1">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
