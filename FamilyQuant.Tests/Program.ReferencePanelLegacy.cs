@@ -96,7 +96,8 @@ internal static partial class Program
             && receipt["EmbeddedCurationSha256"]!.GetValue<string>() == inputHashes["source.json"]
             && receipt["ProjectSha256"]!.GetValue<string>() == inputHashes["legacy-full.fqproj"]);
         string oldFcf = Path.Combine(output, "recorded-format1.fcf"); File.WriteAllText(oldFcf, source, new UTF8Encoding(false));
-        var detect = format!.GetMethod("Detect", BindingFlags.Public | BindingFlags.Static)!;
+        var detect = format!.GetMethod("Detect", BindingFlags.Public | BindingFlags.Static,
+            binder: null, types: new[] { typeof(Func<Stream>) }, modifiers: null)!;
         int inputFormat = (int)detect.Invoke(null, new object[] { (Func<Stream>)(() => File.OpenRead(oldFcf)) })!;
         Check("Z15a4 the frozen curation input is actually format 1", inputFormat == 1);
 
