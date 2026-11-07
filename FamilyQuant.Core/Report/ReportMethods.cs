@@ -141,6 +141,25 @@ public static class ReportMethods
             blocks.Add(new ReportTable("methods-hand-families", "Saved hand-added family choices",
                 new[] { "Protein", "Chosen family", "User note", "Status", "Warnings at the choice" }, handRows,
                 "These memberships are explicit user choices, not automatic evidence. The grouping recipe retains notes and the original automatic evidence; status is checked against the current identifier, sequence and family. Warnings at the choice are the flags the review showed when the choice was applied."));
+            // Per family: how many current members are there because the user added them by hand.
+            var handMembers = assignments.Values.Where(a => a.ProteinIndex >= 0 && a.ProteinIndex < curation.MyExtendedFastaItems.Count
+                    && curation.MyExtendedFastaItems[a.ProteinIndex].SequenceIdentifier == a.Identifier
+                    && curation.MyExtendedFastaItems[a.ProteinIndex].UserID == a.FamilyId)
+                .GroupBy(a => a.FamilyId).OrderBy(g => g.Key).ToArray();
+            if (handMembers.Length > 0)
+            {
+                var targets = curation.MyExtendedFastaItems.Where(p => !SequenceLabels.IsDecoy(p.SequenceIdentifier ?? string.Empty)).ToArray();
+                var familyNames = FamilyNaming.Names(targets);
+                var countRows = handMembers.Select(g => (IReadOnlyList<string>)new[]
+                {
+                    familyNames.GetValueOrDefault(g.Key, string.Empty), Number(g.Key),
+                    Number(targets.Count(p => p.UserID == g.Key)), Number(g.Count()),
+                }).ToArray();
+                blocks.Add(new ReportTable("methods-hand-family-counts", "Members added by hand, per family",
+                    new[] { "Family", "Family number", "Members", "Added by hand" }, countRows,
+                    "Members counts the family's current target proteins; Added by hand counts those that are members because of a saved hand choice."));
+            }
+            blocks.Add(new ReportParagraph("methods-hand-quantified", "Proteins added by hand are quantified as full members of the chosen family."));
         }
 
         var deNovoRows = manifest.DeNovoInputs.OrderBy(i => i.SourceId, StringComparer.Ordinal).ThenBy(i => i.FilePath, StringComparer.Ordinal)

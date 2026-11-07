@@ -108,7 +108,9 @@ namespace FamilyQuant
             return csv.ToString();
         }
 
-        private static PanelFamilyAuditEvidence ToAuditEvidence(PanelProteinAssignment assignment)
+        /// <summary>The evidence of one panel assignment in words, as both the panel audit export and the report's
+        /// protein audit print it.</summary>
+        public static PanelFamilyAuditEvidence ToAuditEvidence(PanelProteinAssignment assignment)
         {
             var parts = new List<string>();
             bool Has(PanelAssignmentEvidenceKind kind) => (assignment.EvidenceKind & kind) != 0;
@@ -133,6 +135,7 @@ namespace FamilyQuant
                 parts.Add(architecture.Count == 0 ? "Domain architecture" : "Domain architecture: " + string.Join("; ", architecture));
             }
             if (Has(PanelAssignmentEvidenceKind.ConfirmedLink)) parts.Add("Confirmed panel link");
+            if (Has(PanelAssignmentEvidenceKind.AddedByHand)) parts.Add("Added by hand");
             string evidence = string.Join(" | ", parts);
             if (!assignment.IsApplied && evidence.Length > 0) evidence = "Considered, not applied: " + evidence;
             return new PanelFamilyAuditEvidence { ProteinIndex = assignment.ProteinIndex, Identifier = assignment.Identifier,

@@ -77,6 +77,27 @@ internal static partial class Program
             table.Columns.SequenceEqual(new[] { "Protein", "Chosen family", "User note", "Status", "Warnings at the choice" })
             && Cells("tr|Q79001|Q79001_SYN")[4] == string.Join(" | ", oddRow.Flags.Select(f => f.Message)) && Cells("tr|Q79001|Q79001_SYN")[4].Length > 0
             && Cells("tr|Q79002|Q79002_SYN")[4] == "None" && table.Rows.All(r => r[3] == "Applied"), string.Join(" || ", table.Rows.Select(r => string.Join(" ; ", r))));
+        // Z12k5b: the report says how many members each family has because of a hand choice, and how they count.
+        var methodsBlocks = FamilyQuant.Report.ReportMethods.Build(file, new QuantManifest()).Blocks;
+        var counts = methodsBlocks.OfType<FamilyQuant.Report.ReportTable>().Single(t => t.Id == "methods-hand-family-counts");
+        int handFamily = odd.FamilyId;
+        int members = file.MyExtendedFastaItems.Count(p => p.UserID == handFamily);
+        Check("Z12k5b: Methods gives each family its number of members added by hand",
+            counts.Columns.SequenceEqual(new[] { "Family", "Family number", "Members", "Added by hand" }) && counts.Rows.Count == 1
+            && counts.Rows[0][1] == handFamily.ToString(System.Globalization.CultureInfo.InvariantCulture)
+            && counts.Rows[0][2] == members.ToString(System.Globalization.CultureInfo.InvariantCulture) && counts.Rows[0][3] == "2" && members >= 2,
+            string.Join(" ; ", counts.Rows[0]));
+        Check("Z12k5b: Methods says hand-added proteins are quantified as full members",
+            methodsBlocks.OfType<FamilyQuant.Report.ReportParagraph>().Any(p => p.Id == "methods-hand-quantified"
+                && p.Text == "Proteins added by hand are quantified as full members of the chosen family."));
+        var files = EvidenceExports.ReportFiles(file);
+        Check("Z12k5b: the report bundle carries the evidence audit, with the user's note on each hand-added protein",
+            files.Count == 1 && files[0].File == "evidence_audit.csv"
+            && files[0].Csv.Split(new[] { "\r\n" }, StringSplitOptions.None).Count(l => l.Contains("Added by hand: Curator's choice", StringComparison.Ordinal)) == 2
+            && EvidenceExports.ReportFiles(HandChoiceFile()).Count == 0, files.Count == 0 ? "none" : files[0].Csv);
+        var words = FamilyQuant.PanelAuditCsv.ToAuditEvidence(new Panels.PanelProteinAssignment { ProteinIndex = 0, Identifier = "tr|Q79001|Q79001_SYN",
+            IsApplied = true, PanelFamilyKey = "invented", EvidenceKind = Panels.PanelAssignmentEvidenceKind.AddedByHand, Reason = "Added by hand." });
+        Check("Z12k5b: the panel audit says Added by hand in words", words.EvidenceUsed == "Added by hand", words.EvidenceUsed);
         var reopened = FamilyClusterFile.FromJsonText(file.ToJsonText());
         Check("Z12k5a: the warnings survive save and reopen", JsonSerializer.Serialize(reopened.EvidenceRecipe!.Assignments.Single(a => a.ProteinIndex == 10).Flags)
             == JsonSerializer.Serialize(odd.Flags));
