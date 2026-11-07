@@ -85,6 +85,8 @@ internal static partial class Program
                     Check(label + " optional colour names never block Next when cleared", model.CanNext);
                     foreach (var colour in model.SourceColorChoices.Where(c => c.Label.Length == 0)) colour.Label = colour.ColorName;
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns-colours");
+                    Check(label + " column category table fits above the footer without page clipping",
+                        WizardPolishTableFits((DataGrid)window.FindName("ColourCategoriesGrid"), out string categoryBounds), categoryBounds);
                     var decision = model.Columns.Single(c => c.Role == PanelImportFields.Decision);
                     decision.Header = decision.Headers.First(h => h.Contains("DECIS", StringComparison.OrdinalIgnoreCase));
                     Check(label + " free-text decisions remain proposals until explicitly confirmed", model.Decisions.Count == 8
@@ -103,12 +105,28 @@ internal static partial class Program
                         && model.SpecialRows.Any(r => r.Duplicate) && model.SpecialRows.Any(r => r.SeveralNames && r.Parts.Count == 4) && !model.CanNext);
                     model.SelectedSpecialRow = model.SpecialRows.Single(r => r.Duplicate);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "04-special-rows-duplicate");
+                    Check(label + " duplicate rename starts as an enabled proposal without accepting the row",
+                        model.SelectedSpecialRow.Action == FamilyPanelRowAction.Import && model.CanUseRowChoice
+                        && model.SelectedSpecialRow.Blocking && !model.SelectedSpecialRow.Chosen && !model.CanNext
+                        && Equals(((ComboBox)window.FindName("RowActionChoice")).SelectedValue, FamilyPanelRowAction.Import)
+                        && file.ToJsonText() == before, WizardPolishProposalState(model, window));
                     string newKey = model.SelectedSpecialRow.Key;
+                    var rowAction = (ComboBox)window.FindName("RowActionChoice");
+                    rowAction.SelectedValue = FamilyPanelRowAction.Skip;
+                    Check(label + " changing the native row action updates only its unaccepted draft proposal",
+                        model.SelectedSpecialRow.Action == FamilyPanelRowAction.Skip && model.SelectedSpecialRow.Blocking
+                        && !model.SelectedSpecialRow.Chosen && !model.CanNext && file.ToJsonText() == before);
+                    rowAction.SelectedValue = FamilyPanelRowAction.Import;
                     model.SelectedSpecialRow.Action = FamilyPanelRowAction.Import; model.UseRowChoice();
                     Check(label + " accepting the proposed duplicate rename keeps the multi-name choice pending", newKey.Length > 0
                         && model.SpecialRows.Any(r => r.Chosen && r.Key == newKey) && !model.CanNext);
                     model.SelectedSpecialRow = model.SpecialRows.Single(r => r.SeveralNames && r.Parts.Count == 4 && r.Blocking);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "04-special-rows");
+                    Check(label + " several-name row starts with its proposed split but still needs explicit acceptance",
+                        model.SelectedSpecialRow.Action == FamilyPanelRowAction.Split && model.CanUseRowChoice
+                        && model.SelectedSpecialRow.Blocking && !model.SelectedSpecialRow.Chosen && !model.CanNext
+                        && Equals(((ComboBox)window.FindName("RowActionChoice")).SelectedValue, FamilyPanelRowAction.Split)
+                        && file.ToJsonText() == before, WizardPolishProposalState(model, window));
                     var partKeys = model.SelectedSpecialRow.Parts.Select(p => p.Key).ToArray();
                     model.SelectedSpecialRow.Action = FamilyPanelRowAction.Split; model.UseRowChoice();
                     while (model.SpecialRows.FirstOrDefault(r => r.SeveralNames && r.Blocking) is { } ambiguous)
