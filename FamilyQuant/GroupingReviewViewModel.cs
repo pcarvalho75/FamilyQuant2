@@ -112,7 +112,10 @@ namespace FamilyQuant
                 if (Evidence.HasInvalidPanelLinkNotes) return "Enter a short single-line note for each edited panel link.";
                 if (Evidence.HasUnappliedPanelLinkChoices) return "Use link choices to update the family proposal before Apply grouping.";
                 if (Evidence.PanelLinks.Any(row => row.Source.NeedsConfirmation)) return "Choose a family or leave outside for each unresolved panel link.";
-                if (Evidence.SelectedCount == 0) return "Tick at least one unlocked protein in the family proposal.";
+                if (Evidence.SelectedCount == 0) return AllProposedProteinsLocked
+                    ? ShowUnlockEvidenceFamilies ? "Every proposed protein belongs to a locked family. Choose Unlock evidence families, review the updated ticks, then Apply grouping."
+                        : "Every proposed protein belongs to a locked family. Unlock those families in Curate families > Manage locks, then reopen Group by evidence."
+                    : "Tick at least one unlocked protein in the family proposal.";
                 if (Evidence.Families.Any(f => f.SelectedCount > 0 && string.IsNullOrWhiteSpace(f.Name))) return "Enter a name for every selected family.";
                 if (Evidence.Architectures.Any(a => Evidence.Families.Any(f => f.Family == a.Family && f.SelectedCount > 0) && !a.IsValid))
                     return "Enter a name for every ticked split.";
@@ -134,7 +137,8 @@ namespace FamilyQuant
             Func<IReadOnlyList<int>, EvidenceReviewInput>? removeFromFamily = null,
             Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null,
             Func<string, Panels.PanelConfirmedEvidenceMatches, EvidenceReviewInput>? confirmPanelMatches = null,
-            Func<string, OperationContext, Task>? fetchMissingPanel = null, Func<string, string>? panelCoverage = null, Func<string, bool>? panelCovered = null)
+            Func<string, OperationContext, Task>? fetchMissingPanel = null, Func<string, string>? panelCoverage = null, Func<string, bool>? panelCovered = null,
+            Func<string, EvidenceReviewInput>? unlockEvidenceFamilies = null)
         {
             Keyword = new KeywordReviewViewModel(keyword); this.propose = propose; this.motif = motif;
             this.discoverTask = discoverTaskWithProgress ?? (discoverTask == null ? null : (_, token) => discoverTask(token));
@@ -146,6 +150,7 @@ namespace FamilyQuant
             this.confirmPanelMatches = confirmPanelMatches;
             this.fetchMissingPanel = fetchMissingPanel; this.panelCoverage = panelCoverage;
             this.panelCovered = panelCovered;
+            this.unlockEvidenceFamilies = unlockEvidenceFamilies;
             scopeText = initialScope; proposalScope = initialScope;
             Keyword.PropertyChanged += (_, _) => NotifySummary();
             SetEvidence(input);
@@ -289,7 +294,7 @@ namespace FamilyQuant
             Changed(nameof(CanEditManual));
         }
         private void EvidenceChanged(object? sender, PropertyChangedEventArgs e) { Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); }
-        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); Changed(nameof(CanMatchPanelNames)); Changed(nameof(MatchPanelNamesHint)); Changed(nameof(CanFetchMissingPanel)); Changed(nameof(PanelCoverageText)); NotifyChecklistActions(); }
+        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); Changed(nameof(CanMatchPanelNames)); Changed(nameof(MatchPanelNamesHint)); Changed(nameof(CanFetchMissingPanel)); Changed(nameof(PanelCoverageText)); NotifyChecklistActions(); NotifyEvidenceLocks(); }
 
         private void RestoreManualState(IReadOnlyList<EvidenceManualChoice>? choices)
         {
