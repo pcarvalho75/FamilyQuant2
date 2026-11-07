@@ -436,6 +436,15 @@ internal static partial class Program
             .Select(m => m.Value).ToHashSet(StringComparer.Ordinal);
     }
 
+    /// <summary>The census status of one control on its own, for the check's negative controls.</summary>
+    private static string ToolTipCensusProbe(Control control)
+    {
+        var window = new Window { Content = control, Width = 300, Height = 200, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual,
+            ShowInTaskbar = false, ShowActivated = false };
+        try { window.Show(); PumpDispatcher(); var collector = new CensusCollector(); collector.Collect(window); return collector.Rows.Single().Status; }
+        finally { window.Close(); PumpDispatcher(); }
+    }
+
     private static void WriteToolTipCensus(string output, List<ToolTipCensusTable> tables)
     {
         static string Cell(string value) => value.Replace('\t', ' ').Replace('\r', ' ').Replace('\n', ' ');

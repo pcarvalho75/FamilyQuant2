@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,12 @@ internal static partial class Program
         new("--test-tooltip-style", 100, TestCommandPhase.Raw, args => args.Length > 0 && args[0] == "--test-tooltip-style", (_, _) =>
         {
             ToolTipStyleTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-tooltips", 100, TestCommandPhase.Raw, args => args.Length > 0 && args[0] == "--test-tooltips", (_, _) =>
+        {
+            ToolTipCheckTests();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),
@@ -75,6 +82,33 @@ internal static partial class Program
             }
             finally { window.Close(); PumpDispatcher(); }
         }
+    }
+
+    /// <summary>Z12q6: rule 7 in every window the census opens. Each window passes when every required control has a
+    /// tooltip that says more than its label, and when no tooltip has a dash, a colour word or a D21 word.</summary>
+    private static void ToolTipCheckTests()
+    {
+        Section("Z12q6 every control explains itself on hover (rule 7)");
+        EnsureApplication();
+        var previous = Themes.ThemeManager.Current;
+        List<ToolTipCensusTable> tables;
+        try { Themes.ThemeManager.Apply(Themes.AppTheme.Dark); tables = ToolTipCensus(); }
+        finally { Themes.ThemeManager.Apply(previous); }
+        foreach (var table in tables)
+        {
+            string window = table.Window + " (" + table.Owner + ")";
+            if (table.Note.StartsWith("OPEN FAILED", StringComparison.Ordinal) || table.Note.StartsWith("NOT OPENED", StringComparison.Ordinal))
+            { Check(window + " opens for the tooltip check", false, table.Note); continue; }
+            var missing = table.Rows.Where(r => r.Status != "OK" && !CensusInformationalKinds.Contains(r.Kind)).ToArray();
+            Check(window + ": every control has a tooltip that says more than its label", missing.Length == 0,
+                missing.Length + " controls: " + string.Join("; ", missing.Select(r => r.Status + " " + r.Kind + " \"" + r.Label + "\"" + (r.Name.Length > 0 ? " (" + r.Name + ")" : string.Empty))));
+            var wording = table.Rows.Where(r => r.Wording.Length > 0).ToArray();
+            Check(window + ": tooltips have no dash, colour word or D21 word", wording.Length == 0,
+                string.Join("; ", wording.Select(r => r.Wording + " in " + r.Kind + " \"" + r.Label + "\"")));
+        }
+        Check("Z12q6 the check would notice a bare control and a tip that repeats its label",
+            ToolTipCensusProbe(new Button { Content = "Save" }) == "NONE" && ToolTipCensusProbe(new Button { Content = "Save", ToolTip = "Save." }) == "REPEATS-LABEL"
+            && ToolTipCensusProbe(new Button { Content = "Save", ToolTip = "Writes the project to its .fqproj file. Undo does not apply to files." }) == "OK");
     }
 
     private static bool YellowOrGold(Color color)
