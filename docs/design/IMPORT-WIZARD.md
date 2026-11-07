@@ -3,8 +3,8 @@
 Z12p2a design proposal. These are mock screens, not an implemented importer.
 Entry: File > Import family panel. The existing panel editor and its editing,
 Pfam checking, template export and Undo contracts remain available.
-Build Z12p2b starts after this design is reviewed and Paulo has seen the screens,
-and after the Z12p1 importer contract is available.
+FQKimi approved Z12p2a and Paulo received the screens (desk M53). Desk M50
+authorised the functional build against Z12p1 while review remarks arrive.
 
 ## Purpose and boundaries
 
@@ -254,19 +254,15 @@ page needs review. No animation is required; no animated page transition.
 | Site Z12p2c | Shipped fictitious workbook, Help screenshots/walkthrough, matching example row numbers and choices |
 | Opus Z12p2d | Save-template action and default import round trip |
 
-Site's announced writer seam is
-`FamilyQuant.Core/Examples/LanternViperFamilyList.cs`,
-`LanternViperFamilyList.Write(path, titleRow)`. Try with the example and the
-functional wizard's fixture round trips use that writer once it lands. The
-test-only design pages here remain detached static stand-ins.
+Site's corrected writer is `FamilyQuant.Examples.ExampleFamilyList.Write(path,
+titleRow)`, with `DefaultFileName` and `FamilySheetName` (desk M54). The functional
+wizard and its tests use this organism-neutral writer. The test-only design
+pages here remain detached static stand-ins.
 
-Source cell fills raise a look-rule boundary: arbitrary workbook colours may
-include yellow/gold. Mocks use existing token fills only. Proposed rule for the
-build is to preserve all source fills as metadata, display allowed fills through
-source-data tokens, and show prohibited fills as a neutral swatch with its
-original colour name/value in the cell details. Exact Excel-colour rendering
-would require the desk to authorise a source-data exception. No such exception
-is assumed here. Source colour never maps to Quantify, skip or membership.
+The desk approved the source-colour boundary in M50: workbook fills are source
+data, not theme colours; yellow/gold fills are shown neutrally with the original
+colour named in cell details. Mock fills use tokens. The functional preview reads
+the stored fill and never turns its colour into a decision or membership rule.
 
 ## Mock fixture and review packet
 
@@ -317,7 +313,38 @@ included in tests, commits or reviewer artifacts.
    are checked on every page at both sizes/themes, including long text, empty
    suggestions and a validation error. Focused checks join DefaultSuite.
 
-Best case: design approval and core contracts allow the build to start next.
-Realistic remaining effort: 2 to 4 hours for the functional wizard and focused
-checks after contracts, plus independent review/polish and real-file acceptance;
-the external review and workbook delivery time are not predictable.
+## Functional implementation notes
+
+The window is `FamilyListImportWindow`, with typed state in
+`FamilyListImportViewModel` and the guarded `FamilyListImportTransaction`.
+`FamilyListStoredEvidenceMatches` is a thin adapter over Fetch's
+`PanelEvidenceMatching`; it adds no second name matcher. New choices start
+unchecked. On re-import, `CarryConfirmedMatches` retains records by stable key,
+the page says Kept from previous panel, and skipping new matching preserves those
+values. Explicitly confirmed replacements win. Removed-key notices are shown
+in Summary. All source and project guards repeat before publication.
+
+The Columns page opens a separate, bounded decision-review subview when a mapped
+free-text column needs confirmation. The header proposals, examples and optional
+colour categories remain on the column form. Ambiguous punctuation can be kept
+as one family explicitly. Source notes open in a read-only report, keeping the
+Summary table compact. Raw merged text is drawn once at its leading cell, while
+cell details retain the complete raw value and merged range.
+
+The actual example writer and `PanelImportTemplate.Write` have production callers
+in the wizard; the File menu also offers Save family list template. The retained
+panel editor is reached through Edit current panel. Done opens Group by evidence
+with a checklist request that selects the tab after the person's explicit Update
+proposal; it performs no implicit update or Apply. H1 was reassigned to FQFloat
+by desk M56; Home's packaging step waits for the named integrated commit.
+
+Native checks use `--test-family-list-import <output-dir>` and the shipped neutral
+example, and join DefaultSuite. They include actual `.fqproj` save/reopen,
+source/project mutation refusal, in-flight cancellation, re-import keep/replace,
+one Undo, template defaults, source-colour handling and the deferred checklist
+handoff. No real workbook is used in tests or review captures.
+
+Best case remaining: review accepts the functional wizard and the integrated
+release checks pass in the next release cycle. Realistic remaining: independent
+polish, the real-file acceptance walk and the desk's full suite/integration, then
+packaging; external review and release timing remain outside the builder's control.

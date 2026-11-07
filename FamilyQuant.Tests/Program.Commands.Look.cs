@@ -10,6 +10,12 @@ internal static partial class Program
     [TestCommandTable]
     private static IEnumerable<TestCommand> LookCommandTable() =>
     [
+        new("--test-family-list-import", 62, TestCommandPhase.Raw, args => args.Contains("--test-family-list-import", StringComparer.Ordinal), (args, _) =>
+        {
+            FamilyListImportTests(args.Length == 2 ? args[1] : null);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
         new("--test-import-wizard-mocks", 61, TestCommandPhase.Raw, args => args.Contains("--test-import-wizard-mocks", StringComparer.Ordinal), (args, _) =>
         {
             ImportWizardMockTests(args.Length == 2 ? args[1] : null);
