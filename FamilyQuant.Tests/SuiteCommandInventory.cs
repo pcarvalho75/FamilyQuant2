@@ -14,6 +14,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-patternlab-priority", "FamilyQuant.Tests.Program.PatternLabPriorityTests(System.String)"),
         SuiteCommandRule.Covered("--write-example-family-list", "FamilyQuant.Tests.Program.ExampleFamilyListTests(System.String)"),
         SuiteCommandRule.Covered("--test-import-guide", "FamilyQuant.Tests.Program.FamilyListImportGuideTests(System.String)"),
+        SuiteCommandRule.Excluded("--import-guide-screens", "Manual capture of the Import family list Help pictures (Z12p2c) requires an explicitly selected output folder; it is a capture producer rather than an ordinary pass/fail fixture."),
         SuiteCommandRule.Covered("--test-align-selected", "FamilyQuant.Tests.Program.AlignSelectedTests(System.String)"),
         SuiteCommandRule.Covered("--test-denovo-workflow-help", "FamilyQuant.Tests.Program.DeNovoWorkflowHelpTests()"),
         SuiteCommandRule.Covered("--test-reference-quantitation", "FamilyQuant.Tests.Program.FullXicComputeRealTests(System.String,System.String)", "FamilyQuant.Tests.Program.NativeTicFractionRealTests(System.String,System.String,System.String)", "FamilyQuant.Tests.Program.Ms1EnvelopeRealTests(System.String,System.String,System.String)", "FamilyQuant.Tests.Program.AnalyticsRealTests(System.String,System.String,System.String)"),
