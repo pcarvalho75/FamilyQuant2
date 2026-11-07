@@ -74,6 +74,12 @@ internal static partial class Program
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),
+        new("--test-evidence-outside-scope-help", 60, TestCommandPhase.Raw, args => args.Contains("--test-evidence-outside-scope-help", StringComparer.Ordinal), (args, _) =>
+        {
+            EvidenceOutsideScopeHelpTests(args.Length == 2 ? args[1] : null);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
     ];
 
     private static int RunCurationLayoutChecks(string[] args, string workDir)

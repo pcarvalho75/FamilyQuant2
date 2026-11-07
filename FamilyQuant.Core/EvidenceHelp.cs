@@ -23,6 +23,7 @@ namespace FamilyQuant
             sb.AppendLine("====================");
             sb.AppendLine();
             sb.AppendLine(EvidenceScopeHelp.Build());
+            sb.AppendLine(EvidenceOutsideScopeHelp.Build());
             sb.AppendLine(EvidenceReviewTerms.Text);
             sb.AppendLine("Each protein is placed in a family by what UniProt's curators and its own sequence");
             sb.AppendLine("say, never by the words in its name. Each one gets a family, a tier and a reason.");

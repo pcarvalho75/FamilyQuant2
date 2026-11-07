@@ -329,6 +329,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ValidationReportTests());
             suite.AddWithApplication(() => EvidenceHelpTests());
             suite.Add(() => EvidenceScopeHelpTests());
+            suite.Add(() => EvidenceOutsideScopeHelpTests());
             suite.Section("Left-out list - marker carriers kept out of the marker's family, with why");
             suite.Add(() => LeftOutListTests());
             suite.Add(() => EvidenceExportTests());

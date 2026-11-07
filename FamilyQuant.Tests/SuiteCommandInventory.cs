@@ -409,6 +409,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-manual-family-choices", "FamilyQuant.Tests.Program.ManualFamilyChoiceTests()"),
         SuiteCommandRule.Covered("--test-manual-family-ui", "FamilyQuant.Tests.Program.ManualFamilyUiTests(System.String)"),
         SuiteCommandRule.Covered("--test-database-update-exports", "FamilyQuant.Tests.Program.DatabaseUpdateExportTests()"),
+        SuiteCommandRule.Covered("--test-evidence-outside-scope-help", "FamilyQuant.Tests.Program.EvidenceOutsideScopeHelpTests(System.String)"),
         SuiteCommandRule.Covered("--test-scope-visibility", "FamilyQuant.Tests.Program.ScopeVisibilityTests()"),
         SuiteCommandRule.Covered("--test-shell-dialogs", "FamilyQuant.Tests.Program.BusyOperationTests(System.String)", "FamilyQuant.Tests.Program.ShellDialogTests(System.String)"),
         SuiteCommandRule.Covered("--test-shell-evidence-cancel", "FamilyQuant.Tests.Program.ShellEvidenceFetchCancellationTests()"),
