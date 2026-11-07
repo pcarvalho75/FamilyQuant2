@@ -69,7 +69,7 @@ public sealed partial class CurationQuantitationViewModel
         {
             operation.Report("recalculate", "Preparing the current family grouping");
             var source = Document.MyExtendedFastaItems.Select(p => (p, p.UserID, p.UserAnnotation ?? "")).ToArray();
-            var calculated = FamilyClusterFile.FromJsonText(Document.ToJsonText());
+            var calculated = Document.DeepCopy(operation);
             operation.ThrowIfCancellationRequested();
             calculated.SetLookupDictionary(project);
             operation.Report("recalculate", "Calculating the family shares");

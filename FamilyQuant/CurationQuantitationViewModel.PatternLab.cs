@@ -51,7 +51,7 @@ public sealed partial class CurationQuantitationViewModel
         };
         if (!available) mode = NormalizationMode.IdentifiedSignal;
         var source = Document.MyExtendedFastaItems.Select(p => (p, p.UserID, p.UserAnnotation ?? "")).ToArray();
-        var staged = FamilyClusterFile.FromJsonText(Document.ToJsonText());
+        var staged = Document.DeepCopy();
         cancellation.ThrowIfCancellationRequested();
         staged.SetLookupDictionary(loaded);
         staged.AttributeXICToGroups(loaded, mode, policy);
