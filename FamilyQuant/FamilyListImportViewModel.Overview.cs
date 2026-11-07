@@ -33,7 +33,7 @@ public sealed partial class FamilyListImportViewModel
                 + (source.Columns.Count > 0 ? ", " + string.Join(", ", source.Columns) : ""))), PageKey(item.Page))).ToArray() ?? Array.Empty<ImportWorkbookFinding>();
     public IReadOnlyList<string> WorkbookReviewProblems => (workbookReview?.Sections.SelectMany(section => section.Items)
         .Where(item => item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace)
-        .Select(item => item.Label + ": " + PlainWorkbookReason(item.Reason) + " Review " + PageLabel(item.Page) + ".") ?? Array.Empty<string>())
+        .Select(item => item.Label + ": " + WorkbookProblemGuidance(item.Reason, item.Page)) ?? Array.Empty<string>())
         .Concat(workbookAcceptance?.Items.SelectMany(item => item.Problems).Where(problem => problem.Blocking).Select(problem =>
             problem.Message.Replace(" Open " + problem.Page + ".", " Review " + PageLabel(problem.Page) + ".", StringComparison.Ordinal)) ?? Array.Empty<string>())
         .Concat(workbookReviewError.Length > 0 ? new[] { workbookReviewError } : Array.Empty<string>()).Distinct(StringComparer.Ordinal).ToArray();
@@ -62,13 +62,33 @@ public sealed partial class FamilyListImportViewModel
     public IReadOnlyList<ImportWorkbookDomainRow> WorkbookDomainRows => (workbookSnapshot?.Pfam ?? new()).Select(hint =>
         new ImportWorkbookDomainRow(hint.FamilyKey, string.Join("; ", hint.Domains.Select(domain => domain.Accession + (domain.Name.Length > 0 ? " " + domain.Name : ""))),
             "Row " + hint.RowNumber + ", " + hint.Column)).ToArray();
-    public IReadOnlyList<ImportWorkbookSection> WorkbookSections => workbookReview?.Sections.Select(section => new ImportWorkbookSection(
-        SectionKey(section.Kind), SectionLabel(section.Kind), (section.Kind == WorkbookImportSectionKind.Sheets ? WorkbookSheets.Count + " sheets read; " : section.Items.Count + " findings; ")
-            + section.Items.Count(item => item.State == WorkbookImportItemState.Proposed) + " proposed; "
-            + section.Items.Count(item => item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace) + " to review",
-        section.Items.Any(item => item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace),
-        "Reviews " + SectionLabel(section.Kind).ToLowerInvariant() + " in the draft. Nothing changes in the project until Accept and import succeeds.")).ToArray()
+    public IReadOnlyList<ImportWorkbookSection> WorkbookSections => workbookReview?.Sections.Select(section =>
+    {
+        int required = section.Items.Count(item => item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace);
+        int optional = section.Items.Count(item => !item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace);
+        string review = required > 0 ? required + " need your choice" : optional > 0 ? optional + " optional to check" : "no choices needed";
+        if (required > 0 && optional > 0) review += "; " + optional + " optional to check";
+        return new ImportWorkbookSection(SectionKey(section.Kind), SectionLabel(section.Kind),
+            (section.Kind == WorkbookImportSectionKind.Sheets ? WorkbookSheets.Count + " sheets read; " : section.Items.Count + " findings; ")
+                + section.Items.Count(item => item.State == WorkbookImportItemState.Proposed) + " proposed; " + review, required > 0,
+            "Reviews " + SectionLabel(section.Kind).ToLowerInvariant() + " in the draft. Nothing changes in the project until Accept and import succeeds.");
+    }).ToArray()
         ?? Array.Empty<ImportWorkbookSection>();
+
+    private static string WorkbookProblemGuidance(string reason, WorkbookImportPage page)
+    {
+        string text = PlainWorkbookReason(reason).Trim();
+        const string diagnostic = "Matched program words: ";
+        if (text.StartsWith(diagnostic, StringComparison.Ordinal) && text.IndexOf('.', diagnostic.Length) is int stop && stop >= 0)
+            text = text[(stop + 1)..].TrimStart();
+        text = text.Replace("No program action word matched.", "No action is clear for this label.", StringComparison.Ordinal)
+            .Replace("Bracketed qualifier:", "Extra condition:", StringComparison.Ordinal)
+            .Replace("The text is optional, conditional or negated; review its action.", "This label is optional, conditional or says not to use an action.", StringComparison.Ordinal)
+            .Replace("The text is optional or conditional; review its action.", "This label is optional or conditional.", StringComparison.Ordinal);
+        const string instruction = "Review its action.";
+        if (text.EndsWith(instruction, StringComparison.Ordinal)) text = text[..^instruction.Length].TrimEnd();
+        return text + (text.Length > 0 ? " " : "") + (page == WorkbookImportPage.Decisions ? "Choose its action in " : "Review ") + PageLabel(page) + ".";
+    }
 
     private static string StateLabel(WorkbookImportItemState state) => state switch
     { WorkbookImportItemState.Found => "Found", WorkbookImportItemState.Proposed => "Proposed", WorkbookImportItemState.Uncertain => "Uncertain", _ => "Could not place" };
@@ -77,8 +97,9 @@ public sealed partial class FamilyListImportViewModel
         WorkbookImportPage.FamilyRows => "rows", WorkbookImportPage.EvidenceMatches => "matches", WorkbookImportPage.Subclasses => "subclasses",
         WorkbookImportPage.Notes => "notes", _ => "sheets" };
     private static string PageLabel(WorkbookImportPage page) => page switch
-    { WorkbookImportPage.FileAndSheets => "Workbook sheets", WorkbookImportPage.FamilyRows => "Special rows", WorkbookImportPage.EvidenceMatches => "Evidence matches",
-        WorkbookImportPage.Colors => "Source categories", _ => page.ToString() };
+    { WorkbookImportPage.FileAndSheets => "Workbook sheets", WorkbookImportPage.Columns => "Family list and columns",
+        WorkbookImportPage.Colors => "Source categories", WorkbookImportPage.Decisions => "Decision labels", WorkbookImportPage.FamilyRows => "Family rows",
+        WorkbookImportPage.EvidenceMatches => "Pfam and evidence matches", WorkbookImportPage.Subclasses => "Subclass proposals", _ => "Source notes" };
     private static string SectionKey(WorkbookImportSectionKind kind) => kind switch
     { WorkbookImportSectionKind.Columns => "columns", WorkbookImportSectionKind.Colors => "colours", WorkbookImportSectionKind.Decisions => "decisions",
         WorkbookImportSectionKind.FamilyRows => "rows", WorkbookImportSectionKind.Pfam => "matches", WorkbookImportSectionKind.Subclasses => "subclasses",
