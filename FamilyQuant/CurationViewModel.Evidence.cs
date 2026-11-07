@@ -17,7 +17,8 @@ public sealed partial class CurationViewModel
     public IReadOnlyDictionary<FastaItemExtended, string> DomainPreview { get; private set; } = new Dictionary<FastaItemExtended, string>();
 
     public async Task<EvidenceFetchOutcome> FetchEvidenceAsync(HttpMessageHandler? handler, OperationContext operation,
-        IReadOnlyCollection<int>? additionalPositionFamilyIds = null, bool retryPanelOnly = false, UniProtFetchOptions? options = null)
+        IReadOnlyCollection<int>? additionalPositionFamilyIds = null, bool retryPanelOnly = false, UniProtFetchOptions? options = null,
+        ReferencePanelRequest? panelRequest = null, Func<FamilyClusterFile, ReferencePanelRequest?>? selectPanel = null)
     {
         operation.Report("evidence", "Preparing the evidence fetch");
         var source = Document.MyExtendedFastaItems.Select(p => (Item: p, p.SequenceIdentifier, p.Sequence, p.Description, p.Domains, p.Evidence)).ToArray();
@@ -32,7 +33,7 @@ public sealed partial class CurationViewModel
             var prepared = await Task.Run(() => FamilyClusterFile.FromJsonText(Document.ToJsonText()), operation.CancellationToken);
             operation.ThrowIfCancellationRequested();
             var result = retryPanelOnly
-                ? await EvidenceFetchSession.RetryPanelAsync(prepared, handler, new CurationFetchProgress(operation), operation.CancellationToken, options)
+                ? await EvidenceFetchSession.RetryPanelAsync(prepared, handler, new CurationFetchProgress(operation), operation.CancellationToken, options, panelRequest)
                 : await EvidenceFetchSession.FetchAsync(prepared, handler, new CurationFetchProgress(operation),
                     cancellationToken: operation.CancellationToken, positionAccessions: positionAccessions, options: options,
                     proteinDomainsReady: ready => OnPreviewContext(() =>
@@ -51,18 +52,23 @@ public sealed partial class CurationViewModel
                         }
                         DomainPreview = new ReadOnlyDictionary<FastaItemExtended, string>(pending);
                         Changed(nameof(DomainPreview));
-                    }));
+                    }), selectPanel: selectPanel == null ? null : async snapshot =>
+                    {
+                        ReferencePanelRequest? choice = null;
+                        await OnPreviewContext(() => choice = selectPanel(snapshot));
+                        return choice;
+                    });
             operation.ThrowIfCancellationRequested();
             if (!result.Changed) return result;
             operation.Commit(() =>
             {
                 EnsureCurrentSource();
-                for (int i = 0; i < source.Length; i++)
+                for (int i = 0; !retryPanelOnly && i < source.Length; i++)
                 {
                     source[i].Item.Domains = prepared.MyExtendedFastaItems[i].Domains;
                     source[i].Item.Evidence = prepared.MyExtendedFastaItems[i].Evidence;
                 }
-                Document.DomainSource = prepared.DomainSource;
+                if (!retryPanelOnly) Document.DomainSource = prepared.DomainSource;
                 Document.EvidenceSource = prepared.EvidenceSource;
                 NotifyDocumentChanged();
             });

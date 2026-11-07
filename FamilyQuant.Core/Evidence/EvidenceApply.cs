@@ -104,6 +104,7 @@ namespace FamilyQuant.Evidence
             ArgumentNullException.ThrowIfNull(file);
             ArgumentNullException.ThrowIfNull(proposal);
             ArgumentNullException.ThrowIfNull(selection);
+            ReferencePanelFetcher.RequireScope(file.EvidenceSource?.ReferencePanel, proposal.Options.ScopeTerms);
             operation?.Report("evidence-apply", "Validating evidence choices");
             selection = Clone(selection);
             string initialPanel = Hash(file.FamilyPanel);
@@ -284,6 +285,7 @@ namespace FamilyQuant.Evidence
             ArgumentNullException.ThrowIfNull(recipe);
             operation?.Report("evidence-apply", "Validating the saved evidence recipe");
             recipe = Clone(recipe);
+            ReferencePanelFetcher.RequireScope(file.EvidenceSource?.ReferencePanel, recipe.Options.ScopeTerms);
             if (recipe.FamilyPanel != null) Panels.FamilyPanelValidation.Validate(recipe.FamilyPanel);
             if (recipe.ConfirmedTask != null) EvidenceTaskDiscovery.Validate(file, recipe.ConfirmedTask, recipe.Options.ScopeTerms);
             string state = StateFingerprint(file, session: recipe);
