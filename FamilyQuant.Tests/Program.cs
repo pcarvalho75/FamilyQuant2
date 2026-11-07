@@ -104,6 +104,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => RecipeCopiesTests(Path.Combine(workDir, "recipe-copies")));
             suite.Add(() => FeatureProvenanceFormatTests(Path.Combine(workDir, "feature-provenance")));
             suite.Add(() => PanelEntryIdentityFormatTests(Path.Combine(workDir, "panel-entry-identity")));
+            suite.Add(() => CurationFormat2CompositionTests(Path.Combine(workDir, "curation-format2-composition")));
             suite.AddWithApplication(() => CurationStreamingContractTests(Path.Combine(workDir, "curation-streaming-contract")));
             suite.Add(() => JsonStreamCopyTests());
             suite.Add(() => CompactCurationTests(Path.Combine(workDir, "compact-curation")));
