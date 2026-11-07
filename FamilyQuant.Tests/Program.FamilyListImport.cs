@@ -24,6 +24,17 @@ internal static partial class Program
         Directory.CreateDirectory(work);
         string workbook = Path.Combine(work, ExampleFamilyList.DefaultFileName); ExampleFamilyList.Write(workbook);
         string sourceHash = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(workbook)));
+        using (var workbookModel = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(ManualChoiceFile())),
+            workbookSource: new FamilyListWorkbookCoreSource(), openWorkbookReview: true))
+        {
+            FinishReviewWork(async () => { await workbookModel.LoadAsync(workbook); await workbookModel.ReviewWorkbookSectionAsync("columns"); });
+            workbookModel.ReviewingDecisions = false;
+            Check("Columns with pending workbook decisions names its available review and return actions",
+                !workbookModel.CanNext && workbookModel.CanReturnToWorkbook
+                && workbookModel.Status.Contains("Review decision values", StringComparison.Ordinal)
+                && workbookModel.Status.Contains("Back to workbook review", StringComparison.Ordinal)
+                && workbookModel.DisabledReason == workbookModel.Status);
+        }
         var previousTheme = Themes.ThemeManager.Current;
         try
         {
@@ -91,6 +102,16 @@ internal static partial class Program
                     decision.Header = decision.Headers.First(h => h.Contains("DECIS", StringComparison.OrdinalIgnoreCase));
                     Check(label + " free-text decisions remain proposals until explicitly confirmed", model.Decisions.Count == 8
                         && model.Decisions.Any(d => !d.Confirmed) && !model.CanNext && model.Decisions.All(d => d.Rows.Length > 0));
+                    WalkTree(window).OfType<Button>().Single(button => Equals(button.Content, "Back to columns"))
+                        .RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
+                    Check(label + " blocked Columns names decision review in its visible footer and disabled Next tooltip",
+                        !model.ReviewingDecisions && !model.CanNext && model.Status.Contains("Review decision values", StringComparison.Ordinal)
+                        && model.DisabledReason == model.Status && !model.Status.Contains("Back to workbook review", StringComparison.Ordinal)
+                        && WalkTree((FrameworkElement)window.FindName("WizardFooter")).OfType<TextBlock>().Any(text => text.Text == model.Status)
+                        && ((Button)window.FindName("ForwardButton")).ToolTip is string tip && tip.Contains(model.Status, StringComparison.Ordinal));
+                    CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns-needs-decisions");
+                    WalkTree(window).OfType<Button>().Single(button => Equals(button.Content, "Review decision values"))
+                        .RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
                     ((Button)window.FindName("ForwardButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                     Check(label + " disabled Next cannot silently accept decision proposals", model.Page == 2);
                     Check(label + " decision review has its own bounded table and clear page heading", model.ReviewingDecisions && model.Title == "Review spreadsheet decisions");
@@ -100,6 +121,14 @@ internal static partial class Program
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns-decisions");
                     model.ConfirmDecisions();
                     Check(label + " explicit batch confirmation accepts the reviewed decision meanings", model.Decisions.All(d => d.Confirmed) && model.CanNext);
+                    Check(label + " confirming decisions removes the Columns blocking instruction",
+                        !model.Status.Contains("Review decision values", StringComparison.Ordinal));
+                    model.Decisions[0].Confirmed = false;
+                    Check(label + " an action needing confirmation again refreshes the Columns instruction",
+                        !model.CanNext && model.Status.Contains("Review decision values", StringComparison.Ordinal));
+                    model.Decisions[0].Confirmed = true;
+                    Check(label + " resolving the last pending confirmation clears the stale instruction",
+                        model.CanNext && !model.Status.Contains("Review decision values", StringComparison.Ordinal));
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " Special rows shows the duplicate and a several-name row with a real choice", model.Page == 3
                         && model.SpecialRows.Any(r => r.Duplicate) && model.SpecialRows.Any(r => r.SeveralNames && r.Parts.Count == 4) && !model.CanNext);
