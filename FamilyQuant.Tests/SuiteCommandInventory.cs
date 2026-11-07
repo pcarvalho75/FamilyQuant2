@@ -8,9 +8,10 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-results-export-facts", "FamilyQuant.Tests.Program.RunResultsExportFixture(System.String,System.Boolean)"),
+        SuiteCommandRule.Covered("--test-feature-provenance-format2", "FamilyQuant.Tests.Program.FeatureProvenanceFormatTests(System.String)"),
         SuiteCommandRule.Covered("--test-curation-streaming-callers", "FamilyQuant.Tests.Program.CurationStreamingCallerTests()"),
         SuiteCommandRule.Excluded("--proof-curation-past-string-limit", "Z12p5f4 opt-in synthetic workflow writes more than 1,073,741,791 JSON characters and runs native import, recalculation, report and file operations under D:/fq-tmp/proof; never run in the default suite. Optional --small debugs the driver without claiming the size proof."),
-        SuiteCommandRule.Covered("--test-feature-provenance-format2", "FamilyQuant.Tests.Program.FeatureProvenanceFormatTests(System.String)"),
         SuiteCommandRule.Excluded("--measure-decoy-rebuild", "Z15b5 explicit-output measurement writes and reads repository synthetic curation fixtures and compares every stored decoy field; an audit producer rather than a DefaultSuite fixture."),
         SuiteCommandRule.Covered("--test-reference-panel-legacy", "FamilyQuant.Tests.Program.ReferencePanelLegacyTests(System.String)"),
         SuiteCommandRule.Excluded("--record-reference-panel-legacy-project", "Baseline-only recorder for the frozen synthetic format-1 curation in a version-2 project; it refuses newer project writers and must never regenerate the committed legacy input during an ordinary suite."),
