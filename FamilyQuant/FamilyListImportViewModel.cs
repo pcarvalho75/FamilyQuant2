@@ -49,7 +49,8 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public IReadOnlyList<ImportColumnChoice> MainColumns => Columns.Where(c => c.Role != PanelImportFields.ColorCategory).ToArray();
     public ImportColumnChoice? ColorColumn => Columns.FirstOrDefault(c => c.Role == PanelImportFields.ColorCategory);
     public bool ReviewingDecisions { get => reviewingDecisions; set { if (Set(ref reviewingDecisions, value)) { Changed(nameof(Title)); Changed(nameof(Explanation));
-        if (page == 2) Status = value ? "Check the proposed actions and press Confirm these actions to continue." : "Your column choices are kept until you import."; } } }
+        if (page == 2) Status = ColumnsStatus;
+        Changed(nameof(DisabledReason)); Changed(nameof(ForwardToolTip)); } } }
     public ObservableCollection<ImportDecisionChoice> Decisions { get; } = new();
     public ObservableCollection<ImportColorChoice> SourceColorChoices { get; } = new();
     public ObservableCollection<ImportSpecialRow> SpecialRows { get; } = new();
@@ -236,9 +237,18 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         GoTo(page + 1); return true;
     }
 
+    private const string ColumnChoicesKept = "Your column choices are kept until you import.";
+    private const string ConfirmDecisionActions = "Check the proposed actions and press Confirm these actions to continue.";
+    private bool HasUnconfirmedColumnDecisions => MappingValid && Decisions.Any(decision => !decision.Confirmed);
+    private string DecisionReviewInstruction => "Press Review decision values and confirm each action to continue"
+        + (CanReturnToWorkbook ? ", or press Back to workbook review." : ".");
+    private string ColumnsStatus => ReviewingDecisions ? ConfirmDecisionActions
+        : HasUnconfirmedColumnDecisions ? DecisionReviewInstruction : ColumnChoicesKept;
+
     public string DisabledReason => IsBusy ? "Wait for the current step to finish, or cancel."
         : page == 1 ? "Choose a readable file, sheet and header row."
-        : page == 2 ? "Choose the required columns and confirm each decision value."
+        : page == 2 ? HasUnconfirmedColumnDecisions ? ReviewingDecisions ? ConfirmDecisionActions : DecisionReviewInstruction
+            : "Choose the required columns and confirm each decision value."
         : page == 3 ? SpecialRows.FirstOrDefault(r => r.Blocking)?.Message ?? check.Problems.FirstOrDefault(p => p.Severity == PanelImportSeverity.Blocking)?.Message ?? "Review the special rows."
         : page == 4 ? "Confirm or skip each family's evidence matches."
         : page == 5 ? "Name the panel and resolve every remaining row choice." : "Complete this page before continuing.";
@@ -250,7 +260,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         {
             0 => "Nothing has changed yet.",
             1 => "Check the sheet and header row before continuing.",
-            2 => ReviewingDecisions ? "Check the proposed actions and press Confirm these actions to continue." : "Your column choices are kept until you import.",
+            2 => ColumnsStatus,
             3 => SpecialSummary + ".",
             4 => MatchingChoiceStatus,
             5 => Imported ? "This list is already imported." : "Nothing has changed yet. Import keeps one Undo step.",
@@ -261,6 +271,8 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
 
     private void Refresh()
     {
+        if (page == 2 && !ReviewingDecisions && !reviewingWorkbook && !reviewingSubclasses && !IsBusy && !Imported
+            && (status == ColumnChoicesKept || status == DecisionReviewInstruction)) Status = ColumnsStatus;
         Changed(nameof(Page)); Changed(nameof(CanNext)); Changed(nameof(CanBack)); Changed(nameof(ForwardLabel));
         Changed(nameof(CloseLabel)); Changed(nameof(Imported)); Changed(nameof(CanUndo)); Changed(nameof(DisabledReason));
         Changed(nameof(DraftPanel)); Changed(nameof(Problems)); Changed(nameof(Summary)); Changed(nameof(SummaryFamilies)); Changed(nameof(ImportedFamilyCount));

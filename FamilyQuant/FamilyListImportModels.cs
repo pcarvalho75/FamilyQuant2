@@ -29,7 +29,7 @@ public sealed class ImportColumnChoice : ScreenViewModel
         PanelImportFields.Pfam => "An optional column of Pfam codes or names, proposed from the headers; Not used adds no domain requirement.",
         PanelImportFields.Decision => "An optional column telling what to do with each family; default Not used quantifies every family, while a chosen column requires you to confirm each label's action.",
         WorkbookImportSummaryFields.Subclasses => "An optional column of expected subclass names, proposed by Core from the workbook structure; Not used leaves it as source text without expected subclass definitions.",
-        _ => "An optional column whose cell fills become text categories; default Not used, and selecting a column starts each category with its source name."
+        _ => "An optional column whose cell fills become text categories; initially the workbook's proposal or Not used, with each category starting with its legend name when available, or its plain fill name."
     }) + " Choose a header from this sheet; this changes only the draft until Import.";
     public ImportColumnChoice(string role, string label, bool required, IReadOnlyList<string> headers, Func<string, string> example)
     { Role = role; Label = label; Required = required; Headers = required ? headers : new[] { "" }.Concat(headers).ToArray(); this.example = example; }

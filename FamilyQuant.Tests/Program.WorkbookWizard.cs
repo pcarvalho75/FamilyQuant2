@@ -97,6 +97,19 @@ internal static partial class Program
                         && model.SourceColorChoices.All(c => source.Last.Colors.Any(h => h.Color.Equals(c.Color, StringComparison.OrdinalIgnoreCase)
                             && c.Label == (!h.IsUncertain && h.Name.Length > 0 ? h.Name : c.ColorName) && h.Meaning == c.Meaning)),
                         string.Join("; ", model.SourceColorChoices.Select(c => c.Color + "=" + c.Label + " / " + c.Meaning)));
+                    model.ReviewingDecisions = false;
+                    ((Expander)window.FindName("ColourCategories")).IsExpanded = true; PumpDispatcher();
+                    var colourGrid = (DataGrid)window.FindName("ColourCategoriesGrid");
+                    Check(label + " category column, table and header explain legend names and the plain fill fallback",
+                        new[] { model.ColorColumn!.ToolTip, colourGrid.ToolTip as string ?? "",
+                            Themes.TableAppearance.GetHeaderToolTip(colourGrid.Columns[2]) ?? "" }
+                        .All(tip => tip.Contains("legend name", StringComparison.Ordinal) && tip.Contains("plain fill name", StringComparison.Ordinal)));
+                    var legendColour = model.SourceColorChoices.First(choice => choice.Meaning.Length > 0);
+                    colourGrid.ScrollIntoView(legendColour); PumpDispatcher();
+                    Check(label + " the native source category row exposes its retained legend meaning",
+                        colourGrid.ItemContainerGenerator.ContainerFromItem(legendColour) is DataGridRow colourRow
+                        && colourRow.ToolTip as string == legendColour.Meaning && project.ToJsonText() == before);
+                    model.ReviewingDecisions = true;
                     model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header = source.Last.FamilyProposal.DecisionHint; PumpDispatcher();
                     Check(label + " decision meanings are displayed without accepting uncertain mappings", model.Decisions.Count > 0
                         && model.Decisions.All(d => source.Last.Decisions.Any(h => h.SourceValue == d.Source && h.LegendMeaning == d.Meaning))
