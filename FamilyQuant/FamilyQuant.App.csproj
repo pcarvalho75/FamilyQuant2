@@ -76,6 +76,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Help\ImportFamilyList\*.png" />
     <Resource Include="Assets\Brand\FamilyQuant.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
