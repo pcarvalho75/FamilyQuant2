@@ -368,6 +368,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-panel-workbook-legend", "FamilyQuant.Tests.Program.PanelWorkbookLegendTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-workbook-notes", "FamilyQuant.Tests.Program.PanelWorkbookNotesTests()"),
         SuiteCommandRule.Covered("--test-panel-subclass-import", "FamilyQuant.Tests.Program.PanelSubclassImportTests(System.String)"),
+        SuiteCommandRule.Covered("--test-workbook-import-summary", "FamilyQuant.Tests.Program.WorkbookImportSummaryTests()"),
         SuiteCommandRule.Covered("--test-panel-import-graceful", "FamilyQuant.Tests.Program.PanelImportGracefulTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-import-several", "FamilyQuant.Tests.Program.PanelImportSeveralTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-import-template", "FamilyQuant.Tests.Program.PanelImportTemplateTests(System.String)"),
