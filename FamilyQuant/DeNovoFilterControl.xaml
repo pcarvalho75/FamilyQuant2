@@ -6,31 +6,24 @@
   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
   <Label Content="De novo source" ToolTip="The selected caller determines the files and native confidence field used."/>
   <ComboBox x:Name="ComboBoxDeNovoSource" Grid.Column="1" SelectedValuePath="Tag"
-   SelectedValue="{Binding ModeTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-   ToolTip="Choose a source or union. Each source keeps its own native confidence cutoff.">
-   <ComboBoxItem Content="PEAKS de novo only (*.denovoOnly.csv)" Tag="peaks-only"/>
-   <ComboBoxItem Content="PEAKS de novo all (*.denovo.csv)" Tag="peaks-all"/>
-   <ComboBoxItem Content="DeepNovo (*.deepnovo.csv)" Tag="deepnovo"/>
-   <ComboBoxItem Content="Union: PEAKS de novo only + DeepNovo" Tag="union-only-deepnovo"/>
-   <ComboBoxItem Content="Union: PEAKS de novo all + DeepNovo" Tag="union-all-deepnovo"/>
+   SelectedValue="{Binding ModeTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="Choose files and native confidence scales for the next import or Compute; default PEAKS de novo only, or the project's saved choice. Stored quantities change only after Compute.">
+   <ComboBoxItem Content="PEAKS de novo only (*.denovoOnly.csv)" Tag="peaks-only" ToolTip="Prepare an import of PEAKS de novo only exports using the native ALC cutoff. This selection changes pending settings, not stored quantities."/>
+   <ComboBoxItem Content="PEAKS de novo all (*.denovo.csv)" Tag="peaks-all" ToolTip="Prepare an import of PEAKS exports that also include identified spectra, using the native ALC cutoff. This selection changes pending settings, not stored quantities."/>
+   <ComboBoxItem Content="DeepNovo (*.deepnovo.csv)" Tag="deepnovo" ToolTip="Prepare an import of DeepNovo exports using its native SCORE cutoff. SCORE is not converted to PEAKS ALC, and stored quantities stay unchanged."/>
+   <ComboBoxItem Content="Union: PEAKS de novo only + DeepNovo" Tag="union-only-deepnovo" ToolTip="Prepare the union of PEAKS de novo only and DeepNovo calls using separate native confidence cutoffs. Stored quantities change only after Compute."/>
+   <ComboBoxItem Content="Union: PEAKS de novo all + DeepNovo" Tag="union-all-deepnovo" ToolTip="Prepare the union of all-call PEAKS and DeepNovo calls using separate native confidence cutoffs. Stored quantities change only after Compute."/>
   </ComboBox>
   <Label Grid.Row="1" Content="PEAKS minimum ALC (%)" ToolTip="Minimum average local confidence for PEAKS calls, from 0 to 100."/>
   <TextBox Grid.Row="1" Grid.Column="1" Width="80" HorizontalAlignment="Left"
-   IsEnabled="{Binding UsesPeaks}" Text="{Binding PeaksMinimumAlc, UpdateSourceTrigger=PropertyChanged}"
-   ToolTip="PEAKS ALC cutoff from 0 to 100. It applies only to PEAKS calls."/>
+   IsEnabled="{Binding UsesPeaks}" Text="{Binding PeaksMinimumAlc, UpdateSourceTrigger=PropertyChanged}" ToolTip="Minimum PEAKS ALC: default 80 percent, range 0 to 100, including decimals; this prepares the next request without changing stored quantities. Disabled when PEAKS is not selected; choose a PEAKS source or union to enable it."/>
   <Label Grid.Row="2" Content="DeepNovo minimum SCORE (%)" ToolTip="Minimum native confidence score for DeepNovo calls, from 0 to 100."/>
   <TextBox Grid.Row="2" Grid.Column="1" Width="80" HorizontalAlignment="Left"
-   IsEnabled="{Binding UsesDeepNovo}" Text="{Binding DeepNovoMinimumScore, UpdateSourceTrigger=PropertyChanged}"
-   ToolTip="DeepNovo SCORE cutoff from 0 to 100. SCORE and ALC are separate confidence scales."/>
-  <Expander Grid.Row="3" Grid.ColumnSpan="2" Header="Length and local confidence" Margin="0,8,0,0"
-   ToolTip="These length and consecutive-residue filters are shared by Quantify and De novo review.">
+   IsEnabled="{Binding UsesDeepNovo}" Text="{Binding DeepNovoMinimumScore, UpdateSourceTrigger=PropertyChanged}" ToolTip="Minimum DeepNovo SCORE: default 80 percent, range 0 to 100, including decimals; this prepares the next request without changing stored quantities. Disabled when DeepNovo is not selected; choose DeepNovo or a union to enable it."/>
+  <Expander Grid.Row="3" Grid.ColumnSpan="2" Header="Length and local confidence" Margin="0,8,0,0" ToolTip="Show the length and consecutive-residue filters shared by De novo review and Quantify. Expanding changes only the view; editing prepares the next request and does not rewrite stored quantities.">
    <WrapPanel Margin="0,8,0,0">
-    <Label Content="Minimum length" ToolTip="Minimum accepted peptide length in residues, from 1 to 100."/><TextBox Width="54" Margin="{DynamicResource ControlPadding}" Text="{Binding MinimumLength, UpdateSourceTrigger=PropertyChanged}"
-     ToolTip="Minimum peptide length in residues, from 1 to 100. Default 7."/>
-    <Label Content="Consecutive residues" ToolTip="Number of consecutive residues required above the local confidence floor."/><TextBox Width="54" Margin="{DynamicResource ControlPadding}" Text="{Binding StretchLength, UpdateSourceTrigger=PropertyChanged}"
-     ToolTip="Required consecutive residues above the local confidence floor, from 1 to 100. Default 5."/>
-    <Label Content="At least (%)" ToolTip="Minimum local confidence of each residue in the requested stretch."/><TextBox Width="54" Margin="{DynamicResource ControlPadding}" Text="{Binding StretchFloor, UpdateSourceTrigger=PropertyChanged}"
-     ToolTip="Local confidence floor from 0 to 100, rounded to the nearest whole number. Default 90."/>
+    <Label Content="Minimum length" ToolTip="Minimum accepted peptide length in residues, from 1 to 100."/><TextBox Width="54" Margin="{DynamicResource ControlPadding}" Text="{Binding MinimumLength, UpdateSourceTrigger=PropertyChanged}" ToolTip="Minimum accepted peptide length: default 7 residues, whole numbers 1 to 100. Editing prepares the next request; stored quantities change only after Compute."/>
+    <Label Content="Consecutive residues" ToolTip="Number of consecutive residues required above the local confidence floor."/><TextBox Width="54" Margin="{DynamicResource ControlPadding}" Text="{Binding StretchLength, UpdateSourceTrigger=PropertyChanged}" ToolTip="Consecutive residues required at or above the local confidence floor: default 5 residues, whole numbers 1 to 100. Editing prepares the next request without changing stored quantities."/>
+    <Label Content="At least (%)" ToolTip="Minimum local confidence of each residue in the requested stretch."/><TextBox Width="54" Margin="{DynamicResource ControlPadding}" Text="{Binding StretchFloor, UpdateSourceTrigger=PropertyChanged}" ToolTip="Confidence floor for every residue in the stretch: default 90 percent, range 0 to 100, rounded to a whole number. Editing prepares the next request without changing stored quantities."/>
    </WrapPanel>
   </Expander>
   <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Margin="0,6,0,0" Text="{Binding SourceProposalText}"
