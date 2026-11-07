@@ -170,6 +170,7 @@ internal static partial class Program
             return Visit(new CoherenceMembersWindow(CoherenceCheck.Learn(file)["Invented family"]), c);
         });
         Guard("Family list import wizard", "Z12q2 FQHome", c => CensusWizard(c, scratch, Show));
+        Guard("Import family list guide", "unassigned", c => Visit(new FamilyListImportGuideWindow(), c));
         Guard("Family panel editor", "Z12q3 FQFetch", c => Visit(new PanelEditorWindow(new FamilyPanel { Name = "Panel",
             Families = new() { new FamilyPanelFamily { Key = "a", DisplayName = "Family a" } } }, evidenceFile: source), c));
         Guard("Match stored names", "Z12q3 FQFetch", c =>
