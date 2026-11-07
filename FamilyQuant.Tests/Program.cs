@@ -297,6 +297,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => InheritedRetryProgressTests());
             suite.Add(() => SameScanConflictTests());
             suite.AddWithApplication(() => PatternLabPriorityTests(workDir));
+            suite.Add(() => ExampleFamilyListTests());
             suite.AddWithApplication(() => DeNovoWorkflowHelpTests());
             suite.Add(() => EvidenceCoverageTests());
             suite.Add(() => QueryResidueCoverageTests());

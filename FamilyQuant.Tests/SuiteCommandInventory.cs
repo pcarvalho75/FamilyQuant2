@@ -12,6 +12,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Excluded("--crash-probe", "Owned fatal subprocess helper invoked and asserted by DefaultSuite CrashHandlerTests; deliberately exits and cannot run as an ordinary in-process fixture."),
         SuiteCommandRule.Covered("--test-same-scan-conflicts", "FamilyQuant.Tests.Program.SameScanConflictTests()"),
         SuiteCommandRule.Covered("--test-patternlab-priority", "FamilyQuant.Tests.Program.PatternLabPriorityTests(System.String)"),
+        SuiteCommandRule.Covered("--write-example-family-list", "FamilyQuant.Tests.Program.ExampleFamilyListTests(System.String)"),
         SuiteCommandRule.Covered("--test-denovo-workflow-help", "FamilyQuant.Tests.Program.DeNovoWorkflowHelpTests()"),
         SuiteCommandRule.Covered("--test-reference-quantitation", "FamilyQuant.Tests.Program.FullXicComputeRealTests(System.String,System.String)", "FamilyQuant.Tests.Program.NativeTicFractionRealTests(System.String,System.String,System.String)", "FamilyQuant.Tests.Program.Ms1EnvelopeRealTests(System.String,System.String,System.String)", "FamilyQuant.Tests.Program.AnalyticsRealTests(System.String,System.String,System.String)"),
         SuiteCommandRule.Excluded("--patternlab-priority-replay", "Explicit read-only stored-project replay writes aggregate before/after counts and family shares; synthetic rule checks are enrolled separately."),
