@@ -25,9 +25,13 @@ public partial class PanelEditorWindow : Window
     public FamilyPanel? Result { get; private set; }
     public ObservableCollection<PanelDecisionRow> DecisionMappings { get; } = new();
 
-    public PanelEditorWindow(FamilyPanel? panel, IPanelSpreadsheetReader? reader = null, IFamilyPanelSpreadsheetImporter? importer = null, IPanelPfamReview? pfamReview = null)
+    public PanelEditorWindow(FamilyPanel? panel, IPanelSpreadsheetReader? reader = null, IFamilyPanelSpreadsheetImporter? importer = null, IPanelPfamReview? pfamReview = null,
+        FamilyClusterFile? evidenceFile = null)
     {
         InitializeComponent();
+        panelMatchEvidenceFile = evidenceFile;
+        FamilyGrid.SelectionChanged += (_, _) => UpdateMatchButton();
+        UpdateMatchButton();
         this.reader = reader ?? new PanelSpreadsheetReader();
         this.importer = importer ?? new FamilyPanelSpreadsheetImporter();
         this.pfamReview = pfamReview ?? new PanelPfamReview();

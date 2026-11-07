@@ -29,11 +29,14 @@ namespace FamilyQuant
             Func<string, string, CancellationToken, Task<EvidenceScopePreview>>? previewScope = null,
             Func<EvidenceManualRequest, EvidenceReviewInput>? addToFamily = null,
             Func<IReadOnlyList<int>, EvidenceReviewInput>? removeFromFamily = null,
-            Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null)
+            Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null,
+            Func<string, PanelEvidenceMatchContext>? createMatchContext = null,
+            Func<string, Panels.PanelConfirmedEvidenceMatches, EvidenceReviewInput>? confirmPanelMatches = null)
         {
             InitializeComponent();
+            this.createMatchContext = createMatchContext;
             model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask, confirmPanelLinks, discoverTaskWithProgress,
-                previewScope, addToFamily, removeFromFamily, updateManualChoices);
+                previewScope, addToFamily, removeFromFamily, updateManualChoices, confirmPanelMatches);
             Loaded += async (_, _) => await DiscoverInitialTaskAsync();
             Closed += (_, _) => model.CancelPending();
             DataContext = model;

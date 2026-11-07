@@ -34,6 +34,9 @@ namespace FamilyQuant
         Consensus family spreadsheet
         Use File > Import family panel to read your consensus spreadsheet. Choose the abbreviation as the stable family key, select the display-name and other-language columns, and map each decision label. Group by evidence > Panel checklist shows database matches and why the proposal leaves them outside. Choose a stored phrase and Add phrase to scope to preview a wider scope, then Update proposal. Place outside matches by hand opens the explicit user-choice dialog and records Added by hand. Review the ticks, Apply grouping, then File > Save. Matching names or domains alone never assigns a family.
 
+        Matching stored evidence labels
+        Match stored names uses the panel display name and every other name under its original spreadsheet header. Suggestions come from shared name words and labels found on the same stored database or reference entries. Every new suggestion starts unticked; edit its type or value, or Add label, then confirm the labels to use. Coverage counts exact database target entries and stored reference accessions for each label; rows can overlap. Incomplete stored references are identified. Confirmed labels identify checklist candidates, where the scope and hand-placement actions continue the review. Apply grouping and File > Save keep choices made in this review. To save labels without grouping proteins, select the family in File > Import family panel, use Match stored names, then Apply panel and File > Save. Saved records follow explicit family-key edits with a moved/dropped notice.
+
         Copy
         Right-click for a UniProt code, the description or the UniProt page. Ctrl+C copies the column clicked; the tick column copies the locus. Selecting a row header preserves the grid's ordinary row copy. A held clipboard is reported rather than silently ignored.
         """;

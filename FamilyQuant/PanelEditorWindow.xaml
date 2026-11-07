@@ -36,11 +36,13 @@
                         <DataGridTextColumn Header="Subclass keys" Binding="{Binding Subclasses, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <WrapPanel Grid.Row="2">
                     <Button Content="Add family" Click="AddFamily_Click" ToolTip="Adds an empty family row."/>
                     <Button Content="Remove selected" Click="RemoveFamily_Click" Margin="8,0,0,0" ToolTip="Removes the selected family from this draft."/>
                     <Button Content="Save panel as spreadsheet" Click="SaveTemplate_Click" Margin="8,0,0,0" ToolTip="Writes a reusable spreadsheet from this panel draft."/>
-                </StackPanel>
+                    <Button x:Name="MatchStoredNamesButton" Content="Match stored names..." Click="MatchStoredNames_Click" Margin="8,0,0,0"
+                            ToolTip="Review exact evidence labels and their stored target coverage for the selected family before confirming candidate matches."/>
+                </WrapPanel>
                 <TextBlock Grid.Row="3" Text="Map spreadsheet decisions" Style="{StaticResource SectionTitle}" Margin="0,10,0,4"/>
                 <DataGrid x:Name="MappingGrid" Grid.Row="4" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
                     <DataGrid.Columns>

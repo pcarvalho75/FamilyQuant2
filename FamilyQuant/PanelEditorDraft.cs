@@ -12,6 +12,7 @@ public sealed class PanelEditorDraft
 {
     private readonly FamilyPanel original;
     private readonly string initialMatchNotice;
+    private readonly Dictionary<PanelEditorRow, (string Key, PanelConfirmedEvidenceMatches Matches)> pendingMatches = new();
     public string MatchChangeNotice { get; private set; } = "";
     public string Name { get; set; }
     public ObservableCollection<PanelEditorRow> Families { get; }
@@ -32,11 +33,31 @@ public sealed class PanelEditorDraft
         result.Families = Families.Select(x => x.Build()).ToList();
         var retained = Families.Where(row => row.OriginalKey.Length > 0).ToDictionary(row => row.OriginalKey, row => row.Key, StringComparer.Ordinal);
         result = PanelEvidenceMatching.RekeyConfirmedMatches(original, result, retained);
-        MatchChangeNotice = string.Join(" ", new[] { initialMatchNotice, result.ConfirmedMatchChangeNotice }.Where(text => text.Length > 0));
+        var notices = new List<string> { initialMatchNotice, result.ConfirmedMatchChangeNotice };
+        foreach (var pair in pendingMatches)
+        {
+            bool originalRecord = original.ConfirmedEvidenceMatches?.ContainsKey(pair.Key.OriginalKey) == true;
+            if (!Families.Contains(pair.Key))
+            {
+                if (!originalRecord) notices.Add("Dropped confirmed matches for " + pair.Key.Key + ".");
+                continue;
+            }
+            result.ConfirmedEvidenceMatches ??= new(StringComparer.Ordinal);
+            result.ConfirmedEvidenceMatches[pair.Key.Key] = PanelEvidenceMatching.Confirm(pair.Value.Matches.NamesUsed, pair.Value.Matches.Choices);
+            if (!originalRecord && pair.Value.Key != pair.Key.Key)
+                notices.Add("Moved confirmed matches from " + pair.Value.Key + " to " + pair.Key.Key + ".");
+        }
+        MatchChangeNotice = string.Join(" ", notices.Where(text => text.Length > 0).Distinct(StringComparer.Ordinal));
         if (result.Families.Any(x => string.IsNullOrWhiteSpace(x.DisplayName)))
             throw new ArgumentException("Every family needs a name.");
         FamilyPanelValidation.Validate(result);
         return result;
+    }
+    public void SetConfirmedMatches(PanelEditorRow row, PanelConfirmedEvidenceMatches matches)
+    {
+        if (!Families.Contains(row)) throw new ArgumentException("Choose a family in this panel draft.", nameof(row));
+        var updated = PanelEvidenceMatching.WithConfirmed(Build(), row.Key, matches);
+        pendingMatches[row] = (row.Key, updated.ConfirmedEvidenceMatches![row.Key]);
     }
 }
 

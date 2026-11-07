@@ -26,6 +26,7 @@ public sealed partial class PanelEvidenceMatching
     private readonly Dictionary<string, int> wordFrequency;
     private readonly string sourceFingerprint;
     private readonly string sourceEvidence;
+    private readonly string sourceDescriptions;
     public bool? ReferencePanelComplete { get; }
 
     public PanelEvidenceMatching(FamilyClusterFile file)
@@ -33,6 +34,7 @@ public sealed partial class PanelEvidenceMatching
         ArgumentNullException.ThrowIfNull(file);
         sourceFingerprint = EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems);
         sourceEvidence = JsonSerializer.Serialize(file.EvidenceSource);
+        sourceDescriptions = DescriptionFingerprint(file);
         ReferencePanelComplete = file.EvidenceSource?.ReferencePanel?.IsComplete;
         var database = file.MyExtendedFastaItems.Where(protein => !NearestReviewed.IsDecoy(protein)
             && !SequenceLabels.IsContaminant(protein.SequenceIdentifier))
@@ -68,7 +70,14 @@ public sealed partial class PanelEvidenceMatching
     }
 
     public bool IsCurrent(FamilyClusterFile file) => sourceFingerprint == EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems)
-        && sourceEvidence == JsonSerializer.Serialize(file.EvidenceSource);
+        && sourceEvidence == JsonSerializer.Serialize(file.EvidenceSource) && sourceDescriptions == DescriptionFingerprint(file);
+
+    private static string DescriptionFingerprint(FamilyClusterFile file)
+    {
+        using var hash = new LengthPrefixedSha256();
+        foreach (var protein in file.MyExtendedFastaItems) hash.Append(protein.Description ?? "");
+        return hash.Finish();
+    }
 
     public IReadOnlyList<PanelEvidenceSuggestion> Suggest(IEnumerable<string> names)
     {

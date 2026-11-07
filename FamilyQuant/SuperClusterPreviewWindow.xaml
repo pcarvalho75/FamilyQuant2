@@ -367,7 +367,7 @@
                             </TabItem>
                             <TabItem x:Name="PanelChecklistTab" Header="Panel checklist" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}">
                                 <Grid>
-                                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                                     <TextBlock Text="Matches are database targets, not automatic assignments; match types may overlap." TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,8"/>
                                     <DataGrid x:Name="PanelChecklistGrid" Grid.Row="1" ItemsSource="{Binding Evidence.PanelChecklist}"
                                               SelectedItem="{Binding Evidence.SelectedChecklistFamily, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False"
@@ -405,6 +405,8 @@
                                     <TextBox x:Name="ChecklistScopePreview" Grid.Row="4" Text="{Binding ChecklistScopePreviewText, Mode=OneWay}" IsReadOnly="True"
                                              Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}" TextWrapping="Wrap" MinHeight="48" MaxHeight="88"
                                              VerticalScrollBarVisibility="Auto" Margin="0,8,0,0" ToolTip="Shows the same stored-evidence preview counts and family names as the scope panel; Update proposal rebuilds the actual proposal."/>
+                                    <Button x:Name="MatchPanelNamesButton" Grid.Row="5" Content="Match stored names..." Click="MatchPanelNames_Click" IsEnabled="{Binding CanMatchPanelNames}"
+                                            HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="Review stored evidence-label suggestions for this panel family, edit their values and confirm which labels the checklist should use."/>
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Architecture"><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>

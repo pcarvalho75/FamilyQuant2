@@ -92,6 +92,14 @@ internal static partial class Program
         file.MyExtendedFastaItems[0].Evidence!.Keywords.Add("Changed after snapshot");
         Check("Z12p4 snapshot remains detached and detects evidence changes", !snapshot.IsCurrent(file)
             && snapshot.Coverage(PanelEvidenceMatchKind.Keyword, "Changed after snapshot").DatabaseTargets == 0);
+        var descriptions = EvidenceMatchingFile(); var descriptionSnapshot = new PanelEvidenceMatching(descriptions);
+        descriptions.MyExtendedFastaItems[0].Description += " changed header name";
+        Check("Z12p4 FASTA name edits invalidate the matching snapshot", !descriptionSnapshot.IsCurrent(descriptions));
+        var nameSession = new EvidenceGroupingSession(descriptions, "name refresh fixture"); nameSession.Propose("Action alpha");
+        var firstContext = nameSession.CreatePanelMatchContext("stable-key");
+        descriptions.MyExtendedFastaItems[1].Description += " another name";
+        var refreshed = nameSession.CreatePanelMatchContext("stable-key");
+        Check("Z12p4 reopening matching refreshes a name-only changed snapshot", !ReferenceEquals(firstContext.Evidence, refreshed.Evidence) && refreshed.IsCurrent());
         var partial = EvidenceMatchingFile(); partial.EvidenceSource!.ReferencePanel!.MissingFamilies.Add("Unfetched supplied group");
         var partialSnapshot = new PanelEvidenceMatching(partial);
         Check("Z12p4 incomplete reference metadata stays explicit while available stored-label counts remain bounded",

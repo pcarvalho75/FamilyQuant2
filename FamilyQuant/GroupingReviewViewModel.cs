@@ -121,7 +121,8 @@ namespace FamilyQuant
             Func<string, string, CancellationToken, Task<EvidenceScopePreview>>? previewScope = null,
             Func<EvidenceManualRequest, EvidenceReviewInput>? addToFamily = null,
             Func<IReadOnlyList<int>, EvidenceReviewInput>? removeFromFamily = null,
-            Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null)
+            Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null,
+            Func<string, Panels.PanelConfirmedEvidenceMatches, EvidenceReviewInput>? confirmPanelMatches = null)
         {
             Keyword = new KeywordReviewViewModel(keyword); this.propose = propose; this.motif = motif;
             this.discoverTask = discoverTaskWithProgress ?? (discoverTask == null ? null : (_, token) => discoverTask(token));
@@ -130,6 +131,7 @@ namespace FamilyQuant
             scopePreviewBaseline = initialScope;
             scopePreviewBaselineCaptured = !string.IsNullOrWhiteSpace(initialScope);
             this.addToFamily = addToFamily; this.removeFromFamily = removeFromFamily; this.updateManualChoices = updateManualChoices;
+            this.confirmPanelMatches = confirmPanelMatches;
             scopeText = initialScope; proposalScope = initialScope;
             Keyword.PropertyChanged += (_, _) => NotifySummary();
             SetEvidence(input);
@@ -256,7 +258,7 @@ namespace FamilyQuant
             Changed(nameof(CanEditManual));
         }
         private void EvidenceChanged(object? sender, PropertyChangedEventArgs e) { Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); }
-        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); NotifyChecklistActions(); }
+        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); Changed(nameof(CanMatchPanelNames)); NotifyChecklistActions(); }
 
         private void RestoreManualState(IReadOnlyList<EvidenceManualChoice>? choices)
         {
