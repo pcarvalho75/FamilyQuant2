@@ -196,6 +196,36 @@ internal static partial class Program
             && ignored.CanAcceptWorkbook && ignored.WorkbookFamilies.All(f => f.Decision == "Quantify"));
         WorkbookOverviewBroadGuardTest(work);
         WorkbookOverviewFilledNavigationTest(work);
+        WorkbookOverviewMeaningPunctuationTests(work);
+    }
+
+    private static void WorkbookOverviewMeaningPunctuationTests(string work)
+    {
+        foreach (string ending in new[] { "", "." })
+        {
+            string path = Path.Combine(work, ending.Length == 0 ? "meaning-no-stop.xlsx" : "meaning-stop.xlsx"); ExampleFamilyList.Write(path);
+            var proposal = new FamilyPanelSpreadsheetImporter().ProposeWorkbook(path);
+            var entry = proposal.Decisions.Single(d => d.SourceValue == "Opcional").LegendEntries.Single();
+            var table = proposal.Workbook.Sheets.Single(s => s.SheetName == entry.SheetName).Table!;
+            string meaning = "Quantify when evidence is sufficient" + ending;
+            using (var document = SpreadsheetDocument.Open(path, true))
+            {
+                var workbook = document.WorkbookPart!;
+                var source = workbook.Workbook!.Sheets!.Elements<XL.Sheet>().Single(s => s.Name == entry.SheetName);
+                var part = (WorksheetPart)workbook.GetPartById(source.Id!.Value!);
+                string address = table.ColumnLetters[1] + entry.RowNumber;
+                var cell = part.Worksheet!.Descendants<XL.Cell>().Single(c => c.CellReference == address);
+                cell.DataType = XL.CellValues.InlineString; cell.CellValue = null; cell.InlineString = new XL.InlineString(new XL.Text(meaning));
+                part.Worksheet.Save();
+            }
+            using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(WorkbookOverviewProject())),
+                workbookSource: new ObservedWorkbookSource(), openWorkbookReview: true);
+            FinishReviewWork(() => model.LoadAsync(path));
+            Check("legend meaning " + (ending.Length == 0 ? "without" : "with") + " a trailing stop ends once in the review status",
+                model.WorkbookReviewStatus.Contains("Legend meaning: Quantify when evidence is sufficient. ", StringComparison.Ordinal)
+                && !model.WorkbookReviewStatus.Contains("sufficient..", StringComparison.Ordinal)
+                && model.Decisions.Single(d => d.Source == "Opcional").Meaning == meaning, model.WorkbookReviewStatus);
+        }
     }
 
     private static void WorkbookOverviewFilledNavigationTest(string work)

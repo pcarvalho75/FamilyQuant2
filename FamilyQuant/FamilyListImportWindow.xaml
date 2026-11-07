@@ -57,6 +57,12 @@
                 <Binding Path="ToolTip" RelativeSource="{RelativeSource AncestorType=DataGridRow}"/>
             </MultiBinding></Setter.Value></Setter>
         </Style>
+        <Style x:Key="WorkbookRoleCombo" TargetType="ComboBox" BasedOn="{StaticResource WizardCellCombo}">
+            <Setter Property="ToolTip" Value="Choose Family list, Colour legend, Subclass table or Notes for this sheet. Changing its role rebuilds the draft without changing the workbook or project."/>
+        </Style>
+        <Style x:Key="WorkbookRoleComboEditor" TargetType="ComboBox" BasedOn="{StaticResource WizardCellComboEditor}">
+            <Setter Property="ToolTip" Value="Choose Family list, Colour legend, Subclass table or Notes for this sheet. Changing its role rebuilds the draft without changing the workbook or project."/>
+        </Style>
         <Style x:Key="WizardPage" TargetType="Grid"><Setter Property="Visibility" Value="Collapsed"/></Style>
         <Style x:Key="StepButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/><Setter Property="Padding" Value="12"/>
@@ -199,7 +205,7 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Sheet" Binding="{Binding Name}" Width="2*" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Original sheet name, read only. Hidden sheets are listed too; no name is used as a family rule."/>
                                         <DataGridComboBoxColumn x:Name="WorkbookRoleColumn" Header="Use as" SelectedValueBinding="{Binding Role, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Value" DisplayMemberPath="Label" Width="160"
-                                            ElementStyle="{StaticResource WizardCellCombo}" EditingElementStyle="{StaticResource WizardCellComboEditor}" theme:TableAppearance.HeaderToolTip="The proposed role: Family list, Colour legend, Subclass table or Notes. You may change it before Import; changing a role rebuilds the draft and keeps the workbook unchanged."/>
+                                            ElementStyle="{StaticResource WorkbookRoleCombo}" EditingElementStyle="{StaticResource WorkbookRoleComboEditor}" theme:TableAppearance.HeaderToolTip="The proposed role: Family list, Colour legend, Subclass table or Notes. You may change it before Import; changing a role rebuilds the draft and keeps the workbook unchanged."/>
                                         <DataGridTextColumn Header="Kept as" Binding="{Binding Contribution}" Width="180" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="How this sheet contributes to the proposal, based on its selected role. Notes are kept as original text and never become family rules."/>
                                         <DataGridTextColumn Header="Review" Binding="{Binding Review}" Width="110" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Whether the proposed role needs your review. Uncertain source content stays visible and is never accepted silently."/>
                                         <DataGridTextColumn Header="Why this role" Binding="{Binding Reason}" Width="3*" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="The structural reason supplied by the workbook reader, read only. It explains a proposal rather than changing any decision."/>
@@ -257,7 +263,7 @@
                             <Expander x:Name="ColourCategories" Header="Colour categories (optional)" IsExpanded="{Binding HasSourceFills, Mode=OneWay}" ToolTip="Shows optional text names for workbook fills and opens automatically when the source has fills. Opening or closing it changes nothing, and fill names never decide a family action.">
                                 <StackPanel>
                                     <TextBlock Text="Column with coloured cells" Style="{StaticResource CaptionText}" Margin="0,0,0,4"/>
-                                    <ComboBox DataContext="{Binding ColorColumn}" ItemsSource="{Binding Headers}" SelectedItem="{Binding Header, UpdateSourceTrigger=PropertyChanged}" MinHeight="34" AutomationProperties.Name="{Binding Label}" ToolTip="{Binding ToolTip}">
+                                    <ComboBox DataContext="{Binding ColorColumn}" ItemsSource="{Binding Headers}" SelectedItem="{Binding Header, UpdateSourceTrigger=PropertyChanged}" MinHeight="34" AutomationProperties.Name="{Binding Label, FallbackValue=Colour category column}" ToolTip="{Binding ToolTip, FallbackValue=Choose the column whose fills become source categories. Choose a workbook before setting the column; this edits the import draft only.}">
                                         <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Converter={StaticResource HeaderLabel}}"/></DataTemplate></ComboBox.ItemTemplate>
                                     </ComboBox>
                                     <DataGrid x:Name="ColourCategoriesGrid" ItemsSource="{Binding SourceColorChoices}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" MaxHeight="150" Margin="0,8,0,0" AutomationProperties.Name="Source colour category names" ToolTip="Optional text categories for the chosen column fills; each starts with its source name, accepts a replacement name, and an empty edit restores that name. These labels remain source text in the draft until Import, never a grouping or quantitation rule.">
