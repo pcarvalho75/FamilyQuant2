@@ -419,6 +419,6 @@ namespace FamilyQuant.Evidence
             return curation;
         }
         private static string Hash<T>(T value) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(value))));
-        internal static T Clone<T>(T value) => JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(value))!;
+        internal static T Clone<T>(T value) => JsonStreamCopy.Clone(value);
     }
 }
