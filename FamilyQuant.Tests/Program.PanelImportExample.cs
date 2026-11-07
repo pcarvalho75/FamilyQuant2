@@ -1,0 +1,88 @@
+using FamilyQuant.Examples;
+using FamilyQuant.Panels;
+using FamilyQuant.Panels.Import;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
+
+namespace FamilyQuant.Tests;
+
+internal static partial class Program
+{
+    [TestCommandTable]
+    private static IEnumerable<TestCommand> PanelImportExampleCommandTable() =>
+    [
+        new("--test-panel-import-example", 100, TestCommandPhase.Raw, args => args.Length > 0 && args[0] == "--test-panel-import-example", (_, _) =>
+        {
+            PanelImportExampleTests(Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests", "panel-import-example"));
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+    ];
+
+    /// <summary>M7: the shipped example family list goes through the graceful importer as the wizard reads it.</summary>
+    private static void PanelImportExampleTests(string workDir)
+    {
+        Section("Z12p1 the shipped example family list through the graceful importer");
+        Directory.CreateDirectory(workDir);
+        string path = Path.Combine(workDir, ExampleFamilyList.DefaultFileName), plainPath = Path.Combine(workDir, "no-title-" + ExampleFamilyList.DefaultFileName);
+        foreach (string file in new[] { path, plainPath }) if (File.Exists(file)) File.Delete(file);
+        ExampleFamilyList.Write(path); ExampleFamilyList.Write(plainPath, titleRow: false);
+        var reader = new PanelSpreadsheetReader(); var importer = new FamilyPanelSpreadsheetImporter();
+        var preview = reader.ReadPreview(path);
+        Check("example: the family sheet opens first and its header row is found below the titles",
+            preview.SheetName == ExampleFamilyList.FamilySheetName && preview.ProposedHeaderRow == ExampleFamilyList.FamilyHeaderRow(true)
+            && preview.Problems.All(p => p.Severity == PanelImportSeverity.Note) && reader.ReadPreview(plainPath).ProposedHeaderRow == ExampleFamilyList.FamilyHeaderRow(false),
+            preview.ProposedHeaderRow + ": " + preview.HeaderReason);
+        var table = reader.ReadTable(path, preview.SheetName, preview.ProposedHeaderRow);
+        var proposal = importer.Propose(table);
+        var roles = proposal.Choices.ColumnHeaders;
+        Check("example: abbreviation, both names and Pfam are proposed, and the coloured abbreviations are offered as a category",
+            roles.GetValueOrDefault(PanelImportFields.FamilyKey) == "Sigla" && roles.GetValueOrDefault(PanelImportFields.DisplayName) == "Nome (português)"
+            && roles.GetValueOrDefault(PanelImportFields.OtherName) == "Nome (inglês)" && roles.GetValueOrDefault(PanelImportFields.Pfam) == "Domínio(s) Pfam"
+            && proposal.ColorColumns.Contains("Sigla") && !roles.ContainsKey(PanelImportFields.Decision),
+            string.Join("|", roles.Select(r => r.Key + "=" + r.Value)) + " colours: " + string.Join(",", proposal.ColorColumns));
+        var choices = proposal.Choices;
+        choices.ColumnHeaders[PanelImportFields.Decision] = "Decisão FamilyQuant";
+        var decisions = importer.ProposeDecisions(table, choices);
+        var byLabel = decisions.ToDictionary(d => d.SourceValue);
+        Check("example: the merge label names its family and the excluding labels are proposed as not a family; the rest are Quantify",
+            byLabel["Fundir com LEC"].Mapping is { Decision: FamilyPanelDecision.MergeIntoAnotherFamily, MergeTargetFamilyKey: "LEC" }
+            && byLabel["Excluir"].Mapping.Decision == FamilyPanelDecision.NotAFamily && byLabel["Excluir (ou só varredura)"].Mapping.Decision == FamilyPanelDecision.NotAFamily
+            && decisions.Where(d => !d.SourceValue.StartsWith("Excluir", StringComparison.Ordinal) && d.SourceValue != "Fundir com LEC").All(d => d.Mapping.Decision == FamilyPanelDecision.Quantify),
+            string.Join(" / ", decisions.Select(d => d.SourceValue + "=" + d.Mapping.Decision)));
+        var mappings = decisions.Select(d => d.Mapping).ToList();
+        var first = importer.Check(table, choices, mappings, "Exemplo");
+        var lec = table.Rows.Where(r => r.Cells["Sigla"].Trim() == "LEC").Select(r => r.RowNumber).ToArray();
+        var repeat = first.Problems.SingleOrDefault(p => p.Kind == PanelImportProblemKind.DuplicateKey);
+        Check("example: the repeated LEC is reported on its later row with the earlier row and a rename",
+            lec.Length == 2 && !first.CanImport && repeat is { Value: "LEC", Suggestion: "LEC-2" } && repeat.RowNumber == lec[1] && repeat.OtherRowNumbers.SequenceEqual(new[] { lec[0] }),
+            string.Join(" / ", first.Problems.Where(p => p.Severity == PanelImportSeverity.Blocking).Select(p => p.Message)));
+        var outras = first.Rows.Single(r => table.Rows.Single(t => t.RowNumber == r.RowNumber).Cells["Sigla"] == "OUTRAS");
+        Check("example: the row listing four families is offered as a list, with paired names in the other language",
+            outras.ListColumn == "Nome (português)" && outras.ProposedParts.Count == 4 && outras.ProposedParts.All(p => p.Key.StartsWith("OUTRAS: ", StringComparison.Ordinal))
+            && first.Problems.Any(p => p.Kind == PanelImportProblemKind.SeveralFamilies && p.RowNumber == outras.RowNumber),
+            string.Join(" | ", outras.ProposedParts.Select(p => p.Key)));
+        Check("example: empty rows between families are listed and skipped, never imported", table.EmptyRows.Count > 0
+            && first.Problems.Any(p => p.Kind == PanelImportProblemKind.EmptyRow));
+
+        choices.RowChoices = new()
+        {
+            new FamilyPanelRowChoice { RowNumber = lec[1], Action = FamilyPanelRowAction.Import, Key = repeat?.Suggestion ?? "LEC-2" },
+            new FamilyPanelRowChoice { RowNumber = outras.RowNumber, Action = FamilyPanelRowAction.Split },
+        };
+        var check = importer.Check(table, choices, mappings, "Exemplo");
+        var panel = check.Panel;
+        int skippedRows = check.Rows.Count(r => r.Action == FamilyPanelRowAction.Skip);
+        Check("example: with the two answers every family row imports, the list as four families with their English names",
+            panel != null && panel.Families.Count == table.Rows.Count - skippedRows - 1 + 4
+            && panel.Families.Where(f => f.Key.StartsWith("OUTRAS: ", StringComparison.Ordinal)).Select(f => PanelImportFields.OtherNameText(panel, f))
+                .SequenceEqual(new[] { "Other rare families: hyaluronidase", "chitinase", "glutaminyl cyclase", "aminopeptidase" })
+            && panel.Families.Single(f => f.Key == "CLP") is { Decision: FamilyPanelDecision.MergeIntoAnotherFamily, MergeTargetFamilyKey: "LEC" }
+            && panel.Families.Single(f => f.Key == "LEC").Pfam.Single().Accession == "PF00059",
+            string.Join(" / ", check.Problems.Where(p => p.Severity == PanelImportSeverity.Blocking).Select(p => p.Message)));
+        Check("example: the import replays exactly", panel != null && JsonSerializer.Serialize(panel) == JsonSerializer.Serialize(importer.Replay(path, panel)));
+    }
+}
