@@ -10,6 +10,21 @@ internal static partial class Program
     [TestCommandTable]
     private static IEnumerable<TestCommand> LookCommandTable() =>
     [
+        new("--test-integrated-review", 64, TestCommandPhase.Raw, args => args.Contains("--test-integrated-review", StringComparer.Ordinal), (_, workDir) =>
+        {
+            EnsureApplication();
+            try { GroupingReviewInteractionTests(); }
+            catch (Exception ex) { Check("integrated review interactions complete without an unhandled exception", false, ex.ToString()); }
+            ScreenHarness.Verify(Check, workDir);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-import-wizard-tooltips", 63, TestCommandPhase.Raw, args => args.Contains("--test-import-wizard-tooltips", StringComparer.Ordinal), (args, _) =>
+        {
+            ImportWizardToolTipTests(args.Length == 2 ? args[1] : null);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
         new("--test-family-list-import", 62, TestCommandPhase.Raw, args => args.Contains("--test-family-list-import", StringComparer.Ordinal), (args, _) =>
         {
             FamilyListImportTests(args.Length == 2 ? args[1] : null);
