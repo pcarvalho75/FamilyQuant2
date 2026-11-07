@@ -65,13 +65,15 @@ internal static partial class Program
         Check("Z12p5f2f null values and primitive arrays retain generic copy behavior", Copy<string?>(null) == null
             && Copy(new[] { 0, 1, -1, int.MaxValue }).SequenceEqual(new[] { 0, 1, -1, int.MaxValue }));
         var nativeFile = ManualChoiceFile(); nativeFile.EvidenceSource = large;
-        string nativeBefore = nativeFile.ToJsonText();
         var model = new CurationViewModel(nativeFile);
         model.ApplyFamilyPanel(new FamilyPanel { Name = "Snapshot copy fixture", Families = new() { new() { Key = "group", DisplayName = "Fixture group" } } });
         nativeFile.EvidenceSource.Provider = "Changed while panel is open";
         model.Undo();
-        Check("Z12p5f2f ApplyFamilyPanel and native Undo restore the complete large source once", model.UndoStack.Count == 0
-            && nativeFile.ToJsonText() == nativeBefore);
+        Check("Z12p5f8 panel-only native Undo preserves unrelated evidence edits", model.UndoStack.Count == 0
+            && nativeFile.FamilyPanel == null && ReferenceEquals(nativeFile.EvidenceSource, large)
+            && nativeFile.EvidenceSource.Provider == "Changed while panel is open");
+        nativeFile.FamilyPanel = LargeUndoPanel();
+        string nativeBefore = nativeFile.ToJsonText();
 
         model.ApplyFamilyPanel(new FamilyPanel { Name = "Retry snapshot", Families = new() { new() { Key = "group", DisplayName = "Fixture group" } } });
         string beforeFailure = nativeFile.ToJsonText();
@@ -110,7 +112,7 @@ internal static partial class Program
 
     private static void EvidenceUndoCallerTests(EvidenceProvenance source)
     {
-        var file = ManualChoiceFile(); file.EvidenceSource = source;
+        var file = ManualChoiceFile(); file.EvidenceSource = source; file.FamilyPanel = LargeUndoPanel();
         var control = new ClusterGenerationControl(file);
         var window = new Window { Content = control, Width = 1280, Height = 800, Left = -30000, Top = -30000,
             WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
@@ -138,7 +140,7 @@ internal static partial class Program
         }
         finally { window.Close(); PumpDispatcher(); }
 
-        file = ManualChoiceFile(); file.EvidenceSource = source;
+        file = ManualChoiceFile(); file.EvidenceSource = source; file.FamilyPanel = LargeUndoPanel();
         var curation = new CurationViewModel(file);
         string initial = file.ToJsonText();
         string work = Path.Combine(Path.GetTempPath(), "snapshot-wizard-caller-" + Guid.NewGuid().ToString("N"));
@@ -167,6 +169,13 @@ internal static partial class Program
         }
         finally { wizard.Close(); PumpDispatcher(); }
     }
+
+    // A panel-only edit spools only a genuinely large previous panel, not unrelated reference tables.
+    private static FamilyPanel LargeUndoPanel() => new()
+    {
+        Name = new string('A', 128 * 1024),
+        Families = new() { new() { Key = "previous", DisplayName = "Previous fixture family" } },
+    };
 
     private static void WithBlockedUndoTemp(Action action)
     {

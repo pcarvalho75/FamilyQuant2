@@ -30,7 +30,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     private readonly IFamilyPanelSpreadsheetImporter importer;
     private readonly FamilyListImportTransaction transaction;
     private readonly IFamilyListImportMatches? matcher;
-    private readonly Func<FamilyClusterFile, OperationContext, FamilyClusterFile> copyProject;
+    private readonly Func<FamilyClusterFile, OperationContext, FamilyClusterFile>? copyProjectOverride;
     private CancellationTokenSource? operation;
     private Task activeRead = Task.CompletedTask;
     private int readGeneration, page, headerRow = 1;
@@ -121,7 +121,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     {
         this.transaction = transaction; this.reader = reader ?? new PanelSpreadsheetReader();
         this.importer = importer ?? new FamilyPanelSpreadsheetImporter(); this.matcher = matcher ?? new FamilyListStoredEvidenceMatches(transaction.Project);
-        this.copyProject = copyProject ?? (static (source, context) => source.DeepCopy(context));
+        this.copyProjectOverride = copyProject;
         PreviousPanel = transaction.PreviousPanel;
     }
 

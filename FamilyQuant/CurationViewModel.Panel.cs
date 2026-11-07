@@ -13,7 +13,7 @@ public sealed partial class CurationViewModel
         var next = FamilyPanelValidation.Clone(panel);
         FamilyPanelValidation.Validate(next);
         if (JsonSerializer.Serialize(Document.FamilyPanel) == JsonSerializer.Serialize(next)) return false;
-        var undo = GroupingSnapshot.CaptureEvidence(Document);
+        var undo = GroupingSnapshot.CaptureFamilyPanel(Document);
         UndoStack.Add(undo);
         if (UndoStack.Count > 50) UndoStack.RemoveAt(0);
         Document.FamilyPanel = next;
