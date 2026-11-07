@@ -258,8 +258,7 @@ internal static partial class Program
         Check("Z15b1 registry: the shipped list loads, with unique names", registered.Select(p => p.Name).Distinct(StringComparer.Ordinal).Count() == registered.Count,
             string.Join(", ", registered.Select(p => p.Name)));
 
-        // A .fcf: the export "Families for FamilyQuant 1.5 (.fcf)" stays format 1 so 1.5 and 2.1.10 open it
-        // (DU7's frozen 1.5 reader, docs/PROJECT-FORMATS.md); a format-2 .fcf still opens everywhere.
+        // D80 retires the legacy-reader output gate. Old inputs still open; every new FCF is format 2.
         var fixture = CurationFormat2Fixture();
         string legacyText = fixture.ToJsonText();
         string legacyFcf = Path.Combine(folder, "legacy.fcf");
@@ -268,8 +267,24 @@ internal static partial class Program
         Check("Z15b1 a format-1 .fcf opens unchanged", opened.ToJsonText() == legacyText);
         string exportedFcf = Path.Combine(folder, "exported.fcf");
         opened.Save(exportedFcf);
-        Check("Z15b1 the .fcf export stays format 1, byte-identical to the canonical content, with its file check passed",
-            File.ReadAllText(exportedFcf) == legacyText && opened.LastSaveCheck?.Passed == true, opened.LastSaveCheck?.Message);
+        Check("Z15b7 the .fcf export writes format 2 and reopens to identical canonical content",
+            CurationFormat.Detect(() => File.OpenRead(exportedFcf)) == CurationFormat.Current
+            && FamilyClusterFile.Load(exportedFcf).ToJsonText() == legacyText && opened.LastSaveCheck?.Passed == true, opened.LastSaveCheck?.Message);
+        var actualExportRefusal = Thrown(() => ReadFcfAs2110(exportedFcf));
+        Check("Z15b7 the transcribed 2.1.10 reader refuses the actual saved FCF", actualExportRefusal is JsonException, actualExportRefusal?.Message);
+        Console.WriteLine("Observed 2.1.10 FCF reader-path refusal: " + actualExportRefusal?.Message);
+        var scoped = CurationFormat2Fixture();
+        scoped.EvidenceSource!.ReferencePanel!.Coverage = new Evidence.ReferencePanelCoverage
+        { ScopeTerms = new() { "Synthetic scope" }, WholeFamilies = new() { "Synthetic family" } };
+        string scopedFcf = Path.Combine(folder, "scoped-format2.fcf");
+        scoped.Save(scopedFcf);
+        bool reachedComplete = false;
+        var scopedRefusal = Thrown(() => reachedComplete = ReadFcfAs2110(scopedFcf).EvidenceSource?.ReferencePanel?.IsComplete == true);
+        Check("Z15b7 scoped panel metadata survives current readback", FamilyClusterFile.Load(scopedFcf).EvidenceSource!.ReferencePanel!.Coverage!.ScopeTerms.SequenceEqual(new[] { "Synthetic scope" }));
+        Check("Z15b7 a scoped panel cannot reach the 2.1.10 reader as complete", scopedRefusal is JsonException && !reachedComplete, scopedRefusal?.Message);
+        string ledgerRoot = FindLedgerRoot() ?? throw new DirectoryNotFoundException("The checkout is required for the D80 ledger check.");
+        Check("Z15b7 DU7 retirement is explicit in the preserved feature ledger", File.ReadAllText(Path.Combine(ledgerRoot, "docs", "FEATURE-LEDGER.md"))
+            .Contains(FeatureLedger.Du7Retirement, StringComparison.Ordinal));
         string savedFcf = Path.Combine(folder, "format2.fcf");
         using (var stream = File.Create(savedFcf)) CurationFormat.Write(opened, stream);
         byte[] savedBytes = File.ReadAllBytes(savedFcf);

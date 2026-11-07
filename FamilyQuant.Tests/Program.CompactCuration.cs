@@ -46,21 +46,22 @@ internal static partial class Program
             opened.Save(rewritten);
             byte[] bytes = File.ReadAllBytes(rewritten);
             string text = opened.ToJsonText();
-            Check("Z12p5j fixture " + index + " string and streamed FCF writes have identical compact bytes", bytes.SequenceEqual(Encoding.UTF8.GetBytes(text))
-                && !text.Contains('\n'));
+            Check("Z15b7 fixture " + index + " saved FCF is compact format 2", CurationFormat.Detect(() => File.OpenRead(rewritten)) == CurationFormat.Current
+                && !Encoding.UTF8.GetString(bytes).Contains('\n'));
             var reloaded = FamilyClusterFile.Load(rewritten);
             Check("Z12p5j fixture " + index + " compact rewrite retains every loaded object", JsonSerializer.Serialize(reloaded, compactOptions) == objects);
             Check("Z12p5j fixture " + index + " compact hash is exact and verified Save still passes", opened.JsonContentSha256()
-                == Convert.ToHexString(SHA256.HashData(bytes)) && opened.LastSaveCheck?.Passed == true);
+                == Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(text))) && opened.LastSaveCheck?.Passed == true);
             string project = Path.Combine(folder, "compact-" + index.ToString(CultureInfo.InvariantCulture) + ".fqproj");
             ProjectStore.WriteFqproj(project, opened, Array.Empty<QuantRow>(), new QuantManifest());
             var projectRead = ProjectStore.ReadFqproj(project).fcf;
             Check("Z12p5j fixture " + index + " project readback restores the same compact canonical bytes", projectRead.ToJsonText() == text);
             using (var archive = ZipFile.OpenRead(project))
-            using (var stream = (archive.GetEntry(ProjectStore.CurationFormat2EntryName) ?? archive.GetEntry(ProjectStore.CurationEntryName)!).Open())
-            using (var reader = new StreamReader(stream, Encoding.UTF8))
+            using (var stream = archive.GetEntry(ProjectStore.CurationFormat2EntryName)!.Open())
+            using (var actual = new MemoryStream())
             {
-                Check("Z12p5j fixture " + index + " project wire JSON is compact too", !reader.ReadToEnd().Contains('\n'));
+                stream.CopyTo(actual);
+                Check("Z15b7 fixture " + index + " project format-2 entry is byte-identical to FCF", actual.ToArray().SequenceEqual(bytes));
             }
             if (index > 0)
                 Check("Z12p5j fixture " + index + " removes formatting bytes without losing state", bytes.Length < Encoding.UTF8.GetByteCount(indented));

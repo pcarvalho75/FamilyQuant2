@@ -213,7 +213,7 @@ namespace FamilyQuant
             string temp = fileName + "." + Guid.NewGuid().ToString("N") + ".tmp";
             try
             {
-                using (var destination = File.Create(temp)) WriteJsonUtf8(destination);
+                using (var destination = File.Create(temp)) WriteCurationFile(destination);
                 LastSaveCheck = Evidence.SavedFileCheck.Verify(expected, temp, project: false, operation);
                 Evidence.SavedFileCheck.RequirePassed(LastSaveCheck);
                 operation?.Report("save", "Publishing the family document", 1, 1);

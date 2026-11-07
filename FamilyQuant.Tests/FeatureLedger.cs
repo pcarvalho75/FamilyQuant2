@@ -20,6 +20,7 @@ internal static class FeatureLedger
     internal const string ReferenceInventorySha256 = "B7B572E352CB394AD46CB4D7CE04394929A7462F8E0326A48635FC61EA871000";
     internal const string GenerateArgument = "--feature-ledger-generate";
     internal const string DropApproval = "Paulo via orchestrator M4, 2026-11-01 11:20:38: retire the De Novo Extract areas and Partition ion current sections in 2.0; 1.5 keeps them. Attribute to families stays and its CSV moves to Results in C11.";
+    internal const string Du7Retirement = "DU7 frozen FamilyQuant 1.5 reader compatibility check retired: Paulo, 11-07: forget familyquant 1.5 (D80). FCF saves now use curation format 2; current-reader preservation checks remain required.";
     private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
     private static readonly Regex Tokens = new(
         "//[^\\r\\n]*|/\\*[\\s\\S]*?\\*/|@\"(?:\"\"|[^\"])*\"|\\$?\"(?:\\\\.|[^\"\\\\])*\"|'(?:\\\\.|[^'\\\\])'",
@@ -239,6 +240,7 @@ internal static class FeatureLedger
         md.AppendLine("Contract for 2.0. Only Paulo may authorize DROP. KEEP preserves behavior; IMPROVE preserves the function while its presentation changes.");
         md.AppendLine("Retained rows start OPEN. A planned check is not evidence that behavior passed. Close a retained row only after its owner records an executed test or an inspected render and reviewer approval. Approved DROP rows record Paulo's decision as evidence, without claiming their implementation is removed yet.");
         md.AppendLine("Approved exception: " + DropApproval);
+        md.AppendLine("Retired compatibility check: " + Du7Retirement);
         md.AppendLine("DROP covers the two frozen XAML section subtrees and their exclusive view handlers/tooltips. Shared extraction/partition engines, test seams, explanatory science and Attribute to families remain preserved. The guard rejects DROP outside that scope. Actual retirement is C11.");
         md.AppendLine();
         md.AppendLine("Frozen source: `" + inventory.Reference + "` in the old FamilyQuant repository, matching the read-only reference README. The frozen app and tests are in `D:/FamilyQuant-data/reference-1.5.0.6`.");

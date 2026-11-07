@@ -50,13 +50,15 @@ Z12p5j sets `CurationJsonOptions.WriteIndented` to false. New FCF files and cano
 have compact JSON; the string API produces exactly those same canonical bytes. Old indented
 files remain readable, including their legacy encodings and lock migration.
 `FamilyQuant.Tests.exe --test-compact-curation [output-directory]` proves that old indented
-files and compact rewrites load to identical objects and that the FCF, string API and streamed
-hash agree. Project readback restores that same canonical curation. It covers empty, nested
+files and compact rewrites load to identical objects and that the canonical string API and
+streamed hash agree. Project readback restores that same canonical curation. It covers empty, nested
 evidence and Unicode/control text.
 Existing streaming-save and project-store byte checks derive their references from the
 shared options, so no frozen scientific export baseline is rewritten for this formatting change.
 
 Z15b1 separates canonical content from wire storage: version-3 projects carry the format-2
 document in `curation2.json`, with a compatibility notice in `curation.json`. Parts may reduce
-the wire body and restore it on read, so the physical project entry need not equal a legacy
-FCF. Canonical hashes, string output and detached copies remain format 1 and see no parts.
+the wire body and restore it on read. D80 subsequently switches FCF saves to that same
+format-2 wire representation; compact fixtures assert the FCF and project curation entry
+are byte-identical. Canonical hashes, string output and detached copies remain format 1
+and see no parts. The old-reader output gate DU7 is explicitly retired in the feature ledger.

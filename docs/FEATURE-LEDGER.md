@@ -5,6 +5,7 @@ Per-row receipts and current audit commands are documented in `docs/FEATURE-EVID
 VERIFIED states proposed by a worker remain provisional until independent review and the desk's merged green gate.
 Retained rows start OPEN. A planned check is not evidence that behavior passed. Close a retained row only after its owner records an executed test or an inspected render and reviewer approval. Approved DROP rows record Paulo's decision as evidence, without claiming their implementation is removed yet.
 Approved exception: Paulo via orchestrator M4, 2026-11-01 11:20:38: retire the De Novo Extract areas and Partition ion current sections in 2.0; 1.5 keeps them. Attribute to families stays and its CSV moves to Results in C11.
+Retired compatibility check: DU7 frozen FamilyQuant 1.5 reader compatibility check retired: Paulo, 11-07: forget familyquant 1.5 (D80). FCF saves now use curation format 2; current-reader preservation checks remain required.
 DROP covers the two frozen XAML section subtrees and their exclusive view handlers/tooltips. Shared extraction/partition engines, test seams, explanatory science and Attribute to families remain preserved. The guard rejects DROP outside that scope. Actual retirement is C11.
 
 Frozen source: `e9b73064d8ff19b2fde3e3231240b636a64c0a91` in the old FamilyQuant repository, matching the read-only reference README. The frozen app and tests are in `D:/FamilyQuant-data/reference-1.5.0.6`.

@@ -13,8 +13,8 @@ namespace FamilyQuant;
 /// as every build up to 2.1.10 wrote it. Format 2 (2.1.11) is a root array holding one document: the format marker,
 /// a notice, the parts used, their shared sections, then the curation shaped by those parts. The array root is what
 /// makes an older build refuse the file: 2.1.10 deserializes the root as a FamilyClusterFile object and stops at the
-/// first token instead of reading an empty curation. Projects (.fqproj, version 3) store format 2; the .fcf export,
-/// "Families for FamilyQuant 1.5 (.fcf)", stays format 1 so FamilyQuant 1.5 and 2.1.10 still open it. Every reader
+/// first token instead of reading an empty curation. Projects (.fqproj, version 3) and FCF exports store format 2.
+/// Paulo retired legacy-reader output compatibility in D80 (11-07). Every current reader
 /// opens both formats. The canonical content form used for hashes and copies (<see cref="FamilyClusterFile.ToJsonText"/>,
 /// <see cref="FamilyClusterFile.JsonContentSha256"/>, <see cref="FamilyClusterFile.DeepCopy"/>) stays format 1.</summary>
 public static class CurationFormat
