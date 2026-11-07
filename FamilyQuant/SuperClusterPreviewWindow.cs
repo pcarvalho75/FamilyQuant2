@@ -32,12 +32,13 @@ namespace FamilyQuant
             Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null,
             Func<string, PanelEvidenceMatchContext>? createMatchContext = null,
             Func<string, Panels.PanelConfirmedEvidenceMatches, EvidenceReviewInput>? confirmPanelMatches = null,
-            Func<string, FamilyQuant.Operations.OperationContext, Task>? fetchMissingPanel = null, Func<string, string>? panelCoverage = null, Func<string, bool>? panelCovered = null)
+            Func<string, FamilyQuant.Operations.OperationContext, Task>? fetchMissingPanel = null, Func<string, string>? panelCoverage = null, Func<string, bool>? panelCovered = null,
+            Func<string>? fullPanelRequirement = null)
         {
             InitializeComponent();
             this.createMatchContext = createMatchContext;
             model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask, confirmPanelLinks, discoverTaskWithProgress,
-                previewScope, addToFamily, removeFromFamily, updateManualChoices, confirmPanelMatches, fetchMissingPanel, panelCoverage, panelCovered);
+                previewScope, addToFamily, removeFromFamily, updateManualChoices, confirmPanelMatches, fetchMissingPanel, panelCoverage, panelCovered, fullPanelRequirement);
             Loaded += async (_, _) => await DiscoverInitialTaskAsync();
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
@@ -131,7 +132,7 @@ namespace FamilyQuant
                 "Original database description, including OS= text. Keyword matching reads only the description before OS=.",
                 "Stored UniProt Pfam calls for this protein. An empty cell is a missing call, not proof that a domain is absent.",
                 "Whether this protein's description before OS= carries the required entered keyword or phrase under the chosen all/any rule.",
-                "Current document User ID before the reviewed grouping is applied.",
+                "Unchanged document family number before Apply grouping. Reviewing or unticking a protein does not change that family.",
                 "Number of keyword-carrying proteins over the total proteins in this current family. The fraction explains why a family is offered even when this protein carries no keyword."
             };
             for (int i = 0; i < grid.Columns.Count; i++)

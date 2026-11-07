@@ -107,7 +107,8 @@ public partial class ClusterGenerationControl
             createMatchContext: session.CreatePanelMatchContext, confirmPanelMatches: session.ConfirmPanelEvidenceMatches,
             fetchMissingPanel: (scope, operation) => session.RefreshPanelAsync(async () =>
                 await ViewModel.FetchEvidenceAsync(FetchDomainsHandlerOverride, operation, retryPanelOnly: true,
-                    panelRequest: new ReferencePanelRequest(WordCluster.ParseKeywords(scope)))), panelCoverage: session.PanelCoverageStatus, panelCovered: session.PanelScopeCovered) { Owner = owner };
+                    panelRequest: new ReferencePanelRequest(WordCluster.ParseKeywords(scope)))), panelCoverage: session.PanelCoverageStatus, panelCovered: session.PanelScopeCovered,
+            fullPanelRequirement: session.FullPanelRequirement) { Owner = owner };
         window.AlignmentSource = highlighted => FamilyQuant.Evidence.Alignment.AlignmentCandidates.Find(fcf, session.Proposal, highlighted);
         if (importedFamilyChecklistRequested) window.RequestFamilyChecklist();
         window.ShowDialog();

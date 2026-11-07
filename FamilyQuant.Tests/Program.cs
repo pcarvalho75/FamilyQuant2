@@ -101,8 +101,10 @@ namespace FamilyQuant.Tests
             suite.Add(() => StreamingSaveTests(Path.Combine(workDir, "streaming-save")));
             suite.Add(() => CurationStreamingCallerTests());
             suite.Add(() => CurationFormat2Tests(Path.Combine(workDir, "curation-format2")));
+            suite.AddWithApplication(() => RecipeCopiesTests(Path.Combine(workDir, "recipe-copies")));
             suite.Add(() => FeatureProvenanceFormatTests(Path.Combine(workDir, "feature-provenance")));
             suite.AddWithApplication(() => CurationStreamingContractTests(Path.Combine(workDir, "curation-streaming-contract")));
+            suite.Add(() => JsonStreamCopyTests());
             suite.Add(() => CompactCurationTests(Path.Combine(workDir, "compact-curation")));
             suite.Section("Display filters and the family counter");
             suite.Add(() => FilterTests());
@@ -362,6 +364,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ReferencePanelScopeUiTests(Path.Combine(workDir, "reference-panel-scope-ui")));
             suite.Add(() => ReferencePanelExpansionTests(Path.Combine(workDir, "reference-panel-expansion")));
             suite.AddWithApplication(() => ReferencePanelExpansionUiTests(Path.Combine(workDir, "reference-panel-expansion-ui")));
+            suite.AddWithApplication(() => ScopedSubclassFlowTests(Path.Combine(workDir, "scoped-subclass-flow")));
             suite.Add(() => EvidenceOperationTests());
             suite.Section("Database update - one-to-one matching of a project with a new database file");
             suite.Add(() => DatabaseUpdateMatchingTests());

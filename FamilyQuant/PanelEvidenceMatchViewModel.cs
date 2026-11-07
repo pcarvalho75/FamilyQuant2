@@ -75,7 +75,7 @@ public sealed class PanelEvidenceMatchViewModel : ScreenViewModel
     public bool CanConfirm => !stale && error.Length == 0 && Rows.Where(row => row.Selected).All(row => row.IsValid);
     public string ConfirmHint => stale ? "Close this window and reopen the matches to review the changed stored evidence."
         : Rows.Any(row => row.Selected && !row.IsValid) ? "Fill in or untick each empty selected label before confirming."
-        : "Return the ticked labels to the panel draft. Apply panel publishes the draft as one change that you can Undo.";
+        : "Returns the ticked labels to the pending draft. Use Apply grouping in Group by evidence or Apply panel in the panel editor to commit one project change; Undo restores the previous state.";
     public string Summary
     {
         get

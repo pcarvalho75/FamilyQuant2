@@ -90,10 +90,18 @@ internal static partial class Program
         Check("Z12p5f5 lock field starts just past byte 4096", text.IndexOf("\"LockedUserIds\"", StringComparison.Ordinal) == markerStart);
         // A forced read edge bisects the marker as well as placing it past a 4096-byte edge.
         long[] cuts = [4096, markerStart + 7];
-        using var source = new CurationBoundaryReadStream(new MemoryStream(bytes), cuts: cuts);
         var sharedReader = typeof(FamilyClusterFile).GetMethod("ReadJsonUtf8", BindingFlags.NonPublic | BindingFlags.Static)!;
-        var read = (FamilyClusterFile)sharedReader.Invoke(null, new object[] { (Func<Stream>)(() => source) })!;
-        Check("Z12p5f5 native shared reader finds a split lock marker and suppresses legacy lock inference", read.LockedUserIds.SetEquals(new[] { 7 }));
+        FamilyClusterFile? read = null;
+        Exception? failure = null;
+        try
+        {
+            // Detection, reading and legacy fallback can each open the same bytes independently.
+            read = (FamilyClusterFile)sharedReader.Invoke(null, new object[]
+                { (Func<Stream>)(() => new CurationBoundaryReadStream(new MemoryStream(bytes), cuts: cuts)) })!;
+        }
+        catch (Exception error) { failure = error is TargetInvocationException { InnerException: { } inner } ? inner : error; }
+        Check("Z12p5f5 native shared reader finds a split lock marker and suppresses legacy lock inference",
+            read?.LockedUserIds.SetEquals(new[] { 7 }) == true, failure?.ToString());
 
         using var badSource = new CurationBoundaryReadStream(new MemoryStream(bytes), cuts: cuts);
         using var probe = CurationBoundaryNativeStream("CurationReadProbe", badSource);
