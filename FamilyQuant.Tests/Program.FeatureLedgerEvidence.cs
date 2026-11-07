@@ -22,6 +22,7 @@ internal static partial class Program
         string root = FindLedgerRoot()!;
         ReceiptValidationFixtures(root, JsonSerializer.Deserialize<FeatureLedger.Inventory>(
             File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!);
+        FeatureLedgerReleaseDeferralTests(root);
     }
 
     private static void FeatureLedgerReceiptGuardTests(bool release = false)
