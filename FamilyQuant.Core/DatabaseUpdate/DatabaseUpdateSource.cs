@@ -15,6 +15,9 @@ namespace FamilyQuant.DatabaseUpdate
     public sealed class DatabaseUpdateSource
     {
         public DatabaseSourceSummary Summary { get; }
+        /// <summary>The hash of the summary and every record kept, in order. A comparison and a placement carry it,
+        /// so a placement made from one file can never be applied with another file's comparison.</summary>
+        public string Fingerprint { get; }
         public IReadOnlyList<DatabaseUpdateEntry> Records { get; }
         /// <summary>Records left out because they hold no residues (Build families cannot cluster them either).</summary>
         public int EmptyRecords { get; }
@@ -24,6 +27,12 @@ namespace FamilyQuant.DatabaseUpdate
             Summary = summary;
             Records = records;
             EmptyRecords = empty;
+            using var hash = new Evidence.LengthPrefixedSha256();
+            hash.Append("Database update source v1");
+            hash.Append(summary.FileName); hash.Append(summary.Sha256);
+            hash.Append(summary.SequenceCount.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            foreach (DatabaseUpdateEntry record in records) { hash.Append(record.Identifier); hash.Append(record.Description); hash.Append(record.Sequence); }
+            Fingerprint = hash.Finish();
         }
 
         /// <summary>Reads a FASTA or target-decoy file with the same parser Build families uses

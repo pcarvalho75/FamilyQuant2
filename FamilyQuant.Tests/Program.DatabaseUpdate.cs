@@ -19,6 +19,7 @@ internal static partial class Program
                 DatabaseUpdatePlacementTests();
                 DatabaseUpdatePlacementSideTests();
                 DatabaseUpdateApplyTests();
+                DatabaseUpdateBindingTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }),
