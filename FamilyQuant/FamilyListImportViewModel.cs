@@ -81,6 +81,19 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public string ForwardLabel => page == 5 && !Imported ? "Import" : page == 6 ? "Family checklist" : "Next";
     public string CloseLabel => Imported ? "Close" : "Cancel";
     public bool CanBack => !IsBusy && page > 0;
+    public string BackToolTip => !CanBack ? IsBusy ? "Wait for the spreadsheet read to finish before returning; Cancel stops the read without importing."
+        : "This is the first step; choose Next to select a spreadsheet, or Cancel to leave without changes."
+        : "Returns to the previous step and keeps your choices; going Back does not change the project or repeat an import.";
+    public string CloseToolTip => IsBusy ? "Cancels the active read and closes after it stops; no unfinished import is applied."
+        : Imported ? "Closes the wizard and keeps the imported list; File > Save stores it with the project, and Undo is still available in the main window."
+        : "Closes the wizard and discards its draft choices; the project and workbook are unchanged.";
+    public string ForwardToolTip => !CanNext ? DisabledReason + " Nothing is imported while this action is unavailable."
+        : page == 5 && !Imported ? "Rechecks the workbook and project, then imports the reviewed list as one project edit; Undo restores the previous list, and File > Save stores the change."
+        : page == 6 ? "Closes the wizard and opens Family checklist for separate protein review; no grouping or quantitation runs automatically."
+        : Imported ? "Shows the imported list's Done page without importing again or adding an Undo step."
+        : page == 2 && !quantifyAllConfirmed && Columns.FirstOrDefault(c => c.Role == PanelImportFields.Decision)?.HasChoice != true
+            ? "Asks you to confirm Quantify for every family because no Decision column is chosen; No keeps you on Columns. Acceptance is remembered for this source until its Decision mapping changes, with no project edit until Import."
+        : "Continues to the next review step with your choices kept; the project and workbook stay unchanged until Import.";
     public bool CanNext => !IsBusy && (Imported || page switch
     {
         0 => true,
@@ -214,6 +227,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         Changed(nameof(ImportedPanel)); Changed(nameof(CanUseRowChoice)); Changed(nameof(AvailableRowOptions)); Changed(nameof(CanConfirmMatches));
         Changed(nameof(SkipFamilyLabel)); Changed(nameof(SkipAllLabel));
         Changed(nameof(Steps)); Changed(nameof(CanEdit));
+        Changed(nameof(BackToolTip)); Changed(nameof(CloseToolTip)); Changed(nameof(ForwardToolTip));
         Changed(nameof(MainColumns)); Changed(nameof(ColorColumn));
         Changed(nameof(DecisionHint)); Changed(nameof(DecisionHintReason)); Changed(nameof(HasDecisionHint)); Changed(nameof(DecisionHintQuestion));
     }

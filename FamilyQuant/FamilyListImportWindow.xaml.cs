@@ -24,8 +24,10 @@ public partial class FamilyListImportWindow : Window
     {
         InitializeComponent(); Model = model; DataContext = model;
         this.exampleWriter = exampleWriter; this.templateWriter = templateWriter;
-        ExampleButton.IsEnabled = exampleWriter != null; ExampleButton.ToolTip = exampleWriter == null ? "The example is not available." : "Open a fictitious family list to try the import steps.";
-        TemplateButton.IsEnabled = templateWriter != null; TemplateButton.ToolTip = templateWriter == null ? "The template is not available." : "Save an Excel template with the recommended columns and instructions.";
+        ExampleButton.IsEnabled = exampleWriter != null;
+        if (exampleWriter == null) ExampleButton.ToolTip = "Unavailable because this window was opened without an example writer; open File > Import family list to use the built-in example. Nothing changes in the project or workbook.";
+        TemplateButton.IsEnabled = templateWriter != null;
+        if (templateWriter == null) TemplateButton.ToolTip = "Unavailable because this window was opened without a template writer; open File > Import family list to save the built-in template. Nothing changes in the project or workbook.";
         DecisionActionColumn.ItemsSource = FamilyListImportViewModel.DecisionOptions;
         Model.PropertyChanged += Model_Changed;
         PreviewKeyDown += Window_KeyDown;
@@ -47,7 +49,9 @@ public partial class FamilyListImportWindow : Window
             SheetPreviewGrid.Columns.Clear(); SheetPreviewGrid.ItemsSource = null;
             var preview = Model.Preview;
             if (preview == null) return;
-            SheetPreviewGrid.Columns.Add(new DataGridTextColumn { Header = "Row", Binding = new Binding(nameof(PanelPreviewRow.RowNumber)), Width = 62, IsReadOnly = true });
+            var rowColumn = new DataGridTextColumn { Header = "Row", Binding = new Binding(nameof(PanelPreviewRow.RowNumber)), Width = 62, IsReadOnly = true };
+            Themes.TableAppearance.SetHeaderToolTip(rowColumn, "The original Excel row number, counted from 1; this read-only preview never changes the workbook or project.");
+            SheetPreviewGrid.Columns.Add(rowColumn);
             for (int column = 0; column < preview.ColumnCount; column++)
             {
                 var border = new FrameworkElementFactory(typeof(Border));
@@ -63,8 +67,10 @@ public partial class FamilyListImportWindow : Window
                 text.SetBinding(FrameworkElement.ToolTipProperty, new Binding("Cells[" + column + "]") { Converter = new ImportSourceDetailConverter() });
                 border.AppendChild(text);
                 string letter = preview.Rows.FirstOrDefault(r => r.Cells.Count > column)?.Cells[column].ColumnLetter ?? (column + 1).ToString(CultureInfo.CurrentCulture);
-                SheetPreviewGrid.Columns.Add(new DataGridTemplateColumn { Header = letter, Width = 180, MinWidth = 110,
-                    CellTemplate = new DataTemplate { VisualTree = border }, ClipboardContentBinding = new Binding("Cells[" + column + "].Text"), IsReadOnly = true });
+                var sourceColumn = new DataGridTemplateColumn { Header = letter, Width = 180, MinWidth = 110,
+                    CellTemplate = new DataTemplate { VisualTree = border }, ClipboardContentBinding = new Binding("Cells[" + column + "].Text"), IsReadOnly = true };
+                Themes.TableAppearance.SetHeaderToolTip(sourceColumn, "Original workbook column " + letter + "; read only, with complete cell text available in Cell details. Selecting a cell changes only the displayed details.");
+                SheetPreviewGrid.Columns.Add(sourceColumn);
             }
             SheetPreviewGrid.ItemsSource = preview.Rows;
             SheetChoice.SelectedItem = Model.Sheet;
