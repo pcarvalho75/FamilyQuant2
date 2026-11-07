@@ -8,6 +8,7 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-results-export-facts", "FamilyQuant.Tests.Program.RunResultsExportFixture(System.String,System.Boolean)"),
         SuiteCommandRule.Covered("--test-feature-provenance-format2", "FamilyQuant.Tests.Program.FeatureProvenanceFormatTests(System.String)"),
         SuiteCommandRule.Covered("--test-curation-streaming-callers", "FamilyQuant.Tests.Program.CurationStreamingCallerTests()"),
         SuiteCommandRule.Excluded("--proof-curation-past-string-limit", "Z12p5f4 opt-in synthetic workflow writes more than 1,073,741,791 JSON characters and runs native import, recalculation, report and file operations under D:/fq-tmp/proof; never run in the default suite. Optional --small debugs the driver without claiming the size proof."),

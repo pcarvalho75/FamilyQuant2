@@ -129,7 +129,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => DatabaseGapLengthTests(Path.Combine(workDir, "database-gap-lengths")));
             suite.Add(() => ResultsPreservationTests(Path.Combine(workDir, "results-preservation")));
             suite.Add(() => ResultsTooltipTests());
-            suite.Add(() => ResultsExportFactTests(Path.Combine(workDir, "results-export-facts")));
+            suite.Add(() => Check("native Results export fixture propagates its worker exit status",
+                RunResultsExportFixture(Path.Combine(workDir, "results-export-facts")) == 0));
             suite.Add(() => DeNovoViewModelTests(workDir));
             suite.Add(() => HomologyResultsTests(workDir));
             suite.Section("Database parsing and the decoy tag");
