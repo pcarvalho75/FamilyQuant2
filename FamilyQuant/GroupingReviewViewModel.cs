@@ -73,8 +73,7 @@ namespace FamilyQuant
             var additions = new List<string>();
             foreach (string keyword in keywords)
             {
-                string label = Regex.Replace(keyword.Replace('"', ' ').Replace('\u201c', ' ').Replace('\u201d', ' '), @"\s+", " ").Trim();
-                string quoted = "\"" + label + "\"";
+                string quoted = QuoteScopeKeyword(keyword);
                 string? term = WordCluster.ParseKeywords(quoted).SingleOrDefault();
                 if (term != null && existing.Add(term)) additions.Add(quoted);
             }
@@ -84,6 +83,8 @@ namespace FamilyQuant
             if (normalizedQuotes.Count(c => c == '"') % 2 != 0) prefix += "\"";
             ScopeText = string.IsNullOrWhiteSpace(prefix) ? string.Join(", ", additions) : prefix + ", " + string.Join(", ", additions);
         }
+        private static string QuoteScopeKeyword(string keyword) => "\""
+            + Regex.Replace(keyword.Replace('"', ' ').Replace('\u201c', ' ').Replace('\u201d', ' '), @"\s+", " ").Trim() + "\"";
         public string Summary => ModeIndex == 1 ? Evidence?.Summary ?? "Set the scope and build an evidence proposal." : Keyword.Headline;
         public bool CanConfirm => !IsBusy && (ModeIndex == 1 ? Evidence?.CanConfirm == true && ScopeText == proposalScope
             && (MotifPattern.Length == 0 || checkedMotifPattern == MotifPattern) : Keyword.CanCreate);
