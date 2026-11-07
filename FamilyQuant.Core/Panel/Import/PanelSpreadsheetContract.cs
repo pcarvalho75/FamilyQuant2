@@ -30,6 +30,8 @@ public sealed class PanelSpreadsheetTable
     public string SourceSha256 { get; set; } = string.Empty;
     public string SheetName { get; set; } = string.Empty;
     public int HeaderRowNumber { get; set; } = 1;
+    /// <summary>The workbook carries the marker of the program's own template (PanelImportTemplate).</summary>
+    public bool IsTemplate { get; set; }
     public List<string> Headers { get; set; } = new();
     /// <summary>Excel column letters, parallel to Headers.</summary>
     public List<string> ColumnLetters { get; set; } = new();
