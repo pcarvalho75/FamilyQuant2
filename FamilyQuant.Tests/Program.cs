@@ -179,6 +179,7 @@ namespace FamilyQuant.Tests
             suite.Section("Project store (Q2) - .fqproj container round trip, migration and structure");
             suite.Add(() => ProjectFormatStageTests());
             suite.Add(() => ProjectStoreTests(workDir));
+            suite.Add(() => ReferencePanelLegacyTests(Path.Combine(workDir, "reference-panel-legacy")));
             suite.Add(() => GoldenNumberGuardTests());
             suite.Section("Talk export routing - one override root for heavy and fast lanes");
             suite.Add(() => TalkOutputRootTests(workDir));

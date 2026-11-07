@@ -8,6 +8,8 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-reference-panel-legacy", "FamilyQuant.Tests.Program.ReferencePanelLegacyTests(System.String)"),
+        SuiteCommandRule.Excluded("--record-reference-panel-legacy-project", "Baseline-only recorder for the frozen synthetic format-1 curation in a version-2 project; it refuses newer project writers and must never regenerate the committed legacy input during an ordinary suite."),
         SuiteCommandRule.Excluded("--test-reference-panel-second", "Opt-in Z15a3 native-search comparison on the second repository fixture, with an imported spreadsheet route and paired timing output; the scoped core has its own default-suite semantic fixtures."),
         SuiteCommandRule.Covered("--test-crash-handler", "FamilyQuant.Tests.Program.CrashHandlerTests()"),
         SuiteCommandRule.Excluded("--crash-probe", "Owned fatal subprocess helper invoked and asserted by DefaultSuite CrashHandlerTests; deliberately exits and cannot run as an ordinary in-process fixture."),

@@ -16,6 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="Fixtures/reference-panel-v2111/**/*" CopyToOutputDirectory="PreserveNewest" />
     <ProjectReference Include="..\FamilyQuant\FamilyQuant.App.csproj" />
     <ProjectReference Include="..\FamilyQuant.Setup\FamilyQuant.Setup.csproj" />
     <Compile Remove="ReferenceGoldenHost/**/*.cs" />
