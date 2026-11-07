@@ -119,8 +119,8 @@ internal static partial class Program
                 }
                 list.Worksheet.Save();
             }
-            Check("Z16a2 an exact action label does not override an unreadable legend qualifier", importer.ProposeWorkbook(qualifiedPath).Decisions
-                .Single(decision => decision.SourceValue == "Quantify").IsUncertain);
+            Check("Z16a11 an action label remains proposed when its legend qualifies the same action", importer.ProposeWorkbook(qualifiedPath).Decisions
+                .Single(decision => decision.SourceValue == "Quantify").ProposedMapping?.Decision == FamilyPanelDecision.Quantify);
             string[][] languageMeanings =
             [
                 ["Keep and include this entry", "Exclude this entry", "Merge into F01", "Optional: quantify this entry", "Unspecified source description"],
@@ -170,6 +170,7 @@ internal static partial class Program
             Check("Z16a2 a role override removes legend interpretation but retains its text", noLegend.Colors.Count == 0
                 && noLegend.ColorsState == PanelWorkbookReadState.Read && noLegend.Notes.Any(note => note.SheetName == "Data 2")
                 && noLegend.Decisions.Single(decision => decision.SourceValue == "Action alpha").IsUncertain);
+            WorkbookDecisionD87Tests(root);
         }
         catch (Exception error) { Check("Z16a2 legend fixtures run without an exception", false, error.ToString()); }
         finally
