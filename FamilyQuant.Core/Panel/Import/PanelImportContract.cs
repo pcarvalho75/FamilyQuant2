@@ -119,6 +119,11 @@ public sealed class PanelImportProposal
     /// <summary>Headers whose cells carry two or more different fill colours, offered as a category; never chosen automatically.</summary>
     public List<string> ColorColumns { get; set; } = new();
     public bool IsTemplate { get; set; }
+    /// <summary>Z12p5b: a column that may say what to do with each family, named so the wizard can ask; never mapped.
+    /// Empty when no column is singled out.</summary>
+    public string DecisionHint { get; set; } = string.Empty;
+    /// <summary>A plain sentence for the hint, with the label count and examples; empty without a hint.</summary>
+    public string DecisionHintReason { get; set; } = string.Empty;
 }
 
 /// <summary>The result of checking a table against the current choices.</summary>
@@ -146,6 +151,10 @@ public sealed class PanelImportRowOutcome
     /// <summary>For a row listing several families: the column holding the list and the names found in it.</summary>
     public string ListColumn { get; set; } = string.Empty;
     public List<FamilyPanelSplitPart> ProposedParts { get; set; } = new();
+    /// <summary>A leading label such as "Other rare families" before the first name, offered as the group's name; empty when none.</summary>
+    public string ListLabel { get; set; } = string.Empty;
+    /// <summary>The choice the wizard starts on: Import (keep as one family) for two names split by a comma alone; null otherwise.</summary>
+    public FamilyPanelRowAction? SuggestedAction { get; set; }
 }
 
 public sealed class PanelImportColorUse

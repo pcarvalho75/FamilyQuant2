@@ -120,5 +120,5 @@ public interface IFamilyListImportMatches
 public sealed record ImportDecisionOption(string Label, FamilyPanelDecision Value);
 public sealed record ImportRowOption(string Label, FamilyPanelRowAction Value);
 
-public sealed record ImportSummaryFamily(string Key, string Name, string OtherName, string Decision, string Matches, string Notes);
+public sealed record ImportSummaryFamily(string Key, string Name, string OtherName, string Decision, string Matches, string Notes, string Color);
 public sealed record ImportWizardStep(int Index, string Label, bool Done, bool Current, bool Enabled);

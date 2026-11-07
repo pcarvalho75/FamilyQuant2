@@ -70,23 +70,20 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Content="De novo export folder:" VerticalAlignment="Center"
                            ToolTip="The folder holding the de novo export. Its sub-folders are searched too, for the files of the source chosen below."/>
-                    <TextBox Grid.Column="1" x:Name="TextBoxPeaksDirectory" Text="{Binding ImportDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" VerticalAlignment="Center"
-                             ToolTip="Type or paste the export folder's full path. Nothing is read until you press Load and filter."/>
+                    <TextBox Grid.Column="1" x:Name="TextBoxPeaksDirectory" Text="{Binding ImportDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" VerticalAlignment="Center" ToolTip="Full path of the export folder, initially empty; any existing folder is accepted, with no numeric unit or range. This prepares the next Load and filter request and writes no file."/>
                     <Button Grid.Column="2" x:Name="ButtonBrowsePeaksDirectory" Content="Browse..."
-                            Click="ButtonBrowsePeaksDirectory_Click" Padding="12,5"
-                            ToolTip="Pick the export folder. Its matching files are counted at once, but nothing is imported until you press Load and filter."/>
+                            Click="ButtonBrowsePeaksDirectory_Click" Padding="12,5" ToolTip="Choose the export folder and count matching files in its subfolders. This changes the pending path only; Load and filter reads the calls."/>
                 </Grid>
                 <WrapPanel Grid.Row="1" Margin="5,7,5,0">
                     <Label Content="Source:" VerticalAlignment="Center"
                            ToolTip="Which de novo program made the export. Each keeps its own confidence score: PEAKS uses ALC, DeepNovo uses SCORE."/>
                     <ComboBox x:Name="ComboBoxDeNovoSource" Width="300" Margin="5" SelectedIndex="0"
-                              SelectionChanged="ComboBoxDeNovoSource_SelectionChanged"
-                              ToolTip="Choose one source or a union of PEAKS and DeepNovo: PEAKS de novo only is the default, PEAKS de novo all includes identified spectra, and DeepNovo uses SCORE (%). Each source keeps its own native cutoff in inspection and Quantify.">
-                        <ComboBoxItem Content="PEAKS de novo only (*.denovoOnly.csv)" Tag="peaks-denovo-only"/>
-                        <ComboBoxItem Content="PEAKS de novo all (*.denovo.csv)" Tag="peaks-denovo-all"/>
-                        <ComboBoxItem Content="DeepNovo (*.deepnovo.csv)" Tag="deepnovo"/>
-                        <ComboBoxItem Content="PEAKS de novo only + DeepNovo" Tag="union-only-deepnovo"/>
-                        <ComboBoxItem Content="PEAKS de novo all + DeepNovo" Tag="union-all-deepnovo"/>
+                              SelectionChanged="ComboBoxDeNovoSource_SelectionChanged" ToolTip="Choose the caller or union for the next import; the initial choice is PEAKS de novo only. Changing source clears this view's previous inspection, but does not change stored project quantities.">
+                        <ComboBoxItem Content="PEAKS de novo only (*.denovoOnly.csv)" Tag="peaks-denovo-only" ToolTip="Prepare an import of PEAKS de novo only exports using the native ALC cutoff. This selection changes pending settings, not stored quantities."/>
+                        <ComboBoxItem Content="PEAKS de novo all (*.denovo.csv)" Tag="peaks-denovo-all" ToolTip="Prepare an import of PEAKS exports that also include identified spectra, using the native ALC cutoff. This selection changes pending settings, not stored quantities."/>
+                        <ComboBoxItem Content="DeepNovo (*.deepnovo.csv)" Tag="deepnovo" ToolTip="Prepare an import of DeepNovo exports using its native SCORE cutoff. SCORE is not converted to PEAKS ALC, and stored quantities stay unchanged."/>
+                        <ComboBoxItem Content="PEAKS de novo only + DeepNovo" Tag="union-only-deepnovo" ToolTip="Read both de novo only PEAKS exports and DeepNovo exports with separate native cutoffs on the next import. Selecting the union changes pending settings, not stored quantities."/>
+                        <ComboBoxItem Content="PEAKS de novo all + DeepNovo" Tag="union-all-deepnovo" ToolTip="Read both all-call PEAKS exports and DeepNovo exports with separate native cutoffs on the next import. Selecting the union changes pending settings, not stored quantities."/>
                     </ComboBox>
                     <TextBlock x:Name="TextBlockNativeConfidence" Style="{StaticResource Note}" Margin="10,7,0,0"
                                Text="Native confidence: PEAKS ALC (%)"
@@ -95,27 +92,21 @@
                 <WrapPanel Grid.Row="2" Margin="5,8,5,0">
                     <Label Content="Minimum length:" VerticalAlignment="Center"
                            ToolTip="Shortest de novo sequence kept, in residues; default 7. Short sequences match proteins by chance, so lower it only with a reason."/>
-                    <TextBox x:Name="TextBoxMinLength" Text="{Binding Filters.MinimumLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
-                             ToolTip="A whole number from 1 to 100. A value out of range is refused when you press Load and filter, and the previous value stays."/>
+                    <TextBox x:Name="TextBoxMinLength" Text="{Binding Filters.MinimumLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center" ToolTip="Minimum accepted peptide length in residues: default 7, whole numbers 1 to 100. This prepares the next import and Quantify request; stored quantities change only after Compute."/>
                     <Label x:Name="LabelMinimumSourceConfidence" Content="Minimum ALC (%):" Margin="12,0,0,0" VerticalAlignment="Center"
                            ToolTip="Lowest overall confidence kept, PEAKS ALC or DeepNovo SCORE; default 80%. These scales are not equivalent, and neither is a calibrated FDR."/>
-                    <TextBox x:Name="TextBoxMinAlc" Text="{Binding ActiveConfidenceText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
-                             ToolTip="Accepts 0 to 100, including decimals, and drops spectra below the cutoff. Load and filter refuses an out-of-range value."/>
+                    <TextBox x:Name="TextBoxMinAlc" Text="{Binding ActiveConfidenceText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center" ToolTip="Minimum native confidence in percent: default 80, range 0 to 100, including decimals. This prepares the next request on the selected caller's own scale and does not change stored quantities."/>
                     <Label x:Name="LabelDeepNovoCutoff" Content="DeepNovo SCORE (%):" Visibility="Collapsed" VerticalAlignment="Center"
                            ToolTip="A separate native SCORE cutoff for DeepNovo in a union. It is never converted into PEAKS ALC."/>
-                    <TextBox x:Name="TextBoxDeepNovoCutoff" Text="{Binding Filters.DeepNovoMinimumScore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" Visibility="Collapsed"
-                             ToolTip="DeepNovo SCORE cutoff from 0 to 100. This value is shared with Quantify."/>
+                    <TextBox x:Name="TextBoxDeepNovoCutoff" Text="{Binding Filters.DeepNovoMinimumScore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" Visibility="Collapsed" ToolTip="Minimum DeepNovo SCORE in percent for a union: default 80, range 0 to 100, including decimals. This prepares the next import and Quantify request without changing stored quantities."/>
                     <Label Content="Stretch length:" Margin="12,0,0,0" VerticalAlignment="Center"
                            ToolTip="Consecutive residues required to reach the stretch floor; default 5. This keeps a sequence with one clearly read region and drops a uniformly mediocre one."/>
-                    <TextBox x:Name="TextBoxStretchLength" Text="{Binding Filters.StretchLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
-                             ToolTip="A whole number from 1 to 100; a longer stretch is stricter. A value out of range is refused when you press Load and filter."/>
+                    <TextBox x:Name="TextBoxStretchLength" Text="{Binding Filters.StretchLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center" ToolTip="Consecutive residues required at or above the local confidence floor: default 5 residues, whole numbers 1 to 100. This prepares the next request without changing stored quantities."/>
                     <Label Content="Stretch floor (%):" Margin="12,0,0,0" VerticalAlignment="Center"
                            ToolTip="Confidence each stretch residue must reach, default 90%. A lower residue breaks the run; keep the floor high."/>
-                    <TextBox x:Name="TextBoxStretchFloor" Text="{Binding Filters.StretchFloor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
-                             ToolTip="A number from 0 to 100, rounded to a whole number. A value out of range is refused when you press Load and filter."/>
+                    <TextBox x:Name="TextBoxStretchFloor" Text="{Binding Filters.StretchFloor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center" ToolTip="Local confidence floor for every residue in the stretch: default 90 percent, range 0 to 100, rounded to a whole number. This prepares the next request without changing stored quantities."/>
                     <Button x:Name="ButtonLoadAndFilter" Style="{DynamicResource PrimaryButton}" Content="Load and filter" Margin="16,0,0,0" Padding="14,6"
-                            Click="ButtonLoadAndFilter_Click" FontSize="13"
-                            ToolTip="Reads every export file of the chosen source in the folder and keeps the rows that pass the length, confidence and stretch filters."/>
+                            Click="ButtonLoadAndFilter_Click" FontSize="13" ToolTip="Read matching exports and replace this view's inspection with calls passing the length, native confidence and stretch filters. No source file or stored project quantity changes; wait for an active operation to finish to edit the view."/>
                 </WrapPanel>
                 <WrapPanel Grid.Row="3" Margin="5,10,5,0">
                     <Label x:Name="LabelFilesFound" Content="{Binding LabelFilesFound}" Style="{StaticResource ResultValue}"
@@ -154,14 +145,11 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Content="SEPro package:" VerticalAlignment="Center"
                            ToolTip="The PatternLab search result (.sepr2) to compare the de novo rows with. It must be the search of the same runs, or every row will look new."/>
-                    <TextBox Grid.Column="1" x:Name="TextBoxSeproPackage" Text="{Binding SeproPackage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" VerticalAlignment="Center"
-                             ToolTip="Type or paste the .sepr2 file's full path. It is only read when you press Reconcile."/>
+                    <TextBox Grid.Column="1" x:Name="TextBoxSeproPackage" Text="{Binding SeproPackage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" VerticalAlignment="Center" ToolTip="Full path of the trusted .sepr2 package from the same runs, initially empty; choose an existing file, with no numeric unit or range. Reconcile reads it without changing the package or stored quantities."/>
                     <Button Grid.Column="2" x:Name="ButtonBrowseSeproPackage" Content="Browse..." Padding="12,5"
-                            Click="ButtonBrowseSeproPackage_Click"
-                            ToolTip="Pick the .sepr2 file. Nothing is read until you press Reconcile."/>
+                            Click="ButtonBrowseSeproPackage_Click" ToolTip="Choose the trusted SEPro package for the next reconciliation. This only fills the path; it does not read or change the file."/>
                     <Button Grid.Column="3" x:Name="ButtonReconcile" Style="{DynamicResource PrimaryButton}" Content="Reconcile" Margin="10,4,4,4" Padding="14,6"
-                            Click="ButtonReconcile_Click" IsEnabled="False" FontSize="13"
-                            ToolTip="Joins the kept de novo rows to PatternLab by file name and scan. Sequences are compared only when the charge matches and the precursor m/z is within 20 ppm."/>
+                            Click="ButtonReconcile_Click" IsEnabled="False" FontSize="13" ToolTip="Compare imported calls with PatternLab by run name and scan, then by charge and precursor m/z within 20 ppm; stored quantities stay unchanged. Disabled until Load and filter keeps rows, or while an operation is running."/>
                 </Grid>
                 <WrapPanel Grid.Row="1" Margin="5,10,5,0">
                     <Label x:Name="LabelVerdictDeNovoOnly" Content="{Binding LabelVerdictDeNovoOnly}" Style="{StaticResource ResultValue}"
@@ -171,9 +159,9 @@
                     <Label x:Name="LabelVerdictRedundant" Content="{Binding LabelVerdictRedundant}" Style="{StaticResource ResultValue}"
                            ToolTip="Same scan, precursor and sequence as a PatternLab identification, so it adds nothing new. None at all usually means the search is not of the same runs."/>
                     <Label x:Name="LabelVerdictWeakPsm" Content="{Binding LabelVerdictWeakPsm}" Style="{StaticResource ResultValue}"
-                           ToolTip="Same sequence as PatternLab, but the PatternLab XCorr is below the threshold. Kept for review, not counted as new signal."/>
+                           ToolTip="Same sequence as a comparable PatternLab precursor, but its XCorr is below 2.5. This is an inspection verdict and does not change stored quantities."/>
                     <Label x:Name="LabelVerdictConflict" Content="{Binding LabelVerdictConflict}" Style="{StaticResource ResultValue}"
-                           ToolTip="Same scan, charge and precursor m/z (within 20 ppm), but a different sequence. Kept for review and left out of the de novo quantitation."/>
+                           ToolTip="Same scan and charge with precursor m/z within 20 ppm, but a different sequence after removing modifications and treating I and L as equivalent. This is an inspection verdict and does not change stored quantities."/>
                 </WrapPanel>
                 <WrapPanel Grid.Row="2" Margin="5,10,5,0">
                     <Label x:Name="LabelReviewQueueCount" Content="{Binding LabelReviewQueueCount}" Style="{StaticResource ResultValue}"
@@ -187,19 +175,15 @@
                     <Label x:Name="LabelOverlapDivergent" Content="{Binding LabelOverlapDivergent}" Style="{StaticResource ResultValue}"
                            ToolTip="Same file, scan and charge, but a different sequence once modifications are removed. The stricter m/z-matched count is shown separately."/>
                     <Button x:Name="ButtonExportSummary" Content=" Export summary CSV" Margin="10,4,4,4" Padding="12,5"
-                            Click="ButtonExportSummary_Click" IsEnabled="False"
-                            ToolTip="Saves a small CSV with the counts above for each run. Disabled until a reconciliation has been run."/>
+                            Click="ButtonExportSummary_Click" IsEnabled="False" ToolTip="Write a CSV of the recorded verdict counts per run; the project stays unchanged and Undo does not remove the file. Disabled until Reconcile has produced a result."/>
                     <Button x:Name="ButtonExportReviewQueue" Content=" Export review queue CSV" Margin="4" Padding="12,5"
-                            Click="ButtonExportReviewQueue_Click" IsEnabled="False"
-                            ToolTip="Saves the review queue as a CSV, with both sequences and every matching field, for checking by hand."/>
+                            Click="ButtonExportReviewQueue_Click" IsEnabled="False" ToolTip="Write both sequences and matching fields from the review queue to a CSV; Undo does not remove this file. Disabled until Reconcile has produced a result, with no change to the project."/>
                     <Button x:Name="ButtonExportOverlapStudy" Content=" Export overlap study CSV" Margin="4" Padding="12,5"
-                            Click="ButtonExportOverlapStudy_Click" IsEnabled="False"
-                            ToolTip="Saves the full overlap study as a CSV: same-scan matches and differences, then the split by precursor. Each row states its definition."/>
+                            Click="ButtonExportOverlapStudy_Click" IsEnabled="False" ToolTip="Write same-scan, comparable-precursor and sequence overlap counts with their denominators to a CSV; Undo does not remove this file. Disabled until Reconcile has produced a result, with no change to the project."/>
                 </WrapPanel>
                 <DataGrid Grid.Row="3" x:Name="DataGridReviewQueue" ItemsSource="{Binding ReviewQueueItems}" Margin="5,10,5,5" Height="200"
                           AutoGenerateColumns="False" IsReadOnly="True"
-                          CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="Horizontal"
-                          ToolTip="Rows with a comparable precursor but a different sequence, plus matches with a low PatternLab XCorr. They are left out of the de novo quantitation and listed here for review.">
+                          CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="Horizontal" ToolTip="Inspect comparable-precursor alternative sequences and same-sequence PatternLab matches with XCorr below 2.5. Selecting or sorting these rows changes no stored quantities or source file.">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="ColumnQueueSource" Header="Source" Width="190" Binding="{Binding Path=Source}"/>
                         <DataGridTextColumn x:Name="ColumnQueueRun" Header="Run" Width="180" Binding="{Binding Path=Run}"/>
@@ -217,8 +201,7 @@
                 </DataGrid>
             </Grid>
         </GroupBox>
-        <Expander x:Name="ExpanderStandalone" Margin="5,6,5,0" IsExpanded="False"
-                  ToolTip="Map the kept peptides to a family file without full XIC or an open project, then export the snapshot from Results. With a project, use Quantify and Results for extraction and reporting.">
+        <Expander x:Name="ExpanderStandalone" Margin="5,6,5,0" IsExpanded="False" ToolTip="Show optional peptide-to-family inspection without full XIC extraction. Expanding changes only this view; use Quantify to compute project quantities.">
             <Expander.Header>
                 <TextBlock Text="Standalone homology (advanced)" FontWeight="Bold" TextWrapping="Wrap"/>
             </Expander.Header>
@@ -250,34 +233,26 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Content="Project or family file:" VerticalAlignment="Center"
                            ToolTip="The project or Family Cluster File supplying the proteins and family numbers. Filled in when a project is already open."/>
-                    <TextBox Grid.Column="1" x:Name="TextBoxHomologyFcf" Text="{Binding HomologyFcf, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" VerticalAlignment="Center"
-                             ToolTip="Type or paste the .fqproj or .fcf file's full path. It is only read when you press Search."/>
+                    <TextBox Grid.Column="1" x:Name="TextBoxHomologyFcf" Text="{Binding HomologyFcf, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" VerticalAlignment="Center" ToolTip="Full path of an existing .fqproj or .fcf supplying sequences and current family IDs; initially empty or suggested from the open project, with no numeric range. Search reads the file without changing it."/>
                     <Button Grid.Column="2" x:Name="ButtonBrowseHomologyFcf" Content="Browse..." Padding="12,5"
-                            Click="ButtonBrowseHomologyFcf_Click"
-                            ToolTip="Pick the .fcf file. Nothing is read until you press Search."/>
+                            Click="ButtonBrowseHomologyFcf_Click" ToolTip="Choose a project or family file supplying the proteins and family IDs for inspection. This changes only the pending path; Search reads the file."/>
                     <Button Grid.Column="3" x:Name="ButtonSearchHomology" Style="{DynamicResource PrimaryButton}" Content="Search" Margin="10,4,4,4" Padding="14,6"
-                            Click="ButtonSearchHomology_Click" IsEnabled="False" FontSize="13"
-                            ToolTip="Aligns each distinct kept peptide to the family file's proteins and assigns hits to families without requiring extracted areas. Disabled until Step 1 has kept at least one row."/>
+                            Click="ButtonSearchHomology_Click" IsEnabled="False" FontSize="13" ToolTip="Map distinct kept peptides to the chosen file's current families and replace this view's homology result; the input file and stored quantities stay unchanged. Disabled until Load and filter keeps rows, or while an operation is running."/>
                 </Grid>
                 <WrapPanel Grid.Row="1" Margin="5,8,5,0">
                     <Label Content="Minimum identity (0 to 1):" VerticalAlignment="Center"
                            ToolTip="Fraction of a peptide that must match a protein exactly before it is scored. Default 0.80; lower values let in chance matches, so watch the decoy-only count."/>
-                    <TextBox x:Name="TextBoxMinIdentity" Text="{Binding MinimumIdentity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="60" Margin="5" VerticalAlignment="Center"
-                             ToolTip="A number from 0 to 1, with a dot as the decimal separator. A value out of range is refused when you press Search."/>
+                    <TextBox x:Name="TextBoxMinIdentity" Text="{Binding MinimumIdentity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="60" Margin="5" VerticalAlignment="Center" ToolTip="Minimum literal peptide identity for the homology prefilter: default 0.80, allowed fraction 0 to 1 using a decimal point. This prepares the next standalone Search without changing stored quantities."/>
                     <Label Content="Top hits per peptide:" Margin="12,0,0,0" VerticalAlignment="Center"
                              ToolTip="Maximum proteins assigned per peptide, best scores first; default 3. Raising it spreads shared peptides over more families."/>
-                    <TextBox x:Name="TextBoxTopHits" Text="{Binding TopHits, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
-                             ToolTip="A whole number, 1 or more. A value below 1 is refused when you press Search."/>
+                    <TextBox x:Name="TextBoxTopHits" Text="{Binding TopHits, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center" ToolTip="Maximum retained protein hits per peptide after scoring: default 3 hits, whole numbers 1 to 1000. This prepares the next standalone Search without changing stored quantities."/>
                     <CheckBox x:Name="CheckBoxConsiderILSame" IsChecked="{Binding ConsiderILSame, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="I and L are one residue"
-                              Margin="14,0,0,0" VerticalAlignment="Center"
-                              ToolTip="Treat isoleucine and leucine as the same residue when matching, since they have identical mass. On by default; leave it on."/>
+                              Margin="14,0,0,0" VerticalAlignment="Center" ToolTip="Treat isoleucine and leucine as the same residue in the next standalone homology search; on by default because their masses are identical. This changes a pending search option, not stored quantities."/>
                     <CheckBox x:Name="CheckBoxKQEquivalent" IsChecked="{Binding KQEquivalent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="K and Q are one residue"
-                              Margin="14,0,0,0" VerticalAlignment="Center"
-                              ToolTip="Treat lysine and glutamine as the same residue when matching (they differ by 0.036 Da). Off by default; turning it on widens every family."/>
+                              Margin="14,0,0,0" VerticalAlignment="Center" ToolTip="Treat lysine and glutamine as equivalent in the next standalone homology search; off by default. This widens sequence matching for that request without changing stored quantities."/>
                     <Label Content="Decoy prefix:" Margin="12,0,0,0" VerticalAlignment="Center"
                            ToolTip="Text that marks a decoy protein in the family file. If it is wrong, decoys count as targets and the mapped count looks better than it is."/>
-                    <TextBox x:Name="TextBoxDecoyLabel" Text="{Binding DecoyLabel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="90" Margin="5" VerticalAlignment="Center"
-                             ToolTip="{x:Static core:IdentifierText.DecoyPrefixToolTip}"/>
+                    <TextBox x:Name="TextBoxDecoyLabel" Text="{Binding DecoyLabel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="90" Margin="5" VerticalAlignment="Center" ToolTip="Case-sensitive identifier prefix marking decoy proteins for the next Search: default Reverse_, any nonempty text, with no numeric unit or range. Changing it prepares the request without editing the input file."/>
                 </WrapPanel>
                 <WrapPanel Grid.Row="2" Margin="5,10,5,0">
                     <Label x:Name="LabelHomologyPeptides" Content="{Binding LabelHomologyPeptides}" Style="{StaticResource ResultValue}"
@@ -293,8 +268,7 @@
                 </WrapPanel>
                 <DataGrid Grid.Row="3" x:Name="DataGridHomologyFamilies" ItemsSource="{Binding HomologyItems}" Margin="5,8,5,5" Height="130"
                           AutoGenerateColumns="False" IsReadOnly="True"
-                          CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="Horizontal"
-                          ToolTip="One line per family reached, most peptides first, target hits only. A peptide in two families counts in both, so the column does not sum to the peptides searched.">
+                          CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="Horizontal" ToolTip="Inspect target peptide counts by current family, ranked by count; a peptide mapped to several families counts in each. Selecting or sorting rows changes only the view, so these counts must not be summed as distinct peptides.">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="ColumnFamilyId" Header="Family (User ID)" Width="120" Binding="{Binding Path=FamilyId}"/>
                         <DataGridTextColumn x:Name="ColumnFamilyPeptides" Header="Peptides" Width="90" Binding="{Binding Path=PeptideCount, StringFormat=N0}"/>
@@ -310,8 +284,7 @@
         <Border Grid.Row="1" BorderThickness="0,1,0,0" Padding="10,6">
             <DockPanel LastChildFill="True">
                 <Button DockPanel.Dock="Right" x:Name="ButtonDeNovoHelp" Content=" Help" Margin="10,0,0,0"
-                        Padding="12,3" VerticalAlignment="Top" Click="ButtonDeNovoHelp_Click"
-                        ToolTip="Opens the help page for this screen in a window you can keep open. It explains the source, the three filters, the reconciliation and the review queue."/>
+                        Padding="12,3" VerticalAlignment="Top" Click="ButtonDeNovoHelp_Click" ToolTip="Open Help explaining native confidence, filters, reconciliation and standalone homology. The project and files stay unchanged."/>
                 <TextBlock x:Name="TextBlockDeNovoStatus" TextWrapping="Wrap" FontSize="12"
                            VerticalAlignment="Center"
                            ToolTip="What is on screen and what to do next. Refused values, empty folders and unreadable files are reported here, not in pop-ups."/>

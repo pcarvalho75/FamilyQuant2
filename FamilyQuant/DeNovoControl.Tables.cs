@@ -33,41 +33,40 @@ public partial class DeNovoControl
                 "and a close precursor m/z.");
 
             ColumnQueueMz.HeaderStyle = HeaderTip(
-                "The precursor m/z " + ActiveDeNovoSource.DisplayName + " reported. PatternLab's value " +
-                "agrees within tolerance; the ppm column shows by how much.");
+                "Precursor mass-to-charge ratio reported by the row's de novo caller. " +
+                "The paired PatternLab precursor is within 20 ppm at the same charge.");
 
             ColumnQueueCharge.HeaderStyle = HeaderTip(
-                "The precursor charge " + ActiveDeNovoSource.DisplayName + " reported. The PatternLab " +
+                "The precursor charge reported by the row's de novo caller. The PatternLab " +
                 "row always has the same charge here.");
 
             ColumnQueueDeNovoSequence.HeaderStyle = HeaderTip(
-                "The sequence " + ActiveDeNovoSource.DisplayName + " read from the spectrum, with its " +
-                "modifications. I and L count as the same, so a row here differs by more than that.");
+                "Sequence reported by the row's de novo caller, with modifications. " +
+                "Inspection compares sequences without modifications and with I and L treated as equivalent.");
 
             ColumnQueuePatternLabSequence.HeaderStyle = HeaderTip(
                 "The sequence PatternLab assigned to the same spectrum. Same as the de novo one for a " +
                 "weak PSM row, different for an alternative sequence row.");
 
             ColumnQueueXCorr.HeaderStyle = HeaderTip(
-                "PatternLab's main identification score (cross-correlation). A low value is what sends " +
-                "a matching row here for review.");
+                "PatternLab's cross-correlation score for the paired identification. " +
+                "A same-sequence match below 2.5 enters the weak-PSM review queue.");
 
             ColumnQueueAlc.HeaderStyle = HeaderTip(
-                "The " + ActiveDeNovoSource.ConfidenceColumn + " that " + ActiveDeNovoSource.DisplayName +
-                " gave the whole sequence, 0 to 100. A high score can still hide a poorly read region; " +
-                "see the next column.");
+                "Whole-sequence native confidence in percent: PEAKS ALC or DeepNovo SCORE, from 0 to 100. " +
+                "These caller-specific scales are retained separately, without conversion or an implied FDR.");
 
             ColumnQueueMinConfidence.HeaderStyle = HeaderTip(
-                "Confidence of the weakest residue. A high average with a low minimum means part of " +
-                "the sequence is a guess.");
+                "Lowest supplied local confidence across the peptide's residues, in percent. " +
+                "It describes the weakest reported residue rather than the average confidence.");
 
             ColumnQueuePpm.HeaderStyle = HeaderTip(
-                "How far apart the two precursor masses are, in parts per million. Closer to zero is " +
-                "a stronger pairing.");
+                "Absolute precursor m/z difference in parts per million, relative to the de novo precursor m/z. " +
+                "Comparable precursors pass the 20 ppm inspection tolerance.");
 
             ColumnQueueVerdict.HeaderStyle = HeaderTip(
                 "Why the row is here: an alternative sequence for a comparable precursor, or the same " +
-                "sequence with a weak PatternLab XCorr. Both are left out of the de novo quantitation.");
+                "sequence with a weak PatternLab XCorr. This inspection table does not change stored quantities.");
         }
 
 
@@ -84,8 +83,8 @@ public partial class DeNovoControl
                 "two families counts in both.");
 
             ColumnFamilyDescription.HeaderStyle = HeaderTip(
-                "The description of the family's first target protein. A sample, not a summary of " +
-                "all its members.");
+                "Description of the first target protein retained for this family in the homology result. " +
+                "It is one representative description rather than a combined annotation of all members.");
         }
 
 
@@ -104,7 +103,6 @@ public partial class DeNovoControl
             style.Setters.Add(new Setter(Control.PaddingProperty, new Thickness(4, 6, 4, 6)));
 
             style.Setters.Add(new Setter(FrameworkElement.ToolTipProperty, tooltip));
-            style.Setters.Add(new Setter(ToolTipService.ShowDurationProperty, 60000));
 
             return style;
         }

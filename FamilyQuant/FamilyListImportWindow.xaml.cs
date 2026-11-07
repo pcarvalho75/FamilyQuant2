@@ -57,8 +57,9 @@ public partial class FamilyListImportWindow : Window
                 visibleText.Bindings.Add(new Binding("Cells[" + column + "]")); visibleText.Bindings.Add(new Binding(nameof(PanelPreviewRow.RowNumber)));
                 text.SetBinding(TextBlock.TextProperty, visibleText);
                 text.SetBinding(TextBlock.ForegroundProperty, new Binding("Cells[" + column + "]") { Converter = new ImportSourceInkConverter() });
-                text.SetValue(TextBlock.TextWrappingProperty, TextWrapping.Wrap);
-                text.SetValue(FrameworkElement.MaxHeightProperty, 66d); text.SetValue(FrameworkElement.MarginProperty, new Thickness(4, 2, 4, 2));
+                text.SetValue(TextBlock.TextWrappingProperty, TextWrapping.NoWrap);
+                text.SetValue(TextBlock.TextTrimmingProperty, TextTrimming.CharacterEllipsis);
+                text.SetValue(FrameworkElement.MarginProperty, new Thickness(4, 2, 4, 2));
                 text.SetBinding(FrameworkElement.ToolTipProperty, new Binding("Cells[" + column + "]") { Converter = new ImportSourceDetailConverter() });
                 border.AppendChild(text);
                 string letter = preview.Rows.FirstOrDefault(r => r.Cells.Count > column)?.Cells[column].ColumnLetter ?? (column + 1).ToString(CultureInfo.CurrentCulture);
@@ -168,7 +169,7 @@ public partial class FamilyListImportWindow : Window
         else if (e.Key == Key.F1) { e.Handled = true; ShowHelp(); }
     }
     private void Help_Click(object sender, RoutedEventArgs e) => ShowHelp();
-    private void ShowHelp() => TextReportWindow.Show("Import your family list", FamilyListImportHelp.Text, this, wrap: true);
+    private void ShowHelp() => TextReportWindow.Show("Import family list", FamilyListImportHelp.Text, this, wrap: true);
 
     private void CommitGridEdits()
     {

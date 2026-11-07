@@ -366,7 +366,7 @@
                                     </DataGrid>
                                 </DockPanel>
                             </TabItem>
-                            <TabItem x:Name="PanelChecklistTab" Header="Panel checklist" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}">
+                            <TabItem x:Name="PanelChecklistTab" Header="Family checklist" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}">
                                 <Grid>
                                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                                     <TextBlock Text="Matches are database targets, not automatic assignments; match types may overlap." TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,8"/>
@@ -401,7 +401,7 @@
                                         <Button x:Name="ChecklistAddScopeButton" Content="Add phrase to scope" Click="AddChecklistPhrase_Click" IsEnabled="{Binding CanAddChecklistPhrase}"
                                                 ToolTip="Adds the selected stored phrase and previews its evidence; Update proposal remains your next choice." Margin="0,0,8,0"/>
                                         <Button x:Name="ChecklistPlaceHandButton" Content="Place outside matches by hand..." Click="PlaceChecklistMatches_Click" IsEnabled="{Binding CanPlaceChecklistMatches}"
-                                                ToolTip="{Binding ChecklistHandHint}"/>
+                                                ToolTip="Opens a confirmation for adding this panel family's outside matches by hand, with the project changed only on Apply grouping and restored by Undo. Choose an included panel family with outside matches, update the proposal and unlock matching proteins to enable it."/>
                                     </WrapPanel>
                                     <TextBox x:Name="ChecklistScopePreview" Grid.Row="4" Text="{Binding ChecklistScopePreviewText, Mode=OneWay}" IsReadOnly="True"
                                              Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}" TextWrapping="Wrap" MinHeight="48" MaxHeight="88"

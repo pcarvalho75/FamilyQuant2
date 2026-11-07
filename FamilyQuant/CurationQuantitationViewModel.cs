@@ -19,8 +19,9 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
     public string Summary { get => summary; private set => Set(ref summary, value); }
     public bool CanUseTic => fullXicTic > 0;
     public bool IsPending => fullXicPending;
-    public string TicHelp => CanUseTic ? "Divides by the summed TIC of every run the computation recorded."
-        : "The TIC basis is unavailable: " + (fullXicTicRefusal ?? "no full XIC has been computed yet") + ".";
+    public string TicHelp => CanUseTic ? "Divide Full XIC by the summed TIC of every recorded run, updating displayed shares immediately. Measured areas and files stay unchanged; choose the previous basis to restore it, since grouping Undo does not reset it."
+        : "The TIC basis is unavailable: " + (fullXicTicRefusal ?? "no full XIC has been computed yet")
+            + ". Recompute with a complete, consistent positive TIC for every quantified run to enable it; the quantified-signal basis stays available.";
     public event EventHandler? Refreshed;
     public CurationQuantitationViewModel(FamilyClusterFile document) => Document = document;
     private void NotifyState()

@@ -181,7 +181,7 @@ internal static partial class Program
             FinishReviewWork(grouping.UpdateProposalAsync); PumpDispatcher();
             var tabs = (TabControl)window.FindName("evidenceTabs");
             Check("after explicit Update the pending request selects the actual checklist tab", updates == 1
-                && tabs.SelectedItem is TabItem { Header: "Panel checklist" } && file.ToJsonText() == before);
+                && tabs.SelectedItem is TabItem { Header: "Family checklist" } && file.ToJsonText() == before);
         }
         finally { window.Close(); PumpDispatcher(); }
     }

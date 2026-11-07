@@ -43,7 +43,7 @@ public static class PanelFamilyChecklist
     {
         if (proposal.PanelContext == null) return Array.Empty<PanelChecklistFamily>();
         if (proposal.SourceFingerprint != EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems))
-            throw new InvalidOperationException("The proteins changed. Update the proposal before reading its panel checklist.");
+            throw new InvalidOperationException("The proteins changed. Update the proposal before reading its family checklist.");
         var panel = FamilyPanelValidation.Clone(selectedPanel ?? file.FamilyPanel
             ?? throw new InvalidOperationException("Import a family panel before reading its checklist."));
         if (PanelDerivedDataCurrentness.FamilyFingerprint(panel) != proposal.PanelContext.AppliedPanelFingerprint)

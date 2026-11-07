@@ -170,6 +170,7 @@ internal static partial class Program
             return Visit(new CoherenceMembersWindow(CoherenceCheck.Learn(file)["Invented family"]), c);
         });
         Guard("Family list import wizard", "Z12q2 FQHome", c => CensusWizard(c, scratch, Show));
+        Guard("Import family list guide", "unassigned", c => Visit(new FamilyListImportGuideWindow(), c));
         Guard("Family panel editor", "Z12q3 FQFetch", c => Visit(new PanelEditorWindow(new FamilyPanel { Name = "Panel",
             Families = new() { new FamilyPanelFamily { Key = "a", DisplayName = "Family a" } } }, evidenceFile: source), c));
         Guard("Match stored names", "Z12q3 FQFetch", c =>
@@ -179,7 +180,7 @@ internal static partial class Program
             var context = new PanelEvidenceMatchContext(evidence, file.FamilyPanel!.Families[0], null, () => evidence.IsCurrent(file));
             return Visit(new PanelEvidenceMatchWindow(new PanelEvidenceMatchViewModel(context)), c);
         });
-        Guard("Database update", "Z12q5 FQFloat", c =>
+        Guard("Database update", "Z12q5 FQFix", c =>
         {
             var data = DatabaseUpdateShellData();
             var update = DatabaseUpdateSource.FromEntries("new-database.fasta", "NEWSHA", data.Entries);
@@ -188,7 +189,7 @@ internal static partial class Program
             var model = new DatabaseUpdateViewModel(preview, data.Project.MyExtendedFastaItems.Select(p => p.SequenceIdentifier).ToArray(), "new-database.fasta", "project.fqproj");
             return Visit(new DatabaseUpdateWindow(model), c);
         });
-        Guard("Align selected", "Z12q5 FQFloat", c =>
+        Guard("Align selected", "Z12q5 FQFix", c =>
         {
             var fixture = AlignFixture();
             var session = new EvidenceGroupingSession(fixture.File, "census fixture", (_, _) => fixture.Search);
@@ -196,12 +197,27 @@ internal static partial class Program
             var set = AlignmentCandidates.Find(fixture.File, session.Proposal, new[] { fixture.QueryIndex });
             return Visit(new AlignmentWindow(new AlignmentViewModel(set)), c);
         });
-        Guard("Installer", "Z12q5 FQFloat", c =>
+        Guard("Installer", "Z12q5 FQFix", c =>
         {
-            foreach (var controller in new[] { new CensusSetupController(null, false), new CensusSetupController(new Setup.ExistingInstallation(CensusSetupController.Folder, "2.1.2", true, true), false),
-                new CensusSetupController(new Setup.ExistingInstallation(CensusSetupController.Folder, "2.1.2", true, true), true) })
-                Visit(new Setup.InstallerWindow(controller), c);
-            return "fresh install, upgrade and uninstall start pages; later pages need a real install";
+            // Every page the Setup preview shows, through its own inert preview path (InstallerWindow.Preview.cs).
+            var screens = (string[])typeof(Setup.InstallerWindowPreview).GetField("Screens", BindingFlags.NonPublic | BindingFlags.Static)!.GetValue(null)!;
+            var preview = typeof(Setup.InstallerWindow).GetMethod("ShowPreview", BindingFlags.NonPublic | BindingFlags.Instance)!;
+            var failed = new List<string>();
+            foreach (string screen in screens)
+            {
+                // The same inert controller per page as InstallerWindowPreview.Run.
+                Setup.ExistingInstallation? existing = screen is "older" or "confirm-older" ? new(CensusSetupController.Folder, "2.1.11.0", true, true)
+                    : screen == "equal" ? new(CensusSetupController.Folder, "2.1.4.0", true, true)
+                    : screen.StartsWith("upgrade", StringComparison.Ordinal) || screen.StartsWith("uninstall", StringComparison.Ordinal)
+                    ? new Setup.ExistingInstallation(CensusSetupController.Folder, "2.1.2", true, true) : null;
+                var window = new Setup.InstallerWindow(new CensusSetupController(existing, screen.StartsWith("uninstall", StringComparison.Ordinal),
+                    screen is "older" or "equal" or "confirm-older" ? "2.1.4.0" : "2.1.3"));
+                try { preview.Invoke(window, new object[] { screen, true }); Show(window); c.Collect(window); }
+                catch (TargetInvocationException ex) { failed.Add(screen + " (" + (ex.InnerException ?? ex).Message + ")"); }
+                finally { window.Close(); PumpDispatcher(); }
+            }
+            return "pages: " + string.Join(", ", screens.Except(failed.Select(f => f.Split(' ')[0])))
+                + (failed.Count > 0 ? "; NOT OPENED: " + string.Join(", ", failed) : string.Empty);
         });
         Guard("Lock manager", "unassigned", c => Visit(new LockManagerWindow(source), c));
         Guard("Spectrum comparison", "unassigned", c => Visit(SpectrumComparisonWindow.Create(manifest.SpectrumComparisonRows), c));
@@ -258,10 +274,11 @@ internal static partial class Program
     {
         internal const string Folder = @"C:\Users\Example\AppData\Local\Programs\FamilyQuant2";
         private readonly Setup.ExistingInstallation? existing;
-        public CensusSetupController(Setup.ExistingInstallation? existing, bool uninstall) { this.existing = existing; Options = new Setup.SetupOptions { Uninstall = uninstall }; }
+        public CensusSetupController(Setup.ExistingInstallation? existing, bool uninstall, string payloadVersion = "2.1.11.0")
+        { this.existing = existing; Options = new Setup.SetupOptions { Uninstall = uninstall }; PayloadVersion = payloadVersion; }
         public Setup.SetupOptions Options { get; }
         public string DefaultDirectory => Folder;
-        public string PayloadVersion => "2.1.11.0";
+        public string PayloadVersion { get; }
         public Setup.ExistingInstallation? DetectExisting() => existing;
         public bool IsAppRunning(string directory) => false;
         public System.Threading.Tasks.Task<Setup.SetupResult> InstallAsync(string directory, bool desktopShortcut, IProgress<Setup.SetupProgress>? progress = null,
@@ -327,6 +344,26 @@ internal static partial class Program
                     string tip = Themes.TableAppearance.GetHeaderToolTip(column) ?? StyleToolTip(column.HeaderStyle)
                         ?? Text((column.Header as FrameworkElement)?.ToolTip) ?? Realized(grid, column) ?? string.Empty;
                     Row("column header", header.Length == 0 ? "(no header text)" : header, string.Empty, Host(grid), column.Visibility == Visibility.Visible, tip);
+                    // The controls of the column's cells, once per column: a realized cell when the grid shows one, else the template.
+                    var cellContent = Nodes(grid, null).OfType<DataGridCell>().FirstOrDefault(cell => ReferenceEquals(cell.Column, column))?.Content as DependencyObject;
+                    if (cellContent == null && column is DataGridTemplateColumn { CellTemplate: { } template })
+                    {
+                        if (!template.IsSealed) template.Seal();
+                        cellContent = template.LoadContent();
+                    }
+                    if (cellContent == null) continue;
+                    string cellHost = Host(grid) + " column \"" + (header.Length == 0 ? "(no header text)" : header) + "\"";
+                    foreach (var inner in Nodes(cellContent, null))
+                    {
+                        string? innerKind = Kind(inner);
+                        if (innerKind is null or "table" || TemplatePart(inner)) continue;
+                        bool bound = inner is FrameworkElement bindable && System.Windows.Data.BindingOperations.IsDataBound(bindable, FrameworkElement.ToolTipProperty);
+                        string innerTip = Text(inner is FrameworkElement innerElement ? innerElement.ToolTip : (inner as FrameworkContentElement)?.ToolTip);
+                        if (innerTip.Length == 0 && bound) innerTip = "(bound to the row's data)";
+                        string innerLabel = Label(inner);
+                        Row(innerKind, innerLabel.Length > 0 ? innerLabel : header.Length > 0 ? header : "(cell)", (inner as FrameworkElement)?.Name ?? string.Empty, cellHost,
+                            inner is not UIElement innerUi || innerUi.IsEnabled, innerTip);
+                    }
                 }
             string? kind = Kind(node);
             if (kind == null || !seen.Add(node) || TemplatePart(node) || InsideCell(node)) return;
@@ -442,6 +479,23 @@ internal static partial class Program
         var window = new Window { Content = control, Width = 300, Height = 200, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual,
             ShowInTaskbar = false, ShowActivated = false };
         try { window.Show(); PumpDispatcher(); var collector = new CensusCollector(); collector.Collect(window); return collector.Rows.Single().Status; }
+        finally { window.Close(); PumpDispatcher(); }
+    }
+
+    /// <summary>A three-row grid with a bare check box column and an explained one, for the cell negative control.</summary>
+    private static List<ToolTipCensusRow> ToolTipCensusCellProbe()
+    {
+        DataGridTemplateColumn Column(string header, string? tip)
+        {
+            var box = new FrameworkElementFactory(typeof(CheckBox));
+            if (tip != null) box.SetValue(FrameworkElement.ToolTipProperty, tip);
+            return new DataGridTemplateColumn { Header = header, CellTemplate = new DataTemplate { VisualTree = box } };
+        }
+        var grid = new DataGrid { AutoGenerateColumns = false, ItemsSource = new[] { "a", "b", "c" }, CanUserAddRows = false };
+        grid.Columns.Add(Column("Bare", null)); grid.Columns.Add(Column("Explained", "Ticks this row for the next step; nothing changes until Apply."));
+        var window = new Window { Content = grid, Width = 400, Height = 300, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual,
+            ShowInTaskbar = false, ShowActivated = false };
+        try { window.Show(); PumpDispatcher(); var collector = new CensusCollector(); collector.Collect(window); return collector.Rows; }
         finally { window.Close(); PumpDispatcher(); }
     }
 

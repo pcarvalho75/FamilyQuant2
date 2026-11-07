@@ -129,6 +129,17 @@ made the row stays one family named as written, so a single name with a comma co
 - `ReportUnderOthers` keeps the row as one family with that decision, overriding the mapped label.
 
 Both choices are stored in `RowChoices` and replay with the panel. Version 0 choices look for no lists.
+
+Z12p3a reads such a cell more gracefully. A leading label before the first name ("Other rare families:
+hyaluronidase; chitinase") is returned as `ListLabel`, offered as the group's name, and is not glued to the
+first family; Report under others then names the group by the label in each name column. A part's proposed
+key is the abbreviation in its trailing parentheses ("hyaluronidase (HYA)" gives HYA, and the name loses the
+parentheses), otherwise the row's abbreviation and the part's number (RARE-4); a key already used gets the
+usual -2. Each part takes its name from the name column when that column lists the same number of names,
+and its other-language name from that column under the same rule, like every other family. A cell split into
+exactly two names by a comma alone, with no label, has `SuggestedAction` Import, so the wizard starts on
+"Keep as one family"; three or more names, a semicolon or a line break leave it empty. Keys proposed for a
+split chosen before this change are not kept by a Replay of the same choices, which 2.1.11 has not shipped.
 Checks: `--test-panel-import-several`. The read-only probe of the real workbook copy flagged exactly one
 row, the row of rare families with nine names in its English column, and no other row.
 
@@ -154,3 +165,15 @@ Checks: `--test-panel-import-template` writes the template, checks its sheets, m
 instructions and drop-down, validates it with the Open XML schema validator, fills it as a user would,
 imports it with no mapping, replays it and compares its content across cultures. The file has not been
 opened in Excel itself on this machine.
+
+## The decision column noticed, Z12p5b
+
+`Propose` never maps a decision column. It names one in `PanelImportProposal.DecisionHint`, with a plain
+sentence in `DecisionHintReason`, so the wizard can ask once. A candidate is a column other than the
+abbreviation, the names and Pfam whose cells, in at least half the rows, hold a few short labels that repeat
+(at most half as many labels as filled cells, a median length of 40 characters, mostly letters). With one
+candidate it is named. With several, the one whose labels the decision proposal reads as excluding, merging
+or as the program's own decision names most often is named; when no label does, or two columns tie, none is.
+Checks: `--test-panel-import-several` (one column, two plain columns, one with excluding and merging labels, a
+column of unique values) and `--test-panel-import-example`. A read-only check on the copy of the real
+workbook named its decision column, 13 labels over 41 rows, and no other.

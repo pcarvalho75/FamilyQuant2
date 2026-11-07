@@ -64,6 +64,11 @@ internal static partial class Program
             && roles.GetValueOrDefault(PanelImportFields.OtherName) == "Nome (inglês)" && roles.GetValueOrDefault(PanelImportFields.Pfam) == "Domínio(s) Pfam"
             && proposal.ColorColumns.Contains("Sigla") && !roles.ContainsKey(PanelImportFields.Decision),
             string.Join("|", roles.Select(r => r.Key + "=" + r.Value)) + " colours: " + string.Join(",", proposal.ColorColumns));
+        Check("example: the decision column is named as a hint among the other short-label columns, and never mapped",
+            proposal.DecisionHint == "Decisão FamilyQuant" && !roles.ContainsKey(PanelImportFields.Decision)
+            && proposal.DecisionHintReason.StartsWith("\"Decisão FamilyQuant\" holds ", StringComparison.Ordinal)
+            && proposal.DecisionHintReason.EndsWith("Is it the column that says what to do with each family? Without one, every family is quantified.", StringComparison.Ordinal),
+            proposal.DecisionHint + " | " + proposal.DecisionHintReason);
         var choices = proposal.Choices;
         choices.ColumnHeaders[PanelImportFields.Decision] = "Decisão FamilyQuant";
         var decisions = importer.ProposeDecisions(table, choices);
@@ -82,7 +87,7 @@ internal static partial class Program
             string.Join(" / ", first.Problems.Where(p => p.Severity == PanelImportSeverity.Blocking).Select(p => p.Message)));
         var outras = first.Rows.Single(r => table.Rows.Single(t => t.RowNumber == r.RowNumber).Cells["Sigla"] == "OUTRAS");
         Check("example: the row listing four families is offered as a list, with paired names in the other language",
-            outras.ListColumn == "Nome (português)" && outras.ProposedParts.Count == 4 && outras.ProposedParts.All(p => p.Key.StartsWith("OUTRAS: ", StringComparison.Ordinal))
+            outras.ListColumn == "Nome (português)" && outras.ListLabel == "Outras raras" && outras.ProposedParts.Select(p => p.Key).SequenceEqual(new[] { "HYA", "QTN", "GC", "AP" })
             && first.Problems.Any(p => p.Kind == PanelImportProblemKind.SeveralFamilies && p.RowNumber == outras.RowNumber),
             string.Join(" | ", outras.ProposedParts.Select(p => p.Key)));
         // Expectations from the workbook's own cells, read here without the importer: which rows below the header hold
@@ -99,15 +104,16 @@ internal static partial class Program
         };
         var check = importer.Check(table, choices, mappings, "Exemplo");
         var panel = check.Panel;
-        var expectedKeys = sourceKeys.Where((key, i) => key != "OUTRAS" && !(key == "LEC" && sourceKeys.Take(i).Contains("LEC"))).Append("LEC-2").ToHashSet(StringComparer.Ordinal);
+        var expectedKeys = sourceKeys.Where((key, i) => key != "OUTRAS" && !(key == "LEC" && sourceKeys.Take(i).Contains("LEC"))).Append("LEC-2")
+            .Concat(new[] { "HYA", "QTN", "GC", "AP" }).ToHashSet(StringComparer.Ordinal);
         Check("example: no row with text is skipped; every one of the workbook's family rows becomes a family",
             check.Rows.Select(r => r.RowNumber).SequenceEqual(sourceRows) && check.Rows.All(r => r.Action != FamilyPanelRowAction.Skip)
-            && panel != null && panel.Families.Where(f => !f.Key.StartsWith("OUTRAS: ", StringComparison.Ordinal)).Select(f => f.Key).ToHashSet(StringComparer.Ordinal).SetEquals(expectedKeys),
+            && panel != null && panel.Families.Select(f => f.Key).ToHashSet(StringComparer.Ordinal).SetEquals(expectedKeys),
             string.Join(",", check.Rows.Where(r => r.Action == FamilyPanelRowAction.Skip).Select(r => r.RowNumber)));
         Check("example: with the two answers every family row imports, the list as four families with their English names",
             panel != null && panel.Families.Count == sourceRows.Count - 1 + 4
-            && panel.Families.Where(f => f.Key.StartsWith("OUTRAS: ", StringComparison.Ordinal)).Select(f => PanelImportFields.OtherNameText(panel, f))
-                .SequenceEqual(new[] { "Other rare families: hyaluronidase", "chitinase", "glutaminyl cyclase", "aminopeptidase" })
+            && panel.Families.Where(f => f.Key is "HYA" or "QTN" or "GC" or "AP").Select(f => (f.DisplayName, PanelImportFields.OtherNameText(panel, f))).SequenceEqual(new[]
+                { ("hialuronidase", "hyaluronidase"), ("quitinase", "chitinase"), ("glutaminil ciclase", "glutaminyl cyclase"), ("aminopeptidase", "aminopeptidase") })
             && panel.Families.Single(f => f.Key == "CLP") is { Decision: FamilyPanelDecision.MergeIntoAnotherFamily, MergeTargetFamilyKey: "LEC" }
             && panel.Families.Single(f => f.Key == "LEC").Pfam.Single().Accession == "PF00059",
             string.Join(" / ", check.Problems.Where(p => p.Severity == PanelImportSeverity.Blocking).Select(p => p.Message)));
