@@ -7,6 +7,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace FamilyQuant;
 
@@ -56,6 +58,7 @@ public partial class FamilyListSubclassReview : UserControl
         // Preserve the host's existing context without replacing its DataContext.
         SetBinding(SubclassChoicesProperty, new Binding(nameof(SubclassChoices)));
         SetBinding(SelectedSubclassProperty, new Binding(nameof(SelectedSubclass)) { Mode = BindingMode.TwoWay });
+        Loaded += (_, _) => EnsureSelection();
     }
     private static void ChoicesChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
     {
@@ -73,10 +76,39 @@ public partial class FamilyListSubclassReview : UserControl
         var view = new ListCollectionView(rows);
         view.GroupDescriptions.Add(new PropertyGroupDescription(nameof(ImportSubclassChoice.SourceFamily)));
         SetValue(ViewKey, view);
-        if (SelectedSubclass == null || !rows.Contains(SelectedSubclass)) SetCurrentValue(SelectedSubclassProperty, rows.FirstOrDefault());
+        if (IsLoaded) EnsureSelection();
         SetValue(DraftHintKey, rows.Any(row => row.HasDraftSelection)
             ? "Initial ticks come from the current summary draft. Review them here; only Accept and import confirms the choices."
             : "Nothing is selected automatically. Include only the subclasses and rules you want; the project stays unchanged until import.");
+    }
+    private void EnsureSelection()
+    {
+        // Wait until host bindings have transferred their initial selection before supplying a default.
+        if (SelectedSubclass != null && rows.Contains(SelectedSubclass)) return;
+        SetCurrentValue(SelectedSubclassProperty, rows.FirstOrDefault());
+        GetBindingExpression(SelectedSubclassProperty)?.UpdateSource();
+    }
+    private void DraftField_Loaded(object sender, RoutedEventArgs args)
+    {
+        if (sender is not TextBox field) return;
+        field.ApplyTemplate();
+        foreach (var clear in Descendants(field).OfType<Button>().Where(button => button.Name == "DeleteButton"))
+        {
+            ToolTipService.SetShowOnDisabled(clear, true);
+            if (field.IsReadOnly)
+            {
+                clear.ToolTip = "Source text is read only here; use the separate draft fields to edit your choices. This source value is never cleared or changed.";
+                clear.IsEnabled = false; clear.Visibility = Visibility.Collapsed;
+            }
+            else clear.ToolTip = "Clears this draft field without changing the workbook or project; an empty field keeps its proposed value. Available while the draft can be edited, before import and outside a running operation.";
+        }
+    }
+    private static IEnumerable<DependencyObject> Descendants(DependencyObject root)
+    {
+        yield return root;
+        if (root is not Visual) yield break;
+        for (int index = 0; index < VisualTreeHelper.GetChildrenCount(root); index++)
+            foreach (var child in Descendants(VisualTreeHelper.GetChild(root, index))) yield return child;
     }
     private void RowChanged(object? sender, PropertyChangedEventArgs args)
     {
@@ -118,6 +150,19 @@ public partial class FamilyListSubclassReview : UserControl
                 }
             }
             SetValue(UnmatchedProblemTextKey, string.Join("\n", unmatched));
+            var first = rows.FirstOrDefault(row => row.HasProblems);
+            if (IsLoaded && first != null)
+            {
+                SetCurrentValue(SelectedSubclassProperty, first);
+                GetBindingExpression(SelectedSubclassProperty)?.UpdateSource();
+                Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
+                {
+                    var message = Descendants(this).OfType<FrameworkElement>().FirstOrDefault(element =>
+                        element.Name == "ProposalProblem" && element.DataContext is ImportSubclassChoice { Problems.Count: > 0 }
+                        || element.Name == "RuleProblem" && element.DataContext is ImportSubclassRuleChoice { HasProblems: true });
+                    message?.BringIntoView();
+                }));
+            }
         }
         finally { showingProblems = false; }
     }

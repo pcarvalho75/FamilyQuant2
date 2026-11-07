@@ -65,6 +65,12 @@ internal static partial class Program
                 ProposalId = "empty-table", IsUncertain = true, Reason = "The source table has no class rows.",
                 Notes = new() { new() { Name = "Source sheet", Text = "Empty architecture table" }, new() { Name = "Source headers", Text = "Class; Architecture" } },
             },
+            new()
+            {
+                ProposalId = "unnamed-row", FamilyKey = "family-b", HasMatchedTableRow = true, IsUncertain = true,
+                Reason = "The subclass name is empty; enter a name before accepting this row.", CandidateFamilyKeys = new() { "family-b" },
+                SourceRows = new() { new() { SheetName = "Unnamed class", RowNumber = 7, Cells = new() { ["Class"] = "", ["Architecture"] = "Original unnamed-row statement" } } },
+            },
         };
     }
 
@@ -80,6 +86,8 @@ internal static partial class Program
         Check("Z16a9 every expected, unplaced row and empty table remains visible", choices.Select(row => row.ProposalId).SequenceEqual(proposals.Select(row => row.ProposalId))
             && choices[1].SourceStatus.Contains("No source row", StringComparison.Ordinal)
             && choices[3].Title == "Unplaced source table" && choices[3].SourceNotes.Any(note => note.Text == "Empty architecture table"));
+        Check("Z16a9 an unnamed row retains its known family without implying a class match", choices[4].Family == "family-b"
+            && choices[4].Title == "Source row without a subclass name" && choices[4].SourceFamily == "Proposed family: family-b" && !choices[4].Use);
         Check("Z16a9 source rows, all original cells, notes and candidate accessions survive exactly",
             choices[0].SourceRows[0].SheetName == "Architecture" && choices[0].SourceRows[0].RowNumber == 3
             && choices[0].SourceRows[0].Cells.Any(cell => cell.Header == "Architecture" && cell.Text == "Required statement\nOriginal second line")
@@ -118,6 +126,16 @@ internal static partial class Program
         Check("Z16a9 summary input sets exact draft ticks without confirmation", seeded.Use && seeded.Rules[0].Use && !seeded.Rules[1].Use
             && !seeded.Confirmed && seeded.Rules.All(rule => !rule.Confirmed));
         Check("Z16a9 an untouched typed draft preserves omitted rules and empty overrides", JsonSerializer.Serialize(seeded.Capture()) == seedBefore);
+        var explicitUntick = ImportSubclassChoice.FromCore(proposals[0], new PanelSubclassAcceptance { ProposalId = "known", Accepted = false });
+        Check("Z16a9 an explicit empty typed selection remains unticked without inferred rules", !explicitUntick.Use
+            && explicitUntick.Rules.All(rule => !rule.Use) && explicitUntick.Capture().Rules.Count == 0 && !explicitUntick.Confirmed);
+        var rawOnly = new PanelSubclassProposal { ProposalId = "raw-only", FamilyKey = "family-a", Key = "raw", DisplayName = "Source-only class",
+            SourceRows = new() { new() { SheetName = "Source text", RowNumber = 2, Cells = new() { ["Statement"] = "PF99999 without another domain" } } } };
+        var rawChoice = ImportSubclassChoice.FromCore(rawOnly); rawChoice.Use = true;
+        var rawBuilt = PanelSubclassImport.BuildDefinitions(new[] { rawOnly }, new[] { rawChoice.Capture() }, new[] { "family-a" });
+        Check("Z16a9 rule-looking cell text never becomes a rule in the control", rawChoice.Rules.Count == 0 && rawBuilt.CanBuild
+            && rawBuilt.Definitions.Single().Definition.RequiredPfam.Count == 0 && rawBuilt.Definitions.Single().Definition.AbsentPfam.Count == 0
+            && rawBuilt.Definitions.Single().Definition.TextFields.Any(field => field.Text.Contains("PF99999 without another domain", StringComparison.Ordinal)));
         seeded.Rules[0].Kind = ImportSubclassRuleKind.AbsentPfam; seeded.Rules[1].Reject();
         var seedEdit = seeded.Capture();
         Check("Z16a9 edited draft rules retain IDs and become explicit selections", seedEdit.Rules.Count == 2
@@ -179,7 +197,7 @@ internal static partial class Program
                 {
                     window.Show(); PumpDispatcher(); window.UpdateLayout();
                     var list = (ListBox)control.FindName("ProposalList");
-                    Check(theme + " Z16a9 existing host bindings show every grouped source state", list.Items.Count == 4
+                    Check(theme + " Z16a9 existing host bindings show every grouped source state", list.Items.Count == 5
                         && control.SelectedSubclass != null && ReferenceEquals(control.SelectedSubclass, host.SelectedSubclass));
                     bool allStates = true;
                     foreach (var choice in choices)
@@ -196,6 +214,11 @@ internal static partial class Program
                     var detail = (ScrollViewer)control.FindName("DetailScroll"); detail.ScrollToEnd(); PumpDispatcher(); window.UpdateLayout();
                     Check(theme + " Z16a9 multiline original cell text remains reachable without truncation", detail.ScrollableHeight > 0
                         && WorkbookSubclassWalk(control).OfType<TextBox>().Any(text => text.Text == "Required statement\nOriginal second line"));
+                    if (output != null)
+                    {
+                        string folder = Path.Combine(output, theme.ToString().ToLowerInvariant()); Directory.CreateDirectory(folder);
+                        ScreenHarness.Save(window, Path.Combine(folder, "03-original-source-cells.png"), 1366, 768);
+                    }
                     detail.ScrollToTop(); PumpDispatcher(); window.UpdateLayout();
                     bool inside = new[] { "ProposalList", "DetailScroll", "CheckButton" }.All(name =>
                     {
@@ -213,14 +236,36 @@ internal static partial class Program
                     control.IsEnabled = false;
                     Check(theme + " Z16a9 disabled draft controls retain their hover text", interactive.All(ToolTipService.GetShowOnDisabled));
                     control.IsEnabled = true;
+                    Check(theme + " Z16a9 selected proposal text stays readable with the theme selection surface",
+                        ChartPalette.ContrastRatio((Brush)control.FindResource("TextBrush"), (Brush)control.FindResource("SelectionBrush")) >= 4.5);
                     if (output != null)
                     {
                         string folder = Path.Combine(output, theme.ToString().ToLowerInvariant()); Directory.CreateDirectory(folder);
                         ScreenHarness.Save(window, Path.Combine(folder, "01-subclass-review.png"), 1366, 768);
-                        host.SelectedSubclass = choices[2]; choices[2].Family = "family-b"; choices[2].Use = true; choices[2].Rules[0].Use = true;
-                        control.CheckChoices(); PumpDispatcher(); window.UpdateLayout();
-                        ScreenHarness.Save(window, Path.Combine(folder, "02-rule-problem.png"), 1366, 768);
                     }
+                    host.SelectedSubclass = choices[2]; choices[2].Family = "family-b"; choices[2].Use = true; choices[2].Rules[0].Use = true;
+                    control.CheckChoices(); PumpDispatcher(); window.UpdateLayout();
+                    var ruleMessage = WorkbookSubclassWalk(control).OfType<TextBlock>().FirstOrDefault(text => text.Name == "RuleProblem"
+                        && text.DataContext is ImportSubclassRuleChoice { HasProblems: true });
+                    bool messageVisible = ruleMessage != null && ruleMessage.Text.Contains("accession", StringComparison.Ordinal);
+                    if (ruleMessage != null)
+                    {
+                        var bounds = ruleMessage.TransformToAncestor(detail).TransformBounds(new Rect(ruleMessage.RenderSize));
+                        messageVisible &= bounds.Top >= -1 && bounds.Bottom <= detail.ActualHeight + 1;
+                    }
+                    Check(theme + " Z16a9 checking choices brings its exact rule message into view", messageVisible);
+                    if (output != null) ScreenHarness.Save(window, Path.Combine(output, theme.ToString().ToLowerInvariant(), "02-rule-problem.png"), 1366, 768);
+                    var draft = new PanelSubclassAcceptance { ProposalId = "known", Accepted = true,
+                        Rules = new() { new() { RuleId = "required", Accepted = true, Kind = PanelSubclassRuleKind.AbsentPfam } } };
+                    var draftRows = WorkbookSubclassReviewFixture().Select(proposal => ImportSubclassChoice.FromCore(proposal,
+                        proposal.ProposalId == draft.ProposalId ? draft : null)).ToArray();
+                    control.SubclassChoices = draftRows; control.SelectedSubclass = draftRows[0];
+                    PumpDispatcher(); window.UpdateLayout(); detail.ScrollToTop();
+                    Check(theme + " Z16a9 typed summary ticks render as unconfirmed draft choices", control.DraftHint.Contains("summary draft", StringComparison.Ordinal)
+                        && ((CheckBox)control.FindName("IncludeSubclass")).IsChecked == true && draftRows.All(row => !row.Confirmed)
+                        && draftRows.SelectMany(row => row.Rules).All(rule => !rule.Confirmed)
+                        && JsonSerializer.Serialize(control.CaptureAcceptances()[0]) == JsonSerializer.Serialize(draft));
+                    if (output != null) ScreenHarness.Save(window, Path.Combine(output, theme.ToString().ToLowerInvariant(), "04-typed-summary-draft.png"), 1366, 768);
                 }
                 finally { window.Close(); PumpDispatcher(); }
             }
