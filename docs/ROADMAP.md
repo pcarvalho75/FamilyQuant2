@@ -32,7 +32,7 @@ Version 13 delivered 73 steps (in the archive): 2.1.8 (11-05), 2.1.9 (the UniPro
 ## Rules every worker follows
 
 1. **Only the program makes results.** Python may investigate or check a number, never make one that reaches a person.
-2. **No exception lists.** No family, protein, Pfam or keyword literal in a rule; evidence and data decide, and what a user chooses is stored in the project. Nothing the user sees names an organism, a venom, a toxin or a sample (D21; the suite tests it).
+2. **No exception lists.** No family, protein, Pfam or keyword literal in a rule; evidence and data decide, and what a user chooses is stored in the project. Nothing the user sees names an organism, a venom, a toxin or a sample's numbers (D21; the suite tests it). Protein family and domain names (for example serum albumin, whey acidic protein domain) are protein names, not samples (desk ruling 11-06 on Z12p2c).
 3. **No function is lost.** The feature ledger is the contract: only Paulo can drop a row. A rename keeps the function; a ledger row that pins an old name is mapped in the ledger's "Added contracts after the frozen source" section, never edited to make a check pass.
 4. **Numbers stay equal unless a step says otherwise.** Only Z6c may change a number, and only after Paulo's decision, a before and after on real data and a science review.
 5. **Deployable at every merge.** One step per commit, with its test; tests go into DefaultSuite. Builders run focused checks; the desk runs the whole suite once per release (D61 mode).
