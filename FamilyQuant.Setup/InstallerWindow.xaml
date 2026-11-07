@@ -1,4 +1,4 @@
-<Window x:Class="FamilyQuant.Setup.InstallerWindow"
+<Window x:Class="FamilyQuant.Setup.InstallerWindow" x:Name="installerWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
@@ -20,9 +20,9 @@
                     <TextBlock Text="Setup" Foreground="{DynamicResource MutedBrush}" Margin="10,0,0,0" VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" shell:WindowChrome.IsHitTestVisibleInChrome="True">
-                    <Button x:Name="ThemeButton" Content="Light" ToolTip="Switch colour theme" AutomationProperties.Name="Switch colour theme" Style="{StaticResource QuietButton}" Padding="10,3" MinHeight="30" Margin="0,6,8,6" Click="ThemeClick"/>
-                    <Button Content="&#xE921;" FontFamily="Segoe Fluent Icons" ToolTip="Minimize" AutomationProperties.Name="Minimize" Style="{StaticResource QuietButton}" Width="36" Padding="0" Click="MinimizeClick"/>
-                    <Button x:Name="CloseButton" Content="&#xE8BB;" FontFamily="Segoe Fluent Icons" ToolTip="Close Setup" AutomationProperties.Name="Close Setup" Style="{StaticResource QuietButton}" Width="36" Padding="0" Click="CloseClick"/>
+                    <Button x:Name="ThemeButton" Content="Light" ToolTip="Changes the appearance of this Setup window. Only its display changes." AutomationProperties.Name="Switch colour theme" Style="{StaticResource QuietButton}" Padding="10,3" MinHeight="30" Margin="0,6,8,6" Click="ThemeClick"/>
+                    <Button Content="&#xE921;" FontFamily="Segoe Fluent Icons" ToolTip="Moves Setup to the taskbar while any active operation continues." AutomationProperties.Name="Minimize" Style="{StaticResource QuietButton}" Width="36" Padding="0" Click="MinimizeClick"/>
+                    <Button x:Name="CloseButton" Content="&#xE8BB;" FontFamily="Segoe Fluent Icons" ToolTip="{Binding CloseHint, ElementName=installerWindow}" AutomationProperties.Name="Close Setup" Style="{StaticResource QuietButton}" Width="36" Padding="0" Click="CloseClick"/>
                 </StackPanel>
             </Grid>
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="40,26,40,24" Focusable="False">
@@ -46,20 +46,20 @@
                             </Grid>
                         </Border>
                         <Button x:Name="ExistingActionButton" Content="_Repair" Style="{StaticResource QuietButton}" HorizontalAlignment="Left"
-                                Visibility="Collapsed" Margin="0,16,0,0" Click="ExistingActionClick"/>
+                                Visibility="Collapsed" Margin="0,16,0,0" Click="ExistingActionClick" ToolTip="{Binding ExistingActionHint, ElementName=installerWindow}"/>
                     </StackPanel>
                     <StackPanel x:Name="FolderPanel" Visibility="Collapsed">
                         <Label Content="_Install folder" Target="{Binding ElementName=FolderBox}" Foreground="{DynamicResource TextBrush}" Padding="0,0,0,9"/>
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-                            <TextBox x:Name="FolderBox" AutomationProperties.Name="Install folder"/>
-                            <Button x:Name="ChangeFolderButton" Grid.Column="1" Content="_Change..." Margin="10,0,0,0" Click="ChangeFolderClick"/>
+                            <TextBox x:Name="FolderBox" AutomationProperties.Name="Install folder" ToolTip="{Binding FolderHint, ElementName=installerWindow}"/>
+                            <Button x:Name="ChangeFolderButton" Grid.Column="1" Content="_Change..." Margin="10,0,0,0" Click="ChangeFolderClick" ToolTip="{Binding ChangeFolderHint, ElementName=installerWindow}"/>
                         </Grid>
                         <TextBlock x:Name="FolderNote" Style="{StaticResource Caption}" Margin="0,12,0,0"/>
                     </StackPanel>
                     <StackPanel x:Name="OptionsPanel" Visibility="Collapsed">
-                        <CheckBox x:Name="DesktopOption" Content="Create a _desktop shortcut"/>
-                        <CheckBox x:Name="LaunchOption" Content="_Launch FamilyQuant when I finish" IsChecked="True"/>
+                        <CheckBox x:Name="DesktopOption" Content="Create a _desktop shortcut" ToolTip="Chooses whether installation creates a FamilyQuant shortcut on your desktop, initially off unless Setup was started with that option. The shortcut choice takes effect during installation and is outside project Undo."/>
+                        <CheckBox x:Name="LaunchOption" Content="_Launch FamilyQuant when I finish" IsChecked="True" ToolTip="Chooses whether the final button opens FamilyQuant after a successful installation, initially on. This choice starts the app only when you finish Setup."/>
                         <Border Background="{DynamicResource SurfaceBrush}" Padding="18" CornerRadius="8" Margin="0,4,0,0">
                             <StackPanel><TextBlock Text="INSTALL TO" Style="{StaticResource Caption}"/><TextBlock x:Name="OptionsFolder" FontSize="13" Margin="0,5,0,0"/></StackPanel>
                         </Border>
@@ -90,18 +90,18 @@
                         <Border BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="1" CornerRadius="8" Padding="18">
                             <TextBlock x:Name="ErrorMessage" AutomationProperties.LiveSetting="Assertive"/>
                         </Border>
-                        <Expander x:Name="ErrorDetails" Header="Details" Foreground="{DynamicResource MutedBrush}" Margin="0,16,0,0" Visibility="Collapsed">
-                            <TextBox x:Name="ErrorDetailsText" IsReadOnly="True" TextWrapping="Wrap" MaxHeight="100" VerticalScrollBarVisibility="Auto" Margin="0,10,0,0" FontSize="12"/>
+                        <Expander x:Name="ErrorDetails" Header="Details" Foreground="{DynamicResource MutedBrush}" Margin="0,16,0,0" Visibility="Collapsed" ToolTip="Shows the technical message recorded for this Setup error. Only this window changes.">
+                            <TextBox x:Name="ErrorDetailsText" IsReadOnly="True" TextWrapping="Wrap" MaxHeight="100" VerticalScrollBarVisibility="Auto" Margin="0,10,0,0" FontSize="12" ToolTip="Read or copy the technical message for the current Setup error. This text is read only."/>
                         </Expander>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
             <Border Grid.Row="2" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="0,1,0,0" Padding="30,18">
                 <Grid>
-                    <Button x:Name="BackButton" Content="_Back" Style="{StaticResource QuietButton}" HorizontalAlignment="Left" Click="BackClick" Visibility="Collapsed"/>
+                    <Button x:Name="BackButton" Content="_Back" Style="{StaticResource QuietButton}" HorizontalAlignment="Left" Click="BackClick" Visibility="Collapsed" ToolTip="Returns to an earlier Setup page so you can review your choices. This navigation is outside project Undo."/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="CancelButton" Content="_Cancel" Style="{StaticResource QuietButton}" Margin="0,0,10,0" Click="CancelClick"/>
-                        <Button x:Name="PrimaryButton" Content="_Continue" Style="{StaticResource PrimaryButton}" IsDefault="True" Click="PrimaryClick"/>
+                        <Button x:Name="CancelButton" Content="_Cancel" Style="{StaticResource QuietButton}" Margin="0,0,10,0" Click="CancelClick" ToolTip="{Binding CancelHint, ElementName=installerWindow}"/>
+                        <Button x:Name="PrimaryButton" Content="_Continue" Style="{StaticResource PrimaryButton}" IsDefault="True" Click="PrimaryClick" ToolTip="{Binding PrimaryHint, ElementName=installerWindow}"/>
                     </StackPanel>
                 </Grid>
             </Border>

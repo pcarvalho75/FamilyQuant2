@@ -1,6 +1,7 @@
 <Window x:Class="FamilyQuant.DatabaseUpdateWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:theme="clr-namespace:FamilyQuant.Themes"
         Title="Update database" Width="1000" Height="700" MinWidth="860" MinHeight="540"
         Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}"
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
@@ -11,7 +12,7 @@
         </DataTemplate>
         <DataTemplate x:Key="CaseChoice">
             <ComboBox ItemsSource="{Binding Options}" SelectedItem="{Binding Selected, Mode=TwoWay}" DisplayMemberPath="Label" MinWidth="260"
-                      ToolTip="Pick the pair that is the same protein, or leave No pair so nothing is carried over."/>
+                      ToolTip="Chooses which old and new record represent the same protein, with No pair as the default and only the listed pairs allowed. Choose Compare again to preview the choice before Apply update changes the project."/>
         </DataTemplate>
     </Window.Resources>
     <Grid Margin="20">
@@ -27,16 +28,16 @@
             <TextBlock x:Name="warningText" Text="{Binding Warnings}" TextWrapping="Wrap" Foreground="{DynamicResource ErrorBrush}"/>
         </Border>
         <TabControl x:Name="updateTabs" Grid.Row="2" Margin="0,12,0,0">
-            <TabItem x:Name="summaryTab" Header="Summary">
+            <TabItem x:Name="summaryTab" Header="Summary" ToolTip="Shows the planned target protein changes and what Apply update will do. Opening this tab changes nothing in the project.">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel Margin="0,8,0,0">
                         <DataGrid x:Name="countsGrid" ItemsSource="{Binding Counts}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
                                   IsReadOnly="True" HeadersVisibility="Column" CanUserSortColumns="False"
                                   ToolTip="Target proteins only, from the comparison and the placement; decoys are counted below.">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="What happens" Width="360" MinWidth="240" Binding="{Binding What}"/>
-                                <DataGridTextColumn Header="Proteins" Width="110" MinWidth="90" Binding="{Binding Proteins}"/>
-                                <DataGridTextColumn Header="Detail" Width="*" MinWidth="200" Binding="{Binding Detail}"/>
+                                <DataGridTextColumn Header="What happens" Width="360" MinWidth="240" Binding="{Binding What}" theme:TableAppearance.HeaderToolTip="The kind of database change planned for these target proteins. Reading the counts changes nothing."/>
+                                <DataGridTextColumn Header="Proteins" Width="110" MinWidth="90" Binding="{Binding Proteins}" theme:TableAppearance.HeaderToolTip="The number of target proteins in this change category. Decoys are counted separately below the table."/>
+                                <DataGridTextColumn Header="Detail" Width="*" MinWidth="200" Binding="{Binding Detail}" theme:TableAppearance.HeaderToolTip="Explains what is kept or cleared for this change category when you apply the update."/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <TextBlock Text="{Binding DecoySummary}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,8,0,0"/>
@@ -50,18 +51,18 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem x:Name="rowsTab" Header="{Binding RowsHeader}">
+            <TabItem x:Name="rowsTab" Header="{Binding RowsHeader}" ToolTip="Lists the protein changes, with filters and CSV export. Opening this tab leaves the preview and project as they are.">
                 <DockPanel Margin="0,8,0,0">
                     <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8" LastChildFill="False">
                         <TextBlock Text="Show" VerticalAlignment="Center" Margin="0,0,8,0" DockPanel.Dock="Left"/>
                         <ComboBox x:Name="rowFilterBox" ItemsSource="{Binding RowFilters}" SelectedItem="{Binding RowFilter, Mode=TwoWay}" Width="230" DockPanel.Dock="Left"
-                                  ToolTip="Narrows the table to one kind of change. The counts and Apply are not affected."/>
+                                  ToolTip="Shows every change by default, or one of the listed change categories. Only the displayed rows change, and the preview applied to the project stays the same."/>
                         <CheckBox x:Name="showDecoysBox" Content="Show decoy rows" IsChecked="{Binding ShowDecoys}" VerticalAlignment="Center" Margin="16,0,0,0" DockPanel.Dock="Left"
-                                  ToolTip="Lists decoy rows too; they follow the same rules as their targets."/>
+                                  ToolTip="Includes decoy rows in the displayed table when ticked, initially off. This changes only the table and copied rows, while Save as CSV always includes decoys."/>
                         <Button x:Name="saveCsvButton" Content="Save as CSV" Click="SaveCsv_Click" DockPanel.Dock="Right" Margin="8,0,0,0"
-                                ToolTip="Saves every row, decoys included, as a CSV file with the columns of the saved change export."/>
+                                ToolTip="Writes every preview row, including hidden rows and decoys, to a CSV file you choose. The project stays as it is, and Undo cannot reverse the file export."/>
                         <Button x:Name="copyRowsButton" Content="Copy" Click="CopyRows_Click" DockPanel.Dock="Right"
-                                ToolTip="Copies the rows shown in the table as CSV text for a spreadsheet or a note."/>
+                                ToolTip="Copies the rows currently shown to the clipboard as CSV text. The project and files stay as they are."/>
                     </DockPanel>
                     <TextBlock DockPanel.Dock="Bottom" Text="{Binding RowsShown}" Style="{StaticResource CaptionText}" Margin="0,6,0,0"/>
                     <TextBlock x:Name="selectedNote" DockPanel.Dock="Bottom" Text="{Binding SelectedItem.Note, ElementName=rowsGrid}" TextWrapping="Wrap"
@@ -70,26 +71,26 @@
                               IsReadOnly="True" HeadersVisibility="Column" SelectionMode="Extended"
                               ToolTip="Every protein that is not unchanged: what happens, its old and new identifier, its family and how it was placed.">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Change" Width="170" MinWidth="150" Binding="{Binding Change}"/>
-                            <DataGridTextColumn Header="Old identifier" Width="190" MinWidth="140" Binding="{Binding OldIdentifier}"/>
-                            <DataGridTextColumn Header="New identifier" Width="190" MinWidth="140" Binding="{Binding NewIdentifier}"/>
-                            <DataGridTextColumn Header="Family" Width="70" MinWidth="70" Binding="{Binding Family}"/>
-                            <DataGridTextColumn Header="Family name" Width="170" MinWidth="120" Binding="{Binding FamilyName}"/>
-                            <DataGridTextColumn Header="Placed by" Width="170" MinWidth="120" Binding="{Binding PlacedBy}"/>
-                            <DataGridTextColumn Header="Identity (%)" Width="104" MinWidth="104" Binding="{Binding Identity}"/>
-                            <DataGridTextColumn Header="Aligned" Width="80" MinWidth="80" Binding="{Binding Aligned}"/>
-                            <DataGridTextColumn Header="Note" Width="420" MinWidth="200" Binding="{Binding Note}"/>
+                            <DataGridTextColumn Header="Change" Width="170" MinWidth="150" Binding="{Binding Change}" theme:TableAppearance.HeaderToolTip="The planned change for this protein, including any decoy, contaminant or ambiguous status. Reading it changes nothing."/>
+                            <DataGridTextColumn Header="Old identifier" Width="190" MinWidth="140" Binding="{Binding OldIdentifier}" theme:TableAppearance.HeaderToolTip="The protein identifier in the open project before the update. Empty for a newly added protein."/>
+                            <DataGridTextColumn Header="New identifier" Width="190" MinWidth="140" Binding="{Binding NewIdentifier}" theme:TableAppearance.HeaderToolTip="The identifier from the replacement database. Empty when the old protein is removed."/>
+                            <DataGridTextColumn Header="Family" Width="70" MinWidth="70" Binding="{Binding Family}" theme:TableAppearance.HeaderToolTip="The family number this protein will have after Apply update. Reading this preview does not change its family."/>
+                            <DataGridTextColumn Header="Family name" Width="170" MinWidth="120" Binding="{Binding FamilyName}" theme:TableAppearance.HeaderToolTip="The family label recorded in this placement preview. Review the Family names tab to choose whether an old name is kept."/>
+                            <DataGridTextColumn Header="Placed by" Width="170" MinWidth="120" Binding="{Binding PlacedBy}" theme:TableAppearance.HeaderToolTip="The matching or placement rule that assigned this protein to its previewed family."/>
+                            <DataGridTextColumn Header="Identity (%)" Width="104" MinWidth="104" Binding="{Binding Identity}" theme:TableAppearance.HeaderToolTip="Sequence identity, as a percentage, for the link used to place this protein. Empty when no placement identity was recorded."/>
+                            <DataGridTextColumn Header="Aligned" Width="80" MinWidth="80" Binding="{Binding Aligned}" theme:TableAppearance.HeaderToolTip="The alignment length in amino acids recorded for the placement link. Empty when no alignment length was recorded."/>
+                            <DataGridTextColumn Header="Note" Width="420" MinWidth="200" Binding="{Binding Note}" theme:TableAppearance.HeaderToolTip="Explains the comparison or placement outcome, including warnings that need review before applying the update."/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>
             </TabItem>
-            <TabItem x:Name="casesTab" Header="{Binding CasesHeader}">
+            <TabItem x:Name="casesTab" Header="{Binding CasesHeader}" ToolTip="Shows cases where the comparison could not choose one old and new protein pair. Pair choices affect the next comparison, and the project changes only after Apply update.">
                 <DockPanel Margin="0,8,0,0">
                     <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Style="{StaticResource BodyText}" Margin="0,0,0,8"
                                Text="The comparison could not tell these proteins apart, so nothing is carried over from them unless you pick the pair that is the same protein. A pick takes the outcome of the test that found the case."/>
                     <DockPanel DockPanel.Dock="Bottom" Margin="0,8,0,0" LastChildFill="True">
                         <Button x:Name="compareAgainButton" Content="Compare again" Click="CompareAgain_Click" DockPanel.Dock="Right" IsEnabled="{Binding PicksPending}"
-                                ToolTip="Runs the comparison and the placement again with these picks; nothing is applied yet."/>
+                                ToolTip="{Binding CompareAgainHint}"/>
                         <TextBlock Text="{Binding PicksStatus}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" TextWrapping="Wrap"/>
                     </DockPanel>
                     <TextBlock DockPanel.Dock="Top" Text="No ambiguous cases: every protein was matched or is new." Style="{StaticResource CaptionText}"
@@ -98,10 +99,10 @@
                               HeadersVisibility="Column" SelectionMode="Single"
                               ToolTip="Each case lists the test that found it and why no single pair was certain.">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Case" Width="60" MinWidth="60" IsReadOnly="True" Binding="{Binding Case}"/>
-                            <DataGridTextColumn Header="Found by" Width="190" MinWidth="150" IsReadOnly="True" Binding="{Binding FoundBy}"/>
-                            <DataGridTemplateColumn Header="Your pick" Width="380" MinWidth="280" IsReadOnly="True" CellTemplate="{StaticResource CaseChoice}"/>
-                            <DataGridTextColumn Header="Why it is ambiguous" Width="*" MinWidth="260" IsReadOnly="True" Binding="{Binding Reason}">
+                            <DataGridTextColumn Header="Case" Width="60" MinWidth="60" IsReadOnly="True" Binding="{Binding Case}" theme:TableAppearance.HeaderToolTip="The reference number for this ambiguous set of old and new records. Reading a case changes nothing."/>
+                            <DataGridTextColumn Header="Found by" Width="190" MinWidth="150" IsReadOnly="True" Binding="{Binding FoundBy}" theme:TableAppearance.HeaderToolTip="The comparison test that found more than one possible protein pair."/>
+                            <DataGridTemplateColumn Header="Your pick" Width="380" MinWidth="280" IsReadOnly="True" CellTemplate="{StaticResource CaseChoice}" theme:TableAppearance.HeaderToolTip="Choose the old and new records that represent the same protein, or keep No pair. Compare again previews your choice before the project changes."/>
+                            <DataGridTextColumn Header="Why it is ambiguous" Width="*" MinWidth="260" IsReadOnly="True" Binding="{Binding Reason}" theme:TableAppearance.HeaderToolTip="The reason the comparison could not identify a unique old and new protein pair.">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock"><Setter Property="TextWrapping" Value="Wrap"/><Setter Property="Margin" Value="4,4"/></Style>
                                 </DataGridTextColumn.ElementStyle>
@@ -110,20 +111,20 @@
                     </DataGrid>
                 </DockPanel>
             </TabItem>
-            <TabItem x:Name="namesTab" Header="{Binding NamesHeader}">
+            <TabItem x:Name="namesTab" Header="{Binding NamesHeader}" ToolTip="Reviews family labels that would change and lets you keep an old label as an annotation. Choices take effect only when Apply update runs.">
                 <DockPanel Margin="0,8,0,0">
                     <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Style="{StaticResource BodyText}" Margin="0,0,0,8"
                                Text="A family's name comes from its members, so removing or renaming members can change it. Ticked: the old name is written as the annotation of every member and stays. Unticked: the name follows the members after the update."/>
                     <DataGrid x:Name="namesGrid" ItemsSource="{Binding Names}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
                               HeadersVisibility="Column" SelectionMode="Single"
-                              ToolTip="A tick starts off where keeping the name would replace a different annotation of a surviving member.">
+                              ToolTip="Reviews the old and proposed family names before the update. Keeping an old name writes it into member annotations only when Apply update runs.">
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Keep the old name" Width="140" MinWidth="130" IsReadOnly="True" CellTemplate="{StaticResource KeepNameTick}"/>
-                            <DataGridTextColumn Header="Family" Width="70" MinWidth="70" IsReadOnly="True" Binding="{Binding Family}"/>
-                            <DataGridTextColumn Header="Old name" Width="200" MinWidth="140" IsReadOnly="True" Binding="{Binding OldName}"/>
-                            <DataGridTextColumn Header="New name" Width="200" MinWidth="140" IsReadOnly="True" Binding="{Binding NewName}"/>
-                            <DataGridTextColumn Header="Old name came from" Width="150" MinWidth="130" IsReadOnly="True" Binding="{Binding OldNameSource}"/>
-                            <DataGridTextColumn Header="Keeping it replaces the annotation of" Width="*" MinWidth="220" IsReadOnly="True" Binding="{Binding Replaces}"/>
+                            <DataGridTemplateColumn Header="Keep the old name" Width="140" MinWidth="130" IsReadOnly="True" CellTemplate="{StaticResource KeepNameTick}" theme:TableAppearance.HeaderToolTip="Tick to write the old family name into member annotations when Apply update runs. Earlier Undo steps are cleared by the update."/>
+                            <DataGridTextColumn Header="Family" Width="70" MinWidth="70" IsReadOnly="True" Binding="{Binding Family}" theme:TableAppearance.HeaderToolTip="The existing family number whose label could change after the database update."/>
+                            <DataGridTextColumn Header="Old name" Width="200" MinWidth="140" IsReadOnly="True" Binding="{Binding OldName}" theme:TableAppearance.HeaderToolTip="The family label shown in the current project before the database update."/>
+                            <DataGridTextColumn Header="New name" Width="200" MinWidth="140" IsReadOnly="True" Binding="{Binding NewName}" theme:TableAppearance.HeaderToolTip="The family label proposed from the updated members when you leave Keep the old name unticked."/>
+                            <DataGridTextColumn Header="Old name came from" Width="150" MinWidth="130" IsReadOnly="True" Binding="{Binding OldNameSource}" theme:TableAppearance.HeaderToolTip="Whether the old family label came from a user annotation or the members' protein names."/>
+                            <DataGridTextColumn Header="Keeping it replaces the annotation of" Width="*" MinWidth="220" IsReadOnly="True" Binding="{Binding Replaces}" theme:TableAppearance.HeaderToolTip="Members with a different annotation that keeping the old family name would replace. Such a conflict makes Keep the old name start unticked."/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>
@@ -132,7 +133,7 @@
         <DockPanel Grid.Row="3" Margin="0,12,0,0" LastChildFill="True">
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                 <Button x:Name="applyButton" Content="Apply update" Style="{DynamicResource PrimaryButton}" Click="Apply_Click" IsEnabled="{Binding CanApply}"
-                        ToolTip="Makes these changes to the open project as one step; the file on disk changes only when you save."/>
+                        ToolTip="{Binding ApplyHint}"/>
                 <Button x:Name="cancelButton" Content="Cancel" IsCancel="True" Click="Cancel_Click" Margin="8,0,0,0"
                         ToolTip="Closes the preview and leaves the project exactly as it was."/>
             </StackPanel>

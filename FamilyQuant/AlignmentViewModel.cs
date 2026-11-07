@@ -18,6 +18,9 @@ public sealed class AlignmentCandidateRow : ScreenViewModel
     public AlignmentCandidate Candidate { get; }
     public bool IsFirst { get; }
     public bool CanTick => !IsFirst;
+    public string TickHint => IsFirst
+        ? "This tick is unavailable because the first protein is the alignment reference and must stay included. Choose a different highlighted protein before opening Align selected to change the reference."
+        : "Includes or removes this sequence and recomputes the displayed alignment. Only this window changes, and the first protein stays included.";
     public string Name => Candidate.Label;
     public string Source => Candidate.OriginText;
     public string Family => Candidate.Family;
@@ -80,9 +83,26 @@ public sealed class AlignmentViewModel : ScreenViewModel
     public bool HasNotes => Notes.Length > 0;
     public string Method => ProteinAlignment.Method;
 
-    public MultipleAlignment? Alignment { get => alignment; private set { if (Set(ref alignment, value)) { Changed(nameof(Summary)); Changed(nameof(CanCopy)); } } }
+    public MultipleAlignment? Alignment
+    {
+        get => alignment;
+        private set
+        {
+            if (!Set(ref alignment, value)) return;
+            Changed(nameof(Summary));
+            Changed(nameof(CanCopy));
+            Changed(nameof(CopyFastaHint));
+            Changed(nameof(CopyTextHint));
+        }
+    }
     public string Status { get => status; private set => Set(ref status, value); }
     public bool CanCopy => Alignment != null;
+    public string CopyFastaHint => CanCopy
+        ? "Copies the ticked sequences with alignment gaps to the clipboard as FASTA. The project and files stay as they are."
+        : "Unavailable because no alignment could be built. Adjust the sequence ticks to build a valid alignment and enable copying.";
+    public string CopyTextHint => CanCopy
+        ? "Copies the alignment to the clipboard in blocks of 60 columns with names and residue numbers. The project and files stay as they are."
+        : "Unavailable because no alignment could be built. Adjust the sequence ticks to build a valid alignment and enable copying.";
     public int TickedCount => Candidates.Count(c => c.Ticked);
 
     public string Summary => Alignment == null ? "No alignment."

@@ -70,7 +70,6 @@ public sealed class AlignmentView : FrameworkElement
     {
         Loaded += (_, _) => { Themes.ThemeManager.ThemeChanged -= Refresh; Themes.ThemeManager.ThemeChanged += Refresh; };
         Unloaded += (_, _) => Themes.ThemeManager.ThemeChanged -= Refresh;
-        ToolTipService.SetInitialShowDelay(this, 150);
     }
 
     private void Refresh(object? sender, EventArgs e) => InvalidateVisual();
