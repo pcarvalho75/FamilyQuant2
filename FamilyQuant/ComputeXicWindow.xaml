@@ -7,8 +7,7 @@
   <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
   <ContentControl x:Name="ScreenHost"/>
   <Button x:Name="ButtonClose" Grid.Row="1" Content="Close" HorizontalAlignment="Right" MinWidth="90"
-   Margin="16,8,16,16" Click="ButtonClose_Click"
-   ToolTip="Close this window. A finished computation is kept in the project; Save the project to write it to disk."/>
+   Margin="16,8,16,16" Click="ButtonClose_Click" ToolTip="Close this window, keeping any completed result in the project; Save writes it to disk and grouping Undo does not revert computed quantities. During a computation, closing requests cancellation and the window stays open until the operation finishes."/>
   <local:BusyOverlay x:Name="OperationOverlay" Grid.RowSpan="2"/>
  </Grid>
 </Window>
