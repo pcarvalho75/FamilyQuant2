@@ -8,6 +8,7 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Excluded("--measure-decoy-rebuild", "Z15b5 explicit-output measurement writes and reads repository synthetic curation fixtures and compares every stored decoy field; an audit producer rather than a DefaultSuite fixture."),
         SuiteCommandRule.Covered("--test-curation-streaming-contract", "FamilyQuant.Tests.Program.CurationStreamingContractTests(System.String)"),
         SuiteCommandRule.Covered("--test-compact-curation", "FamilyQuant.Tests.Program.CompactCurationTests(System.String)"),
         SuiteCommandRule.Covered("--test-crash-handler", "FamilyQuant.Tests.Program.CrashHandlerTests()"),
@@ -438,6 +439,8 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-panel-checklist", "FamilyQuant.Tests.Program.PanelChecklistTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-checklist-actions", "FamilyQuant.Tests.Program.PanelChecklistActionsTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-evidence-matching", "FamilyQuant.Tests.Program.PanelEvidenceMatchingTests()"),
+        SuiteCommandRule.Covered("--test-panel-evidence-ranking", "FamilyQuant.Tests.Program.PanelEvidenceRankingTests()"),
+        SuiteCommandRule.Covered("--test-panel-evidence-broad", "FamilyQuant.Tests.Program.PanelEvidenceBroadTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-match-lifecycle", "FamilyQuant.Tests.Program.PanelMatchLifecycleTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-evidence-match-ui", "FamilyQuant.Tests.Program.PanelEvidenceMatchUiTests(System.String)"),
         SuiteCommandRule.Covered("--test-evidence-detail-selection", "FamilyQuant.Tests.Program.EvidenceDetailSelectionTests(System.String)"),
