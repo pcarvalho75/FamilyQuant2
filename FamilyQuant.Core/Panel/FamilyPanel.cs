@@ -68,7 +68,7 @@ public sealed class FamilyPanelDecisionMapping
 
 /// <summary>Replay information for a user-confirmed import. ColumnHeaders maps importer field keys
 /// to the user's actual headers. FamilySheet and the other sheet names are user data.</summary>
-public sealed class FamilyPanelImport
+public sealed partial class FamilyPanelImport
 {
     public string SourceName { get; set; } = string.Empty;
     public string SourceSha256 { get; set; } = string.Empty;
