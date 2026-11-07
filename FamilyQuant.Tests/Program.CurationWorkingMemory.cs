@@ -118,6 +118,50 @@ internal static partial class Program
         Check("Z12p5f8 editing copied recipe collections never edits the input", references.Count == 512 && search.Neighbours.Count == 1);
         Console.WriteLine(FormattableString.Invariant($"MEMORY Z12p5f8 allocatedBytes legacyRecipe={legacyRecipeBytes} recipeCopy={recipeBytes}"));
 
+        recipe.ProteinSubclassLabels = new() { new() { SubclassKey = "prior", Reason = "Prior rule" } };
+        recipe.ProteinSubclassLabelsPanelFingerprint = "prior panel";
+        recipe.ProteinSubclassLabelsFingerprint = "prior labels";
+        file.EvidenceRecipe = recipe;
+        file.ProteinSubclassLabels = Copy(recipe.ProteinSubclassLabels);
+        file.ProteinSubclassLabelsPanelFingerprint = recipe.ProteinSubclassLabelsPanelFingerprint;
+        file.ProteinSubclassLabelsFingerprint = recipe.ProteinSubclassLabelsFingerprint;
+        string derivedBefore = file.ToJsonText();
+        start = GC.GetAllocatedBytesForCurrentThread();
+        var derivedUndo = GroupingSnapshot.CaptureFamilyPanel(file);
+        long derivedBytes = GC.GetAllocatedBytesForCurrentThread() - start;
+        file.FamilyPanel!.Name = "Changed rules";
+        file.EvidenceRecipe.ProgramVersion = "Changed recipe";
+        file.EvidenceRecipe.SessionReferences!.Clear();
+        file.ProteinSubclassLabels[0].SubclassKey = "changed";
+        file.ProteinSubclassLabelsPanelFingerprint = "changed panel";
+        file.ProteinSubclassLabelsFingerprint = "changed labels";
+        derivedUndo.Restore(file);
+        Check("Z12p5f8 panel-derived snapshot restores complete recipe, labels and fingerprints", file.ToJsonText() == derivedBefore
+            && file.EvidenceSource == source && file.EvidenceRecipe!.SessionReferences!.Count == 512);
+        Check("Z12p5f8 panel-derived snapshot avoids copying large reference sequences", derivedBytes < 3 * 1024 * 1024,
+            derivedBytes + " allocated bytes with source table and session references");
+        file.EvidenceRecipe!.ProgramVersion = "Changed after restore";
+        file.ProteinSubclassLabels![0].Reason = "Changed after restore";
+        derivedUndo.Restore(file);
+        Check("Z12p5f8 repeated panel-derived restore detaches recipe and label records", file.ToJsonText() == derivedBefore);
+        file.EvidenceRecipe!.ProgramVersion = new string('A', 128 * 1024);
+        string beforeRecipeUndo = file.ToJsonText();
+        var recipeUndo = GroupingSnapshot.CaptureFamilyPanel(file);
+        file.FamilyPanel!.Name = "Changed panel before blocked restore";
+        file.EvidenceRecipe.ProgramVersion = "Changed recipe before blocked restore";
+        file.ProteinSubclassLabels![0].SubclassKey = "changed";
+        string recipeFailureState = file.ToJsonText();
+        bool recipeUndoFailed = false;
+        WithBlockedUndoTemp(() =>
+        {
+            try { recipeUndo.Restore(file); }
+            catch (IOException) { recipeUndoFailed = true; }
+        });
+        Check("Z12p5f8 failed recipe preparation preserves every panel-derived field", recipeUndoFailed && file.ToJsonText() == recipeFailureState);
+        recipeUndo.Restore(file);
+        Check("Z12p5f8 a panel-derived Undo retries after recipe storage recovers", file.ToJsonText() == beforeRecipeUndo);
+        Console.WriteLine(FormattableString.Invariant($"MEMORY Z12p5f8 allocatedBytes panelDerivedUndo={derivedBytes}"));
+
         string workbook = Path.Combine(folder, "working-memory-import.xlsx"); PanelImportTemplate.Write(workbook);
         FillTemplate(workbook, new[] { new[] { "group", "Fixture group", "", "", "", "Quantify" } });
         var observer = typeof(FamilyClusterFile).GetProperty("JsonWriteObserved", BindingFlags.Static | BindingFlags.NonPublic)!;

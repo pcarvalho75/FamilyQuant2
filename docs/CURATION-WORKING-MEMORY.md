@@ -7,10 +7,12 @@ The native family-list matcher owns a guarded stored-evidence view and ignores t
 detached project argument. The wizard now calls its panel-only overload. Other adapters still
 receive a complete detached document, including a tested adapter that mutates its inputs.
 
-Import changes only `FamilyPanel`. Its Undo retains a detached prior panel and guards the owning
-document and protein identities. Restore prepares its clone before publication. Unrelated evidence
-and annotation edits survive panel Undo. Actual evidence/grouping Undo retains its complete detached
-snapshot. Large panels use the existing bounded `JsonStreamCopy` store instead of a complete string.
+Panel Undo retains a detached prior panel, subclass labels, complete recipe and both subclass
+fingerprints, guarding the owning document and protein identities. The editor folds subclass
+recomputation into that same Undo, so all of these fields restore together. Restore prepares every
+clone before publication. Unrelated evidence and annotation edits survive panel Undo. Actual
+evidence/grouping Undo retains its complete detached snapshot. Subclass-only publication uses this
+lightweight snapshot too. Large panels use the existing bounded store instead of a complete string.
 
 Apply's private provenance views detach metadata and the new search, borrowing the live reference
 and family-world tables for read-only staging and hashing. The curation fingerprint still omits
@@ -25,19 +27,22 @@ of 65,536 residues each. Native import, stage GC and the 20 ms private-memory sa
 
 | Native wizard import | Before | Final binary |
 | --- | ---: | ---: |
-| Sampled peak private bytes | 6,661,517,312 | 2,312,404,992 |
-| Elapsed seconds | 215.539 | 6.218 |
+| Sampled peak private bytes | 6,661,517,312 | 2,307,448,832 |
+| Elapsed seconds | 215.539 | 6.969 |
 
-Peak private memory is 65.3% lower. An earlier after run measured 2,303,758,336 bytes and 8.129 seconds.
+Peak private memory is 65.4% lower after the combined-Undo correction. An earlier after run measured
+2,303,758,336 bytes and 8.129 seconds.
 Both runs match the baseline scientific digest exactly:
 `BF94925B030AA6B7C4F72100B34984A40AEFD6B59BD7B72E0223793D0E3F4669`.
 It covers targets, grouping/locks, reference evidence and imported definitions, excluding run-specific
 workbook/package provenance. Every reference and family is checked directly too. All generated large
 scratch runs were verified and removed automatically.
 
-The small fixture measures 6,720 allocated bytes for panel Undo with a large reference table present.
-Session staging falls from 9,036,512 to 641,736 allocated bytes; recipe copying falls from 33,756,992
-to 1,213,720. These thread-allocation measurements are separate from the oversized process-memory
+The correction fixture allocated 6,752 bytes for panel Undo with a large reference table present.
+Session staging fell from 9,036,512 to 1,144,880 allocated bytes; recipe copying fell from 33,756,992
+to 1,818,648. A panel snapshot retaining labels, fingerprints and a recipe with large reference
+sequences allocated 211,040 bytes without copying the source table or immutable sequences. These
+thread-allocation measurements are separate from the oversized process-memory
 measurement. Native Apply/replay/no-op/full Undo checks pass; real-project Apply peak measurement
 belongs to the desk's copy. Results/report memory and report byte parity belong to Z12p5f9.
 
@@ -57,3 +62,8 @@ scratch default remain unchanged. The prefix explicitly does not claim the full 
 `--test-curation-streaming-contract` covers bytes, allocation, copy counts and mutable isolation.
 Native import, manual-family UI and evidence-fetch atomicity commands cover import, Apply/replay,
 complete evidence snapshots and blocked-storage Undo failure/retry.
+
+The editor correction is covered by an actual modal rule edit, native ApplyPanel and combined
+subclass runner followed by one Undo. The full prior curation JSON, labels, recipe and fingerprints
+restore exactly and subclass currentness returns. The regression failed on the initial f8 commit;
+missing-label Undo, repeated detached restores and failed recipe-storage preparation are covered too.

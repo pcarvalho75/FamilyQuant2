@@ -512,16 +512,52 @@ internal static partial class Program
         }
         var combined = Fixture(false); MakeAssignmentsCurrent(combined);
         var combinedScreen = new ClusterGenerationControl(combined);
-        var previous = GroupingSnapshot.CaptureEvidence(combined);
         string priorName = combined.FamilyPanel!.Families[0].DisplayName;
-        combined.FamilyPanel.Families[0].DisplayName = "Edited name";
-        combinedScreen.ViewModel.UndoStack.Add(previous);
+        var changedCombinedPanel = FamilyPanelValidation.Clone(combined.FamilyPanel);
+        changedCombinedPanel.Families[0].DisplayName = "Edited name";
+        combinedScreen.ApplyPanel(changedCombinedPanel);
         bool combinedRan = RunCombined(combinedScreen);
         Check("J3a automatic runner folds subclass recomputation into the caller's Undo", combinedRan
             && combinedScreen.ViewModel.UndoStack.Count == 1 && SubclassAssignment.IsCurrent(combined));
         if (combinedScreen.ViewModel.CanUndo) combinedScreen.ViewModel.Undo();
         Check("J3a one combined Undo restores both prior panel and prior labels", combinedRan
             && combined.FamilyPanel!.Families[0].DisplayName == priorName && combined.ProteinSubclassLabels == null);
+        var editorFile = Fixture(false);
+        editorFile.FamilyPanel!.Families[0].DisplayName = "Fixture family";
+        MakeAssignmentsCurrent(editorFile);
+        var editorHost = new ClusterGenerationControl(editorFile);
+        bool initialLabels = RunRunner(editorHost);
+        editorHost.ViewModel.UndoStack.Clear();
+        string editorBefore = editorFile.ToJsonText();
+        string labelsBefore = JsonSerializer.Serialize(editorFile.ProteinSubclassLabels);
+        var editor = new PanelEditorWindow(editorFile.FamilyPanel, evidenceFile: editorFile)
+        {
+            Left = -30000, Top = -30000, ShowActivated = false, ShowInTaskbar = false,
+            WindowStartupLocation = System.Windows.WindowStartupLocation.Manual,
+        };
+        Exception? editorError = null;
+        editor.Dispatcher.BeginInvoke(new Action(() =>
+        {
+            try
+            {
+                // Remove the previously supported part-a rule through the real editor field.
+                editor.Draft.Families[0].Subclasses = "part-b;fragment";
+                ((System.Windows.Controls.Button)editor.FindName("ApplyButton")).RaiseEvent(
+                    new System.Windows.RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
+                if (editor.Result == null) editor.Close();
+            }
+            catch (Exception error) { editorError = error; editor.Close(); }
+        }));
+        bool editorAccepted = editor.ShowDialog() == true;
+        bool editorApplied = editorAccepted && editor.Result != null && editorHost.ApplyPanel(editor.Result);
+        bool editorRecomputed = editorApplied && RunCombined(editorHost);
+        Check("Z12p5f8 real editor rule edit changes current labels and folds into one Undo", initialLabels && editorError == null
+            && editorRecomputed && SubclassAssignment.IsCurrent(editorFile) && editorHost.ViewModel.UndoStack.Count == 1
+            && JsonSerializer.Serialize(editorFile.ProteinSubclassLabels) != labelsBefore, editorError?.ToString() ?? "");
+        if (editorHost.ViewModel.CanUndo) editorHost.ViewModel.Undo();
+        Check("Z12p5f8 one editor Undo restores exact panel, labels, recipe and fingerprints", editorRecomputed
+            && editorFile.ToJsonText() == editorBefore && JsonSerializer.Serialize(editorFile.ProteinSubclassLabels) == labelsBefore
+            && SubclassAssignment.IsCurrent(editorFile) && editorHost.ViewModel.UndoStack.Count == 0);
         var noCaller = Fixture(false); MakeAssignmentsCurrent(noCaller);
         var noCallerScreen = new ClusterGenerationControl(noCaller);
         Check("J3a combined mode refuses to run without a caller Undo", !RunCombined(noCallerScreen)
