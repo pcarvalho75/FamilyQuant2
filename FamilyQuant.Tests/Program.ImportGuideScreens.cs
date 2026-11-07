@@ -184,6 +184,11 @@ internal static partial class Program
                 model.ReviewingSubclasses && model.Title == "Review subclass proposals" && model.SubclassChoices.All(c => !c.Confirmed)
                 && model.SelectedSubclass.Rules.Any(r => r.Accession == "PF00413") && model.SelectedSubclass.Rules.Any(r => r.Accession == "PF00045"),
                 string.Join("; ", model.SubclassChoices.Select(c => c.Family + "/" + c.Title + " " + string.Join(",", c.Rules.Select(r => r.Accession + " " + r.Kind)))));
+            // Z16a12: the example's absent-domains column gives the polarity, so the two hemopexin subclasses propose opposite rules.
+            Check("guide: Sem hemopexina proposes Hemopexin as Absent Pfam and Com hemopexina as Required Pfam, from the column headings",
+                model.SubclassChoices.Single(c => c.Family == "MMP" && c.Title == "Sem hemopexina").Rules.Single(r => r.Accession == "PF00045").Kind == ImportSubclassRuleKind.AbsentPfam
+                && model.SubclassChoices.Single(c => c.Family == "MMP" && c.Title == "Com hemopexina").Rules.Single(r => r.Accession == "PF00045").Kind == ImportSubclassRuleKind.RequiredPfam,
+                string.Join("; ", model.SubclassChoices.Where(c => c.Family == "MMP").Select(c => c.Title + " " + string.Join(",", c.Rules.Select(r => r.Accession + " " + r.Kind + (r.Use ? "*" : ""))))));
             Shot("05-subclasses");
             model.Back(); PumpDispatcher();
             Check("guide: back on Review your workbook, Accept and import is available once her choices are made",

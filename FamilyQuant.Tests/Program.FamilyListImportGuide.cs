@@ -49,7 +49,10 @@ internal static partial class Program
         Check("the chapter keeps every workbook proposal her choice: legend meanings, her Pfam domains, subclass rules, notes",
             text.Contains("each line is still your choice", StringComparison.Ordinal) && text.Contains("the action is left empty for you to choose", StringComparison.Ordinal)
             && text.Contains("because they are your own statement", StringComparison.Ordinal) && text.Contains("Untick any you do not want", StringComparison.Ordinal)
-            && text.Contains("Nothing becomes a rule until you press Accept and import", StringComparison.Ordinal) && text.Contains("never read as families or as rules", StringComparison.Ordinal));
+            && text.Contains("Nothing becomes a rule until you press Accept and import", StringComparison.Ordinal)
+            // Z16a12: polarity from the column headings, and her check of each rule still asked for.
+            && text.Contains("Whether a domain is required or absent is read from the column headings", StringComparison.Ordinal)
+            && text.Contains("Still check each rule before accepting", StringComparison.Ordinal) && text.Contains("never read as families or as rules", StringComparison.Ordinal));
         var pictured = FamilyListImportGuide.Pictured.ToList();
         var loaded = pictured.Select(s =>
         {
