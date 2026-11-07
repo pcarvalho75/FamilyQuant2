@@ -100,6 +100,7 @@ public partial class ClusterGenerationControl
             evidenceMode: startWithEvidence, confirmPanelLinks: session.ConfirmPanelLinks,
             discoverTaskWithProgress: session.DiscoverTaskAsync, addToFamily: session.AddToFamily,
             removeFromFamily: session.RemoveFromFamily, updateManualChoices: session.UpdateManualChoices, previewScope: session.PreviewScopeAsync) { Owner = owner };
+        if (importedFamilyChecklistRequested) window.RequestFamilyChecklist();
         window.ShowDialog();
         if (!window.Confirmed) return false;
         if (!window.IsEvidenceMode) return true;

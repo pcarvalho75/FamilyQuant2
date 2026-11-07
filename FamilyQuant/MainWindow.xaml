@@ -21,6 +21,8 @@
                           ToolTip="Opens a FamilyQuant project or an older Family Cluster File. Save your current changes first."/>
                 <MenuItem x:Name="MenuItemFamilyPanel" Header="Import family panel" Click="MenuItemFamilyPanel_Click" IsEnabled="False"
                           ToolTip="Import or edit a family panel for the open project."/>
+                <MenuItem x:Name="MenuItemFamilyListTemplate" Header="Save family list template" Click="MenuSaveFamilyListTemplate_Click"
+                          ToolTip="Save an Excel template with the recommended family-list columns and instructions."/>
                 <Separator/>
                 <MenuItem x:Name="MenuItemSaveProject" Header="Save" Command="Save" InputGestureText="Ctrl+S" IsEnabled="False"
                           ToolTip="Saves the open project's families and stored quantitation. Disabled until a project is loaded."/>
