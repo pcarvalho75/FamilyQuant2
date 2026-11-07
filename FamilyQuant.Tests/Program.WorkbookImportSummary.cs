@@ -114,6 +114,7 @@ internal static partial class Program
         }
         WorkbookSummarySelectionTests(root);
         WorkbookSummaryResolutionTests(root);
+        WorkbookSummaryRuleResolutionTests(root);
         Console.WriteLine("Z16a9 synthetic artifacts: " + root);
     }
 
