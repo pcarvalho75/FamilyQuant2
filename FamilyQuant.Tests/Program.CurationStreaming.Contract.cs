@@ -90,6 +90,7 @@ internal static partial class Program
         cancelled.Dispose();
         CurationStreamingEncodingTests(folder);
         CurationStreamingImportCacheTests();
+        CurationStreamingBoundaryTests(Path.Combine(folder, "boundaries"));
     }
 
     private static void CurationStreamingEncodingTests(string folder)
