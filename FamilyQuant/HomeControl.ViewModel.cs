@@ -10,7 +10,9 @@ namespace FamilyQuant;
 public sealed record HomeRecentProject(string Path, string Name, bool Exists)
 {
     public string Availability => Exists ? "" : "File unavailable";
-    public string ToolTip => Exists ? "Opens this recent project: " + Path : "This file is unavailable. Last path: " + Path;
+    public string ToolTip => Exists
+        ? "Reopens this saved project after Save, Discard or Cancel protects current edits. File: " + Path
+        : "Unavailable because the saved file cannot be found; restore it at this path or use Open project to locate it. Last path: " + Path;
 }
 
 /// <summary>One numbered step on Home: its names-table entry, its state and whether its button leads.</summary>

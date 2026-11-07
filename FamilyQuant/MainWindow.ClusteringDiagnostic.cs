@@ -146,9 +146,11 @@ public partial class MainWindow
         if (!ShellDialogs.IsDisplayed(this)) return null;
         int? selected = null;
         var input = new TextBox { Width = 100, HorizontalAlignment = HorizontalAlignment.Left,
-            ToolTip = "Enter a whole-number identity percentage from 1 to 100." };
-        var run = new Button { Content = "Run diagnostic", IsDefault = true, IsEnabled = false };
-        var cancel = new Button { Content = "Cancel", IsCancel = true, Margin = new Thickness(8, 0, 0, 0) };
+            ToolTip = "Sequence identity to examine, as a percentage: starts empty because the saved file has no valid threshold, and accepts whole numbers from 1 to 100. Choosing a threshold does not regroup or save the project." };
+        var run = new Button { Content = "Run diagnostic", IsDefault = true, IsEnabled = false,
+            ToolTip = "Uses this threshold to write separate diagnostic reports from the saved file. Enter a whole-number percentage from 1 to 100 to enable it; Undo does not revert report files." };
+        var cancel = new Button { Content = "Cancel", IsCancel = true, Margin = new Thickness(8, 0, 0, 0),
+            ToolTip = "Closes this question without running the diagnostic or writing reports. The project stays unchanged." };
         var buttons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right,
             Margin = new Thickness(0, 18, 0, 0) };
         buttons.Children.Add(run); buttons.Children.Add(cancel);
