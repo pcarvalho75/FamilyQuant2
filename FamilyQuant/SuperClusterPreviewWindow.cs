@@ -131,7 +131,7 @@ namespace FamilyQuant
                 "Original database description, including OS= text. Keyword matching reads only the description before OS=.",
                 "Stored UniProt Pfam calls for this protein. An empty cell is a missing call, not proof that a domain is absent.",
                 "Whether this protein's description before OS= carries the required entered keyword or phrase under the chosen all/any rule.",
-                "Current document User ID before the reviewed grouping is applied.",
+                "Unchanged document family number before Apply grouping. Reviewing or unticking a protein does not change that family.",
                 "Number of keyword-carrying proteins over the total proteins in this current family. The fraction explains why a family is offered even when this protein carries no keyword."
             };
             for (int i = 0; i < grid.Columns.Count; i++)
