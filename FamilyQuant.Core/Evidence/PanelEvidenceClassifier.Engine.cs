@@ -79,7 +79,9 @@ public static partial class PanelEvidenceClassifier
         };
     }
 
-    public static string DefinitionFingerprint(FamilyPanel panel) => Hash(panel.Families.OrderBy(f => f.Key, StringComparer.Ordinal)
+    // Hand-created rows are not reviewed-source candidates; link stamps use the unextended source panel.
+    public static string DefinitionFingerprint(FamilyPanel panel) => Hash(panel.Families
+        .Where(f => f.SourceDecision != "Added by hand").OrderBy(f => f.Key, StringComparer.Ordinal)
         .Select(f => new { f.Key, f.Decision, f.MergeTargetFamilyKey,
             Domains = f.Pfam.Select(d => d.Accession).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal) }));
 
