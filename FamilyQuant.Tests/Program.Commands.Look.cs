@@ -21,7 +21,11 @@ internal static partial class Program
             EnsureApplication();
             try { GroupingReviewInteractionTests(); }
             catch (Exception ex) { Check("integrated review interactions complete without an unhandled exception", false, ex.ToString()); }
-            ScreenHarness.Verify(Check, workDir);
+            string reviewWork = string.IsNullOrWhiteSpace(workDir)
+                ? Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests", "integrated-review-" + Guid.NewGuid().ToString("N")) : workDir;
+            Directory.CreateDirectory(reviewWork);
+            ScreenHarness.Verify(Check, reviewWork);
+            Console.WriteLine("Review proof: " + reviewWork);
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),
