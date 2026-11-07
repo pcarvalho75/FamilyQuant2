@@ -28,7 +28,7 @@ namespace FamilyQuant
         IReadOnlyList<ReviewArchitectureInput>? Architectures = null, IReadOnlyList<ReviewLeftOutInput>? LeftOut = null,
         string SourceLabel = "", string RuleSummary = "", IReadOnlyList<PanelFamilyLinkProposal>? PanelLinks = null,
         IReadOnlyDictionary<string, string>? PanelNames = null, IReadOnlyDictionary<string, FamilyProfile>? CoherenceProfiles = null,
-        IReadOnlyList<EvidenceManualChoice>? ManualChoices = null);
+        IReadOnlyList<EvidenceManualChoice>? ManualChoices = null, IReadOnlyList<PanelChecklistFamily>? PanelChecklist = null);
     public sealed record EvidenceReviewSelection(string SourceFingerprint, IReadOnlyList<int> ProteinIndices,
         IReadOnlyDictionary<string, string> Names, IReadOnlyList<ReviewArchitectureChoice>? ArchitectureChoices = null,
         string MotifPattern = "", IReadOnlyList<EvidenceProteinOverride>? ProteinOverrides = null, IReadOnlyList<EvidenceManualChoice>? ManualChoices = null);
@@ -116,7 +116,7 @@ namespace FamilyQuant
     }
 
     /// <summary>Selection, naming and display only. The proposal's tiers, reasons and flags are immutable.</summary>
-    public sealed class EvidenceReviewViewModel : ScreenViewModel
+    public sealed partial class EvidenceReviewViewModel : ScreenViewModel
     {
         private readonly Dictionary<string, ReviewFamilyRow> familyByKey;
         private readonly Dictionary<int, ReviewProteinRow> proteinByIndex;
