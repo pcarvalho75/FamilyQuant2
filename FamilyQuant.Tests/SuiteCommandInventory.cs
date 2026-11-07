@@ -8,6 +8,7 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-curation-dispatcher-reclaim", "FamilyQuant.Tests.Program.CurationDispatcherReclaimTests(System.String,System.Boolean)"),
         SuiteCommandRule.Covered("--test-results-document-lifetime", "FamilyQuant.Tests.Program.ResultsDocumentLifetimeTests(System.String)"),
         SuiteCommandRule.Excluded("--proof-results-report-from-project", "Z12p5f9 opt-in native report byte comparison uses only the retained synthetic.fqproj below the worktree mailbox and a fresh owned output folder; never selects real inputs."),
         SuiteCommandRule.Covered("--test-results-export-facts", "FamilyQuant.Tests.Program.RunResultsExportFixture(System.String,System.Boolean)"),

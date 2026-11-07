@@ -13,7 +13,6 @@ public static class CurationReadMemory
         // its freed strings do not keep several document-sized segments committed through export.
         GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
         GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
-        GC.WaitForPendingFinalizers();
         GC.Collect();
     }
 }
