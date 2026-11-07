@@ -226,7 +226,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     {
         Changed(nameof(Page)); Changed(nameof(CanNext)); Changed(nameof(CanBack)); Changed(nameof(ForwardLabel));
         Changed(nameof(CloseLabel)); Changed(nameof(Imported)); Changed(nameof(CanUndo)); Changed(nameof(DisabledReason));
-        Changed(nameof(DraftPanel)); Changed(nameof(Problems)); Changed(nameof(Summary)); Changed(nameof(SummaryFamilies));
+        Changed(nameof(DraftPanel)); Changed(nameof(Problems)); Changed(nameof(Summary)); Changed(nameof(SummaryFamilies)); Changed(nameof(ImportedFamilyCount));
         Changed(nameof(ImportedPanel)); Changed(nameof(CanUseRowChoice)); Changed(nameof(AvailableRowOptions)); Changed(nameof(CanConfirmMatches));
         Changed(nameof(SkipFamilyLabel)); Changed(nameof(SkipAllLabel));
         Changed(nameof(Steps)); Changed(nameof(CanEdit));

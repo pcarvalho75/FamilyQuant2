@@ -64,11 +64,11 @@ public static class FamilyListImportGuide
             "An abbreviation used twice, like the second LEC of the example, can be kept with a new abbreviation (Keep or rename this row, proposed as LEC-2), merged into the family of the first row (Merge into family), or left out (Skip this row).",
             "Empty and decorative rows are skipped and listed with the status Skipped, so no row disappears without a trace.",
         }),
-        new FamilyListImportGuideSection("matches", "5. Evidence matches", "05-evidence-matches.png", "Suggestions for one family from the evidence stored in the project, none ticked until you tick them.", new[]
+        new FamilyListImportGuideSection("matches", "5. Evidence matches", "05-evidence-matches.png", "Suggestions for one family from the evidence stored in the project, ticked only by you.", new[]
         {
             "For each family, FamilyQuant suggests labels from the evidence already stored in this project, such as UniProt families and keywords, that share words with the family's names. Nothing is ticked for you.",
             "Counts are database entries for each suggestion, not abundance; suggestions can overlap and must not be added together.",
-            "Tick the labels that describe the family and press Use selected matches, or press Skip this family. Continue without matches skips matching for every family; you can match later. On a new import of the same list, matches confirmed before show as Kept from previous panel. The wizard never downloads evidence and never assigns proteins.",
+            "Tick the labels that describe the family and press Use selected matches, or press Skip this family. Double-click a stored evidence label to edit it, then tick it and press Use selected matches again; counts refresh for the exact edited value. Continue without matches skips matching for every family; you can match later. On a new import of the same list, matches confirmed before show as Kept from previous panel. The wizard never downloads evidence and never assigns proteins.",
             "A broad label can describe most of the database rather than one family. If a ticked label covers more than half of the database's entries, Use selected matches asks once, naming the count, before it keeps the match.",
         }),
         new FamilyListImportGuideSection("later", "Saving matches later", "", "", new[]

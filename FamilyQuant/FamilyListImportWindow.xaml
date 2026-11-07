@@ -53,11 +53,15 @@
             <ItemsControl ItemsSource="{Binding Steps}" HorizontalContentAlignment="Stretch">
                 <ItemsControl.ItemTemplate><DataTemplate>
                     <Button Content="{Binding}" Tag="{Binding Index}" Click="Step_Click" Style="{StaticResource StepButton}" IsEnabled="{Binding Enabled}"
-                            AutomationProperties.Name="{Binding Label}" ToolTip="{Binding ToolTip}">
-                        <Button.ContentTemplate><DataTemplate><StackPanel>
-                            <TextBlock Text="{Binding Label}" Style="{StaticResource BodyText}"/>
-                            <TextBlock Text="Done" Margin="18,2,0,0" Style="{StaticResource CaptionText}" Visibility="{Binding Done, Converter={StaticResource BoolVisibility}}"/>
-                        </StackPanel></DataTemplate></Button.ContentTemplate>
+                            AutomationProperties.Name="{Binding AccessibleName}" ToolTip="{Binding ToolTip}">
+                        <Button.ContentTemplate><DataTemplate><Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="22"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Number}" Style="{StaticResource BodyText}"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource BodyText}"/>
+                                <TextBlock Text="Done" Style="{StaticResource CaptionText}" Visibility="{Binding Done, Converter={StaticResource BoolVisibility}}"/>
+                            </StackPanel>
+                        </Grid></DataTemplate></Button.ContentTemplate>
                     </Button>
                 </DataTemplate></ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -68,7 +72,7 @@
                 <TextBlock Text="{Binding StepLabel}" Style="{StaticResource CaptionText}"/>
                 <TextBlock x:Name="PageHeading" Text="{Binding Title}" Style="{StaticResource PageTitle}" Focusable="True"
                            AutomationProperties.LiveSetting="Polite" AutomationProperties.Name="{Binding StepLabel}"/>
-                <TextBlock Text="{Binding Explanation}" Style="{StaticResource CaptionText}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding Explanation}"/>
+                <TextBlock Text="{Binding Explanation}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" ToolTip="{Binding Explanation}"/>
             </StackPanel>
             <Grid Grid.Row="1">
                 <Grid IsEnabled="{Binding CanEdit}">
@@ -256,22 +260,22 @@
                                           ToolTip="Lists extra stored-evidence labels whose names may provide less specific support for this family. A tick is only a draft choice until you confirm the matches and import the family list.">
                                     <DataGrid.RowStyle><Style TargetType="DataGridRow"><Setter Property="ToolTip" Value="{Binding Details}"/></Style></DataGrid.RowStyle>
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn Header="Use" Width="55" theme:TableAppearance.HeaderToolTip="Choose extra labels to confirm for this family. New suggestions start unticked and reach the project only when the family list is imported.">
+                                        <DataGridTemplateColumn Header="Use" Width="55" theme:TableAppearance.HeaderToolTip="Select this stored-evidence value for explicit confirmation; new suggestions start unticked. Confirmation stages it in the draft until Import, with protein assignment reviewed separately.">
                                             <DataGridTemplateColumn.CellTemplate><DataTemplate>
                                                 <CheckBox IsChecked="{Binding Use, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"
-                                                          ToolTip="Chooses this extra stored-evidence label for confirmation. It reaches the project only when you confirm the matches and import the family list."/>
+                                                          ToolTip="Select this stored-evidence value for explicit confirmation; new suggestions start unticked. Confirmation stages it in the draft until Import, with protein assignment reviewed separately."/>
                                             </DataTemplate></DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Header="Stored evidence" Width="*" theme:TableAppearance.HeaderToolTip="The exact stored label to use for this family if you confirm it. Editing a draft value refreshes its entry counts before import.">
+                                        <DataGridTemplateColumn Header="Stored evidence" Width="*" theme:TableAppearance.HeaderToolTip="A proposed stored family name, keyword or domain label; starts from stored evidence and accepts nonempty one-line text. Tick and confirm edited values again before Import; counts refresh for the exact edited value.">
                                             <DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Text}" Style="{StaticResource SourceText}"/></DataTemplate></DataGridTemplateColumn.CellTemplate>
                                             <DataGridTemplateColumn.CellEditingTemplate><DataTemplate>
                                                 <TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
-                                                         ToolTip="Stored-evidence label text, initially the suggested value, allowing one nonempty line. Editing updates its entry counts and requires confirming the matches again before import."/>
+                                                         ToolTip="A proposed stored family name, keyword or domain label; starts from stored evidence and accepts nonempty one-line text. Tick and confirm edited values again before Import; counts refresh for the exact edited value."/>
                                             </DataTemplate></DataGridTemplateColumn.CellEditingTemplate>
                                         </DataGridTemplateColumn>
-                                        <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="120" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="The stored evidence kind, such as UniProt family, Pfam domain, keyword or tissue phrase. Reading it changes nothing."/>
-                                        <DataGridTextColumn Header="Proteins" Binding="{Binding Proteins}" Width="85" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Distinct database target entries covered by this exact label. Overlapping suggestions are not added together."/>
-                                        <DataGridTextColumn Header="Reviewed" Binding="{Binding Reviewed}" Width="85" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Database target entries covered by this label that are marked reviewed in stored evidence. Reading the count changes nothing."/>
+                                        <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="120" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="The source kind of this stored-evidence label, such as family name, keyword or domain; read only and retained with confirmed choices." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
+                                        <DataGridTextColumn Header="Proteins" Binding="{Binding Proteins}" Width="85" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Distinct target database entries covered by this exact label; read only, and overlapping suggestion counts must not be added." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
+                                        <DataGridTextColumn Header="Reviewed" Binding="{Binding Reviewed}" Width="85" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Covered database target entries marked reviewed in stored UniProt evidence; these are part of Proteins, never an additional count." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Expander>
@@ -290,10 +294,10 @@
                         <TextBlock Text="{Binding PreviousPanel, StringFormat=Current panel to replace: {0}}" Style="{StaticResource CaptionText}"/>
                         <TextBlock Text="{Binding MatchingChangeNotice}" Style="{StaticResource CaptionText}" TextWrapping="Wrap"/>
                     </StackPanel>
-                    <DataGrid x:Name="SummaryGrid" Grid.Row="1" ItemsSource="{Binding SummaryFamilies}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" AutomationProperties.Name="Families that will be imported" ToolTip="Shows the exact families, actions, source categories and matching choices in the reviewed list. This table is read only; Import makes one project edit and Undo restores the prior list.">
+                    <DataGrid x:Name="SummaryGrid" Grid.Row="1" ItemsSource="{Binding SummaryFamilies}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" SizeChanged="SummaryGrid_SizeChanged" AutomationProperties.Name="Families that will be imported" ToolTip="Shows the exact families, actions, source categories and matching choices in the reviewed list. This table is read only; Import makes one project edit and Undo restores the prior list.">
                         <DataGrid.Columns><DataGridTextColumn Header="Abbreviation" Binding="{Binding Key}" Width="110" theme:TableAppearance.HeaderToolTip="The stable abbreviation kept for this family; read only here. Split abbreviations were set on the Special rows page and stay in the draft until Import." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
-                            <DataGridTemplateColumn Header="Family name" Width="2*" theme:TableAppearance.HeaderToolTip="The family name kept for this family; read only here. A split name was set on the Special rows page and stays in the draft until Import."><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Name}" Style="{StaticResource SourceText}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="Other-language name" Width="2*" theme:TableAppearance.HeaderToolTip="Names retained under their original spreadsheet headers; read only and never used as measured values."><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding OtherName}" Style="{StaticResource SourceText}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Family name" Width="2*" theme:TableAppearance.HeaderToolTip="The family name kept for this family; read only here. A split name was set on the Special rows page and stays in the draft until Import."><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Name}" Style="{StaticResource SourceText}" VerticalAlignment="Center"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Other-language name" Width="2*" theme:TableAppearance.HeaderToolTip="Names retained under their original spreadsheet headers; read only and never used as measured values."><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding OtherName}" Style="{StaticResource SourceText}" VerticalAlignment="Center"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
                             <DataGridTextColumn Header="Decision" Binding="{Binding Decision}" Width="145" theme:TableAppearance.HeaderToolTip="The reviewed action retained for this imported family; read only, with the original source label available in source notes." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
                             <DataGridTextColumn Header="Colour" Binding="{Binding Color}" Width="130" theme:TableAppearance.HeaderToolTip="The optional source-fill category retained as text for this family; read only, with no grouping or quantitation rule inferred." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
                             <DataGridTextColumn Header="Matches" Binding="{Binding Matches}" Width="120" theme:TableAppearance.HeaderToolTip="The explicit evidence-matching choice for this family; read only, and protein membership still requires Family checklist review." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
@@ -305,13 +309,13 @@
                 <Grid>
                     <Grid.Style><Style TargetType="Grid" BasedOn="{StaticResource WizardPage}"><Style.Triggers><DataTrigger Binding="{Binding Page}" Value="6"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Grid.Style>
                     <StackPanel><Border Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="1" Padding="{DynamicResource PanelPadding}">
-                        <StackPanel><TextBlock Text="{Binding ImportedPanel.Families.Count, StringFormat={}{0:N0} families imported}" Style="{StaticResource SectionTitle}"/>
+                        <StackPanel><TextBlock Text="{Binding ImportedFamilyCount}" Style="{StaticResource SectionTitle}" TextWrapping="Wrap"/>
                             <TextBlock Text="{Binding PanelName, StringFormat=Panel: {0}}" Style="{StaticResource BodyText}" Margin="0,10,0,4"/>
                             <TextBlock Text="Workbook unchanged" Style="{StaticResource BodyText}" Margin="0,0,0,4"/>
                             <TextBlock Text="Protein grouping unchanged" Style="{StaticResource BodyText}" Margin="0,0,0,4"/>
                             <TextBlock Text="Project not saved yet" Style="{StaticResource BodyText}"/>
                             <TextBlock x:Name="MatchingEffectNote" Text="{x:Static local:FamilyListImportHelp.MatchingEffect}" Style="{StaticResource CaptionText}" Margin="0,12,0,0"
-                                       TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{x:Static local:FamilyListImportHelp.MatchingEffect}"/>
+                                       TextWrapping="Wrap" ToolTip="{x:Static local:FamilyListImportHelp.MatchingEffect}"/>
                         </StackPanel>
                     </Border><Button x:Name="UndoImportButton" Content="Undo import" Click="Undo_Click" IsEnabled="{Binding CanUndo}" HorizontalAlignment="Left" Margin="0,12,0,0"
                                      ToolTip="Restores the list and project state from immediately before this import in one Undo step. Available only while this import is the current unchanged Undo step."/></StackPanel>

@@ -143,6 +143,9 @@ public sealed record ImportRowOption(string Label, FamilyPanelRowAction Value);
 public sealed record ImportSummaryFamily(string Key, string Name, string OtherName, string Decision, string Matches, string Notes, string Color);
 public sealed record ImportWizardStep(int Index, string Label, bool Done, bool Current, bool Enabled)
 {
+    public string Number => (Index + 1).ToString(CultureInfo.CurrentCulture);
+    public string Name => Label.StartsWith(Number + "   ", StringComparison.Ordinal) ? Label[(Number.Length + 3)..] : Label;
+    public string AccessibleName => Done ? Label + " (Done)" : Label;
     public string ToolTip => !Enabled ? "This step is unavailable until you reach it, while a read is running, or after the list is imported; finish the current page to continue."
         : Current ? "This is the current wizard step; choosing it keeps your draft and project unchanged."
         : "Returns to this completed step without losing your choices; the project changes only when you choose Import.";

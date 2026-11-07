@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace FamilyQuant;
 
@@ -20,10 +21,18 @@ public partial class FamilyListImportWindow : Window
     public bool EditPanelRequested { get; private set; }
     public Func<string, bool>? BroadMatchConfirmationOverride { get; set; }
     private readonly Action<string>? exampleWriter, templateWriter;
-    private bool closing, loadingSheets;
+    private bool closing, loadingSheets, fittingSummaryRows;
+    private double summaryFitParentHeight;
     public FamilyListImportWindow(FamilyListImportViewModel model, Action<string>? exampleWriter = null, Action<string>? templateWriter = null)
     {
         InitializeComponent(); Model = model; DataContext = model;
+        AlignSummaryCells();
+        SizeChanged += (_, _) => FitSummaryRows();
+        model.PropertyChanged += (_, args) =>
+        {
+            if (args.PropertyName == nameof(FamilyListImportViewModel.Page))
+            { summaryFitParentHeight = 0; if (model.Page == 5) Dispatcher.BeginInvoke(FitSummaryRows); }
+        };
         this.exampleWriter = exampleWriter; this.templateWriter = templateWriter;
         ExampleButton.IsEnabled = exampleWriter != null;
         if (exampleWriter == null) ExampleButton.ToolTip = "Unavailable because this window was opened without an example writer; open File > Import family list to use the built-in example. Nothing changes in the project or workbook.";
@@ -193,6 +202,61 @@ public partial class FamilyListImportWindow : Window
     }
     private void Help_Click(object sender, RoutedEventArgs e) => ShowHelp();
     private void ShowHelp() => FamilyListImportGuideWindow.Show(this);
+
+    private void AlignSummaryCells()
+    {
+        var summaryText = new Style(typeof(TextBlock), (Style)FindResource("WizardCellText"));
+        summaryText.Setters.Add(new Setter(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center));
+        foreach (var column in SummaryGrid.Columns.OfType<DataGridTextColumn>()) column.ElementStyle = summaryText;
+    }
+
+    private void SummaryGrid_SizeChanged(object sender, SizeChangedEventArgs e) => FitSummaryRows();
+
+    private void FitSummaryRows()
+    {
+        if (fittingSummaryRows || Model?.Page != 5 || SummaryGrid.Parent is not FrameworkElement parent) return;
+        double parentHeight = parent.ActualHeight;
+        if (parentHeight <= 0 || (Math.Abs(parentHeight - summaryFitParentHeight) < 0.5 && !double.IsNaN(SummaryGrid.MaxHeight))) return;
+        fittingSummaryRows = true;
+        try
+        {
+            SummaryGrid.ClearValue(MaxHeightProperty);
+            SummaryGrid.UpdateLayout();
+            double limit = SummaryGrid.ActualHeight;
+            if (limit <= 0) return;
+            var scroll = FindDescendant<ScrollViewer>(SummaryGrid);
+            if (scroll != null && scroll.ComputedHorizontalScrollBarVisibility == Visibility.Visible)
+                limit -= SystemParameters.HorizontalScrollBarHeight;
+            double lastFull = 0;
+            for (int index = 0; index < SummaryGrid.Items.Count; index++)
+            {
+                if (SummaryGrid.ItemContainerGenerator.ContainerFromIndex(index) is not DataGridRow row || row.ActualHeight <= 0) continue;
+                double bottom;
+                try { bottom = row.TransformToAncestor(SummaryGrid).Transform(new Point(0, row.ActualHeight)).Y; }
+                catch (InvalidOperationException) { break; }
+                if (bottom <= limit + 0.5) lastFull = bottom;
+                else break;
+            }
+            if (lastFull <= 0) return;
+            summaryFitParentHeight = parentHeight;
+            if (lastFull < SummaryGrid.ActualHeight - 1)
+                SummaryGrid.MaxHeight = lastFull + SummaryGrid.BorderThickness.Bottom;
+        }
+        finally { fittingSummaryRows = false; }
+    }
+
+    private static T? FindDescendant<T>(DependencyObject root) where T : DependencyObject
+    {
+        int count = VisualTreeHelper.GetChildrenCount(root);
+        for (int index = 0; index < count; index++)
+        {
+            var child = VisualTreeHelper.GetChild(root, index);
+            if (child is T found) return found;
+            var nested = FindDescendant<T>(child);
+            if (nested != null) return nested;
+        }
+        return null;
+    }
 
     private void CommitGridEdits()
     {
