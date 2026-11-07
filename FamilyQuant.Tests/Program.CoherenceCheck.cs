@@ -78,9 +78,10 @@ namespace FamilyQuant.Tests
                 && Codes(CoherenceProtein("tr|A0A308|X", 500, 40, false, 3, "PF00009"), "Gamma family") == "");
             List<CoherenceFlag> flags = CoherenceCheck.Check(alpha, CoherenceProtein("tr|A0A302|X", 130, 12, false, 2, "PF00009"));
             Check("each flag gives the protein's value and what the reviewed members show",
-                flags[0].Message == "130 aa, longer than any reviewed Alpha family member (100 to 109 aa in 10 complete reviewed members)"
-                && flags[2].Message == "2 transmembrane helices, more than any complete reviewed Alpha family member (at most 0 in 10)"
-                && flags[3].Message == "carries NamePF00009 (PF00009), which no reviewed Alpha family member carries (11 members)",
+                flags[0].Message.Contains("130 amino acids", StringComparison.Ordinal) && flags[0].Message.Contains("100 to 109 amino acids", StringComparison.Ordinal)
+                && flags[0].Message.Contains("10 members: source counts not recorded", StringComparison.Ordinal)
+                && flags[2].Message.Contains("2 transmembrane helices", StringComparison.Ordinal) && flags[2].Message.Contains("at most 0", StringComparison.Ordinal)
+                && flags[3].Message.Contains("NamePF00009 (PF00009)", StringComparison.Ordinal) && flags[3].Message.Contains("11 members: source counts not recorded", StringComparison.Ordinal),
                 string.Join(" | ", flags.Select(f => f.Message)));
             var partial = Enumerable.Range(0, 12).Select(i => (new string('A', 30), new ProteinEvidence
             {

@@ -276,6 +276,7 @@ namespace FamilyQuant
             sb.AppendLine("before opening the review; Cancel leaves the project unchanged. If no reviewed accession");
             sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");
             sb.AppendLine("Cancelling leaves the open grouping unchanged and adds no Undo step.");
+            sb.AppendLine(EvidenceScopeHelp.Build());
             sb.AppendLine();
             sb.AppendLine("In Review grouping and the Curate families protein table, right-click to copy a UniProt code or");
             sb.AppendLine("description or to open its UniProt page. Ctrl+C copies the column you clicked, for");

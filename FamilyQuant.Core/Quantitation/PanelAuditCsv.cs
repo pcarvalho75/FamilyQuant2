@@ -94,9 +94,7 @@ namespace FamilyQuant
                     {
                         string name = file.FamilyPanel!.Families.Single(f => f.Key == ownFamily).DisplayName;
                         if (string.IsNullOrWhiteSpace(name)) name = ownFamily;
-                        familyReason = "The protein's own source family maps to panel family " + name
-                            + ", but its keywords and tissue annotations do not match the user scope phrases: "
-                            + string.Join("; ", scope!.Select(term => "\"" + term + "\"")) + ". " + familyReason;
+                        familyReason = ExplainScopeExclusion(evidence, scope!, name, familyReason);
                     }
                 }
                 Append(FamilyNaming.Accession(item.SequenceIdentifier), ProteinNameFormatting.ForNewOutput(item.Description),
@@ -106,6 +104,16 @@ namespace FamilyQuant
                         : label?.Reason ?? (subclassCurrent ? "" : "Subclass labels are unavailable or out of date."), string.Join(" | ", recorded));
             }
             return csv.ToString();
+        }
+
+        public static string ExplainScopeExclusion(Evidence.ProteinEvidence? evidence, IReadOnlyList<string> scope,
+            string? mappedFamilyName, string reason)
+        {
+            if (EvidenceClassifier.IsInScope(evidence, scope)) return reason;
+            string prefix = mappedFamilyName == null ? "The protein's keywords and tissue annotations do not match the user scope phrases: "
+                : "The protein's own source family maps to panel family " + mappedFamilyName
+                    + ", but its keywords and tissue annotations do not match the user scope phrases: ";
+            return prefix + string.Join("; ", scope.Select(term => "\"" + term + "\"")) + ". " + reason;
         }
 
         private static PanelFamilyAuditEvidence ToAuditEvidence(PanelProteinAssignment assignment)

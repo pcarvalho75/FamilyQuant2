@@ -13,15 +13,60 @@ namespace FamilyQuant
     /// </summary>
     public static class EvidenceHelp
     {
+        public const string ScopeExpansionHint = "Add to scope or use Group by words > Group by keywords. Left-out proteins keep their families for Quantify.";
+        public const string DatabaseEntryCountDefinition = "Database entries counted are target FASTA records after excluding contaminants and decoys.";
+        public const string ContaminantCountDefinition = "Contaminants excluded counts target records carrying the database contaminant prefix. Decoys are removed before this count.";
+        public const string KeywordCountExplanation = "One protein can carry several keywords, so keyword rows are not summed. These are reviewed-entry counts, not abundance.";
+        public const string CountDefinitionsHelp = "DATABASE COUNTS\n" + DatabaseEntryCountDefinition + "\n"
+            + ContaminantCountDefinition + "\nKeyword rows count distinct reviewed accessions, once per keyword.\n" + KeywordCountExplanation;
+        public const string ReviewCountHelp = """
+            REVIEWED STATUS AND FASTA PREFIXES
+            Reviewed in UniProt counts distinct matching accessions marked reviewed in the
+            stored fetched evidence. The displayed release comes from that evidence. Marked
+            sp in the FASTA counts target FASTA records with an sp prefix, after contaminants
+            and decoys are excluded. That prefix records the database download's status.
+            UniProt can change a record's reviewed status in a later release. The tooltip
+            lists tr accessions now reviewed and sp accessions now unreviewed, with unresolved
+            sp records and repeated or isoform headers listed separately when present.
+
+            An accession merged into another entry can return unresolved. It contributes no
+            reviewed UniProt accession. An unresolved entry still marked tr in the FASTA
+            contributes to neither displayed reviewed count. Raw sp headers remain part of
+            the FASTA-prefix count, and repeated/isoform headers can exceed the distinct
+            reviewed-accession count.
+            """;
+        public const string ScopeExpansionHelp = """
+            EXTENDING THE SCOPE
+            The suggested scope is a starting point. To include more proteins, select their
+            keyword rows and choose Add to scope, or double-click a keyword row. You can also
+            type a keyword or tissue phrase in quotes. Choose Update proposal, review the
+            family and protein selections, then choose Apply grouping.
+
+            For manual family construction, open Curate families and use Group by words >
+            Group by keywords. Enter description words and review the protein ticks before
+            Apply grouping. You can keep only part of an existing family in the selection.
+
+            Proteins left out keep the families they had before the evidence proposal,
+            including their step 1 families from Build families. Quantify uses those current
+            family assignments too.
+            """;
         public static string Build(LeaveOneOutResult? validation = null, IReadOnlyList<RouteScore>? routes = null,
             string? routeFamily = null, bool panelMode = false)
         {
-            if (panelMode) return PanelEvidenceHelp.Build();
+            if (panelMode) return ScopeExpansionHelp + "\n\n" + CountDefinitionsHelp + "\n\n" + ReviewCountHelp + "\n\n" + PanelEvidenceHelp.Build();
             var options = new EvidenceClassificationOptions();
             var sb = new StringBuilder();
             sb.AppendLine("GROUPING BY EVIDENCE");
             sb.AppendLine("====================");
             sb.AppendLine();
+            sb.AppendLine(ScopeExpansionHelp);
+            sb.AppendLine();
+            sb.AppendLine(CountDefinitionsHelp);
+            sb.AppendLine();
+            sb.AppendLine(ReviewCountHelp);
+            sb.AppendLine();
+            sb.AppendLine(EvidenceScopeHelp.Build());
+            sb.AppendLine(EvidenceReviewTerms.Text);
             sb.AppendLine("Each protein is placed in a family by what UniProt's curators and its own sequence");
             sb.AppendLine("say, never by the words in its name. Each one gets a family, a tier and a reason.");
             sb.AppendLine();
@@ -94,8 +139,8 @@ namespace FamilyQuant
             sb.AppendLine();
 
             sb.AppendLine("WHAT IT DOES NOT DO");
-            sb.AppendLine("- A short fragment with no domain call and none of your words stays unassigned and flagged:");
-            sb.AppendLine("  identity over a few dozen residues does not decide a family.");
+            sb.AppendLine("- Without qualifying evidence, a protein stays unassigned; a warning flag appears only when the analysis supplies one.");
+            sb.AppendLine("  A short sequence match alone does not decide a family.");
             sb.AppendLine("- Two kinds of protein that differ only in their names cannot be told apart. They are");
             sb.AppendLine("  listed for you rather than guessed.");
             return sb.ToString();

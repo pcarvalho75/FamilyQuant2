@@ -22,5 +22,7 @@ namespace FamilyQuant.Evidence
         // This provenance describes the latest fetch; unresolved entries keep their own earlier source.
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? UnresolvedAccessions { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Dictionary<string, string>? UnresolvedReasons { get; set; }
     }
 }

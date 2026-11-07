@@ -11,6 +11,7 @@
              d:DesignHeight="450" d:DesignWidth="1024">
     <UserControl.Resources>
         <local:AccessionTextConverter x:Key="AccessionText"/>
+        <local:CurationDomainPreviewConverter x:Key="DomainPreviewText"/>
         <Style x:Key="FamilyNumberText" TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
@@ -82,7 +83,14 @@
                         <DataGridTextColumn x:Name="ColumnUserAnnotation" CanUserReorder="True" CanUserResize="True" CanUserSort="True"
                                             Header="User Annotation" Width="150" MinWidth="150" Binding="{Binding Path=UserAnnotation, Mode=TwoWay}"/>
                         <DataGridTextColumn x:Name="ColumnDomains" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="Domains" Width="170" MinWidth="170" Binding="{Binding Path=Domains}"/>
+                                            Header="Domains" Width="170" MinWidth="170" SortMemberPath="Domains">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding Converter="{StaticResource DomainPreviewText}" Mode="OneWay">
+                                    <Binding/>
+                                    <Binding Path="DataContext.DomainPreview" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}"/>
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
                         <DataGridTextColumn x:Name="ColumnMass" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
                                             Header="Residue mass (Da)" Width="110" MinWidth="110" Binding="{Binding Path=MonoisotopicMass, StringFormat=N3}"/>
                     </DataGrid.Columns>

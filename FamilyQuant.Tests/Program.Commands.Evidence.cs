@@ -47,6 +47,90 @@ internal static partial class Program
         new("--evidence-task-header-audit", 65, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--evidence-task-header-audit", (args, _) => EvidenceTaskHeaderAuditCommand(args)),
         new("--test-evidence-task", 70, TestCommandPhase.Raw, EvidenceTaskTestsRequested, RunEvidenceTaskTests),
+        new("--test-evidence-family-reuse", 70, TestCommandPhase.Raw, args => args.Contains("--test-evidence-family-reuse", StringComparer.Ordinal), (_, _) =>
+        {
+            EvidenceFamilyReuseTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-taxa-entry-counts", 70, TestCommandPhase.Raw, args => args.Contains("--test-taxa-entry-counts", StringComparer.Ordinal), (_, _) =>
+        {
+            TaxaEntryCountTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-task-taxa-clipboard", 70, TestCommandPhase.Raw, args => args.Contains("--test-task-taxa-clipboard", StringComparer.Ordinal), (_, _) =>
+        {
+            TaskTaxaClipboardTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-keyword-categories", 70, TestCommandPhase.Raw, args => args.Contains("--test-keyword-categories", StringComparer.Ordinal), (_, _) =>
+        {
+            KeywordCategoryTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-keyword-category-filter", 70, TestCommandPhase.Raw, args => args.Contains("--test-keyword-category-filter", StringComparer.Ordinal), (_, _) =>
+        {
+            KeywordCategoryFilterTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-add-keyword-scope", 70, TestCommandPhase.Raw, args => args.Contains("--test-add-keyword-scope", StringComparer.Ordinal), (_, _) =>
+        {
+            AddKeywordScopeTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-scope-expansion-help", 70, TestCommandPhase.Raw, args => args.Contains("--test-scope-expansion-help", StringComparer.Ordinal), (_, _) =>
+        {
+            ScopeExpansionHelpTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-scope-reachability", 70, TestCommandPhase.Raw, args => args.Contains("--test-scope-reachability", StringComparer.Ordinal), (_, _) =>
+        {
+            ScopeReachabilityTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-scope-count-wording", 70, TestCommandPhase.Raw, args => args.Contains("--test-scope-count-wording", StringComparer.Ordinal), (_, _) =>
+        {
+            ScopeCountWordingTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-reviewed-header-counts", 70, TestCommandPhase.Raw, args => args.Contains("--test-reviewed-header-counts", StringComparer.Ordinal), (_, _) =>
+        {
+            ReviewedHeaderCountTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-organism-evidence", 70, TestCommandPhase.Raw, args => args.Contains("--test-organism-evidence", StringComparer.Ordinal), (_, _) =>
+        {
+            OrganismEvidenceTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-scope-change-preview", 70, TestCommandPhase.Raw, args => args.Contains("--test-scope-change-preview", StringComparer.Ordinal), (args, _) =>
+        {
+            ScopeChangePreviewTests(args.Length == 2 ? args[1] : Path.Combine(Path.GetTempPath(), "FamilyQuant.ScopePreview"));
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-smart-fetch-retry", 70, TestCommandPhase.Raw, args => args.Contains("--test-smart-fetch-retry", StringComparer.Ordinal), (_, _) =>
+        {
+            SmartFetchRetryTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
+        new("--test-domains-first", 70, TestCommandPhase.Raw, args => args.Contains("--test-domains-first", StringComparer.Ordinal), (args, _) =>
+        {
+            DomainsFirstTests(args.Length == 2 ? args[1] : Path.Combine(Path.GetTempPath(), "FamilyQuant.DomainsFirst"));
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
         new("--test-taxonomy-batches", 70, TestCommandPhase.Raw, args => args.Contains("--test-taxonomy-batches", StringComparer.Ordinal), (_, workDir) =>
         {
             TaxonomyBatchTests(Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests"));

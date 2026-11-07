@@ -158,7 +158,7 @@ namespace FamilyQuant
         }
 
         /// <summary>A blank selection empties the clipboard, so the next paste cannot be the previous protein's.</summary>
-        private static void ToClipboard(string text, DependencyObject origin)
+        public static void ToClipboard(string text, DependencyObject origin)
         {
             if (ClipboardOverride != null) { ClipboardOverride(text); return; }
 

@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,14 +15,24 @@ namespace FamilyQuant.Evidence;
 internal sealed class UniProtBatchCache
 {
     private const string ReleaseUrl = "https://rest.uniprot.org/uniprotkb/search?format=json&size=0&fields=accession&query=*";
-    private sealed record Manifest(string? Scope, string Release, DateTimeOffset RetrievedAtUtc);
+    private sealed record Manifest(string? Scope, string Release, DateTimeOffset RetrievedAtUtc, List<string>? SplitQueries = null);
     internal sealed record Batch(string Query, string Release, string Json, int? Announced, string Sha256, string? Scope = null);
     private readonly string directory;
-    private readonly Manifest manifest;
+    private Manifest manifest;
     private readonly string? legacyDirectory;
     private bool disabled;
     internal string Release => manifest.Release;
     internal DateTimeOffset RetrievedAtUtc => manifest.RetrievedAtUtc;
+
+    internal bool WasSplit(string query) => manifest.SplitQueries?.Contains(query, StringComparer.Ordinal) == true;
+
+    internal async Task MarkSplitAsync(string query, CancellationToken token)
+    {
+        if (disabled || WasSplit(query)) return;
+        manifest = manifest with { SplitQueries = (manifest.SplitQueries ?? new List<string>()).Append(query).OrderBy(value => value, StringComparer.Ordinal).ToList() };
+        try { await WriteAsync(Path.Combine(directory, "m-" + manifest.Scope![..24] + ".json"), manifest, token).ConfigureAwait(false); }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException) { disabled = true; }
+    }
 
     private UniProtBatchCache(string directory, Manifest manifest, string? legacyDirectory)
     { this.directory = directory; this.manifest = manifest; this.legacyDirectory = legacyDirectory; }

@@ -28,7 +28,8 @@ namespace FamilyQuant.Tests
         internal static readonly string[] Screens = {
             "01-home", "02-build", "03-curation", "04-curation-browser", "05-denovo",
             "06-denovo-advanced", "07-analytics", "08-compute", "09-super-cluster-preview",
-            "10-lock-manager", "11-spectrum-table", "12-identity-scan", "13-text-report", "14-help"
+            "10-lock-manager", "11-spectrum-table", "12-identity-scan", "13-text-report", "14-help",
+            "15-evidence-scope", "16-evidence-architecture"
         };
         private static readonly (int Width, int Height)[] Sizes = { (1366, 820), (1024, 768) };
         private static string[] ThemeNames(string[] args) => args.Contains("--screen-system", StringComparer.OrdinalIgnoreCase)
@@ -176,6 +177,13 @@ namespace FamilyQuant.Tests
                         window.Width = size.Width;
                         window.Height = size.Height;
                         Pump();
+                        if (window is SuperClusterPreviewWindow review && name == "15-evidence-scope")
+                        {
+                            EvidenceScopeScroller(review).ScrollToBottom(); Pump();
+                        }
+                        if (window is SuperClusterPreviewWindow architectureReview && name == "16-evidence-architecture"
+                            && !Program.ReviewArchitectureFits(architectureReview))
+                            throw new InvalidOperationException("Architecture tables are squashed or clipped at " + size.Width + "x" + size.Height);
                         if (!string.Equals(Themes.ThemeManager.Current.ToString(), theme, StringComparison.OrdinalIgnoreCase))
                             throw new InvalidOperationException("The selected theme changed during capture: " + theme);
                         Save(window, path, size.Width, size.Height);
@@ -266,6 +274,7 @@ namespace FamilyQuant.Tests
                 var preview = new SuperClusterPreview(source.MyExtendedFastaItems, null,
                     PreviewWord(source), "", KeywordMatch.Any, null, source.LockedUserIds);
                 Secondary(Screens[8], new SuperClusterPreviewWindow(preview));
+                if (!finish) CaptureEvidenceReview(Secondary);
                 Secondary(Screens[9], new LockManagerWindow(projectFile));
                 Secondary(Screens[10], SpectrumComparisonWindow.Create(manifest.SpectrumComparisonRows));
                 List<IdentityScanRow> sweep = manifest.PresentationIdentitySweep ?? new List<IdentityScanRow>();

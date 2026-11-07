@@ -20,6 +20,10 @@ namespace FamilyQuant.Evidence
         public string Accession { get; set; } = string.Empty;
         public string Sequence { get; set; } = string.Empty;
         public ProteinEvidence Evidence { get; set; } = new ProteinEvidence();
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? OrganismName { get => Evidence?.OrganismName; set => (Evidence ??= new ProteinEvidence()).OrganismName = value; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? TaxonId { get => Evidence?.TaxonId; set => (Evidence ??= new ProteinEvidence()).TaxonId = value; }
     }
 
     /// <summary>The reviewed proteins of the families found in the file, from every taxon, kept with the
@@ -53,7 +57,7 @@ namespace FamilyQuant.Evidence
     public static partial class ReferencePanelFetcher
     {
         private const string Endpoint = "https://rest.uniprot.org/uniprotkb/search?format=json&size=500&fields="
-            + "accession,reviewed,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence&query=";
+            + "accession,reviewed,organism_name,organism_id,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence&query=";
         private const int Attempts = 5;
 
         /// <summary>Every family named by a target's evidence, optionally only those of targets in a scope
