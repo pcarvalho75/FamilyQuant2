@@ -103,6 +103,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => CurationFormat2Tests(Path.Combine(workDir, "curation-format2")));
             suite.AddWithApplication(() => RecipeCopiesTests(Path.Combine(workDir, "recipe-copies")));
             suite.Add(() => FeatureProvenanceFormatTests(Path.Combine(workDir, "feature-provenance")));
+            suite.Add(() => PanelEntryIdentityFormatTests(Path.Combine(workDir, "panel-entry-identity")));
+            suite.Add(() => CurationFormat2CompositionTests(Path.Combine(workDir, "curation-format2-composition")));
             suite.AddWithApplication(() => CurationStreamingContractTests(Path.Combine(workDir, "curation-streaming-contract")));
             suite.Add(() => JsonStreamCopyTests());
             suite.Add(() => CompactCurationTests(Path.Combine(workDir, "compact-curation")));
@@ -129,7 +131,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => DatabaseGapLengthTests(Path.Combine(workDir, "database-gap-lengths")));
             suite.Add(() => ResultsPreservationTests(Path.Combine(workDir, "results-preservation")));
             suite.Add(() => ResultsTooltipTests());
-            suite.Add(() => ResultsExportFactTests(Path.Combine(workDir, "results-export-facts")));
+            suite.Add(() => Check("native Results export fixture propagates its worker exit status",
+                RunResultsExportFixture(Path.Combine(workDir, "results-export-facts")) == 0));
             suite.Add(() => DeNovoViewModelTests(workDir));
             suite.Add(() => HomologyResultsTests(workDir));
             suite.Section("Database parsing and the decoy tag");
@@ -187,6 +190,8 @@ namespace FamilyQuant.Tests
             suite.Section("Project store (Q2) - .fqproj container round trip, migration and structure");
             suite.Add(() => ProjectFormatStageTests());
             suite.Add(() => ProjectStoreTests(workDir));
+            suite.Add(() => ReferencePanelLegacyTests(Path.Combine(workDir, "reference-panel-legacy")));
+            suite.Add(() => ReferencePanelSecondDatabaseTests(Path.Combine(workDir, "reference-panel-second")));
             suite.Add(() => GoldenNumberGuardTests());
             suite.Section("Talk export routing - one override root for heavy and fast lanes");
             suite.Add(() => TalkOutputRootTests(workDir));
@@ -267,6 +272,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => PanelChecklistActionsTests(Path.Combine(workDir, "panel-checklist-actions")));
             suite.Add(() => PanelEvidenceMatchingTests());
             suite.Add(() => PanelEvidenceRankingTests());
+            suite.AddWithApplication(() => SheetPfamMatchTests(Path.Combine(workDir, "sheet-pfam-matches")));
             suite.Add(() => PanelEvidenceFingerprintTests());
             suite.AddWithApplication(() => PanelEvidenceBroadTests(Path.Combine(workDir, "panel-evidence-broad")));
             suite.AddWithApplication(() => EmptyPanelChecklistTests(Path.Combine(workDir, "empty-panel-checklist")));
@@ -294,9 +300,9 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelImportTemplateTests(Path.Combine(workDir, "panel-import-template")));
             suite.Add(() => PanelImportExampleTests(Path.Combine(workDir, "panel-import-example")));
             suite.Add(() => PanelWorkbookMapTests(Path.Combine(workDir, "panel-workbook-map")));
-            suite.AddWithApplication(() => PanelWorkbookNotesTests());
             suite.Add(() => PanelWorkbookLegendTests(Path.Combine(workDir, "panel-workbook-legend")));
             suite.Add(() => PanelSubclassImportTests(Path.Combine(workDir, "panel-subclass-import")));
+            suite.AddWithApplication(() => PanelWorkbookNotesTests());
             suite.AddWithApplication(() => ToolTipStyleTests());
             suite.AddWithApplication(() => ToolTipCheckTests());
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
@@ -369,6 +375,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReferencePanelTests(workDir));
             suite.Add(() => ReferencePanelStreamTests());
             suite.Add(() => ReferencePanelScopeTests(Path.Combine(workDir, "reference-panel-scope")));
+            suite.AddWithApplication(() => ReferencePanelScopeRouteTests());
             suite.AddWithApplication(() => ReferencePanelScopeUiTests(Path.Combine(workDir, "reference-panel-scope-ui")));
             suite.Add(() => ReferencePanelExpansionTests(Path.Combine(workDir, "reference-panel-expansion")));
             suite.AddWithApplication(() => ReferencePanelExpansionUiTests(Path.Combine(workDir, "reference-panel-expansion-ui")));
@@ -480,6 +487,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => HtmlReportExportTests(Path.Combine(workDir, "html-report-export")));
             suite.Add(() => ReportListSheetTests(null));
             suite.AddWithApplication(() => ReportCommandTests(new[] { "--test-report-command" }));
+            suite.AddWithApplication(() => ReportRecoveryTests(new[] { "--test-report-recovery" }));
             suite.Add(FamilyUnobservedTests);
             suite.Add(() => EffectivePanelFamiliesTests(null));
             suite.Add(() => PanelHeadlineTests(null));

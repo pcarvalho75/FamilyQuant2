@@ -118,7 +118,7 @@ internal static partial class Program
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " evidence matching requires each active family to be confirmed or skipped", model.Page == 4
                         && model.MatchFamilies.Count > 0 && model.MatchFamilies.All(f => !f.Decided) && !model.CanNext
-                        && model.MatchFamilies.All(f => f.Suggestions.All(s => !s.Use)));
+                        && model.MatchFamilies.All(f => f.Suggestions.All(s => s.Use == s.IsFromSheet)));
                     model.SelectedMatchFamily = model.MatchFamilies.FirstOrDefault(f => f.Suggestions.Count > 0) ?? model.SelectedMatchFamily;
                     Check(label + " the stored example protein supplies visible real Core suggestions", model.SelectedMatchFamily?.Suggestions.Count > 0);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "05-evidence-matches");

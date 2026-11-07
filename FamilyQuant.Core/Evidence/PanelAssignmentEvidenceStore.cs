@@ -11,9 +11,10 @@ namespace FamilyQuant.Evidence;
 /// evidence provenance and recipe still match. Text/display edits do not change family membership.</summary>
 public static class PanelAssignmentEvidenceStore
 {
+    public const string RebuildMessage = "Family assignment evidence is missing or out of date. Open Curate families > Group by evidence, choose Update proposal, then Apply grouping; if locks block the proposal, use Unlock evidence families there.";
     public static IReadOnlyList<PanelProteinAssignment> RequireCurrent(FamilyClusterFile file) => Current(file)
         ?? throw new InvalidOperationException(HasMissingSequence(file) ? "A target has no stored sequence. Restore its sequence before assigning families."
-            : "Family assignment evidence is missing or out of date. Rebuild the evidence grouping.");
+            : RebuildMessage);
 
     private static bool HasMissingSequence(FamilyClusterFile file) => file.MyExtendedFastaItems
         .Any(p => !NearestReviewed.IsDecoy(p) && string.IsNullOrEmpty(p.Sequence));
@@ -31,7 +32,7 @@ public static class PanelAssignmentEvidenceStore
                 .Where(g => g.Select(r => r.PanelFamilyKey).Distinct(StringComparer.Ordinal).Count() > 1)
                 .Select(g => g.Key).Order().ToArray();
             return new() { Message = HasMissingSequence(file) ? "A target has no stored sequence. Restore its sequence before assigning families."
-                : "Family assignment evidence is missing or out of date. Rebuild the evidence grouping.", ConflictingUserIds = conflicts };
+                : RebuildMessage, ConflictingUserIds = conflicts };
         }
         return BuildFamilyMap(file.FamilyPanel!, current);
     }

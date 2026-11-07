@@ -62,7 +62,7 @@ public sealed partial class FamilyListImportViewModel
     }
 
     private static string MatchPanelFingerprint(FamilyPanel panel) => System.Text.Json.JsonSerializer.Serialize(
-        panel.Families.Select(f => new { f.Key, f.DisplayName, f.Names, f.Decision, f.MergeTargetFamilyKey }));
+        panel.Families.Select(f => new { f.Key, f.DisplayName, f.Names, f.Pfam, f.Decision, f.MergeTargetFamilyKey }));
 
     private void PublishMatches(FamilyPanel panel, IReadOnlyList<ImportMatchFamily> suggestions)
     {
@@ -71,12 +71,12 @@ public sealed partial class FamilyListImportViewModel
         foreach (var family in panel.Families.Where(f => FamilyPanelValidation.ResolveFamilyKey(panel, f.Key) == f.Key))
         {
             var supplied = suggestions.FirstOrDefault(f => f.Key == family.Key);
-            string signature = System.Text.Json.JsonSerializer.Serialize(new[] { family.DisplayName }.Concat(family.Names.Select(n => n.Text)));
+            string signature = System.Text.Json.JsonSerializer.Serialize(new { family.DisplayName, family.Names, family.Pfam });
             var row = new ImportMatchFamily { Key = family.Key, Name = family.DisplayName, NamesSignature = signature,
                 Suggestions = supplied?.Suggestions ?? Array.Empty<ImportEvidenceMatch>(), PreviouslyConfirmed = supplied?.PreviouslyConfirmed == true,
                 ShowAdditional = supplied?.ShowAdditional == true,
                 Choice = supplied?.PreviouslyConfirmed == true ? "Kept from previous panel" : "Needs a choice" };
-            if (!row.PreviouslyConfirmed) foreach (var suggestion in row.Suggestions) suggestion.Use = false;
+            if (!row.PreviouslyConfirmed) foreach (var suggestion in row.Suggestions) suggestion.Use = suggestion.IsFromSheet;
             if (previous.TryGetValue(family.Key, out var retained) && retained.NamesSignature == signature)
             {
                 var retainedChoices = retained.Suggestions.ToDictionary(s => s.Key, StringComparer.Ordinal);

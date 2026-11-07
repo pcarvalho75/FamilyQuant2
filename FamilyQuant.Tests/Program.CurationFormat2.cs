@@ -164,6 +164,14 @@ internal static partial class Program
         }
     }
 
+    /// <summary>Pools a large text in its section, to reach the header limit.</summary>
+    [CurationFormatPart("test-large-pool", 902)]
+    private sealed class LargePoolTestPart : CurationFormatPart
+    {
+        public override void PrepareWrite(FamilyClusterFile file, CurationFormatContext context) =>
+            context.SetSection(this, new[] { new string('P', 200_000) });
+    }
+
     private sealed class UnmarkedTestPart : CurationFormatPart { }
 
     [CurationFormatPart("test-description-pool", 5)]
@@ -202,7 +210,7 @@ internal static partial class Program
             proteins.Add(new FastaItemExtended
             {
                 SequenceIdentifier = "tr|X" + (i + 1).ToString(CultureInfo.InvariantCulture) + "|X" + (i + 1).ToString(CultureInfo.InvariantCulture) + "_INVENT",
-                Sequence = sequences[i], Description = "Invented protein " + i.ToString(CultureInfo.InvariantCulture) + " (quotes \" and accents áê)",
+                Sequence = sequences[i], Description = "Invented protein " + i.ToString(CultureInfo.InvariantCulture) + " (quotes \" and accents \u00e1\u00ea)",
                 UserID = 1 + i % 2, USearchID = 1 + i % 2, Evidence = Evidence("X" + (i + 1).ToString(CultureInfo.InvariantCulture), sequences[i], i == 0),
             });
         foreach (var target in proteins.ToArray())
@@ -240,7 +248,7 @@ internal static partial class Program
 
         // Detection.
         Check("Z15b1 detection: a root object is format 1, a root array format 2, through a byte order mark and whitespace",
-            CurationFormat.Detect("{}") == 1 && CurationFormat.Detect("﻿ \r\n\t[") == 2 && CurationFormat.Detect("") == 1
+            CurationFormat.Detect("{}") == 1 && CurationFormat.Detect("\uFEFF \r\n\t[") == 2 && CurationFormat.Detect("") == 1
             && CurationFormat.Detect(() => new MemoryStream(new byte[] { 0xEF, 0xBB, 0xBF, (byte)' ', (byte)'[' })) == 2
             && CurationFormat.Detect(() => new MemoryStream(Encoding.Unicode.GetPreamble().Concat(Encoding.Unicode.GetBytes("{}")).ToArray())) == 1
             && CurationFormat.Detect(() => new SaveShortRead(Encoding.UTF8.GetBytes("   \n  [ ]"))) == 2);
@@ -258,8 +266,7 @@ internal static partial class Program
         Check("Z15b1 registry: the shipped list loads, with unique names", registered.Select(p => p.Name).Distinct(StringComparer.Ordinal).Count() == registered.Count,
             string.Join(", ", registered.Select(p => p.Name)));
 
-        // A .fcf: the export "Families for FamilyQuant 1.5 (.fcf)" stays format 1 so 1.5 and 2.1.10 open it
-        // (DU7's frozen 1.5 reader, docs/PROJECT-FORMATS.md); a format-2 .fcf still opens everywhere.
+        // D80 retires the legacy-reader output gate. Old inputs still open; every new FCF is format 2.
         var fixture = CurationFormat2Fixture();
         string legacyText = fixture.ToJsonText();
         string legacyFcf = Path.Combine(folder, "legacy.fcf");
@@ -268,8 +275,24 @@ internal static partial class Program
         Check("Z15b1 a format-1 .fcf opens unchanged", opened.ToJsonText() == legacyText);
         string exportedFcf = Path.Combine(folder, "exported.fcf");
         opened.Save(exportedFcf);
-        Check("Z15b1 the .fcf export stays format 1, byte-identical to the canonical content, with its file check passed",
-            File.ReadAllText(exportedFcf) == legacyText && opened.LastSaveCheck?.Passed == true, opened.LastSaveCheck?.Message);
+        Check("Z15b7 the .fcf export writes format 2 and reopens to identical canonical content",
+            CurationFormat.Detect(() => File.OpenRead(exportedFcf)) == CurationFormat.Current
+            && FamilyClusterFile.Load(exportedFcf).ToJsonText() == legacyText && opened.LastSaveCheck?.Passed == true, opened.LastSaveCheck?.Message);
+        var actualExportRefusal = Thrown(() => ReadFcfAs2110(exportedFcf));
+        Check("Z15b7 the transcribed 2.1.10 reader refuses the actual saved FCF", actualExportRefusal is JsonException, actualExportRefusal?.Message);
+        Console.WriteLine("Observed 2.1.10 FCF reader-path refusal: " + actualExportRefusal?.Message);
+        var scoped = CurationFormat2Fixture();
+        scoped.EvidenceSource!.ReferencePanel!.Coverage = new Evidence.ReferencePanelCoverage
+        { ScopeTerms = new() { "Synthetic scope" }, WholeFamilies = new() { "Synthetic family" } };
+        string scopedFcf = Path.Combine(folder, "scoped-format2.fcf");
+        scoped.Save(scopedFcf);
+        bool reachedComplete = false;
+        var scopedRefusal = Thrown(() => reachedComplete = ReadFcfAs2110(scopedFcf).EvidenceSource?.ReferencePanel?.IsComplete == true);
+        Check("Z15b7 scoped panel metadata survives current readback", FamilyClusterFile.Load(scopedFcf).EvidenceSource!.ReferencePanel!.Coverage!.ScopeTerms.SequenceEqual(new[] { "Synthetic scope" }));
+        Check("Z15b7 a scoped panel cannot reach the 2.1.10 reader as complete", scopedRefusal is JsonException && !reachedComplete, scopedRefusal?.Message);
+        string ledgerRoot = FindLedgerRoot() ?? throw new DirectoryNotFoundException("The checkout is required for the D80 ledger check.");
+        Check("Z15b7 DU7 retirement is explicit in the preserved feature ledger", File.ReadAllText(Path.Combine(ledgerRoot, "docs", "FEATURE-LEDGER.md"))
+            .Contains(FeatureLedger.Du7Retirement, StringComparison.Ordinal));
         string savedFcf = Path.Combine(folder, "format2.fcf");
         using (var stream = File.Create(savedFcf)) CurationFormat.Write(opened, stream);
         byte[] savedBytes = File.ReadAllBytes(savedFcf);
@@ -404,6 +427,25 @@ internal static partial class Program
             var read = CurationFormat.Read(() => new SaveShortRead(bytes), synthetic);
             Check("Z15b1 the format-2 reader works through 7-byte reads, with a header section larger than its first buffer",
                 read.ToJsonText() == large.ToJsonText() && JsonNode.Parse(bytes)![0]!["Sections"]!.ToJsonString().Length > 64 * 1024);
+        }
+        // Z15b1a: the writer refuses a header the reader would refuse, before writing a byte, and names the part.
+        var largePool = CurationFormatRegistry.Discover(new[] { typeof(DescriptionPoolTestPart), typeof(LargePoolTestPart) });
+        var limited = typeof(CurationFormat).GetMethod("Write", BindingFlags.Static | BindingFlags.NonPublic,
+            new[] { typeof(FamilyClusterFile), typeof(Stream), typeof(IReadOnlyList<CurationFormatPart>), typeof(int) })!;
+        using (var refused = new MemoryStream())
+        {
+            var error = Thrown(() => limited.Invoke(null, new object?[] { fixture, refused, largePool, 128 * 1024 }));
+            Check("Z15b1a the writer refuses a header over its limit before writing, naming the part with the largest section",
+                error is InvalidOperationException && refused.Length == 0
+                && error.Message.Contains("over the 0.1 MB a reader accepts", StringComparison.Ordinal)
+                && error.Message.EndsWith("The part \"test-large-pool\" writes 0.2 MB in its section.", StringComparison.Ordinal), error?.Message);
+        }
+        using (var accepted = new MemoryStream())
+        {
+            limited.Invoke(null, new object?[] { fixture, accepted, largePool, 512 * 1024 });
+            byte[] bytes = accepted.ToArray();
+            Check("Z15b1a under the limit the same parts write, and the 64 MB limit is the reader's own",
+                CurationFormat.Read(() => new MemoryStream(bytes, false), largePool).ToJsonText() == legacyText && CurationFormat.MaxHeaderBytes == 64 << 20);
         }
         Check("Z15b1 the stored-curation helpers read and edit both layouts",
             EditAndRead(template) && EditAndRead(legacyProject));

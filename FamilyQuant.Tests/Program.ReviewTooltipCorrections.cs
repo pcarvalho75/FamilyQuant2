@@ -25,6 +25,9 @@ internal static partial class Program
             foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
             {
                 Themes.ThemeManager.Apply(theme);
+                var unopened = new SuperClusterPreviewWindow(new SuperClusterPreview(Items(), null, "signal", "", KeywordMatch.All, null, null));
+                try { CheckTooltipCoverage("Z12h2c2 " + theme + " unopened grouping review", (FrameworkElement)unopened.Content); }
+                finally { unopened.Close(); }
                 int reads = 0;
                 var facts = new EvidenceTaskScopeInput("Synthetic clade", Array.Empty<ReviewTaskTaxon>(), Array.Empty<ReviewTaskKeyword>(),
                     1, new[] { "Synthetic activity" }, "fixture");

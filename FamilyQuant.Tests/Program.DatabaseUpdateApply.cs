@@ -59,7 +59,7 @@ internal static partial class Program
     }
 
     /// <summary>FQKimi on Z14c3c: a comparison and a placement made from different new files must never meet;
-    /// panel assignments and a confirmed task go out of date; the frozen 1.5 reader opens the updated file.</summary>
+    /// panel assignments and a confirmed task go out of date; current-reader readback is retained; the frozen-reader gate is retired by D80.</summary>
     private static void DatabaseUpdateBindingTests()
     {
         Section("Database update: one new file per update, and what goes out of date (Z14c3c fix)");
@@ -111,35 +111,9 @@ internal static partial class Program
         Check("DU5: a scope confirmed before the update is refused after it",
             taskConfirmedBefore && Throws<InvalidOperationException>(() => EvidenceTaskDiscovery.Confirm(project, task, new[] { "Leading scope" })));
 
-        // The frozen 1.5 reader opens the updated file and reads the same families (built separately; SKIP when absent).
-        string directory = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests", "database-update-frozen");
-        if (Directory.Exists(directory)) Directory.Delete(directory, recursive: true);
-        Directory.CreateDirectory(directory);
-        string fcf = Path.Combine(directory, "updated.fcf");
-        project.Save(fcf);
-        string? root = FindLedgerRoot();
-        string host = root == null ? string.Empty : Path.Combine(root, "FamilyQuant.Tests/ReferenceGoldenHost/bin/Release/net10.0-windows7.0/ReferenceGoldenHost.exe");
-        if (host.Length == 0 || !File.Exists(host))
-        {
-            skipped++;
-            Console.WriteLine("  SKIP  DU7: the frozen 1.5 reader opens the updated file: build FamilyQuant.Tests/ReferenceGoldenHost first");
-            return;
-        }
-        string current = Path.Combine(directory, "current.json"), frozen = Path.Combine(directory, "frozen.json");
-        FcfCompatibilitySnapshot.Run(new[] { FcfCompatibilitySnapshot.Argument, fcf, current });
-        var start = new System.Diagnostics.ProcessStartInfo(host)
-            { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true };
-        start.ArgumentList.Add(FcfCompatibilitySnapshot.Argument); start.ArgumentList.Add(fcf); start.ArgumentList.Add(frozen);
-        string log;
-        int exit;
-        using (var process = System.Diagnostics.Process.Start(start)!)
-        {
-            log = process.StandardOutput.ReadToEnd() + process.StandardError.ReadToEnd();
-            process.WaitForExit();
-            exit = process.ExitCode;
-        }
-        Check("DU7: the frozen 1.5 reader opens the updated file and reads the same proteins, families, annotations and locks",
-            exit == 0 && File.Exists(frozen) && File.ReadAllText(frozen) == File.ReadAllText(current), exit + " " + log.Trim());
+        // Retired deliberately by Paulo's D80; current-reader readback stays covered below.
+        Console.WriteLine("  RETIRED " + FeatureLedger.Du7Retirement);
+
     }
 
     private static DatabaseUpdatePreview UpdatePreview(PlacementFixture fixture)

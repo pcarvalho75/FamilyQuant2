@@ -31,8 +31,8 @@
                           ToolTip="Writes the open project to a .fqproj file at a location you choose and makes it the current save path. Open a project and finish any save first; Undo does not revert files on disk."/>
                 <MenuItem x:Name="MenuItemExport" Header="Export" IsEnabled="False"
                           ToolTip="Offers separate files for families, tables and interpretation input. Open a project to enable the menu; choosing an export leaves the project open.">
-                    <MenuItem x:Name="MenuItemSaveFCF" Header="Families for FamilyQuant 1.5 (.fcf)" Click="MenuItemSaveFCF_Click" IsEnabled="False"
-                              ToolTip="Writes families, User IDs and annotations to a separate .fcf for FamilyQuant 1.5 without stored quantitation. Open a project first; this export does not save the .fqproj or clear unsaved changes."/>
+                    <MenuItem x:Name="MenuItemSaveFCF" Header="Families (.fcf)" Click="MenuItemSaveFCF_Click" IsEnabled="False"
+                              ToolTip="Writes families, User IDs, annotations and stored curation evidence to a separate format-2 .fcf without the Full XIC results table. Open a project first; this export does not save the .fqproj or clear unsaved changes, and Undo does not revert the file."/>
                     <MenuItem x:Name="MenuItemExportFamilyTable" Header="Visible protein table (CSV)" Click="MenuItemExportFamilyTable_Click"
                               ToolTip="Writes the protein table to CSV using its current display filters and columns. Open a project and show at least one row to enable it; Undo does not revert the exported file."/>
                     <MenuItem x:Name="MenuItemExportPanelAudit" Header="Panel assignment audit (CSV)" Click="MenuItemExportPanelAudit_Click"
@@ -107,7 +107,7 @@
                 <MenuItem x:Name="MenuItemHowToRead" Header="How to read these numbers" Command="Help" InputGestureText="F1"
                           ToolTip="Explains the current screen's numbers, denominators and choices. F1 opens the same read-only Help without changing the project."/>
                 <MenuItem x:Name="MenuItemDeNovoWorkflowHelp" Header="De novo in FamilyQuant" Click="MenuItemDeNovoWorkflowHelp_Click"
-                          ToolTip="Explains how identification and de novo evidence lead to Quantify and Results. This read-only Help changes nothing in the project."/>
+                          ToolTip="Explains the seven steps from identification and de novo calls to Quantify and Results. This read-only Help changes nothing in the project."/>
                 <MenuItem x:Name="MenuItemWhereAmI" Header="What do I do first?" Click="MenuItemWhereAmI_Click"
                           ToolTip="Explains the five workflow steps, their inputs and what to do next. This read-only Help changes nothing in the project."/>
                 <MenuItem x:Name="MenuItemCheckForUpdates" Header="Check for updates" Click="MenuItemCheckForUpdates_Click"

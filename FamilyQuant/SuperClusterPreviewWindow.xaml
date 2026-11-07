@@ -280,7 +280,7 @@
                                             <DataGridTextColumn Header="Domains" Width="180" MinWidth="180" IsReadOnly="True" Binding="{Binding Domains}" theme:TableAppearance.HeaderToolTip="Stored domain calls supplied for this protein. A missing call is not proof that the domain is absent."/>
                                             <DataGridTextColumn Header="Scope words found" Width="160" MinWidth="160" IsReadOnly="True" Binding="{Binding ScopeWordsText}" theme:TableAppearance.HeaderToolTip="Whether stored keyword or tissue annotations match the user-entered scope. Protein description names are not used to establish this scope match."/>
                                             <DataGridTextColumn Header="Description" Width="300" MinWidth="300" IsReadOnly="True" Binding="{Binding Description}" theme:TableAppearance.HeaderToolTip="Original description supplied for this protein. It is retained separately from the evidence-based or hand-chosen family."/>
-                                            <DataGridTextColumn Header="Current family ID" Width="145" MinWidth="145" IsReadOnly="True" Binding="{Binding PreviousFamilyId}" theme:TableAppearance.HeaderToolTip="Unchanged document User ID before Apply grouping. Unticking this protein leaves that grouping in place."/>
+                                            <DataGridTextColumn Header="Current family ID" Width="145" MinWidth="145" IsReadOnly="True" Binding="{Binding PreviousFamilyId}" theme:TableAppearance.HeaderToolTip="Unchanged document family number before Apply grouping. Unticking this protein leaves that family in place."/>
                                             <DataGridTextColumn Header="FASTA identifier" Width="200" MinWidth="200" IsReadOnly="True" Binding="{Binding Identifier}" theme:TableAppearance.HeaderToolTip="Full original FASTA identifier, including its prefixes. It remains unchanged by the review."/>
                                         </DataGrid.Columns>
                                     </DataGrid>
@@ -375,7 +375,7 @@
                                              Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}" TextWrapping="Wrap" MinHeight="48" MaxHeight="88"
                                              VerticalScrollBarVisibility="Auto" Margin="0,8,0,0" ToolTip="Read the same stored-evidence match counts and family names shown in the scope preview. This is read only; Update proposal rebuilds choices without applying them to the project."/>
                                     <Button x:Name="MatchPanelNamesButton" Grid.Row="5" Content="Match stored names..." Click="MatchPanelNames_Click" IsEnabled="{Binding CanMatchPanelNames}"
-                                            HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="{Binding MatchPanelNamesHint}"/>
+                                            HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="{Binding DataContext.MatchPanelNamesHint, RelativeSource={RelativeSource AncestorType={x:Type local:SuperClusterPreviewWindow}}, FallbackValue='Unavailable until a current panel proposal and selected family are ready. Update proposal, select a family and use pending panel-link choices before matching stored names.'}"/>
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Architecture" ToolTip="Inspect supplied domain combinations and choose which groups become separate named families, including placements by length and cysteines. Opening this tab changes only the view; Apply grouping commits split choices and Undo restores the preceding grouping."><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>
@@ -446,7 +446,7 @@
                         </TabControl>
                     </Grid>
                     <DockPanel Grid.Row="2" Margin="0,10,0,0">
-                        <Button DockPanel.Dock="Right" Content="Check motif" Click="Motif_Click" IsEnabled="{Binding CanCheckMotif}" ToolTip="Count the entered motif across complete proposed family members, including unticked members, and retain the checked pattern for Apply grouping. Disabled without a proposal and pattern or during an operation; update the proposal, enter a valid pattern and wait to enable it."/>
+                        <Button DockPanel.Dock="Right" Content="Check motif" Click="Motif_Click" IsEnabled="{Binding CanCheckMotif}" ToolTip="Counts the entered motif across complete proposed family members, including unticked members, and keeps the checked pattern for Apply grouping. Disabled without a proposal or a pattern or during an operation; update the proposal, enter a pattern and wait to enable it; Check motif then reports a pattern it cannot use."/>
                         <TextBlock DockPanel.Dock="Left" Text="Motif (optional)" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox Text="{Binding MotifPattern, UpdateSourceTrigger=PropertyChanged}" ToolTip="Amino-acid regular expression, optionally prefixed with not, or a count expression such as count C &gt;= 8; default empty skips the check, with no numeric range for the pattern. Check motif validates it before Apply grouping retains the choice, after which Undo restores the preceding grouping."/>
                     </DockPanel>
@@ -455,6 +455,9 @@
         </TabControl>
         <DockPanel Grid.Row="3" Margin="0,12,0,0">
         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            <Button x:Name="UnlockEvidenceFamiliesButton" Content="Unlock evidence families" Click="UnlockEvidenceFamilies_Click"
+                    Visibility="{Binding ShowUnlockEvidenceFamilies, Converter={StaticResource VisibleWhenTrue}}" IsEnabled="{Binding CanUnlockEvidenceFamilies}"
+                    ToolTip="{Binding UnlockEvidenceFamiliesHint}"/>
             <Button Content="Help" Click="Help_Click" ToolTip="Open Help explaining scope, evidence sources, coverage, flags, keyword matching, domains and review choices. The project and files stay unchanged."/>
             <Button x:Name="createButton" Content="Apply grouping" Style="{DynamicResource PrimaryButton}" IsEnabled="{Binding CanConfirm}" IsDefault="True" Click="Create_Click" ToolTip="Commit reviewed ticks, family names and splits to the project as one grouping change; Undo restores the preceding grouping and Save writes it to disk. Disabled until at least one eligible protein is ticked, all selected families and splits are named, and scope, links and any motif check are current."/>
             <Button Content="Cancel" IsCancel="True" Click="Cancel_Click" ToolTip="Close this review without applying its choices to the open project. No grouping Undo step is added and no project file is written."/>

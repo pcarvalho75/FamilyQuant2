@@ -74,10 +74,13 @@ internal static partial class Program
             var shellRead = ShellProjectOperations.Read(path);
             var spoolBefore = Directory.GetFiles(Path.GetTempPath(), "FamilyQuant-curation-*.tmp").ToHashSet(StringComparer.OrdinalIgnoreCase);
             var copy = file.DeepCopy();
-            Check("Z12p5f fixture " + index + " FCF bytes equal the legacy string writer", expected.SequenceEqual(File.ReadAllBytes(path)));
+            using var canonical = new MemoryStream();
+            typeof(FamilyClusterFile).GetMethod("WriteJsonUtf8", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(file, new object[] { canonical });
+            Check("Z12p5f fixture " + index + " canonical stream bytes equal the string writer", expected.SequenceEqual(canonical.ToArray()));
+            Check("Z15b7 fixture " + index + " saved FCF is format 2", CurationFormat.Detect(() => File.OpenRead(path)) == CurationFormat.Current);
             Check("Z12p5f fixture " + index + " streamed hashes equal UTF8 of the legacy JSON", file.JsonContentSha256() == expectedHash
                 && read.JsonContentSha256() == expectedHash && copy.JsonContentSha256() == expectedHash);
-            Check("Z12p5f fixture " + index + " shell open preserves exact raw-file provenance", shellRead.DatabaseFileSha256 == expectedHash.ToLowerInvariant()
+            Check("Z12p5f fixture " + index + " shell open preserves exact raw-file provenance", shellRead.DatabaseFileSha256 == Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))).ToLowerInvariant()
                 && shellRead.Curation.JsonContentSha256() == expectedHash);
             Check("Z12p5f fixture " + index + " copy shares no mutable protein or evidence objects", !ReferenceEquals(copy, file)
                 && copy.MyExtendedFastaItems.Zip(file.MyExtendedFastaItems).All(pair => !ReferenceEquals(pair.First, pair.Second)

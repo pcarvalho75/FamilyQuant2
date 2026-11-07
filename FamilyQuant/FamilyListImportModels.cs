@@ -97,8 +97,11 @@ public sealed class ImportEvidenceMatch : ScreenViewModel
     private string text = "", details = "";
     private int proteins, reviewed;
     public string Key { get; init; } = "";
-    public string Text { get => text; set { if (Set(ref text, value ?? "") && Coverage != null) { var result = Coverage(text); Proteins = result.Proteins; Reviewed = result.Reviewed; Details = result.Details; } } }
+    public string Text { get => text; set { if (Set(ref text, value ?? "")) { Changed(nameof(IsFromSheet)); Changed(nameof(Origin)); if (Coverage != null) { var result = Coverage(text); Proteins = result.Proteins; Reviewed = result.Reviewed; Details = result.Details; } } } }
     public string Type { get; init; } = "";
+    public string? SheetValue { get; init; }
+    public bool IsFromSheet => SheetValue != null && string.Equals(Text, SheetValue, StringComparison.OrdinalIgnoreCase);
+    public string Origin => IsFromSheet ? "from your sheet" : "";
     public double NameCoverage { get; init; }
     public bool IsAdditional { get; init; }
     public bool IsFamilyLevelMatch { get; init; }
