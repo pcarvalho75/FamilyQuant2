@@ -71,13 +71,16 @@ internal static partial class Program
                 string project = Path.Combine(folder, language + ".fqproj");
                 var rows = new List<QuantRow> { Qr("identified", "save", 1, 2, "ACDEFGHIK", 10, 20) };
                 string message = ShellProjectOperations.WriteVerifiedProject(project, file, rows, new QuantManifest());
+                // Z15b1: the file holds curation format 2 in its own entry; the canonical content above stays format 1.
                 using (var archive = ZipFile.OpenRead(project))
-                using (var entry = archive.GetEntry(ProjectStore.CurationEntryName)!.Open())
+                using (var entry = archive.GetEntry(ProjectStore.CurationFormat2EntryName)!.Open())
                 using (var bytes = new MemoryStream())
+                using (var format2 = new MemoryStream())
                 {
                     entry.CopyTo(bytes);
+                    CurationFormat.Write(file, format2);
                     Check("J48 actual verified Save writes the exact curation entry bytes " + language,
-                        expected.SequenceEqual(bytes.ToArray()) && message.StartsWith("File check passed", StringComparison.Ordinal));
+                        format2.ToArray().SequenceEqual(bytes.ToArray()) && message.StartsWith("File check passed", StringComparison.Ordinal));
                 }
                 Check("J48 every existing saved-file validation still passes " + language, SavedFileCheck.Check(file, project, project: true).Passed);
                 var changed = FamilyClusterFile.FromJsonText(file.ToJsonText()); changed.MyExtendedFastaItems[0].UserAnnotation += " changed";

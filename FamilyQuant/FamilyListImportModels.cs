@@ -19,6 +19,16 @@ public sealed class ImportColumnChoice : ScreenViewModel
     public string Header { get => header; set { if (Set(ref header, value ?? "")) { Changed(nameof(Example)); Changed(nameof(HasChoice)); } } }
     public string Example => Header.Length == 0 ? Role == PanelImportFields.Decision ? "Quantify every family" : "Not used" : example(Header);
     public bool HasChoice => Header.Length > 0;
+    public string ToolTip => (Role switch
+    {
+        PanelImportFields.FamilyKey => "The column holding each family's stable abbreviation; proposed from the headers, with one nonempty key per imported family.",
+        PanelImportFields.DisplayName => "The column holding the family name to display; proposed from the headers, with a nonempty name for each imported family.",
+        PanelImportFields.OtherName => "An optional column of other-language names, proposed from the headers; Not used keeps these as original source text only.",
+        PanelImportFields.Notes => "An optional column of family notes, proposed from the headers; all original columns remain available as source text.",
+        PanelImportFields.Pfam => "An optional column of Pfam codes or names, proposed from the headers; Not used adds no domain requirement.",
+        PanelImportFields.Decision => "An optional column telling what to do with each family; default Not used quantifies every family, while a chosen column requires you to confirm each label's action.",
+        _ => "An optional column whose cell fills become text categories; default Not used, and selecting a column starts each category with its source name."
+    }) + " Choose a header from this sheet; this changes only the draft until Import.";
     public ImportColumnChoice(string role, string label, bool required, IReadOnlyList<string> headers, Func<string, string> example)
     { Role = role; Label = label; Required = required; Headers = required ? headers : new[] { "" }.Concat(headers).ToArray(); this.example = example; }
 }
@@ -121,4 +131,9 @@ public sealed record ImportDecisionOption(string Label, FamilyPanelDecision Valu
 public sealed record ImportRowOption(string Label, FamilyPanelRowAction Value);
 
 public sealed record ImportSummaryFamily(string Key, string Name, string OtherName, string Decision, string Matches, string Notes, string Color);
-public sealed record ImportWizardStep(int Index, string Label, bool Done, bool Current, bool Enabled);
+public sealed record ImportWizardStep(int Index, string Label, bool Done, bool Current, bool Enabled)
+{
+    public string ToolTip => !Enabled ? "This step is unavailable until you reach it, while a read is running, or after the list is imported; finish the current page to continue."
+        : Current ? "This is the current wizard step; choosing it keeps your draft and project unchanged."
+        : "Returns to this completed step without losing your choices; the project changes only when you choose Import.";
+}

@@ -99,6 +99,7 @@ namespace FamilyQuant.Tests
             suite.Section("Core operation outcomes, progress and cancellation");
             suite.Add(() => CoreOperationTests(workDir));
             suite.Add(() => StreamingSaveTests(Path.Combine(workDir, "streaming-save")));
+            suite.Add(() => CurationFormat2Tests(Path.Combine(workDir, "curation-format2")));
             suite.AddWithApplication(() => CurationStreamingContractTests(Path.Combine(workDir, "curation-streaming-contract")));
             suite.Add(() => CompactCurationTests(Path.Combine(workDir, "compact-curation")));
             suite.Section("Display filters and the family counter");
@@ -316,6 +317,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => PatternLabPriorityTests(workDir));
             suite.Add(() => ExampleFamilyListTests());
             suite.AddWithApplication(() => FamilyListImportGuideTests());
+            suite.AddWithApplication(() => FamilyListImportHelpRouteTests());
             suite.AddWithApplication(() => AlignSelectedTests());
             suite.AddWithApplication(() => DeNovoWorkflowHelpTests());
             suite.Add(() => EvidenceCoverageTests());

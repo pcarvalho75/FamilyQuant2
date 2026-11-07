@@ -32,11 +32,11 @@ public partial class MainWindow
             return button;
         }
         var open = Choice("Open project", CurateWithoutProjectChoice.OpenProject,
-            "Opens a FamilyQuant project or an older Family Cluster File to curate its families.");
+            "Reads a .fqproj with stored results or an older .fcf with families only. Choosing a file opens it for curation.");
         open.IsDefault = true;
         open.SetResourceReference(StyleProperty, "PrimaryButton");
         var build = Choice(WorkflowNames.BuildFamilies, CurateWithoutProjectChoice.BuildFamilies,
-            "Opens Build families to group a protein database by sequence identity first.");
+            "Opens Build families to choose a protein database and sequence identity. Opening the screen writes no files.");
         var cancel = new Button { Content = "Cancel", IsCancel = true, ToolTip = "Closes this question and keeps the current screen." };
         var buttons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right };
         buttons.Children.Add(open); buttons.Children.Add(build); buttons.Children.Add(cancel);

@@ -45,8 +45,9 @@ internal static partial class Program
         string legacyResave = Path.Combine(directory, "legacy-resaved.fqproj");
         ProjectStore.WriteFqproj(legacyResave, oldProject.fcf, oldProject.quant, oldProject.manifest);
         using (var zip = System.IO.Compression.ZipFile.OpenRead(legacyResave))
-        using (var reader = new StreamReader(zip.GetEntry(ProjectStore.CurationEntryName)!.Open()))
-            Check("J1a old project resave preserves its original curation bytes", reader.ReadToEnd() == old);
+        using (var reader = new StreamReader(zip.GetEntry(ProjectStore.CurationFormat2EntryName)!.Open()))
+            // Z15b1: the resave is written as curation format 2; its content is the original curation byte for byte.
+            Check("J1a old project resave preserves its original curation bytes", FamilyClusterFile.FromJsonText(reader.ReadToEnd()).ToJsonText() == old);
         string oldRecipe = JsonSerializer.Serialize(new Evidence.EvidenceRecipe());
         Check("J1a old recipe bytes stay equal after open/save", !oldRecipe.Contains("FamilyPanel", StringComparison.Ordinal)
             && JsonSerializer.Serialize(JsonSerializer.Deserialize<Evidence.EvidenceRecipe>(oldRecipe)) == oldRecipe);
