@@ -14,7 +14,7 @@ public sealed record PanelEvidenceSuggestion(PanelEvidenceMatchKind Kind, string
 }
 
 /// <summary>Detached stored-label suggestions and exact target coverage. No suggested label is a classification rule.</summary>
-public sealed class PanelEvidenceMatching
+public sealed partial class PanelEvidenceMatching
 {
     private sealed record Label(PanelEvidenceMatchKind Kind, string Value, string Name)
     {

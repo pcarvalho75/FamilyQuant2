@@ -258,6 +258,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => PanelChecklistTests(Path.Combine(workDir, "panel-checklist")));
             suite.AddWithApplication(() => PanelChecklistActionsTests(Path.Combine(workDir, "panel-checklist-actions")));
             suite.Add(() => PanelEvidenceMatchingTests());
+            suite.AddWithApplication(() => PanelMatchLifecycleTests(Path.Combine(workDir, "panel-match-lifecycle")));
             suite.AddWithApplication(() => ManualFamilyUiTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
             suite.AddWithApplication(() => GridCopyTests());
