@@ -145,12 +145,6 @@ public sealed partial class FamilyPanelSpreadsheetImporter
                     continue;
                 }
             }
-            if (!chosenRole && eligibleFamilySheets.Contains(sheet.SheetName))
-            {
-                sheet.IsUncertain = true;
-                sheet.RoleReason = "This source also fits a family list; it is retained as notes unless chosen as the family sheet.";
-                continue;
-            }
             var byColumn = other.Headers.Select(header => new { Header = header,
                 Values = otherRows.Select(row => Value(row, header).Trim()).Where(value => value.Length > 0).ToList() }).ToList();
             var keyColumn = byColumn.FirstOrDefault(column => column.Values.Count > 0
@@ -172,6 +166,11 @@ public sealed partial class FamilyPanelSpreadsheetImporter
                 proposal.SubclassTables.Add(new PanelWorkbookSubclassTable { SheetName = sheet.SheetName,
                     FamilyKeys = linked.Order(StringComparer.Ordinal).ToList(), FamilyKeyColumn = keyColumn?.Header ?? "",
                     ClassColumn = classColumn, DomainColumns = domainColumns, Table = other });
+            }
+            else if (!chosenRole && eligibleFamilySheets.Contains(sheet.SheetName))
+            {
+                sheet.IsUncertain = true;
+                sheet.RoleReason = "This source also fits a family list; it is retained as notes unless chosen as the family sheet.";
             }
         }
         var shapeChoices = Copy(choices);

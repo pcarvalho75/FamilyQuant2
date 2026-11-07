@@ -79,6 +79,34 @@ internal static partial class Program
                 if (!freeText) Check("Z16a1 renamed structured subclass table still links by its source column", renamed.SubclassTables.Count == 1);
             }
 
+            string dualRole = Path.Combine(root, "subclass-family-shape.xlsx"); WriteNeutralWorkbook(dualRole);
+            using (var document = SpreadsheetDocument.Open(dualRole, true))
+            {
+                var part = NeutralWorkbookPart(document.WorkbookPart!, "Data 3");
+                int index = 1;
+                foreach (var row in part.Worksheet!.GetFirstChild<XL.SheetData>()!.Elements<XL.Row>().Skip(1))
+                    row.Elements<XL.Cell>().First().InlineString = new XL.InlineString(new XL.Text("F" + (index++).ToString("D2", CultureInfo.InvariantCulture)));
+                part.Worksheet.Save();
+            }
+            var dual = importer.ProposeWorkbook(dualRole);
+            Check("Z16a10 regression sheet also has eligible family-list structure", dual.FamilySheet == "Data 9"
+                && dual.Problems.Any(problem => problem.Kind == PanelImportProblemKind.FamilySheetAlternative
+                    && problem.Message.Contains("Data 3", StringComparison.Ordinal)));
+            Check("Z16a10 source-linked subclass structure wins over an alternate family-list shape",
+                dual.Workbook.Sheets.Single(sheet => sheet.SheetName == "Data 3") is { Role: PanelWorkbookSheetRole.SubclassTable, IsUncertain: false }
+                && dual.SubclassTables.SingleOrDefault()?.FamilyKeys.SequenceEqual(Enumerable.Range(1, 9).Select(index => "F" + index.ToString("D2", CultureInfo.InvariantCulture))) == true
+                && dual.SubclassTables[0].ClassColumn == "x2" && dual.SubclassTables[0].DomainColumns.Count == 2
+                && dual.Notes.All(note => note.SheetName != "Data 3"));
+            var explicitSubclass = importer.ProposeWorkbook(reader.ReadWorkbook(dualRole), "Data 9",
+                new Dictionary<string, PanelWorkbookSheetRole> { ["Data 3"] = PanelWorkbookSheetRole.SubclassTable });
+            Check("Z16a10 automatic subclass facts equal the valid explicit-role proposal",
+                explicitSubclass.Workbook.Sheets.Single(sheet => sheet.SheetName == "Data 3") is { Role: PanelWorkbookSheetRole.SubclassTable, IsUncertain: false }
+                && JsonSerializer.Serialize(dual.SubclassTables) == JsonSerializer.Serialize(explicitSubclass.SubclassTables));
+            var explicitNotes = importer.ProposeWorkbook(reader.ReadWorkbook(dualRole), "Data 9",
+                new Dictionary<string, PanelWorkbookSheetRole> { ["Data 3"] = PanelWorkbookSheetRole.Notes });
+            Check("Z16a10 an explicit notes role still overrides supported subclass structure", explicitNotes.SubclassTables.Count == 0
+                && explicitNotes.Notes.Any(note => note.SheetName == "Data 3"));
+
             string single = Path.Combine(root, "single.xlsx"); WriteNeutralWorkbook(single, onlyFamily: true);
             var oldPreview = reader.ReadPreview(single);
             var oldTable = reader.ReadTable(single, oldPreview.SheetName, oldPreview.ProposedHeaderRow);
