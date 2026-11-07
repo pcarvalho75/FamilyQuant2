@@ -10,20 +10,20 @@ namespace FamilyQuant;
 public sealed record FamilyListImportGuideSection(string Key, string Title, string Image, string Caption, IReadOnlyList<string> Paragraphs);
 
 /// <summary>
-/// The Help chapter "Import family list" (Z12p2c): one section for each page of File > Import family list,
+/// The Help chapter "Import your family list" (Z12p2c): one section for each page of File > Import family panel,
 /// with a picture of that page taken on the fictitious example list (Try with the example), plus the two routes
 /// that save evidence matches later. Wording follows the wizard and the matching window's own Help.
 /// </summary>
 public static class FamilyListImportGuide
 {
-    public const string Title = "Import family list";
+    public const string Title = "Import your family list";
 
     public static IReadOnlyList<FamilyListImportGuideSection> Sections { get; } = new[]
     {
         new FamilyListImportGuideSection("start", "Before you start", "", "", new[]
         {
-            "File > Import family list brings a spreadsheet of family abbreviations and names into this project's family panel, in seven pages. Every page before Import is a draft: Back keeps your choices, and Cancel changes nothing.",
-            "Import creates the family panel and nothing else. It does not group proteins or recompute quantitation; afterwards you review which proteins belong in each family in the Family checklist of Group by evidence.",
+            "File > Import family panel brings a spreadsheet of family abbreviations and names into this project's family panel, in seven pages. Every page before Import is a draft: Back keeps your choices, and Cancel changes nothing.",
+            "Import creates the family panel and nothing else. It does not group proteins or recompute quantitation; afterwards you review which proteins belong in each family in the Panel checklist of Group by evidence.",
             "To practise, press Try with the example on the first page. It opens an invented list for a secreted-protein mixture, written in Portuguese like many consensus sheets, with a title above the column names, coloured abbreviations, a row naming four families and a repeated abbreviation. Every value in it is made up. The pictures in this chapter were taken on it.",
         }),
         new FamilyListImportGuideSection("welcome", "1. Welcome", "01-welcome.png", "The first page: what you need, what is kept, and the three ways in.", new[]
@@ -40,12 +40,10 @@ public static class FamilyListImportGuide
         new FamilyListImportGuideSection("columns", "3. Columns", "03-columns.png", "Each meaning with the column proposed for it and an example from the sheet.", new[]
         {
             "For each meaning, choose the column of your sheet that holds it; an example from your sheet appears below each choice. Abbreviation and Family name are required. Other-language name, Notes, Pfam codes and Decision are optional, and every original column is kept anyway.",
-            "A repeated-label column may be offered as a hint. Use this decision column selects it for review; the hint never maps or confirms an action by itself. Without a Decision column, Next asks you to confirm Quantify for every family, with No keeping you on Columns. Acceptance is remembered for this source until its Decision mapping changes.",
-            "Colour categories (optional) opens when the source has fills. Choose a source column to keep its fills as text categories; each starts with its plain source name, which you can rename. An empty edit restores that name, so optional category names never block Next. Summary shows the retained category; it is never a grouping or quantitation rule.",
+            "Without a Decision column, every family is Quantify. Colour categories (optional) lets you name what each source colour means; if you use it, name every colour.",
         }),
         new FamilyListImportGuideSection("decisions", "3. Reviewing decisions", "03-columns-decisions.png", "One line per decision written in the sheet, with its rows and the proposed action.", new[]
         {
-            FamilyListImportHelp.DecisionsSummary,
             "When you choose a Decision column, the page becomes Review spreadsheet decisions: one line for each different value written in that column, the rows that use it, and the proposed action: Quantify, Report under others, Not a family, or Merge into family with the abbreviation to merge into.",
             "Check each line, change what is wrong, and press Confirm these actions. Next stays disabled until the decisions are confirmed, so no proposal is accepted for you. Back to columns returns without confirming, and Review decision values opens the list again.",
         }),
@@ -68,20 +66,18 @@ public static class FamilyListImportGuide
         new FamilyListImportGuideSection("later", "Saving matches later", "", "", new[]
         {
             "Matches confirmed on page 5 are imported with the panel. Two routes save matches later, as the matching window's Help explains.",
-            "With a grouping: in Group by evidence, open the Family checklist, use Match stored names for a family and confirm the labels to use. Apply grouping and File > Save keep the choices made in that review.",
-            "Without grouping proteins: open File > Import family list, press Edit current panel, select the family, use Match stored names, then Apply panel and File > Save.",
+            "With a grouping: in Group by evidence, open the Panel checklist, use Match stored names for a family and confirm the labels to use. Apply grouping and File > Save keep the choices made in that review.",
+            "Without grouping proteins: open File > Import family panel, press Edit current panel, select the family, use Match stored names, then Apply panel and File > Save.",
         }),
         new FamilyListImportGuideSection("summary", "6. Summary", "06-summary.png", "The last check before anything changes.", new[]
         {
-            "The last page before anything changes. Name the panel, then read the line of counts (families, rows split, skipped and renamed, matching choices), the source sheet, and the panel this import replaces. The table lists every family with its decision, source category and matching choice; View source notes shows the original columns kept for it.",
+            "The last page before anything changes. Name the panel, then read the line of counts (families, rows split, skipped and renamed, matching choices), the source sheet, and the panel this import replaces. The table lists every family with its decision and its matching choice; View source notes shows the original columns kept for it.",
             "Import replaces the current panel, if any, in one step. Just before, the workbook and the project are checked again; if either changed, nothing is imported. Back keeps your choices, and Cancel changes nothing.",
         }),
         new FamilyListImportGuideSection("done", "7. Done", "07-done.png", "The list is imported; the workbook and the protein grouping are unchanged.", new[]
         {
             "The family list is imported. The workbook and the protein grouping are unchanged, and the project is not saved yet: File > Save keeps the panel with it.",
-            FamilyListImportHelp.DoneNext,
-            FamilyListImportHelp.MatchingEffect,
-            "Family checklist goes to the Family checklist of Group by evidence, where you review which proteins belong in each family. Undo import restores the previous panel while the import is still the latest change. Close keeps the imported panel.",
+            "Open family checklist goes to the Panel checklist of Group by evidence, where you review which proteins belong in each family. Undo import restores the previous panel while the import is still the latest change. Close keeps the imported panel.",
         }),
         new FamilyListImportGuideSection("keyboard", "Keyboard", "", "", new[]
         {
