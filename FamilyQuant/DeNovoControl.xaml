@@ -78,7 +78,7 @@
                     <Label Content="Source:" VerticalAlignment="Center"
                            ToolTip="Which de novo program made the export. Each keeps its own confidence score: PEAKS uses ALC, DeepNovo uses SCORE."/>
                     <ComboBox x:Name="ComboBoxDeNovoSource" Width="300" Margin="5" SelectedIndex="0"
-                              SelectionChanged="ComboBoxDeNovoSource_SelectionChanged" ToolTip="Choose the caller or union for the next import; the initial choice is PEAKS de novo only. Changing source clears this view's previous inspection, but does not change stored project quantities.">
+                              SelectionChanged="ComboBoxDeNovoSource_SelectionChanged" ToolTip="Choose one source or a union for the next import, with a separate native confidence cutoff per source; default PEAKS de novo only. Changing source clears this view's previous inspection without changing stored project quantities.">
                         <ComboBoxItem Content="PEAKS de novo only (*.denovoOnly.csv)" Tag="peaks-denovo-only" ToolTip="Prepare an import of PEAKS de novo only exports using the native ALC cutoff. This selection changes pending settings, not stored quantities."/>
                         <ComboBoxItem Content="PEAKS de novo all (*.denovo.csv)" Tag="peaks-denovo-all" ToolTip="Prepare an import of PEAKS exports that also include identified spectra, using the native ALC cutoff. This selection changes pending settings, not stored quantities."/>
                         <ComboBoxItem Content="DeepNovo (*.deepnovo.csv)" Tag="deepnovo" ToolTip="Prepare an import of DeepNovo exports using its native SCORE cutoff. SCORE is not converted to PEAKS ALC, and stored quantities stay unchanged."/>
@@ -252,7 +252,7 @@
                               Margin="14,0,0,0" VerticalAlignment="Center" ToolTip="Treat lysine and glutamine as equivalent in the next standalone homology search; off by default. This widens sequence matching for that request without changing stored quantities."/>
                     <Label Content="Decoy prefix:" Margin="12,0,0,0" VerticalAlignment="Center"
                            ToolTip="Text that marks a decoy protein in the family file. If it is wrong, decoys count as targets and the mapped count looks better than it is."/>
-                    <TextBox x:Name="TextBoxDecoyLabel" Text="{Binding DecoyLabel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="90" Margin="5" VerticalAlignment="Center" ToolTip="Case-sensitive identifier prefix marking decoy proteins for the next Search: default Reverse_, any nonempty text, with no numeric unit or range. Changing it prepares the request without editing the input file."/>
+                    <TextBox x:Name="TextBoxDecoyLabel" Text="{Binding DecoyLabel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="90" Margin="5" VerticalAlignment="Center" ToolTip="{x:Static core:IdentifierText.DecoyPrefixToolTip}"/>
                 </WrapPanel>
                 <WrapPanel Grid.Row="2" Margin="5,10,5,0">
                     <Label x:Name="LabelHomologyPeptides" Content="{Binding LabelHomologyPeptides}" Style="{StaticResource ResultValue}"
