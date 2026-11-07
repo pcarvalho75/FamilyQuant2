@@ -481,6 +481,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => HtmlReportExportTests(Path.Combine(workDir, "html-report-export")));
             suite.Add(() => ReportListSheetTests(null));
             suite.AddWithApplication(() => ReportCommandTests(new[] { "--test-report-command" }));
+            suite.AddWithApplication(() => ReportRecoveryTests(new[] { "--test-report-recovery" }));
             suite.Add(FamilyUnobservedTests);
             suite.Add(() => EffectivePanelFamiliesTests(null));
             suite.Add(() => PanelHeadlineTests(null));

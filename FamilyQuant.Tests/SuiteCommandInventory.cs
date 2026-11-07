@@ -393,6 +393,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-report-attribution-cache", "FamilyQuant.Tests.Program.ReportAttributionCacheTests()"),
         SuiteCommandRule.Covered("--test-report-captions", "FamilyQuant.Tests.Program.ReportCaptionTests(System.String)"),
         SuiteCommandRule.Covered("--test-report-command", "FamilyQuant.Tests.Program.ReportCommandTests(System.String[])"),
+        SuiteCommandRule.Covered("--test-report-recovery", "FamilyQuant.Tests.Program.ReportRecoveryTests(System.String[])"),
         SuiteCommandRule.Covered("--test-report-details", "FamilyQuant.Tests.Program.RunReportDetailsTests()"),
         SuiteCommandRule.Covered("--test-report-draft", "FamilyQuant.Tests.Program.WordReportDraftTests()"),
         SuiteCommandRule.Covered("--test-report-figures", "FamilyQuant.Tests.Program.ReportFigureTests(System.String)"),
