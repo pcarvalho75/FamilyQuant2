@@ -101,6 +101,9 @@ public partial class DeNovoControl : UserControl
             LabelMinimumSourceConfidence.ToolTip = "Lowest " + source.ConfidenceColumn +
                 " kept for " + source.DisplayName + ". This score belongs to this program and is " +
                 "not converted to any other program's scale.";
+            TextBoxDecoyLabel.ToolTip = "Case-sensitive identifier prefix marking decoy proteins for the next Search: default " +
+                HomologyOptions.DefaultDecoyLabel + ", any nonempty text, with no numeric unit or range. " +
+                "Changing it prepares the request without editing the input file.";
             TextBoxMinAlc.ToolTip = "Minimum " + source.ConfidenceColumn +
                 ": default 80 percent, range 0 to 100, including decimals. " +
                 "This prepares the next request on the caller's native scale without changing stored quantities.";
