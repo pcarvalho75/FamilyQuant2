@@ -249,6 +249,8 @@ namespace FamilyQuant.Evidence
                 CheckedMotifs = session.Motifs, CheckedMotifResults = session.Results,
                 ConfirmedTask = selection.ConfirmedTask,
                 FamilyPanel = familyPanel,
+                SourceConfirmedMatchesFingerprint = file.FamilyPanel?.ConfirmedEvidenceMatches != null || familyPanel?.ConfirmedEvidenceMatches != null
+                    ? Hash(file.FamilyPanel?.ConfirmedEvidenceMatches) : null,
                 PanelContext = proposal.PanelContext == null ? null : Clone(proposal.PanelContext),
             };
             recipe.FamilyIdentities = ProjectFamilyIdentities(file, recipe);
@@ -330,6 +332,8 @@ namespace FamilyQuant.Evidence
             {
                 if (StateFingerprint(file, session: stored) != stored.SourceStateFingerprint)
                     throw new InvalidOperationException("The curation changed while the evidence transaction was prepared.");
+                if (stored.SourceConfirmedMatchesFingerprint != null && Hash(file.FamilyPanel?.ConfirmedEvidenceMatches) != stored.SourceConfirmedMatchesFingerprint)
+                    throw new InvalidOperationException("The panel matches changed while the evidence transaction was prepared.");
                 ValidateFamilyIdentities(file, stored);
                 operation?.ThrowIfCancellationRequested();
                 foreach (EvidenceAssignment assignment in stored.Assignments)
@@ -390,6 +394,7 @@ namespace FamilyQuant.Evidence
             }) : curation;
             if (session?.ConfirmedTask != null) state = Hash(new { State = state, session.ConfirmedTask });
             if (session?.FamilyIdentities != null) state = Hash(new { State = state, session.FamilyIdentities });
+            if (session?.SourceConfirmedMatchesFingerprint != null) state = Hash(new { State = state, session.FamilyPanel?.ConfirmedEvidenceMatches });
             return session?.FamilyPanel == null ? state : Hash(new
             {
                 State = state, FamilyPanel = session.PanelContext == null ? (object?)(projectSession ? session.FamilyPanel : file.FamilyPanel)

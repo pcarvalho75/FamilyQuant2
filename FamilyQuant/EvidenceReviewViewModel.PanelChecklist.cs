@@ -40,7 +40,8 @@ public sealed partial class EvidenceReviewViewModel
             if (row == null) return "";
             if (row.Matches == 0) return row.Decision + ". " + row.ContaminantReason
                 + " No database targets match this panel family's stored names, source family links or Pfam domains.";
-            string types = string.Join(" | ", new[] { PanelChecklistMatch.UniProtFamily, PanelChecklistMatch.Pfam, PanelChecklistMatch.NameText, PanelChecklistMatch.HandChoice, PanelChecklistMatch.ProposedPlacement }
+            string types = string.Join(" | ", new[] { PanelChecklistMatch.UniProtFamily, PanelChecklistMatch.Pfam, PanelChecklistMatch.NameText, PanelChecklistMatch.HandChoice,
+                PanelChecklistMatch.ProposedPlacement, PanelChecklistMatch.ConfirmedPhrase, PanelChecklistMatch.ConfirmedMatch }
                 .Where(type => row.Proteins.Any(protein => protein.Match.HasFlag(type)))
                 .Select(type => MatchName(type) + " " + row.Proteins.Count(protein => protein.Match.HasFlag(type)).ToString("N0", CultureInfo.CurrentCulture)));
             string reasons = string.Join(Environment.NewLine, row.Proteins.Where(protein => !protein.Placed).GroupBy(protein => protein.Reason)
@@ -53,6 +54,7 @@ public sealed partial class EvidenceReviewViewModel
     {
         PanelChecklistMatch.UniProtFamily => "UniProt family", PanelChecklistMatch.Pfam => "Pfam",
         PanelChecklistMatch.NameText => "Name text", PanelChecklistMatch.HandChoice => "Added by hand",
-        PanelChecklistMatch.ProposedPlacement => "Proposal placement", _ => "",
+        PanelChecklistMatch.ProposedPlacement => "Proposal placement", PanelChecklistMatch.ConfirmedPhrase => "Confirmed phrase",
+        PanelChecklistMatch.ConfirmedMatch => "Confirmed match", _ => "",
     };
 }
