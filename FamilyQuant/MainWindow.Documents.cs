@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Runtime.CompilerServices;
 
 namespace FamilyQuant;
 
@@ -27,15 +28,21 @@ public partial class MainWindow
 
         public bool OpenProjectPath(string path)
         {
+            long before = GC.GetAllocatedBytesForCurrentThread();
             try
             {
-                // Read the container or the plain file BEFORE touching the layout, so a corrupt project
-                // leaves the previous view in place instead of an empty window. A .fqproj restores the
-                // stored quant too; an old .fcf loads exactly as it always did, with the quant empty.
-                ShellProjectContent content = ShellProjectOperations.Read(path);
-                return AttachProject(path, content);
+                return ReadAndAttachProject(path);
             }
             catch (Exception ex) { return ReportOpenFailure(ex); }
+            finally { CurationReadMemory.ReleaseIfLarge(GC.GetAllocatedBytesForCurrentThread() - before); }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private bool ReadAndAttachProject(string path)
+        {
+            // Read before touching the layout, so corrupt input preserves the previous view.
+            ShellProjectContent content = ShellProjectOperations.Read(path);
+            return AttachProject(path, content);
         }
 
         public Task<bool> OpenProjectPathAsync(string path) => AppOperationHost.OnUi(owner, () => OpenProjectCoreAsync(path));
@@ -45,9 +52,15 @@ public partial class MainWindow
             DateTimeOffset started = DateTimeOffset.UtcNow;
             owner.ProjectOpenLogPath = AppOperationHost.CreateLogPath("open");
             using var operation = owner.Operations.Begin("Open project", started, owner.ProjectOpenLogPath);
+            long readAllocated = 0;
             try
             {
-                ShellProjectContent content = await Task.Run(() => ShellProjectOperations.Read(path, operation.Context));
+                ShellProjectContent content = await Task.Run(() =>
+                {
+                    long before = GC.GetAllocatedBytesForCurrentThread();
+                    try { return ShellProjectOperations.Read(path, operation.Context); }
+                    finally { readAllocated = GC.GetAllocatedBytesForCurrentThread() - before; }
+                });
                 operation.Context.ThrowIfCancellationRequested();
                 operation.Dispose();
                 return AttachProject(path, content, started, owner.ProjectOpenLogPath);
@@ -58,6 +71,7 @@ public partial class MainWindow
                 return false;
             }
             catch (Exception ex) { owner.Operations.LogFailure(ex); return ReportOpenFailure(ex); }
+            finally { CurationReadMemory.ReleaseIfLarge(readAllocated); }
         }
 
         private bool AttachProject(string path, ShellProjectContent content, DateTimeOffset? started = null, string? operationLogPath = null)
