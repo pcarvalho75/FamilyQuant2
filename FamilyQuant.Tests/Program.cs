@@ -260,6 +260,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelEvidenceMatchingTests());
             suite.AddWithApplication(() => PanelMatchLifecycleTests(Path.Combine(workDir, "panel-match-lifecycle")));
             suite.AddWithApplication(() => PanelEvidenceMatchUiTests(Path.Combine(workDir, "panel-evidence-match-ui")));
+            suite.AddWithApplication(() => EvidenceDetailSelectionTests(Path.Combine(workDir, "evidence-detail-selection")));
             suite.Add(() => HandChoiceRecordTests());
             suite.AddWithApplication(() => ManualFamilyUiTests());
             suite.AddWithApplication(() => ImportWizardMockTests());

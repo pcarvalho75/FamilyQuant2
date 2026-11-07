@@ -23,6 +23,8 @@ public static class PanelReportHelp
         key. Apply panel commits one project change; Undo can restore the prior
         panel. Later assignment or subclass refresh operations have their own
         Undo steps. Save the project to retain the change.
+        Select a family and use Match stored names to confirm labels, then
+        Apply panel and File > Save to keep them without grouping proteins.
 
         Check Pfam compares the panel's accessions and supplied names with the
         provider. A mismatch, missing entry or unavailable check is shown; it
