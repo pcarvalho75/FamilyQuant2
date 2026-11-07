@@ -20,7 +20,8 @@ public sealed partial class FamilyListImportViewModel
     public bool HasColors => SourceColorChoices.Count > 0;
     public bool HasSourceFills => Preview?.Rows.Any(r => r.Cells.Any(c => c.Fill.Length > 0)) == true;
     public string DecisionSummary => HasDecisions ? Decisions.Count.ToString("N0", CultureInfo.CurrentCulture)
-        + (Decisions.All(d => d.Confirmed) ? " values confirmed" : " values to review") : "Quantify every family";
+        + (Decisions.Count == 1 ? " value" : " values")
+        + (Decisions.All(d => d.Confirmed) ? " confirmed" : " to review") : "Quantify every family";
     public string SpecialSummary => SpecialRows.Count(r => r.Blocking) is var count && count == 0 ? "Every special row has a choice"
         : count.ToString("N0", CultureInfo.CurrentCulture) + (count == 1 ? " row needs a choice" : " rows need a choice");
     private bool MappingValid => table != null && Columns.Where(c => c.Required).All(c => c.HasChoice && table.Headers.Contains(c.Header, StringComparer.Ordinal))
