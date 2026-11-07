@@ -105,9 +105,10 @@ internal static partial class Program
                 && references.Rows.All(r => r.Cells.Values.Any(v => v.Contains("Fictíci", StringComparison.Ordinal) || v.Contains("Exemplo", StringComparison.Ordinal))));
             string allText = string.Join("\n", sheets.Select((s, i) => reader.ReadTable(titled, s, i == 0 ? 3 : 1))
                 .SelectMany(t => t.Headers.Concat(t.Rows.SelectMany(r => r.Cells.Values))));
-            Check("no em or en dash anywhere in the workbook", !allText.Contains('–') && !allText.Contains('—'));
-            Check("nothing in the workbook names an organism, a venom or a toxin (D21)", !DatabaseSpecificCopy.IsMatch(allText),
-                DatabaseSpecificCopy.Match(allText).Value);
+            Check("no em or en dash anywhere in the workbook", !allText.Contains('\u2013') && !allText.Contains('\u2014'));
+            Check("D21: nothing the user sees in the workbook names an organism, a venom or a sample's numbers",
+                !DatabaseSpecificCopy.IsMatch(allText) && !HistoricalSampleCopy.IsMatch(allText),
+                DatabaseSpecificCopy.Match(allText).Value + HistoricalSampleCopy.Match(allText).Value);
             if (output != null)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(output))!);
