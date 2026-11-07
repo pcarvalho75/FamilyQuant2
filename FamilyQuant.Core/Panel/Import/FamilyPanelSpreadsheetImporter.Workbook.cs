@@ -125,6 +125,10 @@ public sealed partial class FamilyPanelSpreadsheetImporter
         var rows = WorkbookDataRows(table);
         string keyHeader = choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.FamilyKey, "");
         var keys = rows.Select(row => Value(row, keyHeader).Trim()).Where(key => key.Length > 0).ToHashSet(StringComparer.Ordinal);
+        var nameHeaders = new[] { PanelImportFields.DisplayName, PanelImportFields.OtherName }
+            .Select(field => choices.ColumnHeaders.GetValueOrDefault(field, "")).Where(header => header.Length > 0).ToArray();
+        var familyNames = rows.SelectMany(row => nameHeaders.Select(header => Value(row, header).Trim()))
+            .Where(name => name.Length > 0).ToHashSet(StringComparer.OrdinalIgnoreCase);
         var fills = rows.Where(row => row.Fills.ContainsKey(keyHeader)).Select(row => row.Fills[keyHeader]).ToHashSet(StringComparer.OrdinalIgnoreCase);
         foreach (var sheet in proposal.Workbook.Sheets.Where(sheet => sheet.SheetName != proposal.FamilySheet && sheet.Table != null))
         {
@@ -157,7 +161,11 @@ public sealed partial class FamilyPanelSpreadsheetImporter
                 || domainNames.Any(name => ContainsWorkbookKey(Value(row, header), name)))).ToList();
             string classColumn = other.Headers.Where(header => header != keyColumn?.Header && !domainColumns.Contains(header))
                 .FirstOrDefault(header => new ColumnShape(header, otherRows).IsNames || new ColumnShape(header, otherRows).IsCode) ?? "";
-            if (chosenRole && role == PanelWorkbookSheetRole.SubclassTable || linked.Count > 0 && domainColumns.Count > 0 && classColumn.Length > 0)
+            // An alternate family list must add class names, not reuse imported family identities.
+            bool reusesFamilyIdentity = eligibleFamilySheets.Contains(sheet.SheetName)
+                && otherRows.Any(row => familyNames.Contains(Value(row, classColumn).Trim()) || keys.Contains(Value(row, classColumn).Trim()));
+            if (chosenRole && role == PanelWorkbookSheetRole.SubclassTable
+                || linked.Count > 0 && domainColumns.Count > 0 && classColumn.Length > 0 && !reusesFamilyIdentity)
             {
                 sheet.Role = PanelWorkbookSheetRole.SubclassTable;
                 sheet.IsUncertain |= linked.Count == 0 || domainColumns.Count == 0 || classColumn.Length == 0;

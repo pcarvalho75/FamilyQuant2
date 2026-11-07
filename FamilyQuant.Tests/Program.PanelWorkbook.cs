@@ -106,6 +106,18 @@ internal static partial class Program
                 new Dictionary<string, PanelWorkbookSheetRole> { ["Data 3"] = PanelWorkbookSheetRole.Notes });
             Check("Z16a10 an explicit notes role still overrides supported subclass structure", explicitNotes.SubclassTables.Count == 0
                 && explicitNotes.Notes.Any(note => note.SheetName == "Data 3"));
+            string keyClasses = Path.Combine(root, "family-keys-as-classes.xlsx"); File.Copy(dualRole, keyClasses);
+            using (var document = SpreadsheetDocument.Open(keyClasses, true))
+            {
+                var part = NeutralWorkbookPart(document.WorkbookPart!, "Data 3");
+                int index = 11;
+                foreach (var row in part.Worksheet!.GetFirstChild<XL.SheetData>()!.Elements<XL.Row>().Skip(1))
+                    row.Elements<XL.Cell>().ElementAt(1).InlineString = new XL.InlineString(new XL.Text("F" + (index++).ToString("D2", CultureInfo.InvariantCulture)));
+                part.Worksheet.Save();
+            }
+            var keyClassProposal = importer.ProposeWorkbook(keyClasses);
+            Check("Z16a10 imported family keys alone are not distinct subclass names", keyClassProposal.SubclassTables.Count == 0
+                && keyClassProposal.Workbook.Sheets.Single(sheet => sheet.SheetName == "Data 3") is { Role: PanelWorkbookSheetRole.Notes, IsUncertain: true });
 
             string single = Path.Combine(root, "single.xlsx"); WriteNeutralWorkbook(single, onlyFamily: true);
             var oldPreview = reader.ReadPreview(single);
@@ -212,6 +224,22 @@ internal static partial class Program
             var chosen = importer.ProposeWorkbook(tied.Workbook, "Another 9");
             Check("Z16a1 explicit family choice reruns complete derived facts after a tie", chosen.FamilySheet == "Another 9"
                 && !chosen.NeedsFamilySheetChoice && chosen.Pfam.Count == 40 && chosen.MultiFamilyRows.Count > 0);
+            Check("Z16a10 an unchosen duplicate family list remains uncertain notes rather than subclasses",
+                chosen.SubclassTables.Count == 0
+                && chosen.Workbook.Sheets.Single(sheet => sheet.SheetName == "Data 9") is { Role: PanelWorkbookSheetRole.Notes, IsUncertain: true }
+                && chosen.Notes.Any(note => note.SheetName == "Data 9" && note.Text.Contains("Invented group 1", StringComparison.Ordinal)));
+            string filteredPath = Path.Combine(root, "filtered-family-copy.xlsx"); File.Copy(ambiguous, filteredPath);
+            using (var document = SpreadsheetDocument.Open(filteredPath, true))
+            {
+                var part = NeutralWorkbookPart(document.WorkbookPart!, "Another 9");
+                foreach (var row in part.Worksheet!.GetFirstChild<XL.SheetData>()!.Elements<XL.Row>().Skip(11).ToArray()) row.Remove();
+                part.Worksheet.Save();
+            }
+            var filtered = importer.ProposeWorkbook(filteredPath);
+            Check("Z16a10 a filtered family copy keeps its full text as an uncertain alternative",
+                filtered.FamilySheet == "Data 9" && filtered.SubclassTables.Count == 0
+                && filtered.Workbook.Sheets.Single(sheet => sheet.SheetName == "Another 9") is { Role: PanelWorkbookSheetRole.Notes, IsUncertain: true }
+                && filtered.Notes.Any(note => note.SheetName == "Another 9" && note.Text.Contains("Invented group 10", StringComparison.Ordinal)));
             var overridden = importer.ProposeWorkbook(shipped.Workbook, shipped.FamilySheet,
                 new Dictionary<string, PanelWorkbookSheetRole> { [shipped.Workbook.Sheets.Single(sheet => sheet.Role == PanelWorkbookSheetRole.ColorLegend).SheetName] = PanelWorkbookSheetRole.Notes });
             Check("Z16a1 explicit role overrides survive relationship derivation", overridden.Workbook.Sheets.All(sheet => sheet.Role != PanelWorkbookSheetRole.ColorLegend)
