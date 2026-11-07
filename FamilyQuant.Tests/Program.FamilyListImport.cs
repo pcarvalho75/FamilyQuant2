@@ -174,6 +174,7 @@ internal static partial class Program
         FamilyListImportGuardTests(workbook, work);
         FamilyListImportMatchTests();
         FamilyListImportCountGrammarTests();
+        FamilyListDecisionHintTests(workbook);
         FamilyListChecklistHandoffTests();
     }
 

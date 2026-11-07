@@ -32,7 +32,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     private CancellationTokenSource? operation;
     private Task activeRead = Task.CompletedTask;
     private int readGeneration, page, headerRow = 1;
-    private bool busy, updating, keepOtherSheets, reviewingDecisions;
+    private bool busy, updating, keepOtherSheets, reviewingDecisions, quantifyAllConfirmed;
     private string path = "", sheet = "", panelName = "", status = "Nothing has changed yet.";
     private string headerRowText = "1";
     private FamilyPanelImport choices = new() { ImportVersion = PanelImportRules.Current };
@@ -55,6 +55,10 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public FamilyPanel? DraftPanel => check.Panel;
     public FamilyPanel? ImportedPanel => committedPanel;
     public bool Imported => transaction.Imported;
+    public string DecisionHint { get; private set; } = "";
+    public string DecisionHintReason { get; private set; } = "";
+    public bool HasDecisionHint => DecisionHint.Length > 0 && Columns.FirstOrDefault(c => c.Role == PanelImportFields.Decision)?.HasChoice != true;
+    public string DecisionHintQuestion => "Could " + DecisionHint + " hold the family actions?";
     public bool CanUndo => transaction.CanUndo;
     public string PreviousPanel { get; }
     public string WorkbookPath => path;
@@ -129,8 +133,9 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
             updating = true;
             path = workbookPath; sheet = preview.SheetName; Preview = preview; table = loaded; check = new(); HeaderRow = selectedRow;
             HeaderRowText = selectedRow.ToString(CultureInfo.CurrentCulture);
-            choices = loaded == null ? new FamilyPanelImport { ImportVersion = PanelImportRules.Current }
-                : importer.Propose(loaded).Choices;
+            var proposal = loaded == null ? new PanelImportProposal { Choices = new FamilyPanelImport { ImportVersion = PanelImportRules.Current } }
+                : importer.Propose(loaded);
+            choices = proposal.Choices; DecisionHint = proposal.DecisionHint; DecisionHintReason = proposal.DecisionHintReason; quantifyAllConfirmed = false;
             choices.RowChoices = new(); choices.ColorLabels = null;
             PanelName = Path.GetFileNameWithoutExtension(workbookPath);
             Columns.Clear(); Decisions.Clear(); SourceColorChoices.Clear(); MatchFamilies.Clear(); matchesFingerprint = ""; ReviewingDecisions = false;
@@ -158,9 +163,15 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public void Revisit(int target)
     { if (!IsBusy && target >= 0 && target < page && (!Imported || target == 5)) GoTo(target); }
 
-    public async Task<bool> NextAsync()
+    public async Task<bool> NextAsync(Func<string, bool>? confirmQuantifyAll = null)
     {
         if (!CanNext) { Status = DisabledReason; return false; }
+        if (page == 2 && !Imported && !quantifyAllConfirmed && Columns.FirstOrDefault(c => c.Role == PanelImportFields.Decision)?.HasChoice != true)
+        {
+            if (confirmQuantifyAll?.Invoke("No Decision column is chosen. Quantify every family for this import?") != true)
+            { Status = "Choose a Decision column, or confirm Quantify for every family to continue."; return false; }
+            quantifyAllConfirmed = true;
+        }
         if (Imported) { if (page < 6) GoTo(page + 1); return page == 6; }
         if (page == 5) { var commit = CommitAsync(); activeRead = commit; return await commit; }
         if (page == 3)
@@ -204,6 +215,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         Changed(nameof(SkipFamilyLabel)); Changed(nameof(SkipAllLabel));
         Changed(nameof(Steps)); Changed(nameof(CanEdit));
         Changed(nameof(MainColumns)); Changed(nameof(ColorColumn));
+        Changed(nameof(DecisionHint)); Changed(nameof(DecisionHintReason)); Changed(nameof(HasDecisionHint)); Changed(nameof(DecisionHintQuestion));
     }
 
     public void ReportStatus(string message) => Status = message;

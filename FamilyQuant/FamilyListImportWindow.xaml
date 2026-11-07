@@ -128,6 +128,12 @@
                                     <TextBlock Text="{Binding Example, StringFormat=Example: {0}}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" MaxHeight="66" ToolTip="{Binding Example}"/>
                                 </StackPanel></DataTemplate></ItemsControl.ItemTemplate>
                             </ItemsControl>
+                            <DockPanel Visibility="{Binding HasDecisionHint, Converter={StaticResource BoolVisibility}}" Margin="0,0,0,12">
+                                <Button x:Name="UseDecisionHintButton" Content="Use this decision column" Click="UseDecisionHint_Click" DockPanel.Dock="Right"
+                                        ToolTip="Uses the suggested source column for Decision and opens its labels for your review; nothing changes in the project. Each proposed action still needs confirmation before Import."/>
+                                <TextBlock x:Name="DecisionHintText" Text="{Binding DecisionHintQuestion}" ToolTip="{Binding DecisionHintReason}" VerticalAlignment="Center"
+                                           Style="{StaticResource CaptionText}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+                            </DockPanel>
                             <StackPanel Visibility="{Binding HasDecisions, Converter={StaticResource BoolVisibility}}" Margin="0,0,0,12">
                                 <TextBlock Text="{Binding DecisionSummary}" Style="{StaticResource CaptionText}"/>
                                 <Button Content="Review decision values" Click="ReviewDecisions_Click" HorizontalAlignment="Left"/>

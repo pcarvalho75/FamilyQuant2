@@ -111,13 +111,19 @@ public partial class FamilyListImportWindow : Window
     {
         CommitGridEdits();
         if (Model.Imported && Model.Page == 6) { OpenChecklistRequested = true; Close(); return; }
-        await Model.NextAsync();
+        await Model.NextAsync(message => ShellMessages.Report(this, message, "Import family list",
+            MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes);
     }
     private void Back_Click(object sender, RoutedEventArgs e) { CommitGridEdits(); Model.Back(); }
     private void Step_Click(object sender, RoutedEventArgs e) { CommitGridEdits(); if (sender is FrameworkElement { Tag: int index }) Model.Revisit(index); }
     private void ConfirmDecisions_Click(object sender, RoutedEventArgs e) { CommitGridEdits(); Model.ConfirmDecisions(); }
     private void ReviewDecisions_Click(object sender, RoutedEventArgs e) => Model.ReviewingDecisions = true;
     private void BackToColumns_Click(object sender, RoutedEventArgs e) => Model.ReviewingDecisions = false;
+    private void UseDecisionHint_Click(object sender, RoutedEventArgs e)
+    {
+        if (Model.CanEdit && Model.HasDecisionHint && Model.Columns.FirstOrDefault(c => c.Role == PanelImportFields.Decision) is { } column)
+            column.Header = Model.DecisionHint;
+    }
     private void SourceNotes_Click(object sender, RoutedEventArgs e)
     { if (sender is FrameworkElement { DataContext: ImportSummaryFamily family }) TextReportWindow.Show("Source notes", family.Name + "\nAbbreviation: " + family.Key + "\n\n" + family.Notes, this, wrap: true); }
     private void UseRow_Click(object sender, RoutedEventArgs e) { CommitGridEdits(); Model.UseRowChoice(); }

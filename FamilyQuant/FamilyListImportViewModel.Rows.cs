@@ -62,6 +62,7 @@ public sealed partial class FamilyListImportViewModel
             string nextDecision = choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Decision, "");
             if (nextDecision != decisionHeader)
             {
+                quantifyAllConfirmed = false;
                 decisionHeader = nextDecision; Decisions.Clear();
                 foreach (var proposed in importer.ProposeDecisions(table, choices))
                 {
