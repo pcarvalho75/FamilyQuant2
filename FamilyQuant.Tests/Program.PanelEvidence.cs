@@ -254,6 +254,7 @@ internal static partial class Program
     private static void PanelEvidenceUiTests()
     {
         EnsureApplication();
+        PanelManualLinkCurrencyTests();
         var previous = Themes.ThemeManager.Current;
         try
         {
