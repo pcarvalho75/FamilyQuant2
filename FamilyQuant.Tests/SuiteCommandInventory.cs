@@ -8,6 +8,7 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-feature-provenance-format2", "FamilyQuant.Tests.Program.FeatureProvenanceFormatTests(System.String)"),
         SuiteCommandRule.Excluded("--measure-decoy-rebuild", "Z15b5 explicit-output measurement writes and reads repository synthetic curation fixtures and compares every stored decoy field; an audit producer rather than a DefaultSuite fixture."),
         SuiteCommandRule.Covered("--test-curation-streaming-contract", "FamilyQuant.Tests.Program.CurationStreamingContractTests(System.String)"),
         SuiteCommandRule.Covered("--test-crash-handler", "FamilyQuant.Tests.Program.CrashHandlerTests()"),

@@ -100,6 +100,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => CoreOperationTests(workDir));
             suite.Add(() => StreamingSaveTests(Path.Combine(workDir, "streaming-save")));
             suite.Add(() => CurationFormat2Tests(Path.Combine(workDir, "curation-format2")));
+            suite.Add(() => FeatureProvenanceFormatTests(Path.Combine(workDir, "feature-provenance")));
             suite.AddWithApplication(() => CurationStreamingContractTests(Path.Combine(workDir, "curation-streaming-contract")));
             suite.Section("Display filters and the family counter");
             suite.Add(() => FilterTests());
