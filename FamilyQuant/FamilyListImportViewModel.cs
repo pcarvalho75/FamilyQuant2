@@ -77,16 +77,19 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public string Status { get => status; private set => Set(ref status, value); }
     public int Page => page;
     public bool CanEdit => !IsBusy && !Imported;
+    private string StepName(int index) => index == 1 && HasWorkbookMap ? "Workbook sheets" : StepNames[index];
     public IReadOnlyList<ImportWizardStep> Steps => StepNames.Select((name, index) => new ImportWizardStep(index,
-        (index + 1).ToString(CultureInfo.CurrentCulture) + "   " + name, index < page, index == page,
+        (index + 1).ToString(CultureInfo.CurrentCulture) + "   " + StepName(index), index < page, index == page,
         !IsBusy && index <= page && (!Imported || index >= 5))).ToArray();
     public string Title => reviewingWorkbook ? "Review your workbook" : reviewingSubclasses ? "Review subclass proposals"
-        : page == 2 && ReviewingDecisions ? "Review spreadsheet decisions" : Titles[page];
+        : page == 1 && HasWorkbookMap ? "Workbook sheets" : page == 2 && ReviewingDecisions ? "Review spreadsheet decisions" : Titles[page];
     public string Explanation => reviewingWorkbook ? "Review what was found, change any section, then accept the proposal as one import."
         : reviewingSubclasses ? "Check each proposed family, subclass and domain rule before keeping your choices."
-        : page == 2 && ReviewingDecisions ? FamilyListImportHelp.DecisionsSummary : Explanations[page];
+        : page == 2 && ReviewingDecisions ? FamilyListImportHelp.DecisionsSummary
+        : page == 1 && HasWorkbookMap ? "Check each sheet's role under Use as, and take another sheet as the family list if needed."
+        : Explanations[page];
     public string StepLabel => reviewingWorkbook ? "Workbook proposal" : reviewingSubclasses ? "Subclass review"
-        : "Step " + (page + 1).ToString(CultureInfo.CurrentCulture) + " of 7, " + StepNames[page];
+        : "Step " + (page + 1).ToString(CultureInfo.CurrentCulture) + " of 7, " + StepName(page);
     public string ForwardLabel => reviewingWorkbook ? "Accept and import" : reviewingSubclasses ? "Keep subclass choices"
         : WorkbookReviewEnabled && page == 5 && !Imported ? "Review workbook" : page == 5 && !Imported ? "Import" : page == 6 ? "Family checklist" : "Next";
     public string CloseLabel => Imported ? "Close" : "Cancel";

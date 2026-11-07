@@ -45,7 +45,7 @@ public sealed partial class FamilyListImportViewModel
         if (!preserveDraft) { SubclassChoices.Clear(); reviewedWorkbookColumns.Clear(); ResetWorkbookReview(); }
         foreach (var sheet in value?.Workbook.Sheets ?? (IEnumerable<PanelWorkbookSheet>)Array.Empty<PanelWorkbookSheet>())
         {
-            var row = new ImportWorkbookSheet { Name = sheet.SheetName, Role = sheet.Role, Reason = sheet.RoleReason,
+            var row = new ImportWorkbookSheet { Name = sheet.SheetName, Role = sheet.Role, Reason = PlainWorkbookReason(sheet.RoleReason),
                 Visibility = sheet.IsHidden ? "Hidden sheet" : "Visible sheet", Review = sheet.IsUncertain ? "Review role" : "Proposed",
                 IsFamilySheet = sheet.SheetName == value!.FamilySheet };
             row.PropertyChanged += async (_, change) =>
@@ -101,6 +101,10 @@ public sealed partial class FamilyListImportViewModel
     private PanelWorkbookDecisionHint? WorkbookDecision(string source) => workbookSnapshot?.Decisions.FirstOrDefault(d => d.SourceValue == source);
     private PanelWorkbookColorHint? WorkbookColor(string color) => workbookSnapshot?.Colors.FirstOrDefault(c => c.Color.Equals(color, StringComparison.OrdinalIgnoreCase));
     private static string DescribeWorkbookProblem(PanelImportProblem problem) => (problem.SheetName is { Length: > 0 } sheet ? sheet + ": " : "Workbook: ") + problem.Message;
+    private static string PlainWorkbookReason(string reason) => reason.StartsWith("The visible-first ranking proposes this short-code/name table", StringComparison.Ordinal)
+        ? "Suggested as the family list because it has abbreviation and family-name columns. Visible sheets and those with more rows are preferred."
+        : reason == "The sole available table retains the existing single-sheet import proposal."
+            ? "Suggested as the family list because this is the only sheet with a table." : reason;
     private string DefaultColorLabel(PanelImportColorUse color) => WorkbookColor(color.Color) is { IsUncertain: false, Name.Length: > 0 } legend
         ? legend.Name : string.IsNullOrWhiteSpace(color.Label) ? color.ColorName : color.Label;
 

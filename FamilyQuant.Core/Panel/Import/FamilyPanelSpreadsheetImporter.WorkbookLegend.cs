@@ -163,7 +163,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter
         var matchedWords = all.SelectMany(item => item.Words).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray();
         string evidence = matchedWords.Length == 0 ? "No program action word matched."
             : "Matched program words: " + string.Join(", ", matchedWords) + ".";
-        if (meanings.Count > 0) evidence += " Legend meaning: " + string.Join(" | ", meanings) + ".";
+        if (meanings.Count > 0) evidence += " Legend meaning: " + string.Join(" | ", meanings).TrimEnd().TrimEnd('.') + ".";
         if (qualifierFallback)
             return (null, evidence + " Bracketed qualifier: " + source.Qualifier + ". Review its action.");
         bool actionLabel = labelSignals.Actions.Count == 1 && !labelSignals.NeedsReview;

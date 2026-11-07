@@ -198,6 +198,7 @@ internal static partial class Program
         WorkbookOverviewFilledNavigationTest(work);
         WorkbookOverviewMeaningPunctuationTests(work);
         WorkbookFamilySheetDraftTests(work);
+        WorkbookPlainWordsTests(work);
     }
 
     private static void WorkbookFamilySheetDraftTests(string work)
@@ -270,14 +271,37 @@ internal static partial class Program
                 cell.DataType = XL.CellValues.InlineString; cell.CellValue = null; cell.InlineString = new XL.InlineString(new XL.Text(meaning));
                 part.Worksheet.Save();
             }
+            var observed = new ObservedWorkbookSource();
             using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(WorkbookOverviewProject())),
-                workbookSource: new ObservedWorkbookSource(), openWorkbookReview: true);
+                workbookSource: observed, openWorkbookReview: true);
             FinishReviewWork(() => model.LoadAsync(path));
             Check("legend meaning " + (ending.Length == 0 ? "without" : "with") + " a trailing stop ends once in the review status",
                 model.WorkbookReviewStatus.Contains("Legend meaning: Quantify when evidence is sufficient. ", StringComparison.Ordinal)
                 && !model.WorkbookReviewStatus.Contains("sufficient..", StringComparison.Ordinal)
                 && model.Decisions.Single(d => d.Source == "Opcional").Meaning == meaning, model.WorkbookReviewStatus);
+            string reason = observed.Last.Decisions.Single(d => d.SourceValue == "Opcional").Reason;
+            Check("legend reason " + (ending.Length == 0 ? "without" : "with") + " a source stop ends its meaning sentence once",
+                reason.Contains("Legend meaning: Quantify when evidence is sufficient. ", StringComparison.Ordinal)
+                && !reason.Contains("sufficient..", StringComparison.Ordinal), reason);
         }
+    }
+
+    private static void WorkbookPlainWordsTests(string work)
+    {
+        string path = Path.Combine(work, "plain-workbook.xlsx"); ExampleFamilyList.Write(path);
+        using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(WorkbookOverviewProject())),
+            workbookSource: new ObservedWorkbookSource(), openWorkbookReview: true);
+        FinishReviewWork(() => model.LoadAsync(path));
+        string reason = model.WorkbookSheets.Single(sheet => sheet.IsFamilySheet).Reason;
+        Check("family-list explanation uses plain words rather than ranking and short-code terms", reason.Contains("abbreviation", StringComparison.OrdinalIgnoreCase)
+            && !reason.Contains("visible-first", StringComparison.Ordinal) && !reason.Contains("short-code", StringComparison.Ordinal), reason);
+        string card = model.WorkbookSections.Single(section => section.Key == "sheets").Title;
+        FinishReviewWork(() => model.ReviewWorkbookSectionAsync("sheets"));
+        Check("Workbook sheets card opens a page with the same name", card == "Workbook sheets" && model.Title == card
+            && model.StepLabel.EndsWith(card, StringComparison.Ordinal), model.Title + "; " + model.StepLabel);
+        Check("Workbook sheets page explanation names the sheet roles rather than the old file and sheet step",
+            model.Explanation.Contains("role", StringComparison.OrdinalIgnoreCase)
+            && !model.Explanation.Contains("Choose a file and sheet", StringComparison.Ordinal), model.Explanation);
     }
 
     private static void WorkbookOverviewFilledNavigationTest(string work)
