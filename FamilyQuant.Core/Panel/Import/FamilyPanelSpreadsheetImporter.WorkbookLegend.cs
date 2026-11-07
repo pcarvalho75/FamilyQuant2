@@ -69,7 +69,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter
             var ranked = table.Headers.Where(header => !excluded.Contains(header)).Select(header =>
             {
                 var values = rows.Select(row => Value(row, header)).Where(value => !string.IsNullOrWhiteSpace(value)).ToList();
-                return new { Header = header, Filled = values.Count, Matched = values.Count(value => labels.Contains(WorkbookLabel(value))) };
+                return new { Header = header, Filled = values.Count, Matched = values.Count(value => labels.Contains(WorkbookDecisionLabel(value).Label)) };
             }).Where(column => column.Matched >= Math.Min(2, column.Filled) && column.Matched > 0 && column.Matched * 2 >= column.Filled)
                 .OrderByDescending(column => column.Matched).ThenByDescending(column => (double)column.Matched / column.Filled).ToArray();
             ambiguous = ranked.Length > 1 && ranked[0].Matched == ranked[1].Matched
@@ -100,7 +100,9 @@ public sealed partial class FamilyPanelSpreadsheetImporter
         foreach (var group in rows.Where(row => !string.IsNullOrWhiteSpace(Value(row, decisionHeader)))
             .GroupBy(row => Value(row, decisionHeader), StringComparer.Ordinal))
         {
-            var matched = entries.Where(entry => string.Equals(WorkbookLabel(entry.Label), WorkbookLabel(group.Key), StringComparison.OrdinalIgnoreCase)).ToList();
+            string baseLabel = WorkbookDecisionLabel(group.Key).Label;
+            var matched = entries.Where(entry => baseLabel.Length > 0
+                && string.Equals(WorkbookLabel(entry.Label), baseLabel, StringComparison.OrdinalIgnoreCase)).ToList();
             var meanings = matched.Select(entry => entry.Meaning).Where(value => !string.IsNullOrWhiteSpace(value)).Distinct(StringComparer.Ordinal).ToList();
             var evidence = WorkbookDecisionEvidence(group.Key, meanings, keys);
             var action = evidence.Mapping;
@@ -116,11 +118,19 @@ public sealed partial class FamilyPanelSpreadsheetImporter
 
     private static string WorkbookLabel(string value) => value.Trim().Normalize(NormalizationForm.FormC);
 
+    private static (string Label, string Qualifier) WorkbookDecisionLabel(string value)
+    {
+        string normalized = value.Trim().Normalize(NormalizationForm.FormC);
+        int bracket = normalized.IndexOfAny(['(', '[', '{']);
+        return bracket < 0 ? (normalized, "") : (normalized[..bracket].TrimEnd(), normalized[bracket..]);
+    }
+
     private enum WorkbookActionSignal { Quantify, Exclude, Merge, Others, Optional, Conditional, Negation }
 
     // D84: general program-action vocabulary, in English, Portuguese and Spanish. These words only
     // propose UI actions from decision/legend text; they never classify proteins or identify sheets.
-    // Optional, conditional, negated, conflicting and unmatched text requires an explicit choice.
+    // D87: action labels take precedence over same-action/descriptive legend text. Nearby preceding
+    // negation cancels its action only; bracketed source qualifiers always require explicit review.
     private static readonly IReadOnlyDictionary<WorkbookActionSignal, string[]> WorkbookActionVocabulary = new Dictionary<WorkbookActionSignal, string[]>
     {
         [WorkbookActionSignal.Quantify] = ["quantify", "keep", "include", "quantificar", "manter", "incluir", "cuantificar", "conservar", "mantener"],
@@ -137,38 +147,22 @@ public sealed partial class FamilyPanelSpreadsheetImporter
     private static (FamilyPanelDecisionMapping? Mapping, string Reason) WorkbookDecisionEvidence(string label,
         IReadOnlyList<string> meanings, IReadOnlySet<string> keys)
     {
-        var signals = new HashSet<WorkbookActionSignal>();
-        var matchedWords = new HashSet<string>(StringComparer.Ordinal);
-        var targets = new HashSet<string>(StringComparer.Ordinal);
-        foreach (string text in new[] { label }.Concat(meanings))
-        {
-            string normalized = Regex.Replace(Fold(text), @"\s+", " ");
-            var hits = new List<(WorkbookActionSignal Signal, string Word, int Index, int Length)>();
-            foreach (var bucket in WorkbookActionVocabulary)
-            foreach (string word in bucket.Value)
-            foreach (Match match in Regex.Matches(normalized, @"(?<![\p{L}\p{N}])" + Regex.Escape(word) + @"(?![\p{L}\p{N}])", RegexOptions.CultureInvariant))
-                hits.Add((bucket.Key, word, match.Index, match.Length));
-            var named = keys.Where(key => Regex.IsMatch(text, @"(?<![\p{L}\p{N}_\-])" + Regex.Escape(key) + @"(?![\p{L}\p{N}_\-])", RegexOptions.CultureInvariant)).ToArray();
-            targets.UnionWith(named);
-            int firstMerge = hits.Where(hit => hit.Signal == WorkbookActionSignal.Merge).Select(hit => hit.Index).DefaultIfEmpty(int.MaxValue).Min();
-            // A source key following a merge verb is data, even if it happens to spell an action word.
-            var keySpans = named.SelectMany(key => Regex.Matches(normalized, @"(?<![\p{L}\p{N}_\-])" + Regex.Escape(Fold(key)) + @"(?![\p{L}\p{N}_\-])", RegexOptions.CultureInvariant)
-                .Cast<Match>()).Where(match => match.Index > firstMerge).ToArray();
-            foreach (var hit in hits)
-            {
-                if (keySpans.Any(span => hit.Index >= span.Index && hit.Index + hit.Length <= span.Index + span.Length)) continue;
-                if (hit.Signal == WorkbookActionSignal.Negation && hits.Any(phrase => phrase.Signal == WorkbookActionSignal.Exclude
-                    && phrase.Word.Contains(' ') && hit.Index >= phrase.Index && hit.Index + hit.Length <= phrase.Index + phrase.Length)) continue;
-                signals.Add(hit.Signal); matchedWords.Add(hit.Word);
-            }
-        }
-        string evidence = matchedWords.Count == 0 ? "No program action word matched."
-            : "Matched program words: " + string.Join(", ", matchedWords.Order(StringComparer.Ordinal)) + ".";
-        if (signals.Overlaps(new[] { WorkbookActionSignal.Optional, WorkbookActionSignal.Conditional, WorkbookActionSignal.Negation }))
-            return (null, evidence + " The text is optional, conditional or negated; review its action.");
-        var actions = signals.Where(signal => signal is WorkbookActionSignal.Quantify or WorkbookActionSignal.Exclude
-            or WorkbookActionSignal.Merge or WorkbookActionSignal.Others).ToArray();
+        var source = WorkbookDecisionLabel(label);
+        var labelSignals = WorkbookDecisionSignals(source.Label, keys);
+        var legendSignals = meanings.Select(meaning => WorkbookDecisionSignals(meaning, keys)).ToArray();
+        var all = new[] { labelSignals }.Concat(legendSignals).ToArray();
+        var matchedWords = all.SelectMany(item => item.Words).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray();
+        string evidence = matchedWords.Length == 0 ? "No program action word matched."
+            : "Matched program words: " + string.Join(", ", matchedWords) + ".";
+        if (meanings.Count > 0) evidence += " Legend meaning: " + string.Join(" | ", meanings) + ".";
+        if (source.Qualifier.Length > 0)
+            return (null, evidence + " Bracketed qualifier: " + source.Qualifier + ". Review its action.");
+        bool actionLabel = labelSignals.Actions.Count == 1 && !labelSignals.NeedsReview;
+        if (labelSignals.NeedsReview || !actionLabel && legendSignals.Any(item => item.NeedsReview))
+            return (null, evidence + " The text is optional or conditional; review its action.");
+        var actions = all.SelectMany(item => item.Actions).Distinct().ToArray();
         if (actions.Length != 1) return (null, evidence + (actions.Length == 0 ? " Choose a program action." : " Conflicting actions need a choice."));
+        var targets = all.SelectMany(item => item.Targets).ToHashSet(StringComparer.Ordinal);
         if (actions[0] == WorkbookActionSignal.Merge && targets.Count != 1)
             return (null, evidence + " A merge needs exactly one valid source abbreviation.");
         var decision = actions[0] switch
@@ -181,6 +175,41 @@ public sealed partial class FamilyPanelSpreadsheetImporter
         return (new FamilyPanelDecisionMapping { Decision = decision, MergeTargetFamilyKey = decision == FamilyPanelDecision.MergeIntoAnotherFamily ? targets.Single() : "" },
             evidence + " This is a proposal; the user confirms it before import.");
     }
+
+    private static (HashSet<WorkbookActionSignal> Actions, HashSet<string> Words, string[] Targets, bool NeedsReview)
+        WorkbookDecisionSignals(string text, IReadOnlySet<string> keys)
+    {
+        string normalized = Regex.Replace(Fold(text), @"\s+", " ");
+        var hits = new List<(WorkbookActionSignal Signal, string Word, int Index, int Length)>();
+        foreach (var bucket in WorkbookActionVocabulary)
+        foreach (string word in bucket.Value)
+        foreach (Match match in Regex.Matches(normalized, @"(?<![\p{L}\p{N}])" + Regex.Escape(word) + @"(?![\p{L}\p{N}])", RegexOptions.CultureInvariant))
+            hits.Add((bucket.Key, word, match.Index, match.Length));
+        var named = keys.Where(key => Regex.IsMatch(text, @"(?<![\p{L}\p{N}_\-])" + Regex.Escape(key) + @"(?![\p{L}\p{N}_\-])", RegexOptions.CultureInvariant)).ToArray();
+        int firstMerge = hits.Where(hit => hit.Signal == WorkbookActionSignal.Merge).Select(hit => hit.Index).DefaultIfEmpty(int.MaxValue).Min();
+        // A source key following a merge verb is data, even if it happens to spell an action word.
+        var keySpans = named.SelectMany(key => Regex.Matches(normalized, @"(?<![\p{L}\p{N}_\-])" + Regex.Escape(Fold(key)) + @"(?![\p{L}\p{N}_\-])", RegexOptions.CultureInvariant)
+            .Cast<Match>()).Where(match => match.Index > firstMerge).ToArray();
+        var active = hits.Where(hit => !keySpans.Any(span => hit.Index >= span.Index && hit.Index + hit.Length <= span.Index + span.Length))
+            .Where(hit => hit.Signal != WorkbookActionSignal.Negation || !hits.Any(phrase => phrase.Signal == WorkbookActionSignal.Exclude
+                && phrase.Word.Contains(' ') && hit.Index >= phrase.Index && hit.Index + hit.Length <= phrase.Index + phrase.Length)).ToArray();
+        var actions = new HashSet<WorkbookActionSignal>();
+        foreach (var hit in active.Where(hit => hit.Signal is WorkbookActionSignal.Quantify or WorkbookActionSignal.Exclude
+            or WorkbookActionSignal.Merge or WorkbookActionSignal.Others))
+        {
+            bool negated = active.Any(negative => negative.Signal == WorkbookActionSignal.Negation
+                && negative.Index + negative.Length <= hit.Index
+                && WorkbookNearbyNegation(normalized[(negative.Index + negative.Length)..hit.Index]));
+            if (!negated) actions.Add(hit.Signal);
+        }
+        return (actions, active.Select(hit => hit.Word).ToHashSet(StringComparer.Ordinal), named,
+            active.Any(hit => hit.Signal is WorkbookActionSignal.Optional or WorkbookActionSignal.Conditional));
+    }
+
+    private static bool WorkbookNearbyNegation(string between) =>
+        // The action is at most two word positions after the negation, within the same clause.
+        !Regex.IsMatch(between, @"[^\p{L}\p{N}\s]", RegexOptions.CultureInvariant)
+        && Regex.Matches(between, @"[\p{L}\p{N}]+", RegexOptions.CultureInvariant).Count <= 1;
 
     private static FamilyPanelDecisionMapping? WorkbookKnownDecision(string text, IReadOnlySet<string> keys)
     {
