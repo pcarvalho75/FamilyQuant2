@@ -85,8 +85,8 @@ public static class FamilyListImportGuide
         new FamilyListImportGuideSection("done", "7. Done", "07-done.png", "The list is imported; the workbook and the protein grouping are unchanged.", new[]
         {
             "The family list is imported. The workbook and the protein grouping are unchanged, and the project is not saved yet: File > Save keeps the panel with it.",
-            "The line under the title names the next steps: " + FamilyListImportHelp.DoneNext + " Family checklist closes the wizard and opens Group by evidence, which starts Read database and scope by itself. When that read is done, press Update proposal; the review then shows its Family checklist tab, where you review which proteins belong in each family.",
-            "The page also says: " + FamilyListImportHelp.MatchingEffect + " Importing the list and confirming matches move no protein by themselves.",
+            "The line under the title names the next steps: " + FamilyListImportHelp.DoneNext + " Family checklist closes the wizard and opens Group by evidence. When its Read database and scope step is done, press Update proposal; the review then shows its Family checklist tab, where you review which proteins belong in each family.",
+            "The page also says: " + FamilyListImportHelp.MatchingEffect + " Importing the list and confirming matches move no protein by themselves. To place proteins by hand, use Place outside matches by hand in the Family checklist.",
             "Undo import restores the previous panel while the import is still the latest change. Close keeps the imported panel.",
         }),
         new FamilyListImportGuideSection("keyboard", "Keyboard", "", "", new[]
