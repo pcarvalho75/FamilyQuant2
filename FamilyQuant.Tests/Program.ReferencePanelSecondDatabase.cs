@@ -86,6 +86,26 @@ internal static partial class Program
                 var expected = Snapshot(full); var actual = Snapshot(scoped);
                 Check(label + " complete serialized proposal and every default tick equal the full panel byte for byte",
                     expected.Proposal == actual.Proposal && expected.Rows == actual.Rows && expected.Ticks.SequenceEqual(actual.Ticks));
+                var droppedReferenceControls = new List<object>();
+                if (withPanel && scope == "\"Chosen phase\"")
+                {
+                    using var proposal = JsonDocument.Parse(expected.Proposal);
+                    Check("Z15a3 the imported-list route has nonempty family assignments before its sensitivity control",
+                        proposal.RootElement.GetProperty("Proteins").EnumerateArray().Any(row => row.GetProperty("Family").GetString()?.Length > 0));
+                    bool noticed = false;
+                    foreach (var entry in full.Entries.Where(entry => EvidenceClassifier.IsInScope(entry.Evidence, terms)))
+                    {
+                        var dropped = JsonSerializer.Deserialize<ReferencePanel>(fullBefore)!;
+                        dropped.Entries = dropped.Entries.Where(candidate => candidate.Accession != entry.Accession).ToList();
+                        bool changed, refused = false;
+                        try { changed = Snapshot(dropped).Proposal != expected.Proposal; }
+                        catch (Exception error) when (error is InvalidDataException or InvalidOperationException)
+                        { changed = true; refused = true; }
+                        noticed |= changed;
+                        droppedReferenceControls.Add(new { entry.Accession, changed, refused });
+                    }
+                    Check("Z15a3 dropping a needed in-scope reference changes or refuses the imported-list proposal", noticed);
+                }
                 var fullTimes = new List<double>(); var scopedTimes = new List<double>();
                 bool repeatedEqual = true;
                 for (int pair = 0; pair < 3; pair++)
@@ -107,7 +127,7 @@ internal static partial class Program
                 reports.Add(new { importedList = withPanel, scope, fullProposalMs = fullMs, scopedProposalMs = scopedMs, savedMs,
                     fullFetchMs, scopedFetchMs, fullBytes, scopedBytes, fullEntries = full.Entries.Count, scopedEntries = scoped.Entries.Count,
                     fullTimes, scopedTimes, proposalEqual = expected.Proposal == actual.Proposal, rowsEqual = expected.Rows == actual.Rows,
-                    defaultTicksEqual = expected.Ticks.SequenceEqual(actual.Ticks), repeatedEqual });
+                    defaultTicksEqual = expected.Ticks.SequenceEqual(actual.Ticks), repeatedEqual, droppedReferenceControls });
                 if (!withPanel && scope == "\"Chosen phase\"")
                 {
                     var unclosed = JsonSerializer.Deserialize<ReferencePanel>(scopedBefore)!;

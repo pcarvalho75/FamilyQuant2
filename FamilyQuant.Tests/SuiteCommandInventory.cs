@@ -14,7 +14,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Excluded("--measure-decoy-rebuild", "Z15b5 explicit-output measurement writes and reads repository synthetic curation fixtures and compares every stored decoy field; an audit producer rather than a DefaultSuite fixture."),
         SuiteCommandRule.Covered("--test-reference-panel-legacy", "FamilyQuant.Tests.Program.ReferencePanelLegacyTests(System.String)"),
         SuiteCommandRule.Excluded("--record-reference-panel-legacy-project", "Baseline-only recorder for the frozen synthetic format-1 curation in a version-2 project; it refuses newer project writers and must never regenerate the committed legacy input during an ordinary suite."),
-        SuiteCommandRule.Excluded("--test-reference-panel-second", "Opt-in Z15a3 native-search comparison on the second repository fixture, with an imported spreadsheet route and paired timing output; the scoped core has its own default-suite semantic fixtures."),
+        SuiteCommandRule.Covered("--test-reference-panel-second", "FamilyQuant.Tests.Program.ReferencePanelSecondDatabaseTests(System.String)"),
         SuiteCommandRule.Covered("--test-curation-streaming-contract", "FamilyQuant.Tests.Program.CurationStreamingContractTests(System.String)"),
         SuiteCommandRule.Covered("--test-curation-streaming-boundaries", "FamilyQuant.Tests.Program.CurationStreamingBoundaryTests(System.String)"),
         SuiteCommandRule.Covered("--test-json-stream-copy", "FamilyQuant.Tests.Program.JsonStreamCopyTests()"),
