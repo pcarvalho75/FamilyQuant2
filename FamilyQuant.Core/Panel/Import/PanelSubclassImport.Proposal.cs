@@ -66,18 +66,18 @@ public static partial class PanelSubclassImport
                     var added = new PanelSubclassProposal
                     {
                         ProposalId = ImportId("row", tableIndex.ToString(CultureInfo.InvariantCulture), table.SheetName, row.RowNumber.ToString(CultureInfo.InvariantCulture)),
-                        FamilyKey = name.Length > 0 ? family : "", Key = name, DisplayName = name,
-                        CandidateFamilyKeys = rowKeys, Reason = "The subclass table names this class and proposes rules for review.",
+                        FamilyKey = family, Key = name, DisplayName = name,
+                        CandidateFamilyKeys = rowKeys, Reason = "The subclass table row retains its source text and proposed rules for review.",
                     };
-                    if (family.Length == 0 || name.Length == 0)
-                        Uncertain(added, "This row could not be placed: choose one shown family key and a subclass name.");
+                    if (family.Length == 0) Uncertain(added, "This row has no unique associated family; choose one shown family key.");
+                    if (name.Length == 0) Uncertain(added, "The subclass name is empty; enter a name before accepting this row.");
                     result.Proposals.Add(added); matched.Add(added);
                 }
                 foreach (var proposal in matched)
                 {
                     bool repeated = proposal.HasMatchedTableRow;
                     proposal.HasMatchedTableRow = true;
-                    if (!repeated) proposal.Reason += " The subclass table row matches this family and subclass name; its rules are proposals only.";
+                    if (!repeated && family.Length > 0 && name.Length > 0) proposal.Reason += " The subclass table row matches this family and subclass name; its rules are proposals only.";
                     if (repeated) Uncertain(proposal, "More than one architecture row names this subclass; review their rule choices rather than assuming one combined architecture.");
                     if (matched.Count > 1) Uncertain(proposal, "More than one expected name matches this row; choose which definition to retain.");
                     var source = new PanelSubclassSourceRow { SheetName = table.SheetName, RowNumber = row.RowNumber,

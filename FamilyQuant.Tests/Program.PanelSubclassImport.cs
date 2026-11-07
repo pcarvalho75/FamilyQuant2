@@ -74,6 +74,11 @@ internal static partial class Program
             && sourceless.Reason.Contains("no source row", StringComparison.Ordinal));
         Check("Z16a5 ordinal family keys and unknown row keys never acquire a guessed family", proposed.Proposals.Single(proposal => proposal.DisplayName == "Case class").FamilyKey == ""
             && proposed.Proposals.Single(proposal => proposal.DisplayName == "Unplaced class").FamilyKey == "");
+        var unnamed = proposed.Proposals.Single(proposal => proposal.SourceRows.Any(row => row.SheetName == table.SheetName && row.RowNumber == 6));
+        Check("Z16a5 an empty class name retains its associated family and required rule", unnamed is { FamilyKey: "F1", DisplayName: "", IsUncertain: true }
+            && unnamed.Rules is [{ Accession: "PF01234", Kind: PanelSubclassRuleKind.RequiredPfam }]
+            && unnamed.Reason.Contains("subclass name is empty", StringComparison.Ordinal)
+            && !unnamed.Reason.Contains("choose one shown family key", StringComparison.OrdinalIgnoreCase));
         Check("Z16a5 every source row and empty source remains visible", tables.All(source => source.Table.Rows.All(row => proposed.Proposals.Any(proposal => proposal.SourceRows
             .Any(origin => origin.SheetName == source.SheetName && origin.RowNumber == row.RowNumber && row.Cells.All(cell => origin.Cells[cell.Key] == cell.Value)))))
             && proposed.Proposals.Any(proposal => proposal.Notes.Any(note => note.Name == "Source sheet" && note.Text == "Empty source")));
