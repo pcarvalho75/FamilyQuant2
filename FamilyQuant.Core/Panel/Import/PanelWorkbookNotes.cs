@@ -16,21 +16,28 @@ public static class PanelWorkbookNotes
         ArgumentNullException.ThrowIfNull(proposal);
         ArgumentNullException.ThrowIfNull(confirmedChoices);
         ArgumentNullException.ThrowIfNull(confirmedDecisions);
-        if (proposal.FamilyTable is not { } table)
-        {
-            var refused = new PanelImportCheck();
-            refused.Problems.Add(new() { Kind = PanelImportProblemKind.SheetMissing, Severity = PanelImportSeverity.Blocking,
-                SheetName = proposal.FamilySheet, Message = "Choose the family sheet before accepting the workbook." });
-            return refused;
-        }
+        var preflight = new PanelImportCheck { Problems = Copy(proposal.Problems) };
+        if (proposal.ColorsState != PanelWorkbookReadState.Read)
+            preflight.Problems.Add(new() { Kind = PanelImportProblemKind.PreviewMismatch, Severity = PanelImportSeverity.Blocking,
+                Message = "Workbook colours have not been read. Read them before accepting the workbook." });
+        if (proposal.DecisionsState != PanelWorkbookReadState.Read)
+            preflight.Problems.Add(new() { Kind = PanelImportProblemKind.PreviewMismatch, Severity = PanelImportSeverity.Blocking,
+                Message = "Workbook decisions have not been read. Read them before accepting the workbook." });
+        var table = proposal.FamilyTable;
+        if (table == null || proposal.NeedsFamilySheetChoice)
+            preflight.Problems.Add(new() { Kind = table == null ? PanelImportProblemKind.SheetMissing : PanelImportProblemKind.NoFamilies,
+                Severity = PanelImportSeverity.Blocking, SheetName = proposal.FamilySheet,
+                Message = "Choose the family sheet before accepting the workbook." });
+        if (preflight.Problems.Any(problem => problem.Severity == PanelImportSeverity.Blocking)) return preflight;
         var choices = Copy(confirmedChoices);
-        choices.SourceNotes = CopyNotes(proposal.Notes);
+        choices.SourceNotes = null;
         // Check only the selected family table. Source notes never enter its family-row parser.
-        var check = importer.Check(table, choices, confirmedDecisions, panelName);
+        var check = importer.Check(table!, choices, confirmedDecisions, panelName);
         var problemKeys = check.Problems.Select(problem => JsonSerializer.Serialize(problem)).ToHashSet(StringComparer.Ordinal);
-        foreach (var problem in Copy(proposal.Problems))
+        foreach (var problem in preflight.Problems)
             if (problemKeys.Add(JsonSerializer.Serialize(problem))) check.Problems.Add(problem);
         if (check.Problems.Any(problem => problem.Severity == PanelImportSeverity.Blocking)) check.Panel = null;
+        else if (check.Panel != null) check.Panel = WithConfirmedNotes(check.Panel, proposal.Notes);
         return check;
     }
 

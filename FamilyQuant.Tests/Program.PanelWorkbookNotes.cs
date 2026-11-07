@@ -56,6 +56,10 @@ internal static partial class Program
             worksheet.WriteTo(writer);
         }
         var proposal = importer.ProposeWorkbook(path);
+        // The legend enrichment owner supplies these completed states before summary acceptance.
+        // This fixture isolates confirmed notes; the preflight cases below exercise unread states.
+        proposal.ColorsState = PanelWorkbookReadState.Read;
+        proposal.DecisionsState = PanelWorkbookReadState.Read;
         string[] noteSheets = ["Data 4", "Data 5", "Data 6", "Data 2"];
         Check("Z16a6 the synthetic workbook separates source notes and keeps the legend text", proposal.Workbook.Sheets.Count == 6
             && proposal.Notes.Select(note => note.SheetName).SequenceEqual(noteSheets));
@@ -95,6 +99,7 @@ internal static partial class Program
         string oldSaved = Path.Combine(root, "old-resaved.fqproj");
         ProjectStore.WriteFqproj(oldSaved, oldRead.fcf, oldRead.quant, oldRead.manifest);
         Check("Z16a6 the old project resaves as format 2 with identical canonical content", ProjectStore.ReadFqproj(oldSaved).fcf.ToJsonText() == oldJson);
+        PanelWorkbookNotesPreflightTests(proposal, choices, baseline.Panel);
 
         var api = typeof(FamilyPanel).Assembly.GetType("FamilyQuant.Panels.Import.PanelWorkbookNotes");
         var confirmed = api?.GetMethod("CheckConfirmedWorkbook", BindingFlags.Public | BindingFlags.Static);
@@ -132,8 +137,10 @@ internal static partial class Program
         var attached = (FamilyPanel)attach.Invoke(null, new object[] { baseline.Panel, proposal.Notes })!;
         Check("Z16a6 attaching explicit notes returns the same detached panel", JsonSerializer.Serialize(attached) == panelJson
             && storedNotes.GetValue(baseline.Panel.Import) == null);
+        Check("Z16a6 WithConfirmedNotes allocates a new list and every note object", !ReferenceEquals(attached.Import!.SourceNotes, proposal.Notes)
+            && attached.SourceNotes.Zip(proposal.Notes).All(pair => !ReferenceEquals(pair.First, pair.Second)));
         proposal.Notes[0].Text = "Changed after acceptance";
-        Check("Z16a6 later proposal edits cannot alter confirmed source text", Notes(panel) == expectedNotes);
+        Check("Z16a6 later proposal edits cannot alter confirmed source text", Notes(panel) == expectedNotes && Notes(attached) == expectedNotes);
         proposal.Notes[0].Text = JsonSerializer.Deserialize<List<PanelWorkbookSourceNote>>(expectedNotes)![0].Text;
         Check("Z16a6 replay reproduces the complete imported panel byte for byte", JsonSerializer.Serialize(importer.Replay(path, panel)) == panelJson);
         string[] blocksBefore = ReportMethods.Build(oldFile, new QuantManifest()).Blocks.Select(block => block.Id).ToArray();
@@ -188,6 +195,61 @@ internal static partial class Program
         }
         finally { Themes.ThemeManager.Apply(previousTheme); }
         Console.WriteLine("Z16a6 synthetic artifacts: " + root);
+    }
+
+    private static void PanelWorkbookNotesPreflightTests(PanelWorkbookProposal ready, FamilyPanelImport choices, FamilyPanel baseline)
+    {
+        var cases = new (string Name, string Reason, Action<PanelWorkbookProposal> Change)[]
+        {
+            ("unread colours", "colours", proposal => proposal.ColorsState = PanelWorkbookReadState.NotRead),
+            ("unread decisions", "decisions", proposal => proposal.DecisionsState = PanelWorkbookReadState.NotRead),
+            ("unresolved family choice", "family", proposal => proposal.NeedsFamilySheetChoice = true),
+            ("missing family table", "family", proposal => proposal.FamilySheet = "Missing 99"),
+            ("blocking source problem", "blocked", proposal => proposal.Problems.Add(new() { Kind = PanelImportProblemKind.FileUnreadable,
+                Severity = PanelImportSeverity.Blocking, SheetName = "Data 4", Message = "Invented blocked note." })),
+        };
+        foreach (var test in cases)
+        {
+            var proposal = JsonSerializer.Deserialize<PanelWorkbookProposal>(JsonSerializer.Serialize(ready))!;
+            proposal.Problems.Add(new() { Kind = PanelImportProblemKind.PreviewTruncated, Severity = PanelImportSeverity.Note,
+                SheetName = "Data 5", RowNumber = 9, Message = "Invented retained read note." });
+            test.Change(proposal);
+            var probe = new NotesImporterProbe((_, _, _, _) => throw new InvalidOperationException("Check must not run for this proposal."));
+            PanelImportCheck? result = null; Exception? error = null;
+            try { result = probe.CheckConfirmedWorkbook(proposal, choices, Array.Empty<FamilyPanelDecisionMapping>()); }
+            catch (Exception caught) { error = caught; }
+            Check("Z16a6 " + test.Name + " refuses before Check and keeps attributed source problems", error == null && probe.Calls == 0
+                && result is { Panel: null } && result.Problems.Any(problem => problem.Severity == PanelImportSeverity.Blocking
+                    && problem.Message.Contains(test.Reason, StringComparison.OrdinalIgnoreCase))
+                && result.Problems.Any(problem => problem.SheetName == "Data 5" && problem.RowNumber == 9 && problem.Message == "Invented retained read note."),
+                "calls=" + probe.Calls + ", error=" + error?.GetType().Name);
+        }
+        var refusedNotes = JsonSerializer.Deserialize<PanelWorkbookProposal>(JsonSerializer.Serialize(ready))!;
+        refusedNotes.Notes = new() { new() { SheetName = "", Text = "" } };
+        var refusedProbe = new NotesImporterProbe((_, _, _, _) => new() { Problems = new() { new() { Kind = PanelImportProblemKind.PanelInvalid,
+            Severity = PanelImportSeverity.Blocking, Message = "Invented family refusal." } } });
+        PanelImportCheck? refused = null; Exception? refusalError = null;
+        try { refused = refusedProbe.CheckConfirmedWorkbook(refusedNotes, choices, Array.Empty<FamilyPanelDecisionMapping>()); }
+        catch (Exception caught) { refusalError = caught; }
+        Check("Z16a6 failed family Check never reads or attaches unaccepted notes", refusalError == null && refused?.Panel == null
+            && refusedProbe.Calls == 1 && !refusedProbe.SawNotes, "calls=" + refusedProbe.Calls + ", error=" + refusalError?.GetType().Name);
+        var acceptedProbe = new NotesImporterProbe((_, _, _, _) => new() { Panel = FamilyPanelValidation.Clone(baseline) });
+        var accepted = acceptedProbe.CheckConfirmedWorkbook(ready, choices, Array.Empty<FamilyPanelDecisionMapping>());
+        Check("Z16a6 accepted notes attach only after the family Check returns", acceptedProbe.Calls == 1 && !acceptedProbe.SawNotes
+            && JsonSerializer.Serialize(accepted.Panel!.SourceNotes) == JsonSerializer.Serialize(ready.Notes));
+    }
+
+    private sealed class NotesImporterProbe(Func<PanelSpreadsheetTable, FamilyPanelImport, IReadOnlyList<FamilyPanelDecisionMapping>, string, PanelImportCheck> check)
+        : IFamilyPanelSpreadsheetImporter
+    {
+        internal int Calls;
+        internal bool SawNotes;
+        public PanelImportCheck Check(PanelSpreadsheetTable table, FamilyPanelImport choices, IReadOnlyList<FamilyPanelDecisionMapping> decisions, string panelName = "")
+        { Calls++; SawNotes = choices.SourceNotes != null; return check(table, choices, decisions, panelName); }
+        public FamilyPanel Import(PanelSpreadsheetTable table, FamilyPanelImport choices, IReadOnlyList<FamilyPanelDecisionMapping> decisions, string panelName = "") => throw new NotSupportedException();
+        public FamilyPanel Replay(string path, FamilyPanel previous) => throw new NotSupportedException();
+        public PanelImportProposal Propose(PanelSpreadsheetTable table) => throw new NotSupportedException();
+        public IReadOnlyList<PanelDecisionProposal> ProposeDecisions(PanelSpreadsheetTable table, FamilyPanelImport choices) => throw new NotSupportedException();
     }
 
     private static IEnumerable<DependencyObject> NotesVisuals(DependencyObject root)
