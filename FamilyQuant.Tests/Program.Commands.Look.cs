@@ -10,12 +10,22 @@ internal static partial class Program
     [TestCommandTable]
     private static IEnumerable<TestCommand> LookCommandTable() =>
     [
+        new("--test-import-help-routes", 65, TestCommandPhase.Raw, args => args.Contains("--test-import-help-routes", StringComparer.Ordinal), (args, _) =>
+        {
+            FamilyListImportHelpRouteTests(args.Length == 2 ? args[1] : null);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
         new("--test-integrated-review", 64, TestCommandPhase.Raw, args => args.Contains("--test-integrated-review", StringComparer.Ordinal), (_, workDir) =>
         {
             EnsureApplication();
             try { GroupingReviewInteractionTests(); }
             catch (Exception ex) { Check("integrated review interactions complete without an unhandled exception", false, ex.ToString()); }
-            ScreenHarness.Verify(Check, workDir);
+            string reviewWork = string.IsNullOrWhiteSpace(workDir)
+                ? Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests", "integrated-review-" + Guid.NewGuid().ToString("N")) : workDir;
+            Directory.CreateDirectory(reviewWork);
+            ScreenHarness.Verify(Check, reviewWork);
+            Console.WriteLine("Review proof: " + reviewWork);
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }),

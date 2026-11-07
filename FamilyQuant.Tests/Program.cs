@@ -313,6 +313,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => PatternLabPriorityTests(workDir));
             suite.Add(() => ExampleFamilyListTests());
             suite.AddWithApplication(() => FamilyListImportGuideTests());
+            suite.AddWithApplication(() => FamilyListImportHelpRouteTests());
             suite.AddWithApplication(() => AlignSelectedTests());
             suite.AddWithApplication(() => DeNovoWorkflowHelpTests());
             suite.Add(() => EvidenceCoverageTests());

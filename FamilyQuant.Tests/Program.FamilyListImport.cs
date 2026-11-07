@@ -149,11 +149,11 @@ internal static partial class Program
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " Import is one panel publication and retains every protein's state", model.Page == 6 && model.Imported && model.CanUndo
                         && file.FamilyPanel!.Name == "Imported example list" && curation.UndoStack.Count == 1 && JsonSerializer.Serialize(file.MyExtendedFastaItems) == proteinsBefore);
-                    Check(label + " Done explains the UniProt read and explicit proposal step", model.Explanation.Contains("Read database and scope", StringComparison.Ordinal)
-                        && model.Explanation.Contains("Update proposal", StringComparison.Ordinal) && model.Explanation.Contains("UniProt", StringComparison.Ordinal)
-                        && model.Explanation.Contains("minutes", StringComparison.Ordinal) && !model.Explanation.Contains('\n'));
+                    Check(label + " Done explains the automatic read before Update proposal", model.Explanation.Contains("reads the database and scope by itself when it opens", StringComparison.Ordinal)
+                        && model.Explanation.Contains("then press Update proposal", StringComparison.Ordinal)
+                        && model.Explanation.Contains("takes minutes", StringComparison.Ordinal) && !model.Explanation.Contains('\n'));
                     Check(label + " Done distinguishes label matching from moving proteins", window.FindName("MatchingEffectNote") is TextBlock note
-                        && note.Text.Contains("Matching labels families", StringComparison.Ordinal) && note.Text.Contains("Place outside matches", StringComparison.Ordinal)
+                        && note.Text.Contains("Matching labels families", StringComparison.Ordinal) && note.Text.Contains("place them by hand", StringComparison.Ordinal)
                         && note.Text.Contains("Apply grouping", StringComparison.Ordinal) && !note.Text.Contains('\n'));
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "07-done");
                     string saved = file.ToJsonText();
