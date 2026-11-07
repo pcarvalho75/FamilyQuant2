@@ -21,7 +21,7 @@ internal static partial class Program
     {
         var model = new FamilyListImportViewModel(new FamilyListImportTransaction(curation));
         FinishReviewWork(() => model.LoadAsync(workbook));
-        FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(); });
+        FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(_ => true); });
         for (int attempt = 0; attempt < 100; attempt++)
         {
             var row = model.SpecialRows.FirstOrDefault(r => r.Blocking);
