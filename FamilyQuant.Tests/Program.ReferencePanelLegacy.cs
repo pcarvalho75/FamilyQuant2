@@ -135,6 +135,47 @@ internal static partial class Program
             Retained(reader.Name + " saved", reopened);
         }
 
+        // The independently recorded fixture has one entry. This additional legacy-schema copy makes
+        // an otherwise invisible eager scope-prune observable, without editing the historical oracle.
+        var adversarial = FamilyClusterFile.FromJsonText(source);
+        const string outsideFamily = "Invented retained outside family", outsideAccession = "P77777";
+        string outsideSequence = NearestBase(210, 998);
+        string outsideJson = PanelEntryJson(outsideAccession, "Belongs to the " + outsideFamily + ".", outsideSequence, keyword: "Unrelated phase");
+        adversarial.EvidenceSource!.ReferencePanel!.Families.Add(outsideFamily);
+        adversarial.EvidenceSource.ReferencePanel.Entries.Add(new PanelEntry
+        {
+            Accession = outsideAccession, Sequence = outsideSequence,
+            Evidence = EvidenceFetcher.Parse(PanelPage(outsideJson))[outsideAccession]
+        });
+        string adversarialSource = adversarial.ToJsonText();
+        var adversarialEntries = JsonSerializer.SerializeToNode(adversarial.EvidenceSource.ReferencePanel.Entries);
+        Check("Z15a4 the retention adversary contains a reference outside the stored recipe scope",
+            !EvidenceClassifier.IsInScope(adversarial.EvidenceSource.ReferencePanel.Entries.Last().Evidence, recipe.Options.ScopeTerms));
+        string adversarialFcf = Path.Combine(output, "outside-entry-format1.fcf");
+        File.WriteAllText(adversarialFcf, adversarialSource, new UTF8Encoding(false));
+        string adversarialProject = Path.Combine(output, "outside-entry-legacy.fqproj");
+        File.Copy(Path.Combine(root, "legacy-full.fqproj"), adversarialProject, overwrite: true);
+        using (var zip = ZipFile.Open(adversarialProject, ZipArchiveMode.Update))
+        {
+            zip.GetEntry("curation.json")!.Delete();
+            using var writer = new StreamWriter(zip.CreateEntry("curation.json").Open(), new UTF8Encoding(false));
+            writer.Write(adversarialSource);
+        }
+        foreach (var candidate in new[]
+        {
+            FamilyClusterFile.FromJsonText(adversarialSource), FamilyClusterFile.Load(adversarialFcf),
+            ShellProjectOperations.Read(adversarialFcf).Curation, ProjectStore.ReadFqproj(adversarialProject).fcf
+        })
+        {
+            Check("Z15a4 legacy readers retain the adversarial out-of-scope entry without implicit scope metadata",
+                typeof(ReferencePanel).GetProperty("Coverage")!.GetValue(candidate.EvidenceSource!.ReferencePanel!) == null
+                && JsonNode.DeepEquals(adversarialEntries, JsonSerializer.SerializeToNode(candidate.EvidenceSource.ReferencePanel!.Entries)));
+            var session = new EvidenceGroupingSession(candidate, "legacy outside-entry fixture");
+            session.Propose(string.Join(", ", recipe.Options.ScopeTerms.Select(term => "\"" + term + "\"")));
+            Check("Z15a4 merely proposing retains the adversarial out-of-scope entry",
+                JsonNode.DeepEquals(adversarialEntries, JsonSerializer.SerializeToNode(candidate.EvidenceSource.ReferencePanel!.Entries)));
+        }
+
         // The sole allowed coverage transition is an explicit public fetch operation. All references
         // are already stored, so the offline handler must see no download for this scope conversion.
         var explicitFetch = ProjectStore.ReadFqproj(Path.Combine(root, "legacy-full.fqproj")).fcf;
@@ -155,6 +196,7 @@ internal static partial class Program
             Inputs = inputHashes, RecordedEntries = expectedEntries.AsArray().Count, Readers = readers.Select(reader => reader.Name).ToArray(),
             ReplayComparison = "All recorded JSON values, with no field normalization; whitespace/property order are not scientific state",
             EntryComparison = "Every original entry and field, in original order; Coverage stays absent until explicit public fetch",
+            AdditionalAdversary = "Legacy-schema copy has an unrelated reference entry; four reader paths and proposal construction must not prune it",
             ExplicitFetchRequests = handler.Requests
         }, new JsonSerializerOptions { WriteIndented = true }));
 
