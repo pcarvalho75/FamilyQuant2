@@ -42,7 +42,7 @@ internal static partial class Program
         Check("the Columns page has its decision review and Special rows its repeated abbreviation", sections.Any(s => s.Key == "decisions") && sections.Any(s => s.Key == "duplicate"));
         // Z16a8 (W21, D81): a workbook with several sheets, read at once, with nothing set before her one press.
         Check("the chapter covers a workbook with several sheets: the page that reads it all, the map, the subclass table",
-            new[] { "workbook", "map", "subclasses" }.All(key => sections.Any(s => s.Key == key))
+            new[] { "workbook", "file", "preview", "subclasses" }.All(key => sections.Any(s => s.Key == key))
             && text.Contains("One press accepts everything on the page", StringComparison.Ordinal) && text.Contains("nothing is set before it", StringComparison.Ordinal)
             && text.Contains("it never guesses", StringComparison.Ordinal) && text.Contains("never by their names", StringComparison.Ordinal));
         Check("the chapter keeps every workbook proposal her choice: legend meanings, her Pfam domains, subclass rules, notes",
@@ -55,7 +55,7 @@ internal static partial class Program
             try { var image = new BitmapImage(FamilyListImportGuide.ImageUri(s)); return (Section: s, image.PixelWidth, image.PixelHeight); }
             catch (Exception ex) when (ex is IOException or NotSupportedException) { return (Section: s, PixelWidth: 0, PixelHeight: 0); }
         }).ToList();
-        Check("every wizard page has its picture inside the program, at 1366 x 768", pictured.Count == 9
+        Check("every wizard page has its picture inside the program, at 1366 x 768", pictured.Count == 10
             && loaded.All(p => p.PixelWidth == 1366 && p.PixelHeight == 768), string.Join(", ", loaded.Where(p => p.PixelWidth != 1366).Select(p => p.Section.Image)));
         Check("embedded guide pictures match the current native source captures", pictured.All(section =>
         {
@@ -73,6 +73,10 @@ internal static partial class Program
             "Use this decision column", "Match stored names", "Apply grouping", "Apply panel", "Review spreadsheet decisions",
             "Colour categories (optional)", "Colour", "Group by evidence", "Read database and scope", "Update proposal", "Place outside matches by hand",
             "Import family list",
+            // Z16a8 (Z16a3): the workbook map and the legend meanings.
+            "Workbook sheets", "Use as", "Kept as", "Why this role", "Review role", "Proposed", "Family list", "Colour legend", "Subclass table", "Notes",
+            "Use selected family sheet", "Read kept notes", "Kept notes preview", "Kept as source notes", "Sheet preview", "Source notes", "Meaning from legend",
+            "Use as (proposed)", "Merge into abbreviation", "Source colour", "Source rows", "Category name",
         };
         Check("the chapter names the wizard's controls and choices with the program's own words", labels.All(text.Contains) && text.Contains("File > Save", StringComparison.Ordinal),
             string.Join(", ", labels.Where(l => !text.Contains(l))));
@@ -80,7 +84,7 @@ internal static partial class Program
         string repository = GoldenNumbers.FindRepository();
         string program = string.Concat(new[] { "FamilyListImportWindow.xaml", "FamilyListImportViewModel.cs", "FamilyListImportViewModel.Rows.cs",
                 "FamilyListImportViewModel.Commit.cs", "FamilyListImportModels.cs", "SuperClusterPreviewWindow.xaml", "PanelEditorWindow.xaml",
-                "MainWindow.xaml", "ClusterGenerationControl.xaml" }
+                "MainWindow.xaml", "ClusterGenerationControl.xaml", "FamilyListImportWorkbookModels.cs", "FamilyListImportViewModel.Workbook.cs" }
             .Select(name => File.ReadAllText(Path.Combine(repository, "FamilyQuant", name))));
         Check("every control the chapter names is a label in the program's sources", labels.All(l => program.Contains("\"" + l + "\"", StringComparison.Ordinal)
             || program.Contains("\"" + l + "...\"", StringComparison.Ordinal)),
@@ -124,7 +128,7 @@ internal static partial class Program
                     Check(theme + " it opens at a size that fits a 1024 x 768 screen", window.Width <= 1024 && window.Height <= 728);
                     if (theme == Themes.AppTheme.Light) CheckTooltipCoverage("Import guide window", (FrameworkElement)window.Content);
                     ((Button)window.FindName("nextButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
-                    Check(theme + " Next moves to the following part", model.Current.Key == "map" && model.CanPrevious);
+                    Check(theme + " Next moves to the following part", model.Current.Key == "preview" && model.CanPrevious);
                     model.Current = model.Sections.Single(s => s.Key == "later"); PumpDispatcher();
                     Check(theme + " a part without a picture hides the picture frame", !model.HasPicture);
                     model.Current = model.Sections[^1]; PumpDispatcher();

@@ -15,7 +15,9 @@ namespace FamilyQuant.Tests;
 // invented project, 1366 x 768, one picture per page (light by default, --dark for the website's dark set). The Workbook
 // box is shown with a generic documents path, because the real path holds this computer's temporary folder. Z12p2c1:
 // the Columns page with its decision-column question and the fills named as colour categories, and the decisions opened
-// through Use this decision column.
+// through Use this decision column. Z16a8: the wizard reads the whole example workbook through the same Core source as
+// File > Import family list (FamilyListWorkbookCoreSource), so File and sheet opens on Workbook sheets and the Columns
+// page starts the colours and the decision meanings from the example's legend.
 internal static partial class Program
 {
     [TestCommandTable]
@@ -58,7 +60,8 @@ internal static partial class Program
         var previousTheme = Themes.ThemeManager.Current;
         Themes.ThemeManager.Apply(dark ? Themes.AppTheme.Dark : Themes.AppTheme.Light);
         var curation = new CurationViewModel(file);
-        var model = new FamilyListImportViewModel(new FamilyListImportTransaction(curation), matcher: new FamilyListStoredEvidenceMatches(file));
+        var model = new FamilyListImportViewModel(new FamilyListImportTransaction(curation), matcher: new FamilyListStoredEvidenceMatches(file),
+            workbookSource: new FamilyListWorkbookCoreSource());
         var window = new FamilyListImportWindow(model, path => ExampleFamilyList.Write(path), PanelImportTemplate.Write)
         { Width = 1366, Height = 768, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual,
             WindowStyle = WindowStyle.None, ResizeMode = ResizeMode.NoResize, ShowActivated = false, ShowInTaskbar = false };
@@ -79,21 +82,45 @@ internal static partial class Program
             // The real path holds this computer's temporary folder; the picture shows a generic documents path instead.
             var pathBox = (TextBox)window.FindName("WorkbookPathBox");
             pathBox.Text = @"C:\Users\you\Documents\example-family-list.xlsx";
+            // Z16a8: the six sheets of the example, each with its role; the three notes sheets and the legend's text are kept.
+            Check("guide: File and sheet opens on the workbook map of the six example sheets",
+                model.HasWorkbookMap && model.WorkbookSheets.Count == 6 && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.Notes) == 3
+                && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.FamilyList) == 1 && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.ColorLegend) == 1
+                && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.SubclassTable) == 1 && model.WorkbookSheets.All(s => s.Review == "Proposed")
+                && model.KeptNotes.Count == 4 && model.KeptNotesSummary.StartsWith("Notes kept: ", StringComparison.Ordinal)
+                && ((TabControl)window.FindName("WorkbookTabs")).SelectedItem == window.FindName("WorkbookMapTab"),
+                string.Join(", ", model.WorkbookSheets.Select(s => s.Name + "=" + s.Role + "/" + s.Review)) + "; " + model.KeptNotesSummary);
+            Shot("02-workbook-map");
+            ((TabControl)window.FindName("WorkbookTabs")).SelectedItem = window.FindName("SheetPreviewTab"); PumpDispatcher();
             Shot("02-file-and-sheet");
             Check("guide: the example opens on its sheet with header row 3", model.Page == 1 && model.Preview?.ProposedHeaderRow == 3);
             ((Button)window.FindName("ForwardButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
-            // Z12p2c1: the abbreviation cells carry the example's fills, so they become colour categories with their plain names.
-            model.ColorColumn!.Header = model.ColorColumn.Headers.First(h => h == "Sigla"); PumpDispatcher();
-            Check("guide: the Columns page asks about the decision column and names each fill for her",
-                model.HasDecisionHint && model.DecisionHint.StartsWith("Decis", StringComparison.Ordinal)
-                && model.SourceColorChoices.Count > 0 && model.SourceColorChoices.All(c => c.Label == c.ColorName) && model.CanNext,
-                model.DecisionHint + "; " + string.Join(", ", model.SourceColorChoices.Select(c => c.ColorName + "=" + c.Label)));
-            Shot("03-columns");
-            ((Button)window.FindName("UseDecisionHintButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
+            // Z16a8: the legend's labels are the values of Decisão FamilyQuant, so that column is proposed as Decision and Next
+            // opens its values at once, each with its meaning from the legend; nothing is confirmed, and unclear meanings stay empty.
+            Check("guide: Next opens the eight decision values of the legend's column, each with its meaning, none confirmed",
+                model.Page == 2 && model.ReviewingDecisions && model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header == "Decisão FamilyQuant"
+                && model.Decisions.Count == 8 && model.Decisions.All(d => d.Meaning.Length > 0 && !d.Confirmed) && model.Decisions.Any(d => d.Decision == null)
+                && model.Decisions.Any(d => d.Decision == FamilyPanelDecision.MergeIntoAnotherFamily && d.MergeTarget == "LEC") && !model.CanNext,
+                string.Join("; ", model.Decisions.Select(d => d.Source + " -> " + (d.Decision?.ToString() ?? "(empty)") + " " + d.MergeTarget)));
             Shot("03-columns-decisions");
-            Check("guide: Use this decision column opens eight decision values to review",
-                model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header == model.DecisionHint && model.Decisions.Count == 8 && model.ReviewingDecisions);
+            ((Button)WalkTree(window).OfType<Button>().First(b => b.Content as string == "Back to columns")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
+            // Z12p2c1: the abbreviation cells carry the example's fills, so they become colour categories. Z16a8: each starts
+            // with the legend's name, or with its plain name when the legend gives that colour two names.
+            if (model.ColorColumn!.Header != "Sigla") model.ColorColumn.Header = model.ColorColumn.Headers.First(h => h == "Sigla");
+            PumpDispatcher();
+            Check("guide: back on Columns, each fill starts with the legend's name, or its plain name when the legend names it twice",
+                !model.ReviewingDecisions && model.SourceColorChoices.Count == 6 && model.SourceColorChoices.Count(c => c.Label != c.ColorName) == 4
+                && model.SourceColorChoices.Any(c => c.ColorName == "light turquoise" && c.Label == "Núcleo")
+                && model.SourceColorChoices.Any(c => c.ColorName == "light grey" && c.Label == "light grey"),
+                string.Join(", ", model.SourceColorChoices.Select(c => c.ColorName + "=" + c.Label)));
+            Shot("03-columns");
+            ((Button)WalkTree(window).OfType<Button>().First(b => b.Content as string == "Review decision values")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
+            // Her choices for the four labels the legend leaves empty, as a reader of this example would make them: the
+            // families out of the total stay out, and the optional, conditional and pending ones are kept for now.
+            foreach (var open in model.Decisions.Where(d => d.Decision == null))
+                open.Decision = open.Meaning.StartsWith("Fora do total", StringComparison.Ordinal) ? FamilyPanelDecision.NotAFamily : FamilyPanelDecision.Quantify;
             model.ConfirmDecisions();
+            Check("guide: every decision value is confirmed only by Confirm these actions", model.Decisions.All(d => d.Confirmed) && model.CanNext, model.Status);
             FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
             model.SelectedSpecialRow = model.SpecialRows.Single(r => r.SeveralNames && r.Parts.Count == 4 && r.Blocking);
             Shot("04-special-rows");
@@ -122,7 +149,8 @@ internal static partial class Program
             Shot("06-summary");
             FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
             Shot("07-done");
-            Check("guide: imported", model.Imported && file.FamilyPanel?.Name == "Example family list");
+            Check("guide: imported, with the three notes sheets and the legend's text kept as source notes", model.Imported && file.FamilyPanel?.Name == "Example family list"
+                && file.FamilyPanel.SourceNotes.Count == 4);
             Check("guide: the generated workbook is written under the output folder", Path.GetFullPath(workbook)
                 .StartsWith(Path.GetFullPath(output).TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase), workbook);
         }
