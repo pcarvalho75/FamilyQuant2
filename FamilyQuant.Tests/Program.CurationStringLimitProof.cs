@@ -247,7 +247,7 @@ internal static partial class Program
             var book = workbook.AddWorkbookPart(); book.Workbook = new XL.Workbook();
             var sheet = book.AddNewPart<WorksheetPart>(); var data = new XL.SheetData(); sheet.Worksheet = new XL.Worksheet(data);
             book.Workbook.Append(new XL.Sheets(new XL.Sheet { Id = book.GetIdOfPart(sheet), Name = "Families", SheetId = 1 }));
-            string[][] rows = [["Abbreviation", "Name"], ["SYN_A", "Synthetic alpha"], ["SYN_B", "Synthetic beta"]];
+            string[][] rows = [["Abbreviation", "Name", "Decision"], ["SYN_A", "Synthetic alpha", "Quantify"], ["SYN_B", "Synthetic beta", "Quantify"]];
             foreach (var values in rows)
             {
                 var row = new XL.Row();
@@ -262,6 +262,15 @@ internal static partial class Program
         {
             RequireCurationProof(AwaitCurationProof(wizard.NextAsync()) && wizard.Page == expectedPage,
                 "wizard reaches page " + expectedPage.ToString(CultureInfo.InvariantCulture) + ": " + wizard.Status);
+            if (expectedPage == 2)
+            {
+                foreach (var column in wizard.Columns.Where(column => !column.Required)) column.Header = "";
+                wizard.Columns.Single(column => column.Role == PanelImportFields.Decision).Header = "Decision";
+                wizard.ConfirmDecisions();
+                RequireCurationProof(wizard.CanNext, "explicit synthetic Decision mapping is valid: " + wizard.Status + "; "
+                    + string.Join("; ", wizard.Columns.Select(column => column.Role + "=" + column.Header)) + "; decisions="
+                    + string.Join("; ", wizard.Decisions.Select(decision => decision.Source + "=" + decision.Decision + ",confirmed=" + decision.Confirmed)));
+            }
         }
         RequireCurationProof(wizard.MatchFamilies.Count == 2 && wizard.MatchFamilies.All(family => family.Suggestions.Count > 0),
             "actual stored-evidence adapter supplies both synthetic suggestions");

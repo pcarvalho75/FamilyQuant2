@@ -10,6 +10,7 @@ internal static class SuiteCommandInventory
     [
         SuiteCommandRule.Covered("--test-curation-streaming-callers", "FamilyQuant.Tests.Program.CurationStreamingCallerTests()"),
         SuiteCommandRule.Excluded("--proof-curation-past-string-limit", "Z12p5f4 opt-in synthetic workflow writes more than 1,073,741,791 JSON characters and runs native import, recalculation, report and file operations under D:/fq-tmp/proof; never run in the default suite. Optional --small debugs the driver without claiming the size proof."),
+        SuiteCommandRule.Covered("--test-feature-provenance-format2", "FamilyQuant.Tests.Program.FeatureProvenanceFormatTests(System.String)"),
         SuiteCommandRule.Excluded("--measure-decoy-rebuild", "Z15b5 explicit-output measurement writes and reads repository synthetic curation fixtures and compares every stored decoy field; an audit producer rather than a DefaultSuite fixture."),
         SuiteCommandRule.Covered("--test-curation-streaming-contract", "FamilyQuant.Tests.Program.CurationStreamingContractTests(System.String)"),
         SuiteCommandRule.Covered("--test-json-stream-copy", "FamilyQuant.Tests.Program.JsonStreamCopyTests()"),
@@ -382,6 +383,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-reference-panel-scope-ui", "FamilyQuant.Tests.Program.ReferencePanelScopeUiTests(System.String)"),
         SuiteCommandRule.Covered("--test-reference-panel-expansion", "FamilyQuant.Tests.Program.ReferencePanelExpansionTests(System.String)"),
         SuiteCommandRule.Covered("--test-reference-panel-expansion-ui", "FamilyQuant.Tests.Program.ReferencePanelExpansionUiTests(System.String)"),
+        SuiteCommandRule.Covered("--test-scoped-subclass-flow", "FamilyQuant.Tests.Program.ScopedSubclassFlowTests(System.String)"),
         SuiteCommandRule.Covered("--test-report-assembly", "FamilyQuant.Tests.Program.ReportAssemblyChecks(System.String)"),
         SuiteCommandRule.Covered("--test-report-attribution-cache", "FamilyQuant.Tests.Program.ReportAttributionCacheTests()"),
         SuiteCommandRule.Covered("--test-report-captions", "FamilyQuant.Tests.Program.ReportCaptionTests(System.String)"),
