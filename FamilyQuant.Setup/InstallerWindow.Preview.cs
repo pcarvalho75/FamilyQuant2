@@ -13,6 +13,7 @@ public static partial class InstallerWindowPreview
     /// <summary>Safe focused tests for the ordinary suite; STA thread, fake controller only, no files written.</summary>
     public static IReadOnlyList<string> CheckInteractions()
     {
+        SetupToolTipDefaults.Apply();
         var previousContext = SynchronizationContext.Current;
         var app = Application.Current ?? new Application();
         var previousShutdown = app.ShutdownMode;
@@ -33,6 +34,7 @@ public static partial class InstallerWindowPreview
 
     public static int Run(string outputDirectory)
     {
+        SetupToolTipDefaults.Apply();
         var output = Path.GetFullPath(outputDirectory);
         Directory.CreateDirectory(output);
         var checks = new List<string>();
@@ -126,6 +128,24 @@ public static partial class InstallerWindowPreview
         Check(fresh.Installs == 0 && fresh.Uninstalls == 0 && fresh.Launches == 0, "construction never installs, uninstalls or launches");
         Check(window.FolderBox.Text == fresh.DefaultDirectory, "new install uses the controller default folder");
         Check(window.ThemeButton.Content.Equals("Light"), "dark is the default and light is available");
+        Check(new FrameworkElement[] { window.PrimaryButton, window.FolderBox, window.DesktopOption, window.ErrorDetails }
+            .All(element => ToolTipService.GetInitialShowDelay(element) == SetupToolTipDefaults.InitialDelayMilliseconds
+                && ToolTipService.GetShowDuration(element) == SetupToolTipDefaults.ShowDurationMilliseconds
+                && ToolTipService.GetShowOnDisabled(element)), "Setup tooltip defaults are 500 ms, 20 seconds and visible on disabled controls");
+        foreach (bool dark in new[] { true, false })
+        {
+            window.ShowPreview("welcome", dark);
+            var style = (Style)window.FindResource(typeof(ToolTip));
+            var tip = new ToolTip { Style = style, Resources = window.Resources };
+            var template = (DataTemplate)style.Resources[new DataTemplateKey(typeof(string))];
+            Check(tip.MaxWidth == SetupToolTipDefaults.MaximumWidth && tip.FontSize == 12
+                && ReferenceEquals(tip.Background, window.FindResource("SurfaceBrush"))
+                && ReferenceEquals(tip.Foreground, window.FindResource("TextBrush"))
+                && ReferenceEquals(tip.BorderBrush, window.FindResource("EdgeBrush"))
+                && template.LoadContent() is TextBlock { TextWrapping: TextWrapping.Wrap },
+                "Setup tooltip style wraps at 380 px and follows the current appearance tokens, dark=" + dark);
+        }
+        window.ShowPreview("welcome", true);
         Check(Tip(window.PrimaryButton).Contains("folder page", StringComparison.Ordinal), "welcome tooltip describes the next page before any installation");
         Click(window.PrimaryButton);
         Check(Tip(window.FolderBox).Contains(fresh.DefaultDirectory, StringComparison.Ordinal)

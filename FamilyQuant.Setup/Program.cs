@@ -13,6 +13,7 @@ internal static class Program
         bool silent = args.Contains("/silent", StringComparer.OrdinalIgnoreCase);
         try
         {
+            SetupToolTipDefaults.Apply();
             // LK's inert preview path is dispatched before any real platform/controller is constructed.
             if (args.Length == 1 && args[0].StartsWith("/screens=", StringComparison.OrdinalIgnoreCase))
                 return InstallerWindowPreview.Run(args[0][9..]);
