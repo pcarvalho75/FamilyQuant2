@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace FamilyQuant.Panels.Import;
 
@@ -22,6 +23,7 @@ public enum PanelImportProblemKind
     MissingKey, MissingName, DuplicateKey, SeveralFamilies, DecisionNotMapped, DecisionMappingInvalid,
     MergeTargetMissing, MergeCycle, ColorNotNamed, ChoiceRowMissing, ChoiceInvalid, NoFamilies, PanelInvalid,
     PreviewTruncated,
+    FamilySheetAlternative,
 }
 
 /// <summary>One problem as a plain sentence. RowNumber is the worksheet row (0 when not about one row);
@@ -39,6 +41,9 @@ public sealed class PanelImportProblem
     /// <summary>A proposal the user may accept or edit, for example a new abbreviation; empty when none.</summary>
     public string Suggestion { get; set; } = string.Empty;
     public string Message { get; set; } = string.Empty;
+    /// <summary>Workbook sheet for an aggregated problem; null preserves legacy single-sheet JSON.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? SheetName { get; set; }
 }
 
 /// <summary>Append only: values are stored by number.</summary>
