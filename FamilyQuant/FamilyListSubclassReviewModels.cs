@@ -38,9 +38,10 @@ public sealed class ImportSubclassChoice : ScreenViewModel
     public ObservableCollection<string> Problems { get; } = new();
     public bool HasDraftSelection => initial != null;
     public string SourceFamily => SourceProposal is PanelSubclassProposal p && p.FamilyKey.Length > 0
-        ? p.FamilyKey : "Not placed in a family";
-    public string Title => Name.Length > 0 ? Name : ExpectedNameId.Length > 0 ? "Unnamed expected subclass"
-        : SourceRows.Count > 0 ? "Unplaced source row" : "Unplaced source table";
+        ? "Proposed family: " + p.FamilyKey : "Originally unplaced";
+    public string EffectiveName => Name.Length > 0 ? Name : (SourceProposal as PanelSubclassProposal)?.DisplayName ?? "";
+    public string Title => EffectiveName.Length > 0 ? EffectiveName : ExpectedNameId.Length > 0 ? "Unnamed expected subclass"
+        : SourceRows.Count > 0 ? "Source row without a subclass name" : "Unplaced source table";
     public string State => Confirmed ? "Confirmed for import" : reviewed ? Use ? "Included in draft" : "Left out of draft"
         : Use ? "Proposed in draft" : "Not selected";
     public string CandidateText => CandidateFamilies.Count == 0 ? "No candidate family was supplied."
@@ -54,7 +55,7 @@ public sealed class ImportSubclassChoice : ScreenViewModel
         ? string.Join("; ", Rules.Where(rule => rule.Use).Select(rule => rule.KindLabel + ": " + rule.Label))
         : "No rules selected in this draft.";
     public string Family { get => family; set { if (Set(ref family, value ?? "")) { familyEdited = true; Touch(); } } }
-    public string Name { get => name; set { if (Set(ref name, value ?? "")) { nameEdited = true; Touch(); Changed(nameof(Title)); } } }
+    public string Name { get => name; set { if (Set(ref name, value ?? "")) { nameEdited = true; Touch(); Changed(nameof(Title)); Changed(nameof(EffectiveName)); } } }
     public string Abbreviation { get => abbreviation; set { if (Set(ref abbreviation, value ?? "")) { keyEdited = true; Touch(); } } }
     public bool Use { get => use; set { if (Set(ref use, value)) Touch(); } }
     // Only the host's explicit AcceptAll action confirms the draft.
@@ -72,7 +73,8 @@ public sealed class ImportSubclassChoice : ScreenViewModel
     private void Touch() { reviewed = true; Changed(nameof(State)); }
     public void Reject() { Use = false; Touch(); }
 
-    public static ImportSubclassChoice FromCore(PanelSubclassProposal proposal, PanelSubclassAcceptance? draftSelection = null)
+    public static ImportSubclassChoice FromCore(PanelSubclassProposal proposal) => FromCore(proposal, null);
+    public static ImportSubclassChoice FromCore(PanelSubclassProposal proposal, PanelSubclassAcceptance? draftSelection)
     {
         ArgumentNullException.ThrowIfNull(proposal);
         if (draftSelection != null && draftSelection.ProposalId != proposal.ProposalId)
@@ -142,7 +144,7 @@ public sealed class ImportSubclassRuleChoice : ScreenViewModel
     public IReadOnlyList<string> CandidateAccessions { get; init; } = Array.Empty<string>();
     public IReadOnlyList<ImportSubclassSource> SourceRows { get; init; } = Array.Empty<ImportSubclassSource>();
     public ObservableCollection<string> Problems { get; } = new();
-    public string Candidates => CandidateAccessions.Count == 0 ? "No alternative accessions were supplied."
+    public string Candidates => CandidateAccessions.Count == 0 ? ""
         : "Candidate accessions: " + string.Join("; ", CandidateAccessions);
     public string Label => Accession.Length > 0 ? Accession + (Name.Length > 0 ? " / " + Name : "")
         : Name.Length > 0 ? Name + " / accession unresolved" : "Accession unresolved";

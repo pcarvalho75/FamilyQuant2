@@ -4,15 +4,20 @@
              xmlns:local="clr-namespace:FamilyQuant">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibleWhenTrue"/>
+        <Style x:Key="ProblemMessage" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/><Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Style.Triggers><Trigger Property="Text" Value=""><Setter Property="Visibility" Value="Collapsed"/></Trigger></Style.Triggers>
+        </Style>
         <DataTemplate x:Key="SourceRows">
             <StackPanel Margin="0,4,0,10">
                 <TextBlock Text="{Binding Heading}" Style="{StaticResource SectionTitle}" TextWrapping="Wrap"/>
                 <ItemsControl ItemsSource="{Binding Cells}">
                     <ItemsControl.ItemTemplate><DataTemplate><StackPanel Margin="0,4,0,4">
                         <TextBlock Text="{Binding Header}" Style="{StaticResource CaptionText}" TextWrapping="Wrap"/>
-                        <TextBox Text="{Binding Text, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True"
+                        <TextBox Text="{Binding Text, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Loaded="DraftField_Loaded"
                                  AutomationProperties.Name="Original source cell" ToolTipService.ShowOnDisabled="True"
-                                 ToolTip="Original cell text from the indicated sheet and row, read only and shown verbatim. Viewing or copying it changes neither the workbook nor the project."/>
+                                 ToolTip="Original cell text from the indicated sheet and row, read only and shown verbatim. Viewing or copying it changes neither the workbook nor the project; no editable range or numeric unit applies."/>
                     </StackPanel></DataTemplate></ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
@@ -32,13 +37,27 @@
                      HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      AutomationProperties.Name="Subclass proposals by family" ToolTipService.ShowOnDisabled="True"
                      ToolTip="Lists every supplied subclass, expected name and unplaced source item, grouped by its proposed family. Selecting an item opens its details without changing data.">
+                <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="AutomationProperties.Name" Value="{Binding Title}"/>
+                    <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="ItemSurface" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" Padding="2" Margin="0,1">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="ItemSurface" Property="Background" Value="{DynamicResource HoverBrush}"/></Trigger>
+                            <Trigger Property="IsSelected" Value="True"><Setter TargetName="ItemSurface" Property="Background" Value="{DynamicResource SelectionBrush}"/></Trigger>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="ItemSurface" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/></Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate></Setter.Value></Setter>
+                </Style></ListBox.ItemContainerStyle>
                 <ListBox.GroupStyle><GroupStyle><GroupStyle.HeaderTemplate><DataTemplate>
                     <TextBlock Text="{Binding Name}" Style="{StaticResource SectionTitle}" TextWrapping="Wrap" Margin="4,10,4,4"/>
                 </DataTemplate></GroupStyle.HeaderTemplate></GroupStyle></ListBox.GroupStyle>
                 <ListBox.ItemTemplate><DataTemplate><StackPanel Margin="4,6">
                     <TextBlock Text="{Binding Title}" Style="{StaticResource BodyText}" TextWrapping="Wrap"/>
                     <TextBlock Text="{Binding State}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,3,0,0"/>
-                    <TextBlock Text="Needs review" FontWeight="SemiBold" Margin="0,3,0,0" Foreground="{DynamicResource TextBrush}"
+                    <TextBlock Text="Uncertain proposal" FontWeight="SemiBold" Margin="0,3,0,0" Foreground="{DynamicResource TextBrush}"
                                Visibility="{Binding IsUncertain, Converter={StaticResource VisibleWhenTrue}}"/>
                     <TextBlock Text="Item messages need attention" TextWrapping="Wrap" Foreground="{DynamicResource TextBrush}"
                                Visibility="{Binding HasProblems, Converter={StaticResource VisibleWhenTrue}}"/>
@@ -58,25 +77,25 @@
                     <WrapPanel Margin="0,8,0,6">
                         <CheckBox x:Name="IncludeSubclass" Content="Include subclass" IsChecked="{Binding Use, UpdateSourceTrigger=PropertyChanged}"
                                   Margin="0,0,12,0" VerticalAlignment="Center" ToolTipService.ShowOnDisabled="True"
-                                  ToolTip="Includes this subclass in the draft when checked; standalone starts unchecked and the summary route uses its supplied draft. Only Accept and import changes the project, where Undo restores the previous panel."/>
+                                  ToolTip="Includes this subclass in the draft when checked; standalone starts unchecked and the summary route uses its supplied draft. Only Accept and import changes the project, where Undo restores the previous panel; finish a running operation or undo import to enable disabled editing."/>
                         <Button Content="Leave out" Click="RejectSubclass_Click" ToolTipService.ShowOnDisabled="True"
-                                ToolTip="Leaves this subclass out of the draft and marks that choice reviewed. Its source text stays visible and no workbook or project value changes."/>
+                                ToolTip="Leaves this subclass out of the draft and marks that choice reviewed. Its source text stays visible and no workbook or project value changes; finish a running operation or undo import to enable disabled editing."/>
                     </WrapPanel>
                     <TextBlock Text="{Binding State}" Style="{StaticResource CaptionText}"/>
                     <TextBlock Text="{Binding Review}" Style="{StaticResource BodyText}" TextWrapping="Wrap" Margin="0,6,0,4"/>
-                    <TextBlock Text="{Binding ProblemText}" TextWrapping="Wrap" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}" Margin="0,4,0,4"/>
+                    <TextBlock x:Name="ProposalProblem" Text="{Binding ProblemText}" Style="{StaticResource ProblemMessage}" Margin="0,4,0,4"/>
                     <TextBlock Text="Family key" Style="{StaticResource CaptionText}" Margin="0,6,0,3"/>
-                    <TextBox Text="{Binding Family, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="Family key for subclass" ToolTipService.ShowOnDisabled="True"
-                             ToolTip="The family key for this subclass, initially the supplied draft or proposed key; no unit, and an accepted choice must name a family in the current summary. Empty keeps the proposed key and edits affect only the draft."/>
+                    <TextBox Text="{Binding Family, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="Family key for subclass" ToolTipService.ShowOnDisabled="True" Loaded="DraftField_Loaded"
+                             ToolTip="The family key for this subclass, initially the supplied draft or proposed key; no unit, and an accepted choice must name a family in the current summary. Empty keeps the proposed key and edits affect only the draft; finish a running operation or undo import to enable disabled editing."/>
                     <TextBlock Text="{Binding CandidateText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,3,0,6"/>
                     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="0.7*"/><ColumnDefinition Width="12"/><ColumnDefinition/></Grid.ColumnDefinitions>
                         <StackPanel><TextBlock Text="Subclass key" Style="{StaticResource CaptionText}" Margin="0,0,0,3"/>
-                            <TextBox Text="{Binding Abbreviation, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="Subclass key" ToolTipService.ShowOnDisabled="True"
-                                     ToolTip="The subclass key, initially the supplied draft or proposed key; no unit, and it must be nonempty and unique within the chosen family when included. Empty keeps the proposed key; this edits only the draft."/>
+                            <TextBox Text="{Binding Abbreviation, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="Subclass key" ToolTipService.ShowOnDisabled="True" Loaded="DraftField_Loaded"
+                                     ToolTip="The subclass key, initially the supplied draft or proposed key; no unit, and it must be nonempty and unique within the chosen family when included. Empty keeps the proposed key; this edits only the draft, and finishing an operation or undoing import enables disabled editing."/>
                         </StackPanel>
                         <StackPanel Grid.Column="2"><TextBlock Text="Display name" Style="{StaticResource CaptionText}" Margin="0,0,0,3"/>
-                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="Subclass display name" ToolTipService.ShowOnDisabled="True"
-                                     ToolTip="The name shown for this subclass, initially the supplied draft or proposed name; no unit or length limit, but it must be nonempty when included. Empty keeps the proposed name; this edits only the draft."/>
+                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="Subclass display name" ToolTipService.ShowOnDisabled="True" Loaded="DraftField_Loaded"
+                                     ToolTip="The name shown for this subclass, initially the supplied draft or proposed name; no unit or length limit, but it must be nonempty when included. Empty keeps the proposed name; this edits only the draft, and finishing an operation or undoing import enables disabled editing."/>
                         </StackPanel>
                     </Grid>
                     <TextBlock Text="Pfam rules" Style="{StaticResource SectionTitle}" Margin="0,14,0,5"/>
@@ -89,22 +108,22 @@
                                     <WrapPanel Margin="0,6,0,4">
                                         <CheckBox Content="Include rule" IsChecked="{Binding Use, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,10,0" VerticalAlignment="Center"
                                                   AutomationProperties.Name="{Binding RuleId, StringFormat=Include rule {0}}" ToolTipService.ShowOnDisabled="True"
-                                                  ToolTip="Includes this rule only when its subclass is included too; standalone starts unchecked and the summary uses its supplied draft. Ticking changes draft choices only, with no workbook or project edit."/>
+                                                  ToolTip="Includes this rule only when its subclass is included too; standalone starts unchecked and the summary uses its supplied draft. Ticking changes only the draft; finish a running operation or undo import to enable disabled editing."/>
                                         <Button Content="Leave out" Click="RejectRule_Click" ToolTipService.ShowOnDisabled="True"
-                                                ToolTip="Leaves this rule out of the draft and marks that choice reviewed. The original statement stays visible and no workbook or project value changes."/>
+                                                ToolTip="Leaves this rule out of the draft and marks that choice reviewed. The original statement stays visible and no workbook or project value changes; finish a running operation or undo import to enable disabled editing."/>
                                     </WrapPanel>
                                     <ComboBox ItemsSource="{x:Static local:ImportSubclassRuleChoice.KindOptions}" DisplayMemberPath="Label" SelectedValuePath="Value"
                                               SelectedValue="{Binding Kind, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" MinWidth="170"
                                               AutomationProperties.Name="Pfam rule kind" ToolTipService.ShowOnDisabled="True"
-                                              ToolTip="Choose Required Pfam or Absent Pfam; initially the supplied draft kind or proposed kind, with no numeric unit or range. This changes only the rule's draft meaning, and it is stored only if both rule and subclass are included at import."/>
+                                              ToolTip="Choose Required Pfam or Absent Pfam; initially the supplied draft kind or proposed kind, with no numeric unit or range. This changes only the draft and is stored only if both rule and subclass are included at import; finish an operation or undo import to enable disabled editing."/>
                                     <TextBlock Text="{Binding State}" Style="{StaticResource CaptionText}" Margin="0,5,0,3"/>
-                                    <TextBlock Text="Rule needs review" FontWeight="SemiBold" TextWrapping="Wrap"
+                                    <TextBlock Text="Uncertain rule proposal" FontWeight="SemiBold" TextWrapping="Wrap"
                                                Visibility="{Binding IsUncertain, Converter={StaticResource VisibleWhenTrue}}"/>
                                     <TextBlock Text="{Binding Reason}" TextWrapping="Wrap" Style="{StaticResource BodyText}"/>
                                     <TextBlock Text="{Binding Candidates}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,4,0,3"/>
-                                    <TextBlock Text="{Binding ProblemText}" TextWrapping="Wrap" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}"/>
+                                    <TextBlock x:Name="RuleProblem" Text="{Binding ProblemText}" Style="{StaticResource ProblemMessage}"/>
                                     <Expander Header="Original rule cells" Margin="0,6,0,0" IsExpanded="False" ToolTipService.ShowOnDisabled="True"
-                                              ToolTip="Opens the original sheet, row and cell text supporting this rule, initially collapsed. Viewing it changes neither the draft nor any file.">
+                                              ToolTip="Opens the original sheet, row and cell text supporting this rule, initially collapsed. Viewing it changes neither the draft nor any file; finish an operation or undo import to enable disabled review.">
                                         <StackPanel><TextBlock Text="{Binding SourceStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap"/>
                                             <ItemsControl ItemsSource="{Binding SourceRows}" ItemTemplate="{StaticResource SourceRows}"/>
                                         </StackPanel>
@@ -118,7 +137,7 @@
                     <TextBlock Text="Retained source notes" Style="{StaticResource SectionTitle}" Margin="0,12,0,4"/>
                     <ItemsControl ItemsSource="{Binding SourceNotes}"><ItemsControl.ItemTemplate><DataTemplate><StackPanel Margin="0,4,0,8">
                         <TextBlock Text="{Binding Name}" Style="{StaticResource CaptionText}" TextWrapping="Wrap"/>
-                        <TextBox Text="{Binding Text, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True"
+                        <TextBox Text="{Binding Text, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Loaded="DraftField_Loaded"
                                  AutomationProperties.Name="Retained subclass source note" ToolTipService.ShowOnDisabled="True"
                                  ToolTip="The retained source note, initially its supplied text and read only, without an editable range or numeric unit. Viewing or copying it changes no file or project value."/>
                     </StackPanel></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
@@ -130,7 +149,7 @@
             <DockPanel LastChildFill="True">
                 <Button x:Name="CheckButton" Content="Check choices" Click="Check_Click" DockPanel.Dock="Right" Margin="12,0,0,0"
                         IsEnabled="{Binding HasFamilyKeys, ElementName=ReviewRoot}" ToolTipService.ShowOnDisabled="True"
-                        ToolTip="Checks family keys, subclass names and selected Pfam rules and shows any problems on their items; the project stays unchanged. Unavailable until the current summary supplies its family keys."/>
+                        ToolTip="Checks family keys, subclass names and selected Pfam rules and shows any problems on their items; the project stays unchanged. Unavailable during an operation, after import, or until the summary supplies its family keys; finish the operation or undo import to check again."/>
                 <TextBlock Text="{Binding ValidationStatus, ElementName=ReviewRoot}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" VerticalAlignment="Center"/>
             </DockPanel>
         </StackPanel>
