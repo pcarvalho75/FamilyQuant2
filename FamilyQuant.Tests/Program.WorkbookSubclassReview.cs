@@ -1,5 +1,7 @@
 using FamilyQuant.Panels;
 using FamilyQuant.Panels.Import;
+using FamilyQuant.Evidence;
+using FamilyQuant.Examples;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -146,7 +148,75 @@ internal static partial class Program
         Check("Z16a9 the presentation retains detached source records", detached.SourceRows[0].Cells.Any(cell => cell.Text == "Required statement\nOriginal second line")
             && detached.Rules[0].Name == "Domain A");
         WorkbookSubclassReviewProblemTests();
+        WorkbookSubclassReviewSummaryTests();
         WorkbookSubclassReviewLayoutTests(output);
+    }
+
+    private static void WorkbookSubclassReviewSummaryTests()
+    {
+        string scratch = Path.GetFullPath(Path.GetTempPath());
+        var root = Path.GetFullPath(Path.Combine(scratch, "subclass-summary-ui-" + Guid.NewGuid().ToString("N")));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var importer = new FamilyPanelSpreadsheetImporter();
+            var file = new FamilyClusterFile { MyExtendedFastaItems = new() { new() { SequenceIdentifier = "review-reference", Sequence = "ACDEFGHIK",
+                Evidence = new() { Pfam = new() { new() { Accession = "PF01234", Name = "DomainOne" }, new() { Accession = "PF05678", Name = "DomainTwo" } } } } } };
+            var matching = new PanelEvidenceMatching(file); string before = file.ToJsonText();
+            var noEvidence = new Dictionary<string, IReadOnlyList<PanelEvidenceChoice>>();
+            foreach (string shape in new[] { "shipped", "one-sheet", "no-legend" })
+            {
+                string path = Path.Combine(root, shape + ".xlsx");
+                if (shape == "shipped") ExampleFamilyList.Write(path);
+                else WriteNeutralWorkbook(path, onlyFamily: shape == "one-sheet", includeLegend: false, includeDecision: false);
+                var proposal = ReviewSummaryFixture(importer.ProposeWorkbook(path), importer);
+                var summary = WorkbookImportSummaries.Build(proposal, matching, reviewedEvidence: noEvidence);
+                var seeds = summary.DraftSubclassSelections;
+                var rows = summary.SubclassProposals.Select(source => ImportSubclassChoice.FromCore(source,
+                    seeds.FirstOrDefault(seed => seed.ProposalId == source.ProposalId))).ToArray();
+                var control = new FamilyListSubclassReview { SubclassChoices = rows, FamilyKeys = summary.FamilyKeys };
+                var captured = control.CaptureAcceptances();
+                Check("Z16a9 real " + shape + " summary draft round-trips exactly through the control", JsonSerializer.Serialize(captured) == JsonSerializer.Serialize(seeds)
+                    && rows.All(row => !row.Confirmed) && rows.SelectMany(row => row.Rules).All(rule => !rule.Confirmed));
+                var rebuilt = WorkbookImportSummaries.Build(proposal, matching, captured, noEvidence);
+                var accepted = WorkbookImportSummaries.AcceptAll(rebuilt, importer, captured, noEvidence);
+                Check("Z16a9 real " + shape + " captured draft reaches canonical AcceptAll", accepted.CanImport,
+                    string.Join("; ", accepted.Items.SelectMany(item => item.Problems).Select(problem => problem.Message)));
+                var selected = rows.FirstOrDefault(row => row.Use && row.Rules.Any(rule => rule.Use));
+                if (selected != null)
+                {
+                    selected.Reject();
+                    var edited = control.CaptureAcceptances();
+                    var editedSummary = WorkbookImportSummaries.Build(proposal, matching, edited, noEvidence);
+                    var editedResult = WorkbookImportSummaries.AcceptAll(editedSummary, importer, edited, noEvidence);
+                    var canonical = (PanelSubclassProposal)selected.SourceProposal!;
+                    string family = canonical.FamilyKey, key = canonical.Key;
+                    Check("Z16a9 real " + shape + " explicit untick stays out after rebuild and acceptance", editedResult.CanImport
+                        && editedResult.Panel!.Families.Where(item => item.Key == family).SelectMany(item => item.Subclasses).All(item => item.Key != key));
+                }
+                var uncertain = rows.FirstOrDefault(row => row.IsUncertain && row.Name.Length > 0);
+                if (uncertain != null && summary.FamilyKeys.Count > 0)
+                {
+                    uncertain.Family = summary.FamilyKeys.First(); uncertain.Abbreviation = "reviewed-" + uncertain.ProposalId;
+                    uncertain.Name = "Reviewed name-only class"; uncertain.Use = true;
+                    foreach (var rule in uncertain.Rules) rule.Reject();
+                    var resolved = control.CaptureAcceptances();
+                    var resolvedSummary = WorkbookImportSummaries.Build(proposal, matching, resolved, noEvidence);
+                    var resolvedResult = WorkbookImportSummaries.AcceptAll(resolvedSummary, importer, resolved, noEvidence);
+                    Check("Z16a9 real " + shape + " explicit legal uncertain resolution reaches AcceptAll", resolvedResult.CanImport
+                        && resolvedResult.Panel!.Families.SelectMany(item => item.Subclasses).Any(item => item.Key == uncertain.Abbreviation
+                            && item.RequiredPfam.Count == 0 && item.AbsentPfam.Count == 0),
+                        string.Join("; ", resolvedResult.Items.SelectMany(item => item.Problems).Select(problem => problem.Message).Distinct(StringComparer.Ordinal).Take(3)));
+                }
+            }
+            Check("Z16a9 summary review and canonical acceptance never mutate the project", file.ToJsonText() == before);
+        }
+        finally
+        {
+            string allowed = scratch.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar) + Path.DirectorySeparatorChar;
+            if (!root.StartsWith(allowed, StringComparison.OrdinalIgnoreCase)) throw new IOException("Refusing cleanup outside the owned test scratch root.");
+            if (Directory.Exists(root)) Directory.Delete(root, recursive: true);
+        }
     }
 
     private static void WorkbookSubclassReviewProblemTests()
@@ -266,6 +336,10 @@ internal static partial class Program
                         && draftRows.SelectMany(row => row.Rules).All(rule => !rule.Confirmed)
                         && JsonSerializer.Serialize(control.CaptureAcceptances()[0]) == JsonSerializer.Serialize(draft));
                     if (output != null) ScreenHarness.Save(window, Path.Combine(output, theme.ToString().ToLowerInvariant(), "04-typed-summary-draft.png"), 1366, 768);
+                    control.ShowIntroduction = false; PumpDispatcher(); window.UpdateLayout();
+                    Check(theme + " Z16a9 hosted mode removes duplicate introduction without hiding source details",
+                        ((FrameworkElement)control.FindName("Introduction")).Visibility == Visibility.Collapsed
+                        && ((FrameworkElement)control.FindName("DetailScroll")).IsVisible && control.CaptureAcceptances()[0].Accepted);
                 }
                 finally { window.Close(); PumpDispatcher(); }
             }
