@@ -49,7 +49,13 @@ namespace FamilyQuant
             GridCopy.Attach(leftOutGrid, row => (row as ReviewLeftOutInput)?.Identifier, row => (row as ReviewLeftOutInput)?.Description);
             GridCopy.Attach(unassignedGrid, row => (row as ReviewProteinRow)?.Identifier, row => (row as ReviewProteinRow)?.Description);
             InstallKeywordHeaders();
+            model.PropertyChanged += (_, args) =>
+            {
+                if (args.PropertyName is nameof(GroupingReviewViewModel.CanConfirm) or nameof(GroupingReviewViewModel.ApplyHint))
+                    UpdateApplyToolTip();
+            };
             model.Keyword.Refresh();
+            UpdateApplyToolTip();
         }
         private async Task DiscoverInitialTaskAsync()
         {
@@ -92,6 +98,20 @@ namespace FamilyQuant
             Confirmed = true; Close();
         }
         private void Cancel_Click(object sender, RoutedEventArgs e) { Confirmed = false; Close(); }
+        private void UpdateApplyToolTip()
+        {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.DataBind, new Action(UpdateApplyToolTip));
+                return;
+            }
+            string next = model.IsBusy ? "Wait for the current review operation to finish"
+                : model.ModeIndex == 1 ? model.ApplyHint.TrimEnd('.')
+                : "Enter matching keywords and tick at least one eligible protein";
+            createButton.ToolTip = model.CanConfirm
+                ? "Commit the reviewed ticks, family names and splits as one project grouping change. Undo restores the preceding grouping, and Save writes the project to disk."
+                : "Apply grouping is unavailable: " + next + ". The project stays unchanged until Apply grouping, after which Undo restores the preceding grouping and Save writes it to disk.";
+        }
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             var help = TextReportWindow.Create("Grouping review help", GroupingReviewHelp.ForMode(model.ModeIndex == 1, model.Evidence?.HasPanelRules == true)
@@ -101,19 +121,19 @@ namespace FamilyQuant
         private void InstallKeywordHeaders()
         {
             string[] facts = {
-                "Untick to keep this protein in its family; the rest of the family still joins.",
-                "The protein identifier as in the database.", "The description exactly as in the database, OS= and all.",
-                "The Pfam domains from UniProt. Empty when there are none yet or the protein is too short for Pfam.",
-                "Whether this protein carries a keyword itself, in the description before OS=.",
-                "The number of the family this protein belongs to now.",
-                "How many proteins of its family carry a keyword: 2 of 11 means the family is here because of those 2."
+                "Whether this protein is selected to join the keyword grouping on Apply grouping. Unticking keeps its current family, and Undo restores an applied grouping.",
+                "Protein identifier exactly as retained from the database, including its prefixes.",
+                "Original database description, including OS= text. Keyword matching reads only the description before OS=.",
+                "Stored UniProt Pfam calls for this protein. An empty cell is a missing call, not proof that a domain is absent.",
+                "Whether this protein's description before OS= carries the required entered keyword or phrase under the chosen all/any rule.",
+                "Current document User ID before the reviewed grouping is applied.",
+                "Number of keyword-carrying proteins over the total proteins in this current family. The fraction explains why a family is offered even when this protein carries no keyword."
             };
             for (int i = 0; i < grid.Columns.Count; i++)
             {
                 var style = new Style(typeof(System.Windows.Controls.Primitives.DataGridColumnHeader),
                     Application.Current.TryFindResource(typeof(System.Windows.Controls.Primitives.DataGridColumnHeader)) as Style);
                 style.Setters.Add(new Setter(FrameworkElement.ToolTipProperty, facts[i]));
-                style.Setters.Add(new Setter(ToolTipService.ShowDurationProperty, 60000));
                 grid.Columns[i].HeaderStyle = style;
             }
         }
