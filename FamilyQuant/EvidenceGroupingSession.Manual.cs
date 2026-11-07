@@ -83,7 +83,7 @@ public sealed partial class EvidenceGroupingSession
         var panel = reviewPanel == null ? null : ManualFamilyChoices.ExtendPanel(reviewPanel, ordered);
         if (panel != null) automatic = PanelEvidenceClassifier.Propose(file, automatic.Options, Search, References, panel);
         var proposal = ManualFamilyChoices.Overlay(automatic, ordered, file, coherenceProfiles);
-        var presentation = EvidenceProposalPresentation.Present(proposal, file, coherenceProfiles);
+        var presentation = EvidenceProposalPresentation.Present(proposal, file, coherenceProfiles, panel);
         EnsureCurrent();
         manualChoices = ordered.ToDictionary(c => c.ProteinIndex);
         automaticProposal = automatic; selectedReviewPanel = panel; Proposal = proposal; checkedMotif = null;

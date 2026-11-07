@@ -90,7 +90,7 @@ public sealed partial class EvidenceGroupingSession
         coherenceProfiles = profiles;
         selectedReviewPanel = panel;
         proposal = ManualFamilyChoices.Overlay(proposal, manualChoices.Values.ToArray(), file, profiles);
-        var presentation = EvidenceProposalPresentation.Present(proposal, file, profiles);
+        var presentation = EvidenceProposalPresentation.Present(proposal, file, profiles, panel);
         EnsureCurrent();
         Search = result; References = references.ToArray(); Proposal = proposal; checkedMotif = null; confirmedTask = taskChoice;
         lastScope = scope;

@@ -288,6 +288,35 @@
                                     </DataGrid>
                                 </DockPanel>
                             </TabItem>
+                            <TabItem x:Name="PanelChecklistTab" Header="Panel checklist" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}">
+                                <Grid>
+                                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                                    <TextBlock Text="Matches are database targets, not automatic assignments; match types may overlap." TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,8"/>
+                                    <DataGrid x:Name="PanelChecklistGrid" Grid.Row="1" ItemsSource="{Binding Evidence.PanelChecklist}"
+                                              SelectedItem="{Binding Evidence.SelectedChecklistFamily, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False"
+                                              CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" SelectionMode="Single">
+                                        <DataGrid.Columns>
+                                            <DataGridTemplateColumn Header="Panel family" Width="170">
+                                                <DataGridTemplateColumn.CellTemplate><DataTemplate><StackPanel>
+                                                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}"/>
+                                                    <TextBlock Text="{Binding Key}" Foreground="{DynamicResource MutedBrush}" FontSize="10"/>
+                                                </StackPanel></DataTemplate></DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTextColumn Header="Matches" Binding="{Binding Matches, StringFormat=N0}" Width="65"/>
+                                            <DataGridTextColumn Header="Reviewed" Binding="{Binding Reviewed, StringFormat=N0}" Width="75"/>
+                                            <DataGridTextColumn Header="Placed" Binding="{Binding Placed, StringFormat=N0}" Width="60"/>
+                                            <DataGridTextColumn Header="Outside" Binding="{Binding Outside, StringFormat=N0}" Width="65"/>
+                                            <DataGridTextColumn Header="Match types" Binding="{Binding MatchTypes}" Width="130"/>
+                                            <DataGridTextColumn Header="Why outside" Binding="{Binding OutsideSummary}" Width="*" MinWidth="160">
+                                                <DataGridTextColumn.CellStyle><Style TargetType="DataGridCell"><Setter Property="ToolTip" Value="{Binding OutsideSummary}"/></Style></DataGridTextColumn.CellStyle>
+                                            </DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                    <TextBox x:Name="PanelChecklistDetail" Grid.Row="2" Text="{Binding Evidence.ChecklistDetail, Mode=OneWay}" IsReadOnly="True"
+                                             TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" MinHeight="100" MaxHeight="150" Margin="0,8,0,0"
+                                             ToolTip="Shows match-type counts and the proposal's full reasons for matching targets outside the selected panel family."/>
+                                </Grid>
+                            </TabItem>
                             <TabItem Header="Architecture"><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>
                             <TabItem Header="Left out">
                                 <DockPanel>

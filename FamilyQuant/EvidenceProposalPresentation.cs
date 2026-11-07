@@ -17,14 +17,16 @@ namespace FamilyQuant
             => Present(proposal, file, null);
 
         public static EvidenceReviewInput Present(EvidenceProposal proposal, FamilyClusterFile file,
-            IReadOnlyDictionary<string, FamilyProfile>? coherenceProfiles)
+            IReadOnlyDictionary<string, FamilyProfile>? coherenceProfiles, FamilyQuant.Panels.FamilyPanel? selectedPanel = null)
         {
             var input = Present(proposal, file.MyExtendedFastaItems, file.LockedUserIds);
             return input with { RuleSummary = input.RuleSummary + "\nStored motifs:\n"
                 + string.Join("\n", (file.Motifs ?? new List<MotifPattern>()).Select(m => m.Name + ": " + m.Pattern))
                 + (proposal.PanelContext == null ? "" : "\n\n" + PanelEvidenceHelp.Build()),
                 PanelNames = file.FamilyPanel?.Families.ToDictionary(f => f.Key, f => f.DisplayName, StringComparer.Ordinal),
-                CoherenceProfiles = coherenceProfiles, ManualChoices = proposal.ManualChoices };
+                CoherenceProfiles = coherenceProfiles, ManualChoices = proposal.ManualChoices,
+                PanelChecklist = proposal.PanelContext == null ? null : PanelFamilyChecklist.Build(file, proposal, selectedPanel
+                    ?? (proposal.ManualChoices?.Count > 0 && file.FamilyPanel != null ? ManualFamilyChoices.ExtendPanel(file.FamilyPanel, proposal.ManualChoices) : null)) };
         }
 
         public static EvidenceReviewInput Present(EvidenceProposal proposal, IReadOnlyList<FastaItemExtended> proteins,

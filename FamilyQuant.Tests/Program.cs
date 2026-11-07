@@ -254,6 +254,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => EvidenceProteinDetailsTests());
             suite.AddWithApplication(() => CoherenceMembersUiTests());
             suite.Add(() => ManualFamilyChoiceTests());
+            suite.AddWithApplication(() => PanelChecklistTests(Path.Combine(workDir, "panel-checklist")));
             suite.AddWithApplication(() => ManualFamilyUiTests());
             suite.AddWithApplication(() => ImportWizardMockTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
