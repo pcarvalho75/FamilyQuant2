@@ -37,6 +37,13 @@ internal static partial class Program
         Evidence = new ProteinEvidence { Accession = identifier.Split('|')[1], Family = family, Reviewed = reviewed, Fragment = false, Keywords = keywords.ToList() },
     };
 
+    // Z16a8: stored Pfam domains for the invented proteins, so the domains written in the example's rows meet stored entries.
+    private static FastaItemExtended WithPfam(FastaItemExtended protein, params (string Accession, string Name)[] domains)
+    {
+        protein.Evidence!.Pfam = domains.Select(d => new EvidenceDomain { Accession = d.Accession, Name = d.Name }).ToList();
+        return protein;
+    }
+
     private static void ImportGuideScreens(string output, bool dark)
     {
         EnsureApplication();
@@ -46,15 +53,17 @@ internal static partial class Program
         string workbook = Path.Combine(work, ExampleFamilyList.DefaultFileName); ExampleFamilyList.Write(workbook);
         var file = new FamilyClusterFile
         {
-            SourceSha256 = "invented-guide-source", SourceSequenceCount = 6,
+            SourceSha256 = "invented-guide-source", SourceSequenceCount = 7,
             MyExtendedFastaItems = new List<FastaItemExtended>
             {
-                GuideProtein(1, "sp|P90001|TRY1_EXAMPLE", "Trypsin-like serine protease 1", "Peptidase S1 family", true, "Serine protease", "Hydrolase", "Protease"),
-                GuideProtein(1, "tr|A0A900A002|A0A900A002_EXAMPLE", "Trypsin-like serine protease 2", "Peptidase S1 family", false, "Serine protease", "Hydrolase"),
-                GuideProtein(2, "sp|P90003|PA2_EXAMPLE", "Secreted phospholipase A2", "Phospholipase A2 family", true, "Hydrolase", "Lipid degradation"),
-                GuideProtein(3, "sp|P90004|LEC1_EXAMPLE", "C-type lectin 1", "", true, "Lectin", "Calcium"),
-                GuideProtein(4, "sp|P90005|KUI1_EXAMPLE", "Kunitz-type protease inhibitor 1", "", true, "Protease inhibitor", "Serine protease inhibitor"),
-                GuideProtein(5, "sp|P90006|ACTB_EXAMPLE", "Actin, cytoplasmic", "Actin family", true, "Cytoskeleton"),
+                WithPfam(GuideProtein(1, "sp|P90001|TRY1_EXAMPLE", "Trypsin-like serine protease 1", "Peptidase S1 family", true, "Serine protease", "Hydrolase", "Protease"), ("PF00089", "Trypsin")),
+                WithPfam(GuideProtein(1, "tr|A0A900A002|A0A900A002_EXAMPLE", "Trypsin-like serine protease 2", "Peptidase S1 family", false, "Serine protease", "Hydrolase"), ("PF00089", "Trypsin")),
+                WithPfam(GuideProtein(2, "sp|P90003|PA2_EXAMPLE", "Secreted phospholipase A2", "Phospholipase A2 family", true, "Hydrolase", "Lipid degradation"), ("PF00068", "Phospholip_A2_1")),
+                WithPfam(GuideProtein(3, "sp|P90004|LEC1_EXAMPLE", "C-type lectin 1", "", true, "Lectin", "Calcium"), ("PF00059", "Lectin_C")),
+                WithPfam(GuideProtein(4, "sp|P90005|KUI1_EXAMPLE", "Kunitz-type protease inhibitor 1", "", true, "Protease inhibitor", "Serine protease inhibitor"), ("PF00014", "Kunitz_BPTI")),
+                WithPfam(GuideProtein(5, "sp|P90006|ACTB_EXAMPLE", "Actin, cytoplasmic", "Actin family", true, "Cytoskeleton"), ("PF00022", "Actin")),
+                WithPfam(GuideProtein(6, "sp|P90007|MMP1_EXAMPLE", "Matrix metalloproteinase 1", "Peptidase M10A family", true, "Metalloprotease", "Hydrolase"),
+                    ("PF00413", "Peptidase_M10"), ("PF00045", "Hemopexin"), ("PF01471", "PG_binding_1")),
             },
         };
         var previousTheme = Themes.ThemeManager.Current;
@@ -136,6 +145,10 @@ internal static partial class Program
             model.SelectedMatchFamily = model.MatchFamilies.First(f => f.Key == "TRP");
             var family = model.SelectedMatchFamily.Suggestions.FirstOrDefault(s => s.Text == "Peptidase S1 family") ?? model.SelectedMatchFamily.Suggestions.First();
             family.Use = true; PumpDispatcher();
+            // Z16a8 (Z16a4): the Pfam domain written in TRP's row comes first, marked from your sheet and ticked.
+            Check("guide: TRP's Pfam domain from the sheet comes first, marked and ticked",
+                model.SelectedMatchFamily.Suggestions.First() is { Text: "PF00089", Use: true, IsFromSheet: true, Origin: "from your sheet" } sheet && sheet.Proteins == 2,
+                string.Join(", ", model.SelectedMatchFamily.Suggestions.Select(s => s.Text + (s.Use ? "*" : "") + " " + s.Origin + " " + s.Proteins)));
             Shot("05-evidence-matches");
             model.ConfirmMatches(_ => true);
             model.SelectedMatchFamily = model.MatchFamilies.First(f => f.Key == "PLA");

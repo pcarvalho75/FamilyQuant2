@@ -77,6 +77,8 @@ internal static partial class Program
             "Workbook sheets", "Use as", "Kept as", "Why this role", "Review role", "Proposed", "Family list", "Colour legend", "Subclass table", "Notes",
             "Use selected family sheet", "Read kept notes", "Kept notes preview", "Kept as source notes", "Sheet preview", "Source notes", "Meaning from legend",
             "Use as (proposed)", "Merge into abbreviation", "Source colour", "Source rows", "Category name",
+            // Z16a8 (Z16a4): her Pfam domains on Evidence matches.
+            "Pfam domain", "from your sheet",
         };
         Check("the chapter names the wizard's controls and choices with the program's own words", labels.All(text.Contains) && text.Contains("File > Save", StringComparison.Ordinal),
             string.Join(", ", labels.Where(l => !text.Contains(l))));
@@ -84,7 +86,7 @@ internal static partial class Program
         string repository = GoldenNumbers.FindRepository();
         string program = string.Concat(new[] { "FamilyListImportWindow.xaml", "FamilyListImportViewModel.cs", "FamilyListImportViewModel.Rows.cs",
                 "FamilyListImportViewModel.Commit.cs", "FamilyListImportModels.cs", "SuperClusterPreviewWindow.xaml", "PanelEditorWindow.xaml",
-                "MainWindow.xaml", "ClusterGenerationControl.xaml", "FamilyListImportWorkbookModels.cs", "FamilyListImportViewModel.Workbook.cs" }
+                "MainWindow.xaml", "ClusterGenerationControl.xaml", "FamilyListImportWorkbookModels.cs", "FamilyListImportViewModel.Workbook.cs", "FamilyListStoredEvidenceMatches.cs" }
             .Select(name => File.ReadAllText(Path.Combine(repository, "FamilyQuant", name))));
         Check("every control the chapter names is a label in the program's sources", labels.All(l => program.Contains("\"" + l + "\"", StringComparison.Ordinal)
             || program.Contains("\"" + l + "...\"", StringComparison.Ordinal)),
