@@ -101,6 +101,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => StreamingSaveTests(Path.Combine(workDir, "streaming-save")));
             suite.Add(() => CurationStreamingCallerTests());
             suite.AddWithApplication(() => CurationStreamingContractTests(Path.Combine(workDir, "curation-streaming-contract")));
+            suite.Add(() => CompactCurationTests(Path.Combine(workDir, "compact-curation")));
             suite.Section("Display filters and the family counter");
             suite.Add(() => FilterTests());
             suite.Section("Target/decoy scoring arithmetic");

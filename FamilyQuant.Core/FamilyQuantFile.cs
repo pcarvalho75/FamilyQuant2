@@ -124,7 +124,7 @@ namespace FamilyQuant
         /// </summary>
         public static readonly JsonSerializerOptions CurationJsonOptions = new JsonSerializerOptions
         {
-            WriteIndented = true,
+            WriteIndented = false,
         };
 
         /// <summary>Serialises the curation exactly as <see cref="Save"/> writes it. The .fqproj container
