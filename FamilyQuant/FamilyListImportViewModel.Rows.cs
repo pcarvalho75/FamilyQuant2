@@ -18,6 +18,7 @@ public sealed partial class FamilyListImportViewModel
     public bool CanUseRowChoice => !IsBusy && !Imported && SelectedSpecialRow?.Action != null;
     public bool HasDecisions => Decisions.Count > 0;
     public bool HasColors => SourceColorChoices.Count > 0;
+    public bool HasSourceFills => Preview?.Rows.Any(r => r.Cells.Any(c => c.Fill.Length > 0)) == true;
     public string DecisionSummary => HasDecisions ? Decisions.Count.ToString("N0", CultureInfo.CurrentCulture)
         + (Decisions.All(d => d.Confirmed) ? " values confirmed" : " values to review") : "Quantify every family";
     public string SpecialSummary => SpecialRows.Count(r => r.Blocking) is var count && count == 0 ? "Every special row has a choice"
@@ -71,6 +72,7 @@ public sealed partial class FamilyListImportViewModel
                 }
                 ReviewingDecisions = Decisions.Any(d => !d.Confirmed);
             }
+            foreach (var color in SourceColorChoices.Where(c => c.Label.Trim().Length == 0)) color.Label = color.ColorName;
             choices.ColorLabels = SourceColorChoices.Count == 0 ? null : SourceColorChoices.Select(c => new FamilyPanelColorLabel { Color = c.Color, Label = c.Label.Trim() }).ToList();
             check = importer.Check(table, choices, Decisions.Where(d => d.Confirmed && d.Decision != null).Select(d => d.Capture()).ToArray(), PanelName.Trim());
             var sourceFills = check.Colors;
@@ -81,10 +83,13 @@ public sealed partial class FamilyListImportViewModel
                 foreach (var color in sourceFills)
                 {
                     var row = new ImportColorChoice { Color = color.Color, ColorName = color.ColorName,
-                        Rows = string.Join(", ", color.RowNumbers), Label = oldColors.GetValueOrDefault(color.Color, color.Label) };
+                        Rows = string.Join(", ", color.RowNumbers), Label = oldColors.GetValueOrDefault(color.Color,
+                            string.IsNullOrWhiteSpace(color.Label) ? color.ColorName : color.Label) };
                     row.PropertyChanged += (_, change) => { if (!updating && change.PropertyName == nameof(ImportColorChoice.Label)) Recheck(); };
                     SourceColorChoices.Add(row);
                 }
+                choices.ColorLabels = SourceColorChoices.Select(c => new FamilyPanelColorLabel { Color = c.Color, Label = c.Label.Trim() }).ToList();
+                check = importer.Check(table, choices, Decisions.Where(d => d.Confirmed && d.Decision != null).Select(d => d.Capture()).ToArray(), PanelName.Trim());
             }
             RebuildSpecialRows();
             Changed(nameof(HasDecisions)); Changed(nameof(HasColors)); Changed(nameof(DecisionSummary)); Changed(nameof(SpecialSummary));
@@ -172,6 +177,16 @@ public sealed partial class FamilyListImportViewModel
 
     public IReadOnlyList<ImportSummaryFamily> SummaryFamilies => (committedPanel ?? check.Panel)?.Families.Select(f => new ImportSummaryFamily(f.Key, f.DisplayName,
         PanelImportFields.OtherNameText(committedPanel ?? check.Panel!, f), DecisionOptions.First(o => o.Value == f.Decision).Label,
-        MatchFamilies.FirstOrDefault(m => m.Key == f.Key)?.Choice ?? "Not reviewed", string.Join("\n", f.TextFields.Select(t => t.Name + ": " + t.Text)))).ToArray()
+        MatchFamilies.FirstOrDefault(m => m.Key == f.Key)?.Choice ?? "Not reviewed", string.Join("\n", f.TextFields.Select(t => t.Name + ": " + t.Text)),
+        SourceColorCategory(committedPanel ?? check.Panel!, f))).ToArray()
         ?? Array.Empty<ImportSummaryFamily>();
+
+    private static string SourceColorCategory(FamilyPanel panel, FamilyPanelFamily family)
+    {
+        var import = panel.Import;
+        string header = import?.ColumnHeaders.GetValueOrDefault(PanelImportFields.ColorCategory, "") ?? "";
+        if (header.Length == 0) return "";
+        string name = import?.ColorCategoryName is { Length: > 0 } category ? category : header + " colour";
+        return string.Join("; ", family.TextFields.Where(f => f.Name == name).Select(f => f.Text).Distinct(StringComparer.Ordinal));
+    }
 }

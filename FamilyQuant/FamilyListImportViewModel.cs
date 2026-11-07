@@ -82,7 +82,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         0 => true,
         1 => table != null && int.TryParse(HeaderRowText, out int editedHeader) && table.HeaderRowNumber == editedHeader && Preview != null
             && headerRow > 0 && !Preview.Problems.Any(p => p.Severity == PanelImportSeverity.Blocking),
-        2 => MappingValid && Decisions.All(d => d.Confirmed && d.Decision != null) && SourceColorChoices.All(c => c.Label.Trim().Length > 0),
+        2 => MappingValid && Decisions.All(d => d.Confirmed && d.Decision != null),
         3 => check.CanImport && SpecialRows.All(r => !r.Blocking),
         4 => check.CanImport && MatchFamilies.All(f => f.Decided),
         5 => check.CanImport && PanelName.Trim().Length > 0,
@@ -140,6 +140,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
             Status = preview.Problems.FirstOrDefault(p => p.Severity == PanelImportSeverity.Blocking)?.Message
                 ?? (selectedRow <= 0 ? "Choose the row containing the column names." : "Check the sheet and header row before continuing.");
             Recheck(); Changed(nameof(Preview)); Changed(nameof(Sheets)); Changed(nameof(HiddenSheets));
+            Changed(nameof(HasSourceFills));
             Changed(nameof(WorkbookPath)); Changed(nameof(WorkbookName)); Changed(nameof(Sheet));
         }
         catch (OperationCanceledException) { if (generation == readGeneration) Status = "Reading cancelled."; }

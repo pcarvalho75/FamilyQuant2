@@ -132,7 +132,7 @@
                                 <TextBlock Text="{Binding DecisionSummary}" Style="{StaticResource CaptionText}"/>
                                 <Button Content="Review decision values" Click="ReviewDecisions_Click" HorizontalAlignment="Left"/>
                             </StackPanel>
-                            <Expander Header="Colour categories (optional)">
+                            <Expander x:Name="ColourCategories" Header="Colour categories (optional)" IsExpanded="{Binding HasSourceFills, Mode=OneWay}">
                                 <StackPanel>
                                     <ComboBox DataContext="{Binding ColorColumn}" ItemsSource="{Binding Headers}" SelectedItem="{Binding Header, UpdateSourceTrigger=PropertyChanged}" MinHeight="34" AutomationProperties.Name="Colour category column">
                                         <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Converter={StaticResource HeaderLabel}}"/></DataTemplate></ComboBox.ItemTemplate>
@@ -234,6 +234,7 @@
                             <DataGridTemplateColumn Header="Family name" Width="2*"><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Name}" Style="{StaticResource SourceText}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
                             <DataGridTemplateColumn Header="Other-language name" Width="2*"><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding OtherName}" Style="{StaticResource SourceText}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
                             <DataGridTextColumn Header="Decision" Binding="{Binding Decision}" Width="145"/>
+                            <DataGridTextColumn Header="Colour" Binding="{Binding Color}" Width="130"/>
                             <DataGridTextColumn Header="Matches" Binding="{Binding Matches}" Width="120"/>
                             <DataGridTemplateColumn Header="Notes" Width="145"><DataGridTemplateColumn.CellTemplate><DataTemplate>
                                 <Button Content="View source notes" Click="SourceNotes_Click" Padding="6,2" Margin="2" ToolTip="Show every original source field for this family."/>

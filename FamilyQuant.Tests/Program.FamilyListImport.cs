@@ -73,6 +73,18 @@ internal static partial class Program
                         && model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header.Length == 0 && model.CanNext);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns");
                     Check(label + " Columns replaces the sheet-specific status", !model.Status.Contains("sheet and header", StringComparison.Ordinal));
+                    var colourColumn = model.ColorColumn!;
+                    colourColumn.Header = model.Columns.Single(c => c.Role == PanelImportFields.FamilyKey).Header;
+                    Check(label + " source fills open their optional section and start with usable names", ((Expander)window.FindName("ColourCategories")).IsExpanded
+                        && model.SourceColorChoices.Count > 0 && model.SourceColorChoices.All(c => c.Label.Length > 0) && model.CanNext);
+                    if (model.SourceColorChoices.Count > 0)
+                    {
+                        model.SourceColorChoices[0].Label = "My source category";
+                        model.SourceColorChoices[^1].Label = "";
+                    }
+                    Check(label + " optional colour names never block Next when cleared", model.CanNext);
+                    foreach (var colour in model.SourceColorChoices.Where(c => c.Label.Length == 0)) colour.Label = colour.ColorName;
+                    CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns-colours");
                     var decision = model.Columns.Single(c => c.Role == PanelImportFields.Decision);
                     decision.Header = decision.Headers.First(h => h.Contains("DECIS", StringComparison.OrdinalIgnoreCase));
                     Check(label + " free-text decisions remain proposals until explicitly confirmed", model.Decisions.Count == 8
@@ -129,6 +141,8 @@ internal static partial class Program
                     Check(label + " Summary includes the skipped empty row and the confirmed duplicate rename", model.Summary.Contains("1 row skipped", StringComparison.Ordinal)
                         && model.Summary.Contains("1 abbreviation renamed", StringComparison.Ordinal));
                     Check(label + " a single confirmed match uses family grammar", !model.Summary.Contains("1 families confirmed", StringComparison.Ordinal));
+                    Check(label + " Summary includes the imported source colour category", ((DataGrid)window.FindName("SummaryGrid")).Columns.Any(c => c.Header as string == "Colour")
+                        && model.SummaryFamilies.Any(f => f.Notes.Contains("My source category", StringComparison.Ordinal)));
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "06-summary");
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " Import is one panel publication and retains every protein's state", model.Page == 6 && model.Imported && model.CanUndo
