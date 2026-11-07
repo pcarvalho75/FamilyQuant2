@@ -353,6 +353,8 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-panel-import-template", "FamilyQuant.Tests.Program.PanelImportTemplateTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-import-example", "FamilyQuant.Tests.Program.PanelImportExampleTests(System.String)"),
         SuiteCommandRule.Covered("--test-tooltip-style", "FamilyQuant.Tests.Program.ToolTipStyleTests()"),
+        SuiteCommandRule.Excluded("--test-tooltips", "Z12q6 rule 7 check over every window; red until the owners' tooltip steps Z12q2 to Z12q5, Z12q8 and Z12q9 land, then enrolled in DefaultSuite (D77)."),
+        SuiteCommandRule.Excluded("--tooltip-census", "Writes the tooltip census tables to an explicitly selected new output for review; the Z12q6 suite check walks the same windows and fails on a missing tooltip."),
         SuiteCommandRule.Covered("--test-panel-template", "FamilyQuant.Tests.Program.PanelTemplateTests()"),
         SuiteCommandRule.Covered("--test-project-command-ready", "FamilyQuant.Tests.Program.ProjectCommandReadyTests(System.String)"),
         SuiteCommandRule.Excluded("--test-project-figure-export", "Requires a selected saved project and output; cost depends on its protein/figure counts and caches, so no data-independent sub-minute or quick-budget bound is claimed. Bounded synthetic FigureLimitTests are enrolled separately."),

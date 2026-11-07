@@ -132,6 +132,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-panel-import-template` | Z12p2d family-list template: sheets, marker, instructions, drop-down, schema validation, import with no mapping, replay |
 | `--test-panel-import-example` | The shipped example family list through the graceful importer: header below titles, proposals, merge label, repeated abbreviation, four-family row, replay |
 | `--test-tooltip-style` | Z12q1 tooltip defaults (500 ms, 20 s, on disabled controls), the 380 px style on theme tokens in both themes, and the one-attribute column header tooltip |
+| `--test-tooltips` | Z12q6 rule 7 over every window the census opens: fails on a required control with NONE or REPEATS-LABEL and on a dash, colour word or D21 word, naming window and control; not in DefaultSuite until it first passes |
+| `--tooltip-census <new-output>` | Z12q1 census: opens every window, reveals tabs and expanders, and writes one table per window (kind, label, name, host, tooltip or NONE, REPEATS-LABEL, wording flags) plus census.md |
 | `--test-report-findings` | J44 Summary of findings: each fixed sentence present only with its data, headline and study values, Others named only in the supplement, numbers table, culture and wording guards |
 | `--test-interpretation-input` | J45 Interpretation input: deterministic Markdown of details, panel, findings, stored tables and Methods; escaping, absent parts, refusal and the File > Export command |
 | `--j45-walk <project.fqproj> <new-output>` | Private desktop File > Export > Interpretation input (Markdown) twice on a saved project; timings and byte equality |
