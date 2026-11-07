@@ -41,6 +41,7 @@ public sealed class ImportDecisionChoice : ScreenViewModel
     public string Source { get; init; } = "";
     public string Rows { get; init; } = "";
     public string Reason { get; init; } = "";
+    public string Meaning { get; init; } = "";
     public FamilyPanelDecision? Decision { get => decision; set { if (Set(ref decision, value)) { Confirmed = false; Changed(nameof(IsMerge)); } } }
     public string MergeTarget { get => target; set { if (Set(ref target, value ?? "")) Confirmed = false; } }
     public bool IsMerge => Decision == FamilyPanelDecision.MergeIntoAnotherFamily;
@@ -53,6 +54,7 @@ public sealed class ImportColorChoice : ScreenViewModel
     private string label = "";
     public string Color { get; init; } = "";
     public string ColorName { get; init; } = "";
+    public string Meaning { get; init; } = "";
     public string Rows { get; init; } = "";
     public string Label { get => label; set => Set(ref label, value ?? ""); }
 }
