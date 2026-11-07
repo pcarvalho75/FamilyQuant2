@@ -24,7 +24,7 @@ internal static partial class Program
         }),
     ];
 
-    /// <summary>Z12p2c: the invented Lantern viper family list keeps the shape and the quirks of a real consensus
+    /// <summary>Z12p2c: the invented, organism-neutral example family list keeps the shape and the quirks of a real consensus
     /// workbook, reads back with the panel spreadsheet reader, and is rebuilt the same way each time. With
     /// <paramref name="output"/> a copy is written there for people to open.</summary>
     private static void ExampleFamilyListTests(string? output = null)
@@ -34,26 +34,26 @@ internal static partial class Program
         Directory.CreateDirectory(folder);
         try
         {
-            string titled = Path.Combine(folder, LanternViperFamilyList.DefaultFileName), plain = Path.Combine(folder, "plain.xlsx"),
+            string titled = Path.Combine(folder, ExampleFamilyList.DefaultFileName), plain = Path.Combine(folder, "plain.xlsx"),
                 again = Path.Combine(folder, "again.xlsx");
-            LanternViperFamilyList.Write(titled);
-            LanternViperFamilyList.Write(plain, titleRow: false);
-            LanternViperFamilyList.Write(again);
+            ExampleFamilyList.Write(titled);
+            ExampleFamilyList.Write(plain, titleRow: false);
+            ExampleFamilyList.Write(again);
             var reader = new PanelSpreadsheetReader();
             var sheets = reader.ReadSheetNames(titled);
-            Check("six sheets, the families first", sheets.Count == 6 && sheets[0] == LanternViperFamilyList.FamilySheetName
+            Check("six sheets, the families first", sheets.Count == 6 && sheets[0] == ExampleFamilyList.FamilySheetName
                 && sheets.Select(s => s[..2]).SequenceEqual(new[] { "1.", "2.", "3.", "4.", "5.", "6." }), string.Join(" | ", sheets));
-            var table = reader.ReadTable(titled, sheets[0], LanternViperFamilyList.FamilyHeaderRow());
+            var table = reader.ReadTable(titled, sheets[0], ExampleFamilyList.FamilyHeaderRow());
             Check("the header row sits below a title and a subtitle (row 3) with 15 accented headers",
-                LanternViperFamilyList.FamilyHeaderRow() == 3 && table.Headers.Count == 15 && table.Headers[0] == "Sigla"
+                ExampleFamilyList.FamilyHeaderRow() == 3 && table.Headers.Count == 15 && table.Headers[0] == "Sigla"
                 && table.Headers.Contains("Decisão FamilyQuant") && table.Headers.Contains("Domínio(s) Pfam")
                 && table.Headers.Contains("Nome (português)") && table.Headers.Contains("Observações"), string.Join(" | ", table.Headers));
             string Cell(PanelSpreadsheetRow row, string header) => row.Cells[header];
             var keys = table.Rows.Select(r => Cell(r, "Sigla")).ToList();
-            Check("about forty families: 38 rows, one of them naming four", table.Rows.Count == 38
+            Check("about forty families: 39 rows, one of them naming four", table.Rows.Count == 39
                 && table.Rows.Any(r => Cell(r, "Nome (português)").Count(c => c == ';') >= 3));
             Check("one abbreviation is repeated", keys.GroupBy(k => k).Count(g => g.Count() > 1) == 1
-                && keys.Count(k => k == "CTL") == 2);
+                && keys.Count(k => k == "LEC") == 2);
             Check("one empty row interrupts the list", table.Rows.Zip(table.Rows.Skip(1), (a, b) => b.RowNumber - a.RowNumber).Count(d => d == 2) == 1
                 && table.Rows.Zip(table.Rows.Skip(1), (a, b) => b.RowNumber - a.RowNumber).All(d => d is 1 or 2));
             var decisions = table.Rows.Select(r => Cell(r, "Decisão FamilyQuant")).Distinct().ToList();
@@ -91,7 +91,7 @@ internal static partial class Program
                     .Select(r => r.Elements<Cell>().FirstOrDefault(c => c.CellReference!.Value!.StartsWith("A", StringComparison.Ordinal)))
                     .Where(c => c != null).Select(c => FillOf(c!)).ToList();
                 Check("the abbreviation cells are coloured by decision, in several colours",
-                    keyCells.Count == 38 && keyCells.All(f => f != null) && keyCells.Distinct().Count() >= 5, string.Join(",", keyCells.Distinct()));
+                    keyCells.Count == 39 && keyCells.All(f => f != null) && keyCells.Distinct().Count() >= 5, string.Join(",", keyCells.Distinct()));
                 Check("no fill is yellow or gold", fills.Select(f => f.PatternFill?.ForegroundColor?.Rgb?.Value).OfType<string>()
                     .All(argb => !(Convert.ToInt32(argb.Substring(2, 2), 16) > 200 && Convert.ToInt32(argb.Substring(4, 2), 16) > 180
                         && Convert.ToInt32(argb.Substring(6, 2), 16) < 120)));
@@ -106,11 +106,13 @@ internal static partial class Program
             string allText = string.Join("\n", sheets.Select((s, i) => reader.ReadTable(titled, s, i == 0 ? 3 : 1))
                 .SelectMany(t => t.Headers.Concat(t.Rows.SelectMany(r => r.Cells.Values))));
             Check("no em or en dash anywhere in the workbook", !allText.Contains('–') && !allText.Contains('—'));
+            Check("nothing in the workbook names an organism, a venom or a toxin (D21)", !DatabaseSpecificCopy.IsMatch(allText),
+                DatabaseSpecificCopy.Match(allText).Value);
             if (output != null)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(output))!);
-                LanternViperFamilyList.Write(output);
-                Check("a copy was written for people to open", File.Exists(output) && reader.ReadTable(output, sheets[0], 3).Rows.Count == 38, output);
+                ExampleFamilyList.Write(output);
+                Check("a copy was written for people to open", File.Exists(output) && reader.ReadTable(output, sheets[0], 3).Rows.Count == 39, output);
             }
         }
         finally
