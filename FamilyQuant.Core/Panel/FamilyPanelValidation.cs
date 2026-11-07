@@ -15,6 +15,7 @@ public static class FamilyPanelValidation
     public static void Validate(FamilyPanel panel)
     {
         ArgumentNullException.ThrowIfNull(panel);
+        Evidence.PanelEvidenceMatching.ValidateConfirmed(panel);
         var families = new Dictionary<string, FamilyPanelFamily>(StringComparer.Ordinal);
         foreach (FamilyPanelFamily family in panel.Families)
         {

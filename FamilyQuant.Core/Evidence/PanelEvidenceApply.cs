@@ -14,6 +14,7 @@ public static partial class EvidenceApply
         if (manual?.Count > 0) before = ManualFamilyChoices.ExtendPanel(before, manual);
         var after = FamilyPanelValidation.Clone(selected);
         before.EvidenceLinks.Clear(); after.EvidenceLinks.Clear();
+        before.ConfirmedEvidenceMatches = null; after.ConfirmedEvidenceMatches = null;
         foreach (var family in before.Families) family.Subclasses.Clear();
         foreach (var family in after.Families) family.Subclasses.Clear();
         if (JsonSerializer.Serialize(before) != JsonSerializer.Serialize(after))

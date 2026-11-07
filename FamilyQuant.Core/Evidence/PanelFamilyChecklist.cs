@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 namespace FamilyQuant.Evidence;
 
 [Flags]
-public enum PanelChecklistMatch { None = 0, UniProtFamily = 1, Pfam = 2, NameText = 4, HandChoice = 8, ProposedPlacement = 16 }
+public enum PanelChecklistMatch { None = 0, UniProtFamily = 1, Pfam = 2, NameText = 4, HandChoice = 8, ProposedPlacement = 16, ConfirmedPhrase = 32, ConfirmedMatch = 64 }
 
 public sealed record PanelChecklistProtein(int ProteinIndex, string Identifier, PanelChecklistMatch Match,
     bool? Reviewed, bool Placed, string Reason);
@@ -32,6 +32,7 @@ public sealed record PanelChecklistFamily(string Key, string Name, string Decisi
         (PanelChecklistMatch.UniProtFamily, "UniProt family"), (PanelChecklistMatch.Pfam, "Pfam"),
         (PanelChecklistMatch.NameText, "Name text"), (PanelChecklistMatch.HandChoice, "Added by hand"),
         (PanelChecklistMatch.ProposedPlacement, "Proposal placement"),
+        (PanelChecklistMatch.ConfirmedPhrase, "Confirmed phrase"), (PanelChecklistMatch.ConfirmedMatch, "Confirmed match"),
     }.Where(type => Proteins.Any(protein => protein.Match.HasFlag(type.Item1))).Select(type => type.Item2));
 }
 
@@ -59,6 +60,7 @@ public static class PanelFamilyChecklist
             string? targetKey = FamilyPanelValidation.ResolveFamilyKey(panel, family.Key);
             var matches = new List<PanelChecklistProtein>();
             int excludedContaminants = 0;
+            var confirmed = panel.ConfirmedEvidenceMatches?.GetValueOrDefault(family.Key);
             foreach (var row in targets)
             {
                 var protein = file.MyExtendedFastaItems[row.ProteinIndex];
@@ -69,6 +71,16 @@ public static class PanelFamilyChecklist
                     || sourceFamilies.Length > 0 && mapped == family.Key) match |= PanelChecklistMatch.UniProtFamily;
                 if (EvidenceDomains.Ordered(protein.Evidence).Any(domains.Contains)) match |= PanelChecklistMatch.Pfam;
                 if (patterns.Any(pattern => pattern.IsMatch(FamilyNaming.ProteinName(protein.Description)))) match |= PanelChecklistMatch.NameText;
+                foreach (var choice in confirmed?.UserConfirmed == true ? confirmed.Choices : Array.Empty<PanelEvidenceChoice>())
+                {
+                    if (!PanelEvidenceMatching.Matches(protein.Evidence, choice)) continue;
+                    match |= PanelChecklistMatch.ConfirmedMatch | (choice.Kind switch
+                    {
+                        PanelEvidenceMatchKind.UniProtFamily => PanelChecklistMatch.UniProtFamily,
+                        PanelEvidenceMatchKind.Pfam => PanelChecklistMatch.Pfam,
+                        _ => PanelChecklistMatch.ConfirmedPhrase,
+                    });
+                }
                 bool placed = targetKey != null && row.Family == targetKey;
                 if (row.Family == family.Key && row.Tier == EvidenceTier.AddedByHand) match |= PanelChecklistMatch.HandChoice;
                 if (row.Family == family.Key && match == PanelChecklistMatch.None) match = PanelChecklistMatch.ProposedPlacement;
