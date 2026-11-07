@@ -1,6 +1,6 @@
 # Pfam values supplied in a family list
 
-The unified workbook proposal publishes `PanelWorkbookPfamHint` source facts: the row number, actual Pfam column, family key and named accessions. The end-of-proposal enrichment publishes those hints once. The import path and hints share the existing Pfam parser; a hint never imports or confirms a choice.
+The unified workbook proposal publishes `PanelWorkbookPfamHint` source facts: the row number, actual Pfam column, family key and named accessions. The common end-of-proposal enrichment publishes those hints once, including after an explicit family-sheet or role choice. A conflicting family role blocks the proposal and leaves its Pfam facts empty. The import path and hints share the existing Pfam parser; a hint never imports or confirms a choice.
 
 Family-row Pfam values precede inferred stored-name suggestions. They are primary suggestions, marked `from your sheet`, with exact stored coverage including zero. The wizard and shared matching dialog start these explicit source statements ticked when there is no previous confirmation. Other inferred suggestions remain unticked.
 

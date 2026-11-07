@@ -363,6 +363,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-panel-multiscope-audit", "FamilyQuant.Tests.Program.PanelMultiScopeAuditTests()"),
         SuiteCommandRule.Covered("--test-panel-pfam", "FamilyQuant.Tests.Program.PanelPfamTests()"),
         SuiteCommandRule.Covered("--test-panel-spreadsheet", "FamilyQuant.Tests.Program.PanelSpreadsheetTests(System.String)"),
+        SuiteCommandRule.Covered("--test-panel-workbook-map", "FamilyQuant.Tests.Program.PanelWorkbookMapTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-import-graceful", "FamilyQuant.Tests.Program.PanelImportGracefulTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-import-several", "FamilyQuant.Tests.Program.PanelImportSeveralTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-import-template", "FamilyQuant.Tests.Program.PanelImportTemplateTests(System.String)"),

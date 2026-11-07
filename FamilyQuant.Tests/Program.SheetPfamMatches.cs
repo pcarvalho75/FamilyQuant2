@@ -36,9 +36,38 @@ internal static partial class Program
         return importer.Import(proposal.FamilyTable!, proposal.FamilyProposal.Choices, Array.Empty<FamilyPanelDecisionMapping>(), "Invented family list");
     }
 
+    private static void SheetPfamWorkbookChoiceTests()
+    {
+        var importer = new FamilyPanelSpreadsheetImporter();
+        PanelWorkbookSheet Sheet(string sheet, string key, string domain) => new()
+        {
+            SheetName = sheet,
+            Table = new PanelSpreadsheetTable { SourceName = "invented-choice.xlsx", SheetName = sheet,
+                Headers = new() { "Key", "Name", "Pfam" }, ColumnLetters = new() { "A", "B", "C" },
+                Rows = new() { new() { RowNumber = 2, Cells = new() { ["Key"] = key,
+                    ["Name"] = "Invented sheet family", ["Pfam"] = "Invented fold (" + domain + ")" } } } }
+        };
+        var workbook = new PanelWorkbookRead { SourceName = "invented-choice.xlsx",
+            Sheets = new() { Sheet("First", "AA", "PF90001"), Sheet("Second", "BB", "PF90002") } };
+        var first = importer.ProposeWorkbook(workbook, "First");
+        Check("Z16a4 explicit first sheet publishes its Pfam facts exactly once", first.Pfam is [{ FamilyKey: "AA", Column: "Pfam" }]
+            && first.Pfam[0].Domains is [{ Accession: "PF90001" }]);
+        var second = importer.ProposeWorkbook(workbook, "Second");
+        Check("Z16a4 changing family sheet replaces source Pfam facts", second.Pfam is [{ FamilyKey: "BB", Column: "Pfam" }]
+            && second.Pfam[0].Domains is [{ Accession: "PF90002" }]);
+        var blocked = importer.ProposeWorkbook(workbook, "Second",
+            new Dictionary<string, PanelWorkbookSheetRole> { ["Second"] = PanelWorkbookSheetRole.Notes });
+        Check("Z16a4 inconsistent explicit roles block source matching facts", blocked.NeedsFamilySheetChoice && blocked.Pfam.Count == 0
+            && blocked.Problems.Any(problem => problem.Severity == PanelImportSeverity.Blocking && problem.SheetName == "Second"));
+        var restored = importer.ProposeWorkbook(workbook, "First");
+        Check("Z16a4 rerunning a corrected sheet choice retains one source publication", restored.Pfam.Count == 1
+            && first.Pfam[0].Domains[0].Accession == "PF90001" && second.Pfam[0].Domains[0].Accession == "PF90002");
+    }
+
     private static void SheetPfamMatchTests(string output)
     {
         Directory.CreateDirectory(output);
+        SheetPfamWorkbookChoiceTests();
         var panel = SheetPfamPanel(); var family = panel.Families.Single(); var file = EvidenceMatchingFile();
         foreach (var protein in file.MyExtendedFastaItems.Take(2)) protein.Evidence!.Pfam = new()
             { new() { Accession = "PF90001", Name = "Stored first fold" }, new() { Accession = "PF90003", Name = "Invented sheet fold" } };
