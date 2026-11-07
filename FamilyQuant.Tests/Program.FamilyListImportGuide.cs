@@ -58,6 +58,8 @@ internal static partial class Program
         Check("D21: nothing in the chapter names an organism, a venom or a sample's numbers", !DatabaseSpecificCopy.IsMatch(text) && !HistoricalSampleCopy.IsMatch(text),
             DatabaseSpecificCopy.Match(text).Value + HistoricalSampleCopy.Match(text).Value);
         Check("no em or en dash in the chapter", !text.Contains('–') && !text.Contains('—'));
+        string index = File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "docs", "INDEX.md"));
+        Check("docs/INDEX.md lists the command that takes the chapter's pictures", index.Contains("`--import-guide-screens <output-dir> [--dark]`", StringComparison.Ordinal));
 
         var previousTheme = Themes.ThemeManager.Current;
         try

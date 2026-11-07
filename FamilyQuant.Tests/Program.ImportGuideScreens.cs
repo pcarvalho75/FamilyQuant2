@@ -36,7 +36,8 @@ internal static partial class Program
     private static void ImportGuideScreens(string output, bool dark)
     {
         EnsureApplication();
-        string work = Path.Combine(Path.GetTempPath(), "fq-import-guide-" + Guid.NewGuid().ToString("N"));
+        // Everything this capture writes stays under the output folder: the pictures and the workbook it imports.
+        string work = Path.Combine(Path.GetFullPath(output), "example-workbook");
         Directory.CreateDirectory(work);
         string workbook = Path.Combine(work, ExampleFamilyList.DefaultFileName); ExampleFamilyList.Write(workbook);
         var file = new FamilyClusterFile
@@ -113,6 +114,8 @@ internal static partial class Program
             FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
             Shot("07-done");
             Check("guide: imported", model.Imported && file.FamilyPanel?.Name == "Example family list");
+            Check("guide: the generated workbook is written under the output folder", Path.GetFullPath(workbook)
+                .StartsWith(Path.GetFullPath(output).TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase), workbook);
         }
         finally { window.Close(); PumpDispatcher(); Themes.ThemeManager.Apply(previousTheme); }
     }
