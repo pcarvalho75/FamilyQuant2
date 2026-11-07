@@ -109,6 +109,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter
             if (!result.FamilyProposal.Choices.ColumnHeaders.ContainsKey(PanelImportFields.Decision)
                 && result.FamilyProposal.DecisionHint.Length == 0) result.DecisionsState = PanelWorkbookReadState.Read;
         }
+        PopulateWorkbookLegend(result);
         PopulateWorkbookPfam(result);
         return result;
     }
