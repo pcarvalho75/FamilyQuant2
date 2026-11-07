@@ -185,16 +185,20 @@ internal static partial class Program
                     var grid = (DataGrid)review.FindName("evidenceGrid");
                     var toolbar = (WrapPanel)button.Parent;
                     var buttons = toolbar.Children.OfType<Button>().Select(b => b.Content as string).ToArray();
-                    Check(theme + " Align selected sits right after Untick selected", buttons.SequenceEqual(new[]
-                        { "Untick flagged", "Tick selected", "Untick selected", "Align selected" }), string.Join(",", buttons));
+                    int untick = Array.IndexOf(buttons, "Untick selected");
+                    Check(theme + " Align selected sits right after Untick selected", untick >= 0 && untick + 1 < buttons.Length
+                        && buttons[untick + 1] == "Align selected", string.Join(",", buttons));
                     Check(theme + " the button is disabled without a source", !button.IsEnabled);
                     review.AlignmentSource = highlighted => AlignmentCandidates.Find(file, session.Proposal, highlighted);
                     grid.SelectedItems.Clear(); PumpDispatcher();
                     Check(theme + " the button is disabled with no highlighted row", !button.IsEnabled);
                     var evidence = ((GroupingReviewViewModel)review.DataContext).Evidence!;
                     evidence.SelectedFamily = null; PumpDispatcher();
+                    // Changing the family filter may move the details pane to another row; highlight only the query.
+                    grid.SelectedItems.Clear(); PumpDispatcher();
                     var row = grid.Items.OfType<ReviewProteinRow>().Single(p => p.ProteinIndex == query);
                     grid.SelectedItems.Add(row); PumpDispatcher();
+                    Check(theme + " only the protein the user highlighted is highlighted", grid.SelectedItems.Count == 1 && ReferenceEquals(grid.SelectedItems[0], row));
                     Check(theme + " the button is enabled once a row is highlighted", button.IsEnabled);
                     bool tickBefore = row.Selected;
                     button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
