@@ -44,19 +44,19 @@ internal static partial class Program
                 object oldFile = SecondaryCall(null, legacy.GetType("FamilyQuant.FamilyClusterFile", true)!, "FromJsonText", file.ToJsonText())!;
                 string beforeFcf = Path.Combine(folder, "frozen.fcf"), currentFcf = Path.Combine(folder, "current.fcf");
                 SecondaryCall(oldFile, oldFile.GetType(), "Save", beforeFcf); file.Save(currentFcf);
-                // X7 deliberately omits the retired XIC field on new FCF writes. Compare the
-                // parsed retained document, then require the frozen reader to accept the new file.
+                // X7 omits retired XIC. D80 changes the wire format, so compare the retained
+                // document restored by the current reader, not the format-2 frame.
                 using (var oldJson = JsonDocument.Parse(File.ReadAllText(beforeFcf)))
-                using (var currentJson = JsonDocument.Parse(File.ReadAllText(currentFcf)))
                 {
                     var oldNode = System.Text.Json.Nodes.JsonNode.Parse(oldJson.RootElement.GetRawText())!;
                     foreach (var item in oldNode["MyExtendedFastaItems"]!.AsArray()) item!.AsObject().Remove("XIC");
                     Check("FCF retained persisted document agrees after authorized retired-XIC omission " + culture,
-                        System.Text.Json.Nodes.JsonNode.DeepEquals(oldNode, System.Text.Json.Nodes.JsonNode.Parse(currentJson.RootElement.GetRawText())));
+                        System.Text.Json.Nodes.JsonNode.DeepEquals(oldNode, RetainedFcfForLedger(currentFcf)));
                 }
-                object reopened = legacy.GetType("FamilyQuant.FamilyClusterFile", true)!.GetMethod("Load", new[] { typeof(string) })!.Invoke(null, new object[] { currentFcf })!;
-                Check("frozen FCF reader reopens current annotation-bearing export " + culture,
-                    ((IEnumerable)SecondaryRead(reopened, "MyExtendedFastaItems")!).Cast<object>().Select(item => (string)SecondaryRead(item, "UserAnnotation")!)
+                Console.WriteLine("  RETIRED  " + FeatureLedger.Du7Retirement);
+                FamilyClusterFile reopened = FamilyClusterFile.Load(currentFcf);
+                Check("current FCF reader reopens current annotation-bearing export " + culture,
+                    reopened.MyExtendedFastaItems.Select(item => item.UserAnnotation)
                         .SequenceEqual(file.MyExtendedFastaItems.Select(item => item.UserAnnotation)));
                 string oldCsv = (string)legacy.GetType("FamilyQuant.CsvReport", true)!.GetMethods().Single(method => method.Name == "Build" && method.GetParameters().Length == 1)
                     .Invoke(null, new[] { SecondaryRead(oldFile, "MyExtendedFastaItems") })!;
@@ -206,7 +206,7 @@ internal static partial class Program
                 : row.Source.Contains("ThreeWayWindow", StringComparison.Ordinal) ? "partition-format" : "homology-format",
             row.Source + ":" + row.Line.ToString(CultureInfo.InvariantCulture) + " " + row.Detail
             + (row.Source is "FamilyQuant/ClusterGenerationControl.xaml.cs" or "FamilyQuant/HelpContent.cs" or "FamilyQuant/FamilyNaming.cs"
-                ? "; native FCF/CSV persisted identifiers and quoted multiline annotations; frozen reopen; native family names and unchanged nonzero quantitation after annotation edits."
+                ? "; native FCF/CSV persisted identifiers and quoted multiline annotations; current-reader reopen (D80); native family names and unchanged nonzero quantitation after annotation edits."
                 : "; exact filename/filter" + (row.Line == 126 ? "/default extension" : "")
                     + "; preserved cancelled destination; accepted files byte-identical."))).ToList();
         var receipts = new[] { ("partition-format", "partition-screen"), ("homology-format", "homology-screen") }.Select(group =>
@@ -216,7 +216,7 @@ internal static partial class Program
                 new("native", "test", nameof(FileContractCommand), "native frozen/current file bytes en-US/" + group.Item2, log, ""),
                 new("native", "test", nameof(FileContractCommand), "native frozen/current file bytes pt-BR/" + group.Item2, log, "") })).ToList();
         foreach (var group in new[] { ("annotation-format", "format/export", "native annotation FCF/CSV storage, family naming and nonzero quantitation invariance "),
-            ("accession-storage", "export/storage fact", "native accession marker survives file writes and frozen reopen ") })
+            ("accession-storage", "export/storage fact", "native accession marker survives file writes and current reopen ") })
             receipts.Add(new(group.Item1, group.Item2, new() {
                 new("native", "test", nameof(FileContractCommand), group.Item3 + "en-US", log, ""),
                 new("native", "test", nameof(FileContractCommand), group.Item3 + "pt-BR", log, "") }));
@@ -228,7 +228,11 @@ internal static partial class Program
         Console.WriteLine(FormattableString.Invariant($"File cohort: {rows.Length} target rows; {proved.Length} executed format proofs; {excluded.Length} pending Shell exclusions; {unresolved.Length} explicitly unproved/listed; 0 missing wording."));
     }
 
-    private static void FileContractAnnotations(Assembly legacy, string folder, FamilyClusterFile file, object oldFile, object reopened, bool negative)
+    // Both ledger producers compare retained objects; a wire frame is never a scientific document.
+    private static System.Text.Json.Nodes.JsonNode RetainedFcfForLedger(string path) =>
+        System.Text.Json.Nodes.JsonNode.Parse(FamilyClusterFile.Load(path).ToJsonText())!;
+
+    private static void FileContractAnnotations(Assembly legacy, string folder, FamilyClusterFile file, object oldFile, FamilyClusterFile reopened, bool negative)
     {
         var oldItems = ((IEnumerable)SecondaryRead(oldFile, "MyExtendedFastaItems")!).Cast<object>().ToArray();
         string[] annotations = file.MyExtendedFastaItems.Select(item => item.UserAnnotation).ToArray();
@@ -264,9 +268,9 @@ internal static partial class Program
             && before.MeasuredTotalEnvelope > 0 && (double)SecondaryRead(oldBefore, "MeasuredTotalEnvelope")! > 0
             && csvAnnotations.SequenceEqual(annotations));
         string identifier = file.MyExtendedFastaItems[0].SequenceIdentifier;
-        string storedIdentifier = (string)SecondaryRead(((IEnumerable)SecondaryRead(reopened, "MyExtendedFastaItems")!).Cast<object>().First(), "SequenceIdentifier")!;
+        string storedIdentifier = reopened.MyExtendedFastaItems[0].SequenceIdentifier;
         string oldAccession = (string)legacy.GetType("FamilyQuant.FamilyNaming", true)!.GetMethod("Accession")!.Invoke(null, new object[] { storedIdentifier })!;
-        Check("native accession marker survives file writes and frozen reopen " + CultureInfo.CurrentCulture.Name,
+        Check("native accession marker survives file writes and current reopen " + CultureInfo.CurrentCulture.Name,
             storedIdentifier == identifier && oldAccession == "P12345" && FamilyNaming.Accession(identifier) == oldAccession
             && File.ReadAllText(Path.Combine(folder, "current-FamilyQuant_Report.csv")).Contains(identifier, StringComparison.Ordinal));
         FeatureLedgerEvidence.WriteJson(Path.Combine(folder, "annotation-claims.json"), new { FrozenName = oldName, CurrentName = name,

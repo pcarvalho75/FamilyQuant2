@@ -115,6 +115,119 @@
         }
       ],
       "workingDirectory": "C:\\FamilyQuant-gate"
+    },
+    {
+      "id": "native-shell-main-D80",
+      "command": "D:\\FamilyQuant-wt\\tips\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-shell-main out/Z15b7-fix/frozen-source out/Z15b7-fix/green-shell \u00222026-11-07 09:31:11 -0800\u0022",
+      "executedAt": "2026-11-07 09:31:11 -0800",
+      "commit": "db2ca01c148da5e032237142a5f95bdf5279458c",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\comparisons.log",
+          "sha256": "AE467A7756316287D212794187C30CB9AC94A49749FAEE57ABF48E5D0DAC0C36"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\comparisons.json",
+          "sha256": "259AD84DF97FF9D5141B17AFB0ECCB1715A7B91FC4C106E369E96F0640A336B9"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\native-cases-canonical.json",
+          "sha256": "6A84C43A05F0CD08CF367F2894F39DABF033C5C90B082EAB1751FE4512E5D316"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\message-comparisons.json",
+          "sha256": "1C22921AB8076D502A1FD3231B9F3C7526D58BBC4236282A9C41A0F5DBB3BF96"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\native/native-cases.json",
+          "sha256": "E9998A566310E5566848383A153ACB5B5982444E912A8B5846C3D1DBE45C2CCD"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\wording-for-paulo.tsv",
+          "sha256": "31C3D813F810968F0D11B3AC8873EC2D6A68B9ADCABA5C57C8979F771EB7F631"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\LedgerMemberFactComparison.cs",
+          "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\LedgerMemberFactComparison.Messages.cs",
+          "sha256": "D9CA2353875D839C208F097B136E41A649250487F00A70164E8649B596DF622E"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\Program.ShellRouteNative.cs",
+          "sha256": "742B80EDAE96987608E36A3F500C46759EF30E4DC5847D83DD9F369F534DC4A4"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\Program.ShellMainMessages.cs",
+          "sha256": "F23C6FD145EFEC4F1D87DDC74B4A050140F697B3356E00A1C6F03C7CAE6DDB9D"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\Program.ShellMainReceipts.cs",
+          "sha256": "6D33A953E4FA9FCD54E94B5472765CF06E1D86F37D5BB8619F97D05746DDAD5A"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\Program.ShellMessageFrames.cs",
+          "sha256": "7E7C05B59A70C02BD8B961C4148F6E8F356A5506D1B52D79BE5A4E5FBFB597C9"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\Program.Commands.ShellRoutes.cs",
+          "sha256": "7AE2F33E02B447E30AE57AB3A5913A2F748B3B997407BDD08A68047DE9AEEDDE"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\Program.ShellSeproFixture.cs",
+          "sha256": "1F3EA47B23440BC75A278743E4CEC661D8B61342BE85F0AC52D1530E418AFDD6"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\Program.Commands.ShellSeproFixture.cs",
+          "sha256": "75B9B62592B4666124F997277B959313908B0203274BEBE4818A12F9271CE9FC"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\Program.ShellProofWindows.cs",
+          "sha256": "630AEB8FA35969CBF53BDD55A5EB1A28E6C86B14DAD3FA71EBF8EC560013D0EE"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\Program.Commands.ShellProofWindows.cs",
+          "sha256": "47C3F5E10757C5F8CC8C017A7C52F99D3C6217BDCBB0ECDA03AE549EA03B4AAE"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\FamilyQuant.Tests.csproj",
+          "sha256": "0779F3E8C2CC010ACE0F345B0B8770EDA7B55B63FADA9F5B36C3C5DF3C5C1D68"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "AD3FF536C048B8F87CD51D6A2DB6E6BDB85BEEB5D8A6947EE1630805EC3B756C"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\FamilyQuant2.dll",
+          "sha256": "0FB7B7FFCFB9A8BAE2E16501AA503791603814A09B074D1D0881F004FF285D50"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\FamilyQuant.Core.dll",
+          "sha256": "35D81D6B605190FE706A57C1A661CD6B9CB71D0235F852B087B73BFAECFD6ED6"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\SeproPckg2.dll",
+          "sha256": "8A7D8B48B537F6F788718054E4959C129B55C6C5203BCBDF294F1A6B9F0A7EA2"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\FamilyQuant/DLLs\\SeproPckg2.dll",
+          "sha256": "8A7D8B48B537F6F788718054E4959C129B55C6C5203BCBDF294F1A6B9F0A7EA2"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\executed\\PatternTools.dll",
+          "sha256": "C36CC8957FFA977E16A8447F0D808BBD7E710BAB09B50EEC5172D8942987E1F6"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\FamilyQuant/DLLs\\PatternTools.dll",
+          "sha256": "C36CC8957FFA977E16A8447F0D808BBD7E710BAB09B50EEC5172D8942987E1F6"
+        },
+        {
+          "path": "D:\\FamilyQuant-wt\\tips\\FamilyQuant.Tests/FamilyQuant.Tests.csproj",
+          "sha256": "0779F3E8C2CC010ACE0F345B0B8770EDA7B55B63FADA9F5B36C3C5DF3C5C1D68"
+        }
+      ],
+      "workingDirectory": "D:\\FamilyQuant-wt\\tips"
     }
   ],
   "rows": [
@@ -28972,27 +29085,57 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C9BB89706722E647147AA5055D016485C2049BE81CB2B8AC8CB90928A02B9F45"
+          "sha256": "6B2FAF1CB4C937EE25F8B4D7624DD792D2062D6E0F093D2234A8BFC45FFBB4A3"
         },
         {
           "path": "FamilyQuant.Core/ProjectStore.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "60430BFC8A25C5730776898E4997EF38C6FBBBF78F72CBFF16771542B5165BE0"
+          "sha256": "A0B83858FBD44481272E8307708124CDD9E24BECDF282411FBEAD77FC8D33ADC"
         },
         {
           "path": "FamilyQuant.Core/ShellProjectOperations.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "06B478A1EBD500DBA804CCF047FDC0D79125987A5F24A6834B30AB2DD4549704"
+          "sha256": "7D1115D4AD93CD101D203E7585B88329FB8F1C53A1EB7BCF3D3D33E950E30882"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/CurationFormat.cs",
+          "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
+          "sha256": "509C6320B27FE1D9AB85228A1DEE7F1AD4ABF67A164160C2FD7EBAFBD8C21CEB"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/CurationFormat2/FeatureProvenancePart.cs",
+          "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
+          "sha256": "5B0FCFB84939CFBC15C16215856232E1A39FADA0F2C280605F4B7CF8934445DC"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/CurationFormat2/RecipeCopiesPart.cs",
+          "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
+          "sha256": "E88CBE9A57AECBFDE4414F247198B7C4B0ACD2518298AC0B119495143E9FD98D"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/CurationFormatPart.cs",
+          "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
+          "sha256": "22EE2E70C53E2C95DCBBB55F027F6DE5BA597DDDF210D6BF56345E7417B073EB"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/CurationFormatRegistry.cs",
+          "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
+          "sha256": "10508D94F5F90F66B9B37F8F30E0C0AEE2D70010BB627DD7E85431DB41792D63"
         },
         {
           "path": "FamilyQuant.Core/Storage/CurationJsonStream.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "984EFCF90448F0FB13DE4DD43045A9A3F87355C6B91578B379C579F715D76D4C"
+          "sha256": "CFB72207EE326D55B78154549C932526788A449EFECDAE36D2552556968F4CA8"
         },
         {
           "path": "FamilyQuant.Core/Storage/DerivedRunFraction.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
           "sha256": "DB943BF669B6E133E4359C2FABF73502C482052C94E0694F5AC3BD6BF87E68F3"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/JsonStreamCopy.cs",
+          "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
+          "sha256": "F0EBDFACE1596166F92331937C1BF98299B42A6F1B7CF62F6E5AACB9F8C419DF"
         },
         {
           "path": "FamilyQuant.Core/Storage/ProjectArchiveEntries.cs",
@@ -29002,7 +29145,7 @@
         {
           "path": "FamilyQuant.Core/Storage/ProjectFileSchema.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "CA83EE0B4B17D735F0C59EBDA615432F09856F7999CF885E40EBBC6173ED492B"
+          "sha256": "791A01E6F68812E1311068D9412AD5AF3508BF29C6084970B3944AC666FF1233"
         },
         {
           "path": "FamilyQuant.Core/Storage/ProjectManifestCodec.cs",
@@ -29022,7 +29165,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "9B3F56367E4ED288A1A68B9B75BCFB6F09CB97CA926836C8E576406C8ECD7088"
+          "sha256": "73C399EB41EA828330A693355DEA62D8F7D6A0BA7DE76B26C334BD4A32E10229"
         },
         {
           "path": "FamilyQuant.Core/Storage/QuantRow.cs",
@@ -29042,7 +29185,7 @@
         {
           "path": "FamilyQuant.Tests/Program.ShellMainMessages.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "4B08F7D47E8A28AD6255AE0A2E9E83D4DF0EFE9799E8FB8974253AE9D8286482"
+          "sha256": "F23C6FD145EFEC4F1D87DDC74B4A050140F697B3356E00A1C6F03C7CAE6DDB9D"
         },
         {
           "path": "FamilyQuant.Tests/Program.ShellMainReceipts.cs",
@@ -29057,7 +29200,7 @@
         {
           "path": "FamilyQuant.Tests/Program.ShellRouteNative.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "4A011A28FF48411380A1B6AF7EAF0A7B26EC143BB6B07FCAFECA3271C6D67A47"
+          "sha256": "742B80EDAE96987608E36A3F500C46759EF30E4DC5847D83DD9F369F534DC4A4"
         },
         {
           "path": "FamilyQuant.Tests/Program.ShellSeproFixture.cs",
@@ -29067,42 +29210,57 @@
         {
           "path": "FamilyQuant/ComputeXicViewModel.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "49D9173E46D0F1F162EDFC96C4F74E182551196613979923241BD2095B8A3A68"
+          "sha256": "C8EAF1CA7246D07517217A624E7AF7119D9854C5BB4017D2B4F66A9C193FD370"
         },
         {
           "path": "FamilyQuant/HomeControl.ViewModel.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "15EF180AF61E9AA89E130D99824254EB5CBED4E267B2F44272755427AB4A6761"
+          "sha256": "5B2DC01325714282BC231F98575BD18BB470C2151F41C9CE9C23269BF195E48B"
         },
         {
           "path": "FamilyQuant/HomeControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "418C26820B6D043B994FB3730DB44E933A93BD5023B9C25D29A69953F45A3E6D"
+          "sha256": "FBE1749A00C5DE5FDCAC24419BA66FFA603C7E0C39D3E3B275DD0B8AFE07DC16"
         },
         {
           "path": "FamilyQuant/HomeControl.xaml.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "9170B56B65783F835323BC8FC3C3E0CC1CBEF1CB502B267C4A4EA1D097E466E7"
+          "sha256": "0BAB8F34640349CAAF0BDF7787244D3C576EA68FF64F68C513811E226D40D331"
         },
         {
           "path": "FamilyQuant/MainWindow.Ai.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C4E87F8F908496476735532CD62F28722B4218B27C1E33D0DE4C2BC1ABF12803"
+          "sha256": "F41B226FC154C5A7870804890278777FD42F87A94A08679BEE84D10A139E7470"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.CloseProject.cs",
+          "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
+          "sha256": "056AECC3570B1D0C6D349BAFF3C7FCF1A0FEAC3FDAB9AC603536E7C6E3EBA400"
         },
         {
           "path": "FamilyQuant/MainWindow.ClusteringDiagnostic.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "9B0255006FA8C5C63419D27E35D71433358C016670F155A93B414EE0E0D783FD"
+          "sha256": "0F7E2985423E44F172F92ACCE7E3EA1E0AC5F36F9D1E59893D2B2D63EEBFECD5"
         },
         {
           "path": "FamilyQuant/MainWindow.CommandAvailability.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "AEF9E070D3A3AC1A094E953EB9B589D6C58087961A2AA9CB34323AB43E3A78DA"
+          "sha256": "B69147176D35EC39E99B1ED30C185E9C308DE7079782EE391116CACC81F7011F"
         },
         {
           "path": "FamilyQuant/MainWindow.Commands.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "BAE36BF553971234B79D33683B90A29AABB364853CA516E9C81F774200022DBF"
+          "sha256": "6EFF34FAF62D949EF4A91940462099C36BD067B1EA24A1A23E807418A86B18E0"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.CurateChoice.cs",
+          "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
+          "sha256": "1BC8F610CE8A23015C30420D2FE7ACCCFD87014AFFC97A9372CEA4BE4367CAD3"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.DatabaseUpdate.cs",
+          "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
+          "sha256": "0627109BA37B5054B02AA743AD21FFE843B8F0F93C5D512C5889DA0CE7F20333"
         },
         {
           "path": "FamilyQuant/MainWindow.DeNovoFilters.cs",
@@ -29117,12 +29275,22 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "4DC7085A5216AA2FD4BA709982DF03AEB49CDBA6DA693B372111C59DEB15F90F"
+          "sha256": "EB211D197B20659AC5E6B232BA1469785006A6616B4A527610831DE5C8E85775"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.ErrorLogs.cs",
+          "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
+          "sha256": "AF0F9A3D0F387F6ED51D6CFC6BDF17523215698A33764205A9603311E3B292DA"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.FamilyListImport.cs",
+          "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
+          "sha256": "94F2016DDBDED37EDC5E957CBD0FEADF7C71FF16F5BAA26EBDF7C0033441D26E"
         },
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "FE69187C7654C034DBDDA08CCDB37116200909B8CBC42A384B807545BAF34B96"
+          "sha256": "A98A0F3A8753039D8CC57CED64439CAD31681CBC9C531119C8839B20E3DE6F0B"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -29132,17 +29300,17 @@
         {
           "path": "FamilyQuant/MainWindow.InterpretationInput.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "5B8256A425040C039FDD364E9894D2F7B23ECD9363110343536B672656536C40"
+          "sha256": "2350278402FCC9EA9BE35CF687C980771DBD0382CBFFFBBD2F5E469A355C48D1"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "8EDC36FB29E29B1866731D8AB580042248FAF75CEB84DCE5F37F68AA730F1A76"
+          "sha256": "4357B2E37A53745D79B088C18E6DAAE9C3BD353EB9301B67D9B446ECCD8628DC"
         },
         {
           "path": "FamilyQuant/MainWindow.NavigationRail.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "0000FCEF05E837A6511051C8BD8397786006AB063FC217952A5500532CEE0319"
+          "sha256": "9D76A8F2B8FC5F3432D567D7A5693833FD1603DF8C9978355154877135AA51EC"
         },
         {
           "path": "FamilyQuant/MainWindow.NavigationRail.xaml.cs",
@@ -29162,17 +29330,17 @@
         {
           "path": "FamilyQuant/MainWindow.PanelEditor.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "3296987DB772A8631759982458EA86613F821E6B241C07ACECD1E314C10875BC"
+          "sha256": "E9EB800715BF535ECC218572128F908C5F232048E046C817EC3CE433D3AE0BBE"
         },
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "039ED92782FD25B4FD5D63DAF1901BFFE60B81F27DEA7644F5CC86952ECA08E7"
+          "sha256": "9401F03802D3EE989820595D742F9F4931E9509A091F3544C279419D59F11033"
         },
         {
           "path": "FamilyQuant/MainWindow.Quantify.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "8C3F8DE6C189EC34F7AA6318F7CB875FCBB39A8C800D4B25D5EBA33A56D7D1A7"
+          "sha256": "B1FADC05B5E6D140EB81F4EF78563CFD2CB936D6C7BC418EFA87515BB47E6F6F"
         },
         {
           "path": "FamilyQuant/MainWindow.ReportDetails.cs",
@@ -29182,27 +29350,27 @@
         {
           "path": "FamilyQuant/MainWindow.ReportExport.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "26C4886B77BA3705E2A0C77A0522FB514580D76B3C504412B2F3E09772905B82"
+          "sha256": "B3FABCADDA6335F8D8108F7BD5D069AD7B22166F25EE4E43CBCAA5BAF0EC2C64"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "4F1458536558A6E990544393263263B3F38007B2666534522FE0042D925819FD"
+          "sha256": "D0532146B045225946F792893ABD031E24B3B94E70A1C339DEDAF70335A3753A"
         },
         {
           "path": "FamilyQuant/MainWindow.State.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "922E4DDFF2F785FB532D38CC2019A3936B450670B94E96713F705C567F1C764B"
+          "sha256": "5FD4331A883C6898D940DFE1E9B5011352F39E9A055AA19094F5F7608BE81BDF"
         },
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+          "sha256": "D45FE580685B476140F42DF4536A7B948E5C0A1169D6372D4BBF79DD25B27557"
         },
         {
           "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "4F28869CF17EA983DA2BB366D9DCFB683FFBF383A332528306D00E7239BBAA95"
+          "sha256": "58C826D5047114C8DD76E4CEBFC2B37A516C100BA7DA920FEA6493A8FB91E522"
         },
         {
           "path": "FamilyQuant/MainWindow.UpdateInstall.cs",
@@ -29212,12 +29380,12 @@
         {
           "path": "FamilyQuant/MainWindow.UpdateStartup.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "2E9C09BEA133368B352DEDB59E6E8768BE4C151A19B0035E0C806DCDF2FEF786"
+          "sha256": "BD4C283E2274D9CB1FCDC859316ACF55108CD592131917BF2FEBBD6FDA5C025F"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "AC50CA8607AC0BD55C1F2917CD7CDA4168ADFB63CB68008EC4941C06147CF466"
+          "sha256": "67DACBF80E7264404446AA57F821AB2DF3C8CC90CC45F1EA27C95C338BB7123F"
         },
         {
           "path": "FamilyQuant/MainWindow.WindowPreferences.cs",
@@ -29227,7 +29395,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "AD360F3E2FE2D19B68231786400133305334EDD47EE9EF9C0010AFAA21AF2A1A"
+          "sha256": "ED90A7E3349669C42782F980763196748AF07AEFE7855475499D010DA1E6394C"
         },
         {
           "path": "FamilyQuant/MainWindow.xaml.cs",
@@ -29237,7 +29405,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "E44036A29ACD62971B7E9D8453487A6F27226B009AF5C388947FC92872AD9906"
+          "sha256": "0A09FBA619F41D0B619CA043C88EB7552FC41BDD46D4DE1BC47870BB7E16F520"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -29252,17 +29420,17 @@
       ],
       "proofs": [
         {
-          "runId": "native-shell-main",
+          "runId": "native-shell-main-D80",
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-34318E61C997: fcf-success",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261104-012212-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-wt\\tips\\out\\Z15b7-fix\\green-shell\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Frozen entry point maps to the actual menu dispatch and checked native outcome. Route only; no unexecuted scientific operation claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml:32 MenuItemSaveFCF.Header = Save Family Cluster File (.fcf); frozen handler MenuItemSaveFCF_Click; native case fcf-success; before=MenuItemSaveFCF.Header = Save Family Cluster File (.fcf); actual=MenuItemSaveFCF.Header=Families for FamilyQuant 1.5 (.fcf); native Click event; FCF export writes the exact IDs, annotations, locks and grouping"
+      "compared": "FamilyQuant/MainWindow.xaml:32 MenuItemSaveFCF.Header = Save Family Cluster File (.fcf); frozen handler MenuItemSaveFCF_Click; native case fcf-success; before=MenuItemSaveFCF.Header = Save Family Cluster File (.fcf); actual=MenuItemSaveFCF.Header=Families (.fcf); native Click event; FCF export writes the exact IDs, annotations, locks and grouping"
     },
     {
       "observationId": "FQ15-CFD1302DD85B",

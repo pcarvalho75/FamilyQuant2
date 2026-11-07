@@ -171,7 +171,7 @@ internal static partial class Program
         }
         finally { Environment.SetEnvironmentVariable("FAMILYQUANT_USEARCH", saved); }
         var left = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(Path.Combine(folder, "frozen.fcf")))!;
-        var right = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(Path.Combine(folder, "current.fcf")))!;
+        var right = RetainedFcfForLedger(Path.Combine(folder, "current.fcf"));
         foreach (var item in left["MyExtendedFastaItems"]!.AsArray()) item!.AsObject().Remove("XIC");
         string root = FindLedgerRoot()!;
         var inventory = JsonSerializer.Deserialize<FeatureLedger.Inventory>(File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!;

@@ -451,7 +451,9 @@ namespace FamilyQuant.Tests
 
             // ---- migration: an old .fcf still opens; save as .fqproj; reload; curation identical -----
             string oldFcf = Path.Combine(workDir, "legacy.fcf");
-            fcf.Save(oldFcf);                                   // a plain-JSON .fcf, as today's Save writes
+            File.WriteAllText(oldFcf, fcf.ToJsonText(), new System.Text.UTF8Encoding(false));
+            Check("migration fixture is a true format-1 object, without a format-2 frame",
+                CurationFormat.Detect(() => File.OpenRead(oldFcf)) == CurationFormat.Legacy);
 
             FamilyClusterFile legacy = FamilyClusterFile.Load(oldFcf);
             Check("migration: an old .fcf still opens with its curation",
