@@ -107,7 +107,7 @@
                 <MenuItem x:Name="MenuItemHowToRead" Header="How to read these numbers" Command="Help" InputGestureText="F1"
                           ToolTip="Explains the current screen's numbers, denominators and choices. F1 opens the same read-only Help without changing the project."/>
                 <MenuItem x:Name="MenuItemDeNovoWorkflowHelp" Header="De novo in FamilyQuant" Click="MenuItemDeNovoWorkflowHelp_Click"
-                          ToolTip="Explains how identification and de novo evidence lead to Quantify and Results. This read-only Help changes nothing in the project."/>
+                          ToolTip="Explains the seven steps from identification and de novo calls to Quantify and Results. This read-only Help changes nothing in the project."/>
                 <MenuItem x:Name="MenuItemWhereAmI" Header="What do I do first?" Click="MenuItemWhereAmI_Click"
                           ToolTip="Explains the five workflow steps, their inputs and what to do next. This read-only Help changes nothing in the project."/>
                 <MenuItem x:Name="MenuItemCheckForUpdates" Header="Check for updates" Click="MenuItemCheckForUpdates_Click"

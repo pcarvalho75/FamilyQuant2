@@ -375,7 +375,7 @@
                                              Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}" TextWrapping="Wrap" MinHeight="48" MaxHeight="88"
                                              VerticalScrollBarVisibility="Auto" Margin="0,8,0,0" ToolTip="Read the same stored-evidence match counts and family names shown in the scope preview. This is read only; Update proposal rebuilds choices without applying them to the project."/>
                                     <Button x:Name="MatchPanelNamesButton" Grid.Row="5" Content="Match stored names..." Click="MatchPanelNames_Click" IsEnabled="{Binding CanMatchPanelNames}"
-                                            HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="{Binding MatchPanelNamesHint}"/>
+                                            HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="{Binding DataContext.MatchPanelNamesHint, RelativeSource={RelativeSource AncestorType={x:Type local:SuperClusterPreviewWindow}}, FallbackValue='Unavailable until a current panel proposal and selected family are ready. Update proposal, select a family and use pending panel-link choices before matching stored names.'}"/>
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Architecture" ToolTip="Inspect supplied domain combinations and choose which groups become separate named families, including placements by length and cysteines. Opening this tab changes only the view; Apply grouping commits split choices and Undo restores the preceding grouping."><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>
