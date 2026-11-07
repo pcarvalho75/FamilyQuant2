@@ -6,15 +6,32 @@ using System.Linq;
 
 namespace FamilyQuant;
 
+public sealed record ChecklistScopePhrase(string Text, int Targets)
+{
+    public string DisplayName => Text + " (" + Targets.ToString("N0", CultureInfo.CurrentCulture) + " targets)";
+}
+
 public sealed partial class EvidenceReviewViewModel
 {
     private PanelChecklistFamily? selectedChecklistFamily;
+    private ChecklistScopePhrase? selectedChecklistPhrase;
     public IReadOnlyList<PanelChecklistFamily> PanelChecklist => Source.PanelChecklist ?? Array.Empty<PanelChecklistFamily>();
     public PanelChecklistFamily? SelectedChecklistFamily
     {
         get => selectedChecklistFamily ?? PanelChecklist.FirstOrDefault();
-        set { if (Set(ref selectedChecklistFamily, value)) Changed(nameof(ChecklistDetail)); }
+        set
+        {
+            if (!Set(ref selectedChecklistFamily, value)) return;
+            selectedChecklistPhrase = null;
+            Changed(nameof(ChecklistDetail)); Changed(nameof(ChecklistPhrases)); Changed(nameof(SelectedChecklistPhrase));
+        }
     }
+    public IReadOnlyList<ChecklistScopePhrase> ChecklistPhrases => (SelectedChecklistFamily?.Proteins ?? Array.Empty<PanelChecklistProtein>())
+        .Where(protein => !protein.Placed).SelectMany(protein => (protein.ScopePhrases ?? Array.Empty<string>()).Select(phrase => (phrase, protein.ProteinIndex)))
+        .GroupBy(item => item.phrase, StringComparer.OrdinalIgnoreCase)
+        .Select(group => new ChecklistScopePhrase(group.Key, group.Select(item => item.ProteinIndex).Distinct().Count()))
+        .OrderByDescending(phrase => phrase.Targets).ThenBy(phrase => phrase.Text, StringComparer.CurrentCultureIgnoreCase).ToArray();
+    public ChecklistScopePhrase? SelectedChecklistPhrase { get => selectedChecklistPhrase ?? ChecklistPhrases.FirstOrDefault(); set => Set(ref selectedChecklistPhrase, value); }
     public string ChecklistDetail
     {
         get

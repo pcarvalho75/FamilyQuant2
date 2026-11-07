@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using FamilyQuant.Evidence;
 
@@ -57,6 +58,25 @@ namespace FamilyQuant
         public string MotifSummary => MotifReport.Length == 0 ? "Enter a pattern, then Check motif; counts include unticked members and exclude known fragments."
             : "Counts cover all proposed family members, including unticked proteins; known fragments are excluded.";
         public string Status { get => status; private set { status = value; Changed(); } }
+        public void AddScopeKeywords(IEnumerable<string> keywords)
+        {
+            if (IsBusy) return;
+            var existing = new HashSet<string>(WordCluster.ParseKeywords(ScopeText), StringComparer.OrdinalIgnoreCase);
+            var additions = new List<string>();
+            foreach (string keyword in keywords)
+            {
+                string quoted = QuoteScopeKeyword(keyword);
+                string? term = WordCluster.ParseKeywords(quoted).SingleOrDefault();
+                if (term != null && existing.Add(term)) additions.Add(quoted);
+            }
+            if (additions.Count == 0) return;
+            string prefix = ScopeText.TrimEnd();
+            string normalizedQuotes = prefix.Replace('\u201c', '"').Replace('\u201d', '"');
+            if (normalizedQuotes.Count(c => c == '"') % 2 != 0) prefix += "\"";
+            ScopeText = string.IsNullOrWhiteSpace(prefix) ? string.Join(", ", additions) : prefix + ", " + string.Join(", ", additions);
+        }
+        private static string QuoteScopeKeyword(string keyword) => "\""
+            + Regex.Replace(keyword.Replace('"', ' ').Replace('\u201c', ' ').Replace('\u201d', ' '), @"\s+", " ").Trim() + "\"";
         public string Summary => ModeIndex == 1 ? Evidence?.Summary ?? "Set the scope and build an evidence proposal." : Keyword.Headline;
         public bool CanConfirm => !IsBusy && (ModeIndex == 1 ? Evidence?.CanConfirm == true && ScopeText == proposalScope
             && (MotifPattern.Length == 0 || checkedMotifPattern == MotifPattern) : Keyword.CanCreate);
@@ -221,15 +241,17 @@ namespace FamilyQuant
         }
         private void SetEvidence(EvidenceReviewInput? input)
         {
+            string? checklistKey = evidence?.SelectedChecklistFamily?.Key;
             if (evidence != null) evidence.PropertyChanged -= EvidenceChanged;
             evidence = input == null ? null : new EvidenceReviewViewModel(input);
+            if (checklistKey != null && evidence != null) evidence.SelectedChecklistFamily = evidence.PanelChecklist.FirstOrDefault(row => row.Key == checklistKey);
             if (evidence != null) evidence.PropertyChanged += EvidenceChanged;
             checkedMotifPattern = ""; MotifReport = "";
             Changed(nameof(Evidence)); Changed(nameof(EvidenceAvailable)); Changed(nameof(CanCheckMotif)); NotifySummary();
             Changed(nameof(CanEditManual));
         }
         private void EvidenceChanged(object? sender, PropertyChangedEventArgs e) { Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); }
-        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); }
+        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); NotifyChecklistActions(); }
 
         private void RestoreManualState(IReadOnlyList<EvidenceManualChoice>? choices)
         {
