@@ -29,7 +29,7 @@ public sealed partial class FamilyListImportViewModel
         if (fingerprint == matchesFingerprint) return;
         matchesFingerprint = fingerprint;
         var detached = FamilyPanelValidation.Clone(check.Panel);
-        var suggestions = matcher?.Suggest(FamilyClusterFile.FromJsonText(transaction.Project.ToJsonText()), detached)
+        var suggestions = matcher?.Suggest(transaction.Project.DeepCopy(), detached)
             ?? Array.Empty<ImportMatchFamily>();
         var previous = MatchFamilies.ToDictionary(f => f.Key, StringComparer.Ordinal);
         MatchFamilies.Clear();

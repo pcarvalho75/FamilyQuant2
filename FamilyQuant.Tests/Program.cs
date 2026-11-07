@@ -64,6 +64,7 @@ namespace FamilyQuant.Tests
         private static void IsolateShellSessionState()
         {
             string root = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests", "shell-state", Guid.NewGuid().ToString("N"));
+            ApplicationPaths.LocalDataDirectoryOverride = Path.Combine(root, "app-data");
             void Isolate(Assembly assembly)
             {
                 var shell = assembly.GetType("FamilyQuant.MainWindow");
@@ -98,6 +99,8 @@ namespace FamilyQuant.Tests
             suite.Section("Core operation outcomes, progress and cancellation");
             suite.Add(() => CoreOperationTests(workDir));
             suite.Add(() => StreamingSaveTests(Path.Combine(workDir, "streaming-save")));
+            suite.Add(() => CurationFormat2Tests(Path.Combine(workDir, "curation-format2")));
+            suite.AddWithApplication(() => CurationStreamingContractTests(Path.Combine(workDir, "curation-streaming-contract")));
             suite.Section("Display filters and the family counter");
             suite.Add(() => FilterTests());
             suite.Section("Target/decoy scoring arithmetic");
