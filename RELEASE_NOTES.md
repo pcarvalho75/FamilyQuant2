@@ -4,63 +4,27 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
-## 2.1.11 (release candidate)
+## 2.1.11 (draft release candidate)
 
-<!-- Draft until the desk's final approved list. Each bullet depends on these roadmap steps; delete a bullet,
-or the part of it, whose steps are not approved: evidence window Z12d1-Z12d3, Z12e1-Z12e2, Z12f-Z12f10,
-Z12g1-Z12g5 (details pane Z12g2, sources by species Z12g4, Align selected Z12g3); bring families in Z12c1-Z12c4,
-Z12c6, Z12k1, Z12k2, Z12n1, Z12n2; Fetch evidence Z13a, Z13b; database update Z14c3a-Z14c3e; spreadsheet
-import Z12p1-Z12p5, Z12p2a-Z12p2e, Z12p4; reviewed count Z12a1, Z12a2; taxa table Z12b1, Z12b2; fixes Z14c4,
-Z12c5, Z12m1, Z14b. -->
+Draft for the final integration and polish walks. The storage items still being completed are listed separately below.
 
-- **A clearer Group by evidence window.** Legends explain the red rows (a protein
-  with a warning flag, each flag written in words) and the family ticks (full,
-  partial or none of the eligible proteins). Tables and names fit a laptop
-  screen, and every tab says in one line what it shows. A details pane under the
-  protein table shows, for the selected protein, the full reason, every flag with
-  its numbers and where they come from, its reviewed relative, its domains and
-  what its tick does. A flag now says how many of the members it compares with
-  come from your file and how many from the reference panel, and by species.
-  **Align selected** shows the selected proteins aligned with reviewed members of
-  the same family, without changing the proposal.
-- **Bring more families in.** The keyword table shows each keyword's UniProt
-  category and can show Molecular function keywords only. **Add to scope** (or a
-  double-click) adds a keyword to the scope, and before **Update proposal** the
-  scope panel previews what it would bring in, from the stored evidence only.
-  **Add to family** places selected proteins in a family by hand; they are marked
-  **Added by hand**, keep your optional note and are saved with the grouping.
-  In panel mode a **family checklist** lists, for each family of your panel, the
-  matching database proteins and why any are left out, with one action to add a
-  keyword to the scope or to place the proteins by hand.
-- **Faster Fetch evidence.** Long waits are kept for the server's busy replies
-  only; a batch that keeps failing is split to find the one entry at fault, which
-  is recorded with the reason. Pfam domains appear as soon as the protein
-  evidence is in, before the reference panel finishes.
-- **Update a project's database.** **File > Update database** brings a newer
-  database into an open project without starting over: a preview lists the
-  added, removed and changed proteins before anything changes, and the Help, the
-  report's Methods and a table of changes record what was done.
-- **Import your family list from a spreadsheet.** **File > Import family panel**
-  opens a wizard that reads your consensus spreadsheet as it is: a title row above
-  the column names, accents and line breaks, coloured cells (which you can name as
-  a category), free-text decisions (each label is shown with its rows and you
-  choose what it means) and a row listing several families (one family per name,
-  or one group reported under others). Every problem is described in a sentence
-  naming the row and the column, and nothing changes until you confirm. You can
-  save an empty template with the recommended columns and instructions, or try
-  the wizard first with a fictitious example. The program then suggests, for each
-  imported family, the UniProt family names, keywords and Pfam domains of your
-  stored evidence that fit its name, with how many proteins each covers; you
-  confirm or edit each one.
-- **The reviewed count explained.** The window says where its reviewed count
-  comes from (UniProt's reviewed status at the time of the fetch, beside the
-  entries marked sp in the FASTA file), and a taxa table gives each species'
-  entries, reviewed and unreviewed, which you can copy into a spreadsheet.
-- **Fixes.** A protein added later to an evidence family that already exists
-  joins that family instead of creating a second family with the same name. The
-  scope box and **Update proposal** stay within reach while the counts are open.
-  The Help gives the scope as four numbered steps, and one Help sentence about
-  matching in Quantify was checked against the program.
+- **A clearer Group by evidence window.** Warning flags and family ticks are explained, family names and tables fit a laptop screen, and the selected protein's details show its reasons, domains, reviewed relative and how many profile members come from your file and from the reference panel, by species. **Align selected** compares selected proteins with reviewed members of their family without changing the proposal.
+- **Bring more families in.** Keywords show their UniProt category and can be filtered to Molecular function. **Add to scope** previews the effect of a keyword before **Update proposal**. **Add to family** records explicit choices as **Added by hand**, with an optional note. **Family checklist** shows the matching proteins for each family and why any remain outside the proposal; matching labels alone does not move proteins.
+- **Import family list.** **File > Import family list** opens a seven-step wizard for an Excel workbook, with a source preview, proposed columns, explicit decision and special-row choices, evidence matching, Summary and one-step Undo. Source colour categories start with their own names and never block Next. A possible Decision column is offered as a hint; continuing without one asks before using Quantify for every family. Try the example, save a template, or open the illustrated Help chapter with **F1** or **Help**.
+- **Review the stored-evidence matches.** Suggestions are ranked for each imported family, with family-level matches and additional labels kept clear, and show how many database proteins each covers. You confirm, edit or skip them. A label covering a large part of the database asks an extra question before confirmation. Suggestions never assign proteins silently.
+- **Update a project's database.** **File > Update database** previews added, removed and changed proteins before applying an update. Help, the report's Methods and a changes table retain what was done.
+- **Controls explain themselves.** Informative tooltips cover the main workflow, review tools, import wizard and column headers, including why an action is unavailable and what it changes. They use one shared appearance in dark and light.
+- **Streaming curation work.** Curation hashing, deep copies, save and open use streams instead of whole-file JSON strings. The import wizard prepares evidence matches in the background with Cancel available. The final oversized-project proof remains a release gate.
+- **Evidence counts and fetch.** The reviewed count distinguishes stored UniProt status from FASTA prefixes. Taxa and keyword tables can be copied. Fetch evidence keeps completed work, splits failing batches to record the refused entry and its reason, and shows protein evidence before the reference panel finishes.
+
+**Other fixes.** A protein added later to an existing evidence family joins that family, and the scope box and **Update proposal** remain within reach while counts are open.
+
+### Pending before release
+
+- **Compact curation files. Pending.** Write the same stored content without indentation, with old-file compatibility and round-trip checks.
+- **Curation format 2. Pending.** Store repeated provenance, recipe data and panel-entry values once. Existing files must still open, and older FamilyQuant versions must refuse new files with a clear update message. The frame is implemented; the remaining parts, measurements and release checks are still in progress.
+- **Scoped reference panel. Pending.** Fetch and store the panel for the selected scope, verify unchanged proposals against the full panel, and keep older projects' full stored panels until an explicit new fetch.
+
 
 ## 2.1.10 (release candidate)
 
