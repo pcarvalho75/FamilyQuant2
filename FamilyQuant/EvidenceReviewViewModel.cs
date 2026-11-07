@@ -60,9 +60,9 @@ namespace FamilyQuant
         public string ScopeWordsText => Source.HasScopeAnnotation ? "Yes" : "No";
         public bool CanSelect => Source.Family.Length > 0 && !Source.IsLocked;
         public string SelectionHelp => Source.IsLocked
-            ? "This protein belongs to a locked family. Unlock it in Curate families before including it; it stays unticked here."
-            : Source.Family.Length == 0 ? "This protein has no proposed family and stays outside the selection."
-            : "Select this protein for the proposed family. Unticking leaves its current family unchanged.";
+            ? "This protein belongs to a locked family and stays unticked. Unlock it in Curate families before choosing it for Apply grouping; Undo restores an applied grouping."
+            : Source.Family.Length == 0 ? "This protein has no proposed family, so its tick is unavailable. Place it explicitly with Add to family or rebuild a qualifying proposal to enable selection; the project changes only on Apply grouping, with Undo available."
+            : "Select this protein for its proposed family on Apply grouping; unticking leaves its current family unchanged. These are review choices until Apply grouping, after which Undo restores the preceding grouping.";
         public bool Selected
         {
             get => selected;
