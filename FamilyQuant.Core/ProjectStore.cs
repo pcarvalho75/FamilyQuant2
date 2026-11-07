@@ -45,6 +45,7 @@ namespace FamilyQuant
         public const int CurrentFormatVersion = ProjectFileSchema.CurrentFormatVersion;
         public const string Extension = ProjectFileSchema.Extension;
         public const string CurationEntryName = ProjectFileSchema.CurationEntryName;
+        public const string CurationFormat2EntryName = ProjectFileSchema.CurationFormat2EntryName;
         public const string QuantEntryName = ProjectFileSchema.QuantEntryName;
         public const string ManifestEntryName = ProjectFileSchema.ManifestEntryName;
         public const string SpectrumComparisonEntryName = ProjectFileSchema.SpectrumComparisonEntryName;
@@ -54,8 +55,9 @@ namespace FamilyQuant
 
         /// <summary>
         /// Writes a .fqproj: curation, quant table, manifest, and (when present) the streamed spectrum
-        /// comparison table into one ZIP. The curation is serialised with the same options a .fcf uses,
-        /// so a project saved as a container carries curation byte-identical to the plain file. Written
+        /// comparison table into one ZIP. The curation is written as curation format 2 in curation2.json, with the
+        /// same shared options a .fcf uses, and curation.json keeps only the notice older builds read before they
+        /// refuse the version-3 manifest; the content read back equals the plain file's. Written
         /// to a temporary file and moved into place, so a process killed mid-write leaves the previous
         /// project intact rather than a truncated one.
         /// </summary>
@@ -114,8 +116,10 @@ namespace FamilyQuant
                 using (var zip = new ZipArchive(fileStream, ZipArchiveMode.Create))
                 {
                     operation?.ThrowIfCancellationRequested();
-                    using (Stream curationStream = zip.CreateEntry(CurationEntryName, CompressionLevel.Optimal).Open())
-                        fcf.WriteJsonUtf8(curationStream);
+                    using (Stream curationStream = zip.CreateEntry(CurationFormat2EntryName, CompressionLevel.Optimal).Open())
+                        fcf.WriteCurationFile(curationStream);
+                    ProjectArchiveEntries.WriteTextEntry(zip, CurationEntryName, ProjectFileSchema.LegacyCurationNotice,
+                        CompressionLevel.Optimal, operation);
                     ProjectQuantCodec.Write(zip, rows, operation);
                     if (spectrumRows.Count > 0) ProjectSpectrumCodec.Write(zip, spectrumRows, operation);
                     ProjectArchiveEntries.WriteTextEntry(zip, ManifestEntryName,
@@ -145,8 +149,8 @@ namespace FamilyQuant
         }
 
         /// <summary>
-        /// Reads a .fqproj back into its three parts. The curation goes through
-        /// <see cref="FamilyClusterFile.FromJsonText"/>, the same reader a .fcf uses, migration included.
+        /// Reads a .fqproj back into its three parts. The curation goes through the same reader a .fcf uses
+        /// (curation format 1 or 2, migration included), from the entry the manifest's version names.
         /// A container missing an entry, or carrying a format version this build does not understand, is
         /// refused rather than half-read.
         /// </summary>
@@ -158,17 +162,11 @@ namespace FamilyQuant
             using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
             using var zip = new ZipArchive(fileStream, ZipArchiveMode.Read);
 
-            ZipArchiveEntry curationEntry = zip.GetEntry(CurationEntryName)
-                ?? throw new InvalidDataException(
-                    "\"" + path + "\" is not a valid FamilyQuant project: its " + CurationEntryName +
-                    " entry is missing.");
-
+            // The manifest decides which entry holds the curation, so it is read and checked first.
             string manifestText = ProjectArchiveEntries.ReadTextEntry(zip, ManifestEntryName, operation)
                 ?? throw new InvalidDataException(
                     "\"" + path + "\" is not a valid FamilyQuant project: its " + ManifestEntryName +
                     " entry is missing.");
-
-            FamilyClusterFile fcf = FamilyClusterFile.ReadJsonUtf8(curationEntry.Open);
 
             QuantManifest manifest = ProjectManifestCodec.Read(manifestText)
                 ?? throw new InvalidDataException(
@@ -180,6 +178,15 @@ namespace FamilyQuant
                     " project, and this build understands up to version " +
                     CurrentFormatVersion.ToString(CultureInfo.InvariantCulture) +
                     ". Update FamilyQuant to open it.");
+
+            string curationEntryName = manifest.FormatVersion >= ProjectFileSchema.CurationFormat2Version
+                ? CurationFormat2EntryName : CurationEntryName;
+            ZipArchiveEntry curationEntry = zip.GetEntry(curationEntryName)
+                ?? throw new InvalidDataException(
+                    "\"" + path + "\" is not a valid FamilyQuant project: its " + curationEntryName +
+                    " entry is missing.");
+
+            FamilyClusterFile fcf = FamilyClusterFile.ReadJsonUtf8(curationEntry.Open);
 
             // Concordance manifests written before precursor-qualified one-to-one matching carried raw
             // shared-scan counts but left every primary-denominator field at its JSON default of zero.

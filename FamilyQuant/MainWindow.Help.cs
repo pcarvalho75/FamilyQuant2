@@ -173,7 +173,7 @@ public partial class MainWindow
                 "   are checked again. After opening a project with stored Results, Export report\n" +
                 "   becomes available when its family attribution is ready.\n\n" +
                 "BEFORE STEP 3 · Prepare the family panel and report\n" +
-                "   Menu: File > Import family panel\n" +
+                "   Menu: File > Import family list\n" +
                 "   Needs: an open project and a spreadsheet with one row per family.\n" +
                 "   Choose spreadsheet, select its sheet and header row, then Preview columns.\n" +
                 "   Pick the columns for family key, family name, decision and optional Pfam. Map\n" +

@@ -83,6 +83,29 @@ internal static partial class Program
         catch (InvalidOperationException error) { refused = error.Message.Contains("Locked", StringComparison.Ordinal) && error.Message.Contains("Unlock", StringComparison.Ordinal); }
         Check("a mixed locked selection is refused atomically with a reason", refused && locked.ToJsonText() == lockedBefore
             && JsonSerializer.Serialize(lockedSession.Proposal) == proposalBefore);
+        const string excludedReason = "A contaminant or decoy never joins a family, so it was not added.";
+        foreach (string prefix in new[] { SequenceLabels.ContaminantPrefix, SequenceLabels.DecoyPrefix })
+        {
+            var excludedFile = ManualChoiceFile();
+            var excludedProtein = excludedFile.MyExtendedFastaItems[2];
+            excludedProtein.SequenceIdentifier = prefix + excludedProtein.SequenceIdentifier;
+            string excludedBefore = excludedFile.ToJsonText();
+            string reason = "";
+            try { ManualFamilyChoices.Validate(excludedFile, new[] { new EvidenceManualChoice { ProteinIndex = 2,
+                Identifier = excludedProtein.SequenceIdentifier, SequenceSha256 = ManualFamilyChoices.SequenceHash(excludedProtein.Sequence),
+                Family = "Invented family", Name = "Invented family" } }); }
+            catch (ArgumentException error) { reason = error.Message; }
+            Check(prefix + " hand choice explains the exclusion without claiming a data mismatch", reason == excludedReason && excludedFile.ToJsonText() == excludedBefore);
+        }
+        var contaminantFile = ManualChoiceFile();
+        contaminantFile.MyExtendedFastaItems[2].SequenceIdentifier = SequenceLabels.ContaminantPrefix + contaminantFile.MyExtendedFastaItems[2].SequenceIdentifier;
+        var contaminantSession = new EvidenceGroupingSession(contaminantFile, "manual exclusion fixture"); contaminantSession.Propose("scope");
+        string contaminantBefore = contaminantFile.ToJsonText(), contaminantProposalBefore = JsonSerializer.Serialize(contaminantSession.Proposal);
+        string contaminantReason = "";
+        try { contaminantSession.AddToFamily(new EvidenceManualRequest(new[] { 0, 2 }, "Invented family", "Invented family", false)); }
+        catch (ArgumentException error) { contaminantReason = error.Message; }
+        Check("Add to family refuses a mixed contaminant selection with the plain reason and no partial edits", contaminantReason == excludedReason
+            && contaminantFile.ToJsonText() == contaminantBefore && JsonSerializer.Serialize(contaminantSession.Proposal) == contaminantProposalBefore);
         Check("unused manual fields preserve old JSON and enum values", !JsonSerializer.Serialize(new EvidenceRecipe()).Contains("ManualChoices", StringComparison.Ordinal)
             && !JsonSerializer.Serialize(new EvidenceProteinProposal()).Contains("AutomaticEvidence", StringComparison.Ordinal)
             && (int)EvidenceTier.UnannotatedNeighbour == 4 && (int)PanelAssignmentEvidenceKind.ConfirmedLink == 8);
@@ -103,5 +126,64 @@ internal static partial class Program
         Check("panel Undo restores definitions as well as grouping", panelFile.ToJsonText() == panelBefore);
         EvidenceApply.ApplyRecipe(panelFile, JsonSerializer.Deserialize<EvidenceRecipe>(JsonSerializer.Serialize(appliedPanel.Recipe))!);
         Check("panel manual recipe reproduces its declared definitions and facts", panelFile.ToJsonText() == panelAfter);
+        ManualFamilyNameRoundTripTests();
+    }
+
+    private static void ManualFamilyNameRoundTripTests()
+    {
+        var architectureFile = ManualChoiceFile();
+        architectureFile.MyExtendedFastaItems[0].Evidence!.Pfam.Add(new EvidenceDomain { Accession = "invented-binding", Name = "Invented binding domain" });
+        architectureFile.MyExtendedFastaItems[1].Evidence!.Pfam.Add(new EvidenceDomain { Accession = "invented-catalytic", Name = "Invented catalytic domain" });
+        string architectureBefore = architectureFile.ToJsonText();
+        var architectureSession = new EvidenceGroupingSession(architectureFile, "manual name fixture");
+        architectureSession.Propose("scope");
+        const string handName = "Supplied hand family";
+        var architectureInput = architectureSession.AddToFamily(new EvidenceManualRequest(new[] { 0, 1, 2 }, "", handName, true));
+        string handKey = architectureInput.ManualChoices!.First().Family;
+        var architectureModel = new EvidenceReviewViewModel(architectureInput);
+        var architecture = architectureModel.Architectures.Single(a => a.Family == handKey);
+        var noDomain = architecture.Groups.Single(g => g.Source.Domains.Count == 0);
+        Check("a hand family's no-domain Architecture group uses the typed name without exposing its key", architecture.CanSplit
+            && noDomain.Name == handName + " (no domain calls)" && !noDomain.Name.Contains(handKey, StringComparison.Ordinal)
+            && architectureFile.ToJsonText() == architectureBefore);
+        noDomain.Split = true;
+        var split = architectureSession.Apply(architectureModel.CaptureSelection());
+        Check("Split applies the displayed hand-family group name and retains the other members' typed name",
+            split.Recipe.ArchitectureChoices.Single(c => c.Split).Name == handName + " (no domain calls)"
+            && architectureFile.MyExtendedFastaItems[2].UserAnnotation == handName + " (no domain calls)"
+            && architectureFile.MyExtendedFastaItems.Take(2).All(p => p.UserAnnotation == handName)
+            && architectureFile.MyExtendedFastaItems[2].UserID != architectureFile.MyExtendedFastaItems[0].UserID);
+        var splitReplay = FamilyClusterFile.FromJsonText(architectureBefore);
+        EvidenceApply.ApplyRecipe(splitReplay, JsonSerializer.Deserialize<EvidenceRecipe>(JsonSerializer.Serialize(split.Recipe))!);
+        Check("the named manual Architecture split replays byte for byte", splitReplay.ToJsonText() == architectureFile.ToJsonText());
+
+        var file = ManualChoiceFile();
+        var session = new EvidenceGroupingSession(file, "saved manual name fixture");
+        session.Propose("scope");
+        const string savedName = "Curator's supplied family name";
+        var input = session.AddToFamily(new EvidenceManualRequest(new[] { 2 }, "Invented family", savedName, false, "Saved name note"));
+        var model = new EvidenceReviewViewModel(input);
+        // The review retains the edited name that the hand-choice dialog offered.
+        model.Families.Single(f => f.Family == "Invented family").Name = savedName;
+        session.Apply(model.CaptureSelection());
+        var reopened = FamilyClusterFile.FromJsonText(file.ToJsonText());
+        reopened.LockedUserIds.Clear();
+        string reopenedBefore = reopened.ToJsonText();
+        var reopenedSession = new EvidenceGroupingSession(reopened, "saved manual name fixture");
+        var reopenedInput = reopenedSession.Propose("scope");
+        var reopenedModel = new EvidenceReviewViewModel(reopenedInput);
+        Check("reopening uses the saved hand name consistently in the family grid and protein column",
+            reopenedInput.Families.Single(f => f.Family == "Invented family").SuggestedName == savedName
+            && reopenedModel.Families.Single(f => f.Family == "Invented family").Name == savedName
+            && reopenedModel.Proteins.Single(p => p.ProteinIndex == 2).FamilyDisplay == savedName
+            && reopened.ToJsonText() == reopenedBefore);
+        reopenedModel.SetSelected(reopenedModel.Proteins, false);
+        reopenedModel.Proteins.Single(p => p.ProteinIndex == 2).Selected = true;
+        var reapplied = reopenedSession.Apply(reopenedModel.CaptureSelection());
+        Check("re-applying after reopen preserves the hand name and note in the assignment and saved choice",
+            reopened.MyExtendedFastaItems[2].UserAnnotation == savedName
+            && reapplied.Recipe.Assignments.Single().Name == savedName
+            && reapplied.Recipe.ManualChoices!.Single().Name == savedName
+            && reapplied.Recipe.ManualChoices!.Single().Note == "Saved name note");
     }
 }

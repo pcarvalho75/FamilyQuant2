@@ -26,7 +26,7 @@ internal static partial class Program
             "peptide found in more than one family", "redundant database", "moves the numbers a great deal",
             "Default:", SharedPeptidePolicy.FamilyUnique.DisplayName());
         Verify("normalization", ((ComboBox)panel.FindName("ComboBoxNormalization")).ToolTip,
-            "share column", "percentage", "measurements", "never change", "greyed out", "loaded project", "totals",
+            "share column", "percentage", "measurements", "never change", "disabled", "loaded project", "totals",
             "Default:", NormalizationMode.IdentifiedSignal.DisplayName());
         Verify("recovery", new RecoveryChart(Array.Empty<NativeRunFraction>()).ToolTip,
             "Top:", "recovered ion current", "M+0", "PRIMARY estimate", "unadjusted diagnostic", "Bottom: TIC",
@@ -34,6 +34,6 @@ internal static partial class Program
         Verify("isotope count", new IsotopeCountChart(Array.Empty<AnalyticsPeptide>()).ToolTip,
             "Each bar counts", "peptides credited that many isotopes", "from 1 up to the",
             AnalyticsBuilder.IsotopeBasis.ToString(CultureInfo.CurrentCulture) + "-isotope ceiling",
-            "isotope is credited only where signal was found", "colours", "split each bar by peptide mass");
+            "isotope is credited only where signal was found", "mass bands", "split each bar by peptide mass");
     }
 }

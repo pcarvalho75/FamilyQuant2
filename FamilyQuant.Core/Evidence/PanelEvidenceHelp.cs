@@ -9,6 +9,7 @@ public static class PanelEvidenceHelp
         var options = new EvidenceClassificationOptions();
         return "PANEL FAMILIES BY EVIDENCE\n\n"
             + EvidenceScopeHelp.Build() + "\n"
+            + EvidenceOutsideScopeHelp.Build() + "\n"
             + EvidenceReviewTerms.Text + "\n"
             + "The panel defines user keys, names, decisions and domain lists. Family names in the program do not decide membership.\n\n"
             + "Reviewed entries in the user scope connect source family annotations and observed domain combinations to panel families. "

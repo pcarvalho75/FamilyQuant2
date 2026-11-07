@@ -15,6 +15,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Compute and open progress](COMPUTE-PROGRESS.md) | Counted phases, live clocks, timestamped logs and native parity check |
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
+| [Tooltips](TOOLTIPS.md) | Design rule 7: the shared tooltip style and defaults, how to write one, a worked example per control kind, census and check |
 | [Workflow names](WORKFLOW-NAMES.md) | One name per step (Home, the five numbered steps, Tools), retired names and the old-name check |
 | [Checking and installing updates](UPDATE-INSTALL.md) | Optional startup notice, explicit installer action, trusted download hosts and fake-network checks |
 | [Quantitation stages](QUANTITATION-PIPELINE.md) | Full-XIC stage contracts, second-pass residual seam and focused parity checker |
@@ -126,6 +127,13 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--desktop-world-walk <copied-project> <copied-raw-folder> <copied-sepr2> <copied-denovo-root> <output> <confirmed-scope>` | Private desktop real-data fetch/scope dialog, production Compute, Database gap and native CSV/FASTA exports; uses only copies |
 | `--test-quantitation-stages` | Prepared-peptide assignments, cross-side suppression, residual calibration, rollup and deterministic CSV |
 | `--test-family-panel` | Panel and subclass fixtures, safe publication, native runner and report sections |
+| `--test-panel-import-graceful` | Z12p1 graceful spreadsheet import: preview, header proposal, colours, proposals, plain-sentence problems, row choices, replay and old-panel JSON |
+| `--test-panel-import-several` | Z12p3 rows listing several families: list splitting, proposed keys, one family per name, one group under others, replay |
+| `--test-panel-import-template` | Z12p2d family-list template: sheets, marker, instructions, drop-down, schema validation, import with no mapping, replay |
+| `--test-panel-import-example` | The shipped example family list through the graceful importer: header below titles, proposals, merge label, repeated abbreviation, four-family row, replay |
+| `--test-tooltip-style` | Z12q1 tooltip defaults (500 ms, 20 s, on disabled controls), the 380 px style on theme tokens in both themes, and the one-attribute column header tooltip |
+| `--test-tooltips` | Z12q6 rule 7 over every window the census opens: fails on a required control with NONE or REPEATS-LABEL and on a dash, colour word or D21 word, naming window and control; not in DefaultSuite until it first passes |
+| `--tooltip-census <new-output>` | Z12q1 census: opens every window, reveals tabs and expanders, and writes one table per window (kind, label, name, host, tooltip or NONE, REPEATS-LABEL, wording flags) plus census.md |
 | `--test-report-findings` | J44 Summary of findings: each fixed sentence present only with its data, headline and study values, Others named only in the supplement, numbers table, culture and wording guards |
 | `--test-interpretation-input` | J45 Interpretation input: deterministic Markdown of details, panel, findings, stored tables and Methods; escaping, absent parts, refusal and the File > Export command |
 | `--j45-walk <project.fqproj> <new-output>` | Private desktop File > Export > Interpretation input (Markdown) twice on a saved project; timings and byte equality |
@@ -221,6 +229,7 @@ These commands create native WPF client captures or labelled synthetic fixtures,
 | `--homology-results-screens <output-dir>` | [Program.HomologyResultScreens.cs](../FamilyQuant.Tests/Program.HomologyResultScreens.cs) |
 | `--secondary-screens <output-dir>` | [Program.SecondaryWindows.cs](../FamilyQuant.Tests/Program.SecondaryWindows.cs) |
 | `--grouping-review-screens <output-dir> [evidence.fcf]` | [GroupingReviewScreens.cs](../FamilyQuant.Tests/GroupingReviewScreens.cs); merged keyword/evidence/architecture review captures |
+| `--import-guide-screens <output-dir> [--dark]` | [Program.ImportGuideScreens.cs](../FamilyQuant.Tests/Program.ImportGuideScreens.cs); the nine Import family list wizard pages at 1366 x 768 for the Help chapter and the website, on the neutral example list with an invented project; the workbook it imports is written under the output folder |
 | `--logo-assets <output-dir> [--preview=<preview.png>]` | [LogoAssets.cs](../FamilyQuant.Tests/LogoAssets.cs); target scratch before replacing tracked assets |
 | `--shell-save-smoke <input.fcf> <output.fqproj>` | [Program.ShellSaving.cs](../FamilyQuant.Tests/Program.ShellSaving.cs); verified curation-only persistence, no RAW reproduction |
 | `--evidence-recipe-replay-check <recipe-bearing.fcf>` | [Program.ProteinDomains.cs](../FamilyQuant.Tests/Program.ProteinDomains.cs) |

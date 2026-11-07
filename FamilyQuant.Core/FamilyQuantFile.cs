@@ -135,12 +135,11 @@ namespace FamilyQuant
         public static FamilyClusterFile Load(string fileName, OperationContext? operation = null)
         {
             operation?.Report("document-read", "Opening family document");
-            string theFile = File.ReadAllText(fileName);
-            operation?.ThrowIfCancellationRequested();
-
             try
             {
-                var document = FromJsonText(theFile);
+                // Hold a read-only handle across a legacy encoding retry as well.
+                using var held = File.OpenRead(fileName);
+                var document = ReadJsonUtf8(() => File.OpenRead(fileName));
                 operation?.ThrowIfCancellationRequested();
                 return document;
             }
@@ -160,6 +159,8 @@ namespace FamilyQuant
         /// </summary>
         public static FamilyClusterFile FromJsonText(string theFile)
         {
+            if (CurationFormat.Detect(theFile) == CurationFormat.Current)
+                return ReadCurationFormat2(() => new MemoryStream(System.Text.Encoding.UTF8.GetBytes(theFile), writable: false));
             FamilyClusterFile loaded = JsonSerializer.Deserialize<FamilyClusterFile>(theFile)
                 ?? throw new InvalidDataException("The text is not a valid Family Cluster File.");
             return FinishJsonLoad(loaded, theFile.Contains("\"LockedUserIds\""));
@@ -212,7 +213,7 @@ namespace FamilyQuant
             string temp = fileName + "." + Guid.NewGuid().ToString("N") + ".tmp";
             try
             {
-                File.WriteAllText(temp, ToJsonText());
+                using (var destination = File.Create(temp)) WriteJsonUtf8(destination);
                 LastSaveCheck = Evidence.SavedFileCheck.Verify(expected, temp, project: false, operation);
                 Evidence.SavedFileCheck.RequirePassed(LastSaveCheck);
                 operation?.Report("save", "Publishing the family document", 1, 1);

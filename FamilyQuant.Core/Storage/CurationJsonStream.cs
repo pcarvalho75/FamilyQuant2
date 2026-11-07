@@ -3,13 +3,19 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text;
+using FamilyQuant.Operations;
 
 namespace FamilyQuant;
 
 public partial class FamilyClusterFile
 {
     // Same metadata/options/order as ToJsonText, with UTF-8 written incrementally to the destination.
-    internal void WriteJsonUtf8(Stream destination) => JsonSerializer.Serialize(destination, this, CurationJsonOptions);
+    internal static Action? JsonWriteObserved { get; set; }
+    internal void WriteJsonUtf8(Stream destination)
+    {
+        JsonWriteObserved?.Invoke();
+        JsonSerializer.Serialize(destination, this, CurationJsonOptions);
+    }
 
     /// <summary>The same SHA-256 as UTF8(ToJsonText()), without materializing the full string or byte array.</summary>
     public string JsonContentSha256()
@@ -20,8 +26,26 @@ public partial class FamilyClusterFile
         return Convert.ToHexString(hash.Hash!);
     }
 
+    /// <summary>Copies the stored curation through the canonical UTF-8 stream, without a whole-file
+    /// string or byte array. The temporary spool is removed when the operation completes or fails.</summary>
+    public FamilyClusterFile DeepCopy(OperationContext? operation = null)
+    {
+        operation?.ThrowIfCancellationRequested();
+        string path = Path.Combine(Path.GetTempPath(), "FamilyQuant-curation-" + Guid.NewGuid().ToString("N") + ".tmp");
+        using var staging = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite,
+            FileShare.Read | FileShare.Delete, 65536, FileOptions.DeleteOnClose | FileOptions.SequentialScan);
+        WriteJsonUtf8(staging);
+        staging.Flush();
+        operation?.ThrowIfCancellationRequested();
+        var copy = ReadJsonUtf8(() => new FileStream(path, FileMode.Open, FileAccess.Read,
+            FileShare.ReadWrite | FileShare.Delete, 65536, FileOptions.SequentialScan));
+        operation?.ThrowIfCancellationRequested();
+        return copy;
+    }
+
     internal static FamilyClusterFile ReadJsonUtf8(Func<Stream> open)
     {
+        if (CurationFormat.Detect(open) == CurationFormat.Current) return ReadCurationFormat2(open);
         try
         {
             using var source = open(); using var tracked = new CurationReadProbe(source);
@@ -32,9 +56,57 @@ public partial class FamilyClusterFile
         catch (JsonException)
         {
             // Retain the existing StreamReader encoding/BOM/replacement behavior for older unusual inputs.
-            using var source = open(); using var reader = new StreamReader(source, Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
-            return FromJsonText(reader.ReadToEnd());
+            using var source = open();
+            using var normalized = new CurationUtf8ReadStream(source);
+            using var tracked = new CurationReadProbe(normalized);
+            var loaded = JsonSerializer.Deserialize<FamilyClusterFile>(tracked)
+                ?? throw new InvalidDataException("The text is not a valid Family Cluster File.");
+            return FinishJsonLoad(loaded, tracked.HasLockField);
         }
+    }
+
+    // The compatibility reader converts only a bounded chunk at a time. StreamReader supplies the
+    // original BOM detection and replacement fallbacks; Encoder carries split surrogate pairs.
+    private sealed class CurationUtf8ReadStream(Stream source) : Stream
+    {
+        private readonly StreamReader reader = new(source, Encoding.UTF8, detectEncodingFromByteOrderMarks: true, leaveOpen: true);
+        private readonly Encoder encoder = Encoding.UTF8.GetEncoder();
+        private readonly char[] characters = new char[4096];
+        private readonly byte[] bytes = new byte[Encoding.UTF8.GetMaxByteCount(4096)];
+        private int offset, length;
+        private bool finished;
+
+        public override int Read(byte[] buffer, int offset, int count) => Read(buffer.AsSpan(offset, count));
+        public override int Read(Span<byte> destination)
+        {
+            int written = 0;
+            while (written < destination.Length)
+            {
+                if (offset == length)
+                {
+                    if (finished) break;
+                    int count = reader.Read(characters, 0, characters.Length);
+                    finished = count == 0;
+                    length = encoder.GetBytes(characters, 0, count, bytes, 0, flush: finished);
+                    offset = 0;
+                    if (length == 0) continue;
+                }
+                int take = Math.Min(length - offset, destination.Length - written);
+                bytes.AsSpan(offset, take).CopyTo(destination[written..]);
+                offset += take; written += take;
+            }
+            return written;
+        }
+        protected override void Dispose(bool disposing) { if (disposing) reader.Dispose(); base.Dispose(disposing); }
+        public override bool CanRead => true;
+        public override bool CanSeek => false;
+        public override bool CanWrite => false;
+        public override long Length => throw new NotSupportedException();
+        public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        public override void Flush() { }
+        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override void SetLength(long value) => throw new NotSupportedException();
+        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
     }
 
     // Preserve the old raw-text Contains("\"LockedUserIds\"") migration rule across read boundaries.

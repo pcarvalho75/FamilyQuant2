@@ -31,8 +31,8 @@ namespace FamilyQuant
             MinHeight = 260;
             Margin = new Thickness(0);
             ToolTip = "One dot per peptide: its extracted isotope envelope (log10 area, up the side) " +
-                      "against its mass (along the bottom). Blue dots are identified peptides; green dots " +
-                      "are the de novo additions.";
+                      "against its mass (along the bottom). Separate series show identified peptides and " +
+                      "de novo additions without changing project values or files.";
         }
 
 

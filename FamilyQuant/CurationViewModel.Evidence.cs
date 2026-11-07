@@ -31,7 +31,7 @@ public sealed partial class CurationViewModel
         var positionAccessions = Quantitation.PositionAccessions(additionalPositionFamilyIds);
         try
         {
-            var prepared = await Task.Run(() => FamilyClusterFile.FromJsonText(Document.ToJsonText()), operation.CancellationToken);
+            var prepared = await Task.Run(() => Document.DeepCopy(operation), operation.CancellationToken);
             operation.ThrowIfCancellationRequested();
             var result = retryPanelOnly
                 ? await EvidenceFetchSession.RetryPanelAsync(prepared, handler, new CurationFetchProgress(operation), operation.CancellationToken, options, panelRequest)

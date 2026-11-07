@@ -7,7 +7,7 @@ namespace FamilyQuant;
 
 public partial class MainWindow
 {
-    private async void MenuItemFamilyPanel_Click(object sender, RoutedEventArgs e)
+    private async Task OpenFamilyPanelEditorAsync()
     {
         var host = cgc;
         if (host == null) return;

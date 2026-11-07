@@ -17,29 +17,29 @@ public partial class ClusterGenerationControl
             QuantitationPanel.SharedItemSplit.Content = SharedPeptidePolicy.SplitEqually.DisplayName();
             QuantitationPanel.SharedItemEvery.Content = SharedPeptidePolicy.CountInEveryFamily.DisplayName();
 
-            QuantitationPanel.SharedItemUnique.ToolTip = SharedPeptidePolicy.FamilyUnique.ShortExplanation();
-            QuantitationPanel.SharedItemSplit.ToolTip = SharedPeptidePolicy.SplitEqually.ShortExplanation();
-            QuantitationPanel.SharedItemEvery.ToolTip = SharedPeptidePolicy.CountInEveryFamily.ShortExplanation();
+            QuantitationPanel.SharedItemUnique.ToolTip = "Credit a peptide only when it reaches one family; shared signal stays in its separate bucket. Full XIC updates immediately and PatternLab needs Recalculate, without changing measured areas.";
+            QuantitationPanel.SharedItemSplit.ToolTip = "Split each shared peptide's signal equally between its families, preserving the total. Full XIC updates immediately and PatternLab needs Recalculate, without changing measured areas.";
+            QuantitationPanel.SharedItemEvery.ToolTip = "Credit each shared peptide in full to every matching family, so shares overlap and must not be summed. Full XIC updates immediately and PatternLab needs Recalculate, without changing measured areas.";
 
             QuantitationPanel.ComboBoxSharedPeptides.ToolTip =
-                "What to do with a peptide found in more than one family; in a redundant database, " +
-                "this choice moves the numbers a great deal. Default: " +
-                SharedPeptidePolicy.FamilyUnique.DisplayName() + ".";
+                "Choose what to do with a peptide found in more than one family; in a redundant database this choice moves the numbers a great deal; default: " +
+                SharedPeptidePolicy.FamilyUnique.DisplayName() + ". " +
+                "Full XIC shares update immediately and PatternLab shares need Recalculate, without changing extracted areas or writing files.";
 
             QuantitationPanel.ModeItemIdentified.Content = NormalizationMode.IdentifiedSignal.DisplayName();
             QuantitationPanel.ModeItemTic.Content = NormalizationMode.TotalChromatogram.DisplayName();
             QuantitationPanel.ModeItemPeptideSignal.Content = NormalizationMode.IdentifiedPeptideSignal.DisplayName();
             QuantitationPanel.ModeItemChargeRestricted.Content = NormalizationMode.ChargeRestrictedSignal.DisplayName();
 
-            QuantitationPanel.ModeItemIdentified.ToolTip = NormalizationMode.IdentifiedSignal.ShortExplanation();
-            QuantitationPanel.ModeItemTic.ToolTip = NormalizationMode.TotalChromatogram.ShortExplanation();
-            QuantitationPanel.ModeItemPeptideSignal.ToolTip = NormalizationMode.IdentifiedPeptideSignal.ShortExplanation();
-            QuantitationPanel.ModeItemChargeRestricted.ToolTip = NormalizationMode.ChargeRestrictedSignal.ShortExplanation();
+            QuantitationPanel.ModeItemIdentified.ToolTip = "Divide PatternLab family signal by the sum of family signals under the selected shared-peptide policy. This prepares Recalculate without changing measured areas or writing a file.";
+            QuantitationPanel.ModeItemTic.ToolTip = "Divide each PatternLab family's signal by its run's total ion current on Recalculate. Disabled without recorded per-run TIC totals; load a project containing those totals to enable it.";
+            QuantitationPanel.ModeItemPeptideSignal.ToolTip = "Divide each PatternLab family's signal by its run's recorded extracted peptide signal on Recalculate. Disabled without those per-run totals; load a project containing them to enable it.";
+            QuantitationPanel.ModeItemChargeRestricted.ToolTip = "Divide each PatternLab family's signal by its run's recorded charge-restricted signal on Recalculate. Disabled without those per-run totals; load a project extracted with that extra pass to enable it.";
 
             QuantitationPanel.ComboBoxNormalization.ToolTip =
-                "What the share column is a percentage OF; the measurements themselves never change, and a mode " +
-                "is greyed out when the loaded project lacks the totals it needs. Default: " +
-                NormalizationMode.IdentifiedSignal.DisplayName() + ".";
+                "Choose what the PatternLab share column is a percentage of; measurements never change, and a mode is disabled when the loaded project lacks required totals; default: " +
+                NormalizationMode.IdentifiedSignal.DisplayName() + ". " +
+                "Recalculate applies the choice to project shares without writing a file; load a project containing the required per-run totals to enable an unavailable mode.";
         }
 
         /// <summary>
@@ -90,12 +90,18 @@ public partial class ClusterGenerationControl
             // The unavailable wording says what is missing and what would fix it, in that order, because
             // a greyed-out item with no explanation is exactly the dead end this phase exists to remove.
             item.ToolTip = available
-                ? mode.ShortExplanation()
-                : "Not available for the loaded project. " +
+                ? mode switch
+                {
+                    NormalizationMode.TotalChromatogram => "Divide each PatternLab family's signal by its run's recorded total ion current. This prepares Recalculate without changing measured areas or writing a file.",
+                    NormalizationMode.IdentifiedPeptideSignal => "Divide each PatternLab family's signal by its run's recorded extracted peptide signal. This prepares Recalculate without changing measured areas or writing a file.",
+                    NormalizationMode.ChargeRestrictedSignal => "Divide each PatternLab family's signal by its run's recorded charge-restricted signal. This prepares Recalculate without changing measured areas or writing a file.",
+                    _ => "Divide PatternLab family signal by the sum of family signals under the selected shared-peptide policy. This prepares Recalculate without changing measured areas or writing a file."
+                }
+                : "Unavailable for the loaded project: " +
                   (string.IsNullOrEmpty(unavailableReason)
                       ? "It does not record the per-run totals this mode divides by."
                       : unavailableReason) +
-                  " Pick another mode.";
+                  " Load a project recording this mode's complete per-run totals to enable it; no values or files change until Recalculate.";
         }
 
         private void UpdateFilteredResults()
@@ -347,29 +353,29 @@ public partial class ClusterGenerationControl
         {
             ApplyFamilyHeaderTooltips();
             ColumnUSearchId.HeaderStyle = HeaderTip(
-                "The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it " +
-                "equals User ID except where you renumbered a family by hand.");
+                "The last automatic family number, from sequence identity and any word or keyword grouping. " +
+                "Read only; hand curation changes User ID without changing this number.");
 
             ColumnUserId.HeaderStyle = HeaderTip(
-                "Your own family number, the only editable id. Type the same number in two rows to merge " +
-                "their families, or an unused one to split a protein off; editing locks the families involved.");
+                "Current family number for this protein: starts at its stored value, accepts whole numbers from 0 to 2147483647, with no unit. " +
+                "An existing number joins that family and an unused number splits this protein off; editing locks affected families, and Undo restores the change.");
 
             ColumnUserAnnotation.HeaderStyle = HeaderTip(
-                "Free text of your own. It is saved in the .fcf and written to the CSV, and it affects no " +
-                "calculation.");
+                "Annotation for this protein: starts at its stored text, or empty, and accepts free text with no unit or fixed length limit. " +
+                "The edit changes the project and can affect its family name; Undo restores the text, and Save or CSV export keeps it on disk.");
 
             ColumnLocus.HeaderStyle = HeaderTip(
-                "A UniProt accession where available, otherwise the database identifier; hover for the original; " + SequenceLabels.DecoyPrefix
+                "A UniProt accession where available, otherwise the database identifier; hover over a cell for the original; " + SequenceLabels.DecoyPrefix
                 + " marks a decoy and " + SequenceLabels.ContaminantMarker + " marks a contaminant. " +
                 "Right-click for its UniProt code or page; Ctrl+C copies the clicked column.");
 
             ColumnDomains.HeaderStyle = HeaderTip(
-                "The protein's Pfam domains from UniProt, searchable by the Search box. Empty until " +
-                "Fetch evidence is pressed, or when no domain was called, including proteins too short for Pfam.");
+                "Pfam domains recorded for this protein, searchable through Search, with fetched previews shown while evidence downloads. " +
+                "Read only; an empty value can mean no evidence or no domain call and does not prove domain absence.");
 
             ColumnMass.HeaderStyle = HeaderTip(
-                "The sum of the protein's residue masses in daltons, without the terminal water. Add " +
-                "18.011 Da for the neutral protein mass.");
+                "Sum of the protein's residue masses in daltons, without terminal water; add 18.011 Da for neutral protein mass. " +
+                "This value is read only and changes no project data.");
 
             ColumnFullXic.HeaderStyle = HeaderTip(
                 "This family's share of the full XIC (from Quantify), the primary " +
@@ -402,7 +408,6 @@ public partial class ClusterGenerationControl
                 Application.Current.TryFindResource(typeof(System.Windows.Controls.Primitives.DataGridColumnHeader)) as Style);
 
             style.Setters.Add(new Setter(FrameworkElement.ToolTipProperty, tooltip));
-            style.Setters.Add(new Setter(System.Windows.Controls.ToolTipService.ShowDurationProperty, 60000));
             style.Setters.Add(new Setter(ContentControl.ContentTemplateProperty, WrappingHeaderTemplate));
 
             return style;
