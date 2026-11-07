@@ -45,6 +45,7 @@ public partial class FamilyClusterFile
 
     internal static FamilyClusterFile ReadJsonUtf8(Func<Stream> open)
     {
+        if (CurationFormat.Detect(open) == CurationFormat.Current) return ReadCurationFormat2(open);
         try
         {
             using var source = open(); using var tracked = new CurationReadProbe(source);

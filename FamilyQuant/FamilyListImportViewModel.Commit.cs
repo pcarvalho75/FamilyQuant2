@@ -163,7 +163,15 @@ public sealed partial class FamilyListImportViewModel
 
     public void UndoImport()
     {
-        if (transaction.Undo(out string result)) { committedPanel = null; GoTo(5); Recheck(); }
-        Status = result; Refresh();
+        try
+        {
+            if (transaction.Undo(out string result)) { committedPanel = null; GoTo(5); Recheck(); }
+            Status = result;
+        }
+        catch (Exception error) when (error is System.IO.IOException or UnauthorizedAccessException)
+        {
+            Status = "Undo could not run because temporary storage could not be used, and nothing changed. Check its space and permissions, then try Undo again.";
+        }
+        Refresh();
     }
 }
