@@ -48,3 +48,65 @@ exact, the saved panel/recipe reopened and replayed, and both workbooks retained
 (5/0/0). Artifacts are at `D:/FamilyQuant-data/out-assay/j1b-live-02/`.
 The importer reads the selected family table. It retains subclass prose as source text; translating
 that prose or other tabs into executable subclass definitions belongs to explicit panel editing.
+
+## Graceful import, Z12p1
+
+Z12p1 lets a consensus sheet be imported as it is. The wizard (Z12p2b) uses these calls; the J1b calls
+above keep working and replay panels imported before unchanged.
+
+1. `IPanelSheetPreviewReader.ReadPreview(path, sheet = "")` returns every tab (hidden ones listed
+   separately), a dense grid of the chosen sheet with each cell's text, direct fill colour (#RRGGBB
+   and a plain colour word for screen readers), merged range, a proposed header row with a reason
+   sentence, and problems. It never throws for an unreadable file. The header row is proposed from
+   Excel's filter buttons, then an Excel table, then frozen rows, then the first row with several
+   different labels above rows of data. The file is read with sharing, so a workbook open in Excel
+   can be read.
+2. `ReadTable(path, sheet, headerRow)` now also returns column letters, the empty rows between data
+   rows, each row's fills and merged ranges, and notes instead of exceptions: a populated column
+   without a name becomes "Column G", a repeated name gets " (column C)", a formula without a saved
+   result is read as empty and an Excel error is read as its text. Only an unreadable file or a
+   missing sheet still throws.
+3. `Propose(table)` proposes roles from the shape of the values, never from header words: short
+   distinct codes for the abbreviation, the first and second columns of names for the name and the
+   other-language name, a column mostly holding Pfam accessions for Pfam, and the remaining column
+   with the longest text for notes. Decision and colour category are never proposed. Its choices carry
+   `ImportVersion = PanelImportRules.Current`.
+4. `ProposeDecisions(table, choices)` proposes one meaning per distinct decision label with its rows
+   and a reason: Merge into a family when the label has a merging word and names exactly one
+   abbreviation of the table, Not a family when it has an excluding word, otherwise Quantify. The
+   words are a short English, Portuguese and Spanish list in the source, compared without accents or
+   case. They only propose; the user confirms each label and the stored mapping is the user's.
+5. `Check(table, choices, decisions, name)` never throws for data. Every problem is a plain sentence
+   naming the row and the column, with a kind, a severity (Note or Blocking), the value concerned and a
+   suggestion where there is one. It also returns each row's outcome, the decision labels, the colours
+   of the colour-category column and the panel when nothing blocks. `Import` is `Check` and throws the
+   first blocking sentence.
+
+Rules of a graceful import (version 1): the decision column is optional, and without it every family
+is Quantify; an empty decision cell is Quantify with a note. Keys and names are trimmed; every original
+cell stays verbatim in TextFields. A row that repeats the column names, or whose text is one merged
+cell across columns like a section title, is skipped with a note and can be kept. A repeated
+abbreviation blocks on the later row, names the earlier row and suggests a rename such as HYAL-2; the
+answer is a rename, a merge into the earlier family or a skip. A row with an empty abbreviation or name
+blocks with a suggestion. The answers are stored as `FamilyPanelImport.RowChoices` by row number.
+
+Colours are read only from direct cell fills: an explicit colour, the workbook theme with its tint, or
+the indexed palette. Conditional formatting, table styles, gradients and row or column styles are not
+read, and a tinted theme colour can differ from Excel's display by one unit. A colour becomes a
+category only when the user chooses a colour-category column and names every colour in it
+(`ColorLabels`); the family then gets a text field (`ColorCategoryName`, by default the header plus
+" colour") with that name. The colour itself is never interpreted.
+
+`ImportVersion`, `RowChoices`, `ColorLabels` and `ColorCategoryName` are omitted from JSON when unset,
+so a panel imported before keeps its exact JSON and version 0 replays the J1b rules. The other-language
+name is stored in `FamilyPanelFamily.Names` under the actual header; `PanelImportFields.OtherNameText`
+reads it. The program does not know which language a column is. A family key is the trimmed
+abbreviation cell or the user's stored rename, and Replay of the same file reproduces every key.
+
+Checks: `--test-panel-import-graceful` builds a synthetic workbook shaped like a consensus sheet
+(title row, accented headers, filter, coloured abbreviations, section title, empty and repeated header
+rows, a repeated abbreviation, free-text decision labels including a merge, formula and error cells,
+extra and hidden sheets) and covers each rule above, replay, project and recipe round trips, culture
+stability and the unchanged workbook. A read-only probe of a copy of the real workbook, not kept,
+found its header row from the filter, proposed the expected columns and imported all 41 rows with no
+blocking problem, with and without the proposed decision meanings.
