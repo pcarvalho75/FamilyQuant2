@@ -165,5 +165,6 @@ internal static partial class Program
         Check("Z12p4-notes panel window Help explains the independent matching save route",
             PanelReportHelp.Panel.Contains("Match stored names", StringComparison.Ordinal)
             && PanelReportHelp.Panel.Contains("Apply panel and File > Save", StringComparison.Ordinal));
+        PanelEvidenceRankingUiTests(output);
     }
 }

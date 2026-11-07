@@ -8,9 +8,11 @@ using System.Text.RegularExpressions;
 namespace FamilyQuant.Evidence;
 
 public sealed record PanelEvidenceSuggestion(PanelEvidenceMatchKind Kind, string Value, string Name,
-    int DatabaseTargets, int ReferenceEntries, string Reason, int ReviewedTargets = 0)
+    int DatabaseTargets, int ReferenceEntries, string Reason, int ReviewedTargets = 0,
+    double NameCoverage = 0, bool IsAdditional = false)
 {
     public string Key => JsonSerializer.Serialize(new[] { Kind.ToString(), Value });
+    public bool IsFamilyLevelMatch => Kind is PanelEvidenceMatchKind.UniProtFamily or PanelEvidenceMatchKind.Pfam && NameCoverage > 0;
 }
 
 /// <summary>Detached stored-label suggestions and exact target coverage. No suggested label is a classification rule.</summary>
@@ -20,10 +22,13 @@ public sealed partial class PanelEvidenceMatching
     {
         internal (PanelEvidenceMatchKind, string) Key => (Kind, Value.ToUpperInvariant());
     }
-    private sealed record Entry(bool Database, bool Reviewed, IReadOnlyList<Label> Labels, HashSet<string> Words);
+    private sealed record Entry(bool Database, bool Reviewed, IReadOnlyList<Label> Labels, HashSet<string> Words, HashSet<string>[] Names);
     private readonly Entry[] entries;
     private readonly Dictionary<(PanelEvidenceMatchKind, string), PanelEvidenceSuggestion> labels;
     private readonly Dictionary<string, int> wordFrequency;
+    private readonly Dictionary<(PanelEvidenceMatchKind, string), HashSet<string>[]> supportingNames;
+    private string? panelNamesKey;
+    private IReadOnlyDictionary<string, IReadOnlyList<PanelEvidenceSuggestion>>? panelSuggestions;
     private readonly string sourceFingerprint;
     private readonly string sourceEvidence;
     private readonly string sourceDescriptions;
@@ -54,9 +59,15 @@ public sealed partial class PanelEvidenceMatching
                 return new PanelEvidenceSuggestion(first.Kind, first.Value, name, group.Count(item => item.Entry.Database), group.Count(item => !item.Entry.Database), "",
                     group.Count(item => item.Entry.Database && item.Entry.Reviewed));
             });
+        supportingNames = entries.SelectMany(entry => entry.Labels.Where(label => label.Kind is PanelEvidenceMatchKind.UniProtFamily or PanelEvidenceMatchKind.Pfam)
+                .Select(label => label.Key).Distinct().Select(key => (Key: key, entry.Names)))
+            .GroupBy(item => item.Key).ToDictionary(group => group.Key, group => group.SelectMany(item => item.Names)
+                .DistinctBy(words => string.Join(" ", words.OrderBy(word => word, StringComparer.Ordinal))).ToArray());
     }
 
     private static HashSet<string> Words(string text) => Regex.Matches(text.ToLowerInvariant(), @"[\p{L}\p{N}]{3,}", RegexOptions.CultureInvariant)
+        .Cast<Match>().Select(match => match.Value).ToHashSet(StringComparer.Ordinal);
+    private static HashSet<string> NameWords(string text) => Regex.Matches(text.ToLowerInvariant(), @"[\p{L}\p{N}]+", RegexOptions.CultureInvariant)
         .Cast<Match>().Select(match => match.Value).ToHashSet(StringComparer.Ordinal);
 
     private static Entry MakeEntry(bool database, string description, ProteinEvidence? evidence)
@@ -66,7 +77,10 @@ public sealed partial class PanelEvidenceMatching
             .Concat((evidence?.TissueSpecificity ?? new List<string>()).Select(value => new Label(PanelEvidenceMatchKind.TissuePhrase, value, "")))
             .Concat((evidence?.Pfam ?? new List<EvidenceDomain>()).Select(domain => new Label(PanelEvidenceMatchKind.Pfam, domain.Accession, domain.Name)))
             .Where(label => !string.IsNullOrWhiteSpace(label.Value)).Select(label => label with { Value = Normalize(label.Value) }).ToArray();
-        return new Entry(database, evidence?.Reviewed == true, observed, Words(description + " " + string.Join(" ", observed.Select(label => label.Value + " " + label.Name))));
+        var names = new[] { description }.Concat(observed.Where(label => label.Kind == PanelEvidenceMatchKind.Pfam).Select(label => label.Name))
+            .Where(name => !string.IsNullOrWhiteSpace(name)).Select(NameWords).ToArray();
+        return new Entry(database, evidence?.Reviewed == true, observed,
+            Words(description + " " + string.Join(" ", observed.Select(label => label.Value + " " + label.Name))), names);
     }
 
     public bool IsCurrent(FamilyClusterFile file) => sourceFingerprint == EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems)
@@ -81,8 +95,10 @@ public sealed partial class PanelEvidenceMatching
 
     public IReadOnlyList<PanelEvidenceSuggestion> Suggest(IEnumerable<string> names)
     {
+        var importedNames = names.Where(name => !string.IsNullOrWhiteSpace(name)).ToArray();
+        var nameWords = importedNames.Select(NameWords).Where(words => words.Count > 0).ToArray();
         var anchors = new HashSet<string>(StringComparer.Ordinal);
-        foreach (string name in names.Where(name => !string.IsNullOrWhiteSpace(name)))
+        foreach (string name in importedNames)
         {
             var present = Words(name).Where(wordFrequency.ContainsKey).ToArray();
             if (present.Length == 0) continue;
@@ -96,10 +112,31 @@ public sealed partial class PanelEvidenceMatching
             var label = pair.Value;
             bool direct = Words(label.Value + " " + label.Name).Overlaps(anchors);
             string reason = direct ? "Stored label shares name words." : "Co-occurs in stored entries that share name words.";
-            return label with { Reason = reason };
-        }).OrderByDescending(label => label.Reason.StartsWith("Stored", StringComparison.Ordinal))
+            var sources = new[] { NameWords(label.Value + " " + label.Name) }.Concat(supportingNames.GetValueOrDefault(pair.Key) ?? Array.Empty<HashSet<string>>());
+            int totalWords = nameWords.Sum(query => query.Count);
+            double coverage = totalWords == 0 ? 0 : sources.Select(source => (double)nameWords.Sum(query => query.Count(source.Contains)) / totalWords).DefaultIfEmpty(0).Max();
+            return label with { Reason = reason, NameCoverage = coverage,
+                IsAdditional = label.Kind == PanelEvidenceMatchKind.TissuePhrase || coverage == 0 };
+        }).OrderByDescending(label => label.IsFamilyLevelMatch)
+            .ThenByDescending(label => label.NameCoverage)
             .ThenByDescending(label => label.DatabaseTargets).ThenByDescending(label => label.ReferenceEntries)
             .ThenBy(label => label.Kind).ThenBy(label => label.Value, StringComparer.Ordinal).ToArray();
+    }
+
+    /// <summary>Ranks the whole imported list together so broadly shared keywords stay in Show more.</summary>
+    public IReadOnlyDictionary<string, IReadOnlyList<PanelEvidenceSuggestion>> SuggestForPanel(FamilyPanel panel)
+    {
+        string key = JsonSerializer.Serialize(panel.Families.Select(family => new { family.Key, family.DisplayName, Names = family.Names.Select(name => name.Text) }));
+        if (key == panelNamesKey && panelSuggestions != null) return panelSuggestions;
+        var suggestions = panel.Families.ToDictionary(family => family.Key,
+            family => Suggest(family.Names.Select(name => name.Text).Prepend(family.DisplayName)), StringComparer.Ordinal);
+        var shared = suggestions.Values.SelectMany(rows => rows.Where(row => row.Kind == PanelEvidenceMatchKind.Keyword && row.NameCoverage > 0).Select(row => row.Key).Distinct())
+            .GroupBy(label => label, StringComparer.Ordinal).Where(group => suggestions.Count > 1 && group.Count() * 2 > suggestions.Count)
+            .Select(group => group.Key).ToHashSet(StringComparer.Ordinal);
+        panelSuggestions = suggestions.ToDictionary(pair => pair.Key,
+            pair => (IReadOnlyList<PanelEvidenceSuggestion>)pair.Value.Select(row => row with { IsAdditional = row.IsAdditional || shared.Contains(row.Key) }).ToArray(), StringComparer.Ordinal);
+        panelNamesKey = key;
+        return panelSuggestions;
     }
 
     public PanelEvidenceSuggestion Coverage(PanelEvidenceMatchKind kind, string value) =>
