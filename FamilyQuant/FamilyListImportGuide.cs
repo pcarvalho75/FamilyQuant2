@@ -14,43 +14,69 @@ public sealed record FamilyListImportGuideSection(string Key, string Title, stri
 /// with a picture of that page taken on the fictitious example list (Try with the example), plus the two routes
 /// that save evidence matches later. Wording follows the wizard and the matching window's own Help; Z12p2c1 brings it
 /// to the final wizard (the decision-column question, colours named by the program, no conditional action, labels the
-/// program already uses confirmed at once, the Done page's next steps). The suite checks every control it names
-/// against the program's own sources.
+/// program already uses confirmed at once, the Done page's next steps). Z16a8 adds a workbook with several sheets (W21,
+/// D81): the page that reads the whole workbook, the workbook map, the legend's names and meanings, the Pfam domains of
+/// the sheet, the subclass table and the notes sheets. The suite checks every control it names against the program's
+/// own sources.
 /// </summary>
 public static class FamilyListImportGuide
 {
     public const string Title = "Import family list";
 
+    // Z16a8 picture spots. The text below was written against the workbook contract (Z16a1, 8cf2a257) and FQHome's seam
+    // for Z16a3 and Z16a9, before those wizard pages landed. Every spot marked PICTURE Z16a8 (a new picture, its section
+    // has no image yet) or RETAKE Z16a8 (the page changes with the workbook) is taken again by --import-guide-screens on
+    // the merged wizard, and the words of that section are checked against what the page shows.
     public static IReadOnlyList<FamilyListImportGuideSection> Sections { get; } = new[]
     {
         new FamilyListImportGuideSection("start", "Before you start", "", "", new[]
         {
             "File > Import family list brings a spreadsheet of family abbreviations and names into this project's family panel, in seven pages. Every page before Import is a draft: Back keeps your choices, and Cancel changes nothing.",
             "Import creates the family panel and nothing else. It does not group proteins or recompute quantitation; afterwards you review which proteins belong in each family in the Family checklist of Group by evidence.",
-            "To practise, press Try with the example on the first page. It opens an invented list for a secreted-protein mixture, written in Portuguese like many consensus sheets, with a title above the column names, coloured abbreviations, a row naming four families and a repeated abbreviation. Every value in it is made up. The pictures in this chapter were taken on it.",
+            "To practise, press Try with the example on the first page. It opens an invented workbook for a secreted-protein mixture, written in Portuguese like many consensus sheets, with six sheets: the family list, a table of subclasses, three sheets of notes (resolved divergences, quantification rules and references) and a legend that names each colour of the abbreviations. The family list has a title above the column names, coloured abbreviations, a row naming four families and a repeated abbreviation. Every value in it is made up. The pictures in this chapter were taken on it.",
         }),
         new FamilyListImportGuideSection("welcome", "1. Welcome", "01-welcome.png", "The first page: what you need, what is kept, and the three ways in.", new[]
         {
             "The page lists what you need: an Excel workbook (.xlsx) with an abbreviation column and a family name column. Names in another language, notes and the original rows are kept with your list.",
             "Try with the example opens the invented list on the next page. Save a template writes a workbook with the recommended columns, which imports with no mapping. Edit current panel opens the panel editor for the panel this project already has.",
         }),
+        // PICTURE Z16a8 (Z16a9): 02-workbook.png, the page that reads the whole example workbook at once, with every part listed.
+        new FamilyListImportGuideSection("workbook", "Reading the whole workbook", "", "", new[]
+        {
+            "When you open a workbook, FamilyQuant reads every sheet in it before you choose anything, and opens on one page that says what it found and what it proposes. It tells the sheets apart by their structure, never by their names: the family list, a colour legend, a subclass table, and sheets of notes.",
+            "The page lists each part: the family list and the column proposed for each meaning; each colour with the name the legend gives it; each decision label with its meaning from the legend and the action proposed for it; the rows that name several families; the Pfam domains written in your sheet, for matching; the subclasses proposed for a family from the subclass table; and the notes sheets that are kept.",
+            "One press accepts everything on the page, and that press is your confirmation: nothing is set before it. To change a part, open it; each part takes you to its own page of the wizard, described below, and the other parts stay as proposed.",
+            "Whatever the wizard is not sure of is left for you and marked, such as a decision label whose meaning is not clear or a colour the legend names twice; it never guesses. Anything it cannot place is listed plainly. A workbook of another shape, such as a single sheet, or a list with no legend and no decisions, is read the same way from its structure and shows only the parts it has.",
+        }),
+        // RETAKE Z16a8 (Z16a3): the family sheet may now show under Sheet preview, beside Workbook sheets.
         new FamilyListImportGuideSection("file", "2. File and sheet", "02-file-and-sheet.png", "The example's first sheet: a title and a subtitle above the column names in row 3.", new[]
         {
             "Press Browse, or drop the workbook on the page, then choose the sheet that holds your families. FamilyQuant proposes the header row, the row with the column names; in the example it is row 3, below a title and a subtitle. If the proposal is wrong, type the right row number and press Read this header row.",
             "The spreadsheet preview shows your sheet as it is, with its row numbers, column letters, merged titles, accents, line breaks and cell colours. Colours are source data and never decide anything by themselves. Select a cell and open Cell details to read its full text.",
-            "Other sheets are left out unless you tick Keep as source notes; kept sheets are stored as text with the panel and never read as rules. The workbook itself is never changed.",
+            "When the workbook has other sheets, the workbook map says what each one gives the import, as the next part explains. The workbook itself is never changed.",
         }),
+        // PICTURE Z16a8 (Z16a3): 02-workbook-map.png, Workbook sheets on the example: six sheets with their roles and the three notes sheets kept.
+        new FamilyListImportGuideSection("map", "2. The workbook map", "", "", new[]
+        {
+            "Workbook sheets lists every sheet of the workbook, hidden ones too, with the role proposed for it under Use as: Family list, Colour legend, Subclass table or Notes. Kept as says what each sheet gives the import, and Why this role gives the reason, read from the sheet's shape. A sheet marked Review role is one the wizard is not sure of; check it.",
+            "To change a role, choose another under Use as. The proposal is read again with your choice, and the workbook and the project stay unchanged. When two sheets could each be the family list, the wizard asks you to choose one and Next waits; it never takes the first one for you.",
+            "A colour legend is a sheet whose first column carries the same cell colours as the family list, with the meaning of each colour beside it; the same legend can explain the decision labels when its words match them. In the example, 6. Legenda names the colour of each decision.",
+            "Sheets with no family rows, like the example's divergences, quantification rules and references, are notes. They are listed below the map as kept, with their original text; Read kept notes shows it in full. Notes are imported with the panel as source notes, shown in the panel editor and listed in the Methods of the report. They are never read as families or as rules.",
+        }),
+        // RETAKE Z16a8 (Z16a3): the colour categories start with the legend's names.
         new FamilyListImportGuideSection("columns", "3. Columns", "03-columns.png", "Each meaning with the column proposed for it and an example from the sheet.", new[]
         {
             "For each meaning, choose the column of your sheet that holds it; an example from your sheet appears below each choice. Abbreviation and Family name are required. Other-language name, Notes, Pfam codes and Decision are optional, and every original column is kept anyway.",
             "When no column is chosen for Decision and one column holds a few short labels repeated over many rows, the page can ask whether that column says what to do with each family; in the example it asks: Could Decisão FamilyQuant hold the family actions? It is only a question. Use this decision column chooses that column and opens its values for your review; until you press it, nothing is mapped.",
             "Without a Decision column every family is Quantify, so Next asks once: Quantify every family for this import? No keeps you on Columns. Your answer holds for this sheet until you change the Decision column.",
-            "When the sheet has coloured cells, Colour categories (optional) opens by itself. Choose the column whose colours mean something, like Sigla in the example: each colour is listed with its rows and named for you with its plain name, such as light blue. Rename a category if you like; clearing a name brings the plain name back, so the colours never hold up Next. The category is kept as text with each family and shown in the Colour column of the Summary; it never decides what happens to a family.",
+            "When the sheet has coloured cells, Colour categories (optional) opens by itself. Choose the column whose colours mean something, like Sigla in the example: each colour is listed with its rows. When the workbook has a colour legend, each colour starts with the name the legend gives it, with its meaning beside it; in the example, light turquoise starts as Núcleo. A colour the legend does not name, or gives two names, is named for you with its plain name, such as light grey in the example, which the legend gives to two labels. Rename a category if you like; clearing a name brings the plain name back, so the colours never hold up Next. The category is kept as text with each family and shown in the Colour column of the Summary; it never decides what happens to a family.",
         }),
+        // RETAKE Z16a8 (Z16a3): Meaning from legend beside each proposed action.
         new FamilyListImportGuideSection("decisions", "3. Reviewing decisions", "03-columns-decisions.png", "One line per decision written in the sheet, with its rows and the proposed action.", new[]
         {
             "When you choose a Decision column, the page becomes Review spreadsheet decisions: one line for each different value written in that column, the rows that use it, and the proposed action: Quantify, Report under others, Not a family, or Merge into family with the abbreviation to merge into. The line under the title says it in short: " + FamilyListImportHelp.DecisionsSummary,
-            "There is no conditional action. A condition written in the sheet, like Condicional (só na fração solúvel) in the example, is proposed as Quantify; choose the action that fits now. The value written in your sheet stays with each family as its source label.",
+            "When the workbook has a legend that explains the decision labels, as the example's does, Meaning from legend shows each label's meaning beside its action, and the proposal starts from it: a label that keeps a family is proposed as Quantify, one that leaves it out as Not a family, and one that joins it to another family as Merge into family with the abbreviation it names, like Fundir com LEC in the example. When the meaning is not clear, the action is left empty for you to choose. The meaning only helps you decide; each line is still your choice.",
+            "There is no conditional action. A condition written in the sheet, like Condicional (só na fração solúvel) in the example, is never turned into a rule; choose the action that fits now. The value written in your sheet stays with each family as its source label.",
             "A cell that already holds one of the program's own labels, Quantify, Report under others or Not a family, or Merge into followed by an abbreviation of your list, is confirmed at once. When every value is like that, there is nothing to review.",
             "Check each other line, change what is wrong, and press Confirm these actions. Next stays disabled until every value is confirmed, and changing an action or its abbreviation clears that line's Confirmed tick, so no proposal is accepted for you. Back to columns returns without confirming, and Review decision values opens the list again.",
         }),
@@ -58,15 +84,18 @@ public static class FamilyListImportGuide
         {
             "Rows that cannot be imported as written wait here, each with its row number, the problem and a proposed correction. Next waits until no row says Needs a choice. Open Original source row to see the row as written, choose in Use this row as, and press Use this choice.",
             "A cell that lists several names, like the OUTRAS row of the example with four rare families, can become One family per name or One group reported under others; Keep as one family imports it as written. When such a row becomes one family per name, its Pfam codes are kept as text only, because they cannot be told apart for each name. A comma inside a single name looks the same to the importer, as in row 17 of the example: choose Keep as one family there.",
+            "With a workbook of several sheets, the page that reads the whole workbook lists these rows too, so you know which ones wait here.",
         }),
         new FamilyListImportGuideSection("duplicate", "4. A repeated abbreviation", "04-special-rows-duplicate.png", "The second LEC, proposed as LEC-2.", new[]
         {
             "An abbreviation used twice, like the second LEC of the example, can be kept with a new abbreviation (Keep or rename this row, proposed as LEC-2), merged into the family of the first row (Merge into family), or left out (Skip this row).",
             "Empty and decorative rows are skipped and listed with the status Skipped, so no row disappears without a trace.",
         }),
+        // RETAKE Z16a8 (Z16a4): the family's Pfam domains from the sheet first, marked from your sheet and ticked; the caption changes with it.
         new FamilyListImportGuideSection("matches", "5. Evidence matches", "05-evidence-matches.png", "Suggestions for one family from the evidence stored in the project, none ticked until you tick them.", new[]
         {
             "For each family, FamilyQuant suggests labels from the evidence already stored in this project, such as UniProt families and keywords, that share words with the family's names. Nothing is ticked for you.",
+            "The Pfam domains written in the family's own row of your sheet are the one exception. They come first, marked from your sheet, and are ticked, because they are your own statement; in the example, TRP comes with Trypsin (PF00089). Untick any you do not want.",
             "Counts are database entries for each suggestion, not abundance; suggestions can overlap and must not be added together.",
             "Tick the labels that describe the family and press Use selected matches, or press Skip this family. Continue without matches skips matching for every family; you can match later. On a new import of the same list, matches confirmed before show as Kept from previous panel. The wizard never downloads evidence and never assigns proteins.",
             "A broad label can describe most of the database rather than one family. If a ticked label covers more than half of the database's entries, Use selected matches asks once, naming the count, before it keeps the match.",
@@ -77,6 +106,14 @@ public static class FamilyListImportGuide
             "With a grouping: in Group by evidence, open the Family checklist, use Match stored names for a family and confirm the labels to use. Apply grouping and File > Save keep the choices made in that review.",
             "Without grouping proteins: open File > Import family list, press Edit current panel, select the family, use Match stored names, then Apply panel and File > Save.",
         }),
+        // PICTURE Z16a8 (Z16a3, Z16a5): 05-subclasses.png, the subclasses proposed for one family of the example from 2. Subclasses.
+        new FamilyListImportGuideSection("subclasses", "Subclasses from your workbook", "", "", new[]
+        {
+            "A subclass table is a sheet that names abbreviations of your list, in its title or in a column, with one row for each subclass and the Pfam domains that define it, like the example's 2. Subclasses. For each family it names, FamilyQuant offers to create subclass definitions.",
+            "Each rule is only a proposal: a Pfam domain the subclass must have, or one it must not have, and only from Pfam names and codes the program recognizes, such as Hemopexin (PF00045). Nothing becomes a rule until you confirm it. Text it cannot read as a rule stays with the subclass as its notes, as written.",
+            "The Subclasses column of the family list, when your sheet has one, names the subclasses you expect for each family. Confirmed subclass definitions are imported with the panel; the ones you do not confirm are left out.",
+        }),
+        // RETAKE Z16a8 (Z16a9): the Summary after the whole example workbook is accepted.
         new FamilyListImportGuideSection("summary", "6. Summary", "06-summary.png", "The last check before anything changes.", new[]
         {
             "The last page before anything changes. Name the panel, then read the line of counts (families, rows split, skipped and renamed, matching choices), the source sheet, and the panel this import replaces. The table lists every family with its names, decision, colour category (in the Colour column) and matching choice; View source notes shows the original columns kept for it.",

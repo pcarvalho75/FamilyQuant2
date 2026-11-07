@@ -40,6 +40,15 @@ internal static partial class Program
         Check("one part for each of the seven wizard pages, in order", Enumerable.Range(1, 7).All(n => sections.Any(s => s.Title.StartsWith(n + ".", StringComparison.Ordinal)))
             && sections.Where(s => char.IsDigit(s.Title[0])).Select(s => s.Title[0]).SequenceEqual(sections.Where(s => char.IsDigit(s.Title[0])).Select(s => s.Title[0]).OrderBy(c => c)));
         Check("the Columns page has its decision review and Special rows its repeated abbreviation", sections.Any(s => s.Key == "decisions") && sections.Any(s => s.Key == "duplicate"));
+        // Z16a8 (W21, D81): a workbook with several sheets, read at once, with nothing set before her one press.
+        Check("the chapter covers a workbook with several sheets: the page that reads it all, the map, the subclass table",
+            new[] { "workbook", "map", "subclasses" }.All(key => sections.Any(s => s.Key == key))
+            && text.Contains("One press accepts everything on the page", StringComparison.Ordinal) && text.Contains("nothing is set before it", StringComparison.Ordinal)
+            && text.Contains("it never guesses", StringComparison.Ordinal) && text.Contains("never by their names", StringComparison.Ordinal));
+        Check("the chapter keeps every workbook proposal her choice: legend meanings, her Pfam domains, subclass rules, notes",
+            text.Contains("each line is still your choice", StringComparison.Ordinal) && text.Contains("the action is left empty for you to choose", StringComparison.Ordinal)
+            && text.Contains("because they are your own statement", StringComparison.Ordinal) && text.Contains("Untick any you do not want", StringComparison.Ordinal)
+            && text.Contains("Nothing becomes a rule until you confirm it", StringComparison.Ordinal) && text.Contains("never read as families or as rules", StringComparison.Ordinal));
         var pictured = FamilyListImportGuide.Pictured.ToList();
         var loaded = pictured.Select(s =>
         {
@@ -56,7 +65,7 @@ internal static partial class Program
         }));
         string[] labels =
         {
-            "Try with the example", "Save a template", "Edit current panel", "Browse", "Read this header row", "Cell details", "Keep as source notes",
+            "Try with the example", "Save a template", "Edit current panel", "Browse", "Read this header row", "Cell details",
             "Confirm these actions", "Back to columns", "Review decision values", "Quantify", "Report under others", "Not a family", "Merge into family",
             "Original source row", "Use this row as", "Use this choice", "Needs a choice", "Keep as one family", "One family per name",
             "One group reported under others", "Keep or rename this row", "Skip this row", "Skipped", "Use selected matches", "Skip this family",
@@ -115,7 +124,7 @@ internal static partial class Program
                     Check(theme + " it opens at a size that fits a 1024 x 768 screen", window.Width <= 1024 && window.Height <= 728);
                     if (theme == Themes.AppTheme.Light) CheckTooltipCoverage("Import guide window", (FrameworkElement)window.Content);
                     ((Button)window.FindName("nextButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
-                    Check(theme + " Next moves to the following part", model.Current.Key == "columns" && model.CanPrevious);
+                    Check(theme + " Next moves to the following part", model.Current.Key == "map" && model.CanPrevious);
                     model.Current = model.Sections.Single(s => s.Key == "later"); PumpDispatcher();
                     Check(theme + " a part without a picture hides the picture frame", !model.HasPicture);
                     model.Current = model.Sections[^1]; PumpDispatcher();
