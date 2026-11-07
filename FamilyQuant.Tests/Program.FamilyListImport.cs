@@ -142,6 +142,19 @@ internal static partial class Program
                         && model.SummaryFamilies.Count == model.DraftPanel!.Families.Count && curation.UndoStack.Count == 0 && file.ToJsonText() == before);
                     Check(label + " Summary includes the skipped empty row and the confirmed duplicate rename", model.Summary.Contains("1 row skipped", StringComparison.Ordinal)
                         && model.Summary.Contains("1 abbreviation renamed", StringComparison.Ordinal));
+                    const string breakdown = "30 families to quantify (plus 1 merged, 11 not a family)";
+                    var mergedFamily = model.SummaryFamilies.Single(f => f.Decision.StartsWith("Merge into ", StringComparison.Ordinal));
+                    string mergeTarget = model.DraftPanel!.Families.Single(f => f.Key == mergedFamily.Key).MergeTargetFamilyKey;
+                    Check(label + " Summary counts families to quantify, plus merged and not a family, and omits reported under others when that count is zero",
+                        model.Summary.StartsWith(breakdown + "; ", StringComparison.Ordinal)
+                        && !model.Summary.Contains("reported under others", StringComparison.Ordinal)
+                        && !model.Summary.Contains("42 families", StringComparison.Ordinal));
+                    Check(label + " a merge Decision names its target and merged or not-a-family rows need no match",
+                        mergeTarget.Length > 0 && mergedFamily.Decision == "Merge into " + mergeTarget && mergedFamily.Decision != "Merge into family"
+                        && mergedFamily.Matches == "Not needed"
+                        && model.SummaryFamilies.Count(f => f.Decision == "Not a family") == 11
+                        && model.SummaryFamilies.Where(f => f.Decision == "Not a family").All(f => f.Matches == "Not needed")
+                        && model.SummaryFamilies.Where(f => f.Decision == "Quantify").All(f => f.Matches == "Skipped"));
                     Check(label + " a single confirmed match uses family grammar", !model.Summary.Contains("1 families confirmed", StringComparison.Ordinal));
                     Check(label + " Summary includes the imported source colour category", ((DataGrid)window.FindName("SummaryGrid")).Columns.Any(c => c.Header as string == "Colour")
                         && model.SummaryFamilies.Any(f => f.Notes.Contains("My source category", StringComparison.Ordinal)));
@@ -149,6 +162,8 @@ internal static partial class Program
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " Import is one panel publication and retains every protein's state", model.Page == 6 && model.Imported && model.CanUndo
                         && file.FamilyPanel!.Name == "Imported example list" && curation.UndoStack.Count == 1 && JsonSerializer.Serialize(file.MyExtendedFastaItems) == proteinsBefore);
+                    Check(label + " Done title is the same family breakdown plus imported", model.ImportedFamilyCount == breakdown + " imported"
+                        && WalkTree(window).OfType<TextBlock>().Any(block => block.Text == breakdown + " imported"));
                     Check(label + " Done explains the automatic read before Update proposal", model.Explanation.Contains("reads the database and scope by itself when it opens", StringComparison.Ordinal)
                         && model.Explanation.Contains("then press Update proposal", StringComparison.Ordinal)
                         && model.Explanation.Contains("takes minutes", StringComparison.Ordinal) && !model.Explanation.Contains('\n'));
@@ -180,6 +195,7 @@ internal static partial class Program
         FamilyListImportGuardTests(workbook, work);
         FamilyListImportMatchTests(output);
         FamilyListImportCountGrammarTests();
+        FamilyListImportBreakdownTests(work);
         FamilyListDecisionHintTests(workbook);
         FamilyListChecklistHandoffTests();
     }
@@ -190,12 +206,69 @@ internal static partial class Program
         model.SpecialRows.Add(new ImportSpecialRow { RowNumber = 1, Blocking = true, Message = "Choose this row's action." });
         Check("exactly one unresolved special row uses singular grammar", model.SpecialRows.Count(r => r.Blocking) == 1
             && model.SpecialSummary == "1 row needs a choice");
+        Check("no imported panel yet says 0 families imported", model.ImportedFamilyCount == "0 families imported");
         model.Decisions.Add(new ImportDecisionChoice { Source = "Supplied choice", Decision = FamilyPanelDecision.Quantify });
         Check("exactly one unconfirmed decision uses singular grammar", model.Decisions.Count == 1 && model.DecisionSummary == "1 value to review");
         model.Decisions[0].Confirmed = true;
         Check("exactly one confirmed decision uses singular grammar", model.Decisions.Count == 1 && model.DecisionSummary == "1 value confirmed");
         model.Decisions.Add(new ImportDecisionChoice { Source = "Another choice", Decision = FamilyPanelDecision.NotAFamily, Confirmed = true });
         Check("two confirmed decisions retain plural grammar", model.Decisions.Count == 2 && model.DecisionSummary == "2 values confirmed");
+    }
+
+    private static void FamilyListImportBreakdownTests(string work)
+    {
+        CheckBreakdown(work, "only quantify", new[]
+        {
+            new[] { "AA", "Supplied family", "", "", "", "Quantify" },
+            new[] { "BB", "Supplied second", "", "", "", "Quantify" },
+        }, "2 families to quantify", "AA", "Quantify", "Skipped");
+        CheckBreakdown(work, "reported under others and no merge or exclusion", new[]
+        {
+            new[] { "AA", "Supplied family", "", "", "", "Quantify" },
+            new[] { "BB", "Supplied second", "", "", "", "Report under others" },
+        }, "1 family to quantify (plus 1 reported under others)", "BB", "Report under others", "Skipped");
+        CheckBreakdown(work, "not a family and no merge or others", new[]
+        {
+            new[] { "AA", "Supplied family", "", "", "", "Quantify" },
+            new[] { "BB", "Supplied second", "", "", "", "Not a family" },
+        }, "1 family to quantify (plus 1 not a family)", "BB", "Not a family", "Not needed");
+        CheckBreakdown(work, "one merge and no others or exclusion", new[]
+        {
+            new[] { "AA", "Supplied family", "", "", "", "Quantify" },
+            new[] { "BB", "Supplied second", "", "", "", "Merge into AA" },
+        }, "1 family to quantify (plus 1 merged)", "BB", "Merge into AA", "Not needed");
+        CheckBreakdown(work, "nothing to quantify", new[]
+        {
+            new[] { "AA", "Supplied family", "", "", "", "Not a family" },
+        }, "0 families to quantify (plus 1 not a family)", "AA", "Not a family", "Not needed");
+    }
+
+    private static void CheckBreakdown(string work, string name, string[][] rows, string breakdown, string key, string decision, string matches)
+    {
+        string path = Path.Combine(work, "breakdown-" + name.Replace(' ', '-') + ".xlsx");
+        PanelImportTemplate.Write(path);
+        FillTemplate(path, rows);
+        using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(ManualChoiceFile())));
+        FinishReviewWork(() => model.LoadAsync(path));
+        FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(); await model.NextAsync(); });
+        model.SkipAllMatches();
+        FinishReviewWork(async () => { await model.NextAsync(); });
+        var row = model.SummaryFamilies.Single(f => f.Key == key);
+        bool zeroMerged = !breakdown.Contains(" merged", StringComparison.Ordinal);
+        bool zeroOthers = !breakdown.Contains("reported under others", StringComparison.Ordinal);
+        bool zeroExcluded = !breakdown.Contains("not a family", StringComparison.Ordinal);
+        Check("summary " + name + " uses the family breakdown and keeps a zero count out of the plus list",
+            model.Page == 5 && model.Summary.StartsWith(breakdown + "; ", StringComparison.Ordinal)
+            && (zeroMerged || model.Summary.Contains(" merged", StringComparison.Ordinal))
+            && (zeroOthers || model.Summary.Contains("reported under others", StringComparison.Ordinal))
+            && (zeroExcluded || model.Summary.Contains("not a family", StringComparison.Ordinal))
+            && (!zeroMerged || !model.Summary.Contains(" merged", StringComparison.Ordinal))
+            && (!zeroOthers || !model.Summary.Contains("reported under others", StringComparison.Ordinal))
+            && (!zeroExcluded || !model.Summary.Contains("not a family", StringComparison.Ordinal))
+            && row.Decision == decision && row.Matches == matches);
+        model.PanelName = "Supplied list";
+        FinishReviewWork(async () => { await model.NextAsync(); });
+        Check("done title " + name + " repeats that breakdown", model.Page == 6 && model.ImportedFamilyCount == breakdown + " imported");
     }
 
     private static void CaptureFamilyListPage(FamilyListImportWindow window, string? output, Themes.AppTheme theme, int width, int height, string page)
