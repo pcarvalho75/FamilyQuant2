@@ -88,7 +88,7 @@
                             </StackPanel>
                             <TextBlock Grid.Column="2" x:Name="TextBlockHomeStep1State" Style="{StaticResource HomeStepState}"/>
                             <Button Grid.Column="3" x:Name="ButtonHomeBuild" Click="ButtonHomeBuild_Click" MinWidth="150" VerticalAlignment="Center"
-                                    ToolTip="Builds families once per database by USearch sequence identity from a FASTA or target-decoy (.T-R) file. Skip this step and open an existing .fcf or .fqproj."/>
+                                    ToolTip="Opens Build families to group a FASTA or target-decoy database by sequence identity once per database. Skip this step to open an existing .fcf or .fqproj; Save, Discard or Cancel protects current edits before replacement."/>
                         </Grid>
                     </Border>
                     <Border Style="{StaticResource HomeStepRow}">
@@ -101,7 +101,7 @@
                             </StackPanel>
                             <TextBlock Grid.Column="2" x:Name="TextBlockHomeStep2State" Style="{StaticResource HomeStepState}"/>
                             <Button Grid.Column="3" x:Name="ButtonHomeCurate" Click="ButtonHomeCurate_Click" MinWidth="150" VerticalAlignment="Center"
-                                    ToolTip="Returns to the open project for merging, renaming, editing User IDs and locking families by hand; with none open, asks to open a .fqproj or .fcf or build families."/>
+                                    ToolTip="Shows the open families for merging, editing User IDs, renaming and locking, or offers Open project and Build families if none is open. Opening this screen makes no curation edit."/>
                         </Grid>
                     </Border>
                     <Border Style="{StaticResource HomeStepRow}">
@@ -114,7 +114,7 @@
                             </StackPanel>
                             <TextBlock Grid.Column="2" x:Name="TextBlockHomeStep3State" Style="{StaticResource HomeStepState}"/>
                             <Button Grid.Column="3" x:Name="ButtonHomeCompute" Click="ButtonHomeCompute_Click" MinWidth="150" VerticalAlignment="Center"
-                                    ToolTip="Measures every identified peptide and kept de novo precursor from RAW full isotope envelopes into the open project. Disabled until a project is open; Save afterwards to keep the result."/>
+                                    ToolTip="Opens Quantify to choose identification packages and RAW files before starting a Full XIC computation. Disabled until a project is open; Save afterwards to keep computed results."/>
                         </Grid>
                     </Border>
                     <Border Style="{StaticResource HomeStepRow}">
@@ -127,7 +127,7 @@
                             </StackPanel>
                             <TextBlock Grid.Column="2" x:Name="TextBlockHomeStep4State" Style="{StaticResource HomeStepState}"/>
                             <Button Grid.Column="3" x:Name="ButtonHomeAnalytics" Click="ButtonHomeAnalytics_Click" MinWidth="150" VerticalAlignment="Center"
-                                    ToolTip="Draws recovery figures with CSV and PNG export from stored full XIC; reads no RAW and recomputes nothing. Disabled until a project is open and changes no family."/>
+                                    ToolTip="Shows figures and tables from stored Full XIC results and reads no RAW. Disabled until a project is open; opening Results changes no families."/>
                         </Grid>
                     </Border>
                     <Border Padding="0,10,0,0">
@@ -143,7 +143,7 @@
                             </StackPanel>
                             <TextBlock Grid.Column="2" x:Name="TextBlockHomeStep5State" Style="{StaticResource HomeStepState}"/>
                             <Button Grid.Column="3" x:Name="ButtonHomeDeNovo" Click="ButtonHomeDeNovo_Click" MinWidth="150" VerticalAlignment="Center"
-                                    ToolTip="Optional inspection only: filter PEAKS or DeepNovo calls and compare them with PatternLab in a review queue. Quantify reads de novo folders itself, so this review is not needed for quantitation and changes no family or numbers."/>
+                                    ToolTip="Opens optional inspection only: filtering and comparison of de novo calls with identification evidence. This review is not needed for quantitation and changes no families or stored quantitation."/>
                         </Grid>
                     </Border>
                 </StackPanel>
@@ -151,7 +151,7 @@
             <Border Background="{DynamicResource SurfaceBrush}" Padding="16" Margin="0,0,0,18">
                 <DockPanel>
                     <Button x:Name="ButtonHomeOpen" DockPanel.Dock="Right" Content="Open project" Click="ButtonHomeOpen_Click" VerticalAlignment="Center" Margin="12,0,0,0"
-                            ToolTip="Opens a FamilyQuant project or an older Family Cluster File. Your existing files stay available."/>
+                            ToolTip="Reads a .fqproj with stored results or an older .fcf with families only. Save, Discard or Cancel protects changes before replacing the open project."/>
                     <StackPanel>
                         <TextBlock Text="Current project" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold"/>
                         <TextBlock x:Name="TextBlockHomeProject" Margin="0,8,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Foreground="{DynamicResource MutedBrush}"
@@ -173,14 +173,14 @@
                                         <Grid.ContextMenu>
                                             <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                                                 <MenuItem Header="Remove from recent projects" InputGestureText="Delete" Click="RemoveRecentProject_Click"
-                                                          ToolTip="Removes this entry from the saved list and keeps the file."/>
+                                                          ToolTip="Removes this entry from the saved recent-project list. Its file stays on disk and project Undo does not restore the entry."/>
                                             </ContextMenu>
                                         </Grid.ContextMenu>
                                         <Button Click="RecentProject_Click" IsEnabled="{Binding Exists}" ToolTip="{Binding ToolTip}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0,0,4,0">
                                             <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource TextBrush}"/>
                                         </Button>
                                         <Button Grid.Column="1" Content="×" Click="RemoveRecentProject_Click" Style="{StaticResource RecentProjectRemoveButton}"
-                                                ToolTip="Remove from recent projects" AutomationProperties.Name="Remove from recent projects"/>
+                                                ToolTip="Removes this entry from the saved recent-project list. Its file stays on disk and project Undo does not restore the entry." AutomationProperties.Name="Remove from recent projects"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -192,7 +192,7 @@
                         <TextBlock Text="Last result" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold"/>
                         <TextBlock x:Name="TextBlockLastResult" Text="No saved result yet." Foreground="{DynamicResource MutedBrush}" TextWrapping="Wrap" Margin="0,10,0,12"/>
                         <Button x:Name="ButtonHomeLastResult" Click="ButtonHomeLastResult_Click" IsEnabled="False" HorizontalAlignment="Left"
-                                ToolTip="Opens the latest known saved result, or the stored results in this session. Disabled until a result is available.">
+                                ToolTip="Shows results in the current session, or reopens the latest available saved result project. Enabled when either is available; reopening protects unsaved edits with Save, Discard or Cancel.">
                             <TextBlock Text="Open last result" Foreground="{DynamicResource MutedBrush}"/>
                         </Button>
                     </StackPanel>

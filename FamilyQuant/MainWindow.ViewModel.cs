@@ -15,8 +15,20 @@ public sealed class ShellNavigationItem : INotifyPropertyChanged
     public bool IsEnabled { get; private set; }
     public bool IsSelected { get; private set; }
     public string StateText { get; private set; } = "";
-    public string ToolTip => IsEnabled ? "Opens " + Label + " using the existing workflow. Keyboard shortcut: " + Shortcut + "."
-        : StateText + ". Open a project or finish the current operation to continue.";
+    public string ToolTip => !IsEnabled
+        ? StateText == "Operation in progress"
+            ? "Unavailable while an operation is running. Wait for it to finish or cancel it before changing screens."
+            : "Unavailable until a project is open" + (Destination == ShellDestination.Results ? " or a homology search has completed" : "")
+                + ". Open a project with File > Open to continue."
+        : Destination switch
+        {
+            ShellDestination.Build => "Opens Build families to choose a database and sequence identity. Save, Discard or Cancel protects edits before replacing the open project.",
+            ShellDestination.Families => "Shows the open families for curation, or offers Open project and Build families if none is open. Opening this screen makes no curation edit.",
+            ShellDestination.Quantify => "Opens Quantify to choose identification packages and RAW files for Full XIC. Opening this screen computes nothing.",
+            ShellDestination.Results => "Shows figures and tables from stored quantitation or completed homology results. Opening Results does not regroup families or read RAW files.",
+            ShellDestination.DeNovo => "Opens optional filtering and comparison of de novo calls with identification evidence. Opening this screen changes no families or stored quantitation.",
+            _ => "Returns to Home while keeping the open project and unsaved edits. Opening Home changes no project data."
+        };
     /// <summary>Alt and the step number, as Home numbers the steps.</summary>
     public string Shortcut => "Alt+" + Number.ToString(System.Globalization.CultureInfo.InvariantCulture);
     public event PropertyChangedEventHandler? PropertyChanged;

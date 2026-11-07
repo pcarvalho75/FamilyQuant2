@@ -107,7 +107,6 @@ internal static partial class Program
                     model.SelectedSpecialRow.Action = FamilyPanelRowAction.Import; model.UseRowChoice();
                     Check(label + " accepting the proposed duplicate rename keeps the multi-name choice pending", newKey.Length > 0
                         && model.SpecialRows.Any(r => r.Chosen && r.Key == newKey) && !model.CanNext);
-                    Check(label + " one pending special row uses singular grammar", model.SpecialRows.Count(r => r.Blocking) != 1 || model.SpecialSummary == "1 row needs a choice");
                     model.SelectedSpecialRow = model.SpecialRows.Single(r => r.SeveralNames && r.Parts.Count == 4 && r.Blocking);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "04-special-rows");
                     var partKeys = model.SelectedSpecialRow.Parts.Select(p => p.Key).ToArray();
@@ -150,6 +149,12 @@ internal static partial class Program
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " Import is one panel publication and retains every protein's state", model.Page == 6 && model.Imported && model.CanUndo
                         && file.FamilyPanel!.Name == "Imported example list" && curation.UndoStack.Count == 1 && JsonSerializer.Serialize(file.MyExtendedFastaItems) == proteinsBefore);
+                    Check(label + " Done explains the UniProt read and explicit proposal step", model.Explanation.Contains("Read database and scope", StringComparison.Ordinal)
+                        && model.Explanation.Contains("Update proposal", StringComparison.Ordinal) && model.Explanation.Contains("UniProt", StringComparison.Ordinal)
+                        && model.Explanation.Contains("minutes", StringComparison.Ordinal) && !model.Explanation.Contains('\n'));
+                    Check(label + " Done distinguishes label matching from moving proteins", window.FindName("MatchingEffectNote") is TextBlock note
+                        && note.Text.Contains("Matching labels families", StringComparison.Ordinal) && note.Text.Contains("Place outside matches", StringComparison.Ordinal)
+                        && note.Text.Contains("Apply grouping", StringComparison.Ordinal) && !note.Text.Contains('\n'));
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "07-done");
                     string saved = file.ToJsonText();
                     var reopened = FamilyClusterFile.FromJsonText(saved);
@@ -174,7 +179,23 @@ internal static partial class Program
         Check("the real example input is byte-identical after every wizard walk", Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(workbook))) == sourceHash);
         FamilyListImportGuardTests(workbook, work);
         FamilyListImportMatchTests(output);
+        FamilyListImportCountGrammarTests();
+        FamilyListDecisionHintTests(workbook);
         FamilyListChecklistHandoffTests();
+    }
+
+    private static void FamilyListImportCountGrammarTests()
+    {
+        using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(ManualChoiceFile())));
+        model.SpecialRows.Add(new ImportSpecialRow { RowNumber = 1, Blocking = true, Message = "Choose this row's action." });
+        Check("exactly one unresolved special row uses singular grammar", model.SpecialRows.Count(r => r.Blocking) == 1
+            && model.SpecialSummary == "1 row needs a choice");
+        model.Decisions.Add(new ImportDecisionChoice { Source = "Supplied choice", Decision = FamilyPanelDecision.Quantify });
+        Check("exactly one unconfirmed decision uses singular grammar", model.Decisions.Count == 1 && model.DecisionSummary == "1 value to review");
+        model.Decisions[0].Confirmed = true;
+        Check("exactly one confirmed decision uses singular grammar", model.Decisions.Count == 1 && model.DecisionSummary == "1 value confirmed");
+        model.Decisions.Add(new ImportDecisionChoice { Source = "Another choice", Decision = FamilyPanelDecision.NotAFamily, Confirmed = true });
+        Check("two confirmed decisions retain plural grammar", model.Decisions.Count == 2 && model.DecisionSummary == "2 values confirmed");
     }
 
     private static void CaptureFamilyListPage(FamilyListImportWindow window, string? output, Themes.AppTheme theme, int width, int height, string page)

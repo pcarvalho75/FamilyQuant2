@@ -95,12 +95,12 @@ public partial class MainWindow
             var item = new MenuItem
             {
                 Header = Path.GetFileName(path).Replace("_", "__"),
-                ToolTip = "Opens this recent project: " + path,
+                ToolTip = "Reopens this saved project after Save, Discard or Cancel protects current edits. File: " + path,
                 Tag = path
             };
             item.Click += async (_, _) => await OpenProjectSafelyAsync(path);
             var remove = new MenuItem { Header = "Remove from recent projects", InputGestureText = "Delete",
-                ToolTip = "Removes this entry from the saved list and keeps the file." };
+                ToolTip = "Removes this entry from the saved recent-project list. Its file stays on disk and project Undo does not restore the entry." };
             remove.Click += (_, e) => { e.Handled = true; RemoveRecentProject(path); };
             item.ContextMenu = new ContextMenu { Items = { remove } };
             item.PreviewKeyDown += (_, e) =>
@@ -113,7 +113,7 @@ public partial class MainWindow
         }
         if (MenuItemRecent.Items.Count == 0)
             MenuItemRecent.Items.Add(new MenuItem { Header = "No recent projects", IsEnabled = false,
-                ToolTip = "Open or save a project to add it to this list." });
+                ToolTip = "Unavailable because no recent project file is available. Open or save a project to add an entry to this list." });
     }
 
     private string? ChooseOpenProjectPath()

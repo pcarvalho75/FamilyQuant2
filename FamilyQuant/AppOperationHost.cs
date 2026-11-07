@@ -83,6 +83,10 @@ public sealed class AppOperationHost : ScreenViewModel
     public bool IsIndeterminate => !total.HasValue || total <= 0;
     public double Percent => IsIndeterminate ? 0 : Math.Clamp(100d * (completed ?? 0) / total!.Value, 0, 100);
     public ScreenCommand CancelCommand { get; }
+    public string CancelHint => !IsBusy ? "Unavailable because no operation is running. Start an operation before requesting cancellation."
+        : IsCancelling ? "Cancellation has already been requested. Wait for the current phase to stop; previously published results stay available."
+        : active?.Context.HasCommitted == true ? "Unavailable because this operation has already published its change. Wait for it to finish; project Undo can reverse supported curation edits, but not files written to disk."
+        : "Requests cancellation at the next cancellation point before the operation publishes its change. Previously published results stay available.";
     public event EventHandler<OperationProgress>? ProgressReported;
     public TimeSpan Elapsed { get { lock (lifetime) return startedAt == default ? TimeSpan.Zero : Nonnegative((endedAt ?? DateTimeOffset.UtcNow) - startedAt); } }
     public TimeSpan SinceLastStep { get { lock (lifetime) return lastStepAt == default ? TimeSpan.Zero : Nonnegative((endedAt ?? DateTimeOffset.UtcNow) - lastStepAt); } }
