@@ -28,6 +28,7 @@ internal static partial class Program
     private static void PanelLinkNotesTests()
     {
         Section("J37 optional panel link notes");
+        PanelLinkChoiceFilterTests();
         var file = PanelEvidenceFile();
         string before = file.ToJsonText();
         var session = new EvidenceGroupingSession(file, "fixture");
