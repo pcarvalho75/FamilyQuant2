@@ -70,7 +70,7 @@ internal static partial class Program
         Themes.ThemeManager.Apply(dark ? Themes.AppTheme.Dark : Themes.AppTheme.Light);
         var curation = new CurationViewModel(file);
         var model = new FamilyListImportViewModel(new FamilyListImportTransaction(curation), matcher: new FamilyListStoredEvidenceMatches(file),
-            workbookSource: new FamilyListWorkbookCoreSource());
+            workbookSource: new FamilyListWorkbookCoreSource(), openWorkbookReview: true);
         var window = new FamilyListImportWindow(model, path => ExampleFamilyList.Write(path), PanelImportTemplate.Write)
         { Width = 1366, Height = 768, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual,
             WindowStyle = WindowStyle.None, ResizeMode = ResizeMode.NoResize, ShowActivated = false, ShowInTaskbar = false };
@@ -91,9 +91,20 @@ internal static partial class Program
             // The real path holds this computer's temporary folder; the picture shows a generic documents path instead.
             var pathBox = (TextBox)window.FindName("WorkbookPathBox");
             pathBox.Text = @"C:\Users\you\Documents\example-family-list.xlsx";
+            // Z16a8 (Z16a9): the whole workbook is read at once and the wizard opens on Review your workbook, as File > Import
+            // family list does. The four decision labels the legend leaves unclear and the special rows wait for her, so Accept
+            // and import is unavailable; nothing is confirmed and the project has no panel yet.
+            Check("guide: the example opens on Review your workbook, with its eight parts and her open choices",
+                model.ReviewingWorkbook && model.Title == "Review your workbook" && model.ForwardLabel == "Accept and import" && model.WorkbookSections.Count == 8
+                && !model.CanAcceptWorkbook && model.WorkbookHasReviewProblems && model.WorkbookSections.Single(s => s.Key == "decisions").NeedsChoice
+                && model.WorkbookSections.Single(s => s.Key == "rows").NeedsChoice && model.Decisions.All(d => !d.Confirmed)
+                && model.SubclassChoices.Count > 0 && model.SubclassChoices.All(c => !c.Confirmed) && file.FamilyPanel == null,
+                string.Join(" | ", model.WorkbookSections.Select(s => s.Title + ": " + s.Summary)));
+            Shot("02-workbook");
+            FinishReviewWork(() => model.ReviewWorkbookSectionAsync("sheets")); PumpDispatcher();
             // Z16a8: the six sheets of the example, each with its role; the three notes sheets and the legend's text are kept.
-            Check("guide: File and sheet opens on the workbook map of the six example sheets",
-                model.HasWorkbookMap && model.WorkbookSheets.Count == 6 && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.Notes) == 3
+            Check("guide: Review on Workbook sheets opens File and sheet on the map of the six example sheets",
+                model.Page == 1 && model.HasWorkbookMap && model.WorkbookSheets.Count == 6 && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.Notes) == 3
                 && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.FamilyList) == 1 && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.ColorLegend) == 1
                 && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.SubclassTable) == 1 && model.WorkbookSheets.All(s => s.Review == "Proposed")
                 && model.KeptNotes.Count == 4 && model.KeptNotesSummary.StartsWith("Notes kept: ", StringComparison.Ordinal)
@@ -102,28 +113,32 @@ internal static partial class Program
             Shot("02-workbook-map");
             ((TabControl)window.FindName("WorkbookTabs")).SelectedItem = window.FindName("SheetPreviewTab"); PumpDispatcher();
             Shot("02-file-and-sheet");
-            Check("guide: the example opens on its sheet with header row 3", model.Page == 1 && model.Preview?.ProposedHeaderRow == 3);
+            Check("guide: the example's family list has its header row 3", model.Preview?.ProposedHeaderRow == 3);
             ((Button)window.FindName("ForwardButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
-            // Z16a8: the legend's labels are the values of Decisão FamilyQuant, so that column is proposed as Decision and Next
-            // opens its values at once, each with its meaning from the legend; nothing is confirmed, and unclear meanings stay empty.
-            Check("guide: Next opens the eight decision values of the legend's column, each with its meaning, none confirmed",
-                model.Page == 2 && model.ReviewingDecisions && model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header == "Decisão FamilyQuant"
-                && model.Decisions.Count == 8 && model.Decisions.All(d => d.Meaning.Length > 0 && !d.Confirmed) && model.Decisions.Any(d => d.Decision == null)
+            // Z16a8: the legend's labels are the values of Decisão FamilyQuant and its colours those of Sigla, so both columns are
+            // proposed, with Subclasses for the subclass names; each colour starts with the legend's name, or with its plain name
+            // when the legend gives that colour two names.
+            Check("guide: Columns shows the columns proposed from the legend and each fill named from it",
+                model.Page == 2 && !model.ReviewingDecisions && model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header == "Decisão FamilyQuant"
+                && model.ColorColumn?.Header == "Sigla" && model.Columns.Any(c => c.Header == "Subclasses")
+                && model.SourceColorChoices.Count == 6 && model.SourceColorChoices.Count(c => c.Label != c.ColorName) == 4
+                && model.SourceColorChoices.Any(c => c.ColorName == "light turquoise" && c.Label == "Núcleo")
+                && model.SourceColorChoices.Any(c => c.ColorName == "light grey" && c.Label == "light grey"),
+                string.Join(", ", model.Columns.Select(c => c.Label + "=" + c.Header)) + "; " + string.Join(", ", model.SourceColorChoices.Select(c => c.ColorName + "=" + c.Label)));
+            Shot("03-columns");
+            // The colour categories sit below the column choices; the picture of them is taken with the page scrolled to them.
+            var colours = (Expander)window.FindName("ColourCategories");
+            colours.BringIntoView(); PumpDispatcher();
+            Check("guide: Colour categories is open below the column choices", colours.IsExpanded && colours.IsVisible);
+            Shot("03-columns-colours");
+            ((Button)WalkTree(window).OfType<Button>().First(b => b.Content as string == "Review decision values")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
+            // Z16a8: each value with its meaning from the legend; nothing is confirmed, and unclear meanings stay empty.
+            Check("guide: Review decision values shows the eight values with their meanings, four proposed, four empty, none confirmed",
+                model.ReviewingDecisions && model.Decisions.Count == 8 && model.Decisions.All(d => d.Meaning.Length > 0 && !d.Confirmed)
+                && model.Decisions.Count(d => d.Decision == null) == 4
                 && model.Decisions.Any(d => d.Decision == FamilyPanelDecision.MergeIntoAnotherFamily && d.MergeTarget == "LEC") && !model.CanNext,
                 string.Join("; ", model.Decisions.Select(d => d.Source + " -> " + (d.Decision?.ToString() ?? "(empty)") + " " + d.MergeTarget)));
             Shot("03-columns-decisions");
-            ((Button)WalkTree(window).OfType<Button>().First(b => b.Content as string == "Back to columns")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
-            // Z12p2c1: the abbreviation cells carry the example's fills, so they become colour categories. Z16a8: each starts
-            // with the legend's name, or with its plain name when the legend gives that colour two names.
-            if (model.ColorColumn!.Header != "Sigla") model.ColorColumn.Header = model.ColorColumn.Headers.First(h => h == "Sigla");
-            PumpDispatcher();
-            Check("guide: back on Columns, each fill starts with the legend's name, or its plain name when the legend names it twice",
-                !model.ReviewingDecisions && model.SourceColorChoices.Count == 6 && model.SourceColorChoices.Count(c => c.Label != c.ColorName) == 4
-                && model.SourceColorChoices.Any(c => c.ColorName == "light turquoise" && c.Label == "Núcleo")
-                && model.SourceColorChoices.Any(c => c.ColorName == "light grey" && c.Label == "light grey"),
-                string.Join(", ", model.SourceColorChoices.Select(c => c.ColorName + "=" + c.Label)));
-            Shot("03-columns");
-            ((Button)WalkTree(window).OfType<Button>().First(b => b.Content as string == "Review decision values")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
             // Her choices for the four labels the legend leaves empty, as a reader of this example would make them: the
             // families out of the total stay out, and the optional, conditional and pending ones are kept for now.
             foreach (var open in model.Decisions.Where(d => d.Decision == null))
@@ -158,12 +173,28 @@ internal static partial class Program
             while (model.MatchFamilies.FirstOrDefault(f => !f.Decided) is { } next) { model.SelectedMatchFamily = next; model.SkipMatch(); }
             FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
             model.PanelName = "Example family list";
-            Check("guide: Summary shows the colour category of the families that have one", model.SummaryFamilies.Any(f => !string.IsNullOrEmpty(f.Color)));
+            Check("guide: Summary shows the colour category of the families that have one, and goes back to the workbook review",
+                model.Page == 5 && model.SummaryFamilies.Any(f => !string.IsNullOrEmpty(f.Color)) && model.ForwardLabel == "Review workbook");
             Shot("06-summary");
             FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
+            // Z16a8 (Z16a5, Z16a9): the subclasses the table proposes, each with its domain rules, in the draft and unconfirmed.
+            FinishReviewWork(() => model.ReviewWorkbookSectionAsync("subclasses")); PumpDispatcher();
+            model.SelectedSubclass = model.SubclassChoices.First(c => c.Family == "MMP"); PumpDispatcher();
+            Check("guide: Review on Subclass proposals opens the subclasses proposed from 2. Subclasses, none confirmed",
+                model.ReviewingSubclasses && model.Title == "Review subclass proposals" && model.SubclassChoices.All(c => !c.Confirmed)
+                && model.SelectedSubclass.Rules.Any(r => r.Accession == "PF00413") && model.SelectedSubclass.Rules.Any(r => r.Accession == "PF00045"),
+                string.Join("; ", model.SubclassChoices.Select(c => c.Family + "/" + c.Title + " " + string.Join(",", c.Rules.Select(r => r.Accession + " " + r.Kind)))));
+            Shot("05-subclasses");
+            model.Back(); PumpDispatcher();
+            Check("guide: back on Review your workbook, Accept and import is available once her choices are made",
+                model.ReviewingWorkbook && model.CanAcceptWorkbook && !model.WorkbookHasReviewProblems && file.FamilyPanel == null, model.WorkbookReviewStatus);
+            Shot("06-accept");
+            int subclasses = model.SubclassChoices.Count(c => c.Use);
+            FinishReviewWork(async () => { await model.NextAsync(_ => true); }); PumpDispatcher();
             Shot("07-done");
-            Check("guide: imported, with the three notes sheets and the legend's text kept as source notes", model.Imported && file.FamilyPanel?.Name == "Example family list"
-                && file.FamilyPanel.SourceNotes.Count == 4);
+            Check("guide: Accept and import imports the panel with the notes kept and the subclasses left in the draft", model.Imported
+                && file.FamilyPanel?.Name == "Example family list" && file.FamilyPanel.SourceNotes.Count == 4
+                && file.FamilyPanel.Families.Sum(f => f.Subclasses.Count) == subclasses && curation.UndoStack.Count == 1);
             Check("guide: the generated workbook is written under the output folder", Path.GetFullPath(workbook)
                 .StartsWith(Path.GetFullPath(output).TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase), workbook);
         }

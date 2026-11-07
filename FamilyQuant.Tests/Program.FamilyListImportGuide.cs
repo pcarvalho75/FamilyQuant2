@@ -27,7 +27,7 @@ internal static partial class Program
     /// routes that save matches later, and the window that shows it.</summary>
     private static void FamilyListImportGuideTests(string? output = null)
     {
-        Section("Import guide: the Help chapter for File > Import family list (Z12p2c, Z12p2c1)");
+        Section("Import guide: the Help chapter for File > Import family list (Z12p2c, Z12p2c1, Z16a8)");
         EnsureApplication();
         var sections = FamilyListImportGuide.Sections;
         string text = FamilyListImportGuide.Text();
@@ -41,21 +41,22 @@ internal static partial class Program
             && sections.Where(s => char.IsDigit(s.Title[0])).Select(s => s.Title[0]).SequenceEqual(sections.Where(s => char.IsDigit(s.Title[0])).Select(s => s.Title[0]).OrderBy(c => c)));
         Check("the Columns page has its decision review and Special rows its repeated abbreviation", sections.Any(s => s.Key == "decisions") && sections.Any(s => s.Key == "duplicate"));
         // Z16a8 (W21, D81): a workbook with several sheets, read at once, with nothing set before her one press.
-        Check("the chapter covers a workbook with several sheets: the page that reads it all, the map, the subclass table",
-            new[] { "workbook", "file", "preview", "subclasses" }.All(key => sections.Any(s => s.Key == key))
-            && text.Contains("One press accepts everything on the page", StringComparison.Ordinal) && text.Contains("nothing is set before it", StringComparison.Ordinal)
+        Check("the chapter covers a workbook with several sheets: Review your workbook, the map, colours, subclasses and the one press",
+            new[] { "workbook", "file", "preview", "colours", "subclasses", "accept" }.All(key => sections.Any(s => s.Key == key))
+            && text.Contains("it accepts everything the page shows, exactly as shown", StringComparison.Ordinal)
+            && text.Contains("that press is your confirmation, and nothing is set before it", StringComparison.Ordinal)
             && text.Contains("it never guesses", StringComparison.Ordinal) && text.Contains("never by their names", StringComparison.Ordinal));
         Check("the chapter keeps every workbook proposal her choice: legend meanings, her Pfam domains, subclass rules, notes",
             text.Contains("each line is still your choice", StringComparison.Ordinal) && text.Contains("the action is left empty for you to choose", StringComparison.Ordinal)
             && text.Contains("because they are your own statement", StringComparison.Ordinal) && text.Contains("Untick any you do not want", StringComparison.Ordinal)
-            && text.Contains("Nothing becomes a rule until you confirm it", StringComparison.Ordinal) && text.Contains("never read as families or as rules", StringComparison.Ordinal));
+            && text.Contains("Nothing becomes a rule until you press Accept and import", StringComparison.Ordinal) && text.Contains("never read as families or as rules", StringComparison.Ordinal));
         var pictured = FamilyListImportGuide.Pictured.ToList();
         var loaded = pictured.Select(s =>
         {
             try { var image = new BitmapImage(FamilyListImportGuide.ImageUri(s)); return (Section: s, image.PixelWidth, image.PixelHeight); }
             catch (Exception ex) when (ex is IOException or NotSupportedException) { return (Section: s, PixelWidth: 0, PixelHeight: 0); }
         }).ToList();
-        Check("every wizard page has its picture inside the program, at 1366 x 768", pictured.Count == 10
+        Check("every wizard page has its picture inside the program, at 1366 x 768", pictured.Count == 14
             && loaded.All(p => p.PixelWidth == 1366 && p.PixelHeight == 768), string.Join(", ", loaded.Where(p => p.PixelWidth != 1366).Select(p => p.Section.Image)));
         Check("embedded guide pictures match the current native source captures", pictured.All(section =>
         {
@@ -79,6 +80,11 @@ internal static partial class Program
             "Use as (proposed)", "Merge into abbreviation", "Source colour", "Source rows", "Category name",
             // Z16a8 (Z16a4): her Pfam domains on Evidence matches.
             "Pfam domain", "from your sheet",
+            // Z16a8 (Z16a9, Z16a5): Review your workbook, its parts and the subclass review.
+            "Review your workbook", "Accept and import", "Review findings", "Back to workbook review", "Review workbook", "Family list and columns",
+            "Source categories", "Decision labels", "Family rows", "Pfam and evidence matches", "Subclass proposals", "All findings", "Could not place",
+            "Families", "Special rows", "Subclasses", "Review subclass proposals", "Include subclass", "Include rule", "Leave out", "Required Pfam",
+            "Absent Pfam", "Check choices", "Keep subclass choices", "Family key", "Subclass key", "Display name", "Pfam rules", "Column with coloured cells",
         };
         Check("the chapter names the wizard's controls and choices with the program's own words", labels.All(text.Contains) && text.Contains("File > Save", StringComparison.Ordinal),
             string.Join(", ", labels.Where(l => !text.Contains(l))));
@@ -86,7 +92,8 @@ internal static partial class Program
         string repository = GoldenNumbers.FindRepository();
         string program = string.Concat(new[] { "FamilyListImportWindow.xaml", "FamilyListImportViewModel.cs", "FamilyListImportViewModel.Rows.cs",
                 "FamilyListImportViewModel.Commit.cs", "FamilyListImportModels.cs", "SuperClusterPreviewWindow.xaml", "PanelEditorWindow.xaml",
-                "MainWindow.xaml", "ClusterGenerationControl.xaml", "FamilyListImportWorkbookModels.cs", "FamilyListImportViewModel.Workbook.cs", "FamilyListStoredEvidenceMatches.cs" }
+                "MainWindow.xaml", "ClusterGenerationControl.xaml", "FamilyListImportWorkbookModels.cs", "FamilyListImportViewModel.Workbook.cs", "FamilyListStoredEvidenceMatches.cs",
+                "FamilyListImportViewModel.Overview.cs", "FamilyListWorkbookOverview.xaml", "FamilyListSubclassReview.xaml", "FamilyListSubclassReviewModels.cs" }
             .Select(name => File.ReadAllText(Path.Combine(repository, "FamilyQuant", name))));
         Check("every control the chapter names is a label in the program's sources", labels.All(l => program.Contains("\"" + l + "\"", StringComparison.Ordinal)
             || program.Contains("\"" + l + "...\"", StringComparison.Ordinal)),
