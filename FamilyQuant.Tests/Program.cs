@@ -263,6 +263,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => EvidenceStorageTests(workDir));
             suite.Add(() => DomainPositionTests(Path.Combine(workDir, "domain-positions")));
             suite.Add(() => PanelSpreadsheetTests(Path.Combine(workDir, "panel-spreadsheet")));
+            suite.Add(() => PanelImportGracefulTests(Path.Combine(workDir, "panel-import-graceful")));
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
             suite.Section("Panel, threshold, template and report Help");
             suite.Add(() => PanelAuditTests());

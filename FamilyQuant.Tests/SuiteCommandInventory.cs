@@ -334,6 +334,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-panel-multiscope-audit", "FamilyQuant.Tests.Program.PanelMultiScopeAuditTests()"),
         SuiteCommandRule.Covered("--test-panel-pfam", "FamilyQuant.Tests.Program.PanelPfamTests()"),
         SuiteCommandRule.Covered("--test-panel-spreadsheet", "FamilyQuant.Tests.Program.PanelSpreadsheetTests(System.String)"),
+        SuiteCommandRule.Covered("--test-panel-import-graceful", "FamilyQuant.Tests.Program.PanelImportGracefulTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-template", "FamilyQuant.Tests.Program.PanelTemplateTests()"),
         SuiteCommandRule.Covered("--test-project-command-ready", "FamilyQuant.Tests.Program.ProjectCommandReadyTests(System.String)"),
         SuiteCommandRule.Excluded("--test-project-figure-export", "Requires a selected saved project and output; cost depends on its protein/figure counts and caches, so no data-independent sub-minute or quick-budget bound is claimed. Bounded synthetic FigureLimitTests are enrolled separately."),
