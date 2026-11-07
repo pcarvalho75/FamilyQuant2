@@ -48,11 +48,14 @@ internal static partial class Program
             var pdb = provider.GetMetadataReader();
             var methods = assembly.GetTypes().SelectMany(type => type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
                 .Cast<MethodBase>().Concat(type.GetConstructors(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)));
-            // EvidenceUndo.cs:28 instantiates this generic clone with the complete provenance graph.
-            // Resolve its body with that actual type argument so Serialize<T> cannot hide the string.
+            // Follow the actual undo call's generic provenance argument. Resolve that constructed
+            // body so Serialize<T> cannot hide a string, while an unused generic helper is irrelevant.
             if (assembly == typeof(EvidenceApply).Assembly)
-                methods = methods.Append(typeof(EvidenceApply).GetMethod("Clone", BindingFlags.Static | BindingFlags.NonPublic)!
-                    .MakeGenericMethod(typeof(EvidenceProvenance)));
+                methods = methods.Concat(typeof(GroupingSnapshot).GetMethods(BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                    .Where(method => method.Name is "CaptureEvidence" or "RestoreEvidence")
+                    .SelectMany(method => CurationCallerInstructions(method)).Select(call => call.Called).OfType<MethodInfo>()
+                    .Where(method => method.DeclaringType?.Assembly == assembly && method.IsGenericMethod
+                        && method.GetGenericArguments().Contains(typeof(EvidenceProvenance))).Distinct());
             foreach (var method in methods)
             {
                 var debug = pdb.GetMethodDebugInformation(MetadataTokens.MethodDefinitionHandle(method.MetadataToken & 0x00ffffff));
