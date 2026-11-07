@@ -340,6 +340,22 @@ internal static partial class Program
                     Check(theme + " Z16a9 hosted mode removes duplicate introduction without hiding source details",
                         ((FrameworkElement)control.FindName("Introduction")).Visibility == Visibility.Collapsed
                         && ((FrameworkElement)control.FindName("DetailScroll")).IsVisible && control.CaptureAcceptances()[0].Accepted);
+                    string beforeCensus = JsonSerializer.Serialize(control.CaptureAcceptances());
+                    var census = new CensusCollector();
+                    foreach (var row in draftRows)
+                    {
+                        control.SelectedSubclass = row; list.ScrollIntoView(row); PumpDispatcher(); window.UpdateLayout();
+                        census.Collect(control);
+                    }
+                    var missingCensus = census.Rows.Where(row => row.Status != "OK" && !CensusInformationalKinds.Contains(row.Kind)).ToArray();
+                    var requiredKinds = new[] { "check box", "combo box", "input box", "read-only text", "list", "button", "expander" };
+                    Check(theme + " Z16a9 shared suite census covers every source state without missing or repeating tooltips",
+                        requiredKinds.All(kind => census.Rows.Any(row => row.Kind == kind)) && missingCensus.Length == 0,
+                        "kinds=" + string.Join(",", census.Rows.Select(row => row.Kind).Distinct(StringComparer.Ordinal)) + "; "
+                        + string.Join("; ", missingCensus.Select(row => row.Kind + ":" + row.Label + ":" + row.Status)));
+                    Check(theme + " Z16a9 shared census wording rules pass without editing draft acceptance", census.Rows.All(row => row.Wording.Length == 0)
+                        && JsonSerializer.Serialize(control.CaptureAcceptances()) == beforeCensus,
+                        string.Join("; ", census.Rows.Where(row => row.Wording.Length > 0).Select(row => row.Wording + ":" + row.Label)));
                 }
                 finally { window.Close(); PumpDispatcher(); }
             }
