@@ -78,6 +78,7 @@ internal static partial class Program
                         opens == 1 && state.Evidence!.SelectedChecklistFamily?.Matches == 0 && file.ToJsonText() == before);
                     review.PanelMatchesDialogOverride = editor =>
                     {
+                        editor.BroadMatchConfirmation = _ => true;
                         editor.Rows.Single(row => row.Kind == PanelEvidenceMatchKind.UniProtFamily).Selected = true; return true;
                     };
                     button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); review.UpdateLayout(); PumpDispatcher();
@@ -157,7 +158,7 @@ internal static partial class Program
         var modalFile = EvidenceMatchingFile(); var modalSnapshot = new PanelEvidenceMatching(modalFile);
         var modalModel = new PanelEvidenceMatchViewModel(new(modalSnapshot, modalFile.FamilyPanel!.Families[0], null, () => modalSnapshot.IsCurrent(modalFile)));
         modalModel.Rows[0].Selected = true;
-        var modal = new PanelEvidenceMatchWindow(modalModel) { ShowInTaskbar = false, ShowActivated = false };
+        var modal = new PanelEvidenceMatchWindow(modalModel) { ShowInTaskbar = false, ShowActivated = false, BroadMatchConfirmationOverride = _ => true };
         modal.Loaded += (_, _) => modal.Dispatcher.BeginInvoke(new Action(() =>
             ((Button)modal.FindName("ConfirmMatchLabelsButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent))));
         Check("Z12p4 native modal confirmation returns only checked user choices", modal.ShowDialog() == true

@@ -71,6 +71,7 @@ public sealed class PanelEvidenceMatchViewModel : ScreenViewModel
     public ObservableCollection<PanelEvidenceMatchRow> VisibleRows { get; } = new();
     public bool ShowMore { get => showMore; set { if (Set(ref showMore, value)) RefreshVisibleRows(); } }
     public string FamilyMatchStatus { get; }
+    public Func<string, bool>? BroadMatchConfirmation { get; set; }
     public bool CanConfirm => !stale && error.Length == 0 && Rows.Where(row => row.Selected).All(row => row.IsValid);
     public string ConfirmHint => stale ? "Close this window and reopen the matches to review the changed stored evidence."
         : Rows.Any(row => row.Selected && !row.IsValid) ? "Fill in or untick each empty selected label before confirming."
@@ -110,14 +111,19 @@ public sealed class PanelEvidenceMatchViewModel : ScreenViewModel
         var row = new PanelEvidenceMatchRow(context.Evidence, new(PanelEvidenceMatchKind.UniProtFamily, "", "", 0, 0, "Enter your evidence label."), true, NotifySelection);
         Rows.Add(row); return row;
     }
-    public bool TryConfirm(out PanelConfirmedEvidenceMatches? confirmed)
+    public bool TryConfirm(out PanelConfirmedEvidenceMatches? confirmed, Func<string, bool>? confirmBroad = null)
     {
         confirmed = null;
         if (!context.IsCurrent()) { stale = true; error = "Stored evidence changed. Close this window and reopen the matches."; NotifySelection(false); return false; }
         if (!CanConfirm) return false;
         try
         {
-            confirmed = PanelEvidenceMatching.Confirm(names, Rows.Where(row => row.Selected).Select(row => new PanelEvidenceChoice(row.Kind, row.Value)));
+            var choices = Rows.Where(row => row.Selected).Select(row => new PanelEvidenceChoice(row.Kind, row.Value)).ToArray();
+            string warning = context.Evidence.ConfirmationWarning(choices);
+            if (warning.Length > 0 && (confirmBroad ?? BroadMatchConfirmation)?.Invoke(warning) != true) return false;
+            if (!context.IsCurrent()) { stale = true; error = "Stored evidence changed. Close this window and reopen the matches."; NotifySelection(false); return false; }
+            if (!choices.SequenceEqual(Rows.Where(row => row.Selected).Select(row => new PanelEvidenceChoice(row.Kind, row.Value)))) return false;
+            confirmed = PanelEvidenceMatching.Confirm(names, choices);
             return true;
         }
         catch (ArgumentException invalid) { error = invalid.Message; NotifySelection(false); return false; }

@@ -100,7 +100,7 @@ internal static partial class Program
                     ScreenHarness.Save(window, Path.Combine(output, "ranking-more-" + theme + ".png"), 1180, 680);
                     var selected = model.Rows.Single(row => row.Value == "Shared catalogue tag"); selected.Selected = true; model.ShowMore = false; PumpDispatcher();
                     Check("Z12p5a " + theme + " selected additional labels stay visible and return only by explicit confirmation",
-                        grid.Items.Contains(selected) && model.TryConfirm(out var record) && record!.Choices.Single().Value == selected.Value
+                        grid.Items.Contains(selected) && model.TryConfirm(out var record, _ => true) && record!.Choices.Single().Value == selected.Value
                         && panel.ConfirmedEvidenceMatches == null);
                     Check("Z12p5a " + theme + " normal confirmation hint explains the draft and Undo", model.ConfirmHint.Contains("draft", StringComparison.Ordinal) && model.ConfirmHint.Contains("Undo", StringComparison.Ordinal));
                     var blank = model.AddLabel();
