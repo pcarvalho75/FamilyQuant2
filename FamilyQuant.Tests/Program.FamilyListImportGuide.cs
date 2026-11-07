@@ -79,6 +79,10 @@ internal static partial class Program
         Check("the chapter quotes the wizard's own lines: decisions, the Quantify question and the Done page",
             text.Contains(FamilyListImportHelp.DecisionsSummary, StringComparison.Ordinal) && text.Contains(FamilyListImportHelp.DoneNext, StringComparison.Ordinal)
             && text.Contains(FamilyListImportHelp.MatchingEffect, StringComparison.Ordinal)
+            // The chapter's own sentences around the Done lines assume this wording (Z12p5g, 7b2cfc75): the read starts by
+            // itself, and proteins move only after a scope change or a hand placement plus Apply grouping.
+            && FamilyListImportHelp.DoneNext.Contains("reads the database and scope by itself", StringComparison.Ordinal)
+            && FamilyListImportHelp.MatchingEffect.Contains("place them by hand, then Apply grouping", StringComparison.Ordinal)
             && program.Contains("Quantify every family for this import?", StringComparison.Ordinal) && text.Contains("Quantify every family for this import?", StringComparison.Ordinal)
             && program.Contains("\"Could \" + DecisionHint + \" hold the family actions?\"", StringComparison.Ordinal) && text.Contains("hold the family actions?", StringComparison.Ordinal));
         Check("the chapter says there is no conditional action and that the program's own labels are confirmed at once",
@@ -92,6 +96,7 @@ internal static partial class Program
         Check("no em or en dash in the chapter", !text.Contains('\u2013') && !text.Contains('\u2014'));
         string index = File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "docs", "INDEX.md"));
         Check("docs/INDEX.md lists the command that takes the chapter's pictures", index.Contains("`--import-guide-screens <output-dir> [--dark]`", StringComparison.Ordinal));
+        // F1 and Help wiring is FQHome's: --test-import-help-routes runs it in the suite.
 
         var previousTheme = Themes.ThemeManager.Current;
         try
