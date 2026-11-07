@@ -223,7 +223,7 @@
                                   ToolTip="{x:Static core:IdentifierText.HideContaminantsToolTip}"/>
                         <CheckBox x:Name="CheckBoxShowXICOnly" Content="Show quantified families only"
                                   Checked="CheckBoxShowXICOnly_CheckedChanged" Unchecked="CheckBoxShowXICOnly_CheckedChanged"
-                                  ToolTip="Shows only families with a positive PatternLab share; this starts off. Toggling it changes display rows and visible-row CSV content without changing stored proteins or percentages."/>
+                                  ToolTip="Shows only protein rows with a positive PatternLab reading or a positive Full XIC share; this starts off. Toggling it changes the visible rows and visible-row CSV, never the stored proteins or percentages."/>
                         <CheckBox x:Name="CheckBoxShowSearchIds" Content="Show USearch ID" IsChecked="True"
                                   Checked="SearchIdVisibility_Changed" Unchecked="SearchIdVisibility_Changed"
                                   ToolTip="Shows the last automatic family number beside User ID; this starts on unless a saved display preference overrides it. Toggling it changes the visible columns, while stored IDs stay unchanged."/>
