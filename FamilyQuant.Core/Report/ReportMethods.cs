@@ -132,10 +132,15 @@ public static class ReportMethods
                 string status = !same ? "Source changed" : !choice.Selected ? "Not selected" : assignments.TryGetValue(choice.ProteinIndex, out var assignment)
                     && protein!.UserID == assignment.FamilyId ? "Applied" : "Grouping changed";
                 string name = recipe.Families.FirstOrDefault(f => f.Family == choice.Family)?.Name ?? choice.Name;
-                return (IReadOnlyList<string>)new[] { choice.Identifier, name, choice.Note ?? "", status };
+                // The warnings shown when the choice was applied, as stored with the hand assignment.
+                string warnings = !assignments.TryGetValue(choice.ProteinIndex, out var applied) || applied.Identifier != choice.Identifier ? ""
+                    : applied.Flags == null ? "Not recorded" : applied.Flags.Count == 0 ? "None"
+                    : string.Join(" | ", applied.Flags.Select(f => f.Message.Length > 0 ? f.Message : f.Code));
+                return (IReadOnlyList<string>)new[] { choice.Identifier, name, choice.Note ?? "", status, warnings };
             }).ToArray();
-            blocks.Add(new ReportTable("methods-hand-families", "Saved hand-added family choices", new[] { "Protein", "Chosen family", "User note", "Status" }, handRows,
-                "These memberships are explicit user choices, not automatic evidence. The grouping recipe retains notes and the original automatic evidence; status is checked against the current identifier, sequence and family."));
+            blocks.Add(new ReportTable("methods-hand-families", "Saved hand-added family choices",
+                new[] { "Protein", "Chosen family", "User note", "Status", "Warnings at the choice" }, handRows,
+                "These memberships are explicit user choices, not automatic evidence. The grouping recipe retains notes and the original automatic evidence; status is checked against the current identifier, sequence and family. Warnings at the choice are the flags the review showed when the choice was applied."));
         }
 
         var deNovoRows = manifest.DeNovoInputs.OrderBy(i => i.SourceId, StringComparer.Ordinal).ThenBy(i => i.FilePath, StringComparer.Ordinal)

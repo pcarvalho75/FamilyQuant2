@@ -255,6 +255,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => CoherenceMembersUiTests());
             suite.Add(() => ManualFamilyChoiceTests());
             suite.Add(() => EvidenceFamilyReuseTests());
+            suite.Add(() => HandChoiceRecordTests());
             suite.AddWithApplication(() => ManualFamilyUiTests());
             suite.AddWithApplication(() => ImportWizardMockTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
