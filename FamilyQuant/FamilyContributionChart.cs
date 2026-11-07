@@ -303,9 +303,9 @@ namespace FamilyQuant
 
             MinHeight = 260;
             Margin = new Thickness(0);
-            ToolTip = "One bar per family, largest first: blue is the signal of its identified peptides, " +
-                      "green is what the de novo peptides add. Smaller families are combined into one " +
-                      "\"other families\" bar, so nothing is dropped.";
+            ToolTip = "One bar per family, largest first, separates identified and de novo signal, with smaller families combined into " +
+                      "\"other families\" so nothing is dropped. Percent mode divides by measured peptide signal rather than the sum " +
+                      "of bars; shared full counts can overlap, and this chart changes no project values or files.";
         }
 
         /// <summary>The folded bars this chart draws, in drawing order, as the tests read them.</summary>
