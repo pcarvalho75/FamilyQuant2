@@ -54,7 +54,7 @@ public static class PanelImportTemplate
         "",
         "A row that lists several families in one name cell, separated by commas, semicolons or line breaks, is offered as one family per name or as one group reported under others when you import it.",
         "You may colour cells and add more columns: colours can be named as a category during the import, and every extra column is kept as text.",
-        "Save the workbook as .xlsx, then use File > Import family panel in FamilyQuant.",
+        "Save the workbook as .xlsx, then use File > Import family list in FamilyQuant.",
         "",
         "Example rows",
     };

@@ -122,7 +122,7 @@ internal static partial class Program
         lockedModel.Evidence.SelectedChecklistFamily = lockedModel.Evidence.PanelChecklist.Single(row => row.Key == "excluded");
         Check("Z12n2 excluded and unmatched families offer no implicit assignment", !lockedModel.CanPlaceChecklistMatches && !lockedModel.CanAddChecklistPhrase);
         Check("Z12n2 Help explains consensus import, stable keys, scope preview and explicit hand choices",
-            GroupingReviewHelp.Text.Contains("File > Import family panel", StringComparison.Ordinal)
+            GroupingReviewHelp.Text.Contains("File > Import family list", StringComparison.Ordinal)
             && GroupingReviewHelp.Text.Contains("Added by hand", StringComparison.Ordinal) && GroupingReviewHelp.Text.Contains("Add phrase to scope", StringComparison.Ordinal));
         var guarded = ChecklistActionFile();
         var guardedSession = new EvidenceGroupingSession(guarded, "guarded panel choice fixture"); guardedSession.Propose("selected");

@@ -43,7 +43,7 @@ internal static partial class Program
         Check("Z12p2d the Instructions sheet explains every column, the decision names, lists, colours and saving",
             help.Rows[0].Cells[0].Text == "How to fill in this family list"
             && PanelImportTemplate.Columns.All(c => instructions.Contains(c.Header + ":", StringComparison.Ordinal))
-            && new[] { "Report under others", "Not a family", "Merge into CTL", "several families", "colour", "File > Import family panel", ".xlsx" }
+            && new[] { "Report under others", "Not a family", "Merge into CTL", "several families", "colour", "File > Import family list", ".xlsx" }
                 .All(text => instructions.Contains(text, StringComparison.Ordinal)));
         var emptyTable = reader.ReadTable(path, "Families", 1);
         var emptyCheck = importer.Check(emptyTable, importer.Propose(emptyTable).Choices, Array.Empty<FamilyPanelDecisionMapping>());

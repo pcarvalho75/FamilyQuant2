@@ -20,7 +20,8 @@ public sealed partial class FamilyListImportViewModel
     public bool HasColors => SourceColorChoices.Count > 0;
     public string DecisionSummary => HasDecisions ? Decisions.Count.ToString("N0", CultureInfo.CurrentCulture)
         + (Decisions.All(d => d.Confirmed) ? " values confirmed" : " values to review") : "Quantify every family";
-    public string SpecialSummary => SpecialRows.Count(r => r.Blocking).ToString("N0", CultureInfo.CurrentCulture) + " rows need a choice";
+    public string SpecialSummary => SpecialRows.Count(r => r.Blocking) is var count && count == 0 ? "Every special row has a choice"
+        : count.ToString("N0", CultureInfo.CurrentCulture) + (count == 1 ? " row needs a choice" : " rows need a choice");
     private bool MappingValid => table != null && Columns.Where(c => c.Required).All(c => c.HasChoice && table.Headers.Contains(c.Header, StringComparer.Ordinal))
         && Columns.Where(c => c.HasChoice && c.Role != PanelImportFields.ColorCategory).GroupBy(c => c.Header, StringComparer.Ordinal).All(g => g.Count() == 1);
 
@@ -159,14 +160,15 @@ public sealed partial class FamilyListImportViewModel
                 .Concat(SpecialRows.Where(r => r.Action == FamilyPanelRowAction.Skip && !r.Blocking).Select(r => r.RowNumber)).Distinct().Count();
             int renamed = (choices.RowChoices ?? new()).Count(c => c.Action == FamilyPanelRowAction.Import && c.Key.Length > 0
                 && c.Key != Raw(table?.Rows.FirstOrDefault(r => r.RowNumber == c.RowNumber), PanelImportFields.FamilyKey).Trim());
-            return panel.Families.Count.ToString("N0", CultureInfo.CurrentCulture) + " families; " + Rows(split, "split") + "; "
+            return Families(panel.Families.Count) + "; " + Rows(split, "split") + "; "
                 + Rows(skipped, "skipped") + "; " + renamed.ToString("N0", CultureInfo.CurrentCulture) + (renamed == 1 ? " abbreviation renamed" : " abbreviations renamed")
-                + "; matching: " + MatchFamilies.Count(f => f.Choice == "Confirmed").ToString("N0", CultureInfo.CurrentCulture) + " families confirmed, "
+                + "; matching: " + Families(MatchFamilies.Count(f => f.Choice == "Confirmed")) + " confirmed, "
                 + MatchFamilies.Count(f => f.Choice == "Kept from previous panel").ToString("N0", CultureInfo.CurrentCulture) + " kept, "
                 + MatchFamilies.Count(f => f.Choice == "Skipped").ToString("N0", CultureInfo.CurrentCulture) + " skipped";
         }
     }
     private static string Rows(int count, string action) => count.ToString("N0", CultureInfo.CurrentCulture) + (count == 1 ? " row " : " rows ") + action;
+    private static string Families(int count) => count.ToString("N0", CultureInfo.CurrentCulture) + (count == 1 ? " family" : " families");
 
     public IReadOnlyList<ImportSummaryFamily> SummaryFamilies => (committedPanel ?? check.Panel)?.Families.Select(f => new ImportSummaryFamily(f.Key, f.DisplayName,
         PanelImportFields.OtherNameText(committedPanel ?? check.Panel!, f), DecisionOptions.First(o => o.Value == f.Decision).Label,

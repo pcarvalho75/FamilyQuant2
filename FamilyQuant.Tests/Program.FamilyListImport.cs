@@ -48,6 +48,9 @@ internal static partial class Program
                 {
                     window.Show(); PumpDispatcher();
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "01-welcome");
+                    Check(label + " import uses one plain list name in its title and Help", window.Title == "Import family list"
+                        && model.Title == "Import family list" && FamilyListImportHelp.Text.StartsWith("IMPORT FAMILY LIST", StringComparison.Ordinal)
+                        && model.Status == "Nothing has changed yet.");
                     Check(label + " Welcome exposes the example and template without editing the project", ((Button)window.FindName("ExampleButton")).IsEnabled
                         && ((Button)window.FindName("TemplateButton")).IsEnabled && file.ToJsonText() == before && model.Page == 0 && !model.CanBack);
                     FinishReviewWork(() => model.LoadAsync(workbook)); PumpDispatcher();
@@ -55,6 +58,10 @@ internal static partial class Program
                         && model.Preview?.ProposedHeaderRow == ExampleFamilyList.FamilyHeaderRow() && model.CanNext
                         && ((DataGrid)window.FindName("SheetPreviewGrid")).Columns.Count == 16 && file.ToJsonText() == before);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "02-file-and-sheet");
+                    var previewGrid = (DataGrid)window.FindName("SheetPreviewGrid");
+                    Check(label + " preview keeps at least eight complete rows visible despite long source notes", WalkTree(previewGrid).OfType<DataGridRow>()
+                        .Count(r => r.IsVisible && r.TranslatePoint(new Point(), previewGrid).Y >= 0
+                            && r.TranslatePoint(new Point(), previewGrid).Y + r.ActualHeight <= previewGrid.ActualHeight - 18) >= 8);
                     model.HeaderRowText = "not a row";
                     Check(label + " an unconfirmed header edit cannot advance with an old table", !model.CanNext);
                     model.HeaderRowText = ExampleFamilyList.FamilyHeaderRow().ToString();
@@ -65,6 +72,7 @@ internal static partial class Program
                         && model.Columns.Single(c => c.Role == PanelImportFields.DisplayName).Example.Length > 0
                         && model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header.Length == 0 && model.CanNext);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns");
+                    Check(label + " Columns replaces the sheet-specific status", !model.Status.Contains("sheet and header", StringComparison.Ordinal));
                     var decision = model.Columns.Single(c => c.Role == PanelImportFields.Decision);
                     decision.Header = decision.Headers.First(h => h.Contains("DECIS", StringComparison.OrdinalIgnoreCase));
                     Check(label + " free-text decisions remain proposals until explicitly confirmed", model.Decisions.Count == 8
@@ -84,6 +92,7 @@ internal static partial class Program
                     model.SelectedSpecialRow.Action = FamilyPanelRowAction.Import; model.UseRowChoice();
                     Check(label + " accepting the proposed duplicate rename keeps the multi-name choice pending", newKey.Length > 0
                         && model.SpecialRows.Any(r => r.Chosen && r.Key == newKey) && !model.CanNext);
+                    Check(label + " one pending special row uses singular grammar", model.SpecialRows.Count(r => r.Blocking) != 1 || model.SpecialSummary == "1 row needs a choice");
                     model.SelectedSpecialRow = model.SpecialRows.Single(r => r.SeveralNames && r.Parts.Count == 4 && r.Blocking);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "04-special-rows");
                     var partKeys = model.SelectedSpecialRow.Parts.Select(p => p.Key).ToArray();
@@ -102,6 +111,12 @@ internal static partial class Program
                     model.SkipAllMatches();
                     Check(label + " Continue without matches records an explicit choice and no project change", model.CanNext
                         && model.MatchFamilies.All(f => f.Choice == "Skipped") && file.ToJsonText() == before);
+                    model.SelectedMatchFamily = model.MatchFamilies[0];
+                    model.SelectedMatchFamily.Choice = "Needs a choice"; model.SkipMatch();
+                    Check(label + " the last matching choice reports completion", model.Status == "Every family has a matching choice.");
+                    model.MatchFamilies[0].Choice = "Confirmed";
+                    Check(label + " one confirmed family agrees with its summary count", model.Summary.Contains("1 family confirmed", StringComparison.Ordinal));
+                    model.MatchFamilies[0].Choice = "Skipped";
                     FinishReviewWork(async () => { await model.NextAsync(); });
                     model.PanelName = "Imported example list";
                     model.Back(); model.Back();
@@ -113,6 +128,7 @@ internal static partial class Program
                         && model.SummaryFamilies.Count == model.DraftPanel!.Families.Count && curation.UndoStack.Count == 0 && file.ToJsonText() == before);
                     Check(label + " Summary includes the skipped empty row and the confirmed duplicate rename", model.Summary.Contains("1 row skipped", StringComparison.Ordinal)
                         && model.Summary.Contains("1 abbreviation renamed", StringComparison.Ordinal));
+                    Check(label + " a single confirmed match uses family grammar", !model.Summary.Contains("1 families confirmed", StringComparison.Ordinal));
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "06-summary");
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " Import is one panel publication and retains every protein's state", model.Page == 6 && model.Imported && model.CanUndo
