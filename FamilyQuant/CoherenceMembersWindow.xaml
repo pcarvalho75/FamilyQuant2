@@ -6,24 +6,22 @@
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
         <StackPanel Margin="0,0,0,10">
             <TextBlock Text="{Binding Title}" Style="{DynamicResource SectionTitle}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Title}"/>
-            <CheckBox x:Name="completeOnly" Content="Complete members only" IsChecked="{Binding CompleteOnly}" Margin="0,8"
-                      ToolTip="Complete means not marked as a fragment. This is the population used for length and cysteine ranges."/>
+            <CheckBox x:Name="completeOnly" Content="Complete members only" IsChecked="{Binding CompleteOnly}" Margin="0,8" ToolTip="Show only members not marked as fragments, the default population used for length and cysteine ranges. This filters the displayed stored members without changing the profile or proposal."/>
             <TextBlock Text="{Binding Summary}" Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Summary}"/>
         </StackPanel>
         <DataGrid x:Name="membersGrid" Grid.Row="1" ItemsSource="{Binding VisibleMembers}" IsReadOnly="True" AutoGenerateColumns="False"
-                  CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Extended" ClipboardCopyMode="IncludeHeader"
-                  ToolTip="Stored reviewed profile members; Ctrl+C copies selected rows with their headings.">
+                  CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Extended" ClipboardCopyMode="IncludeHeader" ToolTip="Inspect stored reviewed profile members; Ctrl+C copies highlighted rows with headings. Selecting, sorting or copying rows changes no profile, proposal or file.">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Accession" Width="130" Binding="{Binding Accession}"/>
-                <DataGridTextColumn Header="Species" Width="*" MinWidth="180" Binding="{Binding Species}" theme:TableAppearance.FullTextPath="SpeciesHelp"/>
-                <DataGridTextColumn Header="Source" Width="130" Binding="{Binding Source}"/>
-                <DataGridTextColumn Header="Length" Width="80" Binding="{Binding Length}"/>
-                <DataGridTextColumn Header="Cysteines" Width="95" Binding="{Binding Cysteines}"/>
-                <DataGridTextColumn Header="Completeness" Width="180" Binding="{Binding Completeness}"/>
+                <DataGridTextColumn Header="Accession" Width="130" Binding="{Binding Accession}" theme:TableAppearance.HeaderToolTip="Stored reviewed accession used in this coherence profile, with each accession counted once."/>
+                <DataGridTextColumn Header="Species" Width="*" MinWidth="180" Binding="{Binding Species}" theme:TableAppearance.FullTextPath="SpeciesHelp" theme:TableAppearance.HeaderToolTip="Stored organism annotation from UniProt, with OS/OX header fallback for older file entries. Missing facts stay not recorded; no organism is guessed or downloaded during review."/>
+                <DataGridTextColumn Header="Source" Width="130" Binding="{Binding Source}" theme:TableAppearance.HeaderToolTip="Whether this reviewed member came from your file or the stored reference panel. Source provenance is retained with the profile."/>
+                <DataGridTextColumn Header="Length" Width="80" Binding="{Binding Length}" theme:TableAppearance.HeaderToolTip="Stored member sequence length in amino-acid residues. Complete members supply the profile's learned length range."/>
+                <DataGridTextColumn Header="Cysteines" Width="95" Binding="{Binding Cysteines}" theme:TableAppearance.HeaderToolTip="Stored count of cysteine residues in this member's sequence. Complete members supply the profile's learned cysteine range."/>
+                <DataGridTextColumn Header="Completeness" Width="180" Binding="{Binding Completeness}" theme:TableAppearance.HeaderToolTip="Whether stored annotations mark this member as a fragment. Not marked fragment defines the complete-member population and does not independently prove a full sequence."/>
             </DataGrid.Columns>
         </DataGrid>
         <DockPanel Grid.Row="2" Margin="0,12,0,0">
-            <Button DockPanel.Dock="Right" Content="Close" IsCancel="True" Click="Close_Click"/>
+            <Button DockPanel.Dock="Right" Content="Close" IsCancel="True" Click="Close_Click" ToolTip="Close the stored reviewed-member list. The proposal, profile and project stay unchanged."/>
             <TextBlock Text="Stored annotations and file headers only; missing species are shown as not recorded." VerticalAlignment="Center"
                        TextTrimming="CharacterEllipsis" Foreground="{DynamicResource MutedBrush}"
                        ToolTip="Species use stored UniProt metadata, with OS/OX fallback for older file entries. No species is guessed or downloaded during review."/>

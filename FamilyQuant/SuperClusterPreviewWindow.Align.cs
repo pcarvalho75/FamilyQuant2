@@ -35,6 +35,11 @@ public partial class SuperClusterPreviewWindow
     private void UpdateAlignButton()
     {
         alignSelectedButton.IsEnabled = alignmentSource != null && evidenceGrid.SelectedItems.Count > 0;
+        alignSelectedButton.ToolTip = alignmentSource == null
+            ? "Alignment is unavailable because this review has no sequence-alignment source. Open the evidence review from a project with stored sequences to enable it; the proposal stays unchanged."
+            : evidenceGrid.SelectedItems.Count == 0
+                ? "Alignment is unavailable until at least one protein row is highlighted. Highlight rows to align them beside reviewed relatives and family representatives without changing ticks or assignments."
+                : "Open a read-only alignment of highlighted proteins beside reviewed relatives and family representatives. Ticks, assignments and project files stay unchanged.";
     }
 
     /// <summary>The highlighted rows in the order they were highlighted.</summary>
