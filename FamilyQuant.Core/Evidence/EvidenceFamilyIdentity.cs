@@ -12,6 +12,9 @@ public sealed record EvidenceFamilyIdentity
     public string Family { get; init; } = "";
     public string GroupKey { get; init; } = "";
     public bool PanelFamily { get; init; }
+    /// <summary>Explicit proposal-family unlock retains eligibility until those families are applied again.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public bool ReuseAfterExplicitUnlock { get; init; }
     public IReadOnlyList<string> Identifiers { get; init; } = Array.Empty<string>();
 }
 
@@ -23,6 +26,25 @@ public sealed partial class EvidenceRecipe
 
 public static partial class EvidenceApply
 {
+    /// <summary>Preserve only already anchored identities of the locked families the user explicitly unlocks.
+    /// The caller records the lock/identity Undo together. Ordinary manual unlocking does not set this flag.</summary>
+    public static void PreserveIdentitiesForUnlock(FamilyClusterFile file, IReadOnlyCollection<int> familyIds)
+    {
+        ArgumentNullException.ThrowIfNull(file); ArgumentNullException.ThrowIfNull(familyIds);
+        if (file.EvidenceRecipe == null) return;
+        var selected = familyIds.ToHashSet();
+        var retained = CurrentFamilyIdentities(file).Where(identity => selected.Contains(identity.FamilyId)
+            && file.LockedUserIds.Contains(identity.FamilyId)).Select(identity => identity.FamilyId).ToHashSet();
+        if (retained.Count == 0) return;
+        var identities = file.EvidenceRecipe.FamilyIdentities
+            ?? AssignmentIdentities(file.EvidenceRecipe.Assignments, file.EvidenceRecipe.PanelContext != null).ToList();
+        file.EvidenceRecipe.FamilyIdentities = identities.Select(identity => identity with
+        {
+            Identifiers = identity.Identifiers.ToArray(),
+            ReuseAfterExplicitUnlock = identity.ReuseAfterExplicitUnlock || retained.Contains(identity.FamilyId),
+        }).ToList();
+    }
+
     private static List<EvidenceFamilyIdentity> CurrentFamilyIdentities(FamilyClusterFile file)
     {
         var stored = file.EvidenceRecipe;
@@ -30,7 +52,7 @@ public static partial class EvidenceApply
             ?? AssignmentIdentities(stored?.Assignments ?? new List<EvidenceAssignment>(), stored?.PanelContext != null);
         var members = file.MyExtendedFastaItems.Where(protein => !NearestReviewed.IsDecoy(protein)
             && !SequenceLabels.IsContaminant(protein.SequenceIdentifier)).Select(protein => (protein.UserID, protein.SequenceIdentifier)).ToHashSet();
-        return NormalizeIdentities(identities.Where(identity => file.LockedUserIds.Contains(identity.FamilyId)), members);
+        return NormalizeIdentities(identities.Where(identity => file.LockedUserIds.Contains(identity.FamilyId) || identity.ReuseAfterExplicitUnlock), members);
     }
 
     private static IEnumerable<EvidenceFamilyIdentity> AssignmentIdentities(IEnumerable<EvidenceAssignment> assignments, bool panelFamily) =>
@@ -47,6 +69,7 @@ public static partial class EvidenceApply
         .Select(group => new EvidenceFamilyIdentity
         {
             FamilyId = group.Key.FamilyId, Family = group.Key.Family, GroupKey = group.Key.GroupKey, PanelFamily = group.Key.PanelFamily,
+            ReuseAfterExplicitUnlock = group.Any(identity => identity.ReuseAfterExplicitUnlock),
             Identifiers = group.SelectMany(identity => identity.Identifiers).Where(identifier => members.Contains((group.Key.FamilyId, identifier)))
                 .Distinct(StringComparer.Ordinal).OrderBy(identifier => identifier, StringComparer.Ordinal).ToArray(),
         })
@@ -78,12 +101,21 @@ public static partial class EvidenceApply
         var assigned = recipe.Assignments.ToDictionary(assignment => assignment.ProteinIndex);
         var members = file.MyExtendedFastaItems.Select((protein, index) =>
             (assigned.TryGetValue(index, out var assignment) ? assignment.FamilyId : protein.UserID, protein.SequenceIdentifier)).ToHashSet();
-        return NormalizeIdentities(CurrentFamilyIdentities(file).Concat(AssignmentIdentities(recipe.Assignments, recipe.PanelContext != null)), members);
+        var appliedFamilies = recipe.Assignments.Select(assignment => assignment.FamilyId).ToHashSet();
+        return NormalizeIdentities(CurrentFamilyIdentities(file).Concat(AssignmentIdentities(recipe.Assignments, recipe.PanelContext != null)), members)
+            .Select(identity => appliedFamilies.Contains(identity.FamilyId) ? identity with { ReuseAfterExplicitUnlock = false } : identity).ToList();
     }
 
     private static void ValidateFamilyIdentities(FamilyClusterFile file, EvidenceRecipe recipe)
     {
-        if (recipe.FamilyIdentities != null && Hash(ProjectFamilyIdentities(file, recipe)) != Hash(recipe.FamilyIdentities))
+        if (recipe.FamilyIdentities == null) return;
+        if (Hash(ProjectFamilyIdentities(file, recipe)) != Hash(recipe.FamilyIdentities))
             throw new ArgumentException("The saved family identities do not match the retained families and reviewed assignments.", nameof(recipe));
+        int maximum = MaximumId(file);
+        if (recipe.Assignments.All(assignment => assignment.FamilyId > maximum)) return;
+        var current = CurrentFamilyIdentities(file);
+        if (recipe.Assignments.Any(assignment => assignment.FamilyId <= maximum
+            && ReusableFamilyId(current, assignment.Family, assignment.GroupKey, recipe.PanelContext != null) != assignment.FamilyId))
+            throw new ArgumentException("The saved family identities no longer permit this family number. Reopen Group by evidence and update the proposal.");
     }
 }
