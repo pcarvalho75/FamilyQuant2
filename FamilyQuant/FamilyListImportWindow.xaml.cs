@@ -181,7 +181,7 @@ public partial class FamilyListImportWindow : Window
         else if (e.Key == Key.F1) { e.Handled = true; ShowHelp(); }
     }
     private void Help_Click(object sender, RoutedEventArgs e) => ShowHelp();
-    private void ShowHelp() => TextReportWindow.Show("Import family list", FamilyListImportHelp.Text, this, wrap: true);
+    private void ShowHelp() => FamilyListImportGuideWindow.Show(this);
 
     private void CommitGridEdits()
     {

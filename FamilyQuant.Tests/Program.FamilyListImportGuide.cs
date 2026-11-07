@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -30,6 +31,12 @@ internal static partial class Program
         EnsureApplication();
         var sections = FamilyListImportGuide.Sections;
         string text = FamilyListImportGuide.Text();
+        Check("the guide uses the current import and checklist names", FamilyListImportGuide.Title == "Import family list"
+            && !text.Contains("Import family panel", StringComparison.Ordinal) && !text.Contains("Panel checklist", StringComparison.Ordinal));
+        Check("the guide describes optional source categories and explicit default decisions", text.Contains("source name", StringComparison.Ordinal)
+            && text.Contains("Next asks", StringComparison.Ordinal) && text.Contains(FamilyListImportHelp.DecisionsSummary, StringComparison.Ordinal));
+        Check("the guide retains the Done prerequisites and matching boundary", text.Contains(FamilyListImportHelp.DoneNext, StringComparison.Ordinal)
+            && text.Contains(FamilyListImportHelp.MatchingEffect, StringComparison.Ordinal));
         Check("one part for each of the seven wizard pages, in order", Enumerable.Range(1, 7).All(n => sections.Any(s => s.Title.StartsWith(n + ".", StringComparison.Ordinal)))
             && sections.Where(s => char.IsDigit(s.Title[0])).Select(s => s.Title[0]).SequenceEqual(sections.Where(s => char.IsDigit(s.Title[0])).Select(s => s.Title[0]).OrderBy(c => c)));
         Check("the Columns page has its decision review and Special rows its repeated abbreviation", sections.Any(s => s.Key == "decisions") && sections.Any(s => s.Key == "duplicate"));
@@ -41,14 +48,20 @@ internal static partial class Program
         }).ToList();
         Check("every wizard page has its picture inside the program, at 1366 x 768", pictured.Count == 9
             && loaded.All(p => p.PixelWidth == 1366 && p.PixelHeight == 768), string.Join(", ", loaded.Where(p => p.PixelWidth != 1366).Select(p => p.Section.Image)));
+        Check("embedded guide pictures match the current native source captures", pictured.All(section =>
+        {
+            using var stream = Application.GetResourceStream(FamilyListImportGuide.ImageUri(section))?.Stream;
+            string source = Path.Combine(GoldenNumbers.FindRepository(), "FamilyQuant", "Help", "ImportFamilyList", section.Image);
+            return stream != null && Convert.ToHexString(SHA256.HashData(stream)) == TestFileHash.Upper(source);
+        }));
         string[] labels =
         {
             "Try with the example", "Save a template", "Edit current panel", "Browse", "Read this header row", "Cell details", "Keep as source notes",
             "Confirm these actions", "Back to columns", "Review decision values", "Quantify", "Report under others", "Not a family", "Merge into family",
             "Original source row", "Use this row as", "Use this choice", "Needs a choice", "Keep as one family", "One family per name",
             "One group reported under others", "Keep or rename this row", "Skip this row", "Skipped", "Use selected matches", "Skip this family",
-            "Continue without matches", "Kept from previous panel", "View source notes", "Import", "Open family checklist", "Undo import", "Close",
-            "Panel checklist", "Match stored names", "Apply grouping", "Apply panel", "File > Save",
+            "Continue without matches", "Kept from previous panel", "View source notes", "Import", "Family checklist", "Undo import", "Close",
+            "Use this decision column", "Match stored names", "Apply grouping", "Apply panel", "File > Save",
         };
         Check("the chapter names the wizard's controls and choices with the program's own words", labels.All(text.Contains),
             string.Join(", ", labels.Where(l => !text.Contains(l))));
@@ -60,6 +73,7 @@ internal static partial class Program
         Check("no em or en dash in the chapter", !text.Contains('–') && !text.Contains('—'));
         string index = File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "docs", "INDEX.md"));
         Check("docs/INDEX.md lists the command that takes the chapter's pictures", index.Contains("`--import-guide-screens <output-dir> [--dark]`", StringComparison.Ordinal));
+        FamilyListImportHelpRouteTests(output);
 
         var previousTheme = Themes.ThemeManager.Current;
         try
