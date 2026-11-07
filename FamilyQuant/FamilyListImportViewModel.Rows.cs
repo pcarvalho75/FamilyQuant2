@@ -98,7 +98,7 @@ public sealed partial class FamilyListImportViewModel
                     SourceColorChoices.Add(row);
                 }
                 choices.ColorLabels = SourceColorChoices.Select(c => new FamilyPanelColorLabel { Color = c.Color, Label = c.Label.Trim() }).ToList();
-                check = importer.Check(table, choices, Decisions.Where(d => d.Confirmed && d.Decision != null).Select(d => d.Capture()).ToArray(), PanelName.Trim());
+                check = importer.Check(table, choices, Decisions.Where(d => (WorkbookReviewEnabled || d.Confirmed) && d.Decision != null).Select(d => d.Capture()).ToArray(), PanelName.Trim());
             }
             RebuildSpecialRows();
             Changed(nameof(HasDecisions)); Changed(nameof(HasColors)); Changed(nameof(DecisionSummary)); Changed(nameof(SpecialSummary));

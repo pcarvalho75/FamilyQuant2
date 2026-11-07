@@ -195,6 +195,43 @@ internal static partial class Program
         Check("an explicit Not used decision choice is never inferred again", !ignored.Columns.Single(c => c.Role == PanelImportFields.Decision).HasChoice
             && ignored.CanAcceptWorkbook && ignored.WorkbookFamilies.All(f => f.Decision == "Quantify"));
         WorkbookOverviewBroadGuardTest(work);
+        WorkbookOverviewFilledNavigationTest(work);
+    }
+
+    private static void WorkbookOverviewFilledNavigationTest(string work)
+    {
+        string path = Path.Combine(work, "filled-decisions.xlsx"); WriteOverviewShape(path, decisions: true, notes: false);
+        using (var document = SpreadsheetDocument.Open(path, true))
+        {
+            var workbook = document.WorkbookPart!;
+            var styles = workbook.AddNewPart<WorkbookStylesPart>();
+            styles.Stylesheet = new XL.Stylesheet(new XL.Fonts(new XL.Font()) { Count = 1 },
+                new XL.Fills(new XL.Fill(new XL.PatternFill { PatternType = XL.PatternValues.None }),
+                    new XL.Fill(new XL.PatternFill { PatternType = XL.PatternValues.Gray125 }),
+                    new XL.Fill(new XL.PatternFill(new XL.ForegroundColor { Rgb = "FFD6EAF8" }, new XL.BackgroundColor { Indexed = 64 }) { PatternType = XL.PatternValues.Solid }),
+                    new XL.Fill(new XL.PatternFill(new XL.ForegroundColor { Rgb = "FFE2F0D9" }, new XL.BackgroundColor { Indexed = 64 }) { PatternType = XL.PatternValues.Solid })) { Count = 4 },
+                new XL.Borders(new XL.Border()) { Count = 1 }, new XL.CellStyleFormats(new XL.CellFormat()) { Count = 1 },
+                new XL.CellFormats(new XL.CellFormat(), new XL.CellFormat { FillId = 2, ApplyFill = true }, new XL.CellFormat { FillId = 3, ApplyFill = true }) { Count = 3 });
+            styles.Stylesheet.Save();
+            var sheet = workbook.WorksheetParts.Single().Worksheet!;
+            foreach (var row in sheet.GetFirstChild<XL.SheetData>()!.Elements<XL.Row>().Skip(1))
+                row.Elements<XL.Cell>().First().StyleIndex = row.RowIndex!.Value == 3 ? 2U : 1U;
+            sheet.Save();
+        }
+        string sourceHash = TestFileHash.Upper(path);
+        var project = WorkbookOverviewProject(); string before = project.ToJsonText(); var source = new ObservedWorkbookSource();
+        using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(project)), workbookSource: source, openWorkbookReview: true);
+        FinishReviewWork(() => model.LoadAsync(path));
+        model.ColorColumn!.Header = model.Columns.Single(c => c.Role == PanelImportFields.FamilyKey).Header;
+        Check("filled workbook starts with mapped headers and draft decision actions", model.CanAcceptWorkbook && model.SourceColorChoices.Count == 2
+            && model.Columns.Single(c => c.Role == PanelImportFields.Decision).HasChoice && model.Decisions.All(d => !d.Confirmed && d.Decision != null),
+            "colours=" + model.SourceColorChoices.Count + "; " + string.Join("; ", model.WorkbookReviewProblems));
+        FinishReviewWork(() => model.ReviewWorkbookSectionAsync("rows"));
+        Check("filled workbook special-rows navigation keeps proposed decisions without requiring early confirmation", model.Page == 3 && model.CanNext
+            && model.SpecialRows.All(row => !row.Blocking), string.Join("; ", model.Problems.Select(problem => problem.Message)));
+        bool continued = false; FinishReviewWork(async () => { continued = await model.NextAsync(); });
+        Check("filled workbook continues past special rows without confirming or publishing", continued && model.Page == 4 && model.Decisions.All(d => !d.Confirmed)
+            && project.ToJsonText() == before && TestFileHash.Upper(path) == sourceHash && source.Completes == 0);
     }
 
     private static void WorkbookOverviewBroadGuardTest(string work)

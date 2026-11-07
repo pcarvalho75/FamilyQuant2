@@ -8,6 +8,7 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-workbook-subclass-review", "FamilyQuant.Tests.Program.WorkbookSubclassReviewTests(System.String)"),
         SuiteCommandRule.Covered("--test-results-export-facts", "FamilyQuant.Tests.Program.RunResultsExportFixture(System.String,System.Boolean)"),
         SuiteCommandRule.Covered("--test-feature-provenance-format2", "FamilyQuant.Tests.Program.FeatureProvenanceFormatTests(System.String)"),
         SuiteCommandRule.Covered("--test-curation-streaming-callers", "FamilyQuant.Tests.Program.CurationStreamingCallerTests()"),
@@ -365,9 +366,9 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-panel-pfam", "FamilyQuant.Tests.Program.PanelPfamTests()"),
         SuiteCommandRule.Covered("--test-panel-spreadsheet", "FamilyQuant.Tests.Program.PanelSpreadsheetTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-workbook-map", "FamilyQuant.Tests.Program.PanelWorkbookMapTests(System.String)"),
+        SuiteCommandRule.Covered("--test-panel-workbook-notes", "FamilyQuant.Tests.Program.PanelWorkbookNotesTests()"),
         SuiteCommandRule.Covered("--test-panel-workbook-legend", "FamilyQuant.Tests.Program.PanelWorkbookLegendTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-subclass-import", "FamilyQuant.Tests.Program.PanelSubclassImportTests(System.String)"),
-        SuiteCommandRule.Covered("--test-panel-workbook-notes", "FamilyQuant.Tests.Program.PanelWorkbookNotesTests()"),
         SuiteCommandRule.Covered("--test-workbook-import-summary", "FamilyQuant.Tests.Program.WorkbookImportSummaryTests()"),
         SuiteCommandRule.Covered("--test-panel-import-graceful", "FamilyQuant.Tests.Program.PanelImportGracefulTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-import-several", "FamilyQuant.Tests.Program.PanelImportSeveralTests(System.String)"),
@@ -481,7 +482,6 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-import-tooltip-copy", "FamilyQuant.Tests.Program.ImportTooltipCopyTests(System.String)"),
         SuiteCommandRule.Covered("--test-workbook-wizard", "FamilyQuant.Tests.Program.WorkbookWizardTests(System.String)"),
         SuiteCommandRule.Covered("--test-workbook-overview", "FamilyQuant.Tests.Program.WorkbookOverviewTests(System.String)"),
-        SuiteCommandRule.Covered("--test-workbook-subclass-review", "FamilyQuant.Tests.Program.WorkbookSubclassReviewTests(System.String)"),
         SuiteCommandRule.Covered("--test-import-wizard-tooltips", "FamilyQuant.Tests.Program.ImportWizardToolTipTests(System.String)"),
         SuiteCommandRule.Covered("--test-integrated-review", "FamilyQuant.Tests.Program.GroupingReviewInteractionTests()", "FamilyQuant.Tests.ScreenHarness.Verify(System.Action`3[System.String,System.Boolean,System.String],System.String)"),
         SuiteCommandRule.Covered("--test-database-update-exports", "FamilyQuant.Tests.Program.DatabaseUpdateExportTests()"),
