@@ -24,9 +24,13 @@ public static class CurationFormat
     public const string MarkerProperty = "FamilyQuantCurationFormat";
     public const string Notice = "FamilyQuant curation format 2, written by FamilyQuant 2.1.11 or later; older versions cannot open it.";
 
-    /// <summary>The header (everything before the curation) is held in memory while it is read; past this size
-    /// the file is refused rather than read without bound.</summary>
-    internal const int MaxHeaderBytes = 64 << 20;
+    /// <summary>The largest header (everything before the curation: marker, notice, parts and every part's section)
+    /// a reader accepts. The header is held in memory while it is read, so past this size a file is refused rather
+    /// than read without bound, and the writer refuses to write one, naming the part whose section is largest.</summary>
+    public const int MaxHeaderBytes = 64 << 20;
+
+    /// <summary>Room left in the header limit for the bytes that open the curation after the sections.</summary>
+    private const int HeaderMargin = 4096;
 
     private static readonly byte[] Utf8Bom = { 0xEF, 0xBB, 0xBF };
 
@@ -55,7 +59,7 @@ public static class CurationFormat
         ArgumentNullException.ThrowIfNull(text);
         foreach (char c in text)
         {
-            if (c == '﻿' || c is ' ' or '\t' or '\r' or '\n') continue;
+            if (c == '\uFEFF' || c is ' ' or '\t' or '\r' or '\n') continue;
             return c == '[' ? Current : Legacy;
         }
         return Legacy;
@@ -72,18 +76,33 @@ public static class CurationFormat
 
     /// <summary>Writes the curation as format 2 with the given parts (the registered ones when null). Streaming:
     /// the parts' sections are prepared first, then the document is serialized straight into the destination.</summary>
-    public static void Write(FamilyClusterFile file, Stream destination, IReadOnlyList<CurationFormatPart>? parts = null)
+    public static void Write(FamilyClusterFile file, Stream destination, IReadOnlyList<CurationFormatPart>? parts = null) =>
+        Write(file, destination, parts, MaxHeaderBytes);
+
+    /// <summary>The writer with its header limit as a parameter, so a test can reach the limit with small sections.</summary>
+    internal static void Write(FamilyClusterFile file, Stream destination, IReadOnlyList<CurationFormatPart>? parts, int maxHeaderBytes)
     {
         ArgumentNullException.ThrowIfNull(file); ArgumentNullException.ThrowIfNull(destination);
         parts ??= CurationFormatRegistry.Parts;
         var context = new CurationFormatContext(Current, writing: true, parts.Select(p => p.Name));
         foreach (CurationFormatPart part in parts) part.PrepareWrite(file, context);
-        var document = new CurationDocument
+        var options = CurationFormatRegistry.CreateOptions(context, parts);
+        var document = new CurationDocument { Format = Current, Parts = parts.Select(p => p.Name).ToList(), Sections = context.Sections };
+        // Checked before a byte is written: a header the reader would refuse must never reach a file.
+        long headerBytes = JsonSerializer.SerializeToUtf8Bytes(new[] { document }, options).LongLength;
+        if (headerBytes + HeaderMargin > maxHeaderBytes)
         {
-            Format = Current, Parts = parts.Select(p => p.Name).ToList(), Sections = context.Sections, Curation = file,
-        };
-        JsonSerializer.Serialize(destination, new[] { document }, CurationFormatRegistry.CreateOptions(context, parts));
+            var largest = context.Sections.Select(section => (Part: section.Key, Bytes: (long)Encoding.UTF8.GetByteCount(section.Value.GetRawText())))
+                .OrderByDescending(section => section.Bytes).ThenBy(section => section.Part, StringComparer.Ordinal).FirstOrDefault();
+            throw new InvalidOperationException("The curation was not written: its format-2 header would be " + Megabytes(headerBytes)
+                + ", over the " + Megabytes(maxHeaderBytes) + " a reader accepts. "
+                + (largest.Part == null ? "No part wrote a section." : "The part \"" + largest.Part + "\" writes " + Megabytes(largest.Bytes) + " in its section."));
+        }
+        document.Curation = file;
+        JsonSerializer.Serialize(destination, new[] { document }, options);
     }
+
+    private static string Megabytes(long bytes) => (bytes / 1048576.0).ToString("0.0", CultureInfo.InvariantCulture) + " MB";
 
     /// <summary>Reads a curation of either format through the same reader every file route uses.
     /// <paramref name="parts"/> stands for the parts this build knows (the registered ones when null).</summary>
