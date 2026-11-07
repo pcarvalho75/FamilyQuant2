@@ -252,6 +252,7 @@ public partial class FamilyListImportWindow : Window
     {
         if (section is "sheets" or "notes" or "problems") WorkbookTabs.SelectedItem = WorkbookMapTab;
         if (section == "colours") ColourCategories.IsExpanded = true;
+        if (section == "subclasses" && Model.WorkbookHasReviewProblems) WorkbookSubclassReview.CheckChoices();
     }
     private void ShowHelp() => FamilyListImportGuideWindow.Show(this, HelpSectionKey());
     private string HelpSectionKey() => Model.Page switch

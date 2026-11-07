@@ -293,6 +293,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ImportTooltipCopyTests());
             suite.AddWithApplication(() => WorkbookWizardTests());
             suite.AddWithApplication(() => WorkbookOverviewTests());
+            suite.AddWithApplication(() => WorkbookSummaryPolishTests());
             suite.AddWithApplication(() => WorkbookSubclassReviewTests());
             suite.AddWithApplication(() => ImportWizardToolTipTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));

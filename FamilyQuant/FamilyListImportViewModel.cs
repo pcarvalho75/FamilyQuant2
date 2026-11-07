@@ -104,7 +104,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         : "Closes the wizard and discards its draft choices; the project and workbook are unchanged.";
     public string ForwardToolTip => reviewingWorkbook ? CanAcceptWorkbook
         ? "Accepts the exact workbook proposal shown and imports it as one project edit. Source and project are checked again; Undo restores the previous panel, and File > Save stores the change."
-        : (WorkbookReviewProblems.FirstOrDefault() ?? "Review the remaining workbook choices.") + " Accept and import is unavailable until blocking choices are resolved."
+        : (WorkbookHasReviewProblems ? WorkbookReviewStatus : "Review the remaining workbook choices.") + " Accept and import is unavailable until required choices are resolved."
         : reviewingSubclasses ? "Keeps these selections in the workbook draft and returns to its review page. Rules remain unconfirmed until your explicit acceptance."
         : !CanNext ? DisabledReason + " Nothing is imported while this action is unavailable."
         : page == 5 && !Imported ? "Rechecks the workbook and project, then imports the reviewed list as one project edit; Undo restores the previous list, and File > Save stores the change."
