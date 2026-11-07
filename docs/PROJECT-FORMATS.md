@@ -48,8 +48,11 @@ Update FamilyQuant to open it." (checked with the real 2.1.10 Core and in
 `--test-curation-format2` with its reader transcribed). A format-2 text given to
 2.1.10 as a .fcf stops at the first token (root array, not an object).
 
-The export "Families for FamilyQuant 1.5 (.fcf)" stays curation format 1, so 1.5
-and 2.1.10 open it (DU7). Every reader opens both formats: `ReadJsonUtf8` and
+New FCF saves and the "Families (.fcf)" export use curation format 2 (D80).
+DU7's frozen-reader compatibility gate is retired explicitly: "Paulo, 11-07:
+forget familyquant 1.5"; the decision is recorded in the feature ledger and generator.
+The transcribed 2.1.10 reader throws a JSON root-conversion error, so it cannot silently
+interpret a scoped panel as complete. Every current reader opens both formats: `ReadJsonUtf8` and
 `FromJsonText` send a text whose first character is `[` to the format-2 reader. The
 canonical content (`ToJsonText`, `JsonContentSha256`, `DeepCopy`) stays format 1,
 so every hash and fingerprint is unchanged.

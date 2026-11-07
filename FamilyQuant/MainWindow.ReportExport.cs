@@ -167,6 +167,15 @@ public partial class MainWindow
             keepPublicationStage = exception is ReportPublicationRecoveryException;
             string guidance = exception is IOException or UnauthorizedAccessException
                 ? " Check that the destination is writable and that the report is closed in other applications." : "";
+            if (exception is InvalidOperationException && (exception.Message.EndsWith(FamilyStudyMembership.ChangedMessage, StringComparison.Ordinal)
+                || exception.Message.EndsWith(FamilyStudyMembership.UnverifiedMessage, StringComparison.Ordinal))
+                && exception.Message == FamilyStudyMembership.Problem(curation, manifest))
+            {
+                bool sensitivity = manifest.FamilySensitivity != null && exception.Message == FamilyStudyMembership.Problem(curation,
+                    new QuantManifest { FamilySensitivity = manifest.FamilySensitivity });
+                guidance = sensitivity ? " Open Results > Sensitivity and choose Calculate, then choose Export report."
+                    : " Open Quantify. Run Quantify again to refresh them, then choose Export report.";
+            }
             ShellMessages.Report(this, "The report could not be exported. " + exception.Message + guidance, "Export report", image: MessageBoxImage.Error);
             return false;
         }

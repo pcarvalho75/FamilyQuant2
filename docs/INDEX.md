@@ -135,6 +135,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-tooltips` | Z12q6 rule 7 over every window the census opens: fails on a required control with NONE or REPEATS-LABEL and on a dash, colour word or D21 word, naming window and control; in DefaultSuite since it first passed on fq/v2111-release |
 | `--tooltip-census <new-output>` | Z12q1 census: opens every window, reveals tabs and expanders, and writes one table per window (kind, label, name, host, tooltip or NONE, REPEATS-LABEL, wording flags) plus census.md |
 | `--test-report-findings` | J44 Summary of findings: each fixed sentence present only with its data, headline and study values, Others named only in the supplement, numbers table, culture and wording guards |
+| `--test-report-recovery [fresh-output]` | Z12p5l synthetic missing assignment evidence, locked review, one-press family unlock and exact Undo, stale per-run shares, production stored-row share refresh and native report export |
 | `--test-interpretation-input` | J45 Interpretation input: deterministic Markdown of details, panel, findings, stored tables and Methods; escaping, absent parts, refusal and the File > Export command |
 | `--j45-walk <project.fqproj> <new-output>` | Private desktop File > Export > Interpretation input (Markdown) twice on a saved project; timings and byte equality |
 | `--subclass-leave-one-out <project.fqproj> <new-output-directory>` | Current-assignment reviewed-subfamily measurement, per-target CSV and summary JSON; input project unchanged |

@@ -96,8 +96,12 @@ namespace FamilyQuant.Tests
             Check("the current User XIC survives bit-exactly",
                 BitConverter.DoubleToInt64Bits(b.XICUser) == BitConverter.DoubleToInt64Bits(a.XICUser));
             using (var written = JsonDocument.Parse(File.ReadAllText(path)))
+            {
+                var body = written.RootElement.ValueKind == JsonValueKind.Array
+                    ? written.RootElement[0].GetProperty("Curation") : written.RootElement;
                 Check("new curation files omit the unused legacy XIC field",
-                    !written.RootElement.GetProperty("MyExtendedFastaItems")[0].TryGetProperty("XIC", out _));
+                    !body.GetProperty("MyExtendedFastaItems")[0].TryGetProperty("XIC", out _));
+            }
 
             const string legacy = "{\"ClusteringIdentity\":70,\"MyExtendedFastaItems\":[{\"SequenceIdentifier\":\"legacy\",\"Sequence\":\"MKAWLL\",\"USearchID\":2,\"UserID\":5,\"XIC\":0.125,\"XICUser\":0.0625}]}";
             var imported = FamilyClusterFile.FromJsonText(legacy);

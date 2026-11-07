@@ -375,7 +375,7 @@
                                              Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}" TextWrapping="Wrap" MinHeight="48" MaxHeight="88"
                                              VerticalScrollBarVisibility="Auto" Margin="0,8,0,0" ToolTip="Read the same stored-evidence match counts and family names shown in the scope preview. This is read only; Update proposal rebuilds choices without applying them to the project."/>
                                     <Button x:Name="MatchPanelNamesButton" Grid.Row="5" Content="Match stored names..." Click="MatchPanelNames_Click" IsEnabled="{Binding CanMatchPanelNames}"
-                                            HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="{Binding MatchPanelNamesHint}"/>
+                                            HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="{Binding DataContext.MatchPanelNamesHint, RelativeSource={RelativeSource AncestorType={x:Type local:SuperClusterPreviewWindow}}, FallbackValue='Unavailable until a current panel proposal and selected family are ready. Update proposal, select a family and use pending panel-link choices before matching stored names.'}"/>
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Architecture" ToolTip="Inspect supplied domain combinations and choose which groups become separate named families, including placements by length and cysteines. Opening this tab changes only the view; Apply grouping commits split choices and Undo restores the preceding grouping."><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>
@@ -455,6 +455,9 @@
         </TabControl>
         <DockPanel Grid.Row="3" Margin="0,12,0,0">
         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            <Button x:Name="UnlockEvidenceFamiliesButton" Content="Unlock evidence families" Click="UnlockEvidenceFamilies_Click"
+                    Visibility="{Binding ShowUnlockEvidenceFamilies, Converter={StaticResource VisibleWhenTrue}}" IsEnabled="{Binding CanUnlockEvidenceFamilies}"
+                    ToolTip="{Binding UnlockEvidenceFamiliesHint}"/>
             <Button Content="Help" Click="Help_Click" ToolTip="Open Help explaining scope, evidence sources, coverage, flags, keyword matching, domains and review choices. The project and files stay unchanged."/>
             <Button x:Name="createButton" Content="Apply grouping" Style="{DynamicResource PrimaryButton}" IsEnabled="{Binding CanConfirm}" IsDefault="True" Click="Create_Click" ToolTip="Commit reviewed ticks, family names and splits to the project as one grouping change; Undo restores the preceding grouping and Save writes it to disk. Disabled until at least one eligible protein is ticked, all selected families and splits are named, and scope, links and any motif check are current."/>
             <Button Content="Cancel" IsCancel="True" Click="Cancel_Click" ToolTip="Close this review without applying its choices to the open project. No grouping Undo step is added and no project file is written."/>

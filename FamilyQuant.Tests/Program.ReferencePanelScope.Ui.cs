@@ -36,7 +36,7 @@ internal static partial class Program
                         && handler.Queries.All(query => !query.Contains("family:", StringComparison.Ordinal));
                     return Task.FromResult<ReferencePanelRequest?>(new(new[] { "Chosen phase" }));
                 }).GetAwaiter().GetResult();
-            Check("Z15a protein evidence and domains arrive before choosing panel scope", selected && outcome.Panel is { Coverage: not null, IsComplete: true }
+            Check("Z15a protein evidence and domains arrive before choosing panel scope", selected && outcome.Panel is { Coverage: null, IsComplete: true }
                 && fresh.MyExtendedFastaItems[0].Evidence?.Pfam.Count > 0);
         }
         var cancelled = new FamilyClusterFile { MyExtendedFastaItems = new() { new() { SequenceIdentifier = "sp|P50000|invented", Sequence = catalogue[0].Entry.Sequence } } };
