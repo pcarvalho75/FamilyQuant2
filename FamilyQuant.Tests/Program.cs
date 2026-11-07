@@ -99,9 +99,11 @@ namespace FamilyQuant.Tests
             suite.Section("Core operation outcomes, progress and cancellation");
             suite.Add(() => CoreOperationTests(workDir));
             suite.Add(() => StreamingSaveTests(Path.Combine(workDir, "streaming-save")));
+            suite.Add(() => CurationStreamingCallerTests());
             suite.Add(() => CurationFormat2Tests(Path.Combine(workDir, "curation-format2")));
             suite.Add(() => FeatureProvenanceFormatTests(Path.Combine(workDir, "feature-provenance")));
             suite.AddWithApplication(() => CurationStreamingContractTests(Path.Combine(workDir, "curation-streaming-contract")));
+            suite.Add(() => CompactCurationTests(Path.Combine(workDir, "compact-curation")));
             suite.Section("Display filters and the family counter");
             suite.Add(() => FilterTests());
             suite.Section("Target/decoy scoring arithmetic");
@@ -263,7 +265,9 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => PanelChecklistActionsTests(Path.Combine(workDir, "panel-checklist-actions")));
             suite.Add(() => PanelEvidenceMatchingTests());
             suite.Add(() => PanelEvidenceRankingTests());
+            suite.Add(() => PanelEvidenceFingerprintTests());
             suite.AddWithApplication(() => PanelEvidenceBroadTests(Path.Combine(workDir, "panel-evidence-broad")));
+            suite.AddWithApplication(() => EmptyPanelChecklistTests(Path.Combine(workDir, "empty-panel-checklist")));
             suite.AddWithApplication(() => PanelMatchLifecycleTests(Path.Combine(workDir, "panel-match-lifecycle")));
             suite.AddWithApplication(() => PanelEvidenceMatchUiTests(Path.Combine(workDir, "panel-evidence-match-ui")));
             suite.AddWithApplication(() => EvidenceDetailSelectionTests(Path.Combine(workDir, "evidence-detail-selection")));
@@ -284,6 +288,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelImportTemplateTests(Path.Combine(workDir, "panel-import-template")));
             suite.Add(() => PanelImportExampleTests(Path.Combine(workDir, "panel-import-example")));
             suite.AddWithApplication(() => ToolTipStyleTests());
+            suite.AddWithApplication(() => ToolTipCheckTests());
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
             suite.Section("Panel, threshold, template and report Help");
             suite.Add(() => PanelAuditTests());
@@ -353,6 +358,10 @@ namespace FamilyQuant.Tests
             suite.Add(() => NearestReviewedTests(workDir));
             suite.Add(() => ReferencePanelTests(workDir));
             suite.Add(() => ReferencePanelStreamTests());
+            suite.Add(() => ReferencePanelScopeTests(Path.Combine(workDir, "reference-panel-scope")));
+            suite.AddWithApplication(() => ReferencePanelScopeUiTests(Path.Combine(workDir, "reference-panel-scope-ui")));
+            suite.Add(() => ReferencePanelExpansionTests(Path.Combine(workDir, "reference-panel-expansion")));
+            suite.AddWithApplication(() => ReferencePanelExpansionUiTests(Path.Combine(workDir, "reference-panel-expansion-ui")));
             suite.Add(() => EvidenceOperationTests());
             suite.Section("Database update - one-to-one matching of a project with a new database file");
             suite.Add(() => DatabaseUpdateMatchingTests());

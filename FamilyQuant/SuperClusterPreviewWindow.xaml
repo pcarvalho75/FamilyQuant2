@@ -20,20 +20,20 @@
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
         <TextBlock x:Name="headline" Text="{Binding Summary}" Style="{StaticResource SectionTitle}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Margin="0,0,0,12"/>
         <TabControl Grid.Row="1" SelectedIndex="{Binding ModeIndex}" IsEnabled="{Binding CanEdit}" SelectionChanged="ReviewModeChanged">
-            <TabItem Header="Keywords" ToolTip="Review proteins offered through description keywords and choose which ones join a family. Switching tabs changes only this view; Apply grouping commits the chosen mode's review and Undo can restore the previous grouping.">
+            <TabItem Header="Keywords" ToolTip="Reviews description keywords and protein ticks while keeping pending review choices when you return. The first switch to Evidence can start Read database and scope over the internet; only Apply grouping changes the project, and Undo can reverse it.">
                 <Grid Margin="8" DataContext="{Binding Keyword}">
                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/></Grid.RowDefinitions>
                     <Grid>
                         <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition/><ColumnDefinition Width="180"/></Grid.ColumnDefinitions>
                         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                         <TextBlock Text="Keywords" VerticalAlignment="Center" Margin="0,0,8,6"/>
-                        <TextBox Grid.Column="1" Text="{Binding KeywordsText, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,8,6" ToolTip="Description words or quoted phrases, separated by commas or spaces; initially copied from setup, with no numeric unit or range. The proposal follows as you type, but the project changes only on Apply grouping and can then be restored with Undo."/>
-                        <ComboBox Grid.Column="2" SelectedIndex="{Binding MatchIndex}" Margin="0,0,0,6" ToolTip="Choose whether a protein must carry all or any entered keywords; initially copied from setup, with All as the usual default. This rebuilds the review without changing the project until Apply grouping.">
+                        <TextBox Grid.Column="1" Text="{Binding KeywordsText, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,8,6" ToolTip="Description words or quoted phrases separated by spaces, commas or semicolons; starts empty or with the last applied keyword review, with no unit or fixed length limit. Editing rebuilds the review; only Apply grouping changes the project, and Undo restores the previous grouping."/>
+                        <ComboBox Grid.Column="2" SelectedIndex="{Binding MatchIndex}" Margin="0,0,0,6" ToolTip="Chooses match all words or match any word; starts at all words or the last applied keyword review's choice. Changing it rebuilds only the review until Apply grouping; Undo restores an applied grouping.">
                             <ComboBoxItem Content="match all words" ToolTip="Offer a family when one protein contains every keyword in its description before OS=. This changes the proposal only until Apply grouping, after which Undo restores the preceding grouping."/>
                             <ComboBoxItem Content="match any word" ToolTip="Offer a family when one protein contains at least one entered word or complete quoted phrase before OS=. This changes the proposal only until Apply grouping, after which Undo restores the preceding grouping."/>
                         </ComboBox>
                         <TextBlock Grid.Row="1" Text="Exclude words" VerticalAlignment="Center" Margin="0,0,8,6"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ExcludeText, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,6" ToolTip="Exclude description words or quoted phrases, separated by commas or spaces; initially copied from setup, with empty meaning no extra exclusions and no numeric range. Matching proteins stay out while the rest of their family may join; the project changes only on Apply grouping."/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ExcludeText, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,6" ToolTip="Description words or quoted phrases to exclude, separated by spaces, commas or semicolons; starts empty or with the last applied keyword review, with no unit or fixed length limit. Matching proteins stay out while their remaining family members may join; only Apply grouping changes the project."/>
                     </Grid>
                     <StackPanel Grid.Row="1">
                         <TextBlock x:Name="notes" Text="{Binding Notes}" Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" ToolTip="{Binding Notes}"/>
@@ -67,18 +67,18 @@
                             </Style>
                         </DataGrid.RowStyle>
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Joins" Width="72" MinWidth="72" IsReadOnly="True" CellTemplate="{StaticResource KeywordTick}" ClipboardContentBinding="{Binding Locus}" SortMemberPath="Join" theme:TableAppearance.HeaderToolTip="Whether the protein is selected to join the keyword grouping on Apply grouping. Unticking retains its current family, and Undo restores an applied grouping."/>
-                            <DataGridTextColumn Header="Locus" Width="190" MinWidth="190" IsReadOnly="True" Binding="{Binding Locus}" theme:TableAppearance.HeaderToolTip="Protein identifier exactly as retained from the database, including its prefixes."/>
-                            <DataGridTextColumn Header="Description" Width="*" MinWidth="200" IsReadOnly="True" Binding="{Binding Description}" theme:TableAppearance.HeaderToolTip="Original database description, including OS= text. Keyword matching reads only the description before OS=."/>
-                            <DataGridTextColumn Header="Domains" Width="200" MinWidth="200" IsReadOnly="True" Binding="{Binding Domains}" theme:TableAppearance.HeaderToolTip="Stored UniProt Pfam calls for this protein. An empty cell is a missing call, not proof that a domain is absent."/>
-                            <DataGridTextColumn Header="Keyword" Width="100" MinWidth="100" IsReadOnly="True" Binding="{Binding Keyword}" theme:TableAppearance.HeaderToolTip="Whether this protein's description before OS= carries the required entered keyword or phrase under the chosen all/any rule."/>
-                            <DataGridTextColumn Header="Family" Width="76" MinWidth="76" IsReadOnly="True" Binding="{Binding Family}" theme:TableAppearance.HeaderToolTip="Current document User ID of the protein before the reviewed grouping is applied."/>
-                            <DataGridTextColumn Header="In family" Width="90" MinWidth="90" IsReadOnly="True" Binding="{Binding FamilyKeywords}" SortMemberPath="FamilyCarriers" theme:TableAppearance.Numeric="True" theme:TableAppearance.HeaderToolTip="Number of keyword-carrying proteins over the total proteins in this current family. The fraction explains why a family was offered even when this particular protein carries no keyword."/>
+                            <DataGridTemplateColumn Header="Joins" Width="72" MinWidth="72" IsReadOnly="True" CellTemplate="{StaticResource KeywordTick}" ClipboardContentBinding="{Binding Locus}" SortMemberPath="Join"/>
+                            <DataGridTextColumn Header="Locus" Width="190" MinWidth="190" IsReadOnly="True" Binding="{Binding Locus}"/>
+                            <DataGridTextColumn Header="Description" Width="*" MinWidth="200" IsReadOnly="True" Binding="{Binding Description}"/>
+                            <DataGridTextColumn Header="Domains" Width="200" MinWidth="200" IsReadOnly="True" Binding="{Binding Domains}"/>
+                            <DataGridTextColumn Header="Keyword" Width="100" MinWidth="100" IsReadOnly="True" Binding="{Binding Keyword}"/>
+                            <DataGridTextColumn Header="Family" Width="76" MinWidth="76" IsReadOnly="True" Binding="{Binding Family}"/>
+                            <DataGridTextColumn Header="In family" Width="90" MinWidth="90" IsReadOnly="True" Binding="{Binding FamilyKeywords}" SortMemberPath="FamilyCarriers" theme:TableAppearance.Numeric="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Evidence" IsEnabled="{Binding EvidenceAvailable}" ToolTip="Review supplied family assignments, reasons and flags; tab selection changes only this view. Unavailable in keyword-only review; open Group by evidence with an evidence proposal to enable it.">
+            <TabItem Header="Evidence" IsEnabled="{Binding EvidenceAvailable}" ToolTip="Reviews supplied evidence assignments, reasons and flags, and is also available from Group by keywords. Its first opening reads UniProt over the internet through Read database and scope when counts are missing; only Apply grouping changes the project, with Undo available.">
                 <Grid Margin="8">
                     <Grid.RowDefinitions><RowDefinition Height="2*" MaxHeight="260"/><RowDefinition Height="3*" MinHeight="430"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10">
@@ -166,9 +166,14 @@
                     </Expander>
                     <DockPanel>
                         <Button DockPanel.Dock="Right" Content="Update proposal" Click="UpdateProposal_Click" IsEnabled="{Binding CanUpdateProposal}" ToolTip="Rebuild the review from the edited scope and stored evidence without downloading or changing the open project; Apply grouping commits the choices. Disabled without scope words or during a review operation; enter scope words and wait for the operation to finish."/>
+                        <Button x:Name="FetchMissingPanelButton" Content="Fetch missing panel" DockPanel.Dock="Right" Click="FetchMissingPanel_Click" Margin="0,0,8,0"
+                                Visibility="{Binding PanelFetchAvailable, Converter={StaticResource VisibleWhenTrue}}" IsEnabled="{Binding CanFetchMissingPanel}"
+                                ToolTip="Download entries missing for the current scope and store the panel. Use Update proposal before Apply grouping; this is disabled when coverage is ready, scope is empty or another step is running."/>
                         <TextBlock DockPanel.Dock="Left" Text="Scope" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                        <TextBox x:Name="TaskScopeBox" Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Keyword or tissue words and quoted phrases defining the evidence scope; initially suggested or copied from setup, with any parsed terms allowed and no numeric range. Editing previews stored matches; Update proposal is required before Apply grouping, which can then be reverted with Undo."/>
+                        <TextBox x:Name="TaskScopeBox" Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Keyword or tissue words and quoted phrases defining the evidence scope; starts empty and Read database and scope suggests terms from UniProt. Accepts parsed text with no unit or fixed length limit; editing previews stored matches, Update proposal rebuilds the review, and Apply grouping makes an undoable project change."/>
                     </DockPanel>
+                    <TextBlock Text="{Binding PanelCoverageText}" Visibility="{Binding PanelFetchAvailable, Converter={StaticResource VisibleWhenTrue}}"
+                               TextTrimming="CharacterEllipsis" ToolTip="{Binding PanelCoverageText}" Margin="0,6,0,0"/>
                     <Border x:Name="ScopeChangePreviewPanel" Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}"
                             Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource MutedBrush}" BorderThickness="1" CornerRadius="4" Padding="10" Margin="0,8,0,0">
                         <StackPanel>
@@ -298,15 +303,18 @@
                             </TabItem>
                             <TabItem Header="Panel links" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Review evidence-derived candidate links from source families or domain combinations to your panel and record explicit choices. Opening this tab changes only the view; Use link choices rebuilds the proposal before Apply grouping commits it.">
                                 <DockPanel>
-                                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                                    <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+                                        <CheckBox x:Name="PanelLinksNeedsChoiceFilter" Content="{Binding PanelLinksChoiceFilterLabel}"
+                                                  IsChecked="{Binding OnlyPanelLinksNeedingChoice, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,12,0"
+                                                  ToolTip="Shows only panel links that still need confirmation, including choices waiting for Use link choices; starts off. This filters the review list without changing any choice or the project."/>
                                         <Button Content="Use link choices" Click="UpdatePanelLinks_Click" IsEnabled="{Binding CanUpdatePanelLinks}" ToolTip="Rebuild the review from pending panel-link choices and stored evidence; the project changes only on Apply grouping, with Undo available. Disabled without changed link choices or while busy; choose a candidate or Leave outside and enter valid single-line notes, then wait for the operation to finish."/>
                                         <TextBlock Text="Use link choices updates the family proposal." VerticalAlignment="Center" Margin="12,0,0,0"/>
-                                    </StackPanel>
-                                    <DataGrid x:Name="panelLinksGrid" ItemsSource="{Binding Evidence.PanelLinks}" AutoGenerateColumns="False"
+                                    </WrapPanel>
+                                    <DataGrid x:Name="panelLinksGrid" ItemsSource="{Binding VisiblePanelLinks}" AutoGenerateColumns="False"
                                               CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" ToolTip="Inspect supplied link evidence and edit the candidate choice or optional note. These are review choices until Use link choices rebuilds the proposal and Apply grouping commits it, after which Undo restores the preceding grouping.">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="Source family" Binding="{Binding SourceFamily}" IsReadOnly="True" Width="180" theme:TableAppearance.HeaderToolTip="Stored source-family context of the proposed panel link, or Domain combination when no source family is supplied."/>
-                                            <DataGridTemplateColumn Header="User choice" Width="200" theme:TableAppearance.HeaderToolTip="Chosen evidence-derived panel candidate or Leave outside panel, initially the confirmed or sole candidate when available. Use link choices stages the resulting proposal before Apply grouping changes the project.">
+                                            <DataGridTemplateColumn Header="User choice" Width="200" SortMemberPath="Source.NeedsConfirmation" CanUserSort="True" theme:TableAppearance.HeaderToolTip="Chosen evidence-derived panel candidate or Leave outside panel, initially the confirmed or sole candidate when available. Use link choices stages the resulting proposal before Apply grouping changes the project.">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <ComboBox ItemsSource="{Binding Options}" DisplayMemberPath="DisplayName"
@@ -332,7 +340,7 @@
                             <TabItem x:Name="PanelChecklistTab" Header="Family checklist" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Review database target matches to each panel family and why matching proteins remain outside the proposal. Opening this tab changes only the view; a name or domain match alone never assigns a family.">
                                 <Grid>
                                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                                    <TextBlock Text="Matches are database targets, not automatic assignments; match types may overlap." TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,8"/>
+                                    <TextBlock x:Name="PanelChecklistHintText" Text="{Binding PanelChecklistHint}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,8"/>
                                     <DataGrid x:Name="PanelChecklistGrid" Grid.Row="1" ItemsSource="{Binding Evidence.PanelChecklist}"
                                               SelectedItem="{Binding Evidence.SelectedChecklistFamily, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False"
                                               CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" SelectionMode="Single" ToolTip="Select a panel family to inspect overlapping match types and the supplied reasons for outside matches. Selection and sorting change only the view and never assign proteins automatically.">
@@ -367,7 +375,7 @@
                                              Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}" TextWrapping="Wrap" MinHeight="48" MaxHeight="88"
                                              VerticalScrollBarVisibility="Auto" Margin="0,8,0,0" ToolTip="Read the same stored-evidence match counts and family names shown in the scope preview. This is read only; Update proposal rebuilds choices without applying them to the project."/>
                                     <Button x:Name="MatchPanelNamesButton" Grid.Row="5" Content="Match stored names..." Click="MatchPanelNames_Click" IsEnabled="{Binding CanMatchPanelNames}"
-                                            HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="Open stored evidence-label suggestions for the selected panel family, then review and confirm labels used by the checklist. Disabled without an editable current panel proposal and selected family; Update proposal after scope edits, select a family and wait for active operations."/>
+                                            HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="{Binding MatchPanelNamesHint}"/>
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Architecture" ToolTip="Inspect supplied domain combinations and choose which groups become separate named families, including placements by length and cysteines. Opening this tab changes only the view; Apply grouping commits split choices and Undo restores the preceding grouping."><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>

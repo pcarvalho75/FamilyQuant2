@@ -3,8 +3,8 @@ namespace FamilyQuant;
 public static class FamilyListImportHelp
 {
     public const string DecisionsSummary = "Quantify, merge, report under others or leave out; no conditional action. Your labels stay with each family.";
-    public const string DoneNext = "Next: Read database and scope, then Update proposal; reading UniProt can take minutes.";
-    public const string MatchingEffect = "Matching labels families only; change scope or use Place outside matches by hand, then Apply grouping to move proteins.";
+    public const string DoneNext = "Next: Group by evidence reads the database and scope by itself when it opens (this takes minutes); then press Update proposal to see the family checklist.";
+    public const string MatchingEffect = "Matching labels families; proteins move only when you change the scope or place them by hand, then Apply grouping.";
     public const string Text = "IMPORT FAMILY LIST\n\n"
         + "1. Welcome. Choose an Excel workbook with an abbreviation and name for each family, or try the fictitious example. Save a template creates a reusable workbook. Edit current panel keeps the existing editor available.\n\n"
         + "2. File and sheet. Browse or drop one .xlsx file, choose its family sheet, and check the proposed header row. After editing the row number, press Read this header row. The preview retains source text and row numbers; select a cell and open Cell details for the complete text, fill name and merged range. Workbook colours are data, never decisions; yellow and gold fills are shown neutrally. Other sheets can be ignored or kept as original source notes.\n\n"

@@ -1,7 +1,8 @@
 # Curation streaming contract
 
 Z12p5f0 preserves the existing curation JSON metadata, options, property order and bytes.
-It changes how the data moves, without changing the stored scientific objects.
+Z12p5j subsequently removes indentation through the same shared options for both writing
+APIs. Neither change alters the stored scientific objects.
 
 `FamilyClusterFile.DeepCopy(OperationContext? operation = null)` is the shared public copy API.
 It writes canonical UTF-8 to a unique file under `Path.GetTempPath()`, reads it through the
@@ -37,5 +38,13 @@ in production. `ApplicationPaths.LocalDataDirectoryOverride` likewise defaults t
 the test harness sets it under its isolated TEMP directory so native caches and logs remain
 inside the selected test scratch area.
 
-The opt-in oversized proof and production-caller audit belong to Z12p5f4. Compact JSON is a
-separate step, Z12p5j; it must change the shared options for both writing APIs together.
+The opt-in oversized proof and production-caller audit belong to Z12p5f4.
+
+Z12p5j sets `CurationJsonOptions.WriteIndented` to false. New FCF files and project curation
+entries have compact JSON; the string API produces exactly those same bytes. Old indented
+files remain readable, including their legacy encodings and lock migration.
+`FamilyQuant.Tests.exe --test-compact-curation [output-directory]` proves that old indented
+files and compact rewrites load to identical objects and that the FCF, project entry, string
+API and streamed hash agree. It covers empty, nested evidence and Unicode/control text.
+Existing streaming-save and project-store byte checks derive their references from the
+shared options, so no frozen scientific export baseline is rewritten for this formatting change.
