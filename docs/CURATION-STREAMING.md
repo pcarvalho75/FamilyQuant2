@@ -10,6 +10,12 @@ shared reader and removes the spool with `FileOptions.DeleteOnClose`, including 
 Cancellation is checked before writing and at the write/read boundaries. It never creates a
 whole-file string or byte array. Configure TEMP/TMP on a drive with room for the spool.
 
+`JsonStreamCopy` owns the one shared store. `Clone<T>` retains default JSON semantics,
+using at most 64 KiB of memory before spilling; canonical `DeepCopy` forces the original
+file-spool behavior. `ReadWritten<T>` accepts the existing writer/reader callbacks and
+supports reader retries through borrowed views. `SameSerializedBytes<T>` compares actual
+default-JSON bytes through that store rather than relying on selected fields or hashes.
+
 `FamilyClusterFile.JsonContentSha256()` returns the same uppercase SHA-256 as
 `SHA256(Encoding.UTF8.GetBytes(ToJsonText()))`, with streamed serialization into the hash.
 `internal void WriteJsonUtf8(Stream destination)` and
