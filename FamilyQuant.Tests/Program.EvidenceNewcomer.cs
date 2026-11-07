@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FamilyQuant.Evidence;
+using FamilyQuant.DeNovo;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -149,5 +150,17 @@ internal static partial class Program
             && evidenceHelp.Contains("warning flag appears only when the analysis supplies one", StringComparison.Ordinal)
             && evidenceHelp.Contains("entries without a fragment annotation are counted", StringComparison.Ordinal)
             && evidenceHelp.Contains("unticked proteins keep their current family and are still quantified", StringComparison.Ordinal));
+        string generalHelp = HelpContent.BuildDeNovo();
+        Check("Help distinguishes scan m/z clustering from peptidoform neutral-mass suppression", generalHelp.Contains("same run, scan and charge by reported precursor m/z", StringComparison.Ordinal)
+            && generalHelp.Contains("canonical peptidoform and charge, then compares neutral precursor masses", StringComparison.Ordinal)
+            && generalHelp.Contains("one- or two-isotope selection correction", StringComparison.Ordinal)
+            && GroupingReviewHelp.Text.Contains("Align selected opens a read-only alignment", StringComparison.Ordinal));
+        var identified = new NativePeptideQuant { Run = "invented_run", Sequence = "ACDI", Charge = 2, PrecursorMz = 500 };
+        var deNovo = new NativePeptideQuant { Run = "invented_run", Sequence = "ACDL", Charge = 2,
+            PrecursorMz = 500 + PeptidoformIdentity.Carbon13SpacingDa / 2 };
+        Check("the documented isotope offset is accepted by both production precursor helpers", PeptidoformIdentity.PrecursorMzEquivalent(identified.PrecursorMz,
+            deNovo.PrecursorMz, 2, out _) && NativeQuantFractions.IsCrossSideEquivalent(identified, deNovo));
+        deNovo.Sequence = "ACD[15.99]L";
+        Check("suppression still requires canonical modified-peptide equivalence", !NativeQuantFractions.IsCrossSideEquivalent(identified, deNovo));
     }
 }

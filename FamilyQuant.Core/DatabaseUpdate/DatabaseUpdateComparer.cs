@@ -105,7 +105,8 @@ namespace FamilyQuant.DatabaseUpdate
                 }
                 if (leftOld.Count > 0 && leftNew.Count > 0)
                     cases.Add((DatabaseUpdateStep.RepeatedKey, leftOld, leftNew, "The accession " + key.Accession + " is held by "
-                        + Count(olds.Count) + " project rows and " + Count(news.Count) + " new records, with no unique identical sequence for these."));
+                        + Counted(olds.Count, "project row", "project rows") + " and " + Counted(news.Count, "new record", "new records")
+                        + ", with no unique identical sequence for these."));
                 else
                 {
                     // The key's other members found their partners; what is left has no candidate of its key.
@@ -129,8 +130,8 @@ namespace FamilyQuant.DatabaseUpdate
                 if (olds.Count == 1 && news.Count == 1)
                     matches.Add(new DatabaseUpdateMatch(olds[0], news[0], DatabaseUpdateKind.NewAccessionSameSequence, DatabaseUpdateStep.SameSequence, false));
                 else
-                    cases.Add((DatabaseUpdateStep.SameSequence, olds, news, "The same sequence is held by " + Count(olds.Count)
-                        + " project rows and " + Count(news.Count) + " new records under accessions the other side does not hold."));
+                    cases.Add((DatabaseUpdateStep.SameSequence, olds, news, "The same sequence is held by " + Counted(olds.Count, "project row", "project rows")
+                        + " and " + Counted(news.Count, "new record", "new records") + " under accessions the other side does not hold."));
                 foreach (int i in olds) oldDone[i] = true;
                 foreach (int j in news) newDone[j] = true;
             }
@@ -159,8 +160,8 @@ namespace FamilyQuant.DatabaseUpdate
                 if (olds.Count == 1 && news.Count == 1)
                     matches.Add(new DatabaseUpdateMatch(olds[0], news[0], DatabaseUpdateKind.ReplacedByLonger, DatabaseUpdateStep.Containment, false));
                 else
-                    cases.Add((DatabaseUpdateStep.Containment, olds, news, Count(olds.Count) + " project rows and " + Count(news.Count)
-                        + " longer new records contain one another's sequences, so no single replacement is certain."));
+                    cases.Add((DatabaseUpdateStep.Containment, olds, news, Counted(olds.Count, "project row", "project rows") + " and "
+                        + Counted(news.Count, "longer new record", "longer new records") + " contain one another's sequences, so no single replacement is certain."));
                 foreach (int i in olds) oldDone[i] = true;
                 foreach (int j in news) newDone[j] = true;
             }
@@ -190,10 +191,11 @@ namespace FamilyQuant.DatabaseUpdate
             int oldTargets = oldKeys.Count(k => !k.Side.Decoy);
             int keptTargets = matches.Count(m => !oldKeys[m.OldIndex].Side.Decoy);
             if (oldTargets > 0 && keptTargets < LowOverlapFraction * oldTargets)
-                warnings.Add("Only " + Count(keptTargets) + " of the project's " + Count(oldTargets) + " target proteins are in the new file. "
+                warnings.Add("Only " + Count(keptTargets) + " of the project's " + Counted(oldTargets, "target protein is", "target proteins are") + " in the new file. "
                     + "It looks like a different database; Build families may be the better choice.");
             if (source.EmptyRecords > 0)
-                warnings.Add(Count(source.EmptyRecords) + " records of the new file hold no residues and were left out.");
+                warnings.Add(Counted(source.EmptyRecords, "record of the new file holds", "records of the new file hold") + " no residues and "
+                    + (source.EmptyRecords == 1 ? "was" : "were") + " left out.");
             var comparison = new DatabaseUpdateComparison
             {
                 ProjectFingerprint = ProjectFingerprint(project), SourceFingerprint = source.Fingerprint,
@@ -444,5 +446,8 @@ namespace FamilyQuant.DatabaseUpdate
         }
 
         private static string Count(int value) => value.ToString("N0", CultureInfo.InvariantCulture);
+
+        /// <summary>A count with its noun in agreeing number: "1 new record", "2 new records".</summary>
+        internal static string Counted(int value, string one, string many) => Count(value) + " " + (value == 1 ? one : many);
     }
 }

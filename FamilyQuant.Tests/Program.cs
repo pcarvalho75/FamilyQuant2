@@ -260,7 +260,9 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelEvidenceMatchingTests());
             suite.AddWithApplication(() => PanelMatchLifecycleTests(Path.Combine(workDir, "panel-match-lifecycle")));
             suite.AddWithApplication(() => PanelEvidenceMatchUiTests(Path.Combine(workDir, "panel-evidence-match-ui")));
+            suite.Add(() => HandChoiceRecordTests());
             suite.AddWithApplication(() => ManualFamilyUiTests());
+            suite.AddWithApplication(() => ImportWizardMockTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
             suite.AddWithApplication(() => GridCopyTests());
             suite.AddWithApplication(() => GridCopyRowNumberTests());
@@ -346,6 +348,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => DatabaseUpdateApplyTests());
             suite.Add(() => DatabaseUpdateBindingTests());
             suite.AddWithApplication(() => DatabaseUpdateShellTests());
+            suite.Add(() => DatabaseUpdateExportTests());
             suite.Section("Coherence check - what the reviewed members of a family ever show");
             suite.Add(() => CoherenceCheckTests());
             suite.Add(() => CoherenceSourceDetailsTests());
@@ -356,6 +359,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ValidationReportTests());
             suite.AddWithApplication(() => EvidenceHelpTests());
             suite.Add(() => EvidenceScopeHelpTests());
+            suite.Add(() => EvidenceOutsideScopeHelpTests());
             suite.Section("Left-out list - marker carriers kept out of the marker's family, with why");
             suite.Add(() => LeftOutListTests());
             suite.Add(() => EvidenceExportTests());

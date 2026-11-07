@@ -61,6 +61,16 @@ internal static partial class Program
                         string path = Path.Combine(output, theme.ToString().ToLowerInvariant(), size.Width + "x" + size.Height + "-review.png");
                         Directory.CreateDirectory(Path.GetDirectoryName(path)!); ScreenHarness.Save(window, path, size.Width, size.Height);
                     }
+                    model.Evidence.SelectedFamily = model.Evidence.Families.Single(f => f.Name == "Invented UI family");
+                    tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Architecture"); PumpDispatcher();
+                    var architectureControl = (ArchitectureReviewControl)window.FindName("architectureReview");
+                    var architectureGrid = (DataGrid)architectureControl.FindName("groupGrid");
+                    var manualGroup = model.Evidence.SelectedArchitecture!.Groups.Single();
+                    var nameColumn = architectureGrid.Columns.OfType<DataGridTextColumn>().Single(c => (string)c.Header == "New family name");
+                    Check(label + " the native Architecture name cell displays the typed hand-family name", manualGroup.Name == "Invented UI family (no domain calls)"
+                        && nameColumn.GetCellContent(manualGroup) is TextBlock nameCell && nameCell.Text == manualGroup.Name);
+                    if (output != null) ScreenHarness.Save(window, Path.Combine(output, theme.ToString().ToLowerInvariant(), size.Width + "-architecture.png"), size.Width, size.Height);
+                    tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Proteins"); PumpDispatcher();
                     var editorModel = new ManualFamilyViewModel(model.Evidence, new[] { model.Evidence.Proteins.Single(p => p.ProteinIndex == 2) });
                     editorModel.SelectedOption = editorModel.Options.Single(o => o.IsNew);
                     Check(label + " dialog refuses blank and duplicate names and multiline notes", !editorModel.CanConfirm);
