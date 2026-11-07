@@ -33,14 +33,16 @@ public sealed partial class FamilyListImportViewModel
     private ImportWorkbookSheet? selectedWorkbookSheet;
     public ImportWorkbookSheet? SelectedWorkbookSheet { get => selectedWorkbookSheet; set { if (Set(ref selectedWorkbookSheet, value)) Changed(nameof(CanChooseFamilySheet)); } }
     public bool CanChooseFamilySheet => CanEdit && SelectedWorkbookSheet != null;
+    public Func<string, bool>? ConfirmWorkbookSheetChange { get; set; }
     public static IReadOnlyList<ImportSheetRoleOption> SheetRoles { get; } = new[] {
         new ImportSheetRoleOption("Family list", PanelWorkbookSheetRole.FamilyList), new("Colour legend", PanelWorkbookSheetRole.ColorLegend),
         new("Subclass table", PanelWorkbookSheetRole.SubclassTable), new("Notes", PanelWorkbookSheetRole.Notes) };
 
-    private void SetWorkbook(PanelWorkbookProposal? value)
+    private void SetWorkbook(PanelWorkbookProposal? value, bool preserveDraft = false)
     {
         updatingWorkbook = true;
-        workbookSnapshot = value; WorkbookSheets.Clear(); SubclassChoices.Clear(); reviewedWorkbookColumns.Clear(); ResetWorkbookReview();
+        workbookSnapshot = value; WorkbookSheets.Clear();
+        if (!preserveDraft) { SubclassChoices.Clear(); reviewedWorkbookColumns.Clear(); ResetWorkbookReview(); }
         foreach (var sheet in value?.Workbook.Sheets ?? (IEnumerable<PanelWorkbookSheet>)Array.Empty<PanelWorkbookSheet>())
         {
             var row = new ImportWorkbookSheet { Name = sheet.SheetName, Role = sheet.Role, Reason = sheet.RoleReason,
@@ -64,6 +66,24 @@ public sealed partial class FamilyListImportViewModel
     public Task ChangeWorkbookRoleAsync(string name, PanelWorkbookSheetRole role)
     {
         if (!CanEdit || !WorkbookSheets.Any(s => s.Name == name)) return Task.CompletedTask;
+        if (role == PanelWorkbookSheetRole.FamilyList && workbookSnapshot?.FamilySheet == name && !NeedsFamilySheetChoice)
+        {
+            workbookRoles[name] = role;
+            var confirmed = (importer as IFamilyPanelWorkbookImporter ?? new FamilyPanelSpreadsheetImporter())
+                .ProposeWorkbook(workbookSnapshot.Workbook, name, workbookRoles);
+            SetWorkbook(confirmed, preserveDraft: true);
+            Status = "Family sheet confirmed. Your reviewed choices are kept."; Refresh();
+            return Task.CompletedTask;
+        }
+        if (role == PanelWorkbookSheetRole.FamilyList && workbookSnapshot?.FamilySheet is { Length: > 0 } current && name != current
+            && ConfirmWorkbookSheetChange?.Invoke("Changing the family sheet clears your reviewed decisions and other draft choices. Continue?") != true)
+        {
+            updatingWorkbook = true;
+            try { WorkbookSheets.Single(s => s.Name == name).Role = workbookSnapshot.Workbook.Sheets.Single(s => s.SheetName == name).Role; }
+            finally { updatingWorkbook = false; }
+            Status = "Family sheet unchanged. Your reviewed choices are kept.";
+            return Task.CompletedTask;
+        }
         updatingWorkbook = true;
         foreach (var row in WorkbookSheets)
         {
@@ -76,6 +96,7 @@ public sealed partial class FamilyListImportViewModel
 
     public Task ChooseWorkbookFamilySheetAsync() => SelectedWorkbookSheet == null ? Task.CompletedTask
         : ChangeWorkbookRoleAsync(SelectedWorkbookSheet.Name, PanelWorkbookSheetRole.FamilyList);
+    public Task SelectWorkbookFamilySheetAsync(string name) => ChangeWorkbookRoleAsync(name, PanelWorkbookSheetRole.FamilyList);
 
     private PanelWorkbookDecisionHint? WorkbookDecision(string source) => workbookSnapshot?.Decisions.FirstOrDefault(d => d.SourceValue == source);
     private PanelWorkbookColorHint? WorkbookColor(string color) => workbookSnapshot?.Colors.FirstOrDefault(c => c.Color.Equals(color, StringComparison.OrdinalIgnoreCase));

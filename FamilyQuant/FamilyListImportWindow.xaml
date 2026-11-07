@@ -193,7 +193,7 @@
                                  ToolTip="Shows every source sheet, its proposed role and what is kept. Role changes rebuild the draft proposal; the workbook and project stay unchanged.">
                             <Grid Margin="0,6,0,0"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                                 <StackPanel Margin="0,0,0,6"><DockPanel><Button Content="Use selected family sheet" DockPanel.Dock="Right" Click="WorkbookFamilySheet_Click" IsEnabled="{Binding CanChooseFamilySheet}"
-                                    ToolTip="Uses the selected sheet as the family list and rebuilds its column proposals. Choose a sheet to enable this before Import while no step is running; the workbook and project stay unchanged."/>
+                                    ToolTip="Confirms the selected family sheet. Your choices are kept for the current sheet; a different sheet asks before clearing this draft. Available before Import while no step is running; the workbook and project stay unchanged."/>
                                     <TextBlock Text="{Binding WorkbookMapSummary}" Style="{StaticResource SectionTitle}"/></DockPanel>
                                     <TextBlock Text="{Binding WorkbookHintStatus}" Style="{StaticResource CaptionText}"/>
                                     <ItemsControl ItemsSource="{Binding WorkbookProblemMessages}"><ItemsControl.ItemTemplate><DataTemplate>

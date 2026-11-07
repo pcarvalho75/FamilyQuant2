@@ -197,6 +197,58 @@ internal static partial class Program
         WorkbookOverviewBroadGuardTest(work);
         WorkbookOverviewFilledNavigationTest(work);
         WorkbookOverviewMeaningPunctuationTests(work);
+        WorkbookFamilySheetDraftTests(work);
+    }
+
+    private static void WorkbookFamilySheetDraftTests(string work)
+    {
+        string path = Path.Combine(work, "reviewed-sheet-choice.xlsx"); WriteOverviewShape(path, decisions: true, notes: false);
+        using (var document = SpreadsheetDocument.Open(path, true))
+        {
+            var workbook = document.WorkbookPart!; var first = workbook.WorksheetParts.Single();
+            var data = first.Worksheet!.GetFirstChild<XL.SheetData>()!; data.RemoveAllChildren();
+            void Row(int number, params string[] values)
+            {
+                var row = new XL.Row { RowIndex = (uint)number };
+                for (int column = 0; column < values.Length; column++) row.Append(new XL.Cell { CellReference = ((char)('A' + column)).ToString() + number,
+                    DataType = XL.CellValues.InlineString, InlineString = new XL.InlineString(new XL.Text(values[column])) });
+                data.Append(row);
+            }
+            Row(1, "Abbreviation", "Family name", "Decision");
+            for (int i = 1; i <= 13; i++) Row(i + 1, "F" + i, "Family " + i, "Choice " + i);
+            first.Worksheet.Save();
+            var second = workbook.AddNewPart<WorksheetPart>(); second.Worksheet = (XL.Worksheet)first.Worksheet.CloneNode(true); second.Worksheet.Save();
+            workbook.Workbook!.Sheets!.Append(new XL.Sheet { Name = "Other families", SheetId = 2, Id = workbook.GetIdOfPart(second) }); workbook.Workbook.Save();
+        }
+        var project = WorkbookOverviewProject(); string before = project.ToJsonText(); string hash = TestFileHash.Upper(path);
+        var source = new ObservedWorkbookSource();
+        using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(project)), workbookSource: source, openWorkbookReview: true);
+        FinishReviewWork(() => model.LoadAsync(path, "Supplied list"));
+        model.Columns.Single(column => column.Role == PanelImportFields.Decision).Header = "Decision";
+        foreach (var decision in model.Decisions) decision.Decision = FamilyPanelDecision.Quantify;
+        model.ConfirmDecisions(); model.PanelName = "Reviewed import";
+        var originalRows = model.Decisions.ToArray();
+        Check("family sheet regression begins with thirteen confirmed source actions", originalRows.Length == 13 && originalRows.All(d => d.Confirmed),
+            "rows=" + originalRows.Length + "; confirmed=" + originalRows.Count(d => d.Confirmed));
+        model.SelectedWorkbookSheet = model.WorkbookSheets.Single(sheet => sheet.IsFamilySheet);
+        FinishReviewWork(model.ChooseWorkbookFamilySheetAsync);
+        Check("confirming the proposed family sheet preserves all thirteen reviewed decisions and the draft", model.Decisions.Count == 13
+            && model.Decisions.All(decision => decision.Confirmed) && model.Decisions.SequenceEqual(originalRows)
+            && model.PanelName == "Reviewed import" && source.Reads == 1,
+            "rows=" + model.Decisions.Count + "; confirmed=" + model.Decisions.Count(d => d.Confirmed) + "; same rows=" + model.Decisions.SequenceEqual(originalRows)
+                + "; name=" + model.PanelName + "; reads=" + source.Reads);
+        Check("confirming the same sheet never publishes or changes workbook bytes", project.ToJsonText() == before && TestFileHash.Upper(path) == hash && source.Completes == 0);
+        int questions = 0;
+        model.ConfirmWorkbookSheetChange = message => { questions++; return false; };
+        model.SelectedWorkbookSheet = model.WorkbookSheets.Single(sheet => sheet.Name == "Other families");
+        FinishReviewWork(model.ChooseWorkbookFamilySheetAsync);
+        Check("declining a different family sheet preserves all reviewed choices before any reload", questions == 1 && source.Reads == 1
+            && model.Sheet == "Supplied list" && model.Decisions.SequenceEqual(originalRows) && model.Decisions.All(d => d.Confirmed));
+        model.ConfirmWorkbookSheetChange = message => { questions++; return message.Contains("clears your reviewed decisions", StringComparison.Ordinal); };
+        FinishReviewWork(() => model.SelectWorkbookFamilySheetAsync("Other families"));
+        Check("a different family sheet clears choices only after the explicit warning is accepted", questions == 2 && source.Reads == 2
+            && model.Sheet == "Other families" && model.Decisions.All(d => !d.Confirmed) && model.PanelName != "Reviewed import"
+            && project.ToJsonText() == before && TestFileHash.Upper(path) == hash);
     }
 
     private static void WorkbookOverviewMeaningPunctuationTests(string work)

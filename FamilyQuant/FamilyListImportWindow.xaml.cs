@@ -26,6 +26,8 @@ public partial class FamilyListImportWindow : Window
     public FamilyListImportWindow(FamilyListImportViewModel model, Action<string>? exampleWriter = null, Action<string>? templateWriter = null)
     {
         InitializeComponent(); Model = model; DataContext = model;
+        Model.ConfirmWorkbookSheetChange = message => ShellMessages.Report(this, message, "Change family sheet",
+            MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes;
         AlignSummaryCells();
         SizeChanged += (_, _) => FitSummaryRows();
         model.PropertyChanged += (_, args) =>
@@ -45,7 +47,7 @@ public partial class FamilyListImportWindow : Window
         Model.PropertyChanged += Model_Changed;
         RefreshRowActionChoice(updateOptions: true);
         PreviewKeyDown += Window_KeyDown;
-        Closed += (_, _) => { Model.WorkbookViewRequested -= WorkbookView_Requested; Model.PropertyChanged -= Model_Changed; Model.Dispose(); };
+        Closed += (_, _) => { Model.ConfirmWorkbookSheetChange = null; Model.WorkbookViewRequested -= WorkbookView_Requested; Model.PropertyChanged -= Model_Changed; Model.Dispose(); };
     }
 
     private void Model_Changed(object? sender, PropertyChangedEventArgs e)
@@ -151,7 +153,10 @@ public partial class FamilyListImportWindow : Window
     private async void Sheet_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (loadingSheets || Model == null || Model.IsBusy || Model.Imported || SheetChoice.SelectedItem is not string name || name == Model.Sheet) return;
-        await Model.LoadAsync(Model.WorkbookPath, name);
+        if (Model.HasWorkbookMap) await Model.SelectWorkbookFamilySheetAsync(name);
+        else await Model.LoadAsync(Model.WorkbookPath, name);
+        if (SheetChoice.SelectedItem as string != Model.Sheet)
+        { loadingSheets = true; try { SheetChoice.SelectedItem = Model.Sheet; } finally { loadingSheets = false; } }
     }
 
     private async void Header_Click(object sender, RoutedEventArgs e)
