@@ -125,5 +125,6 @@ public sealed partial class GroupingReviewViewModel
         Changed(nameof(ScopeChangePreview)); Changed(nameof(IsScopePreviewBusy)); Changed(nameof(HasScopeChangePreview));
         Changed(nameof(ScopePreviewFamilies)); Changed(nameof(ScopePreviewTerms)); Changed(nameof(ScopePreviewSummary)); Changed(nameof(ScopePreviewEmptyText));
         Changed(nameof(ScopePreviewContaminantNote));
+        Changed(nameof(ChecklistScopePreviewText));
     }
 }

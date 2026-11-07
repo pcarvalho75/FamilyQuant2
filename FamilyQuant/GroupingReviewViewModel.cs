@@ -245,15 +245,17 @@ namespace FamilyQuant
         }
         private void SetEvidence(EvidenceReviewInput? input)
         {
+            string? checklistKey = evidence?.SelectedChecklistFamily?.Key;
             if (evidence != null) evidence.PropertyChanged -= EvidenceChanged;
             evidence = input == null ? null : new EvidenceReviewViewModel(input);
+            if (checklistKey != null && evidence != null) evidence.SelectedChecklistFamily = evidence.PanelChecklist.FirstOrDefault(row => row.Key == checklistKey);
             if (evidence != null) evidence.PropertyChanged += EvidenceChanged;
             checkedMotifPattern = ""; MotifReport = "";
             Changed(nameof(Evidence)); Changed(nameof(EvidenceAvailable)); Changed(nameof(CanCheckMotif)); NotifySummary();
             Changed(nameof(CanEditManual));
         }
         private void EvidenceChanged(object? sender, PropertyChangedEventArgs e) { Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); }
-        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); }
+        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); NotifyChecklistActions(); }
 
         private void RestoreManualState(IReadOnlyList<EvidenceManualChoice>? choices)
         {

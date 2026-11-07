@@ -10,7 +10,7 @@ namespace FamilyQuant.Evidence;
 public enum PanelChecklistMatch { None = 0, UniProtFamily = 1, Pfam = 2, NameText = 4, HandChoice = 8, ProposedPlacement = 16 }
 
 public sealed record PanelChecklistProtein(int ProteinIndex, string Identifier, PanelChecklistMatch Match,
-    bool? Reviewed, bool Placed, string Reason);
+    bool? Reviewed, bool Placed, string Reason, IReadOnlyList<string>? ScopePhrases = null, bool IsLocked = false);
 
 public sealed record PanelChecklistFamily(string Key, string Name, string Decision, string? TargetKey,
     IReadOnlyList<PanelChecklistProtein> Proteins)
@@ -19,6 +19,7 @@ public sealed record PanelChecklistFamily(string Key, string Name, string Decisi
     public int Reviewed => Proteins.Count(protein => protein.Reviewed == true);
     public int Placed => Proteins.Count(protein => protein.Placed);
     public int Outside => Matches - Placed;
+    public bool HasOutside => Outside > 0;
     public string OutsideSummary => Matches == 0 ? "No database targets matched." : Outside == 0 ? "All matching targets are placed."
         : string.Join(" | ", Proteins.Where(protein => !protein.Placed).Select(protein => protein.Reason).Distinct(StringComparer.Ordinal));
     public string MatchTypes => string.Join(" + ", new[]
@@ -71,7 +72,9 @@ public static class PanelFamilyChecklist
                 string reason = placed ? row.Reason : PanelAuditCsv.ExplainScopeExclusion(protein.Evidence, proposal.Options.ScopeTerms, mappedName, row.Reason);
                 if (!placed && row.Family.Length > 0)
                     reason = "Proposed in " + panel.Families.Single(item => item.Key == row.Family).DisplayName + ". " + reason;
-                matches.Add(new(row.ProteinIndex, row.Identifier, match, protein.Evidence?.Reviewed, placed, reason));
+                var phrases = (protein.Evidence?.Keywords ?? new List<string>()).Concat(protein.Evidence?.TissueSpecificity ?? new List<string>())
+                    .Where(phrase => !string.IsNullOrWhiteSpace(phrase)).Distinct(StringComparer.OrdinalIgnoreCase).OrderBy(phrase => phrase, StringComparer.Ordinal).ToArray();
+                matches.Add(new(row.ProteinIndex, row.Identifier, match, protein.Evidence?.Reviewed, placed, reason, phrases, file.LockedUserIds.Contains(protein.UserID)));
             }
             string decision = family.Decision switch
             {

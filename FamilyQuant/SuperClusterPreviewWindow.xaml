@@ -367,7 +367,7 @@
                             </TabItem>
                             <TabItem x:Name="PanelChecklistTab" Header="Panel checklist" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}">
                                 <Grid>
-                                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                                     <TextBlock Text="Matches are database targets, not automatic assignments; match types may overlap." TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,8"/>
                                     <DataGrid x:Name="PanelChecklistGrid" Grid.Row="1" ItemsSource="{Binding Evidence.PanelChecklist}"
                                               SelectedItem="{Binding Evidence.SelectedChecklistFamily, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False"
@@ -392,6 +392,18 @@
                                     <TextBox x:Name="PanelChecklistDetail" Grid.Row="2" Text="{Binding Evidence.ChecklistDetail, Mode=OneWay}" IsReadOnly="True"
                                              TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" MinHeight="100" MaxHeight="150" Margin="0,8,0,0"
                                              ToolTip="Shows match-type counts and the proposal's full reasons for matching targets outside the selected panel family."/>
+                                    <WrapPanel Grid.Row="3" Margin="0,8,0,0" Visibility="{Binding Evidence.SelectedChecklistFamily.HasOutside, Converter={StaticResource VisibleWhenTrue}}">
+                                        <ComboBox x:Name="ChecklistScopePhraseBox" ItemsSource="{Binding Evidence.ChecklistPhrases}" SelectedItem="{Binding Evidence.SelectedChecklistPhrase, Mode=TwoWay}"
+                                                  DisplayMemberPath="DisplayName" MinWidth="170" MaxWidth="270" Margin="0,0,8,0"
+                                                  ToolTip="Choose a keyword or tissue phrase stored on matching targets outside this panel family."/>
+                                        <Button x:Name="ChecklistAddScopeButton" Content="Add phrase to scope" Click="AddChecklistPhrase_Click" IsEnabled="{Binding CanAddChecklistPhrase}"
+                                                ToolTip="Adds the selected stored phrase and previews its evidence; Update proposal remains your next choice." Margin="0,0,8,0"/>
+                                        <Button x:Name="ChecklistPlaceHandButton" Content="Place outside matches by hand..." Click="PlaceChecklistMatches_Click" IsEnabled="{Binding CanPlaceChecklistMatches}"
+                                                ToolTip="{Binding ChecklistHandHint}"/>
+                                    </WrapPanel>
+                                    <TextBox x:Name="ChecklistScopePreview" Grid.Row="4" Text="{Binding ChecklistScopePreviewText, Mode=OneWay}" IsReadOnly="True"
+                                             Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}" TextWrapping="Wrap" MinHeight="48" MaxHeight="88"
+                                             VerticalScrollBarVisibility="Auto" Margin="0,8,0,0" ToolTip="Shows the same stored-evidence preview counts and family names as the scope panel; Update proposal rebuilds the actual proposal."/>
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Architecture"><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>

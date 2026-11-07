@@ -31,6 +31,9 @@ namespace FamilyQuant
         Left out shows marker-carrying proteins the analysis did not assign to that marker's family, including the supplied reason, marker, alternative assignment and source facts. Unassigned separately lists proteins with no proposed family. Neither list silently assigns a family. Marker carrier counts and vote fractions are the supplied quantities, without a new denominator inferred by the review.
         Motifs are user choices. Enter an amino-acid regular expression, prefix it with "not " to count proteins without it, or use "count C 12-16", "count C >= 8" or "count C <= 10" for amino-acid counts. Check motif shows Matching proteins and Proteins counted for each proposed family on the Motif counts tab, including unticked members. Known fragments stay outside that denominator; entries without a fragment annotation are counted. Editing the pattern requires a new check before Apply. Invalid patterns are reported and prevent Apply; the checked pattern travels with the review selection.
 
+        Consensus family spreadsheet
+        Use File > Import family panel to read your consensus spreadsheet. Choose the abbreviation as the stable family key, select the display-name and other-language columns, and map each decision label. Group by evidence > Panel checklist shows database matches and why the proposal leaves them outside. Choose a stored phrase and Add phrase to scope to preview a wider scope, then Update proposal. Place outside matches by hand opens the explicit user-choice dialog and records Added by hand. Review the ticks, Apply grouping, then File > Save. Matching names or domains alone never assigns a family.
+
         Copy
         Right-click for a UniProt code, the description or the UniProt page. Ctrl+C copies the column clicked; the tick column copies the locus. Selecting a row header preserves the grid's ordinary row copy. A held clipboard is reported rather than silently ignored.
         """;

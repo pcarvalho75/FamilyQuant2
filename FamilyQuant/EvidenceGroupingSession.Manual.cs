@@ -48,6 +48,7 @@ public sealed partial class EvidenceGroupingSession
         else
         {
             family = Proposal!.Families.FirstOrDefault(f => f.Family == request.Family)?.Family
+                ?? reviewPanel?.Families.Where(f => f.Key == request.Family && FamilyPanelValidation.ResolveFamilyKey(reviewPanel, f.Key) != null).Select(f => f.Key).SingleOrDefault()
                 ?? throw new ArgumentException("Choose a proposed family or New family.");
             created = manualChoices.Values.Any(c => c.Family == family && c.NewFamily);
         }
