@@ -17,10 +17,13 @@
             <MenuItem x:Name="MenuFile" Header="File" ToolTip="Create, open, save and export your project.">
                 <MenuItem x:Name="MenuItemRunUSearch" Header="Build families" Command="New" InputGestureText="Ctrl+N"
                           ToolTip="Builds families from a FASTA or target-decoy database. Save the open project before starting a different database."/>
+                <MenuItem x:Name="MenuItemUpdateDatabase" Header="Update database" Click="MenuItemUpdateDatabase_Click" IsEnabled="{Binding IsEnabled, ElementName=MenuItemFamilyPanel}" ToolTip="Brings the saved project to a newer FASTA made the same way, keeping its families; a preview shows every change. Disabled until a project is open." ToolTipService.ShowOnDisabled="True"/>
                 <MenuItem x:Name="MenuItemLoadFQC" Header="Open" Command="Open" InputGestureText="Ctrl+O"
                           ToolTip="Opens a FamilyQuant project or an older Family Cluster File. Save your current changes first."/>
                 <MenuItem x:Name="MenuItemFamilyPanel" Header="Import family panel" Click="MenuItemFamilyPanel_Click" IsEnabled="False"
                           ToolTip="Import or edit a family panel for the open project."/>
+                <MenuItem x:Name="MenuItemFamilyListTemplate" Header="Save family list template" Click="MenuSaveFamilyListTemplate_Click"
+                          ToolTip="Save an Excel template with the recommended family-list columns and instructions."/>
                 <Separator/>
                 <MenuItem x:Name="MenuItemSaveProject" Header="Save" Command="Save" InputGestureText="Ctrl+S" IsEnabled="False"
                           ToolTip="Saves the open project's families and stored quantitation. Disabled until a project is loaded."/>

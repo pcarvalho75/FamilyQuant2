@@ -50,6 +50,11 @@ namespace FamilyQuant.Evidence
         public int FamilyId { get; set; }
         public EvidenceTier Tier { get; set; }
         public string Reason { get; set; } = string.Empty;
+        /// <summary>For a protein added by hand: the warnings its review row carried when the user applied the
+        /// choice (coherence with the chosen family and the automatic proposal's own flags), empty when it showed
+        /// none. Absent for automatic rows and in recipes saved before it existed, so their bytes do not change.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public List<EvidenceFlag>? Flags { get; set; }
     }
 
     public sealed partial class EvidenceRecipe
@@ -213,6 +218,8 @@ namespace FamilyQuant.Evidence
                     ProteinIndex = index, Identifier = protein.SequenceIdentifier, Family = family, Name = name, GroupKey = key,
                     PreviousFamilyId = protein.UserID, PreviousSearchId = protein.USearchID, Tier = row.Tier, Reason = row.Reason,
                     AutomaticEvidence = row.AutomaticEvidence == null ? null : Clone(row.AutomaticEvidence),
+                    Flags = row.Tier == EvidenceTier.AddedByHand
+                        ? row.Flags.Select(f => new EvidenceFlag { Code = f.Code, Message = f.Message }).ToList() : null,
                 });
             }
             int next = MaximumId(file);

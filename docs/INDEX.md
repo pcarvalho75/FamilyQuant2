@@ -126,6 +126,10 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--desktop-world-walk <copied-project> <copied-raw-folder> <copied-sepr2> <copied-denovo-root> <output> <confirmed-scope>` | Private desktop real-data fetch/scope dialog, production Compute, Database gap and native CSV/FASTA exports; uses only copies |
 | `--test-quantitation-stages` | Prepared-peptide assignments, cross-side suppression, residual calibration, rollup and deterministic CSV |
 | `--test-family-panel` | Panel and subclass fixtures, safe publication, native runner and report sections |
+| `--test-panel-import-graceful` | Z12p1 graceful spreadsheet import: preview, header proposal, colours, proposals, plain-sentence problems, row choices, replay and old-panel JSON |
+| `--test-panel-import-several` | Z12p3 rows listing several families: list splitting, proposed keys, one family per name, one group under others, replay |
+| `--test-panel-import-template` | Z12p2d family-list template: sheets, marker, instructions, drop-down, schema validation, import with no mapping, replay |
+| `--test-panel-import-example` | The shipped example family list through the graceful importer: header below titles, proposals, merge label, repeated abbreviation, four-family row, replay |
 | `--test-report-findings` | J44 Summary of findings: each fixed sentence present only with its data, headline and study values, Others named only in the supplement, numbers table, culture and wording guards |
 | `--test-interpretation-input` | J45 Interpretation input: deterministic Markdown of details, panel, findings, stored tables and Methods; escaping, absent parts, refusal and the File > Export command |
 | `--j45-walk <project.fqproj> <new-output>` | Private desktop File > Export > Interpretation input (Markdown) twice on a saved project; timings and byte equality |

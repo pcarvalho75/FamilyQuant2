@@ -58,7 +58,9 @@ namespace FamilyQuant
                     m.FamilyCarriers, m.AllCarriers, m.LabelledCarriers, m.VoteFraction)).ToArray(),
                 Architectures: proposal.PanelContext != null ? Array.Empty<ReviewArchitectureInput>()
                 : EvidenceArchitecture.Suggest(proteins, proposal).Select(a => new ReviewArchitectureInput(a.Family, a.CanSplit,
-                    a.Groups.Select(g => new ReviewArchitectureGroupInput(g.Key, g.SuggestedName, g.DominantDomainAccession,
+                    a.Groups.Select(g => new ReviewArchitectureGroupInput(g.Key,
+                        g.Domains.Count == 0 && manualNames.TryGetValue(a.Family, out string? name) ? name + " (no domain calls)" : g.SuggestedName,
+                        g.DominantDomainAccession,
                         g.Domains, g.ProteinIndices, g.ReviewedProteins, g.InferredProteinIndices)).ToArray(),
                     a.Undetermined.Select(p => new ReviewArchitectureUndeterminedInput(p.ProteinIndex, p.Reason)).ToArray())).ToArray(),
                 LeftOut: LeftOutList.Build(proteins, proposal).Select(p => new ReviewLeftOutInput(p.Family, p.Accession,

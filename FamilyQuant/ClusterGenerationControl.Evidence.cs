@@ -101,6 +101,8 @@ public partial class ClusterGenerationControl
             discoverTaskWithProgress: session.DiscoverTaskAsync, previewScope: session.PreviewScopeAsync, addToFamily: session.AddToFamily,
             removeFromFamily: session.RemoveFromFamily, updateManualChoices: session.UpdateManualChoices,
             createMatchContext: session.CreatePanelMatchContext, confirmPanelMatches: session.ConfirmPanelEvidenceMatches) { Owner = owner };
+        window.AlignmentSource = highlighted => FamilyQuant.Evidence.Alignment.AlignmentCandidates.Find(fcf, session.Proposal, highlighted);
+        if (importedFamilyChecklistRequested) window.RequestFamilyChecklist();
         window.ShowDialog();
         if (!window.Confirmed) return false;
         if (!window.IsEvidenceMode) return true;

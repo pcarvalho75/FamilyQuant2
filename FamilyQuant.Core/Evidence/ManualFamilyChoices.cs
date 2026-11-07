@@ -39,9 +39,10 @@ public static class ManualFamilyChoices
         {
             if (choice.ProteinIndex < 0 || choice.ProteinIndex >= file.MyExtendedFastaItems.Count) throw new ArgumentException("A hand choice no longer identifies a protein.");
             var protein = file.MyExtendedFastaItems[choice.ProteinIndex];
-            if (protein.SequenceIdentifier != choice.Identifier || SequenceHash(protein.Sequence ?? "") != choice.SequenceSha256
-                || NearestReviewed.IsDecoy(protein) || SequenceLabels.IsContaminant(protein.SequenceIdentifier))
+            if (protein.SequenceIdentifier != choice.Identifier || SequenceHash(protein.Sequence ?? "") != choice.SequenceSha256)
                 throw new ArgumentException("A hand choice does not match the target protein and sequence.");
+            if (NearestReviewed.IsDecoy(protein) || SequenceLabels.IsContaminant(protein.SequenceIdentifier))
+                throw new ArgumentException("A contaminant or decoy never joins a family, so it was not added.");
             if (string.IsNullOrWhiteSpace(choice.Family) || string.IsNullOrWhiteSpace(choice.Name) || !ValidNote(choice.Note))
                 throw new ArgumentException("Choose a family and enter a name; the optional note must be one line of at most 512 characters.");
             if (file.LockedUserIds.Contains(protein.UserID))
@@ -100,11 +101,13 @@ public static class ManualFamilyChoices
         }).ToArray();
         var counts = rows.Where(r => r.Family.Length > 0).GroupBy(r => r.Family, comparer).ToDictionary(g => g.Key,
             g => (All: g.Count(), Reviewed: g.Count(r => file.MyExtendedFastaItems[r.ProteinIndex].Evidence?.Reviewed == true)), comparer);
+        var manualNames = choices.GroupBy(c => c.Family, comparer)
+            .ToDictionary(g => g.Key, g => g.First().Name, comparer);
         var families = automatic.Families.Select(f => (f.Family, f.SuggestedName))
             .Concat(choices.Select(c => (c.Family, c.Name))).GroupBy(f => f.Family, comparer)
             .Select(g => new EvidenceFamilyProposal
             {
-                Family = g.First().Family, SuggestedName = g.First().Item2,
+                Family = g.First().Family, SuggestedName = manualNames.GetValueOrDefault(g.Key) ?? g.First().Item2,
                 Proteins = counts.GetValueOrDefault(g.Key).All,
                 ReviewedProteins = counts.GetValueOrDefault(g.Key).Reviewed,
             }).ToArray();

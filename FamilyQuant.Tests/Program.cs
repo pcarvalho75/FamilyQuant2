@@ -260,7 +260,10 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelEvidenceMatchingTests());
             suite.AddWithApplication(() => PanelMatchLifecycleTests(Path.Combine(workDir, "panel-match-lifecycle")));
             suite.AddWithApplication(() => PanelEvidenceMatchUiTests(Path.Combine(workDir, "panel-evidence-match-ui")));
+            suite.Add(() => HandChoiceRecordTests());
             suite.AddWithApplication(() => ManualFamilyUiTests());
+            suite.AddWithApplication(() => ImportWizardMockTests());
+            suite.AddWithApplication(() => FamilyListImportTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
             suite.AddWithApplication(() => GridCopyTests());
             suite.AddWithApplication(() => GridCopyRowNumberTests());
@@ -268,6 +271,10 @@ namespace FamilyQuant.Tests
             suite.Add(() => EvidenceStorageTests(workDir));
             suite.Add(() => DomainPositionTests(Path.Combine(workDir, "domain-positions")));
             suite.Add(() => PanelSpreadsheetTests(Path.Combine(workDir, "panel-spreadsheet")));
+            suite.Add(() => PanelImportGracefulTests(Path.Combine(workDir, "panel-import-graceful")));
+            suite.Add(() => PanelImportSeveralTests(Path.Combine(workDir, "panel-import-several")));
+            suite.Add(() => PanelImportTemplateTests(Path.Combine(workDir, "panel-import-template")));
+            suite.Add(() => PanelImportExampleTests(Path.Combine(workDir, "panel-import-example")));
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
             suite.Section("Panel, threshold, template and report Help");
             suite.Add(() => PanelAuditTests());
@@ -301,6 +308,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => InheritedRetryProgressTests());
             suite.Add(() => SameScanConflictTests());
             suite.AddWithApplication(() => PatternLabPriorityTests(workDir));
+            suite.Add(() => ExampleFamilyListTests());
+            suite.AddWithApplication(() => AlignSelectedTests());
             suite.AddWithApplication(() => DeNovoWorkflowHelpTests());
             suite.Add(() => EvidenceCoverageTests());
             suite.Add(() => QueryResidueCoverageTests());
@@ -334,6 +343,14 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReferencePanelTests(workDir));
             suite.Add(() => ReferencePanelStreamTests());
             suite.Add(() => EvidenceOperationTests());
+            suite.Section("Database update - one-to-one matching of a project with a new database file");
+            suite.Add(() => DatabaseUpdateMatchingTests());
+            suite.Add(() => DatabaseUpdatePlacementTests());
+            suite.Add(() => DatabaseUpdatePlacementSideTests());
+            suite.Add(() => DatabaseUpdateApplyTests());
+            suite.Add(() => DatabaseUpdateBindingTests());
+            suite.AddWithApplication(() => DatabaseUpdateShellTests());
+            suite.Add(() => DatabaseUpdateExportTests());
             suite.Section("Coherence check - what the reviewed members of a family ever show");
             suite.Add(() => CoherenceCheckTests());
             suite.Add(() => CoherenceSourceDetailsTests());
@@ -344,6 +361,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ValidationReportTests());
             suite.AddWithApplication(() => EvidenceHelpTests());
             suite.Add(() => EvidenceScopeHelpTests());
+            suite.Add(() => EvidenceOutsideScopeHelpTests());
             suite.Section("Left-out list - marker carriers kept out of the marker's family, with why");
             suite.Add(() => LeftOutListTests());
             suite.Add(() => EvidenceExportTests());
