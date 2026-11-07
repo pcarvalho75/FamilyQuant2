@@ -91,8 +91,8 @@ internal static partial class Program
             foreach (var fact in new[]
             {
                 ("control", "DataGrid DataGridResultGrid", "curation always shows its table without Controls or Data Browser tabs"),
-                ("control", "CheckBox CheckBoxExcludeReverse", "curation hides search IDs and decoys by default while keeping all document rows"),
-                ("control", "DataGridTextColumn ColumnUSearchId", "curation hides search IDs and decoys by default while keeping all document rows"),
+                ("control", "CheckBox CheckBoxExcludeReverse", CurationDefaultVisibilityAssertion),
+                ("control", "DataGridTextColumn ColumnUSearchId", CurationDefaultVisibilityAssertion),
                 ("control", "DataGridTextColumn ColumnLocus", "curation shows accession in Locus while retaining the complete protein identifier"),
                 ("column", "ColumnLocus.Binding = {Binding Path=SequenceIdentifier}", "curation shows accession in Locus while retaining the complete protein identifier"),
                 ("control", "DataGridTextColumn ColumnUserAnnotation", "a native protein annotation edit marks the document and records one Undo step"),
