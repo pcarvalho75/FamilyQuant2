@@ -10,6 +10,12 @@ shared reader and removes the spool with `FileOptions.DeleteOnClose`, including 
 Cancellation is checked before writing and at the write/read boundaries. It never creates a
 whole-file string or byte array. Configure TEMP/TMP on a drive with room for the spool.
 
+`JsonStreamCopy` owns the one shared store. `Clone<T>` retains default JSON semantics,
+using at most 64 KiB of memory before spilling; canonical `DeepCopy` forces the original
+file-spool behavior. `ReadWritten<T>` accepts the existing writer/reader callbacks and
+supports reader retries through borrowed views. `SameSerializedBytes<T>` compares actual
+default-JSON bytes through that store rather than relying on selected fields or hashes.
+
 `FamilyClusterFile.JsonContentSha256()` returns the same uppercase SHA-256 as
 `SHA256(Encoding.UTF8.GetBytes(ToJsonText()))`, with streamed serialization into the hash.
 `internal void WriteJsonUtf8(Stream destination)` and
@@ -40,11 +46,17 @@ inside the selected test scratch area.
 
 The opt-in oversized proof and production-caller audit belong to Z12p5f4.
 
-Z12p5j sets `CurationJsonOptions.WriteIndented` to false. New FCF files and project curation
-entries have compact JSON; the string API produces exactly those same bytes. Old indented
+Z12p5j sets `CurationJsonOptions.WriteIndented` to false. New FCF files and canonical curation
+have compact JSON; the string API produces exactly those same canonical bytes. Old indented
 files remain readable, including their legacy encodings and lock migration.
 `FamilyQuant.Tests.exe --test-compact-curation [output-directory]` proves that old indented
-files and compact rewrites load to identical objects and that the FCF, project entry, string
-API and streamed hash agree. It covers empty, nested evidence and Unicode/control text.
+files and compact rewrites load to identical objects and that the FCF, string API and streamed
+hash agree. Project readback restores that same canonical curation. It covers empty, nested
+evidence and Unicode/control text.
 Existing streaming-save and project-store byte checks derive their references from the
 shared options, so no frozen scientific export baseline is rewritten for this formatting change.
+
+Z15b1 separates canonical content from wire storage: version-3 projects carry the format-2
+document in `curation2.json`, with a compatibility notice in `curation.json`. Parts may reduce
+the wire body and restore it on read, so the physical project entry need not equal a legacy
+FCF. Canonical hashes, string output and detached copies remain format 1 and see no parts.

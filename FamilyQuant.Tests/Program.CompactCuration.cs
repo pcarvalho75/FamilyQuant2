@@ -54,12 +54,13 @@ internal static partial class Program
                 == Convert.ToHexString(SHA256.HashData(bytes)) && opened.LastSaveCheck?.Passed == true);
             string project = Path.Combine(folder, "compact-" + index.ToString(CultureInfo.InvariantCulture) + ".fqproj");
             ProjectStore.WriteFqproj(project, opened, Array.Empty<QuantRow>(), new QuantManifest());
+            var projectRead = ProjectStore.ReadFqproj(project).fcf;
+            Check("Z12p5j fixture " + index + " project readback restores the same compact canonical bytes", projectRead.ToJsonText() == text);
             using (var archive = ZipFile.OpenRead(project))
-            using (var stream = archive.GetEntry(ProjectStore.CurationEntryName)!.Open())
-            using (var actual = new MemoryStream())
+            using (var stream = (archive.GetEntry(ProjectStore.CurationFormat2EntryName) ?? archive.GetEntry(ProjectStore.CurationEntryName)!).Open())
+            using (var reader = new StreamReader(stream, Encoding.UTF8))
             {
-                stream.CopyTo(actual);
-                Check("Z12p5j fixture " + index + " project entry matches the compact FCF byte for byte", actual.ToArray().SequenceEqual(bytes));
+                Check("Z12p5j fixture " + index + " project wire JSON is compact too", !reader.ReadToEnd().Contains('\n'));
             }
             if (index > 0)
                 Check("Z12p5j fixture " + index + " removes formatting bytes without losing state", bytes.Length < Encoding.UTF8.GetByteCount(indented));
