@@ -63,6 +63,7 @@ Version 14 delivered 78 steps (in the archive): Ana's 11-06 batch (the reviewed 
 | FQPolish (PO) | Sol 6.1 xhigh | Hired by Paulo 11-07 ("actually hire 2, we need to speed things up"): the tooltips of the main window and menus, Home, the Group by evidence setup page, the panel editor, the matching dialog and the busy overlay (Z12q3, moved from FQFetch so it stays on Z12g3a and Z12p5a) | `D:/FamilyQuant-wt/polish` |
 | FQScope (SC) | Sol 6.1 xhigh | Hired by Paulo 11-07 09:29 ("if you need more workers, hire!"): the broad-scope full panel route (Z15a6) | `D:/FamilyQuant-wt/scope` |
 | FQArgon (AR) | Gemini 4 Argon (high) | Reviewer from a third model family, 11-07 09:35 (D83): the wizard polish walk (Z12p2e); code, pictures and synthetic data only, read-only workspace D:/FamilyQuant-wt/review-argon; never Ana's data | `D:/FamilyQuant-wt/review-argon` |
+| FQGrok (GK) | Grok 4.7 xhigh | Reviewer from a fourth model family, hired 11-07 at 09:58 (Paulo: "after 10 am we will be able to hire grok as a reviewer"); in the review rota with DeepSeek 1 and 2, Kimi and FQFloat; code and synthetic data only, read-only worktree; never Ana's data | `D:/FamilyQuant-wt/review-grok` |
 
 Kimi limits: one Kimi instance at a time across every project, at most 15 calls in any rolling 5 hours (Paulo, 11-01) and 15 reviews in any rolling hour (Paulo, 11-05 13:24: "raise kimi to 15 reviews"; it was 5 from 11-02), no subagents. Orion runs its own Kimi worker at times; the desk launches FQKimi only when no other Kimi worker runs.
 
