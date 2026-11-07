@@ -183,6 +183,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ProjectFormatStageTests());
             suite.Add(() => ProjectStoreTests(workDir));
             suite.Add(() => ReferencePanelLegacyTests(Path.Combine(workDir, "reference-panel-legacy")));
+            suite.Add(() => ReferencePanelSecondDatabaseTests(Path.Combine(workDir, "reference-panel-second")));
             suite.Add(() => GoldenNumberGuardTests());
             suite.Section("Talk export routing - one override root for heavy and fast lanes");
             suite.Add(() => TalkOutputRootTests(workDir));
