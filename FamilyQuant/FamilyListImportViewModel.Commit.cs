@@ -24,9 +24,9 @@ public sealed partial class FamilyListImportViewModel
         : SelectedMatchFamily.Suggestions.Count == 0 ? "No matching suggestions are available."
         : "Counts are database entries for each suggestion; overlapping suggestions are not added together.";
 
-    private async Task<bool> PrepareMatchesAsync()
+    private async Task<bool> PrepareMatchesAsync(FamilyPanel? panelOverride = null)
     {
-        var panel = check.Panel;
+        var panel = panelOverride ?? check.Panel;
         if (panel == null) return true;
         string fingerprint = MatchPanelFingerprint(panel);
         if (fingerprint == matchesFingerprint) return true;
@@ -48,7 +48,7 @@ public sealed partial class FamilyListImportViewModel
             }, token);
             token.ThrowIfCancellationRequested();
             if (generation != readGeneration) return false;
-            if (!ReferenceEquals(check.Panel, panel) || MatchPanelFingerprint(panel) != fingerprint)
+            if ((panelOverride == null && !ReferenceEquals(check.Panel, panel)) || MatchPanelFingerprint(panel) != fingerprint)
             { Status = "Your family choices changed. Review the special rows again."; return false; }
             PublishMatches(panel, suggestions);
             matchesFingerprint = fingerprint;
@@ -151,13 +151,14 @@ public sealed partial class FamilyListImportViewModel
         ? "Every family has a matching choice."
         : Families(count) + (count == 1 ? " needs a matching choice." : " need a matching choice.");
 
-    private async Task<bool> CommitAsync()
+    private async Task<bool> CommitAsync(FamilyPanel? reviewedPanel = null)
     {
         if (table == null || Imported) return false;
         if (!transaction.CheckCurrent(out string changed)) { Status = changed; return false; }
-        Recheck();
-        if (check.Panel == null) { Status = check.Problems.FirstOrDefault(p => p.Severity == PanelImportSeverity.Blocking)?.Message ?? "Review the import again."; return false; }
-        var panel = FamilyPanelValidation.Clone(check.Panel);
+        if (reviewedPanel == null) Recheck();
+        var sourcePanel = reviewedPanel ?? check.Panel;
+        if (sourcePanel == null) { Status = check.Problems.FirstOrDefault(p => p.Severity == PanelImportSeverity.Blocking)?.Message ?? "Review the import again."; return false; }
+        var panel = FamilyPanelValidation.Clone(sourcePanel);
         string expectedSource = table.SourceSha256;
         operation?.Dispose(); operation = new CancellationTokenSource();
         var token = operation.Token;
@@ -168,9 +169,9 @@ public sealed partial class FamilyListImportViewModel
             token.ThrowIfCancellationRequested();
             if (current.SourceSha256 != expectedSource || current.Problems.Any(p => p.Severity == PanelImportSeverity.Blocking))
             { Status = "The workbook changed or could not be read. Choose it again before importing."; return false; }
-            if (workbookSnapshot != null && workbookSource != null)
+            if (reviewedPanel == null && workbookSnapshot != null && workbookSource != null)
                 panel = workbookSource.CompletePanel(panel, workbookSnapshot);
-            else if (KeepOtherSheets)
+            else if (reviewedPanel == null && KeepOtherSheets)
                 foreach (string other in current.SheetNames.Where(name => name != sheet))
                 {
                     var preview = await Task.Run(() => reader.ReadPreview(path, other), token);
@@ -185,8 +186,11 @@ public sealed partial class FamilyListImportViewModel
                     panel.TextFields.Add(new FamilyPanelText { Name = "Source sheet: " + other, Text = text.ToString() });
                 }
             token.ThrowIfCancellationRequested();
-            if (matcher != null) panel = matcher.Accept(panel, MatchFamilies.ToArray());
-            panel.TextFields.Add(new FamilyPanelText { Name = "Import matching choices", Text = string.Join("\n", MatchFamilies.Select(f => f.Key + ": " + f.Choice)) });
+            if (reviewedPanel == null)
+            {
+                if (matcher != null) panel = matcher.Accept(panel, MatchFamilies.ToArray());
+                panel.TextFields.Add(new FamilyPanelText { Name = "Import matching choices", Text = string.Join("\n", MatchFamilies.Select(f => f.Key + ": " + f.Choice)) });
+            }
             FamilyPanelValidation.Validate(panel);
             if (!transaction.Import(panel, out string result)) { Status = result; return false; }
             committedPanel = FamilyPanelValidation.Clone(panel);

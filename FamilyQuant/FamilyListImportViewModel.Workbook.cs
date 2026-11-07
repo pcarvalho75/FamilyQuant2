@@ -14,7 +14,9 @@ public sealed partial class FamilyListImportViewModel
     private readonly Dictionary<string, PanelWorkbookSheetRole> workbookRoles = new(StringComparer.Ordinal);
     private PanelWorkbookProposal? workbookSnapshot;
     private bool updatingWorkbook;
+    private readonly HashSet<string> reviewedWorkbookColumns = new(StringComparer.Ordinal);
     public ObservableCollection<ImportWorkbookSheet> WorkbookSheets { get; } = new();
+    public ObservableCollection<ImportSubclassChoice> SubclassChoices { get; } = new();
     public bool HasWorkbookMap => workbookSnapshot != null;
     public bool NeedsFamilySheetChoice => workbookSnapshot?.NeedsFamilySheetChoice == true;
     public bool WorkbookHasBlockingProblems => workbookSnapshot?.Problems.Any(p => p.Severity == PanelImportSeverity.Blocking) == true;
@@ -38,7 +40,7 @@ public sealed partial class FamilyListImportViewModel
     private void SetWorkbook(PanelWorkbookProposal? value)
     {
         updatingWorkbook = true;
-        workbookSnapshot = value; WorkbookSheets.Clear();
+        workbookSnapshot = value; WorkbookSheets.Clear(); SubclassChoices.Clear(); reviewedWorkbookColumns.Clear(); ResetWorkbookReview();
         foreach (var sheet in value?.Workbook.Sheets ?? (IEnumerable<PanelWorkbookSheet>)Array.Empty<PanelWorkbookSheet>())
         {
             var row = new ImportWorkbookSheet { Name = sheet.SheetName, Role = sheet.Role, Reason = sheet.RoleReason,
@@ -56,7 +58,7 @@ public sealed partial class FamilyListImportViewModel
         Changed(nameof(HasWorkbookMap)); Changed(nameof(NeedsFamilySheetChoice)); Changed(nameof(WorkbookMapSummary));
         Changed(nameof(WorkbookHasBlockingProblems)); Changed(nameof(WorkbookProblems));
         Changed(nameof(WorkbookHintsRead)); Changed(nameof(WorkbookHintStatus)); Changed(nameof(WorkbookProblemMessages));
-        Changed(nameof(KeptNotes)); Changed(nameof(KeptNotesSummary));
+        Changed(nameof(KeptNotes)); Changed(nameof(KeptNotesSummary)); Changed(nameof(SubclassChoices));
     }
 
     public Task ChangeWorkbookRoleAsync(string name, PanelWorkbookSheetRole role)
@@ -80,4 +82,39 @@ public sealed partial class FamilyListImportViewModel
     private static string DescribeWorkbookProblem(PanelImportProblem problem) => (problem.SheetName is { Length: > 0 } sheet ? sheet + ": " : "Workbook: ") + problem.Message;
     private string DefaultColorLabel(PanelImportColorUse color) => WorkbookColor(color.Color) is { IsUncertain: false, Name.Length: > 0 } legend
         ? legend.Name : string.IsNullOrWhiteSpace(color.Label) ? color.ColorName : color.Label;
+
+    /// <summary>Copies visible draft choices into the published Core input locations. Source facts remain untouched.</summary>
+    private PanelWorkbookProposal CaptureWorkbookDraft()
+    {
+        if (workbookSnapshot == null) throw new InvalidOperationException("Choose a workbook before reviewing its proposal.");
+        static T Copy<T>(T value) => System.Text.Json.JsonSerializer.Deserialize<T>(System.Text.Json.JsonSerializer.Serialize(value))!;
+        var source = workbookSnapshot;
+        if (source.FamilySheet.Length > 0 && !source.NeedsFamilySheetChoice && table != null && !ReferenceEquals(table, source.FamilyTable))
+        {
+            var read = new PanelWorkbookRead { SourceName = source.Workbook.SourceName, SourceSha256 = source.Workbook.SourceSha256,
+                Problems = source.Workbook.Problems, Sheets = source.Workbook.Sheets.Select(s => new PanelWorkbookSheet
+                { SheetName = s.SheetName, IsHidden = s.IsHidden, HasFilterHeader = s.HasFilterHeader, Preview = s.Preview,
+                    Table = s.SheetName == sheet ? table : s.Table, SourceRows = s.SourceRows, Role = s.Role,
+                    RoleReason = s.RoleReason, IsUncertain = s.IsUncertain }).ToList() };
+            source = (importer as IFamilyPanelWorkbookImporter ?? new FamilyPanelSpreadsheetImporter()).ProposeWorkbook(read, sheet, workbookRoles);
+        }
+        var family = Copy(source.FamilyProposal);
+        family.Choices = Copy(choices);
+        var decisions = source.Decisions.Select(Copy).ToList();
+        foreach (var row in Decisions)
+        {
+            var hint = decisions.FirstOrDefault(h => h.SourceValue == row.Source);
+            if (hint == null)
+            {
+                hint = new PanelWorkbookDecisionHint { SourceValue = row.Source, RowNumbers = row.SourceRows.ToList(), LegendMeaning = row.Meaning, Reason = row.Reason };
+                decisions.Add(hint);
+            }
+            hint.ProposedMapping = row.Decision == null ? null : row.Capture();
+        }
+        return new PanelWorkbookProposal { Workbook = source.Workbook, FamilySheet = source.FamilySheet, FamilyProposal = family,
+            Colors = source.Colors, ColorsState = source.ColorsState, DecisionsState = source.DecisionsState,
+            Decisions = decisions,
+            MultiFamilyRows = source.MultiFamilyRows, Pfam = source.Pfam, SubclassTables = source.SubclassTables, Notes = source.Notes,
+            Problems = source.Problems, NeedsFamilySheetChoice = source.NeedsFamilySheetChoice };
+    }
 }

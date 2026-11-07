@@ -16,6 +16,15 @@ public interface IFamilyListWorkbookSource
     FamilyPanel CompletePanel(FamilyPanel panel, PanelWorkbookProposal workbook);
 }
 
+public sealed record ImportWorkbookSection(string Key, string Title, string Summary, bool NeedsChoice, string ToolTip);
+public sealed record ImportWorkbookFamily(string Abbreviation, string Name, string Decision, string MergeTarget);
+public sealed record ImportWorkbookColumn(string Meaning, string SourceColumn, string Example);
+public sealed record ImportWorkbookCategory(string Name, string ProposedName, string Meaning, string Review);
+public sealed record ImportWorkbookDecisionRow(string SourceLabel, string Meaning, string Decision, string MergeTarget, string Review);
+public sealed record ImportWorkbookSpecialRow(int Row, string Families, string ProposedAction);
+public sealed record ImportWorkbookDomainRow(string Family, string Domains, string Source);
+public sealed record ImportWorkbookFinding(string Id, string Label, string Value, string State, string Reason, string Source, string EditKey);
+
 public sealed record ImportSheetRoleOption(string Label, PanelWorkbookSheetRole Value);
 
 public sealed class ImportWorkbookSheet : ScreenViewModel

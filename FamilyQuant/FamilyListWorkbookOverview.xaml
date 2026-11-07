@@ -1,0 +1,347 @@
+<UserControl
+  x:Class="FamilyQuant.FamilyListWorkbookOverview" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:theme="clr-namespace:FamilyQuant.Themes">
+  <UserControl.Resources>
+    <Style x:Key="OverviewCellText" TargetType="TextBlock" BasedOn="{x:Static DataGridTextColumn.DefaultElementStyle}">
+      <Setter Property="ToolTip" Value="{Binding Text, RelativeSource={RelativeSource Self}}" />
+      <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+  </UserControl.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition
+        Height="Auto" />
+      <RowDefinition />
+      <RowDefinition
+        Height="Auto" />
+    </Grid.RowDefinitions>
+    <ItemsControl
+      ItemsSource="{Binding WorkbookSections}">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <UniformGrid
+            Columns="2" />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <Border
+            BorderBrush="{DynamicResource EdgeBrush}"
+            BorderThickness="1"
+            Background="{DynamicResource SurfaceBrush}"
+            Padding="10"
+            Margin="0,0,8,8">
+            <DockPanel>
+              <Button
+                Content="Review"
+                DockPanel.Dock="Right"
+                Tag="{Binding Key}"
+                Click="Review_Click"
+                ToolTip="{Binding ToolTip}"
+                AutomationProperties.Name="{Binding Title, StringFormat=Review {0}}" />
+              <StackPanel>
+                <TextBlock
+                  Text="{Binding Title}"
+                  Style="{StaticResource SectionTitle}" />
+                <TextBlock
+                  Text="{Binding Summary}"
+                  Style="{StaticResource CaptionText}"
+                  TextTrimming="CharacterEllipsis"
+                  ToolTip="{Binding Summary}" />
+              </StackPanel>
+            </DockPanel>
+          </Border>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+    <TabControl x:Name="WorkbookDetailsTabs"
+      Grid.Row="1">
+      <TabItem
+        Header="Families"
+        ToolTip="The exact family rows proposed for import. Changes reach the project only when you explicitly accept.">
+        <DataGrid
+          ItemsSource="{Binding WorkbookFamilies}"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          AutomationProperties.Name="Families proposed for import"
+          ToolTip="Shows the exact proposed family abbreviations, names and program decisions. Nothing changes in the project until Accept and import succeeds.">
+          <DataGrid.Columns>
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Abbreviation"
+              Binding="{Binding Abbreviation}"
+              Width="140"
+              theme:TableAppearance.HeaderToolTip="The stable abbreviation in the proposed family list, read only. Review special rows to change a split or repeated abbreviation." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Family name"
+              Binding="{Binding Name}"
+              Width="*"
+              theme:TableAppearance.HeaderToolTip="The family name in the proposed list, read only. Review columns or special rows to change its source or proposed name." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Use as"
+              Binding="{Binding Decision}"
+              Width="180"
+              theme:TableAppearance.HeaderToolTip="The program decision proposed for this family. Review decisions to change it; it remains unconfirmed until your explicit acceptance." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Merge into"
+              Binding="{Binding MergeTarget}"
+              Width="150"
+              theme:TableAppearance.HeaderToolTip="The proposed target abbreviation for a merged family, read only. Review decisions or special rows to change the target before importing." />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+      <TabItem
+        Header="Columns"
+        ToolTip="Shows every proposed column and an example from the family list. Review columns changes the draft.">
+        <DataGrid
+          ItemsSource="{Binding WorkbookColumns}"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          AutomationProperties.Name="Proposed workbook columns"
+          ToolTip="Shows the original source and detached proposal for review. Values are read only here; use the section Review action to change the draft.">
+          <DataGrid.Columns>
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Use as"
+              Binding="{Binding Meaning}"
+              Width="200"
+              theme:TableAppearance.HeaderToolTip="The proposed meaning of this source column, read only." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Source column"
+              Binding="{Binding SourceColumn}"
+              Width="*"
+              theme:TableAppearance.HeaderToolTip="The original workbook header proposed for this meaning, read only." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Example"
+              Binding="{Binding Example}"
+              Width="*"
+              theme:TableAppearance.HeaderToolTip="One original value from this source column, read only." />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+      <TabItem
+        Header="Source categories"
+        ToolTip="Shows every available source category name and original meaning. Unread information remains explicit rather than being treated as absent.">
+        <DataGrid
+          ItemsSource="{Binding WorkbookLegend}"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          AutomationProperties.Name="Legend names and meanings"
+          ToolTip="Shows the original source and detached proposal for review. Values are read only here; use the section Review action to change the draft.">
+          <DataGrid.Columns>
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Name"
+              Binding="{Binding Name}"
+              Width="180"
+              theme:TableAppearance.HeaderToolTip="The source category name supplied by the legend, read only." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}" Header="Proposed name" Binding="{Binding ProposedName}" Width="180"
+              theme:TableAppearance.HeaderToolTip="The exact category name in the current draft, including your edits. Review source categories to change it before acceptance." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Meaning"
+              Binding="{Binding Meaning}"
+              Width="*"
+              theme:TableAppearance.HeaderToolTip="The original legend meaning, read only; it does not become a program decision by itself." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Needs review"
+              Binding="{Binding Review}"
+              Width="100"
+              theme:TableAppearance.HeaderToolTip="Whether the reader reported conflicting legend information, read only." />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+      <TabItem
+        Header="Decisions"
+        ToolTip="Shows each decision label with its source meaning and proposed program action. Review decisions changes any uncertain or unwanted choice.">
+        <DataGrid
+          ItemsSource="{Binding WorkbookDecisionRows}"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          AutomationProperties.Name="Decision meanings and proposed actions"
+          ToolTip="Shows the original source and detached proposal for review. Values are read only here; use the section Review action to change the draft.">
+          <DataGrid.Columns>
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Source label"
+              Binding="{Binding SourceLabel}"
+              Width="180"
+              theme:TableAppearance.HeaderToolTip="Original decision label from the sheet, read only." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Legend meaning"
+              Binding="{Binding Meaning}"
+              Width="*"
+              theme:TableAppearance.HeaderToolTip="Original meaning found in the legend, read only." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Proposed action"
+              Binding="{Binding Decision}"
+              Width="160"
+              theme:TableAppearance.HeaderToolTip="Program action proposed for this label, not confirmed until explicit acceptance." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Merge into"
+              Binding="{Binding MergeTarget}"
+              Width="120"
+              theme:TableAppearance.HeaderToolTip="Proposed target abbreviation for a merge, read only." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Review"
+              Binding="{Binding Review}"
+              Width="150"
+              theme:TableAppearance.HeaderToolTip="Whether the proposed action still needs a choice, read only." />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+      <TabItem
+        Header="Special rows"
+        ToolTip="Shows the names and exact proposed handling for each multi-family row. Unknown choices remain visible and block acceptance.">
+        <DataGrid
+          ItemsSource="{Binding WorkbookSpecialRows}"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          AutomationProperties.Name="Multi-family row proposals"
+          ToolTip="Shows the original source and detached proposal for review. Values are read only here; use the section Review action to change the draft.">
+          <DataGrid.Columns>
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Row"
+              Binding="{Binding Row}"
+              Width="65"
+              theme:TableAppearance.HeaderToolTip="Original Excel row number, read only." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Names in the row"
+              Binding="{Binding Families}"
+              Width="*"
+              theme:TableAppearance.HeaderToolTip="Names identified in this original multi-family row, read only." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Proposed handling"
+              Binding="{Binding ProposedAction}"
+              Width="220"
+              theme:TableAppearance.HeaderToolTip="The exact proposed row action or a visible need for your choice, read only." />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+      <TabItem
+        Header="Pfam"
+        ToolTip="Shows supplied Pfam accessions and their source rows. Matching labels never moves a protein by itself.">
+        <DataGrid
+          ItemsSource="{Binding WorkbookDomainRows}"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          AutomationProperties.Name="Pfam statements from the workbook"
+          ToolTip="Shows the original source and detached proposal for review. Values are read only here; use the section Review action to change the draft.">
+          <DataGrid.Columns>
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Family"
+              Binding="{Binding Family}"
+              Width="140"
+              theme:TableAppearance.HeaderToolTip="Abbreviation of the family that supplied these domain statements, read only." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Supplied domains"
+              Binding="{Binding Domains}"
+              Width="*"
+              theme:TableAppearance.HeaderToolTip="Pfam accessions written in the family row, read only; they are user statements, not silent protein assignments." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Source"
+              Binding="{Binding Source}"
+              Width="200"
+              theme:TableAppearance.HeaderToolTip="Original source row and column for these statements, read only." />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+      <TabItem
+        Header="Subclasses"
+        ToolTip="Shows proposed subclass definitions and retained source text. Review subclasses opens the rule and family choices.">
+        <DataGrid
+          ItemsSource="{Binding SubclassChoices}"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          AutomationProperties.Name="Subclass definition proposals"
+          ToolTip="Shows the original source and detached proposal for review. Values are read only here; use the section Review action to change the draft.">
+          <DataGrid.Columns>
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Family"
+              Binding="{Binding Family}"
+              Width="120"
+              theme:TableAppearance.HeaderToolTip="Proposed family abbreviation for the subclass, read only." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Subclass"
+              Binding="{Binding Name}"
+              Width="180"
+              theme:TableAppearance.HeaderToolTip="Proposed subclass name, read only." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Rules and notes"
+              Binding="{Binding Summary}"
+              Width="*"
+              theme:TableAppearance.HeaderToolTip="Recognized proposed rules and retained notes, read only; rules remain unconfirmed until explicit acceptance." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Review"
+              Binding="{Binding Review}"
+              Width="180"
+              theme:TableAppearance.HeaderToolTip="Any source uncertainty requiring review, read only." />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+      <TabItem
+        Header="Notes"
+        ToolTip="Shows the notes sheets and original text that will be kept with the panel. Viewing them changes nothing.">
+        <DataGrid
+          ItemsSource="{Binding KeptNotes}"
+          RowHeight="40"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          AutomationProperties.Name="Source notes proposed for retention"
+          ToolTip="Shows the original source and detached proposal for review. Values are read only here; use the section Review action to change the draft.">
+          <DataGrid.Columns>
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Sheet"
+              Binding="{Binding SheetName}"
+              Width="220"
+              theme:TableAppearance.HeaderToolTip="Original name of the notes or legend sheet retained with the panel, read only." />
+            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
+              Header="Original source text"
+              Binding="{Binding Text}"
+              Width="*"
+              theme:TableAppearance.HeaderToolTip="Original source text with cell addresses, read only; it is never treated as a family rule." />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+      <TabItem Header="All findings" ToolTip="Shows every finding with its source, proposed state and reason, including content that could not be placed. Review opens the page that changes that item.">
+        <DataGrid ItemsSource="{Binding WorkbookFindings}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+          AutomationProperties.Name="Every workbook finding and its source" ToolTip="The complete detached Core summary. Review changes the corresponding draft choice; nothing changes in the project until explicit acceptance succeeds.">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="Finding" Binding="{Binding Label}" Width="170" ElementStyle="{StaticResource OverviewCellText}"
+              theme:TableAppearance.HeaderToolTip="The finding reported by Core, read only. Hover over a cell to read its complete text." />
+            <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="2*" ElementStyle="{StaticResource OverviewCellText}"
+              theme:TableAppearance.HeaderToolTip="The exact source fact or proposal that would be accepted, read only. Uncertain values stay visible." />
+            <DataGridTextColumn Header="State" Binding="{Binding State}" Width="110" ElementStyle="{StaticResource OverviewCellText}"
+              theme:TableAppearance.HeaderToolTip="Whether Core found a source fact, proposes a choice, is uncertain or could not place the content. Opening this page confirms nothing." />
+            <DataGridTextColumn Header="Source" Binding="{Binding Source}" Width="180" ElementStyle="{StaticResource OverviewCellText}"
+              theme:TableAppearance.HeaderToolTip="The source sheet, original rows and columns attached to this finding, read only." />
+            <DataGridTextColumn Header="Reason" Binding="{Binding Reason}" Width="2*" ElementStyle="{StaticResource OverviewCellText}"
+              theme:TableAppearance.HeaderToolTip="Core's reason for the proposed state or refusal, read only. Hover over a cell to read the full reason." />
+            <DataGridTemplateColumn Header="Change" Width="85" theme:TableAppearance.HeaderToolTip="Opens the existing page that can change this finding in the draft; no project edit occurs.">
+              <DataGridTemplateColumn.CellTemplate><DataTemplate>
+                <Button Content="Review" Tag="{Binding EditKey}" Click="Review_Click" AutomationProperties.Name="{Binding Label, StringFormat=Review {0}}"
+                  ToolTip="Opens the page that changes this item in the draft. Return to workbook review to inspect the rebuilt proposal before acceptance." />
+              </DataTemplate></DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+    </TabControl>
+    <DockPanel Grid.Row="2" Margin="0,8,0,0">
+      <Button Content="Review findings" DockPanel.Dock="Right" Click="Findings_Click"
+        ToolTip="Shows every finding and refusal on this page, with its source, state and reason. Each finding has a Review action for changing the draft; the project remains unchanged." />
+      <TextBlock Text="{Binding WorkbookReviewStatus}" VerticalAlignment="Center" Style="{StaticResource CaptionText}"
+        TextTrimming="CharacterEllipsis" ToolTip="{Binding WorkbookReviewDetails}" />
+    </DockPanel>
+  </Grid>
+</UserControl>
