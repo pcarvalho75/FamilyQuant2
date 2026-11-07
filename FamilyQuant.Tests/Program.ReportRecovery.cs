@@ -151,6 +151,16 @@ internal static partial class Program
             Check("Z12p5l production stored-row share calculation clears the membership refusal", FamilyStudyMembership.Problem(current, loadedManifest) == null);
             Check("Z12p5l native report exports after evidence repair and refreshed shares", FinishReportCommand(shell.ExportReportAsync())
                 && File.Exists(report) && File.Exists(ReportSupplementWorkbook.PathForReport(report)));
+            string reportHash = FileFingerprint.Sha256(report);
+            loadedManifest.FamilySensitivity = new() { CurationFingerprint = "stale synthetic grouping" };
+            Check("Z12p5l report routes a stale sensitivity study to Calculate without overwriting its report", !FinishReportCommand(shell.ExportReportAsync())
+                && messages.Last().Contains("Open Results > Sensitivity and choose Calculate, then choose Export report.", StringComparison.Ordinal)
+                && !messages.Last().Contains("Quantify", StringComparison.Ordinal) && FileFingerprint.Sha256(report) == reportHash);
+            var sensitivity = new FamilySensitivityViewModel(rows, loadedManifest, current, null, () => { });
+            var calculate = sensitivity.CalculateAsync(null, shell.Operations);
+            FinishBusyTask(calculate); calculate.GetAwaiter().GetResult();
+            Check("Z12p5l Calculate refreshes sensitivity through its production action before report export", sensitivity.HasData
+                && FamilyStudyMembership.Problem(current, loadedManifest) == null && FinishReportCommand(shell.ExportReportAsync()));
             Check("Z12p5l recovery retains source input bytes and stored peptide quantities", FileFingerprint.Sha256(input) == inputHash && JsonSerializer.Serialize(rows) == quantities);
             File.WriteAllLines(Path.Combine(output, "messages.txt"), messages);
         }
