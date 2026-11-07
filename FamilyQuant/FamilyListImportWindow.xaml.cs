@@ -18,6 +18,7 @@ public partial class FamilyListImportWindow : Window
     public FamilyListImportViewModel Model { get; }
     public bool OpenChecklistRequested { get; private set; }
     public bool EditPanelRequested { get; private set; }
+    public Func<string, bool>? BroadMatchConfirmationOverride { get; set; }
     private readonly Action<string>? exampleWriter, templateWriter;
     private bool closing, loadingSheets;
     public FamilyListImportWindow(FamilyListImportViewModel model, Action<string>? exampleWriter = null, Action<string>? templateWriter = null)
@@ -133,7 +134,17 @@ public partial class FamilyListImportWindow : Window
     private void SourceNotes_Click(object sender, RoutedEventArgs e)
     { if (sender is FrameworkElement { DataContext: ImportSummaryFamily family }) TextReportWindow.Show("Source notes", family.Name + "\nAbbreviation: " + family.Key + "\n\n" + family.Notes, this, wrap: true); }
     private void UseRow_Click(object sender, RoutedEventArgs e) { CommitGridEdits(); Model.UseRowChoice(); }
-    private void ConfirmMatches_Click(object sender, RoutedEventArgs e) { CommitGridEdits(); Model.ConfirmMatches(); }
+    private void ConfirmMatches_Click(object sender, RoutedEventArgs e)
+    {
+        CommitGridEdits();
+        Model.ConfirmMatches(warning =>
+        {
+            if (BroadMatchConfirmationOverride != null) return BroadMatchConfirmationOverride(warning);
+            var dialog = new BroadEvidenceMatchWindow(warning) { Owner = this };
+            dialog.KeepButton.ToolTip = "Confirms these broad labels for the imported family draft. Import keeps the panel as one project change that Undo can reverse.";
+            return dialog.ShowDialog() == true;
+        });
+    }
     private void SkipMatch_Click(object sender, RoutedEventArgs e) => Model.SkipMatch();
     private void SkipAllMatches_Click(object sender, RoutedEventArgs e) => Model.SkipAllMatches();
     private void Undo_Click(object sender, RoutedEventArgs e) => Model.UndoImport();
@@ -185,7 +196,7 @@ public partial class FamilyListImportWindow : Window
 
     private void CommitGridEdits()
     {
-        foreach (var grid in new[] { DecisionGrid, SpecialRowsGrid, MatchSuggestionsGrid })
+        foreach (var grid in new[] { DecisionGrid, SpecialRowsGrid, MatchSuggestionsGrid, AdditionalMatchSuggestionsGrid })
         { grid.CommitEdit(DataGridEditingUnit.Cell, true); grid.CommitEdit(DataGridEditingUnit.Row, true); }
     }
     private async void Window_Closing(object? sender, CancelEventArgs e)

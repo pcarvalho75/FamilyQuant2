@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:FamilyQuant"
+        xmlns:theme="clr-namespace:FamilyQuant.Themes"
         Title="Align selected" Width="1240" Height="760" MinWidth="900" MinHeight="560"
         Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}"
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
@@ -9,7 +10,7 @@
         <BooleanToVisibilityConverter x:Key="VisibleWhenTrue"/>
         <DataTemplate x:Key="AlignmentTick">
             <CheckBox IsChecked="{Binding Ticked, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanTick}" HorizontalAlignment="Center"
-                      ToolTip="Tick to include this sequence in the alignment. The first protein always stays in." ToolTipService.ShowOnDisabled="True"/>
+                      ToolTip="{Binding TickHint}"/>
         </DataTemplate>
     </Window.Resources>
     <Grid Margin="20">
@@ -36,13 +37,13 @@
                           ToolTip="Highlighted proteins first, then each one's nearest reviewed protein, then reviewed members of the family from your file and from the reference panel.">
                     <DataGrid.RowStyle><Style TargetType="DataGridRow"><Setter Property="ToolTip" Value="{Binding Details}"/></Style></DataGrid.RowStyle>
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Use" Width="44" MinWidth="44" IsReadOnly="True" CellTemplate="{StaticResource AlignmentTick}" ClipboardContentBinding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Protein" Width="104" MinWidth="96" IsReadOnly="True" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Identity" Width="72" MinWidth="72" IsReadOnly="True" Binding="{Binding Identity}"/>
-                        <DataGridTextColumn Header="Cys" Width="44" MinWidth="44" IsReadOnly="True" Binding="{Binding Cysteines}"/>
-                        <DataGridTextColumn Header="Length" Width="60" MinWidth="60" IsReadOnly="True" Binding="{Binding Length}"/>
-                        <DataGridTextColumn Header="Source" Width="100" MinWidth="100" IsReadOnly="True" Binding="{Binding Source}"/>
-                        <DataGridTextColumn Header="Notes" Width="*" MinWidth="110" IsReadOnly="True" Binding="{Binding Notes}"/>
+                        <DataGridTemplateColumn Header="Use" Width="44" MinWidth="44" IsReadOnly="True" CellTemplate="{StaticResource AlignmentTick}" ClipboardContentBinding="{Binding Name}" theme:TableAppearance.HeaderToolTip="Tick the sequences to include in this alignment, keeping the first protein as the reference. Only this window changes."/>
+                        <DataGridTextColumn Header="Protein" Width="104" MinWidth="96" IsReadOnly="True" Binding="{Binding Name}" theme:TableAppearance.HeaderToolTip="The sequence label from the highlighted proteins or their reviewed relatives. Reading it changes nothing."/>
+                        <DataGridTextColumn Header="Identity" Width="72" MinWidth="72" IsReadOnly="True" Binding="{Binding Identity}" theme:TableAppearance.HeaderToolTip="Identity to the first protein as a percentage within their shared aligned span, including internal gaps and excluding end overhangs. Unticked sequences have no value."/>
+                        <DataGridTextColumn Header="Cys" Width="44" MinWidth="44" IsReadOnly="True" Binding="{Binding Cysteines}" theme:TableAppearance.HeaderToolTip="The number of cysteine residues in this sequence. Reading the count changes nothing."/>
+                        <DataGridTextColumn Header="Length" Width="60" MinWidth="60" IsReadOnly="True" Binding="{Binding Length}" theme:TableAppearance.HeaderToolTip="Sequence length in amino acids before alignment gaps are inserted."/>
+                        <DataGridTextColumn Header="Source" Width="100" MinWidth="100" IsReadOnly="True" Binding="{Binding Source}" theme:TableAppearance.HeaderToolTip="Where the sequence came from, such as your file, its nearest reviewed protein or the reference panel."/>
+                        <DataGridTextColumn Header="Notes" Width="*" MinWidth="110" IsReadOnly="True" Binding="{Binding Notes}" theme:TableAppearance.HeaderToolTip="Review status, fragment status and stored domain limitations for this sequence. These notes leave the proposal and project as they are."/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
@@ -60,9 +61,9 @@
                    ToolTip="{Binding Method}"/>
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
             <Button x:Name="copyFastaButton" Content="Copy as FASTA" Click="CopyFasta_Click" IsEnabled="{Binding CanCopy}"
-                    ToolTip="Copies the aligned sequences, gaps included, as FASTA for another program."/>
+                    ToolTip="{Binding CopyFastaHint}"/>
             <Button x:Name="copyTextButton" Content="Copy aligned text" Click="CopyText_Click" IsEnabled="{Binding CanCopy}" Margin="8,0,0,0"
-                    ToolTip="Copies the alignment as blocks of 60 columns with names and residue numbers, for a note or an email."/>
+                    ToolTip="{Binding CopyTextHint}"/>
             <Button Content="Close" IsCancel="True" Click="Close_Click" Margin="8,0,0,0" ToolTip="Closes this window. Nothing was changed."/>
         </StackPanel>
     </Grid>

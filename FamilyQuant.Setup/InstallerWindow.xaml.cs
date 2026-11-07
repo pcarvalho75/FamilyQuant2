@@ -9,7 +9,7 @@ using Microsoft.Win32;
 namespace FamilyQuant.Setup;
 
 /// <summary>The interactive surface only. All machine changes belong to ISetupController.</summary>
-public partial class InstallerWindow : Window
+public partial class InstallerWindow : Window, INotifyPropertyChanged
 {
     internal enum SetupPage { Welcome, ConfirmOlder, Folder, Options, Progress, Done, Uninstall, Error }
 
@@ -25,6 +25,47 @@ public partial class InstallerWindow : Window
     private bool IsUpgrade => HasExisting && VersionComparison < 0;
     private bool IsAlreadyInstalled => HasExisting && VersionComparison >= 0;
     private bool _allowOlderVersion;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public string FolderHint => HasExisting
+        ? "The full Windows folder path of the detected installation is read only during repair or upgrade. A fresh installation after removal lets you choose another writable folder."
+        : "Full Windows folder path for program files, default " + (_controller.Options.Directory ?? _controller.DefaultDirectory)
+            + ". Choose a writable folder accepted by Setup, and installation writes there only after the options page.";
+    public string ChangeFolderHint => HasExisting
+        ? "Unavailable because repair and upgrade use the detected installation folder. A fresh installation after removal enables choosing another folder."
+        : "Opens a folder picker to change the planned installation location. The Install button on the options page writes the program files.";
+    public string ExistingActionHint => VersionComparison > 0
+        ? "Opens a confirmation page for replacing the installed app with this older version. Program files change only after the final installation choice, which project Undo cannot reverse."
+        : "Opens the folder and options pages for reinstalling the current version. Program files change only after Repair, which project Undo cannot reverse.";
+    public string CloseHint => _busy
+        ? "Requests cancellation and closes Setup after the operation stops. A change already committed can finish before cancellation takes effect."
+        : "Closes the Setup window. Completed program changes are outside project Undo.";
+    public string CancelHint => _operationCancellation?.IsCancellationRequested == true
+        ? "Unavailable while Setup finishes the cancellation already requested. Wait for the operation to stop and show its outcome."
+        : _busy ? "Requests cancellation of the current operation. Setup rolls back incomplete changes, while a change already committed can finish before cancellation takes effect."
+        : "Closes the Setup window. Completed program changes are outside project Undo.";
+    public string PrimaryHint => _launchFailed
+        ? "Closes Setup after the app could not be opened. You can open FamilyQuant from its installed shortcut."
+        : _page switch
+        {
+            SetupPage.Welcome => IsAlreadyInstalled
+                ? "Opens the installed FamilyQuant app and closes Setup. Opening the app is outside project Undo."
+                : "Opens the installation folder page to review where the app will be installed. Program files change only after the options page.",
+            SetupPage.ConfirmOlder => "Accepts using the older version and opens the folder page. Replacing program files requires the final installation choice and is outside project Undo.",
+            SetupPage.Folder => "Checks the full folder path and opens the installation options. Program files change only after the final installation choice.",
+            SetupPage.Options => "Installs this version in the chosen folder and applies the shortcut choice. This changes program files and Windows registration, and project Undo cannot reverse it.",
+            SetupPage.Uninstall => "Removes the installed app, its shortcuts and its installed apps entry. Project Undo cannot reverse removal.",
+            SetupPage.Done => !_removed && LaunchOption.IsChecked == true
+                ? "Opens FamilyQuant and closes Setup after the successful installation. Opening the app is outside project Undo."
+                : "Closes Setup after the operation has finished. Completed program changes are outside project Undo.",
+            SetupPage.Error => _startupError
+                ? "Reads the installation state again and returns to the first Setup page when successful. This step only prepares Setup."
+                : "Retries the requested installation or removal after you resolve the error. This can change program files and Windows registration, and project Undo cannot reverse it.",
+            _ => "Wait for the active Setup operation to finish before continuing. Program file changes are outside project Undo.",
+        };
+
+    private void RefreshToolTips() => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
 
     public InstallerWindow(ISetupController controller)
     {
@@ -137,6 +178,7 @@ public partial class InstallerWindow : Window
                 PrimaryButton.Content = "_Try again";
                 break;
         }
+        RefreshToolTips();
     }
 
     private FrameworkElement PanelFor(SetupPage page) => page switch
@@ -186,6 +228,7 @@ public partial class InstallerWindow : Window
                         _launchFailed = true;
                         ShowError("FamilyQuant could not open", "The app is installed. You can open it from the Start menu.", error.Message);
                         PrimaryButton.Content = "_Finish";
+                        RefreshToolTips();
                         return;
                     }
                 }
@@ -239,6 +282,7 @@ public partial class InstallerWindow : Window
             _busy = false;
             _operationCancellation?.Dispose();
             _operationCancellation = null;
+            RefreshToolTips();
             if (_closeAfterCancel) Close();
         }
     }
@@ -294,6 +338,7 @@ public partial class InstallerWindow : Window
             _launchFailed = true;
             ShowError("FamilyQuant could not open", "Open FamilyQuant from its shortcut.", error.Message);
             PrimaryButton.Content = "_Finish";
+            RefreshToolTips();
         }
     }
     private void BackClick(object sender, RoutedEventArgs e)
@@ -315,6 +360,7 @@ public partial class InstallerWindow : Window
         _operationCancellation?.Cancel();
         CancelButton.Content = "Canceling...";
         CancelButton.IsEnabled = false;
+        RefreshToolTips();
     }
     private void OnClosing(object? sender, CancelEventArgs e)
     {

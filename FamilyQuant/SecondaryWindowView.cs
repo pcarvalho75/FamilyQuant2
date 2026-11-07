@@ -38,7 +38,6 @@ internal static class SecondaryWindowView
     {
         var style = new Style(typeof(DataGridColumnHeader), Application.Current?.TryFindResource(typeof(DataGridColumnHeader)) as Style);
         style.Setters.Add(new Setter(FrameworkElement.ToolTipProperty, tooltip));
-        style.Setters.Add(new Setter(ToolTipService.ShowDurationProperty, 60000));
         var text = new FrameworkElementFactory(typeof(TextBlock));
         text.SetBinding(TextBlock.TextProperty, new Binding());
         text.SetValue(TextBlock.TextWrappingProperty, TextWrapping.Wrap);

@@ -13,6 +13,7 @@ public static partial class InstallerWindowPreview
     /// <summary>Safe focused tests for the ordinary suite; STA thread, fake controller only, no files written.</summary>
     public static IReadOnlyList<string> CheckInteractions()
     {
+        SetupToolTipDefaults.Apply();
         var previousContext = SynchronizationContext.Current;
         var app = Application.Current ?? new Application();
         var previousShutdown = app.ShutdownMode;
@@ -33,6 +34,7 @@ public static partial class InstallerWindowPreview
 
     public static int Run(string outputDirectory)
     {
+        SetupToolTipDefaults.Apply();
         var output = Path.GetFullPath(outputDirectory);
         Directory.CreateDirectory(output);
         var checks = new List<string>();
@@ -99,6 +101,11 @@ public static partial class InstallerWindowPreview
         if (!condition) throw new InvalidOperationException("M7j UI check failed: " + description);
     }
     private static void Click(Button button) => button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+    private static string Tip(FrameworkElement element)
+    {
+        Dispatcher.CurrentDispatcher.Invoke(() => { }, DispatcherPriority.Background);
+        return element.ToolTip as string ?? "";
+    }
     private static void PumpUntil(Func<bool> condition)
     {
         var until = DateTime.UtcNow.AddSeconds(10);
@@ -121,13 +128,36 @@ public static partial class InstallerWindowPreview
         Check(fresh.Installs == 0 && fresh.Uninstalls == 0 && fresh.Launches == 0, "construction never installs, uninstalls or launches");
         Check(window.FolderBox.Text == fresh.DefaultDirectory, "new install uses the controller default folder");
         Check(window.ThemeButton.Content.Equals("Light"), "dark is the default and light is available");
+        Check(new FrameworkElement[] { window.PrimaryButton, window.FolderBox, window.DesktopOption, window.ErrorDetails }
+            .All(element => ToolTipService.GetInitialShowDelay(element) == SetupToolTipDefaults.InitialDelayMilliseconds
+                && ToolTipService.GetShowDuration(element) == SetupToolTipDefaults.ShowDurationMilliseconds
+                && ToolTipService.GetShowOnDisabled(element)), "Setup tooltip defaults are 500 ms, 20 seconds and visible on disabled controls");
+        foreach (bool dark in new[] { true, false })
+        {
+            window.ShowPreview("welcome", dark);
+            var style = (Style)window.FindResource(typeof(ToolTip));
+            var tip = new ToolTip { Style = style, Resources = window.Resources };
+            var template = (DataTemplate)style.Resources[new DataTemplateKey(typeof(string))];
+            Check(tip.MaxWidth == SetupToolTipDefaults.MaximumWidth && tip.FontSize == 12
+                && ReferenceEquals(tip.Background, window.FindResource("SurfaceBrush"))
+                && ReferenceEquals(tip.Foreground, window.FindResource("TextBrush"))
+                && ReferenceEquals(tip.BorderBrush, window.FindResource("EdgeBrush"))
+                && template.LoadContent() is TextBlock { TextWrapping: TextWrapping.Wrap },
+                "Setup tooltip style wraps at 380 px and follows the current appearance tokens, dark=" + dark);
+        }
+        window.ShowPreview("welcome", true);
+        Check(Tip(window.PrimaryButton).Contains("folder page", StringComparison.Ordinal), "welcome tooltip describes the next page before any installation");
         Click(window.PrimaryButton);
+        Check(Tip(window.FolderBox).Contains(fresh.DefaultDirectory, StringComparison.Ordinal)
+            && Tip(window.PrimaryButton).Contains("full folder path", StringComparison.Ordinal), "folder tooltips give the actual default path and current action");
         window.FolderBox.Text = "relative-folder";
         Click(window.PrimaryButton);
         Check(window.FolderPanel.Visibility == Visibility.Visible && fresh.Installs == 0, "relative folder is refused before engine call");
         window.FolderBox.Text = @"D:\Apps\FamilyQuant2";
         Click(window.PrimaryButton);
         Check(window.OptionsPanel.Visibility == Visibility.Visible, "folder continues to options");
+        Check(Tip(window.PrimaryButton).Contains("Windows registration", StringComparison.Ordinal)
+            && Tip(window.PrimaryButton).Contains("Undo", StringComparison.Ordinal), "options tooltip explains installation effects and Undo scope");
         Check(window.FolderNote.Text == "Only your Windows account uses this installation.", "valid folder clears its earlier validation warning");
         window.DesktopOption.IsChecked = true;
         var install = window.ExecuteOperationAsync();
@@ -135,6 +165,7 @@ public static partial class InstallerWindowPreview
         install.GetAwaiter().GetResult();
         Check(fresh.Installs == 1 && fresh.LastDirectory == @"D:\Apps\FamilyQuant2" && fresh.Desktop, "chosen folder and desktop option reach the controller");
         Check(window.DonePanel.Visibility == Visibility.Visible && fresh.Launches == 0, "success shows done without automatic launch");
+        Check(Tip(window.PrimaryButton).StartsWith("Opens FamilyQuant", StringComparison.Ordinal), "completion tooltip follows the final launch action");
         Click(window.PrimaryButton);
         Check(fresh.Launches == 1 && window.ExitCode == 0, "done launches only after explicit choice");
 
@@ -152,6 +183,8 @@ public static partial class InstallerWindowPreview
         var upgrade = new PreviewController { Existing = new ExistingInstallation(PreviewController.Folder, "2.1.2", true, true) };
         window = new InstallerWindow(upgrade);
         Check(window.PageTitle.Text == "Upgrade FamilyQuant 2.1.2 to 2.1.3" && window.FolderBox.IsReadOnly && !window.ChangeFolderButton.IsEnabled, "upgrade names both versions and keeps the existing folder");
+        Check(Tip(window.ChangeFolderButton).Contains("Unavailable", StringComparison.Ordinal)
+            && Tip(window.ChangeFolderButton).Contains("fresh installation", StringComparison.Ordinal), "disabled folder tooltip explains the reason and enabling condition");
         window.Close();
         CheckVersionChoices(checks);
         CheckFailuresAndCancellation(checks);
@@ -178,6 +211,7 @@ public static partial class InstallerWindowPreview
         };
         window = new InstallerWindow(remove);
         Check(window.UninstallPanel.Visibility == Visibility.Visible && remove.Uninstalls == 0, "uninstall requires an explicit confirmation action");
+        Check(Tip(window.PrimaryButton).StartsWith("Removes the installed app", StringComparison.Ordinal), "uninstall tooltip describes removal before confirmation");
         operation = window.ExecuteOperationAsync(); PumpUntil(() => operation.IsCompleted); operation.GetAwaiter().GetResult();
         Check(remove.Uninstalls == 1 && remove.Installs == 0 && window.PageTitle.Text == "FamilyQuant is uninstalled", "uninstall calls only its controller operation and shows completion");
         Click(window.PrimaryButton);
@@ -190,8 +224,12 @@ public static partial class InstallerWindowPreview
         Check(held.Installs == 1 && duplicate.IsCompleted, "duplicate install gestures cannot start a second operation");
         PumpUntil(() => window.InstallProgress.Value == 50);
         Check(window.ProgressStage.Text == "Extracting app files" && window.ProgressPercent.Text == "50%", "controller callback drives stage and progress");
+        Check(Tip(window.CancelButton).StartsWith("Requests cancellation", StringComparison.Ordinal)
+            && Tip(window.CloseButton).Contains("already committed", StringComparison.Ordinal), "active operation tooltips describe cancellation and a completed change");
         Click(window.CancelButton); PumpUntil(() => operation.IsCompleted); operation.GetAwaiter().GetResult();
         Check(held.Canceled && window.PageTitle.Text == "Setup was canceled", "cancel reaches the engine token and exposes retry");
+        Check(Tip(window.PrimaryButton).StartsWith("Retries", StringComparison.Ordinal)
+            && Tip(window.CancelButton).StartsWith("Closes", StringComparison.Ordinal), "cancellation refreshes retry and close tooltips after the operation stops");
         window.Close();
 
         held = new PreviewController { Hold = true, ReturnCanceledResult = true };
