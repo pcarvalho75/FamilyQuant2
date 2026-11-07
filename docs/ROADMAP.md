@@ -158,7 +158,7 @@ Columns: Diff = L, M, H. Hrs = worker hours at measured speed. Blocked by: 🟢 
 
 ## Critical path
 
-2.1.11 holds everything in this round (Paulo, 11-06) except the faster panel (Z15a, D73 f). The longest chain is the database update: FQOpus builds the core Z14c3a, Z14c3b, Z14c3c; FQHome builds the app side Z14c3d against Z14c3a's record model, then the Help Z14c3e, after Z12g1, Z12g2, Z12g4 and Align selected Z12g3; FQFetch runs Z12g5, Z13a, Z13b and Z14c4. Then Z12h1 to Z12h3. Rough wall-clock: 7 to 9 hours from 14:07, so 2.1.11 late tonight or tomorrow morning, a range, never a promise.
+2.1.11 holds everything in this round (Paulo, 11-06) except the faster panel (Z15a, D73 f). Remaining chains: the database update window Z14c3d (FQSite) and the add-a-family polish Z12k2 fix, Z12k3, Z12k4, Z12k5; the family checklist Z12n1, Z12n2 (FQFetch); and her consensus Excel imported gracefully Z12p1 to Z12p5 (FQOpus core, FQHome window, FQFetch name matching, then her real file end to end, which needs the Excel from Ana). Then Z12h1 to Z12h3. Rough wall-clock from 21:20: 6 to 9 hours of work, so 2.1.11 tomorrow morning, a range, never a promise.
 
 2.1.8: Z8a and Z8a2 (FQFetch), the README review Z8b, then the final integration Z8c1, the suite Z8c2 with the package Z8d1 and Z8d2 in parallel, publish Z8d3 to Z8d5, update check Z8e1 to Z8e3. Rough wall-clock: 30 to 50 minutes from 14:30, a range, never a promise.
 
