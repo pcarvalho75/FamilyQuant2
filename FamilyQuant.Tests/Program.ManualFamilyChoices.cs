@@ -103,5 +103,64 @@ internal static partial class Program
         Check("panel Undo restores definitions as well as grouping", panelFile.ToJsonText() == panelBefore);
         EvidenceApply.ApplyRecipe(panelFile, JsonSerializer.Deserialize<EvidenceRecipe>(JsonSerializer.Serialize(appliedPanel.Recipe))!);
         Check("panel manual recipe reproduces its declared definitions and facts", panelFile.ToJsonText() == panelAfter);
+        ManualFamilyNameRoundTripTests();
+    }
+
+    private static void ManualFamilyNameRoundTripTests()
+    {
+        var architectureFile = ManualChoiceFile();
+        architectureFile.MyExtendedFastaItems[0].Evidence!.Pfam.Add(new EvidenceDomain { Accession = "invented-binding", Name = "Invented binding domain" });
+        architectureFile.MyExtendedFastaItems[1].Evidence!.Pfam.Add(new EvidenceDomain { Accession = "invented-catalytic", Name = "Invented catalytic domain" });
+        string architectureBefore = architectureFile.ToJsonText();
+        var architectureSession = new EvidenceGroupingSession(architectureFile, "manual name fixture");
+        architectureSession.Propose("scope");
+        const string handName = "Supplied hand family";
+        var architectureInput = architectureSession.AddToFamily(new EvidenceManualRequest(new[] { 0, 1, 2 }, "", handName, true));
+        string handKey = architectureInput.ManualChoices!.First().Family;
+        var architectureModel = new EvidenceReviewViewModel(architectureInput);
+        var architecture = architectureModel.Architectures.Single(a => a.Family == handKey);
+        var noDomain = architecture.Groups.Single(g => g.Source.Domains.Count == 0);
+        Check("a hand family's no-domain Architecture group uses the typed name without exposing its key", architecture.CanSplit
+            && noDomain.Name == handName + " (no domain calls)" && !noDomain.Name.Contains(handKey, StringComparison.Ordinal)
+            && architectureFile.ToJsonText() == architectureBefore);
+        noDomain.Split = true;
+        var split = architectureSession.Apply(architectureModel.CaptureSelection());
+        Check("Split applies the displayed hand-family group name and retains the other members' typed name",
+            split.Recipe.ArchitectureChoices.Single(c => c.Split).Name == handName + " (no domain calls)"
+            && architectureFile.MyExtendedFastaItems[2].UserAnnotation == handName + " (no domain calls)"
+            && architectureFile.MyExtendedFastaItems.Take(2).All(p => p.UserAnnotation == handName)
+            && architectureFile.MyExtendedFastaItems[2].UserID != architectureFile.MyExtendedFastaItems[0].UserID);
+        var splitReplay = FamilyClusterFile.FromJsonText(architectureBefore);
+        EvidenceApply.ApplyRecipe(splitReplay, JsonSerializer.Deserialize<EvidenceRecipe>(JsonSerializer.Serialize(split.Recipe))!);
+        Check("the named manual Architecture split replays byte for byte", splitReplay.ToJsonText() == architectureFile.ToJsonText());
+
+        var file = ManualChoiceFile();
+        var session = new EvidenceGroupingSession(file, "saved manual name fixture");
+        session.Propose("scope");
+        const string savedName = "Curator's supplied family name";
+        var input = session.AddToFamily(new EvidenceManualRequest(new[] { 2 }, "Invented family", savedName, false, "Saved name note"));
+        var model = new EvidenceReviewViewModel(input);
+        // The review retains the edited name that the hand-choice dialog offered.
+        model.Families.Single(f => f.Family == "Invented family").Name = savedName;
+        session.Apply(model.CaptureSelection());
+        var reopened = FamilyClusterFile.FromJsonText(file.ToJsonText());
+        reopened.LockedUserIds.Clear();
+        string reopenedBefore = reopened.ToJsonText();
+        var reopenedSession = new EvidenceGroupingSession(reopened, "saved manual name fixture");
+        var reopenedInput = reopenedSession.Propose("scope");
+        var reopenedModel = new EvidenceReviewViewModel(reopenedInput);
+        Check("reopening uses the saved hand name consistently in the family grid and protein column",
+            reopenedInput.Families.Single(f => f.Family == "Invented family").SuggestedName == savedName
+            && reopenedModel.Families.Single(f => f.Family == "Invented family").Name == savedName
+            && reopenedModel.Proteins.Single(p => p.ProteinIndex == 2).FamilyDisplay == savedName
+            && reopened.ToJsonText() == reopenedBefore);
+        reopenedModel.SetSelected(reopenedModel.Proteins, false);
+        reopenedModel.Proteins.Single(p => p.ProteinIndex == 2).Selected = true;
+        var reapplied = reopenedSession.Apply(reopenedModel.CaptureSelection());
+        Check("re-applying after reopen preserves the hand name and note in the assignment and saved choice",
+            reopened.MyExtendedFastaItems[2].UserAnnotation == savedName
+            && reapplied.Recipe.Assignments.Single().Name == savedName
+            && reapplied.Recipe.ManualChoices!.Single().Name == savedName
+            && reapplied.Recipe.ManualChoices!.Single().Note == "Saved name note");
     }
 }
