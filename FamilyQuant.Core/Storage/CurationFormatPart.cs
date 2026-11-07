@@ -34,12 +34,14 @@ public abstract class CurationFormatPart
 
     /// <summary>Before writing: look at the file and put any shared table into the context with
     /// <see cref="CurationFormatContext.SetSection{T}"/>. The section is written once, before the curation.
-    /// Must not change the file.</summary>
+    /// Must not change the file. The header (marker, notice, parts and every section together) must stay under
+    /// <see cref="CurationFormat.MaxHeaderBytes"/> (64 MB): a reader refuses a larger one, so the writer refuses to
+    /// write it and names the part with the largest section. Pool small records here, never bulk data.</summary>
     public virtual void PrepareWrite(FamilyClusterFile file, CurationFormatContext context) { }
 
     /// <summary>Converters for the curation body, bound to this one write or read. Convert an item type (a panel
     /// entry, an evidence record), never <see cref="FamilyClusterFile"/> or a list that holds most of the file: a
-    /// converter's value is held in memory whole while it is read, and the reader must stay streaming.</summary>
+    /// converter's value is held whole in memory on read and on write, and both must stay streaming.</summary>
     public virtual IEnumerable<JsonConverter> CreateConverters(CurationFormatContext context) => Array.Empty<JsonConverter>();
 
     /// <summary>Contract changes for the curation body, for example a property left out or renamed, applied to
