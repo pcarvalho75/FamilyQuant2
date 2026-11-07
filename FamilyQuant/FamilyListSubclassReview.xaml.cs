@@ -22,6 +22,8 @@ public partial class FamilyListSubclassReview : UserControl
     public static readonly DependencyProperty FamilyKeysProperty = DependencyProperty.Register(nameof(FamilyKeys),
         typeof(IReadOnlyCollection<string>), typeof(FamilyListSubclassReview), new PropertyMetadata(null,
             (d, e) => ((FamilyListSubclassReview)d).SetValue(HasFamilyKeysKey, e.NewValue is IReadOnlyCollection<string> { Count: > 0 })));
+    public static readonly DependencyProperty ShowIntroductionProperty = DependencyProperty.Register(nameof(ShowIntroduction),
+        typeof(bool), typeof(FamilyListSubclassReview), new PropertyMetadata(true));
     private static readonly DependencyPropertyKey ViewKey = DependencyProperty.RegisterReadOnly(nameof(View), typeof(ICollectionView),
         typeof(FamilyListSubclassReview), new PropertyMetadata(null));
     private static readonly DependencyPropertyKey HasSelectionKey = DependencyProperty.RegisterReadOnly(nameof(HasSelection), typeof(bool),
@@ -43,6 +45,7 @@ public partial class FamilyListSubclassReview : UserControl
     public IEnumerable<ImportSubclassChoice>? SubclassChoices { get => (IEnumerable<ImportSubclassChoice>?)GetValue(SubclassChoicesProperty); set => SetValue(SubclassChoicesProperty, value); }
     public ImportSubclassChoice? SelectedSubclass { get => (ImportSubclassChoice?)GetValue(SelectedSubclassProperty); set => SetValue(SelectedSubclassProperty, value); }
     public IReadOnlyCollection<string>? FamilyKeys { get => (IReadOnlyCollection<string>?)GetValue(FamilyKeysProperty); set => SetValue(FamilyKeysProperty, value); }
+    public bool ShowIntroduction { get => (bool)GetValue(ShowIntroductionProperty); set => SetValue(ShowIntroductionProperty, value); }
     public ICollectionView? View => (ICollectionView?)GetValue(ViewKey.DependencyProperty);
     public bool HasSelection => (bool)GetValue(HasSelectionKey.DependencyProperty);
     public bool HasFamilyKeys => (bool)GetValue(HasFamilyKeysKey.DependencyProperty);

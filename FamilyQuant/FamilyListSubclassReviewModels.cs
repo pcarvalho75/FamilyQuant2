@@ -37,6 +37,7 @@ public sealed class ImportSubclassChoice : ScreenViewModel
     public ObservableCollection<ImportSubclassRuleChoice> Rules { get; } = new();
     public ObservableCollection<string> Problems { get; } = new();
     public bool HasDraftSelection => initial != null;
+    public bool Reviewed => reviewed;
     public string SourceFamily => SourceProposal is PanelSubclassProposal p && p.FamilyKey.Length > 0
         ? "Proposed family: " + p.FamilyKey : "Originally unplaced";
     public string EffectiveName => Name.Length > 0 ? Name : (SourceProposal as PanelSubclassProposal)?.DisplayName ?? "";
@@ -70,7 +71,7 @@ public sealed class ImportSubclassChoice : ScreenViewModel
                 rule.PropertyChanged += (_, _) => { Changed(nameof(Summary)); Changed(nameof(HasProblems)); };
         };
     }
-    private void Touch() { reviewed = true; Changed(nameof(State)); }
+    private void Touch() { reviewed = true; Changed(nameof(Reviewed)); Changed(nameof(State)); }
     public void Reject() { Use = false; Touch(); }
 
     public static ImportSubclassChoice FromCore(PanelSubclassProposal proposal) => FromCore(proposal, null);

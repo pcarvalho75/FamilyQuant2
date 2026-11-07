@@ -25,7 +25,8 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-        <StackPanel Margin="0,0,0,10">
+        <StackPanel x:Name="Introduction" Margin="0,0,0,10"
+                    Visibility="{Binding ShowIntroduction, ElementName=ReviewRoot, Converter={StaticResource VisibleWhenTrue}}">
             <TextBlock Text="{Binding DraftHint, ElementName=ReviewRoot}" Style="{StaticResource BodyText}" TextWrapping="Wrap"/>
             <TextBlock Text="Include a rule only when both the rule and its subclass belong in your draft. Original cells and uncertain items remain available for review."
                        Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,4,0,0"/>
@@ -35,6 +36,7 @@
             <ListBox x:Name="ProposalList" ItemsSource="{Binding View, ElementName=ReviewRoot}"
                      SelectedItem="{Binding SelectedSubclass, ElementName=ReviewRoot, Mode=TwoWay}"
                      HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     VirtualizingPanel.IsVirtualizingWhenGrouping="True" VirtualizingPanel.VirtualizationMode="Recycling"
                      AutomationProperties.Name="Subclass proposals by family" ToolTipService.ShowOnDisabled="True"
                      ToolTip="Lists every supplied subclass, expected name and unplaced source item, grouped by its proposed family. Selecting an item opens its details without changing data.">
                 <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem">
