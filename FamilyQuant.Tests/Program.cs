@@ -259,6 +259,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => CoherenceMembersUiTests());
             suite.Add(() => ManualFamilyChoiceTests());
             suite.Add(() => EvidenceFamilyReuseTests());
+            suite.AddWithApplication(() => EvidenceUnlockIdentityTests(Path.Combine(workDir, "evidence-unlock-identity")));
             suite.AddWithApplication(() => PanelChecklistTests(Path.Combine(workDir, "panel-checklist")));
             suite.AddWithApplication(() => PanelChecklistActionsTests(Path.Combine(workDir, "panel-checklist-actions")));
             suite.Add(() => PanelEvidenceMatchingTests());
