@@ -12,6 +12,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-curation-streaming-contract", "FamilyQuant.Tests.Program.CurationStreamingContractTests(System.String)"),
         SuiteCommandRule.Covered("--test-json-stream-copy", "FamilyQuant.Tests.Program.JsonStreamCopyTests()"),
         SuiteCommandRule.Covered("--test-compact-curation", "FamilyQuant.Tests.Program.CompactCurationTests(System.String)"),
+        SuiteCommandRule.Covered("--test-recipe-copies", "FamilyQuant.Tests.Program.RecipeCopiesTests(System.String)"),
         SuiteCommandRule.Covered("--test-crash-handler", "FamilyQuant.Tests.Program.CrashHandlerTests()"),
         SuiteCommandRule.Excluded("--crash-probe", "Owned fatal subprocess helper invoked and asserted by DefaultSuite CrashHandlerTests; deliberately exits and cannot run as an ordinary in-process fixture."),
         SuiteCommandRule.Covered("--test-same-scan-conflicts", "FamilyQuant.Tests.Program.SameScanConflictTests()"),

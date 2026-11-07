@@ -188,6 +188,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-curation-operations` | Shared host queue/cancel paths, staged PatternLab publication, stale membership, browse preferences and headless refusal |
 | `--test-curation-streaming-contract [output-dir]` | Canonical old-string/stream byte and hash parity, detached-copy cleanup, legacy encodings and counted import-fingerprint reuse |
 | `--test-compact-curation [output-dir]` | Old indented FCF read, compact rewrite with identical objects, exact string/stream/project-entry bytes and verified SHA-256 |
+| `--test-recipe-copies [output-dir]` | Format-2 recipe references only for byte-identical copies, detached history, unequal/null/empty preservation, malformed references and native replay |
 | `--test-family-view` | Native family selection, name editing, accessible locks, Undo, production-share projection and 39,996-family virtualization |
 | `--test-architecture-group-split [output-dir]` | Native per-key split choices, retained bulk choice, unsplit members staying together, exact recipe replay and optional synthetic captures |
 | `--test-report-study-boundary` | Report-only operation ownership, retained Core models and screen dependencies |
