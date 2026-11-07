@@ -47,11 +47,10 @@ public static partial class WorkbookImportSummaries
         return candidates[0].Header;
     }
 
-    // Separators and balanced grouped lists are source syntax, not domain or decision vocabulary.
+    // Only top-level separators split names; punctuation-only placeholders supply no name.
     private static IEnumerable<string> ExpectedNameParts(string text)
     {
         int start = 0, depth = 0;
-        var parts = new List<string>();
         for (int index = 0; index <= text.Length; index++)
         {
             if (index < text.Length)
@@ -61,18 +60,7 @@ public static partial class WorkbookImportSummaries
             }
             if (index != text.Length && (depth != 0 || text[index] is not (';' or ',' or '\r' or '\n'))) continue;
             string part = text[start..index].Trim(); start = index + 1;
-            if (part.Length > 0) parts.Add(part);
-        }
-        foreach (string part in parts)
-        {
-            int open = part.IndexOfAny(new[] { '(', '[' });
-            if (open >= 0 && part.Length > open + 2 && (part[^1] is ')' or ']') && part[(open + 1)..^1].IndexOfAny(new[] { ',', ';', '\r', '\n' }) >= 0)
-            {
-                string parent = part[..open].Trim();
-                if (parent.Length > 0) yield return parent;
-                foreach (string child in ExpectedNameParts(part[(open + 1)..^1])) yield return child;
-            }
-            else yield return part;
+            if (part.Any(char.IsLetterOrDigit)) yield return part;
         }
     }
 }
