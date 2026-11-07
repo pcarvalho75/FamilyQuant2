@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace FamilyQuant.Evidence;
@@ -20,7 +22,7 @@ public static partial class EvidenceClassifier
 {
     public static IReadOnlyList<ScopePreviewProtein> ScopePreviewSnapshot(IEnumerable<FastaItemExtended> proteins) => proteins
         .Where(protein => !NearestReviewed.IsDecoy(protein))
-        .Select(protein => new ScopePreviewProtein(FamilyNaming.Accession(protein.SequenceIdentifier), FamilyNaming.ProteinName(protein.Description),
+        .Select(protein => new ScopePreviewProtein(FamilyNaming.Accession(protein.SequenceIdentifier), ScopePreviewName(protein.Description),
             protein.Evidence == null ? null : new ProteinEvidence
             {
                 Accession = protein.Evidence.Accession, Family = protein.Evidence.Family,
@@ -28,6 +30,15 @@ public static partial class EvidenceClassifier
                 Keywords = (protein.Evidence.Keywords ?? new List<string>()).ToList(),
                 TissueSpecificity = (protein.Evidence.TissueSpecificity ?? new List<string>()).ToList(),
             }, IsContaminant(protein))).ToArray();
+
+    private static string ScopePreviewName(string? description)
+    {
+        string text = description ?? "";
+        var joined = Regex.Matches(text, @" : (?<identifier>\S+)\s", RegexOptions.CultureInvariant).Cast<Match>()
+            .Where(match => FamilyNaming.IsUniProtAccession(FamilyNaming.Accession(match.Groups["identifier"].Value))).ToArray();
+        string firstName = FamilyNaming.ProteinName(joined.Length == 0 ? text : text[..joined[0].Index]);
+        return joined.Length == 0 ? firstName : firstName + " (" + (joined.Length + 1).ToString(CultureInfo.CurrentCulture) + " joined names)";
+    }
 
     public static EvidenceScopePreview PreviewScopeChange(IReadOnlyList<ScopePreviewProtein> proteins, string baseline, string edited,
         CancellationToken cancellationToken = default)

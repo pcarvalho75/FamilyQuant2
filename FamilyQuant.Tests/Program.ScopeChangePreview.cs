@@ -37,6 +37,9 @@ internal static partial class Program
         file.MyExtendedFastaItems[4].Evidence!.Family = "";
         file.MyExtendedFastaItems[5].Evidence = null;
         file.MyExtendedFastaItems[5].Description = "narrow activity OS=Fixture label OX=21";
+        file.MyExtendedFastaItems[0].Description = "Supplied example 1" + string.Concat(Enumerable.Range(1, 12)
+            .Select(index => " : P" + (11000 + index).ToString(System.Globalization.CultureInfo.InvariantCulture) + " Supplied joined alias " + index))
+            + " OS=Fixture label OX=21";
         return file;
     }
 
@@ -45,6 +48,10 @@ internal static partial class Program
         EnsureApplication(); Directory.CreateDirectory(output);
         var file = ScopePreviewFile(); string before = file.ToJsonText();
         var snapshot = EvidenceClassifier.ScopePreviewSnapshot(file.MyExtendedFastaItems);
+        Check("Z12k1-fix joined header preview shows only the first name and total joined-name count",
+            snapshot[0].Name == "Supplied example 1 (13 joined names)" && file.ToJsonText() == before);
+        var colon = ScopePreviewFile(); colon.MyExtendedFastaItems[0].Description = "Supplied enzyme : active form OS=Fixture label";
+        Check("Z12k1-fix ordinary colon name text is retained", EvidenceClassifier.ScopePreviewSnapshot(colon.MyExtendedFastaItems)[0].Name == "Supplied enzyme : active form");
         const string baseline = "\"baseline activity\"";
         const string narrow = "\"baseline activity\", \"narrow activity\"";
         const string broad = "\"baseline activity\", \"narrow activity\", \"broad activity\"";
@@ -122,6 +129,12 @@ internal static partial class Program
                         model.ScopeChangePreview?.ExcludedContaminants == 1
                         && WalkTree(window).OfType<TextBlock>().Any(block => block.IsVisible
                             && block.Text == "1 contaminant carrying these words is excluded. A contaminant never joins a family."));
+                    var previewGrid = (DataGrid)window.FindName("ScopePreviewFamiliesGrid");
+                    previewGrid.ScrollIntoView(previewGrid.Items[0]); window.UpdateLayout();
+                    ((DataGridRow)previewGrid.ItemContainerGenerator.ContainerFromIndex(0)).BringIntoView();
+                    window.UpdateLayout(); PumpDispatcher();
+                    Check("Z12k1-fix " + theme + " " + size.Item1 + " native example renders the first joined name and count",
+                        WalkTree(previewGrid).OfType<TextBlock>().Any(block => block.Text.Contains("Supplied example 1 (13 joined names) [P10001]", StringComparison.Ordinal)));
                     ScreenHarness.Save(window, Path.Combine(output, "scope-preview-" + theme + "-" + size.Item1 + ".png"), size.Item1, size.Item2);
                     Check("Z12k1 " + theme + " " + size.Item1 + " capture retains the completed preview",
                         !model.IsScopePreviewBusy && model.ScopeChangePreview?.Proteins == 4);
