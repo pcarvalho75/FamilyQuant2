@@ -19,6 +19,8 @@ Draft for the final integration and polish walks. The storage items still being 
 
 **Other fixes.** A protein added later to an existing evidence family joins that family, and the scope box and **Update proposal** remain within reach while counts are open.
 
+**Project compatibility.** Saving a project in 2.1.11 upgrades it to project version 3. FamilyQuant 2.1.10 cannot open that saved project and shows "Update FamilyQuant to open it". FamilyQuant 2.1.11 still opens older projects and `.fcf` files.
+
 ### Pending before release
 
 - **Compact curation files. Pending.** Write the same stored content without indentation, with old-file compatibility and round-trip checks.
