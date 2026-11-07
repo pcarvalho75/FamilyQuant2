@@ -1,4 +1,5 @@
 using DocumentFormat.OpenXml.Packaging;
+using FamilyQuant.Examples;
 using FamilyQuant.Panels;
 using FamilyQuant.Panels.Import;
 using System;
@@ -92,6 +93,14 @@ internal static partial class Program
                     item.LegendEntries.Count == 1 && item.LegendEntries[0].Label == baseLabels[language]
                     && item.LegendMeaning == labels[language][4] && item.IsUncertain && !item.ExactProgramDecision
                     && item.SourceValue == qualified && item.Reason.Contains(qualifiers[language], StringComparison.Ordinal));
+                var fullLegend = neutral.ToArray(); fullLegend[0] = qualified; fullLegend[1] = baseLabels[language];
+                var fullMeanings = qualifiedMeanings.ToArray(); fullMeanings[1] = labels[language][1];
+                WriteDecisionWorkbook(path, qualifiedLabels, fullMeanings, fullLegend);
+                var full = importer.ProposeWorkbook(path).Decisions.Single(item => item.SourceValue == qualified);
+                Check("Z16a11b " + languages[language] + " " + open + close + " full label takes priority without qualifier-forced uncertainty",
+                    full.LegendEntries.Count == 1 && full.LegendEntries[0].Label == qualified
+                    && full.LegendMeaning == fullMeanings[0] && full.ProposedMapping?.Decision == FamilyPanelDecision.Quantify
+                    && !full.IsUncertain && !full.Reason.Contains("Bracketed qualifier:", StringComparison.Ordinal));
             }
             var prefixed = neutral.ToArray(); prefixed[0] = baseLabels[language] + "Extra (detail)";
             var distinct = neutral.ToArray(); distinct[0] = baseLabels[language] + " (" + qualifiers[language] + ")";
@@ -114,6 +123,39 @@ internal static partial class Program
                 importer.ProposeWorkbook(path).Decisions.Single(item => item.SourceValue == prefixed[0]).LegendEntries.Count == 0);
         }
         WorkbookDecisionConfirmationTests(root);
+        WorkbookDecisionLookupTests(root);
+    }
+
+    private static void WorkbookDecisionLookupTests(string root)
+    {
+        var importer = new FamilyPanelSpreadsheetImporter();
+        string shippedPath = Path.Combine(root, "d87-full-label-shipped.xlsx"); ExampleFamilyList.Write(shippedPath);
+        var shipped = importer.ProposeWorkbook(shippedPath);
+        foreach (string label in new[] { "Condicional (só na fração solúvel)", "Excluir (ou só varredura)" })
+        {
+            var expected = shipped.Colors.SelectMany(item => item.Entries).Single(item => item.Label == label);
+            var actual = shipped.Decisions.Single(item => item.SourceValue == label);
+            Check("Z16a11b shipped " + label + " retains its own full-label legend meaning",
+                actual.LegendEntries.Count == 1 && actual.LegendEntries[0].Label == label
+                && actual.LegendEntries[0].SheetName == expected.SheetName && actual.LegendEntries[0].RowNumber == expected.RowNumber
+                && actual.LegendMeaning == expected.Meaning && actual.Reason.Contains(expected.Meaning, StringComparison.Ordinal));
+        }
+        string path = Path.Combine(root, "d87-full-label-column.xlsx");
+        string[] plain = ["Action alpha", "Action beta", "Action gamma", "Action delta", "Action epsilon"];
+        string[] qualified = plain.Select(label => label + " (detail)").ToArray();
+        string[] meanings = ["Quantify", "Not a family", "Quantify", "Not a family", "Quantify"];
+        WriteDecisionWorkbook(path, qualified, meanings);
+        var full = importer.ProposeWorkbook(path);
+        Check("Z16a11b full bracketed legend labels identify the decision column",
+            full.FamilyProposal.Choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Decision) == "h06"
+            && qualified.All(label => full.Decisions.Any(item => item.SourceValue == label
+                && item.LegendEntries.Count == 1 && item.LegendEntries[0].Label == label)));
+        WriteDecisionWorkbook(path, qualified, meanings, plain);
+        var fallback = importer.ProposeWorkbook(path);
+        Check("Z16a11b base-only legend labels still identify the decision column and require qualifier review",
+            fallback.FamilyProposal.Choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Decision) == "h06"
+            && qualified.All(label => fallback.Decisions.Any(item => item.SourceValue == label
+                && item.IsUncertain && item.LegendEntries.Count == 1 && item.Reason.Contains("(detail)", StringComparison.Ordinal))));
     }
 
     private static void WorkbookDecisionConfirmationTests(string root)
