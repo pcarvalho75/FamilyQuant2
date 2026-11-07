@@ -74,15 +74,17 @@ public static class ShellProjectOperations
         if (!ProjectStore.IsProjectPath(path))
         {
             operation?.Report("document-read", "Opening family document", 0, 1);
-            byte[] bytes = File.ReadAllBytes(path);
-            operation?.ThrowIfCancellationRequested();
-            using var reader = new StreamReader(new MemoryStream(bytes), Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
+            // Keep the source locked while parsing and hashing, so the provenance hash still
+            // describes the exact bytes read, including a legacy BOM or encoding.
+            using var held = File.OpenRead(path);
             try
             {
-                var file = FamilyClusterFile.FromJsonText(reader.ReadToEnd());
+                var file = FamilyClusterFile.ReadJsonUtf8(() => File.OpenRead(path));
+                operation?.ThrowIfCancellationRequested();
+                string sourceSha256 = Convert.ToHexString(SHA256.HashData(held)).ToLowerInvariant();
                 operation?.ThrowIfCancellationRequested();
                 operation?.Report("document-read", "Family document read", 1, 1);
-                return new(file, new(), null) { DatabaseFileSha256 = Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant() };
+                return new(file, new(), null) { DatabaseFileSha256 = sourceSha256 };
             }
             catch (InvalidDataException) { throw new InvalidDataException("\"" + path + "\" is not a valid Family Cluster File."); }
         }
