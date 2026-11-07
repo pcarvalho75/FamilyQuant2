@@ -78,9 +78,10 @@ public sealed class ImportSpecialRow : ScreenViewModel
     public string Status => Blocking ? "Needs a choice" : Chosen ? "Ready" : "Skipped";
     public bool SeveralNames => Kind == nameof(PanelImportProblemKind.SeveralFamilies);
     public bool Duplicate => Kind == nameof(PanelImportProblemKind.DuplicateKey);
-    public FamilyPanelRowAction? Action { get => action; set { if (Set(ref action, value)) { Changed(nameof(Splitting)); Changed(nameof(Merging)); } } }
+    public FamilyPanelRowAction? Action { get => action; set { if (Set(ref action, value)) { Changed(nameof(Splitting)); Changed(nameof(Merging)); Changed(nameof(EditingSingleFamily)); } } }
     public bool Splitting => Action == FamilyPanelRowAction.Split;
     public bool Merging => Action == FamilyPanelRowAction.MergeInto;
+    public bool EditingSingleFamily => !Splitting && Action != FamilyPanelRowAction.Skip;
     public string Key { get => key; set => Set(ref key, value ?? ""); }
     public string Name { get => name; set => Set(ref name, value ?? ""); }
     public string MergeTarget { get => mergeTarget; set => Set(ref mergeTarget, value ?? ""); }
