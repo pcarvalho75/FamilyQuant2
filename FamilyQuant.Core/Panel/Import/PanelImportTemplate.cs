@@ -49,7 +49,7 @@ public static class PanelImportTemplate
         "Name: the family name used in tables and reports.",
         "Other-language name: the same family in another language, for example English when Name is in Portuguese. Optional.",
         "Notes: anything you want to keep with the family. It is kept as text and never changes a result. Optional.",
-        "Pfam domains: optional, written as Name (accession), separated by semicolons, for example Reprolysin (PF01421); Disintegrin (PF00200).",
+            "Pfam domains: optional, written as Name (accession), separated by semicolons, for example Example domain (PF12345).",
         "Decision: optional. Leave it empty to quantify the family, or choose Quantify, Report under others or Not a family, or write Merge into followed by another row's abbreviation, for example Merge into CTL.",
         "",
         "A row that lists several families in one name cell, separated by commas, semicolons or line breaks, is offered as one family per name or as one group reported under others when you import it.",
