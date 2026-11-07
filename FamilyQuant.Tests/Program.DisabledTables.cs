@@ -86,9 +86,30 @@ internal static partial class Program
                     Check(theme + " leaving disabled state retains the selection", ReferenceEquals(grid.SelectedItem, selected));
                 }
                 finally { editor.Close(); PumpDispatcher(); }
+                CheckDefaultTableForeground(theme);
             }
         }
         finally { Themes.ThemeManager.Apply(previousTheme); }
+    }
+
+    private static void CheckDefaultTableForeground(Themes.AppTheme theme)
+    {
+        var panel = new FamilyPanel { Name = "Default table fixture", Families = new() { new() { Key = "one", DisplayName = "Supplied family" } } };
+        var editor = new PanelEditorWindow(panel) { Left = -30000, Top = -30000, Width = 1080, Height = 720,
+            WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
+        try
+        {
+            var grid = (DataGrid)editor.FindName("FamilyGrid");
+            Check("Z16a15 " + theme + " default table starts with no local foreground", grid.ReadLocalValue(Control.ForegroundProperty) == DependencyProperty.UnsetValue);
+            editor.Show(); PumpDispatcher();
+            Check("Z16a15 " + theme + " default table receives TextBrush on load", ReferenceEquals(grid.Foreground, editor.FindResource("TextBrush")));
+            var other = theme == Themes.AppTheme.Dark ? Themes.AppTheme.Light : Themes.AppTheme.Dark;
+            Themes.ThemeManager.Apply(other); PumpDispatcher();
+            Check("Z16a15 " + theme + " default table follows a switch to " + other, ReferenceEquals(grid.Foreground, editor.FindResource("TextBrush")));
+            Themes.ThemeManager.Apply(theme); PumpDispatcher();
+            Check("Z16a15 " + theme + " default table follows the switch back", ReferenceEquals(grid.Foreground, editor.FindResource("TextBrush")));
+        }
+        finally { editor.Close(); PumpDispatcher(); }
     }
 
     private static void CheckDisabledTable(Window window, DataGrid grid, string label)

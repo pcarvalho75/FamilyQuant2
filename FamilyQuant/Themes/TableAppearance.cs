@@ -75,7 +75,9 @@ namespace FamilyQuant.Themes
                 if (attached) return;
                 attached = true;
                 grid.SetResourceReference(Control.BackgroundProperty, "SurfaceBrush");
-                grid.SetResourceReference(Control.ForegroundProperty, "TextBrush");
+                // Keep a caller foreground when tab content reloads during a theme switch.
+                if (grid.ReadLocalValue(Control.ForegroundProperty) == DependencyProperty.UnsetValue)
+                    grid.SetResourceReference(Control.ForegroundProperty, "TextBrush");
                 // Parent local row brushes outrank row triggers during DataGrid's property transfer.
                 // Use the shared style values so hover and selection retain their precedence.
                 grid.ClearValue(DataGrid.RowBackgroundProperty);
