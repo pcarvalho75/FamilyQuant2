@@ -146,6 +146,10 @@ public sealed class PanelImportRowOutcome
     /// <summary>For a row listing several families: the column holding the list and the names found in it.</summary>
     public string ListColumn { get; set; } = string.Empty;
     public List<FamilyPanelSplitPart> ProposedParts { get; set; } = new();
+    /// <summary>A leading label such as "Other rare families" before the first name, offered as the group's name; empty when none.</summary>
+    public string ListLabel { get; set; } = string.Empty;
+    /// <summary>The choice the wizard starts on: Import (keep as one family) for two names split by a comma alone; null otherwise.</summary>
+    public FamilyPanelRowAction? SuggestedAction { get; set; }
 }
 
 public sealed class PanelImportColorUse

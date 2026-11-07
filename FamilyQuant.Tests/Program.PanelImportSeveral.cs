@@ -55,7 +55,8 @@ internal static partial class Program
         Check("Z12p3 the list row is returned as such with proposed keys from its abbreviation, and nothing changes until a choice",
             asWritten.CanImport && row8 is { Action: FamilyPanelRowAction.Import, ListColumn: "Nome (inglês)" }
             && row8.ProposedParts.Select(p => p.Name).SequenceEqual(names)
-            && row8.ProposedParts.Select(p => p.Key).SequenceEqual(names.Select(n => "Outras raras: " + n))
+            && row8.ProposedParts.Select(p => p.Key).SequenceEqual(Enumerable.Range(1, 5).Select(n => "Outras raras-" + n.ToString(System.Globalization.CultureInfo.InvariantCulture)))
+            && row8.ListLabel.Length == 0 && row8.SuggestedAction == null
             && row8.FamilyKeys.SequenceEqual(new[] { "Outras raras" })
             && note is { RowNumber: 8, Column: "Nome (inglês)", ColumnLetter: "C", Severity: PanelImportSeverity.Note }
             && note.Message == "Row 8, column \"Nome (inglês)\": the cell lists 5 names (Endopeptidase; sulfhydryl oxidase; carboxypeptidase; "
@@ -64,7 +65,7 @@ internal static partial class Program
 
         choices.RowChoices.Add(new FamilyPanelRowChoice { RowNumber = 8, Action = FamilyPanelRowAction.Split });
         var split = importer.Check(table8, choices, decisions, "Consenso");
-        var parts = split.Panel?.Families.Where(f => f.Key.StartsWith("Outras raras: ", StringComparison.Ordinal)).ToList() ?? new();
+        var parts = split.Panel?.Families.Where(f => f.Key.StartsWith("Outras raras-", StringComparison.Ordinal)).ToList() ?? new();
         Check("Z12p3 one family per name: proposed keys and names, the row's decision and every original cell",
             split.CanImport && parts.Count == 5 && parts.Select(f => f.DisplayName).SequenceEqual(names)
             && parts.All(f => f.Decision == FamilyPanelDecision.Quantify && f.SourceDecision == "Opcional" && f.Pfam.Count == 0)
@@ -107,8 +108,8 @@ internal static partial class Program
             !clash.CanImport && clashes.Count == 3
             && clashes[0] is { Kind: PanelImportProblemKind.DuplicateKey, RowNumber: 8, Value: "AChE", Suggestion: "AChE-2" } && clashes[0].OtherRowNumbers.SequenceEqual(new[] { 3 })
             && clashes[0].Message == "Row 8, column \"Sigla\", name 1 of the list (\"Endopeptidase\"): the abbreviation \"AChE\" is also used in row 3. Rename it (for example \"AChE-2\")."
-            && clashes[1] is { Kind: PanelImportProblemKind.MissingKey, Suggestion: "Outras raras: TCTP" }
-            && clashes[1].Message == "Row 8, column \"Sigla\", name 2 of the list (\"TCTP\"): the abbreviation is empty. Type one (for example \"Outras raras: TCTP\")."
+            && clashes[1] is { Kind: PanelImportProblemKind.MissingKey, Suggestion: "Outras raras-5" }
+            && clashes[1].Message == "Row 8, column \"Sigla\", name 2 of the list (\"TCTP\"): the abbreviation is empty. Type one (for example \"Outras raras-5\")."
             && clashes[2] is { Kind: PanelImportProblemKind.MissingName, Column: "Nome (português)" }
             && clashes[2].Message == "Row 8, column \"Nome (português)\", name 3 of the list: the name is empty. Type one.",
             string.Join(" / ", clashes.Select(p => p.Message)));
@@ -128,7 +129,7 @@ internal static partial class Program
         domainChoices.RowChoices = new() { new FamilyPanelRowChoice { RowNumber = 3, Action = FamilyPanelRowAction.Split } };
         var splitDomains = importer.Check(domains, domainChoices, Array.Empty<FamilyPanelDecisionMapping>());
         Check("Z12p3 a split row's domains stay text only, with a note, because they cannot be told apart",
-            splitDomains.Panel?.Families.Where(f => f.Key.StartsWith("MIX: ", StringComparison.Ordinal)).ToList() is { Count: 2 } mix
+            splitDomains.Panel?.Families.Where(f => f.Key.StartsWith("MIX-", StringComparison.Ordinal)).ToList() is { Count: 2 } mix
             && mix.All(f => f.Pfam.Count == 0 && f.TextFields.Single(t => t.Name == "Pfam").Text == "Kunitz_BPTI (PF00014)")
             && splitDomains.Problems.Any(p => p.Kind == PanelImportProblemKind.SeveralFamilies && p.Column == "Pfam"
                 && p.Message == "Row 3, column \"Pfam\": the Pfam domains are kept as text only, because they cannot be told apart for the 2 families of the row."));
@@ -136,10 +137,40 @@ internal static partial class Program
         var legacyCheck = importer.Check(domains, legacy, Array.Empty<FamilyPanelDecisionMapping>());
         Check("Z12p3 version 0 choices look for no lists", legacyCheck.CanImport && !legacyCheck.Problems.Any(p => p.Kind == PanelImportProblemKind.SeveralFamilies)
             && legacyCheck.Rows.All(r => r.ProposedParts.Count == 0));
-        var collide = ListTable(("K", "A, B", ""), ("K: A", "Other", ""));
+        var collide = ListTable(("K", "A, B", ""), ("K-1", "Other", ""));
         var collideCheck = importer.Check(collide, ListChoices(collide), Array.Empty<FamilyPanelDecisionMapping>());
         Check("Z12p3 a proposed part key never repeats an existing abbreviation",
-            collideCheck.Rows[0].ProposedParts.Select(p => p.Key).SequenceEqual(new[] { "K: A-2", "K: B" }));
+            collideCheck.Rows[0].ProposedParts.Select(p => p.Key).SequenceEqual(new[] { "K-1-2", "K-2" }));
+
+        Section("Z12p3a a several-families cell read gracefully");
+        var labelled = ListTable(("RARE", "Outras raras: hialuronidase (HYA); quitinase (QTN); glutaminil ciclase (GC); AMP (peptídeo antimicrobiano, curto)", ""),
+            ("FET", "Fetuína, inibidor de protease", ""), ("TRI", "A, B, C", ""), ("SEMI", "A; B", ""), ("LINE", "A\nB", ""), ("QTN", "Quitinase própria", ""));
+        labelled.Headers.Add("Nome (inglês)"); labelled.ColumnLetters.Add("D");
+        string[] english = { "Other rare families: hyaluronidase; chitinase; glutaminyl cyclase; AMP", "Fetuin, protease inhibitor", "", "", "", "Own chitinase" };
+        for (int i = 0; i < labelled.Rows.Count; i++) labelled.Rows[i].Cells["Nome (inglês)"] = english[i];
+        var labelledChoices = ListChoices(labelled); labelledChoices.ColumnHeaders[PanelImportFields.OtherName] = "Nome (inglês)";
+        var labelledCheck = importer.Check(labelled, labelledChoices, Array.Empty<FamilyPanelDecisionMapping>());
+        var rare = labelledCheck.Rows[0];
+        Check("Z12p3a a leading label is offered as the group's name and is not glued to the first family",
+            rare.ListLabel == "Outras raras" && rare.ProposedParts.Select(p => p.Name).SequenceEqual(new[] { "hialuronidase", "quitinase", "glutaminil ciclase", "AMP (peptídeo antimicrobiano, curto)" }),
+            rare.ListLabel + " | " + string.Join(" | ", rare.ProposedParts.Select(p => p.Name)));
+        Check("Z12p3a each part takes the abbreviation in its parentheses, otherwise the row's abbreviation and a number, never a key already used",
+            rare.ProposedParts.Select(p => p.Key).SequenceEqual(new[] { "HYA", "QTN-2", "GC", "RARE-4" }), string.Join(" | ", rare.ProposedParts.Select(p => p.Key)));
+        Check("Z12p3a two names split by a comma alone start on Keep as one family; three names, a semicolon or a line break do not",
+            labelledCheck.Rows[1].SuggestedAction == FamilyPanelRowAction.Import && labelledCheck.Rows[2].SuggestedAction == null
+            && labelledCheck.Rows[3].SuggestedAction == null && labelledCheck.Rows[4].SuggestedAction == null && rare.SuggestedAction == null);
+        labelledChoices.RowChoices = new() { new FamilyPanelRowChoice { RowNumber = rare.RowNumber, Action = FamilyPanelRowAction.Split } };
+        var labelledSplit = importer.Check(labelled, labelledChoices, Array.Empty<FamilyPanelDecisionMapping>());
+        var rareFamilies = labelledSplit.Panel?.Families.Where(f => f.Key is "HYA" or "QTN-2" or "GC" or "RARE-4").ToList() ?? new();
+        Check("Z12p3a split families take their names from the same columns as every other family",
+            rareFamilies.Select(f => f.DisplayName).SequenceEqual(new[] { "hialuronidase", "quitinase", "glutaminil ciclase", "AMP (peptídeo antimicrobiano, curto)" })
+            && rareFamilies.Select(f => PanelImportFields.OtherNameText(labelledSplit.Panel!, f)).SequenceEqual(new[] { "hyaluronidase", "chitinase", "glutaminyl cyclase", "AMP" }),
+            string.Join(" / ", labelledSplit.Problems.Where(p => p.Severity == PanelImportSeverity.Blocking).Select(p => p.Message)));
+        labelledChoices.RowChoices = new() { new FamilyPanelRowChoice { RowNumber = rare.RowNumber, Action = FamilyPanelRowAction.ReportUnderOthers } };
+        var labelledGroup = importer.Check(labelled, labelledChoices, Array.Empty<FamilyPanelDecisionMapping>());
+        Check("Z12p3a one group reported under others is named by the label in each name column",
+            labelledGroup.Panel?.Families.Single(f => f.Key == "RARE") is { Decision: FamilyPanelDecision.ReportUnderOthers, DisplayName: "Outras raras" } group
+            && PanelImportFields.OtherNameText(labelledGroup.Panel, group) == "Other rare families");
     }
 
     private static PanelSpreadsheetTable ListTable(params (string Key, string Name, string Pfam)[] rows) => new()

@@ -129,6 +129,17 @@ made the row stays one family named as written, so a single name with a comma co
 - `ReportUnderOthers` keeps the row as one family with that decision, overriding the mapped label.
 
 Both choices are stored in `RowChoices` and replay with the panel. Version 0 choices look for no lists.
+
+Z12p3a reads such a cell more gracefully. A leading label before the first name ("Other rare families:
+hyaluronidase; chitinase") is returned as `ListLabel`, offered as the group's name, and is not glued to the
+first family; Report under others then names the group by the label in each name column. A part's proposed
+key is the abbreviation in its trailing parentheses ("hyaluronidase (HYA)" gives HYA, and the name loses the
+parentheses), otherwise the row's abbreviation and the part's number (RARE-4); a key already used gets the
+usual -2. Each part takes its name from the name column when that column lists the same number of names,
+and its other-language name from that column under the same rule, like every other family. A cell split into
+exactly two names by a comma alone, with no label, has `SuggestedAction` Import, so the wizard starts on
+"Keep as one family"; three or more names, a semicolon or a line break leave it empty. Keys proposed for a
+split chosen before this change are not kept by a Replay of the same choices, which 2.1.11 has not shipped.
 Checks: `--test-panel-import-several`. The read-only probe of the real workbook copy flagged exactly one
 row, the row of rare families with nine names in its English column, and no other row.
 
