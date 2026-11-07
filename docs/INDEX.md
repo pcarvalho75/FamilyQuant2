@@ -12,6 +12,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Architecture](ARCHITECTURE.md) | Current boundaries, planned Reports/operation host, budgets and historical destination inventory |
 | [Core operations](CORE-OPERATIONS.md) | Progress, cancellation, outcomes and atomic publication |
 | [Verified Save memory](STREAMING-SAVE.md) | Streaming JSON and fingerprints, exact-entry byte proof and measured memory |
+| [Import and Apply memory](CURATION-WORKING-MEMORY.md) | Panel-only Undo, detached session copies and oversized native import measurement |
 | [Compute and open progress](COMPUTE-PROGRESS.md) | Counted phases, live clocks, timestamped logs and native parity check |
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |

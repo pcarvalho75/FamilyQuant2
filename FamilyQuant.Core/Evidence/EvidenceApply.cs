@@ -416,7 +416,7 @@ namespace FamilyQuant.Evidence
         private static EvidenceProvenance? CurationSource(EvidenceProvenance? source)
         {
             if (source?.FamilyWorld == null) return source;
-            var curation = Clone(source);
+            var curation = ProvenanceView(source);
             curation.FamilyWorld = null;
             return curation;
         }
@@ -428,6 +428,11 @@ namespace FamilyQuant.Evidence
             stream.FlushFinalBlock();
             return Convert.ToHexString(hash.Hash!);
         }
-        internal static T Clone<T>(T value) => JsonStreamCopy.Clone(value);
+        internal static T Clone<T>(T value) => value switch
+        {
+            EvidenceRecipe recipe when typeof(T) == typeof(EvidenceRecipe) => (T)(object)CloneSessionRecord(recipe, recipe.SessionReferences),
+            EvidenceApplySelection selection when typeof(T) == typeof(EvidenceApplySelection) => (T)(object)CloneSessionRecord(selection, selection.SessionReferences),
+            _ => JsonStreamCopy.Clone(value),
+        };
     }
 }

@@ -62,3 +62,6 @@ the wire body and restore it on read. D80 subsequently switches FCF saves to tha
 format-2 wire representation; compact fixtures assert the FCF and project curation entry
 are byte-identical. Canonical hashes, string output and detached copies remain format 1
 and see no parts. The old-reader output gate DU7 is explicitly retired in the feature ledger.
+
+[Import and Apply working memory](CURATION-WORKING-MEMORY.md) records Z12p5f8's copy lifetimes,
+unchanged-content checks and oversized before/after measurement.

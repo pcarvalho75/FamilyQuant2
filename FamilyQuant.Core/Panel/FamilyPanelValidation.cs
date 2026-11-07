@@ -8,7 +8,7 @@ namespace FamilyQuant.Panels;
 public static class FamilyPanelValidation
 {
     public static FamilyPanel Clone(FamilyPanel panel) =>
-        JsonSerializer.Deserialize<FamilyPanel>(JsonSerializer.Serialize(panel))!;
+        JsonStreamCopy.Clone(panel);
 
     /// <summary>Refuses ambiguous keys, broken/cyclic merges and contradictory subclass definitions.
     /// Does not change any user text or domain accession.</summary>

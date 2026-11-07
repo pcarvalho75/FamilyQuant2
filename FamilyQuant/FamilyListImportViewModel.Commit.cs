@@ -29,8 +29,9 @@ public sealed partial class FamilyListImportViewModel
         if (fingerprint == matchesFingerprint) return;
         matchesFingerprint = fingerprint;
         var detached = FamilyPanelValidation.Clone(check.Panel);
-        var suggestions = matcher?.Suggest(transaction.Project.DeepCopy(), detached)
-            ?? Array.Empty<ImportMatchFamily>();
+        var suggestions = matcher is FamilyListStoredEvidenceMatches stored
+            ? stored.Suggest(detached)
+            : matcher?.Suggest(transaction.Project.DeepCopy(), detached) ?? Array.Empty<ImportMatchFamily>();
         var previous = MatchFamilies.ToDictionary(f => f.Key, StringComparer.Ordinal);
         MatchFamilies.Clear();
         foreach (var family in check.Panel.Families.Where(f => FamilyPanelValidation.ResolveFamilyKey(check.Panel, f.Key) == f.Key))
