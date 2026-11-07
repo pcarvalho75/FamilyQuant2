@@ -159,6 +159,8 @@ namespace FamilyQuant
         /// </summary>
         public static FamilyClusterFile FromJsonText(string theFile)
         {
+            if (CurationFormat.Detect(theFile) == CurationFormat.Current)
+                return ReadCurationFormat2(() => new MemoryStream(System.Text.Encoding.UTF8.GetBytes(theFile), writable: false));
             FamilyClusterFile loaded = JsonSerializer.Deserialize<FamilyClusterFile>(theFile)
                 ?? throw new InvalidDataException("The text is not a valid Family Cluster File.");
             return FinishJsonLoad(loaded, theFile.Contains("\"LockedUserIds\""));

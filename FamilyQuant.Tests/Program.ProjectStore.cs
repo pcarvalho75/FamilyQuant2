@@ -362,10 +362,12 @@ namespace FamilyQuant.Tests
             using (var zip = System.IO.Compression.ZipFile.OpenRead(path))
             {
                 var names = zip.Entries.Select(en => en.FullName).OrderBy(n => n, StringComparer.Ordinal).ToList();
-                Check("structure: the zip holds the four documented v2 entries",
+                // Version 3 (Z15b1): the curation is format 2 in curation2.json; curation.json is only the
+                // notice an older build reads before refusing the project at its manifest version check.
+                Check("structure: the zip holds the five documented v3 entries",
                     names.SequenceEqual(new[]
                     {
-                        "curation.json", "manifest.json", "quant.tsv.gz",
+                        ProjectStore.CurationEntryName, ProjectStore.CurationFormat2EntryName, "manifest.json", "quant.tsv.gz",
                         ProjectStore.SpectrumComparisonEntryName,
                     }.OrderBy(n => n, StringComparer.Ordinal)),
                     string.Join(", ", names));

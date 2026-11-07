@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 
 namespace FamilyQuant.Evidence
@@ -420,7 +420,14 @@ namespace FamilyQuant.Evidence
             curation.FamilyWorld = null;
             return curation;
         }
-        private static string Hash<T>(T value) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(value))));
+        private static string Hash<T>(T value)
+        {
+            using var hash = SHA256.Create();
+            using var stream = new CryptoStream(Stream.Null, hash, CryptoStreamMode.Write);
+            JsonSerializer.Serialize(stream, value);
+            stream.FlushFinalBlock();
+            return Convert.ToHexString(hash.Hash!);
+        }
         internal static T Clone<T>(T value) => JsonStreamCopy.Clone(value);
     }
 }
