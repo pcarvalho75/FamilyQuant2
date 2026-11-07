@@ -316,6 +316,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => DatabaseUpdatePlacementSideTests());
             suite.Add(() => DatabaseUpdateApplyTests());
             suite.Add(() => DatabaseUpdateBindingTests());
+            suite.AddWithApplication(() => DatabaseUpdateShellTests());
             suite.Section("Coherence check - what the reviewed members of a family ever show");
             suite.Add(() => CoherenceCheckTests());
             suite.Add(() => E16RuleTests());
