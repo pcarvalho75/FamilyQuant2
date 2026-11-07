@@ -139,7 +139,8 @@ public sealed partial class FamilyListImportViewModel
                 Blocking = severalNeedsChoice || problems.Any(p => p.Severity == PanelImportSeverity.Blocking),
                 Chosen = answer != null, Key = !string.IsNullOrWhiteSpace(answer?.Key) ? answer.Key : !string.IsNullOrWhiteSpace(problem?.Suggestion) ? problem.Suggestion : Raw(source, PanelImportFields.FamilyKey),
                 Name = !string.IsNullOrWhiteSpace(answer?.Name) ? answer.Name : Raw(source, PanelImportFields.DisplayName), MergeTarget = answer?.MergeTargetFamilyKey ?? "",
-                Action = answer?.Action ?? (problem?.Severity == PanelImportSeverity.Note && !severalNeedsChoice ? FamilyPanelRowAction.Skip : null) };
+                Action = answer?.Action ?? (problem?.Severity == PanelImportSeverity.Note && !severalNeedsChoice
+                    ? FamilyPanelRowAction.Skip : severalNeedsChoice ? FamilyPanelRowAction.Split : FamilyPanelRowAction.Import) };
             foreach (var part in answer?.Parts ?? outcome?.ProposedParts ?? new List<FamilyPanelSplitPart>())
                 row.Parts.Add(new ImportRowPart { Key = part.Key, Name = part.Name });
             row.PropertyChanged += (_, _) => { Changed(nameof(CanUseRowChoice)); };

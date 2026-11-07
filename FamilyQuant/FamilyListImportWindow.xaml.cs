@@ -20,7 +20,7 @@ public partial class FamilyListImportWindow : Window
     public bool EditPanelRequested { get; private set; }
     public Func<string, bool>? BroadMatchConfirmationOverride { get; set; }
     private readonly Action<string>? exampleWriter, templateWriter;
-    private bool closing, loadingSheets;
+    private bool closing, loadingSheets, loadingRowActions;
     public FamilyListImportWindow(FamilyListImportViewModel model, Action<string>? exampleWriter = null, Action<string>? templateWriter = null)
     {
         InitializeComponent(); Model = model; DataContext = model;
@@ -31,6 +31,7 @@ public partial class FamilyListImportWindow : Window
         if (templateWriter == null) TemplateButton.ToolTip = "Unavailable because this window was opened without a template writer; open File > Import family list to save the built-in template. Nothing changes in the project or workbook.";
         DecisionActionColumn.ItemsSource = FamilyListImportViewModel.DecisionOptions;
         Model.PropertyChanged += Model_Changed;
+        RefreshRowActionChoice(updateOptions: true);
         PreviewKeyDown += Window_KeyDown;
         Closed += (_, _) => { Model.PropertyChanged -= Model_Changed; Model.Dispose(); };
     }
@@ -38,8 +39,36 @@ public partial class FamilyListImportWindow : Window
     private void Model_Changed(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(FamilyListImportViewModel.Preview)) BuildPreview();
+        if (e.PropertyName is nameof(FamilyListImportViewModel.SelectedSpecialRow) or nameof(FamilyListImportViewModel.AvailableRowOptions))
+            RefreshRowActionChoice(updateOptions: true);
+        else if (e.PropertyName == nameof(FamilyListImportViewModel.CanUseRowChoice)) RefreshRowActionChoice(updateOptions: false);
         if (e.PropertyName is nameof(FamilyListImportViewModel.Page) or nameof(FamilyListImportViewModel.ReviewingDecisions))
             Dispatcher.BeginInvoke(new Action(() => { if (!closing && IsLoaded) { PageHeading.Focus(); PageHeading.BringIntoView(); } }));
+    }
+
+    private void RefreshRowActionChoice(bool updateOptions)
+    {
+        if (!Dispatcher.CheckAccess())
+        {
+            Dispatcher.BeginInvoke(new Action(() => RefreshRowActionChoice(updateOptions)));
+            return;
+        }
+        if (closing) return;
+        loadingRowActions = true;
+        try
+        {
+            if (updateOptions) RowActionChoice.ItemsSource = Model.AvailableRowOptions;
+            RowActionChoice.SelectedValue = Model.SelectedSpecialRow?.Action;
+        }
+        finally { loadingRowActions = false; }
+    }
+
+    private void RowAction_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (loadingRowActions || Model == null || !Model.CanEdit || Model.SelectedSpecialRow == null
+            || RowActionChoice.SelectedValue is not FamilyPanelRowAction action
+            || !Model.AvailableRowOptions.Any(option => option.Value == action)) return;
+        Model.SelectedSpecialRow.Action = action;
     }
 
     private void BuildPreview()
