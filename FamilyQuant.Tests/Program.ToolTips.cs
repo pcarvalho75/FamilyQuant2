@@ -108,7 +108,8 @@ internal static partial class Program
         }
         var cellRows = ToolTipCensusCellProbe();
         Check("Z12q6 the census walks into table cells: one row per column template, NONE for a bare check box, OK with a tooltip",
-            cellRows.Count(r => r.Kind == "check box") == 2
+            cellRows.Count(r => r.Kind == "check box") == 3
+            && cellRows.SingleOrDefault(r => r.Kind == "check box" && r.Host.EndsWith("column \"Cell styled\"", StringComparison.Ordinal))?.Status == "OK"
             && cellRows.SingleOrDefault(r => r.Kind == "check box" && r.Host.EndsWith("column \"Bare\"", StringComparison.Ordinal))?.Status == "NONE"
             && cellRows.SingleOrDefault(r => r.Kind == "check box" && r.Host.EndsWith("column \"Explained\"", StringComparison.Ordinal))?.Status == "OK",
             string.Join("; ", cellRows.Select(r => r.Kind + "|" + r.Host + "|" + r.Status)));

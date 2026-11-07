@@ -313,11 +313,11 @@ namespace FamilyQuant.Evidence
         /// <summary>The file's reviewed proteins and the stored reference panel's entries that are not already
         /// among them, both in scope when a scope is given: a neighbour then always carries the user's words, so
         /// the nearest one in scope is found even when a closer protein outside the scope exists.</summary>
-        public static List<NeighbourReference> References(FamilyClusterFile file, Func<ProteinEvidence, bool>? inScope = null)
+        public static List<NeighbourReference> References(FamilyClusterFile file, Func<ProteinEvidence, bool>? inScope = null, IReadOnlyList<string>? scopeTerms = null)
         {
             List<NeighbourReference> references = ReviewedReferences(file, inScope);
             references.AddRange(ReferencePanelFetcher.References(file.EvidenceSource?.ReferencePanel,
-                references.Select(r => r.Accession)).Where(r => inScope == null || r.Evidence != null && inScope(r.Evidence)));
+                references.Select(r => r.Accession), scopeTerms).Where(r => inScope == null || r.Evidence != null && inScope(r.Evidence)));
             return references;
         }
 
@@ -342,9 +342,9 @@ namespace FamilyQuant.Evidence
 
         /// <summary>The evidence of a neighbour's reference protein: found in the file by its identifier,
         /// or in the stored reference panel by accession for an outside entry; null when there is none.</summary>
-        public static Func<NearestNeighbour, ProteinEvidence?> ReferenceEvidence(FamilyClusterFile file)
+        public static Func<NearestNeighbour, ProteinEvidence?> ReferenceEvidence(FamilyClusterFile file, IReadOnlyList<string>? scopeTerms = null)
         {
-            ReferencePanelFetcher.RequireComplete(file.EvidenceSource?.ReferencePanel);
+            ReferencePanelFetcher.RequireCoverage(file.EvidenceSource?.ReferencePanel, scopeTerms);
             var byIdentifier = new Dictionary<string, ProteinEvidence>(StringComparer.Ordinal);
             foreach (FastaItemExtended item in file.MyExtendedFastaItems)
                 if (item.Evidence != null && !string.IsNullOrEmpty(item.SequenceIdentifier))

@@ -60,7 +60,7 @@ public static class FamilyWorldFetcher
         OperationContext operation, HttpMessageHandler? handler = null, UniProtFetchOptions? options = null)
     {
         ArgumentNullException.ThrowIfNull(operation);
-        ReferencePanelFetcher.RequireComplete(file.EvidenceSource?.ReferencePanel);
+        ReferencePanelFetcher.RequireScope(file.EvidenceSource?.ReferencePanel, task.ScopeTerms);
         EvidenceTaskDiscovery.Validate(file, task, task.ScopeTerms);
         task = EvidenceApply.Clone(task);
         var originals = file.MyExtendedFastaItems.ToArray();

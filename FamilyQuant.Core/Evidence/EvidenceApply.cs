@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 
 namespace FamilyQuant.Evidence
@@ -104,6 +104,7 @@ namespace FamilyQuant.Evidence
             ArgumentNullException.ThrowIfNull(file);
             ArgumentNullException.ThrowIfNull(proposal);
             ArgumentNullException.ThrowIfNull(selection);
+            ReferencePanelFetcher.RequireScope(file.EvidenceSource?.ReferencePanel, proposal.Options.ScopeTerms);
             operation?.Report("evidence-apply", "Validating evidence choices");
             selection = Clone(selection);
             string initialPanel = Hash(file.FamilyPanel);
@@ -284,6 +285,7 @@ namespace FamilyQuant.Evidence
             ArgumentNullException.ThrowIfNull(recipe);
             operation?.Report("evidence-apply", "Validating the saved evidence recipe");
             recipe = Clone(recipe);
+            ReferencePanelFetcher.RequireScope(file.EvidenceSource?.ReferencePanel, recipe.Options.ScopeTerms);
             if (recipe.FamilyPanel != null) Panels.FamilyPanelValidation.Validate(recipe.FamilyPanel);
             if (recipe.ConfirmedTask != null) EvidenceTaskDiscovery.Validate(file, recipe.ConfirmedTask, recipe.Options.ScopeTerms);
             string state = StateFingerprint(file, session: recipe);
@@ -418,7 +420,14 @@ namespace FamilyQuant.Evidence
             curation.FamilyWorld = null;
             return curation;
         }
-        private static string Hash<T>(T value) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(value))));
+        private static string Hash<T>(T value)
+        {
+            using var hash = SHA256.Create();
+            using var stream = new CryptoStream(Stream.Null, hash, CryptoStreamMode.Write);
+            JsonSerializer.Serialize(stream, value);
+            stream.FlushFinalBlock();
+            return Convert.ToHexString(hash.Hash!);
+        }
         internal static T Clone<T>(T value) => JsonStreamCopy.Clone(value);
     }
 }
