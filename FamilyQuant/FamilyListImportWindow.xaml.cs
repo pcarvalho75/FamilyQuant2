@@ -26,14 +26,16 @@ public partial class FamilyListImportWindow : Window
         InitializeComponent(); Model = model; DataContext = model;
         this.exampleWriter = exampleWriter; this.templateWriter = templateWriter;
         ExampleButton.IsEnabled = exampleWriter != null;
-        if (exampleWriter == null) ExampleButton.ToolTip = "Unavailable because this window was opened without an example writer; open File > Import family list to use the built-in example. Nothing changes in the project or workbook.";
+        if (exampleWriter == null) ExampleButton.ToolTip = "Unavailable in this view; open File > Import family list to try the built-in example. Nothing changes in the project or workbook.";
         TemplateButton.IsEnabled = templateWriter != null;
-        if (templateWriter == null) TemplateButton.ToolTip = "Unavailable because this window was opened without a template writer; open File > Import family list to save the built-in template. Nothing changes in the project or workbook.";
+        if (templateWriter == null) TemplateButton.ToolTip = "Unavailable in this view; open File > Import family list to save the built-in template. Nothing changes in the project or workbook.";
         DecisionActionColumn.ItemsSource = FamilyListImportViewModel.DecisionOptions;
         WorkbookRoleColumn.ItemsSource = FamilyListImportViewModel.SheetRoles;
+        WorkbookOverview.ReviewRequested += async section => await Model.ReviewWorkbookSectionAsync(section);
+        Model.WorkbookViewRequested += WorkbookView_Requested;
         Model.PropertyChanged += Model_Changed;
         PreviewKeyDown += Window_KeyDown;
-        Closed += (_, _) => { Model.PropertyChanged -= Model_Changed; Model.Dispose(); };
+        Closed += (_, _) => { Model.WorkbookViewRequested -= WorkbookView_Requested; Model.PropertyChanged -= Model_Changed; Model.Dispose(); };
     }
 
     private void Model_Changed(object? sender, PropertyChangedEventArgs e)
@@ -56,7 +58,8 @@ public partial class FamilyListImportWindow : Window
             SheetPreviewGrid.Columns.Clear(); SheetPreviewGrid.ItemsSource = null;
             var preview = Model.Preview;
             if (preview == null) return;
-            var rowColumn = new DataGridTextColumn { Header = "Row", Binding = new Binding(nameof(PanelPreviewRow.RowNumber)), Width = 62, IsReadOnly = true };
+            var rowColumn = new DataGridTextColumn { Header = "Row", Binding = new Binding(nameof(PanelPreviewRow.RowNumber)), Width = 62, IsReadOnly = true,
+                HeaderStyle = (Style)FindResource("WizardNumberHeader"), ElementStyle = (Style)FindResource("WizardNumberText") };
             Themes.TableAppearance.SetHeaderToolTip(rowColumn, "The original Excel row number, counted from 1; this read-only preview never changes the workbook or project.");
             SheetPreviewGrid.Columns.Add(rowColumn);
             for (int column = 0; column < preview.ColumnCount; column++)
@@ -74,7 +77,7 @@ public partial class FamilyListImportWindow : Window
                 text.SetBinding(FrameworkElement.ToolTipProperty, new Binding("Cells[" + column + "]") { Converter = new ImportSourceDetailConverter() });
                 border.AppendChild(text);
                 string letter = preview.Rows.FirstOrDefault(r => r.Cells.Count > column)?.Cells[column].ColumnLetter ?? (column + 1).ToString(CultureInfo.CurrentCulture);
-                var sourceColumn = new DataGridTemplateColumn { Header = letter, Width = 180, MinWidth = 110,
+                var sourceColumn = new DataGridTemplateColumn { Header = letter, Width = 135, MinWidth = 110,
                     CellTemplate = new DataTemplate { VisualTree = border }, ClipboardContentBinding = new Binding("Cells[" + column + "].Text"), IsReadOnly = true };
                 Themes.TableAppearance.SetHeaderToolTip(sourceColumn, "Original workbook column " + letter + "; read only, with complete cell text available in Cell details. Selecting a cell changes only the displayed details.");
                 SheetPreviewGrid.Columns.Add(sourceColumn);
@@ -201,6 +204,12 @@ public partial class FamilyListImportWindow : Window
     private void WorkbookNotes_Click(object sender, RoutedEventArgs e) => TextReportWindow.Show("Workbook source notes",
         string.Join("\n\n", Model.KeptNotes.Select(n => n.SheetName + "\n" + n.Text)), this, wrap: true);
     private async void WorkbookFamilySheet_Click(object sender, RoutedEventArgs e) => await Model.ChooseWorkbookFamilySheetAsync();
+    private void ReturnWorkbook_Click(object sender, RoutedEventArgs e) => Model.ReturnToWorkbookReview();
+    private void WorkbookView_Requested(string section)
+    {
+        if (section is "sheets" or "notes" or "problems") WorkbookTabs.SelectedItem = WorkbookMapTab;
+        if (section == "colours") ColourCategories.IsExpanded = true;
+    }
     private void ShowHelp() => FamilyListImportGuideWindow.Show(this);
 
     private void CommitGridEdits()

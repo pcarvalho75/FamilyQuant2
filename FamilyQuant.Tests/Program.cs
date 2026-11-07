@@ -287,6 +287,8 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => DisabledTableTests());
             suite.AddWithApplication(() => ImportTooltipCopyTests());
             suite.AddWithApplication(() => WorkbookWizardTests());
+            suite.AddWithApplication(() => WorkbookOverviewTests());
+            suite.AddWithApplication(() => WorkbookSubclassReviewTests());
             suite.AddWithApplication(() => ImportWizardToolTipTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
             suite.AddWithApplication(() => GridCopyTests());
@@ -306,7 +308,6 @@ namespace FamilyQuant.Tests
             suite.Add(() => WorkbookImportSummaryTests());
 
 
-            suite.AddWithApplication(() => WorkbookSubclassReviewTests());
 
             suite.AddWithApplication(() => ToolTipStyleTests());
             suite.AddWithApplication(() => ToolTipCheckTests());

@@ -481,6 +481,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-disabled-tables", "FamilyQuant.Tests.Program.DisabledTableTests(System.String)"),
         SuiteCommandRule.Covered("--test-import-tooltip-copy", "FamilyQuant.Tests.Program.ImportTooltipCopyTests(System.String)"),
         SuiteCommandRule.Covered("--test-workbook-wizard", "FamilyQuant.Tests.Program.WorkbookWizardTests(System.String)"),
+        SuiteCommandRule.Covered("--test-workbook-overview", "FamilyQuant.Tests.Program.WorkbookOverviewTests(System.String)"),
         SuiteCommandRule.Covered("--test-import-wizard-tooltips", "FamilyQuant.Tests.Program.ImportWizardToolTipTests(System.String)"),
         SuiteCommandRule.Covered("--test-integrated-review", "FamilyQuant.Tests.Program.GroupingReviewInteractionTests()", "FamilyQuant.Tests.ScreenHarness.Verify(System.Action`3[System.String,System.Boolean,System.String],System.String)"),
         SuiteCommandRule.Covered("--test-database-update-exports", "FamilyQuant.Tests.Program.DatabaseUpdateExportTests()"),
