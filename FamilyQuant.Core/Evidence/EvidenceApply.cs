@@ -216,8 +216,15 @@ namespace FamilyQuant.Evidence
                 });
             }
             int next = MaximumId(file);
+            var existingFamilies = CurrentFamilyIdentities(file);
             foreach (var group in assignments.GroupBy(a => a.GroupKey, StringComparer.Ordinal).OrderBy(g => g.Key, StringComparer.Ordinal))
             {
+                int reused = ReusableFamilyId(existingFamilies, group.First().Family, group.Key, proposal.PanelContext != null);
+                if (reused > 0)
+                {
+                    foreach (EvidenceAssignment assignment in group) assignment.FamilyId = reused;
+                    continue;
+                }
                 if (next == int.MaxValue) throw new InvalidOperationException("There are no unused family numbers above the existing numbers.");
                 next++;
                 foreach (EvidenceAssignment assignment in group) assignment.FamilyId = next;
@@ -244,6 +251,7 @@ namespace FamilyQuant.Evidence
                 FamilyPanel = familyPanel,
                 PanelContext = proposal.PanelContext == null ? null : Clone(proposal.PanelContext),
             };
+            recipe.FamilyIdentities = ProjectFamilyIdentities(file, recipe);
             foreach (var family in assignments.Where(a => !familyNames.ContainsKey(a.Family)).GroupBy(a => a.Family, StringComparer.Ordinal))
                 recipe.Families.Add(new EvidenceFamilyChoice { Family = family.Key, Name = family.First().Name, Selected = true });
             if (proposal.PanelContext != null)
@@ -282,6 +290,7 @@ namespace FamilyQuant.Evidence
                 || !recipe.Assignments.Select(a => a.ProteinIndex).OrderBy(i => i).SequenceEqual(recipe.SelectedProteinIndices))
                 throw new ArgumentException("The recipe's assignments do not match its selection.", nameof(recipe));
             int maximum = MaximumId(file);
+            var existingFamilies = CurrentFamilyIdentities(file);
             foreach (EvidenceAssignment assignment in recipe.Assignments)
             {
                 if (assignment.ProteinIndex < 0 || assignment.ProteinIndex >= file.MyExtendedFastaItems.Count)
@@ -289,7 +298,10 @@ namespace FamilyQuant.Evidence
                 FastaItemExtended protein = file.MyExtendedFastaItems[assignment.ProteinIndex];
                 if (NearestReviewed.IsDecoy(protein) || assignment.Identifier != protein.SequenceIdentifier
                     || assignment.PreviousFamilyId != protein.UserID || assignment.PreviousSearchId != protein.USearchID
-                    || assignment.FamilyId <= maximum || string.IsNullOrWhiteSpace(assignment.Name)
+                    || assignment.FamilyId <= 0
+                    || (assignment.FamilyId <= maximum && (recipe.FamilyIdentities == null
+                        || ReusableFamilyId(existingFamilies, assignment.Family, assignment.GroupKey, recipe.PanelContext != null) != assignment.FamilyId))
+                    || string.IsNullOrWhiteSpace(assignment.Name)
                     || file.LockedUserIds.Contains(protein.UserID))
                     throw new ArgumentException("A recipe assignment is incompatible with its source.", nameof(recipe));
             }
@@ -318,6 +330,7 @@ namespace FamilyQuant.Evidence
             {
                 if (StateFingerprint(file, session: stored) != stored.SourceStateFingerprint)
                     throw new InvalidOperationException("The curation changed while the evidence transaction was prepared.");
+                ValidateFamilyIdentities(file, stored);
                 operation?.ThrowIfCancellationRequested();
                 foreach (EvidenceAssignment assignment in stored.Assignments)
                 {
@@ -376,6 +389,7 @@ namespace FamilyQuant.Evidence
                 Session = Hash(new { session.SessionSearch, session.SessionReferences, session.CheckedMotifs, session.CheckedMotifResults }),
             }) : curation;
             if (session?.ConfirmedTask != null) state = Hash(new { State = state, session.ConfirmedTask });
+            if (session?.FamilyIdentities != null) state = Hash(new { State = state, session.FamilyIdentities });
             return session?.FamilyPanel == null ? state : Hash(new
             {
                 State = state, FamilyPanel = session.PanelContext == null ? (object?)(projectSession ? session.FamilyPanel : file.FamilyPanel)
