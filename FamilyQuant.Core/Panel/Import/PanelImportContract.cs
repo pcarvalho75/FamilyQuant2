@@ -46,7 +46,8 @@ public enum FamilyPanelRowAction { Import, Skip, MergeInto, Split, ReportUnderOt
 
 /// <summary>A user choice for one worksheet row, replayed with the panel. Key and Name replace the cell text when
 /// nonempty. MergeInto keeps the row as a family reported under MergeTargetFamilyKey. Split creates one family per
-/// part; ReportUnderOthers keeps one family with that decision.</summary>
+/// part, using the row outcome's ProposedParts when Parts is empty; each part keeps the row's decision, colour and
+/// original cells, and its Pfam text stays text only. ReportUnderOthers keeps one family with that decision.</summary>
 public sealed class FamilyPanelRowChoice
 {
     public int RowNumber { get; set; }

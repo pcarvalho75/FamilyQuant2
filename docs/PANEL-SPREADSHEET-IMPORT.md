@@ -110,3 +110,24 @@ extra and hidden sheets) and covers each rule above, replay, project and recipe 
 stability and the unchanged workbook. A read-only probe of a copy of the real workbook, not kept,
 found its header row from the filter, proposed the expected columns and imported all 41 rows with no
 blocking problem, with and without the proposed decision meanings.
+
+## Rows listing several families, Z12p3
+
+Under the graceful rules, a name or other-language name cell that lists several names is returned as such.
+Names are separated by commas, semicolons and line breaks outside parentheses or brackets, and a leading
+bullet is dropped. The row outcome names the list column (`ListColumn`) and the proposed families
+(`ProposedParts`), each keyed from the row's abbreviation plus the name, for example "Outras raras:
+TCTP", made unique against every abbreviation of the table. A note offers the two choices; until one is
+made the row stays one family named as written, so a single name with a comma costs nothing.
+
+- `Split` creates one family per name, from the choice's `Parts` (keys and names the user edited) or,
+  when empty, from the proposed parts. Each family keeps the row's decision, colour category and every
+  original cell. An other-language name is kept only when that column splits into the same number of
+  names. The row's Pfam text stays text only, with a note, because it cannot be told apart per family.
+  A repeated, empty abbreviation or empty name in a part blocks with a sentence naming the row, the
+  column and the part. Splitting a row that lists one name asks for the families instead of guessing.
+- `ReportUnderOthers` keeps the row as one family with that decision, overriding the mapped label.
+
+Both choices are stored in `RowChoices` and replay with the panel. Version 0 choices look for no lists.
+Checks: `--test-panel-import-several`. The read-only probe of the real workbook copy flagged exactly one
+row, the row of rare families with nine names in its English column, and no other row.

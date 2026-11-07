@@ -11,6 +11,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
 {
     private static readonly Regex PfamAccession = new(@"(?<![A-Za-z0-9])PF\d{5}(?!\d)", RegexOptions.CultureInvariant);
     private static readonly Regex NamedPfam = new(@"(?<name>[^;,\r\n()]+?)\s*\(\s*(?<accession>PF\d{5})(?:\.\d+)?\s*\)", RegexOptions.CultureInvariant);
+    private static readonly Regex Bullet = new(@"^[•·*\-]\s+", RegexOptions.CultureInvariant);
     private static readonly Dictionary<string, string> RoleNames = new(StringComparer.Ordinal)
     {
         [PanelImportFields.FamilyKey] = "abbreviation", [PanelImportFields.DisplayName] = "name", [PanelImportFields.Decision] = "decision",
@@ -116,6 +117,11 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
         string Clean(string text) => graceful ? text.Trim() : text;
         var reserved = new HashSet<string>(table.Rows.Select(r => Clean(Value(r, keyHeader))).Where(k => !string.IsNullOrWhiteSpace(k)), StringComparer.Ordinal);
         foreach (var choice in rowChoices.Values) { if (choice.Key.Length > 0) reserved.Add(Clean(choice.Key)); }
+        string PartKey(string rowKey, string part)
+        {
+            string proposed = rowKey.Length > 0 ? rowKey + ": " + OneLine(part) : OneLine(part);
+            return reserved.Add(proposed) ? proposed : Suggest(proposed);
+        }
         string Suggest(string key)
         {
             for (int n = 2; ; n++)
@@ -143,78 +149,112 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
                     PanelImportSeverity.Note, row.RowNumber, string.Empty, string.Empty,
                     "Row " + N(row.RowNumber) + " " + skipReason + ", so it was skipped. Choose Import to keep it as a family.");
             if (outcome.Action == FamilyPanelRowAction.Skip) continue;
-            if (outcome.Action is FamilyPanelRowAction.Split or FamilyPanelRowAction.ReportUnderOthers)
-            {
-                Block(PanelImportProblemKind.ChoiceInvalid, row.RowNumber, string.Empty, string.Empty,
-                    "Row " + N(row.RowNumber) + ": this choice is not available yet. Choose Import, Merge or Skip.");
-                continue;
-            }
             string cellKey = Clean(Value(row, keyHeader)), cellName = Clean(Value(row, nameHeader));
             string key = chosen is { Key.Length: > 0 } ? Clean(chosen.Key) : cellKey;
             string name = chosen is { Name.Length: > 0 } ? Clean(chosen.Name) : cellName;
+            var nameParts = graceful ? SplitList(Value(row, nameHeader)) : new List<string>();
+            var otherParts = graceful && otherHeader != null ? SplitList(Value(row, otherHeader)) : new List<string>();
+            string? listHeader = nameParts.Count >= 2 && nameParts.Count >= otherParts.Count ? nameHeader : otherParts.Count >= 2 ? otherHeader : null;
+            if (listHeader != null)
+            {
+                var listed = listHeader == nameHeader ? nameParts : otherParts;
+                outcome.ListColumn = listHeader;
+                outcome.ProposedParts = listed.Select(part => new FamilyPanelSplitPart { Key = PartKey(key, part), Name = part }).ToList();
+                if (chosen == null)
+                    Add(PanelImportProblemKind.SeveralFamilies, PanelImportSeverity.Note, row.RowNumber, listHeader, Value(row, listHeader),
+                        At(row.RowNumber, listHeader) + ": the cell lists " + N(listed.Count) + " names (" + string.Join("; ", listed.Select(OneLine))
+                        + "). Choose one family per name, or one group reported under others; until then the row is one family named as written.");
+            }
             bool ready = true;
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                string suggestion = string.IsNullOrWhiteSpace(name) ? string.Empty : OneLine(name);
-                Block(PanelImportProblemKind.MissingKey, row.RowNumber, keyHeader, string.Empty,
-                    At(row.RowNumber, keyHeader) + ": the abbreviation is empty. Type one" + (suggestion.Length > 0 ? " (for example \"" + suggestion + "\")" : string.Empty) + ", or skip the row.",
-                    suggestion);
-                ready = false;
-            }
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                string suggestion = string.IsNullOrWhiteSpace(key) ? string.Empty : OneLine(key);
-                Block(PanelImportProblemKind.MissingName, row.RowNumber, nameHeader, string.Empty,
-                    At(row.RowNumber, nameHeader) + ": the name is empty. " + (suggestion.Length > 0 ? "Use the abbreviation \"" + suggestion + "\" as the name, type a name," : "Type a name,") + " or skip the row.",
-                    suggestion);
-                ready = false;
-            }
-            if (ready && firstRow.TryGetValue(key, out int earlier))
-            {
-                string suggestion = Suggest(key);
-                Block(PanelImportProblemKind.DuplicateKey, row.RowNumber, keyHeader, key,
-                    At(row.RowNumber, keyHeader) + ": the abbreviation \"" + OneLine(key) + "\" is also used in row " + N(earlier) + ". Rename it (for example \""
-                    + OneLine(suggestion) + "\"), merge it into the family of row " + N(earlier) + ", or skip it.", suggestion, new[] { earlier });
-                ready = false;
-            }
-            var family = new FamilyPanelFamily
-            {
-                Key = key, DisplayName = name, Decision = FamilyPanelDecision.Quantify,
-                TextFields = table.Headers.Select(header => new FamilyPanelText { Name = header, Text = Value(row, header) }).ToList(),
-            };
+            string sourceDecision = string.Empty, mergeTarget = string.Empty;
+            var decided = FamilyPanelDecision.Quantify;
             if (decisionHeader != null)
             {
                 string label = Value(row, decisionHeader);
-                family.SourceDecision = label;
+                sourceDecision = label;
                 if (graceful && string.IsNullOrWhiteSpace(label)) blankDecisions.Add(row.RowNumber);
-                else if (mappings.TryGetValue(label, out var decision)) { family.Decision = decision.Decision; family.MergeTargetFamilyKey = decision.MergeTargetFamilyKey; }
+                else if (mappings.TryGetValue(label, out var decision)) { decided = decision.Decision; mergeTarget = decision.MergeTargetFamilyKey; }
                 else { unmapped.TryAdd(label, row.RowNumber); ready = false; }
             }
-            if (chosen?.Action == FamilyPanelRowAction.MergeInto)
-            {
-                family.Decision = FamilyPanelDecision.MergeIntoAnotherFamily;
-                family.MergeTargetFamilyKey = Clean(chosen.MergeTargetFamilyKey);
-            }
-            if (otherHeader != null && Clean(Value(row, otherHeader)) is { Length: > 0 } other)
-                family.Names.Add(new FamilyPanelText { Name = otherHeader, Text = other });
+            if (chosen?.Action == FamilyPanelRowAction.MergeInto) { decided = FamilyPanelDecision.MergeIntoAnotherFamily; mergeTarget = Clean(chosen.MergeTargetFamilyKey); }
+            if (chosen?.Action == FamilyPanelRowAction.ReportUnderOthers) { decided = FamilyPanelDecision.ReportUnderOthers; mergeTarget = string.Empty; }
+            FamilyPanelText? colorField = null;
             if (colorHeader != null)
             {
                 string fill = row.Fills.GetValueOrDefault(colorHeader, string.Empty);
                 string label = fill.Length > 0 ? colorLabels.GetValueOrDefault(fill, string.Empty) : string.Empty;
                 if (fill.Length > 0 && string.IsNullOrWhiteSpace(label)) { unnamed.TryAdd(fill, row.RowNumber); ready = false; }
-                family.TextFields.Add(new FamilyPanelText { Name = choices.ColorCategoryName is { Length: > 0 } category ? category : colorHeader + " colour", Text = label });
+                colorField = new FamilyPanelText { Name = choices.ColorCategoryName is { Length: > 0 } category ? category : colorHeader + " colour", Text = label };
             }
-            if (domainHeader != null)
+            string domainText = domainHeader == null ? string.Empty : Value(row, domainHeader);
+
+            var units = new List<(string Key, string Name, string Other, int Part)>();
+            if (outcome.Action == FamilyPanelRowAction.Split)
             {
-                string domainText = Value(row, domainHeader);
-                var names = NamedPfam.Matches(domainText).ToDictionary(m => m.Groups["accession"].Index, m => m.Groups["name"].Value.Trim());
-                family.Pfam = PfamAccession.Matches(domainText).Select(m => (Accession: m.Value, Name: names.GetValueOrDefault(m.Index, string.Empty)))
-                    .Distinct().Select(d => new FamilyPanelDomain { Accession = d.Accession, Name = d.Name }).ToList();
+                var parts = chosen!.Parts.Count > 0 ? chosen.Parts : outcome.ProposedParts;
+                if (parts.Count == 0)
+                {
+                    Block(PanelImportProblemKind.ChoiceInvalid, row.RowNumber, nameHeader, string.Empty, At(row.RowNumber, nameHeader)
+                        + ": the cell does not list several names, so the row cannot be split. Type the families, or choose Import, Report under others or Skip.");
+                    continue;
+                }
+                if (domainHeader != null && PfamAccession.IsMatch(domainText))
+                    Add(PanelImportProblemKind.SeveralFamilies, PanelImportSeverity.Note, row.RowNumber, domainHeader, domainText, At(row.RowNumber, domainHeader)
+                        + ": the Pfam domains are kept as text only, because they cannot be told apart for the " + N(parts.Count) + " families of the row.");
+                for (int i = 0; i < parts.Count; i++)
+                    units.Add((Clean(parts[i]?.Key ?? string.Empty), Clean(parts[i]?.Name ?? string.Empty), otherParts.Count == parts.Count ? otherParts[i] : string.Empty, i + 1));
             }
-            if (!string.IsNullOrWhiteSpace(key)) firstRow.TryAdd(key, row.RowNumber);
-            if (!ready) continue;
-            outcome.FamilyKeys.Add(key);
-            families.Add((family, row.RowNumber));
+            else units.Add((key, name, otherHeader == null ? string.Empty : Clean(Value(row, otherHeader)), 0));
+
+            foreach (var unit in units)
+            {
+                bool unitReady = ready;
+                string where = unit.Part == 0 ? At(row.RowNumber, keyHeader) : At(row.RowNumber, keyHeader) + ", name " + N(unit.Part) + " of the list (\"" + OneLine(unit.Name) + "\")";
+                if (string.IsNullOrWhiteSpace(unit.Key))
+                {
+                    string suggestion = string.IsNullOrWhiteSpace(unit.Name) ? string.Empty : unit.Part == 0 ? OneLine(unit.Name)
+                        : outcome.ProposedParts.FirstOrDefault(p => p.Name == unit.Name)?.Key ?? PartKey(key, unit.Name);
+                    Block(PanelImportProblemKind.MissingKey, row.RowNumber, keyHeader, string.Empty,
+                        where + ": the abbreviation is empty. Type one" + (suggestion.Length > 0 ? " (for example \"" + suggestion + "\")" : string.Empty) + (unit.Part == 0 ? ", or skip the row." : "."),
+                        suggestion);
+                    unitReady = false;
+                }
+                if (string.IsNullOrWhiteSpace(unit.Name))
+                {
+                    string suggestion = string.IsNullOrWhiteSpace(unit.Key) ? string.Empty : OneLine(unit.Key);
+                    Block(PanelImportProblemKind.MissingName, row.RowNumber, nameHeader, string.Empty, unit.Part == 0
+                        ? At(row.RowNumber, nameHeader) + ": the name is empty. " + (suggestion.Length > 0 ? "Use the abbreviation \"" + suggestion + "\" as the name, type a name," : "Type a name,") + " or skip the row."
+                        : At(row.RowNumber, nameHeader) + ", name " + N(unit.Part) + " of the list: the name is empty. Type one.", suggestion);
+                    unitReady = false;
+                }
+                if (!string.IsNullOrWhiteSpace(unit.Key) && !string.IsNullOrWhiteSpace(unit.Name) && firstRow.TryGetValue(unit.Key, out int earlier))
+                {
+                    string suggestion = Suggest(unit.Key);
+                    Block(PanelImportProblemKind.DuplicateKey, row.RowNumber, keyHeader, unit.Key, unit.Part == 0
+                        ? where + ": the abbreviation \"" + OneLine(unit.Key) + "\" is also used in row " + N(earlier) + ". Rename it (for example \""
+                            + OneLine(suggestion) + "\"), merge it into the family of row " + N(earlier) + ", or skip it."
+                        : where + ": the abbreviation \"" + OneLine(unit.Key) + "\" is also used " + (earlier == row.RowNumber ? "in this row" : "in row " + N(earlier))
+                            + ". Rename it (for example \"" + OneLine(suggestion) + "\").", suggestion, earlier == row.RowNumber ? null : new[] { earlier });
+                    unitReady = false;
+                }
+                if (!string.IsNullOrWhiteSpace(unit.Key)) firstRow.TryAdd(unit.Key, row.RowNumber);
+                if (!unitReady) continue;
+                var family = new FamilyPanelFamily
+                {
+                    Key = unit.Key, DisplayName = unit.Name, SourceDecision = sourceDecision, Decision = decided, MergeTargetFamilyKey = mergeTarget,
+                    TextFields = table.Headers.Select(header => new FamilyPanelText { Name = header, Text = Value(row, header) }).ToList(),
+                };
+                if (otherHeader != null && unit.Other.Length > 0) family.Names.Add(new FamilyPanelText { Name = otherHeader, Text = unit.Other });
+                if (colorField != null) family.TextFields.Add(new FamilyPanelText { Name = colorField.Name, Text = colorField.Text });
+                if (domainHeader != null && unit.Part == 0)
+                {
+                    var names = NamedPfam.Matches(domainText).ToDictionary(m => m.Groups["accession"].Index, m => m.Groups["name"].Value.Trim());
+                    family.Pfam = PfamAccession.Matches(domainText).Select(m => (Accession: m.Value, Name: names.GetValueOrDefault(m.Index, string.Empty)))
+                        .Distinct().Select(d => new FamilyPanelDomain { Accession = d.Accession, Name = d.Name }).ToList();
+                }
+                outcome.FamilyKeys.Add(unit.Key);
+                families.Add((family, row.RowNumber));
+            }
         }
         foreach (var (label, row) in unmapped)
             Block(PanelImportProblemKind.DecisionNotMapped, row, decisionHeader!, label,
@@ -289,6 +329,31 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
         if (filled.Length >= 2 && filled.All(h => row.Merges.ContainsKey(h)) && filled.Select(h => row.Merges[h]).Distinct(StringComparer.Ordinal).Count() == 1)
             return "is one merged cell across columns (" + row.Merges[filled[0]] + ", \"" + OneLine(Value(row, filled[0])) + "\"), like a section title";
         return null;
+    }
+
+    /// <summary>Splits a cell listing several names at commas, semicolons and line breaks outside parentheses or
+    /// brackets, dropping a leading bullet from each name. One name gives a list of one.</summary>
+    internal static List<string> SplitList(string text)
+    {
+        var parts = new List<string>();
+        var current = new System.Text.StringBuilder();
+        int depth = 0;
+        foreach (char c in text)
+        {
+            if (c is '(' or '[' or '{') depth++;
+            else if (c is ')' or ']' or '}') depth = Math.Max(0, depth - 1);
+            if (depth == 0 && c is ',' or ';' or '\n' or '\r') { Flush(); continue; }
+            current.Append(c);
+        }
+        Flush();
+        return parts;
+
+        void Flush()
+        {
+            string part = Bullet.Replace(current.ToString().Trim(), string.Empty).Trim();
+            if (part.Length > 0) parts.Add(part);
+            current.Clear();
+        }
     }
 
     private static List<List<int>> Runs(IEnumerable<int> rows)
