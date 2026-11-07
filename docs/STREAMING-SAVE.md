@@ -2,7 +2,9 @@
 
 Project Save writes curation JSON with the existing serializer options directly to its
 UTF-8 ZIP entry. The validation and shell saved-state fingerprints use the same byte
-sequence through a hashing stream. The public `ToJsonText()` behavior is retained.
+sequence through a hashing stream. The public `ToJsonText()` behavior is retained; Z12p5j
+changes the shared options to compact JSON, with old indented files remaining readable.
+See [Curation streaming](CURATION-STREAMING.md) for the copy/read APIs and compatibility checks.
 Sequence, decoy, unassigned, lock, source and curation checks still run in their original
 order, followed by the same verified publication and readback checks. Project curation
 readback is streamed too; its legacy lock migration and unusual-encoding fallback remain.
