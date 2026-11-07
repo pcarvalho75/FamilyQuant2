@@ -34,6 +34,7 @@ internal static partial class Program
             ["CurationViewModel.Evidence.cs"] = "Z12p5f2c FQFix",
             ["MainWindow.ReportExport.cs"] = "Z12p5f2d FQFix",
             ["PanelEvidenceMatching.cs"] = "Z12p5f2e FQFetch",
+            ["EvidenceApply.cs"] = "Z12p5f2f FQFix (evidence undo clone)",
             ["FamilyQuantFile.cs"] = "Z12p5f3 FQTips (save and open)",
             ["ShellProjectOperations.cs"] = "Z12p5f3 FQTips (shell open)"
         };
@@ -45,9 +46,14 @@ internal static partial class Program
             using var source = File.OpenRead(symbols);
             using var provider = MetadataReaderProvider.FromPortablePdbStream(source);
             var pdb = provider.GetMetadataReader();
-            foreach (var type in assembly.GetTypes())
-            foreach (var method in type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-                .Cast<MethodBase>().Concat(type.GetConstructors(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)))
+            var methods = assembly.GetTypes().SelectMany(type => type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+                .Cast<MethodBase>().Concat(type.GetConstructors(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)));
+            // EvidenceUndo.cs:28 instantiates this generic clone with the complete provenance graph.
+            // Resolve its body with that actual type argument so Serialize<T> cannot hide the string.
+            if (assembly == typeof(EvidenceApply).Assembly)
+                methods = methods.Append(typeof(EvidenceApply).GetMethod("Clone", BindingFlags.Static | BindingFlags.NonPublic)!
+                    .MakeGenericMethod(typeof(EvidenceProvenance)));
+            foreach (var method in methods)
             {
                 var debug = pdb.GetMethodDebugInformation(MetadataTokens.MethodDefinitionHandle(method.MetadataToken & 0x00ffffff));
                 var points = debug.GetSequencePoints().Where(point => !point.IsHidden).ToArray();
