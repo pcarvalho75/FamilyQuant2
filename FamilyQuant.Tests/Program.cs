@@ -282,6 +282,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => FamilyListImportTests());
             suite.AddWithApplication(() => ImportPreparationTests());
             suite.AddWithApplication(() => DisabledTableTests());
+            suite.AddWithApplication(() => ImportTooltipCopyTests());
             suite.AddWithApplication(() => ImportWizardToolTipTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
             suite.AddWithApplication(() => GridCopyTests());
