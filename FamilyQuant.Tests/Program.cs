@@ -292,6 +292,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => InheritedRetryProgressTests());
             suite.Add(() => SameScanConflictTests());
             suite.AddWithApplication(() => PatternLabPriorityTests(workDir));
+            suite.Add(() => ExampleFamilyListTests());
+            suite.AddWithApplication(() => AlignSelectedTests());
             suite.AddWithApplication(() => DeNovoWorkflowHelpTests());
             suite.Add(() => EvidenceCoverageTests());
             suite.Add(() => QueryResidueCoverageTests());
@@ -312,6 +314,13 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReferencePanelTests(workDir));
             suite.Add(() => ReferencePanelStreamTests());
             suite.Add(() => EvidenceOperationTests());
+            suite.Section("Database update - one-to-one matching of a project with a new database file");
+            suite.Add(() => DatabaseUpdateMatchingTests());
+            suite.Add(() => DatabaseUpdatePlacementTests());
+            suite.Add(() => DatabaseUpdatePlacementSideTests());
+            suite.Add(() => DatabaseUpdateApplyTests());
+            suite.Add(() => DatabaseUpdateBindingTests());
+            suite.AddWithApplication(() => DatabaseUpdateShellTests());
             suite.Section("Coherence check - what the reviewed members of a family ever show");
             suite.Add(() => CoherenceCheckTests());
             suite.Add(() => E16RuleTests());
