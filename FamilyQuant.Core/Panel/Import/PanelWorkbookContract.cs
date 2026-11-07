@@ -4,6 +4,7 @@ using System.Linq;
 namespace FamilyQuant.Panels.Import;
 
 public enum PanelWorkbookSheetRole { FamilyList, ColorLegend, SubclassTable, Notes }
+public enum PanelWorkbookReadState { NotRead, Read }
 
 /// <summary>An additive whole-workbook reader. Existing single-sheet reader implementations remain valid.</summary>
 public interface IPanelWorkbookReader : IPanelSheetPreviewReader
@@ -38,6 +39,8 @@ public interface IFamilyPanelWorkbookImporter
 {
     PanelWorkbookProposal ProposeWorkbook(string path);
     PanelWorkbookProposal ProposeWorkbook(PanelWorkbookRead workbook);
+    PanelWorkbookProposal ProposeWorkbook(PanelWorkbookRead workbook, string? familySheet = null,
+        IReadOnlyDictionary<string, PanelWorkbookSheetRole>? roleOverrides = null);
 }
 
 /// <summary>The single opening proposal consumed by the workbook summary. Unknown meanings stay unknown.</summary>
@@ -47,7 +50,9 @@ public sealed class PanelWorkbookProposal
     public string FamilySheet { get; set; } = string.Empty;
     public PanelImportProposal FamilyProposal { get; set; } = new();
     public List<PanelWorkbookColorHint> Colors { get; set; } = new();
+    public PanelWorkbookReadState ColorsState { get; set; }
     public List<PanelWorkbookDecisionHint> Decisions { get; set; } = new();
+    public PanelWorkbookReadState DecisionsState { get; set; }
     public List<PanelImportRowOutcome> MultiFamilyRows { get; set; } = new();
     public List<PanelWorkbookPfamHint> Pfam { get; set; } = new();
     public List<PanelWorkbookSubclassTable> SubclassTables { get; set; } = new();

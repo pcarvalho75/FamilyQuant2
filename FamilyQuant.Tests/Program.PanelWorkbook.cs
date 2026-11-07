@@ -41,7 +41,11 @@ internal static partial class Program
                 && shipped.FamilySheet == ExampleFamilyList.FamilySheetName && !shipped.NeedsFamilySheetChoice);
             Check("Z16a1 shipped map separates one legend, one subclass table and three notes sheets",
                 shipped.Workbook.Sheets.Count(sheet => sheet.Role == PanelWorkbookSheetRole.ColorLegend) == 1
-                && shipped.SubclassTables.Count == 1 && shipped.Notes.Count == 3);
+                && shipped.SubclassTables.Count == 1 && shipped.Workbook.Sheets.Count(sheet => sheet.Role == PanelWorkbookSheetRole.Notes) == 3);
+            Check("Z16a1 detected legend is explicitly not read yet and its full text remains kept", shipped.ColorsState == PanelWorkbookReadState.NotRead
+                && shipped.DecisionsState == PanelWorkbookReadState.NotRead && shipped.Colors.Count == 0 && shipped.Decisions.Count == 0
+                && shipped.Notes.Any(note => note.SheetName == shipped.Workbook.Sheets.Single(sheet => sheet.Role == PanelWorkbookSheetRole.ColorLegend).SheetName
+                    && note.Text.Length > 0));
             Check("Z16a1 shipped opening proposal carries family columns, multi-family rows and Pfam facts",
                 shipped.FamilyProposal.Choices.ColumnHeaders.ContainsKey(PanelImportFields.FamilyKey)
                 && shipped.FamilyProposal.Choices.ColumnHeaders.ContainsKey(PanelImportFields.OtherName)
@@ -57,7 +61,7 @@ internal static partial class Program
                     && proposed.FamilyTable?.Rows.Count == 40 && !proposed.NeedsFamilySheetChoice);
                 Check("Z16a1 neutral " + freeText + " map retains all six source roles", proposed.Workbook.Sheets.Count == 6
                     && proposed.Workbook.Sheets.Single(sheet => sheet.Role == PanelWorkbookSheetRole.ColorLegend).SheetName == "Data 2"
-                    && proposed.SubclassTables.Count == 1 && proposed.Notes.Count == 3);
+                    && proposed.SubclassTables.Count == 1 && proposed.Workbook.Sheets.Count(sheet => sheet.Role == PanelWorkbookSheetRole.Notes) == 3);
                 Check("Z16a1 neutral " + freeText + " subclass association comes from source keys and domains", proposed.SubclassTables.Count == 1
                     && proposed.SubclassTables[0].FamilyKeys.SequenceEqual(new[] { "F07" })
                     && proposed.SubclassTables[0].DomainColumns.Count >= 1
@@ -65,7 +69,7 @@ internal static partial class Program
                 Check("Z16a1 neutral " + freeText + " summary carries complete per-family domains and ambiguous rows", proposed.Pfam.Count == 40
                     && proposed.Pfam.All(row => row.Domains.Select(domain => domain.Accession).SequenceEqual(new[] { "PF01234", "PF05678" }))
                     && proposed.MultiFamilyRows.Count > 0);
-                Check("Z16a1 neutral " + freeText + " source notes retain cell provenance and line breaks", proposed.Notes.Count == 3
+                Check("Z16a1 neutral " + freeText + " source notes and legend retain cell provenance and line breaks", proposed.Notes.Count == 4
                     && proposed.Notes.All(note => note.Text.Contains("A1:", StringComparison.Ordinal))
                     && proposed.Notes.Any(note => note.Text.Contains("First invented line\nSecond invented line", StringComparison.Ordinal)));
                 RenameWorkbookSheets(path);
@@ -89,6 +93,80 @@ internal static partial class Program
                 && noLegend.Workbook.Sheets.All(sheet => sheet.Role != PanelWorkbookSheetRole.ColorLegend));
             Check("Z16a1 unrelated notes never become family rows", noLegend.Notes.Count == 3
                 && noLegend.FamilyTable?.Rows.Count == 40 && noLegend.SubclassTables.Count == 1);
+            Check("Z16a1 absent legend/decision slots are read-empty rather than pending", noLegend.ColorsState == PanelWorkbookReadState.Read
+                && noLegend.DecisionsState == PanelWorkbookReadState.Read && noLegend.Colors.Count == 0 && noLegend.Decisions.Count == 0);
+            var incompleteRead = reader.ReadWorkbook(plain);
+            incompleteRead.Sheets.Add(new PanelWorkbookSheet { SheetName = "Unreadable source" });
+            incompleteRead.Problems.Add(new PanelImportProblem { Kind = PanelImportProblemKind.FileUnreadable,
+                Severity = PanelImportSeverity.Blocking, SheetName = "Unreadable source", Message = "Synthetic read failure." });
+            var incomplete = importer.ProposeWorkbook(incompleteRead);
+            Check("Z16a1 a failed sheet read never turns unknown legend/decision data into a read-empty result",
+                incomplete.ColorsState == PanelWorkbookReadState.NotRead && incomplete.DecisionsState == PanelWorkbookReadState.NotRead);
+
+            foreach (bool blankTab in new[] { false, true })
+            {
+                string path = Path.Combine(root, "legacy-fallback-" + blankTab + ".xlsx");
+                WriteNeutralWorkbook(path, onlyFamily: true);
+                using (var document = SpreadsheetDocument.Open(path, true))
+                {
+                    var book = document.WorkbookPart!;
+                    var sheet = book.Workbook!.Sheets!.Elements<XL.Sheet>().Single();
+                    var data = ((WorksheetPart)book.GetPartById(sheet.Id!)).Worksheet!.GetFirstChild<XL.SheetData>()!;
+                    foreach (var row in data.Elements<XL.Row>().Skip(1))
+                        row.Elements<XL.Cell>().First().InlineString = new XL.InlineString(new XL.Text("Long source code " + row.RowIndex));
+                    if (blankTab)
+                    {
+                        var blank = book.AddNewPart<WorksheetPart>(); blank.Worksheet = new XL.Worksheet(new XL.SheetData());
+                        book.Workbook.Sheets.Append(new XL.Sheet { Id = book.GetIdOfPart(blank), Name = "Blank 2", SheetId = 2 });
+                        blank.Worksheet.Save();
+                    }
+                    ((WorksheetPart)book.GetPartById(sheet.Id!)).Worksheet!.Save(); book.Workbook.Save();
+                }
+                var preview = reader.ReadPreview(path, "Data 9");
+                var legacy = importer.Propose(reader.ReadTable(path, "Data 9", preview.ProposedHeaderRow));
+                var fallback = importer.ProposeWorkbook(path);
+                Check("Z16a1 non-code key legacy fallback with blank tab " + blankTab + " keeps the exact old proposal",
+                    fallback.FamilySheet == "Data 9" && !fallback.NeedsFamilySheetChoice
+                    && JsonSerializer.Serialize(fallback.FamilyProposal) == JsonSerializer.Serialize(legacy));
+            }
+
+            string merged = Path.Combine(root, "merged-notes.xlsx"); WriteNeutralWorkbook(merged);
+            using (var document = SpreadsheetDocument.Open(merged, true))
+            {
+                var book = document.WorkbookPart!;
+                var sheet = book.Workbook!.Sheets!.Elements<XL.Sheet>().Single(sheet => sheet.Name == "Data 4");
+                var part = (WorksheetPart)book.GetPartById(sheet.Id!);
+                var row = part.Worksheet!.GetFirstChild<XL.SheetData>()!.Elements<XL.Row>().First();
+                row.RemoveAllChildren<XL.Cell>();
+                row.Append(new XL.Cell { CellReference = "A1", DataType = XL.CellValues.InlineString,
+                    InlineString = new XL.InlineString(new XL.Text("Merged invented title")) });
+                part.Worksheet.Append(new XL.MergeCells(new XL.MergeCell { Reference = "A1:C1" })); part.Worksheet.Save();
+            }
+            var mergedMap = importer.ProposeWorkbook(merged);
+            string mergedText = mergedMap.Notes.Single(note => note.SheetName == "Data 4").Text;
+            Check("Z16a1 merged notes text is emitted once with its complete range", mergedText.Contains("A1:C1: Merged invented title", StringComparison.Ordinal)
+                && mergedText.Split("Merged invented title", StringSplitOptions.None).Length == 2);
+            string problemPath = Path.Combine(root, "sheet-problems.xlsx"); WriteNeutralWorkbook(problemPath);
+            using (var document = SpreadsheetDocument.Open(problemPath, true))
+            {
+                var book = document.WorkbookPart!;
+                foreach (string name in new[] { "Data 9", "Data 4" })
+                {
+                    var sheet = book.Workbook!.Sheets!.Elements<XL.Sheet>().Single(sheet => sheet.Name == name);
+                    var part = (WorksheetPart)book.GetPartById(sheet.Id!);
+                    var rows = part.Worksheet!.GetFirstChild<XL.SheetData>()!;
+                    rows.Elements<XL.Row>().First().Elements<XL.Cell>().First().Remove();
+                    if (part.Worksheet.GetFirstChild<XL.AutoFilter>() == null)
+                        part.Worksheet.Append(new XL.AutoFilter { Reference = "A1:B3" });
+                    part.Worksheet.Save();
+                }
+            }
+            var problemMap = importer.ProposeWorkbook(problemPath);
+            Check("Z16a1 same-row table problems remain distinct and attributed to both sheets", new[] { "Data 9", "Data 4" }.All(name =>
+                problemMap.Problems.Any(problem => problem.Kind == PanelImportProblemKind.UnnamedColumn && problem.RowNumber == 1 && problem.SheetName == name)));
+            Check("Z16a1 selected-family table problems are included in the whole proposal", problemMap.FamilyTable != null
+                && problemMap.FamilyTable.Problems.Count > 0 && problemMap.FamilyTable.Problems.All(problem => problemMap.Problems.Any(aggregate =>
+                    aggregate.Kind == problem.Kind && aggregate.RowNumber == problem.RowNumber && aggregate.SheetName == problemMap.FamilySheet)));
 
             string ambiguous = Path.Combine(root, "ambiguous.xlsx"); WriteNeutralWorkbook(ambiguous, onlyFamily: true);
             using (var document = SpreadsheetDocument.Open(ambiguous, true))
@@ -103,12 +181,52 @@ internal static partial class Program
             var tied = importer.ProposeWorkbook(ambiguous);
             Check("Z16a1 equally supported family sheets require a choice instead of a first-sheet guess", tied.NeedsFamilySheetChoice
                 && tied.FamilySheet.Length == 0 && tied.Problems.Any(problem => problem.Severity == PanelImportSeverity.Blocking));
+            var chosen = importer.ProposeWorkbook(tied.Workbook, "Another 9");
+            Check("Z16a1 explicit family choice reruns complete derived facts after a tie", chosen.FamilySheet == "Another 9"
+                && !chosen.NeedsFamilySheetChoice && chosen.Pfam.Count == 40 && chosen.MultiFamilyRows.Count > 0);
+            var overridden = importer.ProposeWorkbook(shipped.Workbook, shipped.FamilySheet,
+                new Dictionary<string, PanelWorkbookSheetRole> { [shipped.Workbook.Sheets.Single(sheet => sheet.Role == PanelWorkbookSheetRole.ColorLegend).SheetName] = PanelWorkbookSheetRole.Notes });
+            Check("Z16a1 explicit role overrides survive relationship derivation", overridden.Workbook.Sheets.All(sheet => sheet.Role != PanelWorkbookSheetRole.ColorLegend)
+                && overridden.Notes.Count == 4 && overridden.ColorsState == PanelWorkbookReadState.Read);
+            var subclassRead = reader.ReadWorkbook(example);
+            var beforeOverride = importer.ProposeWorkbook(subclassRead);
+            string subclassName = beforeOverride.SubclassTables.Single().SheetName;
+            var noSubclass = importer.ProposeWorkbook(subclassRead, beforeOverride.FamilySheet,
+                new Dictionary<string, PanelWorkbookSheetRole> { [subclassName] = PanelWorkbookSheetRole.Notes });
+            Check("Z16a1 a subclass-to-notes override is retained rather than redetected", noSubclass.SubclassTables.Count == 0
+                && noSubclass.Workbook.Sheets.Single(sheet => sheet.SheetName == subclassName).Role == PanelWorkbookSheetRole.Notes
+                && noSubclass.Notes.Any(note => note.SheetName == subclassName && note.Text.Length > 0));
+            var conflicting = importer.ProposeWorkbook(reader.ReadWorkbook(example), beforeOverride.FamilySheet,
+                new Dictionary<string, PanelWorkbookSheetRole> { [beforeOverride.FamilySheet] = PanelWorkbookSheetRole.Notes });
+            Check("Z16a1 conflicting explicit family and role choices block without overwriting the role", conflicting.NeedsFamilySheetChoice
+                && conflicting.FamilySheet.Length == 0 && conflicting.Workbook.Sheets.Single(sheet => sheet.SheetName == beforeOverride.FamilySheet).Role == PanelWorkbookSheetRole.Notes
+                && conflicting.Problems.Any(problem => problem.Kind == PanelImportProblemKind.ChoiceInvalid && problem.Severity == PanelImportSeverity.Blocking));
+            using (var document = SpreadsheetDocument.Open(ambiguous, true))
+            {
+                var book = document.WorkbookPart!;
+                var first = book.Workbook!.Sheets!.Elements<XL.Sheet>().First(); first.State = XL.SheetStateValues.Hidden;
+                var part = (WorksheetPart)book.GetPartById(first.Id!);
+                var data = part.Worksheet!.GetFirstChild<XL.SheetData>()!;
+                var extra = (XL.Row)data.Elements<XL.Row>().Last().CloneNode(true); extra.RowIndex = 42;
+                foreach (var cell in extra.Elements<XL.Cell>()) cell.CellReference = new string(cell.CellReference!.Value!.TakeWhile(char.IsLetter).ToArray()) + "42";
+                data.Append(extra); part.Worksheet.Save(); book.Workbook.Save();
+            }
+            var visible = importer.ProposeWorkbook(ambiguous);
+            Check("Z16a1 visible family candidates rank before a larger hidden candidate and remain uncertain", visible.FamilySheet == "Another 9"
+                && visible.Workbook.Sheets.Single(sheet => sheet.SheetName == visible.FamilySheet).IsUncertain
+                && visible.Problems.Any(problem => problem.Kind == PanelImportProblemKind.FamilySheetAlternative
+                    && problem.Severity == PanelImportSeverity.Note && problem.Message.Contains("Data 9", StringComparison.Ordinal)));
             var missing = importer.ProposeWorkbook(Path.Combine(root, "missing.xlsx"));
             Check("Z16a1 an unreadable workbook is a blocked proposal rather than a crash", missing.NeedsFamilySheetChoice
                 && missing.Problems.Any(problem => problem.Kind == PanelImportProblemKind.FileUnreadable));
         }
         catch (Exception error) { Check("Z16a1 workbook map fixtures run without an exception", false, error.ToString()); }
-        finally { Directory.Delete(root, recursive: true); }
+        finally
+        {
+            string allowed = Path.GetFullPath(parent).TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
+            if (!root.StartsWith(allowed, StringComparison.OrdinalIgnoreCase)) throw new IOException("Workbook fixture cleanup escaped its owned parent.");
+            Directory.Delete(root, recursive: true);
+        }
         Check("Z16a1 owned synthetic workbook folder is removed", !Directory.Exists(root));
     }
 
