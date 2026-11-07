@@ -104,6 +104,7 @@ public static class PanelAssignmentEvidenceStore
             {
                 row.PanelFamilyKey = selected.Family; row.FamilyUserId = selected.FamilyId;
                 row.IsApplied = true; row.Reason = selected.Reason;
+                if (selected.Tier == EvidenceTier.AddedByHand) row.EvidenceKind = PanelAssignmentEvidenceKind.AddedByHand;
             }
             else
             {

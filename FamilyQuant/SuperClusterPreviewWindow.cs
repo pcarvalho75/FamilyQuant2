@@ -25,10 +25,14 @@ namespace FamilyQuant
             string initialScope = "", bool evidenceMode = false,
             Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask = null,
             Func<IReadOnlyList<PanelFamilyLinkSelection>, EvidenceReviewInput>? confirmPanelLinks = null,
-            Func<IProgress<FetchProgress>?, CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTaskWithProgress = null)
+            Func<IProgress<FetchProgress>?, CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTaskWithProgress = null,
+            Func<EvidenceManualRequest, EvidenceReviewInput>? addToFamily = null,
+            Func<IReadOnlyList<int>, EvidenceReviewInput>? removeFromFamily = null,
+            Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null)
         {
             InitializeComponent();
-            model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask, confirmPanelLinks, discoverTaskWithProgress);
+            model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask, confirmPanelLinks, discoverTaskWithProgress,
+                addToFamily, removeFromFamily, updateManualChoices);
             Loaded += async (_, _) => await DiscoverInitialTaskAsync();
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
@@ -86,8 +90,7 @@ namespace FamilyQuant
         private void Cancel_Click(object sender, RoutedEventArgs e) { Confirmed = false; Close(); }
         private void Help_Click(object sender, RoutedEventArgs e)
         {
-            var help = TextReportWindow.Create("Grouping review help", GroupingReviewHelp.Text
-                + "\n\n" + EvidenceHelp.Build(panelMode: model.Evidence?.HasPanelRules == true)
+            var help = TextReportWindow.Create("Grouping review help", GroupingReviewHelp.ForMode(model.ModeIndex == 1, model.Evidence?.HasPanelRules == true)
                 + (model.Evidence == null ? "" : "\n\nCurrent proposal\n" + model.Evidence.Source.RuleSummary), true);
             help.Owner = this; help.WindowStartupLocation = WindowStartupLocation.CenterOwner; help.Show();
         }

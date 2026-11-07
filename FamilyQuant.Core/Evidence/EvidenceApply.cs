@@ -38,6 +38,8 @@ namespace FamilyQuant.Evidence
 
     public sealed class EvidenceAssignment
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public EvidenceProteinProposal? AutomaticEvidence { get; set; }
         public int ProteinIndex { get; set; }
         public string Identifier { get; set; } = string.Empty;
         public string Family { get; set; } = string.Empty;
@@ -52,6 +54,8 @@ namespace FamilyQuant.Evidence
 
     public sealed partial class EvidenceRecipe
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public List<EvidenceManualChoice>? ManualChoices { get; set; }
         public string SourceFingerprint { get; set; } = string.Empty;
         public string SourceStateFingerprint { get; set; } = string.Empty;
         public string AppliedStateFingerprint { get; set; } = string.Empty;
@@ -125,11 +129,13 @@ namespace FamilyQuant.Evidence
             if (selection.ConfirmedTask != null) request = Hash(new { Request = request, selection.ConfirmedTask });
             if (familyPanel != null) request = Hash(new { Request = request, FamilyPanel = familyPanel });
             if (proposal.PanelContext != null) request = Hash(new { Request = request, proposal.PanelContext });
+            if (proposal.ManualChoices?.Count > 0) request = Hash(new { Request = request, ManualChoices = proposal.ManualChoices.OrderBy(c => c.ProteinIndex) });
             if (file.EvidenceRecipe?.RequestFingerprint == request
                 && file.EvidenceRecipe.AppliedStateFingerprint == StateFingerprint(file, session: file.EvidenceRecipe))
                 return new EvidenceApplyResult { Recipe = Clone(file.EvidenceRecipe) };
             if (EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems) != proposal.SourceFingerprint)
                 throw new InvalidOperationException("The evidence proposal no longer matches the current proteins.");
+            ManualFamilyChoices.ValidateProposal(file, proposal);
             ValidatePanelProposal(file, proposal, selection, familyPanel);
             string initialState = StateFingerprint(file);
             string initialMotifs = Hash(file.Motifs);
@@ -206,6 +212,7 @@ namespace FamilyQuant.Evidence
                 {
                     ProteinIndex = index, Identifier = protein.SequenceIdentifier, Family = family, Name = name, GroupKey = key,
                     PreviousFamilyId = protein.UserID, PreviousSearchId = protein.USearchID, Tier = row.Tier, Reason = row.Reason,
+                    AutomaticEvidence = row.AutomaticEvidence == null ? null : Clone(row.AutomaticEvidence),
                 });
             }
             int next = MaximumId(file);
@@ -226,6 +233,7 @@ namespace FamilyQuant.Evidence
                 }).ToList(),
                 ArchitectureChoices = splits.Values.OrderBy(c => c.Family, StringComparer.Ordinal).ThenBy(c => c.ArchitectureKey, StringComparer.Ordinal).ToList(),
                 ProteinOverrides = Clone(selection.ProteinOverrides.OrderBy(o => o.ProteinIndex).ToList()), Assignments = assignments,
+                ManualChoices = proposal.ManualChoices?.Select(c => c with { Selected = selected.Contains(c.ProteinIndex) }).ToList(),
                 EvidenceProvider = file.EvidenceSource?.Provider ?? string.Empty, EvidenceRelease = file.EvidenceSource?.Release ?? string.Empty,
                 EvidenceReleases = file.MyExtendedFastaItems.Select(p => p.Evidence?.Source?.Release).Append(file.EvidenceSource?.Release)
                     .Where(r => !string.IsNullOrEmpty(r)).Select(r => r!).Distinct(StringComparer.Ordinal).OrderBy(r => r, StringComparer.Ordinal).ToList(),
@@ -269,6 +277,7 @@ namespace FamilyQuant.Evidence
                 || EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems) != recipe.SourceFingerprint)
                 throw new InvalidOperationException("The saved recipe does not match this source or its applied state.");
             ValidatePanelRecipe(file, recipe);
+            ManualFamilyChoices.ValidateRecipe(file, recipe);
             if (recipe.Assignments.Count == 0 || recipe.Assignments.Select(a => a.ProteinIndex).Distinct().Count() != recipe.Assignments.Count
                 || !recipe.Assignments.Select(a => a.ProteinIndex).OrderBy(i => i).SequenceEqual(recipe.SelectedProteinIndices))
                 throw new ArgumentException("The recipe's assignments do not match its selection.", nameof(recipe));

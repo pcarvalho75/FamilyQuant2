@@ -22,6 +22,9 @@ namespace FamilyQuant
             sb.AppendLine("GROUPING BY EVIDENCE");
             sb.AppendLine("====================");
             sb.AppendLine();
+            sb.AppendLine(EvidenceScopeHelp.Build());
+            sb.AppendLine(EvidenceOutsideScopeHelp.Build());
+            sb.AppendLine(EvidenceReviewTerms.Text);
             sb.AppendLine("Each protein is placed in a family by what UniProt's curators and its own sequence");
             sb.AppendLine("say, never by the words in its name. Each one gets a family, a tier and a reason.");
             sb.AppendLine();
@@ -94,8 +97,8 @@ namespace FamilyQuant
             sb.AppendLine();
 
             sb.AppendLine("WHAT IT DOES NOT DO");
-            sb.AppendLine("- A short fragment with no domain call and none of your words stays unassigned and flagged:");
-            sb.AppendLine("  identity over a few dozen residues does not decide a family.");
+            sb.AppendLine("- Without qualifying evidence, a protein stays unassigned; a warning flag appears only when the analysis supplies one.");
+            sb.AppendLine("  A short sequence match alone does not decide a family.");
             sb.AppendLine("- Two kinds of protein that differ only in their names cannot be told apart. They are");
             sb.AppendLine("  listed for you rather than guessed.");
             return sb.ToString();

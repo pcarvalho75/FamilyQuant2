@@ -45,7 +45,8 @@ internal static partial class Program
                 {
                     window.Show(); PumpDispatcher();
                     var text = window.FindName("TextBlockQueryCoverageRule") as TextBlock;
-                    Check(theme + " evidence window shows the plain query-coverage rule beside the proposal", text?.Text == rule && text.IsVisible);
+                    Check(theme + " evidence window shows plain coverage words with the exact definition in its tooltip",
+                        text?.Text == EvidenceProposalPresentation.QueryCoverageSummary && text.ToolTip as string == rule && text.IsVisible);
                     System.Threading.Thread.Sleep(350); PumpDispatcher();
                     ScreenHarness.Save(window, Path.Combine(output, "coverage-" + theme + ".png"), 1180, 740);
                 }

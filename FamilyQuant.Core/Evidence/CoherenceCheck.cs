@@ -2,9 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace FamilyQuant.Evidence
 {
+    public enum CoherenceMemberSource { Unknown, File, ReferencePanel }
+    public sealed record CoherenceSourceCounts(int InFile = 0, int ReferencePanel = 0, int Unknown = 0)
+    {
+        public int Total => InFile + ReferencePanel + Unknown;
+    }
+    public sealed record CoherenceReviewedMember(string Accession, CoherenceMemberSource Source, int Length, int Cysteines,
+        bool IsComplete, int? TransmembraneCount, bool HasDomainCalls, string? Species = null, int? TaxonomyId = null);
+
     /// <summary>What the reviewed members of one family show: the ranges every check reads.</summary>
     public sealed class FamilyProfile
     {
@@ -12,6 +21,11 @@ namespace FamilyQuant.Evidence
 
         /// <summary>Reviewed members learned from, each entry once (the file's and the panel's).</summary>
         public int Members { get; init; }
+        public CoherenceSourceCounts ReviewedSources { get; init; } = new();
+        public CoherenceSourceCounts CompleteSources { get; init; } = new();
+        public CoherenceSourceCounts TransmembraneSources { get; init; } = new();
+        public CoherenceSourceCounts DomainCallSources { get; init; } = new();
+        public IReadOnlyList<CoherenceReviewedMember> ReviewedMembers { get; init; } = Array.Empty<CoherenceReviewedMember>();
 
         /// <summary>Members that are not fragments; the length and cysteine ranges come from these.</summary>
         public int CompleteMembers { get; init; }
@@ -47,6 +61,8 @@ namespace FamilyQuant.Evidence
     /// </summary>
     public static class CoherenceCheck
     {
+        private sealed record Member(string Sequence, ProteinEvidence Evidence, string Accession, CoherenceMemberSource Source,
+            string? Species = null, int? TaxonomyId = null);
         public const int DefaultMinimumMembers = 10;
         public const string LengthAbove = "coherence.length.above";
         public const string LengthBelow = "coherence.length.below";
@@ -61,22 +77,33 @@ namespace FamilyQuant.Evidence
         public static Dictionary<string, FamilyProfile> Learn(FamilyClusterFile file)
         {
             ReferencePanelFetcher.RequireComplete(file.EvidenceSource?.ReferencePanel);
-            var members = new List<(string Sequence, ProteinEvidence Evidence)>();
+            var members = new List<Member>();
             var seen = new HashSet<string>(StringComparer.Ordinal);
             foreach (FastaItemExtended item in NearestReviewed.Targets(file))
             {
                 if (item.Evidence?.Reviewed != true || string.IsNullOrEmpty(item.Sequence)) continue;
-                if (seen.Add(NearestReviewed.EntryAccession(item.SequenceIdentifier)))
-                    members.Add((item.Sequence, item.Evidence));
+                string accession = NearestReviewed.EntryAccession(item.SequenceIdentifier);
+                if (seen.Add(accession))
+                {
+                    var header = HeaderSpecies(item.Description);
+                    bool stored = !string.IsNullOrWhiteSpace(item.Evidence.OrganismName) || item.Evidence.TaxonId != null;
+                    members.Add(new Member(item.Sequence, item.Evidence, accession, CoherenceMemberSource.File,
+                        stored ? item.Evidence.OrganismName : header.Species, stored ? item.Evidence.TaxonId : header.TaxonomyId));
+                }
             }
             foreach (PanelEntry entry in file.EvidenceSource?.ReferencePanel?.Entries ?? new List<PanelEntry>())
-                if (entry.Sequence.Length > 0 && seen.Add(entry.Accession)) members.Add((entry.Sequence, entry.Evidence));
-            return Learn(members);
+                if (entry.Sequence.Length > 0 && seen.Add(entry.Accession))
+                    members.Add(new Member(entry.Sequence, entry.Evidence, entry.Accession, CoherenceMemberSource.ReferencePanel,
+                        entry.OrganismName, entry.TaxonId));
+            return LearnMembers(members);
         }
 
         public static Dictionary<string, FamilyProfile> Learn(IEnumerable<(string Sequence, ProteinEvidence Evidence)> reviewed)
+            => LearnMembers(reviewed.Select(m => new Member(m.Sequence, m.Evidence, m.Evidence.Accession, CoherenceMemberSource.Unknown)));
+
+        private static Dictionary<string, FamilyProfile> LearnMembers(IEnumerable<Member> reviewed)
         {
-            var byFamily = new Dictionary<string, List<(string Sequence, ProteinEvidence Evidence)>>(StringComparer.OrdinalIgnoreCase);
+            var byFamily = new Dictionary<string, List<Member>>(StringComparer.OrdinalIgnoreCase);
             foreach (var member in reviewed)
                 foreach (string family in ReferencePanelFetcher.FamiliesOf(member.Evidence).Distinct(StringComparer.OrdinalIgnoreCase))
                 {
@@ -89,7 +116,7 @@ namespace FamilyQuant.Evidence
             return profiles;
         }
 
-        private static FamilyProfile Profile(string family, List<(string Sequence, ProteinEvidence Evidence)> members)
+        private static FamilyProfile Profile(string family, List<Member> members)
         {
             var complete = members.Where(m => m.Evidence.Fragment != true).ToList();
             var tm = complete.Where(m => m.Evidence.TransmembraneCount != null).Select(m => m.Evidence.TransmembraneCount!.Value).ToList();
@@ -101,6 +128,13 @@ namespace FamilyQuant.Evidence
             {
                 Family = family,
                 Members = members.Count,
+                ReviewedSources = Sources(members),
+                CompleteSources = Sources(complete),
+                TransmembraneSources = Sources(complete.Where(m => m.Evidence.TransmembraneCount != null)),
+                DomainCallSources = Sources(complete.Where(m => m.Evidence.Pfam.Count > 0)),
+                ReviewedMembers = members.Select(m => new CoherenceReviewedMember(m.Accession, m.Source, m.Sequence.Length,
+                    Cysteines(m.Sequence), m.Evidence.Fragment != true, m.Evidence.TransmembraneCount, m.Evidence.Pfam.Count > 0,
+                    m.Species, m.TaxonomyId)).ToArray(),
                 CompleteMembers = complete.Count,
                 MinLength = complete.Count == 0 ? 0 : complete.Min(m => m.Sequence.Length),
                 MaxLength = complete.Count == 0 ? 0 : complete.Max(m => m.Sequence.Length),
@@ -130,27 +164,27 @@ namespace FamilyQuant.Evidence
 
             if (profile.CompleteMembers >= minimumMembers && sequence.Length > 0)
             {
-                string learned = " (" + Range(profile.MinLength, profile.MaxLength) + " aa in " +
-                    Count(profile.CompleteMembers) + " complete reviewed members)";
+                string learned = " amino acids; complete reviewed members of " + family + " have "
+                    + Range(profile.MinLength, profile.MaxLength) + " amino acids (" + DescribeSources(profile.CompleteSources, profile.CompleteMembers) + ").";
                 if (sequence.Length > profile.MaxLength)
-                    flags.Add(Flag(LengthAbove, Count(sequence.Length) + " aa, longer than any reviewed " + family + " member" + learned));
+                    flags.Add(Flag(LengthAbove, Count(sequence.Length) + learned));
                 else if (complete && sequence.Length < profile.MinLength)
-                    flags.Add(Flag(LengthBelow, Count(sequence.Length) + " aa, shorter than any complete reviewed " + family + " member" + learned));
+                    flags.Add(Flag(LengthBelow, Count(sequence.Length) + learned));
 
                 int cysteines = Cysteines(sequence);
-                string cysLearned = " (" + Range(profile.MinCysteines, profile.MaxCysteines) + " in " +
-                    Count(profile.CompleteMembers) + " complete reviewed members)";
+                string cysLearned = " cysteines; complete reviewed members of " + family + " have "
+                    + Range(profile.MinCysteines, profile.MaxCysteines) + " (" + DescribeSources(profile.CompleteSources, profile.CompleteMembers) + ").";
                 if (cysteines > profile.MaxCysteines)
-                    flags.Add(Flag(CysteinesAbove, Count(cysteines) + " cysteines, more than any reviewed " + family + " member" + cysLearned));
+                    flags.Add(Flag(CysteinesAbove, Count(cysteines) + cysLearned));
                 else if (complete && cysteines < profile.MinCysteines)
-                    flags.Add(Flag(CysteinesBelow, Count(cysteines) + " cysteines, fewer than any complete reviewed " + family + " member" + cysLearned));
+                    flags.Add(Flag(CysteinesBelow, Count(cysteines) + cysLearned));
             }
 
             if (profile.MembersWithKnownTransmembrane >= minimumMembers && evidence?.TransmembraneCount is int helices
                 && helices > profile.MaxTransmembrane)
                 flags.Add(Flag(Transmembrane, Count(helices) + " transmembrane " + (helices == 1 ? "helix" : "helices") +
-                    ", more than any complete reviewed " + family + " member (at most " + Count(profile.MaxTransmembrane) + " in " +
-                    Count(profile.MembersWithKnownTransmembrane) + ")"));
+                    "; complete reviewed members of " + family + " with recorded counts have at most " + Count(profile.MaxTransmembrane) + " ("
+                    + DescribeSources(profile.TransmembraneSources, profile.MembersWithKnownTransmembrane) + ")."));
 
             if (profile.MembersWithDomains >= minimumMembers && evidence != null)
                 foreach (EvidenceDomain domain in evidence.Pfam
@@ -158,7 +192,8 @@ namespace FamilyQuant.Evidence
                     .OrderBy(d => d.Accession, StringComparer.Ordinal))
                     if (!profile.DomainCarriers.ContainsKey(domain.Accession))
                         flags.Add(Flag(Domain, "carries " + (domain.Name.Length > 0 ? domain.Name + " (" + domain.Accession + ")" : domain.Accession) +
-                            ", which no reviewed " + family + " member carries (" + Count(profile.Members) + " members)"));
+                            ", not recorded among reviewed members of " + family + " (" + DescribeSources(profile.ReviewedSources, profile.Members)
+                            + "); complete reviewed members with domain calls: " + DescribeSources(profile.DomainCallSources, profile.MembersWithDomains) + "."));
             return flags;
         }
 
@@ -198,6 +233,23 @@ namespace FamilyQuant.Evidence
         }
 
         public static int Cysteines(string sequence) => sequence.Count(c => c == 'C' || c == 'c');
+
+        private static CoherenceSourceCounts Sources(IEnumerable<Member> members)
+        {
+            var list = members.ToArray();
+            return new(list.Count(m => m.Source == CoherenceMemberSource.File), list.Count(m => m.Source == CoherenceMemberSource.ReferencePanel),
+                list.Count(m => m.Source == CoherenceMemberSource.Unknown));
+        }
+        private static string DescribeSources(CoherenceSourceCounts sources, int total) => sources.Total != total || sources.Unknown > 0
+            ? Count(total) + " members: source counts not recorded"
+            : Count(total) + " members: " + Count(sources.InFile) + " in your file, " + Count(sources.ReferencePanel) + " from the reference panel, all species";
+
+        private static (string? Species, int? TaxonomyId) HeaderSpecies(string? description)
+        {
+            var match = Regex.Match(description ?? "", @"(?:^|\s)OS=(?<name>.+?)\sOX=(?<id>[1-9][0-9]*)(?=\s|$)", RegexOptions.CultureInvariant);
+            return match.Success && int.TryParse(match.Groups["id"].Value, NumberStyles.None, CultureInfo.InvariantCulture, out int taxon)
+                ? (match.Groups["name"].Value.Trim(), taxon) : (null, null);
+        }
 
         private static bool DescribedAsFragment(string? description) =>
             (description ?? string.Empty).IndexOf("(Fragment", StringComparison.OrdinalIgnoreCase) >= 0;

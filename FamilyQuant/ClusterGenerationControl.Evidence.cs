@@ -98,7 +98,8 @@ public partial class ClusterGenerationControl
         if (owner == null) return false;
         var window = new SuperClusterPreviewWindow(preview, null, session.Propose, session.CountMotif,
             evidenceMode: startWithEvidence, confirmPanelLinks: session.ConfirmPanelLinks,
-            discoverTaskWithProgress: session.DiscoverTaskAsync) { Owner = owner };
+            discoverTaskWithProgress: session.DiscoverTaskAsync, addToFamily: session.AddToFamily,
+            removeFromFamily: session.RemoveFromFamily, updateManualChoices: session.UpdateManualChoices) { Owner = owner };
         window.ShowDialog();
         if (!window.Confirmed) return false;
         if (!window.IsEvidenceMode) return true;

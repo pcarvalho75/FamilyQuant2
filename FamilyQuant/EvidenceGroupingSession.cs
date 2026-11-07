@@ -11,7 +11,7 @@ using FamilyQuant.Panels;
 namespace FamilyQuant;
 
 /// <summary>A read-only analysis session followed by the Core grouping transaction on confirmation.</summary>
-public sealed class EvidenceGroupingSession
+public sealed partial class EvidenceGroupingSession
 {
     private readonly FamilyClusterFile file;
     private readonly string programVersion;
@@ -69,17 +69,28 @@ public sealed class EvidenceGroupingSession
     public EvidenceReviewInput Propose(string scope)
     {
         EnsureCurrent();
+        InitializeManualChoices();
         var options = new EvidenceClassificationOptions { ScopeTerms = WordCluster.ParseKeywords(scope) };
         if (options.ScopeTerms.Count == 0) throw new ArgumentException("Type at least one scope word or phrase.", nameof(scope));
         var taskChoice = taskProposal == null ? null : EvidenceTaskDiscovery.Confirm(file, taskProposal, options.ScopeTerms);
         var references = reviewPanel == null ? NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms))
             : PanelEvidenceClassifier.References(file, options);
         var result = search(NearestReviewed.Targets(file), references);
-        var proposal = reviewPanel == null
-            ? CoherenceCheck.Flag(EvidenceClassifier.Propose(file.MyExtendedFastaItems, options, result.ByQuery(), NearestReviewed.ReferenceEvidence(file)),
-                file.MyExtendedFastaItems, CoherenceCheck.Learn(file))
-            : PanelEvidenceClassifier.Propose(file, options, result, references, reviewPanel);
-        var presentation = EvidenceProposalPresentation.Present(proposal, file);
+        IReadOnlyDictionary<string, FamilyProfile>? profiles = null;
+        EvidenceProposal proposal;
+        var panel = reviewPanel == null ? null : ManualFamilyChoices.ExtendPanel(reviewPanel, manualChoices.Values.ToArray());
+        if (reviewPanel == null)
+        {
+            var classified = EvidenceClassifier.Propose(file.MyExtendedFastaItems, options, result.ByQuery(), NearestReviewed.ReferenceEvidence(file));
+            profiles = CoherenceCheck.Learn(file);
+            proposal = CoherenceCheck.Flag(classified, file.MyExtendedFastaItems, profiles);
+        }
+        else proposal = PanelEvidenceClassifier.Propose(file, options, result, references, panel!);
+        automaticProposal = proposal;
+        coherenceProfiles = profiles;
+        selectedReviewPanel = panel;
+        proposal = ManualFamilyChoices.Overlay(proposal, manualChoices.Values.ToArray(), file, profiles);
+        var presentation = EvidenceProposalPresentation.Present(proposal, file, profiles);
         EnsureCurrent();
         Search = result; References = references.ToArray(); Proposal = proposal; checkedMotif = null; confirmedTask = taskChoice;
         lastScope = scope;
@@ -108,6 +119,13 @@ public sealed class EvidenceGroupingSession
     public EvidenceApplyResult Apply(EvidenceReviewSelection selection)
     {
         EnsureCurrent();
+        if (selection.ManualChoices?.Count > 0 || manualChoices.Count > 0)
+        {
+            var membership = Proposal?.Proteins.Select(p => (p.ProteinIndex, p.Family)).ToArray();
+            string? checkedBefore = checkedMotif;
+            UpdateManualChoices((selection.ManualChoices ?? manualChoices.Values.ToArray()).Select(c => c with { Selected = selection.ProteinIndices.Contains(c.ProteinIndex) }).ToArray());
+            if (membership?.SequenceEqual(Proposal!.Proteins.Select(p => (p.ProteinIndex, p.Family))) == true) checkedMotif = checkedBefore;
+        }
         var proposal = Proposal ?? throw new InvalidOperationException("Build a proposal before applying its selection.");
         if (selection.MotifPattern.Length > 0 && checkedMotif != selection.MotifPattern)
             throw new InvalidOperationException("Check the motif against this proposal before applying it.");
@@ -128,7 +146,7 @@ public sealed class EvidenceGroupingSession
             SessionReferences = References,
             CheckedMotifs = motifs,
             ConfirmedTask = confirmedTask,
-            FamilyPanel = Proposal?.PanelContext == null ? null : reviewPanel,
+            FamilyPanel = Proposal?.PanelContext == null ? null : selectedReviewPanel,
             ArchitectureChoices = (selection.ArchitectureChoices ?? Array.Empty<ReviewArchitectureChoice>()).Select(a =>
                 new EvidenceArchitectureChoice { Family = a.Family, ArchitectureKey = a.ArchitectureKey, Name = a.Name, Split = a.Split }).ToArray()
         };
