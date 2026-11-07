@@ -13,15 +13,20 @@ public sealed record PanelChecklistProtein(int ProteinIndex, string Identifier, 
     bool? Reviewed, bool Placed, string Reason, IReadOnlyList<string>? ScopePhrases = null, bool IsLocked = false);
 
 public sealed record PanelChecklistFamily(string Key, string Name, string Decision, string? TargetKey,
-    IReadOnlyList<PanelChecklistProtein> Proteins)
+    IReadOnlyList<PanelChecklistProtein> Proteins, int ExcludedContaminants = 0)
 {
     public int Matches => Proteins.Count;
     public int Reviewed => Proteins.Count(protein => protein.Reviewed == true);
     public int Placed => Proteins.Count(protein => protein.Placed);
     public int Outside => Matches - Placed;
     public bool HasOutside => Outside > 0;
-    public string OutsideSummary => Matches == 0 ? "No database targets matched." : Outside == 0 ? "All matching targets are placed."
-        : string.Join(" | ", Proteins.Where(protein => !protein.Placed).Select(protein => protein.Reason).Distinct(StringComparer.Ordinal));
+    public string ContaminantCount => "Contaminants excluded " + ExcludedContaminants.ToString("N0");
+    public string ContaminantReason => ExcludedContaminants.ToString("N0")
+        + (ExcludedContaminants == 1 ? " matching contaminant is excluded. " : " matching contaminants are excluded. ")
+        + "A contaminant never joins a family.";
+    public string OutsideSummary => (ExcludedContaminants > 0 ? ContaminantReason + " " : "")
+        + (Matches == 0 ? "No database targets matched." : Outside == 0 ? "All matching targets are placed."
+            : string.Join(" | ", Proteins.Where(protein => !protein.Placed).Select(protein => protein.Reason).Distinct(StringComparer.Ordinal)));
     public string MatchTypes => string.Join(" + ", new[]
     {
         (PanelChecklistMatch.UniProtFamily, "UniProt family"), (PanelChecklistMatch.Pfam, "Pfam"),
@@ -43,8 +48,7 @@ public static class PanelFamilyChecklist
         if (PanelDerivedDataCurrentness.FamilyFingerprint(panel) != proposal.PanelContext.AppliedPanelFingerprint)
             throw new InvalidOperationException("The panel changed. Update the proposal before reading its checklist.");
         var context = PanelFamilyResolver.CreateAuditContext(panel, proposal.PanelContext.Links);
-        var targets = proposal.Proteins.Where(row => !NearestReviewed.IsDecoy(file.MyExtendedFastaItems[row.ProteinIndex])
-            && !SequenceLabels.IsContaminant(row.Identifier)).ToArray();
+        var targets = proposal.Proteins.Where(row => !NearestReviewed.IsDecoy(file.MyExtendedFastaItems[row.ProteinIndex])).ToArray();
         return panel.Families.Select(family =>
         {
             string[] names = family.Names.Select(name => name.Text).Append(family.DisplayName).Append(family.Key)
@@ -54,6 +58,7 @@ public static class PanelFamilyChecklist
             var domains = family.Pfam.Select(domain => domain.Accession).ToHashSet(StringComparer.Ordinal);
             string? targetKey = FamilyPanelValidation.ResolveFamilyKey(panel, family.Key);
             var matches = new List<PanelChecklistProtein>();
+            int excludedContaminants = 0;
             foreach (var row in targets)
             {
                 var protein = file.MyExtendedFastaItems[row.ProteinIndex];
@@ -68,6 +73,7 @@ public static class PanelFamilyChecklist
                 if (row.Family == family.Key && row.Tier == EvidenceTier.AddedByHand) match |= PanelChecklistMatch.HandChoice;
                 if (row.Family == family.Key && match == PanelChecklistMatch.None) match = PanelChecklistMatch.ProposedPlacement;
                 if (match == PanelChecklistMatch.None) continue;
+                if (SequenceLabels.IsContaminant(row.Identifier)) { excludedContaminants++; continue; }
                 string? mappedName = mapped == null ? null : panel.Families.Single(item => item.Key == mapped).DisplayName;
                 string reason = placed ? row.Reason : PanelAuditCsv.ExplainScopeExclusion(protein.Evidence, proposal.Options.ScopeTerms, mappedName, row.Reason);
                 if (!placed && row.Family.Length > 0)
@@ -83,7 +89,7 @@ public static class PanelFamilyChecklist
                     : "Merge into " + panel.Families.Single(item => item.Key == targetKey).DisplayName,
                 _ => "Quantify",
             };
-            return new PanelChecklistFamily(family.Key, string.IsNullOrWhiteSpace(family.DisplayName) ? family.Key : family.DisplayName, decision, targetKey, matches);
+            return new PanelChecklistFamily(family.Key, string.IsNullOrWhiteSpace(family.DisplayName) ? family.Key : family.DisplayName, decision, targetKey, matches, excludedContaminants);
         }).ToArray();
     }
 }

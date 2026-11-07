@@ -57,6 +57,12 @@ internal static partial class Program
             && missing.Proteins.Single(protein => protein.ProteinIndex == 3).Match == (PanelChecklistMatch.UniProtFamily | PanelChecklistMatch.Pfam | PanelChecklistMatch.NameText));
         Check("Z12n1 unknown status remains unknown and decoys, contaminants, metadata and partial words are excluded",
             missing.Proteins.Select(protein => protein.ProteinIndex).SequenceEqual(new[] { 3, 5 }) && missing.Proteins[1].Reviewed == null);
+        string contaminantAccession = FamilyNaming.Accession(file.MyExtendedFastaItems[7].SequenceIdentifier);
+        int auditContaminants = PanelAuditCsv.BuildCsv(file).Split('\n').Count(line => line.Split(',')[0].Trim('"') == contaminantAccession);
+        Check("Z12n1-fix matching contaminants agree with separate audit rows and remain outside every target count",
+            auditContaminants == 1 && missing.ExcludedContaminants == auditContaminants && rows.Where(row => row.Key != "missing").All(row => row.ExcludedContaminants == 0)
+            && missing is { Matches: 2, Reviewed: 0, Placed: 0, Outside: 2 }
+            && missing.OutsideSummary.Contains("A contaminant never joins a family.", StringComparison.Ordinal));
         Check("Z12n1 counts placements from the actual proposal instead of rescuing domain/name matches",
             rows.All(row => row.Placed == row.Proteins.Count(protein => proposal.Proteins.Single(p => p.ProteinIndex == protein.ProteinIndex).Family == row.TargetKey))
             && proposal.Proteins.Single(protein => protein.ProteinIndex == 3).Family.Length == 0);
@@ -98,11 +104,13 @@ internal static partial class Program
                     var grid = (DataGrid)window.FindName("PanelChecklistGrid");
                     var model = (GroupingReviewViewModel)window.DataContext;
                     grid.SelectedItem = model.Evidence!.PanelChecklist.Single(row => row.Key == "missing");
+                    grid.ScrollIntoView(grid.SelectedItem);
                     window.UpdateLayout(); PumpDispatcher();
                     Check("Z12n1 " + theme + " " + size.Item1 + " native checklist is read only with all rows and explanatory detail",
                         tab.IsVisible && grid.IsReadOnly && grid.Items.Count == rows.Count && grid.ActualHeight > 100
                         && ((TextBox)window.FindName("PanelChecklistDetail")).IsReadOnly
-                        && model.Evidence.ChecklistDetail.Contains(session.Proposal!.Proteins.Single(protein => protein.ProteinIndex == 3).Reason, StringComparison.Ordinal));
+                        && model.Evidence.ChecklistDetail.Contains(session.Proposal!.Proteins.Single(protein => protein.ProteinIndex == 3).Reason, StringComparison.Ordinal)
+                        && model.Evidence.ChecklistDetail.Contains("1 matching contaminant is excluded. A contaminant never joins a family.", StringComparison.Ordinal));
                     ScreenHarness.Save(window, Path.Combine(output, "checklist-" + theme + "-" + size.Item1 + ".png"), size.Item1, size.Item2);
                 }
                 finally { window.Close(); PumpDispatcher(); }

@@ -377,6 +377,7 @@
                                                 <DataGridTemplateColumn.CellTemplate><DataTemplate><StackPanel>
                                                     <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}"/>
                                                     <TextBlock Text="{Binding Key}" Foreground="{DynamicResource MutedBrush}" FontSize="10"/>
+                                                    <TextBlock Text="{Binding ContaminantCount}" Foreground="{DynamicResource MutedBrush}" FontSize="10" ToolTip="{Binding ContaminantReason}"/>
                                                 </StackPanel></DataTemplate></DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
                                             <DataGridTextColumn Header="Matches" Binding="{Binding Matches, StringFormat=N0}" Width="65"/>
