@@ -103,6 +103,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--list-test-commands` | Deterministic command table; executes no test or scientific handler |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
+| `--test-evidence-unlock-identity [output]` | Z12p5l2 Unlock evidence families: unchanged numbers and members, one Undo for locks and identities, stored/legacy identities, Save/reopen, recipe replay and publication eligibility guards |
 | `--source-caption-check <fresh-output>` | Compiled source picker: all five frozen filename/Union facts, selected-source screenshots and native whole-control checks in both themes |
 | `--shared-peptide-effect <copied-project> <copied-T-R> <copied-sepr2> <copied-RAW-folder> <new-output> <cache> <dataset-label> <date> [--prepare-only]` | One-run native Compute full XIC and all three shared-peptide policies; exact database/curation check, scoped CSV/JSON outputs and no de novo input |
 | `--test-evidence-delivery` | Native default review, save, exports, exact app-session replay and app Open fixture |

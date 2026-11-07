@@ -189,6 +189,7 @@ internal static partial class Program
             Check("Z16a5 proposal identifiers and text are culture invariant", one == JsonSerializer.Serialize(PanelSubclassImport.Propose(tables, keys, vocabulary, expected)));
         }
         finally { CultureInfo.CurrentCulture = culture; }
+        PanelSubclassHeaderPolarityTests(output);
         PanelSubclassWorkbookRoute(output, vocabulary);
         File.WriteAllText(Path.Combine(output, "proposals.json"), JsonSerializer.Serialize(proposed, new JsonSerializerOptions { WriteIndented = true }));
     }
