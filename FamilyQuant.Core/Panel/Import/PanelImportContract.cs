@@ -119,6 +119,11 @@ public sealed class PanelImportProposal
     /// <summary>Headers whose cells carry two or more different fill colours, offered as a category; never chosen automatically.</summary>
     public List<string> ColorColumns { get; set; } = new();
     public bool IsTemplate { get; set; }
+    /// <summary>Z12p5b: a column that may say what to do with each family, named so the wizard can ask; never mapped.
+    /// Empty when no column is singled out.</summary>
+    public string DecisionHint { get; set; } = string.Empty;
+    /// <summary>A plain sentence for the hint, with the label count and examples; empty without a hint.</summary>
+    public string DecisionHintReason { get; set; } = string.Empty;
 }
 
 /// <summary>The result of checking a table against the current choices.</summary>

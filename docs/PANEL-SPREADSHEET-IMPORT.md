@@ -165,3 +165,15 @@ Checks: `--test-panel-import-template` writes the template, checks its sheets, m
 instructions and drop-down, validates it with the Open XML schema validator, fills it as a user would,
 imports it with no mapping, replays it and compares its content across cultures. The file has not been
 opened in Excel itself on this machine.
+
+## The decision column noticed, Z12p5b
+
+`Propose` never maps a decision column. It names one in `PanelImportProposal.DecisionHint`, with a plain
+sentence in `DecisionHintReason`, so the wizard can ask once. A candidate is a column other than the
+abbreviation, the names and Pfam whose cells, in at least half the rows, hold a few short labels that repeat
+(at most half as many labels as filled cells, a median length of 40 characters, mostly letters). With one
+candidate it is named. With several, the one whose labels the decision proposal reads as excluding, merging
+or as the program's own decision names most often is named; when no label does, or two columns tie, none is.
+Checks: `--test-panel-import-several` (one column, two plain columns, one with excluding and merging labels, a
+column of unique values) and `--test-panel-import-example`. A read-only check on the copy of the real
+workbook named its decision column, 13 labels over 41 rows, and no other.

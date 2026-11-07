@@ -142,6 +142,30 @@ internal static partial class Program
         Check("Z12p3 a proposed part key never repeats an existing abbreviation",
             collideCheck.Rows[0].ProposedParts.Select(p => p.Key).SequenceEqual(new[] { "K-1-2", "K-2" }));
 
+        Section("Z12p5b the decision column noticed, never mapped");
+        PanelSpreadsheetTable Labelled(params string[][] columns)
+        {
+            var table = ListTable(Enumerable.Range(0, 8).Select(i => ("K" + i.ToString(System.Globalization.CultureInfo.InvariantCulture), "Family name " + i.ToString(System.Globalization.CultureInfo.InvariantCulture), "")).ToArray());
+            for (int c = 0; c < columns.Length; c++)
+            {
+                string header = "Extra " + c.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                table.Headers.Add(header); table.ColumnLetters.Add(((char)('D' + c)).ToString());
+                for (int i = 0; i < table.Rows.Count; i++) table.Rows[i].Cells[header] = columns[c][i % columns[c].Length];
+            }
+            return table;
+        }
+        var single = importer.Propose(Labelled(new[] { "Core", "Optional" }));
+        var twoPlain = importer.Propose(Labelled(new[] { "Core", "Optional" }, new[] { "High", "Low", "Trace" }));
+        var signalled = importer.Propose(Labelled(new[] { "High", "Low", "Trace" }, new[] { "Core", "Optional", "Exclude", "Merge into K1" }));
+        var unique = importer.Propose(Labelled(new[] { "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8" }));
+        Check("Z12p5b one column of a few repeated short labels is named as the possible decision column",
+            single.DecisionHint == "Extra 0" && single.DecisionHintReason == "\"Extra 0\" holds 2 short labels repeated over 8 rows, such as \"Core\" and \"Optional\". "
+                + "Is it the column that says what to do with each family? Without one, every family is quantified.", single.DecisionHintReason);
+        Check("Z12p5b among several such columns, the one with excluding or merging labels is named; with none, no column is",
+            signalled.DecisionHint == "Extra 1" && twoPlain.DecisionHint.Length == 0 && twoPlain.DecisionHintReason.Length == 0 && unique.DecisionHint.Length == 0);
+        Check("Z12p5b the hint never maps a decision column",
+            new[] { single, twoPlain, signalled, unique }.All(p => !p.Choices.ColumnHeaders.ContainsKey(PanelImportFields.Decision)));
+
         Section("Z12p3a a several-families cell read gracefully");
         var labelled = ListTable(("RARE", "Outras raras: hialuronidase (HYA); quitinase (QTN); glutaminil ciclase (GC); AMP (peptídeo antimicrobiano, curto)", ""),
             ("FET", "Fetuína, inibidor de protease", ""), ("TRI", "A, B, C", ""), ("SEMI", "A; B", ""), ("LINE", "A\nB", ""), ("QTN", "Quitinase própria", ""));

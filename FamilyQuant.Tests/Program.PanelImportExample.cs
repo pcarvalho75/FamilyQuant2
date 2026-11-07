@@ -64,6 +64,11 @@ internal static partial class Program
             && roles.GetValueOrDefault(PanelImportFields.OtherName) == "Nome (inglês)" && roles.GetValueOrDefault(PanelImportFields.Pfam) == "Domínio(s) Pfam"
             && proposal.ColorColumns.Contains("Sigla") && !roles.ContainsKey(PanelImportFields.Decision),
             string.Join("|", roles.Select(r => r.Key + "=" + r.Value)) + " colours: " + string.Join(",", proposal.ColorColumns));
+        Check("example: the decision column is named as a hint among the other short-label columns, and never mapped",
+            proposal.DecisionHint == "Decisão FamilyQuant" && !roles.ContainsKey(PanelImportFields.Decision)
+            && proposal.DecisionHintReason.StartsWith("\"Decisão FamilyQuant\" holds ", StringComparison.Ordinal)
+            && proposal.DecisionHintReason.EndsWith("Is it the column that says what to do with each family? Without one, every family is quantified.", StringComparison.Ordinal),
+            proposal.DecisionHint + " | " + proposal.DecisionHintReason);
         var choices = proposal.Choices;
         choices.ColumnHeaders[PanelImportFields.Decision] = "Decisão FamilyQuant";
         var decisions = importer.ProposeDecisions(table, choices);
