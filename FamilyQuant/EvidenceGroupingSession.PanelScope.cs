@@ -35,6 +35,9 @@ public sealed partial class EvidenceGroupingSession
         try { ReferencePanelFetcher.RequireScope(file.EvidenceSource?.ReferencePanel, WordCluster.ParseKeywords(scope)); return true; }
         catch (InvalidDataException) { return false; }
     }
+    public string FullPanelRequirement() => file.EvidenceSource?.ReferencePanel?.Coverage != null
+        && ReferencePanelUseRequirements.HasSubclasses(selectedReviewPanel ?? reviewPanel ?? file.FamilyPanel)
+        ? ReferencePanelUseRequirements.SubclassApply : "";
     public string PanelCoverageStatus(string scope)
     {
         if (file.EvidenceSource?.ReferencePanel == null) return "No stored reference panel.";
