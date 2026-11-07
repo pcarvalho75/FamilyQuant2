@@ -1,3 +1,4 @@
+using FamilyQuant.Evidence;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
+using System.Text.Json;
 
 namespace FamilyQuant.Tests;
 
@@ -31,6 +33,7 @@ internal static partial class Program
             ["CurationQuantitationViewModel.PatternLab.cs"] = "Z12p5f2b FQPolish",
             ["CurationViewModel.Evidence.cs"] = "Z12p5f2c FQFix",
             ["MainWindow.ReportExport.cs"] = "Z12p5f2d FQFix",
+            ["PanelEvidenceMatching.cs"] = "Z12p5f2e FQFetch",
             ["FamilyQuantFile.cs"] = "Z12p5f3 FQTips (save and open)",
             ["ShellProjectOperations.cs"] = "Z12p5f3 FQTips (shell open)"
         };
@@ -74,21 +77,24 @@ internal static partial class Program
             Check(owner.Value + " symbols cover " + owner.Key, seen.Contains(owner.Key));
         foreach (string violation in violations.OrderBy(value => value, StringComparer.Ordinal))
             Console.WriteLine("RED " + violation);
-        Check("all eight curation paths and the shell open route avoid whole-document text/byte materialization", violations.Count == 0,
+        Check("all eight curation paths, shell open and evidence matching avoid whole-document text/byte materialization", violations.Count == 0,
             string.Join(Environment.NewLine, violations));
         // A compiled planted call proves that instruction decoding actually detects the original defect.
         var control = typeof(Program).GetMethod(nameof(CurationCallerNegativeControl), BindingFlags.Static | BindingFlags.NonPublic)!;
-        Check("compiled caller guard detects a planted ToJsonText call without executing it",
-            CurationCallerInstructions(control).Any(call => CurationWholeTextCall(call.Called)));
+        Check("compiled caller guard detects planted curation and evidence string calls without executing them",
+            CurationCallerInstructions(control).Count(call => CurationWholeTextCall(call.Called)) == 2);
     }
 
-    private static string CurationCallerNegativeControl(FamilyClusterFile file) => file.ToJsonText();
+    private static string[] CurationCallerNegativeControl(FamilyClusterFile file) => [file.ToJsonText(), JsonSerializer.Serialize(file.EvidenceSource)];
 
     private static bool CurationWholeTextCall(MethodBase method) =>
         method.DeclaringType == typeof(FamilyClusterFile) && method.Name == nameof(FamilyClusterFile.ToJsonText)
         || method.DeclaringType == typeof(File) && method.Name is nameof(File.ReadAllText) or nameof(File.ReadAllBytes)
         || (method.DeclaringType == typeof(StreamReader) || method.DeclaringType == typeof(TextReader))
-            && method.Name == nameof(StreamReader.ReadToEnd);
+            && method.Name == nameof(StreamReader.ReadToEnd)
+        || method is MethodInfo serializer && serializer.DeclaringType == typeof(JsonSerializer)
+            && serializer.Name == nameof(JsonSerializer.Serialize) && serializer.ReturnType == typeof(string)
+            && serializer.GetGenericArguments().Contains(typeof(EvidenceProvenance));
 
     private static IEnumerable<(int Offset, MethodBase Called)> CurationCallerInstructions(MethodBase method)
     {
