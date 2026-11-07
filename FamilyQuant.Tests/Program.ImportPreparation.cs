@@ -44,6 +44,7 @@ internal static partial class Program
         public string ChangeNotice => inner.ChangeNotice;
         public IReadOnlyList<ImportMatchFamily> Suggest(FamilyClusterFile project, FamilyPanel panel)
         { Calls++; return inner.Suggest(project, panel); }
+        public string ConfirmationWarning(IReadOnlyList<ImportEvidenceMatch> choices) => inner.ConfirmationWarning(choices);
         public FamilyPanel Accept(FamilyPanel panel, IReadOnlyList<ImportMatchFamily> choices) => inner.Accept(panel, choices);
     }
 
@@ -147,5 +148,6 @@ internal static partial class Program
         FinishReviewWork(async () => { await retry.NextAsync(); });
         Check("retry after cancellation and failure performs a fresh copy and publishes suggestions", attempts == 3 && retry.Page == 4
             && retry.MatchFamilies.Count > 0 && !retry.Imported);
+        ImportPreparationBroadMatchTests(output);
     }
 }
