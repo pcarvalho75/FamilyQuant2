@@ -175,19 +175,52 @@ public sealed partial class FamilyListImportViewModel
                 .Concat(SpecialRows.Where(r => r.Action == FamilyPanelRowAction.Skip && !r.Blocking).Select(r => r.RowNumber)).Distinct().Count();
             int renamed = (choices.RowChoices ?? new()).Count(c => c.Action == FamilyPanelRowAction.Import && c.Key.Length > 0
                 && c.Key != Raw(table?.Rows.FirstOrDefault(r => r.RowNumber == c.RowNumber), PanelImportFields.FamilyKey).Trim());
-            return Families(panel.Families.Count) + "; " + Rows(split, "split") + "; "
+            return FamilyBreakdown(panel) + "; " + Rows(split, "split") + "; "
                 + Rows(skipped, "skipped") + "; " + renamed.ToString("N0", CultureInfo.CurrentCulture) + (renamed == 1 ? " abbreviation renamed" : " abbreviations renamed")
                 + "; matching: " + Families(MatchFamilies.Count(f => f.Choice == "Confirmed")) + " confirmed, "
                 + MatchFamilies.Count(f => f.Choice == "Kept from previous panel").ToString("N0", CultureInfo.CurrentCulture) + " kept, "
                 + MatchFamilies.Count(f => f.Choice == "Skipped").ToString("N0", CultureInfo.CurrentCulture) + " skipped";
         }
     }
+    public string ImportedFamilyCount
+    {
+        get
+        {
+            var panel = committedPanel ?? check.Panel;
+            return panel == null ? "0 families imported" : FamilyBreakdown(panel) + " imported";
+        }
+    }
+
+    private static string FamilyBreakdown(FamilyPanel panel)
+    {
+        int quantify = panel.Families.Count(f => f.Decision == FamilyPanelDecision.Quantify);
+        int merged = panel.Families.Count(f => f.Decision == FamilyPanelDecision.MergeIntoAnotherFamily);
+        int others = panel.Families.Count(f => f.Decision == FamilyPanelDecision.ReportUnderOthers);
+        int excluded = panel.Families.Count(f => f.Decision == FamilyPanelDecision.NotAFamily);
+        var extras = new List<string>();
+        if (merged > 0) extras.Add(merged.ToString("N0", CultureInfo.CurrentCulture) + " merged");
+        if (others > 0) extras.Add(others.ToString("N0", CultureInfo.CurrentCulture) + " reported under others");
+        if (excluded > 0) extras.Add(excluded.ToString("N0", CultureInfo.CurrentCulture) + " not a family");
+        string text = Families(quantify) + " to quantify";
+        if (extras.Count > 0) text += " (plus " + string.Join(", ", extras) + ")";
+        return text;
+    }
+
+    private static string SummaryDecision(FamilyPanelFamily family) =>
+        family.Decision == FamilyPanelDecision.MergeIntoAnotherFamily && family.MergeTargetFamilyKey.Length > 0
+            ? "Merge into " + family.MergeTargetFamilyKey
+            : DecisionOptions.First(o => o.Value == family.Decision).Label;
+
+    private string SummaryMatches(FamilyPanelFamily family) =>
+        MatchFamilies.FirstOrDefault(m => m.Key == family.Key)?.Choice
+        ?? (family.Decision is FamilyPanelDecision.MergeIntoAnotherFamily or FamilyPanelDecision.NotAFamily ? "Not needed" : "Not reviewed");
+
     private static string Rows(int count, string action) => count.ToString("N0", CultureInfo.CurrentCulture) + (count == 1 ? " row " : " rows ") + action;
     private static string Families(int count) => count.ToString("N0", CultureInfo.CurrentCulture) + (count == 1 ? " family" : " families");
 
     public IReadOnlyList<ImportSummaryFamily> SummaryFamilies => (committedPanel ?? check.Panel)?.Families.Select(f => new ImportSummaryFamily(f.Key, f.DisplayName,
-        PanelImportFields.OtherNameText(committedPanel ?? check.Panel!, f), DecisionOptions.First(o => o.Value == f.Decision).Label,
-        MatchFamilies.FirstOrDefault(m => m.Key == f.Key)?.Choice ?? "Not reviewed", string.Join("\n", f.TextFields.Select(t => t.Name + ": " + t.Text)),
+        PanelImportFields.OtherNameText(committedPanel ?? check.Panel!, f), SummaryDecision(f),
+        SummaryMatches(f), string.Join("\n", f.TextFields.Select(t => t.Name + ": " + t.Text)),
         SourceColorCategory(committedPanel ?? check.Panel!, f))).ToArray()
         ?? Array.Empty<ImportSummaryFamily>();
 

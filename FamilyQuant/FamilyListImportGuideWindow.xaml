@@ -16,7 +16,7 @@
         </StackPanel>
         <ListBox x:Name="sectionList" Grid.Row="1" ItemsSource="{Binding Sections}" SelectedItem="{Binding Current, Mode=TwoWay}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 AutomationProperties.Name="Sections" ToolTip="Choose a part of the chapter; each page of the wizard has its own part.">
+                 AutomationProperties.Name="Sections" ToolTip="Choose a part of the chapter; includes each page of the wizard and background notes.">
             <ListBox.ItemTemplate>
                 <DataTemplate><TextBlock Text="{Binding Title}" TextWrapping="Wrap"/></DataTemplate>
             </ListBox.ItemTemplate>
@@ -43,9 +43,9 @@
             <Button x:Name="closeButton" DockPanel.Dock="Right" Content="Close" IsCancel="True" Click="Close_Click" Margin="8,0,0,0"
                     ToolTip="Closes this chapter; the import window stays as it was."/>
             <Button x:Name="nextButton" DockPanel.Dock="Right" Content="Next" Click="Next_Click" IsEnabled="{Binding CanNext}" Margin="8,0,0,0"
-                    ToolTip="Shows the next part of the chapter, in the order of the wizard pages."/>
+                    ToolTip="{Binding NextToolTip}"/>
             <Button x:Name="previousButton" DockPanel.Dock="Right" Content="Previous" Click="Previous_Click" IsEnabled="{Binding CanPrevious}"
-                    ToolTip="Shows the previous part of the chapter, in the order of the wizard pages."/>
+                    ToolTip="{Binding PreviousToolTip}"/>
         </DockPanel>
     </Grid>
 </Window>

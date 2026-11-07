@@ -47,7 +47,7 @@ public static class FamilyListImportGuide
             "Without a Decision column every family is Quantify, so Next asks once: Quantify every family for this import? No keeps you on Columns. Your answer holds for this sheet until you change the Decision column.",
             "When the sheet has coloured cells, Colour categories (optional) opens by itself. Choose the column whose colours mean something, like Sigla in the example: each colour is listed with its rows and named for you with its plain name, such as light blue. Rename a category if you like; clearing a name brings the plain name back, so the colours never hold up Next. The category is kept as text with each family and shown in the Colour column of the Summary; it never decides what happens to a family.",
         }),
-        new FamilyListImportGuideSection("decisions", "3. Reviewing decisions", "03-columns-decisions.png", "One line per decision written in the sheet, with its rows and the proposed action.", new[]
+        new FamilyListImportGuideSection("decisions", "3. Review spreadsheet decisions", "03-columns-decisions.png", "One line per decision written in the sheet, with its rows and the proposed action.", new[]
         {
             "When you choose a Decision column, the page becomes Review spreadsheet decisions: one line for each different value written in that column, the rows that use it, and the proposed action: Quantify, Report under others, Not a family, or Merge into family with the abbreviation to merge into. The line under the title says it in short: " + FamilyListImportHelp.DecisionsSummary,
             "There is no conditional action. A condition written in the sheet, like Condicional (só na fração solúvel) in the example, is proposed as Quantify; choose the action that fits now. The value written in your sheet stays with each family as its source label.",
@@ -64,11 +64,11 @@ public static class FamilyListImportGuide
             "An abbreviation used twice, like the second LEC of the example, can be kept with a new abbreviation (Keep or rename this row, proposed as LEC-2), merged into the family of the first row (Merge into family), or left out (Skip this row).",
             "Empty and decorative rows are skipped and listed with the status Skipped, so no row disappears without a trace.",
         }),
-        new FamilyListImportGuideSection("matches", "5. Evidence matches", "05-evidence-matches.png", "Suggestions for one family from the evidence stored in the project, none ticked until you tick them.", new[]
+        new FamilyListImportGuideSection("matches", "5. Evidence matches", "05-evidence-matches.png", "Suggestions for one family from the evidence stored in the project, ticked only by you.", new[]
         {
             "For each family, FamilyQuant suggests labels from the evidence already stored in this project, such as UniProt families and keywords, that share words with the family's names. Nothing is ticked for you.",
             "Counts are database entries for each suggestion, not abundance; suggestions can overlap and must not be added together.",
-            "Tick the labels that describe the family and press Use selected matches, or press Skip this family. Continue without matches skips matching for every family; you can match later. On a new import of the same list, matches confirmed before show as Kept from previous panel. The wizard never downloads evidence and never assigns proteins.",
+            "Tick the labels that describe the family and press Use selected matches, or press Skip this family. Double-click a stored evidence label to edit it, then tick it and press Use selected matches again; counts refresh for the exact edited value. Continue without matches skips matching for every family; you can match later. On a new import of the same list, matches confirmed before show as Kept from previous panel. The wizard never downloads evidence and never assigns proteins.",
             "A broad label can describe most of the database rather than one family. If a ticked label covers more than half of the database's entries, Use selected matches asks once, naming the count, before it keeps the match.",
         }),
         new FamilyListImportGuideSection("later", "Saving matches later", "", "", new[]
