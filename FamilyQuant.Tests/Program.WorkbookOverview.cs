@@ -299,6 +299,9 @@ internal static partial class Program
         FinishReviewWork(() => model.ReviewWorkbookSectionAsync("sheets"));
         Check("Workbook sheets card opens a page with the same name", card == "Workbook sheets" && model.Title == card
             && model.StepLabel.EndsWith(card, StringComparison.Ordinal), model.Title + "; " + model.StepLabel);
+        Check("Workbook sheets page explanation names the sheet roles rather than the old file and sheet step",
+            model.Explanation.Contains("role", StringComparison.OrdinalIgnoreCase)
+            && !model.Explanation.Contains("Choose a file and sheet", StringComparison.Ordinal), model.Explanation);
     }
 
     private static void WorkbookOverviewFilledNavigationTest(string work)

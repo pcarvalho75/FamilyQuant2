@@ -85,7 +85,9 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         : page == 1 && HasWorkbookMap ? "Workbook sheets" : page == 2 && ReviewingDecisions ? "Review spreadsheet decisions" : Titles[page];
     public string Explanation => reviewingWorkbook ? "Review what was found, change any section, then accept the proposal as one import."
         : reviewingSubclasses ? "Check each proposed family, subclass and domain rule before keeping your choices."
-        : page == 2 && ReviewingDecisions ? FamilyListImportHelp.DecisionsSummary : Explanations[page];
+        : page == 2 && ReviewingDecisions ? FamilyListImportHelp.DecisionsSummary
+        : page == 1 && HasWorkbookMap ? "Check each sheet's role under Use as, and take another sheet as the family list if needed."
+        : Explanations[page];
     public string StepLabel => reviewingWorkbook ? "Workbook proposal" : reviewingSubclasses ? "Subclass review"
         : "Step " + (page + 1).ToString(CultureInfo.CurrentCulture) + " of 7, " + StepName(page);
     public string ForwardLabel => reviewingWorkbook ? "Accept and import" : reviewingSubclasses ? "Keep subclass choices"
