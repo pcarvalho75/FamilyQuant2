@@ -81,10 +81,17 @@ public partial class AnalyticsControl : UserControl
         if (ready && Enum.TryParse((ComboBoxExportKind.SelectedItem as ComboBoxItem)?.Tag as string, out ResultsExportKind kind))
             ViewModel.ExportKind = kind;
     }
-    private void RefreshExportHint() => ButtonExport.ToolTip = !ViewModel.CanExport ? ViewModel.ExportUnavailableReason : ViewModel.ExportKind switch {
-        ResultsExportKind.SuggestedAdditions => ViewModel.DatabaseGap.FastaState,
-        ResultsExportKind.DatabaseGap => ViewModel.DatabaseGap.HasData ? "Write the stored composition table, every global bucket and its recorded rules." : ViewModel.DatabaseGap.EmptyMessage,
-        _ => "Save the selected result in CSV or PNG format with invariant decimals. PNGs are 1920 pixels wide in the Light palette, with complete reference data beside bounded figures." };
+    private void RefreshExportHint() => ButtonExport.ToolTip = !ViewModel.CanExport ? ViewModel.ExportKind switch {
+        ResultsExportKind.Homology => "Export is disabled because no standalone homology snapshot is available. Run Search in De novo review to enable it; no file or project value changes while disabled.",
+        ResultsExportKind.DatabaseGap => "Export is disabled because the selected tag length has no stored Database gap table. Choose a computed length in a project with stored family-world results to enable it.",
+        ResultsExportKind.SuggestedAdditions => "Export is disabled without credited world proteins and their verified matching stored sequences. Load a project with that complete evidence and choose a computed tag length to enable it.",
+        _ => "Export is disabled without a completed result and the project evidence required by this export. Open or compute those results and required studies to enable it; no file is written while disabled."
+    } : ViewModel.ExportKind switch {
+        ResultsExportKind.SuggestedAdditions => "Write exact recorded world-hit sequences to a suggested-additions FASTA without editing your database. Undo does not remove the file; review additions and search again in PatternLab yourself.",
+        ResultsExportKind.DatabaseGap => "Write the selected stored Database gap table, all global buckets and recorded rules to CSV without changing the project. Undo does not remove this file.",
+        ResultsExportKind.Figures => "Write stored-result PNG figures to the chosen folder, with standard figures at 1920 by 1080 pixels and complete data beside bounded figures. The project stays unchanged and Undo does not remove the files.",
+        ResultsExportKind.EvidencePack => "Write figures, exact CSV and JSON values and the cutoff README when all required studies are present. The project stays unchanged and Undo does not remove the files.",
+        _ => "Write the selected stored table to CSV with a decimal point for numeric values. The project stays unchanged and Undo does not remove the file." };
     private async void ExportClicked(object sender, RoutedEventArgs e)
     {
         if (!ViewModel.CanExport) return;

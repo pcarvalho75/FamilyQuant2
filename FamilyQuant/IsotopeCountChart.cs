@@ -39,8 +39,9 @@ namespace FamilyQuant
             Margin = new Thickness(0);
             ToolTip = "Each bar counts the peptides credited that many isotopes, from 1 up to the " +
                       AnalyticsBuilder.IsotopeBasis.ToString(CultureInfo.CurrentCulture) +
-                      "-isotope ceiling; an isotope is credited only where signal was found. The colours " +
-                      "split each bar by peptide mass.";
+                      "-isotope ceiling; an isotope is credited only where signal was found. " +
+                      (splitByMass ? "Mass bands split each bar by peptide mass; this read-only chart changes no project values or files."
+                          : "Bars combine all peptide masses; this read-only chart changes no project values or files.");
         }
 
 

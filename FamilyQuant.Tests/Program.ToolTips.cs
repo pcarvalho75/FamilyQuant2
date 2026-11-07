@@ -97,7 +97,7 @@ internal static partial class Program
         foreach (var table in tables)
         {
             string window = table.Window + " (" + table.Owner + ")";
-            if (table.Note.StartsWith("OPEN FAILED", StringComparison.Ordinal) || table.Note.StartsWith("NOT OPENED", StringComparison.Ordinal))
+            if (table.Note.StartsWith("OPEN FAILED", StringComparison.Ordinal) || table.Note.Contains("NOT OPENED", StringComparison.Ordinal))
             { Check(window + " opens for the tooltip check", false, table.Note); continue; }
             var missing = table.Rows.Where(r => r.Status != "OK" && !CensusInformationalKinds.Contains(r.Kind)).ToArray();
             Check(window + ": every control has a tooltip that says more than its label", missing.Length == 0,
@@ -106,6 +106,12 @@ internal static partial class Program
             Check(window + ": tooltips have no dash, colour word or D21 word", wording.Length == 0,
                 string.Join("; ", wording.Select(r => r.Wording + " in " + r.Kind + " \"" + r.Label + "\"")));
         }
+        var cellRows = ToolTipCensusCellProbe();
+        Check("Z12q6 the census walks into table cells: one row per column template, NONE for a bare check box, OK with a tooltip",
+            cellRows.Count(r => r.Kind == "check box") == 2
+            && cellRows.SingleOrDefault(r => r.Kind == "check box" && r.Host.EndsWith("column \"Bare\"", StringComparison.Ordinal))?.Status == "NONE"
+            && cellRows.SingleOrDefault(r => r.Kind == "check box" && r.Host.EndsWith("column \"Explained\"", StringComparison.Ordinal))?.Status == "OK",
+            string.Join("; ", cellRows.Select(r => r.Kind + "|" + r.Host + "|" + r.Status)));
         Check("Z12q6 the check would notice a bare control and a tip that repeats its label",
             ToolTipCensusProbe(new Button { Content = "Save" }) == "NONE" && ToolTipCensusProbe(new Button { Content = "Save", ToolTip = "Save." }) == "REPEATS-LABEL"
             && ToolTipCensusProbe(new Button { Content = "Save", ToolTip = "Writes the project to its .fqproj file. Undo does not apply to files." }) == "OK");

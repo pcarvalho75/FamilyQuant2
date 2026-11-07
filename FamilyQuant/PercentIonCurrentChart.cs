@@ -34,9 +34,9 @@ namespace FamilyQuant
             this.binWidth = binWidth > 0 ? binWidth : 500;
             MinHeight = 240;
             Margin = new Thickness(0);
-            ToolTip = "Peptide mass is binned along the bottom. Blue bars are each mass band's share of the " +
-                      "credited peptide signal and add up to 100%; green bars, when the run's total ion " +
-                      "current is known, are its share of all ion current.";
+            ToolTip = "Peptide mass is binned along the bottom; filled bars show each band's share of credited peptide signal, summing to 100%, " +
+                      "while outlined bars show its share of total ion current when TIC is known. " +
+                      "This read-only chart changes no project values or files.";
         }
 
 
