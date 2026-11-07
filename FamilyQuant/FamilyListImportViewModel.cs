@@ -24,7 +24,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         "Resolve each row marked Needs a choice before continuing.",
         "Confirm or skip the suggestions for each family; nothing is matched for you.",
         "Check what will be created; nothing has changed yet.",
-        "Open the family checklist to review which proteins belong in each family." };
+        FamilyListImportHelp.DoneNext };
     private readonly IPanelSheetPreviewReader reader;
     private readonly IFamilyPanelSpreadsheetImporter importer;
     private readonly FamilyListImportTransaction transaction;
@@ -32,7 +32,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     private CancellationTokenSource? operation;
     private Task activeRead = Task.CompletedTask;
     private int readGeneration, page, headerRow = 1;
-    private bool busy, updating, keepOtherSheets, reviewingDecisions;
+    private bool busy, updating, keepOtherSheets, reviewingDecisions, quantifyAllConfirmed;
     private string path = "", sheet = "", panelName = "", status = "Nothing has changed yet.";
     private string headerRowText = "1";
     private FamilyPanelImport choices = new() { ImportVersion = PanelImportRules.Current };
@@ -55,6 +55,10 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public FamilyPanel? DraftPanel => check.Panel;
     public FamilyPanel? ImportedPanel => committedPanel;
     public bool Imported => transaction.Imported;
+    public string DecisionHint { get; private set; } = "";
+    public string DecisionHintReason { get; private set; } = "";
+    public bool HasDecisionHint => DecisionHint.Length > 0 && Columns.FirstOrDefault(c => c.Role == PanelImportFields.Decision)?.HasChoice != true;
+    public string DecisionHintQuestion => "Could " + DecisionHint + " hold the family actions?";
     public bool CanUndo => transaction.CanUndo;
     public string PreviousPanel { get; }
     public string WorkbookPath => path;
@@ -77,6 +81,19 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public string ForwardLabel => page == 5 && !Imported ? "Import" : page == 6 ? "Family checklist" : "Next";
     public string CloseLabel => Imported ? "Close" : "Cancel";
     public bool CanBack => !IsBusy && page > 0;
+    public string BackToolTip => !CanBack ? IsBusy ? "Wait for the spreadsheet read to finish before returning; Cancel stops the read without importing."
+        : "This is the first step; choose Next to select a spreadsheet, or Cancel to leave without changes."
+        : "Returns to the previous step and keeps your choices; going Back does not change the project or repeat an import.";
+    public string CloseToolTip => IsBusy ? "Cancels the active read and closes after it stops; no unfinished import is applied."
+        : Imported ? "Closes the wizard and keeps the imported list; File > Save stores it with the project, and Undo is still available in the main window."
+        : "Closes the wizard and discards its draft choices; the project and workbook are unchanged.";
+    public string ForwardToolTip => !CanNext ? DisabledReason + " Nothing is imported while this action is unavailable."
+        : page == 5 && !Imported ? "Rechecks the workbook and project, then imports the reviewed list as one project edit; Undo restores the previous list, and File > Save stores the change."
+        : page == 6 ? "Closes the wizard and opens Family checklist for separate protein review; no grouping or quantitation runs automatically."
+        : Imported ? "Shows the imported list's Done page without importing again or adding an Undo step."
+        : page == 2 && !quantifyAllConfirmed && Columns.FirstOrDefault(c => c.Role == PanelImportFields.Decision)?.HasChoice != true
+            ? "Asks you to confirm Quantify for every family because no Decision column is chosen; No keeps you on Columns. Acceptance is remembered for this source until its Decision mapping changes, with no project edit until Import."
+        : "Continues to the next review step with your choices kept; the project and workbook stay unchanged until Import.";
     public bool CanNext => !IsBusy && (Imported || page switch
     {
         0 => true,
@@ -129,8 +146,9 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
             updating = true;
             path = workbookPath; sheet = preview.SheetName; Preview = preview; table = loaded; check = new(); HeaderRow = selectedRow;
             HeaderRowText = selectedRow.ToString(CultureInfo.CurrentCulture);
-            choices = loaded == null ? new FamilyPanelImport { ImportVersion = PanelImportRules.Current }
-                : importer.Propose(loaded).Choices;
+            var proposal = loaded == null ? new PanelImportProposal { Choices = new FamilyPanelImport { ImportVersion = PanelImportRules.Current } }
+                : importer.Propose(loaded);
+            choices = proposal.Choices; DecisionHint = proposal.DecisionHint; DecisionHintReason = proposal.DecisionHintReason; quantifyAllConfirmed = false;
             choices.RowChoices = new(); choices.ColorLabels = null;
             PanelName = Path.GetFileNameWithoutExtension(workbookPath);
             Columns.Clear(); Decisions.Clear(); SourceColorChoices.Clear(); MatchFamilies.Clear(); matchesFingerprint = ""; ReviewingDecisions = false;
@@ -158,9 +176,15 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public void Revisit(int target)
     { if (!IsBusy && target >= 0 && target < page && (!Imported || target == 5)) GoTo(target); }
 
-    public async Task<bool> NextAsync()
+    public async Task<bool> NextAsync(Func<string, bool>? confirmQuantifyAll = null)
     {
         if (!CanNext) { Status = DisabledReason; return false; }
+        if (page == 2 && !Imported && !quantifyAllConfirmed && Columns.FirstOrDefault(c => c.Role == PanelImportFields.Decision)?.HasChoice != true)
+        {
+            if (confirmQuantifyAll?.Invoke("No Decision column is chosen. Quantify every family for this import?") != true)
+            { Status = "Choose a Decision column, or confirm Quantify for every family to continue."; return false; }
+            quantifyAllConfirmed = true;
+        }
         if (Imported) { if (page < 6) GoTo(page + 1); return page == 6; }
         if (page == 5) { var commit = CommitAsync(); activeRead = commit; return await commit; }
         if (page == 3)
@@ -203,7 +227,9 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         Changed(nameof(ImportedPanel)); Changed(nameof(CanUseRowChoice)); Changed(nameof(AvailableRowOptions)); Changed(nameof(CanConfirmMatches));
         Changed(nameof(SkipFamilyLabel)); Changed(nameof(SkipAllLabel));
         Changed(nameof(Steps)); Changed(nameof(CanEdit));
+        Changed(nameof(BackToolTip)); Changed(nameof(CloseToolTip)); Changed(nameof(ForwardToolTip));
         Changed(nameof(MainColumns)); Changed(nameof(ColorColumn));
+        Changed(nameof(DecisionHint)); Changed(nameof(DecisionHintReason)); Changed(nameof(HasDecisionHint)); Changed(nameof(DecisionHintQuestion));
     }
 
     public void ReportStatus(string message) => Status = message;
