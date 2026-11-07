@@ -105,6 +105,11 @@ internal static partial class Program
                         && model.SpecialRows.Any(r => r.Duplicate) && model.SpecialRows.Any(r => r.SeveralNames && r.Parts.Count == 4) && !model.CanNext);
                     model.SelectedSpecialRow = model.SpecialRows.Single(r => r.Duplicate);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "04-special-rows-duplicate");
+                    var specialGrid = (DataGrid)window.FindName("SpecialRowsGrid");
+                    Check(label + " selected review message uses the row's readable text ink",
+                        WizardPolishMessageInk(specialGrid, model.SelectedSpecialRow, out string selectedInk), selectedInk);
+                    Check(label + " the complete duplicate explanation is laid out without clipped lines",
+                        WizardPolishMessageFits(specialGrid, model.SelectedSpecialRow, out string messageHeight), messageHeight);
                     Check(label + " duplicate rename starts as an enabled proposal without accepting the row",
                         model.SelectedSpecialRow.Action == FamilyPanelRowAction.Import && model.CanUseRowChoice
                         && model.SelectedSpecialRow.Blocking && !model.SelectedSpecialRow.Chosen && !model.CanNext
@@ -122,11 +127,23 @@ internal static partial class Program
                         && model.SpecialRows.Any(r => r.Chosen && r.Key == newKey) && !model.CanNext);
                     model.SelectedSpecialRow = model.SpecialRows.Single(r => r.SeveralNames && r.Parts.Count == 4 && r.Blocking);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "04-special-rows");
+                    Check(label + " the complete several-name explanation is laid out without clipped lines",
+                        WizardPolishMessageFits(specialGrid, model.SelectedSpecialRow, out string severalHeight), severalHeight);
                     Check(label + " several-name row starts with its proposed split but still needs explicit acceptance",
                         model.SelectedSpecialRow.Action == FamilyPanelRowAction.Split && model.CanUseRowChoice
                         && model.SelectedSpecialRow.Blocking && !model.SelectedSpecialRow.Chosen && !model.CanNext
                         && Equals(((ComboBox)window.FindName("RowActionChoice")).SelectedValue, FamilyPanelRowAction.Split)
                         && file.ToJsonText() == before, WizardPolishProposalState(model, window));
+                    var nameEditor = WizardPolishRowEditor(window, "Family name for this source row");
+                    var keyEditor = WizardPolishRowEditor(window, "Abbreviation for this source row");
+                    Check(label + " split action hides the unused single-family fields", !nameEditor.IsVisible && !keyEditor.IsVisible);
+                    rowAction.SelectedValue = FamilyPanelRowAction.Skip; window.UpdateLayout(); PumpDispatcher();
+                    Check(label + " skip action hides the unused single-family fields", !nameEditor.IsVisible && !keyEditor.IsVisible);
+                    rowAction.SelectedValue = FamilyPanelRowAction.Import; window.UpdateLayout(); PumpDispatcher();
+                    Check(label + " a kept long family name is readable without horizontal clipping", nameEditor.IsVisible
+                        && nameEditor.ViewportWidth > 0 && nameEditor.ExtentWidth <= nameEditor.ViewportWidth + 2,
+                        $"Extent={nameEditor.ExtentWidth}; viewport={nameEditor.ViewportWidth}.");
+                    rowAction.SelectedValue = FamilyPanelRowAction.Split; window.UpdateLayout(); PumpDispatcher();
                     var partKeys = model.SelectedSpecialRow.Parts.Select(p => p.Key).ToArray();
                     model.SelectedSpecialRow.Action = FamilyPanelRowAction.Split; model.UseRowChoice();
                     while (model.SpecialRows.FirstOrDefault(r => r.SeveralNames && r.Blocking) is { } ambiguous)
