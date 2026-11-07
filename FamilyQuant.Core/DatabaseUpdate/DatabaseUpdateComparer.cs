@@ -13,6 +13,10 @@ namespace FamilyQuant.DatabaseUpdate
     public sealed class DatabaseUpdateComparison
     {
         public string ProjectFingerprint { get; init; } = string.Empty;
+        /// <summary>The new file this comparison read (<see cref="DatabaseUpdateSource.Fingerprint"/>).</summary>
+        public string SourceFingerprint { get; init; } = string.Empty;
+        /// <summary>The project, the file and every decision of this comparison (<see cref="DatabaseUpdateComparer.Fingerprint"/>).</summary>
+        public string ComparisonFingerprint { get; init; } = string.Empty;
         public DatabaseSourceSummary Previous { get; init; } = new();
         public DatabaseUpdateSource Source { get; init; } = null!;
         public IReadOnlyList<DatabaseUpdateMatch> Matches { get; init; } = Array.Empty<DatabaseUpdateMatch>();
@@ -190,13 +194,46 @@ namespace FamilyQuant.DatabaseUpdate
                     + "It looks like a different database; Build families may be the better choice.");
             if (source.EmptyRecords > 0)
                 warnings.Add(Count(source.EmptyRecords) + " records of the new file hold no residues and were left out.");
-            return new DatabaseUpdateComparison
+            var comparison = new DatabaseUpdateComparison
             {
-                ProjectFingerprint = ProjectFingerprint(project),
+                ProjectFingerprint = ProjectFingerprint(project), SourceFingerprint = source.Fingerprint,
                 Previous = new DatabaseSourceSummary { Sha256 = project.SourceSha256, SequenceCount = project.SourceSequenceCount },
                 Source = source, Matches = matches, Removed = removed.ToArray(), Added = added.ToArray(), Ambiguities = ambiguities,
                 Picks = chosen.Values.OrderBy(p => p.Case).ToArray(), Rows = allRows, Counts = counts, DecoyCounts = decoyCounts, Warnings = warnings,
             };
+            return new DatabaseUpdateComparison
+            {
+                ProjectFingerprint = comparison.ProjectFingerprint, SourceFingerprint = comparison.SourceFingerprint,
+                ComparisonFingerprint = Fingerprint(comparison), Previous = comparison.Previous, Source = comparison.Source,
+                Matches = comparison.Matches, Removed = comparison.Removed, Added = comparison.Added, Ambiguities = comparison.Ambiguities,
+                Picks = comparison.Picks, Rows = comparison.Rows, Counts = comparison.Counts, DecoyCounts = comparison.DecoyCounts,
+                Warnings = comparison.Warnings,
+            };
+        }
+
+        /// <summary>The hash of what a comparison decided: its project, its file (recomputed from the source it holds)
+        /// and every match, removal, addition and pick. A placement and a preview are bound to it.</summary>
+        public static string Fingerprint(DatabaseUpdateComparison comparison)
+        {
+            ArgumentNullException.ThrowIfNull(comparison);
+            using var hash = new LengthPrefixedSha256();
+            hash.Append("Database update comparison v1");
+            hash.Append(comparison.ProjectFingerprint);
+            hash.Append(comparison.Source?.Fingerprint ?? string.Empty);
+            hash.Append(comparison.SourceFingerprint);
+            hash.AppendJson(comparison.Matches);
+            hash.AppendJson(comparison.Removed);
+            hash.AppendJson(comparison.Added);
+            hash.AppendJson(comparison.Picks);
+            return hash.Finish();
+        }
+
+        /// <summary>Refuses a comparison whose recorded fingerprints no longer describe its own content.</summary>
+        internal static void RequireConsistent(DatabaseUpdateComparison comparison)
+        {
+            if (comparison.Source == null || comparison.SourceFingerprint != comparison.Source.Fingerprint
+                || comparison.ComparisonFingerprint != Fingerprint(comparison))
+                throw new ArgumentException("The comparison does not match the new database it names. Compare again.", nameof(comparison));
         }
 
         /// <summary>The project state a comparison was made on: rows, families, annotations, locks and source.

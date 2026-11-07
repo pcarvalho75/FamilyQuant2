@@ -1,6 +1,7 @@
 using FamilyQuant.DatabaseUpdate;
 using FamilyQuant.Evidence;
 using FamilyQuant.Operations;
+using FamilyQuant.Panels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,6 +56,90 @@ internal static partial class Program
         return new PlacementFixture(project, DatabaseUpdateSource.FromEntries("new.fasta", "NEWSHA", entries),
             project.MyExtendedFastaItems.Select((r, i) => (r.SequenceIdentifier, i)).ToDictionary(t => t.SequenceIdentifier, t => t.i, StringComparer.Ordinal),
             entries.Select((r, i) => (r.Identifier, i)).ToDictionary(t => t.Identifier, t => t.i, StringComparer.Ordinal));
+    }
+
+    /// <summary>FQKimi on Z14c3c: a comparison and a placement made from different new files must never meet;
+    /// panel assignments and a confirmed task go out of date; the frozen 1.5 reader opens the updated file.</summary>
+    private static void DatabaseUpdateBindingTests()
+    {
+        Section("Database update: one new file per update, and what goes out of date (Z14c3c fix)");
+        var basis = DatabaseUpdateApplyFixture();
+        FamilyClusterFile project = basis.Project;
+        // The offline taxonomy fixture keeps taxa 1, 10 to 13 for its lineage, so the invented taxa move to 21 and up.
+        static string Taxa(string description) => System.Text.RegularExpressions.Regex.Replace(description, @"OX=(\d+)",
+            m => "OX=" + (20 + int.Parse(m.Groups[1].Value, System.Globalization.CultureInfo.InvariantCulture)).ToString(System.Globalization.CultureInfo.InvariantCulture));
+        foreach (FastaItemExtended row in project.MyExtendedFastaItems) row.Description = Taxa(row.Description);
+        var entries = basis.Source.Records.Select(e => e with { Description = Taxa(e.Description) }).ToList();
+        var fixture = basis with { Source = DatabaseUpdateSource.FromEntries("new.fasta", "NEWSHA", entries) };
+        // A second file with the same records, except that one added record now resembles family 1.
+        var otherEntries = fixture.Source.Records.ToList();
+        int pi = otherEntries.FindIndex(e => e.Identifier == "tr|Q40005|Q40005_SYN");
+        otherEntries[pi] = new DatabaseUpdateEntry(otherEntries[pi].Identifier, otherEntries[pi].Description,
+            UpdateMutate(project.MyExtendedFastaItems[0].Sequence, 990, 0.05));
+        var otherSource = DatabaseUpdateSource.FromEntries("other.fasta", "OTHERSHA", otherEntries);
+        var comparison = DatabaseUpdateComparer.Compare(project, fixture.Source);
+        var otherComparison = DatabaseUpdateComparer.Compare(project, otherSource);
+        var otherPlacement = DatabaseUpdatePlacer.Place(project, otherComparison);
+        Check("DU6: the two files give the same added positions, so only a binding can tell them apart",
+            comparison.Added.SequenceEqual(otherComparison.Added));
+        Check("DU6: a placement made from another new file is refused by Preview",
+            Throws<ArgumentException>(() => DatabaseUpdatePlanner.Preview(project, comparison, otherPlacement)));
+        var mixed = new DatabaseUpdatePreview
+        {
+            ProjectFingerprint = comparison.ProjectFingerprint, Comparison = comparison, Placement = otherPlacement,
+            Rows = otherPlacement.Rows, Counts = otherPlacement.Counts, DecoyCounts = otherPlacement.DecoyCounts,
+        };
+        string untouched = project.ToJsonText();
+        Check("DU6: a preview assembled from another file's placement is refused by Apply and changes nothing",
+            Throws<ArgumentException>(() => DatabaseUpdateApply.Apply(project, mixed, Array.Empty<int>(), "test")) && project.ToJsonText() == untouched);
+
+        // Panel assignments current before the update, out of date after it.
+        project.FamilyPanel = new Panels.FamilyPanel { Name = "Synthetic panel", Families = new() { new Panels.FamilyPanelFamily { Key = "alpha", DisplayName = "Alpha" } } };
+        project.PanelProteinAssignments = project.MyExtendedFastaItems.Select((p, i) => new Panels.PanelProteinAssignment
+            { ProteinIndex = i, Identifier = p.SequenceIdentifier, FamilyUserId = p.UserID }).ToList();
+        MakePanelAssignmentsCurrent(project, new EvidenceClassificationOptions { ScopeTerms = new[] { "Leading scope" } });
+        bool panelCurrentBefore = PanelAssignmentEvidenceStore.Current(project) != null;
+        // A confirmed task from discovery (offline taxonomy fixture) binds the protein set.
+        using var handler = new TaskTaxonomyHandler();
+        EvidenceTaskProposal task = EvidenceTaskDiscovery.DiscoverAsync(project, handler).GetAwaiter().GetResult();
+        bool taskConfirmedBefore = !Throws<InvalidOperationException>(() => EvidenceTaskDiscovery.Confirm(project, task, new[] { "Leading scope" }));
+        var preview = UpdatePreview(new PlacementFixture(project, fixture.Source, fixture.Old, fixture.New));
+        DatabaseUpdateApply.Apply(project, preview, preview.NameChanges.Where(c => c.KeepByDefault).Select(c => c.FamilyUserId).ToArray(), "test");
+        Check("DU5: panel family assignments read as out of date after the update",
+            panelCurrentBefore && PanelAssignmentEvidenceStore.Current(project) == null && !SubclassAssignment.IsCurrent(project)
+            && project.PanelProteinAssignments != null && project.FamilyPanel != null);
+        Check("DU5: a scope confirmed before the update is refused after it",
+            taskConfirmedBefore && Throws<InvalidOperationException>(() => EvidenceTaskDiscovery.Confirm(project, task, new[] { "Leading scope" })));
+
+        // The frozen 1.5 reader opens the updated file and reads the same families (built separately; SKIP when absent).
+        string directory = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests", "database-update-frozen");
+        if (Directory.Exists(directory)) Directory.Delete(directory, recursive: true);
+        Directory.CreateDirectory(directory);
+        string fcf = Path.Combine(directory, "updated.fcf");
+        project.Save(fcf);
+        string? root = FindLedgerRoot();
+        string host = root == null ? string.Empty : Path.Combine(root, "FamilyQuant.Tests/ReferenceGoldenHost/bin/Release/net10.0-windows7.0/ReferenceGoldenHost.exe");
+        if (host.Length == 0 || !File.Exists(host))
+        {
+            skipped++;
+            Console.WriteLine("  SKIP  DU7: the frozen 1.5 reader opens the updated file: build FamilyQuant.Tests/ReferenceGoldenHost first");
+            return;
+        }
+        string current = Path.Combine(directory, "current.json"), frozen = Path.Combine(directory, "frozen.json");
+        FcfCompatibilitySnapshot.Run(new[] { FcfCompatibilitySnapshot.Argument, fcf, current });
+        var start = new System.Diagnostics.ProcessStartInfo(host)
+            { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true };
+        start.ArgumentList.Add(FcfCompatibilitySnapshot.Argument); start.ArgumentList.Add(fcf); start.ArgumentList.Add(frozen);
+        string log;
+        int exit;
+        using (var process = System.Diagnostics.Process.Start(start)!)
+        {
+            log = process.StandardOutput.ReadToEnd() + process.StandardError.ReadToEnd();
+            process.WaitForExit();
+            exit = process.ExitCode;
+        }
+        Check("DU7: the frozen 1.5 reader opens the updated file and reads the same proteins, families, annotations and locks",
+            exit == 0 && File.Exists(frozen) && File.ReadAllText(frozen) == File.ReadAllText(current), exit + " " + log.Trim());
     }
 
     private static DatabaseUpdatePreview UpdatePreview(PlacementFixture fixture)

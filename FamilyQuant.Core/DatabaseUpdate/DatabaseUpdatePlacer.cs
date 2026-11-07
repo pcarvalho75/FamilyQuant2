@@ -23,6 +23,9 @@ namespace FamilyQuant.DatabaseUpdate
     public sealed class DatabaseUpdatePlacement
     {
         public string ProjectFingerprint { get; init; } = string.Empty;
+        /// <summary>The new file and the comparison this placement was made from; Preview and Apply refuse any other.</summary>
+        public string SourceFingerprint { get; init; } = string.Empty;
+        public string ComparisonFingerprint { get; init; } = string.Empty;
         public int ClusteringIdentity { get; init; }
         public bool Exhaustive { get; init; }
         public string Method { get; init; } = string.Empty;
@@ -63,6 +66,7 @@ namespace FamilyQuant.DatabaseUpdate
             ArgumentNullException.ThrowIfNull(comparison);
             if (DatabaseUpdateComparer.ProjectFingerprint(project) != comparison.ProjectFingerprint)
                 throw new InvalidOperationException("The project changed since it was compared with the new database. Compare again.");
+            DatabaseUpdateComparer.RequireConsistent(comparison);
             int identity = project.ClusteringIdentity;
             if (identity <= 0 || identity > 100) throw new InvalidDataException("The project records no clustering identity, so new proteins cannot be placed.");
             // Only the method string Build families writes after its second pass earns second-pass links; an empty,
@@ -193,7 +197,8 @@ namespace FamilyQuant.DatabaseUpdate
             var (rowsOut, counts, decoyCounts) = Fill(project, comparison, placed, checks);
             return new DatabaseUpdatePlacement
             {
-                ProjectFingerprint = comparison.ProjectFingerprint, ClusteringIdentity = identity, Exhaustive = exhaustive, Method = Method,
+                ProjectFingerprint = comparison.ProjectFingerprint, SourceFingerprint = comparison.SourceFingerprint,
+                ComparisonFingerprint = comparison.ComparisonFingerprint, ClusteringIdentity = identity, Exhaustive = exhaustive, Method = Method,
                 Added = added.Select(j => placed[j]).ToArray(), SequenceChecks = checks, Rows = rowsOut, Counts = counts, DecoyCounts = decoyCounts,
                 Warnings = warnings,
             };

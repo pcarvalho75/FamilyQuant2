@@ -40,8 +40,7 @@ namespace FamilyQuant.DatabaseUpdate
             string fingerprint = DatabaseUpdateComparer.ProjectFingerprint(project);
             if (fingerprint != comparison.ProjectFingerprint || fingerprint != placement.ProjectFingerprint)
                 throw new InvalidOperationException("The project changed since it was compared with the new database. Compare again.");
-            if (placement.Added.Count != comparison.Added.Count || placement.Added.Select(p => p.NewIndex).Except(comparison.Added).Any())
-                throw new ArgumentException("The placement does not belong to this comparison.", nameof(placement));
+            RequireBound(comparison, placement);
             List<PlannedRow> planned = Plan(project, comparison, placement);
             var before = Targets(project.MyExtendedFastaItems);
             var after = planned.Where(p => !SequenceLabels.IsDecoy(p.Identifier)).ToList();
@@ -75,6 +74,17 @@ namespace FamilyQuant.DatabaseUpdate
                 DecoyCounts = Copy(placement.DecoyCounts), NameChanges = changes, EmptiedFamilies = emptied,
                 Warnings = comparison.Warnings.Concat(placement.Warnings).ToArray(),
             };
+        }
+
+        /// <summary>A comparison and a placement belong together only when both were made from the same new file and the
+        /// placement from exactly this comparison; equal counts or positions are never enough.</summary>
+        internal static void RequireBound(DatabaseUpdateComparison comparison, DatabaseUpdatePlacement placement)
+        {
+            DatabaseUpdateComparer.RequireConsistent(comparison);
+            if (placement.SourceFingerprint != comparison.SourceFingerprint || placement.ComparisonFingerprint != comparison.ComparisonFingerprint
+                || placement.ProjectFingerprint != comparison.ProjectFingerprint
+                || placement.Added.Count != comparison.Added.Count || !placement.Added.Select(p => p.NewIndex).SequenceEqual(comparison.Added))
+                throw new ArgumentException("The placement was not made from this comparison of this new database. Compare and place again.", nameof(placement));
         }
 
         /// <summary>Kept rows in project order with the new identifier, header and sequence; removed rows left out;
@@ -159,6 +169,11 @@ namespace FamilyQuant.DatabaseUpdate
             operation?.Report("database-update", "Checking the previewed update");
             if (DatabaseUpdateComparer.ProjectFingerprint(project) != preview.ProjectFingerprint)
                 throw new InvalidOperationException("The project changed since the update was previewed. Compare again.");
+            if (preview.Comparison == null || preview.Placement == null)
+                throw new ArgumentException("The preview has no comparison or placement.", nameof(preview));
+            DatabaseUpdatePlanner.RequireBound(preview.Comparison, preview.Placement);
+            if (preview.Comparison.ProjectFingerprint != preview.ProjectFingerprint)
+                throw new ArgumentException("The preview does not belong to its comparison.", nameof(preview));
             var keep = keepNameFamilyUserIds.ToHashSet();
             var offered = preview.NameChanges.Select(c => c.FamilyUserId).ToHashSet();
             if (!keep.IsSubsetOf(offered)) throw new ArgumentException("Keep the old name refers to a family whose name does not change.", nameof(keepNameFamilyUserIds));
