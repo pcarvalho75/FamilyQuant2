@@ -77,7 +77,8 @@ internal static partial class Program
         void Shot(string name)
         {
             // Let opening sections (the colour categories) finish their layout before the picture.
-            PumpDispatcher(); System.Threading.Thread.Sleep(400); PumpDispatcher();
+            // Z16a8b: two settle rounds; one round once left Colour categories a few pixels short of its final place.
+            PumpDispatcher(); System.Threading.Thread.Sleep(400); PumpDispatcher(); System.Threading.Thread.Sleep(400); PumpDispatcher();
             var content = (FrameworkElement)window.Content; content.Measure(new Size(1366, 768)); content.Arrange(new Rect(0, 0, 1366, 768)); content.UpdateLayout();
             PumpDispatcher();
             Directory.CreateDirectory(output);
