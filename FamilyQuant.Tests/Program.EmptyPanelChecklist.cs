@@ -35,7 +35,7 @@ internal static partial class Program
                     window.RequestFamilyChecklist(); window.Show(); PumpDispatcher();
                     ((TabItem)window.FindName("PanelChecklistTab")).IsSelected = true; PumpDispatcher();
                     var hint = (TextBlock)window.FindName("PanelChecklistHintText");
-                    Check("Z12p5g " + theme + " empty native checklist names the next two actions in one line", hint.Text == "Press Read grouping task, then Update proposal to fill the panel checklist."
+                    Check("Z12p5g2 " + theme + " empty native checklist explains automatic reading and the explicit next action", hint.Text == "Group by evidence reads the database and scope by itself when it opens (this takes minutes); then press Update proposal to fill the family checklist."
                         && updates == 0 && file.ToJsonText() == before);
                     ScreenHarness.Save(window, Path.Combine(output, "empty-checklist-" + theme + ".png"), 1366, 768);
                     var model = (GroupingReviewViewModel)window.DataContext; model.ScopeText = "Action alpha";

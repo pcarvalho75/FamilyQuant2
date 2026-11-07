@@ -45,7 +45,7 @@ namespace FamilyQuant
         public KeywordReviewViewModel Keyword { get; }
         public EvidenceReviewViewModel? Evidence => evidence;
         public string PanelChecklistHint => evidence == null || evidence.PanelChecklist.Count == 0
-            ? "Press Read grouping task, then Update proposal to fill the panel checklist."
+            ? "Group by evidence reads the database and scope by itself when it opens (this takes minutes); then press Update proposal to fill the family checklist."
             : "Matches are database targets, not automatic assignments; match types may overlap.";
         public bool EvidenceAvailable => evidence != null || propose != null;
         public bool IsBusy { get => isBusy; private set { isBusy = value; Changed(); Changed(nameof(CanEdit)); Changed(nameof(CanDiscoverTask)); Changed(nameof(CanUpdateProposal)); Changed(nameof(CanCheckMotif)); Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); } }
