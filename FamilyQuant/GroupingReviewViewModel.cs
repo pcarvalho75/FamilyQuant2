@@ -44,6 +44,9 @@ namespace FamilyQuant
         public bool TaskScopeExpanded { get => taskScopeExpanded; set => Set(ref taskScopeExpanded, value); }
         public KeywordReviewViewModel Keyword { get; }
         public EvidenceReviewViewModel? Evidence => evidence;
+        public string PanelChecklistHint => evidence == null || evidence.PanelChecklist.Count == 0
+            ? "Press Read grouping task, then Update proposal to fill the panel checklist."
+            : "Matches are database targets, not automatic assignments; match types may overlap.";
         public bool EvidenceAvailable => evidence != null || propose != null;
         public bool IsBusy { get => isBusy; private set { isBusy = value; Changed(); Changed(nameof(CanEdit)); Changed(nameof(CanDiscoverTask)); Changed(nameof(CanUpdateProposal)); Changed(nameof(CanCheckMotif)); Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); } }
         public bool CanUpdateProposal => propose != null && !IsBusy && !string.IsNullOrWhiteSpace(ScopeText);
@@ -255,6 +258,7 @@ namespace FamilyQuant
             if (evidence != null) evidence.PropertyChanged += EvidenceChanged;
             checkedMotifPattern = ""; MotifReport = "";
             Changed(nameof(Evidence)); Changed(nameof(EvidenceAvailable)); Changed(nameof(CanCheckMotif)); NotifySummary();
+            Changed(nameof(PanelChecklistHint));
             Changed(nameof(CanEditManual));
         }
         private void EvidenceChanged(object? sender, PropertyChangedEventArgs e) { Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); }
