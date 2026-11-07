@@ -92,6 +92,9 @@ internal static partial class Program
                     ((Button)window.FindName("ForwardButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                     Check(label + " disabled Next cannot silently accept decision proposals", model.Page == 2);
                     Check(label + " decision review has its own bounded table and clear page heading", model.ReviewingDecisions && model.Title == "Review spreadsheet decisions");
+                    const string decisionExplanation = "Quantify, merge, report under others or leave out; no conditional action. Your labels stay with each family.";
+                    Check(label + " decision page and Help explain all four actions and source labels in one line", model.Explanation == decisionExplanation
+                        && FamilyListImportHelp.Text.Contains(decisionExplanation, StringComparison.Ordinal) && !model.Explanation.Contains('\n'));
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns-decisions");
                     model.ConfirmDecisions();
                     Check(label + " explicit batch confirmation accepts the reviewed decision meanings", model.Decisions.All(d => d.Confirmed) && model.CanNext);
@@ -152,7 +155,8 @@ internal static partial class Program
                     var reopened = FamilyClusterFile.FromJsonText(saved);
                     Check(label + " save and reopen retain names, source choices and explicit row split", reopened.ToJsonText() == saved
                         && reopened.FamilyPanel!.Import!.RowChoices!.Any(c => c.Action == FamilyPanelRowAction.Split)
-                        && reopened.FamilyPanel.Families.Any(f => f.Names.Count > 0));
+                        && reopened.FamilyPanel.Families.Any(f => f.Names.Count > 0)
+                        && reopened.FamilyPanel.Families.Any(f => f.SourceDecision.Length > 0));
                     string bundle = Path.Combine(work, theme + "-" + size.Width + ".fqproj");
                     ProjectStore.WriteFqproj(bundle, file, new List<QuantRow>(), new QuantManifest());
                     Check(label + " the actual project bundle reopens with the imported panel and source choices intact", ProjectStore.ReadFqproj(bundle).fcf.ToJsonText() == saved);

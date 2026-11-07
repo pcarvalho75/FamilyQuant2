@@ -72,7 +72,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         (index + 1).ToString(CultureInfo.CurrentCulture) + "   " + name, index < page, index == page,
         !IsBusy && index <= page && (!Imported || index >= 5))).ToArray();
     public string Title => page == 2 && ReviewingDecisions ? "Review spreadsheet decisions" : Titles[page];
-    public string Explanation => page == 2 && ReviewingDecisions ? "Check each proposed action and its source rows, then confirm the mapping." : Explanations[page];
+    public string Explanation => page == 2 && ReviewingDecisions ? FamilyListImportHelp.DecisionsSummary : Explanations[page];
     public string StepLabel => "Step " + (page + 1).ToString(CultureInfo.CurrentCulture) + " of 7, " + StepNames[page];
     public string ForwardLabel => page == 5 && !Imported ? "Import" : page == 6 ? "Family checklist" : "Next";
     public string CloseLabel => Imported ? "Close" : "Cancel";
