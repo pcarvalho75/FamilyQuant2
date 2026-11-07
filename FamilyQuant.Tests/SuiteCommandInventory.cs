@@ -9,6 +9,7 @@ internal static class SuiteCommandInventory
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
         SuiteCommandRule.Covered("--test-curation-streaming-callers", "FamilyQuant.Tests.Program.CurationStreamingCallerTests()"),
+        SuiteCommandRule.Excluded("--proof-curation-past-string-limit", "Z12p5f4 opt-in synthetic workflow writes more than 1,073,741,791 JSON characters and runs native import, recalculation, report and file operations under D:/fq-tmp/proof; never run in the default suite. Optional --small debugs the driver without claiming the size proof."),
         SuiteCommandRule.Covered("--test-crash-handler", "FamilyQuant.Tests.Program.CrashHandlerTests()"),
         SuiteCommandRule.Excluded("--crash-probe", "Owned fatal subprocess helper invoked and asserted by DefaultSuite CrashHandlerTests; deliberately exits and cannot run as an ordinary in-process fixture."),
         SuiteCommandRule.Covered("--test-same-scan-conflicts", "FamilyQuant.Tests.Program.SameScanConflictTests()"),
