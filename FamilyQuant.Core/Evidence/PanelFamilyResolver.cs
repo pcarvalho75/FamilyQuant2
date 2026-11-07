@@ -19,6 +19,13 @@ public sealed class PanelFamilyResolver
         var links = file.EvidenceRecipe?.PanelContext?.Links
             ?? throw new InvalidOperationException("Current panel-link provenance is unavailable. Rebuild the evidence grouping.");
         context = new(panel, EvidenceApply.Clone(links));
+        auditContext = CreateAuditContext(panel, links);
+        fingerprint = file.PanelProteinAssignmentsFingerprint!;
+    }
+
+    internal static PanelEvidenceClassifier.ClassificationContext CreateAuditContext(FamilyPanel panel,
+        System.Collections.Generic.IReadOnlyList<PanelFamilyLinkProposal> links)
+    {
         // A confirmed panel choice can remain relevant to an audit even when the current scope
         // contains no reference from that source. It must not change the classification resolver.
         var auditLinks = EvidenceApply.Clone(links).ToList();
@@ -38,8 +45,7 @@ public sealed class PanelFamilyResolver
             });
             keys.Add(key);
         }
-        auditContext = new(panel, auditLinks);
-        fingerprint = file.PanelProteinAssignmentsFingerprint!;
+        return new(panel, auditLinks);
     }
 
     /// <summary>Map any source record, including an external reviewed record. This resolves its

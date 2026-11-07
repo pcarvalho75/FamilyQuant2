@@ -152,6 +152,12 @@ internal static partial class Program
             && both.NewIndices.SequenceEqual(new[] { @new["tr|Q20014|Q20014_SYN"] }));
         Check("DU1: an old row contained in two new records is ambiguous with the whole linked set",
             CaseOf("tr|Q10016|Q10016_SYN") is { Step: DatabaseUpdateStep.Containment } linked && linked.OldIndices.Count == 2 && linked.NewIndices.Count == 2);
+        Check("DU1: ambiguity reasons count in agreeing number (1 record, 2 records)",
+            cases[2].Reason.StartsWith("2 project rows and 1 longer new record contain", StringComparison.Ordinal)
+            && cases[1].Reason.Contains("2 project rows and 1 new record under", StringComparison.Ordinal)
+            && cases[0].Reason.Contains("2 project rows and 2 new records,", StringComparison.Ordinal)
+            && cases.All(c => !c.Reason.Contains("1 new records", StringComparison.Ordinal) && !c.Reason.Contains("1 longer new records", StringComparison.Ordinal)
+                && !c.Reason.Contains("1 project rows", StringComparison.Ordinal)), string.Join(" | ", cases.Select(c => c.Reason)));
         Check("DU1: nothing of an ambiguous case is matched; its rows leave and its records arrive unless picked",
             cases.All(a => a.OldIndices.All(i => comparison.Matches.All(m => m.OldIndex != i) && comparison.Removed.Contains(i))
                 && a.NewIndices.All(j => comparison.Matches.All(m => m.NewIndex != j) && comparison.Added.Contains(j)))

@@ -154,11 +154,9 @@ public static class ReportProjectExporter
         {
             ["protein_audit.csv"] = PanelAuditCsv.BuildCsv(curation, curation.PanelProteinAssignments == null
                 ? Array.Empty<PanelFamilyAuditEvidence>()
-                : Evidence.PanelAssignmentEvidenceStore.RequireCurrent(curation).Select(a => new PanelFamilyAuditEvidence
-                {
-                    ProteinIndex = a.ProteinIndex, Identifier = a.Identifier, EvidenceUsed = a.EvidenceKind.ToString(), Reason = a.Reason,
-                }).ToArray()),
+                : Evidence.PanelAssignmentEvidenceStore.RequireCurrent(curation).Select(PanelAuditCsv.ToAuditEvidence).ToArray()),
         };
+        foreach (var (auditFile, auditCsv) in Evidence.EvidenceExports.ReportFiles(curation)) exports.Add(auditFile, auditCsv);
         if (sourceWorld != null && studies.Figures.Any(f => f.Figure.Id.StartsWith("figure:family_signal_sources", StringComparison.Ordinal)))
             exports.Add("family_sources_support.csv", ReportStudyExports.SourceSupport(sourceWorld));
         var layout = ReportSupplementLayout.Apply(document, exports);

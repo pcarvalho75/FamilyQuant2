@@ -45,6 +45,7 @@ internal static partial class Program
             using var handler = new RetryUniProtHandler
             {
                 Timeout = failure == "timeout",
+                Failures = failure == "500" ? 1 : 3,
                 Status = failure == "timeout" ? HttpStatusCode.OK : (HttpStatusCode)int.Parse(failure, System.Globalization.CultureInfo.InvariantCulture),
             };
             var waits = new List<double>(); var reports = new List<FetchProgress>();
@@ -56,10 +57,11 @@ internal static partial class Program
                 var file = new FamilyClusterFile { MyExtendedFastaItems = new() { new() { SequenceIdentifier = "sp|P00001|FIXTURE", Sequence = "PEPTIDEK" } } };
                 EvidenceFetcher.FetchAsync(file, handler, progress, options: options).GetAwaiter().GetResult();
             }
-            Check("Z1b " + (panel ? "panel" : "protein") + " recovers after three " + failure + " replies with reported waits",
-                handler.Calls == (panel ? 5 : 4) && waits.SequenceEqual(new double[] { 5, 15, 45 })
+            double[] expectedWaits = failure == "500" ? new double[] { 0 } : failure == "timeout" ? new double[] { 1, 1, 1 } : new double[] { 5, 15, 45 };
+            Check("Z13a " + (panel ? "panel" : "protein") + " recovers from " + failure + " with the matching reported wait policy",
+                handler.Calls == handler.Failures + (panel ? 2 : 1) && waits.SequenceEqual(expectedWaits)
                 && reports.Where(p => p.Message.Length > 0).Select(p => p.Message)
-                    .SequenceEqual(new[] { "UniProt busy, retrying in 5 s", "UniProt busy, retrying in 15 s", "UniProt busy, retrying in 45 s" }));
+                    .SequenceEqual(expectedWaits.Select(wait => "UniProt busy, retrying in " + wait.ToString(System.Globalization.CultureInfo.CurrentCulture) + " s")));
         }
         foreach (bool badRequest in new[] { true, false })
         {
@@ -69,13 +71,13 @@ internal static partial class Program
             bool refused = false;
             var incomplete = ReferencePanelFetcher.FetchAsync(new[] { "fixture family" }, handler, options: options).GetAwaiter().GetResult();
             refused = !incomplete.IsComplete && incomplete.FailureReason.Contains("HTTP " + ((int)handler.Status).ToString(System.Globalization.CultureInfo.InvariantCulture), StringComparison.Ordinal);
-            Check("Z1b " + (badRequest ? "400 fails immediately" : "exhaustion waits 5, 15, 45 and 120 seconds"),
-                refused && handler.Calls == (badRequest ? 1 : 5)
-                && waits.SequenceEqual(badRequest ? Array.Empty<double>() : new double[] { 5, 15, 45, 120 }));
+            Check("Z13a " + (badRequest ? "400 fails immediately" : "repeated 500 stops after two quick attempts"),
+                refused && handler.Calls == (badRequest ? 1 : 2)
+                && waits.SequenceEqual(badRequest ? Array.Empty<double>() : new double[] { 0 }));
         }
         {
             using var cancel = new CancellationTokenSource();
-            using var handler = new RetryUniProtHandler();
+            using var handler = new RetryUniProtHandler { Status = HttpStatusCode.ServiceUnavailable };
             var reports = new List<OperationProgress>();
             bool waited = false;
             var options = new UniProtFetchOptions { DelayAsync = (_, token) =>

@@ -105,8 +105,8 @@ namespace FamilyQuant.DatabaseUpdate
                 {
                     WriteFasta(queryPath, 'q', queries);
                     WriteFasta(keptPath, 'k', kept.Select(k => k.Sequence));
-                    operation?.Report("database-update", "Aligning " + Count(queries.Count) + " new and changed sequences with "
-                        + Count(kept.Count) + " kept sequences", 0, 1);
+                    operation?.Report("database-update", "Aligning " + DatabaseUpdateComparer.Counted(queries.Count, "new or changed sequence", "new and changed sequences") + " with "
+                        + DatabaseUpdateComparer.Counted(kept.Count, "kept sequence", "kept sequences"), 0, 1);
                     USearchTools.SearchGlobal(queryPath, keptPath, identity / 100.0, edge =>
                     {
                         int q = Label(edge.QueryId, 'q', queries.Count), k = Label(edge.TargetId, 'k', kept.Count);
@@ -218,7 +218,7 @@ namespace FamilyQuant.DatabaseUpdate
             try
             {
                 WriteFasta(path, 'a', sequences);
-                operation?.Report("database-update", "Clustering " + Count(sequences.Count) + " new sequences among themselves", 0, 1);
+                operation?.Report("database-update", "Clustering " + DatabaseUpdateComparer.Counted(sequences.Count, "new sequence", "new sequences") + " among themselves", 0, 1);
                 ClusteringResult result = USearchTools.Cluster(new FileInfo(path), identity, exhaustive, operation);
                 var families = new Dictionary<int, int>();
                 foreach (FastaItemExtended item in result.Document.MyExtendedFastaItems)
@@ -258,7 +258,8 @@ namespace FamilyQuant.DatabaseUpdate
                     };
                     if (p.JoinedLockedFamily) where += " The family is locked and stays locked.";
                     if (p.OtherLinkedFamilies.Count > 0)
-                        where += " Also close to families " + string.Join(", ", p.OtherLinkedFamilies.Select(Number)) + "; families are not merged.";
+                        where += (p.OtherLinkedFamilies.Count == 1 ? " Also close to family " : " Also close to families ")
+                            + string.Join(", ", p.OtherLinkedFamilies.Select(Number)) + "; families are not merged.";
                     row.Note = (row.Note.Length == 0 ? "" : row.Note + " ") + where;
                 }
                 else if (row.OldIndex is int i && byOld.TryGetValue(i, out DatabaseUpdateSequenceCheck? check) && !check.LinkedToOwnFamily)

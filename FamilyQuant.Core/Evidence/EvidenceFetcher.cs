@@ -36,7 +36,7 @@ namespace FamilyQuant.Evidence
     public static class EvidenceFetcher
     {
         private const string Endpoint = "https://rest.uniprot.org/uniprotkb/accessions?format=json&size=500&fields="
-            + "accession,reviewed,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence,ft_chain,ft_peptide,ft_propep,ft_signal&accessions=";
+            + "accession,reviewed,organism_name,organism_id,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence,ft_chain,ft_peptide,ft_propep,ft_signal&accessions=";
         private const int Attempts = 5;
         private static readonly Regex MembershipStart = new Regex(@"\bbelongs\s+to\s+(?:the\s+)?",
             RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
@@ -73,6 +73,13 @@ namespace FamilyQuant.Evidence
             string accession = item.GetProperty("primaryAccession").GetString() ?? string.Empty;
             if (accession.Length == 0) throw new JsonException("An evidence entry has no accession.");
             var evidence = new ProteinEvidence { Accession = accession, TransmembraneCount = 0, Fragment = false };
+            if (item.TryGetProperty("organism", out var organism) && organism.ValueKind == JsonValueKind.Object)
+            {
+                if (organism.TryGetProperty("scientificName", out var name) && name.ValueKind == JsonValueKind.String
+                    && !string.IsNullOrWhiteSpace(name.GetString())) evidence.OrganismName = name.GetString();
+                if (organism.TryGetProperty("taxonId", out var taxon) && taxon.ValueKind == JsonValueKind.Number
+                    && taxon.TryGetInt32(out int taxonId) && taxonId > 0) evidence.TaxonId = taxonId;
+            }
             if (item.TryGetProperty("entryType", out JsonElement entryType))
                 evidence.Reviewed = entryType.GetString() switch
                 {
@@ -84,8 +91,22 @@ namespace FamilyQuant.Evidence
                 && description.TryGetProperty("flag", out JsonElement flag))
                 evidence.Fragment = (flag.GetString() ?? string.Empty).IndexOf("fragment", StringComparison.OrdinalIgnoreCase) >= 0;
             if (item.TryGetProperty("keywords", out JsonElement keywords))
+            {
                 evidence.Keywords = keywords.EnumerateArray().Select(k => k.GetProperty("name").GetString() ?? string.Empty)
                     .Where(k => k.Length > 0).Distinct(StringComparer.Ordinal).ToList();
+                var categories = new SortedDictionary<string, string>(StringComparer.Ordinal);
+                foreach (JsonElement keyword in keywords.EnumerateArray())
+                {
+                    string name = keyword.GetProperty("name").GetString() ?? string.Empty;
+                    if (name.Length == 0 || !keyword.TryGetProperty("category", out var category)
+                        || category.ValueKind != JsonValueKind.String || string.IsNullOrWhiteSpace(category.GetString())) continue;
+                    string value = category.GetString()!;
+                    if (categories.TryGetValue(name, out string? previous) && previous != value)
+                        throw new JsonException("UniProt returned conflicting keyword categories.");
+                    categories[name] = value;
+                }
+                if (categories.Count > 0) evidence.KeywordCategories = categories.ToDictionary(pair => pair.Key, pair => pair.Value, StringComparer.Ordinal);
+            }
             if (item.TryGetProperty("features", out JsonElement features))
                 evidence.TransmembraneCount = features.EnumerateArray()
                     .Count(f => f.GetProperty("type").GetString() == "Transmembrane");
@@ -175,6 +196,7 @@ namespace FamilyQuant.Evidence
                 Provenance = file.EvidenceSource ?? new EvidenceProvenance { Provider = "UniProt" },
             };
             var found = new Dictionary<string, ProteinEvidence>(StringComparer.Ordinal);
+            var failures = new Dictionary<string, string>(StringComparer.Ordinal);
             var result = new EvidenceFetchResult { Asked = batches.Sum(b => b.Count) };
             string? release = null;
             string originalDomainSource = file.DomainSource;
@@ -188,8 +210,48 @@ namespace FamilyQuant.Evidence
             Report(0);
             for (int index = 0; index < batches.Count; index++)
             {
+                await FetchBatch(batches[index], index).ConfigureAwait(false);
+                Report(index + 1);
+            }
+            if (found.Count == 0 && failures.Count > 0)
+                throw new HttpRequestException("UniProt could not return any requested accession. " + string.Join("; ", failures.Select(pair => pair.Key + ": " + pair.Value)),
+                    null, System.Net.HttpStatusCode.InternalServerError);
+
+            async Task FetchBatch(List<string> batch, int index)
+            {
                 cancellationToken.ThrowIfCancellationRequested();
-                List<string> batch = batches[index];
+                string url = Endpoint + string.Join(",", batch);
+                if (batch.Count > 1 && cache?.WasSplit(url) == true)
+                {
+                    Report(index, "Resuming saved protein evidence groups");
+                    await FetchSplit(batch, index).ConfigureAwait(false);
+                    return;
+                }
+                try { await FetchCompleteBatch(batch, index).ConfigureAwait(false); }
+                catch (HttpRequestException error) when (error.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    if (batch.Count == 1)
+                    {
+                        failures[batch[0]] = error.Message;
+                        Report(index, "UniProt could not return accession " + batch[0] + " (HTTP 500)");
+                        return;
+                    }
+                    if (cache != null) await cache.MarkSplitAsync(url, cancellationToken).ConfigureAwait(false);
+                    Report(index, "UniProt refused a batch; trying smaller accession groups");
+                    await FetchSplit(batch, index).ConfigureAwait(false);
+                }
+            }
+
+            async Task FetchSplit(List<string> batch, int index)
+            {
+                int half = batch.Count / 2;
+                await FetchBatch(batch.GetRange(0, half), index).ConfigureAwait(false);
+                await FetchBatch(batch.GetRange(half, batch.Count - half), index).ConfigureAwait(false);
+            }
+
+            async Task FetchCompleteBatch(List<string> batch, int index)
+            {
                 string url = Endpoint + string.Join(",", batch);
                 var saved = cache == null ? null : await cache.ReadAsync(url, cancellationToken).ConfigureAwait(false);
                 string body, currentRelease;
@@ -227,7 +289,6 @@ namespace FamilyQuant.Evidence
                 featureSource.RetrievedAtUtc = cache?.RetrievedAtUtc ?? options?.UtcNow() ?? featureSource.RetrievedAtUtc;
                 foreach (var evidence in parsed.Values.Distinct())
                     if (evidence.Positions != null) evidence.Positions.FeatureSource = featureSource;
-                Report(index + 1);
             }
             // Fetch onto detached evidence objects. A failed page or cancellation cannot publish a
             // half-enriched protein, nor any of the otherwise successful UniProt batches.
@@ -262,6 +323,9 @@ namespace FamilyQuant.Evidence
             {
                 Provider = "UniProt", Release = release ?? string.Empty, RetrievedAtUtc = cache?.RetrievedAtUtc ?? options?.UtcNow() ?? DateTimeOffset.UtcNow,
                 UnresolvedAccessions = result.Missing == 0 ? null : batches.SelectMany(b => b).Where(a => !found.ContainsKey(a)).ToList(),
+                UnresolvedReasons = result.Missing == 0 ? null : batches.SelectMany(b => b).Where(a => !found.ContainsKey(a))
+                    .ToDictionary(accession => accession, accession => failures.TryGetValue(accession, out string? reason)
+                        ? reason : "UniProt returned no matching accession.", StringComparer.Ordinal),
             };
             var source = new EvidenceRecordSource
             {

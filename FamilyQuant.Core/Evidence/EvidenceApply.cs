@@ -38,6 +38,8 @@ namespace FamilyQuant.Evidence
 
     public sealed class EvidenceAssignment
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public EvidenceProteinProposal? AutomaticEvidence { get; set; }
         public int ProteinIndex { get; set; }
         public string Identifier { get; set; } = string.Empty;
         public string Family { get; set; } = string.Empty;
@@ -48,10 +50,17 @@ namespace FamilyQuant.Evidence
         public int FamilyId { get; set; }
         public EvidenceTier Tier { get; set; }
         public string Reason { get; set; } = string.Empty;
+        /// <summary>For a protein added by hand: the warnings its review row carried when the user applied the
+        /// choice (coherence with the chosen family and the automatic proposal's own flags), empty when it showed
+        /// none. Absent for automatic rows and in recipes saved before it existed, so their bytes do not change.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public List<EvidenceFlag>? Flags { get; set; }
     }
 
     public sealed partial class EvidenceRecipe
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public List<EvidenceManualChoice>? ManualChoices { get; set; }
         public string SourceFingerprint { get; set; } = string.Empty;
         public string SourceStateFingerprint { get; set; } = string.Empty;
         public string AppliedStateFingerprint { get; set; } = string.Empty;
@@ -125,11 +134,13 @@ namespace FamilyQuant.Evidence
             if (selection.ConfirmedTask != null) request = Hash(new { Request = request, selection.ConfirmedTask });
             if (familyPanel != null) request = Hash(new { Request = request, FamilyPanel = familyPanel });
             if (proposal.PanelContext != null) request = Hash(new { Request = request, proposal.PanelContext });
+            if (proposal.ManualChoices?.Count > 0) request = Hash(new { Request = request, ManualChoices = proposal.ManualChoices.OrderBy(c => c.ProteinIndex) });
             if (file.EvidenceRecipe?.RequestFingerprint == request
                 && file.EvidenceRecipe.AppliedStateFingerprint == StateFingerprint(file, session: file.EvidenceRecipe))
                 return new EvidenceApplyResult { Recipe = Clone(file.EvidenceRecipe) };
             if (EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems) != proposal.SourceFingerprint)
                 throw new InvalidOperationException("The evidence proposal no longer matches the current proteins.");
+            ManualFamilyChoices.ValidateProposal(file, proposal);
             ValidatePanelProposal(file, proposal, selection, familyPanel);
             string initialState = StateFingerprint(file);
             string initialMotifs = Hash(file.Motifs);
@@ -206,11 +217,21 @@ namespace FamilyQuant.Evidence
                 {
                     ProteinIndex = index, Identifier = protein.SequenceIdentifier, Family = family, Name = name, GroupKey = key,
                     PreviousFamilyId = protein.UserID, PreviousSearchId = protein.USearchID, Tier = row.Tier, Reason = row.Reason,
+                    AutomaticEvidence = row.AutomaticEvidence == null ? null : Clone(row.AutomaticEvidence),
+                    Flags = row.Tier == EvidenceTier.AddedByHand
+                        ? row.Flags.Select(f => new EvidenceFlag { Code = f.Code, Message = f.Message }).ToList() : null,
                 });
             }
             int next = MaximumId(file);
+            var existingFamilies = CurrentFamilyIdentities(file);
             foreach (var group in assignments.GroupBy(a => a.GroupKey, StringComparer.Ordinal).OrderBy(g => g.Key, StringComparer.Ordinal))
             {
+                int reused = ReusableFamilyId(existingFamilies, group.First().Family, group.Key, proposal.PanelContext != null);
+                if (reused > 0)
+                {
+                    foreach (EvidenceAssignment assignment in group) assignment.FamilyId = reused;
+                    continue;
+                }
                 if (next == int.MaxValue) throw new InvalidOperationException("There are no unused family numbers above the existing numbers.");
                 next++;
                 foreach (EvidenceAssignment assignment in group) assignment.FamilyId = next;
@@ -226,6 +247,7 @@ namespace FamilyQuant.Evidence
                 }).ToList(),
                 ArchitectureChoices = splits.Values.OrderBy(c => c.Family, StringComparer.Ordinal).ThenBy(c => c.ArchitectureKey, StringComparer.Ordinal).ToList(),
                 ProteinOverrides = Clone(selection.ProteinOverrides.OrderBy(o => o.ProteinIndex).ToList()), Assignments = assignments,
+                ManualChoices = proposal.ManualChoices?.Select(c => c with { Selected = selected.Contains(c.ProteinIndex) }).ToList(),
                 EvidenceProvider = file.EvidenceSource?.Provider ?? string.Empty, EvidenceRelease = file.EvidenceSource?.Release ?? string.Empty,
                 EvidenceReleases = file.MyExtendedFastaItems.Select(p => p.Evidence?.Source?.Release).Append(file.EvidenceSource?.Release)
                     .Where(r => !string.IsNullOrEmpty(r)).Select(r => r!).Distinct(StringComparer.Ordinal).OrderBy(r => r, StringComparer.Ordinal).ToList(),
@@ -234,8 +256,11 @@ namespace FamilyQuant.Evidence
                 CheckedMotifs = session.Motifs, CheckedMotifResults = session.Results,
                 ConfirmedTask = selection.ConfirmedTask,
                 FamilyPanel = familyPanel,
+                SourceConfirmedMatchesFingerprint = file.FamilyPanel?.ConfirmedEvidenceMatches != null || familyPanel?.ConfirmedEvidenceMatches != null
+                    ? Hash(file.FamilyPanel?.ConfirmedEvidenceMatches) : null,
                 PanelContext = proposal.PanelContext == null ? null : Clone(proposal.PanelContext),
             };
+            recipe.FamilyIdentities = ProjectFamilyIdentities(file, recipe);
             foreach (var family in assignments.Where(a => !familyNames.ContainsKey(a.Family)).GroupBy(a => a.Family, StringComparer.Ordinal))
                 recipe.Families.Add(new EvidenceFamilyChoice { Family = family.Key, Name = family.First().Name, Selected = true });
             if (proposal.PanelContext != null)
@@ -269,10 +294,12 @@ namespace FamilyQuant.Evidence
                 || EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems) != recipe.SourceFingerprint)
                 throw new InvalidOperationException("The saved recipe does not match this source or its applied state.");
             ValidatePanelRecipe(file, recipe);
+            ManualFamilyChoices.ValidateRecipe(file, recipe);
             if (recipe.Assignments.Count == 0 || recipe.Assignments.Select(a => a.ProteinIndex).Distinct().Count() != recipe.Assignments.Count
                 || !recipe.Assignments.Select(a => a.ProteinIndex).OrderBy(i => i).SequenceEqual(recipe.SelectedProteinIndices))
                 throw new ArgumentException("The recipe's assignments do not match its selection.", nameof(recipe));
             int maximum = MaximumId(file);
+            var existingFamilies = CurrentFamilyIdentities(file);
             foreach (EvidenceAssignment assignment in recipe.Assignments)
             {
                 if (assignment.ProteinIndex < 0 || assignment.ProteinIndex >= file.MyExtendedFastaItems.Count)
@@ -280,7 +307,10 @@ namespace FamilyQuant.Evidence
                 FastaItemExtended protein = file.MyExtendedFastaItems[assignment.ProteinIndex];
                 if (NearestReviewed.IsDecoy(protein) || assignment.Identifier != protein.SequenceIdentifier
                     || assignment.PreviousFamilyId != protein.UserID || assignment.PreviousSearchId != protein.USearchID
-                    || assignment.FamilyId <= maximum || string.IsNullOrWhiteSpace(assignment.Name)
+                    || assignment.FamilyId <= 0
+                    || (assignment.FamilyId <= maximum && (recipe.FamilyIdentities == null
+                        || ReusableFamilyId(existingFamilies, assignment.Family, assignment.GroupKey, recipe.PanelContext != null) != assignment.FamilyId))
+                    || string.IsNullOrWhiteSpace(assignment.Name)
                     || file.LockedUserIds.Contains(protein.UserID))
                     throw new ArgumentException("A recipe assignment is incompatible with its source.", nameof(recipe));
             }
@@ -309,6 +339,9 @@ namespace FamilyQuant.Evidence
             {
                 if (StateFingerprint(file, session: stored) != stored.SourceStateFingerprint)
                     throw new InvalidOperationException("The curation changed while the evidence transaction was prepared.");
+                if (stored.SourceConfirmedMatchesFingerprint != null && Hash(file.FamilyPanel?.ConfirmedEvidenceMatches) != stored.SourceConfirmedMatchesFingerprint)
+                    throw new InvalidOperationException("The panel matches changed while the evidence transaction was prepared.");
+                ValidateFamilyIdentities(file, stored);
                 operation?.ThrowIfCancellationRequested();
                 foreach (EvidenceAssignment assignment in stored.Assignments)
                 {
@@ -367,6 +400,8 @@ namespace FamilyQuant.Evidence
                 Session = Hash(new { session.SessionSearch, session.SessionReferences, session.CheckedMotifs, session.CheckedMotifResults }),
             }) : curation;
             if (session?.ConfirmedTask != null) state = Hash(new { State = state, session.ConfirmedTask });
+            if (session?.FamilyIdentities != null) state = Hash(new { State = state, session.FamilyIdentities });
+            if (session?.SourceConfirmedMatchesFingerprint != null) state = Hash(new { State = state, session.FamilyPanel?.ConfirmedEvidenceMatches });
             return session?.FamilyPanel == null ? state : Hash(new
             {
                 State = state, FamilyPanel = session.PanelContext == null ? (object?)(projectSession ? session.FamilyPanel : file.FamilyPanel)
