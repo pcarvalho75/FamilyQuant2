@@ -10,10 +10,10 @@ namespace FamilyQuant.Evidence;
 
 public sealed record PanelEvidenceSuggestion(PanelEvidenceMatchKind Kind, string Value, string Name,
     int DatabaseTargets, int ReferenceEntries, string Reason, int ReviewedTargets = 0,
-    double NameCoverage = 0, bool IsAdditional = false)
+    double NameCoverage = 0, bool IsAdditional = false, bool IsFromSheet = false)
 {
     public string Key => JsonSerializer.Serialize(new[] { Kind.ToString(), Value });
-    public bool IsFamilyLevelMatch => Kind is PanelEvidenceMatchKind.UniProtFamily or PanelEvidenceMatchKind.Pfam && NameCoverage > 0;
+    public bool IsFamilyLevelMatch => Kind is PanelEvidenceMatchKind.UniProtFamily or PanelEvidenceMatchKind.Pfam && (NameCoverage > 0 || IsFromSheet);
 }
 
 /// <summary>Detached stored-label suggestions and exact target coverage. No suggested label is a classification rule.</summary>
@@ -130,10 +130,10 @@ public sealed partial class PanelEvidenceMatching
     /// <summary>Ranks the whole imported list together so broadly shared keywords stay in Show more.</summary>
     public IReadOnlyDictionary<string, IReadOnlyList<PanelEvidenceSuggestion>> SuggestForPanel(FamilyPanel panel)
     {
-        string key = JsonSerializer.Serialize(panel.Families.Select(family => new { family.Key, family.DisplayName, Names = family.Names.Select(name => name.Text) }));
+        string key = JsonSerializer.Serialize(panel.Families.Select(family => new { family.Key, family.DisplayName, Names = family.Names.Select(name => name.Text), family.Pfam }));
         if (key == panelNamesKey && panelSuggestions != null) return panelSuggestions;
         var suggestions = panel.Families.ToDictionary(family => family.Key,
-            family => Suggest(family.Names.Select(name => name.Text).Prepend(family.DisplayName)), StringComparer.Ordinal);
+            SuggestForFamily, StringComparer.Ordinal);
         var shared = suggestions.Values.SelectMany(rows => rows.Where(row => row.Kind == PanelEvidenceMatchKind.Keyword && row.NameCoverage > 0).Select(row => row.Key).Distinct())
             .GroupBy(label => label, StringComparer.Ordinal).Where(group => suggestions.Count > 1 && group.Count() * 2 > suggestions.Count)
             .Select(group => group.Key).ToHashSet(StringComparer.Ordinal);

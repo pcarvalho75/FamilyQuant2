@@ -59,6 +59,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter
         }
         result.Notes = workbook.Sheets.Where(sheet => sheet.Role == PanelWorkbookSheetRole.Notes)
             .Select(sheet => new PanelWorkbookSourceNote { SheetName = sheet.SheetName, Text = WorkbookNoteText(sheet) }).ToList();
+        PopulateWorkbookPfam(result);
         return result;
     }
 
@@ -110,7 +111,6 @@ public sealed partial class FamilyPanelSpreadsheetImporter
                     ClassColumn = classColumn, DomainColumns = domainColumns, Table = other });
             }
         }
-        proposal.Pfam = WorkbookPfam(proposal);
         var shapeChoices = Copy(choices);
         shapeChoices.ColumnHeaders.Remove(PanelImportFields.Decision);
         shapeChoices.ColumnHeaders.Remove(PanelImportFields.ColorCategory);

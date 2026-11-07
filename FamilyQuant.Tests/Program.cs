@@ -270,6 +270,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => PanelChecklistActionsTests(Path.Combine(workDir, "panel-checklist-actions")));
             suite.Add(() => PanelEvidenceMatchingTests());
             suite.Add(() => PanelEvidenceRankingTests());
+            suite.AddWithApplication(() => SheetPfamMatchTests(Path.Combine(workDir, "sheet-pfam-matches")));
             suite.Add(() => PanelEvidenceFingerprintTests());
             suite.AddWithApplication(() => PanelEvidenceBroadTests(Path.Combine(workDir, "panel-evidence-broad")));
             suite.AddWithApplication(() => EmptyPanelChecklistTests(Path.Combine(workDir, "empty-panel-checklist")));
