@@ -1,0 +1,86 @@
+{
+  "ClusteringIdentity": 0,
+  "SourceSha256": "",
+  "SourceSequenceCount": 0,
+  "ClusteringMethod": "",
+  "WordSimilarity": null,
+  "IsKeywordSuperCluster": false,
+  "LockedUserIds": [],
+  "DomainSource": "",
+  "EvidenceSource": {
+    "Provider": "UniProt",
+    "Release": "fixture-release",
+    "RetrievedAtUtc": null,
+    "ReferencePanel": {
+      "Provider": "UniProt",
+      "Release": "fixture-release",
+      "RetrievedAtUtc": null,
+      "Families": [
+        "Invented legacy family"
+      ],
+      "Entries": [
+        {
+          "Accession": "P90002",
+          "Sequence": "ACDEFGHIKLMNPQRSTVWY",
+          "Evidence": {
+            "Accession": "P90002",
+            "Reviewed": true,
+            "Family": "Invented legacy family",
+            "Subfamily": "",
+            "FamilyAnnotation": "",
+            "Keywords": [
+              "Chosen phase"
+            ],
+            "TissueSpecificity": [],
+            "Pfam": [],
+            "Panther": [],
+            "TransmembraneCount": null,
+            "Fragment": null
+          }
+        }
+      ],
+      "MissingFamilies": [],
+      "FailureReason": "",
+      "TotalBatches": 0,
+      "FailedBatches": 0
+    }
+  },
+  "MyExtendedFastaItems": [
+    {
+      "USearchID": 1,
+      "UserID": 1,
+      "UserAnnotation": "",
+      "Domains": "",
+      "Evidence": {
+        "Accession": "",
+        "Reviewed": true,
+        "Family": "Invented legacy family",
+        "Subfamily": "",
+        "FamilyAnnotation": "",
+        "Keywords": [
+          "Chosen phase"
+        ],
+        "TissueSpecificity": [],
+        "Pfam": [],
+        "Panther": [],
+        "TransmembraneCount": null,
+        "Fragment": null
+      },
+      "XICUser": 0,
+      "SequenceIdentifier": "sp|P90001|invented",
+      "Description": "Invented target",
+      "GeneName": null,
+      "Sequence": "ACDEFGHIKLMNPQRSTVWY",
+      "ReviewStatus": null,
+      "EntryName": null,
+      "OrganismName": null,
+      "OrganismTaxId": 0,
+      "ProteinExistence": 0,
+      "SequenceVersion": 0,
+      "ExtraDouble": 0,
+      "Objects": [],
+      "SequenceInBytes": null,
+      "MonoisotopicMass": 2376.11434
+    }
+  ]
+}

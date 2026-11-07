@@ -109,6 +109,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter
             if (!result.FamilyProposal.Choices.ColumnHeaders.ContainsKey(PanelImportFields.Decision)
                 && result.FamilyProposal.DecisionHint.Length == 0) result.DecisionsState = PanelWorkbookReadState.Read;
         }
+        PopulateWorkbookPfam(result);
         return result;
     }
 
@@ -172,7 +173,6 @@ public sealed partial class FamilyPanelSpreadsheetImporter
                     ClassColumn = classColumn, DomainColumns = domainColumns, Table = other });
             }
         }
-        proposal.Pfam = WorkbookPfam(proposal);
         var shapeChoices = Copy(choices);
         shapeChoices.ColumnHeaders.Remove(PanelImportFields.Decision);
         shapeChoices.ColumnHeaders.Remove(PanelImportFields.ColorCategory);
