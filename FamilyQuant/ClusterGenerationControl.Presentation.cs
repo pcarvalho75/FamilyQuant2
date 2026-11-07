@@ -353,29 +353,29 @@ public partial class ClusterGenerationControl
         {
             ApplyFamilyHeaderTooltips();
             ColumnUSearchId.HeaderStyle = HeaderTip(
-                "The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it " +
-                "equals User ID except where you renumbered a family by hand.");
+                "The last automatic family number, from sequence identity and any word or keyword grouping. " +
+                "Read only; hand curation changes User ID without changing this number.");
 
             ColumnUserId.HeaderStyle = HeaderTip(
-                "Your own family number, the only editable id. Type the same number in two rows to merge " +
-                "their families, or an unused one to split a protein off; editing locks the families involved.");
+                "Current family number for this protein: starts at its stored value, accepts whole numbers from 0 to 2147483647, with no unit. " +
+                "An existing number joins that family and an unused number splits this protein off; editing locks affected families, and Undo restores the change.");
 
             ColumnUserAnnotation.HeaderStyle = HeaderTip(
-                "Free text of your own. It is saved in the .fcf and written to the CSV, and it affects no " +
-                "calculation.");
+                "Annotation for this protein: starts at its stored text, or empty, and accepts free text with no unit or fixed length limit. " +
+                "The edit changes the project and can affect its family name; Undo restores the text, and Save or CSV export keeps it on disk.");
 
             ColumnLocus.HeaderStyle = HeaderTip(
-                "A UniProt accession where available, otherwise the database identifier; hover for the original; " + SequenceLabels.DecoyPrefix
+                "A UniProt accession where available, otherwise the database identifier; hover over a cell for the original; " + SequenceLabels.DecoyPrefix
                 + " marks a decoy and " + SequenceLabels.ContaminantMarker + " marks a contaminant. " +
                 "Right-click for its UniProt code or page; Ctrl+C copies the clicked column.");
 
             ColumnDomains.HeaderStyle = HeaderTip(
-                "The protein's Pfam domains from UniProt, searchable by the Search box. Empty until " +
-                "Fetch evidence is pressed, or when no domain was called, including proteins too short for Pfam.");
+                "Pfam domains recorded for this protein, searchable through Search, with fetched previews shown while evidence downloads. " +
+                "Read only; an empty value can mean no evidence or no domain call and does not prove domain absence.");
 
             ColumnMass.HeaderStyle = HeaderTip(
-                "The sum of the protein's residue masses in daltons, without the terminal water. Add " +
-                "18.011 Da for the neutral protein mass.");
+                "Sum of the protein's residue masses in daltons, without terminal water; add 18.011 Da for neutral protein mass. " +
+                "This value is read only and changes no project data.");
 
             ColumnFullXic.HeaderStyle = HeaderTip(
                 "This family's share of the full XIC (from Quantify), the primary " +
@@ -408,7 +408,6 @@ public partial class ClusterGenerationControl
                 Application.Current.TryFindResource(typeof(System.Windows.Controls.Primitives.DataGridColumnHeader)) as Style);
 
             style.Setters.Add(new Setter(FrameworkElement.ToolTipProperty, tooltip));
-            style.Setters.Add(new Setter(System.Windows.Controls.ToolTipService.ShowDurationProperty, 60000));
             style.Setters.Add(new Setter(ContentControl.ContentTemplateProperty, WrappingHeaderTemplate));
 
             return style;

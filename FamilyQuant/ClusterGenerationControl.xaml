@@ -28,7 +28,7 @@
                 <Label Content="Search" Target="{Binding ElementName=TextBoxSearch}" VerticalAlignment="Center" Margin="0,0,8,0"
                        ToolTip="Filter the protein table without changing the stored families or shares."/>
                 <TextBox x:Name="TextBoxSearch" KeyUp="TextBoxSearch_KeyUp" AutomationProperties.Name="Search proteins"
-                         ToolTip="Filter by accession, description or domain, using commas between alternatives. Filtering never changes a percentage."/>
+                         ToolTip="Filters by identifier, description or domain; use commas or semicolons for alternatives, or leave the default empty text to show all matches. Accepts free text with no unit or fixed length limit; display filters leave stored families and shares unchanged."/>
             </DockPanel>
 <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions><ColumnDefinition Width="1.1*" MinWidth="220"/><ColumnDefinition Width="8"/><ColumnDefinition Width="1.2*" MinWidth="220"/></Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
                             <DataGridTemplateColumn Header="Lock" Width="64" MinWidth="64" IsReadOnly="True" SortMemberPath="IsLocked">
                                 <DataGridTemplateColumn.CellTemplate><DataTemplate>
                                     <CheckBox IsChecked="{Binding IsLocked, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanEdit}" Click="FamilyLock_Click" HorizontalAlignment="Center"
-                                              ToolTip="Protect this family from automatic grouping, or remove that protection. Undo reverses this lock change."/>
+                                              ToolTip="{Binding LockHint}"/>
                                 </DataTemplate></DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTextColumn x:Name="ColumnFamilyId" Header="ID" Width="50" MinWidth="50" IsReadOnly="True"
@@ -64,7 +64,7 @@
                           CellEditEnding="DataGridResultGrid_CellEditEnding"
                           SelectionChanged="DataGridResultGrid_SelectionChanged"
                           Sorting="DataGridResultGrid_Sorting"
-                          AlternatingRowBackground="{DynamicResource SubtleBrush}" GridLinesVisibility="None">
+                          AlternatingRowBackground="{DynamicResource SubtleBrush}" GridLinesVisibility="None" ToolTip="Shows proteins in the selected family, or all visible proteins when no family is selected. Edit User ID or User Annotation to change the project; Undo restores committed edits.">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="ColumnUSearchId" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
                                             Visibility="Visible" Header="USearch ID" Width="90" MinWidth="90" Binding="{Binding Path=USearchID}" />
@@ -101,7 +101,7 @@
                 <Button x:Name="ButtonHelp" DockPanel.Dock="Right" Content="?  How to read these numbers"
                         Click="ButtonHelp_Click" Margin="10,0,0,0" Padding="10,4" FontWeight="Normal"
                         Background="{DynamicResource EdgeBrush}"
-                        ToolTip="Opens a page that explains every number on this screen. Read it the first time, and whenever a number does not look as you expected."/>
+                        ToolTip="Explains family IDs, locks, evidence and the signal shares displayed here. This read-only Help changes nothing in the project."/>
 
                 <TextBlock x:Name="TextBlockStatusLine" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"
                            Foreground="{DynamicResource TextBrush}" FontSize="12"
@@ -120,11 +120,11 @@
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="1" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
                             <Button Grid.Column="1" x:Name="ButtonFetchDomains" Content="Fetch evidence" Click="ButtonFetchDomains_Click"
-                                    ToolTip="Needs an open database and internet; about 1 to 2 minutes for 30,000 proteins."/>
+                                    ToolTip="Downloads UniProt protein evidence and reviewed family references into the open project, including positions needed by computed peptides. Requires internet; File &gt; Save keeps the evidence, and this fetch is not a curation Undo step."/>
                         </Grid>
                         <TextBlock Text="{Binding EvidenceStepStatus}" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
                         <Button x:Name="ButtonRetryPanel" Content="Retry panel" Click="ButtonRetryPanel_Click"
-                                Margin="28,0,0,8" HorizontalAlignment="Left" ToolTip="Finish the reference panel from UniProt; the protein evidence already fetched is kept.">
+                                Margin="28,0,0,8" HorizontalAlignment="Left" ToolTip="Retries the incomplete reviewed reference panel while keeping the protein evidence already fetched. Requires internet; File &gt; Save keeps the completed panel, and this fetch is not a curation Undo step.">
                             <Button.Style>
                                 <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -136,14 +136,14 @@
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="2" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
                             <Button Grid.Column="1" x:Name="ButtonEvidenceGrouping" Content="Group by evidence"
-                                    Click="ButtonEvidenceGrouping_Click" ToolTip="Fetch evidence first; review and Apply grouping usually take a few minutes."/>
+                                    Click="ButtonEvidenceGrouping_Click" ToolTip="Opens the stored-evidence review to confirm scope, panel links and proposed protein assignments. Apply grouping makes one undoable project change; missing evidence prompts a download first."/>
                         </Grid>
                         <TextBlock Text="{Binding EvidenceGroupingStepStatus}" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="3" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
                             <Button Grid.Column="1" x:Name="ButtonFetchFamilyWorld" Content="Fetch family world" Click="ButtonFetchFamilyWorld_Click"
-                                    ToolTip="Apply grouping with a confirmed scope first; needs internet and usually takes a few minutes."/>
+                                    ToolTip="Downloads in-scope family references for the confirmed scope into the project, for later Database gap analysis. Confirm the scope in Group by evidence and complete any incomplete reference panel first; File &gt; Save keeps the download."/>
                         </Grid>
                         <TextBlock x:Name="TextBlockFamilyWorldState" Text="{Binding FamilyWorldStepStatus}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
                         <Grid>
@@ -151,7 +151,7 @@
                             <TextBlock Text="4" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
                             <Button Grid.Column="1" x:Name="ButtonComputeFullXic" Content="Quantify"
                                     Command="{x:Static local:MainWindow.NavigateShellCommand}" CommandParameter="{x:Static local:ShellDestination.Quantify}"
-                                    ToolTip="After Fetch family world, choose RAW files and an identification package in Quantify; computing takes minutes to hours."/>
+                                    ToolTip="Opens Quantify to choose identification packages and RAW files for Full XIC. Opening the screen changes no stored quantitation."/>
                         </Grid>
                         <TextBlock Text="{Binding FullXicStepStatus}" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
                         <TextBlock x:Name="TextBlockPartGroupByWords" Text="b Group by words" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="4,12,4,4"
@@ -159,9 +159,9 @@
                         <Button x:Name="ButtonSuperCluster" Content="Group by keywords" Click="ButtonSuperCluster_Click"
                                 ToolTip="Enter keywords, exclusions and the match rule in the grouping review. Review the protein ticks before applying; Undo reverses the grouping."/>
                         <Button x:Name="ButtonAlignSelected" Content="Align selected" Click="ButtonAlignSelected_Click" IsEnabled="False"
-                                ToolTip="Align the selected proteins without changing their families. Disabled until at least two rows are selected in the protein table."/>
+                                ToolTip="Aligns the selected protein sequences and opens a read-only alignment report. Select at least two rows in the protein table to enable it; families stay unchanged."/>
                         <CheckBox x:Name="CheckBoxIncludeFamilyPositions" Content="Include selected families in position fetch" Margin="4,4,4,0"
-                                  ToolTip="Also fetch positions for every member of the families selected in the protein table. By default, only proteins reached by computed peptides are requested."/>
+                                  ToolTip="Includes every member of the selected proteins' families in the next evidence position fetch. Starts off, so only proteins reached by computed peptides need positions; toggling this downloads nothing."/>
                         <Grid Margin="4,8,4,0">
                             <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
@@ -175,26 +175,26 @@
                         <Border x:Name="BadgeLayer1" Visibility="Collapsed"><TextBlock x:Name="TextBlockLayer1State"/></Border>
                     </StackPanel>
                 </GroupBox>
-                <Expander x:Name="WordGroupingActions" Header="Recluster by words" Margin="0,0,0,8">
+                <Expander x:Name="WordGroupingActions" Header="Recluster by words" Margin="0,0,0,8" ToolTip="Shows settings for merging unlocked families by description similarity. Expanding it changes no grouping.">
                     <StackPanel Margin="8">
                         <Label Content="Description similarity" ToolTip="The minimum description similarity that permits a word grouping."/>
                         <numeric:DecimalUpDown x:Name="DecimalUpDownWordReCluster" Value="0.95" Increment="0.01" Minimum="0.10" Maximum="1"
-                                            ToolTip="Merge families whose description similarity meets this threshold. The default 0.95 merges near-identical wording; lower values allow more joins."/>
+                                            ToolTip="Sets the minimum TF-IDF cosine similarity of descriptions for the next word grouping; this is a fraction with no unit, default 0.95, allowed 0.10 to 1 in steps of 0.01. Changing it prepares the next grouping without applying it."/>
                         <Label Content="Ignore words" ToolTip="Words removed from descriptions before comparing their similarity."/>
                         <TextBox x:Name="TextBoxWordsToBeExcluded"
-                                 ToolTip="Whole words ignored when comparing descriptions, separated by commas or spaces. Keyword review also uses these ignored words."/>
+                                 ToolTip="Lists extra words to ignore in description comparisons and keyword review, separated by spaces, commas or semicolons; default empty, free text with no unit or fixed length limit. Changing it prepares the next grouping without applying it."/>
                         <Button x:Name="ButtonWordCluster" Content="Recluster by words" Click="ButtonWordCluster_Click"
-                                ToolTip="Merge unlocked families using the chosen description similarity. The search limits its scope; Undo reverses the grouping."/>
+                                ToolTip="Merges unlocked families whose descriptions meet the chosen similarity, within the Search matches when a search is entered. The grouping changes the project; Undo restores the previous families."/>
                     </StackPanel>
                 </Expander>
-                <Expander x:Name="SelectedProteinActions" Header="Edit selected proteins" Margin="0,0,0,8">
+                <Expander x:Name="SelectedProteinActions" Header="Edit selected proteins" Margin="0,0,0,8" ToolTip="Shows inputs for changing the family number or annotation of selected protein rows. Nothing changes until Apply to selected rows; Undo restores that edit.">
                     <StackPanel Margin="8">
                         <Label Content="Family number" ToolTip="The family number to give every selected protein."/>
                         <TextBox x:Name="TextBoxBatchUserId"
-                                 ToolTip="Give selected proteins this family number, or leave it empty to keep their numbers. Joining and surviving source families are locked."/>
+                                 ToolTip="Family number for selected proteins: default empty keeps their numbers, otherwise enter a whole number from 0 to 2147483647 with no unit. Apply to selected rows changes membership and locks affected populated families; Undo restores the change."/>
                         <Label Content="Annotation" ToolTip="The annotation to write to every selected protein."/>
                         <TextBox x:Name="TextBoxBatchAnnotation"
-                                 ToolTip="Annotate the selected proteins, or leave this empty to keep their annotations. The text is saved and exported with the file."/>
+                                 ToolTip="Annotation for selected proteins: default empty keeps their text, otherwise enter free text with no unit or fixed length limit. Apply to selected rows stores trimmed text in the project; Undo restores the previous annotations."/>
                         <Button x:Name="ButtonApplyToSelected" Content="Apply to selected rows" Click="ButtonApplyToSelected_Click"
                                 ToolTip="Apply the family number and annotation to selected proteins. Select with Ctrl+click, Shift+click or Ctrl+A; Undo reverses the change."/>
                         <TextBlock x:Name="TextBlockBatchStatus" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}"
@@ -205,7 +205,7 @@
                     <Label x:Name="LabelLockCount" ToolTip="Families protected from automatic grouping, including stored locks whose family has no proteins. Manage locks lets you remove that protection."/>
                     <WrapPanel>
                         <Button x:Name="ButtonManageLocks" Content="Manage locks" Click="ButtonManageLocks_Click"
-                                ToolTip="Review or remove locks on curated family numbers. A removal is one reversible Undo step."/>
+                                ToolTip="Opens the list of family numbers protected from automatic grouping. Available when at least one lock exists; removing selected locks is one undoable project change."/>
                         <Button x:Name="ButtonUndo" Content="Undo" Click="ButtonUndo_Click" IsEnabled="False"
                                 ToolTip="Undoes the last curation change, such as a grouping, family number edit or lock removal, up to 50 steps in this session. Disabled until there is a change to undo."/>
                     </WrapPanel>
@@ -213,7 +213,7 @@
                 <local:CurationQuantitationPanel x:Name="QuantitationPanel"
                     LoadRequested="ButtonLoadQuantData_Click" RecalculateRequested="ButtonRecalculateQuantitation_Click"
                     ChoiceChanged="ComboBoxNormalization_SelectionChanged" BasisChanged="ComboBoxFullXicBasis_SelectionChanged"/>
-                <Expander Header="Display and export" Margin="0,10,0,0">
+                <Expander Header="Display and export" Margin="0,10,0,0" ToolTip="Shows protein display filters and separate CSV export actions. Expanding it changes no project data or files.">
                     <StackPanel Margin="8">
                         <CheckBox x:Name="CheckBoxExcludeReverse" Content="Hide decoys" IsChecked="True"
                                   Checked="CheckBoxExcludeReverse_CheckedChanged" Unchecked="CheckBoxExcludeReverse_CheckedChanged"
@@ -223,14 +223,14 @@
                                   ToolTip="{x:Static core:IdentifierText.HideContaminantsToolTip}"/>
                         <CheckBox x:Name="CheckBoxShowXICOnly" Content="Show quantified families only"
                                   Checked="CheckBoxShowXICOnly_CheckedChanged" Unchecked="CheckBoxShowXICOnly_CheckedChanged"
-                                  ToolTip="Hide families whose PatternLab share is zero. Display filtering never changes percentages or the saved proteins."/>
+                                  ToolTip="Shows only protein rows with a positive PatternLab reading or a positive Full XIC share; this starts off. Toggling it changes the visible rows and visible-row CSV, never the stored proteins or percentages."/>
                         <CheckBox x:Name="CheckBoxShowSearchIds" Content="Show USearch ID" IsChecked="True"
                                   Checked="SearchIdVisibility_Changed" Unchecked="SearchIdVisibility_Changed"
-                                  ToolTip="Show the last automatic family number beside the curated number. Hiding this column keeps the stored IDs."/>
+                                  ToolTip="Shows the last automatic family number beside User ID; this starts on unless a saved display preference overrides it. Toggling it changes the visible columns, while stored IDs stay unchanged."/>
                         <Button x:Name="ButtonSaveReport" Content="Export to CSV" Click="ButtonSaveReport_Click"
-                                ToolTip="Export exactly the visible protein rows, with invariant decimal fractions. Disabled while every row is hidden by a filter."/>
+                                ToolTip="Writes the protein table to CSV using its current display filters and columns, with shares as decimal fractions. Show at least one row to enable it; Undo does not revert the exported file."/>
                         <Button x:Name="ButtonExportComposition" Content="Export family composition" Click="ButtonExportComposition_Click" IsEnabled="False"
-                                ToolTip="Export one Full XIC row per family, shared peptides and unattributed peptides. Disabled until full XIC is available."/>
+                                ToolTip="Writes Full XIC family composition, shared signal and unattributed signal to a separate CSV file. Run Quantify to enable it; Undo does not revert the exported file."/>
                         <Border x:Name="BadgeExport" Visibility="Collapsed"><TextBlock x:Name="TextBlockExportState"/></Border>
                     </StackPanel>
                 </Expander>

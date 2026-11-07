@@ -74,9 +74,9 @@ public sealed class DatabaseUpdateNameView : ScreenViewModel
     public string Replaces => Change.DifferingAnnotationMembers.Count == 0 ? ""
         : string.Join(", ", Change.DifferingAnnotationMembers);
     public string Help => Change.DifferingAnnotationMembers.Count > 0
-        ? "Keeping the old name replaces the different annotation of the members listed, so it starts unticked."
-        : Change.OldNameFromAnnotation ? "The old name came from an annotation, so it is kept by default."
-        : "The old name came from protein descriptions, so by default it follows them.";
+        ? "Tick to keep the old family name by replacing the listed members' annotations when Apply update runs. This starts unticked because those members have different annotations."
+        : Change.OldNameFromAnnotation ? "Keeps the old family name as the members' annotation when Apply update runs. This starts ticked because the old name came from an annotation."
+        : "Tick to keep the old family name as the members' annotation when Apply update runs. This starts unticked so the name follows the updated protein descriptions.";
     public bool Keep { get => keep; set => Set(ref keep, value); }
 
     internal DatabaseUpdateNameView(DatabaseUpdateNameChange change, bool keep)
@@ -125,6 +125,13 @@ public sealed class DatabaseUpdateViewModel : ScreenViewModel
     /// <summary>True when a pick differs from the one this preview was computed with: compare again first.</summary>
     public bool PicksPending => Cases.Any(c => c.Selected.Pick != Current(c.Case));
     public bool CanApply => !PicksPending;
+    public string ApplyHint => PicksPending
+        ? "Unavailable because a pair choice changed after this preview was computed. Choose Compare again to review the new preview and enable Apply update."
+        : "Applies the preview to the open project and clears earlier Undo steps, so Undo cannot reverse the update. The project file changes only when you save, so close without saving to return to its saved state.";
+    public string CompareAgainHint => PicksPending
+        ? "Recomputes the comparison and placement with the changed pair choices. The project and its files stay as they are until Apply update."
+        : HasNoCases ? "Unavailable because this preview has no ambiguous protein pairs to choose between. A preview with ambiguous pairs enables Compare again after you change a pair choice."
+        : "Unavailable because the preview already reflects these pair choices. Change a choice in Ambiguous to enable Compare again.";
     public string PicksStatus => PicksPending
         ? "A pick changed. Compare again to see where its proteins go; Apply update waits until then."
         : Cases.Count == 0 ? "" : "The preview reflects these picks.";
@@ -211,6 +218,7 @@ public sealed class DatabaseUpdateViewModel : ScreenViewModel
     private void PicksChanged()
     {
         Changed(nameof(PicksPending)); Changed(nameof(CanApply)); Changed(nameof(PicksStatus));
+        Changed(nameof(ApplyHint)); Changed(nameof(CompareAgainHint));
     }
 
     private bool Matches(DatabaseUpdateRow row) => rowFilter switch

@@ -178,7 +178,7 @@ internal static partial class Program
         finally { Themes.ThemeManager.Apply(previousTheme); }
         Check("the real example input is byte-identical after every wizard walk", Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(workbook))) == sourceHash);
         FamilyListImportGuardTests(workbook, work);
-        FamilyListImportMatchTests();
+        FamilyListImportMatchTests(output);
         FamilyListImportCountGrammarTests();
         FamilyListDecisionHintTests(workbook);
         FamilyListChecklistHandoffTests();

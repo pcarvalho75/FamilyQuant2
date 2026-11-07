@@ -46,10 +46,14 @@ public partial class ClusterGenerationControl
         var dialog = new Window { Title = title, Owner = owner, Width = 560, SizeToContent = SizeToContent.Height,
             ResizeMode = ResizeMode.NoResize, WindowStartupLocation = WindowStartupLocation.CenterOwner, ShowInTaskbar = false };
         SecondaryWindowView.Theme(dialog);
-        var proceed = new Button { Content = action, IsDefault = true, Margin = new Thickness(0, 0, 8, 0) };
+        var proceed = new Button { Content = action, IsDefault = true, Margin = new Thickness(0, 0, 8, 0),
+            ToolTip = action == "Download and continue"
+                ? "Downloads missing UniProt evidence into the project before opening grouping review. Requires internet; File > Save keeps the evidence, and this fetch is not a curation Undo step."
+                : "Opens Group by evidence to confirm the scope needed for a family-world fetch. Opening the review changes no assignments until you apply them." };
         proceed.SetResourceReference(StyleProperty, "PrimaryButton");
         proceed.Click += (_, _) => dialog.DialogResult = true;
-        var cancel = new Button { Content = "Cancel", IsCancel = true };
+        var cancel = new Button { Content = "Cancel", IsCancel = true,
+            ToolTip = "Closes this prerequisite question without starting the offered step. The project stays unchanged." };
         var buttons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right };
         buttons.Children.Add(proceed); buttons.Children.Add(cancel);
         var panel = new StackPanel();
@@ -100,7 +104,11 @@ public partial class ClusterGenerationControl
             evidenceMode: startWithEvidence, confirmPanelLinks: session.ConfirmPanelLinks,
             discoverTaskWithProgress: session.DiscoverTaskAsync, previewScope: session.PreviewScopeAsync, addToFamily: session.AddToFamily,
             removeFromFamily: session.RemoveFromFamily, updateManualChoices: session.UpdateManualChoices,
-            createMatchContext: session.CreatePanelMatchContext, confirmPanelMatches: session.ConfirmPanelEvidenceMatches) { Owner = owner };
+            createMatchContext: session.CreatePanelMatchContext, confirmPanelMatches: session.ConfirmPanelEvidenceMatches,
+            fetchMissingPanel: (scope, operation) => session.RefreshPanelAsync(async () =>
+                await ViewModel.FetchEvidenceAsync(FetchDomainsHandlerOverride, operation, retryPanelOnly: true,
+                    panelRequest: new ReferencePanelRequest(WordCluster.ParseKeywords(scope)))), panelCoverage: session.PanelCoverageStatus, panelCovered: session.PanelScopeCovered,
+            fullPanelRequirement: session.FullPanelRequirement) { Owner = owner };
         window.AlignmentSource = highlighted => FamilyQuant.Evidence.Alignment.AlignmentCandidates.Find(fcf, session.Proposal, highlighted);
         if (importedFamilyChecklistRequested) window.RequestFamilyChecklist();
         window.ShowDialog();

@@ -28,23 +28,12 @@ public partial class FamilyClusterFile
 
     /// <summary>Copies the stored curation through the canonical UTF-8 stream, without a whole-file
     /// string or byte array. The temporary spool is removed when the operation completes or fails.</summary>
-    public FamilyClusterFile DeepCopy(OperationContext? operation = null)
-    {
-        operation?.ThrowIfCancellationRequested();
-        string path = Path.Combine(Path.GetTempPath(), "FamilyQuant-curation-" + Guid.NewGuid().ToString("N") + ".tmp");
-        using var staging = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite,
-            FileShare.Read | FileShare.Delete, 65536, FileOptions.DeleteOnClose | FileOptions.SequentialScan);
-        WriteJsonUtf8(staging);
-        staging.Flush();
-        operation?.ThrowIfCancellationRequested();
-        var copy = ReadJsonUtf8(() => new FileStream(path, FileMode.Open, FileAccess.Read,
-            FileShare.ReadWrite | FileShare.Delete, 65536, FileOptions.SequentialScan));
-        operation?.ThrowIfCancellationRequested();
-        return copy;
-    }
+    public FamilyClusterFile DeepCopy(OperationContext? operation = null) =>
+        JsonStreamCopy.ReadWritten<FamilyClusterFile>(WriteJsonUtf8, ReadJsonUtf8, operation, forceFile: true);
 
     internal static FamilyClusterFile ReadJsonUtf8(Func<Stream> open)
     {
+        if (CurationFormat.Detect(open) == CurationFormat.Current) return ReadCurationFormat2(open);
         try
         {
             using var source = open(); using var tracked = new CurationReadProbe(source);

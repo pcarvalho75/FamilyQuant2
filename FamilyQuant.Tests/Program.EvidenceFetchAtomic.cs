@@ -32,6 +32,7 @@ internal static partial class Program
 
     private static void EvidenceFetchAtomicTests()
     {
+        EvidenceSnapshotCopyTests();
         static OperationResult<EvidenceFetchOutcome> Run(FamilyClusterFile file, EvidenceAndPanelHandler handler,
             CancellationToken token = default, IProgress<OperationProgress>? progress = null, bool cancelAfter = false,
             CancellationTokenSource? cancellation = null) => Task.Run(() => CoreOperation.RunAsync("Fetch evidence", async context =>

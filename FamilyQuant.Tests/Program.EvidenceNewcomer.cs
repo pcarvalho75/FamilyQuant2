@@ -14,6 +14,7 @@ internal static partial class Program
     {
         Section("Group by evidence - newcomer wording and next actions");
         EnsureApplication();
+        ReviewTooltipCorrectionTests();
         var window = ReviewLayoutWindow();
         try
         {

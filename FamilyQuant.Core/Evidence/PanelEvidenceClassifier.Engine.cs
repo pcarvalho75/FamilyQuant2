@@ -21,7 +21,7 @@ public static partial class PanelEvidenceClassifier
     internal sealed record Resolution(string? Family, string Code, string Reason, IReadOnlyList<string>? LinkKeys = null, bool Confirmed = false);
 
     public static List<NeighbourReference> References(FamilyClusterFile file, EvidenceClassificationOptions options) =>
-        NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms))
+        NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms), options.ScopeTerms)
             .Where(r => !SequenceLabels.IsContaminant(r.Identifier) && !SequenceLabels.IsDecoy(r.Identifier)).ToList();
 
     public static EvidenceProposal Propose(FamilyClusterFile file, EvidenceClassificationOptions options,

@@ -345,7 +345,10 @@ internal static partial class Program
                         ?? Text((column.Header as FrameworkElement)?.ToolTip) ?? Realized(grid, column) ?? string.Empty;
                     Row("column header", header.Length == 0 ? "(no header text)" : header, string.Empty, Host(grid), column.Visibility == Visibility.Visible, tip);
                     // The controls of the column's cells, once per column: a realized cell when the grid shows one, else the template.
-                    var cellContent = Nodes(grid, null).OfType<DataGridCell>().FirstOrDefault(cell => ReferenceEquals(cell.Column, column))?.Content as DependencyObject;
+                    var realizedCell = Nodes(grid, null).OfType<DataGridCell>().FirstOrDefault(cell => ReferenceEquals(cell.Column, column));
+                    var cellContent = realizedCell?.Content as DependencyObject;
+                    // A tooltip on the cell itself (a column's CellStyle) shows when the control inside is hovered.
+                    string cellTip = Text(realizedCell?.ToolTip) is { Length: > 0 } shown ? shown : StyleToolTip(column.CellStyle) ?? string.Empty;
                     if (cellContent == null && column is DataGridTemplateColumn { CellTemplate: { } template })
                     {
                         if (!template.IsSealed) template.Seal();
@@ -360,6 +363,7 @@ internal static partial class Program
                         bool bound = inner is FrameworkElement bindable && System.Windows.Data.BindingOperations.IsDataBound(bindable, FrameworkElement.ToolTipProperty);
                         string innerTip = Text(inner is FrameworkElement innerElement ? innerElement.ToolTip : (inner as FrameworkContentElement)?.ToolTip);
                         if (innerTip.Length == 0 && bound) innerTip = "(bound to the row's data)";
+                        if (innerTip.Length == 0) innerTip = cellTip;
                         string innerLabel = Label(inner);
                         Row(innerKind, innerLabel.Length > 0 ? innerLabel : header.Length > 0 ? header : "(cell)", (inner as FrameworkElement)?.Name ?? string.Empty, cellHost,
                             inner is not UIElement innerUi || innerUi.IsEnabled, innerTip);
@@ -436,7 +440,9 @@ internal static partial class Program
             };
             if (text.Length == 0) text = AutomationProperties.GetName(node);
             if (text.Length == 0 && AutomationProperties.GetLabeledBy(node) is { } by) text = Label(by) is { Length: > 0 } l ? l : by is TextBlock t ? t.Text : string.Empty;
-            if (text.Length == 0 && node is ComboBox combo) text = Text(combo.SelectedItem);
+            if (text.Length == 0 && node is ComboBox combo)
+                text = combo.SelectedItem is string selected ? selected : combo.DisplayMemberPath.Length > 0 && combo.SelectedItem != null
+                    ? Text(combo.SelectedItem.GetType().GetProperty(combo.DisplayMemberPath)?.GetValue(combo.SelectedItem)) : string.Empty;
             return Regex.Replace(text, @"\s+", " ").Trim();
         }
 
@@ -493,6 +499,11 @@ internal static partial class Program
         }
         var grid = new DataGrid { AutoGenerateColumns = false, ItemsSource = new[] { "a", "b", "c" }, CanUserAddRows = false };
         grid.Columns.Add(Column("Bare", null)); grid.Columns.Add(Column("Explained", "Ticks this row for the next step; nothing changes until Apply."));
+        // A check-box column whose tooltip is on the cell, as DataGridCheckBoxColumn.CellStyle writes it: hovering the box shows it.
+        var cellStyled = new DataGridCheckBoxColumn { Header = "Cell styled" };
+        cellStyled.CellStyle = new Style(typeof(DataGridCell));
+        cellStyled.CellStyle.Setters.Add(new Setter(FrameworkElement.ToolTipProperty, "Includes this row when you confirm; nothing changes before that."));
+        grid.Columns.Add(cellStyled);
         var window = new Window { Content = grid, Width = 400, Height = 300, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual,
             ShowInTaskbar = false, ShowActivated = false };
         try { window.Show(); PumpDispatcher(); var collector = new CensusCollector(); collector.Collect(window); return collector.Rows; }

@@ -112,7 +112,7 @@ internal static partial class Program
             void Tooltip(string id, FrameworkElement element, string expected, string symbol) => Prove(id,
                 "retained tooltip: " + expected, element.ToolTip is string actual && actual == expected
                     && actual.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length >= 6, symbol);
-            Tooltip("FQ15-6E6228F56C09", top, "Show the largest families and combine every remaining family in one bar.", "ComboBoxFamilyTopN.ToolTip");
+            Tooltip("FQ15-6E6228F56C09", top, "Choose the largest families as separate bars: 10, 15, 20, 30 or all families, with 15 as the default; the remainder shares one bar. This changes the chart and subsequent figure exports without editing project quantities; unavailable until quantitation exists.", "ComboBoxFamilyTopN.ToolTip");
             Prove("FQ15-1F69AF99C92A", "family limit selector is displayed and defaults to fifteen", top.IsVisible && top.IsEnabled
                 && (string?)((ComboBoxItem)top.SelectedItem).Tag == "15", "ComboBoxFamilyTopN / ChartChoiceChanged");
             var options = new[] {
@@ -133,11 +133,11 @@ internal static partial class Program
                 Prove(textId, "family limit retains its label " + label, (string?)item.Content == label,
                     "ComboBoxFamilyTopN.Items");
                 var tooltip = limit switch {
-                    10 => ("FQ15-803482A42F63", "Ten families plus one bar for the rest. Suits presentation slides."),
-                    15 => ("FQ15-EFA52B9AC7C2", "Fifteen families plus one bar for the rest. This is the default."),
-                    20 => ("FQ15-CA12594472E1", "Twenty families plus one bar for the rest. Suits a paper figure."),
-                    30 => ("FQ15-7EF21BC4741F", "Thirty families plus one bar for the rest. Labels need more screen space."),
-                    _ => ("FQ15-3652AC893FCA", "Every family retains its own bar. Scrolling may be needed for a large grouping.") };
+                    10 => ("FQ15-803482A42F63", "Show the ten largest families separately and combine all remaining families in one bar, suited to presentation slides. This changes chart layout and subsequent figure exports without editing quantities."),
+                    15 => ("FQ15-EFA52B9AC7C2", "Show the fifteen largest families separately and combine all remaining families in one bar; this is the default. This changes chart layout and subsequent figure exports without editing quantities."),
+                    20 => ("FQ15-CA12594472E1", "Show the twenty largest families separately and combine all remaining families in one bar, suited to a paper figure. This changes chart layout and subsequent figure exports without editing quantities."),
+                    30 => ("FQ15-7EF21BC4741F", "Show the thirty largest families separately and combine all remaining families in one bar; labels need more screen space. This changes chart layout and subsequent figure exports without editing quantities."),
+                    _ => ("FQ15-3652AC893FCA", "Give every family its own chart bar, allowing scrolling when needed. This changes chart layout and subsequent figure exports without editing quantities.") };
                 Tooltip(tooltip.Item1, item, tooltip.Item2, "ComboBoxFamilyTopN / tag " + limit + " / ToolTip");
             }
             Prove("FQ15-DF754B3A82A5", "selection event applies all five family limits", allChanged, "ChartChoiceChanged");
@@ -153,7 +153,7 @@ internal static partial class Program
             Prove("FQ15-E25869E2C149", "percent label names the measured signal", (string?)percent.Content == "Percent of measured signal"
                 && checkedApplied && uncheckedApplied, "CheckBoxFamilyPercent.Content");
             Tooltip("FQ15-59366EF0C808", percent,
-                "Divide by the measured signal. Count-in-every-family bars can overlap and their percentages must not be summed.", "CheckBoxFamilyPercent.ToolTip");
+                "Show family bars as percentages of measured peptide signal instead of signal amounts; count-in-every-family bars can overlap and their percentages must not be summed. This changes charts and subsequent figure exports without editing quantities; disabled until quantitation exists.", "CheckBoxFamilyPercent.ToolTip");
 
             foreach (var item in new[] {
                 (ResultsExportKind.Peptides, "FQ15-26786D42C42C", "FQ15-523631E1F20E", "FQ15-44CB7F99655E"),
@@ -164,10 +164,10 @@ internal static partial class Program
                 exports.SelectedItem = exports.Items.OfType<ComboBoxItem>().Single(i => (string?)i.Tag == item.Item1.ToString());
                 PumpDispatcher();
                 var copy = item.Item1 switch {
-                    ResultsExportKind.Peptides => ("FQ15-3BCC49F296C6", "Peptide table (CSV)", "FQ15-21F91C29B9E2", "Per-peptide run, sequence, charge, mass, isotope areas, envelope and family assignments."),
-                    ResultsExportKind.Summary => ("FQ15-C7B652959EE3", "Run summary (CSV)", "FQ15-7EE1B55F5E41", "Per-run TIC, peptide counts, envelopes and recovery shares in invariant decimal format."),
-                    ResultsExportKind.Figures => ("FQ15-9D6165ED150A", "Screen figures (PNG)", "FQ15-2C55FFA436E6", "Every screen graph at 1920 by 1080 pixels in the Light palette."),
-                    _ => ("FQ15-3CDBA38C569B", "Presentation evidence pack", "FQ15-9F0785257B19", "Complete figures, exact CSV and JSON numbers and cutoff README. Required studies must be present.") };
+                    ResultsExportKind.Peptides => ("FQ15-3BCC49F296C6", "Peptide table (CSV)", "FQ15-21F91C29B9E2", "Select the peptide table with run, sequence, charge, mass, isotope areas, envelope and family assignments for CSV export. A file is written only when Export is confirmed, and Undo does not remove it."),
+                    ResultsExportKind.Summary => ("FQ15-C7B652959EE3", "Run summary (CSV)", "FQ15-7EE1B55F5E41", "Select per-run TIC, peptide counts, envelopes and recovery shares for CSV export in invariant decimal format. A file is written only when Export is confirmed, and Undo does not remove it."),
+                    ResultsExportKind.Figures => ("FQ15-9D6165ED150A", "Screen figures (PNG)", "FQ15-2C55FFA436E6", "Select every stored-result screen graph for PNG export, with standard figures at 1920 by 1080 pixels in the Light palette and complete data beside bounded figures. Export writes the chosen folder's files, and Undo does not remove them."),
+                    _ => ("FQ15-3CDBA38C569B", "Presentation evidence pack", "FQ15-9F0785257B19", "Select the complete figure set, exact CSV and JSON numbers and the cutoff README for an evidence-pack export. Export writes files only when the required computed studies are present, and Undo does not remove them.") };
                 var selected = (ComboBoxItem)exports.SelectedItem;
                 Prove(copy.Item1, "export label retained as " + copy.Item2, (string?)selected.Content == copy.Item2,
                     "ComboBoxExportKind / " + item.Item1 + " / Content");

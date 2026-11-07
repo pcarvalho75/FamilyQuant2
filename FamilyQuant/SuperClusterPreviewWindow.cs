@@ -31,12 +31,14 @@ namespace FamilyQuant
             Func<IReadOnlyList<int>, EvidenceReviewInput>? removeFromFamily = null,
             Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null,
             Func<string, PanelEvidenceMatchContext>? createMatchContext = null,
-            Func<string, Panels.PanelConfirmedEvidenceMatches, EvidenceReviewInput>? confirmPanelMatches = null)
+            Func<string, Panels.PanelConfirmedEvidenceMatches, EvidenceReviewInput>? confirmPanelMatches = null,
+            Func<string, FamilyQuant.Operations.OperationContext, Task>? fetchMissingPanel = null, Func<string, string>? panelCoverage = null, Func<string, bool>? panelCovered = null,
+            Func<string>? fullPanelRequirement = null)
         {
             InitializeComponent();
             this.createMatchContext = createMatchContext;
             model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask, confirmPanelLinks, discoverTaskWithProgress,
-                previewScope, addToFamily, removeFromFamily, updateManualChoices, confirmPanelMatches);
+                previewScope, addToFamily, removeFromFamily, updateManualChoices, confirmPanelMatches, fetchMissingPanel, panelCoverage, panelCovered, fullPanelRequirement);
             Loaded += async (_, _) => await DiscoverInitialTaskAsync();
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
@@ -105,9 +107,13 @@ namespace FamilyQuant
                 Dispatcher.BeginInvoke(DispatcherPriority.DataBind, new Action(UpdateApplyToolTip));
                 return;
             }
+            if (!model.CanConfirm && !model.IsBusy && model.ModeIndex == 0)
+            {
+                createButton.ToolTip = model.Keyword.Headline;
+                return;
+            }
             string next = model.IsBusy ? "Wait for the current review operation to finish"
-                : model.ModeIndex == 1 ? model.ApplyHint.TrimEnd('.')
-                : "Enter matching keywords and tick at least one eligible protein";
+                : model.ApplyHint.TrimEnd('.');
             createButton.ToolTip = model.CanConfirm
                 ? "Commit the reviewed ticks, family names and splits as one project grouping change. Undo restores the preceding grouping, and Save writes the project to disk."
                 : "Apply grouping is unavailable: " + next + ". The project stays unchanged until Apply grouping, after which Undo restores the preceding grouping and Save writes it to disk.";

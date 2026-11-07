@@ -13,7 +13,9 @@ namespace FamilyQuant.Tests;
 
 // Z12p2c capture of the Help chapter pictures: the Import family list wizard on the neutral example list with a small
 // invented project, 1366 x 768, one picture per page (light by default, --dark for the website's dark set). The Workbook
-// box is shown with a generic documents path, because the real path holds this computer's temporary folder.
+// box is shown with a generic documents path, because the real path holds this computer's temporary folder. Z12p2c1:
+// the Columns page with its decision-column question and the fills named as colour categories, and the decisions opened
+// through Use this decision column.
 internal static partial class Program
 {
     [TestCommandTable]
@@ -62,7 +64,8 @@ internal static partial class Program
             WindowStyle = WindowStyle.None, ResizeMode = ResizeMode.NoResize, ShowActivated = false, ShowInTaskbar = false };
         void Shot(string name)
         {
-            PumpDispatcher();
+            // Let opening sections (the colour categories) finish their layout before the picture.
+            PumpDispatcher(); System.Threading.Thread.Sleep(400); PumpDispatcher();
             var content = (FrameworkElement)window.Content; content.Measure(new Size(1366, 768)); content.Arrange(new Rect(0, 0, 1366, 768)); content.UpdateLayout();
             PumpDispatcher();
             Directory.CreateDirectory(output);
@@ -79,12 +82,17 @@ internal static partial class Program
             Shot("02-file-and-sheet");
             Check("guide: the example opens on its sheet with header row 3", model.Page == 1 && model.Preview?.ProposedHeaderRow == 3);
             ((Button)window.FindName("ForwardButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
+            // Z12p2c1: the abbreviation cells carry the example's fills, so they become colour categories with their plain names.
+            model.ColorColumn!.Header = model.ColorColumn.Headers.First(h => h == "Sigla"); PumpDispatcher();
+            Check("guide: the Columns page asks about the decision column and names each fill for her",
+                model.HasDecisionHint && model.DecisionHint.StartsWith("Decis", StringComparison.Ordinal)
+                && model.SourceColorChoices.Count > 0 && model.SourceColorChoices.All(c => c.Label == c.ColorName) && model.CanNext,
+                model.DecisionHint + "; " + string.Join(", ", model.SourceColorChoices.Select(c => c.ColorName + "=" + c.Label)));
             Shot("03-columns");
-            var decision = model.Columns.Single(c => c.Role == PanelImportFields.Decision);
-            decision.Header = decision.Headers.First(h => h.Contains("Decis", StringComparison.OrdinalIgnoreCase));
-            PumpDispatcher();
+            ((Button)window.FindName("UseDecisionHintButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
             Shot("03-columns-decisions");
-            Check("guide: eight decision values to review", model.Decisions.Count == 8 && model.ReviewingDecisions);
+            Check("guide: Use this decision column opens eight decision values to review",
+                model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header == model.DecisionHint && model.Decisions.Count == 8 && model.ReviewingDecisions);
             model.ConfirmDecisions();
             FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
             model.SelectedSpecialRow = model.SpecialRows.Single(r => r.SeveralNames && r.Parts.Count == 4 && r.Blocking);
@@ -102,14 +110,15 @@ internal static partial class Program
             var family = model.SelectedMatchFamily.Suggestions.FirstOrDefault(s => s.Text == "Peptidase S1 family") ?? model.SelectedMatchFamily.Suggestions.First();
             family.Use = true; PumpDispatcher();
             Shot("05-evidence-matches");
-            model.ConfirmMatches();
+            model.ConfirmMatches(_ => true);
             model.SelectedMatchFamily = model.MatchFamilies.First(f => f.Key == "PLA");
             var lipase = model.SelectedMatchFamily.Suggestions.FirstOrDefault(s => s.Text == "Phospholipase A2 family") ?? model.SelectedMatchFamily.Suggestions.First();
-            lipase.Use = true; model.ConfirmMatches();
+            lipase.Use = true; model.ConfirmMatches(_ => true);
             Check("guide: two families confirmed", model.MatchFamilies.Count(f => f.Choice == "Confirmed") == 2);
             while (model.MatchFamilies.FirstOrDefault(f => !f.Decided) is { } next) { model.SelectedMatchFamily = next; model.SkipMatch(); }
             FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
             model.PanelName = "Example family list";
+            Check("guide: Summary shows the colour category of the families that have one", model.SummaryFamilies.Any(f => !string.IsNullOrEmpty(f.Color)));
             Shot("06-summary");
             FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
             Shot("07-done");

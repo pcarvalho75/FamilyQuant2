@@ -16,7 +16,7 @@ public sealed partial class EvidenceGroupingSession
             ?? throw new InvalidOperationException("Import a family panel before matching its evidence names."));
         if (matchSnapshot == null || !matchSnapshot.IsCurrent(file)) matchSnapshot = new PanelEvidenceMatching(file);
         var snapshot = matchSnapshot;
-        return new(snapshot, panel.Families.Single(family => family.Key == familyKey), panel.ConfirmedEvidenceMatches?.GetValueOrDefault(familyKey), () => snapshot.IsCurrent(file));
+        return new(snapshot, panel.Families.Single(family => family.Key == familyKey), panel.ConfirmedEvidenceMatches?.GetValueOrDefault(familyKey), () => snapshot.IsCurrent(file), panel);
     }
     public EvidenceReviewInput ConfirmPanelEvidenceMatches(string familyKey, PanelConfirmedEvidenceMatches matches)
     {

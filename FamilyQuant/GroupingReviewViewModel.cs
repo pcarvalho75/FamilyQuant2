@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using FamilyQuant.Evidence;
+using FamilyQuant.Operations;
 
 namespace FamilyQuant
 {
@@ -27,6 +28,14 @@ namespace FamilyQuant
         private readonly Func<EvidenceManualRequest, EvidenceReviewInput>? addToFamily;
         private readonly Func<IReadOnlyList<int>, EvidenceReviewInput>? removeFromFamily;
         private readonly Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices;
+        private readonly Func<string, OperationContext, Task>? fetchMissingPanel;
+        private readonly Func<string, string>? panelCoverage;
+        private readonly Func<string, bool>? panelCovered;
+        private readonly Func<string>? fullPanelRequirement;
+        public string FullPanelHint => fullPanelRequirement?.Invoke() ?? "";
+        public bool CanFetchMissingPanel => fetchMissingPanel != null && !IsBusy && WordCluster.ParseKeywords(ScopeText).Count > 0 && panelCovered?.Invoke(ScopeText) != true;
+        public bool PanelFetchAvailable => fetchMissingPanel != null;
+        public string PanelCoverageText => panelCoverage?.Invoke(ScopeText) ?? "";
         private string manualFailure = "";
         private CancellationTokenSource? discoveryCancellation;
         public EvidenceTaskScopeInput? TaskScope { get; private set; }
@@ -44,6 +53,9 @@ namespace FamilyQuant
         public bool TaskScopeExpanded { get => taskScopeExpanded; set => Set(ref taskScopeExpanded, value); }
         public KeywordReviewViewModel Keyword { get; }
         public EvidenceReviewViewModel? Evidence => evidence;
+        public string PanelChecklistHint => evidence == null || evidence.PanelChecklist.Count == 0
+            ? "Group by evidence reads the database and scope by itself when it opens (this takes minutes); then press Update proposal to fill the family checklist."
+            : "Matches are database targets, not automatic assignments; match types may overlap.";
         public bool EvidenceAvailable => evidence != null || propose != null;
         public bool IsBusy { get => isBusy; private set { isBusy = value; Changed(); Changed(nameof(CanEdit)); Changed(nameof(CanDiscoverTask)); Changed(nameof(CanUpdateProposal)); Changed(nameof(CanCheckMotif)); Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); } }
         public bool CanUpdateProposal => propose != null && !IsBusy && !string.IsNullOrWhiteSpace(ScopeText);
@@ -86,7 +98,7 @@ namespace FamilyQuant
         private static string QuoteScopeKeyword(string keyword) => "\""
             + Regex.Replace(keyword.Replace('"', ' ').Replace('\u201c', ' ').Replace('\u201d', ' '), @"\s+", " ").Trim() + "\"";
         public string Summary => ModeIndex == 1 ? Evidence?.Summary ?? "Set the scope and build an evidence proposal." : Keyword.Headline;
-        public bool CanConfirm => !IsBusy && (ModeIndex == 1 ? Evidence?.CanConfirm == true && ScopeText == proposalScope
+        public bool CanConfirm => !IsBusy && (ModeIndex == 1 ? Evidence?.CanConfirm == true && FullPanelHint.Length == 0 && ScopeText == proposalScope
             && (MotifPattern.Length == 0 || checkedMotifPattern == MotifPattern) : Keyword.CanCreate);
         public string ApplyHint
         {
@@ -94,7 +106,9 @@ namespace FamilyQuant
             {
                 if (ModeIndex != 1) return "";
                 if (IsBusy) return "Please wait for the current review step to finish.";
+                if (FullPanelHint.Length > 0) return FullPanelHint;
                 if (manualFailure.Length > 0) return manualFailure;
+                if (!string.IsNullOrWhiteSpace(ScopeText) && panelCovered?.Invoke(ScopeText) == false) return PanelCoverageText;
                 if (Evidence == null) return string.IsNullOrWhiteSpace(ScopeText)
                     ? "Enter scope words, then use Update proposal." : "Use Update proposal to build the family proposal.";
                 if (ScopeText != proposalScope) return "Scope changed: use Update proposal before Apply grouping.";
@@ -122,7 +136,9 @@ namespace FamilyQuant
             Func<EvidenceManualRequest, EvidenceReviewInput>? addToFamily = null,
             Func<IReadOnlyList<int>, EvidenceReviewInput>? removeFromFamily = null,
             Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null,
-            Func<string, Panels.PanelConfirmedEvidenceMatches, EvidenceReviewInput>? confirmPanelMatches = null)
+            Func<string, Panels.PanelConfirmedEvidenceMatches, EvidenceReviewInput>? confirmPanelMatches = null,
+            Func<string, OperationContext, Task>? fetchMissingPanel = null, Func<string, string>? panelCoverage = null, Func<string, bool>? panelCovered = null,
+            Func<string>? fullPanelRequirement = null)
         {
             Keyword = new KeywordReviewViewModel(keyword); this.propose = propose; this.motif = motif;
             this.discoverTask = discoverTaskWithProgress ?? (discoverTask == null ? null : (_, token) => discoverTask(token));
@@ -132,12 +148,30 @@ namespace FamilyQuant
             scopePreviewBaselineCaptured = !string.IsNullOrWhiteSpace(initialScope);
             this.addToFamily = addToFamily; this.removeFromFamily = removeFromFamily; this.updateManualChoices = updateManualChoices;
             this.confirmPanelMatches = confirmPanelMatches;
+            this.fetchMissingPanel = fetchMissingPanel; this.panelCoverage = panelCoverage;
+            this.panelCovered = panelCovered;
+            this.fullPanelRequirement = fullPanelRequirement;
             scopeText = initialScope; proposalScope = initialScope;
             Keyword.PropertyChanged += (_, _) => NotifySummary();
             SetEvidence(input);
             modeIndex = input != null || evidenceMode ? 1 : 0;
         }
         public Task DiscoverTaskAsync() => DiscoverTaskAsync(null);
+
+        public async Task FetchMissingPanelAsync(OperationContext operation)
+        {
+            if (!CanFetchMissingPanel) return;
+            string scope = ScopeText; int request = ++generation;
+            try
+            {
+                IsBusy = true; Status = "Fetching missing panel entries for the chosen scope...";
+                await fetchMissingPanel!(scope, operation);
+                if (request != generation) return;
+                SetEvidence(null); proposalScope = "";
+                Status = "Panel stored. Use Update proposal to review the chosen scope.";
+            }
+            finally { if (request == generation) IsBusy = false; NotifySummary(); }
+        }
 
         internal void ReportOperationFailure(Exception error)
         {
@@ -254,11 +288,13 @@ namespace FamilyQuant
             if (checklistKey != null && evidence != null) evidence.SelectedChecklistFamily = evidence.PanelChecklist.FirstOrDefault(row => row.Key == checklistKey);
             if (evidence != null) evidence.PropertyChanged += EvidenceChanged;
             checkedMotifPattern = ""; MotifReport = "";
+            NotifyPanelLinkList();
             Changed(nameof(Evidence)); Changed(nameof(EvidenceAvailable)); Changed(nameof(CanCheckMotif)); NotifySummary();
+            Changed(nameof(PanelChecklistHint));
             Changed(nameof(CanEditManual));
         }
         private void EvidenceChanged(object? sender, PropertyChangedEventArgs e) { Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); }
-        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); Changed(nameof(CanMatchPanelNames)); NotifyChecklistActions(); }
+        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); Changed(nameof(CanMatchPanelNames)); Changed(nameof(MatchPanelNamesHint)); Changed(nameof(CanFetchMissingPanel)); Changed(nameof(PanelCoverageText)); NotifyChecklistActions(); }
 
         private void RestoreManualState(IReadOnlyList<EvidenceManualChoice>? choices)
         {

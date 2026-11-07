@@ -21,6 +21,9 @@ public sealed class CurationFamilyRow : ScreenViewModel
         set { if (Set(ref locked, value)) lockChanged?.Invoke(value); }
     }
     public bool CanEdit => Proteins > 0;
+    public string LockHint => CanEdit
+        ? "Protects this family from automatic grouping, or removes that protection. Undo restores the previous lock state."
+        : "Unavailable because this family has no target proteins. Choose a family containing target proteins to edit its lock here.";
     public string CountHelp => Proteins.ToString("N0") + " target proteins in the whole family; "
         + VisibleProteins.ToString("N0") + " protein rows are visible under the current filters.";
     public CurationFamilyRow(int id, string name, int proteins, int visible, double? fullXic, double? patternLab,

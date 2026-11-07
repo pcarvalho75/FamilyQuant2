@@ -43,7 +43,9 @@ public partial class ClusterGenerationControl
     }
 
     public void ReportPanelRefreshPending() => ShowCurationOperationResult(
-        "Panel applied. Rebuild family assignments before recomputing subclass labels.");
+        "Panel applied. Rebuild family assignments before recomputing subclass labels."
+        + (fcf.EvidenceSource?.ReferencePanel?.Coverage != null && ReferencePanelUseRequirements.HasSubclasses(fcf.FamilyPanel)
+            ? " Choose Full panel in Fetch evidence." : ""));
 
     public void ReportPanelRefreshFailure(string reason) => ShowCurationOperationResult(
         "Panel applied, but subclass labels were not updated: " + reason);

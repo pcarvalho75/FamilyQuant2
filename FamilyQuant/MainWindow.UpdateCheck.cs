@@ -70,12 +70,14 @@ public partial class MainWindow
         var open = new Button { Name = "ButtonOpenReleasePage", Content = "Open release page", IsDefault = true, Margin = new Thickness(0, 0, 8, 0),
             ToolTip = "Opens the release page in your browser. Nothing is downloaded or installed." };
         open.Click += (_, _) => (OpenReleasePageOverride ?? OpenInBrowser)(result.ReleasePage!);
-        var close = new Button { Content = "Close", IsCancel = true };
+        var close = new Button { Content = "Close", IsCancel = true,
+            ToolTip = "Closes this release notice and keeps FamilyQuant open. The project stays unchanged." };
         close.Click += (_, _) => window.Close();
         var buttons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 12, 0, 0) };
         if (result.Installer != null)
         {
-            var install = new Button { Name = "ButtonInstallUpdate", Content = "Install update", Margin = new Thickness(0, 0, 8, 0) };
+            var install = new Button { Name = "ButtonInstallUpdate", Content = "Install update", Margin = new Thickness(0, 0, 8, 0),
+                ToolTip = "Downloads this release's installer after Save, Discard or Cancel protects open edits. FamilyQuant closes to install it; project Undo does not revert installation." };
             install.SetResourceReference(StyleProperty, "PrimaryButton");
             install.Click += async (_, _) => { window.Close(); await InstallUpdateAsync(result); };
             buttons.Children.Add(install);

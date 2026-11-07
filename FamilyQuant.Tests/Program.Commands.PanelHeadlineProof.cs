@@ -32,8 +32,7 @@ internal static partial class Program
         {
             string hash = FileFingerprint.Sha256(path);
             using var zip = ZipFile.OpenRead(path);
-            using var stream = zip.GetEntry(ProjectStore.CurationEntryName)!.Open();
-            using var json = JsonDocument.Parse(stream);
+            using var json = JsonDocument.Parse(StoredCurationJson(zip));
             bool panel = json.RootElement.TryGetProperty("FamilyPanel", out var p) && p.ValueKind != JsonValueKind.Null;
             bool applied = json.RootElement.TryGetProperty("PanelProteinAssignments", out var a) && a.ValueKind == JsonValueKind.Array && a.GetArrayLength() > 0;
             bool current = false; int multiple = 0;

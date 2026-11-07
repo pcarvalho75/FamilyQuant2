@@ -111,13 +111,15 @@ public partial class ClusterGenerationControl
         panel.Children.Add(new TextBlock { Text = "Confirm the scope words or quoted phrases. Suggestions can include a reviewed keyword and a tissue annotation phrase. The stored world will contain family references for this scope.",
             TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 12, 0, 4) });
         var scope = new TextBox { Text = string.Join(", ", proposal.ProposedScopeTerms.ConvertAll(term => "\"" + term + "\"")),
-            ToolTip = "Scope words or quoted phrases, as in Group by evidence." };
+            ToolTip = "Scope terms for keyword and tissue annotations, initially proposed from database evidence; enter at least one word or quoted phrase, separated by spaces, commas or semicolons, with no unit or fixed length limit. Confirm and fetch uses these terms to download family references into the project." };
         panel.Children.Add(scope);
         var error = new TextBlock { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 4, 0, 4) };
         panel.Children.Add(error);
         var buttons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right };
-        var fetch = new Button { Content = "Confirm and fetch", IsDefault = true };
-        var cancel = new Button { Content = "Cancel", IsCancel = true };
+        var fetch = new Button { Content = "Confirm and fetch", IsDefault = true,
+            ToolTip = "Validates the scope terms and starts downloading family references from UniProt into the project. Requires internet; File > Save keeps the completed family world." };
+        var cancel = new Button { Content = "Cancel", IsCancel = true,
+            ToolTip = "Closes this scope question without downloading a family world. The project stays unchanged." };
         EvidenceTaskChoice? result = null;
         fetch.Click += (_, _) =>
         {

@@ -15,13 +15,13 @@
                 <TextBlock Text="{Binding Title}" FontSize="20" FontWeight="SemiBold" TextWrapping="Wrap"/>
                 <TextBlock x:Name="OperationCurrentItem" Text="{Binding Message}" Margin="0,12,0,16" TextWrapping="Wrap"/>
                 <ProgressBar x:Name="OperationProgressBar" Height="6" Minimum="0" Maximum="100" Value="{Binding Percent, Mode=OneWay}" IsIndeterminate="{Binding IsIndeterminate}"
-                             ToolTip="Shows progress for the current operation when its total is known."/>
-                <TextBlock x:Name="OperationElapsed" Text="{Binding ElapsedText}" Margin="0,12,0,0"/>
-                <TextBlock x:Name="OperationSinceLastStep" Text="{Binding SinceLastStepText}" Margin="0,4,0,0"/>
+                             ToolTip="Shows completed work as a percentage when the current phase has a known total, otherwise indicates ongoing work without a percentage. Reading progress changes nothing."/>
+                <TextBlock x:Name="OperationElapsed" Text="{Binding ElapsedText}" Margin="0,12,0,0" ToolTip="Time since this operation began, in hours, minutes and seconds. Reading the clock changes nothing."/>
+                <TextBlock x:Name="OperationSinceLastStep" Text="{Binding SinceLastStepText}" Margin="0,4,0,0" ToolTip="Time since the latest recorded progress step, in hours, minutes and seconds. A quiet phase can still be working; reading the clock changes nothing."/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-                  <Button Content="Operation log" Click="OperationLog_Click" Margin="0,0,8,0" ToolTip="Read the timestamped steps recorded for this operation."/>
+                  <Button Content="Operation log" Click="OperationLog_Click" Margin="0,0,8,0" ToolTip="Opens the timestamped steps recorded so far for this operation. This read-only log changes no project data and does not stop the operation."/>
                   <Button x:Name="CancelOperationButton" Content="Cancel" Command="{Binding CancelCommand}"
-                          ToolTip="Requests cancellation after the current phase. Previous results stay available."/>
+                          ToolTip="{Binding CancelHint, FallbackValue='Unavailable because no operation is attached to this overlay. Start an operation to enable cancellation before it publishes its change.'}"/>
                 </StackPanel>
               </StackPanel>
               <local:BusyLogo x:Name="AnimatedLogo" IsActive="{Binding IsBusy}" MaxHeight="220" Margin="0,0,0,24"/>
