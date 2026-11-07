@@ -131,6 +131,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ResultsTooltipTests());
             suite.Add(() => Check("native Results export fixture propagates its worker exit status",
                 RunResultsExportFixture(Path.Combine(workDir, "results-export-facts")) == 0));
+            suite.AddWithApplication(() => ResultsDocumentLifetimeTests(Path.Combine(workDir, "results-document-lifetime")));
             suite.Add(() => DeNovoViewModelTests(workDir));
             suite.Add(() => HomologyResultsTests(workDir));
             suite.Section("Database parsing and the decoy tag");

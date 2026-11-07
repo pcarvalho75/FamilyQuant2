@@ -74,7 +74,7 @@ public sealed partial class CurationViewModel
             rows.Add(new CurationFamilyRow(pair.Key, familyNames.TryGetValue(pair.Key, out var name) ? name : "",
                 targets.Length, pair.Value.Length, first?.FullXicShare,
                 Quantitation.DisplayedMode == null ? null : first?.XICUser, Document.LockedUserIds.Contains(pair.Key),
-                value => SetFamilyLock(pair.Key, value)));
+                FamilyLockCallback(this, pair.Key)));
         }
         refreshingFamilies = true;
         try
@@ -85,6 +85,14 @@ public sealed partial class CurationViewModel
             Changed(nameof(SelectedFamilyProteins)); Changed(nameof(ProteinHeading));
         }
         finally { refreshingFamilies = false; }
+    }
+
+    private static Action<bool> FamilyLockCallback(CurationViewModel model, int family)
+    {
+        // WPF caches an inactive family view and its current row after project replacement.
+        // That row must not own the previous curation through its edit callback.
+        var owner = new WeakReference<CurationViewModel>(model);
+        return value => { if (owner.TryGetTarget(out var current)) current.SetFamilyLock(family, value); };
     }
 
     public bool RenameFamily(int family, string name)
