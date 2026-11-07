@@ -24,7 +24,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         "Resolve each row marked Needs a choice before continuing.",
         "Confirm or skip the suggestions for each family; nothing is matched for you.",
         "Check what will be created; nothing has changed yet.",
-        "Open the family checklist to review which proteins belong in each family." };
+        FamilyListImportHelp.DoneNext };
     private readonly IPanelSheetPreviewReader reader;
     private readonly IFamilyPanelSpreadsheetImporter importer;
     private readonly FamilyListImportTransaction transaction;

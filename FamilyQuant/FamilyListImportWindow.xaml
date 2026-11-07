@@ -276,6 +276,8 @@
                             <TextBlock Text="Workbook unchanged" Style="{StaticResource BodyText}" Margin="0,0,0,4"/>
                             <TextBlock Text="Protein grouping unchanged" Style="{StaticResource BodyText}" Margin="0,0,0,4"/>
                             <TextBlock Text="Project not saved yet" Style="{StaticResource BodyText}"/>
+                            <TextBlock x:Name="MatchingEffectNote" Text="{x:Static local:FamilyListImportHelp.MatchingEffect}" Style="{StaticResource CaptionText}" Margin="0,12,0,0"
+                                       TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{x:Static local:FamilyListImportHelp.MatchingEffect}"/>
                         </StackPanel>
                     </Border><Button x:Name="UndoImportButton" Content="Undo import" Click="Undo_Click" IsEnabled="{Binding CanUndo}" HorizontalAlignment="Left" Margin="0,12,0,0"
                                      ToolTip="Restores the list and project state from immediately before this import in one Undo step. Available only while this import is the current unchanged Undo step."/></StackPanel>
