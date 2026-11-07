@@ -59,17 +59,17 @@ public sealed partial class FamilyPanelSpreadsheetImporter
             proposal.FamilyProposal.Reasons[PanelImportFields.ColorCategory] = "Names are proposed from source legend cells whose fills match the abbreviation cells.";
         }
 
+        var labels = entries.Select(entry => WorkbookLabel(entry.Label)).Where(label => label.Length > 0).ToHashSet(StringComparer.OrdinalIgnoreCase);
         string decisionHeader = choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Decision, "");
         bool ambiguous = false;
         if (!table.Headers.Contains(decisionHeader, StringComparer.Ordinal) && entries.Count > 0)
         {
-            var labels = entries.Select(entry => WorkbookLabel(entry.Label)).Where(label => label.Length > 0).ToHashSet(StringComparer.OrdinalIgnoreCase);
             var excluded = new[] { PanelImportFields.FamilyKey, PanelImportFields.DisplayName, PanelImportFields.Pfam }
                 .Select(role => choices.ColumnHeaders.GetValueOrDefault(role, "")).ToHashSet(StringComparer.Ordinal);
             var ranked = table.Headers.Where(header => !excluded.Contains(header)).Select(header =>
             {
                 var values = rows.Select(row => Value(row, header)).Where(value => !string.IsNullOrWhiteSpace(value)).ToList();
-                return new { Header = header, Filled = values.Count, Matched = values.Count(value => labels.Contains(WorkbookDecisionLabel(value).Label)) };
+                return new { Header = header, Filled = values.Count, Matched = values.Count(value => labels.Contains(WorkbookLegendLabel(value, labels).Label)) };
             }).Where(column => column.Matched >= Math.Min(2, column.Filled) && column.Matched > 0 && column.Matched * 2 >= column.Filled)
                 .OrderByDescending(column => column.Matched).ThenByDescending(column => (double)column.Matched / column.Filled).ToArray();
             ambiguous = ranked.Length > 1 && ranked[0].Matched == ranked[1].Matched
@@ -100,11 +100,11 @@ public sealed partial class FamilyPanelSpreadsheetImporter
         foreach (var group in rows.Where(row => !string.IsNullOrWhiteSpace(Value(row, decisionHeader)))
             .GroupBy(row => Value(row, decisionHeader), StringComparer.Ordinal))
         {
-            string baseLabel = WorkbookDecisionLabel(group.Key).Label;
-            var matched = entries.Where(entry => baseLabel.Length > 0
-                && string.Equals(WorkbookLabel(entry.Label), baseLabel, StringComparison.OrdinalIgnoreCase)).ToList();
+            var matchLabel = WorkbookLegendLabel(group.Key, labels);
+            var matched = entries.Where(entry => matchLabel.Label.Length > 0
+                && string.Equals(WorkbookLabel(entry.Label), matchLabel.Label, StringComparison.OrdinalIgnoreCase)).ToList();
             var meanings = matched.Select(entry => entry.Meaning).Where(value => !string.IsNullOrWhiteSpace(value)).Distinct(StringComparer.Ordinal).ToList();
-            var evidence = WorkbookDecisionEvidence(group.Key, meanings, keys);
+            var evidence = WorkbookDecisionEvidence(group.Key, meanings, keys, matchLabel.QualifierFallback);
             var action = evidence.Mapping;
             proposal.Decisions.Add(new PanelWorkbookDecisionHint { SourceValue = group.Key,
                 RowNumbers = group.Select(row => row.RowNumber).ToList(), LegendEntries = matched, LegendMeaning = string.Join("\n", meanings),
@@ -119,6 +119,14 @@ public sealed partial class FamilyPanelSpreadsheetImporter
 
     private static string WorkbookLabel(string value) => value.Trim().Normalize(NormalizationForm.FormC);
 
+    private static (string Label, bool QualifierFallback) WorkbookLegendLabel(string value, IReadOnlySet<string> labels)
+    {
+        string full = WorkbookLabel(value);
+        if (labels.Contains(full)) return (full, false);
+        var source = WorkbookDecisionLabel(full);
+        return (source.Label, source.Qualifier.Length > 0);
+    }
+
     private static (string Label, string Qualifier) WorkbookDecisionLabel(string value)
     {
         string normalized = value.Trim().Normalize(NormalizationForm.FormC);
@@ -131,7 +139,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter
     // D84: general program-action vocabulary, in English, Portuguese and Spanish. These words only
     // propose UI actions from decision/legend text; they never classify proteins or identify sheets.
     // D87: action labels take precedence over same-action/descriptive legend text. Nearby preceding
-    // negation cancels its action only; bracketed source qualifiers always require explicit review.
+    // negation cancels its action only; source qualifiers require review on base-label fallback.
     private static readonly IReadOnlyDictionary<WorkbookActionSignal, string[]> WorkbookActionVocabulary = new Dictionary<WorkbookActionSignal, string[]>
     {
         [WorkbookActionSignal.Quantify] = ["quantify", "keep", "include", "quantificar", "manter", "incluir", "cuantificar", "conservar", "mantener"],
@@ -146,17 +154,17 @@ public sealed partial class FamilyPanelSpreadsheetImporter
     };
 
     private static (FamilyPanelDecisionMapping? Mapping, string Reason) WorkbookDecisionEvidence(string label,
-        IReadOnlyList<string> meanings, IReadOnlySet<string> keys)
+        IReadOnlyList<string> meanings, IReadOnlySet<string> keys, bool qualifierFallback)
     {
         var source = WorkbookDecisionLabel(label);
-        var labelSignals = WorkbookDecisionSignals(source.Label, keys);
+        var labelSignals = WorkbookDecisionSignals(qualifierFallback ? source.Label : label, keys);
         var legendSignals = meanings.Select(meaning => WorkbookDecisionSignals(meaning, keys)).ToArray();
         var all = new[] { labelSignals }.Concat(legendSignals).ToArray();
         var matchedWords = all.SelectMany(item => item.Words).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray();
         string evidence = matchedWords.Length == 0 ? "No program action word matched."
             : "Matched program words: " + string.Join(", ", matchedWords) + ".";
         if (meanings.Count > 0) evidence += " Legend meaning: " + string.Join(" | ", meanings) + ".";
-        if (source.Qualifier.Length > 0)
+        if (qualifierFallback)
             return (null, evidence + " Bracketed qualifier: " + source.Qualifier + ". Review its action.");
         bool actionLabel = labelSignals.Actions.Count == 1 && !labelSignals.NeedsReview;
         if (labelSignals.NeedsReview || !actionLabel && legendSignals.Any(item => item.NeedsReview))
