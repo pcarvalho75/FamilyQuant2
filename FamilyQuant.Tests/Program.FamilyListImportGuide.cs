@@ -23,18 +23,18 @@ internal static partial class Program
         }),
     ];
 
-    /// <summary>Z12p2c: the Help chapter "Import your family list", one part per wizard page with its picture, the
+    /// <summary>Z12p2c: the Help chapter "Import family list", one part per wizard page with its picture, the
     /// routes that save matches later, and the window that shows it.</summary>
     private static void FamilyListImportGuideTests(string? output = null)
     {
-        Section("Import guide: the Help chapter for File > Import family panel (Z12p2c)");
+        Section("Import guide: the Help chapter for File > Import family list (Z12p2c, Z12p2c1)");
         EnsureApplication();
         var sections = FamilyListImportGuide.Sections;
         string text = FamilyListImportGuide.Text();
         Check("the guide uses the current import and checklist names", FamilyListImportGuide.Title == "Import family list"
             && !text.Contains("Import family panel", StringComparison.Ordinal) && !text.Contains("Panel checklist", StringComparison.Ordinal));
-        Check("the guide describes optional source categories and explicit default decisions", text.Contains("source name", StringComparison.Ordinal)
-            && text.Contains("Next asks", StringComparison.Ordinal) && text.Contains(FamilyListImportHelp.DecisionsSummary, StringComparison.Ordinal));
+        Check("the guide describes optional source categories and explicit default decisions", text.Contains("Colour categories (optional) opens by itself", StringComparison.Ordinal)
+            && text.Contains("Next asks once", StringComparison.Ordinal) && text.Contains(FamilyListImportHelp.DecisionsSummary, StringComparison.Ordinal));
         Check("the guide retains the Done prerequisites and matching boundary", text.Contains(FamilyListImportHelp.DoneNext, StringComparison.Ordinal)
             && text.Contains(FamilyListImportHelp.MatchingEffect, StringComparison.Ordinal));
         Check("one part for each of the seven wizard pages, in order", Enumerable.Range(1, 7).All(n => sections.Any(s => s.Title.StartsWith(n + ".", StringComparison.Ordinal)))
@@ -61,16 +61,35 @@ internal static partial class Program
             "Original source row", "Use this row as", "Use this choice", "Needs a choice", "Keep as one family", "One family per name",
             "One group reported under others", "Keep or rename this row", "Skip this row", "Skipped", "Use selected matches", "Skip this family",
             "Continue without matches", "Kept from previous panel", "View source notes", "Import", "Family checklist", "Undo import", "Close",
-            "Use this decision column", "Match stored names", "Apply grouping", "Apply panel", "File > Save",
+            "Use this decision column", "Match stored names", "Apply grouping", "Apply panel", "Review spreadsheet decisions",
+            "Colour categories (optional)", "Colour", "Group by evidence", "Read database and scope", "Update proposal", "Place outside matches by hand",
+            "Import family list",
         };
-        Check("the chapter names the wizard's controls and choices with the program's own words", labels.All(text.Contains),
+        Check("the chapter names the wizard's controls and choices with the program's own words", labels.All(text.Contains) && text.Contains("File > Save", StringComparison.Ordinal),
             string.Join(", ", labels.Where(l => !text.Contains(l))));
+        // Z12p2c1: each of those words is still a label of the program, a string of its own sources, so a renamed control fails here.
+        string repository = GoldenNumbers.FindRepository();
+        string program = string.Concat(new[] { "FamilyListImportWindow.xaml", "FamilyListImportViewModel.cs", "FamilyListImportViewModel.Rows.cs",
+                "FamilyListImportViewModel.Commit.cs", "FamilyListImportModels.cs", "SuperClusterPreviewWindow.xaml", "PanelEditorWindow.xaml",
+                "MainWindow.xaml", "ClusterGenerationControl.xaml" }
+            .Select(name => File.ReadAllText(Path.Combine(repository, "FamilyQuant", name))));
+        Check("every control the chapter names is a label in the program's sources", labels.All(l => program.Contains("\"" + l + "\"", StringComparison.Ordinal)
+            || program.Contains("\"" + l + "...\"", StringComparison.Ordinal)),
+            string.Join(", ", labels.Where(l => !program.Contains("\"" + l + "\"", StringComparison.Ordinal) && !program.Contains("\"" + l + "...\"", StringComparison.Ordinal))));
+        Check("the chapter quotes the wizard's own lines: decisions, the Quantify question and the Done page",
+            text.Contains(FamilyListImportHelp.DecisionsSummary, StringComparison.Ordinal) && text.Contains(FamilyListImportHelp.DoneNext, StringComparison.Ordinal)
+            && text.Contains(FamilyListImportHelp.MatchingEffect, StringComparison.Ordinal)
+            && program.Contains("Quantify every family for this import?", StringComparison.Ordinal) && text.Contains("Quantify every family for this import?", StringComparison.Ordinal)
+            && program.Contains("\"Could \" + DecisionHint + \" hold the family actions?\"", StringComparison.Ordinal) && text.Contains("hold the family actions?", StringComparison.Ordinal));
+        Check("the chapter says there is no conditional action and that the program's own labels are confirmed at once",
+            text.Contains("There is no conditional action", StringComparison.Ordinal) && text.Contains("is confirmed at once", StringComparison.Ordinal)
+            && text.Contains("named for you with its plain name", StringComparison.Ordinal) && text.Contains("never hold up Next", StringComparison.Ordinal));
         Check("both later routes for saving matches are there, with and without grouping proteins",
             text.Contains("Apply grouping and File > Save keep the choices made in that review", StringComparison.Ordinal)
             && text.Contains("press Edit current panel, select the family, use Match stored names, then Apply panel and File > Save", StringComparison.Ordinal));
         Check("D21: nothing in the chapter names an organism, a venom or a sample's numbers", !DatabaseSpecificCopy.IsMatch(text) && !HistoricalSampleCopy.IsMatch(text),
             DatabaseSpecificCopy.Match(text).Value + HistoricalSampleCopy.Match(text).Value);
-        Check("no em or en dash in the chapter", !text.Contains('–') && !text.Contains('—'));
+        Check("no em or en dash in the chapter", !text.Contains('\u2013') && !text.Contains('\u2014'));
         string index = File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "docs", "INDEX.md"));
         Check("docs/INDEX.md lists the command that takes the chapter's pictures", index.Contains("`--import-guide-screens <output-dir> [--dark]`", StringComparison.Ordinal));
         FamilyListImportHelpRouteTests(output);
