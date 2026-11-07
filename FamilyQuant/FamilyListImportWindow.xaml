@@ -351,6 +351,7 @@
                                       Visibility="{Binding SelectedMatchFamily.HasAdditionalSuggestions, Converter={StaticResource BoolVisibility}}"
                                       ToolTip="Shows extra stored-evidence suggestions for this family, including shared keywords and tissue text. Opening the list changes only this page.">
                                 <DataGrid x:Name="AdditionalMatchSuggestionsGrid" ItemsSource="{Binding SelectedMatchFamily.AdditionalSuggestions}"
+                                          Visibility="{Binding SelectedMatchFamily.ShowAdditional, Converter={StaticResource BoolVisibility}}"
                                           AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" MaxHeight="190" MinHeight="100"
                                           AutomationProperties.Name="Additional stored-evidence matches" Margin="0,6,0,0"
                                           ToolTip="Lists extra stored-evidence labels whose names may provide less specific support for this family. A tick is only a draft choice until you confirm the matches and import the family list.">
