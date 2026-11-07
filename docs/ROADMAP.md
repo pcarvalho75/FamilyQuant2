@@ -146,7 +146,7 @@ Paulo, 11-07: "no problem in doing a new file version type, we need to push forw
 | Z12q6 | The rule-7 check green over every window and registered in DefaultSuite | L | 0.2 | Z12q9, Z12q3b, Z12h2b | Z12q7a, Z12q7b, Z12q7c | --test-tooltips green in the default suite; reviewed | FL | | 0 | 0 | |
 | Z12q7a | Every tooltip read as a whole, part 1: the main window and menus, Home, the setup page, the panel editor, the matching dialog, the busy overlay | L | 0.3 | Z12q6 | Z12q7d | Verdict posted; owners fixed what was found | KM | | 0 | 0 | |
 | Z12q7b | Part 2: the review window, Add to family by hand, the coherence members window, the import wizard | L | 0.3 | Z12q6 | Z12q7d | Verdict posted; owners fixed what was found | DS | | 0 | 0 | |
-| Z12q7c | Part 3: the science views, Quantify, curation quantitation, Analytics, USearch, the database update, alignment and installer windows | L | 0.3 | Z12q6 | Z12q7d | Verdict posted; owners fixed what was found | D2 | | 0 | 0 | |
+| Z12q7c | Part 3: the science views, Quantify, curation quantitation, Analytics, USearch, the database update, alignment and installer windows | L | 0.3 | Z12q6 | Z12q7d | Verdict posted; owners fixed what was found | DS | | 0 | 0 | |
 | Z12q7d | Paulo sees the census table of every tooltip before release | L | 0.1 | Z12q7a, Z12q7b, Z12q7c | Z12h1 | Paulo saw the table | Paulo | | 0 | 0 | |
 
 ### W20 Release 2.1.11 (FQFloat, Orchestrator, FQHome, Paulo)
