@@ -201,7 +201,17 @@ public partial class FamilyListImportWindow : Window
         else if (e.Key == Key.F1) { e.Handled = true; ShowHelp(); }
     }
     private void Help_Click(object sender, RoutedEventArgs e) => ShowHelp();
-    private void ShowHelp() => FamilyListImportGuideWindow.Show(this);
+    private void ShowHelp() => FamilyListImportGuideWindow.Show(this, HelpSectionKey());
+    private string HelpSectionKey() => Model.Page switch
+    {
+        0 => "welcome",
+        1 => "file",
+        2 => Model.ReviewingDecisions ? "decisions" : "columns",
+        3 => "special",
+        4 => "matches",
+        5 => "summary",
+        _ => "done",
+    };
 
     private void AlignSummaryCells()
     {

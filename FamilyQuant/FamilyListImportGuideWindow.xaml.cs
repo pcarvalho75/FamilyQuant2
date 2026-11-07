@@ -24,8 +24,16 @@ public sealed class FamilyListImportGuideViewModel : ScreenViewModel
             if (value == null || ReferenceEquals(current, value)) return;
             current = value;
             Changed(); Changed(nameof(Picture)); Changed(nameof(HasPicture)); Changed(nameof(Position)); Changed(nameof(CanNext)); Changed(nameof(CanPrevious));
+            Changed(nameof(NextToolTip)); Changed(nameof(PreviousToolTip));
         }
     }
+
+    public string NextToolTip => CanNext
+        ? "Shows the next part of the chapter, in the order of the wizard pages."
+        : "This is the last part of the chapter; choose Previous or Close.";
+    public string PreviousToolTip => CanPrevious
+        ? "Shows the previous part of the chapter, in the order of the wizard pages."
+        : "This is the first part of the chapter; choose Next or select another part in Sections.";
 
     public int Index => Sections.ToList().IndexOf(current);
     public bool CanNext => Index < Sections.Count - 1;
