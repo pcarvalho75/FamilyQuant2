@@ -24,7 +24,7 @@ public static partial class SpectrumComparisonWindow
         bar.Children.Add(save);
         var score = new Button { Name = "ButtonSaveAcceptedScoreScatter", Content = "Save accepted-call score plot",
             DataContext = model.ScoreScatter, IsEnabled = model.ScoreScatter.Total > 0,
-            ToolTip = "Save a 1920 x 1080 PNG and its CSV: one dot per row where both PEAKS and DeepNovo passed their filters. Blue circles are sequence matches; red diamonds are mismatches." };
+            ToolTip = "Exports PEAKS ALC versus DeepNovo SCORE to a 1920 x 1080 PNG and CSV, with one point per precursor hypothesis accepted by both tools; circles mark strict sequence matches and diamonds mark mismatches. Needs jointly accepted rows to enable it; the project stays unchanged and Undo does not revert files." };
         bar.Children.Add(score);
         bar.Children.Add(SecondaryWindowView.Help("Spectrum comparison help", SpectrumComparisonViewModel.Explanation, window));
         Grid.SetRow(bar, 1); root.Children.Add(bar);
