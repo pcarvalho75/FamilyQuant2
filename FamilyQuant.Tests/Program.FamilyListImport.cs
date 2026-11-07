@@ -148,6 +148,7 @@ internal static partial class Program
         PumpDispatcher();
         var content = (FrameworkElement)window.Content; content.Measure(new Size(width, height)); content.Arrange(new Rect(0, 0, width, height)); content.UpdateLayout();
         var footer = (FrameworkElement)window.FindName("WizardFooter");
+        AuditImportTooltips(window, theme + " " + width + " " + page);
         Check(theme + " " + width + " " + page + " keeps the navigation footer inside the viewport",
             footer.IsVisible && footer.TranslatePoint(new Point(), content).Y + footer.ActualHeight <= height);
         if (output == null) return;
