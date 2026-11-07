@@ -72,6 +72,10 @@ internal static partial class Program
                     review.Show(); PumpDispatcher(); ((TabItem)review.FindName("PanelChecklistTab")).IsSelected = true;
                     var state = (GroupingReviewViewModel)review.DataContext;
                     var button = (Button)review.FindName("MatchPanelNamesButton");
+                    var disabledMatching = new GroupingReviewViewModel(preview, input, session.Propose, initialScope: "Action alpha", evidenceMode: true);
+                    Check("Z12p5y2 " + theme + " " + size.Item1 + " the stored-name hint names Family checklist",
+                        !disabledMatching.CanMatchPanelNames && disabledMatching.MatchPanelNamesHint.Contains("Family checklist", StringComparison.Ordinal)
+                        && !disabledMatching.MatchPanelNamesHint.Contains("Panel checklist", StringComparison.Ordinal), disabledMatching.MatchPanelNamesHint);
                     int opens = 0; review.PanelMatchesDialogOverride = _ => { opens++; return false; };
                     button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                     Check("Z12p4 " + theme + " " + size.Item1 + " checklist opens matching even with no candidates and cancel preserves source",

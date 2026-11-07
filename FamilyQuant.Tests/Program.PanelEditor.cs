@@ -27,6 +27,7 @@ internal static partial class Program
 
     private static void PanelEditorTests()
     {
+        ManualKeyDisplayTests();
         var apply = typeof(CurationViewModel).GetMethod("ApplyFamilyPanel", new[] { typeof(FamilyPanel) });
         Check("J1d panel application is available", apply != null);
         if (apply == null) return;

@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using Microsoft.Win32;
 using FamilyQuant.Panels;
 using FamilyQuant.Panels.Import;
+using FamilyQuant.Evidence;
 
 namespace FamilyQuant;
 
@@ -37,7 +38,14 @@ public partial class PanelEditorWindow : Window
         this.pfamReview = pfamReview ?? new PanelPfamReview();
         Draft = new PanelEditorDraft(panel);
         initialPanelJson = JsonSerializer.Serialize(panel ?? new FamilyPanel());
+        MergeTargetColumn.ItemsSource = Draft.Families;
         DataContext = Draft;
+        MergeTargetColumn.CopyingCellClipboardContent += (_, e) =>
+        {
+            if (e.Item is PanelEditorRow row)
+                e.Content = Draft.Families.FirstOrDefault(target => target.Key == row.MergeTarget)?.FamilyChoiceLabel
+                    ?? (ManualFamilyChoices.IsGeneratedKey(row.MergeTarget) ? "" : row.MergeTarget);
+        };
         var options = new[]
         {
             new DecisionOption("Quantify", FamilyPanelDecision.Quantify),
@@ -72,6 +80,10 @@ public partial class PanelEditorWindow : Window
         PfamStatus.Text = "Not checked for the current panel.";
     }
 
+    private void FamilyGrid_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+    {
+        if (e.Column == FamilyKeyColumn && e.Row.Item is PanelEditorRow { HasGeneratedKey: true }) e.Cancel = true;
+    }
     private void FamilyGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e) { ClearPfamCheck(); UpdateMatchNotice(); }
     private void UpdateMatchNotice()
     {
@@ -90,6 +102,7 @@ public partial class PanelEditorWindow : Window
     private void SetDraft(FamilyPanel panel)
     {
         Draft = new PanelEditorDraft(panel);
+        MergeTargetColumn.ItemsSource = Draft.Families;
         DataContext = Draft;
         ClearPfamCheck();
         StatusText.Text = panel.ConfirmedMatchChangeNotice;

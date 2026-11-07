@@ -51,6 +51,9 @@ namespace FamilyQuant.Tests
                 line.Contains(SharedPeptidePolicy.FamilyUnique.ShortName()), line);
             Check("the status line says how many families were quantified",
                 line.Contains("41") && line.Contains("365"), line);
+            string groups = ReportView.StatusLine(NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique, 2, 7);
+            Check("Z12p5y2 the status denominator names groups without changing either count",
+                groups.Contains("2 of 7 groups quantified", StringComparison.Ordinal) && !groups.Contains("families quantified", StringComparison.Ordinal), groups);
 
             // --- the column headings. "XIC Original" named neither the quantity nor the unit.
             foreach (NormalizationMode mode in Enum.GetValues<NormalizationMode>())

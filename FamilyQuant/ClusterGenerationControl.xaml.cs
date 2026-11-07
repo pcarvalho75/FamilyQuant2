@@ -838,7 +838,8 @@ namespace FamilyQuant
         private void ShowGroupingCompletion(string message)
         {
             if (!lastRecalculationFailed)
-                ShowCurationOperationResult(message + (CurrentPLP == null ? "" : " Family shares were recalculated over the new grouping."));
+                ShowCurationOperationResult((fcf.FamilyPanel == null ? "" : "Run Quantify again before Export report. ")
+                    + message + (CurrentPLP == null ? "" : " Family shares were recalculated over the new grouping."));
         }
     }
 }
