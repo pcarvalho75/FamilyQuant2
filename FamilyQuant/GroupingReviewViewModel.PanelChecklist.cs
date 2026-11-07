@@ -10,7 +10,8 @@ public sealed partial class GroupingReviewViewModel
     public string ChecklistScopePreviewText => ScopePreviewSummary + (ScopePreviewFamilies.Count == 0 ? ""
         : Environment.NewLine + string.Join(" | ", ScopePreviewFamilies.Select(family => family.Family + " " + family.Proteins.ToString("N0"))));
     public bool CanAddChecklistPhrase => !IsBusy && Evidence?.SelectedChecklistPhrase is { } phrase
-        && !WordCluster.ParseKeywords(ScopeText).Contains(phrase.Text, StringComparer.OrdinalIgnoreCase);
+        && WordCluster.ParseKeywords(QuoteScopeKeyword(phrase.Text)).SingleOrDefault() is { } term
+        && !WordCluster.ParseKeywords(ScopeText).Contains(term, StringComparer.OrdinalIgnoreCase);
     public bool CanPlaceChecklistMatches => CanEditManual && Evidence?.SelectedChecklistFamily is { TargetKey: not null, Outside: > 0 } family
         && family.Proteins.Where(protein => !protein.Placed).All(protein => !protein.IsLocked);
     public string ChecklistHandHint

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -123,5 +124,29 @@ internal static partial class Program
         Check("Z12n2 Help explains consensus import, stable keys, scope preview and explicit hand choices",
             GroupingReviewHelp.Text.Contains("File > Import family panel", StringComparison.Ordinal)
             && GroupingReviewHelp.Text.Contains("Added by hand", StringComparison.Ordinal) && GroupingReviewHelp.Text.Contains("Add phrase to scope", StringComparison.Ordinal));
+        var guarded = ChecklistActionFile();
+        var guardedSession = new EvidenceGroupingSession(guarded, "guarded panel choice fixture"); guardedSession.Propose("selected");
+        foreach (string key in new[] { "excluded", "neither-proposed-nor-stored" })
+        {
+            string sourceBefore = guarded.ToJsonText(), proposalBefore = JsonSerializer.Serialize(guardedSession.Proposal);
+            refused = false;
+            try { guardedSession.AddToFamily(new EvidenceManualRequest(new[] { 3, 5 }, key, "Supplied target", false)); }
+            catch (ArgumentException) { refused = true; }
+            Check("Z12n2-fix session refuses " + key + " without changing file or proposal", refused && guarded.ToJsonText() == sourceBefore
+                && JsonSerializer.Serialize(guardedSession.Proposal) == proposalBefore);
+        }
+        var punctuation = ChecklistActionFile();
+        foreach (int index in new[] { 3, 5 }) punctuation.MyExtendedFastaItems[index].Evidence!.Keywords = new() { "alternate, activity" };
+        var punctuationSession = new EvidenceGroupingSession(punctuation, "punctuation fixture");
+        var punctuationInput = punctuationSession.Propose("selected");
+        var punctuationModel = new GroupingReviewViewModel(new SuperClusterPreview(punctuation.MyExtendedFastaItems, null, "", "", KeywordMatch.All, null, punctuation.LockedUserIds),
+            punctuationInput, punctuationSession.Propose, initialScope: "selected", evidenceMode: true);
+        punctuationModel.Evidence!.SelectedChecklistFamily = punctuationModel.Evidence.PanelChecklist.Single(row => row.Key == "missing");
+        punctuationModel.Evidence.SelectedChecklistPhrase = punctuationModel.Evidence.ChecklistPhrases.Single(phrase => phrase.Text == "alternate, activity");
+        bool initiallyAvailable = punctuationModel.CanAddChecklistPhrase;
+        punctuationModel.AddChecklistPhrase(); string scopeAfter = punctuationModel.ScopeText;
+        punctuationModel.AddChecklistPhrase();
+        Check("Z12n2-fix punctuated phrase compares parsed forms and disables repeat Add", initiallyAvailable && !punctuationModel.CanAddChecklistPhrase
+            && WordCluster.ParseKeywords(scopeAfter).Contains("alternate activity") && punctuationModel.ScopeText == scopeAfter);
     }
 }
