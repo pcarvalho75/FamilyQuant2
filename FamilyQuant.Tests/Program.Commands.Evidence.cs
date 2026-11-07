@@ -47,6 +47,12 @@ internal static partial class Program
         new("--evidence-task-header-audit", 65, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--evidence-task-header-audit", (args, _) => EvidenceTaskHeaderAuditCommand(args)),
         new("--test-evidence-task", 70, TestCommandPhase.Raw, EvidenceTaskTestsRequested, RunEvidenceTaskTests),
+        new("--test-evidence-family-reuse", 70, TestCommandPhase.Raw, args => args.Contains("--test-evidence-family-reuse", StringComparer.Ordinal), (_, _) =>
+        {
+            EvidenceFamilyReuseTests();
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        }),
         new("--test-organism-evidence", 70, TestCommandPhase.Raw, args => args.Contains("--test-organism-evidence", StringComparer.Ordinal), (_, _) =>
         {
             OrganismEvidenceTests();
