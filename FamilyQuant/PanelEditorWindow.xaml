@@ -21,7 +21,7 @@
             <TextBox x:Name="PanelName" Width="230" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left"
                      ToolTip="Name stored with this panel: default is its saved name or empty for a new panel, with free text, no unit or fixed length limit. Only the draft changes until Apply panel."/>
         </DockPanel>
-        <TabControl Grid.Row="2" Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}"
+        <TabControl Grid.Row="2" Background="{DynamicResource CanvasBrush}"
                     ToolTip="Switches between the editable panel draft and the source text saved with it. Apply panel commits the draft.">
         <TabItem Header="Families and import" ToolTip="Edits the draft families and import choices. Source notes stay unchanged.">
         <Grid Margin="0,8,0,0">
