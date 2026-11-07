@@ -196,7 +196,7 @@ internal sealed class CurationDocument
 public partial class FamilyClusterFile
 {
     /// <summary>Writes this curation as the current format (2), streaming, with the registered parts. The project
-    /// container uses it; the .fcf export, hashes and copies keep the canonical format-1 content.</summary>
+    /// container and .fcf export use it; hashes and copies keep the canonical format-1 content.</summary>
     internal void WriteCurationFile(Stream destination) => CurationFormat.Write(this, destination);
 
     /// <summary>Reads a format-2 curation in two passes over <paramref name="open"/>: the header first (format,

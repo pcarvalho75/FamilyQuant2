@@ -50,6 +50,9 @@ internal static partial class Program
                 && !Encoding.UTF8.GetString(bytes).Contains('\n'));
             var reloaded = FamilyClusterFile.Load(rewritten);
             Check("Z12p5j fixture " + index + " compact rewrite retains every loaded object", JsonSerializer.Serialize(reloaded, compactOptions) == objects);
+            Check("Z15b7 ledger fixture " + index + " compares current-reader retained objects across both wire formats",
+                System.Text.Json.Nodes.JsonNode.DeepEquals(RetainedFcfForLedger(old), RetainedFcfForLedger(rewritten))
+                && System.Text.Json.Nodes.JsonNode.DeepEquals(RetainedFcfForLedger(rewritten), System.Text.Json.Nodes.JsonNode.Parse(objects)));
             Check("Z12p5j fixture " + index + " compact hash is exact and verified Save still passes", opened.JsonContentSha256()
                 == Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(text))) && opened.LastSaveCheck?.Passed == true);
             string project = Path.Combine(folder, "compact-" + index.ToString(CultureInfo.InvariantCulture) + ".fqproj");
