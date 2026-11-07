@@ -14,6 +14,17 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
+    [TestCommandTable]
+    private static IEnumerable<TestCommand> FamilyListRankedMatchCommands() =>
+    [new("--test-family-list-ranked-matches", 62, TestCommandPhase.Raw,
+        args => args.Length is 1 or 2 && args[0] == "--test-family-list-ranked-matches", (args, _) =>
+        {
+            EnsureApplication();
+            FamilyListImportRankedMatchTests(args.Length == 2 ? args[1] : null);
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
+        })];
+
     private static void FamilyListImportMatchTests(string? output = null)
     {
         var project = ManualChoiceFile();
@@ -139,9 +150,13 @@ internal static partial class Program
                         && additional.Columns.All(c => !string.IsNullOrWhiteSpace(Themes.TableAppearance.GetHeaderToolTip(c))));
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "05-matches-more");
                     model.SelectedMatchFamily = model.MatchFamilies.Single(f => f.Key == "keyword-only");
-                    FinishReviewWork(() => Task.Delay(250)); PumpDispatcher();
+                    FinishReviewWork(() => Task.Delay(1)); PumpDispatcher();
                     Check(label + " a keyword-only family says No family-level match and has its own collapsed extras",
-                        noFamily.IsVisible && noFamily.Text == "No family-level match" && !more.IsExpanded && !additional.IsVisible);
+                        noFamily.IsVisible && noFamily.Text == "No family-level match" && !more.IsExpanded && !additional.IsVisible,
+                        $"notice visible={noFamily.IsVisible}, visibility={noFamily.Visibility}, text={noFamily.Text}; "
+                            + $"family no-match={model.SelectedMatchFamily?.HasNoFamilyLevelMatch}, expanded={more.IsExpanded}, "
+                            + $"family expanded={model.SelectedMatchFamily?.ShowAdditional}, extras visible={additional.IsVisible}, "
+                            + $"extras visibility={additional.Visibility}, extras height={additional.ActualHeight}, page={model.Page}");
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "05-matches-no-family");
                     model.SelectedMatchFamily = target; PumpDispatcher();
                     Check(label + " returning to a family restores its expansion without confirming or ticking anything",
