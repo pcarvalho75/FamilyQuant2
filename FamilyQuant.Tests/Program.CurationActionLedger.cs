@@ -129,7 +129,7 @@ internal static partial class Program
         var validation = FeatureLedgerEvidence.Load(root, inventory, [register]);
         var problems = validation.FatalProblems.Concat(validation.Entries.Values.Where(entry => entry.Row.Proofs.Count > 0).SelectMany(entry => entry.Problems)).ToArray();
         FeatureLedgerEvidence.WriteJson(Path.Combine(output, "candidate-validation.json"), new { valid = problems.Length == 0, problems });
-        if (problems.Length > 0) throw new InvalidDataException("Curation receipt is invalid: " + string.Join("; ", problems.Take(4)));
+        if (problems.Length > 0) throw new InvalidDataException("Curation receipt is invalid: " + LedgerDiagnostics.Capped(problems, 4));
         Console.WriteLine("SH-curation-actions: " + comparisons.Count(row => row.Proofs.Count > 0) + " supported; " + comparisons.Count(row => row.Proofs.Count == 0) + " OPEN.");
         return 0;
     }

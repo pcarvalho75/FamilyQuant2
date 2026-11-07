@@ -78,7 +78,7 @@ internal static partial class FeatureLedgerEvidence
             var validation = Combine(new[] { incoming }, false);
             if (validation.FatalProblems.Count > 0) throw new InvalidDataException(string.Join("; ", validation.FatalProblems));
             if (validation.Entries.Values.Any(e => e.Row.Proofs.Count > 0 && !e.Valid))
-                throw new InvalidDataException("Incoming proof is incomplete or stale: " + string.Join("; ", validation.Entries.Values.SelectMany(e => e.Problems).Take(6)));
+                throw new InvalidDataException("Incoming proof is incomplete or stale: " + LedgerDiagnostics.Capped(validation.Entries.Values.SelectMany(e => e.Problems), 6));
             string target = Path.Combine(folder, incoming.Step + ".json");
             string text = JsonSerializer.Serialize(incoming, JsonOptions) + "\n";
             if (texts.TryGetValue(target, out string? previous) && previous != text)
@@ -96,7 +96,7 @@ internal static partial class FeatureLedgerEvidence
             // replacement reopens that row. Rendering still happens only after the final state.
             markdown = Apply(markdown, final);
             var errors = FeatureLedger.Validate(inventory, markdown, evidenceOverride: final);
-            if (errors.Count > 0) throw new InvalidDataException("Proposed ledger failed its guard: " + string.Join("; ", errors.Take(6)));
+            if (errors.Count > 0) throw new InvalidDataException("Proposed ledger failed its guard: " + LedgerDiagnostics.Capped(errors, 6));
         }
         CommitBatch(ledgerPath, markdown, changes, backups, output);
         return Report(root, inventory, markdown, final!, output, reuseValidatedRegistry: true);
