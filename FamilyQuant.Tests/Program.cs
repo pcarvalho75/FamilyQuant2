@@ -284,6 +284,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelImportTemplateTests(Path.Combine(workDir, "panel-import-template")));
             suite.Add(() => PanelImportExampleTests(Path.Combine(workDir, "panel-import-example")));
             suite.AddWithApplication(() => ToolTipStyleTests());
+            suite.AddWithApplication(() => ToolTipCheckTests());
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
             suite.Section("Panel, threshold, template and report Help");
             suite.Add(() => PanelAuditTests());
