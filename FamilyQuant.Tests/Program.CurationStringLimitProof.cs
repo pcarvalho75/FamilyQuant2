@@ -18,6 +18,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using XL = DocumentFormat.OpenXml.Spreadsheet;
 
 namespace FamilyQuant.Tests;
@@ -53,6 +54,7 @@ internal static partial class Program
         var previousReportPresenter = MainWindow.ReportExportPresenterOverride;
         var previousReportFactory = MainWindow.ReportDocumentFactoryOverride;
         var previousReportStager = MainWindow.ReportFileStagerOverride;
+        var previousContext = SynchronizationContext.Current;
         MainWindow? shell = null;
         try
         {
@@ -71,9 +73,12 @@ internal static partial class Program
             int entries = small ? 8 : 16_384, sequenceLength = small ? 128 : 65_536;
             string original = Path.Combine(root, "synthetic.fcf");
             long characters = MeasureCurationProof("generate-streamed-json", () => GenerateCurationProof(original, entries, sequenceLength));
-            RequireCurationProof(small || characters > CurationStringLimit, "generated JSON exceeds 1,073,741,791 characters");
-            RequireCurationProof(small || (long)entries * sequenceLength > CurationStringLimit,
-                "reference sequence characters alone exceed the limit, independent of indentation");
+            if (!small)
+            {
+                RequireCurationProof(characters > CurationStringLimit, "generated JSON exceeds 1,073,741,791 characters");
+                RequireCurationProof((long)entries * sequenceLength > CurationStringLimit,
+                    "reference sequence characters alone exceed the limit, independent of indentation");
+            }
             Console.WriteLine(FormattableString.Invariant($"JSON characters={characters}; UTF-8 bytes={new FileInfo(original).Length}; reference entries={entries}; sequence length={sequenceLength}"));
 
             MeasureCurationProof("fcf-open", () =>
@@ -82,6 +87,7 @@ internal static partial class Program
                 VerifyCurationProof(loaded, entries, sequenceLength, imported: false, calculated: false);
             });
             EnsureApplication();
+            SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
             shell = new MainWindow { Left = -30000, Top = -30000, ShowInTaskbar = false, ShowActivated = false,
                 Width = 1024, Height = 768, WindowStartupLocation = WindowStartupLocation.Manual };
             shell.Show(); PumpDispatcher();
@@ -97,6 +103,14 @@ internal static partial class Program
             MeasureCurationProof("prepare-stored-results", () =>
             {
                 var document = CurationProofControl(shell).fcf;
+                // Supplied synthetic assignment facts are a report prerequisite. This storage proof
+                // makes no claim about automatic family inference; the real accessor checks currency.
+                document.PanelProteinAssignments = document.MyExtendedFastaItems.Select((protein, index) => new PanelProteinAssignment
+                {
+                    ProteinIndex = index, Identifier = protein.SequenceIdentifier, FamilyUserId = protein.UserID,
+                    IsApplied = true, PanelFamilyKey = index == 0 ? "SYN_A" : "SYN_B"
+                }).ToList();
+                MakePanelAssignmentsCurrent(document, new EvidenceClassificationOptions());
                 var rows = new[] { Qr("identified", "synthetic-run", 1, 2, "ACDEFGHIK", 100, 100),
                     Qr("identified", "synthetic-run", 2, 2, "LMNPQRSTV", 300, 300) };
                 var manifest = new QuantManifest { PerRunTic = new() { ["synthetic-run"] = 1000 }, FamilyMapping = new() { MinIdentity = .99 } };
@@ -144,6 +158,7 @@ internal static partial class Program
                 MainWindow.UnsavedProjectChoiceOverride = previousChoice; ShellMessages.Presenter = previousMessages;
                 MainWindow.SelectReportPathOverride = previousReportPath; MainWindow.ReportExportPresenterOverride = previousReportPresenter;
                 MainWindow.ReportDocumentFactoryOverride = previousReportFactory; MainWindow.ReportFileStagerOverride = previousReportStager;
+                SynchronizationContext.SetSynchronizationContext(previousContext);
                 isolation.SetValue(null, previousData);
                 Environment.SetEnvironmentVariable("TEMP", previousTemp); Environment.SetEnvironmentVariable("TMP", previousTmp);
                 string allowed = Path.GetFullPath(CurationProofScratch).TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
@@ -218,9 +233,9 @@ internal static partial class Program
                 || entry.Evidence.Family != (index % 2 == 0 ? "Synthetic alpha" : "Synthetic beta"))
                 throw new InvalidDataException("Synthetic reference entry differs at index " + index.ToString(CultureInfo.InvariantCulture));
         }
-        RequireCurationProof(!imported || file.FamilyPanel?.Families.Select(family => family.Key).SequenceEqual(new[] { "SYN_A", "SYN_B" }) == true,
+        if (imported) RequireCurationProof(file.FamilyPanel?.Families.Select(family => family.Key).SequenceEqual(new[] { "SYN_A", "SYN_B" }) == true,
             "imported synthetic family list survives");
-        RequireCurationProof(!calculated || Math.Abs(file.MyExtendedFastaItems[0].XICUser - .25) < 1e-12
+        if (calculated) RequireCurationProof(Math.Abs(file.MyExtendedFastaItems[0].XICUser - .25) < 1e-12
             && Math.Abs(file.MyExtendedFastaItems[1].XICUser - .75) < 1e-12, "recalculated 25% and 75% shares survive");
     }
 
@@ -252,8 +267,9 @@ internal static partial class Program
             "actual stored-evidence adapter supplies both synthetic suggestions");
         wizard.SkipAllMatches();
         RequireCurationProof(AwaitCurationProof(wizard.NextAsync()) && wizard.Page == 5, "wizard reaches import summary");
-        RequireCurationProof(AwaitCurationProof(wizard.NextAsync()) && wizard.Imported && wizard.Page == 6
-            && wizard.CanUndo && curation.UndoStack.Count == 1, "wizard transaction commits one undoable family-list import");
+        bool committed = AwaitCurationProof(wizard.NextAsync());
+        RequireCurationProof(committed && wizard.Imported && wizard.Page == 6 && wizard.CanUndo && curation.UndoStack.Count == 1,
+            FormattableString.Invariant($"wizard transaction commits one undoable family-list import: result={committed}, imported={wizard.Imported}, page={wizard.Page}, canUndo={wizard.CanUndo}, undoCount={curation.UndoStack.Count}, status={wizard.Status}"));
     }
 
     private static void RecalculateCurationProof(ClusterGenerationControl control, string root)
