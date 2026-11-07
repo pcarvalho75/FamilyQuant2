@@ -120,6 +120,8 @@ internal static partial class Program
             var edited = FamilyClusterFile.FromJsonText(file.ToJsonText()); edited.MyExtendedFastaItems[0].UserID = 9;
             var stale = new FamilySensitivityViewModel(rows, manifest, edited, mapping, () => { });
             Check("J5e: the table hides a study stale after regrouping", !stale.HasData && stale.Status.Contains("family membership", StringComparison.Ordinal));
+            Check("Z12p5l stale sensitivity names Calculate without report or Quantify directions", stale.Status.Contains("Calculate", StringComparison.Ordinal)
+                && !stale.Status.Contains("Export report", StringComparison.Ordinal) && !stale.Status.Contains("Quantify", StringComparison.Ordinal));
         }
         finally { window.Close(); Themes.ThemeManager.Apply(Themes.AppTheme.Dark); }
     }
