@@ -33,7 +33,7 @@ public sealed partial class FamilyListImportViewModel
                 + (source.Columns.Count > 0 ? ", " + string.Join(", ", source.Columns) : ""))), PageKey(item.Page))).ToArray() ?? Array.Empty<ImportWorkbookFinding>();
     public IReadOnlyList<string> WorkbookReviewProblems => (workbookReview?.Sections.SelectMany(section => section.Items)
         .Where(item => item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace)
-        .Select(item => item.Label + ": " + item.Reason + " Review " + PageLabel(item.Page) + ".") ?? Array.Empty<string>())
+        .Select(item => item.Label + ": " + ReviewProblemReason(item) + " Review " + PageLabel(item.Page) + ".") ?? Array.Empty<string>())
         .Concat(workbookAcceptance?.Items.SelectMany(item => item.Problems).Where(problem => problem.Blocking).Select(problem =>
             problem.Message.Replace(" Open " + problem.Page + ".", " Review " + PageLabel(problem.Page) + ".", StringComparison.Ordinal)) ?? Array.Empty<string>())
         .Concat(workbookReviewError.Length > 0 ? new[] { workbookReviewError } : Array.Empty<string>()).Distinct(StringComparer.Ordinal).ToArray();
@@ -42,6 +42,13 @@ public sealed partial class FamilyListImportViewModel
     public bool WorkbookHasReviewProblems => WorkbookReviewProblems.Count > 0;
     public string WorkbookReviewStatus => WorkbookHasReviewProblems ? WorkbookReviewProblems.Count + " choices need review. " + WorkbookReviewProblems[0] : "";
     public string WorkbookReviewDetails => string.Join("\n", WorkbookReviewProblems);
+    private string ReviewProblemReason(WorkbookImportItem item)
+    {
+        string? meaning = Decisions.FirstOrDefault(decision => decision.Source == item.Label)?.Meaning;
+        return meaning?.TrimEnd().EndsWith(".", StringComparison.Ordinal) == true
+            ? item.Reason.Replace("Legend meaning: " + meaning + ".", "Legend meaning: " + meaning.TrimEnd(), StringComparison.Ordinal)
+            : item.Reason;
+    }
     public IReadOnlyList<ImportWorkbookFamily> WorkbookFamilies => workbookReview?.FamilyRows.Select(row =>
         new ImportWorkbookFamily(row.Key, row.DisplayName, row.Decision is { } decision ? DecisionOptions.First(d => d.Value == decision).Label : "Choose an action",
             row.MergeTargetFamilyKey)).ToArray() ?? Array.Empty<ImportWorkbookFamily>();
