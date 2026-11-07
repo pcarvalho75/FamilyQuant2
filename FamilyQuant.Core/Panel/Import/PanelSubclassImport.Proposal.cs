@@ -85,14 +85,23 @@ public static partial class PanelSubclassImport
                     AddSource(proposal.SourceRows, source);
                     foreach (string column in table.DomainColumns.Distinct(StringComparer.Ordinal))
                     {
-                        var parsed = vocabulary.Read(row.Cells.GetValueOrDefault(column, ""), source);
+                        var parsed = vocabulary.Read(row.Cells.GetValueOrDefault(column, ""), column, source);
                         if (parsed.UnreadText) Uncertain(proposal, "Some rule-cell text was not recognized; it remains verbatim in the subclass notes.");
                         foreach (var rule in parsed.Rules)
                         {
                             rule.RuleId = ImportId(proposal.ProposalId, rule.Accession, rule.Accession.Length == 0 ? rule.Name : "", rule.Kind.ToString());
                             var existing = proposal.Rules.FirstOrDefault(item => item.RuleId == rule.RuleId);
                             if (existing == null) proposal.Rules.Add(rule);
-                            else foreach (var origin in rule.SourceRows) AddSource(existing.SourceRows, origin);
+                            else
+                            {
+                                foreach (var origin in rule.SourceRows) AddSource(existing.SourceRows, origin);
+                                if (rule.IsUncertain)
+                                {
+                                    if (!existing.IsUncertain) existing.Reason = rule.Reason;
+                                    else if (!existing.Reason.Contains(rule.Reason, StringComparison.Ordinal)) existing.Reason += " " + rule.Reason;
+                                    existing.IsUncertain = true;
+                                }
+                            }
                             if (rule.IsUncertain) Uncertain(proposal, rule.Reason);
                         }
                     }
@@ -102,6 +111,9 @@ public static partial class PanelSubclassImport
         }
         foreach (var proposal in result.Proposals)
         {
+            // A changed certainty state must not inherit an accepted draft for the formerly certain rule.
+            foreach (var rule in proposal.Rules.Where(rule => rule.IsUncertain && rule.Accession.Length > 0))
+                rule.RuleId = ImportId(rule.RuleId, "uncertain");
             if (!proposal.HasMatchedTableRow && proposal.ExpectedNameId.Length > 0)
                 Uncertain(proposal, "No matching subclass table row was proposed for this expected name.");
             if (proposal.IsUncertain) proposal.Notes.Add(new() { Name = "Import review", Text = proposal.Reason });
