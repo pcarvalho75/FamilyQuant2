@@ -298,15 +298,18 @@
                             </TabItem>
                             <TabItem Header="Panel links" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Review evidence-derived candidate links from source families or domain combinations to your panel and record explicit choices. Opening this tab changes only the view; Use link choices rebuilds the proposal before Apply grouping commits it.">
                                 <DockPanel>
-                                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                                    <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+                                        <CheckBox x:Name="PanelLinksNeedsChoiceFilter" Content="{Binding PanelLinksChoiceFilterLabel}"
+                                                  IsChecked="{Binding OnlyPanelLinksNeedingChoice, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,12,0"
+                                                  ToolTip="Shows only panel links that still need confirmation, including choices waiting for Use link choices; starts off. This filters the review list without changing any choice or the project."/>
                                         <Button Content="Use link choices" Click="UpdatePanelLinks_Click" IsEnabled="{Binding CanUpdatePanelLinks}" ToolTip="Rebuild the review from pending panel-link choices and stored evidence; the project changes only on Apply grouping, with Undo available. Disabled without changed link choices or while busy; choose a candidate or Leave outside and enter valid single-line notes, then wait for the operation to finish."/>
                                         <TextBlock Text="Use link choices updates the family proposal." VerticalAlignment="Center" Margin="12,0,0,0"/>
-                                    </StackPanel>
-                                    <DataGrid x:Name="panelLinksGrid" ItemsSource="{Binding Evidence.PanelLinks}" AutoGenerateColumns="False"
+                                    </WrapPanel>
+                                    <DataGrid x:Name="panelLinksGrid" ItemsSource="{Binding VisiblePanelLinks}" AutoGenerateColumns="False"
                                               CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" ToolTip="Inspect supplied link evidence and edit the candidate choice or optional note. These are review choices until Use link choices rebuilds the proposal and Apply grouping commits it, after which Undo restores the preceding grouping.">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="Source family" Binding="{Binding SourceFamily}" IsReadOnly="True" Width="180" theme:TableAppearance.HeaderToolTip="Stored source-family context of the proposed panel link, or Domain combination when no source family is supplied."/>
-                                            <DataGridTemplateColumn Header="User choice" Width="200" theme:TableAppearance.HeaderToolTip="Chosen evidence-derived panel candidate or Leave outside panel, initially the confirmed or sole candidate when available. Use link choices stages the resulting proposal before Apply grouping changes the project.">
+                                            <DataGridTemplateColumn Header="User choice" Width="200" SortMemberPath="Source.NeedsConfirmation" CanUserSort="True" theme:TableAppearance.HeaderToolTip="Chosen evidence-derived panel candidate or Leave outside panel, initially the confirmed or sole candidate when available. Use link choices stages the resulting proposal before Apply grouping changes the project.">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <ComboBox ItemsSource="{Binding Options}" DisplayMemberPath="DisplayName"
@@ -367,7 +370,7 @@
                                              Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}" TextWrapping="Wrap" MinHeight="48" MaxHeight="88"
                                              VerticalScrollBarVisibility="Auto" Margin="0,8,0,0" ToolTip="Read the same stored-evidence match counts and family names shown in the scope preview. This is read only; Update proposal rebuilds choices without applying them to the project."/>
                                     <Button x:Name="MatchPanelNamesButton" Grid.Row="5" Content="Match stored names..." Click="MatchPanelNames_Click" IsEnabled="{Binding CanMatchPanelNames}"
-                                            HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="Open stored evidence-label suggestions for the selected panel family, then review and confirm labels used by the checklist. Disabled without an editable current panel proposal and selected family; Update proposal after scope edits, select a family and wait for active operations."/>
+                                            HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="{Binding MatchPanelNamesHint}"/>
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Architecture" ToolTip="Inspect supplied domain combinations and choose which groups become separate named families, including placements by length and cysteines. Opening this tab changes only the view; Apply grouping commits split choices and Undo restores the preceding grouping."><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>
