@@ -12,6 +12,8 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
     private static readonly Regex PfamAccession = new(@"(?<![A-Za-z0-9])PF\d{5}(?!\d)", RegexOptions.CultureInvariant);
     private static readonly Regex NamedPfam = new(@"(?<name>[^;,\r\n()]+?)\s*\(\s*(?<accession>PF\d{5})(?:\.\d+)?\s*\)", RegexOptions.CultureInvariant);
     private static readonly Regex Bullet = new(@"^[•·*\-]\s+", RegexOptions.CultureInvariant);
+    private static readonly Regex LeadingLabel = new(@"^(?<label>[^:()\[\]]+):\s*(?<rest>\S.*)$", RegexOptions.CultureInvariant | RegexOptions.Singleline);
+    private static readonly Regex TrailingAbbreviation = new(@"\s*\(\s*(?<key>[\p{L}\p{N}][\p{L}\p{N}\-]{0,11})\s*\)\s*$", RegexOptions.CultureInvariant);
     private static readonly Dictionary<string, string> RoleNames = new(StringComparer.Ordinal)
     {
         [PanelImportFields.FamilyKey] = "abbreviation", [PanelImportFields.DisplayName] = "name", [PanelImportFields.Decision] = "decision",
@@ -117,9 +119,11 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
         string Clean(string text) => graceful ? text.Trim() : text;
         var reserved = new HashSet<string>(table.Rows.Select(r => Clean(Value(r, keyHeader))).Where(k => !string.IsNullOrWhiteSpace(k)), StringComparer.Ordinal);
         foreach (var choice in rowChoices.Values) { if (choice.Key.Length > 0) reserved.Add(Clean(choice.Key)); }
-        string PartKey(string rowKey, string part)
+        // A part's key: the abbreviation in its trailing parentheses, otherwise the row's abbreviation and its number.
+        string PartKey(string rowKey, string part, int number)
         {
-            string proposed = rowKey.Length > 0 ? rowKey + ": " + OneLine(part) : OneLine(part);
+            string proposed = Abbreviation(part).Key is { Length: > 0 } abbreviation ? abbreviation
+                : rowKey.Length > 0 ? rowKey + "-" + N(number) : OneLine(part);
             return reserved.Add(proposed) ? proposed : Suggest(proposed);
         }
         string Suggest(string key)
@@ -152,18 +156,27 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
             string cellKey = Clean(Value(row, keyHeader)), cellName = Clean(Value(row, nameHeader));
             string key = chosen is { Key.Length: > 0 } ? Clean(chosen.Key) : cellKey;
             string name = chosen is { Name.Length: > 0 } ? Clean(chosen.Name) : cellName;
-            var nameParts = graceful ? SplitList(Value(row, nameHeader)) : new List<string>();
-            var otherParts = graceful && otherHeader != null ? SplitList(Value(row, otherHeader)) : new List<string>();
+            var nameList = graceful ? ReadList(Value(row, nameHeader)) : CellList.None;
+            var otherList = graceful && otherHeader != null ? ReadList(Value(row, otherHeader)) : CellList.None;
+            var nameParts = nameList.Parts; var otherParts = otherList.Parts;
             string? listHeader = nameParts.Count >= 2 && nameParts.Count >= otherParts.Count ? nameHeader : otherParts.Count >= 2 ? otherHeader : null;
             if (listHeader != null)
             {
-                var listed = listHeader == nameHeader ? nameParts : otherParts;
+                var listed = listHeader == nameHeader ? nameList : otherList;
                 outcome.ListColumn = listHeader;
-                outcome.ProposedParts = listed.Select(part => new FamilyPanelSplitPart { Key = PartKey(key, part), Name = part }).ToList();
+                outcome.ListLabel = nameList.Label.Length > 0 ? nameList.Label : otherList.Label;
+                // Each part is named from the name column, like every other family, when that column lists the same number of names.
+                outcome.ProposedParts = listed.Parts.Select((part, i) =>
+                {
+                    string named = nameParts.Count == listed.Parts.Count ? nameParts[i] : part;
+                    return new FamilyPanelSplitPart { Key = PartKey(key, Abbreviation(named).Key.Length > 0 ? named : part, i + 1), Name = Abbreviation(named).Name };
+                }).ToList();
+                if (listed.Parts.Count == 2 && listed.CommaOnly && listed.Label.Length == 0) outcome.SuggestedAction = FamilyPanelRowAction.Import;
                 if (chosen == null)
                     Add(PanelImportProblemKind.SeveralFamilies, PanelImportSeverity.Note, row.RowNumber, listHeader, Value(row, listHeader),
-                        At(row.RowNumber, listHeader) + ": the cell lists " + N(listed.Count) + " names (" + string.Join("; ", listed.Select(OneLine))
-                        + "). Choose one family per name, or one group reported under others; until then the row is one family named as written.");
+                        At(row.RowNumber, listHeader) + ": the cell lists " + N(listed.Parts.Count) + " names (" + string.Join("; ", listed.Parts.Select(OneLine))
+                        + ")" + (outcome.ListLabel.Length > 0 ? " under the label \"" + OneLine(outcome.ListLabel) + "\"" : string.Empty)
+                        + ". Choose one family per name, or one group reported under others; until then the row is one family named as written.");
             }
             bool ready = true;
             string sourceDecision = string.Empty, mergeTarget = string.Empty;
@@ -204,6 +217,9 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
                 for (int i = 0; i < parts.Count; i++)
                     units.Add((Clean(parts[i]?.Key ?? string.Empty), Clean(parts[i]?.Name ?? string.Empty), otherParts.Count == parts.Count ? otherParts[i] : string.Empty, i + 1));
             }
+            else if (outcome.Action == FamilyPanelRowAction.ReportUnderOthers && chosen!.Name.Length == 0 && outcome.ListLabel.Length > 0)
+                units.Add((key, nameList.Label.Length > 0 ? nameList.Label : name,
+                    otherList.Label.Length > 0 ? otherList.Label : otherHeader == null ? string.Empty : Clean(Value(row, otherHeader)), 0));
             else units.Add((key, name, otherHeader == null ? string.Empty : Clean(Value(row, otherHeader)), 0));
 
             foreach (var unit in units)
@@ -213,7 +229,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
                 if (string.IsNullOrWhiteSpace(unit.Key))
                 {
                     string suggestion = string.IsNullOrWhiteSpace(unit.Name) ? string.Empty : unit.Part == 0 ? OneLine(unit.Name)
-                        : outcome.ProposedParts.FirstOrDefault(p => p.Name == unit.Name)?.Key ?? PartKey(key, unit.Name);
+                        : outcome.ProposedParts.FirstOrDefault(p => p.Name == unit.Name)?.Key ?? PartKey(key, unit.Name, unit.Part);
                     Block(PanelImportProblemKind.MissingKey, row.RowNumber, keyHeader, string.Empty,
                         where + ": the abbreviation is empty. Type one" + (suggestion.Length > 0 ? " (for example \"" + suggestion + "\")" : string.Empty) + (unit.Part == 0 ? ", or skip the row." : "."),
                         suggestion);
@@ -331,22 +347,36 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
         return null;
     }
 
-    /// <summary>Splits a cell listing several names at commas, semicolons and line breaks outside parentheses or
-    /// brackets, dropping a leading bullet from each name. One name gives a list of one.</summary>
-    internal static List<string> SplitList(string text)
+    private sealed record CellList(List<string> Parts, string Label, bool CommaOnly)
+    {
+        public static readonly CellList None = new(new List<string>(), string.Empty, false);
+    }
+
+    /// <summary>Reads a cell listing several names: commas, semicolons and line breaks outside parentheses or brackets
+    /// separate names, a leading bullet is dropped, and a leading label ("Other rare families: a; b") is kept apart
+    /// when the cell lists two or more names. One name gives a list of one.</summary>
+    private static CellList ReadList(string text)
     {
         var parts = new List<string>();
         var current = new System.Text.StringBuilder();
         int depth = 0;
+        bool commaOnly = true;
         foreach (char c in text)
         {
             if (c is '(' or '[' or '{') depth++;
             else if (c is ')' or ']' or '}') depth = Math.Max(0, depth - 1);
-            if (depth == 0 && c is ',' or ';' or '\n' or '\r') { Flush(); continue; }
+            if (depth == 0 && c is ',' or ';' or '\n' or '\r')
+            {
+                if (c != ',' && current.ToString().Trim().Length > 0) commaOnly = false;
+                Flush(); continue;
+            }
             current.Append(c);
         }
         Flush();
-        return parts;
+        string label = string.Empty;
+        if (parts.Count >= 2 && LeadingLabel.Match(parts[0]) is { Success: true } match)
+        { label = match.Groups["label"].Value.Trim(); parts[0] = match.Groups["rest"].Value.Trim(); }
+        return new CellList(parts, label, commaOnly);
 
         void Flush()
         {
@@ -354,6 +384,15 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
             if (part.Length > 0) parts.Add(part);
             current.Clear();
         }
+    }
+
+    /// <summary>A short abbreviation in trailing parentheses ("hyaluronidase (HYA)"): one word with a letter, at most
+    /// twelve characters and not a Pfam accession. Returns it and the name without it, or an empty key.</summary>
+    private static (string Key, string Name) Abbreviation(string part)
+    {
+        var match = TrailingAbbreviation.Match(part);
+        if (!match.Success || !match.Groups["key"].Value.Any(char.IsLetter) || PfamAccession.IsMatch(match.Groups["key"].Value)) return (string.Empty, part);
+        return (match.Groups["key"].Value, part[..match.Index].Trim());
     }
 
     private static List<List<int>> Runs(IEnumerable<int> rows)

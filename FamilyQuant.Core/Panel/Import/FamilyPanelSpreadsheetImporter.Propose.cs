@@ -59,7 +59,37 @@ public sealed partial class FamilyPanelSpreadsheetImporter
         Take(PanelImportFields.Notes, stats.Where(c => !taken.Contains(c.Header) && c.Count > 0 && c.LetterShare >= 0.8)
                 .OrderByDescending(c => c.MeanLength).FirstOrDefault(),
             "{0} holds the longest other text, so it is proposed as notes. Every column is kept as text either way.");
+        (proposal.DecisionHint, proposal.DecisionHintReason) = DecisionHint(table, rows, proposal.Choices);
         return proposal;
+    }
+
+    /// <summary>Z12p5b: names a column that may say what to do with each family, never maps it. A candidate is any column
+    /// other than the abbreviation, the names and Pfam that holds a few short labels repeated over at least half the rows
+    /// (at most half as many labels as filled cells). One candidate is named; among several, the one whose labels the
+    /// decision proposal reads as excluding or merging most often, and none when that does not single one out.</summary>
+    private (string Header, string Reason) DecisionHint(PanelSpreadsheetTable table, List<PanelSpreadsheetRow> rows, FamilyPanelImport choices)
+    {
+        var mapped = new[] { PanelImportFields.FamilyKey, PanelImportFields.DisplayName, PanelImportFields.OtherName, PanelImportFields.Pfam }
+            .Select(role => choices.ColumnHeaders.GetValueOrDefault(role)).OfType<string>().ToHashSet(StringComparer.Ordinal);
+        var candidates = new List<(string Header, List<string> Labels, int Filled, int Signals)>();
+        foreach (string header in table.Headers.Where(h => !mapped.Contains(h)))
+        {
+            var values = rows.Select(r => Value(r, header).Trim()).Where(v => v.Length > 0).ToList();
+            var labels = values.Distinct(StringComparer.Ordinal).ToList();
+            if (values.Count * 2 < rows.Count || labels.Count < 2 || labels.Count * 2 > values.Count
+                || values.Select(v => v.Length).Order().ElementAt(values.Count / 2) > 40 || values.Count(v => v.Any(char.IsLetter)) * 5 < values.Count * 4) continue;
+            var probe = Copy(choices);
+            probe.ColumnHeaders[PanelImportFields.Decision] = header;
+            int signals = ProposeDecisions(table, probe).Count(d => d.Exact || d.Mapping.Decision != FamilyPanelDecision.Quantify);
+            candidates.Add((header, labels, values.Count, signals));
+        }
+        var ranked = candidates.OrderByDescending(c => c.Signals).ToList();
+        if (ranked.Count == 0 || ranked.Count > 1 && (ranked[0].Signals == 0 || ranked[0].Signals == ranked[1].Signals)) return (string.Empty, string.Empty);
+        var hint = ranked[0];
+        var examples = hint.Labels.Take(3).Select(l => "\"" + OneLine(l) + "\"").ToList();
+        string such = examples.Count == 1 ? examples[0] : string.Join(", ", examples.Take(examples.Count - 1)) + " and " + examples[^1];
+        return (hint.Header, "\"" + OneLine(hint.Header) + "\" holds " + N(hint.Labels.Count) + " short labels repeated over " + N(hint.Filled)
+            + " rows, such as " + such + ". Is it the column that says what to do with each family? Without one, every family is quantified.");
     }
 
     // Proposal words in English, Portuguese and Spanish, compared without accents or case. They only propose a

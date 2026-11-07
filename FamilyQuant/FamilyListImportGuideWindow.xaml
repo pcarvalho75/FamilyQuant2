@@ -1,0 +1,51 @@
+<Window x:Class="FamilyQuant.FamilyListImportGuideWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Import your family list" Width="1000" Height="700" MinWidth="760" MinHeight="520"
+        Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibleWhenTrue"/>
+    </Window.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <Grid.ColumnDefinitions><ColumnDefinition Width="220"/><ColumnDefinition Width="20"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="3" Margin="0,0,0,14">
+            <TextBlock Text="Import your family list" Style="{StaticResource PageTitle}"/>
+            <TextBlock Text="A walk through File > Import family panel, page by page, on the fictitious example list." Style="{StaticResource CaptionText}" TextWrapping="Wrap"/>
+        </StackPanel>
+        <ListBox x:Name="sectionList" Grid.Row="1" ItemsSource="{Binding Sections}" SelectedItem="{Binding Current, Mode=TwoWay}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 AutomationProperties.Name="Sections" ToolTip="Choose a part of the chapter; each page of the wizard has its own part.">
+            <ListBox.ItemTemplate>
+                <DataTemplate><TextBlock Text="{Binding Title}" TextWrapping="Wrap"/></DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ScrollViewer x:Name="pageScroll" Grid.Row="1" Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+                <TextBlock Text="{Binding Current.Title}" Style="{StaticResource SectionTitle}" Margin="0,0,0,8"/>
+                <ItemsControl ItemsSource="{Binding Current.Paragraphs}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate><TextBlock Text="{Binding}" Style="{StaticResource BodyText}" TextWrapping="Wrap" Margin="0,0,0,10"/></DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Border BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="1" CornerRadius="4" Margin="0,6,0,0"
+                        Visibility="{Binding HasPicture, Converter={StaticResource VisibleWhenTrue}}">
+                    <Image x:Name="pagePicture" Source="{Binding Picture}" Stretch="Uniform" StretchDirection="DownOnly"
+                           AutomationProperties.Name="{Binding Current.Caption}"/>
+                </Border>
+                <TextBlock Text="{Binding Current.Caption}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,6,0,0"
+                           Visibility="{Binding HasPicture, Converter={StaticResource VisibleWhenTrue}}"/>
+            </StackPanel>
+        </ScrollViewer>
+        <DockPanel Grid.Row="2" Grid.ColumnSpan="3" Margin="0,14,0,0" LastChildFill="False">
+            <TextBlock DockPanel.Dock="Left" Text="{Binding Position}" Style="{StaticResource CaptionText}" VerticalAlignment="Center"/>
+            <Button x:Name="closeButton" DockPanel.Dock="Right" Content="Close" IsCancel="True" Click="Close_Click" Margin="8,0,0,0"
+                    ToolTip="Closes this chapter; the import window stays as it was."/>
+            <Button x:Name="nextButton" DockPanel.Dock="Right" Content="Next" Click="Next_Click" IsEnabled="{Binding CanNext}" Margin="8,0,0,0"
+                    ToolTip="Shows the next part of the chapter, in the order of the wizard pages."/>
+            <Button x:Name="previousButton" DockPanel.Dock="Right" Content="Previous" Click="Previous_Click" IsEnabled="{Binding CanPrevious}"
+                    ToolTip="Shows the previous part of the chapter, in the order of the wizard pages."/>
+        </DockPanel>
+    </Grid>
+</Window>
