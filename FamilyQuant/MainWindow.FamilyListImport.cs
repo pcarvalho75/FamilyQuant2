@@ -17,7 +17,7 @@ public partial class MainWindow
         var file = host.fcf;
         var transaction = new FamilyListImportTransaction(host.ViewModel,
             () => ReferenceEquals(cgc, host) && ReferenceEquals(host.fcf, file), host.RefreshFamilyListImport);
-        var model = new FamilyListImportViewModel(transaction, matcher: new FamilyListStoredEvidenceMatches(file));
+        var model = new FamilyListImportViewModel(transaction, matcher: new FamilyListStoredEvidenceMatches(file), workbookSource: new FamilyListWorkbookCoreSource(), openWorkbookReview: true);
         var window = new FamilyListImportWindow(model, path => ExampleFamilyList.Write(path), PanelImportTemplate.Write) { Owner = this };
         window.ShowDialog();
         if (window.EditPanelRequested && ReferenceEquals(cgc, host)) await OpenFamilyPanelEditorAsync();

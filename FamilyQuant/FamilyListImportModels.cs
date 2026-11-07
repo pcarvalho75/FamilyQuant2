@@ -17,7 +17,8 @@ public sealed class ImportColumnChoice : ScreenViewModel
     public IReadOnlyList<string> Headers { get; }
     private readonly Func<string, string> example;
     public string Header { get => header; set { if (Set(ref header, value ?? "")) { Changed(nameof(Example)); Changed(nameof(HasChoice)); } } }
-    public string Example => Header.Length == 0 ? Role == PanelImportFields.Decision ? "Quantify every family" : "Not used" : example(Header);
+    public string Example => Header.Length == 0 ? Role == PanelImportFields.Decision ? "Default when not used: Quantify every family" : "No column selected"
+        : example(Header) is { Length: > 0 } value ? "Example: " + value : "Empty in this sheet";
     public bool HasChoice => Header.Length > 0;
     public string ToolTip => (Role switch
     {
@@ -27,6 +28,7 @@ public sealed class ImportColumnChoice : ScreenViewModel
         PanelImportFields.Notes => "An optional column of family notes, proposed from the headers; all original columns remain available as source text.",
         PanelImportFields.Pfam => "An optional column of Pfam codes or names, proposed from the headers; Not used adds no domain requirement.",
         PanelImportFields.Decision => "An optional column telling what to do with each family; default Not used quantifies every family, while a chosen column requires you to confirm each label's action.",
+        WorkbookImportSummaryFields.Subclasses => "An optional column of expected subclass names, proposed by Core from the workbook structure; Not used leaves it as source text without expected subclass definitions.",
         _ => "An optional column whose cell fills become text categories; default Not used, and selecting a column starts each category with its source name."
     }) + " Choose a header from this sheet; this changes only the draft until Import.";
     public ImportColumnChoice(string role, string label, bool required, IReadOnlyList<string> headers, Func<string, string> example)
@@ -40,11 +42,14 @@ public sealed class ImportDecisionChoice : ScreenViewModel
     private bool confirmed;
     public string Source { get; init; } = "";
     public string Rows { get; init; } = "";
+    public IReadOnlyList<int> SourceRows { get; init; } = Array.Empty<int>();
     public string Reason { get; init; } = "";
+    public string Meaning { get; init; } = "";
     public FamilyPanelDecision? Decision { get => decision; set { if (Set(ref decision, value)) { Confirmed = false; Changed(nameof(IsMerge)); } } }
     public string MergeTarget { get => target; set { if (Set(ref target, value ?? "")) Confirmed = false; } }
     public bool IsMerge => Decision == FamilyPanelDecision.MergeIntoAnotherFamily;
-    public bool Confirmed { get => confirmed; set => Set(ref confirmed, value); }
+    public bool Confirmed { get => confirmed; set { if (Set(ref confirmed, value)) Changed(nameof(Confirmation)); } }
+    public string Confirmation => Confirmed ? "Yes" : "No";
     public FamilyPanelDecisionMapping Capture() => new() { SourceValue = Source, Decision = Decision!.Value, MergeTargetFamilyKey = IsMerge ? MergeTarget.Trim() : "" };
 }
 
@@ -53,6 +58,7 @@ public sealed class ImportColorChoice : ScreenViewModel
     private string label = "";
     public string Color { get; init; } = "";
     public string ColorName { get; init; } = "";
+    public string Meaning { get; init; } = "";
     public string Rows { get; init; } = "";
     public string Label { get => label; set => Set(ref label, value ?? ""); }
 }
@@ -95,8 +101,11 @@ public sealed class ImportEvidenceMatch : ScreenViewModel
     private string text = "", details = "";
     private int proteins, reviewed;
     public string Key { get; init; } = "";
-    public string Text { get => text; set { if (Set(ref text, value ?? "") && Coverage != null) { var result = Coverage(text); Proteins = result.Proteins; Reviewed = result.Reviewed; Details = result.Details; } } }
+    public string Text { get => text; set { if (Set(ref text, value ?? "")) { Changed(nameof(IsFromSheet)); Changed(nameof(Origin)); if (Coverage != null) { var result = Coverage(text); Proteins = result.Proteins; Reviewed = result.Reviewed; Details = result.Details; } } } }
     public string Type { get; init; } = "";
+    public string? SheetValue { get; init; }
+    public bool IsFromSheet => SheetValue != null && string.Equals(Text, SheetValue, StringComparison.OrdinalIgnoreCase);
+    public string Origin => IsFromSheet ? "from your sheet" : "";
     public double NameCoverage { get; init; }
     public bool IsAdditional { get; init; }
     public bool IsFamilyLevelMatch { get; init; }

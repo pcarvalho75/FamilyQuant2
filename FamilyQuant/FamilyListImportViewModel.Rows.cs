@@ -32,15 +32,16 @@ public sealed partial class FamilyListImportViewModel
         var roles = new[] {
             (PanelImportFields.FamilyKey, "Abbreviation", true), (PanelImportFields.DisplayName, "Family name", true),
             (PanelImportFields.OtherName, "Other-language name (optional)", false), (PanelImportFields.Notes, "Notes (optional)", false),
-            (PanelImportFields.Pfam, "Pfam codes (optional)", false), (PanelImportFields.Decision, "Decision (optional)", false),
+            (PanelImportFields.Pfam, "Pfam codes (optional)", false), (WorkbookImportSummaryFields.Subclasses, "Subclass names (optional)", false), (PanelImportFields.Decision, "Decision (optional)", false),
             (PanelImportFields.ColorCategory, "Colour category (optional)", false) };
-        foreach (var (role, label, required) in roles)
+        foreach (var (role, label, required) in roles.Where(role => WorkbookReviewEnabled || role.Item1 != WorkbookImportSummaryFields.Subclasses))
         {
             var column = new ImportColumnChoice(role, label, required, source.Headers, header => source.Rows.Select(r => r.Cells.GetValueOrDefault(header, ""))
-                .FirstOrDefault(text => text.Length > 0) ?? "Empty in this sheet") { Header = choices.ColumnHeaders.GetValueOrDefault(role, "") };
+                .FirstOrDefault(text => text.Length > 0) ?? "") { Header = choices.ColumnHeaders.GetValueOrDefault(role, "") };
             column.PropertyChanged += (_, change) =>
             {
                 if (change.PropertyName != nameof(ImportColumnChoice.Header) || updating || Imported) return;
+                if (WorkbookReviewEnabled) reviewedWorkbookColumns.Add(role);
                 if (role is PanelImportFields.FamilyKey or PanelImportFields.DisplayName or PanelImportFields.OtherName)
                 { choices.RowChoices?.Clear(); matchesFingerprint = ""; }
                 Recheck();
@@ -59,6 +60,8 @@ public sealed partial class FamilyListImportViewModel
         try
         {
             choices.ColumnHeaders = Columns.Where(c => c.HasChoice).ToDictionary(c => c.Role, c => c.Header, StringComparer.Ordinal);
+            if (WorkbookReviewEnabled)
+                foreach (var column in Columns.Where(c => reviewedWorkbookColumns.Contains(c.Role) && !c.HasChoice)) choices.ColumnHeaders[column.Role] = "";
             string nextDecision = choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Decision, "");
             if (nextDecision != decisionHeader)
             {
@@ -66,17 +69,21 @@ public sealed partial class FamilyListImportViewModel
                 decisionHeader = nextDecision; Decisions.Clear();
                 foreach (var proposed in importer.ProposeDecisions(table, choices))
                 {
+                    var legend = WorkbookDecision(proposed.SourceValue);
                     var row = new ImportDecisionChoice { Source = proposed.SourceValue,
-                        Rows = string.Join(", ", proposed.RowNumbers), Reason = proposed.Reason,
-                        Decision = proposed.Mapping.Decision, MergeTarget = proposed.Mapping.MergeTargetFamilyKey, Confirmed = proposed.Exact };
-                    row.PropertyChanged += (_, _) => { if (!updating) { Refresh(); Changed(nameof(DecisionSummary)); } };
+                        Rows = string.Join(", ", proposed.RowNumbers), SourceRows = proposed.RowNumbers.ToArray(), Reason = legend?.Reason is { Length: > 0 } reason ? reason : proposed.Reason,
+                        Meaning = legend?.LegendMeaning ?? "",
+                        Decision = legend == null ? HasWorkbookMap && !proposed.Exact ? null : proposed.Mapping.Decision : legend.ProposedMapping?.Decision,
+                        MergeTarget = legend?.ProposedMapping?.MergeTargetFamilyKey ?? proposed.Mapping.MergeTargetFamilyKey,
+                        Confirmed = !WorkbookReviewEnabled && proposed.Exact && (legend == null || legend.ExactProgramDecision) };
+                    row.PropertyChanged += (_, _) => { if (!updating) { if (WorkbookReviewEnabled) Recheck(); else Refresh(); Changed(nameof(DecisionSummary)); } };
                     Decisions.Add(row);
                 }
                 ReviewingDecisions = Decisions.Any(d => !d.Confirmed);
             }
             foreach (var color in SourceColorChoices.Where(c => c.Label.Trim().Length == 0)) color.Label = color.ColorName;
             choices.ColorLabels = SourceColorChoices.Count == 0 ? null : SourceColorChoices.Select(c => new FamilyPanelColorLabel { Color = c.Color, Label = c.Label.Trim() }).ToList();
-            check = importer.Check(table, choices, Decisions.Where(d => d.Confirmed && d.Decision != null).Select(d => d.Capture()).ToArray(), PanelName.Trim());
+            check = importer.Check(table, choices, Decisions.Where(d => (WorkbookReviewEnabled || d.Confirmed) && d.Decision != null).Select(d => d.Capture()).ToArray(), PanelName.Trim());
             var sourceFills = check.Colors;
             var oldColors = SourceColorChoices.ToDictionary(c => c.Color, c => c.Label, StringComparer.OrdinalIgnoreCase);
             if (!SourceColorChoices.Select(c => c.Color).SequenceEqual(sourceFills.Select(c => c.Color), StringComparer.OrdinalIgnoreCase))
@@ -85,13 +92,13 @@ public sealed partial class FamilyListImportViewModel
                 foreach (var color in sourceFills)
                 {
                     var row = new ImportColorChoice { Color = color.Color, ColorName = color.ColorName,
-                        Rows = string.Join(", ", color.RowNumbers), Label = oldColors.GetValueOrDefault(color.Color,
-                            string.IsNullOrWhiteSpace(color.Label) ? color.ColorName : color.Label) };
+                        Meaning = WorkbookColor(color.Color)?.Meaning ?? "", Rows = string.Join(", ", color.RowNumbers), Label = oldColors.GetValueOrDefault(color.Color,
+                            DefaultColorLabel(color)) };
                     row.PropertyChanged += (_, change) => { if (!updating && change.PropertyName == nameof(ImportColorChoice.Label)) Recheck(); };
                     SourceColorChoices.Add(row);
                 }
                 choices.ColorLabels = SourceColorChoices.Select(c => new FamilyPanelColorLabel { Color = c.Color, Label = c.Label.Trim() }).ToList();
-                check = importer.Check(table, choices, Decisions.Where(d => d.Confirmed && d.Decision != null).Select(d => d.Capture()).ToArray(), PanelName.Trim());
+                check = importer.Check(table, choices, Decisions.Where(d => (WorkbookReviewEnabled || d.Confirmed) && d.Decision != null).Select(d => d.Capture()).ToArray(), PanelName.Trim());
             }
             RebuildSpecialRows();
             Changed(nameof(HasDecisions)); Changed(nameof(HasColors)); Changed(nameof(DecisionSummary)); Changed(nameof(SpecialSummary));

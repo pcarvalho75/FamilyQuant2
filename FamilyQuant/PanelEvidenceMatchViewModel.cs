@@ -18,6 +18,7 @@ public sealed class PanelEvidenceMatchRow : ScreenViewModel
     private readonly PanelEvidenceMatching evidence;
     private readonly Action changed;
     private readonly string basis;
+    private readonly string initialName;
     private PanelEvidenceSuggestion coverage;
     private PanelEvidenceMatchKind kind;
     private string value;
@@ -25,11 +26,12 @@ public sealed class PanelEvidenceMatchRow : ScreenViewModel
     public PanelEvidenceMatchKind Kind { get => kind; set { if (Set(ref kind, value)) Refresh(); } }
     public string Value { get => value; set { if (Set(ref this.value, value ?? "")) Refresh(); } }
     public bool Selected { get => selected; set { if (Set(ref selected, value)) changed(); } }
-    public string Name => coverage.Name;
+    public string Name => !edited ? initialName : coverage.Name;
     public int Targets => coverage.DatabaseTargets;
     public int Reviewed => coverage.ReviewedTargets;
     public int References => coverage.ReferenceEntries;
     public bool IsAdditional { get; }
+    public bool IsFromSheet { get; }
     public string Reason
     {
         get
@@ -43,6 +45,7 @@ public sealed class PanelEvidenceMatchRow : ScreenViewModel
     public PanelEvidenceMatchRow(PanelEvidenceMatching evidence, PanelEvidenceSuggestion suggestion, bool selected, Action changed)
     {
         this.evidence = evidence; this.changed = changed; basis = suggestion.Reason;
+        initialName = suggestion.Name; IsFromSheet = suggestion.IsFromSheet;
         IsAdditional = suggestion.IsAdditional;
         kind = suggestion.Kind; value = suggestion.Value; this.selected = selected; coverage = evidence.Coverage(kind, value);
     }
@@ -93,10 +96,10 @@ public sealed class PanelEvidenceMatchViewModel : ScreenViewModel
         names = context.Family.Names.Select(name => name.Text).Prepend(context.Family.DisplayName).Where(name => !string.IsNullOrWhiteSpace(name)).Distinct(StringComparer.Ordinal).ToArray();
         var saved = context.Confirmed?.UserConfirmed == true ? context.Confirmed.Choices : Array.Empty<PanelEvidenceChoice>();
         var selected = saved.Select(choice => context.Evidence.Coverage(choice.Kind, choice.Value).Key).ToHashSet(StringComparer.Ordinal);
-        var suggestions = context.Panel == null ? context.Evidence.Suggest(names) : context.Evidence.SuggestForPanel(context.Panel)[context.Family.Key];
+        var suggestions = context.Panel == null ? context.Evidence.SuggestForFamily(context.Family) : context.Evidence.SuggestForPanel(context.Panel)[context.Family.Key];
         FamilyMatchStatus = suggestions.Any(row => row.IsFamilyLevelMatch) ? "Family and domain names first" : "No family-level match";
         foreach (var suggestion in suggestions)
-            Rows.Add(new(context.Evidence, suggestion, selected.Contains(suggestion.Key), NotifySelection));
+            Rows.Add(new(context.Evidence, suggestion, context.Confirmed?.UserConfirmed == true ? selected.Contains(suggestion.Key) : suggestion.IsFromSheet, NotifySelection));
         foreach (var choice in saved)
         {
             var coverage = context.Evidence.Coverage(choice.Kind, choice.Value);

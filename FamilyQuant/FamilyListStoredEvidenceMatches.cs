@@ -12,6 +12,7 @@ public sealed class FamilyListStoredEvidenceMatches : IFamilyListImportMatches
 {
     private readonly FamilyClusterFile project;
     private readonly PanelEvidenceMatching matching;
+    internal PanelEvidenceMatching WorkbookSnapshot => matching;
     private readonly FamilyPanel previousPanel;
     public string ChangeNotice { get; private set; } = "";
     public string SourceStatus => matching.ReferencePanelComplete switch
@@ -31,15 +32,16 @@ public sealed class FamilyListStoredEvidenceMatches : IFamilyListImportMatches
         var suggestions = matching.SuggestForPanel(carried);
         return carried.Families.Where(f => FamilyPanelValidation.ResolveFamilyKey(carried, f.Key) == f.Key).Select(family =>
         {
-            var rows = (suggestions.GetValueOrDefault(family.Key) ?? Array.Empty<PanelEvidenceSuggestion>())
-                .Select(suggestion => Project(suggestion)).ToList();
             var confirmed = carried.ConfirmedEvidenceMatches?.GetValueOrDefault(family.Key);
+            var rows = (suggestions.GetValueOrDefault(family.Key) ?? Array.Empty<PanelEvidenceSuggestion>())
+                .Select(suggestion => Project(suggestion, selectSheet: confirmed?.UserConfirmed != true)).ToList();
             foreach (var choice in confirmed?.Choices ?? Array.Empty<PanelEvidenceChoice>())
             {
                 var count = matching.Coverage(choice.Kind, choice.Value);
                 int existing = rows.FindIndex(row => row.Key == count.Key);
                 count = existing >= 0
-                    ? count with { NameCoverage = rows[existing].NameCoverage, IsAdditional = rows[existing].IsAdditional }
+                    ? count with { NameCoverage = rows[existing].NameCoverage, IsAdditional = rows[existing].IsAdditional,
+                        IsFromSheet = rows[existing].SheetValue != null, Reason = rows[existing].SheetValue != null ? "from your sheet" : count.Reason }
                     : count with { IsAdditional = true };
                 var previous = Project(count, choice.Value);
                 if (existing >= 0) rows[existing] = previous; else rows.Add(previous);
@@ -73,10 +75,11 @@ public sealed class FamilyListStoredEvidenceMatches : IFamilyListImportMatches
     private static IEnumerable<PanelEvidenceChoice> EvidenceChoices(IEnumerable<ImportEvidenceMatch> choices) =>
         choices.Select(choice => PanelEvidenceMatching.ChoiceFromKey(choice.Key) with { Value = choice.Text });
 
-    private ImportEvidenceMatch Project(PanelEvidenceSuggestion suggestion, string? previous = null) => new()
+    private ImportEvidenceMatch Project(PanelEvidenceSuggestion suggestion, string? previous = null, bool selectSheet = false) => new()
     {
         Key = suggestion.Key, Text = previous ?? suggestion.Value, Type = KindName(suggestion.Kind), Proteins = suggestion.DatabaseTargets,
-        Reviewed = suggestion.ReviewedTargets, Details = Details(suggestion), PreviousValue = previous, Use = previous != null,
+        Reviewed = suggestion.ReviewedTargets, Details = Details(suggestion), PreviousValue = previous, Use = previous != null || selectSheet && suggestion.IsFromSheet,
+        SheetValue = suggestion.IsFromSheet ? suggestion.Value : null,
         NameCoverage = suggestion.NameCoverage, IsAdditional = suggestion.IsAdditional, IsFamilyLevelMatch = suggestion.IsFamilyLevelMatch,
         Coverage = value => { var count = matching.Coverage(suggestion.Kind, value); return new ImportMatchCoverage(count.DatabaseTargets, count.ReviewedTargets, Details(count)); },
     };

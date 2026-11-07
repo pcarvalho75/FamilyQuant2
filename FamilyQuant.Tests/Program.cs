@@ -277,6 +277,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => PanelChecklistActionsTests(Path.Combine(workDir, "panel-checklist-actions")));
             suite.Add(() => PanelEvidenceMatchingTests());
             suite.Add(() => PanelEvidenceRankingTests());
+            suite.AddWithApplication(() => SheetPfamMatchTests(Path.Combine(workDir, "sheet-pfam-matches")));
             suite.Add(() => PanelEvidenceFingerprintTests());
             suite.AddWithApplication(() => PanelEvidenceBroadTests(Path.Combine(workDir, "panel-evidence-broad")));
             suite.AddWithApplication(() => EmptyPanelChecklistTests(Path.Combine(workDir, "empty-panel-checklist")));
@@ -290,6 +291,9 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ImportPreparationTests());
             suite.AddWithApplication(() => DisabledTableTests());
             suite.AddWithApplication(() => ImportTooltipCopyTests());
+            suite.AddWithApplication(() => WorkbookWizardTests());
+            suite.AddWithApplication(() => WorkbookOverviewTests());
+            suite.AddWithApplication(() => WorkbookSubclassReviewTests());
             suite.AddWithApplication(() => ImportWizardToolTipTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
             suite.AddWithApplication(() => GridCopyTests());
@@ -302,6 +306,14 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelImportSeveralTests(Path.Combine(workDir, "panel-import-several")));
             suite.Add(() => PanelImportTemplateTests(Path.Combine(workDir, "panel-import-template")));
             suite.Add(() => PanelImportExampleTests(Path.Combine(workDir, "panel-import-example")));
+            suite.Add(() => PanelWorkbookMapTests(Path.Combine(workDir, "panel-workbook-map")));
+            suite.AddWithApplication(() => PanelWorkbookNotesTests());
+            suite.Add(() => PanelWorkbookLegendTests(Path.Combine(workDir, "panel-workbook-legend")));
+            suite.Add(() => PanelSubclassImportTests(Path.Combine(workDir, "panel-subclass-import")));
+            suite.Add(() => WorkbookImportSummaryTests());
+
+
+
             suite.AddWithApplication(() => ToolTipStyleTests());
             suite.AddWithApplication(() => ToolTipCheckTests());
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
@@ -579,7 +591,7 @@ namespace FamilyQuant.Tests
             return suite;
         }
 
-        // ============================================================ helpers
+        // ==== helpers
 
         private static void Section(string title)
         {

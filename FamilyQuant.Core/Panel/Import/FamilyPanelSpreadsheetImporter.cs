@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace FamilyQuant.Panels.Import;
 
-public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreadsheetImporter
+public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreadsheetImporter, IFamilyPanelWorkbookImporter
 {
     private static readonly Regex PfamAccession = new(@"(?<![A-Za-z0-9])PF\d{5}(?!\d)", RegexOptions.CultureInvariant);
     private static readonly Regex NamedPfam = new(@"(?<name>[^;,\r\n()]+?)\s*\(\s*(?<accession>PF\d{5})(?:\.\d+)?\s*\)", RegexOptions.CultureInvariant);
@@ -264,9 +264,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
                 if (colorField != null) family.TextFields.Add(new FamilyPanelText { Name = colorField.Name, Text = colorField.Text });
                 if (domainHeader != null && unit.Part == 0)
                 {
-                    var names = NamedPfam.Matches(domainText).ToDictionary(m => m.Groups["accession"].Index, m => m.Groups["name"].Value.Trim());
-                    family.Pfam = PfamAccession.Matches(domainText).Select(m => (Accession: m.Value, Name: names.GetValueOrDefault(m.Index, string.Empty)))
-                        .Distinct().Select(d => new FamilyPanelDomain { Accession = d.Accession, Name = d.Name }).ToList();
+                    family.Pfam = ReadSheetPfam(domainText);
                 }
                 outcome.FamilyKeys.Add(unit.Key);
                 families.Add((family, row.RowNumber));
