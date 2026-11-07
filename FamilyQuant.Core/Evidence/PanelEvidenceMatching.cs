@@ -35,12 +35,13 @@ public sealed partial class PanelEvidenceMatching
     private readonly string sourceDescriptions;
     public bool? ReferencePanelComplete { get; }
     public int DatabaseTargetEntries { get; }
+    public string SourceEvidenceFingerprint => sourceEvidence;
 
     public PanelEvidenceMatching(FamilyClusterFile file)
     {
         ArgumentNullException.ThrowIfNull(file);
         sourceFingerprint = EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems);
-        sourceEvidence = JsonSerializer.Serialize(file.EvidenceSource);
+        sourceEvidence = FingerprintSource(file.EvidenceSource);
         sourceDescriptions = DescriptionFingerprint(file);
         ReferencePanelComplete = file.EvidenceSource?.ReferencePanel?.IsComplete;
         var database = file.MyExtendedFastaItems.Where(protein => !NearestReviewed.IsDecoy(protein)
@@ -87,7 +88,7 @@ public sealed partial class PanelEvidenceMatching
     }
 
     public bool IsCurrent(FamilyClusterFile file) => sourceFingerprint == EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems)
-        && sourceEvidence == JsonSerializer.Serialize(file.EvidenceSource) && sourceDescriptions == DescriptionFingerprint(file);
+        && sourceEvidence == FingerprintSource(file.EvidenceSource) && sourceDescriptions == DescriptionFingerprint(file);
 
     private static string DescriptionFingerprint(FamilyClusterFile file)
     {
