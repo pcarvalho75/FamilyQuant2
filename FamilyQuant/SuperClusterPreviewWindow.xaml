@@ -110,15 +110,17 @@
                                         <DataGridTextColumn Header="Taxonomy ID" Width="128" Binding="{Binding TaxonomyId}" theme:TableAppearance.Numeric="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <DataGrid x:Name="taskKeywordsGrid" Grid.Column="2" ItemsSource="{Binding TaskScope.Keywords}" IsReadOnly="True" AutoGenerateColumns="False"
+                                <DataGrid x:Name="taskKeywordsGrid" Grid.Column="2" ItemsSource="{Binding TaskScope.Keywords}" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="TaskKeyword_DoubleClick"
                                           CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" MinHeight="76"
                                           ToolTip="UniProt keyword counts among distinct reviewed accessions in this file. One accession may carry several keywords, so these rows must not be summed.">
+                                    <DataGrid.CommandBindings><CommandBinding Command="{x:Static local:SuperClusterPreviewWindow.AddTaskKeywordsToScope}" CanExecute="AddScopeKeywords_CanExecute" Executed="AddScopeKeywords_Executed"/></DataGrid.CommandBindings>
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Keyword" Width="*" Binding="{Binding Keyword}"/>
                                         <DataGridTextColumn Header="Reviewed accessions" Width="176" Binding="{Binding ReviewedProteins, StringFormat=N0}" theme:TableAppearance.Numeric="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
+                            <Button Content="Add to scope" HorizontalAlignment="Left" Command="{x:Static local:SuperClusterPreviewWindow.AddTaskKeywordsToScope}" CommandTarget="{Binding ElementName=taskKeywordsGrid}" ToolTip="Add the selected keyword phrases to scope, then preview their stored evidence."/>
                             <WrapPanel>
                                 <TextBlock Text="{Binding TaskScope.ReviewedProteins, StringFormat='Reviewed accessions counted: {0:N0}'}" Margin="0,0,18,0"/>
                                 <TextBlock Text="{Binding TaskScope.Release, StringFormat='UniProt release: {0}'}"/>
@@ -134,7 +136,7 @@
                         <Button DockPanel.Dock="Right" Content="Update proposal" Click="UpdateProposal_Click" IsEnabled="{Binding CanUpdateProposal}"
                                 ToolTip="Confirms your scope words and rebuilds the proposal from stored evidence. Your open document stays unchanged until Apply."/>
                         <TextBlock DockPanel.Dock="Left" Text="Scope" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                        <TextBox Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Words to match in the evidence keywords and tissue fields. These are user choices, never a built-in family list."/>
+                        <TextBox x:Name="TaskScopeBox" Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Words to match in the evidence keywords and tissue fields. These are user choices, never a built-in family list."/>
                     </DockPanel>
                     <Border x:Name="ScopeChangePreviewPanel" Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}"
                             Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource MutedBrush}" BorderThickness="1" CornerRadius="4" Padding="10" Margin="0,8,0,0">

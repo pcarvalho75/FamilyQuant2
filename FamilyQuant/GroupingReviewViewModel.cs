@@ -118,13 +118,10 @@ namespace FamilyQuant
             Keyword = new KeywordReviewViewModel(keyword); this.propose = propose; this.motif = motif;
             this.discoverTask = discoverTaskWithProgress ?? (discoverTask == null ? null : (_, token) => discoverTask(token));
             this.confirmPanelLinks = confirmPanelLinks;
-<<<<<<< HEAD
             this.addToFamily = addToFamily; this.removeFromFamily = removeFromFamily; this.updateManualChoices = updateManualChoices;
-=======
             this.previewScope = previewScope;
             scopePreviewBaseline = initialScope;
             scopePreviewBaselineCaptured = !string.IsNullOrWhiteSpace(initialScope);
->>>>>>> 1f302e17 (Z12k1 Preview added scope words from stored evidence)
             scopeText = initialScope; proposalScope = initialScope;
             Keyword.PropertyChanged += (_, _) => NotifySummary();
             SetEvidence(input);
