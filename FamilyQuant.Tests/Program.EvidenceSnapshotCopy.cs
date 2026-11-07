@@ -1,5 +1,6 @@
 using FamilyQuant.Evidence;
 using FamilyQuant.Panels;
+using FamilyQuant.Panels.Import;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace FamilyQuant.Tests;
 
@@ -101,6 +104,86 @@ internal static partial class Program
         Check("Z12p5f2f a failure after the buffer fills propagates and removes its spool", refused && bad.SawSpool
             && initialSpools.SequenceEqual(Spools()));
         Check("Z12p5f2f successful large copies leave no temporary file", initialSpools.SequenceEqual(Spools()));
+        EvidenceUndoCallerTests(large);
+    }
+
+    private static void EvidenceUndoCallerTests(EvidenceProvenance source)
+    {
+        var file = ManualChoiceFile(); file.EvidenceSource = source;
+        var control = new ClusterGenerationControl(file);
+        var window = new Window { Content = control, Width = 1280, Height = 800, Left = -30000, Top = -30000,
+            WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
+        try
+        {
+            window.Show(); FinishBusyTask(control.FullXicReady); PumpDispatcher();
+            string before = file.ToJsonText();
+            control.ViewModel.ApplyFamilyPanel(new FamilyPanel { Name = "Caller retry", Families = new() { new() { Key = "group", DisplayName = "Fixture group" } } });
+            typeof(ClusterGenerationControl).GetMethod("UpdateGUI", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(control, null);
+            var undo = (Button)control.FindName("ButtonUndo");
+            Check("Z12p5f2f curation Undo is reachable for the large evidence snapshot", undo.IsEnabled && control.ViewModel.CanUndo);
+            string committed = file.ToJsonText();
+            bool escaped = false;
+            WithBlockedUndoTemp(() =>
+            {
+                try { undo.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); }
+                catch (Exception error) when (error.GetBaseException() is IOException or UnauthorizedAccessException) { escaped = true; }
+            });
+            string status = ((TextBlock)control.FindName("TextBlockStatusLine")).Text;
+            Check("Z12p5f2f curation Undo reports blocked storage without escaping or consuming state", !escaped
+                && status.Contains("Undo could not run", StringComparison.Ordinal) && status.Contains("nothing changed", StringComparison.OrdinalIgnoreCase)
+                && file.ToJsonText() == committed && control.ViewModel.UndoStack.Count == 1);
+            undo.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            Check("Z12p5f2f curation Undo click retries after storage recovers", control.ViewModel.UndoStack.Count == 0 && file.ToJsonText() == before);
+        }
+        finally { window.Close(); PumpDispatcher(); }
+
+        file = ManualChoiceFile(); file.EvidenceSource = source;
+        var curation = new CurationViewModel(file);
+        string initial = file.ToJsonText();
+        string work = Path.Combine(Path.GetTempPath(), "snapshot-wizard-caller-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(work);
+        string workbook = Path.Combine(work, "undo-import.xlsx"); PanelImportTemplate.Write(workbook);
+        FillTemplate(workbook, new[] { new[] { "group", "Fixture group", "", "", "", "Quantify" } });
+        var model = ReadyFamilyListImport(workbook, curation);
+        var wizard = new FamilyListImportWindow(model) { Left = -30000, Top = -30000, ShowActivated = false, ShowInTaskbar = false };
+        try
+        {
+            wizard.Show(); FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
+            var undo = (Button)wizard.FindName("UndoImportButton");
+            Check("Z12p5f2f wizard Undo import is reachable after a native import", model.Imported && model.CanUndo && undo.IsEnabled);
+            string committed = file.ToJsonText();
+            bool escaped = false;
+            WithBlockedUndoTemp(() =>
+            {
+                try { undo.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); }
+                catch (Exception error) when (error.GetBaseException() is IOException or UnauthorizedAccessException) { escaped = true; }
+            });
+            Check("Z12p5f2f wizard Undo import reports blocked storage and keeps its committed state", !escaped
+                && model.Status.Contains("Undo could not run", StringComparison.Ordinal) && model.Status.Contains("nothing changed", StringComparison.OrdinalIgnoreCase)
+                && model.Imported && model.CanUndo && curation.UndoStack.Count == 1 && file.ToJsonText() == committed);
+            undo.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
+            Check("Z12p5f2f wizard Undo import retries after storage recovers", !model.Imported && curation.UndoStack.Count == 0 && file.ToJsonText() == initial);
+        }
+        finally { wizard.Close(); PumpDispatcher(); }
+    }
+
+    private static void WithBlockedUndoTemp(Action action)
+    {
+        string path = Path.Combine(Path.GetTempPath(), "snapshot-caller-temp-blocker-" + Guid.NewGuid().ToString("N"));
+        File.WriteAllText(path, "Synthetic temporary folder blocker.");
+        string? previousTemp = Environment.GetEnvironmentVariable("TEMP"), previousTmp = Environment.GetEnvironmentVariable("TMP");
+        try
+        {
+            Environment.SetEnvironmentVariable("TEMP", path);
+            Environment.SetEnvironmentVariable("TMP", path);
+            action();
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable("TEMP", previousTemp);
+            Environment.SetEnvironmentVariable("TMP", previousTmp);
+            File.Delete(path);
+        }
     }
 
     private sealed class FailingSnapshotCopy

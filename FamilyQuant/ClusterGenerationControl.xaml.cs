@@ -579,7 +579,12 @@ namespace FamilyQuant
         private void ButtonUndo_Click(object sender, RoutedEventArgs e)
         {
             if (!ViewModel.CanUndo) return;
-            ViewModel.Undo();
+            try { ViewModel.Undo(); }
+            catch (Exception error) when (error is IOException or UnauthorizedAccessException)
+            {
+                SetCurationOperationStatus("Undo could not run because temporary storage could not be used, and nothing changed. Check its space and permissions, then try Undo again.");
+                return;
+            }
             if (CurrentPLP != null) RecalculateWithFeedback("The grouping was stepped back, but the family shares could not be recalculated");
             UpdateGUI();
         }
