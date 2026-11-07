@@ -105,9 +105,13 @@ namespace FamilyQuant
                 Dispatcher.BeginInvoke(DispatcherPriority.DataBind, new Action(UpdateApplyToolTip));
                 return;
             }
+            if (!model.CanConfirm && !model.IsBusy && model.ModeIndex == 0)
+            {
+                createButton.ToolTip = model.Keyword.Headline;
+                return;
+            }
             string next = model.IsBusy ? "Wait for the current review operation to finish"
-                : model.ModeIndex == 1 ? model.ApplyHint.TrimEnd('.')
-                : "Enter matching keywords and tick at least one eligible protein";
+                : model.ApplyHint.TrimEnd('.');
             createButton.ToolTip = model.CanConfirm
                 ? "Commit the reviewed ticks, family names and splits as one project grouping change. Undo restores the preceding grouping, and Save writes the project to disk."
                 : "Apply grouping is unavailable: " + next + ". The project stays unchanged until Apply grouping, after which Undo restores the preceding grouping and Save writes it to disk.";
