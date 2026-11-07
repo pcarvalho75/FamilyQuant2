@@ -8,6 +8,7 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Excluded("--test-reference-panel-second", "Opt-in Z15a3 native-search comparison on the second repository fixture, with an imported spreadsheet route and paired timing output; the scoped core has its own default-suite semantic fixtures."),
         SuiteCommandRule.Covered("--test-crash-handler", "FamilyQuant.Tests.Program.CrashHandlerTests()"),
         SuiteCommandRule.Excluded("--crash-probe", "Owned fatal subprocess helper invoked and asserted by DefaultSuite CrashHandlerTests; deliberately exits and cannot run as an ordinary in-process fixture."),
         SuiteCommandRule.Covered("--test-same-scan-conflicts", "FamilyQuant.Tests.Program.SameScanConflictTests()"),
