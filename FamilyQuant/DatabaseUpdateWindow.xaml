@@ -1,7 +1,7 @@
 <Window x:Class="FamilyQuant.DatabaseUpdateWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Update database" Width="1180" Height="760" MinWidth="900" MinHeight="560"
+        Title="Update database" Width="1000" Height="700" MinWidth="860" MinHeight="540"
         Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}"
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
     <Window.Resources>

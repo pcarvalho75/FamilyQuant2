@@ -21,6 +21,14 @@ public partial class DatabaseUpdateWindow : Window
         Model = model ?? throw new ArgumentNullException(nameof(model));
         InitializeComponent();
         DataContext = model;
+        // Fits a 1024 x 768 screen as it opens, and never outgrows the working area of a smaller one.
+        Rect area = SystemParameters.WorkArea;
+        MaxWidth = area.Width;
+        MaxHeight = area.Height;
+        Width = Math.Min(Width, area.Width);
+        Height = Math.Min(Height, area.Height);
+        MinWidth = Math.Min(MinWidth, area.Width);
+        MinHeight = Math.Min(MinHeight, area.Height);
     }
 
     private void Apply_Click(object sender, RoutedEventArgs e) => Finish(DatabaseUpdateOutcome.Apply);

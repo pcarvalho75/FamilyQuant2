@@ -173,6 +173,7 @@ public partial class MainWindow
             if (withoutEvidence > 0)
                 text += " " + Count(withoutEvidence, "protein has", "proteins have") + " no evidence yet: Fetch evidence.";
         }
+        if (added > 0) text += " Search PatternLab again with the new file to identify the new proteins.";
         if (loadedQuant.Count > 0 || loadedManifest != null) text += " Results are from the previous database: Quantify again.";
         return text;
     }

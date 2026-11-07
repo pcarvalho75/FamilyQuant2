@@ -189,6 +189,7 @@ internal static partial class Program
             Check("the status line says what changed and what to do next, in plain words",
                 status.Contains("Database updated: ", StringComparison.Ordinal) && status.Contains(" added, ", StringComparison.Ordinal)
                 && status.Contains("no evidence yet: Fetch evidence.", StringComparison.Ordinal)
+                && status.Contains("Search PatternLab again with the new file to identify the new proteins.", StringComparison.Ordinal)
                 && status.Contains("Results are from the previous database: Quantify again.", StringComparison.Ordinal), status);
             Check("the menu item stays available for the updated project", menu.IsEnabled);
         }
@@ -212,6 +213,34 @@ internal static partial class Program
         var oldPresenter = ShellDialogs.FilePresenter;
         try
         {
+            // The window as it opens, with no size forced: it must fit a 1024 x 768 screen (a 728-pixel-high working
+            // area under the taskbar) and never exceed the working area of this one, with Apply update and Cancel in view.
+            var plain = new DatabaseUpdateWindow(new DatabaseUpdateViewModel(windowPreview, identifiers, "new-database.fasta", "project.fqproj"))
+                { Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual, ShowInTaskbar = false, ShowActivated = false };
+            try
+            {
+                plain.Show(); PumpDispatcher();
+                var area = SystemParameters.WorkArea;
+                Check("the preview opens at a size that fits a 1024 x 768 screen", plain.Width <= 1024 && plain.Height <= 728
+                    && plain.MinWidth <= 1024 && plain.MinHeight <= 728, plain.Width + " x " + plain.Height);
+                Check("and never larger than this screen's working area", plain.MaxWidth <= area.Width && plain.MaxHeight <= area.Height
+                    && plain.ActualWidth <= area.Width && plain.ActualHeight <= area.Height, plain.MaxWidth + " x " + plain.MaxHeight);
+                var content = (FrameworkElement)plain.Content;
+                bool Inside(string name)
+                {
+                    var element = (FrameworkElement)plain.FindName(name);
+                    var box = element.TransformToAncestor(content).TransformBounds(new Rect(0, 0, element.ActualWidth, element.ActualHeight));
+                    return element.IsVisible && box.Right <= content.ActualWidth + 0.5 && box.Bottom <= content.ActualHeight + 0.5 && box.Width > 0;
+                }
+                Check("at that default size Apply update and Cancel are in view", Inside("applyButton") && Inside("cancelButton"));
+                if (output != null)
+                {
+                    Directory.CreateDirectory(output);
+                    ScreenHarness.Save(plain, Path.Combine(output, "z14c3d-default-size.png"), (int)content.ActualWidth, (int)content.ActualHeight);
+                }
+            }
+            finally { plain.Close(); PumpDispatcher(); }
+
             foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
             {
                 Themes.ThemeManager.Apply(theme);
