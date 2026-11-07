@@ -409,7 +409,7 @@ internal static partial class Program
         var uses = holders.ToDictionary(m => m, m => program.LiteralUses[m].Where(u => u.Text == pieces[0]).ToList());
         var own = holders.Where(m => owners.Any(o => uses[m].Any(u => Holds(program.Methods[m], o, u.StoredInto)))).ToList();
         if (own.Count == 0)
-            return Open(row, "2 failed: the literal is compiled only in other members (" + string.Join(", ", holders.Take(2).Select(m => program.Methods[m].Key)) + "), not in " + how);
+            return Open(row, "2 failed: the literal is compiled only in other members (" + LedgerDiagnostics.Capped(holders.Select(m => program.Methods[m].Key), 2, ", ") + "), not in " + how);
         var live = own.Where(m => uses[m].Any(u => !program.Overwritten(m, u))).ToList();
         if (live.Count == 0)
             return Open(row, "1 failed: the compiled literal is overwritten later in the same call path (" + program.Methods[own[0]].Key + ")");
@@ -446,9 +446,9 @@ internal static partial class Program
         var matches = own.SelectMany(x => x.Baml!.Values.Where(Matches).Select(v => (x.Path, Baml: x.Baml!, Value: v))).ToList();
         if (matches.Count == 0)
         {
-            var elsewhere = program.Bamls.Values.Where(b => b.Values.Any(Matches)).Select(b => b.Resource).Take(2).ToList();
+            var elsewhere = program.Bamls.Values.Where(b => b.Values.Any(Matches)).Select(b => b.Resource).ToList();
             return elsewhere.Count > 0
-                ? Open(row, "2 failed: only another screen's compiled XAML holds it (" + string.Join(", ", elsewhere) + ")")
+                ? Open(row, "2 failed: only another screen's compiled XAML holds it (" + LedgerDiagnostics.Capped(elsewhere, 2, ", ") + ")")
                 : Open(row, "1 failed: no compiled XAML of its screen holds " + (xaml.Control ? "this named element" : "this element, property and value"));
         }
         foreach (var (path, baml, value) in matches)

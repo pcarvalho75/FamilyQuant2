@@ -503,6 +503,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => CurationSaveResultTests(workDir));
             suite.Add(() => ThemePreferenceTests(workDir));
             suite.Section("Feature ledger - frozen source inventory and explicit preservation checks");
+            suite.Add(() => LedgerDiagnosticTests());
             suite.Add(() => FeatureLedgerBaseTests());
             for (int mutation = 0; mutation < FeatureLedgerMutations; mutation++)
             {
