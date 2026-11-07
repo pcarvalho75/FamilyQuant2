@@ -26,6 +26,7 @@ public sealed partial class PanelSpreadsheetReader
                 var source = new PanelWorkbookSheet { SheetName = name, IsHidden = sheet.State?.Value is { } state && state != SheetStateValues.Visible };
                 result.Sheets.Add(source);
                 source.Preview = ReadPreview(path, name);
+                foreach (var problem in source.Preview.Problems) problem.SheetName = name;
                 result.Problems.AddRange(source.Preview.Problems);
                 if (source.Preview.SourceSha256 != result.SourceSha256)
                     throw new InvalidDataException("The workbook changed while its sheets were being read. Read it again.");
@@ -45,6 +46,8 @@ public sealed partial class PanelSpreadsheetReader
                     if (source.Preview.ProposedHeaderRow > 0)
                     {
                         source.Table = ReadTable(path, name, source.Preview.ProposedHeaderRow);
+                        foreach (var problem in source.Table.Problems) problem.SheetName = name;
+                        result.Problems.AddRange(source.Table.Problems);
                         if (source.Table.SourceSha256 != result.SourceSha256)
                             throw new InvalidDataException("The workbook changed while its sheets were being read. Read it again.");
                     }
@@ -53,7 +56,7 @@ public sealed partial class PanelSpreadsheetReader
                 {
                     source.IsUncertain = true;
                     result.Problems.Add(new PanelImportProblem { Kind = PanelImportProblemKind.FileUnreadable,
-                        Severity = PanelImportSeverity.Blocking, Column = name, Message = Describe(error) });
+                        Severity = PanelImportSeverity.Blocking, SheetName = name, Message = Describe(error) });
                 }
             }
             if (Convert.ToHexString(SHA256.HashData(ReadBytes(path))) != result.SourceSha256)
