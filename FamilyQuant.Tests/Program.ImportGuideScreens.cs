@@ -102,10 +102,10 @@ internal static partial class Program
             var family = model.SelectedMatchFamily.Suggestions.FirstOrDefault(s => s.Text == "Peptidase S1 family") ?? model.SelectedMatchFamily.Suggestions.First();
             family.Use = true; PumpDispatcher();
             Shot("05-evidence-matches");
-            model.ConfirmMatches();
+            model.ConfirmMatches(_ => true);
             model.SelectedMatchFamily = model.MatchFamilies.First(f => f.Key == "PLA");
             var lipase = model.SelectedMatchFamily.Suggestions.FirstOrDefault(s => s.Text == "Phospholipase A2 family") ?? model.SelectedMatchFamily.Suggestions.First();
-            lipase.Use = true; model.ConfirmMatches();
+            lipase.Use = true; model.ConfirmMatches(_ => true);
             Check("guide: two families confirmed", model.MatchFamilies.Count(f => f.Choice == "Confirmed") == 2);
             while (model.MatchFamilies.FirstOrDefault(f => !f.Decided) is { } next) { model.SelectedMatchFamily = next; model.SkipMatch(); }
             FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();

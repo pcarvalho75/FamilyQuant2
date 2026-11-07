@@ -54,11 +54,20 @@ public sealed class FamilyListStoredEvidenceMatches : IFamilyListImportMatches
         foreach (var family in choices.Where(f => f.Choice == "Confirmed"))
         {
             var definition = panel.Families.Single(f => f.Key == family.Key);
-            var selected = family.Suggestions.Where(s => s.Use).Select(s => PanelEvidenceMatching.ChoiceFromKey(s.Key) with { Value = s.Text });
+            var selected = EvidenceChoices(family.Suggestions.Where(s => s.Use));
             result = PanelEvidenceMatching.WithConfirmed(result, family.Key, PanelEvidenceMatching.Confirm(Names(definition), selected));
         }
         return result;
     }
+
+    public string ConfirmationWarning(IReadOnlyList<ImportEvidenceMatch> choices)
+    {
+        RequireCurrent();
+        return matching.ConfirmationWarning(EvidenceChoices(choices));
+    }
+
+    private static IEnumerable<PanelEvidenceChoice> EvidenceChoices(IEnumerable<ImportEvidenceMatch> choices) =>
+        choices.Select(choice => PanelEvidenceMatching.ChoiceFromKey(choice.Key) with { Value = choice.Text });
 
     private ImportEvidenceMatch Project(PanelEvidenceSuggestion suggestion, string? previous = null) => new()
     {

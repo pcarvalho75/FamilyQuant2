@@ -123,6 +123,7 @@ public interface IFamilyListImportMatches
     string SourceStatus { get; }
     string ChangeNotice { get; }
     IReadOnlyList<ImportMatchFamily> Suggest(FamilyClusterFile project, FamilyPanel panel);
+    string ConfirmationWarning(IReadOnlyList<ImportEvidenceMatch> choices);
     FamilyPanel Accept(FamilyPanel panel, IReadOnlyList<ImportMatchFamily> choices);
 }
 

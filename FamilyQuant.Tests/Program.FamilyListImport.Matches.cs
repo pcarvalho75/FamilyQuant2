@@ -50,6 +50,7 @@ internal static partial class Program
         try { adapter.Accept(panel, rows); } catch (InvalidOperationException error) { refused = error.Message.Contains("evidence changed", StringComparison.Ordinal); }
         Check("the wizard adapter refuses a changed stored-evidence snapshot without edits", refused && project.ToJsonText() == after);
         FamilyListImportRankedMatchTests(output);
+        FamilyListImportBroadMatchTests();
     }
 
     private static void FamilyListImportRankedMatchTests(string? output)
