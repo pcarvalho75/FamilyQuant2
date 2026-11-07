@@ -1,6 +1,7 @@
 using FamilyQuant.Panels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -33,6 +34,7 @@ public sealed partial class PanelEvidenceMatching
     private readonly string sourceEvidence;
     private readonly string sourceDescriptions;
     public bool? ReferencePanelComplete { get; }
+    public int DatabaseTargetEntries { get; }
 
     public PanelEvidenceMatching(FamilyClusterFile file)
     {
@@ -49,6 +51,7 @@ public sealed partial class PanelEvidenceMatching
             .GroupBy(entry => entry.Accession, StringComparer.OrdinalIgnoreCase).Select(group => group.First())
             .Select(entry => MakeEntry(false, "", entry.Evidence));
         entries = database.Concat(references).ToArray();
+        DatabaseTargetEntries = entries.Count(entry => entry.Database);
         wordFrequency = entries.SelectMany(entry => entry.Words).GroupBy(word => word, StringComparer.Ordinal)
             .ToDictionary(group => group.Key, group => group.Count(), StringComparer.Ordinal);
         labels = entries.SelectMany(entry => entry.Labels.GroupBy(label => label.Key).Select(group => (Entry: entry, Label: group.First())))
@@ -141,6 +144,16 @@ public sealed partial class PanelEvidenceMatching
 
     public PanelEvidenceSuggestion Coverage(PanelEvidenceMatchKind kind, string value) =>
         labels.GetValueOrDefault((kind, Normalize(value).ToUpperInvariant())) ?? new(kind, Normalize(value), "", 0, 0, "No exact stored label matches this value.");
+
+    public string ConfirmationWarning(IEnumerable<PanelEvidenceChoice> choices)
+    {
+        var broad = choices.Select(choice => Coverage(choice.Kind, choice.Value)).DistinctBy(label => label.Key)
+            .Where(label => (long)label.DatabaseTargets * 2 > DatabaseTargetEntries)
+            .OrderBy(label => label.Kind).ThenBy(label => label.Value, StringComparer.Ordinal).ToArray();
+        return broad.Length == 0 ? "" : "These labels cover more than half of the " + DatabaseTargetEntries.ToString("N0", CultureInfo.CurrentCulture)
+            + " database targets: " + string.Join("; ", broad.Select(label => label.Value + " (" + label.DatabaseTargets.ToString("N0", CultureInfo.CurrentCulture) + ")"))
+            + ". Keep these matches?";
+    }
 
     private static string Normalize(string value) => Regex.Replace(value ?? "", @"\s+", " ").Trim();
     private static bool ValidChoice(PanelEvidenceChoice choice) => Enum.IsDefined(choice.Kind)
