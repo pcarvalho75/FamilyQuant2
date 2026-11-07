@@ -87,6 +87,9 @@ public sealed class ImportEvidenceMatch : ScreenViewModel
     public string Key { get; init; } = "";
     public string Text { get => text; set { if (Set(ref text, value ?? "") && Coverage != null) { var result = Coverage(text); Proteins = result.Proteins; Reviewed = result.Reviewed; Details = result.Details; } } }
     public string Type { get; init; } = "";
+    public double NameCoverage { get; init; }
+    public bool IsAdditional { get; init; }
+    public bool IsFamilyLevelMatch { get; init; }
     public int Proteins { get => proteins; set => Set(ref proteins, value); }
     public int Reviewed { get => reviewed; set => Set(ref reviewed, value); }
     public string Details { get => details; set => Set(ref details, value ?? ""); }
@@ -99,11 +102,17 @@ public sealed record ImportMatchCoverage(int Proteins, int Reviewed, string Deta
 public sealed class ImportMatchFamily : ScreenViewModel
 {
     private string choice = "Needs a choice";
+    private bool showAdditional;
     public string Key { get; init; } = "";
     public string Name { get; init; } = "";
     public string NamesSignature { get; init; } = "";
     public bool PreviouslyConfirmed { get; init; }
     public IReadOnlyList<ImportEvidenceMatch> Suggestions { get; init; } = Array.Empty<ImportEvidenceMatch>();
+    public IReadOnlyList<ImportEvidenceMatch> PrimarySuggestions => Suggestions.Where(s => !s.IsAdditional).ToArray();
+    public IReadOnlyList<ImportEvidenceMatch> AdditionalSuggestions => Suggestions.Where(s => s.IsAdditional).ToArray();
+    public bool HasAdditionalSuggestions => Suggestions.Any(s => s.IsAdditional);
+    public bool HasNoFamilyLevelMatch => !Suggestions.Any(s => s.IsFamilyLevelMatch);
+    public bool ShowAdditional { get => showAdditional; set => Set(ref showAdditional, value); }
     public string Choice { get => choice; set => Set(ref choice, value); }
     public bool Decided => Choice != "Needs a choice";
 }

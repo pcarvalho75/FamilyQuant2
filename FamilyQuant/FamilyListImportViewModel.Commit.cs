@@ -37,12 +37,23 @@ public sealed partial class FamilyListImportViewModel
         {
             var supplied = suggestions.FirstOrDefault(f => f.Key == family.Key);
             string signature = System.Text.Json.JsonSerializer.Serialize(new[] { family.DisplayName }.Concat(family.Names.Select(n => n.Text)));
-            if (previous.TryGetValue(family.Key, out var retained) && retained.NamesSignature == signature)
-            { MatchFamilies.Add(retained); continue; }
             var row = new ImportMatchFamily { Key = family.Key, Name = family.DisplayName, NamesSignature = signature,
                 Suggestions = supplied?.Suggestions ?? Array.Empty<ImportEvidenceMatch>(), PreviouslyConfirmed = supplied?.PreviouslyConfirmed == true,
+                ShowAdditional = supplied?.ShowAdditional == true,
                 Choice = supplied?.PreviouslyConfirmed == true ? "Kept from previous panel" : "Needs a choice" };
             if (!row.PreviouslyConfirmed) foreach (var suggestion in row.Suggestions) suggestion.Use = false;
+            if (previous.TryGetValue(family.Key, out var retained) && retained.NamesSignature == signature)
+            {
+                var retainedChoices = retained.Suggestions.ToDictionary(s => s.Key, StringComparer.Ordinal);
+                foreach (var suggestion in row.Suggestions)
+                {
+                    if (!retainedChoices.TryGetValue(suggestion.Key, out var choice)) continue;
+                    suggestion.Text = choice.Text;
+                    suggestion.Use = choice.Use;
+                }
+                row.Choice = retained.Choice;
+                row.ShowAdditional = retained.ShowAdditional || row.Suggestions.Any(s => s.Use && s.IsAdditional);
+            }
             foreach (var suggestion in row.Suggestions) suggestion.PropertyChanged += (_, _) =>
             { row.Choice = "Needs a choice"; Changed(nameof(CanConfirmMatches)); Refresh(); };
             row.PropertyChanged += (_, _) => Refresh();

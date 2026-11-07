@@ -173,7 +173,7 @@ public partial class FamilyListImportWindow : Window
 
     private void CommitGridEdits()
     {
-        foreach (var grid in new[] { DecisionGrid, SpecialRowsGrid, MatchSuggestionsGrid })
+        foreach (var grid in new[] { DecisionGrid, SpecialRowsGrid, MatchSuggestionsGrid, AdditionalMatchSuggestionsGrid })
         { grid.CommitEdit(DataGridEditingUnit.Cell, true); grid.CommitEdit(DataGridEditingUnit.Row, true); }
     }
     private async void Window_Closing(object? sender, CancelEventArgs e)
