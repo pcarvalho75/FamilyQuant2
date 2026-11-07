@@ -687,7 +687,10 @@ namespace FamilyQuant
                     var extraPositionFamilies = CheckBoxIncludeFamilyPositions.IsChecked == true
                         ? DataGridResultGrid.SelectedItems.OfType<FastaItemExtended>().Select(p => p.UserID).Distinct().ToArray()
                         : Array.Empty<int>();
-                    var outcome = await ViewModel.FetchEvidenceAsync(FetchDomainsHandlerOverride, operation, extraPositionFamilies, panelOnly);
+                    var choice = panelOnly ? ChooseReferencePanel(fcf) : null;
+                    if (panelOnly && choice == null) throw new OperationCanceledException();
+                    var outcome = await ViewModel.FetchEvidenceAsync(FetchDomainsHandlerOverride, operation, extraPositionFamilies, panelOnly,
+                        panelRequest: choice, selectPanel: panelOnly ? null : ChooseReferencePanel);
                     UpdateFilteredResults();
                     string title = panelOnly ? "Retry panel" : "Fetch evidence";
                     ShellMessages.Report(this, CurationViewModel.DescribeEvidenceFetch(outcome, panelOnly), title,

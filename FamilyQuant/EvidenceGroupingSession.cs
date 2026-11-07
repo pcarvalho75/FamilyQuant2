@@ -17,7 +17,7 @@ public sealed partial class EvidenceGroupingSession
     private readonly IReadOnlyList<ScopePreviewProtein> scopePreviewProteins;
     private readonly string programVersion;
     private readonly string sourceFingerprint;
-    private readonly string sourceMetadata;
+    private string sourceMetadata;
     private readonly HashSet<int> sourceLocks;
     private readonly string sourcePanel;
     private FamilyPanel? reviewPanel;
@@ -87,7 +87,7 @@ public sealed partial class EvidenceGroupingSession
         var options = new EvidenceClassificationOptions { ScopeTerms = WordCluster.ParseKeywords(scope) };
         if (options.ScopeTerms.Count == 0) throw new ArgumentException("Type at least one scope word or phrase.", nameof(scope));
         var taskChoice = taskProposal == null ? null : EvidenceTaskDiscovery.Confirm(file, taskProposal, options.ScopeTerms);
-        var references = reviewPanel == null ? NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms))
+        var references = reviewPanel == null ? NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms), options.ScopeTerms)
             : PanelEvidenceClassifier.References(file, options);
         var result = search(NearestReviewed.Targets(file), references);
         IReadOnlyDictionary<string, FamilyProfile>? profiles = null;
@@ -95,8 +95,8 @@ public sealed partial class EvidenceGroupingSession
         var panel = reviewPanel == null ? null : ManualFamilyChoices.ExtendPanel(reviewPanel, manualChoices.Values.ToArray());
         if (reviewPanel == null)
         {
-            var classified = EvidenceClassifier.Propose(file.MyExtendedFastaItems, options, result.ByQuery(), NearestReviewed.ReferenceEvidence(file));
-            profiles = CoherenceCheck.Learn(file);
+            var classified = EvidenceClassifier.Propose(file.MyExtendedFastaItems, options, result.ByQuery(), NearestReviewed.ReferenceEvidence(file, options.ScopeTerms));
+            profiles = CoherenceCheck.Learn(file, options.ScopeTerms);
             proposal = CoherenceCheck.Flag(classified, file.MyExtendedFastaItems, profiles);
         }
         else proposal = PanelEvidenceClassifier.Propose(file, options, result, references, panel!);

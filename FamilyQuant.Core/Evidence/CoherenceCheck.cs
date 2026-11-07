@@ -74,9 +74,9 @@ namespace FamilyQuant.Evidence
         /// <summary>The reviewed members of every family: the file's reviewed targets and the stored
         /// panel's entries, each accession once (the file's copy first), grouped by every family each
         /// belongs to. Families are matched case-insensitively.</summary>
-        public static Dictionary<string, FamilyProfile> Learn(FamilyClusterFile file)
+        public static Dictionary<string, FamilyProfile> Learn(FamilyClusterFile file, IReadOnlyList<string>? scopeTerms = null)
         {
-            ReferencePanelFetcher.RequireComplete(file.EvidenceSource?.ReferencePanel);
+            ReferencePanelFetcher.RequireCoverage(file.EvidenceSource?.ReferencePanel, scopeTerms);
             var members = new List<Member>();
             var seen = new HashSet<string>(StringComparer.Ordinal);
             foreach (FastaItemExtended item in NearestReviewed.Targets(file))
