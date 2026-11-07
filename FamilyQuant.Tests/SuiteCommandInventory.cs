@@ -459,6 +459,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-panel-checklist-actions", "FamilyQuant.Tests.Program.PanelChecklistActionsTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-evidence-matching", "FamilyQuant.Tests.Program.PanelEvidenceMatchingTests()"),
         SuiteCommandRule.Covered("--test-panel-evidence-ranking", "FamilyQuant.Tests.Program.PanelEvidenceRankingTests()"),
+        SuiteCommandRule.Covered("--test-sheet-pfam-matches", "FamilyQuant.Tests.Program.SheetPfamMatchTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-evidence-fingerprint", "FamilyQuant.Tests.Program.PanelEvidenceFingerprintTests()"),
         SuiteCommandRule.Covered("--test-panel-evidence-broad", "FamilyQuant.Tests.Program.PanelEvidenceBroadTests(System.String)"),
         SuiteCommandRule.Covered("--test-empty-panel-checklist", "FamilyQuant.Tests.Program.EmptyPanelChecklistTests(System.String)"),
