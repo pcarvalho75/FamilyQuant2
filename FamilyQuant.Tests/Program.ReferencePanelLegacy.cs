@@ -176,8 +176,8 @@ internal static partial class Program
                 JsonNode.DeepEquals(adversarialEntries, JsonSerializer.SerializeToNode(candidate.EvidenceSource.ReferencePanel!.Entries)));
         }
 
-        // The sole allowed coverage transition is an explicit public fetch operation. All references
-        // are already stored, so the offline handler must see no download for this scope conversion.
+        // An explicit fetch covering the only family keeps full coverage. All references
+        // are already stored, so the offline handler must see no download.
         var explicitFetch = ProjectStore.ReadFqproj(Path.Combine(root, "legacy-full.fqproj")).fcf;
         using var handler = new LegacyPanelNoNetworkHandler();
         var request = Activator.CreateInstance(requestType, new object[] { recipe.Options.ScopeTerms, false })!;
@@ -187,8 +187,8 @@ internal static partial class Program
         task.GetAwaiter().GetResult();
         var outcome = (EvidenceFetchOutcome)task.GetType().GetProperty("Result")!.GetValue(task)!;
         var coverage = typeof(ReferencePanel).GetProperty("Coverage")!.GetValue(explicitFetch.EvidenceSource!.ReferencePanel!);
-        Check("Z15a4 only explicit fetch attaches scoped coverage, reusing every stored legacy entry",
-            outcome.Changed && coverage != null && handler.Requests == 0
+        Check("Z15a4 explicit broad fetch keeps full coverage, reusing every stored legacy entry",
+            outcome.Changed && coverage == null && handler.Requests == 0
             && JsonNode.DeepEquals(JsonNode.Parse(expectedPanel), JsonSerializer.SerializeToNode(explicitFetch.EvidenceSource.ReferencePanel!.Entries)));
         Check("Z15a4 every frozen input remains byte unchanged", inputHashes.All(pair => HashLegacyFile(Path.Combine(root, pair.Key)) == pair.Value));
         File.WriteAllText(Path.Combine(output, "legacy-panel.json"), JsonSerializer.Serialize(new
