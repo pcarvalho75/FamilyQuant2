@@ -113,6 +113,7 @@ internal static partial class Program
                 && file.ToJsonText() == sourceBefore);
         }
         WorkbookSummarySelectionTests(root);
+        WorkbookSummaryResolutionTests(root);
         Console.WriteLine("Z16a9 synthetic artifacts: " + root);
     }
 

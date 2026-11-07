@@ -21,11 +21,16 @@ public static partial class WorkbookImportSummaries
             var choice = selected.Length == 1 ? selected[0] : null;
             bool accepted = choice?.Accepted == true;
             string family = Pick(choice?.FamilyKey, proposal.FamilyKey), key = Pick(choice?.Key, proposal.Key), name = Pick(choice?.DisplayName, proposal.DisplayName);
-            bool placed = keys.Contains(family, StringComparer.Ordinal), certain = !proposal.IsUncertain && key.Length > 0 && name.Length > 0;
+            bool placed = keys.Contains(family, StringComparer.Ordinal);
+            bool explicitlyResolved = accepted && placed && !string.IsNullOrWhiteSpace(choice!.FamilyKey)
+                && !string.IsNullOrWhiteSpace(choice.Key) && !string.IsNullOrWhiteSpace(choice.DisplayName);
+            bool certain = (!proposal.IsUncertain || explicitlyResolved) && !string.IsNullOrWhiteSpace(key) && !string.IsNullOrWhiteSpace(name);
             var state = selected.Length > 1 || !placed ? WorkbookImportItemState.CouldNotPlace : !certain ? WorkbookImportItemState.Uncertain
                 : accepted ? WorkbookImportItemState.Proposed : WorkbookImportItemState.Found;
             add(WorkbookImportSectionKind.Subclasses, "Subclass", family + ": " + key + " " + name,
-                selected.Length > 1 ? "This subclass has repeated review choices." : !accepted && certain && placed ? "This known subclass has no accepted review selection."
+                selected.Length > 1 ? "This subclass has repeated review choices." : proposal.IsUncertain && explicitlyResolved
+                    ? "Explicit review resolved the family key, subclass key and name. Unparsed source text remains notes; only selected certain canonical rules can execute. " + proposal.Reason
+                    : !accepted && certain && placed ? "This known subclass has no accepted review selection."
                     : proposal.Reason.Length > 0 ? proposal.Reason : "The subclass source and explicit review choice are retained.",
                 state, WorkbookImportPage.Subclasses, accepted && state != WorkbookImportItemState.Proposed || selected.Length > 1,
                 new WorkbookImportSubclass(proposal.ProposalId, ""), FromRows(proposal.SourceRows));
