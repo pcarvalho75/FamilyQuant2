@@ -11,17 +11,18 @@ public static partial class PanelSubclassImport
     {
         private readonly Dictionary<string, FamilyPanelDomain[]> aliases;
         private readonly Regex? tokens;
-        // Shared whole-word absence vocabulary for headers and cells: the seven prepositions below,
-        // absent/absente/absents/absentes, ausente/ausentes and a leading minus.
+        // Short prepositions are cell-prefix markers only: in a header, Portuguese "no" can mean "in the".
+        // Headers use explicit absent/absente/absents/absentes or ausente/ausentes adjectives and a leading minus.
         // Required header labels use required, exigido(a)(s) or requerido(a)(s); a leading plus is required.
-        // These markers propose polarity only. They never confirm a rule or invent a Pfam accession.
-        private const string AbsenceWords = @"without|no|not|sem|sin|sans|ohne|absente?s?|ausentes?";
+        // Cell markers take precedence. Header-only polarity remains uncertain and never confirms a rule.
+        private const string HeaderAbsenceWords = @"absente?s?|ausentes?";
+        private const string CellAbsenceWords = @"without|no|not|sem|sin|sans|ohne|" + HeaderAbsenceWords;
         private const string RequiredHeaderWords = @"required|exigid[oa]s?|requerid[oa]s?";
-        private static readonly Regex AbsentPrefix = new(@"(?:^|[\s(,;|])(?<marker>" + AbsenceWords + @")\s*$",
+        private static readonly Regex AbsentPrefix = new(@"(?:^|[\s(,;|])(?<marker>" + CellAbsenceWords + @")\s*$",
             RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         private static readonly Regex MinusPrefix = new(@"(?:^|[\s(,;|])(?<marker>-)\s*$", RegexOptions.CultureInvariant);
         private static readonly Regex PlusPrefix = new(@"(?:^|[\s(,;|])(?<marker>\+)\s*$", RegexOptions.CultureInvariant);
-        private static readonly Regex AbsentHeader = new(@"(?<![\p{L}\p{N}_])(?:" + AbsenceWords + @")(?![\p{L}\p{N}_])",
+        private static readonly Regex AbsentHeader = new(@"(?<![\p{L}\p{N}_])(?:" + HeaderAbsenceWords + @")(?![\p{L}\p{N}_])",
             RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         private static readonly Regex RequiredHeader = new(@"(?<![\p{L}\p{N}_])(?:" + RequiredHeaderWords + @")(?![\p{L}\p{N}_])",
             RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
@@ -61,7 +62,8 @@ public static partial class PanelSubclassImport
                 Match required = PlusPrefix.Match(text[..match.Index]);
                 Match prefix = absent.Success ? absent : required;
                 PanelSubclassRuleKind? cellKind = absent.Success ? PanelSubclassRuleKind.AbsentPfam : required.Success ? PanelSubclassRuleKind.RequiredPfam : null;
-                var kind = headerKind ?? cellKind ?? PanelSubclassRuleKind.RequiredPfam;
+                var kind = cellKind ?? headerKind ?? PanelSubclassRuleKind.RequiredPfam;
+                bool headerDerived = !cellKind.HasValue && headerKind.HasValue;
                 bool polarityConflict = headerAbsent && headerRequired || headerKind.HasValue && cellKind.HasValue && headerKind != cellKind;
                 if (prefix.Success) Erase(prefix.Index, prefix.Length);
                 Erase(match.Index, match.Length);
@@ -83,16 +85,16 @@ public static partial class PanelSubclassImport
                 }
                 string accession = domains.Length == 1 ? domains[0].Accession : "";
                 string reason = domains.Length != 1 ? "This Pfam name matches more than one accession; leave the unresolved rule unselected."
-                    : headerKind.HasValue ? "The column header proposes this recognized Pfam domain as " + (kind == PanelSubclassRuleKind.AbsentPfam ? "absent" : "required") + "; confirmation is still required."
+                    : headerDerived ? "The column header suggests this recognized Pfam domain is " + (kind == PanelSubclassRuleKind.AbsentPfam ? "absent" : "required") + "; this inferred polarity is uncertain and needs review."
                     : kind == PanelSubclassRuleKind.AbsentPfam ? "The source marks this recognized Pfam domain as absent; confirmation is still required."
                     : "The source lists this recognized Pfam domain as required; confirmation is still required.";
                 if (headerAbsent && headerRequired) reason += " The column header contains both required and absent markers; choose the polarity before selecting this rule.";
-                else if (polarityConflict) reason += " The column header and explicit cell marker disagree; review the polarity before selecting this rule.";
+                else if (polarityConflict) reason += " The explicit cell marker takes precedence over the column header; review their disagreement before selecting this rule.";
                 rules.Add(new PanelSubclassRuleProposal
                 {
                     Accession = accession, Name = domains.Length == 1 ? domains[0].Name.Length > 0 ? domains[0].Name : accession : match.Value,
                     CandidateAccessions = domains.Select(domain => domain.Accession).Order(StringComparer.Ordinal).ToList(),
-                    Kind = kind, SourceRows = new() { CopyRow(source) }, IsUncertain = domains.Length != 1 || polarityConflict,
+                    Kind = kind, SourceRows = new() { CopyRow(source) }, IsUncertain = domains.Length != 1 || polarityConflict || headerDerived,
                     Reason = reason,
                 });
             }
