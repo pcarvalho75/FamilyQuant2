@@ -15,7 +15,9 @@ namespace FamilyQuant.Tests;
 // invented project, 1366 x 768, one picture per page (light by default, --dark for the website's dark set). The Workbook
 // box is shown with a generic documents path, because the real path holds this computer's temporary folder. Z12p2c1:
 // the Columns page with its decision-column question and the fills named as colour categories, and the decisions opened
-// through Use this decision column.
+// through Use this decision column. Z16a8: the wizard reads the whole example workbook through the same Core source as
+// File > Import family list (FamilyListWorkbookCoreSource), so File and sheet opens on Workbook sheets and the Columns
+// page starts the colours and the decision meanings from the example's legend.
 internal static partial class Program
 {
     [TestCommandTable]
@@ -35,6 +37,13 @@ internal static partial class Program
         Evidence = new ProteinEvidence { Accession = identifier.Split('|')[1], Family = family, Reviewed = reviewed, Fragment = false, Keywords = keywords.ToList() },
     };
 
+    // Z16a8: stored Pfam domains for the invented proteins, so the domains written in the example's rows meet stored entries.
+    private static FastaItemExtended WithPfam(FastaItemExtended protein, params (string Accession, string Name)[] domains)
+    {
+        protein.Evidence!.Pfam = domains.Select(d => new EvidenceDomain { Accession = d.Accession, Name = d.Name }).ToList();
+        return protein;
+    }
+
     private static void ImportGuideScreens(string output, bool dark)
     {
         EnsureApplication();
@@ -44,21 +53,24 @@ internal static partial class Program
         string workbook = Path.Combine(work, ExampleFamilyList.DefaultFileName); ExampleFamilyList.Write(workbook);
         var file = new FamilyClusterFile
         {
-            SourceSha256 = "invented-guide-source", SourceSequenceCount = 6,
+            SourceSha256 = "invented-guide-source", SourceSequenceCount = 7,
             MyExtendedFastaItems = new List<FastaItemExtended>
             {
-                GuideProtein(1, "sp|P90001|TRY1_EXAMPLE", "Trypsin-like serine protease 1", "Peptidase S1 family", true, "Serine protease", "Hydrolase", "Protease"),
-                GuideProtein(1, "tr|A0A900A002|A0A900A002_EXAMPLE", "Trypsin-like serine protease 2", "Peptidase S1 family", false, "Serine protease", "Hydrolase"),
-                GuideProtein(2, "sp|P90003|PA2_EXAMPLE", "Secreted phospholipase A2", "Phospholipase A2 family", true, "Hydrolase", "Lipid degradation"),
-                GuideProtein(3, "sp|P90004|LEC1_EXAMPLE", "C-type lectin 1", "", true, "Lectin", "Calcium"),
-                GuideProtein(4, "sp|P90005|KUI1_EXAMPLE", "Kunitz-type protease inhibitor 1", "", true, "Protease inhibitor", "Serine protease inhibitor"),
-                GuideProtein(5, "sp|P90006|ACTB_EXAMPLE", "Actin, cytoplasmic", "Actin family", true, "Cytoskeleton"),
+                WithPfam(GuideProtein(1, "sp|P90001|TRY1_EXAMPLE", "Trypsin-like serine protease 1", "Peptidase S1 family", true, "Serine protease", "Hydrolase", "Protease"), ("PF00089", "Trypsin")),
+                WithPfam(GuideProtein(1, "tr|A0A900A002|A0A900A002_EXAMPLE", "Trypsin-like serine protease 2", "Peptidase S1 family", false, "Serine protease", "Hydrolase"), ("PF00089", "Trypsin")),
+                WithPfam(GuideProtein(2, "sp|P90003|PA2_EXAMPLE", "Secreted phospholipase A2", "Phospholipase A2 family", true, "Hydrolase", "Lipid degradation"), ("PF00068", "Phospholip_A2_1")),
+                WithPfam(GuideProtein(3, "sp|P90004|LEC1_EXAMPLE", "C-type lectin 1", "", true, "Lectin", "Calcium"), ("PF00059", "Lectin_C")),
+                WithPfam(GuideProtein(4, "sp|P90005|KUI1_EXAMPLE", "Kunitz-type protease inhibitor 1", "", true, "Protease inhibitor", "Serine protease inhibitor"), ("PF00014", "Kunitz_BPTI")),
+                WithPfam(GuideProtein(5, "sp|P90006|ACTB_EXAMPLE", "Actin, cytoplasmic", "Actin family", true, "Cytoskeleton"), ("PF00022", "Actin")),
+                WithPfam(GuideProtein(6, "sp|P90007|MMP1_EXAMPLE", "Matrix metalloproteinase 1", "Peptidase M10A family", true, "Metalloprotease", "Hydrolase"),
+                    ("PF00413", "Peptidase_M10"), ("PF00045", "Hemopexin"), ("PF01471", "PG_binding_1")),
             },
         };
         var previousTheme = Themes.ThemeManager.Current;
         Themes.ThemeManager.Apply(dark ? Themes.AppTheme.Dark : Themes.AppTheme.Light);
         var curation = new CurationViewModel(file);
-        var model = new FamilyListImportViewModel(new FamilyListImportTransaction(curation), matcher: new FamilyListStoredEvidenceMatches(file));
+        var model = new FamilyListImportViewModel(new FamilyListImportTransaction(curation), matcher: new FamilyListStoredEvidenceMatches(file),
+            workbookSource: new FamilyListWorkbookCoreSource(), openWorkbookReview: true);
         var window = new FamilyListImportWindow(model, path => ExampleFamilyList.Write(path), PanelImportTemplate.Write)
         { Width = 1366, Height = 768, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual,
             WindowStyle = WindowStyle.None, ResizeMode = ResizeMode.NoResize, ShowActivated = false, ShowInTaskbar = false };
@@ -79,21 +91,60 @@ internal static partial class Program
             // The real path holds this computer's temporary folder; the picture shows a generic documents path instead.
             var pathBox = (TextBox)window.FindName("WorkbookPathBox");
             pathBox.Text = @"C:\Users\you\Documents\example-family-list.xlsx";
+            // Z16a8 (Z16a9): the whole workbook is read at once and the wizard opens on Review your workbook, as File > Import
+            // family list does. The four decision labels the legend leaves unclear and the special rows wait for her, so Accept
+            // and import is unavailable; nothing is confirmed and the project has no panel yet.
+            Check("guide: the example opens on Review your workbook, with its eight parts and her open choices",
+                model.ReviewingWorkbook && model.Title == "Review your workbook" && model.ForwardLabel == "Accept and import" && model.WorkbookSections.Count == 8
+                && !model.CanAcceptWorkbook && model.WorkbookHasReviewProblems && model.WorkbookSections.Single(s => s.Key == "decisions").NeedsChoice
+                && model.WorkbookSections.Single(s => s.Key == "rows").NeedsChoice && model.Decisions.All(d => !d.Confirmed)
+                && model.SubclassChoices.Count > 0 && model.SubclassChoices.All(c => !c.Confirmed) && file.FamilyPanel == null,
+                string.Join(" | ", model.WorkbookSections.Select(s => s.Title + ": " + s.Summary)));
+            Shot("02-workbook");
+            FinishReviewWork(() => model.ReviewWorkbookSectionAsync("sheets")); PumpDispatcher();
+            // Z16a8: the six sheets of the example, each with its role; the three notes sheets and the legend's text are kept.
+            Check("guide: Review on Workbook sheets opens File and sheet on the map of the six example sheets",
+                model.Page == 1 && model.HasWorkbookMap && model.WorkbookSheets.Count == 6 && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.Notes) == 3
+                && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.FamilyList) == 1 && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.ColorLegend) == 1
+                && model.WorkbookSheets.Count(s => s.Role == PanelWorkbookSheetRole.SubclassTable) == 1 && model.WorkbookSheets.All(s => s.Review == "Proposed")
+                && model.KeptNotes.Count == 4 && model.KeptNotesSummary.StartsWith("Notes kept: ", StringComparison.Ordinal)
+                && ((TabControl)window.FindName("WorkbookTabs")).SelectedItem == window.FindName("WorkbookMapTab"),
+                string.Join(", ", model.WorkbookSheets.Select(s => s.Name + "=" + s.Role + "/" + s.Review)) + "; " + model.KeptNotesSummary);
+            Shot("02-workbook-map");
+            ((TabControl)window.FindName("WorkbookTabs")).SelectedItem = window.FindName("SheetPreviewTab"); PumpDispatcher();
             Shot("02-file-and-sheet");
-            Check("guide: the example opens on its sheet with header row 3", model.Page == 1 && model.Preview?.ProposedHeaderRow == 3);
+            Check("guide: the example's family list has its header row 3", model.Preview?.ProposedHeaderRow == 3);
             ((Button)window.FindName("ForwardButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
-            // Z12p2c1: the abbreviation cells carry the example's fills, so they become colour categories with their plain names.
-            model.ColorColumn!.Header = model.ColorColumn.Headers.First(h => h == "Sigla"); PumpDispatcher();
-            Check("guide: the Columns page asks about the decision column and names each fill for her",
-                model.HasDecisionHint && model.DecisionHint.StartsWith("Decis", StringComparison.Ordinal)
-                && model.SourceColorChoices.Count > 0 && model.SourceColorChoices.All(c => c.Label == c.ColorName) && model.CanNext,
-                model.DecisionHint + "; " + string.Join(", ", model.SourceColorChoices.Select(c => c.ColorName + "=" + c.Label)));
+            // Z16a8: the legend's labels are the values of Decisão FamilyQuant and its colours those of Sigla, so both columns are
+            // proposed, with Subclasses for the subclass names; each colour starts with the legend's name, or with its plain name
+            // when the legend gives that colour two names.
+            Check("guide: Columns shows the columns proposed from the legend and each fill named from it",
+                model.Page == 2 && !model.ReviewingDecisions && model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header == "Decisão FamilyQuant"
+                && model.ColorColumn?.Header == "Sigla" && model.Columns.Any(c => c.Header == "Subclasses")
+                && model.SourceColorChoices.Count == 6 && model.SourceColorChoices.Count(c => c.Label != c.ColorName) == 4
+                && model.SourceColorChoices.Any(c => c.ColorName == "light turquoise" && c.Label == "Núcleo")
+                && model.SourceColorChoices.Any(c => c.ColorName == "light grey" && c.Label == "light grey"),
+                string.Join(", ", model.Columns.Select(c => c.Label + "=" + c.Header)) + "; " + string.Join(", ", model.SourceColorChoices.Select(c => c.ColorName + "=" + c.Label)));
             Shot("03-columns");
-            ((Button)window.FindName("UseDecisionHintButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
+            // The colour categories sit below the column choices; the picture of them is taken with the page scrolled to them.
+            var colours = (Expander)window.FindName("ColourCategories");
+            colours.BringIntoView(); PumpDispatcher();
+            Check("guide: Colour categories is open below the column choices", colours.IsExpanded && colours.IsVisible);
+            Shot("03-columns-colours");
+            ((Button)WalkTree(window).OfType<Button>().First(b => b.Content as string == "Review decision values")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
+            // Z16a8: each value with its meaning from the legend; nothing is confirmed, and unclear meanings stay empty.
+            Check("guide: Review decision values shows the eight values with their meanings, four proposed, four empty, none confirmed",
+                model.ReviewingDecisions && model.Decisions.Count == 8 && model.Decisions.All(d => d.Meaning.Length > 0 && !d.Confirmed)
+                && model.Decisions.Count(d => d.Decision == null) == 4
+                && model.Decisions.Any(d => d.Decision == FamilyPanelDecision.MergeIntoAnotherFamily && d.MergeTarget == "LEC") && !model.CanNext,
+                string.Join("; ", model.Decisions.Select(d => d.Source + " -> " + (d.Decision?.ToString() ?? "(empty)") + " " + d.MergeTarget)));
             Shot("03-columns-decisions");
-            Check("guide: Use this decision column opens eight decision values to review",
-                model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header == model.DecisionHint && model.Decisions.Count == 8 && model.ReviewingDecisions);
+            // Her choices for the four labels the legend leaves empty, as a reader of this example would make them: the
+            // families out of the total stay out, and the optional, conditional and pending ones are kept for now.
+            foreach (var open in model.Decisions.Where(d => d.Decision == null))
+                open.Decision = open.Meaning.StartsWith("Fora do total", StringComparison.Ordinal) ? FamilyPanelDecision.NotAFamily : FamilyPanelDecision.Quantify;
             model.ConfirmDecisions();
+            Check("guide: every decision value is confirmed only by Confirm these actions", model.Decisions.All(d => d.Confirmed) && model.CanNext, model.Status);
             FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
             model.SelectedSpecialRow = model.SpecialRows.Single(r => r.SeveralNames && r.Parts.Count == 4 && r.Blocking);
             Shot("04-special-rows");
@@ -109,6 +160,10 @@ internal static partial class Program
             model.SelectedMatchFamily = model.MatchFamilies.First(f => f.Key == "TRP");
             var family = model.SelectedMatchFamily.Suggestions.FirstOrDefault(s => s.Text == "Peptidase S1 family") ?? model.SelectedMatchFamily.Suggestions.First();
             family.Use = true; PumpDispatcher();
+            // Z16a8 (Z16a4): the Pfam domain written in TRP's row comes first, marked from your sheet and ticked.
+            Check("guide: TRP's Pfam domain from the sheet comes first, marked and ticked",
+                model.SelectedMatchFamily.Suggestions.First() is { Text: "PF00089", Use: true, IsFromSheet: true, Origin: "from your sheet" } sheet && sheet.Proteins == 2,
+                string.Join(", ", model.SelectedMatchFamily.Suggestions.Select(s => s.Text + (s.Use ? "*" : "") + " " + s.Origin + " " + s.Proteins)));
             Shot("05-evidence-matches");
             model.ConfirmMatches(_ => true);
             model.SelectedMatchFamily = model.MatchFamilies.First(f => f.Key == "PLA");
@@ -118,11 +173,33 @@ internal static partial class Program
             while (model.MatchFamilies.FirstOrDefault(f => !f.Decided) is { } next) { model.SelectedMatchFamily = next; model.SkipMatch(); }
             FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
             model.PanelName = "Example family list";
-            Check("guide: Summary shows the colour category of the families that have one", model.SummaryFamilies.Any(f => !string.IsNullOrEmpty(f.Color)));
+            Check("guide: Summary shows the colour category of the families that have one, and goes back to the workbook review",
+                model.Page == 5 && model.SummaryFamilies.Any(f => !string.IsNullOrEmpty(f.Color)) && model.ForwardLabel == "Review workbook");
             Shot("06-summary");
             FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
+            // Z16a8 (Z16a5, Z16a9): the subclasses the table proposes, each with its domain rules, in the draft and unconfirmed.
+            FinishReviewWork(() => model.ReviewWorkbookSectionAsync("subclasses")); PumpDispatcher();
+            model.SelectedSubclass = model.SubclassChoices.First(c => c.Family == "MMP"); PumpDispatcher();
+            Check("guide: Review on Subclass proposals opens the subclasses proposed from 2. Subclasses, none confirmed",
+                model.ReviewingSubclasses && model.Title == "Review subclass proposals" && model.SubclassChoices.All(c => !c.Confirmed)
+                && model.SelectedSubclass.Rules.Any(r => r.Accession == "PF00413") && model.SelectedSubclass.Rules.Any(r => r.Accession == "PF00045"),
+                string.Join("; ", model.SubclassChoices.Select(c => c.Family + "/" + c.Title + " " + string.Join(",", c.Rules.Select(r => r.Accession + " " + r.Kind)))));
+            // Z16a12: the example's absent-domains column gives the polarity, so the two hemopexin subclasses propose opposite rules.
+            Check("guide: Sem hemopexina proposes Hemopexin as Absent Pfam and Com hemopexina as Required Pfam, from the column headings",
+                model.SubclassChoices.Single(c => c.Family == "MMP" && c.Title == "Sem hemopexina").Rules.Single(r => r.Accession == "PF00045").Kind == ImportSubclassRuleKind.AbsentPfam
+                && model.SubclassChoices.Single(c => c.Family == "MMP" && c.Title == "Com hemopexina").Rules.Single(r => r.Accession == "PF00045").Kind == ImportSubclassRuleKind.RequiredPfam,
+                string.Join("; ", model.SubclassChoices.Where(c => c.Family == "MMP").Select(c => c.Title + " " + string.Join(",", c.Rules.Select(r => r.Accession + " " + r.Kind + (r.Use ? "*" : ""))))));
+            Shot("05-subclasses");
+            model.Back(); PumpDispatcher();
+            Check("guide: back on Review your workbook, Accept and import is available once her choices are made",
+                model.ReviewingWorkbook && model.CanAcceptWorkbook && !model.WorkbookHasReviewProblems && file.FamilyPanel == null, model.WorkbookReviewStatus);
+            Shot("06-accept");
+            int subclasses = model.SubclassChoices.Count(c => c.Use);
+            FinishReviewWork(async () => { await model.NextAsync(_ => true); }); PumpDispatcher();
             Shot("07-done");
-            Check("guide: imported", model.Imported && file.FamilyPanel?.Name == "Example family list");
+            Check("guide: Accept and import imports the panel with the notes kept and the subclasses left in the draft", model.Imported
+                && file.FamilyPanel?.Name == "Example family list" && file.FamilyPanel.SourceNotes.Count == 4
+                && file.FamilyPanel.Families.Sum(f => f.Subclasses.Count) == subclasses && curation.UndoStack.Count == 1);
             Check("guide: the generated workbook is written under the output folder", Path.GetFullPath(workbook)
                 .StartsWith(Path.GetFullPath(output).TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase), workbook);
         }

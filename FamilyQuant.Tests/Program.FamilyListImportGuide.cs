@@ -27,7 +27,7 @@ internal static partial class Program
     /// routes that save matches later, and the window that shows it.</summary>
     private static void FamilyListImportGuideTests(string? output = null)
     {
-        Section("Import guide: the Help chapter for File > Import family list (Z12p2c, Z12p2c1)");
+        Section("Import guide: the Help chapter for File > Import family list (Z12p2c, Z12p2c1, Z16a8)");
         EnsureApplication();
         var sections = FamilyListImportGuide.Sections;
         string text = FamilyListImportGuide.Text();
@@ -40,13 +40,26 @@ internal static partial class Program
         Check("one part for each of the seven wizard pages, in order", Enumerable.Range(1, 7).All(n => sections.Any(s => s.Title.StartsWith(n + ".", StringComparison.Ordinal)))
             && sections.Where(s => char.IsDigit(s.Title[0])).Select(s => s.Title[0]).SequenceEqual(sections.Where(s => char.IsDigit(s.Title[0])).Select(s => s.Title[0]).OrderBy(c => c)));
         Check("the Columns page has its decision review and Special rows its repeated abbreviation", sections.Any(s => s.Key == "decisions") && sections.Any(s => s.Key == "duplicate"));
+        // Z16a8 (W21, D81): a workbook with several sheets, read at once, with nothing set before her one press.
+        Check("the chapter covers a workbook with several sheets: Review your workbook, the map, colours, subclasses and the one press",
+            new[] { "workbook", "file", "preview", "colours", "subclasses", "accept" }.All(key => sections.Any(s => s.Key == key))
+            && text.Contains("it accepts everything the page shows, exactly as shown", StringComparison.Ordinal)
+            && text.Contains("that press is your confirmation, and nothing is set before it", StringComparison.Ordinal)
+            && text.Contains("it never guesses", StringComparison.Ordinal) && text.Contains("never by their names", StringComparison.Ordinal));
+        Check("the chapter keeps every workbook proposal her choice: legend meanings, her Pfam domains, subclass rules, notes",
+            text.Contains("each line is still your choice", StringComparison.Ordinal) && text.Contains("the action is left empty for you to choose", StringComparison.Ordinal)
+            && text.Contains("because they are your own statement", StringComparison.Ordinal) && text.Contains("Untick any you do not want", StringComparison.Ordinal)
+            && text.Contains("Nothing becomes a rule until you press Accept and import", StringComparison.Ordinal)
+            // Z16a12: polarity from the column headings, and her check of each rule still asked for.
+            && text.Contains("Whether a domain is required or absent is read from the column headings", StringComparison.Ordinal)
+            && text.Contains("Still check each rule before accepting", StringComparison.Ordinal) && text.Contains("never read as families or as rules", StringComparison.Ordinal));
         var pictured = FamilyListImportGuide.Pictured.ToList();
         var loaded = pictured.Select(s =>
         {
             try { var image = new BitmapImage(FamilyListImportGuide.ImageUri(s)); return (Section: s, image.PixelWidth, image.PixelHeight); }
             catch (Exception ex) when (ex is IOException or NotSupportedException) { return (Section: s, PixelWidth: 0, PixelHeight: 0); }
         }).ToList();
-        Check("every wizard page has its picture inside the program, at 1366 x 768", pictured.Count == 9
+        Check("every wizard page has its picture inside the program, at 1366 x 768", pictured.Count == 14
             && loaded.All(p => p.PixelWidth == 1366 && p.PixelHeight == 768), string.Join(", ", loaded.Where(p => p.PixelWidth != 1366).Select(p => p.Section.Image)));
         Check("embedded guide pictures match the current native source captures", pictured.All(section =>
         {
@@ -56,7 +69,7 @@ internal static partial class Program
         }));
         string[] labels =
         {
-            "Try with the example", "Save a template", "Edit current panel", "Browse", "Read this header row", "Cell details", "Keep as source notes",
+            "Try with the example", "Save a template", "Edit current panel", "Browse", "Read this header row", "Cell details",
             "Confirm these actions", "Back to columns", "Review decision values", "Quantify", "Report under others", "Not a family", "Merge into family",
             "Original source row", "Use this row as", "Use this choice", "Needs a choice", "Keep as one family", "One family per name",
             "One group reported under others", "Keep or rename this row", "Skip this row", "Skipped", "Use selected matches", "Skip this family",
@@ -64,6 +77,17 @@ internal static partial class Program
             "Use this decision column", "Match stored names", "Apply grouping", "Apply panel", "Review spreadsheet decisions",
             "Colour categories (optional)", "Colour", "Group by evidence", "Read database and scope", "Update proposal", "Place outside matches by hand",
             "Import family list",
+            // Z16a8 (Z16a3): the workbook map and the legend meanings.
+            "Workbook sheets", "Use as", "Kept as", "Why this role", "Review role", "Proposed", "Family list", "Colour legend", "Subclass table", "Notes",
+            "Use selected family sheet", "Read kept notes", "Kept notes preview", "Kept as source notes", "Sheet preview", "Source notes", "Meaning from legend",
+            "Use as (proposed)", "Merge into abbreviation", "Source colour", "Source rows", "Category name",
+            // Z16a8 (Z16a4): her Pfam domains on Evidence matches.
+            "Pfam domain", "from your sheet",
+            // Z16a8 (Z16a9, Z16a5): Review your workbook, its parts and the subclass review.
+            "Review your workbook", "Accept and import", "Review findings", "Back to workbook review", "Review workbook", "Family list and columns",
+            "Source categories", "Decision labels", "Family rows", "Pfam and evidence matches", "Subclass proposals", "All findings", "Could not place",
+            "Families", "Special rows", "Subclasses", "Review subclass proposals", "Include subclass", "Include rule", "Leave out", "Required Pfam",
+            "Absent Pfam", "Check choices", "Keep subclass choices", "Family key", "Subclass key", "Display name", "Pfam rules", "Column with coloured cells",
         };
         Check("the chapter names the wizard's controls and choices with the program's own words", labels.All(text.Contains) && text.Contains("File > Save", StringComparison.Ordinal),
             string.Join(", ", labels.Where(l => !text.Contains(l))));
@@ -71,7 +95,8 @@ internal static partial class Program
         string repository = GoldenNumbers.FindRepository();
         string program = string.Concat(new[] { "FamilyListImportWindow.xaml", "FamilyListImportViewModel.cs", "FamilyListImportViewModel.Rows.cs",
                 "FamilyListImportViewModel.Commit.cs", "FamilyListImportModels.cs", "SuperClusterPreviewWindow.xaml", "PanelEditorWindow.xaml",
-                "MainWindow.xaml", "ClusterGenerationControl.xaml" }
+                "MainWindow.xaml", "ClusterGenerationControl.xaml", "FamilyListImportWorkbookModels.cs", "FamilyListImportViewModel.Workbook.cs", "FamilyListStoredEvidenceMatches.cs",
+                "FamilyListImportViewModel.Overview.cs", "FamilyListWorkbookOverview.xaml", "FamilyListSubclassReview.xaml", "FamilyListSubclassReviewModels.cs" }
             .Select(name => File.ReadAllText(Path.Combine(repository, "FamilyQuant", name))));
         Check("every control the chapter names is a label in the program's sources", labels.All(l => program.Contains("\"" + l + "\"", StringComparison.Ordinal)
             || program.Contains("\"" + l + "...\"", StringComparison.Ordinal)),
@@ -115,7 +140,7 @@ internal static partial class Program
                     Check(theme + " it opens at a size that fits a 1024 x 768 screen", window.Width <= 1024 && window.Height <= 728);
                     if (theme == Themes.AppTheme.Light) CheckTooltipCoverage("Import guide window", (FrameworkElement)window.Content);
                     ((Button)window.FindName("nextButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
-                    Check(theme + " Next moves to the following part", model.Current.Key == "columns" && model.CanPrevious);
+                    Check(theme + " Next moves to the following part", model.Current.Key == "preview" && model.CanPrevious);
                     model.Current = model.Sections.Single(s => s.Key == "later"); PumpDispatcher();
                     Check(theme + " a part without a picture hides the picture frame", !model.HasPicture);
                     model.Current = model.Sections[^1]; PumpDispatcher();
