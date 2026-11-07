@@ -62,7 +62,7 @@ internal static partial class Program
         try
         {
             foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
-            foreach (var size in new[] { (W: 1366, H: 768), (W: 1920, H: 1080) })
+            foreach (var size in new[] { (W: 1220, H: 780), (W: 1366, H: 768), (W: 1920, H: 1080) })
             {
                 Themes.ThemeManager.Apply(theme);
                 var project = ManualChoiceFile(); string before = project.ToJsonText(); var curation = new CurationViewModel(project);
@@ -83,6 +83,13 @@ internal static partial class Program
                     CaptureFamilyListPage(window, output, theme, size.W, size.H, "02-workbook-map");
                     ((TabControl)window.FindName("WorkbookTabs")).SelectedItem = window.FindName("SheetPreviewTab"); PumpDispatcher();
                     CaptureFamilyListPage(window, output, theme, size.W, size.H, "02-source-preview");
+                    var previewGrid = (DataGrid)window.FindName("SheetPreviewGrid");
+                    double scrollbar = WalkTree(previewGrid).OfType<System.Windows.Controls.Primitives.ScrollBar>()
+                        .Where(bar => bar.IsVisible && bar.Orientation == Orientation.Vertical).Select(bar => bar.ActualWidth).DefaultIfEmpty(0).Max();
+                    double available = previewGrid.ActualWidth - scrollbar - previewGrid.BorderThickness.Left - previewGrid.BorderThickness.Right;
+                    double columnsWidth = previewGrid.Columns.Take(7).Sum(c => c.ActualWidth);
+                    Check(label + " source preview keeps its first six columns inside the viewport", columnsWidth <= available + 1,
+                        "columns=" + columnsWidth + "; available=" + available + "; scrollbar=" + scrollbar);
                     FinishReviewWork(async () => { await model.NextAsync(); });
                     model.ColorColumn!.Header = model.Columns.Single(c => c.Role == PanelImportFields.FamilyKey).Header;
                     Check(label + " source fills start with the real Core legend names and meanings", model.SourceColorChoices.Count > 0
@@ -96,6 +103,13 @@ internal static partial class Program
                         && model.Decisions.Any(d => d.Decision == null) && model.Decisions.All(d => !d.Confirmed) && !model.CanNext
                         && ((DataGridColumn)window.FindName("DecisionMeaningColumn")).Visibility == Visibility.Visible);
                     CaptureFamilyListPage(window, output, theme, size.W, size.H, "03-legend-decisions");
+                    var decisionGrid = (DataGrid)window.FindName("DecisionGrid");
+                    var longest = model.Decisions.OrderByDescending(d => d.Rows.Length).First();
+                    var cells = WalkTree(decisionGrid).OfType<FrameworkElement>().Where(e => e.IsVisible && ReferenceEquals(e.DataContext, longest)).ToArray();
+                    Check(label + " truncated source row lists remain readable from the actual cell", cells.OfType<TextBlock>()
+                        .Any(e => e.Text == longest.Rows && e.ToolTip is string tip && tip.Contains(longest.Rows, StringComparison.Ordinal)));
+                    Check(label + " inner action controls retain the complete row explanation", cells.Where(e => e is ComboBox or CheckBox or TextBox)
+                        .Any(e => e.ToolTip is string tip && tip.Contains(longest.Reason, StringComparison.Ordinal)));
                     foreach (var decision in model.Decisions.Where(d => d.Decision == null)) decision.Decision = FamilyPanelDecision.Quantify;
                     model.ConfirmDecisions(); FinishReviewWork(async () => { await model.NextAsync(); });
                     for (int attempt = 0; attempt < 100 && model.SpecialRows.FirstOrDefault(r => r.Blocking) is { } row; attempt++)

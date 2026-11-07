@@ -12,6 +12,7 @@ public sealed class FamilyListStoredEvidenceMatches : IFamilyListImportMatches
 {
     private readonly FamilyClusterFile project;
     private readonly PanelEvidenceMatching matching;
+    internal PanelEvidenceMatching WorkbookSnapshot => matching;
     private readonly FamilyPanel previousPanel;
     public string ChangeNotice { get; private set; } = "";
     public string SourceStatus => matching.ReferencePanelComplete switch

@@ -127,6 +127,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--desktop-world-walk <copied-project> <copied-raw-folder> <copied-sepr2> <copied-denovo-root> <output> <confirmed-scope>` | Private desktop real-data fetch/scope dialog, production Compute, Database gap and native CSV/FASTA exports; uses only copies |
 | `--test-quantitation-stages` | Prepared-peptide assignments, cross-side suppression, residual calibration, rollup and deterministic CSV |
 | `--test-family-panel` | Panel and subclass fixtures, safe publication, native runner and report sections |
+| `--test-panel-subclass-import [output]` | Z16a5 sourced subclass proposals before family confirmation, canonical Pfam rules, explicit atomic acceptance, unknown-text retention and the native subclass engine |
 | `--test-panel-import-graceful` | Z12p1 graceful spreadsheet import: preview, header proposal, colours, proposals, plain-sentence problems, row choices, replay and old-panel JSON |
 | `--test-panel-import-several` | Z12p3 rows listing several families: list splitting, proposed keys, one family per name, one group under others, replay |
 | `--test-panel-import-template` | Z12p2d family-list template: sheets, marker, instructions, drop-down, schema validation, import with no mapping, replay |

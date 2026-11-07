@@ -287,6 +287,8 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => DisabledTableTests());
             suite.AddWithApplication(() => ImportTooltipCopyTests());
             suite.AddWithApplication(() => WorkbookWizardTests());
+            suite.AddWithApplication(() => WorkbookOverviewTests());
+            suite.AddWithApplication(() => WorkbookSubclassReviewTests());
             suite.AddWithApplication(() => ImportWizardToolTipTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
             suite.AddWithApplication(() => GridCopyTests());
@@ -301,7 +303,9 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelImportExampleTests(Path.Combine(workDir, "panel-import-example")));
             suite.Add(() => PanelWorkbookMapTests(Path.Combine(workDir, "panel-workbook-map")));
             suite.Add(() => PanelWorkbookLegendTests(Path.Combine(workDir, "panel-workbook-legend")));
+            suite.Add(() => PanelSubclassImportTests(Path.Combine(workDir, "panel-subclass-import")));
             suite.AddWithApplication(() => PanelWorkbookNotesTests());
+            suite.Add(() => WorkbookImportSummaryTests());
             suite.AddWithApplication(() => ToolTipStyleTests());
             suite.AddWithApplication(() => ToolTipCheckTests());
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
