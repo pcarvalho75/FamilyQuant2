@@ -8,8 +8,12 @@
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
         <TextBlock Text="{Binding Heading}" Style="{StaticResource PageTitle}" TextTrimming="CharacterEllipsis"/>
         <TextBlock Grid.Row="1" Text="{Binding NamesText}" ToolTip="{Binding NamesText}" TextTrimming="CharacterEllipsis" Margin="0,6,0,6" Foreground="{DynamicResource MutedBrush}"/>
-        <TextBlock Grid.Row="2" Text="Review the labels and per-label coverage, then tick those to use." Margin="0,0,0,10"/>
-        <DataGrid x:Name="MatchLabelsGrid" Grid.Row="3" ItemsSource="{Binding Rows}" AutoGenerateColumns="False"
+        <DockPanel Grid.Row="2" Margin="0,0,0,10" LastChildFill="False">
+            <TextBlock Text="{Binding FamilyMatchStatus}" VerticalAlignment="Center"/>
+            <CheckBox x:Name="ShowMoreMatchLabels" Content="Show more" IsChecked="{Binding ShowMore}" Margin="18,0,0,0"
+                      ToolTip="Show additional stored labels, including broadly shared keywords and tissue phrases. Your selected labels stay visible when this is off."/>
+        </DockPanel>
+        <DataGrid x:Name="MatchLabelsGrid" Grid.Row="3" ItemsSource="{Binding VisibleRows}" AutoGenerateColumns="False"
                   CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Header="Use" Binding="{Binding Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="45">

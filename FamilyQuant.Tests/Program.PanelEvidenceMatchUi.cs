@@ -120,6 +120,20 @@ internal static partial class Program
                     bool changed = host.ViewModel.ApplyFamilyPanel(panel);
                     Check("Z12p4 " + theme + " panel Apply saves labels while all protein families remain locked",
                         changed && file.FamilyPanel!.ConfirmedEvidenceMatches!.ContainsKey("stable-key") && file.LockedUserIds.SetEquals(new[] { 0, 1, 2 }));
+                    var reopenSession = new EvidenceGroupingSession(file, "reopen matched choices fixture"); reopenSession.Propose("Action alpha");
+                    var reopenModel = new PanelEvidenceMatchViewModel(reopenSession.CreatePanelMatchContext("stable-key"));
+                    var reopenWindow = new PanelEvidenceMatchWindow(reopenModel) { ShowInTaskbar = false, ShowActivated = false };
+                    try
+                    {
+                        reopenWindow.Show(); PumpDispatcher();
+                        var saved = reopenModel.Rows.Single(choice => choice.Kind == PanelEvidenceMatchKind.Keyword && choice.Value == "Future keyword");
+                        var grid = (DataGrid)reopenWindow.FindName("MatchLabelsGrid"); grid.ScrollIntoView(saved); reopenWindow.UpdateLayout(); PumpDispatcher();
+                        Check("Z12p4-notes " + theme + " reopening the dialog restores the stored choice tick",
+                            saved.Selected && (grid.Columns[0].GetCellContent(saved) as CheckBox)?.IsChecked == true
+                            && reopenModel.Rows.Where(choice => !ReferenceEquals(choice, saved)).All(choice => !choice.Selected));
+                        ScreenHarness.Save(reopenWindow, Path.Combine(output, "reopened-matches-" + theme + ".png"), 1180, 680);
+                    }
+                    finally { reopenWindow.Close(); PumpDispatcher(); }
                     host.ViewModel.Undo();
                     Check("Z12p4 " + theme + " metadata-only panel Apply has byte-exact Undo", file.ToJsonText() == before);
                 }
@@ -148,5 +162,9 @@ internal static partial class Program
             ((Button)modal.FindName("ConfirmMatchLabelsButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent))));
         Check("Z12p4 native modal confirmation returns only checked user choices", modal.ShowDialog() == true
             && modal.Matches is { UserConfirmed: true } && modal.Matches.Choices.Count == 1 && modalFile.FamilyPanel.ConfirmedEvidenceMatches == null);
+        Check("Z12p4-notes panel window Help explains the independent matching save route",
+            PanelReportHelp.Panel.Contains("Match stored names", StringComparison.Ordinal)
+            && PanelReportHelp.Panel.Contains("Apply panel and File > Save", StringComparison.Ordinal));
+        PanelEvidenceRankingUiTests(output);
     }
 }

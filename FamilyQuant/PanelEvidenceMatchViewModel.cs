@@ -9,7 +9,7 @@ using System.Linq;
 namespace FamilyQuant;
 
 public sealed record PanelEvidenceMatchContext(PanelEvidenceMatching Evidence, FamilyPanelFamily Family,
-    PanelConfirmedEvidenceMatches? Confirmed, Func<bool> IsCurrent);
+    PanelConfirmedEvidenceMatches? Confirmed, Func<bool> IsCurrent, FamilyPanel? Panel = null);
 
 public sealed record PanelEvidenceKindOption(PanelEvidenceMatchKind Kind, string Name);
 
@@ -29,6 +29,7 @@ public sealed class PanelEvidenceMatchRow : ScreenViewModel
     public int Targets => coverage.DatabaseTargets;
     public int Reviewed => coverage.ReviewedTargets;
     public int References => coverage.ReferenceEntries;
+    public bool IsAdditional { get; }
     public string Reason
     {
         get
@@ -42,6 +43,7 @@ public sealed class PanelEvidenceMatchRow : ScreenViewModel
     public PanelEvidenceMatchRow(PanelEvidenceMatching evidence, PanelEvidenceSuggestion suggestion, bool selected, Action changed)
     {
         this.evidence = evidence; this.changed = changed; basis = suggestion.Reason;
+        IsAdditional = suggestion.IsAdditional;
         kind = suggestion.Kind; value = suggestion.Value; this.selected = selected; coverage = evidence.Coverage(kind, value);
     }
     private void Refresh()
@@ -57,7 +59,7 @@ public sealed class PanelEvidenceMatchViewModel : ScreenViewModel
     private readonly PanelEvidenceMatchContext context;
     private readonly string[] names;
     private string error = "";
-    private bool stale;
+    private bool stale, showMore;
     public static IReadOnlyList<PanelEvidenceKindOption> KindOptions { get; } = new[]
     {
         new PanelEvidenceKindOption(PanelEvidenceMatchKind.UniProtFamily, "UniProt family"), new(PanelEvidenceMatchKind.Keyword, "Keyword"),
@@ -66,7 +68,13 @@ public sealed class PanelEvidenceMatchViewModel : ScreenViewModel
     public string Heading => "Match " + (string.IsNullOrWhiteSpace(context.Family.DisplayName) ? context.Family.Key : context.Family.DisplayName);
     public string NamesText => "Display name - " + context.Family.DisplayName + string.Concat(context.Family.Names.Select(name => " | " + name.Name + " - " + name.Text));
     public ObservableCollection<PanelEvidenceMatchRow> Rows { get; } = new();
+    public ObservableCollection<PanelEvidenceMatchRow> VisibleRows { get; } = new();
+    public bool ShowMore { get => showMore; set { if (Set(ref showMore, value)) RefreshVisibleRows(); } }
+    public string FamilyMatchStatus { get; }
     public bool CanConfirm => !stale && error.Length == 0 && Rows.Where(row => row.Selected).All(row => row.IsValid);
+    public string ConfirmHint => stale ? "Close this window and reopen the matches to review the changed stored evidence."
+        : Rows.Any(row => row.Selected && !row.IsValid) ? "Fill in or untick each empty selected label before confirming."
+        : "Return the ticked labels to the panel draft. Apply panel publishes the draft as one change that you can Undo.";
     public string Summary
     {
         get
@@ -84,8 +92,9 @@ public sealed class PanelEvidenceMatchViewModel : ScreenViewModel
         names = context.Family.Names.Select(name => name.Text).Prepend(context.Family.DisplayName).Where(name => !string.IsNullOrWhiteSpace(name)).Distinct(StringComparer.Ordinal).ToArray();
         var saved = context.Confirmed?.UserConfirmed == true ? context.Confirmed.Choices : Array.Empty<PanelEvidenceChoice>();
         var selected = saved.Select(choice => context.Evidence.Coverage(choice.Kind, choice.Value).Key).ToHashSet(StringComparer.Ordinal);
-        Rows.CollectionChanged += (_, _) => NotifySelection();
-        foreach (var suggestion in context.Evidence.Suggest(names))
+        var suggestions = context.Panel == null ? context.Evidence.Suggest(names) : context.Evidence.SuggestForPanel(context.Panel)[context.Family.Key];
+        FamilyMatchStatus = suggestions.Any(row => row.IsFamilyLevelMatch) ? "Family and domain names first" : "No family-level match";
+        foreach (var suggestion in suggestions)
             Rows.Add(new(context.Evidence, suggestion, selected.Contains(suggestion.Key), NotifySelection));
         foreach (var choice in saved)
         {
@@ -93,6 +102,8 @@ public sealed class PanelEvidenceMatchViewModel : ScreenViewModel
             if (Rows.Any(row => row.Kind == choice.Kind && row.Value.Equals(coverage.Value, StringComparison.OrdinalIgnoreCase))) continue;
             Rows.Add(new(context.Evidence, coverage with { Reason = "Previously confirmed choice." }, true, NotifySelection));
         }
+        Rows.CollectionChanged += (_, _) => { NotifySelection(); RefreshVisibleRows(); };
+        RefreshVisibleRows();
     }
     public PanelEvidenceMatchRow AddLabel()
     {
@@ -112,9 +123,14 @@ public sealed class PanelEvidenceMatchViewModel : ScreenViewModel
         catch (ArgumentException invalid) { error = invalid.Message; NotifySelection(false); return false; }
     }
     private void NotifySelection() => NotifySelection(true);
+    private void RefreshVisibleRows()
+    {
+        VisibleRows.Clear();
+        foreach (var row in Rows.Where(row => ShowMore || !row.IsAdditional || row.Selected)) VisibleRows.Add(row);
+    }
     private void NotifySelection(bool clearError)
     {
         if (clearError && !stale) error = "";
-        Changed(nameof(CanConfirm)); Changed(nameof(Summary));
+        Changed(nameof(CanConfirm)); Changed(nameof(Summary)); Changed(nameof(ConfirmHint));
     }
 }
