@@ -17,6 +17,7 @@ internal static partial class Program
 {
     private static void EvidenceSnapshotCopyTests()
     {
+        EvidenceFingerprintTests();
         Section("Z12p5f2f streamed evidence snapshot copies");
         var copyMethod = typeof(EvidenceApply).GetMethod("Clone", BindingFlags.Static | BindingFlags.NonPublic)!;
         T Copy<T>(T value) => (T)copyMethod.MakeGenericMethod(typeof(T)).Invoke(null, new object?[] { value })!;
