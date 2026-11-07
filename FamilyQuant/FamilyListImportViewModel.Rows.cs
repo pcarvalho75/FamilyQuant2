@@ -66,9 +66,13 @@ public sealed partial class FamilyListImportViewModel
                 decisionHeader = nextDecision; Decisions.Clear();
                 foreach (var proposed in importer.ProposeDecisions(table, choices))
                 {
+                    var legend = WorkbookDecision(proposed.SourceValue);
                     var row = new ImportDecisionChoice { Source = proposed.SourceValue,
-                        Rows = string.Join(", ", proposed.RowNumbers), Reason = proposed.Reason,
-                        Decision = proposed.Mapping.Decision, MergeTarget = proposed.Mapping.MergeTargetFamilyKey, Confirmed = proposed.Exact };
+                        Rows = string.Join(", ", proposed.RowNumbers), Reason = legend?.Reason is { Length: > 0 } reason ? reason : proposed.Reason,
+                        Meaning = legend?.LegendMeaning ?? "",
+                        Decision = legend == null ? HasWorkbookMap && !proposed.Exact ? null : proposed.Mapping.Decision : legend.ProposedMapping?.Decision,
+                        MergeTarget = legend?.ProposedMapping?.MergeTargetFamilyKey ?? proposed.Mapping.MergeTargetFamilyKey,
+                        Confirmed = proposed.Exact && (legend == null || legend.ExactProgramDecision) };
                     row.PropertyChanged += (_, _) => { if (!updating) { Refresh(); Changed(nameof(DecisionSummary)); } };
                     Decisions.Add(row);
                 }
@@ -85,8 +89,8 @@ public sealed partial class FamilyListImportViewModel
                 foreach (var color in sourceFills)
                 {
                     var row = new ImportColorChoice { Color = color.Color, ColorName = color.ColorName,
-                        Rows = string.Join(", ", color.RowNumbers), Label = oldColors.GetValueOrDefault(color.Color,
-                            string.IsNullOrWhiteSpace(color.Label) ? color.ColorName : color.Label) };
+                        Meaning = WorkbookColor(color.Color)?.Meaning ?? "", Rows = string.Join(", ", color.RowNumbers), Label = oldColors.GetValueOrDefault(color.Color,
+                            DefaultColorLabel(color)) };
                     row.PropertyChanged += (_, change) => { if (!updating && change.PropertyName == nameof(ImportColorChoice.Label)) Recheck(); };
                     SourceColorChoices.Add(row);
                 }

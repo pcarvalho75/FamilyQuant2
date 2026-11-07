@@ -13,7 +13,7 @@ namespace FamilyQuant.Panels.Import;
 
 /// <summary>Reads cached XLSX cell text and direct fill colours without Office, formula evaluation or workbook
 /// edits. The file is read once into memory with sharing, so a workbook open in Excel can still be read.</summary>
-public sealed class PanelSpreadsheetReader : IPanelSheetPreviewReader
+public sealed partial class PanelSpreadsheetReader : IPanelWorkbookReader
 {
     private const int PreviewRowLimit = 2000;
 

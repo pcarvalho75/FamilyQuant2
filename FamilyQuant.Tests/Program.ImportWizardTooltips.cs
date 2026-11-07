@@ -30,11 +30,11 @@ internal static partial class Program
         }
     }
 
-    private static void AuditImportTooltips(FamilyListImportWindow window, string label)
+    private static void AuditImportTooltips(FamilyListImportWindow window, string label, bool force = false)
     {
-        if (!auditImportTooltips) return;
+        if (!auditImportTooltips && !force) return;
         var controls = WalkTree(window).OfType<FrameworkElement>().Where(e => e.IsVisible && !e.Name.StartsWith("PART_", StringComparison.Ordinal)
-            && e is Button or CheckBox or ComboBox or TextBox or DataGrid or Expander)
+            && e is Button or CheckBox or ComboBox or TextBox or DataGrid or Expander or TabItem)
             .Where(e => e is not Button { TemplatedParent: not null, Content: not string }).ToArray();
         var missing = new List<string>(); var repeats = new List<string>();
         foreach (var control in controls)
