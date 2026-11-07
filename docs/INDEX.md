@@ -15,6 +15,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Compute and open progress](COMPUTE-PROGRESS.md) | Counted phases, live clocks, timestamped logs and native parity check |
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
+| [Tooltips](TOOLTIPS.md) | Design rule 7: the shared tooltip style and defaults, how to write one, a worked example per control kind, census and check |
 | [Workflow names](WORKFLOW-NAMES.md) | One name per step (Home, the five numbered steps, Tools), retired names and the old-name check |
 | [Checking and installing updates](UPDATE-INSTALL.md) | Optional startup notice, explicit installer action, trusted download hosts and fake-network checks |
 | [Quantitation stages](QUANTITATION-PIPELINE.md) | Full-XIC stage contracts, second-pass residual seam and focused parity checker |
@@ -130,6 +131,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-panel-import-several` | Z12p3 rows listing several families: list splitting, proposed keys, one family per name, one group under others, replay |
 | `--test-panel-import-template` | Z12p2d family-list template: sheets, marker, instructions, drop-down, schema validation, import with no mapping, replay |
 | `--test-panel-import-example` | The shipped example family list through the graceful importer: header below titles, proposals, merge label, repeated abbreviation, four-family row, replay |
+| `--test-tooltip-style` | Z12q1 tooltip defaults (500 ms, 20 s, on disabled controls), the 380 px style on theme tokens in both themes, and the one-attribute column header tooltip |
 | `--test-report-findings` | J44 Summary of findings: each fixed sentence present only with its data, headline and study values, Others named only in the supplement, numbers table, culture and wording guards |
 | `--test-interpretation-input` | J45 Interpretation input: deterministic Markdown of details, panel, findings, stored tables and Methods; escaping, absent parts, refusal and the File > Export command |
 | `--j45-walk <project.fqproj> <new-output>` | Private desktop File > Export > Interpretation input (Markdown) twice on a saved project; timings and byte equality |

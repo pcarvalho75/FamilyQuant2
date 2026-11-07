@@ -83,7 +83,7 @@ internal static partial class Program
                 var disabled = new[] { "ButtonHomeCompute", "ButtonHomeAnalytics" }.Select(name => (Button)home.FindName(name)).ToArray();
                 Check(theme + " native Home screen gates project actions with readable disabled explanations",
                     disabled.All(button => !button.IsEnabled && ToolTipService.GetShowOnDisabled(button)
-                        && ToolTipService.GetShowDuration(button) == 60000 && button.ToolTip is string text && text.Contains("Disabled until a project is open.", StringComparison.Ordinal)));
+                        && ToolTipService.GetShowDuration(button) == Themes.ToolTipDefaults.ShowDurationMilliseconds && button.ToolTip is string text && text.Contains("Disabled until a project is open.", StringComparison.Ordinal)));
                 ScreenHarness.Save(window, Path.Combine(output, "home-" + theme + ".png"), 1366, 900);
             }
             finally { window.Close(); }

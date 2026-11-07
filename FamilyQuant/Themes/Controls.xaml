@@ -47,16 +47,12 @@
         <Setter Property="Background" Value="{DynamicResource SubtleBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource EdgeBrush}"/>
-        <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-        <Setter Property="ToolTipService.ShowDuration" Value="60000"/>
     </Style>
     <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
         <Setter Property="FontFamily" Value="{DynamicResource UiFont}"/>
         <Setter Property="FontSize" Value="{DynamicResource BodySize}"/>
         <Setter Property="Padding" Value="{DynamicResource ControlPadding}"/>
         <Setter Property="Margin" Value="{DynamicResource ControlMargin}"/>
-        <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-        <Setter Property="ToolTipService.ShowDuration" Value="60000"/>
         <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AccentInkBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
@@ -68,28 +64,18 @@
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource EdgeBrush}"/>
         <Setter Property="SelectionBrush" Value="{DynamicResource AccentBrush}"/>
-        <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-        <Setter Property="ToolTipService.ShowDuration" Value="60000"/>
     </Style>
     <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultCheckBoxStyle}">
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-        <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-        <Setter Property="ToolTipService.ShowDuration" Value="60000"/>
     </Style>
     <Style TargetType="ComboBox" BasedOn="{StaticResource DefaultComboBoxStyle}">
         <Setter Property="FontSize" Value="{DynamicResource CaptionSize}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         <Setter Property="Background" Value="{DynamicResource InputBrush}"/>
-        <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-        <Setter Property="ToolTipService.ShowDuration" Value="60000"/>
     </Style>
     <Style TargetType="ComboBoxItem" BasedOn="{StaticResource DefaultComboBoxItemStyle}">
-        <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-        <Setter Property="ToolTipService.ShowDuration" Value="60000"/>
     </Style>
     <Style TargetType="MenuItem" BasedOn="{StaticResource DefaultMenuItemStyle}">
-        <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-        <Setter Property="ToolTipService.ShowDuration" Value="60000"/>
     </Style>
     <Style TargetType="GroupBox" BasedOn="{StaticResource DefaultGroupBoxStyle}">
         <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
@@ -135,8 +121,14 @@
             <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="{DynamicResource SelectionBrush}"/></Trigger>
         </Style.Triggers>
     </Style>
+    <!-- Design rule 7 (docs/TOOLTIPS.md): every tooltip wraps at one width on theme tokens; timing is in ToolTipDefaults. -->
     <Style TargetType="ToolTip" BasedOn="{StaticResource DefaultToolTipStyle}">
-        <Setter Property="MaxWidth" Value="520"/>
+        <Setter Property="MaxWidth" Value="{x:Static theme:ToolTipDefaults.MaximumWidth}"/>
+        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource EdgeBrush}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource UiFont}"/>
+        <Setter Property="FontSize" Value="{DynamicResource CaptionSize}"/>
         <Style.Resources>
             <DataTemplate DataType="{x:Type sys:String}">
                 <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
