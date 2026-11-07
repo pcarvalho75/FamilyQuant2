@@ -1,6 +1,8 @@
 using FamilyQuant.Panels;
 using FamilyQuant.Panels.Import;
+using FamilyQuant.Operations;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -22,18 +24,51 @@ public sealed partial class FamilyListImportViewModel
         : SelectedMatchFamily.Suggestions.Count == 0 ? "No matching suggestions are available."
         : "Counts are database entries for each suggestion; overlapping suggestions are not added together.";
 
-    private void PrepareMatches()
+    private async Task<bool> PrepareMatchesAsync()
     {
-        if (check.Panel == null) return;
-        string fingerprint = System.Text.Json.JsonSerializer.Serialize(check.Panel.Families.Select(f => new { f.Key, f.DisplayName, f.Names, f.Decision, f.MergeTargetFamilyKey }));
-        if (fingerprint == matchesFingerprint) return;
-        matchesFingerprint = fingerprint;
-        var detached = FamilyPanelValidation.Clone(check.Panel);
-        var suggestions = matcher?.Suggest(transaction.Project.DeepCopy(), detached)
-            ?? Array.Empty<ImportMatchFamily>();
+        var panel = check.Panel;
+        if (panel == null) return true;
+        string fingerprint = MatchPanelFingerprint(panel);
+        if (fingerprint == matchesFingerprint) return true;
+        var detached = FamilyPanelValidation.Clone(panel);
+        operation?.Cancel(); operation?.Dispose(); operation = new CancellationTokenSource();
+        var token = operation.Token;
+        int generation = ++readGeneration;
+        IsBusy = true; Status = "Preparing evidence matches...";
+        try
+        {
+            var suggestions = await Task.Run(() =>
+            {
+                token.ThrowIfCancellationRequested();
+                var source = copyProject(transaction.Project, new OperationContext(token));
+                token.ThrowIfCancellationRequested();
+                var result = matcher?.Suggest(source, detached) ?? Array.Empty<ImportMatchFamily>();
+                token.ThrowIfCancellationRequested();
+                return result;
+            }, token);
+            token.ThrowIfCancellationRequested();
+            if (generation != readGeneration) return false;
+            if (!ReferenceEquals(check.Panel, panel) || MatchPanelFingerprint(panel) != fingerprint)
+            { Status = "Your family choices changed. Review the special rows again."; return false; }
+            PublishMatches(panel, suggestions);
+            matchesFingerprint = fingerprint;
+            return true;
+        }
+        catch (OperationCanceledException)
+        { if (generation == readGeneration) Status = "Evidence matching cancelled. Your choices are unchanged."; return false; }
+        catch (Exception error) when (error is ArgumentException or InvalidOperationException or System.IO.IOException or UnauthorizedAccessException)
+        { if (generation == readGeneration) Status = "Evidence matches could not be prepared. " + error.Message; return false; }
+        finally { if (generation == readGeneration) IsBusy = false; }
+    }
+
+    private static string MatchPanelFingerprint(FamilyPanel panel) => System.Text.Json.JsonSerializer.Serialize(
+        panel.Families.Select(f => new { f.Key, f.DisplayName, f.Names, f.Decision, f.MergeTargetFamilyKey }));
+
+    private void PublishMatches(FamilyPanel panel, IReadOnlyList<ImportMatchFamily> suggestions)
+    {
         var previous = MatchFamilies.ToDictionary(f => f.Key, StringComparer.Ordinal);
         MatchFamilies.Clear();
-        foreach (var family in check.Panel.Families.Where(f => FamilyPanelValidation.ResolveFamilyKey(check.Panel, f.Key) == f.Key))
+        foreach (var family in panel.Families.Where(f => FamilyPanelValidation.ResolveFamilyKey(panel, f.Key) == f.Key))
         {
             var supplied = suggestions.FirstOrDefault(f => f.Key == family.Key);
             string signature = System.Text.Json.JsonSerializer.Serialize(new[] { family.DisplayName }.Concat(family.Names.Select(n => n.Text)));
