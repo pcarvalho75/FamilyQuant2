@@ -248,7 +248,7 @@ internal static partial class Program
                         AdjacentFile = Path.GetRelativePath(output, path), Records = items.Length, MixingEnabled = ((Button)screen.FindName("ButtonCalculateFDR")).IsEnabled });
                     if (frozen) old.GetType().GetProperty("fcf")!.SetValue(old, null); else { /* fresh selection resets the current document */ }
                 }
-                var left = JsonNode.Parse(File.ReadAllText(outputs[0]))!; var right = JsonNode.Parse(File.ReadAllText(outputs[1]))!;
+                var left = JsonNode.Parse(File.ReadAllText(outputs[0]))!; var right = RetainedFcfForLedger(outputs[1]);
                 foreach (var item in left["MyExtendedFastaItems"]!.AsArray()) item!.AsObject().Remove("XIC");
                 all &= JsonNode.DeepEquals(left, right);
             }
