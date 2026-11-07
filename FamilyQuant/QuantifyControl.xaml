@@ -12,40 +12,31 @@
      <Grid.ColumnDefinitions><ColumnDefinition Width="190"/><ColumnDefinition Width="*"/><ColumnDefinition Width="100"/></Grid.ColumnDefinitions>
      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
      <Label Content="RAW folder" ToolTip="Acquisition folder whose file names are matched to the identified runs."/>
-     <TextBox x:Name="TextBoxRawDirectory" Grid.Column="1" Text="{Binding RawDirectory, UpdateSourceTrigger=PropertyChanged}"
-      ToolTip="Folder containing the RAW acquisitions. Runs are matched by file name."/>
-     <Button Grid.Column="2" Content="Browse..." Click="BrowseRaw" ToolTip="Choose the folder containing the RAW acquisitions."/>
+     <TextBox x:Name="TextBoxRawDirectory" Grid.Column="1" Text="{Binding RawDirectory, UpdateSourceTrigger=PropertyChanged}" ToolTip="Full path of the RAW acquisition folder, initially empty; any existing folder is accepted, with no numeric unit or range. This prepares the next computation, matching runs by file name without editing acquisitions."/>
+     <Button Grid.Column="2" Content="Browse..." Click="BrowseRaw" ToolTip="Choose the RAW acquisition folder for the next computation. This changes the pending path only; wait for any current computation to finish if disabled."/>
      <Label Grid.Row="1" Content="Identifications (.sepr2)" ToolTip="Trusted SEPro package containing the identifications from these RAW acquisitions."/>
-     <TextBox x:Name="TextBoxSeproPackage" Grid.Row="1" Grid.Column="1" Text="{Binding SeproPackage, UpdateSourceTrigger=PropertyChanged}"
-      ToolTip="SEPro identification package from the same runs as the RAW acquisitions."/>
-     <Button Grid.Row="1" Grid.Column="2" Content="Browse..." Click="BrowseSepro" ToolTip="Choose the SEPro identification package for these RAW acquisitions."/>
+     <TextBox x:Name="TextBoxSeproPackage" Grid.Row="1" Grid.Column="1" Text="{Binding SeproPackage, UpdateSourceTrigger=PropertyChanged}" ToolTip="Full path of the trusted .sepr2 identification package from the same runs, initially empty; any existing package is accepted, with no numeric range. This prepares the next computation without editing the package."/>
+     <Button Grid.Row="1" Grid.Column="2" Content="Browse..." Click="BrowseSepro" ToolTip="Choose the trusted SEPro identification package from the same runs. This changes only the pending path; wait for any current computation to finish if disabled."/>
      <Label Grid.Row="2" Content="De novo folder (optional)" ToolTip="Export root searched recursively for the selected de novo sources."/>
-     <TextBox x:Name="TextBoxDeNovoDirectory" Grid.Row="2" Grid.Column="1" Text="{Binding DeNovoDirectory, UpdateSourceTrigger=LostFocus}"
-      ToolTip="Export root searched recursively for the selected sources. Leave empty for identified peptides only."/>
-     <Button Grid.Row="2" Grid.Column="2" Content="Browse..." Click="BrowseDeNovo" ToolTip="Choose the de novo export root."/>
+     <TextBox x:Name="TextBoxDeNovoDirectory" Grid.Row="2" Grid.Column="1" Text="{Binding DeNovoDirectory, UpdateSourceTrigger=LostFocus}" ToolTip="Full path of the de novo export root, searched recursively; default empty for identified peptides only, or choose an existing folder, with no numeric range. This prepares the next computation without changing stored quantities."/>
+     <Button Grid.Row="2" Grid.Column="2" Content="Browse..." Click="BrowseDeNovo" ToolTip="Choose the optional de novo export root and inspect which source exports it contains. This prepares the next request without importing calls; wait for a current computation to finish if disabled."/>
      <Label Grid.Row="3" Content="Search settings (optional)" ToolTip="Search parameter file recorded for the report's methods."/>
-     <TextBox x:Name="TextBoxSearchParameters" Grid.Row="3" Grid.Column="1" Text="{Binding SearchParametersPath, UpdateSourceTrigger=PropertyChanged}"
-      ToolTip="Choose the search parameter file for the report. If empty, one adjacent .params file is selected automatically; ambiguous files are not guessed."/>
-     <Button Grid.Row="3" Grid.Column="2" Content="Browse..." Click="BrowseSearchParameters" ToolTip="Choose the search parameter file to record with completed Results."/>
+     <TextBox x:Name="TextBoxSearchParameters" Grid.Row="3" Grid.Column="1" Text="{Binding SearchParametersPath, UpdateSourceTrigger=PropertyChanged}" ToolTip="Optional search-parameter file path, default empty; choose an existing file, with no numeric unit or range. Compute records it for Methods, or selects a single adjacent .params file when unambiguous, without editing it."/>
+     <Button Grid.Row="3" Grid.Column="2" Content="Browse..." Click="BrowseSearchParameters" ToolTip="Choose a search-parameter file to record with the next completed result's Methods. This changes only the pending path; wait for any current computation to finish if disabled."/>
      <local:DeNovoFilterControl x:Name="FilterControl" Grid.Row="4" Grid.ColumnSpan="3" DataContext="{Binding Filters}" Margin="0,12,0,12"/>
      <WrapPanel Grid.Row="5" Grid.ColumnSpan="3">
-      <Label Content="Isotope ceiling" ToolTip="Maximum credited isotopes per peptide, including the monoisotopic peak."/><numeric:IntegerUpDown x:Name="IntegerUpDownIsotopes" Margin="{DynamicResource ControlPadding}" Width="70" Minimum="1" Maximum="6" Value="{Binding IsotopeCeiling, Mode=TwoWay}"
-       ToolTip="Maximum isotopes per peptide from 1 to 6, default 6. An absent isotope adds nothing."/>
-      <Label Content="Minimum points per peak" ToolTip="Required array points per isotope peak, including the two padding points." Margin="20,0,0,0"/><numeric:IntegerUpDown x:Name="IntegerUpDownMinPoints" Margin="{DynamicResource ControlPadding}" Width="70" Minimum="1" Maximum="20" Value="{Binding MinimumPoints, Mode=TwoWay}"
-       ToolTip="Points per isotope peak, including two padding points; default 3. Set 1 to restore the legacy height rule."/>
+      <Label Content="Isotope ceiling" ToolTip="Maximum credited isotopes per peptide, including the monoisotopic peak."/><numeric:IntegerUpDown x:Name="IntegerUpDownIsotopes" Margin="{DynamicResource ControlPadding}" Width="70" Minimum="1" Maximum="6" Value="{Binding IsotopeCeiling, Mode=TwoWay}" ToolTip="Maximum isotopes credited per peptide including M+0: default 6, whole numbers 1 to 6; an absent isotope adds nothing. This prepares the next computation without changing stored quantities; wait for a running computation if disabled."/>
+      <Label Content="Minimum points per peak" ToolTip="Required array points per isotope peak, including the two padding points." Margin="20,0,0,0"/><numeric:IntegerUpDown x:Name="IntegerUpDownMinPoints" Margin="{DynamicResource ControlPadding}" Width="70" Minimum="1" Maximum="20" Value="{Binding MinimumPoints, Mode=TwoWay}" ToolTip="Minimum array points per isotope peak including two padding points: default 3, whole numbers 1 to 20; 1 uses the legacy height rule. This prepares the next computation without changing stored quantities; wait for a running computation if disabled."/>
      </WrapPanel>
      <CheckBox x:Name="CheckBoxPatternLabWinsScanConflicts" Grid.Row="6" Grid.ColumnSpan="3" Margin="0,10,0,0"
-      Content="PatternLab wins conflicting precursors" IsChecked="{Binding PatternLabWinsScanConflicts, Mode=TwoWay}"
-      ToolTip="At Compute, exclude de novo calls that disagree with PatternLab on the same scan and precursor; PTMs are removed and I = L. Stored results change only after Compute."/>
+      Content="PatternLab wins conflicting precursors" IsChecked="{Binding PatternLabWinsScanConflicts, Mode=TwoWay}" ToolTip="On the next Compute, let PatternLab's top-XCorr claim exclude a different de novo sequence at the same scan and isotope-aware 20 ppm precursor hypothesis, comparing without PTMs and with I = L; on by default. Stored quantities change only after Compute; wait for a running computation if disabled."/>
     </Grid>
    </Border>
    <TextBlock Text="{Binding Basis}" ToolTip="{Binding BasisDetails}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,12,0,8"/>
    <StackPanel Orientation="Horizontal">
-    <Button x:Name="ButtonCompute" Content="Quantify" Style="{DynamicResource PrimaryButton}" Command="{Binding ComputeCommand}"
-     ToolTip="Compute identified and selected de novo peptide envelopes from at least a RAW folder and matching trusted .sepr2 package. Save the project afterwards to keep the completed result."/>
-    <Button Content="Cancel" Command="{Binding CancelCommand}" ToolTip="Cancel at the next operation boundary. The previous project results remain available."/>
-    <Button x:Name="ButtonViewSpectrumComparison" Content="Spectrum table" Click="ViewSpectrum" IsEnabled="{Binding Computed}"
-     ToolTip="Inspect the read-only spectrum table from the exact completed computation, one row per file, scan, charge and precursor hypothesis. CSV exports contain the same rows."/>
+    <Button x:Name="ButtonCompute" Content="Quantify" Style="{DynamicResource PrimaryButton}" Command="{Binding ComputeCommand}" ToolTip="Measure identified and selected de novo peptide envelopes, replace the completed project result, and write local caches, logs and a spectrum CSV. Save keeps the result, grouping Undo does not revert it, and a running computation must finish or be cancelled before another can start."/>
+    <Button Content="Cancel" Command="{Binding CancelCommand}" ToolTip="Request cancellation at the next operation boundary, keeping the previous completed project result. Disabled when no computation is running; start Quantify to enable it."/>
+    <Button x:Name="ButtonViewSpectrumComparison" Content="Spectrum table" Click="ViewSpectrum" IsEnabled="{Binding Computed}" ToolTip="Open the completed computation's read-only evidence table, with one row per run, scan, charge and precursor hypothesis. Disabled until a computation completes; opening the table changes no project values or files."/>
    </StackPanel>
    <TextBlock x:Name="TextBlockStatus" Text="{Binding Status}" TextWrapping="Wrap" Margin="0,8,0,12"
     ToolTip="Computation progress, per-run counts, refusals and what to do next."/>
@@ -53,9 +44,8 @@
     <StackPanel>
      <TextBlock Text="Run summary" FontWeight="SemiBold"/>
      <TextBlock Text="{Binding RunSummary}" TextWrapping="Wrap" Margin="0,6,0,0"/>
-     <Expander Header="Per-run shares and computation details" Margin="0,10,0,0" ToolTip="Every per-run result, source cutoff, diagnostic note and export warning from the engine.">
-      <TextBox Text="{Binding Details, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" BorderThickness="0" Margin="0,8,0,0"
-       ToolTip="Read-only computation details. Select text to copy it."/>
+     <Expander Header="Per-run shares and computation details" Margin="0,10,0,0" ToolTip="Expand the recorded run shares, source cutoffs, diagnostic notes and export warnings. Only this view changes.">
+      <TextBox Text="{Binding Details, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" BorderThickness="0" Margin="0,8,0,0" ToolTip="Read-only details from the completed computation, or workflow instructions before a result exists. Select and copy text without editing project values or files."/>
      </Expander>
     </StackPanel>
    </Border>

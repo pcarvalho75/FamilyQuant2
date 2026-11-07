@@ -31,17 +31,13 @@
             <StackPanel x:Name="FullXicOptions" Margin="0,8,0,0">
                 <Label Content="Share of" Padding="0,0,0,4"
                        ToolTip="Choose the denominator for the Full XIC family shares. Changes apply to that column immediately."/>
-                <ComboBox x:Name="ComboBoxFullXicBasis" SelectionChanged="Basis_Changed" HorizontalAlignment="Stretch"
-                          ToolTip="Divides Full XIC by the quantified signal or all recorded run TICs. A missing run TIC makes that basis unavailable.">
-                    <ComboBoxItem x:Name="FullXicBasisQuantified" IsSelected="True" Content="the quantified signal"
-                                  ToolTip="Divides by all quantified peptides, each counted once."/>
-                    <ComboBoxItem x:Name="FullXicBasisTic" Content="the total ion current of all runs"
-                                  ToolTip="Divides by the summed TIC of every recorded run."/>
+                <ComboBox x:Name="ComboBoxFullXicBasis" SelectionChanged="Basis_Changed" HorizontalAlignment="Stretch" ToolTip="Choose the Full XIC denominator: quantified peptide signal by default, or the summed TIC of all recorded runs. Reported shares change immediately without changing measured areas; change the choice again to restore it, since grouping Undo does not reset it.">
+                    <ComboBoxItem x:Name="FullXicBasisQuantified" IsSelected="True" Content="the quantified signal" ToolTip="Divide each family's Full XIC signal by all quantified peptide signal, counting each peptide once in the denominator. This changes displayed shares immediately without editing measured areas or writing a file."/>
+                    <ComboBoxItem x:Name="FullXicBasisTic" Content="the total ion current of all runs" ToolTip="Divide Full XIC by the summed TIC of all recorded runs, changing displayed shares immediately. Disabled when a required run TIC is missing or inconsistent; recompute with complete run TICs to enable it."/>
                 </ComboBox>
                 <TextBlock x:Name="TicRefusalHint" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,6,0,0"/>
             </StackPanel>
-            <Expander x:Name="FullXicDetails" Header="Full XIC details" Margin="0,8,0,0"
-                      ToolTip="Shows the quantity, denominator, shared bucket and unattributed signal. These are the facts behind the Full XIC column.">
+            <Expander x:Name="FullXicDetails" Header="Full XIC details" Margin="0,8,0,0" ToolTip="Expand the Full XIC quantity, denominator, shared bucket and unattributed signal behind the family column. Only this view changes.">
                 <TextBlock x:Name="TextBlockFullXicSummary" TextWrapping="Wrap" Margin="0,6,0,0"
                            Foreground="{DynamicResource MutedBrush}" FontSize="11"
                            ToolTip="The exact basis and conservation statement for the current Full XIC shares."/>
@@ -51,10 +47,10 @@
             <Label Content="Shared peptides" Padding="0,0,0,4"
                    ToolTip="Choose how to handle peptides reaching more than one family. This rule applies to either quantitation source.">
             </Label>
-            <ComboBox x:Name="ComboBoxSharedPeptides" SelectionChanged="Choice_Changed" HorizontalAlignment="Stretch">
-                <ComboBoxItem x:Name="SharedItemUnique" IsSelected="True"/>
-                <ComboBoxItem x:Name="SharedItemSplit"/>
-                <ComboBoxItem x:Name="SharedItemEvery"/>
+            <ComboBox x:Name="ComboBoxSharedPeptides" SelectionChanged="Choice_Changed" HorizontalAlignment="Stretch" ToolTip="Choose how to attribute peptides reaching several families; default family-unique only. Full XIC shares update immediately and PatternLab shares need Recalculate, without changing extracted areas or writing files.">
+                <ComboBoxItem x:Name="SharedItemUnique" IsSelected="True" ToolTip="Credit a peptide only when it reaches one family; signal shared across families stays in its separate bucket. Full XIC updates immediately and PatternLab needs Recalculate, without changing measured areas."/>
+                <ComboBoxItem x:Name="SharedItemSplit" ToolTip="Split each shared peptide's signal equally between its families, preserving the total. Full XIC updates immediately and PatternLab needs Recalculate, without changing measured areas."/>
+                <ComboBoxItem x:Name="SharedItemEvery" ToolTip="Credit a shared peptide's full signal to every matching family, so family shares overlap and must not be summed. Full XIC updates immediately and PatternLab needs Recalculate, without changing measured areas."/>
             </ComboBox>
         </StackPanel>
         <Border x:Name="PatternLabSection" Background="{DynamicResource SubtleBrush}" Padding="12" Margin="0,16,0,0">
@@ -65,8 +61,7 @@
                     </Border>
                     <TextBlock Text="PatternLab (optional)" FontWeight="SemiBold"/>
                 </DockPanel>
-                <Button x:Name="ButtonLoadQuantData" Content="Load PatternLab project" Click="Load_Click" HorizontalAlignment="Left"
-                        ToolTip="Loads a peptide-level PatternLab project for the Share of signal column. Full XIC does not need this secondary source."/>
+                <Button x:Name="ButtonLoadQuantData" Content="Load PatternLab project" Click="Load_Click" HorizontalAlignment="Left" ToolTip="Read a peptide-level PatternLab project and attach its shares to the separate Share of signal column; the source file stays unchanged. Save keeps the attached values, and grouping Undo does not undo this load."/>
                 <DockPanel Margin="0,8,0,0">
                     <TextBlock x:Name="IconPLPStatus" Text="&#xE73E;" Style="{DynamicResource FluentIcon}" Visibility="Collapsed" Margin="0,0,6,0"/>
                     <TextBlock x:Name="TextBlockPLPStatus" Text="No PatternLab project loaded" Foreground="{DynamicResource MutedBrush}"
@@ -75,18 +70,16 @@
                 <StackPanel x:Name="PatternLabOptions" Margin="0,10,0,0">
                     <Label Content="PatternLab share of" Padding="0,0,0,4"
                            ToolTip="Choose the denominator for the PatternLab Share of signal column. Recalculate applies that choice to its values."/>
-                    <ComboBox x:Name="ComboBoxNormalization" SelectionChanged="Choice_Changed" HorizontalAlignment="Stretch">
+                    <ComboBox x:Name="ComboBoxNormalization" SelectionChanged="Choice_Changed" HorizontalAlignment="Stretch" ToolTip="Choose PatternLab's denominator from the listed recorded modes; default identified signal, with no conversion between missing totals. Recalculate applies the choice to project shares without changing measured areas; unavailable modes require a project containing their per-run totals.">
                         <!-- Retain enum indexes, including disabled modes whose divisor is absent. -->
-                        <ComboBoxItem x:Name="ModeItemIdentified" IsSelected="True"/>
-                        <ComboBoxItem x:Name="ModeItemTic"/>
-                        <ComboBoxItem x:Name="ModeItemPeptideSignal"/>
-                        <ComboBoxItem x:Name="ModeItemChargeRestricted"/>
+                        <ComboBoxItem x:Name="ModeItemIdentified" IsSelected="True" ToolTip="Divide PatternLab family signal by the sum of family signals under the selected shared-peptide policy. This prepares Recalculate without changing measured areas or writing a file."/>
+                        <ComboBoxItem x:Name="ModeItemTic" ToolTip="Divide each PatternLab family's signal by its run's total ion current on Recalculate. Disabled without recorded per-run TIC totals; load a project containing those totals to enable it."/>
+                        <ComboBoxItem x:Name="ModeItemPeptideSignal" ToolTip="Divide each PatternLab family's signal by its run's recorded extracted peptide signal on Recalculate. Disabled without those per-run totals; load a project containing them to enable it."/>
+                        <ComboBoxItem x:Name="ModeItemChargeRestricted" ToolTip="Divide each PatternLab family's signal by its run's recorded charge-restricted signal on Recalculate. Disabled without those per-run totals; load a project extracted with that extra pass to enable it."/>
                     </ComboBox>
                     <Button x:Name="ButtonRecalculateQuantitation" Style="{DynamicResource PrimaryButton}" Content="Recalculate"
-                            Click="Recalculate_Click" IsEnabled="False" Margin="0,10,0,0" HorizontalAlignment="Left"
-                            ToolTip="Applies the chosen denominator and shared rule to PatternLab shares. Disabled until you use Load PatternLab project in Curate families > Quantitation > PatternLab (optional)."/>
-                    <Expander Header="PatternLab details" Margin="0,8,0,0"
-                              ToolTip="Shows the recorded quantitation profile and supported divisors. An unavailable mode keeps its explanation in the list.">
+                            Click="Recalculate_Click" IsEnabled="False" Margin="0,10,0,0" HorizontalAlignment="Left" ToolTip="Apply the pending denominator and shared-peptide policy to PatternLab project shares; Save keeps them and grouping Undo does not reset these choices. Disabled until Load PatternLab project supplies peptide-level quantitation."/>
+                    <Expander Header="PatternLab details" Margin="0,8,0,0" ToolTip="Expand the loaded project's quantitation profile and the recorded divisors it can supply. Only this view changes.">
                         <TextBlock x:Name="TextBlockQuantProfile" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,6,0,0"
                                    ToolTip="The loaded project's recorded denominator and available reporting modes."/>
                     </Expander>
