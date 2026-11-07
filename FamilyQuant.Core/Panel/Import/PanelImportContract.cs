@@ -163,4 +163,6 @@ public sealed class PanelDecisionProposal
     public List<int> RowNumbers { get; set; } = new();
     public FamilyPanelDecisionMapping Mapping { get; set; } = new();
     public string Reason { get; set; } = string.Empty;
+    /// <summary>The label is one of the program's own decision names, so its meaning needs no question.</summary>
+    public bool Exact { get; set; }
 }

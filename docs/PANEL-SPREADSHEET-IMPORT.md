@@ -131,3 +131,26 @@ made the row stays one family named as written, so a single name with a comma co
 Both choices are stored in `RowChoices` and replay with the panel. Version 0 choices look for no lists.
 Checks: `--test-panel-import-several`. The read-only probe of the real workbook copy flagged exactly one
 row, the row of rare families with nine names in its English column, and no other row.
+
+## Family-list template, Z12p2d
+
+`PanelImportTemplate.Write(path)` writes an empty family list for the user to fill in: a Families sheet
+with the recommended columns Abbreviation, Name, Other-language name, Notes, Pfam domains and Decision
+(filter buttons, a frozen header row, a Decision drop-down that offers Quantify, Report under others and
+Not a family and still accepts other text), then an Instructions sheet explaining every column, the
+decision names, rows listing several families, colours, extra columns and saving, with example rows.
+A hidden defined name marks the workbook; `ReadTable` and `ReadPreview` report it as `IsTemplate`.
+
+For a marked table, `Propose` maps every template column present to its role and returns the decision
+mappings for the program's own decision names, so a filled template imports with no question. The
+program's decision names (Quantify, Report under others, Not a family, and "Merge into" followed by an
+abbreviation of the table) are recognised in any sheet, without regard to case or surrounding spaces,
+and `PanelDecisionProposal.Exact` says so; any other label is still proposed for the user to confirm.
+An empty Decision cell is Quantify, as in every graceful import. The wizard and the File menu (FQHome)
+call `Write`; the template is not the J1e panel spreadsheet (`FamilyPanelTemplate`), which saves an
+existing panel with its hidden snapshot.
+
+Checks: `--test-panel-import-template` writes the template, checks its sheets, marker, header proposal,
+instructions and drop-down, validates it with the Open XML schema validator, fills it as a user would,
+imports it with no mapping, replays it and compares its content across cultures. The file has not been
+opened in Excel itself on this machine.

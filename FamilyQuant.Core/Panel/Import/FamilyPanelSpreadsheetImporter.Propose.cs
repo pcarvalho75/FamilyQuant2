@@ -23,11 +23,21 @@ public sealed partial class FamilyPanelSpreadsheetImporter
                 HeaderRowNumber = table.HeaderRowNumber, ImportVersion = PanelImportRules.Current,
             },
         };
+        if (table.IsTemplate && PanelImportTemplate.Columns.Any(c => c.Role == PanelImportFields.FamilyKey && table.Headers.Contains(c.Header, StringComparer.Ordinal)))
+        {
+            foreach (var (header, role) in PanelImportTemplate.Columns.Where(c => table.Headers.Contains(c.Header, StringComparer.Ordinal)))
+            {
+                proposal.Choices.ColumnHeaders[role] = header;
+                proposal.Reasons[role] = "\"" + header + "\" is a column of the FamilyQuant template.";
+            }
+            proposal.IsTemplate = true;
+            proposal.Decisions = ProposeDecisions(table, proposal.Choices).Where(d => d.Exact).Select(d => d.Mapping).ToList();
+        }
         var rows = table.Rows.Where(r => DecorativeReason(table, r) == null).ToList();
         var stats = table.Headers.Select(h => new ColumnShape(h, rows)).ToList();
         proposal.ColorColumns = table.Headers.Where(h => table.Rows.Where(r => r.Fills.ContainsKey(h))
             .Select(r => r.Fills[h]).Distinct(StringComparer.OrdinalIgnoreCase).Count() >= 2).ToList();
-        if (rows.Count == 0) return proposal;
+        if (rows.Count == 0 || proposal.IsTemplate) return proposal;
         var taken = new HashSet<string>(StringComparer.Ordinal);
         void Take(string role, ColumnShape? column, string reason)
         {
@@ -84,7 +94,20 @@ public sealed partial class FamilyPanelSpreadsheetImporter
             var named = keys.Where(k => Regex.IsMatch(label, @"(?<![\p{L}\p{N}\-])" + Regex.Escape(k) + @"(?![\p{L}\p{N}\-])")).ToArray();
             var proposal = new PanelDecisionProposal { SourceValue = label, RowNumbers = group.Select(r => r.RowNumber).ToList(),
                 Mapping = new FamilyPanelDecisionMapping { SourceValue = label, Decision = FamilyPanelDecision.Quantify } };
-            if (words.Overlaps(MergeWords) && named.Length == 1)
+            string trimmed = label.Trim();
+            var exact = PanelImportTemplate.DecisionNames.Where(d => string.Equals(trimmed, d.Label, StringComparison.OrdinalIgnoreCase)).ToArray();
+            string mergeKey = trimmed.StartsWith(PanelImportTemplate.MergePrefix, StringComparison.OrdinalIgnoreCase) ? trimmed[PanelImportTemplate.MergePrefix.Length..].Trim() : string.Empty;
+            if (exact.Length == 1)
+            {
+                proposal.Mapping.Decision = exact[0].Decision; proposal.Exact = true;
+                proposal.Reason = quoted + " is the FamilyQuant decision " + exact[0].Label + ".";
+            }
+            else if (mergeKey.Length > 0 && keys.Contains(mergeKey, StringComparer.Ordinal))
+            {
+                proposal.Mapping.Decision = FamilyPanelDecision.MergeIntoAnotherFamily; proposal.Mapping.MergeTargetFamilyKey = mergeKey; proposal.Exact = true;
+                proposal.Reason = quoted + " is the FamilyQuant decision Merge into " + OneLine(mergeKey) + ".";
+            }
+            else if (words.Overlaps(MergeWords) && named.Length == 1)
             {
                 proposal.Mapping.Decision = FamilyPanelDecision.MergeIntoAnotherFamily; proposal.Mapping.MergeTargetFamilyKey = named[0];
                 proposal.Reason = quoted + " names the family " + OneLine(named[0]) + " and a word for merging, so it is proposed as Merge into " + OneLine(named[0]) + ".";

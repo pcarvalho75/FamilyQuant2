@@ -34,7 +34,7 @@ public sealed class PanelSpreadsheetReader : IPanelSheetPreviewReader
         var table = new PanelSpreadsheetTable
         {
             SourceName = Path.GetFileName(path), SourceSha256 = Convert.ToHexString(SHA256.HashData(bytes)),
-            SheetName = sheetName, HeaderRowNumber = headerRowNumber,
+            SheetName = sheetName, HeaderRowNumber = headerRowNumber, IsTemplate = PanelImportTemplate.IsMarked(document.WorkbookPart!),
         };
         int width = grid.Text.Keys.Where(k => k.Row >= headerRowNumber).Select(k => k.Column)
             .Concat(grid.Merges.Where(m => headerRowNumber >= m.Start.Row && headerRowNumber <= m.End.Row).Select(m => m.End.Column))
@@ -117,6 +117,7 @@ public sealed class PanelSpreadsheetReader : IPanelSheetPreviewReader
                 return preview;
             }
             var grid = Grid.Load(document, sheetName);
+            preview.IsTemplate = PanelImportTemplate.IsMarked(document.WorkbookPart!);
             int lastRow = grid.Rows.Where(r => Enumerable.Range(1, grid.Width).Any(c => grid.At(r, c).Length > 0 || grid.FillAt(r, c).Length > 0))
                 .DefaultIfEmpty(0).Max();
             preview.ColumnCount = grid.Width;
