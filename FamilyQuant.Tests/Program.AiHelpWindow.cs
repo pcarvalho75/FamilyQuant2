@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Globalization;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -69,10 +71,20 @@ internal static partial class Program
             MainWindow.AskAiHelpCommand.Execute(null, secondary); PumpDispatcher();
             Check("H2a secondary window command reuses one AI Help window", ReferenceEquals(first, shell.AiHelp)
                 && Application.Current.Windows.OfType<AiHelpWindow>().Count() == 1);
+            using (shell.Operations.Begin("Synthetic operation"))
+                Check("H2d AI Help command remains available during a main window operation", MainWindow.AskAiHelpCommand.CanExecute(null, shell));
             first!.Close();
             MainWindow.AskAiHelpCommand.Execute(null, secondary); PumpDispatcher();
             Check("H2a secondary window command opens AI Help when closed", shell.AiHelp?.IsVisible == true);
             shell.AiHelp!.Close();
+            var transient = new Window { Title = "Transient", Width = 360, Height = 200, ShowInTaskbar = false, Owner = shell };
+            transient.Show(); PumpDispatcher();
+            MainWindow.AskAiHelpCommand.Execute(null, transient); PumpDispatcher();
+            var fromTransient = shell.AiHelp;
+            transient.Close(); PumpDispatcher();
+            Check("H2a AI Help opened from a secondary window stays open when that window closes",
+                fromTransient?.IsVisible == true && ReferenceEquals(fromTransient, shell.AiHelp));
+            shell.AiHelp?.Close();
             var menu = (MenuItem)shell.FindName("MenuItemAiHelp");
             Check("H2a Help starts with the explained Ctrl+H command", ((MenuItem)menu.Parent).Items[0] == menu
                 && menu.InputGestureText == "Ctrl+H" && menu.ToolTip != null);
@@ -125,6 +137,36 @@ internal static partial class Program
                 var expected = (string)method.Invoke(null, new object[] { Enum.Parse<AiWorkflowOutcome>(outcome.ToString()) })!;
                 Check("H2a " + outcome + " uses the AI draft message", LogicalHelpText(window.Answers).Contains(expected));
             }
+            Check("H2d usage notice states account charges and shared GitHub limits", window.UsageNotice.Text == "Questions go to Claude with your own Anthropic key and count on your Anthropic account. AI Help reads the source through GitHub, which allows 10 code searches a minute and 5,000 file reads an hour for all FamilyQuant users together; when that limit is reached, AI Help says so and when it resets.");
+            var reset = new DateTimeOffset(2030, 1, 2, 12, 34, 0, TimeSpan.Zero);
+            fake.Answer = fake.Answer with { Outcome = AiOutcome.Success, SourceReadable = false, GitHubLimitResetsAt = reset };
+            window.AskAsync().GetAwaiter().GetResult();
+            var outcomeMessages = Enum.GetValues<AiOutcome>().Where(o => o != AiOutcome.Success).Select(MainWindow.HelpOutcomeMessage).ToArray();
+            Check("H2d earlier turns carry only Claude's answers, never the program's outcome messages", fake.Questions[^1].Earlier.Count == 4
+                && fake.Questions[^1].Earlier.All(t => t.Answer == "Use the displayed controls." && !outcomeMessages.Contains(t.Answer)));
+            Check("H2d answer explains source unavailability", HelpNotices(window.Answers).Contains("This build cannot read the source on GitHub, so this answer relies on the screen and FamilyQuant's own help."));
+            Check("H2d answer names the local GitHub reset time", HelpNotices(window.Answers).Contains("GitHub's limit was reached; reading resumes at " + reset.ToLocalTime().ToString("HH:mm", CultureInfo.CurrentCulture) + "."));
+            fake.Answer = fake.Answer with { Outcome = AiOutcome.WrongKey };
+            window.AskAsync().GetAwaiter().GetResult();
+            Check("H2d an outcome message carries no note about how an answer was sourced",
+                !HelpNotices(window.Answers.Children[window.Answers.Children.Count - 1]).Contains("This build cannot read the source on GitHub", StringComparison.Ordinal));
+            var keyWindow = new AiKeySettingsWindow(new AiKeyStore(Path.Combine(Path.GetTempPath(), "fq-help-unused-" + Guid.NewGuid().ToString("N"))));
+            try
+            {
+                Check("H2d key window explains the shared key and shortcut", HelpNotices(keyWindow).Contains("The same key is used by AI Help (Help > Ask AI Help, or Ctrl+H)."));
+                if (screens != null)
+                {
+                    Directory.CreateDirectory(screens); var previous = Themes.ThemeManager.Current;
+                    try
+                    {
+                        keyWindow.Show(); PumpDispatcher();
+                        foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
+                        { Themes.ThemeManager.Apply(theme); PumpDispatcher(); ScreenHarness.Save(keyWindow, Path.Combine(screens, "ai-key-" + theme + ".png"), 650, 390); }
+                    }
+                    finally { Themes.ThemeManager.Apply(previous); }
+                }
+            }
+            finally { keyWindow.Close(); }
             string? copied = null, address = null, folder = null;
             string reportDirectory = Path.Combine(Path.GetTempPath(), "fq-help-report-" + Guid.NewGuid().ToString("N"));
             var reportQuestion = new HelpQuestion("Synthetic issue & detail", SyntheticHelpState, picture, Array.Empty<HelpTurn>());
@@ -132,6 +174,7 @@ internal static partial class Program
                 url => address = url, path => { folder = path; return true; }, reportDirectory);
             try
             {
+                Check("H2d report states account ownership and public visibility", HelpNotices(report).Contains("You submit the issue from your own GitHub account, and issues there are public."));
                 Check("H2c report starts with the question title and requested fields", report.ReportTitle.Text == reportQuestion.Text
                     && new[] { reportQuestion.Text, "Synthetic answer", SyntheticHelpState.Version, SyntheticHelpState.Screen,
                         SyntheticHelpState.LastError, SyntheticHelpState.LogTail }.All(report.ReportBody.Text.Contains)
@@ -183,6 +226,12 @@ internal static partial class Program
                     {
                         Themes.ThemeManager.Apply(theme); PumpDispatcher();
                         ScreenHarness.Save(window, Path.Combine(screens, "ai-help-" + theme + ".png"), 840, 760);
+                        foreach (var details in HelpNodes(window).OfType<Expander>()) details.IsExpanded = true;
+                        window.IncludePicture.IsChecked = true; PumpDispatcher();
+                        var settle = Stopwatch.StartNew(); while (settle.ElapsedMilliseconds < 400) PumpDispatcher();
+                        ScreenHarness.Save(window, Path.Combine(screens, "ai-help-details-" + theme + ".png"), 840, 760);
+                        foreach (var details in HelpNodes(window).OfType<Expander>()) details.IsExpanded = false;
+                        window.IncludePicture.IsChecked = false;
                     }
                 }
                 finally { Themes.ThemeManager.Apply(previous); }
@@ -199,4 +248,12 @@ internal static partial class Program
                 foreach (var found in HelpBoxes(dependency)) yield return found;
     }
     private static string LogicalHelpText(DependencyObject parent) => string.Join("\n", HelpBoxes(parent).Select(b => b.Text));
+    private static IEnumerable<DependencyObject> HelpNodes(DependencyObject parent)
+    {
+        yield return parent;
+        foreach (object child in LogicalTreeHelper.GetChildren(parent))
+            if (child is DependencyObject dependency)
+                foreach (var found in HelpNodes(dependency)) yield return found;
+    }
+    private static string HelpNotices(DependencyObject parent) => string.Join("\n", HelpNodes(parent).OfType<TextBlock>().Select(t => t.Text));
 }
