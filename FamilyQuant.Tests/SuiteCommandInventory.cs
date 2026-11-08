@@ -346,6 +346,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-figure-limits", "FamilyQuant.Tests.Program.FigureLimitTests(System.String)"),
         SuiteCommandRule.Covered("--test-fullxic-storage", "FamilyQuant.Tests.Program.FullXicStorageTests()"),
         SuiteCommandRule.Covered("--test-grid-copy", "FamilyQuant.Tests.Program.GridCopyRowNumberTests()", "FamilyQuant.Tests.Program.GridCopyTests()"),
+        SuiteCommandRule.Covered("--test-help-assistant", "FamilyQuant.Tests.Program.HelpAssistantTests()"),
         SuiteCommandRule.Covered("--test-identity-study", "FamilyQuant.Tests.Program.IdentityStudyTests()"),
         SuiteCommandRule.Excluded("--test-inputs", "Requires selected real input files for the input census; the no-data gate cannot supply that dataset."),
         SuiteCommandRule.Covered("--test-interpretation-input", "FamilyQuant.Tests.Program.InterpretationInputTests()"),
