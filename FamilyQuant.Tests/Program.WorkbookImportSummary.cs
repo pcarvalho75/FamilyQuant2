@@ -82,7 +82,9 @@ internal static partial class Program
             var direct = importer.CheckConfirmedWorkbook(reviewed, ready.FamilyChoices, ready.ProposedDecisions, "Summary fixture");
             Check("Z16a9 " + shape + " family rows notes and decisions exactly match the displayed confirmed calls", direct.Panel != null
                 && JsonSerializer.Serialize(result.Panel.Families) == JsonSerializer.Serialize(direct.Panel.Families)
-                && JsonSerializer.Serialize(result.Panel.SourceNotes) == JsonSerializer.Serialize(reviewed.Notes)
+                && JsonSerializer.Serialize(result.Panel.SourceNotes.Where(note => reviewed.Notes.Any(original => JsonSerializer.Serialize(original) == JsonSerializer.Serialize(note))))
+                    == JsonSerializer.Serialize(reviewed.Notes)
+                && result.Panel.SourceNotes.Count == reviewed.Notes.Count + (ready.SubclassReviewFindings.Any(item => item.Label == "Subclass notes") ? 1 : 0)
                 && JsonSerializer.Serialize(result.Panel.DecisionMappings) == JsonSerializer.Serialize(direct.Panel.DecisionMappings));
             Check("Z16a9 " + shape + " confirmed matches contain only the typed shown selections", (result.Panel.ConfirmedEvidenceMatches?.Count ?? 0) == selected.Count
                 && selected.All(pair => result.Panel.ConfirmedEvidenceMatches![pair.Key].Choices.SequenceEqual(
@@ -95,8 +97,9 @@ internal static partial class Program
                 .SetEquals(WorkbookImportSummaries.ProposedFamilyKeys(reviewed)));
             Check("Z16a9 " + shape + " sheet domain labels never become provider vocabulary", reviewed.Pfam.Count > 0 && ready.RecognizedPfamDomains.Count == 0
                 && ready.SubclassProposals.All(subclass => subclass.Rules.Count == 0));
-            Check("Z16a9 " + shape + " source-bearing expected names are prepared in Core", ready.ExpectedSubclassNames.Count > 0
-                && ready.ExpectedSubclassNames.All(name => name.SourceRows.Any(row => row.SheetName == reviewed.FamilySheet && row.Cells.Count > 1)));
+            Check("Z16a9 " + shape + " expected entries have source-bearing table matches or retained notes",
+                ready.ExpectedSubclassNames.All(name => name.SourceRows.Any(row => row.SheetName == reviewed.FamilySheet && row.Cells.Count > 1))
+                && (ready.ExpectedSubclassNames.Count > 0 || ready.SubclassReviewFindings.Any(item => item.Label == "Subclass notes")));
             Check("Z16a9 " + shape + " detached family rows show the checked names decisions and merge targets", direct.Panel != null
                 && direct.Panel.Families.All(family => ready.FamilyRows.Any(row => row.Key == family.Key && row.DisplayName == family.DisplayName
                     && row.Decision == family.Decision && row.MergeTargetFamilyKey == family.MergeTargetFamilyKey && row.SourceCells.Count > 1)));
@@ -116,6 +119,7 @@ internal static partial class Program
         WorkbookSummaryResolutionTests(root);
         WorkbookSummaryRuleResolutionTests(root);
         WorkbookSummaryNoiseTests(root);
+        WorkbookSummarySubclassFindingTests(root);
         Console.WriteLine("Z16a9 synthetic artifacts: " + root);
     }
 
@@ -205,7 +209,7 @@ internal static partial class Program
         selection.Rules.Single(rule => rule.RuleId == absentRule.RuleId).Kind = PanelSubclassRuleKind.AbsentPfam;
         var acceptedClasses = new[] { selection };
         var classSummary = WorkbookImportSummaries.Build(source, storedMatching, acceptedClasses, empty);
-        Check("Z16a9 Core prepares real subclass proposals from source columns before a checked panel exists", classSummary.ExpectedSubclassNames.Count > 0
+        Check("Z16a9 Core prepares table-backed subclass proposals and retains unmatched expected text as notes", classSummary.SubclassReviewFindings.Any(item => item.Label == "Subclass notes")
             && classSummary.SubclassProposals.Any(proposal => proposal.ProposalId == known.ProposalId && proposal.SourceRows.Any(row => row.SheetName == "Data 3")));
         var classResult = WorkbookImportSummaries.AcceptAll(classSummary, importer, acceptedClasses, empty);
         var definition = classResult.Panel?.Families.Single(family => family.Key == "F08").Subclasses.SingleOrDefault();

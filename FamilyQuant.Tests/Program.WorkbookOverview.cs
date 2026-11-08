@@ -146,6 +146,7 @@ internal static partial class Program
                         && shown.Select(f => (f.Abbreviation, f.Name, f.Decision, f.MergeTarget)).SequenceEqual(project.FamilyPanel!.Families.Select(f =>
                             (f.Key, f.DisplayName, FamilyListImportViewModel.DecisionOptions.First(d => d.Value == f.Decision).Label, f.MergeTargetFamilyKey))));
                     Check(label + " the accepted panel retains shown notes subclasses and category names", project.FamilyPanel!.SourceNotes.Count == source.Last.Notes.Count
+                        + (model.SubclassReviewFindings.Any(item => item.Label == "Subclass notes") ? 1 : 0)
                         && project.FamilyPanel.Families.Sum(f => f.Subclasses.Count) == subclasses
                         && categoryLabels.SequenceEqual((project.FamilyPanel.Import?.ColorLabels ?? new()).Select(c => (c.Color, c.Label))));
                     string saved = Path.Combine(work, label + ".fqproj"); ProjectStore.WriteFqproj(saved, project, new List<QuantRow>(), new QuantManifest());
@@ -158,6 +159,7 @@ internal static partial class Program
         }
         finally { Themes.ThemeManager.Apply(previousTheme); }
         WorkbookOverviewGuardTests(one, work);
+        WorkbookSubclassFindingUiTests(work);
     }
 
     private static void WorkbookOverviewGuardTests(string path, string work)

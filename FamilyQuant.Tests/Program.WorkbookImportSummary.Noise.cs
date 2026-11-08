@@ -40,11 +40,15 @@ internal static partial class Program
         var evidence = new Dictionary<string, IReadOnlyList<PanelEvidenceChoice>>();
         var complete = WorkbookImportSummaries.Build(source, matching, reviewedEvidence: evidence);
         var names = complete.ExpectedSubclassNames;
+        var notedPanel = WorkbookImportSummaries.AcceptAll(complete, importer, complete.DraftSubclassSelections, evidence, broadPfamConfirmed: true).Panel;
+        var retained = notedPanel?.SourceNotes.Where(note => note.SheetName == source.FamilySheet).SelectMany(note => note.Text.Split('\n')).ToArray()
+            ?? Array.Empty<string>();
         Check("Z16a9d punctuation-only placeholder cells add no expected subclass names", names.All(name => name.DisplayName.Any(char.IsLetterOrDigit)));
-        Check("Z16a9d only top-level separators split names and bracketed text stays whole", names.Select(name => name.DisplayName).SequenceEqual(new[]
-            { "A (A1, A2)", "B [B1; B2]", "C", "D", "E (E1 [E2, E3], E4)", "F", "G" }));
-        Check("Z16a9d the review has exactly one finding per real expected name", complete.SubclassProposals.Count == 7
-            && complete.Sections.Single(section => section.Kind == WorkbookImportSectionKind.Subclasses).Items.Count == 7);
+        Check("Z16a9d only top-level separators split retained notes and bracketed text stays whole", retained.Length == 7
+            && new[] { "A (A1, A2)", "B [B1; B2]", "C", "D", "E (E1 [E2, E3], E4)", "F", "G" }
+                .All(text => retained.Count(line => line.EndsWith(": " + text, StringComparison.Ordinal)) == 1));
+        Check("Z12p5y1 text without a source table class produces notes instead of proposals", names.Count == 0 && complete.SubclassProposals.Count == 0
+            && complete.SubclassReviewFindings.Count(item => item.Label == "Subclass notes") == 4);
         Check("Z16a9d expected names retain their exact source row and unsplit cell text", names.All(name => name.SourceRows.Count == 1
             && name.SourceRows[0].SheetName == source.FamilySheet
             && name.SourceRows[0].Cells["h13"] == source.FamilyTable!.Rows.Single(row => row.RowNumber == name.SourceRows[0].RowNumber).Cells["h13"]));

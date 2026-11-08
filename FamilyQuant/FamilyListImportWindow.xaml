@@ -124,6 +124,22 @@
                 <TextBlock x:Name="PageHeading" Text="{Binding Title}" Style="{StaticResource PageTitle}" Focusable="True"
                            AutomationProperties.LiveSetting="Polite" AutomationProperties.Name="{Binding StepLabel}"/>
                 <TextBlock Text="{Binding Explanation}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" ToolTip="{Binding Explanation}"/>
+                <Border Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="1" Padding="6" Margin="0,8,0,0"
+                        Visibility="{Binding HasSubclassReviewFindings, Converter={StaticResource BoolVisibility}}">
+                    <StackPanel>
+                        <ScrollViewer x:Name="SubclassFindingScroll" MaxHeight="64" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                                      AutomationProperties.Name="Subclass findings to review"
+                                      ToolTip="Scroll through subclass overlaps and source notes. These read-only findings do not block import; editing a choice or the sheet changes the next proposal.">
+                            <ItemsControl x:Name="SubclassFindingList" ItemsSource="{Binding SubclassReviewFindings}">
+                                <ItemsControl.ItemTemplate><DataTemplate><StackPanel Margin="0,6,0,6">
+                                    <TextBlock Text="{Binding Value}" Style="{StaticResource BodyText}" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Reason}" Style="{StaticResource BodyText}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Source}" Style="{StaticResource CaptionText}" TextWrapping="Wrap"/>
+                                </StackPanel></DataTemplate></ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Border>
             </StackPanel>
             <Grid Grid.Row="1">
                 <local:FamilyListWorkbookOverview x:Name="WorkbookOverview" Visibility="{Binding ReviewingWorkbook, Converter={StaticResource BoolVisibility}}"/>

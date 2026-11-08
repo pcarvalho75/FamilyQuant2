@@ -68,6 +68,7 @@ public static partial class WorkbookImportSummaries
                     add(WorkbookImportSectionKind.Subclasses, "Unplaced subclass source", table.SheetName, "This source table has no placed subclass rows.",
                         WorkbookImportItemState.CouldNotPlace, WorkbookImportPage.Subclasses, sources: new[] { Source(table.SheetName, columns: table.Table.Headers) });
             }
+        AddSubclassReviewFindings(plan, keys, add);
     }
 
     private static bool CertainRule(PanelSubclassRuleProposal rule, bool polarityResolved = false) => (!rule.IsUncertain || polarityResolved)
