@@ -21,7 +21,7 @@ public static partial class PanelEvidenceClassifier
     internal sealed record Resolution(string? Family, string Code, string Reason, IReadOnlyList<string>? LinkKeys = null, bool Confirmed = false);
 
     public static List<NeighbourReference> References(FamilyClusterFile file, EvidenceClassificationOptions options) =>
-        NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms))
+        NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms), options.ScopeTerms)
             .Where(r => !SequenceLabels.IsContaminant(r.Identifier) && !SequenceLabels.IsDecoy(r.Identifier)).ToList();
 
     public static EvidenceProposal Propose(FamilyClusterFile file, EvidenceClassificationOptions options,
@@ -79,7 +79,9 @@ public static partial class PanelEvidenceClassifier
         };
     }
 
-    public static string DefinitionFingerprint(FamilyPanel panel) => Hash(panel.Families.OrderBy(f => f.Key, StringComparer.Ordinal)
+    // Hand-created rows are not reviewed-source candidates; link stamps use the unextended source panel.
+    public static string DefinitionFingerprint(FamilyPanel panel) => Hash(panel.Families
+        .Where(f => f.SourceDecision != "Added by hand").OrderBy(f => f.Key, StringComparer.Ordinal)
         .Select(f => new { f.Key, f.Decision, f.MergeTargetFamilyKey,
             Domains = f.Pfam.Select(d => d.Accession).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal) }));
 

@@ -44,7 +44,8 @@ public static partial class SubclassAssignment
             recipe.ProteinSubclassLabels = EvidenceApply.Clone(labels);
             recipe.ProteinSubclassLabelsPanelFingerprint = candidate.PanelFingerprint;
             recipe.ProteinSubclassLabelsFingerprint = fingerprint;
-            undo = GroupingSnapshot.CaptureEvidence(file);
+            // Subclass publication changes labels and recipe, not the live reference evidence.
+            undo = GroupingSnapshot.CaptureFamilyPanel(file);
             file.ProteinSubclassLabels = labels;
             file.ProteinSubclassLabelsPanelFingerprint = candidate.PanelFingerprint;
             file.ProteinSubclassLabelsFingerprint = fingerprint;

@@ -170,7 +170,7 @@ public static class ReportSupplementLayout
 
     private static string ExportSection(string file) => file switch
     {
-        "peptide_representatives.csv" or "protein_audit.csv" => ReportSectionIds.Supplements,
+        "peptide_representatives.csv" or "protein_audit.csv" or Evidence.EvidenceExports.ReportAuditFile => ReportSectionIds.Supplements,
         "family_pooled_minus_mean.csv" or "family_sensitivity.csv" => ReportSectionIds.Sensitivity,
         "database_gap.csv" => ReportSectionIds.DatabaseGap,
         "assignment_conflicts.csv" => ReportSectionIds.AssignmentConflicts,

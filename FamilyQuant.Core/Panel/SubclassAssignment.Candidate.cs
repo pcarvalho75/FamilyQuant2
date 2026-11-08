@@ -225,7 +225,8 @@ public static partial class SubclassAssignment
         return Finish();
     }
 
-    private static bool HasExecutableDefinitions(FamilyPanelFamily family) => family.Subclasses.Any(s =>
+    /// <summary>Whether this family's stored subclass rules make the search read reviewed references.</summary>
+    public static bool HasExecutableDefinitions(FamilyPanelFamily family) => family.Subclasses.Any(s =>
         s.RequiredPfam.Count > 0 || s.AbsentPfam.Count > 0 || s.UniProtSubfamilies.Any(t => !string.IsNullOrWhiteSpace(t)));
 
     private static string SourceFingerprint(FamilyClusterFile file, EvidenceClassificationOptions options, string panelFingerprint) =>

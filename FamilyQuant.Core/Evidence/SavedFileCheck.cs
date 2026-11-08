@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text;
+using System.Runtime.CompilerServices;
 
 namespace FamilyQuant.Evidence
 {
@@ -31,6 +32,15 @@ namespace FamilyQuant.Evidence
 
         internal static SavedFileCheckResult Verify(Snapshot expected, string path, bool? project = null,
             Operations.OperationContext? operation = null)
+        {
+            long before = GC.GetAllocatedBytesForCurrentThread();
+            try { return VerifyCore(expected, path, project, operation); }
+            finally { CurationReadMemory.ReleaseIfLarge(GC.GetAllocatedBytesForCurrentThread() - before); }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static SavedFileCheckResult VerifyCore(Snapshot expected, string path, bool? project,
+            Operations.OperationContext? operation)
         {
             operation?.Report("file-check", "Reopening the saved file", 0, 1);
             try

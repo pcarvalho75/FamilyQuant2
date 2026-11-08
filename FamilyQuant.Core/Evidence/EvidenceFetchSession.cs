@@ -17,6 +17,9 @@ public sealed record EvidenceFetchOutcome(EvidenceFetchResult Evidence, Referenc
     public bool Changed => Evidence.Asked > 0 || Panel != null;
 }
 
+public sealed record ProteinDomainPreview(int ProteinIndex, string Identifier, string Sequence, string Domains);
+public sealed record ProteinDomainPreviewBatch(IReadOnlyList<ProteinDomainPreview> Proteins, string Release);
+
 /// <summary>Stages protein evidence and the reviewed panel without touching the open file.
 /// Only the final operation commit attaches the result. A panel failure keeps fetched protein evidence;
 /// cancellation, a release change or a source edit attaches neither phase.</summary>
@@ -34,19 +37,24 @@ public static class EvidenceFetchSession
 
     public static Task<EvidenceFetchOutcome> FetchAsync(FamilyClusterFile file, HttpMessageHandler? handler = null,
         IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default,
-        IReadOnlyCollection<string>? positionAccessions = null, UniProtFetchOptions? options = null) =>
-        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, positionAccessions, options, false);
+        IReadOnlyCollection<string>? positionAccessions = null, UniProtFetchOptions? options = null,
+        Func<ProteinDomainPreviewBatch, Task>? proteinDomainsReady = null,
+        Func<FamilyClusterFile, Task<ReferencePanelRequest?>>? selectPanel = null) =>
+        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, positionAccessions, options, false, proteinDomainsReady, selectPanel);
 
     public static Task<EvidenceFetchOutcome> FetchAsync(FamilyClusterFile file, OperationContext operation,
-        HttpMessageHandler? handler = null, IReadOnlyCollection<string>? positionAccessions = null, UniProtFetchOptions? options = null) => FetchStagedAsync(file, operation, handler, null, positionAccessions, options, false);
+        HttpMessageHandler? handler = null, IReadOnlyCollection<string>? positionAccessions = null, UniProtFetchOptions? options = null,
+        Func<ProteinDomainPreviewBatch, Task>? proteinDomainsReady = null) => FetchStagedAsync(file, operation, handler, null, positionAccessions, options, false, proteinDomainsReady);
 
     public static Task<EvidenceFetchOutcome> RetryPanelAsync(FamilyClusterFile file, HttpMessageHandler? handler = null,
-        IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default, UniProtFetchOptions? options = null) =>
-        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, null, options, true);
+        IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default, UniProtFetchOptions? options = null,
+        ReferencePanelRequest? panelRequest = null) =>
+        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, null, options, true, panelRequest: panelRequest);
 
     private static async Task<EvidenceFetchOutcome> FetchStagedAsync(FamilyClusterFile file, OperationContext operation,
         HttpMessageHandler? handler, IProgress<FetchProgress>? progress, IReadOnlyCollection<string>? positionAccessions, UniProtFetchOptions? options,
-        bool panelOnly)
+        bool panelOnly, Func<ProteinDomainPreviewBatch, Task>? proteinDomainsReady = null,
+        Func<FamilyClusterFile, Task<ReferencePanelRequest?>>? selectPanel = null, ReferencePanelRequest? panelRequest = null)
     {
         ArgumentNullException.ThrowIfNull(file);
         ArgumentNullException.ThrowIfNull(operation);
@@ -73,18 +81,37 @@ public static class EvidenceFetchSession
             WithDomains = staged.MyExtendedFastaItems.Count(p => !string.IsNullOrWhiteSpace(p.Domains)),
         } : await EvidenceFetcher.FetchAsync(staged, handler,
             new FetchStageProgress(operation, EvidenceStage, progress), operation.CancellationToken, positionAccessions, options).ConfigureAwait(false);
+        operation.ThrowIfCancellationRequested();
+        if (!panelOnly && proteinDomainsReady != null)
+        {
+            var ready = staged.MyExtendedFastaItems.Select((protein, index) => (protein, index))
+                .Where(row => !ReferenceEquals(row.protein.Evidence, stagedEvidence[row.index]))
+                .Select(row => new ProteinDomainPreview(row.index, row.protein.SequenceIdentifier, row.protein.Sequence, row.protein.Domains)).ToArray();
+            await proteinDomainsReady(new ProteinDomainPreviewBatch(ready, evidence.Provenance.Release)).ConfigureAwait(false);
+            operation.ThrowIfCancellationRequested();
+        }
         ReferencePanel? panel = null;
         Exception? panelFailure = null;
         var families = ReferencePanelFetcher.FamiliesFound(staged);
         if (families.Count > 0)
         {
+            if (selectPanel != null)
+            {
+                panelRequest = await selectPanel(staged).ConfigureAwait(false);
+                if (panelRequest == null) throw new OperationCanceledException("Reference panel choice cancelled.", operation.CancellationToken);
+                operation.ThrowIfCancellationRequested();
+            }
             try
             {
-                panel = await ReferencePanelFetcher.FetchAndStoreAsync(staged, handler: handler,
+                string? expected = (evidence.Asked > 0 || panelOnly) && evidence.Provenance.Release.Length > 0 ? evidence.Provenance.Release : null;
+                panel = panelRequest == null ? await ReferencePanelFetcher.FetchAndStoreAsync(staged, handler: handler,
                     progress: new FetchStageProgress(operation, ReferencePanelFetcher.ProgressStage, progress),
                     cancellationToken: operation.CancellationToken,
-                    expectedRelease: (evidence.Asked > 0 || panelOnly) && evidence.Provenance.Release.Length > 0
-                        ? evidence.Provenance.Release : null, options: options).ConfigureAwait(false);
+                    expectedRelease: expected, options: options).ConfigureAwait(false)
+                    : await ReferencePanelFetcher.FetchForScopeAsync(staged, panelRequest, handler,
+                        new FetchStageProgress(operation, ReferencePanelFetcher.ProgressStage, progress), operation.CancellationToken, expected, options).ConfigureAwait(false);
+                staged.EvidenceSource ??= new EvidenceProvenance();
+                staged.EvidenceSource.ReferencePanel = panel;
                 if (!panel.IsComplete) panelFailure = new HttpRequestException(panel.FailureReason);
             }
             catch (Exception ex) when (ex is HttpRequestException or JsonException or InvalidDataException)
@@ -96,6 +123,7 @@ public static class EvidenceFetchSession
                     Provider = "UniProt", Release = evidence.Provenance.Release,
                     Families = families, MissingFamilies = families.ToList(), FailureReason = ex.Message,
                     TotalBatches = ReferencePanelFetcher.PlannedStreamBatchCount(families), FailedBatches = 1,
+                    Coverage = panelRequest is { FullPanel: false } ? new() { ScopeTerms = ReferencePanelFetcher.NormalizeScope(panelRequest.ScopeTerms) } : null,
                 };
                 staged.EvidenceSource ??= new EvidenceProvenance();
                 staged.EvidenceSource.ReferencePanel = panel;

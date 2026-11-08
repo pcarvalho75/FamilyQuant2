@@ -34,8 +34,20 @@ internal static partial class Program
         }
     }
 
+    private static void ReleaseNotes211ClaimTests()
+    {
+        string notes = System.IO.File.ReadAllText(System.IO.Path.Combine(GoldenNumbers.FindRepository(), "RELEASE_NOTES.md"));
+        int start = notes.IndexOf("## 2.1.11", StringComparison.Ordinal);
+        int end = start < 0 ? -1 : notes.IndexOf("## 2.1.10", start, StringComparison.Ordinal);
+        string section = start >= 0 && end > start ? notes.Substring(start, end - start) : "";
+        Check("2.1.11 notes require a decision only for required choices",
+            section.Contains("Required choices need your decision before import; optional findings stay listed and do not block it.", StringComparison.Ordinal)
+            && !section.Contains("Uncertain choices need your decision before import", StringComparison.Ordinal));
+    }
+
     private static void CurationWordingTests()
     {
+        ReleaseNotes211ClaimTests();
         EnsureApplication();
         GeneralWordingTests();
         WorkflowFactTests();

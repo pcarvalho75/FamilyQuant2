@@ -11,13 +11,22 @@ namespace FamilyQuant
     {
         public const string QueryCoverageRule =
             "At least 70 percent of the query's residues occur in the alignment; inserted gap columns do not count.";
+        public static string QueryCoverageSummary => "The comparison must cover at least "
+            + NearestReviewed.DefaultMinQueryAlignedPercent.ToString("0.##", CultureInfo.CurrentCulture) + "% of this protein's length.";
         public static EvidenceReviewInput Present(EvidenceProposal proposal, FamilyClusterFile file)
+            => Present(proposal, file, null);
+
+        public static EvidenceReviewInput Present(EvidenceProposal proposal, FamilyClusterFile file,
+            IReadOnlyDictionary<string, FamilyProfile>? coherenceProfiles, FamilyQuant.Panels.FamilyPanel? selectedPanel = null)
         {
             var input = Present(proposal, file.MyExtendedFastaItems, file.LockedUserIds);
             return input with { RuleSummary = input.RuleSummary + "\nStored motifs:\n"
                 + string.Join("\n", (file.Motifs ?? new List<MotifPattern>()).Select(m => m.Name + ": " + m.Pattern))
                 + (proposal.PanelContext == null ? "" : "\n\n" + PanelEvidenceHelp.Build()),
-                PanelNames = file.FamilyPanel?.Families.ToDictionary(f => f.Key, f => f.DisplayName, StringComparer.Ordinal) };
+                PanelNames = file.FamilyPanel?.Families.ToDictionary(f => f.Key, f => f.DisplayName, StringComparer.Ordinal),
+                CoherenceProfiles = coherenceProfiles, ManualChoices = proposal.ManualChoices,
+                PanelChecklist = proposal.PanelContext == null ? null : PanelFamilyChecklist.Build(file, proposal, selectedPanel
+                    ?? (proposal.ManualChoices?.Count > 0 && file.FamilyPanel != null ? ManualFamilyChoices.ExtendPanel(file.FamilyPanel, proposal.ManualChoices) : null)) };
         }
 
         public static EvidenceReviewInput Present(EvidenceProposal proposal, IReadOnlyList<FastaItemExtended> proteins,
@@ -27,6 +36,9 @@ namespace FamilyQuant
             ArgumentNullException.ThrowIfNull(proteins);
             if (!string.Equals(proposal.SourceFingerprint, EvidenceClassifier.Fingerprint(proteins), StringComparison.Ordinal))
                 throw new InvalidOperationException("The file changed after this proposal was made. Build a new proposal before reviewing it.");
+            var manualByIndex = (proposal.ManualChoices ?? Array.Empty<EvidenceManualChoice>()).ToDictionary(c => c.ProteinIndex);
+            var manualNames = (proposal.ManualChoices ?? Array.Empty<EvidenceManualChoice>()).GroupBy(c => c.Family, StringComparer.Ordinal)
+                .ToDictionary(g => g.Key, g => g.First().Name, StringComparer.Ordinal);
             var rows = proposal.Proteins.Select(p =>
             {
                 if (p.ProteinIndex < 0 || p.ProteinIndex >= proteins.Count
@@ -35,10 +47,10 @@ namespace FamilyQuant
                 var source = proteins[p.ProteinIndex];
                 return new ReviewProteinInput(p.ProteinIndex, p.Identifier, p.PreviousFamilyId, p.Family,
                     TierName(p.Tier), p.Reason, p.HasScopeAnnotation, NeighbourText(p.Neighbour),
-                    p.Flags.Select(f => f.Code + ": " + f.Message).ToArray(), p.SuggestedSelected,
+                    p.Flags.Select(f => f.Code + ": " + f.Message).ToArray(), manualByIndex.GetValueOrDefault(p.ProteinIndex)?.Selected ?? p.SuggestedSelected,
                     source.Description, source.Domains, lockedFamilyIds?.Contains(source.UserID) == true,
                     source.Evidence?.Reviewed, source.Sequence?.Length ?? 0, CoherenceCheck.Cysteines(source.Sequence ?? ""),
-                    source.Evidence?.Pfam?.Count > 0);
+                    source.Evidence?.Pfam?.Count > 0, p.AutomaticEvidence == null ? "" : OriginalEvidence(p.AutomaticEvidence));
             }).ToArray();
             return new EvidenceReviewInput(proposal.SourceFingerprint, rows,
                 proposal.Families.Select(f => new ReviewFamilyInput(f.Family, f.SuggestedName, f.Proteins, f.ReviewedProteins)).ToArray(),
@@ -46,11 +58,14 @@ namespace FamilyQuant
                     m.FamilyCarriers, m.AllCarriers, m.LabelledCarriers, m.VoteFraction)).ToArray(),
                 Architectures: proposal.PanelContext != null ? Array.Empty<ReviewArchitectureInput>()
                 : EvidenceArchitecture.Suggest(proteins, proposal).Select(a => new ReviewArchitectureInput(a.Family, a.CanSplit,
-                    a.Groups.Select(g => new ReviewArchitectureGroupInput(g.Key, g.SuggestedName, g.DominantDomainAccession,
+                    a.Groups.Select(g => new ReviewArchitectureGroupInput(g.Key,
+                        g.Domains.Count == 0 && manualNames.TryGetValue(a.Family, out string? name) ? name + " (no domain calls)" : g.SuggestedName,
+                        g.DominantDomainAccession,
                         g.Domains, g.ProteinIndices, g.ReviewedProteins, g.InferredProteinIndices)).ToArray(),
                     a.Undetermined.Select(p => new ReviewArchitectureUndeterminedInput(p.ProteinIndex, p.Reason)).ToArray())).ToArray(),
                 LeftOut: LeftOutList.Build(proteins, proposal).Select(p => new ReviewLeftOutInput(p.Family, p.Accession,
-                    p.Identifier, p.Description, p.Length, p.Reviewed, p.Fragment, p.MarkerAccession, p.MarkerName, p.AssignedFamily, p.Why)).ToArray(), RuleSummary:
+                    p.Identifier, p.Description, p.Length, p.Reviewed, p.Fragment, p.MarkerAccession, p.MarkerName,
+                    manualNames.GetValueOrDefault(p.AssignedFamily) ?? p.AssignedFamily, p.Why)).ToArray(), RuleSummary:
                     "Scope terms: " + string.Join(", ", proposal.Options.ScopeTerms)
                     + "\nAnnotated identity threshold (%): " + proposal.Options.AnnotatedIdentityPercent.ToString(CultureInfo.CurrentCulture)
                     + "\nUnannotated identity threshold (%): " + proposal.Options.UnannotatedIdentityPercent.ToString(CultureInfo.CurrentCulture)
@@ -60,14 +75,20 @@ namespace FamilyQuant
                 PanelLinks: proposal.PanelContext?.Links);
         }
 
+        private static string OriginalEvidence(EvidenceProteinProposal row) => "Family: " + (row.Family.Length == 0 ? "No family proposed" : row.Family)
+            + "; evidence source: " + TierName(row.Tier) + "\nReason: " + row.Reason + "\n"
+            + string.Join("\n", row.Flags.Select(f => EvidenceWarningText.Describe(f.Code + ": " + f.Message).Help));
+
         public static string CountMotif(EvidenceProposal proposal, IReadOnlyList<FastaItemExtended> proteins, string pattern)
         {
             if (proposal.SourceFingerprint != EvidenceClassifier.Fingerprint(proteins))
                 throw new InvalidOperationException("The file changed. Update the proposal before checking its motifs.");
             var result = MotifCheck.Count(new MotifPattern { Name = pattern, Pattern = pattern },
                 proposal.Proteins.Where(p => p.Family.Length > 0).Select(p => (p.Family, proteins[p.ProteinIndex])));
-            return "Pattern: " + result.Motif.Pattern + "\nFamily\tCarriers\tComplete proteins\n" + string.Join("\n",
-                result.Families.Select(f => f.Family + "\t" + f.Carriers.ToString(CultureInfo.CurrentCulture)
+            var manualNames = (proposal.ManualChoices ?? Array.Empty<EvidenceManualChoice>()).GroupBy(c => c.Family, StringComparer.Ordinal)
+                .ToDictionary(g => g.Key, g => g.First().Name, StringComparer.Ordinal);
+            return "Pattern: " + result.Motif.Pattern + "\nFamily\tMatching proteins\tProteins counted\n" + string.Join("\n",
+                result.Families.Select(f => (manualNames.GetValueOrDefault(f.Family) ?? f.Family) + "\t" + f.Carriers.ToString(CultureInfo.CurrentCulture)
                     + "\t" + f.Complete.ToString(CultureInfo.CurrentCulture)));
         }
 
@@ -77,6 +98,7 @@ namespace FamilyQuant
             EvidenceTier.ReviewedNeighbour => "Reviewed neighbour",
             EvidenceTier.LearnedMarker => "Learned marker",
             EvidenceTier.UnannotatedNeighbour => "Unannotated neighbour",
+            EvidenceTier.AddedByHand => "Added by hand",
             _ => tier.ToString()
         };
 

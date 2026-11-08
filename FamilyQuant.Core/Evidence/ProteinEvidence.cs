@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace FamilyQuant.Evidence
 {
@@ -12,6 +13,10 @@ namespace FamilyQuant.Evidence
     public sealed partial class ProteinEvidence
     {
         public string Accession { get; set; } = string.Empty;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? OrganismName { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? TaxonId { get; set; }
 
         // A missing value means the source did not supply the fact; false and zero are observations.
         public bool? Reviewed { get; set; }
@@ -19,6 +24,8 @@ namespace FamilyQuant.Evidence
         public string Subfamily { get; set; } = string.Empty;
         public string FamilyAnnotation { get; set; } = string.Empty;
         public List<string> Keywords { get; set; } = new List<string>();
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Dictionary<string, string>? KeywordCategories { get; set; }
         public List<string> TissueSpecificity { get; set; } = new List<string>();
         public List<EvidenceDomain> Pfam { get; set; } = new List<EvidenceDomain>();
         public List<EvidenceDomain> Panther { get; set; } = new List<EvidenceDomain>();

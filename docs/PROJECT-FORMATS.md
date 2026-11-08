@@ -1,8 +1,8 @@
 # Project and FCF format boundaries
 
 X7 separates the project models, versioned schema and entry codecs. Existing
-`ProjectStore` APIs, constants and column arrays remain available. Storage format
-version stays 2; application/deployment versions are unchanged.
+`ProjectStore` APIs, constants and column arrays remain available. Z15b1 (2.1.11)
+raised the storage format version to 3; see "Curation format 2" below.
 
 | Component under `FamilyQuant.Core/Storage` | Owns |
 |---|---|
@@ -33,6 +33,42 @@ destination and the existing operation-aware manifest rollback behavior.
   requests more than the table can store.
 - FCF export uses the production `FamilyClusterFile.Save` path and its staged
   verification. No migration script produces a collaborator file.
+
+## Curation format 2 (Z15b1, D78)
+
+A version-3 project stores its curation as curation format 2 in `curation2.json`.
+Format 2 is a root JSON array holding one document, in this order:
+`FamilyQuantCurationFormat` (2), `Notice`, `Parts` (the names of the parts that
+shaped the file), `Sections` (one shared table per part, written once) and
+`Curation` (the FamilyClusterFile body as the parts shaped it). `curation.json`
+keeps only a one-property notice object. FamilyQuant 2.1.10 reads that notice as
+an empty curation, goes on to `manifest.json` and refuses the project with its own
+message: "is a version 3 project, and this build understands up to version 2.
+Update FamilyQuant to open it." (checked with the real 2.1.10 Core and in
+`--test-curation-format2` with its reader transcribed). A format-2 text given to
+2.1.10 as a .fcf stops at the first token (root array, not an object).
+
+New FCF saves and the "Families (.fcf)" export use curation format 2 (D80).
+DU7's frozen-reader compatibility gate is retired explicitly: "Paulo, 11-07:
+forget familyquant 1.5"; the decision is recorded in the feature ledger and generator.
+The transcribed 2.1.10 reader throws a JSON root-conversion error, so it cannot silently
+interpret a scoped panel as complete. Every current reader opens both formats: `ReadJsonUtf8` and
+`FromJsonText` send a text whose first character is `[` to the format-2 reader. The
+canonical content (`ToJsonText`, `JsonContentSha256`, `DeepCopy`) stays format 1,
+so every hash and fingerprint is unchanged.
+
+Parts. Each part is one sealed class in its own file under
+`FamilyQuant.Core/Storage/CurationFormat2/`, deriving from `CurationFormatPart` and
+marked `[CurationFormatPart("name", order)]`; `CurationFormatRegistry.Parts` finds
+them, so no part edits another's file or a shared list. A part may prepare a shared
+section before writing, add converters and type-contract changes for the body, and
+rebuild what it left out after reading. Its converters live only in the options of
+one format-2 write or read (`CurationFormatRegistry.CreateOptions`), never in
+`CurationJsonOptions` or default options, so a gate that hashes
+`JsonSerializer.Serialize(...)` sees the same bytes. On read only the parts the
+file lists run; a part the build does not know, or a format above 2, is refused
+with "Update FamilyQuant to open it." The test helper
+`CheckCurationFormatRoundTrip` proves a part changes the wire only.
 
 ## Native commands
 

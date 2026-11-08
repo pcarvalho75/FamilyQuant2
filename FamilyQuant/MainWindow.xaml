@@ -14,108 +14,111 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu x:Name="MainMenu" Grid.Row="0" Background="{DynamicResource SurfaceBrush}">
-            <MenuItem x:Name="MenuFile" Header="File" ToolTip="Create, open, save and export your project.">
+            <MenuItem x:Name="MenuFile" Header="File" ToolTip="Offers commands to replace, save or export the open project. Opening this menu changes nothing.">
                 <MenuItem x:Name="MenuItemRunUSearch" Header="Build families" Command="New" InputGestureText="Ctrl+N"
-                          ToolTip="Builds families from a FASTA or target-decoy database. Save the open project before starting a different database."/>
+                          ToolTip="Opens Build families to group a FASTA or target-decoy database by sequence identity. Save, Discard or Cancel protects changes before replacing the open project."/>
+                <MenuItem x:Name="MenuItemUpdateDatabase" Header="Update database" Click="MenuItemUpdateDatabase_Click" IsEnabled="{Binding IsEnabled, ElementName=MenuItemFamilyPanel}" ToolTip="Previews changes from a newer FASTA made the same way before updating the open project. Open a project and finish the current operation first; applying an update starts a new curation Undo history."/>
                 <MenuItem x:Name="MenuItemLoadFQC" Header="Open" Command="Open" InputGestureText="Ctrl+O"
-                          ToolTip="Opens a FamilyQuant project or an older Family Cluster File. Save your current changes first."/>
-                <MenuItem x:Name="MenuItemFamilyPanel" Header="Import family panel" Click="MenuItemFamilyPanel_Click" IsEnabled="False"
-                          ToolTip="Import or edit a family panel for the open project."/>
+                          ToolTip="Reads a .fqproj with stored results or an older .fcf with families only. Save, Discard or Cancel protects changes before replacing the open project."/>
+                <MenuItem x:Name="MenuItemFamilyPanel" Header="Import family list" Click="MenuItemFamilyPanel_Click" IsEnabled="False"
+                          ToolTip="Opens the family-list import wizard, where you can also edit the current panel. Open a project and finish the current operation first; a confirmed import is one undoable project change."/>
+                <MenuItem x:Name="MenuItemFamilyListTemplate" Header="Save family list template" Click="MenuSaveFamilyListTemplate_Click"
+                          ToolTip="Writes an Excel workbook with family-list columns and instructions to a location you choose. This file can be edited for import; Undo does not revert file writes."/>
                 <Separator/>
                 <MenuItem x:Name="MenuItemSaveProject" Header="Save" Command="Save" InputGestureText="Ctrl+S" IsEnabled="False"
-                          ToolTip="Saves the open project's families and stored quantitation. Disabled until a project is loaded."/>
+                          ToolTip="Writes the open families, panel, report details and stored results to a .fqproj file. Open a project and finish any save first; Undo does not revert files on disk."/>
                 <MenuItem x:Name="MenuItemSaveAs" Header="Save as" Command="SaveAs" InputGestureText="Ctrl+Shift+S" IsEnabled="False"
-                          ToolTip="Saves the project under a new name. Disabled until a project is loaded."/>
+                          ToolTip="Writes the open project to a .fqproj file at a location you choose and makes it the current save path. Open a project and finish any save first; Undo does not revert files on disk."/>
                 <MenuItem x:Name="MenuItemExport" Header="Export" IsEnabled="False"
-                          ToolTip="Exports families or tables without replacing the open project. Disabled until a project is loaded.">
-                    <MenuItem x:Name="MenuItemSaveFCF" Header="Families for FamilyQuant 1.5 (.fcf)" Click="MenuItemSaveFCF_Click" IsEnabled="False"
-                              ToolTip="Exports families, User IDs and annotations for FamilyQuant 1.5, without quantitation. Disabled until a project is loaded."/>
+                          ToolTip="Offers separate files for families, tables and interpretation input. Open a project to enable the menu; choosing an export leaves the project open.">
+                    <MenuItem x:Name="MenuItemSaveFCF" Header="Families (.fcf)" Click="MenuItemSaveFCF_Click" IsEnabled="False"
+                              ToolTip="Writes families, User IDs, annotations and stored curation evidence to a separate format-2 .fcf without the Full XIC results table. Open a project first; this export does not save the .fqproj or clear unsaved changes, and Undo does not revert the file."/>
                     <MenuItem x:Name="MenuItemExportFamilyTable" Header="Visible protein table (CSV)" Click="MenuItemExportFamilyTable_Click"
-                              ToolTip="Exports the visible protein rows using the table's existing filters and columns. Disabled until a project is loaded."/>
+                              ToolTip="Writes the protein table to CSV using its current display filters and columns. Open a project and show at least one row to enable it; Undo does not revert the exported file."/>
                     <MenuItem x:Name="MenuItemExportPanelAudit" Header="Panel assignment audit (CSV)" Click="MenuItemExportPanelAudit_Click"
-                              ToolTip="Exports one row per target protein with panel labels and recorded assignment evidence."/>
+                              ToolTip="Writes one CSV row per target protein with its panel labels and recorded assignment evidence. The project stays unchanged; Undo does not revert the exported file."/>
                     <MenuItem x:Name="MenuItemExportComposition" Header="Family composition (CSV)" Click="MenuItemExportComposition_Click"
-                              ToolTip="Exports the current Full XIC family composition with its existing attribution settings. Disabled until Full XIC is available."/>
+                              ToolTip="Writes Full XIC family composition, shared signal and unattributed signal to a CSV file. Run Quantify to enable it; Undo does not revert the exported file."/>
                     <MenuItem x:Name="MenuItemExportInterpretationInput" Header="Interpretation input (Markdown)" Click="MenuItemExportInterpretationInput_Click"
-                              ToolTip="Writes report details, the panel and the stored result tables to one file for an assistant of your choice. Needs stored Results."/>
+                              ToolTip="Writes stored Results, panel and report details to a Markdown file for an assistant you choose. Requires Results; Undo does not revert the file."/>
                 </MenuItem>
                 <MenuItem x:Name="MenuItemReportDetails" Header="Report details" Click="MenuItemReportDetails_Click" IsEnabled="False"
-                          ToolTip="Edit the study description and written interpretation saved with the project. Disabled until a project is open."/>
+                          ToolTip="Opens study details and written interpretation for editing in the project. Open a project and finish the current operation first; Undo restores saved detail edits."/>
                 <MenuItem x:Name="MenuItemExportReport" Header="Export report" Click="MenuItemExportReport_Click"
-                          ToolTip="Write a Word report from stored Results and selected sections or figures. Use Quantify first when no Results are stored."/>
+                          ToolTip="Opens report choices for writing a Word report, supplement workbook and offline HTML report from stored Results. Export writes files; Undo does not revert them."/>
                 <MenuItem x:Name="MenuItemAiDraft" Header="Draft interpretation with AI..." Click="MenuItemAiDraft_Click"
-                          ToolTip="Optionally review project information, then request and review an AI interpretation draft."/>
+                          ToolTip="Previews project information before you approve sending it to the AI service for a draft. Accepting a reviewed draft changes the written interpretation; Undo restores the previous text."/>
                 <MenuItem x:Name="MenuItemRecent" Header="Recent projects" SubmenuOpened="MenuItemRecent_SubmenuOpened"
-                          ToolTip="Reopens a recent project or Family Cluster File. Missing files remain listed with their paths."/>
+                          ToolTip="Lists saved project paths that are still available so you can reopen one. Opening the menu changes nothing; removing an entry keeps its file on disk."/>
                 <MenuItem x:Name="MenuItemCloseProject" Header="Close project" Click="MenuItemCloseProject_Click" IsEnabled="False"
-                          ToolTip="Closes the open project and returns to Home after Save, Discard or Cancel."/>
+                          ToolTip="Closes the open project and returns to Home after Save, Discard or Cancel. Open a project and finish the current operation to enable it; discarded edits cannot be undone."/>
                 <Separator/>
                 <MenuItem Header="Exit" Command="Close" InputGestureText="Alt+F4"
-                          ToolTip="Closes this application window. Save the project first to keep your changes."/>
+                          ToolTip="Closes FamilyQuant after offering Save, Discard or Cancel for unsaved project changes. Finish any save first; discarded edits cannot be undone."/>
             </MenuItem>
-            <MenuItem Header="Edit" ToolTip="Undo curation, copy selected text or find proteins.">
+            <MenuItem Header="Edit" ToolTip="Offers Undo for curation, table copying and protein search. Opening this menu changes nothing.">
                 <MenuItem x:Name="MenuItemUndo" Header="Undo" Command="Undo" InputGestureText="Ctrl+Z"
-                          ToolTip="Undoes the last text edit or curation change. Disabled until there is a change to undo."/>
+                          ToolTip="Restores the previous curation change in the open project, up to 50 steps in this session. Make a curation edit to enable it; files already written stay as saved."/>
                 <MenuItem x:Name="MenuItemCopy" Header="Copy" Command="Copy" InputGestureText="Ctrl+C"
-                          ToolTip="Copies selected text or the selected table cells using the table's copy rules. Disabled while nothing is selected."/>
+                          ToolTip="Copies selected table cells to the clipboard using that table's copy rules. Select table rows to enable it; the project and files stay unchanged."/>
                 <Separator/>
                 <MenuItem x:Name="MenuItemFind" Header="Find proteins" Command="Find" InputGestureText="Ctrl+F"
-                          ToolTip="Focuses the family search box in the open project. Disabled until a project is loaded."/>
+                          ToolTip="Returns to Curate families and selects the protein search box for typing. Open a project to enable it; finding proteins changes only the displayed rows."/>
             </MenuItem>
             <MenuItem x:Name="MenuView" Header="View" SubmenuOpened="MenuView_SubmenuOpened"
-                      ToolTip="Move between Home and the steps, and choose the appearance or visible protein rows.">
+                      ToolTip="Offers the workflow screens, appearance preferences and protein display filters. Opening this menu changes nothing.">
                 <MenuItem x:Name="MenuItemHome" Header="Home" Click="MenuItemHome_Click" InputGestureText="Alt+0"
-                          ToolTip="Returns to Home and its five steps while keeping your project open. Each step opens the same screen as the sidebar."/>
+                          ToolTip="Returns to Home and its five steps while keeping the open project and unsaved edits. Keyboard shortcut: Alt+0."/>
                 <MenuItem x:Name="MenuItemFamilies" Header="Curate families" Click="MenuItemFamilies_Click" InputGestureText="Alt+2"
-                          ToolTip="Returns to the open project's families; with none open, asks to open a project or build families. Existing curation stays in memory."/>
+                          ToolTip="Shows the open families for curation, or offers Open project and Build families if none is open. Opening this screen makes no curation edit."/>
                 <MenuItem x:Name="MenuItemComputeXic" Header="Quantify" Click="MenuItemComputeXic_Click" IsEnabled="False" InputGestureText="Alt+3"
-                          ToolTip="Measures identified and kept de novo precursors from RAW files with the full isotope envelope. Disabled until a project is loaded."/>
+                          ToolTip="Opens Quantify to choose identification packages and RAW files before computing Full XIC. Open a project and return to Home or Curate families to enable it; opening the screen computes nothing."/>
                 <MenuItem x:Name="MenuItemAnalytics" Header="Results" Click="MenuItemAnalytics_Click" InputGestureText="Alt+4"
-                          ToolTip="Shows the project's stored quantitation and its exports. Use Quantify first when no results are stored."/>
+                          ToolTip="Shows figures and tables from stored quantitation or completed homology results. Open a project or complete a homology search and finish the current operation to enable it; opening Results does not regroup families."/>
                 <MenuItem x:Name="MenuItemDeNovo" Header="De novo review" Click="MenuItemDeNovo_Click" InputGestureText="Alt+5"
-                          ToolTip="Optional: imports, filters and compares PEAKS or DeepNovo evidence with PatternLab. It changes no family or quantitation."/>
+                          ToolTip="Opens the optional review of de novo calls against identification evidence. Opening the screen changes no families or stored quantitation."/>
                 <Separator/>
-                <MenuItem Header="Appearance" ToolTip="Choose light or dark surfaces without changing the project or its numbers.">
+                <MenuItem Header="Appearance" ToolTip="Offers application appearance presets and the option to follow Windows. Choosing one saves a preference without changing the project or its results.">
                     <MenuItem x:Name="MenuThemeDark" Header="Dark" IsCheckable="True" IsChecked="True" Click="MenuThemeDark_Click"
-                              ToolTip="Uses dark surfaces and light text. This is the default application appearance."/>
+                              ToolTip="Uses the default application appearance for reduced screen brightness. Saves this preference without changing the project or its results."/>
                     <MenuItem x:Name="MenuThemeLight" Header="Light" IsCheckable="True" Click="MenuThemeLight_Click"
-                              ToolTip="Uses light surfaces and dark text. Every command and value stays the same."/>
+                              ToolTip="Uses the application appearance intended for brighter surroundings. Saves this preference without changing the project or its results."/>
                     <MenuItem x:Name="MenuThemeSystem" Header="Use Windows setting" IsCheckable="True" Click="MenuThemeSystem_Click"
-                              ToolTip="Follows the light or dark app setting in Windows. The appearance updates when Windows changes."/>
+                              ToolTip="Follows the Windows application appearance and updates when that setting changes. Saves this preference without changing the project or its results."/>
                 </MenuItem>
                 <Separator/>
                 <MenuItem x:Name="MenuItemHideDecoys" Header="Hide decoys" IsCheckable="True" Click="MenuItemHideDecoys_Click"
-                          ToolTip="Hides decoy rows in the family table and its CSV without changing percentages. Disabled until a project is loaded."/>
+                          ToolTip="Hides decoy proteins from the family tables and visible-row CSV. Open a project to enable it; stored proteins and percentages stay unchanged."/>
                 <MenuItem x:Name="MenuItemHideContaminants" Header="Hide contaminants" IsCheckable="True" Click="MenuItemHideContaminants_Click"
-                          ToolTip="Hides contaminant rows in the family table and its CSV without changing percentages. Disabled until a project is loaded."/>
+                          ToolTip="Hides proteins carrying the database contaminant prefix from the family tables and visible-row CSV. Open a project to enable it; stored proteins and percentages stay unchanged."/>
             </MenuItem>
-            <MenuItem x:Name="MenuTools" Header="Tools" SubmenuOpened="MenuAnalysis_SubmenuOpened" ToolTip="Extra tools beside the five steps: the spectrum table, the clustering diagnostic and SEPro reannotation.">
+            <MenuItem x:Name="MenuTools" Header="Tools" SubmenuOpened="MenuAnalysis_SubmenuOpened" ToolTip="Offers spectrum comparison, a saved-file clustering diagnostic and SEPro reannotation. Opening this menu changes nothing.">
                 <MenuItem x:Name="MenuItemSpectrumComparison" Header="Spectrum comparison" Click="MenuItemSpectrumComparison_Click" IsEnabled="False"
-                          ToolTip="Shows the source comparison table and its existing CSV and score plot exports. Disabled until spectrum evidence is loaded."/>
+                          ToolTip="Opens the stored spectrum comparison table with CSV and score-plot exports. Load spectrum evidence or run Quantify to enable it; opening the table changes no families."/>
                 <MenuItem x:Name="MenuItemClusteringDiagnostic" Header="Clustering diagnostic" Click="MenuItemClusteringDiagnostic_Click" IsEnabled="False"
-                          ToolTip="Writes a diagnostic report from the saved .fcf or .fqproj using its clustering identity. Save changes first; families stay as they are."/>
+                          ToolTip="Writes a diagnostic report from the saved .fcf or .fqproj using its clustering identity; families stay as they are. Save changes first and finish the current operation to enable it; Undo does not revert report files."/>
                 <Separator/>
                 <MenuItem x:Name="MenuItemReanotateSEPro" Header="Reannotate SEPro" Click="MenuItemReanotateSEPro_Click" IsEnabled="False"
-                          ToolTip="Writes family numbers to a new regrouped SEPro package, leaving the original unchanged. Disabled until a project is loaded."/>
+                          ToolTip="Writes current User ID family numbers to a new regrouped SEPro package and keeps the original package. Open a project in Home or Curate families to enable it; Undo does not revert the new file."/>
             </MenuItem>
-            <MenuItem x:Name="MenuItemHelp" Header="Help" ToolTip="Read the current screen's explanations or the complete workflow.">
+            <MenuItem x:Name="MenuItemHelp" Header="Help" ToolTip="Offers explanations of the workflow and current screen, update commands and AI key settings. Opening this menu changes nothing.">
                 <MenuItem x:Name="MenuItemAiKey" Header="AI assistant key..." Click="MenuItemAiKey_Click"
-                          ToolTip="Add, test, import or remove your private API key for the optional AI draft."/>
+                          ToolTip="Opens settings to add, test, import or remove your private AI service key for this Windows user. The key is kept outside the project; changes here are not part of project Undo."/>
                 <MenuItem x:Name="MenuItemHowToRead" Header="How to read these numbers" Command="Help" InputGestureText="F1"
-                          ToolTip="Explains the current screen's numbers and choices, including denominators and shared peptides. F1 opens this same help."/>
+                          ToolTip="Explains the current screen's numbers, denominators and choices. F1 opens the same read-only Help without changing the project."/>
                 <MenuItem x:Name="MenuItemDeNovoWorkflowHelp" Header="De novo in FamilyQuant" Click="MenuItemDeNovoWorkflowHelp_Click"
-                          ToolTip="Explains the seven steps from identifications and de novo calls to Quantify and Results."/>
+                          ToolTip="Explains the seven steps from identification and de novo calls to Quantify and Results. This read-only Help changes nothing in the project."/>
                 <MenuItem x:Name="MenuItemWhereAmI" Header="What do I do first?" Click="MenuItemWhereAmI_Click"
-                          ToolTip="Lists the complete workflow and what each step needs. De novo review is optional."/>
+                          ToolTip="Explains the five workflow steps, their inputs and what to do next. This read-only Help changes nothing in the project."/>
                 <MenuItem x:Name="MenuItemCheckForUpdates" Header="Check for updates" Click="MenuItemCheckForUpdates_Click"
-                          ToolTip="Asks GitHub for the latest public release. Downloading or opening its page needs your click."/>
+                          ToolTip="Asks GitHub whether a newer public release is available. The result offers release-page and installation choices without changing the project."/>
                 <MenuItem x:Name="MenuItemInstallUpdate" Header="Install update" Click="MenuItemInstallUpdate_Click"
-                          ToolTip="Checks for a newer release, downloads its installer and closes FamilyQuant to install it."/>
+                          ToolTip="Checks for a newer release and downloads its installer after Save, Discard or Cancel protects open edits. FamilyQuant closes to install it; project Undo does not revert installation."/>
                 <MenuItem x:Name="MenuItemAutomaticUpdateChecks" Header="Check for updates at startup" IsCheckable="True"
-                          Click="MenuItemAutomaticUpdateChecks_Click" ToolTip="Quietly checks at every start. Downloads only when you choose Install update."/>
+                          Click="MenuItemAutomaticUpdateChecks_Click" ToolTip="Checks for a newer public release at startup and shows an available-update notice. This starts enabled and saves an application preference; installation needs your separate choice."/>
                 <Separator/>
                 <MenuItem x:Name="MenuItemOpenErrorLogs" Header="Open error logs folder" Click="MenuItemOpenErrorLogs_Click"
-                          ToolTip="Opens the folder containing unexpected-error reports you can send to the developers."/>
+                          ToolTip="Opens the folder of unexpected-error reports for inspection or sharing with the developers. Opening the folder changes no project data."/>
             </MenuItem>
         </Menu>
         <!-- The first thing a new user sees. It says what to do, in order, and it stays until a Family
@@ -124,11 +127,11 @@
             <DockPanel>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                     <Button x:Name="ButtonInstallAvailableUpdate" Content="Install update" Click="ButtonInstallAvailableUpdate_Click"
-                            Style="{DynamicResource PrimaryButton}" Margin="12,0,8,0" ToolTip="Downloads the installer and closes FamilyQuant to install the update."/>
+                            Style="{DynamicResource PrimaryButton}" Margin="12,0,8,0" ToolTip="Downloads this release's installer after Save, Discard or Cancel protects open edits. FamilyQuant closes to install it; project Undo does not revert installation."/>
                     <Button x:Name="ButtonOpenAvailableRelease" Content="Open release page" Click="ButtonOpenAvailableRelease_Click"
-                            Margin="0,0,8,0" ToolTip="Opens this release in your browser."/>
+                            Margin="0,0,8,0" ToolTip="Opens this release's notes and downloads page in your browser. The project stays unchanged."/>
                     <Button Content="Dismiss" x:Name="ButtonDismissUpdate" Click="ButtonDismissUpdate_Click"
-                            ToolTip="Hides this notice until the next start or manual check."/>
+                            ToolTip="Hides this update notice until the next startup or manual update check. The project and startup-check preference stay unchanged."/>
                 </StackPanel>
                 <TextBlock x:Name="TextUpdateAvailable" VerticalAlignment="Center" TextWrapping="Wrap"/>
             </DockPanel>

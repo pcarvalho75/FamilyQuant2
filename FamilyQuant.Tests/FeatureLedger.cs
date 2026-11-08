@@ -20,6 +20,7 @@ internal static class FeatureLedger
     internal const string ReferenceInventorySha256 = "B7B572E352CB394AD46CB4D7CE04394929A7462F8E0326A48635FC61EA871000";
     internal const string GenerateArgument = "--feature-ledger-generate";
     internal const string DropApproval = "Paulo via orchestrator M4, 2026-11-01 11:20:38: retire the De Novo Extract areas and Partition ion current sections in 2.0; 1.5 keeps them. Attribute to families stays and its CSV moves to Results in C11.";
+    internal const string Du7Retirement = "DU7 frozen FamilyQuant 1.5 reader compatibility check retired: Paulo, 11-07: forget familyquant 1.5 (D80). FCF saves now use curation format 2; current-reader preservation checks remain required.";
     private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
     private static readonly Regex Tokens = new(
         "//[^\\r\\n]*|/\\*[\\s\\S]*?\\*/|@\"(?:\"\"|[^\"])*\"|\\$?\"(?:\\\\.|[^\"\\\\])*\"|'(?:\\\\.|[^'\\\\])'",
@@ -239,6 +240,7 @@ internal static class FeatureLedger
         md.AppendLine("Contract for 2.0. Only Paulo may authorize DROP. KEEP preserves behavior; IMPROVE preserves the function while its presentation changes.");
         md.AppendLine("Retained rows start OPEN. A planned check is not evidence that behavior passed. Close a retained row only after its owner records an executed test or an inspected render and reviewer approval. Approved DROP rows record Paulo's decision as evidence, without claiming their implementation is removed yet.");
         md.AppendLine("Approved exception: " + DropApproval);
+        md.AppendLine("Retired compatibility check: " + Du7Retirement);
         md.AppendLine("DROP covers the two frozen XAML section subtrees and their exclusive view handlers/tooltips. Shared extraction/partition engines, test seams, explanatory science and Attribute to families remain preserved. The guard rejects DROP outside that scope. Actual retirement is C11.");
         md.AppendLine();
         md.AppendLine("Frozen source: `" + inventory.Reference + "` in the old FamilyQuant repository, matching the read-only reference README. The frozen app and tests are in `D:/FamilyQuant-data/reference-1.5.0.6`.");
@@ -285,14 +287,54 @@ internal static class FeatureLedger
     internal static bool ReceiptsReleaseOnly => string.Equals(Environment.GetEnvironmentVariable(ReceiptsVariable),
         ReceiptsReleaseOnlyValue, StringComparison.Ordinal);
 
+    internal const string DeferredReleaseReason = "not re-proved for 2.1.11; receipts lost after 2.1.10; verify again after release";
+    internal const string DeferredReleaseList = "docs/LEDGER-REVERIFY-2.1.11.md";
+
+    internal sealed record ReleaseDeferrals(IReadOnlySet<string> Ids, bool VersionAllowed, IReadOnlyList<string> Errors)
+    {
+        internal bool Accepts(string id, string reason) => VersionAllowed && Errors.Count == 0
+            && string.Equals(reason, DeferredReleaseReason, StringComparison.Ordinal) && Ids.Contains(id);
+    }
+
+    internal static ReleaseDeferrals LoadReleaseDeferrals(string? root)
+    {
+        var ids = new HashSet<string>(StringComparer.Ordinal);
+        var errors = new List<string>();
+        bool versionAllowed = Version.TryParse(AppVersionInfo.Current(), out var version)
+            && version.Major == 2 && version.Minor == 1 && version.Build == 11 && version.Revision <= 0;
+        string? path = root == null ? null : Path.Combine(root, DeferredReleaseList);
+        if (path != null && File.Exists(path))
+        {
+            foreach (string line in File.ReadLines(path).Where(line => line.StartsWith("| FQ15-", StringComparison.Ordinal)))
+            {
+                string[] cells = line.Split('|').Select(cell => cell.Trim()).ToArray();
+                if (cells.Length != 4 || !Regex.IsMatch(cells[1], @"^FQ15-[0-9A-F]{12}$", RegexOptions.CultureInvariant))
+                { errors.Add("Malformed D90 deferred ID row: " + line); continue; }
+                if (!ids.Add(cells[1])) errors.Add("Duplicate D90 deferred ID: " + cells[1]);
+            }
+        }
+        return new(ids, versionAllowed, errors);
+    }
+
+    private static string[][] LedgerRows(string markdown) => markdown.Split('\n')
+        .Where(line => line.StartsWith("| FQ15-", StringComparison.Ordinal))
+        .Select(line => line.Split('|').Select(cell => cell.Trim()).ToArray()).ToArray();
+
+    internal static string ReleaseSummary(string markdown, ReleaseDeferrals deferrals)
+    {
+        var rows = LedgerRows(markdown).Where(row => row.Length == 10).ToArray();
+        return "Feature ledger release: VERIFIED=" + rows.Count(row => row[7] == "VERIFIED").ToString(CultureInfo.InvariantCulture)
+            + "; DEFERRED=" + rows.Count(row => row[7] == "OPEN" && deferrals.Accepts(row[1], row[8])).ToString(CultureInfo.InvariantCulture)
+            + "; LIST=" + DeferredReleaseList + "; D90.";
+    }
+
     /// <param name="checkReceipts">False leaves out the receipt-currency check of VERIFIED rows (and the receipt
     /// load it needs); every other check still runs.</param>
     internal static List<string> Validate(Inventory inventory, string markdown, bool requireClosed = false,
-        FeatureLedgerEvidence.Registry? evidenceOverride = null, bool checkReceipts = true)
+        FeatureLedgerEvidence.Registry? evidenceOverride = null, bool checkReceipts = true, ReleaseDeferrals? releaseDeferrals = null)
     {
         var errors = new List<string>();
-        string[][] rows = markdown.Split('\n').Where(s => s.StartsWith("| FQ15-", StringComparison.Ordinal))
-            .Select(s => s.Split('|').Select(c => c.Trim()).ToArray()).ToArray();
+        string[][] rows = LedgerRows(markdown);
         if (inventory.Reference != ReferenceCommit) errors.Add("Wrong frozen reference.");
         if (Fingerprint(inventory) != ReferenceInventorySha256) errors.Add("Frozen inventory fingerprint differs.");
         if (inventory.Files.Sum(f => f.Observations) != inventory.Observations.Count) errors.Add("Source scan counts differ.");
@@ -301,6 +343,14 @@ internal static class FeatureLedger
         if (inventory.Observations.Select(r => r.Id).Distinct().Count() != inventory.Observations.Count) errors.Add("Duplicate scan ID.");
         var byId = inventory.Observations.GroupBy(r => r.Id).ToDictionary(g => g.Key, g => g.First());
         string? evidenceRoot = FeatureLedgerEvidence.FindRoot();
+        var deferrals = requireClosed ? releaseDeferrals ?? LoadReleaseDeferrals(evidenceRoot) : null;
+        if (deferrals != null)
+        {
+            errors.AddRange(deferrals.Errors);
+            var openIds = rows.Where(row => row.Length == 10 && row[7] == "OPEN").Select(row => row[1]).ToHashSet(StringComparer.Ordinal);
+            foreach (string id in deferrals.Ids.Where(id => !openIds.Contains(id)).Order(StringComparer.Ordinal))
+                errors.Add("D90 list entry is not OPEN in the ledger: " + id);
+        }
         var evidence = evidenceOverride ?? (checkReceipts && evidenceRoot != null && rows.Any(r => r.Length == 10 && r[7] == "VERIFIED")
             ? FeatureLedgerEvidence.Load(evidenceRoot, inventory) : null);
         foreach (string[] row in rows)
@@ -321,7 +371,9 @@ internal static class FeatureLedger
             if (!validCheck) errors.Add("Unknown check target: " + row[1]);
             if (row[7] is not ("OPEN" or "VERIFIED" or "APPROVED_DROP")) errors.Add("Unknown state: " + row[1]);
             if ((row[7] == "APPROVED_DROP") != (row[2] == "DROP")) errors.Add("Retirement state differs: " + row[1]);
-            if (requireClosed && row[7] is not ("VERIFIED" or "APPROVED_DROP")) errors.Add("Release has an open row: " + row[1]);
+            if (requireClosed && row[7] is not ("VERIFIED" or "APPROVED_DROP")
+                && !(row[7] == "OPEN" && deferrals?.Accepts(row[1], row[8]) == true))
+                errors.Add("Release has an open row: " + row[1]);
             if (row[7] == "VERIFIED" && (row[8] == "pending" || row[8].Length < 12))
                 errors.Add("Verified row lacks behavioral evidence: " + row[1]);
             if (checkReceipts && row[7] == "VERIFIED" && evidence?.IsVerified(row[1], row[8]) != true)

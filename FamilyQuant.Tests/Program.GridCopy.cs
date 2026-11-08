@@ -215,8 +215,8 @@ namespace FamilyQuant.Tests
             tickRow.IsChecked = true;
             tickRow.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
 
-            TextBox domainBox = WalkTree(content).OfType<TextBox>().First(x => x.TemplatedParent == null && (x.ToolTip as string)?.StartsWith("Domains to keep", StringComparison.Ordinal) == true);
-            ComboBox domainList = WalkTree(content).OfType<ComboBox>().First(x => (x.ToolTip as string)?.StartsWith("The domains on this list", StringComparison.Ordinal) == true);
+            TextBox domainBox = UiField<TextBox>(window, "domainsBox")!;
+            ComboBox domainList = UiField<ComboBox>(window, "domainsList")!;
             Check("the domains found are offered with their counts",
                 domainList.Items.Cast<string>().SequenceEqual(new[] { "Disintegrin (1)", "Reprolysin (1)" }), string.Join(" | ", domainList.Items.Cast<string>()));
             domainList.SelectedIndex = 1;
@@ -230,7 +230,8 @@ namespace FamilyQuant.Tests
             Check("Apply keeps the domains named", Protein("sp|P31987|VM2I_CROVV").Join && !Protein("sp|O93517|VM3S4_GLOBR").Join, Headline().Text);
             Click(Action("Tick all"));
 
-            TextBox excludeBox = WalkTree(content).OfType<TextBox>().First(x => x.TemplatedParent == null && (x.ToolTip as string)?.StartsWith("Whole words", StringComparison.Ordinal) == true);
+            TextBox excludeBox = WalkTree(content).OfType<TextBox>().Single(x => System.Windows.Data.BindingOperations
+                .GetBinding(x, TextBox.TextProperty)?.Path?.Path == "ExcludeText");
             table.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription(nameof(SuperClusterPreviewProtein.Locus), System.ComponentModel.ListSortDirection.Descending));
             excludeBox.Text = "cc8b";
             PumpDispatcher();

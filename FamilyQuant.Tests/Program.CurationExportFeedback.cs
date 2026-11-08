@@ -124,6 +124,7 @@ internal static partial class Program
                         && both.Contains(SharedPeptidePolicy.SplitEqually.ShortName(), StringComparison.Ordinal)
                         && both.Contains(SharedPeptidePolicy.FamilyUnique.ShortName(), StringComparison.Ordinal)
                         && !both.Contains("no quantitation", StringComparison.OrdinalIgnoreCase));
+                    FinalWalkGroupingTextTests(screen, status, language);
                 }
                 finally { main.Close(); PumpDispatcher(); }
             }

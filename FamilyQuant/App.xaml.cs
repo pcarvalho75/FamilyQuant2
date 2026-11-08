@@ -18,6 +18,7 @@ namespace FamilyQuant
             if (Assembly.GetEntryAssembly() == typeof(App).Assembly)
                 crashHandling = new CrashHandling(this, new CrashReportStore(CrashReportStore.DefaultDirectory));
             ApplyDisplayCulture();
+            Themes.ToolTipDefaults.Apply();
         }
 
         protected override void OnStartup(StartupEventArgs e)

@@ -362,10 +362,12 @@ namespace FamilyQuant.Tests
             using (var zip = System.IO.Compression.ZipFile.OpenRead(path))
             {
                 var names = zip.Entries.Select(en => en.FullName).OrderBy(n => n, StringComparer.Ordinal).ToList();
-                Check("structure: the zip holds the four documented v2 entries",
+                // Version 3 (Z15b1): the curation is format 2 in curation2.json; curation.json is only the
+                // notice an older build reads before refusing the project at its manifest version check.
+                Check("structure: the zip holds the five documented v3 entries",
                     names.SequenceEqual(new[]
                     {
-                        "curation.json", "manifest.json", "quant.tsv.gz",
+                        ProjectStore.CurationEntryName, ProjectStore.CurationFormat2EntryName, "manifest.json", "quant.tsv.gz",
                         ProjectStore.SpectrumComparisonEntryName,
                     }.OrderBy(n => n, StringComparer.Ordinal)),
                     string.Join(", ", names));
@@ -449,7 +451,9 @@ namespace FamilyQuant.Tests
 
             // ---- migration: an old .fcf still opens; save as .fqproj; reload; curation identical -----
             string oldFcf = Path.Combine(workDir, "legacy.fcf");
-            fcf.Save(oldFcf);                                   // a plain-JSON .fcf, as today's Save writes
+            File.WriteAllText(oldFcf, fcf.ToJsonText(), new System.Text.UTF8Encoding(false));
+            Check("migration fixture is a true format-1 object, without a format-2 frame",
+                CurationFormat.Detect(() => File.OpenRead(oldFcf)) == CurationFormat.Legacy);
 
             FamilyClusterFile legacy = FamilyClusterFile.Load(oldFcf);
             Check("migration: an old .fcf still opens with its curation",

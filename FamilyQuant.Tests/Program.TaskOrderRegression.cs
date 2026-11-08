@@ -133,14 +133,7 @@ internal static partial class Program
             file = FamilyClusterFile.FromJsonText(file.ToJsonText());
             ProjectStore.WriteFqproj(project, file, Array.Empty<QuantRow>(), new QuantManifest { FamilyWorldResult = summary });
             // Remove migration metadata to exercise a genuine pre-R4c container on the next read.
-            using (var zip = System.IO.Compression.ZipFile.Open(project, System.IO.Compression.ZipArchiveMode.Update))
-            {
-                var entry = zip.GetEntry(ProjectStore.CurationEntryName)!;
-                string text; using (var reader = new StreamReader(entry.Open())) text = reader.ReadToEnd();
-                var json = System.Text.Json.Nodes.JsonNode.Parse(text)!; json.AsObject().Remove("LegacyTaskSourceFingerprints");
-                entry.Delete(); using var writer = new StreamWriter(zip.CreateEntry(ProjectStore.CurationEntryName).Open());
-                writer.Write(json.ToJsonString());
-            }
+            EditStoredCuration(project, curation => curation.Remove("LegacyTaskSourceFingerprints"));
             Walk(project, WriteDenominatorFixture(output, "owned.plp", "NONE"), "fixture");
             if (args.Length == 4) Walk(args[2], args[3], "b6");
         }

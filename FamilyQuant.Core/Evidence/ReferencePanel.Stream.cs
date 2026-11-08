@@ -22,11 +22,11 @@ public static partial class ReferencePanelFetcher
 
     private static async Task<ReferencePanel> FetchStreamsAsync(IReadOnlyList<string> families,
         HttpMessageHandler? handler, IProgress<FetchProgress>? progress, CancellationToken cancellationToken, string? expectedRelease,
-        UniProtFetchOptions? options)
+        UniProtFetchOptions? options, string scopeClause = "", int scopeConditions = 0)
     {
         var asked = families.Where(f => !string.IsNullOrWhiteSpace(f)).Distinct(StringComparer.OrdinalIgnoreCase)
             .OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal).ToList();
-        var batches = StreamBatches(asked);
+        var batches = StreamQueryBatches(asked, scopeClause, scopeConditions);
         var entries = new SortedDictionary<string, PanelEntry>(StringComparer.Ordinal);
         string? release = null;
         int received = 0, completed = 0;
@@ -37,7 +37,7 @@ public static partial class ReferencePanelFetcher
         client.DefaultRequestHeaders.UserAgent.ParseAdd("FamilyQuant");
         client.DefaultRequestHeaders.AcceptEncoding.ParseAdd("gzip");
         var cache = batches.Count == 0 ? null : await UniProtBatchCache.OpenAsync(
-            string.Join("\n", batches.Select(b => StreamEndpoint + Uri.EscapeDataString(StreamQuery(b)))),
+            string.Join("\n", batches.Select(b => StreamEndpoint + Uri.EscapeDataString(StreamQuery(b) + scopeClause))),
             client, handler, options, message => Report(message), cancellationToken, expectedRelease).ConfigureAwait(false);
         release = cache?.Release;
         Report();
@@ -81,7 +81,7 @@ public static partial class ReferencePanelFetcher
         async Task FetchCompleteBatch(List<string> batch)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            string query = Uri.EscapeDataString(StreamQuery(batch));
+            string query = Uri.EscapeDataString(StreamQuery(batch) + scopeClause);
             int announced;
             string url = StreamEndpoint + query;
             var saved = cache == null ? null : await cache.ReadAsync(url, cancellationToken).ConfigureAwait(false);
@@ -188,19 +188,21 @@ public static partial class ReferencePanelFetcher
     private static string StreamQuery(IEnumerable<string> families) => "(reviewed:true) AND ("
         + string.Join(" OR ", families.Select(f => "(family:\"" + f.Replace("\"", "") + "\")")) + ")";
 
-    private static List<List<string>> StreamBatches(List<string> families)
+    private static List<List<string>> StreamBatches(List<string> families) => StreamQueryBatches(families, "", 0);
+
+    private static List<List<string>> StreamQueryBatches(List<string> families, string scopeClause, int scopeConditions)
     {
         var batches = new List<List<string>>();
         var current = new List<string>();
         foreach (string family in families)
         {
             current.Add(family);
-            if (current.Count <= MaximumFamiliesPerStream
-                && StreamEndpoint.Length + Uri.EscapeDataString(StreamQuery(current)).Length <= MaximumStreamUrlLength) continue;
+            if (current.Count + scopeConditions <= MaximumFamiliesPerStream
+                && StreamEndpoint.Length + Uri.EscapeDataString(StreamQuery(current) + scopeClause).Length <= MaximumStreamUrlLength) continue;
             current.RemoveAt(current.Count - 1);
             if (current.Count > 0) batches.Add(current);
             current = new List<string> { family };
-            if (StreamEndpoint.Length + Uri.EscapeDataString(StreamQuery(current)).Length > MaximumStreamUrlLength)
+            if (StreamEndpoint.Length + Uri.EscapeDataString(StreamQuery(current) + scopeClause).Length > MaximumStreamUrlLength)
                 throw new InvalidDataException("A family name exceeds the UniProt query URL limit. No panel was made.");
         }
         if (current.Count > 0) batches.Add(current);

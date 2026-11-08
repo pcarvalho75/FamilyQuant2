@@ -20,6 +20,10 @@ namespace FamilyQuant.Evidence
         public string Accession { get; set; } = string.Empty;
         public string Sequence { get; set; } = string.Empty;
         public ProteinEvidence Evidence { get; set; } = new ProteinEvidence();
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? OrganismName { get => Evidence?.OrganismName; set => (Evidence ??= new ProteinEvidence()).OrganismName = value; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? TaxonId { get => Evidence?.TaxonId; set => (Evidence ??= new ProteinEvidence()).TaxonId = value; }
     }
 
     /// <summary>The reviewed proteins of the families found in the file, from every taxon, kept with the
@@ -35,6 +39,10 @@ namespace FamilyQuant.Evidence
 
         /// <summary>The entries, sorted by accession.</summary>
         public List<PanelEntry> Entries { get; set; } = new List<PanelEntry>();
+
+        /// <summary>Null in legacy and full panels. Otherwise the recorded scope slices and whole families.</summary>
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ReferencePanelCoverage? Coverage { get; set; }
 
         public List<string> MissingFamilies { get; set; } = new();
         public string FailureReason { get; set; } = string.Empty;
@@ -53,7 +61,7 @@ namespace FamilyQuant.Evidence
     public static partial class ReferencePanelFetcher
     {
         private const string Endpoint = "https://rest.uniprot.org/uniprotkb/search?format=json&size=500&fields="
-            + "accession,reviewed,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence&query=";
+            + "accession,reviewed,organism_name,organism_id,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence&query=";
         private const int Attempts = 5;
 
         /// <summary>Every family named by a target's evidence, optionally only those of targets in a scope
@@ -218,9 +226,9 @@ namespace FamilyQuant.Evidence
 
         /// <summary>The panel's entries as neighbour references, leaving out any accession already among
         /// <paramref name="present"/> (the file's own reviewed proteins answer for themselves).</summary>
-        public static List<NeighbourReference> References(ReferencePanel? panel, IEnumerable<string>? present = null)
+        public static List<NeighbourReference> References(ReferencePanel? panel, IEnumerable<string>? present = null, IReadOnlyList<string>? scopeTerms = null)
         {
-            RequireComplete(panel);
+            RequireCoverage(panel, scopeTerms);
             if (panel == null) return new List<NeighbourReference>();
             var skip = new HashSet<string>(present ?? Array.Empty<string>(), StringComparer.Ordinal);
             return panel.Entries

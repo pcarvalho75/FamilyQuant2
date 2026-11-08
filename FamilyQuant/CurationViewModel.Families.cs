@@ -21,6 +21,9 @@ public sealed class CurationFamilyRow : ScreenViewModel
         set { if (Set(ref locked, value)) lockChanged?.Invoke(value); }
     }
     public bool CanEdit => Proteins > 0;
+    public string LockHint => CanEdit
+        ? "Protects this family from automatic grouping, or removes that protection. Undo restores the previous lock state."
+        : "Unavailable because this family has no target proteins. Choose a family containing target proteins to edit its lock here.";
     public string CountHelp => Proteins.ToString("N0") + " target proteins in the whole family; "
         + VisibleProteins.ToString("N0") + " protein rows are visible under the current filters.";
     public CurationFamilyRow(int id, string name, int proteins, int visible, double? fullXic, double? patternLab,
@@ -71,7 +74,7 @@ public sealed partial class CurationViewModel
             rows.Add(new CurationFamilyRow(pair.Key, familyNames.TryGetValue(pair.Key, out var name) ? name : "",
                 targets.Length, pair.Value.Length, first?.FullXicShare,
                 Quantitation.DisplayedMode == null ? null : first?.XICUser, Document.LockedUserIds.Contains(pair.Key),
-                value => SetFamilyLock(pair.Key, value)));
+                FamilyLockCallback(this, pair.Key)));
         }
         refreshingFamilies = true;
         try
@@ -82,6 +85,14 @@ public sealed partial class CurationViewModel
             Changed(nameof(SelectedFamilyProteins)); Changed(nameof(ProteinHeading));
         }
         finally { refreshingFamilies = false; }
+    }
+
+    private static Action<bool> FamilyLockCallback(CurationViewModel model, int family)
+    {
+        // WPF caches an inactive family view and its current row after project replacement.
+        // That row must not own the previous curation through its edit callback.
+        var owner = new WeakReference<CurationViewModel>(model);
+        return value => { if (owner.TryGetTarget(out var current)) current.SetFamilyLock(family, value); };
     }
 
     public bool RenameFamily(int family, string name)

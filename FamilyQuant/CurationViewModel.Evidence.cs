@@ -2,49 +2,112 @@ using FamilyQuant.Evidence;
 using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FamilyQuant;
 
 public sealed partial class CurationViewModel
 {
+    private int domainPreviewGeneration;
+    public IReadOnlyDictionary<FastaItemExtended, string> DomainPreview { get; private set; } = new Dictionary<FastaItemExtended, string>();
+
     public async Task<EvidenceFetchOutcome> FetchEvidenceAsync(HttpMessageHandler? handler, OperationContext operation,
-        IReadOnlyCollection<int>? additionalPositionFamilyIds = null, bool retryPanelOnly = false, UniProtFetchOptions? options = null)
+        IReadOnlyCollection<int>? additionalPositionFamilyIds = null, bool retryPanelOnly = false, UniProtFetchOptions? options = null,
+        ReferencePanelRequest? panelRequest = null, Func<FamilyClusterFile, ReferencePanelRequest?>? selectPanel = null)
     {
         operation.Report("evidence", "Preparing the evidence fetch");
-        var source = Document.MyExtendedFastaItems.Select(p => (Item: p, p.SequenceIdentifier, p.Domains, p.Evidence)).ToArray();
+        var source = Document.MyExtendedFastaItems.Select(p => (Item: p, p.SequenceIdentifier, p.Sequence, p.Description, p.Domains, p.Evidence)).ToArray();
+        string sourceFingerprint = EvidenceClassifier.Fingerprint(Document.MyExtendedFastaItems);
         string domainSource = Document.DomainSource;
         var evidenceSource = Document.EvidenceSource;
+        string evidenceSourceFingerprint = PanelEvidenceMatching.FingerprintSource(evidenceSource);
+        SynchronizationContext? ui = SynchronizationContext.Current;
+        int previewRequest = Interlocked.Increment(ref domainPreviewGeneration);
         var positionAccessions = Quantitation.PositionAccessions(additionalPositionFamilyIds);
-        var prepared = await Task.Run(() => FamilyClusterFile.FromJsonText(Document.ToJsonText()), operation.CancellationToken);
-        operation.ThrowIfCancellationRequested();
-        var result = retryPanelOnly
-            ? await EvidenceFetchSession.RetryPanelAsync(prepared, handler, new CurationFetchProgress(operation), operation.CancellationToken, options)
-            : await EvidenceFetchSession.FetchAsync(prepared, handler, new CurationFetchProgress(operation),
-                cancellationToken: operation.CancellationToken, positionAccessions: positionAccessions, options: options);
-        operation.ThrowIfCancellationRequested();
-        if (!result.Changed) return result;
-        operation.Commit(() =>
+        try
+        {
+            var prepared = await Task.Run(() => Document.DeepCopy(operation), operation.CancellationToken);
+            operation.ThrowIfCancellationRequested();
+            var result = retryPanelOnly
+                ? await EvidenceFetchSession.RetryPanelAsync(prepared, handler, new CurationFetchProgress(operation), operation.CancellationToken, options, panelRequest)
+                : await EvidenceFetchSession.FetchAsync(prepared, handler, new CurationFetchProgress(operation),
+                    cancellationToken: operation.CancellationToken, positionAccessions: positionAccessions, options: options,
+                    proteinDomainsReady: ready => OnPreviewContext(() =>
+                    {
+                        operation.ThrowIfCancellationRequested();
+                        EnsureCurrentSource();
+                        if (ready.Proteins.Count > 0 && string.IsNullOrWhiteSpace(ready.Release))
+                            throw new InvalidOperationException("Fetched domain display has no UniProt release.");
+                        if (previewRequest != domainPreviewGeneration) return;
+                        var pending = new Dictionary<FastaItemExtended, string>(ReferenceEqualityComparer.Instance);
+                        foreach (var row in ready.Proteins)
+                        {
+                            if (row.ProteinIndex < 0 || row.ProteinIndex >= source.Length || row.Identifier != source[row.ProteinIndex].SequenceIdentifier
+                                || row.Sequence != source[row.ProteinIndex].Sequence) throw new InvalidOperationException("Fetched domain display does not match the open proteins.");
+                            pending.Add(source[row.ProteinIndex].Item, row.Domains);
+                        }
+                        DomainPreview = new ReadOnlyDictionary<FastaItemExtended, string>(pending);
+                        Changed(nameof(DomainPreview));
+                    }), selectPanel: selectPanel == null ? null : async snapshot =>
+                    {
+                        ReferencePanelRequest? choice = null;
+                        await OnPreviewContext(() => choice = selectPanel(snapshot));
+                        return choice;
+                    });
+            operation.ThrowIfCancellationRequested();
+            if (!result.Changed) return result;
+            operation.Commit(() =>
+            {
+                EnsureCurrentSource();
+                for (int i = 0; !retryPanelOnly && i < source.Length; i++)
+                {
+                    source[i].Item.Domains = prepared.MyExtendedFastaItems[i].Domains;
+                    source[i].Item.Evidence = prepared.MyExtendedFastaItems[i].Evidence;
+                }
+                if (!retryPanelOnly) Document.DomainSource = prepared.DomainSource;
+                Document.EvidenceSource = prepared.EvidenceSource;
+                NotifyDocumentChanged();
+            });
+            return result;
+        }
+        finally
+        {
+            await OnPreviewContext(() =>
+            {
+                if (previewRequest != domainPreviewGeneration) return;
+                DomainPreview = new Dictionary<FastaItemExtended, string>();
+                Changed(nameof(DomainPreview));
+            });
+        }
+
+        void EnsureCurrentSource()
         {
             if (Document.MyExtendedFastaItems.Count != source.Length || Document.DomainSource != domainSource
-                || !ReferenceEquals(Document.EvidenceSource, evidenceSource)
-                || Document.MyExtendedFastaItems.Where((p, i) => !ReferenceEquals(p, source[i].Item)
-                    || p.SequenceIdentifier != source[i].SequenceIdentifier || p.Domains != source[i].Domains
-                    || !ReferenceEquals(p.Evidence, source[i].Evidence)).Any())
+                || !ReferenceEquals(Document.EvidenceSource, evidenceSource) || PanelEvidenceMatching.FingerprintSource(Document.EvidenceSource) != evidenceSourceFingerprint
+                || EvidenceClassifier.Fingerprint(Document.MyExtendedFastaItems) != sourceFingerprint
+                || Document.MyExtendedFastaItems.Where((protein, index) => !ReferenceEquals(protein, source[index].Item)
+                    || protein.SequenceIdentifier != source[index].SequenceIdentifier || protein.Sequence != source[index].Sequence
+                    || protein.Description != source[index].Description || protein.Domains != source[index].Domains
+                    || !ReferenceEquals(protein.Evidence, source[index].Evidence)).Any())
                 throw new InvalidOperationException("The protein evidence changed during the fetch. Fetch again for the current document.");
-            for (int i = 0; i < source.Length; i++)
+        }
+
+        Task OnPreviewContext(Action publish)
+        {
+            if (ui == null || ReferenceEquals(SynchronizationContext.Current, ui)) { publish(); return Task.CompletedTask; }
+            var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            ui.Post(_ =>
             {
-                source[i].Item.Domains = prepared.MyExtendedFastaItems[i].Domains;
-                source[i].Item.Evidence = prepared.MyExtendedFastaItems[i].Evidence;
-            }
-            Document.DomainSource = prepared.DomainSource;
-            Document.EvidenceSource = prepared.EvidenceSource;
-            NotifyDocumentChanged();
-        });
-        return result;
+                try { publish(); completion.SetResult(); }
+                catch (Exception error) { completion.SetException(error); }
+            }, null);
+            return completion.Task;
+        }
     }
 
     private sealed class CurationFetchProgress(OperationContext operation) : IProgress<FetchProgress>

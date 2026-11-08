@@ -72,16 +72,16 @@ namespace FamilyQuant
             if (locusOf != null)
             {
                 code = NewItem("Copy UniProt code",
-                    "Copies the code alone, P31982 from sp|P31982|VM2I_CROCC, one line per selected row.",
+                    "Copy the UniProt accession from each selected row to the clipboard, one line per row; the project stays unchanged. Disabled when the rows have no accession; select a row with a UniProt accession to enable it.",
                     () => ToClipboard(Codes(rows.Select(locusOf)), grid));
                 menu.Items.Add(code);
             }
-            MenuItem text = NewItem(textLabel, "Copies this text as the database has it, one line per selected row.",
+            MenuItem text = NewItem(textLabel, "Copy the recorded text from each selected row to the clipboard, one line per row; the project stays unchanged. Disabled when the rows have no text; select a row with text to enable it.",
                 () => ToClipboard(Lines(rows.Select(textOf)), grid));
             menu.Items.Add(text);
             if (locusOf != null)
             {
-                open = NewItem("Open in UniProt", "Opens the UniProt page of the row you clicked in your browser.",
+                open = NewItem("Open in UniProt", "Open the clicked row's UniProt entry in your browser without changing the project or files. Disabled without a usable accession; open the menu on a row with a UniProt accession to enable it.",
                     () => OpenUrl(FamilyNaming.UniProtUrl(FamilyNaming.Accession(locusOf(clicked!))), grid));
                 menu.Items.Add(open);
             }
@@ -132,6 +132,7 @@ namespace FamilyQuant
         private static MenuItem NewItem(string header, string tooltip, Action run)
         {
             var item = new MenuItem { Header = header, ToolTip = tooltip };
+            ToolTipService.SetShowOnDisabled(item, true);
             item.Click += (_, _) => run();
             return item;
         }
@@ -158,7 +159,7 @@ namespace FamilyQuant
         }
 
         /// <summary>A blank selection empties the clipboard, so the next paste cannot be the previous protein's.</summary>
-        private static void ToClipboard(string text, DependencyObject origin)
+        public static void ToClipboard(string text, DependencyObject origin)
         {
             if (ClipboardOverride != null) { ClipboardOverride(text); return; }
 

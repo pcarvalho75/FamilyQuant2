@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,6 +17,12 @@ public sealed class EvidenceTaxon
     public int TaxonId { get; set; }
     public string ScientificName { get; set; } = string.Empty;
     public string Rank { get; set; } = string.Empty;
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? Entries { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? MarkedSp { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? MarkedTr { get; set; }
 }
 
 public sealed class EvidenceKeywordCount
@@ -36,6 +43,18 @@ public sealed class EvidenceTaskProposal
     public int TargetProteins { get; set; }
     public int IgnoredContaminants { get; set; }
     public int ReviewedProteins { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? FastaSpEntries { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string>? ReviewStatusReleases { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string>? FastaTrNowReviewed { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string>? FastaSpNowUnreviewed { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string>? FastaSpUnresolved { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string>? RepeatedSpAccessions { get; set; }
     public List<EvidenceTaxon> Taxa { get; set; } = new();
     public EvidenceTaxon Clade { get; set; } = new();
     public List<EvidenceKeywordCount> Keywords { get; set; } = new();
@@ -75,6 +94,7 @@ public static partial class EvidenceTaskDiscovery
         var taxa = headers.GroupBy(h => h.TaxonId).OrderBy(g => g.Key).Select(g => new EvidenceTaxon
         {
             TaxonId = g.Key, ScientificName = string.Join("; ", g.Select(h => h.ScientificName).Distinct(StringComparer.Ordinal).OrderBy(n => n, StringComparer.Ordinal)),
+            Entries = g.Count(), MarkedSp = g.Sum(h => h.MarkedSp.GetValueOrDefault()), MarkedTr = g.Sum(h => h.MarkedTr.GetValueOrDefault()),
         }).ToList();
         using HttpClient client = handler == null ? new HttpClient() : new HttpClient(handler, disposeHandler: false);
         client.Timeout = TimeSpan.FromSeconds(100);
@@ -99,8 +119,16 @@ public static partial class EvidenceTaskDiscovery
         foreach (var group in proteins.Where(p => p.Evidence?.Reviewed == true).GroupBy(p => p.Evidence!.Accession, StringComparer.Ordinal))
             if (group.Select(p => JsonSerializer.Serialize(p.Evidence!.Keywords.OrderBy(k => k, StringComparer.Ordinal))).Distinct().Count() > 1)
                 throw new InvalidDataException("Duplicate reviewed accessions have conflicting keyword evidence. Fetch evidence again.");
+        var storedCategories = reviewed.SelectMany(p => p.Evidence!.KeywordCategories?.AsEnumerable()
+                ?? Enumerable.Empty<KeyValuePair<string, string>>())
+            .GroupBy(pair => pair.Key, StringComparer.Ordinal)
+            .ToDictionary(group => group.Key, group => group.Select(pair => pair.Value).Distinct(StringComparer.Ordinal).ToArray(), StringComparer.Ordinal);
         var keywords = reviewed.SelectMany(p => p.Evidence!.Keywords.Where(k => !string.IsNullOrWhiteSpace(k)).Distinct(StringComparer.Ordinal))
-            .GroupBy(k => k, StringComparer.Ordinal).Select(g => new EvidenceKeywordCount { Keyword = g.Key, ReviewedProteins = g.Count() })
+            .GroupBy(k => k, StringComparer.Ordinal).Select(g => new EvidenceKeywordCount
+            {
+                Keyword = g.Key, ReviewedProteins = g.Count(),
+                CategoryName = storedCategories.TryGetValue(g.Key, out var categories) && categories.Length == 1 ? categories[0] : string.Empty,
+            })
             .OrderByDescending(k => k.ReviewedProteins).ThenBy(k => k.Keyword, StringComparer.Ordinal).ToList();
         if (keywords.Count > 0)
         {
@@ -129,6 +157,14 @@ public static partial class EvidenceTaskDiscovery
         var proposedScope = keywords.Where(k => k.CategoryId == FunctionalScopeCategoryId).Take(1).Select(k => k.Keyword).ToList();
         string? tissue = CommonTissuePhrase(reviewedGroups);
         if (tissue != null && !proposedScope.Contains(tissue, StringComparer.OrdinalIgnoreCase)) proposedScope.Add(tissue);
+        var spHeaders = proteins.Where(p => p.SequenceIdentifier.StartsWith("sp|", StringComparison.Ordinal)).ToList();
+        var resolvedStatus = proteins.Where(p => p.Evidence?.Reviewed != null
+            && p.Evidence.Accession == FamilyNaming.Accession(p.SequenceIdentifier).Split('-')[0]).ToList();
+        var releases = resolvedStatus.Select(p => p.Evidence!.Source?.Release ?? file.EvidenceSource?.Release ?? string.Empty)
+            .Where(r => !string.IsNullOrWhiteSpace(r)).Distinct(StringComparer.Ordinal).OrderBy(r => r, StringComparer.Ordinal).ToList();
+        if (releases.Count == 0 && !string.IsNullOrWhiteSpace(file.EvidenceSource?.Release)) releases.Add(file.EvidenceSource.Release);
+        static List<string> Accessions(IEnumerable<FastaItemExtended> rows) => rows.Select(p => FamilyNaming.Accession(p.SequenceIdentifier))
+            .Distinct(StringComparer.Ordinal).OrderBy(accession => accession, StringComparer.Ordinal).ToList();
         return new EvidenceTaskProposal
         {
             SourceFingerprint = fingerprint, Provider = "UniProt", Release = release ?? string.Empty,
@@ -136,6 +172,12 @@ public static partial class EvidenceTaskDiscovery
                 .Distinct(StringComparer.Ordinal).OrderBy(r => r, StringComparer.Ordinal).ToList(),
             TargetProteins = proteins.Count, IgnoredContaminants = targets.Count - proteins.Count,
             ReviewedProteins = reviewed.Count, Taxa = taxa, Clade = clade, Keywords = keywords,
+            FastaSpEntries = spHeaders.Count, ReviewStatusReleases = releases,
+            FastaTrNowReviewed = Accessions(reviewedGroups.SelectMany(group => group).Where(p => p.SequenceIdentifier.StartsWith("tr|", StringComparison.Ordinal))),
+            FastaSpNowUnreviewed = Accessions(resolvedStatus.Where(p => p.SequenceIdentifier.StartsWith("sp|", StringComparison.Ordinal) && p.Evidence!.Reviewed == false)),
+            FastaSpUnresolved = Accessions(spHeaders.Except(resolvedStatus)),
+            RepeatedSpAccessions = spHeaders.GroupBy(p => FamilyNaming.Accession(p.SequenceIdentifier).Split('-')[0], StringComparer.Ordinal)
+                .Where(group => group.Count() > 1).Select(group => group.Key).OrderBy(accession => accession, StringComparer.Ordinal).ToList(),
             ProposedScopeTerms = proposedScope,
         };
     }
@@ -224,6 +266,8 @@ public static partial class EvidenceTaskDiscovery
         {
             TaxonId = int.Parse(match.Groups["id"].Value, NumberStyles.None, CultureInfo.InvariantCulture),
             ScientificName = match.Groups["name"].Value.Trim(),
+            Entries = 1, MarkedSp = identifier.StartsWith("sp|", StringComparison.Ordinal) ? 1 : 0,
+            MarkedTr = identifier.StartsWith("tr|", StringComparison.Ordinal) ? 1 : 0,
         }).GroupBy(taxon => taxon.TaxonId).Select(group => group.First()).ToArray();
     }
 

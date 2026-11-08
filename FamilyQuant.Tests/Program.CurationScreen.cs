@@ -8,6 +8,8 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
+    private const string CurationDefaultVisibilityAssertion = "curation shows search IDs and hides decoys by default while keeping all document rows";
+
     private static void CurationScreenTests()
     {
         EnsureApplication();
@@ -24,7 +26,7 @@ internal static partial class Program
         var table = UiField<DataGrid>(screen, "DataGridResultGrid")!;
         Check("curation always shows its table without Controls or Data Browser tabs",
             !WalkTree(screen).OfType<TabControl>().Any() && table.IsVisible && table.ActualHeight > 200);
-        Check("curation shows search IDs and hides decoys by default while keeping all document rows",
+        Check(CurationDefaultVisibilityAssertion,
             UiField<DataGridTextColumn>(screen, "ColumnUSearchId")!.Visibility == Visibility.Visible
             && UiField<CheckBox>(screen, "CheckBoxExcludeReverse")!.IsChecked == true
             && table.Items.Count == 1 && file.MyExtendedFastaItems.Count == 2);

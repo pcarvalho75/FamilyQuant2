@@ -20,6 +20,7 @@ internal static partial class Program
         internal List<string> Urls = new();
         internal string Release = "fixture";
         internal Func<string, string>? TransformTaxonomyJson;
+        internal string? VocabularyJson;
         internal bool MissingRelease, ChangedRelease, WrongId;
         internal CancellationTokenSource? Cancel;
         internal Action? DuringRequest;
@@ -38,7 +39,7 @@ internal static partial class Program
             }
             if (request.RequestUri!.AbsolutePath == "/keywords/stream")
             {
-                var vocabulary = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("""
+                var vocabulary = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(VocabularyJson ?? """
                     {"results":[{"keyword":{"name":"Leading scope","id":"KW-0001"},"category":{"name":"Molecular function","id":"KW-9992"}},
                     {"keyword":{"name":"Other","id":"KW-0002"},"category":{"name":"Technical term","id":"KW-9990"}}]}
                     """) };

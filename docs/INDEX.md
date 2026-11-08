@@ -12,9 +12,11 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Architecture](ARCHITECTURE.md) | Current boundaries, planned Reports/operation host, budgets and historical destination inventory |
 | [Core operations](CORE-OPERATIONS.md) | Progress, cancellation, outcomes and atomic publication |
 | [Verified Save memory](STREAMING-SAVE.md) | Streaming JSON and fingerprints, exact-entry byte proof and measured memory |
+| [Import and Apply memory](CURATION-WORKING-MEMORY.md) | Panel-only Undo, detached session copies and oversized native import measurement |
 | [Compute and open progress](COMPUTE-PROGRESS.md) | Counted phases, live clocks, timestamped logs and native parity check |
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
+| [Tooltips](TOOLTIPS.md) | Design rule 7: the shared tooltip style and defaults, how to write one, a worked example per control kind, census and check |
 | [Workflow names](WORKFLOW-NAMES.md) | One name per step (Home, the five numbered steps, Tools), retired names and the old-name check |
 | [Checking and installing updates](UPDATE-INSTALL.md) | Optional startup notice, explicit installer action, trusted download hosts and fake-network checks |
 | [Quantitation stages](QUANTITATION-PIPELINE.md) | Full-XIC stage contracts, second-pass residual seam and focused parity checker |
@@ -102,6 +104,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--list-test-commands` | Deterministic command table; executes no test or scientific handler |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
+| `--test-evidence-unlock-identity [output]` | Z12p5l2 Unlock evidence families: unchanged numbers and members, one Undo for locks and identities, stored/legacy identities, Save/reopen, recipe replay and publication eligibility guards |
 | `--source-caption-check <fresh-output>` | Compiled source picker: all five frozen filename/Union facts, selected-source screenshots and native whole-control checks in both themes |
 | `--shared-peptide-effect <copied-project> <copied-T-R> <copied-sepr2> <copied-RAW-folder> <new-output> <cache> <dataset-label> <date> [--prepare-only]` | One-run native Compute full XIC and all three shared-peptide policies; exact database/curation check, scoped CSV/JSON outputs and no de novo input |
 | `--test-evidence-delivery` | Native default review, save, exports, exact app-session replay and app Open fixture |
@@ -126,7 +129,16 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--desktop-world-walk <copied-project> <copied-raw-folder> <copied-sepr2> <copied-denovo-root> <output> <confirmed-scope>` | Private desktop real-data fetch/scope dialog, production Compute, Database gap and native CSV/FASTA exports; uses only copies |
 | `--test-quantitation-stages` | Prepared-peptide assignments, cross-side suppression, residual calibration, rollup and deterministic CSV |
 | `--test-family-panel` | Panel and subclass fixtures, safe publication, native runner and report sections |
+| `--test-panel-subclass-import [output]` | Z16a5 sourced subclass proposals before family confirmation, canonical Pfam rules, explicit atomic acceptance, unknown-text retention and the native subclass engine |
+| `--test-panel-import-graceful` | Z12p1 graceful spreadsheet import: preview, header proposal, colours, proposals, plain-sentence problems, row choices, replay and old-panel JSON |
+| `--test-panel-import-several` | Z12p3 rows listing several families: list splitting, proposed keys, one family per name, one group under others, replay |
+| `--test-panel-import-template` | Z12p2d family-list template: sheets, marker, instructions, drop-down, schema validation, import with no mapping, replay |
+| `--test-panel-import-example` | The shipped example family list through the graceful importer: header below titles, proposals, merge label, repeated abbreviation, four-family row, replay |
+| `--test-tooltip-style` | Z12q1 tooltip defaults (500 ms, 20 s, on disabled controls), the 380 px style on theme tokens in both themes, and the one-attribute column header tooltip |
+| `--test-tooltips` | Z12q6 rule 7 over every window the census opens: fails on a required control with NONE or REPEATS-LABEL and on a dash, colour word or D21 word, naming window and control; in DefaultSuite since it first passed on fq/v2111-release |
+| `--tooltip-census <new-output>` | Z12q1 census: opens every window, reveals tabs and expanders, and writes one table per window (kind, label, name, host, tooltip or NONE, REPEATS-LABEL, wording flags) plus census.md |
 | `--test-report-findings` | J44 Summary of findings: each fixed sentence present only with its data, headline and study values, Others named only in the supplement, numbers table, culture and wording guards |
+| `--test-report-recovery [fresh-output]` | Z12p5l synthetic missing assignment evidence, locked review, one-press family unlock and exact Undo, stale per-run shares, production stored-row share refresh and native report export |
 | `--test-interpretation-input` | J45 Interpretation input: deterministic Markdown of details, panel, findings, stored tables and Methods; escaping, absent parts, refusal and the File > Export command |
 | `--j45-walk <project.fqproj> <new-output>` | Private desktop File > Export > Interpretation input (Markdown) twice on a saved project; timings and byte equality |
 | `--subclass-leave-one-out <project.fqproj> <new-output-directory>` | Current-assignment reviewed-subfamily measurement, per-target CSV and summary JSON; input project unchanged |
@@ -144,6 +156,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-family-world` | The family world's crediting rule, species removal, the B1 verdict bars, D11 and the B5 pass with its export, on a hand-made world |
 | `--test-ui-icons` | No emoji in product source, escaped/entity regressions and Fluent glyphs in both themes |
 | `--test-ui-colors` | Literal/fixed-factory color guard with Tokens/ChartPalette sources and the explicit protected export-only PresentationFigures exception |
+| `--test-import-walk-layout [output]` | Z12p2f1 native workbook-map, preview, columns, decisions and subclass layout checks in both themes at standard/minimum size; captures, full-cell tips, merged headings and unchanged source/project data |
 | `--test-keyword-command` | Single keyword command, empty review, Cancel and accepted-setting retention |
 | `--test-review-wait` | Dispatcher completion beyond the former load timeout, original fault/cancellation and synchronization context retention |
 | `--test-ui-wording` | Current curation/shell Help paths, family overview and lock instructions, retired-screen names, tooltip length and retained report/Help facts |
@@ -178,6 +191,10 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-quantitation-panel [output-dir]` | Full XIC first, conditional source options, retained selectors and both-theme native captures |
 | `--test-curation-quantitation` | Full-XIC column, denominator changes, shared policy and unavailable-TIC fallback |
 | `--test-curation-operations` | Shared host queue/cancel paths, staged PatternLab publication, stale membership, browse preferences and headless refusal |
+| `--test-curation-streaming-contract [output-dir]` | Canonical old-string/stream byte and hash parity, detached-copy cleanup, legacy encodings and counted import-fingerprint reuse |
+| `--test-compact-curation [output-dir]` | Old indented FCF read, compact rewrite with identical objects, exact string/stream/project-entry bytes and verified SHA-256 |
+| `--test-recipe-copies [output-dir]` | Format-2 recipe references only for byte-identical copies, detached history, unequal/null/empty preservation, malformed references and native replay |
+| `--test-curation-format2-composition [output-dir]` | Every shipped format-2 part active on one synthetic curation: lossless round trip, each part shortens the wire, verified project save and reopen, and a second save writes the same stored bytes |
 | `--test-family-view` | Native family selection, name editing, accessible locks, Undo, production-share projection and 39,996-family virtualization |
 | `--test-architecture-group-split [output-dir]` | Native per-key split choices, retained bulk choice, unsplit members staying together, exact recipe replay and optional synthetic captures |
 | `--test-report-study-boundary` | Report-only operation ownership, retained Core models and screen dependencies |
@@ -221,6 +238,7 @@ These commands create native WPF client captures or labelled synthetic fixtures,
 | `--homology-results-screens <output-dir>` | [Program.HomologyResultScreens.cs](../FamilyQuant.Tests/Program.HomologyResultScreens.cs) |
 | `--secondary-screens <output-dir>` | [Program.SecondaryWindows.cs](../FamilyQuant.Tests/Program.SecondaryWindows.cs) |
 | `--grouping-review-screens <output-dir> [evidence.fcf]` | [GroupingReviewScreens.cs](../FamilyQuant.Tests/GroupingReviewScreens.cs); merged keyword/evidence/architecture review captures |
+| `--import-guide-screens <output-dir> [--dark]` | [Program.ImportGuideScreens.cs](../FamilyQuant.Tests/Program.ImportGuideScreens.cs); the fourteen Import family list wizard pictures at 1366 x 768 for the Help chapter and the website, on the neutral six-sheet example workbook read the way File > Import family list reads it (Review your workbook first, each part opened from it, subclass review, Accept and import) with an invented project that stores Pfam domains; the workbook it imports is written under the output folder |
 | `--logo-assets <output-dir> [--preview=<preview.png>]` | [LogoAssets.cs](../FamilyQuant.Tests/LogoAssets.cs); target scratch before replacing tracked assets |
 | `--shell-save-smoke <input.fcf> <output.fqproj>` | [Program.ShellSaving.cs](../FamilyQuant.Tests/Program.ShellSaving.cs); verified curation-only persistence, no RAW reproduction |
 | `--evidence-recipe-replay-check <recipe-bearing.fcf>` | [Program.ProteinDomains.cs](../FamilyQuant.Tests/Program.ProteinDomains.cs) |

@@ -8,13 +8,14 @@ namespace FamilyQuant.Panels;
 public static class FamilyPanelValidation
 {
     public static FamilyPanel Clone(FamilyPanel panel) =>
-        JsonSerializer.Deserialize<FamilyPanel>(JsonSerializer.Serialize(panel))!;
+        JsonStreamCopy.Clone(panel);
 
     /// <summary>Refuses ambiguous keys, broken/cyclic merges and contradictory subclass definitions.
     /// Does not change any user text or domain accession.</summary>
     public static void Validate(FamilyPanel panel)
     {
         ArgumentNullException.ThrowIfNull(panel);
+        Evidence.PanelEvidenceMatching.ValidateConfirmed(panel);
         var families = new Dictionary<string, FamilyPanelFamily>(StringComparer.Ordinal);
         foreach (FamilyPanelFamily family in panel.Families)
         {

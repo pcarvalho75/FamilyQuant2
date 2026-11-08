@@ -1,8 +1,10 @@
 <Window x:Class="FamilyQuant.PanelEditorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:theme="clr-namespace:FamilyQuant.Themes"
         Title="Family panel" Width="1080" Height="720" MinWidth="900" MinHeight="600"
         WindowStartupLocation="CenterOwner" Background="{DynamicResource CanvasBrush}">
+    <Window.Resources><BooleanToVisibilityConverter x:Key="SourceNotesVisibility"/></Window.Resources>
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/>
@@ -14,43 +16,70 @@
         </StackPanel>
         <DockPanel Grid.Row="1" Margin="0,14,0,10" LastChildFill="False">
             <Button x:Name="ButtonChooseWorkbook" Content="Choose spreadsheet" Click="ChooseWorkbook_Click" DockPanel.Dock="Left"
-                    ToolTip="Choose a spreadsheet and map its headers and decisions before applying it."/>
+                    ToolTip="Reads a family-panel template into this draft, or opens sheet and column choices for another workbook. Apply panel commits the draft; Cancel leaves the project unchanged."/>
             <TextBlock Text="Panel name" VerticalAlignment="Center" Margin="18,0,6,0" DockPanel.Dock="Left"/>
             <TextBox x:Name="PanelName" Width="230" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left"
-                     ToolTip="A name for this family panel, saved with the project."/>
+                     ToolTip="Name stored with this panel: default is its saved name or empty for a new panel, with free text, no unit or fixed length limit. Only the draft changes until Apply panel."/>
         </DockPanel>
-        <Grid Grid.Row="2">
+        <TabControl Grid.Row="2" Background="{DynamicResource CanvasBrush}"
+                    ToolTip="Switches between the editable panel draft and the source text saved with it. Apply panel commits the draft.">
+        <TabItem Header="Families and import" ToolTip="Edits the draft families and import choices. Source notes stay unchanged.">
+        <Grid Margin="0,8,0,0">
             <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="14"/><ColumnDefinition Width="280"/></Grid.ColumnDefinitions>
             <Grid>
                 <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/><RowDefinition Height="100"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                 <TextBlock Text="Families" Style="{StaticResource SectionTitle}"/>
                 <DataGrid x:Name="FamilyGrid" Grid.Row="1" Margin="0,6,0,6" ItemsSource="{Binding Families}" AutoGenerateColumns="False"
-                          CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" SelectionUnit="FullRow" CellEditEnding="FamilyGrid_CellEditEnding">
+                          CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" SelectionUnit="FullRow" BeginningEdit="FamilyGrid_BeginningEdit" CellEditEnding="FamilyGrid_CellEditEnding" ToolTip="Edits the draft family keys, names, decisions, domains and subclass keys. Apply panel commits the draft as one undoable project change.">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Key" Binding="{Binding Key, UpdateSourceTrigger=PropertyChanged}" Width="110"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                        <DataGridComboBoxColumn x:Name="DecisionColumn" Header="Decision" SelectedValueBinding="{Binding Decision, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Label" SelectedValuePath="Value" Width="145"/>
-                        <DataGridTextColumn Header="Merge target key" Binding="{Binding MergeTarget, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
-                        <DataGridTextColumn Header="Pfam codes" Binding="{Binding Pfam, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
-                        <DataGridTextColumn Header="Subclass keys" Binding="{Binding Subclasses, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+                        <DataGridTextColumn x:Name="FamilyKeyColumn" Header="Key" Binding="{Binding KeyDisplay, UpdateSourceTrigger=PropertyChanged}" Width="110" theme:TableAppearance.HeaderToolTip="Unique, nonempty text key for this panel family; a new row starts empty, with no unit or fixed length limit. Families added by hand show their names here and are renamed in Name; other key edits move matching choices when Apply panel commits the draft."/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="*" theme:TableAppearance.HeaderToolTip="Display name for this family; a new row starts empty and requires nonempty free text with no unit or fixed length limit. Only the panel draft changes until Apply panel."/>
+                        <DataGridComboBoxColumn x:Name="DecisionColumn" Header="Decision" SelectedValueBinding="{Binding Decision, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Label" SelectedValuePath="Value" Width="145" theme:TableAppearance.HeaderToolTip="Chooses Quantify, Report under others, Not a family or Merge into family for this draft row; new rows default to Quantify. A merge needs another family's key, and only Apply panel commits the choice.">
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="ComboBox" BasedOn="{x:Static DataGridComboBoxColumn.DefaultElementStyle}">
+                                    <Setter Property="ToolTip" Value="Chooses Quantify, Report under others, Not a family or Merge into family for this panel row; new rows default to Quantify. A merge requires another family key; only Apply panel commits this draft, and Undo restores the previous panel."/>
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
+                            <DataGridComboBoxColumn.EditingElementStyle>
+                                <Style TargetType="ComboBox" BasedOn="{x:Static DataGridComboBoxColumn.DefaultEditingElementStyle}">
+                                    <Setter Property="ToolTip" Value="Chooses Quantify, Report under others, Not a family or Merge into family for this panel row; new rows default to Quantify. A merge requires another family key; only Apply panel commits this draft, and Undo restores the previous panel."/>
+                                </Style>
+                            </DataGridComboBoxColumn.EditingElementStyle>
+                        </DataGridComboBoxColumn>
+                        <DataGridComboBoxColumn x:Name="MergeTargetColumn" Header="Merge target" SelectedValueBinding="{Binding MergeTarget, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Key" DisplayMemberPath="FamilyChoiceLabel" Width="120" theme:TableAppearance.HeaderToolTip="Merge target family, initially the saved target or unselected; choose another family from this panel. This is used only for Merge into family and stays in the draft until Apply panel.">
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="ComboBox" BasedOn="{x:Static DataGridComboBoxColumn.DefaultElementStyle}">
+                                    <Setter Property="ToolTip" Value="Merge target family, initially the saved target or unselected; choose another family from this panel. This is used only for Merge into family and stays in the draft until Apply panel."/>
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
+                            <DataGridComboBoxColumn.EditingElementStyle>
+                                <Style TargetType="ComboBox" BasedOn="{x:Static DataGridComboBoxColumn.DefaultEditingElementStyle}">
+                                    <Setter Property="ToolTip" Value="Merge target family, initially the saved target or unselected; choose another family from this panel. This is used only for Merge into family and stays in the draft until Apply panel."/>
+                                </Style>
+                            </DataGridComboBoxColumn.EditingElementStyle>
+                        </DataGridComboBoxColumn>
+                        <DataGridTextColumn Header="Pfam codes" Binding="{Binding Pfam, UpdateSourceTrigger=PropertyChanged}" Width="120" theme:TableAppearance.HeaderToolTip="Pfam accessions for this family, separated by semicolons, commas or line breaks; default empty, no unit or count limit. Existing domain details are kept for unchanged codes, and only Apply panel commits the draft."/>
+                        <DataGridTextColumn Header="Subclass keys" Binding="{Binding Subclasses, UpdateSourceTrigger=PropertyChanged}" Width="120" theme:TableAppearance.HeaderToolTip="Subclass keys separated by semicolons, commas or line breaks; default empty, no unit or count limit, with each key unique in this family. Unchanged keys keep their rules; Apply panel commits changes."/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <Button Content="Add family" Click="AddFamily_Click" ToolTip="Adds an empty family row."/>
-                    <Button Content="Remove selected" Click="RemoveFamily_Click" Margin="8,0,0,0" ToolTip="Removes the selected family from this draft."/>
-                    <Button Content="Save panel as spreadsheet" Click="SaveTemplate_Click" Margin="8,0,0,0" ToolTip="Writes a reusable spreadsheet from this panel draft."/>
-                </StackPanel>
+                <WrapPanel Grid.Row="2">
+                    <Button Content="Add family" Click="AddFamily_Click" ToolTip="Adds a blank family row to the panel draft. The project stays unchanged until Apply panel."/>
+                    <Button Content="Remove selected" Click="RemoveFamily_Click" Margin="8,0,0,0" ToolTip="Removes the selected family row from this draft. The project stays unchanged until Apply panel, and Cancel discards the draft."/>
+                    <Button Content="Save panel as spreadsheet" Click="SaveTemplate_Click" Margin="8,0,0,0" ToolTip="Writes this valid draft to a reusable Excel workbook at a location you choose. It does not apply the panel to the project; Undo does not revert the file."/>
+                    <Button x:Name="MatchStoredNamesButton" Content="Match stored names..." Click="MatchStoredNames_Click" Margin="8,0,0,0"
+                            ToolTip="Reviews exact stored evidence labels and their target coverage for the selected draft family. Select a family in an open project to enable it; confirmed choices stay in the draft until Apply panel."/>
+                </WrapPanel>
                 <TextBlock Grid.Row="3" Text="Map spreadsheet decisions" Style="{StaticResource SectionTitle}" Margin="0,10,0,4"/>
-                <DataGrid x:Name="MappingGrid" Grid.Row="4" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                <DataGrid x:Name="MappingGrid" Grid.Row="4" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ToolTip="Maps every distinct spreadsheet decision to a panel action and, for a merge, a target key. Preview panel builds a draft from these choices without applying it to the project.">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Source decision" Binding="{Binding Source}" IsReadOnly="True" Width="*"/>
-                        <DataGridComboBoxColumn x:Name="MappingDecisionColumn" Header="Decision" SelectedValueBinding="{Binding Decision}" DisplayMemberPath="Label" SelectedValuePath="Value" Width="180"/>
-                        <DataGridTextColumn Header="Merge target key" Binding="{Binding MergeTarget, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                        <DataGridTextColumn Header="Source decision" Binding="{Binding Source}" IsReadOnly="True" Width="*" theme:TableAppearance.HeaderToolTip="Exact decision text read from the chosen spreadsheet column. This source value is read only and the workbook stays unchanged."/>
+                        <DataGridComboBoxColumn x:Name="MappingDecisionColumn" Header="Decision" SelectedValueBinding="{Binding Decision}" DisplayMemberPath="Label" SelectedValuePath="Value" Width="180" theme:TableAppearance.HeaderToolTip="Chooses how each source decision becomes Quantify, Report under others, Not a family or Merge into family. Map every value before Preview panel; the project stays unchanged until Apply panel."/>
+                        <DataGridTextColumn Header="Merge target key" Binding="{Binding MergeTarget, UpdateSourceTrigger=PropertyChanged}" Width="150" theme:TableAppearance.HeaderToolTip="Target key for a source decision mapped to Merge into family: default empty, otherwise use a different existing family key, with no unit. Preview panel validates the choices in a draft before Apply panel changes the project."/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button x:Name="ButtonPreviewPanel" Grid.Row="5" Content="Preview panel" Click="PreviewPanel_Click" HorizontalAlignment="Left" Margin="0,6,0,0"
-                        ToolTip="Build a draft from the selected columns and decision mappings."/>
+                        ToolTip="Builds a replacement draft from the chosen columns and mapped source decisions. Choose required columns and map every decision first; only Apply panel changes the project."/>
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
@@ -60,39 +89,57 @@
                     <Grid.ColumnDefinitions><ColumnDefinition Width="108"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                    <TextBlock Text="Sheet" VerticalAlignment="Center"/><ComboBox x:Name="SheetChoice" Grid.Column="1" Height="28" Margin="0,0,0,2" ToolTip="Choose the sheet containing the family table."/>
+                    <TextBlock Text="Sheet" VerticalAlignment="Center"/><ComboBox x:Name="SheetChoice" Grid.Column="1" Height="28" Margin="0,0,0,2" ToolTip="Chooses the workbook sheet to read; the first sheet is selected initially and any listed sheet is allowed. Preview columns reads it without changing the workbook or project."/>
                     <TextBlock Grid.Row="1" Text="Header row" VerticalAlignment="Center"/>
-                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal"><TextBox x:Name="HeaderRow" Text="1" Width="42" Height="28" Margin="0,0,5,2" ToolTip="The row number containing the column names."/><Button Content="Preview columns" Height="28" Click="PreviewColumns_Click" ToolTip="Read the chosen sheet and header row."/></StackPanel>
-                    <TextBlock Grid.Row="2" Text="Family key" VerticalAlignment="Center"/><ComboBox x:Name="KeyColumn" Grid.Row="2" Grid.Column="1" Height="28" Margin="0,0,0,2"/>
-                    <TextBlock Grid.Row="3" Text="Family name" VerticalAlignment="Center"/><ComboBox x:Name="NameColumn" Grid.Row="3" Grid.Column="1" Height="28" Margin="0,0,0,2"/>
-                    <TextBlock Grid.Row="4" Text="Decision" VerticalAlignment="Center"/><ComboBox x:Name="SourceDecisionColumn" Grid.Row="4" Grid.Column="1" Height="28" Margin="0,0,0,2" SelectionChanged="SourceDecisionColumn_SelectionChanged"/>
-                    <TextBlock Grid.Row="5" Text="Pfam (optional)" VerticalAlignment="Center"/><ComboBox x:Name="PfamColumn" Grid.Row="5" Grid.Column="1" Height="28" Margin="0,0,0,2"/>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal"><TextBox x:Name="HeaderRow" Text="1" Width="42" Height="28" Margin="0,0,5,2" ToolTip="Row containing column names, counted from 1 as in Excel: default 1, whole numbers from 1 to 2147483647 within the sheet. Changing this row number only prepares Preview columns."/><Button Content="Preview columns" Height="28" Click="PreviewColumns_Click" ToolTip="Reads column names and rows from the selected sheet at the chosen header row. The workbook and project stay unchanged."/></StackPanel>
+                    <TextBlock Grid.Row="2" Text="Family key" VerticalAlignment="Center"/><ComboBox x:Name="KeyColumn" Grid.Row="2" Grid.Column="1" Height="28" Margin="0,0,0,2" ToolTip="Selects the column containing a unique key for each family; default unselected, choose any listed header. Used by Preview panel without changing the workbook or project."/>
+                    <TextBlock Grid.Row="3" Text="Family name" VerticalAlignment="Center"/><ComboBox x:Name="NameColumn" Grid.Row="3" Grid.Column="1" Height="28" Margin="0,0,0,2" ToolTip="Selects the column containing each family's display name; default unselected, choose any listed header. Used by Preview panel without changing the workbook or project."/>
+                    <TextBlock Grid.Row="4" Text="Decision" VerticalAlignment="Center"/><ComboBox x:Name="SourceDecisionColumn" Grid.Row="4" Grid.Column="1" Height="28" Margin="0,0,0,2" SelectionChanged="SourceDecisionColumn_SelectionChanged" ToolTip="Selects the column whose distinct decision values you will map; default unselected, choose any listed header. Changing it clears the draft decision mappings without changing the project."/>
+                    <TextBlock Grid.Row="5" Text="Pfam (optional)" VerticalAlignment="Center"/><ComboBox x:Name="PfamColumn" Grid.Row="5" Grid.Column="1" Height="28" Margin="0,0,0,2" ToolTip="Selects an optional column of Pfam accessions; default unselected, choose a listed header or leave empty to omit domains. Used by Preview panel without changing the workbook or project."/>
                 </Grid>
                 <Grid Grid.Row="3" Margin="0,12,0,0">
                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
                     <DockPanel LastChildFill="False">
                         <TextBlock Text="Pfam check" Style="{StaticResource SectionTitle}" VerticalAlignment="Center"/>
                         <Button x:Name="ButtonCheckPfam" Content="Check Pfam" Click="CheckPfam_Click" Margin="12,0,0,0" Height="28"
-                                ToolTip="Check the panel's accessions and names against the provider without changing the panel."/>
+                                ToolTip="Compares the draft's Pfam accessions and supplied names with InterPro and lists the differences. Requires internet and a valid draft; neither panel nor workbook is changed."/>
                     </DockPanel>
                     <TextBlock x:Name="PfamStatus" Grid.Row="1" Text="Not checked." TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" Margin="0,4,0,4"/>
-                    <DataGrid x:Name="PfamGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ToolTip="{Binding SelectedItem.Reason, RelativeSource={RelativeSource Self}}">
+                    <DataGrid x:Name="PfamGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ToolTip="Lists Pfam matches, name mismatches, missing entries and checks that could not be completed. These results are read only and do not correct the panel.">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Family" Binding="{Binding Family}" Width="*"/>
-                            <DataGridTextColumn Header="Pfam" Binding="{Binding Accession}" Width="80"/>
-                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="110"/>
-                            <DataGridTextColumn Header="Details" Binding="{Binding Reason}" Width="180"/>
+                            <DataGridTextColumn Header="Family" Binding="{Binding Family}" Width="*" theme:TableAppearance.HeaderToolTip="Key of the draft family whose Pfam accession was checked. Read only; it does not change family assignments."/>
+                            <DataGridTextColumn Header="Pfam" Binding="{Binding Accession}" Width="80" theme:TableAppearance.HeaderToolTip="Pfam accession checked for this draft family. Read only; a missing or failed lookup does not remove the accession."/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="110" theme:TableAppearance.HeaderToolTip="Whether the provider matched the accession and supplied name, found a difference or could not complete the check. Read only; the panel stays unchanged."/>
+                            <DataGridTextColumn Header="Details" Binding="{Binding Reason}" Width="180" theme:TableAppearance.HeaderToolTip="Explains the Pfam check result and gives the provider name when available. Read only; the panel stays unchanged."/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </Grid>
         </Grid>
+        </TabItem>
+        <TabItem x:Name="SourceNotesTab" Header="Source notes" Visibility="{Binding HasSourceNotes, Converter={StaticResource SourceNotesVisibility}}"
+                 ToolTip="Shows the source sheets accepted with this panel, including their cell addresses and original text. The notes are read only and do not define families or measured quantities.">
+            <TabControl x:Name="SourceNotesTabs" ItemsSource="{Binding SourceNotes}" Margin="0,8,0,0"
+                        ToolTip="Select a source sheet to read its saved text. This view does not change the notes, families or workbook.">
+                <TabControl.ItemTemplate>
+                    <DataTemplate><TextBlock Text="{Binding SheetName}" ToolTip="{Binding SheetName}"/></DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <TextBox Text="{Binding Text, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                                 ToolTip="Original source text with cell addresses and line breaks, saved with the panel. You can select and copy it; this view cannot edit it."/>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </TabItem>
+        </TabControl>
         <TextBlock x:Name="StatusText" Grid.Row="3" TextWrapping="Wrap" Margin="0,10,0,0" Style="{StaticResource CaptionText}"/>
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
-            <Button Content="Help" Click="Help_Click" Margin="0,0,8,0"/>
-            <Button Content="Cancel" IsCancel="True" Margin="0,0,8,0"/>
+            <Button Content="Help" Click="Help_Click" Margin="0,0,8,0" ToolTip="Explains panel keys, decisions, domain checks and applying a draft. This read-only Help changes nothing in the draft or project."/>
+            <Button Content="Cancel" IsCancel="True" Margin="0,0,8,0" ToolTip="Closes the editor and discards unapplied draft edits. Any spreadsheet already exported stays on disk."/>
             <Button x:Name="ApplyButton" Content="Apply panel" Style="{DynamicResource PrimaryButton}" Click="Apply_Click"
-                    ToolTip="Validate and save this panel in the open project. Undo restores the previous panel."/>
+                    ToolTip="Validates and replaces the panel in the open project with this draft; File &gt; Save keeps it on disk. Undo restores the previous panel, and changed rules can require a new grouping review."/>
         </StackPanel>
     </Grid>
 </Window>

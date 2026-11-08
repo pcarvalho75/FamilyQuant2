@@ -1,0 +1,48 @@
+<Window x:Class="FamilyQuant.PanelEvidenceMatchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:theme="clr-namespace:FamilyQuant.Themes"
+        xmlns:local="clr-namespace:FamilyQuant"
+        Title="Match panel family to stored evidence" Width="1180" Height="680" MinWidth="940" MinHeight="560"
+        WindowStartupLocation="CenterOwner" Background="{DynamicResource CanvasBrush}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <TextBlock Text="{Binding Heading}" Style="{StaticResource PageTitle}" TextTrimming="CharacterEllipsis"/>
+        <TextBlock Grid.Row="1" Text="{Binding NamesText}" ToolTip="{Binding NamesText}" TextTrimming="CharacterEllipsis" Margin="0,6,0,6" Foreground="{DynamicResource MutedBrush}"/>
+        <DockPanel Grid.Row="2" Margin="0,0,0,10" LastChildFill="False">
+            <TextBlock Text="{Binding FamilyMatchStatus}" VerticalAlignment="Center"/>
+            <CheckBox x:Name="ShowMoreMatchLabels" Content="Show more" IsChecked="{Binding ShowMore}" Margin="18,0,0,0"
+                      ToolTip="Show additional stored labels, including broadly shared keywords and tissue phrases. Your selected labels stay visible when this is off."/>
+        </DockPanel>
+        <DataGrid x:Name="MatchLabelsGrid" Grid.Row="3" ItemsSource="{Binding VisibleRows}" AutoGenerateColumns="False"
+                  CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" SelectionMode="Single" ToolTip="Edits exact evidence labels to confirm for this panel family, with per-label counts from stored evidence. Confirm matches returns the choices to panel review; it does not assign proteins.">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="Use" Binding="{Binding Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="45" theme:TableAppearance.HeaderToolTip="Includes this exact label in the confirmed candidate matches when ticked; new suggestions start unticked. Choices remain in panel review until its changes are applied.">
+                    <DataGridCheckBoxColumn.CellStyle><Style TargetType="DataGridCell"><Setter Property="ToolTip" Value="Includes this exact label when you confirm matches; new suggestions start unticked. This choice stays in panel review until its changes are applied."/></Style></DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridComboBoxColumn Header="Type" ItemsSource="{x:Static local:PanelEvidenceMatchViewModel.KindOptions}" DisplayMemberPath="Name" SelectedValuePath="Kind"
+                                        SelectedValueBinding="{Binding Kind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="140" theme:TableAppearance.HeaderToolTip="Selects the stored evidence field: UniProt family, Keyword, Tissue phrase or Pfam; added rows default to UniProt family. Changing the field refreshes the displayed counts and leaves project assignments unchanged.">
+                    <DataGridComboBoxColumn.CellStyle><Style TargetType="DataGridCell"><Setter Property="ToolTip" Value="Chooses UniProt family, Keyword, Tissue phrase or Pfam as the evidence field; added rows default to UniProt family. Counts refresh for the new field without changing project assignments."/></Style></DataGridComboBoxColumn.CellStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn Header="Evidence label" Binding="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" theme:TableAppearance.HeaderToolTip="Exact stored label or Pfam accession to match: added rows start empty and selected rows require nonempty text, with no unit or fixed length limit. Editing refreshes counts but leaves project assignments unchanged.">
+                    <DataGridTextColumn.CellStyle><Style TargetType="DataGridCell"><Setter Property="ToolTip" Value="Exact stored label or Pfam accession: added rows start empty, and selected rows need nonempty text with no unit or fixed length limit. Editing refreshes counts without changing project assignments."/></Style></DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Pfam name" Binding="{Binding Name}" IsReadOnly="True" Width="150" theme:TableAppearance.HeaderToolTip="Pfam name supplied in your family list or recorded in stored evidence for this accession. Read only; it does not rename the family."/>
+                <DataGridTextColumn Header="Targets" Binding="{Binding Targets, StringFormat=N0}" IsReadOnly="True" Width="75" theme:TableAppearance.HeaderToolTip="Database target proteins whose stored evidence exactly matches this label, excluding labelled contaminants. Counts are per label and may overlap; they are not abundance and should not be added together."/>
+                <DataGridTextColumn Header="Reviewed" Binding="{Binding Reviewed, StringFormat=N0}" IsReadOnly="True" Width="80" theme:TableAppearance.HeaderToolTip="Matching database targets marked reviewed in the stored UniProt evidence, included within Targets. Read only; this count is not independent validation of the match."/>
+                <DataGridTextColumn Header="Stored refs" Binding="{Binding References, StringFormat=N0}" IsReadOnly="True" Width="85" theme:TableAppearance.HeaderToolTip="Matching entries in the stored reviewed reference panel, using available entries if it is incomplete. Read only; this count is separate from database Targets and is not abundance."/>
+                <DataGridTextColumn Header="Why suggested" Binding="{Binding Reason}" IsReadOnly="True" Width="*" MinWidth="180" theme:TableAppearance.HeaderToolTip="Explains why this label was suggested or how an edited label matches stored evidence. Suggestions do not become confirmed choices until you select and confirm them.">
+                    <DataGridTextColumn.CellStyle><Style TargetType="DataGridCell"><Setter Property="ToolTip" Value="{Binding Reason}"/></Style></DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock x:Name="MatchSelectionSummary" Grid.Row="4" Text="{Binding Summary}" TextWrapping="Wrap" Margin="0,10,0,10"/>
+        <DockPanel Grid.Row="5" LastChildFill="False">
+            <Button x:Name="AddMatchLabelButton" Content="Add label" Click="AddLabel_Click" DockPanel.Dock="Left"
+                    ToolTip="Adds a selected blank UniProt family label for you to edit, with counts refreshed from stored evidence. This changes only the matching draft."/>
+            <Button x:Name="ConfirmMatchLabelsButton" Content="Confirm matches" Click="Confirm_Click" IsEnabled="{Binding CanConfirm}" IsDefault="True" DockPanel.Dock="Right"
+                    ToolTip="{Binding ConfirmHint, FallbackValue='Returns selected valid labels to panel review; applying that review publishes them. Fill in or untick empty labels to enable confirmation; if evidence changed, close and reopen the matches.'}" Margin="8,0,0,0" Style="{DynamicResource PrimaryButton}"/>
+            <Button Content="Cancel" IsCancel="True" DockPanel.Dock="Right" ToolTip="Closes this matching draft without returning any edited choices to panel review. The project stays unchanged."/>
+        </DockPanel>
+    </Grid>
+</Window>

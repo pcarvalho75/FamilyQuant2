@@ -70,7 +70,7 @@ public partial class MainWindow
                 RequireSameProject();
                 operation.Context.Report("report-attribution", "Family attribution ready", 1, 1);
                 operation.Context.Report("report-snapshot", "Capturing the project and stored Results", 0, 1);
-                var captured = await Task.Run(() => (File: FamilyClusterFile.FromJsonText(curation.ToJsonText()), Rows: rows.ToArray()));
+                var captured = await Task.Run(() => (File: curation.DeepCopy(operation.Context), Rows: rows.ToArray()), operation.Context.CancellationToken);
                 snapshot = captured.File; capturedRows = captured.Rows;
                 operation.Context.Report("report-snapshot", "Project and stored Results captured", 1, 1);
                 RequireSameProject();
@@ -167,6 +167,15 @@ public partial class MainWindow
             keepPublicationStage = exception is ReportPublicationRecoveryException;
             string guidance = exception is IOException or UnauthorizedAccessException
                 ? " Check that the destination is writable and that the report is closed in other applications." : "";
+            if (exception is InvalidOperationException && (exception.Message.EndsWith(FamilyStudyMembership.ChangedMessage, StringComparison.Ordinal)
+                || exception.Message.EndsWith(FamilyStudyMembership.UnverifiedMessage, StringComparison.Ordinal))
+                && exception.Message == FamilyStudyMembership.Problem(curation, manifest))
+            {
+                bool sensitivity = manifest.FamilySensitivity != null && exception.Message == FamilyStudyMembership.Problem(curation,
+                    new QuantManifest { FamilySensitivity = manifest.FamilySensitivity });
+                guidance = sensitivity ? " Open Results > Sensitivity and choose Calculate, then choose Export report."
+                    : " Open Quantify. Run Quantify again to refresh them, then choose Export report.";
+            }
             ShellMessages.Report(this, "The report could not be exported. " + exception.Message + guidance, "Export report", image: MessageBoxImage.Error);
             return false;
         }

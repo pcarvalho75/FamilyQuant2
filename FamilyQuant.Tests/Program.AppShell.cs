@@ -48,9 +48,12 @@ namespace FamilyQuant.Tests
             Check("the resource namespace stays compatible after the project rename",
                 typeof(USearchTools).Assembly.GetManifestResourceNames()
                     .Contains("FamilyQuant.MyResources.resources"));
-            Check("the 2.x local data folder stays separate from 1.x",
-                ApplicationPaths.LocalDataDirectory == Path.Combine(
+            Check("the product's 2.x local data folder stays separate from 1.x",
+                WithProductDataPath(() => ApplicationPaths.LocalDataDirectory) == Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FamilyQuant2"));
+            Check("the active data folder respects the process test isolation override",
+                ApplicationPaths.LocalDataDirectory == (ApplicationPaths.LocalDataDirectoryOverride ?? Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FamilyQuant2")));
             Check("2.x isolates USEARCH scratch files from 1.x",
                 ApplicationPaths.ScratchDirectory == Path.Combine(Path.GetTempPath(), "FamilyQuant2"));
 
@@ -106,8 +109,8 @@ namespace FamilyQuant.Tests
 
         private static void DeploymentIdentityTests()
         {
-            Check("the prepared application assembly is version 2.1.10.0",
-                typeof(AppVersionInfo).Assembly.GetName().Version == new Version(2, 1, 10, 0));
+            Check("the prepared application assembly is version 2.1.11.0",
+                typeof(AppVersionInfo).Assembly.GetName().Version == new Version(2, 1, 11, 0));
 
             DirectoryInfo? root = new DirectoryInfo(AppContext.BaseDirectory);
             while (root != null && !File.Exists(Path.Combine(root.FullName, "FamilyQuant2.sln")))
@@ -125,15 +128,15 @@ namespace FamilyQuant.Tests
 
             Check("assembly and file versions match the prepared deployment version",
                 new[] { "Version", "AssemblyVersion", "FileVersion" }
-                    .All(name => Property(project, name) == "2.1.10.0") &&
-                Property(project, "Title") == "FamilyQuant 2.1.10" &&
-                Property(profile, "ApplicationVersion") == "2.1.10.0" &&
+                    .All(name => Property(project, name) == "2.1.11.0") &&
+                Property(project, "Title") == "FamilyQuant 2.1.11" &&
+                Property(profile, "ApplicationVersion") == "2.1.11.0" &&
                 Property(profile, "ApplicationRevision") == "0");
             const string install = "http://patternlabforproteomics.org/familyquant2/";
             Check("2.x installs and updates from its separate address",
                 Property(profile, "InstallUrl") == install && Property(profile, "UpdateUrl") == install);
             Check("the installed product has its own Start menu identity",
-                Property(profile, "ProductName") == "FamilyQuant 2.1.10");
+                Property(profile, "ProductName") == "FamilyQuant 2.1.11");
             string packaging = File.ReadAllText(Path.Combine(root.FullName, "tools", "packaging", "Test-ReleaseSetup.ps1"));
             var packagingVersion = System.Text.RegularExpressions.Regex.Match(packaging,
                 @"\[Version\]\$ExpectedVersion\s*=\s*\[Version\]'([^']+)'");
@@ -378,8 +381,18 @@ namespace FamilyQuant.Tests
                 && ThemeManager.Resolve(AppTheme.System, false) == AppTheme.Dark
                 && ThemeManager.Resolve(AppTheme.Light, false) == AppTheme.Light
                 && ThemeManager.Resolve(AppTheme.Dark, true) == AppTheme.Dark);
-            Check("appearance settings belong to the separate 2.0 profile",
-                Path.GetFileName(Path.GetDirectoryName(ThemeSettings.DefaultPath)) == ApplicationPaths.DataFolderName);
+            Check("product appearance settings belong to the separate 2.0 profile",
+                Path.GetFileName(Path.GetDirectoryName(WithProductDataPath(() => ThemeSettings.DefaultPath))) == ApplicationPaths.DataFolderName);
+            Check("active appearance settings stay in the isolated data folder",
+                Path.GetDirectoryName(ThemeSettings.DefaultPath) == ApplicationPaths.LocalDataDirectory);
+        }
+
+        // Inspect pure path getters only: no file access, dispatcher pumping or asynchronous work.
+        private static string WithProductDataPath(Func<string> read)
+        {
+            string? isolated = ApplicationPaths.LocalDataDirectoryOverride;
+            try { ApplicationPaths.LocalDataDirectoryOverride = null; return read(); }
+            finally { ApplicationPaths.LocalDataDirectoryOverride = isolated; }
         }
 
         private static void LegacySurfaceContrastTests()

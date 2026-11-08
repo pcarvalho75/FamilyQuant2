@@ -1,7 +1,7 @@
 # FamilyQuant working guide
 
 FamilyQuant 2.0 is a Windows/.NET 10 WPF program for protein-family clustering and quantitation.
-It installs beside frozen 1.5, opens its files and retains an old-compatible `.fcf` export.
+It installs beside older builds and opens their files; new `.fcf` exports use curation format 2 (D80).
 [ROADMAP.md](docs/ROADMAP.md) owns unfinished work; [INDEX.md](docs/INDEX.md) catalogs commands.
 The complete previous guide, measurements and implementation notes are in
 [HISTORY.md](docs/HISTORY.md). Historical counts are not current validation.

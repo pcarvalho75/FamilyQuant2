@@ -50,7 +50,8 @@ namespace FamilyQuant.Evidence
                 return null;
             }
             List<FastaItemExtended> queries = NearestReviewed.Targets(file).Where(p => !string.IsNullOrEmpty(p.Sequence)).ToList();
-            List<NeighbourReference> current = NearestReviewed.References(file);
+            List<NeighbourReference> current = file.EvidenceSource?.ReferencePanel?.Coverage == null ? NearestReviewed.References(file)
+                : NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms), options.ScopeTerms);
             List<NeighbourReference>? panel = allowPanelReferences ? PanelEvidenceClassifier.References(file, options) : null;
             List<NeighbourReference>? references = suppliedReferences?.ToList();
             if (references == null)
@@ -58,8 +59,8 @@ namespace FamilyQuant.Evidence
                 var candidates = new List<List<NeighbourReference>>
                 {
                     current,
-                    NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms)),
-                    NearestReviewed.References(file, e => e.FamilyAnnotation.Length > 0 && EvidenceClassifier.IsInScope(e, options.ScopeTerms)),
+                    NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms), options.ScopeTerms),
+                    NearestReviewed.References(file, e => e.FamilyAnnotation.Length > 0 && EvidenceClassifier.IsInScope(e, options.ScopeTerms), options.ScopeTerms),
                 };
                 if (panel != null) candidates.Add(panel);
                 references = candidates.FirstOrDefault(r => NearestReviewed.IsCurrent(search, queries, r, allowLegacyCoverage: allowLegacyCoverage));
@@ -123,7 +124,7 @@ namespace FamilyQuant.Evidence
         private static EvidenceProvenance? SessionSource(FamilyClusterFile file, NeighbourSearch? search)
         {
             if (search == null) return file.EvidenceSource;
-            EvidenceProvenance source = file.EvidenceSource == null ? new EvidenceProvenance() : Clone(file.EvidenceSource);
+            EvidenceProvenance source = file.EvidenceSource == null ? new EvidenceProvenance() : ProvenanceView(file.EvidenceSource);
             source.NearestReviewed = Clone(search);
             return source;
         }

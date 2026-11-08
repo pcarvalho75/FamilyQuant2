@@ -95,6 +95,7 @@ public static class FamilyPanelTemplate
         result.Name = At(familyRows[0], 2);
         var familyIds = new HashSet<string>(StringComparer.Ordinal);
         result.Families = new List<FamilyPanelFamily>();
+        var retainedMatchKeys = new Dictionary<string, string>(StringComparer.Ordinal);
         foreach (var row in familyRows.Skip(2).Where(HasContent))
         {
             if (row.Skip(FamilyHeaders.Length + fields.Count).Any(x => x.Length > 0)) throw new InvalidDataException("A family value has no column header.");
@@ -103,6 +104,7 @@ public static class FamilyPanelTemplate
             int index = ParseFamilyId(id, original.Families.Count);
             var f = index >= 0 ? FamilyPanelValidation.Clone(new FamilyPanel { Families = new() { original.Families[index] } }).Families[0] : new FamilyPanelFamily();
             f.Key = At(row, 1); f.DisplayName = At(row, 2); f.Decision = ParseDecision(At(row, 3)); f.MergeTargetFamilyKey = At(row, 4);
+            if (index >= 0) retainedMatchKeys[original.Families[index].Key] = f.Key;
             string domainText = At(row, 5);
             if (domainText != Join(f.Pfam.Select(d => d.Accession)))
             {
@@ -132,6 +134,7 @@ public static class FamilyPanelTemplate
             s.ReportAsSubclassKey = At(row, 7);
             family.Subclasses.Add(s);
         }
+        result = Evidence.PanelEvidenceMatching.RekeyConfirmedMatches(original, result, retainedMatchKeys);
         FamilyPanelValidation.Validate(result);
         return result;
     }

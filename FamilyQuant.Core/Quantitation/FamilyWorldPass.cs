@@ -164,7 +164,7 @@ namespace FamilyQuant
         public static List<FamilyWorldProtein> Collect(FamilyClusterFile file)
         {
             if (file == null) throw new ArgumentNullException(nameof(file));
-            ReferencePanelFetcher.RequireComplete(file.EvidenceSource?.ReferencePanel);
+            ReferencePanelFetcher.RequireFull(file.EvidenceSource?.ReferencePanel);
             var proteins = new List<FamilyWorldProtein>();
             var accessions = new HashSet<string>(StringComparer.Ordinal);
             foreach (FastaItemExtended item in file.MyExtendedFastaItems ?? new List<FastaItemExtended>())

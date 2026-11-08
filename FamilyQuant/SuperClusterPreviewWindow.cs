@@ -25,10 +25,21 @@ namespace FamilyQuant
             string initialScope = "", bool evidenceMode = false,
             Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask = null,
             Func<IReadOnlyList<PanelFamilyLinkSelection>, EvidenceReviewInput>? confirmPanelLinks = null,
-            Func<IProgress<FetchProgress>?, CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTaskWithProgress = null)
+            Func<IProgress<FetchProgress>?, CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTaskWithProgress = null,
+            Func<string, string, CancellationToken, Task<EvidenceScopePreview>>? previewScope = null,
+            Func<EvidenceManualRequest, EvidenceReviewInput>? addToFamily = null,
+            Func<IReadOnlyList<int>, EvidenceReviewInput>? removeFromFamily = null,
+            Func<IReadOnlyList<EvidenceManualChoice>, EvidenceReviewInput>? updateManualChoices = null,
+            Func<string, PanelEvidenceMatchContext>? createMatchContext = null,
+            Func<string, Panels.PanelConfirmedEvidenceMatches, EvidenceReviewInput>? confirmPanelMatches = null,
+            Func<string, FamilyQuant.Operations.OperationContext, Task>? fetchMissingPanel = null, Func<string, string>? panelCoverage = null, Func<string, bool>? panelCovered = null,
+            Func<string>? fullPanelRequirement = null,
+            Func<string, EvidenceReviewInput>? unlockEvidenceFamilies = null)
         {
             InitializeComponent();
-            model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask, confirmPanelLinks, discoverTaskWithProgress);
+            this.createMatchContext = createMatchContext;
+            model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask, confirmPanelLinks, discoverTaskWithProgress,
+                previewScope, addToFamily, removeFromFamily, updateManualChoices, confirmPanelMatches, fetchMissingPanel, panelCoverage, panelCovered, fullPanelRequirement, unlockEvidenceFamilies);
             Loaded += async (_, _) => await DiscoverInitialTaskAsync();
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
@@ -41,7 +52,13 @@ namespace FamilyQuant
             GridCopy.Attach(leftOutGrid, row => (row as ReviewLeftOutInput)?.Identifier, row => (row as ReviewLeftOutInput)?.Description);
             GridCopy.Attach(unassignedGrid, row => (row as ReviewProteinRow)?.Identifier, row => (row as ReviewProteinRow)?.Description);
             InstallKeywordHeaders();
+            model.PropertyChanged += (_, args) =>
+            {
+                if (args.PropertyName is nameof(GroupingReviewViewModel.CanConfirm) or nameof(GroupingReviewViewModel.ApplyHint))
+                    UpdateApplyToolTip();
+            };
             model.Keyword.Refresh();
+            UpdateApplyToolTip();
         }
         private async Task DiscoverInitialTaskAsync()
         {
@@ -84,29 +101,46 @@ namespace FamilyQuant
             Confirmed = true; Close();
         }
         private void Cancel_Click(object sender, RoutedEventArgs e) { Confirmed = false; Close(); }
+        private void UpdateApplyToolTip()
+        {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.DataBind, new Action(UpdateApplyToolTip));
+                return;
+            }
+            if (!model.CanConfirm && !model.IsBusy && model.ModeIndex == 0)
+            {
+                createButton.ToolTip = model.Keyword.Headline;
+                return;
+            }
+            string next = model.IsBusy ? "Wait for the current review operation to finish"
+                : model.ApplyHint.TrimEnd('.');
+            createButton.ToolTip = model.CanConfirm
+                ? "Commit the reviewed ticks, family names and splits as one project grouping change. Undo restores the preceding grouping, and Save writes the project to disk."
+                : "Apply grouping is unavailable: " + next + ". The project stays unchanged until Apply grouping, after which Undo restores the preceding grouping and Save writes it to disk.";
+        }
         private void Help_Click(object sender, RoutedEventArgs e)
         {
-            var help = TextReportWindow.Create("Grouping review help", GroupingReviewHelp.Text
-                + "\n\n" + EvidenceHelp.Build(panelMode: model.Evidence?.HasPanelRules == true)
+            var help = TextReportWindow.Create("Grouping review help", GroupingReviewHelp.ForMode(model.ModeIndex == 1, model.Evidence?.HasPanelRules == true)
                 + (model.Evidence == null ? "" : "\n\nCurrent proposal\n" + model.Evidence.Source.RuleSummary), true);
             help.Owner = this; help.WindowStartupLocation = WindowStartupLocation.CenterOwner; help.Show();
         }
         private void InstallKeywordHeaders()
         {
             string[] facts = {
-                "Untick to keep this protein in its family; the rest of the family still joins.",
-                "The protein identifier as in the database.", "The description exactly as in the database, OS= and all.",
-                "The Pfam domains from UniProt. Empty when there are none yet or the protein is too short for Pfam.",
-                "Whether this protein carries a keyword itself, in the description before OS=.",
-                "The number of the family this protein belongs to now.",
-                "How many proteins of its family carry a keyword: 2 of 11 means the family is here because of those 2."
+                "Whether this protein is selected to join the keyword grouping on Apply grouping. Unticking keeps its current family, and Undo restores an applied grouping.",
+                "Protein identifier exactly as retained from the database, including its prefixes.",
+                "Original database description, including OS= text. Keyword matching reads only the description before OS=.",
+                "Stored UniProt Pfam calls for this protein. An empty cell is a missing call, not proof that a domain is absent.",
+                "Whether this protein's description before OS= carries the required entered keyword or phrase under the chosen all/any rule.",
+                "Unchanged document family number before Apply grouping. Reviewing or unticking a protein does not change that family.",
+                "Number of keyword-carrying proteins over the total proteins in this current family. The fraction explains why a family is offered even when this protein carries no keyword."
             };
             for (int i = 0; i < grid.Columns.Count; i++)
             {
                 var style = new Style(typeof(System.Windows.Controls.Primitives.DataGridColumnHeader),
                     Application.Current.TryFindResource(typeof(System.Windows.Controls.Primitives.DataGridColumnHeader)) as Style);
                 style.Setters.Add(new Setter(FrameworkElement.ToolTipProperty, facts[i]));
-                style.Setters.Add(new Setter(ToolTipService.ShowDurationProperty, 60000));
                 grid.Columns[i].HeaderStyle = style;
             }
         }

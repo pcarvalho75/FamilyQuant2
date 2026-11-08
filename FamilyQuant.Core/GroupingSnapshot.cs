@@ -85,8 +85,10 @@ namespace FamilyQuant
         /// </summary>
         public void Restore(FamilyClusterFile fcf)
         {
+            if (RestoreFamilyPanel(fcf)) return;
             if (RestoreReportDetails(fcf)) return;
             if (RestoreEvidence(fcf)) return;
+            RestoreEvidenceIdentityUnlock(fcf);
             foreach (var item in fcf.MyExtendedFastaItems)
             {
                 if (ids.TryGetValue(item.SequenceIdentifier, out var snap))

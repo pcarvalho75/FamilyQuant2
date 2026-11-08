@@ -4,7 +4,7 @@ namespace FamilyQuant.Panels;
 
 /// <summary>User data defining the families to measure and the text to print. Keys are user supplied,
 /// stable and case sensitive; names and source decision labels never act as automatic rules.</summary>
-public sealed class FamilyPanel
+public sealed partial class FamilyPanel
 {
     public string Name { get; set; } = string.Empty;
     public List<FamilyPanelFamily> Families { get; set; } = new();
@@ -68,7 +68,7 @@ public sealed class FamilyPanelDecisionMapping
 
 /// <summary>Replay information for a user-confirmed import. ColumnHeaders maps importer field keys
 /// to the user's actual headers. FamilySheet and the other sheet names are user data.</summary>
-public sealed class FamilyPanelImport
+public sealed partial class FamilyPanelImport
 {
     public string SourceName { get; set; } = string.Empty;
     public string SourceSha256 { get; set; } = string.Empty;

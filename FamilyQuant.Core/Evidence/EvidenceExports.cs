@@ -20,6 +20,19 @@ namespace FamilyQuant.Evidence
             "Domains (Pfam)", "Length (aa)", "Cysteines", "Reviewed", "Fragment", "Annotated in scope", "UniProt family",
         };
 
+        /// <summary>The report bundle's name for <see cref="BuildAuditCsv"/>.</summary>
+        public const string ReportAuditFile = "evidence_audit.csv";
+
+        /// <summary>The evidence exports a report bundle carries: the audit of the applied grouping, one row per
+        /// protein placed with its reason (an "Added by hand" reason carries the user's note), when a recipe
+        /// placed any protein; nothing otherwise.</summary>
+        public static IReadOnlyList<(string File, string Csv)> ReportFiles(FamilyClusterFile file)
+        {
+            ArgumentNullException.ThrowIfNull(file);
+            return file.EvidenceRecipe?.Assignments.Count > 0
+                ? new[] { (ReportAuditFile, BuildAuditCsv(file)) } : Array.Empty<(string, string)>();
+        }
+
         /// <summary>The proteins the stored recipe placed, by family number and then locus; empty with no recipe.</summary>
         public static string BuildAuditCsv(FamilyClusterFile file)
         {

@@ -94,7 +94,7 @@ internal static partial class Program
         var problems = validation.FatalProblems.Concat(validation.Entries.Values.Where(entry => entry.Row.Proofs.Count > 0)
             .SelectMany(entry => entry.Problems)).ToArray();
         FeatureLedgerEvidence.WriteJson(Path.Combine(output, "candidate-validation.json"), new { valid = problems.Length == 0, problems });
-        if (problems.Length > 0) throw new InvalidDataException("Native MainWindow candidate failed validation: " + string.Join("; ", problems.Take(5)));
+        if (problems.Length > 0) throw new InvalidDataException("Native MainWindow candidate failed validation: " + LedgerDiagnostics.Capped(problems));
         Console.WriteLine("SH-main-routes: " + rows.Count(row => row.Proofs.Count > 0) + " supported; "
             + rows.Count(row => row.Proofs.Count == 0) + " remain unproven.");
         return 0;

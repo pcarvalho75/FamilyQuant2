@@ -179,7 +179,8 @@ namespace FamilyQuant.Tests
                 string.Join(",", loaded.LockedUserIds.OrderBy(i => i)));
 
             string legacy = Path.Combine(workDir, "legacy.fcf");
-            File.WriteAllText(legacy, File.ReadAllText(path).Replace("\"LockedUserIds\"", "\"SomethingElse\""));
+            File.WriteAllText(legacy, file.ToJsonText().Replace("\"LockedUserIds\"", "\"SomethingElse\""));
+            Check("the manual-edit migration fixture is a true format-1 file", CurationFormat.Detect(() => File.OpenRead(legacy)) == CurationFormat.Legacy);
 
             // A legacy file can only diverge UserID from USearchID by MANUAL editing (the old builds
             // overwrote both on every reclustering), so the divergence arrives locked: the curation
@@ -199,9 +200,9 @@ namespace FamilyQuant.Tests
             v108.MyExtendedFastaItems[0].UserID = 0;
             v108.MyExtendedFastaItems[1].UserID = 1;
             v108.MyExtendedFastaItems[2].UserID = 2;
-            v108.Save(reclustered);
             File.WriteAllText(reclustered,
-                File.ReadAllText(reclustered).Replace("\"LockedUserIds\"", "\"SomethingElse\""));
+                v108.ToJsonText().Replace("\"LockedUserIds\"", "\"SomethingElse\""));
+            Check("the reclustered migration fixture is a true format-1 file", CurationFormat.Detect(() => File.OpenRead(reclustered)) == CurationFormat.Legacy);
             Check("a legacy file that went through a reclustering gets NO inferred locks",
                 FamilyClusterFile.Load(reclustered).LockedUserIds.Count == 0,
                 FamilyClusterFile.Load(reclustered).LockedUserIds.Count.ToString());
@@ -209,8 +210,8 @@ namespace FamilyQuant.Tests
             string legacyClean = Path.Combine(workDir, "legacy_clean.fcf");
             var untouched = new FamilyClusterFile { ClusteringIdentity = 70, MyExtendedFastaItems = Venom() };
             untouched.MyExtendedFastaItems.ForEach(i => i.UserID = i.USearchID);
-            untouched.Save(legacyClean);
-            File.WriteAllText(legacyClean, File.ReadAllText(legacyClean).Replace("\"LockedUserIds\"", "\"SomethingElse\""));
+            File.WriteAllText(legacyClean, untouched.ToJsonText().Replace("\"LockedUserIds\"", "\"SomethingElse\""));
+            Check("the unedited migration fixture is a true format-1 file", CurationFormat.Detect(() => File.OpenRead(legacyClean)) == CurationFormat.Legacy);
             Check("a legacy file with no manual edits arrives with no locks",
                 FamilyClusterFile.Load(legacyClean).LockedUserIds.Count == 0);
 

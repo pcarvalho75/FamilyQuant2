@@ -579,7 +579,12 @@ namespace FamilyQuant
         private void ButtonUndo_Click(object sender, RoutedEventArgs e)
         {
             if (!ViewModel.CanUndo) return;
-            ViewModel.Undo();
+            try { ViewModel.Undo(); }
+            catch (Exception error) when (error is IOException or UnauthorizedAccessException)
+            {
+                SetCurationOperationStatus("Undo could not run because temporary storage could not be used, and nothing changed. Check its space and permissions, then try Undo again.");
+                return;
+            }
             if (CurrentPLP != null) RecalculateWithFeedback("The grouping was stepped back, but the family shares could not be recalculated");
             UpdateGUI();
         }
@@ -687,7 +692,10 @@ namespace FamilyQuant
                     var extraPositionFamilies = CheckBoxIncludeFamilyPositions.IsChecked == true
                         ? DataGridResultGrid.SelectedItems.OfType<FastaItemExtended>().Select(p => p.UserID).Distinct().ToArray()
                         : Array.Empty<int>();
-                    var outcome = await ViewModel.FetchEvidenceAsync(FetchDomainsHandlerOverride, operation, extraPositionFamilies, panelOnly);
+                    var choice = panelOnly ? ChooseReferencePanel(fcf) : null;
+                    if (panelOnly && choice == null) throw new OperationCanceledException();
+                    var outcome = await ViewModel.FetchEvidenceAsync(FetchDomainsHandlerOverride, operation, extraPositionFamilies, panelOnly,
+                        panelRequest: choice, selectPanel: panelOnly ? null : ChooseReferencePanel);
                     UpdateFilteredResults();
                     string title = panelOnly ? "Retry panel" : "Fetch evidence";
                     ShellMessages.Report(this, CurationViewModel.DescribeEvidenceFetch(outcome, panelOnly), title,
@@ -830,7 +838,8 @@ namespace FamilyQuant
         private void ShowGroupingCompletion(string message)
         {
             if (!lastRecalculationFailed)
-                ShowCurationOperationResult(message + (CurrentPLP == null ? "" : " Family shares were recalculated over the new grouping."));
+                ShowCurationOperationResult((fcf.FamilyPanel == null ? "" : "Run Quantify again before Export report. ")
+                    + message + (CurrentPLP == null ? "" : " Family shares were recalculated over the new grouping."));
         }
     }
 }

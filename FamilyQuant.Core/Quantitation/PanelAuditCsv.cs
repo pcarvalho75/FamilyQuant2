@@ -94,9 +94,7 @@ namespace FamilyQuant
                     {
                         string name = file.FamilyPanel!.Families.Single(f => f.Key == ownFamily).DisplayName;
                         if (string.IsNullOrWhiteSpace(name)) name = ownFamily;
-                        familyReason = "The protein's own source family maps to panel family " + name
-                            + ", but its keywords and tissue annotations do not match the user scope phrases: "
-                            + string.Join("; ", scope!.Select(term => "\"" + term + "\"")) + ". " + familyReason;
+                        familyReason = ExplainScopeExclusion(evidence, scope!, name, familyReason);
                     }
                 }
                 Append(FamilyNaming.Accession(item.SequenceIdentifier), ProteinNameFormatting.ForNewOutput(item.Description),
@@ -108,7 +106,19 @@ namespace FamilyQuant
             return csv.ToString();
         }
 
-        private static PanelFamilyAuditEvidence ToAuditEvidence(PanelProteinAssignment assignment)
+        public static string ExplainScopeExclusion(Evidence.ProteinEvidence? evidence, IReadOnlyList<string> scope,
+            string? mappedFamilyName, string reason)
+        {
+            if (EvidenceClassifier.IsInScope(evidence, scope)) return reason;
+            string prefix = mappedFamilyName == null ? "The protein's keywords and tissue annotations do not match the user scope phrases: "
+                : "The protein's own source family maps to panel family " + mappedFamilyName
+                    + ", but its keywords and tissue annotations do not match the user scope phrases: ";
+            return prefix + string.Join("; ", scope.Select(term => "\"" + term + "\"")) + ". " + reason;
+        }
+
+        /// <summary>The evidence of one panel assignment in words, as both the panel audit export and the report's
+        /// protein audit print it.</summary>
+        public static PanelFamilyAuditEvidence ToAuditEvidence(PanelProteinAssignment assignment)
         {
             var parts = new List<string>();
             bool Has(PanelAssignmentEvidenceKind kind) => (assignment.EvidenceKind & kind) != 0;
@@ -133,6 +143,7 @@ namespace FamilyQuant
                 parts.Add(architecture.Count == 0 ? "Domain architecture" : "Domain architecture: " + string.Join("; ", architecture));
             }
             if (Has(PanelAssignmentEvidenceKind.ConfirmedLink)) parts.Add("Confirmed panel link");
+            if (Has(PanelAssignmentEvidenceKind.AddedByHand)) parts.Add("Added by hand");
             string evidence = string.Join(" | ", parts);
             if (!assignment.IsApplied && evidence.Length > 0) evidence = "Considered, not applied: " + evidence;
             return new PanelFamilyAuditEvidence { ProteinIndex = assignment.ProteinIndex, Identifier = assignment.Identifier,

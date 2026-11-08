@@ -68,6 +68,8 @@ namespace FamilyQuant
             sb.AppendLine("5. " + WorkflowNames.DeNovoReview + " is optional: it inspects de novo calls beside PatternLab, and");
             sb.AppendLine("   Quantify does not need it.");
             sb.AppendLine();
+            sb.AppendLine(DatabaseUpdateHelp.Text);
+            sb.AppendLine();
             sb.AppendLine("The families and the quantitation you keep live in one FamilyQuant project file, a");
             sb.AppendLine(".fqproj, written by File > Save. Beyond the share above, Quantify measures each");
             sb.AppendLine("peptide's full isotope envelope straight from the RAW and stores it in that project,");
@@ -276,6 +278,7 @@ namespace FamilyQuant
             sb.AppendLine("before opening the review; Cancel leaves the project unchanged. If no reviewed accession");
             sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");
             sb.AppendLine("Cancelling leaves the open grouping unchanged and adds no Undo step.");
+            sb.AppendLine(EvidenceScopeHelp.Build());
             sb.AppendLine();
             sb.AppendLine("In Review grouping and the Curate families protein table, right-click to copy a UniProt code or");
             sb.AppendLine("description or to open its UniProt page. Ctrl+C copies the column you clicked, for");
@@ -514,6 +517,9 @@ namespace FamilyQuant
             sb.AppendLine("the same reported charge and a direct precursor m/z match within 20 ppm before");
             sb.AppendLine("comparing sequences. Reconcile applies the tolerance to the reported m/z values.");
             sb.AppendLine("Quantify's PatternLab-wins rule and cross-side suppression use isotope-aware matching.");
+            sb.AppendLine("The scan rule groups calls with the same run, scan and charge by reported precursor m/z.");
+            sb.AppendLine("Suppression requires the same run, canonical peptidoform and charge, then compares neutral precursor masses.");
+            sb.AppendLine("Both permit direct 20-ppm agreement or a one- or two-isotope selection correction.");
             sb.AppendLine("Each filtered row from the selected source receives one of five verdicts:");
             sb.AppendLine();
             sb.AppendLine("De novo only        nothing in the search shares that spectrum. This is new");

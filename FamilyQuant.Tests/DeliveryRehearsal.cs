@@ -108,7 +108,7 @@ internal static class DeliveryRehearsal
         + "family-panel.xlsx is the exact panel workbook recorded by that project. trace.csv records the report's numeric-token checks. "
         + "delivery-checks.json records file sizes and SHA-256 values. The .work folder retains the rehearsal's diagnostic files.\n\n"
         + "Open project.fqproj in FamilyQuant 2.1.0 using File > Open, then look at Results. "
-        + "Help > What do I do first? describes the full path. To change the panel, use File > Import family panel, review its columns and decisions, "
+        + "Help > What do I do first? describes the full path. To change the panel, use File > Import family list, review its columns and decisions, "
         + "and apply the panel. Review the evidence grouping and refresh computed Results when the program asks. "
         + "Use File > Export report to choose sections and figures, change Report threshold (%) if wanted, and write new Word, HTML and supplement files together. "
         + "File > Save keeps changed panel choices, report details and threshold.\n\n"

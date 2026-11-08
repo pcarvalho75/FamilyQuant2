@@ -7,12 +7,12 @@ namespace FamilyQuant;
 
 public partial class MainWindow
 {
-    private async void MenuItemFamilyPanel_Click(object sender, RoutedEventArgs e)
+    private async Task OpenFamilyPanelEditorAsync()
     {
         var host = cgc;
         if (host == null) return;
         var previous = host.fcf.FamilyPanel == null ? null : FamilyPanelValidation.Clone(host.fcf.FamilyPanel);
-        var window = new PanelEditorWindow(host.fcf.FamilyPanel) { Owner = this };
+        var window = new PanelEditorWindow(host.fcf.FamilyPanel, evidenceFile: host.fcf) { Owner = this };
         if (window.ShowDialog() != true || window.Result == null || !host.ApplyPanel(window.Result)) return;
         bool subclassesChanged = PanelSubclassRefresh.DefinitionsChanged(previous, window.Result);
         bool FamilyRulesCurrent() => PanelDerivedDataCurrentness.Check(host.fcf).FamilyAssignments == PanelDerivedDataStatus.Current;
@@ -43,7 +43,9 @@ public partial class ClusterGenerationControl
     }
 
     public void ReportPanelRefreshPending() => ShowCurationOperationResult(
-        "Panel applied. Rebuild family assignments before recomputing subclass labels.");
+        "Panel applied. Rebuild family assignments before recomputing subclass labels."
+        + (fcf.EvidenceSource?.ReferencePanel?.Coverage != null && ReferencePanelUseRequirements.HasSubclasses(fcf.FamilyPanel)
+            ? " Choose Full panel in Fetch evidence." : ""));
 
     public void ReportPanelRefreshFailure(string reason) => ShowCurationOperationResult(
         "Panel applied, but subclass labels were not updated: " + reason);

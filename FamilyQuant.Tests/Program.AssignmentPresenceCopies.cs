@@ -1,5 +1,6 @@
 using FamilyQuant.Evidence;
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -67,9 +68,14 @@ internal static partial class Program
         Directory.CreateDirectory(root);
         string project = Path.Combine(root, "assigned.fqproj");
         ProjectStore.WriteFqproj(project, assigned, Array.Empty<QuantRow>(), new QuantManifest());
+        // Z15b1: the project stores curation format 2; its bytes are the format-2 writer's output for the same file.
         using (var zip = ZipFile.OpenRead(project))
-        using (var reader = new StreamReader(zip.GetEntry("curation.json")!.Open()))
-            Check("all-assigned project writes the exact original curation bytes", reader.ReadToEnd() == original);
+        using (var reader = new StreamReader(zip.GetEntry(ProjectStore.CurationFormat2EntryName)!.Open()))
+        using (var format2 = new MemoryStream())
+        {
+            CurationFormat.Write(assigned, format2);
+            Check("all-assigned project writes the exact original curation bytes", reader.ReadToEnd() == Encoding.UTF8.GetString(format2.ToArray()));
+        }
         var reopened = ProjectStore.ReadFqproj(project);
         Check("all-assigned project reopen preserves recorded assignments and values", reopened.fcf.ToJsonText() == original
             && reopened.fcf.MyExtendedFastaItems.All(p => p.HasUserId));

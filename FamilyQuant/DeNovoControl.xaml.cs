@@ -101,14 +101,16 @@ public partial class DeNovoControl : UserControl
             LabelMinimumSourceConfidence.ToolTip = "Lowest " + source.ConfidenceColumn +
                 " kept for " + source.DisplayName + ". This score belongs to this program and is " +
                 "not converted to any other program's scale.";
-            TextBoxMinAlc.ToolTip = "Accepts 0 to 100, including decimals, and drops spectra with a lower " +
-                source.ConfidenceColumn + ". " +
-                (source == DeNovoSource.DeepNovo
-                    ? "DeepNovo SCORE is not PEAKS ALC."
-                    : "PEAKS ALC is not a calibrated FDR.");
+            TextBoxDecoyLabel.ToolTip = "Case-sensitive identifier prefix marking decoy proteins for the next Search: default " +
+                HomologyOptions.DefaultDecoyLabel + ", any nonempty text, with no numeric unit or range. " +
+                "Changing it prepares the request without editing the input file.";
+            TextBoxMinAlc.ToolTip = "Minimum " + source.ConfidenceColumn +
+                ": default 80 percent, range 0 to 100, including decimals. " +
+                "This prepares the next request on the caller's native scale without changing stored quantities.";
             TextBlockNativeConfidence.Text = "Native confidence: " + source.ConfidenceColumn;
-            ButtonLoadAndFilter.ToolTip = "Reads every " + source.FileGlob + " file in the folder and " +
-                "keeps the rows that pass the length, " + source.ConfidenceColumn + " and stretch filters.";
+            ButtonLoadAndFilter.ToolTip = "Read every " + source.FileGlob + " file under the folder and replace this view's inspection " +
+                "with calls passing length, " + source.ConfidenceColumn + " and stretch filters. " +
+                "Source files and stored quantities stay unchanged; wait for an active operation to finish to edit the view.";
 
             if (ColumnQueueAlc != null) ColumnQueueAlc.Header = union ? "Native confidence (%)" : source.ConfidenceColumn;
             if (ColumnQueueAlc != null) ColumnQueueAlc.Width = new DataGridLength(union ? 180 : 110);
@@ -117,7 +119,8 @@ public partial class DeNovoControl : UserControl
             {
                 LabelMinimumSourceConfidence.Content = "PEAKS minimum ALC (%):";
                 TextBlockNativeConfidence.Text = "Each source keeps its native confidence";
-                ButtonLoadAndFilter.ToolTip = "Reads every selected source with its own cutoff. These accepted spectrum-call counts precede quantitation and union resolution.";
+                ButtonLoadAndFilter.ToolTip = "Read each selected source with its own native cutoff and replace this view's inspection. " +
+                    "Source files and stored quantities stay unchanged; wait for an active operation to finish to edit the view.";
             }
             ApplyReviewColumnTooltips();
 

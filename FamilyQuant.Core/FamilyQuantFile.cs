@@ -89,7 +89,7 @@ namespace FamilyQuant
 
         public FamilyClusterFile()
         {
-
+            CurationLifetimeProbe.Created?.Invoke(this);
         }
 
         public void SetLookupDictionary(PatternLabProject MyPLP, OperationContext? operation = null) =>
@@ -118,29 +118,26 @@ namespace FamilyQuant
             FamilyClusterScoring.DivideAndConquerDetailed(fileName, acceptableScore, decoyTag, exhaustive, operation);
 
         /// <summary>
-        /// The serialization options every curation write uses, so a .fcf on disk and the curation.json
-        /// entry of a .fqproj are byte-for-byte the same text for the same file. Shared, not re-created
-        /// per call, precisely so the two paths cannot drift.
+        /// Canonical format-1 serialization options for hashes, detached copies and legacy text.
+        /// Format-2 file and project writers derive their options from these shared defaults.
         /// </summary>
         public static readonly JsonSerializerOptions CurationJsonOptions = new JsonSerializerOptions
         {
-            WriteIndented = true,
+            WriteIndented = false,
         };
 
-        /// <summary>Serialises the curation exactly as <see cref="Save"/> writes it. The .fqproj container
-        /// stores this text verbatim in its curation.json entry, so nothing about curation changes when a
-        /// project is saved as a container instead of a plain file.</summary>
+        /// <summary>Serialises canonical format-1 content for compatibility text, hashes and copies.
+        /// Save and the project container write a format-2 frame around the persisted curation.</summary>
         public string ToJsonText() => JsonSerializer.Serialize(this, CurationJsonOptions);
 
         public static FamilyClusterFile Load(string fileName, OperationContext? operation = null)
         {
             operation?.Report("document-read", "Opening family document");
-            string theFile = File.ReadAllText(fileName);
-            operation?.ThrowIfCancellationRequested();
-
             try
             {
-                var document = FromJsonText(theFile);
+                // Hold a read-only handle across a legacy encoding retry as well.
+                using var held = File.OpenRead(fileName);
+                var document = ReadJsonUtf8(() => File.OpenRead(fileName));
                 operation?.ThrowIfCancellationRequested();
                 return document;
             }
@@ -160,6 +157,8 @@ namespace FamilyQuant
         /// </summary>
         public static FamilyClusterFile FromJsonText(string theFile)
         {
+            if (CurationFormat.Detect(theFile) == CurationFormat.Current)
+                return ReadCurationFormat2(() => new MemoryStream(System.Text.Encoding.UTF8.GetBytes(theFile), writable: false));
             FamilyClusterFile loaded = JsonSerializer.Deserialize<FamilyClusterFile>(theFile)
                 ?? throw new InvalidDataException("The text is not a valid Family Cluster File.");
             return FinishJsonLoad(loaded, theFile.Contains("\"LockedUserIds\""));
@@ -212,7 +211,7 @@ namespace FamilyQuant
             string temp = fileName + "." + Guid.NewGuid().ToString("N") + ".tmp";
             try
             {
-                File.WriteAllText(temp, ToJsonText());
+                using (var destination = File.Create(temp)) WriteCurationFile(destination);
                 LastSaveCheck = Evidence.SavedFileCheck.Verify(expected, temp, project: false, operation);
                 Evidence.SavedFileCheck.RequirePassed(LastSaveCheck);
                 operation?.Report("save", "Publishing the family document", 1, 1);

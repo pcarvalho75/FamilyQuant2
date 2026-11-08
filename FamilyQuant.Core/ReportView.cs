@@ -50,7 +50,7 @@ namespace FamilyQuant
             return "showing: " + mode.Value.ShortName() +
                    " · " + policy.ShortName() +
                    " · " + quantifiedFamilies.ToString("N0", CultureInfo.CurrentCulture) + " of " +
-                   familiesInFile.ToString("N0", CultureInfo.CurrentCulture) + " families quantified";
+                   familiesInFile.ToString("N0", CultureInfo.CurrentCulture) + " groups quantified";
         }
 
         /// <summary>Names the displayed full-XIC basis and rule, retaining any separately loaded PatternLab status.</summary>
