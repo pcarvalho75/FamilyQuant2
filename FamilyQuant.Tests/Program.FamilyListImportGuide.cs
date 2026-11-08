@@ -51,7 +51,8 @@ internal static partial class Program
             && text.Contains("because they are your own statement", StringComparison.Ordinal) && text.Contains("Untick any you do not want", StringComparison.Ordinal)
             && text.Contains("Nothing becomes a rule until you press Accept and import", StringComparison.Ordinal)
             // Z16a12: polarity from the column headings, and her check of each rule still asked for.
-            && text.Contains("Whether a domain is required or absent is read from the column headings", StringComparison.Ordinal)
+            && text.Contains("suggest whether a domain is required or absent", StringComparison.Ordinal)
+            && text.Contains("A polarity read only from a heading is an uncertain proposal", StringComparison.Ordinal)
             && text.Contains("Still check each rule before accepting", StringComparison.Ordinal) && text.Contains("never read as families or as rules", StringComparison.Ordinal));
         var pictured = FamilyListImportGuide.Pictured.ToList();
         var loaded = pictured.Select(s =>
@@ -88,6 +89,8 @@ internal static partial class Program
             "Source categories", "Decision labels", "Family rows", "Pfam and evidence matches", "Subclass proposals", "All findings", "Could not place",
             "Families", "Special rows", "Subclasses", "Review subclass proposals", "Include subclass", "Include rule", "Leave out", "Required Pfam",
             "Absent Pfam", "Check choices", "Keep subclass choices", "Family key", "Subclass key", "Display name", "Pfam rules", "Column with coloured cells",
+            // Z16a8b (Z16a9c, Z16a9d, Z16a12b): the code-final subclass review.
+            "Not selected", "Uncertain proposal", "Proposal explanation", "Original rule cells",
         };
         Check("the chapter names the wizard's controls and choices with the program's own words", labels.All(text.Contains) && text.Contains("File > Save", StringComparison.Ordinal),
             string.Join(", ", labels.Where(l => !text.Contains(l))));
