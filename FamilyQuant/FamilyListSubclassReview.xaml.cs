@@ -129,8 +129,8 @@ public partial class FamilyListSubclassReview : UserControl
         else result = PanelSubclassImport.BuildDefinitions(rows.Select(row => (PanelSubclassProposal)row.SourceProposal!).ToArray(),
             CaptureAcceptances(), FamilyKeys?.ToArray() ?? Array.Empty<string>());
         ShowProblems(result.Problems);
-        SetValue(ValidationStatusKey, result.CanBuild ? "Choices checked. Nothing has been imported or confirmed."
-            : "Review the messages on the affected subclass or rule, then check the draft again.");
+        SetValue(ValidationStatusKey, result.CanBuild ? "Choices checked. Nothing is imported until Accept and import."
+            : "Review the messages on the affected subclass or rule, check the draft again, then Accept and import.");
         return result;
     }
     public void ShowProblems(IEnumerable<PanelSubclassImportProblem> problems)
