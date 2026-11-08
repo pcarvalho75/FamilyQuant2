@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,6 +35,7 @@ public sealed class AiHelpWindow : Window
     public TextBox StatePreview { get; } = SecondaryWindowView.Report("", true, "The program information included with your next question.");
     public HelpQuestion? LastQuestion { get; private set; }
     public string LastAnswer { get; private set; } = "";
+    public TextBlock UsageNotice { get; } = SecondaryWindowView.Text("Questions go to Claude with your own Anthropic key and count on your Anthropic account. AI Help reads the source through GitHub, which allows 10 code searches a minute and 5,000 file reads an hour for all FamilyQuant users together; when that limit is reached, AI Help says so and when it resets.", true);
 
     public AiHelpWindow(IHelpAssistant assistant, Func<string?> key, Func<HelpState> state,
         Func<AiOutcome, string> outcomeMessage, Func<byte[]?>? screenshot = null)
@@ -63,7 +65,7 @@ public sealed class AiHelpWindow : Window
         PicturePreview.Margin = new Thickness(0, 8, 0, 0); PicturePreview.Stretch = Stretch.Uniform;
         PicturePreview.ToolTip = "Preview of the optional picture; a fresh picture is taken when you ask.";
         PicturePreview.Visibility = Visibility.Collapsed; top.Children.Add(PicturePreview);
-        IncludePicture.Checked += (_, _) => RefreshPicture();
+        IncludePicture.Checked += (_, _) => { RefreshPicture(); Dispatcher.BeginInvoke(() => PicturePreview.BringIntoView()); };
         IncludePicture.Unchecked += (_, _) => { PicturePreview.Source = null; PicturePreview.Visibility = Visibility.Collapsed; };
         var actions = new WrapPanel { Margin = new Thickness(0, 12, 0, 0) };
         AskButton.Content = "Ask"; AskButton.ToolTip = "Sends your question and the displayed program information to Claude.";
@@ -72,8 +74,13 @@ public sealed class AiHelpWindow : Window
         ReportButton.Content = "Report this as a bug..."; ReportButton.IsEnabled = false;
         ReportButton.ToolTip = "Review and edit a public GitHub issue about the last question and answer before submitting it yourself.";
         ReportButton.Margin = new Thickness(8, 0, 0, 0);
-        actions.Children.Add(AskButton); actions.Children.Add(CancelButton); actions.Children.Add(ReportButton); top.Children.Add(actions); top.Children.Add(Status);
-        DockPanel.SetDock(top, Dock.Top); layout.Children.Add(top);
+        actions.Children.Add(AskButton); actions.Children.Add(CancelButton); actions.Children.Add(ReportButton);
+        var topScroll = new ScrollViewer { Content = top, VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled, ToolTip = "Review the question, program information and optional picture before asking." };
+        SizeChanged += (_, e) => topScroll.MaxHeight = Math.Max(140, e.NewSize.Height - 340);
+        var heading = new StackPanel(); heading.Children.Add(topScroll); heading.Children.Add(actions); heading.Children.Add(Status);
+        DockPanel.SetDock(heading, Dock.Top); layout.Children.Add(heading);
+        UsageNotice.Margin = new Thickness(0, 12, 0, 0); DockPanel.SetDock(UsageNotice, Dock.Bottom); layout.Children.Add(UsageNotice);
         var scroll = new ScrollViewer { Content = Answers, VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
             ToolTip = "Read and select the answers and their source references." };
         layout.Children.Add(scroll);
@@ -87,7 +94,7 @@ public sealed class AiHelpWindow : Window
         Activated += (_, _) => RefreshState();
     }
 
-    public void RefreshState() => StatePreview.Text = FormatState(state());
+    public void RefreshState() { StatePreview.Text = FormatState(state()); StatePreview.ScrollToHome(); }
 
     public static string FormatState(HelpState value) => $"Version: {value.Version}\nScreen: {value.Screen}\n\nScreen help:\n{value.ScreenHelp}"
         + $"\n\nProject:\n{value.ProjectSummary}\n\nLast error:\n{value.LastError}\n\nLog tail:\n{value.LogTail}";
@@ -139,8 +146,13 @@ public sealed class AiHelpWindow : Window
             if (answer.Sources.Count > 0)
                 turn.Children.Add(SecondaryWindowView.Report(string.Join("\n", answer.Sources.Select(s => $"{s.Path}, lines {s.FromLine}-{s.ToLine}")),
                     true, "Repository paths and inclusive line ranges read for this answer."));
+            if (!answer.SourceReadable)
+                turn.Children.Add(SecondaryWindowView.Text("This build cannot read the source on GitHub, so this answer relies on the screen and FamilyQuant's own help.", true));
+            if (answer.GitHubLimitResetsAt is DateTimeOffset reset)
+                turn.Children.Add(SecondaryWindowView.Text("GitHub's limit was reached; reading resumes at "
+                    + reset.ToLocalTime().ToString("HH:mm", CultureInfo.CurrentCulture) + ".", true));
             Answers.Children.Add(turn);
-            if (answer.Outcome == AiOutcome.Success) earlier.Add(new(question.Text, answer.Text));
+            earlier.Add(new(question.Text, text));
             Status.Text = "";
         }
         catch (OperationCanceledException) { if (!closed) Status.Text = "Cancelled."; }

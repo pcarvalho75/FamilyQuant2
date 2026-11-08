@@ -33,8 +33,9 @@ internal static partial class Program
                 var parent = (MenuItem)item.Parent;
                 return parent.Header + " > " + item.Header;
             }
-            string[] paths = { PathFor("MenuItemAiKey"), PathFor("MenuItemAiDraft") };
-            Check("J46d AI Help names both commands from the live menu", paths.All(p => flat.Contains(p, StringComparison.Ordinal)));
+            string[] paths = { PathFor("MenuItemAiHelp"), PathFor("MenuItemAiKey"), PathFor("MenuItemAiDraft") };
+            Check("J46d AI Help names all three commands from the live menu", paths.All(p => flat.Contains(p, StringComparison.Ordinal)));
+            Check("H2d workflow Help explains the AI Help shortcut, source, state and optional picture", new[] { "Ctrl+H", "source code on GitHub", "displayed program information", "optional picture" }.All(p => flat.Contains(p, StringComparison.Ordinal)));
             string[] details = { "exact", "confirm", "number", "not found", "program", "without AI", "cancel" };
             Check("J46d AI Help explains the preview, confirmation, number check and program narrative", details.All(p => flat.Contains(p, StringComparison.OrdinalIgnoreCase)));
         }
