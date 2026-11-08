@@ -14,6 +14,22 @@ using System.Threading.Tasks;
 namespace FamilyQuant.Ai;
 
 /// <summary>
+/// The read-only GitHub token built into this program, or null when the build had none. Key and Scrambled come from
+/// the GenerateHelpTokenSource target in FamilyQuant.App.csproj; the scrambling only keeps secret scanners from
+/// recognising the token, it does not protect it.
+/// </summary>
+internal static partial class HelpGitHubToken
+{
+    public static string? Read()
+    {
+        byte[] bytes = Convert.FromBase64String(Scrambled);
+        for (int i = 0; i < bytes.Length; i++) bytes[i] ^= (byte)Key[i % Key.Length];
+        string token = Encoding.UTF8.GetString(bytes);
+        return token.Length == 0 ? null : token;
+    }
+}
+
+/// <summary>
 /// GitHub stopped the reading for this question. A null <see cref="LimitResetsAt"/> means it refused the built-in token;
 /// otherwise its rate limit was reached and it said when it would answer again.
 /// </summary>
