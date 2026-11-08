@@ -31,6 +31,15 @@ public sealed partial class FamilyListImportViewModel
             string.Join("; ", item.Sources.Select(source => source.SheetName
                 + (source.RowNumbers.Count > 0 ? ", rows " + string.Join(", ", source.RowNumbers) : "")
                 + (source.Columns.Count > 0 ? ", " + string.Join(", ", source.Columns) : ""))), PageKey(item.Page))).ToArray() ?? Array.Empty<ImportWorkbookFinding>();
+    public IReadOnlyList<ImportWorkbookFinding> SubclassReviewFindings
+    {
+        get
+        {
+            var ids = workbookReview?.SubclassReviewFindings.Select(item => item.Id).ToHashSet(StringComparer.Ordinal);
+            return ids == null ? Array.Empty<ImportWorkbookFinding>() : WorkbookFindings.Where(item => ids.Contains(item.Id)).ToArray();
+        }
+    }
+    public bool HasSubclassReviewFindings => (ReviewingWorkbook || ReviewingSubclasses) && SubclassReviewFindings.Count > 0;
     public IReadOnlyList<string> WorkbookReviewProblems => (workbookReview?.Sections.SelectMany(section => section.Items)
         .Where(item => item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace)
         .Select(item => item.Label + ": " + WorkbookProblemGuidance(item.Reason, item.Page)) ?? Array.Empty<string>())
@@ -153,7 +162,7 @@ public sealed partial class FamilyListImportViewModel
             catch (Exception error) when (error is ArgumentException or InvalidOperationException)
             { workbookReviewError = error.Message; }
         }
-        foreach (string property in new[] { nameof(WorkbookSections), nameof(WorkbookFamilies), nameof(WorkbookFamilyKeys), nameof(WorkbookFindings),
+        foreach (string property in new[] { nameof(WorkbookSections), nameof(WorkbookFamilies), nameof(WorkbookFamilyKeys), nameof(WorkbookFindings), nameof(SubclassReviewFindings), nameof(HasSubclassReviewFindings),
             nameof(WorkbookReviewProblems), nameof(WorkbookHasReviewProblems), nameof(WorkbookReviewStatus), nameof(WorkbookReviewDetails), nameof(CanAcceptWorkbook), nameof(WorkbookColumns), nameof(WorkbookLegend), nameof(WorkbookDecisionRows),
             nameof(WorkbookSpecialRows), nameof(WorkbookDomainRows), nameof(CanReturnToWorkbook), nameof(ReviewingWorkbook), nameof(ReviewingSubclasses), nameof(ShowingWizardPages) }) Changed(property);
     }

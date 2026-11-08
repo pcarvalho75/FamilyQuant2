@@ -23,11 +23,11 @@ public static partial class WorkbookImportSummaries
         var source = Copy(proposal); var choices = PrepareChoices(source);
         var keyPreview = KeyPreview(source, choices);
         var keys = Freeze(keyPreview.Rows.SelectMany(row => row.FamilyKeys).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal));
-        var expected = ExpectedNames(source, choices, keyPreview);
+        var expected = ExpectedNames(source, choices, keyPreview, out var subclassNotes);
         var vocabulary = matching.RecognizedPfamDomains().Select(Copy).ToList();
         var subclassProposals = PanelSubclassImport.Propose(source.SubclassTables, keys, vocabulary, expected).Proposals;
         var plan = new WorkbookImportPlan { Proposal = source, Choices = choices, Matching = matching,
-            Subclasses = Copy(subclassProposals), ExpectedNames = expected, Vocabulary = vocabulary,
+            Subclasses = Copy(subclassProposals), ExpectedNames = expected, SubclassNotes = subclassNotes, Vocabulary = vocabulary,
             ReviewedSubclasses = reviewedSubclasses == null ? DraftSubclasses(subclassProposals, keys) : Copy(reviewedSubclasses.ToList()),
             ReviewedEvidence = new(StringComparer.Ordinal) };
         var table = source.FamilyTable;
