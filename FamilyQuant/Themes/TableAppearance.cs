@@ -22,6 +22,10 @@ namespace FamilyQuant.Themes
             "Numeric", typeof(bool), typeof(TableAppearance), new PropertyMetadata(false));
         public static readonly DependencyProperty FullTextPathProperty = DependencyProperty.RegisterAttached(
             "FullTextPath", typeof(string), typeof(TableAppearance), new PropertyMetadata(null));
+        public static readonly DependencyProperty PreserveCellToolTipProperty = DependencyProperty.RegisterAttached(
+            "PreserveCellToolTip", typeof(bool), typeof(TableAppearance), new PropertyMetadata(false));
+        public static bool GetPreserveCellToolTip(DependencyObject target) => (bool)target.GetValue(PreserveCellToolTipProperty);
+        public static void SetPreserveCellToolTip(DependencyObject target, bool value) => target.SetValue(PreserveCellToolTipProperty, value);
         /// <summary>Rule 7 for a DataGrid column: the header's tooltip, written on the column as one attribute. It becomes a
         /// setter of the column's header style, which the table appearance keeps when it restyles the header.</summary>
         public static readonly DependencyProperty HeaderToolTipProperty = DependencyProperty.RegisterAttached(
@@ -75,7 +79,9 @@ namespace FamilyQuant.Themes
                 if (attached) return;
                 attached = true;
                 grid.SetResourceReference(Control.BackgroundProperty, "SurfaceBrush");
-                grid.SetResourceReference(Control.ForegroundProperty, "TextBrush");
+                // Keep a caller foreground when tab content reloads during a theme switch.
+                if (grid.ReadLocalValue(Control.ForegroundProperty) == DependencyProperty.UnsetValue)
+                    grid.SetResourceReference(Control.ForegroundProperty, "TextBrush");
                 // Parent local row brushes outrank row triggers during DataGrid's property transfer.
                 // Use the shared style values so hover and selection retain their precedence.
                 grid.ClearValue(DataGrid.RowBackgroundProperty);
@@ -150,9 +156,10 @@ namespace FamilyQuant.Themes
                     var style = new Style(typeof(TextBlock), textOriginal ?? DataGridTextColumn.DefaultElementStyle);
                     style.Setters.Add(new Setter(TextBlock.TextTrimmingProperty, TextTrimming.CharacterEllipsis));
                     style.Setters.Add(new Setter(TextBlock.TextWrappingProperty, TextWrapping.NoWrap));
-                    style.Setters.Add(new Setter(FrameworkElement.ToolTipProperty,
-                        GetFullTextPath(column) is string path ? new Binding(path)
-                            : new Binding(nameof(TextBlock.Text)) { RelativeSource = RelativeSource.Self }));
+                    if (!GetPreserveCellToolTip(grid))
+                        style.Setters.Add(new Setter(FrameworkElement.ToolTipProperty,
+                            GetFullTextPath(column) is string path ? new Binding(path)
+                                : new Binding(nameof(TextBlock.Text)) { RelativeSource = RelativeSource.Self }));
                     if (numeric && !SetsAlignment(textOriginal, TextBlock.TextAlignmentProperty))
                         style.Setters.Add(new Setter(TextBlock.TextAlignmentProperty, TextAlignment.Right));
                     text.ElementStyle = style;

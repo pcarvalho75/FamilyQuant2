@@ -64,14 +64,26 @@ public sealed class PanelEditorDraft
     }
 }
 
-public sealed class PanelEditorRow
+public sealed class PanelEditorRow : ScreenViewModel
 {
     private readonly FamilyPanelFamily original;
     private readonly string originalPfam;
     private readonly string originalSubclasses;
     internal string OriginalKey => original.Key;
-    public string Key { get; set; }
-    public string Name { get; set; }
+    private string key = "", name = "";
+    public string Key
+    {
+        get => key;
+        set { if (Set(ref key, value ?? "")) { Changed(nameof(KeyDisplay)); Changed(nameof(HasGeneratedKey)); Changed(nameof(FamilyChoiceLabel)); } }
+    }
+    public string Name
+    {
+        get => name;
+        set { if (Set(ref name, value ?? "")) { Changed(nameof(KeyDisplay)); Changed(nameof(FamilyChoiceLabel)); } }
+    }
+    public bool HasGeneratedKey => ManualFamilyChoices.IsGeneratedKey(Key);
+    public string KeyDisplay { get => HasGeneratedKey ? Name : Key; set { if (!HasGeneratedKey) Key = value; } }
+    public string FamilyChoiceLabel => HasGeneratedKey || Key.Length == 0 ? Name : Name + " (" + Key + ")";
     public FamilyPanelDecision Decision { get; set; }
     public string MergeTarget { get; set; }
     public string Pfam { get; set; }

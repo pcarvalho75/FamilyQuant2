@@ -19,7 +19,7 @@ public sealed partial class GroupingReviewViewModel
             if (Evidence.HasInvalidPanelLinkNotes) return "Unavailable because a panel link note needs correction. In Panel links, enter a short single-line note, then choose Use link choices before matching stored names.";
             if (Evidence.HasUnappliedPanelLinkChoices) return "Unavailable while panel link choices are waiting to update the proposal. In Panel links, choose Use link choices first, then match stored names.";
             if (confirmPanelMatches == null || Evidence.SelectedChecklistFamily is not { } family || Evidence.Source.PanelNames?.ContainsKey(family.Key) != true)
-                return "Unavailable without a selected panel family that supports stored-name matching. Open Group by evidence with a panel, then select a family in Panel checklist.";
+                return "Unavailable without a selected panel family that supports stored-name matching. Open Group by evidence with a panel, then select a family in Family checklist.";
             return "Open stored evidence-label suggestions for the selected panel family, then review and confirm labels used by the checklist. Disabled without an editable current panel proposal and selected family; Update proposal after scope edits, select a family and wait for active operations.";
         }
     }

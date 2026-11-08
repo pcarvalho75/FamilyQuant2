@@ -24,6 +24,17 @@ internal static partial class Program
         Directory.CreateDirectory(work);
         string workbook = Path.Combine(work, ExampleFamilyList.DefaultFileName); ExampleFamilyList.Write(workbook);
         string sourceHash = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(workbook)));
+        using (var workbookModel = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(ManualChoiceFile())),
+            workbookSource: new FamilyListWorkbookCoreSource(), openWorkbookReview: true))
+        {
+            FinishReviewWork(async () => { await workbookModel.LoadAsync(workbook); await workbookModel.ReviewWorkbookSectionAsync("columns"); });
+            workbookModel.ReviewingDecisions = false;
+            Check("Columns with pending workbook decisions names its available review and return actions",
+                !workbookModel.CanNext && workbookModel.CanReturnToWorkbook
+                && workbookModel.Status.Contains("Review decision values", StringComparison.Ordinal)
+                && workbookModel.Status.Contains("Back to workbook review", StringComparison.Ordinal)
+                && workbookModel.DisabledReason == workbookModel.Status);
+        }
         var previousTheme = Themes.ThemeManager.Current;
         try
         {
@@ -85,10 +96,22 @@ internal static partial class Program
                     Check(label + " optional colour names never block Next when cleared", model.CanNext);
                     foreach (var colour in model.SourceColorChoices.Where(c => c.Label.Length == 0)) colour.Label = colour.ColorName;
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns-colours");
+                    Check(label + " column category table fits above the footer without page clipping",
+                        WizardPolishTableFits((DataGrid)window.FindName("ColourCategoriesGrid"), out string categoryBounds), categoryBounds);
                     var decision = model.Columns.Single(c => c.Role == PanelImportFields.Decision);
                     decision.Header = decision.Headers.First(h => h.Contains("DECIS", StringComparison.OrdinalIgnoreCase));
                     Check(label + " free-text decisions remain proposals until explicitly confirmed", model.Decisions.Count == 8
                         && model.Decisions.Any(d => !d.Confirmed) && !model.CanNext && model.Decisions.All(d => d.Rows.Length > 0));
+                    WalkTree(window).OfType<Button>().Single(button => Equals(button.Content, "Back to columns"))
+                        .RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
+                    Check(label + " blocked Columns names decision review in its visible footer and disabled Next tooltip",
+                        !model.ReviewingDecisions && !model.CanNext && model.Status.Contains("Review decision values", StringComparison.Ordinal)
+                        && model.DisabledReason == model.Status && !model.Status.Contains("Back to workbook review", StringComparison.Ordinal)
+                        && WalkTree((FrameworkElement)window.FindName("WizardFooter")).OfType<TextBlock>().Any(text => text.Text == model.Status)
+                        && ((Button)window.FindName("ForwardButton")).ToolTip is string tip && tip.Contains(model.Status, StringComparison.Ordinal));
+                    CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns-needs-decisions");
+                    WalkTree(window).OfType<Button>().Single(button => Equals(button.Content, "Review decision values"))
+                        .RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
                     ((Button)window.FindName("ForwardButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                     Check(label + " disabled Next cannot silently accept decision proposals", model.Page == 2);
                     Check(label + " decision review has its own bounded table and clear page heading", model.ReviewingDecisions && model.Title == "Review spreadsheet decisions");
@@ -98,17 +121,58 @@ internal static partial class Program
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns-decisions");
                     model.ConfirmDecisions();
                     Check(label + " explicit batch confirmation accepts the reviewed decision meanings", model.Decisions.All(d => d.Confirmed) && model.CanNext);
+                    Check(label + " confirming decisions removes the Columns blocking instruction",
+                        !model.Status.Contains("Review decision values", StringComparison.Ordinal));
+                    model.Decisions[0].Confirmed = false;
+                    Check(label + " an action needing confirmation again refreshes the Columns instruction",
+                        !model.CanNext && model.Status.Contains("Review decision values", StringComparison.Ordinal));
+                    model.Decisions[0].Confirmed = true;
+                    Check(label + " resolving the last pending confirmation clears the stale instruction",
+                        model.CanNext && !model.Status.Contains("Review decision values", StringComparison.Ordinal));
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " Special rows shows the duplicate and a several-name row with a real choice", model.Page == 3
                         && model.SpecialRows.Any(r => r.Duplicate) && model.SpecialRows.Any(r => r.SeveralNames && r.Parts.Count == 4) && !model.CanNext);
                     model.SelectedSpecialRow = model.SpecialRows.Single(r => r.Duplicate);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "04-special-rows-duplicate");
+                    var specialGrid = (DataGrid)window.FindName("SpecialRowsGrid");
+                    Check(label + " selected review message uses the row's readable text ink",
+                        WizardPolishMessageInk(specialGrid, model.SelectedSpecialRow, out string selectedInk), selectedInk);
+                    Check(label + " the complete duplicate explanation is laid out without clipped lines",
+                        WizardPolishMessageFits(specialGrid, model.SelectedSpecialRow, out string messageHeight), messageHeight);
+                    Check(label + " duplicate rename starts as an enabled proposal without accepting the row",
+                        model.SelectedSpecialRow.Action == FamilyPanelRowAction.Import && model.CanUseRowChoice
+                        && model.SelectedSpecialRow.Blocking && !model.SelectedSpecialRow.Chosen && !model.CanNext
+                        && Equals(((ComboBox)window.FindName("RowActionChoice")).SelectedValue, FamilyPanelRowAction.Import)
+                        && file.ToJsonText() == before, WizardPolishProposalState(model, window));
                     string newKey = model.SelectedSpecialRow.Key;
+                    var rowAction = (ComboBox)window.FindName("RowActionChoice");
+                    rowAction.SelectedValue = FamilyPanelRowAction.Skip;
+                    Check(label + " changing the native row action updates only its unaccepted draft proposal",
+                        model.SelectedSpecialRow.Action == FamilyPanelRowAction.Skip && model.SelectedSpecialRow.Blocking
+                        && !model.SelectedSpecialRow.Chosen && !model.CanNext && file.ToJsonText() == before);
+                    rowAction.SelectedValue = FamilyPanelRowAction.Import;
                     model.SelectedSpecialRow.Action = FamilyPanelRowAction.Import; model.UseRowChoice();
                     Check(label + " accepting the proposed duplicate rename keeps the multi-name choice pending", newKey.Length > 0
                         && model.SpecialRows.Any(r => r.Chosen && r.Key == newKey) && !model.CanNext);
                     model.SelectedSpecialRow = model.SpecialRows.Single(r => r.SeveralNames && r.Parts.Count == 4 && r.Blocking);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "04-special-rows");
+                    Check(label + " the complete several-name explanation is laid out without clipped lines",
+                        WizardPolishMessageFits(specialGrid, model.SelectedSpecialRow, out string severalHeight), severalHeight);
+                    Check(label + " several-name row starts with its proposed split but still needs explicit acceptance",
+                        model.SelectedSpecialRow.Action == FamilyPanelRowAction.Split && model.CanUseRowChoice
+                        && model.SelectedSpecialRow.Blocking && !model.SelectedSpecialRow.Chosen && !model.CanNext
+                        && Equals(((ComboBox)window.FindName("RowActionChoice")).SelectedValue, FamilyPanelRowAction.Split)
+                        && file.ToJsonText() == before, WizardPolishProposalState(model, window));
+                    var nameEditor = WizardPolishRowEditor(window, "Family name for this source row");
+                    var keyEditor = WizardPolishRowEditor(window, "Abbreviation for this source row");
+                    Check(label + " split action hides the unused single-family fields", !nameEditor.IsVisible && !keyEditor.IsVisible);
+                    rowAction.SelectedValue = FamilyPanelRowAction.Skip; window.UpdateLayout(); PumpDispatcher();
+                    Check(label + " skip action hides the unused single-family fields", !nameEditor.IsVisible && !keyEditor.IsVisible);
+                    rowAction.SelectedValue = FamilyPanelRowAction.Import; window.UpdateLayout(); PumpDispatcher();
+                    Check(label + " a kept long family name is readable without horizontal clipping", nameEditor.IsVisible
+                        && nameEditor.ViewportWidth > 0 && nameEditor.ExtentWidth <= nameEditor.ViewportWidth + 2,
+                        $"Extent={nameEditor.ExtentWidth}; viewport={nameEditor.ViewportWidth}.");
+                    rowAction.SelectedValue = FamilyPanelRowAction.Split; window.UpdateLayout(); PumpDispatcher();
                     var partKeys = model.SelectedSpecialRow.Parts.Select(p => p.Key).ToArray();
                     model.SelectedSpecialRow.Action = FamilyPanelRowAction.Split; model.UseRowChoice();
                     while (model.SpecialRows.FirstOrDefault(r => r.SeveralNames && r.Blocking) is { } ambiguous)
@@ -142,6 +206,19 @@ internal static partial class Program
                         && model.SummaryFamilies.Count == model.DraftPanel!.Families.Count && curation.UndoStack.Count == 0 && file.ToJsonText() == before);
                     Check(label + " Summary includes the skipped empty row and the confirmed duplicate rename", model.Summary.Contains("1 row skipped", StringComparison.Ordinal)
                         && model.Summary.Contains("1 abbreviation renamed", StringComparison.Ordinal));
+                    const string breakdown = "30 families to quantify (plus 1 merged, 11 not a family)";
+                    var mergedFamily = model.SummaryFamilies.Single(f => f.Decision.StartsWith("Merge into ", StringComparison.Ordinal));
+                    string mergeTarget = model.DraftPanel!.Families.Single(f => f.Key == mergedFamily.Key).MergeTargetFamilyKey;
+                    Check(label + " Summary counts families to quantify, plus merged and not a family, and omits reported under others when that count is zero",
+                        model.Summary.StartsWith(breakdown + "; ", StringComparison.Ordinal)
+                        && !model.Summary.Contains("reported under others", StringComparison.Ordinal)
+                        && !model.Summary.Contains("42 families", StringComparison.Ordinal));
+                    Check(label + " a merge Decision names its target and merged or not-a-family rows need no match",
+                        mergeTarget.Length > 0 && mergedFamily.Decision == "Merge into " + mergeTarget && mergedFamily.Decision != "Merge into family"
+                        && mergedFamily.Matches == "Not needed"
+                        && model.SummaryFamilies.Count(f => f.Decision == "Not a family") == 11
+                        && model.SummaryFamilies.Where(f => f.Decision == "Not a family").All(f => f.Matches == "Not needed")
+                        && model.SummaryFamilies.Where(f => f.Decision == "Quantify").All(f => f.Matches == "Skipped"));
                     Check(label + " a single confirmed match uses family grammar", !model.Summary.Contains("1 families confirmed", StringComparison.Ordinal));
                     Check(label + " Summary includes the imported source colour category", ((DataGrid)window.FindName("SummaryGrid")).Columns.Any(c => c.Header as string == "Colour")
                         && model.SummaryFamilies.Any(f => f.Notes.Contains("My source category", StringComparison.Ordinal)));
@@ -149,6 +226,8 @@ internal static partial class Program
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " Import is one panel publication and retains every protein's state", model.Page == 6 && model.Imported && model.CanUndo
                         && file.FamilyPanel!.Name == "Imported example list" && curation.UndoStack.Count == 1 && JsonSerializer.Serialize(file.MyExtendedFastaItems) == proteinsBefore);
+                    Check(label + " Done title is the same family breakdown plus imported", model.ImportedFamilyCount == breakdown + " imported"
+                        && WalkTree(window).OfType<TextBlock>().Any(block => block.Text == breakdown + " imported"));
                     Check(label + " Done explains the automatic read before Update proposal", model.Explanation.Contains("reads the database and scope by itself when it opens", StringComparison.Ordinal)
                         && model.Explanation.Contains("then press Update proposal", StringComparison.Ordinal)
                         && model.Explanation.Contains("takes minutes", StringComparison.Ordinal) && !model.Explanation.Contains('\n'));
@@ -180,6 +259,7 @@ internal static partial class Program
         FamilyListImportGuardTests(workbook, work);
         FamilyListImportMatchTests(output);
         FamilyListImportCountGrammarTests();
+        FamilyListImportBreakdownTests(work);
         FamilyListDecisionHintTests(workbook);
         FamilyListChecklistHandoffTests();
     }
@@ -190,12 +270,69 @@ internal static partial class Program
         model.SpecialRows.Add(new ImportSpecialRow { RowNumber = 1, Blocking = true, Message = "Choose this row's action." });
         Check("exactly one unresolved special row uses singular grammar", model.SpecialRows.Count(r => r.Blocking) == 1
             && model.SpecialSummary == "1 row needs a choice");
+        Check("no imported panel yet says 0 families imported", model.ImportedFamilyCount == "0 families imported");
         model.Decisions.Add(new ImportDecisionChoice { Source = "Supplied choice", Decision = FamilyPanelDecision.Quantify });
         Check("exactly one unconfirmed decision uses singular grammar", model.Decisions.Count == 1 && model.DecisionSummary == "1 value to review");
         model.Decisions[0].Confirmed = true;
         Check("exactly one confirmed decision uses singular grammar", model.Decisions.Count == 1 && model.DecisionSummary == "1 value confirmed");
         model.Decisions.Add(new ImportDecisionChoice { Source = "Another choice", Decision = FamilyPanelDecision.NotAFamily, Confirmed = true });
         Check("two confirmed decisions retain plural grammar", model.Decisions.Count == 2 && model.DecisionSummary == "2 values confirmed");
+    }
+
+    private static void FamilyListImportBreakdownTests(string work)
+    {
+        CheckBreakdown(work, "only quantify", new[]
+        {
+            new[] { "AA", "Supplied family", "", "", "", "Quantify" },
+            new[] { "BB", "Supplied second", "", "", "", "Quantify" },
+        }, "2 families to quantify", "AA", "Quantify", "Skipped");
+        CheckBreakdown(work, "reported under others and no merge or exclusion", new[]
+        {
+            new[] { "AA", "Supplied family", "", "", "", "Quantify" },
+            new[] { "BB", "Supplied second", "", "", "", "Report under others" },
+        }, "1 family to quantify (plus 1 reported under others)", "BB", "Report under others", "Skipped");
+        CheckBreakdown(work, "not a family and no merge or others", new[]
+        {
+            new[] { "AA", "Supplied family", "", "", "", "Quantify" },
+            new[] { "BB", "Supplied second", "", "", "", "Not a family" },
+        }, "1 family to quantify (plus 1 not a family)", "BB", "Not a family", "Not needed");
+        CheckBreakdown(work, "one merge and no others or exclusion", new[]
+        {
+            new[] { "AA", "Supplied family", "", "", "", "Quantify" },
+            new[] { "BB", "Supplied second", "", "", "", "Merge into AA" },
+        }, "1 family to quantify (plus 1 merged)", "BB", "Merge into AA", "Not needed");
+        CheckBreakdown(work, "nothing to quantify", new[]
+        {
+            new[] { "AA", "Supplied family", "", "", "", "Not a family" },
+        }, "0 families to quantify (plus 1 not a family)", "AA", "Not a family", "Not needed");
+    }
+
+    private static void CheckBreakdown(string work, string name, string[][] rows, string breakdown, string key, string decision, string matches)
+    {
+        string path = Path.Combine(work, "breakdown-" + name.Replace(' ', '-') + ".xlsx");
+        PanelImportTemplate.Write(path);
+        FillTemplate(path, rows);
+        using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(ManualChoiceFile())));
+        FinishReviewWork(() => model.LoadAsync(path));
+        FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(); await model.NextAsync(); });
+        model.SkipAllMatches();
+        FinishReviewWork(async () => { await model.NextAsync(); });
+        var row = model.SummaryFamilies.Single(f => f.Key == key);
+        bool zeroMerged = !breakdown.Contains(" merged", StringComparison.Ordinal);
+        bool zeroOthers = !breakdown.Contains("reported under others", StringComparison.Ordinal);
+        bool zeroExcluded = !breakdown.Contains("not a family", StringComparison.Ordinal);
+        Check("summary " + name + " uses the family breakdown and keeps a zero count out of the plus list",
+            model.Page == 5 && model.Summary.StartsWith(breakdown + "; ", StringComparison.Ordinal)
+            && (zeroMerged || model.Summary.Contains(" merged", StringComparison.Ordinal))
+            && (zeroOthers || model.Summary.Contains("reported under others", StringComparison.Ordinal))
+            && (zeroExcluded || model.Summary.Contains("not a family", StringComparison.Ordinal))
+            && (!zeroMerged || !model.Summary.Contains(" merged", StringComparison.Ordinal))
+            && (!zeroOthers || !model.Summary.Contains("reported under others", StringComparison.Ordinal))
+            && (!zeroExcluded || !model.Summary.Contains("not a family", StringComparison.Ordinal))
+            && row.Decision == decision && row.Matches == matches);
+        model.PanelName = "Supplied list";
+        FinishReviewWork(async () => { await model.NextAsync(); });
+        Check("done title " + name + " repeats that breakdown", model.Page == 6 && model.ImportedFamilyCount == breakdown + " imported");
     }
 
     private static void CaptureFamilyListPage(FamilyListImportWindow window, string? output, Themes.AppTheme theme, int width, int height, string page)

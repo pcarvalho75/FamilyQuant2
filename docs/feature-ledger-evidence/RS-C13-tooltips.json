@@ -5,52 +5,52 @@
   "runs": [
     {
       "id": "RS-C13-native-tooltips",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --test-results-tooltips D:/FamilyQuant-data/out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips \u00222026-11-02 18:28:31 -0800\u0022",
-      "executedAt": "2026-11-02 18:28:31 -0800",
-      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
+      "command": "D:\\FamilyQuant-wt\\fetch-ledger-final\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --test-results-tooltips D:/FamilyQuant-data/out-refresh/final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips \u00222026-11-07 12:05:55 -0800\u0022",
+      "executedAt": "2026-11-07 12:05:55 -0800",
+      "commit": "64f60deee32c8b31bd13ad51e840bd0b467b10f6",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "sha256": "E7E2C6AF6AF69A862726494C6A4566240115C0B92612FF471822D2ECB93FB030"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant_ClusterGenerationControl.Presentation.cs",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\executed\\FamilyQuant_ClusterGenerationControl.Presentation.cs",
+          "sha256": "FDDEE22ABD52B98B3B7D14EF48BB356B8F7A049C19B291DA8F5DA1329B3216B0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant_RecoveryChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\executed\\FamilyQuant_RecoveryChart.cs",
           "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant_IsotopeCountChart.cs",
-          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\executed\\FamilyQuant_IsotopeCountChart.cs",
+          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Tests_Program.ResultsTooltips.cs",
-          "sha256": "8675FD6ECCCEFDC3AB62D8017C702B6F74401AA509AE478A31DB100F552CFF33"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\executed\\FamilyQuant.Tests_Program.ResultsTooltips.cs",
+          "sha256": "1A813CD2287975CCBC40079C75D13CF3C64EBE67168B5BE3163B9DB83991FA08"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Tests_Program.ResultsTooltipProof.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\executed\\FamilyQuant.Tests_Program.ResultsTooltipProof.cs",
           "sha256": "D4282B196CBB0EE6B9EFB4C68ECB49536A3AC2B5C920CBD9BAD34ADA0EAB7AFE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Tests_Program.Commands.ResultsTooltips.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\executed\\FamilyQuant.Tests_Program.Commands.ResultsTooltips.cs",
           "sha256": "C5EED2A7A19CE30329501BEF6514E253025C2CA92CA90CBA05590D977331BF94"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "6F2762D3760DB80C7EF95E01791ADDCF311D2A58137A9797910B10F57606C080"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "B3A92C3A3E7397FB9343DACDE450DFA7B6930A13E0614941C7E44BE3F81341FD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant2.dll",
-          "sha256": "FA5B9E3A6B3879ADA83165E6E6CC644E900DB0E72E59E11263D15871663B55AD"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\executed\\FamilyQuant2.dll",
+          "sha256": "ED9935912049D1D863905EFC8FAD112E45669BB6559C7EFD603AB7B45BE877BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Core.dll",
-          "sha256": "BB2B0CAA4935237DB0CAE13B8BC6177D08BDFB963839063CE2B5D5E240F9B4BA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\executed\\FamilyQuant.Core.dll",
+          "sha256": "B7381DAC619A69FCC2E697FC7DE8C3C4B22B11AE01D520D04C1B45B1B541BE8A"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-gate"
+      "workingDirectory": "D:\\FamilyQuant-wt\\fetch-ledger-final"
     }
   ],
   "rows": [
@@ -60,7 +60,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "isotope count constructor / ToolTip",
-          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
         }
       ],
       "proofs": [
@@ -69,7 +69,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "isotope count tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -77,13 +77,13 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "isotope count tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],
       "note": "Explicit semantic wording comparison for C13, not an unchanged-literal declaration claim; independent review required.",
       "kindReceiptId": null,
-      "compared": "\u0022Each bar counts the peptides credited that many isotopes, from 1 up to the \u0022 -\u003E native ToolTip: Each bar counts the peptides credited that many isotopes, from 1 up to the 6-isotope ceiling; an isotope is credited only where signal was found. The colours split each bar by peptide mass."
+      "compared": "\u0022Each bar counts the peptides credited that many isotopes, from 1 up to the \u0022 -\u003E native ToolTip: Each bar counts the peptides credited that many isotopes, from 1 up to the 6-isotope ceiling; an isotope is credited only where signal was found. Mass bands split each bar by peptide mass; this read-only chart changes no project values or files."
     },
     {
       "observationId": "FQ15-19228B26B200",
@@ -91,7 +91,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "isotope count constructor / ToolTip",
-          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
         }
       ],
       "proofs": [
@@ -100,7 +100,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "isotope count tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -108,13 +108,13 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "isotope count tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],
       "note": "Explicit semantic wording comparison for C13, not an unchanged-literal declaration claim; independent review required.",
       "kindReceiptId": null,
-      "compared": "\u0022-isotope ceiling. An isotope is credited only where signal was found. The colours \u0022 -\u003E native ToolTip: Each bar counts the peptides credited that many isotopes, from 1 up to the 6-isotope ceiling; an isotope is credited only where signal was found. The colours split each bar by peptide mass."
+      "compared": "\u0022-isotope ceiling. An isotope is credited only where signal was found. The colours \u0022 -\u003E native ToolTip: Each bar counts the peptides credited that many isotopes, from 1 up to the 6-isotope ceiling; an isotope is credited only where signal was found. Mass bands split each bar by peptide mass; this read-only chart changes no project values or files."
     },
     {
       "observationId": "FQ15-0A90D9115B97",
@@ -122,7 +122,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "isotope count constructor / ToolTip",
-          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
         }
       ],
       "proofs": [
@@ -131,7 +131,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "isotope count tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -139,13 +139,13 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "isotope count tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],
       "note": "Explicit semantic wording comparison for C13, not an unchanged-literal declaration claim; independent review required.",
       "kindReceiptId": null,
-      "compared": "\u0022split each bar by peptide mass.\u0022 -\u003E native ToolTip: Each bar counts the peptides credited that many isotopes, from 1 up to the 6-isotope ceiling; an isotope is credited only where signal was found. The colours split each bar by peptide mass."
+      "compared": "\u0022split each bar by peptide mass.\u0022 -\u003E native ToolTip: Each bar counts the peptides credited that many isotopes, from 1 up to the 6-isotope ceiling; an isotope is credited only where signal was found. Mass bands split each bar by peptide mass; this read-only chart changes no project values or files."
     },
     {
       "observationId": "FQ15-8D5A75F7EDC8",
@@ -162,7 +162,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -170,7 +170,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -193,7 +193,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -201,7 +201,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -224,7 +224,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -232,7 +232,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -255,7 +255,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -263,7 +263,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],

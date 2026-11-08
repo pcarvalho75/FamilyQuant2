@@ -125,10 +125,16 @@ public static class ReportPanelSections
             string blockPrefix = "panel-block:" + Uri.EscapeDataString(family.Key) + ":";
             var rows = new List<IReadOnlyList<string>>
             {
-                new[] { "Panel key", family.Key }, new[] { "Panel decision", family.SourceDecision },
+                new[] { "Panel decision", family.SourceDecision },
                 new[] { "Action", Action(family.Decision) },
             };
-            if (family.MergeTargetFamilyKey.Length > 0) rows.Add(new[] { "Merge target key", family.MergeTargetFamilyKey });
+            if (!ManualFamilyChoices.IsGeneratedKey(family.Key)) rows.Insert(0, new[] { "Panel key", family.Key });
+            if (family.MergeTargetFamilyKey.Length > 0)
+            {
+                if (!ManualFamilyChoices.IsGeneratedKey(family.MergeTargetFamilyKey)) rows.Add(new[] { "Merge target key", family.MergeTargetFamilyKey });
+                else if (panel.Families.FirstOrDefault(target => target.Key == family.MergeTargetFamilyKey) is { } target)
+                    rows.Add(new[] { "Merge target", target.DisplayName });
+            }
             rows.AddRange(family.Names.Select(n => (IReadOnlyList<string>)new[] { n.Name, n.Text }));
             rows.AddRange(family.TextFields.Select(n => (IReadOnlyList<string>)new[] { n.Name, n.Text }));
             var blocks = new List<ReportBlock>

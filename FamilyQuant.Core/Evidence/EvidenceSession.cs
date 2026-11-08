@@ -124,7 +124,7 @@ namespace FamilyQuant.Evidence
         private static EvidenceProvenance? SessionSource(FamilyClusterFile file, NeighbourSearch? search)
         {
             if (search == null) return file.EvidenceSource;
-            EvidenceProvenance source = file.EvidenceSource == null ? new EvidenceProvenance() : Clone(file.EvidenceSource);
+            EvidenceProvenance source = file.EvidenceSource == null ? new EvidenceProvenance() : ProvenanceView(file.EvidenceSource);
             source.NearestReviewed = Clone(search);
             return source;
         }

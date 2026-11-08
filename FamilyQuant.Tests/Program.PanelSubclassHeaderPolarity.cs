@@ -15,7 +15,8 @@ internal static partial class Program
     private static void PanelSubclassHeaderPolarityTests(string output)
     {
         Section("Z16a12 column and cell polarity in subclass proposals");
-        var vocabulary = new[] { new FamilyPanelDomain { Accession = "PF01234", Name = "Anchor domain" } };
+        var vocabulary = new[] { new FamilyPanelDomain { Accession = "PF01234", Name = "Anchor domain" },
+            new FamilyPanelDomain { Accession = "PF05678", Name = "Tail domain" }, new FamilyPanelDomain { Accession = "PF09090", Name = "Extra domain" } };
         PanelSubclassProposal Propose(params (string Header, string Cell)[] fields)
         {
             var cells = fields.ToDictionary(field => field.Header, field => field.Cell, StringComparer.Ordinal);
@@ -28,50 +29,65 @@ internal static partial class Program
             if (JsonSerializer.Serialize(table) != before) throw new InvalidOperationException("Subclass proposal changed its source table.");
             return result;
         }
+        // Z16a12b replaces the earlier assumption that short prepositions give header polarity.
+        foreach (string header in new[] { "Como reconhecer no FamilyQuant", "Dom\u00ednios no grupo" })
+        {
+            var mixed = Propose((header, "Anchor domain SEM Tail domain e SEM Extra domain"));
+            var plus = Propose((header, "Anchor domain + Tail domain + Extra domain"));
+            Check("Z16a12b Portuguese preposition does not negate an unmarked first domain", mixed.Rules.Count == 3
+                && mixed.Rules.Single(rule => rule.Accession == "PF01234").Kind == PanelSubclassRuleKind.RequiredPfam
+                && mixed.Rules.Where(rule => rule.Accession != "PF01234").All(rule => rule.Kind == PanelSubclassRuleKind.AbsentPfam));
+            Check("Z16a12b Portuguese preposition leaves a plus architecture entirely required", plus.Rules.Count == 3
+                && plus.Rules.All(rule => rule.Kind == PanelSubclassRuleKind.RequiredPfam && !rule.IsUncertain));
+        }
         var absentColumns = new[]
         {
             ("English adjective", "Absent domains", "absent Anchor domain"),
-            ("English without", "Domains without", "without Anchor domain"),
-            ("English no", "No domains", "no Anchor domain"),
-            ("English not", "Not domains", "not Anchor domain"),
             ("Portuguese adjective", "Dom\u00ednios ausentes", "ausente Anchor domain"),
-            ("Portuguese sem", "Sem dom\u00ednios", "sem Anchor domain"),
             ("Spanish adjective", "Dominios ausentes", "ausentes Anchor domain"),
-            ("Spanish sin", "Sin dominios", "sin Anchor domain"),
             ("French adjective", "Domaines absents", "absents Anchor domain"),
-            ("French sans", "Sans domaines", "sans Anchor domain"),
-            ("German ohne", "Ohne Dom\u00e4nen", "ohne Anchor domain"),
             ("Leading minus", "- domains", "- Anchor domain"),
         };
         foreach (var (label, header, agreeingCell) in absentColumns)
         {
             var plain = Propose((header, "Anchor domain"));
             var agreed = Propose((header, agreeingCell));
-            Check("Z16a12 " + label + " header gives a bare cell absent polarity", plain.Rules is [{ Accession: "PF01234", Kind: PanelSubclassRuleKind.AbsentPfam, IsUncertain: false }]
-                && !plain.IsUncertain);
+            Check("Z16a12b " + label + " header inference is absent but uncertain", plain.Rules is [{ Accession: "PF01234", Kind: PanelSubclassRuleKind.AbsentPfam, IsUncertain: true }]
+                && plain.IsUncertain && plain.Rules.Single().Reason.Contains("header", StringComparison.OrdinalIgnoreCase));
             Check("Z16a12 " + label + " agreeing header and cell remain certain", agreed.Rules is [{ Kind: PanelSubclassRuleKind.AbsentPfam, IsUncertain: false }] && !agreed.IsUncertain);
+        }
+        foreach (string marker in new[] { "no", "not", "sem", "sin", "sans", "ohne", "without" })
+        {
+            var plain = Propose(("Domains " + marker + " context", "Anchor domain"));
+            var explicitCell = Propose(("Domains " + marker + " context", marker + " Anchor domain"));
+            Check("Z16a12b short word " + marker + " is cell-only", plain.Rules is [{ Kind: PanelSubclassRuleKind.RequiredPfam, IsUncertain: false }]
+                && explicitCell.Rules is [{ Kind: PanelSubclassRuleKind.AbsentPfam, IsUncertain: false }]);
         }
         foreach (string header in new[] { "Required domains", "Dom\u00ednios Pfam exigidos", "Dominios requeridos" })
         {
             var plain = Propose((header, "Anchor domain"));
             var agreed = Propose((header, "+ Anchor domain"));
-            Check("Z16a12 required header and agreeing plus keep required polarity", plain.Rules is [{ Kind: PanelSubclassRuleKind.RequiredPfam, IsUncertain: false }]
+            Check("Z16a12b required header inference needs review while an explicit plus stays certain", plain.Rules is [{ Kind: PanelSubclassRuleKind.RequiredPfam, IsUncertain: true }]
                 && agreed.Rules is [{ Kind: PanelSubclassRuleKind.RequiredPfam, IsUncertain: false }]);
             var conflict = Propose((header, "without Anchor domain"));
-            Check("Z16a12 required header versus absent cell requires review", conflict.IsUncertain && conflict.Rules.Single().IsUncertain
+            Check("Z16a12b explicit absent cell wins a required header and keeps conflict review", conflict.IsUncertain
+                && conflict.Rules is [{ Kind: PanelSubclassRuleKind.AbsentPfam, IsUncertain: true }]
                 && conflict.Rules.Single().Reason.Contains("header", StringComparison.OrdinalIgnoreCase)
                 && conflict.Rules.Single().Reason.Contains("cell", StringComparison.OrdinalIgnoreCase));
             Check("Z16a12 a newly conflicted rule cannot inherit its previous accepted identifier", conflict.Rules.Single().RuleId != plain.Rules.Single().RuleId);
         }
         var opposite = Propose(("Absent domains", "+ Anchor domain"));
-        Check("Z16a12 absent header versus explicit required cell is uncertain", opposite.IsUncertain && opposite.Rules.Single().IsUncertain);
+        Check("Z16a12b explicit required cell wins an absent header and keeps conflict review", opposite.IsUncertain
+            && opposite.Rules is [{ Kind: PanelSubclassRuleKind.RequiredPfam, IsUncertain: true }]);
         var mixedHeader = Propose(("Required or absent domains", "Anchor domain"));
         Check("Z16a12 a contradictory header stays uncertain", mixedHeader.IsUncertain && mixedHeader.Rules.Single().IsUncertain);
+        Check("Z16a12b explicit plus wins even a contradictory header", Propose(("Required or absent domains", "+ Anchor domain")).Rules
+            is [{ Kind: PanelSubclassRuleKind.RequiredPfam, IsUncertain: true }]);
         foreach (bool reversed in new[] { false, true })
         {
-            var fields = new[] { ("Required domains", "Anchor domain"), ("Other required domains", "without Anchor domain") };
+            var fields = new[] { ("Required domains", "Anchor domain"), ("Other required domains", "+ Anchor domain") };
             var merged = Propose(reversed ? fields.Reverse().ToArray() : fields);
-            Check("Z16a12 merging repeated rules keeps conflict uncertainty in either column order", merged.Rules.Count == 1 && merged.Rules.Single().IsUncertain && merged.IsUncertain);
+            Check("Z16a12b merging explicit and inferred copies keeps inference uncertainty", merged.Rules.Count == 1 && merged.Rules.Single().IsUncertain && merged.IsUncertain);
         }
         Check("Z16a12 neutral headers keep existing cell semantics and whole-word boundaries", Propose(("Architecture", "without Anchor domain")).Rules is [{ Kind: PanelSubclassRuleKind.AbsentPfam, IsUncertain: false }]
             && Propose(("Nocturnal domain annotation", "Anchor domain")).Rules is [{ Kind: PanelSubclassRuleKind.RequiredPfam, IsUncertain: false }]);
@@ -90,8 +106,9 @@ internal static partial class Program
         var withoutDomain = proposals.Single(proposal => proposal.FamilyKey == "MMP" && proposal.DisplayName == "Sem hemopexina");
         Check("Z16a12 shipped example proposes opposite rules for its two domain architectures", withDomain.Rules.Single(rule => rule.Accession == "PF00045").Kind == PanelSubclassRuleKind.RequiredPfam
             && withoutDomain.Rules.Single(rule => rule.Accession == "PF00045").Kind == PanelSubclassRuleKind.AbsentPfam
-            && withoutDomain.Rules.Single(rule => rule.Accession == "PF00413").Kind == PanelSubclassRuleKind.RequiredPfam
-            && !withDomain.IsUncertain && !withoutDomain.IsUncertain);
+            && withoutDomain.Rules.Single(rule => rule.Accession == "PF00413").Kind == PanelSubclassRuleKind.RequiredPfam);
+        Check("Z16a12b shipped header-derived rules require review", withDomain.IsUncertain && withoutDomain.IsUncertain
+            && withDomain.Rules.Concat(withoutDomain.Rules).All(rule => rule.IsUncertain && rule.Reason.Contains("header", StringComparison.OrdinalIgnoreCase)));
         var confirmed = PanelSubclassImport.BuildDefinitions(proposals, new[] { ConfirmSubclass(withDomain), ConfirmSubclass(withoutDomain) }, keys);
         var family = new FamilyPanelFamily { Key = "MMP", Subclasses = confirmed.Definitions.Select(item => item.Definition).ToList() };
         ProteinEvidence Facts(params string[] domains) => new() { Fragment = false, Pfam = domains.Select(accession => new EvidenceDomain { Accession = accession }).ToList() };

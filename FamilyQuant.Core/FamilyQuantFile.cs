@@ -89,7 +89,7 @@ namespace FamilyQuant
 
         public FamilyClusterFile()
         {
-
+            CurationLifetimeProbe.Created?.Invoke(this);
         }
 
         public void SetLookupDictionary(PatternLabProject MyPLP, OperationContext? operation = null) =>

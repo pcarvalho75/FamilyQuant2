@@ -29,6 +29,8 @@ public static class ManualFamilyChoices
 {
     public static string SequenceHash(string sequence) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(sequence)));
     public static string NewKey(string name) => "manual:" + SequenceHash(name.Trim().ToUpperInvariant());
+    public static bool IsGeneratedKey(string? key) => key is { Length: 71 }
+        && key.StartsWith("manual:", StringComparison.Ordinal) && key[7..].All(char.IsAsciiHexDigit);
     public static string Reason(EvidenceManualChoice choice) => "Added by hand" + (string.IsNullOrWhiteSpace(choice.Note) ? "." : ": " + choice.Note!.Trim());
     public static bool ValidNote(string? note) => note == null || note.Length <= 512 && !note.Any(char.IsControl);
 

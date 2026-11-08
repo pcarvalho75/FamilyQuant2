@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace FamilyQuant;
 
@@ -20,10 +21,22 @@ public partial class FamilyListImportWindow : Window
     public bool EditPanelRequested { get; private set; }
     public Func<string, bool>? BroadMatchConfirmationOverride { get; set; }
     private readonly Action<string>? exampleWriter, templateWriter;
-    private bool closing, loadingSheets;
+    private bool closing, loadingSheets, loadingRowActions, fittingSummaryRows;
+    private double summaryFitParentHeight;
     public FamilyListImportWindow(FamilyListImportViewModel model, Action<string>? exampleWriter = null, Action<string>? templateWriter = null)
     {
         InitializeComponent(); Model = model; DataContext = model;
+        Model.ConfirmWorkbookSheetChange = message => ShellMessages.Report(this, message, "Change family sheet",
+            MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes;
+        AlignSummaryCells();
+        SizeChanged += (_, _) => FitSummaryRows();
+        SheetPreviewGrid.LayoutUpdated += (_, _) => PositionPreviewTitles();
+        SheetPreviewGrid.SizeChanged += (_, _) => FitPreviewColumns();
+        model.PropertyChanged += (_, args) =>
+        {
+            if (args.PropertyName == nameof(FamilyListImportViewModel.Page))
+            { summaryFitParentHeight = 0; if (model.Page == 5) Dispatcher.BeginInvoke(FitSummaryRows); }
+        };
         this.exampleWriter = exampleWriter; this.templateWriter = templateWriter;
         ExampleButton.IsEnabled = exampleWriter != null;
         if (exampleWriter == null) ExampleButton.ToolTip = "Unavailable in this view; open File > Import family list to try the built-in example. Nothing changes in the project or workbook.";
@@ -34,8 +47,9 @@ public partial class FamilyListImportWindow : Window
         WorkbookOverview.ReviewRequested += async section => await Model.ReviewWorkbookSectionAsync(section);
         Model.WorkbookViewRequested += WorkbookView_Requested;
         Model.PropertyChanged += Model_Changed;
+        RefreshRowActionChoice(updateOptions: true);
         PreviewKeyDown += Window_KeyDown;
-        Closed += (_, _) => { Model.WorkbookViewRequested -= WorkbookView_Requested; Model.PropertyChanged -= Model_Changed; Model.Dispose(); };
+        Closed += (_, _) => { Model.ConfirmWorkbookSheetChange = null; Model.WorkbookViewRequested -= WorkbookView_Requested; Model.PropertyChanged -= Model_Changed; Model.Dispose(); };
     }
 
     private void Model_Changed(object? sender, PropertyChangedEventArgs e)
@@ -46,8 +60,36 @@ public partial class FamilyListImportWindow : Window
             DecisionMeaningColumn.Visibility = Model.HasWorkbookMap ? Visibility.Visible : Visibility.Collapsed;
         }
         if (e.PropertyName == nameof(FamilyListImportViewModel.Preview)) BuildPreview();
+        if (e.PropertyName is nameof(FamilyListImportViewModel.SelectedSpecialRow) or nameof(FamilyListImportViewModel.AvailableRowOptions))
+            RefreshRowActionChoice(updateOptions: true);
+        else if (e.PropertyName == nameof(FamilyListImportViewModel.CanUseRowChoice)) RefreshRowActionChoice(updateOptions: false);
         if (e.PropertyName is nameof(FamilyListImportViewModel.Page) or nameof(FamilyListImportViewModel.ReviewingDecisions))
             Dispatcher.BeginInvoke(new Action(() => { if (!closing && IsLoaded) { PageHeading.Focus(); PageHeading.BringIntoView(); } }));
+    }
+
+    private void RefreshRowActionChoice(bool updateOptions)
+    {
+        if (!Dispatcher.CheckAccess())
+        {
+            Dispatcher.BeginInvoke(new Action(() => RefreshRowActionChoice(updateOptions)));
+            return;
+        }
+        if (closing) return;
+        loadingRowActions = true;
+        try
+        {
+            if (updateOptions) RowActionChoice.ItemsSource = Model.AvailableRowOptions;
+            RowActionChoice.SelectedValue = Model.SelectedSpecialRow?.Action;
+        }
+        finally { loadingRowActions = false; }
+    }
+
+    private void RowAction_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (loadingRowActions || Model == null || !Model.CanEdit || Model.SelectedSpecialRow == null
+            || RowActionChoice.SelectedValue is not FamilyPanelRowAction action
+            || !Model.AvailableRowOptions.Any(option => option.Value == action)) return;
+        Model.SelectedSpecialRow.Action = action;
     }
 
     private void BuildPreview()
@@ -55,6 +97,7 @@ public partial class FamilyListImportWindow : Window
         loadingSheets = true;
         try
         {
+            previewTitles.Clear(); PreviewMergedTitles.Children.Clear();
             SheetPreviewGrid.Columns.Clear(); SheetPreviewGrid.ItemsSource = null;
             var preview = Model.Preview;
             if (preview == null) return;
@@ -77,17 +120,19 @@ public partial class FamilyListImportWindow : Window
                 text.SetBinding(FrameworkElement.ToolTipProperty, new Binding("Cells[" + column + "]") { Converter = new ImportSourceDetailConverter() });
                 border.AppendChild(text);
                 string letter = preview.Rows.FirstOrDefault(r => r.Cells.Count > column)?.Cells[column].ColumnLetter ?? (column + 1).ToString(CultureInfo.CurrentCulture);
-                var sourceColumn = new DataGridTemplateColumn { Header = letter, Width = 135, MinWidth = 110,
+                var sourceColumn = new DataGridTemplateColumn { Header = letter, Width = 145, MinWidth = 110,
                     CellTemplate = new DataTemplate { VisualTree = border }, ClipboardContentBinding = new Binding("Cells[" + column + "].Text"), IsReadOnly = true };
                 Themes.TableAppearance.SetHeaderToolTip(sourceColumn, "Original workbook column " + letter + "; read only, with complete cell text available in Cell details. Selecting a cell changes only the displayed details.");
                 SheetPreviewGrid.Columns.Add(sourceColumn);
             }
             SheetPreviewGrid.ItemsSource = preview.Rows;
+            BuildPreviewTitles(preview);
             SheetChoice.SelectedItem = Model.Sheet;
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (closing || !ReferenceEquals(Model.Preview, preview) || preview.Rows.Count == 0) return;
                 SheetPreviewGrid.ScrollIntoView(preview.Rows[0]);
+                FitPreviewColumns();
             }));
         }
         finally { loadingSheets = false; }
@@ -113,7 +158,10 @@ public partial class FamilyListImportWindow : Window
     private async void Sheet_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (loadingSheets || Model == null || Model.IsBusy || Model.Imported || SheetChoice.SelectedItem is not string name || name == Model.Sheet) return;
-        await Model.LoadAsync(Model.WorkbookPath, name);
+        if (Model.HasWorkbookMap) await Model.SelectWorkbookFamilySheetAsync(name);
+        else await Model.LoadAsync(Model.WorkbookPath, name);
+        if (SheetChoice.SelectedItem as string != Model.Sheet)
+        { loadingSheets = true; try { SheetChoice.SelectedItem = Model.Sheet; } finally { loadingSheets = false; } }
     }
 
     private async void Header_Click(object sender, RoutedEventArgs e)
@@ -209,8 +257,74 @@ public partial class FamilyListImportWindow : Window
     {
         if (section is "sheets" or "notes" or "problems") WorkbookTabs.SelectedItem = WorkbookMapTab;
         if (section == "colours") ColourCategories.IsExpanded = true;
+        if (section == "subclasses" && Model.WorkbookHasReviewProblems) WorkbookSubclassReview.CheckChoices();
     }
-    private void ShowHelp() => FamilyListImportGuideWindow.Show(this);
+    private void ShowHelp() => FamilyListImportGuideWindow.Show(this, HelpSectionKey());
+    private string HelpSectionKey() => Model.Page switch
+    {
+        0 => "welcome",
+        1 => "file",
+        2 => Model.ReviewingDecisions ? "decisions" : "columns",
+        3 => "special",
+        4 => "matches",
+        5 => "summary",
+        _ => "done",
+    };
+
+    private void AlignSummaryCells()
+    {
+        var summaryText = new Style(typeof(TextBlock), (Style)FindResource("WizardCellText"));
+        summaryText.Setters.Add(new Setter(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center));
+        foreach (var column in SummaryGrid.Columns.OfType<DataGridTextColumn>()) column.ElementStyle = summaryText;
+    }
+
+    private void SummaryGrid_SizeChanged(object sender, SizeChangedEventArgs e) => FitSummaryRows();
+
+    private void FitSummaryRows()
+    {
+        if (fittingSummaryRows || Model?.Page != 5 || SummaryGrid.Parent is not FrameworkElement parent) return;
+        double parentHeight = parent.ActualHeight;
+        if (parentHeight <= 0 || (Math.Abs(parentHeight - summaryFitParentHeight) < 0.5 && !double.IsNaN(SummaryGrid.MaxHeight))) return;
+        fittingSummaryRows = true;
+        try
+        {
+            SummaryGrid.ClearValue(MaxHeightProperty);
+            SummaryGrid.UpdateLayout();
+            double limit = SummaryGrid.ActualHeight;
+            if (limit <= 0) return;
+            var scroll = FindDescendant<ScrollViewer>(SummaryGrid);
+            if (scroll != null && scroll.ComputedHorizontalScrollBarVisibility == Visibility.Visible)
+                limit -= SystemParameters.HorizontalScrollBarHeight;
+            double lastFull = 0;
+            for (int index = 0; index < SummaryGrid.Items.Count; index++)
+            {
+                if (SummaryGrid.ItemContainerGenerator.ContainerFromIndex(index) is not DataGridRow row || row.ActualHeight <= 0) continue;
+                double bottom;
+                try { bottom = row.TransformToAncestor(SummaryGrid).Transform(new Point(0, row.ActualHeight)).Y; }
+                catch (InvalidOperationException) { break; }
+                if (bottom <= limit + 0.5) lastFull = bottom;
+                else break;
+            }
+            if (lastFull <= 0) return;
+            summaryFitParentHeight = parentHeight;
+            if (lastFull < SummaryGrid.ActualHeight - 1)
+                SummaryGrid.MaxHeight = lastFull + SummaryGrid.BorderThickness.Bottom;
+        }
+        finally { fittingSummaryRows = false; }
+    }
+
+    private static T? FindDescendant<T>(DependencyObject root) where T : DependencyObject
+    {
+        int count = VisualTreeHelper.GetChildrenCount(root);
+        for (int index = 0; index < count; index++)
+        {
+            var child = VisualTreeHelper.GetChild(root, index);
+            if (child is T found) return found;
+            var nested = FindDescendant<T>(child);
+            if (nested != null) return nested;
+        }
+        return null;
+    }
 
     private void CommitGridEdits()
     {

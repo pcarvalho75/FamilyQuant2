@@ -100,6 +100,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => CoreOperationTests(workDir));
             suite.Add(() => StreamingSaveTests(Path.Combine(workDir, "streaming-save")));
             suite.Add(() => CurationStreamingCallerTests());
+            suite.Add(() => CurationProofSamplerTests());
             suite.Add(() => CurationFormat2Tests(Path.Combine(workDir, "curation-format2")));
             suite.AddWithApplication(() => RecipeCopiesTests(Path.Combine(workDir, "recipe-copies")));
             suite.Add(() => FeatureProvenanceFormatTests(Path.Combine(workDir, "feature-provenance")));
@@ -133,6 +134,9 @@ namespace FamilyQuant.Tests
             suite.Add(() => ResultsTooltipTests());
             suite.Add(() => Check("native Results export fixture propagates its worker exit status",
                 RunResultsExportFixture(Path.Combine(workDir, "results-export-facts")) == 0));
+            suite.AddWithApplication(() => ResultsDocumentLifetimeTests(Path.Combine(workDir, "results-document-lifetime")));
+            suite.Add(() => Check("native dispatcher reclaim fixture propagates its worker exit status",
+                CurationDispatcherReclaimTests(Path.Combine(workDir, "dispatcher-reclaim-" + Guid.NewGuid().ToString("N"))) == 0));
             suite.Add(() => DeNovoViewModelTests(workDir));
             suite.Add(() => HomologyResultsTests(workDir));
             suite.Section("Database parsing and the decoy tag");
@@ -284,11 +288,13 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ManualFamilyUiTests());
             suite.AddWithApplication(() => ImportWizardMockTests());
             suite.AddWithApplication(() => FamilyListImportTests());
+            suite.AddWithApplication(() => ImportWalkLayoutTests(Path.Combine(workDir, "import-walk-layout")));
             suite.AddWithApplication(() => ImportPreparationTests());
             suite.AddWithApplication(() => DisabledTableTests());
             suite.AddWithApplication(() => ImportTooltipCopyTests());
             suite.AddWithApplication(() => WorkbookWizardTests());
             suite.AddWithApplication(() => WorkbookOverviewTests());
+            suite.AddWithApplication(() => WorkbookSummaryPolishTests());
             suite.AddWithApplication(() => WorkbookSubclassReviewTests());
             suite.AddWithApplication(() => ImportWizardToolTipTests());
             suite.AddWithApplication(() => SuperClusterPreviewUiTests(workDir));
@@ -511,6 +517,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => CurationSaveResultTests(workDir));
             suite.Add(() => ThemePreferenceTests(workDir));
             suite.Section("Feature ledger - frozen source inventory and explicit preservation checks");
+            suite.Add(() => LedgerDiagnosticTests());
             suite.Add(() => FeatureLedgerBaseTests());
             for (int mutation = 0; mutation < FeatureLedgerMutations; mutation++)
             {

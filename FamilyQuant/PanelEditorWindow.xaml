@@ -21,7 +21,7 @@
             <TextBox x:Name="PanelName" Width="230" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left"
                      ToolTip="Name stored with this panel: default is its saved name or empty for a new panel, with free text, no unit or fixed length limit. Only the draft changes until Apply panel."/>
         </DockPanel>
-        <TabControl Grid.Row="2" Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}"
+        <TabControl Grid.Row="2" Background="{DynamicResource CanvasBrush}"
                     ToolTip="Switches between the editable panel draft and the source text saved with it. Apply panel commits the draft.">
         <TabItem Header="Families and import" ToolTip="Edits the draft families and import choices. Source notes stay unchanged.">
         <Grid Margin="0,8,0,0">
@@ -31,9 +31,9 @@
                     <RowDefinition Height="Auto"/><RowDefinition Height="100"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                 <TextBlock Text="Families" Style="{StaticResource SectionTitle}"/>
                 <DataGrid x:Name="FamilyGrid" Grid.Row="1" Margin="0,6,0,6" ItemsSource="{Binding Families}" AutoGenerateColumns="False"
-                          CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" SelectionUnit="FullRow" CellEditEnding="FamilyGrid_CellEditEnding" ToolTip="Edits the draft family keys, names, decisions, domains and subclass keys. Apply panel commits the draft as one undoable project change.">
+                          CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" SelectionUnit="FullRow" BeginningEdit="FamilyGrid_BeginningEdit" CellEditEnding="FamilyGrid_CellEditEnding" ToolTip="Edits the draft family keys, names, decisions, domains and subclass keys. Apply panel commits the draft as one undoable project change.">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Key" Binding="{Binding Key, UpdateSourceTrigger=PropertyChanged}" Width="110" theme:TableAppearance.HeaderToolTip="Unique, nonempty text key for this panel family; a new row starts empty, with no unit or fixed length limit. Changing it moves retained matching choices to the new key when the draft is applied."/>
+                        <DataGridTextColumn x:Name="FamilyKeyColumn" Header="Key" Binding="{Binding KeyDisplay, UpdateSourceTrigger=PropertyChanged}" Width="110" theme:TableAppearance.HeaderToolTip="Unique, nonempty text key for this panel family; a new row starts empty, with no unit or fixed length limit. Families added by hand show their names here and are renamed in Name; other key edits move matching choices when Apply panel commits the draft."/>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="*" theme:TableAppearance.HeaderToolTip="Display name for this family; a new row starts empty and requires nonempty free text with no unit or fixed length limit. Only the panel draft changes until Apply panel."/>
                         <DataGridComboBoxColumn x:Name="DecisionColumn" Header="Decision" SelectedValueBinding="{Binding Decision, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Label" SelectedValuePath="Value" Width="145" theme:TableAppearance.HeaderToolTip="Chooses Quantify, Report under others, Not a family or Merge into family for this draft row; new rows default to Quantify. A merge needs another family's key, and only Apply panel commits the choice.">
                             <DataGridComboBoxColumn.ElementStyle>
@@ -47,7 +47,18 @@
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
                         </DataGridComboBoxColumn>
-                        <DataGridTextColumn Header="Merge target key" Binding="{Binding MergeTarget, UpdateSourceTrigger=PropertyChanged}" Width="120" theme:TableAppearance.HeaderToolTip="Target family key for Merge into family: default empty, otherwise use an existing panel key other than this row's key. There is no unit; only the draft changes until Apply panel."/>
+                        <DataGridComboBoxColumn x:Name="MergeTargetColumn" Header="Merge target" SelectedValueBinding="{Binding MergeTarget, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Key" DisplayMemberPath="FamilyChoiceLabel" Width="120" theme:TableAppearance.HeaderToolTip="Merge target family, initially the saved target or unselected; choose another family from this panel. This is used only for Merge into family and stays in the draft until Apply panel.">
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="ComboBox" BasedOn="{x:Static DataGridComboBoxColumn.DefaultElementStyle}">
+                                    <Setter Property="ToolTip" Value="Merge target family, initially the saved target or unselected; choose another family from this panel. This is used only for Merge into family and stays in the draft until Apply panel."/>
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
+                            <DataGridComboBoxColumn.EditingElementStyle>
+                                <Style TargetType="ComboBox" BasedOn="{x:Static DataGridComboBoxColumn.DefaultEditingElementStyle}">
+                                    <Setter Property="ToolTip" Value="Merge target family, initially the saved target or unselected; choose another family from this panel. This is used only for Merge into family and stays in the draft until Apply panel."/>
+                                </Style>
+                            </DataGridComboBoxColumn.EditingElementStyle>
+                        </DataGridComboBoxColumn>
                         <DataGridTextColumn Header="Pfam codes" Binding="{Binding Pfam, UpdateSourceTrigger=PropertyChanged}" Width="120" theme:TableAppearance.HeaderToolTip="Pfam accessions for this family, separated by semicolons, commas or line breaks; default empty, no unit or count limit. Existing domain details are kept for unchanged codes, and only Apply panel commits the draft."/>
                         <DataGridTextColumn Header="Subclass keys" Binding="{Binding Subclasses, UpdateSourceTrigger=PropertyChanged}" Width="120" theme:TableAppearance.HeaderToolTip="Subclass keys separated by semicolons, commas or line breaks; default empty, no unit or count limit, with each key unique in this family. Unchanged keys keep their rules; Apply panel commits changes."/>
                     </DataGrid.Columns>

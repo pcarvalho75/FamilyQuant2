@@ -10,7 +10,7 @@ namespace FamilyQuant.Tests;
 internal static partial class Program
 {
     private static readonly Regex UiHexColor = new(@"#[0-9a-fA-F]{3}(?:[0-9a-fA-F]|[0-9a-fA-F]{3}|[0-9a-fA-F]{5})?(?![0-9a-fA-F])", RegexOptions.CultureInvariant);
-    private static readonly Regex UiNamedColor = new(@"\b(?:Brushes|Colors)\.[A-Z][A-Za-z]+", RegexOptions.CultureInvariant);
+    private static readonly Regex UiNamedColor = new(@"\b(?<type>Brushes|Colors)\.(?<name>[A-Z][A-Za-z]+)", RegexOptions.CultureInvariant);
     private static readonly Regex UiColorFactory = new(@"\b(?:Color\.(?:FromRgb|FromArgb|FromScRgb)|FreezeRgb|MakeBrush)\s*\((?<args>[^()]{1,180})\)", RegexOptions.CultureInvariant);
     private static readonly Regex UiColorNumber = new(@"^[+-]?(?:0x[0-9a-fA-F]+|(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+))[fFdDuUmM]?$", RegexOptions.CultureInvariant);
     private static readonly Regex UiColorInitializer = new(@"\bnew\s*(?:(?:global::)?(?:System\.Windows\.Media\.)?Color\s*(?:\(\s*\))?|\(\s*\))\s*\{(?<members>[^{}]*)\}", RegexOptions.CultureInvariant);
@@ -20,7 +20,13 @@ internal static partial class Program
     private static IEnumerable<int> UiColorLiteralPositions(string source)
     {
         foreach (Match match in UiHexColor.Matches(source)) yield return match.Index;
-        foreach (Match match in UiNamedColor.Matches(source)) yield return match.Index;
+        foreach (Match match in UiNamedColor.Matches(source))
+        {
+            // Workbook fill collections also use Colors; their methods are not WPF palette properties.
+            Type palette = match.Groups["type"].Value == "Brushes" ? typeof(System.Windows.Media.Brushes) : typeof(System.Windows.Media.Colors);
+            if (palette.GetProperty(match.Groups["name"].Value, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static) != null)
+                yield return match.Index;
+        }
         foreach (Match match in UiColorFactory.Matches(source))
         {
             string[] args = match.Groups["args"].Value.Split(',');
@@ -36,6 +42,19 @@ internal static partial class Program
 
     private static void UiColorTests()
     {
+        const string workbookData = """
+            proposal.Colors.Clear();
+            proposal.Colors.Add(new PanelWorkbookColorHint { Color = color });
+            if (proposal.Colors.Count > 0) ReadLegend();
+            choices.ColorLabels = proposal.Colors.Where(color => !color.IsUncertain);
+            var hint = workbookSnapshot?.Colors.FirstOrDefault(c => c.Color.Equals(color));
+            """;
+        Check("UI color guard allows workbook fill collections rather than treating their methods as WPF colors",
+            !UiColorLiteralPositions(workbookData).Any());
+        const string plantedPaint = "button.Background = System.Windows.Media.Brushes.White;";
+        string mixedSource = workbookData + "\n" + plantedPaint;
+        Check("UI color guard still reports a real UI literal planted beside workbook fill data",
+            UiColorLiteralPositions(mixedSource).SequenceEqual(new[] { mixedSource.IndexOf("Brushes.White", StringComparison.Ordinal) }));
         Check("UI color guard rejects planted hex, named brushes, fixed RGB factories and XAML color names",
             new[] { "Foreground=\"#FF00FF\"", "Color.FromRgb(255, 0, 255)", "Brushes.White", "Colors.Magenta",
                 "FreezeRgb(0x1F, 0x4E, 0x8C)", "Color.FromRgb(\n255,\n0,\n255)", "Foreground=\"White\"",

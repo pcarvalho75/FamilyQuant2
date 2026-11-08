@@ -23,11 +23,11 @@ public static partial class WorkbookImportSummaries
         var source = Copy(proposal); var choices = PrepareChoices(source);
         var keyPreview = KeyPreview(source, choices);
         var keys = Freeze(keyPreview.Rows.SelectMany(row => row.FamilyKeys).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal));
-        var expected = ExpectedNames(source, choices, keyPreview);
+        var expected = ExpectedNames(source, choices, keyPreview, out var subclassNotes);
         var vocabulary = matching.RecognizedPfamDomains().Select(Copy).ToList();
         var subclassProposals = PanelSubclassImport.Propose(source.SubclassTables, keys, vocabulary, expected).Proposals;
         var plan = new WorkbookImportPlan { Proposal = source, Choices = choices, Matching = matching,
-            Subclasses = Copy(subclassProposals), ExpectedNames = expected, Vocabulary = vocabulary,
+            Subclasses = Copy(subclassProposals), ExpectedNames = expected, SubclassNotes = subclassNotes, Vocabulary = vocabulary,
             ReviewedSubclasses = reviewedSubclasses == null ? DraftSubclasses(subclassProposals, keys) : Copy(reviewedSubclasses.ToList()),
             ReviewedEvidence = new(StringComparer.Ordinal) };
         var table = source.FamilyTable;
@@ -161,10 +161,20 @@ public static partial class WorkbookImportSummaries
             plan.Actions.Where(action => action.Item.State == WorkbookImportItemState.Proposed).Select(action => action.Value).OfType<FamilyPanelDecisionMapping>().ToArray());
         PrepareFamilyRows(plan, preview, keyPreview);
         foreach (var problem in source.Problems.Concat(preview.Problems).DistinctBy(problem => JsonSerializer.Serialize(problem)))
-            if (problem.Severity == PanelImportSeverity.Blocking)
-                Add(WorkbookImportSectionKind.FamilyRows, "Workbook problem", problem.Message, problem.Message, WorkbookImportItemState.CouldNotPlace,
-                    problem.Kind is PanelImportProblemKind.DecisionNotMapped or PanelImportProblemKind.DecisionMappingInvalid ? WorkbookImportPage.Decisions : WorkbookImportPage.FamilyRows,
-                    true, sources: new[] { At(problem.RowNumber > 0 ? new[] { problem.RowNumber } : null, new[] { problem.Column }, problem.SheetName) });
+        {
+            if (problem.Severity != PanelImportSeverity.Blocking) continue;
+            bool decisionAlreadyShown = (problem.Kind is PanelImportProblemKind.DecisionNotMapped or PanelImportProblemKind.DecisionMappingInvalid)
+                && !string.IsNullOrWhiteSpace(problem.Value)
+                && (string.IsNullOrEmpty(problem.SheetName) || problem.SheetName == source.FamilySheet)
+                && (string.IsNullOrEmpty(problem.Column) || problem.Column == decisionColumn)
+                && plan.Actions.Any(action => action.Section == WorkbookImportSectionKind.Decisions && action.Item.Label == problem.Value
+                    && action.Item.Required && (action.Item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace)
+                    && (problem.RowNumber <= 0 || action.Item.Sources.Any(finding => finding.RowNumbers.Contains(problem.RowNumber))));
+            if (decisionAlreadyShown) continue;
+            Add(WorkbookImportSectionKind.FamilyRows, "Workbook problem", problem.Message, problem.Message, WorkbookImportItemState.CouldNotPlace,
+                problem.Kind is PanelImportProblemKind.DecisionNotMapped or PanelImportProblemKind.DecisionMappingInvalid ? WorkbookImportPage.Decisions : WorkbookImportPage.FamilyRows,
+                true, sources: new[] { At(problem.RowNumber > 0 ? new[] { problem.RowNumber } : null, new[] { problem.Column }, problem.SheetName) });
+        }
         foreach (var kind in Enum.GetValues<WorkbookImportSectionKind>())
             if (!plan.Actions.Any(action => action.Section == kind))
                 Add(kind, kind.ToString(), "None found", "No findings of this kind were supplied by the workbook proposal.", WorkbookImportItemState.Found,

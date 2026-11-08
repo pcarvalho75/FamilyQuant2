@@ -40,9 +40,17 @@ public sealed partial class FamilyListImportViewModel
             var suggestions = await Task.Run(() =>
             {
                 token.ThrowIfCancellationRequested();
-                var source = copyProject(transaction.Project, new OperationContext(token));
-                token.ThrowIfCancellationRequested();
-                var result = matcher?.Suggest(source, detached) ?? Array.Empty<ImportMatchFamily>();
+                IReadOnlyList<ImportMatchFamily> result;
+                if (matcher is FamilyListStoredEvidenceMatches stored && copyProjectOverride == null)
+                    result = stored.Suggest(detached);
+                else
+                {
+                    var context = new OperationContext(token);
+                    var source = copyProjectOverride != null ? copyProjectOverride(transaction.Project, context)
+                        : transaction.Project.DeepCopy(context);
+                    token.ThrowIfCancellationRequested();
+                    result = matcher?.Suggest(source, detached) ?? Array.Empty<ImportMatchFamily>();
+                }
                 token.ThrowIfCancellationRequested();
                 return result;
             }, token);

@@ -52,9 +52,10 @@ internal static partial class Program
             Path.Combine(root, "docs", "feature-ledger-scan.json")))!;
         string markdown = File.ReadAllText(Path.Combine(root, "docs", "FEATURE-LEDGER.md"));
         bool receipts = !LedgerReceiptsSkipped(release);
-        var errors = FeatureLedger.Validate(inventory, markdown, release, checkReceipts: receipts);
-        Check("feature ledger scan equals rows and every row names a known check", errors.Count == 0,
-            string.Join("; ", errors.Take(5)));
+        var deferrals = release ? FeatureLedger.LoadReleaseDeferrals(root) : null;
+        var errors = FeatureLedger.Validate(inventory, markdown, release, checkReceipts: receipts, releaseDeferrals: deferrals);
+        ReportFeatureLedgerValidation(errors);
+        if (deferrals != null) Console.WriteLine(FeatureLedger.ReleaseSummary(markdown, deferrals));
         if (!receipts) SkipLedgerReceipts("feature ledger VERIFIED rows carry current executed receipts");
         Check("feature ledger includes both help pages", inventory.Observations.Count(o => o.Kind == "help page") == 2);
         Check("feature ledger records Paulo's two UI retirements and preserves homology and engines",
@@ -68,6 +69,9 @@ internal static partial class Program
     }
 
     private const int FeatureLedgerMutations = 6;
+
+    private static void ReportFeatureLedgerValidation(System.Collections.Generic.IReadOnlyList<string> errors) =>
+        Check("feature ledger scan equals rows and every row names a known check", errors.Count == 0, LedgerDiagnostics.Capped(errors));
 
     /// <summary>One planted ledger change that validation must reject. Each validation reads every receipt,
     /// so the default suite gives each its own entry.</summary>
@@ -108,8 +112,12 @@ internal static partial class Program
                     noEvidence, checkReceipts: receipts).Count > 0);
                 break;
             case 4:
+                string unapprovedOpen = MutateCell(7, "OPEN");
+                string openRow = unapprovedOpen.Split('\n').First(line => line.StartsWith("| FQ15-", StringComparison.Ordinal));
+                string[] openCells = openRow.Split('|'); openCells[8] = " pending ";
+                unapprovedOpen = unapprovedOpen.Replace(openRow, string.Join('|', openCells), StringComparison.Ordinal);
                 Check("feature ledger release gate rejects open rows", FeatureLedger.Validate(inventory,
-                    MutateCell(7, "OPEN"), true, checkReceipts: receipts).Count > 0);
+                    unapprovedOpen, true, checkReceipts: receipts).Count > 0);
                 break;
             case 5:
                 Check("feature ledger rejects a changed inventory even if row counts are changed with it",

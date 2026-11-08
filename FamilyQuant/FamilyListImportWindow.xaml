@@ -57,6 +57,12 @@
                 <Binding Path="ToolTip" RelativeSource="{RelativeSource AncestorType=DataGridRow}"/>
             </MultiBinding></Setter.Value></Setter>
         </Style>
+        <Style x:Key="WorkbookRoleCombo" TargetType="ComboBox" BasedOn="{StaticResource WizardCellCombo}">
+            <Setter Property="ToolTip" Value="Choose Family list, Colour legend, Subclass table or Notes for this sheet. Changing its role rebuilds the draft without changing the workbook or project."/>
+        </Style>
+        <Style x:Key="WorkbookRoleComboEditor" TargetType="ComboBox" BasedOn="{StaticResource WizardCellComboEditor}">
+            <Setter Property="ToolTip" Value="Choose Family list, Colour legend, Subclass table or Notes for this sheet. Changing its role rebuilds the draft without changing the workbook or project."/>
+        </Style>
         <Style x:Key="WizardPage" TargetType="Grid"><Setter Property="Visibility" Value="Collapsed"/></Style>
         <Style x:Key="StepButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/><Setter Property="Padding" Value="12"/>
@@ -68,6 +74,7 @@
         </Style>
         <Style x:Key="SourceText" TargetType="TextBlock" BasedOn="{StaticResource BodyText}">
             <Setter Property="TextWrapping" Value="Wrap"/><Setter Property="Margin" Value="4,2"/>
+            <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=DataGridCell}}"/>
             <Setter Property="ToolTip"><Setter.Value><MultiBinding Converter="{StaticResource CellToolTip}">
                 <Binding Path="Column.(theme:TableAppearance.HeaderToolTip)" RelativeSource="{RelativeSource AncestorType=DataGridCell}"/>
                 <Binding Path="Text" RelativeSource="{RelativeSource Self}"/>
@@ -97,11 +104,15 @@
             <ItemsControl ItemsSource="{Binding Steps}" HorizontalContentAlignment="Stretch" Visibility="{Binding ShowingWizardPages, Converter={StaticResource BoolVisibility}}">
                 <ItemsControl.ItemTemplate><DataTemplate>
                     <Button Content="{Binding}" Tag="{Binding Index}" Click="Step_Click" Style="{StaticResource StepButton}" IsEnabled="{Binding Enabled}"
-                            AutomationProperties.Name="{Binding Label}" ToolTip="{Binding ToolTip}">
-                        <Button.ContentTemplate><DataTemplate><StackPanel>
-                            <TextBlock Text="{Binding Label}" Style="{StaticResource BodyText}"/>
-                            <TextBlock Text="Done" Margin="18,2,0,0" Style="{StaticResource CaptionText}" Visibility="{Binding Done, Converter={StaticResource BoolVisibility}}"/>
-                        </StackPanel></DataTemplate></Button.ContentTemplate>
+                            AutomationProperties.Name="{Binding AccessibleName}" ToolTip="{Binding ToolTip}">
+                        <Button.ContentTemplate><DataTemplate><Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="22"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Number}" Style="{StaticResource BodyText}"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource BodyText}"/>
+                                <TextBlock Text="Done" Style="{StaticResource CaptionText}" Visibility="{Binding Done, Converter={StaticResource BoolVisibility}}"/>
+                            </StackPanel>
+                        </Grid></DataTemplate></Button.ContentTemplate>
                     </Button>
                 </DataTemplate></ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -112,7 +123,23 @@
                 <TextBlock Text="{Binding StepLabel}" Style="{StaticResource CaptionText}"/>
                 <TextBlock x:Name="PageHeading" Text="{Binding Title}" Style="{StaticResource PageTitle}" Focusable="True"
                            AutomationProperties.LiveSetting="Polite" AutomationProperties.Name="{Binding StepLabel}"/>
-                <TextBlock Text="{Binding Explanation}" Style="{StaticResource CaptionText}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding Explanation}"/>
+                <TextBlock Text="{Binding Explanation}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" ToolTip="{Binding Explanation}"/>
+                <Border Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="1" Padding="6" Margin="0,8,0,0"
+                        Visibility="{Binding HasSubclassReviewFindings, Converter={StaticResource BoolVisibility}}">
+                    <StackPanel>
+                        <ScrollViewer x:Name="SubclassFindingScroll" MaxHeight="64" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                                      AutomationProperties.Name="Subclass findings to review"
+                                      ToolTip="Scroll through subclass overlaps and source notes. These read-only findings do not block import; editing a choice or the sheet changes the next proposal.">
+                            <ItemsControl x:Name="SubclassFindingList" ItemsSource="{Binding SubclassReviewFindings}">
+                                <ItemsControl.ItemTemplate><DataTemplate><StackPanel Margin="0,6,0,6">
+                                    <TextBlock Text="{Binding Value}" Style="{StaticResource BodyText}" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Reason}" Style="{StaticResource BodyText}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Source}" Style="{StaticResource CaptionText}" TextWrapping="Wrap"/>
+                                </StackPanel></DataTemplate></ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Border>
             </StackPanel>
             <Grid Grid.Row="1">
                 <local:FamilyListWorkbookOverview x:Name="WorkbookOverview" Visibility="{Binding ReviewingWorkbook, Converter={StaticResource BoolVisibility}}"/>
@@ -180,9 +207,9 @@
                     <TabControl x:Name="WorkbookTabs" Grid.Row="1" SelectedIndex="1" Padding="0">
                         <TabItem x:Name="WorkbookMapTab" Header="Workbook sheets" Visibility="{Binding HasWorkbookMap, Converter={StaticResource BoolVisibility}}"
                                  ToolTip="Shows every source sheet, its proposed role and what is kept. Role changes rebuild the draft proposal; the workbook and project stay unchanged.">
-                            <Grid Margin="0,6,0,0"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                                <StackPanel Margin="0,0,0,6"><DockPanel><Button Content="Use selected family sheet" DockPanel.Dock="Right" Click="WorkbookFamilySheet_Click" IsEnabled="{Binding CanChooseFamilySheet}"
-                                    ToolTip="Uses the selected sheet as the family list and rebuilds its column proposals. Choose a sheet to enable this before Import while no step is running; the workbook and project stay unchanged."/>
+                            <Grid Margin="0,6,0,0"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                                <StackPanel Margin="0,0,0,6"><DockPanel><Button Content="Use selected family sheet" DockPanel.Dock="Right" Margin="0" Click="WorkbookFamilySheet_Click" IsEnabled="{Binding CanChooseFamilySheet}"
+                                    ToolTip="Uses the selected sheet as the family list and rebuilds its column proposals without changing the workbook or project. Available before import while no step is running; select a different sheet or resolve the pending family-sheet choice to enable it."/>
                                     <TextBlock Text="{Binding WorkbookMapSummary}" Style="{StaticResource SectionTitle}"/></DockPanel>
                                     <TextBlock Text="{Binding WorkbookHintStatus}" Style="{StaticResource CaptionText}"/>
                                     <ItemsControl ItemsSource="{Binding WorkbookProblemMessages}"><ItemsControl.ItemTemplate><DataTemplate>
@@ -194,7 +221,7 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Sheet" Binding="{Binding Name}" Width="2*" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Original sheet name, read only. Hidden sheets are listed too; no name is used as a family rule."/>
                                         <DataGridComboBoxColumn x:Name="WorkbookRoleColumn" Header="Use as" SelectedValueBinding="{Binding Role, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Value" DisplayMemberPath="Label" Width="160"
-                                            ElementStyle="{StaticResource WizardCellCombo}" EditingElementStyle="{StaticResource WizardCellComboEditor}" theme:TableAppearance.HeaderToolTip="The proposed role: Family list, Colour legend, Subclass table or Notes. You may change it before Import; changing a role rebuilds the draft and keeps the workbook unchanged."/>
+                                            ElementStyle="{StaticResource WorkbookRoleCombo}" EditingElementStyle="{StaticResource WorkbookRoleComboEditor}" theme:TableAppearance.HeaderToolTip="The proposed role: Family list, Colour legend, Subclass table or Notes. You may change it before Import; changing a role rebuilds the draft and keeps the workbook unchanged."/>
                                         <DataGridTextColumn Header="Kept as" Binding="{Binding Contribution}" Width="180" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="How this sheet contributes to the proposal, based on its selected role. Notes are kept as original text and never become family rules."/>
                                         <DataGridTextColumn Header="Review" Binding="{Binding Review}" Width="110" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Whether the proposed role needs your review. Uncertain source content stays visible and is never accepted silently."/>
                                         <DataGridTextColumn Header="Why this role" Binding="{Binding Reason}" Width="3*" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="The structural reason supplied by the workbook reader, read only. It explains a proposal rather than changing any decision."/>
@@ -202,15 +229,15 @@
                                 </DataGrid>
                                 <DockPanel Grid.Row="2" Margin="0,8,0,4"><Button Content="Read kept notes" DockPanel.Dock="Right" Click="WorkbookNotes_Click"
                                     ToolTip="Opens the original text from notes sheets in a read-only report. Viewing it changes neither the draft nor the project."/>
-                                    <TextBlock Text="{Binding KeptNotesSummary}" Style="{StaticResource CaptionText}" TextTrimming="CharacterEllipsis" ToolTip="{Binding KeptNotesSummary}"/>
-                                </DockPanel>
-                                <Expander Grid.Row="3" Header="Kept notes preview" ToolTip="Shows the original notes text retained from the workbook. Opening it changes nothing; Read kept notes displays the complete text.">
+                                <Expander Header="Kept notes preview" Padding="0" Margin="0" ToolTip="Shows the original notes text retained from the workbook. Opening it changes nothing; Read kept notes displays the complete text.">
                                 <DataGrid MaxHeight="100" RowHeight="28" ItemsSource="{Binding KeptNotes}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                                    Visibility="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=Expander}, Converter={StaticResource BoolVisibility}}"
                                     AutomationProperties.Name="Notes sheets kept with the family list" ToolTip="Lists notes sheets that will be retained with the panel. All values are source text, not measurements or automatic rules.">
                                     <DataGrid.Columns><DataGridTextColumn Header="Sheet" Binding="{Binding SheetName}" Width="200" theme:TableAppearance.HeaderToolTip="Original name of a kept notes sheet, read only. Read kept notes opens the full source text."/>
                                         <DataGridTextColumn Header="Source notes" Binding="{Binding Text}" Width="*" theme:TableAppearance.HeaderToolTip="Original cell text from the sheet, shown as a preview. Read kept notes displays it in full; Import retains it with the panel."/></DataGrid.Columns>
                                 </DataGrid>
                                 </Expander>
+                                </DockPanel>
                             </Grid>
                         </TabItem>
                         <TabItem x:Name="SheetPreviewTab" Header="Sheet preview" ToolTip="Shows original row numbers, text and cell fills from the selected family sheet. Select a cell for complete details; this view changes nothing.">
@@ -218,6 +245,7 @@
                     <DataGrid x:Name="SheetPreviewGrid" Grid.Row="0" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
                               SelectionUnit="Cell" SelectedCellsChanged="Preview_SelectedCellsChanged" HeadersVisibility="Column" FrozenColumnCount="1" Margin="0,6,0,0" RowHeight="30"
                               AutomationProperties.Name="Spreadsheet preview with source row numbers" ToolTip="Shows original cell text and Excel row numbers; select a cell for its complete details. The table is read only and never changes the workbook or project."/>
+                    <Canvas x:Name="PreviewMergedTitles" Grid.Row="0" Margin="0,6,0,0" IsHitTestVisible="False" ClipToBounds="True"/>
                     <Expander x:Name="CellDetails" Grid.Row="1" Header="Cell details" Margin="0,8,0,0" ToolTip="Shows the complete selected source cell, original fill and merged range; opening this section changes nothing.">
                         <TextBox x:Name="CellDetailText" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" MaxHeight="110" MinHeight="50" VerticalScrollBarVisibility="Auto" AutomationProperties.Name="Complete source cell text, fill and merged range" ToolTip="The complete selected source cell text, original fill and merged range, initially no selection and read only. Selecting another preview cell changes this display without changing the workbook or project."/>
                     </Expander>
@@ -231,9 +259,9 @@
                         <ScrollViewer.Style><Style TargetType="ScrollViewer"><Style.Triggers><DataTrigger Binding="{Binding ReviewingDecisions}" Value="True"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></ScrollViewer.Style>
                         <StackPanel>
                             <ItemsControl ItemsSource="{Binding MainColumns}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate><DataTemplate><StackPanel Margin="0,0,12,14">
+                                <ItemsControl.ItemTemplate><DataTemplate><StackPanel Margin="0,0,12,8">
                                     <TextBlock Text="{Binding Label}" Style="{StaticResource SectionTitle}"/>
-                                    <ComboBox ItemsSource="{Binding Headers}" SelectedItem="{Binding Header, UpdateSourceTrigger=PropertyChanged}" MinHeight="34" Margin="0,4,0,6" AutomationProperties.Name="{Binding Label}" ToolTip="{Binding ToolTip}">
+                                    <ComboBox ItemsSource="{Binding Headers}" SelectedItem="{Binding Header, UpdateSourceTrigger=PropertyChanged}" MinHeight="34" Margin="0,2,0,3" AutomationProperties.Name="{Binding Label}" ToolTip="{Binding ToolTip}">
                                         <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Converter={StaticResource HeaderLabel}}" ToolTip="{Binding}"/></DataTemplate></ComboBox.ItemTemplate>
                                     </ComboBox>
                                     <TextBlock Text="{Binding Example}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" MaxHeight="66" ToolTip="{Binding Example}"/>
@@ -245,20 +273,21 @@
                                 <TextBlock x:Name="DecisionHintText" Text="{Binding DecisionHintQuestion}" ToolTip="{Binding DecisionHintReason}" VerticalAlignment="Center"
                                            Style="{StaticResource CaptionText}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
                             </DockPanel>
-                            <StackPanel Visibility="{Binding HasDecisions, Converter={StaticResource BoolVisibility}}" Margin="0,0,0,12">
-                                <TextBlock Text="{Binding DecisionSummary}" Style="{StaticResource CaptionText}"/>
-                                <Button Content="Review decision values" Margin="0,4,8,0" Click="ReviewDecisions_Click" HorizontalAlignment="Left" ToolTip="Shows every distinct source label and its proposed action for your confirmation; the project stays unchanged. Available before import when no read is running."/>
-                            </StackPanel>
+                            <WrapPanel Visibility="{Binding HasDecisions, Converter={StaticResource BoolVisibility}}" Margin="0,0,0,12">
+                                <TextBlock Text="{Binding DecisionSummary}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                <Button Content="Review decision values" Margin="0" Click="ReviewDecisions_Click" HorizontalAlignment="Left" ToolTip="Shows every distinct source label and its proposed action for your confirmation; the project stays unchanged. Available before import when no read is running."/>
+                            </WrapPanel>
                             <Expander x:Name="ColourCategories" Header="Colour categories (optional)" IsExpanded="{Binding HasSourceFills, Mode=OneWay}" ToolTip="Shows optional text names for workbook fills and opens automatically when the source has fills. Opening or closing it changes nothing, and fill names never decide a family action.">
                                 <StackPanel>
                                     <TextBlock Text="Column with coloured cells" Style="{StaticResource CaptionText}" Margin="0,0,0,4"/>
-                                    <ComboBox DataContext="{Binding ColorColumn}" ItemsSource="{Binding Headers}" SelectedItem="{Binding Header, UpdateSourceTrigger=PropertyChanged}" MinHeight="34" AutomationProperties.Name="{Binding Label}" ToolTip="{Binding ToolTip}">
+                                    <ComboBox DataContext="{Binding ColorColumn}" ItemsSource="{Binding Headers}" SelectedItem="{Binding Header, UpdateSourceTrigger=PropertyChanged}" MinHeight="34" AutomationProperties.Name="{Binding Label, FallbackValue=Colour category column}" ToolTip="{Binding ToolTip, FallbackValue=Choose the column whose fills become source categories. Choose a workbook before setting the column; this edits the import draft only.}">
                                         <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Converter={StaticResource HeaderLabel}}"/></DataTemplate></ComboBox.ItemTemplate>
                                     </ComboBox>
-                                    <DataGrid ItemsSource="{Binding SourceColorChoices}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" MaxHeight="180" Margin="0,8,0,0" AutomationProperties.Name="Source colour category names" ToolTip="Optional text categories for the chosen column fills; each starts with its source name, accepts a replacement name, and an empty edit restores that name. These labels remain source text in the draft until Import, never a grouping or quantitation rule.">
+                                    <DataGrid x:Name="ColourCategoriesGrid" ItemsSource="{Binding SourceColorChoices}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" MaxHeight="130" Margin="0,8,0,0" AutomationProperties.Name="Source colour category names" ToolTip="Optional text categories for the chosen column fills; each starts with its legend name when available, or its plain fill name, and clearing a name restores the plain fill name. These labels remain source text in the draft until Import, never a grouping or quantitation rule.">
+                                        <DataGrid.RowStyle><Style TargetType="DataGridRow"><Setter Property="ToolTip" Value="{Binding Meaning}"/></Style></DataGrid.RowStyle>
                                         <DataGrid.Columns><DataGridTextColumn Header="Source colour" Binding="{Binding ColorName}" Width="*" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="The original fill name from the chosen source column; read only, with no family action inferred." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
                                             <DataGridTextColumn Header="Source rows" Binding="{Binding Rows}" Width="*" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Original Excel rows sharing this value, counted from 1; read only for checking the source." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
-                                            <DataGridTextColumn Header="Category name" Binding="{Binding Label, UpdateSourceTrigger=PropertyChanged}" Width="2*" theme:TableAppearance.HeaderToolTip="An optional text label starting with the source fill name; any text is allowed, and clearing it restores the source name before Import." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/></DataGrid.Columns>
+                                            <DataGridTextColumn Header="Category name" Binding="{Binding Label, UpdateSourceTrigger=PropertyChanged}" Width="2*" theme:TableAppearance.HeaderToolTip="An optional text label starting with its legend name when available, or its plain fill name; any text is allowed, and clearing it restores the plain fill name before Import." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/></DataGrid.Columns>
                                     </DataGrid>
                                 </StackPanel>
                             </Expander>
@@ -290,7 +319,7 @@
                         <DataGrid x:Name="SpecialRowsGrid" Grid.Row="1" ItemsSource="{Binding SpecialRows}" SelectedItem="{Binding SelectedSpecialRow}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" AutomationProperties.Name="Special source rows" ToolTip="Selects a source row that needs an explicit choice, including repeated abbreviations and several names. Selection changes only the details shown, with no project edit.">
                             <DataGrid.Columns><DataGridTextColumn HeaderStyle="{StaticResource WizardNumberHeader}" Header="Row" Binding="{Binding RowNumber}" Width="65" theme:TableAppearance.HeaderToolTip="The original Excel row number, counted from 1; read only and unchanged by import choices." ElementStyle="{StaticResource WizardNumberText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
                                 <DataGridTextColumn Header="Abbreviation" Binding="{Binding Abbreviation}" Width="110" theme:TableAppearance.HeaderToolTip="The stable abbreviation from the source or your proposed correction; read only in this table. Change it in the Abbreviation box below; it must be nonempty and unique, and it stays in the draft until Import." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
-                                <DataGridTemplateColumn Header="What needs review" Width="*" theme:TableAppearance.HeaderToolTip="Why this original row needs your choice; read only, with the complete row available in Original source row."><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Message}" Style="{StaticResource SourceText}" MaxHeight="70"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="What needs review" Width="*" theme:TableAppearance.HeaderToolTip="Why this original row needs your choice; read only, with the complete row available in Original source row."><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Message}" Style="{StaticResource SourceText}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
                                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="120" theme:TableAppearance.HeaderToolTip="Whether the source row still needs a choice, is ready, or is explicitly skipped; read only, based on your draft choices." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/></DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -298,11 +327,13 @@
                         <TextBlock Text="{Binding SelectedSpecialRow.Message}" Style="{StaticResource SectionTitle}" TextWrapping="Wrap"/>
                         <Expander Header="Original source row" Margin="0,8" ToolTip="Shows every original column value for the selected row; opening this section changes nothing."><TextBox Text="{Binding SelectedSpecialRow.Original, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" MaxHeight="150" VerticalScrollBarVisibility="Auto" AutomationProperties.Name="Complete original source row" ToolTip="The complete original text and column labels for the selected row, read only. Selecting a different special row changes this display without editing the workbook or project."/></Expander>
                         <TextBlock Text="Use this row as" Style="{StaticResource CaptionText}"/>
-                        <ComboBox x:Name="RowActionChoice" ItemsSource="{Binding AvailableRowOptions}" SelectedValue="{Binding SelectedSpecialRow.Action, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Value" DisplayMemberPath="Label" MinHeight="34" AutomationProperties.Name="Special row action" ToolTip="How this row will be kept, skipped, merged, split or reported under others, starting with its proposed choice. Choose one available action and Use this choice before Import; only the draft changes after the current read finishes."/>
+                        <ComboBox x:Name="RowActionChoice" SelectionChanged="RowAction_SelectionChanged" SelectedValuePath="Value" DisplayMemberPath="Label" MinHeight="34" AutomationProperties.Name="Special row action" ToolTip="How this row will be kept, skipped, merged, split or reported under others, starting with its proposed choice. Choose one available action and Use this choice before Import; only the draft changes after the current read finishes."/>
+                        <StackPanel Visibility="{Binding SelectedSpecialRow.EditingSingleFamily, Converter={StaticResource BoolVisibility}}">
                         <TextBlock Text="Abbreviation" Style="{StaticResource CaptionText}" Margin="0,10,0,4"/>
                         <TextBox Text="{Binding SelectedSpecialRow.Key, UpdateSourceTrigger=PropertyChanged}" MinHeight="32" AutomationProperties.Name="Abbreviation for this source row" ToolTip="The proposed stable abbreviation for this row; starts with the original abbreviation or proposed unique correction and requires nonempty text that does not duplicate another imported abbreviation. Use this choice keeps it in the draft before Import, once any read finishes."/>
                         <TextBlock Text="Family name" Style="{StaticResource CaptionText}" Margin="0,10,0,4"/>
-                        <TextBox Text="{Binding SelectedSpecialRow.Name, UpdateSourceTrigger=PropertyChanged}" MinHeight="32" AutomationProperties.Name="Family name for this source row" ToolTip="The family name to display for this row, starting from its source name; enter nonempty text for a kept family. Use this choice keeps it in the draft before Import, once any read finishes."/>
+                        <TextBox Text="{Binding SelectedSpecialRow.Name, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" MinHeight="32" AutomationProperties.Name="Family name for this source row" ToolTip="The family name to display for this row, starting from its source name; enter nonempty text for a kept family. Use this choice keeps it in the draft before Import, once any read finishes."/>
+                        </StackPanel>
                         <StackPanel Visibility="{Binding SelectedSpecialRow.Merging, Converter={StaticResource BoolVisibility}}"><TextBlock Text="Merge into abbreviation" Style="{StaticResource CaptionText}" Margin="0,10,0,4"/>
                             <TextBox Text="{Binding SelectedSpecialRow.MergeTarget, UpdateSourceTrigger=PropertyChanged}" MinHeight="32" AutomationProperties.Name="Merge target abbreviation" ToolTip="The exact abbreviation of an existing kept family, initially empty unless a target was proposed; required only when merging this row. Use this choice keeps the merge in the draft before Import, once any read finishes."/></StackPanel>
                         <DataGrid ItemsSource="{Binding SelectedSpecialRow.Parts}" Visibility="{Binding SelectedSpecialRow.Splitting, Converter={StaticResource BoolVisibility}}"
@@ -344,27 +375,28 @@
                                       Visibility="{Binding SelectedMatchFamily.HasAdditionalSuggestions, Converter={StaticResource BoolVisibility}}"
                                       ToolTip="Shows extra stored-evidence suggestions for this family, including shared keywords and tissue text. Opening the list changes only this page.">
                                 <DataGrid x:Name="AdditionalMatchSuggestionsGrid" ItemsSource="{Binding SelectedMatchFamily.AdditionalSuggestions}"
+                                          Visibility="{Binding SelectedMatchFamily.ShowAdditional, Converter={StaticResource BoolVisibility}}"
                                           AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" MaxHeight="190" MinHeight="100"
                                           AutomationProperties.Name="Additional stored-evidence matches" Margin="0,6,0,0"
                                           ToolTip="Lists extra stored-evidence labels whose names may provide less specific support for this family. A tick is only a draft choice until you confirm the matches and import the family list.">
                                     <DataGrid.RowStyle><Style TargetType="DataGridRow"><Setter Property="ToolTip" Value="{Binding Details}"/></Style></DataGrid.RowStyle>
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn Header="Use" Width="55" theme:TableAppearance.HeaderToolTip="Choose extra labels to confirm for this family. New suggestions start unticked and reach the project only when the family list is imported.">
+                                        <DataGridTemplateColumn Header="Use" Width="55" theme:TableAppearance.HeaderToolTip="Select this stored-evidence value for explicit confirmation; new suggestions start unticked. Confirmation stages it in the draft until Import, with protein assignment reviewed separately.">
                                             <DataGridTemplateColumn.CellTemplate><DataTemplate>
                                                 <CheckBox IsChecked="{Binding Use, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"
-                                                          ToolTip="Chooses this extra stored-evidence label for confirmation. It reaches the project only when you confirm the matches and import the family list."/>
+                                                          ToolTip="Select this stored-evidence value for explicit confirmation; new suggestions start unticked. Confirmation stages it in the draft until Import, with protein assignment reviewed separately."/>
                                             </DataTemplate></DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Header="Stored evidence" Width="*" theme:TableAppearance.HeaderToolTip="The exact stored label to use for this family if you confirm it. Editing a draft value refreshes its entry counts before import.">
+                                        <DataGridTemplateColumn Header="Stored evidence" Width="*" theme:TableAppearance.HeaderToolTip="A proposed stored family name, keyword or domain label; starts from stored evidence and accepts nonempty one-line text. Tick and confirm edited values again before Import; counts refresh for the exact edited value.">
                                             <DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Text}" Style="{StaticResource SourceText}"/></DataTemplate></DataGridTemplateColumn.CellTemplate>
                                             <DataGridTemplateColumn.CellEditingTemplate><DataTemplate>
                                                 <TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
-                                                         ToolTip="Stored-evidence label text, initially the suggested value, allowing one nonempty line. Editing updates its entry counts and requires confirming the matches again before import."/>
+                                                         ToolTip="A proposed stored family name, keyword or domain label; starts from stored evidence and accepts nonempty one-line text. Tick and confirm edited values again before Import; counts refresh for the exact edited value."/>
                                             </DataTemplate></DataGridTemplateColumn.CellEditingTemplate>
                                         </DataGridTemplateColumn>
-                                        <DataGridTextColumn theme:TableAppearance.FullTextPath="Details" Header="Type" Binding="{Binding Type}" Width="120" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="The stored evidence kind, such as UniProt family, Pfam domain, keyword or tissue phrase. Reading it changes nothing."/>
-                                        <DataGridTextColumn HeaderStyle="{StaticResource WizardNumberHeader}" ElementStyle="{StaticResource WizardNumberText}" theme:TableAppearance.FullTextPath="Details" Header="Proteins" Binding="{Binding Proteins}" Width="85" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Distinct database target entries covered by this exact label. Overlapping suggestions are not added together."/>
-                                        <DataGridTextColumn HeaderStyle="{StaticResource WizardNumberHeader}" ElementStyle="{StaticResource WizardNumberText}" theme:TableAppearance.FullTextPath="Details" Header="Reviewed" Binding="{Binding Reviewed}" Width="85" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Database target entries covered by this label that are marked reviewed in stored evidence. Reading the count changes nothing."/>
+                                        <DataGridTextColumn theme:TableAppearance.FullTextPath="Details" Header="Type" Binding="{Binding Type}" Width="120" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="The source kind of this stored-evidence label, such as family name, keyword or domain; read only and retained with confirmed choices."/>
+                                        <DataGridTextColumn HeaderStyle="{StaticResource WizardNumberHeader}" ElementStyle="{StaticResource WizardNumberText}" theme:TableAppearance.FullTextPath="Details" Header="Proteins" Binding="{Binding Proteins}" Width="85" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Distinct target database entries covered by this exact label; read only, and overlapping suggestion counts must not be added."/>
+                                        <DataGridTextColumn HeaderStyle="{StaticResource WizardNumberHeader}" ElementStyle="{StaticResource WizardNumberText}" theme:TableAppearance.FullTextPath="Details" Header="Reviewed" Binding="{Binding Reviewed}" Width="85" IsReadOnly="True" theme:TableAppearance.HeaderToolTip="Covered database target entries marked reviewed in stored UniProt evidence; these are part of Proteins, never an additional count."/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Expander>
@@ -383,10 +415,10 @@
                         <TextBlock Text="{Binding PreviousPanel, StringFormat=Current panel to replace: {0}}" Style="{StaticResource CaptionText}"/>
                         <TextBlock Text="{Binding MatchingChangeNotice}" Style="{StaticResource CaptionText}" TextWrapping="Wrap"/>
                     </StackPanel>
-                    <DataGrid x:Name="SummaryGrid" Grid.Row="1" ItemsSource="{Binding SummaryFamilies}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" AutomationProperties.Name="Families that will be imported" ToolTip="Shows the exact families, actions, source categories and matching choices in the reviewed list. This table is read only; Import makes one project edit and Undo restores the prior list.">
+                    <DataGrid x:Name="SummaryGrid" Grid.Row="1" ItemsSource="{Binding SummaryFamilies}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" SizeChanged="SummaryGrid_SizeChanged" AutomationProperties.Name="Families that will be imported" ToolTip="Shows the exact families, actions, source categories and matching choices in the reviewed list. This table is read only; Import makes one project edit and Undo restores the prior list.">
                         <DataGrid.Columns><DataGridTextColumn Header="Abbreviation" Binding="{Binding Key}" Width="110" theme:TableAppearance.HeaderToolTip="The stable abbreviation kept for this family; read only here. Split abbreviations were set on the Special rows page and stay in the draft until Import." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
-                            <DataGridTemplateColumn Header="Family name" Width="2*" theme:TableAppearance.HeaderToolTip="The family name kept for this family; read only here. A split name was set on the Special rows page and stays in the draft until Import."><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Name}" Style="{StaticResource SourceText}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="Other-language name" Width="2*" theme:TableAppearance.HeaderToolTip="Names retained under their original spreadsheet headers; read only and never used as measured values."><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding OtherName}" Style="{StaticResource SourceText}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Family name" Width="2*" theme:TableAppearance.HeaderToolTip="The family name kept for this family; read only here. A split name was set on the Special rows page and stays in the draft until Import."><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Name}" Style="{StaticResource SourceText}" VerticalAlignment="Center"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Other-language name" Width="2*" theme:TableAppearance.HeaderToolTip="Names retained under their original spreadsheet headers; read only and never used as measured values."><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding OtherName}" Style="{StaticResource SourceText}" VerticalAlignment="Center"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
                             <DataGridTextColumn Header="Decision" Binding="{Binding Decision}" Width="145" theme:TableAppearance.HeaderToolTip="The reviewed action retained for this imported family; read only, with the original source label available in source notes." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
                             <DataGridTextColumn Header="Colour" Binding="{Binding Color}" Width="130" theme:TableAppearance.HeaderToolTip="The optional source-fill category retained as text for this family; read only, with no grouping or quantitation rule inferred." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
                             <DataGridTextColumn Header="Matches" Binding="{Binding Matches}" Width="120" theme:TableAppearance.HeaderToolTip="The explicit evidence-matching choice for this family; read only, and protein membership still requires Family checklist review." ElementStyle="{StaticResource WizardCellText}" EditingElementStyle="{StaticResource WizardCellEditor}"/>
@@ -398,13 +430,13 @@
                 <Grid>
                     <Grid.Style><Style TargetType="Grid" BasedOn="{StaticResource WizardPage}"><Style.Triggers><DataTrigger Binding="{Binding Page}" Value="6"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Grid.Style>
                     <StackPanel><Border Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="1" Padding="{DynamicResource PanelPadding}">
-                        <StackPanel><TextBlock Text="{Binding ImportedPanel.Families.Count, StringFormat={}{0:N0} families imported}" Style="{StaticResource SectionTitle}"/>
+                        <StackPanel><TextBlock Text="{Binding ImportedFamilyCount}" Style="{StaticResource SectionTitle}" TextWrapping="Wrap"/>
                             <TextBlock Text="{Binding PanelName, StringFormat=Panel: {0}}" Style="{StaticResource BodyText}" Margin="0,10,0,4"/>
                             <TextBlock Text="Workbook unchanged" Style="{StaticResource BodyText}" Margin="0,0,0,4"/>
                             <TextBlock Text="Protein grouping unchanged" Style="{StaticResource BodyText}" Margin="0,0,0,4"/>
                             <TextBlock Text="Project not saved yet" Style="{StaticResource BodyText}"/>
                             <TextBlock x:Name="MatchingEffectNote" Text="{x:Static local:FamilyListImportHelp.MatchingEffect}" Style="{StaticResource CaptionText}" Margin="0,12,0,0"
-                                       TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{x:Static local:FamilyListImportHelp.MatchingEffect}"/>
+                                       TextWrapping="Wrap" ToolTip="{x:Static local:FamilyListImportHelp.MatchingEffect}"/>
                         </StackPanel>
                     </Border><Button x:Name="UndoImportButton" Content="Undo import" Click="Undo_Click" IsEnabled="{Binding CanUndo}" HorizontalAlignment="Left" Margin="0,12,0,0"
                                      ToolTip="Restores the list and project state from immediately before this import in one Undo step. Available only while this import is the current unchanged Undo step."/></StackPanel>
@@ -413,11 +445,12 @@
             </Grid>
             <Grid x:Name="WizardFooter" Grid.Row="2" Margin="0,18,0,0">
                 <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-                <StackPanel VerticalAlignment="Center" Margin="0,0,16,0"><TextBlock Text="{Binding Status}" Style="{StaticResource CaptionText}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"
-                        ToolTip="{Binding Status}" AutomationProperties.LiveSetting="Polite"/>
-                    <Button Content="Help" Margin="0,4,8,0" Click="Help_Click" HorizontalAlignment="Left" ToolTip="Opens the illustrated import guide with instructions for each step; the draft, project and workbook stay unchanged."/>
-                    <Button Content="Back to workbook review" Click="ReturnWorkbook_Click" HorizontalAlignment="Left" Visibility="{Binding CanReturnToWorkbook, Converter={StaticResource BoolVisibility}}"
+                <StackPanel VerticalAlignment="Center" Margin="0,0,16,0"><TextBlock Text="{Binding Status}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"
+                        ToolTip="{Binding Status}" AutomationProperties.LiveSetting="Polite"><TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource CaptionText}"><Style.Triggers><DataTrigger Binding="{Binding ReviewingSubclasses}" Value="True"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock>
+                    <WrapPanel Margin="0,4,0,0"><Button Content="Help" Margin="0,0,8,0" Click="Help_Click" HorizontalAlignment="Left" ToolTip="Opens the illustrated import guide with instructions for each step; the draft, project and workbook stay unchanged."/>
+                    <Button Content="Back to workbook review" Margin="0" Click="ReturnWorkbook_Click" HorizontalAlignment="Left" Visibility="{Binding CanReturnToWorkbook, Converter={StaticResource BoolVisibility}}"
                         ToolTip="Returns to the complete workbook proposal without losing your draft choices. Nothing changes in the project until Accept and import."/>
+                    </WrapPanel>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                     <Button x:Name="CloseButton" Content="{Binding CloseLabel}" Click="Close_Click" MinWidth="86" ToolTip="{Binding CloseToolTip}"/>

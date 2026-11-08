@@ -12,6 +12,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Architecture](ARCHITECTURE.md) | Current boundaries, planned Reports/operation host, budgets and historical destination inventory |
 | [Core operations](CORE-OPERATIONS.md) | Progress, cancellation, outcomes and atomic publication |
 | [Verified Save memory](STREAMING-SAVE.md) | Streaming JSON and fingerprints, exact-entry byte proof and measured memory |
+| [Import and Apply memory](CURATION-WORKING-MEMORY.md) | Panel-only Undo, detached session copies and oversized native import measurement |
 | [Compute and open progress](COMPUTE-PROGRESS.md) | Counted phases, live clocks, timestamped logs and native parity check |
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
@@ -155,6 +156,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-family-world` | The family world's crediting rule, species removal, the B1 verdict bars, D11 and the B5 pass with its export, on a hand-made world |
 | `--test-ui-icons` | No emoji in product source, escaped/entity regressions and Fluent glyphs in both themes |
 | `--test-ui-colors` | Literal/fixed-factory color guard with Tokens/ChartPalette sources and the explicit protected export-only PresentationFigures exception |
+| `--test-import-walk-layout [output]` | Z12p2f1 native workbook-map, preview, columns, decisions and subclass layout checks in both themes at standard/minimum size; captures, full-cell tips, merged headings and unchanged source/project data |
 | `--test-keyword-command` | Single keyword command, empty review, Cancel and accepted-setting retention |
 | `--test-review-wait` | Dispatcher completion beyond the former load timeout, original fault/cancellation and synchronization context retention |
 | `--test-ui-wording` | Current curation/shell Help paths, family overview and lock instructions, retired-screen names, tooltip length and retained report/Help facts |

@@ -33,7 +33,7 @@ public partial class FamilyListSubclassReview : UserControl
     private static readonly DependencyPropertyKey DraftHintKey = DependencyProperty.RegisterReadOnly(nameof(DraftHint), typeof(string),
         typeof(FamilyListSubclassReview), new PropertyMetadata("No choices have been confirmed."));
     private static readonly DependencyPropertyKey ValidationStatusKey = DependencyProperty.RegisterReadOnly(nameof(ValidationStatus), typeof(string),
-        typeof(FamilyListSubclassReview), new PropertyMetadata("Check the draft before importing; the project is unchanged."));
+        typeof(FamilyListSubclassReview), new PropertyMetadata("Check the draft before Accept and import; the project is unchanged."));
     private static readonly DependencyPropertyKey UnmatchedProblemTextKey = DependencyProperty.RegisterReadOnly(nameof(UnmatchedProblemText), typeof(string),
         typeof(FamilyListSubclassReview), new PropertyMetadata(""));
     public static readonly DependencyProperty ViewProperty = ViewKey.DependencyProperty;
@@ -129,8 +129,8 @@ public partial class FamilyListSubclassReview : UserControl
         else result = PanelSubclassImport.BuildDefinitions(rows.Select(row => (PanelSubclassProposal)row.SourceProposal!).ToArray(),
             CaptureAcceptances(), FamilyKeys?.ToArray() ?? Array.Empty<string>());
         ShowProblems(result.Problems);
-        SetValue(ValidationStatusKey, result.CanBuild ? "Choices checked. Nothing has been imported or confirmed."
-            : "Review the messages on the affected subclass or rule, then check the draft again.");
+        SetValue(ValidationStatusKey, result.CanBuild ? "Choices checked. Nothing is imported until Accept and import."
+            : "Review the messages on the affected subclass or rule, check the draft again, then Accept and import.");
         return result;
     }
     public void ShowProblems(IEnumerable<PanelSubclassImportProblem> problems)

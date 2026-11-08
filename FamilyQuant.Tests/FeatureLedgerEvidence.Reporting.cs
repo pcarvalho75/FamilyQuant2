@@ -27,7 +27,7 @@ internal static partial class FeatureLedgerEvidence
             var validation = Load(root, inventory, new[] { incoming });
             if (validation.FatalProblems.Count > 0) throw new InvalidDataException(string.Join("; ", validation.FatalProblems));
             if (validation.Entries.Values.Any(e => e.Row.Proofs.Count > 0 && !e.Valid))
-                throw new InvalidDataException("Incoming proof is incomplete or stale: " + string.Join("; ", validation.Entries.Values.SelectMany(e => e.Problems).Take(6)));
+                throw new InvalidDataException("Incoming proof is incomplete or stale: " + LedgerDiagnostics.Capped(validation.Entries.Values.SelectMany(e => e.Problems), 6));
             string folder = Path.Combine(root, "docs/feature-ledger-evidence");
             Directory.CreateDirectory(folder);
             string target = Path.Combine(folder, incoming.Step + ".json");
@@ -41,7 +41,7 @@ internal static partial class FeatureLedgerEvidence
             File.WriteAllText(target, text, new UTF8Encoding(false));
             markdown = Apply(markdown, Load(root, inventory));
             var errors = FeatureLedger.Validate(inventory, markdown);
-            if (errors.Count > 0) throw new InvalidDataException("Proposed ledger failed its guard: " + string.Join("; ", errors.Take(6)));
+            if (errors.Count > 0) throw new InvalidDataException("Proposed ledger failed its guard: " + LedgerDiagnostics.Capped(errors, 6));
             string staged = ledgerPath + "." + Guid.NewGuid().ToString("N") + ".tmp";
             try { File.WriteAllText(staged, markdown, new UTF8Encoding(false)); File.Move(staged, ledgerPath, true); }
             finally { if (File.Exists(staged)) File.Delete(staged); }

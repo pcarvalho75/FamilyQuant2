@@ -28,8 +28,8 @@ public sealed class ImportColumnChoice : ScreenViewModel
         PanelImportFields.Notes => "An optional column of family notes, proposed from the headers; all original columns remain available as source text.",
         PanelImportFields.Pfam => "An optional column of Pfam codes or names, proposed from the headers; Not used adds no domain requirement.",
         PanelImportFields.Decision => "An optional column telling what to do with each family; default Not used quantifies every family, while a chosen column requires you to confirm each label's action.",
-        WorkbookImportSummaryFields.Subclasses => "An optional column of expected subclass names, proposed by Core from the workbook structure; Not used leaves it as source text without expected subclass definitions.",
-        _ => "An optional column whose cell fills become text categories; default Not used, and selecting a column starts each category with its source name."
+        WorkbookImportSummaryFields.Subclasses => "An optional column of expected subclass names, proposed from the workbook structure; Not used leaves it as source text without expected subclass definitions.",
+        _ => "An optional column whose cell fills become text categories; initially the workbook's proposal or Not used, with each category starting with its legend name when available, or its plain fill name."
     }) + " Choose a header from this sheet; this changes only the draft until Import.";
     public ImportColumnChoice(string role, string label, bool required, IReadOnlyList<string> headers, Func<string, string> example)
     { Role = role; Label = label; Required = required; Headers = required ? headers : new[] { "" }.Concat(headers).ToArray(); this.example = example; }
@@ -84,9 +84,10 @@ public sealed class ImportSpecialRow : ScreenViewModel
     public string Status => Blocking ? "Needs a choice" : Chosen ? "Ready" : "Skipped";
     public bool SeveralNames => Kind == nameof(PanelImportProblemKind.SeveralFamilies);
     public bool Duplicate => Kind == nameof(PanelImportProblemKind.DuplicateKey);
-    public FamilyPanelRowAction? Action { get => action; set { if (Set(ref action, value)) { Changed(nameof(Splitting)); Changed(nameof(Merging)); } } }
+    public FamilyPanelRowAction? Action { get => action; set { if (Set(ref action, value)) { Changed(nameof(Splitting)); Changed(nameof(Merging)); Changed(nameof(EditingSingleFamily)); } } }
     public bool Splitting => Action == FamilyPanelRowAction.Split;
     public bool Merging => Action == FamilyPanelRowAction.MergeInto;
+    public bool EditingSingleFamily => !Splitting && Action != FamilyPanelRowAction.Skip;
     public string Key { get => key; set => Set(ref key, value ?? ""); }
     public string Name { get => name; set => Set(ref name, value ?? ""); }
     public string MergeTarget { get => mergeTarget; set => Set(ref mergeTarget, value ?? ""); }
@@ -152,6 +153,9 @@ public sealed record ImportRowOption(string Label, FamilyPanelRowAction Value);
 public sealed record ImportSummaryFamily(string Key, string Name, string OtherName, string Decision, string Matches, string Notes, string Color);
 public sealed record ImportWizardStep(int Index, string Label, bool Done, bool Current, bool Enabled)
 {
+    public string Number => (Index + 1).ToString(CultureInfo.CurrentCulture);
+    public string Name => Label.StartsWith(Number + "   ", StringComparison.Ordinal) ? Label[(Number.Length + 3)..] : Label;
+    public string AccessibleName => Done ? Label + " (Done)" : Label;
     public string ToolTip => !Enabled ? "This step is unavailable until you reach it, while a read is running, or after the list is imported; finish the current page to continue."
         : Current ? "This is the current wizard step; choosing it keeps your draft and project unchanged."
         : "Returns to this completed step without losing your choices; the project changes only when you choose Import.";

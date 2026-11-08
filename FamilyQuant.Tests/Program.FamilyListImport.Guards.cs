@@ -17,9 +17,10 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
-    private static FamilyListImportViewModel ReadyFamilyListImport(string workbook, CurationViewModel curation, bool split = true)
+    private static FamilyListImportViewModel ReadyFamilyListImport(string workbook, CurationViewModel curation, bool split = true,
+        IFamilyListImportMatches? matcher = null)
     {
-        var model = new FamilyListImportViewModel(new FamilyListImportTransaction(curation));
+        var model = new FamilyListImportViewModel(new FamilyListImportTransaction(curation), matcher: matcher);
         FinishReviewWork(() => model.LoadAsync(workbook));
         FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(_ => true); });
         for (int attempt = 0; attempt < 100; attempt++)

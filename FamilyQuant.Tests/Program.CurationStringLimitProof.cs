@@ -12,6 +12,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
@@ -38,7 +39,13 @@ internal static partial class Program
     // reference entries for driver debugging; it cannot claim proof past the string limit.
     private static int RunCurationStringLimitProof(bool small)
     {
-        string root = Path.GetFullPath(Path.Combine(CurationProofScratch, "run-" + Guid.NewGuid().ToString("N")));
+        string scratch = Path.GetFullPath(Environment.GetEnvironmentVariable("FAMILYQUANT_CURATION_PROOF_ROOT") ?? CurationProofScratch);
+        if (!Path.GetPathRoot(scratch)!.Equals("D:\\", StringComparison.OrdinalIgnoreCase))
+            throw new ArgumentException("Curation proof scratch must be on drive D.");
+        string? lastStage = Environment.GetEnvironmentVariable("FAMILYQUANT_CURATION_PROOF_LAST_STAGE");
+        if (!string.IsNullOrEmpty(lastStage) && lastStage != "wizard-family-list-import")
+            throw new ArgumentException("The optional curation proof last stage must be wizard-family-list-import.");
+        string root = Path.GetFullPath(Path.Combine(scratch, "run-" + Guid.NewGuid().ToString("N")));
         string? previousTemp = Environment.GetEnvironmentVariable("TEMP"), previousTmp = Environment.GetEnvironmentVariable("TMP");
         var isolation = typeof(ApplicationPaths).GetProperty("LocalDataDirectoryOverride", BindingFlags.Public | BindingFlags.Static);
         if (isolation?.CanWrite != true)
@@ -97,6 +104,14 @@ internal static partial class Program
                 AwaitCurationProof(CurationProofControl(shell).FullXicReady);
             });
             MeasureCurationProof("wizard-family-list-import", () => ImportCurationProof(CurationProofControl(shell).ViewModel, root));
+            Console.WriteLine("RESULT wizard-family-list-import scientificSha256=" + CurationProofResultHash(CurationProofControl(shell).fcf));
+            if (lastStage == "wizard-family-list-import")
+            {
+                VerifyCurationProof(CurationProofControl(shell).fcf, entries, sequenceLength, imported: true, calculated: false);
+                Console.WriteLine(small ? "PASS small import-only memory smoke; full past-limit proof NOT CLAIMED"
+                    : "PASS oversized import-only memory measurement; full f4 workflow NOT CLAIMED");
+                return 0;
+            }
             MeasureCurationProof("recalculate-family-shares", () => RecalculateCurationProof(CurationProofControl(shell), root));
 
             string project = Path.Combine(root, "synthetic.fqproj");
@@ -161,12 +176,26 @@ internal static partial class Program
                 SynchronizationContext.SetSynchronizationContext(previousContext);
                 isolation.SetValue(null, previousData);
                 Environment.SetEnvironmentVariable("TEMP", previousTemp); Environment.SetEnvironmentVariable("TMP", previousTmp);
-                string allowed = Path.GetFullPath(CurationProofScratch).TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
+                string allowed = scratch.TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
                 if (!root.StartsWith(allowed, StringComparison.OrdinalIgnoreCase)) throw new IOException("Refusing cleanup outside the proof scratch root.");
                 if (Directory.Exists(root)) Directory.Delete(root, recursive: true);
                 Console.WriteLine("CLEANUP removed owned proof run: " + !Directory.Exists(root));
             }
         }
+    }
+
+    // Exclude workbook-path/package provenance while retaining all scientific records and choices.
+    private static string CurationProofResultHash(FamilyClusterFile file)
+    {
+        using var hash = SHA256.Create();
+        using var stream = new CryptoStream(Stream.Null, hash, CryptoStreamMode.Write);
+        JsonSerializer.Serialize(stream, new
+        {
+            file.MyExtendedFastaItems, file.LockedUserIds, file.WordSimilarity, file.IsKeywordSuperCluster,
+            file.EvidenceSource, Families = file.FamilyPanel?.Families
+        });
+        stream.FlushFinalBlock();
+        return Convert.ToHexString(hash.Hash!);
     }
 
     private static long GenerateCurationProof(string path, int entries, int sequenceLength)
@@ -319,22 +348,23 @@ internal static partial class Program
     {
         GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect();
         using var process = Process.GetCurrentProcess();
-        long peak = process.PrivateMemorySize64;
-        void Sample()
+        var sampler = new CurationPrivateMemorySampler(() =>
         {
-            process.Refresh(); long current = process.PrivateMemorySize64;
-            long previous;
-            do { previous = Interlocked.Read(ref peak); if (current <= previous) return; }
-            while (Interlocked.CompareExchange(ref peak, current, previous) != previous);
-        }
-        using var timer = new Timer(_ => Sample(), null, 0, 20);
+            process.Refresh(); return process.PrivateMemorySize64;
+        });
+        sampler.Sample();
+        using var timer = new Timer(_ => sampler.Sample(), null, 0, 20);
         var watch = Stopwatch.StartNew();
         string status = "FAIL";
         try { T result = action(); status = "PASS"; return result; }
         finally
         {
-            timer.DisposeAsync().AsTask().GetAwaiter().GetResult(); Sample();
-            Console.WriteLine(FormattableString.Invariant($"MEASURE {name} status={status} seconds={watch.Elapsed.TotalSeconds:F3} sampledPeakPrivateBytes={Interlocked.Read(ref peak)}"));
+            timer.DisposeAsync().AsTask().GetAwaiter().GetResult(); sampler.Sample();
+            bool unavailable = sampler.SuccessfulSamples == 0;
+            bool samplingOnlyFailure = unavailable && status == "PASS";
+            if (samplingOnlyFailure) status = "FAIL-SAMPLING";
+            Console.WriteLine(FormattableString.Invariant($"MEASURE {name} status={status} seconds={watch.Elapsed.TotalSeconds:F3} sampledPeakPrivateBytes={sampler.Peak} successfulSamples={sampler.SuccessfulSamples} failedSamples={sampler.FailedSamples} skippedSamples={sampler.SkippedSamples} lastSampleError={sampler.LastFailure?.GetType().Name ?? "none"}"));
+            if (samplingOnlyFailure) throw new InvalidOperationException("No private-memory samples succeeded for " + name + ".", sampler.LastFailure);
         }
     }
 }

@@ -36,6 +36,8 @@ public sealed class WorkbookImportSummary
     public IReadOnlyList<PanelSubclassProposal> SubclassProposals => Detached(Plan.Subclasses);
     public IReadOnlyList<PanelSubclassAcceptance> ReviewedSubclassSelections => Detached(Plan.ReviewedSubclasses);
     public IReadOnlyList<PanelSubclassAcceptance> DraftSubclassSelections => Detached(Plan.ReviewedSubclasses);
+    public IReadOnlyList<WorkbookImportItem> SubclassReviewFindings => System.Array.AsReadOnly(Plan.Actions
+        .Where(action => action.Value is WorkbookImportSubclassReviewFinding).Select(action => action.Item).ToArray());
     public IReadOnlyList<WorkbookImportFamilyRow> FamilyRows => System.Array.AsReadOnly(Plan.FamilyRows.ToArray());
     public IReadOnlyDictionary<string, IReadOnlyList<PanelEvidenceChoice>> ProposedEvidenceSelections =>
         new ReadOnlyDictionary<string, IReadOnlyList<PanelEvidenceChoice>>(Plan.ReviewedEvidence.ToDictionary(pair => pair.Key,
@@ -67,6 +69,7 @@ internal sealed class WorkbookImportPlan
     internal required PanelEvidenceMatching Matching { get; init; }
     internal required List<PanelSubclassProposal> Subclasses { get; init; }
     internal required List<PanelSubclassExpectedName> ExpectedNames { get; init; }
+    internal required List<PanelSubclassExpectedName> SubclassNotes { get; init; }
     internal required List<FamilyPanelDomain> Vocabulary { get; init; }
     internal required List<PanelSubclassAcceptance> ReviewedSubclasses { get; init; }
     internal required Dictionary<string, IReadOnlyList<PanelEvidenceChoice>> ReviewedEvidence { get; init; }

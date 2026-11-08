@@ -21,6 +21,10 @@ public sealed class FamilyListStoredEvidenceMatches : IFamilyListImportMatches
     { this.project = project; matching = new PanelEvidenceMatching(project); previousPanel = FamilyPanelValidation.Clone(project.FamilyPanel ?? new FamilyPanel()); }
 
     public IReadOnlyList<ImportMatchFamily> Suggest(FamilyClusterFile source, FamilyPanel panel)
+        => Suggest(panel);
+
+    // This adapter owns a guarded stored-evidence view; the interface's detached project is unused.
+    internal IReadOnlyList<ImportMatchFamily> Suggest(FamilyPanel panel)
     {
         RequireCurrent();
         var carried = PanelEvidenceMatching.CarryConfirmedMatches(previousPanel, panel);

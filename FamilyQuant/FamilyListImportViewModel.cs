@@ -30,7 +30,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     private readonly IFamilyPanelSpreadsheetImporter importer;
     private readonly FamilyListImportTransaction transaction;
     private readonly IFamilyListImportMatches? matcher;
-    private readonly Func<FamilyClusterFile, OperationContext, FamilyClusterFile> copyProject;
+    private readonly Func<FamilyClusterFile, OperationContext, FamilyClusterFile>? copyProjectOverride;
     private readonly IFamilyListWorkbookSource? workbookSource;
     private readonly bool openWorkbookReview;
     private CancellationTokenSource? operation;
@@ -49,7 +49,8 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public IReadOnlyList<ImportColumnChoice> MainColumns => Columns.Where(c => c.Role != PanelImportFields.ColorCategory).ToArray();
     public ImportColumnChoice? ColorColumn => Columns.FirstOrDefault(c => c.Role == PanelImportFields.ColorCategory);
     public bool ReviewingDecisions { get => reviewingDecisions; set { if (Set(ref reviewingDecisions, value)) { Changed(nameof(Title)); Changed(nameof(Explanation));
-        if (page == 2) Status = value ? "Check the proposed actions and press Confirm these actions to continue." : "Your column choices are kept until you import."; } } }
+        if (page == 2) Status = ColumnsStatus;
+        Changed(nameof(DisabledReason)); Changed(nameof(ForwardToolTip)); } } }
     public ObservableCollection<ImportDecisionChoice> Decisions { get; } = new();
     public ObservableCollection<ImportColorChoice> SourceColorChoices { get; } = new();
     public ObservableCollection<ImportSpecialRow> SpecialRows { get; } = new();
@@ -77,21 +78,25 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public string Status { get => status; private set => Set(ref status, value); }
     public int Page => page;
     public bool CanEdit => !IsBusy && !Imported;
+    private string StepName(int index) => index == 1 && HasWorkbookMap ? "Workbook sheets" : StepNames[index];
     public IReadOnlyList<ImportWizardStep> Steps => StepNames.Select((name, index) => new ImportWizardStep(index,
-        (index + 1).ToString(CultureInfo.CurrentCulture) + "   " + name, index < page, index == page,
+        (index + 1).ToString(CultureInfo.CurrentCulture) + "   " + StepName(index), index < page, index == page,
         !IsBusy && index <= page && (!Imported || index >= 5))).ToArray();
     public string Title => reviewingWorkbook ? "Review your workbook" : reviewingSubclasses ? "Review subclass proposals"
-        : page == 2 && ReviewingDecisions ? "Review spreadsheet decisions" : Titles[page];
+        : page == 1 && HasWorkbookMap ? "Workbook sheets" : page == 2 && ReviewingDecisions ? "Review spreadsheet decisions" : Titles[page];
     public string Explanation => reviewingWorkbook ? "Review what was found, change any section, then accept the proposal as one import."
         : reviewingSubclasses ? "Check each proposed family, subclass and domain rule before keeping your choices."
-        : page == 2 && ReviewingDecisions ? FamilyListImportHelp.DecisionsSummary : Explanations[page];
+        : page == 2 && ReviewingDecisions ? FamilyListImportHelp.DecisionsSummary
+        : page == 1 && HasWorkbookMap ? "Check each sheet's role under Use as, and take another sheet as the family list if needed."
+        : Explanations[page];
     public string StepLabel => reviewingWorkbook ? "Workbook proposal" : reviewingSubclasses ? "Subclass review"
-        : "Step " + (page + 1).ToString(CultureInfo.CurrentCulture) + " of 7, " + StepNames[page];
+        : "Step " + (page + 1).ToString(CultureInfo.CurrentCulture) + " of 7, " + StepName(page);
     public string ForwardLabel => reviewingWorkbook ? "Accept and import" : reviewingSubclasses ? "Keep subclass choices"
         : WorkbookReviewEnabled && page == 5 && !Imported ? "Review workbook" : page == 5 && !Imported ? "Import" : page == 6 ? "Family checklist" : "Next";
     public string CloseLabel => Imported ? "Close" : "Cancel";
     public bool CanBack => !IsBusy && page > 0 && !reviewingWorkbook;
     public string BackToolTip => reviewingWorkbook ? "Use a section's Review button to change its proposal; Cancel leaves the project unchanged."
+        : reviewingSubclasses ? "Returns to Review your workbook and keeps your subclass draft choices; nothing changes in the project until Accept and import."
         : !CanBack ? IsBusy ? "Wait for the current step to finish before returning; Cancel stops it without importing."
         : "This is the first step; choose Next or Try with the example to continue, or Cancel to leave without changes."
         : "Returns to the previous step and keeps your choices; going Back does not change the project or repeat an import.";
@@ -100,7 +105,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         : "Closes the wizard and discards its draft choices; the project and workbook are unchanged.";
     public string ForwardToolTip => reviewingWorkbook ? CanAcceptWorkbook
         ? "Accepts the exact workbook proposal shown and imports it as one project edit. Source and project are checked again; Undo restores the previous panel, and File > Save stores the change."
-        : (WorkbookReviewProblems.FirstOrDefault() ?? "Review the remaining workbook choices.") + " Accept and import is unavailable until blocking choices are resolved."
+        : (WorkbookHasReviewProblems ? WorkbookReviewStatus : "Review the remaining workbook choices.") + " Accept and import is unavailable until required choices are resolved."
         : reviewingSubclasses ? "Keeps these selections in the workbook draft and returns to its review page. Rules remain unconfirmed until your explicit acceptance."
         : !CanNext ? DisabledReason + " Nothing is imported while this action is unavailable."
         : page == 5 && !Imported ? "Rechecks the workbook and project, then imports the reviewed list as one project edit; Undo restores the previous list, and File > Save stores the change."
@@ -135,7 +140,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     {
         this.transaction = transaction; this.reader = reader ?? new PanelSpreadsheetReader();
         this.importer = importer ?? new FamilyPanelSpreadsheetImporter(); this.matcher = matcher ?? new FamilyListStoredEvidenceMatches(transaction.Project);
-        this.copyProject = copyProject ?? (static (source, context) => source.DeepCopy(context));
+        this.copyProjectOverride = copyProject;
         this.workbookSource = workbookSource;
         this.openWorkbookReview = openWorkbookReview;
         PreviousPanel = transaction.PreviousPanel;
@@ -233,9 +238,18 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         GoTo(page + 1); return true;
     }
 
+    private const string ColumnChoicesKept = "Your column choices are kept until you import.";
+    private const string ConfirmDecisionActions = "Check the proposed actions and press Confirm these actions to continue.";
+    private bool HasUnconfirmedColumnDecisions => MappingValid && Decisions.Any(decision => !decision.Confirmed);
+    private string DecisionReviewInstruction => "Press Review decision values and confirm each action to continue"
+        + (CanReturnToWorkbook ? ", or press Back to workbook review." : ".");
+    private string ColumnsStatus => ReviewingDecisions ? ConfirmDecisionActions
+        : HasUnconfirmedColumnDecisions ? DecisionReviewInstruction : ColumnChoicesKept;
+
     public string DisabledReason => IsBusy ? "Wait for the current step to finish, or cancel."
         : page == 1 ? "Choose a readable file, sheet and header row."
-        : page == 2 ? "Choose the required columns and confirm each decision value."
+        : page == 2 ? HasUnconfirmedColumnDecisions ? ReviewingDecisions ? ConfirmDecisionActions : DecisionReviewInstruction
+            : "Choose the required columns and confirm each decision value."
         : page == 3 ? SpecialRows.FirstOrDefault(r => r.Blocking)?.Message ?? check.Problems.FirstOrDefault(p => p.Severity == PanelImportSeverity.Blocking)?.Message ?? "Review the special rows."
         : page == 4 ? "Confirm or skip each family's evidence matches."
         : page == 5 ? "Name the panel and resolve every remaining row choice." : "Complete this page before continuing.";
@@ -247,10 +261,10 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         {
             0 => "Nothing has changed yet.",
             1 => "Check the sheet and header row before continuing.",
-            2 => ReviewingDecisions ? "Check the proposed actions and press Confirm these actions to continue." : "Your column choices are kept until you import.",
+            2 => ColumnsStatus,
             3 => SpecialSummary + ".",
             4 => MatchingChoiceStatus,
-            5 => Imported ? "This list is already imported." : "Nothing has changed yet. Import keeps one Undo step.",
+            5 => Imported ? "This list is already imported." : WorkbookReviewEnabled ? "Nothing has changed yet. Accept and import keeps one Undo step." : "Nothing has changed yet. Import keeps one Undo step.",
             _ => "Family list imported. File > Save keeps it with the project."
         };
         Refresh(); Changed(nameof(Title)); Changed(nameof(Explanation)); Changed(nameof(StepLabel));
@@ -258,9 +272,11 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
 
     private void Refresh()
     {
+        if (page == 2 && !ReviewingDecisions && !reviewingWorkbook && !reviewingSubclasses && !IsBusy && !Imported
+            && (status == ColumnChoicesKept || status == DecisionReviewInstruction)) Status = ColumnsStatus;
         Changed(nameof(Page)); Changed(nameof(CanNext)); Changed(nameof(CanBack)); Changed(nameof(ForwardLabel));
         Changed(nameof(CloseLabel)); Changed(nameof(Imported)); Changed(nameof(CanUndo)); Changed(nameof(DisabledReason));
-        Changed(nameof(DraftPanel)); Changed(nameof(Problems)); Changed(nameof(Summary)); Changed(nameof(SummaryFamilies));
+        Changed(nameof(DraftPanel)); Changed(nameof(Problems)); Changed(nameof(Summary)); Changed(nameof(SummaryFamilies)); Changed(nameof(ImportedFamilyCount));
         Changed(nameof(ImportedPanel)); Changed(nameof(CanUseRowChoice)); Changed(nameof(AvailableRowOptions)); Changed(nameof(CanConfirmMatches));
         Changed(nameof(SkipFamilyLabel)); Changed(nameof(SkipAllLabel));
         Changed(nameof(Steps)); Changed(nameof(CanEdit));

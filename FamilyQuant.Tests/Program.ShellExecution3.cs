@@ -128,7 +128,7 @@ internal static partial class Program
         FeatureLedgerEvidence.WriteJson(Path.Combine(output, "SH-execution3.json"), register);
         var validation = FeatureLedgerEvidence.Load(root, inventory, [register]);
         var problems = validation.FatalProblems.Concat(validation.Entries.Values.SelectMany(entry => entry.Problems)).ToArray();
-        if (problems.Length > 0) throw new InvalidDataException(string.Join("; ", problems.Take(4)));
+        if (problems.Length > 0) throw new InvalidDataException(LedgerDiagnostics.Capped(problems, 4));
         Console.WriteLine("SH-execution3: " + rows.Count + " native supported rows; zero disposition changes.");
         return 0;
     }

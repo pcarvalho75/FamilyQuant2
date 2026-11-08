@@ -146,6 +146,7 @@ internal static partial class Program
                         && shown.Select(f => (f.Abbreviation, f.Name, f.Decision, f.MergeTarget)).SequenceEqual(project.FamilyPanel!.Families.Select(f =>
                             (f.Key, f.DisplayName, FamilyListImportViewModel.DecisionOptions.First(d => d.Value == f.Decision).Label, f.MergeTargetFamilyKey))));
                     Check(label + " the accepted panel retains shown notes subclasses and category names", project.FamilyPanel!.SourceNotes.Count == source.Last.Notes.Count
+                        + (model.SubclassReviewFindings.Any(item => item.Label == "Subclass notes") ? 1 : 0)
                         && project.FamilyPanel.Families.Sum(f => f.Subclasses.Count) == subclasses
                         && categoryLabels.SequenceEqual((project.FamilyPanel.Import?.ColorLabels ?? new()).Select(c => (c.Color, c.Label))));
                     string saved = Path.Combine(work, label + ".fqproj"); ProjectStore.WriteFqproj(saved, project, new List<QuantRow>(), new QuantManifest());
@@ -158,6 +159,7 @@ internal static partial class Program
         }
         finally { Themes.ThemeManager.Apply(previousTheme); }
         WorkbookOverviewGuardTests(one, work);
+        WorkbookSubclassFindingUiTests(work);
     }
 
     private static void WorkbookOverviewGuardTests(string path, string work)
@@ -196,6 +198,112 @@ internal static partial class Program
             && ignored.CanAcceptWorkbook && ignored.WorkbookFamilies.All(f => f.Decision == "Quantify"));
         WorkbookOverviewBroadGuardTest(work);
         WorkbookOverviewFilledNavigationTest(work);
+        WorkbookOverviewMeaningPunctuationTests(work);
+        WorkbookFamilySheetDraftTests(work);
+        WorkbookPlainWordsTests(work);
+    }
+
+    private static void WorkbookFamilySheetDraftTests(string work)
+    {
+        string path = Path.Combine(work, "reviewed-sheet-choice.xlsx"); WriteOverviewShape(path, decisions: true, notes: false);
+        using (var document = SpreadsheetDocument.Open(path, true))
+        {
+            var workbook = document.WorkbookPart!; var first = workbook.WorksheetParts.Single();
+            var data = first.Worksheet!.GetFirstChild<XL.SheetData>()!; data.RemoveAllChildren();
+            void Row(int number, params string[] values)
+            {
+                var row = new XL.Row { RowIndex = (uint)number };
+                for (int column = 0; column < values.Length; column++) row.Append(new XL.Cell { CellReference = ((char)('A' + column)).ToString() + number,
+                    DataType = XL.CellValues.InlineString, InlineString = new XL.InlineString(new XL.Text(values[column])) });
+                data.Append(row);
+            }
+            Row(1, "Abbreviation", "Family name", "Decision");
+            for (int i = 1; i <= 13; i++) Row(i + 1, "F" + i, "Family " + i, "Choice " + i);
+            first.Worksheet.Save();
+            var second = workbook.AddNewPart<WorksheetPart>(); second.Worksheet = (XL.Worksheet)first.Worksheet.CloneNode(true); second.Worksheet.Save();
+            workbook.Workbook!.Sheets!.Append(new XL.Sheet { Name = "Other families", SheetId = 2, Id = workbook.GetIdOfPart(second) }); workbook.Workbook.Save();
+        }
+        var project = WorkbookOverviewProject(); string before = project.ToJsonText(); string hash = TestFileHash.Upper(path);
+        var source = new ObservedWorkbookSource();
+        using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(project)), workbookSource: source, openWorkbookReview: true);
+        FinishReviewWork(() => model.LoadAsync(path, "Supplied list"));
+        model.Columns.Single(column => column.Role == PanelImportFields.Decision).Header = "Decision";
+        foreach (var decision in model.Decisions) decision.Decision = FamilyPanelDecision.Quantify;
+        model.ConfirmDecisions(); model.PanelName = "Reviewed import";
+        var originalRows = model.Decisions.ToArray();
+        Check("family sheet regression begins with thirteen confirmed source actions", originalRows.Length == 13 && originalRows.All(d => d.Confirmed),
+            "rows=" + originalRows.Length + "; confirmed=" + originalRows.Count(d => d.Confirmed));
+        model.SelectedWorkbookSheet = model.WorkbookSheets.Single(sheet => sheet.IsFamilySheet);
+        FinishReviewWork(model.ChooseWorkbookFamilySheetAsync);
+        Check("confirming the proposed family sheet preserves all thirteen reviewed decisions and the draft", model.Decisions.Count == 13
+            && model.Decisions.All(decision => decision.Confirmed) && model.Decisions.SequenceEqual(originalRows)
+            && model.PanelName == "Reviewed import" && source.Reads == 1,
+            "rows=" + model.Decisions.Count + "; confirmed=" + model.Decisions.Count(d => d.Confirmed) + "; same rows=" + model.Decisions.SequenceEqual(originalRows)
+                + "; name=" + model.PanelName + "; reads=" + source.Reads);
+        Check("confirming the same sheet never publishes or changes workbook bytes", project.ToJsonText() == before && TestFileHash.Upper(path) == hash && source.Completes == 0);
+        int questions = 0;
+        model.ConfirmWorkbookSheetChange = message => { questions++; return false; };
+        model.SelectedWorkbookSheet = model.WorkbookSheets.Single(sheet => sheet.Name == "Other families");
+        FinishReviewWork(model.ChooseWorkbookFamilySheetAsync);
+        Check("declining a different family sheet preserves all reviewed choices before any reload", questions == 1 && source.Reads == 1
+            && model.Sheet == "Supplied list" && model.Decisions.SequenceEqual(originalRows) && model.Decisions.All(d => d.Confirmed));
+        model.ConfirmWorkbookSheetChange = message => { questions++; return message.Contains("clears your reviewed decisions", StringComparison.Ordinal); };
+        FinishReviewWork(() => model.SelectWorkbookFamilySheetAsync("Other families"));
+        Check("a different family sheet clears choices only after the explicit warning is accepted", questions == 2 && source.Reads == 2
+            && model.Sheet == "Other families" && model.Decisions.All(d => !d.Confirmed) && model.PanelName != "Reviewed import"
+            && project.ToJsonText() == before && TestFileHash.Upper(path) == hash);
+    }
+
+    private static void WorkbookOverviewMeaningPunctuationTests(string work)
+    {
+        foreach (string ending in new[] { "", "." })
+        {
+            string path = Path.Combine(work, ending.Length == 0 ? "meaning-no-stop.xlsx" : "meaning-stop.xlsx"); ExampleFamilyList.Write(path);
+            var proposal = new FamilyPanelSpreadsheetImporter().ProposeWorkbook(path);
+            var entry = proposal.Decisions.Single(d => d.SourceValue == "Opcional").LegendEntries.Single();
+            var table = proposal.Workbook.Sheets.Single(s => s.SheetName == entry.SheetName).Table!;
+            string meaning = "Quantify when evidence is sufficient" + ending;
+            using (var document = SpreadsheetDocument.Open(path, true))
+            {
+                var workbook = document.WorkbookPart!;
+                var source = workbook.Workbook!.Sheets!.Elements<XL.Sheet>().Single(s => s.Name == entry.SheetName);
+                var part = (WorksheetPart)workbook.GetPartById(source.Id!.Value!);
+                string address = table.ColumnLetters[1] + entry.RowNumber;
+                var cell = part.Worksheet!.Descendants<XL.Cell>().Single(c => c.CellReference == address);
+                cell.DataType = XL.CellValues.InlineString; cell.CellValue = null; cell.InlineString = new XL.InlineString(new XL.Text(meaning));
+                part.Worksheet.Save();
+            }
+            var observed = new ObservedWorkbookSource();
+            using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(WorkbookOverviewProject())),
+                workbookSource: observed, openWorkbookReview: true);
+            FinishReviewWork(() => model.LoadAsync(path));
+            Check("legend meaning " + (ending.Length == 0 ? "without" : "with") + " a trailing stop ends once in the review status",
+                model.WorkbookReviewStatus.Contains("Legend meaning: Quantify when evidence is sufficient. ", StringComparison.Ordinal)
+                && !model.WorkbookReviewStatus.Contains("sufficient..", StringComparison.Ordinal)
+                && model.Decisions.Single(d => d.Source == "Opcional").Meaning == meaning, model.WorkbookReviewStatus);
+            string reason = observed.Last.Decisions.Single(d => d.SourceValue == "Opcional").Reason;
+            Check("legend reason " + (ending.Length == 0 ? "without" : "with") + " a source stop ends its meaning sentence once",
+                reason.Contains("Legend meaning: Quantify when evidence is sufficient. ", StringComparison.Ordinal)
+                && !reason.Contains("sufficient..", StringComparison.Ordinal), reason);
+        }
+    }
+
+    private static void WorkbookPlainWordsTests(string work)
+    {
+        string path = Path.Combine(work, "plain-workbook.xlsx"); ExampleFamilyList.Write(path);
+        using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(WorkbookOverviewProject())),
+            workbookSource: new ObservedWorkbookSource(), openWorkbookReview: true);
+        FinishReviewWork(() => model.LoadAsync(path));
+        string reason = model.WorkbookSheets.Single(sheet => sheet.IsFamilySheet).Reason;
+        Check("family-list explanation uses plain words rather than ranking and short-code terms", reason.Contains("abbreviation", StringComparison.OrdinalIgnoreCase)
+            && !reason.Contains("visible-first", StringComparison.Ordinal) && !reason.Contains("short-code", StringComparison.Ordinal), reason);
+        string card = model.WorkbookSections.Single(section => section.Key == "sheets").Title;
+        FinishReviewWork(() => model.ReviewWorkbookSectionAsync("sheets"));
+        Check("Workbook sheets card opens a page with the same name", card == "Workbook sheets" && model.Title == card
+            && model.StepLabel.EndsWith(card, StringComparison.Ordinal), model.Title + "; " + model.StepLabel);
+        Check("Workbook sheets page explanation names the sheet roles rather than the old file and sheet step",
+            model.Explanation.Contains("role", StringComparison.OrdinalIgnoreCase)
+            && !model.Explanation.Contains("Choose a file and sheet", StringComparison.Ordinal), model.Explanation);
     }
 
     private static void WorkbookOverviewFilledNavigationTest(string work)

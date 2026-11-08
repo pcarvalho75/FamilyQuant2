@@ -40,7 +40,8 @@ public static partial class WorkbookImportSummaries
                 var selection = selectedRules.Length == 1 ? selectedRules[0] : null;
                 bool ruleAccepted = selection?.Accepted == true;
                 var kind = selection?.Kind ?? rule.Kind;
-                bool valid = CertainRule(rule) && Enum.IsDefined(kind);
+                // Explicit review resolves polarity only; the canonical accession checks still apply.
+                bool valid = CertainRule(rule, ruleAccepted && selection?.Kind != null) && Enum.IsDefined(kind);
                 var ruleState = selectedRules.Length > 1 ? WorkbookImportItemState.CouldNotPlace
                     : !valid ? WorkbookImportItemState.Uncertain : ruleAccepted && accepted ? WorkbookImportItemState.Proposed : WorkbookImportItemState.Found;
                 add(WorkbookImportSectionKind.Subclasses, "Subclass rule", family + ": " + key + ", " + kind + " " + rule.Accession,
@@ -67,9 +68,11 @@ public static partial class WorkbookImportSummaries
                     add(WorkbookImportSectionKind.Subclasses, "Unplaced subclass source", table.SheetName, "This source table has no placed subclass rows.",
                         WorkbookImportItemState.CouldNotPlace, WorkbookImportPage.Subclasses, sources: new[] { Source(table.SheetName, columns: table.Table.Headers) });
             }
+        AddSubclassReviewFindings(plan, keys, add);
     }
 
-    private static bool CertainRule(PanelSubclassRuleProposal rule) => !rule.IsUncertain && rule.Accession.Length > 0 && Enum.IsDefined(rule.Kind)
+    private static bool CertainRule(PanelSubclassRuleProposal rule, bool polarityResolved = false) => (!rule.IsUncertain || polarityResolved)
+        && rule.Accession.Length > 0 && Enum.IsDefined(rule.Kind)
         && rule.CandidateAccessions.Count <= 1 && (rule.CandidateAccessions.Count == 0 || rule.CandidateAccessions.Contains(rule.Accession, StringComparer.Ordinal));
     private static List<PanelSubclassAcceptance> DraftSubclasses(IReadOnlyList<PanelSubclassProposal> proposals, IReadOnlyCollection<string> keys) => proposals.Select(proposal =>
         new PanelSubclassAcceptance { ProposalId = proposal.ProposalId,
