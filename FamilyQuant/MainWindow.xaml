@@ -102,6 +102,8 @@
                           ToolTip="Writes current User ID family numbers to a new regrouped SEPro package and keeps the original package. Open a project in Home or Curate families to enable it; Undo does not revert the new file."/>
             </MenuItem>
             <MenuItem x:Name="MenuItemHelp" Header="Help" ToolTip="Offers explanations of the workflow and current screen, update commands and AI key settings. Opening this menu changes nothing.">
+                <MenuItem x:Name="MenuItemAiHelp" Header="Ask AI Help..." Click="MenuItemAiHelp_Click" InputGestureText="Ctrl+H"
+                          ToolTip="Ask Claude about FamilyQuant using the current screen and source code; requests use your Anthropic account."/>
                 <MenuItem x:Name="MenuItemAiKey" Header="AI assistant key..." Click="MenuItemAiKey_Click"
                           ToolTip="Opens settings to add, test, import or remove your private AI service key for this Windows user. The key is kept outside the project; changes here are not part of project Undo."/>
                 <MenuItem x:Name="MenuItemHowToRead" Header="How to read these numbers" Command="Help" InputGestureText="F1"
