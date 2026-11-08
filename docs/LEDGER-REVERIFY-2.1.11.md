@@ -8,6 +8,8 @@ Reason for every listed row: not re-proved for 2.1.11; receipts lost after 2.1.1
 
 These rows remain OPEN and require verification after release. This list does not mark them VERIFIED.
 
+2.1.12, 2026-11-08: the receipt refresh on the 2.1.12 tree (N6a-text) proved six listed rows, FQ15-033F630F491F, FQ15-4B912FDD995D, FQ15-53AFA8BB71EB, FQ15-9114008B6416, FQ15-9E3E3DEA8BE6, FQ15-A6A013274E5B; they are VERIFIED in the ledger and left this list.
+
 Currency after scoped Z17a9 pass 2 at `57292045f1fcc58c5e2d4aae7eb0451e95519609`: 2219 current VERIFIED, 3241 OPEN, 296 APPROVED_DROP. Of 421 stale rows citing files changed after `9b5696ff`, 420 were restored. One frozen literal still lacks a current proof.
 
 Unchanged-file ledger rows retain their baseline states. Six incidental positive checks from the full native text register remain unclaimed in this pass. Native generated receipts are retained without editing.
@@ -79,7 +81,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-02E4A7DD1B7A | AS-presentation-pack |
 | FQ15-02FF78469D24 | Core-X7-runtime |
 | FQ15-032559C20232 | Paulo-rulings |
-| FQ15-033F630F491F | FL-secondary-interactions |
 | FQ15-03487353083C | AS-retained |
 | FQ15-036389E75CD8 | Paulo-rulings |
 | FQ15-038D1B231EA4 | AS-presentation-pack |
@@ -966,7 +967,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-4B5132371956 | AS-retained |
 | FQ15-4B69CE23C0B3 | AS-retained |
 | FQ15-4B828366EB9A | AS-presentation-pack |
-| FQ15-4B912FDD995D | FL-secondary-interactions |
 | FQ15-4BA272385B9E | Paulo-rulings |
 | FQ15-4BBAD1F92143 | Paulo-rulings |
 | FQ15-4BBB36B1D8BF | AS-retained |
@@ -1062,7 +1062,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-53666841AC8F | N6a-text |
 | FQ15-537CABD389DE | AS-retained |
 | FQ15-539CE5CFCC45 | AS-presentation-pack |
-| FQ15-53AFA8BB71EB | FL-secondary-interactions |
 | FQ15-53C622D8EEDA | Paulo-rulings |
 | FQ15-53D0A9721B25 | Paulo-rulings |
 | FQ15-5402C3269417 | AS-retained |
@@ -1870,7 +1869,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-90FAFEFB1B89 | Paulo-rulings |
 | FQ15-91075F7615C5 | AS-retained |
 | FQ15-910AE022A94A | Paulo-rulings |
-| FQ15-9114008B6416 | FL-secondary-interactions |
 | FQ15-9121E79692F0 | AS-retained |
 | FQ15-9130F9764373 | Paulo-rulings |
 | FQ15-9150094342D9 | Paulo-rulings |
@@ -2025,7 +2023,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-9E34CFE4DD87 | AS-retained |
 | FQ15-9E392D5D92DE | AS-retained |
 | FQ15-9E3BB00A9DA8 | AS-retained |
-| FQ15-9E3E3DEA8BE6 | FL-secondary-interactions |
 | FQ15-9E5893023318 | AS-presentation-figures |
 | FQ15-9E73EC365DDF | EV-denovo-commands-1 |
 | FQ15-9E9B3B697A05 | EV-denovo-commands-1 |
@@ -2133,7 +2130,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-A62DED5AD4E2 | Paulo-rulings |
 | FQ15-A63BD782A3D4 | AS-retained |
 | FQ15-A68DDF570330 | Paulo-rulings |
-| FQ15-A6A013274E5B | FL-secondary-interactions |
 | FQ15-A6AE1E467A80 | AS-retained |
 | FQ15-A6B7F8F215E2 | AS-presentation-pack |
 | FQ15-A6DE60F9C8A8 | Paulo-rulings |

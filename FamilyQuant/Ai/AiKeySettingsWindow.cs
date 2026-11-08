@@ -26,7 +26,8 @@ public sealed class AiKeySettingsWindow : Window
         var title = SecondaryWindowView.Text(Title); title.SetResourceReference(StyleProperty, "PageTitle"); layout.Children.Add(title);
         layout.Children.Add(SecondaryWindowView.Text("The optional AI draft uses your own Anthropic API key. "
             + "It is protected for this Windows user and is not saved in the project or report. "
-            + "You will see the project information and confirm before an AI draft is sent.", true));
+            + "You will see the project information and confirm before an AI draft is sent. "
+            + "The same key is used by AI Help (Help > Ask AI Help, or Ctrl+H).", true));
         layout.Children.Add(new Label { Content = "Paste or replace key", Target = KeyEditor });
         KeyEditor.Margin = new Thickness(0, 0, 0, 12); KeyEditor.ToolTip = "Enter a key, then choose Save key or Test key.";
         layout.Children.Add(KeyEditor);

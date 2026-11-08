@@ -257,6 +257,7 @@ public partial class MainWindow
                 "   Give it to an assistant of your choice; FamilyQuant itself does not interpret it.\n\n" +
 
                 "OPTIONAL · Draft an interpretation with AI\n" +
+                "   AI Help (Help > Ask AI Help..., or Ctrl+H) answers questions about FamilyQuant using its source code on GitHub, the displayed program information and an optional picture.\n\n" +
                 "   Menu: Help > AI assistant key...\n" +
                 "   Add, test, import or remove your Anthropic key. It is protected for this Windows\n" +
                 "   user and is not saved in the project or report. Test key sends a short request\n" +
