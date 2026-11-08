@@ -89,9 +89,13 @@ internal static partial class Program
                 part.Worksheet.Save();
             }
             var dual = importer.ProposeWorkbook(dualRole);
-            Check("Z16a10 regression sheet also has eligible family-list structure", dual.FamilySheet == "Data 9"
-                && dual.Problems.Any(problem => problem.Kind == PanelImportProblemKind.FamilySheetAlternative
+            Check("Z12p5y2 a mapped subclass table is not named as a competing family sheet", dual.FamilySheet == "Data 9"
+                && !dual.Problems.Any(problem => problem.Kind == PanelImportProblemKind.FamilySheetAlternative
                     && problem.Message.Contains("Data 3", StringComparison.Ordinal)));
+            string familyReason = dual.Workbook.Sheets.Single(sheet => sheet.SheetName == dual.FamilySheet).RoleReason;
+            Check("Z12p5y2 the reader explains the proposed family sheet in plain words",
+                familyReason.Contains("abbreviation", StringComparison.OrdinalIgnoreCase)
+                && !familyReason.Contains("visible-first", StringComparison.Ordinal) && !familyReason.Contains("short-code", StringComparison.Ordinal), familyReason);
             Check("Z16a10 source-linked subclass structure wins over an alternate family-list shape",
                 dual.Workbook.Sheets.Single(sheet => sheet.SheetName == "Data 3") is { Role: PanelWorkbookSheetRole.SubclassTable, IsUncertain: false }
                 && dual.SubclassTables.SingleOrDefault()?.FamilyKeys.SequenceEqual(Enumerable.Range(1, 9).Select(index => "F" + index.ToString("D2", CultureInfo.InvariantCulture))) == true

@@ -90,14 +90,18 @@ public sealed partial class FamilyPanelSpreadsheetImporter
             selected.Sheet.IsUncertain |= !userSelected && (!selected.Eligible || ranked.Count > 1);
             selected.Sheet.RoleReason = userSelected ? "This family sheet was chosen by the user."
                 : candidates.Count == 1 ? "The sole available table retains the existing single-sheet import proposal."
-                : "The visible-first ranking proposes this short-code/name table with "
-                    + selected.Rows.ToString(CultureInfo.InvariantCulture) + " data rows.";
-            if (!userSelected && ranked.Count > 1)
-                result.Problems.Add(new PanelImportProblem { Kind = PanelImportProblemKind.FamilySheetAlternative, Severity = PanelImportSeverity.Note,
-                    SheetName = selected.Sheet.SheetName, Message = "Other sheets also have supported family-list structure: "
-                        + string.Join(", ", ranked.Where(candidate => candidate != selected).Select(candidate => "\"" + candidate.Sheet.SheetName + "\""))
-                        + ". Review the proposed family sheet before accepting." });
+                : "Suggested as the family list because it has abbreviation and family-name columns and "
+                    + selected.Rows.ToString(CultureInfo.InvariantCulture) + " data rows. Visible sheets are preferred, then tables with more rows.";
             ProposeWorkbookRelationships(result, overrides, ranked.Select(candidate => candidate.Sheet.SheetName).ToHashSet(StringComparer.Ordinal));
+            if (!userSelected && ranked.Count > 1)
+            {
+                var alternatives = ranked.Where(candidate => candidate != selected && candidate.Sheet.Role != PanelWorkbookSheetRole.SubclassTable)
+                    .Select(candidate => "\"" + candidate.Sheet.SheetName + "\"").ToArray();
+                if (alternatives.Length > 0)
+                    result.Problems.Add(new PanelImportProblem { Kind = PanelImportProblemKind.FamilySheetAlternative, Severity = PanelImportSeverity.Note,
+                        SheetName = selected.Sheet.SheetName, Message = "Other sheets could also be the family list: "
+                            + string.Join(", ", alternatives) + ". Review the proposed family sheet in Workbook sheets before accepting." });
+            }
         }
         result.Notes = workbook.Sheets.Where(sheet => sheet.Role is PanelWorkbookSheetRole.Notes or PanelWorkbookSheetRole.ColorLegend
             || sheet.Role == PanelWorkbookSheetRole.FamilyList && sheet.SheetName != result.FamilySheet)
