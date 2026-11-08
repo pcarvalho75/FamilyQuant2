@@ -1,6 +1,6 @@
 # Updating a project's database (design note Z14c1)
 
-Status: a design for Paulo to read (Z14c2). Nothing is built. Written by FQOpus on 2026-11-06 from
+Status: a design for Paulo to read (Z14c2). Nothing is built. The references below to a 1.5 export describe the original proposal; new FCF saves use curation format 2, and frozen 1.5 reader acceptance was retired by D80. See [current format boundaries](../PROJECT-FORMATS.md). Written by FQOpus on 2026-11-06 from
 master 5a431fb (FamilyQuant 2.1.10 plus the roadmap). Every claim about today's program names the
 file and line it was read from; section 12 lists what was not verified.
 

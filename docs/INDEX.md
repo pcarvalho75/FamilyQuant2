@@ -24,7 +24,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Experimental homology options](HOMOLOGY-SCIENCE-OPTIONS.md) | Default-OFF science options, certified five-search parity, selected-input cached replay/comparison and J43 headline basis |
 | [Panel subclasses](PANEL-SUBCLASSES.md) | User-defined subclass rules, currentness, reviewed transfer and leave-one-out measurement |
 | [De novo engine](DENOVO-ENGINE.md) | Reader/result boundaries, Core selections and review tables, focused real-data parity |
-| [Project formats](PROJECT-FORMATS.md) | Versioned schema/codecs, legacy container rules and frozen-reader FCF proof |
+| [Project formats](PROJECT-FORMATS.md) | Versioned schema/codecs, legacy input rules and curation format 2 |
 | [Clustering refactor](CLUSTERING-REFACTOR.md) | Result contracts and bounded frozen/current comparison |
 | [Dependencies](DEPENDENCIES.md) | Package decisions, cache compatibility and real-file opening checks |
 | [USEARCH provenance](USEARCH-PROVENANCE.md) | Pinned author artifact, license and full assignment parity |

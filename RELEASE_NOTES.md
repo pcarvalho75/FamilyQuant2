@@ -4,7 +4,7 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
-## 2.1.11 (release candidate)
+## 2.1.11 (published 2026-11-07)
 
 - **Import a whole workbook.** **File > Import family list** opens **Review your workbook**, bringing the family list, columns, sheet roles, colours, decisions, Pfam matches, subclass proposals and source notes together. Open a section to change its choices, then press **Accept and import** to keep the reviewed list in one undoable step. Nothing changes in the project before that press. <!-- Z16a1 Z16a3 Z16a9 Z16a9a -->
 - **Use your workbook's legend.** The workbook map lists every sheet and lets you change its role. Confirming the current family sheet keeps your reviewed choices; choosing another asks before clearing them. Colour names and decision meanings come from the legend. Required choices need your decision before import; optional findings stay listed and do not block it. A clear explanation appears when no Decision column is chosen. <!-- Z16a1 Z16a2 Z16a3 Z16a3c Z16a9 Z16a11 Z16a11b Z12p2f3 -->

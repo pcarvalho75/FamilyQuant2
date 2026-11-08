@@ -139,7 +139,7 @@ usual -2. Each part takes its name from the name column when that column lists t
 and its other-language name from that column under the same rule, like every other family. A cell split into
 exactly two names by a comma alone, with no label, has `SuggestedAction` Import, so the wizard starts on
 "Keep as one family"; three or more names, a semicolon or a line break leave it empty. Keys proposed for a
-split chosen before this change are not kept by a Replay of the same choices, which 2.1.11 has not shipped.
+split chosen before this change are not kept by a Replay of the same choices, which applied only to pre-release drafts of 2.1.11.
 Checks: `--test-panel-import-several`. The read-only probe of the real workbook copy flagged exactly one
 row, the row of rare families with nine names in its English column, and no other row.
 
