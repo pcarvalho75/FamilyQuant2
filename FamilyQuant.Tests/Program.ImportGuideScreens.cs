@@ -77,7 +77,8 @@ internal static partial class Program
         void Shot(string name)
         {
             // Let opening sections (the colour categories) finish their layout before the picture.
-            PumpDispatcher(); System.Threading.Thread.Sleep(400); PumpDispatcher();
+            // Z16a8b: two settle rounds; one round once left Colour categories a few pixels short of its final place.
+            PumpDispatcher(); System.Threading.Thread.Sleep(400); PumpDispatcher(); System.Threading.Thread.Sleep(400); PumpDispatcher();
             var content = (FrameworkElement)window.Content; content.Measure(new Size(1366, 768)); content.Arrange(new Rect(0, 0, 1366, 768)); content.UpdateLayout();
             PumpDispatcher();
             Directory.CreateDirectory(output);
@@ -137,7 +138,8 @@ internal static partial class Program
                 model.ReviewingDecisions && model.Decisions.Count == 8 && model.Decisions.All(d => d.Meaning.Length > 0 && !d.Confirmed)
                 && model.Decisions.Count(d => d.Decision == null) == 4
                 && model.Decisions.Any(d => d.Decision == FamilyPanelDecision.MergeIntoAnotherFamily && d.MergeTarget == "LEC") && !model.CanNext,
-                string.Join("; ", model.Decisions.Select(d => d.Source + " -> " + (d.Decision?.ToString() ?? "(empty)") + " " + d.MergeTarget)));
+                "reviewing " + model.ReviewingDecisions + ", can next " + model.CanNext + "; " + string.Join("; ", model.Decisions.Select(d => d.Source + " -> "
+                    + (d.Decision?.ToString() ?? "(empty)") + " " + d.MergeTarget + (d.Confirmed ? " confirmed" : "") + " [" + d.Meaning + "]")));
             Shot("03-columns-decisions");
             // Her choices for the four labels the legend leaves empty, as a reader of this example would make them: the
             // families out of the total stay out, and the optional, conditional and pending ones are kept for now.
@@ -190,6 +192,11 @@ internal static partial class Program
                 && model.SubclassChoices.Single(c => c.Family == "MMP" && c.Title == "Com hemopexina").Rules.Single(r => r.Accession == "PF00045").Kind == ImportSubclassRuleKind.RequiredPfam,
                 string.Join("; ", model.SubclassChoices.Where(c => c.Family == "MMP").Select(c => c.Title + " " + string.Join(",", c.Rules.Select(r => r.Accession + " " + r.Kind + (r.Use ? "*" : ""))))));
             Shot("05-subclasses");
+            // Z16a8b (Z16a12b, Z16a9c): a polarity read only from a column heading is an uncertain proposal, so every subclass of the
+            // example starts Not selected with its rules unticked; she includes each one she wants.
+            Check("guide: every subclass of the example starts Not selected, its heading-derived rules uncertain and unticked",
+                model.SubclassChoices.All(c => !c.Use && c.State == "Not selected") && model.SubclassChoices.Where(c => c.Family == "MMP").SelectMany(c => c.Rules).All(r => !r.Use && r.IsUncertain),
+                string.Join("; ", model.SubclassChoices.Select(c => c.Family + "/" + c.Title + " " + c.State)));
             model.Back(); PumpDispatcher();
             Check("guide: back on Review your workbook, Accept and import is available once her choices are made",
                 model.ReviewingWorkbook && model.CanAcceptWorkbook && !model.WorkbookHasReviewProblems && file.FamilyPanel == null, model.WorkbookReviewStatus);
