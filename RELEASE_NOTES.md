@@ -4,6 +4,15 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.12 (release candidate)
+
+- **AI Help.** **Help > Ask AI Help** (Ctrl+H, from any FamilyQuant window) answers questions about FamilyQuant. It sends your question, what the program shows (version, screen, project, last error and the last lines of the log) and, only when you tick it, a picture of the window to Claude with your own Anthropic key, the same key as the AI draft. For technical questions it reads the FamilyQuant source code on GitHub and names the files and lines it used. **What AI Help sends** shows the text before you ask.
+- **GitHub's limits.** GitHub allows 10 code searches a minute and 5,000 file reads an hour for all FamilyQuant users together. When a limit is reached, AI Help says so and when reading resumes.
+- **Report this as a bug.** From AI Help, **Report this as a bug...** opens an editable report, then a new issue on the FamilyQuant releases page on GitHub with the full report on the clipboard and the picture saved for you to drag in. You submit it from your own GitHub account; issues there are public.
+- **AI assistant key.** The key window says the same key is used by AI Help.
+
+**Feature ledger.** 2,225 checks proved for 2.1.12; 3,235 remain open to verify again after release, listed in [docs/LEDGER-REVERIFY-2.1.11.md](docs/LEDGER-REVERIFY-2.1.11.md).
+
 ## 2.1.11 (published 2026-11-07)
 
 - **Import a whole workbook.** **File > Import family list** opens **Review your workbook**, bringing the family list, columns, sheet roles, colours, decisions, Pfam matches, subclass proposals and source notes together. Open a section to change its choices, then press **Accept and import** to keep the reviewed list in one undoable step. Nothing changes in the project before that press. <!-- Z16a1 Z16a3 Z16a9 Z16a9a -->
