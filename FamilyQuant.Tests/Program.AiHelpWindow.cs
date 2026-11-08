@@ -125,6 +125,51 @@ internal static partial class Program
                 var expected = (string)method.Invoke(null, new object[] { Enum.Parse<AiWorkflowOutcome>(outcome.ToString()) })!;
                 Check("H2a " + outcome + " uses the AI draft message", LogicalHelpText(window.Answers).Contains(expected));
             }
+            string? copied = null, address = null, folder = null;
+            string reportDirectory = Path.Combine(Path.GetTempPath(), "fq-help-report-" + Guid.NewGuid().ToString("N"));
+            var reportQuestion = new HelpQuestion("Synthetic issue & detail", SyntheticHelpState, picture, Array.Empty<HelpTurn>());
+            var report = new AiHelpReportWindow(reportQuestion, "Synthetic answer", text => copied = text,
+                url => address = url, path => { folder = path; return true; }, reportDirectory);
+            try
+            {
+                Check("H2c report starts with the question title and requested fields", report.ReportTitle.Text == reportQuestion.Text
+                    && new[] { reportQuestion.Text, "Synthetic answer", SyntheticHelpState.Version, SyntheticHelpState.Screen,
+                        SyntheticHelpState.LastError, SyntheticHelpState.LogTail }.All(report.ReportBody.Text.Contains)
+                    && !report.ReportBody.IsReadOnly && !report.ReportTitle.IsReadOnly && window.ReportButton.IsEnabled);
+                report.ReportTitle.Text = "Edited & issue #";
+                report.ReportBody.Text += "\n" + string.Concat(Enumerable.Repeat("Synthetic & detail \u00e9 \U0001F9EA\n", 900));
+                Check("H2c opening the issue copies the full edited report", report.OpenIssue() && copied == report.ReportTitle.Text + "\n\n" + report.ReportBody.Text);
+                Check("H2c issue URL uses the releases repository and stays below 7000 characters", address != null && address.Length < 7000
+                    && new Uri(address).Host == "github.com" && new Uri(address).AbsolutePath == "/pcarvalho75/FamilyQuant2-releases/issues/new"
+                    && address.Contains("title=" + Uri.EscapeDataString(report.ReportTitle.Text))
+                    && Uri.UnescapeDataString(address).EndsWith("The full report is on the clipboard.", StringComparison.Ordinal));
+                Check("H2c picture is saved as PNG and its folder is opened", folder == reportDirectory && report.SavedPicturePath != null
+                    && File.ReadAllBytes(report.SavedPicturePath).SequenceEqual(picture) && Path.GetExtension(report.SavedPicturePath) == ".png");
+                int folderOpens = 0;
+                var noPicture = new AiHelpReportWindow(reportQuestion with { ScreenshotPng = null }, "Synthetic answer", _ => { }, _ => { },
+                    _ => { folderOpens++; return true; }, reportDirectory);
+                try { Check("H2c no picture produces no image handoff", noPicture.OpenIssue() && noPicture.SavedPicturePath == null && folderOpens == 0); }
+                finally { noPicture.Close(); }
+                Check("H2c short issue text is URL encoded without truncation", Uri.UnescapeDataString(AiHelpReportWindow.BuildIssueAddress("A & B", "Synthetic + # detail")).EndsWith("&body=Synthetic + # detail", StringComparison.Ordinal));
+                if (screens != null)
+                {
+                    Directory.CreateDirectory(screens); report.ReportBody.Text = AiHelpReportWindow.BuildBody(reportQuestion, "Synthetic answer");
+                    var previous = Themes.ThemeManager.Current;
+                    try
+                    {
+                        report.Show(); PumpDispatcher();
+                        foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
+                        { Themes.ThemeManager.Apply(theme); PumpDispatcher(); ScreenHarness.Save(report, Path.Combine(screens, "ai-help-report-" + theme + ".png"), 800, 700); }
+                    }
+                    finally { Themes.ThemeManager.Apply(previous); }
+                }
+            }
+            finally
+            {
+                report.Close();
+                if (report.SavedPicturePath != null && File.Exists(report.SavedPicturePath)) File.Delete(report.SavedPicturePath);
+                if (Directory.Exists(reportDirectory)) Directory.Delete(reportDirectory);
+            }
             if (screens != null)
             {
                 Directory.CreateDirectory(screens);

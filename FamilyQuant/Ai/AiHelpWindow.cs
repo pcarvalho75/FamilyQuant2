@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ public sealed class AiHelpWindow : Window
     public TextBox Question { get; } = new();
     public Button AskButton { get; } = new();
     public Button CancelButton { get; } = new();
+    public Button ReportButton { get; } = new();
     public StackPanel Answers { get; } = new();
     public TextBlock Status { get; } = SecondaryWindowView.Text("", true);
     public Task? AskTask { get; private set; }
@@ -67,7 +69,10 @@ public sealed class AiHelpWindow : Window
         AskButton.Content = "Ask"; AskButton.ToolTip = "Sends your question and the displayed program information to Claude.";
         AskButton.SetResourceReference(StyleProperty, "PrimaryButton"); AskButton.Margin = new Thickness(0, 0, 8, 0);
         CancelButton.Content = "Cancel"; CancelButton.ToolTip = "Stops waiting for the current answer."; CancelButton.Visibility = Visibility.Collapsed;
-        actions.Children.Add(AskButton); actions.Children.Add(CancelButton); top.Children.Add(actions); top.Children.Add(Status);
+        ReportButton.Content = "Report this as a bug..."; ReportButton.IsEnabled = false;
+        ReportButton.ToolTip = "Review and edit a public GitHub issue about the last question and answer before submitting it yourself.";
+        ReportButton.Margin = new Thickness(8, 0, 0, 0);
+        actions.Children.Add(AskButton); actions.Children.Add(CancelButton); actions.Children.Add(ReportButton); top.Children.Add(actions); top.Children.Add(Status);
         DockPanel.SetDock(top, Dock.Top); layout.Children.Add(top);
         var scroll = new ScrollViewer { Content = Answers, VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
             ToolTip = "Read and select the answers and their source references." };
@@ -75,6 +80,8 @@ public sealed class AiHelpWindow : Window
         Content = SecondaryWindowView.Frame(layout);
         AskButton.Click += async (_, _) => { AskTask = AskAsync(); await AskTask; };
         CancelButton.Click += (_, _) => asking?.Cancel();
+        ReportButton.Click += (_, _) =>
+        { if (LastQuestion != null) new AiHelpReportWindow(LastQuestion, LastAnswer) { Owner = this }.ShowDialog(); };
         Closed += (_, _) => { closed = true; asking?.Cancel(); };
         Loaded += (_, _) => { RefreshState(); Question.Focus(); };
         Activated += (_, _) => RefreshState();
@@ -112,7 +119,7 @@ public sealed class AiHelpWindow : Window
     {
         if (asking != null || string.IsNullOrWhiteSpace(Question.Text)) return;
         using var cancellation = new CancellationTokenSource(); asking = cancellation;
-        AskButton.IsEnabled = false; Question.IsReadOnly = true; CancelButton.Visibility = Visibility.Visible;
+        AskButton.IsEnabled = false; ReportButton.IsEnabled = false; Question.IsReadOnly = true; CancelButton.Visibility = Visibility.Visible;
         try
         {
             string? apiKey = key();
@@ -141,7 +148,102 @@ public sealed class AiHelpWindow : Window
         finally
         {
             asking = null;
-            if (!closed) { AskButton.IsEnabled = true; Question.IsReadOnly = false; CancelButton.Visibility = Visibility.Collapsed; }
+            if (!closed) { AskButton.IsEnabled = true; ReportButton.IsEnabled = LastQuestion != null; Question.IsReadOnly = false; CancelButton.Visibility = Visibility.Collapsed; }
         }
+    }
+}
+
+public sealed class AiHelpReportWindow : Window
+{
+    private const string IssueBase = "https://github.com/pcarvalho75/FamilyQuant2-releases/issues/new?title=";
+    private const string ClipboardClosing = "\n\nThe full report is on the clipboard.";
+    private readonly byte[]? picture;
+    private readonly Action<string> copyReport;
+    private readonly Action<string> openAddress;
+    private readonly Func<string, bool> openFolder;
+    private readonly string reportDirectory;
+    public TextBox ReportTitle { get; } = new();
+    public TextBox ReportBody { get; } = new();
+    public Button OpenButton { get; } = new();
+    public TextBlock Status { get; } = SecondaryWindowView.Text("", true);
+    public string? SavedPicturePath { get; private set; }
+
+    public AiHelpReportWindow(HelpQuestion question, string answer, Action<string>? copyReport = null,
+        Action<string>? openAddress = null, Func<string, bool>? openFolder = null, string? reportDirectory = null)
+    {
+        this.picture = question.ScreenshotPng;
+        this.copyReport = copyReport ?? Clipboard.SetText;
+        this.openAddress = openAddress ?? (address => { using var process = Process.Start(new ProcessStartInfo(address) { UseShellExecute = true }); });
+        this.openFolder = openFolder ?? CrashReportStore.TryOpenFolder;
+        this.reportDirectory = reportDirectory ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FamilyQuant", "AI Help reports");
+        Title = "Report this as a bug"; Width = 800; Height = 700; MinWidth = 520; MinHeight = 420;
+        ShowInTaskbar = false; WindowStartupLocation = WindowStartupLocation.CenterOwner; SecondaryWindowView.Theme(this);
+        var layout = new DockPanel();
+        var heading = new StackPanel();
+        var title = SecondaryWindowView.Text(Title); title.SetResourceReference(StyleProperty, "PageTitle"); heading.Children.Add(title);
+        heading.Children.Add(SecondaryWindowView.Text("You submit the issue from your own GitHub account, and issues there are public.", true));
+        heading.Children.Add(new Label { Content = "Issue title", Target = ReportTitle, ToolTip = "Edit the short title that appears on the public issue." });
+        ReportTitle.Text = SafePrefix(question.Text.Replace('\r', ' ').Replace('\n', ' ').Trim(), 200);
+        ReportTitle.MaxLength = 200; ReportTitle.ToolTip = "A short description of the problem, initially taken from your question.";
+        heading.Children.Add(ReportTitle);
+        heading.Children.Add(new Label { Content = "Report", Target = ReportBody, ToolTip = "Review and edit the information you want to share publicly." });
+        DockPanel.SetDock(heading, Dock.Top); layout.Children.Add(heading);
+        var footer = new StackPanel();
+        var actions = new WrapPanel { Margin = new Thickness(0, 12, 0, 8) };
+        OpenButton.Content = "Open on GitHub"; OpenButton.SetResourceReference(StyleProperty, "PrimaryButton");
+        OpenButton.ToolTip = "Copies the full report and opens a filled issue draft in your browser; you submit it yourself.";
+        var close = new Button { Content = "Close", Margin = new Thickness(8, 0, 0, 0), ToolTip = "Closes this editable report without submitting an issue." };
+        close.Click += (_, _) => Close();
+        actions.Children.Add(OpenButton); actions.Children.Add(close); footer.Children.Add(actions); footer.Children.Add(Status);
+        DockPanel.SetDock(footer, Dock.Bottom); layout.Children.Add(footer);
+        ReportBody.Text = BuildBody(question, answer); ReportBody.AcceptsReturn = true; ReportBody.TextWrapping = TextWrapping.Wrap;
+        ReportBody.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+        ReportBody.ToolTip = "The question, answer and diagnostic information to review before opening the issue draft.";
+        layout.Children.Add(ReportBody); Content = SecondaryWindowView.Frame(layout);
+        OpenButton.Click += (_, _) => OpenIssue();
+    }
+
+    public static string BuildBody(HelpQuestion question, string answer) => $"Question:\n{question.Text}\n\nAnswer:\n{answer}"
+        + $"\n\nVersion: {question.State.Version}\nScreen: {question.State.Screen}\n\nLast error:\n{question.State.LastError}\n\nLog tail:\n{question.State.LogTail}";
+
+    private static string SafePrefix(string text, int length)
+    {
+        length = Math.Min(length, text.Length);
+        if (length > 0 && char.IsHighSurrogate(text[length - 1])) length--;
+        return text[..length];
+    }
+
+    public static string BuildIssueAddress(string title, string body)
+    {
+        string prefix = IssueBase + Uri.EscapeDataString(SafePrefix(title, 200)) + "&body=";
+        if (prefix.Length + Uri.EscapeDataString(body).Length < 7000) return prefix + Uri.EscapeDataString(body);
+        int low = 0, high = body.Length;
+        while (low < high)
+        {
+            int middle = low + (high - low + 1) / 2;
+            if (prefix.Length + Uri.EscapeDataString(SafePrefix(body, middle) + ClipboardClosing).Length < 7000) low = middle;
+            else high = middle - 1;
+        }
+        return prefix + Uri.EscapeDataString(SafePrefix(body, low) + ClipboardClosing);
+    }
+
+    public bool OpenIssue()
+    {
+        try
+        {
+            copyReport(ReportTitle.Text + "\n\n" + ReportBody.Text);
+            if (picture != null)
+            {
+                Directory.CreateDirectory(reportDirectory);
+                SavedPicturePath = Path.Combine(reportDirectory, "report-" + Guid.NewGuid().ToString("N") + ".png");
+                File.WriteAllBytes(SavedPicturePath, picture);
+                if (!openFolder(reportDirectory)) { Status.Text = "The picture was saved, but its folder could not be opened: " + reportDirectory; return false; }
+            }
+            openAddress(BuildIssueAddress(ReportTitle.Text, ReportBody.Text));
+            Status.Text = picture == null ? "Report copied. Finish and submit the issue in your browser."
+                : "Report copied. Drag the saved picture into the issue in your browser, then submit it.";
+            return true;
+        }
+        catch (Exception) { Status.Text = "Could not prepare or open the issue. Try again."; return false; }
     }
 }
