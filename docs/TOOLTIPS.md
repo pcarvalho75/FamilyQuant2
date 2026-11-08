@@ -38,7 +38,7 @@ setters of `ToolTipService.ShowDuration` in code-built styles are older choices 
 | Option | One family per name (a cell listing several families) | Imports each name in the cell as its own family, with keys you can edit. Nothing changes until you confirm the import. |
 | Input box with unit, default and range | Header row (panel editor) | The row that holds the column names, counted as in Excel. Default 1; any whole number from 1. |
 | List or combo box | Keyword categories (scope counts) | Shows every keyword category, or only Molecular function keywords. Only this table changes; the scope stays as it is. |
-| Tab | Panel checklist | For each family of your panel, the database proteins that match it and why any are left outside the proposal. Read only. |
+| Tab | Family checklist | For each family of your panel, the database proteins that match it and why any are left outside the proposal. Read only. |
 | Expander | Counts behind the suggested scope | Shows the taxa, keywords and reviewed entries the suggested scope was built from. Opening it changes nothing. |
 | Column header | Reviewed (family list) | Proteins marked reviewed in the stored UniProt evidence, including unticked members; they are part of Total. |
 | Disabled control | Apply grouping, before Update proposal | Unavailable because the scope changed after the last proposal. Choose Update proposal, review the ticks, then Apply grouping. |
