@@ -24,7 +24,7 @@ public sealed partial class FamilyListImportViewModel
     public bool ReviewingWorkbook => reviewingWorkbook;
     public bool ReviewingSubclasses => reviewingSubclasses;
     public bool ShowingWizardPages => !reviewingWorkbook && !reviewingSubclasses;
-    public bool CanReturnToWorkbook => WorkbookReviewEnabled && HasWorkbookMap && !Imported && !IsBusy && !reviewingWorkbook;
+    public bool CanReturnToWorkbook => WorkbookReviewEnabled && HasWorkbookMap && !Imported && !IsBusy && !reviewingWorkbook && !reviewingSubclasses;
     public IReadOnlyCollection<string> WorkbookFamilyKeys => workbookReview?.FamilyKeys ?? Array.Empty<string>();
     public IReadOnlyList<ImportWorkbookFinding> WorkbookFindings => workbookReview?.Sections.SelectMany(section => section.Items).Select(item =>
         new ImportWorkbookFinding(item.Id, item.Label, item.Value, StateLabel(item.State), item.Reason,

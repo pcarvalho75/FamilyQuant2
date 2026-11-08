@@ -32,7 +32,7 @@ public sealed partial class FamilyListImportViewModel
     public IReadOnlyList<PanelWorkbookSourceNote> KeptNotes => workbookSnapshot?.Notes is { } notes ? notes : Array.Empty<PanelWorkbookSourceNote>();
     private ImportWorkbookSheet? selectedWorkbookSheet;
     public ImportWorkbookSheet? SelectedWorkbookSheet { get => selectedWorkbookSheet; set { if (Set(ref selectedWorkbookSheet, value)) Changed(nameof(CanChooseFamilySheet)); } }
-    public bool CanChooseFamilySheet => CanEdit && SelectedWorkbookSheet != null;
+    public bool CanChooseFamilySheet => CanEdit && SelectedWorkbookSheet != null && (!SelectedWorkbookSheet.IsFamilySheet || NeedsFamilySheetChoice);
     public Func<string, bool>? ConfirmWorkbookSheetChange { get; set; }
     public static IReadOnlyList<ImportSheetRoleOption> SheetRoles { get; } = new[] {
         new ImportSheetRoleOption("Family list", PanelWorkbookSheetRole.FamilyList), new("Colour legend", PanelWorkbookSheetRole.ColorLegend),

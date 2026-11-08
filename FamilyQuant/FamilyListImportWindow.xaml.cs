@@ -30,6 +30,8 @@ public partial class FamilyListImportWindow : Window
             MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes;
         AlignSummaryCells();
         SizeChanged += (_, _) => FitSummaryRows();
+        SheetPreviewGrid.LayoutUpdated += (_, _) => PositionPreviewTitles();
+        SheetPreviewGrid.SizeChanged += (_, _) => FitPreviewColumns();
         model.PropertyChanged += (_, args) =>
         {
             if (args.PropertyName == nameof(FamilyListImportViewModel.Page))
@@ -95,6 +97,7 @@ public partial class FamilyListImportWindow : Window
         loadingSheets = true;
         try
         {
+            previewTitles.Clear(); PreviewMergedTitles.Children.Clear();
             SheetPreviewGrid.Columns.Clear(); SheetPreviewGrid.ItemsSource = null;
             var preview = Model.Preview;
             if (preview == null) return;
@@ -117,17 +120,19 @@ public partial class FamilyListImportWindow : Window
                 text.SetBinding(FrameworkElement.ToolTipProperty, new Binding("Cells[" + column + "]") { Converter = new ImportSourceDetailConverter() });
                 border.AppendChild(text);
                 string letter = preview.Rows.FirstOrDefault(r => r.Cells.Count > column)?.Cells[column].ColumnLetter ?? (column + 1).ToString(CultureInfo.CurrentCulture);
-                var sourceColumn = new DataGridTemplateColumn { Header = letter, Width = 135, MinWidth = 110,
+                var sourceColumn = new DataGridTemplateColumn { Header = letter, Width = 145, MinWidth = 110,
                     CellTemplate = new DataTemplate { VisualTree = border }, ClipboardContentBinding = new Binding("Cells[" + column + "].Text"), IsReadOnly = true };
                 Themes.TableAppearance.SetHeaderToolTip(sourceColumn, "Original workbook column " + letter + "; read only, with complete cell text available in Cell details. Selecting a cell changes only the displayed details.");
                 SheetPreviewGrid.Columns.Add(sourceColumn);
             }
             SheetPreviewGrid.ItemsSource = preview.Rows;
+            BuildPreviewTitles(preview);
             SheetChoice.SelectedItem = Model.Sheet;
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (closing || !ReferenceEquals(Model.Preview, preview) || preview.Rows.Count == 0) return;
                 SheetPreviewGrid.ScrollIntoView(preview.Rows[0]);
+                FitPreviewColumns();
             }));
         }
         finally { loadingSheets = false; }
