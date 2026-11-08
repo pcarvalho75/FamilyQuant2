@@ -18,7 +18,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` requires current VERIFIED receipts or authorized APPROVED_DROP decisions. Under D90, only for 2.1.11, an OPEN row is accepted only with the exact D88 reason and its ID listed in `docs/LEDGER-REVERIFY-2.1.11.md`. Listed rows remain OPEN and require verification after release. The normal quick suite permits OPEN rows during development. Preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2220**; OPEN retained rows: **3240**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2219**; OPEN retained rows: **3241**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -5221,7 +5221,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2220**; OPEN r
 | FQ15-C13ED755EBC7 | IMPROVE | code fact | FamilyQuant/ReportView.cs:52 | "N0" | test:ShellLedgerComparisonCommand | OPEN | not re-proved for 2.1.11; receipts lost after 2.1.10; verify again after release |
 | FQ15-C845A1AC71F9 | IMPROVE | code fact | FamilyQuant/ReportView.cs:52 | " of " | test:ShellLedgerComparisonCommand | OPEN | not re-proved for 2.1.11; receipts lost after 2.1.10; verify again after release |
 | FQ15-52B123DB1542 | IMPROVE | code fact | FamilyQuant/ReportView.cs:53 | "N0" | test:ShellLedgerComparisonCommand | OPEN | not re-proved for 2.1.11; receipts lost after 2.1.10; verify again after release |
-| FQ15-ECB14BEAC060 | IMPROVE | code fact | FamilyQuant/ReportView.cs:53 | " families quantified" | test:LedgerTextPreservedCommand | VERIFIED | evidence:N6a-text:FQ15-ECB14BEAC060 |
+| FQ15-ECB14BEAC060 | IMPROVE | code fact | FamilyQuant/ReportView.cs:53 | " families quantified" | test:LedgerTextPreservedCommand | OPEN | not re-proved for 2.1.11; receipts lost after 2.1.10; verify again after release |
 | FQ15-FF6B443DF36D | IMPROVE | code fact | FamilyQuant/ReportView.cs:71 | "READY" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-FF6B443DF36D |
 | FQ15-6349DDEEB511 | IMPROVE | code fact | FamilyQuant/ReportView.cs:72 | "PENDING" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-6349DDEEB511 |
 | FQ15-50B5E407C984 | IMPROVE | code fact | FamilyQuant/ReportView.cs:72 | "BLOCKED \u00B7 " | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-50B5E407C984 |
