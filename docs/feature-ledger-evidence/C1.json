@@ -5,352 +5,352 @@
   "runs": [
     {
       "id": "shell-declarations",
-      "command": "D:\\FamilyQuant-wt\\scope-ledger-fixes\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/ledger-temp/scope-z17a7-e289a1e0ef83495fb936b4469cb84c24 \u00222026-11-07 12:42:52 -0800\u0022 D:/FamilyQuant-data/reference-1.5.0.6/app",
-      "executedAt": "2026-11-07 12:42:52 -0800",
-      "commit": "e3bbff5cb6bbceed5d4e0eb22d872c1995dfedfc",
+      "command": "D:\\FamilyQuant-wt\\fetch-ledger-pass2\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh/z17a9-pass2-57292045/execution\\20261107-164712-fetch-ledger-pass2\\shell-compare \u00222026-11-07 16:48:10 -0800\u0022 D:/FamilyQuant-data/reference-1.5.0.6/app",
+      "executedAt": "2026-11-07 16:48:10 -0800",
+      "commit": "57292045f1fcc58c5e2d4aae7eb0451e95519609",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
-          "sha256": "DA99ED3DF7517B8D207762A0F3563657F83E3AA8A639376D35EA85628FDD06AB"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
+          "sha256": "918D11E0BB02E3FBD2DD09E273DDECC11D3B77E7EE478F525A752AF8042FE076"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.json",
-          "sha256": "B5D91DBFA3E2C98B132E9301F1352B88E9E8FC5A1BF7239049BF544A15ECC8AA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.json",
+          "sha256": "C5ACEA6DDC71D59651074DE4AFEE5B88309916D5A329351E2342E8A6FCF38AAB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\curation-runtime.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\curation-runtime.json",
           "sha256": "07F4095394C5835710C8380AC885D75B52845CAF6694B3441C0FEA95A80B03B2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-populated-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-populated-FamilyUnique.csv",
           "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-populated-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-populated-FamilyUnique.csv",
           "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-populated-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-populated-SplitEqually.csv",
           "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-populated-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-populated-SplitEqually.csv",
           "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-populated-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-populated-CountInEveryFamily.csv",
           "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-populated-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-populated-CountInEveryFamily.csv",
           "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-zero-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-zero-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-zero-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-zero-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-zero-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-zero-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-zero-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-zero-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-zero-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-negative-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-negative-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-negative-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-negative-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-negative-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-negative-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-negative-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-negative-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-negative-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-nonfinite-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-nonfinite-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-nonfinite-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-nonfinite-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-nonfinite-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-empty-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-empty-FamilyUnique.csv",
           "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-empty-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-empty-FamilyUnique.csv",
           "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-empty-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-empty-SplitEqually.csv",
           "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-empty-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-empty-SplitEqually.csv",
           "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\frozen-empty-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\frozen-empty-CountInEveryFamily.csv",
           "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\en-US\\current-empty-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\en-US\\current-empty-CountInEveryFamily.csv",
           "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-populated-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-populated-FamilyUnique.csv",
           "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-populated-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-populated-FamilyUnique.csv",
           "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-populated-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-populated-SplitEqually.csv",
           "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-populated-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-populated-SplitEqually.csv",
           "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-populated-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-populated-CountInEveryFamily.csv",
           "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-populated-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-populated-CountInEveryFamily.csv",
           "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-zero-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-zero-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-zero-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-zero-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-zero-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-zero-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-negative-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-negative-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-negative-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-negative-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-negative-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-negative-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-nonfinite-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-nonfinite-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-nonfinite-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-nonfinite-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-nonfinite-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-empty-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-empty-FamilyUnique.csv",
           "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-empty-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-empty-FamilyUnique.csv",
           "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-empty-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-empty-SplitEqually.csv",
           "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-empty-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-empty-SplitEqually.csv",
           "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\frozen-empty-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\frozen-empty-CountInEveryFamily.csv",
           "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\pt-BR\\current-empty-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\pt-BR\\current-empty-CountInEveryFamily.csv",
           "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\files.json",
-          "sha256": "1677574A3E418CDCE191879047BD50111F92E8635CC7BD74005A0A5D8BED6A74"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\files.json",
+          "sha256": "8D6FAF643BF0B5AC755FBFDABC3C733652F273EBF49FB1617EBCAA8AF083DBA3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\inputs.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\inputs.json",
           "sha256": "834E2BB59297BD99ECA91C23762B9FE56F44DCA2E49527BDBA7C12A742A27BFE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\current-CsvReport.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\current-CsvReport.cs",
           "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\composition-native\\frozen-CsvReport.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\composition-native\\frozen-CsvReport.cs",
           "sha256": "B4574252A1AEAE766366D13932117A31C2C7FFB3910F05B1CD6E852B08087617"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\tic-native\\outcomes.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\tic-native\\outcomes.json",
           "sha256": "15EB155E672E7BDA66FBA6B44FAF75549450744DB29CA7ABF4D19334D13296D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\tic-native\\inputs.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\tic-native\\inputs.json",
           "sha256": "BE93B28EC27EEE93F5DBBEA974BD49316ED1FBDE627E2D77C35E321EA98F5326"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\tic-native\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\tic-native\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\tic-native\\frozen-curation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\tic-native\\frozen-curation.cs",
           "sha256": "76807FCBF54364407381AF7A3309E30B8E8121BD82EE14631AB17BD527FEBD9E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\tic-native\\current-curation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\tic-native\\current-curation.cs",
           "sha256": "3E6C4B62DF8919EBAE12CC0F75E7862874D8246A4A00DC9811FBFF4748E603FC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\executed\\Program.ShellLedgerReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
           "sha256": "7DD22910C17D7BC5B44366C5D5B1A71A8F5A51C6127FE62041162D885D0EDC78"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\executed\\Program.ShellLedgerComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
           "sha256": "869FC668090431A23D08E8ED109B95BC937D9A6B94DE63E11E86672852649FEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\executed\\Program.ShellCompositionProof.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\executed\\Program.ShellCompositionProof.cs",
           "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\executed\\Program.ShellTicProof.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\executed\\Program.ShellTicProof.cs",
           "sha256": "F256F051DFFED360C3229D9B251F8433CD3A196E00AC11B8B532AAFFA7620923"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\executed\\Program.Commands.LedgerDeclarations.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
           "sha256": "5F18F4DD7E56E601368051AAD44866736DE2FA60C17A5550F4A330C98DABB3D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\executed\\Program.CurationScreen.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\executed\\Program.CurationScreen.cs",
           "sha256": "3C614BBC323A20D54A390CBE10FBDCD2076AF27F1AA128C1783624D26D501AC5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\executed\\LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\executed\\FeatureLedgerEvidence.Reporting.cs",
-          "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
+          "sha256": "F471C5570F9E6004927F2C1D296738E023E01CFCE2D8BCBAE4D87F9E1C64558B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "6BF6B9E6343963E0AEF082C9C2D823EBBF8C0978CFFA092E07C988005044CFB9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "7969C355CF890F4912EB3FC376BF182A999D226E1B057B312EE952B86413ABF0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\executed\\FamilyQuant2.dll",
-          "sha256": "30F36604C18AD02AB7F1DB9B30F8D328824C6F7457D7E51C2202A574AEA30E8D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\executed\\FamilyQuant2.dll",
+          "sha256": "141251CD3D2B1350C83CE11F48FB94CF8BA6E5B7E01083BF46BDFA5D794C0DD1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\executed\\FamilyQuant.Core.dll",
-          "sha256": "9E5C9BBCAC163F0CD09800C629399392BFFF774A3D467328B6C36188D51ED986"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\executed\\FamilyQuant.Core.dll",
+          "sha256": "42113AF43C9081702EE1A74AF5D52B8D74D030D48A54810139F9BE8CBED94FD5"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\scope-ledger-fixes"
+      "workingDirectory": "D:\\FamilyQuant-wt\\fetch-ledger-pass2"
     }
   ],
   "rows": [
@@ -421,7 +421,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "C9A65DA7B874BB0C2FAD2C27B11832C07E984F2787D8D62FBC3FF05E00086298"
+          "sha256": "D791CD05699F88E4903F1D48C040423CD2C119867091B9B470BD48E0E27E72F7"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
@@ -445,7 +445,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "a native protein annotation edit marks the document and records one Undo step",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -859,7 +859,7 @@
           "kind": "test",
           "target": "ProveShellTic",
           "assertion": "native shell TIC fact FQ15-17EC0A3B6C6C: anchored frozen message fragment occurs in equal frozen/current refusals",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -1021,7 +1021,7 @@
           "kind": "test",
           "target": "ProveShellTic",
           "assertion": "native shell TIC fact FQ15-1C817C5A8896: anchored frozen message fragment occurs in equal frozen/current refusals",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -1623,7 +1623,7 @@
           "kind": "test",
           "target": "ProveShellTic",
           "assertion": "native shell TIC fact FQ15-3B44414FB4F4: anchored frozen message fragment occurs in equal frozen/current refusals",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -1801,7 +1801,7 @@
           "kind": "test",
           "target": "ProveShellTic",
           "assertion": "native shell TIC fact FQ15-3F227ACEA320: anchored frozen message fragment occurs in equal frozen/current refusals",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -2624,7 +2624,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "C9A65DA7B874BB0C2FAD2C27B11832C07E984F2787D8D62FBC3FF05E00086298"
+          "sha256": "D791CD05699F88E4903F1D48C040423CD2C119867091B9B470BD48E0E27E72F7"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
@@ -2648,7 +2648,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation shows accession in Locus while retaining the complete protein identifier",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3010,7 +3010,7 @@
           "kind": "test",
           "target": "ProveShellTic",
           "assertion": "native shell TIC fact FQ15-83E85F7C2532: anchored frozen message fragment occurs in equal frozen/current refusals",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3320,7 +3320,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::public void ShowHelp ( )",
-          "sha256": "C9A65DA7B874BB0C2FAD2C27B11832C07E984F2787D8D62FBC3FF05E00086298"
+          "sha256": "D791CD05699F88E4903F1D48C040423CD2C119867091B9B470BD48E0E27E72F7"
         }
       ],
       "proofs": [],
@@ -3459,7 +3459,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "C9A65DA7B874BB0C2FAD2C27B11832C07E984F2787D8D62FBC3FF05E00086298"
+          "sha256": "D791CD05699F88E4903F1D48C040423CD2C119867091B9B470BD48E0E27E72F7"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
@@ -3483,7 +3483,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "a native protein annotation edit marks the document and records one Undo step",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3675,7 +3675,7 @@
           "kind": "test",
           "target": "ProveShellTic",
           "assertion": "native shell TIC fact FQ15-A04A4E4C4066: anchored frozen message fragment occurs in equal frozen/current refusals",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4206,7 +4206,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "C9A65DA7B874BB0C2FAD2C27B11832C07E984F2787D8D62FBC3FF05E00086298"
+          "sha256": "D791CD05699F88E4903F1D48C040423CD2C119867091B9B470BD48E0E27E72F7"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
@@ -4230,7 +4230,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4317,7 +4317,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "C9A65DA7B874BB0C2FAD2C27B11832C07E984F2787D8D62FBC3FF05E00086298"
+          "sha256": "D791CD05699F88E4903F1D48C040423CD2C119867091B9B470BD48E0E27E72F7"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
@@ -4341,7 +4341,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation shows search IDs and hides decoys by default while keeping all document rows",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4478,7 +4478,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "C9A65DA7B874BB0C2FAD2C27B11832C07E984F2787D8D62FBC3FF05E00086298"
+          "sha256": "D791CD05699F88E4903F1D48C040423CD2C119867091B9B470BD48E0E27E72F7"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
@@ -4502,7 +4502,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation shows search IDs and hides decoys by default while keeping all document rows",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4680,7 +4680,7 @@
           "kind": "test",
           "target": "ProveShellTic",
           "assertion": "native shell TIC fact FQ15-CC4116F91EF3: anchored frozen message fragment occurs in equal frozen/current refusals",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4999,7 +4999,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "C9A65DA7B874BB0C2FAD2C27B11832C07E984F2787D8D62FBC3FF05E00086298"
+          "sha256": "D791CD05699F88E4903F1D48C040423CD2C119867091B9B470BD48E0E27E72F7"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
@@ -5023,7 +5023,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation always shows its table without Controls or Data Browser tabs",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5090,7 +5090,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "C9A65DA7B874BB0C2FAD2C27B11832C07E984F2787D8D62FBC3FF05E00086298"
+          "sha256": "D791CD05699F88E4903F1D48C040423CD2C119867091B9B470BD48E0E27E72F7"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
@@ -5114,7 +5114,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation shows accession in Locus while retaining the complete protein identifier",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5228,7 +5228,7 @@
           "kind": "test",
           "target": "ProveShellTic",
           "assertion": "native shell TIC fact FQ15-E013A7902055: anchored frozen message fragment occurs in equal frozen/current refusals",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5247,7 +5247,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "C9A65DA7B874BB0C2FAD2C27B11832C07E984F2787D8D62FBC3FF05E00086298"
+          "sha256": "D791CD05699F88E4903F1D48C040423CD2C119867091B9B470BD48E0E27E72F7"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
@@ -5271,7 +5271,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5306,7 +5306,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "C9A65DA7B874BB0C2FAD2C27B11832C07E984F2787D8D62FBC3FF05E00086298"
+          "sha256": "D791CD05699F88E4903F1D48C040423CD2C119867091B9B470BD48E0E27E72F7"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
@@ -5330,7 +5330,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5867,7 +5867,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind code fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5881,7 +5881,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind column: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5895,7 +5895,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind option/copy: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5909,7 +5909,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind tooltip: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\ledger-temp\\scope-z17a7-e289a1e0ef83495fb936b4469cb84c24\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\z17a9-pass2-57292045\\execution\\20261107-164712-fetch-ledger-pass2\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]

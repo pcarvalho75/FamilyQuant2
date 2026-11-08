@@ -1,6 +1,6 @@
 # Ledger reverification for 2.1.11
 
-Prepared: 2026-11-07 15:33:05 -0800
+Prepared: 2026-11-07 16:53:20 -0800
 
 D90: The release check accepts these rows only for 2.1.11, only when their IDs are listed here, and only when their Evidence cells contain exactly the D88 reason below.
 
@@ -8,9 +8,9 @@ Reason for every listed row: not re-proved for 2.1.11; receipts lost after 2.1.1
 
 These rows remain OPEN and require verification after release. This list does not mark them VERIFIED.
 
-Currency audit at `2fc37c869e41eca1accbb5f6c2d629f3ae8331a4`: 2220 current VERIFIED, 3240 OPEN, 296 APPROVED_DROP. The audited base includes Z17a9 pass 1 and the Z17a11 guard. All 124 rows recovered by pass 1 remain current.
+Currency after scoped Z17a9 pass 2 at `57292045f1fcc58c5e2d4aae7eb0451e95519609`: 2219 current VERIFIED, 3241 OPEN, 296 APPROVED_DROP. Of 421 stale rows citing files changed after `9b5696ff`, 420 were restored. One frozen literal still lacks a current proof.
 
-Source: FQScope's prepared Z17a10 patch, debt CSV and manifest, checked against the native currency audit on this release tip. Only the 3240 still non-current IDs are listed.
+Unchanged-file ledger rows retain their baseline states. Six incidental positive checks from the full native text register remain unclaimed in this pass. Native generated receipts are retained without editing.
 
 | Register | Rows |
 | --- | ---: |
@@ -34,7 +34,7 @@ Source: FQScope's prepared Z17a10 patch, debt CSV and manifest, checked against 
 | LK-copy-1 | 1 |
 | LK-copy-next-2 | 3 |
 | LK-copy-next-3 | 2 |
-| N6a-text | 24 |
+| N6a-text | 25 |
 | Paulo-rulings | 1166 |
 | SH | 1 |
 | SH-behaviour | 34 |
@@ -3059,6 +3059,7 @@ Source: FQScope's prepared Z17a10 patch, debt CSV and manifest, checked against 
 | FQ15-EC4DF291D98E | AS-retained |
 | FQ15-EC767CA27636 | Paulo-rulings |
 | FQ15-ECAB36D03EB9 | AS-retained |
+| FQ15-ECB14BEAC060 | N6a-text |
 | FQ15-ECE3802B874B | LK-copy-next-3 |
 | FQ15-ECE9A52DE149 | AS-presentation-figures |
 | FQ15-ECFA25B4D253 | SH-curation-actions |
