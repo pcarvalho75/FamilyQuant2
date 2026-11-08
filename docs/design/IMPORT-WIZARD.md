@@ -1,6 +1,6 @@
 # Import your family list
 
-Z12p2a design proposal. These are mock screens, not an implemented importer.
+Historical Z12p2a design proposal. These are the original mock screens. The importer shipped in 2.1.11; current names are File > Import family list and Family checklist. See [the implemented importer](../PANEL-SPREADSHEET-IMPORT.md).
 Entry: File > Import family panel. The existing panel editor and its editing,
 Pfam checking, template export and Undo contracts remain available.
 FQKimi approved Z12p2a and Paulo received the screens (desk M53). Desk M50

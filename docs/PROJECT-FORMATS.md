@@ -7,7 +7,7 @@ raised the storage format version to 3; see "Curation format 2" below.
 | Component under `FamilyQuant.Core/Storage` | Owns |
 |---|---|
 | `QuantRow`, `DerivedRunFraction`, `QuantManifest` | Existing stored/derived data contracts, same namespaces and properties |
-| `ProjectFileSchema` | Version 2, entry names, current/legacy columns and six-isotope storage limit |
+| `ProjectFileSchema` | Version 3, entry names, current/legacy columns and six-isotope storage limit |
 | `ProjectArchiveEntries` | UTF-8 text entries and cancellation checkpoints |
 | `ProjectManifestCodec` | Manifest JSON; legacy embedded spectrum rows remain readable but are omitted on writes |
 | `ProjectQuantCodec` | Invariant, round-trip TSV/GZip read/write with columns resolved by header name |

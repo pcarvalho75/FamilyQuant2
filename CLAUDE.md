@@ -122,7 +122,7 @@ project, quantitation and manifest still match. Failure/cancellation retains pri
 Curation and secondary windows use tested models. Results reads persisted quantitation/studies;
 missing studies are not invented. Retired extraction/partition controls are compatibility seams.
 
-Save uses a captured, verified, staged `.fqproj` bundle. Old `.fcf` export does not clear dirty
+Save uses a captured, verified, staged `.fqproj` bundle. The `.fcf` export does not clear dirty
 state. Save/Discard/Cancel protects replacement and closing. SEPro reannotation writes a separate
 `*_regrouped.sepr2` and leaves its input intact. Help holds detailed explanations; tooltips stay
 short. Colors belong in tokens/palettes, with screen and frozen export palettes kept separate.

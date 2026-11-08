@@ -14,7 +14,7 @@ are counted as non-gap letters in `qrow`. This build's `qs` and coordinate spans
 unaligned flanks, so they are retained as observations rather than used as the coverage numerator.
 Native `qcov` agrees with row-letter coverage within integer rounding for every returned hit.
 The aligned-row fields are defined in the
-[USEARCH user-field documentation](https://m.drive5.com/usearch/manual/userfields.html).
+[USEARCH user-field documentation](https://www.drive5.com/usearch/manual/userfields.html).
 
 | Reading at the same 70% threshold | Neighbours | Changed neighbours | Changed proposed families | Changed tiers | Default selected |
 |---|---:|---:|---:|---:|---:|

@@ -33,7 +33,7 @@ the **repo root**, where `FamilyQuant2.sln` lives:
 - `dotnet run --project FamilyQuant/FamilyQuant.App.csproj`
 - Or open `FamilyQuant2.sln` in Visual Studio 2022.
 
-**Publish (ClickOnce).** The product is delivered by ClickOnce auto-update from
+**Historical publish (ClickOnce).** The former deployment address below now returns 404. Current installation and updates use [Setup and GitHub releases](UPDATE-INSTALL.md). This retained rehearsal used ClickOnce auto-update from
 `http://patternlabforproteomics.org/familyquant2/`. The rehearsal, which writes only into the local
 `PublishDir` / `PublishUrl` and uploads nothing:
 
