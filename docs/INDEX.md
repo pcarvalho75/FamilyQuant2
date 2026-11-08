@@ -1,6 +1,6 @@
 # Repository and test-command catalog
 
-This is the navigation index for the current checkout. The roadmap owns unfinished work. Recorded check counts in milestone notes describe those runs, not a live suite total.
+This is the navigation index for the current checkout. The roadmap owns unfinished work. Recorded check counts in milestone notes describe those runs, not a live suite total. The [mission briefs](missions/) and [idea consultations](ideas/consults/) are historical records; the roadmap owns current assignments.
 
 ## Documents
 

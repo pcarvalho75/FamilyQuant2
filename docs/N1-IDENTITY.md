@@ -1,5 +1,7 @@
 # FamilyQuant 2.0 identity checks
 
+Historical N1 identity and ClickOnce checks are recorded below. FamilyQuant 2.1.11 uses the per-user Setup installer and GitHub releases described in [Checking and installing updates](UPDATE-INSTALL.md). The old `familyquant2/` ClickOnce address now returns 404.
+
 The 2.0 solution is `FamilyQuant2.sln`. The app project is
 `FamilyQuant/FamilyQuant.App.csproj`, its assembly is `FamilyQuant2`, and its
 resource and C# namespace stays `FamilyQuant`. The test project and executable
