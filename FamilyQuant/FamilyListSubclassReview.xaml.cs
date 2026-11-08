@@ -33,7 +33,7 @@ public partial class FamilyListSubclassReview : UserControl
     private static readonly DependencyPropertyKey DraftHintKey = DependencyProperty.RegisterReadOnly(nameof(DraftHint), typeof(string),
         typeof(FamilyListSubclassReview), new PropertyMetadata("No choices have been confirmed."));
     private static readonly DependencyPropertyKey ValidationStatusKey = DependencyProperty.RegisterReadOnly(nameof(ValidationStatus), typeof(string),
-        typeof(FamilyListSubclassReview), new PropertyMetadata("Check the draft before importing; the project is unchanged."));
+        typeof(FamilyListSubclassReview), new PropertyMetadata("Check the draft before Accept and import; the project is unchanged."));
     private static readonly DependencyPropertyKey UnmatchedProblemTextKey = DependencyProperty.RegisterReadOnly(nameof(UnmatchedProblemText), typeof(string),
         typeof(FamilyListSubclassReview), new PropertyMetadata(""));
     public static readonly DependencyProperty ViewProperty = ViewKey.DependencyProperty;

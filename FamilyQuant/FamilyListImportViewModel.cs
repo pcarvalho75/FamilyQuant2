@@ -96,6 +96,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public string CloseLabel => Imported ? "Close" : "Cancel";
     public bool CanBack => !IsBusy && page > 0 && !reviewingWorkbook;
     public string BackToolTip => reviewingWorkbook ? "Use a section's Review button to change its proposal; Cancel leaves the project unchanged."
+        : reviewingSubclasses ? "Returns to Review your workbook and keeps your subclass draft choices; nothing changes in the project until Accept and import."
         : !CanBack ? IsBusy ? "Wait for the current step to finish before returning; Cancel stops it without importing."
         : "This is the first step; choose Next or Try with the example to continue, or Cancel to leave without changes."
         : "Returns to the previous step and keeps your choices; going Back does not change the project or repeat an import.";
@@ -263,7 +264,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
             2 => ColumnsStatus,
             3 => SpecialSummary + ".",
             4 => MatchingChoiceStatus,
-            5 => Imported ? "This list is already imported." : "Nothing has changed yet. Import keeps one Undo step.",
+            5 => Imported ? "This list is already imported." : WorkbookReviewEnabled ? "Nothing has changed yet. Accept and import keeps one Undo step." : "Nothing has changed yet. Import keeps one Undo step.",
             _ => "Family list imported. File > Save keeps it with the project."
         };
         Refresh(); Changed(nameof(Title)); Changed(nameof(Explanation)); Changed(nameof(StepLabel));

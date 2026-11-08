@@ -288,6 +288,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ManualFamilyUiTests());
             suite.AddWithApplication(() => ImportWizardMockTests());
             suite.AddWithApplication(() => FamilyListImportTests());
+            suite.AddWithApplication(() => ImportWalkLayoutTests(Path.Combine(workDir, "import-walk-layout")));
             suite.AddWithApplication(() => ImportPreparationTests());
             suite.AddWithApplication(() => DisabledTableTests());
             suite.AddWithApplication(() => ImportTooltipCopyTests());

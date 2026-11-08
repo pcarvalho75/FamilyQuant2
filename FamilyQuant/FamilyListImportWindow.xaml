@@ -191,9 +191,9 @@
                     <TabControl x:Name="WorkbookTabs" Grid.Row="1" SelectedIndex="1" Padding="0">
                         <TabItem x:Name="WorkbookMapTab" Header="Workbook sheets" Visibility="{Binding HasWorkbookMap, Converter={StaticResource BoolVisibility}}"
                                  ToolTip="Shows every source sheet, its proposed role and what is kept. Role changes rebuild the draft proposal; the workbook and project stay unchanged.">
-                            <Grid Margin="0,6,0,0"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                                <StackPanel Margin="0,0,0,6"><DockPanel><Button Content="Use selected family sheet" DockPanel.Dock="Right" Click="WorkbookFamilySheet_Click" IsEnabled="{Binding CanChooseFamilySheet}"
-                                    ToolTip="Confirms the selected family sheet. Your choices are kept for the current sheet; a different sheet asks before clearing this draft. Available before Import while no step is running; the workbook and project stay unchanged."/>
+                            <Grid Margin="0,6,0,0"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                                <StackPanel Margin="0,0,0,6"><DockPanel><Button Content="Use selected family sheet" DockPanel.Dock="Right" Margin="0" Click="WorkbookFamilySheet_Click" IsEnabled="{Binding CanChooseFamilySheet}"
+                                    ToolTip="Uses the selected sheet as the family list and rebuilds its column proposals without changing the workbook or project. Available before import while no step is running; select a different sheet or resolve the pending family-sheet choice to enable it."/>
                                     <TextBlock Text="{Binding WorkbookMapSummary}" Style="{StaticResource SectionTitle}"/></DockPanel>
                                     <TextBlock Text="{Binding WorkbookHintStatus}" Style="{StaticResource CaptionText}"/>
                                     <ItemsControl ItemsSource="{Binding WorkbookProblemMessages}"><ItemsControl.ItemTemplate><DataTemplate>
@@ -213,15 +213,15 @@
                                 </DataGrid>
                                 <DockPanel Grid.Row="2" Margin="0,8,0,4"><Button Content="Read kept notes" DockPanel.Dock="Right" Click="WorkbookNotes_Click"
                                     ToolTip="Opens the original text from notes sheets in a read-only report. Viewing it changes neither the draft nor the project."/>
-                                    <TextBlock Text="{Binding KeptNotesSummary}" Style="{StaticResource CaptionText}" TextTrimming="CharacterEllipsis" ToolTip="{Binding KeptNotesSummary}"/>
-                                </DockPanel>
-                                <Expander Grid.Row="3" Header="Kept notes preview" ToolTip="Shows the original notes text retained from the workbook. Opening it changes nothing; Read kept notes displays the complete text.">
+                                <Expander Header="Kept notes preview" Padding="0" Margin="0" ToolTip="Shows the original notes text retained from the workbook. Opening it changes nothing; Read kept notes displays the complete text.">
                                 <DataGrid MaxHeight="100" RowHeight="28" ItemsSource="{Binding KeptNotes}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                                    Visibility="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=Expander}, Converter={StaticResource BoolVisibility}}"
                                     AutomationProperties.Name="Notes sheets kept with the family list" ToolTip="Lists notes sheets that will be retained with the panel. All values are source text, not measurements or automatic rules.">
                                     <DataGrid.Columns><DataGridTextColumn Header="Sheet" Binding="{Binding SheetName}" Width="200" theme:TableAppearance.HeaderToolTip="Original name of a kept notes sheet, read only. Read kept notes opens the full source text."/>
                                         <DataGridTextColumn Header="Source notes" Binding="{Binding Text}" Width="*" theme:TableAppearance.HeaderToolTip="Original cell text from the sheet, shown as a preview. Read kept notes displays it in full; Import retains it with the panel."/></DataGrid.Columns>
                                 </DataGrid>
                                 </Expander>
+                                </DockPanel>
                             </Grid>
                         </TabItem>
                         <TabItem x:Name="SheetPreviewTab" Header="Sheet preview" ToolTip="Shows original row numbers, text and cell fills from the selected family sheet. Select a cell for complete details; this view changes nothing.">
@@ -229,6 +229,7 @@
                     <DataGrid x:Name="SheetPreviewGrid" Grid.Row="0" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
                               SelectionUnit="Cell" SelectedCellsChanged="Preview_SelectedCellsChanged" HeadersVisibility="Column" FrozenColumnCount="1" Margin="0,6,0,0" RowHeight="30"
                               AutomationProperties.Name="Spreadsheet preview with source row numbers" ToolTip="Shows original cell text and Excel row numbers; select a cell for its complete details. The table is read only and never changes the workbook or project."/>
+                    <Canvas x:Name="PreviewMergedTitles" Grid.Row="0" Margin="0,6,0,0" IsHitTestVisible="False" ClipToBounds="True"/>
                     <Expander x:Name="CellDetails" Grid.Row="1" Header="Cell details" Margin="0,8,0,0" ToolTip="Shows the complete selected source cell, original fill and merged range; opening this section changes nothing.">
                         <TextBox x:Name="CellDetailText" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" MaxHeight="110" MinHeight="50" VerticalScrollBarVisibility="Auto" AutomationProperties.Name="Complete source cell text, fill and merged range" ToolTip="The complete selected source cell text, original fill and merged range, initially no selection and read only. Selecting another preview cell changes this display without changing the workbook or project."/>
                     </Expander>
@@ -242,9 +243,9 @@
                         <ScrollViewer.Style><Style TargetType="ScrollViewer"><Style.Triggers><DataTrigger Binding="{Binding ReviewingDecisions}" Value="True"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></ScrollViewer.Style>
                         <StackPanel>
                             <ItemsControl ItemsSource="{Binding MainColumns}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate><DataTemplate><StackPanel Margin="0,0,12,10">
+                                <ItemsControl.ItemTemplate><DataTemplate><StackPanel Margin="0,0,12,8">
                                     <TextBlock Text="{Binding Label}" Style="{StaticResource SectionTitle}"/>
-                                    <ComboBox ItemsSource="{Binding Headers}" SelectedItem="{Binding Header, UpdateSourceTrigger=PropertyChanged}" MinHeight="34" Margin="0,4,0,6" AutomationProperties.Name="{Binding Label}" ToolTip="{Binding ToolTip}">
+                                    <ComboBox ItemsSource="{Binding Headers}" SelectedItem="{Binding Header, UpdateSourceTrigger=PropertyChanged}" MinHeight="34" Margin="0,2,0,3" AutomationProperties.Name="{Binding Label}" ToolTip="{Binding ToolTip}">
                                         <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Converter={StaticResource HeaderLabel}}" ToolTip="{Binding}"/></DataTemplate></ComboBox.ItemTemplate>
                                     </ComboBox>
                                     <TextBlock Text="{Binding Example}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" MaxHeight="66" ToolTip="{Binding Example}"/>
@@ -256,10 +257,10 @@
                                 <TextBlock x:Name="DecisionHintText" Text="{Binding DecisionHintQuestion}" ToolTip="{Binding DecisionHintReason}" VerticalAlignment="Center"
                                            Style="{StaticResource CaptionText}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
                             </DockPanel>
-                            <StackPanel Visibility="{Binding HasDecisions, Converter={StaticResource BoolVisibility}}" Margin="0,0,0,12">
-                                <TextBlock Text="{Binding DecisionSummary}" Style="{StaticResource CaptionText}"/>
-                                <Button Content="Review decision values" Margin="0,4,8,0" Click="ReviewDecisions_Click" HorizontalAlignment="Left" ToolTip="Shows every distinct source label and its proposed action for your confirmation; the project stays unchanged. Available before import when no read is running."/>
-                            </StackPanel>
+                            <WrapPanel Visibility="{Binding HasDecisions, Converter={StaticResource BoolVisibility}}" Margin="0,0,0,12">
+                                <TextBlock Text="{Binding DecisionSummary}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                <Button Content="Review decision values" Margin="0" Click="ReviewDecisions_Click" HorizontalAlignment="Left" ToolTip="Shows every distinct source label and its proposed action for your confirmation; the project stays unchanged. Available before import when no read is running."/>
+                            </WrapPanel>
                             <Expander x:Name="ColourCategories" Header="Colour categories (optional)" IsExpanded="{Binding HasSourceFills, Mode=OneWay}" ToolTip="Shows optional text names for workbook fills and opens automatically when the source has fills. Opening or closing it changes nothing, and fill names never decide a family action.">
                                 <StackPanel>
                                     <TextBlock Text="Column with coloured cells" Style="{StaticResource CaptionText}" Margin="0,0,0,4"/>
@@ -428,11 +429,12 @@
             </Grid>
             <Grid x:Name="WizardFooter" Grid.Row="2" Margin="0,18,0,0">
                 <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-                <StackPanel VerticalAlignment="Center" Margin="0,0,16,0"><TextBlock Text="{Binding Status}" Style="{StaticResource CaptionText}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"
-                        ToolTip="{Binding Status}" AutomationProperties.LiveSetting="Polite"/>
-                    <Button Content="Help" Margin="0,4,8,0" Click="Help_Click" HorizontalAlignment="Left" ToolTip="Opens the illustrated import guide with instructions for each step; the draft, project and workbook stay unchanged."/>
-                    <Button Content="Back to workbook review" Click="ReturnWorkbook_Click" HorizontalAlignment="Left" Visibility="{Binding CanReturnToWorkbook, Converter={StaticResource BoolVisibility}}"
+                <StackPanel VerticalAlignment="Center" Margin="0,0,16,0"><TextBlock Text="{Binding Status}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"
+                        ToolTip="{Binding Status}" AutomationProperties.LiveSetting="Polite"><TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource CaptionText}"><Style.Triggers><DataTrigger Binding="{Binding ReviewingSubclasses}" Value="True"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock>
+                    <WrapPanel Margin="0,4,0,0"><Button Content="Help" Margin="0,0,8,0" Click="Help_Click" HorizontalAlignment="Left" ToolTip="Opens the illustrated import guide with instructions for each step; the draft, project and workbook stay unchanged."/>
+                    <Button Content="Back to workbook review" Margin="0" Click="ReturnWorkbook_Click" HorizontalAlignment="Left" Visibility="{Binding CanReturnToWorkbook, Converter={StaticResource BoolVisibility}}"
                         ToolTip="Returns to the complete workbook proposal without losing your draft choices. Nothing changes in the project until Accept and import."/>
+                    </WrapPanel>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                     <Button x:Name="CloseButton" Content="{Binding CloseLabel}" Click="Close_Click" MinWidth="86" ToolTip="{Binding CloseToolTip}"/>
