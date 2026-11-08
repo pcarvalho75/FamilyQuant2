@@ -77,6 +77,14 @@ internal static partial class Program
             MainWindow.AskAiHelpCommand.Execute(null, secondary); PumpDispatcher();
             Check("H2a secondary window command opens AI Help when closed", shell.AiHelp?.IsVisible == true);
             shell.AiHelp!.Close();
+            var transient = new Window { Title = "Transient", Width = 360, Height = 200, ShowInTaskbar = false, Owner = shell };
+            transient.Show(); PumpDispatcher();
+            MainWindow.AskAiHelpCommand.Execute(null, transient); PumpDispatcher();
+            var fromTransient = shell.AiHelp;
+            transient.Close(); PumpDispatcher();
+            Check("H2a AI Help opened from a secondary window stays open when that window closes",
+                fromTransient?.IsVisible == true && ReferenceEquals(fromTransient, shell.AiHelp));
+            shell.AiHelp?.Close();
             var menu = (MenuItem)shell.FindName("MenuItemAiHelp");
             Check("H2a Help starts with the explained Ctrl+H command", ((MenuItem)menu.Parent).Items[0] == menu
                 && menu.InputGestureText == "Ctrl+H" && menu.ToolTip != null);
@@ -133,10 +141,15 @@ internal static partial class Program
             var reset = new DateTimeOffset(2030, 1, 2, 12, 34, 0, TimeSpan.Zero);
             fake.Answer = fake.Answer with { Outcome = AiOutcome.Success, SourceReadable = false, GitHubLimitResetsAt = reset };
             window.AskAsync().GetAwaiter().GetResult();
-            Check("H2d earlier turns retain every displayed outcome", fake.Questions[^1].Earlier.Count == fake.Questions.Count - 1
-                && fake.Questions[^1].Earlier[^1].Answer == MainWindow.HelpOutcomeMessage(AiOutcome.Incomplete));
+            var outcomeMessages = Enum.GetValues<AiOutcome>().Where(o => o != AiOutcome.Success).Select(MainWindow.HelpOutcomeMessage).ToArray();
+            Check("H2d earlier turns carry only Claude's answers, never the program's outcome messages", fake.Questions[^1].Earlier.Count == 4
+                && fake.Questions[^1].Earlier.All(t => t.Answer == "Use the displayed controls." && !outcomeMessages.Contains(t.Answer)));
             Check("H2d answer explains source unavailability", HelpNotices(window.Answers).Contains("This build cannot read the source on GitHub, so this answer relies on the screen and FamilyQuant's own help."));
             Check("H2d answer names the local GitHub reset time", HelpNotices(window.Answers).Contains("GitHub's limit was reached; reading resumes at " + reset.ToLocalTime().ToString("HH:mm", CultureInfo.CurrentCulture) + "."));
+            fake.Answer = fake.Answer with { Outcome = AiOutcome.WrongKey };
+            window.AskAsync().GetAwaiter().GetResult();
+            Check("H2d an outcome message carries no note about how an answer was sourced",
+                !HelpNotices(window.Answers.Children[window.Answers.Children.Count - 1]).Contains("This build cannot read the source on GitHub", StringComparison.Ordinal));
             var keyWindow = new AiKeySettingsWindow(new AiKeyStore(Path.Combine(Path.GetTempPath(), "fq-help-unused-" + Guid.NewGuid().ToString("N"))));
             try
             {

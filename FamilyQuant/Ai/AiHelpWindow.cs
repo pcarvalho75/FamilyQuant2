@@ -146,13 +146,14 @@ public sealed class AiHelpWindow : Window
             if (answer.Sources.Count > 0)
                 turn.Children.Add(SecondaryWindowView.Report(string.Join("\n", answer.Sources.Select(s => $"{s.Path}, lines {s.FromLine}-{s.ToLine}")),
                     true, "Repository paths and inclusive line ranges read for this answer."));
-            if (!answer.SourceReadable)
+            if (answer.Outcome == AiOutcome.Success && !answer.SourceReadable)
                 turn.Children.Add(SecondaryWindowView.Text("This build cannot read the source on GitHub, so this answer relies on the screen and FamilyQuant's own help.", true));
             if (answer.GitHubLimitResetsAt is DateTimeOffset reset)
                 turn.Children.Add(SecondaryWindowView.Text("GitHub's limit was reached; reading resumes at "
                     + reset.ToLocalTime().ToString("HH:mm", CultureInfo.CurrentCulture) + ".", true));
             Answers.Children.Add(turn);
-            earlier.Add(new(question.Text, text));
+            // Only Claude's answers go back as earlier turns; an outcome message is the program's text, not Claude's.
+            if (answer.Outcome == AiOutcome.Success) earlier.Add(new(question.Text, answer.Text));
             Status.Text = "";
         }
         catch (OperationCanceledException) { if (!closed) Status.Text = "Cancelled."; }

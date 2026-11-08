@@ -41,7 +41,8 @@ public partial class MainWindow
             var window = new AiHelpWindow(HelpAssistantOverride?.Invoke() ?? new HelpAssistant(), HelpKey,
                 CaptureHelpState, HelpOutcomeMessage, () => AiHelpWindow.CaptureWindow(aiHelpOrigin is { IsVisible: true } ? aiHelpOrigin : this));
             AiHelp = window;
-            window.Owner = origin is { IsVisible: true } ? origin : this;
+            // Owned by the main window, not the origin, so closing the window Ctrl+H came from keeps the conversation.
+            window.Owner = this;
             window.Closed += (_, _) => AiHelp = null;
             window.Show();
         }
