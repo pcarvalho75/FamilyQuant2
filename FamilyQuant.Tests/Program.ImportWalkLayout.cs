@@ -137,6 +137,8 @@ internal static partial class Program
                     var status = WalkTree(footer).OfType<TextBlock>().Single(text => text.GetBindingExpression(TextBlock.TextProperty)?.ParentBinding.Path?.Path == "Status");
                     Check(label + " row2 shows only the subclass editor status", !status.IsVisible);
                     var subclassReview = WalkTree(window).OfType<FamilyListSubclassReview>().Single();
+                    Check(label + " row2 visible subclass status names the final acceptance",
+                        subclassReview.ValidationStatus.Contains("Accept and import", StringComparison.Ordinal));
                     var detail = (ScrollViewer)subclassReview.FindName("DetailScroll");
                     detail.ScrollToTop(); PumpDispatcher();
                     var rules = (ItemsControl)subclassReview.FindName("RulesList");
