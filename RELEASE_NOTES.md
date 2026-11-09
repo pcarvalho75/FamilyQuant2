@@ -4,7 +4,7 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
-## 2.1.12 (release candidate)
+## 2.1.12 (published 2026-11-08)
 
 - **AI Help.** **Help > Ask AI Help** (Ctrl+H, from any FamilyQuant window) answers questions about FamilyQuant. It sends your question, what the program shows (version, screen, project, last error and the last lines of the log) and, only when you tick it, a picture of the window to Claude with your own Anthropic key, the same key as the AI draft. For technical questions it reads the FamilyQuant source code on GitHub and names the files and lines it used. **What AI Help sends** shows the text before you ask.
 - **GitHub's limits.** GitHub allows 10 code searches a minute and 5,000 file reads an hour for all FamilyQuant users together. When a limit is reached, AI Help says so and when reading resumes.
