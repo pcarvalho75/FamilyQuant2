@@ -45,6 +45,10 @@ namespace FamilyQuant.Tests
                                   " OS=Bothrops jararaca OX=8724 GN=svmp PE=1 SV=2",
                     IdentifiedEnvelope = (i + 1) * 1000.0,
                     DeNovoEnvelope = (i + 1) * 250.0,
+                    UniqueIdentifiedEnvelope = (i + 1) * 1000.0,
+                    UniqueDeNovoEnvelope = (i + 1) * 250.0,
+                    SplitIdentifiedEnvelope = (i + 1) * 1000.0,
+                    SplitDeNovoEnvelope = (i + 1) * 250.0,
                     IdentifiedPeptides = i + 1,
                     DeNovoPeptides = i,
                 });

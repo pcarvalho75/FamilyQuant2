@@ -96,6 +96,8 @@ namespace FamilyQuant.Tests
                 Description = "Zinc metalloproteinase-disintegrin-like jararhagin OS=Bothrops jararaca",
                 IdentifiedEnvelope = 0,
                 DeNovoEnvelope = 4.2e6,
+                UniqueDeNovoEnvelope = 4.2e6,
+                SplitDeNovoEnvelope = 4.2e6,
                 DeNovoPeptides = 31,
             });
 
@@ -315,9 +317,8 @@ namespace FamilyQuant.Tests
                 mixedBuilt.Families.Count == 1 ? mixedBuilt.Families[0].Description : "no family");
 
             // ---- the denominator is the measurement, not the sum of the bars --------------------------
-            // Two deduped peptides of 1000 each: one reaching two families, one reaching none. The bars
-            // then sum to 3000 while the run measured 2000, and the residual is a half of the signal and
-            // not a third. Dividing by the bars would understate it, and in the flattering direction.
+            // Two peptides of 1000 each: one reaches two families, one reaches none. The unique chart
+            // keeps the shared peptide in its own bar and sums to the measured 2000.
             var sharedRows = new List<QuantRow>
             {
                 AnQr("identified", "share_01", 21, 2, "AAAAAAAAAA", 700.5, new double[] { 600, 400, 0, 0 }),
@@ -345,7 +346,8 @@ namespace FamilyQuant.Tests
             Check("the percent mode divides by the measured envelope and not by the sum of the bars",
                 sharedChart.PercentApplies
                 && Math.Abs(sharedChart.MeasuredEnvelope - 2000) < 1e-9
-                && Math.Abs(FamilyContributionPlot.BarTotal(sharedChart.Bars) - 3000) < 1e-9,
+                && Math.Abs(FamilyContributionPlot.BarTotal(sharedChart.Bars) - 2000) < 1e-9
+                && sharedChart.Bars.Single(b => b.Kind == FamilyContributionBarKind.Shared).Identified == 1000,
                 sharedChart.MeasuredEnvelope.ToString("R", CultureInfo.InvariantCulture) + " vs bars " +
                 FamilyContributionPlot.BarTotal(sharedChart.Bars).ToString("R", CultureInfo.InvariantCulture));
             Check("so the residual reads the half of the signal it really is, not a third",
@@ -367,8 +369,8 @@ namespace FamilyQuant.Tests
                 wired.Families != null && wired.Families.Families.Count == 2
                 && WalkTree(wired).OfType<FamilyContributionChart>().Single().Bars.Count == 3,
                 wired.Families == null ? "null" : wired.Families.Families.Count.ToString());
-            Check("and its TopN selector opens on the documented default with the percent label off",
-                wired.FamilyTopN == FamilyContributionPlot.DefaultTopN && !wired.FamilyAsPercent,
+            Check("and its TopN selector opens on the documented default with percent labels",
+                wired.FamilyTopN == FamilyContributionPlot.DefaultTopN && wired.FamilyAsPercent,
                 wired.FamilyTopN.ToString(CultureInfo.InvariantCulture));
         }
 

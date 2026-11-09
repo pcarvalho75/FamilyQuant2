@@ -134,7 +134,7 @@ public static class CompositionChartCaptions
                 top.Total / chart.MeasuredEnvelope * 100, "%") : new("Largest displayed family signal, " + top.Label,
                     top.Total, "area units", "0.###E+0"));
         return new("Attributed peptide signal by family",
-            "Read the labelled signal basis and legend. Full-counting family values may overlap; folded and unattributed rows remain separate", numbers);
+            "Each peptide counts once under the stated shared-peptide rule; other families, shared and unattributed signal remain explicit", numbers);
     }
 
     private static FigureCaptionInput Analytics(AnalyticsFigure figure, AnalyticsData data)
