@@ -1003,6 +1003,26 @@
       .report-panel {
         min-width: 0;
       }
+      .chart-legend {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+        margin-top: 12px;
+      }
+      .report-figure {
+        margin: 20px 0 0;
+        min-width: 0;
+        break-inside: avoid;
+      }
+      .report-figure > button {
+        width: 100%;
+      }
+      .rank-run-count {
+        display: block;
+        font-size: 11px;
+        font-weight: 400;
+        color: var(--muted);
+      }
       #panel-recovery .evidence-grid {
         grid-template-columns: 1fr;
       }
@@ -2713,6 +2733,7 @@
                   viewBox="0 0 320 320"
                   role="group"
                   aria-label="Interactive family composition"
+                  aria-describedby="composition-plain-legend"
                 ></svg>
                 <div class="ring-center">
                   <div class="ring-value" id="ring-value"></div>
@@ -2721,6 +2742,7 @@
               </div>
               <p class="ring-caption" id="composition-basis"></p>
               <div id="composition-legend" class="legend"></div>
+              <p id="composition-plain-legend" class="chart-legend"></p>
               <div id="selected-summary" class="selected-summary"></div>
             </div>
             <div class="rank-pane">
@@ -2736,6 +2758,7 @@
                     id="rank-sort-share"
                     class="sort-tab"
                     aria-pressed="true"
+                    title="Sort families from largest to smallest mean share. This changes only the order in this report."
                   >
                     Share
                   </button>
@@ -2743,10 +2766,12 @@
                     id="rank-sort-spread"
                     class="sort-tab"
                     aria-pressed="false"
+                    title="Sort families by the sample SD of their run shares, in percentage points. This changes only the order in this report."
                   >
                     Spread
                   </button>
                 </div>
+                <button class="info" id="spread-info" aria-label="About Spread" title="Explain how Spread compares run-to-run variation. This opens help and changes no project values or files.">i</button>
                 <button
                   class="info"
                   id="runs-info"
@@ -2768,9 +2793,11 @@
                 id="family-ranking"
                 role="group"
                 aria-label="Family contributions by run"
+                aria-describedby="ranking-legend"
               ></div>
               <div class="rank-scale" id="rank-scale"></div>
               <div class="run-key" id="run-key"></div>
+              <p id="ranking-legend" class="chart-legend"><span id="ranking-runs-legend"></span> Percent of the chosen base: <span id="ranking-base-name">credited family signal</span>. The shaded capsule spans the lowest to highest run; it is not a confidence interval.</p>
               <div class="more">
                 <small id="ranking-note"></small
                 ><button class="quiet-button" id="all-families-button">
@@ -2823,6 +2850,7 @@
                 class="dot-chart"
                 role="group"
                 aria-label="Interactive family measures dot plot"
+                aria-describedby="dot-plain-legend"
               ></svg>
             </div>
             <div class="dot-legend">
@@ -2830,6 +2858,7 @@
               ><span>Hollow: unplottable values</span>
             </div>
           </div>
+          <p id="dot-plain-legend" class="chart-legend">Each dot is a family; the chosen X, Y and Size measures say how to compare it. A share uses the recorded family-share denominator, while protein and entry counts have no signal denominator. Family shares are means across available runs; counts describe the recorded database and evidence, and this chart has no whiskers.</p>
         </section>
         <div id="family-figures" class="figure-grid"></div>
         </div>
@@ -3183,6 +3212,13 @@
             sort: "share",
             pinnedRun: null,
           };
+          function familyRunCount(f) {
+            return (f.runs || []).filter(r => val(r.share) !== null).length;
+          }
+          function meanRunText() {
+            const counts = [...new Set(families.map(familyRunCount))];
+            return counts.length === 1 && counts[0] > 0 ? counts[0] + " runs" : "its available runs";
+          }
           const tabs = Array.from(document.querySelectorAll('.report-tab'));
           function showTab(tab) {
             for (const item of tabs) {
@@ -3363,6 +3399,9 @@
             $("composition-legend").replaceChildren();
             const f = state.selected,
               groups = f ? plotParts(f) : new Map();
+            $("composition-plain-legend").textContent = state.drill
+              ? "Each slice shows a part of the selected family's pooled signal. The denominator is that family's credited signal across all runs; this ring has no whiskers."
+              : "Each slice compares a family's mean share across the available runs. The denominator is the credited family signal in each run; select a family to explore its pooled parts, with no whiskers on this ring.";
             if (!f || !ordered.some((item) => val(item.mean) !== null)) {
               document.querySelector(
                 'section[aria-labelledby="composition-title"]',
@@ -3816,6 +3855,9 @@
               };
               const name = node("button", "rank-name");
               name.append(field(f.name));
+              const count = familyRunCount(f);
+              name.append(node("span", "rank-run-count", count ? "mean of " + count + " runs" : "run count unavailable"));
+              name.title = "Select this family to explore its stored values. This changes only the view of this report.";
               name.setAttribute("aria-pressed", String(f === state.selected));
               name.onclick = () => select(f);
               name.onfocus = () => {
@@ -3934,6 +3976,7 @@
               host.append(node("p", "empty", "No matching families."));
             $("ranking-note").textContent =
               "Mean share of credited family signal";
+            $("ranking-runs-legend").textContent = "Each bar shows the mean of " + meanRunText() + "; dots show individual runs.";
             $("rank-sort").hidden = !ordered.some((f) => val(f.sd) !== null);
             $("rank-sort-share").setAttribute(
               "aria-pressed",
@@ -4067,9 +4110,65 @@
               full.loading = "eager";
               full.className = "full-figure";
               content.push(full);
+              content.push(node("p", "chart-legend", figureLegend(fig)));
+              if (exists(fig.caption)) content.push(field(fig.caption, "p"));
               popup(field(fig.title), content, true);
             };
-            host.append(button);
+            const figure = node("figure", "report-figure"),
+              legend = node("figcaption", "chart-legend", figureLegend(fig));
+            figure.dataset.figure = fig.sourceFigureId;
+            figure.append(button, legend);
+            host.append(figure);
+          }
+          function figureLegend(fig) {
+            const id = fig.sourceFigureId || "";
+            if (/protein_coverage_/.test(id))
+              return "This map places observed peptides and stored annotations along the selected protein. Positions use the full protein length, with evidence pooled across runs; colours identify the two tracks, and no whiskers are drawn.";
+            if (/xic_by_mass/.test(id))
+              return "Each point is a peptide feature from the pooled runs. Mass increases left to right; higher points have more measured isotope-envelope signal on a logarithmic scale. These are signal areas, with no percentage denominator or whiskers.";
+            if (/isotopes_credited/.test(id))
+              return "Bars count peptide features by the number of isotopes with measured signal; colours separate mass bands. Counts pool the runs and have no percentage denominator or run-to-run whiskers. A missing isotope adds no credit.";
+            if (/percent_ion_current_by_mass/.test(id))
+              return "Bars compare the measured isotope-envelope signal in each mass range, with all runs pooled. Filled bars divide by the displayed peptide signal; outlined bars divide by pooled total ion current (TIC), when available. These are two different totals, and no whiskers are drawn.";
+            if (/recovery|signal_by_run/.test(id))
+              return "Bars compare the labelled peptide-signal readings with total ion current (TIC). Each run uses its own TIC, while an all-runs bar uses pooled signal divided by pooled TIC. The readings use the isotope bases printed on the figure; they are not uncertainty intervals or run-to-run whiskers.";
+            if (/signal_uplift/.test(id))
+              return "Bars show the recorded contributions to signal recovery with all runs pooled. Each percentage divides by pooled total ion current (TIC). Read the labelled isotope basis for each component; the components are signal readings, with no run-to-run whiskers.";
+            if (/family_composition/.test(id))
+              return "Each bar shows a family's mean share of credited family signal across " + meanRunText() + ". Longer bars mean larger shares; whiskers extend one sample SD across runs. The SD describes run-to-run disagreement, not a confidence interval.";
+            if (/family_subclass_ring/.test(id))
+              return "Inner arcs show families and outer arcs split the same signal into subclasses. Arc sizes use credited family signal with all runs pooled; Others keeps the report's chosen family membership. This ring has no run-to-run whiskers.";
+            if (/family_subclasses/.test(id))
+              return "Each stacked bar splits a family's contribution into its recorded subclasses. The parts use the pooled credited-family-signal denominator, so they add to the family's pooled share. Grey marks unresolved parts; no run-to-run whiskers are drawn.";
+            if (/family_contribution/.test(id))
+              return "Bars compare family contributions, split into the identified and de novo parts shown by the colours. These are pooled values: use signal area or percent of the measured peptide total as labelled on the horizontal axis. Shared and unattributed signal stay separate, and no run-to-run whiskers are drawn.";
+            if (/abundance_diversity/.test(id))
+              return "Horizontal position gives the mean per-run share of credited family signal; vertical position gives the database proteins needed to explain the peptides. Each point is a family, with protein counts pooled across runs. These database-dependent estimates have no whiskers.";
+            if (/family_signal_vs_denovo_share/.test(id))
+              return "Each point compares a family's pooled signal with its de novo contribution. The de novo percentage divides by that family's pooled signal, while the signal axis shows area units. The points pool all runs and have no run-to-run whiskers.";
+            if (/family_signal_sources|database_gap/.test(id))
+              return "Each row separates identified, database-mapped de novo and family-world-only signal. Bar widths are signal areas pooled across all runs, with no percentage denominator or run-to-run whiskers. Family-world-only signal stays outside starting-database family composition.";
+            if (/family_source_sequence_counts/.test(id))
+              return "Bars count the distinct source sequences supporting each family, with all runs pooled. Compare the source-coloured parts using sequence counts, with no signal denominator or run-to-run whiskers. These counts describe evidence sources, not the number of proteins present.";
+            if (/identity_sweep|identity_scan/.test(id))
+              return "Each point is a stored identity threshold, based on the sequences used in that scan. Read family counts and target-decoy mixing against their labelled axes; a mixing percentage uses that threshold's family count. This compares grouping choices, with no mean across acquisition runs or confidence interval.";
+            if (/de_novo_score_distribution/.test(id))
+              return "Bars count imported de novo calls in each score range, with colours showing the recorded filtering stages. Counts pool the runs and have no percentage denominator or run-to-run whiskers. Each caller keeps its own score scale, so compare callers within their labelled panels.";
+            if (/de_novo_consolidation|peptide_representatives/.test(id))
+              return "Bars count the calls or peptide features retained at the labelled stages. These are counts pooled across all runs, with no signal denominator or run-to-run whiskers. Follow the stage labels to distinguish repeated calls from the features carried forward.";
+            if (/family_world_rates/.test(id))
+              return "This chart compares the stored evidence rates for each family, with all runs pooled. The decoy rate divides decoy signal by credited signal; the correct-credit rate divides correct known credits by all known credits. Missing rates stay unavailable, and no run-to-run whiskers are drawn.";
+            if (/source_venn/.test(id))
+              return "The regions count sequences found by each caller alone or by both, with all runs pooled. Overlapping regions use the sequence normalization named in the figure; these are counts, with no signal denominator or run-to-run whiskers. The filtered-call and carried-forward populations stay separate.";
+            if (/accepted_score_agreement|score_vs_score_scatter/.test(id))
+              return "Each point is a paired comparison of two callers' scores, pooled across runs. Read each axis on its caller's own score scale; scores are not signal percentages and have no common denominator. The colours show the labelled agreement groups, with no run-to-run whiskers.";
+            if (/peaks_deepnovo_agreement|database_search_concordance|alternative_triage/.test(id))
+              return "This chart compares the sequence agreement groups named on its axes and colour key, with all runs pooled. Counts use the recorded comparison population, and any fraction divides by the comparison total printed on the figure. The groups describe agreement, with no run-to-run whiskers.";
+            if (/variant_comparison/.test(id))
+              return "Bars compare stored source options on the labelled signal or percentage basis, with all runs pooled. Any percentage uses the total printed for that comparison. The red whiskers span the two recorded envelope-model readings; they show model sensitivity, not sample SD across runs or a confidence interval.";
+            if (/source_effect_comparison/.test(id))
+              return "Each bar is a stored source option compared with the same identification baseline, with all runs pooled. Any percentage uses the total printed for that comparison. These are differences between options, with no run-to-run whiskers.";
+            return "This figure shows the stored results named above. Read its axes and colours with the full report caption, available when you open the figure. Its population, denominator and pooling follow that caption; this page adds no averaging or uncertainty.";
           }
           let renderedFamily = null;
           function renderFamily(f = state.selected) {
@@ -4120,11 +4219,9 @@
                 row.append(name, metric(p.share));
                 list.append(row);
               });
-              parts.append(
-                bars,
-                list,
-                node("p", "fine-print", "Pooled shares within this family."),
-              );
+              const partChart = node("div", "subclass-chart");
+              partChart.append(bars, list, node("p", "chart-legend", "The coloured parts show how this family's signal is divided within the named grouping. Each percentage uses the family's credited signal with all runs pooled; unresolved parts stay separate, and no whiskers are drawn."));
+              parts.append(partChart);
             }
             parts.hidden = !groups.size;
             const coverage = $("coverage-content");
@@ -4247,7 +4344,7 @@
                 entry.append(sw, node("span", "", label));
                 legend.append(entry);
               }
-              coverage.append(meta, track, legend);
+              coverage.append(meta, track, legend, node("p", "chart-legend", figureLegend({ sourceFigureId: "figure:protein_coverage_live" })));
               const inspect = node(
                 "button",
                 "quiet-button positions-button",
@@ -4879,7 +4976,7 @@
               host.append(row);
             }
             host.append(
-              node("p", "fine-print", "Of whole measured signal, by run."),
+              node("p", "chart-legend", "Each bar shows the family signal credited in one run. Its percentage uses that run's whole measured signal as the denominator; runs are shown separately, with no averaging or whiskers."),
             );
             const gap = $("gap-panel");
             gap.append(node("h3", "", "Database gap"));
@@ -4903,8 +5000,8 @@
             gap.append(
               node(
                 "p",
-                "fine-print",
-                "Each fraction uses its own reference total.",
+                "chart-legend",
+                "Bars show the stored database-gap fractions with evidence pooled across runs. Each row uses its own recorded reference total, so compare rows only when those totals agree; no run-to-run whiskers are drawn.",
               ),
             );
             if (rows.length) {
@@ -4943,8 +5040,9 @@
           help(
             "runs-info",
             "Reading the run points",
-            "Capsule spans the runs; line shows the mean. Pick a run below.",
+            "Each bar shows the mean of its available runs, and each dot is one run. The shaded capsule spans the lowest to highest run, not a confidence interval. Pick a run below to highlight it.",
           );
+          help("spread-info", "Reading Spread", "Sorts families by how much their share varies from run to run (sample SD in percentage points). It describes disagreement between runs, not a confidence interval.");
           help(
             "signal-info",
             "The reference total matters",
