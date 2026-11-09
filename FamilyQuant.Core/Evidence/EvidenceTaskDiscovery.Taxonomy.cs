@@ -12,7 +12,9 @@ namespace FamilyQuant.Evidence;
 
 public static partial class EvidenceTaskDiscovery
 {
-    private const string TaxonomyStreamEndpoint = "https://rest.uniprot.org/taxonomy/stream?format=json&query=";
+    // One search page holds a whole batch (at most MaximumTaxaPerBatch results), and ReadTaxonomyBatch
+    // refuses a reply that omits a requested taxon. The stream endpoint failed with 502 on 2026-11-09.
+    private const string TaxonomySearchEndpoint = "https://rest.uniprot.org/taxonomy/search?format=json&size=500&query=";
     private const int MaximumTaxonomyUrlLength = 7000;
     private const int MaximumTaxaPerBatch = 100;
 
@@ -117,5 +119,5 @@ public static partial class EvidenceTaskDiscovery
 
     private static string TaxonomyUrl(IEnumerable<int> taxa, bool single) => single
         ? "https://rest.uniprot.org/taxonomy/" + taxa.Single().ToString(CultureInfo.InvariantCulture)
-        : TaxonomyStreamEndpoint + Uri.EscapeDataString(string.Join(" OR ", taxa.Select(id => "(tax_id:" + id.ToString(CultureInfo.InvariantCulture) + ")")));
+        : TaxonomySearchEndpoint + Uri.EscapeDataString(string.Join(" OR ", taxa.Select(id => "(tax_id:" + id.ToString(CultureInfo.InvariantCulture) + ")")));
 }

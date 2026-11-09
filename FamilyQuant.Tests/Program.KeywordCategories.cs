@@ -54,5 +54,74 @@ internal static partial class Program
             "{\"id\":\"KW-0004\",\"name\":\"Fixture activity\",\"category\":\"Technical term\"}", StringComparison.Ordinal)); }
         catch (JsonException) { refused = true; }
         Check("Z12c1 conflicting provider categories cannot silently choose an arbitrary value", refused);
+        VocabularyRouteTests();
+    }
+
+    // 2.1.13: UniProt's keyword and taxonomy streams answered 502 on 2026-11-09 while its search pages worked.
+    private static void VocabularyRouteTests()
+    {
+        static FamilyClusterFile File(params string[] keywords) => new()
+        {
+            EvidenceSource = new EvidenceProvenance { Provider = "UniProt", Release = "fixture" },
+            MyExtendedFastaItems = new() { TaskProtein("sp|P00001|ONE", 21, true, keywords) },
+        };
+        var stored = File("Fixture activity", "Fixture annotation");
+        stored.MyExtendedFastaItems[0].Evidence!.KeywordCategories = new() { ["Fixture activity"] = "Molecular function", ["Fixture annotation"] = "Technical term" };
+        using (var inner = new TaskTaxonomyHandler())
+        {
+            var proposal = EvidenceTaskDiscovery.DiscoverAsync(stored, inner).GetAwaiter().GetResult();
+            var taxonomy = inner.Urls.Where(u => new Uri(u).AbsolutePath.StartsWith("/taxonomy/", StringComparison.Ordinal)).ToList();
+            Check("2.1.13 stored keyword categories need no vocabulary request",
+                !inner.Urls.Any(u => new Uri(u).AbsolutePath.StartsWith("/keywords/", StringComparison.Ordinal))
+                && proposal.ProposedScopeTerms.SequenceEqual(new[] { "Fixture activity" })
+                && proposal.Keywords.Single(k => k.Keyword == "Fixture activity").CategoryId == EvidenceTaskDiscovery.FunctionalScopeCategoryId
+                && proposal.Keywords.Single(k => k.Keyword == "Fixture annotation").CategoryId == "KW-9990",
+                "urls=" + string.Join(" ", inner.Urls));
+            Check("2.1.13 taxonomy is read from UniProt's search pages, one page per batch", taxonomy.Count > 0
+                && taxonomy.All(u => u.StartsWith("https://rest.uniprot.org/taxonomy/search?format=json&size=500&query=", StringComparison.Ordinal)),
+                "taxonomy=" + string.Join(" ", taxonomy));
+        }
+        var legacy = File("Fixture annotation", "Legacy missing category");
+        using (var inner = new TaskTaxonomyHandler())
+        using (var paged = new PagedVocabularyHandler(inner))
+        {
+            var proposal = EvidenceTaskDiscovery.DiscoverAsync(legacy, paged).GetAwaiter().GetResult();
+            Check("2.1.13 keywords without a stored category are read page by page until UniProt gives no next page",
+                paged.Pages.Count == 2 && paged.Pages[0].Contains("/keywords/search?", StringComparison.Ordinal)
+                && paged.Pages[0].Contains("size=500", StringComparison.Ordinal) && paged.Pages[1].Contains("cursor=page2", StringComparison.Ordinal)
+                && proposal.Keywords.Single(k => k.Keyword == "Legacy missing category").CategoryId == EvidenceTaskDiscovery.FunctionalScopeCategoryId
+                && proposal.ProposedScopeTerms.SequenceEqual(new[] { "Legacy missing category" }),
+                "pages=" + string.Join(" ", paged.Pages));
+        }
+        using (var inner = new TaskTaxonomyHandler())
+        using (var paged = new PagedVocabularyHandler(inner) { SecondRelease = "other" })
+        {
+            bool refusedRelease = false;
+            try { EvidenceTaskDiscovery.DiscoverAsync(legacy, paged).GetAwaiter().GetResult(); }
+            catch (System.IO.InvalidDataException) { refusedRelease = true; }
+            Check("2.1.13 a vocabulary page from another UniProt release is refused", refusedRelease && paged.Pages.Count == 2);
+        }
+    }
+
+    private sealed class PagedVocabularyHandler(System.Net.Http.HttpMessageHandler inner) : System.Net.Http.DelegatingHandler(inner)
+    {
+        internal readonly List<string> Pages = new();
+        internal string SecondRelease = "fixture";
+        protected override Task<System.Net.Http.HttpResponseMessage> SendAsync(System.Net.Http.HttpRequestMessage request, System.Threading.CancellationToken token)
+        {
+            if (request.RequestUri!.AbsolutePath != "/keywords/search") return base.SendAsync(request, token);
+            Pages.Add(request.RequestUri.AbsoluteUri);
+            bool first = !request.RequestUri.Query.Contains("cursor=", StringComparison.Ordinal);
+            var response = new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.OK)
+            {
+                Content = new System.Net.Http.StringContent(first
+                    ? """{"results":[{"keyword":{"name":"Fixture annotation","id":"KW-0002"},"category":{"name":"Technical term","id":"KW-9990"}}]}"""
+                    : """{"results":[{"keyword":{"name":"Legacy missing category","id":"KW-0004"},"category":{"name":"Molecular function","id":"KW-9992"}}]}"""),
+            };
+            response.Headers.Add("x-uniprot-release", first ? "fixture" : SecondRelease);
+            if (first) response.Headers.TryAddWithoutValidation("Link",
+                "<https://rest.uniprot.org/keywords/search?query=*&format=json&size=500&cursor=page2>; rel=\"next\"");
+            return Task.FromResult(response);
+        }
     }
 }

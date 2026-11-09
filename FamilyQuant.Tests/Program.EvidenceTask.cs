@@ -37,7 +37,7 @@ internal static partial class Program
                 if (!MissingRelease) probe.Headers.Add("x-uniprot-release", release);
                 return Task.FromResult(probe);
             }
-            if (request.RequestUri!.AbsolutePath == "/keywords/stream")
+            if (request.RequestUri!.AbsolutePath == "/keywords/search")
             {
                 var vocabulary = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(VocabularyJson ?? """
                     {"results":[{"keyword":{"name":"Leading scope","id":"KW-0001"},"category":{"name":"Molecular function","id":"KW-9992"}},
@@ -46,7 +46,7 @@ internal static partial class Program
                 if (!MissingRelease) vocabulary.Headers.Add("x-uniprot-release", release);
                 return Task.FromResult(vocabulary);
             }
-            bool batch = request.RequestUri.AbsolutePath == "/taxonomy/stream";
+            bool batch = request.RequestUri.AbsolutePath == "/taxonomy/search";
             int[] ids = batch ? System.Text.RegularExpressions.Regex.Matches(Uri.UnescapeDataString(request.RequestUri.Query), @"tax_id:(\d+)")
                 .Select(m => int.Parse(m.Groups[1].Value, CultureInfo.InvariantCulture)).Reverse().ToArray()
                 : new[] { int.Parse(request.RequestUri.Segments.Last(), CultureInfo.InvariantCulture) };

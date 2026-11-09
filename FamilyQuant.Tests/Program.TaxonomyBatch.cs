@@ -75,7 +75,7 @@ internal static partial class Program
         static bool IsTaxonomy(Uri uri) => uri.AbsolutePath.StartsWith("/taxonomy/", StringComparison.Ordinal);
         static string Proposal(FamilyClusterFile file, TaskTaxonomyHandler handler, bool single = false) =>
             JsonSerializer.Serialize(EvidenceTaskDiscovery.DiscoverAsync(file, handler, usePerTaxonComparison: single).GetAwaiter().GetResult());
-        static string[] BatchUrls(TaskTaxonomyHandler handler) => handler.Urls.Where(u => new Uri(u).AbsolutePath == "/taxonomy/stream").ToArray();
+        static string[] BatchUrls(TaskTaxonomyHandler handler) => handler.Urls.Where(u => new Uri(u).AbsolutePath == "/taxonomy/search").ToArray();
         void Verify(string name, Action run)
         {
             try { run(); }
@@ -90,7 +90,7 @@ internal static partial class Program
                     var file = ManyTaxaFile(count);
                     using var inner = new TaskTaxonomyHandler();
                     using var handler = new TaxonomyRefusalHandler(inner) { Refuse = uri => retryVocabulary
-                        ? uri.AbsolutePath == "/keywords/stream" : IsTaxonomy(uri)
+                        ? uri.AbsolutePath == "/keywords/search" : IsTaxonomy(uri)
                             && (count == 87 || Uri.UnescapeDataString(uri.Query).Contains("tax_id:121)", StringComparison.Ordinal)) };
                     var values = new List<FetchProgress>();
                     var groupingReports = new List<OperationProgress>(); var familyReports = new List<OperationProgress>();
@@ -231,7 +231,7 @@ internal static partial class Program
                     using var inner = new TaskTaxonomyHandler();
                     using var handler = new TaxonomyRefusalHandler(inner)
                     {
-                        Refuse = uri => interruption == "keywords" ? uri.AbsolutePath == "/keywords/stream"
+                        Refuse = uri => interruption == "keywords" ? uri.AbsolutePath == "/keywords/search"
                             : IsTaxonomy(uri) && Uri.UnescapeDataString(uri.Query).Contains("tax_id:121)", StringComparison.Ordinal),
                         FailuresRemaining = 10, Status = interruption == "503" ? HttpStatusCode.ServiceUnavailable : HttpStatusCode.TooManyRequests,
                     };

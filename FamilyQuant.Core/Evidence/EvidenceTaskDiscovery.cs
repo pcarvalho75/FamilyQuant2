@@ -72,6 +72,17 @@ public static partial class EvidenceTaskDiscovery
     // UniProt's ontology category identifier for molecular function, not a list of biological terms.
     // Functional scope is suggested independently of location, structure and technical annotation.
     public const string FunctionalScopeCategoryId = "KW-9992";
+    // UniProt's ten keyword categories. Fetch evidence stores each keyword's category name from the same
+    // entries, so the vocabulary is read only for keywords without a stored category.
+    private static readonly Dictionary<string, string> CategoryIds = new(StringComparer.Ordinal)
+    {
+        ["Technical term"] = "KW-9990", ["PTM"] = "KW-9991", ["Molecular function"] = FunctionalScopeCategoryId,
+        ["Ligand"] = "KW-9993", ["Domain"] = "KW-9994", ["Disease"] = "KW-9995", ["Developmental stage"] = "KW-9996",
+        ["Coding sequence diversity"] = "KW-9997", ["Cellular component"] = "KW-9998", ["Biological process"] = "KW-9999",
+    };
+    // Paged search, not the stream endpoint: on 2026-11-09 UniProt's keyword and taxonomy streams
+    // answered 502 for hours while its search pages answered normally.
+    private const string KeywordVocabularyEndpoint = "https://rest.uniprot.org/keywords/search?query=*&format=json&size=500";
     private static readonly Regex Organism = new(@"(?:^|\s)OS=(?<name>.+?)\sOX=(?<id>[1-9][0-9]*)(?=\s|$)",
         RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
@@ -130,17 +141,19 @@ public static partial class EvidenceTaskDiscovery
                 CategoryName = storedCategories.TryGetValue(g.Key, out var categories) && categories.Length == 1 ? categories[0] : string.Empty,
             })
             .OrderByDescending(k => k.ReviewedProteins).ThenBy(k => k.Keyword, StringComparer.Ordinal).ToList();
-        if (keywords.Count > 0)
+        foreach (var count in keywords)
+            if (CategoryIds.TryGetValue(count.CategoryName, out string? categoryId)) count.CategoryId = categoryId;
+        string? page = keywords.Any(k => k.CategoryId.Length == 0) ? KeywordVocabularyEndpoint : null;
+        var byName = keywords.ToDictionary(k => k.Keyword, StringComparer.Ordinal);
+        while (page != null)
         {
-            using HttpResponseMessage response = await UniProtHttp.GetWithRetryAsync(client,
-                "https://rest.uniprot.org/keywords/stream?query=*&format=json", 5,
+            using HttpResponseMessage response = await UniProtHttp.GetWithRetryAsync(client, page, 5,
                 status => "UniProt refused the keyword vocabulary (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No task was proposed.", cancellationToken,
                 options, message => progress?.Report(new FetchProgress
                 { Message = message, CompletedBatches = paths.Count, TotalBatches = taxa.Count, Asked = taxa.Count, Found = paths.Count })).ConfigureAwait(false);
             if (UniProtHttp.Release(response) != release)
                 throw new InvalidDataException("The UniProt keyword vocabulary and taxonomy releases differ. No task was proposed.");
             using JsonDocument vocabulary = JsonDocument.Parse(await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
-            var byName = keywords.ToDictionary(k => k.Keyword, StringComparer.Ordinal);
             foreach (var entry in vocabulary.RootElement.GetProperty("results").EnumerateArray())
             {
                 var term = entry.GetProperty("keyword");
@@ -151,6 +164,7 @@ public static partial class EvidenceTaskDiscovery
                 count.CategoryId = category.GetProperty("id").GetString() ?? string.Empty;
                 count.CategoryName = category.GetProperty("name").GetString() ?? string.Empty;
             }
+            page = ReferencePanelFetcher.NextPage(response);
         }
         cancellationToken.ThrowIfCancellationRequested();
         if (fingerprint != SourceFingerprint(file)) throw new InvalidDataException("The file changed during task discovery. No task was proposed.");

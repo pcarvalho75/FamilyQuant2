@@ -80,13 +80,24 @@
             </TabItem>
             <TabItem Header="Evidence" IsEnabled="{Binding EvidenceAvailable}" ToolTip="Reviews supplied evidence assignments, reasons and flags, and is also available from Group by keywords. Its first opening reads UniProt over the internet through Read database and scope when counts are missing; only Apply grouping changes the project, with Undo available.">
                 <Grid Margin="8">
-                    <Grid.RowDefinitions><RowDefinition Height="2*" MaxHeight="260"/><RowDefinition Height="3*" MinHeight="430"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10">
-                    <StackPanel>
+                    <!-- The title and the Scope row stay outside the scroll area, so the tables' minimum height can never hide them (2.1.13). -->
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="2*" MaxHeight="200"/><RowDefinition Height="3*" MinHeight="390"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                    <StackPanel Margin="0,0,0,8">
                     <DockPanel Visibility="{Binding TaskDiscoveryAvailable, Converter={StaticResource VisibleWhenTrue}}" Margin="0,0,0,8">
                         <Button DockPanel.Dock="Right" Content="Read database and scope" Click="DiscoverTask_Click" IsEnabled="{Binding CanDiscoverTask}" ToolTip="Read database taxonomy and reviewed keyword counts using UniProt, then suggest scope without changing the open project. Disabled while a review operation is running; wait for it to finish and review the scope before Update proposal."/>
                         <TextBlock Text="Database and scope" Style="{StaticResource SectionTitle}" VerticalAlignment="Center"/>
                     </DockPanel>
+                    <DockPanel x:Name="TaskScopeRow">
+                        <Button DockPanel.Dock="Right" Content="Update proposal" Click="UpdateProposal_Click" IsEnabled="{Binding CanUpdateProposal}" ToolTip="Rebuild the review from the edited scope and stored evidence without downloading or changing the open project; Apply grouping commits the choices. Disabled without scope words or during a review operation; enter scope words and wait for the operation to finish."/>
+                        <Button x:Name="FetchMissingPanelButton" Content="Fetch missing panel" DockPanel.Dock="Right" Click="FetchMissingPanel_Click" Margin="0,0,8,0"
+                                Visibility="{Binding PanelFetchAvailable, Converter={StaticResource VisibleWhenTrue}}" IsEnabled="{Binding CanFetchMissingPanel}"
+                                ToolTip="Download entries missing for the current scope and store the panel. Use Update proposal before Apply grouping; this is disabled when coverage is ready, scope is empty or another step is running."/>
+                        <TextBlock DockPanel.Dock="Left" Text="Scope" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBox x:Name="TaskScopeBox" Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Keyword or tissue words and quoted phrases defining the evidence scope; starts empty and Read database and scope suggests terms from UniProt. Accepts parsed text with no unit or fixed length limit; editing previews stored matches, Update proposal rebuilds the review, and Apply grouping makes an undoable project change."/>
+                    </DockPanel>
+                    </StackPanel>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10">
+                    <StackPanel>
                     <Expander x:Name="TaskCountsExpander" IsExpanded="{Binding TaskScopeExpanded}" Margin="0,0,0,8"
                               Visibility="{Binding HasTaskScope, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Expand database taxa, clade and keyword counts used to suggest scope; keyword counts can overlap and are not family shares. Only this view changes.">
                         <Expander.Header>
@@ -164,14 +175,6 @@
                             <TextBlock Text="{Binding TaskScope.Note}" TextTrimming="CharacterEllipsis" ToolTip="{Binding TaskScope.Note}" Foreground="{DynamicResource MutedBrush}"/>
                         </StackPanel>
                     </Expander>
-                    <DockPanel>
-                        <Button DockPanel.Dock="Right" Content="Update proposal" Click="UpdateProposal_Click" IsEnabled="{Binding CanUpdateProposal}" ToolTip="Rebuild the review from the edited scope and stored evidence without downloading or changing the open project; Apply grouping commits the choices. Disabled without scope words or during a review operation; enter scope words and wait for the operation to finish."/>
-                        <Button x:Name="FetchMissingPanelButton" Content="Fetch missing panel" DockPanel.Dock="Right" Click="FetchMissingPanel_Click" Margin="0,0,8,0"
-                                Visibility="{Binding PanelFetchAvailable, Converter={StaticResource VisibleWhenTrue}}" IsEnabled="{Binding CanFetchMissingPanel}"
-                                ToolTip="Download entries missing for the current scope and store the panel. Use Update proposal before Apply grouping; this is disabled when coverage is ready, scope is empty or another step is running."/>
-                        <TextBlock DockPanel.Dock="Left" Text="Scope" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                        <TextBox x:Name="TaskScopeBox" Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Keyword or tissue words and quoted phrases defining the evidence scope; starts empty and Read database and scope suggests terms from UniProt. Accepts parsed text with no unit or fixed length limit; editing previews stored matches, Update proposal rebuilds the review, and Apply grouping makes an undoable project change."/>
-                    </DockPanel>
                     <TextBlock Text="{Binding PanelCoverageText}" Visibility="{Binding PanelFetchAvailable, Converter={StaticResource VisibleWhenTrue}}"
                                TextTrimming="CharacterEllipsis" ToolTip="{Binding PanelCoverageText}" Margin="0,6,0,0"/>
                     <Border x:Name="ScopeChangePreviewPanel" Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}"
@@ -207,7 +210,7 @@
                                Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,8,0,0" TextWrapping="Wrap"/>
                     </StackPanel>
                     </ScrollViewer>
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="2">
                         <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                         <Grid.ColumnDefinitions><ColumnDefinition Width="2*" MinWidth="440"/><ColumnDefinition Width="10"/><ColumnDefinition Width="3*" MinWidth="280"/></Grid.ColumnDefinitions>
                         <TextBlock x:Name="familyTickLegend" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,6,0,0" FontSize="11"
@@ -445,7 +448,7 @@
                             </TabItem>
                         </TabControl>
                     </Grid>
-                    <DockPanel Grid.Row="2" Margin="0,10,0,0">
+                    <DockPanel Grid.Row="3" Margin="0,10,0,0">
                         <Button DockPanel.Dock="Right" Content="Check motif" Click="Motif_Click" IsEnabled="{Binding CanCheckMotif}" ToolTip="Counts the entered motif across complete proposed family members, including unticked members, and keeps the checked pattern for Apply grouping. Disabled without a proposal or a pattern or during an operation; update the proposal, enter a pattern and wait to enable it; Check motif then reports a pattern it cannot use."/>
                         <TextBlock DockPanel.Dock="Left" Text="Motif (optional)" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox Text="{Binding MotifPattern, UpdateSourceTrigger=PropertyChanged}" ToolTip="Amino-acid regular expression, optionally prefixed with not, or a count expression such as count C &gt;= 8; default empty skips the check, with no numeric range for the pattern. Check motif validates it before Apply grouping retains the choice, after which Undo restores the preceding grouping."/>

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace FamilyQuant.Tests;
 
@@ -11,7 +12,8 @@ internal static partial class Program
     private static void ScopeReachabilityTests()
     {
         EnsureApplication();
-        foreach (var size in new[] { (1024, 768), (1366, 820) })
+        // 1180 x 740 is the window's own default size; 2.1.12 hid the Scope row there behind the tables' minimum height.
+        foreach (var size in new[] { (1024, 768), (1180, 740), (1366, 820) })
         {
             var facts = new EvidenceTaskScopeInput("Fixture clade", Enumerable.Range(1, 40)
                 .Select(id => new ReviewTaskTaxon("Fixture taxon " + id, id, 10, 1, 9)).ToArray(),
@@ -22,39 +24,37 @@ internal static partial class Program
                 discoverTask: _ => Task.FromResult(facts)) { Width = size.Item1, Height = size.Item2, ShowActivated = false, ShowInTaskbar = false };
             try
             {
-                var expander = (Expander)window.FindName("TaskCountsExpander");
-                var panel = (StackPanel)expander.Parent;
-                ScrollViewer viewport;
-                if (panel.Parent is ScrollViewer existing) viewport = existing;
-                else
-                {
-                    var parent = (Panel)panel.Parent;
-                    int index = parent.Children.IndexOf(panel);
-                    parent.Children.Remove(panel);
-                    viewport = new ScrollViewer { Content = panel, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
-                    Grid.SetRow(viewport, Grid.GetRow(panel));
-                    parent.Children.Insert(index, viewport);
-                }
-                viewport.Height = 210;
                 window.Show(); PumpDispatcher(); window.UpdateLayout();
                 var model = (GroupingReviewViewModel)window.DataContext;
+                var expander = (Expander)window.FindName("TaskCountsExpander");
                 var scope = (TextBox)window.FindName("TaskScopeBox");
                 var update = WalkTree(window).OfType<Button>().Single(button => button.Content as string == "Update proposal");
                 var collapse = (Button)window.FindName("CollapseCountsToScopeButton");
-                bool Inside(FrameworkElement element)
+                var motif = WalkTree(window).OfType<TextBlock>().First(text => text.Text == "Motif (optional)");
+                var root = (FrameworkElement)window.Content;
+                bool OnScreen(FrameworkElement element)
                 {
-                    Rect bounds = element.TransformToAncestor(viewport).TransformBounds(new Rect(element.RenderSize));
-                    return bounds.Top >= -1 && bounds.Bottom <= viewport.ActualHeight + 1;
+                    if (!element.IsVisible) return false;
+                    Rect bounds = element.TransformToAncestor(root).TransformBounds(new Rect(element.RenderSize));
+                    return bounds.Top >= -1 && bounds.Bottom <= root.ActualHeight + 1;
                 }
-                Check("Z12c5 " + size.Item1 + " expanded counts expose a reachable collapse/edit action",
-                    model.TaskScopeExpanded && collapse.IsVisible && Inside(collapse) && !Inside(scope));
+                static bool Scrolls(DependencyObject element)
+                {
+                    for (var parent = VisualTreeHelper.GetParent(element); parent != null; parent = VisualTreeHelper.GetParent(parent))
+                        if (parent is ScrollViewer viewer && viewer.TemplatedParent is not TextBox) return true;
+                    return false;
+                }
+                string label = "2.1.13 " + size.Item1 + "x" + size.Item2;
+                Check(label + " expanded counts keep the Scope box, Update proposal and the motif row on screen",
+                    model.TaskScopeExpanded && collapse.IsVisible && OnScreen(scope) && OnScreen(update) && OnScreen(motif) && !Scrolls(scope),
+                    "scope_on_screen=" + OnScreen(scope) + " update_on_screen=" + OnScreen(update) + " motif_on_screen=" + OnScreen(motif));
                 string previous = model.ScopeText;
                 collapse.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 PumpDispatcher(); window.UpdateLayout(); PumpDispatcher();
-                Check("Z12c5 " + size.Item1 + " collapsing counts brings scope and Update proposal into the bounded viewport",
-                    !model.TaskScopeExpanded && Inside(scope) && Inside(update) && model.ScopeText == previous && scope.IsEnabled && update.IsEnabled);
+                Check(label + " collapsing counts keeps scope and Update proposal usable",
+                    !model.TaskScopeExpanded && OnScreen(scope) && OnScreen(update) && model.ScopeText == previous && scope.IsEnabled && update.IsEnabled);
                 model.TaskScopeExpanded = true; PumpDispatcher();
-                Check("Z12c5 " + size.Item1 + " counts remain available after editing", expander.IsExpanded
+                Check(label + " counts remain available after editing", expander.IsExpanded
                     && ReferenceEquals(model.TaskScope, facts) && collapse.IsVisible);
             }
             finally { window.Close(); PumpDispatcher(); }
