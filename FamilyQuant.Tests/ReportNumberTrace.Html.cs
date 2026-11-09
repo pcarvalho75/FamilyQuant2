@@ -228,6 +228,16 @@ internal static partial class ReportNumberTrace
         HtmlBound Resolve(HtmlReportReference source, HtmlReportField field)
         {
             if (!double.IsFinite(source.Scale)) throw new InvalidDataException("Non-finite display scale.");
+            if (source.Kind == "family-basis")
+            {
+                if (manifest == null || source.Scale != 100 || source.Format is not ("G3" or "G6"))
+                    throw new InvalidDataException("A family basis needs stored inputs and a percent display recipe.");
+                if (field.Unit != (source.Property?.EndsWith("/sd", StringComparison.Ordinal) == true ? "pp" : "%"))
+                    throw new InvalidDataException("A family share has the wrong display unit.");
+                double value = (HtmlReportPayloadBuilder.ReadFamilyShare(source, manifest)
+                    ?? throw new InvalidDataException("Stored family share unavailable.")) * source.Scale;
+                return new(N(value.ToString(source.Format, CultureInfo.InvariantCulture)), value, "project", source.Family + "/" + source.Property);
+            }
             if (source.Kind == "database-entry-count") return databaseEntries.Resolve(source, field);
             if (source.Kind is "axis-label" or "axis-tick")
             {
@@ -298,7 +308,9 @@ internal static partial class ReportNumberTrace
         foreach (var f in p.Composition.Families)
         {
             ids.AddRange(new[] { f.Name, f.Mean, f.Sd, f.Cv, f.WholeMeasured, f.Proteins, f.UniqueProteins, f.Peptides, f.DatabaseEntries });
-            foreach (var r in f.Runs) ids.AddRange(new[] { r.Name, r.Share, r.Measured });
+            foreach (var basis in new[] { f.IdentifiedOnly, f.IdentifiedAndDeNovo, f.DetectorEnvelopes, f.Tic })
+                ids.AddRange(new[] { basis.Mean, basis.Sd, basis.Cv });
+            foreach (var r in f.Runs) ids.AddRange(new[] { r.Name, r.Share, r.Measured, r.IdentifiedOnly, r.IdentifiedAndDeNovo, r.DetectorEnvelopes, r.Tic });
             foreach (var part in f.Parts) ids.AddRange(new[] { part.Name, part.Share });
             foreach (var c in f.Coverage) { ids.AddRange(new[] { c.Title, c.Caption, c.Protein, c.LengthLabel }); foreach (var s in c.Peptides.Concat(c.Domains)) ids.AddRange(new[] { s.Label, s.Range }); }
         }
