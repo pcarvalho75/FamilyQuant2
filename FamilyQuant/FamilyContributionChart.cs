@@ -268,7 +268,7 @@ namespace FamilyQuant
 
 
         private const double NameGutter = 300;
-        private const double ValueGutter = 104;
+        private const double ValueGutter = 224;
 
         /// <param name="result">The per-family envelope table plus the unattributed residual, or null.</param>
         /// <param name="topN">How many families get a bar of their own; zero or less folds nothing.</param>
@@ -390,6 +390,11 @@ namespace FamilyQuant
             return v.ToString(compact ? "E1" : "E2", CultureInfo.CurrentCulture);
         }
 
+        /// <summary>Both parts stay readable beside the bar even when a segment is too small to label.</summary>
+        public string BarValueLabel(FamilyContributionBar bar) => PercentApplies
+            ? "ID " + Value(bar.Identified, compact: false) + " + de novo " + Value(bar.DeNovo, compact: false)
+            : Value(bar.Total, compact: false);
+
         protected override void OnRender(DrawingContext dc)
         {
             base.OnRender(dc);
@@ -501,8 +506,8 @@ namespace FamilyQuant
             dc.DrawRectangle(null, new Pen(isFamily ? Grid : NotAFamily, isFamily ? 1.0 : 1.4), slot);
 
             // ---- the tail: the bar's whole value, in the mode's unit
-            var tail = Text(Value(bar.Total, compact: false), isFamily ? Muted : NotAFamily, 10,
-                            bold: !isFamily);
+            var tail = Clipped(BarValueLabel(bar), isFamily ? Muted : NotAFamily, 10,
+                               ValueGutter - 12, bold: !isFamily);
             dc.DrawText(tail, new Point(slot.Right + 8, slot.Top + (slot.Height - tail.Height) / 2));
         }
 

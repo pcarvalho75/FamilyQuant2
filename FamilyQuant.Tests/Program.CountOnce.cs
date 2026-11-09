@@ -14,6 +14,7 @@ internal static partial class Program
         {
             EnsureApplication();
             FamilyCountOnceTests(args.Length > 1 ? args[1] : Path.Combine(Path.GetTempPath(), "count-once"));
+            if (args.Contains("--legacy", StringComparer.Ordinal)) FamilyContributionChartTests(args[1]);
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         })];

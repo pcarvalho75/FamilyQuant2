@@ -34,7 +34,7 @@ public partial class AnalyticsControl : UserControl
             if (string.Equals(item.Tag as string, ViewModel.ExportKind.ToString(), StringComparison.Ordinal)) ComboBoxExportKind.SelectedItem = item;
         TextBlockDetails.Text = ViewModel.Details;
         BorderEmpty.Visibility = Data == null && !ViewModel.DatabaseGap.HasStoredResult ? Visibility.Visible : Visibility.Collapsed;
-        ComboBoxFamilyTopN.IsEnabled = CheckBoxFamilyPercent.IsEnabled = ViewModel.HasData;
+        ComboBoxFamilyTopN.IsEnabled = ViewModel.HasData;
         ButtonExport.IsEnabled = ViewModel.CanExport;
         RefreshExportHint();
         ViewModel.PropertyChanged += (_, e) =>
@@ -53,7 +53,6 @@ public partial class AnalyticsControl : UserControl
         if (!ready) return;
         ViewModel.FamilyTopN = int.TryParse((ComboBoxFamilyTopN.SelectedItem as ComboBoxItem)?.Tag as string,
             NumberStyles.Integer, CultureInfo.InvariantCulture, out int top) ? top : FamilyContributionPlot.DefaultTopN;
-        ViewModel.FamilyAsPercent = CheckBoxFamilyPercent.IsChecked == true;
     }
     private void DrawCharts()
     {

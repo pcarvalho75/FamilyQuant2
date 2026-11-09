@@ -42,8 +42,6 @@
     <ComboBoxItem Content="Top 30 families" Tag="30" ToolTip="Show the thirty largest families separately and combine all remaining families in one bar; labels need more screen space. This changes chart layout and subsequent figure exports without editing quantities."/>
     <ComboBoxItem Content="All families" Tag="0" ToolTip="Give every family its own chart bar, allowing scrolling when needed. This changes chart layout and subsequent figure exports without editing quantities."/>
    </ComboBox>
-   <CheckBox x:Name="CheckBoxFamilyPercent" Content="Percent of measured signal" Margin="16,0,0,0" VerticalAlignment="Center"
-    Checked="ChartChoiceChanged" Unchecked="ChartChoiceChanged" ToolTip="Show family bars as percentages of measured peptide signal instead of signal amounts; count-in-every-family bars can overlap and their percentages must not be summed. This changes charts and subsequent figure exports without editing quantities; disabled until quantitation exists."/>
   </WrapPanel>
   <ScrollViewer x:Name="ScrollAnalytics" Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
    <StackPanel>
