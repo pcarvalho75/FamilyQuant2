@@ -62,6 +62,10 @@ internal static partial class Program
                 Math.Abs(fitted.Sum(b => b.Total) - table.MeasuredTotalEnvelopeReferenceCalibrated) < 1e-9
                 && fitted.Count(b => b.Kind == FamilyContributionBarKind.Shared) == bars.Count(b => b.Kind == FamilyContributionBarKind.Shared));
             var chart = new FamilyContributionChart(table, 1, true, sharedPolicy: policy);
+            string caption = CompositionChartCaptions.Build(new AnalyticsFigure(AnalyticsFigures.FamilyContributionFile, chart, 420));
+            Check("count-once caption explains the allocation without overlapping counts",
+                caption.Contains("Each peptide counts once", StringComparison.Ordinal)
+                && !caption.Contains("may overlap", StringComparison.Ordinal));
             Check("count-once heading states " + policy,
                 chart.Heading.Contains(policy == SharedPeptidePolicy.SplitEqually ? "split equally" : "family-unique", StringComparison.Ordinal));
             ChartImageExporter.Save(chart, Path.Combine(output, "family-count-once-" + policy + ".png"), 1180, 420);
