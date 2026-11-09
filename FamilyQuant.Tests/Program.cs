@@ -208,6 +208,7 @@ namespace FamilyQuant.Tests
             suite.Section("Native fraction of TIC (Q3) - per-peptide dedup, unit invariants and the method");
             suite.Add(() => NativeFractionUnitTests(workDir));
             suite.Add(() => ReferenceEnvelopeOptimizationTests());
+            suite.Add(() => DeNovoEnvelopeCheckTests());
             suite.Add(() => StreamingProvenanceHashTests());
             suite.Section("Native fraction of TIC (Q3) - run _01 identified/envelope/DDA+de novo, envelope partition");
             suite.Add(() => NativeTicFractionRealTests(args.Length > 2 ? args[2] : null, args.Length > 3 ? args[3] : null, workDir));
