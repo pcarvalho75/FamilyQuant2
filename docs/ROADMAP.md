@@ -34,19 +34,20 @@ Version 18 delivered 13 steps (in the archive): release 2.1.12, AI Help. Release
 
 ## The team
 
-Paulo, 11-09: "put 3 sol workers and a grok reviewer, get it going" (D100).
+Paulo, 11-09: "put 3 sol workers and a grok reviewer, get it going" (D100), then "recruit a 4th sol worker" (D102).
 
 | Name | Engine | Role in version 19 | Worktree |
 |---|---|---|---|
 | Orchestrator | Claude, main session | Assigns, routes reviews, runs every check on Ana's data (T1, T3), merges, drops the ledger rows Paulo removed, runs the suite once, releases, keeps this file and the board true | |
-| FQDeNovo (DN) | Sol 6.1 xhigh | T1, T5, T6, T3, T4, T17: the de novo envelope check command and the switch, the recovery chart, the Quantify warnings, Import family list as step 0 | `D:/FamilyQuant-wt/denovo` |
-| FQCount (CT) | Sol 6.1 xhigh | T7 to T12, then the package (as H4c): each peptide once, fewer chart options, the HTML payload fields, the Simple view of Review grouping | `D:/FamilyQuant-wt/count` |
-| FQHtml (HT) | Sol 6.1 xhigh | T13 to T16 and T18: the HTML report in tabs with every figure, its legend and the denominator switch; the one Export window | `D:/FamilyQuant-wt/html-tabs` |
+| FQDeNovo (DN) | Sol 6.1 xhigh | T1, T5, T6, T3, T4: the de novo envelope check command and the switch, the recovery chart, the Quantify warnings | `D:/FamilyQuant-wt/denovo` |
+| FQCount (CT) | Sol 6.1 xhigh | T7 to T11, then the package (as H4c): each peptide once, fewer chart options, the HTML payload fields | `D:/FamilyQuant-wt/count` |
+| FQHtml (HT) | Sol 6.1 xhigh | T13 to T16: the HTML report in tabs with every figure, its legend and the denominator switch |
+| FQSimple (SM) | Sol 6.1 xhigh | T17, T12, T18: Import family list as step 0, the Simple view of Review grouping, the one Export window | `D:/FamilyQuant-wt/simple` | `D:/FamilyQuant-wt/html-tabs` |
 | FQRev (RV) | Grok 4.7 xhigh | Reviews every READY under D89 and D91 and fixes small defects itself; a fix over 20 lines is checked by a builder of another lane | `D:/FamilyQuant-wt/review` |
 
 The builders and the reviewer see code and synthetic data only. Ana's project and RAW files are read only by the desk, which runs the check commands the builders write and passes back counts, medians and shares, never rows.
 
-File ownership, so the lanes never touch the same file at the same time: DN owns `FamilyQuant.Core/DeNovo`, `FamilyQuant.Core/Quantitation`, `RecoveryChart.cs`, the Quantify screen and the Grouping panel of Curate families. CT owns `FamilyContributionChart.cs`, `AnalyticsViewModel.cs`, `CurationQuantitationPanel.xaml(.cs)`, `SuperClusterPreviewWindow.xaml(.cs)` and `FamilyQuant.Core/Report/HtmlReportPayload*.cs`. HT owns `FamilyQuant.Core/Report/Html/report-template.html`, the HTML figure code and the export entries (File menu, Results export list, Curate families Display and export). `AnalyticsControl.xaml(.cs)` is CT's until T10 is approved, then HT's. A change needed in another lane's file is asked for through the desk.
+File ownership, so the lanes never touch the same file at the same time: DN owns `FamilyQuant.Core/DeNovo`, `FamilyQuant.Core/Quantitation`, `RecoveryChart.cs` and the Quantify screen. CT owns `FamilyContributionChart.cs`, `AnalyticsViewModel.cs`, `CurationQuantitationPanel.xaml(.cs)` and `FamilyQuant.Core/Report/HtmlReportPayload*.cs`. HT owns `FamilyQuant.Core/Report/Html/report-template.html` and the HTML figure code. SM owns `SuperClusterPreviewWindow.xaml(.cs)`, `ClusterGenerationControl` (the Grouping panel and Display and export), the export entries (File menu, Results export list) and the new Export window. `AnalyticsControl.xaml(.cs)` is CT's until T10 is approved, then SM's. A change needed in another lane's file is asked for through the desk.
 
 ## Design rules for the look (hard requirements)
 
@@ -62,7 +63,7 @@ File ownership, so the lanes never touch the same file at the same time: DN owns
 
 Every row is a small step with its own done-check. A step is done when a reviewer other than its builder approves it (rule 6); each lane merges into master at T19. Ids never change; a step split here keeps its id as a prefix (T7 would become T7a and T7b).
 
-### W24 Ana's session, release 2.1.14: simpler (FQDeNovo, FQCount, FQHtml, FQRev, Orchestrator)
+### W24 Ana's session, release 2.1.14: simpler (FQDeNovo, FQCount, FQHtml, FQSimple, FQRev, Orchestrator)
 
 Paulo, 11-09, during the session with Ana: "a peptide cannot go to more than one family", "im also considering in removing this wierd normalization", "ideally everything in the html so we get rid of the export figures and simplify", "too many options", "something to be done in one day".
 
@@ -79,19 +80,19 @@ Paulo, 11-09, during the session with Ana: "a peptide cannot go to more than one
 | T9 | The "count in every family" shared-peptide choice leaves the Quantitation panel (D96): family-unique and split remain | L | 0.3 |  | T19 | Test; screen render; reviewed | CT |  | 0 | 0 |  |
 | T10 | Results: the Top N choice sits directly above the family chart | L | 0.3 | T8 | T18 | Screen render; reviewed | CT |  | 0 | 0 |  |
 | T11 | The HTML payload carries, per family and per run, the three shares (identified only, identified and de novo, TIC) from the stored studies, each peptide once | L | 0.4 | T7 | T15 | Payload test; reviewed | CT |  | 0 | 0 |  |
-| T12 | Review grouping, Simple view by default: Scope, Read database and scope, Update proposal, the family table, the Proteins table (Use, Accession, Description, Flags) made taller, Find, Tick and Untick, Selected protein details, Apply grouping. "Show all options" opens the rest (Keywords, the other tabs, Align, Add to and Remove from family, Show members, Motif, Fetch missing panel) | M | 1.5 |  | T19 | Screen renders at 1180x740 and 1366x820, both views; every hidden control still reachable; reviewed | CT |  | 0 | 0 |  |
+| T12 | Review grouping, Simple view by default: Scope, Read database and scope, Update proposal, the family table, the Proteins table (Use, Accession, Description, Flags) made taller, Find, Tick and Untick, Selected protein details, Apply grouping. "Show all options" opens the rest (Keywords, the other tabs, Align, Add to and Remove from family, Show members, Motif, Fetch missing panel) | M | 1.5 |  | T19 | Screen renders at 1180x740 and 1366x820, both views; every hidden control still reachable; reviewed | SM |  | 0 | 0 |  |
 | T13 | The HTML report in tabs: Families, Signal recovery, Mass and isotopes, Coverage, Database gap, Quality, Sensitivity; today's content moves into them unchanged | M | 1.0 |  | T14, T15 | The offline page opens on a synthetic project with every tab; template tests green; reviewed | HT |  | 0 | 0 |  |
 | T14 | Every Results figure inside its tab (signal recovery, ion current by mass, isotopes credited, signal by mass, family contribution), rendered from the same chart code as the screen, as the Quality figures are today; coverage stays the page's own interactive maps | M | 1.0 | T13 | T16, T18 | Each figure present on a synthetic project; page size measured; reviewed | HT |  | 0 | 0 |  |
 | T15 | The denominator switch on the Families tab ranking (identified only, identified and de novo, TIC), from T11's fields | M | 0.8 | T11, T13 | T19 | Switch test on a synthetic payload; reviewed | HT |  | 0 | 0 |  |
 | T16 | A plain-language legend under every figure and chart: what it shows, how to read it, its denominator, pooled or the mean of N runs, what the whiskers are; Spread gets its (i) description | M | 1.0 | T14 | T19 | A test finds a legend under every figure; reviewed | HT |  | 0 | 0 |  |
-| T17 | Import family list as an optional step 0 of the guided Grouping order; Group by evidence says when the project has no family list | L | 0.5 |  | T19 | Screen render; test; reviewed | DN |  | 0 | 0 |  |
-| T18 | One Export window (File > Export) replacing the 15 entries in four places: Report (HTML, Word, workbook) first, then Tables (CSV), Suggested additions (FASTA), Families (.fcf), Interpretation input. "Screen figures (PNG)" and the Presentation evidence pack go (D98, D101); duplicates in Results and Curate families open this window | M | 1.5 | T10, T14 | T19 | Every kept export reachable from the window and writes the same file as before (tests); screen render; reviewed | HT |  | 0 | 0 |  |
+| T17 | Import family list as an optional step 0 of the guided Grouping order; Group by evidence says when the project has no family list | L | 0.5 |  | T19 | Screen render; test; reviewed | SM |  | 0 | 0 |  |
+| T18 | One Export window (File > Export) replacing the 15 entries in four places: Report (HTML, Word, workbook) first, then Tables (CSV), Suggested additions (FASTA), Families (.fcf), Interpretation input. "Screen figures (PNG)" and the Presentation evidence pack go (D98, D101); duplicates in Results and Curate families open this window | M | 1.5 | T10, T14 | T19 | Every kept export reachable from the window and writes the same file as before (tests); screen render; reviewed | SM |  | 0 | 0 |  |
 | T19 | The lanes merged into master; the ledger rows of what Paulo removed dropped under D95, D96, D98, D99 and D101, every rename mapped; the receipts refreshed; the full suite once | M | 0.8 | T3, T4, T5, T6, T9, T12, T15, T16, T17, T18 | T20 | Suite line copied; ledger check exit 0 | Orchestrator |  | 0 | 0 |  |
 | T20 | Release 2.1.14: the version bump on the 31 lines, the notes, the package with the token (FQCount, as H4c), the offline update from 2.1.13, published as Latest, the README | M | 1.0 | T19 |  | Release live; hashes match | Orchestrator |  | 0 | 0 |  |
 
 ## Critical path
 
-Three Sol builders start at once from master 7c11435b. FQDeNovo writes the check T1 first, because it decides T3 (the desk runs it on Ana's data); T5, T6 and T17 fill the wait. FQCount does T7, then T8, T10 and T11, with T9 and T12 after. FQHtml does T13 and T14, then T15 once T11 lands, T16, and T18 once T10 and T14 are approved. FQRev reviews each step as it lands. About 5 hours of building, then about 2 hours for T19 and T20.
+Three Sol builders started at 15:27 from master 488211ae and a fourth joined after (D102). FQDeNovo writes the check T1 first, because it decides T3 (the desk runs it on Ana's data); T5 and T6 fill the wait. FQCount does T7, then T8, T10 and T11, then T9. FQHtml does T13 and T14, then T15 once T11 lands, and T16. FQSimple does T17 and T12, then T18 once T10 and T14 are approved. FQRev reviews each step as it lands. About 4 hours of building, then about 2 hours for T19 and T20.
 
 After this version, planned with Paulo (D97): a simplification pass over every other screen (the Grouping panel, Quantify, De novo review: what goes behind "More options" and what is removed); one glossary and "peptide feature" everywhere; the recovery chart rewritten and recovery per mass range; a Merge families action; the unattributed bar broken down; the isotope-pattern fit; AI Help Markdown; and the other items in the desk's notes/next-roadmap.md.
 
@@ -176,6 +177,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D99 | Simpler | Fewer options on screen, advanced controls behind "Show all options", one Export window. Paulo, 11-09 ("too many options,and simplify the program,.. multiple exports, everything should be significantly simplified!") |
 | D100 | The team for 2.1.14 | Three Sol 6.1 builders (FQDeNovo, FQCount, FQHtml) and one Grok 4.7 reviewer (FQRev); the desk runs every check on Ana's data. Paulo, 11-09 ("put 3 sol workers and a grok reviewer, get it going") |
 | D101 | Which exports stay (was P2) | The default, taken with Paulo's go: keep the Report (HTML, Word, workbook), the CSV tables, Suggested additions (FASTA), Families (.fcf) and Interpretation input (Markdown); remove Screen figures (PNG) and the Presentation evidence pack. Paulo, 11-09 ("get it going") |
+| D102 | A fourth builder | FQSimple (Sol 6.1) takes T17, T12 and T18 from the other three lanes, so the day is shorter. Paulo, 11-09 ("recruit a 4th sol worker") |
 
 ## Risks and triggers
 
