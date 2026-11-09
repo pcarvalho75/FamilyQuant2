@@ -13,7 +13,7 @@ namespace FamilyQuant;
 
 public static class FamilySensitivityStudy
 {
-    public const string Method = "Stored computed variants; primary calibrated family signal / measured peptide signal. "
+    public const string Method = "Stored computed variants; measured family envelope / measured peptide envelope. "
         + "Shared policies use the same prepared peptides. Family-world-only credits are excluded; full counts overlap. "
         + "Recorded inputs, grouping and extraction settings are checked; unrecorded settings cannot be compared.";
 

@@ -15,12 +15,12 @@ internal static partial class Program
         Check("empty Results withholds cards and exports and explains the next step", !empty.HasData && !empty.CanExport
             && empty.Cards.Count == 0 && empty.EmptyMessage.Contains("Quantify"));
         var model = new AnalyticsViewModel(SyntheticAnalyticsRows(), new QuantManifest
-            { PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 } });
+            { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method, PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 } });
         Check("Results exposes three short cards and retains all method facts on demand", model.Cards.Count == 3
             && model.Details.Contains("PTM-aware peptidoform and charge") && model.Details.Contains("NOT quantified")
             && model.Details.Contains("No Family Cluster File is open") && model.Details.Contains("before cross-side suppression"));
-        Check("the headline explicitly labels the primary estimate and its RAW TIC denominator",
-            model.Cards[0].Title == "Primary recovery estimate" && model.Cards[0].Detail.Contains("reference-calibrated estimate")
+        Check("the headline explicitly labels measured-envelope recovery and its RAW TIC denominator",
+            model.Cards[0].Title == "Measured envelope recovery" && model.Cards[0].Detail.Contains("measured envelope")
             && model.Cards[0].Detail.Contains("RAW TIC"));
         Check("Results keeps its original exports and adds the two evidence-dependent Database gap choices", model.CanExport
             && Enum.GetValues<ResultsExportKind>().Length == 7
@@ -38,7 +38,7 @@ internal static partial class Program
         Directory.CreateDirectory(output);
         var project = projectPath == null
             ? (fcf: (FamilyClusterFile?)null, quant: SyntheticAnalyticsRows(), manifest: new QuantManifest
-                { PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 } })
+                { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method, PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 } })
             : ProjectStore.ReadFqproj(projectPath);
         var model = new AnalyticsViewModel(project.quant, project.manifest, project.fcf);
         foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })

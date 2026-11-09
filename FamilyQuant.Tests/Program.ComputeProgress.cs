@@ -91,8 +91,8 @@ internal static partial class Program
         progress.Items.Clear();
         string counted = SpectrumComparisonTable.ToCsv(SpectrumComparisonTable.Build(Array.Empty<PeaksDeNovoRow>(), Array.Empty<PeaksDeNovoRow>(),
             Array.Empty<PatternLabPsm>(), rows, operation: operation));
-        Check("J35 spectrum comparison updates inside reference evaluation and row assembly without changing any CSV byte",
-            Batches("spectrum-reference-validation") && Batches("spectrum-rows") && original == counted);
+        Check("T3 spectrum comparison reports row assembly without fitting the removed primary model",
+            !progress.Items.Any(p => p.Stage == "spectrum-reference-validation") && Batches("spectrum-rows") && original == counted);
     }
 
     private static void ComputeProgressFixture(string folder)
@@ -191,7 +191,7 @@ internal static partial class Program
                     && all.Where(item => item.Completed > 0).Select(item => item.Completed!.Value).SequenceEqual(Enumerable.Range(1, count).Select(value => (long)value))
                     && all.All(item => item.Total == count));
             }
-            Series("compute-phase", 5); Series("compute-run", 2); Series("compute-study", 14); Series("source-study", 10); Series("world-phase", 5);
+            Series("compute-phase", 5); Series("compute-run", 2); Series("compute-study", 13); Series("source-study", 10); Series("world-phase", 5);
             Check("J35 every counted Compute phase reaches its declared total", steps.Where(item => item.Total > 0).GroupBy(item => item.Stage).All(group =>
                 group.First().Completed == 0 && group.Last().Completed == group.First().Total && group.All(item => item.Total == group.First().Total)
                 && group.Zip(group.Skip(1), (previous, next) => next.Completed >= previous.Completed).All(value => value)));

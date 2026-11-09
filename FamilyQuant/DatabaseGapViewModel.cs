@@ -85,7 +85,7 @@ public sealed class DatabaseGapViewModel : ScreenViewModel
         + ". Family-world credits go only to families in the stored scope.";
     public string SecondPassRules => Summary?.Rules ?? "";
     public string Scope => !HasData ? "" : "Stored scope: " + string.Join("; ", Summary!.ScopeFamilies);
-    public string Basis => !HasData ? "" : "Signal is envelope area: observed for identified peptides, reference-calibrated for de novo. "
+    public string Basis => !HasData ? "" : "Signal is envelope area: measured for identified and de novo peptides. "
         + "Measured total: " + Summary!.MeasuredTotalEnvelope.ToString("G6", CultureInfo.CurrentCulture)
         + ". Shared signal and the global unexplained bucket are separate from every family.";
     public string FirstPassRules => Summary?.CompositionRules ?? "";

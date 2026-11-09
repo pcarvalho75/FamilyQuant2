@@ -27,8 +27,8 @@ public static class DeNovoWorkflowHelp
             + "The cluster's top-XCorr PatternLab claim must have a sequence to win; a de novo call matching only a lower-ranked PSM is still excluded.\n\n"
             // NativeQuantFractions.CrossSideKey; IsCrossSideEquivalent; Compute.
             + "4. Avoid double credit. A de novo peptide equivalent to an identified peptide is not credited again. The production rule compares run, peptidoform, charge and isotope-aware precursor mass with I = L; genuinely different PTMs remain distinct.\n\n"
-            // FullXicRunStage.Extract; NativeQuantFractions.DedupToPeptides; ReferenceEnvelopeEstimator.Apply.
-            + "5. Peptide XICs. Quantify reads RAW data for identified and additional de novo peptide XICs. Repeated anchors collapse to one representative per run, peptidoform and charge. Identified primary signal uses the observed isotope envelope; de novo primary signal uses identified-reference calibration. A missing isotope adds no signal.\n\n"
+            // FullXicRunStage.Extract; NativeQuantFractions.DedupToPeptides.
+            + "5. Peptide XICs. Quantify reads RAW data for identified and additional de novo peptide XICs. Repeated anchors collapse to one representative per run, peptidoform and charge. Identified and de novo primary signal both use the measured isotope envelope. A missing isotope adds no signal.\n\n"
             // FamilyEnvelopeQuant.SearchCuration; HomologyOptions; HomologySearch; DecoyIdentityGate.
             + "6. Family homology. De novo peptides are mapped by PepExplorer-style homology at a default minimum identity of " + Number(100 * HomologyOptions.DefaultMinIdentity)
             + "% with I = L. Recorded mapping choices can restrict the matches, including score-tier selection. If the decoy identity gate is enabled it can raise the identity floor; a decoy wins an exact tie.\n\n"

@@ -95,7 +95,7 @@ internal static partial class Program
                 var rows = new List<QuantRow> { new() { Run = "synthetic", Side = "identified", Sequence = "PEPTIDEK", Charge = 2,
                     PrecursorMz = 500, IsotopeAreas = new[] { 10d, 5d, 2d }, EnvelopeSum = 17 } };
                 var results = new AnalyticsControl(new AnalyticsViewModel(rows,
-                    new QuantManifest { PerRunTic = new() { ["synthetic"] = 100 } }, curation, homology: new DeNovoHomology()));
+                    new QuantManifest { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method, PerRunTic = new() { ["synthetic"] = 100 } }, curation, homology: new DeNovoHomology()));
                 Host(results);
                 foreach (var kind in Enum.GetValues<ResultsExportKind>())
                 {

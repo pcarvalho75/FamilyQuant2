@@ -158,12 +158,12 @@ public static class CompositionChartCaptions
             double total = eligible.Sum(p => p.Envelope);
             var numbers = new List<CaptionNumber> { new("Credited signal represented", total, "area units", "0.###E+0") };
             if (data.Grouped is { Tic: > 0 } grouped) numbers.Add(new("Represented share of recorded total ion current", total / grouped.Tic * 100, "%"));
-            return new("Directly observed credited signal by peptide mass", "Filled bars give each mass bin's share of the displayed credited signal; outlined bars use recorded total ion current when available. This observed-envelope diagnostic is separate from the primary calibrated estimate", numbers);
+            return new("Directly observed credited signal by peptide mass", "Filled bars give each mass bin's share of the displayed credited signal; outlined bars use recorded total ion current when available. Both identified and de novo peptides use their measured envelope", numbers);
         }
         if (figure.Chart is RecoveryChart)
         {
             var numbers = new List<CaptionNumber> { new("Acquisition runs", data.Fractions.Count, "runs", "0") };
-            if (data.Grouped is { Tic: > 0 } grouped) numbers.Add(new("Pooled primary recovery estimate", grouped.RecoveredFractionReferenceCalibrated * 100, "%", "0.0"));
+            if (data.Grouped is { Tic: > 0 } grouped) numbers.Add(new("Pooled measured envelope recovery", grouped.RecoveredFractionReferenceCalibrated * 100, "%", "0.0"));
             var reference = data.Fractions.Concat(data.Grouped == null ? Array.Empty<NativeRunFraction>() : new[] { data.Grouped })
                 .LastOrDefault(row => row.HasDetectedChargeSplit && row.Tic > 0);
             if (reference != null)
@@ -172,7 +172,7 @@ public static class CompositionChartCaptions
                 numbers.Add(new("Detector z >= 2 share of TIC, " + scope, reference.DetectedFractionMultiplyCharged * 100, "%"));
                 numbers.Add(new("Detector z = 1 share of TIC, " + scope, reference.DetectedFractionSinglyCharged * 100, "%"));
             }
-            return new("Recovery relative to each run's recorded total ion current", "The top compares M+0 sensitivity, the primary calibrated estimate and the observed-envelope diagnostic; these are different readings, not confidence limits. The lower levels are independent comparisons, not a biological partition", numbers,
+            return new("Recovery relative to each run's recorded total ion current", "The top compares M+0 only and the measured envelope; these are different readings, not confidence limits. The lower levels are independent comparisons, not a biological partition", numbers,
                 new[] { "Independent MS1 detector: z >= 2: " + Ms1EnvelopeDetector.StrongEvidenceLabel + "; z = 1: " + Ms1EnvelopeDetector.WeakEvidenceLabel,
                     Ms1EnvelopeDetector.SinglyChargedCaveat });
         }

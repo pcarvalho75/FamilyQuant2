@@ -251,7 +251,7 @@ internal static partial class Program
         {
             new QuantRow { Run = "synthetic", Side = "identified", Sequence = "PEPTIDEK", Charge = 2,
                 PrecursorMz = 500, IsotopeAreas = new[] { 10d, 5d, 2d }, EnvelopeSum = 17 }
-        }, new QuantManifest { PerRunTic = new() { ["synthetic"] = 100 } });
+        }, new QuantManifest { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method, PerRunTic = new() { ["synthetic"] = 100 } });
         var host = new AppOperationHost();
         foreach (var kind in new[] { ResultsExportKind.Summary, ResultsExportKind.Peptides, ResultsExportKind.Figures })
         {

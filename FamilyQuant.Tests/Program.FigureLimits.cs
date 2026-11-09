@@ -106,7 +106,7 @@ internal static partial class Program
         var culture = CultureInfo.CurrentCulture;
         try { CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR"); Check("complete figure data are byte-stable across locales", csv == FigureDetailsCsv.Build(figures)); }
         finally { CultureInfo.CurrentCulture = culture; }
-        var manifest = new QuantManifest { FamilyRunShares = new() { Runs = new() { new() { Run = "r", AssignedSignal = 100 } },
+        var manifest = new QuantManifest { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method, FamilyRunShares = new() { Runs = new() { new() { Run = "r", AssignedSignal = 100 } },
             Families = new() { new() { FamilyUserId = 1, MeanShare = 1, AvailableRunCount = 1, Runs = new() { new() { Run = "r", Signal = 100, ShareOfAssignedSignal = 1 } } } } },
             FamilySubclassParts = new() { Families = new() { new() { FamilyUserId = 1, FamilySignal = 100,
                 Parts = Enumerable.Range(0, 2000).Select(i => new FamilySignalPart { PartKey = "p" + i, Label = "Part " + i, Signal = .05, ShareOfFamily = .0005 }).ToList() } } } };
@@ -142,7 +142,7 @@ internal static partial class Program
         if (uniqueIds) File.WriteAllBytes(Path.Combine(folder, "assembled_supplement.xlsx"),
             ReportSupplementWorkbook.BuildBytes(assembled.Document, assembled.SupplementSheets));
         string boundedFolder = Path.Combine(folder, "bounded-results-" + Guid.NewGuid().ToString("N"));
-        var boundedModel = new AnalyticsViewModel(SyntheticAnalyticsRows(), new QuantManifest { FamilyRunShares = new()
+        var boundedModel = new AnalyticsViewModel(SyntheticAnalyticsRows(), new QuantManifest { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method, FamilyRunShares = new()
         {
             Families = rows.Select(r => new FamilyRunShareSummary { FamilyUserId = int.Parse(r.Key, CultureInfo.InvariantCulture),
                 MeanShare = r.MeanPercent / 100, AvailableRunCount = 1 }).ToList()

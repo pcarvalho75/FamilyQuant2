@@ -6,7 +6,7 @@ using System.Linq;
 namespace FamilyQuant
 {
     /// <summary>One prepared peptide and every distinct current User family it reaches. The peptide
-    /// keeps its run, charge, representative anchor, source claims and calibrated envelope.</summary>
+    /// keeps its run, charge, representative anchor, source claims and measured envelope.</summary>
     public sealed class FamilyAttributedPeptide
     {
         internal FamilyAttributedPeptide(NativePeptideQuant peptide, IReadOnlyList<int> families)
@@ -41,7 +41,7 @@ namespace FamilyQuant
 
     public static partial class FamilyEnvelopeQuant
     {
-        /// <summary>Assigns prepared, calibrated peptides to the current first-pass families. This is
+        /// <summary>Assigns prepared, measured-envelope peptides to the current first-pass families. This is
         /// the second-pass seam: its residual excludes identified-equivalent de novo peptides, mapped
         /// de novo peptides and all identified peptides. Inputs and quantitation values are only read.</summary>
         public static FamilyPeptideAttribution AttributePeptides(

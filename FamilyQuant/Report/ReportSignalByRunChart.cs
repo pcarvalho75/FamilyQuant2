@@ -23,7 +23,7 @@ public sealed class ReportSignalByRunChart : ReportPrintChart
 
     protected override void OnRender(DrawingContext dc)
     {
-        Ground(dc, "Assigned signal by acquisition run", "Each bar uses its own run TIC; total = identified + calibrated de novo.");
+        Ground(dc, "Assigned signal by acquisition run", "Each bar uses its own run TIC; total = identified + measured de novo envelope.");
         if (Rows.Count == 0)
         {
             Label(dc, "No acquisition run fractions are stored.", 20, 130);
@@ -46,7 +46,7 @@ public sealed class ReportSignalByRunChart : ReportPrintChart
             dc.DrawRectangle(palette.Identified, null, new Rect(20, y + 34, 14, 14));
             Label(dc, "identified " + Percent(row.IdentifiedFractionEnvelope), 44, y + 30);
             dc.DrawRectangle(palette.DeNovo, null, new Rect(290, y + 34, 14, 14));
-            Label(dc, "calibrated de novo " + Percent(row.DeNovoFractionReferenceCalibrated), 314, y + 30);
+            Label(dc, "measured de novo envelope " + Percent(row.DeNovoFractionReferenceCalibrated), 314, y + 30);
             double identifiedWidth = (ActualWidth - 40) * row.IdentifiedFractionEnvelope / maximum;
             double deNovoWidth = (ActualWidth - 40) * row.DeNovoFractionReferenceCalibrated / maximum;
             if (identifiedWidth > 0) dc.DrawRectangle(palette.Identified, null, new Rect(20, y + 63, identifiedWidth, 22));

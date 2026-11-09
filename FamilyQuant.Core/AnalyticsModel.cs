@@ -52,9 +52,7 @@ namespace FamilyQuant
         /// method sums. Equal to <see cref="NativePeptideQuant.EnvelopeSum"/> for this peptide.</summary>
         public double Envelope { get; set; }
 
-        /// <summary>The identified-reference envelope model estimate used for de novo recovery. It is not
-        /// an empirical calibration; the directly observed six-window <see cref="Envelope"/> remains a
-        /// separate diagnostic.</summary>
+        /// <summary>Compatibility name for the measured isotope envelope used for recovery.</summary>
         public double ReferenceCalibratedEnvelope { get; set; }
 
         /// <summary>The family (its UserID) this peptide carries, or null when none was attributed.</summary>
@@ -158,7 +156,6 @@ namespace FamilyQuant
 
             var peptides = new List<AnalyticsPeptide>();
             List<NativePeptideQuant> nativePeptides = NativeQuantFractions.DedupToPeptides(rowList);
-            ReferenceEnvelopeEstimator.Apply(nativePeptides);
             foreach (NativePeptideQuant p in nativePeptides)
             {
                 string key = KeyOf(p.Run, p.Side, p.Sequence ?? string.Empty, p.Charge);

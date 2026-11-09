@@ -165,7 +165,7 @@ internal static partial class Program
                 foreach (int line in kind == ResultsExportKind.Peptides ? new[] { 452, 453, 454 } : new[] { 374, 375, 376 })
                     Fact(line, "IO refusal keeps existing files and gives the reason and specific recovery advice", refused, status);
             }
-            var incomplete = new AnalyticsViewModel(rows, new QuantManifest { PerRunTic = manifest.PerRunTic }, BuildSyntheticFcf());
+            var incomplete = new AnalyticsViewModel(rows, new QuantManifest { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method, PerRunTic = manifest.PerRunTic }, BuildSyntheticFcf());
             incomplete.ExportKind = ResultsExportKind.EvidencePack;
             string missingPack = Path.Combine(output, "incomplete-pack"); incomplete.Export(missingPack);
             foreach (int line in new[] { 412, 413 })
@@ -186,6 +186,7 @@ internal static partial class Program
 
     private static QuantManifest ResultsCompleteFixtureManifest(IReadOnlyList<QuantRow> rows) => new()
     {
+        DerivedMethod = NativeQuantFractions.Method,
         PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 },
         DeNovoOverlap = new DeNovoOverlapSummary(),
         DeNovoScoreDistribution = DeNovoScoreDistributionStudy.Build(Array.Empty<PeaksDeNovoRow>()),

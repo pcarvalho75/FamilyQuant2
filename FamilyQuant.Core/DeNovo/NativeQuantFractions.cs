@@ -50,8 +50,8 @@ namespace FamilyQuant.DeNovo
         /// the max-envelope one, so the envelope total is not biased upward by cherry-picking.</summary>
         public double EnvelopeSum { get; set; }
 
-        /// <summary>For de novo peptides, M+0 scaled by the identified envelope/M+0 ratio in the same
-        /// fixed neutral-mass stratum. For identified peptides this equals the measured envelope.</summary>
+        /// <summary>Compatibility name for the measured envelope on both evidence sides. The old
+        /// mass-bin model is used only by explicit historical comparison commands.</summary>
         public double ReferenceCalibratedEnvelope { get; set; }
 
         /// <summary>How many anchors collapsed into this peptide. 1 for a peptide sampled once; larger
@@ -163,7 +163,7 @@ namespace FamilyQuant.DeNovo
         public double IdentifiedFractionEnvelope => Tic > 0 ? IdentifiedEnvelope / Tic : 0.0;
         public double DeNovoFractionEnvelope => Tic > 0 ? DeNovoEnvelope / Tic : 0.0;
         public double DeNovoFractionReferenceCalibrated =>
-            Tic > 0 ? DeNovoEnvelopeReferenceCalibrated / Tic : 0.0;
+            Tic > 0 ? DeNovoEnvelope / Tic : 0.0;
         public double DeNovoFractionM0 => Tic > 0 ? DeNovoAreaM0 / Tic : 0.0;
 
         /// <summary>What DDA and de novo together recover: the identified envelope plus the de novo
@@ -171,11 +171,10 @@ namespace FamilyQuant.DeNovo
         /// twice on either side.</summary>
         public double RecoveredFractionEnvelope => Tic > 0 ? (IdentifiedEnvelope + DeNovoEnvelope) / Tic : 0.0;
 
-        /// <summary>A model-based recovery estimate: measured identified envelope plus de novo M+0
-        /// scaled by the identified envelope/M+0 relationship in fixed neutral-mass strata. It is not an
-        /// observed de novo envelope or an empirical calibration of identification accuracy.</summary>
+        /// <summary>Measured identified and de novo envelopes divided by the recorded RAW TIC.
+        /// The property name is retained for stored-project and export compatibility.</summary>
         public double RecoveredFractionReferenceCalibrated => Tic > 0
-            ? (IdentifiedEnvelope + DeNovoEnvelopeReferenceCalibrated) / Tic : 0.0;
+            ? (IdentifiedEnvelope + DeNovoEnvelope) / Tic : 0.0;
 
         public double RecoveredFractionM0 => Tic > 0 ? (IdentifiedAreaM0 + DeNovoAreaM0) / Tic : 0.0;
 
@@ -252,7 +251,7 @@ namespace FamilyQuant.DeNovo
         /// largest-M+0 representative per run, evidence side, canonical PTM-aware peptidoform and charge;
         /// it is not a precursor-mass cluster. Only a NEW computation stamps this: ProjectStore preserves
         /// whatever token a reopened project recorded.</summary>
-        public const string Method = "per-peptidoform-charge-maxm0-over-tic-v2";
+        public const string Method = "per-peptidoform-charge-maxm0-over-tic-v3-measured-envelope";
 
         /// <summary>One admitted store anchor before the deterministic per-peptidoform collapse.</summary>
         private sealed class DedupAnchor
@@ -386,6 +385,7 @@ namespace FamilyQuant.DeNovo
                     PrecursorMz = representative.PrecursorMz,
                     AreaM0 = representative.AreaM0,
                     EnvelopeSum = representative.EnvelopeSum,
+                    ReferenceCalibratedEnvelope = representative.EnvelopeSum,
                     UnderSampledArea = representative.UnderSampledArea,
                     UnderSampledIsEstimate = representative.UnderSampledIsEstimate,
                     AnchorCount = group.Value.Count,
@@ -423,7 +423,6 @@ namespace FamilyQuant.DeNovo
             if (perRunTic == null) throw new ArgumentNullException(nameof(perRunTic));
 
             List<NativePeptideQuant> peptides = DedupToPeptides(rows);
-            ReferenceEnvelopeEstimator.Apply(peptides);
 
             // Prevent cross-side double credit only for the same peptidoform context. I/L is folded and
             // fixed C(+57.02) notation is canonicalized, but non-fixed PTMs remain explicit and precursor
@@ -476,7 +475,7 @@ namespace FamilyQuant.DeNovo
                         }
                         f.DeNovoAreaM0 += p.AreaM0;
                         f.DeNovoEnvelope += p.EnvelopeSum;
-                        f.DeNovoEnvelopeReferenceCalibrated += p.ReferenceCalibratedEnvelope;
+                        f.DeNovoEnvelopeReferenceCalibrated += p.EnvelopeSum;
                         f.DeNovoPeptides++;
                         if (p.UnderSampledArea > 0)
                         {
@@ -705,14 +704,13 @@ namespace FamilyQuant.DeNovo
             manifest.Provenance["denovo_fraction_envelope"] = "derived";
             manifest.Provenance["recovered_fraction_envelope"] = "derived";
             manifest.Provenance["denovo_envelope_reference_calibrated"] =
-                ReferenceEnvelopeEstimator.ProvenanceLabel;
+                "measured:de novo isotope envelope from the max-M+0 representative";
             manifest.Provenance["denovo_fraction_reference_calibrated"] = "derived";
             manifest.Provenance["recovered_fraction_reference_calibrated"] =
-                "derived:model estimate: identified observed envelope + de novo M0 scaled by identified " +
-                "envelope/M0 in fixed mass bins, over measured TIC; not an empirical de novo calibration";
+                "derived:measured identified and de novo isotope envelopes over measured RAW TIC";
             manifest.Provenance["recovered_fraction_m0"] = "derived:sensitivity reading, not a formal lower bound";
             manifest.Provenance["recovered_fraction_envelope_unadjusted"] =
-                "derived:unadjusted six-window diagnostic, not the primary recovered estimate";
+                "derived:measured isotope envelope over measured RAW TIC";
 
             // The under-sampled block is not simply "derived": part of it can be an ESTIMATE. Whether it
             // actually is, on this store, is recorded per row in UnderSampledIsEstimate, and the label

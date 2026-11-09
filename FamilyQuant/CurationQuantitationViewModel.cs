@@ -55,7 +55,7 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
 
     /// <summary>The primary estimate of SCIENTIFIC_METHOD.md, named wherever the column is described.</summary>
     private const string FullXicQuantity =
-        "identified observed envelope plus the de novo identified-reference, mass-calibrated estimate";
+        "identified observed envelope plus the de novo measured envelope";
 
     /// <summary>The protein-set fingerprint of the attached quantitation's curation, or null.</summary>
     public string? FullXicProteinFingerprint => HasFullXic ? fullXicProteinFingerprint : null;

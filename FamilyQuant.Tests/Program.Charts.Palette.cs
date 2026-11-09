@@ -467,7 +467,6 @@ namespace FamilyQuant.Tests
                     ("peptide_evidence_overlap", new PeptideEvidenceOverlapChart(data, overlap)),
                     ("signal_by_run", new SignalByRunChart(data.Fractions)),
                     ("signal_uplift", new SignalUpliftChart(grouped)),
-                    ("reference_envelope_diagnostics", new ReferenceEnvelopeDiagnosticsChart(envelopeDiagnostics)),
                     ("reference_components", new ReferenceComponentsChart(reference, 70)),
                     ("family_signal_share", new FamilySignalShareChart(families, 10)),
                 };
@@ -547,11 +546,11 @@ namespace FamilyQuant.Tests
             });
             Check("the presentation evidence pack writes the complete documented base and variant figure set",
                 evidence.FigurePaths.Select(Path.GetFileName).SequenceEqual(expectedEvidenceFigures)
-                && evidence.FigurePaths.Count == 16,
+                && evidence.FigurePaths.Count == 15,
                 string.Join(", ", evidence.FigurePaths.Select(Path.GetFileName)));
-            Check("the evidence pack includes the consolidation and model-diagnostics PNGs",
+            Check("T3 the figure set keeps consolidation and removes the model-diagnostics PNG",
                 evidence.FigurePaths.Any(p => Path.GetFileName(p) == PresentationFigures.DeNovoConsolidationFile)
-                && evidence.FigurePaths.Any(p => Path.GetFileName(p) == PresentationFigures.ReferenceEnvelopeDiagnosticsFile)
+                && !evidence.FigurePaths.Any(p => Path.GetFileName(p) == PresentationFigures.ReferenceEnvelopeDiagnosticsFile)
                 && evidence.FigurePaths.Where(p =>
                     Path.GetFileName(p) == PresentationFigures.DeNovoConsolidationFile
                     || Path.GetFileName(p) == PresentationFigures.ReferenceEnvelopeDiagnosticsFile)

@@ -328,14 +328,10 @@ namespace FamilyQuant.DeNovo
                 .GroupBy(c => ScanKey(c.Run, c.Scan), StringComparer.OrdinalIgnoreCase)
                 .ToDictionary(g => g.Key, g => g.Count(), StringComparer.OrdinalIgnoreCase);
 
-            // Fit the exact primary de novo assignment model once from the same quant table. A row's
-            // assigned value remains at precursor grain; presentation totals must still apply the
+            // A row's measured value remains at precursor grain; presentation totals apply the
             // documented peptide representative collapse before summing it.
             List<NativePeptideQuant> peptideRepresentatives =
                 NativeQuantFractions.DedupToPeptides(quants);
-            ReferenceEnvelopeDiagnostics reference = ReferenceEnvelopeEstimator.Evaluate(
-                peptideRepresentatives, operation, "spectrum-reference-validation");
-            ReferenceEnvelopeEstimator.Apply(peptideRepresentatives);
             Dictionary<string, List<NativePeptideQuant>> identifiedByIdentity = peptideRepresentatives
                 .Where(p => string.Equals(p.Side, NativeQuantFractions.SideIdentified,
                     StringComparison.Ordinal))
@@ -368,7 +364,7 @@ namespace FamilyQuant.DeNovo
                 {
                     operation?.ThrowIfCancellationRequested();
                     output.Add(ToRow(ordered[i], i + 1, hypothesesPerScan[scanGroup.Key],
-                        reference, familyLabels, familyAttribution,
+                        familyLabels, familyAttribution,
                         rawByScan.TryGetValue(scanGroup.Key, out RawScanPrecursorMetadata? raw)
                             ? raw : null,
                         creditedByIdentity,
@@ -504,7 +500,7 @@ namespace FamilyQuant.DeNovo
         }
 
         private static SpectrumComparisonRow ToRow(Cluster cluster, int hypothesisIndex,
-            int hypothesesInScan, ReferenceEnvelopeDiagnostics reference,
+            int hypothesesInScan,
             IReadOnlyDictionary<int, string>? familyLabels,
             FamilyQuant.PeptideFamilyAttribution? familyAttribution,
             RawScanPrecursorMetadata? raw,
@@ -536,20 +532,10 @@ namespace FamilyQuant.DeNovo
             string primaryBasis = string.Empty;
             if (quant != null)
             {
-                if (string.Equals(quant.Side, NativeQuantFractions.SideDeNovo, StringComparison.Ordinal))
-                {
-                    int bin = ReferenceEnvelopeEstimator.BinOf(
-                        AnalyticsBuilder.MonoisotopicMass(quant.PrecursorMz, quant.Charge));
-                    double ratio = reference.Bins.FirstOrDefault(x => x.Bin == bin)?.EnvelopeToM0Ratio
-                        ?? reference.PooledEnvelopeToM0Ratio;
-                    primary = quant.QuantifiedAreaM0 * Math.Max(1.0, ratio);
-                    primaryBasis = ReferenceEnvelopeEstimator.ProvenanceLabel;
-                }
-                else
-                {
-                    primary = quant.EnvelopeSum;
-                    primaryBasis = "observed:identified credited envelope";
-                }
+                primary = quant.EnvelopeSum;
+                primaryBasis = string.Equals(quant.Side, NativeQuantFractions.SideDeNovo, StringComparison.Ordinal)
+                    ? "observed:de novo measured envelope"
+                    : "observed:identified measured envelope";
             }
 
             IReadOnlyList<int> familyIds = quant == null

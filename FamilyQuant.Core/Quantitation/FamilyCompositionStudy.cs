@@ -92,17 +92,7 @@ namespace FamilyQuant
         private static double PrimaryCredit(FamilyAttributedPeptide assigned, FamilyEnvelopeQuantRow family,
             SharedPeptidePolicy policy, double factor)
         {
-            NativePeptideQuant peptide = assigned.Peptide;
-            if (string.Equals(peptide.Side, NativeQuantFractions.SideIdentified, StringComparison.Ordinal))
-                return peptide.EnvelopeSum * factor;
-            double calibrated = policy switch
-            {
-                SharedPeptidePolicy.FamilyUnique => family.UniqueDeNovoEnvelopeReferenceCalibrated,
-                SharedPeptidePolicy.SplitEqually => family.SplitDeNovoEnvelopeReferenceCalibrated,
-                _ => family.DeNovoEnvelopeReferenceCalibrated,
-            };
-            // Preserve the existing aggregate's legacy fallback, including mixed zero/nonzero estimates.
-            return (calibrated > 0 ? peptide.ReferenceCalibratedEnvelope : peptide.EnvelopeSum) * factor;
+            return assigned.Peptide.EnvelopeSum * factor;
         }
 
         private static FamilySignalBreakdown CloseParts(int family, double total, IEnumerable<FamilySignalPart> source)

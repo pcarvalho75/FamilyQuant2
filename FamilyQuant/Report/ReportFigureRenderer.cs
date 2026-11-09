@@ -69,7 +69,7 @@ public static class ReportFigureRenderer
         Add(ReportSectionIds.Quality, AnalyticsFigures.PercentIonCurrentFile, "Ion current by mass",
             "Signal in each mass interval divided by the recorded RAW total ion current. Missing TIC is unavailable.", () => new PercentIonCurrentChart(data.Peptides, data.Grouped?.Tic ?? 0));
         Add(ReportSectionIds.Quality, AnalyticsFigures.RecoveryFile, "Recovery and M+0 sensitivity",
-            "The chart separates the primary reference-calibrated estimate, M+0 sensitivity and directly observed diagnostic bases.", () => new RecoveryChart(data.Fractions, data.Grouped));
+            "The chart compares M+0 only with the measured envelope for identified and de novo peptides.", () => new RecoveryChart(data.Fractions, data.Grouped));
         var runPages = data.Fractions.Chunk(ReportSignalByRunChart.RunsPerPage).DefaultIfEmpty(Array.Empty<NativeRunFraction>()).ToArray();
         for (int page = 0; page < runPages.Length; page++)
         {
@@ -78,14 +78,14 @@ public static class ReportFigureRenderer
             string file = page == 0 ? PresentationFigures.SignalByRunFile
                 : Path.GetFileNameWithoutExtension(PresentationFigures.SignalByRunFile) + "_" + (page + 1).ToString(CultureInfo.InvariantCulture) + ".png";
             Add(ReportSectionIds.Results, file, "Signal by run",
-                "Observed identified envelope and reference-calibrated de novo estimate each use that run's TIC denominator. "
+                "Observed identified envelope and measured de novo envelope each use that run's TIC denominator. "
                     + "Run indices follow acquisition order in the Signal by run table and companion workbook, where complete run names are retained. Missing TIC is unavailable.",
                 () => new ReportSignalByRunChart(pageRuns, runOffset),
                 new CaptionNumber("Acquisition runs", data.Fractions.Count, "runs", "0"));
             charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportPrintChart.LayoutHeight };
         }
         var pooledFacts = data.Grouped is { Tic: > 0 } pooled
-            ? new[] { new CaptionNumber("Pooled primary recovery estimate", 100 * pooled.RecoveredFractionReferenceCalibrated, "%"),
+            ? new[] { new CaptionNumber("Pooled measured envelope recovery", 100 * pooled.RecoveredFractionReferenceCalibrated, "%"),
                 new CaptionNumber("Pooled M+0 recovery", 100 * pooled.RecoveredFractionM0, "%") }
             : new[] { new CaptionNumber("Pooled records available", data.Grouped == null ? 0 : 1, "records", "0") };
         Add(ReportSectionIds.Results, PresentationFigures.SignalUpliftFile, "Signal recovery components",
@@ -207,15 +207,6 @@ public static class ReportFigureRenderer
             else Missing(ReportSectionIds.Quality, "De novo alternative triage");
         }
         else Missing(ReportSectionIds.Quality, "Database search concordance and alternative triage");
-        if (manifest.ReferenceEnvelopeModelDiagnostics is { } diagnostics)
-        {
-            diagnostics.Validate();
-            Add(ReportSectionIds.Quality, PresentationFigures.ReferenceEnvelopeDiagnosticsFile, "Reference envelope diagnostics",
-                "Stored model support and error diagnostics for the reference-calibrated envelope estimate.", () => new ReferenceEnvelopeDiagnosticsChart(diagnostics),
-                new("Identified reference peptides", diagnostics.IdentifiedPeptides, "peptides", "0"),
-                new("Cross-validated peptides", diagnostics.CrossValidatedPeptides, "peptides", "0"));
-        }
-        else Missing(ReportSectionIds.Quality, "Reference envelope diagnostics");
         if (manifest.PresentationIdentitySweep.Count > 0)
         {
             int components = ReferenceComponentSummary.FromCuration(curation).AllComponents;
@@ -279,8 +270,8 @@ public static class ReportFigureRenderer
         {
             DeNovoVariantComparison.ValidateTalkVariantSet(manifest.PresentationDeNovoVariants);
             Add(ReportSectionIds.Sensitivity, PresentationFigures.DeNovoVariantComparisonFile, "Stored source variants",
-                "The source variants actually computed and recorded in this project. Red whiskers compare fixed-bin and pooled-ratio envelope models; "
-                    + "they show model sensitivity, not run-to-run SD or a confidence interval.", () => new DeNovoVariantComparisonChart(manifest.PresentationDeNovoVariants),
+                "The source variants actually computed and recorded in this project. "
+                    + "Each source keeps its recorded confidence rule.", () => new DeNovoVariantComparisonChart(manifest.PresentationDeNovoVariants),
                 new CaptionNumber("Stored source variants", manifest.PresentationDeNovoVariants.Count, "variants", "0"));
             var comparison = DeNovoTalkComparison.Build(manifest.PresentationDeNovoVariants);
             Add(ReportSectionIds.Sensitivity, PresentationFigures.DeNovoTalkComparisonFile, "Source effect comparison",
