@@ -20,8 +20,9 @@ public sealed partial class CurationViewModel
     public string EvidenceGroupingStepStatus => HasAppliedEvidenceGrouping ? "Applied" : "Not yet";
     public string FamilyWorldStepStatus => HasIncompletePanel ? "Panel incomplete; Retry panel first" : HasStoredFamilyWorld ? FamilyWorldState : "Not yet";
     public string FullXicStepStatus => HasComputedFullXic ? "Computed" : "Not yet";
-    public int NextGroupingStep => !HasStoredEvidence || HasIncompletePanel ? 1 : !HasAppliedEvidenceGrouping ? 2
-        : !HasStoredFamilyWorld ? 3 : !HasComputedFullXic ? 4 : 0;
+    public int NextGroupingStep => Document.FamilyPanel == null && !HasAppliedEvidenceGrouping ? 0
+        : !HasStoredEvidence || HasIncompletePanel ? 1 : !HasAppliedEvidenceGrouping ? 2
+        : !HasStoredFamilyWorld ? 3 : !HasComputedFullXic ? 4 : -1;
 
     public void SetQuantManifest(QuantManifest? manifest)
     {

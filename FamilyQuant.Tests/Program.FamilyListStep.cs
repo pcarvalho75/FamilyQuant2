@@ -47,6 +47,11 @@ internal static partial class Program
             var button = (Button)control.FindName("ButtonImportFamilyList");
             var listStatus = (TextBlock)control.FindName("TextBlockFamilyListStatus");
             var groupingStatus = (TextBlock)control.FindName("TextBlockEvidenceGroupingStatus");
+            var fetch = (Button)control.FindName("ButtonFetchDomains");
+            var primary = control.FindResource("PrimaryButton");
+            Check("missing list before grouping highlights optional step 0 and keeps Fetch evidence available",
+                control.ViewModel.NextGroupingStep == 0 && ReferenceEquals(button.Style, primary)
+                && !ReferenceEquals(fetch.Style, primary) && fetch.IsEnabled);
             Check("optional step 0 precedes Fetch evidence and explains the import change", button.IsVisible
                 && button.TranslatePoint(new Point(), main).Y < ((Button)control.FindName("ButtonFetchDomains")).TranslatePoint(new Point(), main).Y
                 && button.ToolTip is string tip && tip.Contains("File > Import family list", StringComparison.Ordinal)
@@ -76,12 +81,24 @@ internal static partial class Program
             PumpDispatcher();
             Check("import refreshes the list name and count and clears the missing-list notice",
                 listStatus.Text == "Fixture list (2 families)" && groupingStatus.Text == "Not yet");
+            Check("an imported list moves the highlight to Fetch evidence", control.ViewModel.NextGroupingStep == 1
+                && ReferenceEquals(fetch.Style, primary) && !ReferenceEquals(button.Style, primary));
             if (output != null) ScreenHarness.Save(main, Path.Combine(output, "family-list.png"), 1366, 820);
             control.ViewModel.Undo(); PumpDispatcher();
             Check("Undo restores the missing-list status without changing protein grouping or values",
                 listStatus.Text == "No family list" && groupingStatus.Text.Contains("No family list", StringComparison.Ordinal)
                 && control.fcf.ToJsonText() == before);
             Check("Help starts the guided grouping order with optional import", HelpContent.GroupingOrder.StartsWith("0. Import family list (optional):", StringComparison.Ordinal));
+            control.fcf.EvidenceSource = new Evidence.EvidenceProvenance { Provider = "UniProt" };
+            control.ViewModel.RefreshRows(); PumpDispatcher();
+            Check("downloaded evidence alone still suggests the optional import", control.ViewModel.NextGroupingStep == 0
+                && ReferenceEquals(button.Style, primary) && fetch.IsEnabled);
+            control.fcf.EvidenceRecipe = new Evidence.EvidenceRecipe();
+            control.ViewModel.RefreshRows(); PumpDispatcher();
+            Check("applied grouping with no list follows required steps and retains No family list",
+                control.ViewModel.NextGroupingStep == 3 && !ReferenceEquals(button.Style, primary)
+                && ReferenceEquals(((Button)control.FindName("ButtonFetchFamilyWorld")).Style, primary)
+                && listStatus.Text == "No family list");
         }
         finally { main.Close(); MainWindow.SelectOpenPathOverride = previousOpen; PumpDispatcher(); }
     }

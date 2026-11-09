@@ -19,10 +19,10 @@ public partial class ClusterGenerationControl
             + (panel.Families.Count == 1 ? " family)" : " families)");
         TextBlockEvidenceGroupingStatus.Text = ViewModel.EvidenceGroupingStepStatus
             + (panel == null ? ". No family list; step 0 is optional." : "");
-        var steps = new[] { ButtonFetchDomains, ButtonEvidenceGrouping, ButtonFetchFamilyWorld, ButtonComputeFullXic };
+        var steps = new[] { ButtonImportFamilyList, ButtonFetchDomains, ButtonEvidenceGrouping, ButtonFetchFamilyWorld, ButtonComputeFullXic };
         for (int index = 0; index < steps.Length; index++)
         {
-            if (ViewModel.NextGroupingStep == index + 1) steps[index].SetResourceReference(StyleProperty, "PrimaryButton");
+            if (ViewModel.NextGroupingStep == index) steps[index].SetResourceReference(StyleProperty, "PrimaryButton");
             else steps[index].ClearValue(StyleProperty);
         }
     }

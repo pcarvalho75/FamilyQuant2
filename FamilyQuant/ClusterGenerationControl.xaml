@@ -120,7 +120,7 @@
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="0" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
                             <Button Grid.Column="1" x:Name="ButtonImportFamilyList" Content="Import family list (optional)" Click="ButtonImportFamilyList_Click"
-                                    ToolTip="Opens File > Import family list to choose the families you want to review before grouping. A confirmed import changes the project in one Undo step; finish the current operation to enable import."/>
+                                    ToolTip="Opens File > Import family list to choose the families you want to review before grouping; suggested until a list exists or evidence grouping has been applied, while Fetch evidence stays available. A confirmed import changes the project in one Undo step; finish the current operation to enable import."/>
                         </Grid>
                         <TextBlock x:Name="TextBlockFamilyListStatus" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8" TextWrapping="Wrap"/>
                         <Grid>
