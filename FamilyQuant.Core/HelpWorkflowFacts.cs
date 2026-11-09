@@ -44,7 +44,7 @@ public static class HelpWorkflowFacts
         "Minimum points per peak ranges from 1 to 20 and is saved with the project; default 3 requires at least one real detection, while 5 requires at least three because two padding points are counted. Setting 1 switches the point-count gate off and restores the legacy height rule.\n\n" +
         "The displayed isotope ceiling, minimum points, extraction window and MS1 tolerance are the next computation's settings. Window and MS1 tolerance stay fixed to the production values used for the stored quants.\n\n" +
         "The spectrum comparison CSV is written only after a successful computation and contains the same rows as the spectrum table. Before a completed result exists there is no spectrum table to show; complete full XIC first, then inspect its exact result.\n\n" +
-        "Status reports progress, per-run counts and refusals; failed validation means nothing was computed. A missing or unreachable file is named in the refusal so its path can be corrected.\n\n";
+        "Before RAW extraction starts, Quantify names any RAW run with no calls in the selected de novo sources and repeats the warning in its completion line. The Run summary lists credited de novo peptide features per computed run after source filtering, precursor reconciliation and peptide deduplication. Status also reports progress and refusals; failed validation means nothing was computed, and a missing or unreachable file is named so its path can be corrected.\n\n";
 
     public const string DeNovo =
         "DE NOVO WORKFLOW DETAILS\n" +

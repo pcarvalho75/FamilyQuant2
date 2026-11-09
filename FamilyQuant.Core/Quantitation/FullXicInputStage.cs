@@ -21,6 +21,7 @@ namespace FamilyQuant
         internal required FullXicSourceInput Sources { get; init; }
         internal required IReadOnlyList<string> Runs { get; init; }
         internal required FullXicRunMatch Match { get; init; }
+        internal List<string> DeNovoSourceWarnings { get; init; } = new();
     }
 
     /// <summary>Reads inputs, applies source rules and refuses unmatched acquisitions before extraction.</summary>
@@ -93,11 +94,27 @@ namespace FamilyQuant
                 throw new FullXicNoMatchedRunsException(match,
                     match.RefusalMessage(rawDirectory, identificationsName, deNovoDirectory != null, only));
 
+            var warnings = new List<string>();
+            if (deNovoDirectory != null)
+            {
+                var sourceRuns = deNovoImport.AllSourceRows.Select(r => DeNovoReconciler.NormalizeRunName(r.RunName))
+                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
+                foreach (string run in rawByRun.Keys.Where(r => (only == null || only.Contains(r)) && !sourceRuns.Contains(r))
+                    .OrderBy(r => r, StringComparer.OrdinalIgnoreCase))
+                {
+                    string warning = "No de novo calls in the selected source(s) for RAW run " + run + ".";
+                    warnings.Add(warning);
+                    progress?.Invoke(warning);
+                    operation?.Report("denovo-run-warning", warning);
+                }
+            }
+
             return new FullXicInput
             {
                 RawDirectory = rawDirectory, Sepr2Path = sepr2Path, RawByRun = rawByRun,
                 Psms = psms, PsmsByRun = psmsByRun, Selections = deNovoSelections,
                 Sources = deNovoImport, Runs = runs, Match = match,
+                DeNovoSourceWarnings = warnings,
             };
         }
 
@@ -111,6 +128,8 @@ namespace FamilyQuant
             IReadOnlyList<DeNovoSourceSelection> deNovoSelections = input.Selections;
             var result = new FullXicComputeResult();
             result.Notes.AddRange(match.MismatchNotes(rawDirectory, identificationsName));
+            result.DeNovoSourceWarnings.AddRange(input.DeNovoSourceWarnings);
+            result.Notes.AddRange(input.DeNovoSourceWarnings);
             DateTime now = DateTime.UtcNow;
 
             var manifest = new QuantManifest

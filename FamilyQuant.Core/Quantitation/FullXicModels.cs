@@ -126,6 +126,9 @@ namespace FamilyQuant
         /// parsed.</summary>
         public List<string> Notes { get; set; } = new List<string>();
 
+        /// <summary>Selected-source runs missing calls, reported before any acquisition extraction.</summary>
+        public List<string> DeNovoSourceWarnings { get; set; } = new List<string>();
+
         /// <summary>
         /// The headline the Compute window shows FIRST: per run, the share of the TIC the quantified
         /// peptides explain, then one sentence placing the isotope-series diagnostic beside it. Without
