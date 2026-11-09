@@ -111,6 +111,7 @@ internal static partial class Program
                 var model = (GroupingReviewViewModel)window.DataContext;
                 try
                 {
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher();
                     var box = (TextBox)window.FindName("TaskScopeBox");
                     box.Text = narrow; PumpDispatcher(); FinishReviewWork(() => model.ScopePreviewCompletion);

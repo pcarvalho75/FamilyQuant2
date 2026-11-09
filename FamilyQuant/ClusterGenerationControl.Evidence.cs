@@ -113,7 +113,7 @@ public partial class ClusterGenerationControl
             {
                 if (ViewModel.UnlockFamilies(families) != families.Count) throw new InvalidOperationException("The family locks changed. Reopen the grouping review.");
                 UpdateGUI();
-            })) { Owner = owner };
+            }), hasFamilyList: fcf.FamilyPanel != null) { Owner = owner };
         window.AlignmentSource = highlighted => FamilyQuant.Evidence.Alignment.AlignmentCandidates.Find(fcf, session.Proposal, highlighted);
         if (importedFamilyChecklistRequested) window.RequestFamilyChecklist();
         window.ShowDialog();

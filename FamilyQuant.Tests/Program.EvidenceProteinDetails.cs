@@ -37,6 +37,7 @@ internal static partial class Program
                 };
                 try
                 {
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher(); window.UpdateLayout();
                     var model = ((GroupingReviewViewModel)window.DataContext).Evidence!;
                     var grid = (DataGrid)window.FindName("evidenceGrid");

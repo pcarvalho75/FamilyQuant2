@@ -69,6 +69,7 @@ internal static class GroupingReviewScreens
                 }, null, "Example", "", KeywordMatch.Any, null, null);
                 var fixture = new SuperClusterPreviewWindow(keyword, Fixture(), null,
                     _ => "Presentation fixture, no scientific result\nFamily\tCarriers\tComplete\nSupplied family 0\t2\t3\nSupplied family 1\t1\t4");
+                fixture.ShowAllOptions = true;
                 var model = (GroupingReviewViewModel)fixture.DataContext;
                 model.MotifPattern = "user supplied pattern";
                 var previousContext = SynchronizationContext.Current;

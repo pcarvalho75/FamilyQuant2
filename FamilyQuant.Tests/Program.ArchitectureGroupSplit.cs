@@ -70,6 +70,7 @@ internal static partial class Program
                     Check(theme + " clearing the bulk choice clears every group", model.Capture().All(c => !c.Split));
                     var tabs = (TabControl)window.FindName("evidenceTabs");
                     tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(tab => tab.Content is ArchitectureReviewControl);
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher();
                     var control = (ArchitectureReviewControl)window.FindName("architectureReview");
                     var table = (DataGrid)control.FindName("groupGrid");

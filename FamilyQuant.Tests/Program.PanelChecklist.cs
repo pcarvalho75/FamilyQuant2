@@ -99,6 +99,7 @@ internal static partial class Program
                     { Width = size.Item1, Height = size.Item2, ShowInTaskbar = false, ShowActivated = false };
                 try
                 {
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher();
                     var tab = (TabItem)window.FindName("PanelChecklistTab"); tab.IsSelected = true;
                     var grid = (DataGrid)window.FindName("PanelChecklistGrid");

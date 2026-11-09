@@ -25,6 +25,7 @@ internal static partial class Program
             evidenceMode: true, discoverTask: _ => Task.FromResult(facts));
         try
         {
+            window.ShowAllOptions = true;
             window.Show(); PumpDispatcher();
             var model = (GroupingReviewViewModel)window.DataContext;
             string scope = model.ScopeText;

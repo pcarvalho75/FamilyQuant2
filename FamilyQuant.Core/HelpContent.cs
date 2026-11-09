@@ -273,8 +273,10 @@ namespace FamilyQuant
             sb.AppendLine("stored world to populate Database gap, where credited tags can suggest FASTA additions.");
             sb.AppendLine();
             sb.AppendLine("Group by evidence opens the Evidence tab of Review grouping. Confirm the scope,");
-            sb.AppendLine("then review the supplied families, reasons, flags and protein ticks before Apply");
-            sb.AppendLine("grouping; the review's Help explains its architecture, motif and left-out views.");
+            sb.AppendLine("then review the families, flags, protein ticks and Selected protein details in Simple view.");
+            sb.AppendLine("Show all options opens Keywords, all evidence tabs, full protein columns and extra tools;");
+            sb.AppendLine("it keeps the scope and pending choices. With an imported family list, Family checklist");
+            sb.AppendLine("opens that review in one click. Apply grouping commits the reviewed choices.");
             sb.AppendLine("If the project has no stored UniProt evidence, Download and continue runs Fetch evidence");
             sb.AppendLine("before opening the review; Cancel leaves the project unchanged. If no reviewed accession");
             sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");

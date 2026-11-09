@@ -69,6 +69,7 @@ internal static partial class Program
                     { Width = size.Item1, Height = size.Item2, ShowInTaskbar = false, ShowActivated = false };
                 try
                 {
+                    review.ShowAllOptions = true;
                     review.Show(); PumpDispatcher(); ((TabItem)review.FindName("PanelChecklistTab")).IsSelected = true;
                     var state = (GroupingReviewViewModel)review.DataContext;
                     var button = (Button)review.FindName("MatchPanelNamesButton");

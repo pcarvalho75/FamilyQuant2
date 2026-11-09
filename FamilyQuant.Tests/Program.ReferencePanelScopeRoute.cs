@@ -112,6 +112,7 @@ internal static partial class Program
             { ShowActivated = false, ShowInTaskbar = false };
         try
         {
+            window.ShowAllOptions = true;
             window.Show(); PumpDispatcher();
             var model = (GroupingReviewViewModel)window.DataContext;
             Check("Z15a6 Fetch missing panel is disabled after the full route", !model.CanFetchMissingPanel

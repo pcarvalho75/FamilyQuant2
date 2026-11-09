@@ -43,6 +43,7 @@ internal static partial class Program
                         WindowStartupLocation = WindowStartupLocation.Manual, ShowInTaskbar = false, ShowActivated = false };
                 try
                 {
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher();
                     var text = window.FindName("TextBlockQueryCoverageRule") as TextBlock;
                     Check(theme + " evidence window shows plain coverage words with the exact definition in its tooltip",

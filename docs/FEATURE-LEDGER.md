@@ -5781,6 +5781,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2225**; OPEN r
 
 ## Added contracts after the frozen source
 
+| FQ2-SIMPLE-GROUPING-VIEW | MAP | T12 opens evidence Review grouping in Simple view: fixed database/scope actions, family table, taller four-column Proteins and details, and tick actions. Show all options retains Keywords, every evidence tab, full protein columns, all hand-placement/alignment/profile actions, count tables, motif and panel fetch. Imported family lists have a one-click Family checklist shortcut and status reminder. Switching views preserves pending choices; Group by keywords opens the keyword tools | test:SimpleGroupingTests; test:ScopeReachabilityTests; test:EvidenceReviewFamilyLayoutTests |
+
 | FQ2-GROUPING-OPTIONAL-FAMILY-LIST | ADD | T17 adds optional Import family list as step 0 in Curate families, calling the existing File import wizard. Its name and family count refresh after import and Undo; Group by evidence names a missing list in its status. The four required grouping steps and their functions remain in order | test:FamilyListStepTests |
 
 These are additions, not replacements or drops of frozen FQ15 observations. The named DefaultSuite

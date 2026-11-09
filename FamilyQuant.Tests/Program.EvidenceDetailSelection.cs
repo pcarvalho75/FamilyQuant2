@@ -36,6 +36,7 @@ internal static partial class Program
                     { Width = 1366, Height = 820, ShowInTaskbar = false, ShowActivated = false };
                 try
                 {
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher();
                     var grid = (DataGrid)window.FindName("evidenceGrid");
                     var model = ((GroupingReviewViewModel)window.DataContext).Evidence!;

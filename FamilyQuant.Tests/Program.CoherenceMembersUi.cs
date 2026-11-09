@@ -54,6 +54,7 @@ internal static partial class Program
                 Window? roster = null;
                 try
                 {
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher();
                     var model = ((GroupingReviewViewModel)window.DataContext).Evidence!;
                     var grid = (DataGrid)window.FindName("evidenceGrid"); grid.SelectedItem = model.Proteins.Last(); grid.ScrollIntoView(grid.SelectedItem); PumpDispatcher();

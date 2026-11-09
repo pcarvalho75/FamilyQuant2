@@ -52,6 +52,7 @@ internal static partial class Program
                     { ShowActivated = false, ShowInTaskbar = false };
                 try
                 {
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher(); var model = (GroupingReviewViewModel)window.DataContext;
                     model.ScopeText = "\"Chosen phase\", \"Later phase\"";
                     FinishReviewWork(model.UpdateProposalAsync);

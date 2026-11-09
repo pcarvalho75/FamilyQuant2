@@ -25,7 +25,7 @@ internal static partial class Program
                 Enumerable.Range(24, 8).Select(i => new ReviewArchitectureUndeterminedInput(i, "Supplied placement refusal")).ToArray()) });
     }
 
-    internal static SuperClusterPreviewWindow ReviewLayoutWindow(int width = 1366, int height = 768)
+    internal static SuperClusterPreviewWindow ReviewLayoutWindow(int width = 1366, int height = 768, bool allOptions = true)
     {
         var input = ReviewLayoutFixture();
         return new SuperClusterPreviewWindow(new SuperClusterPreview(new List<FastaItemExtended>(), null,
@@ -37,7 +37,7 @@ internal static partial class Program
         {
             Width = width, Height = height, Left = -30000, Top = -30000,
             WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false,
-            WindowStyle = WindowStyle.None, ResizeMode = ResizeMode.NoResize
+            WindowStyle = WindowStyle.None, ResizeMode = ResizeMode.NoResize, ShowAllOptions = allOptions
         };
     }
 
@@ -58,16 +58,17 @@ internal static partial class Program
         {
             foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
             foreach (var size in new[] { (Width: 1024, Height: 768), (Width: 1366, Height: 768), (Width: 1920, Height: 1080) })
+            foreach (bool allOptions in new[] { false, true })
             {
                 Themes.ThemeManager.Apply(theme);
                 var input = ReviewLayoutFixture();
-                var window = ReviewLayoutWindow(size.Width, size.Height);
+                var window = ReviewLayoutWindow(size.Width, size.Height, allOptions);
                 try
                 {
                     window.Show(); PumpDispatcher(); window.UpdateLayout();
                     var grid = (DataGrid)window.FindName("familyGrid");
                     grid.ScrollIntoView(grid.Items[0]); PumpDispatcher(); window.UpdateLayout();
-                    string label = theme + " " + size.Width;
+                    string label = theme + " " + size.Width + (allOptions ? " full" : " Simple");
                     var flags = (DataGrid)window.FindName("evidenceGrid");
                     var flagText = WalkTree(flags).OfType<TextBlock>().First(t => t.Text == "Longer than reviewed members");
                     Check(label + " hovering the flag text shows guidance and original evidence detail",
@@ -81,10 +82,11 @@ internal static partial class Program
                         && grid.Columns.Single(c => (string)c.Header == "Reviewed").ActualWidth >= 90);
                     if (output != null)
                     {
-                        string path = Path.Combine(output, theme.ToString().ToLowerInvariant(), size.Width + "x" + size.Height, "families.png");
+                        string path = Path.Combine(output, theme.ToString().ToLowerInvariant(), size.Width + "x" + size.Height, allOptions ? "families.png" : "families-simple.png");
                         Directory.CreateDirectory(Path.GetDirectoryName(path)!); ScreenHarness.Save(window, path, size.Width, size.Height);
                     }
                     var tabs = (TabControl)window.FindName("evidenceTabs");
+                    window.ShowAllOptions = true;
                     tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Architecture");
                     PumpDispatcher(); window.UpdateLayout();
                     var architecture = (ArchitectureReviewControl)window.FindName("architectureReview");

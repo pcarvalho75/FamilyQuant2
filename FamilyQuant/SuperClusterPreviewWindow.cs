@@ -15,6 +15,10 @@ namespace FamilyQuant
     public partial class SuperClusterPreviewWindow : Window
     {
         private readonly GroupingReviewViewModel model;
+        public static readonly DependencyProperty ShowAllOptionsProperty = DependencyProperty.Register(nameof(ShowAllOptions), typeof(bool),
+            typeof(SuperClusterPreviewWindow), new PropertyMetadata(false, (owner, _) => ((SuperClusterPreviewWindow)owner).UpdateReviewView()));
+        public bool ShowAllOptions { get => (bool)GetValue(ShowAllOptionsProperty); set => SetValue(ShowAllOptionsProperty, value); }
+        private readonly bool hasFamilyList;
         private List<SortDescription> sorts = new();
         public bool Confirmed { get; private set; }
         public EvidenceReviewSelection? EvidenceSelection { get; private set; }
@@ -34,12 +38,13 @@ namespace FamilyQuant
             Func<string, Panels.PanelConfirmedEvidenceMatches, EvidenceReviewInput>? confirmPanelMatches = null,
             Func<string, FamilyQuant.Operations.OperationContext, Task>? fetchMissingPanel = null, Func<string, string>? panelCoverage = null, Func<string, bool>? panelCovered = null,
             Func<string>? fullPanelRequirement = null,
-            Func<string, EvidenceReviewInput>? unlockEvidenceFamilies = null)
+            Func<string, EvidenceReviewInput>? unlockEvidenceFamilies = null, bool hasFamilyList = false)
         {
             InitializeComponent();
             this.createMatchContext = createMatchContext;
             model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask, confirmPanelLinks, discoverTaskWithProgress,
                 previewScope, addToFamily, removeFromFamily, updateManualChoices, confirmPanelMatches, fetchMissingPanel, panelCoverage, panelCovered, fullPanelRequirement, unlockEvidenceFamilies);
+            this.hasFamilyList = hasFamilyList;
             Loaded += async (_, _) => await DiscoverInitialTaskAsync();
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
@@ -56,9 +61,53 @@ namespace FamilyQuant
             {
                 if (args.PropertyName is nameof(GroupingReviewViewModel.CanConfirm) or nameof(GroupingReviewViewModel.ApplyHint))
                     UpdateApplyToolTip();
+                if (args.PropertyName is nameof(GroupingReviewViewModel.ModeIndex) or nameof(GroupingReviewViewModel.Evidence)) UpdateReviewView();
             };
             model.Keyword.Refresh();
             UpdateApplyToolTip();
+            ShowAllOptions = model.ModeIndex == 0;
+            UpdateReviewView();
+        }
+        private void UpdateReviewView()
+        {
+            if (model == null) return;
+            bool full = ShowAllOptions;
+            if (!full && model.ModeIndex != 1) { model.ModeIndex = 1; return; }
+            ReviewModeTabs.Items.OfType<TabItem>().First().Visibility = full ? Visibility.Visible : Visibility.Collapsed;
+            foreach (var tab in evidenceTabs.Items.OfType<TabItem>().Skip(1))
+                tab.Visibility = full && (tab != PanelChecklistTab && tab.Header as string != "Panel links" || model.Evidence?.HasPanelRules == true)
+                    ? Visibility.Visible : Visibility.Collapsed;
+            if (!full) evidenceTabs.SelectedIndex = 0;
+            foreach (var button in new[] { alignSelectedButton, addFamilyButton, removeFamilyButton })
+                button.Visibility = full ? Visibility.Visible : Visibility.Collapsed;
+            for (int index = 0; index < evidenceGrid.Columns.Count; index++)
+            {
+                var column = evidenceGrid.Columns[index];
+                if (full) column.DisplayIndex = index;
+                string header = column.Header as string ?? "";
+                column.Visibility = full || header is "Use" or "Accession" or "Description" or "Flags" ? Visibility.Visible : Visibility.Collapsed;
+                if (header == "Description") { column.MinWidth = full ? 300 : 120; column.Width = full ? new DataGridLength(300) : new DataGridLength(1, DataGridLengthUnitType.Star); }
+                if (header == "Flags") { column.Width = full ? 180 : 160; column.MinWidth = full ? 180 : 120; }
+                if (header == "Accession") { column.Width = full ? 140 : 110; column.MinWidth = full ? 140 : 90; }
+            }
+            if (!full)
+            {
+                evidenceGrid.Columns.Single(column => column.Header as string == "Description").DisplayIndex = 2;
+                evidenceGrid.Columns.Single(column => column.Header as string == "Flags").DisplayIndex = 3;
+            }
+            ScopeDetailsRow.Height = full ? new GridLength(2, GridUnitType.Star) : new GridLength(0);
+            FamilyTableColumn.Width = full ? new GridLength(2, GridUnitType.Star) : new GridLength(440);
+            ProteinTableRow.Height = new GridLength(full ? 2 : 1, GridUnitType.Star);
+            ProteinTableRow.MinHeight = full ? 120 : 296;
+            ProteinDetailsRow.Height = full ? new GridLength(3, GridUnitType.Star) : new GridLength(110);
+            OpenFamilyChecklistButton.Visibility = hasFamilyList || model.Evidence?.HasPanelRules == true ? Visibility.Visible : Visibility.Collapsed;
+            UpdateApplyToolTip();
+        }
+        private void OpenFamilyChecklist_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAllOptions = true;
+            model.ModeIndex = 1;
+            RequestFamilyChecklist();
         }
         private async Task DiscoverInitialTaskAsync()
         {
@@ -108,6 +157,8 @@ namespace FamilyQuant
                 Dispatcher.BeginInvoke(DispatcherPriority.DataBind, new Action(UpdateApplyToolTip));
                 return;
             }
+            applyHint.Text = (!ShowAllOptions && OpenFamilyChecklistButton.Visibility == Visibility.Visible ? "Family checklist is one click away. " : "") + model.ApplyHint;
+            applyHint.ToolTip = applyHint.Text;
             if (!model.CanConfirm && !model.IsBusy && model.ModeIndex == 0)
             {
                 createButton.ToolTip = model.Keyword.Headline;

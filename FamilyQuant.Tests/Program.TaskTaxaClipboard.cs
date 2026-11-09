@@ -27,6 +27,7 @@ internal static partial class Program
         GridCopy.ClipboardOverride = copied.Add;
         try
         {
+            window.ShowAllOptions = true;
             window.Show(); PumpDispatcher();
             var grid = (DataGrid)window.FindName("taskTaxaGrid");
             var button = (Button)window.FindName("CopyTaskTaxaButton");

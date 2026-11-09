@@ -18,6 +18,7 @@ internal static partial class Program
         var window = ReviewLayoutWindow();
         try
         {
+            window.ShowAllOptions = true;
             window.Show(); PumpDispatcher(); window.UpdateLayout();
             var coverage = (TextBlock)window.FindName("TextBlockQueryCoverageRule");
             Check("coverage uses protein length words and preserves the precise definition", coverage.Text == EvidenceProposalPresentation.QueryCoverageSummary
@@ -106,6 +107,7 @@ internal static partial class Program
             { Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
         try
         {
+            unassignedWindow.ShowAllOptions = true;
             unassignedWindow.Show(); PumpDispatcher();
             var tabs = (TabControl)unassignedWindow.FindName("evidenceTabs");
             tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Unassigned"); PumpDispatcher();
@@ -126,6 +128,7 @@ internal static partial class Program
             { Width = 1366, Height = 768, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
         try
         {
+            panelWindow.ShowAllOptions = true;
             panelWindow.Show(); PumpDispatcher();
             var tabs = (TabControl)panelWindow.FindName("evidenceTabs");
             tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(t => (string)t.Header == "Panel links"); PumpDispatcher();

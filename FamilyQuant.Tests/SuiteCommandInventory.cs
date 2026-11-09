@@ -321,6 +321,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-scope-expansion-help", "FamilyQuant.Tests.Program.ScopeExpansionHelpTests()"),
         SuiteCommandRule.Covered("--test-scope-reachability", "FamilyQuant.Tests.Program.ScopeReachabilityTests()"),
         SuiteCommandRule.Covered("--test-family-list-step", "FamilyQuant.Tests.Program.FamilyListStepTests(System.String)"),
+        SuiteCommandRule.Covered("--test-simple-grouping", "FamilyQuant.Tests.Program.SimpleGroupingTests(System.String)"),
         SuiteCommandRule.Covered("--test-scope-count-wording", "FamilyQuant.Tests.Program.ScopeCountWordingTests()"),
         SuiteCommandRule.Covered("--test-reviewed-header-counts", "FamilyQuant.Tests.Program.ReviewedHeaderCountTests()"),
         SuiteCommandRule.Covered("--test-organism-evidence", "FamilyQuant.Tests.Program.OrganismEvidenceTests()"),

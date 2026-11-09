@@ -56,6 +56,7 @@ internal static partial class Program
                     ShowActivated = false, ShowInTaskbar = false };
                 try
                 {
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher();
                     var model = (GroupingReviewViewModel)window.DataContext;
                     var tab = WalkTree(window).OfType<TabItem>().Single(item => item.Header as string == "Panel links");

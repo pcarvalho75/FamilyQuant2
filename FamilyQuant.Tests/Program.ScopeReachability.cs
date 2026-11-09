@@ -14,6 +14,7 @@ internal static partial class Program
         EnsureApplication();
         // 1180 x 740 is the window's own default size; 2.1.12 hid the Scope row there behind the tables' minimum height.
         foreach (var size in new[] { (1024, 768), (1180, 740), (1366, 820) })
+        foreach (bool allOptions in new[] { false, true })
         {
             var facts = new EvidenceTaskScopeInput("Fixture clade", Enumerable.Range(1, 40)
                 .Select(id => new ReviewTaskTaxon("Fixture taxon " + id, id, 10, 1, 9)).ToArray(),
@@ -21,7 +22,8 @@ internal static partial class Program
                 40, new[] { "Fixture activity" }, "fixture", TargetProteins: 400);
             var preview = new SuperClusterPreview(new System.Collections.Generic.List<FastaItemExtended>(), null, "", "", KeywordMatch.All, null, null);
             var window = new SuperClusterPreviewWindow(preview, GroupingReviewScreens.Fixture(12), _ => GroupingReviewScreens.Fixture(12),
-                discoverTask: _ => Task.FromResult(facts)) { Width = size.Item1, Height = size.Item2, ShowActivated = false, ShowInTaskbar = false };
+                discoverTask: _ => Task.FromResult(facts)) { Width = size.Item1, Height = size.Item2, ShowActivated = false, ShowInTaskbar = false,
+                    ShowAllOptions = allOptions, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual };
             try
             {
                 window.Show(); PumpDispatcher(); window.UpdateLayout();
@@ -30,7 +32,7 @@ internal static partial class Program
                 var scope = (TextBox)window.FindName("TaskScopeBox");
                 var update = WalkTree(window).OfType<Button>().Single(button => button.Content as string == "Update proposal");
                 var collapse = (Button)window.FindName("CollapseCountsToScopeButton");
-                var motif = WalkTree(window).OfType<TextBlock>().First(text => text.Text == "Motif (optional)");
+                var motif = (TextBlock)window.FindName("MotifLabel");
                 var root = (FrameworkElement)window.Content;
                 // Visible to a person: inside the window and inside the viewport of every scroll area around it
                 // (a scroll area clips what lies below its viewport even when that is within the window).
@@ -53,9 +55,9 @@ internal static partial class Program
                         if (parent is ScrollViewer viewer && viewer.TemplatedParent is not TextBox) return true;
                     return false;
                 }
-                string label = "2.1.13 " + size.Item1 + "x" + size.Item2;
+                string label = "Scope " + size.Item1 + "x" + size.Item2 + (allOptions ? " full" : " Simple");
                 Check(label + " expanded counts keep the Scope box, Update proposal and the motif row on screen",
-                    model.TaskScopeExpanded && collapse.IsVisible && OnScreen(scope) && OnScreen(update) && OnScreen(motif) && !Scrolls(scope),
+                    model.TaskScopeExpanded && collapse.IsVisible == allOptions && OnScreen(scope) && OnScreen(update) && OnScreen(motif) == allOptions && !Scrolls(scope),
                     "scope_on_screen=" + OnScreen(scope) + " update_on_screen=" + OnScreen(update) + " motif_on_screen=" + OnScreen(motif));
                 string previous = model.ScopeText;
                 collapse.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
@@ -64,9 +66,10 @@ internal static partial class Program
                     !model.TaskScopeExpanded && OnScreen(scope) && OnScreen(update) && model.ScopeText == previous && scope.IsEnabled && update.IsEnabled);
                 model.TaskScopeExpanded = true; PumpDispatcher();
                 Check(label + " counts remain available after editing", expander.IsExpanded
-                    && ReferenceEquals(model.TaskScope, facts) && collapse.IsVisible);
+                    && ReferenceEquals(model.TaskScope, facts) && collapse.IsVisible == allOptions);
             }
             finally { window.Close(); PumpDispatcher(); }
         }
     }
+
 }

@@ -272,6 +272,7 @@ internal static partial class Program
                     ShowInTaskbar = false, ShowActivated = false };
                 try
                 {
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher(); window.UpdateLayout();
                     var model = (GroupingReviewViewModel)window.DataContext;
                     var grid = window.FindName("panelLinksGrid") as DataGrid;

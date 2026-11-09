@@ -65,6 +65,7 @@ internal static partial class Program
                     fullPanelRequirement: session.FullPanelRequirement) { ShowActivated = false, ShowInTaskbar = false };
                 try
                 {
+                    review.ShowAllOptions = true;
                     review.Show(); PumpDispatcher();
                     Check("Z15a5 " + theme + " scoped review explains Full panel before enabling Apply", ((TextBlock)review.FindName("applyHint")).Text == ReferencePanelUseRequirements.SubclassApply
                         && !((Button)review.FindName("createButton")).IsEnabled && file.ToJsonText() == before);
