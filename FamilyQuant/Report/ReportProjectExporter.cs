@@ -234,8 +234,10 @@ public static class ReportProjectExporter
     {
         operation?.Report("report-html", "Writing the interactive HTML report", 0, 1);
         operation?.ThrowIfCancellationRequested();
-        var payload = HtmlReportPayloadBuilder.Build(export.Document, export.SupplementSheets, selection ?? export.Selection,
+        selection ??= export.Selection;
+        var payload = HtmlReportPayloadBuilder.Build(export.Document, export.SupplementSheets, selection,
             export.HtmlContext, Path.GetFileName(wordPath));
+        payload = HtmlReportFigures.Build(payload, export.Document, selection);
         HtmlReportWriter.Write(HtmlReportWriter.PathForReport(wordPath), payload, operation);
         operation?.Report("report-html", "Interactive HTML report written", 1, 1);
     }

@@ -2831,6 +2831,7 @@
             </div>
           </div>
         </section>
+        <div id="family-figures" class="figure-grid"></div>
         </div>
         <div class="report-panel" id="panel-coverage" role="tabpanel" aria-labelledby="tab-coverage" tabindex="0" hidden>
           <label for="coverage-family">Family</label>
@@ -2893,6 +2894,7 @@
         <div class="report-panel" id="panel-gap" role="tabpanel" aria-labelledby="tab-gap" tabindex="0" hidden>
           <h2>Database gap</h2>
           <div class="evidence-panel" id="gap-panel"></div>
+          <div id="gap-figures" class="figure-grid"></div>
         </div>
         <div class="report-panel" id="panel-quality" role="tabpanel" aria-labelledby="tab-quality" tabindex="0" hidden>
           <h2>Quality</h2>
@@ -4968,6 +4970,14 @@
           renderFamily();
           updateSelectionSummary();
           renderSignal();
+          for (const figure of data.results || []) {
+            const id = figure.sourceFigureId || "";
+            const kind = /xic_by_mass|isotopes_credited|percent_ion_current_by_mass/.test(id) ? "mass"
+              : /recovery|signal_by_run|signal_uplift/.test(id) ? "recovery"
+              : /database_gap/.test(id) ? "gap" : "family";
+            figureCard(figure, $(kind + "-figures"));
+          }
+          $("mass-empty").hidden = $("mass-figures").childElementCount > 0;
           for (const kind of ["quality", "sensitivity"]) {
             const host = $(kind + "-figures");
             for (const figure of data[kind] || []) figureCard(figure, host);
