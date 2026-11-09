@@ -98,7 +98,6 @@ internal static partial class Program
         {
             window.Show(); window.UpdateLayout(); PumpDispatcher(); window.UpdateLayout(); PumpDispatcher();
             var top = (ComboBox)control.FindName("ComboBoxFamilyTopN");
-            var percent = (CheckBox)control.FindName("CheckBoxFamilyPercent");
             var exports = (ComboBox)control.FindName("ComboBoxExportKind");
             var button = (Button)control.FindName("ButtonExport");
             var host = AppOperationHost.For(control);
@@ -141,19 +140,9 @@ internal static partial class Program
                 Tooltip(tooltip.Item1, item, tooltip.Item2, "ComboBoxFamilyTopN / tag " + limit + " / ToolTip");
             }
             Prove("FQ15-DF754B3A82A5", "selection event applies all five family limits", allChanged, "ChartChoiceChanged");
-            percent.IsChecked = true; PumpDispatcher();
-            bool checkedApplied = model.FamilyAsPercent && WalkTree(control).OfType<FamilyContributionChart>().Single().IsPercentOfTotal;
-            Prove("FQ15-1826BA8181A2", "percent control remains enabled and changes the chart", percent.IsVisible && percent.IsEnabled && checkedApplied,
-                "CheckBoxFamilyPercent / ChartChoiceChanged");
-            Prove("FQ15-A338D170136B", "Checked event switches the displayed chart to measured-signal percentages", checkedApplied, "ChartChoiceChanged");
-            percent.IsChecked = false; PumpDispatcher();
-            bool uncheckedApplied = !model.FamilyAsPercent && !WalkTree(control).OfType<FamilyContributionChart>().Single().IsPercentOfTotal;
-            Prove("FQ15-C213AEB5CD1C", "Unchecked event restores the envelope chart", uncheckedApplied, "ChartChoiceChanged");
-            Prove("FQ15-C968838F81DD", "percent handler replacement applies checked and unchecked choices", checkedApplied && uncheckedApplied, "ChartChoiceChanged");
-            Prove("FQ15-E25869E2C149", "percent label names the measured signal", (string?)percent.Content == "Percent of measured signal"
-                && checkedApplied && uncheckedApplied, "CheckBoxFamilyPercent.Content");
-            Tooltip("FQ15-59366EF0C808", percent,
-                "Show family bars as percentages of measured peptide signal instead of signal amounts; count-in-every-family bars can overlap and their percentages must not be summed. This changes charts and subsequent figure exports without editing quantities; disabled until quantitation exists.", "CheckBoxFamilyPercent.ToolTip");
+            Check("D99 Results always labels both parts as percentages without a checkbox",
+                control.FindName("CheckBoxFamilyPercent") == null && model.FamilyAsPercent
+                && WalkTree(control).OfType<FamilyContributionChart>().Single().IsPercentOfTotal);
 
             foreach (var item in new[] {
                 (ResultsExportKind.Peptides, "FQ15-26786D42C42C", "FQ15-523631E1F20E", "FQ15-44CB7F99655E"),

@@ -34,7 +34,7 @@ public partial class AnalyticsControl : UserControl
             if (string.Equals(item.Tag as string, ViewModel.ExportKind.ToString(), StringComparison.Ordinal)) ComboBoxExportKind.SelectedItem = item;
         TextBlockDetails.Text = ViewModel.Details;
         BorderEmpty.Visibility = Data == null && !ViewModel.DatabaseGap.HasStoredResult ? Visibility.Visible : Visibility.Collapsed;
-        ComboBoxFamilyTopN.IsEnabled = CheckBoxFamilyPercent.IsEnabled = ViewModel.HasData;
+        ComboBoxFamilyTopN.IsEnabled = ViewModel.HasData;
         ButtonExport.IsEnabled = ViewModel.CanExport;
         RefreshExportHint();
         ViewModel.PropertyChanged += (_, e) =>
@@ -53,16 +53,19 @@ public partial class AnalyticsControl : UserControl
         if (!ready) return;
         ViewModel.FamilyTopN = int.TryParse((ComboBoxFamilyTopN.SelectedItem as ComboBoxItem)?.Tag as string,
             NumberStyles.Integer, CultureInfo.InvariantCulture, out int top) ? top : FamilyContributionPlot.DefaultTopN;
-        ViewModel.FamilyAsPercent = CheckBoxFamilyPercent.IsChecked == true;
     }
     private void DrawCharts()
     {
+        PanelFamilyChart.Children.Clear();
         PanelCharts.Children.Clear();
         if (Data == null) return;
         foreach (var figure in AnalyticsFigures.Build(Data, Families, FamilyTopN, FamilyAsPercent)
             .Concat(ViewModel.BuildCompositionFigures()))
         {
-            if (figure.Chart is IPalettedChart chart) chart.Palette = ChartPalette.UiPalette;
+            FrameworkElement plotted = figure.Chart is FamilyContributionChart
+                ? new FamilyContributionChart(Families, FamilyTopN, FamilyAsPercent, sharedPolicy: ViewModel.FamilySharedPolicy)
+                : figure.Chart;
+            if (plotted is IPalettedChart chart) chart.Palette = ChartPalette.UiPalette;
             string text = CompositionChartCaptions.Build(figure, Data);
             var caption = new TextBlock { Text = text,
                 ToolTip = "This line explains the chart and its recorded numbers. The complete explanation is included in the report.",
@@ -71,9 +74,10 @@ public partial class AnalyticsControl : UserControl
                 FontSize = 12, Margin = new Thickness(0, 6, 0, 0) };
             caption.SetResourceReference(TextBlock.ForegroundProperty, "MutedBrush");
             var group = new StackPanel { Margin = new Thickness(0, 0, 0, 16) };
-            group.Children.Add(new Border { Height = figure.ScreenHeight, Child = figure.Chart });
+            group.Children.Add(new Border { Height = figure.ScreenHeight, Child = plotted });
             group.Children.Add(caption);
-            PanelCharts.Children.Add(group);
+            if (plotted is FamilyContributionChart) PanelFamilyChart.Children.Add(group);
+            else PanelCharts.Children.Add(group);
         }
     }
     private void ExportChoiceChanged(object sender, SelectionChangedEventArgs e)

@@ -49,17 +49,21 @@ public static partial class FamilyCompositionStudy
         {
             var assigned = new FamilyPeptideAttribution(groups.TryGetValue(run, out var peptides) ? peptides : new());
             FamilyEnvelopeQuantResult table = FamilyEnvelopeQuant.BuildFromAttributedPeptides(assigned);
-            var signals = table.Families.ToDictionary(f => f.FamilyUserId, f => f.Signal(policy));
-            double assignedTotal = result.Families.Sum(f => signals.GetValueOrDefault(f.FamilyUserId));
+            var signals = table.Families.ToDictionary(f => f.FamilyUserId, f => (Signal: f.Signal(policy),
+                Identified: policy == SharedPeptidePolicy.SplitEqually ? f.SplitIdentifiedEnvelope : f.UniqueIdentifiedEnvelope));
+            double assignedTotal = result.Families.Sum(f => signals.GetValueOrDefault(f.FamilyUserId).Signal);
             double measured = table.MeasuredTotalEnvelopeReferenceCalibrated;
             double? totalTic = tic.TryGetValue(run, out double rawTic) && rawTic > 0 && double.IsFinite(rawTic) ? rawTic : null;
-            result.Runs.Add(new() { Run = run, AssignedSignal = assignedTotal, MeasuredSignal = measured, TotalIonCurrent = totalTic });
+            result.Runs.Add(new() { Run = run, AssignedSignal = assignedTotal, MeasuredSignal = measured,
+                IdentifiedSignal = table.MeasuredIdentifiedEnvelope, TotalIonCurrent = totalTic });
             foreach (FamilyRunShareSummary family in result.Families)
             {
-                double signal = signals.GetValueOrDefault(family.FamilyUserId);
+                var parts = signals.GetValueOrDefault(family.FamilyUserId);
+                double signal = parts.Signal;
                 family.Runs.Add(new()
                 {
                     Run = run, Signal = signal,
+                    IdentifiedSignal = parts.Identified,
                     ShareOfAssignedSignal = assignedTotal > 0 ? signal / assignedTotal : null,
                     ShareOfMeasuredSignal = measured > 0 ? signal / measured : null,
                     ShareOfTic = totalTic.HasValue ? signal / totalTic.Value : null,

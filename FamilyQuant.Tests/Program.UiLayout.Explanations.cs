@@ -147,14 +147,14 @@ namespace FamilyQuant.Tests
             }
             CheckTooltipCoverage("AnalyticsControl", analytics);
 
-            // Four chrome controls: export choice/action, TopN and percent. Export kinds stay pinned in the view-model check.
+            // Export choice/action and Top N. Export kinds stay pinned in the view-model check.
             var analyticsControls = WalkTree(analytics).OfType<FrameworkElement>()
                 .Where(e => e.TemplatedParent == null)
                 .Where(e => e is Button || e is CheckBox || e is ComboBox || e is TextBox || e is Label)
                 .ToList();
 
-            Check("the Results screen offers its four consolidated chrome controls",
-                analyticsControls.Count == 4,
+            Check("the Results screen offers its three consolidated chrome controls",
+                analyticsControls.Count == 3,
                 string.Join(", ", analyticsControls.Select(Describe)));
 
             var topN = UiField<ComboBox>(analytics, "ComboBoxFamilyTopN")!;

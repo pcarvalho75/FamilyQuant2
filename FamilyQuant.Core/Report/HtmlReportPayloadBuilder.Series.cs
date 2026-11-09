@@ -56,7 +56,14 @@ public static partial class HtmlReportPayloadBuilder
 
         private HtmlReportFamily FamilyDetails(HtmlReportFamily family, FamilyRunShareSummary? summary)
         {
-            if (family.IsOthers) return family;
+            if (family.IsOthers) return OtherFamilyShares(family);
+            family = family with
+            {
+                IdentifiedOnly = FamilyShareStatistics(family.Id, "IdentifiedOnly"),
+                IdentifiedAndDeNovo = FamilyShareStatistics(family.Id, "IdentifiedAndDeNovo"),
+                DetectorEnvelopes = FamilyShareStatistics(family.Id, "DetectorEnvelopes"),
+                Tic = FamilyShareStatistics(family.Id, "Tic"),
+            };
             // A selected Results headline is independent of the family-detail checkbox. Do not
             // allocate any detail fields for an excluded family owner, even from global worksheets.
             if (context.FamilySections.TryGetValue(family.Id, out var owner) && !sections.ContainsKey(owner)) return family;
@@ -73,7 +80,13 @@ public static partial class HtmlReportPayloadBuilder
                         string name = RunField(frame, row, run);
                         runs.Add(new(name,
                             NativeCell(frame, row, "assigned_signal_pct", "%", fractionColumn: "assigned_signal_fraction", stored: stored?.ShareOfAssignedSignal * 100),
-                            NativeCell(frame, row, "measured_peptide_signal_pct", "%", fractionColumn: "measured_peptide_signal_fraction", stored: stored?.ShareOfMeasuredSignal * 100)));
+                            NativeCell(frame, row, "measured_peptide_signal_pct", "%", fractionColumn: "measured_peptide_signal_fraction", stored: stored?.ShareOfMeasuredSignal * 100))
+                        {
+                            IdentifiedOnly = FamilyShareField(family.Id, "IdentifiedOnly", frame.Table.Rows[row][run]),
+                            IdentifiedAndDeNovo = FamilyShareField(family.Id, "IdentifiedAndDeNovo", frame.Table.Rows[row][run]),
+                            DetectorEnvelopes = FamilyShareField(family.Id, "DetectorEnvelopes", frame.Table.Rows[row][run]),
+                            Tic = FamilyShareField(family.Id, "Tic", frame.Table.Rows[row][run]),
+                        });
                     }
             }
             var parts = new List<HtmlFamilyPart>();
