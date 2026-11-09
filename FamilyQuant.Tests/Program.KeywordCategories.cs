@@ -93,6 +93,28 @@ internal static partial class Program
                 && proposal.ProposedScopeTerms.SequenceEqual(new[] { "Legacy missing category" }),
                 "pages=" + string.Join(" ", paged.Pages));
         }
+        var mixed = File("Fixture activity", "Legacy missing category");
+        mixed.MyExtendedFastaItems.Add(TaskProtein("sp|P00002|TWO", 21, true, "Fixture activity"));
+        foreach (var protein in mixed.MyExtendedFastaItems)
+            protein.Evidence!.KeywordCategories = new() { ["Fixture activity"] = "Molecular function" };
+        using (var inner = new TaskTaxonomyHandler())
+        using (var paged = new PagedVocabularyHandler(inner))
+        {
+            var proposal = EvidenceTaskDiscovery.DiscoverAsync(mixed, paged).GetAwaiter().GetResult();
+            Check("2.1.13 partly stored categories read the vocabulary for the gap and keep the stored molecular-function suggestion",
+                paged.Pages.Count == 2 && proposal.ProposedScopeTerms.SequenceEqual(new[] { "Fixture activity" })
+                && proposal.Keywords.Single(k => k.Keyword == "Fixture activity") is { ReviewedProteins: 2, CategoryId: EvidenceTaskDiscovery.FunctionalScopeCategoryId }
+                && proposal.Keywords.Single(k => k.Keyword == "Legacy missing category").CategoryId == EvidenceTaskDiscovery.FunctionalScopeCategoryId,
+                "pages=" + paged.Pages.Count + " scope=" + string.Join(",", proposal.ProposedScopeTerms));
+        }
+        using (var inner = new TaskTaxonomyHandler())
+        using (var paged = new PagedVocabularyHandler(inner) { RepeatFirstPage = true })
+        {
+            bool refusedLoop = false;
+            try { EvidenceTaskDiscovery.DiscoverAsync(legacy, paged).GetAwaiter().GetResult(); }
+            catch (System.IO.InvalidDataException) { refusedLoop = true; }
+            Check("2.1.13 a repeated next-page link is refused instead of looping", refusedLoop && paged.Pages.Count == 2);
+        }
         using (var inner = new TaskTaxonomyHandler())
         using (var paged = new PagedVocabularyHandler(inner) { SecondRelease = "other" })
         {
@@ -107,6 +129,7 @@ internal static partial class Program
     {
         internal readonly List<string> Pages = new();
         internal string SecondRelease = "fixture";
+        internal bool RepeatFirstPage;
         protected override Task<System.Net.Http.HttpResponseMessage> SendAsync(System.Net.Http.HttpRequestMessage request, System.Threading.CancellationToken token)
         {
             if (request.RequestUri!.AbsolutePath != "/keywords/search") return base.SendAsync(request, token);
@@ -119,7 +142,7 @@ internal static partial class Program
                     : """{"results":[{"keyword":{"name":"Legacy missing category","id":"KW-0004"},"category":{"name":"Molecular function","id":"KW-9992"}}]}"""),
             };
             response.Headers.Add("x-uniprot-release", first ? "fixture" : SecondRelease);
-            if (first) response.Headers.TryAddWithoutValidation("Link",
+            if (first || RepeatFirstPage) response.Headers.TryAddWithoutValidation("Link",
                 "<https://rest.uniprot.org/keywords/search?query=*&format=json&size=500&cursor=page2>; rel=\"next\"");
             return Task.FromResult(response);
         }

@@ -145,8 +145,10 @@ public static partial class EvidenceTaskDiscovery
             if (CategoryIds.TryGetValue(count.CategoryName, out string? categoryId)) count.CategoryId = categoryId;
         string? page = keywords.Any(k => k.CategoryId.Length == 0) ? KeywordVocabularyEndpoint : null;
         var byName = keywords.ToDictionary(k => k.Keyword, StringComparer.Ordinal);
+        var visited = new HashSet<string>(StringComparer.Ordinal);
         while (page != null)
         {
+            if (!visited.Add(page)) throw new InvalidDataException("UniProt repeated a keyword vocabulary page. No task was proposed.");
             using HttpResponseMessage response = await UniProtHttp.GetWithRetryAsync(client, page, 5,
                 status => "UniProt refused the keyword vocabulary (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No task was proposed.", cancellationToken,
                 options, message => progress?.Report(new FetchProgress
