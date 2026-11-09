@@ -18,14 +18,16 @@ namespace FamilyQuant
         /// <summary>Every family below the TopN cut, summed into one bar so nothing is silently dropped.</summary>
         OtherFamilies,
 
+        /// <summary>Peptides reaching several families, each counted once under family-unique.</summary>
+        Shared,
+
         /// <summary>Signal that reached no family at all. Drawn apart, because it is a residual and not
         /// a biological group.</summary>
         Unattributed,
     }
 
     /// <summary>
-    /// One horizontal bar: its identified observed-envelope signal and its de novo reference-model
-    /// estimate, plus what the bar is (a family, the fold below the cut, or the unattributed residual).
+    /// One horizontal bar: identified and de novo signal, plus the family or residual it represents.
     /// </summary>
     public sealed class FamilyContributionBar
     {
@@ -86,7 +88,8 @@ namespace FamilyQuant
         /// over the whole result. A <paramref name="topN"/> of zero or less means "no fold at all", which
         /// is what the interface's "all" choice asks for.
         /// </summary>
-        public static List<FamilyContributionBar> Fold(FamilyEnvelopeQuantResult? result, int topN)
+        public static List<FamilyContributionBar> Fold(FamilyEnvelopeQuantResult? result, int topN,
+            SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique)
         {
             var bars = new List<FamilyContributionBar>();
             if (result == null) return bars;
@@ -95,7 +98,8 @@ namespace FamilyQuant
             // a caller may hand in a result it assembled itself and the fold has to be the same either way.
             List<FamilyEnvelopeQuantRow> ordered = result.Families
                 .Where(f => f != null)
-                .OrderByDescending(f => f.TotalEnvelopeReferenceCalibrated)
+                .OrderByDescending(f => f.Signal(sharedPolicy == SharedPeptidePolicy.SplitEqually
+                    ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique))
                 .ThenBy(f => f.FamilyUserId)
                 .ToList();
 
@@ -111,8 +115,8 @@ namespace FamilyQuant
                     FamilyCount = 1,
                     Label = FamilyFigureLabel.Format(f.FamilyUserId, f.Description, maximumNameLength: 34),
                     Description = string.Empty,
-                    Identified = f.IdentifiedEnvelope,
-                    DeNovo = f.DeNovoEnvelopePrimary,
+                    Identified = sharedPolicy == SharedPeptidePolicy.SplitEqually ? f.SplitIdentifiedEnvelope : f.UniqueIdentifiedEnvelope,
+                    DeNovo = sharedPolicy == SharedPeptidePolicy.SplitEqually ? f.SplitDeNovoEnvelopePrimary : f.UniqueDeNovoEnvelopePrimary,
                 });
             }
 
@@ -126,10 +130,20 @@ namespace FamilyQuant
                     FamilyCount = folded,
                     Label = "other families (" + folded.ToString("N0", CultureInfo.CurrentCulture) + ")",
                     Description = "every family below the cut, summed so none is silently dropped",
-                    Identified = ordered.Skip(keep).Sum(f => f.IdentifiedEnvelope),
-                    DeNovo = ordered.Skip(keep).Sum(f => f.DeNovoEnvelopePrimary),
+                    Identified = ordered.Skip(keep).Sum(f => sharedPolicy == SharedPeptidePolicy.SplitEqually ? f.SplitIdentifiedEnvelope : f.UniqueIdentifiedEnvelope),
+                    DeNovo = ordered.Skip(keep).Sum(f => sharedPolicy == SharedPeptidePolicy.SplitEqually ? f.SplitDeNovoEnvelopePrimary : f.UniqueDeNovoEnvelopePrimary),
                 });
             }
+
+            if (sharedPolicy != SharedPeptidePolicy.SplitEqually && result.SharedTotalEnvelopeReferenceCalibrated > 0)
+                bars.Add(new FamilyContributionBar
+                {
+                    Kind = FamilyContributionBarKind.Shared,
+                    Label = "shared between families",
+                    Description = "peptides reaching several families, counted once",
+                    Identified = result.SharedIdentifiedEnvelope,
+                    DeNovo = result.SharedDeNovoEnvelopePrimary,
+                });
 
             double unattributed = result.UnattributedIdentifiedEnvelope
                 + result.UnattributedDeNovoEnvelopePrimary;
@@ -153,9 +167,7 @@ namespace FamilyQuant
         /// <summary>
         /// The sum of the bars.
         ///
-        /// NOT a denominator and NOT the measured signal: under the count-in-every-family policy a
-        /// peptide belonging to two families is in both bars, so this overlaps and is at least the
-        /// measured envelope. It is here so the chart can SAY by how much the bars overlap.
+        /// Family parts, shared signal and unattributed signal count each peptide once.
         /// </summary>
         public static double BarTotal(IEnumerable<FamilyContributionBar>? bars) =>
             bars == null ? 0 : bars.Sum(b => b.Total);
@@ -201,7 +213,7 @@ namespace FamilyQuant
             List<FamilyContributionBar> others =
                 source.Where(b => b.Kind == FamilyContributionBarKind.OtherFamilies).ToList();
             List<FamilyContributionBar> residual =
-                source.Where(b => b.Kind == FamilyContributionBarKind.Unattributed).ToList();
+                source.Where(b => b.Kind is FamilyContributionBarKind.Shared or FamilyContributionBarKind.Unattributed).ToList();
 
             // One bar of the budget goes to the fold itself, and the residual keeps its own bars: it is
             // the number a reader takes as "what we still cannot explain" and it is never merged away.
@@ -239,10 +251,8 @@ namespace FamilyQuant
     /// more families into that one bar rather than leaving bars unpainted, which preserves the sums
     /// exactly and keeps the figure's claim of completeness true at any size.
     ///
-    /// The percent mode divides by the MEASURED envelope of the run - every deduped peptide counted once,
-    /// the same basis as the recovery numbers and the paper - and not by the sum of the bars, which
-    /// double-counts a peptide belonging to several families. The shares therefore pass 100% exactly by
-    /// the amount of that sharing, and the legend says so and prints both numbers.
+    /// The percent mode divides by the measured envelope, each peptide counted once. Family-unique
+    /// parts plus shared and unattributed signal, or split parts plus unattributed signal, sum to it.
     ///
     /// Widths are relative to the LARGEST bar in both modes, so a small family is still visible; the mode
     /// decides what the numbers say - the raw envelope signal, or each bar's share of the measurement.
@@ -254,6 +264,7 @@ namespace FamilyQuant
         private readonly bool asPercent;
         private readonly double measuredTotal;
         private readonly double identityThreshold;
+        private readonly SharedPeptidePolicy sharedPolicy;
 
 
         private const double NameGutter = 300;
@@ -267,10 +278,11 @@ namespace FamilyQuant
         public FamilyContributionChart(FamilyEnvelopeQuantResult? result,
                                        int topN = FamilyContributionPlot.DefaultTopN,
                                        bool asPercentOfTotal = false,
-                                       ChartPalette? palette = null)
-            : this(FamilyContributionPlot.Fold(result, topN), asPercentOfTotal,
+                                       ChartPalette? palette = null,
+                                       SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique)
+            : this(FamilyContributionPlot.Fold(result, topN, sharedPolicy), asPercentOfTotal,
                    FamilyContributionPlot.MeasuredTotal(result),
-                   result?.IdentityThreshold ?? 0, palette)
+                   result?.IdentityThreshold ?? 0, palette, sharedPolicy)
         {
         }
 
@@ -281,8 +293,7 @@ namespace FamilyQuant
         /// <param name="measuredEnvelope">The whole measured envelope of the run, each peptide counted
         /// ONCE (<see cref="FamilyEnvelopeQuantResult.MeasuredTotalEnvelope"/>). It is the denominator of
         /// the percent mode and the total the legend prints, and it is deliberately not derived from the
-        /// bars, which overlap wherever a peptide belongs to more than one family. Zero means "not
-        /// supplied", and then the percent mode falls back to the raw signal and says so rather than
+        /// bars. Zero means "not supplied", and then the percent mode falls back to raw signal rather than
         /// dividing by a number that is not the measurement.</param>
         /// <param name="identityThresholdFraction">The homology identity the attribution stood on, as a
         /// fraction (0.80 for the shipped default), or 0 for "not stated". It is PRINTED IN THE HEADING,
@@ -293,19 +304,22 @@ namespace FamilyQuant
                                        bool asPercentOfTotal = false,
                                        double measuredEnvelope = 0,
                                        double identityThresholdFraction = 0,
-                                       ChartPalette? palette = null)
+                                       ChartPalette? palette = null,
+                                       SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique)
         {
             this.palette = palette ?? ChartPalette.Dark;
             this.bars = (folded ?? Enumerable.Empty<FamilyContributionBar>()).Where(b => b != null).ToList();
             this.asPercent = asPercentOfTotal;
             this.measuredTotal = measuredEnvelope > 0 ? measuredEnvelope : 0;
             this.identityThreshold = identityThresholdFraction > 0 ? identityThresholdFraction : 0;
+            this.sharedPolicy = sharedPolicy == SharedPeptidePolicy.SplitEqually
+                ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique;
 
             MinHeight = 260;
             Margin = new Thickness(0);
             ToolTip = "One bar per family, largest first, separates identified and de novo signal, with smaller families combined into " +
-                      "\"other families\" so nothing is dropped. Percent mode divides by measured peptide signal rather than the sum " +
-                      "of bars; shared full counts can overlap, and this chart changes no project values or files.";
+                      "\"other families\" so nothing is dropped. Each peptide counts once under the project's shared-peptide " +
+                      "rule; this chart changes no project values or files.";
         }
 
         /// <summary>The folded bars this chart draws, in drawing order, as the tests read them.</summary>
@@ -329,8 +343,9 @@ namespace FamilyQuant
             get
             {
                 string basis = PercentApplies
-                    ? "Family contribution: share of the primary recovered signal"
-                    : "Family contribution: identified observed + de novo calibrated estimate";
+                    ? "Family contribution: % of all peptide features"
+                    : "Family contribution: identified + de novo";
+                basis += sharedPolicy == SharedPeptidePolicy.SplitEqually ? " - split equally" : " - family-unique";
 
                 // The threshold is part of the claim, not decoration: these bars exist because peptides
                 // aligned to proteins at THIS identity, and at another identity they would be other bars.
@@ -424,7 +439,6 @@ namespace FamilyQuant
                 : FamilyContributionPlot.BarGap;
             double barH = Math.Min(FamilyContributionPlot.MaxBarHeight, Math.Max(1, step - gap));
 
-            double barSum = FamilyContributionPlot.BarTotal(drawn);
             double maxTotal = drawn.Max(b => b.Total);
 
             double y = topBand;
@@ -434,7 +448,7 @@ namespace FamilyQuant
                 y += step;
             }
 
-            DrawLegend(dc, new Point(14, ActualHeight - legendBand + 6), drawn, barSum);
+            DrawLegend(dc, new Point(14, ActualHeight - legendBand + 6), drawn);
         }
 
         private void DrawBar(DrawingContext dc, FamilyContributionBar bar, Rect slot, double maxTotal)
@@ -493,14 +507,10 @@ namespace FamilyQuant
         }
 
         /// <summary>
-        /// Two lines: the colour keys, and underneath them the BASIS - what the numbers are shares of, and
-        /// whether the bars overlap. The basis line is the honest counterpart of the old single "whole
-        /// measured signal" caption, which printed the sum of the bars and so double-counted every shared
-        /// peptide.
+        /// The colour keys and the measured total, with each peptide counted once.
         /// </summary>
         /// <param name="drawn">The bars actually painted, after any fold to fit the height.</param>
-        /// <param name="barSum">Their sum, which overlaps wherever a peptide reaches several families.</param>
-        private void DrawLegend(DrawingContext dc, Point at, List<FamilyContributionBar> drawn, double barSum)
+        private void DrawLegend(DrawingContext dc, Point at, List<FamilyContributionBar> drawn)
         {
             ChartPalette pal = palette;
             Brush Muted = pal.Muted, Identified = pal.Identified, DeNovo = pal.DeNovo, NotAFamily = pal.NotAFamily;
@@ -508,7 +518,7 @@ namespace FamilyQuant
             var entries = new (Brush Fill, string Name)[]
             {
                 (Identified, "identified envelope"),
-                (DeNovo, "de novo reference-model estimate"),
+                (DeNovo, "de novo"),
             };
 
             double x = at.X;
@@ -524,22 +534,13 @@ namespace FamilyQuant
             if (anyFolded)
             {
                 dc.DrawRectangle(null, new Pen(NotAFamily, 1.4), new Rect(x, at.Y + 2, 12, 12));
-                var t = Text("not one family: the fold and the unattributed residual", Muted, 11);
+                var t = Text("other families, shared or unattributed", Muted, 11);
                 if (x + 16 + t.Width < ActualWidth - 8) dc.DrawText(t, new Point(x + 16, at.Y));
             }
 
-            // Overlap is a real property of the count-in-every-family policy, so it is stated rather than
-            // hidden inside a denominator. The comparison is relative, so floating point noise from the
-            // summing does not make a run without any shared peptide announce a sharing.
-            bool overlaps = measuredTotal > 0 && barSum > measuredTotal * (1 + 1e-9);
-
             string basis = measuredTotal > 0
-                ? "primary total, each peptide counted once: " +
-                  measuredTotal.ToString("E2", CultureInfo.CurrentCulture) +
-                  (overlaps
-                      ? "   -   the bars sum to " + barSum.ToString("E2", CultureInfo.CurrentCulture) +
-                        " because a peptide in several families counts in each, so the shares pass 100%"
-                      : "   -   no peptide is shared here, so the bars sum to exactly that")
+                ? "all peptide features, each peptide counted once: " +
+                  measuredTotal.ToString("E2", CultureInfo.CurrentCulture)
                 : "no primary total was supplied with this table, so the values are raw areas and no " +
                   "share can be taken from them";
 

@@ -62,7 +62,10 @@ public partial class AnalyticsControl : UserControl
         foreach (var figure in AnalyticsFigures.Build(Data, Families, FamilyTopN, FamilyAsPercent)
             .Concat(ViewModel.BuildCompositionFigures()))
         {
-            if (figure.Chart is IPalettedChart chart) chart.Palette = ChartPalette.UiPalette;
+            FrameworkElement plotted = figure.Chart is FamilyContributionChart
+                ? new FamilyContributionChart(Families, FamilyTopN, FamilyAsPercent, sharedPolicy: ViewModel.FamilySharedPolicy)
+                : figure.Chart;
+            if (plotted is IPalettedChart chart) chart.Palette = ChartPalette.UiPalette;
             string text = CompositionChartCaptions.Build(figure, Data);
             var caption = new TextBlock { Text = text,
                 ToolTip = "This line explains the chart and its recorded numbers. The complete explanation is included in the report.",
@@ -71,7 +74,7 @@ public partial class AnalyticsControl : UserControl
                 FontSize = 12, Margin = new Thickness(0, 6, 0, 0) };
             caption.SetResourceReference(TextBlock.ForegroundProperty, "MutedBrush");
             var group = new StackPanel { Margin = new Thickness(0, 0, 0, 16) };
-            group.Children.Add(new Border { Height = figure.ScreenHeight, Child = figure.Chart });
+            group.Children.Add(new Border { Height = figure.ScreenHeight, Child = plotted });
             group.Children.Add(caption);
             PanelCharts.Children.Add(group);
         }

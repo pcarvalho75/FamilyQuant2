@@ -38,6 +38,8 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     public string EmptyMessage => MissingQuantitation + (HasHomology ? " The standalone homology snapshot can still be exported here." : "");
     public IReadOnlyList<ResultsSummaryCard> Cards { get; } = Array.Empty<ResultsSummaryCard>();
     public int FamilyTopN { get => topN; set => Set(ref topN, value); }
+    public SharedPeptidePolicy FamilySharedPolicy => manifest?.FamilyRunShares?.Policy == SharedPeptidePolicy.SplitEqually
+        ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique;
     public bool FamilyAsPercent { get => percent; set => Set(ref percent, value); }
     public string Status { get => status; private set => Set(ref status, value); }
     public ResultsExportKind ExportKind { get => exportKind; set { Set(ref exportKind, value); Changed(nameof(CanExport)); } }
