@@ -32,11 +32,20 @@ internal static partial class Program
                 var collapse = (Button)window.FindName("CollapseCountsToScopeButton");
                 var motif = WalkTree(window).OfType<TextBlock>().First(text => text.Text == "Motif (optional)");
                 var root = (FrameworkElement)window.Content;
+                // Visible to a person: inside the window and inside the viewport of every scroll area around it
+                // (a scroll area clips what lies below its viewport even when that is within the window).
                 bool OnScreen(FrameworkElement element)
                 {
                     if (!element.IsVisible) return false;
                     Rect bounds = element.TransformToAncestor(root).TransformBounds(new Rect(element.RenderSize));
-                    return bounds.Top >= -1 && bounds.Bottom <= root.ActualHeight + 1;
+                    if (bounds.Top < -1 || bounds.Bottom > root.ActualHeight + 1) return false;
+                    for (var parent = VisualTreeHelper.GetParent(element); parent != null; parent = VisualTreeHelper.GetParent(parent))
+                        if (parent is ScrollViewer viewer && viewer.TemplatedParent is not TextBox)
+                        {
+                            Rect inViewer = element.TransformToAncestor(viewer).TransformBounds(new Rect(element.RenderSize));
+                            if (inViewer.Top < -1 || inViewer.Bottom > viewer.ViewportHeight + 1) return false;
+                        }
+                    return true;
                 }
                 static bool Scrolls(DependencyObject element)
                 {
