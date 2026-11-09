@@ -985,6 +985,32 @@
       [hidden] {
         display: none !important;
       }
+      .report-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 24px 0;
+      }
+      .report-tab {
+        padding: 10px 14px;
+        border-radius: 8px;
+        background: var(--subtle);
+      }
+      .report-tab[aria-selected="true"] {
+        background: var(--selection);
+        color: var(--accent);
+      }
+      .report-panel {
+        min-width: 0;
+      }
+      #panel-recovery .evidence-grid {
+        grid-template-columns: 1fr;
+      }
+      @media print {
+        .report-tabs { display: none; }
+        .report-panel[hidden] { display: block !important; }
+        .report-panel { break-before: page; }
+      }
       svg {
         fill: none;
         stroke: currentColor;
@@ -2646,6 +2672,16 @@
         </div>
         <div id="notices"></div>
         <div class="headline" id="headline"></div>
+        <div class="report-tabs" role="tablist" aria-label="Report sections">
+          <button class="report-tab" id="tab-families" role="tab" aria-controls="panel-families" aria-selected="true" title="Explore family shares and compare the runs. This changes only the view of this report.">Families</button>
+          <button class="report-tab" id="tab-recovery" role="tab" aria-controls="panel-recovery" aria-selected="false" tabindex="-1" title="Compare credited signal with the measured total. This changes only the view of this report.">Signal recovery</button>
+          <button class="report-tab" id="tab-mass" role="tab" aria-controls="panel-mass" aria-selected="false" tabindex="-1" title="Inspect signal by mass and the isotopes credited. This changes only the view of this report.">Mass and isotopes</button>
+          <button class="report-tab" id="tab-coverage" role="tab" aria-controls="panel-coverage" aria-selected="false" tabindex="-1" title="Explore the selected family's proteins and sequence coverage. This changes only the view of this report.">Coverage</button>
+          <button class="report-tab" id="tab-gap" role="tab" aria-controls="panel-gap" aria-selected="false" tabindex="-1" title="Compare database coverage with the stored evidence. This changes only the view of this report.">Database gap</button>
+          <button class="report-tab" id="tab-quality" role="tab" aria-controls="panel-quality" aria-selected="false" tabindex="-1" title="Inspect the included quality figures. This changes only the view of this report.">Quality</button>
+          <button class="report-tab" id="tab-sensitivity" role="tab" aria-controls="panel-sensitivity" aria-selected="false" tabindex="-1" title="Inspect the included sensitivity figures. This changes only the view of this report.">Sensitivity</button>
+        </div>
+        <div class="report-panel" id="panel-families" role="tabpanel" aria-labelledby="tab-families" tabindex="0">
         <section aria-labelledby="composition-title">
           <div class="section-title">
             <div>
@@ -2795,6 +2831,10 @@
             </div>
           </div>
         </section>
+        </div>
+        <div class="report-panel" id="panel-coverage" role="tabpanel" aria-labelledby="tab-coverage" tabindex="0" hidden>
+          <label for="coverage-family">Family</label>
+          <select id="coverage-family" title="Choose the family whose stored sequence coverage is shown. This changes only the view of this report."></select>
         <section
           class="family-detail"
           id="family-detail"
@@ -2822,6 +2862,8 @@
             </div>
           </div>
         </section>
+        </div>
+        <div class="report-panel" id="panel-recovery" role="tabpanel" aria-labelledby="tab-recovery" tabindex="0" hidden>
         <section
           class="section"
           id="evidence-section"
@@ -2839,9 +2881,29 @@
           </div>
           <div class="evidence-grid">
             <div class="evidence-panel" id="signal-panel"></div>
-            <div class="evidence-panel" id="gap-panel"></div>
           </div>
         </section>
+        <div id="recovery-figures" class="figure-grid"></div>
+        </div>
+        <div class="report-panel" id="panel-mass" role="tabpanel" aria-labelledby="tab-mass" tabindex="0" hidden>
+          <h2>Mass and isotopes</h2>
+          <div id="mass-figures" class="figure-grid"></div>
+          <p id="mass-empty" class="fine-print">No mass or isotope figures are included in this report.</p>
+        </div>
+        <div class="report-panel" id="panel-gap" role="tabpanel" aria-labelledby="tab-gap" tabindex="0" hidden>
+          <h2>Database gap</h2>
+          <div class="evidence-panel" id="gap-panel"></div>
+        </div>
+        <div class="report-panel" id="panel-quality" role="tabpanel" aria-labelledby="tab-quality" tabindex="0" hidden>
+          <h2>Quality</h2>
+          <div id="quality-figures" class="figure-grid"></div>
+          <p id="quality-empty" class="fine-print">No quality figures are included in this report.</p>
+        </div>
+        <div class="report-panel" id="panel-sensitivity" role="tabpanel" aria-labelledby="tab-sensitivity" tabindex="0" hidden>
+          <h2>Sensitivity</h2>
+          <div id="sensitivity-figures" class="figure-grid"></div>
+          <p id="sensitivity-empty" class="fine-print">No sensitivity figures are included in this report.</p>
+        </div>
         <footer class="footer">
           <p id="footer-meta"></p>
           <div class="footer-links">
@@ -3118,6 +3180,43 @@
             detailVisible: false,
             sort: "share",
             pinnedRun: null,
+          };
+          const tabs = Array.from(document.querySelectorAll('.report-tab'));
+          function showTab(tab) {
+            for (const item of tabs) {
+              const active = item === tab;
+              item.setAttribute("aria-selected", String(active));
+              item.tabIndex = active ? 0 : -1;
+              $(item.getAttribute("aria-controls")).hidden = !active;
+            }
+            $("chart-hover").hidden = true;
+            $("coverage-hover").hidden = true;
+            $("dot-tooltip").hidden = true;
+          }
+          for (const [index, tab] of tabs.entries()) {
+            tab.onclick = () => showTab(tab);
+            tab.onkeydown = (event) => {
+              let next;
+              if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+              if (event.key === "ArrowLeft") next = (index + tabs.length - 1) % tabs.length;
+              if (event.key === "Home") next = 0;
+              if (event.key === "End") next = tabs.length - 1;
+              if (next === undefined) return;
+              event.preventDefault();
+              showTab(tabs[next]);
+              tabs[next].focus();
+            };
+          }
+          for (const f of ordered) {
+            const option = node("option", "", text(f.name));
+            option.value = f.id;
+            $("coverage-family").append(option);
+          }
+          $("coverage-family").disabled = !ordered.length;
+          if (!ordered.length) $("coverage-family").title = "No families are included in this report. Include family results when exporting to enable this choice.";
+          $("coverage-family").onchange = () => {
+            const family = families.find(f => f.id === $("coverage-family").value);
+            if (family) select(family);
           };
           let hoverFrame = null;
           function preview(f) {
@@ -3497,6 +3596,7 @@
               );
           }
           function scrollToFamily() {
+            showTab($("tab-coverage"));
             $("family-detail").scrollIntoView({
               behavior: reducedMotion.matches ? "auto" : "smooth",
               block: "start",
@@ -3952,6 +4052,7 @@
               "button",
               compact ? "coverage-figure" : "figure-card",
             );
+            button.title = "Open this figure at full size. This changes only the view of this report.";
             const img = node("img");
             img.src = fig.png;
             img.alt = "";
@@ -3976,6 +4077,7 @@
             $("family-detail").hidden = !f;
             if (!f) return;
             bind("family-title", f.name);
+            $("coverage-family").value = f.id;
             $("family-detail").style.setProperty(
               "--family-color",
               familyColor(f),
@@ -4866,6 +4968,11 @@
           renderFamily();
           updateSelectionSummary();
           renderSignal();
+          for (const kind of ["quality", "sensitivity"]) {
+            const host = $(kind + "-figures");
+            for (const figure of data[kind] || []) figureCard(figure, host);
+            $(kind + "-empty").hidden = host.childElementCount > 0;
+          }
           $("app").hidden = false;
           initializeDotPlot();
         } catch (error) {

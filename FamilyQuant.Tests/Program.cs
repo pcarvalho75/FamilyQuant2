@@ -479,6 +479,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => InterpretationInputTests());
             suite.Add(() => ReportNumberTraceTests());
             suite.Add(() => HtmlReportDataTests());
+            suite.Add(() => HtmlReportTabsTests(Path.Combine(workDir, "html-report-tabs")));
             suite.Add(() => DatabaseEntryCountTests(null));
             suite.Add(() => AssignmentPresenceCopyTests(null));
             suite.Add(() => HtmlDatabaseEntryTests());
