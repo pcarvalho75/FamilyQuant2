@@ -4,7 +4,7 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
-## 2.1.13 (release candidate)
+## 2.1.13 (published 2026-11-09)
 
 - **Read database and scope works while UniProt's bulk downloads are down.** It now uses the keyword categories that **Fetch evidence** already saved in the project, and reads UniProt's keyword list only for keywords without one, page by page. Species lineages are read page by page too. On 9 November 2026 UniProt's bulk keyword and taxonomy downloads failed for hours (HTTP 502) while its page-by-page searches worked, and 2.1.12 stopped with "UniProt refused the keyword vocabulary".
 - **The Scope box is always visible.** In **Review grouping > Evidence**, the Scope box and **Update proposal** sit directly under **Database and scope** and no longer scroll out of sight. In 2.1.12, at the window's normal size, the tables below left room only for the section title.
