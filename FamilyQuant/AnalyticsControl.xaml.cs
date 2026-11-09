@@ -56,6 +56,7 @@ public partial class AnalyticsControl : UserControl
     }
     private void DrawCharts()
     {
+        PanelFamilyChart.Children.Clear();
         PanelCharts.Children.Clear();
         if (Data == null) return;
         foreach (var figure in AnalyticsFigures.Build(Data, Families, FamilyTopN, FamilyAsPercent)
@@ -75,7 +76,8 @@ public partial class AnalyticsControl : UserControl
             var group = new StackPanel { Margin = new Thickness(0, 0, 0, 16) };
             group.Children.Add(new Border { Height = figure.ScreenHeight, Child = plotted });
             group.Children.Add(caption);
-            PanelCharts.Children.Add(group);
+            if (plotted is FamilyContributionChart) PanelFamilyChart.Children.Add(group);
+            else PanelCharts.Children.Add(group);
         }
     }
     private void ExportChoiceChanged(object sender, SelectionChangedEventArgs e)

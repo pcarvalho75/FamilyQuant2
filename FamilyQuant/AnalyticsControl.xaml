@@ -5,7 +5,7 @@
  Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}">
  <UserControl.Resources><BooleanToVisibilityConverter x:Key="VisibleWhenTrue"/></UserControl.Resources>
  <Grid Margin="24">
-  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
   <DockPanel>
    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
     <ComboBox x:Name="ComboBoxExportKind" Width="210" SelectedIndex="0" SelectionChanged="ExportChoiceChanged" ToolTip="Choose among the listed stored tables, figures and suggested sequences; the usual initial choice is Run summary, or an available standalone result. Selecting prepares Export without writing files or changing project values.">
@@ -33,7 +33,13 @@
     </Border>
    </DataTemplate></ItemsControl.ItemTemplate>
   </ItemsControl>
-  <WrapPanel Grid.Row="2" Margin="0,0,0,10">
+  <ScrollViewer x:Name="ScrollAnalytics" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+   <StackPanel>
+    <TextBlock x:Name="TextBlockStatus" TextWrapping="Wrap" Margin="0,0,0,8"/>
+    <Border x:Name="BorderEmpty" Background="{DynamicResource SurfaceBrush}" Padding="24" CornerRadius="6">
+     <TextBlock x:Name="TextBlockEmpty" Text="{Binding EmptyMessage}" TextWrapping="Wrap"/>
+    </Border>
+  <WrapPanel x:Name="FamilyChartOptions" Margin="0,0,0,10">
    <TextBlock Text="Family chart" VerticalAlignment="Center" Margin="0,0,10,0"/>
    <ComboBox x:Name="ComboBoxFamilyTopN" Width="160" SelectionChanged="ChartChoiceChanged" ToolTip="Choose the largest families as separate bars: 10, 15, 20, 30 or all families, with 15 as the default; the remainder shares one bar. This changes the chart and subsequent figure exports without editing project quantities; unavailable until quantitation exists.">
     <ComboBoxItem Content="Top 10 families" Tag="10" ToolTip="Show the ten largest families separately and combine all remaining families in one bar, suited to presentation slides. This changes chart layout and subsequent figure exports without editing quantities."/>
@@ -43,12 +49,7 @@
     <ComboBoxItem Content="All families" Tag="0" ToolTip="Give every family its own chart bar, allowing scrolling when needed. This changes chart layout and subsequent figure exports without editing quantities."/>
    </ComboBox>
   </WrapPanel>
-  <ScrollViewer x:Name="ScrollAnalytics" Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-   <StackPanel>
-    <TextBlock x:Name="TextBlockStatus" TextWrapping="Wrap" Margin="0,0,0,8"/>
-    <Border x:Name="BorderEmpty" Background="{DynamicResource SurfaceBrush}" Padding="24" CornerRadius="6">
-     <TextBlock x:Name="TextBlockEmpty" Text="{Binding EmptyMessage}" TextWrapping="Wrap"/>
-    </Border>
+    <StackPanel x:Name="PanelFamilyChart"/>
     <Expander Header="Numbers, provenance and method details" Visibility="{Binding HasData, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Expand stored summary facts, denominators, source cutoffs and counting grains behind Results. Only this view changes.">
      <TextBlock x:Name="TextBlockDetails" TextWrapping="Wrap" Margin="12"/>
     </Expander>
