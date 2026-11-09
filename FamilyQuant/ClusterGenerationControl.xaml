@@ -115,7 +115,14 @@
                 <GroupBox Header="Grouping" Margin="0,0,0,10">
                     <StackPanel>
                         <TextBlock x:Name="TextBlockPartGroupByEvidence" Text="a Group by evidence" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="4,0,4,4"
-                                   ToolTip="Part a of Curate families: the four numbered steps, in this order, from UniProt evidence to Quantify."/>
+                                   ToolTip="Part a of Curate families: optionally import your family list, then follow the four numbered steps from UniProt evidence to Quantify."/>
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <TextBlock Text="0" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
+                            <Button Grid.Column="1" x:Name="ButtonImportFamilyList" Content="Import family list (optional)" Click="ButtonImportFamilyList_Click"
+                                    ToolTip="Opens File > Import family list to choose the families you want to review before grouping. A confirmed import changes the project in one Undo step; finish the current operation to enable import."/>
+                        </Grid>
+                        <TextBlock x:Name="TextBlockFamilyListStatus" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8" TextWrapping="Wrap"/>
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="1" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
@@ -138,7 +145,7 @@
                             <Button Grid.Column="1" x:Name="ButtonEvidenceGrouping" Content="Group by evidence"
                                     Click="ButtonEvidenceGrouping_Click" ToolTip="Opens the stored-evidence review to confirm scope, panel links and proposed protein assignments. Apply grouping makes one undoable project change; missing evidence prompts a download first."/>
                         </Grid>
-                        <TextBlock Text="{Binding EvidenceGroupingStepStatus}" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
+                        <TextBlock x:Name="TextBlockEvidenceGroupingStatus" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8" TextWrapping="Wrap"/>
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="3" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>

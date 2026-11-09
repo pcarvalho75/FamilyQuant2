@@ -5781,6 +5781,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2225**; OPEN r
 
 ## Added contracts after the frozen source
 
+| FQ2-GROUPING-OPTIONAL-FAMILY-LIST | ADD | T17 adds optional Import family list as step 0 in Curate families, calling the existing File import wizard. Its name and family count refresh after import and Undo; Group by evidence names a missing list in its status. The four required grouping steps and their functions remain in order | test:FamilyListStepTests |
+
 These are additions, not replacements or drops of frozen FQ15 observations. The named DefaultSuite
 checks guard the contract and its presence. Executed native proof is recorded separately for review;
 adding this row does not change any frozen disposition, scan hash or receipt verification state.
