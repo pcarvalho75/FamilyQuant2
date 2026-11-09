@@ -179,6 +179,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D100 | The team for 2.1.14 | Three Sol 6.1 builders (FQDeNovo, FQCount, FQHtml) and one Grok 4.7 reviewer (FQRev); the desk runs every check on Ana's data. Paulo, 11-09 ("put 3 sol workers and a grok reviewer, get it going") |
 | D101 | Which exports stay (was P2) | The default, taken with Paulo's go: keep the Report (HTML, Word, workbook), the CSV tables, Suggested additions (FASTA), Families (.fcf) and Interpretation input (Markdown); remove Screen figures (PNG) and the Presentation evidence pack. Paulo, 11-09 ("get it going") |
 | D102 | A fourth builder | FQSimple (Sol 6.1) takes T17, T12 and T18 from the other three lanes, so the day is shorter. Paulo, 11-09 ("recruit a 4th sol worker") |
+| D103 | Bigger review bundles | FQRev reviews one lane at a time at its newest commit, every landed step of that lane in one pass (one build, all focused commands, one read of the diff); after the first pass, one final bundle per lane when its last step lands. Paulo, 11-09 ("bundle many things in a single review") |
 
 ## Risks and triggers
 
