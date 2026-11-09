@@ -1,35 +1,30 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 18, 2026-11-08 09:00, release 2.1.12: AI Help (Ctrl+H), a window that sends the question, the program's state and an optional picture to Claude, which reads the FamilyQuant source on GitHub to answer, with a bug report to the public releases repository (W23).
+Version 19, 2026-11-09 15:15, release 2.1.14, one day of work, theme: simpler. Each peptide counts once in the family charts; de novo peptides measured like identified ones (the per-interval normalization removed); the HTML report in tabs with every figure and a plain legend, and the choice of denominator (identified only, identified and de novo, TIC) there; fewer options in the program, a Simple view for Review grouping, and one Export window instead of 15 entries in four places.
 Finished rows leave this file and go to `docs/ROADMAP-archive.md`; the needle restarts at zero with each version.
 
-Version 17 delivered 38 steps (in the archive): release 2.1.11 published as Latest with the website live and Ana told, the ledger release check under D90, the deck v1 to v4 from her data, and the housekeeping after the release. Version 16 delivered 28 steps before it.
+Version 18 delivered 13 steps (in the archive): release 2.1.12, AI Help. Release 2.1.13 (UniProt search pages, the Scope row) was a quick fix outside the roadmap. The whole 11-09 plan from Ana's session is in the desk's notes/plan-ana-session-1109.md; this version takes the part that fits in one day (D97).
 
 ## The goal, in Paulo's words
 
-- 11-08: "i was thinking on doing a help system were its an llm help, we would get a pop up window that knows the state and a screenshot of what is going on in the program, it would then consult the github codebase to enable answering technical questions, it would also enable to submit bugs or odd behaviors"
-- 11-08: "i dont want to make th erepo public but i dont mind if they hack in"; "lets keep in the github limits and you make the user aware in the help window of this limitation"; "the user should be with the newest version always" (D93)
-- 11-08: "this should be doable even in 1h with 2 workers and a reviewer... you might be overcomplicating it"; "1 opus from the carvalho.paulo fiocruz account working, 1 sol worker, and 1 grok as floater / reviewer"
-- 11-07 15:13: "well its time to clean the roadmap again, get rid of the green boxes and make the roadmap properly reflect tot the end of the mission and bring the needle back to zero"
-- 11-07 15:07: "there must be a way to put a worker to advance work that is in the end of the roadmap from the serial long chain so we can advance on that end"
-- 11-07 14:36: "this process of review and go back is just to slow. maybe the reviewer fixes i?" (D89, D91)
-- 11-07 12:00: "clean the roadmap once again, get rid of all the green boxes, push the needle back to zero and place the boxes to reflect the road to project completion with what is missing or delete what is wrong"
-- 11-07 12:00: "if you want to rebuild all tests you better get started asap on that"
-- 11-07 09:25: "we need to get all workers busy, this project needs to ship today"
-- 11-05 14:25: "i wold like to see a way more detailed roadmap with many small steps ... remove all that was already accomplished and bring the needle back to zero"
-- 11-05 14:03 to 14:22: the website: "very very very gorgeous", "very instructional so everyone can understand", "fun and intuitive", "let the science for the paper", a separate rigorous science page, an in-depth study first
-- 11-05 13:57: "lets publish the next version asap... full throttle ahead!"
-
-- 11-05 12:21: "lets ready every suggestion from ana as you suggested also, prepare the roadmap and begin, 2 sol workers and 1 kimi reviewer"
+- 11-09: "too many options,and simplify the program,.. multiple exports, everything should be significantly simplified!"
+- 11-09: "ok, so include the per interval normalization, build a roadmap, but it needs to be very straight forward, something to be done in one day"
+- 11-09: "the export figures should be reconsidered the html could have tabs..... ideally everything in the html so we get rid of the export figures and simplify"
+- 11-09: "im also considering in removing this wierd normalization you did per channel, what do you think?"
+- 11-09: "a peptide cannot go to more than one family...  and in the graph its says a peptide in several families"
+- 11-09, his notes: "in the html i would like to have the option also of the normaliation be among the identified and not identified peptides... so I should have an option for the identified only, or the identified and not identified, or the TIC"
+- 11-09, his notes: "spread in html, i need to include a description"; "essa abrra e a media dos tres, tem que indicar na legenda"
+- 11-09: "i would also like all the figure export to be included in the html report with way more user friendly legends"
+- 11-09, Ana, through Paulo: there are too many options in the Review grouping window
 
 ## Rules every worker follows
 
 1. **Only the program makes results.** Python may investigate or check a number, never make one that reaches a person.
 2. **No exception lists.** No family, protein, Pfam or keyword literal in a rule; evidence and data decide, and what a user chooses is stored in the project. Nothing the user sees names an organism, a venom, a toxin or a sample's numbers (D21; the suite tests it). Protein family and domain names (for example serum albumin, whey acidic protein domain) are protein names, not samples (desk ruling 11-06 on Z12p2c).
 3. **No function is lost.** The feature ledger is the contract: only Paulo can drop a row. A rename keeps the function; a ledger row that pins an old name is mapped in the ledger's "Added contracts after the frozen source" section, never edited to make a check pass.
-4. **Numbers stay equal unless a step says otherwise.** Only Z6c may change a number, and only after Paulo's decision, a before and after on real data and a science review.
+4. **Numbers stay equal unless a step says otherwise.** In this version only T3 changes a number (D95), with its before and after on Ana's data. T7, T8 and T15 change which stored values a chart divides and draws (D96), never a stored value.
 5. **Deployable at every merge.** One step per commit, with its test; tests go into DefaultSuite. Builders run focused checks; the desk runs the whole suite once per release (D61 mode).
-6. **A step counts as done when a reviewer approves it** (Paulo, 11-05 13:41: "many approvals and no green boxes?"). Each release still ships only after its own full suite (Z7c, Z8c) is green on the merged commit; a suite failure reopens the step it points to until the fix is approved.
+6. **A step counts as done when a reviewer approves it** (Paulo, 11-05 13:41: "many approvals and no green boxes?"). Each release still ships only after its own full suite (T19 in this version) is green on the merged commit; a suite failure reopens the step it points to until the fix is approved.
 7. **A family panel is user data.** Ana's families, domains, subclasses and decisions live in her file and the project, never in code.
 8. **Never write inside `C:/Users/paulo/Desktop/AnaG`** except a delivery to `AnaG/Bjararaca/Relatorio` on Paulo's word.
 9. **The code repository stays private.** Releases go out as a Setup.exe and a zip on the public releases-only repository (D31, D32).
@@ -39,12 +34,16 @@ Version 17 delivered 38 steps (in the archive): release 2.1.11 published as Late
 
 ## The team
 
-| Name | Engine | Role in version 18 | Worktree |
+| Name | Engine | Role in version 19 | Worktree |
 |---|---|---|---|
-| Orchestrator | Claude, main session | Wrote the interface, assigns, routes reviews, merges, runs the suite once, releases, keeps this file and the board true | |
-| FQHelpBrain (HB) | Opus 5.5, carvalho.paulo@fiocruz.br | H1: the help assistant, Claude with the GitHub reader and the build-time token | `D:/FamilyQuant-wt/help-brain` |
-| FQHelpWindow (HW) | Sol 6.1 xhigh | H2: the AI Help window, Ctrl+H everywhere, what gets sent, the bug report, the notices | `D:/FamilyQuant-wt/help-window` |
-| FQHelpReview (HR) | Grok 4.7 xhigh | Reviewer and floater (Paulo, 11-08: "1 grok as floater / reviewer"): every READY under D89, small defects fixed itself; code and synthetic data only | `D:/FamilyQuant-wt/help-review` |
+| Orchestrator | Claude, main session | Assigns, routes reviews, merges, drops the ledger rows Paulo removed, runs the suite once, releases, keeps this file and the board true | |
+| FQDeNovo (DN) | Opus 5.5, carvalho.paulo@fiocruz.br | T1 to T6: the de novo envelope check and switch, the recovery chart, the Quantify warnings. The only worker that touches Ana's data | `D:/FamilyQuant-wt/denovo` |
+| FQCount (CT) | Sol 6.1 xhigh | T7 to T12, then the package (as H4c): each peptide once, fewer chart options, the HTML payload fields, the Simple view of Review grouping | `D:/FamilyQuant-wt/count` |
+| FQHelpWindow (HW) | Sol 6.1 xhigh | T13 to T16: the HTML report in tabs with every figure, its legend and the denominator switch | `D:/FamilyQuant-wt/html-tabs` |
+| FQHelpReview (HR) | Grok 4.7 xhigh | Reviewer and floater: every READY under D89 and D91, small defects fixed itself; T17 and T18. Code and synthetic data only | `D:/FamilyQuant-wt/help-review` |
+| Argon | Gemini 4 Argon | Reviews HR's own steps (T17, T18) | |
+
+File ownership, so the lanes never touch the same file at the same time: DN owns `FamilyQuant.Core/DeNovo`, `FamilyQuant.Core/Quantitation`, `RecoveryChart.cs` and the Quantify screen. CT owns `FamilyContributionChart.cs`, `AnalyticsViewModel.cs`, `CurationQuantitationPanel.xaml(.cs)`, `SuperClusterPreviewWindow.xaml(.cs)` and `FamilyQuant.Core/Report/HtmlReportPayload*.cs`. HW owns `FamilyQuant.Core/Report/Html/report-template.html` and the HTML figure code. HR owns the export entries (File menu, Results export list, Curate families Display and export) and the Grouping panel for T17. `AnalyticsControl.xaml(.cs)` is CT's until T10 is approved, then HR's. A change needed in another lane's file is asked for through the desk.
 
 ## Design rules for the look (hard requirements)
 
@@ -58,38 +57,47 @@ Version 17 delivered 38 steps (in the archive): release 2.1.11 published as Late
 
 ## Workstreams
 
-Every row is a small step with its own done-check. A step is done when a reviewer other than its builder approves it (rule 6); approved work merges into fq/v2111-release (FQFloat) and reaches master at Z12h2e. Ids are unchanged from version 14; a step split here keeps its id as a prefix (Z12p5f became Z12p5f1 to Z12p5f4).
+Every row is a small step with its own done-check. A step is done when a reviewer other than its builder approves it (rule 6); each lane merges into master at T19. Ids never change; a step split here keeps its id as a prefix (T7 would become T7a and T7b).
 
-### W23 AI Help, release 2.1.12 (FQHelpBrain, FQHelpWindow, FQHelpReview, Orchestrator, Paulo)
+### W24 Ana's session, release 2.1.14: simpler (FQDeNovo, FQCount, FQHelpWindow, FQHelpReview, Orchestrator)
 
-Paulo, 11-08: "i was thinking on doing a help system were its an llm help, we would get a pop up window that knows the state and a screenshot of what is going on in the program, it would then consult the github codebase to enable answering technical questions, it would also enable to submit bugs or odd behaviors"; "this should be doable even in 1h with 2 workers and a reviewer". Both builders work against the desk's interface `FamilyQuant/Ai/HelpAssistantContract.cs` (commit ebaea183) from the start, so neither waits for the other.
+Paulo, 11-09, during the session with Ana: "a peptide cannot go to more than one family", "im also considering in removing this wierd normalization", "ideally everything in the html so we get rid of the export figures and simplify", "too many options", "something to be done in one day".
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| H3a | FQHelpReview checks the desk's interface (ebaea183) against both briefs: can each builder do every step with it | L | 0.1 |  |  | APPROVED or FINDINGS posted; the desk ruled any gap | HR |  | 0 | 0 |  |
-| H1a | The GitHub reader: list files (one tree call, cached), read lines (cached per path), search code (10 a minute for all users together); the limit headers read and a limit stops reading cleanly; nothing about the user goes to GitHub | M | 0.3 |  | H1c | --test-help-assistant passes against a fake GitHub; reviewed | HB |  | 0 | 0 |  |
-| H1b | The read-only token at build time: read from a file outside the repository (%LOCALAPPDATA%/FamilyQuant-build/github-help-token.txt), kept scrambled so its text never appears in the binary; without the file the build has no token and AI Help answers without GitHub | L | 0.2 |  | H1c, H4b | Builds with and without the file; the token text absent from the binary; reviewed | HB |  | 0 | 0 |  |
-| H1c | The Claude loop replaces the stub: earlier turns, the state as text, the picture only when ticked, the three GitHub tools, caps (12 GitHub calls, 3 searches, 8 rounds), sources from every read, the AI draft's outcome mapping, a short help system prompt | M | 0.4 | H1a, H1b | H4a | --test-help-assistant and --test-ai-transport pass; reviewed | HB |  | 0 | 0 |  |
-| H2a | The AI Help window: Help > Ask AI Help... with Ctrl+H, and Ctrl+H from every FamilyQuant window (Paulo, 11-08: "maybe we could fire up this window from anywhere with ctrl + h"); question, Ask, Cancel, answers with their sources, the AI draft's key offer and outcome messages | M | 0.3 |  | H2b | --test-ai-help-window and the four global checks pass; screens dark and light; reviewed | HW |  | 0 | 0 |  |
-| H2b | What gets sent: the state (version, screen, screen help, project, last error, log tail) shown under "What AI Help sends"; the picture box off by default, with a preview, taken again at Ask | L | 0.2 | H2a | H2c | Tests pass; reviewed | HW |  | 0 | 0 |  |
-| H2c | Report this as a bug: an editable report; Open on GitHub fills a new issue on FamilyQuant2-releases (address under 7,000 characters, the full report on the clipboard); the picture saved where the user can drag it in | L | 0.2 | H2b | H2d | Tests pass; reviewed | HW |  | 0 | 0 |  |
-| H2d | The notices: GitHub's limits and the user's own Anthropic key in the window, the no-source and limit-reached lines; in the AI assistant key window "The same key is used by AI Help" (Paulo, 11-08: "make a notice in the claude api window that it can also be used for the AI help"); AI Help in the in-program AI text | L | 0.2 | H2c | H4a | Tests pass; reviewed | HW |  | 0 | 0 |  |
-| H5a | Paulo makes the fine-grained GitHub token (read-only Contents on FamilyQuant2 only) and saves it with one command into the build folder; the desk guides and never sees it | L | 0.1 |  | H4b | The file exists (only its size is checked); Paulo does it later today | Paulo |  | 0 | 0 |  |
-| H4a | fq/help-brain and fq/help-window merged into master, the full suite green, pushed | L | 0.4 | H1c, H2d, H4a1 | H4b0 | Suite line copied; master pushed | Orchestrator |  | 0 | 0 |  |
-| H4a1 | The feature-ledger receipts refreshed on the final merged tree (refresh_ledger.py: the Help menu item in MainWindow.xaml staled 136 rows in N6a-text, SH, SH-main-routes and SH-runtime, all automatic producers; found by the desk's full-suite rehearsal at 09:34, 10,632 passed and 2 failed) and the ledger scan green | L | 0.2 | H1c, H2d | H4a | 136 of 136 came back; the ledger scan check passes | Orchestrator |  | 0 | 0 |  |
-| H4b0 | Packaging rehearsal without the token (Paulo, 11-08: "you will need to advance with the code as if this token existed... i will leave now and will only be able to do that later"): version 2.1.12.0, the notes drafted, the Visual Studio MSBuild publish and Setup into a scratch folder, AI Help shown answering without GitHub; nothing published | L | 0.3 | H4a | H4b | Package check PASS at 2.1.12.0; notes drafted | Orchestrator |  | 0 | 0 |  |
-| H4b | Release 2.1.12: version bump, the package built with the token (Visual Studio MSBuild publish and Setup), one live AI Help question that reads a file from GitHub on the packaged build, published as Latest with notes | M | 0.2 | H4b0, H5a |  | The release page shows 2.1.12; the live question cited a GitHub file | Orchestrator |  | 0 | 0 |  |
+| T1 | The de novo envelope check, changing no number: a FamilyQuant.Tests command on a copy of Ana's project and RAW files. For every precursor with both a PatternLab identification and a de novo call, the measured de novo envelope divided by the identified envelope of the same precursor, and the mass-interval model's estimate divided by it | M | 1.0 |  | T2 | Counts, medians and quartiles of both ratios posted, no rows | DN |  | 0 | 0 |  |
+| T2 | D95's guard: a median measured ratio within 0.8 to 1.25 starts T3; outside it the desk stops and asks Paulo | L | 0.1 | T1 | T3 | The desk's line in LOG with both medians | Orchestrator |  | 0 | 0 |  |
+| T3 | De novo peptides use their measured envelope, the same rule as identified peptides: the primary de novo value and its run and family sums return the measured envelope; ReferenceEnvelopeEstimator leaves the pipeline; the reference-envelope model figure and its captions go; the quant method version moves up, so a project computed before says "Run Quantify again" | M | 2.0 | T2 | T4, T19 | Before and after on Ana's project posted (recovery per run, the top 15 family shares; counts and shares only); focused tests green; reviewed | DN |  | 0 | 0 |  |
+| T4 | The recovery chart after T3: two readings (M+0 only; the measured envelope); the label prints the real isotope ceiling instead of "six-window"; one plain line per bar in the legend | L | 0.4 | T3 | T19 | Screen render; test; reviewed | DN |  | 0 | 0 |  |
+| T5 | Quantify warns when a run has no de novo calls, and the Run summary lists de novo peptide features per run (her runs 02 and 03 had none) | L | 0.5 |  | T19 | Test with a synthetic two-run source; reviewed | DN |  | 0 | 0 |  |
+| T6 | Why her Quantify page opened at isotope ceiling 3 when the Help says 6: find the source (a stored setting or the default); a new project starts at 6 | L | 0.3 |  | T19 | Test: a new project opens at 6; reviewed | DN |  | 0 | 0 |  |
+| T7 | The family contribution chart counts each peptide once: drawn under the project's shared-peptide rule (family-unique parts, a "shared between families" bar beside unattributed, all summing to 100%); the heading names the rule; the de novo legend says "de novo" | M | 1.5 |  | T8, T11 | The bars sum to the total on a synthetic project with shared peptides; screen render; reviewed | CT |  | 0 | 0 |  |
+| T8 | Fewer chart options on Results: the "Percent of measured signal" box goes; the family chart always shows percent of all peptide features (identified and de novo, each peptide once), each bar split into its identified and de novo parts. The denominator choice lives only in the HTML report (T15) | L | 0.5 | T7 | T10 | Test; screen render; reviewed | CT |  | 0 | 0 |  |
+| T9 | The "count in every family" shared-peptide choice leaves the Quantitation panel (D96): family-unique and split remain | L | 0.3 |  | T19 | Test; screen render; reviewed | CT |  | 0 | 0 |  |
+| T10 | Results: the Top N choice sits directly above the family chart | L | 0.3 | T8 | T18 | Screen render; reviewed | CT |  | 0 | 0 |  |
+| T11 | The HTML payload carries, per family and per run, the three shares (identified only, identified and de novo, TIC) from the stored studies, each peptide once | L | 0.4 | T7 | T15 | Payload test; reviewed | CT |  | 0 | 0 |  |
+| T12 | Review grouping, Simple view by default: Scope, Read database and scope, Update proposal, the family table, the Proteins table (Use, Accession, Description, Flags) made taller, Find, Tick and Untick, Selected protein details, Apply grouping. "Show all options" opens the rest (Keywords, the other tabs, Align, Add to and Remove from family, Show members, Motif, Fetch missing panel) | M | 1.5 |  | T19 | Screen renders at 1180x740 and 1366x820, both views; every hidden control still reachable; reviewed | CT |  | 0 | 0 |  |
+| T13 | The HTML report in tabs: Families, Signal recovery, Mass and isotopes, Coverage, Database gap, Quality, Sensitivity; today's content moves into them unchanged | M | 1.0 |  | T14, T15 | The offline page opens on a synthetic project with every tab; template tests green; reviewed | HW |  | 0 | 0 |  |
+| T14 | Every Results figure inside its tab (signal recovery, ion current by mass, isotopes credited, signal by mass, family contribution), rendered from the same chart code as the screen, as the Quality figures are today; coverage stays the page's own interactive maps | M | 1.0 | T13 | T16, T18 | Each figure present on a synthetic project; page size measured; reviewed | HW |  | 0 | 0 |  |
+| T15 | The denominator switch on the Families tab ranking (identified only, identified and de novo, TIC), from T11's fields | M | 0.8 | T11, T13 | T19 | Switch test on a synthetic payload; reviewed | HW |  | 0 | 0 |  |
+| T16 | A plain-language legend under every figure and chart: what it shows, how to read it, its denominator, pooled or the mean of N runs, what the whiskers are; Spread gets its (i) description | M | 1.0 | T14 | T19 | A test finds a legend under every figure; reviewed | HW |  | 0 | 0 |  |
+| T17 | Import family list as an optional step 0 of the guided Grouping order; Group by evidence says when the project has no family list | L | 0.5 |  | T19 | Screen render; test; reviewed by Argon | HR |  | 0 | 0 |  |
+| T18 | One Export window (File > Export) replacing the 15 entries in four places: Report (HTML, Word, workbook) first, then Tables (CSV), Suggested additions (FASTA), Families (.fcf). "Screen figures (PNG)" goes (D98) and the exports P2 removes; duplicates in Results and Curate families open this window | M | 1.5 | T10, T14, P2 | T19 | Every kept export reachable from the window and writes the same file as before (tests); screen render; reviewed by Argon | HR |  | 0 | 0 |  |
+| T19 | The lanes merged into master; the ledger rows of what Paulo removed dropped under D95, D96, D98 and D99, every rename mapped; the receipts refreshed; the full suite once | M | 0.8 | T3, T4, T5, T6, T9, T12, T15, T16, T17, T18 | T20 | Suite line copied; ledger check exit 0 | Orchestrator |  | 0 | 0 |  |
+| T20 | Release 2.1.14: the version bump on the 31 lines, the notes, the package with the token (FQCount, as H4c), the offline update from 2.1.13, published as Latest, the README | M | 1.0 | T19 |  | Release live; hashes match | Orchestrator |  | 0 | 0 |  |
 
 ## Critical path
 
-Two builders in parallel against the desk's interface (ebaea183): FQHelpBrain does H1a and H1b, then H1c; FQHelpWindow does H2a to H2d. FQHelpReview reviews each step as it lands and fixes small defects itself (D89, D91). Paulo's token (H5a) runs meanwhile. Then the merge and the full suite (H4a) and the release built with the token (H4b).
+Four lanes start at once from master 3b31796a. FQDeNovo runs the check T1 first, because it decides T3; T5 and T6 fill the wait. FQCount does T7, then T8, T10 and T11, with T9 and T12 after. FQHelpWindow does T13 and T14, then T15 once T11 lands, and T16. FQHelpReview reviews each step as it lands and does T17, then T18 once T10 and T14 are approved. About 5 hours of building, then about 2 hours for T19 and T20.
 
-After this mission: the documentation rewrite and the other items in the desk's notes/next-roadmap.md; the next mission is planned with Paulo.
+After this version, planned with Paulo (D97): a simplification pass over every other screen (the Grouping panel, Quantify, De novo review: what goes behind "More options" and what is removed); one glossary and "peptide feature" everywhere; the recovery chart rewritten and recovery per mass range; a Merge families action; the unattributed bar broken down; the isotope-pattern fit; AI Help Markdown; and the other items in the desk's notes/next-roadmap.md.
 
 ## Paulo's decisions
 
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
+| P1 | The team for this day | FQDeNovo (Opus 5.5, fiocruz) for the de novo lane, FQCount and FQHelpWindow (Sol 6.1) building, FQHelpReview (Grok 4.7) reviewing, Argon reviewing Grok's steps | The start |
+| P2 | Which exports stay | Keep: Report (HTML, Word, workbook); Tables (run summary, peptide table, homology assignments, database gap, family composition, protein table, panel assignment audit); Suggested additions (FASTA); Families (.fcf); Interpretation input (Markdown). Remove: Screen figures (PNG) (D98) and the Presentation evidence pack, whose figures now live in the HTML | T18 |
 
 ### Decisions in force
 
@@ -161,19 +169,21 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D92 | D21 covers the program and its Help, not the website, for 2.1.11 | Paulo, 11-07 15:20, on FQSite's Q Z14a0: "pick whatever you think is more appropriate". The desk keeps the website's examples (venom, Toxin, Venom gland, the invented Lantern viper) as on the live site Paulo approved, so the upload changes no page beyond the release; neutral examples that show "any database" go to the documentation rewrite after the release (notes/next-roadmap.md) | Taken | Z14a |
 | D93 | AI Help reads master on GitHub through a read-only token built into the program; the repository stays private | Paulo, 11-08: "i dont want to make th erepo public but i dont mind if they hack in", "the user should be with the newest version always". The token can read only Contents of FamilyQuant2; it is kept scrambled in the binary so automatic scanners do not revoke it, not for security; it is never in the repository or a log. |
 | D94 | AI Help stays inside GitHub's limits and says so | Paulo, 11-08: "lets not do it, lets keep in the github limits and you make the user aware in the help window of this limitation". No local copy of the source; the window states the shared limits (10 code searches a minute, 5,000 calls an hour, for all users) and, when one is hit, when it resets. |
+| D95 | The per-interval de novo normalization | Removed: de novo peptides use their measured envelope, the same rule as identified peptides. Desk's guard: if the check T1 puts the median measured ratio outside 0.8 to 1.25, the desk stops and asks. Paulo, 11-09 ("im also considering in removing this wierd normalization", "ok, so include the per interval normalization, build a roadmap") |
+| D96 | Each peptide counts once | Family charts and shares credit a peptide to at most one family; "count in every family" leaves the program; the denominator is a choice in the HTML report: identified only, identified and de novo, TIC. Paulo, 11-09 ("a peptide cannot go to more than one family", his notes) |
+| D97 | One day | This version holds only what fits in one day; the rest of the 11-09 plan waits for the next roadmap, planned with Paulo. Paulo, 11-09 ("very straight forward, something to be done in one day") |
+| D98 | The figures live in the HTML report | The HTML report gets tabs with every Results figure and plain legends; "Screen figures (PNG)" leaves the program. Paulo, 11-09 ("ideally everything in the html so we get rid of the export figures and simplify") |
+| D99 | Simpler | Fewer options on screen, advanced controls behind "Show all options", one Export window. Paulo, 11-09 ("too many options,and simplify the program,.. multiple exports, everything should be significantly simplified!") |
 
 ## Risks and triggers
 
 | Risk | Trigger | Response |
 |---|---|---|
-| GitHub's shared limit is hit often | Users see the limit line | Count it in the bug reports; a cache or a local copy is decided with Paulo (D94 for now) |
-| The token is revoked or expires | AI Help says it cannot read the source | Paulo makes a new one and the next release carries it; answers meanwhile rely on the screen and the program's own help |
-| Code search refuses a fine-grained token | search_code returns an error | list_files and read_file still work; the assistant falls back to them |
-| The final walk or the dress rehearsal finds more | FINDINGS Z12p5 or RESULT Z12h2c0 names new defects | Each becomes a bundle under Z12p5y or Z12h2c1 at once, fixed in parallel by the free builders, small reviewer fixes checked by the desk (D91) |
-| The release check cannot pass today | Z17a2 shows groups that cannot be rerun or fixed in time | Paulo decides at Z17a3 which rows must be proved before 2.1.11 and which ship marked to verify again; nothing is weakened silently |
-| A partial panel is used as if complete | A family is missing after Z1d | The panel is stored as incomplete with the missing families named; every step that reads it says so and offers Retry panel |
-| Resume mixes two UniProt releases | The release changes between two fetches | Kept batches are keyed by release and discarded when it changes (Z1c); the evidence and panel release guard stays |
-| A rename loses a function or breaks a ledger row | The full suite fails on a ledger or text check | The owner maps the old name to the new one in the ledger's Added contracts section; nothing is dropped or edited to pass |
-| Setup reopens the app wrongly | Two windows, or a launch after a failed install | Launch only on the update path, once, as the user (Z2a test) |
-| The reviewer is busy elsewhere | Another project's Kimi worker is running when a batch is ready | The batch waits in the queue; if a 2.1.7 batch waits more than 30 minutes the desk tells Paulo |
-| Ana's data leaves this PC | Any review or brief | Kimi sees code and synthetic data only; Z6a reports counts and shares, never her rows |
+| The measured de novo envelope disagrees with the identified one | T1's median ratio outside 0.8 to 1.25 | The desk stops T3 and asks Paulo (D95's guard); the other lanes go on |
+| Two lanes touch the same file | A merge conflict at T19 | File ownership in the team section; a change in another lane's file goes through the desk |
+| Old projects show model numbers | A project computed before 2.1.14 is opened | The quant method version moved up in T3; Results says "Run Quantify again" |
+| A function is lost without Paulo's word | The ledger check fails at T19 | Only D95, D96, D98, D99 and P2 drop rows; every other change is mapped in the ledger's Added contracts section |
+| The Simple view hides something Ana needs | Her first use of 2.1.14 | "Show all options" is one click; she tells Paulo what to bring forward |
+| The HTML page grows too large with figures | T14's page size on Ana's project | Compressed PNG, measured before T19 |
+| Ana's data leaves this PC | Any brief or review | Only FQDeNovo (Anthropic) touches her project; the others see code and synthetic data only |
+| The day runs long | A lane is more than an hour late at 18:00 | Its last step moves to the next roadmap; 2.1.14 ships with what is reviewed |
