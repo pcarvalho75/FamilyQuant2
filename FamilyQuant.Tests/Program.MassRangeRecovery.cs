@@ -137,6 +137,13 @@ internal static partial class Program
             && recovery.Bins[0].Recovery == null && recovery.Bins[1].Recovery == .5 && recovery.Bins[39].Recovery == .1);
         Check("U6 native chart and HTML projection share identical areas, ratios and bases", JsonSerializer.Serialize(recovery)
             == JsonSerializer.Serialize(new PercentIonCurrentChart(data.Peptides, recovery: recovery).Data));
+        string caption = CompositionChartCaptions.Build(new AnalyticsFigure(AnalyticsFigures.PercentIonCurrentFile,
+            new PercentIonCurrentChart(data.Peptides, recovery: recovery), 300), data);
+        Check("U6 results and report caption describes detector recovery, not TIC-share bars",
+            caption.Contains("detector's isotope-envelope area", StringComparison.Ordinal)
+            && caption.Contains("not a share of TIC", StringComparison.Ordinal)
+            && !caption.Contains("outlined bars", StringComparison.Ordinal)
+            && !caption.Contains("Represented share of recorded total ion current", StringComparison.Ordinal));
         data.Fractions[1].DetectedAreaByNeutralMass = null;
         Check("U6 one incomplete run blocks the pooled view", !MassRangeRecoveryData.Build(data).Available);
         data.Fractions[1].DetectedAreaByNeutralMass = b;
