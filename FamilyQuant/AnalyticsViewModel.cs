@@ -81,7 +81,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
             if (DatabaseGap.HasStoredResult) exportKind = ResultsExportKind.DatabaseGap;
             return;
         }
-        Data = AnalyticsBuilder.Build(rows, manifest?.PerRunTic ?? new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase));
+        Data = AnalyticsBuilder.Build(rows, manifest?.PerRunTic ?? new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase), manifest?.IsotopeCount);
         if (manifest?.DerivedFractions is { Count: > 0 })
             NativeQuantFractions.ApplyDetectedToFractions(Data.Fractions, Data.Grouped, manifest.DerivedFractions);
         if (curation != null)

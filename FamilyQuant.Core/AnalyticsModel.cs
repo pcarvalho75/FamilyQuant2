@@ -74,6 +74,10 @@ namespace FamilyQuant
     /// </summary>
     public sealed class AnalyticsData
     {
+        /// <summary>Recorded extraction ceiling; null when it was not supplied. Padded storage arrays
+        /// cannot establish the ceiling selected for a computation.</summary>
+        public int? IsotopeCeiling { get; internal set; }
+
         public List<AnalyticsPeptide> Peptides { get; } = new List<AnalyticsPeptide>();
 
         /// <summary>The per-run native fractions (Q3), in run order. Never carries the grouped row; that
@@ -236,11 +240,12 @@ namespace FamilyQuant
         /// the store and the manifest's per-run TIC. A store with no TIC (an unmanifested project) still
         /// yields a table; its fractions divide by zero and read zero, which the recovery chart says.
         /// </summary>
-        public static AnalyticsData Build(IEnumerable<QuantRow> rows, IReadOnlyDictionary<string, double>? perRunTic)
+        public static AnalyticsData Build(IEnumerable<QuantRow> rows, IReadOnlyDictionary<string, double>? perRunTic,
+            int? isotopeCeiling = null)
         {
             if (rows == null) throw new ArgumentNullException(nameof(rows));
 
-            var data = new AnalyticsData();
+            var data = new AnalyticsData { IsotopeCeiling = isotopeCeiling is >= 1 and <= 6 ? isotopeCeiling : null };
             data.Peptides.AddRange(BuildPeptides(rows));
 
             var tic = perRunTic ?? new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);

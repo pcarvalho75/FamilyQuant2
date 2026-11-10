@@ -29,8 +29,8 @@ internal static partial class Program
             "share column", "percentage", "measurements", "never change", "disabled", "loaded project", "totals",
             "Default:", NormalizationMode.IdentifiedSignal.DisplayName());
         Verify("recovery", new RecoveryChart(Array.Empty<NativeRunFraction>()).ToolTip,
-            "Top:", "recovered ion current", "M+0", "PRIMARY estimate", "unadjusted diagnostic", "Bottom: TIC",
-            "isotope-series detector", "primary estimate", "not peptide-FDR calibrated", "does not partition the TIC", "biological classes");
+            "M+0 only", "measured isotope envelope", "recorded TIC", "identified signal before de novo signal",
+            "independent isotope-series diagnostic", "not peptide-FDR calibrated", "does not partition TIC", "biological classes");
         Verify("isotope count", new IsotopeCountChart(Array.Empty<AnalyticsPeptide>()).ToolTip,
             "Each bar counts", "peptides credited that many isotopes", "from 1 up to the",
             AnalyticsBuilder.IsotopeBasis.ToString(CultureInfo.CurrentCulture) + "-isotope ceiling",

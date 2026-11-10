@@ -84,7 +84,7 @@ namespace FamilyQuant.Tests
 
             Color ticColour = ChartPalette.ColorOf(pal.Tic);
             Color quantColour = ChartPalette.ColorOf(pal.Quantified);
-            Color singleColour = ChartPalette.ColorOf(pal.DetectedSinglyCharged);
+            Color singleColour = ChartPalette.ColorOf(pal.Muted);
             Color deNovoColour = ChartPalette.ColorOf(pal.DeNovo);
 
             // A minimum start of 100 px and a minimum length of 30 px keep the 12 px legend swatches, which

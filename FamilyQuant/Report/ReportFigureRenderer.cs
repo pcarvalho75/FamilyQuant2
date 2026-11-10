@@ -69,7 +69,7 @@ public static class ReportFigureRenderer
         Add(ReportSectionIds.Quality, AnalyticsFigures.PercentIonCurrentFile, "Ion current by mass",
             "Signal in each mass interval divided by the recorded RAW total ion current. Missing TIC is unavailable.", () => new PercentIonCurrentChart(data.Peptides, data.Grouped?.Tic ?? 0));
         Add(ReportSectionIds.Quality, AnalyticsFigures.RecoveryFile, "Recovery and M+0 sensitivity",
-            "The chart compares M+0 only with the measured envelope for identified and de novo peptides.", () => new RecoveryChart(data.Fractions, data.Grouped));
+            "The chart compares M+0 only with the measured envelope for identified and de novo peptides.", () => new RecoveryChart(data.Fractions, data.Grouped, isotopeCeiling: manifest.IsotopeCount));
         var runPages = data.Fractions.Chunk(ReportSignalByRunChart.RunsPerPage).DefaultIfEmpty(Array.Empty<NativeRunFraction>()).ToArray();
         for (int page = 0; page < runPages.Length; page++)
         {

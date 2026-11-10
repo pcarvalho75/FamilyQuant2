@@ -230,6 +230,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => FamilyContributionChartTests(workDir));
             suite.Section("Recovery chart geometry - per-row normalisation and labels that tell the runs apart");
             suite.AddWithApplication(() => RecoveryChartGeometryTests(workDir));
+            suite.AddWithApplication(() => MeasuredRecoveryChartTests(Path.Combine(workDir, "measured-recovery-chart")));
             suite.Section("Chart palette - the light slide variant, and every chart drawn in both");
             suite.AddWithApplication(() => ChartPaletteTests(workDir));
             suite.Section("Figure export - every chart as a projector-sized PNG, with no window");
