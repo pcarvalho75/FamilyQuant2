@@ -185,6 +185,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D103 | Bigger review bundles | FQRev reviews one lane at a time at its newest commit, every landed step of that lane in one pass (one build, all focused commands, one read of the diff); after the first pass, one final bundle per lane when its last step lands. Paulo, 11-09 ("bundle many things in a single review") |
 | D104 | The HTML replots by normalization | A page-wide radio button selects the normalization and every chart that depends on it redraws (T15b, T11b), before 2.1.14 ships. Paulo, 11-09 ("i would like the html to be able to replot depending on the normalization, so there would be a radio button to select the normalization on the html") |
 | D105 | The website follows 2.1.14 | A new upload folder for the website with the science text and screenshots of this release (T21); Paulo uploads it. Paulo, 11-09 ("does this roadmap include and update in the website?") |
+| D106 | Ledger rows this release changed on purpose | Rows whose proofs went stale because of the intended 2.1.14 changes and that the refresh cannot bring back are reopened as OPEN, named in docs/LEDGER-REVERIFY-2.1.14.md, to verify again after release (as D88 for 2.1.11); 2.1.14 ships when the full suite is green. Paulo, 11-09 ("well just verify agin"), leaving until 20:00 ("i expect this project to be done by then") |
 
 ## Risks and triggers
 
