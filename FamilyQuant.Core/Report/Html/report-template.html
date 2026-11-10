@@ -89,7 +89,7 @@
       }
       html {
         scroll-behavior: smooth;
-        scroll-padding-top: 88px;
+        scroll-padding-top: var(--report-sticky-height, 88px);
       }
       body {
         margin: 0;
@@ -1023,17 +1023,28 @@
         font-weight: 400;
         color: var(--muted);
       }
-      .ranking-bases {
+      .normalization-bar {
+        position: sticky;
+        top: var(--topbar-height, 68px);
+        z-index: 4;
+        background: var(--surface);
+        border: 1px solid var(--edge);
+        border-radius: 12px;
+        padding: 12px 16px;
+        margin: 20px 0;
+      }
+      .normalization-bases {
         border: 0;
         padding: 0;
-        margin: 0 0 18px;
+        margin: 0;
       }
-      .ranking-bases legend {
+      .normalization-bases legend {
         font-weight: 600;
         margin-bottom: 8px;
       }
       .basis-options {
         display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 8px;
       }
       .basis-option {
@@ -1049,10 +1060,53 @@
       .basis-reason {
         display: block;
       }
+      .contribution-chart {
+        margin-top: 20px;
+      }
+      .contribution-row {
+        display: grid;
+        grid-template-columns: minmax(130px, 1fr) minmax(160px, 2fr) 90px;
+        gap: 12px;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--edge);
+      }
+      .contribution-track {
+        position: relative;
+        height: 24px;
+        background: var(--subtle);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .contribution-part {
+        position: absolute;
+        top: 0;
+        height: 100%;
+      }
+      .contribution-values {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        margin-top: 4px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .contribution-total {
+        text-align: right;
+      }
+      .contribution-row[data-kind="others"] {
+        font-weight: 600;
+      }
+      @media (max-width: 740px) {
+        .basis-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .contribution-row { grid-template-columns: minmax(0, 1fr) 80px; }
+        .contribution-label { grid-column: 1 / -1; }
+      }
       #panel-recovery .evidence-grid {
         grid-template-columns: 1fr;
       }
       @media print {
+        .normalization-bar { position: static; break-inside: avoid; }
         .report-tabs { display: none; }
         .report-panel[hidden] { display: block !important; }
         .report-panel { break-before: page; }
@@ -2718,6 +2772,13 @@
         </div>
         <div id="notices"></div>
         <div class="headline" id="headline"></div>
+        <div class="normalization-bar" id="report-normalization">
+          <fieldset class="normalization-bases" id="normalization-bases">
+            <legend>Normalize to</legend>
+            <div class="basis-options" id="normalization-options"></div>
+            <p id="basis-compatibility" class="fine-print" hidden>This report contains the recorded credited-family ranking. Export it with the current FamilyQuant version to add the four bases.</p>
+          </fieldset>
+        </div>
         <div class="report-tabs" role="tablist" aria-label="Report sections">
           <button class="report-tab" id="tab-families" role="tab" aria-controls="panel-families" aria-selected="true" title="Explore family shares and compare the runs. This changes only the view of this report.">Families</button>
           <button class="report-tab" id="tab-recovery" role="tab" aria-controls="panel-recovery" aria-selected="false" tabindex="-1" title="Compare credited signal with the measured total. This changes only the view of this report.">Signal recovery</button>
@@ -2772,11 +2833,6 @@
               <div id="selected-summary" class="selected-summary"></div>
             </div>
             <div class="rank-pane">
-              <fieldset class="ranking-bases" id="ranking-bases">
-                <legend>Share denominator</legend>
-                <div class="basis-options" id="ranking-base-options"></div>
-                <p id="basis-compatibility" class="fine-print" hidden>This report contains the recorded credited-family ranking. Export it with the current FamilyQuant version to add the four bases.</p>
-              </fieldset>
               <div class="rank-toolbar">
                 <h3>Across the runs</h3>
                 <div
@@ -2889,7 +2945,20 @@
               ><span>Hollow: unplottable values</span>
             </div>
           </div>
-          <p id="dot-plain-legend" class="chart-legend">Each dot is a family; the chosen X, Y and Size measures say how to compare it. A share uses the recorded family-share denominator, while protein and entry counts have no signal denominator. Family shares are means across available runs; counts describe the recorded database and evidence, and this chart has no whiskers.</p>
+          <p id="dot-plain-legend" class="chart-legend">Each dot is a family; the chosen X, Y and Size measures say how to compare it. A share uses the recorded family-share denominator, while protein and entry counts have no signal denominator. Family shares are means across available runs; counts describe the recorded database and evidence, and this chart has no whiskers. This chart keeps its recorded base when Normalize to changes.</p>
+        </section>
+        <section class="section" id="family-contribution-section" aria-labelledby="family-contribution-title">
+          <div class="section-title">
+            <h2 id="family-contribution-title">Family contribution</h2>
+          </div>
+          <p id="contribution-scope" class="fine-print"></p>
+          <div class="legend" id="contribution-key">
+            <span class="legend-item"><span class="swatch" style="background:var(--s1)"></span>Identified</span>
+            <span class="legend-item"><span class="swatch" style="background:var(--s2)"></span>De novo</span>
+          </div>
+          <div id="family-contribution-chart" class="contribution-chart" role="group" aria-label="Family contributions split by identified and de novo signal" aria-describedby="contribution-legend"></div>
+          <p id="contribution-empty" class="fine-print">Contribution parts are unavailable for this base in this report. Include current stored family results when exporting to view this chart.</p>
+          <p id="contribution-legend" class="chart-legend"><span id="contribution-runs-legend">Each bar shows a mean across the available runs.</span> Percent of the chosen base: <span id="contribution-base-name">credited family signal</span>. Colours split each mean into identified and de novo parts on a common scale without whiskers. <span id="contribution-limit-legend">Shared and unattributed signal is shown in the program's Results and is excluded from these family run means.</span></p>
         </section>
         <div id="family-figures" class="figure-grid"></div>
         </div>
@@ -3258,8 +3327,11 @@
               enable: "Run Quantify again with matching acquisition files to store TIC totals.",
             },
           ];
+          const fixedBaseLegend = " This chart keeps its recorded base when Normalize to changes.";
+          const contributionRows = data.composition?.contributionRows || [];
           const hasShareBases = families.some(f => shareBases.some(base =>
-            val(f[base.key]?.mean) !== null || (f.runs || []).some(run => val(run[base.key]) !== null)));
+            val(f[base.key]?.mean) !== null || (f.runs || []).some(run => val(run[base.key]) !== null)))
+            || contributionRows.some(row => shareBases.some(base => val(row[base.key]?.total) !== null));
           const state = {
             selected: ordered.find((f) => !f.isOthers) || ordered[0],
             drill: false,
@@ -3290,18 +3362,19 @@
           }
           $("basis-compatibility").hidden = hasShareBases;
           for (const base of shareBases) {
-            const available = families.some(f => val(f[base.key]?.mean) !== null);
+            const available = families.some(f => val(f[base.key]?.mean) !== null)
+              || contributionRows.some(row => val(row[base.key]?.total) !== null);
             const label = node("label", "basis-option"),
               choice = node("input"),
               body = node("span", "", base.name),
               reason = node("small", "basis-reason", base.reason);
             choice.type = "radio";
-            choice.name = "ranking-basis";
+            choice.name = "normalization-basis";
             choice.value = base.key;
             choice.id = "basis-" + base.key;
             choice.checked = hasShareBases && base.key === state.basis;
             choice.disabled = !available;
-            choice.title = available ? base.description + " This changes the ranking and run points in this report."
+            choice.title = available ? base.description + " This redraws the family ranking and family contribution chart in this report."
               : base.reason + " " + base.enable;
             label.title = choice.title;
             reason.id = choice.id + "-reason";
@@ -3315,9 +3388,10 @@
               state.pinnedRun = null;
               $("chart-hover").hidden = true;
               renderRanking();
+              renderContribution();
               updateSelectionSummary();
             };
-            $("ranking-base-options").append(label);
+            $("normalization-options").append(label);
           }
           const tabs = Array.from(document.querySelectorAll('.report-tab'));
           function showTab(tab) {
@@ -3330,6 +3404,73 @@
             $("chart-hover").hidden = true;
             $("coverage-hover").hidden = true;
             $("dot-tooltip").hidden = true;
+          }
+          function renderContribution() {
+            $("contribution-base-name").textContent = rankingBaseName();
+            const missingBuckets = contributionRows.filter(row =>
+              ["shared", "unattributed"].includes(row.kind) && val(row[state.basis]?.total) === null);
+            const rows = contributionRows.filter(row => exists(row.name) && !missingBuckets.includes(row));
+            const host = $("family-contribution-chart");
+            host.replaceChildren();
+            const maximum = Math.max(0, ...rows.map(row => val(row[state.basis]?.total) ?? 0)) || 1;
+            const runCount = data.composition?.contributionRunCount;
+            $("contribution-runs-legend").textContent = Number.isInteger(runCount) && runCount > 0
+              ? "Each bar shows the mean of " + runCount + (runCount === 1 ? " run." : " runs.")
+              : "Each bar shows a mean across the available runs.";
+            $("contribution-scope").textContent = rows.length
+              ? "Families use the same grouping and Others as the ranking." : "";
+            $("contribution-limit-legend").textContent = missingBuckets.length
+              ? "Signal for " + missingBuckets.map(row => text(row.name)).join(" and ") + " is shown in the program's Results because its per-run totals are unavailable for this chart."
+              : "";
+            let hasParts = false;
+            for (const row of rows) {
+              const parts = row[state.basis] || {};
+              const element = node("div", "contribution-row");
+              element.dataset.row = row.id || row.name;
+              element.dataset.kind = row.kind || "family";
+              element.dataset.basis = state.basis;
+              const label = field(row.name, "div");
+              label.className = "contribution-label";
+              const plot = node("div"), track = node("div", "contribution-track");
+              track.setAttribute("aria-hidden", "true");
+              const available = [parts.total, parts.identified, parts.deNovo].every(id => val(id) !== null);
+              if (available) {
+                hasParts = true;
+                const identified = node("span", "contribution-part identified"),
+                  deNovo = node("span", "contribution-part de-novo");
+                identified.style.background = "var(--s1)";
+                identified.style.left = "0%";
+                identified.style.width = val(parts.identified) / maximum * 100 + "%";
+                deNovo.style.background = "var(--s2)";
+                deNovo.style.left = val(parts.identified) / maximum * 100 + "%";
+                deNovo.style.width = val(parts.deNovo) / maximum * 100 + "%";
+                track.append(identified, deNovo);
+              }
+              const values = node("div", "contribution-values");
+              for (const [name, id] of [["Identified", parts.identified], ["De novo", parts.deNovo]]) {
+                const entry = node("span", "", name + " ");
+                if (val(id) === null) entry.append(node("span", "unavailable", "not available"));
+                else {
+                  const value = metric(id);
+                  value.title = "Open this row's exact " + name.toLowerCase() + " share using " + rankingBaseName() + ". This changes only the view of this report.";
+                  entry.append(value);
+                }
+                values.append(entry);
+              }
+              plot.append(track, values);
+              const total = node("div", "contribution-total");
+              if (val(parts.total) === null) total.textContent = "not available";
+              else {
+                const value = metric(parts.total);
+                value.title = "Open this row's exact total share using " + rankingBaseName() + ". This changes only the view of this report.";
+                total.append(value);
+              }
+              element.append(label, plot, total);
+              host.append(element);
+            }
+            host.hidden = !rows.length;
+            $("contribution-key").hidden = !hasParts;
+            $("contribution-empty").hidden = hasParts;
           }
           for (const [index, tab] of tabs.entries()) {
             tab.onclick = () => showTab(tab);
@@ -3500,8 +3641,8 @@
             const f = state.selected,
               groups = f ? plotParts(f) : new Map();
             $("composition-plain-legend").textContent = state.drill
-              ? "Each slice shows a part of the selected family's pooled signal. The denominator is that family's credited signal across all runs; this ring has no whiskers."
-              : "Each slice compares a family's mean share across the available runs. The denominator is the credited family signal in each run; select a family to explore its pooled parts, with no whiskers on this ring.";
+              ? "Each slice shows a part of the selected family's pooled signal. The denominator is that family's credited signal across all runs; this ring has no whiskers." + fixedBaseLegend
+              : "Each slice compares a family's mean share across the available runs. The denominator is the credited family signal in each run; select a family to explore its pooled parts, with no whiskers on this ring." + fixedBaseLegend;
             if (!f || !ordered.some((item) => val(item.mean) !== null)) {
               document.querySelector(
                 'section[aria-labelledby="composition-title"]',
@@ -4224,12 +4365,12 @@
               full.loading = "eager";
               full.className = "full-figure";
               content.push(full);
-              content.push(node("p", "chart-legend", figureLegend(fig)));
+              content.push(node("p", "chart-legend", figureLegend(fig) + fixedBaseLegend));
               if (exists(fig.caption)) content.push(field(fig.caption, "p"));
               popup(field(fig.title), content, true);
             };
             const figure = node("figure", "report-figure"),
-              legend = node("figcaption", "chart-legend", figureLegend(fig));
+              legend = node("figcaption", "chart-legend", figureLegend(fig) + fixedBaseLegend);
             figure.dataset.figure = fig.sourceFigureId;
             figure.append(button, legend);
             host.append(figure);
@@ -4255,7 +4396,7 @@
             if (/family_subclasses/.test(id))
               return "Each stacked bar splits a family's contribution into its recorded subclasses. The parts use the pooled credited-family-signal denominator, so they add to the family's pooled share. Grey marks unresolved parts; no run-to-run whiskers are drawn.";
             if (/family_contribution/.test(id))
-              return "Each bar splits a family's pooled contribution into identified and de novo signal. Every percentage divides by all measured peptide-feature signal, with each feature counted once. Shared and unattributed signal have separate bars. These pooled bars have no run-to-run whiskers.";
+              return "Each bar splits a family's pooled contribution into identified and de novo signal. Every percentage divides by all measured peptide-feature signal, with each feature counted once. Shared and unattributed signal have separate bars, with no run-to-run whiskers.";
             if (/abundance_diversity/.test(id))
               return "Horizontal position gives the mean per-run share of credited family signal; vertical position gives the database proteins needed to explain the peptides. Each point is a family, with protein counts pooled across runs. These database-dependent estimates have no whiskers.";
             if (/family_signal_vs_denovo_share/.test(id))
@@ -4334,7 +4475,7 @@
                 list.append(row);
               });
               const partChart = node("div", "subclass-chart");
-              partChart.append(bars, list, node("p", "chart-legend", "The coloured parts show how this family's signal is divided within the named grouping. Each percentage uses the family's credited signal with all runs pooled; unresolved parts stay separate, and no whiskers are drawn."));
+              partChart.append(bars, list, node("p", "chart-legend", "The coloured parts show how this family's signal is divided within the named grouping. Each percentage uses the family's credited signal with all runs pooled; unresolved parts stay separate, and no whiskers are drawn." + fixedBaseLegend));
               parts.append(partChart);
             }
             parts.hidden = !groups.size;
@@ -4458,7 +4599,7 @@
                 entry.append(sw, node("span", "", label));
                 legend.append(entry);
               }
-              coverage.append(meta, track, legend, node("p", "chart-legend", figureLegend({ sourceFigureId: "figure:protein_coverage_live" })));
+              coverage.append(meta, track, legend, node("p", "chart-legend", figureLegend({ sourceFigureId: "figure:protein_coverage_live" }) + fixedBaseLegend));
               const inspect = node(
                 "button",
                 "quiet-button positions-button",
@@ -5090,7 +5231,7 @@
               host.append(row);
             }
             host.append(
-              node("p", "chart-legend", "Each bar shows the family signal credited in one run. Its percentage uses that run's whole measured signal as the denominator; runs are shown separately, with no averaging or whiskers."),
+              node("p", "chart-legend", "Each bar shows the family signal credited in one run. Its percentage uses that run's whole measured signal as the denominator; runs are shown separately, with no averaging or whiskers." + fixedBaseLegend),
             );
             const gap = $("gap-panel");
             gap.append(node("h3", "", "Database gap"));
@@ -5115,7 +5256,7 @@
               node(
                 "p",
                 "chart-legend",
-                "Bars show the stored database-gap fractions with evidence pooled across runs. Each row uses its own recorded reference total, so compare rows only when those totals agree; no run-to-run whiskers are drawn.",
+                "Bars show the stored database-gap fractions with evidence pooled across runs. Each row uses its own recorded reference total, so compare rows only when those totals agree; no run-to-run whiskers are drawn." + fixedBaseLegend,
               ),
             );
             if (rows.length) {
@@ -5179,11 +5320,13 @@
           });
           renderRing();
           renderRanking();
+          renderContribution();
           renderFamily();
           updateSelectionSummary();
           renderSignal();
           for (const figure of data.results || []) {
             const id = figure.sourceFigureId || "";
+            if (id.startsWith("figure:family_contribution")) continue;
             const kind = /xic_by_mass|isotopes_credited|percent_ion_current_by_mass/.test(id) ? "mass"
               : /recovery|signal_by_run|signal_uplift/.test(id) ? "recovery"
               : /database_gap/.test(id) ? "gap" : "family";
@@ -5196,6 +5339,18 @@
             $(kind + "-empty").hidden = host.childElementCount > 0;
           }
           $("app").hidden = false;
+          const topbar = document.querySelector(".topbar");
+          const updateStickySpace = () => {
+            const headerHeight = topbar.getBoundingClientRect().height;
+            document.documentElement.style.setProperty("--topbar-height", headerHeight + "px");
+            document.documentElement.style.setProperty("--report-sticky-height", (headerHeight + $("report-normalization").getBoundingClientRect().height + 16) + "px");
+          };
+          updateStickySpace();
+          if ("ResizeObserver" in window) {
+            const stickyObserver = new ResizeObserver(updateStickySpace);
+            stickyObserver.observe(topbar);
+            stickyObserver.observe($("report-normalization"));
+          }
           initializeDotPlot();
         } catch (error) {
           $("load-error").hidden = false;

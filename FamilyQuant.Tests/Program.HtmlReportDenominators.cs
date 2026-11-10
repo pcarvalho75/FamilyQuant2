@@ -40,7 +40,7 @@ internal static partial class Program
             const fields = p.fields, families = p.composition.families;
             const bases = ['identifiedOnly', 'identifiedAndDeNovo', 'detectorEnvelopes', 'tic'];
             const labels = ['PSM only', 'PSM and de novo', 'Detector envelopes', 'TIC'];
-            const controls = [...d.querySelectorAll('input[name="ranking-basis"]')];
+            const controls = [...d.querySelectorAll('input[name="normalization-basis"]')];
             const legacy = name === 'legacy-payload';
             const rows = () => [...d.querySelectorAll('#family-ranking .rank-row')];
             const available = id => id && fields[id] && Number.isFinite(fields[id].value);
@@ -57,8 +57,23 @@ internal static partial class Program
               const bounds = c.closest('label').getBoundingClientRect();
               return bounds.left >= 0 && bounds.right <= w.innerWidth;
             });
+            const normalization = d.getElementById('report-normalization');
+            checks.pageWide = !!normalization && !normalization.closest('[role="tabpanel"]')
+              && normalization.querySelector('legend').textContent === 'Normalize to'
+              && !!(normalization.compareDocumentPosition(d.querySelector('[role="tablist"]')) & w.Node.DOCUMENT_POSITION_FOLLOWING);
+            const tabs = [...d.querySelectorAll('[role="tab"]')];
+            checks.everyTab = tabs.every(tab => {
+              tab.click();
+              return controls.every(c => c.getClientRects().length > 0);
+            });
+            tabs[0].click();
+            w.document.documentElement.style.scrollBehavior = 'auto';
+            w.scrollTo(0, 1000);
+            checks.sticky = normalization.getBoundingClientRect().top >= d.querySelector('.topbar').getBoundingClientRect().bottom - 1
+              && normalization.getBoundingClientRect().bottom <= w.innerHeight;
+            w.scrollTo(0, 0);
             checks.default = legacy ? controls.every(c => c.disabled && !c.checked)
-              : d.querySelector('input:checked[name="ranking-basis"]')?.value === 'identifiedAndDeNovo';
+              : d.querySelector('input:checked[name="normalization-basis"]')?.value === 'identifiedAndDeNovo';
             checks.disabledReasons = controls.every(c => {
               const enabled = families.some(f => available(f[c.value]?.mean));
               const reason = d.getElementById(c.id + '-reason');
@@ -92,6 +107,7 @@ internal static partial class Program
               d.getElementById('rank-sort-share').click();
               checks[key + 'Legend'] = d.getElementById('ranking-base-name').textContent === labels[index]
                 && d.getElementById('ranking-legend').textContent.includes('mean of ' + (name === 'one-run' ? '1 run' : '2 runs'));
+              checks[key + 'ContributionBase'] = d.getElementById('contribution-base-name').textContent === labels[index];
               checks[key + 'Sort'] = rows().length === families.length && sortedRows(key, 'mean');
               checks[key + 'Means'] = rows().every(row => {
                 const family = families.find(f => f.id === row.dataset.family);

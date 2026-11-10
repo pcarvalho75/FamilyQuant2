@@ -18,7 +18,8 @@ public static class HtmlReportFigures
         foreach (var section in document.Sections.Where(section => !excluded.Contains(section.Id)))
             foreach (var figure in section.Blocks.OfType<ReportFigure>().Where(figure => !excluded.Contains(figure.Id)))
             {
-                if (figure.Id.StartsWith("figure:protein_coverage_", StringComparison.Ordinal)) continue;
+                if (figure.Id.StartsWith("figure:protein_coverage_", StringComparison.Ordinal)
+                    || figure.Id.StartsWith("figure:family_contribution", StringComparison.Ordinal)) continue;
                 List<HtmlReportFigure>? target = section.Id == ReportSectionIds.Sensitivity ? sensitivity
                     : analyticsIds.Contains(figure.Id) || section.Id is ReportSectionIds.Results or ReportSectionIds.DatabaseGap ? results
                     : section.Id == ReportSectionIds.Quality ? quality : null;

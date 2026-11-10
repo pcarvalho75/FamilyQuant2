@@ -35,7 +35,10 @@ internal static partial class Program
         var document = new ReportDocument { Title = "Synthetic HTML figure fixture", Sections = native.GroupBy(figure => figure.SectionId)
             .Select(group => new ReportSection(group.Key, group.Key, group.Select(figure => (ReportBlock)figure.Figure).ToArray())).ToArray() };
         var payload = HtmlReportFigures.Build(new(), document);
-        Check("HTML includes every Results figure", AnalyticsFigures.FileNames.All(name => payload.Results.Any(figure => figure.SourceFigureId == "figure:" + name)));
+        var imageNames = AnalyticsFigures.FileNames.Where(name => name != AnalyticsFigures.FamilyContributionFile).ToArray();
+        Check("HTML includes every fixed Results figure", imageNames.All(name => payload.Results.Any(figure => figure.SourceFigureId == "figure:" + name)));
+        Check("HTML contribution picture is replaced while Word keeps its native figure", payload.Results.All(figure => !figure.SourceFigureId.StartsWith("figure:family_contribution", StringComparison.Ordinal))
+            && document.Sections.SelectMany(section => section.Blocks).OfType<ReportFigure>().Any(figure => figure.Id == "figure:" + AnalyticsFigures.FamilyContributionFile));
         Check("HTML figures retain the exact native Word PNG and title/caption bindings", payload.Results.Concat(payload.Quality).Concat(payload.Sensitivity).All(figure =>
         {
             var original = native.Single(item => item.Figure.Id == figure.SourceFigureId).Figure;
@@ -47,7 +50,7 @@ internal static partial class Program
         try
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture; CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
-            Check("HTML five Results PNGs equal direct screen chart exports", screen.All(figure =>
+            Check("native Word Results PNGs equal direct screen chart exports", screen.All(figure =>
             {
                 string path = Path.Combine(output, "direct", figure.FileName);
                 ChartImageExporter.Save(figure.Chart, path);
@@ -71,7 +74,9 @@ internal static partial class Program
         ReportProjectExporter.Write(export, report);
         string htmlPath = HtmlReportWriter.PathForReport(report);
         var actual = ReadHtmlPayload(htmlPath);
-        Check("production HTML export includes all five Results images", AnalyticsFigures.FileNames.All(name => actual.Results.Any(figure => figure.SourceFigureId == "figure:" + name)));
+        Check("production HTML export includes all fixed Results images", imageNames.All(name => actual.Results.Any(figure => figure.SourceFigureId == "figure:" + name)));
+        Check("production Word retains its contribution picture while HTML uses its interactive chart", export.Document.Sections.SelectMany(section => section.Blocks).OfType<ReportFigure>()
+            .Any(figure => figure.Id == "figure:" + AnalyticsFigures.FamilyContributionFile) && actual.Results.All(figure => !figure.SourceFigureId.StartsWith("figure:family_contribution", StringComparison.Ordinal)));
         Check("production HTML export includes selected quality and sensitivity images", actual.Quality.Count > 0 && actual.Sensitivity.Count > 0);
         Check("coverage remains in the interactive maps rather than the figure grids", actual.Results.All(figure => !figure.SourceFigureId.StartsWith("figure:protein_coverage_", StringComparison.Ordinal))
             && actual.Composition.Families.Any(family => family.Coverage.Count > 0));
@@ -79,8 +84,9 @@ internal static partial class Program
             + actual.Results.Count + " Results, " + actual.Quality.Count + " Quality, " + actual.Sensitivity.Count + " Sensitivity images.");
         HtmlReportBrowserChecks(Path.Combine(output, "page"), new[] { ("all-figures", actual, 390) }, """
             const checks={};
-            for(const [name,host] of [['xic_by_mass.png','mass'],['isotopes_credited.png','mass'],['percent_ion_current_by_mass.png','mass'],['family_contribution.png','family'],['recovery.png','recovery']])
+            for(const [name,host] of [['xic_by_mass.png','mass'],['isotopes_credited.png','mass'],['percent_ion_current_by_mass.png','mass'],['recovery.png','recovery']])
               checks[name]=!!d.getElementById(host+'-figures').querySelector('img[data-fq-figure="figure:'+name+'"]');
+            checks.contribution=!!d.getElementById('family-contribution-chart')&&!d.querySelector('img[data-fq-figure^="figure:family_contribution"]');
             checks.quality=d.getElementById('quality-figures').querySelectorAll('img').length>0;
             checks.sensitivity=d.getElementById('sensitivity-figures').querySelectorAll('img').length>0;
             checks.inline=[...d.querySelectorAll('.figure-grid img')].every(img=>img.src.startsWith('data:image/png;base64,'));
