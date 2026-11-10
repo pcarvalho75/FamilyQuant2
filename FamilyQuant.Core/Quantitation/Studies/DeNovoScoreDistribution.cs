@@ -176,6 +176,29 @@ namespace FamilyQuant.DeNovo
 
     public static class DeNovoSourceScoreDistributionStudy
     {
+        public static DeNovoSourceScoreDistribution FromLegacy(DeNovoScoreDistribution distribution)
+        {
+            if (distribution == null) throw new ArgumentNullException(nameof(distribution));
+            distribution.Validate();
+            return new DeNovoSourceScoreDistribution
+                {
+                    SourceId = DeNovoSource.DenovoOnly.Id,
+                    SourceDisplayName = DeNovoSource.DenovoOnly.DisplayName,
+                    ConfidenceField = DeNovoSource.DenovoOnly.ConfidenceColumn,
+                    MinimumConfidence = distribution.MinAverageLocalConfidence,
+                    RawRows = distribution.RawRows,
+                    RowsPassingLength = distribution.RowsPassingLength,
+                    RowsAtOrAboveConfidence = distribution.RowsAtOrAboveAlc,
+                    RowsPassingLocalStretch = distribution.RowsPassingLocalStretch,
+                    RowsPassingLengthAndConfidence = distribution.RowsPassingLengthAndAlc,
+                    RowsPassingAllCriteria = distribution.RowsPassingAllCriteria,
+                    MinLength = distribution.MinLength,
+                    StretchLength = distribution.StretchLength,
+                    StretchFloor = distribution.StretchFloor,
+                    Bins = distribution.Bins,
+                };
+        }
+
         public static DeNovoSourceScoreDistribution Build(
             IEnumerable<PeaksDeNovoRow> rows,
             DeNovoSourceSelection selection,

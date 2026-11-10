@@ -500,6 +500,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => HtmlReportLegendTests(Path.Combine(workDir, "html-report-legends")));
             suite.Add(() => HtmlReportDenominatorTests(Path.Combine(workDir, "html-report-denominators")));
             suite.Add(() => HtmlReportNormalizationTests(Path.Combine(workDir, "html-report-normalization")));
+            suite.AddWithApplication(() => HtmlMassQualityTests(Path.Combine(workDir, "html-mass-quality")));
             suite.Add(() => DatabaseEntryCountTests(null));
             suite.Add(() => AssignmentPresenceCopyTests(null));
             suite.Add(() => HtmlDatabaseEntryTests());

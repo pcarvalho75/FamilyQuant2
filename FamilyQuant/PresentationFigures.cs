@@ -914,11 +914,8 @@ namespace FamilyQuant
                 "Every stage is project-native. Count grain changes are explicit; these four numbers are not one common-denominator funnel.");
             if (ActualWidth < 650 || ActualHeight < 330) return;
 
-            int rawImported = manifest.DeNovoInputs != null && manifest.DeNovoInputs.Count > 0
-                ? manifest.DeNovoInputs.Sum(i => i.RawRows)
-                : manifest.DeNovoScoreDistribution?.RawRows ?? 0;
-            int credited = data.Grouped?.DeNovoPeptides
-                ?? data.Fractions.Where(f => !f.IsGrouped).Sum(f => f.DeNovoPeptides);
+            int rawImported = QualityChartData.ImportedCalls(manifest);
+            int credited = QualityChartData.CreditedFeatures(data);
             var stages = new[]
             {
                 (Count: rawImported, Kicker: "1 · IMPORTED", Title: "raw spectrum calls",
@@ -1325,31 +1322,13 @@ namespace FamilyQuant
     public sealed class DeNovoScoreDistributionChart : TalkChartBase
     {
         private readonly List<DeNovoSourceScoreDistribution> distributions;
+        public IReadOnlyList<DeNovoSourceScoreDistribution> Distributions => distributions;
 
         public DeNovoScoreDistributionChart(DeNovoScoreDistribution distribution)
         {
             if (distribution == null) throw new ArgumentNullException(nameof(distribution));
             distribution.Validate();
-            distributions = new List<DeNovoSourceScoreDistribution>
-            {
-                new DeNovoSourceScoreDistribution
-                {
-                    SourceId = DeNovoSource.DenovoOnly.Id,
-                    SourceDisplayName = DeNovoSource.DenovoOnly.DisplayName,
-                    ConfidenceField = DeNovoSource.DenovoOnly.ConfidenceColumn,
-                    MinimumConfidence = distribution.MinAverageLocalConfidence,
-                    RawRows = distribution.RawRows,
-                    RowsPassingLength = distribution.RowsPassingLength,
-                    RowsAtOrAboveConfidence = distribution.RowsAtOrAboveAlc,
-                    RowsPassingLocalStretch = distribution.RowsPassingLocalStretch,
-                    RowsPassingLengthAndConfidence = distribution.RowsPassingLengthAndAlc,
-                    RowsPassingAllCriteria = distribution.RowsPassingAllCriteria,
-                    MinLength = distribution.MinLength,
-                    StretchLength = distribution.StretchLength,
-                    StretchFloor = distribution.StretchFloor,
-                    Bins = distribution.Bins,
-                },
-            };
+            distributions = new() { DeNovoSourceScoreDistributionStudy.FromLegacy(distribution) };
         }
 
         public DeNovoScoreDistributionChart(IEnumerable<DeNovoSourceScoreDistribution> distributions)

@@ -171,6 +171,7 @@ public static class ReportProjectExporter
             SupplementSheets = ReportTableSupplements.Complete(layout.Document, sheets), Selection = curation.ReportSelection,
             HtmlContext = new()
             {
+                ChartAnalytics = data, // U3b uses the same analytics instance as the Word/native charts.
                 UsesPanel = compositionBasis.UsesPanel, IsIdentity = compositionBasis.IsIdentity,
                 IsAdditive = compositionBasis.Studies.FamilyRunShares?.Policy != SharedPeptidePolicy.CountInEveryFamily,
                 StoredStudies = compositionBasis.Studies, PanelKeys = panelKeys,

@@ -18,6 +18,10 @@ public static class HtmlReportFigures
         foreach (var section in document.Sections.Where(section => !excluded.Contains(section.Id)))
             foreach (var figure in section.Blocks.OfType<ReportFigure>().Where(figure => !excluded.Contains(figure.Id)))
             {
+                // U3b: Word retains its pictures; these HTML tabs draw program-projected values.
+                if (payload.MassQualityCharts != null && (figure.Id is "figure:xic_by_mass.png"
+                    or "figure:isotopes_credited.png" or "figure:percent_ion_current_by_mass.png"
+                    || section.Id == ReportSectionIds.Quality && !analyticsIds.Contains(figure.Id))) continue;
                 if (figure.Id.StartsWith("figure:protein_coverage_", StringComparison.Ordinal)
                     || figure.Id.StartsWith("figure:family_contribution", StringComparison.Ordinal)) continue;
                 List<HtmlReportFigure>? target = section.Id == ReportSectionIds.Sensitivity ? sensitivity
