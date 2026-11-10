@@ -50,7 +50,10 @@ public sealed record ReportSupplementSource(string Csv, IReadOnlyList<string> Co
 
 /// <summary>Original PNG export, never transcoded by the document writer. Size controls layout only.</summary>
 public sealed record ReportFigure(string Id, string Title, byte[] PngBytes, string Caption,
-    int PixelWidth, int PixelHeight) : ReportBlock(Id);
+    int PixelWidth, int PixelHeight) : ReportBlock(Id)
+{
+    public HtmlSignalChart? SignalChart { get; init; } // U3a: native readings retained beside the Word picture.
+}
 
 /// <summary>
 /// Top-level order: title, contents, summary, summary of findings, methods, results, one section per panel family,

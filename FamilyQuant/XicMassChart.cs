@@ -19,6 +19,7 @@ namespace FamilyQuant
     public class XicMassChart : ChartDrawingBase, IPalettedChart
     {
         private readonly List<AnalyticsPeptide> peptides;
+        public MassIsotopeChartData.Scatter Data { get; }
 
 
         /// <param name="peptides">The deduped analytics table; only positive mass and envelope are drawn.</param>
@@ -28,6 +29,7 @@ namespace FamilyQuant
             this.palette = palette ?? ChartPalette.Dark;
             this.peptides = (peptides ?? Enumerable.Empty<AnalyticsPeptide>())
                 .Where(p => p != null && p.Envelope > 0 && p.Mass > 0).ToList();
+            Data = MassIsotopeChartData.ScatterPoints(this.peptides);
             MinHeight = 260;
             Margin = new Thickness(0);
             ToolTip = "One dot per peptide: its extracted isotope envelope (log10 area, up the side) " +
@@ -61,13 +63,7 @@ namespace FamilyQuant
                 return;
             }
 
-            double maxMass = peptides.Max(p => p.Mass);
-            double massHi = Math.Ceiling(maxMass / 500.0) * 500.0;
-            if (massHi <= 0) massHi = 500;
-
-            double logMin = Math.Floor(peptides.Min(p => Math.Log10(p.Envelope)));
-            double logMax = Math.Ceiling(peptides.Max(p => Math.Log10(p.Envelope)));
-            if (logMax <= logMin) logMax = logMin + 1;
+            double massHi = Data.MassMaximum, logMin = Data.LogMinimum, logMax = Data.LogMaximum;
 
             var gridPen = new Pen(Grid, 0.8);
             var axisPen = new Pen(pal.Axis, 1.0);
@@ -94,8 +90,8 @@ namespace FamilyQuant
             DrawAxes(dc, plot, axisPen);
 
             // The two series. De novo drawn first so the more numerous identified dots do not bury it.
-            DrawSeries(dc, peptides.Where(p => p.Side == NativeQuantFractions.SideDeNovo), DeNovo, plot, massHi, logMin, logMax);
-            DrawSeries(dc, peptides.Where(p => p.Side == NativeQuantFractions.SideIdentified), Identified, plot, massHi, logMin, logMax);
+            DrawSeries(dc, Data.Points.Where(p => p.Side == NativeQuantFractions.SideDeNovo), DeNovo, plot, massHi, logMin, logMax);
+            DrawSeries(dc, Data.Points.Where(p => p.Side == NativeQuantFractions.SideIdentified), Identified, plot, massHi, logMin, logMax);
 
             // Axis names.
             var xName = Text("monoisotopic mass (Da)", Muted, 11);
@@ -104,13 +100,13 @@ namespace FamilyQuant
             DrawLegend(dc, plot);
         }
 
-        private static void DrawSeries(DrawingContext dc, IEnumerable<AnalyticsPeptide> series, Brush brush,
+        private static void DrawSeries(DrawingContext dc, IEnumerable<MassIsotopeChartData.Point> series, Brush brush,
                                        Rect plot, double massHi, double logMin, double logMax)
         {
-            foreach (AnalyticsPeptide p in series)
+            foreach (MassIsotopeChartData.Point p in series)
             {
                 double x = plot.Left + Math.Min(p.Mass, massHi) / massHi * plot.Width;
-                double log = Math.Log10(p.Envelope);
+                double log = p.LogEnvelope;
                 double y = plot.Bottom - (log - logMin) / (logMax - logMin) * plot.Height;
                 dc.DrawEllipse(brush, null, new Point(x, y), 1.9, 1.9);
             }

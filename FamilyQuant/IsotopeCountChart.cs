@@ -21,10 +21,7 @@ namespace FamilyQuant
     {
         private readonly List<AnalyticsPeptide> peptides;
         private readonly bool splitByMass;
-
-
-        static readonly string[] BandNames = { "under 1500 Da", "1500 to 3000 Da", "over 3000 Da" };
-        const double Band1 = 1500, Band2 = 3000;
+        public MassIsotopeChartData.Isotopes Data { get; }
 
         /// <param name="palette">The colours to paint in, or null for the screen palette. The three mass
         /// bands come from <see cref="ChartPalette.MassBands"/>, low mass to high.</param>
@@ -35,6 +32,7 @@ namespace FamilyQuant
             this.peptides = (peptides ?? Enumerable.Empty<AnalyticsPeptide>())
                 .Where(p => p != null && p.IsotopesCredited >= 1).ToList();
             this.splitByMass = splitByMass;
+            Data = MassIsotopeChartData.IsotopeCounts(this.peptides);
             MinHeight = 240;
             Margin = new Thickness(0);
             ToolTip = "Each bar counts the peptides credited that many isotopes, from 1 up to the " +
@@ -43,10 +41,6 @@ namespace FamilyQuant
                       (splitByMass ? "Mass bands split each bar by peptide mass; this read-only chart changes no project values or files."
                           : "Bars combine all peptide masses; this read-only chart changes no project values or files.");
         }
-
-
-        private static int BandOf(double mass) => mass < Band1 ? 0 : mass < Band2 ? 1 : 2;
-
         protected override void OnRender(DrawingContext dc)
         {
             base.OnRender(dc);
@@ -71,23 +65,8 @@ namespace FamilyQuant
                 return;
             }
 
-            // counts[isotopeCount 1..IsotopeBasis][band 0..2]
-            int bins = AnalyticsBuilder.IsotopeBasis;
-            var counts = new int[bins + 1, 3];
-            foreach (AnalyticsPeptide p in peptides)
-            {
-                int c = Math.Min(AnalyticsBuilder.IsotopeBasis, p.IsotopesCredited);
-                if (c >= 1) counts[c, BandOf(p.Mass)]++;
-            }
-
-            int maxTotal = 1;
-            for (int c = 1; c <= bins; c++)
-            {
-                int total = counts[c, 0] + counts[c, 1] + counts[c, 2];
-                if (total > maxTotal) maxTotal = total;
-            }
-            double top = Math.Ceiling(maxTotal / 4.0) * 4.0;
-            if (top < 4) top = 4;
+            int bins = Data.Bins.Count;
+            double top = Data.AxisMaximum;
 
             var gridPen = new Pen(Grid, 0.8);
             var axisPen = new Pen(pal.Axis, 1.0);
@@ -108,14 +87,14 @@ namespace FamilyQuant
                 double cx = plot.Left + (c - 1 + 0.5) * slot;
                 double x = cx - barWidth / 2;
 
-                int total = counts[c, 0] + counts[c, 1] + counts[c, 2];
+                int total = Data.Bins[c - 1].Total;
                 double yTop = plot.Bottom;
 
                 if (splitByMass)
                 {
                     for (int band = 0; band < 3; band++)
                     {
-                        int n = counts[c, band];
+                        int n = Data.Bins[c - 1].MassBandCounts[band];
                         if (n == 0) continue;
                         double h = n / top * plot.Height;
                         yTop -= h;
@@ -155,14 +134,14 @@ namespace FamilyQuant
             double x = plot.Right;
 
             // Right-aligned in the title band, so it does not collide with the heading on the left.
-            var widths = BandNames.Select(n => Text(n, Muted, 11).Width + 34).ToArray();
+            var widths = Data.MassBands.Select(n => Text(n, Muted, 11).Width + 34).ToArray();
             x = plot.Right - widths.Sum();
             if (x < plot.Left + 260) return;   // no room; dropped rather than overlapping the title
 
             for (int band = 0; band < 3; band++)
             {
                 dc.DrawRectangle(Bands[band], null, new Rect(x, y + 2, 12, 12));
-                var t = Text(BandNames[band], Muted, 11);
+                var t = Text(Data.MassBands[band], Muted, 11);
                 dc.DrawText(t, new Point(x + 16, y));
                 x += widths[band];
             }

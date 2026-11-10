@@ -128,7 +128,9 @@ public static partial class HtmlReportPayloadBuilder
             if (means != null)
                 foreach (int row in FamilyRows(means, family.Id))
                 { cv = NativeCell(means, row, "cv_pct", "%", fractionColumn: "cv_ratio", stored: summary?.CoefficientOfVariation * 100); break; }
-            var coverage = context.CoverageProvider?.Invoke(family.Id, Add, selection) ?? Array.Empty<HtmlReportCoverage>();
+            var coverage = context.CoverageCatalogProvider == null
+                ? context.CoverageProvider?.Invoke(family.Id, Add, selection) ?? Array.Empty<HtmlReportCoverage>()
+                : Array.Empty<HtmlReportCoverage>();
             return family with { Runs = runs, Parts = parts, Peptides = peptides, Cv = cv, Coverage = coverage };
         }
 

@@ -13,6 +13,11 @@ public static class ProteinCoverageFigures
     /// <summary>Consumes FL's persisted pooled localization and current sequence/evidence; no search is performed.</summary>
     public static IReadOnlyList<AnalyticsFigure> FromStored(FamilyPeptideLocalizationResult localization,
         FamilyClusterFile project, int topPerFamily = 3)
+        => DataFromStored(localization, project, topPerFamily).Select(Build).ToArray();
+
+    /// <summary>The stored drawing snapshots shared by native pictures and the offline coverage catalog.</summary>
+    public static IReadOnlyList<ProteinCoverageMapData> DataFromStored(FamilyPeptideLocalizationResult localization,
+        FamilyClusterFile project, int topPerFamily = 3)
     {
         ArgumentNullException.ThrowIfNull(localization); ArgumentNullException.ThrowIfNull(project);
         if (topPerFamily < 1) throw new ArgumentOutOfRangeException(nameof(topPerFamily));
@@ -26,6 +31,7 @@ public static class ProteinCoverageFigures
         var rankedKeys = ranked.Select(p => (p.Family, p.Protein.ProteinIdentifier)).ToHashSet();
         if (localization.Segments.Any(s => !rankedKeys.Contains((s.FamilyUserId, s.ProteinIdentifier))))
             throw new ArgumentException("A localized segment has no matching ranked protein.", nameof(localization));
+        var segmentsByProtein = localization.Segments.ToLookup(segment => (segment.FamilyUserId, segment.ProteinIdentifier));
         var maps = new List<ProteinCoverageMapData>();
         foreach (var entry in ranked.GroupBy(p => p.Family).OrderBy(g => g.Key)
             .SelectMany(g => g.OrderBy(p => p.Protein.Rank).Take(topPerFamily)))
@@ -37,7 +43,7 @@ public static class ProteinCoverageFigures
             if (entry.Protein.ProteinLength != item.Sequence.Length || !string.Equals(entry.Protein.ProteinSequenceSha256,
                     ProteinCoverageMapData.SequenceHash(item.Sequence), StringComparison.OrdinalIgnoreCase))
                 throw new InvalidOperationException("Stored localization sequence differs for " + entry.Protein.ProteinIdentifier + "; recompute localization before drawing coverage.");
-            var segments = localization.Segments.Where(s => s.FamilyUserId == entry.Family && s.ProteinIdentifier == item.SequenceIdentifier)
+            var segments = segmentsByProtein[(entry.Family, item.SequenceIdentifier)]
                 .OrderBy(s => s.Side, StringComparer.Ordinal).ThenBy(s => s.NormalizedSequence, StringComparer.Ordinal)
                 .ThenBy(s => s.MatchKind).ThenBy(s => string.Join(";", s.Intervals.Select(i =>
                     i.Start.ToString(CultureInfo.InvariantCulture) + ":" + i.End.ToString(CultureInfo.InvariantCulture))), StringComparer.Ordinal).ToArray();
@@ -64,7 +70,7 @@ public static class ProteinCoverageFigures
                 item.Evidence?.Positions, entry.Protein.ProteinSequenceSha256, placements, entry.Protein.CreditedSignal,
                 string.IsNullOrWhiteSpace(localization.Method) ? "All runs pooled; display allocation across candidate proteins and placements" : localization.Method));
         }
-        return maps.Select(Build).ToArray();
+        return maps;
     }
 
     public static AnalyticsFigure Build(ProteinCoverageMapData data) => new(

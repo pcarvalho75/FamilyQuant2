@@ -111,6 +111,10 @@ internal static partial class Program
         var fraction = model.Fields[model.DatabaseGap[0].Fraction];
         Check("HTML gap short label keeps the Word fraction unit and exact value for pop-ups", fraction.Text == "0.123456789" && fraction.Short != null
             && model.Fields[fraction.Short].Text == "0.123" && model.Fields[fraction.Short].Unit == "fraction" && model.Fields[fraction.Short].Source.Scale == 1);
+        var gapPercent = model.Fields[model.DatabaseGap[0].Percent!];
+        Check("U3a gap percentages name their unit and retain the scaled native source", gapPercent.Unit == "%"
+            && gapPercent.Value == fraction.Value * 100 && gapPercent.Source.Scale == 100 && gapPercent.Short != null
+            && model.Fields[gapPercent.Short].Unit == "%");
         Check("D47 HTML producer emits no methods or quality prose", model.Methods.Count == 0 && model.Quality.Count == 0 && model.Interpretation == null);
         var repeated = document with { Sections = document.Sections.Select(s => s.Id == ReportSectionIds.Results
             ? s with { Blocks = s.Blocks.Concat(new ReportBlock[] { new ReportParagraph("first", "Observed 14 units."), new ReportParagraph("second", "Observed 14 units.") }).ToArray() } : s).ToArray() };

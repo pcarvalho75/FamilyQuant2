@@ -13,6 +13,7 @@ public sealed record HtmlReportPayload
     public HtmlReportLinks Links { get; init; } = new();
     public IReadOnlyList<HtmlReportHighlight> Highlights { get; init; } = Array.Empty<HtmlReportHighlight>();
     public HtmlComposition Composition { get; init; } = new();
+    public HtmlCoverageCatalog? CoverageCatalog { get; init; } // U1
     public HtmlFamilyFigures FamilyFigures { get; init; } = new(); // U3c native Families plots.
     public IReadOnlyList<HtmlRunCredit> CreditedRuns { get; init; } = Array.Empty<HtmlRunCredit>();
     public IReadOnlyList<HtmlGapRow> DatabaseGap { get; init; } = Array.Empty<HtmlGapRow>();
@@ -21,6 +22,8 @@ public sealed record HtmlReportPayload
     public IReadOnlyList<HtmlReportFigure> Quality { get; init; } = Array.Empty<HtmlReportFigure>();
     public IReadOnlyList<HtmlReportFigure> Results { get; init; } = Array.Empty<HtmlReportFigure>();
     public IReadOnlyList<HtmlReportFigure> Sensitivity { get; init; } = Array.Empty<HtmlReportFigure>();
+    public IReadOnlyList<HtmlSignalChart> SignalCharts { get; init; } = Array.Empty<HtmlSignalChart>(); // U3a native recovery/gap readings.
+    public HtmlMassQualityCharts? MassQualityCharts { get; init; } // U3b shared native chart projections.
     public string? Interpretation { get; init; }
     public IReadOnlyDictionary<string, HtmlReportField> Fields { get; init; }
         = new SortedDictionary<string, HtmlReportField>(StringComparer.Ordinal);
@@ -121,7 +124,10 @@ public sealed record HtmlContributionRow(string Id, string Kind, string Name)
 public sealed record HtmlContributionShares(string? Total, string? Identified, string? DeNovo);
 public sealed record HtmlFamilyPart(string Kind, string Name, string? Share, bool IsUnresolved = false);
 public sealed record HtmlRunCredit(string Name, string Share);
-public sealed record HtmlGapRow(string Name, string Fraction);
+public sealed record HtmlGapRow(string Name, string Fraction)
+{
+    public string? Percent { get; init; } // U3a: percentage display retains the native fraction binding.
+}
 /// <summary>Label and Ticks are field IDs; Values maps family IDs to existing exact field IDs.
 /// Scale controls geometry only. Missing values are absent; recorded zero remains available.</summary>
 public sealed record HtmlDotMeasure(string Id, string Label, string Unit, string Scale,
@@ -152,6 +158,7 @@ public sealed record HtmlCoverageSpan(int Start, int End, string Label, string K
 /// replacement for canonical membership or an instruction to calculate a missing study.</summary>
 public sealed record HtmlReportContext
 {
+    public AnalyticsData? ChartAnalytics { get; init; } // U3b chart inputs from the same prepared native report.
     public bool UsesPanel { get; init; }
     public bool IsIdentity { get; init; } = true;
     public bool IsAdditive { get; init; } = true;
@@ -169,4 +176,5 @@ public sealed record HtmlReportContext
     public FamilyReportThresholdResult? SourceGrouping { get; init; }
     public FamilyWorldSummary? World { get; init; }
     public Func<string, Func<string, HtmlReportReference, string, double?, string>, ReportSelection?, IReadOnlyList<HtmlReportCoverage>>? CoverageProvider { get; init; }
+    public Func<ReportSelection?, HtmlCoverageCatalog?>? CoverageCatalogProvider { get; init; } // U1
 }
