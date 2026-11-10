@@ -1023,6 +1023,32 @@
         font-weight: 400;
         color: var(--muted);
       }
+      .ranking-bases {
+        border: 0;
+        padding: 0;
+        margin: 0 0 18px;
+      }
+      .ranking-bases legend {
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .basis-options {
+        display: grid;
+        gap: 8px;
+      }
+      .basis-option {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 8px;
+        align-items: start;
+      }
+      .basis-option input {
+        accent-color: var(--accent);
+        margin-top: 5px;
+      }
+      .basis-reason {
+        display: block;
+      }
       #panel-recovery .evidence-grid {
         grid-template-columns: 1fr;
       }
@@ -2746,6 +2772,11 @@
               <div id="selected-summary" class="selected-summary"></div>
             </div>
             <div class="rank-pane">
+              <fieldset class="ranking-bases" id="ranking-bases">
+                <legend>Share denominator</legend>
+                <div class="basis-options" id="ranking-base-options"></div>
+                <p id="basis-compatibility" class="fine-print" hidden>This report contains the recorded credited-family ranking. Export it with the current FamilyQuant version to add the four bases.</p>
+              </fieldset>
               <div class="rank-toolbar">
                 <h3>Across the runs</h3>
                 <div
@@ -3201,6 +3232,34 @@
             f.isOthers
               ? "var(--s6)"
               : colors[Math.max(0, ordered.indexOf(f)) % colors.length];
+          const shareBases = [
+            {
+              key: "identifiedOnly", name: "PSM only",
+              description: "Show identified family signal as a percentage of all identified peptide signal.",
+              reason: "PSM-only shares are unavailable for this project.",
+              enable: "Run Quantify again with this version to store them.",
+            },
+            {
+              key: "identifiedAndDeNovo", name: "PSM and de novo",
+              description: "Show family signal as a percentage of all measured peptide features, identified and de novo.",
+              reason: "Complete measured-peptide totals are unavailable.",
+              enable: "Run Quantify again to store matching totals for every run.",
+            },
+            {
+              key: "detectorEnvelopes", name: "Detector envelopes",
+              description: "Show family signal as a percentage of all stored MS1 detector envelope area, including envelopes without identifications.",
+              reason: "Complete detector envelope totals are unavailable.",
+              enable: "Run Quantify with MS1 detector totals to enable this base.",
+            },
+            {
+              key: "tic", name: "TIC",
+              description: "Show family signal as a percentage of the total ion current recorded for each run.",
+              reason: "Complete TIC totals are unavailable.",
+              enable: "Run Quantify again with matching acquisition files to store TIC totals.",
+            },
+          ];
+          const hasShareBases = families.some(f => shareBases.some(base =>
+            val(f[base.key]?.mean) !== null || (f.runs || []).some(run => val(run[base.key]) !== null)));
           const state = {
             selected: ordered.find((f) => !f.isOthers) || ordered[0],
             drill: false,
@@ -3211,13 +3270,54 @@
             detailVisible: false,
             sort: "share",
             pinnedRun: null,
+            basis: "identifiedAndDeNovo",
           };
-          function familyRunCount(f) {
-            return (f.runs || []).filter(r => val(r.share) !== null).length;
+          function rankingStatistics(f) {
+            return hasShareBases ? f[state.basis] || {} : f;
           }
-          function meanRunText() {
-            const counts = [...new Set(families.map(familyRunCount))];
-            return counts.length === 1 && counts[0] > 0 ? counts[0] + " runs" : "its available runs";
+          function rankingRunShare(run) {
+            return hasShareBases ? run[state.basis] : run.share;
+          }
+          function rankingBaseName() {
+            return hasShareBases ? shareBases.find(base => base.key === state.basis).name : "credited family signal";
+          }
+          function familyRunCount(f, basis = null) {
+            return (f.runs || []).filter(run => val(basis ? run[basis] : run.share) !== null).length;
+          }
+          function meanRunText(basis = null) {
+            const counts = [...new Set(families.map(f => familyRunCount(f, basis)))];
+            return counts.length === 1 && counts[0] > 0 ? counts[0] + (counts[0] === 1 ? " run" : " runs") : "its available runs";
+          }
+          $("basis-compatibility").hidden = hasShareBases;
+          for (const base of shareBases) {
+            const available = families.some(f => val(f[base.key]?.mean) !== null);
+            const label = node("label", "basis-option"),
+              choice = node("input"),
+              body = node("span", "", base.name),
+              reason = node("small", "basis-reason", base.reason);
+            choice.type = "radio";
+            choice.name = "ranking-basis";
+            choice.value = base.key;
+            choice.id = "basis-" + base.key;
+            choice.checked = hasShareBases && base.key === state.basis;
+            choice.disabled = !available;
+            choice.title = available ? base.description + " This changes the ranking and run points in this report."
+              : base.reason + " " + base.enable;
+            label.title = choice.title;
+            reason.id = choice.id + "-reason";
+            reason.hidden = available;
+            if (!available) choice.setAttribute("aria-describedby", reason.id);
+            body.append(reason);
+            label.append(choice, body);
+            choice.onchange = () => {
+              if (!choice.checked || choice.disabled) return;
+              state.basis = base.key;
+              state.pinnedRun = null;
+              $("chart-hover").hidden = true;
+              renderRanking();
+              updateSelectionSummary();
+            };
+            $("ranking-base-options").append(label);
           }
           const tabs = Array.from(document.querySelectorAll('.report-tab'));
           function showTab(tab) {
@@ -3660,28 +3760,28 @@
             swatch.style.background = familyColor(f);
             title.append(swatch, field(f.name, "h3"));
             const stats = node("div", "selected-summary-stats");
-            stat(stats, "Mean share", f.mean);
-            stat(stats, "Run SD", f.sd);
+            stat(stats, "Mean share of " + rankingBaseName(), rankingStatistics(f).mean);
+            stat(stats, "Run SD", rankingStatistics(f).sd);
             stat(stats, "Protein groups", f.proteins);
             const footer = node("div", "selected-summary-footer"),
               runs = node("div", "mini-runs");
             runs.setAttribute("aria-hidden", "true");
             const maximum = Math.max(
               ...ordered.flatMap((x) => [
-                val(x.mean) ?? 0,
-                ...(x.runs || []).map((r) => val(r.share) ?? 0),
+                val(rankingStatistics(x).mean) ?? 0,
+                ...(x.runs || []).map((r) => val(rankingRunShare(r)) ?? 0),
               ]),
               1,
             );
             runs.append(node("span", "mini-run-track"));
             for (const [i, r] of (f.runs || []).entries()) {
-              if (val(r.share) === null) continue;
+              if (val(rankingRunShare(r)) === null) continue;
               const dot = node(
                 "span",
                 "mini-run-point" +
                   (i % 3 === 1 ? " outline" : i % 3 === 2 ? " square" : ""),
               );
-              dot.style.left = (val(r.share) / maximum) * 100 + "%";
+              dot.style.left = (val(rankingRunShare(r)) / maximum) * 100 + "%";
               runs.append(dot);
             }
             if ((f.runs || []).length)
@@ -3700,7 +3800,7 @@
             name.className = "chip-name";
             chip.append(
               name,
-              displayField(f.mean),
+              displayField(rankingStatistics(f).mean),
               node("span", "chip-action", "Details"),
             );
             chip.onclick = scrollToFamily;
@@ -3720,7 +3820,7 @@
           function showAllRunHover(f, anchor, activeRun = null) {
             if (dialog.open) return;
             const runs = (f.runs || []).filter(
-                (r) => exists(r.name) && val(r.share) !== null,
+                (r) => exists(r.name) && val(rankingRunShare(r)) !== null,
               ),
               tip = $("chart-hover");
             if (!runs.length) {
@@ -3740,8 +3840,8 @@
               row.classList.toggle("is-active", text(run.name) === activeRun);
               row.append(
                 displayField(run.name),
-                displayField(run.share),
-                field(run.share),
+                displayField(rankingRunShare(run)),
+                field(rankingRunShare(run)),
               );
               tip.append(row);
             }
@@ -3788,15 +3888,11 @@
               ]),
             );
             host.replaceChildren();
-            const ranked =
-              state.sort === "spread"
-                ? ordered
-                    .slice()
-                    .sort(
-                      (a, b) =>
-                        (val(b.sd) ?? -Infinity) - (val(a.sd) ?? -Infinity),
-                    )
-                : ordered;
+            const hasSpread = ordered.some(f => val(rankingStatistics(f).sd) !== null);
+            if (!hasSpread) state.sort = "share";
+            const sortField = state.sort === "spread" ? "sd" : "mean";
+            const ranked = ordered.slice().sort((a, b) =>
+              (val(rankingStatistics(b)[sortField]) ?? -Infinity) - (val(rankingStatistics(a)[sortField]) ?? -Infinity));
             const rankedWithOthersLast = [
               ...ranked.filter((f) => !f.isOthers),
               ...ranked.filter((f) => f.isOthers),
@@ -3820,8 +3916,8 @@
 
             const maximum = Math.max(
               ...ordered.flatMap((f) => [
-                val(f.mean) ?? 0,
-                ...(f.runs || []).map((r) => val(r.share) ?? 0),
+                val(rankingStatistics(f).mean) ?? 0,
+                ...(f.runs || []).map((r) => val(rankingRunShare(r)) ?? 0),
               ]),
               1,
             );
@@ -3855,8 +3951,11 @@
               };
               const name = node("button", "rank-name");
               name.append(field(f.name));
-              const count = familyRunCount(f);
-              name.append(node("span", "rank-run-count", count ? "mean of " + count + " runs" : "run count unavailable"));
+              const mean = rankingStatistics(f).mean,
+                count = familyRunCount(f, hasShareBases ? state.basis : null);
+              const runLabel = count + (count === 1 ? " run" : " runs");
+              const runCountLabel = val(mean) === null ? "mean unavailable" : count ? "mean of " + runLabel : "run count unavailable";
+              name.append(node("span", "rank-run-count", runCountLabel));
               name.title = "Select this family to explore its stored values. This changes only the view of this report.";
               name.setAttribute("aria-pressed", String(f === state.selected));
               name.onclick = () => select(f);
@@ -3875,12 +3974,12 @@
               const fill = node("span", "rank-fill");
               fill.setAttribute("aria-hidden", "true");
               fill.style.width =
-                Math.max(0, (val(f.mean) ?? 0) / maximum) * 100 + "%";
+                Math.max(0, (val(mean) ?? 0) / maximum) * 100 + "%";
               fill.style.background = familyColor(f);
               fill.style.top = pointHeight / 2 - 2 + "px";
               chart.append(fill);
               const values = (f.runs || [])
-                .map((r) => val(r.share))
+                .map((r) => val(rankingRunShare(r)))
                 .filter((value) => value !== null);
               if (values.length) {
                 const low = Math.min(...values),
@@ -3896,13 +3995,13 @@
               }
 
               (f.runs || []).forEach((r, i) => {
-                if (val(r.share) === null) return;
+                if (val(rankingRunShare(r)) === null) return;
                 const dot = node("button", "rank-point");
                 dot.style.top = "1px";
                 dot.dataset.run = text(r.name);
                 dot.dataset.runStyle = i % 3;
                 dot.style.left =
-                  Math.max(0, val(r.share) / maximum) * 100 + "%";
+                  Math.max(0, val(rankingRunShare(r)) / maximum) * 100 + "%";
                 dot.style.setProperty(
                   "--dot-fill",
                   i % 3 === 1 ? "var(--surface)" : "var(--ink)",
@@ -3919,7 +4018,7 @@
                 label.append(
                   displayField(r.name),
                   document.createTextNode(": "),
-                  displayField(r.share),
+                  displayField(rankingRunShare(r)),
                 );
                 dot.append(label);
                 const hover = () => {
@@ -3944,12 +4043,12 @@
                   hide();
                   const dl = node("dl");
                   dl.append(
-                    node("dt", "", "Share of credited family signal"),
-                    field(r.share, "dd"),
+                    node("dt", "", "Percent of " + rankingBaseName()),
+                    field(rankingRunShare(r), "dd"),
                   );
                   if (exists(r.measured))
                     dl.append(
-                      node("dt", "", "Share of whole measured signal"),
+                      node("dt", "", "Share of measured peptide signal"),
                       field(r.measured, "dd"),
                     );
                   popup(field(r.name), [field(f.name, "p"), dl]);
@@ -3958,8 +4057,8 @@
                 if (exists(r.name) && !runNames.has(text(r.name)))
                   runNames.set(text(r.name), { id: r.name, index: i });
               });
-              const value = metric(f.mean);
-              value.className = "rank-value metric-button";
+              const value = val(mean) === null ? node("span", "rank-value unavailable", "not available") : metric(mean);
+              if (val(mean) !== null) value.className = "rank-value metric-button";
               row.append(name, chart, value);
               host.append(row);
               const previous = oldPositions.get(f.id);
@@ -3974,10 +4073,10 @@
             }
             if (!shown.length && state.query)
               host.append(node("p", "empty", "No matching families."));
-            $("ranking-note").textContent =
-              "Mean share of credited family signal";
-            $("ranking-runs-legend").textContent = "Each bar shows the mean of " + meanRunText() + "; dots show individual runs.";
-            $("rank-sort").hidden = !ordered.some((f) => val(f.sd) !== null);
+            $("ranking-note").textContent = "Mean share of " + rankingBaseName();
+            $("ranking-base-name").textContent = rankingBaseName();
+            $("ranking-runs-legend").textContent = "Each bar shows the mean of " + meanRunText(hasShareBases ? state.basis : null) + ". Dots show individual runs.";
+            $("rank-sort").hidden = !hasSpread;
             $("rank-sort-share").setAttribute(
               "aria-pressed",
               String(state.sort === "share"),
@@ -4058,7 +4157,7 @@
               ["Mean share of credited family signal", f.mean],
               ["Run-to-run standard deviation", f.sd],
               ["Coefficient of variation", f.cv],
-              ["Share of whole measured signal", f.wholeMeasured],
+              ["Share of measured peptide signal", f.wholeMeasured],
               ["Protein groups", f.proteins],
               ["Family-unique protein groups", f.uniqueProteins],
               ["Peptides", f.peptides],
@@ -4077,11 +4176,26 @@
               ),
               dl,
             );
+            const bases = node("dl", "family-share-bases");
+            for (const base of shareBases) {
+              const statistics = f[base.key] || {};
+              const value = node("dd");
+              value.dataset.basis = base.key;
+              if (val(statistics.mean) === null) value.textContent = base.reason;
+              else {
+                value.append(field(statistics.mean));
+                if (val(statistics.sd) !== null)
+                  value.append(document.createTextNode(" (sample SD "), field(statistics.sd), document.createTextNode(")"));
+              }
+              bases.append(node("dt", "", base.name), value);
+            }
+            content.push(node("h3", "", "Mean shares by denominator"), bases);
             if (f.runs?.length) {
-              content.push(node("h3", "", "By run"));
+              content.push(node("h3", "", "By run, percent of " + rankingBaseName()));
               const runs = node("dl");
               for (const r of f.runs)
-                runs.append(field(r.name, "dt"), field(r.share, "dd"));
+                runs.append(field(r.name, "dt"), val(rankingRunShare(r)) === null
+                  ? node("dd", "unavailable", "not available") : field(rankingRunShare(r), "dd"));
               content.push(runs);
             }
             popup(field(f.name), content);
@@ -4141,7 +4255,7 @@
             if (/family_subclasses/.test(id))
               return "Each stacked bar splits a family's contribution into its recorded subclasses. The parts use the pooled credited-family-signal denominator, so they add to the family's pooled share. Grey marks unresolved parts; no run-to-run whiskers are drawn.";
             if (/family_contribution/.test(id))
-              return "Bars compare family contributions, split into the identified and de novo parts shown by the colours. These are pooled values: use signal area or percent of the measured peptide total as labelled on the horizontal axis. Shared and unattributed signal stay separate, and no run-to-run whiskers are drawn.";
+              return "Each bar splits a family's pooled contribution into identified and de novo signal. Every percentage divides by all measured peptide-feature signal, with each feature counted once. Shared and unattributed signal have separate bars. These pooled bars have no run-to-run whiskers.";
             if (/abundance_diversity/.test(id))
               return "Horizontal position gives the mean per-run share of credited family signal; vertical position gives the database proteins needed to explain the peptides. Each point is a family, with protein counts pooled across runs. These database-dependent estimates have no whiskers.";
             if (/family_signal_vs_denovo_share/.test(id))
@@ -4165,7 +4279,7 @@
             if (/peaks_deepnovo_agreement|database_search_concordance|alternative_triage/.test(id))
               return "This chart compares the sequence agreement groups named on its axes and colour key, with all runs pooled. Counts use the recorded comparison population, and any fraction divides by the comparison total printed on the figure. The groups describe agreement, with no run-to-run whiskers.";
             if (/variant_comparison/.test(id))
-              return "Bars compare stored source options on the labelled signal or percentage basis, with all runs pooled. Any percentage uses the total printed for that comparison. The red whiskers span the two recorded envelope-model readings; they show model sensitivity, not sample SD across runs or a confidence interval.";
+              return "Bars compare stored source options on the labelled signal or percentage basis, with all runs pooled. Any percentage uses the total printed for that comparison. Compare the coloured components to see how each source option contributes to the pooled signal.";
             if (/source_effect_comparison/.test(id))
               return "Each bar is a stored source option compared with the same identification baseline, with all runs pooled. Any percentage uses the total printed for that comparison. These are differences between options, with no run-to-run whiskers.";
             return "This figure shows the stored results named above. Read its axes and colours with the full report caption, available when you open the figure. Its population, denominator and pooling follow that caption; this page adds no averaging or uncertainty.";
@@ -4187,8 +4301,8 @@
             $("family-info").onclick = () => familyDialog(f);
             const stats = $("family-stats");
             stats.replaceChildren();
-            stat(stats, "Mean family share", f.mean);
-            stat(stats, "Run-to-run SD", f.sd);
+            stat(stats, "Mean share of credited family signal", f.mean);
+            stat(stats, "Run-to-run SD of credited share", f.sd);
             stat(stats, "Protein groups", f.proteins);
             stat(stats, "Peptides", f.peptides);
             const parts = $("subclasses");

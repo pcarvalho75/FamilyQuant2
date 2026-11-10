@@ -74,7 +74,7 @@ internal static partial class Program
             checks.signal=d.getElementById('signal-panel').querySelector('.chart-legend')?.textContent.includes("that run's whole measured signal");
             checks.gap=d.getElementById('gap-panel').querySelector('.chart-legend')?.textContent.includes('reference total');
             checks.sd=d.querySelector('[data-figure="figure:family_composition.png"] figcaption').textContent.includes('one sample SD across runs');
-            checks.modelBounds=d.querySelector('[data-figure="figure:de_novo_variant_comparison.png"] figcaption').textContent.includes('model sensitivity, not sample SD across runs');
+            checks.retiredModelBounds=!d.querySelector('[data-figure="figure:de_novo_variant_comparison.png"] figcaption').textContent.includes('whiskers');
             d.getElementById('tab-mass').click();d.querySelector('[data-figure="figure:xic_by_mass.png"] > button').click();
             checks.popup=d.querySelector('#dialog-body .full-figure')?.nextElementSibling?.classList.contains('chart-legend')&&!!d.querySelector('#dialog-body [data-fq-field="caption"]');
             d.getElementById('dialog-close').click();
