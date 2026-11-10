@@ -47,19 +47,25 @@ public static partial class HtmlReportPayloadBuilder
         if (parts[0] is not ("IdentifiedOnly" or "IdentifiedAndDeNovo" or "DetectorEnvelopes" or "Tic"))
             throw new InvalidDataException("Unknown family share basis.");
         if (source.Run != null && parts.Length != 1) throw new InvalidDataException("A run share cannot name a summary statistic.");
+        bool identifiedPart = parts.Length == 2 && parts[1] == "identified-mean";
+        bool deNovoPart = parts.Length == 2 && parts[1] == "denovo-mean";
+        bool component = identifiedPart || deNovoPart;
         double? Share(FamilyRunShare run)
         {
             string name = DeNovoReconciler.NormalizeRunName(run.Run);
             var total = study.Runs.SingleOrDefault(r => string.Equals(DeNovoReconciler.NormalizeRunName(r.Run), name, StringComparison.OrdinalIgnoreCase));
+            if (component && !run.IdentifiedSignal.HasValue) return null;
+            double signal = identifiedPart ? run.IdentifiedSignal!.Value
+                : deNovoPart ? run.Signal - run.IdentifiedSignal!.Value : run.Signal;
             double? value = parts[0] switch
             {
                 "IdentifiedOnly" => run.IdentifiedSignal.HasValue && total?.IdentifiedSignal > 0
-                    ? run.IdentifiedSignal / total.IdentifiedSignal : null,
-                "IdentifiedAndDeNovo" => run.ShareOfMeasuredSignal
-                    ?? (total?.MeasuredSignal > 0 ? run.Signal / total.MeasuredSignal : null),
-                "Tic" => run.ShareOfTic
-                    ?? (total?.TotalIonCurrent > 0 ? run.Signal / total.TotalIonCurrent : null),
-                "DetectorEnvelopes" => DetectorShare(run.Signal, name),
+                    ? deNovoPart ? 0 : run.IdentifiedSignal / total.IdentifiedSignal : null,
+                "IdentifiedAndDeNovo" => (!component ? run.ShareOfMeasuredSignal : null)
+                    ?? (total?.MeasuredSignal > 0 ? signal / total.MeasuredSignal : null),
+                "Tic" => (!component ? run.ShareOfTic : null)
+                    ?? (total?.TotalIonCurrent > 0 ? signal / total.TotalIonCurrent : null),
+                "DetectorEnvelopes" => DetectorShare(signal, name),
                 _ => throw new InvalidDataException("Unknown family share basis."),
             };
             return value.HasValue && double.IsFinite(value.Value) ? value : null;
@@ -77,7 +83,7 @@ public static partial class HtmlReportPayloadBuilder
                 DeNovoReconciler.NormalizeRunName(source.Run), StringComparison.OrdinalIgnoreCase));
             return run == null ? null : Share(run);
         }
-        if (parts.Length != 2 || parts[1] is not ("mean" or "sd" or "cv"))
+        if (parts.Length != 2 || parts[1] is not ("mean" or "sd" or "cv" or "identified-mean" or "denovo-mean"))
             throw new InvalidDataException("A family share statistic is required.");
         // Existing CV is for assigned-family composition, a different denominator from these bases.
         if (parts[1] == "cv") return null;
@@ -96,7 +102,7 @@ public static partial class HtmlReportPayloadBuilder
             mean += delta / count;
             m2 += delta * (value.Value - mean);
         }
-        return parts[1] == "mean" ? mean : count > 1 ? Math.Sqrt(Math.Max(0, m2 / (count - 1))) : null;
+        return parts[1] == "sd" ? count > 1 ? Math.Sqrt(Math.Max(0, m2 / (count - 1))) : null : mean;
     }
 
     private sealed partial class Builder
@@ -134,8 +140,12 @@ public static partial class HtmlReportPayloadBuilder
             return family with
             {
                 Runs = runs, IdentifiedOnly = FamilyShareStatistics(key, "IdentifiedOnly"),
+                IdentifiedOnlyParts = FamilyShareMeanParts(key, "IdentifiedOnly"),
                 IdentifiedAndDeNovo = FamilyShareStatistics(key, "IdentifiedAndDeNovo"),
-                DetectorEnvelopes = FamilyShareStatistics(key, "DetectorEnvelopes"), Tic = FamilyShareStatistics(key, "Tic"),
+                IdentifiedAndDeNovoParts = FamilyShareMeanParts(key, "IdentifiedAndDeNovo"),
+                DetectorEnvelopes = FamilyShareStatistics(key, "DetectorEnvelopes"),
+                DetectorEnvelopesParts = FamilyShareMeanParts(key, "DetectorEnvelopes"),
+                Tic = FamilyShareStatistics(key, "Tic"), TicParts = FamilyShareMeanParts(key, "Tic"),
             };
         }
 
@@ -157,5 +167,22 @@ public static partial class HtmlReportPayloadBuilder
             FamilyShareField(family, basis, statistic: "mean"),
             FamilyShareField(family, basis, statistic: "sd"),
             FamilyShareField(family, basis, statistic: "cv"));
+
+        private HtmlFamilyMeanParts? FamilyShareMeanParts(string family, string basis)
+        {
+            if (context.StoredStudies == null) return null;
+            var identifiedSource = new HtmlReportReference { Kind = "family-basis", Family = family,
+                Study = context.UsesPanel && !context.IsIdentity ? "effective" : "source",
+                Property = basis + "/identified-mean", Format = "G6", Scale = 100 };
+            var deNovoSource = identifiedSource with { Property = basis + "/denovo-mean" };
+            double? identified = ReadFamilyShare(identifiedSource, context.StoredStudies) * 100;
+            double? deNovo = ReadFamilyShare(deNovoSource, context.StoredStudies) * 100;
+            if (!identified.HasValue || !deNovo.HasValue) return null;
+            string identifiedId = Add(identified.Value.ToString("G6", CultureInfo.InvariantCulture), identifiedSource, "%", identified);
+            string deNovoId = Add(deNovo.Value.ToString("G6", CultureInfo.InvariantCulture), deNovoSource, "%", deNovo);
+            AddShort(identifiedId, identified.Value, identifiedSource);
+            AddShort(deNovoId, deNovo.Value, deNovoSource);
+            return new(identifiedId, deNovoId);
+        }
     }
 }

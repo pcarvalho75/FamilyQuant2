@@ -60,9 +60,13 @@ public static partial class HtmlReportPayloadBuilder
             family = family with
             {
                 IdentifiedOnly = FamilyShareStatistics(family.Id, "IdentifiedOnly"),
+                IdentifiedOnlyParts = FamilyShareMeanParts(family.Id, "IdentifiedOnly"),
                 IdentifiedAndDeNovo = FamilyShareStatistics(family.Id, "IdentifiedAndDeNovo"),
+                IdentifiedAndDeNovoParts = FamilyShareMeanParts(family.Id, "IdentifiedAndDeNovo"),
                 DetectorEnvelopes = FamilyShareStatistics(family.Id, "DetectorEnvelopes"),
+                DetectorEnvelopesParts = FamilyShareMeanParts(family.Id, "DetectorEnvelopes"),
                 Tic = FamilyShareStatistics(family.Id, "Tic"),
+                TicParts = FamilyShareMeanParts(family.Id, "Tic"),
             };
             // A selected Results headline is independent of the family-detail checkbox. Do not
             // allocate any detail fields for an excluded family owner, even from global worksheets.

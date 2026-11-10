@@ -62,6 +62,10 @@ public sealed record HtmlComposition
     public string Basis { get; init; } = "Mean of per-run shares of credited family signal";
     public bool IsAdditive { get; init; } = true;
     public IReadOnlyList<HtmlReportFamily> Families { get; init; } = Array.Empty<HtmlReportFamily>();
+    public IReadOnlyList<HtmlContributionRow> ContributionRows { get; init; } = Array.Empty<HtmlContributionRow>();
+    // Per-run allocation buckets are not recorded in the current stored study. Missing totals stay null.
+    public HtmlShareBasisTotals SharedBetweenFamilies { get; init; } = new();
+    public HtmlShareBasisTotals Unattributed { get; init; } = new();
 }
 
 /// <summary>Name, Mean and other field properties are keys into Payload.Fields, not display strings.</summary>
@@ -79,9 +83,13 @@ public sealed record HtmlReportFamily
     public string? DatabaseEntries { get; init; }
     public bool IsOthers { get; init; }
     public HtmlFamilyShareStatistics IdentifiedOnly { get; init; } = new();
+    public HtmlFamilyMeanParts? IdentifiedOnlyParts { get; init; }
     public HtmlFamilyShareStatistics IdentifiedAndDeNovo { get; init; } = new();
+    public HtmlFamilyMeanParts? IdentifiedAndDeNovoParts { get; init; }
     public HtmlFamilyShareStatistics DetectorEnvelopes { get; init; } = new();
+    public HtmlFamilyMeanParts? DetectorEnvelopesParts { get; init; }
     public HtmlFamilyShareStatistics Tic { get; init; } = new();
+    public HtmlFamilyMeanParts? TicParts { get; init; }
     public IReadOnlyList<HtmlFamilyRun> Runs { get; init; } = Array.Empty<HtmlFamilyRun>();
     public IReadOnlyList<HtmlFamilyPart> Parts { get; init; } = Array.Empty<HtmlFamilyPart>();
     public IReadOnlyList<HtmlReportCoverage> Coverage { get; init; } = Array.Empty<HtmlReportCoverage>();
@@ -95,6 +103,20 @@ public sealed record HtmlFamilyRun(string Name, string? Share, string? Measured)
     public string? Tic { get; init; }
 }
 public sealed record HtmlFamilyShareStatistics(string? Mean = null, string? Sd = null, string? Cv = null);
+/// <summary>Field IDs for the identified and de novo parts of the mean per-run share, in percent.</summary>
+public sealed record HtmlFamilyMeanParts(string Identified, string DeNovo);
+public sealed record HtmlShareBasisTotals(string? IdentifiedOnly = null, string? IdentifiedAndDeNovo = null,
+    string? DetectorEnvelopes = null, string? Tic = null);
+/// <summary>Name and numeric properties are field IDs. Rows preserve the canonical ranking order;
+/// unavailable bases are null and never reconstructed by the browser.</summary>
+public sealed record HtmlContributionRow(string Id, string Kind, string Name)
+{
+    public HtmlContributionShares? IdentifiedOnly { get; init; }
+    public HtmlContributionShares? IdentifiedAndDeNovo { get; init; }
+    public HtmlContributionShares? DetectorEnvelopes { get; init; }
+    public HtmlContributionShares? Tic { get; init; }
+}
+public sealed record HtmlContributionShares(string? Total, string? Identified, string? DeNovo);
 public sealed record HtmlFamilyPart(string Kind, string Name, string? Share, bool IsUnresolved = false);
 public sealed record HtmlRunCredit(string Name, string Share);
 public sealed record HtmlGapRow(string Name, string Fraction);
