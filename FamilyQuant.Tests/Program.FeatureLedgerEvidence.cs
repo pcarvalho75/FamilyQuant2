@@ -43,7 +43,9 @@ internal static partial class Program
         string invalidAudit = Path.Combine(Path.GetTempPath(), "FamilyQuant.EvidenceGuard.Tests", Path.GetFileName(root), "missing-row-audit");
         Directory.CreateDirectory(invalidAudit);
         Check("an audit cannot accept a ledger with a missing frozen row", FeatureLedgerEvidence.Report(root, inventory,
-            markdown.Replace(first + "\n", "", StringComparison.Ordinal), FeatureLedgerEvidence.Load(root, inventory), invalidAudit) == 1);
+            markdown.Replace(first + "\n", "", StringComparison.Ordinal), StructuralReceiptRegistry(release,
+                () => FeatureLedgerEvidence.Load(root, inventory)), invalidAudit, reuseValidatedRegistry: LedgerReceiptsSkipped(release)) == 1);
+        FeatureLedgerSyntheticModeTests();
     }
 
     // Deliberately synthetic validator inputs. None is imported into the real ledger.
