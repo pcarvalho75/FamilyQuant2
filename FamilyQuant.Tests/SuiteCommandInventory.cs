@@ -8,7 +8,7 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
-        SuiteCommandRule.Covered("--test-ledger-synthetic-mode", "FamilyQuant.Tests.Program.FeatureLedgerReceiptGuardTests(System.Boolean)", "FamilyQuant.Tests.Program.FeatureLedgerSyntheticModeTests()"),
+        SuiteCommandRule.Covered("--test-ledger-synthetic-mode", "FamilyQuant.Tests.Program.FeatureLedgerReceiptGuardTests(System.Boolean)"),
         SuiteCommandRule.Covered("--test-html-share-parts", "FamilyQuant.Tests.Program.HtmlSharePartsTests(System.String)"),
         SuiteCommandRule.Covered("--test-curation-csv-basis", "FamilyQuant.Tests.Program.CurationCsvBasisTests()"),
         SuiteCommandRule.Covered("--test-ledger-drops-2114", "FamilyQuant.Tests.Program.LedgerDrops2114Tests()", "FamilyQuant.Tests.Program.FeatureLedgerBaseTests(System.Boolean)", "FamilyQuant.Tests.Program.FeatureLedgerMutationTest(System.Int32,System.Boolean)"),
