@@ -32,7 +32,7 @@ public static class HtmlCoverageCatalogBuilder
             var domains = map.Annotations.SelectMany(annotation => annotation.Segments.Select(span => new HtmlCoverageCatalogSpan(span.Start, span.End,
                 annotation.Label, annotation.Kind == CoverageAnnotationKind.Domain ? "domain" : "feature"))).ToArray();
             proteins.Add(new(map.FamilyUserId, map.ProteinId,
-                map.ProteinId + " (" + count.ToString(CultureInfo.InvariantCulture) + " distinct placed peptide sequences)",
+                map.ProteinId + " (" + count.ToString(CultureInfo.InvariantCulture) + " distinct placed sequences)",
                 map.SequenceLength, count, map.RankingSignal, peptides, domains));
         }
         var names = FamilyNaming.Names(project.MyExtendedFastaItems.Where(protein => !SequenceLabels.IsDecoy(protein.SequenceIdentifier)));

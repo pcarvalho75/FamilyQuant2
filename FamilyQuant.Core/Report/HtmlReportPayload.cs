@@ -133,7 +133,10 @@ public sealed record HtmlGapRow(string Name, string Fraction)
 /// <summary>Label and Ticks are field IDs; Values maps family IDs to existing exact field IDs.
 /// Scale controls geometry only. Missing values are absent; recorded zero remains available.</summary>
 public sealed record HtmlDotMeasure(string Id, string Label, string Unit, string Scale,
-    IReadOnlyList<string> Ticks, IReadOnlyDictionary<string, string> Values);
+    IReadOnlyList<string> Ticks, IReadOnlyDictionary<string, string> Values)
+{
+    public IReadOnlyDictionary<string, HtmlDotBasis> Bases { get; init; } = new Dictionary<string, HtmlDotBasis>(); // U9
+}
 public sealed record HtmlReportHighlight(string Name, string Value, string? Description);
 /// <summary>Title, fact Name and fact Value are all field IDs.</summary>
 public sealed record HtmlMethodStep(string Id, string Title, IReadOnlyList<HtmlReportFact> Facts);
