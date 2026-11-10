@@ -4,6 +4,17 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.15 (published 2026-11-10)
+
+- **Every chart in the HTML report is drawn in the page.** The pictures pasted into 2.1.14's tabs are gone: Families, Signal recovery, Mass and isotopes, Database gap, Quality and Sensitivity now draw their charts in the page from the program's own numbers. Point, tap or use the keyboard to read an exact value and what it is a percentage of; every chart names its base, says when a value is a mean of runs or all runs pooled, and works in light and dark, on a phone and in print. The Word report keeps its pictures.
+- **Every protein's coverage.** The Coverage tab lists every family, including those below the report threshold and Others, and every protein with placed peptides, with the same maps as the program.
+- **The family ring follows Normalize to.** The ring, its centre and the selected-family card use the chosen base (PSM only, PSM and de novo, Detector envelopes or TIC) on a true 0 to 100% scale, with the part outside the shown families labelled.
+- **Recovery explained again.** The Signal recovery tab has a new guide: what each of the four readings divides by, what the gaps between them can and cannot mean, pooled runs against run means, and percentage points against the relative increase.
+- **Recovery by mass range.** The "percent of ion current by mass" chart becomes recovery by mass range: measured peptide envelope signal divided by the detector's envelope signal in each 500 Da range, in the program and in the HTML report. Projects quantified by an earlier version ask you to run **Quantify** again for this chart.
+- **Plainer words.** Family names drop the database header fields (the full header shows on hover and in the family details). A "What the numbers mean" panel defines the reference totals and the peptide feature (one peptide at one charge in one elution peak, counted once). Each chart names its base once, and the Compare family measures chart follows Normalize to with readable labels. A project without families says to curate families and run Quantify, instead of asking for a newer version.
+
+**Feature ledger.** 1,962 checks proved for 2.1.15; 28 rows changed on purpose by this release are open to verify again after release, listed in [docs/LEDGER-REVERIFY-2.1.15.md](docs/LEDGER-REVERIFY-2.1.15.md).
+
 ## 2.1.14 (published 2026-11-09)
 
 - **Each peptide counts once.** The family contribution chart credits a peptide to at most one family: shared peptides sit in their own bar beside unattributed signal, and the bars add up to 100%. The "count in every family" choice is gone; family-unique and split remain. A project saved with "every family" opens with family-unique and says so once.

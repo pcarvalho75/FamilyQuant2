@@ -5,144 +5,144 @@
   "runs": [
     {
       "id": "native",
-      "command": "D:\\FamilyQuant-wt\\fetch-ledger-final\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-cache D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh/final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache \u00222026-11-07 12:03:59 -0800\u0022",
-      "executedAt": "2026-11-07 12:03:59 -0800",
-      "commit": "64f60deee32c8b31bd13ad51e840bd0b467b10f6",
+      "command": "D:\\FamilyQuant-wt\\release-2115\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-cache D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261110-063212-release-2115\\assay-cache \u00222026-11-10 06:33:05 -0800\u0022",
+      "executedAt": "2026-11-10 06:33:05 -0800",
+      "commit": "3d7c72932f67b7135d5c1263d88ca81555bd9b45",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\proofs.log",
           "sha256": "A49EEA994C5133450D475C902050941359A06A510CAA4BFE8A6E01E159E79B7F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\actual-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\actual-values.json",
           "sha256": "D4BA12749E3BFB79E8DCC4ADFB92E96EB6417309A218DCDCEF1A7CD546129470"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
           "sha256": "F5296E32FB6CE6CBACD00F9B41E521BC9A86F84520EE8B63673F936BA099F588"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
           "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
           "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
-          "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "sha256": "F471C5570F9E6004927F2C1D296738E023E01CFCE2D8BCBAE4D87F9E1C64558B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "7FFE973E1D4F66812812B051DAB78C93169902380838CFA92C011F86B1C3A02D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
           "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
           "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
           "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\frozen\\FamilyQuant/DeNovo/DeNovoXicCache.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\frozen\\FamilyQuant/DeNovo/DeNovoXicCache.cs",
           "sha256": "28896247F0957D4D244802E5E41968B264CD075F3EC2381A1498B19D996AEEA1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\frozen\\FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\frozen\\FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs",
           "sha256": "2BE7652D4FB2F3C44801773D52BA3787BAD054CA004D29CEA9ADAA9745654CA2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "B3A92C3A3E7397FB9343DACDE450DFA7B6930A13E0614941C7E44BE3F81341FD"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "070E3F0555AA8EDCCB3CA75A0FEEED1B7F21B100B480CAA8CD8CA1B847A76473"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\executed\\FamilyQuant.Core.dll",
-          "sha256": "B7381DAC619A69FCC2E697FC7DE8C3C4B22B11AE01D520D04C1B45B1B541BE8A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\executed\\FamilyQuant.Core.dll",
+          "sha256": "E2A31A136E84D34B7DF344B13E0347CDD7F5C2553120B8A45CD92FD70103F0FD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\frozen-ReferenceGoldenHost.dll",
-          "sha256": "5579B3A706BFD311233A2AB3FC1EA59AC5B3D20C1EAB1FEC5FCF75F54A946948"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "01E733A93806DA6EB90EF4656E80C537E0E0ED2EB94665AC3BAD5B334AC91FDC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\frozen-ReferenceGoldenHost.exe",
-          "sha256": "E7CC7A41F1A46477929777F0523F46FD91161DB139D95CFCB41159B649D05B72"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "6336DE120E03B1EA532966C1DE59E732429771FE8CC293AAE315B5D35C2F93D3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\frozen-host.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\frozen-host.log",
           "sha256": "0E65B3EC7E70149A79E307FA3EE325666029EB8DB36D88675E62806C2360CADB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\current\\blocked-ms1.json.tmp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\current\\blocked-ms1.json.tmp",
           "sha256": "C20FFFD9198FC88300FF30679E721169B74CF632E2D611489653DCDD73A385EF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\current\\blocked-xic.json.tmp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\current\\blocked-xic.json.tmp",
           "sha256": "E744A499BCFEB2354CDE24384BB9FF079F95D81CB994DEDF0E36C10638DC938B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\current\\ms1.canonical.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\current\\ms1.canonical.json",
           "sha256": "26DACFC452C055D6F9D06CF3305937F0ECC60C828F94424FB4E8A74B6702D5FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\current\\ms1.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\current\\ms1.json",
           "sha256": "C20FFFD9198FC88300FF30679E721169B74CF632E2D611489653DCDD73A385EF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\current\\staging.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\current\\staging.json",
           "sha256": "14EC035F4C65A7EB2D60A3253FA88B955502CEEC3F067BCA6B8A46BB307FA33B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\current\\xic.canonical.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\current\\xic.canonical.json",
           "sha256": "B2BFBE12B1B669706499DDC9F54717B332FF5D3EC0803AA7B33D0637ECB2E6DE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\current\\xic.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\current\\xic.json",
           "sha256": "E744A499BCFEB2354CDE24384BB9FF079F95D81CB994DEDF0E36C10638DC938B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\frozen\\blocked-ms1.json.tmp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\frozen\\blocked-ms1.json.tmp",
           "sha256": "B84F06B833D8794C8D00BFAEA21A37B8D1CA7E82F599FF7F4D8FD275532F1726"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\frozen\\blocked-xic.json.tmp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\frozen\\blocked-xic.json.tmp",
           "sha256": "4AAFEBA830214D1B02F3B7233429A172B63B3621A35D13227E0AC462FFA4615F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\frozen\\ms1.canonical.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\frozen\\ms1.canonical.json",
           "sha256": "26DACFC452C055D6F9D06CF3305937F0ECC60C828F94424FB4E8A74B6702D5FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\frozen\\ms1.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\frozen\\ms1.json",
           "sha256": "B84F06B833D8794C8D00BFAEA21A37B8D1CA7E82F599FF7F4D8FD275532F1726"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\frozen\\staging.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\frozen\\staging.json",
           "sha256": "14EC035F4C65A7EB2D60A3253FA88B955502CEEC3F067BCA6B8A46BB307FA33B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\frozen\\xic.canonical.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\frozen\\xic.canonical.json",
           "sha256": "B2BFBE12B1B669706499DDC9F54717B332FF5D3EC0803AA7B33D0637ECB2E6DE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\frozen\\xic.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\frozen\\xic.json",
           "sha256": "4AAFEBA830214D1B02F3B7233429A172B63B3621A35D13227E0AC462FFA4615F"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\fetch-ledger-final"
+      "workingDirectory": "D:\\FamilyQuant-wt\\release-2115"
     }
   ],
   "rows": [
@@ -162,7 +162,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -186,7 +186,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -210,7 +210,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -234,7 +234,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -258,7 +258,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -282,7 +282,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -306,7 +306,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -330,7 +330,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -354,7 +354,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -378,7 +378,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -402,7 +402,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -426,7 +426,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -450,7 +450,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -474,7 +474,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -498,7 +498,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -522,7 +522,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -546,7 +546,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -570,7 +570,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -594,7 +594,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -618,7 +618,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -642,7 +642,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -666,7 +666,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -690,7 +690,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -714,7 +714,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -738,7 +738,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -762,7 +762,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -786,7 +786,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -810,7 +810,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -834,7 +834,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -858,7 +858,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -882,7 +882,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -906,7 +906,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -930,7 +930,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -954,7 +954,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -978,7 +978,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1002,7 +1002,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1026,7 +1026,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1050,7 +1050,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1074,7 +1074,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1098,7 +1098,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1122,7 +1122,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1146,7 +1146,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1170,7 +1170,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1194,7 +1194,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1218,7 +1218,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1242,7 +1242,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1266,7 +1266,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1290,7 +1290,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1314,7 +1314,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1338,7 +1338,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1362,7 +1362,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Native frozen/current cache wire and staging comparison",
-          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
+          "sha256": "73DA318D78D676FA2CC2CFB888B08F29317549F7D2A733A93A00027C5588EFD4"
         }
       ],
       "proofs": [],
@@ -1381,7 +1381,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-cache-wire kind export/storage fact: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\final-64f60dee\\20261107-120302-fetch-ledger-final\\assay-cache\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-063212-release-2115\\assay-cache\\proofs.log",
           "inspectedBy": ""
         }
       ]

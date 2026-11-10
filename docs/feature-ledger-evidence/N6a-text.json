@@ -5,56 +5,56 @@
   "runs": [
     {
       "id": "text-tool",
-      "command": "D:\\FamilyQuant-wt\\release-2114\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261109-181948-release-2114\\text-preserved \u00222026-11-09 18:20:09 -0800\u0022",
-      "executedAt": "2026-11-09 18:20:09 -0800",
-      "commit": "c8885cce746467fd3ef2ffd5b02a3bfaaa9ffa61",
+      "command": "D:\\FamilyQuant-wt\\release-2115\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261110-064550-release-2115\\text-preserved \u00222026-11-10 06:46:18 -0800\u0022",
+      "executedAt": "2026-11-10 06:46:18 -0800",
+      "commit": "3d7c72932f67b7135d5c1263d88ca81555bd9b45",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\text.log",
-          "sha256": "98D07289F5EE5033652FD6FE01B3C92D0ED2DD704B1A9A1FEFC6878DF1014D6A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.log",
+          "sha256": "EC6365538DC2D1E62D3B3B37BE9A73E9E2F2C5B421D0EDCF7E5F7BEAF75F8EFC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\text.json",
-          "sha256": "4D01550E65C93F11F42EAC4D301F03E06002BDE6E74FF5AB2E0E012AE4E3F42E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.json",
+          "sha256": "EAB6AD707CA500AEC21D04E629CF80C77DC22D8D5E8F5A38E3EA48048400BAA3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\executed\\FamilyQuant2.dll",
-          "sha256": "5B696999DB5D40545612F5FCBD130FA693C502F8D76C062BADB21CFCC8912084"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant2.dll",
+          "sha256": "67512E51368508C83DC741D3675F19C874F91D59C786FBE3A7FBF59AA4510091"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\executed\\FamilyQuant2.pdb",
-          "sha256": "0E170F7741CCF2182AAD92D42F9D9A61350E8B45CD3D4C58E68904F23F575FB1"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant2.pdb",
+          "sha256": "794C9BE1A23D8F76F6F006CFC5C9E100549B3DBE5942D207368D6CAD110CEB69"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\executed\\FamilyQuant.Core.dll",
-          "sha256": "7EEB0BF50C082AF06855FBE7FFB8EDF31A1F6463CDD6F3F6959BBE540506C1D0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Core.dll",
+          "sha256": "E2A31A136E84D34B7DF344B13E0347CDD7F5C2553120B8A45CD92FD70103F0FD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\executed\\FamilyQuant.Core.pdb",
-          "sha256": "B9E614CF3576FEAF2BE54321F67A5C33A8ACD6F120EE471F2E9C556FB5A1E5BB"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Core.pdb",
+          "sha256": "CDA7B546F484BF1998F4027D08AC003E8782173560BE3BF9DE0F88880EC120E6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "537B33416C42923980D3CE1BB4E56C9DBDEA2522904252B25EA8789FE3B9701A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "070E3F0555AA8EDCCB3CA75A0FEEED1B7F21B100B480CAA8CD8CA1B847A76473"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
           "sha256": "2CB78207901A4D7ACADF502A2EA634EFA79F3C1FC984986B33E5559BAD99FD21"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
           "sha256": "5243AEA610F5970D27BE03D90F556F3C60A0B0E700DAD42192AE5BB0535261EB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
           "sha256": "76B82F938173EA4E342000A363089B287BD5B2A897FDC8872B5EDB5319BB2F12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "7FFE973E1D4F66812812B051DAB78C93169902380838CFA92C011F86B1C3A02D"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\release-2114"
+      "workingDirectory": "D:\\FamilyQuant-wt\\release-2115"
     }
   ],
   "rows": [
@@ -104,7 +104,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -118,7 +118,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -294,7 +294,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -370,7 +370,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -424,7 +424,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -446,7 +446,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -530,7 +530,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoScoreDistributionChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -568,7 +568,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PeptideRepresentativesChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -774,7 +774,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -784,6 +784,14 @@
     },
     {
       "observationId": "FQ15-0A234B75965F",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0A23F2CBFDA6",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
@@ -820,7 +828,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::.ctor(System.Collections.Generic.IEnumerable\u00601{FamilyQuant.DeNovo.DeNovoTalkComparisonRow})",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -838,6 +846,14 @@
     },
     {
       "observationId": "FQ15-0A8602AFB8CE",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0A90D9115B97",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
@@ -891,6 +907,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-0BF65773FF2C",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-0C5119C90092",
       "implementation": [],
       "proofs": [],
@@ -904,7 +928,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -942,7 +966,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -972,7 +996,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoVariantComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -1026,7 +1050,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -1161,12 +1185,20 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-1001355FDE8B",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-100498AAADDB",
       "implementation": [
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PeptideRepresentativesChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -1180,7 +1212,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Save(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult,String,FamilyQuant.ChartPaletteVariant)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -1242,7 +1274,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::LabelOf(FamilyQuant.DeNovo.AgreementCategory)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -1540,13 +1572,21 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
       "compared": "frozen literal \u0022Nothing to show: compute the full XIC so the runs have a TIC to divide by.\u0022 (SHA256 0CE77A67D50913C3) verbatim in FamilyQuant2.dll FamilyQuant.RecoveryChart::OnRender(System.Windows.Media.DrawingContext) [FamilyQuant/RecoveryChart.cs]; feature member RecoveryChart.OnRender; reached as delegate FamilyQuant.AnalyticsViewModel/\u003C\u003Ec__DisplayClass69_0::\u003CExportWriter\u003Eb__2(String), 4 steps from the entry point"
+    },
+    {
+      "observationId": "FQ15-15B84190A3F4",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-15CA1AF08DCE",
@@ -1602,7 +1642,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -1712,7 +1752,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -1733,6 +1773,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-183961BF94B3",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1758,7 +1806,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -1773,6 +1821,20 @@
       "note": "2 failed: the literal is compiled only in other members (showing the first 1 of 1: FamilyQuant.AnalyticsViewModel::SummaryLine(FamilyQuant.AnalyticsData,FamilyQuant.FamilyEnvelopeQuantResult,FamilyQuant.FamilyClusterFile,FamilyQuant.QuantManifest)), not in member AnalyticsControl.SummaryLine",
       "kindReceiptId": null,
       "compared": null
+    },
+    {
+      "observationId": "FQ15-18D61707CAFD",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "FamilyQuant.IsotopeCountChart::OnRender(System.Windows.Media.DrawingContext)",
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
+      "kindReceiptId": "text-code-fact",
+      "compared": "frozen literal \u0022Isotopes credited per peptide\u0022 (SHA256 9FACD162935BA10F) verbatim in FamilyQuant2.dll FamilyQuant.IsotopeCountChart::OnRender(System.Windows.Media.DrawingContext) [FamilyQuant/IsotopeCountChart.cs]; feature member IsotopeCountChart.OnRender; reached as delegate FamilyQuant.AnalyticsViewModel/\u003C\u003Ec__DisplayClass69_0::\u003CExportWriter\u003Eb__2(String), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-18DC9493B812",
@@ -1807,6 +1869,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-19228B26B200",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-195513C7DFFE",
       "implementation": [],
       "proofs": [],
@@ -1820,7 +1890,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::SaveDeNovoTalkComparison(System.Collections.Generic.IReadOnlyList\u00601{FamilyQuant.DeNovo.DeNovoTalkComparisonRow},String,FamilyQuant.ChartPaletteVariant)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -1858,7 +1928,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -1920,7 +1990,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "D088FDF4A6FD7F9ABE039DF3CB1C312B192B21FC76E4DAC3C51AF9B043A52D2C"
+          "sha256": "24E3CA27562C059087B7C9EC811D96BE0A12F2A81BAB97C8566066E832B3AD51"
         }
       ],
       "proofs": [],
@@ -1964,7 +2034,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -2046,7 +2116,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PeptideRepresentativesChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -2132,7 +2202,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -2270,7 +2340,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -2346,7 +2416,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -2408,7 +2478,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -2659,6 +2729,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-25B8151A1126",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-25BFB8499E7C",
       "implementation": [],
       "proofs": [],
@@ -2712,7 +2790,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySourceSequenceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -2764,7 +2842,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -2856,7 +2934,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "D088FDF4A6FD7F9ABE039DF3CB1C312B192B21FC76E4DAC3C51AF9B043A52D2C"
+          "sha256": "24E3CA27562C059087B7C9EC811D96BE0A12F2A81BAB97C8566066E832B3AD51"
         }
       ],
       "proofs": [],
@@ -2870,7 +2948,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -2900,7 +2978,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -2992,7 +3070,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -3349,6 +3427,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-2F326D517A18",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-2F45C22C5B12",
       "implementation": [],
       "proofs": [],
@@ -3387,6 +3473,14 @@
       "compared": "frozen literal \u0022Minimum identity (0 to 1):\u0022 (SHA256 37746A108E9B3B0A) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::InitializeComponent() loading denovocontrol.baml [FamilyQuant/DeNovoControl.xaml]; feature compiled XAML of FamilyQuant.DeNovoControl; reached as delegate FamilyQuant.MainWindow::\u003CInitializeNavigation\u003Eb__160_0(FamilyQuant.ShellDestination), 5 steps from the entry point"
     },
     {
+      "observationId": "FQ15-2FE77BAEBF4C",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-2FEA564E4846",
       "implementation": [],
       "proofs": [],
@@ -3400,7 +3494,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -3430,7 +3524,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -3547,6 +3641,20 @@
       "note": "1 failed: the row records no literal text (kind option/copy)",
       "kindReceiptId": null,
       "compared": null
+    },
+    {
+      "observationId": "FQ15-3335A84B815E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/XicMassChart.cs",
+          "symbol": "FamilyQuant.XicMassChart::OnRender(System.Windows.Media.DrawingContext)",
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
+      "kindReceiptId": "text-code-fact",
+      "compared": "frozen literal \u0022XIC by mass: envelope area against peptide mass\u0022 (SHA256 4128A5296EBC530B) verbatim in FamilyQuant2.dll FamilyQuant.XicMassChart::OnRender(System.Windows.Media.DrawingContext) [FamilyQuant/XicMassChart.cs]; feature member XicMassChart.OnRender; reached as delegate FamilyQuant.AnalyticsViewModel/\u003C\u003Ec__DisplayClass69_0::\u003CExportWriter\u003Eb__2(String), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-334D1CDAA36B",
@@ -3714,7 +3822,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -3744,7 +3852,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -3758,7 +3866,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -3949,6 +4057,14 @@
       "compared": "frozen literal \u0022 de novo export file(s) found under that folder. Next step: check the three filters and press \u0027Load ...\u0022 (SHA256 12074578F7A474C1) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowsePeaksDirectory_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
     },
     {
+      "observationId": "FQ15-372A1D7D876F",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-373C56C4ED66",
       "implementation": [
         {
@@ -3982,7 +4098,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoScoreDistributionChart::.ctor(System.Collections.Generic.IEnumerable\u00601{FamilyQuant.DeNovo.DeNovoSourceScoreDistribution})",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -4138,13 +4254,21 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
       "compared": "frozen literal \u0022One dot per compatible file \u002B scan \u002B charge/m/z precursor hypothesis; both source calls passed all c...\u0022 (SHA256 426B2A99A6367913) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext) [FamilyQuant/PresentationFigures.cs]; feature member DeNovoAcceptedScoreScatterChart.OnRender; reached as delegate FamilyQuant.AnalyticsViewModel/\u003C\u003Ec__DisplayClass69_0::\u003CExportWriter\u003Eb__3(String), 4 steps from the entry point"
+    },
+    {
+      "observationId": "FQ15-393E11835299",
+      "implementation": [],
+      "proofs": [],
+      "note": "2 failed: the literal is compiled only in other members (showing the first 1 of 1: FamilyQuant.XicMassChart::OnRender(System.Windows.Media.DrawingContext)), not in member PercentIonCurrentChart.OnRender",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-3980BE03A0C9",
@@ -4574,7 +4698,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -4620,7 +4744,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -4643,6 +4767,20 @@
       "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
+    },
+    {
+      "observationId": "FQ15-3FD91852854B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "FamilyQuant.IsotopeCountChart::.ctor(System.Collections.Generic.IEnumerable\u00601{FamilyQuant.AnalyticsPeptide},Boolean,FamilyQuant.ChartPalette)",
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
+      "kindReceiptId": "text-code-fact",
+      "compared": "frozen literal \u0022Each bar counts the peptides credited that many isotopes, from 1 up to the \u0022 (SHA256 EB10508A8941A1A6) verbatim in FamilyQuant2.dll FamilyQuant.IsotopeCountChart::.ctor(System.Collections.Generic.IEnumerable\u00601{FamilyQuant.AnalyticsPeptide},Boolean,FamilyQuant.ChartPalette) [FamilyQuant/IsotopeCountChart.cs]; feature member IsotopeCountChart.IsotopeCountChart; reached as delegate FamilyQuant.AnalyticsViewModel/\u003C\u003Ec__DisplayClass69_0::\u003CExportWriter\u003Eb__2(String), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-3FEF6B56D2CA",
@@ -4722,7 +4860,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::.ctor(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -4774,7 +4912,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -4796,7 +4934,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -4810,7 +4948,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -4910,7 +5048,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -4932,7 +5070,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -5031,6 +5169,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-45C4F2A2837C",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -5160,7 +5306,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -5222,7 +5368,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -5362,7 +5508,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -5497,6 +5643,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-4CE2050A0999",
+      "implementation": [],
+      "proofs": [],
+      "note": "2 failed: the literal is compiled only in other members (showing the first 2 of 4: FamilyQuant.AlignmentView::.cctor(), FamilyQuant.ChartDrawingBase::Text(String,System.Windows.Media.Brush,Double,Boolean)), not in member PercentIonCurrentChart.Text",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-4CE5F84DC14C",
       "implementation": [],
       "proofs": [],
@@ -5548,7 +5702,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -5558,6 +5712,14 @@
     },
     {
       "observationId": "FQ15-4DE8597B3173",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4DECEB0D8774",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
@@ -5756,7 +5918,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -5826,7 +5988,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::.ctor(System.Collections.Generic.IEnumerable\u00601{FamilyQuant.DeNovo.DeNovoTalkComparisonRow})",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -5953,6 +6115,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-54519B6879D6",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-549529DEFE02",
       "implementation": [],
       "proofs": [],
@@ -5974,7 +6144,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -5995,6 +6165,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-54F5DE5562BE",
+      "implementation": [],
+      "proofs": [],
+      "note": "2 failed: the literal is compiled only in other members (showing the first 2 of 4: FamilyQuant.AlignmentView::.cctor(), FamilyQuant.ChartDrawingBase::Text(String,System.Windows.Media.Brush,Double,Boolean)), not in member IsotopeCountChart.Text",
       "kindReceiptId": null,
       "compared": null
     },
@@ -6068,7 +6246,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6098,7 +6276,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6184,7 +6362,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6238,7 +6416,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6268,7 +6446,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6352,7 +6530,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6420,7 +6598,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6450,7 +6628,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PeptideRepresentativesChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6584,7 +6762,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::SaveAgreement(FamilyQuant.DeNovo.DeNovoAgreementResult,String,FamilyQuant.ChartPaletteVariant)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6732,7 +6910,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6746,7 +6924,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::SaveVariantComparison(System.Collections.Generic.IReadOnlyList\u00601{FamilyQuant.DeNovo.DeNovoVariantSummary},String,FamilyQuant.ChartPaletteVariant)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6777,6 +6955,14 @@
       "compared": "frozen literal \u0022Stretch length:\u0022 (SHA256 EB89823BD2CC099D) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::InitializeComponent() loading denovocontrol.baml [FamilyQuant/DeNovoControl.xaml]; feature compiled XAML of FamilyQuant.DeNovoControl; reached as delegate FamilyQuant.MainWindow::\u003CInitializeNavigation\u003Eb__160_0(FamilyQuant.ShellDestination), 5 steps from the entry point"
     },
     {
+      "observationId": "FQ15-60554875A19A",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-60863DD78ECA",
       "implementation": [],
       "proofs": [],
@@ -6798,7 +6984,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6820,7 +7006,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySourceSequenceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6880,7 +7066,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -6966,7 +7152,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7044,7 +7230,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7074,7 +7260,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PeptideRepresentativesChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7104,7 +7290,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PeptideRepresentativesChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7118,7 +7304,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.SignalUpliftChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7240,7 +7426,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySourceSequenceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7254,7 +7440,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySourceSequenceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7284,7 +7470,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7330,7 +7516,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::DrawVenn(System.Windows.Media.DrawingContext,System.Windows.Rect,FamilyQuant.DeNovo.DeNovoSequenceSetRegions,String,String)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7464,7 +7650,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7510,7 +7696,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7628,7 +7814,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7770,7 +7956,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7904,7 +8090,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -7972,7 +8158,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8008,7 +8194,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8050,6 +8236,14 @@
     },
     {
       "observationId": "FQ15-723C7233F16B",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-727F643D4187",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
@@ -8102,7 +8296,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8164,7 +8358,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8256,7 +8450,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8318,7 +8512,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8356,7 +8550,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8378,7 +8572,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8604,7 +8798,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8629,12 +8823,26 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-798A3F744ACE",
+      "implementation": [
+        {
+          "path": "FamilyQuant/XicMassChart.cs",
+          "symbol": "FamilyQuant.XicMassChart::OnRender(System.Windows.Media.DrawingContext)",
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
+      "kindReceiptId": "text-code-fact",
+      "compared": "frozen literal \u0022monoisotopic mass (Da)\u0022 (SHA256 90CC13811861D098) verbatim in FamilyQuant2.dll FamilyQuant.XicMassChart::OnRender(System.Windows.Media.DrawingContext) [FamilyQuant/XicMassChart.cs]; feature member XicMassChart.OnRender; reached as delegate FamilyQuant.AnalyticsViewModel/\u003C\u003Ec__DisplayClass69_0::\u003CExportWriter\u003Eb__2(String), 4 steps from the entry point"
+    },
+    {
       "observationId": "FQ15-798C5023C988",
       "implementation": [
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8664,7 +8872,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoScoreDistributionChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8710,7 +8918,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8738,7 +8946,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8816,7 +9024,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart/ScoreAxis::Create(System.Collections.Generic.IEnumerable\u00601{Double},System.Nullable\u00601{Double})",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8830,7 +9038,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -8986,7 +9194,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PeptideRepresentativesChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9208,7 +9416,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9326,7 +9534,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9450,7 +9658,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.SignalUpliftChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9544,7 +9752,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9614,7 +9822,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9636,7 +9844,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9666,7 +9874,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9752,7 +9960,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySignalShareChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9774,7 +9982,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoScoreDistributionChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9796,7 +10004,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9826,7 +10034,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9872,7 +10080,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -9964,7 +10172,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -10096,7 +10304,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -10118,7 +10326,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -10162,7 +10370,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -10184,7 +10392,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -10238,7 +10446,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -10424,7 +10632,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::DrawVenn(System.Windows.Media.DrawingContext,System.Windows.Rect,FamilyQuant.DeNovo.DeNovoSequenceSetRegions,String,String)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -10438,7 +10646,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -10650,7 +10858,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoVariantComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -10686,7 +10894,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.TalkChartBase::Text(String,System.Windows.Media.Brush,Double,Boolean)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -10740,7 +10948,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySignalShareChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -10770,7 +10978,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::.ctor(System.Collections.Generic.IEnumerable\u00601{FamilyQuant.DeNovo.DeNovoTalkComparisonRow})",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -10792,7 +11000,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -11098,7 +11306,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -11230,7 +11438,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -11252,7 +11460,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.SignalUpliftChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -11304,7 +11512,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -11318,7 +11526,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PeptideRepresentativesChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -11348,7 +11556,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -11362,7 +11570,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySourceSequenceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -11392,7 +11600,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -11444,7 +11652,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -11677,6 +11885,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A05988D6E225",
+      "implementation": [],
+      "proofs": [],
+      "note": "2 failed: the literal is compiled only in other members (showing the first 2 of 4: FamilyQuant.AlignmentView::.cctor(), FamilyQuant.ChartDrawingBase::Text(String,System.Windows.Media.Brush,Double,Boolean)), not in member XicMassChart.Text",
       "kindReceiptId": null,
       "compared": null
     },
@@ -12019,6 +12235,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-A405B2C741B9",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-A4190B6774C6",
       "implementation": [],
       "proofs": [],
@@ -12040,7 +12264,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PeptideRepresentativesChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -12142,7 +12366,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -12202,7 +12426,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -12217,6 +12441,20 @@
       "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
+    },
+    {
+      "observationId": "FQ15-A7CDC3BFB12D",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "FamilyQuant.IsotopeCountChart::OnRender(System.Windows.Media.DrawingContext)",
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
+      "kindReceiptId": "text-code-fact",
+      "compared": "frozen literal \u0022isotopes credited (area \u003E 0)\u0022 (SHA256 8E756B5124C0BB88) verbatim in FamilyQuant2.dll FamilyQuant.IsotopeCountChart::OnRender(System.Windows.Media.DrawingContext) [FamilyQuant/IsotopeCountChart.cs]; feature member IsotopeCountChart.OnRender; reached as delegate FamilyQuant.AnalyticsViewModel/\u003C\u003Ec__DisplayClass69_0::\u003CExportWriter\u003Eb__2(String), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-A7D40F57CABA",
@@ -12256,7 +12494,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -12490,7 +12728,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -12608,7 +12846,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -12622,7 +12860,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -12644,7 +12882,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::DrawVenn(System.Windows.Media.DrawingContext,System.Windows.Rect,FamilyQuant.DeNovo.DeNovoSequenceSetRegions,String,String)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -12794,7 +13032,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.SignalByRunChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -12864,7 +13102,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -12951,12 +13189,20 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-B25597DA07D1",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-B25D6D4E5ED1",
       "implementation": [
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -13066,7 +13312,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::DrawVenn(System.Windows.Media.DrawingContext,System.Windows.Rect,FamilyQuant.DeNovo.DeNovoSequenceSetRegions,String,String)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -13168,7 +13414,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -13198,7 +13444,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -13220,7 +13466,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySignalShareChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -13329,6 +13575,20 @@
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
       "compared": "frozen literal \u0022??Next step: copy the UniProt code and paste it into uniprot.org.\u0022 (SHA256 FFDFD571C6F0EEC2) verbatim in FamilyQuant2.dll FamilyQuant.GridCopy::OpenUrl(String,System.Windows.DependencyObject) [FamilyQuant/GridCopy.cs]; feature member GridCopy.OpenUrl; reached as delegate FamilyQuant.GridCopy/\u003C\u003Ec__DisplayClass8_0::\u003CAttach\u003Eb__6(), 1 steps from the entry point"
+    },
+    {
+      "observationId": "FQ15-B6507A24A6BB",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "FamilyQuant.IsotopeCountChart::OnRender(System.Windows.Media.DrawingContext)",
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
+      "kindReceiptId": "text-code-fact",
+      "compared": "frozen literal \u0022Nothing to show: no peptide was credited an isotope yet.\u0022 (SHA256 00EF063A875DB91D) verbatim in FamilyQuant2.dll FamilyQuant.IsotopeCountChart::OnRender(System.Windows.Media.DrawingContext) [FamilyQuant/IsotopeCountChart.cs]; feature member IsotopeCountChart.OnRender; reached as delegate FamilyQuant.AnalyticsViewModel/\u003C\u003Ec__DisplayClass69_0::\u003CExportWriter\u003Eb__2(String), 4 steps from the entry point"
     },
     {
       "observationId": "FQ15-B65589178DA2",
@@ -13440,7 +13700,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoVariantComparisonChart::.ctor(System.Collections.Generic.IEnumerable\u00601{FamilyQuant.DeNovo.DeNovoVariantSummary})",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -13628,7 +13888,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySignalShareChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -13666,7 +13926,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.SignalByRunChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -13822,7 +14082,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -13852,7 +14112,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::SaveDeNovoSourceVenn(FamilyQuant.DeNovo.DeNovoSourceVennSummary,String,FamilyQuant.ChartPaletteVariant)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -13898,7 +14158,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -13936,7 +14196,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -13950,7 +14210,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -14146,7 +14406,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -14212,7 +14472,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -14242,7 +14502,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySourceSequenceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -14336,7 +14596,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::LabelOf(FamilyQuant.DeNovo.AgreementCategory)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -14532,7 +14792,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PeptideRepresentativesChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -14634,7 +14894,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.SignalByRunChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -14664,7 +14924,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -14710,7 +14970,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySourceSequenceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -14870,7 +15130,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -14978,7 +15238,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -15032,7 +15292,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySourceSequenceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -15140,13 +15400,21 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "D088FDF4A6FD7F9ABE039DF3CB1C312B192B21FC76E4DAC3C51AF9B043A52D2C"
+          "sha256": "24E3CA27562C059087B7C9EC811D96BE0A12F2A81BAB97C8566066E832B3AD51"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-help-fact",
       "compared": "frozen literal \u0022Note the words \u0027NOT recorded\u0027 above. This project was exported before\u0022 (SHA256 6A8F037F4161D2AD) verbatim in FamilyQuant.Core.dll FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy) [FamilyQuant.Core/HelpContent.cs]; feature member HelpContent.Build; reached as delegate FamilyQuant.MainWindow::\u003CInitializeShellCommands\u003Eb__81_14(), 3 steps from the entry point"
+    },
+    {
+      "observationId": "FQ15-D106481D7895",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-D11C61A63122",
@@ -15178,13 +15446,21 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
       "compared": "frozen literal \u0022This project\u0027s overlap study predates the literal same-file/same-scan sequence comparison. Recompute...\u0022 (SHA256 005E776379B56B51) verbatim in FamilyQuant2.dll FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult) [FamilyQuant/PresentationFigures.cs]; feature member PresentationFigures.Build; reached as delegate FamilyQuant.AnalyticsViewModel/\u003C\u003Ec__DisplayClass69_0::\u003CExportWriter\u003Eb__3(String), 2 steps from the entry point"
+    },
+    {
+      "observationId": "FQ15-D16E461B873F",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-D1875536F6FA",
@@ -15238,7 +15514,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoScoreDistributionChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -15368,7 +15644,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -15486,7 +15762,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -15539,6 +15815,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the row records no literal text (kind handler definition)",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D659F7855A37",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -15596,7 +15880,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -15618,7 +15902,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -15700,7 +15984,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -15730,7 +16014,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoVariantComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -15752,7 +16036,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -15982,7 +16266,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -15996,7 +16280,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -16010,7 +16294,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -16024,7 +16308,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -16078,7 +16362,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -16307,6 +16591,20 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-E0DC8922ED9E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/XicMassChart.cs",
+          "symbol": "FamilyQuant.XicMassChart::OnRender(System.Windows.Media.DrawingContext)",
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
+      "kindReceiptId": "text-code-fact",
+      "compared": "frozen literal \u0022Nothing to show: no peptide carried a positive envelope yet.\u0022 (SHA256 052729C95C8A0BCB) verbatim in FamilyQuant2.dll FamilyQuant.XicMassChart::OnRender(System.Windows.Media.DrawingContext) [FamilyQuant/XicMassChart.cs]; feature member XicMassChart.OnRender; reached as delegate FamilyQuant.AnalyticsViewModel/\u003C\u003Ec__DisplayClass69_0::\u003CExportWriter\u003Eb__2(String), 4 steps from the entry point"
+    },
+    {
       "observationId": "FQ15-E122B79F22E2",
       "implementation": [],
       "proofs": [],
@@ -16368,7 +16666,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -16390,7 +16688,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -16412,7 +16710,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -16496,7 +16794,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -16534,7 +16832,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -16580,7 +16878,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSearchCrosscheckChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -16602,7 +16900,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::DrawVenn(System.Windows.Media.DrawingContext,System.Windows.Rect,FamilyQuant.DeNovo.DeNovoSequenceSetRegions,String,String)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -16712,7 +17010,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -16986,7 +17284,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoConsolidationChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -17000,13 +17298,21 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
       "compared": "frozen literal \u0022 \u002B local stretch\u0022 (SHA256 B47A709CA9DCE82F) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext) [FamilyQuant/PresentationFigures.cs]; feature member DeNovoSourceVennChart.OnRender; reached as delegate FamilyQuant.AnalyticsViewModel/\u003C\u003Ec__DisplayClass69_0::\u003CExportWriter\u003Eb__3(String), 4 steps from the entry point"
+    },
+    {
+      "observationId": "FQ15-EAAD8BBA27D5",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-EAE48FA17375",
@@ -17268,7 +17574,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -17282,7 +17588,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.FamilySignalShareChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -17400,7 +17706,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.ReferenceIdentitySweepChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -17534,7 +17840,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DatabaseSearchConcordanceChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -17580,7 +17886,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::SaveDeNovoAcceptedScoreScatter(FamilyQuant.DeNovo.DeNovoAcceptedScoreScatter,String,FamilyQuant.ChartPaletteVariant)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -17624,7 +17930,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::LabelOf(FamilyQuant.DeNovo.AgreementCategory)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -17702,7 +18008,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.PresentationFigures::Build(FamilyQuant.AnalyticsData,FamilyQuant.QuantManifest,FamilyQuant.FamilyClusterFile,FamilyQuant.FamilyEnvelopeQuantResult)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -17748,7 +18054,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoSourceVennChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -17762,7 +18068,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.SignalUpliftChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -17862,7 +18168,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.SignalUpliftChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -17892,7 +18198,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoTalkComparisonChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -18067,6 +18373,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-FD0073FA4998",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-FD1CE3C4E856",
       "implementation": [],
       "proofs": [],
@@ -18144,7 +18458,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "D088FDF4A6FD7F9ABE039DF3CB1C312B192B21FC76E4DAC3C51AF9B043A52D2C"
+          "sha256": "24E3CA27562C059087B7C9EC811D96BE0A12F2A81BAB97C8566066E832B3AD51"
         }
       ],
       "proofs": [],
@@ -18158,7 +18472,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.SignalUpliftChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -18260,7 +18574,7 @@
         {
           "path": "FamilyQuant/PresentationFigures.cs",
           "symbol": "FamilyQuant.DeNovoAgreementChart::OnRender(System.Windows.Media.DrawingContext)",
-          "sha256": "2ABD977D182DEF1E99B5FD1B369EE731A70F7D445D39AC5DD73F99659E0B1ACD"
+          "sha256": "7735B1826DF538ACAB41EFE2F10764FA1EA31043175F9B2D508F3D48FB54C8D2"
         }
       ],
       "proofs": [],
@@ -18273,6 +18587,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-FF8E3AB54443",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
     },
@@ -18317,7 +18639,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind code fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -18331,7 +18653,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind control: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -18345,7 +18667,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind help fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -18359,7 +18681,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind option/copy: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -18373,7 +18695,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind tooltip: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
