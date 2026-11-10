@@ -1538,11 +1538,10 @@
       .u5-guide { margin: 18px 0 24px; padding: 24px; border: 1px solid var(--edge); border-radius: var(--radius); background: var(--surface); }
       .u5-guide h3 { margin: 0 0 10px; font-size: 1.25rem; }
       .u5-guide h4 { margin: 0 0 6px; font-size: .96rem; }
-      .u5-guide p { margin: 0 0 12px; line-height: 1.6; }
+      .u5-guide p { margin: 0 0 12px; line-height: 1.6; font-size: .9rem; color: var(--ink); }
       .u5-guide p:last-child { margin-bottom: 0; }
       .u5-definitions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 28px; margin-top: 20px; }
       .u5-definition { border-left: 3px solid var(--edge); padding-left: 14px; min-width: 0; }
-      .u5-definition p, .u5-gap p { color: var(--muted); font-size: .9rem; }
       .u5-gap { margin: 18px 0; }
       .u5-base { padding-top: 16px; border-top: 1px solid var(--edge); font-size: .9rem; }
       @media (max-width: 600px) {
@@ -2824,6 +2823,12 @@
       .u3c-svg { display:block; width:100%; overflow:visible; }
       .u3c-svg text { font-family:inherit; fill:var(--muted); font-size:12px; stroke:none; paint-order:normal; }
       .u3c-grid { stroke:var(--edge); stroke-width:1; }
+      .u3c-zero { stroke:var(--ink); stroke-width:1.4; pointer-events:none; }
+      .u3c-scale { margin:0; }
+      .u3c-row.u3c-scale .u3c-svg { height:32px; }
+      .u3c-pooled { grid-column:1 / -1; min-width:0; padding-top:20px; }
+      .u3c-pooled > h2 { margin:0 0 6px; }
+      .u3c-pooled > p { color:var(--muted); margin:0 0 18px; }
       .u3c-hit { cursor:pointer; outline:none; }
       .u3c-hit:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
       .u3c-hit:hover { filter:brightness(1.12); }
@@ -2833,7 +2838,7 @@
       .u3c-row { display:grid; grid-template-columns:minmax(145px,24%) minmax(100px,1fr) 96px; align-items:center; gap:12px; margin:12px 0; min-width:0; }
       .u3c-row-name { min-width:0; overflow-wrap:anywhere; font-weight:600; }
       .u3c-run { display:block; color:var(--muted); font-size:.78rem; font-weight:400; }
-      .u3c-row-value { font-variant-numeric:tabular-nums; text-align:right; overflow-wrap:anywhere; }
+      .u3c-row-value { font-variant-numeric:tabular-nums; text-align:right; overflow-wrap:anywhere; font-size:.9rem; }
       .u3c-row .u3c-svg { height:46px; }
       .u3c-key { display:flex; flex-wrap:wrap; gap:8px 18px; color:var(--muted); font-size:.85rem; margin:12px 0; }
       .u3c-key-item { display:inline-flex; align-items:center; gap:7px; }
@@ -2853,6 +2858,8 @@
       @media(max-width:600px) {
         .u3c-row { grid-template-columns:minmax(0,1fr) 82px; gap:2px 10px; margin:18px 0; }
         .u3c-row-name { grid-column:1 / -1; }
+        .u3c-scale { margin:0; }
+        .u3c-scale > :first-child { display:none; }
         .u3c-rings { grid-template-columns:minmax(0,1fr); gap:18px; }
         .u3c-heading { font-size:1.05rem; }
         .u3c-values th,.u3c-values td { padding:5px; }
@@ -4648,6 +4655,8 @@
           const u3cDisplay = metric => metric && exists(metric.display) ? text(metric.display) : "Not available";
           const u3cUnit = metric => metric && data.fields[metric.exact]?.unit || "";
           const u3cAmount = metric => u3cExact(metric) + (u3cUnit(metric) ? " " + u3cUnit(metric) : "");
+          const u3cHoverAmount = metric => (u3cUnit(metric)==="area" ? u3cDisplay(metric) : u3cExact(metric)) + (u3cUnit(metric) ? " " + u3cUnit(metric) : "");
+          const u3cPartPercent = part => part.familyPercent ? u3cDisplay(part.familyPercent)+"% of this family's total" : "Share unavailable without a positive family total";
           function u3cName(row, full = false) { return typeof familyLabel === "function" ? familyLabel(row.name, full) : text(row.name); }
           function u3cView(figure) { return figure.views[figure.usesNormalization ? (hasShareBases ? state.basis : "credited") : "fixed"]; }
           function u3cInfo(figure, view, row, part = null) {
@@ -4659,21 +4668,22 @@
             if (!part && row.y) entry(view.yLabel || "Database-search sequences (separate set)",u3cAmount(row.y));
             if (!part && row.lower && row.upper) entry("One sample SD below to above the mean",u3cAmount(row.lower)+" to "+u3cAmount(row.upper));
             entry("Runs",row.runText);
-            if (!part) for (const item of row.parts || []) entry(text(item.name),u3cAmount(item.value));
+            if (!part) for (const item of row.parts || []) entry(text(item.name),u3cAmount(item.value)+(figure.kind==="sources"?"; "+u3cPartPercent(item):""));
             popup(title,[node("p","",view.legend),list]);
           }
           function u3cTarget(element, figure, view, row, part = null) {
-            const title=(part ? text(part.name) + ": " + u3cName(row, true) : u3cName(row, true))+": "+u3cAmount(part ? part.value : row.x)+"; "+view.basis+"; "+row.runText;
+            const title=(part ? text(part.name) + ": " + u3cName(row, true) : u3cName(row, true))+": "+u3cHoverAmount(part ? part.value : row.x)+"; "+view.basis+"; "+row.runText;
             element.classList.add("u3c-hit"); element.setAttribute("tabindex","0"); element.setAttribute("role","button");
             element.setAttribute("aria-label",title+". Open exact stored values.");
-            element.setAttribute("title",title+". Open exact stored values; this changes only this report view.");
+            element.setAttribute("title",title+(figure.kind==="sources"?"; "+row.parts.map(item=>text(item.name)+": "+u3cHoverAmount(item.value)+", "+u3cPartPercent(item)).join("; "):"")+". Open exact stored values; this changes only this report view.");
             if (element.namespaceURI === "http://www.w3.org/2000/svg") {const label=svg("title");label.textContent=element.getAttribute("title");element.append(label);}
             element.addEventListener("click",()=>u3cInfo(figure,view,row,part));
             element.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();u3cInfo(figure,view,row,part);}});
             const tip=$("chart-hover");
             const show=()=>{
-              tip.replaceChildren(node("strong","",part?text(part.name):u3cName(row,true)),node("div","",u3cAmount(part?part.value:row.x)),node("div","",view.basis),node("div","",row.runText));
+              tip.replaceChildren(node("strong","",part?text(part.name):u3cName(row,true)),node("div","",u3cHoverAmount(part?part.value:row.x)),node("div","",view.basis),node("div","",row.runText));
               if(!part && row.y)tip.append(node("div","",(view.yLabel||"Search sequences (separate set)")+": "+u3cAmount(row.y)));
+              if(figure.kind==="sources")for(const item of row.parts)tip.append(node("div","",text(item.name)+": "+u3cHoverAmount(item.value)+"; "+u3cPartPercent(item)));
               tip.hidden=false;const box=element.getBoundingClientRect();
               tip.style.left=Math.max(8,Math.min(box.left,innerWidth-tip.offsetWidth-8))+"px";
               tip.style.top=Math.max(8,Math.min(box.bottom+8,innerHeight-tip.offsetHeight-8))+"px";
@@ -4692,6 +4702,7 @@
             for(const row of view.rows){
               const wrap=node("div","u3c-row"),name=node("div","u3c-row-name",u3cName(row));name.append(node("small","u3c-run",row.runText));
               const canvas=svg("svg",{class:"u3c-svg",viewBox:"0 0 640 46",preserveAspectRatio:"none","aria-hidden":"false"});
+              if(figure.kind==="composition")for(const tick of view.xTicks)canvas.append(svg("path",{class:"u3c-grid",d:`M ${X(tick.position)} 0 V 46`,"vector-effect":"non-scaling-stroke"}));
               if(u3cNumber(row.x)!==null){
                 const group=svg("g"),zero=X(0);group.append(svg("rect",{x:0,y:1,width:640,height:44,fill:"transparent"}));
                 if(row.parts.length){let at=zero;row.parts.forEach((part,index)=>{const amount=u3cNumber(part.value)||0,w=(right-left)*amount/range;group.append(svg("rect",{x:at,y:12,width:Math.max(0,w),height:22,rx:2,fill:part.unresolved?"var(--s6)":u3cPalette[index%u3cPalette.length]}));at+=w;});}
@@ -4699,8 +4710,16 @@
                 if(row.lower&&row.upper){const a=X(u3cNumber(row.lower)),b=X(u3cNumber(row.upper));group.append(svg("path",{d:`M ${a} 23 H ${b} M ${a} 16 V 30 M ${b} 16 V 30`,stroke:"var(--ink)","stroke-width":1.5,fill:"none","vector-effect":"non-scaling-stroke"}));}
                 u3cTarget(group,figure,view,row);canvas.append(group);
               }
+              if(figure.kind==="composition")canvas.append(svg("path",{class:"u3c-zero",d:`M ${X(0)} 0 V 46`,"vector-effect":"non-scaling-stroke"}));
               const value=node("div","u3c-row-value",u3cDisplay(row.x)+(u3cUnit(row.x)==="%"?"%":""));
               wrap.append(name,canvas,value);host.append(wrap);
+            }
+            if(figure.kind==="composition"){
+              const scale=node("div","u3c-row u3c-scale"),canvas=svg("svg",{class:"u3c-svg",role:"img","aria-label":"Family share value axis, including zero and negative whisker values"});
+              scale.append(node("span"),canvas,node("span"));host.append(scale);
+              const pixels=Math.max(100,canvas.getBoundingClientRect().width),x=value=>pixels*(value-view.minimumX)/range;
+              canvas.setAttribute("viewBox",`0 0 ${pixels} 32`);canvas.append(svg("path",{class:"u3c-grid",d:`M 0 1 H ${pixels}`}));
+              for(const tick of view.xTicks){const at=x(tick.position),label=svg("text",{x:at,y:23,"text-anchor":tick.position===view.minimumX?"start":tick.position===view.maximumX?"end":"middle"});label.textContent=tick.label;canvas.append(svg("path",{class:tick.position===0?"u3c-zero":"u3c-grid",d:`M ${at} 0 V 7`}),label);}
             }
             if(figure.kind!=="subclasses"&&view.rows.some(row=>row.parts.length))u3cKey(host,view.rows.find(row=>row.parts.length).parts.map(part=>text(part.name)));
             host.append(node("p","u3c-axis-label",view.xLabel));
@@ -4738,12 +4757,19 @@
             for(const row of view.rows){const line=node("tr"),other=node("td");if(row.y)other.append(node("div","",u3cAmount(row.y)));if(row.lower&&row.upper)other.append(node("div","","One sample SD: "+u3cAmount(row.lower)+" to "+u3cAmount(row.upper)));for(const part of row.parts)other.append(node("div","",text(part.name)+": "+u3cAmount(part.value)));line.append(node("td","",u3cName(row,true)+" ("+row.runText+")"),node("td","",u3cAmount(row.x)),other);body.append(line);}table.append(thead,body);details.append(summary,table);host.append(details);
           }
           function renderU3cFamilies(){
-            for(const previous of u3cHost.querySelectorAll(":scope > .u3c-figure"))previous.remove();
-            for(const figure of u3cFigures){
+            for(const previous of u3cHost.querySelectorAll(":scope > .u3c-figure,:scope > .u3c-pooled"))previous.remove();
+            const order=["composition","diversity","subclasses","ring","sources","scatter","counts"];
+            let pooled;
+            for(const figure of [...u3cFigures].sort((a,b)=>order.indexOf(a.kind)-order.indexOf(b.kind))){
+              let parent=u3cHost;
+              if(!figure.usesNormalization){
+                if(!pooled){pooled=node("section","u3c-pooled");pooled.append(node("h2","","Pooled details"),node("p","","All runs are pooled here. Changing Normalize to does not change these charts."));u3cHost.append(pooled);}
+                parent=pooled;
+              }
               const view=u3cView(figure),card=node("figure","u3c-figure");card.dataset.nativeFamilyFigure=figure.id;card.dataset.kind=figure.kind;card.dataset.base=figure.usesNormalization?state.basis:"fixed";
               card.append(node("h3","u3c-heading",figure.title));
-              if(!view){card.append(node("p","u3c-empty","The selected base is unavailable in the stored drawing data."));u3cHost.append(card);continue;}
-              card.append(node("p","u3c-base",view.basis));const plot=node("div","u3c-plot");card.append(plot);u3cHost.append(card);
+              if(!view){card.append(node("p","u3c-empty","The selected base is unavailable in the stored drawing data."));parent.append(card);continue;}
+              card.append(node("p","u3c-base",view.basis));const plot=node("div","u3c-plot");card.append(plot);parent.append(card);
               if(!view.rows.length)plot.append(node("p","u3c-empty","No stored values are available for this figure."));
               else if(figure.kind==="ring")u3cRings(figure,view,plot);
               else if(figure.kind==="scatter"||figure.kind==="diversity")u3cScatter(figure,view,plot);
