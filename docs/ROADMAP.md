@@ -101,7 +101,12 @@ Paulo, 11-09 evening, after opening the report: "i did not see all the proteins 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
 | U1 | The HTML Coverage tab lists every protein that has placed peptides, in every family (Others and families below the report threshold included): choose a family, then any of its proteins (ordered by credited signal, with its peptide count), and its map is drawn from the stored spans. The Word report keeps one map per family | M | 1.5 | T20 | U2 | A synthetic project of realistic size shows every protein with placements; page size measured and reported; the whole synthetic suite run once before READY; reviewed | HT |  | 0 | 0 |  |
-| U2 | Release 2.1.15: merge, the full suite once (launched outside the desk sandbox), the ledger refreshed, the version bump, the package (FQCount), published as Latest with notes and README | M | 1.0 | U1 |  | Release live; hashes match | Orchestrator |  | 0 | 0 |  |
+| U3a | Native HTML charts for the Signal recovery tab (recovery, signal by run, signal uplift) and the Database gap figure, replacing their pictures in the HTML: drawn from payload data computed by the same program code as the native charts, hover values, legends, light and dark, phone width | M | 1.5 | U1 | U2 | Each chart shows the same numbers as its native chart on a synthetic project (test); the pictures leave the HTML, Word keeps them; reviewed | SM |  | 0 | 0 |  |
+| U3b | Native HTML charts for the Mass and isotopes tab (signal by mass, isotopes credited, ion current by mass) and the Quality figure (de novo score distribution), as U3a | M | 1.5 | U1 | U2 | As U3a | DN |  | 0 | 0 |  |
+| U3c | Native HTML charts for the Families tab figures (family composition, signal sources, signal against de novo share, subclass ring, subclasses, abundance and diversity), as U3a | M | 2.0 | U1 | U2 | As U3a | CT |  | 0 | 0 |  |
+| U3d | Native HTML charts for the Sensitivity figures (identity scan, identity sweep), as U3a | L | 0.8 | U1 | U2 | As U3a | HT |  | 0 | 0 |  |
+| U4 | The desk's real-data check of the HTML report: Quantify the local copy of Ana's three-run project with the new build, export the report, open every tab and every Normalize to base, and list what does not work | M | 1.0 |  | U2 | Findings posted; each one fixed or recorded | Orchestrator |  | 0 | 0 |  |
+| U2 | Release 2.1.15 (after U1, U3a to U3d and U4): merge, the full suite once (launched outside the desk sandbox), the ledger refreshed, the version bump, the package (FQCount), published as Latest with notes and README | M | 1.0 | U1 |  | Release live; hashes match | Orchestrator |  | 0 | 0 |  |
 
 ## Critical path
 
@@ -196,6 +201,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D105 | The website follows 2.1.14 | A new upload folder for the website with the science text and screenshots of this release (T21); Paulo uploads it. Paulo, 11-09 ("does this roadmap include and update in the website?") |
 | D106 | Ledger rows this release changed on purpose | Rows whose proofs went stale because of the intended 2.1.14 changes and that the refresh cannot bring back are reopened as OPEN, named in docs/LEDGER-REVERIFY-2.1.14.md, to verify again after release (as D88 for 2.1.11); 2.1.14 ships when the full suite is green. Paulo, 11-09 ("well just verify agin"), leaving until 20:00 ("i expect this project to be done by then") |
 | D107 | Every protein's coverage in the HTML | The HTML Coverage tab lists every protein with placed peptides in every family, as a 2.1.15 release published when its checks pass. Paulo, 11-09 ("exactly you need to fix that, list every protein like you did") |
+| D108 | The HTML report draws its own charts | Every picture in the HTML report becomes a native HTML chart drawn from payload data (hover values, legends, themes), with the same numbers as the program; the Word report keeps its pictures; the HTML is checked on real data before 2.1.15 ships. Paulo, 11-09 ("double check on this html report, if thisgs are working, fix and republish"; "improve on the images in the html report, does not look nice... should be more htmlis"; "fix that too and republish") |
 
 ## Risks and triggers
 
