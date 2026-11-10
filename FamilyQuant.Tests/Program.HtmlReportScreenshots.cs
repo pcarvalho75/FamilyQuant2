@@ -57,8 +57,13 @@ internal static partial class Program
     {
         using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(40));
         string portFile = Path.Combine(profile, "DevToolsActivePort");
-        while (!File.Exists(portFile)) await Task.Delay(50, timeout.Token);
-        string[] portLines = File.ReadAllLines(portFile);
+        string[] portLines = Array.Empty<string>();
+        while (portLines.Length == 0 || !int.TryParse(portLines[0], out _))
+        {
+            try { if (File.Exists(portFile)) portLines = File.ReadAllLines(portFile); }
+            catch (IOException) { }
+            if (portLines.Length == 0 || !int.TryParse(portLines[0], out _)) await Task.Delay(50, timeout.Token);
+        }
         using var http = new HttpClient(new HttpClientHandler { UseProxy = false });
         string targets = await http.GetStringAsync("http://127.0.0.1:" + portLines[0] + "/json/list", timeout.Token);
         using var list = JsonDocument.Parse(targets);

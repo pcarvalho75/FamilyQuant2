@@ -505,6 +505,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => HtmlSignalRecoveryTests(Path.Combine(workDir, "html-signal-recovery")));
             suite.AddWithApplication(() => HtmlMassQualityTests(Path.Combine(workDir, "html-mass-quality")));
             suite.AddWithApplication(() => HtmlRecoveryExplanationTests(Path.Combine(workDir, "html-recovery-explanations")));
+            suite.Add(() => HtmlRingBasesTests(Path.Combine(workDir, "html-ring-bases")));
             suite.Add(() => DatabaseEntryCountTests(null));
             suite.Add(() => AssignmentPresenceCopyTests(null));
             suite.Add(() => HtmlDatabaseEntryTests());

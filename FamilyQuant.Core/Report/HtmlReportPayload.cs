@@ -68,6 +68,7 @@ public sealed record HtmlComposition
     public IReadOnlyList<HtmlReportFamily> Families { get; init; } = Array.Empty<HtmlReportFamily>();
     public IReadOnlyList<HtmlContributionRow> ContributionRows { get; init; } = Array.Empty<HtmlContributionRow>();
     public int? ContributionRunCount { get; init; }
+    public IReadOnlyDictionary<string, HtmlRingBasis> RingBases { get; init; } = new Dictionary<string, HtmlRingBasis>(); // U8
     // Per-run allocation buckets are not recorded in the current stored study. Missing totals stay null.
     public HtmlShareBasisTotals SharedBetweenFamilies { get; init; } = new();
     public HtmlShareBasisTotals Unattributed { get; init; } = new();
