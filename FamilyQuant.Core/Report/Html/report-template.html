@@ -2709,6 +2709,54 @@
       .run-hover-row.is-active {
         color: var(--accent);
       }
+      /* U3c begin */
+      #family-figures .u3c-figure { grid-column:1 / -1; min-width:0; margin:0; padding:22px 0; border-top:1px solid var(--edge); }
+      .u3c-heading { margin:0 0 4px; font-size:1.15rem; font-weight:600; }
+      .u3c-base { color:var(--muted); margin:0 0 16px; max-width:78ch; }
+      .u3c-plot { min-width:0; }
+      .u3c-svg { display:block; width:100%; overflow:visible; }
+      .u3c-svg text { font-family:inherit; fill:var(--muted); font-size:12px; stroke:none; paint-order:normal; }
+      .u3c-grid { stroke:var(--edge); stroke-width:1; }
+      .u3c-hit { cursor:pointer; outline:none; }
+      .u3c-hit:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+      .u3c-hit:hover { filter:brightness(1.12); }
+      .u3c-hit > rect,.u3c-hit > circle[fill="transparent"] { stroke:none; }
+      .u3c-legend { max-width:78ch; margin:14px 0 0; color:var(--muted); font-size:.9rem; }
+      .u3c-axis-label { color:var(--muted); font-size:.85rem; text-align:center; margin:6px 0; }
+      .u3c-row { display:grid; grid-template-columns:minmax(145px,24%) minmax(100px,1fr) 96px; align-items:center; gap:12px; margin:12px 0; min-width:0; }
+      .u3c-row-name { min-width:0; overflow-wrap:anywhere; font-weight:600; }
+      .u3c-run { display:block; color:var(--muted); font-size:.78rem; font-weight:400; }
+      .u3c-row-value { font-variant-numeric:tabular-nums; text-align:right; overflow-wrap:anywhere; }
+      .u3c-row .u3c-svg { height:46px; }
+      .u3c-key { display:flex; flex-wrap:wrap; gap:8px 18px; color:var(--muted); font-size:.85rem; margin:12px 0; }
+      .u3c-key-item { display:inline-flex; align-items:center; gap:7px; }
+      .u3c-swatch { display:inline-block; width:12px; height:12px; border-radius:2px; background:var(--s1); }
+      .u3c-rings { display:grid; grid-template-columns:minmax(250px,40%) minmax(0,1fr); align-items:start; gap:24px; }
+      .u3c-ring-key { display:grid; gap:7px; padding:0; list-style:none; margin:0; }
+      .u3c-ring-key button { width:100%; padding:7px 9px; text-align:left; border:0; background:transparent; color:var(--ink); border-radius:4px; font:inherit; cursor:pointer; }
+      .u3c-ring-key button:hover { background:var(--hover); }
+      .u3c-ring-key button:focus-visible,.u3c-values summary:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+      .u3c-values { margin-top:14px; color:var(--muted); }
+      .u3c-values summary { cursor:pointer; width:max-content; max-width:100%; padding:4px 0; }
+      .u3c-values table { width:100%; border-collapse:collapse; margin-top:8px; color:var(--ink); font-size:.85rem; }
+      .u3c-values th,.u3c-values td { text-align:left; vertical-align:top; padding:7px; border-bottom:1px solid var(--edge); overflow-wrap:anywhere; }
+      .u3c-values td:first-child { max-width:180px; }
+      .u3c-values td:not(:first-child) { font-variant-numeric:tabular-nums; }
+      .u3c-empty { margin:12px 0; color:var(--muted); }
+      @media(max-width:600px) {
+        .u3c-row { grid-template-columns:minmax(0,1fr) 82px; gap:2px 10px; margin:18px 0; }
+        .u3c-row-name { grid-column:1 / -1; }
+        .u3c-rings { grid-template-columns:minmax(0,1fr); gap:18px; }
+        .u3c-heading { font-size:1.05rem; }
+        .u3c-values th,.u3c-values td { padding:5px; }
+      }
+      @media print {
+        #family-figures .u3c-figure { break-inside:avoid; }
+        .u3c-values { display:block; }
+        .u3c-hit { filter:none; }
+      }
+      /* U3c end */
+
     </style>
   </head>
   <body>
@@ -4375,6 +4423,124 @@
             figure.append(button, legend);
             host.append(figure);
           }
+          /* U3c begin */
+          const u3cFigures = data.familyFigures?.figures || [];
+          const u3cHost = $("family-figures");
+          const u3cPalette = ["var(--s1)","var(--s4)","var(--s3)","var(--s2)","var(--s5)","var(--s6)"];
+          const u3cNumber = metric => val(metric?.exact);
+          const u3cExact = metric => metric && exists(metric.exact) ? text(metric.exact) : "Not available";
+          const u3cDisplay = metric => metric && exists(metric.display) ? text(metric.display) : "Not available";
+          const u3cUnit = metric => metric && data.fields[metric.exact]?.unit || "";
+          const u3cAmount = metric => u3cExact(metric) + (u3cUnit(metric) ? " " + u3cUnit(metric) : "");
+          function u3cName(row, full = false) { return typeof familyLabel === "function" ? familyLabel(row.name, full) : text(row.name); }
+          function u3cView(figure) { return figure.views[figure.usesNormalization ? (hasShareBases ? state.basis : "credited") : "fixed"]; }
+          function u3cInfo(figure, view, row, part = null) {
+            const title = part ? text(part.name) + ": " + u3cName(row, true) : u3cName(row, true);
+            const list = node("dl");
+            const entry = (name, value) => list.append(node("dt","",name),node("dd","",value));
+            entry("Base",view.basis);
+            entry(view.xLabel || "Stored value",u3cAmount(part ? part.value : row.x));
+            if (!part && row.y) entry(view.yLabel || "Database-search sequences (separate set)",u3cAmount(row.y));
+            if (!part && row.lower && row.upper) entry("One sample SD below to above the mean",u3cAmount(row.lower)+" to "+u3cAmount(row.upper));
+            entry("Runs",row.runText);
+            if (!part) for (const item of row.parts || []) entry(text(item.name),u3cAmount(item.value));
+            popup(title,[node("p","",view.legend),list]);
+          }
+          function u3cTarget(element, figure, view, row, part = null) {
+            const title=(part ? text(part.name) + ": " + u3cName(row, true) : u3cName(row, true))+": "+u3cAmount(part ? part.value : row.x)+"; "+view.basis+"; "+row.runText;
+            element.classList.add("u3c-hit"); element.setAttribute("tabindex","0"); element.setAttribute("role","button");
+            element.setAttribute("aria-label",title+". Open exact stored values.");
+            element.setAttribute("title",title+". Open exact stored values; this changes only this report view.");
+            if (element.namespaceURI === "http://www.w3.org/2000/svg") {const label=svg("title");label.textContent=element.getAttribute("title");element.append(label);}
+            element.addEventListener("click",()=>u3cInfo(figure,view,row,part));
+            element.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();u3cInfo(figure,view,row,part);}});
+            const tip=$("chart-hover");
+            const show=()=>{
+              tip.replaceChildren(node("strong","",part?text(part.name):u3cName(row,true)),node("div","",u3cAmount(part?part.value:row.x)),node("div","",view.basis),node("div","",row.runText));
+              if(!part && row.y)tip.append(node("div","",(view.yLabel||"Search sequences (separate set)")+": "+u3cAmount(row.y)));
+              tip.hidden=false;const box=element.getBoundingClientRect();
+              tip.style.left=Math.max(8,Math.min(box.left,innerWidth-tip.offsetWidth-8))+"px";
+              tip.style.top=Math.max(8,Math.min(box.bottom+8,innerHeight-tip.offsetHeight-8))+"px";
+            };
+            element.addEventListener("pointerenter",show);element.addEventListener("focus",show);
+            element.addEventListener("pointerleave",()=>tip.hidden=true);element.addEventListener("blur",()=>tip.hidden=true);
+          }
+          function u3cKey(host, entries) {
+            const key=node("div","u3c-key");
+            entries.forEach((name,index)=>{const item=node("span","u3c-key-item"),swatch=node("i","u3c-swatch");swatch.style.background=u3cPalette[index%u3cPalette.length];item.append(swatch,node("span","",name));key.append(item);});
+            host.append(key);
+          }
+          function u3cBars(figure,view,host) {
+            const width=640,left=0,right=640,range=view.maximumX-view.minimumX||1;
+            const X=value=>left+(right-left)*(value-view.minimumX)/range;
+            for(const row of view.rows){
+              const wrap=node("div","u3c-row"),name=node("div","u3c-row-name",u3cName(row));name.append(node("small","u3c-run",row.runText));
+              const canvas=svg("svg",{class:"u3c-svg",viewBox:"0 0 640 46",preserveAspectRatio:"none","aria-hidden":"false"});
+              if(u3cNumber(row.x)!==null){
+                const group=svg("g"),zero=X(0);group.append(svg("rect",{x:0,y:1,width:640,height:44,fill:"transparent"}));
+                if(row.parts.length){let at=zero;row.parts.forEach((part,index)=>{const amount=u3cNumber(part.value)||0,w=(right-left)*amount/range;group.append(svg("rect",{x:at,y:12,width:Math.max(0,w),height:22,rx:2,fill:part.unresolved?"var(--s6)":u3cPalette[index%u3cPalette.length]}));at+=w;});}
+                else group.append(svg("rect",{x:zero,y:12,width:Math.max(0,X(u3cNumber(row.x))-zero),height:22,rx:2,fill:"var(--s1)"}));
+                if(row.lower&&row.upper){const a=X(u3cNumber(row.lower)),b=X(u3cNumber(row.upper));group.append(svg("path",{d:`M ${a} 23 H ${b} M ${a} 16 V 30 M ${b} 16 V 30`,stroke:"var(--ink)","stroke-width":1.5,fill:"none","vector-effect":"non-scaling-stroke"}));}
+                u3cTarget(group,figure,view,row);canvas.append(group);
+              }
+              const value=node("div","u3c-row-value",u3cDisplay(row.x)+(u3cUnit(row.x)==="%"?"%":""));
+              wrap.append(name,canvas,value);host.append(wrap);
+            }
+            if(figure.kind!=="subclasses"&&view.rows.some(row=>row.parts.length))u3cKey(host,view.rows.find(row=>row.parts.length).parts.map(part=>text(part.name)));
+            host.append(node("p","u3c-axis-label",view.xLabel));
+          }
+          function u3cScatter(figure,view,host) {
+            const width=Math.max(280,host.getBoundingClientRect().width||700),height=320,left=52,right=width-20,top=22,bottom=268;
+            const canvas=svg("svg",{class:"u3c-svg",viewBox:`0 0 ${width} ${height}`,role:"group","aria-label":figure.title});
+            const X=value=>left+(right-left)*(value-view.minimumX)/(view.maximumX-view.minimumX||1),Y=value=>bottom-(bottom-top)*value/(view.maximumY||1);
+            for(const tick of view.xTicks){const x=X(tick.position);canvas.append(svg("path",{class:"u3c-grid",d:`M ${x} ${top} V ${bottom}`}));const label=svg("text",{x,y:bottom+22,"text-anchor":"middle"});label.textContent=tick.label;canvas.append(label);}
+            for(const tick of view.yTicks){const y=Y(tick.position);canvas.append(svg("path",{class:"u3c-grid",d:`M ${left} ${y} H ${right}`}));const label=svg("text",{x:left-8,y:y+4,"text-anchor":"end"});label.textContent=tick.label;canvas.append(label);}
+            view.rows.forEach((row,index)=>{if(u3cNumber(row.x)===null||u3cNumber(row.y)===null)return;const group=svg("g"),x=X(u3cNumber(row.x)),y=Y(u3cNumber(row.y));group.append(svg("circle",{cx:x,cy:y,r:14,fill:"transparent"}),svg("circle",{cx:x,cy:y,r:6,fill:u3cPalette[index%u3cPalette.length],stroke:"var(--surface)","stroke-width":2}));u3cTarget(group,figure,view,row);canvas.append(group);});
+            host.append(node("p","u3c-axis-label",view.yLabel),canvas,node("p","u3c-axis-label",view.xLabel));
+          }
+          function u3cArc(cx,cy,inner,outer,start,sweep){
+            const point=(radius,angle)=>[cx+radius*Math.cos(angle*Math.PI/180),cy+radius*Math.sin(angle*Math.PI/180)];
+            if(sweep>=360-1e-8)sweep=359.999999;
+            const a=point(outer,start),b=point(outer,start+sweep),c=point(inner,start+sweep),d=point(inner,start),large=sweep>180?1:0;
+            return `M ${a} A ${outer} ${outer} 0 ${large} 1 ${b} L ${c} A ${inner} ${inner} 0 ${large} 0 ${d} Z`;
+          }
+          function u3cRings(figure,view,host){
+            const layout=node("div","u3c-rings"),plot=node("div"),list=node("ul","u3c-ring-key"),canvas=svg("svg",{class:"u3c-svg",viewBox:"0 0 340 340",role:"group","aria-label":figure.title});
+            let start=-90;
+            view.rows.forEach((row,index)=>{
+              const sweep=(u3cNumber(row.x)||0)*3.6,colour=u3cPalette[index%u3cPalette.length];
+              if(sweep>0){const arc=svg("path",{d:u3cArc(170,170,77,122,start,sweep),fill:colour,stroke:"var(--surface)","stroke-width":2});u3cTarget(arc,figure,view,row);canvas.append(arc);}
+              let partStart=start;
+              for(const part of row.parts){const partSweep=(u3cNumber(part.value)||0)*3.6;if(partSweep>0){const arc=svg("path",{d:u3cArc(170,170,127,158,partStart,partSweep),fill:part.unresolved?"var(--s6)":colour,opacity:part.unresolved?1:.68,stroke:"var(--surface)","stroke-width":2});u3cTarget(arc,figure,view,row,part);canvas.append(arc);}partStart+=partSweep;}
+              const item=node("li"),button=node("button"),swatch=node("i","u3c-swatch");swatch.style.background=colour;button.append(swatch,document.createTextNode(" "+u3cName(row)+" "+u3cDisplay(row.x)+"%"));u3cTarget(button,figure,view,row);item.append(button);list.append(item);start+=sweep;
+            });
+            const center=svg("text",{x:170,y:166,"text-anchor":"middle"});center.textContent="Families";const subtitle=svg("text",{x:170,y:185,"text-anchor":"middle"});subtitle.textContent="and subclasses";canvas.append(center,subtitle);plot.append(canvas);layout.append(plot,list);host.append(layout);
+          }
+          function u3cValues(figure,view,host){
+            const details=node("details","u3c-values"),summary=node("summary","","Show exact values");summary.title="Inspect every supplied value and its recorded base. Only this report view changes.";
+            const table=node("table"),head=node("tr");for(const label of ["Family or group",view.xLabel,view.yLabel||"Source parts and spread"]){const cell=node("th","",label);cell.scope="col";cell.title="Identify the stored values used by this chart column. Reading the table changes nothing.";head.append(cell);}const thead=node("thead"),body=node("tbody");thead.append(head);
+            for(const row of view.rows){const line=node("tr"),other=node("td");if(row.y)other.append(node("div","",u3cAmount(row.y)));if(row.lower&&row.upper)other.append(node("div","","One sample SD: "+u3cAmount(row.lower)+" to "+u3cAmount(row.upper)));for(const part of row.parts)other.append(node("div","",text(part.name)+": "+u3cAmount(part.value)));line.append(node("td","",u3cName(row,true)+" ("+row.runText+")"),node("td","",u3cAmount(row.x)),other);body.append(line);}table.append(thead,body);details.append(summary,table);host.append(details);
+          }
+          function renderU3cFamilies(){
+            for(const previous of u3cHost.querySelectorAll(":scope > .u3c-figure"))previous.remove();
+            for(const figure of u3cFigures){
+              const view=u3cView(figure),card=node("figure","u3c-figure");card.dataset.nativeFamilyFigure=figure.id;card.dataset.kind=figure.kind;card.dataset.base=figure.usesNormalization?state.basis:"fixed";
+              card.append(node("h3","u3c-heading",figure.title));
+              if(!view){card.append(node("p","u3c-empty","The selected base is unavailable in the stored drawing data."));u3cHost.append(card);continue;}
+              card.append(node("p","u3c-base",view.basis));const plot=node("div","u3c-plot");card.append(plot);u3cHost.append(card);
+              if(!view.rows.length)plot.append(node("p","u3c-empty","No stored values are available for this figure."));
+              else if(figure.kind==="ring")u3cRings(figure,view,plot);
+              else if(figure.kind==="scatter"||figure.kind==="diversity")u3cScatter(figure,view,plot);
+              else u3cBars(figure,view,plot);
+              card.append(node("figcaption","u3c-legend chart-legend",view.legend));u3cValues(figure,view,card);
+            }
+          }
+          document.addEventListener("change",event=>{if(event.target?.name==="normalization-basis")renderU3cFamilies();});
+          let u3cWidth=0;
+          if("ResizeObserver" in window){const observer=new ResizeObserver(()=>{const width=u3cHost.clientWidth;if(width!==u3cWidth){u3cWidth=width;requestAnimationFrame(renderU3cFamilies);}});observer.observe(u3cHost);}
+          renderU3cFamilies();
+          /* U3c end */
+
           function figureLegend(fig) {
             const id = fig.sourceFigureId || "";
             if (/protein_coverage_/.test(id))

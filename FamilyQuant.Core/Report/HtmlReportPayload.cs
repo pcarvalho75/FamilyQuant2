@@ -13,6 +13,7 @@ public sealed record HtmlReportPayload
     public HtmlReportLinks Links { get; init; } = new();
     public IReadOnlyList<HtmlReportHighlight> Highlights { get; init; } = Array.Empty<HtmlReportHighlight>();
     public HtmlComposition Composition { get; init; } = new();
+    public HtmlFamilyFigures FamilyFigures { get; init; } = new(); // U3c native Families plots.
     public IReadOnlyList<HtmlRunCredit> CreditedRuns { get; init; } = Array.Empty<HtmlRunCredit>();
     public IReadOnlyList<HtmlGapRow> DatabaseGap { get; init; } = Array.Empty<HtmlGapRow>();
     public IReadOnlyList<HtmlDotMeasure> DotMeasures { get; init; } = Array.Empty<HtmlDotMeasure>();
@@ -159,6 +160,7 @@ public sealed record HtmlReportContext
     public IReadOnlyDictionary<string, string> PanelKeys { get; init; }
         = new Dictionary<string, string>(StringComparer.Ordinal);
     public QuantManifest? StoredStudies { get; init; }
+    public Func<Func<string, HtmlReportReference, string, double?, string>, ReportSelection?, HtmlFamilyFigures>? FamilyFiguresProvider { get; init; } // U3c native chart inputs.
     public FamilyDatabaseEntryCountView? DatabaseEntryCounts { get; init; }
     public IReadOnlyDictionary<int, IReadOnlyList<int>> SourceUserIds { get; init; }
         = new Dictionary<int, IReadOnlyList<int>>();
