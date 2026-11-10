@@ -66,8 +66,8 @@ public static class ReportFigureRenderer
             "Peptide representatives grouped by mass, with identified and de novo signal shown on the chart's stated basis.", () => new XicMassChart(data.Peptides));
         Add(ReportSectionIds.Quality, AnalyticsFigures.IsotopesCreditedFile, "Isotopes credited",
             "Number of isotope windows carrying signal in the stored representatives. An absent isotope receives no credit.", () => new IsotopeCountChart(data.Peptides));
-        Add(ReportSectionIds.Quality, AnalyticsFigures.PercentIonCurrentFile, "Ion current by mass",
-            "Signal in each mass interval divided by the recorded RAW total ion current. Missing TIC is unavailable.", () => new PercentIonCurrentChart(data.Peptides, data.Grouped?.Tic ?? 0));
+        Add(ReportSectionIds.Quality, AnalyticsFigures.PercentIonCurrentFile, "Recovery by mass range",
+            "Measured peptide envelope over detector isotope-envelope area in the same neutral-mass range, with run areas pooled. Older projects require Quantify again for this view.", () => new PercentIonCurrentChart(data.Peptides, data.Grouped?.Tic ?? 0, recovery: MassRangeRecoveryData.Build(data)));
         Add(ReportSectionIds.Quality, AnalyticsFigures.RecoveryFile, "Recovery and M+0 sensitivity",
             "The chart compares M+0 only with the measured envelope for identified and de novo peptides.", () => new RecoveryChart(data.Fractions, data.Grouped, isotopeCeiling: manifest.IsotopeCount));
         var runPages = data.Fractions.Chunk(ReportSignalByRunChart.RunsPerPage).DefaultIfEmpty(Array.Empty<NativeRunFraction>()).ToArray();

@@ -79,6 +79,13 @@ internal static partial class Program
                 sequence, 300 + i * 6.1, Enumerable.Range(0, 6).Select(k => k <= i % 6 ? (1000d + i * 117 + run * 71) / (k + 1) : 0).ToArray()));
         }
         var data = AnalyticsBuilder.Build(rows, new Dictionary<string, double> { ["synthetic_run_0"] = 5e8, ["synthetic_run_1"] = 4e8 }, 6);
+        foreach (var fraction in data.Fractions)
+        {
+            fraction.NeutralMassBinWidth = NeutralMassRanges.Width;
+            fraction.DetectedAreaByNeutralMass = new double[NeutralMassRanges.Count];
+            foreach (var peptide in data.Peptides.Where(p => p.Run == fraction.Run))
+                fraction.DetectedAreaByNeutralMass[NeutralMassRanges.Index(peptide.Mass)] += peptide.Envelope * 2;
+        }
         var manifest = HtmlMassQualityManifest();
         var plan = ReportFigureRenderer.Plan(data, manifest, new FamilyClusterFile(), null);
         var figures = ReportFigureRenderer.Render(plan, Path.Combine(output, "word-figures"));
@@ -90,7 +97,7 @@ internal static partial class Program
         Check("U3b signal points equal native projection", JsonSerializer.Serialize(charts.SignalByMass) == JsonSerializer.Serialize(new XicMassChart(data.Peptides).Data));
         Check("U3b isotope bins equal native projection", JsonSerializer.Serialize(charts.Isotopes) == JsonSerializer.Serialize(new IsotopeCountChart(data.Peptides).Data)
             && charts.Isotopes!.Bins.Sum(b => b.Total) == data.Peptides.Count(p => p.IsotopesCredited >= 1));
-        Check("U3b mass-signal bins and bases equal native projection", JsonSerializer.Serialize(charts.IonCurrentByMass) == JsonSerializer.Serialize(new PercentIonCurrentChart(data.Peptides, data.Grouped!.Tic).Data));
+        Check("U3b mass-recovery bins and bases equal native projection", JsonSerializer.Serialize(charts.IonCurrentByMass) == JsonSerializer.Serialize(new PercentIonCurrentChart(data.Peptides, data.Grouped!.Tic, recovery: MassRangeRecoveryData.Build(data)).Data));
         Check("U3b scores equal native source bins and cutoffs", JsonSerializer.Serialize(charts.Quality.Single(c => c.Scores.Count > 0).Scores)
             == JsonSerializer.Serialize(new DeNovoScoreDistributionChart(manifest.DeNovoSourceScoreDistributions).Distributions));
         Check("U3b caller audit retains observed floors and matching tolerances", charts.Quality.Single(c => c.Id == "de_novo_peaks_deepnovo_agreement.png").Legend
@@ -115,6 +122,12 @@ internal static partial class Program
             checks.massNative = cards.length === 3 && !d.querySelector('#mass-figures img');
             checks.scatterPoints = d.querySelectorAll('[data-native-chart="xic_by_mass.png"] .u3b-mark').length === p.massQualityCharts.signalByMass.points.length;
             checks.massLegend = cards.every(c => c.querySelector('.chart-legend')?.textContent.length > 70);
+            const recovery = d.querySelector('[data-native-chart="percent_ion_current_by_mass.png"]');
+            checks.rangeRecovery = recovery.textContent.includes('Recovery by mass range') && recovery.querySelectorAll('details tr').length === p.massQualityCharts.ionCurrentByMass.bins.length + 1;
+            checks.compactPercentages = [...recovery.querySelectorAll('.u3b-row-value')].every(n => /^(under 0\.1%|[0-9]+\.[0-9]%|Unavailable)$/.test(n.textContent));
+            checks.scatterGrid = d.querySelectorAll('[data-native-chart="xic_by_mass.png"] .u3b-grid').length > 5;
+            const fill = recovery.querySelector('.u3b-fill');
+            checks.visibleBarTrack = !!fill && fill.getBoundingClientRect().height >= 8 && w.getComputedStyle(fill).backgroundColor !== 'rgba(0, 0, 0, 0)';
             const mark = d.querySelector('[data-native-chart="xic_by_mass.png"] .u3b-mark');
             mark.focus(); checks.focusValue = !d.getElementById('chart-hover').hidden && d.getElementById('chart-hover').textContent.includes('intensity x minutes');
             mark.dispatchEvent(new w.KeyboardEvent('keydown', {key:'ArrowRight',bubbles:true}));
@@ -123,6 +136,7 @@ internal static partial class Program
             checks.qualityNative = d.querySelectorAll('#quality-figures .u3b-chart').length >= p.massQualityCharts.quality.length && !d.querySelector('#quality-figures img');
             checks.scoreSources = d.querySelectorAll('[data-native-chart="de_novo_score_distribution.png"]').length === 3;
             checks.allLegends = [...d.querySelectorAll('.u3b-chart')].every(c => !!c.querySelector('.chart-legend')?.textContent);
+            checks.singularUnits = ![...d.querySelectorAll('#quality-figures .u3b-row-value')].some(n => /\b1 (calls|pairs|scans)\b/.test(n.textContent));
             checks.noHorizontalPageScroll = d.documentElement.scrollWidth <= d.documentElement.clientWidth + 1;
             return checks;
             """);

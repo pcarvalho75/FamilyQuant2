@@ -159,6 +159,9 @@ namespace FamilyQuant.DeNovo
         /// <see cref="DetectedAreaByCharge"/>.</summary>
         public int[] DetectedCountByCharge { get; set; } = Array.Empty<int>();
 
+        public double[]? DetectedAreaByNeutralMass { get; set; }
+        public double? NeutralMassBinWidth { get; set; }
+
         public double IdentifiedFractionM0 => Tic > 0 ? IdentifiedAreaM0 / Tic : 0.0;
         public double IdentifiedFractionEnvelope => Tic > 0 ? IdentifiedEnvelope / Tic : 0.0;
         public double DeNovoFractionEnvelope => Tic > 0 ? DeNovoEnvelope / Tic : 0.0;
@@ -774,6 +777,8 @@ namespace FamilyQuant.DeNovo
                 d.DetectedCountSinglyCharged = det.DetectedCountSinglyCharged;
                 d.DetectedAreaByCharge = det.DetectedAreaByCharge ?? Array.Empty<double>();
                 d.DetectedCountByCharge = det.DetectedCountByCharge ?? Array.Empty<int>();
+                d.DetectedAreaByNeutralMass = det.DetectedAreaByNeutralMass;
+                d.NeutralMassBinWidth = det.NeutralMassBinWidth;
                 d.DetectedFractionMultiplyCharged = d.Tic > 0 ? det.DetectedAreaMultiplyCharged / d.Tic : 0.0;
                 d.DetectedFractionSinglyCharged = d.Tic > 0 ? det.DetectedAreaSinglyCharged / d.Tic : 0.0;
 
@@ -874,6 +879,8 @@ namespace FamilyQuant.DeNovo
                     f.DetectedCountSinglyCharged = d.DetectedCountSinglyCharged;
                     f.DetectedAreaByCharge = d.DetectedAreaByCharge ?? Array.Empty<double>();
                     f.DetectedCountByCharge = d.DetectedCountByCharge ?? Array.Empty<int>();
+                    f.DetectedAreaByNeutralMass = d.DetectedAreaByNeutralMass;
+                    f.NeutralMassBinWidth = d.NeutralMassBinWidth;
 
                     groupedMulti += d.DetectedAreaMultiplyCharged;
                     groupedSingle += d.DetectedAreaSinglyCharged;

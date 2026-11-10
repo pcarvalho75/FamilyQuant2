@@ -10,7 +10,11 @@ namespace FamilyQuant;
 /// <summary>Chart projections of the recorded native quality studies. No source calls are re-read.</summary>
 public static class QualityChartData
 {
-    public sealed record Row(string Label, double? Value, string Text, string Unit, string Base);
+    public sealed record Row(string Label, double? Value, string Text, string Unit, string Base)
+    {
+        public string? Family { get; init; }
+        public string? Detail { get; init; }
+    }
     public sealed record Point(double X, double Y, string Category, string XText, string YText);
     public sealed record Plot(string Id, string Title, string Legend, string Unit, IReadOnlyList<Row> Rows)
     {
@@ -30,7 +34,7 @@ public static class QualityChartData
     private static Row Count(string label, double value, string unit, string basis = "Count; no percentage denominator") =>
         new(label, value, value.ToString("N0", CultureInfo.InvariantCulture), unit, basis);
     private static Row Rate(string label, double? value, string basis) => new(label, value.HasValue ? 100 * value : null,
-        value.HasValue ? (100 * value.Value).ToString("0.####", CultureInfo.InvariantCulture) + "%" : "Not available", "%", basis);
+        value.HasValue ? (100 * value.Value).ToString("G17", CultureInfo.InvariantCulture) + "%" : "Not available", "%", basis);
 
     public static IReadOnlyList<FamilyWorldFamilySummary[]> WorldPages(QuantManifest manifest, FamilyReportThresholdResult? grouping)
     {
@@ -178,8 +182,8 @@ public static class QualityChartData
             plots.Add(new("family_world_rates_" + page.ToString(CultureInfo.InvariantCulture) + ".png", "Family-world support rates",
                 "Recorded family-world evidence, not identification FDR. Decoy ratio divides decoy signal by credited signal. Right rate divides correct known credits by known credits and is unavailable below the native evidence floor. Rates are not clamped to 100%.", "%", rows.SelectMany(row => new[]
                 {
-                    Rate(row.Family + ": decoy ratio", row.DecoyRate, "Decoy signal / credited family-world signal"),
-                    Rate(row.Family + ": right rate", row.RightRate, "Correct known credits / known credits"),
+                    Rate(row.Family + ": decoy ratio", row.DecoyRate, "Decoy signal / credited family-world signal") with { Family = row.Family, Detail = "decoy ratio" },
+                    Rate(row.Family + ": right rate", row.RightRate, "Correct known credits / known credits") with { Family = row.Family, Detail = "right rate" },
                 }).ToArray()));
         }
         return plots;

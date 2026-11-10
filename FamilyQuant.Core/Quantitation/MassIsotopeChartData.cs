@@ -18,9 +18,6 @@ public static class MassIsotopeChartData
     }
     public sealed record Isotopes(IReadOnlyList<IsotopeBin> Bins, int FeatureCount, double AxisMaximum,
         IReadOnlyList<string> MassBands);
-    public sealed record SignalBin(double LowerMass, double UpperMass, double Envelope, double Share,
-        double? TicShare, string Label, string EnvelopeText, string ShareText, string TicShareText);
-    public sealed record Signal(IReadOnlyList<SignalBin> Bins, double AxisMaximum, double Envelope, double BinWidth);
 
     public static Scatter ScatterPoints(IEnumerable<AnalyticsPeptide> source)
     {
@@ -56,25 +53,4 @@ public static class MassIsotopeChartData
         return new(bins, features, top, new[] { "Under 1500 Da", "1500 to under 3000 Da", "3000 Da and above" });
     }
 
-    public static Signal SignalByMass(IEnumerable<AnalyticsPeptide> source, double tic = 0, double binWidth = 500)
-    {
-        binWidth = binWidth > 0 ? binWidth : 500;
-        var peptides = source.Where(p => p != null && p.Envelope > 0 && p.Mass > 0).ToList();
-        int count = peptides.Count == 0 ? 1 : Math.Min(40, Math.Max(1, (int)Math.Ceiling(peptides.Max(p => p.Mass) / binWidth)));
-        var found = new double[count];
-        double total = 0;
-        foreach (var peptide in peptides)
-        {
-            found[Math.Min(count - 1, (int)(peptide.Mass / binWidth))] += peptide.Envelope;
-            total += peptide.Envelope;
-        }
-        double denominator = total > 0 ? total : 1;
-        var bins = Enumerable.Range(0, count).Select(i => new SignalBin(i * binWidth, (i + 1) * binWidth,
-            found[i], found[i] / denominator, tic > 0 ? found[i] / tic : null,
-            (i * binWidth).ToString("N0", CultureInfo.InvariantCulture) + " to " + ((i + 1) * binWidth).ToString("N0", CultureInfo.InvariantCulture) + " Da",
-            found[i].ToString("G17", CultureInfo.InvariantCulture) + " intensity x minutes",
-            (found[i] / denominator).ToString("P4", CultureInfo.InvariantCulture) + " of displayed peptide signal",
-            tic > 0 ? (found[i] / tic).ToString("P4", CultureInfo.InvariantCulture) + " of pooled TIC" : "TIC not recorded")).ToArray();
-        return new(bins, Math.Max(.05, Math.Ceiling(bins.Max(b => b.Share) * 20) / 20), total, binWidth);
-    }
 }
