@@ -4797,7 +4797,7 @@
             if (/isotopes_credited/.test(id))
               return "Bars count peptide features by the number of isotopes with measured signal; colours separate mass bands. Counts pool the runs and have no percentage denominator or run-to-run whiskers. A missing isotope adds no credit.";
             if (/percent_ion_current_by_mass/.test(id))
-              return "Each bar divides measured peptide envelope signal by the detector's isotope-envelope area in the same 500 Da neutral-mass range, pooling run areas. This is not a share of TIC. The detector is not peptide-FDR calibrated, a missing range stays unavailable, and a ratio can exceed 100%. No whiskers are drawn.";
+              return "Each bar divides measured peptide envelope signal by the detector's isotope-envelope area in the same 500 Da neutral-mass range, pooling run areas; this is not a share of TIC. The detector is not peptide-FDR calibrated, a missing range stays unavailable, and a ratio can exceed 100%. No whiskers are drawn.";
             if (/recovery|signal_by_run/.test(id))
               return "Bars compare the labelled peptide-signal readings with total ion current (TIC). Each run uses its own TIC, while an all-runs bar uses pooled signal divided by pooled TIC. The readings use the isotope bases printed on the figure; they are not uncertainty intervals or run-to-run whiskers.";
             if (/signal_uplift/.test(id))
