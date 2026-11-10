@@ -13,6 +13,7 @@ public sealed record HtmlReportPayload
     public HtmlReportLinks Links { get; init; } = new();
     public IReadOnlyList<HtmlReportHighlight> Highlights { get; init; } = Array.Empty<HtmlReportHighlight>();
     public HtmlComposition Composition { get; init; } = new();
+    public HtmlCoverageCatalog? CoverageCatalog { get; init; } // U1
     public IReadOnlyList<HtmlRunCredit> CreditedRuns { get; init; } = Array.Empty<HtmlRunCredit>();
     public IReadOnlyList<HtmlGapRow> DatabaseGap { get; init; } = Array.Empty<HtmlGapRow>();
     public IReadOnlyList<HtmlDotMeasure> DotMeasures { get; init; } = Array.Empty<HtmlDotMeasure>();
@@ -167,4 +168,5 @@ public sealed record HtmlReportContext
     public FamilyReportThresholdResult? SourceGrouping { get; init; }
     public FamilyWorldSummary? World { get; init; }
     public Func<string, Func<string, HtmlReportReference, string, double?, string>, ReportSelection?, IReadOnlyList<HtmlReportCoverage>>? CoverageProvider { get; init; }
+    public Func<ReportSelection?, HtmlCoverageCatalog?>? CoverageCatalogProvider { get; init; } // U1
 }

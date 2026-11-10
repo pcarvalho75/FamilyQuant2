@@ -82,6 +82,7 @@ public static partial class HtmlReportPayloadBuilder
             {
                 Composition = payload.Composition with { Families = withEntries },
                 DotMeasures = measures.Concat(DotMeasures(withEntries, databaseOnly: true)).ToArray(),
+                CoverageCatalog = context.CoverageCatalogProvider?.Invoke(selection),
             };
         }
 

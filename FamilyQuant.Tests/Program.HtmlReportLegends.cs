@@ -71,7 +71,7 @@ internal static partial class Program
             checks.coverage=d.getElementById('coverage-content').querySelector('.coverage-track')&&d.getElementById('coverage-content').querySelector('.chart-legend')?.textContent.includes('full protein length');
             checks.parts=[...d.querySelectorAll('.subclass-chart')].every(c=>c.querySelector('.subclass-bars')&&c.querySelector('.chart-legend')?.textContent.includes('all runs pooled'));
             choice.value='b';choice.dispatchEvent(new w.Event('change'));
-            checks.fallbackCoverage=!!d.getElementById('coverage-content').querySelector('.report-figure > figcaption.chart-legend');
+            checks.fallbackCoverage=!d.getElementById('coverage-catalog-empty').hidden&&!d.getElementById('coverage-content').querySelector('img');
             checks.signal=d.getElementById('signal-panel').querySelector('.chart-legend')?.textContent.includes("that run's whole measured signal");
             checks.gap=d.getElementById('gap-panel').querySelector('.chart-legend')?.textContent.includes('reference total');
             checks.sd=d.querySelector('[data-figure="figure:family_composition.png"] figcaption').textContent.includes('one sample SD across runs');
