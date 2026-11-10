@@ -64,7 +64,7 @@ internal static partial class Program
             checks.fixedBases=figures.every(f=>f.querySelector('figcaption').textContent.includes('keeps its recorded base when Normalize to changes'));
             const ranking=d.getElementById('ranking-legend').textContent;
             checks.meanThree=ranking.includes('mean of 3 runs')&&[...d.querySelectorAll('.rank-run-count')].every(c=>c.textContent==='mean of 3 runs');
-            checks.baseName=ranking.includes('Percent of the chosen base: credited family signal.');
+            checks.baseName=d.getElementById('ranking-note').textContent==='Percent of credited family signal';
             checks.range=ranking.includes('lowest to highest run')&&ranking.includes('not a confidence interval');
             const expected='Sorts families by how much their share varies from run to run (sample SD in percentage points). It describes disagreement between runs, not a confidence interval.';
             const info=d.getElementById('spread-info');info.click();

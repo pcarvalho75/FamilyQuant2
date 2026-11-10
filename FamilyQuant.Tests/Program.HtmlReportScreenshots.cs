@@ -14,7 +14,7 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
-    private static void CaptureHtmlReportScreens(string output, HtmlReportPayload payload, string tab, string setup = "")
+    private static void CaptureHtmlReportScreens(string output, HtmlReportPayload payload, string tab, string setup = "", string? anchor = null)
     {
         Directory.CreateDirectory(output);
         string? edge = new[] { Environment.SpecialFolder.ProgramFilesX86, Environment.SpecialFolder.ProgramFiles }
@@ -28,8 +28,7 @@ internal static partial class Program
                 string script = "document.documentElement.dataset.theme=" + JsonSerializer.Serialize(theme)
                     + ";document.getElementById('theme-label').textContent=" + JsonSerializer.Serialize(theme == "dark" ? "Dark theme" : "Light theme")
                     + ";document.getElementById(" + JsonSerializer.Serialize("tab-" + tab) + ").click();" + setup
-                    + "document.documentElement.style.scrollBehavior='auto';document.getElementById(" + JsonSerializer.Serialize("panel-" + tab)
-                    + ").scrollIntoView({block:'start',behavior:'instant'});";
+                    + "document.documentElement.style.scrollBehavior='auto';";
                 string page = Encoding.UTF8.GetString(HtmlReportWriter.BuildBytes(payload));
                 File.WriteAllText(path, page, new UTF8Encoding(false));
                 string profile = Path.Combine(output, "browser-" + name + "-" + Guid.NewGuid().ToString("N"));
@@ -41,7 +40,7 @@ internal static partial class Program
                 using var browser = Process.Start(start) ?? throw new IOException("Could not start the isolated screenshot browser.");
                 var stdout = browser.StandardOutput.ReadToEndAsync(); var stderr = browser.StandardError.ReadToEndAsync();
                 bool captured = false;
-                try { captured = CaptureExactViewport(profile, png, width, script).GetAwaiter().GetResult(); }
+                try { captured = CaptureExactViewport(profile, png, width, script, anchor ?? "panel-" + tab).GetAwaiter().GetResult(); }
                 finally
                 {
                     if (!browser.HasExited) browser.Kill(entireProcessTree: true);
@@ -53,7 +52,7 @@ internal static partial class Program
             }
     }
 
-    private static async Task<bool> CaptureExactViewport(string profile, string png, int width, string setup)
+    private static async Task<bool> CaptureExactViewport(string profile, string png, int width, string setup, string anchor)
     {
         using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(40));
         string portFile = Path.Combine(profile, "DevToolsActivePort");
@@ -96,9 +95,21 @@ internal static partial class Program
         await Command("Emulation.setDeviceMetricsOverride", new { width, height = 900, deviceScaleFactor = 1, mobile = false });
         string expression = "(async()=>{while(!document.getElementById('app')||document.getElementById('app').hidden)await new Promise(r=>setTimeout(r,20));"
             + setup + "await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));"
-            + "document.querySelector('[role=tabpanel]:not([hidden])').scrollIntoView({block:'start',behavior:'instant'});"
+            + "document.getElementById(" + JsonSerializer.Serialize(anchor) + ").scrollIntoView({block:'start',behavior:'instant'});"
             + "await new Promise(r=>requestAnimationFrame(r));return innerWidth;})()";
-        var evaluated = await Command("Runtime.evaluate", new { expression, awaitPromise = true, returnByValue = true });
+        JsonElement evaluated;
+        while (true)
+        {
+            try
+            {
+                evaluated = await Command("Runtime.evaluate", new { expression, awaitPromise = true, returnByValue = true });
+                break;
+            }
+            catch (IOException error) when (error.Message.Contains("Execution context was destroyed", StringComparison.Ordinal))
+            {
+                await Task.Delay(50, timeout.Token);
+            }
+        }
         if (evaluated.TryGetProperty("exceptionDetails", out var exception)) throw new IOException(exception.GetRawText());
         int actualWidth = evaluated.GetProperty("result").GetProperty("value").GetInt32();
         var capture = await Command("Page.captureScreenshot", new { format = "png", captureBeyondViewport = false, fromSurface = true });

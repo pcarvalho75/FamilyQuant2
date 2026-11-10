@@ -24,6 +24,7 @@ internal static partial class Program
     {
         EnsureApplication(); Directory.CreateDirectory(output);
         var (manifest, project, families) = HtmlFamilyNativeFixture();
+        project.ReportThreshold = .001;
         foreach (var protein in project.MyExtendedFastaItems)
             protein.UserAnnotation = "Stored group " + protein.UserID + " OS=Header detail OX=123 GN=Label PE=1 SV=2";
         foreach (var family in families.Families)
@@ -78,6 +79,15 @@ internal static partial class Program
             const paths=new Set();
             for(const [index,key] of bases.entries()) {
               d.querySelector('input[name="normalization-basis"][value="'+key+'"]').click();
+              const baseNames={identifiedOnly:'identified peptide-feature signal',identifiedAndDeNovo:'peptide-feature signal',detectorEnvelopes:'detector envelopes',tic:'TIC'};
+              const captions={identifiedOnly:'Percent of identified peptide-feature signal (PSM only)',identifiedAndDeNovo:'Percent of peptide-feature signal (PSM and de novo)',detectorEnvelopes:'Percent of Detector envelopes',tic:'Percent of TIC'};
+              for(const [chart,caption] of [['family-ranking','ranking-note'],['family-contribution-chart','contribution-base-caption']]) {
+                const heading=d.getElementById(caption);
+                checks[key+chart+'BaseHeading']=heading.textContent===captions[key]&&heading.getBoundingClientRect().top<d.getElementById(chart).getBoundingClientRect().top;
+                const percentages=[...d.querySelectorAll('#'+chart+' [data-percent-base]')];
+                checks[key+chart+'CompactRows']=percentages.length>0&&percentages.every(element=>['none','normal','""'].includes(w.getComputedStyle(element,'::after').content)&&!element.textContent.includes(' of '));
+                checks[key+chart+'HoverBase']=percentages.filter(element=>element.closest('[data-metric]')).every(element=>element.closest('[data-metric]').title.includes(baseNames[key]));
+              }
               const view=p.dotMeasures.find(measure=>measure.id==='mean').bases[key];
               checks[key+'Axis']=d.getElementById('dot-chart').textContent.includes(fields[view.label].text);
               const mark=d.querySelector('.evidence-dot[data-family="'+raw.id+'"]');
@@ -92,6 +102,13 @@ internal static partial class Program
               }));
             }
             checks.dotRedraws=paths.size>1;
+            const threshold=p.highlights.find(highlight=>fields[highlight.name].text==='report threshold (%)');
+            checks.thresholdFixture=!!threshold;
+            if(threshold) {
+              const value=d.querySelector('#headline [data-metric="'+threshold.value+'"]');
+              checks.thresholdLabel=value.parentElement.querySelector('.headline-label').textContent==='Report threshold, mean share of credited family signal';
+              checks.thresholdCompact=value.textContent==='0.1 %'&&['none','normal','""'].includes(w.getComputedStyle(value.firstElementChild,'::after').content);
+            }
             for(const tab of d.querySelectorAll('[role="tab"]')) {
               tab.click();
               const percentages=[...d.querySelectorAll('[data-fq-field]')].filter(element=>fields[element.dataset.fqField]?.unit==='%'&&element.getClientRects().length&&element.tagName.toLowerCase()!=='title');
@@ -107,6 +124,8 @@ internal static partial class Program
             return checks;
             """);
         CaptureHtmlReportScreens(Path.Combine(output, "screens"), payload, "families");
+        CaptureHtmlReportScreens(Path.Combine(output, "contribution-screens"), payload, "families", anchor: "family-contribution-section");
+        CaptureHtmlReportScreens(Path.Combine(output, "threshold-screens"), payload, "families", anchor: "headline");
         CaptureHtmlReportScreens(Path.Combine(output, "coverage-screens"), payload, "coverage");
         byte[] bytes = HtmlReportWriter.BuildBytes(payload); File.WriteAllBytes(Path.Combine(output, "words.html"), bytes);
         Console.WriteLine("U9 synthetic HTML size: " + bytes.Length.ToString(CultureInfo.InvariantCulture) + " bytes.");

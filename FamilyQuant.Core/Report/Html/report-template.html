@@ -2942,9 +2942,12 @@
     </style>
     <style>
       /* U9 begin */
-      [data-percent-base]::after { content: " of " attr(data-percent-base); color: var(--muted); font-size: 0.78em; font-weight: 400; }
-      .ring-value [data-percent-base]::after { content: none; }
-      .rank-value [data-percent-base]::after { display: block; white-space: normal; line-height: 1.25; }
+      #selected-summary [data-percent-base]::after,
+      #dialog-body [data-percent-base]::after,
+      #chart-hover [data-percent-base]::after,
+      #dot-tooltip [data-percent-base]::after,
+      #coverage-hover [data-percent-base]::after { content: " of " attr(data-percent-base); color: var(--muted); font-size: 0.78em; font-weight: 400; }
+      .ring-value .metric-button, .ring-outside-key [data-fq-field], .rank-value, .contribution-values .metric-button, .contribution-total .metric-button { white-space: nowrap; }
       .report-word-tools { margin: 10px 0; }
       .numbers-meanings dt { font-weight: 600; margin-top: 16px; }
       .numbers-meanings dd { margin: 4px 0 0; }
@@ -3124,6 +3127,7 @@
                 placeholder="Find a family"
                 autocomplete="off"
               />
+              <p class="fine-print" id="ranking-note">Percent of <span id="ranking-base-name">credited family signal</span></p>
               <div
                 class="rank-scroll"
                 id="family-ranking"
@@ -3133,10 +3137,9 @@
               ></div>
               <div class="rank-scale" id="rank-scale"></div>
               <div class="run-key" id="run-key"></div>
-              <p id="ranking-legend" class="chart-legend"><span id="ranking-runs-legend"></span> Percent of the chosen base: <span id="ranking-base-name">credited family signal</span>. The shaded capsule spans the lowest to highest run; it is not a confidence interval.</p>
+              <p id="ranking-legend" class="chart-legend"><span id="ranking-runs-legend"></span> The shaded capsule spans the lowest to highest run; it is not a confidence interval.</p>
               <div class="more">
-                <small id="ranking-note"></small
-                ><button class="quiet-button" id="all-families-button">
+                <button class="quiet-button" id="all-families-button">
                   View all families
                 </button>
               </div>
@@ -3201,13 +3204,14 @@
             <h2 id="family-contribution-title">Family contribution</h2>
           </div>
           <p id="contribution-scope" class="fine-print"></p>
+          <p class="fine-print" id="contribution-base-caption">Percent of <span id="contribution-base-name">credited family signal</span></p>
           <div class="legend" id="contribution-key">
             <span class="legend-item"><span class="swatch" style="background:var(--s1)"></span>Identified</span>
             <span class="legend-item"><span class="swatch" style="background:var(--s2)"></span>De novo</span>
           </div>
           <div id="family-contribution-chart" class="contribution-chart" role="group" aria-label="Family contributions split by identified and de novo signal" aria-describedby="contribution-legend"></div>
           <p id="contribution-empty" class="fine-print">Contribution parts are unavailable for this base in this report. Include current stored family results when exporting to view this chart.</p>
-          <p id="contribution-legend" class="chart-legend"><span id="contribution-runs-legend">Each bar shows a mean across the available runs.</span> Percent of the chosen base: <span id="contribution-base-name">credited family signal</span>. Colours split each mean into identified and de novo parts on a common scale without whiskers. <span id="contribution-limit-legend">Shared and unattributed signal is shown in the program's Results and is excluded from these family run means.</span></p>
+          <p id="contribution-legend" class="chart-legend"><span id="contribution-runs-legend">Each bar shows a mean across the available runs.</span> Colours split each mean into identified and de novo parts on the named reference total, with a common scale and no whiskers. <span id="contribution-limit-legend">Shared and unattributed signal is shown in the program's Results and is excluded from these family run means.</span></p>
         </section>
         <div id="family-figures" class="figure-grid"></div>
         </div>
@@ -3556,7 +3560,7 @@
             for (const run of family.runs || []) { rememberBase(run.share, "credited family signal"); rememberBase(run.measured, "peptide-feature signal"); }
             for (const part of family.parts || []) rememberBase(part.share, "this family's pooled credited signal");
           }
-          for (const highlight of data.highlights || []) rememberBase(highlight.value, "mean credited-family share (report threshold)");
+          for (const highlight of data.highlights || []) rememberBase(highlight.value, "credited family signal");
           for (const run of data.creditedRuns || []) rememberBase(run.share, "measured peptide-feature signal");
           for (const row of data.databaseGap || []) rememberBase(row.percent, "measured peptide-feature signal");
           for (const figure of data.familyFigures?.figures || [])
@@ -3609,10 +3613,10 @@
             button.setAttribute("aria-describedby", "metric-action");
             button.append(displayField(id, tag));
             const base = percentBase(id);
-            button.title = base ? "Show the exact percentage of " + base + ". This opens the recorded value and its reference total."
+            button.title = base ? text(id) + " % of " + base + ". Open the exact stored value and its reference total."
               : "Show the exact stored value. This opens details in this report.";
             button.onclick = () =>
-              popup("Exact report value", [field(id, "p"), ...(base ? [node("p", "", "Percentage of " + base)] : [])]);
+              popup("Exact report value", [field(id, "p")]);
             return button;
           }
           function runLabel(id) {
@@ -3713,6 +3717,14 @@
           function rankingBaseName() {
             return hasShareBases ? shareBases.find(base => base.key === state.basis).name : "credited family signal";
           }
+          function shareBaseCaption(nameId) {
+            const name = $(nameId), caption = name.parentElement;
+            name.textContent = rankingBaseName();
+            const reference = hasShareBases ? basisNames[state.basis] : null;
+            if (reference && reference.toLowerCase() !== name.textContent.toLowerCase())
+              caption.replaceChildren("Percent of " + reference + " (", name, ")");
+            else caption.replaceChildren("Percent of ", name);
+          }
           function familyRunCount(f, basis = null) {
             return (f.runs || []).filter(run => val(basis ? run[basis] : run.share) !== null).length;
           }
@@ -3773,7 +3785,7 @@
             $("dot-tooltip").hidden = true;
           }
           function renderContribution() {
-            $("contribution-base-name").textContent = rankingBaseName();
+            shareBaseCaption("contribution-base-name");
             const missingBuckets = contributionRows.filter(row =>
               ["shared", "unattributed"].includes(row.kind) && val(row[state.basis]?.total) === null);
             const rows = contributionRows.filter(row => exists(row.name) && !missingBuckets.includes(row));
@@ -3819,7 +3831,6 @@
                 if (val(id) === null) entry.append(node("span", "unavailable", "not available"));
                 else {
                   const value = metric(id);
-                  value.title = "Open this row's exact " + name.toLowerCase() + " share using " + rankingBaseName() + ". This changes only the view of this report.";
                   entry.append(value);
                 }
                 values.append(entry);
@@ -3829,7 +3840,6 @@
               if (val(parts.total) === null) total.textContent = "not available";
               else {
                 const value = metric(parts.total);
-                value.title = "Open this row's exact total share using " + rankingBaseName() + ". This changes only the view of this report.";
                 total.append(value);
               }
               element.append(label, plot, total);
@@ -3898,7 +3908,10 @@
               v = metric(h.value),
               label = node("div", "headline-label");
             v.className = "headline-value metric-button";
-            label.append(field(h.name));
+            const caption = field(h.name);
+            if (text(h.name).toLowerCase() === "report threshold (%)")
+              caption.textContent = "Report threshold, mean share of credited family signal";
+            label.append(caption);
             if (exists(h.description)) {
               const b = node("button", "info", "i");
               b.setAttribute("aria-label", "About " + text(h.name));
@@ -4001,7 +4014,6 @@
             }
             if (exists(basis.total)) {
               const total = metric(basis.total);
-              total.title = "Show the total mean share of the shown families using " + rankingBaseName() + ". This opens the exact value.";
               $("ring-value").replaceChildren(total);
             } else $("ring-value").textContent = "Unavailable";
             $("ring-name").textContent = ({ identifiedOnly: "of identified peptide-feature signal", identifiedAndDeNovo: "of peptide-feature signal",
@@ -4180,7 +4192,7 @@
                 const key = node("button", "quiet-button ring-outside-key");
                 key.append(node("span", "swatch"), node("span", "", item.label + " "), displayField(item.share));
                 key.querySelector(".swatch").style.background = "repeating-linear-gradient(135deg,var(--subtle) 0,var(--subtle) 3px,var(--muted) 3px,var(--muted) 4px)";
-                key.title = "Show the exact share outside the shown families using " + rankingBaseName() + ". This opens its recorded percentage.";
+                key.title = text(item.share) + " % of " + percentBase(item.share) + ". Open the exact share outside the shown families.";
                 key.onclick = () => popup(item.label, [node("p", "", "Percent of " + rankingBaseName()), field(item.share, "p")]);
                 $("composition-legend").append(key);
               }
@@ -4201,7 +4213,7 @@
                 id: "ring-label-" + i,
                 "data-fq-field": item.name,
               });
-              title.textContent = (item.label || familyLabel(item.name)) + (basis ? " - " + text(item.share) + " % of " + rankingBaseName() : "");
+              title.textContent = (item.label || familyLabel(item.name)) + (basis ? " - " + text(item.share) + " % of " + percentBase(item.share) : "");
               if (item.name) title.textContent += "\n" + familyLabel(item.name, true);
               if (!item.name) title.removeAttribute("data-fq-field");
               path.append(title);
@@ -4625,8 +4637,7 @@
             }
             if (!shown.length && state.query)
               host.append(node("p", "empty", "No matching families."));
-            $("ranking-note").textContent = "Mean share of " + rankingBaseName();
-            $("ranking-base-name").textContent = rankingBaseName();
+            shareBaseCaption("ranking-base-name");
             $("ranking-runs-legend").textContent = "Each bar shows the mean of " + meanRunText(hasShareBases ? state.basis : null) + ". Dots show individual runs.";
             $("rank-sort").hidden = !hasSpread;
             $("rank-sort-share").setAttribute(
