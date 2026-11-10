@@ -1558,6 +1558,47 @@
       }
       @media print { .u5-guide { break-inside: auto; } .u5-definition, .u5-gap { break-inside: avoid; } }
       /* U5 end */
+      /* U3d begin */
+      #sensitivity-figures .u3d-figure { grid-column:1 / -1; min-width:0; margin:0; padding:24px 0; border-top:1px solid var(--edge); }
+      .u3d-figure > h3 { margin:0 0 18px; font-size:1.15rem; }
+      .u3d-panels { display:grid; grid-template-columns:minmax(0,1fr); gap:28px; }
+      .u3d-panels.u3d-paired { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .u3d-paired .u3d-base { min-height:3em; }
+      .u3d-panel { min-width:0; }
+      .u3d-panel h4 { margin:0 0 6px; font-size:1rem; }
+      .u3d-base,.u3d-legend,.u3d-axis,.u3d-note { color:var(--muted); }
+      .u3d-base { margin:0 0 16px; font-size:.9rem; }
+      .u3d-legend { margin:18px 0 0; max-width:86ch; font-size:.9rem; }
+      .u3d-svg { display:block; width:100%; overflow:visible; }
+      .u3d-svg text { font-family:inherit; font-size:12px; fill:var(--muted); stroke:none; }
+      .u3d-grid { stroke:var(--edge); stroke-width:1; }
+      .u3d-axis { text-align:center; margin:8px 0; font-size:.85rem; }
+      .u3d-key { display:flex; flex-wrap:wrap; gap:8px 18px; margin:12px 0; color:var(--muted); font-size:.85rem; }
+      .u3d-swatch { display:inline-block; width:12px; height:12px; margin-right:6px; border-radius:2px; }
+      .u3d-hit { cursor:pointer; outline:none; }
+      .u3d-hit:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+      .u3d-hit:hover { filter:brightness(1.12); }
+      .u3d-hit > rect,.u3d-hit > circle[fill="transparent"] { stroke:none; }
+      .u3d-row { display:grid; grid-template-columns:minmax(120px,27%) minmax(80px,1fr) 76px; gap:8px 12px; align-items:center; margin:16px 0; min-width:0; }
+      .u3d-row-name { min-width:0; overflow-wrap:anywhere; font-weight:600; }
+      .u3d-row .u3d-svg { height:44px; }
+      .u3d-value { font-variant-numeric:tabular-nums; text-align:right; overflow-wrap:anywhere; font-size:.9rem; }
+      .u3d-parts,.u3d-note { grid-column:2 / -1; margin:0; font-size:.82rem; overflow-wrap:anywhere; }
+      .u3d-parts { display:flex; flex-wrap:wrap; gap:4px 14px; }
+      .u3d-values { margin-top:14px; color:var(--muted); }
+      .u3d-values summary { width:max-content; max-width:100%; padding:4px 0; cursor:pointer; }
+      .u3d-values summary:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+      .u3d-values table { width:100%; border-collapse:collapse; margin-top:8px; color:var(--ink); font-size:.85rem; }
+      .u3d-values th,.u3d-values td { padding:7px; text-align:left; vertical-align:top; border-bottom:1px solid var(--edge); overflow-wrap:anywhere; }
+      .u3d-values td { font-variant-numeric:tabular-nums; }
+      @media(max-width:900px) { .u3d-panels.u3d-paired { grid-template-columns:minmax(0,1fr); } }
+      @media(max-width:600px) {
+        .u3d-row { grid-template-columns:minmax(0,1fr) 76px; }
+        .u3d-row-name,.u3d-parts,.u3d-note { grid-column:1 / -1; }
+        .u3d-panels { gap:24px; }
+      }
+      @media print { .u3d-figure,.u3d-panel { break-inside:avoid; } .u3d-hit { filter:none; } }
+      /* U3d end */
     </style>
     <style>
       .rank-row {
@@ -2899,6 +2940,23 @@
       #ring-unavailable { margin-top: 12px; }
       /* U8 end */
     </style>
+    <style>
+      /* U9 begin */
+      [data-percent-base]::after { content: " of " attr(data-percent-base); color: var(--muted); font-size: 0.78em; font-weight: 400; }
+      .ring-value [data-percent-base]::after { content: none; }
+      .rank-value [data-percent-base]::after { display: block; white-space: normal; line-height: 1.25; }
+      .report-word-tools { margin: 10px 0; }
+      .numbers-meanings dt { font-weight: 600; margin-top: 16px; }
+      .numbers-meanings dd { margin: 4px 0 0; }
+      .full-family-header { overflow-wrap: anywhere; color: var(--muted); }
+      #coverage-family, #protein-select { background: var(--input); color: var(--ink); border: 1px solid var(--edge); border-radius: 6px; padding: 7px 9px; font: inherit; font-size: 13px; }
+      .coverage-track { height: 72px; }
+      .coverage-track .sequence-line { height: 5px; }
+      .coverage-track .peptide { min-height: 8px; }
+      .coverage-track .domain { min-height: 16px; }
+      .coverage-ruler { display: flex; justify-content: space-between; margin: 4px 0 10px; color: var(--muted); font-size: 11px; }
+      /* U9 end */
+    </style>
   </head>
   <body>
     <a class="skip" href="#main">Skip to results</a>
@@ -2959,6 +3017,7 @@
           <p id="project-subtitle"></p>
           <span class="snapshot" id="snapshot"></span>
         </div>
+        <div class="report-word-tools"><button class="quiet-button" id="numbers-help" title="Explain the report's reference totals, peptide features and summary statistics. This opens definitions and changes only the report view.">What the numbers mean</button></div>
         <div id="notices"></div>
         <div class="headline" id="headline"></div>
         <div class="normalization-bar" id="report-normalization">
@@ -3135,7 +3194,7 @@
               ><span>Hollow: unplottable values</span>
             </div>
           </div>
-          <p id="dot-plain-legend" class="chart-legend">Each dot is a family; the chosen X, Y and Size measures say how to compare it. A share uses the recorded family-share denominator, while protein and entry counts have no signal denominator. Family shares are means across available runs; counts describe the recorded database and evidence, and this chart has no whiskers. This chart keeps its recorded base when Normalize to changes.</p>
+          <p id="dot-plain-legend" class="chart-legend">Each dot is a family; the chosen X, Y and Size measures say how to compare it. Mean shares and run SD follow Normalize to, with the reference total named on the axis; protein and entry counts have no signal denominator. Shares are means across available runs, while counts describe the recorded database and distinct observed sequences; this chart has no whiskers. Only a few names are printed to keep them readable; hover, focus or select any dot for its full name and exact values.</p>
         </section>
         <section class="section" id="family-contribution-section" aria-labelledby="family-contribution-title">
           <div class="section-title">
@@ -3155,8 +3214,8 @@
         <div class="report-panel" id="panel-coverage" role="tabpanel" aria-labelledby="tab-coverage" tabindex="0" hidden>
           <label for="coverage-family">Family</label>
           <select id="coverage-family" title="Choose any stored family to inspect its proteins. This changes only the protein list and map in this report."></select>
-          <p class="fine-print" id="coverage-chooser-legend">Proteins are ordered by credited signal, with counts of distinct placed peptide sequences across identified and de novo evidence.</p>
-          <p class="empty" id="coverage-catalog-empty" hidden>No stored placed peptides are available for this selection. Choose another family or export current localization results.</p>
+          <p class="fine-print" id="coverage-chooser-legend">Proteins are ordered by credited signal, with counts of distinct placed sequences across identified and de novo evidence.</p>
+          <p class="empty" id="coverage-catalog-empty" hidden>No stored sequence placements are available for this selection. Choose another family or export current localization results.</p>
         <section
           class="family-detail"
           id="family-detail"
@@ -3455,13 +3514,80 @@
                 ? fields[id].value
                 : null;
           const text = (id) => (exists(id) ? fields[id].text : "");
+          /* U9 begin */
+          function familyLabel(value, full = false) {
+            const label = exists(value) ? text(value) : typeof value === "string" ? value : "";
+            if (full) return label;
+            const header = /(?:^|\s)(?:OS|OX|GN|PE|SV)=/i.exec(label);
+            return (header ? label.slice(0, header.index) : label).trim();
+          }
+          const familyFieldIds = new Set([
+            ...(data.composition?.families || []).map(family => family.name),
+            ...(data.composition?.contributionRows || []).map(row => row.name),
+            ...(data.databaseGap || []).map(row => row.name),
+            ...(data.familyFigures?.figures || []).flatMap(figure => Object.values(figure.views || {}).flatMap(view => (view.rows || []).map(row => row.name))),
+          ]);
+          const percentageBases = new Map();
+          const basisNames = { identifiedOnly: "identified peptide-feature signal", identifiedAndDeNovo: "peptide-feature signal",
+            detectorEnvelopes: "detector envelopes", tic: "TIC" };
+          function percentBase(id) {
+            if (!exists(id) || fields[id].unit !== "%") return null;
+            if (percentageBases.has(id)) return percentageBases.get(id);
+            const source = fields[id].source || {}, property = source.property || "";
+            if (["family-basis", "family-ring"].includes(source.kind)) {
+              const key = property.split('/')[0];
+              return ({ IdentifiedOnly: basisNames.identifiedOnly, IdentifiedAndDeNovo: basisNames.identifiedAndDeNovo,
+                DetectorEnvelopes: basisNames.detectorEnvelopes, Tic: basisNames.tic })[key] || null;
+            }
+            if (source.kind === "axis-tick" && property.startsWith("mean/"))
+              return hasShareBases ? basisNames[state.basis] : "credited family signal";
+            if (source.kind === "axis-tick" && property.startsWith("cv/")) return "mean credited-family share (CV)";
+            return null;
+          }
+          function rememberBase(id, base) {
+            if (!exists(id)) return;
+            percentageBases.set(id, base);
+            if (exists(fields[id].short)) percentageBases.set(fields[id].short, base);
+          }
+          for (const family of data.composition?.families || []) {
+            rememberBase(family.mean, "credited family signal");
+            rememberBase(family.wholeMeasured, "peptide-feature signal");
+            rememberBase(family.cv, "mean credited-family share (CV)");
+            for (const run of family.runs || []) { rememberBase(run.share, "credited family signal"); rememberBase(run.measured, "peptide-feature signal"); }
+            for (const part of family.parts || []) rememberBase(part.share, "this family's pooled credited signal");
+          }
+          for (const highlight of data.highlights || []) rememberBase(highlight.value, "mean credited-family share (report threshold)");
+          for (const run of data.creditedRuns || []) rememberBase(run.share, "measured peptide-feature signal");
+          for (const row of data.databaseGap || []) rememberBase(row.percent, "measured peptide-feature signal");
+          for (const figure of data.familyFigures?.figures || [])
+            for (const view of Object.values(figure.views || {}))
+              for (const row of view.rows || []) {
+                for (const value of [row.x, row.y, row.lower, row.upper, ...(row.parts || []).map(part => part.value)])
+                  if (value) { rememberBase(value.exact, view.basis); rememberBase(value.display, view.basis); }
+              }
+          $("numbers-help").onclick = () => {
+            const definitions = node("dl", "numbers-meanings");
+            for (const [name, description] of [
+              ["TIC", "Total ion current (TIC) is the MS1 ion current recorded for a run. It includes current with and without assigned peptide features."],
+              ["Peptide feature", "One peptide at one charge in one elution peak, counted once. Another charge or elution peak is a separate feature."],
+              ["PSM", "A peptide-spectrum match links a tandem mass spectrum to a peptide sequence. PSM only uses identified peptide-feature signal as the reference total."],
+              ["De novo", "A sequence proposed from a spectrum without requiring a match to the starting database. Its quantified feature uses the measured isotope envelope."],
+              ["Detector envelopes", "Isotope patterns measured directly in MS1, including patterns with no accepted sequence. Their area supplies an independent reference total."],
+              ["Credited family signal", "Signal allocated to families under the saved shared-feature rule. Family-unique leaves shared features in a separate bucket, while split divides their credit between families."],
+              ["Mean of runs and spread", "A mean of N runs averages the per-run shares equally. SD is one sample standard deviation across runs in percentage points, and the ranking capsule spans the lowest to highest run."],
+            ]) definitions.append(node("dt", "", name), node("dd", "", description));
+            popup("What the numbers mean", [definitions]);
+          };
+          /* U9 end */
           function field(id, tag = "span", unit = true) {
             const e = node(tag);
             if (exists(id)) {
               e.dataset.fqField = id;
-              e.textContent =
-                fields[id].text +
-                (unit && fields[id].unit ? " " + fields[id].unit : "");
+              e.textContent = (familyFieldIds.has(id) ? familyLabel(id) : fields[id].text)
+                + (unit && fields[id].unit ? " " + fields[id].unit : "");
+              if (familyFieldIds.has(id)) { e.title = familyLabel(id, true); e.dataset.familyLabel = "true"; }
+              const base = unit ? percentBase(id) : null;
+              if (base) { e.dataset.percentBase = base; e.setAttribute("aria-label", fields[id].text + " percent of " + base); }
             } else {
               e.hidden = true;
             }
@@ -3482,8 +3608,11 @@
             button.dataset.metric = id;
             button.setAttribute("aria-describedby", "metric-action");
             button.append(displayField(id, tag));
+            const base = percentBase(id);
+            button.title = base ? "Show the exact percentage of " + base + ". This opens the recorded value and its reference total."
+              : "Show the exact stored value. This opens details in this report.";
             button.onclick = () =>
-              popup("Exact report value", [field(id, "p")]);
+              popup("Exact report value", [field(id, "p"), ...(base ? [node("p", "", "Percentage of " + base)] : [])]);
             return button;
           }
           function runLabel(id) {
@@ -3535,14 +3664,14 @@
           const shareBases = [
             {
               key: "identifiedOnly", name: "PSM only",
-              description: "Show identified family signal as a percentage of all identified peptide signal.",
+              description: "Show identified family signal as a percentage of all identified peptide-feature signal.",
               reason: "PSM-only shares are unavailable for this project.",
               enable: "Run Quantify again with this version to store them.",
             },
             {
               key: "identifiedAndDeNovo", name: "PSM and de novo",
               description: "Show family signal as a percentage of all measured peptide features, identified and de novo.",
-              reason: "Complete measured-peptide totals are unavailable.",
+              reason: "Complete measured peptide-feature totals are unavailable.",
               enable: "Run Quantify again to store matching totals for every run.",
             },
             {
@@ -3592,13 +3721,17 @@
             return counts.length === 1 && counts[0] > 0 ? counts[0] + (counts[0] === 1 ? " run" : " runs") : "its available runs";
           }
           $("basis-compatibility").hidden = hasShareBases;
+          const noFamilyResults = families.length === 0 && contributionRows.length === 0 && !(data.familyFigures?.figures || []).length;
+          $("basis-compatibility").textContent = noFamilyResults
+            ? "No family results in this project yet. Curate families and run Quantify, then export again."
+            : "Family normalization shares are unavailable in this report. Run Quantify for the curated families and export again.";
           for (const base of shareBases) {
             const available = families.some(f => val(f[base.key]?.mean) !== null)
               || contributionRows.some(row => val(row[base.key]?.total) !== null);
             const label = node("label", "basis-option"),
               choice = node("input"),
               body = node("span", "", base.name),
-              reason = node("small", "basis-reason", base.reason);
+              reason = node("small", "basis-reason", noFamilyResults ? "No family results are stored." : base.reason);
             choice.type = "radio";
             choice.name = "normalization-basis";
             choice.value = base.key;
@@ -3606,7 +3739,7 @@
             choice.checked = hasShareBases && base.key === state.basis;
             choice.disabled = !available;
             choice.title = available ? base.description + " This redraws the family ranking and family contribution chart in this report."
-              : base.reason + " " + base.enable;
+              : noFamilyResults ? "No family results are stored. Curate families and run Quantify, then export again." : base.reason + " " + base.enable;
             label.title = choice.title;
             reason.id = choice.id + "-reason";
             reason.hidden = available;
@@ -3623,6 +3756,7 @@
               if (activeRingBasis()) { state.drill = false; renderRing(); } // U8
               updateSelectionSummary();
               refreshCoverageStats(); // U1
+              if (typeof dotState !== "undefined" && dotState.y) renderDotPlot(false); // U9
             };
             $("normalization-options").append(label);
           }
@@ -3870,7 +4004,7 @@
               total.title = "Show the total mean share of the shown families using " + rankingBaseName() + ". This opens the exact value.";
               $("ring-value").replaceChildren(total);
             } else $("ring-value").textContent = "Unavailable";
-            $("ring-name").textContent = ({ identifiedOnly: "of identified peptide signal", identifiedAndDeNovo: "of peptide-feature signal",
+            $("ring-name").textContent = ({ identifiedOnly: "of identified peptide-feature signal", identifiedAndDeNovo: "of peptide-feature signal",
               detectorEnvelopes: "of detector envelopes", tic: "of the TIC" })[state.basis];
           }
           function renderRing() {
@@ -4044,7 +4178,7 @@
               const share = val(item.share) ?? 0;
               if (item.outside) {
                 const key = node("button", "quiet-button ring-outside-key");
-                key.append(node("span", "swatch"), node("span", "", item.label + " "), displayField(item.share), node("span", "", "of " + rankingBaseName()));
+                key.append(node("span", "swatch"), node("span", "", item.label + " "), displayField(item.share));
                 key.querySelector(".swatch").style.background = "repeating-linear-gradient(135deg,var(--subtle) 0,var(--subtle) 3px,var(--muted) 3px,var(--muted) 4px)";
                 key.title = "Show the exact share outside the shown families using " + rankingBaseName() + ". This opens its recorded percentage.";
                 key.onclick = () => popup(item.label, [node("p", "", "Percent of " + rankingBaseName()), field(item.share, "p")]);
@@ -4067,7 +4201,8 @@
                 id: "ring-label-" + i,
                 "data-fq-field": item.name,
               });
-              title.textContent = (item.label || text(item.name)) + (basis ? " - " + text(item.share) + " % of " + rankingBaseName() : "");
+              title.textContent = (item.label || familyLabel(item.name)) + (basis ? " - " + text(item.share) + " % of " + rankingBaseName() : "");
+              if (item.name) title.textContent += "\n" + familyLabel(item.name, true);
               if (!item.name) title.removeAttribute("data-fq-field");
               path.append(title);
               path.setAttribute("aria-labelledby", title.id);
@@ -4369,7 +4504,7 @@
               const name = node("button", "rank-name");
               name.append(field(f.name));
               const mean = rankingStatistics(f).mean,
-                count = familyRunCount(f, hasShareBases ? state.basis : null);
+                count = familyRunCount(f, hasShareBases ? state.basis : null) || (val(mean) !== null ? data.composition?.contributionRunCount || activeRingBasis()?.runCount || 0 : 0);
               const runLabel = count + (count === 1 ? " run" : " runs");
               const runCountLabel = val(mean) === null ? "mean unavailable" : count ? "mean of " + runLabel : "run count unavailable";
               name.append(node("span", "rank-run-count", runCountLabel));
@@ -4465,7 +4600,7 @@
                   );
                   if (exists(r.measured))
                     dl.append(
-                      node("dt", "", "Share of measured peptide signal"),
+                      node("dt", "", "Share of measured peptide-feature signal"),
                       field(r.measured, "dd"),
                     );
                   popup(field(r.name), [field(f.name, "p"), dl]);
@@ -4568,16 +4703,16 @@
             host.append(e);
           }
           function familyDialog(f) {
-            const content = [];
+            const content = [node("p", "full-family-header", familyLabel(f.name, true))];
             const dl = node("dl");
             for (const [label, id] of [
               ["Mean share of credited family signal", f.mean],
               ["Run-to-run standard deviation", f.sd],
               ["Coefficient of variation", f.cv],
-              ["Share of measured peptide signal", f.wholeMeasured],
+              ["Share of measured peptide-feature signal", f.wholeMeasured],
               ["Protein groups", f.proteins],
               ["Family-unique protein groups", f.uniqueProteins],
-              ["Peptides", f.peptides],
+              ["Distinct observed sequences", f.peptides],
             ])
               if (exists(id)) dl.append(node("dt", "", label), field(id, "dd"));
             for (const [kind, parts] of groupedParts(f)) {
@@ -4858,7 +4993,7 @@
             stat(stats, "Mean share of " + rankingBaseName(), rankingStatistics(f).mean);
             stat(stats, "Run-to-run SD (percentage points)", rankingStatistics(f).sd);
             stat(stats, "Protein groups", f.proteins);
-            stat(stats, "Peptides", f.peptides);
+            stat(stats, "Distinct observed sequences", f.peptides);
             const parts = $("subclasses");
             parts.replaceChildren();
             const groups = plotParts(f);
@@ -4899,14 +5034,15 @@
           const coverageGroups = data.coverageCatalog ? data.coverageCatalog.families || []
             : ordered.map(family => ({ id: family.id, name: family.name, reportFamilyId: family.id }));
           for (const group of coverageGroups) {
-            const option = node("option", "", data.coverageCatalog ? group.selectorLabel : text(group.name));
+            const option = node("option", "", data.coverageCatalog ? familyLabel(group.name) + " (" + group.proteins.length + " proteins)" : familyLabel(group.name));
+            option.title = familyLabel(group.name, true);
             option.value = group.id;
             $("coverage-family").append(option);
           }
           $("coverage-family").disabled = coverageGroups.length === 0;
           $("coverage-family").title = coverageGroups.length
             ? "Choose any stored family, including families below the report threshold and Others. This changes the protein list and map in this report."
-            : "No stored proteins with placed peptides are available. Export current localization results to enable this list.";
+            : "No stored proteins with sequence placements are available. Export current localization results to enable this list.";
           $("coverage-family").onchange = () => {
             const group = coverageGroups.find(group => group.id === $("coverage-family").value);
             const family = families.find(family => family.id === group?.reportFamilyId);
@@ -4923,7 +5059,8 @@
             $("coverage-family").value = group?.id || "";
             if (data.coverageCatalog && group) {
               $("family-detail").hidden = false;
-              $("family-title").textContent = group.name;
+              $("family-title").textContent = familyLabel(group.name);
+              $("family-title").title = familyLabel(group.name, true);
               const family = families.find(family => family.id === group.reportFamilyId);
               $("family-info").hidden = !family;
               if (!family) {
@@ -4959,8 +5096,8 @@
             selector.hidden = false;
             selector.disabled = positions.length === 0;
             selector.title = positions.length
-              ? "Choose any protein with placed peptides, ordered by credited signal. The count is distinct placed peptide sequences across identified and de novo evidence, and selecting changes only this report view."
-              : "No stored placed peptides are available for this selection. Choose another family or export current localization results to enable this list.";
+              ? "Choose any protein with sequence placements, ordered by credited signal. The count is distinct placed sequences across identified and de novo evidence, and selecting changes only this report view."
+              : "No stored sequence placements are available for this selection. Choose another family or export current localization results to enable this list.";
             $("coverage-catalog-empty").hidden = positions.length > 0;
             const draw = () => {
               coverage.replaceChildren();
@@ -4974,7 +5111,7 @@
               const placement = span => span.side ? span.side + ", " + (span.kind === "Aligned" ? "aligned" : "exact") : span.kind === "Aligned" ? "aligned" : "exact";
               const meta = node("div", "coverage-meta");
               if (raw) meta.append(node("span", "", item.protein), node("span", "", item.length + " residues"),
-                node("span", "", item.peptideCount + " distinct placed peptide sequences"));
+                node("span", "", item.peptideCount + " distinct placed sequences"));
               else {
                 if (exists(item.protein)) meta.append(field(item.protein));
                 if (exists(item.lengthLabel)) meta.append(field(item.lengthLabel));
@@ -4999,7 +5136,7 @@
                   if (span.side === "de novo") b.classList.add("is-denovo");
                   if (span.side) b.dataset.side = span.side;
                   b.dataset.kind = span.kind;
-                  b.title = "Inspect this stored " + (kind === "peptide" ? placement(span) + " peptide placement" : "annotation") + ". This opens its label and residue positions.";
+                  b.title = "Inspect this stored " + (kind === "peptide" ? placement(span) + " sequence placement" : "annotation") + ". This opens its label and residue positions.";
                   b.style.left = ((span.start - 1) / item.length) * 100 + "%";
                   b.style.width =
                     ((span.end - span.start + 1) / item.length) * 100 + "%";
@@ -5042,7 +5179,7 @@
                     popup(
                       kind === "domain"
                         ? "Positioned annotation"
-                        : "Observed peptide",
+                        : "Placed sequence",
                       detail,
                     );
                   };
@@ -5064,13 +5201,15 @@
                 entry.append(sw, node("span", "", label));
                 legend.append(entry);
               }
-              coverage.append(meta, track, legend, node("p", "chart-legend", figureLegend({ sourceFigureId: "figure:protein_coverage_live" }) + fixedBaseLegend));
+              const ruler = node("div", "coverage-ruler");
+              ruler.append(node("span", "", "Residue 1"), node("span", "", "Residue " + item.length));
+              coverage.append(meta, track, ruler, legend, node("p", "chart-legend", figureLegend({ sourceFigureId: "figure:protein_coverage_live" }) + fixedBaseLegend));
               const inspect = node(
                 "button",
                 "quiet-button positions-button",
-                "Inspect positions",
+                "List placements and annotations",
               );
-              inspect.title = "List every stored peptide and annotation interval for this protein. This opens details and changes only this report view.";
+              inspect.title = "List every placed sequence and annotation interval for this protein. This opens details and changes only this report view.";
               inspect.onclick = () => {
                 const list = node("dl");
                 for (const span of [
@@ -5102,7 +5241,7 @@
             stat(stats, "Mean share of " + rankingBaseName(), rankingStatistics(family).mean);
             stat(stats, "Run-to-run SD (percentage points)", rankingStatistics(family).sd);
             stat(stats, "Protein groups", family.proteins);
-            stat(stats, "Peptides", family.peptides);
+            stat(stats, "Distinct observed sequences", family.peptides);
           }
           /* U1 end */
           // Only field IDs from the producer define measures, labels and printed ticks.
@@ -5127,20 +5266,29 @@
             suppressFocus: false,
             width: 0,
           };
-          const dotField = (f, measure) =>
-            measure &&
-            Object.prototype.hasOwnProperty.call(measure.values || {}, f.id)
-              ? measure.values[f.id]
-              : null;
-          const dotMeasure = (id) =>
-            dotMeasures.find((measure) => measure.id === id);
+          /* U9 dot begin */
+          const dotField = (family, measure) => {
+            const view = hasShareBases ? measure?.bases?.[state.basis] : null;
+            const values = view?.values || measure?.values || {};
+            return Object.prototype.hasOwnProperty.call(values, family.id) ? values[family.id] : null;
+          };
+          const dotMeasure = id => {
+            const measure = dotMeasures.find(measure => measure.id === id);
+            const view = hasShareBases ? measure?.bases?.[state.basis] : null;
+            return view ? { ...measure, ...view } : measure;
+          };
+          /* U9 dot end */
           function dotText(id, attributes = {}) {
             const label = svg("text", attributes);
             if (exists(id)) {
               label.dataset.fqField = id;
-              label.textContent =
-                fields[id].text +
-                (fields[id].unit ? " " + fields[id].unit : "");
+              label.textContent = (familyFieldIds.has(id) ? familyLabel(id) : fields[id].text)
+                + (fields[id].unit ? " " + fields[id].unit : "");
+              if (familyFieldIds.has(id)) {
+                const title = svg("title"); title.textContent = familyLabel(id, true); label.append(title);
+              }
+              const base = percentBase(id);
+              if (base) label.dataset.percentBase = base;
             }
             return label;
           }
@@ -5175,7 +5323,7 @@
                 id = dotField(f, measure);
               if ([dotState.x, dotState.y, dotState.size].includes(measure.id))
                 row.classList.add("is-chosen");
-              row.append(field(measure.label));
+              row.append(field(dotMeasure(measure.id).label));
               row.append(
                 exists(id) && val(id) !== null
                   ? displayField(id)
@@ -5286,6 +5434,11 @@
               my = dotMeasure(dotState.y),
               ms = dotMeasure(dotState.size);
             if (!mx || !my || !ms) return;
+            for (const select of [$("dot-x"), $("dot-y"), $("dot-size")])
+              for (const option of select.options) {
+                const label = dotMeasure(option.value)?.label;
+                if (exists(label)) { option.textContent = text(label); option.dataset.fqField = label; }
+              }
             hideDotTooltip();
             const width = forPrint
                 ? 640
@@ -5537,7 +5690,7 @@
             for (const point of layout
               .filter((p) => !p.missing && !p.outside && p.radius > 0)
               .sort((a, b) => b.radius - a.radius)
-              .slice(0, phone ? 4 : 6)) {
+              .slice(0, phone ? 2 : 4)) {
               const label = dotText(point.f.name, {
                 class: "dot-name-label",
                 "text-anchor": "start",
@@ -6207,6 +6360,88 @@
             for (const figure of data[kind] || []) figureCard(figure, host);
             $(kind + "-empty").hidden = host.childElementCount > 0;
           }
+      /* U3d begin */
+          const u3dHost=$('sensitivity-figures'),u3dFigures=data.sensitivityFigures?.figures||[];
+          const u3dColours=['var(--s1)','var(--s4)','var(--s3)'];
+          const u3dNumber=metric=>val(metric?.exact);
+          const u3dName=(value,full=false)=>typeof familyLabel==='function'?familyLabel(value,full):(data.fields?.[value]?.text??value??'');
+          const u3dAmount=(metric,compact=false)=>metric?(text(compact?metric.display:metric.exact)+(data.fields[metric.exact]?.unit==='%'?'%':' '+(data.fields[metric.exact]?.unit||''))):'Not available';
+          function u3dDetails(figure,panel,row){
+            const list=node('dl'),entry=(label,value)=>list.append(node('dt','',label),node('dd','',value));
+            entry('Base',panel.basis);if(row.x)entry('Sequence identity',u3dAmount(row.x));
+            for(const part of row.parts)entry(part.label,u3dAmount(part.value));
+            if(row.total)entry('Total',u3dAmount(row.total));if(row.note)entry('Stored rule',text(row.note));
+            popup(u3dName(row.name,true),[node('p','',figure.legend),list]);
+          }
+          function u3dTarget(mark,figure,panel,row,label=''){
+            const heading=(label?label+': ':'')+u3dName(row.name,true),values=row.parts.map(part=>part.label+': '+u3dAmount(part.value));
+            const title=heading+'; '+values.join('; ')+'; Base: '+panel.basis+'. Open exact stored values; this changes only this report view.';
+            mark.classList.add('u3d-hit');mark.setAttribute('tabindex','0');mark.setAttribute('role','button');mark.setAttribute('aria-label',title);mark.setAttribute('title',title);
+            const nativeTitle=svg('title');nativeTitle.textContent=title;mark.append(nativeTitle);
+            mark.addEventListener('click',()=>u3dDetails(figure,panel,row));
+            mark.addEventListener('keydown',event=>{
+              if(event.key==='Enter'||event.key===' '){event.preventDefault();u3dDetails(figure,panel,row);}
+              if(event.key==='ArrowRight'||event.key==='ArrowLeft'){const targets=[...mark.closest('.u3d-panel').querySelectorAll('.u3d-hit')],index=targets.indexOf(mark),next=index+(event.key==='ArrowRight'?1:-1);if(targets[next]){event.preventDefault();targets[next].focus();}}
+            });
+            const tip=$('chart-hover'),show=()=>{
+              tip.replaceChildren(node('strong','',heading),...values.map(value=>node('div','',value)),node('div','','Base: '+panel.basis));
+              if(row.note)tip.append(node('div','',text(row.note)));tip.hidden=false;const box=mark.getBoundingClientRect();
+              tip.style.left=Math.max(8,Math.min(box.left,innerWidth-tip.offsetWidth-8))+'px';tip.style.top=Math.max(8,Math.min(box.bottom+8,innerHeight-tip.offsetHeight-8))+'px';
+            };
+            mark.addEventListener('focus',show);mark.addEventListener('pointerenter',show);mark.addEventListener('blur',()=>tip.hidden=true);mark.addEventListener('pointerleave',()=>tip.hidden=true);
+          }
+          function u3dText(canvas,x,y,value,anchor='middle'){const label=svg('text',{x,y,'text-anchor':anchor});label.textContent=value;canvas.append(label);}
+          function u3dKey(host,parts){const key=node('div','u3d-key');parts.forEach((part,index)=>{const item=node('span'),swatch=node('i','u3d-swatch');swatch.style.background=u3dColours[index%u3dColours.length];item.append(swatch,document.createTextNode(part.label));key.append(item);});host.append(key);}
+          function u3dLine(figure,panel,host){
+            const width=Math.max(280,host.getBoundingClientRect().width||600),height=328,left=52,right=width-22,top=panel.markers.length?64:24,bottom=278;
+            const canvas=svg('svg',{class:'u3d-svg',viewBox:`0 0 ${width} ${height}`,role:'group','aria-label':panel.title});
+            const X=value=>left+(right-left)*(panel.reverseX?panel.maximumX-value:value-panel.minimumX)/(panel.maximumX-panel.minimumX||1),Y=value=>bottom-(bottom-top)*value/(panel.maximumY||1);
+            for(const tick of panel.yTicks){const y=Y(tick.position);canvas.append(svg('path',{class:'u3d-grid',d:`M ${left} ${y} H ${right}`}));u3dText(canvas,left-8,y+4,tick.label,'end');}
+            const every=Math.max(1,Math.ceil(panel.xTicks.length*50/(right-left)));
+            panel.xTicks.forEach((tick,index)=>{if(index%every&&index!==panel.xTicks.length-1)return;const x=X(tick.position);canvas.append(svg('path',{class:'u3d-grid',d:`M ${x} ${top} V ${bottom}`}));u3dText(canvas,x,bottom+22,tick.label);});
+            for(const [index,marker]of panel.markers.entries()){
+              const x=X(u3dNumber(marker.identity)),colour=index?'var(--ink)':'var(--s3)';
+              canvas.append(svg('path',{d:`M ${x} ${top} V ${bottom}`,stroke:colour,'stroke-width':1.4,'stroke-dasharray':index?'2 4':'5 4',fill:'none'}));
+              const label=svg('g'),row={name:marker.label,x:null,parts:[{label:marker.label,value:marker.identity}]};label.append(svg('rect',{x:Math.max(left,Math.min(x-100,right-200)),y:1+index*18,width:200,height:17,fill:'transparent'}));u3dText(label,Math.max(left+100,Math.min(x,right-100)),14+index*18,marker.label+' '+u3dAmount(marker.identity,true));u3dTarget(label,figure,panel,row);canvas.append(label);
+            }
+            const parts=panel.rows[0]?.parts||[];
+            parts.forEach((part,index)=>{
+              const points=panel.rows.filter(row=>row.x&&row.parts[index]).map(row=>[X(u3dNumber(row.x)),Y(u3dNumber(row.parts[index].value))]);
+              canvas.append(svg('polyline',{points:points.map(point=>point.join(',')).join(' '),fill:'none',stroke:u3dColours[index%u3dColours.length],'stroke-width':2}));
+              for(const row of panel.rows){if(!row.x||!row.parts[index])continue;const x=X(u3dNumber(row.x)),y=Y(u3dNumber(row.parts[index].value)),mark=svg('g');mark.append(svg('circle',{cx:x,cy:y,r:13,fill:'transparent'}),svg('circle',{cx:x,cy:y,r:5,fill:u3dColours[index%u3dColours.length],stroke:'var(--surface)','stroke-width':1.5}));u3dTarget(mark,figure,panel,row,part.label);canvas.append(mark);}
+            });
+            host.append(node('p','u3d-axis',panel.yLabel),canvas,node('p','u3d-axis',panel.xLabel));u3dKey(host,parts);
+          }
+          function u3dBars(figure,panel,host){
+            for(const row of panel.rows){
+              const wrap=node('div','u3d-row'),name=node('div','u3d-row-name',u3dName(row.name)),canvas=svg('svg',{class:'u3d-svg',viewBox:'0 0 640 44',preserveAspectRatio:'none'}),mark=svg('g');
+              mark.append(svg('rect',{x:0,y:0,width:640,height:44,fill:'transparent'}));let at=0;
+              row.parts.forEach((part,index)=>{const width=640*(u3dNumber(part.value)||0)/(panel.maximumX||1);mark.append(svg('rect',{x:at,y:10,width:Math.max(0,width),height:24,rx:2,fill:u3dColours[index%u3dColours.length]}));at+=width;});u3dTarget(mark,figure,panel,row);canvas.append(mark);
+              const values=node('div','u3d-parts');row.parts.forEach(part=>values.append(node('span','',part.label+': '+u3dAmount(part.value,true))));
+              wrap.append(name,canvas,node('div','u3d-value',u3dAmount(row.total||row.parts[0]?.value,true)),values);if(row.note)wrap.append(node('p','u3d-note',text(row.note)));host.append(wrap);
+            }
+            host.append(node('p','u3d-axis',panel.xLabel));
+          }
+          function u3dValues(figure,panel,host){
+            const details=node('details','u3d-values'),summary=node('summary','','Show exact values');summary.title='Inspect every stored value and its base. Only this report view changes.';
+            const table=node('table'),head=node('tr');for(const title of ['Condition or identity','Stored readings']){const th=node('th','',title);th.scope='col';head.append(th);}const thead=node('thead'),body=node('tbody');thead.append(head);
+            for(const row of panel.rows){const readings=node('td');if(row.x)readings.append(node('div','',panel.xLabel+': '+u3dAmount(row.x)));for(const part of row.parts)readings.append(node('div','',part.label+': '+u3dAmount(part.value)));if(row.total)readings.append(node('div','','Total: '+u3dAmount(row.total)));if(row.note)readings.append(node('div','',text(row.note)));const line=node('tr');line.append(node('td','',u3dName(row.name,true)),readings);body.append(line);}table.append(thead,body);details.append(summary,table);host.append(details);
+          }
+          function renderU3dSensitivity(){
+            for(const old of u3dHost.querySelectorAll(':scope > .u3d-figure'))old.remove();
+            const order=['identity','reference','variants','effects'];
+            for(const figure of [...u3dFigures].sort((a,b)=>order.indexOf(a.kind)-order.indexOf(b.kind))){
+              const card=node('figure','u3d-figure');card.dataset.nativeSensitivityFigure=figure.id;card.dataset.kind=figure.kind;card.append(node('h3','',figure.title));const panels=node('div',figure.panels.length>1?'u3d-panels u3d-paired':'u3d-panels');card.append(panels);u3dHost.append(card);
+              for(const panel of figure.panels){const section=node('section','u3d-panel');section.append(node('h4','',panel.title),node('p','u3d-base',panel.basis));panels.append(section);if(panel.rows.length){if(panel.kind==='line')u3dLine(figure,panel,section);else u3dBars(figure,panel,section);}else section.append(node('p','u3d-note','No stored points are available for this panel.'));u3dValues(figure,panel,section);}
+              card.append(node('figcaption','u3d-legend chart-legend',figure.legend));
+            }
+            $('sensitivity-empty').hidden=u3dHost.childElementCount>0;
+          }
+          $('tab-sensitivity').addEventListener('click',renderU3dSensitivity);
+          let u3dWidth=0;
+          if('ResizeObserver'in window){const observer=new ResizeObserver(()=>{const width=u3dHost.clientWidth;if(width!==u3dWidth){u3dWidth=width;requestAnimationFrame(renderU3dSensitivity);}});observer.observe(u3dHost);}
+          renderU3dSensitivity();
+          /* U3d end */
           $("app").hidden = false;
           const topbar = document.querySelector(".topbar");
           const updateStickySpace = () => {

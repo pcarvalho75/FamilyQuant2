@@ -155,6 +155,16 @@ internal static partial class ReportNumberTrace
                 if (payload.Fields.TryGetValue(id, out var tick)
                     && (tick.Source.Kind != "axis-tick" || tick.Source.Property?.StartsWith(measure.Id + "/", StringComparison.Ordinal) != true))
                     errors[id] = "Axis tick is not bound to this measure.";
+            foreach (var basis in measure.Bases)
+            {
+                if (!payload.Fields.TryGetValue(basis.Value.Label, out var basisLabel)
+                    || basisLabel.Source.Kind != "basis-axis-label" || basisLabel.Source.Property != measure.Id + "/" + basis.Key)
+                    errors[basis.Value.Label] = "Selected-base axis label is not bound to this measure and base.";
+                foreach (string id in basis.Value.Ticks)
+                    if (!payload.Fields.TryGetValue(id, out var tick) || tick.Source.Kind != "axis-tick"
+                        || tick.Source.Property?.StartsWith(measure.Id + "/", StringComparison.Ordinal) != true)
+                        errors[id] = "Selected-base axis tick is not bound to this measure.";
+            }
         }
         foreach (var family in payload.Composition.Families)
             if (family.DatabaseEntries is string id && payload.Fields.TryGetValue(id, out var field))
@@ -289,7 +299,7 @@ internal static partial class ReportNumberTrace
                 return new(N(value.ToString(source.Format, CultureInfo.InvariantCulture)), value, "project", source.Family + "/" + source.Property);
             }
             if (source.Kind == "database-entry-count") return databaseEntries.Resolve(source, field);
-            if (source.Kind is "axis-label" or "axis-tick")
+            if (source.Kind is "axis-label" or "axis-tick" or "basis-axis-label")
             {
                 if (!HtmlReportAxisTicks.TryResolve(source, out var resolved) || resolved == null)
                     throw new InvalidDataException("Unknown or invalid axis source recipe.");
@@ -355,6 +365,18 @@ internal static partial class ReportNumberTrace
     private static IEnumerable<(string Location, string Id)> FieldReferences(HtmlReportPayload p)
     {
         var ids = new List<string?> { p.Title, p.Authors, p.Interpretation };
+        foreach (var figure in p.SensitivityFigures.Figures)
+            foreach (var panel in figure.Panels)
+            {
+                foreach (var marker in panel.Markers) ids.AddRange(new[] { marker.Identity.Exact, marker.Identity.Display });
+                foreach (var row in panel.Rows)
+                {
+                    ids.AddRange(new[] { row.Name, row.Note });
+                    foreach (var number in new[] { row.X, row.Total })
+                        if (number != null) ids.AddRange(new[] { number.Exact, number.Display });
+                    foreach (var part in row.Parts) ids.AddRange(new[] { part.Value.Exact, part.Value.Display });
+                }
+            }
         foreach (var figure in p.FamilyFigures.Figures)
             foreach (var view in figure.Views.Values)
                 foreach (var row in view.Rows)
@@ -394,6 +416,12 @@ internal static partial class ReportNumberTrace
             ids.Add(measure.Label);
             ids.AddRange(measure.Ticks);
             ids.AddRange(measure.Values.Values);
+            foreach (var basis in measure.Bases.Values)
+            {
+                ids.Add(basis.Label);
+                ids.AddRange(basis.Ticks);
+                ids.AddRange(basis.Values.Values);
+            }
         }
         foreach (var r in p.CreditedRuns) ids.AddRange(new[] { r.Name, r.Share });
         foreach (var g in p.DatabaseGap) ids.AddRange(new[] { g.Name, g.Fraction });

@@ -15,6 +15,7 @@ public sealed record HtmlReportPayload
     public HtmlComposition Composition { get; init; } = new();
     public HtmlCoverageCatalog? CoverageCatalog { get; init; } // U1
     public HtmlFamilyFigures FamilyFigures { get; init; } = new(); // U3c native Families plots.
+    public HtmlSensitivityFigures SensitivityFigures { get; init; } = new(); // U3d native Sensitivity plots.
     public IReadOnlyList<HtmlRunCredit> CreditedRuns { get; init; } = Array.Empty<HtmlRunCredit>();
     public IReadOnlyList<HtmlGapRow> DatabaseGap { get; init; } = Array.Empty<HtmlGapRow>();
     public IReadOnlyList<HtmlDotMeasure> DotMeasures { get; init; } = Array.Empty<HtmlDotMeasure>();
@@ -132,7 +133,10 @@ public sealed record HtmlGapRow(string Name, string Fraction)
 /// <summary>Label and Ticks are field IDs; Values maps family IDs to existing exact field IDs.
 /// Scale controls geometry only. Missing values are absent; recorded zero remains available.</summary>
 public sealed record HtmlDotMeasure(string Id, string Label, string Unit, string Scale,
-    IReadOnlyList<string> Ticks, IReadOnlyDictionary<string, string> Values);
+    IReadOnlyList<string> Ticks, IReadOnlyDictionary<string, string> Values)
+{
+    public IReadOnlyDictionary<string, HtmlDotBasis> Bases { get; init; } = new Dictionary<string, HtmlDotBasis>(); // U9
+}
 public sealed record HtmlReportHighlight(string Name, string Value, string? Description);
 /// <summary>Title, fact Name and fact Value are all field IDs.</summary>
 public sealed record HtmlMethodStep(string Id, string Title, IReadOnlyList<HtmlReportFact> Facts);
@@ -169,6 +173,7 @@ public sealed record HtmlReportContext
         = new Dictionary<string, string>(StringComparer.Ordinal);
     public QuantManifest? StoredStudies { get; init; }
     public Func<Func<string, HtmlReportReference, string, double?, string>, ReportSelection?, HtmlFamilyFigures>? FamilyFiguresProvider { get; init; } // U3c native chart inputs.
+    public Func<Func<string, HtmlReportReference, string, double?, string>, ReportSelection?, HtmlSensitivityFigures>? SensitivityFiguresProvider { get; init; } // U3d native chart inputs.
     public FamilyDatabaseEntryCountView? DatabaseEntryCounts { get; init; }
     public IReadOnlyDictionary<int, IReadOnlyList<int>> SourceUserIds { get; init; }
         = new Dictionary<int, IReadOnlyList<int>>();

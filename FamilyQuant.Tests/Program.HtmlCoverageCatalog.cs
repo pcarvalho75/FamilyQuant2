@@ -118,8 +118,8 @@ internal static partial class Program
             checks.allFamilies = family.options.length === catalog.families.length;
             family.value = 'family:7'; family.dispatchEvent(new w.Event('change'));
             checks.order = [...protein.options].map(option => option.textContent.split(' ')[0]).join(',') === 'Protein_7_B,Protein_7_A';
-            checks.countLabel = protein.options[1].textContent.includes('3 distinct placed peptide sequences');
-            checks.countTooltip = protein.title.includes('distinct placed peptide sequences across identified and de novo');
+            checks.countLabel = protein.options[1].textContent.includes('3 distinct placed sequences');
+            checks.countTooltip = protein.title.includes('distinct placed sequences across identified and de novo');
             checks.noAnnotations = !d.querySelector('#coverage-content .legend').textContent.includes('Positioned annotations');
             protein.value = '1'; protein.dispatchEvent(new w.Event('change'));
             const track = d.querySelector('#coverage-content .coverage-track');
