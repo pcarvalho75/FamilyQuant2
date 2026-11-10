@@ -79,7 +79,7 @@ internal static partial class Program
             .Any(figure => figure.Id == "figure:" + AnalyticsFigures.FamilyContributionFile) && actual.Results.All(figure => !figure.SourceFigureId.StartsWith("figure:family_contribution", StringComparison.Ordinal)));
         Check("production HTML export includes selected quality and sensitivity images", actual.Quality.Count > 0 && actual.Sensitivity.Count > 0);
         Check("coverage remains in the interactive maps rather than the figure grids", actual.Results.All(figure => !figure.SourceFigureId.StartsWith("figure:protein_coverage_", StringComparison.Ordinal))
-            && actual.Composition.Families.Any(family => family.Coverage.Count > 0));
+            && actual.CoverageCatalog?.Proteins.Count > 0);
         Console.WriteLine("Synthetic project HTML size: " + new FileInfo(htmlPath).Length.ToString(CultureInfo.InvariantCulture) + " bytes; "
             + actual.Results.Count + " Results, " + actual.Quality.Count + " Quality, " + actual.Sensitivity.Count + " Sensitivity images.");
         HtmlReportBrowserChecks(Path.Combine(output, "page"), new[] { ("all-figures", actual, 390) }, """

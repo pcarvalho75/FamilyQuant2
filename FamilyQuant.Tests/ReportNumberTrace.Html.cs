@@ -176,6 +176,37 @@ internal static partial class ReportNumberTrace
                 catch (Exception e) when (e is ArgumentException or InvalidDataException or InvalidOperationException or KeyNotFoundException or FormatException)
                 { errors[coverage.SourceFigureId] = e.Message; }
             }
+        if (payload.CoverageCatalog is { } catalog)
+        {
+            try
+            {
+                if (catalog.Proteins.Count > 0 && (project == null || manifest?.FamilyPeptideLocalization == null))
+                    throw new InvalidDataException("The coverage catalog requires its stored localization and project.");
+                var native = catalog.Proteins.Count == 0 ? new Dictionary<(int, string), ProteinCoverageMapData>()
+                    : ProteinCoverageFigures.DataFromStored(manifest!.FamilyPeptideLocalization!, project!, int.MaxValue)
+                        .ToDictionary(map => (map.FamilyUserId, map.ProteinId));
+                foreach (var protein in catalog.Proteins)
+                {
+                    string key = "coverage catalog " + protein.FamilyUserId + "/" + protein.Protein;
+                    if (!native.TryGetValue((protein.FamilyUserId, protein.Protein), out var map))
+                    { errors[key] = "The catalog protein has no native stored snapshot."; continue; }
+                    int count = map.Peptides.Select(peptide => peptide.Label).Distinct(StringComparer.Ordinal).Count();
+                    var peptides = map.Peptides.SelectMany(peptide => peptide.Segments.Select(span => new HtmlCoverageCatalogSpan(span.Start, span.End,
+                        peptide.Label, peptide.Kind == CoveragePlacementKind.Exact ? "ExactContainment" : "Aligned",
+                        peptide.Source == CoveragePeptideSource.Identified ? "identified" : "de novo")));
+                    var domains = map.Annotations.SelectMany(annotation => annotation.Segments.Select(span => new HtmlCoverageCatalogSpan(span.Start, span.End,
+                        annotation.Label, annotation.Kind == CoverageAnnotationKind.Domain ? "domain" : "feature")));
+                    if (protein.Length != map.SequenceLength || protein.CreditedSignal != map.RankingSignal || protein.PeptideCount != count
+                        || !protein.Peptides.SequenceEqual(peptides) || !protein.Domains.SequenceEqual(domains))
+                        errors[key] = "The catalog differs from the native stored coverage snapshot.";
+                }
+                foreach (var family in catalog.Families)
+                    if (family.Proteins.Distinct().Count() != family.Proteins.Count || family.Proteins.Any(index => index < 0 || index >= catalog.Proteins.Count))
+                        errors["coverage catalog family " + family.Id] = "The catalog family contains an invalid protein reference.";
+            }
+            catch (Exception e) when (e is ArgumentException or InvalidOperationException or InvalidDataException)
+            { errors["coverage catalog"] = e.Message; }
+        }
         foreach (var figure in payload.Quality.Concat(payload.Sensitivity)) CheckPng(figure.SourceFigureId, figure.Png, Text(figure.Title), Text(figure.Caption));
         using (var writer = new StreamWriter(output, false, new UTF8Encoding(false)))
         {
@@ -190,6 +221,14 @@ internal static partial class ReportNumberTrace
                     found ? "explicit " + pair.Value.Source.Kind + (pair.Value.Source.Format == null ? "" : " format " + pair.Value.Source.Format) : reason!, pair.Value.Text, pair.Key, found ? "1" : "0" });
             }
             foreach (var pair in errors.Where(e => !payload.Fields.ContainsKey(e.Key))) Write(new[] { pair.Key, "", "NOT FOUND", "", "", pair.Value, "", "", "0" });
+            if (payload.CoverageCatalog != null)
+                foreach (var protein in payload.CoverageCatalog.Proteins)
+                {
+                    string key = "coverage catalog " + protein.FamilyUserId + "/" + protein.Protein;
+                    if (!errors.ContainsKey(key) && !errors.ContainsKey("coverage catalog"))
+                        Write(new[] { key, protein.PeptideCount.ToString(CultureInfo.InvariantCulture), "MATCH", "project", "FamilyPeptideLocalization",
+                            "native coverage snapshot", protein.Protein, key, "1" });
+                }
             void Write(IEnumerable<string> row) => writer.WriteLine(string.Join(",", row.Select(value => SpreadsheetSafeCsv.Encode(value))));
         }
         Console.WriteLine($"HTML number trace: {payload.Fields.Count} bound fields, {errors.Count} NOT FOUND. Output: {output}");

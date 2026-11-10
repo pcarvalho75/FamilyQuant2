@@ -2710,6 +2710,21 @@
         color: var(--accent);
       }
     </style>
+    <style>
+      /* U1 begin */
+      #coverage-family { max-width: 100%; margin: 8px 0; }
+      #protein-select { max-width: 100%; min-width: 0; }
+      #coverage-chooser-legend { margin-bottom: 16px; }
+      .coverage-track .peptide.is-denovo { background: var(--s1); }
+      .coverage-track .peptide.is-aligned { border: 1px dashed var(--ink); opacity: 0.75; }
+      @media (max-width: 740px) {
+        html { scroll-padding-top: var(--report-sticky-height, 88px); }
+        .protein-selector { flex-direction: column; align-items: stretch; }
+        .protein-selector h3 { flex: none; }
+        #protein-select { width: 100%; max-width: 100%; }
+      }
+      /* U1 end */
+    </style>
   </head>
   <body>
     <a class="skip" href="#main">Skip to results</a>
@@ -2964,7 +2979,9 @@
         </div>
         <div class="report-panel" id="panel-coverage" role="tabpanel" aria-labelledby="tab-coverage" tabindex="0" hidden>
           <label for="coverage-family">Family</label>
-          <select id="coverage-family" title="Choose the family whose stored sequence coverage is shown. This changes only the view of this report."></select>
+          <select id="coverage-family" title="Choose any stored family to inspect its proteins. This changes only the protein list and map in this report."></select>
+          <p class="fine-print" id="coverage-chooser-legend">Proteins are ordered by credited signal, with counts of distinct placed peptide sequences across identified and de novo evidence.</p>
+          <p class="empty" id="coverage-catalog-empty" hidden>No stored placed peptides are available for this selection. Choose another family or export current localization results.</p>
         <section
           class="family-detail"
           id="family-detail"
@@ -3390,6 +3407,7 @@
               renderRanking();
               renderContribution();
               updateSelectionSummary();
+              refreshCoverageStats(); // U1
             };
             $("normalization-options").append(label);
           }
@@ -3486,17 +3504,6 @@
               tabs[next].focus();
             };
           }
-          for (const f of ordered) {
-            const option = node("option", "", text(f.name));
-            option.value = f.id;
-            $("coverage-family").append(option);
-          }
-          $("coverage-family").disabled = !ordered.length;
-          if (!ordered.length) $("coverage-family").title = "No families are included in this report. Include family results when exporting to enable this choice.";
-          $("coverage-family").onchange = () => {
-            const family = families.find(f => f.id === $("coverage-family").value);
-            if (family) select(family);
-          };
           let hoverFrame = null;
           function preview(f) {
             if (hoverFrame !== null) cancelAnimationFrame(hoverFrame);
@@ -4431,9 +4438,9 @@
             renderedFamily = f;
             motion($("family-detail"), [{ opacity: 0.6 }, { opacity: 1 }], 110);
             $("family-detail").hidden = !f;
-            if (!f) return;
+            if (!f) { syncCoverageFamily(); return; }
+            $("family-info").hidden = false;
             bind("family-title", f.name);
-            $("coverage-family").value = f.id;
             $("family-detail").style.setProperty(
               "--family-color",
               familyColor(f),
@@ -4442,8 +4449,8 @@
             $("family-info").onclick = () => familyDialog(f);
             const stats = $("family-stats");
             stats.replaceChildren();
-            stat(stats, "Mean share of credited family signal", f.mean);
-            stat(stats, "Run-to-run SD of credited share", f.sd);
+            stat(stats, "Mean share of " + rankingBaseName(), rankingStatistics(f).mean);
+            stat(stats, "Run-to-run SD (percentage points)", rankingStatistics(f).sd);
             stat(stats, "Protein groups", f.proteins);
             stat(stats, "Peptides", f.peptides);
             const parts = $("subclasses");
@@ -4479,30 +4486,76 @@
               parts.append(partChart);
             }
             parts.hidden = !groups.size;
+            syncCoverageFamily(f);
+          }
+          /* U1 begin */
+          let activeCoverageGroup = null;
+          const coverageGroups = data.coverageCatalog ? data.coverageCatalog.families || []
+            : ordered.map(family => ({ id: family.id, name: family.name, reportFamilyId: family.id }));
+          for (const group of coverageGroups) {
+            const option = node("option", "", data.coverageCatalog ? group.selectorLabel : text(group.name));
+            option.value = group.id;
+            $("coverage-family").append(option);
+          }
+          $("coverage-family").disabled = coverageGroups.length === 0;
+          $("coverage-family").title = coverageGroups.length
+            ? "Choose any stored family, including families below the report threshold and Others. This changes the protein list and map in this report."
+            : "No stored proteins with placed peptides are available. Export current localization results to enable this list.";
+          $("coverage-family").onchange = () => {
+            const group = coverageGroups.find(group => group.id === $("coverage-family").value);
+            const family = families.find(family => family.id === group?.reportFamilyId);
+            renderedFamily = null;
+            if (family) select(family);
+            else renderCoverageGroup(group);
+          };
+          function syncCoverageFamily(family) {
+            const group = family ? coverageGroups.find(group => group.reportFamilyId === family.id) : coverageGroups[0];
+            renderCoverageGroup(group);
+          }
+          function renderCoverageGroup(group) {
+            activeCoverageGroup = group;
+            $("coverage-family").value = group?.id || "";
+            if (data.coverageCatalog && group) {
+              $("family-detail").hidden = false;
+              $("family-title").textContent = group.name;
+              const family = families.find(family => family.id === group.reportFamilyId);
+              $("family-info").hidden = !family;
+              if (!family) {
+                $("family-stats").replaceChildren();
+                $("subclasses").replaceChildren();
+                $("subclasses").hidden = true;
+                $("family-color").style.background = "var(--s6)";
+              }
+            }
+            refreshCoverageStats();
             const coverage = $("coverage-content");
             coverage.replaceChildren();
             $("protein-panel").querySelector("h3").textContent =
               "Sequence coverage";
-            const positions = (f.coverage || []).filter(
+            const raw = !!data.coverageCatalog;
+            const source = raw ? (group?.proteins || []).map(index => data.coverageCatalog.proteins[index])
+              : families.find(family => family.id === group?.reportFamilyId)?.coverage || [];
+            const positions = source.filter(
               (item) =>
                 (Number.isInteger(item.length) &&
                   item.length > 0 &&
                   ((item.peptides || []).length ||
-                    (item.domains || []).length)) ||
-                (typeof item.png === "string" &&
-                  item.png.startsWith("data:image/png;base64,")),
+                    (item.domains || []).length)),
             );
             const selector = $("protein-select");
             selector.replaceChildren();
             for (const [i, item] of positions.entries()) {
-              const option = field(
-                exists(item.protein) ? item.protein : item.title,
-                "option",
-              );
+              const option = raw ? node("option", "", item.selectorLabel)
+                : field(exists(item.protein) ? item.protein : item.title, "option");
               option.value = i;
               selector.append(option);
             }
-            selector.hidden = positions.length < 2;
+            selector.hidden = false;
+            selector.disabled = positions.length === 0;
+            selector.title = positions.length
+              ? "Choose any protein with placed peptides, ordered by credited signal. The count is distinct placed peptide sequences across identified and de novo evidence, and selecting changes only this report view."
+              : "No stored placed peptides are available for this selection. Choose another family or export current localization results to enable this list.";
+            $("coverage-catalog-empty").hidden = positions.length > 0;
             const draw = () => {
               coverage.replaceChildren();
               const item =
@@ -4510,16 +4563,19 @@
                   selector.selectedIndex < 0 ? 0 : selector.selectedIndex
                 ];
               if (!item) return;
-              if (!(Number.isInteger(item.length) && item.length > 0)) {
-                figureCard(item, coverage, true);
-                return;
-              }
+              const label = (value, tag = "span") => raw ? node(tag, "", value) : field(value, tag);
+              const range = span => raw ? node("span", "", span.start + "-" + span.end) : field(span.range);
+              const placement = span => span.side ? span.side + ", " + (span.kind === "Aligned" ? "aligned" : "exact") : span.kind === "Aligned" ? "aligned" : "exact";
               const meta = node("div", "coverage-meta");
-              if (exists(item.protein)) meta.append(field(item.protein));
-              if (exists(item.lengthLabel))
-                meta.append(field(item.lengthLabel));
+              if (raw) meta.append(node("span", "", item.protein), node("span", "", item.length + " residues"),
+                node("span", "", item.peptideCount + " distinct placed peptide sequences"));
+              else {
+                if (exists(item.protein)) meta.append(field(item.protein));
+                if (exists(item.lengthLabel)) meta.append(field(item.lengthLabel));
+              }
               const track = node("div", "coverage-track");
-              track.dataset.fqCoverage = item.sourceFigureId;
+              track.dataset.fqCoverage = raw ? item.familyUserId + ":" + item.protein : item.sourceFigureId;
+              track.dataset.protein = raw ? item.protein : text(item.protein || item.title);
               track.append(node("span", "sequence-line"));
               const addSpans = (spans, kind) => {
                 for (const span of spans || []) {
@@ -4529,25 +4585,26 @@
                     span.start < 1 ||
                     span.end < span.start ||
                     span.end > item.length ||
-                    !exists(span.label)
+                    !(raw ? typeof span.label === "string" && span.label.length > 0 : exists(span.label))
                   )
                     continue;
                   const b = node("button", kind);
+                  if (span.kind === "Aligned") b.classList.add("is-aligned");
+                  if (span.side === "de novo") b.classList.add("is-denovo");
+                  if (span.side) b.dataset.side = span.side;
+                  b.dataset.kind = span.kind;
+                  b.title = "Inspect this stored " + (kind === "peptide" ? placement(span) + " peptide placement" : "annotation") + ". This opens its label and residue positions.";
                   b.style.left = ((span.start - 1) / item.length) * 100 + "%";
                   b.style.width =
                     ((span.end - span.start + 1) / item.length) * 100 + "%";
                   const accessible = node("span", "sr-only");
-                  accessible.append(field(span.label));
-                  if (exists(span.range))
-                    accessible.append(
-                      document.createTextNode(" "),
-                      field(span.range),
-                    );
+                  accessible.append(label(span.label), document.createTextNode(" "), range(span));
+                  if (kind === "peptide") accessible.append(document.createTextNode(" " + placement(span)));
                   b.append(accessible);
                   const show = () => {
                     const tip = $("coverage-hover");
-                    tip.replaceChildren(field(span.label));
-                    if (exists(span.range)) tip.append(field(span.range));
+                    tip.replaceChildren(label(span.label), range(span));
+                    if (kind === "peptide") tip.append(node("span", "", placement(span)));
                     tip.hidden = false;
                     const r = b.getBoundingClientRect();
                     tip.style.left =
@@ -4574,8 +4631,8 @@
                   b.onblur = hide;
                   b.onclick = () => {
                     hide();
-                    const detail = [field(span.label, "p")];
-                    if (exists(span.range)) detail.push(field(span.range, "p"));
+                    const detail = [label(span.label, "p"), range(span)];
+                    if (kind === "peptide") detail.push(node("p", "", placement(span)));
                     popup(
                       kind === "domain"
                         ? "Positioned annotation"
@@ -4589,10 +4646,12 @@
               addSpans(item.domains, "domain");
               addSpans(item.peptides, "peptide");
               const legend = node("div", "legend");
-              for (const [label, color] of [
-                ["Positioned annotations", "var(--s3)"],
-                ["Observed peptides", "var(--s2)"],
-              ]) {
+              const keys = [];
+              if (item.domains?.length) keys.push(["Positioned annotations", "var(--s3)"]);
+              if (item.peptides?.some(span => !span.side || span.side === "identified")) keys.push(["Identified placements", "var(--s2)"]);
+              if (item.peptides?.some(span => span.side === "de novo")) keys.push(["De novo placements", "var(--s1)"]);
+              if (item.peptides?.some(span => span.kind === "Aligned")) keys.push(["Dashed outline: aligned placement", "var(--muted)"]);
+              for (const [label, color] of keys) {
                 const entry = node("span", "legend-item"),
                   sw = node("span", "swatch");
                 sw.style.background = color;
@@ -4605,17 +4664,21 @@
                 "quiet-button positions-button",
                 "Inspect positions",
               );
+              inspect.title = "List every stored peptide and annotation interval for this protein. This opens details and changes only this report view.";
               inspect.onclick = () => {
                 const list = node("dl");
                 for (const span of [
                   ...(item.domains || []),
                   ...(item.peptides || []),
                 ]) {
-                  if (!exists(span.label)) continue;
-                  list.append(field(span.label, "dt"));
-                  if (exists(span.range)) list.append(field(span.range, "dd"));
+                  if (raw ? !span.label : !exists(span.label)) continue;
+                  list.append(label(span.label, "dt"));
+                  const value = node("dd");
+                  value.append(range(span));
+                  if (span.side) value.append(document.createTextNode(" " + placement(span)));
+                  list.append(value);
                 }
-                popup(field(exists(item.protein) ? item.protein : item.title), [
+                popup(raw ? item.protein : field(exists(item.protein) ? item.protein : item.title), [
                   list,
                 ]);
               };
@@ -4625,6 +4688,17 @@
             draw();
             $("protein-panel").hidden = !positions.length;
           }
+          function refreshCoverageStats() {
+            const family = families.find(family => family.id === activeCoverageGroup?.reportFamilyId);
+            if (!family) return;
+            const stats = $("family-stats");
+            stats.replaceChildren();
+            stat(stats, "Mean share of " + rankingBaseName(), rankingStatistics(family).mean);
+            stat(stats, "Run-to-run SD (percentage points)", rankingStatistics(family).sd);
+            stat(stats, "Protein groups", family.proteins);
+            stat(stats, "Peptides", family.peptides);
+          }
+          /* U1 end */
           // Only field IDs from the producer define measures, labels and printed ticks.
           const dotMeasures = (data.dotMeasures || []).filter(
             (measure) =>

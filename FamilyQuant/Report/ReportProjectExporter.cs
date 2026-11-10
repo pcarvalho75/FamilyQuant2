@@ -180,6 +180,11 @@ public static class ReportProjectExporter
                 FigureDetailsCsv = studies.FigureDetailsCsv,
                 FamilySections = panelKeys.ToDictionary(pair => pair.Key, pair => ReportSectionIds.FamilyPrefix + pair.Value, StringComparer.Ordinal),
                 World = sourceWorld, SourceGrouping = compositionBasis.SourceMembership(),
+                CoverageCatalogProvider = currentSelection => HtmlCoverageCatalogBuilder.Build(curation, sourceStudies,
+                    compositionBasis.SourceMembership() ?? grouping, compositionBasis.SourceUserIds, compositionBasis.Labels,
+                    compositionBasis.SourceUserIds.SelectMany(pair => pair.Value.Select(id => (Id: id, Owner:
+                        panelKeys.TryGetValue(pair.Key.ToString(CultureInfo.InvariantCulture), out string? key) ? ReportSectionIds.FamilyPrefix + key : ReportSectionIds.Results)))
+                        .ToDictionary(pair => pair.Id, pair => pair.Owner), currentSelection),
                 CoverageProvider = (id, addField, currentSelection) =>
                 {
                     if (!int.TryParse(id, NumberStyles.Integer, CultureInfo.InvariantCulture, out int familyId)
