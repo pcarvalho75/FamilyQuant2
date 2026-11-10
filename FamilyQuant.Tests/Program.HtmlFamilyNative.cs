@@ -33,10 +33,11 @@ internal static partial class Program
             manifest.PerRunTic[total.Run] = total.TotalIonCurrent.Value;
             manifest.DerivedFractions.Add(new() { Run = total.Run, DetectedPeptideLikeArea = total.MeasuredSignal * .8 });
         }
+        const double areaScale = 1_234_567.89;
         var families = new FamilyEnvelopeQuantResult
         {
-            MeasuredIdentifiedEnvelope = manifest.FamilyRunShares.Runs.Sum(run => run.IdentifiedSignal!.Value),
-            MeasuredDeNovoEnvelope = manifest.FamilyRunShares.Runs.Sum(run => run.MeasuredSignal - run.IdentifiedSignal!.Value),
+            MeasuredIdentifiedEnvelope = manifest.FamilyRunShares.Runs.Sum(run => run.IdentifiedSignal!.Value) * areaScale,
+            MeasuredDeNovoEnvelope = manifest.FamilyRunShares.Runs.Sum(run => run.MeasuredSignal - run.IdentifiedSignal!.Value) * areaScale,
         };
         foreach (var family in manifest.FamilyRunShares.Families)
         {
@@ -46,7 +47,7 @@ internal static partial class Program
                 var total = manifest.FamilyRunShares.Runs.Single(total => total.Run == run.Run);
                 run.ShareOfTic = run.Signal / total.TotalIonCurrent;
             }
-            double identified = family.Runs.Sum(run => run.IdentifiedSignal!.Value), deNovo = family.Runs.Sum(run => run.Signal - run.IdentifiedSignal!.Value);
+            double identified = family.Runs.Sum(run => run.IdentifiedSignal!.Value) * areaScale, deNovo = family.Runs.Sum(run => run.Signal - run.IdentifiedSignal!.Value) * areaScale;
             families.Families.Add(new() { FamilyUserId = family.FamilyUserId, Description = "Family " + family.FamilyUserId,
                 IdentifiedEnvelope = identified, DeNovoEnvelope = deNovo, UniqueIdentifiedEnvelope = identified, UniqueDeNovoEnvelope = deNovo,
                 SplitIdentifiedEnvelope = identified, SplitDeNovoEnvelope = deNovo });
@@ -60,7 +61,7 @@ internal static partial class Program
         families.UnattributedDeNovoEnvelope = families.MeasuredDeNovoEnvelope - families.Families.Sum(family => family.DeNovoEnvelope);
         manifest.FamilyWorldResult = new() { MinimumTagLength = FamilyWorldOptions.DefaultMinimumTagLength, CompositionRules = FamilyWorldErrors.CompositionRule,
             Composition = Enumerable.Range(1, 3).Select(id => new FamilyWorldCompositionRow { Family = "Family " + id,
-                CuratedUserIds = new() { id }, IdentifiedEnvelope = 100 * id, DatabaseDeNovoEnvelope = 20 * id, WorldDeNovoEnvelope = 5 * id }).ToList() };
+                CuratedUserIds = new() { id }, IdentifiedEnvelope = (100 * id + .123456789) * 1e9, DatabaseDeNovoEnvelope = 20 * id * 1e9, WorldDeNovoEnvelope = 5 * id * 1e9 }).ToList() };
         return (manifest, project, families);
     }
 
@@ -127,6 +128,18 @@ internal static partial class Program
                     double? expected = HtmlReportPayloadBuilder.ReadFamilyShare(new() { Kind = "family-basis", Family = family, Study = "source", Property = sourceBasis + "/mean" }, manifest) * 100;
                     return Value(row.X) == expected && row.RunText.Contains("3 runs", StringComparison.Ordinal);
                 }));
+        var sourceRows = figures.Single(figure => figure.Kind == "sources").Views["fixed"].Rows;
+        Check("U3c source hovers carry program-computed within-family percentages", sourceRows.All(row => row.Parts.All(part =>
+            Value(part.FamilyPercent) == 100 * Value(part.Value) / Value(row.X))));
+        Check("U3c raw areas use the native G5 formatter and retain exact values", figures.Where(figure => figure.Kind is "sources" or "scatter")
+            .SelectMany(figure => figure.Views["fixed"].Rows).All(row => payload.Fields[row.X!.Display].Source.Format == "G5"
+                && payload.Fields[row.X.Display].Text == Value(row.X)!.Value.ToString("G5", CultureInfo.InvariantCulture)
+                && payload.Fields[row.X.Exact].Source.Format == "R") && sourceRows.Any(row => Value(row.X) > 1e9));
+        Check("U3c spread keeps native means with a readable negative-to-positive percent axis", figures.Where(figure => figure.Kind == "composition")
+            .All(figure => figure.Title.StartsWith("Run-to-run spread of family shares", StringComparison.Ordinal)
+                && figure.Views.Values.All(view => view.XTicks.Any(tick => tick.Position == 0 && tick.Label == "0%")
+                    && view.XTicks.All(tick => tick.Label.EndsWith('%'))))
+            && figures.Single(figure => figure.Kind == "composition").Views["identifiedAndDeNovo"].XTicks.Any(tick => tick.Position < 0));
         Check("U3c fixed plots explicitly name their own pooling/base", figures.Where(figure => !figure.UsesNormalization).All(figure =>
             figure.Views["fixed"].Legend.Contains("All runs pooled", StringComparison.Ordinal) && figure.Views["fixed"].Legend.Contains("Normalize to", StringComparison.Ordinal)));
         var omit = HtmlReportPayloadBuilder.Build(export.Document, export.SupplementSheets,
@@ -148,6 +161,19 @@ internal static partial class Program
             checks.legends=[...host.querySelectorAll('.u3c-figure')].every(el=>el.querySelector('.u3c-base')?.textContent&&el.querySelector('figcaption')?.textContent);
             checks.keyboard=[...host.querySelectorAll('.u3c-hit')].every(el=>el.getAttribute('tabindex')==='0'&&el.getAttribute('title')&&el.getAttribute('aria-label'));
             checks.noPageOverflow=d.documentElement.scrollWidth<=w.innerWidth+1;
+            const sections=[...host.children];
+            checks.spreadTitle=sections[0]?.dataset.kind==='composition'&&sections[0].querySelector('h3')?.textContent.startsWith('Run-to-run spread of family shares');
+            checks.detailOrder=sections[1]?.dataset.kind==='diversity'&&sections[2]?.classList.contains('u3c-pooled');
+            const pooled=host.querySelector('.u3c-pooled');
+            checks.pooledGroup=pooled?.querySelector('h2')?.textContent==='Pooled details'&&pooled.querySelector('p').textContent.includes('Changing Normalize to does not change')
+              &&[...pooled.querySelectorAll('.u3c-figure')].map(el=>el.dataset.kind).join(',')==='subclasses,ring,sources,scatter,counts';
+            const spread=host.querySelector('[data-kind="composition"]');
+            const labels=[...spread.querySelectorAll('.u3c-scale text')].map(el=>el.textContent);
+            checks.spreadAxis=labels.includes('0%')&&labels.some(label=>label.startsWith('-')&&label.endsWith('%'))&&spread.querySelectorAll('.u3c-zero').length>=3;
+            const source=host.querySelector('[data-kind="sources"] .u3c-hit');source.dispatchEvent(new w.Event('pointerenter'));
+            const tooltip=d.getElementById('chart-hover').textContent;
+            checks.sourcePartHovers=(tooltip.match(/% of this family's total/g)||[]).length===3&&tooltip.includes('E+');source.dispatchEvent(new w.Event('pointerleave'));
+            checks.nativeAreaLabels=host.querySelector('[data-kind="sources"] .u3c-row-value').textContent.includes('E+');
             for(const key of ['identifiedOnly','identifiedAndDeNovo','detectorEnvelopes','tic']){
               const radio=d.querySelector('input[name="normalization-basis"][value="'+key+'"]');radio.checked=true;radio.dispatchEvent(new w.Event('change',{bubbles:true}));
               checks['base-'+key]=[...host.querySelectorAll('[data-kind="composition"],[data-kind="diversity"]')].every(el=>el.dataset.base===key&&el.querySelector('svg'));

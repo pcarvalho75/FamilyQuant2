@@ -18,7 +18,8 @@ public sealed record HtmlFamilyFigureView(string Basis, string Legend, string XL
     IReadOnlyList<HtmlFamilyFigureRow> Rows);
 public sealed record HtmlFamilyFigureNumber(string Exact, string Display);
 public sealed record HtmlFamilyFigureTick(double Position, string Label);
-public sealed record HtmlFamilyFigurePart(string Name, HtmlFamilyFigureNumber Value, bool Unresolved);
+public sealed record HtmlFamilyFigurePart(string Name, HtmlFamilyFigureNumber Value, bool Unresolved,
+    HtmlFamilyFigureNumber? FamilyPercent = null);
 public sealed record HtmlFamilyFigureRow(string Key, string Name, HtmlFamilyFigureNumber? X,
     HtmlFamilyFigureNumber? Y, HtmlFamilyFigureNumber? Lower, HtmlFamilyFigureNumber? Upper,
     string RunText, IReadOnlyList<HtmlFamilyFigurePart> Parts);
