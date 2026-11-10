@@ -76,6 +76,14 @@ namespace FamilyQuant
             sb.AppendLine("peptide's full isotope envelope straight from the RAW and stores it in that project,");
             sb.AppendLine("and the Results screen then reads the recovery from it. An old Family Cluster File");
             sb.AppendLine("(.fcf) still opens, with the quantitation empty until it is computed.");
+            sb.AppendLine("In the HTML report, Signal recovery and Database gap draw interactive charts from");
+            sb.AppendLine("the same stored readings as the program. Hover, focus or select a bar or value for");
+            sb.AppendLine("its exact reading and reference total; All exact readings opens a printable table.");
+            sb.AppendLine("These charts keep their named bases when Normalize to changes. Word keeps its pictures.");
+            sb.AppendLine("The Signal recovery guide defines a peptide feature, explains each TIC-based reading,");
+            sb.AppendLine("and explains isotope, detector and TIC gaps without treating them as biological classes.");
+            sb.AppendLine("Database gap also gives each part's share of its own family's displayed signal total;");
+            sb.AppendLine("the separate comparison panel keeps all measured peptide feature signal as its base.");
             sb.AppendLine();
 
             sb.AppendLine("WHAT THE PERCENTAGE IS OF (THE DENOMINATOR)");

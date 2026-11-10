@@ -72,9 +72,11 @@ public static partial class HtmlReportPayloadBuilder
                 Composition = new() { IsAdditive = context.IsAdditive && !HasBlock("composition-overlap-warning"), Families = families,
                     ContributionRows = ContributionRows(families) },
                 Highlights = Highlights(), CreditedRuns = CreditedRuns(families), DatabaseGap = DatabaseGap(),
+                MassQualityCharts = MassQualityCharts(), // U3b native projection, no browser analysis.
                 // D47: this is a plot-first page. No methods/quality prose or interpretation block.
                 Fields = fields,
             };
+            payload = payload with { FamilyFigures = context.FamilyFiguresProvider?.Invoke(Add, selection) ?? new() }; // U3c
             // Preserve all old bindings and axis IDs before appending the new stored-source view.
             var measures = DotMeasures(families);
             var withEntries = DatabaseEntryFamilies(families);

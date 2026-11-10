@@ -16,6 +16,7 @@ namespace FamilyQuant
     public class RecoveryChart : ChartDrawingBase, IPalettedChart
     {
         private readonly List<NativeRunFraction> rows;
+        public IReadOnlyList<NativeRunFraction> Rows => rows;
         public int? IsotopeCeiling { get; }
         public string EnvelopeLabel => IsotopeCeiling.HasValue
             ? "Measured envelope (M+0" + (IsotopeCeiling == 1 ? ")" : " to M+" + (IsotopeCeiling.Value - 1).ToString(CultureInfo.InvariantCulture) + ")")

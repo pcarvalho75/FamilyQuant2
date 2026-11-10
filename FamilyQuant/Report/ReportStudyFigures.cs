@@ -19,6 +19,7 @@ public sealed record ReportStudyFigurePacket(IReadOnlyList<ReportPlacedFigure> F
 {
     public string FigureDetailsCsv { get; init; } = "";
     public IReadOnlyList<ReportSupplementSheet> FigureDetailSheets { get; init; } = Array.Empty<ReportSupplementSheet>();
+    public IReadOnlyList<ReportStudyFigure> NativeFigures { get; init; } = Array.Empty<ReportStudyFigure>(); // U3c retains the exact drawing inputs.
 }
 
 /// <summary>Stored-study report figures. No extraction, sequence search, evidence refresh or quantitation is run.</summary>
@@ -191,7 +192,7 @@ public static partial class ReportStudyFigures
                 return new ReportSupplementSheet(id, f.SectionId, "Figure data " + (i + 1).ToString(CultureInfo.InvariantCulture), table);
             }).ToArray();
             return new(placed, plan.Unavailable, plan.Figures.ToDictionary(f => "figure:" + f.Plot.FileName, f => f.Caption, StringComparer.Ordinal))
-                { FigureDetailsCsv = details, FigureDetailSheets = sheets };
+                { FigureDetailsCsv = details, FigureDetailSheets = sheets, NativeFigures = plan.Figures };
         }
         finally { CultureInfo.CurrentCulture = culture; CultureInfo.CurrentUICulture = ui; }
     }

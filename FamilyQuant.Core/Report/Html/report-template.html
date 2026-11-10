@@ -1447,6 +1447,113 @@
           border: 1px solid var(--edge);
         }
       }
+      /* U3a begin */
+      .u3a-card { padding: 22px; border: 1px solid var(--edge); border-radius: var(--radius); background: var(--surface); min-width: 0; }
+      .u3a-card h3 { margin: 0 0 4px; font-size: 1.25rem; }
+      .u3a-card.recovery, .u3a-card.gap { grid-column: 1 / -1; }
+      .u3a-basis { color: var(--muted); font-size: .86rem; margin: 0 0 18px; }
+      .u3a-legend { display: flex; gap: 8px 18px; flex-wrap: wrap; margin: 12px 0; font-size: .82rem; color: var(--muted); }
+      .u3a-key { display: inline-flex; align-items: center; gap: 6px; }
+      .u3a-key i { width: 11px; height: 11px; border-radius: 3px; background: var(--u3a-color); }
+      .u3a-run { border-top: 1px solid var(--edge); padding: 16px 0; min-width: 0; }
+      .u3a-run.pooled { background: var(--input); border-radius: 10px; padding: 16px 12px; margin-top: 8px; }
+      .u3a-run-head, .u3a-reading-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 16px; }
+      .u3a-run-name { margin: 0 0 10px; font-size: .98rem; overflow-wrap: anywhere; }
+      .u3a-reading { margin: 9px 0; min-width: 0; }
+      .u3a-reading-meta { font-size: .84rem; margin-bottom: 3px; }
+      .u3a-reading-meta > span { overflow-wrap: anywhere; }
+      .u3a-value { padding: 1px 0; border: 0; border-radius: 3px; background: transparent; color: var(--accent); font-variant-numeric: tabular-nums; text-align: right; flex-shrink: 0; }
+      .u3a-value:hover { text-decoration: underline; }
+      .u3a-svg { width: 100%; height: 20px; display: block; overflow: visible; }
+      .u3a-track { fill: var(--subtle); }
+      .u3a-mark { cursor: pointer; }
+      .u3a-mark:focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+      .u3a-tic-line { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+      .u3a-missing { fill: none; stroke: var(--muted); stroke-dasharray: 5 4; }
+      .u3a-caption { color: var(--muted); font-size: .84rem; margin-bottom: 0; }
+      .u3a-notes { display: grid; gap: 10px; margin: 15px 0; }
+      .u3a-note { display: flex; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 8px; background: var(--input); font-size: .88rem; }
+      .u3a-note small { display: block; color: var(--muted); }
+      .u3a-details { margin-top: 16px; font-size: .86rem; }
+      .u3a-details summary { cursor: pointer; color: var(--accent); }
+      .u3a-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin-top: 12px; }
+      .u3a-table th, .u3a-table td { padding: 8px 6px; border-bottom: 1px solid var(--edge); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+      .u3a-table th:nth-child(1), .u3a-table th:nth-child(2) { width: 25%; }
+      .u3a-table small { display: block; color: var(--muted); }
+      @media (max-width: 600px) {
+        .u3a-card { padding: 16px; }
+        .u3a-run-head { display: block; }
+        .u3a-reading-meta { align-items: flex-start; gap: 8px; }
+        .u3a-reading-meta > span { max-width: 70%; }
+      }
+      @media print {
+        .u3a-card { break-inside: auto; box-shadow: none; margin-bottom: 16px; }
+        .u3a-run { break-inside: avoid; }
+        .u3a-value { color: var(--ink); }
+        .u3a-details summary { display: none; }
+      }
+      /* U3a end */
+      /* U3b begin */
+      .u3b-chart { min-width: 0; margin: 0; padding: 20px; background: var(--surface); border: 1px solid var(--edge); border-radius: var(--radius); }
+      .u3b-chart h3 { margin: 0 0 16px; color: var(--ink); font-size: 1.12rem; font-weight: 600; line-height: 1.35; }
+      .u3b-chart .chart-legend { margin: 14px 0 0; max-width: 76ch; }
+      .u3b-chart[data-native-chart="xic_by_mass.png"] { grid-column: 1 / -1; }
+      .u3b-plot { min-width: 0; width: 100%; }
+      .u3b-plot svg { display: block; max-width: 100%; overflow: visible; }
+      .u3b-axis { stroke: none; paint-order: normal; font: 11px "Segoe UI", system-ui, sans-serif; fill: var(--muted); }
+      .u3b-axis-line { fill: none; stroke: var(--edge); stroke-width: 1; }
+      .u3b-mark { cursor: pointer; stroke: var(--surface); stroke-width: .5; }
+      .u3b-mark:focus { stroke: var(--accent); stroke-width: 3; outline: none; }
+      .u3b-mark:hover { stroke: var(--ink); stroke-width: 2; }
+      .u3b-series-1 { fill: var(--s1); }
+      .u3b-series-2 { fill: var(--s4); }
+      .u3b-series-3 { fill: var(--s3); }
+      .u3b-raw { fill: var(--edge); }
+      .u3b-cutoff { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .u3b-keys { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; color: var(--muted); font-size: .9rem; }
+      .u3b-key { display: inline-flex; gap: 7px; align-items: center; }
+      .u3b-key::before { content: ""; width: 10px; height: 10px; border-radius: 2px; background: var(--s1); }
+      .u3b-key-2::before { background: var(--s4); }
+      .u3b-key-3::before { background: var(--s3); }
+      .u3b-key-raw::before { background: var(--edge); }
+      .u3b-rows { display: grid; gap: 12px; }
+      .u3b-row { display: grid; grid-template-columns: minmax(130px, 1fr) minmax(130px, 1.5fr); gap: 12px; align-items: center; }
+      .u3b-row-name { color: var(--ink); line-height: 1.35; overflow-wrap: anywhere; }
+      .u3b-row-bar { position: relative; isolation: isolate; min-height: 40px; padding: 8px 10px; border: 1px solid var(--edge); border-radius: 6px; background: var(--input); color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
+      .u3b-fill { position: absolute; z-index: -1; inset: 0 auto 0 0; max-width: 100%; background: var(--selection); border-radius: inherit; }
+      .u3b-row-value { font-variant-numeric: tabular-nums; line-height: 1.3; overflow-wrap: anywhere; }
+      .u3b-row-bar:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+      @media (max-width: 520px) { .u3b-chart { padding: 14px; } .u3b-row { grid-template-columns: 1fr; gap: 5px; } .u3b-chart h3 { font-size: 1.05rem; } }
+      @media print { .u3b-chart { break-inside: avoid; border-radius: 0; } .u3b-row-bar { border-color: var(--edge); } }
+      /* U3b end */
+      /* U5 begin */
+      .u3a-svg .u3a-track { fill: var(--input); stroke: var(--edge); stroke-width: 1; vector-effect: non-scaling-stroke; }
+      .u3a-svg .u3a-mark rect { stroke: none; }
+      .u3a-svg .u3a-mark .u3a-missing { stroke: var(--edge); }
+      .u3a-svg .u3a-mark[data-native-key="tic"] rect { fill: var(--muted); opacity: .3; }
+      .u3a-key[data-native-key="tic"] i { background: var(--muted); opacity: .3; }
+      .u3a-svg .u3a-tic-line { stroke: var(--edge); vector-effect: non-scaling-stroke; }
+      .u3a-card.gap .u3a-reading-meta { align-items: flex-start; }
+      .u3a-card.gap .u3a-value { flex-shrink: 1; overflow-wrap: anywhere; }
+      .u5-guide { margin: 18px 0 24px; padding: 24px; border: 1px solid var(--edge); border-radius: var(--radius); background: var(--surface); }
+      .u5-guide h3 { margin: 0 0 10px; font-size: 1.25rem; }
+      .u5-guide h4 { margin: 0 0 6px; font-size: .96rem; }
+      .u5-guide p { margin: 0 0 12px; line-height: 1.6; }
+      .u5-guide p:last-child { margin-bottom: 0; }
+      .u5-definitions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 28px; margin-top: 20px; }
+      .u5-definition { border-left: 3px solid var(--edge); padding-left: 14px; min-width: 0; }
+      .u5-definition p, .u5-gap p { color: var(--muted); font-size: .9rem; }
+      .u5-gap { margin: 18px 0; }
+      .u5-base { padding-top: 16px; border-top: 1px solid var(--edge); font-size: .9rem; }
+      @media (max-width: 600px) {
+        .u5-guide { padding: 16px; }
+        .u5-definitions { grid-template-columns: 1fr; gap: 18px; }
+        .u3a-card.gap .u3a-reading-meta { display: block; margin-top: 8px; }
+        .u3a-card.gap .u3a-reading-meta > span { max-width: none; display: block; }
+        .u3a-card.gap .u3a-value { max-width: 100%; text-align: left; }
+      }
+      @media print { .u5-guide { break-inside: auto; } .u5-definition, .u5-gap { break-inside: avoid; } }
+      /* U5 end */
     </style>
     <style>
       .rank-row {
@@ -2709,6 +2816,54 @@
       .run-hover-row.is-active {
         color: var(--accent);
       }
+      /* U3c begin */
+      #family-figures .u3c-figure { grid-column:1 / -1; min-width:0; margin:0; padding:22px 0; border-top:1px solid var(--edge); }
+      .u3c-heading { margin:0 0 4px; font-size:1.15rem; font-weight:600; }
+      .u3c-base { color:var(--muted); margin:0 0 16px; max-width:78ch; }
+      .u3c-plot { min-width:0; }
+      .u3c-svg { display:block; width:100%; overflow:visible; }
+      .u3c-svg text { font-family:inherit; fill:var(--muted); font-size:12px; stroke:none; paint-order:normal; }
+      .u3c-grid { stroke:var(--edge); stroke-width:1; }
+      .u3c-hit { cursor:pointer; outline:none; }
+      .u3c-hit:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+      .u3c-hit:hover { filter:brightness(1.12); }
+      .u3c-hit > rect,.u3c-hit > circle[fill="transparent"] { stroke:none; }
+      .u3c-legend { max-width:78ch; margin:14px 0 0; color:var(--muted); font-size:.9rem; }
+      .u3c-axis-label { color:var(--muted); font-size:.85rem; text-align:center; margin:6px 0; }
+      .u3c-row { display:grid; grid-template-columns:minmax(145px,24%) minmax(100px,1fr) 96px; align-items:center; gap:12px; margin:12px 0; min-width:0; }
+      .u3c-row-name { min-width:0; overflow-wrap:anywhere; font-weight:600; }
+      .u3c-run { display:block; color:var(--muted); font-size:.78rem; font-weight:400; }
+      .u3c-row-value { font-variant-numeric:tabular-nums; text-align:right; overflow-wrap:anywhere; }
+      .u3c-row .u3c-svg { height:46px; }
+      .u3c-key { display:flex; flex-wrap:wrap; gap:8px 18px; color:var(--muted); font-size:.85rem; margin:12px 0; }
+      .u3c-key-item { display:inline-flex; align-items:center; gap:7px; }
+      .u3c-swatch { display:inline-block; width:12px; height:12px; border-radius:2px; background:var(--s1); }
+      .u3c-rings { display:grid; grid-template-columns:minmax(250px,40%) minmax(0,1fr); align-items:start; gap:24px; }
+      .u3c-ring-key { display:grid; gap:7px; padding:0; list-style:none; margin:0; }
+      .u3c-ring-key button { width:100%; padding:7px 9px; text-align:left; border:0; background:transparent; color:var(--ink); border-radius:4px; font:inherit; cursor:pointer; }
+      .u3c-ring-key button:hover { background:var(--hover); }
+      .u3c-ring-key button:focus-visible,.u3c-values summary:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+      .u3c-values { margin-top:14px; color:var(--muted); }
+      .u3c-values summary { cursor:pointer; width:max-content; max-width:100%; padding:4px 0; }
+      .u3c-values table { width:100%; border-collapse:collapse; margin-top:8px; color:var(--ink); font-size:.85rem; }
+      .u3c-values th,.u3c-values td { text-align:left; vertical-align:top; padding:7px; border-bottom:1px solid var(--edge); overflow-wrap:anywhere; }
+      .u3c-values td:first-child { max-width:180px; }
+      .u3c-values td:not(:first-child) { font-variant-numeric:tabular-nums; }
+      .u3c-empty { margin:12px 0; color:var(--muted); }
+      @media(max-width:600px) {
+        .u3c-row { grid-template-columns:minmax(0,1fr) 82px; gap:2px 10px; margin:18px 0; }
+        .u3c-row-name { grid-column:1 / -1; }
+        .u3c-rings { grid-template-columns:minmax(0,1fr); gap:18px; }
+        .u3c-heading { font-size:1.05rem; }
+        .u3c-values th,.u3c-values td { padding:5px; }
+      }
+      @media print {
+        #family-figures .u3c-figure { break-inside:avoid; }
+        .u3c-values { display:block; }
+        .u3c-hit { filter:none; }
+      }
+      /* U3c end */
+
     </style>
     <style>
       /* U1 begin */
@@ -3019,26 +3174,65 @@
         </section>
         </div>
         <div class="report-panel" id="panel-recovery" role="tabpanel" aria-labelledby="tab-recovery" tabindex="0" hidden>
+          <div class="section-title">
+            <h2 id="evidence-title">Signal recovery</h2>
+            <button class="info" id="signal-info" aria-label="Explain signal recovery readings and gaps">i</button>
+          </div>
+        <section class="u5-guide" id="u5-readings">
+          <h3>Four readings, one reference total</h3>
+          <p>Each reading below is a percentage of that run's recorded total ion current (TIC). They are different views of the signal and should not be added together.</p>
+          <p>A <strong>peptide feature</strong> is one peptide at one charge in one elution peak, counted once. Another charge or elution peak is a separate feature.</p>
+          <div class="u5-definitions">
+            <div class="u5-definition" data-reading="m0">
+              <h4>M+0 only</h4>
+              <p>The first, monoisotopic peak of the identified and de novo peptide features, divided by the run's TIC. Heavier isotope peaks of those same features are left out of this reading.</p>
+            </div>
+            <div class="u5-definition" data-reading="measured">
+              <h4>Measured envelope of the peptide features</h4>
+              <p>The measured isotope peaks of those same features, including M+0, divided by the run's TIC. The bar label gives the recorded isotope limit; an isotope without accepted measured signal receives no credit.</p>
+            </div>
+            <div class="u5-definition" data-reading="detector">
+              <h4>Detector isotope envelopes</h4>
+              <p>Isotope patterns found directly in the MS1 scans, with or without an accepted peptide sequence, divided by the run's TIC. This is an independent measurement with its own acceptance rules; it is not calibrated to a peptide false discovery rate (FDR).</p>
+            </div>
+            <div class="u5-definition" data-reading="tic">
+              <h4>TIC: the reference total</h4>
+              <p>The ion current recorded for the run's MS1 scans, shown as 100%. It includes signal with and without assigned peptide features.</p>
+            </div>
+          </div>
+        </section>
         <section
           class="section"
           id="evidence-section"
           aria-labelledby="evidence-title"
         >
-          <div class="section-title">
-            <h2 id="evidence-title">How much of the signal do we explain?</h2>
-            <button
-              class="info"
-              id="signal-info"
-              aria-label="About the signal denominator"
-            >
-              i
-            </button>
-          </div>
           <div class="evidence-grid">
             <div class="evidence-panel" id="signal-panel"></div>
           </div>
         </section>
         <div id="recovery-figures" class="figure-grid"></div>
+        <section class="u5-guide" id="u5-gaps">
+          <h3>How to read the gaps</h3>
+          <div class="u5-gap" data-gap="isotopes">
+            <h4>From M+0 to the measured envelope</h4>
+            <p>The increase comes from including the measured heavier isotope peaks of the same peptide features. It does not represent additional peptide identifications or newly found proteins.</p>
+          </div>
+          <div class="u5-gap" data-gap="detector">
+            <h4>Between peptide features and the detector</h4>
+            <p>The detector can find isotope patterns that did not become accepted identified or de novo peptide features. The two methods make independent selections, so subtracting their totals does not measure a validated pool of unidentified peptides.</p>
+          </div>
+          <div class="u5-gap" data-gap="tic">
+            <h4>Between the detector and TIC</h4>
+            <p>This is signal outside the detector's accepted isotope patterns. The chart alone cannot classify the whole gap as noise, non-peptide material or biological signal, and the readings are not a biological partition of TIC.</p>
+          </div>
+          <p>The readings need not form perfectly nested sets. If their order is unexpected, inspect the stored run and method; the chart preserves the recorded values. A missing TIC or detector result stays unavailable, rather than becoming a zero measurement.</p>
+          <div class="u5-base">
+            <h4>Runs, pooling and the de novo addition</h4>
+            <p>Individual runs each use their own TIC. <strong>All runs pooled</strong> divides the summed signal by the summed TIC; it is not the mean of the run percentages, and these charts have no whiskers.</p>
+            <p>In Signal recovery components, the added de novo <strong>percentage points</strong> use pooled TIC. The <strong>relative increase</strong> uses the identified envelope as its baseline, so it answers a different question: how much signal de novo adds compared with identification alone. It is unavailable when that baseline is zero.</p>
+            <p>Normalize to changes the family charts. The recovery charts keep the fixed reference totals named beside their readings; select a bar or value for the exact number and its reference total.</p>
+          </div>
+        </section>
         </div>
         <div class="report-panel" id="panel-mass" role="tabpanel" aria-labelledby="tab-mass" tabindex="0" hidden>
           <h2>Mass and isotopes</h2>
@@ -4445,6 +4639,124 @@
             figure.append(button, legend);
             host.append(figure);
           }
+          /* U3c begin */
+          const u3cFigures = data.familyFigures?.figures || [];
+          const u3cHost = $("family-figures");
+          const u3cPalette = ["var(--s1)","var(--s4)","var(--s3)","var(--s2)","var(--s5)","var(--s6)"];
+          const u3cNumber = metric => val(metric?.exact);
+          const u3cExact = metric => metric && exists(metric.exact) ? text(metric.exact) : "Not available";
+          const u3cDisplay = metric => metric && exists(metric.display) ? text(metric.display) : "Not available";
+          const u3cUnit = metric => metric && data.fields[metric.exact]?.unit || "";
+          const u3cAmount = metric => u3cExact(metric) + (u3cUnit(metric) ? " " + u3cUnit(metric) : "");
+          function u3cName(row, full = false) { return typeof familyLabel === "function" ? familyLabel(row.name, full) : text(row.name); }
+          function u3cView(figure) { return figure.views[figure.usesNormalization ? (hasShareBases ? state.basis : "credited") : "fixed"]; }
+          function u3cInfo(figure, view, row, part = null) {
+            const title = part ? text(part.name) + ": " + u3cName(row, true) : u3cName(row, true);
+            const list = node("dl");
+            const entry = (name, value) => list.append(node("dt","",name),node("dd","",value));
+            entry("Base",view.basis);
+            entry(view.xLabel || "Stored value",u3cAmount(part ? part.value : row.x));
+            if (!part && row.y) entry(view.yLabel || "Database-search sequences (separate set)",u3cAmount(row.y));
+            if (!part && row.lower && row.upper) entry("One sample SD below to above the mean",u3cAmount(row.lower)+" to "+u3cAmount(row.upper));
+            entry("Runs",row.runText);
+            if (!part) for (const item of row.parts || []) entry(text(item.name),u3cAmount(item.value));
+            popup(title,[node("p","",view.legend),list]);
+          }
+          function u3cTarget(element, figure, view, row, part = null) {
+            const title=(part ? text(part.name) + ": " + u3cName(row, true) : u3cName(row, true))+": "+u3cAmount(part ? part.value : row.x)+"; "+view.basis+"; "+row.runText;
+            element.classList.add("u3c-hit"); element.setAttribute("tabindex","0"); element.setAttribute("role","button");
+            element.setAttribute("aria-label",title+". Open exact stored values.");
+            element.setAttribute("title",title+". Open exact stored values; this changes only this report view.");
+            if (element.namespaceURI === "http://www.w3.org/2000/svg") {const label=svg("title");label.textContent=element.getAttribute("title");element.append(label);}
+            element.addEventListener("click",()=>u3cInfo(figure,view,row,part));
+            element.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();u3cInfo(figure,view,row,part);}});
+            const tip=$("chart-hover");
+            const show=()=>{
+              tip.replaceChildren(node("strong","",part?text(part.name):u3cName(row,true)),node("div","",u3cAmount(part?part.value:row.x)),node("div","",view.basis),node("div","",row.runText));
+              if(!part && row.y)tip.append(node("div","",(view.yLabel||"Search sequences (separate set)")+": "+u3cAmount(row.y)));
+              tip.hidden=false;const box=element.getBoundingClientRect();
+              tip.style.left=Math.max(8,Math.min(box.left,innerWidth-tip.offsetWidth-8))+"px";
+              tip.style.top=Math.max(8,Math.min(box.bottom+8,innerHeight-tip.offsetHeight-8))+"px";
+            };
+            element.addEventListener("pointerenter",show);element.addEventListener("focus",show);
+            element.addEventListener("pointerleave",()=>tip.hidden=true);element.addEventListener("blur",()=>tip.hidden=true);
+          }
+          function u3cKey(host, entries) {
+            const key=node("div","u3c-key");
+            entries.forEach((name,index)=>{const item=node("span","u3c-key-item"),swatch=node("i","u3c-swatch");swatch.style.background=u3cPalette[index%u3cPalette.length];item.append(swatch,node("span","",name));key.append(item);});
+            host.append(key);
+          }
+          function u3cBars(figure,view,host) {
+            const width=640,left=0,right=640,range=view.maximumX-view.minimumX||1;
+            const X=value=>left+(right-left)*(value-view.minimumX)/range;
+            for(const row of view.rows){
+              const wrap=node("div","u3c-row"),name=node("div","u3c-row-name",u3cName(row));name.append(node("small","u3c-run",row.runText));
+              const canvas=svg("svg",{class:"u3c-svg",viewBox:"0 0 640 46",preserveAspectRatio:"none","aria-hidden":"false"});
+              if(u3cNumber(row.x)!==null){
+                const group=svg("g"),zero=X(0);group.append(svg("rect",{x:0,y:1,width:640,height:44,fill:"transparent"}));
+                if(row.parts.length){let at=zero;row.parts.forEach((part,index)=>{const amount=u3cNumber(part.value)||0,w=(right-left)*amount/range;group.append(svg("rect",{x:at,y:12,width:Math.max(0,w),height:22,rx:2,fill:part.unresolved?"var(--s6)":u3cPalette[index%u3cPalette.length]}));at+=w;});}
+                else group.append(svg("rect",{x:zero,y:12,width:Math.max(0,X(u3cNumber(row.x))-zero),height:22,rx:2,fill:"var(--s1)"}));
+                if(row.lower&&row.upper){const a=X(u3cNumber(row.lower)),b=X(u3cNumber(row.upper));group.append(svg("path",{d:`M ${a} 23 H ${b} M ${a} 16 V 30 M ${b} 16 V 30`,stroke:"var(--ink)","stroke-width":1.5,fill:"none","vector-effect":"non-scaling-stroke"}));}
+                u3cTarget(group,figure,view,row);canvas.append(group);
+              }
+              const value=node("div","u3c-row-value",u3cDisplay(row.x)+(u3cUnit(row.x)==="%"?"%":""));
+              wrap.append(name,canvas,value);host.append(wrap);
+            }
+            if(figure.kind!=="subclasses"&&view.rows.some(row=>row.parts.length))u3cKey(host,view.rows.find(row=>row.parts.length).parts.map(part=>text(part.name)));
+            host.append(node("p","u3c-axis-label",view.xLabel));
+          }
+          function u3cScatter(figure,view,host) {
+            const width=Math.max(280,host.getBoundingClientRect().width||700),height=320,left=52,right=width-20,top=22,bottom=268;
+            const canvas=svg("svg",{class:"u3c-svg",viewBox:`0 0 ${width} ${height}`,role:"group","aria-label":figure.title});
+            const X=value=>left+(right-left)*(value-view.minimumX)/(view.maximumX-view.minimumX||1),Y=value=>bottom-(bottom-top)*value/(view.maximumY||1);
+            for(const tick of view.xTicks){const x=X(tick.position);canvas.append(svg("path",{class:"u3c-grid",d:`M ${x} ${top} V ${bottom}`}));const label=svg("text",{x,y:bottom+22,"text-anchor":"middle"});label.textContent=tick.label;canvas.append(label);}
+            for(const tick of view.yTicks){const y=Y(tick.position);canvas.append(svg("path",{class:"u3c-grid",d:`M ${left} ${y} H ${right}`}));const label=svg("text",{x:left-8,y:y+4,"text-anchor":"end"});label.textContent=tick.label;canvas.append(label);}
+            view.rows.forEach((row,index)=>{if(u3cNumber(row.x)===null||u3cNumber(row.y)===null)return;const group=svg("g"),x=X(u3cNumber(row.x)),y=Y(u3cNumber(row.y));group.append(svg("circle",{cx:x,cy:y,r:14,fill:"transparent"}),svg("circle",{cx:x,cy:y,r:6,fill:u3cPalette[index%u3cPalette.length],stroke:"var(--surface)","stroke-width":2}));u3cTarget(group,figure,view,row);canvas.append(group);});
+            host.append(node("p","u3c-axis-label",view.yLabel),canvas,node("p","u3c-axis-label",view.xLabel));
+          }
+          function u3cArc(cx,cy,inner,outer,start,sweep){
+            const point=(radius,angle)=>[cx+radius*Math.cos(angle*Math.PI/180),cy+radius*Math.sin(angle*Math.PI/180)];
+            if(sweep>=360-1e-8)sweep=359.999999;
+            const a=point(outer,start),b=point(outer,start+sweep),c=point(inner,start+sweep),d=point(inner,start),large=sweep>180?1:0;
+            return `M ${a} A ${outer} ${outer} 0 ${large} 1 ${b} L ${c} A ${inner} ${inner} 0 ${large} 0 ${d} Z`;
+          }
+          function u3cRings(figure,view,host){
+            const layout=node("div","u3c-rings"),plot=node("div"),list=node("ul","u3c-ring-key"),canvas=svg("svg",{class:"u3c-svg",viewBox:"0 0 340 340",role:"group","aria-label":figure.title});
+            let start=-90;
+            view.rows.forEach((row,index)=>{
+              const sweep=(u3cNumber(row.x)||0)*3.6,colour=u3cPalette[index%u3cPalette.length];
+              if(sweep>0){const arc=svg("path",{d:u3cArc(170,170,77,122,start,sweep),fill:colour,stroke:"var(--surface)","stroke-width":2});u3cTarget(arc,figure,view,row);canvas.append(arc);}
+              let partStart=start;
+              for(const part of row.parts){const partSweep=(u3cNumber(part.value)||0)*3.6;if(partSweep>0){const arc=svg("path",{d:u3cArc(170,170,127,158,partStart,partSweep),fill:part.unresolved?"var(--s6)":colour,opacity:part.unresolved?1:.68,stroke:"var(--surface)","stroke-width":2});u3cTarget(arc,figure,view,row,part);canvas.append(arc);}partStart+=partSweep;}
+              const item=node("li"),button=node("button"),swatch=node("i","u3c-swatch");swatch.style.background=colour;button.append(swatch,document.createTextNode(" "+u3cName(row)+" "+u3cDisplay(row.x)+"%"));u3cTarget(button,figure,view,row);item.append(button);list.append(item);start+=sweep;
+            });
+            const center=svg("text",{x:170,y:166,"text-anchor":"middle"});center.textContent="Families";const subtitle=svg("text",{x:170,y:185,"text-anchor":"middle"});subtitle.textContent="and subclasses";canvas.append(center,subtitle);plot.append(canvas);layout.append(plot,list);host.append(layout);
+          }
+          function u3cValues(figure,view,host){
+            const details=node("details","u3c-values"),summary=node("summary","","Show exact values");summary.title="Inspect every supplied value and its recorded base. Only this report view changes.";
+            const table=node("table"),head=node("tr");for(const label of ["Family or group",view.xLabel,view.yLabel||"Source parts and spread"]){const cell=node("th","",label);cell.scope="col";cell.title="Identify the stored values used by this chart column. Reading the table changes nothing.";head.append(cell);}const thead=node("thead"),body=node("tbody");thead.append(head);
+            for(const row of view.rows){const line=node("tr"),other=node("td");if(row.y)other.append(node("div","",u3cAmount(row.y)));if(row.lower&&row.upper)other.append(node("div","","One sample SD: "+u3cAmount(row.lower)+" to "+u3cAmount(row.upper)));for(const part of row.parts)other.append(node("div","",text(part.name)+": "+u3cAmount(part.value)));line.append(node("td","",u3cName(row,true)+" ("+row.runText+")"),node("td","",u3cAmount(row.x)),other);body.append(line);}table.append(thead,body);details.append(summary,table);host.append(details);
+          }
+          function renderU3cFamilies(){
+            for(const previous of u3cHost.querySelectorAll(":scope > .u3c-figure"))previous.remove();
+            for(const figure of u3cFigures){
+              const view=u3cView(figure),card=node("figure","u3c-figure");card.dataset.nativeFamilyFigure=figure.id;card.dataset.kind=figure.kind;card.dataset.base=figure.usesNormalization?state.basis:"fixed";
+              card.append(node("h3","u3c-heading",figure.title));
+              if(!view){card.append(node("p","u3c-empty","The selected base is unavailable in the stored drawing data."));u3cHost.append(card);continue;}
+              card.append(node("p","u3c-base",view.basis));const plot=node("div","u3c-plot");card.append(plot);u3cHost.append(card);
+              if(!view.rows.length)plot.append(node("p","u3c-empty","No stored values are available for this figure."));
+              else if(figure.kind==="ring")u3cRings(figure,view,plot);
+              else if(figure.kind==="scatter"||figure.kind==="diversity")u3cScatter(figure,view,plot);
+              else u3cBars(figure,view,plot);
+              card.append(node("figcaption","u3c-legend chart-legend",view.legend));u3cValues(figure,view,card);
+            }
+          }
+          document.addEventListener("change",event=>{if(event.target?.name==="normalization-basis")renderU3cFamilies();});
+          let u3cWidth=0;
+          if("ResizeObserver" in window){const observer=new ResizeObserver(()=>{const width=u3cHost.clientWidth;if(width!==u3cWidth){u3cWidth=width;requestAnimationFrame(renderU3cFamilies);}});observer.observe(u3cHost);}
+          renderU3cFamilies();
+          /* U3c end */
+
           function figureLegend(fig) {
             const id = fig.sourceFigureId || "";
             if (/protein_coverage_/.test(id))
@@ -5371,7 +5683,7 @@
               node("p", "chart-legend", "Each bar shows the family signal credited in one run. Its percentage uses that run's whole measured signal as the denominator; runs are shown separately, with no averaging or whiskers." + fixedBaseLegend),
             );
             const gap = $("gap-panel");
-            gap.append(node("h3", "", "Database gap"));
+            gap.append(node("h3", "", "Share of measured peptide feature signal"));
             const rows = (data.databaseGap || []).filter(
               (r) => exists(r.name) && val(r.fraction) !== null,
             );
@@ -5380,20 +5692,23 @@
                 track = node("div", "gap-track"),
                 fill = node("div", "gap-fill");
               fill.style.background = "var(--s3)";
-              const v = val(r.fraction);
-              if (v !== null && v >= 0 && v <= 1)
-                fill.style.width = v * 100 + "%";
+              const percent = r.percent || (fields[r.fraction]?.unit === "%" ? r.fraction : null), v = val(percent);
+              if (v !== null && v >= 0 && v <= 100)
+                fill.style.width = v + "%";
               track.append(fill);
-              const value = metric(r.fraction);
+              const value = percent ? metric(percent) : node("span", "", "percentage not available");
               value.className = "gap-value metric-button";
-              row.append(field(r.name), track, value);
+              const family = field(r.name);
+              family.textContent = typeof familyLabel === "function" ? familyLabel(r.name) : family.textContent;
+              family.title = typeof familyLabel === "function" ? familyLabel(r.name, true) : family.textContent;
+              row.append(family, track, value);
               gap.append(row);
             }
             gap.append(
               node(
                 "p",
                 "chart-legend",
-                "Bars show the stored database-gap fractions with evidence pooled across runs. Each row uses its own recorded reference total, so compare rows only when those totals agree; no run-to-run whiskers are drawn." + fixedBaseLegend,
+                "The reference total is all measured peptide feature signal, identified and de novo, each counted once. These percentages pool the recorded runs; they are not run means and have no whiskers." + fixedBaseLegend,
               ),
             );
             if (rows.length) {
@@ -5402,15 +5717,16 @@
                 "quiet-button",
                 "Read the gap comparisons",
               );
+              b.title = "Show every stored gap comparison as a percentage of measured peptide feature signal. This opens details without changing the project.";
               b.onclick = () => {
                 const dl = node("dl");
                 for (const r of rows)
-                  dl.append(field(r.name, "dt"), field(r.fraction, "dd"));
+                  dl.append(field(r.name, "dt"), r.percent ? field(r.percent, "dd") : node("dd", "", "Percentage not available"));
                 popup("Database gap", [
                   node(
                     "p",
                     "",
-                    "Read each fraction against its own reference total.",
+                    "Each percentage uses all measured peptide feature signal, identified and de novo, as its reference total.",
                   ),
                   dl,
                 ]);
@@ -5420,7 +5736,167 @@
             host.hidden = !runs.length;
             gap.hidden = !rows.length;
             $("evidence-section").hidden = host.hidden && gap.hidden;
+            renderU3aSignalCharts();
           }
+          /* U3a begin */
+          function u3aColor(key) {
+            return ({ identified: "var(--s1)", denovo: "var(--s3)", world: "var(--s4)",
+              m0: "var(--s6)", measured: "var(--s1)", detector: "var(--s2)", tic: "var(--s5)",
+              combined: "var(--s4)" })[key] || "var(--s1)";
+          }
+          function u3aDescription(value) {
+            if (!Number.isFinite(value.value)) return value.unavailableReason || "This reading is not available.";
+            return value.label + ": " + value.exact + (value.unit === "area" ? " signal area" : "")
+              + "; reference: " + value.basis
+              + (value.familyShare ? "; " + value.familyShare.exact + " of " + value.familyShare.basis : "") + ".";
+          }
+          function u3aPopup(value, run) {
+            const details = node("dl");
+            for (const [label, text] of [["Reading", value.exact], ["Reference", value.basis],
+              ["Signal area", value.areaText], ["Reference total area", value.referenceText],
+              ["Share of this family's displayed total", value.familyShare?.exact], ["Family share availability", value.familyShare?.unavailableReason],
+              ["Availability", value.unavailableReason]])
+              if (text !== null && text !== undefined && text !== "") details.append(node("dt", "", label), node("dd", "", text));
+            popup(value.label, [node("p", "", typeof familyLabel === "function" ? familyLabel(run, true) : run), details]);
+          }
+          function u3aHover(value, run, anchor) {
+            const tip = $("chart-hover"), box = anchor.getBoundingClientRect();
+            tip.replaceChildren(node("strong", "", run), node("p", "", u3aDescription(value)));
+            tip.hidden = false;
+            tip.style.left = Math.max(12, Math.min(innerWidth - tip.offsetWidth - 12, box.left)) + "px";
+            tip.style.top = Math.max(12, Math.min(innerHeight - tip.offsetHeight - 12, box.bottom + 7)) + "px";
+          }
+          function u3aInteraction(element, value, run) {
+            element.setAttribute("aria-label", run + ": " + u3aDescription(value) + " Show exact reading.");
+            element.setAttribute("aria-describedby", "chart-hover");
+            element.onpointerenter = () => u3aHover(value, run, element);
+            element.onfocus = () => u3aHover(value, run, element);
+            element.onpointerleave = element.onblur = () => { $("chart-hover").hidden = true; };
+            element.onclick = () => { $("chart-hover").hidden = true; u3aPopup(value, run); };
+            element.onkeydown = event => {
+              if (event.key === "Escape") { $("chart-hover").hidden = true; return; }
+              if (element.tagName.toLowerCase() !== "button" && (event.key === "Enter" || event.key === " ")) {
+                event.preventDefault(); element.onclick();
+              }
+            };
+          }
+          function u3aMetric(value, run) {
+            const button = node("button", "u3a-value", value.text);
+            button.type = "button";
+            button.title = u3aDescription(value) + " Open the exact reading without changing the project.";
+            button.dataset.nativeValue = Number.isFinite(value.value) ? value.value : "";
+            button.dataset.nativeKey = value.key;
+            u3aInteraction(button, value, run);
+            return button;
+          }
+          function u3aBars(parts, maximum, run, stacked, percent) {
+            const plot = svg("svg", { viewBox: "0 0 1000 20", preserveAspectRatio: "none", class: "u3a-svg",
+              role: "group", "aria-label": run + (stacked ? ": signal components" : ": signal reading") });
+            plot.append(svg("rect", { x: 0, y: 0, width: 1000, height: 20, rx: 4, class: "u3a-track" }));
+            let left = 0;
+            for (const value of parts) {
+              const valid = Number.isFinite(value.value),
+                width = valid ? Math.max(0, value.value / (maximum > 0 ? maximum : 1) * 1000) : 0,
+                group = svg("g", { tabindex: 0, role: "button", class: "u3a-mark" });
+              group.dataset.nativeKey = value.key;
+              group.dataset.nativeValue = valid ? value.value : "";
+              const title = svg("title"); title.textContent = u3aDescription(value) + " Open the exact reading without changing the project."; group.append(title);
+              group.append(svg("rect", valid ? { x: left, y: 1, width, height: 18, rx: 3, fill: u3aColor(value.key) }
+                : { x: 1, y: 1, width: 998, height: 18, rx: 3, class: "u3a-missing" }));
+              u3aInteraction(group, value, run); plot.append(group);
+              // Position only. All scientific values, including totals and percentages, are supplied by the program.
+              if (stacked) left += width;
+            }
+            if (percent && maximum >= 100) plot.append(svg("line", { x1: 100 / maximum * 1000, x2: 100 / maximum * 1000,
+              y1: -2, y2: 22, class: "u3a-tic-line", "aria-hidden": "true" }));
+            return plot;
+          }
+          function u3aTable(chart) {
+            const details = node("details", "u3a-details"), summary = node("summary", "", "All exact readings");
+            summary.title = "Show the exact program readings and the reference total for each row. This changes only the report view.";
+            const table = node("table", "u3a-table"), head = node("thead"), titles = node("tr"), body = node("tbody");
+            for (const label of ["Run or family", "Reading", "Exact value and reference"]) {
+              const cell = node("th", "", label); cell.scope = "col";
+              cell.title = label === "Exact value and reference" ? "The unrounded program reading and its named signal base. Selecting text changes no stored result."
+                : "Names the stored run, family or reading represented in this row. Selecting text changes no stored result.";
+              titles.append(cell);
+            }
+            head.append(titles);
+            for (const row of [...(chart.rows || []), { name: "All runs pooled", parts: chart.notes || [] }])
+              for (const value of [...row.parts, ...(row.details || []), ...(row.total ? [row.total] : [])]) {
+                const line = node("tr"), reading = node("td");
+                reading.append(node("span", "", value.exact), node("small", "", value.basis));
+                if (value.familyShare) reading.append(node("small", "", value.familyShare.exact + "; " + value.familyShare.basis));
+                if (value.unavailableReason) reading.append(node("small", "", value.unavailableReason));
+                const name = node("td", "", chart.kind === "gap" && typeof familyLabel === "function" ? familyLabel(row.name, true) : row.name);
+                name.title = chart.kind === "gap" && typeof familyLabel === "function" ? familyLabel(row.name, true) : row.name;
+                line.append(name, node("td", "", value.label), reading); body.append(line);
+              }
+            table.append(head, body); details.append(summary, table); return details;
+          }
+          function renderU3aSignalCharts() {
+            const charts = data.signalCharts || [], recovery = $("recovery-figures"), gap = $("gap-figures");
+            for (const chart of charts) {
+              const card = node("section", "u3a-card " + chart.kind), legend = node("div", "u3a-legend");
+              card.dataset.nativeChart = chart.id;
+              card.append(node("h3", "", chart.kind === "gap" ? "Signal sources by family" : chart.title), node("p", "u3a-basis", chart.basis));
+              const keys = new Set();
+              for (const row of chart.rows || [])
+                for (const value of row.parts)
+                  if (!keys.has(value.key)) {
+                    keys.add(value.key); const key = node("span", "u3a-key"), chip = node("i");
+                    key.dataset.nativeKey = value.key;
+                    chip.style.setProperty("--u3a-color", u3aColor(value.key)); chip.setAttribute("aria-hidden", "true");
+                    key.append(chip, document.createTextNode(value.label)); legend.append(key);
+                  }
+              card.append(legend);
+              for (const row of chart.rows || []) {
+                const host = node("div", "u3a-run" + (row.isPooled ? " pooled" : "")), heading = node("div", "u3a-run-head");
+                host.dataset.nativeRun = row.name;
+                const name = node("h4", "u3a-run-name", chart.kind === "gap" && typeof familyLabel === "function" ? familyLabel(row.name) : row.name);
+                name.title = chart.kind === "gap" && typeof familyLabel === "function" ? familyLabel(row.name, true) : row.name;
+                heading.append(name);
+                if (row.total) heading.append(u3aMetric(row.total, row.name));
+                host.append(heading);
+                if (chart.kind === "by-run" || chart.kind === "gap") {
+                  host.append(u3aBars(row.parts, chart.maximum, row.name, true, chart.kind === "by-run"));
+                  for (const value of row.parts) {
+                    const label = node("div", "u3a-reading-meta");
+                    label.append(node("span", "", value.label), u3aMetric(value, row.name)); host.append(label);
+                  }
+                } else for (const value of row.parts) {
+                  const reading = node("div", "u3a-reading"), label = node("div", "u3a-reading-meta");
+                  label.append(node("span", "", value.label), u3aMetric(value, row.name));
+                  reading.append(label, u3aBars([value], chart.maximum, row.name, false, true)); host.append(reading);
+                }
+                card.append(host);
+              }
+              if ((chart.notes || []).length) {
+                const notes = node("div", "u3a-notes");
+                for (const value of chart.notes) {
+                  const line = node("div", "u3a-note"), label = node("span", "", value.label);
+                  label.append(node("small", "", value.basis)); line.append(label, u3aMetric(value, "All runs pooled")); notes.append(line);
+                }
+                card.append(notes);
+              }
+              if (!(chart.rows || []).length) card.append(node("p", "fine-print", "No native readings are included for this chart."));
+              card.append(node("p", "u3a-caption chart-legend", chart.legend + fixedBaseLegend));
+              if ((chart.rows || []).length) card.append(u3aTable(chart));
+              (chart.kind === "gap" ? gap : recovery).append(card);
+            }
+            if (!charts.some(chart => chart.kind !== "gap")) recovery.append(node("p", "fine-print", "No interactive recovery chart data are included in this report."));
+            if (!charts.some(chart => chart.kind === "gap")) gap.append(node("p", "fine-print", "No interactive Database gap chart data are included in this report."));
+          }
+          let u3aPrintDetails = [];
+          window.addEventListener("beforeprint", () => {
+            u3aPrintDetails = [...document.querySelectorAll(".u3a-details")].map(element => [element, element.open]);
+            for (const [element] of u3aPrintDetails) element.open = true;
+          });
+          window.addEventListener("afterprint", () => {
+            for (const [element, open] of u3aPrintDetails) element.open = open;
+            u3aPrintDetails = [];
+          });
+          /* U3a end */
           function help(id, title, body) {
             $(id).onclick = () => popup(title, [node("p", "", body)]);
           }
@@ -5435,11 +5911,17 @@
             "Each bar shows the mean of its available runs, and each dot is one run. The shaded capsule spans the lowest to highest run, not a confidence interval. Pick a run below to highlight it.",
           );
           help("spread-info", "Reading Spread", "Sorts families by how much their share varies from run to run (sample SD in percentage points). It describes disagreement between runs, not a confidence interval.");
-          help(
-            "signal-info",
-            "The reference total matters",
-            "Credited signal compared with whole measured signal.",
-          );
+          /* U5 begin */
+          $("signal-info").title = "Explain the four signal readings, their reference totals and the gaps between them. This opens help without changing the project.";
+          $("signal-info").setAttribute("aria-label", "Explain signal recovery readings and gaps");
+          $("signal-info").onclick = () => {
+            const content = [];
+            for (const id of ["u5-readings", "u5-gaps"]) {
+              const copy = $(id).cloneNode(true); copy.removeAttribute("id"); content.push(copy);
+            }
+            popup("Reading signal recovery", content);
+          };
+          /* U5 end */
           $("footer-meta").textContent = "FamilyQuant";
           let printState = null;
           window.addEventListener("beforeprint", () => {
@@ -5461,9 +5943,183 @@
           renderFamily();
           updateSelectionSummary();
           renderSignal();
+          /* U3b begin */
+          function renderMassQuality() {
+            const model = data.massQualityCharts;
+            if (!model) return;
+            const tip = $("chart-hover");
+            function hint(mark, heading, lines) {
+              mark.setAttribute("tabindex", "0");
+              mark.setAttribute("role", "button");
+              const description = [heading, ...lines].join(". ");
+              mark.setAttribute("aria-label", description);
+              const title = svg("title"); title.textContent = description; mark.append(title);
+              function show() {
+                tip.replaceChildren(node("strong", "", heading), ...lines.map(line => node("div", "", line)));
+                tip.hidden = false;
+                const box = mark.getBoundingClientRect();
+                tip.style.left = Math.max(8, Math.min(innerWidth - Math.min(360, innerWidth - 16) - 8, box.left)) + "px";
+                tip.style.top = Math.max(8, Math.min(innerHeight - tip.offsetHeight - 8, box.bottom + 8)) + "px";
+              }
+              mark.addEventListener("pointerenter", show);
+              mark.addEventListener("focus", show);
+              mark.addEventListener("click", event => { event.stopPropagation(); show(); });
+              mark.addEventListener("pointerleave", () => { if (document.activeElement !== mark) tip.hidden = true; });
+              mark.addEventListener("blur", () => { tip.hidden = true; });
+              mark.addEventListener("keydown", event => {
+                if (event.key === "Escape") { tip.hidden = true; event.preventDefault(); }
+                if (event.key === "Enter" || event.key === " ") { show(); event.preventDefault(); }
+              });
+            }
+            function card(host, id, title, legend) {
+              const article = node("article", "u3b-chart"); article.dataset.nativeChart = id;
+              const heading = node("h3", "", title), caption = node("p", "chart-legend", legend);
+              const plot = node("div", "u3b-plot"); article.append(heading, plot);
+              const keys = node("div", "u3b-keys");
+              const labels = id === "xic_by_mass.png" ? [["Identified", 1], ["De novo", 2]] : id === "isotopes_credited.png"
+                ? [["Under 1500 Da", 1], ["1500 to under 3000 Da", 2], ["3000 Da and above", 3]] : id === "de_novo_score_distribution.png"
+                ? [["Imported calls", "raw"], ["Retained calls", 2]] : id === "de_novo_peaks_deepnovo_agreement.png"
+                ? [["Identical sequence", 1], ["Different sequence; theoretical mass match", 2], ["Different theoretical mass", 3]] : id === "de_novo_accepted_score_agreement.png"
+                ? [["Exact sequence match (circles)", 1], ["Sequence mismatch (squares)", 3]] : [];
+              labels.forEach(([text, key]) => keys.append(node("span", "u3b-key u3b-key-" + key, text)));
+              if (labels.length) article.append(keys);
+              article.append(caption); host.append(article);
+              return plot;
+            }
+            function canvas(host, title, draw) {
+              function paint() {
+                const width = Math.max(280, host.clientWidth || 640), height = width < 500 ? 280 : 320;
+                const graph = svg("svg", { viewBox: `0 0 ${width} ${height}`, width: "100%", height, role: "group", "aria-label": title });
+                host.replaceChildren(graph); draw(graph, { left: 56, top: 36, width: width - 76, height: height - 94 });
+              }
+              paint();
+              if ("ResizeObserver" in window) new ResizeObserver(paint).observe(host);
+            }
+            function label(graph, x, y, value, anchor = "middle") {
+              const text = svg("text", { x, y, "text-anchor": anchor, class: "u3b-axis" }); text.textContent = value; graph.append(text);
+            }
+            function axes(graph, area, xName, yName) {
+              graph.append(svg("path", { d: `M${area.left} ${area.top}v${area.height}h${area.width}`, class: "u3b-axis-line" }));
+              label(graph, area.left + area.width / 2, area.top + area.height + 48, xName);
+              label(graph, area.left, 11, yName, "start");
+            }
+            function scatter(host, id, title, legend, points, xName, yName, limits) {
+              const plot = card(host, id, title, legend);
+              canvas(plot, title, (graph, area) => {
+                axes(graph, area, xName, yName);
+                if (!points.length) { label(graph, area.left + area.width / 2, area.top + area.height / 2, "No comparable points recorded"); return; }
+                const xLow = limits?.xLow ?? Math.min(0, ...points.map(p => p.x)), xHigh = limits?.xHigh ?? Math.max(1, ...points.map(p => p.x));
+                const yLow = limits?.yLow ?? Math.min(0, ...points.map(p => p.y)), yHigh = limits?.yHigh ?? Math.max(1, ...points.map(p => p.y));
+                label(graph, area.left, area.top + area.height + 20, String(xLow));
+                label(graph, area.left + area.width, area.top + area.height + 20, String(xHigh));
+                label(graph, area.left - 6, area.top + 5, String(yHigh), "end");
+                label(graph, area.left - 6, area.top + area.height, String(yLow), "end");
+                const marks = [];
+                for (const [index, point] of points.entries()) {
+                  const x = area.left + (point.x - xLow) / (xHigh - xLow || 1) * area.width;
+                  const y = area.top + area.height - (point.y - yLow) / (yHigh - yLow || 1) * area.height;
+                  const match = point.category !== "Mismatch" && point.category !== "DifferentMass";
+                  const mark = svg(match ? "circle" : "rect", match ? { cx: x, cy: y, r: 3.3 }
+                    : { x: x - 3, y: y - 3, width: 6, height: 6 });
+                  mark.setAttribute("class", "u3b-mark " + (point.category === "denovo" || point.category === "SameMassRearrangement" ? "u3b-series-2" : match ? "u3b-series-1" : "u3b-series-3"));
+                  hint(mark, point.category || "Peptide feature", [point.xText, point.yText, point.category === "identified" || point.category === "denovo" ? "One stored peptide feature representative; no percentage denominator" : "One stored precursor-call comparison; confidence scores are not probabilities"]);
+                  mark.setAttribute("tabindex", index === 0 ? "0" : "-1"); marks.push(mark); graph.append(mark);
+                }
+                graph.addEventListener("keydown", event => {
+                  if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+                  let i = marks.indexOf(document.activeElement); if (i < 0) return;
+                  marks[i].setAttribute("tabindex", "-1");
+                  i = event.key === "Home" ? 0 : event.key === "End" ? marks.length - 1
+                    : (i + (event.key === "ArrowRight" ? 1 : -1) + marks.length) % marks.length;
+                  marks[i].setAttribute("tabindex", "0"); marks[i].focus(); event.preventDefault();
+                });
+              });
+            }
+            function bars(host, id, title, legend, rows) {
+              const plot = card(host, id, title, legend);
+              const list = node("div", "u3b-rows"); plot.append(list);
+              for (const row of rows) {
+                const wrap = node("div", "u3b-row"), name = node("span", "u3b-row-name", row.label);
+                const button = node("button", "u3b-row-bar"), value = node("span", "u3b-row-value", row.text + (["%", "fraction"].includes(row.unit) ? "" : " " + row.unit));
+                button.type = "button"; button.title = row.label + ": " + row.text + ". " + row.base + "; select for details without changing the project.";
+                const maximum = Math.max(row.unit === "%" ? 100 : 1, ...rows.filter(r => r.unit === row.unit && r.value !== null).map(r => r.value));
+                const fill = node("span", "u3b-fill"); fill.style.width = row.value === null ? "0" : row.value / maximum * 100 + "%";
+                button.append(fill, value); button.dataset.value = row.value ?? "";
+                button.setAttribute("aria-label", row.label + ": " + row.text + (["fraction", "%"].includes(row.unit) ? "" : " " + row.unit) + ". " + row.base);
+                button.onclick = () => popup(row.label, [node("p", "", row.text + (["fraction", "%"].includes(row.unit) ? "" : " " + row.unit)), node("p", "", row.base)]);
+                wrap.append(name, button); list.append(wrap);
+              }
+            }
+            const massHost = $("mass-figures"), qualityHost = $("quality-figures");
+            if (model.signalByMass) {
+              const source = model.signalByMass;
+              scatter(massHost, "xic_by_mass.png", "Measured signal by neutral mass",
+                "Each dot is one stored peptide feature representative, pooled across runs before cross-side suppression. Identified and de novo are separate series. Height is measured envelope area on a logarithmic scale; it is not a percentage. Hover, tap or focus for exact values; arrow keys move between dots.",
+                source.points.map(p => ({ x: p.mass, y: p.logEnvelope, category: p.side, xText: p.massText, yText: p.envelopeText })),
+                "Neutral mass (Da)", "Envelope area, log10", { xLow: 0, xHigh: source.massMaximum, yLow: source.logMinimum, yHigh: source.logMaximum });
+            }
+            if (model.isotopes) {
+              const source = model.isotopes, title = "Measured isotopes per peptide feature";
+              const plot = card(massHost, "isotopes_credited.png", title,
+                "Bars count stored peptide feature representatives, pooled across runs. Each isotope is credited only where signal was measured. The three mass bands are under 1500 Da, 1500 to under 3000 Da, and 3000 Da and above; no run-mean whiskers are shown.");
+              canvas(plot, title, (graph, area) => {
+                axes(graph, area, "Number of credited isotopes", "Peptide features");
+                const slot = area.width / source.bins.length;
+                source.bins.forEach((bin, i) => {
+                  let y = area.top + area.height;
+                  bin.massBandCounts.forEach((count, band) => {
+                    const h = count / source.axisMaximum * area.height; y -= h;
+                    const mark = svg("rect", { x: area.left + slot * (i + .18), y, width: slot * .64, height: h, class: "u3b-mark u3b-series-" + (band + 1) });
+                    hint(mark, bin.label + " isotopes: " + source.massBands[band], [String(count) + " peptide features", bin.massBandShares[band], "Percentage base: all displayed peptide feature representatives"]);
+                    graph.append(mark);
+                  });
+                  label(graph, area.left + slot * (i + .5), area.top + area.height + 20, bin.label);
+                  label(graph, area.left + slot * (i + .5), y - 5, String(bin.total));
+                });
+              });
+            }
+            if (model.ionCurrentByMass) {
+              bars(massHost, "percent_ion_current_by_mass.png", "Where measured peptide signal lies",
+                "Mass ranges pool the displayed peptide feature representatives across runs. Each filled bar divides by all displayed peptide envelope signal, so these shares sum to 100%. The exact-value view also states the same range's share of pooled TIC; the two totals are different. No means or whiskers are shown.",
+                model.ionCurrentByMass.bins.map(bin => ({ label: bin.label, value: bin.share, text: bin.shareText, unit: "fraction", base: bin.envelopeText + ". " + bin.ticShareText })));
+            }
+            for (const chart of model.quality || []) {
+              if (chart.scores?.length) {
+                for (const source of chart.scores) {
+                  const title = source.sourceDisplayName + ": " + source.confidenceField;
+                  const plot = card(qualityHost, chart.id, title, chart.legend + " Recorded filters: " + source.cutoffLabel + "; length >= " + source.minLength + "; " + source.stretchLength + " consecutive local scores >= " + source.stretchFloor + ".");
+                  canvas(plot, title, (graph, area) => {
+                    axes(graph, area, source.confidenceField + " (source-native scale)", "Source calls");
+                    const maximum = Math.max(1, ...source.bins.map(b => b.rawRows)), slot = area.width / source.bins.length;
+                    const cutoff = svg("line", { x1: area.left + area.width * source.minimumConfidence / 100, x2: area.left + area.width * source.minimumConfidence / 100,
+                      y1: area.top, y2: area.top + area.height, class: "u3b-cutoff" });
+                    hint(cutoff, "Recorded acceptance cutoff", [source.cutoffLabel, "Source-native confidence score, not a probability"]);
+                    source.bins.forEach((bin, index) => {
+                      const x = area.left + slot * (index + .1), raw = bin.rawRows / maximum * area.height, kept = bin.passingAllCriteria / maximum * area.height;
+                      for (const [count, h, width, offset, cls, name] of [[bin.rawRows, raw, .8, 0, "u3b-raw", "Imported calls"], [bin.passingAllCriteria, kept, .45, .18, "u3b-series-2", "Retained calls"]]) {
+                        const mark = svg("rect", { x: x + slot * offset, y: area.top + area.height - h, width: slot * width, height: h, class: "u3b-mark " + cls });
+                        hint(mark, title + ": " + bin.label, [name + ": " + count, "Count of source calls in this confidence range; no percentage denominator", "Acceptance: " + source.cutoffLabel]); graph.append(mark);
+                      }
+                      if (index % 4 === 0) label(graph, x, area.top + area.height + 20, String(bin.lowerInclusive));
+                    });
+                    graph.append(cutoff);
+                  });
+                }
+              } else {
+                if (chart.points?.length) scatter(qualityHost, chart.id, chart.title, chart.legend, chart.points, chart.xLabel, chart.yLabel);
+                bars(qualityHost, chart.id + "-counts", chart.points?.length ? chart.title + ": recorded counts" : chart.title, chart.legend, chart.rows || []);
+              }
+            }
+            $("mass-empty").hidden = massHost.childElementCount > 0;
+            $("quality-empty").hidden = qualityHost.childElementCount > 0;
+          }
+          renderMassQuality();
+          /* U3b end */
+
           for (const figure of data.results || []) {
             const id = figure.sourceFigureId || "";
             if (id.startsWith("figure:family_contribution")) continue;
+            if (/recovery|signal_by_run|signal_uplift|database_gap/.test(id)) continue; // U3a: never substitute pictures in these tabs.
             const kind = /xic_by_mass|isotopes_credited|percent_ion_current_by_mass/.test(id) ? "mass"
               : /recovery|signal_by_run|signal_uplift/.test(id) ? "recovery"
               : /database_gap/.test(id) ? "gap" : "family";

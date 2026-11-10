@@ -20,6 +20,7 @@ namespace FamilyQuant
         private readonly List<AnalyticsPeptide> peptides;
         private readonly double tic;
         private readonly double binWidth;
+        public MassIsotopeChartData.Signal Data { get; }
 
 
         /// <param name="tic">The run (or grouped) total ion current, or 0 to omit the share-of-TIC overlay.</param>
@@ -32,6 +33,7 @@ namespace FamilyQuant
                 .Where(p => p != null && p.Envelope > 0 && p.Mass > 0).ToList();
             this.tic = tic > 0 ? tic : 0;
             this.binWidth = binWidth > 0 ? binWidth : 500;
+            Data = MassIsotopeChartData.SignalByMass(this.peptides, this.tic, this.binWidth);
             MinHeight = 240;
             Margin = new Thickness(0);
             ToolTip = "Peptide mass is binned along the bottom; filled bars show each band's share of credited peptide signal, summing to 100%, " +
@@ -64,23 +66,8 @@ namespace FamilyQuant
                 return;
             }
 
-            double maxMass = peptides.Max(p => p.Mass);
-            int binCount = Math.Max(1, (int)Math.Ceiling(maxMass / binWidth));
-            binCount = Math.Min(binCount, 40);   // never so many bars they are a pixel wide
-
-            var found = new double[binCount];
-            double totalFound = 0;
-            foreach (AnalyticsPeptide p in peptides)
-            {
-                int b = Math.Min(binCount - 1, (int)(p.Mass / binWidth));
-                found[b] += p.Envelope;
-                totalFound += p.Envelope;
-            }
-            if (totalFound <= 0) totalFound = 1;
-
-            double maxShare = 0;
-            for (int b = 0; b < binCount; b++) maxShare = Math.Max(maxShare, found[b] / totalFound);
-            double top = Math.Max(0.05, Math.Ceiling(maxShare * 20) / 20.0);   // round up to a 5% step
+            int binCount = Data.Bins.Count;
+            double top = Data.AxisMaximum;
 
             var gridPen = new Pen(Grid, 0.8);
             var axisPen = new Pen(pal.Axis, 1.0);
@@ -99,14 +86,14 @@ namespace FamilyQuant
             for (int b = 0; b < binCount; b++)
             {
                 double cx = plot.Left + (b + 0.5) * slot;
-                double share = found[b] / totalFound;
+                double share = Data.Bins[b].Share;
                 double h = Math.Min(1, share / top) * plot.Height;
                 var rect = new Rect(cx - barWidth / 2, plot.Bottom - h, barWidth, h);
                 dc.DrawRectangle(Found, null, rect);
 
                 if (tic > 0)
                 {
-                    double ticShare = found[b] / tic;
+                    double ticShare = Data.Bins[b].TicShare!.Value;
                     double th = Math.Min(1, ticShare / top) * plot.Height;
                     dc.DrawRectangle(null, new Pen(OfTic, 1.6),
                         new Rect(cx - barWidth / 2, plot.Bottom - th, barWidth, th));

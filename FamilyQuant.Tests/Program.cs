@@ -234,6 +234,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ResultsTopNPlacementTests(workDir));
             suite.Add(() => HtmlShareBasesTests());
             suite.Add(() => HtmlSharePartsTests(workDir));
+            suite.AddWithApplication(() => HtmlFamilyNativeTests(Path.Combine(workDir, "html-family-native")));
             suite.AddWithApplication(() => SharedPolicyChoiceTests(workDir));
             suite.Section("Recovery chart geometry - per-row normalisation and labels that tell the runs apart");
             suite.AddWithApplication(() => RecoveryChartGeometryTests(workDir));
@@ -502,6 +503,9 @@ namespace FamilyQuant.Tests
             suite.Add(() => HtmlReportNormalizationTests(Path.Combine(workDir, "html-report-normalization")));
             suite.AddWithApplication(() => HtmlCoverageCatalogTests(Path.Combine(workDir, "html-coverage-catalog")));
             suite.Add(() => HtmlRingBasesTests(Path.Combine(workDir, "html-ring-bases")));
+            suite.AddWithApplication(() => HtmlSignalRecoveryTests(Path.Combine(workDir, "html-signal-recovery")));
+            suite.AddWithApplication(() => HtmlMassQualityTests(Path.Combine(workDir, "html-mass-quality")));
+            suite.AddWithApplication(() => HtmlRecoveryExplanationTests(Path.Combine(workDir, "html-recovery-explanations")));
             suite.Add(() => DatabaseEntryCountTests(null));
             suite.Add(() => AssignmentPresenceCopyTests(null));
             suite.Add(() => HtmlDatabaseEntryTests());
