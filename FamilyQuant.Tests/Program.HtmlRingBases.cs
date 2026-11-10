@@ -33,6 +33,22 @@ internal static partial class Program
             return result;
         }
         var payload = Build();
+        var precise = Build(manifest =>
+        {
+            foreach (var run in manifest.FamilyRunShares!.Runs)
+            {
+                run.IdentifiedSignal *= 53.75 / 69.1734;
+                run.TotalIonCurrent *= 7 / 36.0917;
+            }
+            foreach (var family in manifest.FamilyRunShares.Families)
+                foreach (var run in family.Runs)
+                    run.ShareOfTic = run.Signal / manifest.FamilyRunShares.Runs.Single(total => total.Run == run.Run).TotalIonCurrent;
+        });
+        string Display(HtmlReportPayload data, string id) => data.Fields[data.Fields[id].Short!].Text;
+        Check("U9-polish ring shares use the existing G3 display and keep exact values", precise.Composition.RingBases["identifiedOnly"] is { Total: { } total, Outside: { } outside }
+            && precise.Fields[total].Text == "69.1734" && Display(precise, total) == "69.2"
+            && precise.Fields[outside].Text == "30.8266" && Display(precise, outside) == "30.8"
+            && Display(precise, precise.Composition.RingBases["tic"].Total!) == "36.1");
         double Value(HtmlReportPayload data, string? id) => id == null ? double.NaN : data.Fields[id].Value!.Value;
         foreach (var item in new[] { (Key: "identifiedOnly", Total: 53.75), (Key: "identifiedAndDeNovo", Total: 47.5),
             (Key: "detectorEnvelopes", Total: 76.25), (Key: "tic", Total: 7d) })
@@ -78,7 +94,8 @@ internal static partial class Program
         var withParts = payload with { Fields = fields, Composition = payload.Composition with { Families = payload.Composition.Families.Select(family => family.IsOthers ? family
             : family with { Parts = new[] { new HtmlFamilyPart("subclass", "part-a", "share-a"), new HtmlFamilyPart("subclass", "part-b", "share-b") } }).ToArray() } };
         HtmlReportBrowserChecks(Path.Combine(output, "page"), new[] { ("phone", withParts, 390), ("desktop", withParts, 1366),
-            ("excessive", excessive, 390), ("missing", missing, 390), ("zero", zero, 390), ("full", full, 390) }, """
+            ("excessive", excessive, 390), ("missing", missing, 390), ("zero", zero, 390), ("full", full, 390),
+            ("precision-phone", precise, 390), ("precision-desktop", precise, 1366) }, """
             const checks = {}, p = JSON.parse(d.getElementById('fq-data').textContent), fields = p.fields;
             const bases = ['identifiedOnly','identifiedAndDeNovo','detectorEnvelopes','tic'];
             const choices = [...d.querySelectorAll('input[name="normalization-basis"]')], paths = new Set();
@@ -87,6 +104,10 @@ internal static partial class Program
               choices[index].click();
               const ring = p.composition.ringBases[key];
               checks[key+'Centre'] = ring.total ? !!d.querySelector('#ring-value [data-metric="'+ring.total+'"]') : d.getElementById('ring-value').textContent==='Unavailable';
+              if (ring.total) {
+                const metric=d.querySelector('#ring-value [data-metric="'+ring.total+'"]'), short=fields[ring.total].short;
+                checks[key+'CompactCentre']=metric.textContent===fields[short].text+' %'&&metric.title.includes(fields[ring.total].text)&&w.getComputedStyle(metric).whiteSpace==='nowrap';
+              }
               checks[key+'Base'] = d.getElementById('ring-name').textContent.includes(key==='tic'?'TIC':key==='detectorEnvelopes'?'detector':key==='identifiedOnly'?'identified':'peptide-feature');
               if (!ring.canDraw) {
                 checks[key+'Unavailable'] = !d.getElementById('ring-unavailable').hidden && !d.querySelector('#composition-ring .ring-slice');
@@ -98,6 +119,7 @@ internal static partial class Program
               });
               const outside=d.querySelector('.ring-outside-key');
               checks[key+'Outside'] = !!outside&&outside.textContent.includes('Outside the shown families')&&outside.getClientRects().length>0;
+              checks[key+'CompactOutside']=outside.textContent.includes(fields[fields[ring.outside].short].text+' %')&&outside.title.includes(fields[ring.outside].text);
               outside.focus();outside.click();
               checks[key+'OutsideValue'] = !!d.querySelector('#dialog-body [data-fq-field="'+ring.outside+'"]');
               d.getElementById('dialog-close').click();
@@ -116,7 +138,7 @@ internal static partial class Program
             checks.noOverflow = d.documentElement.scrollWidth<=w.innerWidth;
             return checks;
             """);
-        CaptureHtmlReportScreens(Path.Combine(output, "screens"), withParts, "families");
+        CaptureHtmlReportScreens(Path.Combine(output, "screens"), precise, "families", "document.getElementById('basis-identifiedOnly').click();");
         File.WriteAllBytes(Path.Combine(output, "ring.html"), HtmlReportWriter.BuildBytes(withParts));
         Console.WriteLine("U8 synthetic HTML size: " + new FileInfo(Path.Combine(output, "ring.html")).Length.ToString(CultureInfo.InvariantCulture) + " bytes.");
     }

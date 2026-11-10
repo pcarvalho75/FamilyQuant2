@@ -53,7 +53,12 @@ public static partial class HtmlReportPayloadBuilder
                     Property = basis.Source + "/total", Study = references[0].Study, Scale = 100, Format = "G6" };
                 double? total = ReadRingShare(source, context.StoredStudies) * 100;
                 if (!total.HasValue) continue;
-                string AddShare(double value, HtmlReportReference reference) => Add(value.ToString("G6", CultureInfo.InvariantCulture), reference, "%", value);
+                string AddShare(double value, HtmlReportReference reference)
+                {
+                    string id = Add(value.ToString("G6", CultureInfo.InvariantCulture), reference, "%", value);
+                    AddShort(id, value, reference);
+                    return id;
+                }
                 string totalId = AddShare(total.Value, source);
                 bool canDraw = total.Value >= 0 && total.Value <= 100;
                 string? outside = canDraw ? AddShare(ReadRingShare(source with { Property = basis.Source + "/outside" }, context.StoredStudies)!.Value * 100,
