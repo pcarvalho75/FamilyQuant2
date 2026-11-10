@@ -238,6 +238,9 @@ public static class ReportProjectExporter
         var payload = HtmlReportPayloadBuilder.Build(export.Document, export.SupplementSheets, selection,
             export.HtmlContext, Path.GetFileName(wordPath));
         payload = HtmlReportFigures.Build(payload, export.Document, selection);
+        payload = payload with { Composition = payload.Composition with
+            { ContributionRunCount = payload.Composition.ContributionRows.Count == 0 ? null
+                : export.HtmlContext.StoredStudies?.FamilyRunShares?.Runs.Count } };
         HtmlReportWriter.Write(HtmlReportWriter.PathForReport(wordPath), payload, operation);
         operation?.Report("report-html", "Interactive HTML report written", 1, 1);
     }
