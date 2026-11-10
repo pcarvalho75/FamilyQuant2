@@ -100,6 +100,14 @@ internal static partial class Program
                 && ReferenceEquals(((Button)control.FindName("ButtonFetchFamilyWorld")).Style, primary)
                 && listStatus.Text == "No family list");
         }
-        finally { main.Close(); MainWindow.SelectOpenPathOverride = previousOpen; PumpDispatcher(); }
+        finally
+        {
+            var previousChoice = MainWindow.UnsavedProjectChoiceOverride;
+            MainWindow.UnsavedProjectChoiceOverride = () => UnsavedProjectChoice.Discard;
+            main.Close();
+            PumpDispatcher();
+            MainWindow.UnsavedProjectChoiceOverride = previousChoice;
+            MainWindow.SelectOpenPathOverride = previousOpen;
+        }
     }
 }
