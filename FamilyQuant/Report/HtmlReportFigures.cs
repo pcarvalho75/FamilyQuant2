@@ -26,6 +26,10 @@ public static class HtmlReportFigures
                             Legend = "Interactive chart data are not included in this report. Export again with the current program; no picture or estimated value is substituted." });
                     continue;
                 }
+                // U3b: Word retains its pictures; these HTML tabs draw program-projected values.
+                if (payload.MassQualityCharts != null && (figure.Id is "figure:xic_by_mass.png"
+                    or "figure:isotopes_credited.png" or "figure:percent_ion_current_by_mass.png"
+                    || section.Id == ReportSectionIds.Quality && !analyticsIds.Contains(figure.Id))) continue;
                 if (figure.Id.StartsWith("figure:protein_coverage_", StringComparison.Ordinal)
                     || figure.Id.StartsWith("figure:family_contribution", StringComparison.Ordinal)) continue;
                 List<HtmlReportFigure>? target = section.Id == ReportSectionIds.Sensitivity ? sensitivity

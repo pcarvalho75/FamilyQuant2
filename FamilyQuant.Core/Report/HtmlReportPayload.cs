@@ -22,6 +22,7 @@ public sealed record HtmlReportPayload
     public IReadOnlyList<HtmlReportFigure> Results { get; init; } = Array.Empty<HtmlReportFigure>();
     public IReadOnlyList<HtmlReportFigure> Sensitivity { get; init; } = Array.Empty<HtmlReportFigure>();
     public IReadOnlyList<HtmlSignalChart> SignalCharts { get; init; } = Array.Empty<HtmlSignalChart>(); // U3a native recovery/gap readings.
+    public HtmlMassQualityCharts? MassQualityCharts { get; init; } // U3b shared native chart projections.
     public string? Interpretation { get; init; }
     public IReadOnlyDictionary<string, HtmlReportField> Fields { get; init; }
         = new SortedDictionary<string, HtmlReportField>(StringComparer.Ordinal);
@@ -156,6 +157,7 @@ public sealed record HtmlCoverageSpan(int Start, int End, string Label, string K
 /// replacement for canonical membership or an instruction to calculate a missing study.</summary>
 public sealed record HtmlReportContext
 {
+    public AnalyticsData? ChartAnalytics { get; init; } // U3b chart inputs from the same prepared native report.
     public bool UsesPanel { get; init; }
     public bool IsIdentity { get; init; } = true;
     public bool IsAdditive { get; init; } = true;

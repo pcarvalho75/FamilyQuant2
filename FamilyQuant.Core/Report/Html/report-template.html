@@ -1493,6 +1493,39 @@
         .u3a-details summary { display: none; }
       }
       /* U3a end */
+      /* U3b begin */
+      .u3b-chart { min-width: 0; margin: 0; padding: 20px; background: var(--surface); border: 1px solid var(--edge); border-radius: var(--radius); }
+      .u3b-chart h3 { margin: 0 0 16px; color: var(--ink); font-size: 1.12rem; font-weight: 600; line-height: 1.35; }
+      .u3b-chart .chart-legend { margin: 14px 0 0; max-width: 76ch; }
+      .u3b-chart[data-native-chart="xic_by_mass.png"] { grid-column: 1 / -1; }
+      .u3b-plot { min-width: 0; width: 100%; }
+      .u3b-plot svg { display: block; max-width: 100%; overflow: visible; }
+      .u3b-axis { stroke: none; paint-order: normal; font: 11px "Segoe UI", system-ui, sans-serif; fill: var(--muted); }
+      .u3b-axis-line { fill: none; stroke: var(--edge); stroke-width: 1; }
+      .u3b-mark { cursor: pointer; stroke: var(--surface); stroke-width: .5; }
+      .u3b-mark:focus { stroke: var(--accent); stroke-width: 3; outline: none; }
+      .u3b-mark:hover { stroke: var(--ink); stroke-width: 2; }
+      .u3b-series-1 { fill: var(--s1); }
+      .u3b-series-2 { fill: var(--s4); }
+      .u3b-series-3 { fill: var(--s3); }
+      .u3b-raw { fill: var(--edge); }
+      .u3b-cutoff { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .u3b-keys { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; color: var(--muted); font-size: .9rem; }
+      .u3b-key { display: inline-flex; gap: 7px; align-items: center; }
+      .u3b-key::before { content: ""; width: 10px; height: 10px; border-radius: 2px; background: var(--s1); }
+      .u3b-key-2::before { background: var(--s4); }
+      .u3b-key-3::before { background: var(--s3); }
+      .u3b-key-raw::before { background: var(--edge); }
+      .u3b-rows { display: grid; gap: 12px; }
+      .u3b-row { display: grid; grid-template-columns: minmax(130px, 1fr) minmax(130px, 1.5fr); gap: 12px; align-items: center; }
+      .u3b-row-name { color: var(--ink); line-height: 1.35; overflow-wrap: anywhere; }
+      .u3b-row-bar { position: relative; isolation: isolate; min-height: 40px; padding: 8px 10px; border: 1px solid var(--edge); border-radius: 6px; background: var(--input); color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
+      .u3b-fill { position: absolute; z-index: -1; inset: 0 auto 0 0; max-width: 100%; background: var(--selection); border-radius: inherit; }
+      .u3b-row-value { font-variant-numeric: tabular-nums; line-height: 1.3; overflow-wrap: anywhere; }
+      .u3b-row-bar:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+      @media (max-width: 520px) { .u3b-chart { padding: 14px; } .u3b-row { grid-template-columns: 1fr; gap: 5px; } .u3b-chart h3 { font-size: 1.05rem; } }
+      @media print { .u3b-chart { break-inside: avoid; border-radius: 0; } .u3b-row-bar { border-color: var(--edge); } }
+      /* U3b end */
     </style>
     <style>
       .rank-row {
@@ -5596,6 +5629,179 @@
           renderFamily();
           updateSelectionSummary();
           renderSignal();
+          /* U3b begin */
+          function renderMassQuality() {
+            const model = data.massQualityCharts;
+            if (!model) return;
+            const tip = $("chart-hover");
+            function hint(mark, heading, lines) {
+              mark.setAttribute("tabindex", "0");
+              mark.setAttribute("role", "button");
+              const description = [heading, ...lines].join(". ");
+              mark.setAttribute("aria-label", description);
+              const title = svg("title"); title.textContent = description; mark.append(title);
+              function show() {
+                tip.replaceChildren(node("strong", "", heading), ...lines.map(line => node("div", "", line)));
+                tip.hidden = false;
+                const box = mark.getBoundingClientRect();
+                tip.style.left = Math.max(8, Math.min(innerWidth - Math.min(360, innerWidth - 16) - 8, box.left)) + "px";
+                tip.style.top = Math.max(8, Math.min(innerHeight - tip.offsetHeight - 8, box.bottom + 8)) + "px";
+              }
+              mark.addEventListener("pointerenter", show);
+              mark.addEventListener("focus", show);
+              mark.addEventListener("click", event => { event.stopPropagation(); show(); });
+              mark.addEventListener("pointerleave", () => { if (document.activeElement !== mark) tip.hidden = true; });
+              mark.addEventListener("blur", () => { tip.hidden = true; });
+              mark.addEventListener("keydown", event => {
+                if (event.key === "Escape") { tip.hidden = true; event.preventDefault(); }
+                if (event.key === "Enter" || event.key === " ") { show(); event.preventDefault(); }
+              });
+            }
+            function card(host, id, title, legend) {
+              const article = node("article", "u3b-chart"); article.dataset.nativeChart = id;
+              const heading = node("h3", "", title), caption = node("p", "chart-legend", legend);
+              const plot = node("div", "u3b-plot"); article.append(heading, plot);
+              const keys = node("div", "u3b-keys");
+              const labels = id === "xic_by_mass.png" ? [["Identified", 1], ["De novo", 2]] : id === "isotopes_credited.png"
+                ? [["Under 1500 Da", 1], ["1500 to under 3000 Da", 2], ["3000 Da and above", 3]] : id === "de_novo_score_distribution.png"
+                ? [["Imported calls", "raw"], ["Retained calls", 2]] : id === "de_novo_peaks_deepnovo_agreement.png"
+                ? [["Identical sequence", 1], ["Different sequence; theoretical mass match", 2], ["Different theoretical mass", 3]] : id === "de_novo_accepted_score_agreement.png"
+                ? [["Exact sequence match (circles)", 1], ["Sequence mismatch (squares)", 3]] : [];
+              labels.forEach(([text, key]) => keys.append(node("span", "u3b-key u3b-key-" + key, text)));
+              if (labels.length) article.append(keys);
+              article.append(caption); host.append(article);
+              return plot;
+            }
+            function canvas(host, title, draw) {
+              function paint() {
+                const width = Math.max(280, host.clientWidth || 640), height = width < 500 ? 280 : 320;
+                const graph = svg("svg", { viewBox: `0 0 ${width} ${height}`, width: "100%", height, role: "group", "aria-label": title });
+                host.replaceChildren(graph); draw(graph, { left: 56, top: 36, width: width - 76, height: height - 94 });
+              }
+              paint();
+              if ("ResizeObserver" in window) new ResizeObserver(paint).observe(host);
+            }
+            function label(graph, x, y, value, anchor = "middle") {
+              const text = svg("text", { x, y, "text-anchor": anchor, class: "u3b-axis" }); text.textContent = value; graph.append(text);
+            }
+            function axes(graph, area, xName, yName) {
+              graph.append(svg("path", { d: `M${area.left} ${area.top}v${area.height}h${area.width}`, class: "u3b-axis-line" }));
+              label(graph, area.left + area.width / 2, area.top + area.height + 48, xName);
+              label(graph, area.left, 11, yName, "start");
+            }
+            function scatter(host, id, title, legend, points, xName, yName, limits) {
+              const plot = card(host, id, title, legend);
+              canvas(plot, title, (graph, area) => {
+                axes(graph, area, xName, yName);
+                if (!points.length) { label(graph, area.left + area.width / 2, area.top + area.height / 2, "No comparable points recorded"); return; }
+                const xLow = limits?.xLow ?? Math.min(0, ...points.map(p => p.x)), xHigh = limits?.xHigh ?? Math.max(1, ...points.map(p => p.x));
+                const yLow = limits?.yLow ?? Math.min(0, ...points.map(p => p.y)), yHigh = limits?.yHigh ?? Math.max(1, ...points.map(p => p.y));
+                label(graph, area.left, area.top + area.height + 20, String(xLow));
+                label(graph, area.left + area.width, area.top + area.height + 20, String(xHigh));
+                label(graph, area.left - 6, area.top + 5, String(yHigh), "end");
+                label(graph, area.left - 6, area.top + area.height, String(yLow), "end");
+                const marks = [];
+                for (const [index, point] of points.entries()) {
+                  const x = area.left + (point.x - xLow) / (xHigh - xLow || 1) * area.width;
+                  const y = area.top + area.height - (point.y - yLow) / (yHigh - yLow || 1) * area.height;
+                  const match = point.category !== "Mismatch" && point.category !== "DifferentMass";
+                  const mark = svg(match ? "circle" : "rect", match ? { cx: x, cy: y, r: 3.3 }
+                    : { x: x - 3, y: y - 3, width: 6, height: 6 });
+                  mark.setAttribute("class", "u3b-mark " + (point.category === "denovo" || point.category === "SameMassRearrangement" ? "u3b-series-2" : match ? "u3b-series-1" : "u3b-series-3"));
+                  hint(mark, point.category || "Peptide feature", [point.xText, point.yText, point.category === "identified" || point.category === "denovo" ? "One stored peptide feature representative; no percentage denominator" : "One stored precursor-call comparison; confidence scores are not probabilities"]);
+                  mark.setAttribute("tabindex", index === 0 ? "0" : "-1"); marks.push(mark); graph.append(mark);
+                }
+                graph.addEventListener("keydown", event => {
+                  if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+                  let i = marks.indexOf(document.activeElement); if (i < 0) return;
+                  marks[i].setAttribute("tabindex", "-1");
+                  i = event.key === "Home" ? 0 : event.key === "End" ? marks.length - 1
+                    : (i + (event.key === "ArrowRight" ? 1 : -1) + marks.length) % marks.length;
+                  marks[i].setAttribute("tabindex", "0"); marks[i].focus(); event.preventDefault();
+                });
+              });
+            }
+            function bars(host, id, title, legend, rows) {
+              const plot = card(host, id, title, legend);
+              const list = node("div", "u3b-rows"); plot.append(list);
+              for (const row of rows) {
+                const wrap = node("div", "u3b-row"), name = node("span", "u3b-row-name", row.label);
+                const button = node("button", "u3b-row-bar"), value = node("span", "u3b-row-value", row.text + (["%", "fraction"].includes(row.unit) ? "" : " " + row.unit));
+                button.type = "button"; button.title = row.label + ": " + row.text + ". " + row.base + "; select for details without changing the project.";
+                const maximum = Math.max(row.unit === "%" ? 100 : 1, ...rows.filter(r => r.unit === row.unit && r.value !== null).map(r => r.value));
+                const fill = node("span", "u3b-fill"); fill.style.width = row.value === null ? "0" : row.value / maximum * 100 + "%";
+                button.append(fill, value); button.dataset.value = row.value ?? "";
+                button.setAttribute("aria-label", row.label + ": " + row.text + (["fraction", "%"].includes(row.unit) ? "" : " " + row.unit) + ". " + row.base);
+                button.onclick = () => popup(row.label, [node("p", "", row.text + (["fraction", "%"].includes(row.unit) ? "" : " " + row.unit)), node("p", "", row.base)]);
+                wrap.append(name, button); list.append(wrap);
+              }
+            }
+            const massHost = $("mass-figures"), qualityHost = $("quality-figures");
+            if (model.signalByMass) {
+              const source = model.signalByMass;
+              scatter(massHost, "xic_by_mass.png", "Measured signal by neutral mass",
+                "Each dot is one stored peptide feature representative, pooled across runs before cross-side suppression. Identified and de novo are separate series. Height is measured envelope area on a logarithmic scale; it is not a percentage. Hover, tap or focus for exact values; arrow keys move between dots.",
+                source.points.map(p => ({ x: p.mass, y: p.logEnvelope, category: p.side, xText: p.massText, yText: p.envelopeText })),
+                "Neutral mass (Da)", "Envelope area, log10", { xLow: 0, xHigh: source.massMaximum, yLow: source.logMinimum, yHigh: source.logMaximum });
+            }
+            if (model.isotopes) {
+              const source = model.isotopes, title = "Measured isotopes per peptide feature";
+              const plot = card(massHost, "isotopes_credited.png", title,
+                "Bars count stored peptide feature representatives, pooled across runs. Each isotope is credited only where signal was measured. The three mass bands are under 1500 Da, 1500 to under 3000 Da, and 3000 Da and above; no run-mean whiskers are shown.");
+              canvas(plot, title, (graph, area) => {
+                axes(graph, area, "Number of credited isotopes", "Peptide features");
+                const slot = area.width / source.bins.length;
+                source.bins.forEach((bin, i) => {
+                  let y = area.top + area.height;
+                  bin.massBandCounts.forEach((count, band) => {
+                    const h = count / source.axisMaximum * area.height; y -= h;
+                    const mark = svg("rect", { x: area.left + slot * (i + .18), y, width: slot * .64, height: h, class: "u3b-mark u3b-series-" + (band + 1) });
+                    hint(mark, bin.label + " isotopes: " + source.massBands[band], [String(count) + " peptide features", bin.massBandShares[band], "Percentage base: all displayed peptide feature representatives"]);
+                    graph.append(mark);
+                  });
+                  label(graph, area.left + slot * (i + .5), area.top + area.height + 20, bin.label);
+                  label(graph, area.left + slot * (i + .5), y - 5, String(bin.total));
+                });
+              });
+            }
+            if (model.ionCurrentByMass) {
+              bars(massHost, "percent_ion_current_by_mass.png", "Where measured peptide signal lies",
+                "Mass ranges pool the displayed peptide feature representatives across runs. Each filled bar divides by all displayed peptide envelope signal, so these shares sum to 100%. The exact-value view also states the same range's share of pooled TIC; the two totals are different. No means or whiskers are shown.",
+                model.ionCurrentByMass.bins.map(bin => ({ label: bin.label, value: bin.share, text: bin.shareText, unit: "fraction", base: bin.envelopeText + ". " + bin.ticShareText })));
+            }
+            for (const chart of model.quality || []) {
+              if (chart.scores?.length) {
+                for (const source of chart.scores) {
+                  const title = source.sourceDisplayName + ": " + source.confidenceField;
+                  const plot = card(qualityHost, chart.id, title, chart.legend + " Recorded filters: " + source.cutoffLabel + "; length >= " + source.minLength + "; " + source.stretchLength + " consecutive local scores >= " + source.stretchFloor + ".");
+                  canvas(plot, title, (graph, area) => {
+                    axes(graph, area, source.confidenceField + " (source-native scale)", "Source calls");
+                    const maximum = Math.max(1, ...source.bins.map(b => b.rawRows)), slot = area.width / source.bins.length;
+                    const cutoff = svg("line", { x1: area.left + area.width * source.minimumConfidence / 100, x2: area.left + area.width * source.minimumConfidence / 100,
+                      y1: area.top, y2: area.top + area.height, class: "u3b-cutoff" });
+                    hint(cutoff, "Recorded acceptance cutoff", [source.cutoffLabel, "Source-native confidence score, not a probability"]);
+                    source.bins.forEach((bin, index) => {
+                      const x = area.left + slot * (index + .1), raw = bin.rawRows / maximum * area.height, kept = bin.passingAllCriteria / maximum * area.height;
+                      for (const [count, h, width, offset, cls, name] of [[bin.rawRows, raw, .8, 0, "u3b-raw", "Imported calls"], [bin.passingAllCriteria, kept, .45, .18, "u3b-series-2", "Retained calls"]]) {
+                        const mark = svg("rect", { x: x + slot * offset, y: area.top + area.height - h, width: slot * width, height: h, class: "u3b-mark " + cls });
+                        hint(mark, title + ": " + bin.label, [name + ": " + count, "Count of source calls in this confidence range; no percentage denominator", "Acceptance: " + source.cutoffLabel]); graph.append(mark);
+                      }
+                      if (index % 4 === 0) label(graph, x, area.top + area.height + 20, String(bin.lowerInclusive));
+                    });
+                    graph.append(cutoff);
+                  });
+                }
+              } else {
+                if (chart.points?.length) scatter(qualityHost, chart.id, chart.title, chart.legend, chart.points, chart.xLabel, chart.yLabel);
+                bars(qualityHost, chart.id + "-counts", chart.points?.length ? chart.title + ": recorded counts" : chart.title, chart.legend, chart.rows || []);
+              }
+            }
+            $("mass-empty").hidden = massHost.childElementCount > 0;
+            $("quality-empty").hidden = qualityHost.childElementCount > 0;
+          }
+          renderMassQuality();
+          /* U3b end */
+
           for (const figure of data.results || []) {
             const id = figure.sourceFigureId || "";
             if (id.startsWith("figure:family_contribution")) continue;
