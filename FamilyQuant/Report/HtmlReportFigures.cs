@@ -15,10 +15,18 @@ public static class HtmlReportFigures
         var quality = new List<HtmlReportFigure>();
         var sensitivity = new List<HtmlReportFigure>();
         var signalCharts = new List<HtmlSignalChart>(); // U3a: selected native signal/gap snapshots.
+        var nativeSensitivity = new List<HtmlSensitivityFigure>(); // U3d: follow the selected document below.
         var analyticsIds = AnalyticsFigures.FileNames.Select(name => "figure:" + name).ToHashSet(StringComparer.Ordinal);
         foreach (var section in document.Sections.Where(section => !excluded.Contains(section.Id)))
             foreach (var figure in section.Blocks.OfType<ReportFigure>().Where(figure => !excluded.Contains(figure.Id)))
             {
+                if (HtmlSensitivityFigurePacket.Owns(figure.Id))
+                {
+                    nativeSensitivity.Add(payload.SensitivityFigures.Figures.SingleOrDefault(chart => chart.Id == figure.Id)
+                        ?? new(figure.Id, "unavailable", figure.Title,
+                            "Native Sensitivity values are unavailable in this report. Export again with the current program; no picture or invented value is substituted.", Array.Empty<HtmlSensitivityPanel>()));
+                    continue;
+                }
                 if (HtmlSignalRecoveryData.Owns(figure.Id))
                 {
                     signalCharts.Add(figure.SignalChart is { } chart ? chart with { Id = figure.Id, Title = figure.Title }
@@ -43,6 +51,6 @@ public static class HtmlReportFigures
                 target.Add(new(title, caption, "data:image/png;base64," + Convert.ToBase64String(figure.PngBytes), figure.Id));
             }
         return payload with { Fields = fields, Results = results, Quality = quality, Sensitivity = sensitivity,
-            SignalCharts = signalCharts };
+            SignalCharts = signalCharts, SensitivityFigures = new() { Figures = nativeSensitivity } };
     }
 }

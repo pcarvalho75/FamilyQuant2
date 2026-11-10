@@ -91,6 +91,8 @@ namespace FamilyQuant
     {
         private readonly List<IdentityScanRow> rows;
         private readonly int? currentIdentity;
+        public IReadOnlyList<IdentityScanRow> Rows => rows; // U3d native drawing inputs.
+        public int? CurrentIdentity => currentIdentity;
 
 
         /// <param name="palette">The colours to paint in, or null for the screen palette. The exporter

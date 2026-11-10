@@ -77,6 +77,7 @@ public static partial class HtmlReportPayloadBuilder
                 Fields = fields,
             };
             payload = payload with { FamilyFigures = context.FamilyFiguresProvider?.Invoke(Add, selection) ?? new() }; // U3c
+            payload = payload with { SensitivityFigures = context.SensitivityFiguresProvider?.Invoke(Add, selection) ?? new() }; // U3d
             // Preserve all old bindings and axis IDs before appending the new stored-source view.
             var measures = DotMeasures(families);
             var withEntries = DatabaseEntryFamilies(families);

@@ -1145,7 +1145,9 @@ namespace FamilyQuant
     public sealed class ReferenceIdentitySweepChart : TalkChartBase
     {
         private readonly List<IdentityScanRow> rows;
+        public IReadOnlyList<IdentityScanRow> Rows => rows; // U3d native drawing inputs.
         private readonly int selectedIdentity;
+        public int SelectedIdentity => selectedIdentity;
 
         public ReferenceIdentitySweepChart(IEnumerable<IdentityScanRow> rows, int selectedIdentity)
         {
@@ -2627,6 +2629,7 @@ namespace FamilyQuant
     public sealed class DeNovoTalkComparisonChart : TalkChartBase
     {
         private readonly List<DeNovoTalkComparisonRow> rows;
+        public IReadOnlyList<DeNovoTalkComparisonRow> Rows => rows; // U3d native drawing inputs.
 
         public DeNovoTalkComparisonChart(IEnumerable<DeNovoTalkComparisonRow> rows)
         {
@@ -2730,6 +2733,7 @@ namespace FamilyQuant
     public sealed class DeNovoVariantComparisonChart : TalkChartBase
     {
         private readonly List<DeNovoVariantSummary> rows;
+        public IReadOnlyList<DeNovoVariantSummary> Rows => rows; // U3d native drawing inputs.
 
         public DeNovoVariantComparisonChart(IEnumerable<DeNovoVariantSummary> rows)
         {

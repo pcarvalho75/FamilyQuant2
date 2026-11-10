@@ -355,6 +355,18 @@ internal static partial class ReportNumberTrace
     private static IEnumerable<(string Location, string Id)> FieldReferences(HtmlReportPayload p)
     {
         var ids = new List<string?> { p.Title, p.Authors, p.Interpretation };
+        foreach (var figure in p.SensitivityFigures.Figures)
+            foreach (var panel in figure.Panels)
+            {
+                foreach (var marker in panel.Markers) ids.AddRange(new[] { marker.Identity.Exact, marker.Identity.Display });
+                foreach (var row in panel.Rows)
+                {
+                    ids.AddRange(new[] { row.Name, row.Note });
+                    foreach (var number in new[] { row.X, row.Total })
+                        if (number != null) ids.AddRange(new[] { number.Exact, number.Display });
+                    foreach (var part in row.Parts) ids.AddRange(new[] { part.Value.Exact, part.Value.Display });
+                }
+            }
         foreach (var figure in p.FamilyFigures.Figures)
             foreach (var view in figure.Views.Values)
                 foreach (var row in view.Rows)

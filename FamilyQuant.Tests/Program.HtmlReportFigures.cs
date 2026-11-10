@@ -83,11 +83,11 @@ internal static partial class Program
         Check("production Word retains its contribution picture while HTML uses its interactive chart", export.Document.Sections.SelectMany(section => section.Blocks).OfType<ReportFigure>()
             .Any(figure => figure.Id == "figure:" + AnalyticsFigures.FamilyContributionFile) && actual.Results.All(figure => !figure.SourceFigureId.StartsWith("figure:family_contribution", StringComparison.Ordinal)));
         Check("production HTML draws Quality natively and retains selected sensitivity figures", actual.Quality.Count == 0
-            && actual.MassQualityCharts!.Quality.Count > 0 && actual.Sensitivity.Count > 0);
+            && actual.MassQualityCharts!.Quality.Count > 0 && actual.Sensitivity.Count == 0 && actual.SensitivityFigures.Figures.Count > 0);
         Check("coverage remains in the interactive maps rather than the figure grids", actual.Results.All(figure => !figure.SourceFigureId.StartsWith("figure:protein_coverage_", StringComparison.Ordinal))
             && actual.CoverageCatalog?.Proteins.Count > 0);
         Console.WriteLine("Synthetic project HTML size: " + new FileInfo(htmlPath).Length.ToString(CultureInfo.InvariantCulture) + " bytes; "
-            + actual.Results.Count + " Results, " + actual.Quality.Count + " Quality, " + actual.Sensitivity.Count + " Sensitivity images.");
+            + actual.Results.Count + " Results, " + actual.Quality.Count + " Quality images; " + actual.SensitivityFigures.Figures.Count + " native Sensitivity charts.");
         HtmlReportBrowserChecks(Path.Combine(output, "page"), new[] { ("all-figures", actual, 390) }, """
             const checks={};
             for(const name of ['xic_by_mass.png','isotopes_credited.png','percent_ion_current_by_mass.png'])
@@ -95,7 +95,7 @@ internal static partial class Program
             checks.recovery=!!d.querySelector('#panel-recovery [data-native-chart]')&&!d.querySelector('#panel-recovery img');
             checks.contribution=!!d.getElementById('family-contribution-chart')&&!d.querySelector('img[data-fq-figure^="figure:family_contribution"]');
             checks.quality=d.querySelectorAll('#quality-figures .u3b-chart').length>0&&!d.querySelector('#quality-figures img');
-            checks.sensitivity=d.getElementById('sensitivity-figures').querySelectorAll('img').length>0;
+            checks.sensitivity=d.getElementById('sensitivity-figures').querySelectorAll('.u3d-figure svg').length>0&&!d.getElementById('panel-sensitivity').querySelector('img');
             checks.inline=[...d.querySelectorAll('.figure-grid img')].every(img=>img.src.startsWith('data:image/png;base64,'));
             return checks;
             """);
