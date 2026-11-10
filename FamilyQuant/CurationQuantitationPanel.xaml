@@ -50,7 +50,6 @@
             <ComboBox x:Name="ComboBoxSharedPeptides" SelectionChanged="Choice_Changed" HorizontalAlignment="Stretch" ToolTip="Choose how to attribute peptides reaching several families; default family-unique only. Full XIC shares update immediately and PatternLab shares need Recalculate, without changing extracted areas or writing files.">
                 <ComboBoxItem x:Name="SharedItemUnique" IsSelected="True" ToolTip="Credit a peptide only when it reaches one family; signal shared across families stays in its separate bucket. Full XIC updates immediately and PatternLab needs Recalculate, without changing measured areas."/>
                 <ComboBoxItem x:Name="SharedItemSplit" ToolTip="Split each shared peptide's signal equally between its families, preserving the total. Full XIC updates immediately and PatternLab needs Recalculate, without changing measured areas."/>
-                <ComboBoxItem x:Name="SharedItemEvery" ToolTip="Credit a shared peptide's full signal to every matching family, so family shares overlap and must not be summed. Full XIC updates immediately and PatternLab needs Recalculate, without changing measured areas."/>
             </ComboBox>
         </StackPanel>
         <Border x:Name="PatternLabSection" Background="{DynamicResource SubtleBrush}" Padding="12" Margin="0,16,0,0">

@@ -149,8 +149,7 @@ namespace FamilyQuant
             foreach (SharedPeptidePolicy other in new[]
                      {
                          SharedPeptidePolicy.FamilyUnique,
-                         SharedPeptidePolicy.SplitEqually,
-                         SharedPeptidePolicy.CountInEveryFamily
+                         SharedPeptidePolicy.SplitEqually
                      })
             {
                 if (other == policy) continue;
@@ -159,6 +158,10 @@ namespace FamilyQuant
                 sb.AppendLine(Wrap(other.Explanation(), "        "));
                 sb.AppendLine();
             }
+
+            sb.AppendLine("A project saved with count in every family opens with family-unique instead.");
+            sb.AppendLine("The status line says so once; run Quantify again to refresh its stored results.");
+            sb.AppendLine();
 
             sb.AppendLine("HOW THE FAMILIES ARE BUILT: TWO STAGES");
             sb.AppendLine("--------------------------------------");

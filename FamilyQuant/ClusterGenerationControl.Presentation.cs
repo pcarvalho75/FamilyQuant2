@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using PatternTools.PLP;
@@ -11,15 +12,31 @@ namespace FamilyQuant;
 
 public partial class ClusterGenerationControl
 {
+        private bool legacySharedPolicyNoticePending;
+        private bool legacySharedPolicyNoticeShown;
+
+        public void RestoreStoredSharedPeptidePolicy(SharedPeptidePolicy? policy)
+        {
+            QuantitationPanel.ComboBoxSharedPeptides.SelectedIndex = policy == SharedPeptidePolicy.SplitEqually ? 1 : 0;
+            legacySharedPolicyNoticePending = policy == SharedPeptidePolicy.CountInEveryFamily && !legacySharedPolicyNoticeShown;
+        }
+
+        public Task ShowSharedPeptidePolicyNoticeAsync(Task attribution) => AppOperationHost.OnUi(this, async () =>
+        {
+            await attribution;
+            if (!legacySharedPolicyNoticePending || legacySharedPolicyNoticeShown) return;
+            legacySharedPolicyNoticePending = false;
+            legacySharedPolicyNoticeShown = true;
+            SetCurationOperationStatus("The stored count-in-every-family rule was replaced with family-unique. Run Quantify again to refresh the stored results.");
+        });
+
         private void FillChoiceLists()
         {
             QuantitationPanel.SharedItemUnique.Content = SharedPeptidePolicy.FamilyUnique.DisplayName();
             QuantitationPanel.SharedItemSplit.Content = SharedPeptidePolicy.SplitEqually.DisplayName();
-            QuantitationPanel.SharedItemEvery.Content = SharedPeptidePolicy.CountInEveryFamily.DisplayName();
 
             QuantitationPanel.SharedItemUnique.ToolTip = "Credit a peptide only when it reaches one family; shared signal stays in its separate bucket. Full XIC updates immediately and PatternLab needs Recalculate, without changing measured areas.";
             QuantitationPanel.SharedItemSplit.ToolTip = "Split each shared peptide's signal equally between its families, preserving the total. Full XIC updates immediately and PatternLab needs Recalculate, without changing measured areas.";
-            QuantitationPanel.SharedItemEvery.ToolTip = "Credit each shared peptide in full to every matching family, so shares overlap and must not be summed. Full XIC updates immediately and PatternLab needs Recalculate, without changing measured areas.";
 
             QuantitationPanel.ComboBoxSharedPeptides.ToolTip =
                 "Choose what to do with a peptide found in more than one family; in a redundant database this choice moves the numbers a great deal; default: " +

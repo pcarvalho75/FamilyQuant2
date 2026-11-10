@@ -35,9 +35,9 @@ internal static partial class Program
                 var mode = (ComboBox)panel.FindName("ComboBoxNormalization");
                 var basis = (ComboBox)panel.FindName("ComboBoxFullXicBasis");
                 var recalculate = (Button)panel.FindName("ButtonRecalculateQuantitation");
-                Check(theme + " every normalization, shared policy and Full XIC basis remains in its original index",
+                Check(theme + " normalization and basis indexes remain, with unique and split shared policies",
                     mode.Items.Count == Enum.GetValues<NormalizationMode>().Length
-                    && shared.Items.Count == Enum.GetValues<SharedPeptidePolicy>().Length && basis.Items.Count == 2);
+                    && shared.Items.Count == 2 && basis.Items.Count == 2);
                 bool Shown(string name) => panel.FindName(name) is FrameworkElement element && element.Visibility == Visibility.Visible;
                 Check(theme + " no-data state hides every inapplicable choice", !Shown("SharedOptions") && !Shown("FullXicOptions")
                     && !Shown("PatternLabOptions") && recalculate.Visibility == Visibility.Collapsed);
