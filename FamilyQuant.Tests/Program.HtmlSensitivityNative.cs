@@ -71,9 +71,9 @@ internal static partial class Program
                 Check("U3d identity floor/current markers equal native rules and remain distinct", figure.Panels.All(panel =>
                     Value(panel.Markers.Single(marker => marker.Label == "Clean-range floor").Identity) == IdentityScanPlot.CleanFloor(rows)
                     && Value(panel.Markers.Single(marker => marker.Label == "This file").Identity) == scan.CurrentIdentity));
-                var nativePoints = IdentityScanPlot.Map(rows, new System.Windows.Rect(0, 0, 1, 1), row => row.ReportedTargetGroups);
-                Check("U3d identity positions use the native strict-to-loose zero-based scales", figure.Panels[0].Rows.Select((row, index) =>
-                    Math.Abs(nativePoints[index].Y - (1 - Value(row.Parts[0].Value) / figure.Panels[0].MaximumY)) < 1e-12).All(equal => equal));
+                Check("U3d round axes retain every native identity point and a zero count baseline", figure.Panels[0].ReverseX
+                    && figure.Panels[0].MinimumX <= rows.Min(row => row.Identity) && figure.Panels[0].MaximumX >= rows.Max(row => row.Identity)
+                    && figure.Panels[0].MaximumY >= IdentityScanPlot.MaxFamilies(rows) && figure.Panels[0].YTicks[0].Position == 0);
             }
             if (native is ReferenceIdentitySweepChart reference)
                 Check("U3d reference counts use native inclusion and threshold filter", figure.Panels[0].Rows.Select(row => Value(row.X!)).SequenceEqual(reference.Rows.Select(row => (double)row.Identity))
@@ -92,6 +92,21 @@ internal static partial class Program
                     && Value(figure.Panels[1].Rows[index].Total!) == row.CombinedAssignedFractionOfTic * 100
                     && (index == 0 || Value(figure.Panels[0].Rows[index - 1].Total!) == row.CarriedForwardDistinctSequences)).All(equal => equal));
         }
+        bool RoundTicks(IReadOnlyList<HtmlSensitivityTick> ticks)
+        {
+            if (ticks.Count < 2) return false;
+            double step = ticks[1].Position - ticks[0].Position;
+            double multiple = step / Math.Pow(10, Math.Floor(Math.Log10(step)));
+            return new[] { 1.0, 2, 5 }.Any(value => Math.Abs(multiple - value) < 1e-9)
+                && ticks.Skip(1).Select((tick, index) => Math.Abs(tick.Position - ticks[index].Position - step) < step * 1e-9).All(equal => equal)
+                && ticks.All(tick => Math.Abs(double.Parse(tick.Label.TrimEnd('%'), CultureInfo.InvariantCulture) - tick.Position) < Math.Max(1, step) * 1e-9);
+        }
+        Check("U3d every supplied axis has uniformly spaced round decade ticks", figures.SelectMany(figure => figure.Panels)
+            .All(panel => RoundTicks(panel.XTicks) && (panel.Kind != "line" || RoundTicks(panel.YTicks))));
+        Check("U3d count and mixing examples use readable whole steps", figures.Single(figure => figure.Kind == "identity").Panels[0].YTicks
+            .Select(tick => tick.Label).SequenceEqual(new[] { "0", "10", "20", "30" })
+            && figures.Single(figure => figure.Kind == "identity").Panels[1].YTicks.All(tick => tick.Position % 10 == 0)
+            && figures.Single(figure => figure.Kind == "reference").Panels[0].YTicks.All(tick => tick.Position % 10 == 0));
         Check("U3d reads stored studies without mutation", before == JsonSerializer.Serialize(new { manifest.PresentationIdentitySweep, manifest.PresentationDeNovoVariants }));
         Check("U3d every panel names its fixed base and legend explains Normalize to", figures.All(figure => figure.Legend.Contains("Changing Normalize to", StringComparison.Ordinal)
             && figure.Panels.All(panel => panel.Basis.Length > 0)));

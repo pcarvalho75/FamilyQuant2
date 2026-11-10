@@ -155,16 +155,36 @@ public sealed class HtmlSensitivityFigurePacket
             Panel Line(string title, string basis, string yLabel, IReadOnlyList<Row> rows, double maximum, bool percent, IReadOnlyList<Marker> markers)
             {
                 double lo = rows.Select(row => row.X!.Value!.Value).DefaultIfEmpty(0).Min(), hi = rows.Select(row => row.X!.Value!.Value).DefaultIfEmpty(1).Max();
-                return new("line", title, basis, "Sequence identity, strictest on the left (%)", yLabel, lo, hi, maximum, true,
-                    rows.Select(row => new HtmlSensitivityTick(row.X!.Value!.Value, row.X.Value.Value.ToString("0", CultureInfo.InvariantCulture) + "%")).Distinct().ToArray(),
-                    Ticks(maximum, percent, 4), rows, markers);
+                if (hi == lo) { lo = Math.Max(0, lo - 5); hi = Math.Min(100, hi + 5); }
+                var x = Axis(lo, hi, true, true);
+                var y = Axis(0, maximum, percent, !percent);
+                return new("line", title, basis, "Sequence identity, strictest on the left (%)", yLabel, x.Minimum, x.Maximum, y.Maximum, true,
+                    x.Ticks, y.Ticks, rows, markers);
             }
-            Panel Bars(string title, string basis, string label, IReadOnlyList<Row> rows, double maximum, bool percent) =>
-                new("bars", title, basis, label, "", 0, maximum, 1, false, Ticks(maximum, percent, 4), Array.Empty<HtmlSensitivityTick>(), rows, Array.Empty<Marker>());
+            Panel Bars(string title, string basis, string label, IReadOnlyList<Row> rows, double maximum, bool percent)
+            {
+                var x = Axis(0, maximum, percent, !percent);
+                return new("bars", title, basis, label, "", x.Minimum, x.Maximum, 1, false, x.Ticks,
+                    Array.Empty<HtmlSensitivityTick>(), rows, Array.Empty<Marker>());
+            }
         }
         return new(plots);
     }
 
-    private static IReadOnlyList<HtmlSensitivityTick> Ticks(double maximum, bool percent, int count) => Enumerable.Range(0, count + 1)
-        .Select(i => new HtmlSensitivityTick(maximum * i / count, (maximum * i / count).ToString(percent ? "G3" : "N0", CultureInfo.InvariantCulture) + (percent ? "%" : ""))).ToArray();
+    private static (double Minimum, double Maximum, IReadOnlyList<HtmlSensitivityTick> Ticks) Axis(double minimum, double maximum, bool percent, bool integer)
+    {
+        double rawStep = Math.Max(maximum - minimum, 1e-12) / 4;
+        double magnitude = Math.Pow(10, Math.Floor(Math.Log10(rawStep))), fraction = rawStep / magnitude;
+        double step = (fraction <= 1 ? 1 : fraction <= 2 ? 2 : fraction <= 5 ? 5 : 10) * magnitude;
+        if (integer) step = Math.Max(1, step);
+        double lo = Math.Floor(minimum / step) * step, hi = Math.Ceiling(maximum / step) * step;
+        if (hi <= lo) hi = lo + step;
+        int intervals = (int)Math.Round((hi - lo) / step);
+        var ticks = Enumerable.Range(0, intervals + 1).Select(index =>
+        {
+            double value = lo + index * step;
+            return new HtmlSensitivityTick(value, value.ToString(integer ? "N0" : "G6", CultureInfo.InvariantCulture) + (percent ? "%" : ""));
+        }).ToArray();
+        return (lo, hi, ticks);
+    }
 }
