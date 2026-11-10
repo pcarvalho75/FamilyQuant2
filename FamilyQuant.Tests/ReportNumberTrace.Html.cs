@@ -228,6 +228,17 @@ internal static partial class ReportNumberTrace
         HtmlBound Resolve(HtmlReportReference source, HtmlReportField field)
         {
             if (!double.IsFinite(source.Scale)) throw new InvalidDataException("Non-finite display scale.");
+            if (source.Kind == "contribution-label")
+            {
+                if (source.Scale != 1 || source.Format != null || field.Value != null || field.Unit != "")
+                    throw new InvalidDataException("A contribution label is plain program text.");
+                string label = source.Property switch
+                {
+                    "shared" => "shared between families", "unattributed" => "unattributed",
+                    _ => throw new InvalidDataException("Unknown contribution label."),
+                };
+                return new(N(label), null, "program", source.Property);
+            }
             if (source.Kind == "family-basis")
             {
                 if (manifest == null || source.Scale != 100 || source.Format is not ("G3" or "G6"))
@@ -305,11 +316,21 @@ internal static partial class ReportNumberTrace
     private static IEnumerable<(string Location, string Id)> FieldReferences(HtmlReportPayload p)
     {
         var ids = new List<string?> { p.Title, p.Authors, p.Interpretation };
+        foreach (var bucket in new[] { p.Composition.SharedBetweenFamilies, p.Composition.Unattributed })
+            ids.AddRange(new[] { bucket.IdentifiedOnly, bucket.IdentifiedAndDeNovo, bucket.DetectorEnvelopes, bucket.Tic });
+        foreach (var row in p.Composition.ContributionRows)
+        {
+            ids.Add(row.Name);
+            foreach (var basis in new[] { row.IdentifiedOnly, row.IdentifiedAndDeNovo, row.DetectorEnvelopes, row.Tic })
+                if (basis != null) ids.AddRange(new[] { basis.Total, basis.Identified, basis.DeNovo });
+        }
         foreach (var f in p.Composition.Families)
         {
             ids.AddRange(new[] { f.Name, f.Mean, f.Sd, f.Cv, f.WholeMeasured, f.Proteins, f.UniqueProteins, f.Peptides, f.DatabaseEntries });
             foreach (var basis in new[] { f.IdentifiedOnly, f.IdentifiedAndDeNovo, f.DetectorEnvelopes, f.Tic })
                 ids.AddRange(new[] { basis.Mean, basis.Sd, basis.Cv });
+            foreach (var parts in new[] { f.IdentifiedOnlyParts, f.IdentifiedAndDeNovoParts, f.DetectorEnvelopesParts, f.TicParts })
+                if (parts != null) ids.AddRange(new[] { parts.Identified, parts.DeNovo });
             foreach (var r in f.Runs) ids.AddRange(new[] { r.Name, r.Share, r.Measured, r.IdentifiedOnly, r.IdentifiedAndDeNovo, r.DetectorEnvelopes, r.Tic });
             foreach (var part in f.Parts) ids.AddRange(new[] { part.Name, part.Share });
             foreach (var c in f.Coverage) { ids.AddRange(new[] { c.Title, c.Caption, c.Protein, c.LengthLabel }); foreach (var s in c.Peptides.Concat(c.Domains)) ids.AddRange(new[] { s.Label, s.Range }); }

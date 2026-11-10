@@ -233,6 +233,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ResultsPercentOnlyTests(workDir));
             suite.AddWithApplication(() => ResultsTopNPlacementTests(workDir));
             suite.Add(() => HtmlShareBasesTests());
+            suite.Add(() => HtmlSharePartsTests(workDir));
             suite.AddWithApplication(() => SharedPolicyChoiceTests(workDir));
             suite.Section("Recovery chart geometry - per-row normalisation and labels that tell the runs apart");
             suite.AddWithApplication(() => RecoveryChartGeometryTests(workDir));

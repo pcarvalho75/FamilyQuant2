@@ -69,7 +69,8 @@ public static partial class HtmlReportPayloadBuilder
             var payload = new HtmlReportPayload
             {
                 Title = title, Authors = authors, Links = links,
-                Composition = new() { IsAdditive = context.IsAdditive && !HasBlock("composition-overlap-warning"), Families = families },
+                Composition = new() { IsAdditive = context.IsAdditive && !HasBlock("composition-overlap-warning"), Families = families,
+                    ContributionRows = ContributionRows(families) },
                 Highlights = Highlights(), CreditedRuns = CreditedRuns(families), DatabaseGap = DatabaseGap(),
                 // D47: this is a plot-first page. No methods/quality prose or interpretation block.
                 Fields = fields,
