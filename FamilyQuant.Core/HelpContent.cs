@@ -76,6 +76,21 @@ namespace FamilyQuant
             sb.AppendLine("peptide's full isotope envelope straight from the RAW and stores it in that project,");
             sb.AppendLine("and the Results screen then reads the recovery from it. An old Family Cluster File");
             sb.AppendLine("(.fcf) still opens, with the quantitation empty until it is computed.");
+            sb.AppendLine("In the HTML report, Signal recovery and Database gap draw interactive charts from");
+            sb.AppendLine("the same stored readings as the program. Hover, focus or select a bar or value for");
+            sb.AppendLine("its exact reading and reference total; All exact readings opens a printable table.");
+            sb.AppendLine("These charts keep their named bases when Normalize to changes. Word keeps its pictures.");
+            sb.AppendLine("The Signal recovery guide defines a peptide feature, explains each TIC-based reading,");
+            sb.AppendLine("and explains isotope, detector and TIC gaps without treating them as biological classes.");
+            sb.AppendLine("Database gap also gives each part's share of its own family's displayed signal total;");
+            sb.AppendLine("the separate comparison panel keeps all measured peptide feature signal as its base.");
+            sb.AppendLine("Signal sources by family lists families by pooled total signal, largest first.");
+            sb.AppendLine("What the numbers mean at the top defines the reference totals and peptide features.");
+            sb.AppendLine("Share rows use compact percentages. The chart heading names their reference total.");
+            sb.AppendLine("Hover or select a value for its exact reading and base, including rounded ring totals.");
+            sb.AppendLine("Family labels stop before database header fields; tooltips and details retain the full name.");
+            sb.AppendLine("The compare-measures plot's mean and SD follow Normalize to, with its base named on the axis.");
+            sb.AppendLine("Coverage uses matching choosers, a residue ruler and List placements and annotations.");
             sb.AppendLine();
 
             sb.AppendLine("WHAT THE PERCENTAGE IS OF (THE DENOMINATOR)");
@@ -373,6 +388,8 @@ namespace FamilyQuant
             sb.AppendLine("between 0 and 1 and a dot as the decimal separator, whatever your machine's");
             sb.AppendLine("language is. That is on purpose: the file is meant to be read by a program.");
 
+            sb.AppendLine();
+            sb.AppendLine("Recovery by mass range divides measured peptide envelope signal by the detector's isotope-envelope area in the same 500 Da neutral-mass range, pooling run areas. Identified-equivalent de novo features are excluded. The view spans the first through last range with detector signal; blank ranges have no detector signal. It is not a share of TIC or a mean of run percentages; the independent detector is not peptide-FDR calibrated and ratios can exceed 100%. Older projects need Quantify again to record the detector ranges for this view.");
             sb.AppendLine();
             sb.AppendLine(HelpWorkflowFacts.FilesAndNavigation);
             sb.AppendLine(HelpWorkflowFacts.Families);

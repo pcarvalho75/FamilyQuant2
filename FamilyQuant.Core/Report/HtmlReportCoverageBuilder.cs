@@ -120,7 +120,7 @@ public static class HtmlReportCoverageBuilder
     private sealed record BoundSpan(int Start, int End, string Label, string LabelPath, string? LabelFormat, string RangePath, string Kind);
     private static string I(int value) => value.ToString(CultureInfo.InvariantCulture);
     private static HtmlReportReference Stored(string pointer, string? format = null) => new() { Kind = "stored-value", Property = pointer, Format = format };
-    private static string FigureId(int family, string protein) => "figure:protein_coverage_" + I(family) + "_"
+    public static string FigureId(int family, string protein) => "figure:protein_coverage_" + I(family) + "_"
         + Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(protein))).ToLowerInvariant() + ".png";
     private static void Validate(int start, int end, int length)
     { if (start < 1 || end < start || end > length) throw new InvalidDataException("Stored coverage coordinates are outside the canonical sequence."); }

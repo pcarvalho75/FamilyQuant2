@@ -914,11 +914,8 @@ namespace FamilyQuant
                 "Every stage is project-native. Count grain changes are explicit; these four numbers are not one common-denominator funnel.");
             if (ActualWidth < 650 || ActualHeight < 330) return;
 
-            int rawImported = manifest.DeNovoInputs != null && manifest.DeNovoInputs.Count > 0
-                ? manifest.DeNovoInputs.Sum(i => i.RawRows)
-                : manifest.DeNovoScoreDistribution?.RawRows ?? 0;
-            int credited = data.Grouped?.DeNovoPeptides
-                ?? data.Fractions.Where(f => !f.IsGrouped).Sum(f => f.DeNovoPeptides);
+            int rawImported = QualityChartData.ImportedCalls(manifest);
+            int credited = QualityChartData.CreditedFeatures(data);
             var stages = new[]
             {
                 (Count: rawImported, Kicker: "1 · IMPORTED", Title: "raw spectrum calls",
@@ -1148,7 +1145,9 @@ namespace FamilyQuant
     public sealed class ReferenceIdentitySweepChart : TalkChartBase
     {
         private readonly List<IdentityScanRow> rows;
+        public IReadOnlyList<IdentityScanRow> Rows => rows; // U3d native drawing inputs.
         private readonly int selectedIdentity;
+        public int SelectedIdentity => selectedIdentity;
 
         public ReferenceIdentitySweepChart(IEnumerable<IdentityScanRow> rows, int selectedIdentity)
         {
@@ -1325,31 +1324,13 @@ namespace FamilyQuant
     public sealed class DeNovoScoreDistributionChart : TalkChartBase
     {
         private readonly List<DeNovoSourceScoreDistribution> distributions;
+        public IReadOnlyList<DeNovoSourceScoreDistribution> Distributions => distributions;
 
         public DeNovoScoreDistributionChart(DeNovoScoreDistribution distribution)
         {
             if (distribution == null) throw new ArgumentNullException(nameof(distribution));
             distribution.Validate();
-            distributions = new List<DeNovoSourceScoreDistribution>
-            {
-                new DeNovoSourceScoreDistribution
-                {
-                    SourceId = DeNovoSource.DenovoOnly.Id,
-                    SourceDisplayName = DeNovoSource.DenovoOnly.DisplayName,
-                    ConfidenceField = DeNovoSource.DenovoOnly.ConfidenceColumn,
-                    MinimumConfidence = distribution.MinAverageLocalConfidence,
-                    RawRows = distribution.RawRows,
-                    RowsPassingLength = distribution.RowsPassingLength,
-                    RowsAtOrAboveConfidence = distribution.RowsAtOrAboveAlc,
-                    RowsPassingLocalStretch = distribution.RowsPassingLocalStretch,
-                    RowsPassingLengthAndConfidence = distribution.RowsPassingLengthAndAlc,
-                    RowsPassingAllCriteria = distribution.RowsPassingAllCriteria,
-                    MinLength = distribution.MinLength,
-                    StretchLength = distribution.StretchLength,
-                    StretchFloor = distribution.StretchFloor,
-                    Bins = distribution.Bins,
-                },
-            };
+            distributions = new() { DeNovoSourceScoreDistributionStudy.FromLegacy(distribution) };
         }
 
         public DeNovoScoreDistributionChart(IEnumerable<DeNovoSourceScoreDistribution> distributions)
@@ -2256,6 +2237,10 @@ namespace FamilyQuant
         private readonly List<FamilyEnvelopeQuantRow> rows;
         private readonly HashSet<int> labelledFamilyIds;
         private IReadOnlyList<Rect> lastLabelBounds = Array.Empty<Rect>();
+        public IReadOnlyList<FamilyEnvelopeQuantRow> Rows => rows; // U3c exact native scatter inputs.
+        public static (double Signal, double DeNovoShare) Value(FamilyEnvelopeQuantRow row) =>
+            (Math.Max(0, row.TotalEnvelopeReferenceCalibrated), row.TotalEnvelopeReferenceCalibrated > 0
+                ? row.DeNovoEnvelopePrimary / row.TotalEnvelopeReferenceCalibrated : 0);
 
         /// <summary>The most recently rendered label rectangles, exposed so the headless chart test can
         /// guard against a future return of clipped or overlapping family labels.</summary>
@@ -2306,9 +2291,9 @@ namespace FamilyQuant
             var positions = new Dictionary<int, Point>();
             foreach (FamilyEnvelopeQuantRow r in rows)
             {
-                double share = r.TotalEnvelopeReferenceCalibrated > 0
-                    ? r.DeNovoEnvelopePrimary / r.TotalEnvelopeReferenceCalibrated : 0;
-                double xValue = Math.Max(0, r.TotalEnvelopeReferenceCalibrated) / 1e9;
+                var value = Value(r);
+                double share = value.DeNovoShare;
+                double xValue = value.Signal / 1e9;
                 double x = plot.Left + plot.Width * xValue / maxX;
                 double y = plot.Bottom - plot.Height * share / maxY;
                 Brush fill = share >= 0.20 ? Palette.Mixing : Palette.DeNovo;
@@ -2644,6 +2629,7 @@ namespace FamilyQuant
     public sealed class DeNovoTalkComparisonChart : TalkChartBase
     {
         private readonly List<DeNovoTalkComparisonRow> rows;
+        public IReadOnlyList<DeNovoTalkComparisonRow> Rows => rows; // U3d native drawing inputs.
 
         public DeNovoTalkComparisonChart(IEnumerable<DeNovoTalkComparisonRow> rows)
         {
@@ -2747,6 +2733,7 @@ namespace FamilyQuant
     public sealed class DeNovoVariantComparisonChart : TalkChartBase
     {
         private readonly List<DeNovoVariantSummary> rows;
+        public IReadOnlyList<DeNovoVariantSummary> Rows => rows; // U3d native drawing inputs.
 
         public DeNovoVariantComparisonChart(IEnumerable<DeNovoVariantSummary> rows)
         {

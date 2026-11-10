@@ -5,104 +5,104 @@
   "runs": [
     {
       "id": "RS-member-declarations",
-      "command": "D:\\FamilyQuant-wt\\release-2114\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-results-members D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261109-181948-release-2114\\results-members \u00222026-11-09 18:20:18 -0800\u0022",
-      "executedAt": "2026-11-09 18:20:18 -0800",
-      "commit": "c8885cce746467fd3ef2ffd5b02a3bfaaa9ffa61",
+      "command": "D:\\FamilyQuant-wt\\release-2115\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-results-members D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261110-064550-release-2115\\results-members \u00222026-11-10 06:46:18 -0800\u0022",
+      "executedAt": "2026-11-10 06:46:18 -0800",
+      "commit": "3d7c72932f67b7135d5c1263d88ca81555bd9b45",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\comparisons.log",
-          "sha256": "BD8D3887D9421789474D3113A58EA43DCABF0481482EFDBAD4B1AFCEE2884C19"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\comparisons.log",
+          "sha256": "E4A3CE155F23D37BB595BF016162DA2D00252F95B52A0F6F4757C2C1ADF5C1DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\comparisons.json",
-          "sha256": "960FFFA669ED32955A5843C52C689A05A633DD15BE2B5A94E28E9DA16BC06BB0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\comparisons.json",
+          "sha256": "1824B136405728BB9591701AAC63C322DD224B2944366478F06DE88F57479817"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant_AnalyticsControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant_AnalyticsControl.xaml.cs",
           "sha256": "27D83E03B0F65993485C7205ABBC3FF31B0A5B2DA3E249B55A9BAFD84371D6DC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant_AnalyticsViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant_AnalyticsViewModel.cs",
           "sha256": "7E89F75B03302B3688F280EC8FB4CDC2721123FF7EF1AF739ED753B750BADE83"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant_AnalyticsFigures.cs",
-          "sha256": "C6D7EEEAEA64987999B9524D85040609D54CDA579878DEAEFD06530E4EB51D5F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant_AnalyticsFigures.cs",
+          "sha256": "B29495F0E2CB7B7AB7E2F7B2C00E245B77C20E949E72D04D29DDDD402E739388"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant.Core_AnalyticsModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant.Core_AnalyticsModel.cs",
           "sha256": "69D4671C959D2FACF5AC903CF575CCF0295B63B7969C6FDD196B414EA810BE87"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant_ChartImageExporter.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant_ChartImageExporter.cs",
           "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant_ChartPalette.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant_ChartPalette.cs",
           "sha256": "08EE43A5A44D35CDA783D7D48E692929BA87170515CF953BE25CA29E07A20FB3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant_FamilyContributionChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant_FamilyContributionChart.cs",
           "sha256": "1A4170DFB077401C3D51E893668275D8004FDA247678D37F8E35553FB4B1CB6D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant_IdentityScanChart.cs",
-          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant_IdentityScanChart.cs",
+          "sha256": "338A312D7ED0E7A37B73653F61F13258F957992BBDF304939DC84E8A85D14E1C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant_IsotopeCountChart.cs",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant_IsotopeCountChart.cs",
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant.Core_NormalizationMode.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant.Core_NormalizationMode.cs",
           "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant_PercentIonCurrentChart.cs",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant_PercentIonCurrentChart.cs",
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant.Core_QuantitationProfile.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant.Core_QuantitationProfile.cs",
           "sha256": "44C857B61504BA7F8860F5F7D8B6FD7E5D50AE30ABE0948FB6D3CBE42312DB59"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant_RecoveryChart.cs",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant_RecoveryChart.cs",
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant.Core_SharedPeptidePolicy.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant.Core_SharedPeptidePolicy.cs",
           "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant_XicMassChart.cs",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant_XicMassChart.cs",
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant.Tests_Program.ResultsDeclarations.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant.Tests_Program.ResultsDeclarations.cs",
           "sha256": "AA5FFABFE1473F53112B1FE17534BB44D9061DFDB87D56B5EC318006C127EF9A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant.Tests_Program.Commands.ResultsPreservation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant.Tests_Program.Commands.ResultsPreservation.cs",
           "sha256": "BA1972CF75500818987B017134BE93F256323A005E2189D45B44673CA097126D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "537B33416C42923980D3CE1BB4E56C9DBDEA2522904252B25EA8789FE3B9701A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "070E3F0555AA8EDCCB3CA75A0FEEED1B7F21B100B480CAA8CD8CA1B847A76473"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant2.dll",
-          "sha256": "5B696999DB5D40545612F5FCBD130FA693C502F8D76C062BADB21CFCC8912084"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant2.dll",
+          "sha256": "67512E51368508C83DC741D3675F19C874F91D59C786FBE3A7FBF59AA4510091"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\executed\\FamilyQuant.Core.dll",
-          "sha256": "7EEB0BF50C082AF06855FBE7FFB8EDF31A1F6463CDD6F3F6959BBE540506C1D0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\executed\\FamilyQuant.Core.dll",
+          "sha256": "E2A31A136E84D34B7DF344B13E0347CDD7F5C2553120B8A45CD92FD70103F0FD"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\release-2114"
+      "workingDirectory": "D:\\FamilyQuant-wt\\release-2115"
     }
   ],
   "rows": [
@@ -1134,7 +1134,7 @@
         {
           "path": "FamilyQuant/AnalyticsFigures.cs",
           "symbol": "FamilyQuant.AnalyticsFigures::public const string XicByMassFile",
-          "sha256": "C6D7EEEAEA64987999B9524D85040609D54CDA579878DEAEFD06530E4EB51D5F"
+          "sha256": "B29495F0E2CB7B7AB7E2F7B2C00E245B77C20E949E72D04D29DDDD402E739388"
         }
       ],
       "proofs": [],
@@ -1148,7 +1148,7 @@
         {
           "path": "FamilyQuant/AnalyticsFigures.cs",
           "symbol": "FamilyQuant.AnalyticsFigures::public const string IsotopesCreditedFile",
-          "sha256": "C6D7EEEAEA64987999B9524D85040609D54CDA579878DEAEFD06530E4EB51D5F"
+          "sha256": "B29495F0E2CB7B7AB7E2F7B2C00E245B77C20E949E72D04D29DDDD402E739388"
         }
       ],
       "proofs": [],
@@ -1162,7 +1162,7 @@
         {
           "path": "FamilyQuant/AnalyticsFigures.cs",
           "symbol": "FamilyQuant.AnalyticsFigures::public const string PercentIonCurrentFile",
-          "sha256": "C6D7EEEAEA64987999B9524D85040609D54CDA579878DEAEFD06530E4EB51D5F"
+          "sha256": "B29495F0E2CB7B7AB7E2F7B2C00E245B77C20E949E72D04D29DDDD402E739388"
         }
       ],
       "proofs": [],
@@ -1176,7 +1176,7 @@
         {
           "path": "FamilyQuant/AnalyticsFigures.cs",
           "symbol": "FamilyQuant.AnalyticsFigures::public const string FamilyContributionFile",
-          "sha256": "C6D7EEEAEA64987999B9524D85040609D54CDA579878DEAEFD06530E4EB51D5F"
+          "sha256": "B29495F0E2CB7B7AB7E2F7B2C00E245B77C20E949E72D04D29DDDD402E739388"
         }
       ],
       "proofs": [],
@@ -1190,7 +1190,7 @@
         {
           "path": "FamilyQuant/AnalyticsFigures.cs",
           "symbol": "FamilyQuant.AnalyticsFigures::public const string RecoveryFile",
-          "sha256": "C6D7EEEAEA64987999B9524D85040609D54CDA579878DEAEFD06530E4EB51D5F"
+          "sha256": "B29495F0E2CB7B7AB7E2F7B2C00E245B77C20E949E72D04D29DDDD402E739388"
         }
       ],
       "proofs": [],
@@ -1204,7 +1204,7 @@
         {
           "path": "FamilyQuant/AnalyticsFigures.cs",
           "symbol": "FamilyQuant.AnalyticsFigures::public static List \u003C string \u003E Save ( AnalyticsData data , FamilyEnvelopeQuantResult ? families , string folder , int topN = FamilyContributionPlot . DefaultTopN , bool asPercentOfTotal = false , double layoutWidth = ChartImageExporter . DefaultLayoutWidth , double layoutHeight = ChartImageExporter . DefaultLayoutHeight , double scale = ChartImageExporter . DefaultScale , ChartPaletteVariant variant = ChartImageExporter . DefaultVariant )",
-          "sha256": "C6D7EEEAEA64987999B9524D85040609D54CDA579878DEAEFD06530E4EB51D5F"
+          "sha256": "B29495F0E2CB7B7AB7E2F7B2C00E245B77C20E949E72D04D29DDDD402E739388"
         }
       ],
       "proofs": [],
@@ -2814,7 +2814,7 @@
         {
           "path": "FamilyQuant/IdentityScanChart.cs",
           "symbol": "source module; member unresolved",
-          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+          "sha256": "338A312D7ED0E7A37B73653F61F13258F957992BBDF304939DC84E8A85D14E1C"
         }
       ],
       "proofs": [],
@@ -2828,7 +2828,7 @@
         {
           "path": "FamilyQuant/IdentityScanChart.cs",
           "symbol": "FamilyQuant.IdentityScanChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+          "sha256": "338A312D7ED0E7A37B73653F61F13258F957992BBDF304939DC84E8A85D14E1C"
         }
       ],
       "proofs": [],
@@ -2842,7 +2842,7 @@
         {
           "path": "FamilyQuant/IdentityScanChart.cs",
           "symbol": "FamilyQuant.IdentityScanChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+          "sha256": "338A312D7ED0E7A37B73653F61F13258F957992BBDF304939DC84E8A85D14E1C"
         }
       ],
       "proofs": [],
@@ -2856,7 +2856,7 @@
         {
           "path": "FamilyQuant/IdentityScanChart.cs",
           "symbol": "FamilyQuant.IdentityScanChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+          "sha256": "338A312D7ED0E7A37B73653F61F13258F957992BBDF304939DC84E8A85D14E1C"
         }
       ],
       "proofs": [],
@@ -2870,7 +2870,7 @@
         {
           "path": "FamilyQuant/IdentityScanChart.cs",
           "symbol": "FamilyQuant.IdentityScanChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+          "sha256": "338A312D7ED0E7A37B73653F61F13258F957992BBDF304939DC84E8A85D14E1C"
         }
       ],
       "proofs": [],
@@ -2884,7 +2884,7 @@
         {
           "path": "FamilyQuant/IdentityScanChart.cs",
           "symbol": "FamilyQuant.IdentityScanChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+          "sha256": "338A312D7ED0E7A37B73653F61F13258F957992BBDF304939DC84E8A85D14E1C"
         }
       ],
       "proofs": [],
@@ -2898,7 +2898,7 @@
         {
           "path": "FamilyQuant/IdentityScanChart.cs",
           "symbol": "FamilyQuant.IdentityScanChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+          "sha256": "338A312D7ED0E7A37B73653F61F13258F957992BBDF304939DC84E8A85D14E1C"
         }
       ],
       "proofs": [],
@@ -2912,7 +2912,7 @@
         {
           "path": "FamilyQuant/IdentityScanChart.cs",
           "symbol": "FamilyQuant.IdentityScanChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+          "sha256": "338A312D7ED0E7A37B73653F61F13258F957992BBDF304939DC84E8A85D14E1C"
         }
       ],
       "proofs": [],
@@ -2926,7 +2926,7 @@
         {
           "path": "FamilyQuant/IdentityScanChart.cs",
           "symbol": "FamilyQuant.IdentityScanChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+          "sha256": "338A312D7ED0E7A37B73653F61F13258F957992BBDF304939DC84E8A85D14E1C"
         }
       ],
       "proofs": [],
@@ -2940,7 +2940,7 @@
         {
           "path": "FamilyQuant/IdentityScanChart.cs",
           "symbol": "FamilyQuant.IdentityScanChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+          "sha256": "338A312D7ED0E7A37B73653F61F13258F957992BBDF304939DC84E8A85D14E1C"
         }
       ],
       "proofs": [],
@@ -2954,7 +2954,7 @@
         {
           "path": "FamilyQuant/IdentityScanChart.cs",
           "symbol": "FamilyQuant.IdentityScanChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+          "sha256": "338A312D7ED0E7A37B73653F61F13258F957992BBDF304939DC84E8A85D14E1C"
         }
       ],
       "proofs": [],
@@ -2967,42 +2967,42 @@
       "implementation": [
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
-          "symbol": "FamilyQuant.IsotopeCountChart::static readonly string [ ] BandNames",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "symbol": "source module; member unresolved",
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim. Declaration comparison does not prove runtime behavior.",
-      "kindReceiptId": "member-code-fact",
-      "compared": "FamilyQuant.IsotopeCountChart::static readonly string [ ] BandNames: \u0022under 1500 Da\u0022 -\u003E FamilyQuant/IsotopeCountChart.cs: FamilyQuant.IsotopeCountChart::static readonly string [ ] BandNames; exact tokens SHA256 F2A337B74D62349C7A1AA8672B8BEF7C953CE5407559154548B9AC68EB29374B; occurrences 1"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback. Declaration comparison does not prove runtime behavior.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-FD0073FA4998",
       "implementation": [
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
-          "symbol": "FamilyQuant.IsotopeCountChart::static readonly string [ ] BandNames",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "symbol": "source module; member unresolved",
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim. Declaration comparison does not prove runtime behavior.",
-      "kindReceiptId": "member-code-fact",
-      "compared": "FamilyQuant.IsotopeCountChart::static readonly string [ ] BandNames: \u00221500 to 3000 Da\u0022 -\u003E FamilyQuant/IsotopeCountChart.cs: FamilyQuant.IsotopeCountChart::static readonly string [ ] BandNames; exact tokens SHA256 F2A337B74D62349C7A1AA8672B8BEF7C953CE5407559154548B9AC68EB29374B; occurrences 1"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback. Declaration comparison does not prove runtime behavior.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-D106481D7895",
       "implementation": [
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
-          "symbol": "FamilyQuant.IsotopeCountChart::static readonly string [ ] BandNames",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "symbol": "source module; member unresolved",
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim. Declaration comparison does not prove runtime behavior.",
-      "kindReceiptId": "member-code-fact",
-      "compared": "FamilyQuant.IsotopeCountChart::static readonly string [ ] BandNames: \u0022over 3000 Da\u0022 -\u003E FamilyQuant/IsotopeCountChart.cs: FamilyQuant.IsotopeCountChart::static readonly string [ ] BandNames; exact tokens SHA256 F2A337B74D62349C7A1AA8672B8BEF7C953CE5407559154548B9AC68EB29374B; occurrences 1"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback. Declaration comparison does not prove runtime behavior.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-3FD91852854B",
@@ -3010,7 +3010,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "FamilyQuant.IsotopeCountChart::public IsotopeCountChart ( IEnumerable \u003C AnalyticsPeptide \u003E ? peptides , bool splitByMass = true , ChartPalette ? palette = null )",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
@@ -3024,7 +3024,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "FamilyQuant.IsotopeCountChart::public IsotopeCountChart ( IEnumerable \u003C AnalyticsPeptide \u003E ? peptides , bool splitByMass = true , ChartPalette ? palette = null )",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
@@ -3038,7 +3038,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "FamilyQuant.IsotopeCountChart::public IsotopeCountChart ( IEnumerable \u003C AnalyticsPeptide \u003E ? peptides , bool splitByMass = true , ChartPalette ? palette = null )",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
@@ -3052,7 +3052,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "source module; member unresolved",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
@@ -3066,7 +3066,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "FamilyQuant.IsotopeCountChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
@@ -3080,7 +3080,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "FamilyQuant.IsotopeCountChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
@@ -3094,7 +3094,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "FamilyQuant.IsotopeCountChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
@@ -3108,7 +3108,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "FamilyQuant.IsotopeCountChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
@@ -3122,7 +3122,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "FamilyQuant.IsotopeCountChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
@@ -3136,7 +3136,7 @@
         {
           "path": "FamilyQuant/IsotopeCountChart.cs",
           "symbol": "FamilyQuant.IsotopeCountChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "580A3045CB30E514A210D8D0DB80B49A732423C62B1CDF3AA082DD9B01CEE945"
+          "sha256": "76EC59FF00D601F2EFD748283534F8F790254186A65DBAB9AE273D69D0F36365"
         }
       ],
       "proofs": [],
@@ -3751,12 +3751,12 @@
       "implementation": [
         {
           "path": "FamilyQuant/PercentIonCurrentChart.cs",
-          "symbol": "FamilyQuant.PercentIonCurrentChart::public PercentIonCurrentChart ( IEnumerable \u003C AnalyticsPeptide \u003E ? peptides , double tic = 0 , double binWidth = 500 , ChartPalette ? palette = null )",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "symbol": "source module; member unresolved",
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         }
       ],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed. Declaration comparison does not prove runtime behavior.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback. Declaration comparison does not prove runtime behavior.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3765,12 +3765,12 @@
       "implementation": [
         {
           "path": "FamilyQuant/PercentIonCurrentChart.cs",
-          "symbol": "FamilyQuant.PercentIonCurrentChart::public PercentIonCurrentChart ( IEnumerable \u003C AnalyticsPeptide \u003E ? peptides , double tic = 0 , double binWidth = 500 , ChartPalette ? palette = null )",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "symbol": "source module; member unresolved",
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         }
       ],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed. Declaration comparison does not prove runtime behavior.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback. Declaration comparison does not prove runtime behavior.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3779,12 +3779,12 @@
       "implementation": [
         {
           "path": "FamilyQuant/PercentIonCurrentChart.cs",
-          "symbol": "FamilyQuant.PercentIonCurrentChart::public PercentIonCurrentChart ( IEnumerable \u003C AnalyticsPeptide \u003E ? peptides , double tic = 0 , double binWidth = 500 , ChartPalette ? palette = null )",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "symbol": "source module; member unresolved",
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         }
       ],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed. Declaration comparison does not prove runtime behavior.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback. Declaration comparison does not prove runtime behavior.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3794,7 +3794,7 @@
         {
           "path": "FamilyQuant/PercentIonCurrentChart.cs",
           "symbol": "source module; member unresolved",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         }
       ],
       "proofs": [],
@@ -3808,11 +3808,11 @@
         {
           "path": "FamilyQuant/PercentIonCurrentChart.cs",
           "symbol": "FamilyQuant.PercentIonCurrentChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         }
       ],
       "proofs": [],
-      "note": "The containing member declaration or body changed; retained text alone is insufficient. Declaration comparison does not prove runtime behavior.",
+      "note": "The exact literal multiplicity within the containing member changed. Declaration comparison does not prove runtime behavior.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3822,11 +3822,11 @@
         {
           "path": "FamilyQuant/PercentIonCurrentChart.cs",
           "symbol": "FamilyQuant.PercentIonCurrentChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         }
       ],
       "proofs": [],
-      "note": "The containing member declaration or body changed; retained text alone is insufficient. Declaration comparison does not prove runtime behavior.",
+      "note": "The exact literal multiplicity within the containing member changed. Declaration comparison does not prove runtime behavior.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3836,11 +3836,11 @@
         {
           "path": "FamilyQuant/PercentIonCurrentChart.cs",
           "symbol": "FamilyQuant.PercentIonCurrentChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         }
       ],
       "proofs": [],
-      "note": "The containing member declaration or body changed; retained text alone is insufficient. Declaration comparison does not prove runtime behavior.",
+      "note": "The exact literal multiplicity within the containing member changed. Declaration comparison does not prove runtime behavior.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3850,7 +3850,7 @@
         {
           "path": "FamilyQuant/PercentIonCurrentChart.cs",
           "symbol": "FamilyQuant.PercentIonCurrentChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         }
       ],
       "proofs": [],
@@ -3864,11 +3864,11 @@
         {
           "path": "FamilyQuant/PercentIonCurrentChart.cs",
           "symbol": "FamilyQuant.PercentIonCurrentChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         }
       ],
       "proofs": [],
-      "note": "The containing member declaration or body changed; retained text alone is insufficient. Declaration comparison does not prove runtime behavior.",
+      "note": "The exact literal multiplicity within the containing member changed. Declaration comparison does not prove runtime behavior.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3877,42 +3877,42 @@
       "implementation": [
         {
           "path": "FamilyQuant/PercentIonCurrentChart.cs",
-          "symbol": "FamilyQuant.PercentIonCurrentChart::private void DrawLegend ( DrawingContext dc , Rect plot )",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "symbol": "source module; member unresolved",
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         }
       ],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim. Declaration comparison does not prove runtime behavior.",
-      "kindReceiptId": "member-code-fact",
-      "compared": "FamilyQuant.PercentIonCurrentChart::private void DrawLegend ( DrawingContext dc , Rect plot ): \u0022share of credited envelope\u0022 -\u003E FamilyQuant/PercentIonCurrentChart.cs: FamilyQuant.PercentIonCurrentChart::private void DrawLegend ( DrawingContext dc , Rect plot ); exact tokens SHA256 16034F74A53EF6C7E09094250482DB90A4BC6110367CBC55DB71AE3DD2A6DE37; occurrences 1"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback. Declaration comparison does not prove runtime behavior.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-25B8151A1126",
       "implementation": [
         {
           "path": "FamilyQuant/PercentIonCurrentChart.cs",
-          "symbol": "FamilyQuant.PercentIonCurrentChart::private void DrawLegend ( DrawingContext dc , Rect plot )",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "symbol": "source module; member unresolved",
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         }
       ],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim. Declaration comparison does not prove runtime behavior.",
-      "kindReceiptId": "member-code-fact",
-      "compared": "FamilyQuant.PercentIonCurrentChart::private void DrawLegend ( DrawingContext dc , Rect plot ): \u0022share of TIC\u0022 -\u003E FamilyQuant/PercentIonCurrentChart.cs: FamilyQuant.PercentIonCurrentChart::private void DrawLegend ( DrawingContext dc , Rect plot ); exact tokens SHA256 16034F74A53EF6C7E09094250482DB90A4BC6110367CBC55DB71AE3DD2A6DE37; occurrences 2"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback. Declaration comparison does not prove runtime behavior.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-0A23F2CBFDA6",
       "implementation": [
         {
           "path": "FamilyQuant/PercentIonCurrentChart.cs",
-          "symbol": "FamilyQuant.PercentIonCurrentChart::private void DrawLegend ( DrawingContext dc , Rect plot )",
-          "sha256": "3EDF43A885EB75531DC03458B97A195883149381AC1B8C74C29934DC713BB653"
+          "symbol": "source module; member unresolved",
+          "sha256": "EF27586DABB2C62C6B7B70FBA08CA6F664B19100B09FB42810CA1CA145801F0F"
         }
       ],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim. Declaration comparison does not prove runtime behavior.",
-      "kindReceiptId": "member-code-fact",
-      "compared": "FamilyQuant.PercentIonCurrentChart::private void DrawLegend ( DrawingContext dc , Rect plot ): \u0022share of TIC\u0022 -\u003E FamilyQuant/PercentIonCurrentChart.cs: FamilyQuant.PercentIonCurrentChart::private void DrawLegend ( DrawingContext dc , Rect plot ); exact tokens SHA256 16034F74A53EF6C7E09094250482DB90A4BC6110367CBC55DB71AE3DD2A6DE37; occurrences 2"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback. Declaration comparison does not prove runtime behavior.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-C9A212E23A82",
@@ -4172,7 +4172,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::private const string LabelSeparators",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4186,7 +4186,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "source module; member unresolved",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4200,7 +4200,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::private static string Pct ( double frac )",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4214,7 +4214,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::private static string Pct ( double frac )",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4228,7 +4228,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4242,7 +4242,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4256,7 +4256,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::private static string TopTailText ( NativeRunFraction f )",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4270,7 +4270,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::private static string TopTailText ( NativeRunFraction f )",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4284,7 +4284,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::private static string BottomTailText ( NativeRunFraction f , bool anyDetected )",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4298,7 +4298,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::private void DrawLegend ( DrawingContext dc , Point at )",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4312,7 +4312,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::private void DrawLegend ( DrawingContext dc , Point at )",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4326,7 +4326,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::private void DrawLegend ( DrawingContext dc , Point at )",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4340,7 +4340,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "FamilyQuant.RecoveryChart::private void DrawLegend ( DrawingContext dc , Point at )",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4354,7 +4354,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "source module; member unresolved",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4368,7 +4368,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "source module; member unresolved",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4382,7 +4382,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "source module; member unresolved",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4396,7 +4396,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "source module; member unresolved",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4410,7 +4410,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "source module; member unresolved",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4424,7 +4424,7 @@
         {
           "path": "FamilyQuant/RecoveryChart.cs",
           "symbol": "source module; member unresolved",
-          "sha256": "5FA6D298137328572971B893EA60A88E3D866755F9888EA3A0C6F0BD41ADBE6F"
+          "sha256": "5AE699D747E2C5C4FB71FADF415C128C8E46DAD8411F674029B0ABD3198927BB"
         }
       ],
       "proofs": [],
@@ -4760,7 +4760,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::public XicMassChart ( IEnumerable \u003C AnalyticsPeptide \u003E ? peptides , ChartPalette ? palette = null )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4774,7 +4774,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::public XicMassChart ( IEnumerable \u003C AnalyticsPeptide \u003E ? peptides , ChartPalette ? palette = null )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4788,7 +4788,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::public XicMassChart ( IEnumerable \u003C AnalyticsPeptide \u003E ? peptides , ChartPalette ? palette = null )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4802,7 +4802,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "source module; member unresolved",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4816,7 +4816,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4830,7 +4830,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4844,7 +4844,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4858,7 +4858,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4872,7 +4872,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4886,7 +4886,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::protected override void OnRender ( DrawingContext dc )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4900,7 +4900,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::private void DrawLegend ( DrawingContext dc , Rect plot )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4914,7 +4914,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::private void DrawLegend ( DrawingContext dc , Rect plot )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4928,7 +4928,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::private void DrawLegend ( DrawingContext dc , Rect plot )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4942,7 +4942,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::private void DrawLegend ( DrawingContext dc , Rect plot )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4956,7 +4956,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::private void DrawLegend ( DrawingContext dc , Rect plot )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4970,7 +4970,7 @@
         {
           "path": "FamilyQuant/XicMassChart.cs",
           "symbol": "FamilyQuant.XicMassChart::private void DrawLegend ( DrawingContext dc , Rect plot )",
-          "sha256": "29E1AB9F115836229AA7673865F3DE554A1768F7A4119051B6352C8CE115504D"
+          "sha256": "58CBF37E0F719CED2D9FA34B93441B37D386BEDAD1EB1566ACF53D9C2B96A8BC"
         }
       ],
       "proofs": [],
@@ -4989,7 +4989,7 @@
           "kind": "test",
           "target": "ResultsMemberComparisonCommand",
           "assertion": "RS declaration kind code fact: every listed literal retains its complete containing member",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5003,7 +5003,7 @@
           "kind": "test",
           "target": "ResultsMemberComparisonCommand",
           "assertion": "RS declaration kind export/storage fact: every listed literal retains its complete containing member",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5017,7 +5017,7 @@
           "kind": "test",
           "target": "ResultsMemberComparisonCommand",
           "assertion": "RS declaration kind format/export: every listed literal retains its complete containing member",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\results-members\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\results-members\\comparisons.log",
           "inspectedBy": ""
         }
       ]

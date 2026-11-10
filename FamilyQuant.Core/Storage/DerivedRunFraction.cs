@@ -7,6 +7,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 
 namespace FamilyQuant
@@ -129,6 +130,12 @@ namespace FamilyQuant
         /// <summary>Q6: the detected feature count per charge, indexed like
         /// <see cref="DetectedAreaByCharge"/>.</summary>
         public int[] DetectedCountByCharge { get; set; } = Array.Empty<int>();
+
+        /// <summary>Optional detector areas in fixed neutral-mass ranges, recorded by U6 Quantify.</summary>
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double[]? DetectedAreaByNeutralMass { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? NeutralMassBinWidth { get; set; }
 
         /// <summary>How every number in this row was obtained, machine-readable.</summary>
         public string Provenance { get; set; } = string.Empty;

@@ -96,7 +96,10 @@ public static partial class HtmlReportPayloadBuilder
                 if (!double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out double value) || !double.IsFinite(value)) continue;
                 string field = Add(text, frame.Reference(row, fraction), "fraction", value);
                 AddShort(field, value, frame.Reference(row, fraction), "fraction");
-                result.Add(new(Cell(frame, row, name), field));
+                var percentSource = frame.Reference(row, fraction) with { Scale = 100, Format = "G17" };
+                string percent = Add((value * 100).ToString("G17", CultureInfo.InvariantCulture), percentSource, "%", value * 100);
+                AddShort(percent, value * 100, percentSource, "%");
+                result.Add(new(Cell(frame, row, name), field) { Percent = percent });
             }
             return result;
         }

@@ -137,7 +137,7 @@ namespace FamilyQuant
                 FullXicCacheLocation detectedCache = storage.Detector(run, detectedCachePathFor?.Invoke(run));
 
                 Ms1EnvelopeDetectionResult det = Ms1EnvelopeDetector.DetectRun(
-                    rawPath, detectedCache.WritePath, progress, rawFingerprint, detectedCache.LegacyReadPath, operation);
+                    rawPath, detectedCache.WritePath, progress, rawFingerprint, detectedCache.LegacyReadPath, operation, requireMassRanges: true);
                 result.Detected[run] = det;
 
                 manifest.PerRunTic.TryGetValue(run, out double runTic);

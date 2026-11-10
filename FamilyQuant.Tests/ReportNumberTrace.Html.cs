@@ -155,6 +155,16 @@ internal static partial class ReportNumberTrace
                 if (payload.Fields.TryGetValue(id, out var tick)
                     && (tick.Source.Kind != "axis-tick" || tick.Source.Property?.StartsWith(measure.Id + "/", StringComparison.Ordinal) != true))
                     errors[id] = "Axis tick is not bound to this measure.";
+            foreach (var basis in measure.Bases)
+            {
+                if (!payload.Fields.TryGetValue(basis.Value.Label, out var basisLabel)
+                    || basisLabel.Source.Kind != "basis-axis-label" || basisLabel.Source.Property != measure.Id + "/" + basis.Key)
+                    errors[basis.Value.Label] = "Selected-base axis label is not bound to this measure and base.";
+                foreach (string id in basis.Value.Ticks)
+                    if (!payload.Fields.TryGetValue(id, out var tick) || tick.Source.Kind != "axis-tick"
+                        || tick.Source.Property?.StartsWith(measure.Id + "/", StringComparison.Ordinal) != true)
+                        errors[id] = "Selected-base axis tick is not bound to this measure.";
+            }
         }
         foreach (var family in payload.Composition.Families)
             if (family.DatabaseEntries is string id && payload.Fields.TryGetValue(id, out var field))
@@ -176,6 +186,37 @@ internal static partial class ReportNumberTrace
                 catch (Exception e) when (e is ArgumentException or InvalidDataException or InvalidOperationException or KeyNotFoundException or FormatException)
                 { errors[coverage.SourceFigureId] = e.Message; }
             }
+        if (payload.CoverageCatalog is { } catalog)
+        {
+            try
+            {
+                if (catalog.Proteins.Count > 0 && (project == null || manifest?.FamilyPeptideLocalization == null))
+                    throw new InvalidDataException("The coverage catalog requires its stored localization and project.");
+                var native = catalog.Proteins.Count == 0 ? new Dictionary<(int, string), ProteinCoverageMapData>()
+                    : ProteinCoverageFigures.DataFromStored(manifest!.FamilyPeptideLocalization!, project!, int.MaxValue)
+                        .ToDictionary(map => (map.FamilyUserId, map.ProteinId));
+                foreach (var protein in catalog.Proteins)
+                {
+                    string key = "coverage catalog " + protein.FamilyUserId + "/" + protein.Protein;
+                    if (!native.TryGetValue((protein.FamilyUserId, protein.Protein), out var map))
+                    { errors[key] = "The catalog protein has no native stored snapshot."; continue; }
+                    int count = map.Peptides.Select(peptide => peptide.Label).Distinct(StringComparer.Ordinal).Count();
+                    var peptides = map.Peptides.SelectMany(peptide => peptide.Segments.Select(span => new HtmlCoverageCatalogSpan(span.Start, span.End,
+                        peptide.Label, peptide.Kind == CoveragePlacementKind.Exact ? "ExactContainment" : "Aligned",
+                        peptide.Source == CoveragePeptideSource.Identified ? "identified" : "de novo")));
+                    var domains = map.Annotations.SelectMany(annotation => annotation.Segments.Select(span => new HtmlCoverageCatalogSpan(span.Start, span.End,
+                        annotation.Label, annotation.Kind == CoverageAnnotationKind.Domain ? "domain" : "feature")));
+                    if (protein.Length != map.SequenceLength || protein.CreditedSignal != map.RankingSignal || protein.PeptideCount != count
+                        || !protein.Peptides.SequenceEqual(peptides) || !protein.Domains.SequenceEqual(domains))
+                        errors[key] = "The catalog differs from the native stored coverage snapshot.";
+                }
+                foreach (var family in catalog.Families)
+                    if (family.Proteins.Distinct().Count() != family.Proteins.Count || family.Proteins.Any(index => index < 0 || index >= catalog.Proteins.Count))
+                        errors["coverage catalog family " + family.Id] = "The catalog family contains an invalid protein reference.";
+            }
+            catch (Exception e) when (e is ArgumentException or InvalidOperationException or InvalidDataException)
+            { errors["coverage catalog"] = e.Message; }
+        }
         foreach (var figure in payload.Quality.Concat(payload.Sensitivity)) CheckPng(figure.SourceFigureId, figure.Png, Text(figure.Title), Text(figure.Caption));
         using (var writer = new StreamWriter(output, false, new UTF8Encoding(false)))
         {
@@ -190,6 +231,14 @@ internal static partial class ReportNumberTrace
                     found ? "explicit " + pair.Value.Source.Kind + (pair.Value.Source.Format == null ? "" : " format " + pair.Value.Source.Format) : reason!, pair.Value.Text, pair.Key, found ? "1" : "0" });
             }
             foreach (var pair in errors.Where(e => !payload.Fields.ContainsKey(e.Key))) Write(new[] { pair.Key, "", "NOT FOUND", "", "", pair.Value, "", "", "0" });
+            if (payload.CoverageCatalog != null)
+                foreach (var protein in payload.CoverageCatalog.Proteins)
+                {
+                    string key = "coverage catalog " + protein.FamilyUserId + "/" + protein.Protein;
+                    if (!errors.ContainsKey(key) && !errors.ContainsKey("coverage catalog"))
+                        Write(new[] { key, protein.PeptideCount.ToString(CultureInfo.InvariantCulture), "MATCH", "project", "FamilyPeptideLocalization",
+                            "native coverage snapshot", protein.Protein, key, "1" });
+                }
             void Write(IEnumerable<string> row) => writer.WriteLine(string.Join(",", row.Select(value => SpreadsheetSafeCsv.Encode(value))));
         }
         Console.WriteLine($"HTML number trace: {payload.Fields.Count} bound fields, {errors.Count} NOT FOUND. Output: {output}");
@@ -239,18 +288,18 @@ internal static partial class ReportNumberTrace
                 };
                 return new(N(label), null, "program", source.Property);
             }
-            if (source.Kind == "family-basis")
+            if (source.Kind is "family-basis" or "family-ring")
             {
                 if (manifest == null || source.Scale != 100 || source.Format is not ("G3" or "G6"))
                     throw new InvalidDataException("A family basis needs stored inputs and a percent display recipe.");
                 if (field.Unit != (source.Property?.EndsWith("/sd", StringComparison.Ordinal) == true ? "pp" : "%"))
                     throw new InvalidDataException("A family share has the wrong display unit.");
-                double value = (HtmlReportPayloadBuilder.ReadFamilyShare(source, manifest)
+                double value = ((source.Kind == "family-ring" ? HtmlReportPayloadBuilder.ReadRingShare(source, manifest) : HtmlReportPayloadBuilder.ReadFamilyShare(source, manifest))
                     ?? throw new InvalidDataException("Stored family share unavailable.")) * source.Scale;
                 return new(N(value.ToString(source.Format, CultureInfo.InvariantCulture)), value, "project", source.Family + "/" + source.Property);
             }
             if (source.Kind == "database-entry-count") return databaseEntries.Resolve(source, field);
-            if (source.Kind is "axis-label" or "axis-tick")
+            if (source.Kind is "axis-label" or "axis-tick" or "basis-axis-label")
             {
                 if (!HtmlReportAxisTicks.TryResolve(source, out var resolved) || resolved == null)
                     throw new InvalidDataException("Unknown or invalid axis source recipe.");
@@ -316,6 +365,31 @@ internal static partial class ReportNumberTrace
     private static IEnumerable<(string Location, string Id)> FieldReferences(HtmlReportPayload p)
     {
         var ids = new List<string?> { p.Title, p.Authors, p.Interpretation };
+        foreach (var figure in p.SensitivityFigures.Figures)
+            foreach (var panel in figure.Panels)
+            {
+                foreach (var marker in panel.Markers) ids.AddRange(new[] { marker.Identity.Exact, marker.Identity.Display });
+                foreach (var row in panel.Rows)
+                {
+                    ids.AddRange(new[] { row.Name, row.Note });
+                    foreach (var number in new[] { row.X, row.Total })
+                        if (number != null) ids.AddRange(new[] { number.Exact, number.Display });
+                    foreach (var part in row.Parts) ids.AddRange(new[] { part.Value.Exact, part.Value.Display });
+                }
+            }
+        foreach (var figure in p.FamilyFigures.Figures)
+            foreach (var view in figure.Views.Values)
+                foreach (var row in view.Rows)
+                {
+                    ids.Add(row.Name);
+                    foreach (var number in new[] { row.X, row.Y, row.Lower, row.Upper })
+                        if (number != null) ids.AddRange(new[] { number.Exact, number.Display });
+                    foreach (var part in row.Parts)
+                    {
+                        ids.AddRange(new[] { part.Name, part.Value.Exact, part.Value.Display });
+                        if (part.FamilyPercent != null) ids.AddRange(new[] { part.FamilyPercent.Exact, part.FamilyPercent.Display });
+                    }
+                }
         foreach (var bucket in new[] { p.Composition.SharedBetweenFamilies, p.Composition.Unattributed })
             ids.AddRange(new[] { bucket.IdentifiedOnly, bucket.IdentifiedAndDeNovo, bucket.DetectorEnvelopes, bucket.Tic });
         foreach (var row in p.Composition.ContributionRows)
@@ -324,6 +398,7 @@ internal static partial class ReportNumberTrace
             foreach (var basis in new[] { row.IdentifiedOnly, row.IdentifiedAndDeNovo, row.DetectorEnvelopes, row.Tic })
                 if (basis != null) ids.AddRange(new[] { basis.Total, basis.Identified, basis.DeNovo });
         }
+        foreach (var ring in p.Composition.RingBases.Values) ids.AddRange(new[] { ring.Total, ring.Outside });
         foreach (var f in p.Composition.Families)
         {
             ids.AddRange(new[] { f.Name, f.Mean, f.Sd, f.Cv, f.WholeMeasured, f.Proteins, f.UniqueProteins, f.Peptides, f.DatabaseEntries });
@@ -341,6 +416,12 @@ internal static partial class ReportNumberTrace
             ids.Add(measure.Label);
             ids.AddRange(measure.Ticks);
             ids.AddRange(measure.Values.Values);
+            foreach (var basis in measure.Bases.Values)
+            {
+                ids.Add(basis.Label);
+                ids.AddRange(basis.Ticks);
+                ids.AddRange(basis.Values.Values);
+            }
         }
         foreach (var r in p.CreditedRuns) ids.AddRange(new[] { r.Name, r.Share });
         foreach (var g in p.DatabaseGap) ids.AddRange(new[] { g.Name, g.Fraction });

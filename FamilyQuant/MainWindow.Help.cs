@@ -34,7 +34,7 @@ public partial class MainWindow
             {
                 return
                     "Results. A read-only view of this project's own full-envelope quantitation: the XIC " +
-                    "by mass, the isotopes credited per peptide, the percent of ion current by mass, what " +
+                    "by mass, the isotopes credited per peptide, recovery by mass range, what " +
                     "each family contributes, and the recovery of the total ion current. These Results graphs can be " +
                     "saved as a projector-sized PNG. It changes no family and reads no RAW. If it says " +
                     "there is nothing to analyse, use Quantify first. The open " +

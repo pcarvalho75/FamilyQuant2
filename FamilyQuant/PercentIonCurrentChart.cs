@@ -1,152 +1,79 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
 namespace FamilyQuant
 {
-    /// <summary>
-    /// Where the credited ion current sits by mass: mass binned along the bottom, and for each bin the
-    /// share of the whole credited envelope signal that the peptides in that bin carry. When a run TIC is
-    /// supplied the bin's share of the raw TIC is drawn as a fainter overlay, so the reader sees both what
-    /// fraction of the FOUND signal and what fraction of ALL signal each mass band holds.
-    ///
-    /// Drawn with OnRender for the same reason as the other charts, and renders headless.
-    /// </summary>
+    /// <summary>Recovery per neutral-mass range, using the independently detected envelope area.</summary>
     public class PercentIonCurrentChart : ChartDrawingBase, IPalettedChart
     {
-        private readonly List<AnalyticsPeptide> peptides;
-        private readonly double tic;
-        private readonly double binWidth;
+        public MassRangeRecoveryData Data { get; }
 
-
-        /// <param name="tic">The run (or grouped) total ion current, or 0 to omit the share-of-TIC overlay.</param>
-        /// <param name="palette">The colours to paint in, or null for the screen palette.</param>
-        public PercentIonCurrentChart(IEnumerable<AnalyticsPeptide>? peptides, double tic = 0,
-                                      double binWidth = 500, ChartPalette? palette = null)
+        /// <summary>The historical constructor arguments are retained for existing chart callers.
+        /// Recovery requires the optional stored detector-range projection.</summary>
+        public PercentIonCurrentChart(IEnumerable<AnalyticsPeptide> peptides, double tic = 0,
+            double binWidth = 500, ChartPalette? palette = null, MassRangeRecoveryData? recovery = null)
         {
             this.palette = palette ?? ChartPalette.Dark;
-            this.peptides = (peptides ?? Enumerable.Empty<AnalyticsPeptide>())
-                .Where(p => p != null && p.Envelope > 0 && p.Mass > 0).ToList();
-            this.tic = tic > 0 ? tic : 0;
-            this.binWidth = binWidth > 0 ? binWidth : 500;
+            Data = recovery ?? new(false, MassRangeRecoveryData.MissingMessage, Array.Empty<MassRangeRecoveryData.Bin>(),
+                1, 0, MassRangeRecoveryData.MissingMessage);
             MinHeight = 240;
             Margin = new Thickness(0);
-            ToolTip = "Peptide mass is binned along the bottom; filled bars show each band's share of credited peptide signal, summing to 100%, " +
-                      "while outlined bars show its share of total ion current when TIC is known. " +
-                      "This read-only chart changes no project values or files.";
+            ToolTip = "Each mass range compares measured peptide envelopes with detector isotope-envelope area in that same range. "
+                + "This read-only chart pools run areas and changes no project values or files.";
         }
-
 
         protected override void OnRender(DrawingContext dc)
         {
             base.OnRender(dc);
-
-            ChartPalette pal = palette;
-            Brush Backdrop = pal.Backdrop, Ink = pal.Ink, Muted = pal.Muted, Grid = pal.Grid;
-            Brush Found = pal.Found, OfTic = pal.OfTic;
-
-            DrawBackdrop(dc, Backdrop);
-
-            var head = Text("Percent of ion current by mass", Ink, 13, bold: true);
-            dc.DrawText(head, new Point(14, 10));
-
+            DrawBackdrop(dc, palette.Backdrop);
+            dc.DrawText(Text("Recovery by neutral-mass range", palette.Ink, 13, true), new Point(14, 10));
             if (ActualWidth < 200 || ActualHeight < 150) return;
-
-            var plot = new Rect(64, 40, Math.Max(1, ActualWidth - 64 - 24),
-                                Math.Max(1, ActualHeight - 40 - 56));
-
-            if (peptides.Count == 0)
+            if (!Data.Available || Data.Bins.Count == 0)
             {
-                DrawEmpty(dc, "Nothing to show: no peptide carried a positive envelope yet.", Muted, new Point(plot.Left, plot.Top + plot.Height / 2));
+                var message = Text(Data.Message, palette.Muted, 12);
+                message.MaxTextWidth = Math.Max(1, ActualWidth - 40);
+                dc.DrawText(message, new Point(20, 54));
                 return;
             }
-
-            double maxMass = peptides.Max(p => p.Mass);
-            int binCount = Math.Max(1, (int)Math.Ceiling(maxMass / binWidth));
-            binCount = Math.Min(binCount, 40);   // never so many bars they are a pixel wide
-
-            var found = new double[binCount];
-            double totalFound = 0;
-            foreach (AnalyticsPeptide p in peptides)
+            dc.DrawText(Text("Measured peptide envelope / detector envelope in each range", palette.Muted, 10), new Point(14, 30));
+            var plot = new Rect(64, 56, Math.Max(1, ActualWidth - 88), Math.Max(1, ActualHeight - 168));
+            int ticks = (int)Math.Round(Data.AxisMaximum / Data.TickStep);
+            for (int tick = 0; tick <= ticks; tick++)
             {
-                int b = Math.Min(binCount - 1, (int)(p.Mass / binWidth));
-                found[b] += p.Envelope;
-                totalFound += p.Envelope;
+                double value = tick * Data.TickStep;
+                DrawHorizontalTick(dc, plot, plot.Bottom - value / Data.AxisMaximum * plot.Height,
+                    new Pen(palette.Grid, .8), (100 * value).ToString("0.#", CultureInfo.CurrentCulture) + "%", palette.Muted);
             }
-            if (totalFound <= 0) totalFound = 1;
-
-            double maxShare = 0;
-            for (int b = 0; b < binCount; b++) maxShare = Math.Max(maxShare, found[b] / totalFound);
-            double top = Math.Max(0.05, Math.Ceiling(maxShare * 20) / 20.0);   // round up to a 5% step
-
-            var gridPen = new Pen(Grid, 0.8);
-            var axisPen = new Pen(pal.Axis, 1.0);
-
-            for (int i = 0; i <= 4; i++)
+            DrawAxes(dc, plot, new Pen(palette.Axis, 1));
+            double slot = plot.Width / Data.Bins.Count;
+            int labelEvery = Math.Max(1, (int)Math.Ceiling(55 / slot));
+            for (int i = 0; i < Data.Bins.Count; i++)
             {
-                double y = plot.Bottom - i / 4.0 * plot.Height;
-                DrawHorizontalTick(dc, plot, y, gridPen, (top * i / 4.0).ToString("P0", CultureInfo.CurrentCulture), Muted);
-            }
-
-            DrawAxes(dc, plot, axisPen);
-
-            double slot = plot.Width / binCount;
-            double barWidth = Math.Max(2, slot * 0.7);
-
-            for (int b = 0; b < binCount; b++)
-            {
-                double cx = plot.Left + (b + 0.5) * slot;
-                double share = found[b] / totalFound;
-                double h = Math.Min(1, share / top) * plot.Height;
-                var rect = new Rect(cx - barWidth / 2, plot.Bottom - h, barWidth, h);
-                dc.DrawRectangle(Found, null, rect);
-
-                if (tic > 0)
+                var bin = Data.Bins[i];
+                double x = plot.Left + (i + .5) * slot;
+                if (bin.Recovery.HasValue)
                 {
-                    double ticShare = found[b] / tic;
-                    double th = Math.Min(1, ticShare / top) * plot.Height;
-                    dc.DrawRectangle(null, new Pen(OfTic, 1.6),
-                        new Rect(cx - barWidth / 2, plot.Bottom - th, barWidth, th));
+                    double h = bin.Recovery.Value / Data.AxisMaximum * plot.Height;
+                    if (bin.Recovery.Value == 0)
+                        dc.DrawLine(new Pen(palette.Found, 2), new Point(x - slot * .35, plot.Bottom), new Point(x + slot * .35, plot.Bottom));
+                    else dc.DrawRectangle(palette.Found, null, new Rect(x - slot * .35, plot.Bottom - h, slot * .7, h));
                 }
-
-                // Thinned mass labels so they never collide.
-                int every = Math.Max(1, (int)Math.Ceiling(binCount * 40.0 / Math.Max(plot.Width, 1)));
-                if (b % every == 0 || b == binCount - 1)
+                if (i % labelEvery == 0)
                 {
-                    var t = Text(((b + 1) * binWidth).ToString("N0", CultureInfo.CurrentCulture), Muted, 10);
-                    dc.DrawText(t, new Point(cx - t.Width / 2, plot.Bottom + 6));
+                    var label = Text((bin.Index * NeutralMassRanges.Width).ToString("N0", CultureInfo.CurrentCulture)
+                        + (bin.Index == NeutralMassRanges.Count - 1 ? "+" : ""), palette.Muted, 10);
+                    dc.DrawText(label, new Point(x - label.Width / 2, plot.Bottom + 7));
                 }
             }
-
-            var xName = Text("monoisotopic mass (Da), upper edge of each bin", Muted, 11);
-            dc.DrawText(xName, new Point(plot.Left + (plot.Width - xName.Width) / 2, plot.Bottom + 24));
-
-            DrawLegend(dc, plot);
-        }
-
-        private void DrawLegend(DrawingContext dc, Rect plot)
-        {
-            Brush Found = palette.Found, OfTic = palette.OfTic;
-
-            double y = 14;
-            var a = Text("share of credited envelope", Found, 11, bold: true);
-            double totalW = a.Width + 34 + (tic > 0 ? Text("share of TIC", OfTic, 11, bold: true).Width + 34 : 0);
-            double x = plot.Right - totalW;
-            if (x < plot.Left + 260) return;
-
-            dc.DrawRectangle(Found, null, new Rect(x, y + 2, 12, 12));
-            dc.DrawText(a, new Point(x + 16, y));
-            x += a.Width + 34;
-
-            if (tic > 0)
-            {
-                dc.DrawRectangle(null, new Pen(OfTic, 1.6), new Rect(x, y + 2, 12, 12));
-                var b = Text("share of TIC", OfTic, 11, bold: true);
-                dc.DrawText(b, new Point(x + 16, y));
-            }
+            dc.DrawText(Text("Neutral mass (Da), range lower edge", palette.Muted, 10),
+                new Point(plot.Left, plot.Bottom + 26));
+            var legend = Text("Areas pooled across " + Data.RunCount.ToString(CultureInfo.CurrentCulture)
+                + (Data.RunCount == 1 ? " run;" : " runs;") + " no run mean or whiskers. Blank ranges have no detector signal; baseline marks show zero peptide signal. The independent detector is not peptide-FDR calibrated; ratios can exceed 100%.", palette.Muted, 10);
+            legend.MaxTextWidth = plot.Width;
+            dc.DrawText(legend, new Point(plot.Left, plot.Bottom + 44));
         }
     }
 }

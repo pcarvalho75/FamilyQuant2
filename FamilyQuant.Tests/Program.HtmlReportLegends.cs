@@ -55,13 +55,16 @@ internal static partial class Program
             const checks={}, sentences=s=>s.split(/[.!?]+/).filter(p=>p.trim()).length;
             const before=JSON.stringify(JSON.parse(d.getElementById('fq-data').textContent).fields);
             const figures=[...d.querySelectorAll('.figure-grid .report-figure')];
-            checks.everyFigure=figures.length===29&&figures.every(f=>{const c=f.querySelector(':scope > figcaption.chart-legend');return c&&c.previousElementSibling?.tagName==='BUTTON'&&sentences(c.textContent)>=2&&sentences(c.textContent)<=4;});
+            checks.everyFigure=figures.length===25&&figures.every(f=>{const c=f.querySelector(':scope > figcaption.chart-legend');return c&&c.previousElementSibling?.tagName==='BUTTON'&&sentences(c.textContent)>=2&&sentences(c.textContent)<=4;});
+            const massLegend=d.querySelector('[data-figure="figure:percent_ion_current_by_mass.png"] figcaption').textContent;
+            checks.massRecoveryBasis=massLegend.includes("detector's isotope-envelope area")&&massLegend.includes('500 Da neutral-mass range')
+                &&massLegend.includes('pooling run areas')&&massLegend.includes('not a share of TIC')&&!massLegend.includes('outlined bars');
             checks.specificLegends=figures.filter(f=>f.dataset.figure.endsWith('.png')).every(f=>!f.querySelector('figcaption').textContent.includes('full report caption'));
             checks.interactiveCharts=['composition-ring','family-ranking','dot-chart','family-contribution-chart'].every(id=>{const c=d.getElementById(id),legend=d.getElementById(c.getAttribute('aria-describedby'));return legend&&legend.classList.contains('chart-legend')&&sentences(legend.textContent)>=2&&sentences(legend.textContent)<=4;});
             checks.fixedBases=figures.every(f=>f.querySelector('figcaption').textContent.includes('keeps its recorded base when Normalize to changes'));
             const ranking=d.getElementById('ranking-legend').textContent;
             checks.meanThree=ranking.includes('mean of 3 runs')&&[...d.querySelectorAll('.rank-run-count')].every(c=>c.textContent==='mean of 3 runs');
-            checks.baseName=ranking.includes('Percent of the chosen base: credited family signal.');
+            checks.baseName=d.getElementById('ranking-note').textContent==='Percent of credited family signal';
             checks.range=ranking.includes('lowest to highest run')&&ranking.includes('not a confidence interval');
             const expected='Sorts families by how much their share varies from run to run (sample SD in percentage points). It describes disagreement between runs, not a confidence interval.';
             const info=d.getElementById('spread-info');info.click();
@@ -71,7 +74,7 @@ internal static partial class Program
             checks.coverage=d.getElementById('coverage-content').querySelector('.coverage-track')&&d.getElementById('coverage-content').querySelector('.chart-legend')?.textContent.includes('full protein length');
             checks.parts=[...d.querySelectorAll('.subclass-chart')].every(c=>c.querySelector('.subclass-bars')&&c.querySelector('.chart-legend')?.textContent.includes('all runs pooled'));
             choice.value='b';choice.dispatchEvent(new w.Event('change'));
-            checks.fallbackCoverage=!!d.getElementById('coverage-content').querySelector('.report-figure > figcaption.chart-legend');
+            checks.fallbackCoverage=!d.getElementById('coverage-catalog-empty').hidden&&!d.getElementById('coverage-content').querySelector('img');
             checks.signal=d.getElementById('signal-panel').querySelector('.chart-legend')?.textContent.includes("that run's whole measured signal");
             checks.gap=d.getElementById('gap-panel').querySelector('.chart-legend')?.textContent.includes('reference total');
             checks.sd=d.querySelector('[data-figure="figure:family_composition.png"] figcaption').textContent.includes('one sample SD across runs');

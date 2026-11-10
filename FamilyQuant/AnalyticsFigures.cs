@@ -75,7 +75,7 @@ namespace FamilyQuant
                 new AnalyticsFigure(XicByMassFile, new XicMassChart(data.Peptides), 340),
                 new AnalyticsFigure(IsotopesCreditedFile, new IsotopeCountChart(data.Peptides), 300),
                 new AnalyticsFigure(PercentIonCurrentFile,
-                    new PercentIonCurrentChart(data.Peptides, groupedTic), 300),
+                    new PercentIonCurrentChart(data.Peptides, groupedTic, recovery: MassRangeRecoveryData.Build(data)), 300),
                 new AnalyticsFigure(FamilyContributionFile,
                     new FamilyContributionChart(families, topN, asPercentOfTotal), 420),
                 new AnalyticsFigure(RecoveryFile, new RecoveryChart(data.Fractions, data.Grouped, isotopeCeiling: data.IsotopeCeiling), 380),

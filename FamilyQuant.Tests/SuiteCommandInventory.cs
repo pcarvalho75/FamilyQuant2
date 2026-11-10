@@ -9,6 +9,8 @@ internal static class SuiteCommandInventory
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
         SuiteCommandRule.Covered("--test-ledger-synthetic-mode", "FamilyQuant.Tests.Program.FeatureLedgerReceiptGuardTests(System.Boolean)"),
+        SuiteCommandRule.Covered("--test-html-family-native", "FamilyQuant.Tests.Program.HtmlFamilyNativeTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-sensitivity-native", "FamilyQuant.Tests.Program.HtmlSensitivityNativeTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-share-parts", "FamilyQuant.Tests.Program.HtmlSharePartsTests(System.String)"),
         SuiteCommandRule.Covered("--test-curation-csv-basis", "FamilyQuant.Tests.Program.CurationCsvBasisTests()"),
         SuiteCommandRule.Covered("--test-ledger-drops-2114", "FamilyQuant.Tests.Program.LedgerDrops2114Tests()", "FamilyQuant.Tests.Program.FeatureLedgerBaseTests(System.Boolean)", "FamilyQuant.Tests.Program.FeatureLedgerMutationTest(System.Int32,System.Boolean)"),
@@ -443,6 +445,14 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-html-report-legends", "FamilyQuant.Tests.Program.HtmlReportLegendTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-report-denominators", "FamilyQuant.Tests.Program.HtmlReportDenominatorTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-report-normalization", "FamilyQuant.Tests.Program.HtmlReportNormalizationTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-coverage-catalog", "FamilyQuant.Tests.Program.HtmlCoverageCatalogTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-signal-recovery", "FamilyQuant.Tests.Program.HtmlSignalRecoveryTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-mass-quality", "FamilyQuant.Tests.Program.HtmlMassQualityTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-recovery-explanations", "FamilyQuant.Tests.Program.HtmlRecoveryExplanationTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-ring-bases", "FamilyQuant.Tests.Program.HtmlRingBasesTests(System.String)"),
+        SuiteCommandRule.Covered("--test-mass-range-recovery", "FamilyQuant.Tests.Program.MassRangeRecoveryTests(System.String)", "FamilyQuant.Tests.Program.HtmlMassQualityTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-report-words", "FamilyQuant.Tests.Program.HtmlReportWordsTests(System.String)"),
+        SuiteCommandRule.Covered("--test-mass-range-polish", "FamilyQuant.Tests.Program.MassRangePolishTests(System.String)"),
         SuiteCommandRule.Covered("--test-database-entry-counts", "FamilyQuant.Tests.Program.DatabaseEntryCountTests(System.String)"),
         SuiteCommandRule.Covered("--test-assignment-presence-copies", "FamilyQuant.Tests.Program.AssignmentPresenceCopyTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-database-entries", "FamilyQuant.Tests.Program.HtmlDatabaseEntryTests()"),
