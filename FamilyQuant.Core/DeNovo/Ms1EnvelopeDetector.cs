@@ -60,6 +60,10 @@ namespace FamilyQuant.DeNovo
         /// <see cref="DetectedAreaByCharge"/>.</summary>
         public int[] DetectedCountByCharge { get; set; } = NewChargeArray<int>();
 
+        /// <summary>Optional integrated areas in fixed neutral-mass ranges. Null in older caches.</summary>
+        public double[]? DetectedAreaByNeutralMass { get; set; }
+        public double? NeutralMassBinWidth { get; set; }
+
         /// <summary>The multiply charged part (z &gt;= 2), more specific than z=1 but not peptide-FDR
         /// calibrated.</summary>
         public double DetectedAreaMultiplyCharged { get; set; }
@@ -192,7 +196,7 @@ namespace FamilyQuant.DeNovo
         public static Ms1EnvelopeDetectionResult DetectRun(
             string rawPath, string? cachePath = null, Action<string>? progress = null,
             string? sourceFingerprint = null, string? legacyCachePath = null,
-            FamilyQuant.Operations.OperationContext? operation = null)
+            FamilyQuant.Operations.OperationContext? operation = null, bool requireMassRanges = false)
         {
             if (string.IsNullOrWhiteSpace(rawPath))
                 throw new ArgumentException("A RAW file path is required.", nameof(rawPath));
@@ -202,25 +206,43 @@ namespace FamilyQuant.DeNovo
             string fingerprint = string.IsNullOrWhiteSpace(sourceFingerprint)
                 ? FileFingerprint.Sha256(rawPath) : sourceFingerprint;
 
+            Ms1EnvelopeDetectionResult? totalsOnly = null;
             if (cachePath != null && TryLoadCache(cachePath, runName, fingerprint,
                     out Ms1EnvelopeDetectionResult? cached)
                 && cached != null)
             {
-                progress?.Invoke(runName + ": resolved isotope-series diagnostic answered from the cache (" +
-                    cached.DetectedEnvelopeCount.ToString("N0", CultureInfo.InvariantCulture) + " envelope(s)).");
-                operation?.Report("detector-cache:" + runName, "Resolved isotope-series diagnostic read from the cache: " + runName, 1, 1);
-                return cached;
+                if (requireMassRanges && !NeutralMassRanges.IsRecorded(cached.DetectedAreaByNeutralMass, cached.NeutralMassBinWidth))
+                    totalsOnly = cached;
+                else
+                {
+                    progress?.Invoke(runName + ": resolved isotope-series diagnostic answered from the cache (" +
+                        cached.DetectedEnvelopeCount.ToString("N0", CultureInfo.InvariantCulture) + " envelope(s)).");
+                    operation?.Report("detector-cache:" + runName, "Resolved isotope-series diagnostic read from the cache: " + runName, 1, 1);
+                    return cached;
+                }
             }
             if (legacyCachePath != null && TryLoadCache(legacyCachePath, runName, fingerprint, out var legacy) && legacy != null)
             {
-                progress?.Invoke(runName + ": resolved isotope-series diagnostic answered from the legacy cache (read only).");
-                operation?.Report("detector-cache:" + runName, "Resolved isotope-series diagnostic read from the legacy cache: " + runName, 1, 1);
-                return legacy;
+                if (requireMassRanges && !NeutralMassRanges.IsRecorded(legacy.DetectedAreaByNeutralMass, legacy.NeutralMassBinWidth))
+                    totalsOnly ??= legacy;
+                else
+                {
+                    progress?.Invoke(runName + ": resolved isotope-series diagnostic answered from the legacy cache (read only).");
+                    operation?.Report("detector-cache:" + runName, "Resolved isotope-series diagnostic read from the legacy cache: " + runName, 1, 1);
+                    return legacy;
+                }
             }
 
             operation?.Report("detector-cache:" + runName, "No cached detector result; loading acquisition: " + runName, 1, 1);
             progress?.Invoke(runName + ": loading MS1 spectra to detect resolved isotope series...");
-            List<MSUltraLight> spectra = DeNovoXicExtractor.LoadMs1Spectra(rawPath);
+            List<MSUltraLight> spectra;
+            try { spectra = DeNovoXicExtractor.LoadMs1Spectra(rawPath); }
+            catch (Exception ex) when (totalsOnly != null && ex is not OperationCanceledException)
+            {
+                progress?.Invoke(runName + ": cached detector totals retained; neutral-mass ranges could not be measured ("
+                    + ex.GetType().Name + ").");
+                return totalsOnly;
+            }
 
             Ms1EnvelopeDetectionResult result = Detect(runName, spectra, operation);
             progress?.Invoke(runName + ": detected " +
@@ -243,7 +265,7 @@ namespace FamilyQuant.DeNovo
         /// without a file. Deterministic: the same spectra in yield the same numbers out.
         /// </summary>
         public static Ms1EnvelopeDetectionResult Detect(string runName, IReadOnlyList<MSUltraLight> spectra,
-            FamilyQuant.Operations.OperationContext? operation = null)
+            FamilyQuant.Operations.OperationContext? operation = null, bool collectMassRanges = true)
         {
             if (spectra == null) throw new ArgumentNullException(nameof(spectra));
 
@@ -330,6 +352,7 @@ namespace FamilyQuant.DeNovo
             // but it is dropped rather than trusted into an index.
             double[] areaByCharge = Ms1EnvelopeDetectionResult.NewChargeArray<double>();
             int[] countByCharge = Ms1EnvelopeDetectionResult.NewChargeArray<int>();
+            double[]? areaByMass = collectMassRanges ? new double[NeutralMassRanges.Count] : null;
 
             foreach (Feature feat in closedFeatures)
             {
@@ -337,7 +360,10 @@ namespace FamilyQuant.DeNovo
                 int z = feat.Charge;
                 if (z < MinCharge || z > MaxCharge) continue;
                 countByCharge[z]++;
-                areaByCharge[z] += feat.Area();
+                double area = feat.Area();
+                areaByCharge[z] += area;
+                int massRange = NeutralMassRanges.Index(AnalyticsBuilder.MonoisotopicMass(feat.Mz, z));
+                if (areaByMass != null && massRange >= 0) areaByMass[massRange] += area;
             }
 
             // z >= 2 first, left to right, then charge 1 added to it: the same grouping the two exposed
@@ -363,6 +389,8 @@ namespace FamilyQuant.DeNovo
                 Ms1ScanCount = scans.Count,
                 DetectedAreaByCharge = areaByCharge,
                 DetectedCountByCharge = countByCharge,
+                DetectedAreaByNeutralMass = areaByMass,
+                NeutralMassBinWidth = areaByMass != null ? NeutralMassRanges.Width : null,
                 DetectedAreaMultiplyCharged = multiArea,
                 DetectedAreaSinglyCharged = singleArea,
                 DetectedCountMultiplyCharged = multiCount,
@@ -614,6 +642,8 @@ namespace FamilyQuant.DeNovo
                     Ms1ScanCount = file.Ms1ScanCount,
                     DetectedAreaByCharge = file.DetectedAreaByCharge,
                     DetectedCountByCharge = file.DetectedCountByCharge,
+                    DetectedAreaByNeutralMass = file.DetectedAreaByNeutralMass,
+                    NeutralMassBinWidth = file.NeutralMassBinWidth,
                     DetectedAreaMultiplyCharged = file.DetectedAreaMultiplyCharged,
                     DetectedAreaSinglyCharged = file.DetectedAreaSinglyCharged,
                     DetectedCountMultiplyCharged = file.DetectedCountMultiplyCharged,
@@ -652,6 +682,8 @@ namespace FamilyQuant.DeNovo
                     Ms1ScanCount = result.Ms1ScanCount,
                     DetectedAreaByCharge = result.DetectedAreaByCharge,
                     DetectedCountByCharge = result.DetectedCountByCharge,
+                    DetectedAreaByNeutralMass = result.DetectedAreaByNeutralMass,
+                    NeutralMassBinWidth = result.NeutralMassBinWidth,
                     DetectedAreaMultiplyCharged = result.DetectedAreaMultiplyCharged,
                     DetectedAreaSinglyCharged = result.DetectedAreaSinglyCharged,
                     DetectedCountMultiplyCharged = result.DetectedCountMultiplyCharged,
@@ -692,6 +724,10 @@ namespace FamilyQuant.DeNovo
             // does.
             [JsonPropertyName("detectedAreaByCharge")] public double[]? DetectedAreaByCharge { get; set; }
             [JsonPropertyName("detectedCountByCharge")] public int[]? DetectedCountByCharge { get; set; }
+            [JsonPropertyName("detectedAreaByNeutralMass"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            public double[]? DetectedAreaByNeutralMass { get; set; }
+            [JsonPropertyName("neutralMassBinWidth"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            public double? NeutralMassBinWidth { get; set; }
             [JsonPropertyName("detectedAreaMultiplyCharged")] public double DetectedAreaMultiplyCharged { get; set; }
             [JsonPropertyName("detectedAreaSinglyCharged")] public double DetectedAreaSinglyCharged { get; set; }
             [JsonPropertyName("detectedCountMultiplyCharged")] public int DetectedCountMultiplyCharged { get; set; }

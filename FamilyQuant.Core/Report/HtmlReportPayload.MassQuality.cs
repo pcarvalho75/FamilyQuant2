@@ -8,6 +8,6 @@ public sealed record HtmlMassQualityCharts
 {
     public MassIsotopeChartData.Scatter? SignalByMass { get; init; }
     public MassIsotopeChartData.Isotopes? Isotopes { get; init; }
-    public MassIsotopeChartData.Signal? IonCurrentByMass { get; init; }
+    public MassRangeRecoveryData? IonCurrentByMass { get; init; }
     public IReadOnlyList<QualityChartData.Plot> Quality { get; init; } = Array.Empty<QualityChartData.Plot>();
 }

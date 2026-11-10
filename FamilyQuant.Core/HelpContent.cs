@@ -382,6 +382,8 @@ namespace FamilyQuant
             sb.AppendLine("language is. That is on purpose: the file is meant to be read by a program.");
 
             sb.AppendLine();
+            sb.AppendLine("Recovery by mass range divides measured peptide envelope signal by the detector's isotope-envelope area in the same 500 Da neutral-mass range, pooling run areas. Identified-equivalent de novo features are excluded. It is not a share of TIC or a mean of run percentages; the independent detector is not peptide-FDR calibrated and ratios can exceed 100%. Older projects need Quantify again to record the detector ranges for this view.");
+            sb.AppendLine();
             sb.AppendLine(HelpWorkflowFacts.FilesAndNavigation);
             sb.AppendLine(HelpWorkflowFacts.Families);
             sb.AppendLine(DeNovoWorkflowHelp.Build());

@@ -153,12 +153,13 @@ public static class CompositionChartCaptions
             if (mode != null) { numbers.Add(new("A largest bin", mode.Key, "credited isotopes", "0")); numbers.Add(new("Peptides in that bin", mode.Count(), "peptides", "0")); }
             return new("Number of credited isotopes per peptide", "Bar height counts peptide representatives; stacked colors identify mass bands. An isotope is credited only where signal was found", numbers);
         }
-        if (figure.Chart is PercentIonCurrentChart)
+        if (figure.Chart is PercentIonCurrentChart chart)
         {
-            double total = eligible.Sum(p => p.Envelope);
-            var numbers = new List<CaptionNumber> { new("Credited signal represented", total, "area units", "0.###E+0") };
-            if (data.Grouped is { Tic: > 0 } grouped) numbers.Add(new("Represented share of recorded total ion current", total / grouped.Tic * 100, "%"));
-            return new("Directly observed credited signal by peptide mass", "Filled bars give each mass bin's share of the displayed credited signal; outlined bars use recorded total ion current when available. Both identified and de novo peptides use their measured envelope", numbers);
+            var recovery = chart.Data;
+            var numbers = new List<CaptionNumber> { new("Runs pooled", recovery.RunCount, "runs", "0") };
+            return new("Recovery by neutral-mass range", recovery.Available
+                ? "Each bar divides measured peptide envelope signal by the detector's isotope-envelope area in the same 500 Da neutral-mass range, pooling run areas. This is not a share of TIC or a mean of run percentages. The detector is not peptide-FDR calibrated, and a ratio can exceed 100%."
+                : recovery.Message, numbers);
         }
         if (figure.Chart is RecoveryChart)
         {

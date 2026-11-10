@@ -18,7 +18,7 @@ public static partial class HtmlReportPayloadBuilder
                 SignalByMass = Include("xic_by_mass.png") ? MassIsotopeChartData.ScatterPoints(data.Peptides) : null,
                 Isotopes = Include("isotopes_credited.png") ? MassIsotopeChartData.IsotopeCounts(data.Peptides) : null,
                 IonCurrentByMass = Include("percent_ion_current_by_mass.png")
-                    ? MassIsotopeChartData.SignalByMass(data.Peptides, data.Grouped?.Tic ?? 0) : null,
+                    ? MassRangeRecoveryData.Build(data) : null,
                 Quality = QualityChartData.Build(data, manifest, context.SourceGrouping).Where(plot => Include(plot.Id)).ToArray(),
             };
         }

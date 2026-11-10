@@ -1502,6 +1502,7 @@
       .u3b-plot svg { display: block; max-width: 100%; overflow: visible; }
       .u3b-axis { stroke: none; paint-order: normal; font: 11px "Segoe UI", system-ui, sans-serif; fill: var(--muted); }
       .u3b-axis-line { fill: none; stroke: var(--edge); stroke-width: 1; }
+      .u3b-grid { stroke: var(--edge); stroke-width: .7; opacity: .65; }
       .u3b-mark { cursor: pointer; stroke: var(--surface); stroke-width: .5; }
       .u3b-mark:focus { stroke: var(--accent); stroke-width: 3; outline: none; }
       .u3b-mark:hover { stroke: var(--ink); stroke-width: 2; }
@@ -1519,10 +1520,14 @@
       .u3b-rows { display: grid; gap: 12px; }
       .u3b-row { display: grid; grid-template-columns: minmax(130px, 1fr) minmax(130px, 1.5fr); gap: 12px; align-items: center; }
       .u3b-row-name { color: var(--ink); line-height: 1.35; overflow-wrap: anywhere; }
-      .u3b-row-bar { position: relative; isolation: isolate; min-height: 40px; padding: 8px 10px; border: 1px solid var(--edge); border-radius: 6px; background: var(--input); color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
-      .u3b-fill { position: absolute; z-index: -1; inset: 0 auto 0 0; max-width: 100%; background: var(--selection); border-radius: inherit; }
+      .u3b-row-bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; min-height: 40px; padding: 8px 10px; border: 1px solid var(--edge); border-radius: 6px; background: var(--input); color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
+      .u3b-track { display: block; height: 10px; background: var(--surface); border-radius: 3px; overflow: hidden; }
+      .u3b-fill { display: block; height: 100%; max-width: 100%; background: var(--s1); border-radius: inherit; }
       .u3b-row-value { font-variant-numeric: tabular-nums; line-height: 1.3; overflow-wrap: anywhere; }
       .u3b-row-bar:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+      .u3b-exact { margin-top: 16px; overflow-x: auto; }
+      .u3b-exact summary { cursor: pointer; color: var(--link); }
+      .u3b-exact table { margin-top: 10px; font-size: .85rem; }
       @media (max-width: 520px) { .u3b-chart { padding: 14px; } .u3b-row { grid-template-columns: 1fr; gap: 5px; } .u3b-chart h3 { font-size: 1.05rem; } }
       @media print { .u3b-chart { break-inside: avoid; border-radius: 0; } .u3b-row-bar { border-color: var(--edge); } }
       /* U3b end */
@@ -4792,7 +4797,7 @@
             if (/isotopes_credited/.test(id))
               return "Bars count peptide features by the number of isotopes with measured signal; colours separate mass bands. Counts pool the runs and have no percentage denominator or run-to-run whiskers. A missing isotope adds no credit.";
             if (/percent_ion_current_by_mass/.test(id))
-              return "Bars compare the measured isotope-envelope signal in each mass range, with all runs pooled. Filled bars divide by the displayed peptide signal; outlined bars divide by pooled total ion current (TIC), when available. These are two different totals, and no whiskers are drawn.";
+              return "Each bar divides measured peptide envelope signal by the detector's isotope-envelope area in the same 500 Da neutral-mass range, pooling run areas. This is not a share of TIC. The detector is not peptide-FDR calibrated, a missing range stays unavailable, and a ratio can exceed 100%. No whiskers are drawn.";
             if (/recovery|signal_by_run/.test(id))
               return "Bars compare the labelled peptide-signal readings with total ion current (TIC). Each run uses its own TIC, while an all-runs bar uses pooled signal divided by pooled TIC. The readings use the isotope bases printed on the figure; they are not uncertainty intervals or run-to-run whiskers.";
             if (/signal_uplift/.test(id))
@@ -6040,6 +6045,20 @@
                 label(graph, area.left + area.width, area.top + area.height + 20, String(xHigh));
                 label(graph, area.left - 6, area.top + 5, String(yHigh), "end");
                 label(graph, area.left - 6, area.top + area.height, String(yLow), "end");
+                const massAxis = xName.includes("mass (Da)"), xStep = massAxis ? 500 : (xHigh - xLow) / 4;
+                const yStep = id === "xic_by_mass.png" ? 1 : (yHigh - yLow) / 4;
+                for (let value = Math.ceil(xLow / xStep) * xStep, tick = 0; xStep > 0 && value < xHigh && tick < 200; value += xStep, tick++) {
+                  if (value <= xLow) continue;
+                  const x = area.left + (value - xLow) / (xHigh - xLow || 1) * area.width;
+                  graph.append(svg("line", { x1: x, x2: x, y1: area.top, y2: area.top + area.height, class: "u3b-grid" }));
+                  if (!massAxis || area.width > 500 || tick % 2 === 1) label(graph, x, area.top + area.height + 20, Number(value.toPrecision(4)).toString());
+                }
+                for (let value = Math.ceil(yLow / yStep) * yStep, tick = 0; yStep > 0 && value < yHigh && tick < 100; value += yStep, tick++) {
+                  if (value <= yLow) continue;
+                  const y = area.top + area.height - (value - yLow) / (yHigh - yLow || 1) * area.height;
+                  graph.append(svg("line", { x1: area.left, x2: area.left + area.width, y1: y, y2: y, class: "u3b-grid" }));
+                  label(graph, area.left - 6, y + 4, Number(value.toPrecision(4)).toString(), "end");
+                }
                 const marks = [];
                 for (const [index, point] of points.entries()) {
                   const x = area.left + (point.x - xLow) / (xHigh - xLow || 1) * area.width;
@@ -6064,18 +6083,36 @@
             function bars(host, id, title, legend, rows) {
               const plot = card(host, id, title, legend);
               const list = node("div", "u3b-rows"); plot.append(list);
+              const exactRows = [];
               for (const row of rows) {
-                const wrap = node("div", "u3b-row"), name = node("span", "u3b-row-name", row.label);
-                const button = node("button", "u3b-row-bar"), value = node("span", "u3b-row-value", row.text + (["%", "fraction"].includes(row.unit) ? "" : " " + row.unit));
-                button.type = "button"; button.title = row.label + ": " + row.text + ". " + row.base + "; select for details without changing the project.";
+                const visibleName = row.family ? (typeof familyLabel === "function" ? familyLabel(row.family) : row.family) + ": " + row.detail : row.label;
+                const fullName = row.family ? (typeof familyLabel === "function" ? familyLabel(row.family, true) : row.family) + ": " + row.detail : row.label;
+                const wrap = node("div", "u3b-row"), name = node("span", "u3b-row-name", visibleName);
+                name.title = fullName;
+                const unit = row.value === 1 ? ({ "source calls": "source call", calls: "call", pairs: "pair", scans: "scan", "PSM rows": "PSM row", "pooled sequences": "pooled sequence", "peptide features": "peptide feature", "credited de novo peptide features": "credited de novo peptide feature" }[row.unit] || row.unit) : row.unit;
+                const exact = row.text + (["%", "fraction"].includes(unit) ? "" : " " + unit);
+                exactRows.push([fullName, exact, row.base]);
+                const visible = row.value === null ? "Unavailable" : ["%", "fraction"].includes(unit)
+                  ? percent(unit === "fraction" ? 100 * row.value : row.value) : exact;
+                const button = node("button", "u3b-row-bar"), value = node("span", "u3b-row-value", visible);
+                button.type = "button"; button.title = fullName + ": " + row.text + ". " + row.base + "; select for details without changing the project.";
                 const maximum = Math.max(row.unit === "%" ? 100 : 1, ...rows.filter(r => r.unit === row.unit && r.value !== null).map(r => r.value));
-                const fill = node("span", "u3b-fill"); fill.style.width = row.value === null ? "0" : row.value / maximum * 100 + "%";
-                button.append(fill, value); button.dataset.value = row.value ?? "";
-                button.setAttribute("aria-label", row.label + ": " + row.text + (["fraction", "%"].includes(row.unit) ? "" : " " + row.unit) + ". " + row.base);
-                button.onclick = () => popup(row.label, [node("p", "", row.text + (["fraction", "%"].includes(row.unit) ? "" : " " + row.unit)), node("p", "", row.base)]);
+                const track = node("span", "u3b-track"), fill = node("span", "u3b-fill"); fill.style.width = row.value === null ? "0" : row.value / maximum * 100 + "%";
+                track.append(fill); button.append(track, value); button.dataset.value = row.value ?? "";
+                button.setAttribute("aria-label", fullName + ": " + exact + ". " + row.base);
+                button.onclick = () => popup(fullName, [node("p", "", exact), node("p", "", row.base)]);
                 wrap.append(name, button); list.append(wrap);
               }
+              if (rows.length && id !== "percent_ion_current_by_mass.png") {
+                const details = node("details", "u3b-exact"), summary = node("summary", "", "Exact readings");
+                summary.title = "Show each recorded value and its base. Opening this table changes no project values.";
+                const table = node("table"), head = node("tr");
+                ["Reading", "Exact value", "Base"].forEach(text => head.append(node("th", "", text))); table.append(head);
+                exactRows.forEach(values => { const row = node("tr"); values.forEach(text => row.append(node("td", "", text))); table.append(row); });
+                details.append(summary, table); plot.parentElement.append(details);
+              }
             }
+            function percent(value) { return value < .1 ? "under 0.1%" : value.toFixed(1) + "%"; }
             const massHost = $("mass-figures"), qualityHost = $("quality-figures");
             if (model.signalByMass) {
               const source = model.signalByMass;
@@ -6105,9 +6142,22 @@
               });
             }
             if (model.ionCurrentByMass) {
-              bars(massHost, "percent_ion_current_by_mass.png", "Where measured peptide signal lies",
-                "Mass ranges pool the displayed peptide feature representatives across runs. Each filled bar divides by all displayed peptide envelope signal, so these shares sum to 100%. The exact-value view also states the same range's share of pooled TIC; the two totals are different. No means or whiskers are shown.",
-                model.ionCurrentByMass.bins.map(bin => ({ label: bin.label, value: bin.share, text: bin.shareText, unit: "fraction", base: bin.envelopeText + ". " + bin.ticShareText })));
+              const recovery = model.ionCurrentByMass;
+              if (!recovery.available || !recovery.bins.length) card(massHost, "percent_ion_current_by_mass.png", "Recovery by mass range", recovery.message);
+              else {
+                const basisEnd = recovery.legend.indexOf(". ") + 1;
+                bars(massHost, "percent_ion_current_by_mass.png", "Recovery by mass range", recovery.legend.slice(basisEnd).trim(),
+                  recovery.bins.map(bin => ({ label: bin.label, value: bin.recovery, text: bin.recoveryText, unit: "fraction", base: bin.peptideText + ". " + bin.detectorText + ". Numerator / denominator in this mass range, pooling run areas." })));
+                const article = massHost.querySelector('[data-native-chart="percent_ion_current_by_mass.png"]');
+                article.insertBefore(node("p", "chart-legend", recovery.legend.slice(0, basisEnd)), article.querySelector('.u3b-plot'));
+                const details = node("details", "u3b-exact"), summary = node("summary", "", "Exact readings");
+                summary.title = "Show the stored numerator, detector denominator and exact ratio for each range. Opening this table changes no project values.";
+                const table = node("table"), head = node("tr");
+                ["Neutral mass range", "Peptide envelope", "Detector envelope", "Recovery / detector envelope"].forEach(text => head.append(node("th", "", text)));
+                table.append(head);
+                recovery.bins.forEach(bin => { const row = node("tr"); [bin.label, bin.peptideText, bin.detectorText, bin.recoveryText].forEach(text => row.append(node("td", "", text))); table.append(row); });
+                details.append(summary, table); massHost.querySelector('[data-native-chart="percent_ion_current_by_mass.png"]').append(details);
+              }
             }
             for (const chart of model.quality || []) {
               if (chart.scores?.length) {
