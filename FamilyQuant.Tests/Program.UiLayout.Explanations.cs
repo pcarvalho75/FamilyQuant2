@@ -608,11 +608,11 @@ namespace FamilyQuant.Tests
             // Named command coverage stays stable when the recent-file submenu changes length.
             string[] commands = {
                 "MenuItemHome", "MenuItemRunUSearch", "MenuItemLoadFQC", "MenuItemSaveProject",
-                "MenuItemSaveFCF", "MenuItemComputeXic", "MenuItemSpectrumComparison", "MenuItemReanotateSEPro",
+                "MenuItemExport", "MenuItemComputeXic", "MenuItemSpectrumComparison", "MenuItemReanotateSEPro",
                 "MenuItemDeNovo", "MenuItemAnalytics", "MenuItemHowToRead", "MenuItemWhereAmI",
                 "MenuThemeLight", "MenuThemeDark", "MenuThemeSystem", "MenuItemSaveAs", "MenuItemUndo", "MenuItemCopy",
-                "MenuItemFind", "MenuItemHideDecoys", "MenuItemHideContaminants", "MenuItemExportFamilyTable",
-                "MenuItemExportComposition", "MenuItemFamilies"
+                "MenuItemFind", "MenuItemHideDecoys", "MenuItemHideContaminants", "MenuItemExport",
+                "MenuItemExport", "MenuItemFamilies"
             };
             string[] missing = commands.Where(name => main.FindName(name) is not MenuItem { HasItems: false }).ToArray();
             Check("all legacy and new shell commands remain reachable menu leaves", missing.Length == 0,

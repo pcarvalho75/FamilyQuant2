@@ -69,12 +69,9 @@ internal static partial class Program
                     Check("No-snapshot assignments export remains unavailable " + culture, !oldButton.IsEnabled
                         && !main.NavigationModel.CanNavigate(ShellDestination.Results) && !UiField<MenuItem>(main, "MenuItemAnalytics")!.IsEnabled);
                     var emptyResults = new AnalyticsControl(Array.Empty<QuantRow>(), null);
-                    var emptyChoice = (ComboBox)emptyResults.FindName("ComboBoxExportKind");
-                    emptyChoice.SelectedItem = emptyChoice.Items.OfType<ComboBoxItem>().Single(item => item.Tag as string == "Homology");
-                    PumpDispatcher();
+                    var emptyItem = ResultsExportOptions(emptyResults.ViewModel).Single(option => option.Kind == ProjectExportKind.Homology);
                     Check("Results assignment choice cannot export an absent snapshot " + culture,
-                        emptyResults.ViewModel.ExportKind == ResultsExportKind.Homology && !emptyResults.ViewModel.CanExport
-                        && !((Button)emptyResults.FindName("ButtonExport")).IsEnabled);
+                        !emptyItem.Available && emptyItem.Hint.Contains("Search", StringComparison.Ordinal));
                     string oldRefusal = Refusal(() => oldType.GetMethod("ExportHomologyCsv")!.Invoke(legacy, [Path.Combine(output, "must-not-exist.csv")]));
                     string currentRefusal = Refusal(() => current.ExportHomologyCsv(Path.Combine(output, "must-not-exist.csv")));
                     Check("Absent-snapshot compatibility export refuses without creating a file " + culture,
@@ -110,12 +107,11 @@ internal static partial class Program
                         MainWindow.NavigateShellCommand.Execute(ShellDestination.Results, main);
                         Wait(() => host.Children.OfType<AnalyticsControl>().Any() && !main.Operations.IsBusy);
                         var results = host.Children.OfType<AnalyticsControl>().Single();
-                        var choice = (ComboBox)results.FindName("ComboBoxExportKind");
-                        var selected = choice.SelectedItem as ComboBoxItem;
+                        var selected = ExportOptions(main).Single(option => option.Kind == ProjectExportKind.Homology);
                         var export = (Button)results.FindName("ButtonExport");
-                        Check("Shell passes its exact snapshot into the selected assignment export " + culture + "/" + fixture,
+                        Check("Shell passes its exact snapshot into the assignment export " + culture + "/" + fixture,
                             ReferenceEquals(results.ViewModel.Homology, snapshot) && results.ViewModel.Data == null && export.IsEnabled
-                            && selected?.Tag as string == "Homology" && selected.Content as string == "Homology assignments (CSV)"
+                            && selected.Available && selected.Label == "Homology assignments"
                             && main.NavigationModel.Current == ShellDestination.Results);
                         string before = JsonSerializer.Serialize(snapshot, DeNovoBridgeJson);
                         string oldPath = Path.Combine(output, culture + "-" + fixture + "-frozen.csv");
@@ -137,7 +133,13 @@ internal static partial class Program
                             suggested = dialog.FileName; dialogId = id;
                             return owner == null ? dialog.ShowDialog() : dialog.ShowDialog(owner);
                         };
-                        bool newWritten = NativeWrite(export, newPath, () => Wait(() => !AppOperationHost.For(results).IsBusy));
+                        bool newWritten;
+                        using (var driver = new NativeOwnedDialogDriver(newPath))
+                        {
+                            ChooseExport(main, ProjectExportKind.Homology); Wait(() => !main.Operations.IsBusy); PumpDispatcher();
+                            newWritten = driver.SawDialog && driver.EnteredPath && !driver.TimedOut && File.Exists(newPath);
+                            Check("Native assignments Save writes the selected file " + Path.GetFileName(newPath), newWritten);
+                        }
                         Check("Results uses the assignments dialog and retained suggested filename " + culture + "/" + fixture,
                             dialogId == "results.Homology" && suggested == "FamilyQuant_DeNovo_Homology.csv");
                         byte[] oldBytes = File.ReadAllBytes(oldPath), newBytes = File.ReadAllBytes(newPath);
@@ -171,7 +173,7 @@ internal static partial class Program
                         }
                         scenarios.Add(new { culture, fixture, legacyCsv = Path.GetFileName(oldPath), currentCsv = Path.GetFileName(newPath),
                             same, suggested, dialogId, snapshot = JsonSerializer.SerializeToElement(snapshot, DeNovoBridgeJson),
-                            selected = selected!.Content, status = results.ViewModel.Status.Replace(newPath, "{chosen-file}", StringComparison.Ordinal) });
+                            selected = selected.Label, status = results.ViewModel.Status.Replace(newPath, "{chosen-file}", StringComparison.Ordinal) });
                         MainWindow.NavigateShellCommand.Execute(ShellDestination.DeNovo, main); PumpDispatcher();
                         current = host.Children.OfType<DeNovoControl>().Single();
                         CheckSourceAndHelp(legacy, oldSnapshot, culture, fixture, "frozen");

@@ -426,12 +426,18 @@ namespace FamilyQuant
 
         // ===================================================================== export
 
-        private async void ButtonSaveReport_Click(object sender, RoutedEventArgs e)
+        private void OpenExportWindow_Click(object sender, RoutedEventArgs e)
+        {
+            if (Operations.IsBusy) { ShowCurationOperationResult("Wait for the current operation to finish."); return; }
+            if (Window.GetWindow(this) is MainWindow window) window.OpenExportWindow();
+        }
+
+        internal async void ExportVisibleProteinTable(DependencyObject? dialogOrigin = null)
         {
             if (Operations.IsBusy) return;
             if (VisibleRows().Count == 0) { ShowCurationOperationResult("Nothing was exported: no protein row is visible. Clear the search or display filters, then export again."); return; }
             var dialog = new SaveFileDialog { Filter = FileDialogFilters.Csv, FileName = "FamilyQuant_Report.csv", Title = "Save the visible rows as CSV" };
-            if (!ShellDialogs.ShowFile(this, "curation.proteins-csv", dialog)) return;
+            if (!ShellDialogs.ShowFile(dialogOrigin ?? this, "curation.proteins-csv", dialog)) return;
             await RunCurationAsync("Export visible protein rows", async operation =>
             {
                 var rows = VisibleRows(); var mode = DisplayedMode; string heading = FullXicCsvHeader();
@@ -504,7 +510,6 @@ namespace FamilyQuant
             QuantitationPanel.TextBlockFullXicSummary.Text = Quantitation.Summary;
             QuantitationPanel.FullXicBasisTic.IsEnabled = Quantitation.CanUseTic;
             QuantitationPanel.FullXicBasisTic.ToolTip = Quantitation.TicHelp;
-            ButtonExportComposition.IsEnabled = HasFullXic;
         }
 
         private async void ButtonExportComposition_Click(object sender, RoutedEventArgs e) =>

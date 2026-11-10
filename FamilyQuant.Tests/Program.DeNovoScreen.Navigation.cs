@@ -41,7 +41,7 @@ namespace FamilyQuant.Tests
 
             var guide = UiField<TextBlock>(main, "TextBlockGuide")!;
             var app = UiField<Grid>(main, "GridApp")!;
-            var save = UiField<MenuItem>(main, "MenuItemSaveFCF")!;
+            var save = UiField<MenuItem>(main, "MenuItemExport")!;
             var reanotate = UiField<MenuItem>(main, "MenuItemReanotateSEPro")!;
             var deNovoItem = UiField<MenuItem>(main, "MenuItemDeNovo")!;
 

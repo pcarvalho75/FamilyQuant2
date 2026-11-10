@@ -362,7 +362,11 @@ namespace FamilyQuant
             sb.AppendLine("It includes labelled keratins, trypsin and serum proteins; hiding them affects the");
             sb.AppendLine("table and visible-row CSV only, so visible identified-signal shares can total below 100%.");
             sb.AppendLine();
-            sb.AppendLine("Export to CSV writes exactly the rows you can see, with the values as fractions");
+            sb.AppendLine("File > Export opens one window for Report (HTML, Word and supplement workbook),");
+            sb.AppendLine("Tables (CSV), Suggested additions (FASTA), Families (.fcf) and Interpretation input");
+            sb.AppendLine("(Markdown). The Export shortcuts in Results and Curate families open the same window.");
+            sb.AppendLine("The report contains the figures; separate screen-figure and presentation-pack exports");
+            sb.AppendLine("are no longer offered. Visible protein table writes the rows you can see, with values as fractions");
             sb.AppendLine("between 0 and 1 and a dot as the decimal separator, whatever your machine's");
             sb.AppendLine("language is. That is on purpose: the file is meant to be read by a program.");
 

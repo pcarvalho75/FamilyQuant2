@@ -112,7 +112,7 @@ internal static partial class Program
                     ShellDialogs.FilePresenter = (_, id, dialog) => id == "curation." + (group == "protein" ? "proteins-csv" : "composition-csv")
                         ? Choose(dialog) : throw new InvalidOperationException("Unexpected curation chooser: " + id);
                     if (frozen) injected.Invoke(null, new object[] { old, old.FindName(button), new RoutedEventArgs() });
-                    else { SecondaryClick(UiField<Button>(current, button)!); FinishBusyOperation(current.Operations); PumpDispatcher(); }
+                    else { typeof(ClusterGenerationControl).GetMethod(group == "protein" ? "ExportVisibleProteinTable" : handler, BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(current, group == "protein" ? new object[] { current } : new object[] { current, new RoutedEventArgs() }); FinishBusyOperation(current.Operations); PumpDispatcher(); }
                     bool sameMarker = File.ReadAllText(path) == marker;
                     contract &= shown == 1 && (accept ? !sameMarker : sameMarker) && (!frozen || CurationFileMessages.Count == (accept ? 1 : 0));
                     configurations.Add(configuration);

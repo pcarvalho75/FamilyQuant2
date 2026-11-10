@@ -92,9 +92,14 @@ internal static partial class Program
         }
         void Click(string name)
         {
-            var button = UiField<Button>(screen, name)!;
-            if (!button.IsEnabled || !WalkTree(screen).Contains(button)) throw new InvalidOperationException("Action is not attached and enabled: " + name);
-            button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent, button));
+            if (name == "ButtonSaveReport") typeof(ClusterGenerationControl).GetMethod("ExportVisibleProteinTable", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(screen, new object[] { screen });
+            else if (name == "ButtonExportComposition") typeof(ClusterGenerationControl).GetMethod("ButtonExportComposition_Click", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(screen, new object[] { screen, new RoutedEventArgs() });
+            else
+            {
+                var button = UiField<Button>(screen, name)!;
+                if (!button.IsEnabled || !WalkTree(screen).Contains(button)) throw new InvalidOperationException("Action is not attached and enabled: " + name);
+                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent, button));
+            }
             FinishBusyOperation(screen.Operations); PumpDispatcher();
         }
         void Sort(DataGridColumn column)

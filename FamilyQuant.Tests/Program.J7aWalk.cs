@@ -64,13 +64,13 @@ internal static partial class Program
             shell.Show(); PumpDispatcher();
             if (!shell.OpenProjectPath(args[1])) throw new InvalidOperationException("The shell did not open the project.");
             J7aWaitIdle(shell, TimeSpan.FromHours(2));
-            var item = (MenuItem)shell.FindName("MenuItemExportInterpretationInput");
+            var item = (MenuItem)shell.FindName("MenuItemExport");
             var files = new List<string>();
             foreach (string name in new[] { "interpretation-input.md", "interpretation-input-repeat.md" })
             {
                 target = Path.Combine(output, name);
                 var watch = Stopwatch.StartNew();
-                item.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+                ChooseExport(shell, ProjectExportKind.InterpretationInput);
                 bool written = J7aWait(shell.InterpretationInputTask!, TimeSpan.FromMinutes(30));
                 Say("Export " + name + ": " + written + " in " + watch.Elapsed.TotalSeconds.ToString("F1", CultureInfo.InvariantCulture) + " s; "
                     + (File.Exists(target) ? new FileInfo(target).Length + " bytes, SHA-256 " + TestFileHash.Upper(target) : "no file"));
@@ -321,7 +321,7 @@ internal static partial class Program
                     editor.SaveButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 };
                 Directory.CreateDirectory(Path.GetDirectoryName(reportPath)!);
-                ((MenuItem)shell.FindName("MenuItemExportReport")).RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+                ChooseExport(shell, ProjectExportKind.Report);
                 bool exported = shell.ReportExportTask != null && J7aWait(shell.ReportExportTask, TimeSpan.FromHours(2));
                 Say("Report export: " + exported + "; " + (File.Exists(reportPath) ? new FileInfo(reportPath).Length + " bytes" : "no file")
                     + "; supplement " + Report.ReportSupplementWorkbook.PathForReport(reportPath) + " " + File.Exists(Report.ReportSupplementWorkbook.PathForReport(reportPath)));
@@ -480,7 +480,7 @@ internal static partial class Program
                     editor.SaveButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 };
                 Directory.CreateDirectory(Path.GetDirectoryName(reportPath)!);
-                ((MenuItem)shell.FindName("MenuItemExportReport")).RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+                ChooseExport(shell, ProjectExportKind.Report);
                 bool exported = shell.ReportExportTask != null && J7aWait(shell.ReportExportTask, TimeSpan.FromHours(1));
                 Say("Report export: " + exported + "; " + (File.Exists(reportPath) ? new FileInfo(reportPath).Length + " bytes" : "no file")
                     + "; supplement " + Report.ReportSupplementWorkbook.PathForReport(reportPath) + " " + File.Exists(Report.ReportSupplementWorkbook.PathForReport(reportPath)));
@@ -657,7 +657,7 @@ internal static partial class Program
             J7aButtonExport(sensitivity, Part("ExportTable"), Path.Combine(dir, "family_sensitivity.csv"), say);
         }
         else say("Sensitivity section not found in Results.");
-        foreach (var kind in Enum.GetValues<ResultsExportKind>())
+        foreach (var kind in Enum.GetValues<ResultsExportKind>().Where(kind => kind is not (ResultsExportKind.Figures or ResultsExportKind.EvidencePack)))
         {
             model.ExportKind = kind; PumpDispatcher();
             if (!model.CanExport) { say("Results export " + kind + " UNAVAILABLE: " + model.ExportUnavailableReason); continue; }
@@ -668,7 +668,7 @@ internal static partial class Program
                 ResultsExportKind.Homology => "FamilyQuant_DeNovo_Homology.csv", ResultsExportKind.DatabaseGap => "familyquant_database_gap.csv",
                 ResultsExportKind.SuggestedAdditions => "familyquant_suggested_additions.fasta", _ => kind.ToString().ToLowerInvariant()
             });
-            if (!folder) J7aButtonExport(analytics, "ButtonExport", target, say);
+            if (!folder) { using var driver = new NativeOwnedDialogDriver(target); ChooseResultsExport(model, kind); }
             else { Directory.CreateDirectory(target); J7aWait(model.ExportAsync(target, AppOperationHost.For(analytics)), TimeSpan.FromMinutes(30)); }
             say("Results export " + kind + ": " + model.Status);
         }
@@ -717,15 +717,15 @@ internal static partial class Program
 
     private static void J7aMenuExport(MainWindow shell, string menuName, string path, Action<string> say)
     {
-        var menu = (MenuItem)shell.FindName(menuName);
+        var menu = (MenuItem)shell.FindName("MenuItemExport");
         if (!menu.IsEnabled) { say("Export " + menuName + " UNAVAILABLE: " + menu.ToolTip); return; }
         using var driver = new NativeOwnedDialogDriver(path);
-        menu.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+        ChooseExport(shell, menuName switch { "MenuItemExportComposition" => ProjectExportKind.FamilyComposition, "MenuItemExportPanelAudit" => ProjectExportKind.PanelAudit, "MenuItemExportFamilyTable" => ProjectExportKind.VisibleProteins, _ => ProjectExportKind.InterpretationInput });
         if (!J7aWaitOrGiveUp(() => driver.SawDialog || File.Exists(path), TimeSpan.FromSeconds(60)))
         {
             var families = J7aFamilies(shell);
-            say("Export " + menuName + ": no file dialog appeared within 60 s; composition button enabled " + ((Button)families.FindName("ButtonExportComposition")).IsEnabled
-                + " (" + ((Button)families.FindName("ButtonExportComposition")).ToolTip + "); has full XIC " + families.HasFullXic + "; status " + J7aStatus(shell));
+            say("Export " + menuName + ": no file dialog appeared within 60 s; composition button enabled " + ((Button)families.FindName("ButtonSaveReport")).IsEnabled
+                + " (" + ((Button)families.FindName("ButtonSaveReport")).ToolTip + "); has full XIC " + families.HasFullXic + "; status " + J7aStatus(shell));
             return;
         }
         J7aWait(() => File.Exists(path) && !shell.Operations.IsBusy || driver.TimedOut, TimeSpan.FromMinutes(20));
@@ -733,8 +733,12 @@ internal static partial class Program
             + (File.Exists(path) ? " (" + new FileInfo(path).Length + " bytes)" : ""));
     }
 
-    private static void J7aButtonExport(FrameworkElement screen, string buttonName, string path, Action<string> say) =>
+    private static void J7aButtonExport(FrameworkElement screen, string buttonName, string path, Action<string> say)
+    {
+        if (screen is ClusterGenerationControl && Window.GetWindow(screen) is MainWindow shell)
+        { J7aMenuExport(shell, buttonName == "ButtonExportComposition" ? "MenuItemExportComposition" : "MenuItemExportFamilyTable", path, say); return; }
         J7aButtonExport(screen, (Button)screen.FindName(buttonName), path, say);
+    }
 
     private static void J7aButtonExport(FrameworkElement screen, Button button, string path, Action<string> say)
     {

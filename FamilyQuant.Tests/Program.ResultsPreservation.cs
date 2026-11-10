@@ -98,7 +98,6 @@ internal static partial class Program
         {
             window.Show(); window.UpdateLayout(); PumpDispatcher(); window.UpdateLayout(); PumpDispatcher();
             var top = (ComboBox)control.FindName("ComboBoxFamilyTopN");
-            var exports = (ComboBox)control.FindName("ComboBoxExportKind");
             var button = (Button)control.FindName("ButtonExport");
             var host = AppOperationHost.For(control);
             window.UpdateLayout(); PumpDispatcher();
@@ -146,54 +145,25 @@ internal static partial class Program
 
             foreach (var item in new[] {
                 (ResultsExportKind.Peptides, "FQ15-26786D42C42C", "FQ15-523631E1F20E", "FQ15-44CB7F99655E"),
-                (ResultsExportKind.Summary, "FQ15-9DEFC5CA51C6", "FQ15-4CC6F55B2F33", "FQ15-6C182BB4B81F"),
-                (ResultsExportKind.Figures, "FQ15-8F08DA795CB5", "FQ15-9AB13C0AE2A4", "FQ15-C7CC0C2ABDF0"),
-                (ResultsExportKind.EvidencePack, "FQ15-C571D9176653", "FQ15-D56E685BBF02", "FQ15-187ED75059DC") })
+                (ResultsExportKind.Summary, "FQ15-9DEFC5CA51C6", "FQ15-4CC6F55B2F33", "FQ15-6C182BB4B81F") })
             {
-                exports.SelectedItem = exports.Items.OfType<ComboBoxItem>().Single(i => (string?)i.Tag == item.Item1.ToString());
-                PumpDispatcher();
-                var copy = item.Item1 switch {
-                    ResultsExportKind.Peptides => ("FQ15-3BCC49F296C6", "Peptide table (CSV)", "FQ15-21F91C29B9E2", "Select the peptide table with run, sequence, charge, mass, isotope areas, envelope and family assignments for CSV export. A file is written only when Export is confirmed, and Undo does not remove it."),
-                    ResultsExportKind.Summary => ("FQ15-C7B652959EE3", "Run summary (CSV)", "FQ15-7EE1B55F5E41", "Select per-run TIC, peptide counts, envelopes and recovery shares for CSV export in invariant decimal format. A file is written only when Export is confirmed, and Undo does not remove it."),
-                    ResultsExportKind.Figures => ("FQ15-9D6165ED150A", "Screen figures (PNG)", "FQ15-2C55FFA436E6", "Select the stored result's run, peptide and family graphs for PNG export, with standard figures at 1920 by 1080 pixels in the Light palette and complete data beside bounded figures. Export writes the chosen folder's files, and Undo does not remove them."),
-                    _ => ("FQ15-3CDBA38C569B", "Presentation evidence pack", "FQ15-9F0785257B19", "Select the complete figure set, exact CSV and JSON numbers and the cutoff README for an evidence-pack export. Export writes files only when the required computed studies are present, and Undo does not remove them.") };
-                var selected = (ComboBoxItem)exports.SelectedItem;
-                Prove(copy.Item1, "export label retained as " + copy.Item2, (string?)selected.Content == copy.Item2,
-                    "ComboBoxExportKind / " + item.Item1 + " / Content");
-                Tooltip(copy.Item3, selected, copy.Item4, "ComboBoxExportKind / " + item.Item1 + " / ToolTip");
-                Prove(item.Item2, item.Item1 + " export remains selectable and enabled", model.ExportKind == item.Item1 && button.IsVisible && button.IsEnabled,
-                    "ComboBoxExportKind / ButtonExport / ExportChoiceChanged");
+                var choice = ResultsExportOptions(model).Single(option => option.Kind == (item.Item1 == ResultsExportKind.Peptides ? ProjectExportKind.PeptideTable : ProjectExportKind.RunSummary));
+                string label = item.Item1 == ResultsExportKind.Peptides ? "Peptide table" : "Run summary";
+                Prove(item.Item2, label + " is selectable in the shared Export window", choice.Available && choice.Label == label,
+                    "ExportWindow / " + choice.Kind);
                 var routes = new List<string>();
                 string destination = "";
                 ShellDialogs.FilePresenter = (_, id, dialog) => { routes.Add(id); dialog.FileName = destination; return true; };
-                ShellDialogs.FolderPresenter = (_, id, dialog) => { routes.Add(id); dialog.FolderName = destination; return true; };
                 for (int repeat = 1; repeat <= 2; repeat++)
                 {
                     destination = Path.Combine(output, item.Item1 + "-" + repeat);
-                    button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); FinishBusyOperation(host);
+                    ChooseResultsExport(model, item.Item1);
                 }
-                bool nativeRoute = routes.SequenceEqual(Enumerable.Repeat("results." + item.Item1, 2));
-                Console.WriteLine(item.Item1 + " export outcome: " + model.Status);
                 string first = Path.Combine(output, item.Item1 + "-1"), second = Path.Combine(output, item.Item1 + "-2");
-                bool completed;
-                if (item.Item1 == ResultsExportKind.EvidencePack)
-                    completed = !Directory.Exists(first) && !Directory.Exists(second) && model.Status.StartsWith("The export did not finish.", StringComparison.Ordinal)
-                        && model.Status.Contains("no stored de novo/search-engine overlap study", StringComparison.Ordinal);
-                else if (item.Item1 == ResultsExportKind.Figures)
-                {
-                    string[] expected = { "family_contribution.png", "isotopes_credited.png", "percent_ion_current_by_mass.png", "recovery.png", "xic_by_mass.png" };
-                    completed = Directory.GetFiles(first).Select(Path.GetFileName).OrderBy(n => n, StringComparer.Ordinal).SequenceEqual(expected)
-                        && expected.All(name => File.ReadAllBytes(Path.Combine(first, name)).SequenceEqual(File.ReadAllBytes(Path.Combine(second, name)))
-                            && PngSize(Path.Combine(first, name)) == (1920, 1080));
-                }
-                else completed = File.Exists(first) && new FileInfo(first).Length > 100
-                    && File.ReadAllBytes(first).SequenceEqual(File.ReadAllBytes(second));
-                string behavior = item.Item1 == ResultsExportKind.EvidencePack
-                    ? "native evidence-pack route refuses missing required studies and publishes no folder"
-                    : "native " + item.Item1 + " export writes byte-identical output twice";
-                Prove(item.Item3, behavior, nativeRoute && completed, "ExportClicked / AnalyticsViewModel.ExportAsync");
-                Prove(item.Item4, behavior + " through the replacement handler", nativeRoute && completed,
-                    "ExportClicked / AnalyticsViewModel.ExportAsync");
+                bool completed = File.Exists(first) && File.Exists(second) && File.ReadAllBytes(first).SequenceEqual(File.ReadAllBytes(second));
+                Prove(item.Item3, label + " retains the native CSV route", routes.SequenceEqual(Enumerable.Repeat("results." + item.Item1, 2)),
+                    "MainWindow.ExportResultsTable / AnalyticsViewModel.ExportAsync");
+                Prove(item.Item4, label + " repeats the same stored CSV bytes", completed, "MainWindow.ExportResultsTable / AnalyticsViewModel.ExportAsync");
             }
             foreach (var theme in new[] { Themes.AppTheme.Light, Themes.AppTheme.Dark })
             {
@@ -210,11 +180,5 @@ internal static partial class Program
         }
         return cases;
 
-        static (int, int) PngSize(string path)
-        {
-            using var stream = File.OpenRead(path);
-            var frame = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-            return (frame.PixelWidth, frame.PixelHeight);
-        }
     }
 }

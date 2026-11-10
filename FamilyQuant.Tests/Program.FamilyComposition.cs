@@ -209,19 +209,18 @@ namespace FamilyQuant.Tests
             var summary = UiField<TextBlock>(control, "TextBlockFullXicSummary")!;
             var sharedBox = UiField<ComboBox>(control, "ComboBoxSharedPeptides")!;
             var basisBox = UiField<ComboBox>(control, "ComboBoxFullXicBasis")!;
-            var exportButton = UiField<Button>(control, "ButtonExportComposition")!;
             FastaItemExtended p1 = fcf.MyExtendedFastaItems.Single(i => i.SequenceIdentifier == "sp|P1|A");
             FastaItemExtended p2 = fcf.MyExtendedFastaItems.Single(i => i.SequenceIdentifier == "sp|P2|B");
             void Refresh() => typeof(ClusterGenerationControl).GetMethod("UpdateGUI",
                 BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(control, null);
 
             Check("without a full XIC the column is empty, the export is off, and Layer 2 is OPTIONAL, not BLOCKED",
-                p1.FullXicShare == null && !exportButton.IsEnabled && layer2.Text == "OPTIONAL · no .plp loaded",
+                p1.FullXicShare == null && control.FullXicCompositionCsv() == null && layer2.Text == "OPTIONAL · no .plp loaded",
                 layer2.Text);
 
             control.SetFullXicQuant(rows, new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase) { ["r1"] = 1000 });
             Check("with a full XIC and no .plp, Layer 3 is ready and the export is on",
-                control.HasFullXic && layer3.Text == "READY" && exportButton.IsEnabled, layer3.Text);
+                control.HasFullXic && layer3.Text == "READY" && control.FullXicCompositionCsv() != null, layer3.Text);
             Check("the column carries each family's unique share of the quantified signal (400 counted once)",
                 p1.FullXicShare is double a && Math.Abs(a - 200.0 / 400) < 1e-9
                 && p2.FullXicShare is double b && Math.Abs(b - 80.0 / 400) < 1e-9,
@@ -363,7 +362,7 @@ namespace FamilyQuant.Tests
 
             control.SetFullXicQuant(null, null);
             Check("detaching the quantitation empties the column again",
-                !control.HasFullXic && p1.FullXicShare == null && !exportButton.IsEnabled);
+                !control.HasFullXic && p1.FullXicShare == null && control.FullXicCompositionCsv() == null);
 
             // ---- the hit cut keeps its ties for family attribution ----------------------------------------
             const string tied = "GSWHNCPEMR";

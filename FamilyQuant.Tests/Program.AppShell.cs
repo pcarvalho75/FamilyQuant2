@@ -230,7 +230,7 @@ namespace FamilyQuant.Tests
 
             var app = UiField<Grid>(main, "GridApp")!;
             var saveProject = UiField<MenuItem>(main, "MenuItemSaveProject")!;
-            var saveFcf = UiField<MenuItem>(main, "MenuItemSaveFCF")!;
+            var saveFcf = UiField<MenuItem>(main, "MenuItemExport")!;
             var compute = UiField<MenuItem>(main, "MenuItemComputeXic")!;
 
             Call("ShowHome");

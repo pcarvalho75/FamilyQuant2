@@ -220,7 +220,7 @@
                 <local:CurationQuantitationPanel x:Name="QuantitationPanel"
                     LoadRequested="ButtonLoadQuantData_Click" RecalculateRequested="ButtonRecalculateQuantitation_Click"
                     ChoiceChanged="ComboBoxNormalization_SelectionChanged" BasisChanged="ComboBoxFullXicBasis_SelectionChanged"/>
-                <Expander Header="Display and export" Margin="0,10,0,0" ToolTip="Shows protein display filters and separate CSV export actions. Expanding it changes no project data or files.">
+                <Expander Header="Display and export" Margin="0,10,0,0" ToolTip="Shows protein display filters and opens the shared Export window. Expanding it changes no project data or files.">
                     <StackPanel Margin="8">
                         <CheckBox x:Name="CheckBoxExcludeReverse" Content="Hide decoys" IsChecked="True"
                                   Checked="CheckBoxExcludeReverse_CheckedChanged" Unchecked="CheckBoxExcludeReverse_CheckedChanged"
@@ -234,10 +234,8 @@
                         <CheckBox x:Name="CheckBoxShowSearchIds" Content="Show USearch ID" IsChecked="True"
                                   Checked="SearchIdVisibility_Changed" Unchecked="SearchIdVisibility_Changed"
                                   ToolTip="Shows the last automatic family number beside User ID; this starts on unless a saved display preference overrides it. Toggling it changes the visible columns, while stored IDs stay unchanged."/>
-                        <Button x:Name="ButtonSaveReport" Content="Export to CSV" Click="ButtonSaveReport_Click"
-                                ToolTip="Writes the protein table to CSV using its current display filters and columns, with shares as decimal fractions. Show at least one row to enable it; Undo does not revert the exported file."/>
-                        <Button x:Name="ButtonExportComposition" Content="Export family composition" Click="ButtonExportComposition_Click" IsEnabled="False"
-                                ToolTip="Writes Full XIC family composition, shared signal and unattributed signal to a separate CSV file. Run Quantify to enable it; Undo does not revert the exported file."/>
+                        <Button x:Name="ButtonSaveReport" Content="Export" Click="OpenExportWindow_Click"
+                                ToolTip="Opens the shared Export window for reports, tables and other project files. Show at least one protein row to enable this shortcut; File > Export is also available, and Undo does not revert exported files."/>
                         <Border x:Name="BadgeExport" Visibility="Collapsed"><TextBlock x:Name="TextBlockExportState"/></Border>
                     </StackPanel>
                 </Expander>

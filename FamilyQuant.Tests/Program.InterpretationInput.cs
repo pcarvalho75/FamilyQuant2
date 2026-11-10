@@ -115,9 +115,9 @@ internal static partial class Program
         ShellMessages.Reported += Seen;
         try
         {
-            var item = (MenuItem)shell.FindName("MenuItemExportInterpretationInput");
-            Check("J45 File > Export holds Interpretation input (Markdown)", item != null && ReferenceEquals(item.Parent, shell.FindName("MenuItemExport"))
-                && (string)item.Header == "Interpretation input (Markdown)" && item.ToolTip is string tip && tip.Length < 160);
+            var item = ExportOptions(shell).Single(option => option.Kind == ProjectExportKind.InterpretationInput);
+            Check("J45 File > Export holds Interpretation input under Markdown", item.Section == "Interpretation input (Markdown)"
+                && item.Label == "Interpretation input" && !item.Available && item.Hint.Contains("Results", StringComparison.Ordinal));
             var task = shell.ExportInterpretationInputAsync();
             Check("J45 without stored Results the command explains what to do and writes nothing", task.IsCompleted && !task.Result
                 && message?.StartsWith("The interpretation input needs stored Results.", StringComparison.Ordinal) == true, message);

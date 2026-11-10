@@ -81,6 +81,11 @@ internal static partial class Program
             {
             if (!main.Dispatcher.CheckAccess() || SynchronizationContext.Current is not DispatcherSynchronizationContext)
                 throw new InvalidOperationException("Invoke native menu actions with their real dispatcher context.");
+            if (menuName == "MenuItemSaveFCF")
+            {
+                ChooseExport(main, ProjectExportKind.Families); FinishBusyOperation(main.Operations); PumpDispatcher();
+                return "File > Export > Families (.fcf)";
+            }
             var item = (MenuItem)main.FindName(menuName);
             if (!item.IsEnabled) throw new InvalidOperationException("Native route is disabled: " + menuName);
             if (item.Command is RoutedCommand routed)
@@ -110,10 +115,10 @@ internal static partial class Program
         void Record(string id, string menu, string dispatch, string outcome, bool result, string? exception = null,
             Dictionary<string, string>? bindings = null, Dictionary<string, bool>? branches = null)
         {
-            var item = (MenuItem)main.FindName(menu);
+            var item = (MenuItem)main.FindName(menu == "MenuItemSaveFCF" ? "MenuItemExport" : menu);
             bool preserved = FeatureLedgerEvidence.Hash(input) == inputHash && messageThreads.All(thread => thread == uiThread);
             Check("native shell route " + id + ": " + outcome, result && preserved);
-            cases.Add(new(id, menu, item.Header?.ToString() ?? "", dispatch, outcome, result && preserved,
+            cases.Add(new(id, menu, menu == "MenuItemSaveFCF" ? "Families (.fcf)" : item.Header?.ToString() ?? "", dispatch, outcome, result && preserved,
                 dialogs.ToList(), messages.ToList(), main.StatusModel.ContextHelp, exception,
                 id == "project-success" ? main.DocumentState.SaveCheckText : null, bindings, branches, consoleText));
         }

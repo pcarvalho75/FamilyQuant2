@@ -107,22 +107,7 @@ namespace FamilyQuant.Tests
 
             foreach (string p in written) Console.WriteLine("        figure written to " + p);
 
-            // The screen's own export path is the same one, so what a talk gets is what the screen showed.
-            var control = new AnalyticsControl(rows, new QuantManifest { PerRunTic = tic });
-            control.ViewModel.ExportKind = ResultsExportKind.Figures;
-            var figureButton = UiField<Button>(control, "ButtonExport");
-            Check("the analytics screen offers the figure export, enabled once there is something to draw",
-                figureButton != null && figureButton.IsEnabled
-                && figureButton.ToolTip is string t && t.Contains("1920"), figureButton?.ToolTip as string);
 
-            figureButton!.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
-            Check("and pressed off a display it refuses in the status line rather than opening a dialog",
-                UiField<TextBlock>(control, "TextBlockStatus")!.Text.Contains("not on a display"),
-                UiField<TextBlock>(control, "TextBlockStatus")!.Text);
-
-            var emptyControl = new AnalyticsControl(new List<QuantRow>(), null);
-            Check("with no quantitation the figure export is dark, like the two CSV exports",
-                UiField<Button>(emptyControl, "ButtonExport")!.IsEnabled == false);
         }
 
     }

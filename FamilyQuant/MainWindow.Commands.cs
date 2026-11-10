@@ -75,9 +75,6 @@ public partial class MainWindow
         RefreshProjectCommandAvailability();
         bool project = cgc != null;
         MenuItemSaveAs.IsEnabled = project;
-        MenuItemExport.IsEnabled = project;
-        MenuItemExportComposition.IsEnabled = cgc?.ButtonExportComposition.IsEnabled == true;
-        MenuItemExportFamilyTable.IsEnabled = cgc?.ButtonSaveReport.IsEnabled == true;
         MenuItemHideDecoys.IsEnabled = project;
         MenuItemHideContaminants.IsEnabled = project;
         MenuItemAnalytics.IsEnabled = (project || latestHomologyResult != null) && !saveInProgress && !analyticsInProgress;
@@ -163,7 +160,7 @@ public partial class MainWindow
     }
     private void MenuItemExportFamilyTable_Click(object sender, RoutedEventArgs e)
     {
-        if (cgc?.ButtonSaveReport.IsEnabled == true) cgc.ButtonSaveReport.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        if (cgc?.ButtonSaveReport.IsEnabled == true) cgc.ExportVisibleProteinTable(this);
     }
     private async void MenuItemExportComposition_Click(object sender, RoutedEventArgs e)
     {

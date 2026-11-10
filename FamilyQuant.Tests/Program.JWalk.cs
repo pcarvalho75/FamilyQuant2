@@ -196,7 +196,7 @@ internal static partial class Program
             Say("Database gap FASTA: " + gap.FastaState);
             foreach (var row in gap.LengthRows) Say("Database gap length row: " + row.MinimumTagLength + " table " + row.HasTable);
             watch.Restart();
-            foreach (var kind in Enum.GetValues<ResultsExportKind>())
+            foreach (var kind in Enum.GetValues<ResultsExportKind>().Where(kind => kind is not (ResultsExportKind.Figures or ResultsExportKind.EvidencePack)))
             {
                 model.ExportKind = kind; PumpDispatcher();
                 if (!model.CanExport) { Say("Results export " + kind + " UNAVAILABLE: " + model.ExportUnavailableReason); continue; }
@@ -211,7 +211,7 @@ internal static partial class Program
                     _ => kind.ToString().ToLowerInvariant()
                 });
                 var exportWatch = Stopwatch.StartNew();
-                if (!folder) JWalkButtonExport(analytics, "ButtonExport", target, Say);
+                if (!folder) { using var driver = new NativeOwnedDialogDriver(target); ChooseResultsExport(model, kind); }
                 else
                 {
                     Directory.CreateDirectory(target);
@@ -241,6 +241,12 @@ internal static partial class Program
     private static void JWalkButtonExport(FrameworkElement screen, string buttonName, string path, Action<string> say)
     {
         using var driver = new NativeOwnedDialogDriver(path);
+        if (screen is ClusterGenerationControl && Window.GetWindow(screen) is MainWindow shell)
+        {
+            ChooseExport(shell, buttonName == "ButtonExportComposition" ? ProjectExportKind.FamilyComposition : ProjectExportKind.VisibleProteins);
+            FinishBusyOperation(shell.Operations); PumpDispatcher();
+            say("Export " + buttonName + " to " + path + ": written " + File.Exists(path)); return;
+        }
         var button = (Button)screen.FindName(buttonName);
         if (!button.IsEnabled) { say("Export " + buttonName + " UNAVAILABLE: " + button.ToolTip); return; }
         button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));

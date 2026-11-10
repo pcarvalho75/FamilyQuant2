@@ -55,26 +55,26 @@ internal static partial class Program
                     bool Enabled(string name) => ((MenuItem)main.FindName(name)).IsEnabled;
                     Check("J31 attribution ends with File available and Results attached " + language,
                         !main.Operations.IsBusy && ((Menu)main.FindName("MainMenu")).IsEnabled && screen.HasFullXic);
-                    Check("J31 Export report enables after attribution without a menu detour " + language, Enabled("MenuItemExportReport"));
+                    Check("J31 Export report enables after attribution without a menu detour " + language, Enabled("MenuItemExport"));
                     Check("J31 panel and report details enable after attribution without a menu detour " + language,
                         Enabled("MenuItemFamilyPanel") && Enabled("MenuItemReportDetails"));
                     Check("J31 File exports follow completed Results without a menu detour " + language,
-                        Enabled("MenuItemExport") && Enabled("MenuItemExportComposition") && Enabled("MenuItemExportFamilyTable"));
+                        Enabled("MenuItemExport") && ExportOptions(main).Single(option => option.Kind == ProjectExportKind.FamilyComposition).Available && ExportOptions(main).Single(option => option.Kind == ProjectExportKind.VisibleProteins).Available);
                     using (var operation = main.Operations.Begin("Synthetic availability wait"))
                     {
                         PumpDispatcher();
                         Check("J31 a running shared operation still blocks File actions " + language,
-                            main.Operations.IsBusy && !((Menu)main.FindName("MainMenu")).IsEnabled && !Enabled("MenuItemExportReport"));
+                            main.Operations.IsBusy && !((Menu)main.FindName("MainMenu")).IsEnabled && !Enabled("MenuItemExport"));
                     }
                     PumpDispatcher();
                     Check("J31 another shared completion restores File actions without a menu detour " + language,
-                        Enabled("MenuItemExportReport") && Enabled("MenuItemExportComposition") && Enabled("MenuItemExportFamilyTable"));
+                        Enabled("MenuItemExport") && ExportOptions(main).Single(option => option.Kind == ProjectExportKind.FamilyComposition).Available && ExportOptions(main).Single(option => option.Kind == ProjectExportKind.VisibleProteins).Available);
                     var noResults = main.OpenProjectSafelyAsync(empty); FinishBusyTask(noResults);
                     if (!noResults.GetAwaiter().GetResult()) throw new InvalidOperationException("Could not open the empty Results fixture.");
                     var emptyScreen = ((Grid)main.FindName("GridApp")).Children.OfType<ClusterGenerationControl>().Single();
                     FinishBusyTask(emptyScreen.FullXicReady); FinishBusyOperation(main.Operations); PumpDispatcher();
                     Check("J31 opening without Results clears composition availability and keeps actionable report command " + language,
-                        !emptyScreen.HasFullXic && !Enabled("MenuItemExportComposition") && Enabled("MenuItemExportReport") && Enabled("MenuItemExportFamilyTable"));
+                        !emptyScreen.HasFullXic && !ExportOptions(main).Single(option => option.Kind == ProjectExportKind.FamilyComposition).Available && Enabled("MenuItemExport") && ExportOptions(main).Single(option => option.Kind == ProjectExportKind.VisibleProteins).Available);
                 }
                 finally
                 {

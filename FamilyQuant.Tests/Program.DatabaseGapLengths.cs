@@ -58,7 +58,6 @@ internal static partial class Program
             window.Show(); PumpDispatcher(); window.UpdateLayout();
             var gap = (DatabaseGapControl)((ContentControl)control.FindName("DatabaseGapHost")).Content;
             var chooser = (ComboBox)gap.FindName("ComboBoxMinimumTagLength");
-            var exportChoice = (ComboBox)control.FindName("ComboBoxExportKind"); var exportButton = (Button)control.FindName("ButtonExport");
             Check("length screen uses the Core default and every Core choice without recording an initial edit",
                 model.DatabaseGap.MinimumTagLength == FamilyWorldOptions.DefaultMinimumTagLength && manifest.DatabaseGapMinimumTagLength == null
                 && chooser.Items.Cast<int>().SequenceEqual(FamilyWorldOptions.LengthChoices) && edits == 0);
@@ -76,13 +75,13 @@ internal static partial class Program
                     && model.DatabaseGap.Rules.Contains(length + " residues", StringComparison.Ordinal));
                 foreach (var kind in new[] { ResultsExportKind.DatabaseGap, ResultsExportKind.SuggestedAdditions })
                 {
-                    exportChoice.SelectedItem = exportChoice.Items.OfType<ComboBoxItem>().Single(item => (string?)item.Tag == kind.ToString()); PumpDispatcher();
+                    model.ExportKind = kind; PumpDispatcher();
                     var paths = new List<string>();
                     for (int repeat = 1; repeat <= 2; repeat++)
                     {
                         string path = Path.Combine(output, length + "-" + kind + "-" + repeat); paths.Add(path);
                         ShellDialogs.FilePresenter = (_, _, dialog) => { dialog.FileName = path; return true; };
-                        exportButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); FinishBusyOperation(AppOperationHost.For(control));
+                        ChooseResultsExport(model, kind); FinishBusyOperation(AppOperationHost.For(control));
                     }
                     string actual = File.ReadAllText(paths[0]);
                     bool agrees = kind == ResultsExportKind.DatabaseGap ? actual == active.BuildCompositionCsv()
@@ -159,7 +158,6 @@ internal static partial class Program
             window.Show(); PumpDispatcher(); window.UpdateLayout();
             var gap = (DatabaseGapControl)((ContentControl)control.FindName("DatabaseGapHost")).Content;
             var lengthChoice = (ComboBox)gap.FindName("ComboBoxMinimumTagLength");
-            var exportChoice = (ComboBox)control.FindName("ComboBoxExportKind"); var button = (Button)control.FindName("ButtonExport");
             if (requireDefault)
             {
                 Check("default proof uses Core length 8 and a freshly stored top-level table at 8",
@@ -201,12 +199,12 @@ internal static partial class Program
                 if (!ready) { transcript.Add(length + " refused: " + model.DatabaseGap.FastaState); continue; }
                 foreach (var kind in new[] { ResultsExportKind.DatabaseGap, ResultsExportKind.SuggestedAdditions })
                 {
-                    exportChoice.SelectedItem = exportChoice.Items.OfType<ComboBoxItem>().Single(item => (string?)item.Tag == kind.ToString()); PumpDispatcher();
+                    model.ExportKind = kind; PumpDispatcher();
                     string[] paths = Enumerable.Range(1, 2).Select(repeat => Path.Combine(output, length + "-" + kind + "-" + repeat)).ToArray();
                     foreach (string path in paths)
                     {
                         ShellDialogs.FilePresenter = (_, _, dialog) => { dialog.FileName = path; return true; };
-                        button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); FinishBusyOperation(AppOperationHost.For(control));
+                        ChooseResultsExport(model, kind); FinishBusyOperation(AppOperationHost.For(control));
                     }
                     bool equal = File.Exists(paths[0]) && File.Exists(paths[1]) && File.ReadAllBytes(paths[0]).SequenceEqual(File.ReadAllBytes(paths[1]));
                     if (equal && kind == ResultsExportKind.DatabaseGap) equal = File.ReadAllText(paths[0]) == active!.BuildCompositionCsv();

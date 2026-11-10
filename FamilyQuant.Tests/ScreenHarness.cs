@@ -229,7 +229,7 @@ namespace FamilyQuant.Tests
                 Set(main, "cgc", curation);
                 Set(main, "loadedCuration", source);
                 Set(main, "lastFcfPath", curationPath);
-                foreach (string command in new[] { "MenuItemSaveFCF", "MenuItemSaveProject",
+                foreach (string command in new[] { "MenuItemExport", "MenuItemSaveProject",
                     "MenuItemComputeXic", "MenuItemReanotateSEPro" })
                     Field<MenuItem>(main, command).IsEnabled = true;
                 Present(main, curation, "cgc");

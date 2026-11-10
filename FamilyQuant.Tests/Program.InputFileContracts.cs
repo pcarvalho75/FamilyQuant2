@@ -141,7 +141,7 @@ internal static partial class Program
             secondaryFrozenChooser = dialog => { ((FileDialog)dialog).FileName = oldPath; return true; };
             copied.Invoke(null, new object[] { old, old.FindName("ButtonSaveReport"), new RoutedEventArgs() });
             ShellDialogs.FilePresenter = (_, _, dialog) => { dialog.FileName = currentPath; return true; };
-            SecondaryClick(UiField<Button>(current, "ButtonSaveReport")!); FinishBusyOperation(current.Operations);
+            typeof(ClusterGenerationControl).GetMethod("ExportVisibleProteinTable", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(current, new object[] { current }); FinishBusyOperation(current.Operations);
             string[] Patterns(string filter) => filter.Split('|').Where((_, index) => index % 2 == 1).SelectMany(value => value.Split(';')).ToArray();
             bool same = cancel && currentCancel && accepted && current.ViewModel.Quantitation.HasPatternLab
                 && Patterns(oldFilter).SequenceEqual(Patterns(currentFilter)) && Patterns(currentFilter).Contains("*.plp", StringComparer.Ordinal)

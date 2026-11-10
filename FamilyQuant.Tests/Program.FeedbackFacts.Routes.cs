@@ -34,11 +34,17 @@ internal static partial class Program
         string Text() => UiField<TextBlock>(screen, "TextBlockStatusLine")!.Text;
         void Capture(string ids, string note)
         { foreach(string id in ids.Split(' ', StringSplitOptions.RemoveEmptyEntries)) observed.Add("FQ15-"+id, (Text(), note)); }
-        void Click(string id)
+        void Click(string name)
         {
-            var button = UiField<Button>(screen,id)!;
-            Check("Y9 normal button is attached and enabled: " + id, button.IsEnabled && WalkTree(screen).Contains(button));
-            button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); FinishBusyOperation(screen.Operations); PumpDispatcher();
+            if (name == "ButtonSaveReport") typeof(ClusterGenerationControl).GetMethod("ExportVisibleProteinTable", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(screen, new object[] { screen });
+            else if (name == "ButtonExportComposition") typeof(ClusterGenerationControl).GetMethod("ButtonExportComposition_Click", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(screen, new object[] { screen, new RoutedEventArgs() });
+            else
+            {
+                var button = UiField<Button>(screen, name)!;
+                if (!button.IsEnabled || !WalkTree(screen).Contains(button)) throw new InvalidOperationException("Action is not attached and enabled: " + name);
+                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent, button));
+            }
+            FinishBusyOperation(screen.Operations); PumpDispatcher();
         }
         void Call(string name) => typeof(ClusterGenerationControl).GetMethod(name, BindingFlags.Instance|BindingFlags.NonPublic)!.Invoke(screen,null);
         try

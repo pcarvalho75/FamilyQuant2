@@ -43,7 +43,7 @@ internal static partial class Program
             string Workflow() => (string)typeof(MainWindow).GetMethod("WorkflowText", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(shell, null)!;
             string text = Workflow();
             string flat = Regex.Replace(text, @"\s+", " ");
-            string[] required = { "MenuItemFamilyPanel", "MenuItemFamilies", "MenuItemReportDetails", "MenuItemComputeXic", "MenuItemExportReport" };
+            string[] required = { "MenuItemFamilyPanel", "MenuItemFamilies", "MenuItemReportDetails", "MenuItemComputeXic", "MenuItemExport" };
             var requiredPaths = required.Select(name => paths[(MenuItem)shell.FindName(name)]).ToArray();
             Check("J21 workflow contains every required path from the live menu",
                 requiredPaths.All(path => flat.Contains(path, StringComparison.Ordinal)), string.Join("; ", requiredPaths.Where(path => !flat.Contains(path, StringComparison.Ordinal))));
@@ -53,7 +53,7 @@ internal static partial class Program
             var knownPaths = paths.Values.ToHashSet(StringComparer.Ordinal);
             Check("J21 every Menu line matches a complete live menu path", menuLines.Length > 0 && menuLines.All(knownPaths.Contains),
                 string.Join("; ", menuLines.Where(path => !knownPaths.Contains(path))));
-            string typo = text.Replace("Menu: File > Export report", "Menu: File > Export repot", StringComparison.Ordinal);
+            string typo = text.Replace("Menu: File > Export", "Menu: File > Exprot", StringComparison.Ordinal);
             Check("J21 menu check rejects a misspelled command even when its prefix is a menu", typo != text
                 && MenuLines(typo).Any(path => !knownPaths.Contains(path)));
             var mentions = Regex.Matches(flat, @"\b(?:File|Edit|View|Tools|Analysis|Help) > ").Select(m => flat[m.Index..]).ToArray();

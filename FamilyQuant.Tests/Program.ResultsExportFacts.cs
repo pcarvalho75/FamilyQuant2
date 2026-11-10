@@ -42,7 +42,7 @@ internal static partial class Program
         var manifest = ResultsCompleteFixtureManifest(rows);
         var model = new AnalyticsViewModel(rows, manifest, BuildSyntheticFcf());
         var control = new AnalyticsControl(model);
-        var exports = (ComboBox)control.FindName("ComboBoxExportKind"); var button = (Button)control.FindName("ButtonExport");
+        var button = (Button)control.FindName("ButtonExport");
         var window = new Window { Content = control, Width = 1180, Height = 800, Left = -30000, Top = -30000,
             ShowInTaskbar = false, ShowActivated = false, WindowStyle = WindowStyle.None };
         try
@@ -51,21 +51,20 @@ internal static partial class Program
             int dialogCalls = 0;
             ShellDialogs.FilePresenter = (_, _, _) => { dialogCalls++; return false; };
             ShellDialogs.FolderPresenter = (_, _, _) => { dialogCalls++; return false; };
-            foreach (var kind in new[] { ResultsExportKind.Figures, ResultsExportKind.EvidencePack, ResultsExportKind.Peptides })
+            foreach (var kind in new[] { ResultsExportKind.Peptides })
             {
                 Select(kind); button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 string status = model.Status;
-                int[] lines = kind == ResultsExportKind.Figures ? new[] { 344, 345, 346 }
-                    : kind == ResultsExportKind.EvidencePack ? new[] { 386, 387, 388 } : new[] { 426, 427, 428 };
+                int[] lines = { 426, 427, 428 };
                 foreach (int line in lines)
                     Fact(line, kind + " detached view refuses dialogs and names the next step", dialogCalls == 0
-                        && Has(status, "not on a display", "dialog", "application", "export"), status);
+                        && Has(status, "project window", "File > Export"), status);
             }
             window.Show(); window.UpdateLayout(); PumpDispatcher();
             var chartObjects = ((StackPanel)control.FindName("PanelCharts")).Children.Cast<object>().ToArray();
             var data = model.Data;
             var host = AppOperationHost.For(control);
-            foreach (var kind in new[] { ResultsExportKind.Peptides, ResultsExportKind.Summary, ResultsExportKind.Figures, ResultsExportKind.EvidencePack })
+            foreach (var kind in new[] { ResultsExportKind.Peptides, ResultsExportKind.Summary })
             {
                 Select(kind);
                 string title = "", filter = "", extension = "", suggested = ""; bool addExtension = false;
@@ -73,7 +72,7 @@ internal static partial class Program
                 { title = dialog.Title; filter = dialog.Filter; extension = dialog.DefaultExt; addExtension = dialog.AddExtension; suggested = dialog.FileName; return false; };
                 ShellDialogs.FolderPresenter = (_, _, dialog) => { title = dialog.Title; return false; };
                 string beforeCancel = model.Status;
-                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
+                ChooseResultsExport(model, kind); PumpDispatcher();
                 Check(kind + " cancelled native chooser preserves the previous status", model.Status == beforeCancel && !host.IsBusy);
                 if (kind is ResultsExportKind.Peptides or ResultsExportKind.Summary)
                 {
@@ -85,8 +84,6 @@ internal static partial class Program
                     Fact(438, "CSV chooser retains its extension and automatic extension behavior",
                         extension.TrimStart('.') == "csv" && addExtension, extension + "; AddExtension=" + addExtension);
                 }
-                else Fact(kind == ResultsExportKind.Figures ? 352 : 394, "native folder chooser describes the selected export",
-                    Has(title, kind == ResultsExportKind.Figures ? "figures" : "evidence", "folder"), title);
                 var folders = new List<string>();
                 for (int repeat = 1; repeat <= 2; repeat++)
                 {
@@ -94,7 +91,7 @@ internal static partial class Program
                     ShellDialogs.FilePresenter = (_, _, dialog) => { dialog.FileName = path; return true; };
                     ShellDialogs.FolderPresenter = (_, _, dialog) => { dialog.FolderName = path; return true; };
                     var exportWatch = System.Diagnostics.Stopwatch.StartNew();
-                    button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); FinishBusyOperation(host);
+                    ChooseResultsExport(model, kind); FinishBusyOperation(host);
                     Console.WriteLine(FormattableString.Invariant($"MEASURE Results export kind={kind} repeat={repeat} seconds={exportWatch.Elapsed.TotalSeconds:F3}"));
                 }
                 string success = model.Status;
@@ -110,59 +107,20 @@ internal static partial class Program
                     foreach (int line in new[] { 446, 447, 448 }) Fact(line, "CSV success names its path, invariant decimals and unchanged charts",
                         csv && success.Contains(folders[1], StringComparison.Ordinal) && Has(success, "dot", "decimal", "language", "unchanged") && sameCharts, success);
                 }
-                else
-                {
-                    string[] files = Directory.Exists(folders[1]) ? Directory.GetFiles(folders[1], "*", SearchOption.AllDirectories) : Array.Empty<string>();
-                    string[] pngs = files.Where(path => path.EndsWith(".png", StringComparison.Ordinal)).ToArray();
-                    bool dimensions = pngs.Length > 0 && pngs.All(path =>
-                    {
-                        using var stream = File.OpenRead(path);
-                        var frame = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-                        return frame.PixelWidth == 1920 && frame.PixelHeight == 1080;
-                    });
-                    bool repeat = files.Length > 0 && files.Where(path => !path.EndsWith(PresentationEvidencePack.PlotDataFile, StringComparison.Ordinal))
-                        .All(path => File.ReadAllBytes(path).SequenceEqual(File.ReadAllBytes(Path.Combine(folders[0], Path.GetRelativePath(folders[1], path)))));
-                    Check(kind + " native export repeats PNG/CSV/definition bytes; volatile plot-data timestamp is inspected separately", repeat);
-                    bool common = dimensions && sameCharts && Has(success, "1920", "1080", "Light", "unchanged")
-                        && success.Contains(folders[1], StringComparison.Ordinal);
-                    if (kind == ResultsExportKind.Figures)
-                    {
-                        bool detailed = common && pngs.Length == 5 && Has(success, "5", "projector")
-                            && pngs.All(path => success.Contains(Path.GetFileName(path), StringComparison.Ordinal));
-                        foreach (int line in new[] { 363, 364, 365, 367, 369, 370 })
-                            Fact(line, "figure success gives real count, filenames, pixel size, projector palette and unchanged charts", detailed, success);
-                    }
-                    else
-                    {
-                        int definitions = files.Length - pngs.Length;
-                        bool detailed = common && pngs.Length == PresentationFigures.FileNames.Count()
-                            && success.Contains(pngs.Length.ToString("N0", CultureInfo.CurrentCulture), StringComparison.Ordinal)
-                            && success.Contains(definitions.ToString("N0", CultureInfo.CurrentCulture), StringComparison.Ordinal)
-                            && Has(success, "definition", "CSV", "JSON", "exact plotted");
-                        Check("native complete evidence pack succeeds with every documented base figure and definition", detailed && definitions > 10);
-                        foreach (int line in new[] { 403, 404, 405, 406, 407, 408 })
-                            Fact(line, "complete pack success gives real figure/definition counts, Light PNG dimensions and exact plotted CSV/JSON numbers", detailed, success);
-                        // Compare the full recorded number tree while ignoring only the existing root timestamp.
-                        using var first = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(folders[0], PresentationEvidencePack.PlotDataFile)));
-                        using var second = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(folders[1], PresentationEvidencePack.PlotDataFile)));
-                        string Stable(System.Text.Json.JsonElement value) => string.Join("\n", value.EnumerateObject()
-                            .Where(property => property.Name != "generatedUtc").Select(property => property.Name + ":" + property.Value.GetRawText()));
-                        Check("complete evidence pack retains the entire repeated JSON tree except its existing root generatedUtc", Stable(first.RootElement) == Stable(second.RootElement));
-                    }
-                }
             }
+
             // A file in place of the parent folder forces a real IO refusal without changing permissions.
             string blocker = Path.Combine(output, "blocked-parent"); File.WriteAllText(blocker, "retained", new UTF8Encoding(false));
-            foreach (var kind in new[] { ResultsExportKind.Peptides, ResultsExportKind.Figures })
+            foreach (var kind in new[] { ResultsExportKind.Peptides })
             {
                 Select(kind); string path = Path.Combine(blocker, "export");
                 ShellDialogs.FilePresenter = (_, _, dialog) => { dialog.FileName = path; return true; };
                 ShellDialogs.FolderPresenter = (_, _, dialog) => { dialog.FolderName = path; return true; };
-                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); FinishBusyOperation(host);
+                ChooseResultsExport(model, kind); FinishBusyOperation(host);
                 string status = model.Status;
                 bool refused = File.ReadAllText(blocker) == "retained" && !File.Exists(path) && !Directory.Exists(path)
-                    && Has(status, "did not finish", "Reason", "write", "folder", kind == ResultsExportKind.Peptides ? "Excel" : "PNG");
-                foreach (int line in kind == ResultsExportKind.Peptides ? new[] { 452, 453, 454 } : new[] { 374, 375, 376 })
+                    && Has(status, "did not finish", "Reason", "write", "folder", "Excel");
+                foreach (int line in new[] { 452, 453, 454 })
                     Fact(line, "IO refusal keeps existing files and gives the reason and specific recovery advice", refused, status);
             }
             var incomplete = new AnalyticsViewModel(rows, new QuantManifest { PerRunTic = manifest.PerRunTic }, BuildSyntheticFcf());
@@ -181,7 +139,7 @@ internal static partial class Program
         return facts;
 
         void Select(ResultsExportKind kind)
-        { exports.SelectedItem = exports.Items.OfType<ComboBoxItem>().Single(item => (string?)item.Tag == kind.ToString()); PumpDispatcher(); }
+        { model.ExportKind = kind; PumpDispatcher(); }
     }
 
     private static QuantManifest ResultsCompleteFixtureManifest(IReadOnlyList<QuantRow> rows) => new()
