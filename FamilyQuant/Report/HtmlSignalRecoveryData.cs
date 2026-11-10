@@ -123,6 +123,15 @@ public static class HtmlSignalRecoveryData
             Legend = "Both bars use the same pooled TIC. Added percentage points use TIC; relative increase instead uses the identified envelope baseline. These are pooled values, not run means; no whiskers are drawn." };
     }
 
+    private static HtmlSignalValue GapPart(string key, string label, double amount, double total)
+    {
+        var area = Number(key, label, amount, "area", "stored pooled signal area", amount, total);
+        var share = Number(key + "-family-share", label + " share of family total", total > 0 && double.IsFinite(total) ? amount / total * 100 : null,
+            "%", "this family's displayed total signal", amount, total, "This family's total signal is zero or unavailable.");
+        return area with { FamilyShare = share, Text = area.Text + " area; " + (share.Value.HasValue
+            ? share.Text + " of family total" : "family share not available") };
+    }
+
     private static HtmlSignalChart Gap(DatabaseGapChart chart, string id, string title)
     {
         var rows = chart.Rows.Select(row => new HtmlSignalRow
@@ -130,14 +139,14 @@ public static class HtmlSignalRecoveryData
             Name = DatabaseGapDisplayRow.Label(row), IsPooled = true,
             Parts = new[]
             {
-                Number("identified", "Identified", row.IdentifiedEnvelope, "area", "stored pooled signal area"),
-                Number("denovo", "De novo in the database", row.DatabaseDeNovoEnvelope, "area", "stored pooled signal area"),
-                Number("world", "De novo only in the family world", row.WorldDeNovoEnvelope, "area", "stored pooled signal area"),
+                GapPart("identified", "Identified", row.IdentifiedEnvelope, row.TotalEnvelope),
+                GapPart("denovo", "De novo in the database", row.DatabaseDeNovoEnvelope, row.TotalEnvelope),
+                GapPart("world", "De novo only in the family world", row.WorldDeNovoEnvelope, row.TotalEnvelope),
             },
             Total = Number("total", "Total family signal shown", row.TotalEnvelope, "area", "stored pooled signal area"),
         }).ToArray();
         return new() { Id = id, Kind = "gap", Title = title, Rows = rows, Maximum = Maximum(rows, 0),
             Basis = "Stored pooled signal area",
-            Legend = "The three parts are pooled signal areas, not percentages or run means; no whiskers are drawn. Family-world-only signal stays outside the database family composition. Shared and unexplained global signal is not assigned to a family bar." };
+            Legend = "Bars compare pooled signal area, with each part's percentage of that family's displayed total. Signal found only in the family world stays outside the database family composition; shared and unexplained global signal stays outside every family bar. These are pooled values, not run means; no whiskers are drawn." };
     }
 }

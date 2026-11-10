@@ -41,4 +41,5 @@ public sealed record HtmlSignalValue
     public double? Reference { get; init; }
     public string? ReferenceText { get; init; }
     public string? UnavailableReason { get; init; }
+    public HtmlSignalValue? FamilyShare { get; init; } // U5: an additional, explicitly named family denominator.
 }
