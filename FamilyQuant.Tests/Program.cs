@@ -211,6 +211,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => DeNovoEnvelopeCheckTests());
             suite.Add(() => DeNovoMeasuredEnvelopeTests(Path.Combine(workDir, "denovo-measured")));
             suite.Add(() => ResultsMethodGateTests());
+            suite.Add(() => DeNovoSwitchFallbackTests(Path.Combine(workDir, "denovo-switch-fallback")));
             suite.Add(() => DeNovoRunWarningTests());
             suite.AddWithApplication(() => QuantifyIsotopeDefaultTests(Path.Combine(workDir, "quantify-isotope-default")));
             suite.Add(() => StreamingProvenanceHashTests());
