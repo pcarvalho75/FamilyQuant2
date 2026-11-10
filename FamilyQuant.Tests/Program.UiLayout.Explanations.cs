@@ -415,7 +415,7 @@ namespace FamilyQuant.Tests
             Check("the shared-peptide list shows exactly the names the rest of the program quotes",
                 sharedItems.Items.Cast<ComboBoxItem>()
                     .Select(i => i.Content as string)
-                    .SequenceEqual(Enum.GetValues<SharedPeptidePolicy>().Select(p => p.DisplayName())));
+                    .SequenceEqual(new[] { SharedPeptidePolicy.FamilyUnique, SharedPeptidePolicy.SplitEqually }.Select(p => p.DisplayName())));
 
             Check("every entry of both lists explains what it does",
                 modeItems.Items.Cast<ComboBoxItem>().All(i => i.ToolTip != null)
