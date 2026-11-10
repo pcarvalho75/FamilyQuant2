@@ -4,6 +4,16 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.14 (published 2026-11-09)
+
+- **Each peptide counts once.** The family contribution chart credits a peptide to at most one family: shared peptides sit in their own bar beside unattributed signal, and the bars add up to 100%. The "count in every family" choice is gone; family-unique and split remain. A project saved with "every family" opens with family-unique and says so once.
+- **De novo peptides use their measured envelope.** The per-interval multiplier that scaled a de novo peptide's M+0 by a ratio learned from identified peptides is gone; de novo peptides are measured like identified ones. On a three-run test project, recovery of the TIC rose by about 7 points per run, while the family shares of credited signal moved by less than half a point. Results computed by an earlier version ask you to run **Quantify** again.
+- **Everything in the HTML report.** The report opens in tabs (Families, Signal recovery, Mass and isotopes, Coverage, Database gap, Quality, Sensitivity), with every Results figure inside and a plain legend under each. A **Normalize to** choice at the top redraws the family ranking and the family contribution chart as a percentage of PSM only, PSM and de novo, Detector envelopes or TIC. **Spread** explains itself, and the bars say they are the mean of the runs.
+- **A simpler program.** **Review grouping** opens in a Simple view with the essentials, and **Show all options** opens the rest. Results shows one family chart in percent of all peptide features, with its Top N choice right above it. All exports are in one window, **File > Export**; Screen figures (PNG) and the Presentation evidence pack are gone, since the figures live in the HTML report.
+- **Smaller fixes.** The recovery chart shows M+0 and the measured envelope with the real isotope range. Quantify warns when a run has no de novo calls. New projects start at isotope ceiling 6. **Import family list** appears as an optional first step of the guided order.
+
+**Feature ledger.** @VERIFIED@ checks proved for 2.1.14; 110 rows retired by Paulo's decisions of 9 November; @REOPENED@ rows changed on purpose by this release are open to verify again after release, listed in [docs/LEDGER-REVERIFY-2.1.14.md](docs/LEDGER-REVERIFY-2.1.14.md).
+
 ## 2.1.13 (published 2026-11-09)
 
 - **Read database and scope works while UniProt's bulk downloads are down.** It now uses the keyword categories that **Fetch evidence** already saved in the project, and reads UniProt's keyword list only for keywords without one, page by page. Species lineages are read page by page too. On 9 November 2026 UniProt's bulk keyword and taxonomy downloads failed for hours (HTTP 502) while its page-by-page searches worked, and 2.1.12 stopped with "UniProt refused the keyword vocabulary".
