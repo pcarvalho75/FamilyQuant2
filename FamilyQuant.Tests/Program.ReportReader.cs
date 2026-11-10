@@ -193,8 +193,11 @@ internal static partial class Program
             identity.Caption.Contains("not an identification FDR", StringComparison.Ordinal)
             && identity.CaptionInput!.Numbers.Any(n => n.Label.Contains("floor", StringComparison.OrdinalIgnoreCase) && n.Value == 75)
             && identity.CaptionInput.Numbers.Any(n => n.Label.Contains("file", StringComparison.OrdinalIgnoreCase) && n.Value == 70));
-        Check("variant caption distinguishes model sensitivity from run uncertainty",
-            Figure(PresentationFigures.DeNovoVariantComparisonFile).Caption.Contains("not run-to-run SD or a confidence interval", StringComparison.Ordinal));
+        string variantCaption = Figure(PresentationFigures.DeNovoVariantComparisonFile).Caption;
+        Check("variant caption keeps source confidence rules without the removed model-sensitivity whiskers",
+            variantCaption.Contains("Each source keeps its recorded confidence rule", StringComparison.Ordinal)
+            && !variantCaption.Contains("whisker", StringComparison.OrdinalIgnoreCase)
+            && !variantCaption.Contains("model sensitivity", StringComparison.OrdinalIgnoreCase));
         Check("source-effect caption names the exact union rather than the separate headline variant",
             Figure(PresentationFigures.DeNovoTalkComparisonFile).Caption.Contains(DeNovoVariantComparison.OnlyPlusDeepNovoVariantName, StringComparison.Ordinal)
             && Figure(PresentationFigures.DeNovoTalkComparisonFile).Caption.Contains(DeNovoVariantComparison.AllPlusDeepNovoVariantName, StringComparison.Ordinal));

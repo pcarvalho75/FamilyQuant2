@@ -1,3 +1,4 @@
+using FamilyQuant.DeNovo;
 using FamilyQuant.Report;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ internal static partial class Program
     {
         Section("Generated captions reach native Results and the real Word report export");
         EnsureApplication(); Directory.CreateDirectory(folder);
-        var manifest = new QuantManifest();
+        var manifest = new QuantManifest { DerivedMethod = NativeQuantFractions.Method };
         var rows = SyntheticAnalyticsRows();
         var control = new AnalyticsControl(rows, manifest);
         var captions = WalkTree(control).OfType<TextBlock>().Where(t => t.Tag is string tag && tag.StartsWith("figure-caption:", StringComparison.Ordinal)).ToArray();

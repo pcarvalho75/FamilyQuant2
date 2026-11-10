@@ -278,6 +278,8 @@ internal static partial class Program
             new() { Run = "synthetic", Side = "identified", Sequence = "PEPTIDEK", Charge = 2,
                 PrecursorMz = 500, IsotopeAreas = new[] { 10d, 5d, 2d }, EnvelopeSum = 17 }
         });
+        typeof(MainWindow).GetField("loadedManifest", flags)!.SetValue(main, new QuantManifest
+            { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method });
         try
         {
             typeof(MainWindow).GetMethod("PresentResults", flags)!.Invoke(main, null);

@@ -101,7 +101,7 @@ internal static partial class Program
         for (int index = 0; index < 4; index++) data.Fractions.Add(new NativeRunFraction
         {
             Run = "synthetic_run_" + index, Tic = index == 3 ? 0 : 1000,
-            IdentifiedEnvelope = 350, DeNovoEnvelopeReferenceCalibrated = 210,
+            IdentifiedEnvelope = 350, DeNovoEnvelope = 210, DeNovoEnvelopeReferenceCalibrated = 210,
         });
         var charts = ReportFigureRenderer.Plan(data, new QuantManifest(), new FamilyClusterFile(), null).Charts
             .Where(c => c.FileName.StartsWith("signal_by_run", StringComparison.Ordinal)).ToArray();

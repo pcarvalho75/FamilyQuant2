@@ -110,7 +110,8 @@ internal static partial class Program
         summary.Composition.Add(new FamilyWorldCompositionRow { Family = stored.Families[0], IdentifiedEnvelope = 10, WorldDeNovoEnvelope = 20 });
         summary.Families.Add(new FamilyWorldFamilySummary { Family = stored.Families[0], WorldProteins = stored.Entries.Select(entry => entry.Accession).ToList() });
         var rows = new[] { Qr("identified", "export_fixture", 1, 2, "ACDEFGHIK", 100, 150) };
-        var manifest = new QuantManifest { PerRunTic = new() { ["export_fixture"] = 1000 }, FamilyWorldResult = summary,
+        var manifest = new QuantManifest { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method,
+            PerRunTic = new() { ["export_fixture"] = 1000 }, FamilyWorldResult = summary,
             FamilyRunShares = new() { MembershipSha256 = FamilyStudyMembership.Fingerprint(file),
                 Families = new() { new() { FamilyUserId = file.MyExtendedFastaItems[0].UserID, MeanShare = .125, AvailableRunCount = 1 } },
                 Runs = new() { new() { Run = "export_fixture", AssignedSignal = 100, MeasuredSignal = 200 } } } };

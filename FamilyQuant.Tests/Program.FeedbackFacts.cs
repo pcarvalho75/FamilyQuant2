@@ -17,7 +17,8 @@ internal static partial class Program
 
     private static int FeedbackFactTests(string[] args)
     {
-        string output = args.Length > 1 ? Path.GetFullPath(args[1]) : "D:/FamilyQuant-data/out-evidence/y9-native";
+        string output = args.Length > 1 ? Path.GetFullPath(args[1])
+            : Path.Combine(Path.GetTempPath(), "FamilyQuant.FeedbackFacts", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(output);
         string logPath = Path.Combine(output, "native-feedback.log");
         if (!NativeProofDesktop.IsPrivate) return NativeProofDesktop.Run(new[] { args[0], output }, logPath);
@@ -71,13 +72,13 @@ internal static partial class Program
             && analytics.Status.Contains("Search", StringComparison.Ordinal) && analytics.Status.Contains("De novo", StringComparison.Ordinal));
         var results = new AnalyticsControl(analytics); LayoutAt(results, new Size(1366, 900), -1);
         var export = UiField<Button>(results, "ButtonExport")!;
-        string expectedExportTip = "Export is disabled because no standalone homology snapshot is available. Run Search in De novo review to enable it; no file or project value changes while disabled.";
-        Check("Y9 disabled normal Results export exposes the refusal on hover", !export.IsEnabled && export.ToolTip.ToString() == expectedExportTip
-            && export.ToolTip.ToString()!.Contains("no standalone homology snapshot", StringComparison.Ordinal)
-            && export.ToolTip.ToString()!.Contains("Run Search in De novo review", StringComparison.Ordinal)
-            && export.ToolTip.ToString()!.Contains("no file or project value changes", StringComparison.Ordinal)
-            && ToolTipService.GetShowOnDisabled(export));
-        Capture("B84C0E820934 AFA02F4AA37B", export.ToolTip.ToString()!, "Actual disabled Results Export tooltip with Homology selected; normal hover route, not only an Export guard.");
+        var homologyExport = ResultsExportOptions(analytics).Single(option => option.Kind == ProjectExportKind.Homology);
+        Check("Y9 shared Export keeps the unavailable homology reason on its own choice", export.IsEnabled
+            && export.ToolTip.ToString()!.Contains("shared Export window", StringComparison.Ordinal)
+            && !homologyExport.Available
+            && homologyExport.Hint.Contains("No standalone homology snapshot", StringComparison.Ordinal)
+            && homologyExport.Hint.Contains("Run Search in De novo review", StringComparison.Ordinal));
+        Capture("B84C0E820934 AFA02F4AA37B", homologyExport.Hint, "The shared Export window's unavailable Homology choice explains its prerequisite; Results keeps the parent Export action reachable.");
         var main = new MainWindow(); PumpDispatcher();
         string start = UiField<TextBlock>(main, "TextBlockGuide")!.Text;
         Check("Y9 normal Home status includes next action", start.Contains("Open project", StringComparison.Ordinal) && start.Contains(WorkflowNames.BuildFamilies, StringComparison.Ordinal));

@@ -305,7 +305,7 @@ namespace FamilyQuant.Tests
             }
 
             // The control itself, headless: populated builds the five charts, empty shows the guidance.
-            var control = new AnalyticsControl(rows, new QuantManifest { PerRunTic = tic });
+            var control = new AnalyticsControl(rows, new QuantManifest { DerivedMethod = NativeQuantFractions.Method, PerRunTic = tic });
             Check("the populated control holds its analytics and five charts",
                 control.Data != null
                 && CountVisual<XicMassChart>(control) == 1 && CountVisual<IsotopeCountChart>(control) == 1

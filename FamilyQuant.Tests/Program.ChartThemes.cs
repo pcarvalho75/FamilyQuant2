@@ -99,7 +99,7 @@ internal static partial class Program
         foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
         {
             Themes.ThemeManager.Apply(theme);
-            var control = new AnalyticsControl(SyntheticAnalyticsRows(), new QuantManifest());
+            var control = new AnalyticsControl(SyntheticAnalyticsRows(), new QuantManifest { DerivedMethod = NativeQuantFractions.Method });
             var actual = WalkTree(control).OfType<ChartDrawingBase>().ToArray();
             Check(theme + " Results creates every chart with UI tokens", actual.Length == 5
                 && actual.All(c => Same(c.Palette.Backdrop, Token("CanvasBrush"))));

@@ -173,7 +173,7 @@ internal static partial class Program
                 Themes.ThemeManager.Apply(theme);
                 var review = new SuperClusterPreviewWindow(new SuperClusterPreview(new List<FastaItemExtended>(), null,
                     "", "", KeywordMatch.All, null, null), input, null, initialScope: "hydrolase")
-                    { Width = 1366, Height = 820, Left = -30000, Top = -30000,
+                    { ShowAllOptions = true, Width = 1366, Height = 820, Left = -30000, Top = -30000,
                         WindowStartupLocation = WindowStartupLocation.Manual, ShowInTaskbar = false, ShowActivated = false };
                 AlignmentWindow? opened = null;
                 try
@@ -185,8 +185,8 @@ internal static partial class Program
                     var grid = (DataGrid)review.FindName("evidenceGrid");
                     var toolbar = (WrapPanel)button.Parent;
                     var buttons = toolbar.Children.OfType<Button>().Select(b => b.Content as string).ToArray();
-                    int untick = Array.IndexOf(buttons, "Untick selected");
-                    Check(theme + " Align selected sits right after Untick selected", untick >= 0 && untick + 1 < buttons.Length
+                    int untick = Array.IndexOf(buttons, "Untick flagged");
+                    Check(theme + " Align selected follows Untick flagged in the advanced toolbar", untick >= 0 && untick + 1 < buttons.Length
                         && buttons[untick + 1] == "Align selected", string.Join(",", buttons));
                     Check(theme + " the button is disabled without a source", !button.IsEnabled);
                     review.AlignmentSource = highlighted => AlignmentCandidates.Find(file, session.Proposal, highlighted);

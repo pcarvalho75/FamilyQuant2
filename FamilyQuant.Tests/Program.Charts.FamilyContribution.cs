@@ -361,7 +361,7 @@ namespace FamilyQuant.Tests
 
             // And the screen wired to a curation really does stand on that table.
             var wired = new AnalyticsControl(storeRows,
-                new QuantManifest { PerRunTic = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
+                new QuantManifest { DerivedMethod = NativeQuantFractions.Method, PerRunTic = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
                     { ["fam_01"] = 1.0e4 } },
                 curation);
 

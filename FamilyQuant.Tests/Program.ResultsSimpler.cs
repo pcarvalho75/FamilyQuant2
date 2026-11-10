@@ -25,7 +25,8 @@ internal static partial class Program
     {
         Directory.CreateDirectory(output);
         var model = new AnalyticsViewModel(SyntheticAnalyticsRows(), new QuantManifest
-            { PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 } }, BuildSyntheticFcf());
+            { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method,
+                PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 } }, BuildSyntheticFcf());
         var control = new AnalyticsControl(model);
         Check("Results removes the percent checkbox", control.FindName("CheckBoxFamilyPercent") == null);
         Check("Results always uses percent even through the retained compatibility property", model.FamilyAsPercent);

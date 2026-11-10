@@ -267,8 +267,8 @@ namespace FamilyQuant.Tests
             Check("clearing the annotation gives the family its protein name back",
                 control.FullXicCompositionCsv()?.Contains("\"Alpha toxin\"", StringComparison.Ordinal) == true);
 
-            Check("the summary names the quantity as the primary estimate, not an observed de novo envelope",
-                summary.Text.Contains("mass-calibrated estimate", StringComparison.Ordinal)
+            Check("the summary names the measured de novo envelope and the composition closure",
+                summary.Text.Contains("de novo measured envelope", StringComparison.Ordinal)
                 && summary.Text.Contains("add up to 100%", StringComparison.Ordinal), summary.Text);
 
             // ---- review fixes (Astra, 2026-10-25) ------------------------------------------------------

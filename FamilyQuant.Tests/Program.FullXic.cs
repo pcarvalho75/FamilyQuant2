@@ -59,8 +59,8 @@ namespace FamilyQuant.Tests
 
             var withDeNovo = new List<DerivedRunFraction> { Run("run_01", 0.2784, 0.1381, 0.5972) };
             List<string> dn = FullXicComputer.DescribeTicShares(withDeNovo);
-            Check("with de novo the line adds the reference-calibrated estimate and the primary total",
-                dn.Count == 3 && dn[0].Contains("de novo reference-calibrated estimate", StringComparison.Ordinal)
+            Check("with de novo the line adds the measured envelope and the recovered total",
+                dn.Count == 3 && dn[0].Contains("de novo measured envelope", StringComparison.Ordinal)
                 && dn[1] == "  run_01: identified 27.84 % + de novo 13.81 % = 41.65 %", string.Join(" | ", dn));
             Check("one run gets no 'all runs' line and a single diagnostic value",
                 !dn.Any(l => l.Contains("all runs", StringComparison.Ordinal)) && dn[2].Contains("(59.72 % of the TIC)", StringComparison.Ordinal));

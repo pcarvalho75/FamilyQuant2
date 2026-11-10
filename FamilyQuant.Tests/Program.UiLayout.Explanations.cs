@@ -128,15 +128,13 @@ namespace FamilyQuant.Tests
             home.SetProjectState(false, "No project open.");
             Check("and closing it darkens them again", !homeCompute.IsEnabled && !homeAnalytics.IsEnabled);
 
-            // The analytics screen (Q4) is a view of ours like the others, built populated so the sweep and
-            // the layout checks have real content. Its charts are custom FrameworkElements, not the chrome
-            // controls the sweeps examine, so its six chrome controls are the two CSV exports, the screen
-            // figure export, the complete talk-plot export and the family chart's two selectors.
+            // Populate Results so the tooltip and layout sweeps cover its actual chart chrome.
+            // The shared Export action and Top N selector are the two remaining chrome controls.
             AnalyticsControl analytics;
             try
             {
                 analytics = new AnalyticsControl(SyntheticAnalyticsRows(),
-                    new QuantManifest { PerRunTic = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
+                    new QuantManifest { DerivedMethod = NativeQuantFractions.Method, PerRunTic = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
                         { ["ui_01"] = 5.0e8, ["ui_02"] = 4.0e8 } });
             }
             catch (Exception ex)
@@ -153,8 +151,8 @@ namespace FamilyQuant.Tests
                 .Where(e => e is Button || e is CheckBox || e is ComboBox || e is TextBox || e is Label)
                 .ToList();
 
-            Check("the Results screen offers its three consolidated chrome controls",
-                analyticsControls.Count == 3,
+            Check("the Results screen offers its Top N selector and shared Export action",
+                analyticsControls.Count == 2,
                 string.Join(", ", analyticsControls.Select(Describe)));
 
             var topN = UiField<ComboBox>(analytics, "ComboBoxFamilyTopN")!;

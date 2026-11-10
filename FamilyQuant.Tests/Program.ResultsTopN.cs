@@ -24,7 +24,8 @@ internal static partial class Program
     {
         Directory.CreateDirectory(output);
         var control = new AnalyticsControl(SyntheticAnalyticsRows(), new QuantManifest
-            { PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 } }, BuildSyntheticFcf());
+            { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method,
+                PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 } }, BuildSyntheticFcf());
         var window = new Window { Content = control, Width = 1180, Height = 820 };
         try
         {

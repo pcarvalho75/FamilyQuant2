@@ -97,10 +97,17 @@ namespace FamilyQuant.Tests
             });
             try
             {
-                bool started = SpinWait.SpinUntil(() => File.Exists(pidFile), TimeSpan.FromSeconds(15));
+                bool started = SpinWait.SpinUntil(() =>
+                {
+                    try
+                    {
+                        return int.TryParse(File.ReadAllText(pidFile), System.Globalization.NumberStyles.Integer,
+                            System.Globalization.CultureInfo.InvariantCulture, out childPid) && childPid > 0;
+                    }
+                    catch (IOException) { return false; }
+                }, TimeSpan.FromSeconds(15));
                 Check("the native cancellation fixture starts its own helper process", started);
                 if (!started) return;
-                childPid = int.Parse(File.ReadAllText(pidFile), System.Globalization.CultureInfo.InvariantCulture);
                 cancel.Cancel();
                 bool completed = SpinWait.SpinUntil(() => task.IsCompleted, TimeSpan.FromSeconds(10));
                 bool wasCancelled = false;

@@ -1,3 +1,4 @@
+using FamilyQuant.DeNovo;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,7 +37,7 @@ internal static partial class Program
         Check("stored FL fractional means and SD become percentage points without renormalization",
             adapted.Families[0].MeanPercent == 70 && adapted.Families[0].SdPercent == 10
             && adapted.Families[0].GreedyProteinCount == 5 && adapted.UnavailableFamilies.SequenceEqual(new[] { "Family 3" }));
-        var manifest = new QuantManifest { FamilyRunShares = storedMeans };
+        var manifest = new QuantManifest { DerivedMethod = NativeQuantFractions.Method, FamilyRunShares = storedMeans };
         var results = new AnalyticsControl(SyntheticAnalyticsRows(), manifest);
         Check("stored composition is reachable through the actual Results screen",
             WalkTree(results).OfType<FamilyCompositionChart>().Count() == 1

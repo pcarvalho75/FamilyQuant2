@@ -177,7 +177,7 @@ namespace FamilyQuant.Tests
                 var preview = new SuperClusterPreview(Vipers(), null, ViperKeywords, "", KeywordMatch.Any, null, null);
                 var window = new SuperClusterPreviewWindow(preview, input, null,
                     pattern => pattern == "invalid" ? throw new ArgumentException("Supplied motif error") : "Family\tCarriers\tComplete\nProvided family\t2\t3")
-                { Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
+                { ShowAllOptions = true, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
                 window.Show();
                 try
                 {

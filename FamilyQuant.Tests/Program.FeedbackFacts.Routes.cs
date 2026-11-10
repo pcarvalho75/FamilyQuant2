@@ -17,7 +17,7 @@ internal static partial class Program
 {
     private static void FeedbackFailureRoutes(string output, Dictionary<string, (string Text, string Note)> observed)
     {
-        string fixture = "D:/FamilyQuant-data/out-evidence/y9-fixture"; Directory.CreateDirectory(fixture);
+        string fixture = Path.Combine(output, "fixtures"); Directory.CreateDirectory(fixture);
         string plpPath = WriteSparseRunFixture(fixture, "legacy.plp");
         File.WriteAllText(plpPath, File.ReadAllText(plpPath).Replace("0.6", "6.0"));
         string blocked = Path.Combine(fixture, "held-output.csv"); File.WriteAllText(blocked, "owned previous export");
