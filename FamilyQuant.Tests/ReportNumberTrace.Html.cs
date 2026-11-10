@@ -362,7 +362,11 @@ internal static partial class ReportNumberTrace
                     ids.Add(row.Name);
                     foreach (var number in new[] { row.X, row.Y, row.Lower, row.Upper })
                         if (number != null) ids.AddRange(new[] { number.Exact, number.Display });
-                    foreach (var part in row.Parts) ids.AddRange(new[] { part.Name, part.Value.Exact, part.Value.Display });
+                    foreach (var part in row.Parts)
+                    {
+                        ids.AddRange(new[] { part.Name, part.Value.Exact, part.Value.Display });
+                        if (part.FamilyPercent != null) ids.AddRange(new[] { part.FamilyPercent.Exact, part.FamilyPercent.Display });
+                    }
                 }
         foreach (var bucket in new[] { p.Composition.SharedBetweenFamilies, p.Composition.Unattributed })
             ids.AddRange(new[] { bucket.IdentifiedOnly, bucket.IdentifiedAndDeNovo, bucket.DetectorEnvelopes, bucket.Tic });
