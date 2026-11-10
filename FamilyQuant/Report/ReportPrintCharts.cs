@@ -75,7 +75,11 @@ public sealed class ReportDeNovoTriageChart : ReportPrintChart
 public sealed class ReportSignalUpliftChart : ReportPrintChart
 {
     private readonly NativeRunFraction? grouped;
+    public NativeRunFraction? Grouped => grouped;
     public ReportSignalUpliftChart(NativeRunFraction? grouped) => this.grouped = grouped;
+
+    public static double? RelativeIncrease(NativeRunFraction? row) => row is { Tic: > 0 } && row.IdentifiedFractionEnvelope > 0
+        ? row.DeNovoFractionReferenceCalibrated / row.IdentifiedFractionEnvelope : null;
 
     protected override void OnRender(DrawingContext dc)
     {
@@ -99,8 +103,8 @@ public sealed class ReportSignalUpliftChart : ReportPrintChart
         }
         double addition = grouped.DeNovoFractionReferenceCalibrated;
         Label(dc, "+" + (100 * addition).ToString("0.00", CultureInfo.InvariantCulture) + " percentage points of pooled TIC", 20, 365, bold: true);
-        Label(dc, grouped.IdentifiedFractionEnvelope > 0
-            ? "+" + Percent(addition / grouped.IdentifiedFractionEnvelope) + " relative to the identified baseline"
+        Label(dc, RelativeIncrease(grouped) is double relative
+            ? "+" + Percent(relative) + " relative to the identified baseline"
             : "Relative uplift is unavailable: no identified baseline.", 20, 406, palette.DeNovo);
     }
 }

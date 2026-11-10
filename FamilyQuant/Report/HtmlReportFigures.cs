@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FamilyQuant.Report;
 
-/// <summary>Copies the selected native report images without rendering or analyzing a second time.</summary>
+/// <summary>Copies selected report images and native signal snapshots without a second analysis.</summary>
 public static class HtmlReportFigures
 {
     public static HtmlReportPayload Build(HtmlReportPayload payload, ReportDocument document, ReportSelection? selection = null)
@@ -14,10 +14,18 @@ public static class HtmlReportFigures
         var results = new List<HtmlReportFigure>();
         var quality = new List<HtmlReportFigure>();
         var sensitivity = new List<HtmlReportFigure>();
+        var signalCharts = new List<HtmlSignalChart>(); // U3a: selected native signal/gap snapshots.
         var analyticsIds = AnalyticsFigures.FileNames.Select(name => "figure:" + name).ToHashSet(StringComparer.Ordinal);
         foreach (var section in document.Sections.Where(section => !excluded.Contains(section.Id)))
             foreach (var figure in section.Blocks.OfType<ReportFigure>().Where(figure => !excluded.Contains(figure.Id)))
             {
+                if (HtmlSignalRecoveryData.Owns(figure.Id))
+                {
+                    signalCharts.Add(figure.SignalChart is { } chart ? chart with { Id = figure.Id, Title = figure.Title }
+                        : new() { Id = figure.Id, Title = figure.Title, Kind = figure.Id.Contains("database_gap", StringComparison.Ordinal) ? "gap" : "unavailable",
+                            Legend = "Interactive chart data are not included in this report. Export again with the current program; no picture or estimated value is substituted." });
+                    continue;
+                }
                 if (figure.Id.StartsWith("figure:protein_coverage_", StringComparison.Ordinal)
                     || figure.Id.StartsWith("figure:family_contribution", StringComparison.Ordinal)) continue;
                 List<HtmlReportFigure>? target = section.Id == ReportSectionIds.Sensitivity ? sensitivity
@@ -29,6 +37,7 @@ public static class HtmlReportFigures
                 fields.Add(caption, new(figure.Caption, null, "", new() { Kind = "figure-caption", Figure = figure.Id }));
                 target.Add(new(title, caption, "data:image/png;base64," + Convert.ToBase64String(figure.PngBytes), figure.Id));
             }
-        return payload with { Fields = fields, Results = results, Quality = quality, Sensitivity = sensitivity };
+        return payload with { Fields = fields, Results = results, Quality = quality, Sensitivity = sensitivity,
+            SignalCharts = signalCharts };
     }
 }

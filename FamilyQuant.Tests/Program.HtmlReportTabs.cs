@@ -70,6 +70,7 @@ internal static partial class Program
         fields["credited"] = new("55", 55, "%", source);
         fields["gap-name"] = new("Unassigned evidence", null, "", source);
         fields["gap-fraction"] = new("0.25", .25, "", source);
+        fields["gap-percent"] = new("25", 25, "%", source);
         fields["quality-title"] = new("Quality fixture", null, "", source);
         fields["sensitivity-title"] = new("Sensitivity fixture", null, "", source);
         fields["caption"] = new("Stored synthetic figure caption.", null, "", source);
@@ -78,7 +79,7 @@ internal static partial class Program
         {
             Fields = fields,
             CreditedRuns = new[] { new HtmlRunCredit("run", "credited") },
-            DatabaseGap = new[] { new HtmlGapRow("gap-name", "gap-fraction") },
+            DatabaseGap = new[] { new HtmlGapRow("gap-name", "gap-fraction") { Percent = "gap-percent" } },
             Quality = new[] { new HtmlReportFigure("quality-title", "caption", png, "quality-fixture") },
             Sensitivity = new[] { new HtmlReportFigure("sensitivity-title", "caption", png, "sensitivity-fixture") },
         };

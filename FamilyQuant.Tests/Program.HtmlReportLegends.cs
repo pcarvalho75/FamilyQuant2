@@ -55,7 +55,7 @@ internal static partial class Program
             const checks={}, sentences=s=>s.split(/[.!?]+/).filter(p=>p.trim()).length;
             const before=JSON.stringify(JSON.parse(d.getElementById('fq-data').textContent).fields);
             const figures=[...d.querySelectorAll('.figure-grid .report-figure')];
-            checks.everyFigure=figures.length===29&&figures.every(f=>{const c=f.querySelector(':scope > figcaption.chart-legend');return c&&c.previousElementSibling?.tagName==='BUTTON'&&sentences(c.textContent)>=2&&sentences(c.textContent)<=4;});
+            checks.everyFigure=figures.length===25&&figures.every(f=>{const c=f.querySelector(':scope > figcaption.chart-legend');return c&&c.previousElementSibling?.tagName==='BUTTON'&&sentences(c.textContent)>=2&&sentences(c.textContent)<=4;});
             checks.specificLegends=figures.filter(f=>f.dataset.figure.endsWith('.png')).every(f=>!f.querySelector('figcaption').textContent.includes('full report caption'));
             checks.interactiveCharts=['composition-ring','family-ranking','dot-chart','family-contribution-chart'].every(id=>{const c=d.getElementById(id),legend=d.getElementById(c.getAttribute('aria-describedby'));return legend&&legend.classList.contains('chart-legend')&&sentences(legend.textContent)>=2&&sentences(legend.textContent)<=4;});
             checks.fixedBases=figures.every(f=>f.querySelector('figcaption').textContent.includes('keeps its recorded base when Normalize to changes'));
