@@ -278,13 +278,13 @@ internal static partial class ReportNumberTrace
                 };
                 return new(N(label), null, "program", source.Property);
             }
-            if (source.Kind == "family-basis")
+            if (source.Kind is "family-basis" or "family-ring")
             {
                 if (manifest == null || source.Scale != 100 || source.Format is not ("G3" or "G6"))
                     throw new InvalidDataException("A family basis needs stored inputs and a percent display recipe.");
                 if (field.Unit != (source.Property?.EndsWith("/sd", StringComparison.Ordinal) == true ? "pp" : "%"))
                     throw new InvalidDataException("A family share has the wrong display unit.");
-                double value = (HtmlReportPayloadBuilder.ReadFamilyShare(source, manifest)
+                double value = ((source.Kind == "family-ring" ? HtmlReportPayloadBuilder.ReadRingShare(source, manifest) : HtmlReportPayloadBuilder.ReadFamilyShare(source, manifest))
                     ?? throw new InvalidDataException("Stored family share unavailable.")) * source.Scale;
                 return new(N(value.ToString(source.Format, CultureInfo.InvariantCulture)), value, "project", source.Family + "/" + source.Property);
             }
@@ -363,6 +363,7 @@ internal static partial class ReportNumberTrace
             foreach (var basis in new[] { row.IdentifiedOnly, row.IdentifiedAndDeNovo, row.DetectorEnvelopes, row.Tic })
                 if (basis != null) ids.AddRange(new[] { basis.Total, basis.Identified, basis.DeNovo });
         }
+        foreach (var ring in p.Composition.RingBases.Values) ids.AddRange(new[] { ring.Total, ring.Outside });
         foreach (var f in p.Composition.Families)
         {
             ids.AddRange(new[] { f.Name, f.Mean, f.Sd, f.Cv, f.WholeMeasured, f.Proteins, f.UniqueProteins, f.Peptides, f.DatabaseEntries });

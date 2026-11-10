@@ -2725,6 +2725,13 @@
       }
       /* U1 end */
     </style>
+    <style>
+      /* U8 begin */
+      .ring-outside-key { text-align: left; padding: 6px 0; flex-wrap: wrap; }
+      #composition-legend:has(.ring-outside-key) { display: flex; }
+      #ring-unavailable { margin-top: 12px; }
+      /* U8 end */
+    </style>
   </head>
   <body>
     <a class="skip" href="#main">Skip to results</a>
@@ -2845,6 +2852,7 @@
               <p class="ring-caption" id="composition-basis"></p>
               <div id="composition-legend" class="legend"></div>
               <p id="composition-plain-legend" class="chart-legend"></p>
+              <p id="ring-unavailable" class="notice" hidden></p>
               <div id="selected-summary" class="selected-summary"></div>
             </div>
             <div class="rank-pane">
@@ -3406,6 +3414,7 @@
               $("chart-hover").hidden = true;
               renderRanking();
               renderContribution();
+              if (activeRingBasis()) { state.drill = false; renderRing(); } // U8
               updateSelectionSummary();
               refreshCoverageStats(); // U1
             };
@@ -3527,8 +3536,7 @@
                   !!f && row.dataset.family === f.id,
                 );
               if (!state.drill && current) {
-                $("ring-value").replaceChildren(metric(current.mean));
-                bind("ring-name", current.name);
+                refreshRingCentre(current); // U8
               }
             });
           }
@@ -3638,6 +3646,27 @@
               ? "repeating-linear-gradient(135deg,var(--subtle) 0,var(--subtle) 4px,var(--muted) 4px,var(--muted) 5px)"
               : partColor(f, p, i);
           }
+          /* U8 begin */
+          function activeRingBasis() {
+            return hasShareBases ? data.composition?.ringBases?.[state.basis] : null;
+          }
+          function ringMean(family) {
+            return activeRingBasis() ? rankingStatistics(family).mean : family.mean;
+          }
+          function refreshRingCentre(family) {
+            const basis = activeRingBasis();
+            if (!basis) {
+              if (family) { $("ring-value").replaceChildren(metric(family.mean)); bind("ring-name", family.name); }
+              return;
+            }
+            if (exists(basis.total)) {
+              const total = metric(basis.total);
+              total.title = "Show the total mean share of the shown families using " + rankingBaseName() + ". This opens the exact value.";
+              $("ring-value").replaceChildren(total);
+            } else $("ring-value").textContent = "Unavailable";
+            $("ring-name").textContent = ({ identifiedOnly: "of identified peptide signal", identifiedAndDeNovo: "of peptide-feature signal",
+              detectorEnvelopes: "of detector envelopes", tic: "of the TIC" })[state.basis];
+          }
           function renderRing() {
             const ring = $("composition-ring"),
               crumb = $("breadcrumb"),
@@ -3647,10 +3676,22 @@
             $("composition-legend").replaceChildren();
             const f = state.selected,
               groups = f ? plotParts(f) : new Map();
+            const basis = activeRingBasis();
+            $("ring-unavailable").hidden = !basis || basis.canDraw;
+            $("ring-unavailable").textContent = basis?.unavailable || "";
+            refreshRingCentre(f);
+            if (basis && !basis.canDraw) {
+              ring.parentElement.hidden = false;
+              reset.hidden = true;
+              $("composition-basis").textContent = "Percent of " + rankingBaseName();
+              $("composition-plain-legend").textContent = "Compare each recorded family value in the ranking. The selected base is " + rankingBaseName() + ".";
+              return;
+            }
             $("composition-plain-legend").textContent = state.drill
               ? "Each slice shows a part of the selected family's pooled signal. The denominator is that family's credited signal across all runs; this ring has no whiskers." + fixedBaseLegend
-              : "Each slice compares a family's mean share across the available runs. The denominator is the credited family signal in each run; select a family to explore its pooled parts, with no whiskers on this ring." + fixedBaseLegend;
-            if (!f || !ordered.some((item) => val(item.mean) !== null)) {
+              : basis ? "Each arc shows the mean of " + basis.runCount + (basis.runCount === 1 ? " run" : " runs") + " as a percent of " + rankingBaseName() + ". The hatched arc shows the share outside the shown families, on the same base. Select an arc for its stored value, with no whiskers on this ring."
+                : "Each slice compares a family's mean share across the available runs. The denominator is the credited family signal in each run; select a family to explore its pooled parts, with no whiskers on this ring." + fixedBaseLegend;
+            if (!f || !ordered.some((item) => val(ringMean(item)) !== null)) {
               document.querySelector(
                 'section[aria-labelledby="composition-title"]',
               ).hidden = true;
@@ -3692,6 +3733,10 @@
               }),
             );
             defs.append(pattern);
+            const outsidePattern = svg("pattern", { id: "fq-outside", width: 8, height: 8, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" });
+            outsidePattern.append(svg("rect", { width: 8, height: 8, fill: "var(--subtle)" }),
+              svg("line", { x1: 0, y1: 0, x2: 0, y2: 8, stroke: "var(--muted)", "stroke-width": 1, opacity: 0.5 }));
+            defs.append(outsidePattern);
             ring.append(defs);
             const point = (a, r) => [
               160 + Math.cos(a) * r,
@@ -3707,19 +3752,19 @@
                 large = end - start > Math.PI ? 1 : 0;
               return `M${a} A${outside},${outside} 0 ${large} 1 ${b} L${c} A${inside},${inside} 0 ${large} 0 ${d} Z`;
             };
-            const whole = ordered.filter((x) => (val(x.mean) ?? 0) > 0),
-              wholeSum = whole.reduce((sum, x) => sum + val(x.mean), 0);
+            const whole = ordered.filter((x) => (val(ringMean(x)) ?? 0) > 0),
+              wholeSum = basis ? 100 : whole.reduce((sum, x) => sum + val(ringMean(x)), 0);
             const parentIndex = whole.indexOf(f),
               parentStart =
                 (whole
                   .slice(0, Math.max(0, parentIndex))
-                  .reduce((sum, x) => sum + val(x.mean), 0) /
+                  .reduce((sum, x) => sum + val(ringMean(x)), 0) /
                   wholeSum) *
                   Math.PI *
                   2 -
                 Math.PI / 2;
             const parentAngle =
-              parentStart + ((val(f.mean) ?? 0) / wholeSum) * Math.PI;
+              parentStart + ((val(ringMean(f)) ?? 0) / wholeSum) * Math.PI;
             let items = [];
             if (state.drill && groups.size) {
               const kind =
@@ -3747,7 +3792,7 @@
               };
               let a = -Math.PI / 2;
               for (const item of whole) {
-                const end = a + (val(item.mean) / wholeSum) * Math.PI * 2;
+                const end = a + (val(ringMean(item)) / wholeSum) * Math.PI * 2;
                 const context = svg("path", {
                   d: annulus(a, end, 150, 156),
                   fill: familyColor(item),
@@ -3764,23 +3809,25 @@
               state.drill = false;
               items = whole.map((family) => ({
                 name: family.name,
-                share: family.mean,
+                share: ringMean(family),
                 fill: familyColor(family),
                 family,
               }));
-              $("composition-basis").textContent =
-                data.composition?.basis ||
-                "Mean of per-run shares of credited family signal";
+              if (basis && exists(basis.outside)) items.push({
+                label: "Outside the shown families", share: basis.outside, fill: "url(#fq-outside)", outside: true,
+              });
+              $("composition-basis").textContent = basis
+                ? "Mean of " + basis.runCount + (basis.runCount === 1 ? " run" : " runs") + ". Percent of " + rankingBaseName() + "."
+                : data.composition?.basis || "Mean of per-run shares of credited family signal";
               reset.hidden = !groups.size;
               reset.textContent = "Explore parts";
               reset.onclick = () => select(f, true);
             }
-            $("ring-value").replaceChildren(metric(f.mean));
-            bind("ring-name", f.name);
+            refreshRingCentre(f);
             ring.append(
               svg("circle", { cx: 160, cy: 160, r: 122, class: "ring-base" }),
             );
-            const total = items.reduce(
+            const total = basis && !state.drill ? 100 : items.reduce(
               (sum, x) => sum + Math.max(0, val(x.share) ?? 0),
               0,
             );
@@ -3789,6 +3836,14 @@
               selectedArc = null;
             items.forEach((item, i) => {
               const share = val(item.share) ?? 0;
+              if (item.outside) {
+                const key = node("button", "quiet-button ring-outside-key");
+                key.append(node("span", "swatch"), node("span", "", item.label + " "), displayField(item.share), node("span", "", "of " + rankingBaseName()));
+                key.querySelector(".swatch").style.background = "repeating-linear-gradient(135deg,var(--subtle) 0,var(--subtle) 3px,var(--muted) 3px,var(--muted) 4px)";
+                key.title = "Show the exact share outside the shown families using " + rankingBaseName() + ". This opens its recorded percentage.";
+                key.onclick = () => popup(item.label, [node("p", "", "Percent of " + rankingBaseName()), field(item.share, "p")]);
+                $("composition-legend").append(key);
+              }
               if (!(share > 0) || !(total > 0)) return;
               const end = angle + (share / total) * Math.PI * 2,
                 mid = (angle + end) / 2;
@@ -3806,9 +3861,12 @@
                 id: "ring-label-" + i,
                 "data-fq-field": item.name,
               });
-              title.textContent = text(item.name);
+              title.textContent = (item.label || text(item.name)) + (basis ? " - " + text(item.share) + " % of " + rankingBaseName() : "");
+              if (!item.name) title.removeAttribute("data-fq-field");
               path.append(title);
               path.setAttribute("aria-labelledby", title.id);
+              path.dataset.share = item.share;
+              if (item.outside) path.dataset.outside = "true";
               if (item.family) {
                 path.dataset.family = item.family.id;
                 path.onpointerenter = (event) => {
@@ -3839,6 +3897,10 @@
                 }
               }
               const action = () => {
+                if (item.outside) {
+                  popup(item.label, [node("p", "", "Percent of " + rankingBaseName()), field(item.share, "p")]);
+                  return;
+                }
                 if (item.part) {
                   partDialog(item.part);
                   return;
@@ -3884,6 +3946,7 @@
                 180,
               );
           }
+          /* U8 end */
           function scrollToFamily() {
             showTab($("tab-coverage"));
             $("family-detail").scrollIntoView({
