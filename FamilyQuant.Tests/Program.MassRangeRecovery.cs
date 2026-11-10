@@ -128,13 +128,14 @@ internal static partial class Program
         });
         NativeQuantFractions.ApplyDetectedToFractions(data.Fractions, data.Grouped, manifest.DerivedFractions);
         var recovery = MassRangeRecoveryData.Build(data);
+        var byRange = recovery.Bins.ToDictionary(bin => bin.Index);
         Check("U6 range recovery pools numerator and denominator across both runs", recovery.Available && recovery.RunCount == 2
-            && recovery.Bins[2].PeptideEnvelope == 150 && recovery.Bins[2].DetectedEnvelope == 300 && recovery.Bins[2].Recovery == .5);
+            && byRange[2].PeptideEnvelope == 150 && byRange[2].DetectedEnvelope == 300 && byRange[2].Recovery == .5);
         Check("U6 production I/L and isotope-offset equivalence suppress duplicate de novo signal", recovery.Bins.Sum(bin => bin.PeptideEnvelope)
             == data.Fractions.Sum(f => f.IdentifiedEnvelope + f.DeNovoEnvelope) && data.Fractions.Sum(f => f.DeNovoSuppressedCrossSideOverlaps) == 1);
-        Check("U6 independent detector ratios above 100 percent remain visible", recovery.Bins[5].Recovery == 2.5 && recovery.AxisMaximum == 2.5);
-        Check("U6 zero detector denominator is unavailable, distinct from zero recovery", recovery.Bins[7].Recovery == null
-            && recovery.Bins[0].Recovery == null && recovery.Bins[1].Recovery == .5 && recovery.Bins[39].Recovery == .1);
+        Check("U6 independent detector ratios above 100 percent remain visible", byRange[5].Recovery == 2.5 && recovery.AxisMaximum == 2.5);
+        Check("U6 zero detector denominator is unavailable, distinct from zero recovery", byRange[7].Recovery == null
+            && byRange[3].Recovery == null && byRange[1].Recovery == .5 && byRange[39].Recovery == .1);
         Check("U6 native chart and HTML projection share identical areas, ratios and bases", JsonSerializer.Serialize(recovery)
             == JsonSerializer.Serialize(new PercentIonCurrentChart(data.Peptides, recovery: recovery).Data));
         string caption = CompositionChartCaptions.Build(new AnalyticsFigure(AnalyticsFigures.PercentIonCurrentFile,
