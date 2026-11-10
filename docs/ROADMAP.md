@@ -92,6 +92,7 @@ Paulo, 11-09, during the session with Ana: "a peptide cannot go to more than one
 | T18 | One Export window (File > Export) replacing the 15 entries in four places: Report (HTML, Word, workbook) first, then Tables (CSV), Suggested additions (FASTA), Families (.fcf), Interpretation input. "Screen figures (PNG)" and the Presentation evidence pack go (D98, D101); duplicates in Results and Curate families open this window | M | 1.5 | T10, T14 | T19 | Every kept export reachable from the window and writes the same file as before (tests); screen render; reviewed | SM |  | 0 | 0 |  |
 | T19 | The lanes merged into master; the ledger rows of what Paulo removed dropped under D95, D96, D98, D99 and D101, every rename mapped; the receipts refreshed; the full suite once | M | 0.8 | T3, T4, T5, T6, T9, T12, T15, T16, T17, T18 | T20 | Suite line copied; ledger check exit 0 | Orchestrator |  | 0 | 0 |  |
 | T20 | Release 2.1.14: the version bump on the 31 lines, the notes, the package with the token (FQCount, as H4c), the offline update from 2.1.13, published as Latest, the README | M | 1.0 | T19 |  | Release live; hashes match | Orchestrator |  | 0 | 0 |  |
+| T21 | The website for 2.1.14: a new upload folder familyquant-2.1.14 made from Desktop/FamilyQuant-website/familyquant-2.1.11. science.html: the de novo envelope section and the recovery readings rewritten for the measured envelope (D95), each peptide once (D96) and the four bases; index.html: the version, what is new, and new screenshots on synthetic data (the Simple view of Review grouping, Results, the Export window, the HTML report tabs with the Normalize to buttons). Paulo uploads it | M | 1.0 | T15b |  | Folder ready; every changed claim matches the program; screenshots synthetic; reviewed | SM |  | 0 | 0 |  |
 
 ## Critical path
 
@@ -183,6 +184,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D102 | A fourth builder | FQSimple (Sol 6.1) takes T17, T12 and T18 from the other three lanes, so the day is shorter. Paulo, 11-09 ("recruit a 4th sol worker") |
 | D103 | Bigger review bundles | FQRev reviews one lane at a time at its newest commit, every landed step of that lane in one pass (one build, all focused commands, one read of the diff); after the first pass, one final bundle per lane when its last step lands. Paulo, 11-09 ("bundle many things in a single review") |
 | D104 | The HTML replots by normalization | A page-wide radio button selects the normalization and every chart that depends on it redraws (T15b, T11b), before 2.1.14 ships. Paulo, 11-09 ("i would like the html to be able to replot depending on the normalization, so there would be a radio button to select the normalization on the html") |
+| D105 | The website follows 2.1.14 | A new upload folder for the website with the science text and screenshots of this release (T21); Paulo uploads it. Paulo, 11-09 ("does this roadmap include and update in the website?") |
 
 ## Risks and triggers
 
