@@ -80,6 +80,10 @@ namespace FamilyQuant
             sb.AppendLine("the same stored readings as the program. Hover, focus or select a bar or value for");
             sb.AppendLine("its exact reading and reference total; All exact readings opens a printable table.");
             sb.AppendLine("These charts keep their named bases when Normalize to changes. Word keeps its pictures.");
+            sb.AppendLine("The Signal recovery guide defines a peptide feature, explains each TIC-based reading,");
+            sb.AppendLine("and explains isotope, detector and TIC gaps without treating them as biological classes.");
+            sb.AppendLine("Database gap also gives each part's share of its own family's displayed signal total;");
+            sb.AppendLine("the separate comparison panel keeps all measured peptide feature signal as its base.");
             sb.AppendLine();
 
             sb.AppendLine("WHAT THE PERCENTAGE IS OF (THE DENOMINATOR)");
