@@ -31,6 +31,7 @@ public static class HtmlReportFigures
                     or "figure:isotopes_credited.png" or "figure:percent_ion_current_by_mass.png"
                     || section.Id == ReportSectionIds.Quality && !analyticsIds.Contains(figure.Id))) continue;
                 if (figure.Id.StartsWith("figure:protein_coverage_", StringComparison.Ordinal)
+                    || HtmlFamilyFigurePacket.Owns(figure.Id) // U3c Families are native page charts; Word retains these images.
                     || figure.Id.StartsWith("figure:family_contribution", StringComparison.Ordinal)) continue;
                 List<HtmlReportFigure>? target = section.Id == ReportSectionIds.Sensitivity ? sensitivity
                     : analyticsIds.Contains(figure.Id) || section.Id is ReportSectionIds.Results or ReportSectionIds.DatabaseGap ? results

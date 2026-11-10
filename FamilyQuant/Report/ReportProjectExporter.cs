@@ -160,9 +160,10 @@ public static class ReportProjectExporter
         if (sourceWorld != null && studies.Figures.Any(f => f.Figure.Id.StartsWith("figure:family_signal_sources", StringComparison.Ordinal)))
             exports.Add("family_sources_support.csv", ReportStudyExports.SourceSupport(sourceWorld));
         var layout = ReportSupplementLayout.Apply(document, exports);
+        var familyFigures = HtmlFamilyFigurePacket.Prepare(studies, plan, compositionBasis, manifest); // U3c exact native inputs.
         exports.Add(FigureLayout.DetailFileName, studies.FigureDetailsCsv);
         var sheets = layout.Sheets.Concat(ReportStudyFigures.CombineFigureSupplements(studies.FigureDetailSheets,
-            ReportCaptionTrace.Build(document, figureCaptions))).ToArray();
+            ReportCaptionTrace.Build(document, figureCaptions))).Concat(familyFigures.Sheets).ToArray();
         var panelKeys = compositionBasis.Map?.UserFamilies.Values.Where(f => !f.HasConflict && f.PanelFamilyKey != null)
             .ToDictionary(f => f.FamilyUserId.ToString(CultureInfo.InvariantCulture), f => f.PanelFamilyKey!, StringComparer.Ordinal)
             ?? new Dictionary<string, string>(StringComparer.Ordinal);
@@ -175,6 +176,7 @@ public static class ReportProjectExporter
                 UsesPanel = compositionBasis.UsesPanel, IsIdentity = compositionBasis.IsIdentity,
                 IsAdditive = compositionBasis.Studies.FamilyRunShares?.Policy != SharedPeptidePolicy.CountInEveryFamily,
                 StoredStudies = compositionBasis.Studies, PanelKeys = panelKeys,
+                FamilyFiguresProvider = familyFigures.Build, // U3c
                 DatabaseEntryCounts = FamilyDatabaseEntryCounts.Read(curation),
                 SourceUserIds = compositionBasis.SourceUserIds,
                 ConflictingFamilyIds = compositionBasis.Map?.ConflictingUserIds ?? Array.Empty<int>(),
