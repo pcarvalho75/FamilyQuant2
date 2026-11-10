@@ -94,6 +94,15 @@ Paulo, 11-09, during the session with Ana: "a peptide cannot go to more than one
 | T20 | Release 2.1.14: the version bump on the 31 lines, the notes, the package with the token (FQCount, as H4c), the offline update from 2.1.13, published as Latest, the README | M | 1.0 | T19 |  | Release live; hashes match | Orchestrator |  | 0 | 0 |  |
 | T21 | The website for 2.1.14: a new upload folder familyquant-2.1.14 made from Desktop/FamilyQuant-website/familyquant-2.1.11. science.html: the de novo envelope section and the recovery readings rewritten for the measured envelope (D95), each peptide once (D96) and the four bases; index.html: the version, what is new, and new screenshots on synthetic data (the Simple view of Review grouping, Results, the Export window, the HTML report tabs with the Normalize to buttons). Paulo uploads it | M | 1.0 | T15b |  | Folder ready; every changed claim matches the program; screenshots synthetic; reviewed | SM |  | 0 | 0 |  |
 
+### W25 Every protein's coverage in the HTML, release 2.1.15 (FQHtml, FQRev, FQCount, Orchestrator)
+
+Paulo, 11-09 evening, after opening the report: "i did not see all the proteins with coverage there", then "exactly you need to fix that, list every protein like you did" (D107). The report draws coverage for one protein per family (topProteinsPerPanelFamily: 1 in ReportProjectExporter.cs), and 2.1.14 removed the PNG export that drew up to three.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| U1 | The HTML Coverage tab lists every protein that has placed peptides, in every family (Others and families below the report threshold included): choose a family, then any of its proteins (ordered by credited signal, with its peptide count), and its map is drawn from the stored spans. The Word report keeps one map per family | M | 1.5 | T20 | U2 | A synthetic project of realistic size shows every protein with placements; page size measured and reported; the whole synthetic suite run once before READY; reviewed | HT |  | 0 | 0 |  |
+| U2 | Release 2.1.15: merge, the full suite once (launched outside the desk sandbox), the ledger refreshed, the version bump, the package (FQCount), published as Latest with notes and README | M | 1.0 | U1 |  | Release live; hashes match | Orchestrator |  | 0 | 0 |  |
+
 ## Critical path
 
 Three Sol builders started at 15:27 from master 488211ae and a fourth joined after (D102). FQDeNovo writes the check T1 first, because it decides T3 (the desk runs it on Ana's data); T5 and T6 fill the wait. FQCount does T7, then T8, T10 and T11, then T9. FQHtml does T13 and T14, then T15 once T11 lands, and T16. FQSimple does T17 and T12, then T18 once T10 and T14 are approved. FQRev reviews each step as it lands. About 4 hours of building, then about 2 hours for T19 and T20.
@@ -186,6 +195,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D104 | The HTML replots by normalization | A page-wide radio button selects the normalization and every chart that depends on it redraws (T15b, T11b), before 2.1.14 ships. Paulo, 11-09 ("i would like the html to be able to replot depending on the normalization, so there would be a radio button to select the normalization on the html") |
 | D105 | The website follows 2.1.14 | A new upload folder for the website with the science text and screenshots of this release (T21); Paulo uploads it. Paulo, 11-09 ("does this roadmap include and update in the website?") |
 | D106 | Ledger rows this release changed on purpose | Rows whose proofs went stale because of the intended 2.1.14 changes and that the refresh cannot bring back are reopened as OPEN, named in docs/LEDGER-REVERIFY-2.1.14.md, to verify again after release (as D88 for 2.1.11); 2.1.14 ships when the full suite is green. Paulo, 11-09 ("well just verify agin"), leaving until 20:00 ("i expect this project to be done by then") |
+| D107 | Every protein's coverage in the HTML | The HTML Coverage tab lists every protein with placed peptides in every family, as a 2.1.15 release published when its checks pass. Paulo, 11-09 ("exactly you need to fix that, list every protein like you did") |
 
 ## Risks and triggers
 
