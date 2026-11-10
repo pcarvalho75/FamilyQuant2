@@ -45,7 +45,7 @@ internal static partial class Program
         var gap = charts[^1];
         for (int index = 0; index < gapRows.Length; index++)
         {
-            var native = gapRows[index]; var row = gap.Rows[index];
+            var row = gap.Rows[index]; var native = gapRows.Single(item => DatabaseGapDisplayRow.Label(item) == row.Name);
             var amounts = new[] { native.IdentifiedEnvelope, native.DatabaseDeNovoEnvelope, native.WorldDeNovoEnvelope };
             Check("U5 gap areas retain native values and G5 program formatting " + index, row.Parts.Select((part, i) =>
                 part.Value == amounts[i] && part.Text.StartsWith(amounts[i].ToString("G5", CultureInfo.InvariantCulture) + " area; ", StringComparison.Ordinal)).All(same => same));
@@ -55,8 +55,10 @@ internal static partial class Program
         }
         Check("U5 zero family totals stay unavailable instead of dividing by zero", gap.Rows[^1].Parts.All(part =>
             part.Value == 0 && part.FamilyShare is { Value: null, UnavailableReason: not null }));
-        Check("U5 large areas use native scientific notation while exact areas stay unrounded", gap.Rows[1].Parts[0].Text.StartsWith("1.2E+09 area;", StringComparison.Ordinal)
-            && gap.Rows[1].Parts[0].Exact == (1.2e9).ToString("G17", CultureInfo.InvariantCulture));
+        Check("U5 gap puts the largest pooled family first and the recorded zero last", gap.Rows.Select(row => row.Name)
+            .SequenceEqual(new[] { "Large illustrative family", "Illustrative family", "Recorded zero family" }));
+        Check("U5 large areas use native scientific notation while exact areas stay unrounded", gap.Rows[0].Parts[0].Text.StartsWith("1.2E+09 area;", StringComparison.Ordinal)
+            && gap.Rows[0].Parts[0].Exact == (1.2e9).ToString("G17", CultureInfo.InvariantCulture));
         var payload = HtmlReportTabsFixture() with { SignalCharts = charts };
         string path = Path.Combine(output, "synthetic-recovery-explanations.html");
         HtmlReportWriter.Write(path, payload);

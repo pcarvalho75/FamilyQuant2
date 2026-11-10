@@ -134,7 +134,7 @@ public static class HtmlSignalRecoveryData
 
     private static HtmlSignalChart Gap(DatabaseGapChart chart, string id, string title)
     {
-        var rows = chart.Rows.Select(row => new HtmlSignalRow
+        var rows = chart.Rows.OrderByDescending(row => row.TotalEnvelope).Select(row => new HtmlSignalRow
         {
             Name = DatabaseGapDisplayRow.Label(row), IsPooled = true,
             Parts = new[]
