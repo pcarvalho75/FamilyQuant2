@@ -18,6 +18,7 @@ public sealed record HtmlReportPayload
     public IReadOnlyList<HtmlDotMeasure> DotMeasures { get; init; } = Array.Empty<HtmlDotMeasure>();
     public IReadOnlyList<HtmlMethodStep> Methods { get; init; } = Array.Empty<HtmlMethodStep>();
     public IReadOnlyList<HtmlReportFigure> Quality { get; init; } = Array.Empty<HtmlReportFigure>();
+    public IReadOnlyList<HtmlReportFigure> Results { get; init; } = Array.Empty<HtmlReportFigure>();
     public IReadOnlyList<HtmlReportFigure> Sensitivity { get; init; } = Array.Empty<HtmlReportFigure>();
     public string? Interpretation { get; init; }
     public IReadOnlyDictionary<string, HtmlReportField> Fields { get; init; }

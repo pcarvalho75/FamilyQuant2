@@ -985,6 +985,78 @@
       [hidden] {
         display: none !important;
       }
+      .report-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 24px 0;
+      }
+      .report-tab {
+        padding: 10px 14px;
+        border-radius: 8px;
+        background: var(--subtle);
+      }
+      .report-tab[aria-selected="true"] {
+        background: var(--selection);
+        color: var(--accent);
+      }
+      .report-panel {
+        min-width: 0;
+      }
+      .chart-legend {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+        margin-top: 12px;
+      }
+      .report-figure {
+        margin: 20px 0 0;
+        min-width: 0;
+        break-inside: avoid;
+      }
+      .report-figure > button {
+        width: 100%;
+      }
+      .rank-run-count {
+        display: block;
+        font-size: 11px;
+        font-weight: 400;
+        color: var(--muted);
+      }
+      .ranking-bases {
+        border: 0;
+        padding: 0;
+        margin: 0 0 18px;
+      }
+      .ranking-bases legend {
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .basis-options {
+        display: grid;
+        gap: 8px;
+      }
+      .basis-option {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 8px;
+        align-items: start;
+      }
+      .basis-option input {
+        accent-color: var(--accent);
+        margin-top: 5px;
+      }
+      .basis-reason {
+        display: block;
+      }
+      #panel-recovery .evidence-grid {
+        grid-template-columns: 1fr;
+      }
+      @media print {
+        .report-tabs { display: none; }
+        .report-panel[hidden] { display: block !important; }
+        .report-panel { break-before: page; }
+      }
       svg {
         fill: none;
         stroke: currentColor;
@@ -2646,6 +2718,16 @@
         </div>
         <div id="notices"></div>
         <div class="headline" id="headline"></div>
+        <div class="report-tabs" role="tablist" aria-label="Report sections">
+          <button class="report-tab" id="tab-families" role="tab" aria-controls="panel-families" aria-selected="true" title="Explore family shares and compare the runs. This changes only the view of this report.">Families</button>
+          <button class="report-tab" id="tab-recovery" role="tab" aria-controls="panel-recovery" aria-selected="false" tabindex="-1" title="Compare credited signal with the measured total. This changes only the view of this report.">Signal recovery</button>
+          <button class="report-tab" id="tab-mass" role="tab" aria-controls="panel-mass" aria-selected="false" tabindex="-1" title="Inspect signal by mass and the isotopes credited. This changes only the view of this report.">Mass and isotopes</button>
+          <button class="report-tab" id="tab-coverage" role="tab" aria-controls="panel-coverage" aria-selected="false" tabindex="-1" title="Explore the selected family's proteins and sequence coverage. This changes only the view of this report.">Coverage</button>
+          <button class="report-tab" id="tab-gap" role="tab" aria-controls="panel-gap" aria-selected="false" tabindex="-1" title="Compare database coverage with the stored evidence. This changes only the view of this report.">Database gap</button>
+          <button class="report-tab" id="tab-quality" role="tab" aria-controls="panel-quality" aria-selected="false" tabindex="-1" title="Inspect the included quality figures. This changes only the view of this report.">Quality</button>
+          <button class="report-tab" id="tab-sensitivity" role="tab" aria-controls="panel-sensitivity" aria-selected="false" tabindex="-1" title="Inspect the included sensitivity figures. This changes only the view of this report.">Sensitivity</button>
+        </div>
+        <div class="report-panel" id="panel-families" role="tabpanel" aria-labelledby="tab-families" tabindex="0">
         <section aria-labelledby="composition-title">
           <div class="section-title">
             <div>
@@ -2677,6 +2759,7 @@
                   viewBox="0 0 320 320"
                   role="group"
                   aria-label="Interactive family composition"
+                  aria-describedby="composition-plain-legend"
                 ></svg>
                 <div class="ring-center">
                   <div class="ring-value" id="ring-value"></div>
@@ -2685,9 +2768,15 @@
               </div>
               <p class="ring-caption" id="composition-basis"></p>
               <div id="composition-legend" class="legend"></div>
+              <p id="composition-plain-legend" class="chart-legend"></p>
               <div id="selected-summary" class="selected-summary"></div>
             </div>
             <div class="rank-pane">
+              <fieldset class="ranking-bases" id="ranking-bases">
+                <legend>Share denominator</legend>
+                <div class="basis-options" id="ranking-base-options"></div>
+                <p id="basis-compatibility" class="fine-print" hidden>This report contains the recorded credited-family ranking. Export it with the current FamilyQuant version to add the four bases.</p>
+              </fieldset>
               <div class="rank-toolbar">
                 <h3>Across the runs</h3>
                 <div
@@ -2700,6 +2789,7 @@
                     id="rank-sort-share"
                     class="sort-tab"
                     aria-pressed="true"
+                    title="Sort families from largest to smallest mean share. This changes only the order in this report."
                   >
                     Share
                   </button>
@@ -2707,10 +2797,12 @@
                     id="rank-sort-spread"
                     class="sort-tab"
                     aria-pressed="false"
+                    title="Sort families by the sample SD of their run shares, in percentage points. This changes only the order in this report."
                   >
                     Spread
                   </button>
                 </div>
+                <button class="info" id="spread-info" aria-label="About Spread" title="Explain how Spread compares run-to-run variation. This opens help and changes no project values or files.">i</button>
                 <button
                   class="info"
                   id="runs-info"
@@ -2732,9 +2824,11 @@
                 id="family-ranking"
                 role="group"
                 aria-label="Family contributions by run"
+                aria-describedby="ranking-legend"
               ></div>
               <div class="rank-scale" id="rank-scale"></div>
               <div class="run-key" id="run-key"></div>
+              <p id="ranking-legend" class="chart-legend"><span id="ranking-runs-legend"></span> Percent of the chosen base: <span id="ranking-base-name">credited family signal</span>. The shaded capsule spans the lowest to highest run; it is not a confidence interval.</p>
               <div class="more">
                 <small id="ranking-note"></small
                 ><button class="quiet-button" id="all-families-button">
@@ -2787,6 +2881,7 @@
                 class="dot-chart"
                 role="group"
                 aria-label="Interactive family measures dot plot"
+                aria-describedby="dot-plain-legend"
               ></svg>
             </div>
             <div class="dot-legend">
@@ -2794,7 +2889,13 @@
               ><span>Hollow: unplottable values</span>
             </div>
           </div>
+          <p id="dot-plain-legend" class="chart-legend">Each dot is a family; the chosen X, Y and Size measures say how to compare it. A share uses the recorded family-share denominator, while protein and entry counts have no signal denominator. Family shares are means across available runs; counts describe the recorded database and evidence, and this chart has no whiskers.</p>
         </section>
+        <div id="family-figures" class="figure-grid"></div>
+        </div>
+        <div class="report-panel" id="panel-coverage" role="tabpanel" aria-labelledby="tab-coverage" tabindex="0" hidden>
+          <label for="coverage-family">Family</label>
+          <select id="coverage-family" title="Choose the family whose stored sequence coverage is shown. This changes only the view of this report."></select>
         <section
           class="family-detail"
           id="family-detail"
@@ -2822,6 +2923,8 @@
             </div>
           </div>
         </section>
+        </div>
+        <div class="report-panel" id="panel-recovery" role="tabpanel" aria-labelledby="tab-recovery" tabindex="0" hidden>
         <section
           class="section"
           id="evidence-section"
@@ -2839,9 +2942,30 @@
           </div>
           <div class="evidence-grid">
             <div class="evidence-panel" id="signal-panel"></div>
-            <div class="evidence-panel" id="gap-panel"></div>
           </div>
         </section>
+        <div id="recovery-figures" class="figure-grid"></div>
+        </div>
+        <div class="report-panel" id="panel-mass" role="tabpanel" aria-labelledby="tab-mass" tabindex="0" hidden>
+          <h2>Mass and isotopes</h2>
+          <div id="mass-figures" class="figure-grid"></div>
+          <p id="mass-empty" class="fine-print">No mass or isotope figures are included in this report.</p>
+        </div>
+        <div class="report-panel" id="panel-gap" role="tabpanel" aria-labelledby="tab-gap" tabindex="0" hidden>
+          <h2>Database gap</h2>
+          <div class="evidence-panel" id="gap-panel"></div>
+          <div id="gap-figures" class="figure-grid"></div>
+        </div>
+        <div class="report-panel" id="panel-quality" role="tabpanel" aria-labelledby="tab-quality" tabindex="0" hidden>
+          <h2>Quality</h2>
+          <div id="quality-figures" class="figure-grid"></div>
+          <p id="quality-empty" class="fine-print">No quality figures are included in this report.</p>
+        </div>
+        <div class="report-panel" id="panel-sensitivity" role="tabpanel" aria-labelledby="tab-sensitivity" tabindex="0" hidden>
+          <h2>Sensitivity</h2>
+          <div id="sensitivity-figures" class="figure-grid"></div>
+          <p id="sensitivity-empty" class="fine-print">No sensitivity figures are included in this report.</p>
+        </div>
         <footer class="footer">
           <p id="footer-meta"></p>
           <div class="footer-links">
@@ -3108,6 +3232,34 @@
             f.isOthers
               ? "var(--s6)"
               : colors[Math.max(0, ordered.indexOf(f)) % colors.length];
+          const shareBases = [
+            {
+              key: "identifiedOnly", name: "PSM only",
+              description: "Show identified family signal as a percentage of all identified peptide signal.",
+              reason: "PSM-only shares are unavailable for this project.",
+              enable: "Run Quantify again with this version to store them.",
+            },
+            {
+              key: "identifiedAndDeNovo", name: "PSM and de novo",
+              description: "Show family signal as a percentage of all measured peptide features, identified and de novo.",
+              reason: "Complete measured-peptide totals are unavailable.",
+              enable: "Run Quantify again to store matching totals for every run.",
+            },
+            {
+              key: "detectorEnvelopes", name: "Detector envelopes",
+              description: "Show family signal as a percentage of all stored MS1 detector envelope area, including envelopes without identifications.",
+              reason: "Complete detector envelope totals are unavailable.",
+              enable: "Run Quantify with MS1 detector totals to enable this base.",
+            },
+            {
+              key: "tic", name: "TIC",
+              description: "Show family signal as a percentage of the total ion current recorded for each run.",
+              reason: "Complete TIC totals are unavailable.",
+              enable: "Run Quantify again with matching acquisition files to store TIC totals.",
+            },
+          ];
+          const hasShareBases = families.some(f => shareBases.some(base =>
+            val(f[base.key]?.mean) !== null || (f.runs || []).some(run => val(run[base.key]) !== null)));
           const state = {
             selected: ordered.find((f) => !f.isOthers) || ordered[0],
             drill: false,
@@ -3118,6 +3270,91 @@
             detailVisible: false,
             sort: "share",
             pinnedRun: null,
+            basis: "identifiedAndDeNovo",
+          };
+          function rankingStatistics(f) {
+            return hasShareBases ? f[state.basis] || {} : f;
+          }
+          function rankingRunShare(run) {
+            return hasShareBases ? run[state.basis] : run.share;
+          }
+          function rankingBaseName() {
+            return hasShareBases ? shareBases.find(base => base.key === state.basis).name : "credited family signal";
+          }
+          function familyRunCount(f, basis = null) {
+            return (f.runs || []).filter(run => val(basis ? run[basis] : run.share) !== null).length;
+          }
+          function meanRunText(basis = null) {
+            const counts = [...new Set(families.map(f => familyRunCount(f, basis)))];
+            return counts.length === 1 && counts[0] > 0 ? counts[0] + (counts[0] === 1 ? " run" : " runs") : "its available runs";
+          }
+          $("basis-compatibility").hidden = hasShareBases;
+          for (const base of shareBases) {
+            const available = families.some(f => val(f[base.key]?.mean) !== null);
+            const label = node("label", "basis-option"),
+              choice = node("input"),
+              body = node("span", "", base.name),
+              reason = node("small", "basis-reason", base.reason);
+            choice.type = "radio";
+            choice.name = "ranking-basis";
+            choice.value = base.key;
+            choice.id = "basis-" + base.key;
+            choice.checked = hasShareBases && base.key === state.basis;
+            choice.disabled = !available;
+            choice.title = available ? base.description + " This changes the ranking and run points in this report."
+              : base.reason + " " + base.enable;
+            label.title = choice.title;
+            reason.id = choice.id + "-reason";
+            reason.hidden = available;
+            if (!available) choice.setAttribute("aria-describedby", reason.id);
+            body.append(reason);
+            label.append(choice, body);
+            choice.onchange = () => {
+              if (!choice.checked || choice.disabled) return;
+              state.basis = base.key;
+              state.pinnedRun = null;
+              $("chart-hover").hidden = true;
+              renderRanking();
+              updateSelectionSummary();
+            };
+            $("ranking-base-options").append(label);
+          }
+          const tabs = Array.from(document.querySelectorAll('.report-tab'));
+          function showTab(tab) {
+            for (const item of tabs) {
+              const active = item === tab;
+              item.setAttribute("aria-selected", String(active));
+              item.tabIndex = active ? 0 : -1;
+              $(item.getAttribute("aria-controls")).hidden = !active;
+            }
+            $("chart-hover").hidden = true;
+            $("coverage-hover").hidden = true;
+            $("dot-tooltip").hidden = true;
+          }
+          for (const [index, tab] of tabs.entries()) {
+            tab.onclick = () => showTab(tab);
+            tab.onkeydown = (event) => {
+              let next;
+              if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+              if (event.key === "ArrowLeft") next = (index + tabs.length - 1) % tabs.length;
+              if (event.key === "Home") next = 0;
+              if (event.key === "End") next = tabs.length - 1;
+              if (next === undefined) return;
+              event.preventDefault();
+              showTab(tabs[next]);
+              tabs[next].focus();
+            };
+          }
+          for (const f of ordered) {
+            const option = node("option", "", text(f.name));
+            option.value = f.id;
+            $("coverage-family").append(option);
+          }
+          $("coverage-family").disabled = !ordered.length;
+          if (!ordered.length) $("coverage-family").title = "No families are included in this report. Include family results when exporting to enable this choice.";
+          $("coverage-family").onchange = () => {
+            const family = families.find(f => f.id === $("coverage-family").value);
+            if (family) select(family);
           };
           let hoverFrame = null;
           function preview(f) {
@@ -3262,6 +3499,9 @@
             $("composition-legend").replaceChildren();
             const f = state.selected,
               groups = f ? plotParts(f) : new Map();
+            $("composition-plain-legend").textContent = state.drill
+              ? "Each slice shows a part of the selected family's pooled signal. The denominator is that family's credited signal across all runs; this ring has no whiskers."
+              : "Each slice compares a family's mean share across the available runs. The denominator is the credited family signal in each run; select a family to explore its pooled parts, with no whiskers on this ring.";
             if (!f || !ordered.some((item) => val(item.mean) !== null)) {
               document.querySelector(
                 'section[aria-labelledby="composition-title"]',
@@ -3497,6 +3737,7 @@
               );
           }
           function scrollToFamily() {
+            showTab($("tab-coverage"));
             $("family-detail").scrollIntoView({
               behavior: reducedMotion.matches ? "auto" : "smooth",
               block: "start",
@@ -3519,28 +3760,28 @@
             swatch.style.background = familyColor(f);
             title.append(swatch, field(f.name, "h3"));
             const stats = node("div", "selected-summary-stats");
-            stat(stats, "Mean share", f.mean);
-            stat(stats, "Run SD", f.sd);
+            stat(stats, "Mean share of " + rankingBaseName(), rankingStatistics(f).mean);
+            stat(stats, "Run SD", rankingStatistics(f).sd);
             stat(stats, "Protein groups", f.proteins);
             const footer = node("div", "selected-summary-footer"),
               runs = node("div", "mini-runs");
             runs.setAttribute("aria-hidden", "true");
             const maximum = Math.max(
               ...ordered.flatMap((x) => [
-                val(x.mean) ?? 0,
-                ...(x.runs || []).map((r) => val(r.share) ?? 0),
+                val(rankingStatistics(x).mean) ?? 0,
+                ...(x.runs || []).map((r) => val(rankingRunShare(r)) ?? 0),
               ]),
               1,
             );
             runs.append(node("span", "mini-run-track"));
             for (const [i, r] of (f.runs || []).entries()) {
-              if (val(r.share) === null) continue;
+              if (val(rankingRunShare(r)) === null) continue;
               const dot = node(
                 "span",
                 "mini-run-point" +
                   (i % 3 === 1 ? " outline" : i % 3 === 2 ? " square" : ""),
               );
-              dot.style.left = (val(r.share) / maximum) * 100 + "%";
+              dot.style.left = (val(rankingRunShare(r)) / maximum) * 100 + "%";
               runs.append(dot);
             }
             if ((f.runs || []).length)
@@ -3559,7 +3800,7 @@
             name.className = "chip-name";
             chip.append(
               name,
-              displayField(f.mean),
+              displayField(rankingStatistics(f).mean),
               node("span", "chip-action", "Details"),
             );
             chip.onclick = scrollToFamily;
@@ -3579,7 +3820,7 @@
           function showAllRunHover(f, anchor, activeRun = null) {
             if (dialog.open) return;
             const runs = (f.runs || []).filter(
-                (r) => exists(r.name) && val(r.share) !== null,
+                (r) => exists(r.name) && val(rankingRunShare(r)) !== null,
               ),
               tip = $("chart-hover");
             if (!runs.length) {
@@ -3599,8 +3840,8 @@
               row.classList.toggle("is-active", text(run.name) === activeRun);
               row.append(
                 displayField(run.name),
-                displayField(run.share),
-                field(run.share),
+                displayField(rankingRunShare(run)),
+                field(rankingRunShare(run)),
               );
               tip.append(row);
             }
@@ -3647,15 +3888,11 @@
               ]),
             );
             host.replaceChildren();
-            const ranked =
-              state.sort === "spread"
-                ? ordered
-                    .slice()
-                    .sort(
-                      (a, b) =>
-                        (val(b.sd) ?? -Infinity) - (val(a.sd) ?? -Infinity),
-                    )
-                : ordered;
+            const hasSpread = ordered.some(f => val(rankingStatistics(f).sd) !== null);
+            if (!hasSpread) state.sort = "share";
+            const sortField = state.sort === "spread" ? "sd" : "mean";
+            const ranked = ordered.slice().sort((a, b) =>
+              (val(rankingStatistics(b)[sortField]) ?? -Infinity) - (val(rankingStatistics(a)[sortField]) ?? -Infinity));
             const rankedWithOthersLast = [
               ...ranked.filter((f) => !f.isOthers),
               ...ranked.filter((f) => f.isOthers),
@@ -3679,8 +3916,8 @@
 
             const maximum = Math.max(
               ...ordered.flatMap((f) => [
-                val(f.mean) ?? 0,
-                ...(f.runs || []).map((r) => val(r.share) ?? 0),
+                val(rankingStatistics(f).mean) ?? 0,
+                ...(f.runs || []).map((r) => val(rankingRunShare(r)) ?? 0),
               ]),
               1,
             );
@@ -3714,6 +3951,12 @@
               };
               const name = node("button", "rank-name");
               name.append(field(f.name));
+              const mean = rankingStatistics(f).mean,
+                count = familyRunCount(f, hasShareBases ? state.basis : null);
+              const runLabel = count + (count === 1 ? " run" : " runs");
+              const runCountLabel = val(mean) === null ? "mean unavailable" : count ? "mean of " + runLabel : "run count unavailable";
+              name.append(node("span", "rank-run-count", runCountLabel));
+              name.title = "Select this family to explore its stored values. This changes only the view of this report.";
               name.setAttribute("aria-pressed", String(f === state.selected));
               name.onclick = () => select(f);
               name.onfocus = () => {
@@ -3731,12 +3974,12 @@
               const fill = node("span", "rank-fill");
               fill.setAttribute("aria-hidden", "true");
               fill.style.width =
-                Math.max(0, (val(f.mean) ?? 0) / maximum) * 100 + "%";
+                Math.max(0, (val(mean) ?? 0) / maximum) * 100 + "%";
               fill.style.background = familyColor(f);
               fill.style.top = pointHeight / 2 - 2 + "px";
               chart.append(fill);
               const values = (f.runs || [])
-                .map((r) => val(r.share))
+                .map((r) => val(rankingRunShare(r)))
                 .filter((value) => value !== null);
               if (values.length) {
                 const low = Math.min(...values),
@@ -3752,13 +3995,13 @@
               }
 
               (f.runs || []).forEach((r, i) => {
-                if (val(r.share) === null) return;
+                if (val(rankingRunShare(r)) === null) return;
                 const dot = node("button", "rank-point");
                 dot.style.top = "1px";
                 dot.dataset.run = text(r.name);
                 dot.dataset.runStyle = i % 3;
                 dot.style.left =
-                  Math.max(0, val(r.share) / maximum) * 100 + "%";
+                  Math.max(0, val(rankingRunShare(r)) / maximum) * 100 + "%";
                 dot.style.setProperty(
                   "--dot-fill",
                   i % 3 === 1 ? "var(--surface)" : "var(--ink)",
@@ -3775,7 +4018,7 @@
                 label.append(
                   displayField(r.name),
                   document.createTextNode(": "),
-                  displayField(r.share),
+                  displayField(rankingRunShare(r)),
                 );
                 dot.append(label);
                 const hover = () => {
@@ -3800,12 +4043,12 @@
                   hide();
                   const dl = node("dl");
                   dl.append(
-                    node("dt", "", "Share of credited family signal"),
-                    field(r.share, "dd"),
+                    node("dt", "", "Percent of " + rankingBaseName()),
+                    field(rankingRunShare(r), "dd"),
                   );
                   if (exists(r.measured))
                     dl.append(
-                      node("dt", "", "Share of whole measured signal"),
+                      node("dt", "", "Share of measured peptide signal"),
                       field(r.measured, "dd"),
                     );
                   popup(field(r.name), [field(f.name, "p"), dl]);
@@ -3814,8 +4057,8 @@
                 if (exists(r.name) && !runNames.has(text(r.name)))
                   runNames.set(text(r.name), { id: r.name, index: i });
               });
-              const value = metric(f.mean);
-              value.className = "rank-value metric-button";
+              const value = val(mean) === null ? node("span", "rank-value unavailable", "not available") : metric(mean);
+              if (val(mean) !== null) value.className = "rank-value metric-button";
               row.append(name, chart, value);
               host.append(row);
               const previous = oldPositions.get(f.id);
@@ -3830,9 +4073,10 @@
             }
             if (!shown.length && state.query)
               host.append(node("p", "empty", "No matching families."));
-            $("ranking-note").textContent =
-              "Mean share of credited family signal";
-            $("rank-sort").hidden = !ordered.some((f) => val(f.sd) !== null);
+            $("ranking-note").textContent = "Mean share of " + rankingBaseName();
+            $("ranking-base-name").textContent = rankingBaseName();
+            $("ranking-runs-legend").textContent = "Each bar shows the mean of " + meanRunText(hasShareBases ? state.basis : null) + ". Dots show individual runs.";
+            $("rank-sort").hidden = !hasSpread;
             $("rank-sort-share").setAttribute(
               "aria-pressed",
               String(state.sort === "share"),
@@ -3913,7 +4157,7 @@
               ["Mean share of credited family signal", f.mean],
               ["Run-to-run standard deviation", f.sd],
               ["Coefficient of variation", f.cv],
-              ["Share of whole measured signal", f.wholeMeasured],
+              ["Share of measured peptide signal", f.wholeMeasured],
               ["Protein groups", f.proteins],
               ["Family-unique protein groups", f.uniqueProteins],
               ["Peptides", f.peptides],
@@ -3932,11 +4176,26 @@
               ),
               dl,
             );
+            const bases = node("dl", "family-share-bases");
+            for (const base of shareBases) {
+              const statistics = f[base.key] || {};
+              const value = node("dd");
+              value.dataset.basis = base.key;
+              if (val(statistics.mean) === null) value.textContent = base.reason;
+              else {
+                value.append(field(statistics.mean));
+                if (val(statistics.sd) !== null)
+                  value.append(document.createTextNode(" (sample SD "), field(statistics.sd), document.createTextNode(")"));
+              }
+              bases.append(node("dt", "", base.name), value);
+            }
+            content.push(node("h3", "", "Mean shares by denominator"), bases);
             if (f.runs?.length) {
-              content.push(node("h3", "", "By run"));
+              content.push(node("h3", "", "By run, percent of " + rankingBaseName()));
               const runs = node("dl");
               for (const r of f.runs)
-                runs.append(field(r.name, "dt"), field(r.share, "dd"));
+                runs.append(field(r.name, "dt"), val(rankingRunShare(r)) === null
+                  ? node("dd", "unavailable", "not available") : field(rankingRunShare(r), "dd"));
               content.push(runs);
             }
             popup(field(f.name), content);
@@ -3952,6 +4211,7 @@
               "button",
               compact ? "coverage-figure" : "figure-card",
             );
+            button.title = "Open this figure at full size. This changes only the view of this report.";
             const img = node("img");
             img.src = fig.png;
             img.alt = "";
@@ -3964,9 +4224,65 @@
               full.loading = "eager";
               full.className = "full-figure";
               content.push(full);
+              content.push(node("p", "chart-legend", figureLegend(fig)));
+              if (exists(fig.caption)) content.push(field(fig.caption, "p"));
               popup(field(fig.title), content, true);
             };
-            host.append(button);
+            const figure = node("figure", "report-figure"),
+              legend = node("figcaption", "chart-legend", figureLegend(fig));
+            figure.dataset.figure = fig.sourceFigureId;
+            figure.append(button, legend);
+            host.append(figure);
+          }
+          function figureLegend(fig) {
+            const id = fig.sourceFigureId || "";
+            if (/protein_coverage_/.test(id))
+              return "This map places observed peptides and stored annotations along the selected protein. Positions use the full protein length, with evidence pooled across runs; colours identify the two tracks, and no whiskers are drawn.";
+            if (/xic_by_mass/.test(id))
+              return "Each point is a peptide feature from the pooled runs. Mass increases left to right; higher points have more measured isotope-envelope signal on a logarithmic scale. These are signal areas, with no percentage denominator or whiskers.";
+            if (/isotopes_credited/.test(id))
+              return "Bars count peptide features by the number of isotopes with measured signal; colours separate mass bands. Counts pool the runs and have no percentage denominator or run-to-run whiskers. A missing isotope adds no credit.";
+            if (/percent_ion_current_by_mass/.test(id))
+              return "Bars compare the measured isotope-envelope signal in each mass range, with all runs pooled. Filled bars divide by the displayed peptide signal; outlined bars divide by pooled total ion current (TIC), when available. These are two different totals, and no whiskers are drawn.";
+            if (/recovery|signal_by_run/.test(id))
+              return "Bars compare the labelled peptide-signal readings with total ion current (TIC). Each run uses its own TIC, while an all-runs bar uses pooled signal divided by pooled TIC. The readings use the isotope bases printed on the figure; they are not uncertainty intervals or run-to-run whiskers.";
+            if (/signal_uplift/.test(id))
+              return "Bars show the recorded contributions to signal recovery with all runs pooled. Each percentage divides by pooled total ion current (TIC). Read the labelled isotope basis for each component; the components are signal readings, with no run-to-run whiskers.";
+            if (/family_composition/.test(id))
+              return "Each bar shows a family's mean share of credited family signal across " + meanRunText() + ". Longer bars mean larger shares; whiskers extend one sample SD across runs. The SD describes run-to-run disagreement, not a confidence interval.";
+            if (/family_subclass_ring/.test(id))
+              return "Inner arcs show families and outer arcs split the same signal into subclasses. Arc sizes use credited family signal with all runs pooled; Others keeps the report's chosen family membership. This ring has no run-to-run whiskers.";
+            if (/family_subclasses/.test(id))
+              return "Each stacked bar splits a family's contribution into its recorded subclasses. The parts use the pooled credited-family-signal denominator, so they add to the family's pooled share. Grey marks unresolved parts; no run-to-run whiskers are drawn.";
+            if (/family_contribution/.test(id))
+              return "Each bar splits a family's pooled contribution into identified and de novo signal. Every percentage divides by all measured peptide-feature signal, with each feature counted once. Shared and unattributed signal have separate bars. These pooled bars have no run-to-run whiskers.";
+            if (/abundance_diversity/.test(id))
+              return "Horizontal position gives the mean per-run share of credited family signal; vertical position gives the database proteins needed to explain the peptides. Each point is a family, with protein counts pooled across runs. These database-dependent estimates have no whiskers.";
+            if (/family_signal_vs_denovo_share/.test(id))
+              return "Each point compares a family's pooled signal with its de novo contribution. The de novo percentage divides by that family's pooled signal, while the signal axis shows area units. The points pool all runs and have no run-to-run whiskers.";
+            if (/family_signal_sources|database_gap/.test(id))
+              return "Each row separates identified, database-mapped de novo and family-world-only signal. Bar widths are signal areas pooled across all runs, with no percentage denominator or run-to-run whiskers. Family-world-only signal stays outside starting-database family composition.";
+            if (/family_source_sequence_counts/.test(id))
+              return "Bars count the distinct source sequences supporting each family, with all runs pooled. Compare the source-coloured parts using sequence counts, with no signal denominator or run-to-run whiskers. These counts describe evidence sources, not the number of proteins present.";
+            if (/identity_sweep|identity_scan/.test(id))
+              return "Each point is a stored identity threshold, based on the sequences used in that scan. Read family counts and target-decoy mixing against their labelled axes; a mixing percentage uses that threshold's family count. This compares grouping choices, with no mean across acquisition runs or confidence interval.";
+            if (/de_novo_score_distribution/.test(id))
+              return "Bars count imported de novo calls in each score range, with colours showing the recorded filtering stages. Counts pool the runs and have no percentage denominator or run-to-run whiskers. Each caller keeps its own score scale, so compare callers within their labelled panels.";
+            if (/de_novo_consolidation|peptide_representatives/.test(id))
+              return "Bars count the calls or peptide features retained at the labelled stages. These are counts pooled across all runs, with no signal denominator or run-to-run whiskers. Follow the stage labels to distinguish repeated calls from the features carried forward.";
+            if (/family_world_rates/.test(id))
+              return "This chart compares the stored evidence rates for each family, with all runs pooled. The decoy rate divides decoy signal by credited signal; the correct-credit rate divides correct known credits by all known credits. Missing rates stay unavailable, and no run-to-run whiskers are drawn.";
+            if (/source_venn/.test(id))
+              return "The regions count sequences found by each caller alone or by both, with all runs pooled. Overlapping regions use the sequence normalization named in the figure; these are counts, with no signal denominator or run-to-run whiskers. The filtered-call and carried-forward populations stay separate.";
+            if (/accepted_score_agreement|score_vs_score_scatter/.test(id))
+              return "Each point is a paired comparison of two callers' scores, pooled across runs. Read each axis on its caller's own score scale; scores are not signal percentages and have no common denominator. The colours show the labelled agreement groups, with no run-to-run whiskers.";
+            if (/peaks_deepnovo_agreement|database_search_concordance|alternative_triage/.test(id))
+              return "This chart compares the sequence agreement groups named on its axes and colour key, with all runs pooled. Counts use the recorded comparison population, and any fraction divides by the comparison total printed on the figure. The groups describe agreement, with no run-to-run whiskers.";
+            if (/variant_comparison/.test(id))
+              return "Bars compare stored source options on the labelled signal or percentage basis, with all runs pooled. Any percentage uses the total printed for that comparison. Compare the coloured components to see how each source option contributes to the pooled signal.";
+            if (/source_effect_comparison/.test(id))
+              return "Each bar is a stored source option compared with the same identification baseline, with all runs pooled. Any percentage uses the total printed for that comparison. These are differences between options, with no run-to-run whiskers.";
+            return "This figure shows the stored results named above. Read its axes and colours with the full report caption, available when you open the figure. Its population, denominator and pooling follow that caption; this page adds no averaging or uncertainty.";
           }
           let renderedFamily = null;
           function renderFamily(f = state.selected) {
@@ -3976,6 +4292,7 @@
             $("family-detail").hidden = !f;
             if (!f) return;
             bind("family-title", f.name);
+            $("coverage-family").value = f.id;
             $("family-detail").style.setProperty(
               "--family-color",
               familyColor(f),
@@ -3984,8 +4301,8 @@
             $("family-info").onclick = () => familyDialog(f);
             const stats = $("family-stats");
             stats.replaceChildren();
-            stat(stats, "Mean family share", f.mean);
-            stat(stats, "Run-to-run SD", f.sd);
+            stat(stats, "Mean share of credited family signal", f.mean);
+            stat(stats, "Run-to-run SD of credited share", f.sd);
             stat(stats, "Protein groups", f.proteins);
             stat(stats, "Peptides", f.peptides);
             const parts = $("subclasses");
@@ -4016,11 +4333,9 @@
                 row.append(name, metric(p.share));
                 list.append(row);
               });
-              parts.append(
-                bars,
-                list,
-                node("p", "fine-print", "Pooled shares within this family."),
-              );
+              const partChart = node("div", "subclass-chart");
+              partChart.append(bars, list, node("p", "chart-legend", "The coloured parts show how this family's signal is divided within the named grouping. Each percentage uses the family's credited signal with all runs pooled; unresolved parts stay separate, and no whiskers are drawn."));
+              parts.append(partChart);
             }
             parts.hidden = !groups.size;
             const coverage = $("coverage-content");
@@ -4143,7 +4458,7 @@
                 entry.append(sw, node("span", "", label));
                 legend.append(entry);
               }
-              coverage.append(meta, track, legend);
+              coverage.append(meta, track, legend, node("p", "chart-legend", figureLegend({ sourceFigureId: "figure:protein_coverage_live" })));
               const inspect = node(
                 "button",
                 "quiet-button positions-button",
@@ -4775,7 +5090,7 @@
               host.append(row);
             }
             host.append(
-              node("p", "fine-print", "Of whole measured signal, by run."),
+              node("p", "chart-legend", "Each bar shows the family signal credited in one run. Its percentage uses that run's whole measured signal as the denominator; runs are shown separately, with no averaging or whiskers."),
             );
             const gap = $("gap-panel");
             gap.append(node("h3", "", "Database gap"));
@@ -4799,8 +5114,8 @@
             gap.append(
               node(
                 "p",
-                "fine-print",
-                "Each fraction uses its own reference total.",
+                "chart-legend",
+                "Bars show the stored database-gap fractions with evidence pooled across runs. Each row uses its own recorded reference total, so compare rows only when those totals agree; no run-to-run whiskers are drawn.",
               ),
             );
             if (rows.length) {
@@ -4839,8 +5154,9 @@
           help(
             "runs-info",
             "Reading the run points",
-            "Capsule spans the runs; line shows the mean. Pick a run below.",
+            "Each bar shows the mean of its available runs, and each dot is one run. The shaded capsule spans the lowest to highest run, not a confidence interval. Pick a run below to highlight it.",
           );
+          help("spread-info", "Reading Spread", "Sorts families by how much their share varies from run to run (sample SD in percentage points). It describes disagreement between runs, not a confidence interval.");
           help(
             "signal-info",
             "The reference total matters",
@@ -4866,6 +5182,19 @@
           renderFamily();
           updateSelectionSummary();
           renderSignal();
+          for (const figure of data.results || []) {
+            const id = figure.sourceFigureId || "";
+            const kind = /xic_by_mass|isotopes_credited|percent_ion_current_by_mass/.test(id) ? "mass"
+              : /recovery|signal_by_run|signal_uplift/.test(id) ? "recovery"
+              : /database_gap/.test(id) ? "gap" : "family";
+            figureCard(figure, $(kind + "-figures"));
+          }
+          $("mass-empty").hidden = $("mass-figures").childElementCount > 0;
+          for (const kind of ["quality", "sensitivity"]) {
+            const host = $(kind + "-figures");
+            for (const figure of data[kind] || []) figureCard(figure, host);
+            $(kind + "-empty").hidden = host.childElementCount > 0;
+          }
           $("app").hidden = false;
           initializeDotPlot();
         } catch (error) {
