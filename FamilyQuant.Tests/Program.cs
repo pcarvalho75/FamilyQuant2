@@ -509,6 +509,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => HtmlRingBasesTests(Path.Combine(workDir, "html-ring-bases")));
             suite.AddWithApplication(() => MassRangeRecoveryTests(Path.Combine(workDir, "mass-range-recovery")));
             suite.AddWithApplication(() => HtmlReportWordsTests(Path.Combine(workDir, "html-report-words")));
+            suite.AddWithApplication(() => MassRangePolishTests(Path.Combine(workDir, "mass-range-polish")));
             suite.Add(() => DatabaseEntryCountTests(null));
             suite.Add(() => AssignmentPresenceCopyTests(null));
             suite.Add(() => HtmlDatabaseEntryTests());
