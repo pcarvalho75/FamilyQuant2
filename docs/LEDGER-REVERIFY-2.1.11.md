@@ -213,7 +213,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-0E4A63DEB716 | AS-retained |
 | FQ15-0E5ABE2C3DA8 | AS-retained |
 | FQ15-0E64DA61060C | AS-retained |
-| FQ15-0E6E4B52BC20 | AS-presentation-figures |
 | FQ15-0E83C10F930D | Paulo-rulings |
 | FQ15-0E8F41C31827 | Paulo-rulings |
 | FQ15-0EA80068FD9C | AS-retained |
@@ -401,7 +400,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-1D142739A693 | Paulo-rulings |
 | FQ15-1D26053368C6 | AS-retained |
 | FQ15-1D36BF2A40FB | AS-retained |
-| FQ15-1D490CD0A1AF | AS-presentation-figures |
 | FQ15-1D79FDF3EE90 | AS-retained |
 | FQ15-1D837E05FE2D | Paulo-rulings |
 | FQ15-1D9ECFEA131D | AS-retained |
@@ -430,7 +428,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-1EEC74BA5E8B | EV-denovo-commands-1 |
 | FQ15-1F0ED07EC30A | AS-presentation-pack |
 | FQ15-1F1BCE712F54 | AS-retained |
-| FQ15-1F562E79187D | AS-presentation-figures |
 | FQ15-1F6C22FA3D47 | Paulo-rulings |
 | FQ15-1F75095E5FEA | AS-presentation-pack |
 | FQ15-1F75453DB92E | AS-presentation-figures |
@@ -494,7 +491,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-23E822FE597A | AS-retained |
 | FQ15-242403E763BC | Paulo-rulings |
 | FQ15-2426D072631F | Paulo-rulings |
-| FQ15-2459614DB23B | AS-presentation-figures |
 | FQ15-24913E8BD1DE | Core-X5 |
 | FQ15-24A54859CF77 | AS-retained |
 | FQ15-24CECD571E26 | AS-retained |
@@ -970,7 +966,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-4BA272385B9E | Paulo-rulings |
 | FQ15-4BBAD1F92143 | Paulo-rulings |
 | FQ15-4BBB36B1D8BF | AS-retained |
-| FQ15-4BBF66239F72 | AS-presentation-figures |
 | FQ15-4BD0128914A0 | Paulo-rulings |
 | FQ15-4BEB9EB6F4D6 | Paulo-rulings |
 | FQ15-4BEE2F3FFAF2 | Paulo-rulings |
@@ -1130,11 +1125,9 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-580CC33CCE5B | Core-X5-runtime |
 | FQ15-581F3B15E0ED | Paulo-rulings |
 | FQ15-583EE2F199ED | AS-retained |
-| FQ15-58545E31FB8A | AS-presentation-figures |
 | FQ15-585C327B3274 | Paulo-rulings |
 | FQ15-5873111D8BFC | Paulo-rulings |
 | FQ15-58795AB24692 | SH-curation-actions |
-| FQ15-588632ACA532 | AS-presentation-figures |
 | FQ15-5889FAD8F6F2 | AS-retained |
 | FQ15-589157475A70 | Paulo-rulings |
 | FQ15-589536AE2E1F | Paulo-rulings |
@@ -1195,7 +1188,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-5CCDA0B631E7 | Paulo-rulings |
 | FQ15-5CD06FECABA6 | AS-retained |
 | FQ15-5CED6ED42457 | AS-retained |
-| FQ15-5D1BD7C5253E | AS-presentation-figures |
 | FQ15-5D2B0F0DF729 | Paulo-rulings |
 | FQ15-5D740CE73FA2 | Paulo-rulings |
 | FQ15-5D7F5FC05E1C | Paulo-rulings |
@@ -1884,7 +1876,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-9240CBD9E75A | Paulo-rulings |
 | FQ15-9247944D9812 | AS-retained |
 | FQ15-92620A0247C1 | Core-X5 |
-| FQ15-9281179BEE2C | AS-presentation-pack |
 | FQ15-92898169E9DF | Core-X5-runtime |
 | FQ15-9292951374F5 | AS-retained |
 | FQ15-92A4702A8D4F | SH-curation-actions |
@@ -1923,10 +1914,8 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-95CF869BB4A6 | AS-retained |
 | FQ15-95D4A5E286C3 | SH-behaviour |
 | FQ15-95D9C2550BE4 | Paulo-rulings |
-| FQ15-95ED42C90BCE | Core-X5 |
 | FQ15-95F7B0990665 | Paulo-rulings |
 | FQ15-95FA9A3543E1 | Paulo-rulings |
-| FQ15-95FEFEBA38D1 | AS-presentation-figures |
 | FQ15-95FF9241616A | Paulo-rulings |
 | FQ15-960444E4ED74 | Paulo-rulings |
 | FQ15-9606ED53587F | AS-retained |
@@ -1961,7 +1950,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-98B4B95F1104 | AS-presentation-figures |
 | FQ15-98E2A4118978 | AS-retained |
 | FQ15-98EA2BCA9546 | Core-X5 |
-| FQ15-992A1437F15D | AS-presentation-figures |
 | FQ15-99626C99C260 | Paulo-rulings |
 | FQ15-99646E147558 | Paulo-rulings |
 | FQ15-99658E9D6800 | Paulo-rulings |
@@ -2023,7 +2011,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-9E34CFE4DD87 | AS-retained |
 | FQ15-9E392D5D92DE | AS-retained |
 | FQ15-9E3BB00A9DA8 | AS-retained |
-| FQ15-9E5893023318 | AS-presentation-figures |
 | FQ15-9E73EC365DDF | EV-denovo-commands-1 |
 | FQ15-9E9B3B697A05 | EV-denovo-commands-1 |
 | FQ15-9E9DD4C80DFE | AS-retained |
@@ -2135,7 +2122,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-A6DE60F9C8A8 | Paulo-rulings |
 | FQ15-A6ED0747B3DA | AS-retained |
 | FQ15-A6FE034CDA86 | SH-behaviour |
-| FQ15-A70FFB9928DA | AS-retained |
 | FQ15-A73316F95C61 | AS-retained |
 | FQ15-A734ACBB4BC2 | AS-retained |
 | FQ15-A73576FC37C1 | AS-retained |
@@ -2167,7 +2153,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-A88B5EAB8662 | AS-presentation-pack |
 | FQ15-A89A70993018 | AS-retained |
 | FQ15-A89F929AB936 | Paulo-rulings |
-| FQ15-A8A2FA12D02D | AS-retained |
 | FQ15-A8B19C137DC2 | Paulo-rulings |
 | FQ15-A8B4A5CF598B | Paulo-rulings |
 | FQ15-A8C754395A78 | Paulo-rulings |
@@ -2451,7 +2436,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-BE33AC53AFFB | AS-retained |
 | FQ15-BE52AC090392 | AS-retained |
 | FQ15-BE69960EE84B | AS-retained |
-| FQ15-BE713350FC3E | AS-presentation-figures |
 | FQ15-BE752AC5BDBF | Paulo-rulings |
 | FQ15-BE7BFC4196C9 | Paulo-rulings |
 | FQ15-BE7D144EF026 | AS-presentation-figures |
@@ -2468,7 +2452,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-BF0FA6F1D889 | Paulo-rulings |
 | FQ15-BF1D9789E87F | AS-retained |
 | FQ15-BF2A465EEB81 | AS-retained |
-| FQ15-BF2D7CB7B77C | AS-presentation-figures |
 | FQ15-BF54174EC5F6 | AS-retained |
 | FQ15-BF5BD8D5792B | Core-X5 |
 | FQ15-BF64203D3C6E | Paulo-rulings |
@@ -2523,7 +2506,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-C309DCD69D94 | AS-retained |
 | FQ15-C339931F4434 | AS-retained |
 | FQ15-C339F3870498 | AS-presentation-pack |
-| FQ15-C348DEC78899 | AS-presentation-figures |
 | FQ15-C362E4FE4D3A | AS-retained |
 | FQ15-C367549CE11E | AS-presentation-figures |
 | FQ15-C38B03DA4692 | Core-X5 |
@@ -2756,7 +2738,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-D50E0526C4CA | Paulo-rulings |
 | FQ15-D51BC8BFE0D7 | Paulo-rulings |
 | FQ15-D56C785A9029 | AS-presentation-figures |
-| FQ15-D56EF735C538 | AS-presentation-figures |
 | FQ15-D57C81C465AE | AS-retained |
 | FQ15-D58352EB61E2 | Paulo-rulings |
 | FQ15-D5A155DBF559 | Paulo-rulings |
@@ -3231,7 +3212,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-FC08F56D35C5 | Core-X5-runtime |
 | FQ15-FC27767FEEC2 | Paulo-rulings |
 | FQ15-FC366CEDB372 | AS-presentation-figures |
-| FQ15-FC4990EE6085 | AS-presentation-figures |
 | FQ15-FC5D8AF378EB | AS-presentation-pack |
 | FQ15-FC7DC6017CCD | AS-retained |
 | FQ15-FC892A9C4DF1 | AS-presentation-pack |
@@ -3239,7 +3219,6 @@ Unchanged-file ledger rows retain their baseline states. Six incidental positive
 | FQ15-FCA4B942E595 | Paulo-rulings |
 | FQ15-FCB0F8EACA01 | AS-retained |
 | FQ15-FCE17DF3809E | AS-retained |
-| FQ15-FCE6A0BB645D | AS-presentation-figures |
 | FQ15-FCEAF2EAEEE5 | EV-denovo-declarations-1 |
 | FQ15-FCF24F202E4B | Paulo-rulings |
 | FQ15-FCFBA87AB6F9 | Core-X5 |

@@ -124,7 +124,9 @@ internal static partial class Program
                     contract && safe && configurations.Count == 4 && configurations.Distinct(StringComparer.Ordinal).Count() == 1);
                 string before = Path.Combine(folder, "frozen-" + group + ".csv"), after = Path.Combine(folder, "current-" + group + ".csv");
                 if (negative && group == "composition") File.AppendAllText(after, "negative-control\n");
-                Check("native curation " + group + " file bytes " + CultureInfo.CurrentCulture.Name, File.ReadAllBytes(before).SequenceEqual(File.ReadAllBytes(after)));
+                Check("native curation " + group + " file bytes " + CultureInfo.CurrentCulture.Name, group == "composition"
+                    ? CurationCompositionBytesMatch(File.ReadAllBytes(before), File.ReadAllBytes(after))
+                    : File.ReadAllBytes(before).SequenceEqual(File.ReadAllBytes(after)));
             }
             FeatureLedgerEvidence.WriteJson(Path.Combine(folder, "dialogs.json"), values);
             FeatureLedgerEvidence.WriteJson(Path.Combine(folder, "injections.json"), trace);
@@ -205,11 +207,11 @@ internal static partial class Program
                 new FeatureLedgerEvidence.Proof("native", "test", nameof(CurationFileCommand), "native curation " + group + " file bytes " + language, Path.Combine(output, "files.log"), "") }).ToList()));
         if (coreProved) receipts.Add(new("no-decoy", selected.Single(row => row.Source == "FamilyQuant/FamilyQuantFile.cs").Kind,
             new() { new("native", "test", nameof(CurationFileCommand), "native no-decoy engine files and refusal agree", Path.Combine(output, "files.log"), "") }));
-        var rows = selected.Select(row => new FeatureLedgerEvidence.Row(row.Id, mappings, new(), "Native attached CSV screen route and actual frozen/current files in two cultures.",
+        var rows = selected.Select(row => new FeatureLedgerEvidence.Row(row.Id, mappings, new(), "Native attached CSV screen route and actual frozen/current files in two cultures. D95 changes only the composition basis phrase to measured de novo envelope; every other byte must match.",
             row.Source == "FamilyQuant/FamilyQuantFile.cs" ? "no-decoy" : row.Line is 642 or 643 ? "protein" : "composition",
             row.Source + ":" + row.Line.ToString(CultureInfo.InvariantCulture) + " " + row.Detail
                 + (row.Source == "FamilyQuant/FamilyQuantFile.cs" ? "; actual frozen/current engine FCF writes, retained data equality and exact target-only rejection message."
-                    : "; native exact filter/default filename, cancelled destination preserved, accepted CSV bytes equal."))).ToList();
+                    : "; native exact filter/default filename, cancelled destination preserved, accepted CSV bytes equal after the D95 composition basis text update."))).ToList();
         string ledgerSnapshot = Path.Combine(output, "cohort-ledger.md"); File.Copy(Path.Combine(root, "docs/FEATURE-LEDGER.md"), ledgerSnapshot);
         var currentStates = File.ReadAllLines(ledgerSnapshot).Where(line => line.StartsWith("| FQ15-", StringComparison.Ordinal))
             .Select(line => line.Split('|').Select(cell => cell.Trim()).ToArray()).ToDictionary(cells => cells[1], cells => cells[7], StringComparer.Ordinal);
@@ -218,7 +220,7 @@ internal static partial class Program
                 .Select(row => new { Row = row, Reason = "Not executed by this curation/engine packet; retains the earlier OPEN wording/reason decision entry." }).ToArray() });
         File.Copy(Path.Combine(audit, "mapping.json"), Path.Combine(output, "cohort-mapping.json"));
         File.Copy(Path.Combine(audit, "report.json"), Path.Combine(output, "cohort-report.json"));
-        string[] sources = mappings.Select(item => item.Path).Concat(new[] { "FamilyQuant.Tests/Program.CurationFileContracts.cs", "FamilyQuant.Tests/Program.SecondaryInjectedMethod.cs",
+        string[] sources = mappings.Select(item => item.Path).Concat(new[] { "FamilyQuant.Tests/Program.CurationFileContracts.cs", "FamilyQuant.Tests/Program.CurationCsvBasis.cs", "FamilyQuant.Tests/Program.SecondaryInjectedMethod.cs",
             "FamilyQuant.Tests/Program.Commands.SecondaryLedger.cs" }).ToArray();
         foreach (string source in sources)
         { string target = Path.Combine(output, "executed", source); Directory.CreateDirectory(Path.GetDirectoryName(target)!); File.Copy(Path.Combine(root, source), target); }

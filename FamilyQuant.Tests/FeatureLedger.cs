@@ -14,7 +14,7 @@ namespace FamilyQuant.Tests;
 
 // A development inventory, never a producer of scientific results. Scan the frozen source,
 // not the moving 2.0 views. Keep observations separate from their acceptance evidence.
-internal static class FeatureLedger
+internal static partial class FeatureLedger
 {
     internal const string ReferenceCommit = "e9b73064d8ff19b2fde3e3231240b636a64c0a91";
     internal const string ReferenceInventorySha256 = "B7B572E352CB394AD46CB4D7CE04394929A7462F8E0326A48635FC61EA871000";
@@ -223,7 +223,12 @@ internal static class FeatureLedger
 
     // Frozen source ranges identify the two approved UI subtrees and their exclusive view handlers.
     // Static extraction/partition engines, shared state, test seams and explanatory science stay KEEP.
-    internal static bool IsApprovedDrop(Observation row) => row.Source switch
+    internal static bool IsApprovedDrop(Observation row) => ApprovedDropText(row) != null;
+
+    internal static string? ApprovedDropText(Observation row) => ApprovedDrops2114.TryGetValue(row.Id, out string? text)
+        ? text : IsApprovedLegacyDrop(row) ? DropApproval : null;
+
+    private static bool IsApprovedLegacyDrop(Observation row) => row.Source switch
     {
         "FamilyQuant/DeNovoControl.xaml" => row.Line is >= 314 and <= 388 or >= 506 and <= 605,
         "FamilyQuant/DeNovoControl.xaml.cs" => row.Line is >= 798 and <= 834 or >= 1291 and <= 1344
@@ -263,7 +268,7 @@ internal static class FeatureLedger
             bool drop = IsApprovedDrop(row);
             md.AppendLine("| " + row.Id + " | " + (drop ? "DROP" : improve ? "IMPROVE" : "KEEP") + " | " + row.Kind + " | " +
                 row.Source + ":" + row.Line + " | " + Escape(row.Detail) + " | " + CheckFor(row) +
-                (drop ? " | APPROVED_DROP | " + DropApproval + " |" : " | OPEN | pending |"));
+                (drop ? " | APPROVED_DROP | " + ApprovedDropText(row) + " |" : " | OPEN | pending |"));
         }
         return md.ToString().Replace("\r\n", "\n");
     }
@@ -358,7 +363,7 @@ internal static class FeatureLedger
             if (row.Length != 10) { errors.Add("Malformed row."); continue; }
             if (!byId.TryGetValue(row[1], out Observation? observation)) { errors.Add("Unknown ID: " + row[1]); continue; }
             if (row[2] is not ("KEEP" or "IMPROVE" or "DROP") ||
-                row[2] == "DROP" && (!IsApprovedDrop(observation) || row[8] != DropApproval))
+                row[2] == "DROP" && (!IsApprovedDrop(observation) || row[8] != ApprovedDropText(observation)))
                 errors.Add("Disposition requires Paulo: " + row[1]);
             if (IsApprovedDrop(observation) && row[2] != "DROP") errors.Add("Paulo's retirement decision is missing: " + row[1]);
             if (row[3] != observation.Kind || row[4] != observation.Source + ":" + observation.Line || row[5] != Escape(observation.Detail))

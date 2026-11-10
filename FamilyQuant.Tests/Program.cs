@@ -539,6 +539,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => ThemePreferenceTests(workDir));
             suite.Section("Feature ledger - frozen source inventory and explicit preservation checks");
             suite.Add(() => LedgerDiagnosticTests());
+            suite.Add(() => { if (FeatureLedgerReady()) LedgerDrops2114Tests(); });
+            suite.Add(() => CurationCsvBasisTests());
             suite.Add(() => FeatureLedgerBaseTests());
             for (int mutation = 0; mutation < FeatureLedgerMutations; mutation++)
             {

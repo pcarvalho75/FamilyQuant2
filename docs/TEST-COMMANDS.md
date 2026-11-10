@@ -134,5 +134,7 @@ receipt guard, the receipt fixtures, the import batch, shell metadata, message f
 shards share them; `FeatureLedgerTests()` still runs them all, in the same order, for `--feature-ledger-check`.
 With `FAMILYQUANT_LEDGER_RECEIPTS=release-only`, the ordinary suite skips the receipt-currency checks: validation
 leaves out the "Verified row lacks a current executed receipt" test and the receipt load it needs, and two
+For a metadata-only release guard diagnosis, `--feature-ledger-release-check --guard-only` checks the ledger and D90 list without loading receipt artifacts or running native preservation checks. It reports those omissions explicitly and does not replace the full release gate.
+
 SKIP lines name what was left out. Every other ledger guard runs. `--feature-ledger-release-check` always
 checks receipts, whatever the variable says. Unset, nothing changes.

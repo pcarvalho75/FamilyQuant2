@@ -245,6 +245,7 @@ internal static partial class Program
     private static bool MatchesCommand022(string[] args) => args.Length > 0 && args[0] == "--feature-ledger-release-check";
     private static int RunCommand022(string[] args, string workDir)
     {
+        if (args.Length == 2 && args[1] == "--guard-only") return FeatureLedgerReleaseGuardCheck();
         return FeatureLedgerTests(release: true);
 
     }
