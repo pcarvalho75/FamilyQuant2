@@ -449,6 +449,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-html-mass-quality", "FamilyQuant.Tests.Program.HtmlMassQualityTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-recovery-explanations", "FamilyQuant.Tests.Program.HtmlRecoveryExplanationTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-ring-bases", "FamilyQuant.Tests.Program.HtmlRingBasesTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-report-words", "FamilyQuant.Tests.Program.HtmlReportWordsTests(System.String)"),
         SuiteCommandRule.Covered("--test-database-entry-counts", "FamilyQuant.Tests.Program.DatabaseEntryCountTests(System.String)"),
         SuiteCommandRule.Covered("--test-assignment-presence-copies", "FamilyQuant.Tests.Program.AssignmentPresenceCopyTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-database-entries", "FamilyQuant.Tests.Program.HtmlDatabaseEntryTests()"),

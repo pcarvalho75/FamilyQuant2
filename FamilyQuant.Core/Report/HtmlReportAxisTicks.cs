@@ -12,12 +12,12 @@ public static class HtmlReportAxisTicks
 
     internal static (string Label, string Unit, string Scale) Definition(string id) => id switch
     {
-        "mean" => ("Mean ion current share", "%", "log"),
-        "peptides" => ("Peptides", "", "log"),
+        "mean" => ("Mean share of credited family signal", "%", "log"),
+        "peptides" => ("Distinct observed sequences", "", "log"),
         "proteins" => ("Protein estimate (greedy)", "", "log"),
-        "uniqueProteins" => ("Proteins with own peptide", "", "log"),
-        "sd" => ("Run-to-run SD", "pp", "linear"),
-        "cv" => ("CV", "%", "linear"),
+        "uniqueProteins" => ("Proteins with own sequence", "", "log"),
+        "sd" => ("Run SD of credited-family share (pp)", "pp", "linear"),
+        "cv" => ("CV of credited-family mean share", "%", "linear"),
         "databaseEntries" => ("Database entries", "", "log"),
         "databaseGap" => ("Database gap fraction", "fraction", "log"),
         _ => throw new ArgumentException("Unknown dot measure.", nameof(id)),
@@ -33,6 +33,18 @@ public static class HtmlReportAxisTicks
         string[] path = source.Property.Split('/');
         if (!Known(path[0])) return false;
         var definition = Definition(path[0]);
+        if (source.Kind == "basis-axis-label")
+        {
+            if (path.Length != 2 || path[0] is not ("mean" or "sd") || source.Format != null) return false;
+            string? name = path[1] switch
+            {
+                "identifiedOnly" => "PSM only", "identifiedAndDeNovo" => "PSM and de novo",
+                "detectorEnvelopes" => "detector envelopes", "tic" => "TIC", _ => null,
+            };
+            if (name == null) return false;
+            field = new(path[0] == "mean" ? "Mean share of " + name + " (%)" : "Run SD of " + name + " (pp)", null, "", source);
+            return true;
+        }
         if (source.Kind == "axis-label")
         {
             if (path.Length != 1 || source.Format != null) return false;

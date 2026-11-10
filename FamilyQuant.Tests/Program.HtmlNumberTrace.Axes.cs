@@ -26,7 +26,7 @@ internal static partial class Program
             ["axisLabel"] = new("Protein estimate (greedy)", null, "", new() { Kind = "axis-label", Property = "proteins" }),
             ["axisTick"] = new("1000", 1000, "", new() { Kind = "axis-tick", Property = "proteins/log10/3", Format = "axis-plain" }),
             ["sdValue"] = new("0.2", .2, "pp", new() { Kind = "word-cell", Table = 1, Row = 2, Column = 3 }),
-            ["sdLabel"] = new("Run-to-run SD", null, "", new() { Kind = "axis-label", Property = "sd" }),
+            ["sdLabel"] = new("Run SD of credited-family share (pp)", null, "", new() { Kind = "axis-label", Property = "sd" }),
             ["sdTick"] = new("0.03", .01 * 3, "pp", new() { Kind = "axis-tick", Property = "sd/linear/-2/3", Format = "axis-plain" }),
             ["sdZero"] = new("0", 0, "pp", new() { Kind = "axis-tick", Property = "sd/linear/-1/0", Format = "axis-plain" }),
             ["sdNoisy"] = new("0.3", .1 * 3, "pp", new() { Kind = "axis-tick", Property = "sd/linear/-1/3", Format = "axis-plain" }),
