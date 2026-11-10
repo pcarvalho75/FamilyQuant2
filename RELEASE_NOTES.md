@@ -12,7 +12,7 @@ in [the catalog](docs/INDEX.md). No historical version heading is changed by thi
 - **A simpler program.** **Review grouping** opens in a Simple view with the essentials, and **Show all options** opens the rest. Results shows one family chart in percent of all peptide features, with its Top N choice right above it. All exports are in one window, **File > Export**; Screen figures (PNG) and the Presentation evidence pack are gone, since the figures live in the HTML report.
 - **Smaller fixes.** The recovery chart shows M+0 and the measured envelope with the real isotope range. Quantify warns when a run has no de novo calls. New projects start at isotope ceiling 6. **Import family list** appears as an optional first step of the guided order.
 
-**Feature ledger.** @VERIFIED@ checks proved for 2.1.14; 110 rows retired by Paulo's decisions of 9 November; @REOPENED@ rows changed on purpose by this release are open to verify again after release, listed in [docs/LEDGER-REVERIFY-2.1.14.md](docs/LEDGER-REVERIFY-2.1.14.md).
+**Feature ledger.** 1,990 checks proved for 2.1.14; 110 rows retired by Paulo's decisions of 9 November; 146 rows changed on purpose by this release are open to verify again after release, listed in [docs/LEDGER-REVERIFY-2.1.14.md](docs/LEDGER-REVERIFY-2.1.14.md).
 
 ## 2.1.13 (published 2026-11-09)
 
