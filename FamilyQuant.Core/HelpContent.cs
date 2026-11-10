@@ -76,6 +76,10 @@ namespace FamilyQuant
             sb.AppendLine("peptide's full isotope envelope straight from the RAW and stores it in that project,");
             sb.AppendLine("and the Results screen then reads the recovery from it. An old Family Cluster File");
             sb.AppendLine("(.fcf) still opens, with the quantitation empty until it is computed.");
+            sb.AppendLine("In the HTML report, Signal recovery and Database gap draw interactive charts from");
+            sb.AppendLine("the same stored readings as the program. Hover, focus or select a bar or value for");
+            sb.AppendLine("its exact reading and reference total; All exact readings opens a printable table.");
+            sb.AppendLine("These charts keep their named bases when Normalize to changes. Word keeps its pictures.");
             sb.AppendLine();
 
             sb.AppendLine("WHAT THE PERCENTAGE IS OF (THE DENOMINATOR)");

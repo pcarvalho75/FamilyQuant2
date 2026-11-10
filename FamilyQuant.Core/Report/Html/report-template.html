@@ -1447,6 +1447,52 @@
           border: 1px solid var(--edge);
         }
       }
+      /* U3a begin */
+      .u3a-card { padding: 22px; border: 1px solid var(--edge); border-radius: var(--radius); background: var(--surface); min-width: 0; }
+      .u3a-card h3 { margin: 0 0 4px; font-size: 1.25rem; }
+      .u3a-card.recovery, .u3a-card.gap { grid-column: 1 / -1; }
+      .u3a-basis { color: var(--muted); font-size: .86rem; margin: 0 0 18px; }
+      .u3a-legend { display: flex; gap: 8px 18px; flex-wrap: wrap; margin: 12px 0; font-size: .82rem; color: var(--muted); }
+      .u3a-key { display: inline-flex; align-items: center; gap: 6px; }
+      .u3a-key i { width: 11px; height: 11px; border-radius: 3px; background: var(--u3a-color); }
+      .u3a-run { border-top: 1px solid var(--edge); padding: 16px 0; min-width: 0; }
+      .u3a-run.pooled { background: var(--input); border-radius: 10px; padding: 16px 12px; margin-top: 8px; }
+      .u3a-run-head, .u3a-reading-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 16px; }
+      .u3a-run-name { margin: 0 0 10px; font-size: .98rem; overflow-wrap: anywhere; }
+      .u3a-reading { margin: 9px 0; min-width: 0; }
+      .u3a-reading-meta { font-size: .84rem; margin-bottom: 3px; }
+      .u3a-reading-meta > span { overflow-wrap: anywhere; }
+      .u3a-value { padding: 1px 0; border: 0; border-radius: 3px; background: transparent; color: var(--accent); font-variant-numeric: tabular-nums; text-align: right; flex-shrink: 0; }
+      .u3a-value:hover { text-decoration: underline; }
+      .u3a-svg { width: 100%; height: 20px; display: block; overflow: visible; }
+      .u3a-track { fill: var(--subtle); }
+      .u3a-mark { cursor: pointer; }
+      .u3a-mark:focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+      .u3a-tic-line { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+      .u3a-missing { fill: none; stroke: var(--muted); stroke-dasharray: 5 4; }
+      .u3a-caption { color: var(--muted); font-size: .84rem; margin-bottom: 0; }
+      .u3a-notes { display: grid; gap: 10px; margin: 15px 0; }
+      .u3a-note { display: flex; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 8px; background: var(--input); font-size: .88rem; }
+      .u3a-note small { display: block; color: var(--muted); }
+      .u3a-details { margin-top: 16px; font-size: .86rem; }
+      .u3a-details summary { cursor: pointer; color: var(--accent); }
+      .u3a-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin-top: 12px; }
+      .u3a-table th, .u3a-table td { padding: 8px 6px; border-bottom: 1px solid var(--edge); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+      .u3a-table th:nth-child(1), .u3a-table th:nth-child(2) { width: 25%; }
+      .u3a-table small { display: block; color: var(--muted); }
+      @media (max-width: 600px) {
+        .u3a-card { padding: 16px; }
+        .u3a-run-head { display: block; }
+        .u3a-reading-meta { align-items: flex-start; gap: 8px; }
+        .u3a-reading-meta > span { max-width: 70%; }
+      }
+      @media print {
+        .u3a-card { break-inside: auto; box-shadow: none; margin-bottom: 16px; }
+        .u3a-run { break-inside: avoid; }
+        .u3a-value { color: var(--ink); }
+        .u3a-details summary { display: none; }
+      }
+      /* U3a end */
     </style>
     <style>
       .rank-row {
@@ -5234,7 +5280,7 @@
               node("p", "chart-legend", "Each bar shows the family signal credited in one run. Its percentage uses that run's whole measured signal as the denominator; runs are shown separately, with no averaging or whiskers." + fixedBaseLegend),
             );
             const gap = $("gap-panel");
-            gap.append(node("h3", "", "Database gap"));
+            gap.append(node("h3", "", "Share of measured peptide feature signal"));
             const rows = (data.databaseGap || []).filter(
               (r) => exists(r.name) && val(r.fraction) !== null,
             );
@@ -5243,11 +5289,11 @@
                 track = node("div", "gap-track"),
                 fill = node("div", "gap-fill");
               fill.style.background = "var(--s3)";
-              const v = val(r.fraction);
-              if (v !== null && v >= 0 && v <= 1)
-                fill.style.width = v * 100 + "%";
+              const percent = r.percent || (fields[r.fraction]?.unit === "%" ? r.fraction : null), v = val(percent);
+              if (v !== null && v >= 0 && v <= 100)
+                fill.style.width = v + "%";
               track.append(fill);
-              const value = metric(r.fraction);
+              const value = percent ? metric(percent) : node("span", "", "percentage not available");
               value.className = "gap-value metric-button";
               row.append(field(r.name), track, value);
               gap.append(row);
@@ -5256,7 +5302,7 @@
               node(
                 "p",
                 "chart-legend",
-                "Bars show the stored database-gap fractions with evidence pooled across runs. Each row uses its own recorded reference total, so compare rows only when those totals agree; no run-to-run whiskers are drawn." + fixedBaseLegend,
+                "The reference total is all measured peptide feature signal, identified and de novo, each counted once. These percentages pool the recorded runs; they are not run means and have no whiskers." + fixedBaseLegend,
               ),
             );
             if (rows.length) {
@@ -5265,15 +5311,16 @@
                 "quiet-button",
                 "Read the gap comparisons",
               );
+              b.title = "Show every stored gap comparison as a percentage of measured peptide feature signal. This opens details without changing the project.";
               b.onclick = () => {
                 const dl = node("dl");
                 for (const r of rows)
-                  dl.append(field(r.name, "dt"), field(r.fraction, "dd"));
+                  dl.append(field(r.name, "dt"), r.percent ? field(r.percent, "dd") : node("dd", "", "Percentage not available"));
                 popup("Database gap", [
                   node(
                     "p",
                     "",
-                    "Read each fraction against its own reference total.",
+                    "Each percentage uses all measured peptide feature signal, identified and de novo, as its reference total.",
                   ),
                   dl,
                 ]);
@@ -5283,7 +5330,158 @@
             host.hidden = !runs.length;
             gap.hidden = !rows.length;
             $("evidence-section").hidden = host.hidden && gap.hidden;
+            renderU3aSignalCharts();
           }
+          /* U3a begin */
+          function u3aColor(key) {
+            return ({ identified: "var(--s1)", denovo: "var(--s3)", world: "var(--s4)",
+              m0: "var(--s6)", measured: "var(--s1)", detector: "var(--s2)", tic: "var(--s5)",
+              combined: "var(--s4)" })[key] || "var(--s1)";
+          }
+          function u3aDescription(value) {
+            if (!Number.isFinite(value.value)) return value.unavailableReason || "This reading is not available.";
+            return value.label + ": " + value.exact + (value.unit === "area" ? " signal area" : "")
+              + "; reference: " + value.basis + ".";
+          }
+          function u3aPopup(value, run) {
+            const details = node("dl");
+            for (const [label, text] of [["Reading", value.exact], ["Reference", value.basis],
+              ["Signal area", value.areaText], ["Reference total area", value.referenceText], ["Availability", value.unavailableReason]])
+              if (text !== null && text !== undefined && text !== "") details.append(node("dt", "", label), node("dd", "", text));
+            popup(value.label, [node("p", "", run), details]);
+          }
+          function u3aHover(value, run, anchor) {
+            const tip = $("chart-hover"), box = anchor.getBoundingClientRect();
+            tip.replaceChildren(node("strong", "", run), node("p", "", u3aDescription(value)));
+            tip.hidden = false;
+            tip.style.left = Math.max(12, Math.min(innerWidth - tip.offsetWidth - 12, box.left)) + "px";
+            tip.style.top = Math.max(12, Math.min(innerHeight - tip.offsetHeight - 12, box.bottom + 7)) + "px";
+          }
+          function u3aInteraction(element, value, run) {
+            element.setAttribute("aria-label", run + ": " + u3aDescription(value) + " Show exact reading.");
+            element.setAttribute("aria-describedby", "chart-hover");
+            element.onpointerenter = () => u3aHover(value, run, element);
+            element.onfocus = () => u3aHover(value, run, element);
+            element.onpointerleave = element.onblur = () => { $("chart-hover").hidden = true; };
+            element.onclick = () => { $("chart-hover").hidden = true; u3aPopup(value, run); };
+            element.onkeydown = event => {
+              if (event.key === "Escape") { $("chart-hover").hidden = true; return; }
+              if (element.tagName.toLowerCase() !== "button" && (event.key === "Enter" || event.key === " ")) {
+                event.preventDefault(); element.onclick();
+              }
+            };
+          }
+          function u3aMetric(value, run) {
+            const button = node("button", "u3a-value", value.text);
+            button.type = "button";
+            button.title = u3aDescription(value) + " Open the exact reading without changing the project.";
+            button.dataset.nativeValue = Number.isFinite(value.value) ? value.value : "";
+            button.dataset.nativeKey = value.key;
+            u3aInteraction(button, value, run);
+            return button;
+          }
+          function u3aBars(parts, maximum, run, stacked, percent) {
+            const plot = svg("svg", { viewBox: "0 0 1000 20", preserveAspectRatio: "none", class: "u3a-svg",
+              role: "group", "aria-label": run + (stacked ? ": signal components" : ": signal reading") });
+            plot.append(svg("rect", { x: 0, y: 0, width: 1000, height: 20, rx: 4, class: "u3a-track" }));
+            let left = 0;
+            for (const value of parts) {
+              const valid = Number.isFinite(value.value),
+                width = valid ? Math.max(0, value.value / (maximum > 0 ? maximum : 1) * 1000) : 0,
+                group = svg("g", { tabindex: 0, role: "button", class: "u3a-mark" });
+              group.dataset.nativeKey = value.key;
+              group.dataset.nativeValue = valid ? value.value : "";
+              const title = svg("title"); title.textContent = u3aDescription(value) + " Open the exact reading without changing the project."; group.append(title);
+              group.append(svg("rect", valid ? { x: left, y: 1, width, height: 18, rx: 3, fill: u3aColor(value.key) }
+                : { x: 1, y: 1, width: 998, height: 18, rx: 3, class: "u3a-missing" }));
+              u3aInteraction(group, value, run); plot.append(group);
+              // Position only. All scientific values, including totals and percentages, are supplied by the program.
+              if (stacked) left += width;
+            }
+            if (percent && maximum >= 100) plot.append(svg("line", { x1: 100 / maximum * 1000, x2: 100 / maximum * 1000,
+              y1: -2, y2: 22, class: "u3a-tic-line", "aria-hidden": "true" }));
+            return plot;
+          }
+          function u3aTable(chart) {
+            const details = node("details", "u3a-details"), summary = node("summary", "", "All exact readings");
+            summary.title = "Show the exact program readings and the reference total for each row. This changes only the report view.";
+            const table = node("table", "u3a-table"), head = node("thead"), titles = node("tr"), body = node("tbody");
+            for (const label of ["Run or family", "Reading", "Exact value and reference"]) {
+              const cell = node("th", "", label); cell.scope = "col";
+              cell.title = label === "Exact value and reference" ? "The unrounded program reading and its named signal base. Selecting text changes no stored result."
+                : "Names the stored run, family or reading represented in this row. Selecting text changes no stored result.";
+              titles.append(cell);
+            }
+            head.append(titles);
+            for (const row of [...(chart.rows || []), { name: "All runs pooled", parts: chart.notes || [] }])
+              for (const value of [...row.parts, ...(row.details || []), ...(row.total ? [row.total] : [])]) {
+                const line = node("tr"), reading = node("td");
+                reading.append(node("span", "", value.exact), node("small", "", value.basis));
+                if (value.unavailableReason) reading.append(node("small", "", value.unavailableReason));
+                line.append(node("td", "", row.name), node("td", "", value.label), reading); body.append(line);
+              }
+            table.append(head, body); details.append(summary, table); return details;
+          }
+          function renderU3aSignalCharts() {
+            const charts = data.signalCharts || [], recovery = $("recovery-figures"), gap = $("gap-figures");
+            for (const chart of charts) {
+              const card = node("section", "u3a-card " + chart.kind), legend = node("div", "u3a-legend");
+              card.dataset.nativeChart = chart.id;
+              card.append(node("h3", "", chart.kind === "gap" ? "Signal sources by family" : chart.title), node("p", "u3a-basis", chart.basis));
+              const keys = new Set();
+              for (const row of chart.rows || [])
+                for (const value of row.parts)
+                  if (!keys.has(value.key)) {
+                    keys.add(value.key); const key = node("span", "u3a-key"), chip = node("i");
+                    chip.style.setProperty("--u3a-color", u3aColor(value.key)); chip.setAttribute("aria-hidden", "true");
+                    key.append(chip, document.createTextNode(value.label)); legend.append(key);
+                  }
+              card.append(legend);
+              for (const row of chart.rows || []) {
+                const host = node("div", "u3a-run" + (row.isPooled ? " pooled" : "")), heading = node("div", "u3a-run-head");
+                host.dataset.nativeRun = row.name;
+                heading.append(node("h4", "u3a-run-name", row.name));
+                if (row.total) heading.append(u3aMetric(row.total, row.name));
+                host.append(heading);
+                if (chart.kind === "by-run" || chart.kind === "gap") {
+                  host.append(u3aBars(row.parts, chart.maximum, row.name, true, chart.kind === "by-run"));
+                  for (const value of row.parts) {
+                    const label = node("div", "u3a-reading-meta");
+                    label.append(node("span", "", value.label), u3aMetric(value, row.name)); host.append(label);
+                  }
+                } else for (const value of row.parts) {
+                  const reading = node("div", "u3a-reading"), label = node("div", "u3a-reading-meta");
+                  label.append(node("span", "", value.label), u3aMetric(value, row.name));
+                  reading.append(label, u3aBars([value], chart.maximum, row.name, false, true)); host.append(reading);
+                }
+                card.append(host);
+              }
+              if ((chart.notes || []).length) {
+                const notes = node("div", "u3a-notes");
+                for (const value of chart.notes) {
+                  const line = node("div", "u3a-note"), label = node("span", "", value.label);
+                  label.append(node("small", "", value.basis)); line.append(label, u3aMetric(value, "All runs pooled")); notes.append(line);
+                }
+                card.append(notes);
+              }
+              if (!(chart.rows || []).length) card.append(node("p", "fine-print", "No native readings are included for this chart."));
+              card.append(node("p", "u3a-caption chart-legend", chart.legend + fixedBaseLegend));
+              if ((chart.rows || []).length) card.append(u3aTable(chart));
+              (chart.kind === "gap" ? gap : recovery).append(card);
+            }
+            if (!charts.some(chart => chart.kind !== "gap")) recovery.append(node("p", "fine-print", "No interactive recovery chart data are included in this report."));
+            if (!charts.some(chart => chart.kind === "gap")) gap.append(node("p", "fine-print", "No interactive Database gap chart data are included in this report."));
+          }
+          let u3aPrintDetails = [];
+          window.addEventListener("beforeprint", () => {
+            u3aPrintDetails = [...document.querySelectorAll(".u3a-details")].map(element => [element, element.open]);
+            for (const [element] of u3aPrintDetails) element.open = true;
+          });
+          window.addEventListener("afterprint", () => {
+            for (const [element, open] of u3aPrintDetails) element.open = open;
+            u3aPrintDetails = [];
+          });
+          /* U3a end */
           function help(id, title, body) {
             $(id).onclick = () => popup(title, [node("p", "", body)]);
           }
@@ -5327,6 +5525,7 @@
           for (const figure of data.results || []) {
             const id = figure.sourceFigureId || "";
             if (id.startsWith("figure:family_contribution")) continue;
+            if (/recovery|signal_by_run|signal_uplift|database_gap/.test(id)) continue; // U3a: never substitute pictures in these tabs.
             const kind = /xic_by_mass|isotopes_credited|percent_ion_current_by_mass/.test(id) ? "mass"
               : /recovery|signal_by_run|signal_uplift/.test(id) ? "recovery"
               : /database_gap/.test(id) ? "gap" : "family";

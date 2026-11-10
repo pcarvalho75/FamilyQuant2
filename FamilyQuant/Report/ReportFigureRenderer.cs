@@ -13,7 +13,10 @@ namespace FamilyQuant.Report;
 
 public sealed record ReportChart(string SectionId, string FileName, string Title, string Caption,
     Func<FrameworkElement> CreateChart, double Width = ChartImageExporter.DefaultLayoutWidth,
-    double Height = ChartImageExporter.DefaultLayoutHeight, FigureCaptionInput? CaptionInput = null);
+    double Height = ChartImageExporter.DefaultLayoutHeight, FigureCaptionInput? CaptionInput = null)
+{
+    public HtmlSignalChart? SignalChart { get; init; } // U3a: snapshot the already created native chart.
+}
 public sealed record ReportFigureAvailability(string SectionId, string Title, string Reason)
 {
     public bool SupplementOnly { get; init; }
@@ -59,7 +62,8 @@ public static class ReportFigureRenderer
             if (reportGrouping != null && native is FamilyContributionChart or FamilySignalShareChart or ReportFamilySourceSequenceChart or DatabaseGapChart or ReportFamilyWorldRatesChart)
                 input = input with { Notes = (input.Notes ?? Array.Empty<string>()).Append(
                     "Only canonical report members are shown individually. Others member details remain in the supplement; stored values and original denominators are unchanged").ToArray() };
-            charts.Add(new(section, file, title, ReportCaptionBuilder.Figure(input), factory, CaptionInput: input));
+            charts.Add(new(section, file, title, ReportCaptionBuilder.Figure(input), factory, CaptionInput: input)
+                { SignalChart = HtmlSignalRecoveryData.Read(native, "figure:" + file, title) });
         }
         void Missing(string section, string title, string reason = "Not computed in this project.") => unavailable.Add(new(section, title, reason));
         Add(ReportSectionIds.Quality, AnalyticsFigures.XicByMassFile, "Extracted signal by mass",
@@ -339,7 +343,8 @@ public static class ReportFigureRenderer
                     variant: ChartPaletteVariant.Light);
                 string caption = captions != null && captions.TryGetValue(chart.FileName, out string? text) ? text : chart.Caption;
                 return new ReportPlacedFigure(chart.SectionId, new("figure:" + chart.FileName, chart.Title, File.ReadAllBytes(path), caption,
-                    (int)Math.Round(chart.Width * ChartImageExporter.DefaultScale), (int)Math.Round(chart.Height * ChartImageExporter.DefaultScale)));
+                    (int)Math.Round(chart.Width * ChartImageExporter.DefaultScale), (int)Math.Round(chart.Height * ChartImageExporter.DefaultScale))
+                    { SignalChart = chart.SignalChart });
             }).ToArray();
         }
         finally { CultureInfo.CurrentCulture = culture; CultureInfo.CurrentUICulture = ui; }
