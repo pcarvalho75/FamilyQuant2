@@ -60,7 +60,7 @@ No signing or third-party installer tooling is used.
 current user's `%LOCALAPPDATA%\Temp`:
 
 ```powershell
-FamilyQuant.Tests.exe --test-setup-native <built-Setup.exe> <fresh-LocalAppData-Temp-root> 2.1.14.0
+FamilyQuant.Tests.exe --test-setup-native <built-Setup.exe> <fresh-LocalAppData-Temp-root> 2.1.15.0
 ```
 
 That command always passes `/test-mode /silent /test-root=<root> /dir=<root>/app` (plus an owned
