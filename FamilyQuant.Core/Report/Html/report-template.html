@@ -1526,6 +1526,33 @@
       @media (max-width: 520px) { .u3b-chart { padding: 14px; } .u3b-row { grid-template-columns: 1fr; gap: 5px; } .u3b-chart h3 { font-size: 1.05rem; } }
       @media print { .u3b-chart { break-inside: avoid; border-radius: 0; } .u3b-row-bar { border-color: var(--edge); } }
       /* U3b end */
+      /* U5 begin */
+      .u3a-svg .u3a-track { fill: var(--input); stroke: var(--edge); stroke-width: 1; vector-effect: non-scaling-stroke; }
+      .u3a-svg .u3a-mark rect { stroke: none; }
+      .u3a-svg .u3a-mark .u3a-missing { stroke: var(--edge); }
+      .u3a-svg .u3a-mark[data-native-key="tic"] rect { fill: var(--muted); opacity: .3; }
+      .u3a-key[data-native-key="tic"] i { background: var(--muted); opacity: .3; }
+      .u3a-svg .u3a-tic-line { stroke: var(--edge); vector-effect: non-scaling-stroke; }
+      .u3a-card.gap .u3a-reading-meta { align-items: flex-start; }
+      .u3a-card.gap .u3a-value { flex-shrink: 1; overflow-wrap: anywhere; }
+      .u5-guide { margin: 18px 0 24px; padding: 24px; border: 1px solid var(--edge); border-radius: var(--radius); background: var(--surface); }
+      .u5-guide h3 { margin: 0 0 10px; font-size: 1.25rem; }
+      .u5-guide h4 { margin: 0 0 6px; font-size: .96rem; }
+      .u5-guide p { margin: 0 0 12px; line-height: 1.6; font-size: .9rem; color: var(--ink); }
+      .u5-guide p:last-child { margin-bottom: 0; }
+      .u5-definitions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 28px; margin-top: 20px; }
+      .u5-definition { border-left: 3px solid var(--edge); padding-left: 14px; min-width: 0; }
+      .u5-gap { margin: 18px 0; }
+      .u5-base { padding-top: 16px; border-top: 1px solid var(--edge); font-size: .9rem; }
+      @media (max-width: 600px) {
+        .u5-guide { padding: 16px; }
+        .u5-definitions { grid-template-columns: 1fr; gap: 18px; }
+        .u3a-card.gap .u3a-reading-meta { display: block; margin-top: 8px; }
+        .u3a-card.gap .u3a-reading-meta > span { max-width: none; display: block; }
+        .u3a-card.gap .u3a-value { max-width: 100%; text-align: left; }
+      }
+      @media print { .u5-guide { break-inside: auto; } .u5-definition, .u5-gap { break-inside: avoid; } }
+      /* U5 end */
     </style>
     <style>
       .rank-row {
@@ -3146,26 +3173,65 @@
         </section>
         </div>
         <div class="report-panel" id="panel-recovery" role="tabpanel" aria-labelledby="tab-recovery" tabindex="0" hidden>
+          <div class="section-title">
+            <h2 id="evidence-title">Signal recovery</h2>
+            <button class="info" id="signal-info" aria-label="Explain signal recovery readings and gaps">i</button>
+          </div>
+        <section class="u5-guide" id="u5-readings">
+          <h3>Four readings, one reference total</h3>
+          <p>Each reading below is a percentage of that run's recorded total ion current (TIC). They are different views of the signal and should not be added together.</p>
+          <p>A <strong>peptide feature</strong> is one peptide at one charge in one elution peak, counted once. Another charge or elution peak is a separate feature.</p>
+          <div class="u5-definitions">
+            <div class="u5-definition" data-reading="m0">
+              <h4>M+0 only</h4>
+              <p>The first, monoisotopic peak of the identified and de novo peptide features, divided by the run's TIC. Heavier isotope peaks of those same features are left out of this reading.</p>
+            </div>
+            <div class="u5-definition" data-reading="measured">
+              <h4>Measured envelope of the peptide features</h4>
+              <p>The measured isotope peaks of those same features, including M+0, divided by the run's TIC. The bar label gives the recorded isotope limit; an isotope without accepted measured signal receives no credit.</p>
+            </div>
+            <div class="u5-definition" data-reading="detector">
+              <h4>Detector isotope envelopes</h4>
+              <p>Isotope patterns found directly in the MS1 scans, with or without an accepted peptide sequence, divided by the run's TIC. This is an independent measurement with its own acceptance rules; it is not calibrated to a peptide false discovery rate (FDR).</p>
+            </div>
+            <div class="u5-definition" data-reading="tic">
+              <h4>TIC: the reference total</h4>
+              <p>The ion current recorded for the run's MS1 scans, shown as 100%. It includes signal with and without assigned peptide features.</p>
+            </div>
+          </div>
+        </section>
         <section
           class="section"
           id="evidence-section"
           aria-labelledby="evidence-title"
         >
-          <div class="section-title">
-            <h2 id="evidence-title">How much of the signal do we explain?</h2>
-            <button
-              class="info"
-              id="signal-info"
-              aria-label="About the signal denominator"
-            >
-              i
-            </button>
-          </div>
           <div class="evidence-grid">
             <div class="evidence-panel" id="signal-panel"></div>
           </div>
         </section>
         <div id="recovery-figures" class="figure-grid"></div>
+        <section class="u5-guide" id="u5-gaps">
+          <h3>How to read the gaps</h3>
+          <div class="u5-gap" data-gap="isotopes">
+            <h4>From M+0 to the measured envelope</h4>
+            <p>The increase comes from including the measured heavier isotope peaks of the same peptide features. It does not represent additional peptide identifications or newly found proteins.</p>
+          </div>
+          <div class="u5-gap" data-gap="detector">
+            <h4>Between peptide features and the detector</h4>
+            <p>The detector can find isotope patterns that did not become accepted identified or de novo peptide features. The two methods make independent selections, so subtracting their totals does not measure a validated pool of unidentified peptides.</p>
+          </div>
+          <div class="u5-gap" data-gap="tic">
+            <h4>Between the detector and TIC</h4>
+            <p>This is signal outside the detector's accepted isotope patterns. The chart alone cannot classify the whole gap as noise, non-peptide material or biological signal, and the readings are not a biological partition of TIC.</p>
+          </div>
+          <p>The readings need not form perfectly nested sets. If their order is unexpected, inspect the stored run and method; the chart preserves the recorded values. A missing TIC or detector result stays unavailable, rather than becoming a zero measurement.</p>
+          <div class="u5-base">
+            <h4>Runs, pooling and the de novo addition</h4>
+            <p>Individual runs each use their own TIC. <strong>All runs pooled</strong> divides the summed signal by the summed TIC; it is not the mean of the run percentages, and these charts have no whiskers.</p>
+            <p>In Signal recovery components, the added de novo <strong>percentage points</strong> use pooled TIC. The <strong>relative increase</strong> uses the identified envelope as its baseline, so it answers a different question: how much signal de novo adds compared with identification alone. It is unavailable when that baseline is zero.</p>
+            <p>Normalize to changes the family charts. The recovery charts keep the fixed reference totals named beside their readings; select a bar or value for the exact number and its reference total.</p>
+          </div>
+        </section>
         </div>
         <div class="report-panel" id="panel-mass" role="tabpanel" aria-labelledby="tab-mass" tabindex="0" hidden>
           <h2>Mass and isotopes</h2>
@@ -5595,7 +5661,10 @@
               track.append(fill);
               const value = percent ? metric(percent) : node("span", "", "percentage not available");
               value.className = "gap-value metric-button";
-              row.append(field(r.name), track, value);
+              const family = field(r.name);
+              family.textContent = typeof familyLabel === "function" ? familyLabel(r.name) : family.textContent;
+              family.title = typeof familyLabel === "function" ? familyLabel(r.name, true) : family.textContent;
+              row.append(family, track, value);
               gap.append(row);
             }
             gap.append(
@@ -5641,14 +5710,17 @@
           function u3aDescription(value) {
             if (!Number.isFinite(value.value)) return value.unavailableReason || "This reading is not available.";
             return value.label + ": " + value.exact + (value.unit === "area" ? " signal area" : "")
-              + "; reference: " + value.basis + ".";
+              + "; reference: " + value.basis
+              + (value.familyShare ? "; " + value.familyShare.exact + " of " + value.familyShare.basis : "") + ".";
           }
           function u3aPopup(value, run) {
             const details = node("dl");
             for (const [label, text] of [["Reading", value.exact], ["Reference", value.basis],
-              ["Signal area", value.areaText], ["Reference total area", value.referenceText], ["Availability", value.unavailableReason]])
+              ["Signal area", value.areaText], ["Reference total area", value.referenceText],
+              ["Share of this family's displayed total", value.familyShare?.exact], ["Family share availability", value.familyShare?.unavailableReason],
+              ["Availability", value.unavailableReason]])
               if (text !== null && text !== undefined && text !== "") details.append(node("dt", "", label), node("dd", "", text));
-            popup(value.label, [node("p", "", run), details]);
+            popup(value.label, [node("p", "", typeof familyLabel === "function" ? familyLabel(run, true) : run), details]);
           }
           function u3aHover(value, run, anchor) {
             const tip = $("chart-hover"), box = anchor.getBoundingClientRect();
@@ -5717,8 +5789,11 @@
               for (const value of [...row.parts, ...(row.details || []), ...(row.total ? [row.total] : [])]) {
                 const line = node("tr"), reading = node("td");
                 reading.append(node("span", "", value.exact), node("small", "", value.basis));
+                if (value.familyShare) reading.append(node("small", "", value.familyShare.exact + "; " + value.familyShare.basis));
                 if (value.unavailableReason) reading.append(node("small", "", value.unavailableReason));
-                line.append(node("td", "", row.name), node("td", "", value.label), reading); body.append(line);
+                const name = node("td", "", chart.kind === "gap" && typeof familyLabel === "function" ? familyLabel(row.name, true) : row.name);
+                name.title = chart.kind === "gap" && typeof familyLabel === "function" ? familyLabel(row.name, true) : row.name;
+                line.append(name, node("td", "", value.label), reading); body.append(line);
               }
             table.append(head, body); details.append(summary, table); return details;
           }
@@ -5733,6 +5808,7 @@
                 for (const value of row.parts)
                   if (!keys.has(value.key)) {
                     keys.add(value.key); const key = node("span", "u3a-key"), chip = node("i");
+                    key.dataset.nativeKey = value.key;
                     chip.style.setProperty("--u3a-color", u3aColor(value.key)); chip.setAttribute("aria-hidden", "true");
                     key.append(chip, document.createTextNode(value.label)); legend.append(key);
                   }
@@ -5740,7 +5816,9 @@
               for (const row of chart.rows || []) {
                 const host = node("div", "u3a-run" + (row.isPooled ? " pooled" : "")), heading = node("div", "u3a-run-head");
                 host.dataset.nativeRun = row.name;
-                heading.append(node("h4", "u3a-run-name", row.name));
+                const name = node("h4", "u3a-run-name", chart.kind === "gap" && typeof familyLabel === "function" ? familyLabel(row.name) : row.name);
+                name.title = chart.kind === "gap" && typeof familyLabel === "function" ? familyLabel(row.name, true) : row.name;
+                heading.append(name);
                 if (row.total) heading.append(u3aMetric(row.total, row.name));
                 host.append(heading);
                 if (chart.kind === "by-run" || chart.kind === "gap") {
@@ -5796,11 +5874,17 @@
             "Each bar shows the mean of its available runs, and each dot is one run. The shaded capsule spans the lowest to highest run, not a confidence interval. Pick a run below to highlight it.",
           );
           help("spread-info", "Reading Spread", "Sorts families by how much their share varies from run to run (sample SD in percentage points). It describes disagreement between runs, not a confidence interval.");
-          help(
-            "signal-info",
-            "The reference total matters",
-            "Credited signal compared with whole measured signal.",
-          );
+          /* U5 begin */
+          $("signal-info").title = "Explain the four signal readings, their reference totals and the gaps between them. This opens help without changing the project.";
+          $("signal-info").setAttribute("aria-label", "Explain signal recovery readings and gaps");
+          $("signal-info").onclick = () => {
+            const content = [];
+            for (const id of ["u5-readings", "u5-gaps"]) {
+              const copy = $(id).cloneNode(true); copy.removeAttribute("id"); content.push(copy);
+            }
+            popup("Reading signal recovery", content);
+          };
+          /* U5 end */
           $("footer-meta").textContent = "FamilyQuant";
           let printState = null;
           window.addEventListener("beforeprint", () => {
