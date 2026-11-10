@@ -235,6 +235,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => HtmlShareBasesTests());
             suite.Add(() => HtmlSharePartsTests(workDir));
             suite.AddWithApplication(() => HtmlFamilyNativeTests(Path.Combine(workDir, "html-family-native")));
+            suite.AddWithApplication(() => HtmlSensitivityNativeTests(Path.Combine(workDir, "html-sensitivity-native")));
             suite.AddWithApplication(() => SharedPolicyChoiceTests(workDir));
             suite.Section("Recovery chart geometry - per-row normalisation and labels that tell the runs apart");
             suite.AddWithApplication(() => RecoveryChartGeometryTests(workDir));

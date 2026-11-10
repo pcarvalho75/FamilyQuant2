@@ -1558,6 +1558,47 @@
       }
       @media print { .u5-guide { break-inside: auto; } .u5-definition, .u5-gap { break-inside: avoid; } }
       /* U5 end */
+      /* U3d begin */
+      #sensitivity-figures .u3d-figure { grid-column:1 / -1; min-width:0; margin:0; padding:24px 0; border-top:1px solid var(--edge); }
+      .u3d-figure > h3 { margin:0 0 18px; font-size:1.15rem; }
+      .u3d-panels { display:grid; grid-template-columns:minmax(0,1fr); gap:28px; }
+      .u3d-panels.u3d-paired { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .u3d-paired .u3d-base { min-height:3em; }
+      .u3d-panel { min-width:0; }
+      .u3d-panel h4 { margin:0 0 6px; font-size:1rem; }
+      .u3d-base,.u3d-legend,.u3d-axis,.u3d-note { color:var(--muted); }
+      .u3d-base { margin:0 0 16px; font-size:.9rem; }
+      .u3d-legend { margin:18px 0 0; max-width:86ch; font-size:.9rem; }
+      .u3d-svg { display:block; width:100%; overflow:visible; }
+      .u3d-svg text { font-family:inherit; font-size:12px; fill:var(--muted); stroke:none; }
+      .u3d-grid { stroke:var(--edge); stroke-width:1; }
+      .u3d-axis { text-align:center; margin:8px 0; font-size:.85rem; }
+      .u3d-key { display:flex; flex-wrap:wrap; gap:8px 18px; margin:12px 0; color:var(--muted); font-size:.85rem; }
+      .u3d-swatch { display:inline-block; width:12px; height:12px; margin-right:6px; border-radius:2px; }
+      .u3d-hit { cursor:pointer; outline:none; }
+      .u3d-hit:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+      .u3d-hit:hover { filter:brightness(1.12); }
+      .u3d-hit > rect,.u3d-hit > circle[fill="transparent"] { stroke:none; }
+      .u3d-row { display:grid; grid-template-columns:minmax(120px,27%) minmax(80px,1fr) 76px; gap:8px 12px; align-items:center; margin:16px 0; min-width:0; }
+      .u3d-row-name { min-width:0; overflow-wrap:anywhere; font-weight:600; }
+      .u3d-row .u3d-svg { height:44px; }
+      .u3d-value { font-variant-numeric:tabular-nums; text-align:right; overflow-wrap:anywhere; font-size:.9rem; }
+      .u3d-parts,.u3d-note { grid-column:2 / -1; margin:0; font-size:.82rem; overflow-wrap:anywhere; }
+      .u3d-parts { display:flex; flex-wrap:wrap; gap:4px 14px; }
+      .u3d-values { margin-top:14px; color:var(--muted); }
+      .u3d-values summary { width:max-content; max-width:100%; padding:4px 0; cursor:pointer; }
+      .u3d-values summary:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+      .u3d-values table { width:100%; border-collapse:collapse; margin-top:8px; color:var(--ink); font-size:.85rem; }
+      .u3d-values th,.u3d-values td { padding:7px; text-align:left; vertical-align:top; border-bottom:1px solid var(--edge); overflow-wrap:anywhere; }
+      .u3d-values td { font-variant-numeric:tabular-nums; }
+      @media(max-width:900px) { .u3d-panels.u3d-paired { grid-template-columns:minmax(0,1fr); } }
+      @media(max-width:600px) {
+        .u3d-row { grid-template-columns:minmax(0,1fr) 76px; }
+        .u3d-row-name,.u3d-parts,.u3d-note { grid-column:1 / -1; }
+        .u3d-panels { gap:24px; }
+      }
+      @media print { .u3d-figure,.u3d-panel { break-inside:avoid; } .u3d-hit { filter:none; } }
+      /* U3d end */
     </style>
     <style>
       .rank-row {
@@ -6207,6 +6248,88 @@
             for (const figure of data[kind] || []) figureCard(figure, host);
             $(kind + "-empty").hidden = host.childElementCount > 0;
           }
+      /* U3d begin */
+          const u3dHost=$('sensitivity-figures'),u3dFigures=data.sensitivityFigures?.figures||[];
+          const u3dColours=['var(--s1)','var(--s4)','var(--s3)'];
+          const u3dNumber=metric=>val(metric?.exact);
+          const u3dName=(value,full=false)=>typeof familyLabel==='function'?familyLabel(value,full):(data.fields?.[value]?.text??value??'');
+          const u3dAmount=(metric,compact=false)=>metric?(text(compact?metric.display:metric.exact)+(data.fields[metric.exact]?.unit==='%'?'%':' '+(data.fields[metric.exact]?.unit||''))):'Not available';
+          function u3dDetails(figure,panel,row){
+            const list=node('dl'),entry=(label,value)=>list.append(node('dt','',label),node('dd','',value));
+            entry('Base',panel.basis);if(row.x)entry('Sequence identity',u3dAmount(row.x));
+            for(const part of row.parts)entry(part.label,u3dAmount(part.value));
+            if(row.total)entry('Total',u3dAmount(row.total));if(row.note)entry('Stored rule',text(row.note));
+            popup(u3dName(row.name,true),[node('p','',figure.legend),list]);
+          }
+          function u3dTarget(mark,figure,panel,row,label=''){
+            const heading=(label?label+': ':'')+u3dName(row.name,true),values=row.parts.map(part=>part.label+': '+u3dAmount(part.value));
+            const title=heading+'; '+values.join('; ')+'; Base: '+panel.basis+'. Open exact stored values; this changes only this report view.';
+            mark.classList.add('u3d-hit');mark.setAttribute('tabindex','0');mark.setAttribute('role','button');mark.setAttribute('aria-label',title);mark.setAttribute('title',title);
+            const nativeTitle=svg('title');nativeTitle.textContent=title;mark.append(nativeTitle);
+            mark.addEventListener('click',()=>u3dDetails(figure,panel,row));
+            mark.addEventListener('keydown',event=>{
+              if(event.key==='Enter'||event.key===' '){event.preventDefault();u3dDetails(figure,panel,row);}
+              if(event.key==='ArrowRight'||event.key==='ArrowLeft'){const targets=[...mark.closest('.u3d-panel').querySelectorAll('.u3d-hit')],index=targets.indexOf(mark),next=index+(event.key==='ArrowRight'?1:-1);if(targets[next]){event.preventDefault();targets[next].focus();}}
+            });
+            const tip=$('chart-hover'),show=()=>{
+              tip.replaceChildren(node('strong','',heading),...values.map(value=>node('div','',value)),node('div','','Base: '+panel.basis));
+              if(row.note)tip.append(node('div','',text(row.note)));tip.hidden=false;const box=mark.getBoundingClientRect();
+              tip.style.left=Math.max(8,Math.min(box.left,innerWidth-tip.offsetWidth-8))+'px';tip.style.top=Math.max(8,Math.min(box.bottom+8,innerHeight-tip.offsetHeight-8))+'px';
+            };
+            mark.addEventListener('focus',show);mark.addEventListener('pointerenter',show);mark.addEventListener('blur',()=>tip.hidden=true);mark.addEventListener('pointerleave',()=>tip.hidden=true);
+          }
+          function u3dText(canvas,x,y,value,anchor='middle'){const label=svg('text',{x,y,'text-anchor':anchor});label.textContent=value;canvas.append(label);}
+          function u3dKey(host,parts){const key=node('div','u3d-key');parts.forEach((part,index)=>{const item=node('span'),swatch=node('i','u3d-swatch');swatch.style.background=u3dColours[index%u3dColours.length];item.append(swatch,document.createTextNode(part.label));key.append(item);});host.append(key);}
+          function u3dLine(figure,panel,host){
+            const width=Math.max(280,host.getBoundingClientRect().width||600),height=328,left=52,right=width-22,top=panel.markers.length?64:24,bottom=278;
+            const canvas=svg('svg',{class:'u3d-svg',viewBox:`0 0 ${width} ${height}`,role:'group','aria-label':panel.title});
+            const X=value=>left+(right-left)*(panel.reverseX?panel.maximumX-value:value-panel.minimumX)/(panel.maximumX-panel.minimumX||1),Y=value=>bottom-(bottom-top)*value/(panel.maximumY||1);
+            for(const tick of panel.yTicks){const y=Y(tick.position);canvas.append(svg('path',{class:'u3d-grid',d:`M ${left} ${y} H ${right}`}));u3dText(canvas,left-8,y+4,tick.label,'end');}
+            const every=Math.max(1,Math.ceil(panel.xTicks.length*50/(right-left)));
+            panel.xTicks.forEach((tick,index)=>{if(index%every&&index!==panel.xTicks.length-1)return;const x=X(tick.position);canvas.append(svg('path',{class:'u3d-grid',d:`M ${x} ${top} V ${bottom}`}));u3dText(canvas,x,bottom+22,tick.label);});
+            for(const [index,marker]of panel.markers.entries()){
+              const x=X(u3dNumber(marker.identity)),colour=index?'var(--ink)':'var(--s3)';
+              canvas.append(svg('path',{d:`M ${x} ${top} V ${bottom}`,stroke:colour,'stroke-width':1.4,'stroke-dasharray':index?'2 4':'5 4',fill:'none'}));
+              const label=svg('g'),row={name:marker.label,x:null,parts:[{label:marker.label,value:marker.identity}]};label.append(svg('rect',{x:Math.max(left,Math.min(x-100,right-200)),y:1+index*18,width:200,height:17,fill:'transparent'}));u3dText(label,Math.max(left+100,Math.min(x,right-100)),14+index*18,marker.label+' '+u3dAmount(marker.identity,true));u3dTarget(label,figure,panel,row);canvas.append(label);
+            }
+            const parts=panel.rows[0]?.parts||[];
+            parts.forEach((part,index)=>{
+              const points=panel.rows.filter(row=>row.x&&row.parts[index]).map(row=>[X(u3dNumber(row.x)),Y(u3dNumber(row.parts[index].value))]);
+              canvas.append(svg('polyline',{points:points.map(point=>point.join(',')).join(' '),fill:'none',stroke:u3dColours[index%u3dColours.length],'stroke-width':2}));
+              for(const row of panel.rows){if(!row.x||!row.parts[index])continue;const x=X(u3dNumber(row.x)),y=Y(u3dNumber(row.parts[index].value)),mark=svg('g');mark.append(svg('circle',{cx:x,cy:y,r:13,fill:'transparent'}),svg('circle',{cx:x,cy:y,r:5,fill:u3dColours[index%u3dColours.length],stroke:'var(--surface)','stroke-width':1.5}));u3dTarget(mark,figure,panel,row,part.label);canvas.append(mark);}
+            });
+            host.append(node('p','u3d-axis',panel.yLabel),canvas,node('p','u3d-axis',panel.xLabel));u3dKey(host,parts);
+          }
+          function u3dBars(figure,panel,host){
+            for(const row of panel.rows){
+              const wrap=node('div','u3d-row'),name=node('div','u3d-row-name',u3dName(row.name)),canvas=svg('svg',{class:'u3d-svg',viewBox:'0 0 640 44',preserveAspectRatio:'none'}),mark=svg('g');
+              mark.append(svg('rect',{x:0,y:0,width:640,height:44,fill:'transparent'}));let at=0;
+              row.parts.forEach((part,index)=>{const width=640*(u3dNumber(part.value)||0)/(panel.maximumX||1);mark.append(svg('rect',{x:at,y:10,width:Math.max(0,width),height:24,rx:2,fill:u3dColours[index%u3dColours.length]}));at+=width;});u3dTarget(mark,figure,panel,row);canvas.append(mark);
+              const values=node('div','u3d-parts');row.parts.forEach(part=>values.append(node('span','',part.label+': '+u3dAmount(part.value,true))));
+              wrap.append(name,canvas,node('div','u3d-value',u3dAmount(row.total||row.parts[0]?.value,true)),values);if(row.note)wrap.append(node('p','u3d-note',text(row.note)));host.append(wrap);
+            }
+            host.append(node('p','u3d-axis',panel.xLabel));
+          }
+          function u3dValues(figure,panel,host){
+            const details=node('details','u3d-values'),summary=node('summary','','Show exact values');summary.title='Inspect every stored value and its base. Only this report view changes.';
+            const table=node('table'),head=node('tr');for(const title of ['Condition or identity','Stored readings']){const th=node('th','',title);th.scope='col';head.append(th);}const thead=node('thead'),body=node('tbody');thead.append(head);
+            for(const row of panel.rows){const readings=node('td');if(row.x)readings.append(node('div','',panel.xLabel+': '+u3dAmount(row.x)));for(const part of row.parts)readings.append(node('div','',part.label+': '+u3dAmount(part.value)));if(row.total)readings.append(node('div','','Total: '+u3dAmount(row.total)));if(row.note)readings.append(node('div','',text(row.note)));const line=node('tr');line.append(node('td','',u3dName(row.name,true)),readings);body.append(line);}table.append(thead,body);details.append(summary,table);host.append(details);
+          }
+          function renderU3dSensitivity(){
+            for(const old of u3dHost.querySelectorAll(':scope > .u3d-figure'))old.remove();
+            const order=['identity','reference','variants','effects'];
+            for(const figure of [...u3dFigures].sort((a,b)=>order.indexOf(a.kind)-order.indexOf(b.kind))){
+              const card=node('figure','u3d-figure');card.dataset.nativeSensitivityFigure=figure.id;card.dataset.kind=figure.kind;card.append(node('h3','',figure.title));const panels=node('div',figure.panels.length>1?'u3d-panels u3d-paired':'u3d-panels');card.append(panels);u3dHost.append(card);
+              for(const panel of figure.panels){const section=node('section','u3d-panel');section.append(node('h4','',panel.title),node('p','u3d-base',panel.basis));panels.append(section);if(panel.rows.length){if(panel.kind==='line')u3dLine(figure,panel,section);else u3dBars(figure,panel,section);}else section.append(node('p','u3d-note','No stored points are available for this panel.'));u3dValues(figure,panel,section);}
+              card.append(node('figcaption','u3d-legend chart-legend',figure.legend));
+            }
+            $('sensitivity-empty').hidden=u3dHost.childElementCount>0;
+          }
+          $('tab-sensitivity').addEventListener('click',renderU3dSensitivity);
+          let u3dWidth=0;
+          if('ResizeObserver'in window){const observer=new ResizeObserver(()=>{const width=u3dHost.clientWidth;if(width!==u3dWidth){u3dWidth=width;requestAnimationFrame(renderU3dSensitivity);}});observer.observe(u3dHost);}
+          renderU3dSensitivity();
+          /* U3d end */
           $("app").hidden = false;
           const topbar = document.querySelector(".topbar");
           const updateStickySpace = () => {
