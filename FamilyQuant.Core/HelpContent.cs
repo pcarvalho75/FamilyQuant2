@@ -84,6 +84,7 @@ namespace FamilyQuant
             sb.AppendLine("and explains isotope, detector and TIC gaps without treating them as biological classes.");
             sb.AppendLine("Database gap also gives each part's share of its own family's displayed signal total;");
             sb.AppendLine("the separate comparison panel keeps all measured peptide feature signal as its base.");
+            sb.AppendLine("Signal sources by family lists families by pooled total signal, largest first.");
             sb.AppendLine("What the numbers mean at the top defines the reference totals and peptide features.");
             sb.AppendLine("Family labels stop before database header fields; tooltips and details retain the full name.");
             sb.AppendLine("The compare-measures plot's mean and SD follow Normalize to, with its base named on the axis.");

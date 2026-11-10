@@ -40,6 +40,9 @@ internal static partial class Program
         {
             new FamilyWorldCompositionRow { Family = "Illustrative family A", IdentifiedEnvelope = 100, DatabaseDeNovoEnvelope = 25, WorldDeNovoEnvelope = 75 },
             new FamilyWorldCompositionRow { Family = "Illustrative family B", IdentifiedEnvelope = 40, DatabaseDeNovoEnvelope = 10, WorldDeNovoEnvelope = 20 },
+            new FamilyWorldCompositionRow { Family = "Illustrative family C", IdentifiedEnvelope = 450, DatabaseDeNovoEnvelope = 40, WorldDeNovoEnvelope = 10 },
+            new FamilyWorldCompositionRow { Family = "Illustrative family D", IdentifiedEnvelope = 480, DatabaseDeNovoEnvelope = 15, WorldDeNovoEnvelope = 5 },
+            new FamilyWorldCompositionRow { Family = "Illustrative family E" },
         });
         var manifest = new QuantManifest { IsotopeCount = 6, FamilyWorldResult = world, DerivedMethod = NativeQuantFractions.Method };
         var project = new FamilyClusterFile();
@@ -84,11 +87,18 @@ internal static partial class Program
             && uplift.SignalChart.Notes[1].Reference == data.Grouped.IdentifiedEnvelope);
         var gap = signalPlans.Single(chart => chart.SignalChart!.Kind == "gap");
         var nativeGap = (DatabaseGapChart)gap.CreateChart();
-        Check("U3a gap retains native order, every area and the native total", gap.SignalChart!.Rows.Select((row, index) =>
-            row.Parts[0].Value == nativeGap.Rows[index].IdentifiedEnvelope
-            && row.Parts[1].Value == nativeGap.Rows[index].DatabaseDeNovoEnvelope
-            && row.Parts[2].Value == nativeGap.Rows[index].WorldDeNovoEnvelope
-            && row.Total!.Value == nativeGap.Rows[index].TotalEnvelope && row.Parts.All(value => value.Unit == "area")).All(same => same));
+        Check("U5 gap order uses descending pooled totals and preserves native order for ties", gap.SignalChart!.Rows.Select(row => row.Name)
+            .SequenceEqual(new[] { "Illustrative family C", "Illustrative family D", "Illustrative family A", "Illustrative family B", "Illustrative family E" })
+            && gap.SignalChart.Rows.Select(row => row.Total!.Value).SequenceEqual(new double?[] { 500, 500, 200, 70, 0 }));
+        Check("U5 gap ordering leaves the native Word chart order untouched", nativeGap.Rows.Select(row => row.Family)
+            .SequenceEqual(new[] { "Illustrative family A", "Illustrative family B", "Illustrative family C", "Illustrative family D", "Illustrative family E" }));
+        Check("U3a gap retains every native area and total after HTML ordering", gap.SignalChart.Rows.All(row =>
+        {
+            var native = nativeGap.Rows.Single(item => DatabaseGapDisplayRow.Label(item) == row.Name);
+            return row.Parts[0].Value == native.IdentifiedEnvelope && row.Parts[1].Value == native.DatabaseDeNovoEnvelope
+                && row.Parts[2].Value == native.WorldDeNovoEnvelope && row.Total!.Value == native.TotalEnvelope
+                && row.Parts.All(value => value.Unit == "area");
+        }));
         var noTic = new NativeRunFraction { Run = "missing-tic", IdentifiedEnvelope = 80, DeNovoEnvelope = 20 };
         var absent = HtmlSignalRecoveryData.Read(new RecoveryChart(new[] { noTic }, isotopeCeiling: null), "figure:recovery.png", "Recovery")!;
         Check("U3a missing TIC/detector/ceiling remain unavailable rather than zero", absent.Rows[0].Parts.All(value => value.Value == null)
@@ -161,6 +171,10 @@ internal static partial class Program
             for(const kind of panels){ d.getElementById('tab-'+kind).click();
               checks[kind+'Fits']=d.documentElement.scrollWidth<=w.innerWidth+1&&[...d.getElementById('panel-'+kind).querySelectorAll('.u3a-card')].every(card=>{const r=card.getBoundingClientRect();return r.left>=0&&r.right<=w.innerWidth+1;}); }
             checks.gapHeading=[...d.getElementById('panel-gap').querySelectorAll('h2,h3')].filter(h=>h.textContent==='Database gap').length===1;
+            const gapChart=p.signalCharts.find(chart=>chart.kind==='gap');
+            checks.gapOrder=gapChart ? gapChart.rows.every((row,index)=>index===0||gapChart.rows[index-1].total.value>=row.total.value)
+              &&[...d.querySelectorAll('.u3a-card.gap .u3a-run')].map(row=>row.dataset.nativeRun).join('|')===gapChart.rows.map(row=>row.name).join('|')
+              : !d.querySelector('.u3a-card.gap');
             checks.gapPercent=d.getElementById('gap-panel').textContent.includes('25')&&!d.getElementById('gap-panel').textContent.includes('0.25')
               &&d.getElementById('gap-panel').textContent.includes('measured peptide feature signal');
             d.getElementById('tab-recovery').click();
