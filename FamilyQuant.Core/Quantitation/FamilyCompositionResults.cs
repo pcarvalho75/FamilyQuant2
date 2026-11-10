@@ -21,6 +21,9 @@ namespace FamilyQuant
         public string Run { get; set; } = string.Empty;
         public double AssignedSignal { get; set; }
         public double MeasuredSignal { get; set; }
+        /// <summary>All identified peptide signal, counted once. Null on studies made before this was recorded.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public double? IdentifiedSignal { get; set; }
         /// <summary>Recorded RAW total ion current, separate from measured peptide signal.</summary>
         public double? TotalIonCurrent { get; set; }
     }
@@ -29,6 +32,9 @@ namespace FamilyQuant
     {
         public string Run { get; set; } = string.Empty;
         public double Signal { get; set; }
+        /// <summary>Identified signal allocated under the recorded shared-peptide rule; null on older studies.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public double? IdentifiedSignal { get; set; }
         /// <summary>Null when this run has no assigned family signal.</summary>
         public double? ShareOfAssignedSignal { get; set; }
         /// <summary>Null when this run has no measured peptide signal. This is not a TIC share.</summary>

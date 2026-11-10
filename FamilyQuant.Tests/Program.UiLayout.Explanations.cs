@@ -147,14 +147,14 @@ namespace FamilyQuant.Tests
             }
             CheckTooltipCoverage("AnalyticsControl", analytics);
 
-            // Four chrome controls: export choice/action, TopN and percent. Export kinds stay pinned in the view-model check.
+            // Export choice/action and Top N. Export kinds stay pinned in the view-model check.
             var analyticsControls = WalkTree(analytics).OfType<FrameworkElement>()
                 .Where(e => e.TemplatedParent == null)
                 .Where(e => e is Button || e is CheckBox || e is ComboBox || e is TextBox || e is Label)
                 .ToList();
 
-            Check("the Results screen offers its four consolidated chrome controls",
-                analyticsControls.Count == 4,
+            Check("the Results screen offers its three consolidated chrome controls",
+                analyticsControls.Count == 3,
                 string.Join(", ", analyticsControls.Select(Describe)));
 
             var topN = UiField<ComboBox>(analytics, "ComboBoxFamilyTopN")!;
@@ -415,7 +415,7 @@ namespace FamilyQuant.Tests
             Check("the shared-peptide list shows exactly the names the rest of the program quotes",
                 sharedItems.Items.Cast<ComboBoxItem>()
                     .Select(i => i.Content as string)
-                    .SequenceEqual(Enum.GetValues<SharedPeptidePolicy>().Select(p => p.DisplayName())));
+                    .SequenceEqual(new[] { SharedPeptidePolicy.FamilyUnique, SharedPeptidePolicy.SplitEqually }.Select(p => p.DisplayName())));
 
             Check("every entry of both lists explains what it does",
                 modeItems.Items.Cast<ComboBoxItem>().All(i => i.ToolTip != null)

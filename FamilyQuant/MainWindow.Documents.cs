@@ -101,7 +101,9 @@ public partial class MainWindow
 
                 // A .fqproj carries its own quantitation: the curation table shows it at once.
                 owner.cgc.SetFullXicMappingProvenance(owner.loadedManifest?.FamilyMapping);
-                _ = owner.cgc.SetFullXicQuantAsync(owner.loadedQuant, owner.loadedManifest?.PerRunTic, started, operationLogPath);
+                owner.cgc.RestoreStoredSharedPeptidePolicy(owner.loadedManifest?.FamilyRunShares?.Policy);
+                Task attribution = owner.cgc.SetFullXicQuantAsync(owner.loadedQuant, owner.loadedManifest?.PerRunTic, started, operationLogPath);
+                _ = owner.cgc.ShowSharedPeptidePolicyNoticeAsync(attribution);
 
                 owner.RefreshProjectCommandAvailability(resetSpectrum: true);
                 owner.lastSpectrumComparisonCsvPath = null;

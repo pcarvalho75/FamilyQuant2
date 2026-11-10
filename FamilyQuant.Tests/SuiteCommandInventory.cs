@@ -8,6 +8,11 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-family-count-once", "FamilyQuant.Tests.Program.FamilyCountOnceTests(System.String)", "FamilyQuant.Tests.Program.FamilyContributionChartTests(System.String)"),
+        SuiteCommandRule.Covered("--test-results-percent-only", "FamilyQuant.Tests.Program.ResultsPercentOnlyTests(System.String)"),
+        SuiteCommandRule.Covered("--test-results-topn-placement", "FamilyQuant.Tests.Program.ResultsTopNPlacementTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-share-bases", "FamilyQuant.Tests.Program.HtmlShareBasesTests()"),
+        SuiteCommandRule.Covered("--test-shared-policy-choices", "FamilyQuant.Tests.Program.SharedPolicyChoiceTests(System.String)"),
         SuiteCommandRule.Covered("--test-family-list-ranked-matches", "FamilyQuant.Tests.Program.FamilyListImportRankedMatchTests(System.String)"),
         SuiteCommandRule.Covered("--test-ledger-diagnostics", "FamilyQuant.Tests.Program.LedgerDiagnosticTests()"),
         SuiteCommandRule.Covered("--test-curation-dispatcher-reclaim", "FamilyQuant.Tests.Program.CurationDispatcherReclaimTests(System.String,System.Boolean)"),

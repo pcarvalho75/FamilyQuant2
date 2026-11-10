@@ -77,12 +77,23 @@ public sealed record HtmlReportFamily
     public string? Peptides { get; init; }
     public string? DatabaseEntries { get; init; }
     public bool IsOthers { get; init; }
+    public HtmlFamilyShareStatistics IdentifiedOnly { get; init; } = new();
+    public HtmlFamilyShareStatistics IdentifiedAndDeNovo { get; init; } = new();
+    public HtmlFamilyShareStatistics DetectorEnvelopes { get; init; } = new();
+    public HtmlFamilyShareStatistics Tic { get; init; } = new();
     public IReadOnlyList<HtmlFamilyRun> Runs { get; init; } = Array.Empty<HtmlFamilyRun>();
     public IReadOnlyList<HtmlFamilyPart> Parts { get; init; } = Array.Empty<HtmlFamilyPart>();
     public IReadOnlyList<HtmlReportCoverage> Coverage { get; init; } = Array.Empty<HtmlReportCoverage>();
 }
 
-public sealed record HtmlFamilyRun(string Name, string? Share, string? Measured);
+public sealed record HtmlFamilyRun(string Name, string? Share, string? Measured)
+{
+    public string? IdentifiedOnly { get; init; }
+    public string? IdentifiedAndDeNovo { get; init; }
+    public string? DetectorEnvelopes { get; init; }
+    public string? Tic { get; init; }
+}
+public sealed record HtmlFamilyShareStatistics(string? Mean = null, string? Sd = null, string? Cv = null);
 public sealed record HtmlFamilyPart(string Kind, string Name, string? Share, bool IsUnresolved = false);
 public sealed record HtmlRunCredit(string Name, string Share);
 public sealed record HtmlGapRow(string Name, string Fraction);

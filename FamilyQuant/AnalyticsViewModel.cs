@@ -16,7 +16,6 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     private readonly QuantManifest? manifest;
     private readonly FamilyClusterFile? curation;
     private int topN = FamilyContributionPlot.DefaultTopN;
-    private bool percent;
     private string status = "";
     private ResultsExportKind exportKind;
     public AnalyticsData? Data { get; }
@@ -38,7 +37,10 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     public string EmptyMessage => MissingQuantitation + (HasHomology ? " The standalone homology snapshot can still be exported here." : "");
     public IReadOnlyList<ResultsSummaryCard> Cards { get; } = Array.Empty<ResultsSummaryCard>();
     public int FamilyTopN { get => topN; set => Set(ref topN, value); }
-    public bool FamilyAsPercent { get => percent; set => Set(ref percent, value); }
+    public SharedPeptidePolicy FamilySharedPolicy => manifest?.FamilyRunShares?.Policy == SharedPeptidePolicy.SplitEqually
+        ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique;
+    // Retained for callers of the former chart option. Results always uses all peptide features.
+    public bool FamilyAsPercent { get => true; set { } }
     public string Status { get => status; private set => Set(ref status, value); }
     public ResultsExportKind ExportKind { get => exportKind; set { Set(ref exportKind, value); Changed(nameof(CanExport)); } }
     public bool CanExport => ExportKind switch {
