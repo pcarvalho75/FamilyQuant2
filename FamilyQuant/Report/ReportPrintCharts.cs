@@ -86,7 +86,7 @@ public sealed class ReportSignalUpliftChart : ReportPrintChart
             return;
         }
         var values = new[] { grouped.IdentifiedFractionEnvelope, grouped.RecoveredFractionReferenceCalibrated };
-        var labels = new[] { "Observed identified envelope", "Identified + calibrated de novo estimate" };
+        var labels = new[] { "Observed identified envelope", "Identified + measured de novo envelope" };
         var colors = new[] { palette.Identified, palette.Quantified };
         double maximum = Math.Max(.01, Math.Max(values[0], values[1]));
         for (int index = 0; index < values.Length; index++)

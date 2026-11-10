@@ -51,6 +51,8 @@ public sealed class ComputeXicViewModel : ScreenViewModel
     public bool CanEdit => !IsBusy;
     public string Status { get => status; private set => Set(ref status, value); }
     public string RunSummary { get => summary; private set => Set(ref summary, value); }
+    private string deNovoRunWarning = "";
+    public string DeNovoRunWarning { get => deNovoRunWarning; private set => Set(ref deNovoRunWarning, value); }
     public string Details { get => details; private set => Set(ref details, value); }
     public FullXicComputeResult? Result { get; private set; }
     public bool Computed => Result != null;
@@ -95,6 +97,13 @@ public sealed class ComputeXicViewModel : ScreenViewModel
         using var tokenLifetime = tokenSource;
         cancellation = tokenSource;
         IsBusy = true;
+        DeNovoRunWarning = "";
+        void SourceWarning(object? sender, FamilyQuant.Operations.OperationProgress item)
+        {
+            if (item.Stage == "denovo-run-warning")
+                DeNovoRunWarning += (DeNovoRunWarning.Length == 0 ? "" : " ") + item.Message;
+        }
+        Operations.ProgressReported += SourceWarning;
         Status = "Computing full XIC...";
         var progress = new Progress<string>(message =>
         {
@@ -114,10 +123,16 @@ public sealed class ComputeXicViewModel : ScreenViewModel
             operation.Context.Report("compute-publish", "Attaching completed results", 0, 1);
             operation.Context.Report("compute-publish", "Attaching completed results", 1, 1);
             Result = outcome;
+            DeNovoRunWarning = string.Join(" ", outcome.DeNovoSourceWarnings);
             CompletedInputProvenance = inputProvenance;
             RunSummary = $"{outcome.Rows.Count.ToString("N0", CultureInfo.CurrentCulture)} quant rows across " +
                 $"{outcome.Manifest.PerRunTic.Count.ToString("N0", CultureInfo.CurrentCulture)} runs. " +
-                $"{outcome.IdentifiedRows:N0} identified; {outcome.DeNovoRows:N0} de novo.";
+                $"{outcome.IdentifiedRows:N0} identified; {outcome.DeNovoRows:N0} de novo." +
+                string.Concat(outcome.Manifest.PerRunTic.Keys.OrderBy(r => r, StringComparer.OrdinalIgnoreCase).Select(run =>
+                    "\n" + run + ": " + (outcome.Manifest.DerivedFractions.FirstOrDefault(d => !d.Grouped
+                        && string.Equals(DeNovoReconciler.NormalizeRunName(d.Run), DeNovoReconciler.NormalizeRunName(run),
+                            StringComparison.OrdinalIgnoreCase))?.DeNovoPeptides ?? 0).ToString("N0", CultureInfo.CurrentCulture)
+                    + " de novo peptide features."));
             Details = string.Join("\n", outcome.TicShareSummary.Concat(outcome.Notes)) +
                 (outcome.Manifest.DeNovoInputs.Count == 0 ? "" : "\nDe novo inputs: " + string.Join("; ",
                     outcome.Manifest.DeNovoInputs.GroupBy(i => i.SourceId).Select(g => g.First().SourceDisplayName +
@@ -126,6 +141,7 @@ public sealed class ComputeXicViewModel : ScreenViewModel
                 (string.IsNullOrWhiteSpace(outcome.SpectrumComparisonCsvError) ? "" : "\n" + outcome.SpectrumComparisonCsvError) +
                 "\n\n" + HelpWorkflowFacts.Quantify;
             Status = "Computed. The results are held in memory; the project itself has not been saved yet. Use File > Save to keep the quant rows and complete spectrum evidence table.";
+            if (DeNovoRunWarning.Length > 0) Status += " Warning: " + DeNovoRunWarning;
             Changed(nameof(Result)); Changed(nameof(Computed));
             operation.Dispose();
             Completed?.Invoke(outcome);
@@ -133,7 +149,7 @@ public sealed class ComputeXicViewModel : ScreenViewModel
         catch (OperationCanceledException) when (tokenSource.IsCancellationRequested) { Status = "Cancelled. The previous project results were kept."; }
         catch (FullXicNoMatchedRunsException ex) { Operations.LogFailure(ex); Status = ex.Message; }
         catch (Exception ex) { Operations.LogFailure(ex); Status = "The computation did not finish. " + ex.Message; }
-        finally { cancellation = null; IsBusy = false; }
+        finally { Operations.ProgressReported -= SourceWarning; cancellation = null; IsBusy = false; }
     }
 
     private static Task<FullXicComputeResult> RunEngine(ComputeXicRequest request, IProgress<string> progress, CancellationToken token) =>

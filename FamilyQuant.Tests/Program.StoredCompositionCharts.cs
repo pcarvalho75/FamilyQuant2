@@ -130,6 +130,6 @@ internal static partial class Program
         };
         string membership = FamilyStudyMembership.Fingerprint(project);
         perRun.MembershipSha256 = parts.MembershipSha256 = localization.MembershipSha256 = membership;
-        return (new QuantManifest { FamilyRunShares = perRun, FamilySubclassParts = parts, FamilyPeptideLocalization = localization }, project);
+        return (new QuantManifest { DerivedMethod = NativeQuantFractions.Method, FamilyRunShares = perRun, FamilySubclassParts = parts, FamilyPeptideLocalization = localization }, project);
     }
 }

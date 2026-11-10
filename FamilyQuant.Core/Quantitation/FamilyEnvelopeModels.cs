@@ -62,7 +62,7 @@ namespace FamilyQuant
         /// unknown-source residual. The four buckets sum to <see cref="DeNovoEnvelope"/>.</summary>
         public DeNovoEnvelopeBySource DeNovoEnvelopeRegions { get; } = new DeNovoEnvelopeBySource();
 
-        /// <summary>The same split on the PRIMARY (reference-calibrated) basis the family chart draws and
+        /// <summary>The same split on the PRIMARY measured-envelope basis the family chart draws and
         /// the recovery numbers use. Its four buckets sum to <see cref="DeNovoEnvelopePrimary"/>.</summary>
         public DeNovoEnvelopeBySource DeNovoEnvelopePrimaryRegions { get; } = new DeNovoEnvelopeBySource();
 
@@ -79,8 +79,7 @@ namespace FamilyQuant
         public double TotalEnvelopeReferenceCalibrated =>
             IdentifiedEnvelope + DeNovoEnvelopePrimary;
 
-        public double DeNovoEnvelopePrimary => DeNovoEnvelopeReferenceCalibrated > 0 || DeNovoEnvelope == 0
-            ? DeNovoEnvelopeReferenceCalibrated : DeNovoEnvelope;
+        public double DeNovoEnvelopePrimary => DeNovoEnvelope;
 
         /// <summary>
         /// The part of the family's signal carried by peptides that reach THIS family and no other: the
@@ -96,9 +95,7 @@ namespace FamilyQuant
         public int UniqueIdentifiedPeptides { get; set; }
         public int UniqueDeNovoPeptides { get; set; }
 
-        public double UniqueDeNovoEnvelopePrimary =>
-            UniqueDeNovoEnvelopeReferenceCalibrated > 0 || UniqueDeNovoEnvelope == 0
-                ? UniqueDeNovoEnvelopeReferenceCalibrated : UniqueDeNovoEnvelope;
+        public double UniqueDeNovoEnvelopePrimary => UniqueDeNovoEnvelope;
 
         public double UniqueTotalEnvelopeReferenceCalibrated => UniqueIdentifiedEnvelope + UniqueDeNovoEnvelopePrimary;
 
@@ -109,9 +106,7 @@ namespace FamilyQuant
         public double SplitDeNovoEnvelope { get; set; }
         public double SplitDeNovoEnvelopeReferenceCalibrated { get; set; }
 
-        public double SplitDeNovoEnvelopePrimary =>
-            SplitDeNovoEnvelopeReferenceCalibrated > 0 || SplitDeNovoEnvelope == 0
-                ? SplitDeNovoEnvelopeReferenceCalibrated : SplitDeNovoEnvelope;
+        public double SplitDeNovoEnvelopePrimary => SplitDeNovoEnvelope;
 
         public double SplitTotalEnvelopeReferenceCalibrated => SplitIdentifiedEnvelope + SplitDeNovoEnvelopePrimary;
 
@@ -156,7 +151,7 @@ namespace FamilyQuant
         public int UnattributedDeNovoPeptides { get; set; }
 
         /// <summary>The unattributed de novo residual split by calling source, on the raw and primary
-        /// (reference-calibrated) bases. Buckets sum to <see cref="UnattributedDeNovoEnvelope"/> and
+        /// measured-envelope bases. Buckets sum to <see cref="UnattributedDeNovoEnvelope"/> and
         /// <see cref="UnattributedDeNovoEnvelopePrimary"/> respectively.</summary>
         public DeNovoEnvelopeBySource UnattributedDeNovoEnvelopeRegions { get; } = new DeNovoEnvelopeBySource();
         public DeNovoEnvelopeBySource UnattributedDeNovoEnvelopePrimaryRegions { get; } =
@@ -183,13 +178,9 @@ namespace FamilyQuant
         public double MeasuredTotalEnvelopeReferenceCalibrated =>
             MeasuredIdentifiedEnvelope + MeasuredDeNovoEnvelopePrimary;
 
-        public double MeasuredDeNovoEnvelopePrimary =>
-            MeasuredDeNovoEnvelopeReferenceCalibrated > 0 || MeasuredDeNovoEnvelope == 0
-                ? MeasuredDeNovoEnvelopeReferenceCalibrated : MeasuredDeNovoEnvelope;
+        public double MeasuredDeNovoEnvelopePrimary => MeasuredDeNovoEnvelope;
 
-        public double UnattributedDeNovoEnvelopePrimary =>
-            UnattributedDeNovoEnvelopeReferenceCalibrated > 0 || UnattributedDeNovoEnvelope == 0
-                ? UnattributedDeNovoEnvelopeReferenceCalibrated : UnattributedDeNovoEnvelope;
+        public double UnattributedDeNovoEnvelopePrimary => UnattributedDeNovoEnvelope;
 
         public double UnattributedTotalEnvelopeReferenceCalibrated =>
             UnattributedIdentifiedEnvelope + UnattributedDeNovoEnvelopePrimary;
@@ -202,9 +193,7 @@ namespace FamilyQuant
         public int SharedIdentifiedPeptides { get; set; }
         public int SharedDeNovoPeptides { get; set; }
 
-        public double SharedDeNovoEnvelopePrimary =>
-            SharedDeNovoEnvelopeReferenceCalibrated > 0 || SharedDeNovoEnvelope == 0
-                ? SharedDeNovoEnvelopeReferenceCalibrated : SharedDeNovoEnvelope;
+        public double SharedDeNovoEnvelopePrimary => SharedDeNovoEnvelope;
 
         public double SharedTotalEnvelopeReferenceCalibrated => SharedIdentifiedEnvelope + SharedDeNovoEnvelopePrimary;
 

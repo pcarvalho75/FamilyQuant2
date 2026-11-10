@@ -142,14 +142,13 @@ namespace FamilyQuant
             return BuildFromPeptides(PreparePeptides(rows), identifiedFamilies, deNovoFamilies, describe);
         }
 
-        /// <summary>The deduplicated, reference-calibrated peptides <see cref="Build"/> works on. A caller
+        /// <summary>The deduplicated, measured-envelope peptides <see cref="Build"/> works on. A caller
         /// that rebuilds the table many times over the same quant (the curation screen, after every
         /// regrouping) prepares them once and calls <see cref="BuildFromPeptides"/>.</summary>
         public static List<NativePeptideQuant> PreparePeptides(IEnumerable<QuantRow> rows)
         {
             if (rows == null) throw new ArgumentNullException(nameof(rows));
             List<NativePeptideQuant> peptides = NativeQuantFractions.DedupToPeptides(rows);
-            ReferenceEnvelopeEstimator.Apply(peptides);
             return peptides;
         }
 
@@ -187,7 +186,7 @@ namespace FamilyQuant
                 else
                 {
                     result.MeasuredDeNovoEnvelope += p.EnvelopeSum;
-                    result.MeasuredDeNovoEnvelopeReferenceCalibrated += p.ReferenceCalibratedEnvelope;
+                    result.MeasuredDeNovoEnvelopeReferenceCalibrated += p.EnvelopeSum;
                 }
 
                 IReadOnlyList<int> families = assigned.FamilyUserIds;
@@ -202,7 +201,7 @@ namespace FamilyQuant
                     else
                     {
                         result.UnattributedDeNovoEnvelope += p.EnvelopeSum;
-                        result.UnattributedDeNovoEnvelopeReferenceCalibrated += p.ReferenceCalibratedEnvelope;
+                        result.UnattributedDeNovoEnvelopeReferenceCalibrated += p.EnvelopeSum;
                         result.UnattributedDeNovoPeptides++;
                     }
                     continue;
@@ -226,7 +225,7 @@ namespace FamilyQuant
                     else
                     {
                         result.SharedDeNovoEnvelope += p.EnvelopeSum;
-                        result.SharedDeNovoEnvelopeReferenceCalibrated += p.ReferenceCalibratedEnvelope;
+                        result.SharedDeNovoEnvelopeReferenceCalibrated += p.EnvelopeSum;
                         result.SharedDeNovoPeptides++;
                     }
                 }
@@ -259,14 +258,14 @@ namespace FamilyQuant
                     {
                         row.DeNovoM0 += p.AreaM0;
                         row.DeNovoEnvelope += p.EnvelopeSum;
-                        row.DeNovoEnvelopeReferenceCalibrated += p.ReferenceCalibratedEnvelope;
+                        row.DeNovoEnvelopeReferenceCalibrated += p.EnvelopeSum;
                         row.DeNovoPeptides++;
                         row.SplitDeNovoEnvelope += p.EnvelopeSum * part;
-                        row.SplitDeNovoEnvelopeReferenceCalibrated += p.ReferenceCalibratedEnvelope * part;
+                        row.SplitDeNovoEnvelopeReferenceCalibrated += p.EnvelopeSum * part;
                         if (unique)
                         {
                             row.UniqueDeNovoEnvelope += p.EnvelopeSum;
-                            row.UniqueDeNovoEnvelopeReferenceCalibrated += p.ReferenceCalibratedEnvelope;
+                            row.UniqueDeNovoEnvelopeReferenceCalibrated += p.EnvelopeSum;
                             row.UniqueDeNovoPeptides++;
                         }
                     }

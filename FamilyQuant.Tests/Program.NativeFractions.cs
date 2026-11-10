@@ -122,13 +122,13 @@ namespace FamilyQuant.Tests
             Check("Q3 compute: DDA + de novo recovered is identified plus de novo envelope over the TIC",
                 Math.Abs(r01.RecoveredFractionEnvelope - (379.5 + 96.8) / 2000.0) < 1e-12,
                 r01.RecoveredFractionEnvelope.ToString("R", CultureInfo.InvariantCulture));
-            Check("Q3 primary: identified-reference calibration learns the 2.3x identified ratio",
-                Math.Abs(r01.DeNovoEnvelopeReferenceCalibrated - 44.0 * 2.3) < 1e-9
-                && Math.Abs(r02.DeNovoEnvelopeReferenceCalibrated - 55.0 * 2.3) < 1e-9,
+            Check("T3 primary: both runs use the measured de novo envelope",
+                Math.Abs(r01.DeNovoEnvelopeReferenceCalibrated - r01.DeNovoEnvelope) < 1e-9
+                && Math.Abs(r02.DeNovoEnvelopeReferenceCalibrated - r02.DeNovoEnvelope) < 1e-9,
                 r01.DeNovoEnvelopeReferenceCalibrated.ToString("R", CultureInfo.InvariantCulture));
-            Check("Q3 primary: M+0, calibrated primary, and unadjusted diagnostic remain separate",
+            Check("T3 primary: M+0 differs while primary and measured envelope are equal",
                 r01.RecoveredFractionM0 != r01.RecoveredFractionReferenceCalibrated
-                && r01.RecoveredFractionReferenceCalibrated != r01.RecoveredFractionEnvelope,
+                && r01.RecoveredFractionReferenceCalibrated == r01.RecoveredFractionEnvelope,
                 r01.RecoveredFractionM0.ToString("R", CultureInfo.InvariantCulture) + " / " +
                 r01.RecoveredFractionReferenceCalibrated.ToString("R", CultureInfo.InvariantCulture) + " / " +
                 r01.RecoveredFractionEnvelope.ToString("R", CultureInfo.InvariantCulture));

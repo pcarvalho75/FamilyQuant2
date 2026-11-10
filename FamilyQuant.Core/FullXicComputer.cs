@@ -77,7 +77,7 @@ namespace FamilyQuant
         /// <summary>
         /// The share of the TIC explained, per run (and over all runs when there are several), in the
         /// language of SCIENTIFIC_METHOD.md: the identified observed envelope, plus, when de novo rows
-        /// were quantified, the de novo reference-calibrated estimate and their sum (the primary
+        /// were quantified, the de novo measured envelope and their sum (the primary
         /// estimate). The last line says what the resolved isotope-series diagnostic is, so the two
         /// percentages cannot be confused. Empty when there is no run to describe.
         /// </summary>
@@ -94,7 +94,7 @@ namespace FamilyQuant
 
             lines.Add(deNovo
                 ? "Share of the TIC explained by the quantified peptides (identified observed envelope + " +
-                  "de novo reference-calibrated estimate, one area per peptide):"
+                  "de novo measured envelope, one area per peptide):"
                 : "Share of the TIC explained by the identified peptides (full isotope envelope, one area " +
                   "per peptide):");
 

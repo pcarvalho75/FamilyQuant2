@@ -208,6 +208,12 @@ namespace FamilyQuant.Tests
             suite.Section("Native fraction of TIC (Q3) - per-peptide dedup, unit invariants and the method");
             suite.Add(() => NativeFractionUnitTests(workDir));
             suite.Add(() => ReferenceEnvelopeOptimizationTests());
+            suite.Add(() => DeNovoEnvelopeCheckTests());
+            suite.Add(() => DeNovoMeasuredEnvelopeTests(Path.Combine(workDir, "denovo-measured")));
+            suite.Add(() => ResultsMethodGateTests());
+            suite.Add(() => DeNovoSwitchFallbackTests(Path.Combine(workDir, "denovo-switch-fallback")));
+            suite.Add(() => DeNovoRunWarningTests());
+            suite.AddWithApplication(() => QuantifyIsotopeDefaultTests(Path.Combine(workDir, "quantify-isotope-default")));
             suite.Add(() => StreamingProvenanceHashTests());
             suite.Section("Native fraction of TIC (Q3) - run _01 identified/envelope/DDA+de novo, envelope partition");
             suite.Add(() => NativeTicFractionRealTests(args.Length > 2 ? args[2] : null, args.Length > 3 ? args[3] : null, workDir));
@@ -230,6 +236,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => SharedPolicyChoiceTests(workDir));
             suite.Section("Recovery chart geometry - per-row normalisation and labels that tell the runs apart");
             suite.AddWithApplication(() => RecoveryChartGeometryTests(workDir));
+            suite.AddWithApplication(() => MeasuredRecoveryChartTests(Path.Combine(workDir, "measured-recovery-chart")));
             suite.Section("Chart palette - the light slide variant, and every chart drawn in both");
             suite.AddWithApplication(() => ChartPaletteTests(workDir));
             suite.Section("Figure export - every chart as a projector-sized PNG, with no window");

@@ -30,11 +30,15 @@ public sealed class AnalyticsViewModel : ScreenViewModel
         (Homology.PeptidesSearched == 1 ? "peptide" : "peptides") + " reached targets. " +
         $"Source: {Path.GetFileName(Homology.FcfPath)}. This snapshot is independent of full XIC.";
     public bool HasData => Data != null;
+    public bool RequiresQuantify { get; }
     public string Details { get; } = "";
     private const string MissingQuantitation = "No full XIC is stored. Results reads FamilyQuant's own full isotope-envelope quantitation. " +
         "A plain .fcf carries no quantitation, and a .fqproj saved before full XIC was ever computed carries none either. " +
         "Load the project, run Quantify, then return here to draw the graphs.";
-    public string EmptyMessage => MissingQuantitation + (HasHomology ? " The standalone homology snapshot can still be exported here." : "");
+    private const string PreviousQuantitation = "Run Quantify again. These stored results use an earlier or unrecorded quantitation method. " +
+        "Quantify now measures the isotope envelope for identified and de novo peptides.";
+    public string EmptyMessage => (RequiresQuantify ? PreviousQuantitation : MissingQuantitation)
+        + (HasHomology ? " The standalone homology snapshot can still be exported here." : "");
     public IReadOnlyList<ResultsSummaryCard> Cards { get; } = Array.Empty<ResultsSummaryCard>();
     public int FamilyTopN { get => topN; set => Set(ref topN, value); }
     public SharedPeptidePolicy FamilySharedPolicy => manifest?.FamilyRunShares?.Policy == SharedPeptidePolicy.SplitEqually
@@ -55,14 +59,18 @@ public sealed class AnalyticsViewModel : ScreenViewModel
         this.manifest = manifest;
         this.curation = curation;
         Homology = homology;
-        Sensitivity = new FamilySensitivityViewModel(rows, manifest, curation, attribution, () => ResultsOptionsChanged?.Invoke(this, EventArgs.Empty));
-        DatabaseGap = new DatabaseGapViewModel(manifest?.FamilyWorldResult, curation, manifest?.DatabaseGapMinimumTagLength, length =>
+        RequiresQuantify = (rows is { Count: > 0 } || manifest?.DerivedFractions.Count > 0)
+            && !string.Equals(manifest?.DerivedMethod, NativeQuantFractions.Method, StringComparison.Ordinal);
+        Sensitivity = new FamilySensitivityViewModel(RequiresQuantify ? null : rows, RequiresQuantify ? null : manifest,
+            curation, attribution, () => ResultsOptionsChanged?.Invoke(this, EventArgs.Empty));
+        DatabaseGap = new DatabaseGapViewModel(RequiresQuantify ? null : manifest?.FamilyWorldResult, curation, manifest?.DatabaseGapMinimumTagLength, length =>
         {
             if (manifest == null) return;
             manifest.DatabaseGapMinimumTagLength = length == FamilyWorldOptions.DefaultMinimumTagLength ? null : length;
             ResultsOptionsChanged?.Invoke(this, EventArgs.Empty);
         });
         DatabaseGap.PropertyChanged += (_, _) => Changed(nameof(CanExport));
+        if (RequiresQuantify) { Status = PreviousQuantitation; Details = PreviousQuantitation; return; }
         if (rows == null || rows.Count == 0)
         {
             if (homology != null)
@@ -75,7 +83,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
             if (DatabaseGap.HasStoredResult) exportKind = ResultsExportKind.DatabaseGap;
             return;
         }
-        Data = AnalyticsBuilder.Build(rows, manifest?.PerRunTic ?? new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase));
+        Data = AnalyticsBuilder.Build(rows, manifest?.PerRunTic ?? new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase), manifest?.IsotopeCount);
         if (manifest?.DerivedFractions is { Count: > 0 })
             NativeQuantFractions.ApplyDetectedToFractions(Data.Fractions, Data.Grouped, manifest.DerivedFractions);
         if (curation != null)
@@ -84,14 +92,14 @@ public sealed class AnalyticsViewModel : ScreenViewModel
                 : FamilyEnvelopeQuant.BuildFromCuration(rows, curation); }
             catch (Exception ex) { Status = "Family attribution is unavailable. " + ex.Message; }
         }
-        Details = "The headline uses the primary reference-calibrated estimate. The directly observed six-window " +
-            "diagnostic below uses a different basis. The representative table is counted before cross-side " +
+        Details = "The headline uses the measured envelope for identified and de novo peptides. The M+0 " +
+            "reading below uses only the monoisotopic peak. The representative table is counted before cross-side " +
             "suppression; recovery counts are after suppression.\n\n" + SummaryLine(Data, Families, curation, manifest);
         var grouped = Data.Grouped;
         Cards = new[] {
-            new ResultsSummaryCard("Primary recovery estimate", grouped is { Tic: > 0 }
+            new ResultsSummaryCard("Measured envelope recovery", grouped is { Tic: > 0 }
                 ? grouped.RecoveredFractionReferenceCalibrated.ToString("P2", CultureInfo.CurrentCulture) : "Unavailable",
-                "Identified observed envelope plus de novo reference-calibrated estimate, divided by the recorded RAW TIC."),
+                "Identified observed envelope plus de novo measured envelope, divided by the recorded RAW TIC."),
             new ResultsSummaryCard("Peptide representatives", Data.Peptides.Count.ToString("N0", CultureInfo.CurrentCulture),
                 $"{Data.IdentifiedCount:N0} identified; {Data.DeNovoCount:N0} de novo. Collapsed table before cross-side suppression; one representative per run, side, peptidoform and charge."),
             new ResultsSummaryCard("Families reached", Families?.Families.Count.ToString("N0", CultureInfo.CurrentCulture) ?? "Unavailable",
@@ -101,6 +109,12 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     public void ShowStatus(string message) => Status = message;
     public IReadOnlyList<AnalyticsFigure> BuildCompositionFigures(bool strict = false)
     {
+        if (RequiresQuantify)
+        {
+            if (strict) throw new InvalidOperationException(PreviousQuantitation);
+            Status = PreviousQuantitation;
+            return Array.Empty<AnalyticsFigure>();
+        }
         try
         {
             if (curation != null) FamilyStudyMembership.RequireCurrent(curation, manifest);

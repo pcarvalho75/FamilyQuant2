@@ -78,7 +78,7 @@ namespace FamilyQuant
                     new PercentIonCurrentChart(data.Peptides, groupedTic), 300),
                 new AnalyticsFigure(FamilyContributionFile,
                     new FamilyContributionChart(families, topN, asPercentOfTotal), 420),
-                new AnalyticsFigure(RecoveryFile, new RecoveryChart(data.Fractions, data.Grouped), 380),
+                new AnalyticsFigure(RecoveryFile, new RecoveryChart(data.Fractions, data.Grouped, isotopeCeiling: data.IsotopeCeiling), 380),
             };
         }
 
@@ -142,7 +142,7 @@ namespace FamilyQuant
             IReadOnlyDictionary<string, double> tic = manifest?.PerRunTic
                 ?? new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
 
-            AnalyticsData data = AnalyticsBuilder.Build(rowList, tic);
+            AnalyticsData data = AnalyticsBuilder.Build(rowList, tic, manifest?.IsotopeCount);
 
             // Same injection the screen makes: the Q6 detected estimate is read from the manifest, never
             // recomputed here.

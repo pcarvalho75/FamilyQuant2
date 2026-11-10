@@ -33,6 +33,8 @@
     </Grid>
    </Border>
    <TextBlock Text="{Binding Basis}" ToolTip="{Binding BasisDetails}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,12,0,8"/>
+   <TextBlock x:Name="TextBlockDeNovoRunWarning" Text="{Binding DeNovoRunWarning}" TextWrapping="Wrap" Foreground="{DynamicResource TextBrush}" Margin="0,0,0,8"
+    ToolTip="Names RAW runs with no calls in the selected de novo sources, checked before extraction starts. This warning changes no inputs or quantities."/>
    <StackPanel Orientation="Horizontal">
     <Button x:Name="ButtonCompute" Content="Quantify" Style="{DynamicResource PrimaryButton}" Command="{Binding ComputeCommand}" ToolTip="Measure identified and selected de novo peptide envelopes, replace the completed project result, and write local caches, logs and a spectrum CSV. Save keeps the result, grouping Undo does not revert it, and a running computation must finish or be cancelled before another can start."/>
     <Button Content="Cancel" Command="{Binding CancelCommand}" ToolTip="Request cancellation at the next operation boundary, keeping the previous completed project result. Disabled when no computation is running; start Quantify to enable it."/>

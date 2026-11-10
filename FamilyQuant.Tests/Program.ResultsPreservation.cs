@@ -90,7 +90,7 @@ internal static partial class Program
         var previousFile = ShellDialogs.FilePresenter;
         var previousFolder = ShellDialogs.FolderPresenter;
         var model = new AnalyticsViewModel(SyntheticAnalyticsRows(), new QuantManifest
-            { PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 } }, BuildSyntheticFcf());
+            { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method, PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 } }, BuildSyntheticFcf());
         var control = new AnalyticsControl(model);
         var window = new Window { Content = control, Width = 1180, Height = 800, Left = -30000, Top = -30000,
             ShowInTaskbar = false, ShowActivated = false, WindowStartupLocation = WindowStartupLocation.Manual };

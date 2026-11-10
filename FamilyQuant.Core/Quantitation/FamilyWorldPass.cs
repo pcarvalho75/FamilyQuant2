@@ -316,7 +316,7 @@ namespace FamilyQuant
         }
     }
 
-    /// <summary>One family of the second pass: the reference-calibrated de novo envelope credited to it.</summary>
+    /// <summary>One family of the second pass: the measured de novo envelope credited to it.</summary>
     public sealed class FamilyWorldFamilyRow
     {
         public string Family { get; init; } = string.Empty;
@@ -493,7 +493,7 @@ namespace FamilyQuant
             var creditableSet = new HashSet<string>(creditable, StringComparer.OrdinalIgnoreCase);
             foreach (var (peptide, sequence) in residual)
             {
-                double envelope = peptide.ReferenceCalibratedEnvelope;
+                double envelope = peptide.EnvelopeSum;
                 FamilyWorldCredit credit = CreditOf(sequence);
                 result.ResidualEnvelope += envelope;
                 result.ResidualPeptides++;

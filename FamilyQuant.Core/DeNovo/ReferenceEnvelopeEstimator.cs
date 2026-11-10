@@ -57,7 +57,8 @@ namespace FamilyQuant.DeNovo
     }
 
     /// <summary>
-    /// Estimates a de novo isotope envelope from its measured M+0 using the envelope/M+0 relationship
+    /// Historical model retained for explicit comparison commands and the legacy presentation export.
+    /// Live quantitation uses measured envelopes. Estimates a de novo envelope from M+0 using the relationship
     /// observed on identified peptides of comparable neutral mass. This is an explicitly model-based
     /// estimate, not an empirical calibration of de novo peptide accuracy or an observed de novo
     /// envelope. The directly credited six-window envelope remains available as a separate diagnostic.

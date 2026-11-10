@@ -177,7 +177,7 @@ namespace FamilyQuant
             DeNovoScoreDistributionFile, DeNovoConsolidationFile, PeptideEvidenceFile,
             DatabaseSearchConcordanceFile,
             DeNovoSearchCrosscheckFile,
-            SignalByRunFile, SignalUpliftFile, ReferenceEnvelopeDiagnosticsFile, IdentitySweepFile,
+            SignalByRunFile, SignalUpliftFile, IdentitySweepFile,
             FamilyContributionFile, FamilySignalShareFile, FamilySourceSequenceFile,
         };
 
@@ -235,7 +235,6 @@ namespace FamilyQuant
             int currentIdentity = manifest.PresentationIdentitySweep
                 .OrderBy(r => Math.Abs(r.Groups - reference.AllComponents)).ThenByDescending(r => r.Identity)
                 .First().Identity;
-            ReferenceEnvelopeDiagnostics diagnostics = ResolveReferenceEnvelopeDiagnostics(data, manifest);
 
             return new List<PresentationFigure>
             {
@@ -254,8 +253,6 @@ namespace FamilyQuant
                     new DeNovoSearchCrosscheckChart(manifest.DeNovoOverlap, manifest.IdentificationConcordance)),
                 new PresentationFigure(SignalByRunFile, new SignalByRunChart(data.Fractions)),
                 new PresentationFigure(SignalUpliftFile, new SignalUpliftChart(data.Grouped)),
-                new PresentationFigure(ReferenceEnvelopeDiagnosticsFile,
-                    new ReferenceEnvelopeDiagnosticsChart(diagnostics)),
                 new PresentationFigure(IdentitySweepFile,
                     new ReferenceIdentitySweepChart(manifest.PresentationIdentitySweep, currentIdentity)),
                 new PresentationFigure(FamilyContributionFile,
@@ -2173,7 +2170,7 @@ namespace FamilyQuant
         protected override void OnRender(DrawingContext dc)
         {
             Ground(dc, "Assigned signal by technical run",
-                "Identified observed envelope plus the reference-envelope model estimate for de novo M+0, each divided by run TIC.");
+                "Identified observed envelope plus the measured envelope for de novo peptides, each divided by run TIC.");
             double left = 80, top = 100, bottom = ActualHeight - 80, width = ActualWidth - 120;
             double max = 0.50, groupW = width / Math.Max(1, rows.Count);
             for (int i = 0; i < rows.Count; i++)
@@ -2222,127 +2219,6 @@ namespace FamilyQuant
             DrawText(dc, "+" + (grouped.DeNovoFractionReferenceCalibrated * 100).ToString("F2", CultureInfo.CurrentCulture) +
                 " percentage points", Palette.Muted, 12, new Point(ActualWidth * 0.67, 150));
         }
-    }
-
-    /// <summary>Defensibility view for the identified-reference envelope model: reference support per
-    /// fixed mass bin, fitted ratios, leave-one-representative-out error, and a pooled-ratio sensitivity
-    /// comparator. The sensitivity span is explicitly not presented as uncertainty or a confidence
-    /// interval.</summary>
-    public sealed class ReferenceEnvelopeDiagnosticsChart : TalkChartBase
-    {
-        private readonly ReferenceEnvelopeDiagnostics diagnostics;
-
-        public ReferenceEnvelopeDiagnosticsChart(ReferenceEnvelopeDiagnostics diagnostics)
-        {
-            this.diagnostics = diagnostics ?? throw new ArgumentNullException(nameof(diagnostics));
-            this.diagnostics.Validate();
-        }
-
-        protected override void OnRender(DrawingContext dc)
-        {
-            Ground(dc, "Reference-envelope model: support, validation, sensitivity",
-                "De novo M+0 is scaled by identified envelope/M+0 ratios in fixed neutral-mass bins. This is a model estimate, not empirical calibration.");
-            if (ActualWidth < 650 || ActualHeight < 330) return;
-
-            Rect plot = new Rect(58, 126, ActualWidth * 0.57, ActualHeight - 224);
-            int maxSupport = Math.Max(1, diagnostics.Bins.Max(b => b.IdentifiedPeptides));
-            int supportTick = NiceIntegerTick(maxSupport, 4);
-            int supportAxisMaximum = ((maxSupport + supportTick - 1) / supportTick) * supportTick;
-            int supportTickCount = Math.Max(1, supportAxisMaximum / supportTick);
-            dc.DrawLine(new Pen(Palette.Axis, 1), plot.BottomLeft, plot.TopLeft);
-            dc.DrawLine(new Pen(Palette.Axis, 1), plot.BottomLeft, plot.BottomRight);
-            for (int i = 0; i <= supportTickCount; i++)
-            {
-                int value = supportTick * i;
-                double y = plot.Bottom - plot.Height * value / supportAxisMaximum;
-                dc.DrawLine(new Pen(Palette.Grid, 0.6), new Point(plot.Left, y), new Point(plot.Right, y));
-                DrawText(dc, value.ToString("N0", CultureInfo.CurrentCulture), Palette.Muted, 8,
-                    new Point(plot.Left - 35, y - 6));
-            }
-            DrawText(dc, "identified reference representatives", Palette.Muted, 9,
-                new Point(plot.Left, 92), true);
-
-            double slot = plot.Width / diagnostics.Bins.Count;
-            for (int i = 0; i < diagnostics.Bins.Count; i++)
-            {
-                ReferenceEnvelopeBinDiagnostic bin = diagnostics.Bins[i];
-                double x = plot.Left + i * slot + slot * 0.16;
-                double height = plot.Height * bin.IdentifiedPeptides / supportAxisMaximum;
-                Brush fill = bin.UsesPooledFallback ? Palette.Grid : Palette.Identified;
-                dc.DrawRectangle(fill, new Pen(Palette.Axis, 0.6),
-                    new Rect(x, plot.Bottom - height, slot * 0.68, Math.Max(1, height)));
-                string ratio = "×" + bin.EnvelopeToM0Ratio.ToString("0.00", CultureInfo.CurrentCulture) +
-                    (bin.UsesPooledFallback ? "*" : string.Empty);
-                FormattedText rt = Text(ratio, bin.UsesPooledFallback ? Palette.Mixing : Palette.Ink, 8.5, true);
-                dc.DrawText(rt, new Point(x + slot * 0.34 - rt.Width / 2,
-                    Math.Max(plot.Top - 2, plot.Bottom - height - 20)));
-                FormattedText label = Text(MassBinLabel(bin), Palette.Muted, 7.5);
-                dc.DrawText(label, new Point(x + slot * 0.34 - label.Width / 2, plot.Bottom + 10));
-            }
-
-            double right = ActualWidth * 0.67;
-            double panelW = ActualWidth - right - 34;
-            dc.DrawRoundedRectangle(Palette.Panel, new Pen(Palette.Grid, 0.8),
-                new Rect(right, 96, panelW, ActualHeight - 138), 8, 8);
-            DrawText(dc, "LEAVE-ONE-REPRESENTATIVE-OUT", Palette.Mixing, 9.5,
-                new Point(right + 20, 120), true);
-            DrawText(dc, P(diagnostics.CrossValidatedWeightedAbsolutePercentError), Palette.Identified,
-                28, new Point(right + 20, 150), true);
-            DrawText(dc, "weighted absolute prediction error", Palette.Ink, 9.5,
-                new Point(right + 20, 193), true);
-            DrawText(dc, "median APE  " + P(diagnostics.CrossValidatedMedianAbsolutePercentError),
-                Palette.Ink, 9, new Point(right + 20, 224));
-            DrawText(dc, "90th-percentile APE  " + P(diagnostics.CrossValidatedP90AbsolutePercentError),
-                Palette.Ink, 9, new Point(right + 20, 248));
-            DrawText(dc, "signed bias  " + SignedPercent(diagnostics.CrossValidatedSignedBiasFraction),
-                Palette.Ink, 9, new Point(right + 20, 272));
-            DrawText(dc, N(diagnostics.CrossValidatedPeptides) + " identified representatives validated",
-                Palette.Muted, 8.5, new Point(right + 20, 299));
-
-            DrawText(dc, "MODEL-FORM SENSITIVITY", Palette.Mixing, 9.5,
-                new Point(right + 20, 334), true);
-            DrawText(dc, "fixed bins  " + Scientific(diagnostics.FixedBinDeNovoEstimate), Palette.Ink, 9,
-                new Point(right + 20, 362));
-            DrawText(dc, "one pooled ratio  " + Scientific(diagnostics.PooledRatioDeNovoEstimate), Palette.Ink, 9,
-                new Point(right + 20, 386));
-            double relativeDifference = diagnostics.FixedBinDeNovoEstimate > 0
-                ? Math.Abs(diagnostics.PooledRatioDeNovoEstimate - diagnostics.FixedBinDeNovoEstimate)
-                    / diagnostics.FixedBinDeNovoEstimate : 0.0;
-            DrawText(dc, "difference vs fixed-bin estimate  " + P(relativeDifference), Palette.DeNovo, 9,
-                new Point(right + 20, 412), true);
-            DrawText(dc, "Sensitivity comparator only, not a confidence interval.", Palette.Muted, 8.5,
-                new Point(right + 20, 440));
-
-            DrawText(dc, "Ratio labels above bars are fitted identified envelope/M+0. * = no support in that bin; pooled identified ratio used.",
-                Palette.Muted, 8.5, new Point(58, ActualHeight - 47));
-            DrawText(dc, "Method: " + diagnostics.Method, Palette.Muted, 8,
-                new Point(58, ActualHeight - 25));
-        }
-
-        private static string MassBinLabel(ReferenceEnvelopeBinDiagnostic bin)
-        {
-            string lower = (bin.LowerMassDa / 1000.0).ToString("0.#", CultureInfo.CurrentCulture);
-            if (!bin.UpperMassDa.HasValue) return lower + "k+";
-            string upper = (bin.UpperMassDa.Value / 1000.0).ToString("0.#", CultureInfo.CurrentCulture);
-            return lower + "-" + upper + "k";
-        }
-
-        private static int NiceIntegerTick(int maximum, int targetTicks)
-        {
-            double rough = maximum / (double)Math.Max(1, targetTicks);
-            double magnitude = Math.Pow(10, Math.Floor(Math.Log10(Math.Max(rough, 1.0))));
-            double normalized = rough / magnitude;
-            double factor = normalized <= 1 ? 1 : normalized <= 2 ? 2 :
-                normalized <= 5 ? 5 : 10;
-            return Math.Max(1, (int)Math.Round(factor * magnitude));
-        }
-
-        private static string SignedPercent(double value) =>
-            (value >= 0 ? "+" : string.Empty) +
-            (value * 100).ToString("0.0", CultureInfo.CurrentCulture) + "%";
-
-        private static string Scientific(double value) =>
-            value.ToString("0.###E+0", CultureInfo.CurrentCulture) + " intensity×min";
     }
 
     public sealed class ReferenceComponentsChart : TalkChartBase
@@ -2401,7 +2277,7 @@ namespace FamilyQuant
         {
             Ground(dc, "De novo contribution versus total attributed family signal",
                 "Each point is one of " + N(rows.Count) +
-                " families with attributed signal; labels mark the ten strongest. X = identified signal + de novo model estimate; Y = de novo share.");
+                " families with attributed signal; labels mark the ten strongest. X = identified signal + de novo measured envelope; Y = de novo share.");
             if (rows.Count == 0) return;
             Rect plot = new Rect(96, 112, ActualWidth - 148, ActualHeight - 198);
             double dataMaxX = rows.Max(r => Math.Max(0, r.TotalEnvelopeReferenceCalibrated)) / 1e9;
@@ -2786,7 +2662,7 @@ namespace FamilyQuant
         protected override void OnRender(DrawingContext dc)
         {
             Ground(dc, "What PEAKS de novo-only and DeepNovo add",
-                "Left: carried-forward distinct sequences (no XIC). Right: assigned share of the same pooled TIC; the de novo addition is model-estimated.");
+                "Left: carried-forward distinct sequences (no XIC). Right: assigned share of the same pooled TIC; the de novo addition uses its measured envelope.");
             if (ActualWidth < 700 || ActualHeight < 360) return;
 
             List<DeNovoTalkComparisonRow> arms = rows.Skip(1).ToList();
@@ -2822,7 +2698,7 @@ namespace FamilyQuant
 
             DrawText(dc, "ASSIGNED SHARE OF POOLED TIC", Palette.Identified, 10,
                 new Point(signalPanel.Left + 18, signalPanel.Top + 16), true);
-            DrawText(dc, "Observed search baseline + model-estimated de novo addition",
+            DrawText(dc, "Observed search baseline + measured de novo envelope",
                 Palette.Muted, 8.3, new Point(signalPanel.Left + 18, signalPanel.Top + 38));
 
             double maxSignal = Math.Max(0.01, rows.Max(r => r.CombinedAssignedFractionOfTic) * 1.12);
@@ -2854,7 +2730,7 @@ namespace FamilyQuant
                 new Point(signalPanel.Left + 36, legendY - 3));
             dc.DrawRectangle(Palette.DeNovo, null,
                 new Rect(signalPanel.Left + 150, legendY, 12, 12));
-            DrawText(dc, "de novo model estimate", Palette.Ink, 8.3,
+            DrawText(dc, "de novo measured envelope", Palette.Ink, 8.3,
                 new Point(signalPanel.Left + 168, legendY - 3));
 
             DrawText(dc,
@@ -2865,8 +2741,8 @@ namespace FamilyQuant
 
     /// <summary>
     /// Fully processed de novo-source variants on the one comparable quantity: share of the same
-    /// pooled TIC. Identified and de novo parts are directly labelled, and a whisker shows the fixed-bin
-    /// versus pooled-ratio model sensitivity. Confidence metrics remain source-specific in the subtitle.
+    /// pooled TIC. Identified and de novo measured envelopes are directly labelled.
+    /// Confidence metrics remain source-specific in the subtitle.
     /// </summary>
     public sealed class DeNovoVariantComparisonChart : TalkChartBase
     {
@@ -2882,13 +2758,12 @@ namespace FamilyQuant
 
         protected override void OnRender(DrawingContext dc)
         {
-            Ground(dc, "Observed search signal + de novo model estimate across source variants",
-                "Same pooled TIC denominator; green is model-estimated, and each source keeps its native confidence field and cutoff. ALC and SCORE are not a common scale.");
+            Ground(dc, "Measured search and de novo envelopes across source variants",
+                "Same pooled TIC denominator; both parts use measured envelopes, and each source keeps its native confidence field and cutoff. ALC and SCORE are not a common scale.");
             if (ActualWidth < 600 || ActualHeight < 300) return;
 
             Rect plot = new Rect(86, 104, ActualWidth - 128, ActualHeight - 240);
-            double max = Math.Max(0.01, rows.Max(r => Math.Max(
-                r.CombinedModelEstimateFractionOfTic, r.CombinedSensitivityUpperFractionOfTic)) * 1.18);
+            double max = Math.Max(0.01, rows.Max(r => r.CombinedModelEstimateFractionOfTic) * 1.18);
             // Round upward to a clean five-percentage-point increment.
             max = Math.Ceiling(max * 20.0) / 20.0;
             var axis = new Pen(Palette.Axis, 1.0);
@@ -2917,14 +2792,6 @@ namespace FamilyQuant
                 Bar(dc, identified, Palette.Identified, P(row.IdentifiedFractionOfTic));
                 Bar(dc, deNovo, Palette.DeNovo, "+" + P(row.DeNovoModelEstimateFractionOfTic));
 
-                double whiskerX = x + barWidth + 12;
-                double lowY = plot.Bottom - plot.Height * row.CombinedSensitivityLowerFractionOfTic / max;
-                double highY = plot.Bottom - plot.Height * row.CombinedSensitivityUpperFractionOfTic / max;
-                var whisker = new Pen(Palette.Mixing, 1.5);
-                dc.DrawLine(whisker, new Point(whiskerX, lowY), new Point(whiskerX, highY));
-                dc.DrawLine(whisker, new Point(whiskerX - 4, lowY), new Point(whiskerX + 4, lowY));
-                dc.DrawLine(whisker, new Point(whiskerX - 4, highY), new Point(whiskerX + 4, highY));
-
                 DrawText(dc, P(row.CombinedModelEstimateFractionOfTic), Palette.Ink, 11,
                     new Point(x + barWidth / 2 - 25, deNovo.Top - 24), true);
                 FormattedText name = Text(row.Variant, Palette.Ink, 10, true);
@@ -2947,13 +2814,9 @@ namespace FamilyQuant
                 new Point(plot.Left + 20, ActualHeight - 36));
             dc.DrawRectangle(Palette.DeNovo, null,
                 new Rect(plot.Left + 195, ActualHeight - 33, 13, 13));
-            DrawText(dc, "reference-envelope model estimate for de novo M+0", Palette.Ink, 9,
+            DrawText(dc, "measured envelope for de novo peptides", Palette.Ink, 9,
                 new Point(plot.Left + 215, ActualHeight - 36));
-            var legendWhisker = new Pen(Palette.Mixing, 1.5);
-            dc.DrawLine(legendWhisker, new Point(plot.Left, ActualHeight - 10),
-                new Point(plot.Left + 20, ActualHeight - 10));
-            DrawText(dc, "fixed-bin vs pooled-ratio sensitivity (not a confidence interval)",
-                Palette.Ink, 9, new Point(plot.Left + 28, ActualHeight - 17));
+
         }
     }
 }

@@ -9,22 +9,33 @@ using System.Windows.Media;
 namespace FamilyQuant
 {
     /// <summary>
-    /// The headline recovery picture, separating the primary estimate from two sensitivity readings.
-    ///
-    /// TOP - THREE DISTINCT READINGS, NEVER A RANGE OR PHYSICAL PARTITION. Each run shows the M+0-only
-    /// sensitivity reading, the identified-reference mass-calibrated primary estimate, and the unadjusted
-    /// six-window diagnostic. Their ordering is data-dependent; none is labelled a confidence bound.
-    ///
-    /// BOTTOM - THREE INDEPENDENT LEVELS AGAINST EACH RUN'S OWN TIC: raw TIC, the resolved isotope-series
-    /// detector diagnostic, and the primary recovery estimate. The detector has no peptide-level FDR and
-    /// therefore is not subtracted from TIC to manufacture biological residual classes. Normalising each
-    /// run to its own TIC makes technical replicates comparable without letting the pooled row dominate.
-    ///
-    /// Drawn with OnRender for the same reason as the other charts, and renders headless.
+    /// Recovery read as M+0 only and as the measured isotope envelope, each against the run's TIC.
+    /// The lower panel retains the independent MS1 isotope-series diagnostic and the identified/de novo
+    /// envelope split. The detector is not peptide-FDR calibrated and does not define biological residuals.
     /// </summary>
     public class RecoveryChart : ChartDrawingBase, IPalettedChart
     {
         private readonly List<NativeRunFraction> rows;
+        public int? IsotopeCeiling { get; }
+        public string EnvelopeLabel => IsotopeCeiling.HasValue
+            ? "Measured envelope (M+0" + (IsotopeCeiling == 1 ? ")" : " to M+" + (IsotopeCeiling.Value - 1).ToString(CultureInfo.InvariantCulture) + ")")
+            : "Measured envelope (isotope ceiling not recorded)";
+        public IReadOnlyList<string> LegendLines
+        {
+            get
+            {
+                var lines = new List<string>
+                {
+                    "M+0 only: identified and de novo monoisotopic signal divided by this run's TIC.",
+                    EnvelopeLabel + ": all credited isotopes / run TIC; lower bar: identified then de novo.",
+                    "MS1 total ion current: all measured signal in this run, shown as 100%.",
+                };
+                if (rows.Any(r => r.HasDetectedPeptideLike))
+                    lines.Add(AnyChargeSplit ? ChargeSplitLegendText()
+                        : "Resolved isotope-series diagnostic: independent MS1 estimate, not peptide-FDR calibrated.");
+                return lines;
+            }
+        }
 
 
         // The gutters are FLOORS and CEILINGS, not fixed widths. A fixed 150 DIP left gutter cut every
@@ -56,10 +67,12 @@ namespace FamilyQuant
         /// non-grouped rows and need not build the aggregate.</param>
         /// <param name="grouped">The pooled row, or null to have it built from the fractions.</param>
         /// <param name="palette">The colours to paint in, or null for the screen palette.</param>
+        /// <param name="isotopeCeiling">The recorded maximum credited isotopes, or null when unrecorded.</param>
         public RecoveryChart(IEnumerable<NativeRunFraction>? fractions, NativeRunFraction? grouped = null,
-                             ChartPalette? palette = null)
+                             ChartPalette? palette = null, int? isotopeCeiling = null)
         {
             this.palette = palette ?? ChartPalette.Dark;
+            IsotopeCeiling = isotopeCeiling is >= 1 and <= 6 ? isotopeCeiling : null;
 
             var given = (fractions ?? Enumerable.Empty<NativeRunFraction>()).Where(f => !f.IsGrouped).ToList();
             this.rows = new List<NativeRunFraction>(given);
@@ -68,10 +81,7 @@ namespace FamilyQuant
 
             MinHeight = 300;
             Margin = new Thickness(0);
-            ToolTip = "Top: recovered ion current read three ways, M+0, the PRIMARY estimate and an " +
-                      "unadjusted diagnostic. Bottom: TIC, isotope-series detector and primary estimate; " +
-                      "the detector is not peptide-FDR calibrated and does not partition the TIC into " +
-                      "biological classes.";
+            ToolTip = "Compare M+0 only with the measured isotope envelope, each divided by the run's recorded TIC; the lower measured bar places identified signal before de novo signal. This read-only chart also shows the independent isotope-series diagnostic, which is not peptide-FDR calibrated and does not partition TIC into biological classes.";
         }
 
 
@@ -108,12 +118,8 @@ namespace FamilyQuant
             // heading above it. At 36 the two collided, and the four-way caption is longer than the
             // caption that collision was first noticed under.
             double topBand = 46;
-            // Two legend rows: one for the shares of the top bar, one for the levels of the bottom panel.
-            // A single row could not hold both without dropping entries, and a legend that drops entries
-            // is a figure that cannot be read without its caption. A THIRD line is added when the detected
-            // level is split by charge, carrying what the two parts mean in words - the split is a claim
-            // about evidence, and a colour key alone would not state it.
-            double legendBand = AnyChargeSplit ? 66 : 48;
+            // One plain legend line per reading or independent level.
+            double legendBand = LegendLines.Count * 18 + 14;
             double usable = ActualHeight - topBand - legendBand;
 
             // The two panels split the height; the top (fraction) panel gets the larger share.
@@ -136,8 +142,7 @@ namespace FamilyQuant
         /// has one, else what was quantified. Shared with the gutter measurement so the space reserved is
         /// the space the text will need.</summary>
         private static string TopTailText(NativeRunFraction f) =>
-            Pct(f.RecoveredFractionM0) + " / " + Pct(f.RecoveredFractionReferenceCalibrated) +
-            " / " + Pct(f.RecoveredFractionEnvelope);
+            Pct(f.RecoveredFractionM0) + " / " + Pct(f.RecoveredFractionEnvelope);
 
         /// <summary>The number printed beside a row of the BOTTOM panel. These are FRACTIONS of the run's
         /// own TIC and always were, which is why normalising the bars to that same TIC leaves them
@@ -266,7 +271,7 @@ namespace FamilyQuant
             Brush Muted = palette.Muted;
 
             var caption = Text(
-                    "Recovery readings: M+0 sensitivity / PRIMARY mass-calibrated estimate / unadjusted six-window diagnostic",
+                    "Recovery readings: M+0 only / " + EnvelopeLabel,
                 Muted, 11, bold: true);
             dc.DrawText(caption, new Point(area.Left - nameGutter + 4, area.Top - 16));
 
@@ -286,19 +291,18 @@ namespace FamilyQuant
         {
             ChartPalette pal = palette;
             Brush Ink = pal.Ink, Muted = pal.Muted, Grid = pal.Grid;
-            Brush Primary = pal.Quantified, M0 = pal.NotQuantified, Diagnostic = pal.Remainder;
+            Brush Primary = pal.Quantified, M0 = pal.NotQuantified;
 
             var name = FitLabel(label, f.IsGrouped ? Ink : Muted, f.IsGrouped, nameGutter - LabelPad);
             dc.DrawText(name, new Point(Math.Max(4, bar.Left - 10 - name.Width),
                                         bar.Top + (bar.Height - name.Height) / 2));
 
             double gap = 2;
-            double h = Math.Max(1, (bar.Height - 2 * gap) / 3.0);
+            double h = Math.Max(1, (bar.Height - gap) / 2.0);
             var readings = new (double Share, Brush Fill)[]
             {
                 (f.RecoveredFractionM0, M0),
-                (f.RecoveredFractionReferenceCalibrated, Primary),
-                (f.RecoveredFractionEnvelope, Diagnostic),
+                (f.RecoveredFractionEnvelope, Primary),
             };
             for (int i = 0; i < readings.Length; i++)
             {
@@ -320,16 +324,16 @@ namespace FamilyQuant
             ChartPalette pal = palette;
             Brush Ink = pal.Ink, Muted = pal.Muted;
             Brush Identified = pal.Identified, DeNovo = pal.DeNovo, Tic = pal.Tic;
-            Brush Detected = pal.Detected;
-            Brush DetectedMulti = pal.DetectedMultiplyCharged, DetectedSingle = pal.DetectedSinglyCharged;
+            Brush Detected = pal.Remainder;
+            Brush DetectedMulti = pal.Remainder, DetectedSingle = pal.Muted;
 
             bool anyDetected = rows.Any(r => r.HasDetectedPeptideLike);
             bool split = AnyChargeSplit;
             var caption = Text(anyDetected
                     ? (split
-                        ? "MS1 TIC, resolved isotope-series diagnostic (z >= 2 then z = 1), and PRIMARY recovery estimate"
-                        : "MS1 TIC, resolved isotope-series diagnostic, and PRIMARY recovery estimate")
-                    : "MS1 TIC vs the identified-reference recovery model estimate",
+                        ? "MS1 TIC, resolved isotope-series diagnostic (z >= 2 then z = 1), and measured envelope recovery"
+                        : "MS1 TIC, resolved isotope-series diagnostic, and measured envelope recovery")
+                    : "MS1 TIC vs measured envelope recovery",
                 Muted, 11, bold: true);
             dc.DrawText(caption, new Point(area.Left - nameGutter + 4, area.Top - 16));
 
@@ -350,7 +354,7 @@ namespace FamilyQuant
                 dc.DrawText(name, new Point(Math.Max(4, area.Left - 10 - name.Width),
                                             y + (groupH - name.Height) / 2));
 
-                double found = f.IdentifiedEnvelope + f.DeNovoEnvelopeReferenceCalibrated;
+                double found = f.IdentifiedEnvelope + f.DeNovoEnvelope;
 
                 // EVERY ROW AGAINST ITS OWN TOTAL ION CURRENT. Scaled to the largest row instead, the
                 // pooled row (three runs of current) drew about three times any single run and squeezed
@@ -397,7 +401,7 @@ namespace FamilyQuant
                 // Last row: the assigned envelope as identified then de novo, so its make-up shows.
                 double wFound = found / denom * area.Width;
                 double wFoundId = f.IdentifiedEnvelope / denom * area.Width;
-                double wFoundDn = f.DeNovoEnvelopeReferenceCalibrated / denom * area.Width;
+                double wFoundDn = f.DeNovoEnvelope / denom * area.Width;
                 dc.DrawRectangle(Identified, null, new Rect(area.Left, rowY, Math.Max(0, wFoundId), subH));
                 dc.DrawRectangle(DeNovo, null, new Rect(area.Left + wFoundId, rowY, Math.Max(0, wFoundDn), subH));
 
@@ -417,57 +421,21 @@ namespace FamilyQuant
 
         private void DrawLegend(DrawingContext dc, Point at)
         {
-            ChartPalette pal = palette;
-            Brush Muted = pal.Muted;
-            Brush Quantified = pal.Quantified, NotQuantified = pal.NotQuantified;
-            Brush Identified = pal.Identified, DeNovo = pal.DeNovo, Tic = pal.Tic, Detected = pal.Detected;
-            Brush Diagnostic = pal.Remainder;
-            Brush DetectedMulti = pal.DetectedMultiplyCharged, DetectedSingle = pal.DetectedSinglyCharged;
-
-            bool anyDetected = rows.Any(r => r.HasDetectedPeptideLike);
-            bool split = AnyChargeSplit;
-
-            // Row one names the shares of the TOP bar, row two the levels of the BOTTOM panel. Two rows
-            // because one cannot hold both, and an entry silently dropped for want of width would leave a
-            // block on the figure with no name.
-            var shareRow = new (Brush Fill, string Name)[]
+            IReadOnlyList<string> lines = LegendLines;
+            Brush[] fills = { palette.NotQuantified, palette.Quantified, palette.Tic,
+                palette.Remainder };
+            for (int i = 0; i < lines.Count; i++)
             {
-                (NotQuantified, "M+0 sensitivity (not a formal lower bound)"),
-                (Quantified, "identified-reference model estimate"),
-                (Diagnostic, "unadjusted six-window diagnostic"),
-            };
-
-            // With the charge split the detected level takes TWO keys instead of one, kept short here
-            // because the line underneath states what they mean in full. Without it, the single key the
-            // figure has always carried.
-            var levelRow = anyDetected
-                ? (split
-                    ? new (Brush Fill, string Name)[]
-                    {
-                        (Tic, "MS1 total ion current"),
-                        (DetectedMulti, "resolved series z >= 2 (diagnostic)"),
-                        (DetectedSingle, "resolved series z = 1 (diagnostic)"),
-                        (Identified, "identified envelope"),
-                        (DeNovo, "de novo reference-model estimate"),
-                    }
-                    : new (Brush Fill, string Name)[]
-                    {
-                        (Tic, "MS1 total ion current"),
-                        (Detected, "resolved isotope-series diagnostic"),
-                        (Identified, "identified envelope"),
-                        (DeNovo, "de novo reference-model estimate"),
-                    })
-                : new (Brush Fill, string Name)[]
-                {
-                    (Tic, "MS1 total ion current"),
-                    (Identified, "identified envelope"),
-                    (DeNovo, "de novo reference-model estimate"),
-                };
-
-            DrawLegendRow(dc, at, shareRow);
-            DrawLegendRow(dc, new Point(at.X, at.Y + 18), levelRow);
-
-            if (split) DrawChargeSplitLine(dc, new Point(at.X, at.Y + 36));
+                double y = at.Y + i * 18;
+                dc.DrawRectangle(fills[i], null, new Rect(at.X, y + 2, 12, 12));
+                if (i == 3 && AnyChargeSplit)
+                    dc.DrawRectangle(palette.Muted, null, new Rect(at.X + 6, y + 2, 6, 12));
+                var text = Text(lines[i], palette.Muted, 10);
+                text.MaxTextWidth = Math.Max(1, ActualWidth - at.X - 24);
+                text.MaxLineCount = 1;
+                text.Trimming = TextTrimming.CharacterEllipsis;
+                dc.DrawText(text, new Point(at.X + 18, y));
+            }
         }
 
         /// <summary>
@@ -476,7 +444,7 @@ namespace FamilyQuant
         /// evidence, which is the whole point of the split - and it would leave the reader free to take the
         /// singly charged part for "not a peptide", which it is not.
         /// </summary>
-        private void DrawChargeSplitLine(DrawingContext dc, Point at)
+        private string ChargeSplitLegendText()
         {
             NativeRunFraction? reference = rows.LastOrDefault(r => r.HasDetectedChargeSplit);
             string numbers = reference == null || !(reference.Tic > 0)
@@ -485,30 +453,10 @@ namespace FamilyQuant
                   Pct(reference.DetectedFractionSinglyCharged) + " of the TIC" +
                   (reference.IsGrouped ? " over the runs together" : " on " + reference.Run) + ".";
 
-            var line = Text(
-                "z >= 2: " + Ms1EnvelopeDetector.StrongEvidenceLabel + ". z = 1: " +
-                Ms1EnvelopeDetector.WeakEvidenceLabel + ", not a claim it is not a peptide." + numbers,
-                palette.Muted, 10);
+            return "Resolved series: z >= 2 stronger evidence; z = 1 weaker evidence, which can include peptides." + numbers;
 
-            // Trimmed rather than allowed to run off the figure: an ellipsis says there is more, a
-            // half-drawn word says nothing.
-            line.MaxTextWidth = Math.Max(1, ActualWidth - at.X - 8);
-            line.MaxLineCount = 1;
-            line.Trimming = TextTrimming.CharacterEllipsis;
-            dc.DrawText(line, at);
         }
 
-        private void DrawLegendRow(DrawingContext dc, Point at, (Brush Fill, string Name)[] entries)
-        {
-            double x = at.X;
-            foreach (var e in entries)
-            {
-                dc.DrawRectangle(e.Fill, null, new Rect(x, at.Y + 2, 12, 12));
-                var t = Text(e.Name, palette.Muted, 11);
-                dc.DrawText(t, new Point(x + 16, at.Y));
-                x += 16 + t.Width + 18;
-                if (x > ActualWidth - 60) break;
-            }
-        }
+
     }
 }

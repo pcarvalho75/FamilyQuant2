@@ -52,9 +52,7 @@ namespace FamilyQuant
         /// method sums. Equal to <see cref="NativePeptideQuant.EnvelopeSum"/> for this peptide.</summary>
         public double Envelope { get; set; }
 
-        /// <summary>The identified-reference envelope model estimate used for de novo recovery. It is not
-        /// an empirical calibration; the directly observed six-window <see cref="Envelope"/> remains a
-        /// separate diagnostic.</summary>
+        /// <summary>Compatibility name for the measured isotope envelope used for recovery.</summary>
         public double ReferenceCalibratedEnvelope { get; set; }
 
         /// <summary>The family (its UserID) this peptide carries, or null when none was attributed.</summary>
@@ -76,6 +74,10 @@ namespace FamilyQuant
     /// </summary>
     public sealed class AnalyticsData
     {
+        /// <summary>Recorded extraction ceiling; null when it was not supplied. Padded storage arrays
+        /// cannot establish the ceiling selected for a computation.</summary>
+        public int? IsotopeCeiling { get; internal set; }
+
         public List<AnalyticsPeptide> Peptides { get; } = new List<AnalyticsPeptide>();
 
         /// <summary>The per-run native fractions (Q3), in run order. Never carries the grouped row; that
@@ -158,7 +160,6 @@ namespace FamilyQuant
 
             var peptides = new List<AnalyticsPeptide>();
             List<NativePeptideQuant> nativePeptides = NativeQuantFractions.DedupToPeptides(rowList);
-            ReferenceEnvelopeEstimator.Apply(nativePeptides);
             foreach (NativePeptideQuant p in nativePeptides)
             {
                 string key = KeyOf(p.Run, p.Side, p.Sequence ?? string.Empty, p.Charge);
@@ -239,11 +240,12 @@ namespace FamilyQuant
         /// the store and the manifest's per-run TIC. A store with no TIC (an unmanifested project) still
         /// yields a table; its fractions divide by zero and read zero, which the recovery chart says.
         /// </summary>
-        public static AnalyticsData Build(IEnumerable<QuantRow> rows, IReadOnlyDictionary<string, double>? perRunTic)
+        public static AnalyticsData Build(IEnumerable<QuantRow> rows, IReadOnlyDictionary<string, double>? perRunTic,
+            int? isotopeCeiling = null)
         {
             if (rows == null) throw new ArgumentNullException(nameof(rows));
 
-            var data = new AnalyticsData();
+            var data = new AnalyticsData { IsotopeCeiling = isotopeCeiling is >= 1 and <= 6 ? isotopeCeiling : null };
             data.Peptides.AddRange(BuildPeptides(rows));
 
             var tic = perRunTic ?? new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);

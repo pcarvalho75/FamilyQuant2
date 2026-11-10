@@ -4,7 +4,7 @@ using FamilyQuant.DeNovo;
 namespace FamilyQuant;
 
 /// <summary>Comparison of actual computed cutoff variants. Missing variants are absent, never zero.
-/// Shares use each variant's measured peptide signal on the primary calibrated basis. Full counts
+/// Shares use each variant's measured peptide signal on the measured envelope basis. Full counts
 /// overlap and are not a normalized family composition. Family-world-only credits are excluded.</summary>
 public sealed class FamilySensitivityResult
 {

@@ -59,7 +59,7 @@ internal static partial class Program
         var hits = FamilyEnvelopeQuant.SearchCuration(rows, original);
         var mapping = FamilyEnvelopeQuant.AttributeHits(hits, original);
         var assigned = FamilyEnvelopeQuant.AttributePeptides(FamilyEnvelopeQuant.PreparePeptides(rows), mapping);
-        var manifest = new QuantManifest { PerRunTic = new() { ["r"] = 1200 } };
+        var manifest = new QuantManifest { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method,  PerRunTic = new() { ["r"] = 1200 } };
         FamilyCompositionStudy.StoreRunShares(manifest, assigned);
         FamilyCompositionStudy.StoreProteinCounts(manifest, assigned, original.MyExtendedFastaItems);
         FamilyCompositionStudy.StoreSubclasses(manifest, assigned, (_, _, _) => new[] { "part" });

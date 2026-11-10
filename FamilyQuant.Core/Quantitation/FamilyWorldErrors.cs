@@ -205,7 +205,7 @@ namespace FamilyQuant
 
         /// <summary>The first pass's rule, in plain words, beside <see cref="Rules"/>.</summary>
         public string CompositionRules { get; set; } = string.Empty;
-        /// <summary>The measured basis the composition closes on: identified envelope plus de novo reference-calibrated
+        /// <summary>The measured basis the composition closes on: identified envelope plus de novo measured
         /// envelope, each deduplicated peptide once (FamilyEnvelopeQuant's MeasuredTotalEnvelopeReferenceCalibrated).</summary>
         public double MeasuredIdentifiedEnvelope { get; set; }
         public double MeasuredDeNovoEnvelope { get; set; }
@@ -530,7 +530,7 @@ namespace FamilyQuant
             {
                 NativePeptideQuant p = attributed.Peptide;
                 bool identified = string.Equals(p.Side, NativeQuantFractions.SideIdentified, StringComparison.Ordinal);
-                double envelope = identified ? p.EnvelopeSum : p.ReferenceCalibratedEnvelope;
+                double envelope = p.EnvelopeSum;
                 if (identified) summary.MeasuredIdentifiedEnvelope += envelope;
                 else summary.MeasuredDeNovoEnvelope += envelope;
                 if (attributed.FamilyUserIds.Count == 0)
