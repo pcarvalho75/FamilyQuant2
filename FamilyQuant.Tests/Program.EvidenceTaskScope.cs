@@ -81,6 +81,7 @@ internal static partial class Program
                 window.ShowInTaskbar = false; window.ShowActivated = false;
                 try
                 {
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher();
                     var model = (GroupingReviewViewModel)window.DataContext;
                     var taxa = (System.Windows.Controls.DataGrid)window.FindName("taskTaxaGrid");
@@ -151,6 +152,7 @@ internal static partial class Program
         window.ShowInTaskbar = false; window.ShowActivated = false;
         try
         {
+            window.ShowAllOptions = true;
             window.Show(); PumpDispatcher();
             var model = (GroupingReviewViewModel)window.DataContext;
             FinishReviewWork(async () =>

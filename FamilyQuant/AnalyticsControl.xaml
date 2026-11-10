@@ -8,17 +8,8 @@
   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
   <DockPanel>
    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-    <ComboBox x:Name="ComboBoxExportKind" Width="210" SelectedIndex="0" SelectionChanged="ExportChoiceChanged" ToolTip="Choose among the listed stored tables, figures and suggested sequences; the usual initial choice is Run summary, or an available standalone result. Selecting prepares Export without writing files or changing project values.">
-     <ComboBoxItem Content="Run summary (CSV)" Tag="Summary" ToolTip="Select per-run TIC, peptide counts, envelopes and recovery shares for CSV export in invariant decimal format. A file is written only when Export is confirmed, and Undo does not remove it."/>
-     <ComboBoxItem Content="Peptide table (CSV)" Tag="Peptides" ToolTip="Select the peptide table with run, sequence, charge, mass, isotope areas, envelope and family assignments for CSV export. A file is written only when Export is confirmed, and Undo does not remove it."/>
-     <ComboBoxItem Content="Screen figures (PNG)" Tag="Figures" ToolTip="Select the stored result's run, peptide and family graphs for PNG export, with standard figures at 1920 by 1080 pixels in the Light palette and complete data beside bounded figures. Export writes the chosen folder's files, and Undo does not remove them."/>
-     <ComboBoxItem Content="Presentation evidence pack" Tag="EvidencePack" ToolTip="Select the complete figure set, exact CSV and JSON numbers and the cutoff README for an evidence-pack export. Export writes files only when the required computed studies are present, and Undo does not remove them."/>
-     <ComboBoxItem Content="Homology assignments (CSV)" Tag="Homology" ToolTip="Select the latest standalone homology snapshot for CSV export, with one row per searched peptide, protein IDs, family IDs and ambiguity. No full XIC is required; Export writes the file and Undo does not remove it."/>
-     <ComboBoxItem Content="Database gap (CSV)" Tag="DatabaseGap" ToolTip="Select the chosen stored Database gap family table, global buckets and recorded rules for CSV export. Export writes a file without recalculating attribution, and Undo does not remove it."/>
-     <ComboBoxItem Content="Suggested additions (FASTA)" Tag="SuggestedAdditions" ToolTip="Select exact sequences of credited tag hits from the verified matching stored family world for FASTA export. Export writes suggestions for review without changing your database, and Undo does not remove the file."/>
-    </ComboBox>
     <Button x:Name="ButtonExport" Content="Export" Style="{DynamicResource PrimaryButton}" Click="ExportClicked"
-     ToolTipService.ShowOnDisabled="True" ToolTip="Write the selected stored result to a file or figure folder without changing project values. Disabled until that result and its required evidence are available; Undo does not remove exported files."/>
+     ToolTip="Opens the shared Export window for reports, CSV tables and other project files. The project stays open; Undo does not remove exported files."/>
    </StackPanel>
    <TextBlock Text="Results" FontSize="{DynamicResource TitleSize}" FontWeight="SemiBold" VerticalAlignment="Center"/>
   </DockPanel>

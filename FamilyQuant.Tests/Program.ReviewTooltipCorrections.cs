@@ -39,6 +39,7 @@ internal static partial class Program
                     ShowActivated = false, ShowInTaskbar = false };
                 try
                 {
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher(); window.UpdateLayout();
                     var model = (GroupingReviewViewModel)window.DataContext;
                     TextBox Box(string path) => WalkTree(window).OfType<TextBox>().Single(box => box.GetBindingExpression(TextBox.TextProperty)?.ParentBinding.Path?.Path == path);
@@ -98,6 +99,7 @@ internal static partial class Program
                     { Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
                     try
                     {
+                        review.ShowAllOptions = true;
                         review.Show(); PumpDispatcher();
                         var model = (GroupingReviewViewModel)review.DataContext;
                         var apply = (Button)review.FindName("createButton");

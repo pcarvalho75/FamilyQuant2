@@ -82,10 +82,10 @@ internal static partial class Program
             MainWindow.ReportExportPresenterOverride = editor => editor.SaveButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             shell.OpenProjectPath(empty);
             WaitForReportFixture(shell);
-            var menu = (MenuItem)shell.FindName("MenuItemExportReport");
-            menu.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
-            Check("native File Export report refuses missing Results before choosing output", shell.ReportExportTask != null
-                && !FinishReportCommand(shell.ReportExportTask) && choices == 0 && !File.Exists(report) && !shell.DocumentState.IsModified);
+            var menu = (MenuItem)shell.FindName("MenuItemExport");
+            var refused = shell.ExportReportAsync();
+            Check("native Export window disables Report without Results and the writer refuses it before choosing output", !ExportOptions(shell).Single(option => option.Kind == ProjectExportKind.Report).Available
+                && !FinishReportCommand(refused) && choices == 0 && !File.Exists(report) && !shell.DocumentState.IsModified);
 
             shell.OpenProjectPath(input);
             WaitForReportFixture(shell);
@@ -99,7 +99,7 @@ internal static partial class Program
                 editor.ThresholdEditor.Value = 0.2m;
                 editor.SaveButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             };
-            menu.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+            ChooseExport(shell, ProjectExportKind.Report);
             bool exported = shell.ReportExportTask != null && FinishReportCommand(shell.ReportExportTask);
             Check("native File Export report writes the production Word document", exported && File.Exists(report) && !shell.Operations.IsBusy);
             string supplement = ReportSupplementWorkbook.PathForReport(report);

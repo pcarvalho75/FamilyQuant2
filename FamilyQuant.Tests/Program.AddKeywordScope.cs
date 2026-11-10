@@ -22,6 +22,7 @@ internal static partial class Program
             initialScope: "\"Existing phrase\", simple", evidenceMode: true, discoverTask: _ => Task.FromResult(facts));
         try
         {
+            window.ShowAllOptions = true;
             window.Show(); PumpDispatcher();
             var model = (GroupingReviewViewModel)window.DataContext;
             var grid = (DataGrid)window.FindName("taskKeywordsGrid");

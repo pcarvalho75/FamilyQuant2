@@ -20,6 +20,7 @@ namespace FamilyQuant
     public static class HelpContent
     {
         public const string GroupingOrder =
+            "0. Import family list (optional): choose your family list through File > Import family list.\n" +
             "1. Fetch evidence: download UniProt annotations for the project's proteins.\n" +
             "2. Group by evidence: review the scope and proposal, then Apply grouping.\n" +
             "3. Fetch family world: download family references for the confirmed task and scope.\n" +
@@ -275,8 +276,10 @@ namespace FamilyQuant
             sb.AppendLine("stored world to populate Database gap, where credited tags can suggest FASTA additions.");
             sb.AppendLine();
             sb.AppendLine("Group by evidence opens the Evidence tab of Review grouping. Confirm the scope,");
-            sb.AppendLine("then review the supplied families, reasons, flags and protein ticks before Apply");
-            sb.AppendLine("grouping; the review's Help explains its architecture, motif and left-out views.");
+            sb.AppendLine("then review the families, flags, protein ticks and Selected protein details in Simple view.");
+            sb.AppendLine("Show all options opens Keywords, all evidence tabs, full protein columns and extra tools;");
+            sb.AppendLine("it keeps the scope and pending choices. With an imported family list, Family checklist");
+            sb.AppendLine("opens that review in one click. Apply grouping commits the reviewed choices.");
             sb.AppendLine("If the project has no stored UniProt evidence, Download and continue runs Fetch evidence");
             sb.AppendLine("before opening the review; Cancel leaves the project unchanged. If no reviewed accession");
             sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");
@@ -362,7 +365,11 @@ namespace FamilyQuant
             sb.AppendLine("It includes labelled keratins, trypsin and serum proteins; hiding them affects the");
             sb.AppendLine("table and visible-row CSV only, so visible identified-signal shares can total below 100%.");
             sb.AppendLine();
-            sb.AppendLine("Export to CSV writes exactly the rows you can see, with the values as fractions");
+            sb.AppendLine("File > Export opens one window for Report (HTML, Word and supplement workbook),");
+            sb.AppendLine("Tables (CSV), Suggested additions (FASTA), Families (.fcf) and Interpretation input");
+            sb.AppendLine("(Markdown). The Export shortcuts in Results and Curate families open the same window.");
+            sb.AppendLine("The report contains the figures; separate screen-figure and presentation-pack exports");
+            sb.AppendLine("are no longer offered. Visible protein table writes the rows you can see, with values as fractions");
             sb.AppendLine("between 0 and 1 and a dot as the decimal separator, whatever your machine's");
             sb.AppendLine("language is. That is on purpose: the file is meant to be read by a program.");
 

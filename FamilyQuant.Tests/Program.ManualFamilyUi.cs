@@ -30,6 +30,7 @@ internal static partial class Program
                     WindowStyle = WindowStyle.None, ResizeMode = ResizeMode.NoResize, ShowActivated = false, ShowInTaskbar = false };
                 try
                 {
+                    window.ShowAllOptions = true;
                     window.Show(); PumpDispatcher();
                     var model = (GroupingReviewViewModel)window.DataContext;
                     var tabs = (TabControl)window.FindName("evidenceTabs");

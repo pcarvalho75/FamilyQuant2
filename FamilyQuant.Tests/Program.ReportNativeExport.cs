@@ -81,10 +81,10 @@ internal static partial class Program
                 foreach (var check in ReportCheckboxes(editor)) check.IsChecked = true;
                 Log("Report choices accepted"); editor.SaveButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             };
-            var menu = (MenuItem)shell.FindName("MenuItemExportReport");
+            var menu = (MenuItem)shell.FindName("MenuItemExport");
             Log("File > Export report; enabled=" + menu.IsEnabled);
             var export = Stopwatch.StartNew();
-            menu.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+            ChooseExport(shell, ProjectExportKind.Report);
             if (shell.ReportExportTask == null) throw new InvalidOperationException("The report menu did not start its command.");
             Wait(() => shell.ReportExportTask.IsCompleted);
             bool success = shell.ReportExportTask.GetAwaiter().GetResult();

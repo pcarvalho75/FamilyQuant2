@@ -11,6 +11,7 @@ public partial class SuperClusterPreviewWindow
     private bool familyChecklistRequested;
     public void RequestFamilyChecklist()
     {
+        ShowAllOptions = true;
         if (familyChecklistRequested) return;
         familyChecklistRequested = true;
         model.PropertyChanged += (_, e) => { if (e.PropertyName == nameof(GroupingReviewViewModel.Evidence)) Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(SelectRequestedChecklist)); };

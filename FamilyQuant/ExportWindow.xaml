@@ -1,0 +1,39 @@
+<Window x:Class="FamilyQuant.ExportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Export" Width="680" Height="720" MinWidth="560" MinHeight="480"
+        Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+    <Window.Resources>
+        <CollectionViewSource x:Key="GroupedExports">
+            <CollectionViewSource.GroupDescriptions><PropertyGroupDescription PropertyName="Section"/></CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </Window.Resources>
+    <Grid Margin="16">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <TextBlock Text="Export" Style="{DynamicResource SectionTitle}" Margin="0,0,0,12"/>
+        <ListBox x:Name="ExportChoices" Grid.Row="1"
+                 SelectionChanged="ExportChoice_Changed" HorizontalContentAlignment="Stretch"
+                 ToolTip="Choose a report, table or other file from the open project's stored data. Export opens the existing file choices; the project stays open and Undo does not remove exported files.">
+            <ListBox.GroupStyle><GroupStyle><GroupStyle.HeaderTemplate><DataTemplate>
+                <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Margin="8,12,8,4" Foreground="{DynamicResource MutedBrush}"/>
+            </DataTemplate></GroupStyle.HeaderTemplate></GroupStyle></ListBox.GroupStyle>
+            <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem">
+                <Setter Property="IsEnabled" Value="{Binding Available}"/>
+                <Setter Property="ToolTip" Value="{Binding Hint}"/>
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+                <Setter Property="Padding" Value="12,7"/>
+            </Style></ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Label}" TextWrapping="Wrap"/></DataTemplate></ListBox.ItemTemplate>
+        </ListBox>
+        <DockPanel Grid.Row="2" Margin="0,12,0,0">
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Button x:Name="ExportButton" Content="Export" IsDefault="True" Style="{DynamicResource PrimaryButton}" Click="Export_Click"
+                        ToolTipService.ShowOnDisabled="True" ToolTip="Continue with the selected file's existing export choices and save dialog. Choose an available entry to enable it; Undo does not remove exported files."/>
+                <Button Content="Cancel" IsCancel="True" Click="Cancel_Click"
+                        ToolTip="Close Export without writing a file or changing the project. Pending choices in this window are discarded."/>
+            </StackPanel>
+            <TextBlock x:Name="ExportStatus" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,0,12,0"/>
+        </DockPanel>
+    </Grid>
+</Window>

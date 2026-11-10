@@ -36,8 +36,7 @@ internal static partial class Program
             Check("a chosen Database gap length survives manifest serialization", (int?)choiceProperty.GetValue(reopenedChoice) == 7);
         }
         var homologyControl = new AnalyticsControl(Array.Empty<QuantRow>(), null, null, null, new DeNovoHomology());
-        string homologyTip = ((ComboBox)homologyControl.FindName("ComboBoxExportKind")).Items.OfType<ComboBoxItem>()
-            .Single(item => (string?)item.Tag == ResultsExportKind.Homology.ToString()).ToolTip.ToString()!;
+        string homologyTip = ResultsExportOptions(homologyControl.ViewModel).Single(option => option.Kind == ProjectExportKind.Homology).Hint;
         Check("Homology export tooltip retains one row per searched peptide", homologyTip.Contains("one row per searched peptide", StringComparison.OrdinalIgnoreCase));
         Check("Homology export tooltip retains family IDs, protein IDs and ambiguity", new[] { "family IDs", "protein IDs", "ambiguity" }
             .All(fact => homologyTip.Contains(fact, StringComparison.OrdinalIgnoreCase)));
@@ -206,7 +205,6 @@ internal static partial class Program
         {
             resultsWindow.Show(); PumpDispatcher();
             var host = AppOperationHost.For(results); resultsWindow.UpdateLayout(); PumpDispatcher();
-            var choice = (ComboBox)results.FindName("ComboBoxExportKind");
             var button = (Button)results.FindName("ButtonExport");
             Check("native Results hosts the supplied gap model and hides the missing-XIC instruction", ((ContentControl)results.FindName("DatabaseGapHost")).Content
                 is DatabaseGapControl gap && ReferenceEquals(gap.ViewModel, exportModel.DatabaseGap)
@@ -216,8 +214,8 @@ internal static partial class Program
                 string target = Path.Combine(output, "native-" + kind + (kind == ResultsExportKind.DatabaseGap ? ".csv" : ".fasta"));
                 string route = "", filter = "";
                 ShellDialogs.FilePresenter = (_, id, dialog) => { route = id; filter = dialog.Filter; dialog.FileName = target; return true; };
-                choice.SelectedItem = choice.Items.OfType<ComboBoxItem>().Single(i => (string?)i.Tag == kind.ToString()); PumpDispatcher();
-                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); FinishBusyOperation(host);
+                exportModel.ExportKind = kind; PumpDispatcher();
+                ChooseResultsExport(exportModel, kind); FinishBusyOperation(host);
                 Check("native " + kind + " selector and button write the supplied result through the correct file route",
                     route == "results." + kind && File.ReadAllText(target) == (kind == ResultsExportKind.DatabaseGap ? summary.BuildCompositionCsv() : fasta)
                     && filter.StartsWith(kind == ResultsExportKind.DatabaseGap ? "CSV" : "FASTA", StringComparison.Ordinal));

@@ -23,6 +23,7 @@ internal static partial class Program
         var window = new SuperClusterPreviewWindow(preview, null, session.Propose, evidenceMode: true, discoverTask: session.DiscoverTaskAsync);
         try
         {
+            window.ShowAllOptions = true;
             window.Show(); PumpDispatcher();
             var model = (GroupingReviewViewModel)window.DataContext;
             Check("Z12c6 counted and excluded labels use plain words with definitions",

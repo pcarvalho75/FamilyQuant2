@@ -56,8 +56,8 @@ internal static partial class Program
                     var screen = host.Children.OfType<ClusterGenerationControl>().Single();
                     FinishBusyTask(screen.FullXicReady); FinishBusyOperation(main.Operations); PumpDispatcher();
                     var status = (TextBlock)screen.FindName("TextBlockStatusLine");
-                    var button = (Button)screen.FindName("ButtonExportComposition");
-                    var menu = (MenuItem)main.FindName("MenuItemExportComposition");
+                    var button = (Button)screen.FindName("ButtonSaveReport");
+                    var menu = (MenuItem)main.FindName("MenuItemExport");
                     Check("J20 native stored full-XIC shares are shown without PatternLab " + language,
                         screen.HasFullXic && screen.fcf.MyExtendedFastaItems.Any(item => item.FullXicShare > 0)
                         && screen.ViewModel.Quantitation.DisplayedMode == null && button.IsEnabled && menu.IsEnabled);
@@ -77,7 +77,7 @@ internal static partial class Program
                     int choices = 0; Window? chooserOwner = null;
                     ShellDialogs.FilePresenter = (owner, id, dialog) =>
                     { if (id == "curation.composition-csv") { choices++; chooserOwner = owner; } return false; };
-                    menu.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent)); PumpDispatcher();
+                    ChooseExport(main, ProjectExportKind.FamilyComposition); PumpDispatcher();
                     Check("J20 idle File composition export opens a shell-owned chooser from Results " + language,
                         choices == 1 && ReferenceEquals(chooserOwner, main) && host.Children.OfType<AnalyticsControl>().Any());
 
@@ -105,7 +105,7 @@ internal static partial class Program
                     MainWindow.NavigateShellCommand.Execute(ShellDestination.Results, main);
                     FinishBusyOperation(main.Operations); PumpDispatcher();
                     choices = 0;
-                    menu.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+                    ChooseExport(main, ProjectExportKind.FamilyComposition);
                     FinishBusyOperation(main.Operations); PumpDispatcher();
                     Check("J20 idle File export from Results writes the unchanged production CSV " + language,
                         choices == 1 && File.ReadAllText(csv) == expected && !main.Operations.IsBusy

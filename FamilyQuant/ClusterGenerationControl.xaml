@@ -115,7 +115,14 @@
                 <GroupBox Header="Grouping" Margin="0,0,0,10">
                     <StackPanel>
                         <TextBlock x:Name="TextBlockPartGroupByEvidence" Text="a Group by evidence" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="4,0,4,4"
-                                   ToolTip="Part a of Curate families: the four numbered steps, in this order, from UniProt evidence to Quantify."/>
+                                   ToolTip="Part a of Curate families: optionally import your family list, then follow the four numbered steps from UniProt evidence to Quantify."/>
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <TextBlock Text="0" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
+                            <Button Grid.Column="1" x:Name="ButtonImportFamilyList" Content="Import family list (optional)" Click="ButtonImportFamilyList_Click"
+                                    ToolTip="Opens File > Import family list to choose the families you want to review before grouping; suggested until a list exists or evidence grouping has been applied, while Fetch evidence stays available. A confirmed import changes the project in one Undo step; finish the current operation to enable import."/>
+                        </Grid>
+                        <TextBlock x:Name="TextBlockFamilyListStatus" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8" TextWrapping="Wrap"/>
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="1" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
@@ -138,7 +145,7 @@
                             <Button Grid.Column="1" x:Name="ButtonEvidenceGrouping" Content="Group by evidence"
                                     Click="ButtonEvidenceGrouping_Click" ToolTip="Opens the stored-evidence review to confirm scope, panel links and proposed protein assignments. Apply grouping makes one undoable project change; missing evidence prompts a download first."/>
                         </Grid>
-                        <TextBlock Text="{Binding EvidenceGroupingStepStatus}" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
+                        <TextBlock x:Name="TextBlockEvidenceGroupingStatus" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8" TextWrapping="Wrap"/>
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="3" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
@@ -213,7 +220,7 @@
                 <local:CurationQuantitationPanel x:Name="QuantitationPanel"
                     LoadRequested="ButtonLoadQuantData_Click" RecalculateRequested="ButtonRecalculateQuantitation_Click"
                     ChoiceChanged="ComboBoxNormalization_SelectionChanged" BasisChanged="ComboBoxFullXicBasis_SelectionChanged"/>
-                <Expander Header="Display and export" Margin="0,10,0,0" ToolTip="Shows protein display filters and separate CSV export actions. Expanding it changes no project data or files.">
+                <Expander Header="Display and export" Margin="0,10,0,0" ToolTip="Shows protein display filters and opens the shared Export window. Expanding it changes no project data or files.">
                     <StackPanel Margin="8">
                         <CheckBox x:Name="CheckBoxExcludeReverse" Content="Hide decoys" IsChecked="True"
                                   Checked="CheckBoxExcludeReverse_CheckedChanged" Unchecked="CheckBoxExcludeReverse_CheckedChanged"
@@ -227,10 +234,8 @@
                         <CheckBox x:Name="CheckBoxShowSearchIds" Content="Show USearch ID" IsChecked="True"
                                   Checked="SearchIdVisibility_Changed" Unchecked="SearchIdVisibility_Changed"
                                   ToolTip="Shows the last automatic family number beside User ID; this starts on unless a saved display preference overrides it. Toggling it changes the visible columns, while stored IDs stay unchanged."/>
-                        <Button x:Name="ButtonSaveReport" Content="Export to CSV" Click="ButtonSaveReport_Click"
-                                ToolTip="Writes the protein table to CSV using its current display filters and columns, with shares as decimal fractions. Show at least one row to enable it; Undo does not revert the exported file."/>
-                        <Button x:Name="ButtonExportComposition" Content="Export family composition" Click="ButtonExportComposition_Click" IsEnabled="False"
-                                ToolTip="Writes Full XIC family composition, shared signal and unattributed signal to a separate CSV file. Run Quantify to enable it; Undo does not revert the exported file."/>
+                        <Button x:Name="ButtonSaveReport" Content="Export" Click="OpenExportWindow_Click"
+                                ToolTip="Opens the shared Export window for reports, tables and other project files. Show at least one protein row to enable this shortcut; File > Export is also available, and Undo does not revert exported files."/>
                         <Border x:Name="BadgeExport" Visibility="Collapsed"><TextBlock x:Name="TextBlockExportState"/></Border>
                     </StackPanel>
                 </Expander>

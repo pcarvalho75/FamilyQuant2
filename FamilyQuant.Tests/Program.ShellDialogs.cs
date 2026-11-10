@@ -97,10 +97,11 @@ internal static partial class Program
                 var results = new AnalyticsControl(new AnalyticsViewModel(rows,
                     new QuantManifest { DerivedMethod = FamilyQuant.DeNovo.NativeQuantFractions.Method, PerRunTic = new() { ["synthetic"] = 100 } }, curation, homology: new DeNovoHomology()));
                 Host(results);
-                foreach (var kind in Enum.GetValues<ResultsExportKind>())
+                foreach (var kind in new[] { ResultsExportKind.Summary, ResultsExportKind.Peptides, ResultsExportKind.Homology })
                 {
                     results.ViewModel.ExportKind = kind;
-                    Call(results, "ExportClicked", results, new RoutedEventArgs());
+                    ChooseExport(main, kind switch { ResultsExportKind.Summary => ProjectExportKind.RunSummary,
+                        ResultsExportKind.Peptides => ProjectExportKind.PeptideTable, _ => ProjectExportKind.Homology }, results.ViewModel);
                 }
                 Check("browse fixture opens its curation before testing shell exports", main.OpenProjectPath(file), main.StatusModel.ContextHelp);
                 main.RememberFolder(first);
@@ -124,7 +125,7 @@ internal static partial class Program
                 "project.open", "project.save", "build.database", "quantify.raw", "quantify.sepro", "quantify.denovo",
                 "denovo.import", "denovo.sepro", "denovo.curation", "denovo.export.FamilyQuant_DeNovo_Summary.csv",
                 "denovo.export.FamilyQuant_DeNovo_ReviewQueue.csv", "denovo.export.FamilyQuant_DeNovo_OverlapStudy.csv",
-                "results.Summary", "results.Peptides", "results.Figures", "results.EvidencePack", "results.Homology",
+                "results.Summary", "results.Peptides", "results.Homology",
                 "families.export", "sepro.reannotate", "identity.figure", "spectrum.csv", "spectrum.score-plot", "partition.csv"
             };
             foreach (string id in expected)

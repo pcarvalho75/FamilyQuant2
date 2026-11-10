@@ -45,6 +45,7 @@ internal static partial class Program
         var window = new SuperClusterPreviewWindow(preview, null, session.Propose, evidenceMode: true, discoverTask: session.DiscoverTaskAsync);
         try
         {
+            window.ShowAllOptions = true;
             window.Show(); PumpDispatcher();
             var reviewed = (TextBlock)window.FindName("UniProtReviewedCount");
             var marked = (TextBlock)window.FindName("FastaSpCount");

@@ -32,7 +32,7 @@ internal static partial class Program
         MainWindow.ComputeDialogOverride = null;
         var main = new MainWindow();
         const BindingFlags any = BindingFlags.Instance | BindingFlags.NonPublic;
-        string[] names = { "MenuItemSaveFCF", "MenuItemSaveProject", "MenuItemComputeXic", "MenuItemSpectrumComparison", "MenuItemReanotateSEPro" };
+        string[] names = { "MenuItemExport", "MenuItemSaveProject", "MenuItemComputeXic", "MenuItemSpectrumComparison", "MenuItemReanotateSEPro" };
         void Snapshot(string name, string expected)
         {
             PumpDispatcher();

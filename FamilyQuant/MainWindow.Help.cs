@@ -225,14 +225,16 @@ public partial class MainWindow
                 "   Menu: View > Results\n" +
                 "   Also: 4 Results on Home or the sidebar (Alt+4). Results reads the stored quantitation\n" +
                 "   and draws its figures; it reads no RAW and changes no family.\n" +
-                "   Export to CSV writes exactly the rows on screen, with the shares as fractions\n" +
+                "   File > Export opens the report, CSV tables and other project files. Visible protein\n" +
+                "   table writes exactly the rows in Curate families, with shares as fractions\n" +
                 "   between 0 and 1 and a dot for the decimal separator, so any program can read them.\n" +
                 "   File > Save keeps the project for next time. File > Export also writes families\n" +
                 "   as a separate .fcf, preserving grouping and evidence without the Full XIC results table.\n" +
                 "   Tools > Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\n" +
                 "   result package, leaving the original untouched.\n\n" +
                 "EXPORT THE REPORT\n" +
-                "   Menu: File > Export report\n" +
+                "   Menu: File > Export\n" +
+                "   Choose Report to write HTML, Word and the supplement workbook together.\n" +
                 "   Needs: stored Results from step 3 and the report details you want to include.\n" +
                 "   Choose sections and figures with the checkboxes. Set Report threshold (%) to\n" +
                 "   group families below that mean assigned-signal share under Others; their list\n" +
@@ -250,7 +252,8 @@ public partial class MainWindow
                 "   project data, without AI. Your panel and report details also appear in the report.\n" +
                 "   File > Save keeps the project, report details, choices and threshold.\n\n" +
                 "EXPORT THE INTERPRETATION INPUT\n" +
-                "   Menu: File > Export > Interpretation input (Markdown)\n" +
+                "   Menu: File > Export\n" +
+                "   Choose Interpretation input (Markdown).\n" +
                 "   Needs: stored Results from step 3.\n" +
                 "   Writes one Markdown file with the report details, the panel as entered, the summary\n" +
                 "   of findings, the stored tables it reads, the methods and a short instruction block.\n" +

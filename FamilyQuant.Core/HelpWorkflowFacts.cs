@@ -50,5 +50,5 @@ public static class HelpWorkflowFacts
         "DE NOVO WORKFLOW DETAILS\n" +
         "De novo review is optional inspection only and accepts one source or a union of PEAKS and DeepNovo; Quantify can combine sources and reads its de novo folder independently. Review changes no family or quantitation, so it is not needed for quantitation.\n\n" +
         "With a project, use Quantify and Results for extraction and reporting. Standalone family attribution reads peptides, not chromatograms, so it can run directly after importing and filtering the calls.\n\n" +
-        "Results > Homology assignments exports CSV with one line per searched peptide, including family IDs, protein IDs and ambiguity. It is unavailable until a homology search result exists, including a result retained from an earlier search.\n\n";
+        "File > Export offers Homology assignments under Tables (CSV), with one line per searched peptide, including family IDs, protein IDs and ambiguity. It is unavailable until a homology search result exists, including a result retained from an earlier search.\n\n";
 }

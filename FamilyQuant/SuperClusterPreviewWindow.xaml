@@ -18,8 +18,16 @@
     </Window.Resources>
     <Grid Margin="16">
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-        <TextBlock x:Name="headline" Text="{Binding Summary}" Style="{StaticResource SectionTitle}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Margin="0,0,0,12"/>
-        <TabControl Grid.Row="1" SelectedIndex="{Binding ModeIndex}" IsEnabled="{Binding CanEdit}" SelectionChanged="ReviewModeChanged">
+        <DockPanel Margin="0,0,0,12">
+            <CheckBox x:Name="ShowAllOptionsCheckBox" DockPanel.Dock="Right" Content="Show all options" VerticalAlignment="Center" Margin="12,0,0,0"
+                      IsEnabled="{Binding EvidenceAvailable}" ToolTipService.ShowOnDisabled="True"
+                      IsChecked="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Mode=TwoWay}"
+                      ToolTip="Show the keyword review, evidence tabs, full protein columns and additional review tools. Switching views keeps pending choices and changes no project values; Simple view needs an evidence review and is unavailable for keyword-only review."/>
+            <Button x:Name="OpenFamilyChecklistButton" DockPanel.Dock="Right" Content="Family checklist" Click="OpenFamilyChecklist_Click" Margin="8,0,0,0"
+                    Visibility="Collapsed" ToolTip="Show all options and open the imported family list's checklist in one click. Review which proteins match each family without changing the project until Apply grouping."/>
+            <TextBlock x:Name="headline" Text="{Binding Summary}" Style="{StaticResource SectionTitle}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" VerticalAlignment="Center"/>
+        </DockPanel>
+        <TabControl x:Name="ReviewModeTabs" Grid.Row="1" SelectedIndex="{Binding ModeIndex}" IsEnabled="{Binding CanEdit}" SelectionChanged="ReviewModeChanged">
             <TabItem Header="Keywords" ToolTip="Reviews description keywords and protein ticks while keeping pending review choices when you return. The first switch to Evidence can start Read database and scope over the internet; only Apply grouping changes the project, and Undo can reverse it.">
                 <Grid Margin="8" DataContext="{Binding Keyword}">
                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/></Grid.RowDefinitions>
@@ -81,7 +89,7 @@
             <TabItem Header="Evidence" IsEnabled="{Binding EvidenceAvailable}" ToolTip="Reviews supplied evidence assignments, reasons and flags, and is also available from Group by keywords. Its first opening reads UniProt over the internet through Read database and scope when counts are missing; only Apply grouping changes the project, with Undo available.">
                 <Grid Margin="8">
                     <!-- The title and the Scope row stay outside the scroll area, so the tables' minimum height can never hide them (2.1.13). -->
-                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="2*" MaxHeight="200"/><RowDefinition Height="3*" MinHeight="390"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition x:Name="ScopeDetailsRow" Height="2*" MaxHeight="200"/><RowDefinition Height="3*" MinHeight="390"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                     <StackPanel Margin="0,0,0,8">
                     <DockPanel Visibility="{Binding TaskDiscoveryAvailable, Converter={StaticResource VisibleWhenTrue}}" Margin="0,0,0,8">
                         <Button DockPanel.Dock="Right" Content="Read database and scope" Click="DiscoverTask_Click" IsEnabled="{Binding CanDiscoverTask}" ToolTip="Read database taxonomy and reviewed keyword counts using UniProt, then suggest scope without changing the open project. Disabled while a review operation is running; wait for it to finish and review the scope before Update proposal."/>
@@ -89,14 +97,17 @@
                     </DockPanel>
                     <DockPanel x:Name="TaskScopeRow">
                         <Button DockPanel.Dock="Right" Content="Update proposal" Click="UpdateProposal_Click" IsEnabled="{Binding CanUpdateProposal}" ToolTip="Rebuild the review from the edited scope and stored evidence without downloading or changing the open project; Apply grouping commits the choices. Disabled without scope words or during a review operation; enter scope words and wait for the operation to finish."/>
-                        <Button x:Name="FetchMissingPanelButton" Content="Fetch missing panel" DockPanel.Dock="Right" Click="FetchMissingPanel_Click" Margin="0,0,8,0"
+                        <StackPanel DockPanel.Dock="Right" Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
+                        <Button x:Name="FetchMissingPanelButton" Content="Fetch missing panel" Click="FetchMissingPanel_Click" Margin="0,0,8,0"
                                 Visibility="{Binding PanelFetchAvailable, Converter={StaticResource VisibleWhenTrue}}" IsEnabled="{Binding CanFetchMissingPanel}"
                                 ToolTip="Download entries missing for the current scope and store the panel. Use Update proposal before Apply grouping; this is disabled when coverage is ready, scope is empty or another step is running."/>
+                        </StackPanel>
                         <TextBlock DockPanel.Dock="Left" Text="Scope" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox x:Name="TaskScopeBox" Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Keyword or tissue words and quoted phrases defining the evidence scope; starts empty and Read database and scope suggests terms from UniProt. Accepts parsed text with no unit or fixed length limit; editing previews stored matches, Update proposal rebuilds the review, and Apply grouping makes an undoable project change."/>
                     </DockPanel>
                     </StackPanel>
-                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10">
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10"
+                                  Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
                     <StackPanel>
                     <Expander x:Name="TaskCountsExpander" IsExpanded="{Binding TaskScopeExpanded}" Margin="0,0,0,8"
                               Visibility="{Binding HasTaskScope, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Expand database taxa, clade and keyword counts used to suggest scope; keyword counts can overlap and are not family shares. Only this view changes.">
@@ -212,8 +223,9 @@
                     </ScrollViewer>
                     <Grid Grid.Row="2">
                         <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions><ColumnDefinition Width="2*" MinWidth="440"/><ColumnDefinition Width="10"/><ColumnDefinition Width="3*" MinWidth="280"/></Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions><ColumnDefinition x:Name="FamilyTableColumn" Width="2*" MinWidth="440"/><ColumnDefinition Width="10"/><ColumnDefinition Width="3*" MinWidth="280"/></Grid.ColumnDefinitions>
                         <TextBlock x:Name="familyTickLegend" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,6,0,0" FontSize="11"
+                                   Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}"
                                    Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
                                    Text="Full tick: all eligible proteins; dash: some; empty: none. Flagged start unticked; locked stay unticked."
                                    ToolTip="Initially, proteins with a proposed family and no warning flags are ticked unless locked; full tick means every eligible protein, dash some, empty none. A family tick can include flagged proteins when you choose it; locked proteins always stay unticked."/>
@@ -244,22 +256,25 @@
                             <TabItem Header="Proteins" ToolTip="Inspect each proposed protein's reason, evidence source, reviewed relative and warning flags, and choose its tick. Opening this tab changes only the view; Apply grouping commits ticks and Undo restores the preceding grouping.">
                                 <DockPanel DataContext="{Binding Evidence}">
                                     <TextBlock x:Name="proteinWarningLegend" DockPanel.Dock="Top" Margin="0,0,0,6"
+                                               Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}"
                                                Text="Red italic rows carry a warning flag; hover over Flags for what to check."
                                                Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis" ToolTip="Rows carrying warning flags start unticked; hover over Flags for the supplied checks and evidence detail. Explicitly choosing a flagged protein affects the project only on Apply grouping, with Undo available."/>
                                     <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+                                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="8,0,0,0">
+                                        <Button Content="Tick selected" Click="EvidenceTickSelected_Click" ToolTip="Tick highlighted proteins that have a proposed family and are not locked, including flagged proteins by explicit choice. This changes the review only until Apply grouping, after which Undo restores the preceding grouping."/>
+                                        <Button Content="Untick selected" Click="EvidenceUntickSelected_Click" ToolTip="Clear ticks on highlighted protein rows without changing their current document families. The review choice takes effect only on Apply grouping, after which Undo restores the preceding grouping."/>
+                                    </StackPanel>
                                     <TextBlock DockPanel.Dock="Left" Text="Find proteins" VerticalAlignment="Center" Margin="0,0,8,0"/>
                                     <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Find text in protein identifiers, descriptions, reasons or flags; default empty shows every row in the current family view, with no numeric range. This filters displayed rows without changing ticks or the project."/>
                                     </DockPanel>
-                                    <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,6">
-                                        <Button Content="Untick flagged" Click="UntickFlagged_Click" ToolTip="Clear ticks on all proposal proteins with supplied warning flags, keeping unflagged ticks unchanged. This changes the review only until Apply grouping, after which Undo restores the preceding grouping."/>
-                                        <Button Content="Tick selected" Click="EvidenceTickSelected_Click" ToolTip="Tick highlighted proteins that have a proposed family and are not locked, including flagged proteins by explicit choice. This changes the review only until Apply grouping, after which Undo restores the preceding grouping."/>
-                                        <Button Content="Untick selected" Click="EvidenceUntickSelected_Click" ToolTip="Clear ticks on highlighted protein rows without changing their current document families. The review choice takes effect only on Apply grouping, after which Undo restores the preceding grouping."/>
+                                    <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,6" Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
+                                        <Button Content="Untick flagged" Click="UntickFlagged_Click" Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Clear ticks on all proposal proteins with supplied warning flags, keeping unflagged ticks unchanged. This changes the review only until Apply grouping, after which Undo restores the preceding grouping."/>
                                         <Button x:Name="alignSelectedButton" Content="Align selected" Click="AlignSelected_Click" Loaded="AlignSelected_Loaded" IsEnabled="False" ToolTipService.ShowOnDisabled="True" ToolTip="Open a read-only alignment of highlighted proteins beside reviewed relatives and family representatives without changing ticks or assignments. Disabled without highlighted rows or an alignment source; highlight rows in an evidence review opened from the project to enable it."/>
                                         <Button x:Name="addFamilyButton" Content="Add to family" Click="AddManualFamily_Click" IsEnabled="{Binding DataContext.CanEditManual, RelativeSource={RelativeSource AncestorType=Window}}" ToolTip="Open hand placement for highlighted proteins in a proposed or new family; the project changes only on Apply grouping, with Undo available. Disabled without an editable current evidence proposal; Update proposal after scope edits and wait for active operations to finish."/>
                                         <Button x:Name="removeFamilyButton" Content="Remove from family" Click="RemoveManualFamily_Click" IsEnabled="{Binding DataContext.CanEditManual, RelativeSource={RelativeSource AncestorType=Window}}" ToolTip="Clear hand-added choices for highlighted proteins and restore their automatic proposals; the project changes only on Apply grouping, with Undo available. Disabled without an editable current evidence proposal; Update proposal after scope edits and wait for active operations to finish."/>
                                     </WrapPanel>
                                     <Grid>
-                                    <Grid.RowDefinitions><RowDefinition Height="2*" MinHeight="120"/><RowDefinition Height="8"/><RowDefinition Height="3*" MinHeight="110"/></Grid.RowDefinitions>
+                                    <Grid.RowDefinitions><RowDefinition x:Name="ProteinTableRow" Height="2*" MinHeight="120"/><RowDefinition Height="8"/><RowDefinition x:Name="ProteinDetailsRow" Height="3*" MinHeight="110"/></Grid.RowDefinitions>
                                     <DataGrid x:Name="evidenceGrid" ItemsSource="{Binding VisibleProteins}" SelectedItem="{Binding SelectedProtein, Mode=TwoWay}" AutoGenerateColumns="False" CanUserAddRows="False"
                                               CanUserDeleteRows="False" SelectionMode="Extended" ToolTip="Inspect the supplied family, reason, evidence source, reviewed relative and flags, or highlight rows for review actions. Ticks remain choices until Apply grouping, after which Undo restores the preceding grouping.">
                                         <DataGrid.RowStyle><Style TargetType="DataGridRow"><Style.Triggers>
@@ -292,10 +307,12 @@
                                                   Focusable="True" ToolTip="Drag, or focus and use the arrow keys, to resize the protein table and full details pane. Only the view changes."/>
                                     <DockPanel Grid.Row="2">
                                         <DockPanel DockPanel.Dock="Top" Margin="0,0,0,4">
-                                            <Button x:Name="profileMembersButton" DockPanel.Dock="Right" Content="Show members" IsEnabled="{Binding CanShowProfileMembers}"
+                                            <StackPanel DockPanel.Dock="Right" Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
+                                            <Button x:Name="profileMembersButton" Content="Show members" IsEnabled="{Binding CanShowProfileMembers}"
                                                     Visibility="{Binding CanShowProfileMembers, Converter={StaticResource VisibleWhenTrue}}"
                                                     Click="ProfileMembers_Click"
                                                     ToolTipService.ShowOnDisabled="True" ToolTip="Open the stored reviewed members used to build the selected protein's coherence profile without downloading or changing the proposal. Unavailable when no stored profile members exist; select a protein with a stored reviewed-member profile to enable it."/>
+                                            </StackPanel>
                                             <TextBlock Text="Selected protein details" Style="{DynamicResource CaptionText}" VerticalAlignment="Center"/>
                                         </DockPanel>
                                         <TextBox x:Name="proteinDetails" Text="{Binding ProteinDetails, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True"
@@ -448,9 +465,9 @@
                             </TabItem>
                         </TabControl>
                     </Grid>
-                    <DockPanel Grid.Row="3" Margin="0,10,0,0">
+                    <DockPanel Grid.Row="3" Margin="0,10,0,0" Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
                         <Button DockPanel.Dock="Right" Content="Check motif" Click="Motif_Click" IsEnabled="{Binding CanCheckMotif}" ToolTip="Counts the entered motif across complete proposed family members, including unticked members, and keeps the checked pattern for Apply grouping. Disabled without a proposal or a pattern or during an operation; update the proposal, enter a pattern and wait to enable it; Check motif then reports a pattern it cannot use."/>
-                        <TextBlock DockPanel.Dock="Left" Text="Motif (optional)" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock x:Name="MotifLabel" DockPanel.Dock="Left" Text="Motif (optional)" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox Text="{Binding MotifPattern, UpdateSourceTrigger=PropertyChanged}" ToolTip="Amino-acid regular expression, optionally prefixed with not, or a count expression such as count C &gt;= 8; default empty skips the check, with no numeric range for the pattern. Check motif validates it before Apply grouping retains the choice, after which Undo restores the preceding grouping."/>
                     </DockPanel>
                 </Grid>

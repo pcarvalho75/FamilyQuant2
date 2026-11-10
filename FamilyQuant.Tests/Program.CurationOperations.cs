@@ -121,8 +121,8 @@ internal static partial class Program
             void BrowseAll()
             {
                 UiField<Button>(screen, "ButtonLoadQuantData")!.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                UiField<Button>(screen, "ButtonSaveReport")!.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                UiField<Button>(screen, "ButtonExportComposition")!.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                typeof(ClusterGenerationControl).GetMethod("ExportVisibleProteinTable", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(screen, new object[] { screen });
+                typeof(ClusterGenerationControl).GetMethod("ButtonExportComposition_Click", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(screen, new object[] { screen, new RoutedEventArgs() });
                 PumpDispatcher();
             }
             BrowseAll();
