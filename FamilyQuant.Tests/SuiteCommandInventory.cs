@@ -22,6 +22,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Excluded("--denovo-envelope-check", "Desk aggregate over a selected project and an optional RAW folder. It prints counts and ratios only. The synthetic proof is --test-denovo-envelope-check; the ordinary suite must not open a selected project."),
         SuiteCommandRule.Covered("--test-denovo-envelope-check", "FamilyQuant.Tests.Program.DeNovoEnvelopeCheckTests()"),
         SuiteCommandRule.Covered("--test-denovo-run-warnings", "FamilyQuant.Tests.Program.DeNovoRunWarningTests()"),
+        SuiteCommandRule.Covered("--test-quantify-warning-dispatcher", "FamilyQuant.Tests.Program.QuantifyWarningDispatcherTests()"),
         SuiteCommandRule.Covered("--test-quantify-isotope-default", "FamilyQuant.Tests.Program.QuantifyIsotopeDefaultTests(System.String)"),
         SuiteCommandRule.Covered("--test-family-list-ranked-matches", "FamilyQuant.Tests.Program.FamilyListImportRankedMatchTests(System.String)"),
         SuiteCommandRule.Covered("--test-ledger-diagnostics", "FamilyQuant.Tests.Program.LedgerDiagnosticTests()"),
