@@ -98,8 +98,9 @@ namespace FamilyQuant
             ScopeDetailsRow.Height = full ? new GridLength(2, GridUnitType.Star) : new GridLength(0);
             FamilyTableColumn.Width = full ? new GridLength(2, GridUnitType.Star) : new GridLength(440);
             ProteinTableRow.Height = new GridLength(full ? 2 : 1, GridUnitType.Star);
-            ProteinTableRow.MinHeight = full ? 120 : 296;
-            ProteinDetailsRow.Height = full ? new GridLength(3, GridUnitType.Star) : new GridLength(110);
+            ProteinTableRow.MinHeight = 120;
+            ProteinDetailsRow.Height = GridLength.Auto;
+            ReviewTablesRow.MinHeight = full ? 470 : 390;
             OpenFamilyChecklistButton.Visibility = hasFamilyList || model.Evidence?.HasPanelRules == true ? Visibility.Visible : Visibility.Collapsed;
             UpdateApplyToolTip();
         }

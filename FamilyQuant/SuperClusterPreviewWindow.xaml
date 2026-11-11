@@ -89,7 +89,7 @@
             <TabItem Header="Evidence" IsEnabled="{Binding EvidenceAvailable}" ToolTip="Reviews supplied evidence assignments, reasons and flags, and is also available from Group by keywords. Its first opening reads UniProt over the internet through Read database and scope when counts are missing; only Apply grouping changes the project, with Undo available.">
                 <Grid Margin="8">
                     <!-- The title and the Scope row stay outside the scroll area, so the tables' minimum height can never hide them (2.1.13). -->
-                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition x:Name="ScopeDetailsRow" Height="2*" MaxHeight="200"/><RowDefinition Height="3*" MinHeight="390"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition x:Name="ScopeDetailsRow" Height="2*" MaxHeight="200"/><RowDefinition x:Name="ReviewTablesRow" Height="3*" MinHeight="390"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                     <StackPanel Margin="0,0,0,8">
                     <DockPanel Visibility="{Binding TaskDiscoveryAvailable, Converter={StaticResource VisibleWhenTrue}}" Margin="0,0,0,8">
                         <Button DockPanel.Dock="Right" Content="Read database and scope" Click="DiscoverTask_Click" IsEnabled="{Binding CanDiscoverTask}" ToolTip="Read database taxonomy and reviewed keyword counts using UniProt, then suggest scope without changing the open project. Disabled while a review operation is running; wait for it to finish and review the scope before Update proposal."/>
@@ -281,7 +281,7 @@
                                         <Button x:Name="removeFamilyButton" Content="Remove from family" Click="RemoveManualFamily_Click" IsEnabled="{Binding DataContext.CanEditManual, RelativeSource={RelativeSource AncestorType=Window}}" ToolTip="Clear hand-added choices for highlighted proteins and restore their automatic proposals; the project changes only on Apply grouping, with Undo available. Disabled without an editable current evidence proposal; Update proposal after scope edits and wait for active operations to finish."/>
                                     </WrapPanel>
                                     <Grid>
-                                    <Grid.RowDefinitions><RowDefinition x:Name="ProteinTableRow" Height="2*" MinHeight="120"/><RowDefinition Height="8"/><RowDefinition x:Name="ProteinDetailsRow" Height="3*" MinHeight="110"/></Grid.RowDefinitions>
+                                    <Grid.RowDefinitions><RowDefinition x:Name="ProteinTableRow" Height="2*" MinHeight="120"/><RowDefinition Height="8"/><RowDefinition x:Name="ProteinDetailsRow" Height="Auto"/></Grid.RowDefinitions>
                                     <DataGrid x:Name="evidenceGrid" ItemsSource="{Binding VisibleProteins}" SelectedItem="{Binding SelectedProtein, Mode=TwoWay}" AutoGenerateColumns="False" CanUserAddRows="False"
                                               CanUserDeleteRows="False" SelectionMode="Extended" ToolTip="Inspect the supplied family, reason, evidence source, reviewed relative and flags, or highlight rows for review actions. Ticks remain choices until Apply grouping, after which Undo restores the preceding grouping.">
                                         <DataGrid.RowStyle><Style TargetType="DataGridRow"><Style.Triggers>
@@ -323,7 +323,8 @@
                                             <TextBlock Text="Selected protein details" Style="{DynamicResource CaptionText}" VerticalAlignment="Center"/>
                                         </DockPanel>
                                         <TextBox x:Name="proteinDetails" Text="{Binding ProteinDetails, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True"
-                                                 TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" ToolTip="Read the selected protein's full supplied reason, original evidence, warning checks, reviewed relative, domains, scope match and tick consequence. Select and copy text without changing ticks, assignments or files."/>
+                                                 MinLines="3" MaxLines="10" VerticalContentAlignment="Top"
+                                                 TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" ToolTip="Read the selected protein's full evidence, scope match and tick consequence; the pane grows to ten lines, then scrolls. Selecting and copying text changes no ticks, assignments or files."/>
                                     </DockPanel>
                                     </Grid>
                                 </DockPanel>

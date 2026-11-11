@@ -91,6 +91,7 @@ namespace FamilyQuant.Tests
             var suite = new SuiteTable();
             suite.AddWithApplication(() => ReviewChecklistStateTests(Path.Combine(workDir, "review-checklist-states")));
             suite.AddWithApplication(() => ReviewDestinationTests(Path.Combine(workDir, "review-destinations")));
+            suite.AddWithApplication(() => ReviewDetailsHeightTests(Path.Combine(workDir, "review-details-height")));
             suite.Add(() => PanelLinkExampleTests());
             suite.AddWithApplication(() => ReviewApplyWaitTests(Path.Combine(workDir, "review-apply-wait")));
             suite.Section("CSV export - locale and escaping");
