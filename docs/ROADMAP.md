@@ -149,6 +149,7 @@ Ana, slide 26: "fiquei confusa sobre como agir em relação a cada uma das diver
 | RG6 | The Family checklist answers "which wins, 23 or 42?" (slide 24). Every row of the user's list shows its state: has N proteins, waits for a choice, has no Pfam code, or matches no database protein. The top line reads "Your list: 42 families, 23 with proteins, ..." | L | 0.6 |  | RL1 | Screen render on a synthetic panel, plus a test; reviewed | SM | FQSimple | 0 | 0 |  |
 | RG7 | Where every protein goes (Ana 11-11). A short panel gives three counts, one sentence each: proteins in a family of the list; in-scope proteins in no family of the list, which keep their sequence family (named after its proteins) and are measured as one; and proteins outside the scope. Help shows the same picture in general terms (D21) | M | 0.8 |  | AP4, RL1 | Screen render and a Help test; reviewed | SM | FQSimple | 0 | 0 |  |
 | RG8 | "Fetch family world" gets a plain name (slide 32; Ana read it as "family word"; D114). The label and the Help say what it counts: the UniProt families of the in-scope proteins. The 42 in her project without a list is that count, not her list. The rename is mapped in the ledger | L | 0.4 |  | RL1 | Screen render and ledger mapping; reviewed | PN | FQPanel | 0 | 0 |  |
+| RG9 | "Show all options" says what each tab is for (slide 25: "continua difícil de entender"). Each tab it opens (Keywords, Architecture, Left out, Unassigned, Markers, Motif counts and the others) shows one line at its top: what the tab is for and when to use it; the Help page lists the same lines. No control moves or goes | L | 0.5 |  | RL1 | Test that every tab has its line; reviewed | SM | FQSimple | 0 | 0 |  |
 
 ### W30 Small fixes from the deck (FQDeNovo, FQSimple, FQRev)
 
@@ -163,7 +164,7 @@ Ana, slide 26: "fiquei confusa sobre como agir em relação a cada uma das diver
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| RL1 | The 2.1.16 candidate: the lanes merged, the full suite once, the ledger refreshed only for the rows the steps touched (D116), and the rows dropped under D110 named | M | 1.0 | QX3, QX4, IM8, IM9, RG1 to RG8, SF1 to SF4 | AP6 | Suite line and ledger line posted | Orchestrator | not staffed | 0 | 0 |  |
+| RL1 | The 2.1.16 candidate: the lanes merged, the full suite once, the ledger refreshed only for the rows the steps touched (D116), and the rows dropped under D110 named | M | 1.0 | QX3, QX4, IM8, IM9, RG1 to RG9, SF1 to SF4 | AP6 | Suite line and ledger line posted | Orchestrator | not staffed | 0 | 0 |  |
 | RL2 | Release 2.1.16 after AP6: version bump, package, notes, README, and the update check from 2.1.15 | M | 1.0 | AP6 | AP5, RL3 | Published as Latest; an installed 2.1.15 offers 2.1.16 | Orchestrator | not staffed | 0 | 0 |  |
 | RL3 | The website follows 2.1.16 (new import and Review grouping screens), on Paulo's word, as D105 | L | 0.5 | RL2 |  | Upload folder ready | Orchestrator | not staffed | 0 | 0 |  |
 
@@ -184,7 +185,7 @@ Each comment on Ana's 34 slides and each request in her nine voice notes of 11-1
 | Slides 19, 20 | The template with an Instructions sheet blocks the review; deleting that sheet works | IM1 | Desk: the program's own template writes the Instructions sheet (`PanelImportTemplate.InstructionsSheet`); why the review stops is P0 |
 | Slide 21 | Had to close without saving to reach File > Save; is it lost?; the import is too sophisticated ("menos é mais") | IM7, IM8 | P0 |
 | Slide 24 | The program proposes 23 families, her sheet has 42: which wins? | RG6, RG7 | P0 |
-| Slide 25 | "Show all options" is still hard to understand | Paulo's session with Ana, after this version | Not a step: she asks to do this step with Paulo (slide 26) |
+| Slide 25 | "Show all options" is still hard to understand | RG9, and Paulo's session with Ana | P0 |
 | Slide 26 | Confused about how to act in Proteins, Panel links, Family checklist and Unassigned | RG1, RG3, RG6, RG7, and the session | P0 |
 | Slide 27 | The lines under "Scope words found: yes" cannot be read | SF2 | P0 |
 | Slide 28 | Selected 2 proteins, the alignment shows 9 | SF3 | P0 |
