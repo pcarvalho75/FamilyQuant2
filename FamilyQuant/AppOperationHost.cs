@@ -167,10 +167,11 @@ public sealed class AppOperationHost : ScreenViewModel
             completed = progress.Completed;
             total = progress.Total;
             Notify();
+            ProgressReported?.Invoke(this, progress);
         }
         if (dispatcher.CheckAccess()) Apply();
-        else dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)Apply);
-        ProgressReported?.Invoke(this, progress);
+        // Subscribers may update views or cancel before the worker's next cancellation point.
+        else dispatcher.Invoke((Action)Apply);
     }
     // Caller holds lifetime. Raw file records remain timestamped even if UI painting is delayed.
     private void Record(OperationProgress progress, DateTimeOffset at)

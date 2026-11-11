@@ -114,10 +114,11 @@ public partial class USearchLib
                     FamilyFilter.CountFamilies(generated.MyExtendedFastaItems).ToString("N0", CultureInfo.CurrentCulture) +
                     " families at " + identity.ToString(CultureInfo.CurrentCulture) + "% identity, and written to\n" +
                     fcfPath + "\n\n" +
-                    "Next step: open that file with File > Open to refine the grouping " +
-                    "and attach quantitation. You can also press \"Check mixing (FDR)\" here first to check " +
+                    "Curate families opens this file to refine the grouping and attach quantitation. " +
+                    "Return to Build families and press \"Check mixing (FDR)\" to check " +
                     "whether this identity keeps real and decoy sequences apart.",
                     "Family Cluster File generated", MessageBoxButton.OK, MessageBoxImage.Information);
+                owner.FamiliesWritten?.Invoke(fcfPath);
             }
             catch (OperationCanceledException) when (owner.Operation?.IsCancellationRequested == true)
             {
