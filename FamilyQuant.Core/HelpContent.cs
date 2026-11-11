@@ -20,7 +20,7 @@ namespace FamilyQuant
     public static class HelpContent
     {
         public const string GroupingOrder =
-            "0. Import family list (optional): choose your family list through File > Import family list. Sheets without family columns are skipped and named in the summary; their source text is kept.\n" +
+            "0. Import family list (optional): choose your family list through File > Import family list. Use template writes an empty workbook to fill and import. Sheets without family columns are skipped and named in the summary; their source text is kept.\n" +
             "1. Fetch evidence: download UniProt annotations for the project's proteins.\n" +
             "2. Group by evidence: review the scope and proposal, then Apply grouping.\n" +
             "3. Fetch family world: download family references for the confirmed task and scope.\n" +

@@ -37,7 +37,7 @@ public static class FamilyListImportGuide
         new FamilyListImportGuideSection("welcome", "1. Welcome", "01-welcome.png", "The first page: what you need, what is kept, where it goes, and the three ways in.", new[]
         {
             "The page lists what you need, an Excel workbook (.xlsx) with an abbreviation column and a family name column; what is kept with your list, names in another language, notes and the original rows; and where it goes, this project's family panel, after which you review protein choices in the Family checklist of Group by evidence.",
-            "Try with the example opens the invented workbook on Review your workbook. Save a template writes a workbook with the recommended columns, which imports with no mapping. Edit current panel opens the panel editor for the panel this project already has. Next leads to File and sheet, where Browse chooses your own workbook.",
+            "Try with the example opens the invented workbook on Review your workbook. Use template writes an empty workbook with the program's columns, ready to fill and import. Edit current panel opens the panel editor for the panel this project already has. Next leads to File and sheet, where Browse chooses your own workbook.",
         }),
         new FamilyListImportGuideSection("workbook", "Review your workbook", "02-workbook.png", "Review your workbook: what the example's six sheets give, with the choices still waiting for you.", new[]
         {
