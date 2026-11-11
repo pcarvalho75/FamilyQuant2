@@ -1,10 +1,28 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace FamilyQuant
 {
     public static class GroupingReviewHelp
     {
-        public static string ForMode(bool evidenceMode, bool panelMode = false) => evidenceMode
-            ? EvidenceHelp.Build(panelMode: panelMode) + "\n\n" + Text
-            : Text + "\n\n" + EvidenceHelp.Build(panelMode: panelMode);
+        public static string ForMode(bool evidenceMode, bool panelMode = false) => (evidenceMode
+            ? EvidenceHelp.Build(panelMode: panelMode) + Environment.NewLine + Environment.NewLine + Text
+            : Text + Environment.NewLine + Environment.NewLine + EvidenceHelp.Build(panelMode: panelMode))
+            + Environment.NewLine + Environment.NewLine + AdvancedTabsText;
+        public static IReadOnlyDictionary<string, string> AdvancedTabGuides { get; } = new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["Keywords"] = "Use description words to group proteins when you want to review matches before applying them.",
+            ["Panel links"] = "Choose how stored UniProt families and domain combinations link to your list when a choice is unresolved.",
+            ["Family checklist"] = "Check every family in your list when you want to see which have proteins and why others are waiting.",
+            ["Architecture"] = "Compare domain combinations when you need to decide whether a proposed family should split.",
+            ["Left out"] = "Check these proteins when a family marker is present but the proposal put them elsewhere.",
+            ["Unassigned"] = "Review proteins with no proposed family when you want to place them by hand or keep their current family.",
+            ["Markers"] = "Check which domains support each family when you want to understand a proposal.",
+            ["Motif counts"] = "Read motif matches after using Check motif to compare complete members of the proposed families.",
+        };
+        public static string AdvancedTabsText => "Show all options tabs" + Environment.NewLine
+            + string.Join(Environment.NewLine, AdvancedTabGuides.Select(guide => guide.Key + ": " + guide.Value));
         public const string Text = """
         Review grouping
 

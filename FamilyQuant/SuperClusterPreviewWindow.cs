@@ -48,6 +48,7 @@ namespace FamilyQuant
             Loaded += async (_, _) => await DiscoverInitialTaskAsync();
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
+            InitializeAdvancedTabGuides();
             AppOperationHost.SetScope(this, Operations);
             BusyOverlay.AttachWindow(this, Operations);
             model.Keyword.Refreshing += (_, _) => sorts = grid.Items.SortDescriptions.ToList();

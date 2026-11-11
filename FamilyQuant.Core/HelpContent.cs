@@ -296,6 +296,7 @@ namespace FamilyQuant
             sb.AppendLine("Align selected counts the selected proteins and reviewed references included in its heading. References are");
             sb.AppendLine("stored nearest reviewed proteins and family representatives from the database or reference panel; alignment ticks change only the comparison.");
             sb.AppendLine("Show all options opens Keywords, all evidence tabs, full protein columns and extra tools;");
+            sb.AppendLine("each tab it reveals starts with a sentence saying what to use it for; Review grouping Help lists the same sentences.");
             sb.AppendLine("it keeps the scope and pending choices. With an imported family list, Family checklist");
             sb.AppendLine("opens that review in one click. Apply grouping commits the reviewed choices.");
             sb.AppendLine("If Apply grouping waits for Panel links, Review choices shows only links needing a choice;");
