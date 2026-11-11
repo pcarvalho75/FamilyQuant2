@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace FamilyQuant.Evidence;
 
 /// <summary>Panel families are user data. Reviewed entries connect source annotations and domain
-/// combinations to that data. Conflicting links require a saved user choice, never a vote or a name rule.</summary>
+/// combinations to that data. Equal domain coverage requires a saved user choice, never a vote or a name rule.</summary>
 public static partial class PanelEvidenceClassifier
 {
     public const int MaximumLinkNoteLength = 512;
@@ -94,19 +94,22 @@ public static partial class PanelEvidenceClassifier
             .Distinct(StringComparer.OrdinalIgnoreCase).Order(StringComparer.Ordinal).ToArray();
 
     public static IReadOnlyList<PanelFamilyLinkProposal> BuildLinks(FamilyPanel panel,
-        IReadOnlyList<NeighbourReference> references, EvidenceClassificationOptions options)
+        IReadOnlyList<NeighbourReference> references, EvidenceClassificationOptions options) => BuildLinks(panel, references, options, true);
+
+    private static IReadOnlyList<PanelFamilyLinkProposal> BuildLinks(FamilyPanel panel,
+        IReadOnlyList<NeighbourReference> references, EvidenceClassificationOptions options, bool usePfamCoverage)
     {
         FamilyPanelValidation.Validate(panel);
         EvidenceClassifier.Validate(options);
         string definition = DefinitionFingerprint(panel);
         var groups = new Dictionary<string, LinkSupport>(StringComparer.Ordinal);
-        var candidateCache = new Dictionary<string, string[]>(StringComparer.Ordinal);
+        var candidateCache = new Dictionary<string, DomainCandidates>(StringComparer.Ordinal);
         foreach (NeighbourReference reference in references)
         {
             if (reference.Evidence?.Reviewed != true || !EvidenceClassifier.IsInScope(reference.Evidence, options.ScopeTerms)
                 || SequenceLabels.IsContaminant(reference.Identifier) || SequenceLabels.IsDecoy(reference.Identifier)) continue;
             string architecture = ArchitectureKey(reference.Evidence);
-            if (!candidateCache.TryGetValue(architecture, out string[]? candidates))
+            if (!candidateCache.TryGetValue(architecture, out var candidates))
                 candidateCache[architecture] = candidates = Candidates(panel, EvidenceDomains.Ordered(reference.Evidence));
             foreach (string family in SourceFamilies(reference.Evidence))
             {
@@ -123,20 +126,24 @@ public static partial class PanelEvidenceClassifier
             confirmed.TryGetValue(pair.Key, out var choice);
             bool current = choice != null && choice.PanelDefinitionFingerprint == definition
                 && (choice.PanelFamilyKey == null || candidates.Contains(choice.PanelFamilyKey, StringComparer.Ordinal));
+            bool coverageResolved = !current && usePfamCoverage && candidates.Length > 1 && pair.Value.CoverageCandidates.Count == 1;
+            if (!current && usePfamCoverage) candidates = pair.Value.CoverageCandidates.Order(StringComparer.Ordinal).ToArray();
             return new PanelFamilyLinkProposal
             {
                 Key = pair.Key, SourceFamily = pair.Value.SourceFamily, ArchitectureKey = pair.Value.Architecture,
                 CandidateFamilyKeys = candidates, SupportingAccessions = pair.Value.Accessions.Order(StringComparer.Ordinal).ToArray(),
                 IsConfirmed = current, SelectedFamilyKey = current ? choice!.PanelFamilyKey : candidates.Length == 1 ? candidates[0] : null,
+                IsPfamCoverageResolved = coverageResolved,
                 SourceNote = current ? choice!.Source ?? string.Empty : string.Empty,
             };
         }).ToArray();
 
-        void Add(string family, string architecture, string[] candidates, string accession)
+        void Add(string family, string architecture, DomainCandidates candidates, string accession)
         {
             string key = LinkKey(family, architecture);
             if (!groups.TryGetValue(key, out var group)) groups.Add(key, group = new(family, architecture));
-            group.Candidates.UnionWith(candidates);
+            group.Candidates.UnionWith(candidates.All);
+            group.CoverageCandidates.UnionWith(candidates.Coverage);
             group.Accessions.Add(accession);
         }
     }
@@ -146,18 +153,29 @@ public static partial class PanelEvidenceClassifier
         internal string SourceFamily { get; } = sourceFamily;
         internal string Architecture { get; } = architecture;
         internal HashSet<string> Candidates { get; } = new(StringComparer.Ordinal);
+        internal HashSet<string> CoverageCandidates { get; } = new(StringComparer.Ordinal);
         internal HashSet<string> Accessions { get; } = new(StringComparer.Ordinal);
     }
 
-    private static string[] Candidates(FamilyPanel panel, IReadOnlyCollection<string> observed)
+    private sealed record DomainCandidates(string[] All, string[] Coverage);
+
+    private static DomainCandidates Candidates(FamilyPanel panel, IReadOnlyCollection<string> observed)
     {
-        if (observed.Count == 0) return Array.Empty<string>();
-        var scores = panel.Families.Select(f => (Family: f, Count: f.Pfam.Select(d => d.Accession)
-            .Distinct(StringComparer.Ordinal).Count(observed.Contains))).ToArray();
+        if (observed.Count == 0) return new(Array.Empty<string>(), Array.Empty<string>());
+        var scores = panel.Families.Select(f =>
+        {
+            string[] domains = f.Pfam.Select(d => d.Accession).Distinct(StringComparer.Ordinal).ToArray();
+            return (Family: f, Count: domains.Count(observed.Contains), Total: domains.Length);
+        }).ToArray();
         int best = scores.Select(s => s.Count).DefaultIfEmpty().Max();
-        return best == 0 ? Array.Empty<string>() : scores.Where(s => s.Count == best)
+        if (best == 0) return new(Array.Empty<string>(), Array.Empty<string>());
+        var tied = scores.Where(s => s.Count == best).ToArray();
+        // The numerator is equal within this tie, so the smallest denominator covers most.
+        int complete = tied.Min(s => s.Total);
+        return new(tied.Select(s => FamilyPanelValidation.ResolveFamilyKey(panel, s.Family.Key) ?? s.Family.Key)
+            .Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray(), tied.Where(s => s.Total == complete)
             .Select(s => FamilyPanelValidation.ResolveFamilyKey(panel, s.Family.Key) ?? s.Family.Key)
-            .Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray();
+            .Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray());
     }
 
     public static FamilyPanel ConfirmLinks(FamilyPanel panel, IReadOnlyList<PanelFamilyLinkProposal> proposals,
@@ -217,6 +235,8 @@ public static partial class PanelEvidenceClassifier
             foreach (string family in families)
             {
                 Links.TryGetValue(LinkKey(family, architecture), out var link);
+                if (link?.IsPfamCoverageResolved == true && family.Length > 0
+                    && Links.TryGetValue(LinkKey(family, ""), out var saved) && saved.IsConfirmed) link = saved;
                 if ((link == null || link.CandidateFamilyKeys.Count == 0 && !link.IsConfirmed) && family.Length > 0)
                     Links.TryGetValue(LinkKey(family, ""), out link);
                 if (link == null || (!link.IsConfirmed && link.CandidateFamilyKeys.Count == 0))
@@ -240,7 +260,7 @@ public static partial class PanelEvidenceClassifier
         internal bool Conflicts(string[] observed, string family)
         {
             if (observed.Any(domain => domainOwners.TryGetValue(domain, out var owners) && owners.Count == 1 && !owners.Contains(family))) return true;
-            string[] candidates = Candidates(Panel, observed);
+            string[] candidates = Candidates(Panel, observed).All;
             return candidates.Length > 0 && !candidates.Contains(family, StringComparer.Ordinal);
         }
 

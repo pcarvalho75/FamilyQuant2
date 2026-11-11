@@ -15,6 +15,8 @@ public sealed class PanelFamilyLinkProposal
     public IReadOnlyList<string> SupportingAccessions { get; init; } = Array.Empty<string>();
     public bool IsConfirmed { get; init; }
     public string? SelectedFamilyKey { get; init; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public bool IsPfamCoverageResolved { get; init; }
     // Presentation only: the existing saved link Source remains the serialized note.
     [JsonIgnore] public string SourceNote { get; init; } = string.Empty;
     public bool NeedsConfirmation => CandidateFamilyKeys.Count > 1 && !IsConfirmed;
