@@ -49,7 +49,7 @@ public partial class ClusterGenerationControl
         var proceed = new Button { Content = action, IsDefault = true, Margin = new Thickness(0, 0, 8, 0),
             ToolTip = action == "Download and continue"
                 ? "Downloads missing UniProt evidence into the project before opening grouping review. Requires internet; File > Save keeps the evidence, and this fetch is not a curation Undo step."
-                : "Opens Group by evidence to confirm the scope needed for a family-world fetch. Opening the review changes no assignments until you apply them." };
+                : "Opens Group by evidence to confirm the scope needed for Fetch UniProt families. Opening the review changes no assignments until you apply them." };
         proceed.SetResourceReference(StyleProperty, "PrimaryButton");
         proceed.Click += (_, _) => dialog.DialogResult = true;
         var cancel = new Button { Content = "Cancel", IsCancel = true,

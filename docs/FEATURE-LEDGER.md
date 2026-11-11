@@ -5781,6 +5781,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1962**; OPEN r
 
 ## Added contracts after the frozen source
 
+| FQ2-FETCH-UNIPROT-FAMILIES | MAP | RG8 renames Fetch family world to Fetch UniProt families in Curate families, Grouping order, status, Help, progress, report captions and messages. The tooltip and Help describe the existing query: families of in-scope database proteins, every reviewed entry for those families and entries in the database clade. FQ2-GROUPING-OPTIONAL-FAMILY-LIST keeps the four required steps; FQ2-SCOPED-PANEL-SUBCLASS-FLOW keeps Full panel prerequisites; FQ2-HTML-NATIVE-SIGNAL and FQ2-HTML-MASS-QUALITY keep all chart values, captions and exports under the new visible name. Identifiers, stored names, scope, fetch queries and quantities are unchanged | test:DesktopWorldChecks; test:ReportStudyFigureTests |
+
 | FQ2-FAMILY-COUNTER-FILTERS | MAP | SF4 maps FQ15-B0E9E05EC8E3 and FQ15-DEFB773DF777 to N shown of M in file followed by only the active decoys, contaminants, search and only quantified filters. Both existing family counts and every stored quantity stay unchanged; no per-filter count is computed | test:FamilyCounterFilterTests; test:ReportViewTests |
 
 | FQ2-HTML-GAP-ORDER | MAP | U5-gap-order sorts the HTML Signal sources by family rows by stored pooled total, largest first, preserving native order for ties and keeping zero rows. Every native part, total, family percentage and Word chart input/order remains unchanged | test:HtmlSignalRecoveryTests; test:HtmlRecoveryExplanationTests |

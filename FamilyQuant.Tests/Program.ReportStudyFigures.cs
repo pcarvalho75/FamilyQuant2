@@ -55,7 +55,7 @@ internal static partial class Program
         var sourcePlot = plan.Figures.Single(f => f.Plot.Chart is FamilySignalOriginChart);
         var sourceRows = ((FamilySignalOriginChart)sourcePlot.Plot.Chart).Rows;
         Check("source caption uses stored component amounts and leaves world-only signal separate",
-            sourcePlot.Caption.Numbers.Any(n => n.Label == "Family-world-only de novo signal" && n.Value == sourceRows.Sum(r => r.WorldDeNovoEnvelope))
+            sourcePlot.Caption.Numbers.Any(n => n.Label == "De novo signal only in UniProt families" && n.Value == sourceRows.Sum(r => r.WorldDeNovoEnvelope))
             && sourcePlot.Caption.How.Contains("starting database"));
 
         var oldCulture = CultureInfo.CurrentCulture; var oldUi = CultureInfo.CurrentUICulture;
@@ -102,7 +102,7 @@ internal static partial class Program
         manifest.FamilyWorldResult!.Composition[0].WorldDeNovoEnvelope += 99;
         Check("planned source figure and caption retain their immutable stored-data snapshot",
             sourceRows.Sum(r => r.WorldDeNovoEnvelope) == sourceBefore
-            && sourcePlot.Caption.Numbers.Single(n => n.Label == "Family-world-only de novo signal").Value == sourceBefore);
+            && sourcePlot.Caption.Numbers.Single(n => n.Label == "De novo signal only in UniProt families").Value == sourceBefore);
         manifest.FamilyWorldResult.Composition[0].WorldDeNovoEnvelope -= 99;
         ReportStudyCanonicalMembershipTests(folder);
         var many = new QuantManifest { FamilyRunShares = new FamilyRunSharesResult(), FamilySubclassParts = new FamilySubclassPartsResult() };

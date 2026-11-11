@@ -32,11 +32,11 @@ public static class CompositionChartCaptions
 
     private static FigureCaptionInput SignalSources(FamilySignalOriginChart chart) => new(
         "Family-specific envelope signal by sequence source, all runs pooled",
-        "Each stacked row shows identified, de novo supported by the starting database, and family-world-only contributions. Shared and unexplained global signal are separate. Family-world-only signal is not added to starting database family composition",
+        "Each stacked row shows identified, de novo supported by the starting database, and contributions found only in UniProt families. Shared and unexplained global signal are separate. Signal found only in UniProt families is not added to starting database family composition",
         new CaptionNumber[] { new("Family rows shown", chart.Rows.Count, "families", "0"),
             new("Identified signal", chart.Rows.Sum(r => r.IdentifiedEnvelope), "area units", "G5"),
             new("Starting-database de novo signal", chart.Rows.Sum(r => r.DatabaseDeNovoEnvelope), "area units", "G5"),
-            new("Family-world-only de novo signal", chart.Rows.Sum(r => r.WorldDeNovoEnvelope), "area units", "G5") });
+            new("De novo signal only in UniProt families", chart.Rows.Sum(r => r.WorldDeNovoEnvelope), "area units", "G5") });
 
     private static FigureCaptionInput Composition(FamilyCompositionData data)
     {

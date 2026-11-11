@@ -23,7 +23,7 @@ namespace FamilyQuant
             "0. Import family list (optional): choose your family list through File > Import family list.\n" +
             "1. Fetch evidence: download UniProt annotations for the project's proteins.\n" +
             "2. Group by evidence: review the scope and proposal, then Apply grouping.\n" +
-            "3. Fetch family world: download family references for the confirmed task and scope.\n" +
+            "3. Fetch UniProt families: find the families of in-scope database proteins and download their reviewed and database-clade entries.\n" +
             "4. Quantify: measure peptide signal from the RAW files.\n";
 
         /// <summary>
@@ -228,9 +228,9 @@ namespace FamilyQuant
             sb.AppendLine("GROUPING: PART A OF CURATE FAMILIES, GROUP BY EVIDENCE");
             sb.AppendLine("------------------------------------------------------");
             sb.AppendLine(GroupingOrder);
-            sb.AppendLine("Fetch evidence stores annotations for grouping; Fetch family world stores reference");
+            sb.AppendLine("Fetch evidence stores annotations for grouping; Fetch UniProt families stores reference");
             sb.AppendLine("sequences for Database gap. Both need an internet connection when downloading.");
-            sb.AppendLine("Save the project to keep the evidence, applied grouping and family world.");
+            sb.AppendLine("Save the project to keep the evidence, applied grouping and UniProt families.");
             sb.AppendLine();
             sb.AppendLine("PART B OF CURATE FAMILIES, GROUP BY WORDS, AND CURATING BY HAND");
             sb.AppendLine("----------------------------------------------------------------");
@@ -283,12 +283,15 @@ namespace FamilyQuant
             sb.AppendLine("domains stays ticked if it carries a keyword; short proteins and fragments can have");
             sb.AppendLine("no Pfam call. Domains do not separate everything: different families can share them.");
             sb.AppendLine();
-            sb.AppendLine("Fetch family world uses the confirmed database task and scope from Group by evidence.");
+            sb.AppendLine("Fetch UniProt families finds the UniProt families of the in-scope proteins of your");
+            sb.AppendLine("database, then downloads every reviewed UniProt entry of those families and their");
+            sb.AppendLine("entries from your database's own clade. It uses the confirmed database task and scope");
+            sb.AppendLine("from Group by evidence.");
             sb.AppendLine("Fetch evidence first to supply the database's family annotations.");
             sb.AppendLine("If no matching task and scope are confirmed, it offers to open Group by evidence first.");
-            sb.AppendLine("The screen shows the stored release, scope, protein count and size. Cancel or a failed fetch");
-            sb.AppendLine("keeps the previous file. Save the project to keep the world for offline use. Compute uses the");
-            sb.AppendLine("stored world to populate Database gap, where credited tags can suggest FASTA additions.");
+            sb.AppendLine("The screen shows the stored release, scope, family count, entry count and size. Cancel or a");
+            sb.AppendLine("failed fetch keeps the previous file. Save the project to keep these references for offline");
+            sb.AppendLine("use. Quantify uses them to populate Database gap, where credited tags can suggest FASTA additions.");
             sb.AppendLine();
             sb.AppendLine("Group by evidence opens the Evidence tab of Review grouping. Confirm the scope,");
             sb.AppendLine("then review the families, flags, protein ticks and Selected protein details in Simple view.");

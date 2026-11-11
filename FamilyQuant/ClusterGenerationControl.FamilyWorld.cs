@@ -31,7 +31,7 @@ public partial class ClusterGenerationControl
             && (ConfirmFamilyWorldGroupingOfferOverride != null || Window.GetWindow(this) != null))
         {
             bool openGrouping = ConfirmFamilyWorldGroupingOfferOverride?.Invoke()
-                ?? ConfirmGroupingPrerequisite("Fetch family world",
+                ?? ConfirmGroupingPrerequisite("Fetch UniProt families",
                     "Confirm a task and scope with Group by evidence first?", "Open Group by evidence");
             if (openGrouping)
                 await ReviewEvidenceWithFetchOfferAsync();
@@ -61,7 +61,7 @@ public partial class ClusterGenerationControl
         {
             if (fcf.EvidenceSource?.ReferencePanel is { IsComplete: false })
             {
-                SetCurationOperationStatus("The reference panel is incomplete. Retry panel before fetching the family world.");
+                SetCurationOperationStatus("The reference panel is incomplete. Retry panel before fetching the UniProt families.");
                 return;
             }
             if (!NearestReviewed.Targets(fcf).Any(p => !SequenceLabels.IsContaminant(p.SequenceIdentifier)
@@ -80,17 +80,17 @@ public partial class ClusterGenerationControl
                         cancellationToken: operation.CancellationToken))) return;
                 choice = ConfirmFamilyWorldScopeOverride != null ? ConfirmFamilyWorldScopeOverride(proposal!)
                     : ConfirmFamilyWorldScope(proposal!);
-                if (choice == null) { SetCurationOperationStatus("Family world cancelled. The previous document was kept."); return; }
+                if (choice == null) { SetCurationOperationStatus("Fetching UniProt families cancelled. The previous document was kept."); return; }
                 // Confirmation is read-only until the completed world is published by Core.
                 choice = EvidenceTaskDiscovery.Confirm(fcf, choice.Proposal, choice.ScopeTerms);
             }
-            await RunCurationAsync("Fetch family world", async operation =>
+            await RunCurationAsync("Fetch UniProt families", async operation =>
             {
                 await ViewModel.FetchFamilyWorldAsync(choice, operation, FamilyWorldHandlerOverride);
-                SetCurationOperationStatus("Family world added to the open project. Use File > Save to keep it, then Quantify to populate Database gap.");
+                SetCurationOperationStatus("UniProt families added to the open project. Use File > Save to keep it, then Quantify to populate Database gap.");
             });
         }
-        catch (Exception ex) { SetCurationOperationStatus("Family world could not finish: " + ex.Message); }
+        catch (Exception ex) { SetCurationOperationStatus("Fetching UniProt families could not finish: " + ex.Message); }
         finally { familyWorldFetchRunning = false; }
     }
 
@@ -103,7 +103,7 @@ public partial class ClusterGenerationControl
 
     private EvidenceTaskChoice? ConfirmFamilyWorldScope(EvidenceTaskProposal proposal)
     {
-        var dialog = new Window { Title = "Confirm family-world scope", Width = 520, SizeToContent = SizeToContent.Height,
+        var dialog = new Window { Title = "Confirm UniProt families scope", Width = 520, SizeToContent = SizeToContent.Height,
             WindowStartupLocation = WindowStartupLocation.CenterOwner, Owner = Window.GetWindow(this), ResizeMode = ResizeMode.NoResize };
         var panel = new StackPanel { Margin = new Thickness(20) };
         panel.Children.Add(new TextBlock { Text = "Database task: " + proposal.Clade.ScientificName + ". UniProt release " + proposal.Release + ".",
@@ -117,9 +117,9 @@ public partial class ClusterGenerationControl
         panel.Children.Add(error);
         var buttons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right };
         var fetch = new Button { Content = "Confirm and fetch", IsDefault = true,
-            ToolTip = "Validates the scope terms and starts downloading family references from UniProt into the project. Requires internet; File > Save keeps the completed family world." };
+            ToolTip = "Validates the scope terms and starts downloading family references from UniProt into the project. Requires internet; File > Save keeps the completed UniProt families." };
         var cancel = new Button { Content = "Cancel", IsCancel = true,
-            ToolTip = "Closes this scope question without downloading a family world. The project stays unchanged." };
+            ToolTip = "Closes this scope question without downloading UniProt family references. The project stays unchanged." };
         EvidenceTaskChoice? result = null;
         fetch.Click += (_, _) =>
         {

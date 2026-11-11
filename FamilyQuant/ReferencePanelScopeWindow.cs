@@ -22,7 +22,7 @@ public sealed class ReferencePanelScopeWindow : Window
         ScopeBox.Text = string.Join(", ", initialScope.Select(term => "\"" + term + "\""));
         FullPanelBox.IsChecked = hasSubclasses;
         ScopeBox.ToolTip = "Enter words or quoted phrases to match stored keywords and tissue annotations. Fetch panel downloads their missing entries; this field is disabled while Full panel is selected.";
-        FullPanelBox.ToolTip = "Download every reviewed entry for the file's families. This is needed for subclass assignment, validation reports and the family world.";
+        FullPanelBox.ToolTip = "Download every reviewed entry for the file's families. This is needed for subclass assignment, validation reports and Fetch UniProt families.";
         FetchButton.ToolTip = "Fetch reviewed entries for the chosen scope and the whole families needed for grouping checks. Enter scope words or choose Full panel to enable this.";
         FetchButton.SetResourceReference(StyleProperty, "PrimaryButton");
         void Validate() { ScopeBox.IsEnabled = FullPanelBox.IsChecked != true; FetchButton.IsEnabled = FullPanelBox.IsChecked == true || WordCluster.ParseKeywords(ScopeBox.Text).Any(term => System.Text.RegularExpressions.Regex.IsMatch(term, @"[\p{L}\p{Nd}]")); }

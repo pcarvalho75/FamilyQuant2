@@ -9,7 +9,7 @@ public static partial class FamilyCompositionStudy
 {
     // Retained verbatim so older completed native studies can be recognized without rerunning attribution.
     public const string RunSharesMethod = "Per-file primary family signal / sum of credited family signal; measured-peptide and recorded " +
-        "RAW TIC shares are separate. Family-world-only signal excluded. Arithmetic mean of available run " +
+        "RAW TIC shares are separate. Signal found only in UniProt families excluded. Arithmetic mean of available run " +
         "shares, sample SD (n-1), CV = SD / mean. Zero denominators and undefined statistics are unavailable. " +
         "Pooled share uses all runs pooled; pooled-minus-mean is its signed difference from the per-run mean. " +
         "Measured-signal and TIC means/SDs each require every run's corresponding share to be available.";

@@ -32,7 +32,7 @@
     MaxHeight="360" ColumnHeaderStyle="{StaticResource GapLengthHeader}" ToolTip="Inspect stored estimates at each minimum tag length without calculating missing results. Sorting or selecting rows changes only this view.">
     <DataGrid.Columns>
      <DataGridTextColumn Header="Minimum tag length" Binding="{Binding MinimumTagLength}" ElementStyle="{StaticResource GapNumber}" Width="110" theme:TableAppearance.HeaderToolTip="Minimum accepted de novo tag length in residues for this stored estimate. Each row reports its own computed length or an unavailable result."/>
-     <DataGridTextColumn Header="Landed share" Binding="{Binding LandedShare}" ElementStyle="{StaticResource GapNumber}" Width="140" theme:TableAppearance.HeaderToolTip="Envelope credited by the family-world pass divided by the unattributed de novo envelope, shown as a percentage. This is a stored estimate, not a new calculation."/>
+     <DataGridTextColumn Header="Landed share" Binding="{Binding LandedShare}" ElementStyle="{StaticResource GapNumber}" Width="140" theme:TableAppearance.HeaderToolTip="Envelope credited by the UniProt families pass divided by the unattributed de novo envelope, shown as a percentage. This is a stored estimate, not a new calculation."/>
      <DataGridTextColumn Header="Decoy rate" Binding="{Binding DecoyRate}" ElementStyle="{StaticResource GapRate}" Width="340" theme:TableAppearance.HeaderToolTip="Stored reversed-copy envelope divided by credited envelope at this minimum tag length. This is a decoy control on world credits, not a calibrated spectrum FDR."/>
      <DataGridTextColumn Header="Known answers right (right/landed)" Binding="{Binding KnownAnswerRight}" Width="*" MinWidth="240" theme:TableAppearance.HeaderToolTip="Stored known-answer right rate with right/landed counts for this tag length. Missing validation is shown as not recorded rather than zero."/>
      <DataGridTextColumn Header="Result" Binding="{Binding Availability}" Width="120" theme:TableAppearance.HeaderToolTip="Whether a family table was stored for this tag length. Not computed means choosing this length cannot show a family result."/>
@@ -52,7 +52,7 @@
    <WrapPanel Margin="0,0,0,8">
     <TextBlock Text="Identified" Foreground="{DynamicResource ChartIdentifiedBrush}" Margin="0,0,18,0"/>
     <TextBlock Text="De novo in database" Foreground="{DynamicResource ChartDeNovoBrush}" Margin="0,0,18,0"/>
-    <TextBlock Text="De novo only in family world" Foreground="{DynamicResource ChartPeptideLikeBrush}"/>
+    <TextBlock Text="De novo only in UniProt families" Foreground="{DynamicResource ChartPeptideLikeBrush}"/>
    </WrapPanel>
    <ScrollViewer x:Name="ChartScroll" MaxHeight="280" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
     ToolTip="Every stored family has a three-part bar. Scroll to see the complete ranking.">
@@ -65,15 +65,15 @@
     CanUserAddRows="False" ToolTip="Inspect stored family amounts and validation facts at the chosen tag length. Selecting or sorting rows changes only the view; shared signal remains in separate global buckets.">
     <DataGrid.Columns>
      <DataGridTextColumn Header="Family" Binding="{Binding FamilyLabel}" ElementStyle="{StaticResource GapFamily}" Width="*" MinWidth="150" theme:TableAppearance.HeaderToolTip="Stored family label, with current curated group IDs when the row represents a curated group. Shared credits are kept outside these family-only amounts."/>
-     <DataGridTextColumn Header="Type" Binding="{Binding Kind}" Width="90" theme:TableAppearance.HeaderToolTip="Whether this stored row represents a curated group or a UniProt family from the family world."/>
+     <DataGridTextColumn Header="Type" Binding="{Binding Kind}" Width="90" theme:TableAppearance.HeaderToolTip="Whether this stored row represents a curated group or a UniProt family from the UniProt families."/>
      <DataGridTextColumn Header="Identified" Binding="{Binding Data.IdentifiedEnvelope, StringFormat={}{0:G6}}" ElementStyle="{StaticResource GapNumber}" Width="100" theme:TableAppearance.HeaderToolTip="Observed isotope-envelope area of identified peptides credited only to this family. Identified signal shared between families stays in a global bucket."/>
      <DataGridTextColumn Header="De novo in database" Binding="{Binding Data.DatabaseDeNovoEnvelope, StringFormat={}{0:G6}}" ElementStyle="{StaticResource GapNumber}" Width="120" theme:TableAppearance.HeaderToolTip="Measured envelope area of de novo peptides placed only in this family by the searched database. Shared database credits stay in a global bucket."/>
-     <DataGridTextColumn Header="Database gap" Binding="{Binding Data.WorldDeNovoEnvelope, StringFormat={}{0:G6}}" ElementStyle="{StaticResource GapNumber}" Width="90" theme:TableAppearance.HeaderToolTip="Measured envelope area placed only in this in-scope family by the stored family world after database attribution. Shared world credits stay in a global bucket."/>
-     <DataGridTextColumn Header="Decoy rate of world credits" Binding="{Binding DecoyRate}" ElementStyle="{StaticResource GapRate}" Width="340" theme:TableAppearance.HeaderToolTip="Reversed-copy envelope divided by all envelope credited to this family in the family-world pass, including shared credits. The stored evidence determines availability."/>
+     <DataGridTextColumn Header="Database gap" Binding="{Binding Data.WorldDeNovoEnvelope, StringFormat={}{0:G6}}" ElementStyle="{StaticResource GapNumber}" Width="90" theme:TableAppearance.HeaderToolTip="Measured envelope area placed only in this in-scope family by the stored UniProt families after database attribution. Shared world credits stay in a global bucket."/>
+     <DataGridTextColumn Header="Decoy rate of world credits" Binding="{Binding DecoyRate}" ElementStyle="{StaticResource GapRate}" Width="340" theme:TableAppearance.HeaderToolTip="Reversed-copy envelope divided by all envelope credited to this family in the UniProt families pass, including shared credits. The stored evidence determines availability."/>
      <DataGridTextColumn Header="Known-answer right rate (true/credited)" Binding="{Binding RightRate}" Width="260" theme:TableAppearance.HeaderToolTip="Fraction of known-answer credits that include the correct family, with true/credited counts. Below the stored minimum known-credit count, the evidence message replaces the rate."/>
     </DataGrid.Columns>
    </DataGrid>
-   <Expander Header="Stored rules, scope and provenance" Margin="0,10,0,0" ToolTip="Expand the stored first-pass and family-world rules, in-scope families and release provenance. Only the view changes.">
+   <Expander Header="Stored rules, scope and provenance" Margin="0,10,0,0" ToolTip="Expand the stored first-pass and UniProt families rules, in-scope families and release provenance. Only the view changes.">
     <StackPanel Margin="8"><TextBlock Text="{Binding FirstPassRules}" TextWrapping="Wrap"/>
      <TextBlock Text="{Binding SecondPassRules}" TextWrapping="Wrap" Margin="0,6,0,0"/>
      <TextBlock Text="{Binding Scope}" TextWrapping="Wrap" Margin="0,6,0,0"/>

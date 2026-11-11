@@ -296,9 +296,9 @@ public static class ReportFigureRenderer
             var rows = world.Composition.Where(r => !hiddenWorld.Contains(r.Family)).OrderByDescending(r => r.WorldDeNovoEnvelope).ThenByDescending(r => r.TotalEnvelope)
                 .ThenBy(r => r.Family, StringComparer.Ordinal).ToArray();
             Add(ReportSectionIds.DatabaseGap, "database_gap.png", "Database gap",
-                "Identified, database-mapped de novo and family-world-only signal are separate components. The family-world-only component is excluded from database family composition.",
+                "Identified, database-mapped de novo and signal found only in UniProt families are separate components. The component found only in UniProt families is excluded from database family composition.",
                 () => new DatabaseGapChart(rows, ChartPalette.Light), new("Family rows shown", rows.Length, "families", "0"),
-                new("Family-world-only envelope shown", rows.Sum(r => r.WorldDeNovoEnvelope), "area units", "G5"));
+                new("Envelope only in UniProt families", rows.Sum(r => r.WorldDeNovoEnvelope), "area units", "G5"));
             charts[^1] = charts[^1] with { Height = Math.Max(540, 70 + rows.Length * 30) };
         }
         else Missing(ReportSectionIds.DatabaseGap, "Database gap");
@@ -309,14 +309,14 @@ public static class ReportFigureRenderer
             {
                 var page = rows.Skip(offset).Take(12).ToArray();
                 string suffix = (offset / 12 + 1).ToString(CultureInfo.InvariantCulture);
-                Add(ReportSectionIds.Quality, "family_world_rates_" + suffix + ".png", "Family-world rates " + suffix,
+                Add(ReportSectionIds.Quality, "family_world_rates_" + suffix + ".png", "UniProt families rates " + suffix,
                     "Stored decoy signal divided by credited signal, and correct known credits divided by known credits, by family. Missing rates remain unavailable; supporting counts and the evidence floor are printed in the quality table.",
                     () => new ReportFamilyWorldRatesChart(page), new("Family rows on this page", page.Length, "families", "0"),
                     new("Known credited sequences on this page", page.Sum(r => r.KnownCredited), "sequences", "0"));
             }
-            if (rows.Length == 0) Missing(ReportSectionIds.Quality, "Family-world error rates", "No individually reportable per-family rates are available. Complete stored rates remain in the companion workbook.");
+            if (rows.Length == 0) Missing(ReportSectionIds.Quality, "UniProt families error rates", "No individually reportable per-family rates are available. Complete stored rates remain in the companion workbook.");
         }
-        else Missing(ReportSectionIds.Quality, "Family-world error rates");
+        else Missing(ReportSectionIds.Quality, "UniProt families error rates");
         return new(charts, unavailable);
     }
 

@@ -137,10 +137,10 @@ public sealed class HtmlFamilyFigurePacket
                             plot.Number(row.TotalEnvelope > 0 ? 100 * row.IdentifiedEnvelope / row.TotalEnvelope : null, "%")),
                         new Part(plot.Text("De novo in database"), plot.Number(row.DatabaseDeNovoEnvelope, "area")!, false,
                             plot.Number(row.TotalEnvelope > 0 ? 100 * row.DatabaseDeNovoEnvelope / row.TotalEnvelope : null, "%")),
-                        new Part(plot.Text("De novo only in family world"), plot.Number(row.WorldDeNovoEnvelope, "area")!, false,
+                        new Part(plot.Text("De novo only in UniProt families"), plot.Number(row.WorldDeNovoEnvelope, "area")!, false,
                             plot.Number(row.TotalEnvelope > 0 ? 100 * row.WorldDeNovoEnvelope / row.TotalEnvelope : null, "%")),
                     })).ToArray();
-                plot.Views["fixed"] = ViewOf(rows, "Measured envelope area, all runs pooled", "All runs pooled. Bar parts are identified, database-mapped de novo and family-world-only envelope areas. These are areas, not percentages; shared and unattributed signal stay outside family bars. Changing Normalize to does not change measured areas.", "Measured envelope area", "", false);
+                plot.Views["fixed"] = ViewOf(rows, "Measured envelope area, all runs pooled", "All runs pooled. Bar parts are identified, database-mapped de novo and envelope areas found only in UniProt families. These are areas, not percentages; shared and unattributed signal stay outside family bars. Changing Normalize to does not change measured areas.", "Measured envelope area", "", false);
             }
             else if (native is FamilySignalShareChart scatter)
             {

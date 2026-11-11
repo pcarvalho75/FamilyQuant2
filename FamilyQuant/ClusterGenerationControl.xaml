@@ -149,8 +149,8 @@
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="3" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
-                            <Button Grid.Column="1" x:Name="ButtonFetchFamilyWorld" Content="Fetch family world" Click="ButtonFetchFamilyWorld_Click"
-                                    ToolTip="Downloads in-scope family references for the confirmed scope into the project, for later Database gap analysis. Confirm the scope in Group by evidence and complete any incomplete reference panel first; File &gt; Save keeps the download."/>
+                            <Button Grid.Column="1" x:Name="ButtonFetchFamilyWorld" Content="Fetch UniProt families" Click="ButtonFetchFamilyWorld_Click"
+                                    ToolTip="Fetch UniProt families finds the UniProt families of the in-scope proteins of your database, then downloads every reviewed UniProt entry of those families and their entries from your database's own clade. Confirm the scope in Group by evidence and complete any incomplete reference panel first; File &gt; Save keeps the download."/>
                         </Grid>
                         <TextBlock x:Name="TextBlockFamilyWorldState" Text="{Binding FamilyWorldStepStatus}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
                         <Grid>

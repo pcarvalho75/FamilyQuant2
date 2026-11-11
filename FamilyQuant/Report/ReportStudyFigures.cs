@@ -140,7 +140,7 @@ public static partial class ReportStudyFigures
                     basis is { UsesPanel: true, IsIdentity: false } ? ReportSectionIds.Supplements : ReportSectionIds.Results);
             }
         }
-        else Missing("Family signal sources", "The selected family-world source composition has not been stored; its missing parts are not zero.");
+        else Missing("Family signal sources", "The selected UniProt families source composition has not been stored; its missing parts are not zero.");
         int coverageStart = figures.Count;
         AddCoverage(manifest, project, panelMap, sourceThreshold, topProteinsPerPanelFamily, figures, unavailable);
         if (basis is { UsesPanel: true, IsIdentity: false })
