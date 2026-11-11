@@ -146,20 +146,20 @@ internal static partial class Program
             DeNovoSelections = new[] { new DeNovoSourceSelection(DeNovoSource.DenovoOnly, 80, 0) } };
         var baseline = Engine(Options(), null, null);
         var expected = ComputeProgressSnapshot(Path.Combine(folder, "baseline.fqproj"), file, baseline);
+        using var entered = new ManualResetEventSlim(); using var release = new ManualResetEventSlim();
+        int pause = 1;
         var model = new ComputeXicViewModel("Synthetic progress fixture", familyCuration: FamilyClusterFile.FromJsonText(file.ToJsonText()),
             compute: (request, messages, token) => Task.Run(() => Engine(request.Options, messages.Report,
-                typeof(ComputeXicRequest).GetProperty("Operation")?.GetValue(request) as OperationContext), token))
+                new OperationContext(token, new InlineOperationProgress(item =>
+        {
+            request.Operation!.Report(item.Stage, item.Message, item.Completed, item.Total);
+            if (item.Stage == "compute-study" && item.Completed == 1 && Interlocked.Exchange(ref pause, 0) == 1)
+            { entered.Set(); if (!release.Wait(TimeSpan.FromSeconds(30))) throw new TimeoutException("Native compute fixture was not released."); }
+        }))), token))
         { RawDirectory = raw, SeproPackage = package, DeNovoDirectory = exports };
         var window = OffscreenProofWindow(new Window { Content = new QuantifyControl(model), Width = 1024, Height = 768 });
         var trace = new ConcurrentQueue<OperationProgress>();
-        using var entered = new ManualResetEventSlim(); using var release = new ManualResetEventSlim();
-        int pause = 1;
-        model.Operations.ProgressReported += (_, item) =>
-        {
-            trace.Enqueue(item);
-            if (item.Stage == "compute-study" && item.Completed == 1 && Interlocked.Exchange(ref pause, 0) == 1)
-            { entered.Set(); if (!release.Wait(TimeSpan.FromSeconds(30))) throw new TimeoutException("Native compute fixture was not released."); }
-        };
+        model.Operations.ProgressReported += (_, item) => trace.Enqueue(item);
         var oldContext = SynchronizationContext.Current;
         try
         {

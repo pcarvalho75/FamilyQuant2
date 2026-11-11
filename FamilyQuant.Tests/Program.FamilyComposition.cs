@@ -309,15 +309,14 @@ namespace FamilyQuant.Tests
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 control.SetFullXicQuant(null, null);
                 using var workerEntered = new ManualResetEventSlim();
-                using var releaseWorker = new ManualResetEventSlim();
+                bool pendingVisible = false;
                 int holdWorker = 1;
                 EventHandler<FamilyQuant.Operations.OperationProgress> holdAttribution = (_, step) =>
                 {
                     if (step.Stage != "attribution-cache" || step.Completed != 0
                         || Interlocked.Exchange(ref holdWorker, 0) != 1) return;
+                    pendingVisible = !control.HasFullXic && layer3.Text == "PENDING";
                     workerEntered.Set();
-                    if (!releaseWorker.Wait(TimeSpan.FromSeconds(60)))
-                        throw new TimeoutException("The attach-state fixture did not release attribution.");
                 };
                 bool WaitForState(Func<bool> state)
                 {
@@ -331,19 +330,15 @@ namespace FamilyQuant.Tests
                 try
                 {
                     pending = control.SetFullXicQuantAsync(rows, null);
-                    bool pendingVisible = WaitForState(() => workerEntered.IsSet && !pending.IsCompleted
-                        && !control.HasFullXic && layer3.Text == "PENDING");
-                    releaseWorker.Set();
                     bool readyVisible = WaitForState(() => pending.IsCompleted && control.HasFullXic && layer3.Text == "READY");
                     FinishBusyTask(pending);
                     Check("the background attach fills the column when it finishes, PENDING meanwhile",
-                        pendingVisible && readyVisible
+                        workerEntered.IsSet && pendingVisible && readyVisible
                         && p1.FullXicShare is double asyncShare && Math.Abs(asyncShare - 200.0 / 400) < 1e-9,
                         layer3.Text + " / " + p1.FullXicShare);
                 }
                 finally
                 {
-                    releaseWorker.Set();
                     control.Operations.ProgressReported -= holdAttribution;
                     if (pending != null && !pending.IsCompleted) FinishBusyTask(pending);
                 }
