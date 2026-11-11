@@ -24,6 +24,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-denovo-run-warnings", "FamilyQuant.Tests.Program.DeNovoRunWarningTests()"),
         SuiteCommandRule.Covered("--test-quantify-warning-dispatcher", "FamilyQuant.Tests.Program.QuantifyWarningDispatcherTests()"),
         SuiteCommandRule.Covered("--test-ui-progress-audit", "FamilyQuant.Tests.Program.UiProgressAuditTests()"),
+        SuiteCommandRule.Covered("--test-build-curation-handoff", "FamilyQuant.Tests.Program.BuildCurationHandoffTests()"),
         SuiteCommandRule.Covered("--test-quantify-isotope-default", "FamilyQuant.Tests.Program.QuantifyIsotopeDefaultTests(System.String)"),
         SuiteCommandRule.Covered("--test-family-list-ranked-matches", "FamilyQuant.Tests.Program.FamilyListImportRankedMatchTests(System.String)"),
         SuiteCommandRule.Covered("--test-ledger-diagnostics", "FamilyQuant.Tests.Program.LedgerDiagnosticTests()"),

@@ -215,6 +215,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => DeNovoRunWarningTests());
             suite.AddWithApplication(() => QuantifyWarningDispatcherTests());
             suite.AddWithApplication(() => UiProgressAuditTests());
+            suite.AddWithApplication(() => BuildCurationHandoffTests());
             suite.AddWithApplication(() => QuantifyIsotopeDefaultTests(Path.Combine(workDir, "quantify-isotope-default")));
             suite.Add(() => StreamingProvenanceHashTests());
             suite.Section("Native fraction of TIC (Q3) - run _01 identified/envelope/DDA+de novo, envelope partition");

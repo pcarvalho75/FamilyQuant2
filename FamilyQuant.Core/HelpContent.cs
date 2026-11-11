@@ -55,7 +55,7 @@ namespace FamilyQuant
             sb.AppendLine("   Home or the sidebar opens it. Choose database, then Build families on a FASTA or");
             sb.AppendLine("   target-decoy (.T-R) database. That writes a Family Cluster File (.fcf) next to the");
             sb.AppendLine("   database: proteins grouped into families.");
-            sb.AppendLine("2. " + WorkflowNames.CurateFamilies + ": File > Open opens that .fcf for curation. Part a, " + WorkflowNames.GroupByEvidence + ",");
+            sb.AppendLine("2. " + WorkflowNames.CurateFamilies + " opens that .fcf after Build; File > Open also opens existing files. Part a, " + WorkflowNames.GroupByEvidence + ",");
             sb.AppendLine("   follows the numbered Grouping order below; part b, " + WorkflowNames.GroupByWords + ", merges families by");
             sb.AppendLine("   their description words (Recluster by words) or a keyword list (Group by keywords).");
             sb.AppendLine("3. " + WorkflowNames.Quantify + ", on Home or the sidebar, is the primary quantitation route.");
