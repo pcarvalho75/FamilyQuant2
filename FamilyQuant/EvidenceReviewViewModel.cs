@@ -28,7 +28,8 @@ namespace FamilyQuant
         IReadOnlyList<ReviewArchitectureInput>? Architectures = null, IReadOnlyList<ReviewLeftOutInput>? LeftOut = null,
         string SourceLabel = "", string RuleSummary = "", IReadOnlyList<PanelFamilyLinkProposal>? PanelLinks = null,
         IReadOnlyDictionary<string, string>? PanelNames = null, IReadOnlyDictionary<string, FamilyProfile>? CoherenceProfiles = null,
-        IReadOnlyList<EvidenceManualChoice>? ManualChoices = null, IReadOnlyList<PanelChecklistFamily>? PanelChecklist = null);
+        IReadOnlyList<EvidenceManualChoice>? ManualChoices = null, IReadOnlyList<PanelChecklistFamily>? PanelChecklist = null,
+        IReadOnlyDictionary<string, PanelLinkExample>? PanelLinkExamples = null);
     public sealed record EvidenceReviewSelection(string SourceFingerprint, IReadOnlyList<int> ProteinIndices,
         IReadOnlyDictionary<string, string> Names, IReadOnlyList<ReviewArchitectureChoice>? ArchitectureChoices = null,
         string MotifPattern = "", IReadOnlyList<EvidenceProteinOverride>? ProteinOverrides = null, IReadOnlyList<EvidenceManualChoice>? ManualChoices = null);
@@ -204,7 +205,7 @@ namespace FamilyQuant
             };
             Source = source;
             PanelLinks = (source.PanelLinks ?? Array.Empty<PanelFamilyLinkProposal>()).Select(link =>
-                new PanelLinkReviewRow(link, source.PanelNames, () => { Changed(nameof(HasUnappliedPanelLinkChoices)); Changed(nameof(HasInvalidPanelLinkNotes)); Changed(nameof(CanConfirm)); })).ToArray();
+                new PanelLinkReviewRow(link, source.PanelNames, () => { Changed(nameof(HasUnappliedPanelLinkChoices)); Changed(nameof(HasInvalidPanelLinkNotes)); Changed(nameof(CanConfirm)); }, source.PanelLinkExamples?.GetValueOrDefault(link.Key))).ToArray();
             if (string.IsNullOrEmpty(source.SourceFingerprint)) throw new ArgumentException("The proposal needs a source fingerprint.", nameof(source));
             if (source.Proteins.Select(p => p.ProteinIndex).Distinct().Count() != source.Proteins.Count)
                 throw new ArgumentException("A proposal cannot repeat a protein index.", nameof(source));
