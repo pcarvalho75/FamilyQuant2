@@ -26,7 +26,8 @@ public sealed partial class FamilyListImportViewModel
     public bool ShowingWizardPages => !reviewingWorkbook && !reviewingSubclasses;
     public bool CanReturnToWorkbook => WorkbookReviewEnabled && HasWorkbookMap && !Imported && !IsBusy && !reviewingWorkbook && !reviewingSubclasses;
     public IReadOnlyCollection<string> WorkbookFamilyKeys => workbookReview?.FamilyKeys ?? Array.Empty<string>();
-    public IReadOnlyList<ImportWorkbookFinding> WorkbookFindings => workbookReview?.Sections.SelectMany(section => section.Items).Select(item =>
+    public IReadOnlyList<ImportWorkbookFinding> WorkbookFindings => workbookReview?.Sections
+        .Where(section => section.Kind != WorkbookImportSectionKind.Colors).SelectMany(section => section.Items).Select(item =>
         new ImportWorkbookFinding(item.Id, item.Label, item.Value, StateLabel(item.State), PlainWorkbookReason(item.Reason),
             string.Join("; ", item.Sources.Select(source => source.SheetName
                 + (source.RowNumbers.Count > 0 ? ", rows " + string.Join(", ", source.RowNumbers) : "")
@@ -71,7 +72,9 @@ public sealed partial class FamilyListImportViewModel
     public IReadOnlyList<ImportWorkbookDomainRow> WorkbookDomainRows => (workbookSnapshot?.Pfam ?? new()).Select(hint =>
         new ImportWorkbookDomainRow(hint.FamilyKey, string.Join("; ", hint.Domains.Select(domain => domain.Accession + (domain.Name.Length > 0 ? " " + domain.Name : ""))),
             "Row " + hint.RowNumber + ", " + hint.Column)).ToArray();
-    public IReadOnlyList<ImportWorkbookSection> WorkbookSections => workbookReview?.Sections.Select(section =>
+    public IReadOnlyList<ImportWorkbookSection> WorkbookSections => workbookReview?.Sections
+        .Where(section => section.Kind != WorkbookImportSectionKind.Colors
+            && (section.Kind != WorkbookImportSectionKind.Decisions || HasCustomDecisions)).Select(section =>
     {
         int required = section.Items.Count(item => item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace);
         int optional = section.Items.Count(item => !item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace);
@@ -197,6 +200,7 @@ public sealed partial class FamilyListImportViewModel
     public async Task ReviewWorkbookSectionAsync(string section)
     {
         if (IsBusy || Imported) return;
+        if (section == "colours" || section == "decisions" && !HasCustomDecisions) return;
         if (section == "matches")
         {
             RefreshWorkbookReview();

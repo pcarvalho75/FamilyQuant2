@@ -39,6 +39,13 @@ internal static partial class Program
                 ImportEntryActionTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
+            }),
+        new("--test-import-decision-pages", 100, TestCommandPhase.Raw,
+            args => args is ["--test-import-decision-pages"], (_, _) =>
+            {
+                ImportDecisionPageTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
             })];
 
     private static string ImportSimpleWork(string step)
@@ -77,6 +84,29 @@ internal static partial class Program
             && window.FindName("TemplateButton") is System.Windows.Controls.Button { IsEnabled: true, Content: "Use template" }
             && file.ToJsonText() == before && !FamilyListImportGuide.Text().Contains("Try with the example", StringComparison.Ordinal));
         window.Close();
+    }
+
+    private static void ImportDecisionPageTests()
+    {
+        Section("IM5 decision labels need review only for the sheet's own words");
+        EnsureApplication();
+        foreach (string shape in new[] { "no-decision", "program", "custom" })
+        {
+            string path = Path.Combine(ImportSimpleWork("IM5"), shape + ".xlsx");
+            PanelImportTemplate.Write(path);
+            SetImportHeaders(path, shape == "no-decision" ? new[] { "Abbreviation", "Name" } : new[] { "Abbreviation", "Name", "Decision" });
+            FillTemplate(path, new[] { new[] { "A", "First family", shape == "custom" ? "Keep this" : shape == "program" ? "Quantify" : "" } });
+            var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(new FamilyClusterFile())),
+                workbookSource: new FamilyListWorkbookCoreSource(), openWorkbookReview: true);
+            FinishReviewWork(() => model.LoadAsync(path));
+            if (model.HasCustomDecisions) FinishReviewWork(() => model.ReviewWorkbookSectionAsync("decisions"));
+            var window = new FamilyListImportWindow(model);
+            Check("IM5 " + shape + " shows decision review only for custom words and has no colour-category controls",
+                model.HasCustomDecisions == (shape == "custom") && model.ReviewingDecisions == (shape == "custom")
+                && model.Decisions.All(d => d.Confirmed == (shape != "custom"))
+                && model.WorkbookSections.All(s => s.Key != "colours") && window.FindName("ColourCategories") == null);
+            window.Close();
+        }
     }
 
     private static void ImportSimpleTemplateTests()

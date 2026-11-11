@@ -38,6 +38,11 @@ public sealed partial class FamilyPanelSpreadsheetImporter
             proposal.Choices.ColumnHeaders[PanelImportFields.UniProtFamilies] = PanelImportTemplate.UniProtFamily;
             proposal.Reasons[PanelImportFields.UniProtFamilies] = "The UniProt family column contains exact source family names.";
         }
+        if (table.Headers.Contains(PanelImportTemplate.Decision, StringComparer.Ordinal))
+        {
+            proposal.Choices.ColumnHeaders[PanelImportFields.Decision] = PanelImportTemplate.Decision;
+            proposal.Reasons[PanelImportFields.Decision] = "Decision is the program's optional family-action column.";
+        }
         var rows = table.Rows.Where(r => DecorativeReason(table, r) == null).ToList();
         var stats = table.Headers.Select(h => new ColumnShape(h, rows)).ToList();
         proposal.ColorColumns = table.Headers.Where(h => table.Rows.Where(r => r.Fills.ContainsKey(h))

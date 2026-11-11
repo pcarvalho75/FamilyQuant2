@@ -8,6 +8,7 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-import-decision-pages", "FamilyQuant.Tests.Program.ImportDecisionPageTests()"),
         SuiteCommandRule.Covered("--test-import-entry-actions", "FamilyQuant.Tests.Program.ImportEntryActionTests()"),
         SuiteCommandRule.Covered("--test-import-simple-template", "FamilyQuant.Tests.Program.ImportSimpleTemplateTests()"),
         SuiteCommandRule.Covered("--test-import-template-workbook", "FamilyQuant.Tests.Program.ImportTemplateWorkbookTests()"),

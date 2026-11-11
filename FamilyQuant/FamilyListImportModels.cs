@@ -38,6 +38,7 @@ public sealed class ImportColumnChoice : ScreenViewModel
 
 public sealed class ImportDecisionChoice : ScreenViewModel
 {
+    public bool IsProgramDecision { get; init; }
     private FamilyPanelDecision? decision;
     private string target = "";
     private bool confirmed;

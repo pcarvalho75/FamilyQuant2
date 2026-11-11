@@ -17,6 +17,7 @@ public sealed partial class FamilyListImportViewModel
         : RowOptions.Where(o => o.Value is FamilyPanelRowAction.Import or FamilyPanelRowAction.Skip or FamilyPanelRowAction.MergeInto).ToArray();
     public bool CanUseRowChoice => !IsBusy && !Imported && SelectedSpecialRow?.Action != null;
     public bool HasDecisions => Decisions.Count > 0;
+    public bool HasCustomDecisions => Decisions.Any(decision => !decision.IsProgramDecision);
     public bool HasColors => SourceColorChoices.Count > 0;
     public bool HasSourceFills => Preview?.Rows.Any(r => r.Cells.Any(c => c.Fill.Length > 0)) == true;
     public string DecisionSummary => HasDecisions ? Decisions.Count.ToString("N0", CultureInfo.CurrentCulture)
@@ -76,7 +77,8 @@ public sealed partial class FamilyListImportViewModel
                         Meaning = legend?.LegendMeaning ?? "",
                         Decision = legend == null ? HasWorkbookMap && !proposed.Exact ? null : proposed.Mapping.Decision : legend.ProposedMapping?.Decision,
                         MergeTarget = legend?.ProposedMapping?.MergeTargetFamilyKey ?? proposed.Mapping.MergeTargetFamilyKey,
-                        Confirmed = !WorkbookReviewEnabled && proposed.Exact && (legend == null || legend.ExactProgramDecision) };
+                        IsProgramDecision = proposed.Exact && (legend == null || legend.ExactProgramDecision),
+                        Confirmed = proposed.Exact && (legend == null || legend.ExactProgramDecision) };
                     row.PropertyChanged += (_, _) => { if (!updating) { if (WorkbookReviewEnabled) Recheck(); else Refresh(); Changed(nameof(DecisionSummary)); } };
                     Decisions.Add(row);
                 }
@@ -102,7 +104,7 @@ public sealed partial class FamilyListImportViewModel
                 check = importer.Check(table, choices, Decisions.Where(d => (WorkbookReviewEnabled || d.Confirmed) && d.Decision != null).Select(d => d.Capture()).ToArray(), PanelName.Trim());
             }
             RebuildSpecialRows();
-            Changed(nameof(HasDecisions)); Changed(nameof(HasColors)); Changed(nameof(DecisionSummary)); Changed(nameof(SpecialSummary));
+            Changed(nameof(HasDecisions)); Changed(nameof(HasCustomDecisions)); Changed(nameof(HasColors)); Changed(nameof(DecisionSummary)); Changed(nameof(SpecialSummary));
         }
         finally { updating = false; Refresh(); }
     }
