@@ -213,6 +213,13 @@ namespace FamilyQuant
             manualByIndex = (source.ManualChoices ?? Array.Empty<EvidenceManualChoice>()).ToDictionary(c => c.ProteinIndex);
             Proteins = source.Proteins.Select(p => new ReviewProteinRow(p, SelectionChanged,
                 source.CoherenceProfiles?.GetValueOrDefault(p.Family), manualByIndex.GetValueOrDefault(p.ProteinIndex))).ToArray();
+            foreach (var row in Proteins)
+            {
+                if (SequenceLabels.IsDecoy(row.Identifier) || SequenceLabels.IsContaminant(row.Identifier)) continue;
+                if (row.Family.Length > 0) ProteinsInList++;
+                else if (row.HasScopeAnnotation) InScopeProteinsOutsideList++;
+                else ProteinsOutsideScope++;
+            }
             proteinByIndex = Proteins.ToDictionary(p => p.ProteinIndex);
             var groups = Proteins.GroupBy(p => p.Family, StringComparer.Ordinal).ToDictionary(g => g.Key, g => (IReadOnlyList<ReviewProteinRow>)g.ToArray(), StringComparer.Ordinal);
             foreach (var family in source.Families)

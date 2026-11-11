@@ -298,6 +298,10 @@ namespace FamilyQuant
             sb.AppendLine("If Apply grouping waits for Panel links, Review choices shows only links needing a choice;");
             sb.AppendLine("choose a family or Leave outside panel, then Use link choices to update the proposal.");
             sb.AppendLine("Each Panel links row shows an example database protein and its stored UniProt family to help you recognize it.");
+            sb.AppendLine("The destination panel counts target proteins proposed in your list, in scope outside your list, and outside scope.");
+            sb.AppendLine("In-scope proteins in no family of the list keep their sequence family, named after its proteins,");
+            sb.AppendLine("and are measured together in it. Outside-scope proteins keep their current family. These are proposal counts:");
+            sb.AppendLine("locked or unticked proteins keep their current family; decoys and contaminants are excluded from the counts.");
             sb.AppendLine("Family checklist keeps every row of your list and counts those with proposed proteins, waiting for a choice,");
             sb.AppendLine("with no Pfam code, or matching no database protein; matching evidence alone does not assign a protein.");
             sb.AppendLine("If the project has no stored UniProt evidence, Download and continue runs Fetch evidence");

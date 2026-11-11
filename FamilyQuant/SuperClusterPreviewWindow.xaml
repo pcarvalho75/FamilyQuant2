@@ -105,6 +105,13 @@
                         <TextBlock DockPanel.Dock="Left" Text="Scope" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox x:Name="TaskScopeBox" Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Keyword or tissue words and quoted phrases defining the evidence scope; starts empty and Read database and scope suggests terms from UniProt. Accepts parsed text with no unit or fixed length limit; editing previews stored matches, Update proposal rebuilds the review, and Apply grouping makes an undoable project change."/>
                     </DockPanel>
+                    <StackPanel x:Name="ProteinDestinationsPanel" Margin="0,8,0,0" DataContext="{Binding Evidence}"
+                                Visibility="{Binding HasPanelRules, Converter={StaticResource VisibleWhenTrue}}" ToolTip="{x:Static local:EvidenceReviewViewModel.DestinationHelp}">
+                        <TextBlock Text="{Binding ListDestinationText}" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding SequenceDestinationText}" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                        <TextBlock Text="{Binding OutsideScopeDestinationText}" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                        <TextBlock Text="Proposal counts; locked or unticked proteins keep their current family." Foreground="{DynamicResource MutedBrush}" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                    </StackPanel>
                     </StackPanel>
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10"
                                   Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
