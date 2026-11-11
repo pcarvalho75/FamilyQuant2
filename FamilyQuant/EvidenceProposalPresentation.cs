@@ -55,25 +55,27 @@ namespace FamilyQuant
             var examples = new Dictionary<string, PanelLinkExample>(StringComparer.Ordinal);
             if (proposal.PanelContext != null)
             {
-                var byLink = proposal.Proteins.Where(row => !SequenceLabels.IsDecoy(row.Identifier) && !SequenceLabels.IsContaminant(row.Identifier))
-                    .SelectMany(row =>
+                var byAccession = proteins.Where(protein => !SequenceLabels.IsDecoy(protein.SequenceIdentifier)
+                        && !SequenceLabels.IsContaminant(protein.SequenceIdentifier))
+                    .Select(protein => new
                     {
-                        var evidence = proteins[row.ProteinIndex].Evidence;
-                        string architecture = PanelEvidenceClassifier.ArchitectureKey(evidence);
-                        return ReferencePanelFetcher.FamiliesOf(evidence ?? new ProteinEvidence()).Append("")
-                            .SelectMany(family => new[] { PanelEvidenceClassifier.LinkKey(family, architecture), PanelEvidenceClassifier.LinkKey(family, "") })
-                            .Distinct(StringComparer.Ordinal).Select(key => (Key: key, Row: row));
-                    }).ToLookup(item => item.Key, item => item.Row, StringComparer.Ordinal);
+                        Protein = protein,
+                        Accession = protein.Evidence?.Accession is { Length: > 0 } accession ? accession : FamilyNaming.Accession(protein.SequenceIdentifier),
+                        Fields = protein.Evidence is not { } evidence ? 0 : new[]
+                        {
+                            evidence.Family.Length > 0, evidence.Subfamily.Length > 0, evidence.FamilyAnnotation.Length > 0,
+                            evidence.Keywords.Count > 0, evidence.TissueSpecificity.Count > 0, evidence.Pfam.Count > 0,
+                            evidence.Panther.Count > 0, evidence.TransmembraneCount.HasValue, evidence.Fragment.HasValue,
+                        }.Count(present => present),
+                    }).ToLookup(item => item.Accession, StringComparer.Ordinal);
                 foreach (var link in proposal.PanelContext.Links)
                 {
-                    var example = byLink[link.Key].OrderByDescending(row => proteins[row.ProteinIndex].Evidence?.Reviewed == true)
-                        .ThenBy(row => row.Tier switch { EvidenceTier.UniProtFamily => 0, EvidenceTier.ReviewedNeighbour => 1,
-                            EvidenceTier.LearnedMarker => 2, EvidenceTier.UnannotatedNeighbour => 3, _ => 4 })
-                        .ThenBy(row => FamilyNaming.Accession(row.Identifier), StringComparer.Ordinal).ThenBy(row => row.ProteinIndex).FirstOrDefault();
+                    var example = link.SupportingAccessions.SelectMany(accession => byAccession[accession])
+                        .OrderByDescending(item => item.Protein.Evidence?.Reviewed == true).ThenByDescending(item => item.Fields)
+                        .ThenBy(item => item.Accession, StringComparer.Ordinal).ThenBy(item => item.Protein.SequenceIdentifier, StringComparer.Ordinal).FirstOrDefault();
                     if (example == null) continue;
-                    var protein = proteins[example.ProteinIndex];
-                    examples[link.Key] = new(FamilyNaming.Accession(example.Identifier) is { Length: > 0 } accession ? accession : example.Identifier,
-                        FamilyNaming.ProteinName(protein.Description), string.Join("; ", ReferencePanelFetcher.FamiliesOf(protein.Evidence ?? new ProteinEvidence())));
+                    examples[link.Key] = new(example.Accession, FamilyNaming.ProteinName(example.Protein.Description),
+                        string.Join("; ", ReferencePanelFetcher.FamiliesOf(example.Protein.Evidence ?? new ProteinEvidence())));
                 }
             }
             return new EvidenceReviewInput(proposal.SourceFingerprint, rows,
