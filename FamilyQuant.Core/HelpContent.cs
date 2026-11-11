@@ -20,7 +20,7 @@ namespace FamilyQuant
     public static class HelpContent
     {
         public const string GroupingOrder =
-            "0. Import family list (optional): choose your family list through File > Import family list.\n" +
+            "0. Import family list (optional): choose your family list through File > Import family list. Use template writes an empty workbook to fill and import. UniProt family holds exact family names separated by semicolons; empty means none. Sheets without family columns are skipped and named in the summary; their source text is kept.\n" +
             "1. Fetch evidence: download UniProt annotations for the project's proteins.\n" +
             "2. Group by evidence: review the scope and proposal, then Apply grouping.\n" +
             "3. Fetch UniProt families: find the families of in-scope database proteins and download their reviewed and database-clade entries.\n" +

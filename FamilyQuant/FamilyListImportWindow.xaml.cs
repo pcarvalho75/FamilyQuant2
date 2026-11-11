@@ -41,7 +41,7 @@ public partial class FamilyListImportWindow : Window
         ExampleButton.IsEnabled = exampleWriter != null;
         if (exampleWriter == null) ExampleButton.ToolTip = "Unavailable in this view; open File > Import family list to try the built-in example. Nothing changes in the project or workbook.";
         TemplateButton.IsEnabled = templateWriter != null;
-        if (templateWriter == null) TemplateButton.ToolTip = "Unavailable in this view; open File > Import family list to save the built-in template. Nothing changes in the project or workbook.";
+        if (templateWriter == null) TemplateButton.ToolTip = "Unavailable in this view; open File > Import family list to use the built-in template. It writes an empty sheet to fill and import, leaving the project unchanged.";
         DecisionActionColumn.ItemsSource = FamilyListImportViewModel.DecisionOptions;
         WorkbookRoleColumn.ItemsSource = FamilyListImportViewModel.SheetRoles;
         WorkbookOverview.ReviewRequested += async section => await Model.ReviewWorkbookSectionAsync(section);

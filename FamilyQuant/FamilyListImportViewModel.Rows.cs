@@ -33,6 +33,7 @@ public sealed partial class FamilyListImportViewModel
             (PanelImportFields.FamilyKey, "Abbreviation", true), (PanelImportFields.DisplayName, "Family name", true),
             (PanelImportFields.OtherName, "Other-language name (optional)", false), (PanelImportFields.Notes, "Notes (optional)", false),
             (PanelImportFields.Pfam, "Pfam codes (optional)", false), (WorkbookImportSummaryFields.Subclasses, "Subclass names (optional)", false), (PanelImportFields.Decision, "Decision (optional)", false),
+            (PanelImportFields.UniProtFamilies, "UniProt family (optional)", false),
             (PanelImportFields.ColorCategory, "Colour category (optional)", false) };
         foreach (var (role, label, required) in roles.Where(role => WorkbookReviewEnabled || role.Item1 != WorkbookImportSummaryFields.Subclasses))
         {

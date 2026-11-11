@@ -19,6 +19,7 @@ public static class PanelImportTemplate
     public const string OtherName = "Other-language name";
     public const string Notes = "Notes";
     public const string Pfam = "Pfam domains";
+    public const string UniProtFamily = "UniProt family";
     public const string Decision = "Decision";
     internal const string Marker = "FamilyQuant_family_list_template";
     internal const string MarkerValue = "\"1\"";
@@ -29,6 +30,7 @@ public static class PanelImportTemplate
     {
         (Abbreviation, PanelImportFields.FamilyKey), (Name, PanelImportFields.DisplayName), (OtherName, PanelImportFields.OtherName),
         (Notes, PanelImportFields.Notes), (Pfam, PanelImportFields.Pfam), (Decision, PanelImportFields.Decision),
+        (UniProtFamily, PanelImportFields.UniProtFamilies),
     };
 
     /// <summary>The program's decision names, also recognised in any sheet; a merge is written "Merge into" and an abbreviation.</summary>
@@ -50,6 +52,7 @@ public static class PanelImportTemplate
         "Other-language name: the same family in another language, for example English when Name is in Portuguese. Optional.",
         "Notes: anything you want to keep with the family. It is kept as text and never changes a result. Optional.",
         "Pfam domains: optional, written as Name (accession), separated by semicolons, for example Example domain (PF12345).",
+        "UniProt family: optional, exact UniProt family names separated by semicolons. Empty means no family name is specified.",
         "Decision: optional. Leave it empty to quantify the family, or choose Quantify, Report under others or Not a family, or write Merge into followed by another row's abbreviation, for example Merge into CTL.",
         "",
         "A row that lists several families in one name cell, separated by commas, semicolons or line breaks, is offered as one family per name or as one group reported under others when you import it.",
@@ -93,9 +96,9 @@ public static class PanelImportTemplate
         var families = new SheetData(Row(1, Columns.Select(c => c.Header).ToArray(), 1));
         var familySheet = new Worksheet(
             new SheetViews(new SheetView(new Pane { VerticalSplit = 1, TopLeftCell = "A2", ActivePane = PaneValues.BottomLeft, State = PaneStateValues.Frozen }) { WorkbookViewId = 0 }),
-            new Columns(Width(1, 16), Width(2, 32), Width(3, 32), Width(4, 40), Width(5, 44), Width(6, 24)),
+            new Columns(Width(1, 16), Width(2, 32), Width(3, 32), Width(4, 40), Width(5, 44), Width(6, 24), Width(7, 44)),
             families,
-            new AutoFilter { Reference = "A1:F1" },
+            new AutoFilter { Reference = "A1:G1" },
             new DataValidations(new DataValidation(new Formula1("\"" + string.Join(",", DecisionNames.Select(d => d.Label)) + "\""))
             {
                 Type = DataValidationValues.List, AllowBlank = true, ShowErrorMessage = false, ShowInputMessage = true,

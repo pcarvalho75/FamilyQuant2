@@ -323,6 +323,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelImportGracefulTests(Path.Combine(workDir, "panel-import-graceful")));
             suite.Add(() => PanelImportSeveralTests(Path.Combine(workDir, "panel-import-several")));
             suite.Add(() => PanelImportTemplateTests(Path.Combine(workDir, "panel-import-template")));
+            suite.Add(() => ImportTemplateWorkbookTests());
+            suite.Add(() => ImportUniProtColumnTests());
             suite.Add(() => PanelImportExampleTests(Path.Combine(workDir, "panel-import-example")));
             suite.Add(() => PanelWorkbookMapTests(Path.Combine(workDir, "panel-workbook-map")));
             suite.AddWithApplication(() => PanelWorkbookNotesTests());
