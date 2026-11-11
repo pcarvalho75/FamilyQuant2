@@ -318,8 +318,9 @@ namespace FamilyQuant
             sb.AppendLine("In-scope proteins in no family of the list keep their sequence family, named after its proteins,");
             sb.AppendLine("and are measured together in it. Outside-scope proteins keep their current family. These are proposal counts:");
             sb.AppendLine("locked or unticked proteins keep their current family; decoys and contaminants are excluded from the counts.");
-            sb.AppendLine("Family checklist keeps every row of your list and counts those with proposed proteins, waiting for a choice,");
-            sb.AppendLine("with no Pfam code, or matching no database protein; matching evidence alone does not assign a protein.");
+            sb.AppendLine("Family checklist keeps every list row and counts rows with proposed proteins, pending Panel links choices,");
+            sb.AppendLine("no Pfam code, no database match, no protein in scope, proteins in another row, or no placed proteins.");
+            sb.AppendLine("Only an unresolved Panel links choice is waiting; outside-scope matches and proteins assigned elsewhere are not.");
             sb.AppendLine("Save panel as spreadsheet writes named link choices in the UniProt family column.");
             sb.AppendLine("Importing that column restores exact family links among the supported rows without");
             sb.AppendLine("asking again. Separate several source family names with semicolons.");
