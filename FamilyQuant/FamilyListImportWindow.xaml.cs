@@ -20,7 +20,7 @@ public partial class FamilyListImportWindow : Window
     public bool OpenChecklistRequested { get; private set; }
     public bool EditPanelRequested { get; private set; }
     public Func<string, bool>? BroadMatchConfirmationOverride { get; set; }
-    private readonly Action<string>? exampleWriter, templateWriter;
+    private readonly Action<string>? templateWriter;
     private bool closing, loadingSheets, loadingRowActions, fittingSummaryRows;
     private double summaryFitParentHeight;
     public FamilyListImportWindow(FamilyListImportViewModel model, Action<string>? exampleWriter = null, Action<string>? templateWriter = null)
@@ -37,11 +37,9 @@ public partial class FamilyListImportWindow : Window
             if (args.PropertyName == nameof(FamilyListImportViewModel.Page))
             { summaryFitParentHeight = 0; if (model.Page == 5) Dispatcher.BeginInvoke(FitSummaryRows); }
         };
-        this.exampleWriter = exampleWriter; this.templateWriter = templateWriter;
-        ExampleButton.IsEnabled = exampleWriter != null;
-        if (exampleWriter == null) ExampleButton.ToolTip = "Unavailable in this view; open File > Import family list to try the built-in example. Nothing changes in the project or workbook.";
+        this.templateWriter = templateWriter;
         TemplateButton.IsEnabled = templateWriter != null;
-        if (templateWriter == null) TemplateButton.ToolTip = "Unavailable in this view; open File > Import family list to save the built-in template. Nothing changes in the project or workbook.";
+        if (templateWriter == null) TemplateButton.ToolTip = "Unavailable in this view; open File > Import family list to use the built-in template. It writes an empty sheet to fill and import, leaving the project unchanged.";
         DecisionActionColumn.ItemsSource = FamilyListImportViewModel.DecisionOptions;
         WorkbookRoleColumn.ItemsSource = FamilyListImportViewModel.SheetRoles;
         WorkbookOverview.ReviewRequested += async section => await Model.ReviewWorkbookSectionAsync(section);
@@ -208,20 +206,6 @@ public partial class FamilyListImportWindow : Window
     private void Close_Click(object sender, RoutedEventArgs e) => Close();
     private void Editor_Click(object sender, RoutedEventArgs e) { EditPanelRequested = true; Close(); }
 
-    private async void Example_Click(object sender, RoutedEventArgs e)
-    {
-        if (!Model.CanEdit || exampleWriter == null) return;
-        try
-        {
-            string folder = Path.Combine(Path.GetTempPath(), "FamilyQuant2", "import-examples", Guid.NewGuid().ToString("N"));
-            Directory.CreateDirectory(folder);
-            string path = Path.Combine(folder, "family-list-example.xlsx");
-            exampleWriter(path); await Model.LoadAsync(path);
-        }
-        catch (Exception error) when (error is IOException or UnauthorizedAccessException or ArgumentException)
-        { Model.ReportStatus("The example could not be opened. " + error.Message); }
-    }
-
     private void Template_Click(object sender, RoutedEventArgs e)
     {
         if (!Model.CanEdit || templateWriter == null) return;
@@ -256,7 +240,6 @@ public partial class FamilyListImportWindow : Window
     private void WorkbookView_Requested(string section)
     {
         if (section is "sheets" or "notes" or "problems") WorkbookTabs.SelectedItem = WorkbookMapTab;
-        if (section == "colours") ColourCategories.IsExpanded = true;
         if (section == "subclasses" && Model.WorkbookHasReviewProblems) WorkbookSubclassReview.CheckChoices();
     }
     private void ShowHelp() => FamilyListImportGuideWindow.Show(this, HelpSectionKey());

@@ -1,6 +1,7 @@
 <UserControl
   x:Class="FamilyQuant.FamilyListWorkbookOverview" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:theme="clr-namespace:FamilyQuant.Themes" xmlns:local="clr-namespace:FamilyQuant">
   <UserControl.Resources>
+    <BooleanToVisibilityConverter x:Key="BoolVisibility" />
     <local:ImportCellToolTipConverter x:Key="CellToolTip" />
     <Style x:Key="OverviewCellText" TargetType="TextBlock" BasedOn="{x:Static DataGridTextColumn.DefaultElementStyle}">
       <Setter Property="ToolTip"><Setter.Value><MultiBinding Converter="{StaticResource CellToolTip}">
@@ -130,40 +131,10 @@
           </DataGrid.Columns>
         </DataGrid>
       </TabItem>
-      <TabItem
-        Header="Source categories"
-        ToolTip="Shows every available source category name and original meaning. Unread information remains explicit rather than being treated as absent.">
-        <DataGrid theme:TableAppearance.PreserveCellToolTip="True"
-          ItemsSource="{Binding WorkbookLegend}"
-          AutoGenerateColumns="False"
-          IsReadOnly="True"
-          CanUserAddRows="False"
-          CanUserDeleteRows="False"
-          AutomationProperties.Name="Legend names and meanings"
-          ToolTip="Shows the original source and detached proposal for review. Values are read only here; use the section Review action to change the draft.">
-          <DataGrid.Columns>
-            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
-              Header="Name"
-              Binding="{Binding Name}"
-              Width="180"
-              theme:TableAppearance.HeaderToolTip="The source category name supplied by the legend, read only." />
-            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}" Header="Proposed name" Binding="{Binding ProposedName}" Width="180"
-              theme:TableAppearance.HeaderToolTip="The exact category name in the current draft, including your edits. Review source categories to change it before acceptance." />
-            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
-              Header="Meaning"
-              Binding="{Binding Meaning}"
-              Width="*"
-              theme:TableAppearance.HeaderToolTip="The original legend meaning, read only; it does not become a program decision by itself." />
-            <DataGridTextColumn ElementStyle="{StaticResource OverviewCellText}"
-              Header="Needs review"
-              Binding="{Binding Review}"
-              Width="100"
-              theme:TableAppearance.HeaderToolTip="Whether the reader reported conflicting legend information, read only." />
-          </DataGrid.Columns>
-        </DataGrid>
-      </TabItem>
+
       <TabItem
         Header="Decisions"
+        Visibility="{Binding HasCustomDecisions, Converter={StaticResource BoolVisibility}}"
         ToolTip="Shows each decision label with its source meaning and proposed program action. Review decisions changes any uncertain or unwanted choice.">
         <DataGrid theme:TableAppearance.PreserveCellToolTip="True"
           ItemsSource="{Binding WorkbookDecisionRows}"

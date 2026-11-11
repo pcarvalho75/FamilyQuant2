@@ -36,20 +36,21 @@ internal static partial class Program
         Check("Z12p2d the template opens on its Families sheet, marked, with the header row proposed from its filter",
             blank.IsTemplate && blank.SheetNames.SequenceEqual(new[] { "Families", "Instructions" }) && blank.HiddenSheetNames.Count == 0
             && blank.ProposedHeaderRow == 1 && blank.Rows.Count == 1 && blank.Problems.Count == 0
-            && blank.Rows[0].Cells.Select(c => c.Text).SequenceEqual(new[] { "Abbreviation", "Name", "Other-language name", "Notes", "Pfam domains", "Decision" })
+            && blank.Rows[0].Cells.Select(c => c.Text).SequenceEqual(PanelImportTemplate.Columns.Select(c => c.Header))
             && blank.Rows[0].Cells.All(c => c.Fill == "#D9E1F2"), string.Join("|", blank.Rows.SelectMany(r => r.Cells).Select(c => c.Text + c.Fill)));
         var help = reader.ReadPreview(path, "Instructions");
         string instructions = string.Join("\n", help.Rows.Select(r => r.Cells[0].Text));
-        Check("Z12p2d the Instructions sheet explains every column, the decision names, lists, colours and saving",
+        Check("Z12p2d the Instructions sheet explains every current column, lists and saving",
             help.Rows[0].Cells[0].Text == "How to fill in this family list"
             && PanelImportTemplate.Columns.All(c => instructions.Contains(c.Header + ":", StringComparison.Ordinal))
-            && new[] { "Report under others", "Not a family", "Merge into CTL", "several families", "colour", "File > Import family list", ".xlsx" }
+            && new[] { "several families", "File > Import family list", ".xlsx" }
                 .All(text => instructions.Contains(text, StringComparison.Ordinal)));
         var emptyTable = reader.ReadTable(path, "Families", 1);
         var emptyCheck = importer.Check(emptyTable, importer.Propose(emptyTable).Choices, Array.Empty<FamilyPanelDecisionMapping>());
         Check("Z12p2d an untouched template imports nothing and says so", !emptyCheck.CanImport
             && emptyCheck.Problems.Single().Message == "No row of sheet \"Families\" below row 1 becomes a family.");
 
+        SetImportHeaders(path, new[] { "Abbreviation", "Name", "Other-language name", "Notes", "Pfam domains", "Decision", "UniProt family" });
         FillTemplate(path, new[]
         {
             new[] { "PLA2", "Fosfolipase A2", "Phospholipase A2", "Família principal", "Phospholip_A2_1 (PF00068)", "Quantify" },
@@ -119,10 +120,8 @@ internal static partial class Program
             Check("Z12p2d the written workbook passes the Open XML schema validator", errors.Count == 0,
                 string.Join(" / ", errors.Take(5).Select(e => e.Path?.XPath + ": " + e.Description)));
             var sheet = (WorksheetPart)document.WorkbookPart!.GetPartById(document.WorkbookPart.Workbook!.Sheets!.Elements<Sheet>().First().Id!);
-            var validation = sheet.Worksheet!.Descendants<DataValidation>().Single();
-            Check("Z12p2d the Decision column offers the program's decision names and still accepts Merge into",
-                validation.Formula1!.Text == "\"Quantify,Report under others,Not a family\"" && validation.ShowErrorMessage?.Value == false
-                && validation.SequenceOfReferences!.InnerText == "F2:F2000"
+            Check("IM3 the empty template has no decision dropdown and keeps its frozen header",
+                !sheet.Worksheet!.Descendants<DataValidation>().Any()
                 && sheet.Worksheet.Descendants<Pane>().Single() is { State.Value: var state } && state == PaneStateValues.Frozen);
         }
     }
