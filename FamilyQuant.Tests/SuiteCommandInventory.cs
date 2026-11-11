@@ -27,6 +27,8 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-quantify-warning-dispatcher", "FamilyQuant.Tests.Program.QuantifyWarningDispatcherTests()"),
         SuiteCommandRule.Covered("--test-ui-progress-audit", "FamilyQuant.Tests.Program.UiProgressAuditTests()"),
         SuiteCommandRule.Covered("--test-build-curation-handoff", "FamilyQuant.Tests.Program.BuildCurationHandoffTests()"),
+        SuiteCommandRule.Covered("--test-panel-tie-list", "FamilyQuant.Tests.Program.PanelTieListTests()"),
+        SuiteCommandRule.Excluded("--panel-tie-list", "Desk-only read-only producer over an explicitly selected project and new output directory; --test-panel-tie-list proves its CSV/JSON and project immutability on synthetic data."),
         SuiteCommandRule.Covered("--test-quantify-isotope-default", "FamilyQuant.Tests.Program.QuantifyIsotopeDefaultTests(System.String)"),
         SuiteCommandRule.Covered("--test-family-list-ranked-matches", "FamilyQuant.Tests.Program.FamilyListImportRankedMatchTests(System.String)"),
         SuiteCommandRule.Covered("--test-ledger-diagnostics", "FamilyQuant.Tests.Program.LedgerDiagnosticTests()"),
