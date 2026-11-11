@@ -52,6 +52,32 @@ namespace FamilyQuant
                     source.Evidence?.Reviewed, source.Sequence?.Length ?? 0, CoherenceCheck.Cysteines(source.Sequence ?? ""),
                     source.Evidence?.Pfam?.Count > 0, p.AutomaticEvidence == null ? "" : OriginalEvidence(p.AutomaticEvidence));
             }).ToArray();
+            var examples = new Dictionary<string, PanelLinkExample>(StringComparer.Ordinal);
+            if (proposal.PanelContext != null)
+            {
+                var byAccession = proteins.Where(protein => !SequenceLabels.IsDecoy(protein.SequenceIdentifier)
+                        && !SequenceLabels.IsContaminant(protein.SequenceIdentifier))
+                    .Select(protein => new
+                    {
+                        Protein = protein,
+                        Accession = protein.Evidence?.Accession is { Length: > 0 } accession ? accession : FamilyNaming.Accession(protein.SequenceIdentifier),
+                        Fields = protein.Evidence is not { } evidence ? 0 : new[]
+                        {
+                            evidence.Family.Length > 0, evidence.Subfamily.Length > 0, evidence.FamilyAnnotation.Length > 0,
+                            evidence.Keywords.Count > 0, evidence.TissueSpecificity.Count > 0, evidence.Pfam.Count > 0,
+                            evidence.Panther.Count > 0, evidence.TransmembraneCount.HasValue, evidence.Fragment.HasValue,
+                        }.Count(present => present),
+                    }).ToLookup(item => item.Accession, StringComparer.Ordinal);
+                foreach (var link in proposal.PanelContext.Links)
+                {
+                    var example = link.SupportingAccessions.SelectMany(accession => byAccession[accession])
+                        .OrderByDescending(item => item.Protein.Evidence?.Reviewed == true).ThenByDescending(item => item.Fields)
+                        .ThenBy(item => item.Accession, StringComparer.Ordinal).ThenBy(item => item.Protein.SequenceIdentifier, StringComparer.Ordinal).FirstOrDefault();
+                    if (example == null) continue;
+                    examples[link.Key] = new(example.Accession, FamilyNaming.ProteinName(example.Protein.Description),
+                        string.Join("; ", ReferencePanelFetcher.FamiliesOf(example.Protein.Evidence ?? new ProteinEvidence())));
+                }
+            }
             return new EvidenceReviewInput(proposal.SourceFingerprint, rows,
                 proposal.Families.Select(f => new ReviewFamilyInput(f.Family, f.SuggestedName, f.Proteins, f.ReviewedProteins)).ToArray(),
                 proposal.Markers.Select(m => new ReviewMarkerInput(m.Accession, m.Name, m.Family,
@@ -72,7 +98,7 @@ namespace FamilyQuant
                     + "\nMinimum query aligned (%): " + proposal.Options.MinQueryAlignedPercent.ToString(CultureInfo.CurrentCulture)
                     + (proposal.PanelContext == null ? "\nMarker vote fraction: " + proposal.Options.MarkerVoteFraction.ToString(CultureInfo.CurrentCulture)
                         : "\nPanel links require one explicit choice when the evidence is ambiguous."),
-                PanelLinks: proposal.PanelContext?.Links);
+                PanelLinks: proposal.PanelContext?.Links, PanelLinkExamples: examples);
         }
 
         private static string OriginalEvidence(EvidenceProteinProposal row) => "Family: " + (row.Family.Length == 0 ? "No family proposed" : row.Family)

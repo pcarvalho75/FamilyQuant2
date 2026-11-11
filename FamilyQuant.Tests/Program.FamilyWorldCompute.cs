@@ -57,7 +57,7 @@ internal static partial class Program
         Check("Compute family world: with a stored world the table is attached, with the snapshot's release, hash and rules",
             table != null && table.WorldRelease == snapshot.Release && table.WorldFingerprint == snapshot.ContentSha256
             && table.MinimumTagLength == FamilyWorldOptions.DefaultMinimumTagLength && table.ScopeFamilies.SequenceEqual(snapshot.Families)
-            && attached.Notes.Any(n => n.StartsWith("Family world: ", StringComparison.Ordinal)), attached.Notes.LastOrDefault());
+            && attached.Notes.Any(n => n.StartsWith("UniProt families: ", StringComparison.Ordinal)), attached.Notes.LastOrDefault());
         Check("Compute family world: the residual's outcomes are stored and the table closes on the measured total",
             table != null && table.ResidualPeptides == 2
             && table.Outcomes.Single(o => o.Outcome == nameof(FamilyWorldOutcome.TooShort)).Peptides == 1
@@ -138,6 +138,6 @@ internal static partial class Program
         FamilyWorldAnalysis.AttachToCompute(damaged, refused);
         Check("Compute family world: a damaged stored world is refused with a warning and the quantitation is kept",
             refused.Manifest.FamilyWorldResult == null && refused.Rows.Count == rows
-            && refused.Notes.Single().StartsWith("WARNING: the family-world pass did not run", StringComparison.Ordinal), refused.Notes.FirstOrDefault());
+            && refused.Notes.Single().StartsWith("WARNING: the UniProt families pass did not run", StringComparison.Ordinal), refused.Notes.FirstOrDefault());
     }
 }

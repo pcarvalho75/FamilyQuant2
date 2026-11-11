@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -26,9 +27,9 @@ namespace FamilyQuant.Panels
             ArgumentNullException.ThrowIfNull(panel);
             var data = new
             {
-                Families = panel.Families.OrderBy(f => f.Key, StringComparer.Ordinal).Select(f => new
+                Families = panel.Families.OrderBy(f => f.Key, StringComparer.Ordinal).Select(f => new FamilyRules
                 {
-                    f.Key, f.Decision, f.MergeTargetFamilyKey,
+                    Key = f.Key, Decision = f.Decision, MergeTargetFamilyKey = f.MergeTargetFamilyKey,
                     Pfam = f.Pfam.Select(d => d.Accession).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal),
                     Subclasses = f.Subclasses.Where(_ => includeSubclasses).OrderBy(s => s.Key, StringComparer.Ordinal).Select(s => new
                     {
@@ -37,10 +38,23 @@ namespace FamilyQuant.Panels
                         Absent = s.AbsentPfam.Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal),
                         SourceText = s.UniProtSubfamilies.Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal),
                     }),
+                    UniProtFamilies = f.UniProtFamilies.Count == 0 ? null : f.UniProtFamilies.Select(name => name.Trim().ToUpperInvariant())
+                        .Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray(),
                 }),
                 Links = panel.EvidenceLinks.OrderBy(l => l.SourceFamily, StringComparer.Ordinal).ThenBy(l => l.ArchitectureKey, StringComparer.Ordinal),
             };
             return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(data))));
+        }
+
+        private sealed class FamilyRules
+        {
+            public string Key { get; init; } = string.Empty;
+            public FamilyPanelDecision Decision { get; init; }
+            public string MergeTargetFamilyKey { get; init; } = string.Empty;
+            public IEnumerable<string> Pfam { get; init; } = Array.Empty<string>();
+            public object Subclasses { get; init; } = Array.Empty<object>();
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            public string[]? UniProtFamilies { get; init; }
         }
 
         public static PanelDerivedDataCheck Check(FamilyClusterFile file)

@@ -23,22 +23,40 @@ public sealed partial class FamilyPanelSpreadsheetImporter
                 HeaderRowNumber = table.HeaderRowNumber, ImportVersion = PanelImportRules.Current,
             },
         };
-        if (table.IsTemplate && PanelImportTemplate.Columns.Any(c => c.Role == PanelImportFields.FamilyKey && table.Headers.Contains(c.Header, StringComparer.Ordinal)))
+        bool savedPanel = table.Headers.Contains("Record ID", StringComparer.Ordinal) && table.Headers.Contains("Key", StringComparer.Ordinal)
+            && table.Headers.Contains(PanelImportTemplate.Name, StringComparer.Ordinal);
+        if (savedPanel || table.Headers.Contains(PanelImportTemplate.Abbreviation, StringComparer.Ordinal)
+            && table.Headers.Contains(PanelImportTemplate.Name, StringComparer.Ordinal))
         {
-            foreach (var (header, role) in PanelImportTemplate.Columns.Where(c => table.Headers.Contains(c.Header, StringComparer.Ordinal)))
+            foreach (var (header, role) in PanelImportTemplate.ImportColumns.Where(c => table.Headers.Contains(c.Header, StringComparer.Ordinal)))
             {
                 proposal.Choices.ColumnHeaders[role] = header;
                 proposal.Reasons[role] = "\"" + header + "\" is a column of the FamilyQuant template.";
             }
+            if (savedPanel)
+            {
+                proposal.Choices.ColumnHeaders[PanelImportFields.FamilyKey] = "Key";
+                if (table.Headers.Contains("Pfam", StringComparer.Ordinal)) proposal.Choices.ColumnHeaders[PanelImportFields.Pfam] = "Pfam";
+            }
             proposal.IsTemplate = true;
             proposal.Decisions = ProposeDecisions(table, proposal.Choices).Where(d => d.Exact).Select(d => d.Mapping).ToList();
+        }
+        if (table.Headers.Contains(PanelImportTemplate.UniProtFamily, StringComparer.Ordinal))
+        {
+            proposal.Choices.ColumnHeaders[PanelImportFields.UniProtFamilies] = PanelImportTemplate.UniProtFamily;
+            proposal.Reasons[PanelImportFields.UniProtFamilies] = "The UniProt family column contains exact source family names.";
+        }
+        if (table.Headers.Contains(PanelImportTemplate.Decision, StringComparer.Ordinal))
+        {
+            proposal.Choices.ColumnHeaders[PanelImportFields.Decision] = PanelImportTemplate.Decision;
+            proposal.Reasons[PanelImportFields.Decision] = "Decision is the program's optional family-action column.";
         }
         var rows = table.Rows.Where(r => DecorativeReason(table, r) == null).ToList();
         var stats = table.Headers.Select(h => new ColumnShape(h, rows)).ToList();
         proposal.ColorColumns = table.Headers.Where(h => table.Rows.Where(r => r.Fills.ContainsKey(h))
             .Select(r => r.Fills[h]).Distinct(StringComparer.OrdinalIgnoreCase).Count() >= 2).ToList();
         if (rows.Count == 0 || proposal.IsTemplate) return proposal;
-        var taken = new HashSet<string>(StringComparer.Ordinal);
+        var taken = proposal.Choices.ColumnHeaders.Values.ToHashSet(StringComparer.Ordinal);
         void Take(string role, ColumnShape? column, string reason)
         {
             if (column == null) return;

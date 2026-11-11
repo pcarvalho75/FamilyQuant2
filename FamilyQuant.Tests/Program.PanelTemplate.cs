@@ -37,6 +37,7 @@ internal static partial class Program
             EvidenceLinks = new() { new FamilyPanelEvidenceLink { SourceFamily = "source", ArchitectureKey = "architecture", PanelFamilyKey = "a", PanelDefinitionFingerprint = "proof", SupportingAccessions = new() { "P12345" } } },
             Families = new() { new FamilyPanelFamily { Key = "a", DisplayName = "Family, α", SourceDecision = "keep",
                 Names = new() { new FamilyPanelText { Name = "alias", Text = "name" } },
+                UniProtFamilies = new() { "source" },
                 Pfam = new() { new FamilyPanelDomain { Accession = "PF00001", Name = "domain" } },
                 TextFields = new() { new FamilyPanelText { Name = "note", Text = "a\nvalue" }, new FamilyPanelText { Name = "note", Text = "second" } },
                 Subclasses = new() { new FamilyPanelSubclass { Key = "sub", DisplayName = "Subclass", RequiredPfam = new() { "PF00001" },
@@ -79,11 +80,11 @@ internal static partial class Program
                 row.Elements<DocumentFormat.OpenXml.Spreadsheet.Cell>().ElementAt(2).InlineString!.Text!.Text = "Edited family";
                 var header = part.Worksheet.Descendants<DocumentFormat.OpenXml.Spreadsheet.Row>().ElementAt(1);
                 header.Append(new DocumentFormat.OpenXml.Spreadsheet.Cell(new DocumentFormat.OpenXml.Spreadsheet.InlineString(new DocumentFormat.OpenXml.Spreadsheet.Text("Extra note")))
-                    { CellReference = "I2", DataType = DocumentFormat.OpenXml.Spreadsheet.CellValues.InlineString });
+                    { CellReference = "J2", DataType = DocumentFormat.OpenXml.Spreadsheet.CellValues.InlineString });
                 row.Append(new DocumentFormat.OpenXml.Spreadsheet.Cell(new DocumentFormat.OpenXml.Spreadsheet.InlineString(new DocumentFormat.OpenXml.Spreadsheet.Text("new text")))
-                    { CellReference = "I3", DataType = DocumentFormat.OpenXml.Spreadsheet.CellValues.InlineString });
+                    { CellReference = "J3", DataType = DocumentFormat.OpenXml.Spreadsheet.CellValues.InlineString });
                 var addedFamily = new DocumentFormat.OpenXml.Spreadsheet.Row { RowIndex = 4 };
-                string[] values = { "", "b", "Family B", "Quantify", "", "PF88888", "", "", "added note" };
+                string[] values = { "", "b", "Family B", "Quantify", "", "PF88888", "", "", "", "added note" };
                 for (int i = 0; i < values.Length; i++) addedFamily.Append(new DocumentFormat.OpenXml.Spreadsheet.Cell(
                     new DocumentFormat.OpenXml.Spreadsheet.InlineString(new DocumentFormat.OpenXml.Spreadsheet.Text(values[i])))
                     { CellReference = ((char)('A' + i)).ToString() + "4", DataType = DocumentFormat.OpenXml.Spreadsheet.CellValues.InlineString });

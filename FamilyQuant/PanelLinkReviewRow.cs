@@ -6,6 +6,8 @@ using System.Text.Json;
 
 namespace FamilyQuant;
 
+public sealed record PanelLinkExample(string Accession, string Name, string UniProtFamily);
+
 public sealed record PanelLinkOption(string? Key, string DisplayName);
 
 /// <summary>Display and explicit user choices only. The engine supplies every candidate and support entry.</summary>
@@ -20,6 +22,8 @@ public sealed class PanelLinkReviewRow : ScreenViewModel
     public string SourceFamily => Source.SourceFamily.Length > 0 ? Source.SourceFamily : "Domain combination";
     public string Architecture => Source.ArchitectureKey.Length == 0 ? "Any observed combination"
         : string.Join(" + ", JsonSerializer.Deserialize<string[]>(Source.ArchitectureKey) ?? Array.Empty<string>());
+    public string ExampleProtein { get; }
+    public string ExampleUniProtFamily { get; }
     public string SupportingAccessions => string.Join(", ", Source.SupportingAccessions);
     public string Candidates => string.Join(", ", Options.Where(o => o.Key != null).Select(o => o.DisplayName));
     public string State => !IsNoteValid ? "Enter a short single-line note" : HasUnappliedChoice ? "Ready to update" : Source.IsConfirmed ? "Confirmed"
@@ -50,9 +54,11 @@ public sealed class PanelLinkReviewRow : ScreenViewModel
         }
     }
 
-    public PanelLinkReviewRow(PanelFamilyLinkProposal source, IReadOnlyDictionary<string, string>? names, Action changed)
+    public PanelLinkReviewRow(PanelFamilyLinkProposal source, IReadOnlyDictionary<string, string>? names, Action changed, PanelLinkExample? example = null)
     {
         Source = source; this.changed = changed;
+        ExampleProtein = example == null ? "No database example available" : example.Accession + " | " + example.Name;
+        ExampleUniProtFamily = example == null || example.UniProtFamily.Length == 0 ? "Not recorded" : example.UniProtFamily;
         originalNote = note = source.SourceNote ?? string.Empty;
         Options = source.CandidateFamilyKeys.Select(key => new PanelLinkOption(key,
             (names?.GetValueOrDefault(key) is { Length: > 0 } name ? name : key) + " (" + key + ")"))

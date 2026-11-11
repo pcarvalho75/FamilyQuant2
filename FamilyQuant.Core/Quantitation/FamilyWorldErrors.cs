@@ -257,7 +257,7 @@ namespace FamilyQuant
                     Q(string.Empty), string.Empty, string.Empty)).Append('\n');
             Global("identified, shared between families", SharedIdentifiedEnvelope);
             Global("de novo in the database, shared between families", SharedDatabaseDeNovoEnvelope);
-            Global("de novo in the family world, shared between families", SharedEnvelope);
+            Global("de novo in the UniProt families, shared between families", SharedEnvelope);
             Global("identified, in no family", UnattributedIdentifiedEnvelope);
             Global("de novo, unexplained", UnexplainedEnvelope);
             return csv.ToString();
@@ -312,7 +312,7 @@ namespace FamilyQuant
         public const string KnownAnswerMethod =
             "known answers v1: accepted de novo calls on scans the database search identified, at a compatible " +
             "precursor; the family is the UniProt family of the database proteins holding the identified peptide " +
-            "(the proteins tied at the best score); the tag is searched in the family world without the sample's " +
+            "(the proteins tied at the best score); the tag is searched in the UniProt families without the sample's " +
             "own species under the pass's rules; a credit to a family is right when the identified peptide's " +
             "holders carry it; 2026-11-02";
 
@@ -347,7 +347,7 @@ namespace FamilyQuant
             nameof(FamilyWorldOutcome.OutOfScope) => "landed on families out of scope only",
             nameof(FamilyWorldOutcome.LandedNoFamily) => "landed on proteins with no family",
             nameof(FamilyWorldOutcome.TooShort) => "tag shorter than the minimum length",
-            nameof(FamilyWorldOutcome.NotLanded) => "not found in the family world",
+            nameof(FamilyWorldOutcome.NotLanded) => "not found in the UniProt families",
             nameof(FamilyWorldOutcome.Rejected) => "sequence not readable",
             _ => outcome,
         };

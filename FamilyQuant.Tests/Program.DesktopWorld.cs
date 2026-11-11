@@ -31,7 +31,7 @@ internal static partial class Program
         Check("Y8 curation exposes a family-world fetch button beside evidence", view.FindName("ButtonFetchFamilyWorld") is Button);
         Check("Y8 curation exposes persistent family-world state", view.FindName("TextBlockFamilyWorldState") is TextBlock);
         Check("Y8 family-world tooltip uses at most two sentences", TooltipSentenceCount(((Button)view.FindName("ButtonFetchFamilyWorld")).ToolTip.ToString()!) <= 2);
-        Check("Y8 no world is reported as not fetched", view.ViewModel.FamilyWorldState == "Family world: not fetched.");
+        Check("Y8 no world is reported as not fetched", view.ViewModel.FamilyWorldState == "UniProt families: not fetched.");
         var withoutEvidence = TaskFile();
         foreach (var protein in withoutEvidence.MyExtendedFastaItems) protein.Evidence = null;
         var noEvidenceScreen = new ClusterGenerationControl(withoutEvidence);
@@ -96,12 +96,12 @@ internal static partial class Program
                 var state = (TextBlock)screen.FindName("TextBlockFamilyWorldState");
                 PumpDispatcher();
                 Check("Y8 state includes stored release scope count and size", state.Text.Contains("fixture") && state.Text.Contains("Leading scope")
-                    && state.Text.Contains("2 proteins in 1 family") && state.Text.Contains("MB")
+                    && state.Text.Contains("1 family, 2 entries") && state.Text.Contains("MB")
                     && state.Text.Contains("in the open project", StringComparison.Ordinal)
                     && state.Text.Contains("Use File > Save", StringComparison.Ordinal));
                 string message = ((TextBlock)screen.FindName("TextBlockStatusLine")).Text;
                 Check("Z1l family-world completion explains the open-project result and File Save action",
-                    message.Contains("Family world added to the open project.", StringComparison.Ordinal)
+                    message.Contains("UniProt families added to the open project.", StringComparison.Ordinal)
                     && message.Contains("Use File > Save", StringComparison.Ordinal)
                     && !message.Contains("stored", StringComparison.OrdinalIgnoreCase));
                 string path = Path.Combine(Path.GetTempPath(), "fq-y8-" + Guid.NewGuid().ToString("N") + ".fqproj");

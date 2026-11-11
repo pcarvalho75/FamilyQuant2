@@ -89,6 +89,15 @@ namespace FamilyQuant.Tests
         private static SuiteTable DefaultSuite(string[] args, string workDir)
         {
             var suite = new SuiteTable();
+            suite.AddWithApplication(() => ReviewChecklistStateTests(Path.Combine(workDir, "review-checklist-states")));
+            suite.AddWithApplication(() => ReviewDestinationTests(Path.Combine(workDir, "review-destinations")));
+            suite.AddWithApplication(() => ReviewDetailsHeightTests(Path.Combine(workDir, "review-details-height")));
+            suite.AddWithApplication(() => ReviewAlignmentHeadingTests());
+            suite.Add(() => ReviewNamedDestinationTests());
+            suite.Add(() => ImportSubclassTemplateTests(Path.Combine(workDir, "import-subclass-template")));
+            suite.AddWithApplication(() => ReviewTabGuideTests());
+            suite.Add(() => PanelLinkExampleTests());
+            suite.AddWithApplication(() => ReviewApplyWaitTests(Path.Combine(workDir, "review-apply-wait")));
             suite.Section("CSV export - locale and escaping");
             suite.Add(() => CommandRegistryTests());
             suite.Add(() => SuiteCommandCoverageTests(null));
@@ -278,6 +287,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => LocaleTests(args.Length > 0 ? args[0] : null));
             suite.Section("What the numbers are called - status line, counter and column headings");
             suite.Add(() => ReportViewTests());
+            suite.AddWithApplication(() => FamilyCounterFilterTests());
             suite.Section("Embedded help - both pages answer the questions that were actually asked");
             suite.Add(() => HelpContentTests());
             suite.Add(() => DeNovoHelpContentTests());
@@ -328,6 +338,14 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelImportGracefulTests(Path.Combine(workDir, "panel-import-graceful")));
             suite.Add(() => PanelImportSeveralTests(Path.Combine(workDir, "panel-import-several")));
             suite.Add(() => PanelImportTemplateTests(Path.Combine(workDir, "panel-import-template")));
+            suite.Add(() => ImportTemplateWorkbookTests());
+            suite.Add(() => ImportUniProtColumnTests());
+            suite.Add(() => ImportSimpleTemplateTests());
+            suite.AddWithApplication(() => ImportEntryActionTests());
+            suite.AddWithApplication(() => ImportDecisionPageTests());
+            suite.AddWithApplication(() => ImportDirectPfamTests());
+            suite.AddWithApplication(() => ImportSaveHandoffTests());
+            suite.AddWithApplication(() => ImportConditionalPageTests());
             suite.Add(() => PanelImportExampleTests(Path.Combine(workDir, "panel-import-example")));
             suite.Add(() => PanelWorkbookMapTests(Path.Combine(workDir, "panel-workbook-map")));
             suite.AddWithApplication(() => PanelWorkbookNotesTests());
@@ -405,6 +423,8 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => PanelMultiScopeAuditTests());
             suite.Add(() => PanelCoverageTieTests(Path.Combine(workDir, "panel-coverage-ties")));
+            suite.Add(() => PanelLinkRoundtripTests(Path.Combine(workDir, "panel-link-roundtrip")));
+            suite.Add(() => PanelNamedFamilyTests(Path.Combine(workDir, "panel-named-families")));
             suite.AddWithApplication(() => PanelLinkNotesTests());
             suite.Add(() => EvidenceClassifierTests());
             suite.AddWithApplication(() => FamilyPanelSubclassTests());

@@ -55,7 +55,7 @@ namespace FamilyQuant
         public EvidenceReviewViewModel? Evidence => evidence;
         public string PanelChecklistHint => evidence == null || evidence.PanelChecklist.Count == 0
             ? "Group by evidence reads the database and scope by itself when it opens (this takes minutes); then press Update proposal to fill the family checklist."
-            : "Matches are database targets, not automatic assignments; match types may overlap.";
+            : evidence.PanelChecklistSummary;
         public bool EvidenceAvailable => evidence != null || propose != null;
         public bool IsBusy { get => isBusy; private set { isBusy = value; Changed(); Changed(nameof(CanEdit)); Changed(nameof(CanDiscoverTask)); Changed(nameof(CanUpdateProposal)); Changed(nameof(CanCheckMotif)); Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); } }
         public bool CanUpdateProposal => propose != null && !IsBusy && !string.IsNullOrWhiteSpace(ScopeText);
@@ -299,7 +299,7 @@ namespace FamilyQuant
             Changed(nameof(CanEditManual));
         }
         private void EvidenceChanged(object? sender, PropertyChangedEventArgs e) { Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); }
-        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); Changed(nameof(CanMatchPanelNames)); Changed(nameof(MatchPanelNamesHint)); Changed(nameof(CanFetchMissingPanel)); Changed(nameof(PanelCoverageText)); NotifyChecklistActions(); NotifyEvidenceLocks(); }
+        private void NotifySummary() { Changed(nameof(IsWaitingForPanelLinks)); Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); Changed(nameof(CanMatchPanelNames)); Changed(nameof(MatchPanelNamesHint)); Changed(nameof(CanFetchMissingPanel)); Changed(nameof(PanelCoverageText)); NotifyChecklistActions(); NotifyEvidenceLocks(); }
 
         private void RestoreManualState(IReadOnlyList<EvidenceManualChoice>? choices)
         {

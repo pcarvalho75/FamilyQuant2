@@ -18,7 +18,7 @@ public static class FamilyPanelTemplate
 {
     private const string Marker = "FamilyQuant panel template 1";
     private const int ChunkLength = 30000;
-    private static readonly string[] FamilyHeaders = { "Record ID", "Key", "Name", "Decision", "Merge target key", "Pfam" };
+    private static readonly string[] FamilyHeaders = { "Record ID", "Key", "Name", "Decision", "Merge target key", "Pfam", "UniProt family" };
     private static readonly string[] SubclassHeaders = { "Record ID", "Family key", "Subclass key", "Name", "Required Pfam", "Absent Pfam", "UniProt subfamily", "Report as subclass key" };
 
     public static void Write(string path, FamilyPanel panel)
@@ -36,9 +36,13 @@ public static class FamilyPanelTemplate
         for (int i = 0; i < panel.Families.Count; i++)
         {
             var f = panel.Families[i];
-            AddRow(families, new[] { "f" + i.ToString(CultureInfo.InvariantCulture), f.Key, f.DisplayName, DecisionText(f.Decision), f.MergeTargetFamilyKey, Join(f.Pfam.Select(d => d.Accession)) }
+            var sourceFamilies = f.UniProtFamilies.Concat(panel.EvidenceLinks.Where(link => link.PanelFamilyKey == f.Key)
+                .Select(link => link.SourceFamily)).Select(name => name.Trim()).Where(name => name.Length > 0).Distinct(StringComparer.OrdinalIgnoreCase);
+            AddRow(families, new[] { "f" + i.ToString(CultureInfo.InvariantCulture), f.Key, f.DisplayName, DecisionText(f.Decision), f.MergeTargetFamilyKey, Join(f.Pfam.Select(d => d.Accession)), Join(sourceFamilies) }
                 .Concat(fields.Select(field => FieldValue(f, field))).ToArray());
         }
+        ((Worksheet)families.Parent!).Append(new AutoFilter { Reference = "A2:" + ColumnName(FamilyHeaders.Length + fields.Count - 1)
+            + (panel.Families.Count + 2).ToString(CultureInfo.InvariantCulture) });
         var subclasses = NewSheet(workbook, sheets, "Subclasses", 2, false);
         AddRow(subclasses, SubclassHeaders);
         for (int i = 0; i < panel.Families.Count; i++)
@@ -80,8 +84,9 @@ public static class FamilyPanelTemplate
             ?? throw new InvalidDataException("The panel metadata is missing.");
         var original = metadata.Panel ?? throw new InvalidDataException("The panel metadata is missing.");
         var fields = metadata.TextFields ?? throw new InvalidDataException("The panel text columns are missing.");
-        RequireHeaders(familyRows[1], FamilyHeaders.Concat(fields.Select(FieldHeader)).ToArray());
-        int fixedWidth = FamilyHeaders.Length + fields.Count;
+        var familyHeaders = At(familyRows[1], 6) == "UniProt family" ? FamilyHeaders : FamilyHeaders.Take(6).ToArray();
+        RequireHeaders(familyRows[1], familyHeaders.Concat(fields.Select(FieldHeader)).ToArray());
+        int fixedWidth = familyHeaders.Length + fields.Count;
         foreach (string header in familyRows[1].Skip(fixedWidth))
         {
             if (string.IsNullOrWhiteSpace(header)) throw new InvalidDataException("Every additional text column needs a header.");
@@ -98,7 +103,7 @@ public static class FamilyPanelTemplate
         var retainedMatchKeys = new Dictionary<string, string>(StringComparer.Ordinal);
         foreach (var row in familyRows.Skip(2).Where(HasContent))
         {
-            if (row.Skip(FamilyHeaders.Length + fields.Count).Any(x => x.Length > 0)) throw new InvalidDataException("A family value has no column header.");
+            if (row.Skip(familyHeaders.Length + fields.Count).Any(x => x.Length > 0)) throw new InvalidDataException("A family value has no column header.");
             string id = At(row, 0);
             if (id.Length > 0 && !familyIds.Add(id)) throw new InvalidDataException("A family record ID is repeated.");
             int index = ParseFamilyId(id, original.Families.Count);
@@ -111,7 +116,8 @@ public static class FamilyPanelTemplate
                 var existing = f.Pfam.GroupBy(x => x.Accession, StringComparer.Ordinal).ToDictionary(x => x.Key, x => x.First(), StringComparer.Ordinal);
                 f.Pfam = Split(domainText).Select(x => existing.TryGetValue(x, out var d) ? d : new FamilyPanelDomain { Accession = x }).ToList();
             }
-            for (int i = 0; i < fields.Count; i++) SetField(f, fields[i], At(row, FamilyHeaders.Length + i));
+            if (familyHeaders.Length > 6) f.UniProtFamilies = Split(At(row, 6)).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+            for (int i = 0; i < fields.Count; i++) SetField(f, fields[i], At(row, familyHeaders.Length + i));
             f.Subclasses = new List<FamilyPanelSubclass>();
             result.Families.Add(f);
         }

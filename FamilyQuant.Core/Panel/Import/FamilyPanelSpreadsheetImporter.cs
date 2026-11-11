@@ -19,6 +19,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
         [PanelImportFields.FamilyKey] = "abbreviation", [PanelImportFields.DisplayName] = "name", [PanelImportFields.Decision] = "decision",
         [PanelImportFields.Pfam] = "Pfam domains", [PanelImportFields.OtherName] = "other-language name", [PanelImportFields.Notes] = "notes",
         [PanelImportFields.ColorCategory] = "colour category",
+        [PanelImportFields.UniProtFamilies] = "UniProt family",
     };
 
     public FamilyPanel Import(PanelSpreadsheetTable table, FamilyPanelImport choices,
@@ -87,6 +88,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
         string? decisionHeader = Role(PanelImportFields.Decision, false), domainHeader = Role(PanelImportFields.Pfam, false);
         string? otherHeader = Role(PanelImportFields.OtherName, false), colorHeader = Role(PanelImportFields.ColorCategory, false);
         Role(PanelImportFields.Notes, false);
+        string? uniProtHeader = Role(PanelImportFields.UniProtFamilies, false);
         if (decisions.Any(d => d == null || !Enum.IsDefined(d.Decision))
             || decisions.Select(d => d.SourceValue).Distinct(StringComparer.Ordinal).Count() != decisions.Count)
             Block(PanelImportProblemKind.DecisionMappingInvalid, 0, decisionHeader ?? string.Empty, string.Empty,
@@ -262,6 +264,9 @@ public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreads
                 };
                 if (otherHeader != null && unit.Other.Length > 0) family.Names.Add(new FamilyPanelText { Name = otherHeader, Text = unit.Other });
                 if (colorField != null) family.TextFields.Add(new FamilyPanelText { Name = colorField.Name, Text = colorField.Text });
+                if (uniProtHeader != null)
+                    family.UniProtFamilies = Value(row, uniProtHeader).Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                        .Distinct(StringComparer.OrdinalIgnoreCase).ToList();
                 if (domainHeader != null && unit.Part == 0)
                 {
                     family.Pfam = ReadSheetPfam(domainText);

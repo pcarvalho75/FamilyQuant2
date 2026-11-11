@@ -393,7 +393,7 @@ namespace FamilyQuant
     {
         public const string Method =
             "family world pass v1: de novo peptides with no first-pass family; tags of at least the minimum length " +
-            "searched against the family world and its reversed copies (gapless identity gate, PAM30MS, every target " +
+            "searched against the UniProt family references and their reversed copies (gapless identity gate, PAM30MS, every target " +
             "past the gate after target-decoy competition); a hit credits the UniProt families in scope of the " +
             "winning proteins, never a protein; 2026-11-01";
 
@@ -442,8 +442,8 @@ namespace FamilyQuant
             if (lengths.Any(l => l < 0)) throw new ArgumentOutOfRangeException(nameof(lengths), "The minimum tag length cannot be negative.");
             IReadOnlyCollection<string> creditable = options.CreditableFamilies ?? world.ScopeFamilies;
             if (creditable.Count == 0)
-                throw new InvalidOperationException("The family world records no families in scope, so no family can be credited. " +
-                    "Fetch the family world for a confirmed scope first.");
+                throw new InvalidOperationException("The UniProt families records no families in scope, so no family can be credited. " +
+                    "Fetch the UniProt families for a confirmed scope first.");
             string[] creditableSorted = creditable.Distinct(StringComparer.OrdinalIgnoreCase)
                 .OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal).ToArray();
 
@@ -455,7 +455,7 @@ namespace FamilyQuant
             var credits = new Dictionary<string, FamilyWorldCredit>(StringComparer.Ordinal);
             IEnumerable<HomologyResult> found = replay == null
                 ? HomologySearch.Search(searched, world.Database, options.SearchOptions(), operation,
-                    progressStage: "world-residual-queries", progressLabel: "Family-world peptides searched", progressBatchSize: 128)
+                    progressStage: "world-residual-queries", progressLabel: "UniProt families peptides searched", progressBatchSize: 128)
                 : searched.Select(sequence => replay.TryGetValue(sequence, out var result) && result.NormalizedPeptide == sequence
                     ? result : throw new ArgumentException("Replay lacks residual query: " + sequence, nameof(replay)));
             foreach (HomologyResult r in found)
@@ -581,7 +581,7 @@ namespace FamilyQuant
             Closing("landed on families out of scope only", result.Envelope(FamilyWorldOutcome.OutOfScope), result.Peptides(FamilyWorldOutcome.OutOfScope));
             Closing("landed on proteins with no family", result.Envelope(FamilyWorldOutcome.LandedNoFamily), result.Peptides(FamilyWorldOutcome.LandedNoFamily));
             Closing("tag shorter than the minimum length", result.Envelope(FamilyWorldOutcome.TooShort), result.Peptides(FamilyWorldOutcome.TooShort));
-            Closing("not found in the family world", result.Envelope(FamilyWorldOutcome.NotLanded), result.Peptides(FamilyWorldOutcome.NotLanded));
+            Closing("not found in the UniProt families", result.Envelope(FamilyWorldOutcome.NotLanded), result.Peptides(FamilyWorldOutcome.NotLanded));
             Closing("sequence not readable", result.Envelope(FamilyWorldOutcome.Rejected), result.Peptides(FamilyWorldOutcome.Rejected));
             return csv.ToString();
         }

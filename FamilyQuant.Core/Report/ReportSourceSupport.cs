@@ -12,7 +12,7 @@ public static class ReportSourceSupport
         string csv = ReportStudyExports.SourceSupport(result);
         var table = ReportCsvTable.Build("source-world-support", "Support beside the source contributions",
             csv,
-            "Stored family-world decoy signal / credited signal and correct known credits / known credits. The stored minimum support is "
+            "Stored UniProt families decoy signal / credited signal and correct known credits / known credits. The stored minimum support is "
                 + result.MinimumKnownCredits.ToString(CultureInfo.InvariantCulture)
                 + " known credits. Missing rates stay unavailable; too-little-evidence states remain explicit. The sources figure alone is not a validation claim."
                 + (grouping?.OtherFamilies.Count > 0 ? " Others has no combined quality rate; its individual stored support remains in the companion workbook." : ""),

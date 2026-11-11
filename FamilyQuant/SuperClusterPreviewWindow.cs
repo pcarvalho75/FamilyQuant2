@@ -48,6 +48,7 @@ namespace FamilyQuant
             Loaded += async (_, _) => await DiscoverInitialTaskAsync();
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
+            InitializeAdvancedTabGuides();
             AppOperationHost.SetScope(this, Operations);
             BusyOverlay.AttachWindow(this, Operations);
             model.Keyword.Refreshing += (_, _) => sorts = grid.Items.SortDescriptions.ToList();
@@ -98,8 +99,9 @@ namespace FamilyQuant
             ScopeDetailsRow.Height = full ? new GridLength(2, GridUnitType.Star) : new GridLength(0);
             FamilyTableColumn.Width = full ? new GridLength(2, GridUnitType.Star) : new GridLength(440);
             ProteinTableRow.Height = new GridLength(full ? 2 : 1, GridUnitType.Star);
-            ProteinTableRow.MinHeight = full ? 120 : 296;
-            ProteinDetailsRow.Height = full ? new GridLength(3, GridUnitType.Star) : new GridLength(110);
+            ProteinTableRow.MinHeight = 120;
+            ProteinDetailsRow.Height = GridLength.Auto;
+            ReviewTablesRow.MinHeight = full ? 470 : 390;
             OpenFamilyChecklistButton.Visibility = hasFamilyList || model.Evidence?.HasPanelRules == true ? Visibility.Visible : Visibility.Collapsed;
             UpdateApplyToolTip();
         }
@@ -150,6 +152,12 @@ namespace FamilyQuant
             Confirmed = true; Close();
         }
         private void Cancel_Click(object sender, RoutedEventArgs e) { Confirmed = false; Close(); }
+        private void OpenPanelLinkChoices_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAllOptions = true;
+            model.OnlyPanelLinksNeedingChoice = true;
+            evidenceTabs.SelectedItem = evidenceTabs.Items.OfType<TabItem>().Single(tab => tab.Header as string == "Panel links");
+        }
         private void UpdateApplyToolTip()
         {
             if (!Dispatcher.CheckAccess())

@@ -63,7 +63,8 @@ public static partial class PanelSubclassImport
                 Match prefix = absent.Success ? absent : required;
                 PanelSubclassRuleKind? cellKind = absent.Success ? PanelSubclassRuleKind.AbsentPfam : required.Success ? PanelSubclassRuleKind.RequiredPfam : null;
                 var kind = cellKind ?? headerKind ?? PanelSubclassRuleKind.RequiredPfam;
-                bool headerDerived = !cellKind.HasValue && headerKind.HasValue;
+                bool headerDerived = !cellKind.HasValue && headerKind.HasValue
+                    && column != PanelImportTemplate.SubclassRequiredPfam && column != PanelImportTemplate.SubclassAbsentPfam;
                 bool polarityConflict = headerAbsent && headerRequired || headerKind.HasValue && cellKind.HasValue && headerKind != cellKind;
                 if (prefix.Success) Erase(prefix.Index, prefix.Length);
                 Erase(match.Index, match.Length);

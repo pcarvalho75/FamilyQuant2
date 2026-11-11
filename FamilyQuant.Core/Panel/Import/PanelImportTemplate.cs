@@ -8,28 +8,49 @@ using System.Linq;
 
 namespace FamilyQuant.Panels.Import;
 
-/// <summary>An empty family-list workbook with the recommended columns and an Instructions sheet. A hidden defined
+/// <summary>An empty family-list workbook with the recommended columns, an optional Subclasses sheet and header notes on Instructions. A hidden defined
 /// name marks it, so the importer maps its columns and the program's own decision names with no user mapping.</summary>
 public static class PanelImportTemplate
 {
     public const string FamilySheet = "Families";
     public const string InstructionsSheet = "Instructions";
+    public const string SubclassesSheet = "Subclasses";
+    public const string SubclassFamily = "Family";
+    public const string SubclassName = "Subclass";
+    public const string SubclassUniProt = "UniProt family or subfamily";
+    public const string SubclassRequiredPfam = "Pfam required";
+    public const string SubclassAbsentPfam = "Pfam absent";
     public const string Abbreviation = "Abbreviation";
     public const string Name = "Name";
     public const string OtherName = "Other-language name";
     public const string Notes = "Notes";
     public const string Pfam = "Pfam domains";
+    public const string UniProtFamily = "UniProt family";
     public const string Decision = "Decision";
     internal const string Marker = "FamilyQuant_family_list_template";
     internal const string MarkerValue = "\"1\"";
-    private const int DecisionRows = 2000;
 
     /// <summary>Template header to importer role, in column order.</summary>
     public static IReadOnlyList<(string Header, string Role)> Columns { get; } = new[]
     {
         (Abbreviation, PanelImportFields.FamilyKey), (Name, PanelImportFields.DisplayName), (OtherName, PanelImportFields.OtherName),
-        (Notes, PanelImportFields.Notes), (Pfam, PanelImportFields.Pfam), (Decision, PanelImportFields.Decision),
+        (Pfam, PanelImportFields.Pfam),
+        (UniProtFamily, PanelImportFields.UniProtFamilies),
     };
+
+    public static IReadOnlyList<(string Header, string Note)> SubclassColumns { get; } = new[]
+    {
+        (SubclassFamily, "Copy the family abbreviation from Families; this must match its key exactly."),
+        (SubclassName, "Write one subclass name per row; names must be unique within the family."),
+        (SubclassUniProt, "Exact UniProt family or subfamily names, separated by semicolons; keep the full name, including family or subfamily."),
+        (SubclassRequiredPfam, "Pfam accessions that must all be present, separated by semicolons; leave empty for no required-domain rule."),
+        (SubclassAbsentPfam, "Pfam accessions that must all be absent, separated by semicolons; absence needs a complete protein with domain evidence."),
+    };
+
+    internal static IEnumerable<(string Header, string Role)> ImportColumns => Columns.Concat(new[]
+    {
+        (Notes, PanelImportFields.Notes), (Decision, PanelImportFields.Decision),
+    });
 
     /// <summary>The program's decision names, also recognised in any sheet; a merge is written "Merge into" and an abbreviation.</summary>
     public static IReadOnlyList<(string Label, FamilyPanelDecision Decision)> DecisionNames { get; } = new[]
@@ -48,12 +69,11 @@ public static class PanelImportTemplate
         "Abbreviation: a short code that names the family, for example PLA2. Each abbreviation must be used once; it is the family's key in FamilyQuant.",
         "Name: the family name used in tables and reports.",
         "Other-language name: the same family in another language, for example English when Name is in Portuguese. Optional.",
-        "Notes: anything you want to keep with the family. It is kept as text and never changes a result. Optional.",
         "Pfam domains: optional, written as Name (accession), separated by semicolons, for example Example domain (PF12345).",
-        "Decision: optional. Leave it empty to quantify the family, or choose Quantify, Report under others or Not a family, or write Merge into followed by another row's abbreviation, for example Merge into CTL.",
+        "UniProt family: optional, exact UniProt family names separated by semicolons. Empty means no family name is specified.",
         "",
         "A row that lists several families in one name cell, separated by commas, semicolons or line breaks, is offered as one family per name or as one group reported under others when you import it.",
-        "You may colour cells and add more columns: colours can be named as a category during the import, and every extra column is kept as text.",
+        "Every family is quantified. You may add more columns; every extra column is kept as source text.",
         "Save the workbook as .xlsx, then use File > Import family list in FamilyQuant.",
         "",
         "Example rows",
@@ -61,11 +81,9 @@ public static class PanelImportTemplate
 
     private static readonly string[][] Example =
     {
-        new[] { Abbreviation, Name, OtherName, Notes, Pfam, Decision },
-        new[] { "PLA2", "Fosfolipase A2", "Phospholipase A2", "Main family", "Phospholip_A2_1 (PF00068)", "Quantify" },
-        new[] { "CTL", "Lectina tipo C", "C-type lectin", "", "Lectin_C (PF00059)", "" },
-        new[] { "Gal-CTL", "Lectina ligante de galactose", "Galactose-binding lectin", "Reported with CTL", "Lectin_C (PF00059)", "Merge into CTL" },
-        new[] { "Rare", "Outras raras", "Endopeptidase, carboxypeptidase, TCTP", "Offered as one family per name or one group", "", "Report under others" },
+        new[] { Abbreviation, Name, OtherName, Pfam, UniProtFamily },
+        new[] { "PLA2", "Fosfolipase A2", "Phospholipase A2", "Phospholip_A2_1 (PF00068)", "" },
+        new[] { "CTL", "Lectina tipo C", "C-type lectin", "Lectin_C (PF00059)", "" },
     };
 
     public static void Write(string path)
@@ -93,26 +111,30 @@ public static class PanelImportTemplate
         var families = new SheetData(Row(1, Columns.Select(c => c.Header).ToArray(), 1));
         var familySheet = new Worksheet(
             new SheetViews(new SheetView(new Pane { VerticalSplit = 1, TopLeftCell = "A2", ActivePane = PaneValues.BottomLeft, State = PaneStateValues.Frozen }) { WorkbookViewId = 0 }),
-            new Columns(Width(1, 16), Width(2, 32), Width(3, 32), Width(4, 40), Width(5, 44), Width(6, 24)),
+            new Columns(Width(1, 16), Width(2, 32), Width(3, 32), Width(4, 44), Width(5, 44)),
             families,
-            new AutoFilter { Reference = "A1:F1" },
-            new DataValidations(new DataValidation(new Formula1("\"" + string.Join(",", DecisionNames.Select(d => d.Label)) + "\""))
-            {
-                Type = DataValidationValues.List, AllowBlank = true, ShowErrorMessage = false, ShowInputMessage = true,
-                PromptTitle = "Decision", Prompt = "Empty or Quantify, Report under others, Not a family, or type Merge into and an abbreviation.",
-                SequenceOfReferences = new ListValue<StringValue> { InnerText = "F2:F" + DecisionRows.ToString(CultureInfo.InvariantCulture) },
-            }) { Count = 1 });
+            new AutoFilter { Reference = "A1:E1" });
         AddSheet(workbook, sheets, FamilySheet, 1, familySheet);
 
         var instructions = new SheetData();
         uint row = 1;
-        foreach (string line in Instructions)
+        foreach (string line in Instructions.Where(line => line != "Example rows"))
         {
             uint style = row == 1 ? 3u : line == "Example rows" ? 1u : 2u;
             instructions.Append(Row(row++, new[] { line }, style));
         }
+        instructions.Append(Row(row++, new[] { "Subclasses: optional, one subclass per row on the Subclasses sheet; the Family value is a key from Families." }, 2));
+        foreach (var column in SubclassColumns) instructions.Append(Row(row++, new[] { "Subclasses > " + column.Header + ": " + column.Note }, 2));
+        instructions.Append(Row(row++, new[] { "" }, 2));
+        instructions.Append(Row(row++, new[] { "Example rows" }, 1));
         foreach (var example in Example) instructions.Append(Row(row++, example, example[0] == Abbreviation ? 1u : 2u));
         AddSheet(workbook, sheets, InstructionsSheet, 2, new Worksheet(new Columns(Width(1, 120)), instructions));
+
+        AddSheet(workbook, sheets, SubclassesSheet, 3, new Worksheet(
+            new SheetViews(new SheetView(new Pane { VerticalSplit = 1, TopLeftCell = "A2", ActivePane = PaneValues.BottomLeft, State = PaneStateValues.Frozen }) { WorkbookViewId = 0 }),
+            new Columns(Width(1, 18), Width(2, 32), Width(3, 50), Width(4, 40), Width(5, 40)),
+            new SheetData(Row(1, SubclassColumns.Select(column => column.Header).ToArray(), 1)),
+            new AutoFilter { Reference = "A1:E1" }));
 
         workbook.Workbook.Append(new DefinedNames(new DefinedName { Name = Marker, Hidden = true, Text = MarkerValue }));
         workbook.Workbook.Save();

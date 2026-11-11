@@ -141,12 +141,12 @@ public static class HtmlSignalRecoveryData
             {
                 GapPart("identified", "Identified", row.IdentifiedEnvelope, row.TotalEnvelope),
                 GapPart("denovo", "De novo in the database", row.DatabaseDeNovoEnvelope, row.TotalEnvelope),
-                GapPart("world", "De novo only in the family world", row.WorldDeNovoEnvelope, row.TotalEnvelope),
+                GapPart("world", "De novo only in the UniProt families", row.WorldDeNovoEnvelope, row.TotalEnvelope),
             },
             Total = Number("total", "Total family signal shown", row.TotalEnvelope, "area", "stored pooled signal area"),
         }).ToArray();
         return new() { Id = id, Kind = "gap", Title = title, Rows = rows, Maximum = Maximum(rows, 0),
             Basis = "Stored pooled signal area",
-            Legend = "Bars compare pooled signal area, with each part's percentage of that family's displayed total. Signal found only in the family world stays outside the database family composition; shared and unexplained global signal stays outside every family bar. These are pooled values, not run means; no whiskers are drawn." };
+            Legend = "Bars compare pooled signal area, with each part's percentage of that family's displayed total. Signal found only in the UniProt families stays outside the database family composition; shared and unexplained global signal stays outside every family bar. These are pooled values, not run means; no whiskers are drawn." };
     }
 }

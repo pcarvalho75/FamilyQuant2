@@ -39,7 +39,7 @@ public static class ReportCurrentResults
             {
                 var composition = Export("composition-assigned", "Database-family composition diagnostic, all runs pooled", "family_composition_credited.csv",
                     CsvReport.BuildFamilyComposition(families, policy, assigned, "fraction of signal credited to database families; " + basis, ProteinNameFormatting.ForNewOutput),
-                    "All runs pooled. Family rows sum to 1 when credited signal is available. Family-world-only signal is excluded. The mean-of-per-run composition is a separate result. These are signal shares, not a direct measurement of sample mass.",
+                    "All runs pooled. Family rows sum to 1 when credited signal is available. Signal found only in UniProt families is excluded. The mean-of-per-run composition is a separate result. These are signal shares, not a direct measurement of sample mass.",
                     "family_user_id", "description", "signal_primary_estimate", "fraction");
                 results.Insert(0, composition with
                 {
@@ -86,21 +86,21 @@ public static class ReportCurrentResults
         if (world != null)
         {
             string csv = world.BuildCsv();
-            quality.Add(ReportWordMembership.FilterWorld(Export("quality-family-world", "Family-world support and rates", "family_world_rates.csv", csv,
+            quality.Add(ReportWordMembership.FilterWorld(Export("quality-family-world", "UniProt families support and rates", "family_world_rates.csv", csv,
                 "Decoy ratio is decoy signal divided by credited signal. Right rate is correct known credits divided by known credits and remains unavailable below the stored evidence floor.",
                 "family", "decoy_rate", "known_credited", "known_credited_true", "right_rate", "evidence")
                 with { Columns = new[] { "Family", "Decoy ratio", "Known credits", "Correct credits", "Right rate", "Evidence" } }, world, grouping));
             quality.Add(new ReportParagraph("quality-world-rules", world.Rules + "\n" + world.KnownAnswerMethod));
             if (world.CompositionRules.Length > 0)
                 gap.Add(ReportWordMembership.FilterWorld(Export("database-gap-table", "Stored Database gap components", "database_gap.csv", world.BuildCompositionCsv(),
-                    "Identified, database de novo and family-world-only signal are distinct. Global shared and unexplained rows are retained; family-world-only signal is not added to database family composition.",
+                    "Identified, database de novo and signal found only in UniProt families are distinct. Global shared and unexplained rows are retained; signal found only in UniProt families is not added to database family composition.",
                     "family", "identified_envelope", "database_de_novo_envelope", "family_world_de_novo_envelope", "fraction_of_measured_total")
-                    with { Columns = new[] { "Family or global row", "Identified", "Database de novo", "Family-world only", "Fraction of measured signal" } }, world, grouping));
+                    with { Columns = new[] { "Family or global row", "Identified", "Database de novo", "UniProt families only", "Fraction of measured signal" } }, world, grouping));
             else gap.Add(new ReportParagraph("gap-table-unavailable", "Database gap components: not computed in this project."));
         }
         else
         {
-            quality.Add(new ReportParagraph("quality-world-unavailable", "Family-world support and error rates: not computed in this project."));
+            quality.Add(new ReportParagraph("quality-world-unavailable", "UniProt families support and error rates: not computed in this project."));
             gap.Add(new ReportParagraph("gap-unavailable", "Database gap: not computed in this project."));
         }
         foreach (var (id, title, stored) in new[] { ("subclasses", "Subclass parts", manifest.FamilySubclassParts != null),

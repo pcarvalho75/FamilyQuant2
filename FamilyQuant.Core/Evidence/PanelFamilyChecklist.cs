@@ -12,9 +12,21 @@ public enum PanelChecklistMatch { None = 0, UniProtFamily = 1, Pfam = 2, NameTex
 public sealed record PanelChecklistProtein(int ProteinIndex, string Identifier, PanelChecklistMatch Match,
     bool? Reviewed, bool Placed, string Reason, IReadOnlyList<string>? ScopePhrases = null, bool IsLocked = false);
 
+public enum PanelChecklistState { WithProteins, NeedsChoice, NoPfamCode, NoDatabaseMatch }
+
 public sealed record PanelChecklistFamily(string Key, string Name, string Decision, string? TargetKey,
-    IReadOnlyList<PanelChecklistProtein> Proteins, int ExcludedContaminants = 0)
+    IReadOnlyList<PanelChecklistProtein> Proteins, int ExcludedContaminants = 0, bool HasPfamCode = true, bool NeedsLinkChoice = false)
 {
+    public PanelChecklistState State => Placed > 0 ? PanelChecklistState.WithProteins
+        : NeedsLinkChoice ? PanelChecklistState.NeedsChoice : !HasPfamCode ? PanelChecklistState.NoPfamCode
+        : Matches == 0 ? PanelChecklistState.NoDatabaseMatch : PanelChecklistState.NeedsChoice;
+    public string StateText => State switch
+    {
+        PanelChecklistState.WithProteins => "Has " + Placed.ToString("N0") + (Placed == 1 ? " protein" : " proteins"),
+        PanelChecklistState.NeedsChoice => "Waits for a choice",
+        PanelChecklistState.NoPfamCode => "Has no Pfam code",
+        _ => "Matches no database protein",
+    };
     public int Matches => Proteins.Count;
     public int Reviewed => Proteins.Count(protein => protein.Reviewed == true);
     public int Placed => Proteins.Count(protein => protein.Placed);
@@ -101,7 +113,9 @@ public static class PanelFamilyChecklist
                     : "Merge into " + panel.Families.Single(item => item.Key == targetKey).DisplayName,
                 _ => "Quantify",
             };
-            return new PanelChecklistFamily(family.Key, string.IsNullOrWhiteSpace(family.DisplayName) ? family.Key : family.DisplayName, decision, targetKey, matches, excludedContaminants);
+            return new PanelChecklistFamily(family.Key, string.IsNullOrWhiteSpace(family.DisplayName) ? family.Key : family.DisplayName, decision, targetKey, matches, excludedContaminants,
+                domains.Count > 0, proposal.PanelContext.Links.Any(link => link.NeedsConfirmation
+                    && link.CandidateFamilyKeys.Contains(targetKey ?? family.Key, StringComparer.Ordinal)));
         }).ToArray();
     }
 }
