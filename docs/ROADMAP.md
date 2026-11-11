@@ -48,8 +48,8 @@ Proposed; staffed on Paulo's word (D115). The engines are the same as in version
 | Orchestrator | Claude, main session | Assigns work, routes reviews, merges, runs both releases and keeps this file and the board true. It runs every check on Ana's data (QX4, AP1, AP2, AP6) and her panel sheet (AP3), drafts the message to her (AP4) and drops the ledger rows Paulo removes | |
 | FQDeNovo (DN) | Sol 6.1 xhigh | QX1 to QX3 (the crash), then SF1 | `D:/FamilyQuant-wt/denovo` |
 | FQImport (IM) | Sol 6.1 xhigh | IM1 to IM9: Import family list | `D:/FamilyQuant-wt/import` |
-| FQPanel (PN) | Sol 6.1 xhigh | RG2, RG4, RG5: the panel rules in Core | `D:/FamilyQuant-wt/panel` |
-| FQSimple (SM) | Sol 6.1 xhigh | RG1, RG3, RG6 to RG8 and SF2 to SF4: the Review grouping and Families screens | `D:/FamilyQuant-wt/simple` |
+| FQPanel (PN) | Sol 6.1 xhigh | RG2, RG4, RG5: the panel rules in Core; RG8 and SF4 on the Curate families screen (moved from FQSimple 11-11 13:58, while RG4 waited on a seam) | `D:/FamilyQuant-wt/panel` |
+| FQSimple (SM) | Sol 6.1 xhigh | RG1, RG3, RG6, RG7, SF2, SF3: the Review grouping window | `D:/FamilyQuant-wt/simple` |
 | FQRev (RV) | Grok 4.7 xhigh | Reviews every READY under D89 and D91 and fixes small defects itself. A fix over 20 lines is checked by a builder of another lane | `D:/FamilyQuant-wt/review` |
 
 The builders and the reviewer see code and synthetic data only. Ana's project, panel sheet and RAW files are read only by the desk. The desk runs the check commands the builders write and passes back counts, never rows.
@@ -148,7 +148,7 @@ Ana, slide 26: "fiquei confusa sobre como agir em relação a cada uma das diver
 | RG5 | Rows told apart by UniProt family when Pfam cannot (Ana on SVMPI). A row with Pfam Cystatin and UniProt family "fetuin family" takes those proteins; the other Cystatin row takes the rest. If AP2 shows them out of scope, D113 decides how they come in | M | 1.0 | AP2, RG4 | RL1 | A synthetic test with two rows sharing one Pfam code, plus the desk's count on Ana's project; reviewed | PN | FQPanel | 0 | 0 |  |
 | RG6 | The Family checklist answers "which wins, 23 or 42?" (slide 24). Every row of the user's list shows its state: has N proteins, waits for a choice, has no Pfam code, or matches no database protein. The top line reads "Your list: 42 families, 23 with proteins, ..." | L | 0.6 |  | RL1 | Screen render on a synthetic panel, plus a test; reviewed | SM | FQSimple | 0 | 0 |  |
 | RG7 | Where every protein goes (Ana 11-11). A short panel gives three counts, one sentence each: proteins in a family of the list; in-scope proteins in no family of the list, which keep their sequence family (named after its proteins) and are measured as one; and proteins outside the scope. Help shows the same picture in general terms (D21) | M | 0.8 |  | AP4, RL1 | Screen render and a Help test; reviewed | SM | FQSimple | 0 | 0 |  |
-| RG8 | "Fetch family world" gets a plain name (slide 32; Ana read it as "family word"; D114). The label and the Help say what it counts: the UniProt families of the in-scope proteins. The 42 in her project without a list is that count, not her list. The rename is mapped in the ledger | L | 0.4 |  | RL1 | Screen render and ledger mapping; reviewed | SM | FQSimple | 0 | 0 |  |
+| RG8 | "Fetch family world" gets a plain name (slide 32; Ana read it as "family word"; D114). The label and the Help say what it counts: the UniProt families of the in-scope proteins. The 42 in her project without a list is that count, not her list. The rename is mapped in the ledger | L | 0.4 |  | RL1 | Screen render and ledger mapping; reviewed | PN | FQPanel | 0 | 0 |  |
 
 ### W30 Small fixes from the deck (FQDeNovo, FQSimple, FQRev)
 
@@ -157,7 +157,7 @@ Ana, slide 26: "fiquei confusa sobre como agir em relação a cada uma das diver
 | SF1 | After Build writes the .fcf, Curate families opens on it (slide 3) | L | 0.4 | QX3 | RL1 | Test; reviewed | DN | FQDeNovo | 0 | 0 |  |
 | SF2 | The text under "Scope words found: yes" is no longer cut off (slide 27): the details panel wraps | L | 0.3 |  | RL1 | Screen renders at 1366x820 and 1024x768; reviewed | SM | FQSimple | 0 | 0 |  |
 | SF3 | The alignment says what it aligns (slide 28: 2 selected, 9 shown). Find why. Then either align the selection only, or title it "2 selected and 7 reviewed references" | L | 0.4 |  | RL1 | Test; reviewed | SM | FQSimple | 0 | 0 |  |
-| SF4 | The Families count names what is hidden (slide 4: "19,948 visible · 40,407 in file"). It becomes "19,948 shown; 20,459 decoy and contaminant families hidden (View)" | L | 0.2 |  | RL1 | Screen render; reviewed | SM | FQSimple | 0 | 0 |  |
+| SF4 | The Families count names what is hidden (slide 4: "19,948 visible · 40,407 in file"). It becomes "19,948 shown; 20,459 decoy and contaminant families hidden (View)" | L | 0.2 |  | RL1 | Screen render; reviewed | PN | FQPanel | 0 | 0 |  |
 
 ### W31 Release 2.1.16 (Orchestrator)
 
