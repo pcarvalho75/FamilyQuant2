@@ -17,6 +17,7 @@ The inputs for this version:
 - Paulo, 11-11: "based on these questions, the answers, the slides, do a roadmap to solve all these issues to the next version"
 - Paulo, 11-11 13:48: "the goaals need to be very clear based on the slides and all the requests ana did through audions" (AP0)
 - Paulo, 11-11 13:50: "you need to simplify execution as much as possible, only test when really necessary, etc... because this should be ready by early morning" (D109, D116)
+- Paulo, 11-11 13:56: "bundle reviewes and merges and dont do major tests for every step, so we can progress swuiftly" (D116)
 - Ana, slide 21: "achei que o Import family list poderia ser mais simples ... Às vezes, menos é mais."
 - Ana, slide 29: "Parei aqui, não consigo avançar com o Apply grouping desabilitado"
 - Ana, 11-11: "a melhor coisa é quantificar todo mundo e tirar essa coisa do color, que eu acho que só complica sem necessidade"
@@ -166,6 +167,41 @@ Ana, slide 26: "fiquei confusa sobre como agir em relação a cada uma das diver
 | RL2 | Release 2.1.16 after AP6: version bump, package, notes, README, and the update check from 2.1.15 | M | 1.0 | AP6 | AP5, RL3 | Published as Latest; an installed 2.1.15 offers 2.1.16 | Orchestrator | not staffed | 0 | 0 |  |
 | RL3 | The website follows 2.1.16 (new import and Review grouping screens), on Paulo's word, as D105 | L | 0.5 | RL2 |  | Upload folder ready | Orchestrator | not staffed | 0 | 0 |  |
 
+## Every request, traced (AP0)
+
+Each comment on Ana's 34 slides and each request in her nine voice notes of 11-11, with its step. "Desk" means the desk traced the premise in the code; "P0" means the builder confirms it in the code before building and puts the line in its READY; FQRev's R0 checks every brief against the code.
+
+| Source | Ana's request, in short | Step | Premise checked |
+|---|---|---|---|
+| Slide 3 | After Build writes the .fcf, open it in Curate families | SF1 | P0 |
+| Slide 4 | "19,948 visible, 40,407 in file": what is hidden? | SF4 | P0 (slide 32 shows the same 20,459 hidden) |
+| Slide 6 | "Try with the example" confuses more than it helps | IM4 | P0 |
+| Slide 7 | The consensus sheet's extra columns pollute; Notes is optional, so drop it; say "Use Template"; simplify to the maximum | IM2, IM3, IM8 | P0 |
+| Slide 9 | The SVMPI row was added by hand; the rest is the consensus of 14 venomics papers | AP1, AP2, RG5 | Desk: BJ46a (Q9DGI0) is in her database; its Pfam is Cystatin, its UniProt family fetuin; the panel row has Pfam only (`FamilyPanel.cs`) |
+| Slide 13 | How the template's Decision relates to the window's options; are Colour categories needed? | IM3, IM5, AP3 | P0 |
+| Slide 14 | Where subclasses go in the sheet, and what the window's subclass options mean | IM9, AP3 | Desk: `SubclassAssignment.ClassifyDirect` matches subfamily names; `WithoutRankSuffix` strips only " subfamily" and " sub-subfamily" |
+| Slide 17 | Why confirm Pfam again when the sheet gives it; what "Continue without matches" does | IM6 | P0 |
+| Slides 19, 20 | The template with an Instructions sheet blocks the review; deleting that sheet works | IM1 | Desk: the program's own template writes the Instructions sheet (`PanelImportTemplate.InstructionsSheet`); why the review stops is P0 |
+| Slide 21 | Had to close without saving to reach File > Save; is it lost?; the import is too sophisticated ("menos é mais") | IM7, IM8 | P0 |
+| Slide 24 | The program proposes 23 families, her sheet has 42: which wins? | RG6, RG7 | P0 |
+| Slide 25 | "Show all options" is still hard to understand | Paulo's session with Ana, after this version | Not a step: she asks to do this step with Paulo (slide 26) |
+| Slide 26 | Confused about how to act in Proteins, Panel links, Family checklist and Unassigned | RG1, RG3, RG6, RG7, and the session | P0 |
+| Slide 27 | The lines under "Scope words found: yes" cannot be read | SF2 | P0 |
+| Slide 28 | Selected 2 proteins, the alignment shows 9 | SF3 | P0 |
+| Slide 29 | Apply grouping stays disabled; the 19 pending choices; how they relate to her 42-row sheet | RG1, RG2, RG3, AP1 | P0 |
+| Slide 30 | Her workaround: reopened the .fcf without the import and grouped by evidence | No step; AP6 walks the import route | |
+| Slide 32 | A project without her sheet still shows 42 families for the "family word": how? | RG8 | Desk: the 42 is the count of distinct UniProt families among the in-scope proteins of her database (`FamilyWorldSnapshot.cs:70-73`, `CurationViewModel.FamilyWorld.cs:27`); 7,719 UniProt entries were fetched for them. It does not come from her sheet; the same number is a coincidence |
+| Slide 33 | Her Quantify settings | QX4 uses them | |
+| Slide 34 | Quantify fails: "The calling thread cannot access this object" | QX1, QX2, QX3, QX4 | Desk: traced to `AppOperationHost.cs:173` and `MainWindow.Status.cs:70` (W26) |
+| Voice note 11.38 | Decision and Colour categories were made up; quantify every family and drop the colours | IM3, IM5, AP3 | as slide 13 |
+| Voice note 11.38 | She is free from 11-12 afternoon | D109: ready by early morning | |
+| Voice note 11.40 | The ties: follow the consensus; the desk builds the list | AP1, RG2 | |
+| Voice note 11.42 | BJ46a must join neither the tripeptides nor the canonical cystatins; "não sei como fazer" | AP2, RG4, RG5, D113 | as slide 9 |
+| Voice notes 11.43, 11.45 | What "measured in its own sequence family" means; "para onde vai cada coisa" | RG7, AP4 | P0 |
+| Voice notes 11.46.01 and 11.46.36 | The rare families will not appear or fall under the threshold into "Outras"; Pfam per name is optional | AP3 (the row goes) | |
+| Voice note 11.47 | Ignore AMP and the endopeptidase inhibitor | AP3 | |
+| Voice note 11.48 | Subclasses: only true lectins against snaclecs, and PLI alpha, beta and gamma (different families, all phospholipase inhibitors); not SVMP P-I to P-III, PLA2 D49/K49 or short and long disintegrins | IM9, AP3 | IM9 proves both shapes: a split by UniProt family name and a split by Pfam |
+
 ## Critical path
 
 **Today.** The crash goes first: QX1, QX2, then QX3 and the desk's real run QX4. Meanwhile the desk builds AP0, AP1 and AP2 on 2.1.15, since ties and scope do not depend on Quantify.
@@ -185,7 +221,6 @@ Ana, slide 26: "fiquei confusa sobre como agir em relação a cada uma das diver
 | D112 | Tie choices written back into the sheet as a "UniProt family" column | Yes | RG4 |
 | D113 | BJ46a out of scope, if AP2 shows it | A row's own UniProt family brings its proteins into scope. The alternative is Ana adding a scope word such as "Metalloprotease inhibitor", which brings in every protein carrying that keyword | RG5 |
 | D114 | Names | "Use template", Ana's word, for "Save a template"; "Fetch UniProt families" for "Fetch family world" | IM2, RG8 |
-| D115 | The team | Four Sol builders (DN, IM, PN, SM) and FQRev reviewing, as in version 19 | Start |
 
 ### Decisions in force
 
@@ -193,8 +228,9 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 
 | ID | Question | Taken |
 |---|---|---|
+| D115 | The team? | Four Sol builders (FQDeNovo, FQImport, FQPanel, FQSimple) and FQRev (Grok) reviewing, launched 11-11 13:47 on Paulo's "im assuming you are already working on the new roadmap" |
 | D109 | One release or two? | One: 2.1.16 with every step, by early morning 11-12. Paulo, 11-11 13:50: "simplify execution as much as possible ... this should be ready by early morning" |
-| D116 | How much testing? | Lean gates: one focused test per step that changes behaviour; a screen render only for layout steps (IM8, RG1, RG6, RG7, SF2); the reviewer runs the step's own test; the full suite once at RL1; the ledger refreshed only for touched rows. Paulo, 11-11 13:50: "only test when really necessary" |
+| D116 | How much testing? | Lean gates: one focused test per step that changes behaviour; a screen render only for layout steps (IM8, RG1, RG6, RG7, SF2); the reviewer runs the step's own test; reviews and merges in batches (one build per lane tip, the batch's new tests only); the full suite once at RL1; the ledger refreshed only for touched rows. Paulo, 11-11 13:50: "only test when really necessary"; 13:56: "bundle reviewes and merges and dont do major tests for every step" |
 | D21 | Is the program general? | Yes: nothing the user sees names an organism, a venom or a sample's numbers. Paulo, 11-02 |
 | D31 | How releases reach users | A zip on the public releases-only repo pcarvalho75/FamilyQuant2-releases; Help > Check for updates reads it. The code repo stays private. Paulo, 11-02 |
 | D32 | Publishing | The desk publishes when Paulo asks. 2.1.0 asked for on 11-03 ("we publish it in github and she installs it from there") |
