@@ -35,11 +35,12 @@ internal static partial class Program
         var stage = typeof(FullXicComputer).Assembly.GetType("FamilyQuant.FullXicInputStage", true)!;
         var prepare = stage.GetMethod("Prepare", BindingFlags.NonPublic | BindingFlags.Static)!;
         var create = stage.GetMethod("CreateResult", BindingFlags.NonPublic | BindingFlags.Static)!;
-        bool workerReported = false, warningTouchedUi = false;
+        bool workerReported = false, warningTouchedUi = false, detailTouchedUi = false;
         var grid = new Grid(); var child = new Border(); grid.Children.Add(child);
-        var model = new ComputeXicViewModel("Synthetic dispatcher fixture", compute: (request, _, token) => Task.Run(() =>
+        var model = new ComputeXicViewModel("Synthetic dispatcher fixture", compute: (request, progress, token) => Task.Run(() =>
         {
             workerReported = !grid.Dispatcher.CheckAccess();
+            progress.Report("Synthetic worker detail");
             try
             {
                 var input = prepare.Invoke(null, new object?[] { raw, package, source, request.Options, null, null, request.Operation });
@@ -50,13 +51,16 @@ internal static partial class Program
         }, token)) { RawDirectory = raw, SeproPackage = package, DeNovoDirectory = source };
         model.PropertyChanged += (_, change) =>
         {
+            grid.Children.Contains(child);
+            if (change.PropertyName == nameof(ComputeXicViewModel.Status) && model.Status == "Synthetic worker detail") detailTouchedUi = true;
             if (change.PropertyName == nameof(ComputeXicViewModel.DeNovoRunWarning) && model.DeNovoRunWarning.Length > 0)
                 warningTouchedUi = grid.Children.Contains(child);
         };
         Task work = AppOperationHost.OnUi(grid, model.ComputeAsync);
         FinishBusyTask(work); work.GetAwaiter().GetResult(); PumpDispatcher();
         Check("QX1 warning originates on a worker thread", workerReported);
-        Check("QX1 Quantify completes with a UI-touching warning handler: " + model.Status, model.Computed && warningTouchedUi);
+        Check("QX1 Quantify completes with UI-touching warning and detail handlers: " + model.Status,
+            model.Computed && warningTouchedUi && detailTouchedUi);
         Check("QX1 the missing-run warning text stays intact", model.Computed
             && model.DeNovoRunWarning == "No de novo calls in the selected source(s) for RAW run run02.");
     }
