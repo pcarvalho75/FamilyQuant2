@@ -5781,6 +5781,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1962**; OPEN r
 
 ## Added contracts after the frozen source
 
+| FQ2-IMPORT-USE-TEMPLATE | MAP | IM2 renames the import window's Save a template action and the File menu's Save family list template action to Use template (D114). Both call the same shared workbook writer at a chosen location, leave the project unchanged and explain that the empty sheet is ready to fill and import. FQ2-PANEL-IMPORT-TEMPLATE and FQ2-IMPORT-FAMILY-LIST retain their underlying template action | test:PanelImportTemplateTests; test:ImportTemplateWorkbookTests |
+
 | FQ2-HTML-GAP-ORDER | MAP | U5-gap-order sorts the HTML Signal sources by family rows by stored pooled total, largest first, preserving native order for ties and keeping zero rows. Every native part, total, family percentage and Word chart input/order remains unchanged | test:HtmlSignalRecoveryTests; test:HtmlRecoveryExplanationTests |
 
 | FQ2-HTML-RECOVERY-GUIDE | MAP | U5 explains peptide-feature grain, the four recovery readings and their TIC base, measured isotope gaps, the independent detector without peptide-FDR calibration, pooling, and percentage points versus identified-baseline relative increase. The existing signal Help opens the same guide. Desk M18 adds program-computed percentages of each Database gap family's displayed total alongside native G5 pooled areas; the separate comparison panel retains its all-feature denominator. Quiet tracks and TIC reference retain every native value | test:HtmlRecoveryExplanationTests; test:HtmlSignalRecoveryTests |

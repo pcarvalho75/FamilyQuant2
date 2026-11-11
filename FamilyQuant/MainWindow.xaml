@@ -22,7 +22,7 @@
                           ToolTip="Reads a .fqproj with stored results or an older .fcf with families only. Save, Discard or Cancel protects changes before replacing the open project."/>
                 <MenuItem x:Name="MenuItemFamilyPanel" Header="Import family list" Click="MenuItemFamilyPanel_Click" IsEnabled="False"
                           ToolTip="Opens the family-list import wizard, where you can also edit the current panel. Open a project and finish the current operation first; a confirmed import is one undoable project change."/>
-                <MenuItem x:Name="MenuItemFamilyListTemplate" Header="Save family list template" Click="MenuSaveFamilyListTemplate_Click"
+                <MenuItem x:Name="MenuItemFamilyListTemplate" Header="Use template" Click="MenuSaveFamilyListTemplate_Click"
                           ToolTip="Writes an Excel workbook with family-list columns and instructions to a location you choose. This file can be edited for import; Undo does not revert file writes."/>
                 <Separator/>
                 <MenuItem x:Name="MenuItemSaveProject" Header="Save" Command="Save" InputGestureText="Ctrl+S" IsEnabled="False"
