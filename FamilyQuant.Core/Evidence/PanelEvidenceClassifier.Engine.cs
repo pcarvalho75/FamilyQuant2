@@ -104,6 +104,10 @@ public static partial class PanelEvidenceClassifier
         string definition = DefinitionFingerprint(panel);
         var groups = new Dictionary<string, LinkSupport>(StringComparer.Ordinal);
         var candidateCache = new Dictionary<string, DomainCandidates>(StringComparer.Ordinal);
+        var namedFamilies = panel.Families.SelectMany(f => f.UniProtFamilies.Select(name =>
+                (Name: name.Trim(), Key: FamilyPanelValidation.ResolveFamilyKey(panel, f.Key) ?? f.Key)))
+            .GroupBy(row => row.Name, StringComparer.OrdinalIgnoreCase).ToDictionary(g => g.Key,
+                g => g.Select(row => row.Key).ToHashSet(StringComparer.Ordinal), StringComparer.OrdinalIgnoreCase);
         foreach (NeighbourReference reference in references)
         {
             if (reference.Evidence?.Reviewed != true || !EvidenceClassifier.IsInScope(reference.Evidence, options.ScopeTerms)
@@ -111,12 +115,22 @@ public static partial class PanelEvidenceClassifier
             string architecture = ArchitectureKey(reference.Evidence);
             if (!candidateCache.TryGetValue(architecture, out var candidates))
                 candidateCache[architecture] = candidates = Candidates(panel, EvidenceDomains.Ordered(reference.Evidence));
-            foreach (string family in SourceFamilies(reference.Evidence))
+            var sourceBefore = new HashSet<string>(StringComparer.Ordinal);
+            var sourceAfter = new HashSet<string>(StringComparer.Ordinal);
+            string[] sourceFamilies = SourceFamilies(reference.Evidence);
+            foreach (string family in sourceFamilies)
             {
-                Add(family, "", candidates, reference.Accession);
-                if (architecture != "[]") Add(family, architecture, candidates, reference.Accession);
+                string[] named = namedFamilies.TryGetValue(family, out var owners)
+                    ? candidates.All.Where(owners.Contains).ToArray() : Array.Empty<string>();
+                string[] before = named.Length > 0 ? named : candidates.All;
+                string[] after = named.Length > 0 ? named : candidates.Coverage;
+                Add(family, "", candidates.All, before, after, reference.Accession);
+                if (architecture != "[]") Add(family, architecture, candidates.All, before, after, reference.Accession);
+                sourceBefore.UnionWith(before); sourceAfter.UnionWith(after);
             }
-            if (architecture != "[]") Add("", architecture, candidates, reference.Accession);
+            if (architecture != "[]") Add("", architecture, candidates.All,
+                sourceFamilies.Length > 0 ? sourceBefore : candidates.All,
+                sourceFamilies.Length > 0 ? sourceAfter : candidates.Coverage, reference.Accession);
         }
         var confirmed = panel.EvidenceLinks.GroupBy(c => LinkKey(c.SourceFamily, c.ArchitectureKey), StringComparer.Ordinal)
             .ToDictionary(g => g.Key, g => g.Count() == 1 ? g.Single() : throw new ArgumentException("A panel link has more than one saved choice."), StringComparer.Ordinal);
@@ -126,8 +140,10 @@ public static partial class PanelEvidenceClassifier
             confirmed.TryGetValue(pair.Key, out var choice);
             bool current = choice != null && choice.PanelDefinitionFingerprint == definition
                 && (choice.PanelFamilyKey == null || candidates.Contains(choice.PanelFamilyKey, StringComparer.Ordinal));
-            bool coverageResolved = !current && usePfamCoverage && candidates.Length > 1 && pair.Value.CoverageCandidates.Count == 1;
-            if (!current && usePfamCoverage) candidates = pair.Value.CoverageCandidates.Order(StringComparer.Ordinal).ToArray();
+            bool coverageResolved = !current && usePfamCoverage && pair.Value.BeforeCoverageCandidates.Count > 1
+                && pair.Value.CoverageCandidates.Count == 1;
+            if (!current) candidates = (usePfamCoverage ? pair.Value.CoverageCandidates : pair.Value.BeforeCoverageCandidates)
+                .Order(StringComparer.Ordinal).ToArray();
             return new PanelFamilyLinkProposal
             {
                 Key = pair.Key, SourceFamily = pair.Value.SourceFamily, ArchitectureKey = pair.Value.Architecture,
@@ -138,12 +154,14 @@ public static partial class PanelEvidenceClassifier
             };
         }).ToArray();
 
-        void Add(string family, string architecture, DomainCandidates candidates, string accession)
+        void Add(string family, string architecture, IEnumerable<string> candidates,
+            IEnumerable<string> before, IEnumerable<string> after, string accession)
         {
             string key = LinkKey(family, architecture);
             if (!groups.TryGetValue(key, out var group)) groups.Add(key, group = new(family, architecture));
-            group.Candidates.UnionWith(candidates.All);
-            group.CoverageCandidates.UnionWith(candidates.Coverage);
+            group.Candidates.UnionWith(candidates);
+            group.BeforeCoverageCandidates.UnionWith(before);
+            group.CoverageCandidates.UnionWith(after);
             group.Accessions.Add(accession);
         }
     }
@@ -153,6 +171,7 @@ public static partial class PanelEvidenceClassifier
         internal string SourceFamily { get; } = sourceFamily;
         internal string Architecture { get; } = architecture;
         internal HashSet<string> Candidates { get; } = new(StringComparer.Ordinal);
+        internal HashSet<string> BeforeCoverageCandidates { get; } = new(StringComparer.Ordinal);
         internal HashSet<string> CoverageCandidates { get; } = new(StringComparer.Ordinal);
         internal HashSet<string> Accessions { get; } = new(StringComparer.Ordinal);
     }

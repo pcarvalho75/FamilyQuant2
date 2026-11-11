@@ -301,6 +301,9 @@ namespace FamilyQuant
             sb.AppendLine("In Panel links, tied domain matches use the fraction of each row's Pfam list present");
             sb.AppendLine("in the protein. The most complete row wins; equal coverage still asks for a choice.");
             sb.AppendLine("Your confirmed choices take precedence and are kept when the project is saved.");
+            sb.AppendLine("Save panel as spreadsheet writes named link choices in the UniProt family column.");
+            sb.AppendLine("Importing that column restores exact family links among the supported rows without");
+            sb.AppendLine("asking again. Separate several source family names with semicolons.");
             sb.AppendLine("If the project has no stored UniProt evidence, Download and continue runs Fetch evidence");
             sb.AppendLine("before opening the review; Cancel leaves the project unchanged. If no reviewed accession");
             sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");
