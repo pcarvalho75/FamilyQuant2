@@ -15,7 +15,9 @@ namespace FamilyQuant.Tests;
 internal static partial class Program
 {
     private sealed record QuantifyScreenConfiguration(string Project, string Raw, string Sepro, string DeNovo, string Cache, string Output,
-        bool SaveProject = false, int? IsotopeCeiling = null, int? MinimumPoints = null, double? PeaksMinimumAlc = null);
+        bool SaveProject = false, int? IsotopeCeiling = null, int? MinimumPoints = null, double? PeaksMinimumAlc = null,
+        string? DeNovoMode = null, double? DeepNovoMinimumScore = null, int? MinimumLength = null,
+        int? StretchLength = null, double? StretchFloor = null, bool? PatternLabWins = null);
 
     [TestCommandTable]
     private static IEnumerable<TestCommand> QuantifyScreenRunCommands() =>
@@ -60,6 +62,19 @@ internal static partial class Program
             if (config.IsotopeCeiling.HasValue) model.IsotopeCeiling = config.IsotopeCeiling.Value;
             if (config.MinimumPoints.HasValue) model.MinimumPoints = config.MinimumPoints.Value;
             if (config.PeaksMinimumAlc.HasValue) model.Filters.PeaksMinimumAlc = config.PeaksMinimumAlc.Value.ToString("R", CultureInfo.InvariantCulture);
+            if (config.DeNovoMode != null) model.Filters.ModeTag = config.DeNovoMode;
+            if (config.DeepNovoMinimumScore.HasValue) model.Filters.DeepNovoMinimumScore = config.DeepNovoMinimumScore.Value.ToString("R", CultureInfo.InvariantCulture);
+            if (config.MinimumLength.HasValue) model.Filters.MinimumLength = config.MinimumLength.Value.ToString(CultureInfo.InvariantCulture);
+            if (config.StretchLength.HasValue) model.Filters.StretchLength = config.StretchLength.Value.ToString(CultureInfo.InvariantCulture);
+            if (config.StretchFloor.HasValue) model.Filters.StretchFloor = config.StretchFloor.Value.ToString("R", CultureInfo.InvariantCulture);
+            if (config.PatternLabWins.HasValue) model.PatternLabWinsScanConflicts = config.PatternLabWins.Value;
+            var settings = new
+            {
+                DeNovoMode = model.Filters.ModeTag, model.Filters.PeaksMinimumAlc, model.Filters.DeepNovoMinimumScore,
+                model.Filters.MinimumLength, model.Filters.StretchLength, model.Filters.StretchFloor,
+                IsotopeCeiling = model.IsotopeCount, MinimumPoints = model.MinPointsForQuant, PatternLabWins = model.PatternLabWinsScanConflicts,
+            };
+            Console.WriteLine("SETTINGS " + JsonSerializer.Serialize(settings));
             var grid = new Grid(); var screen = new QuantifyControl(model); grid.Children.Add(screen);
             var warnings = new List<string>();
             model.PropertyChanged += (_, _) => grid.Children.Contains(screen);
@@ -85,7 +100,7 @@ internal static partial class Program
             {
                 Exit = 0, model.RunSummary, Warnings = warnings, Rows = model.Result.Rows.Count,
                 Runs = model.Result.Manifest.PerRunTic.Count, model.IsotopeCount, model.MinPointsForQuant,
-                model.Filters.PeaksMinimumAlc, config.SaveProject, InputUnchanged = true,
+                model.Filters.PeaksMinimumAlc, Settings = settings, config.SaveProject, InputUnchanged = true,
             }, new JsonSerializerOptions { WriteIndented = true }));
             Console.WriteLine("RESULT " + model.RunSummary.Replace('\r', ' ').Replace('\n', ' '));
             return 0;
@@ -105,10 +120,16 @@ internal static partial class Program
         string raw = Path.Combine(root, "raw"), source = Path.Combine(root, "source"), cache = Path.Combine(root, "cache");
         Directory.CreateDirectory(raw); Directory.CreateDirectory(source); Directory.CreateDirectory(cache);
         foreach (string run in new[] { "run01", "run02" }) File.WriteAllText(Path.Combine(raw, run + ".raw"), "Synthetic cache fixture, never an acquisition.");
-        File.WriteAllText(Path.Combine(source, "run01.raw.denovoOnly.csv"),
+        File.WriteAllText(Path.Combine(source, "run01.raw.denovo.csv"),
             "Scan,Peptide,ALC (%),Length,m/z,z,RT,Area,local confidence (%)\n1,PEPTIDEK,99,8,500,2,1,100,99 99 99 99 99 99 99 99\n");
         string package = Path.Combine(root, "fixture.sepr2"); CreateShellSeproFixture(Array.Empty<(string, int)>()).Save(package);
-        string project = Path.Combine(root, "fixture.fqproj"); ProjectStore.WriteFqproj(project, new FamilyClusterFile(), Array.Empty<QuantRow>(), new QuantManifest());
+        string project = Path.Combine(root, "fixture.fqproj");
+        ProjectStore.WriteFqproj(project, new FamilyClusterFile(), Array.Empty<QuantRow>(), new QuantManifest
+        {
+            PatternLabWinsScanConflicts = false,
+            DeNovoInputs = new() { new() { SourceId = DeNovoSource.DeNovoAll.Id, MinimumConfidence = 12 },
+                new() { SourceId = DeNovoSource.DeepNovo.Id, MinimumConfidence = 13, SourcePriority = 1 } },
+        });
         string hash = TestFileHash.Upper(project);
         var storage = new FullXicStoragePaths(raw, cache); string fingerprint = FileFingerprint.Sha256(Path.Combine(raw, "run01.raw"));
         var extraction = DeNovoXicCache.Load(storage.Extraction("denovo", "run01").WritePath, "run01", DeNovoXicExtractor.ProductionPpm,
@@ -118,12 +139,17 @@ internal static partial class Program
             new object[] { storage.Detector("run01").WritePath, new Ms1EnvelopeDetectionResult { RunName = "run01", Ms1ScanCount = 10,
                 DetectedAreaByNeutralMass = new double[NeutralMassRanges.Count], NeutralMassBinWidth = NeutralMassRanges.Width }, fingerprint });
         var config = new QuantifyScreenConfiguration(project, raw, package, source, cache, Path.Combine(root, "output"),
-            SaveProject: true, IsotopeCeiling: 6, MinimumPoints: 5, PeaksMinimumAlc: 90);
+            SaveProject: true, IsotopeCeiling: 6, MinimumPoints: 5, PeaksMinimumAlc: 90, DeNovoMode: "peaks-all",
+            DeepNovoMinimumScore: 80, MinimumLength: 7, StretchLength: 5, StretchFloor: 90, PatternLabWins: true);
         string json = Path.Combine(root, "compute.json"); File.WriteAllText(json, JsonSerializer.Serialize(config));
-        int uiThread = Environment.CurrentManagedThreadId; bool worker = false;
+        int uiThread = Environment.CurrentManagedThreadId; bool worker = false, requestedSettings = false;
         void SyntheticOptions(FullXicOptions options)
         {
             worker = Environment.CurrentManagedThreadId != uiThread;
+            requestedSettings = options.IsotopeCount == 6 && options.MinPointsForQuant == 5 && options.PatternLabWinsScanConflicts
+                && options.DeNovoCriteria.MinLength == 7 && options.DeNovoCriteria.StretchLength == 5 && options.DeNovoCriteria.StretchFloor == 90
+                && options.DeNovoSelections is { Count: 1 } && options.DeNovoSelections[0].Source == DeNovoSource.DeNovoAll
+                && options.DeNovoSelections[0].MinimumConfidence == 90;
             typeof(FullXicOptions).GetProperty("ReadTicArea", BindingFlags.NonPublic | BindingFlags.Instance)!.SetValue(options, (Func<string, double>)(_ => 1000));
         }
         var console = Console.Out; var printed = new StringWriter(CultureInfo.InvariantCulture); int exit;
@@ -133,6 +159,17 @@ internal static partial class Program
         Check("QX4-tool real Quantify screen and cache-backed full engine complete on separate threads", exit == 0 && worker);
         Check("QX4-tool prints each missing-source warning and a successful result line", printed.ToString().Contains("WARNING No de novo calls in the selected source(s) for RAW run run02.", StringComparison.Ordinal)
             && printed.ToString().Contains("RESULT 1 quant rows across 1 runs.", StringComparison.Ordinal));
+        using (var effective = JsonDocument.Parse(printed.ToString().Split('\n').Single(line => line.StartsWith("SETTINGS ", StringComparison.Ordinal))[9..]))
+        {
+            var settings = effective.RootElement;
+            Check("QX4-tool-b every screen field overrides saved DeepNovo mode and is printed before compute", requestedSettings
+                && settings.GetProperty("DeNovoMode").GetString() == "peaks-all" && settings.GetProperty("PeaksMinimumAlc").GetString() == "90"
+                && settings.GetProperty("DeepNovoMinimumScore").GetString() == "80" && settings.GetProperty("MinimumLength").GetString() == "7"
+                && settings.GetProperty("StretchLength").GetString() == "5" && settings.GetProperty("StretchFloor").GetString() == "90"
+                && settings.GetProperty("IsotopeCeiling").GetInt32() == 6 && settings.GetProperty("MinimumPoints").GetInt32() == 5
+                && settings.GetProperty("PatternLabWins").GetBoolean()
+                && printed.ToString().IndexOf("SETTINGS ", StringComparison.Ordinal) < printed.ToString().IndexOf("WARNING ", StringComparison.Ordinal));
+        }
         if (exit == 0)
         {
             var result = ProjectStore.ReadFqproj(Path.Combine(config.Output, "computed.fqproj"));
