@@ -43,7 +43,9 @@ public sealed partial class PanelSpreadsheetReader
                             Fill = grid.FillAt(row, column), MergeRange = grid.MergeAt(row, column)
                         }).Where(cell => cell.Text.Length > 0 || cell.Fill.Length > 0).ToList()
                     }).Where(row => row.Cells.Count > 0).ToList();
-                    if (source.Preview.ProposedHeaderRow > 0)
+                    // The marked template's instructions include examples, not a second family list.
+                    if (source.Preview.ProposedHeaderRow > 0
+                        && !(source.Preview.IsTemplate && name == PanelImportTemplate.InstructionsSheet))
                     {
                         source.Table = ReadTable(path, name, source.Preview.ProposedHeaderRow);
                         foreach (var problem in source.Table.Problems) problem.SheetName = name;

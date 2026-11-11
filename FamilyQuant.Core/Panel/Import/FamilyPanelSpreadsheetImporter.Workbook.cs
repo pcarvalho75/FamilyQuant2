@@ -37,7 +37,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter
             sheet.Role = overrides.GetValueOrDefault(sheet.SheetName, PanelWorkbookSheetRole.Notes);
             sheet.RoleReason = overrides.ContainsKey(sheet.SheetName) ? "This source role was chosen by the user."
                 : "Source text is kept as notes unless a family, legend or subclass structure is found.";
-            sheet.IsUncertain = sheet.Table == null || workbook.Problems.Any(problem => problem.SheetName == sheet.SheetName
+            sheet.IsUncertain = workbook.Problems.Any(problem => problem.SheetName == sheet.SheetName
                 && problem.Severity == PanelImportSeverity.Blocking);
         }
         var candidates = workbook.Sheets.Where(sheet => sheet.Table != null && (!overrides.TryGetValue(sheet.SheetName, out var role)
@@ -106,6 +106,8 @@ public sealed partial class FamilyPanelSpreadsheetImporter
         result.Notes = workbook.Sheets.Where(sheet => sheet.Role is PanelWorkbookSheetRole.Notes or PanelWorkbookSheetRole.ColorLegend
             || sheet.Role == PanelWorkbookSheetRole.FamilyList && sheet.SheetName != result.FamilySheet)
             .Select(sheet => new PanelWorkbookSourceNote { SheetName = sheet.SheetName, Text = WorkbookNoteText(sheet) }).ToList();
+        foreach (var sheet in workbook.Sheets.Where(sheet => sheet.Role == PanelWorkbookSheetRole.Notes && !sheet.IsUncertain))
+            sheet.RoleReason = "Sheet " + sheet.SheetName + " was skipped: it has no family columns";
         if (selected != null && !result.Problems.Any(problem => problem.Severity == PanelImportSeverity.Blocking)
             && !workbook.Sheets.Any(sheet => sheet.Role == PanelWorkbookSheetRole.ColorLegend))
         {
