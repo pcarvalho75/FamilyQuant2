@@ -18,7 +18,7 @@
             <RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <TextBlock Text="{Binding Title}" Style="{StaticResource PageTitle}" TextTrimming="CharacterEllipsis"/>
+            <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource PageTitle}" TextTrimming="CharacterEllipsis" ToolTip="Reviewed references are stored nearest reviewed proteins and family representatives from the database or reference panel. This comparison changes no proposal ticks, assignments or project files."/>
             <TextBlock Text="Read only: tick the sequences to compare. Nothing in the proposal, its ticks or your file changes."
                        Style="{StaticResource CaptionText}" TextWrapping="Wrap"/>
         </StackPanel>

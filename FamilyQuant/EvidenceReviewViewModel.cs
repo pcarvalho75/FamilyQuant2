@@ -28,7 +28,8 @@ namespace FamilyQuant
         IReadOnlyList<ReviewArchitectureInput>? Architectures = null, IReadOnlyList<ReviewLeftOutInput>? LeftOut = null,
         string SourceLabel = "", string RuleSummary = "", IReadOnlyList<PanelFamilyLinkProposal>? PanelLinks = null,
         IReadOnlyDictionary<string, string>? PanelNames = null, IReadOnlyDictionary<string, FamilyProfile>? CoherenceProfiles = null,
-        IReadOnlyList<EvidenceManualChoice>? ManualChoices = null, IReadOnlyList<PanelChecklistFamily>? PanelChecklist = null);
+        IReadOnlyList<EvidenceManualChoice>? ManualChoices = null, IReadOnlyList<PanelChecklistFamily>? PanelChecklist = null,
+        IReadOnlyDictionary<string, PanelLinkExample>? PanelLinkExamples = null);
     public sealed record EvidenceReviewSelection(string SourceFingerprint, IReadOnlyList<int> ProteinIndices,
         IReadOnlyDictionary<string, string> Names, IReadOnlyList<ReviewArchitectureChoice>? ArchitectureChoices = null,
         string MotifPattern = "", IReadOnlyList<EvidenceProteinOverride>? ProteinOverrides = null, IReadOnlyList<EvidenceManualChoice>? ManualChoices = null);
@@ -204,7 +205,7 @@ namespace FamilyQuant
             };
             Source = source;
             PanelLinks = (source.PanelLinks ?? Array.Empty<PanelFamilyLinkProposal>()).Select(link =>
-                new PanelLinkReviewRow(link, source.PanelNames, () => { Changed(nameof(HasUnappliedPanelLinkChoices)); Changed(nameof(HasInvalidPanelLinkNotes)); Changed(nameof(CanConfirm)); })).ToArray();
+                new PanelLinkReviewRow(link, source.PanelNames, () => { Changed(nameof(HasUnappliedPanelLinkChoices)); Changed(nameof(HasInvalidPanelLinkNotes)); Changed(nameof(CanConfirm)); }, source.PanelLinkExamples?.GetValueOrDefault(link.Key))).ToArray();
             if (string.IsNullOrEmpty(source.SourceFingerprint)) throw new ArgumentException("The proposal needs a source fingerprint.", nameof(source));
             if (source.Proteins.Select(p => p.ProteinIndex).Distinct().Count() != source.Proteins.Count)
                 throw new ArgumentException("A proposal cannot repeat a protein index.", nameof(source));
@@ -212,6 +213,13 @@ namespace FamilyQuant
             manualByIndex = (source.ManualChoices ?? Array.Empty<EvidenceManualChoice>()).ToDictionary(c => c.ProteinIndex);
             Proteins = source.Proteins.Select(p => new ReviewProteinRow(p, SelectionChanged,
                 source.CoherenceProfiles?.GetValueOrDefault(p.Family), manualByIndex.GetValueOrDefault(p.ProteinIndex))).ToArray();
+            foreach (var row in Proteins)
+            {
+                if (SequenceLabels.IsDecoy(row.Identifier) || SequenceLabels.IsContaminant(row.Identifier)) continue;
+                if (row.Family.Length > 0) ProteinsInList++;
+                else if (row.HasScopeAnnotation) InScopeProteinsOutsideList++;
+                else ProteinsOutsideScope++;
+            }
             proteinByIndex = Proteins.ToDictionary(p => p.ProteinIndex);
             var groups = Proteins.GroupBy(p => p.Family, StringComparer.Ordinal).ToDictionary(g => g.Key, g => (IReadOnlyList<ReviewProteinRow>)g.ToArray(), StringComparer.Ordinal);
             foreach (var family in source.Families)

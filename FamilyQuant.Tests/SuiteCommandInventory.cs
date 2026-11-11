@@ -10,6 +10,13 @@ internal static class SuiteCommandInventory
     [
         SuiteCommandRule.Covered("--test-panel-coverage-ties", "FamilyQuant.Tests.Program.PanelCoverageTieTests(System.String)"),
         SuiteCommandRule.Excluded("--panel-tie-counts", "Read-only desk aggregate over a selected project. Prints only tie counts and counts per imported family row; synthetic proof is PanelCoverageTieTests in DefaultSuite."),
+        SuiteCommandRule.Covered("--test-review-tab-guides", "FamilyQuant.Tests.Program.ReviewTabGuideTests()"),
+        SuiteCommandRule.Covered("--test-review-alignment-heading", "FamilyQuant.Tests.Program.ReviewAlignmentHeadingTests()"),
+        SuiteCommandRule.Covered("--test-review-details-height", "FamilyQuant.Tests.Program.ReviewDetailsHeightTests(System.String)"),
+        SuiteCommandRule.Covered("--test-review-destinations", "FamilyQuant.Tests.Program.ReviewDestinationTests(System.String)"),
+        SuiteCommandRule.Covered("--test-review-checklist-states", "FamilyQuant.Tests.Program.ReviewChecklistStateTests(System.String)"),
+        SuiteCommandRule.Covered("--test-panel-link-examples", "FamilyQuant.Tests.Program.PanelLinkExampleTests()"),
+        SuiteCommandRule.Covered("--test-review-apply-wait", "FamilyQuant.Tests.Program.ReviewApplyWaitTests(System.String)"),
         SuiteCommandRule.Covered("--test-ledger-synthetic-mode", "FamilyQuant.Tests.Program.FeatureLedgerReceiptGuardTests(System.Boolean)"),
         SuiteCommandRule.Covered("--test-html-family-native", "FamilyQuant.Tests.Program.HtmlFamilyNativeTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-sensitivity-native", "FamilyQuant.Tests.Program.HtmlSensitivityNativeTests(System.String)"),

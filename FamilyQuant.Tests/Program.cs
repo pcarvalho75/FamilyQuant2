@@ -89,6 +89,13 @@ namespace FamilyQuant.Tests
         private static SuiteTable DefaultSuite(string[] args, string workDir)
         {
             var suite = new SuiteTable();
+            suite.AddWithApplication(() => ReviewChecklistStateTests(Path.Combine(workDir, "review-checklist-states")));
+            suite.AddWithApplication(() => ReviewDestinationTests(Path.Combine(workDir, "review-destinations")));
+            suite.AddWithApplication(() => ReviewDetailsHeightTests(Path.Combine(workDir, "review-details-height")));
+            suite.AddWithApplication(() => ReviewAlignmentHeadingTests());
+            suite.AddWithApplication(() => ReviewTabGuideTests());
+            suite.Add(() => PanelLinkExampleTests());
+            suite.AddWithApplication(() => ReviewApplyWaitTests(Path.Combine(workDir, "review-apply-wait")));
             suite.Section("CSV export - locale and escaping");
             suite.Add(() => CommandRegistryTests());
             suite.Add(() => SuiteCommandCoverageTests(null));
