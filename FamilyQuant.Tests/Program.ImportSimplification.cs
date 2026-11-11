@@ -191,7 +191,10 @@ internal static partial class Program
         var choices = importer.Propose(table).Choices;
         choices.ColumnHeaders[PanelImportFields.FamilyKey] = "Key";
         choices.ColumnHeaders[PanelImportFields.DisplayName] = "Name";
-        var imported = importer.Check(table, choices, Array.Empty<FamilyPanelDecisionMapping>()).Panel;
+        var imported = importer.Check(table, choices, new[]
+        {
+            new FamilyPanelDecisionMapping { SourceValue = "Quantify", Decision = FamilyPanelDecision.Quantify },
+        }).Panel;
         Check("RG4 saved rows carry named chosen links once, while hidden metadata retains every choice",
             restored.Families.Single().UniProtFamilies.SequenceEqual(new[] { "First family", "Second family", "Third family" })
             && restored.EvidenceLinks.Count == 4
