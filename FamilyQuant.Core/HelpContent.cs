@@ -23,7 +23,7 @@ namespace FamilyQuant
             "0. Import family list (optional): use File > Import family list to choose your workbook or Use template to write an empty workbook to fill and import, with every family quantified. Older sheets can still carry Notes and Decision columns. Only a Decision column with custom words needs label review; source colours remain in the workbook preview. Supplied Pfam codes found in stored evidence are accepted directly; names and codes not found need a choice. A row without a code gets no proteins until it has one. UniProt family holds exact family names separated by semicolons; empty means none. Sheets without family columns are skipped and named in the summary; their source text is kept.\n" +
             "1. Fetch evidence: download UniProt annotations for the project's proteins.\n" +
             "2. Group by evidence: review the scope and proposal, then Apply grouping.\n" +
-            "3. Fetch family world: download family references for the confirmed task and scope.\n" +
+            "3. Fetch UniProt families: find the families of in-scope database proteins and download their reviewed and database-clade entries.\n" +
             "4. Quantify: measure peptide signal from the RAW files.\n";
 
         /// <summary>
@@ -228,9 +228,9 @@ namespace FamilyQuant
             sb.AppendLine("GROUPING: PART A OF CURATE FAMILIES, GROUP BY EVIDENCE");
             sb.AppendLine("------------------------------------------------------");
             sb.AppendLine(GroupingOrder);
-            sb.AppendLine("Fetch evidence stores annotations for grouping; Fetch family world stores reference");
+            sb.AppendLine("Fetch evidence stores annotations for grouping; Fetch UniProt families stores reference");
             sb.AppendLine("sequences for Database gap. Both need an internet connection when downloading.");
-            sb.AppendLine("Save the project to keep the evidence, applied grouping and family world.");
+            sb.AppendLine("Save the project to keep the evidence, applied grouping and UniProt families.");
             sb.AppendLine();
             sb.AppendLine("Use template includes an optional Subclasses sheet: copy a Family key from Families and write one Subclass per row.");
             sb.AppendLine("Each header has a one-line note on Instructions. A subclass matches an exact UniProt family or subfamily name");
@@ -289,12 +289,15 @@ namespace FamilyQuant
             sb.AppendLine("domains stays ticked if it carries a keyword; short proteins and fragments can have");
             sb.AppendLine("no Pfam call. Domains do not separate everything: different families can share them.");
             sb.AppendLine();
-            sb.AppendLine("Fetch family world uses the confirmed database task and scope from Group by evidence.");
+            sb.AppendLine("Fetch UniProt families finds the UniProt families of the in-scope proteins of your");
+            sb.AppendLine("database, then downloads every reviewed UniProt entry of those families and their");
+            sb.AppendLine("entries from your database's own clade. It uses the confirmed database task and scope");
+            sb.AppendLine("from Group by evidence.");
             sb.AppendLine("Fetch evidence first to supply the database's family annotations.");
             sb.AppendLine("If no matching task and scope are confirmed, it offers to open Group by evidence first.");
-            sb.AppendLine("The screen shows the stored release, scope, protein count and size. Cancel or a failed fetch");
-            sb.AppendLine("keeps the previous file. Save the project to keep the world for offline use. Compute uses the");
-            sb.AppendLine("stored world to populate Database gap, where credited tags can suggest FASTA additions.");
+            sb.AppendLine("The screen shows the stored release, scope, family count, entry count and size. Cancel or a");
+            sb.AppendLine("failed fetch keeps the previous file. Save the project to keep these references for offline");
+            sb.AppendLine("use. Quantify uses them to populate Database gap, where credited tags can suggest FASTA additions.");
             sb.AppendLine();
             sb.AppendLine("Group by evidence opens the Evidence tab of Review grouping. Confirm the scope,");
             sb.AppendLine("then review the families, flags, protein ticks and Selected protein details in Simple view.");
@@ -314,6 +317,16 @@ namespace FamilyQuant
             sb.AppendLine("locked or unticked proteins keep their current family; decoys and contaminants are excluded from the counts.");
             sb.AppendLine("Family checklist keeps every row of your list and counts those with proposed proteins, waiting for a choice,");
             sb.AppendLine("with no Pfam code, or matching no database protein; matching evidence alone does not assign a protein.");
+            sb.AppendLine("In Panel links, tied domain matches use the fraction of each row's Pfam list present");
+            sb.AppendLine("in the protein. The most complete row wins; equal coverage still asks for a choice.");
+            sb.AppendLine("Your confirmed choices take precedence and are kept when the project is saved.");
+            sb.AppendLine("Save panel as spreadsheet writes named link choices in the UniProt family column.");
+            sb.AppendLine("Importing that column restores exact family links among the supported rows without");
+            sb.AppendLine("asking again. Separate several source family names with semicolons.");
+            sb.AppendLine("A row naming a UniProt family takes only proteins with that complete family name.");
+            sb.AppendLine("Those proteins enter that row even without matching scope words. Rows sharing its");
+            sb.AppendLine("domains without a family name take the other supported proteins under the existing");
+            sb.AppendLine("scope rules. A neighbour cannot supply membership of a named UniProt family.");
             sb.AppendLine("If the project has no stored UniProt evidence, Download and continue runs Fetch evidence");
             sb.AppendLine("before opening the review; Cancel leaves the project unchanged. If no reviewed accession");
             sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");
@@ -387,7 +400,8 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine("THE FAMILY COUNTER AND THE FILTERS");
             sb.AppendLine("----------------------------------");
-            sb.AppendLine("The counter reads \"N visible · M in file\". Display and export filters hide rows,");
+            sb.AppendLine("The counter reads \"N shown of M in file\" and names only the active filters after");
+            sb.AppendLine("\"hidden:\": decoys, contaminants, search or only quantified. Display and export filters hide rows;");
             sb.AppendLine("they never change a number: hiding decoys or contaminants lowers the visible count");
             sb.AppendLine("and leaves every percentage exactly as it was. In \"" +
                           NormalizationMode.IdentifiedSignal.ShortName() + "\" the hidden rows");

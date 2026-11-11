@@ -52,7 +52,7 @@ public static class PanelReportHelp
         The composition headline is the mean of available per-run shares of the
         signal credited to database families. The measured peptide signal and RAW
         total ion current (TIC) are separate denominators; a peptide-signal share
-        is not a TIC share. Family-world-only signal is shown separately and is
+        is not a TIC share. Signal found only in UniProt families is shown separately and is
         not added to the database-family composition. These are signal shares,
         not direct measurements of sample mass.
 
@@ -95,7 +95,7 @@ public static class PanelReportHelp
         estimate. A coverage map shows the stored protein positions, domains and
         supported peptide placements; missing or ambiguous positions stay
         unavailable or unresolved. The signal-source figure separates identified,
-        database-matched de novo and family-world-only contributions. Other
+        database-matched de novo and contributions found only in UniProt families. Other
         quality figures retain their own denominators and captions.
         """;
 

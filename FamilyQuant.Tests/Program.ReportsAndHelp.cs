@@ -31,11 +31,11 @@ namespace FamilyQuant.Tests
             string counter = ReportView.FamilyCounter(232, 365);
             Check("the family counter reports the visible rows", counter.Contains("232"), counter);
             Check("and the number in the file, in the same label", counter.Contains("365"), counter);
-            Check("and says which is which", counter.Contains("visible") && counter.Contains("in file"), counter);
+            Check("and says which is which", counter.Contains("shown of") && counter.Contains("in file"), counter);
 
             string unfiltered = ReportView.FamilyCounter(365, 365);
             Check("with no filter on, both halves agree and the label still reads correctly",
-                unfiltered.Contains("365 visible") && unfiltered.Contains("365 in file"), unfiltered);
+                unfiltered.Contains("365 shown of 365 in file"), unfiltered);
 
             // --- the status line above the table
             string none = ReportView.StatusLine(null, SharedPeptidePolicy.FamilyUnique, 0, 365);

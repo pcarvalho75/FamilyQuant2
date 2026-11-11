@@ -30,14 +30,14 @@ public static class ReportStoredResults
             if (grouping == null) throw new InvalidOperationException("Stored report studies require the canonical J5c report partition.");
             sections[ReportSectionIds.Summary].RemoveAll(b => b.Id == "summary-composition");
             sections[ReportSectionIds.Summary].Add(new ReportParagraph("summary-composition",
-                "Headline family composition uses the arithmetic mean of available per-run shares, with sample SD and CV. Pooled composition and within-family parts are labelled separately. Per-run whole measured peptide signal and RAW TIC shares retain their own denominators. Family-world-only signal remains separate."));
+                "Headline family composition uses the arithmetic mean of available per-run shares, with sample SD and CV. Pooled composition and within-family parts are labelled separately. Per-run whole measured peptide signal and RAW TIC shares retain their own denominators. Signal found only in UniProt families remains separate."));
             Remove("family-runs-unavailable");
             exports.Add("family_run_means.csv", ReportStudyExports.MeanShares(runs, familyLabels));
             string headlineCsv = ReportStudyExports.Headline(grouping, manifest.FamilyProteinCounts, familyLabels);
             exports.Add("report_settings.csv", ReportStudyExports.ReportSettings(grouping));
             results.Insert(0, Table("family-run-means", "Headline family composition: mean of per-run shares", "family_composition_headline.csv",
                 headlineCsv,
-                "Each run's composition uses signal credited to database families. Mean and sample SD use available runs. Whole measured-signal mean/SD are separate stored statistics; family-world-only signal is excluded. Protein estimates count database entries, not genes or proteoforms. Others membership and summed-run uncertainty come only from the canonical stored-threshold accessor." + displayed,
+                "Each run's composition uses signal credited to database families. Mean and sample SD use available runs. Whole measured-signal mean/SD are separate stored statistics; signal found only in UniProt families is excluded. Protein estimates count database entries, not genes or proteoforms. Others membership and summed-run uncertainty come only from the canonical stored-threshold accessor." + displayed,
                 new[] { "family", "mean_pct", "sample_sd_pct", "mean_measured_pct", "sample_sd_measured_pct", "greedy_protein_estimate", "unique_peptide_proteins" },
                 new[] { "Family", "Mean share (%)", "Sample SD (pp)", "Whole measured (%)", "Whole-signal SD (pp)", "Proteins needed (greedy)", "Proteins with own peptide" }));
             var paired = ReportCsvTable.Build("paired-source", "Paired source", headlineCsv, "",

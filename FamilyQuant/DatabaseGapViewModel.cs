@@ -28,7 +28,7 @@ public sealed class DatabaseGapDisplayRow
             + data.WorldKnownCredited.ToString(CultureInfo.CurrentCulture) + ")";
         RightRate = data.WorldKnownCredited >= minimumKnownCredits && data.WorldRightRate is double rate
             ? rate.ToString("P2", CultureInfo.CurrentCulture) + counts
-            : (data.WorldEvidence.Length > 0 ? data.WorldEvidence : "No family-world evaluation") + counts;
+            : (data.WorldEvidence.Length > 0 ? data.WorldEvidence : "No evaluation of UniProt families") + counts;
     }
 }
 
@@ -53,18 +53,18 @@ public sealed class DatabaseGapViewModel : ScreenViewModel
     private readonly Action<int>? storeChoice;
     private readonly FamilyWorldSnapshot? storedWorld;
     private readonly string verifiedWorldFingerprint = "";
-    private readonly string worldProblem = "No matching stored family world is available.";
+    private readonly string worldProblem = "No matching stored UniProt family references are available.";
     private int minimumTagLength;
     public FamilyWorldSummary? Summary { get; private set; }
     public bool HasStoredResult => storedResult != null;
     public bool HasData => Summary != null && Summary.CompositionRules.Length > 0;
     public string EmptyMessage => storedResult == null
-        ? "No family-world result is stored in this project. Open a project with that result to view Database gap."
+        ? "No UniProt families result is stored in this project. Open a project with that result to view Database gap."
         : storedResult.Lengths == null && storedResult.CompositionRules.Length == 0
-            ? "This stored family-world result predates the three-part composition table. Its missing parts are not shown as zero."
+            ? "This stored UniProt families result predates the three-part composition table. Its missing parts are not shown as zero."
         : Summary == null ? "No stored table was computed for minimum tag length " + MinimumTagLength.ToString(CultureInfo.CurrentCulture)
             + ". Choose a computed length. This screen does not compute a result."
-        : "This stored family-world result predates the three-part composition table. Its missing parts are not shown as zero.";
+        : "This stored UniProt families result predates the three-part composition table. Its missing parts are not shown as zero.";
     public IReadOnlyList<int> LengthChoices => FamilyWorldOptions.LengthChoices;
     public IReadOnlyList<DatabaseGapLengthRow> LengthRows { get; }
     public int MinimumTagLength
@@ -82,7 +82,7 @@ public sealed class DatabaseGapViewModel : ScreenViewModel
     public IReadOnlyList<DatabaseGapGlobalRow> GlobalRows { get; private set; } = Array.Empty<DatabaseGapGlobalRow>();
     public string Rules => !HasData ? "" : "Minimum tag length: " + Summary!.MinimumTagLength.ToString(CultureInfo.CurrentCulture)
         + " residues. Identity gate: " + Summary.MinIdentity.ToString("P2", CultureInfo.CurrentCulture)
-        + ". Family-world credits go only to families in the stored scope.";
+        + ". UniProt families credits go only to families in the stored scope.";
     public string SecondPassRules => Summary?.Rules ?? "";
     public string Scope => !HasData ? "" : "Stored scope: " + string.Join("; ", Summary!.ScopeFamilies);
     public string Basis => !HasData ? "" : "Signal is envelope area: measured for identified and de novo peptides. "
@@ -94,7 +94,7 @@ public sealed class DatabaseGapViewModel : ScreenViewModel
     public string Provenance => !HasData ? "" : "World release: " + Recorded(Summary!.WorldRelease)
         + "; result fingerprint: " + Recorded(Summary.WorldFingerprint) + ".";
     public bool CanExportFasta => candidates.Count > 0 && FastaProblem.Length == 0;
-    public string FastaProblem { get; private set; } = "No matching stored family world is available.";
+    public string FastaProblem { get; private set; } = "No matching stored UniProt family references are available.";
     public string FastaState => CanExportFasta ? candidates.Count.ToString(CultureInfo.CurrentCulture)
         + " stored world proteins hit by credited tags. FASTA contains suggested additions for you to add and search again in PatternLab."
         : "Suggested additions unavailable: " + FastaProblem;
@@ -181,12 +181,12 @@ public sealed class DatabaseGapViewModel : ScreenViewModel
 
 public static class DatabaseGapHelp
 {
-    public const string Text = "Database gap ranks the stored family rows by de novo signal found only in the family world. "
+    public const string Text = "Database gap ranks the stored family rows by de novo signal found only in the UniProt families. "
         + "The length table reads stored estimates: landed share is credited envelope over unattributed de novo envelope, "
         + "and its decoy rate uses credited envelope. Known answers right shows right/landed counts and the recorded rate. "
         + "Choose a minimum tag length to use its stored family result, CSV and suggested FASTA; the choice is saved in the project. "
         + "An uncomputed length stays unavailable, and this screen never starts a search or computes an estimate. "
-        + "Each bar has three parts: identified, de novo placed by your database, and de novo placed only by the family world. "
+        + "Each bar has three parts: identified, de novo placed by your database, and de novo placed only by the UniProt families. "
         + "Only peptides credited to one family enter that family's own bar. Shared signal stays in separate global rows. "
         + "The global unexplained de novo bucket belongs to no family. Amounts use the measured envelope basis, not RAW TIC. "
         + "The minimum tag length and the in-scope family rule stored with the result are shown beside it and in the CSV. "

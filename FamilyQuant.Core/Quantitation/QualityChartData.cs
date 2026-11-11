@@ -179,10 +179,10 @@ public static class QualityChartData
         foreach (var rows in WorldPages(manifest, grouping))
         {
             page++;
-            plots.Add(new("family_world_rates_" + page.ToString(CultureInfo.InvariantCulture) + ".png", "Family-world support rates",
-                "Recorded family-world evidence, not identification FDR. Decoy ratio divides decoy signal by credited signal. Right rate divides correct known credits by known credits and is unavailable below the native evidence floor. Rates are not clamped to 100%.", "%", rows.SelectMany(row => new[]
+            plots.Add(new("family_world_rates_" + page.ToString(CultureInfo.InvariantCulture) + ".png", "UniProt families support rates",
+                "Recorded UniProt families evidence, not identification FDR. Decoy ratio divides decoy signal by credited signal. Right rate divides correct known credits by known credits and is unavailable below the native evidence floor. Rates are not clamped to 100%.", "%", rows.SelectMany(row => new[]
                 {
-                    Rate(row.Family + ": decoy ratio", row.DecoyRate, "Decoy signal / credited family-world signal") with { Family = row.Family, Detail = "decoy ratio" },
+                    Rate(row.Family + ": decoy ratio", row.DecoyRate, "Decoy signal / credited UniProt families signal") with { Family = row.Family, Detail = "decoy ratio" },
                     Rate(row.Family + ": right rate", row.RightRate, "Correct known credits / known credits") with { Family = row.Family, Detail = "right rate" },
                 }).ToArray()));
         }
