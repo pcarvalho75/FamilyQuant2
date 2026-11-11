@@ -50,6 +50,8 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-build-curation-handoff", "FamilyQuant.Tests.Program.BuildCurationHandoffTests()"),
         SuiteCommandRule.Covered("--test-panel-tie-list", "FamilyQuant.Tests.Program.PanelTieListTests()"),
         SuiteCommandRule.Covered("--test-quantify-screen-run", "FamilyQuant.Tests.Program.QuantifyScreenRunTests()"),
+        SuiteCommandRule.Covered("--test-family-list-walk", "FamilyQuant.Tests.Program.FamilyListWalkTests()"),
+        SuiteCommandRule.Excluded("--family-list-walk", "Desk-only screen-path import and grouping walk over explicit project/workbook paths; --test-family-list-walk proves successful save and pending-choice refusal on synthetic inputs."),
         SuiteCommandRule.Covered("--test-panel-tie-list-fresh-import", "FamilyQuant.Tests.Program.PanelTieListFreshImportTests()"),
         SuiteCommandRule.Excluded("--quantify-screen-run", "Desk-only Quantify screen execution over explicit compute.json paths; --test-quantify-screen-run proves the real view model and worker engine with synthetic caches and a missing source run."),
         SuiteCommandRule.Excluded("--panel-tie-list", "Desk-only read-only producer over an explicitly selected project and new output directory; --test-panel-tie-list proves its CSV/JSON and project immutability on synthetic data."),

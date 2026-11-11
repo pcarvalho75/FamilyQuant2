@@ -227,6 +227,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => BuildCurationHandoffTests());
             suite.Add(() => PanelTieListTests());
             suite.AddWithApplication(() => QuantifyScreenRunTests());
+            suite.AddWithApplication(() => FamilyListWalkTests());
             suite.Add(() => PanelTieListFreshImportTests());
             suite.AddWithApplication(() => QuantifyIsotopeDefaultTests(Path.Combine(workDir, "quantify-isotope-default")));
             suite.Add(() => StreamingProvenanceHashTests());
