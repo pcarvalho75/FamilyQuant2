@@ -41,6 +41,8 @@ public static class FamilyPanelTemplate
             AddRow(families, new[] { "f" + i.ToString(CultureInfo.InvariantCulture), f.Key, f.DisplayName, DecisionText(f.Decision), f.MergeTargetFamilyKey, Join(f.Pfam.Select(d => d.Accession)), Join(sourceFamilies) }
                 .Concat(fields.Select(field => FieldValue(f, field))).ToArray());
         }
+        ((Worksheet)families.Parent!).Append(new AutoFilter { Reference = "A2:" + ColumnName(FamilyHeaders.Length + fields.Count - 1)
+            + (panel.Families.Count + 2).ToString(CultureInfo.InvariantCulture) });
         var subclasses = NewSheet(workbook, sheets, "Subclasses", 2, false);
         AddRow(subclasses, SubclassHeaders);
         for (int i = 0; i < panel.Families.Count; i++)

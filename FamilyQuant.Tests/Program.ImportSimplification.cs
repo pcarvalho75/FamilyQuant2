@@ -137,7 +137,7 @@ internal static partial class Program
         using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(file)),
             workbookSource: new FamilyListWorkbookCoreSource());
         FinishReviewWork(() => model.LoadAsync(path));
-        FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(_ => true); await model.NextAsync(); });
+        FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(); });
         Check("IM6 supplied valid codes reach Summary without a Pfam question and missing-code rows are named once",
             model.Page == 5 && model.PfamQuestions.Count == 0 && model.MatchFamilies.All(f => f.Decided)
             && model.MatchFamilies.Single(f => f.Key == "A").Suggestions.Single(s => s.IsFromSheet).Use
@@ -194,7 +194,7 @@ internal static partial class Program
             Check("IM7 closing before Accept explains draft loss and lets the user keep working",
                 window.IsVisible && !model.Imported && !main.DocumentState.IsModified && warning.Contains("discards this import draft", StringComparison.Ordinal));
             ShellMessages.Presenter = (_, _) => System.Windows.MessageBoxResult.Yes;
-            FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(_ => true); await model.NextAsync(); });
+            FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(); });
             var closed = new System.Threading.Tasks.TaskCompletionSource(System.Threading.Tasks.TaskCreationOptions.RunContinuationsAsynchronously);
             window.Closed += (_, _) => closed.TrySetResult();
             FinishReviewWork(async () =>

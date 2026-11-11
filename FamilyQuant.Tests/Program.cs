@@ -329,6 +329,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ImportDecisionPageTests());
             suite.AddWithApplication(() => ImportDirectPfamTests());
             suite.AddWithApplication(() => ImportSaveHandoffTests());
+            suite.AddWithApplication(() => ImportConditionalPageTests());
             suite.Add(() => PanelImportExampleTests(Path.Combine(workDir, "panel-import-example")));
             suite.Add(() => PanelWorkbookMapTests(Path.Combine(workDir, "panel-workbook-map")));
             suite.AddWithApplication(() => PanelWorkbookNotesTests());

@@ -24,7 +24,8 @@ public sealed partial class FamilyListImportViewModel
     public bool ReviewingWorkbook => reviewingWorkbook;
     public bool ReviewingSubclasses => reviewingSubclasses;
     public bool ShowingWizardPages => !reviewingWorkbook && !reviewingSubclasses;
-    public bool CanReturnToWorkbook => WorkbookReviewEnabled && HasWorkbookMap && !Imported && !IsBusy && !reviewingWorkbook && !reviewingSubclasses;
+    public bool CanReturnToWorkbook => WorkbookReviewEnabled && HasWorkbookMap && WorkbookHasReviewProblems
+        && !Imported && !IsBusy && !reviewingWorkbook && !reviewingSubclasses;
     public IReadOnlyCollection<string> WorkbookFamilyKeys => workbookReview?.FamilyKeys ?? Array.Empty<string>();
     public IReadOnlyList<ImportWorkbookFinding> WorkbookFindings => workbookReview?.Sections
         .Where(section => section.Kind != WorkbookImportSectionKind.Colors).SelectMany(section => section.Items).Select(item =>
@@ -74,7 +75,9 @@ public sealed partial class FamilyListImportViewModel
             "Row " + hint.RowNumber + ", " + hint.Column)).ToArray();
     public IReadOnlyList<ImportWorkbookSection> WorkbookSections => workbookReview?.Sections
         .Where(section => section.Kind != WorkbookImportSectionKind.Colors
-            && (section.Kind != WorkbookImportSectionKind.Decisions || HasCustomDecisions)).Select(section =>
+            && (section.Kind != WorkbookImportSectionKind.Decisions || HasCustomDecisions)
+            && (section.Kind != WorkbookImportSectionKind.Pfam || PfamQuestions.Count > 0
+                || section.Items.Any(item => item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace))).Select(section =>
     {
         int required = section.Items.Count(item => item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace);
         int optional = section.Items.Count(item => !item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace);
@@ -124,6 +127,7 @@ public sealed partial class FamilyListImportViewModel
 
     private void ResetWorkbookReview()
     {
+        reviewingWorkbook = reviewingSubclasses = false;
         workbookReview = null; workbookAcceptance = null; reviewedWorkbook = null; reviewedEvidence = null;
         subclassSourceKey = workbookReviewError = reviewInputKey = ""; evidencePagePrepared = false;
     }
@@ -204,6 +208,8 @@ public sealed partial class FamilyListImportViewModel
         if (section == "matches")
         {
             RefreshWorkbookReview();
+            if (PfamQuestions.Count == 0 && workbookReview?.Sections.Where(part => part.Kind == WorkbookImportSectionKind.Pfam)
+                .SelectMany(part => part.Items).Any(item => item.Required && item.State == WorkbookImportItemState.Uncertain) != true) return;
             if (workbookReview == null || reviewedWorkbook?.FamilyTable == null)
             { Status = "Resolve family choices before reviewing evidence matches."; return; }
             var preview = importer.Check(reviewedWorkbook.FamilyTable, workbookReview.FamilyChoices, workbookReview.ProposedDecisions, PanelName);

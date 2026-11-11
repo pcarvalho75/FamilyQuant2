@@ -118,6 +118,7 @@ public static partial class WorkbookImportSummaries
         }
         foreach (var hint in source.Pfam)
         {
+            if (choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Pfam, "") != hint.Column) continue;
             string? key = keyPreview.Rows.FirstOrDefault(row => row.RowNumber == hint.RowNumber)?.FamilyKeys.SingleOrDefaultSafe();
             string text = hint.SourceText.Length > 0 ? hint.SourceText : string.Join("; ", hint.Domains.Select(domain => domain.Accession));
             bool needsChoice = FamilyPanelSpreadsheetImporter.NeedsPfamChoice(text, knownPfam);
@@ -149,7 +150,8 @@ public static partial class WorkbookImportSummaries
                 .OfType<WorkbookImportDomain>().GroupBy(domain => domain.FamilyKey, StringComparer.Ordinal))
                 plan.ReviewedEvidence[group.Key] = Freeze(group.Select(domain => new PanelEvidenceChoice(PanelEvidenceMatchKind.Pfam, domain.Domain.Accession)).Distinct());
             foreach (string key in keys.Where(key => !plan.ReviewedEvidence.ContainsKey(key)
-                && !source.Pfam.Any(hint => hint.FamilyKey == key && (hint.SourceText.Length > 0 || hint.Domains.Count > 0))))
+                && !source.Pfam.Any(hint => hint.FamilyKey == key && hint.Column == choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Pfam, "")
+                    && (hint.SourceText.Length > 0 || hint.Domains.Count > 0))))
                 plan.ReviewedEvidence[key] = Array.Empty<PanelEvidenceChoice>();
         }
         else foreach (var pair in reviewedEvidence) plan.ReviewedEvidence[pair.Key] = Freeze(pair.Value.Select(choice => choice with { }));

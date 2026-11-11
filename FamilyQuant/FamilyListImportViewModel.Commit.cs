@@ -71,8 +71,11 @@ public sealed partial class FamilyListImportViewModel
         finally { if (generation == readGeneration) IsBusy = false; }
     }
 
-    private static string MatchPanelFingerprint(FamilyPanel panel) => System.Text.Json.JsonSerializer.Serialize(
-        panel.Families.Select(f => new { f.Key, f.DisplayName, f.Names, f.Pfam, f.Decision, f.MergeTargetFamilyKey }));
+    private string MatchPanelFingerprint(FamilyPanel panel) => System.Text.Json.JsonSerializer.Serialize(new
+    {
+        PfamColumn = choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Pfam, ""),
+        Families = panel.Families.Select(f => new { f.Key, f.DisplayName, f.Names, f.Pfam, f.Decision, f.MergeTargetFamilyKey }),
+    });
 
     private void PublishMatches(FamilyPanel panel, IReadOnlyList<ImportMatchFamily> suggestions)
     {

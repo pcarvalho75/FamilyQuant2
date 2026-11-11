@@ -43,6 +43,7 @@ public partial class FamilyListImportWindow : Window
         DecisionActionColumn.ItemsSource = FamilyListImportViewModel.DecisionOptions;
         WorkbookRoleColumn.ItemsSource = FamilyListImportViewModel.SheetRoles;
         WorkbookOverview.ReviewRequested += async section => await Model.ReviewWorkbookSectionAsync(section);
+        SummaryWorkbookDetails.ReviewRequested += async section => await Model.ReviewWorkbookSectionAsync(section);
         Model.WorkbookViewRequested += WorkbookView_Requested;
         Model.PropertyChanged += Model_Changed;
         RefreshRowActionChoice(updateOptions: true);
@@ -54,7 +55,7 @@ public partial class FamilyListImportWindow : Window
     {
         if (e.PropertyName == nameof(FamilyListImportViewModel.HasWorkbookMap))
         {
-            WorkbookTabs.SelectedItem = Model.HasWorkbookMap ? WorkbookMapTab : SheetPreviewTab;
+            WorkbookTabs.SelectedItem = Model.NeedsFamilySheetChoice ? WorkbookMapTab : SheetPreviewTab;
             DecisionMeaningColumn.Visibility = Model.HasWorkbookMap ? Visibility.Visible : Visibility.Collapsed;
         }
         if (e.PropertyName == nameof(FamilyListImportViewModel.Preview)) BuildPreview();
