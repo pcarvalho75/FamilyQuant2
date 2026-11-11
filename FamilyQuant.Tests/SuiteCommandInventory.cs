@@ -8,6 +8,7 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-panel-visible-links", "FamilyQuant.Tests.Program.PanelVisibleLinkTests()"),
         SuiteCommandRule.Covered("--test-import-conditional-pages", "FamilyQuant.Tests.Program.ImportConditionalPageTests(System.String)"),
         SuiteCommandRule.Covered("--test-import-save-handoff", "FamilyQuant.Tests.Program.ImportSaveHandoffTests()"),
         SuiteCommandRule.Covered("--test-import-pfam-direct", "FamilyQuant.Tests.Program.ImportDirectPfamTests()"),

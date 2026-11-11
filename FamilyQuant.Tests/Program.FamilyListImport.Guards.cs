@@ -33,8 +33,9 @@ internal static partial class Program
             else throw new InvalidOperationException("Unexpected fixture problem: " + row.Message);
             model.UseRowChoice();
         }
-        FinishReviewWork(async () => { await model.NextAsync(); }); model.SkipAllMatches();
-        FinishReviewWork(async () => { await model.NextAsync(); });
+        if (model.Page < 5) FinishReviewWork(async () => { await model.NextAsync(); });
+        model.SkipAllMatches();
+        if (model.Page == 4) FinishReviewWork(async () => { await model.NextAsync(); });
         return model;
     }
 
@@ -100,15 +101,19 @@ internal static partial class Program
             var book = document.WorkbookPart!; var tab = book.Workbook!.Sheets!.Elements<XL.Sheet>().First(s => s.Name == PanelImportTemplate.FamilySheet);
             var part = (WorksheetPart)book.GetPartById(tab.Id!); var data = part.Worksheet!.GetFirstChild<XL.SheetData>()!;
             var row = new XL.Row { RowIndex = 2 };
-            string[] values = { "FA", "Supplied family", "Família fornecida", "Supplied note", "PF12345", "Quantify" };
+            string[] values = PanelImportTemplate.Columns.Select(column => column.Role switch
+            {
+                PanelImportFields.FamilyKey => "FA", PanelImportFields.DisplayName => "Supplied family",
+                PanelImportFields.OtherName => "Supplied alternate family", PanelImportFields.Pfam => "PF12345", _ => "",
+            }).ToArray();
             for (int i = 0; i < values.Length; i++) row.Append(new XL.Cell { CellReference = ((char)('A' + i)).ToString() + "2", DataType = XL.CellValues.InlineString,
                 InlineString = new XL.InlineString(new XL.Text(values[i])) });
             data.Append(row); part.Worksheet.Save();
         }
         using var templateModel = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(ManualChoiceFile())));
         FinishReviewWork(() => templateModel.LoadAsync(template)); FinishReviewWork(async () => { await templateModel.NextAsync(); });
-        Check("the program's filled template maps its columns and exact decision without a mapping question", templateModel.Page == 2 && templateModel.CanNext
-            && templateModel.Columns.Where(c => c.Required).All(c => c.Header.Length > 0) && templateModel.Decisions.All(d => d.Confirmed));
+        Check("the program's filled template maps its current columns without a mapping question", templateModel.Page == 2 && templateModel.CanNext
+            && templateModel.Columns.Where(c => c.Required).All(c => c.Header.Length > 0) && templateModel.Decisions.Count == 0 && templateModel.Columns.Single(c => c.Role == PanelImportFields.Pfam).Header == PanelImportTemplate.Pfam);
 
         FamilyListReimportTests(workbook);
 
@@ -143,11 +148,12 @@ internal static partial class Program
             && family.Suggestions.Single(s => s.PreviousValue != null).Text == "An earlier explicit match");
         FinishReviewWork(async () => { await model.NextAsync(); });
         Check("the production wizard carries stable-key confirmations through replacement without changing the source panel", model.Imported
-            && System.Text.Json.JsonSerializer.Serialize(file.FamilyPanel!.ConfirmedEvidenceMatches) == records
+            && System.Text.Json.JsonSerializer.Serialize(file.FamilyPanel!.ConfirmedEvidenceMatches![definition.Key])
+                == System.Text.Json.JsonSerializer.Serialize(previous.ConfirmedEvidenceMatches![definition.Key])
             && System.Text.Json.JsonSerializer.Serialize(previous.ConfirmedEvidenceMatches) == records);
         model.UndoImport();
         Check("Undo after re-import restores the previous panel and its confirmations byte for byte", file.ToJsonText() == before);
-        model.Back(); model.SelectedMatchFamily = model.MatchFamilies.Single(f => f.Key == definition.Key);
+        GoToImportPage(model, 4); model.SelectedMatchFamily = model.MatchFamilies.Single(f => f.Key == definition.Key);
         var selected = model.SelectedMatchFamily.Suggestions.Single(s => s.PreviousValue != null);
         selected.Text = "An explicitly confirmed replacement";
         Check("editing a kept value requires a new explicit confirmation", model.SelectedMatchFamily.Choice == "Needs a choice" && !model.CanNext);

@@ -70,7 +70,9 @@ internal static partial class Program
                     && problem.Message.Contains(item.Label, StringComparison.Ordinal) && problem.Message.Contains(item.Page.ToString(), StringComparison.Ordinal)) == 1));
 
             var reviewed = ReviewSummaryFixture(proposal, importer);
-            var ready = WorkbookImportSummaries.Build(reviewed, matching);
+            var reviewedEvidence = WorkbookImportSummaries.ProposedFamilyKeys(reviewed).ToDictionary(key => key,
+                _ => (IReadOnlyList<PanelEvidenceChoice>)Array.Empty<PanelEvidenceChoice>(), StringComparer.Ordinal);
+            var ready = WorkbookImportSummaries.Build(reviewed, matching, reviewedEvidence: reviewedEvidence);
             Check("Z16a9 " + shape + " explicit reviewed choices make the summary ready", !ready.HasBlockingItems,
                 string.Join("; ", ready.Sections.SelectMany(section => section.Items).Where(item => item.Required && item.State is WorkbookImportItemState.Uncertain or WorkbookImportItemState.CouldNotPlace)
                     .Select(item => item.Label + ": " + item.Reason)));
@@ -160,15 +162,16 @@ internal static partial class Program
         string path = Path.Combine(root, "selection-cases.xlsx"); WriteNeutralWorkbook(path, includeLegend: false, includeDecision: false);
         var source = ReviewSummaryFixture(importer.ProposeWorkbook(path), importer);
         var emptyFile = new FamilyClusterFile(); var matching = new PanelEvidenceMatching(emptyFile);
-        var empty = new Dictionary<string, IReadOnlyList<PanelEvidenceChoice>>();
-        var savedUntick = new Dictionary<string, IReadOnlyList<PanelEvidenceChoice>> { ["F01"] = Array.Empty<PanelEvidenceChoice>() };
+        var empty = WorkbookImportSummaries.ProposedFamilyKeys(source).ToDictionary(key => key,
+            _ => (IReadOnlyList<PanelEvidenceChoice>)Array.Empty<PanelEvidenceChoice>(), StringComparer.Ordinal);
+        var savedUntick = new Dictionary<string, IReadOnlyList<PanelEvidenceChoice>>(empty, StringComparer.Ordinal);
         var unticked = WorkbookImportSummaries.Build(source, matching, reviewedEvidence: savedUntick);
         var untickResult = WorkbookImportSummaries.AcceptAll(unticked, importer, unticked.DraftSubclassSelections, savedUntick);
-        Check("Z16a9 an explicit empty selection overrides sheet defaults without erasing source domains", untickResult.Panel?.ConfirmedEvidenceMatches is { Count: 1 } matches
+        Check("Z16a9 an explicit empty selection overrides sheet defaults without erasing source domains", untickResult.Panel?.ConfirmedEvidenceMatches is { } matches && matches.Count == savedUntick.Count
             && matches["F01"].Choices.Count == 0 && untickResult.Panel.Families.Single(family => family.Key == "F01").Pfam.Count == 2);
-        var selected = new Dictionary<string, IReadOnlyList<PanelEvidenceChoice>> { ["F01"] = new[] { new PanelEvidenceChoice(PanelEvidenceMatchKind.Pfam, "PF01234") } };
+        var selected = new Dictionary<string, IReadOnlyList<PanelEvidenceChoice>>(empty, StringComparer.Ordinal) { ["F01"] = new[] { new PanelEvidenceChoice(PanelEvidenceMatchKind.Pfam, "PF01234") } };
         var shown = WorkbookImportSummaries.Build(source, matching, reviewedEvidence: selected);
-        var hidden = new Dictionary<string, IReadOnlyList<PanelEvidenceChoice>> { ["F01"] = new[] { new PanelEvidenceChoice(PanelEvidenceMatchKind.Pfam, "PF99999") } };
+        var hidden = new Dictionary<string, IReadOnlyList<PanelEvidenceChoice>>(selected, StringComparer.Ordinal) { ["F01"] = new[] { new PanelEvidenceChoice(PanelEvidenceMatchKind.Pfam, "PF99999") } };
         var probe = new NotesImporterProbe((_, _, _, _) => throw new InvalidOperationException("Changed selections must not reach Check."));
         var refused = WorkbookImportSummaries.AcceptAll(shown, probe, shown.DraftSubclassSelections, hidden);
         Check("Z16a9 evidence not shown in the summary is refused before import", !refused.CanImport && probe.Calls == 0
@@ -191,8 +194,9 @@ internal static partial class Program
         var broad = WorkbookImportSummaries.Build(source, storedMatching, reviewedEvidence: selected);
         var noQuestion = WorkbookImportSummaries.AcceptAll(broad, importer, broad.DraftSubclassSelections, selected);
         var confirmed = WorkbookImportSummaries.AcceptAll(broad, importer, broad.DraftSubclassSelections, selected, broadPfamConfirmed: true);
-        Check("Z16a9 broad source matches retain the counted confirmation gate", !noQuestion.CanImport && confirmed.CanImport
-            && broad.Sections.SelectMany(section => section.Items).Any(item => item.ConfirmationWarning.Contains("PF01234 (2)", StringComparison.Ordinal)));
+        Check("IM6 known broad source PF codes retain coverage counts without a second confirmation", noQuestion.CanImport && confirmed.CanImport
+            && broad.Sections.SelectMany(section => section.Items).Any(item => item.Label == "Reviewed evidence for F01"
+                && item.Reason.Contains("2 database targets", StringComparison.Ordinal) && item.ConfirmationWarning.Length == 0));
         Check("Z16a9 provider vocabulary comes from stored evidence rather than sheet names", broad.RecognizedPfamDomains.Count == 2
             && broad.RecognizedPfamDomains.Any(domain => domain.Accession == "PF01234" && domain.Name == "DomainOne"));
         var ordinalSource = new FamilyClusterFile { MyExtendedFastaItems = new() { new() { SequenceIdentifier = "tr|Q79999|invented", Evidence = new()

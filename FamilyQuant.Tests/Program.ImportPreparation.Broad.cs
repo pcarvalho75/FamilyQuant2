@@ -28,7 +28,7 @@ internal static partial class Program
                 string original = file.ToJsonText();
                 string work = Path.Combine(Path.GetTempPath(), "fq-prepared-broad-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(work);
                 string workbook = Path.Combine(work, "broad.xlsx"); PanelImportTemplate.Write(workbook);
-                FillTemplate(workbook, new[] { new[] { "broad", "Broad shared keyword", "", "", "", "Quantify" } });
+                FillTemplate(workbook, new[] { new[] { "broad", "Broad shared keyword", "", "", "Unresolved domain", "Quantify" } });
                 int uiThread = Environment.CurrentManagedThreadId, copyThread = 0;
                 var matcher = new PreparationMatcher(file);
                 var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(file)), matcher: matcher,

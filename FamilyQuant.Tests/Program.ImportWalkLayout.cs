@@ -36,7 +36,8 @@ internal static partial class Program
     private static void ImportWalkLayoutTests(string output)
     {
         Section("Z12p2f1 native import-page walk regression");
-        EnsureApplication(); Directory.CreateDirectory(output);
+        EnsureApplication();
+        using var dialogs = new ImportFixtureDialogs(); Directory.CreateDirectory(output);
         var spanMethod = typeof(FamilyListImportWindow).GetMethod("PreviewTitleSpan", BindingFlags.NonPublic | BindingFlags.Static)!;
         var heading = new PanelPreviewRow { RowNumber = 1, Cells = new()
         {
@@ -133,7 +134,7 @@ internal static partial class Program
                     Check(label + " row2 keeps the correct editor action label", model.ForwardLabel == "Keep subclass choices");
                     Check(label + " row2 has no duplicate return button and names the final acceptance", !model.CanReturnToWorkbook
                         && !returnButton.IsVisible && model.Status.Contains("Accept and import", StringComparison.Ordinal)
-                        && model.BackToolTip.Contains("Review your workbook", StringComparison.Ordinal));
+                        && model.BackToolTip.Contains("Summary", StringComparison.Ordinal));
                     var status = WalkTree(footer).OfType<TextBlock>().Single(text => text.GetBindingExpression(TextBlock.TextProperty)?.ParentBinding.Path?.Path == "Status");
                     Check(label + " row2 shows only the subclass editor status", !status.IsVisible);
                     var subclassReview = WalkTree(window).OfType<FamilyListSubclassReview>().Single();

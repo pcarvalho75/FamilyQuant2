@@ -156,6 +156,26 @@ internal static partial class Program
         Check("IM6 names and unknown codes require exactly one resolving choice per source row",
             summary.HasBlockingItems && summary.Sections.SelectMany(s => s.Items).Count(i => i.Required
                 && i.State == WorkbookImportItemState.Uncertain && i.Page == WorkbookImportPage.EvidenceMatches) == 2);
+        path = Path.Combine(ImportSimpleWork("IM6"), "inactive-rows.xlsx");
+        PanelImportTemplate.Write(path);
+        SetImportHeaders(path, new[] { "Abbreviation", "Name", "Pfam domains", "Decision" });
+        FillTemplate(path, new[]
+        {
+            new[] { "A", "First family", "PF12345", "Quantify" },
+            new[] { "B", "Second family", "PF99999", "Not a family" },
+            new[] { "C", "Third family", "PF88888", "Merge into A" },
+            new[] { "D", "Fourth family; Fifth family", "PF77777", "Quantify" },
+        });
+        var inactive = importer.ProposeWorkbook(path);
+        inactive.FamilyProposal.Choices.RowChoices = new() { new() { RowNumber = 5, Action = FamilyPanelRowAction.Split } };
+        summary = WorkbookImportSummaries.Build(inactive, matching);
+        var accepted = WorkbookImportSummaries.AcceptAll(summary, importer, summary.ReviewedSubclassSelections, summary.ProposedEvidenceSelections);
+        Check("IM6 inactive and split source rows cannot leave an unresolvable matching question or lose their source domains",
+            !summary.HasBlockingItems && accepted.CanImport && accepted.Panel!.Families.Count == 5
+            && accepted.Panel!.Families.Single(f => f.Key == "B").Pfam.Single().Accession == "PF99999"
+            && accepted.Panel.Families.Single(f => f.Key == "C").Pfam.Single().Accession == "PF88888"
+            && accepted.Panel.Families.Where(f => f.Key is not ("A" or "B" or "C")).All(f => f.Pfam.Count == 0
+                && f.TextFields.Any(field => field.Name == "Pfam domains" && field.Text == "PF77777")));
     }
 
     private static void ImportSaveHandoffTests()
@@ -300,6 +320,7 @@ internal static partial class Program
             new FamilyPanelEvidenceLink { SourceFamily = "", ArchitectureKey = "PF12345", PanelFamilyKey = "A" },
             new FamilyPanelEvidenceLink { SourceFamily = "Outside family", PanelFamilyKey = null },
         });
+        foreach (var link in panel.EvidenceLinks) link.PanelDefinitionFingerprint = PanelEvidenceClassifier.DefinitionFingerprint(panel);
         path = Path.Combine(ImportSimpleWork("RG4"), "saved.xlsx");
         FamilyPanelTemplate.Write(path, panel);
         var restored = FamilyPanelTemplate.Read(path);

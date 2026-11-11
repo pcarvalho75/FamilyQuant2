@@ -54,6 +54,7 @@ internal static partial class Program
 
     private static void WorkbookWizardTests(string? output = null)
     {
+        using var dialogs = new ImportFixtureDialogs();
         Section("Z16a3 workbook map, explicit roles, legend meanings and retained source notes");
         EnsureApplication();
         string work = Path.Combine(Path.GetTempPath(), "fq-workbook-wizard-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(work);
@@ -77,7 +78,7 @@ internal static partial class Program
                     Check(label + " every source sheet and its structural role is shown", model.HasWorkbookMap && model.WorkbookSheets.Count == 6
                         && model.WorkbookSheets.Count(r => r.Role == PanelWorkbookSheetRole.FamilyList) == 1
                         && model.WorkbookSheets.Count(r => r.Role == PanelWorkbookSheetRole.Notes) == 3
-                        && ((TabControl)window.FindName("WorkbookTabs")).SelectedItem == window.FindName("WorkbookMapTab"));
+                        && ((TabControl)window.FindName("WorkbookTabs")).SelectedItem == window.FindName("SheetPreviewTab"));
                     Check(label + " the map names the kept notes without publishing them", model.KeptNotes.Count == source.Last.Notes.Count && model.KeptNotesSummary.Contains(source.Last.Notes[0].SheetName, StringComparison.Ordinal)
                         && source.Completes == 0 && project.ToJsonText() == before);
                     CaptureFamilyListPage(window, output, theme, size.W, size.H, "02-workbook-map");
@@ -98,17 +99,8 @@ internal static partial class Program
                             && c.Label == (!h.IsUncertain && h.Name.Length > 0 ? h.Name : c.ColorName) && h.Meaning == c.Meaning)),
                         string.Join("; ", model.SourceColorChoices.Select(c => c.Color + "=" + c.Label + " / " + c.Meaning)));
                     model.ReviewingDecisions = false;
-                    ((Expander)window.FindName("ColourCategories")).IsExpanded = true; PumpDispatcher();
-                    var colourGrid = (DataGrid)window.FindName("ColourCategoriesGrid");
-                    Check(label + " category column, table and header explain legend names and the plain fill fallback",
-                        new[] { model.ColorColumn!.ToolTip, colourGrid.ToolTip as string ?? "",
-                            Themes.TableAppearance.GetHeaderToolTip(colourGrid.Columns[2]) ?? "" }
-                        .All(tip => tip.Contains("legend name", StringComparison.Ordinal) && tip.Contains("plain fill name", StringComparison.Ordinal)));
-                    var legendColour = model.SourceColorChoices.First(choice => choice.Meaning.Length > 0);
-                    colourGrid.ScrollIntoView(legendColour); PumpDispatcher();
-                    Check(label + " the native source category row exposes its retained legend meaning",
-                        colourGrid.ItemContainerGenerator.ContainerFromItem(legendColour) is DataGridRow colourRow
-                        && colourRow.ToolTip as string == legendColour.Meaning && project.ToJsonText() == before);
+                    Check(label + " source legend text remains data while category controls are absent", window.FindName("ColourCategories") == null
+                        && model.SourceColorChoices.Any(choice => choice.Meaning.Length > 0) && project.ToJsonText() == before);
                     model.ReviewingDecisions = true;
                     model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header = source.Last.FamilyProposal.DecisionHint; PumpDispatcher();
                     Check(label + " decision meanings are displayed without accepting uncertain mappings", model.Decisions.Count > 0
@@ -128,7 +120,7 @@ internal static partial class Program
                     for (int attempt = 0; attempt < 100 && model.SpecialRows.FirstOrDefault(r => r.Blocking) is { } row; attempt++)
                     { model.SelectedSpecialRow = row; row.Action = row.SeveralNames ? FamilyPanelRowAction.Split : FamilyPanelRowAction.Import; model.UseRowChoice(); }
                     FinishReviewWork(async () => { await model.NextAsync(); }); model.SkipAllMatches();
-                    FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(); });
+                    FinishReviewWork(async () => { if (model.Page < 5) await model.NextAsync(); if (model.Page == 5) await model.NextAsync(); });
                     Check(label + " accepted import retains source notes once and creates one Undo", model.Imported && source.Completes == 1 && curation.UndoStack.Count == 1
                         && project.FamilyPanel!.SourceNotes.Count == source.Last.Notes.Count);
                     string bundle = Path.Combine(work, label + ".fqproj"); ProjectStore.WriteFqproj(bundle, project, new List<QuantRow>(), new QuantManifest());

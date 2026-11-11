@@ -150,11 +150,12 @@
                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                     <StackPanel>
                         <TextBlock Text="Workbook" Style="{StaticResource SectionTitle}"/>
-                        <WrapPanel HorizontalAlignment="Right" Margin="0,0,0,4">
-                            <Button x:Name="TemplateButton" Content="Use template" Click="Template_Click" ToolTip="Writes an empty Excel workbook with the program's columns at a location you choose, ready to fill and import. This creates a file and leaves the project unchanged; available before import when no read is running."/>
-                            <Button Content="Edit current panel" Click="Editor_Click" ToolTip="Closes this draft and opens the current family panel editor. Closing a loaded draft asks before discarding its choices; the project changes only when you apply an edit."/>
-                        </WrapPanel>
-                        <DockPanel Margin="0,4,0,10"><Button x:Name="BrowseButton" Content="Browse" DockPanel.Dock="Right" Click="Browse_Click" ToolTip="Chooses an Excel workbook to preview without changing it or the project. Available before import when no read is running."/>
+                        <DockPanel Margin="0,4,0,10">
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                <Button x:Name="BrowseButton" Content="Browse" Click="Browse_Click" ToolTip="Chooses an Excel workbook to preview without changing it or the project. Available before import when no read is running."/>
+                                <Button x:Name="TemplateButton" Content="Use template" Click="Template_Click" ToolTip="Writes an empty Excel workbook with the program's columns at a location you choose, ready to fill and import. This creates a file and leaves the project unchanged; available before import when no read is running."/>
+                                <Button Content="Edit current panel" Click="Editor_Click" ToolTip="Closes this draft and opens the current family panel editor. Closing a loaded draft asks before discarding its choices; the project changes only when you apply an edit."/>
+                            </StackPanel>
                             <TextBox x:Name="WorkbookPathBox" Text="{Binding WorkbookPath, Mode=OneWay}" IsReadOnly="True" MinHeight="34"
                                      ToolTip="The full path of the selected Excel workbook, initially empty and read only. Choose Browse or drop one .xlsx file to change the source before Import; viewing it changes nothing." AutomationProperties.Name="Workbook"/>
                         </DockPanel>

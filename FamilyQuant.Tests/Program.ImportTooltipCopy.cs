@@ -29,6 +29,7 @@ internal static partial class Program
     {
         Section("Z12q7b wizard tips describe read-only columns and actual enablement");
         EnsureApplication();
+        using var dialogs = new ImportFixtureDialogs();
         string folder = Path.Combine(Path.GetTempPath(), "fq-tooltip-copy-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(folder);
         string workbook = Path.Combine(folder, "example.xlsx"); ExampleFamilyList.Write(workbook);
         var project = ManualChoiceFile(); string before = project.ToJsonText();

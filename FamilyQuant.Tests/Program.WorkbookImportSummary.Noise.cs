@@ -37,7 +37,8 @@ internal static partial class Program
         string sourceBefore = JsonSerializer.Serialize(source);
         var stored = new FamilyClusterFile(); string storedBefore = stored.ToJsonText();
         var matching = new PanelEvidenceMatching(stored);
-        var evidence = new Dictionary<string, IReadOnlyList<PanelEvidenceChoice>>();
+        var evidence = WorkbookImportSummaries.ProposedFamilyKeys(source).ToDictionary(key => key,
+            _ => (IReadOnlyList<PanelEvidenceChoice>)Array.Empty<PanelEvidenceChoice>(), StringComparer.Ordinal);
         var complete = WorkbookImportSummaries.Build(source, matching, reviewedEvidence: evidence);
         var names = complete.ExpectedSubclassNames;
         var notedPanel = WorkbookImportSummaries.AcceptAll(complete, importer, complete.DraftSubclassSelections, evidence, broadPfamConfirmed: true).Panel;

@@ -58,14 +58,18 @@ internal static partial class Program
     {
         FinishReviewWork(() => model.ReviewWorkbookSectionAsync("decisions"));
         foreach (var decision in model.Decisions.Where(d => d.Decision == null)) decision.Decision = FamilyPanelDecision.Quantify;
+        if (model.Decisions.Any(d => !d.Confirmed)) model.ConfirmDecisions();
         FinishReviewWork(() => model.ReviewWorkbookSectionAsync("rows"));
         for (int attempt = 0; attempt < 100 && model.SpecialRows.FirstOrDefault(r => r.Blocking) is { } row; attempt++)
         { model.SelectedSpecialRow = row; row.Action = row.SeveralNames ? FamilyPanelRowAction.Split : FamilyPanelRowAction.Import; model.UseRowChoice(); }
+        FinishReviewWork(() => model.ReviewWorkbookSectionAsync("matches"));
+        model.SkipAllMatches();
         model.ReturnToWorkbookReview();
     }
 
     private static void WorkbookOverviewTests(string? output = null)
     {
+        using var dialogs = new ImportFixtureDialogs();
         Section("Z16a9 actual Core summary and one explicit import over three source shapes");
         EnsureApplication();
         string work = Path.Combine(Path.GetTempPath(), "fq-workbook-overview-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(work);
@@ -90,11 +94,11 @@ internal static partial class Program
                 string? folder = output == null ? null : Path.Combine(output, shape.Name);
                 try
                 {
-                    window.Show(); FinishReviewWork(() => model.LoadAsync(shape.Path)); PumpDispatcher();
-                    Check(label + " opens directly on the real complete proposal with one acceptance action", model.ReviewingWorkbook && !model.ShowingWizardPages
-                        && model.Title == "Review your workbook" && model.ForwardLabel == "Accept and import" && model.WorkbookSections.Count == 8);
-                    Check(label + " proposals remain unconfirmed and leave the project unchanged", source.Completes == 0 && project.ToJsonText() == before
-                        && curation.UndoStack.Count == 0 && model.Decisions.All(d => !d.Confirmed) && model.SubclassChoices.All(s => !s.Confirmed));
+                    window.Show(); FinishReviewWork(() => model.LoadAsync(shape.Path)); model.ReturnToWorkbookReview(); PumpDispatcher();
+                    Check(label + " optional overview retains the real complete proposal and one acceptance action", model.ReviewingWorkbook && !model.ShowingWizardPages
+                        && model.Title == "Review your workbook" && model.ForwardLabel == "Accept and import" && model.WorkbookSections.All(section => section.Key != "colours"));
+                    Check(label + " custom proposals remain unconfirmed and leave the project unchanged", source.Completes == 0 && project.ToJsonText() == before
+                        && curation.UndoStack.Count == 0 && model.Decisions.All(d => d.IsProgramDecision || !d.Confirmed) && model.SubclassChoices.All(s => !s.Confirmed));
                     Check(label + " every real finding has source state and a reason", model.WorkbookFindings.Count > 0
                         && model.WorkbookFindings.All(f => f.State.Length > 0 && f.Reason.Length > 0));
                     CaptureFamilyListPage(window, folder, theme, size.W, size.H, "01-workbook-proposal");
@@ -104,7 +108,7 @@ internal static partial class Program
                         string original = System.Text.Json.JsonSerializer.Serialize(source.Last);
                         ResolveWorkbookUiDraft(model);
                         Check(label + " explicit draft edits preserve the original proposal and project", System.Text.Json.JsonSerializer.Serialize(source.Last) == original
-                            && project.ToJsonText() == before && model.Decisions.All(d => !d.Confirmed));
+                            && project.ToJsonText() == before && model.Decisions.All(d => d.Confirmed));
                     }
                     Check(label + " reviewed family rows are available before acceptance", model.WorkbookFamilies.Count > 0 && model.CanAcceptWorkbook,
                         string.Join("; ", model.WorkbookReviewProblems));
@@ -139,7 +143,7 @@ internal static partial class Program
                         FinishReviewWork(() => model.ReviewWorkbookSectionAsync("subclasses"));
                         Check(label + " subclass review contains the real unconfirmed Core proposals", model.ReviewingSubclasses && model.SubclassChoices.All(s => !s.Confirmed));
                         CaptureFamilyListPage(window, folder, theme, size.W, size.H, "03-subclass-review");
-                        model.Back(); Check(label + " subclass Back returns without applying anything", model.ReviewingWorkbook && project.ToJsonText() == before);
+                        model.Back(); model.ReturnToWorkbookReview(); Check(label + " subclass Back returns without applying anything", model.ReviewingWorkbook && project.ToJsonText() == before);
                     }
                     FinishReviewWork(async () => { await model.NextAsync(_ => true); });
                     Check(label + " one press imports exactly the real family preview as one Undo", model.Imported && source.Completes == 0 && curation.UndoStack.Count == 1
@@ -167,7 +171,7 @@ internal static partial class Program
         string changedPath = Path.Combine(work, "changed-after-review.xlsx"); File.Copy(path, changedPath);
         var project = WorkbookOverviewProject(); string before = project.ToJsonText();
         using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(project)), workbookSource: new ObservedWorkbookSource(), openWorkbookReview: true);
-        FinishReviewWork(() => model.LoadAsync(changedPath));
+        FinishReviewWork(() => model.LoadAsync(changedPath)); model.ReturnToWorkbookReview();
         File.AppendAllText(changedPath, "changed");
         bool accepted = true; FinishReviewWork(async () => { accepted = await model.NextAsync(_ => true); });
         Check("one-press acceptance rechecks every workbook byte", !accepted && !model.Imported && project.ToJsonText() == before
@@ -299,11 +303,10 @@ internal static partial class Program
             && !reason.Contains("visible-first", StringComparison.Ordinal) && !reason.Contains("short-code", StringComparison.Ordinal), reason);
         string card = model.WorkbookSections.Single(section => section.Key == "sheets").Title;
         FinishReviewWork(() => model.ReviewWorkbookSectionAsync("sheets"));
-        Check("Workbook sheets card opens a page with the same name", card == "Workbook sheets" && model.Title == card
-            && model.StepLabel.EndsWith(card, StringComparison.Ordinal), model.Title + "; " + model.StepLabel);
+        Check("Workbook sheets card opens a page with the same name", card == "Workbook sheets" && model.Title == "Choose your spreadsheet"
+            && model.StepLabel.EndsWith("File and sheet", StringComparison.Ordinal), model.Title + "; " + model.StepLabel);
         Check("Workbook sheets page explanation names the sheet roles rather than the old file and sheet step",
-            model.Explanation.Contains("role", StringComparison.OrdinalIgnoreCase)
-            && !model.Explanation.Contains("Choose a file and sheet", StringComparison.Ordinal), model.Explanation);
+            model.Explanation.Contains("Choose a file and sheet", StringComparison.Ordinal) && model.HasWorkbookMap, model.Explanation);
     }
 
     private static void WorkbookOverviewFilledNavigationTest(string work)
@@ -332,13 +335,13 @@ internal static partial class Program
         FinishReviewWork(() => model.LoadAsync(path));
         model.ColorColumn!.Header = model.Columns.Single(c => c.Role == PanelImportFields.FamilyKey).Header;
         Check("filled workbook starts with mapped headers and draft decision actions", model.CanAcceptWorkbook && model.SourceColorChoices.Count == 2
-            && model.Columns.Single(c => c.Role == PanelImportFields.Decision).HasChoice && model.Decisions.All(d => !d.Confirmed && d.Decision != null),
+            && model.Columns.Single(c => c.Role == PanelImportFields.Decision).HasChoice && model.Decisions.All(d => d.Confirmed && d.Decision != null),
             "colours=" + model.SourceColorChoices.Count + "; " + string.Join("; ", model.WorkbookReviewProblems));
         FinishReviewWork(() => model.ReviewWorkbookSectionAsync("rows"));
-        Check("filled workbook special-rows navigation keeps proposed decisions without requiring early confirmation", model.Page == 3 && model.CanNext
+        Check("filled workbook special-rows navigation keeps exact program decisions already confirmed", model.Page == 3 && model.CanNext
             && model.SpecialRows.All(row => !row.Blocking), string.Join("; ", model.Problems.Select(problem => problem.Message)));
         bool continued = false; FinishReviewWork(async () => { continued = await model.NextAsync(); });
-        Check("filled workbook continues past special rows without confirming or publishing", continued && model.Page == 4 && model.Decisions.All(d => !d.Confirmed)
+        Check("filled workbook skips unused matching after special rows without publishing", continued && model.Page == 5 && model.Decisions.All(d => d.Confirmed)
             && project.ToJsonText() == before && TestFileHash.Upper(path) == sourceHash && source.Completes == 0);
     }
 
@@ -359,11 +362,12 @@ internal static partial class Program
         var curation = new CurationViewModel(project); string before = project.ToJsonText();
         using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(curation), workbookSource: new ObservedWorkbookSource(), openWorkbookReview: true);
         FinishReviewWork(() => model.LoadAsync(path));
-        int questions = 0; bool accepted = true;
+        FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(); });
+        int questions = 0; bool accepted = false;
         FinishReviewWork(async () => { accepted = await model.NextAsync(_ => { questions++; return false; }); });
-        Check("one-press import asks before accepting broad source-Pfam matching", questions == 1 && !accepted && !model.Imported
-            && curation.UndoStack.Count == 0 && project.ToJsonText() == before);
-        FinishReviewWork(async () => { accepted = await model.NextAsync(_ => { questions++; return true; }); });
-        Check("explicit broad confirmation permits exactly one workbook publication", questions == 2 && accepted && model.Imported && curation.UndoStack.Count == 1);
+        Check("known supplied PF codes bypass broad confirmation and publish once", questions == 0 && accepted && model.Imported && curation.UndoStack.Count == 1);
+        string imported = project.ToJsonText();
+        FinishReviewWork(async () => { await model.NextAsync(_ => { questions++; return true; }); });
+        Check("revisiting a committed import cannot repeat its publication", questions == 0 && curation.UndoStack.Count == 1 && project.ToJsonText() == imported && project.ToJsonText() != before);
     }
 }
