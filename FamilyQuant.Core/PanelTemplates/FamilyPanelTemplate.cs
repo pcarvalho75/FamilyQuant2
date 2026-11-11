@@ -25,6 +25,7 @@ public static class FamilyPanelTemplate
     {
         ArgumentNullException.ThrowIfNull(panel);
         FamilyPanelValidation.Validate(panel);
+        string definition = Evidence.PanelEvidenceClassifier.DefinitionFingerprint(panel);
         var fields = TextColumns(panel);
         using var document = SpreadsheetDocument.Create(path, SpreadsheetDocumentType.Workbook);
         var workbook = document.AddWorkbookPart();
@@ -36,7 +37,8 @@ public static class FamilyPanelTemplate
         for (int i = 0; i < panel.Families.Count; i++)
         {
             var f = panel.Families[i];
-            var sourceFamilies = f.UniProtFamilies.Concat(panel.EvidenceLinks.Where(link => link.PanelFamilyKey == f.Key)
+            var sourceFamilies = f.UniProtFamilies.Concat(panel.EvidenceLinks.Where(link => link.PanelFamilyKey == f.Key
+                && link.PanelDefinitionFingerprint == definition)
                 .Select(link => link.SourceFamily)).Select(name => name.Trim()).Where(name => name.Length > 0).Distinct(StringComparer.OrdinalIgnoreCase);
             AddRow(families, new[] { "f" + i.ToString(CultureInfo.InvariantCulture), f.Key, f.DisplayName, DecisionText(f.Decision), f.MergeTargetFamilyKey, Join(f.Pfam.Select(d => d.Accession)), Join(sourceFamilies) }
                 .Concat(fields.Select(field => FieldValue(f, field))).ToArray());

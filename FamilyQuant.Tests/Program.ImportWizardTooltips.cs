@@ -16,6 +16,7 @@ internal static partial class Program
     private static readonly Dictionary<string, string> importTooltipCensus = new(StringComparer.Ordinal);
     private static void ImportWizardToolTipTests(string? output = null)
     {
+        using var dialogs = new ImportFixtureDialogs();
         Section("Z12q2 import wizard tooltips across every real page");
         importTooltipCensus.Clear(); auditImportTooltips = true;
         try { FamilyListImportTests(output); }

@@ -116,25 +116,28 @@ public static partial class WorkbookImportSummaries
                 chosen == null ? WorkbookImportItemState.Uncertain : WorkbookImportItemState.Proposed, WorkbookImportPage.FamilyRows, true, chosen,
                 new[] { At(new[] { row }, multi == null ? null : new[] { multi.ListColumn }) });
         }
+        var preview = table == null ? new PanelImportCheck() : new FamilyPanelSpreadsheetImporter().Check(table, choices,
+            plan.Actions.Where(action => action.Item.State == WorkbookImportItemState.Proposed).Select(action => action.Value).OfType<FamilyPanelDecisionMapping>().ToArray());
         foreach (var hint in source.Pfam)
         {
             if (choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Pfam, "") != hint.Column) continue;
             string? key = keyPreview.Rows.FirstOrDefault(row => row.RowNumber == hint.RowNumber)?.FamilyKeys.SingleOrDefaultSafe();
             string text = hint.SourceText.Length > 0 ? hint.SourceText : string.Join("; ", hint.Domains.Select(domain => domain.Accession));
-            bool needsChoice = FamilyPanelSpreadsheetImporter.NeedsPfamChoice(text, knownPfam);
+            bool active = key != null && (preview.Panel == null || FamilyPanelValidation.ResolveFamilyKey(preview.Panel, key) == key);
+            bool needsChoice = active && FamilyPanelSpreadsheetImporter.NeedsPfamChoice(text, knownPfam);
             bool reviewed = key != null && reviewedEvidence?.ContainsKey(key) == true;
             if (needsChoice && !reviewed)
                 Add(WorkbookImportSectionKind.Pfam, "Pfam for row " + hint.RowNumber + " (" + hint.FamilyKey + ")", text,
                     "Resolve the Pfam names or codes not found in the stored domain list, or explicitly skip this row's matches.",
                     WorkbookImportItemState.Uncertain, WorkbookImportPage.EvidenceMatches, true,
                     sources: new[] { At(new[] { hint.RowNumber }, new[] { hint.Column }) });
-            if (text.Length == 0)
+            if (text.Length == 0 && active)
                 Add(WorkbookImportSectionKind.Pfam, "Row " + hint.RowNumber + " (" + hint.FamilyKey + ")", "No Pfam code",
                     "This family gets no proteins until it has a Pfam code.", WorkbookImportItemState.Found,
                     WorkbookImportPage.EvidenceMatches, sources: new[] { At(new[] { hint.RowNumber }, new[] { hint.Column }) });
             foreach (var domain in hint.Domains)
             {
-                if (!knownPfam.Contains(domain.Accession) && !reviewed) continue;
+                if (!knownPfam.Contains(domain.Accession) && !reviewed && active) continue;
                 bool selected = choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Pfam, "").Length > 0;
                 bool valid = key != null && domain.Accession.Length > 0;
                 Add(WorkbookImportSectionKind.Pfam, "Source Pfam domain", domain.Accession + (domain.Name.Length == 0 ? "" : ": " + domain.Name),
@@ -179,8 +182,6 @@ public static partial class WorkbookImportSummaries
             Add(WorkbookImportSectionKind.Notes, note.SheetName, "Source text kept with the panel", "Original cell addresses and text are kept with the panel, without interpretation.",
                 WorkbookImportItemState.Proposed, WorkbookImportPage.Notes, action: Copy(note),
                 sources: new[] { At(source.Workbook.Sheets.FirstOrDefault(sheet => sheet.SheetName == note.SheetName)?.SourceRows.Select(row => row.RowNumber), sheet: note.SheetName) });
-        var preview = table == null ? new PanelImportCheck() : new FamilyPanelSpreadsheetImporter().Check(table, choices,
-            plan.Actions.Where(action => action.Item.State == WorkbookImportItemState.Proposed).Select(action => action.Value).OfType<FamilyPanelDecisionMapping>().ToArray());
         PrepareFamilyRows(plan, preview, keyPreview);
         foreach (var problem in source.Problems.Concat(preview.Problems).DistinctBy(problem => JsonSerializer.Serialize(problem)))
         {

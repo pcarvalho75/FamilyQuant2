@@ -29,7 +29,7 @@ internal static partial class Program
         Directory.CreateDirectory(work);
         string workbook = Path.Combine(work, "synthetic-broad-match.xlsx");
         PanelImportTemplate.Write(workbook);
-        FillTemplate(workbook, new[] { new[] { "broad", "Broad shared keyword", "", "", "", "Quantify" } });
+        FillTemplate(workbook, new[] { new[] { "broad", "Broad shared keyword", "", "", "Unresolved domain", "Quantify" } });
         var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(file)));
         var window = new FamilyListImportWindow(model)
         {

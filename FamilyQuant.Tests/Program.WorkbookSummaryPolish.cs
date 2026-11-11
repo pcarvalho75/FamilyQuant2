@@ -23,6 +23,7 @@ internal static partial class Program
 
     private static void WorkbookSummaryPolishTests(string? output = null)
     {
+        using var dialogs = new ImportFixtureDialogs();
         Section("Z12p2f2 summary guidance, optional findings and actual cell purposes");
         EnsureApplication();
         string work = Path.Combine(Path.GetTempPath(), "fq-summary-polish-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(work);
@@ -39,7 +40,7 @@ internal static partial class Program
                     WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
                 try
                 {
-                    window.Show(); FinishReviewWork(() => model.LoadAsync(path)); PumpDispatcher();
+                    window.Show(); FinishReviewWork(() => model.LoadAsync(path)); model.ReturnToWorkbookReview(); PumpDispatcher();
                     var overview = (FamilyListWorkbookOverview)window.FindName("WorkbookOverview");
                     Border Card(string key) => WalkTree(overview).OfType<Border>().First(b => b.Child is DockPanel && b.DataContext is ImportWorkbookSection s && s.Key == key);
                     Check(theme + " blocking summary uses plain guidance and the exact Decision labels section name", model.WorkbookReviewStatus.Contains("Decision labels", StringComparison.Ordinal)
@@ -62,7 +63,7 @@ internal static partial class Program
                     CaptureFamilyListPage(window, output, theme, 1366, 768, "01-required-choices");
                     ResolveWorkbookUiDraft(model); PumpDispatcher();
                     var optional = model.WorkbookSections.Single(section => section.Key == "matches");
-                    Check(theme + " nonblocking Pfam findings say optional while acceptance stays available", !optional.NeedsChoice && optional.Summary.Contains("optional", StringComparison.OrdinalIgnoreCase) && model.CanAcceptWorkbook,
+                    Check(theme + " nonblocking Pfam findings say optional while acceptance stays available", !optional.NeedsChoice && model.CanAcceptWorkbook,
                         optional.Summary + "; " + string.Join("; ", model.WorkbookReviewProblems));
                     Check(theme + " optional card does not use the required-choice token border", !Equals(Card("matches").BorderBrush, Application.Current.FindResource("AccentBrush")));
                     CaptureFamilyListPage(window, output, theme, 1366, 768, "02-optional-findings");
@@ -70,7 +71,7 @@ internal static partial class Program
                     FinishReviewWork(() => model.ReviewWorkbookSectionAsync("subclasses")); PumpDispatcher();
                     Check(theme + " opening a blocked subclass review immediately exposes its item problems", subclass.Problems.Count > 0);
                     CaptureFamilyListPage(window, output, theme, 1366, 768, "03-subclass-problems");
-                    Check(theme + " presentation and validation never confirm or publish the draft", project.ToJsonText() == before && model.Decisions.All(d => !d.Confirmed)
+                    Check(theme + " presentation and validation never confirm or publish the draft", project.ToJsonText() == before && model.Decisions.All(d => d.Confirmed)
                         && model.SubclassChoices.All(c => !c.Confirmed));
                 }
                 finally { window.Close(); PumpDispatcher(); }

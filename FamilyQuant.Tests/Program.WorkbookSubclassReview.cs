@@ -78,6 +78,7 @@ internal static partial class Program
 
     private static void WorkbookSubclassReviewTests(string? output = null)
     {
+        using var dialogs = new ImportFixtureDialogs();
         Section("Z16a9 sourced subclass review, explicit acceptance and item messages");
         EnsureApplication();
         var proposals = WorkbookSubclassReviewFixture();
@@ -170,6 +171,8 @@ internal static partial class Program
                 if (shape == "shipped") ExampleFamilyList.Write(path);
                 else WriteNeutralWorkbook(path, onlyFamily: shape == "one-sheet", includeLegend: false, includeDecision: false);
                 var proposal = ReviewSummaryFixture(importer.ProposeWorkbook(path), importer);
+                noEvidence = WorkbookImportSummaries.ProposedFamilyKeys(proposal).ToDictionary(key => key,
+                    _ => (IReadOnlyList<PanelEvidenceChoice>)Array.Empty<PanelEvidenceChoice>(), StringComparer.Ordinal);
                 var summary = WorkbookImportSummaries.Build(proposal, matching, reviewedEvidence: noEvidence);
                 var seeds = summary.DraftSubclassSelections;
                 var rows = summary.SubclassProposals.Select(source => ImportSubclassChoice.FromCore(source,
