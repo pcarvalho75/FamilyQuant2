@@ -398,6 +398,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => GroupingDiscoverySafetyTests());
             suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => PanelMultiScopeAuditTests());
+            suite.Add(() => PanelCoverageTieTests(Path.Combine(workDir, "panel-coverage-ties")));
             suite.AddWithApplication(() => PanelLinkNotesTests());
             suite.Add(() => EvidenceClassifierTests());
             suite.AddWithApplication(() => FamilyPanelSubclassTests());

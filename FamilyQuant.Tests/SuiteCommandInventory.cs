@@ -8,6 +8,8 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-panel-coverage-ties", "FamilyQuant.Tests.Program.PanelCoverageTieTests(System.String)"),
+        SuiteCommandRule.Excluded("--panel-tie-counts", "Read-only desk aggregate over a selected project. Prints only tie counts and counts per imported family row; synthetic proof is PanelCoverageTieTests in DefaultSuite."),
         SuiteCommandRule.Covered("--test-ledger-synthetic-mode", "FamilyQuant.Tests.Program.FeatureLedgerReceiptGuardTests(System.Boolean)"),
         SuiteCommandRule.Covered("--test-html-family-native", "FamilyQuant.Tests.Program.HtmlFamilyNativeTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-sensitivity-native", "FamilyQuant.Tests.Program.HtmlSensitivityNativeTests(System.String)"),
