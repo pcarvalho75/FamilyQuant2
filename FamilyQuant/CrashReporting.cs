@@ -97,7 +97,7 @@ public sealed class CrashReportStore
     private static string SafeOperation(string? value) => value switch
     {
         "Group by evidence" or "Read database and scope" or "Read grouping task" or "Fetch evidence" or
-        "Fetch family world" or "Retry panel" or "Quantify" or "Build families" or "Open project" or
+        "Fetch UniProt families" or "Retry panel" or "Quantify" or "Build families" or "Open project" or
         "Save project" or "Export families" or "Prepare results" or "Prepare report" or "Export report" or
         "Export results" or "Clustering diagnostic" or "Prepare spectrum comparison" or "Reannotate SEPro" or
         "Check for updates" or "Install update" or "Load and filter de novo" or "Reconcile de novo" or

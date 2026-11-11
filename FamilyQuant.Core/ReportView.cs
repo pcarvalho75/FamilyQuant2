@@ -20,13 +20,20 @@ namespace FamilyQuant
     public static class ReportView
     {
         /// <summary>
-        /// "232 visible · 365 in file". Both numbers, always - the single change that removes the
-        /// question. When no filter is active the two are equal and the line still reads correctly.
+        /// Shown and whole-file family counts, followed by only the active display filters.
+        /// Filter names describe the view without recalculating per-filter counts.
         /// </summary>
-        public static string FamilyCounter(int visible, int inFile)
+        public static string FamilyCounter(int visible, int inFile, bool hideDecoys = false,
+            bool hideContaminants = false, bool search = false, bool onlyQuantified = false)
         {
-            return visible.ToString("N0", CultureInfo.CurrentCulture) + " visible · " +
-                   inFile.ToString("N0", CultureInfo.CurrentCulture) + " in file";
+            var filters = new List<string>();
+            if (hideDecoys) filters.Add("decoys");
+            if (hideContaminants) filters.Add("contaminants");
+            if (search) filters.Add("search");
+            if (onlyQuantified) filters.Add("only quantified");
+            return visible.ToString("N0", CultureInfo.CurrentCulture) + " shown of " +
+                   inFile.ToString("N0", CultureInfo.CurrentCulture) + " in file"
+                + (filters.Count == 0 ? "" : "; hidden: " + string.Join(", ", filters));
         }
 
         /// <summary>

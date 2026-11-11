@@ -91,7 +91,7 @@ public static class FamilyWorldFetcher
                 {
                     operation.ThrowIfCancellationRequested();
                     using var response = await UniProtHttp.GetWithRetryAsync(client, url, 3,
-                        status => "UniProt refused the family-world page (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No world was attached.",
+                        status => "UniProt refused the UniProt families page (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No world was attached.",
                         operation.CancellationToken, options, message => operation.Report("Family world", message)).ConfigureAwait(false);
                     string current = UniProtHttp.Release(response);
                     if (current.Length == 0 || (release != null && release != current) || current != task.Proposal.Release)
@@ -100,7 +100,7 @@ public static class FamilyWorldFetcher
                     if (!response.Headers.TryGetValues("x-total-results", out var totals)
                         || !int.TryParse(totals.FirstOrDefault(), NumberStyles.None, CultureInfo.InvariantCulture, out int total) || total < 0
                         || (announced.HasValue && announced != total))
-                        throw new InvalidDataException("UniProt omitted or changed the family-world result count. No world was attached.");
+                        throw new InvalidDataException("UniProt omitted or changed the UniProt families result count. No world was attached.");
                     announced = total;
                     string json = await response.Content.ReadAsStringAsync(operation.CancellationToken).ConfigureAwait(false);
                     var parsed = EvidenceFetcher.Parse(json);
@@ -108,7 +108,7 @@ public static class FamilyWorldFetcher
                     foreach (var item in document.RootElement.GetProperty("results").EnumerateArray())
                     {
                         string accession = item.GetProperty("primaryAccession").GetString() ?? string.Empty;
-                        if (!seen.Add(accession)) throw new InvalidDataException("A family-world query repeated an accession. No world was attached.");
+                        if (!seen.Add(accession)) throw new InvalidDataException("A UniProt families query repeated an accession. No world was attached.");
                         receipt.Received++;
                         var evidence = parsed[accession];
                         if (evidence.Reviewed == null || (reviewed && evidence.Reviewed != true))
@@ -125,7 +125,7 @@ public static class FamilyWorldFetcher
                         {
                             if (prior.Sequence != sequence || prior.TaxonId != taxon || !prior.LineageTaxonIds.SequenceEqual(lineage)
                                 || JsonSerializer.Serialize(prior.Evidence) != JsonSerializer.Serialize(evidence))
-                                throw new InvalidDataException("An entry changed between family-world queries. No world was attached.");
+                                throw new InvalidDataException("An entry changed between UniProt families queries. No world was attached.");
                             prior.FromReviewedPanel |= reviewed; prior.FromClade |= !reviewed;
                         }
                         else entries.Add(accession, new FamilyWorldEntry { Accession = accession, Sequence = sequence, TaxonId = taxon,
@@ -133,7 +133,7 @@ public static class FamilyWorldFetcher
                     }
                     url = ReferencePanelFetcher.NextPage(response);
                 }
-                if (receipt.Received != announced) throw new InvalidDataException("A family-world query ended before all announced entries arrived. No world was attached.");
+                if (receipt.Received != announced) throw new InvalidDataException("A UniProt families query ended before all announced entries arrived. No world was attached.");
                 receipts.Add(receipt);
                 operation.Report("Family world", receipts.Count.ToString(CultureInfo.InvariantCulture) + " of "
                     + (families.Count * 2).ToString(CultureInfo.InvariantCulture) + " family queries; " + entries.Count.ToString(CultureInfo.InvariantCulture) + " entries kept",
@@ -145,12 +145,12 @@ public static class FamilyWorldFetcher
         Verify(world);
         var attached = JsonSerializer.Deserialize<EvidenceProvenance>(source) ?? new EvidenceProvenance();
         attached.FamilyWorld = world;
-        operation.Report("Family world", "Publishing the complete family world", families.Count * 2, families.Count * 2);
+        operation.Report("Family world", "Publishing the complete UniProt families", families.Count * 2, families.Count * 2);
         operation.Commit(() =>
         {
             if (file.MyExtendedFastaItems.Count != originals.Length || originals.Where((p, index) => !ReferenceEquals(p, file.MyExtendedFastaItems[index])).Any()
                 || EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems) != initial || JsonSerializer.Serialize(file.EvidenceSource) != source || file.DomainSource != domainSource)
-                throw new InvalidDataException("The file changed during the family-world fetch. No world was attached.");
+                throw new InvalidDataException("The file changed during the UniProt families fetch. No world was attached.");
             operation.ThrowIfCancellationRequested();
             file.EvidenceSource = attached;
         });
@@ -159,7 +159,7 @@ public static class FamilyWorldFetcher
 
     public static FamilyWorldSnapshot Stored(FamilyClusterFile file)
     {
-        var world = file.EvidenceSource?.FamilyWorld ?? throw new InvalidDataException("This file has no stored family world.");
+        var world = file.EvidenceSource?.FamilyWorld ?? throw new InvalidDataException("This file has no stored UniProt families.");
         Verify(world);
         EvidenceTaskDiscovery.Validate(file, world.Task, world.Task.ScopeTerms);
         return world;
@@ -173,7 +173,7 @@ public static class FamilyWorldFetcher
                 || (!e.FromReviewedPanel && !e.FromClade) || (e.FromReviewedPanel && e.Evidence.Reviewed != true)
                 || !ReferencePanelFetcher.FamiliesOf(e.Evidence).Intersect(world.Families, StringComparer.OrdinalIgnoreCase).Any())
             || world.ContentSha256 != ContentHash(world))
-            throw new InvalidDataException("The stored family world is incomplete or its content hash differs.");
+            throw new InvalidDataException("The stored UniProt family references are incomplete or their content hash differs.");
     }
 
     public static string ContentHash(FamilyWorldSnapshot world) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(new

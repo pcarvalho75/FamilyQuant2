@@ -84,7 +84,7 @@ public static class FigureDetailsCsv
                     string keys = string.Join(";", row.CuratedUserIds.Select(id => id.ToString(CultureInfo.InvariantCulture)));
                     Row("signal_source", "All runs pooled", keys, row.Family, metric: "identified signal", value: row.IdentifiedEnvelope, unit: "area units");
                     Row("signal_source", "All runs pooled", keys, row.Family, metric: "de novo in database", value: row.DatabaseDeNovoEnvelope, unit: "area units");
-                    Row("signal_source", "All runs pooled", keys, row.Family, metric: "de novo only in family world", value: row.WorldDeNovoEnvelope, unit: "area units", note: row.WorldEvidence);
+                    Row("signal_source", "All runs pooled", keys, row.Family, metric: "de novo only in UniProt families", value: row.WorldDeNovoEnvelope, unit: "area units", note: row.WorldEvidence);
                 }
         }
     }

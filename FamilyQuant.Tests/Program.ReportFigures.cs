@@ -22,7 +22,7 @@ internal static partial class Program
         var plan = ReportFigureRenderer.Plan(data, manifest, curation, families);
         Check("all five analytics figure exports are included", AnalyticsFigures.FileNames.All(name => plan.Charts.Any(c => c.FileName == name)));
         Check("uncomputed studies remain explicit", plan.Unavailable.Any(s => s.Title == "De novo score distributions")
-            && plan.Unavailable.Any(s => s.Title == "Family-world error rates") && plan.Unavailable.Any(s => s.Title == "Database gap"));
+            && plan.Unavailable.Any(s => s.Title == "UniProt families error rates") && plan.Unavailable.Any(s => s.Title == "Database gap"));
         Check("figure ids and filenames do not collide", plan.Charts.Select(c => c.FileName).Distinct(StringComparer.Ordinal).Count() == plan.Charts.Count);
         manifest.PresentationIdentitySweep = new() { new() { Identity = 80, Groups = 3, Score = 0 }, new() { Identity = 60, Groups = 2, Score = .1 } };
         var withSweep = ReportFigureRenderer.Plan(data, manifest, curation, families);

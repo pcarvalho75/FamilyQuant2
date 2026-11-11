@@ -282,6 +282,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => LocaleTests(args.Length > 0 ? args[0] : null));
             suite.Section("What the numbers are called - status line, counter and column headings");
             suite.Add(() => ReportViewTests());
+            suite.AddWithApplication(() => FamilyCounterFilterTests());
             suite.Section("Embedded help - both pages answer the questions that were actually asked");
             suite.Add(() => HelpContentTests());
             suite.Add(() => DeNovoHelpContentTests());
