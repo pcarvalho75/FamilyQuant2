@@ -20,7 +20,7 @@ namespace FamilyQuant
     public static class HelpContent
     {
         public const string GroupingOrder =
-            "0. Import family list (optional): use File > Import family list to choose your workbook or Use template to write an empty workbook to fill and import, with every family quantified. Older sheets can still carry Notes and Decision columns. Only a Decision column with custom words needs label review; source colours remain in the workbook preview. UniProt family holds exact family names separated by semicolons; empty means none. Sheets without family columns are skipped and named in the summary; their source text is kept.\n" +
+            "0. Import family list (optional): use File > Import family list to choose your workbook or Use template to write an empty workbook to fill and import, with every family quantified. Older sheets can still carry Notes and Decision columns. Only a Decision column with custom words needs label review; source colours remain in the workbook preview. Supplied Pfam codes found in stored evidence are accepted directly; names and codes not found need a choice. A row without a code gets no proteins until it has one. UniProt family holds exact family names separated by semicolons; empty means none. Sheets without family columns are skipped and named in the summary; their source text is kept.\n" +
             "1. Fetch evidence: download UniProt annotations for the project's proteins.\n" +
             "2. Group by evidence: review the scope and proposal, then Apply grouping.\n" +
             "3. Fetch family world: download family references for the confirmed task and scope.\n" +

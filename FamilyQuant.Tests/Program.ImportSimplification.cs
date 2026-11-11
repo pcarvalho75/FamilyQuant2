@@ -46,6 +46,13 @@ internal static partial class Program
                 ImportDecisionPageTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
+            }),
+        new("--test-import-pfam-direct", 100, TestCommandPhase.Raw,
+            args => args is ["--test-import-pfam-direct"], (_, _) =>
+            {
+                ImportDirectPfamTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
             })];
 
     private static string ImportSimpleWork(string step)
@@ -107,6 +114,41 @@ internal static partial class Program
                 && model.WorkbookSections.All(s => s.Key != "colours") && window.FindName("ColourCategories") == null);
             window.Close();
         }
+    }
+
+    private static void ImportDirectPfamTests()
+    {
+        Section("IM6 known supplied PF codes do not require another matching decision");
+        EnsureApplication();
+        var file = ManualChoiceFile();
+        file.MyExtendedFastaItems[0].Evidence!.Pfam = new() { new() { Accession = "PF12345", Name = "First domain" } };
+        string before = file.ToJsonText();
+        string path = Path.Combine(ImportSimpleWork("IM6"), "known.xlsx");
+        PanelImportTemplate.Write(path);
+        SetImportHeaders(path, new[] { "Abbreviation", "Name", "Pfam domains" });
+        FillTemplate(path, new[] { new[] { "A", "First family", "First domain (PF12345)" }, new[] { "B", "Second family", "" } });
+        using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(file)),
+            workbookSource: new FamilyListWorkbookCoreSource());
+        FinishReviewWork(() => model.LoadAsync(path));
+        FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(_ => true); await model.NextAsync(); });
+        Check("IM6 supplied valid codes reach Summary without a Pfam question and missing-code rows are named once",
+            model.Page == 5 && model.PfamQuestions.Count == 0 && model.MatchFamilies.All(f => f.Decided)
+            && model.MatchFamilies.Single(f => f.Key == "A").Suggestions.Single(s => s.IsFromSheet).Use
+            && model.SummaryFamilies.Count(f => f.Matches == "No Pfam code; no proteins until it has one") == 1
+            && file.ToJsonText() == before);
+        var importer = new FamilyPanelSpreadsheetImporter();
+        var matching = new PanelEvidenceMatching(file);
+        var summary = WorkbookImportSummaries.Build(importer.ProposeWorkbook(path), matching);
+        Check("IM6 the workbook summary accepts known codes without broad-domain confirmation",
+            !summary.HasBlockingItems && summary.Sections.SelectMany(s => s.Items).All(i => i.ConfirmationWarning.Length == 0));
+        path = Path.Combine(ImportSimpleWork("IM6"), "questions.xlsx");
+        PanelImportTemplate.Write(path);
+        SetImportHeaders(path, new[] { "Abbreviation", "Name", "Pfam domains" });
+        FillTemplate(path, new[] { new[] { "A", "First family", "First domain" }, new[] { "B", "Second family", "PF99999; PF88888" } });
+        summary = WorkbookImportSummaries.Build(importer.ProposeWorkbook(path), matching);
+        Check("IM6 names and unknown codes require exactly one resolving choice per source row",
+            summary.HasBlockingItems && summary.Sections.SelectMany(s => s.Items).Count(i => i.Required
+                && i.State == WorkbookImportItemState.Uncertain && i.Page == WorkbookImportPage.EvidenceMatches) == 2);
     }
 
     private static void ImportSimpleTemplateTests()

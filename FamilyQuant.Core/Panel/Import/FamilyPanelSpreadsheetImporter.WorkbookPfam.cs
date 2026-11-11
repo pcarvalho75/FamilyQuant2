@@ -5,6 +5,15 @@ namespace FamilyQuant.Panels.Import;
 
 public sealed partial class FamilyPanelSpreadsheetImporter
 {
+    public static bool NeedsPfamChoice(string text, IReadOnlySet<string> recognized)
+    {
+        if (string.IsNullOrWhiteSpace(text)) return false;
+        var codes = PfamAccession.Matches(text);
+        if (codes.Count == 0 || codes.Any(code => !recognized.Contains(code.Value))) return true;
+        string remainder = PfamAccession.Replace(NamedPfam.Replace(text, ""), "");
+        return remainder.Trim(' ', '\t', '\r', '\n', ';', ',').Length > 0;
+    }
+
     private static List<FamilyPanelDomain> ReadSheetPfam(string text)
     {
         var names = NamedPfam.Matches(text).ToDictionary(match => match.Groups["accession"].Index, match => match.Groups["name"].Value.Trim());
@@ -21,8 +30,8 @@ public sealed partial class FamilyPanelSpreadsheetImporter
         foreach (var row in WorkbookDataRows(table))
         {
             var domains = ReadSheetPfam(Value(row, domainColumn));
-            if (domains.Count == 0) continue;
-            proposal.Pfam.Add(new PanelWorkbookPfamHint { RowNumber = row.RowNumber, FamilyKey = Value(row, keyColumn).Trim(), Column = domainColumn, Domains = domains });
+            proposal.Pfam.Add(new PanelWorkbookPfamHint { RowNumber = row.RowNumber, FamilyKey = Value(row, keyColumn).Trim(),
+                Column = domainColumn, SourceText = Value(row, domainColumn), Domains = domains });
         }
     }
 }

@@ -234,6 +234,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         {
             var preparation = PrepareMatchesAsync(); activeRead = preparation;
             if (!await preparation) return false;
+            GoTo(PfamQuestions.Any(family => !family.Decided) ? 4 : 5); return true;
         }
         GoTo(page + 1); return true;
     }

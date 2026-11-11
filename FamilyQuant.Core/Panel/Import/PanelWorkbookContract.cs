@@ -96,6 +96,7 @@ public sealed class PanelWorkbookDecisionHint
 
 public sealed class PanelWorkbookPfamHint
 {
+    public string SourceText { get; set; } = string.Empty;
     public int RowNumber { get; set; }
     public string FamilyKey { get; set; } = string.Empty;
     public string Column { get; set; } = string.Empty;

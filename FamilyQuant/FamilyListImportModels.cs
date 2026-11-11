@@ -123,6 +123,8 @@ public sealed record ImportMatchCoverage(int Proteins, int Reviewed, string Deta
 
 public sealed class ImportMatchFamily : ScreenViewModel
 {
+    public bool Automatic { get; init; }
+    public bool MissingPfam { get; init; }
     private string choice = "Needs a choice";
     private bool showAdditional;
     public string Key { get; init; } = "";

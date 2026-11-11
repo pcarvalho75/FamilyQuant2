@@ -215,7 +215,8 @@ public sealed partial class FamilyListImportViewModel
             : DecisionOptions.First(o => o.Value == family.Decision).Label;
 
     private string SummaryMatches(FamilyPanelFamily family) =>
-        MatchFamilies.FirstOrDefault(m => m.Key == family.Key)?.Choice
+        MatchFamilies.FirstOrDefault(m => m.Key == family.Key) is { MissingPfam: true } ? "No Pfam code; no proteins until it has one"
+        : MatchFamilies.FirstOrDefault(m => m.Key == family.Key)?.Choice
         ?? (family.Decision is FamilyPanelDecision.MergeIntoAnotherFamily or FamilyPanelDecision.NotAFamily ? "Not needed" : "Not reviewed");
 
     private static string Rows(int count, string action) => count.ToString("N0", CultureInfo.CurrentCulture) + (count == 1 ? " row " : " rows ") + action;

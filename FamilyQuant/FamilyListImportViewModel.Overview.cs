@@ -173,7 +173,7 @@ public sealed partial class FamilyListImportViewModel
     public void ReturnToWorkbookReview()
     {
         if (!WorkbookReviewEnabled || !HasWorkbookMap || IsBusy || Imported) return;
-        if (evidencePagePrepared) reviewedEvidence = MatchFamilies.ToDictionary(family => family.Key,
+        if (evidencePagePrepared) reviewedEvidence = MatchFamilies.Where(family => family.Decided).ToDictionary(family => family.Key,
             family => (IReadOnlyList<PanelEvidenceChoice>)family.Suggestions.Where(choice => choice.Use)
                 .Select(choice => PanelEvidenceMatching.ChoiceFromKey(choice.Key) with { Value = choice.Text }).ToArray(), StringComparer.Ordinal);
         reviewingWorkbook = true; reviewingSubclasses = false;
