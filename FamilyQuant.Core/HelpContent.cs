@@ -314,6 +314,13 @@ namespace FamilyQuant
             sb.AppendLine("locked or unticked proteins keep their current family; decoys and contaminants are excluded from the counts.");
             sb.AppendLine("Family checklist keeps every row of your list and counts those with proposed proteins, waiting for a choice,");
             sb.AppendLine("with no Pfam code, or matching no database protein; matching evidence alone does not assign a protein.");
+            sb.AppendLine("Save panel as spreadsheet writes named link choices in the UniProt family column.");
+            sb.AppendLine("Importing that column restores exact family links among the supported rows without");
+            sb.AppendLine("asking again. Separate several source family names with semicolons.");
+            sb.AppendLine("A row naming a UniProt family takes only proteins with that complete family name.");
+            sb.AppendLine("Those proteins enter that row even without matching scope words. Rows sharing its");
+            sb.AppendLine("domains without a family name take the other supported proteins under the existing");
+            sb.AppendLine("scope rules. A neighbour cannot supply membership of a named UniProt family.");
             sb.AppendLine("If the project has no stored UniProt evidence, Download and continue runs Fetch evidence");
             sb.AppendLine("before opening the review; Cancel leaves the project unchanged. If no reviewed accession");
             sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");
