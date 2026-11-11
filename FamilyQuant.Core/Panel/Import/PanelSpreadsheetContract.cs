@@ -11,6 +11,7 @@ public static class PanelImportFields
     public const string DisplayName = "display-name";
     public const string Decision = "decision";
     public const string Pfam = "pfam";
+    public const string UniProtFamilies = "uniprot-families";
     /// <summary>A name in another language, stored in the family's Names under the actual header.</summary>
     public const string OtherName = "other-name";
     /// <summary>Recorded so the wizard and the template agree; the text stays in TextFields like every column.</summary>

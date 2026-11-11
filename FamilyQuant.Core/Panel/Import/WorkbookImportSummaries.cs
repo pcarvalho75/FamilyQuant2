@@ -206,9 +206,9 @@ public static partial class WorkbookImportSummaries
     }
     private static string? SingleOrDefaultSafe(this IReadOnlyList<string> values) => values.Count == 1 ? values[0] : null;
     private static bool KnownRole(string role) => role is PanelImportFields.FamilyKey or PanelImportFields.DisplayName or PanelImportFields.OtherName
-        or PanelImportFields.Decision or PanelImportFields.Pfam or PanelImportFields.Notes or PanelImportFields.ColorCategory or WorkbookImportSummaryFields.Subclasses;
+        or PanelImportFields.Decision or PanelImportFields.Pfam or PanelImportFields.UniProtFamilies or PanelImportFields.Notes or PanelImportFields.ColorCategory or WorkbookImportSummaryFields.Subclasses;
     private static string RoleLabel(string role) => role switch { PanelImportFields.FamilyKey => "Family key", PanelImportFields.DisplayName => "Family name",
-        PanelImportFields.OtherName => "Other name", PanelImportFields.ColorCategory => "Colour category", WorkbookImportSummaryFields.Subclasses => "Expected subclasses", _ => role };
+        PanelImportFields.OtherName => "Other name", PanelImportFields.UniProtFamilies => "UniProt family", PanelImportFields.ColorCategory => "Colour category", WorkbookImportSummaryFields.Subclasses => "Expected subclasses", _ => role };
     private static WorkbookImportSource Source(string sheet, IEnumerable<int>? rows = null, IEnumerable<string>? columns = null) =>
         new(sheet, Freeze(rows?.Distinct().Order() ?? Enumerable.Empty<int>()), Freeze(columns?.Where(column => column.Length > 0).Distinct(StringComparer.Ordinal) ?? Enumerable.Empty<string>()));
     private static IReadOnlyList<T> Freeze<T>(IEnumerable<T> values) => Array.AsReadOnly(values.ToArray());

@@ -33,12 +33,17 @@ public sealed partial class FamilyPanelSpreadsheetImporter
             proposal.IsTemplate = true;
             proposal.Decisions = ProposeDecisions(table, proposal.Choices).Where(d => d.Exact).Select(d => d.Mapping).ToList();
         }
+        if (table.Headers.Contains(PanelImportTemplate.UniProtFamily, StringComparer.Ordinal))
+        {
+            proposal.Choices.ColumnHeaders[PanelImportFields.UniProtFamilies] = PanelImportTemplate.UniProtFamily;
+            proposal.Reasons[PanelImportFields.UniProtFamilies] = "The UniProt family column contains exact source family names.";
+        }
         var rows = table.Rows.Where(r => DecorativeReason(table, r) == null).ToList();
         var stats = table.Headers.Select(h => new ColumnShape(h, rows)).ToList();
         proposal.ColorColumns = table.Headers.Where(h => table.Rows.Where(r => r.Fills.ContainsKey(h))
             .Select(r => r.Fills[h]).Distinct(StringComparer.OrdinalIgnoreCase).Count() >= 2).ToList();
         if (rows.Count == 0 || proposal.IsTemplate) return proposal;
-        var taken = new HashSet<string>(StringComparer.Ordinal);
+        var taken = proposal.Choices.ColumnHeaders.Values.ToHashSet(StringComparer.Ordinal);
         void Take(string role, ColumnShape? column, string reason)
         {
             if (column == null) return;
