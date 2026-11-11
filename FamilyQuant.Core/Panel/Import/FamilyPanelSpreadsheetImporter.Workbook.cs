@@ -143,6 +143,13 @@ public sealed partial class FamilyPanelSpreadsheetImporter
             bool chosenRole = overrides.TryGetValue(sheet.SheetName, out var role);
             if (chosenRole && role is PanelWorkbookSheetRole.Notes or PanelWorkbookSheetRole.FamilyList) continue;
             if (chosenRole && role == PanelWorkbookSheetRole.ColorLegend) continue;
+            if (PanelSubclassImport.TryReadTemplateTable(other, keys, out var subclassSource))
+            {
+                sheet.Role = PanelWorkbookSheetRole.SubclassTable;
+                sheet.RoleReason = "The columns explicitly define subclass family keys, names, UniProt labels and Pfam rules.";
+                proposal.SubclassTables.Add(subclassSource);
+                continue;
+            }
             if (!chosenRole && other.Headers.Count == 2 && fills.Count > 0)
             {
                 string first = other.Headers[0];

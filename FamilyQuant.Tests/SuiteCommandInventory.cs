@@ -8,6 +8,21 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-review-named-destinations", "FamilyQuant.Tests.Program.ReviewNamedDestinationTests()"),
+        SuiteCommandRule.Covered("--test-import-subclass-template", "FamilyQuant.Tests.Program.ImportSubclassTemplateTests(System.String)"),
+        SuiteCommandRule.Covered("--test-review-tab-guides", "FamilyQuant.Tests.Program.ReviewTabGuideTests()"),
+        SuiteCommandRule.Covered("--test-review-alignment-heading", "FamilyQuant.Tests.Program.ReviewAlignmentHeadingTests()"),
+        SuiteCommandRule.Covered("--test-review-details-height", "FamilyQuant.Tests.Program.ReviewDetailsHeightTests(System.String)"),
+        SuiteCommandRule.Covered("--test-review-destinations", "FamilyQuant.Tests.Program.ReviewDestinationTests(System.String)"),
+        SuiteCommandRule.Covered("--test-review-checklist-states", "FamilyQuant.Tests.Program.ReviewChecklistStateTests(System.String)"),
+        SuiteCommandRule.Covered("--test-panel-link-examples", "FamilyQuant.Tests.Program.PanelLinkExampleTests()"),
+        SuiteCommandRule.Covered("--test-review-apply-wait", "FamilyQuant.Tests.Program.ReviewApplyWaitTests(System.String)"),
+        SuiteCommandRule.Covered("--test-import-pfam-direct", "FamilyQuant.Tests.Program.ImportDirectPfamTests()"),
+        SuiteCommandRule.Covered("--test-import-decision-pages", "FamilyQuant.Tests.Program.ImportDecisionPageTests()"),
+        SuiteCommandRule.Covered("--test-import-entry-actions", "FamilyQuant.Tests.Program.ImportEntryActionTests()"),
+        SuiteCommandRule.Covered("--test-import-simple-template", "FamilyQuant.Tests.Program.ImportSimpleTemplateTests()"),
+        SuiteCommandRule.Covered("--test-import-template-workbook", "FamilyQuant.Tests.Program.ImportTemplateWorkbookTests()"),
+        SuiteCommandRule.Covered("--test-import-uniprot-column", "FamilyQuant.Tests.Program.ImportUniProtColumnTests()"),
         SuiteCommandRule.Covered("--test-panel-named-families", "FamilyQuant.Tests.Program.PanelNamedFamilyTests(System.String)"),
         SuiteCommandRule.Excluded("--panel-family-counts", "Read-only desk comparison of RG4 and RG5 assignments in a selected project. Prints only the imported row names and counts; PanelNamedFamilyTests provides the DefaultSuite synthetic proof."),
         SuiteCommandRule.Covered("--test-panel-link-roundtrip", "FamilyQuant.Tests.Program.PanelLinkRoundtripTests(System.String)"),

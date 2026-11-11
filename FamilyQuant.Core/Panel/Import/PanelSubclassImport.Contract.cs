@@ -35,6 +35,7 @@ public sealed class PanelSubclassProposal
     public List<string> CandidateFamilyKeys { get; set; } = new();
     public List<PanelSubclassSourceRow> SourceRows { get; set; } = new();
     public List<PanelSubclassRuleProposal> Rules { get; set; } = new();
+    public List<string> UniProtSubfamilies { get; set; } = new();
     public List<FamilyPanelText> Notes { get; set; } = new();
     public bool HasMatchedTableRow { get; set; }
     public bool IsUncertain { get; set; }

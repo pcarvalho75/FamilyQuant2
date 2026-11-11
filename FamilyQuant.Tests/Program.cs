@@ -93,6 +93,8 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ReviewDestinationTests(Path.Combine(workDir, "review-destinations")));
             suite.AddWithApplication(() => ReviewDetailsHeightTests(Path.Combine(workDir, "review-details-height")));
             suite.AddWithApplication(() => ReviewAlignmentHeadingTests());
+            suite.Add(() => ReviewNamedDestinationTests());
+            suite.Add(() => ImportSubclassTemplateTests(Path.Combine(workDir, "import-subclass-template")));
             suite.AddWithApplication(() => ReviewTabGuideTests());
             suite.Add(() => PanelLinkExampleTests());
             suite.AddWithApplication(() => ReviewApplyWaitTests(Path.Combine(workDir, "review-apply-wait")));

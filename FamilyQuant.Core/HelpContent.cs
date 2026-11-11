@@ -232,6 +232,12 @@ namespace FamilyQuant
             sb.AppendLine("sequences for Database gap. Both need an internet connection when downloading.");
             sb.AppendLine("Save the project to keep the evidence, applied grouping and UniProt families.");
             sb.AppendLine();
+            sb.AppendLine("Use template includes an optional Subclasses sheet: copy a Family key from Families and write one Subclass per row.");
+            sb.AppendLine("Each header has a one-line note on Instructions. A subclass matches an exact UniProt family or subfamily name");
+            sb.AppendLine("in the protein's stored hierarchy, or all required Pfam domains with none of the absent domains. Keep the full");
+            sb.AppendLine("UniProt name, including family or subfamily. Absence needs a complete protein with domain evidence; missing or");
+            sb.AppendLine("conflicting support stays Unknown. Review and accept imported subclasses before they become project rules.");
+            sb.AppendLine();
             sb.AppendLine("PART B OF CURATE FAMILIES, GROUP BY WORDS, AND CURATING BY HAND");
             sb.AppendLine("----------------------------------------------------------------");
             sb.AppendLine("Group by words merges families by their description words (Recluster by words) or builds");
@@ -314,6 +320,9 @@ namespace FamilyQuant
             sb.AppendLine("locked or unticked proteins keep their current family; decoys and contaminants are excluded from the counts.");
             sb.AppendLine("Family checklist keeps every row of your list and counts those with proposed proteins, waiting for a choice,");
             sb.AppendLine("with no Pfam code, or matching no database protein; matching evidence alone does not assign a protein.");
+            sb.AppendLine("In Panel links, tied domain matches use the fraction of each row's Pfam list present");
+            sb.AppendLine("in the protein. The most complete row wins; equal coverage still asks for a choice.");
+            sb.AppendLine("Your confirmed choices take precedence and are kept when the project is saved.");
             sb.AppendLine("Save panel as spreadsheet writes named link choices in the UniProt family column.");
             sb.AppendLine("Importing that column restores exact family links among the supported rows without");
             sb.AppendLine("asking again. Separate several source family names with semicolons.");
