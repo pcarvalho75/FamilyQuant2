@@ -1,31 +1,34 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 19, 2026-11-09 15:15, release 2.1.14, one day of work, theme: simpler. Each peptide counts once in the family charts; de novo peptides measured like identified ones (the per-interval normalization removed); the HTML report in tabs with every figure and a plain legend, and the choice of denominator (PSM only, PSM and de novo, detector envelopes, TIC) there; fewer options in the program, a Simple view for Review grouping, and one Export window instead of 15 entries in four places.
+Version 20, 2026-11-11 12:00, releases 2.1.16 and 2.1.17. Theme: unblock Ana first, then make Import family list simpler and Review grouping clearer. 2.1.16 fixes the Quantify crash she hit (slide 34). 2.1.17 carries everything else from her 11-10 deck and her 11-11 answers.
 Finished rows leave this file and go to `docs/ROADMAP-archive.md`; the needle restarts at zero with each version.
 
-Version 18 delivered 13 steps (in the archive): release 2.1.12, AI Help. Release 2.1.13 (UniProt search pages, the Scope row) was a quick fix outside the roadmap. The whole 11-09 plan from Ana's session is in the desk's notes/plan-ana-session-1109.md; this version takes the part that fits in one day (D97).
+Version 19 delivered 34 of 34 steps, now in the archive: releases 2.1.14 (simpler) and 2.1.15 (every protein's coverage, native HTML charts).
 
-## The goal, in Paulo's words
+The inputs for this version:
+- Ana's deck `FamilyQuant_v15_20261110_V2.pptx` (34 slides on 2.1.15).
+- The desk's ten questions, `Perguntas_Ana_FamilyQuant_2.1.15.docx`.
+- Her nine voice notes of 11-11, transcribed by the desk and kept out of the repo.
+- UniProt Q9DGI0, which she sent.
 
-- 11-09: "i want tic, psm , PSM _ de novo, and detector envelopes tthings that match isotopic signature)"
-- 11-09: "too many options,and simplify the program,.. multiple exports, everything should be significantly simplified!"
-- 11-09: "ok, so include the per interval normalization, build a roadmap, but it needs to be very straight forward, something to be done in one day"
-- 11-09: "the export figures should be reconsidered the html could have tabs..... ideally everything in the html so we get rid of the export figures and simplify"
-- 11-09: "im also considering in removing this wierd normalization you did per channel, what do you think?"
-- 11-09: "a peptide cannot go to more than one family...  and in the graph its says a peptide in several families"
-- 11-09, his notes: "in the html i would like to have the option also of the normaliation be among the identified and not identified peptides... so I should have an option for the identified only, or the identified and not identified, or the TIC"
-- 11-09, his notes: "spread in html, i need to include a description"; "essa abrra e a media dos tres, tem que indicar na legenda"
-- 11-09: "i would also like all the figure export to be included in the html report with way more user friendly legends"
-- 11-09, Ana, through Paulo: there are too many options in the Review grouping window
+## The goal, in Paulo's and Ana's words
+
+- Paulo, 11-11: "most importantly, we need to fix this bug" (Quantify: "The computation did not finish. The calling thread cannot access this object because a different thread owns it.")
+- Paulo, 11-11: "based on these questions, the answers, the slides, do a roadmap to solve all these issues to the next version"
+- Ana, slide 21: "achei que o Import family list poderia ser mais simples ... Às vezes, menos é mais."
+- Ana, slide 29: "Parei aqui, não consigo avançar com o Apply grouping desabilitado"
+- Ana, 11-11: "a melhor coisa é quantificar todo mundo e tirar essa coisa do color, que eu acho que só complica sem necessidade"
+- Ana, 11-11, on SVMPI (BJ46a, Q9DGI0): "não pode juntar, não. Nem com os inibidores tripeptídeos, nem com a cistatina canônica"
+- Ana, 11-11: "eu ainda estou confusa com essa coisa das famílias que o escopo propõe, as famílias que eu proponho ... para onde vai cada coisa"
 
 ## Rules every worker follows
 
 1. **Only the program makes results.** Python may investigate or check a number, never make one that reaches a person.
 2. **No exception lists.** No family, protein, Pfam or keyword literal in a rule; evidence and data decide, and what a user chooses is stored in the project. Nothing the user sees names an organism, a venom, a toxin or a sample's numbers (D21; the suite tests it). Protein family and domain names (for example serum albumin, whey acidic protein domain) are protein names, not samples (desk ruling 11-06 on Z12p2c).
 3. **No function is lost.** The feature ledger is the contract: only Paulo can drop a row. A rename keeps the function; a ledger row that pins an old name is mapped in the ledger's "Added contracts after the frozen source" section, never edited to make a check pass.
-4. **Numbers stay equal unless a step says otherwise.** In this version only T3 changes a number (D95), with its before and after on Ana's data. T7, T8 and T15 change which stored values a chart divides and draws (D96), never a stored value.
+4. **Numbers stay equal unless a step says otherwise.** In this version no step changes a stored quantity. RG2 (D111) and RG5 (D113) change which family some proteins get, with the desk's before and after counts on Ana's panel.
 5. **Deployable at every merge.** One step per commit, with its test; tests go into DefaultSuite. Builders run focused checks; the desk runs the whole suite once per release (D61 mode).
-6. **A step counts as done when a reviewer approves it** (Paulo, 11-05 13:41: "many approvals and no green boxes?"). Each release still ships only after its own full suite (T19 in this version) is green on the merged commit; a suite failure reopens the step it points to until the fix is approved.
+6. **A step counts as done when a reviewer approves it** (Paulo, 11-05 13:41: "many approvals and no green boxes?"). Each release still ships only after its own full suite (QX5 and RL1 in this version) is green on the merged commit; a suite failure reopens the step it points to until the fix is approved.
 7. **A family panel is user data.** Ana's families, domains, subclasses and decisions live in her file and the project, never in code.
 8. **Never write inside `C:/Users/paulo/Desktop/AnaG`** except a delivery to `AnaG/Bjararaca/Relatorio` on Paulo's word.
 9. **The code repository stays private.** Releases go out as a Setup.exe and a zip on the public releases-only repository (D31, D32).
@@ -35,20 +38,25 @@ Version 18 delivered 13 steps (in the archive): release 2.1.12, AI Help. Release
 
 ## The team
 
-Paulo, 11-09: "put 3 sol workers and a grok reviewer, get it going" (D100), then "recruit a 4th sol worker" (D102).
+Proposed; staffed on Paulo's word (D115). The engines are the same as in version 19.
 
-| Name | Engine | Role in version 19 | Worktree |
+| Name | Engine | Role in version 20 | Worktree |
 |---|---|---|---|
-| Orchestrator | Claude, main session | Assigns, routes reviews, runs every check on Ana's data (T1, T3), merges, drops the ledger rows Paulo removed, runs the suite once, releases, keeps this file and the board true | |
-| FQDeNovo (DN) | Sol 6.1 xhigh | T1, T5, T6, T3, T4: the de novo envelope check command and the switch, the recovery chart, the Quantify warnings | `D:/FamilyQuant-wt/denovo` |
-| FQCount (CT) | Sol 6.1 xhigh | T7 to T11, then the package (as H4c): each peptide once, fewer chart options, the HTML payload fields | `D:/FamilyQuant-wt/count` |
-| FQHtml (HT) | Sol 6.1 xhigh | T13 to T16: the HTML report in tabs with every figure, its legend and the denominator switch |
-| FQSimple (SM) | Sol 6.1 xhigh | T17, T12, T18: Import family list as step 0, the Simple view of Review grouping, the one Export window | `D:/FamilyQuant-wt/simple` | `D:/FamilyQuant-wt/html-tabs` |
-| FQRev (RV) | Grok 4.7 xhigh | Reviews every READY under D89 and D91 and fixes small defects itself; a fix over 20 lines is checked by a builder of another lane | `D:/FamilyQuant-wt/review` |
+| Orchestrator | Claude, main session | Assigns work, routes reviews, merges, runs both releases and keeps this file and the board true. It runs every check on Ana's data (QX4, AP1, AP2, AP6) and her panel sheet (AP3), drafts the message to her (AP4) and drops the ledger rows Paulo removes | |
+| FQDeNovo (DN) | Sol 6.1 xhigh | QX1 to QX3 (the crash), then SF1 | `D:/FamilyQuant-wt/denovo` |
+| FQImport (IM) | Sol 6.1 xhigh | IM1 to IM9: Import family list | `D:/FamilyQuant-wt/import` |
+| FQPanel (PN) | Sol 6.1 xhigh | RG2, RG4, RG5: the panel rules in Core | `D:/FamilyQuant-wt/panel` |
+| FQSimple (SM) | Sol 6.1 xhigh | RG1, RG3, RG6 to RG8 and SF2 to SF4: the Review grouping and Families screens | `D:/FamilyQuant-wt/simple` |
+| FQRev (RV) | Grok 4.7 xhigh | Reviews every READY under D89 and D91 and fixes small defects itself. A fix over 20 lines is checked by a builder of another lane | `D:/FamilyQuant-wt/review` |
 
-The builders and the reviewer see code and synthetic data only. Ana's project and RAW files are read only by the desk, which runs the check commands the builders write and passes back counts, medians and shares, never rows.
+The builders and the reviewer see code and synthetic data only. Ana's project, panel sheet and RAW files are read only by the desk. The desk runs the check commands the builders write and passes back counts, never rows.
 
-File ownership, so the lanes never touch the same file at the same time: DN owns `FamilyQuant.Core/DeNovo`, `FamilyQuant.Core/Quantitation`, `RecoveryChart.cs` and the Quantify screen. CT owns `FamilyContributionChart.cs`, `AnalyticsViewModel.cs`, `CurationQuantitationPanel.xaml(.cs)` and `FamilyQuant.Core/Report/HtmlReportPayload*.cs`. HT owns `FamilyQuant.Core/Report/Html/report-template.html` and the HTML figure code. SM owns `SuperClusterPreviewWindow.xaml(.cs)`, `ClusterGenerationControl` (the Grouping panel and Display and export), the export entries (File menu, Results export list) and the new Export window. `AnalyticsControl.xaml(.cs)` is CT's until T10 is approved, then SM's. A change needed in another lane's file is asked for through the desk.
+File ownership, so the lanes never touch the same file at the same time:
+- DN owns `AppOperationHost.cs`, `ComputeXicViewModel.cs`, `MainWindow.Quantify.cs`, the Quantify screen and the Build to Curate families hand-off.
+- IM owns `FamilyListImport*`, `FamilyQuant.Core/Panel/Import` and `FamilyQuant.Core/PanelTemplates`.
+- PN owns `FamilyQuant.Core/Evidence/PanelEvidenceClassifier*` and `FamilyQuant.Core/Panel` (Import excepted).
+- SM owns `SuperClusterPreviewWindow.xaml(.cs)`, `GroupingReviewViewModel*`, `EvidenceReviewViewModel.cs` and the Families screen in `ClusterGenerationControl`.
+- RG4 writes a column into the sheet that IM8 shows. PN asks IM for that part through the desk.
 
 ## Design rules for the look (hard requirements)
 
@@ -64,64 +72,120 @@ File ownership, so the lanes never touch the same file at the same time: DN owns
 
 Every row is a small step with its own done-check. A step is done when a reviewer other than its builder approves it (rule 6); each lane merges into master at T19. Ids never change; a step split here keeps its id as a prefix (T7 would become T7a and T7b).
 
-### W24 Ana's session, release 2.1.14: simpler (FQDeNovo, FQCount, FQHtml, FQSimple, FQRev, Orchestrator)
+### W26 The Quantify crash, release 2.1.16 (FQDeNovo, FQRev, Orchestrator)
 
-Paulo, 11-09, during the session with Ana: "a peptide cannot go to more than one family", "im also considering in removing this wierd normalization", "ideally everything in the html so we get rid of the export figures and simplify", "too many options", "something to be done in one day".
+Paulo, 11-11: "most importantly, we need to fix this bug".
 
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| T1 | The de novo envelope check, changing no number: a FamilyQuant.Tests command, proved on synthetic data, that the desk runs on a copy of Ana's project and RAW files. For every precursor with both a PatternLab identification and a de novo call, the measured de novo envelope divided by the identified envelope of the same precursor, and the mass-interval model's estimate divided by it | M | 1.0 |  | T2 | Counts, medians and quartiles of both ratios posted, no rows | DN |  | 0 | 0 |  |
-| T2 | D95's guard: a median measured ratio within 0.8 to 1.25 starts T3; outside it the desk stops and asks Paulo | L | 0.1 | T1 | T3 | The desk's line in LOG with both medians | Orchestrator |  | 0 | 0 |  |
-| T3 | De novo peptides use their measured envelope, the same rule as identified peptides: the primary de novo value and its run and family sums return the measured envelope; ReferenceEnvelopeEstimator leaves the pipeline; the reference-envelope model figure and its captions go; the quant method version moves up, so a project computed before says "Run Quantify again" | M | 2.0 | T2 | T4, T19 | The desk's before and after on Ana's project (recovery per run, the top 15 family shares; counts and shares only); focused tests green; reviewed | DN |  | 0 | 0 |  |
-| T4 | The recovery chart after T3: two readings (M+0 only; the measured envelope); the label prints the real isotope ceiling instead of "six-window"; one plain line per bar in the legend | L | 0.4 | T3 | T19 | Screen render; test; reviewed | DN |  | 0 | 0 |  |
-| T5 | Quantify warns when a run has no de novo calls, and the Run summary lists de novo peptide features per run (her runs 02 and 03 had none) | L | 0.5 |  | T19 | Test with a synthetic two-run source; reviewed | DN |  | 0 | 0 |  |
-| T6 | Why her Quantify page opened at isotope ceiling 3 when the Help says 6: find the source (a stored setting or the default); a new project starts at 6 | L | 0.3 |  | T19 | Test: a new project opens at 6; reviewed | DN |  | 0 | 0 |  |
-| T7 | The family contribution chart counts each peptide once: drawn under the project's shared-peptide rule (family-unique parts, a "shared between families" bar beside unattributed, all summing to 100%); the heading names the rule; the de novo legend says "de novo" | M | 1.5 |  | T8, T11 | The bars sum to the total on a synthetic project with shared peptides; screen render; reviewed | CT |  | 0 | 0 |  |
-| T8 | Fewer chart options on Results: the "Percent of measured signal" box goes; the family chart always shows percent of all peptide features (identified and de novo, each peptide once), each bar split into its identified and de novo parts. The denominator choice lives only in the HTML report (T15) | L | 0.5 | T7 | T10 | Test; screen render; reviewed | CT |  | 0 | 0 |  |
-| T9 | The "count in every family" shared-peptide choice leaves the Quantitation panel (D96): family-unique and split remain | L | 0.3 |  | T19 | Test; screen render; reviewed | CT |  | 0 | 0 |  |
-| T10 | Results: the Top N choice sits directly above the family chart | L | 0.3 | T8 | T18 | Screen render; reviewed | CT |  | 0 | 0 |  |
-| T11 | The HTML payload carries, per family and per run, the four shares (PSM only, PSM and de novo, detector envelopes, TIC) from the stored studies, each peptide once | L | 0.4 | T7 | T15 | Payload test; reviewed | CT |  | 0 | 0 |  |
-| T12 | Review grouping, Simple view by default: Scope, Read database and scope, Update proposal, the family table, the Proteins table (Use, Accession, Description, Flags) made taller, Find, Tick and Untick, Selected protein details, Apply grouping. "Show all options" opens the rest (Keywords, the other tabs, Align, Add to and Remove from family, Show members, Motif, Fetch missing panel) | M | 1.5 |  | T19 | Screen renders at 1180x740 and 1366x820, both views; every hidden control still reachable; reviewed | SM |  | 0 | 0 |  |
-| T13 | The HTML report in tabs: Families, Signal recovery, Mass and isotopes, Coverage, Database gap, Quality, Sensitivity; today's content moves into them unchanged | M | 1.0 |  | T14, T15 | The offline page opens on a synthetic project with every tab; template tests green; reviewed | HT |  | 0 | 0 |  |
-| T14 | Every Results figure inside its tab (signal recovery, ion current by mass, isotopes credited, signal by mass, family contribution), rendered from the same chart code as the screen, as the Quality figures are today; coverage stays the page's own interactive maps | M | 1.0 | T13 | T16, T18 | Each figure present on a synthetic project; page size measured; reviewed | HT |  | 0 | 0 |  |
-| T15 | The denominator switch on the Families tab ranking (PSM only, PSM and de novo, detector envelopes, TIC), from T11's fields | M | 0.8 | T11, T13 | T19 | Switch test on a synthetic payload; reviewed | HT |  | 0 | 0 |  |
-| T16 | A plain-language legend under every figure and chart: what it shows, how to read it, its denominator, pooled or the mean of N runs, what the whiskers are; Spread gets its (i) description | M | 1.0 | T14 | T19 | A test finds a legend under every figure; reviewed | HT |  | 0 | 0 |  |
-| T15b | One page-wide radio button group for the normalization (PSM only, PSM and de novo, Detector envelopes, TIC) at the top of the HTML report, driving every chart that depends on it: the Families ranking and an interactive family contribution chart drawn from the payload, which replaces the static family contribution picture in the HTML (the Word report keeps the picture). Charts that do not depend on the base say so in their legend | M | 1.0 | T15, T11b |  | Switching the radio redraws both charts on a synthetic payload (test); reviewed | HT |  | 0 | 0 |  |
-| T11b | If T15b needs them: the per-family identified and de novo parts for each of the four bases in the HTML payload, from stored values only | L | 0.4 | T11 | T15b | Payload test; reviewed | CT |  | 0 | 0 |  |
-| T17 | Import family list as an optional step 0 of the guided Grouping order; Group by evidence says when the project has no family list | L | 0.5 |  | T19 | Screen render; test; reviewed | SM |  | 0 | 0 |  |
-| T18 | One Export window (File > Export) replacing the 15 entries in four places: Report (HTML, Word, workbook) first, then Tables (CSV), Suggested additions (FASTA), Families (.fcf), Interpretation input. "Screen figures (PNG)" and the Presentation evidence pack go (D98, D101); duplicates in Results and Curate families open this window | M | 1.5 | T10, T14 | T19 | Every kept export reachable from the window and writes the same file as before (tests); screen render; reviewed | SM |  | 0 | 0 |  |
-| T19 | The lanes merged into master; the ledger rows of what Paulo removed dropped under D95, D96, D98, D99 and D101, every rename mapped; the receipts refreshed; the full suite once | M | 0.8 | T3, T4, T5, T6, T9, T12, T15, T16, T17, T18 | T20 | Suite line copied; ledger check exit 0 | Orchestrator |  | 0 | 0 |  |
-| T20 | Release 2.1.14: the version bump on the 31 lines, the notes, the package with the token (FQCount, as H4c), the offline update from 2.1.13, published as Latest, the README | M | 1.0 | T19 |  | Release live; hashes match | Orchestrator |  | 0 | 0 |  |
-| T21 | The website for 2.1.14: a new upload folder familyquant-2.1.14 made from Desktop/FamilyQuant-website/familyquant-2.1.11. science.html: the de novo envelope section and the recovery readings rewritten for the measured envelope (D95), each peptide once (D96) and the four bases; index.html: the version, what is new, and new screenshots on synthetic data (the Simple view of Review grouping, Results, the Export window, the HTML report tabs with the Normalize to buttons). Paulo uploads it | M | 1.0 | T15b |  | Folder ready; every changed claim matches the program; screenshots synthetic; reviewed | SM |  | 0 | 0 |  |
+**The cause, found by the desk in the code (QX1 confirms it):**
+1. Since 2.1.14 (T5), Quantify warns when a RAW run has no de novo calls.
+2. The warning is reported from the computing thread (`FullXicInputStage.cs:108`). `AppOperationHost.Report` raises `ProgressReported` on that same thread (`AppOperationHost.cs:173`).
+3. The Quantify screen's handler sets `DeNovoRunWarning` there (`ComputeXicViewModel.cs:101-106`).
+4. The main window's PropertyChanged handler then calls `UpdateGuide()` (`MainWindow.Quantify.cs:27-33`), which reads `GridApp.Children` from the wrong thread (`MainWindow.Status.cs:70`).
+5. WPF throws, the engine stops, and the screen shows "The computation did not finish".
 
-### W25 Every protein's coverage in the HTML, release 2.1.15 (FQHtml, FQRev, FQCount, Orchestrator)
-
-Paulo, 11-09 evening, after opening the report: "i did not see all the proteins with coverage there", then "exactly you need to fix that, list every protein like you did" (D107). The report draws coverage for one protein per family (topProteinsPerPanelFamily: 1 in ReportProjectExporter.cs), and 2.1.14 removed the PNG export that drew up to three.
+Ana's `DeNovoPeaks_ALL` holds a CSV for run 01 only, so runs 02 and 03 raise the warning. Any project with a RAW run missing from the de novo source hits this. T5's test (`--test-denovo-run-warnings`) checks the engine alone, without the Quantify screen and the main window, so the suite never caught it.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| U1 | The HTML Coverage tab lists every protein that has placed peptides, in every family (Others and families below the report threshold included): choose a family, then any of its proteins (ordered by credited signal, with its peptide count), and its map is drawn from the stored spans. The Word report keeps one map per family | M | 1.5 | T20 | U2 | A synthetic project of realistic size shows every protein with placements; page size measured and reported; the whole synthetic suite run once before READY; reviewed | HT |  | 0 | 0 |  |
-| U3a | Native HTML charts for the Signal recovery tab (recovery, signal by run, signal uplift) and the Database gap figure, replacing their pictures in the HTML: drawn from payload data computed by the same program code as the native charts, hover values, legends, light and dark, phone width | M | 1.5 | U1 | U2 | Each chart shows the same numbers as its native chart on a synthetic project (test); the pictures leave the HTML, Word keeps them; reviewed | SM |  | 0 | 0 |  |
-| U3b | Native HTML charts for the Mass and isotopes tab (signal by mass, isotopes credited, ion current by mass) and the Quality figure (de novo score distribution), as U3a | M | 1.5 | U1 | U2 | As U3a | DN |  | 0 | 0 |  |
-| U3c | Native HTML charts for the Families tab figures (family composition, signal sources, signal against de novo share, subclass ring, subclasses, abundance and diversity), as U3a | M | 2.0 | U1 | U2 | As U3a | CT |  | 0 | 0 |  |
-| U3d | Native HTML charts for the Sensitivity figures (identity scan, identity sweep, stored source variants, source effect comparison), as U3a | L | 0.8 | U1 | U2 | As U3a | CT (moved from HT 11-09 23:03) |  | 0 | 0 |  |
-| U5 | The recovery explanations rewritten in the HTML Signal recovery tab, not just relabelled: what each reading is, what it is a share of, how to read the gap between them, in plain words (Paulo's note: "melhorar o grafico do recovery bastante, as explicacoes!") | M | 0.6 | U3a | U2 | Desk reads it on real data; reviewed | SM |  | 0 | 0 |  |
-| U6 | Ion current by mass answers Paulo's note ("o Share of TIC deveria ser maior"): the overlay that was the same bars times one factor is replaced by recovery per mass range, peptide signal over the detector's isotope-envelope signal in the same neutral-mass range; Quantify stores the detector's area by mass range; an older project says to run Quantify again for this view | M | 1.2 | U3b | U2 | Test on synthetic data; real-data view checked by the desk; reviewed | DN |  | 0 | 0 |  |
-| U8 | The family landscape ring follows Normalize to like the ranking and the contribution chart | L | 0.5 | U1 | U2 | Switching redraws the ring (test); reviewed | HT |  | 0 | 0 |  |
-| U9 | Words: "peptide feature" used throughout the HTML, every number names its base, and a short "What the numbers mean" panel (TIC, peptide feature, PSM, de novo, detector envelopes, credited family signal) reachable from the top of the page | M | 0.6 | U3a, U3b, U3c, U3d | U2 | A test finds the base named beside every percentage; reviewed | HT |  | 0 | 0 |  |
-| U4 | The desk's real-data check of the HTML report: Quantify the local copy of Ana's three-run project with the new build, export the report, open every tab and every Normalize to base, and list what does not work | M | 1.0 |  | U2 | Findings posted; each one fixed or recorded | Orchestrator |  | 0 | 0 |  |
-| U2 | Release 2.1.15 (after U1, U3a to U3d, U4, U5, U6, U8 and U9): merge, the full suite once (launched outside the desk sandbox), the ledger refreshed, the version bump, the package (FQCount), published as Latest with notes and README | M | 1.0 | U1 |  | Release live; hashes match | Orchestrator |  | 0 | 0 |  |
+| QX1 | A failing test first. The Quantify screen runs a compute that reports "denovo-run-warning" from a worker thread, with the main window's handler attached, as on Ana's runs 02 and 03. Today this ends with the cross-thread error | L | 0.3 |  | QX2 | The test fails on master 1b5083af with "The calling thread cannot access this object"; reviewed | DN | not staffed | 0 | 0 |  |
+| QX2 | The fix at the source. When Report comes from another thread, AppOperationHost raises ProgressReported on the UI thread, as it already does for its own display (`AppOperationHost.cs:171-172`). The test subscribers that rely on event order are checked, including the ones that cancel on a progress item | M | 0.8 | QX1 | QX3, QX4 | QX1 passes. The ComputeProgress, HtmlReportExport.Native, GroupingDiscoverySafety and FamilyComposition tests are green; reviewed | DN | not staffed | 0 | 0 |  |
+| QX3 | The same hazard elsewhere. List every progress event or PropertyChanged that a background task raises and a window handler hears, in Build, Fetch evidence, Fetch family world, Quantify and Export. Each is either marshalled or proved safe by a test that raises it from a worker thread | M | 0.8 | QX2 | QX5 | The list is in the step note, with one test per path; reviewed | DN | not staffed | 0 | 0 |  |
+| QX4 | The desk's real run. Use a local copy of Ana's project and her three RAW files, with her settings from slide 33: her de novo source and ALC 90, isotope ceiling 6, at least 5 points per peak. Run Quantify from the screen: it finishes, and the warning names runs 02 and 03 | M | 0.5 | QX2 | QX5 | Run summary counts posted, no rows | Orchestrator | not staffed | 0 | 0 |  |
+| QX5 | Release 2.1.16, the fix alone (D109). Version bump, the full suite once, the ledger refresh, Setup.exe and zip, notes, README, and the update check from 2.1.15 | M | 1.0 | QX3, QX4 | RL1 | Published as Latest; an installed 2.1.15 offers 2.1.16 | Orchestrator | not staffed | 0 | 0 |  |
+
+### W27 Ana's answers on her panel (Orchestrator; her data, never code)
+
+Her 11-11 answers, against the desk's ten questions. She answered the Decision question first, so she counts it as her first answer. The numbers below are the docx's.
+
+| Question | Ana's answer | Where it goes |
+|---|---|---|
+| 6, Decision and Colour categories (slide 13) | Quantify every family; remove the colours, "só complica" | IM3, IM5, AP3 |
+| 1, the 19 ties (slides 9, 29) | Follow the consensus sheet; she agrees the desk builds the list | AP1, RG2, RG3 |
+| 2, SVMPI (slide 9) | BJ46a (Q9DGI0), the protein Richard isolated. It is a large metalloprotease inhibitor with a cystatin-like domain, not a canonical cystatin. Never join it with the tripeptides or with the cystatins. "não sei como fazer" | AP2, RG5 |
+| 3, svMP-i and pHpG (slide 9) | Agrees: svMP-i joins NP, pHpG is not a family. She asks what "measured in its own sequence family" means | AP3, RG7, AP4 |
+| 4, Other (rares) (slides 9, 15 to 21) | These will not show in jararaca, or will fall below the threshold and go to "Outras". Ignore AMP and endopeptidase; Pfam per name is optional | AP3 (the row goes) |
+| 5, subclasses (slide 14) | Only two matter: true lectins against snaclecs (CTL), and PLI alpha, beta and gamma. The other subclasses would split the families into crumbs | AP3, IM9 |
+| 7, 8, 9, 10 | Not answered yet. Her question in row 3 is really question 8, her list against the scope. Question 10's project file is no longer needed, since the cause is in the code | RG6, RG7, AP4 |
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| AP1 | The 19 ties listed for Ana, as promised in question 1. Run Fetch evidence and Group by evidence on a copy of her Viperidae project with the template she imported (42 rows plus SVMPI). One row per tie: the UniProt family, the domains, the tied families, one example protein (accession and name), what the consensus sheet said, the desk's proposal, and whether RG2 would settle it | M | 0.8 |  | AP3, AP4 | A Portuguese xlsx in the desk's staging folder; counts posted | Orchestrator | not staffed | 0 | 0 |  |
+| AP2 | Where BJ46a lands. It is in her database as Q9DGI0 (FTE46_BOTJA). Its UniProt keywords say metalloprotease inhibitor and secreted, and its tissue is liver, with no scope word, so it is probably out of scope. On her project, check whether it is in scope and which family it gets today. Count the entries of her database that share its UniProt family (fetuin family) and its Pfam (Cystatin, PF00031). Snake cystatins belong to the cystatin family | L | 0.4 |  | AP3, RG5, D113 | Counts posted | Orchestrator | not staffed | 0 | 0 |  |
+| AP3 | Her panel sheet revised as she answered. Out: svMP-i, pHpG and Other (rares). Gal-CTL becomes the "true lectins" subclass of CTL beside "snaclecs". PLI gets its alpha, beta and gamma subclasses. SVMPI stays its own row. Decision column and colours out. The tie answers from AP1 go in | M | 0.6 | AP1, AP2 | AP4, AP6 | The sheet is staged, with a row diff against her template posted | Orchestrator | not staffed | 0 | 0 |  |
+| AP4 | The message to Ana in Portuguese, drafted in chat; Paulo sends it. It covers what changed in her sheet and why, and the tie list. It explains "measured in its own sequence family" with RG7's picture. It tells her the de novo folder has calls for run 01 only, so runs 02 and 03 are measured from identified peptides alone, and asks whether that was intended. Questions 7 to 10 shrink to one line each | L | 0.5 | AP1, AP3, RG7 | AP5 | The draft, in chat, for Paulo | Orchestrator | not staffed | 0 | 0 |  |
+| AP5 | Delivery into `AnaG/Bjararaca/Relatorio`, on Paulo's word (rule 8): the revised sheet and the tie list | L | 0.2 | AP4, RL2 |  | Her other files unchanged by hash | Orchestrator | not staffed | 0 | 0 |  |
+| AP6 | The desk's walk on her data with the 2.1.17 candidate, before her session. Import the revised sheet. Every tie is explained or settled, Apply grouping is enabled, Quantify finishes and the report opens | M | 1.0 | AP3, RL1 | RL2 | Findings posted; each one fixed, or moved on Paulo's word | Orchestrator | not staffed | 0 | 0 |  |
+
+### W28 Import family list, simpler (FQImport, FQRev)
+
+Ana, slide 21: "o sistema ficou sofisiticado demais, para possibilitar o reconhecimento de diversos formatos e colunas ... acabou complicando para o usuário".
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| IM1 | The program's own template imports (slides 19, 20). Today the review stops on a workbook holding the Families sheet plus the Instructions sheet that Save a template writes (`PanelImportTemplate.InstructionsSheet`); Ana got through only by deleting Instructions. After the fix it goes through, and any sheet without family headers is ignored and named once | L | 0.5 |  | IM8, IM9, RG4 | A test imports the program's own template unchanged; reviewed | IM | not staffed | 0 | 0 |  |
+| IM2 | "Save a template" becomes "Use template", Ana's word (slide 7, D114). The tooltip says it writes an empty sheet to fill. The rename is mapped in the ledger | L | 0.2 |  | IM8 | Screen render and ledger mapping; reviewed | IM | not staffed | 0 | 0 |  |
+| IM3 | The template the program writes drops the Notes column, the Decision column and the colour legend (slide 7; Ana 11-11; D110). A sheet that still has those columns imports as before | L | 0.5 |  | IM8 | Test: an old sheet with Decision and Notes imports unchanged, and the new template has neither column; reviewed | IM | not staffed | 0 | 0 |  |
+| IM4 | "Try with the example" leaves the import window (slide 6, D110) | L | 0.2 |  | IM8 | Screen render, and the ledger row dropped on Paulo's word; reviewed | IM | not staffed | 0 | 0 |  |
+| IM5 | Colour categories leave the import window (slide 13, D110). The Decision labels page appears only when the sheet has a Decision column with words of its own | L | 0.5 |  | IM8 | A test each way, plus a screen render; reviewed | IM | not staffed | 0 | 0 |  |
+| IM6 | No second Pfam confirmation (slide 17). PF codes that exist are taken as given. Only cells written as names, or codes not found, ask, one line per row. A row with no Pfam code is named once: it gets no proteins until it has one. Use selected matches, Skip this family and Continue without matches are no longer asked | M | 1.0 |  | IM8 | A synthetic sheet with PF codes reaches the summary with no Pfam question; tests; reviewed | IM | not staffed | 0 | 0 |  |
+| IM7 | Saving right after the import (slide 21). Accept closes the window and puts the list in the project. The status line says File > Save keeps it, and the title marks the project modified. Closing before Accept says what is lost | L | 0.5 |  | IM8 | Test and screen render; reviewed | IM | not staffed | 0 | 0 |  |
+| IM8 | Fewer pages. A sheet with the program's headers goes through three pages: file, columns, summary. Other pages appear only when something needs a choice | M | 1.0 | IM1 to IM7 | RL1 | Screen renders before and after on a synthetic sheet; tests; reviewed | IM | not staffed | 0 | 0 |  |
+| IM9 | Subclasses get a visible home (slide 14). The template carries a Subclasses sheet with these columns: Family, Subclass, UniProt family or subfamily, Pfam required, Pfam absent, and a note per header. The Help says in general terms how a subclass is recognized, including that a subclass written as a UniProt family name (for example "serpin family") matches the proteins of that family | M | 0.8 | IM1 | AP3, RL1 | Test: a subclass written as a UniProt family name labels a protein of that family; screen render; reviewed | IM | not staffed | 0 | 0 |  |
+
+### W29 Review grouping, clearer (FQPanel, FQSimple, FQRev)
+
+Ana, slide 26: "fiquei confusa sobre como agir em relação a cada uma das diversas opções ... acho que vou precisar fazer esta etapa com você".
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| RG1 | Apply grouping says why it waits (slide 29). Beside the disabled button, a line reads "Waiting for 19 choices in Panel links", with a button that opens Panel links on Needs a choice | L | 0.5 |  | RL1 | Test and screen render; reviewed | SM | not staffed | 0 | 0 |  |
+| RG2 | Ties the domains already settle (D111). Among tied families, the one whose own Pfam list the protein covers most completely wins. For example, a Disintegrin-only protein covers all of a one-domain list but a third of a three-domain list. Only ties that stay equal are asked, and a choice the user already made wins | M | 1.0 |  | AP1, RL1 | A synthetic test, plus the desk's before and after on Ana's panel: ties asked and proteins per family, counts only; reviewed | PN | not staffed | 0 | 0 |  |
+| RG3 | Each Panel links row shows one example protein (accession and name) and its UniProt family, so the user chooses for a protein they recognize (slide 26) | L | 0.5 |  | RL1 | Test and screen render; reviewed | SM | not staffed | 0 | 0 |  |
+| RG4 | The choices travel with the list (D112). Saving the panel as a sheet writes each chosen link into a "UniProt family" column on the chosen row. Importing that sheet into a new project restores the choices with no question | M | 1.2 | IM1 | RG5, RL1 | Round-trip test: choose, save, import into a new project, and no tie is asked; reviewed | PN | not staffed | 0 | 0 |  |
+| RG5 | Rows told apart by UniProt family when Pfam cannot (Ana on SVMPI). A row with Pfam Cystatin and UniProt family "fetuin family" takes those proteins; the other Cystatin row takes the rest. If AP2 shows them out of scope, D113 decides how they come in | M | 1.0 | AP2, RG4 | RL1 | A synthetic test with two rows sharing one Pfam code, plus the desk's count on Ana's project; reviewed | PN | not staffed | 0 | 0 |  |
+| RG6 | The Family checklist answers "which wins, 23 or 42?" (slide 24). Every row of the user's list shows its state: has N proteins, waits for a choice, has no Pfam code, or matches no database protein. The top line reads "Your list: 42 families, 23 with proteins, ..." | L | 0.6 |  | RL1 | Screen render on a synthetic panel, plus a test; reviewed | SM | not staffed | 0 | 0 |  |
+| RG7 | Where every protein goes (Ana 11-11). A short panel gives three counts, one sentence each: proteins in a family of the list; in-scope proteins in no family of the list, which keep their sequence family (named after its proteins) and are measured as one; and proteins outside the scope. Help shows the same picture in general terms (D21) | M | 0.8 |  | AP4, RL1 | Screen render and a Help test; reviewed | SM | not staffed | 0 | 0 |  |
+| RG8 | "Fetch family world" gets a plain name (slide 32; Ana read it as "family word"; D114). The label and the Help say what it counts: the UniProt families of the in-scope proteins. The 42 in her project without a list is that count, not her list. The rename is mapped in the ledger | L | 0.4 |  | RL1 | Screen render and ledger mapping; reviewed | SM | not staffed | 0 | 0 |  |
+
+### W30 Small fixes from the deck (FQDeNovo, FQSimple, FQRev)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| SF1 | After Build writes the .fcf, Curate families opens on it (slide 3) | L | 0.4 | QX3 | RL1 | Test; reviewed | DN | not staffed | 0 | 0 |  |
+| SF2 | The text under "Scope words found: yes" is no longer cut off (slide 27): the details panel wraps | L | 0.3 |  | RL1 | Screen renders at 1366x820 and 1024x768; reviewed | SM | not staffed | 0 | 0 |  |
+| SF3 | The alignment says what it aligns (slide 28: 2 selected, 9 shown). Find why. Then either align the selection only, or title it "2 selected and 7 reviewed references" | L | 0.4 |  | RL1 | Test; reviewed | SM | not staffed | 0 | 0 |  |
+| SF4 | The Families count names what is hidden (slide 4: "19,948 visible · 40,407 in file"). It becomes "19,948 shown; 20,459 decoy and contaminant families hidden (View)" | L | 0.2 |  | RL1 | Screen render; reviewed | SM | not staffed | 0 | 0 |  |
+
+### W31 Release 2.1.17 (Orchestrator)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| RL1 | The 2.1.17 candidate: the lanes merged, the full suite once, the ledger refreshed, and the rows dropped under D110 named | M | 1.0 | QX5, IM8, IM9, RG1 to RG8, SF1 to SF4 | AP6 | Suite line and ledger line posted | Orchestrator | not staffed | 0 | 0 |  |
+| RL2 | Release 2.1.17 after AP6: version bump, package, notes, README, and the update check from 2.1.16 | M | 1.0 | AP6 | AP5, RL3 | Published as Latest; an installed 2.1.16 offers 2.1.17 | Orchestrator | not staffed | 0 | 0 |  |
+| RL3 | The website follows 2.1.17 (new import and Review grouping screens), on Paulo's word, as D105 | L | 0.5 | RL2 |  | Upload folder ready | Orchestrator | not staffed | 0 | 0 |  |
 
 ## Critical path
 
-Three Sol builders started at 15:27 from master 488211ae and a fourth joined after (D102). FQDeNovo writes the check T1 first, because it decides T3 (the desk runs it on Ana's data); T5 and T6 fill the wait. FQCount does T7, then T8, T10 and T11, then T9. FQHtml does T13 and T14, then T15 once T11 lands, and T16. FQSimple does T17 and T12, then T18 once T10 and T14 are approved. FQRev reviews each step as it lands. About 4 hours of building, then about 2 hours for T19 and T20.
+**Today.** 2.1.16 goes first: QX1, QX2, then QX3 and QX4 together, then QX5. That is about 3 hours to a published fix. Meanwhile the desk builds AP1 and AP2 on 2.1.15, since ties and scope do not depend on Quantify.
 
-After this version, planned with Paulo (D97): a simplification pass over every other screen (the Grouping panel, Quantify, De novo review: what goes behind "More options" and what is removed); one glossary and "peptide feature" everywhere; the recovery chart rewritten and recovery per mass range; a Merge families action; the unattributed bar broken down; the isotope-pattern fit; AI Help Markdown; and the other items in the desk's notes/next-roadmap.md.
+**In parallel.** IM runs IM1 to IM9. PN does RG2, then RG4 once IM1 lands, then RG5 once AP2 is posted. SM does RG1, RG3 and RG6 to RG8, then SF2 to SF4. DN does SF1 after QX3. FQRev reviews each step as it lands.
+
+**Before her session.** RL1, then AP6, then RL2 and AP5. Ana is free from 11-12 afternoon ("só vou conseguir estar liberada para voltar nesse assunto amanhã à tarde"), so 2.1.17 should be out by 11-12 noon. About 22 hours of steps, about 6 hours of wall time with four builders.
+
+**After this version.** Paulo's session with Ana on Review grouping (slide 26: "vou precisar fazer esta etapa com você"). "Show all options" is still hard for her (slide 25), so the next simplification comes from that session. The items in the desk's notes/next-roadmap.md remain.
 
 ## Paulo's decisions
 
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
+| D109 | Two releases | 2.1.16 is the crash fix alone, published as soon as its checks pass today. Everything else is 2.1.17, before Ana's session on 11-12 afternoon | QX5 |
+| D110 | Ledger rows dropped at Ana's request | "Try with the example", Colour categories, and the Decision column, Notes column and colour legend in the program's template. An old sheet that has them still imports | IM3 to IM5 |
+| D111 | Ties settled by how completely a protein covers each tied family's Pfam list | Yes. Only tied proteins change, and a user's choice wins | RG2 |
+| D112 | Tie choices written back into the sheet as a "UniProt family" column | Yes | RG4 |
+| D113 | BJ46a out of scope, if AP2 shows it | A row's own UniProt family brings its proteins into scope. The alternative is Ana adding a scope word such as "Metalloprotease inhibitor", which brings in every protein carrying that keyword | RG5 |
+| D114 | Names | "Use template", Ana's word, for "Save a template"; "Fetch UniProt families" for "Fetch family world" | IM2, RG8 |
+| D115 | The team | Four Sol builders (DN, IM, PN, SM) and FQRev reviewing, as in version 19 | Start |
+
 ### Decisions in force
 
 The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
@@ -211,11 +275,11 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 
 | Risk | Trigger | Response |
 |---|---|---|
-| The measured de novo envelope disagrees with the identified one | T1's median ratio outside 0.8 to 1.25 | The desk stops T3 and asks Paulo (D95's guard); the other lanes go on |
-| Two lanes touch the same file | A merge conflict at T19 | File ownership in the team section; a change in another lane's file goes through the desk |
-| Old projects show model numbers | A project computed before 2.1.14 is opened | The quant method version moved up in T3; Results says "Run Quantify again" |
-| A function is lost without Paulo's word | The ledger check fails at T19 | Only D95, D96, D98, D99 and D101 drop rows; every other change is mapped in the ledger's Added contracts section |
-| The Simple view hides something Ana needs | Her first use of 2.1.14 | "Show all options" is one click; she tells Paulo what to bring forward |
-| The HTML page grows too large with figures | T14's page size on Ana's project | Compressed PNG, measured before T19 |
-| Ana's data leaves this PC | Any brief or review | Only the desk (Anthropic) reads her project; the builders and the reviewer see code and synthetic data only |
-| The day runs long | A lane is more than an hour late at 18:00 | Its last step moves to the next roadmap; 2.1.14 ships with what is reviewed |
+| The fix changes when a subscriber hears progress | QX2 turns a synchronous event into a posted one | QX2 checks the tests that cancel on a progress item; QX3 adds a worker-thread test per path |
+| Another cross-thread path ships | Any background event with a window handler | QX3 lists them all; QX4 runs Quantify from the real screen on real data before 2.1.16 ships |
+| RG2 moves a protein a user expected elsewhere | A tied protein gets a family without a question | Only ties change and a stored choice wins; the desk posts before and after counts on Ana's panel |
+| Old sheets stop importing | A sheet with Decision, Notes or colours | IM3 keeps reading them, with a test |
+| BJ46a never enters the scope | AP2's count | D113 |
+| A function is lost without Paulo's word | The ledger check fails at RL1 | Only D110 drops rows; the renames (D114) are mapped in the ledger's Added contracts section |
+| Ana's data leaves this PC | Any brief or review | Only the desk (Anthropic) reads her project and sheet; the builders and the reviewer see code and synthetic data only |
+| The day runs long | 2.1.17 not ready by 11-12 noon | The late steps move to the next roadmap and 2.1.17 ships with what is reviewed; 2.1.16 has already unblocked her Quantify |
