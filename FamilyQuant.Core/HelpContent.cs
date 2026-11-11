@@ -371,7 +371,8 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine("THE FAMILY COUNTER AND THE FILTERS");
             sb.AppendLine("----------------------------------");
-            sb.AppendLine("The counter reads \"N visible · M in file\". Display and export filters hide rows,");
+            sb.AppendLine("The counter reads \"N shown of M in file\" and names only the active filters after");
+            sb.AppendLine("\"hidden:\": decoys, contaminants, search or only quantified. Display and export filters hide rows;");
             sb.AppendLine("they never change a number: hiding decoys or contaminants lowers the visible count");
             sb.AppendLine("and leaves every percentage exactly as it was. In \"" +
                           NormalizationMode.IdentifiedSignal.ShortName() + "\" the hidden rows");

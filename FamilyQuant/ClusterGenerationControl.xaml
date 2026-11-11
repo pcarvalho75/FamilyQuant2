@@ -22,7 +22,7 @@
         <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
             <DockPanel Margin="0,0,0,10">
                 <TextBlock x:Name="TextBlockCurateTitle" Text="Curate families" Style="{StaticResource PageTitle}" DockPanel.Dock="Left"/>
-                <Label x:Name="LabelNumberOfGroups" HorizontalAlignment="Right" ToolTip="Visible families and families in the file. Display filters never change the saved grouping or percentages."/>
+                <Label x:Name="LabelNumberOfGroups" HorizontalAlignment="Right" ToolTip="Shows the family count after the active display filters, the count in the whole file and the active filter names. Display filters never change the saved grouping or percentages."/>
             </DockPanel>
             <DockPanel Grid.Row="1" Margin="0,0,0,10">
                 <Label Content="Search" Target="{Binding ElementName=TextBoxSearch}" VerticalAlignment="Center" Margin="0,0,8,0"

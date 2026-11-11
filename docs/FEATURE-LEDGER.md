@@ -5781,6 +5781,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1962**; OPEN r
 
 ## Added contracts after the frozen source
 
+| FQ2-FAMILY-COUNTER-FILTERS | MAP | SF4 maps FQ15-B0E9E05EC8E3 and FQ15-DEFB773DF777 to N shown of M in file followed by only the active decoys, contaminants, search and only quantified filters. Both existing family counts and every stored quantity stay unchanged; no per-filter count is computed | test:FamilyCounterFilterTests; test:ReportViewTests |
+
 | FQ2-HTML-GAP-ORDER | MAP | U5-gap-order sorts the HTML Signal sources by family rows by stored pooled total, largest first, preserving native order for ties and keeping zero rows. Every native part, total, family percentage and Word chart input/order remains unchanged | test:HtmlSignalRecoveryTests; test:HtmlRecoveryExplanationTests |
 
 | FQ2-HTML-RECOVERY-GUIDE | MAP | U5 explains peptide-feature grain, the four recovery readings and their TIC base, measured isotope gaps, the independent detector without peptide-FDR calibration, pooling, and percentage points versus identified-baseline relative increase. The existing signal Help opens the same guide. Desk M18 adds program-computed percentages of each Database gap family's displayed total alongside native G5 pooled areas; the separate comparison panel retains its all-feature denominator. Quiet tracks and TIC reference retain every native value | test:HtmlRecoveryExplanationTests; test:HtmlSignalRecoveryTests |
