@@ -16,6 +16,12 @@ public sealed partial class EvidenceReviewViewModel
     private PanelChecklistFamily? selectedChecklistFamily;
     private ChecklistScopePhrase? selectedChecklistPhrase;
     public IReadOnlyList<PanelChecklistFamily> PanelChecklist => Source.PanelChecklist ?? Array.Empty<PanelChecklistFamily>();
+    public string PanelChecklistSummary => "Your list: " + PanelChecklist.Count.ToString("N0", CultureInfo.CurrentCulture)
+        + " families, " + PanelChecklist.Count(row => row.State == PanelChecklistState.WithProteins).ToString("N0", CultureInfo.CurrentCulture)
+        + " with proteins, " + PanelChecklist.Count(row => row.State == PanelChecklistState.NeedsChoice).ToString("N0", CultureInfo.CurrentCulture)
+        + " waiting for a choice, " + PanelChecklist.Count(row => row.State == PanelChecklistState.NoPfamCode).ToString("N0", CultureInfo.CurrentCulture)
+        + " with no Pfam code, " + PanelChecklist.Count(row => row.State == PanelChecklistState.NoDatabaseMatch).ToString("N0", CultureInfo.CurrentCulture)
+        + " matching no database protein.";
     public PanelChecklistFamily? SelectedChecklistFamily
     {
         get => selectedChecklistFamily ?? PanelChecklist.FirstOrDefault();
@@ -38,7 +44,10 @@ public sealed partial class EvidenceReviewViewModel
         {
             var row = SelectedChecklistFamily;
             if (row == null) return "";
-            if (row.Matches == 0) return row.Decision + ". " + row.ContaminantReason
+            string state = row.StateText + ". " + (row.NeedsLinkChoice ? "Resolve candidate links in Panel links, then Use link choices. "
+                : row.State == PanelChecklistState.NoPfamCode ? "Add a Pfam code to this family list row to supply domain evidence. "
+                : row.State == PanelChecklistState.NeedsChoice ? "Review the outside-match reasons below, then choose a scope phrase or place matches by hand. " : "");
+            if (row.Matches == 0) return state + row.Decision + ". " + row.ContaminantReason
                 + " No database targets match this panel family's stored names, source family links or Pfam domains.";
             string types = string.Join(" | ", new[] { PanelChecklistMatch.UniProtFamily, PanelChecklistMatch.Pfam, PanelChecklistMatch.NameText, PanelChecklistMatch.HandChoice,
                 PanelChecklistMatch.ProposedPlacement, PanelChecklistMatch.ConfirmedPhrase, PanelChecklistMatch.ConfirmedMatch }
@@ -46,7 +55,7 @@ public sealed partial class EvidenceReviewViewModel
                 .Select(type => MatchName(type) + " " + row.Proteins.Count(protein => protein.Match.HasFlag(type)).ToString("N0", CultureInfo.CurrentCulture)));
             string reasons = string.Join(Environment.NewLine, row.Proteins.Where(protein => !protein.Placed).GroupBy(protein => protein.Reason)
                 .Select(group => group.Count().ToString("N0", CultureInfo.CurrentCulture) + (group.Count() == 1 ? " entry. " : " entries. ") + group.Key));
-            return row.Decision + ". " + row.ContaminantReason + Environment.NewLine + types
+            return state + row.Decision + ". " + row.ContaminantReason + Environment.NewLine + types
                 + Environment.NewLine + (reasons.Length == 0 ? "All matching targets are placed in the proposal." : reasons);
         }
     }

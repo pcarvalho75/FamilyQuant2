@@ -298,6 +298,8 @@ namespace FamilyQuant
             sb.AppendLine("If Apply grouping waits for Panel links, Review choices shows only links needing a choice;");
             sb.AppendLine("choose a family or Leave outside panel, then Use link choices to update the proposal.");
             sb.AppendLine("Each Panel links row shows an example database protein and its stored UniProt family to help you recognize it.");
+            sb.AppendLine("Family checklist keeps every row of your list and counts those with proposed proteins, waiting for a choice,");
+            sb.AppendLine("with no Pfam code, or matching no database protein; matching evidence alone does not assign a protein.");
             sb.AppendLine("If the project has no stored UniProt evidence, Download and continue runs Fetch evidence");
             sb.AppendLine("before opening the review; Cancel leaves the project unchanged. If no reviewed accession");
             sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");
