@@ -11,6 +11,23 @@ namespace FamilyQuant.Panels.Import;
 /// <summary>Detached interpretation of the subclass sources shown in the workbook summary. Never confirms or applies.</summary>
 public static partial class PanelSubclassImport
 {
+    public static bool TryReadTemplateTable(PanelSpreadsheetTable table, IReadOnlyCollection<string> familyKeys,
+        out PanelWorkbookSubclassTable source)
+    {
+        source = new();
+        if (!PanelImportTemplate.SubclassColumns.All(column => table.Headers.Contains(column.Header, StringComparer.Ordinal))
+            || !table.Rows.Any(row => PanelImportTemplate.SubclassColumns.Any(column => !string.IsNullOrWhiteSpace(row.Cells.GetValueOrDefault(column.Header))))) return false;
+        source = new PanelWorkbookSubclassTable
+        {
+            SheetName = table.SheetName, Table = table,
+            FamilyKeys = table.Rows.Select(row => row.Cells.GetValueOrDefault(PanelImportTemplate.SubclassFamily, "").Trim())
+                .Where(key => familyKeys.Contains(key, StringComparer.Ordinal)).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToList(),
+            FamilyKeyColumn = PanelImportTemplate.SubclassFamily, ClassColumn = PanelImportTemplate.SubclassName,
+            DomainColumns = new() { PanelImportTemplate.SubclassRequiredPfam, PanelImportTemplate.SubclassAbsentPfam },
+        };
+        return true;
+    }
+
     public static PanelSubclassProposalResult Propose(IReadOnlyList<PanelWorkbookSubclassTable> tables,
         IReadOnlyCollection<string> summaryFamilyKeys, IReadOnlyList<FamilyPanelDomain> recognizedPfam,
         IReadOnlyList<PanelSubclassExpectedName> expectedNames)
@@ -83,6 +100,11 @@ public static partial class PanelSubclassImport
                     var source = new PanelSubclassSourceRow { SheetName = table.SheetName, RowNumber = row.RowNumber,
                         Cells = new Dictionary<string, string>(row.Cells, StringComparer.Ordinal) };
                     AddSource(proposal.SourceRows, source);
+                    foreach (string value in row.Cells.GetValueOrDefault(PanelImportTemplate.SubclassUniProt, "")
+                        .Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                        if (!proposal.UniProtSubfamilies.Contains(value, StringComparer.OrdinalIgnoreCase)) proposal.UniProtSubfamilies.Add(value);
+                    if (proposal.UniProtSubfamilies.Count > 0)
+                        proposal.Reason += " UniProt family or subfamily matches: " + string.Join("; ", proposal.UniProtSubfamilies) + ".";
                     foreach (string column in table.DomainColumns.Distinct(StringComparer.Ordinal))
                     {
                         var parsed = vocabulary.Read(row.Cells.GetValueOrDefault(column, ""), column, source);
@@ -105,7 +127,7 @@ public static partial class PanelSubclassImport
                             if (rule.IsUncertain) Uncertain(proposal, rule.Reason);
                         }
                     }
-                    if (proposal.Rules.Count == 0) Uncertain(proposal, "No uniquely recognized Pfam rule was found; the subclass name and source text remain available.");
+                    if (proposal.Rules.Count == 0 && proposal.UniProtSubfamilies.Count == 0) Uncertain(proposal, "No uniquely recognized Pfam rule was found; the subclass name and source text remain available.");
                 }
             }
         }

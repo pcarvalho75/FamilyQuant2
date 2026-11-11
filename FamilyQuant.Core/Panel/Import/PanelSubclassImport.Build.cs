@@ -47,7 +47,8 @@ public static partial class PanelSubclassImport
             if (string.IsNullOrWhiteSpace(family) || !targets.Contains(family)) Problem(selection.ProposalId, "", "Choose a family key shown in the current summary before accepting this subclass.");
             if (string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(name)) Problem(selection.ProposalId, "", "An accepted subclass needs a nonempty key and display name.");
             if (!chosenKeys.Add((family, key))) Problem(selection.ProposalId, "", "Subclass keys must be unique within the selected family.");
-            var definition = new FamilyPanelSubclass { Key = key, DisplayName = name };
+            var definition = new FamilyPanelSubclass { Key = key, DisplayName = name,
+                UniProtSubfamilies = proposal.UniProtSubfamilies.Order(StringComparer.Ordinal).ToList() };
             foreach (var field in proposal.Notes.Concat(SourceFields(proposal.SourceRows)))
                 if (!definition.TextFields.Any(existing => existing.Name == field.Name && existing.Text == field.Text))
                     definition.TextFields.Add(new() { Name = field.Name, Text = field.Text });

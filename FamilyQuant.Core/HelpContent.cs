@@ -232,6 +232,12 @@ namespace FamilyQuant
             sb.AppendLine("sequences for Database gap. Both need an internet connection when downloading.");
             sb.AppendLine("Save the project to keep the evidence, applied grouping and family world.");
             sb.AppendLine();
+            sb.AppendLine("Use template includes an optional Subclasses sheet: copy a Family key from Families and write one Subclass per row.");
+            sb.AppendLine("Each header has a one-line note on Instructions. A subclass matches an exact UniProt family or subfamily name");
+            sb.AppendLine("in the protein's stored hierarchy, or all required Pfam domains with none of the absent domains. Keep the full");
+            sb.AppendLine("UniProt name, including family or subfamily. Absence needs a complete protein with domain evidence; missing or");
+            sb.AppendLine("conflicting support stays Unknown. Review and accept imported subclasses before they become project rules.");
+            sb.AppendLine();
             sb.AppendLine("PART B OF CURATE FAMILIES, GROUP BY WORDS, AND CURATING BY HAND");
             sb.AppendLine("----------------------------------------------------------------");
             sb.AppendLine("Group by words merges families by their description words (Recluster by words) or builds");

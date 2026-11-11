@@ -8,12 +8,18 @@ using System.Linq;
 
 namespace FamilyQuant.Panels.Import;
 
-/// <summary>An empty family-list workbook with the recommended columns and an Instructions sheet. A hidden defined
+/// <summary>An empty family-list workbook with the recommended columns, an optional Subclasses sheet and header notes on Instructions. A hidden defined
 /// name marks it, so the importer maps its columns and the program's own decision names with no user mapping.</summary>
 public static class PanelImportTemplate
 {
     public const string FamilySheet = "Families";
     public const string InstructionsSheet = "Instructions";
+    public const string SubclassesSheet = "Subclasses";
+    public const string SubclassFamily = "Family";
+    public const string SubclassName = "Subclass";
+    public const string SubclassUniProt = "UniProt family or subfamily";
+    public const string SubclassRequiredPfam = "Pfam required";
+    public const string SubclassAbsentPfam = "Pfam absent";
     public const string Abbreviation = "Abbreviation";
     public const string Name = "Name";
     public const string OtherName = "Other-language name";
@@ -30,6 +36,15 @@ public static class PanelImportTemplate
         (Abbreviation, PanelImportFields.FamilyKey), (Name, PanelImportFields.DisplayName), (OtherName, PanelImportFields.OtherName),
         (Pfam, PanelImportFields.Pfam),
         (UniProtFamily, PanelImportFields.UniProtFamilies),
+    };
+
+    public static IReadOnlyList<(string Header, string Note)> SubclassColumns { get; } = new[]
+    {
+        (SubclassFamily, "Copy the family abbreviation from Families; this must match its key exactly."),
+        (SubclassName, "Write one subclass name per row; names must be unique within the family."),
+        (SubclassUniProt, "Exact UniProt family or subfamily names, separated by semicolons; keep the full name, including family or subfamily."),
+        (SubclassRequiredPfam, "Pfam accessions that must all be present, separated by semicolons; leave empty for no required-domain rule."),
+        (SubclassAbsentPfam, "Pfam accessions that must all be absent, separated by semicolons; absence needs a complete protein with domain evidence."),
     };
 
     internal static IEnumerable<(string Header, string Role)> ImportColumns => Columns.Concat(new[]
@@ -103,13 +118,23 @@ public static class PanelImportTemplate
 
         var instructions = new SheetData();
         uint row = 1;
-        foreach (string line in Instructions)
+        foreach (string line in Instructions.Where(line => line != "Example rows"))
         {
             uint style = row == 1 ? 3u : line == "Example rows" ? 1u : 2u;
             instructions.Append(Row(row++, new[] { line }, style));
         }
+        instructions.Append(Row(row++, new[] { "Subclasses: optional, one subclass per row on the Subclasses sheet; the Family value is a key from Families." }, 2));
+        foreach (var column in SubclassColumns) instructions.Append(Row(row++, new[] { "Subclasses > " + column.Header + ": " + column.Note }, 2));
+        instructions.Append(Row(row++, new[] { "" }, 2));
+        instructions.Append(Row(row++, new[] { "Example rows" }, 1));
         foreach (var example in Example) instructions.Append(Row(row++, example, example[0] == Abbreviation ? 1u : 2u));
         AddSheet(workbook, sheets, InstructionsSheet, 2, new Worksheet(new Columns(Width(1, 120)), instructions));
+
+        AddSheet(workbook, sheets, SubclassesSheet, 3, new Worksheet(
+            new SheetViews(new SheetView(new Pane { VerticalSplit = 1, TopLeftCell = "A2", ActivePane = PaneValues.BottomLeft, State = PaneStateValues.Frozen }) { WorkbookViewId = 0 }),
+            new Columns(Width(1, 18), Width(2, 32), Width(3, 50), Width(4, 40), Width(5, 40)),
+            new SheetData(Row(1, SubclassColumns.Select(column => column.Header).ToArray(), 1)),
+            new AutoFilter { Reference = "A1:E1" }));
 
         workbook.Workbook.Append(new DefinedNames(new DefinedName { Name = Marker, Hidden = true, Text = MarkerValue }));
         workbook.Workbook.Save();

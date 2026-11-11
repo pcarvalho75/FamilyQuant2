@@ -34,7 +34,7 @@ internal static partial class Program
         var reader = new PanelSpreadsheetReader(); var importer = new FamilyPanelSpreadsheetImporter();
         var blank = reader.ReadPreview(path);
         Check("Z12p2d the template opens on its Families sheet, marked, with the header row proposed from its filter",
-            blank.IsTemplate && blank.SheetNames.SequenceEqual(new[] { "Families", "Instructions" }) && blank.HiddenSheetNames.Count == 0
+            blank.IsTemplate && blank.SheetNames.SequenceEqual(new[] { "Families", "Instructions", "Subclasses" }) && blank.HiddenSheetNames.Count == 0
             && blank.ProposedHeaderRow == 1 && blank.Rows.Count == 1 && blank.Problems.Count == 0
             && blank.Rows[0].Cells.Select(c => c.Text).SequenceEqual(PanelImportTemplate.Columns.Select(c => c.Header))
             && blank.Rows[0].Cells.All(c => c.Fill == "#D9E1F2"), string.Join("|", blank.Rows.SelectMany(r => r.Cells).Select(c => c.Text + c.Fill)));
@@ -111,7 +111,7 @@ internal static partial class Program
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US"); PanelImportTemplate.Write(english);
         }
         finally { CultureInfo.CurrentCulture = culture; }
-        string Content(string file) => JsonSerializer.Serialize(new[] { "Families", "Instructions" }.Select(sheet => reader.ReadPreview(file, sheet).Rows
+        string Content(string file) => JsonSerializer.Serialize(new[] { "Families", "Instructions", "Subclasses" }.Select(sheet => reader.ReadPreview(file, sheet).Rows
             .Select(r => r.Cells.Select(c => c.Text + c.Fill + c.MergeRange))));
         Check("Z12p2d the template's content does not depend on display culture", Content(portuguese) == Content(english));
         using (var document = SpreadsheetDocument.Open(english, false))
