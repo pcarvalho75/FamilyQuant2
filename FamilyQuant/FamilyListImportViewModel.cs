@@ -35,8 +35,8 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     private readonly bool openWorkbookReview;
     private CancellationTokenSource? operation;
     private Task activeRead = Task.CompletedTask;
-    private int readGeneration, page, headerRow = 1;
-    private bool busy, updating, keepOtherSheets, reviewingDecisions, quantifyAllConfirmed;
+    private int readGeneration, page = 1, headerRow = 1;
+    private bool busy, updating, keepOtherSheets, reviewingDecisions;
     private string path = "", sheet = "", panelName = "", status = "Nothing has changed yet.";
     private string headerRowText = "1";
     private FamilyPanelImport choices = new() { ImportVersion = PanelImportRules.Current };
@@ -78,23 +78,26 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public string Status { get => status; private set => Set(ref status, value); }
     public int Page => page;
     public bool CanEdit => !IsBusy && !Imported;
-    private string StepName(int index) => index == 1 && HasWorkbookMap ? "Workbook sheets" : StepNames[index];
-    public IReadOnlyList<ImportWizardStep> Steps => StepNames.Select((name, index) => new ImportWizardStep(index,
-        (index + 1).ToString(CultureInfo.CurrentCulture) + "   " + StepName(index), index < page, index == page,
-        !IsBusy && index <= page && (!Imported || index >= 5))).ToArray();
+    private string StepName(int index) => StepNames[index];
+    private IReadOnlyList<int> WizardPages => new[] { 1, 2, 3, 4, 5 }.Where(index => index is 1 or 2 or 5 || index == page
+        || index == 3 && SpecialRows.Any(row => row.Blocking || row.Chosen)
+        || index == 4 && PfamQuestions.Count > 0).ToArray();
+    public IReadOnlyList<ImportWizardStep> Steps => WizardPages.Select((index, position) => new ImportWizardStep(index,
+        (position + 1).ToString(CultureInfo.CurrentCulture) + "   " + StepName(index), index < page, index == page,
+        !IsBusy && index <= page && !Imported)).ToArray();
     public string Title => reviewingWorkbook ? "Review your workbook" : reviewingSubclasses ? "Review subclass proposals"
-        : page == 1 && HasWorkbookMap ? "Workbook sheets" : page == 2 && ReviewingDecisions ? "Review spreadsheet decisions" : Titles[page];
+        : page == 2 && ReviewingDecisions ? "Review spreadsheet decisions" : Titles[page];
     public string Explanation => reviewingWorkbook ? "Review what was found, change any section, then accept the proposal as one import."
         : reviewingSubclasses ? "Check each proposed family, subclass and domain rule before keeping your choices."
         : page == 2 && ReviewingDecisions ? FamilyListImportHelp.DecisionsSummary
-        : page == 1 && HasWorkbookMap ? "Check each sheet's role under Use as, and take another sheet as the family list if needed."
         : Explanations[page];
     public string StepLabel => reviewingWorkbook ? "Workbook proposal" : reviewingSubclasses ? "Subclass review"
-        : "Step " + (page + 1).ToString(CultureInfo.CurrentCulture) + " of 7, " + StepName(page);
+        : Imported ? "Imported" : "Step " + (WizardPages.ToList().IndexOf(page) + 1).ToString(CultureInfo.CurrentCulture)
+            + " of " + WizardPages.Count.ToString(CultureInfo.CurrentCulture) + ", " + StepName(page);
     public string ForwardLabel => reviewingWorkbook ? "Accept and import" : reviewingSubclasses ? "Keep subclass choices"
-        : WorkbookReviewEnabled && page == 5 && !Imported ? "Review workbook" : page == 5 && !Imported ? "Import" : page == 6 ? "Family checklist" : "Next";
+        : page == 5 && !Imported ? "Accept and import" : page == 6 ? "Family checklist" : "Next";
     public string CloseLabel => Imported ? "Close" : "Cancel";
-    public bool CanBack => !IsBusy && page > 0 && !reviewingWorkbook;
+    public bool CanBack => !IsBusy && page > 1 && !reviewingWorkbook;
     public string BackToolTip => reviewingWorkbook ? "Use a section's Review button to change its proposal; Cancel leaves the project unchanged."
         : reviewingSubclasses ? "Returns to Review your workbook and keeps your subclass draft choices; nothing changes in the project until Accept and import."
         : !CanBack ? IsBusy ? "Wait for the current step to finish before returning; Cancel stops it without importing."
@@ -111,18 +114,18 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
         : page == 5 && !Imported ? "Rechecks the workbook and project, then imports the reviewed list as one project edit; Undo restores the previous list, and File > Save stores the change."
         : page == 6 ? "Closes the wizard and opens Family checklist for separate protein review; no grouping or quantitation runs automatically."
         : Imported ? "Shows the imported list's Done page without importing again or adding an Undo step."
-        : page == 2 && !quantifyAllConfirmed && Columns.FirstOrDefault(c => c.Role == PanelImportFields.Decision)?.HasChoice != true
-            ? "Asks you to confirm Quantify for every family because no Decision column is chosen; No keeps you on Columns. Acceptance is remembered for this source until its Decision mapping changes, with no project edit until Import."
+        : page == 2 && HasUnconfirmedColumnDecisions
+            ? "Opens the sheet's custom decision labels so you can confirm their actions. Nothing changes in the project until Accept and import."
         : "Continues to the next review step with your choices kept; the project and workbook stay unchanged until Import.";
     public bool CanNext => reviewingWorkbook ? CanAcceptWorkbook : reviewingSubclasses ? !IsBusy && !Imported : !IsBusy && (Imported || page switch
     {
         0 => true,
         1 => !NeedsFamilySheetChoice && !WorkbookHasBlockingProblems && table != null && int.TryParse(HeaderRowText, out int editedHeader) && table.HeaderRowNumber == editedHeader && Preview != null
             && headerRow > 0 && !Preview.Problems.Any(p => p.Severity == PanelImportSeverity.Blocking),
-        2 => MappingValid && Decisions.All(d => d.Confirmed && d.Decision != null),
+        2 => MappingValid && (!ReviewingDecisions || Decisions.All(d => d.Confirmed && d.Decision != null)),
         3 => check.CanImport && SpecialRows.All(r => !r.Blocking),
         4 => check.CanImport && MatchFamilies.All(f => f.Decided),
-        5 => check.CanImport && PanelName.Trim().Length > 0,
+        5 => check.CanImport && PanelName.Trim().Length > 0 && (!WorkbookReviewEnabled || CanAcceptWorkbook),
         _ => false,
     });
     public static IReadOnlyList<ImportDecisionOption> DecisionOptions { get; } = new[] {
@@ -183,7 +186,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
             HeaderRowText = selectedRow.ToString(CultureInfo.CurrentCulture);
             var proposal = loaded == null ? new PanelImportProposal { Choices = new FamilyPanelImport { ImportVersion = PanelImportRules.Current } }
                 : workbook != null && loaded.SheetName == workbook.FamilySheet ? workbook.FamilyProposal : importer.Propose(loaded);
-            choices = System.Text.Json.JsonSerializer.Deserialize<FamilyPanelImport>(System.Text.Json.JsonSerializer.Serialize(proposal.Choices))!; DecisionHint = proposal.DecisionHint; DecisionHintReason = proposal.DecisionHintReason; quantifyAllConfirmed = false;
+            choices = System.Text.Json.JsonSerializer.Deserialize<FamilyPanelImport>(System.Text.Json.JsonSerializer.Serialize(proposal.Choices))!; DecisionHint = proposal.DecisionHint; DecisionHintReason = proposal.DecisionHintReason;
             choices.RowChoices = new(); choices.ColorLabels = null;
             PanelName = Path.GetFileNameWithoutExtension(workbookPath);
             Columns.Clear(); Decisions.Clear(); SourceColorChoices.Clear(); MatchFamilies.Clear(); matchesFingerprint = ""; ReviewingDecisions = false;
@@ -195,8 +198,6 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
             Recheck(); Changed(nameof(Preview)); Changed(nameof(Sheets)); Changed(nameof(HiddenSheets));
             Changed(nameof(HasSourceFills));
             Changed(nameof(WorkbookPath)); Changed(nameof(WorkbookName)); Changed(nameof(Sheet));
-            if (WorkbookReviewEnabled && workbook != null)
-            { reviewingWorkbook = true; Status = "Nothing has changed yet. Accept and import keeps one Undo step."; Refresh(); RefreshReviewHeading(); }
         }
         catch (OperationCanceledException) { if (generation == readGeneration) Status = "Reading cancelled."; }
         catch (Exception error) when (error is IOException or UnauthorizedAccessException or ArgumentException or InvalidOperationException)
@@ -209,32 +210,52 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
 
     public void Back()
     {
-        if (reviewingSubclasses) { ReturnToWorkbookReview(); return; }
+        if (reviewingSubclasses) { reviewingSubclasses = false; GoTo(5); return; }
         if (page == 2 && ReviewingDecisions) ReviewingDecisions = false;
-        else if (CanBack) GoTo(page - 1);
+        else if (CanBack) GoTo(WizardPages.Where(index => index < page).DefaultIfEmpty(1).Last());
     }
 
     public void Revisit(int target)
-    { if (ShowingWizardPages && !IsBusy && target >= 0 && target < page && (!Imported || target == 5)) GoTo(target); }
+    { if (ShowingWizardPages && !IsBusy && WizardPages.Contains(target) && target < page && !Imported) GoTo(target); }
 
     public async Task<bool> NextAsync(Func<string, bool>? confirmQuantifyAll = null)
     {
         if (reviewingWorkbook) return await AcceptWorkbookAsync(confirmQuantifyAll);
-        if (reviewingSubclasses) { ReturnToWorkbookReview(); return true; }
-        if (!CanNext) { Status = DisabledReason; return false; }
-        if (page == 2 && !Imported && !quantifyAllConfirmed && Columns.FirstOrDefault(c => c.Role == PanelImportFields.Decision)?.HasChoice != true)
+        if (reviewingSubclasses)
         {
-            if (confirmQuantifyAll?.Invoke("No Decision column is chosen. Quantify every family for this import?") != true)
-            { Status = "Choose a Decision column, or confirm Quantify for every family to continue."; return false; }
-            quantifyAllConfirmed = true;
+            foreach (var choice in SubclassChoices.Where(choice => !choice.Reviewed && !choice.Use)) choice.Reject();
+            reviewingSubclasses = false; RefreshWorkbookReview(); GoTo(5); return true;
+        }
+        if (!CanNext) { Status = DisabledReason; return false; }
+        if (page == 2 && HasUnconfirmedColumnDecisions)
+        {
+            ReviewingDecisions = true; Status = ConfirmDecisionActions; return true;
         }
         if (Imported) { if (page < 6) GoTo(page + 1); return page == 6; }
-        if (page == 5) { if (WorkbookReviewEnabled) { ReturnToWorkbookReview(); return true; } var commit = CommitAsync(); activeRead = commit; return await commit; }
-        if (page == 3)
+        if (page == 5)
         {
+            if (WorkbookReviewEnabled) return await AcceptWorkbookAsync(confirmQuantifyAll);
+            var commit = CommitAsync(); activeRead = commit; return await commit;
+        }
+        if (page is 2 or 3)
+        {
+            if (SpecialRows.Any(row => row.Blocking)) { GoTo(3); return true; }
             var preparation = PrepareMatchesAsync(); activeRead = preparation;
             if (!await preparation) return false;
-            GoTo(PfamQuestions.Any(family => !family.Decided) ? 4 : 5); return true;
+            if (PfamQuestions.Any(family => !family.Decided)) { GoTo(4); return true; }
+        }
+        if (page is 2 or 3 or 4)
+        {
+            if (WorkbookReviewEnabled)
+            {
+                evidencePagePrepared = true;
+                reviewedEvidence = MatchFamilies.Where(family => family.Decided).ToDictionary(family => family.Key,
+                    family => (IReadOnlyList<PanelEvidenceChoice>)family.Suggestions.Where(choice => choice.Use)
+                        .Select(choice => FamilyQuant.Evidence.PanelEvidenceMatching.ChoiceFromKey(choice.Key) with { Value = choice.Text }).ToArray(), StringComparer.Ordinal);
+                RefreshWorkbookReview();
+                reviewingSubclasses = SubclassChoices.Any(choice => choice.IsUncertain && !choice.Reviewed);
+            }
+            GoTo(5); return true;
         }
         GoTo(page + 1); return true;
     }
@@ -242,7 +263,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     private const string ColumnChoicesKept = "Your column choices are kept until you import.";
     private const string ConfirmDecisionActions = "Check the proposed actions and press Confirm these actions to continue.";
     private bool HasUnconfirmedColumnDecisions => MappingValid && Decisions.Any(decision => !decision.Confirmed);
-    private string DecisionReviewInstruction => "Press Review decision values and confirm each action to continue"
+    private string DecisionReviewInstruction => "Next opens the custom decision labels; confirm each action to continue"
         + (CanReturnToWorkbook ? ", or press Back to workbook review." : ".");
     private string ColumnsStatus => ReviewingDecisions ? ConfirmDecisionActions
         : HasUnconfirmedColumnDecisions ? DecisionReviewInstruction : ColumnChoicesKept;
@@ -289,5 +310,5 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     }
 
     public void ReportStatus(string message) => Status = message;
-    public void Dispose() { operation?.Cancel(); operation?.Dispose(); transaction.Dispose(); }
+    public void Dispose() { operation?.Cancel(); operation?.Dispose(); operation = null; transaction.Dispose(); }
 }

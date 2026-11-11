@@ -29,6 +29,9 @@ public sealed partial class FamilyListImportViewModel
         + (NeedsFamilySheetChoice ? "; choose the family list" : "; family list: " + (workbookSnapshot?.FamilySheet ?? ""));
     public string KeptNotesSummary => workbookSnapshot?.Notes.Count > 0
         ? "Notes kept: " + string.Join(", ", workbookSnapshot.Notes.Select(n => n.SheetName)) : "No separate notes sheets";
+    public string SkippedSheetsSummary => string.Join("\n", workbookSnapshot?.Workbook.Sheets
+        .Where(sheet => sheet.Role == PanelWorkbookSheetRole.Notes && sheet.RoleReason.StartsWith("Sheet ", StringComparison.Ordinal))
+        .Select(sheet => sheet.RoleReason) ?? Array.Empty<string>());
     public IReadOnlyList<PanelWorkbookSourceNote> KeptNotes => workbookSnapshot?.Notes is { } notes ? notes : Array.Empty<PanelWorkbookSourceNote>();
     private ImportWorkbookSheet? selectedWorkbookSheet;
     public ImportWorkbookSheet? SelectedWorkbookSheet { get => selectedWorkbookSheet; set { if (Set(ref selectedWorkbookSheet, value)) Changed(nameof(CanChooseFamilySheet)); } }
@@ -61,6 +64,7 @@ public sealed partial class FamilyListImportViewModel
         Changed(nameof(WorkbookHasBlockingProblems)); Changed(nameof(WorkbookProblems));
         Changed(nameof(WorkbookHintsRead)); Changed(nameof(WorkbookHintStatus)); Changed(nameof(WorkbookProblemMessages));
         Changed(nameof(KeptNotes)); Changed(nameof(KeptNotesSummary)); Changed(nameof(SubclassChoices));
+        Changed(nameof(SkippedSheetsSummary));
     }
 
     public Task ChangeWorkbookRoleAsync(string name, PanelWorkbookSheetRole role)

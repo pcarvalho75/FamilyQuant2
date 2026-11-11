@@ -21,6 +21,8 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-review-checklist-states", "FamilyQuant.Tests.Program.ReviewChecklistStateTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-link-examples", "FamilyQuant.Tests.Program.PanelLinkExampleTests()"),
         SuiteCommandRule.Covered("--test-review-apply-wait", "FamilyQuant.Tests.Program.ReviewApplyWaitTests(System.String)"),
+        SuiteCommandRule.Covered("--test-import-conditional-pages", "FamilyQuant.Tests.Program.ImportConditionalPageTests(System.String)"),
+        SuiteCommandRule.Covered("--test-import-save-handoff", "FamilyQuant.Tests.Program.ImportSaveHandoffTests()"),
         SuiteCommandRule.Covered("--test-import-pfam-direct", "FamilyQuant.Tests.Program.ImportDirectPfamTests()"),
         SuiteCommandRule.Covered("--test-import-decision-pages", "FamilyQuant.Tests.Program.ImportDecisionPageTests()"),
         SuiteCommandRule.Covered("--test-import-entry-actions", "FamilyQuant.Tests.Program.ImportEntryActionTests()"),
