@@ -8,6 +8,8 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-panel-named-families", "FamilyQuant.Tests.Program.PanelNamedFamilyTests(System.String)"),
+        SuiteCommandRule.Excluded("--panel-family-counts", "Read-only desk comparison of RG4 and RG5 assignments in a selected project. Prints only the imported row names and counts; PanelNamedFamilyTests provides the DefaultSuite synthetic proof."),
         SuiteCommandRule.Covered("--test-panel-link-roundtrip", "FamilyQuant.Tests.Program.PanelLinkRoundtripTests(System.String)"),
         SuiteCommandRule.Covered("--test-family-counter-filters", "FamilyQuant.Tests.Program.FamilyCounterFilterTests()"),
         SuiteCommandRule.Covered("--test-panel-coverage-ties", "FamilyQuant.Tests.Program.PanelCoverageTieTests(System.String)"),

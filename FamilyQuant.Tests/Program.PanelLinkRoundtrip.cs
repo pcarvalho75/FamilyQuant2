@@ -75,7 +75,7 @@ internal static partial class Program
             MyExtendedFastaItems = JsonSerializer.Deserialize<List<FastaItemExtended>>(JsonSerializer.Serialize(file.MyExtendedFastaItems))! };
         foreach (var protein in exact.MyExtendedFastaItems) protein.Evidence!.Family += " extra";
         Check("RG4 source-family names match the complete label rather than a substring", PanelEvidenceClassifier.Propose(exact, options)
-            .PanelContext!.Links.Any(l => l.NeedsConfirmation));
+            .Proteins.All(p => p.Family != "B"));
 
         var changed = FamilyPanelValidation.Clone(chosen);
         string chosenFingerprint = PanelDerivedDataCurrentness.FamilyFingerprint(chosen);

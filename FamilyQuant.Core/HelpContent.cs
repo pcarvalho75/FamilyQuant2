@@ -304,6 +304,10 @@ namespace FamilyQuant
             sb.AppendLine("Save panel as spreadsheet writes named link choices in the UniProt family column.");
             sb.AppendLine("Importing that column restores exact family links among the supported rows without");
             sb.AppendLine("asking again. Separate several source family names with semicolons.");
+            sb.AppendLine("A row naming a UniProt family takes only proteins with that complete family name.");
+            sb.AppendLine("Those proteins enter that row even without matching scope words. Rows sharing its");
+            sb.AppendLine("domains without a family name take the other supported proteins under the existing");
+            sb.AppendLine("scope rules. A neighbour cannot supply membership of a named UniProt family.");
             sb.AppendLine("If the project has no stored UniProt evidence, Download and continue runs Fetch evidence");
             sb.AppendLine("before opening the review; Cancel leaves the project unchanged. If no reviewed accession");
             sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");
