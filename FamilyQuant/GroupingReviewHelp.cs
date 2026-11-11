@@ -9,6 +9,7 @@ namespace FamilyQuant
         Review grouping
 
         Nothing in the open document changes until Apply grouping is confirmed. Cancel, Escape or closing leaves it alone and adds no undo step.
+        When Apply grouping waits for choices in Panel links, Review choices opens that tab filtered to Needs a choice. Choose a family or Leave outside panel, then Use link choices to rebuild the proposal. The waiting count disappears when every link is resolved.
 
         Keywords
         Keywords are separated by commas or spaces. Quoted words are a phrase; a hyphenated entry also works. Match all requires every keyword in one protein description; match any requires at least one. Matching reads the description before OS=.

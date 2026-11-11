@@ -150,6 +150,12 @@ namespace FamilyQuant
             Confirmed = true; Close();
         }
         private void Cancel_Click(object sender, RoutedEventArgs e) { Confirmed = false; Close(); }
+        private void OpenPanelLinkChoices_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAllOptions = true;
+            model.OnlyPanelLinksNeedingChoice = true;
+            evidenceTabs.SelectedItem = evidenceTabs.Items.OfType<TabItem>().Single(tab => tab.Header as string == "Panel links");
+        }
         private void UpdateApplyToolTip()
         {
             if (!Dispatcher.CheckAccess())

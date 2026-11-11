@@ -299,7 +299,7 @@ namespace FamilyQuant
             Changed(nameof(CanEditManual));
         }
         private void EvidenceChanged(object? sender, PropertyChangedEventArgs e) { Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); }
-        private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); Changed(nameof(CanMatchPanelNames)); Changed(nameof(MatchPanelNamesHint)); Changed(nameof(CanFetchMissingPanel)); Changed(nameof(PanelCoverageText)); NotifyChecklistActions(); NotifyEvidenceLocks(); }
+        private void NotifySummary() { Changed(nameof(IsWaitingForPanelLinks)); Changed(nameof(Summary)); Changed(nameof(CanConfirm)); Changed(nameof(ApplyHint)); Changed(nameof(CanEditManual)); Changed(nameof(CanMatchPanelNames)); Changed(nameof(MatchPanelNamesHint)); Changed(nameof(CanFetchMissingPanel)); Changed(nameof(PanelCoverageText)); NotifyChecklistActions(); NotifyEvidenceLocks(); }
 
         private void RestoreManualState(IReadOnlyList<EvidenceManualChoice>? choices)
         {

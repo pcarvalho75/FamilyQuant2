@@ -8,6 +8,7 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-review-apply-wait", "FamilyQuant.Tests.Program.ReviewApplyWaitTests(System.String)"),
         SuiteCommandRule.Covered("--test-ledger-synthetic-mode", "FamilyQuant.Tests.Program.FeatureLedgerReceiptGuardTests(System.Boolean)"),
         SuiteCommandRule.Covered("--test-html-family-native", "FamilyQuant.Tests.Program.HtmlFamilyNativeTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-sensitivity-native", "FamilyQuant.Tests.Program.HtmlSensitivityNativeTests(System.String)"),

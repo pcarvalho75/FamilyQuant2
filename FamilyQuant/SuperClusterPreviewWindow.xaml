@@ -474,6 +474,12 @@
             </TabItem>
         </TabControl>
         <DockPanel Grid.Row="3" Margin="0,12,0,0">
+        <WrapPanel x:Name="PanelLinksWaitPanel" DockPanel.Dock="Top" Margin="0,0,0,6"
+                   Visibility="{Binding IsWaitingForPanelLinks, Converter={StaticResource VisibleWhenTrue}}">
+            <TextBlock Text="{Binding PanelLinksWaitText}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <Button x:Name="OpenPanelLinkChoicesButton" Content="Review choices" Click="OpenPanelLinkChoices_Click"
+                    ToolTip="Open Panel links filtered to Needs a choice. Choose a family or Leave outside panel, then Use link choices to update the proposal; opening this view leaves the project unchanged."/>
+        </WrapPanel>
         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <Button x:Name="UnlockEvidenceFamiliesButton" Content="Unlock evidence families" Click="UnlockEvidenceFamilies_Click"
                     Visibility="{Binding ShowUnlockEvidenceFamilies, Converter={StaticResource VisibleWhenTrue}}" IsEnabled="{Binding CanUnlockEvidenceFamilies}"

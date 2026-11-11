@@ -89,6 +89,7 @@ namespace FamilyQuant.Tests
         private static SuiteTable DefaultSuite(string[] args, string workDir)
         {
             var suite = new SuiteTable();
+            suite.AddWithApplication(() => ReviewApplyWaitTests(Path.Combine(workDir, "review-apply-wait")));
             suite.Section("CSV export - locale and escaping");
             suite.Add(() => CommandRegistryTests());
             suite.Add(() => SuiteCommandCoverageTests(null));
