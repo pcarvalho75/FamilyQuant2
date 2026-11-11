@@ -5781,6 +5781,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1962**; OPEN r
 
 ## Added contracts after the frozen source
 
+| FQ2-IMPORT-ACCEPT-SAVE | MAP | IM7 closes the import window after successful Accept and import. FQ2-IMPORT-FAMILY-LIST's single panel edit, source/project guards, save/reopen and Undo remain: File > Save in the main window keeps the imported list and its normal modified marker clears after saving; main-window Undo restores the previous list. Family checklist remains available from Curate families. Closing a draft explains the choices that would be discarded | test:ImportSaveHandoffTests; --test-import-save-handoff |
+
 | FQ2-IMPORT-USE-TEMPLATE | MAP | IM2 renames the import window's Save a template action and the File menu's Save family list template action to Use template (D114). Both call the same shared workbook writer at a chosen location, leave the project unchanged and explain that the empty sheet is ready to fill and import. FQ2-PANEL-IMPORT-TEMPLATE and FQ2-IMPORT-FAMILY-LIST retain their underlying template action | test:PanelImportTemplateTests; test:ImportTemplateWorkbookTests |
 
 | FQ2-HTML-GAP-ORDER | MAP | U5-gap-order sorts the HTML Signal sources by family rows by stored pooled total, largest first, preserving native order for ties and keeping zero rows. Every native part, total, family percentage and Word chart input/order remains unchanged | test:HtmlSignalRecoveryTests; test:HtmlRecoveryExplanationTests |

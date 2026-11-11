@@ -53,6 +53,13 @@ internal static partial class Program
                 ImportDirectPfamTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
+            }),
+        new("--test-import-save-handoff", 100, TestCommandPhase.Raw,
+            args => args is ["--test-import-save-handoff"], (_, _) =>
+            {
+                ImportSaveHandoffTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
             })];
 
     private static string ImportSimpleWork(string step)
@@ -149,6 +156,73 @@ internal static partial class Program
         Check("IM6 names and unknown codes require exactly one resolving choice per source row",
             summary.HasBlockingItems && summary.Sections.SelectMany(s => s.Items).Count(i => i.Required
                 && i.State == WorkbookImportItemState.Uncertain && i.Page == WorkbookImportPage.EvidenceMatches) == 2);
+    }
+
+    private static void ImportSaveHandoffTests()
+    {
+        Section("IM7 accepting import releases the main window for Save");
+        EnsureApplication();
+        string folder = ImportSimpleWork("IM7"), source = Path.Combine(folder, "source.fcf"), saved = Path.Combine(folder, "saved.fqproj");
+        string path = Path.Combine(folder, "template.xlsx");
+        var file = ManualChoiceFile();
+        file.MyExtendedFastaItems[0].Evidence!.Pfam = new() { new() { Accession = "PF12345", Name = "First domain" } };
+        file.Save(source);
+        PanelImportTemplate.Write(path);
+        SetImportHeaders(path, new[] { "Abbreviation", "Name", "Pfam domains" });
+        FillTemplate(path, new[] { new[] { "A", "First family", "PF12345" } });
+        var oldMessages = ShellMessages.Presenter;
+        var oldSettings = MainWindow.ShellSettingsPathOverride;
+        var oldSave = MainWindow.SelectSaveProjectPathOverride;
+        var oldChoice = MainWindow.UnsavedProjectChoiceOverride;
+        MainWindow? main = null;
+        FamilyListImportWindow? window = null;
+        try
+        {
+            MainWindow.ShellSettingsPathOverride = Path.Combine(folder, "preferences.json");
+            MainWindow.SelectSaveProjectPathOverride = () => saved;
+            MainWindow.UnsavedProjectChoiceOverride = () => UnsavedProjectChoice.Discard;
+            main = new MainWindow { Left = -30000, Top = -30000, ShowActivated = false, ShowInTaskbar = false };
+            main.Show(); main.OpenProjectPath(source);
+            var host = (ClusterGenerationControl)typeof(MainWindow).GetField("cgc", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.GetValue(main)!;
+            var model = new FamilyListImportViewModel(new FamilyListImportTransaction(host.ViewModel, afterEdit: host.RefreshFamilyListImport),
+                workbookSource: new FamilyListWorkbookCoreSource());
+            window = new FamilyListImportWindow(model) { Owner = main, Left = -30000, Top = -30000, ShowActivated = false, ShowInTaskbar = false };
+            window.Show(); FinishReviewWork(() => model.LoadAsync(path));
+            string warning = "";
+            ShellMessages.Presenter = (_, message) => { warning = message.Text; return System.Windows.MessageBoxResult.No; };
+            window.Close();
+            Check("IM7 closing before Accept explains draft loss and lets the user keep working",
+                window.IsVisible && !model.Imported && !main.DocumentState.IsModified && warning.Contains("discards this import draft", StringComparison.Ordinal));
+            ShellMessages.Presenter = (_, _) => System.Windows.MessageBoxResult.Yes;
+            FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(_ => true); await model.NextAsync(); });
+            var closed = new System.Threading.Tasks.TaskCompletionSource(System.Threading.Tasks.TaskCreationOptions.RunContinuationsAsynchronously);
+            window.Closed += (_, _) => closed.TrySetResult();
+            FinishReviewWork(async () =>
+            {
+                ((System.Windows.Controls.Button)window.FindName("ForwardButton")).RaiseEvent(new System.Windows.RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
+                await closed.Task.WaitAsync(TimeSpan.FromSeconds(15));
+            });
+            Check("IM7 Accept closes the import window, marks the real shell modified and retains one Undo step",
+                !window.IsVisible && model.Imported && host.ViewModel.Document.FamilyPanel?.Families.Single().Key == "A"
+                && main.DocumentState.IsModified && main.Title.EndsWith(" *", StringComparison.Ordinal) && host.ViewModel.UndoStack.Count == 1
+                && model.Status.Contains("File > Save", StringComparison.Ordinal));
+            var saving = (System.Threading.Tasks.Task)typeof(MainWindow).GetMethod("SaveProjectAsync", System.Reflection.BindingFlags.Instance
+                | System.Reflection.BindingFlags.NonPublic)!.Invoke(main, new object[] { false })!;
+            FinishBusyTask(saving); saving.GetAwaiter().GetResult();
+            Check("IM7 File Save retains the imported panel on reopen and clears the modified marker",
+                !main.DocumentState.IsModified && !main.Title.EndsWith(" *", StringComparison.Ordinal)
+                && ProjectStore.ReadFqproj(saved).fcf.FamilyPanel?.Families.Single().Key == "A");
+        }
+        finally
+        {
+            ShellMessages.Presenter = (_, _) => System.Windows.MessageBoxResult.Yes;
+            if (window?.IsVisible == true) window.Close();
+            main?.Close();
+            ShellMessages.Presenter = oldMessages;
+            MainWindow.ShellSettingsPathOverride = oldSettings;
+            MainWindow.SelectSaveProjectPathOverride = oldSave;
+            MainWindow.UnsavedProjectChoiceOverride = oldChoice;
+        }
     }
 
     private static void ImportSimpleTemplateTests()

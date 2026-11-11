@@ -289,5 +289,5 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     }
 
     public void ReportStatus(string message) => Status = message;
-    public void Dispose() { operation?.Cancel(); operation?.Dispose(); transaction.Dispose(); }
+    public void Dispose() { operation?.Cancel(); operation?.Dispose(); operation = null; transaction.Dispose(); }
 }

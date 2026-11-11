@@ -175,6 +175,7 @@ public partial class FamilyListImportWindow : Window
         if (Model.Imported && Model.Page == 6) { OpenChecklistRequested = true; Close(); return; }
         await Model.NextAsync(message => ShellMessages.Report(this, message, "Import family list",
             MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes);
+        if (Model.Imported) Close();
     }
     private void Back_Click(object sender, RoutedEventArgs e) { CommitGridEdits(); Model.Back(); }
     private void Step_Click(object sender, RoutedEventArgs e) { CommitGridEdits(); if (sender is FrameworkElement { Tag: int index }) Model.Revisit(index); }
@@ -204,7 +205,7 @@ public partial class FamilyListImportWindow : Window
     private void SkipAllMatches_Click(object sender, RoutedEventArgs e) => Model.SkipAllMatches();
     private void Undo_Click(object sender, RoutedEventArgs e) => Model.UndoImport();
     private void Close_Click(object sender, RoutedEventArgs e) => Close();
-    private void Editor_Click(object sender, RoutedEventArgs e) { EditPanelRequested = true; Close(); }
+    private void Editor_Click(object sender, RoutedEventArgs e) { EditPanelRequested = true; Close(); if (!closing) EditPanelRequested = false; }
 
     private void Template_Click(object sender, RoutedEventArgs e)
     {
@@ -317,6 +318,10 @@ public partial class FamilyListImportWindow : Window
     private async void Window_Closing(object? sender, CancelEventArgs e)
     {
         if (closing) return;
+        if (IsVisible && !Model.Imported && Model.WorkbookPath.Length > 0
+            && ShellMessages.Report(this, "Closing discards this import draft and its column, row and matching choices. The project and workbook stay unchanged. Close without importing?",
+                "Discard import draft", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) != MessageBoxResult.Yes)
+        { e.Cancel = true; return; }
         if (Model.IsBusy) { e.Cancel = true; await Model.CancelReadAsync(); closing = true; Close(); return; }
         closing = true;
     }

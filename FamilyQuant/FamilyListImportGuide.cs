@@ -44,7 +44,7 @@ public static class FamilyListImportGuide
             "When you open a workbook with Browse or by dropping it on File and sheet, FamilyQuant reads every sheet before you choose anything and opens on Review your workbook. It tells the sheets apart by their structure: the family list, a colour legend, a subclass table, and sheets of notes.",
             "The page has one box for each part, with what was found, how many items are proposed, and whether any need your choice or are optional to check: Workbook sheets, Family list and columns, Decision labels, Family rows, Pfam and evidence matches, Subclass proposals and Source notes. Review in a box opens that part's page of the wizard, described below; Back to workbook review, or Review workbook on the Summary, brings you back here. The tabs below the boxes list the parts themselves: Families, Columns, Decisions, Special rows, Pfam, Subclasses, Notes, and All findings, where each finding shows its state, its reason and the cells it comes from.",
             "Whatever the wizard is not sure of is left for you; it never guesses. A box with something that needs your choice is outlined, and the line below the tabs names the first one. In the example it says 6 choices need review: the four decision labels the legend leaves open, the row that names four families and the repeated abbreviation LEC. Review findings lists them all. Anything the wizard cannot place is shown as Could not place.",
-            "Accept and import stays unavailable while a choice is needed; items that are only optional to check, such as the subclass proposals, do not hold it up. When you press it, it accepts everything the page shows, exactly as shown, and imports it as one change: that press is your confirmation, and nothing is set before it. The line at the bottom says so: Nothing has changed yet. Accept and import keeps one Undo step.",
+            "Accept and import stays unavailable while a choice is needed; items that are only optional to check, such as the subclass proposals, do not hold it up. When you press it, it accepts everything the page shows, exactly as shown, imports it as one change and closes the import window: that press is your confirmation, and nothing is set before it. The line at the bottom says so: Nothing has changed yet. Accept and import keeps one Undo step.",
             "A workbook of another shape, such as a single sheet, or a list with no legend and no decisions, is read the same way from its structure and shows only the parts it has.",
         }),
         new FamilyListImportGuideSection("file", "2. Workbook sheets", "02-workbook-map.png", "Workbook sheets: the six sheets of the example, each with the role proposed for it.", new[]
@@ -114,12 +114,11 @@ public static class FamilyListImportGuide
             "Once every needed choice is made, the boxes that needed you say no choices needed, and Accept and import becomes available. In the example, Pfam and evidence matches and Subclass proposals still show items optional to check: they do not hold up the import, and subclasses you did not include are not imported.",
             "Accept and import replaces the current panel, if any, in one step. Just before, the workbook and the project are checked again; if either changed, nothing is imported. If a ticked match covers more than half of the database's entries, it asks once before importing.",
         }),
-        new FamilyListImportGuideSection("done", "7. Done", "07-done.png", "The list is imported; the workbook and the protein grouping are unchanged.", new[]
+        new FamilyListImportGuideSection("done", "After acceptance", "", "", new[]
         {
-            "The family list is imported. The workbook and the protein grouping are unchanged, and the project is not saved yet: File > Save keeps the panel with it.",
-            "The line under the title names the next steps: " + FamilyListImportHelp.DoneNext + " Family checklist closes the wizard and opens Group by evidence. When its Read database and scope step is done, press Update proposal; the review then shows its Family checklist tab, where you review which proteins belong in each family.",
-            "The page also says: " + FamilyListImportHelp.MatchingEffect + " Importing the list and confirming matches move no protein by themselves. To place proteins by hand, use Place outside matches by hand in the Family checklist.",
-            "Undo import restores the previous panel while the import is still the latest change. Close keeps the imported panel.",
+            "Accept and import closes the import window. The main window marks the project modified; File > Save keeps the list with the project. Undo in the main window restores the previous list.",
+            "Closing before acceptance explains that the import draft and its choices will be discarded. The workbook and project stay unchanged.",
+            FamilyListImportHelp.DoneNext + " " + FamilyListImportHelp.MatchingEffect,
         }),
         new FamilyListImportGuideSection("keyboard", "Keyboard", "", "", new[]
         {
