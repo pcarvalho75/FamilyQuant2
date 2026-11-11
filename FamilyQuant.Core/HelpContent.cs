@@ -320,9 +320,6 @@ namespace FamilyQuant
             sb.AppendLine("locked or unticked proteins keep their current family; decoys and contaminants are excluded from the counts.");
             sb.AppendLine("Family checklist keeps every row of your list and counts those with proposed proteins, waiting for a choice,");
             sb.AppendLine("with no Pfam code, or matching no database protein; matching evidence alone does not assign a protein.");
-            sb.AppendLine("In Panel links, tied domain matches use the fraction of each row's Pfam list present");
-            sb.AppendLine("in the protein. The most complete row wins; equal coverage still asks for a choice.");
-            sb.AppendLine("Your confirmed choices take precedence and are kept when the project is saved.");
             sb.AppendLine("Save panel as spreadsheet writes named link choices in the UniProt family column.");
             sb.AppendLine("Importing that column restores exact family links among the supported rows without");
             sb.AppendLine("asking again. Separate several source family names with semicolons.");
