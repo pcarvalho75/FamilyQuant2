@@ -19,9 +19,12 @@ public sealed partial class EvidenceReviewViewModel
     public string PanelChecklistSummary => "Your list: " + PanelChecklist.Count.ToString("N0", CultureInfo.CurrentCulture)
         + " families, " + PanelChecklist.Count(row => row.State == PanelChecklistState.WithProteins).ToString("N0", CultureInfo.CurrentCulture)
         + " with proteins, " + PanelChecklist.Count(row => row.State == PanelChecklistState.NeedsChoice).ToString("N0", CultureInfo.CurrentCulture)
-        + " waiting for a choice, " + PanelChecklist.Count(row => row.State == PanelChecklistState.NoPfamCode).ToString("N0", CultureInfo.CurrentCulture)
+        + " waiting for a choice in Panel links, " + PanelChecklist.Count(row => row.State == PanelChecklistState.NoPfamCode).ToString("N0", CultureInfo.CurrentCulture)
         + " with no Pfam code, " + PanelChecklist.Count(row => row.State == PanelChecklistState.NoDatabaseMatch).ToString("N0", CultureInfo.CurrentCulture)
-        + " matching no database protein.";
+        + " matching no database protein, " + PanelChecklist.Count(row => row.State == PanelChecklistState.NoProteinInScope).ToString("N0", CultureInfo.CurrentCulture)
+        + " with no protein in the scope, " + PanelChecklist.Count(row => row.State == PanelChecklistState.AssignedElsewhere).ToString("N0", CultureInfo.CurrentCulture)
+        + " with proteins in another row, " + PanelChecklist.Count(row => row.State == PanelChecklistState.NotPlaced).ToString("N0", CultureInfo.CurrentCulture)
+        + " with no proteins placed.";
     public PanelChecklistFamily? SelectedChecklistFamily
     {
         get => selectedChecklistFamily ?? PanelChecklist.FirstOrDefault();
@@ -46,7 +49,10 @@ public sealed partial class EvidenceReviewViewModel
             if (row == null) return "";
             string state = row.StateText + ". " + (row.NeedsLinkChoice ? "Resolve candidate links in Panel links, then Use link choices. "
                 : row.State == PanelChecklistState.NoPfamCode ? "Add a Pfam code to this family list row to supply domain evidence. "
-                : row.State == PanelChecklistState.NeedsChoice ? "Review the outside-match reasons below, then choose a scope phrase or place matches by hand. " : "");
+                : row.State == PanelChecklistState.NoProteinInScope ? "The database matches are outside the current scope; no link choice is pending for this row. "
+                : row.State == PanelChecklistState.AssignedElsewhere ? row.AssignedElsewhere.ToString("N0", CultureInfo.CurrentCulture)
+                    + " matching database proteins are proposed in another row; see their recorded reasons below. "
+                : row.State == PanelChecklistState.NotPlaced ? "No matching protein is placed in this row; see the recorded reasons below. " : "");
             if (row.Matches == 0) return state + row.Decision + ". " + row.ContaminantReason
                 + " No database targets match this panel family's stored names, source family links or Pfam domains.";
             string types = string.Join(" | ", new[] { PanelChecklistMatch.UniProtFamily, PanelChecklistMatch.Pfam, PanelChecklistMatch.NameText, PanelChecklistMatch.HandChoice,
