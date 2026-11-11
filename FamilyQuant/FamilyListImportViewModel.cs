@@ -98,7 +98,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public string BackToolTip => reviewingWorkbook ? "Use a section's Review button to change its proposal; Cancel leaves the project unchanged."
         : reviewingSubclasses ? "Returns to Review your workbook and keeps your subclass draft choices; nothing changes in the project until Accept and import."
         : !CanBack ? IsBusy ? "Wait for the current step to finish before returning; Cancel stops it without importing."
-        : "This is the first step; choose Next or Try with the example to continue, or Cancel to leave without changes."
+        : "This is the first step; choose Next to continue, or Cancel to leave without changes."
         : "Returns to the previous step and keeps your choices; going Back does not change the project or repeat an import.";
     public string CloseToolTip => IsBusy ? "Cancels the current step and closes after it stops; no unfinished import is applied."
         : Imported ? "Closes the wizard and keeps the imported list; File > Save stores it with the project, and Undo is still available in the main window."

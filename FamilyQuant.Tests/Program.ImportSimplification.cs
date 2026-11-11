@@ -32,6 +32,13 @@ internal static partial class Program
                 ImportSimpleTemplateTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
+            }),
+        new("--test-import-entry-actions", 100, TestCommandPhase.Raw,
+            args => args is ["--test-import-entry-actions"], (_, _) =>
+            {
+                ImportEntryActionTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
             })];
 
     private static string ImportSimpleWork(string step)
@@ -55,6 +62,21 @@ internal static partial class Program
                 new DocumentFormat.OpenXml.Spreadsheet.Text(headers[i])))
             { CellReference = ((char)('A' + i)).ToString() + "1", DataType = DocumentFormat.OpenXml.Spreadsheet.CellValues.InlineString });
         part.Worksheet.Save();
+    }
+
+    private static void ImportEntryActionTests()
+    {
+        Section("IM4 the import entry actions stay focused on the user's workbook");
+        EnsureApplication();
+        var file = new FamilyClusterFile();
+        string before = file.ToJsonText();
+        using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(file)));
+        var window = new FamilyListImportWindow(model, _ => throw new InvalidOperationException("The example action was removed."), PanelImportTemplate.Write);
+        Check("IM4 the example action is absent while Use template remains available without editing the project",
+            window.FindName("ExampleButton") == null
+            && window.FindName("TemplateButton") is System.Windows.Controls.Button { IsEnabled: true, Content: "Use template" }
+            && file.ToJsonText() == before && !FamilyListImportGuide.Text().Contains("Try with the example", StringComparison.Ordinal));
+        window.Close();
     }
 
     private static void ImportSimpleTemplateTests()

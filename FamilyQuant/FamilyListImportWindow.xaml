@@ -167,7 +167,7 @@
                                 <TextBlock Text="Next, after import: open Group by evidence and review protein choices in Family checklist" Style="{StaticResource BodyText}"/>
                             </StackPanel>
                         </Border>
-                        <WrapPanel><Button x:Name="ExampleButton" Content="Try with the example" Margin="0,4,8,0" Click="Example_Click" ToolTip="Writes a new example workbook to a temporary folder and opens it for practice; your project changes only if you complete Import. Available before import when no read is running."/>
+                        <WrapPanel>
                             <Button x:Name="TemplateButton" Content="Use template" Click="Template_Click" ToolTip="Writes an empty Excel sheet with the program's columns at a location you choose, ready to fill and import. This creates a file and leaves the project unchanged; available before import when no read is running."/>
                             <Button Content="Edit current panel" Click="Editor_Click" ToolTip="Closes this draft and opens the existing family panel editor; choosing this button alone changes nothing. Available before import when no read is running."/></WrapPanel>
                     </StackPanel></ScrollViewer>
