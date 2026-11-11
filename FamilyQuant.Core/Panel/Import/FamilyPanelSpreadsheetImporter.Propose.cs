@@ -25,7 +25,7 @@ public sealed partial class FamilyPanelSpreadsheetImporter
         };
         if (table.IsTemplate && PanelImportTemplate.Columns.Any(c => c.Role == PanelImportFields.FamilyKey && table.Headers.Contains(c.Header, StringComparer.Ordinal)))
         {
-            foreach (var (header, role) in PanelImportTemplate.Columns.Where(c => table.Headers.Contains(c.Header, StringComparer.Ordinal)))
+            foreach (var (header, role) in PanelImportTemplate.ImportColumns.Where(c => table.Headers.Contains(c.Header, StringComparer.Ordinal)))
             {
                 proposal.Choices.ColumnHeaders[role] = header;
                 proposal.Reasons[role] = "\"" + header + "\" is a column of the FamilyQuant template.";

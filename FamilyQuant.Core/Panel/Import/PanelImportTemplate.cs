@@ -23,15 +23,19 @@ public static class PanelImportTemplate
     public const string Decision = "Decision";
     internal const string Marker = "FamilyQuant_family_list_template";
     internal const string MarkerValue = "\"1\"";
-    private const int DecisionRows = 2000;
 
     /// <summary>Template header to importer role, in column order.</summary>
     public static IReadOnlyList<(string Header, string Role)> Columns { get; } = new[]
     {
         (Abbreviation, PanelImportFields.FamilyKey), (Name, PanelImportFields.DisplayName), (OtherName, PanelImportFields.OtherName),
-        (Notes, PanelImportFields.Notes), (Pfam, PanelImportFields.Pfam), (Decision, PanelImportFields.Decision),
+        (Pfam, PanelImportFields.Pfam),
         (UniProtFamily, PanelImportFields.UniProtFamilies),
     };
+
+    internal static IEnumerable<(string Header, string Role)> ImportColumns => Columns.Concat(new[]
+    {
+        (Notes, PanelImportFields.Notes), (Decision, PanelImportFields.Decision),
+    });
 
     /// <summary>The program's decision names, also recognised in any sheet; a merge is written "Merge into" and an abbreviation.</summary>
     public static IReadOnlyList<(string Label, FamilyPanelDecision Decision)> DecisionNames { get; } = new[]
@@ -50,13 +54,11 @@ public static class PanelImportTemplate
         "Abbreviation: a short code that names the family, for example PLA2. Each abbreviation must be used once; it is the family's key in FamilyQuant.",
         "Name: the family name used in tables and reports.",
         "Other-language name: the same family in another language, for example English when Name is in Portuguese. Optional.",
-        "Notes: anything you want to keep with the family. It is kept as text and never changes a result. Optional.",
         "Pfam domains: optional, written as Name (accession), separated by semicolons, for example Example domain (PF12345).",
         "UniProt family: optional, exact UniProt family names separated by semicolons. Empty means no family name is specified.",
-        "Decision: optional. Leave it empty to quantify the family, or choose Quantify, Report under others or Not a family, or write Merge into followed by another row's abbreviation, for example Merge into CTL.",
         "",
         "A row that lists several families in one name cell, separated by commas, semicolons or line breaks, is offered as one family per name or as one group reported under others when you import it.",
-        "You may colour cells and add more columns: colours can be named as a category during the import, and every extra column is kept as text.",
+        "Every family is quantified. You may add more columns; every extra column is kept as source text.",
         "Save the workbook as .xlsx, then use File > Import family list in FamilyQuant.",
         "",
         "Example rows",
@@ -64,11 +66,9 @@ public static class PanelImportTemplate
 
     private static readonly string[][] Example =
     {
-        new[] { Abbreviation, Name, OtherName, Notes, Pfam, Decision },
-        new[] { "PLA2", "Fosfolipase A2", "Phospholipase A2", "Main family", "Phospholip_A2_1 (PF00068)", "Quantify" },
-        new[] { "CTL", "Lectina tipo C", "C-type lectin", "", "Lectin_C (PF00059)", "" },
-        new[] { "Gal-CTL", "Lectina ligante de galactose", "Galactose-binding lectin", "Reported with CTL", "Lectin_C (PF00059)", "Merge into CTL" },
-        new[] { "Rare", "Outras raras", "Endopeptidase, carboxypeptidase, TCTP", "Offered as one family per name or one group", "", "Report under others" },
+        new[] { Abbreviation, Name, OtherName, Pfam, UniProtFamily },
+        new[] { "PLA2", "Fosfolipase A2", "Phospholipase A2", "Phospholip_A2_1 (PF00068)", "" },
+        new[] { "CTL", "Lectina tipo C", "C-type lectin", "Lectin_C (PF00059)", "" },
     };
 
     public static void Write(string path)
@@ -96,15 +96,9 @@ public static class PanelImportTemplate
         var families = new SheetData(Row(1, Columns.Select(c => c.Header).ToArray(), 1));
         var familySheet = new Worksheet(
             new SheetViews(new SheetView(new Pane { VerticalSplit = 1, TopLeftCell = "A2", ActivePane = PaneValues.BottomLeft, State = PaneStateValues.Frozen }) { WorkbookViewId = 0 }),
-            new Columns(Width(1, 16), Width(2, 32), Width(3, 32), Width(4, 40), Width(5, 44), Width(6, 24), Width(7, 44)),
+            new Columns(Width(1, 16), Width(2, 32), Width(3, 32), Width(4, 44), Width(5, 44)),
             families,
-            new AutoFilter { Reference = "A1:G1" },
-            new DataValidations(new DataValidation(new Formula1("\"" + string.Join(",", DecisionNames.Select(d => d.Label)) + "\""))
-            {
-                Type = DataValidationValues.List, AllowBlank = true, ShowErrorMessage = false, ShowInputMessage = true,
-                PromptTitle = "Decision", Prompt = "Empty or Quantify, Report under others, Not a family, or type Merge into and an abbreviation.",
-                SequenceOfReferences = new ListValue<StringValue> { InnerText = "F2:F" + DecisionRows.ToString(CultureInfo.InvariantCulture) },
-            }) { Count = 1 });
+            new AutoFilter { Reference = "A1:E1" });
         AddSheet(workbook, sheets, FamilySheet, 1, familySheet);
 
         var instructions = new SheetData();

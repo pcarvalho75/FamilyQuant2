@@ -25,6 +25,13 @@ internal static partial class Program
                 ImportUniProtColumnTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
+            }),
+        new("--test-import-simple-template", 100, TestCommandPhase.Raw,
+            args => args is ["--test-import-simple-template"], (_, _) =>
+            {
+                ImportSimpleTemplateTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
             })];
 
     private static string ImportSimpleWork(string step)
@@ -33,6 +40,46 @@ internal static partial class Program
             "Temp", "fq2", "FQImport", step);
         Directory.CreateDirectory(folder);
         return folder;
+    }
+
+    private static void SetImportHeaders(string path, string[] headers)
+    {
+        using var document = DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(path, true);
+        var workbook = document.WorkbookPart!;
+        var sheet = workbook.Workbook!.Sheets!.Elements<DocumentFormat.OpenXml.Spreadsheet.Sheet>().Single(s => s.Name == "Families");
+        var part = (DocumentFormat.OpenXml.Packaging.WorksheetPart)workbook.GetPartById(sheet.Id!);
+        var row = part.Worksheet!.Descendants<DocumentFormat.OpenXml.Spreadsheet.Row>().First();
+        row.RemoveAllChildren();
+        for (int i = 0; i < headers.Length; i++)
+            row.Append(new DocumentFormat.OpenXml.Spreadsheet.Cell(new DocumentFormat.OpenXml.Spreadsheet.InlineString(
+                new DocumentFormat.OpenXml.Spreadsheet.Text(headers[i])))
+            { CellReference = ((char)('A' + i)).ToString() + "1", DataType = DocumentFormat.OpenXml.Spreadsheet.CellValues.InlineString });
+        part.Worksheet.Save();
+    }
+
+    private static void ImportSimpleTemplateTests()
+    {
+        Section("IM3 the empty template is simple and legacy columns keep their meanings");
+        string path = Path.Combine(ImportSimpleWork("IM3"), "template.xlsx");
+        PanelImportTemplate.Write(path);
+        var reader = new PanelSpreadsheetReader();
+        var table = reader.ReadTable(path, "Families", 1);
+        string instructions = string.Join("\n", reader.ReadPreview(path, "Instructions").Rows.SelectMany(r => r.Cells).Select(c => c.Text));
+        Check("IM3 the writer omits Notes, Decision and colour-category guidance",
+            !table.Headers.Contains("Notes") && !table.Headers.Contains("Decision")
+            && !instructions.Contains("colour", StringComparison.OrdinalIgnoreCase));
+        SetImportHeaders(path, new[] { "Abbreviation", "Name", "Other-language name", "Notes", "Pfam domains", "Decision" });
+        FillTemplate(path, new[] { new[] { "A", "First family", "", "12.50 kept as text", "PF12345", "Quantify" },
+            new[] { "B", "Second family", "", "7.25 kept as text", "PF23456", "Report under others" } });
+        var importer = new FamilyPanelSpreadsheetImporter();
+        var proposal = importer.ProposeWorkbook(path);
+        var panel = importer.CheckConfirmedWorkbook(proposal, proposal.FamilyProposal.Choices, proposal.FamilyProposal.Decisions).Panel;
+        Check("IM3 an old marked sheet keeps every family, decision and original numerical text",
+            panel?.Families.Count == 2 && panel.Families[0].Decision == FamilyPanelDecision.Quantify
+            && panel.Families[1].Decision == FamilyPanelDecision.ReportUnderOthers
+            && panel.Families[0].TextFields.Single(t => t.Name == "Notes").Text == "12.50 kept as text"
+            && panel.Families[1].TextFields.Single(t => t.Name == "Notes").Text == "7.25 kept as text"
+            && panel.Families.SelectMany(f => f.Pfam).Select(d => d.Accession).SequenceEqual(new[] { "PF12345", "PF23456" }));
     }
 
     private static void ImportTemplateWorkbookTests()
