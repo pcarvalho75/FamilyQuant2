@@ -5005,6 +5005,10 @@
             stat(stats, "Run-to-run SD (percentage points)", rankingStatistics(f).sd);
             stat(stats, "Protein groups", f.proteins);
             stat(stats, "Distinct observed sequences", f.peptides);
+            renderSubclassParts(f);
+            syncCoverageFamily(f);
+          }
+          function renderSubclassParts(f) {
             const parts = $("subclasses");
             parts.replaceChildren();
             const groups = plotParts(f);
@@ -5038,7 +5042,6 @@
               parts.append(partChart);
             }
             parts.hidden = !groups.size;
-            syncCoverageFamily(f);
           }
           /* U1 begin */
           let activeCoverageGroup = null;
@@ -5076,8 +5079,7 @@
               $("family-info").hidden = !family;
               if (!family) {
                 $("family-stats").replaceChildren();
-                $("subclasses").replaceChildren();
-                $("subclasses").hidden = true;
+                renderSubclassParts({id:group.id,parts:group.parts||[]});
                 $("family-color").style.background = "var(--s6)";
               }
             }

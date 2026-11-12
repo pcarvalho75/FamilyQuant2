@@ -80,6 +80,7 @@ namespace FamilyQuant
             sb.AppendLine("the same stored readings as the program. Hover, focus or select a bar or value for");
             sb.AppendLine("its exact reading and reference total; All exact readings opens a printable table.");
             sb.AppendLine("These charts keep their named bases when Normalize to changes. Word keeps its pictures.");
+            sb.AppendLine("Selecting a family also shows its stored pooled subclass parts, including families below the report threshold.");
             sb.AppendLine("The Signal recovery guide defines a peptide feature, explains each TIC-based reading,");
             sb.AppendLine("and explains isotope, detector and TIC gaps without treating them as biological classes.");
             sb.AppendLine("Database gap also gives each part's share of its own family's displayed signal total;");
