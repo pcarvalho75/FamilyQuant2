@@ -5,52 +5,52 @@
   "runs": [
     {
       "id": "text-tool",
-      "command": "D:\\FamilyQuant-wt\\release-2116\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261111-203943-release-2116\\text-preserved \u00222026-11-11 20:40:02 -0800\u0022",
-      "executedAt": "2026-11-11 20:40:02 -0800",
-      "commit": "e244733cb8ab55c7a804076d8751f04ebce9edde",
+      "command": "D:\\FamilyQuant-wt\\release-2116\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261111-213157-release-2116\\text-preserved \u00222026-11-11 21:32:08 -0800\u0022",
+      "executedAt": "2026-11-11 21:32:08 -0800",
+      "commit": "baf96cba6f76781b9607c93606c501a6e20253fb",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\text.log",
-          "sha256": "D0E144D99183C42F2C4DD4886D0869507DB5DC882275296AA5DDE5704A48734C"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\text.log",
+          "sha256": "42AAD3AAF16E340328ECFE5BB82EF03B72988000CB92E8C5399A24BC9E2115F6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\text.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\text.json",
           "sha256": "8F6556A62EEAD3FE5560EC6184AE1B3F49D64017762B83C3E33F32D5FF0A3C10"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\executed\\FamilyQuant2.dll",
-          "sha256": "A03C2AF94C4C99E257F137D805F4976B35C423421A6FA8C5F9D7ED06A333F1AD"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\executed\\FamilyQuant2.dll",
+          "sha256": "3A4281E40BC3882D021FEF146576412F2EE0D1D8821CABC833C0617A98D073FE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\executed\\FamilyQuant2.pdb",
-          "sha256": "61243D3717D28DFA4E8C336125ECF0CAD35C330BD3717DF08153D2073D26A896"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\executed\\FamilyQuant2.pdb",
+          "sha256": "E518EDBB769C34E1BB471D2F89227055DD543BA7A05390686EDF640393EA000C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\executed\\FamilyQuant.Core.dll",
-          "sha256": "8CE684EDC8E1DCDA36017C27C9F15E3EA559D125CC19C7CD1502C9D965305F40"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\executed\\FamilyQuant.Core.dll",
+          "sha256": "0DB5B6DB9139FCA6B32A9C185C4F28DE7B38EDA577A8A38ECD5457C3E6FE9D33"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\executed\\FamilyQuant.Core.pdb",
-          "sha256": "4D4B4266FADB7B5696CC2904F3BCAD1FAF771B66F9312DEB89CFDF47EC8D58A8"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\executed\\FamilyQuant.Core.pdb",
+          "sha256": "638B1180CF7C45F653A3CFD78CB8510344D1F17DAD5785B6015E753F49FB45EB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "B3CBF99C352926D7D96A115A6FD9917800A772E24A8DD322EAD1B11F1D6B75F2"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "8CE674EED54274CCD169B4354376D92FAF1BCD1307D949283A40CC9546F65442"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
           "sha256": "2CB78207901A4D7ACADF502A2EA634EFA79F3C1FC984986B33E5559BAD99FD21"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
           "sha256": "5243AEA610F5970D27BE03D90F556F3C60A0B0E700DAD42192AE5BB0535261EB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
           "sha256": "76B82F938173EA4E342000A363089B287BD5B2A897FDC8872B5EDB5319BB2F12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "7FFE973E1D4F66812812B051DAB78C93169902380838CFA92C011F86B1C3A02D"
         }
       ],
@@ -2004,7 +2004,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "A56273BAD4D9F9437A793C7821BEDA3E6531E2E1717154A5F4888FE9B28BDD2D"
+          "sha256": "BA388258B08597A55A5233C006067D0D54D68F4FF8800E965750AB32F50D597C"
         }
       ],
       "proofs": [],
@@ -2948,7 +2948,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "A56273BAD4D9F9437A793C7821BEDA3E6531E2E1717154A5F4888FE9B28BDD2D"
+          "sha256": "BA388258B08597A55A5233C006067D0D54D68F4FF8800E965750AB32F50D597C"
         }
       ],
       "proofs": [],
@@ -15446,7 +15446,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "A56273BAD4D9F9437A793C7821BEDA3E6531E2E1717154A5F4888FE9B28BDD2D"
+          "sha256": "BA388258B08597A55A5233C006067D0D54D68F4FF8800E965750AB32F50D597C"
         }
       ],
       "proofs": [],
@@ -18504,7 +18504,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "A56273BAD4D9F9437A793C7821BEDA3E6531E2E1717154A5F4888FE9B28BDD2D"
+          "sha256": "BA388258B08597A55A5233C006067D0D54D68F4FF8800E965750AB32F50D597C"
         }
       ],
       "proofs": [],
@@ -18685,7 +18685,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind code fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -18699,7 +18699,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind control: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -18713,7 +18713,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind help fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -18727,7 +18727,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind option/copy: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -18741,7 +18741,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind tooltip: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203943-release-2116\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-213157-release-2116\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
