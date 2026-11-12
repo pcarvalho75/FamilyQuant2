@@ -168,7 +168,7 @@ Ana, slide 26: "fiquei confusa sobre como agir em relação a cada uma das diver
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
 | RL1 | The 2.1.16 candidate: the lanes merged, the full suite once, the ledger refreshed only for the rows the steps touched (D116), and the rows dropped under D110 named | M | 1.0 | QX3, QX4, IM8, IM9, RG1 to RG9, SF1 to SF4 | AP6 | Suite line and ledger line posted | Orchestrator | not staffed | 0 | 0 |  |
 | RL2 | Release 2.1.16 after AP6: version bump, package, notes, README, and the update check from 2.1.15 | M | 1.0 | AP6 | AP5, RL3 | Published as Latest; an installed 2.1.15 offers 2.1.16 | Orchestrator | not staffed | 0 | 0 |  |
-| RL3 | The website follows 2.1.16 (new import and Review grouping screens), on Paulo's word, as D105 | L | 0.5 | RL2 |  | Upload folder ready | Orchestrator | not staffed | 0 | 0 |  |
+| RL3 | The website follows 2.1.16 (new import and Review grouping screens), on Paulo's word, as D105 | L | 0.5 | RL2 |  | Upload folder ready | SM | FQSimple | 0 | 0 |  |
 
 ## Every request, traced (AP0)
 
@@ -217,7 +217,7 @@ Each comment on Ana's 34 slides and each request in her nine voice notes of 11-1
 
 ## Paulo's decisions
 
-None open: D109 to D116 are taken (below). Still on Paulo's word: sending the message to Ana (AP4), the delivery into her Relatorio folder (AP5) and the website (RL3).
+None open: D109 to D116 are taken (below). Still on Paulo's word: sending the message and deck to Ana (AP4, AP7) and the delivery into her Relatorio folder (AP5). The website (RL3) started on his word, 11-11: "we might need to upddate our webiste as well".
 
 ### Decisions in force
 
