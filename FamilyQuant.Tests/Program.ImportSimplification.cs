@@ -209,10 +209,15 @@ internal static partial class Program
             window = new FamilyListImportWindow(model) { Owner = main, Left = -30000, Top = -30000, ShowActivated = false, ShowInTaskbar = false };
             window.Show(); FinishReviewWork(() => model.LoadAsync(path));
             string warning = "";
-            ShellMessages.Presenter = (_, message) => { warning = message.Text; return System.Windows.MessageBoxResult.No; };
+            System.Windows.Window? promptOwner = null;
+            ShellMessage? prompt = null;
+            ShellMessages.Presenter = (owner, message) =>
+            { promptOwner = owner; prompt = message; warning = message.Text; return System.Windows.MessageBoxResult.No; };
             window.Close();
             Check("IM7 closing before Accept explains draft loss and lets the user keep working",
-                window.IsVisible && !model.Imported && !main.DocumentState.IsModified && warning.Contains("discards this import draft", StringComparison.Ordinal));
+                window.IsVisible && !model.Imported && !main.DocumentState.IsModified && warning.Contains("discards this import draft", StringComparison.Ordinal)
+                && ReferenceEquals(promptOwner, window) && prompt is { Title: "Discard import draft", Buttons: System.Windows.MessageBoxButton.YesNo,
+                    DefaultResult: System.Windows.MessageBoxResult.No });
             ShellMessages.Presenter = (_, _) => System.Windows.MessageBoxResult.Yes;
             FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(); });
             var closed = new System.Threading.Tasks.TaskCompletionSource(System.Threading.Tasks.TaskCreationOptions.RunContinuationsAsynchronously);

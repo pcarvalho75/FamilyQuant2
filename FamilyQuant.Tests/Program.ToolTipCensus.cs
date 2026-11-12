@@ -230,6 +230,7 @@ internal static partial class Program
 
     private static string CensusWizard(CensusCollector collector, string scratch, Action<Window> show)
     {
+        using var dialogs = new ImportFixtureDialogs();
         var file = ManualChoiceFile();
         var curation = new CurationViewModel(file);
         var model = new FamilyListImportViewModel(new FamilyListImportTransaction(curation), matcher: new FamilyListStoredEvidenceMatches(file));
