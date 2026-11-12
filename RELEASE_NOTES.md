@@ -4,7 +4,13 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
-## 2.1.16 (published 2026-11-12)
+## 2.1.17 (published 2026-11-11)
+
+- **Review grouping fits a laptop screen.** "Where proteins go" opens to its three counts and their explanations and closes without leaving a gap; the two status lines under the scope stay readable; the Family checklist spans the window and shows its rows, with the reasons below. Projects, groupings and numbers are unchanged.
+
+**Feature ledger.** 1,958 checks proved for 2.1.17, as for 2.1.16; the 4 Families counter rows changed on purpose in 2.1.16 stay open to verify again, listed in [docs/LEDGER-REVERIFY-2.1.16.md](docs/LEDGER-REVERIFY-2.1.16.md).
+
+## 2.1.16 (published 2026-11-11)
 
 - **Quantify no longer stops when a run has no de novo calls.** Since 2.1.14, Quantify warns when a RAW run has no calls in the chosen de novo source. That warning reached the window from the computing thread, and Windows stopped the computation with "The calling thread cannot access this object because a different thread owns it". Progress and warnings now always reach the window on its own thread; Build, Fetch evidence, Fetch UniProt families, Quantify and Export were all checked for the same fault.
 - **Import family list is simpler.** "Save a template" is now **Use template**: an empty sheet with the program's columns and a **Subclasses** sheet, without the Notes and Decision columns or the colour legend. The program's own template imports as it is, Instructions sheet included. A sheet with the program's columns goes through three pages: file, columns, summary; other pages appear only when something needs your choice. Pfam codes you give are taken as given. **Accept** closes the window and **File > Save** keeps the list at once. "Try with the example" and the colour categories are gone; older sheets with Decision, Notes or colours still import.

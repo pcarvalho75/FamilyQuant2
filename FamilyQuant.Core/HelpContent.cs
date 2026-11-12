@@ -307,7 +307,9 @@ namespace FamilyQuant
             sb.AppendLine("stored nearest reviewed proteins and family representatives from the database or reference panel; alignment ticks change only the comparison.");
             sb.AppendLine("Show all options opens Keywords, all evidence tabs, full protein columns and extra tools;");
             sb.AppendLine("each tab it reveals starts with a sentence saying what to use it for; Review grouping Help lists the same sentences.");
-            sb.AppendLine("it keeps the scope and pending choices. With an imported family list, Family checklist");
+            sb.AppendLine("The scope hint and proposal status stay above the tables while database counts scroll in their own area.");
+            sb.AppendLine("In a short full view, protein search and actions scroll above the protein table.");
+            sb.AppendLine("Switching views keeps the scope and pending choices. With an imported family list, Family checklist");
             sb.AppendLine("opens that review in one click. Apply grouping commits the reviewed choices.");
             sb.AppendLine("In Panel links, tied domain matches use the fraction of each row's Pfam list present");
             sb.AppendLine("in the protein. The most complete row wins; equal coverage still asks for a choice.");
@@ -322,6 +324,8 @@ namespace FamilyQuant
             sb.AppendLine("Family checklist keeps every list row and counts rows with proposed proteins, pending Panel links choices,");
             sb.AppendLine("no Pfam code, no database match, no protein in scope, proteins in another row, or no placed proteins.");
             sb.AppendLine("Only unresolved Panel links choices are waiting. The checklist table stays visible while reasons and scope or matching actions scroll below.");
+            sb.AppendLine("Family checklist uses the full review width and one line per row; hover over Panel family for its full name, key and excluded-contaminant count.");
+            sb.AppendLine("After adding a phrase to scope, its preview stays beside the scrolling reasons and actions until Update proposal.");
             sb.AppendLine("Save panel as spreadsheet writes named link choices in the UniProt family column.");
             sb.AppendLine("Importing that column restores exact family links among the supported rows without");
             sb.AppendLine("asking again. Separate several source family names with semicolons.");

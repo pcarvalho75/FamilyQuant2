@@ -109,8 +109,8 @@ namespace FamilyQuant.Tests
 
         private static void DeploymentIdentityTests()
         {
-            Check("the prepared application assembly is version 2.1.16.0",
-                typeof(AppVersionInfo).Assembly.GetName().Version == new Version(2, 1, 16, 0));
+            Check("the prepared application assembly is version 2.1.17.0",
+                typeof(AppVersionInfo).Assembly.GetName().Version == new Version(2, 1, 17, 0));
 
             DirectoryInfo? root = new DirectoryInfo(AppContext.BaseDirectory);
             while (root != null && !File.Exists(Path.Combine(root.FullName, "FamilyQuant2.sln")))
@@ -128,15 +128,15 @@ namespace FamilyQuant.Tests
 
             Check("assembly and file versions match the prepared deployment version",
                 new[] { "Version", "AssemblyVersion", "FileVersion" }
-                    .All(name => Property(project, name) == "2.1.16.0") &&
-                Property(project, "Title") == "FamilyQuant 2.1.16" &&
-                Property(profile, "ApplicationVersion") == "2.1.16.0" &&
+                    .All(name => Property(project, name) == "2.1.17.0") &&
+                Property(project, "Title") == "FamilyQuant 2.1.17" &&
+                Property(profile, "ApplicationVersion") == "2.1.17.0" &&
                 Property(profile, "ApplicationRevision") == "0");
             const string install = "http://patternlabforproteomics.org/familyquant2/";
             Check("2.x installs and updates from its separate address",
                 Property(profile, "InstallUrl") == install && Property(profile, "UpdateUrl") == install);
             Check("the installed product has its own Start menu identity",
-                Property(profile, "ProductName") == "FamilyQuant 2.1.16");
+                Property(profile, "ProductName") == "FamilyQuant 2.1.17");
             string packaging = File.ReadAllText(Path.Combine(root.FullName, "tools", "packaging", "Test-ReleaseSetup.ps1"));
             var packagingVersion = System.Text.RegularExpressions.Regex.Match(packaging,
                 @"\[Version\]\$ExpectedVersion\s*=\s*\[Version\]'([^']+)'");

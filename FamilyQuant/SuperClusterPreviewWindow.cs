@@ -49,12 +49,22 @@ namespace FamilyQuant
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
             InitializeAdvancedTabGuides();
+            evidenceTabs.SelectionChanged += (_, args) =>
+            {
+                if (args.OriginalSource != evidenceTabs) return;
+                bool checklist = evidenceTabs.SelectedItem == PanelChecklistTab;
+                Grid.SetColumn(evidenceTabs, checklist ? 0 : 2);
+                Grid.SetColumnSpan(evidenceTabs, checklist ? 3 : 1);
+                ProposedFamiliesPanel.Visibility = FamilyTableSplitter.Visibility = checklist ? Visibility.Collapsed : Visibility.Visible;
+                familyTickLegend.SetCurrentValue(VisibilityProperty, !checklist && ShowAllOptions ? Visibility.Visible : Visibility.Collapsed);
+            };
             LayoutUpdated += (_, _) => ConstrainReviewTables();
             Loaded += (_, _) => ConstrainReviewLayout();
             EvidenceLayout.Loaded += (_, _) => ConstrainReviewLayout();
             SizeChanged += (_, _) => ConstrainReviewLayout();
             ReviewModeTabs.SizeChanged += (_, _) => ConstrainReviewLayout();
             ReviewScopeHeader.SizeChanged += (_, _) => ConstrainReviewLayout();
+            ScopeStatusPanel.SizeChanged += (_, _) => ConstrainReviewLayout();
             MotifRow.SizeChanged += (_, _) => ConstrainReviewLayout();
             AppOperationHost.SetScope(this, Operations);
             BusyOverlay.AttachWindow(this, Operations);
@@ -80,6 +90,7 @@ namespace FamilyQuant
         {
             if (model == null) return;
             bool full = ShowAllOptions;
+            familyTickLegend.SetCurrentValue(VisibilityProperty, full && evidenceTabs.SelectedItem != PanelChecklistTab ? Visibility.Visible : Visibility.Collapsed);
             if (full) ReviewModeTabs.ClearValue(TemplateProperty);
             else ReviewModeTabs.Template = (ControlTemplate)FindResource("SimpleReviewTabs");
             if (!full && model.ModeIndex != 1) { model.ModeIndex = 1; return; }

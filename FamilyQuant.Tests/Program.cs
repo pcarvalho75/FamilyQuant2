@@ -421,6 +421,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ScopeReachabilityTests());
             suite.AddWithApplication(() => FamilyListStepTests());
             suite.AddWithApplication(() => SimpleGroupingTests());
+            suite.AddWithApplication(() => ReviewLayout3Tests());
             suite.AddWithApplication(() => ExportWindowTests(Path.Combine(workDir, "export-window")));
             suite.AddWithApplication(() => ScopeCountWordingTests());
             suite.AddWithApplication(() => ReviewedHeaderCountTests());
