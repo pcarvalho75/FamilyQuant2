@@ -13,7 +13,7 @@ in [the catalog](docs/INDEX.md). No historical version heading is changed by thi
 - **Where every protein goes.** Review grouping shows three counts: proteins in a family of your list, in-scope proteins in no family of your list (they keep their sequence family and are measured together in it), and proteins outside the scope. The Family checklist gives every row of your list its state: proteins, a choice waiting in Panel links, no Pfam code, no protein in the scope, proteins that went to another row.
 - **Clearer names and screens.** **Fetch family world** is now **Fetch UniProt families**, and its Help says what it fetches. Every tab under **Show all options** starts with a sentence saying what it is for. The selected protein details grow to show all their lines, the alignment says how many proteins are yours and how many are references, and the Families count names the filters that hide families. After **Build**, Curate families opens on the new file.
 
-**Feature ledger.** @LEDGER@
+**Feature ledger.** 1,958 checks proved for 2.1.16; 4 rows of the Families counter, whose text changed on purpose in this release, are open to verify again after release, listed in [docs/LEDGER-REVERIFY-2.1.16.md](docs/LEDGER-REVERIFY-2.1.16.md).
 
 ## 2.1.15 (published 2026-11-10)
 
