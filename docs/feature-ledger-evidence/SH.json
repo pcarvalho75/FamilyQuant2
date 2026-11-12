@@ -5,352 +5,352 @@
   "runs": [
     {
       "id": "shell-declarations",
-      "command": "D:\\FamilyQuant-wt\\release-2114\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261109-181948-release-2114\\shell-compare \u00222026-11-09 18:19:56 -0800\u0022 D:/FamilyQuant-data/reference-1.5.0.6/app",
-      "executedAt": "2026-11-09 18:19:56 -0800",
-      "commit": "c8885cce746467fd3ef2ffd5b02a3bfaaa9ffa61",
+      "command": "D:\\FamilyQuant-wt\\release-2116\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261111-171237-release-2116\\shell-compare \u00222026-11-11 17:12:49 -0800\u0022 D:/FamilyQuant-data/reference-1.5.0.6/app",
+      "executedAt": "2026-11-11 17:12:49 -0800",
+      "commit": "c5408faf801ad2cbc1291679b28bff0f46a2ac01",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
-          "sha256": "D0BACDCDBDBACA2D20BBE28BCC41CE57BBE75307DE192BC03CCBC8F3E72F1E5D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
+          "sha256": "3A65723B97F7D8091F32BC91D11065741EEF00444481D089AF1AD2BD90566B1B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.json",
-          "sha256": "B881D896AAE4B26FEFEDF4D9BC1956252A030924CADA577D47C773250E87203F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.json",
+          "sha256": "FF1AE816D02589E6EB386B5920D3C649F8968AB207B0C427BE211BA7AD7B894F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\curation-runtime.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\curation-runtime.json",
           "sha256": "07F4095394C5835710C8380AC885D75B52845CAF6694B3441C0FEA95A80B03B2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-populated-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-populated-FamilyUnique.csv",
           "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-populated-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-populated-FamilyUnique.csv",
           "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-populated-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-populated-SplitEqually.csv",
           "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-populated-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-populated-SplitEqually.csv",
           "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-populated-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-populated-CountInEveryFamily.csv",
           "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-populated-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-populated-CountInEveryFamily.csv",
           "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-zero-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-zero-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-zero-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-zero-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-zero-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-zero-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-negative-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-negative-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-negative-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-negative-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-negative-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-negative-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-empty-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-empty-FamilyUnique.csv",
           "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-empty-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-empty-FamilyUnique.csv",
           "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-empty-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-empty-SplitEqually.csv",
           "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-empty-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-empty-SplitEqually.csv",
           "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\frozen-empty-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\frozen-empty-CountInEveryFamily.csv",
           "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\en-US\\current-empty-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\en-US\\current-empty-CountInEveryFamily.csv",
           "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-populated-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-populated-FamilyUnique.csv",
           "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-populated-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-populated-FamilyUnique.csv",
           "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-populated-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-populated-SplitEqually.csv",
           "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-populated-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-populated-SplitEqually.csv",
           "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-populated-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-populated-CountInEveryFamily.csv",
           "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-populated-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-populated-CountInEveryFamily.csv",
           "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-empty-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-empty-FamilyUnique.csv",
           "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-empty-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-empty-FamilyUnique.csv",
           "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-empty-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-empty-SplitEqually.csv",
           "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-empty-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-empty-SplitEqually.csv",
           "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\frozen-empty-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\frozen-empty-CountInEveryFamily.csv",
           "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\pt-BR\\current-empty-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\pt-BR\\current-empty-CountInEveryFamily.csv",
           "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\files.json",
-          "sha256": "035207EA12AAB1665AC626879E312E859D198B2EB263556F8D029397CCF243C8"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\files.json",
+          "sha256": "960FAD9AA58F59090BEAC872288612E1CE8CDEBB1FF3E51CEFA25727377837F1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\inputs.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\inputs.json",
           "sha256": "834E2BB59297BD99ECA91C23762B9FE56F44DCA2E49527BDBA7C12A742A27BFE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\current-CsvReport.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\current-CsvReport.cs",
           "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\composition-native\\frozen-CsvReport.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\composition-native\\frozen-CsvReport.cs",
           "sha256": "B4574252A1AEAE766366D13932117A31C2C7FFB3910F05B1CD6E852B08087617"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\tic-native\\outcomes.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\tic-native\\outcomes.json",
           "sha256": "15EB155E672E7BDA66FBA6B44FAF75549450744DB29CA7ABF4D19334D13296D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\tic-native\\inputs.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\tic-native\\inputs.json",
           "sha256": "BE93B28EC27EEE93F5DBBEA974BD49316ED1FBDE627E2D77C35E321EA98F5326"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\tic-native\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\tic-native\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\tic-native\\frozen-curation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\tic-native\\frozen-curation.cs",
           "sha256": "76807FCBF54364407381AF7A3309E30B8E8121BD82EE14631AB17BD527FEBD9E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\tic-native\\current-curation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\tic-native\\current-curation.cs",
           "sha256": "D10903D481E494910561C0BBB3499072D468461906F06A66B01797B8E9AAC41E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
           "sha256": "7DD22910C17D7BC5B44366C5D5B1A71A8F5A51C6127FE62041162D885D0EDC78"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
           "sha256": "869FC668090431A23D08E8ED109B95BC937D9A6B94DE63E11E86672852649FEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\executed\\Program.ShellCompositionProof.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\executed\\Program.ShellCompositionProof.cs",
           "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\executed\\Program.ShellTicProof.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\executed\\Program.ShellTicProof.cs",
           "sha256": "F256F051DFFED360C3229D9B251F8433CD3A196E00AC11B8B532AAFFA7620923"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
           "sha256": "5F18F4DD7E56E601368051AAD44866736DE2FA60C17A5550F4A330C98DABB3D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\executed\\Program.CurationScreen.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\executed\\Program.CurationScreen.cs",
           "sha256": "3C614BBC323A20D54A390CBE10FBDCD2076AF27F1AA128C1783624D26D501AC5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
           "sha256": "F471C5570F9E6004927F2C1D296738E023E01CFCE2D8BCBAE4D87F9E1C64558B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "537B33416C42923980D3CE1BB4E56C9DBDEA2522904252B25EA8789FE3B9701A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "787633870F9FEF44FF043132BA05D5FBA9EEB26ADFD4757A2270B0259F413763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\executed\\FamilyQuant2.dll",
-          "sha256": "5B696999DB5D40545612F5FCBD130FA693C502F8D76C062BADB21CFCC8912084"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\executed\\FamilyQuant2.dll",
+          "sha256": "78A93233C910C8E8570436EC500A7DDA59856573914A3C562167004A2220075F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\executed\\FamilyQuant.Core.dll",
-          "sha256": "7EEB0BF50C082AF06855FBE7FFB8EDF31A1F6463CDD6F3F6959BBE540506C1D0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\executed\\FamilyQuant.Core.dll",
+          "sha256": "98DDF60C616F0FA13A1F318505760588B491DA883559074D5FAED9478C42B9D7"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\release-2114"
+      "workingDirectory": "D:\\FamilyQuant-wt\\release-2116"
     }
   ],
   "rows": [
@@ -525,7 +525,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-04AAB575A5CB: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -547,7 +547,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemHome.Header",
-          "sha256": "F261DA7C4AD3053D3FCCDBF378FE849FA12D4C3A8A876945CD26F2F8DAE6E113"
+          "sha256": "A83D90361D40BEA6591A69236D6EC96F264EC4148FD3CE6677C1B33BC55F5E21"
         }
       ],
       "proofs": [],
@@ -662,7 +662,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-06E740B998A5: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -1304,17 +1304,11 @@
     },
     {
       "observationId": "FQ15-16A46B4A62E2",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string FamilyCounter ( int visible , int inFile )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:29 \u0022 in file\u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string FamilyCounter ( int visible , int inFile ) = \u0022 in file\u0022; complete member tokens SHA256=21BFF1220566514886E4E0F87F29735ADB5C94FC5A0BC51980626A1BE43286B4"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-16B3A67EDEC9",
@@ -1354,7 +1348,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -1683,7 +1677,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-2025778EF37B: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -1743,7 +1737,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -1906,7 +1900,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-24ED395047BF: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3506,7 +3500,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static string LayerState ( bool ready , string ? blockedBecause )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -3696,7 +3690,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -3828,7 +3822,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemReanotateSEPro.IsEnabled",
-          "sha256": "F261DA7C4AD3053D3FCCDBF378FE849FA12D4C3A8A876945CD26F2F8DAE6E113"
+          "sha256": "A83D90361D40BEA6591A69236D6EC96F264EC4148FD3CE6677C1B33BC55F5E21"
         }
       ],
       "proofs": [],
@@ -4070,7 +4064,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static string LayerState ( bool ready , string ? blockedBecause )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -4280,7 +4274,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -4563,7 +4557,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-7036894F9DF7: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4649,7 +4643,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -4871,7 +4865,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -5125,7 +5119,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -5184,7 +5178,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-7D56F063F66C: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5515,7 +5509,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-83110D07824B: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5837,17 +5831,11 @@
     },
     {
       "observationId": "FQ15-8B7D63ADF6DA",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string FamilyCounter ( int visible , int inFile )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:28 \u0022 visible \u00B7 \u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string FamilyCounter ( int visible , int inFile ) = \u0022 visible \u00B7 \u0022; complete member tokens SHA256=21BFF1220566514886E4E0F87F29735ADB5C94FC5A0BC51980626A1BE43286B4"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-8BEC30E52D69",
@@ -5919,7 +5907,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemWhereAmI.Header",
-          "sha256": "F261DA7C4AD3053D3FCCDBF378FE849FA12D4C3A8A876945CD26F2F8DAE6E113"
+          "sha256": "A83D90361D40BEA6591A69236D6EC96F264EC4148FD3CE6677C1B33BC55F5E21"
         }
       ],
       "proofs": [],
@@ -6069,7 +6057,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemComputeXic.IsEnabled",
-          "sha256": "F261DA7C4AD3053D3FCCDBF378FE849FA12D4C3A8A876945CD26F2F8DAE6E113"
+          "sha256": "A83D90361D40BEA6591A69236D6EC96F264EC4148FD3CE6677C1B33BC55F5E21"
         }
       ],
       "proofs": [],
@@ -6165,17 +6153,11 @@
     },
     {
       "observationId": "FQ15-919C85EFE603",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string FamilyCounter ( int visible , int inFile )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:29 \u0022N0\u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string FamilyCounter ( int visible , int inFile ) = \u0022N0\u0022; complete member tokens SHA256=21BFF1220566514886E4E0F87F29735ADB5C94FC5A0BC51980626A1BE43286B4"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-91DAD8FD3427",
@@ -6810,7 +6792,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-9FDF0CC7EACE: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -6978,17 +6960,11 @@
     },
     {
       "observationId": "FQ15-A46A1D04B820",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string FamilyCounter ( int visible , int inFile )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:28 \u0022N0\u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string FamilyCounter ( int visible , int inFile ) = \u0022N0\u0022; complete member tokens SHA256=21BFF1220566514886E4E0F87F29735ADB5C94FC5A0BC51980626A1BE43286B4"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-A487680101CE",
@@ -7545,7 +7521,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-B32233DB2707: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -8341,7 +8317,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSaveProject.IsEnabled",
-          "sha256": "F261DA7C4AD3053D3FCCDBF378FE849FA12D4C3A8A876945CD26F2F8DAE6E113"
+          "sha256": "A83D90361D40BEA6591A69236D6EC96F264EC4148FD3CE6677C1B33BC55F5E21"
         }
       ],
       "proofs": [],
@@ -8395,7 +8371,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSpectrumComparison.IsEnabled",
-          "sha256": "F261DA7C4AD3053D3FCCDBF378FE849FA12D4C3A8A876945CD26F2F8DAE6E113"
+          "sha256": "A83D90361D40BEA6591A69236D6EC96F264EC4148FD3CE6677C1B33BC55F5E21"
         }
       ],
       "proofs": [],
@@ -8811,7 +8787,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -8825,7 +8801,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemHelp.Header",
-          "sha256": "F261DA7C4AD3053D3FCCDBF378FE849FA12D4C3A8A876945CD26F2F8DAE6E113"
+          "sha256": "A83D90361D40BEA6591A69236D6EC96F264EC4148FD3CE6677C1B33BC55F5E21"
         }
       ],
       "proofs": [],
@@ -9124,7 +9100,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-DC72052AA7DC: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -9191,7 +9167,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-DE97BFC1DC1A: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -9266,7 +9242,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-DF6B9D200673: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -9368,7 +9344,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -9657,7 +9633,7 @@
           "kind": "test",
           "target": "ProveShellComposition",
           "assertion": "native shell composition fact FQ15-E67177435835: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -9919,7 +9895,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -9989,7 +9965,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemHowToRead.Header",
-          "sha256": "F261DA7C4AD3053D3FCCDBF378FE849FA12D4C3A8A876945CD26F2F8DAE6E113"
+          "sha256": "A83D90361D40BEA6591A69236D6EC96F264EC4148FD3CE6677C1B33BC55F5E21"
         }
       ],
       "proofs": [],
@@ -10425,7 +10401,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static string LayerState ( bool ready , string ? blockedBecause )",
-          "sha256": "EB4BA43123B2C7B592B968139BDA2D8C78F073AF6E7130C3804FFC4789E05D68"
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
         }
       ],
       "proofs": [],
@@ -10476,7 +10452,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind code fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -10490,7 +10466,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind export/storage fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -10504,7 +10480,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind format/export: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -10518,7 +10494,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind option/copy: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261109-181948-release-2114\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171237-release-2116\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]

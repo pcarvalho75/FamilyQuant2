@@ -44,7 +44,7 @@ internal static partial class Program
             FamilyPanel = new() { Name = "Selected panel", Families = new()
             {
                 new() { Key = "broad", DisplayName = "User first", Pfam = new() { new() { Accession = "domain-a" }, new() { Accession = "domain-b" } } },
-                new() { Key = "narrow", DisplayName = "User second", Pfam = new() { new() { Accession = "domain-a" } } },
+                new() { Key = "narrow", DisplayName = "User second", Pfam = new() { new() { Accession = "domain-a" }, new() { Accession = "domain-d" } } },
                 new() { Key = "other", DisplayName = "User third", Pfam = new() { new() { Accession = "domain-c" } } },
             } },
             MyExtendedFastaItems = new() { alpha, beta, unannotated, unsupported, shared },
@@ -80,7 +80,7 @@ internal static partial class Program
         var unknownChoice = new[] { new PanelFamilyLinkSelection { LinkKey = choices[0].LinkKey, PanelFamilyKey = "other" } };
         Check("J2a confirmations cannot invent a candidate family", Throws<ArgumentException>(() => PanelEvidenceClassifier.ConfirmLinks(file.FamilyPanel!, links, unknownChoice)));
         var changed = FamilyPanelValidation.Clone(confirmed);
-        changed.Families[0].Pfam.RemoveAt(1);
+        changed.Families[0].Pfam[1].Accession = "domain-d";
         Check("J2a changed domain definitions invalidate old link confirmations", PanelEvidenceClassifier.BuildLinks(changed, references, options)
             .Any(l => l.NeedsConfirmation && choices.Any(c => c.LinkKey == l.Key)));
         var excluded = FamilyPanelValidation.Clone(file.FamilyPanel!);

@@ -27,6 +27,7 @@ public sealed class FamilyPanelFamily
     public FamilyPanelDecision Decision { get; set; }
     public string MergeTargetFamilyKey { get; set; } = string.Empty;
     public List<FamilyPanelDomain> Pfam { get; set; } = new();
+    public List<string> UniProtFamilies { get; set; } = new();
     public List<FamilyPanelSubclass> Subclasses { get; set; } = new();
     /// <summary>Original named text, including literature abundance, notes, sources and levels.
     /// Values are printed verbatim, never parsed as measured quantities or classification rules.</summary>

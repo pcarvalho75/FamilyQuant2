@@ -139,6 +139,7 @@ public static class PanelAssignmentEvidenceStore
         }
         hash.AppendJson(source); hash.Append(JsonSerializer.Serialize(recipe.Options));
         hash.Append(JsonSerializer.Serialize(recipe.PanelContext)); hash.Append(JsonSerializer.Serialize(recipe.Assignments));
+        if (recipe.RetainedPanelAssignments != null) hash.Append(JsonSerializer.Serialize(recipe.RetainedPanelAssignments));
         foreach (var row in rows) hash.Append(JsonSerializer.Serialize(row));
         return hash.Finish();
     }

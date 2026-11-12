@@ -65,7 +65,7 @@ public partial class USearchLib
     }
 
     public string BuildHelpText() =>
-        "Choose a database, set identity, and Build families. The Family Cluster File is written beside the database.\n\n" +
+        "Choose a database, set identity, and Build families. The Family Cluster File is written beside the database and opens in Curate families. Return to Build families to check mixing in the last built result.\n\n" +
         "The fast pass depends on sequence order. The exhaustive pass aligns every pair and closes gaps the fast pass leaves; " +
         "it is on by default, with one confirmation above 10,000 sequences and no automatic size cap.\n\n" +
         "Scan identity range retains the 95 to 10 percent sweep. Find lowest identity retains Divide and Conquer and its allowed mixing fraction. " +

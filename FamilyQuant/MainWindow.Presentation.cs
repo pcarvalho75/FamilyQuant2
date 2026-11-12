@@ -16,6 +16,7 @@ public partial class MainWindow
     private sealed class ShellViewPresenter
     {
         private readonly MainWindow owner;
+        private USearchLib? build;
         public ShellViewPresenter(MainWindow owner) => this.owner = owner;
 
         public void PresentHome()
@@ -105,7 +106,15 @@ public partial class MainWindow
             owner.lastSpectrumComparisonCsvPath = null;
 
 
-            owner.usearch = new USearchLib();
+            if (build == null)
+            {
+                build = new USearchLib();
+                build.FamiliesWritten += async path =>
+                {
+                    if (ReferenceEquals(owner.usearch, build)) await owner.OpenProjectSafelyAsync(path);
+                };
+            }
+            owner.usearch = build;
             owner.GridApp.Children.Add(owner.usearch);
 
             owner.UpdateGuide();

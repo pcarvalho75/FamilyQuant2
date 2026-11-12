@@ -26,14 +26,14 @@ internal static partial class Program
 
     private static void ImportWizardMockTests(string? output = null)
     {
-        Section("Import wizard design - seven static pages, real tokens and bounded native controls");
+        Section("Import wizard design - three normal pages and optional choices, real tokens and bounded native controls");
         EnsureApplication();
         var previous = Themes.ThemeManager.Current;
         try
         {
             foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
             foreach (var size in new[] { (Width: 1366, Height: 768), (Width: 1920, Height: 1080) })
-            foreach (var state in Enumerable.Range(0, ImportMockSteps.Length).Select(p => (Page: p, Variant: ""))
+            foreach (var state in new[] { 1, 2, 3, 4, 5 }.Select(p => (Page: p, Variant: ""))
                 .Concat(new[] { (Page: 1, Variant: "wide-sheet"), (Page: 2, Variant: "decisions"), (Page: 3, Variant: "duplicate"), (Page: 3, Variant: "empty") }))
             {
                 int page = state.Page;
@@ -90,12 +90,13 @@ internal static partial class Program
         var marker = ImportMockText("Design preview | Fictitious data", "CaptionText");
         DockPanel.SetDock(marker, Dock.Bottom); rail.Children.Add(marker);
         var steps = new StackPanel();
-        for (int i = 0; i < ImportMockSteps.Length; i++)
+        var route = new[] { 1, 2, 5 }.Concat(page is 3 or 4 ? new[] { page } : Array.Empty<int>()).Order().ToArray();
+        foreach (int i in route)
         {
             var step = new Border { Padding = new Thickness(12), Margin = new Thickness(0, 0, 0, 8), CornerRadius = new CornerRadius(4) };
             step.SetResourceReference(Border.BackgroundProperty, i == page ? "SelectionBrush" : "CanvasBrush");
             var line = new StackPanel();
-            line.Children.Add(ImportMockText((i + 1) + "   " + ImportMockSteps[i], i == page ? "SectionTitle" : "BodyText"));
+            line.Children.Add(ImportMockText((Array.IndexOf(route, i) + 1) + "   " + ImportMockSteps[i], i == page ? "SectionTitle" : "BodyText"));
             if (i < page) line.Children.Add(ImportMockText("     Done", "CaptionText"));
             step.Child = line; steps.Children.Add(step);
         }
@@ -105,7 +106,7 @@ internal static partial class Program
         main.RowDefinitions.Add(new RowDefinition());
         main.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
         var head = new StackPanel { Margin = new Thickness(0, 0, 0, 22) };
-        head.Children.Add(ImportMockText("Step " + (page + 1) + " of 7", "CaptionText"));
+        head.Children.Add(ImportMockText("Step " + (Array.IndexOf(route, page) + 1) + " of " + route.Length, "CaptionText"));
         var heading = ImportMockText(variant == "decisions" ? "Review spreadsheet decisions" : ImportMockTitles[page], "PageTitle"); heading.Name = "mockHeading"; window.RegisterName(heading.Name, heading);
         head.Children.Add(heading);
         head.Children.Add(ImportMockText(variant == "decisions" ? "Check each proposed action and its source rows, then confirm the mapping." : ImportMockExplanations[page], "CaptionText")); main.Children.Add(head);
@@ -118,8 +119,8 @@ internal static partial class Program
         var help = ImportMockButton("Help"); help.HorizontalAlignment = HorizontalAlignment.Left; left.Children.Add(help); footer.Children.Add(left);
         var actions = new StackPanel { Orientation = Orientation.Horizontal, VerticalAlignment = VerticalAlignment.Center };
         actions.Children.Add(ImportMockButton(page == 6 ? "Close" : "Cancel"));
-        var back = ImportMockButton("Back"); back.IsEnabled = page != 0; actions.Children.Add(back);
-        var next = ImportMockButton(page == 5 ? "Import" : page == 6 ? "Open family checklist" : "Next", true);
+        var back = ImportMockButton("Back"); back.IsEnabled = page != 1; actions.Children.Add(back);
+        var next = ImportMockButton(page == 5 ? "Accept and import" : page == 6 ? "Open family checklist" : "Next", true);
         next.Name = "mockForward"; window.RegisterName(next.Name, next); next.IsEnabled = page != 3 && page != 4 && variant != "decisions"; actions.Children.Add(next);
         Grid.SetColumn(actions, 1); footer.Children.Add(actions); Grid.SetRow(footer, 2); main.Children.Add(footer);
         return window;
@@ -135,14 +136,14 @@ internal static partial class Program
             content.Children.Add(ImportMockCard("You need", "Excel workbook (.xlsx)", "Abbreviation column", "Family name column"));
             content.Children.Add(ImportMockCard("Kept with your list", "Other-language names", "Notes and original rows"));
             content.Children.Add(ImportMockCard("Imported into", "This project's family panel", "Next, after import: Review protein choices in Panel checklist"));
-            var actions = new WrapPanel(); actions.Children.Add(ImportMockButton("Try with the example"));
-            actions.Children.Add(ImportMockButton("Save a template")); actions.Children.Add(ImportMockButton("Edit current panel")); content.Children.Add(actions);
+            var actions = new WrapPanel(); actions.Children.Add(ImportMockButton("Use template")); actions.Children.Add(ImportMockButton("Edit current panel")); content.Children.Add(actions);
             return content;
         }
         if (page == 1)
         {
             var grid = ImportMockRows();
             var controls = new StackPanel();
+            var entry = new WrapPanel(); entry.Children.Add(ImportMockButton("Use template")); entry.Children.Add(ImportMockButton("Edit current panel")); controls.Children.Add(entry);
             var file = new DockPanel(); var browse = ImportMockButton("Browse"); DockPanel.SetDock(browse, Dock.Right); file.Children.Add(browse);
             file.Children.Add(ImportMockField("Workbook", "Example family list.xlsx")); controls.Children.Add(file);
             var options = new UniformGridForMock(2);

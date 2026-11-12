@@ -1,6 +1,8 @@
 using FamilyQuant.Evidence.Alignment;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 
@@ -60,7 +62,21 @@ public partial class SuperClusterPreviewWindow
             ShellMessages.Report(this, "Nothing could be aligned: " + ex.Message, "Align selected", MessageBoxButton.OK, MessageBoxImage.Information);
             return null;
         }
-        window.Closed += (_, _) => { if (ReferenceEquals(OpenAlignmentWindow, window)) OpenAlignmentWindow = null; };
+        void UpdateHeading()
+        {
+            int selected = window.Model.Candidates.Count(row => row.Ticked && row.Candidate.Origin == AlignmentOrigin.Highlighted);
+            int references = window.Model.Candidates.Count(row => row.Ticked && row.Candidate.Origin != AlignmentOrigin.Highlighted);
+            window.Title = selected.ToString("N0", CultureInfo.CurrentCulture) + " selected and "
+                + references.ToString("N0", CultureInfo.CurrentCulture) + (references == 1 ? " reviewed reference" : " reviewed references");
+        }
+        UpdateHeading();
+        PropertyChangedEventHandler updateHeading = (_, args) => { if (args.PropertyName == nameof(AlignmentViewModel.Summary)) UpdateHeading(); };
+        window.Model.PropertyChanged += updateHeading;
+        window.Closed += (_, _) =>
+        {
+            window.Model.PropertyChanged -= updateHeading;
+            if (ReferenceEquals(OpenAlignmentWindow, window)) OpenAlignmentWindow = null;
+        };
         OpenAlignmentWindow = window;
         window.Show();
         return window;

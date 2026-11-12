@@ -56,9 +56,17 @@ internal static partial class Program
         EventHandler<OperationProgress> observe = (_, step) =>
         {
             trace.Enqueue(step);
-            if (step.Stage == "report-write-section" && step.Completed == 1 && Interlocked.Exchange(ref pause, 0) == 1)
-            { entered.Set(); if (!release.Wait(TimeSpan.FromSeconds(30))) throw new TimeoutException("Owned progress fixture was not released."); }
         };
+        void StageWord(string path, ReportDocument document, ReportSelection selection, OperationContext operation)
+        {
+            var workerOperation = new OperationContext(operation.CancellationToken, new InlineOperationProgress(step =>
+            {
+                operation.Report(step.Stage, step.Message, step.Completed, step.Total);
+                if (step.Stage == "report-write-section" && step.Completed == 1 && Interlocked.Exchange(ref pause, 0) == 1)
+                { entered.Set(); if (!release.Wait(TimeSpan.FromSeconds(30))) throw new TimeoutException("Owned progress fixture was not released."); }
+            }));
+            File.WriteAllBytes(path, WordReportWriter.BuildBytes(document, selection, workerOperation));
+        }
         EventInfo? progressEvent = typeof(AppOperationHost).GetEvent("ProgressReported");
         bool WaitForStep(Task<bool> task)
         {
@@ -79,6 +87,7 @@ internal static partial class Program
             var screen = ((Grid)main.FindName("GridApp")).Children.OfType<ClusterGenerationControl>().Single();
             FinishBusyTask(screen.FullXicReady); FinishBusyOperation(main.Operations); PumpDispatcher();
             progressEvent?.AddEventHandler(main.Operations, observe);
+            MainWindow.ReportFileStagerOverride = StageWord;
             Check("J24 operation host exposes each native progress report", progressEvent != null);
             Task<bool> export = main.ExportReportAsync();
             bool paused = WaitForStep(export);

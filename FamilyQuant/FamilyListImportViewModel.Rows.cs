@@ -17,6 +17,7 @@ public sealed partial class FamilyListImportViewModel
         : RowOptions.Where(o => o.Value is FamilyPanelRowAction.Import or FamilyPanelRowAction.Skip or FamilyPanelRowAction.MergeInto).ToArray();
     public bool CanUseRowChoice => !IsBusy && !Imported && SelectedSpecialRow?.Action != null;
     public bool HasDecisions => Decisions.Count > 0;
+    public bool HasCustomDecisions => Decisions.Any(decision => !decision.IsProgramDecision);
     public bool HasColors => SourceColorChoices.Count > 0;
     public bool HasSourceFills => Preview?.Rows.Any(r => r.Cells.Any(c => c.Fill.Length > 0)) == true;
     public string DecisionSummary => HasDecisions ? Decisions.Count.ToString("N0", CultureInfo.CurrentCulture)
@@ -33,6 +34,7 @@ public sealed partial class FamilyListImportViewModel
             (PanelImportFields.FamilyKey, "Abbreviation", true), (PanelImportFields.DisplayName, "Family name", true),
             (PanelImportFields.OtherName, "Other-language name (optional)", false), (PanelImportFields.Notes, "Notes (optional)", false),
             (PanelImportFields.Pfam, "Pfam codes (optional)", false), (WorkbookImportSummaryFields.Subclasses, "Subclass names (optional)", false), (PanelImportFields.Decision, "Decision (optional)", false),
+            (PanelImportFields.UniProtFamilies, "UniProt family (optional)", false),
             (PanelImportFields.ColorCategory, "Colour category (optional)", false) };
         foreach (var (role, label, required) in roles.Where(role => WorkbookReviewEnabled || role.Item1 != WorkbookImportSummaryFields.Subclasses))
         {
@@ -65,7 +67,6 @@ public sealed partial class FamilyListImportViewModel
             string nextDecision = choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Decision, "");
             if (nextDecision != decisionHeader)
             {
-                quantifyAllConfirmed = false;
                 decisionHeader = nextDecision; Decisions.Clear();
                 foreach (var proposed in importer.ProposeDecisions(table, choices))
                 {
@@ -75,7 +76,8 @@ public sealed partial class FamilyListImportViewModel
                         Meaning = legend?.LegendMeaning ?? "",
                         Decision = legend == null ? HasWorkbookMap && !proposed.Exact ? null : proposed.Mapping.Decision : legend.ProposedMapping?.Decision,
                         MergeTarget = legend?.ProposedMapping?.MergeTargetFamilyKey ?? proposed.Mapping.MergeTargetFamilyKey,
-                        Confirmed = !WorkbookReviewEnabled && proposed.Exact && (legend == null || legend.ExactProgramDecision) };
+                        IsProgramDecision = proposed.Exact && (legend == null || legend.ExactProgramDecision),
+                        Confirmed = proposed.Exact && (legend == null || legend.ExactProgramDecision) };
                     row.PropertyChanged += (_, _) => { if (!updating) { if (WorkbookReviewEnabled) Recheck(); else Refresh(); Changed(nameof(DecisionSummary)); } };
                     Decisions.Add(row);
                 }
@@ -101,7 +103,7 @@ public sealed partial class FamilyListImportViewModel
                 check = importer.Check(table, choices, Decisions.Where(d => (WorkbookReviewEnabled || d.Confirmed) && d.Decision != null).Select(d => d.Capture()).ToArray(), PanelName.Trim());
             }
             RebuildSpecialRows();
-            Changed(nameof(HasDecisions)); Changed(nameof(HasColors)); Changed(nameof(DecisionSummary)); Changed(nameof(SpecialSummary));
+            Changed(nameof(HasDecisions)); Changed(nameof(HasCustomDecisions)); Changed(nameof(HasColors)); Changed(nameof(DecisionSummary)); Changed(nameof(SpecialSummary));
         }
         finally { updating = false; Refresh(); }
     }
@@ -212,7 +214,8 @@ public sealed partial class FamilyListImportViewModel
             : DecisionOptions.First(o => o.Value == family.Decision).Label;
 
     private string SummaryMatches(FamilyPanelFamily family) =>
-        MatchFamilies.FirstOrDefault(m => m.Key == family.Key)?.Choice
+        MatchFamilies.FirstOrDefault(m => m.Key == family.Key) is { MissingPfam: true } ? "No Pfam code; no proteins until it has one"
+        : MatchFamilies.FirstOrDefault(m => m.Key == family.Key)?.Choice
         ?? (family.Decision is FamilyPanelDecision.MergeIntoAnotherFamily or FamilyPanelDecision.NotAFamily ? "Not needed" : "Not reviewed");
 
     private static string Rows(int count, string action) => count.ToString("N0", CultureInfo.CurrentCulture) + (count == 1 ? " row " : " rows ") + action;

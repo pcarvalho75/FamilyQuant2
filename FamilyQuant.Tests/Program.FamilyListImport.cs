@@ -18,8 +18,9 @@ internal static partial class Program
 {
     private static void FamilyListImportTests(string? output = null)
     {
-        Section("Family list import - actual workbook, seven pages, explicit choices and one publication");
+        Section("Family list import - actual workbook, conditional pages, explicit choices and one publication");
         EnsureApplication();
+        using var dialogs = new ImportFixtureDialogs();
         string work = Path.Combine(Path.GetTempPath(), "fq-family-list-import-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(work);
         string workbook = Path.Combine(work, ExampleFamilyList.DefaultFileName); ExampleFamilyList.Write(workbook);
@@ -30,10 +31,10 @@ internal static partial class Program
             FinishReviewWork(async () => { await workbookModel.LoadAsync(workbook); await workbookModel.ReviewWorkbookSectionAsync("columns"); });
             workbookModel.ReviewingDecisions = false;
             Check("Columns with pending workbook decisions names its available review and return actions",
-                !workbookModel.CanNext && workbookModel.CanReturnToWorkbook
-                && workbookModel.Status.Contains("Review decision values", StringComparison.Ordinal)
+                workbookModel.CanNext && workbookModel.CanReturnToWorkbook
+                && workbookModel.Status.Contains("Next opens", StringComparison.Ordinal)
                 && workbookModel.Status.Contains("Back to workbook review", StringComparison.Ordinal)
-                && workbookModel.DisabledReason == workbookModel.Status);
+                && workbookModel.ForwardToolTip.Contains("custom decision labels", StringComparison.Ordinal));
         }
         var previousTheme = Themes.ThemeManager.Current;
         try
@@ -60,10 +61,10 @@ internal static partial class Program
                     window.Show(); PumpDispatcher();
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "01-welcome");
                     Check(label + " import uses one plain list name in its title and Help", window.Title == "Import family list"
-                        && model.Title == "Import family list" && FamilyListImportHelp.Text.StartsWith("IMPORT FAMILY LIST", StringComparison.Ordinal)
+                        && model.Title == "Choose your spreadsheet" && FamilyListImportHelp.Text.StartsWith("IMPORT FAMILY LIST", StringComparison.Ordinal)
                         && model.Status == "Nothing has changed yet.");
-                    Check(label + " Welcome exposes the example and template without editing the project", ((Button)window.FindName("ExampleButton")).IsEnabled
-                        && ((Button)window.FindName("TemplateButton")).IsEnabled && file.ToJsonText() == before && model.Page == 0 && !model.CanBack);
+                    Check(label + " File exposes Use template without a practice action or project edit", window.FindName("ExampleButton") == null
+                        && ((Button)window.FindName("TemplateButton")).IsEnabled && file.ToJsonText() == before && model.Page == 1 && !model.CanBack);
                     FinishReviewWork(() => model.LoadAsync(workbook)); PumpDispatcher();
                     Check(label + " File and sheet reads the real neutral example and detected header", model.Page == 1 && model.Sheets.Count == 6
                         && model.Preview?.ProposedHeaderRow == ExampleFamilyList.FamilyHeaderRow() && model.CanNext
@@ -84,31 +85,17 @@ internal static partial class Program
                         && model.Columns.Single(c => c.Role == PanelImportFields.Decision).Header.Length == 0 && model.CanNext);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns");
                     Check(label + " Columns replaces the sheet-specific status", !model.Status.Contains("sheet and header", StringComparison.Ordinal));
-                    var colourColumn = model.ColorColumn!;
-                    colourColumn.Header = model.Columns.Single(c => c.Role == PanelImportFields.FamilyKey).Header;
-                    Check(label + " source fills open their optional section and start with usable names", ((Expander)window.FindName("ColourCategories")).IsExpanded
-                        && model.SourceColorChoices.Count > 0 && model.SourceColorChoices.All(c => c.Label.Length > 0) && model.CanNext);
-                    if (model.SourceColorChoices.Count > 0)
-                    {
-                        model.SourceColorChoices[0].Label = "My source category";
-                        model.SourceColorChoices[^1].Label = "";
-                    }
-                    Check(label + " optional colour names never block Next when cleared", model.CanNext);
-                    foreach (var colour in model.SourceColorChoices.Where(c => c.Label.Length == 0)) colour.Label = colour.ColorName;
-                    CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns-colours");
-                    Check(label + " column category table fits above the footer without page clipping",
-                        WizardPolishTableFits((DataGrid)window.FindName("ColourCategoriesGrid"), out string categoryBounds), categoryBounds);
+                    Check(label + " source fills remain preview data without category controls", window.FindName("ColourCategories") == null
+                        && model.Preview!.Rows.Any(row => row.Cells.Any(cell => cell.Fill.Length > 0)) && model.CanNext);
                     var decision = model.Columns.Single(c => c.Role == PanelImportFields.Decision);
                     decision.Header = decision.Headers.First(h => h.Contains("DECIS", StringComparison.OrdinalIgnoreCase));
                     Check(label + " free-text decisions remain proposals until explicitly confirmed", model.Decisions.Count == 8
-                        && model.Decisions.Any(d => !d.Confirmed) && !model.CanNext && model.Decisions.All(d => d.Rows.Length > 0));
+                        && model.Decisions.Any(d => !d.Confirmed) && model.Decisions.All(d => d.Rows.Length > 0));
                     WalkTree(window).OfType<Button>().Single(button => Equals(button.Content, "Back to columns"))
                         .RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
-                    Check(label + " blocked Columns names decision review in its visible footer and disabled Next tooltip",
-                        !model.ReviewingDecisions && !model.CanNext && model.Status.Contains("Review decision values", StringComparison.Ordinal)
-                        && model.DisabledReason == model.Status && !model.Status.Contains("Back to workbook review", StringComparison.Ordinal)
-                        && WalkTree((FrameworkElement)window.FindName("WizardFooter")).OfType<TextBlock>().Any(text => text.Text == model.Status)
-                        && ((Button)window.FindName("ForwardButton")).ToolTip is string tip && tip.Contains(model.Status, StringComparison.Ordinal));
+                    Check(label + " Columns offers custom decision review before continuing", !model.ReviewingDecisions && model.CanNext
+                        && model.Status.Contains("Next opens", StringComparison.Ordinal)
+                        && ((Button)window.FindName("ForwardButton")).ToolTip is string tip && tip.Contains("custom decision labels", StringComparison.Ordinal));
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "03-columns-needs-decisions");
                     WalkTree(window).OfType<Button>().Single(button => Equals(button.Content, "Review decision values"))
                         .RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher();
@@ -122,13 +109,13 @@ internal static partial class Program
                     model.ConfirmDecisions();
                     Check(label + " explicit batch confirmation accepts the reviewed decision meanings", model.Decisions.All(d => d.Confirmed) && model.CanNext);
                     Check(label + " confirming decisions removes the Columns blocking instruction",
-                        !model.Status.Contains("Review decision values", StringComparison.Ordinal));
+                        !model.Status.Contains("Next opens", StringComparison.Ordinal));
                     model.Decisions[0].Confirmed = false;
                     Check(label + " an action needing confirmation again refreshes the Columns instruction",
-                        !model.CanNext && model.Status.Contains("Review decision values", StringComparison.Ordinal));
+                        model.CanNext && model.Status.Contains("Next opens", StringComparison.Ordinal));
                     model.Decisions[0].Confirmed = true;
                     Check(label + " resolving the last pending confirmation clears the stale instruction",
-                        model.CanNext && !model.Status.Contains("Review decision values", StringComparison.Ordinal));
+                        model.CanNext && !model.Status.Contains("Next opens", StringComparison.Ordinal));
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " Special rows shows the duplicate and a several-name row with a real choice", model.Page == 3
                         && model.SpecialRows.Any(r => r.Duplicate) && model.SpecialRows.Any(r => r.SeveralNames && r.Parts.Count == 4) && !model.CanNext);
@@ -181,27 +168,24 @@ internal static partial class Program
                         && partKeys.Length == 4 && partKeys.All(key => model.DraftPanel!.Families.Any(f => f.Key == key)) && file.ToJsonText() == before);
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " evidence matching requires each active family to be confirmed or skipped", model.Page == 4
-                        && model.MatchFamilies.Count > 0 && model.MatchFamilies.All(f => !f.Decided) && !model.CanNext
+                        && model.PfamQuestions.Count > 0 && model.PfamQuestions.All(f => !f.Decided) && !model.CanNext
                         && model.MatchFamilies.All(f => f.Suggestions.All(s => s.Use == s.IsFromSheet)));
-                    model.SelectedMatchFamily = model.MatchFamilies.FirstOrDefault(f => f.Suggestions.Count > 0) ?? model.SelectedMatchFamily;
+                    model.SelectedMatchFamily = model.PfamQuestions.FirstOrDefault(f => f.Suggestions.Count > 0) ?? model.SelectedMatchFamily;
                     Check(label + " the stored example protein supplies visible real Core suggestions", model.SelectedMatchFamily?.Suggestions.Count > 0);
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "05-evidence-matches");
                     model.SkipAllMatches();
                     Check(label + " Continue without matches records an explicit choice and no project change", model.CanNext
-                        && model.MatchFamilies.All(f => f.Choice == "Skipped") && file.ToJsonText() == before);
-                    model.SelectedMatchFamily = model.MatchFamilies[0];
+                        && model.PfamQuestions.All(f => f.Choice == "Skipped") && file.ToJsonText() == before);
+                    model.SelectedMatchFamily = model.PfamQuestions[0];
                     model.SelectedMatchFamily.Choice = "Needs a choice"; model.SkipMatch();
                     Check(label + " the last matching choice reports completion", model.Status == "Every family has a matching choice.");
-                    model.MatchFamilies[0].Choice = "Confirmed";
-                    Check(label + " one confirmed family agrees with its summary count", model.Summary.Contains("1 family confirmed", StringComparison.Ordinal));
-                    model.MatchFamilies[0].Choice = "Skipped";
                     FinishReviewWork(async () => { await model.NextAsync(); });
                     model.PanelName = "Imported example list";
                     model.Back(); model.Back();
                     FinishReviewWork(async () => { await model.NextAsync(); });
-                    Check(label + " Back and Next retain matching decisions and the edited panel name", model.Page == 4
-                        && model.MatchFamilies.All(f => f.Choice == "Skipped") && model.PanelName == "Imported example list");
-                    FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
+                    Check(label + " Back and Next retain matching decisions and the edited panel name", model.Page == 5
+                        && model.PfamQuestions.All(f => f.Choice == "Skipped") && model.PanelName == "Imported example list");
+                    PumpDispatcher();
                     Check(label + " Summary names the replacement and creates no Undo before Import", model.Page == 5 && model.PreviousPanel.Contains("Previous list", StringComparison.Ordinal)
                         && model.SummaryFamilies.Count == model.DraftPanel!.Families.Count && curation.UndoStack.Count == 0 && file.ToJsonText() == before);
                     Check(label + " Summary includes the skipped empty row and the confirmed duplicate rename", model.Summary.Contains("1 row skipped", StringComparison.Ordinal)
@@ -218,10 +202,10 @@ internal static partial class Program
                         && mergedFamily.Matches == "Not needed"
                         && model.SummaryFamilies.Count(f => f.Decision == "Not a family") == 11
                         && model.SummaryFamilies.Where(f => f.Decision == "Not a family").All(f => f.Matches == "Not needed")
-                        && model.SummaryFamilies.Where(f => f.Decision == "Quantify").All(f => f.Matches == "Skipped"));
+                        && model.SummaryFamilies.Where(f => f.Decision == "Quantify").All(f => f.Matches == "Skipped" || f.Matches.StartsWith("No Pfam code", StringComparison.Ordinal)));
                     Check(label + " a single confirmed match uses family grammar", !model.Summary.Contains("1 families confirmed", StringComparison.Ordinal));
-                    Check(label + " Summary includes the imported source colour category", ((DataGrid)window.FindName("SummaryGrid")).Columns.Any(c => c.Header as string == "Colour")
-                        && model.SummaryFamilies.Any(f => f.Notes.Contains("My source category", StringComparison.Ordinal)));
+                    Check(label + " Summary omits categories and keeps complete original source fields", !((DataGrid)window.FindName("SummaryGrid")).Columns.Any(c => c.Header as string == "Colour")
+                        && model.SummaryFamilies.All(f => f.Notes.Length > 0));
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "06-summary");
                     FinishReviewWork(async () => { await model.NextAsync(); }); PumpDispatcher();
                     Check(label + " Import is one panel publication and retains every protein's state", model.Page == 6 && model.Imported && model.CanUndo
@@ -314,9 +298,8 @@ internal static partial class Program
         FillTemplate(path, rows);
         using var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(ManualChoiceFile())));
         FinishReviewWork(() => model.LoadAsync(path));
-        FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(); await model.NextAsync(); });
-        model.SkipAllMatches();
-        FinishReviewWork(async () => { await model.NextAsync(); });
+        FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(); });
+        if (model.Page == 4) { model.SkipAllMatches(); FinishReviewWork(async () => { await model.NextAsync(); }); }
         var row = model.SummaryFamilies.Single(f => f.Key == key);
         bool zeroMerged = !breakdown.Contains(" merged", StringComparison.Ordinal);
         bool zeroOthers = !breakdown.Contains("reported under others", StringComparison.Ordinal);
@@ -329,7 +312,7 @@ internal static partial class Program
             && (!zeroMerged || !model.Summary.Contains(" merged", StringComparison.Ordinal))
             && (!zeroOthers || !model.Summary.Contains("reported under others", StringComparison.Ordinal))
             && (!zeroExcluded || !model.Summary.Contains("not a family", StringComparison.Ordinal))
-            && row.Decision == decision && row.Matches == matches);
+            && row.Decision == decision && row.Matches == (matches == "Skipped" ? "No Pfam code; no proteins until it has one" : matches));
         model.PanelName = "Supplied list";
         FinishReviewWork(async () => { await model.NextAsync(); });
         Check("done title " + name + " repeats that breakdown", model.Page == 6 && model.ImportedFamilyCount == breakdown + " imported");

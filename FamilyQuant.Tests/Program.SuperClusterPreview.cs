@@ -368,8 +368,9 @@ namespace FamilyQuant.Tests
                 FamilyQuant.Themes.ThemeManager.Apply(theme);
                 var window = new SuperClusterPreviewWindow(new SuperClusterPreview(Vipers(), null, ViperKeywords, "", KeywordMatch.Any, null, null), input, null)
                 { Width = 1180, Height = 740, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
+                window.ShowAllOptions = true;
                 var tabs = (TabControl)window.FindName("evidenceTabs");
-                tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(tab => tab.Content is ArchitectureReviewControl);
+                tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(tab => WalkTree((DependencyObject)tab.Content).OfType<ArchitectureReviewControl>().Any());
                 window.Show();
                 try
                 {

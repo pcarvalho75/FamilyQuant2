@@ -5,56 +5,56 @@
   "runs": [
     {
       "id": "text-tool",
-      "command": "D:\\FamilyQuant-wt\\release-2115\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261110-064550-release-2115\\text-preserved \u00222026-11-10 06:46:18 -0800\u0022",
-      "executedAt": "2026-11-10 06:46:18 -0800",
-      "commit": "3d7c72932f67b7135d5c1263d88ca81555bd9b45",
+      "command": "D:\\FamilyQuant-wt\\release-2116\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261111-184813-release-2116\\text-preserved \u00222026-11-11 18:48:24 -0800\u0022",
+      "executedAt": "2026-11-11 18:48:24 -0800",
+      "commit": "43ea4f7575d46643aa7f81de3bf63dc0631b43b6",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.log",
-          "sha256": "EC6365538DC2D1E62D3B3B37BE9A73E9E2F2C5B421D0EDCF7E5F7BEAF75F8EFC"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\text.log",
+          "sha256": "95A9EE9FEDD5EE5B378BBCAB86EF8017CBC537CFC10CD865A300FA03D7D6E5C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.json",
-          "sha256": "EAB6AD707CA500AEC21D04E629CF80C77DC22D8D5E8F5A38E3EA48048400BAA3"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\text.json",
+          "sha256": "8F6556A62EEAD3FE5560EC6184AE1B3F49D64017762B83C3E33F32D5FF0A3C10"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant2.dll",
-          "sha256": "67512E51368508C83DC741D3675F19C874F91D59C786FBE3A7FBF59AA4510091"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\executed\\FamilyQuant2.dll",
+          "sha256": "0BD7B796AA47D3B40EBFED1C11A825A69C310354C722341E4E4723696A449110"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant2.pdb",
-          "sha256": "794C9BE1A23D8F76F6F006CFC5C9E100549B3DBE5942D207368D6CAD110CEB69"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\executed\\FamilyQuant2.pdb",
+          "sha256": "E79D30707FF0EF1BDE0CD1B50EB2AB980153938C2619738C1A99B4C373D919DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Core.dll",
-          "sha256": "E2A31A136E84D34B7DF344B13E0347CDD7F5C2553120B8A45CD92FD70103F0FD"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\executed\\FamilyQuant.Core.dll",
+          "sha256": "04266FD6CD19EE36BBDF6D75C73EB0E243C25CACE0CE483862317E2573B0F6E6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Core.pdb",
-          "sha256": "CDA7B546F484BF1998F4027D08AC003E8782173560BE3BF9DE0F88880EC120E6"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\executed\\FamilyQuant.Core.pdb",
+          "sha256": "2DE0A0E4CC33E21F4ECAA68749926BE4C004497135F6649781602FAC91C88901"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "070E3F0555AA8EDCCB3CA75A0FEEED1B7F21B100B480CAA8CD8CA1B847A76473"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "9F550BFC0BE763324CE18393B2F3919260A5B43DF63B291708D0366A844DE2D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
           "sha256": "2CB78207901A4D7ACADF502A2EA634EFA79F3C1FC984986B33E5559BAD99FD21"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
           "sha256": "5243AEA610F5970D27BE03D90F556F3C60A0B0E700DAD42192AE5BB0535261EB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
           "sha256": "76B82F938173EA4E342000A363089B287BD5B2A897FDC8872B5EDB5319BB2F12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "7FFE973E1D4F66812812B051DAB78C93169902380838CFA92C011F86B1C3A02D"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\release-2115"
+      "workingDirectory": "D:\\FamilyQuant-wt\\release-2116"
     }
   ],
   "rows": [
@@ -1651,6 +1651,20 @@
       "compared": "frozen literal \u0022MATCH RULE\u0022 (SHA256 BA94782BA0082CB6) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoAcceptedScoreScatterChart::OnRender(System.Windows.Media.DrawingContext) [FamilyQuant/PresentationFigures.cs]; feature member DeNovoAcceptedScoreScatterChart.OnRender; reached as delegate FamilyQuant.AnalyticsViewModel/\u003C\u003Ec__DisplayClass69_0::\u003CExportWriter\u003Eb__3(String), 4 steps from the entry point"
     },
     {
+      "observationId": "FQ15-16A46B4A62E2",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/ReportView.cs",
+          "symbol": "FamilyQuant.ReportView::FamilyCounter(Int32,Int32,Boolean,Boolean,Boolean,Boolean)",
+          "sha256": "F4583E1554882978D0F92BA700C65EA796946D80B1E3E18EB577372037260317"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
+      "kindReceiptId": "text-code-fact",
+      "compared": "frozen literal \u0022 in file\u0022 (SHA256 DA3226DA36CD77CF) verbatim in FamilyQuant.Core.dll FamilyQuant.ReportView::FamilyCounter(Int32,Int32,Boolean,Boolean,Boolean,Boolean) [FamilyQuant.Core/ReportView.cs]; feature member ReportView.FamilyCounter; reached as delegate FamilyQuant.MainWindow/\u003C\u003Ec__DisplayClass193_0::\u003CCreateReportDetailsEditor\u003Eb__0(FamilyQuant.Report.ReportDetails), 4 steps from the entry point"
+    },
+    {
       "observationId": "FQ15-16B3A67EDEC9",
       "implementation": [],
       "proofs": [],
@@ -1990,7 +2004,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "24E3CA27562C059087B7C9EC811D96BE0A12F2A81BAB97C8566066E832B3AD51"
+          "sha256": "968902AC0C763FB1121F8C062E5839B6E9D786AA97C83852D8348EAA521AD9E2"
         }
       ],
       "proofs": [],
@@ -2048,7 +2062,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -2634,7 +2648,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -2934,7 +2948,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "24E3CA27562C059087B7C9EC811D96BE0A12F2A81BAB97C8566066E832B3AD51"
+          "sha256": "968902AC0C763FB1121F8C062E5839B6E9D786AA97C83852D8348EAA521AD9E2"
         }
       ],
       "proofs": [],
@@ -3212,7 +3226,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled XAML mainwindow.baml: MenuItem MenuItemHelp",
-          "sha256": "F261DA7C4AD3053D3FCCDBF378FE849FA12D4C3A8A876945CD26F2F8DAE6E113"
+          "sha256": "A83D90361D40BEA6591A69236D6EC96F264EC4148FD3CE6677C1B33BC55F5E21"
         }
       ],
       "proofs": [],
@@ -4684,7 +4698,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -5414,7 +5428,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -5688,7 +5702,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -5850,7 +5864,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -6792,7 +6806,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -8776,7 +8790,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -9068,7 +9082,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled XAML mainwindow.baml: MenuItem MenuItemHowToRead",
-          "sha256": "F261DA7C4AD3053D3FCCDBF378FE849FA12D4C3A8A876945CD26F2F8DAE6E113"
+          "sha256": "A83D90361D40BEA6591A69236D6EC96F264EC4148FD3CE6677C1B33BC55F5E21"
         }
       ],
       "proofs": [],
@@ -10245,6 +10259,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-8B7D63ADF6DA",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-8BA6DEDE6604",
       "implementation": [
         {
@@ -10476,7 +10498,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateColumnHeaders()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -10789,6 +10811,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-919C85EFE603",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-91BC81E5F2FB",
       "implementation": [],
       "proofs": [],
@@ -10880,7 +10910,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "compiled XAML mainwindow.baml: MenuItem MenuItemWhereAmI",
-          "sha256": "F261DA7C4AD3053D3FCCDBF378FE849FA12D4C3A8A876945CD26F2F8DAE6E113"
+          "sha256": "A83D90361D40BEA6591A69236D6EC96F264EC4148FD3CE6677C1B33BC55F5E21"
         }
       ],
       "proofs": [],
@@ -11180,7 +11210,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -12078,7 +12108,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -12247,6 +12277,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A46A1D04B820",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
     },
@@ -12676,7 +12714,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -13112,6 +13150,14 @@
     },
     {
       "observationId": "FQ15-B0C4CF7FF047",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-B0E9E05EC8E3",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
@@ -13722,7 +13768,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateColumnHeaders()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -15400,7 +15446,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "24E3CA27562C059087B7C9EC811D96BE0A12F2A81BAB97C8566066E832B3AD51"
+          "sha256": "968902AC0C763FB1121F8C062E5839B6E9D786AA97C83852D8348EAA521AD9E2"
         }
       ],
       "proofs": [],
@@ -15932,7 +15978,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -16558,7 +16604,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D4E174EECA50468D9DCD7CC2EE434BFB98013454D0D55EE9EAB3C3D4F39BF696"
+          "sha256": "16B17D56B11448A3A8B3D507AC31CFBCFB5CCBCA697375DE17042645C74BD0C7"
         }
       ],
       "proofs": [],
@@ -18458,7 +18504,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "24E3CA27562C059087B7C9EC811D96BE0A12F2A81BAB97C8566066E832B3AD51"
+          "sha256": "968902AC0C763FB1121F8C062E5839B6E9D786AA97C83852D8348EAA521AD9E2"
         }
       ],
       "proofs": [],
@@ -18639,7 +18685,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind code fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -18653,7 +18699,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind control: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -18667,7 +18713,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind help fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -18681,7 +18727,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind option/copy: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -18695,7 +18741,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind tooltip: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261110-064550-release-2115\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184813-release-2116\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]

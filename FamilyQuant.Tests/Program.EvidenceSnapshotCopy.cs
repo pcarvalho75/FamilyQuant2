@@ -112,6 +112,7 @@ internal static partial class Program
 
     private static void EvidenceUndoCallerTests(EvidenceProvenance source)
     {
+        using var dialogs = new ImportFixtureDialogs();
         var file = ManualChoiceFile(); file.EvidenceSource = source; file.FamilyPanel = LargeUndoPanel();
         var control = new ClusterGenerationControl(file);
         var window = new Window { Content = control, Width = 1280, Height = 800, Left = -30000, Top = -30000,

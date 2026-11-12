@@ -9,7 +9,7 @@ namespace FamilyQuant.Panels;
 public static partial class SubclassAssignment
 {
     private const string ConflictReason = "Source evidence supports conflicting panel subclass definitions.";
-    /// <summary>Evaluate direct domain and source-subfamily facts. Conflicts and missing facts stay Unknown.</summary>
+    /// <summary>Evaluate direct domain and source family/subfamily facts. Conflicts and missing facts stay Unknown.</summary>
     public static ProteinSubclassLabel ClassifyDirect(FamilyPanelFamily family, ProteinEvidence? evidence)
     {
         ArgumentNullException.ThrowIfNull(family);
@@ -17,10 +17,12 @@ public static partial class SubclassAssignment
         var domains = (evidence.Pfam ?? new List<EvidenceDomain>()).Where(d => d != null && !string.IsNullOrWhiteSpace(d.Accession))
             .Select(d => d.Accession).ToHashSet(StringComparer.Ordinal);
         var texts = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        Add(evidence.Family);
         Add(evidence.Subfamily);
         Add(evidence.FamilyAnnotation);
         foreach (var membership in evidence.FamilyMemberships ?? new List<EvidenceFamilyMembership>())
         {
+            Add(membership.Family);
             Add(membership.Subfamily);
             Add(membership.Hierarchy);
         }

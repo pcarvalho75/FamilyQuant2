@@ -12,6 +12,7 @@ internal static partial class Program
 {
     private static void FamilyListImportHelpRouteTests(string? output = null)
     {
+        using var dialogs = new ImportFixtureDialogs();
         EnsureApplication();
         var previous = Themes.ThemeManager.Current;
         try
@@ -39,7 +40,7 @@ internal static partial class Program
                         {
                             var guide = opened.OfType<FamilyListImportGuideWindow>().SingleOrDefault();
                             Check(theme + " " + route + " opens the owned illustrated chapter and preserves the draft", guide != null && ReferenceEquals(guide.Owner, wizard)
-                                && guide.IsVisible && model.Page == 0 && file.ToJsonText() == before);
+                                && guide.IsVisible && model.Page == 1 && file.ToJsonText() == before);
                             if (guide != null && output != null)
                             {
                                 guide.Left = -30000; guide.Top = -30000;
@@ -64,7 +65,7 @@ internal static partial class Program
     {
         var pages = new (int Page, string Key)[]
         {
-            (0, "welcome"), (1, "file"), (2, "columns"), (3, "special"),
+            (1, "file"), (2, "columns"), (3, "special"),
             (4, "matches"), (5, "summary"), (6, "done"),
         };
         var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(ManualChoiceFile())));
@@ -84,7 +85,7 @@ internal static partial class Program
             using var decisions = OpenImportHelp(wizard);
             Check("Help while reviewing decisions opens that section", model.Page == 2 && model.ReviewingDecisions
                 && decisions.Guide.Model.Current.Key == "decisions"
-                && decisions.Guide.Model.Current.Title == "3. Review spreadsheet decisions");
+                && decisions.Guide.Model.Current.Title == "Decision labels when needed");
             decisions.Guide.Model.Current = decisions.Guide.Model.Sections[0]; PumpDispatcher();
             var previous = (Button)decisions.Guide.FindName("previousButton");
             Check("disabled Previous says this is the first part", previous.IsEnabled == false

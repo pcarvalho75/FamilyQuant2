@@ -17,16 +17,16 @@ public sealed class ReportFamilyWorldRatesChart : ChartDrawingBase, IPalettedCha
         Rows = rows;
         foreach (var row in rows)
             if (new[] { row.DecoyRate, row.RightRate }.Any(r => r.HasValue && (!double.IsFinite(r.Value) || r.Value < 0)))
-                throw new ArgumentException("Stored family-world rates must be finite and nonnegative.", nameof(rows));
+                throw new ArgumentException("Stored UniProt families rates must be finite and nonnegative.", nameof(rows));
     }
 
     protected override void OnRender(DrawingContext dc)
     {
         base.OnRender(dc);
         DrawBackdrop(dc, Palette.Backdrop);
-        dc.DrawText(Text("Stored family-world rates", Palette.Ink, 16, true), new Point(18, 12));
+        dc.DrawText(Text("Stored UniProt families rates", Palette.Ink, 16, true), new Point(18, 12));
         dc.DrawText(Text("Decoy signal / credited signal; correct known credits / known credits", Palette.Muted, 11), new Point(18, 39));
-        if (Rows.Count == 0) { DrawEmpty(dc, "No family-world rates are stored.", Palette.Muted, new Point(18, 75)); return; }
+        if (Rows.Count == 0) { DrawEmpty(dc, "No rates for UniProt families are stored.", Palette.Muted, new Point(18, 75)); return; }
         double labelWidth = Math.Min(280, ActualWidth * .3);
         double half = Math.Max(80, (ActualWidth - labelWidth - 90) / 2);
         double max = Math.Max(1, Rows.SelectMany(r => new[] { r.DecoyRate ?? 0, r.RightRate ?? 0 }).Max());

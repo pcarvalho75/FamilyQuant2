@@ -22,7 +22,7 @@
         <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
             <DockPanel Margin="0,0,0,10">
                 <TextBlock x:Name="TextBlockCurateTitle" Text="Curate families" Style="{StaticResource PageTitle}" DockPanel.Dock="Left"/>
-                <Label x:Name="LabelNumberOfGroups" HorizontalAlignment="Right" ToolTip="Visible families and families in the file. Display filters never change the saved grouping or percentages."/>
+                <Label x:Name="LabelNumberOfGroups" HorizontalAlignment="Right" ToolTip="Shows the family count after the active display filters, the count in the whole file and the active filter names. Display filters never change the saved grouping or percentages."/>
             </DockPanel>
             <DockPanel Grid.Row="1" Margin="0,0,0,10">
                 <Label Content="Search" Target="{Binding ElementName=TextBoxSearch}" VerticalAlignment="Center" Margin="0,0,8,0"
@@ -149,8 +149,8 @@
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="3" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
-                            <Button Grid.Column="1" x:Name="ButtonFetchFamilyWorld" Content="Fetch family world" Click="ButtonFetchFamilyWorld_Click"
-                                    ToolTip="Downloads in-scope family references for the confirmed scope into the project, for later Database gap analysis. Confirm the scope in Group by evidence and complete any incomplete reference panel first; File &gt; Save keeps the download."/>
+                            <Button Grid.Column="1" x:Name="ButtonFetchFamilyWorld" Content="Fetch UniProt families" Click="ButtonFetchFamilyWorld_Click"
+                                    ToolTip="Fetch UniProt families finds the UniProt families of the in-scope proteins of your database, then downloads every reviewed UniProt entry of those families and their entries from your database's own clade. Confirm the scope in Group by evidence and complete any incomplete reference panel first; File &gt; Save keeps the download."/>
                         </Grid>
                         <TextBlock x:Name="TextBlockFamilyWorldState" Text="{Binding FamilyWorldStepStatus}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
                         <Grid>

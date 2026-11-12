@@ -22,6 +22,7 @@ namespace FamilyQuant
         public string ShellStatusText => busy ? "Running USEARCH. Two runs over the same files would interfere with each other." : ViewModel.Status;
         public string ShellHelpText => BuildHelpText() + "\n\n" + TextBlockUSearchState.Text;
         public event EventHandler? ShellStatusChanged;
+        public event Action<string>? FamiliesWritten;
         public bool UseShellStatusBar
         {
             get => BorderUSearchStatus.Visibility == Visibility.Collapsed;

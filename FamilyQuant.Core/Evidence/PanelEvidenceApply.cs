@@ -54,16 +54,24 @@ public static partial class EvidenceApply
         ValidatePanelOverlay(file.FamilyPanel, panel, recipe.ManualChoices);
         var actual = PanelEvidenceClassifier.Propose(file, recipe.Options, recipe.SessionSearch, recipe.SessionReferences, panel);
         actual = ManualFamilyChoices.Overlay(actual, recipe.ManualChoices ?? new(), file);
+        if (recipe.RetainedPanelAssignments != null)
+        {
+            var retained = RetainPanelAssignments(file, actual,
+                recipe.Families.ToDictionary(family => family.Family, family => family.Name, StringComparer.Ordinal), CurrentFamilyIdentities(file));
+            if (JsonSerializer.Serialize(retained) != JsonSerializer.Serialize(recipe.RetainedPanelAssignments))
+                throw new ArgumentException("The retained panel memberships no longer match the locked source families.", nameof(recipe));
+        }
         if (JsonSerializer.Serialize(actual.PanelContext) != JsonSerializer.Serialize(recipe.PanelContext))
             throw new ArgumentException("The saved panel links no longer have the recorded reviewed support.", nameof(recipe));
         var rows = actual.Proteins.ToDictionary(p => p.ProteinIndex);
-        foreach (var assignment in recipe.Assignments)
+        var assignments = recipe.Assignments.Concat(recipe.RetainedPanelAssignments ?? Enumerable.Empty<EvidenceAssignment>()).ToArray();
+        foreach (var assignment in assignments)
             if (!rows.TryGetValue(assignment.ProteinIndex, out var row) || row.Family != assignment.Family
                 || row.Tier != assignment.Tier || row.Reason != assignment.Reason || !row.SuggestedSelected)
                 throw new ArgumentException("A saved panel assignment is not reproduced by the recorded evidence rule.", nameof(recipe));
-        var facts = PanelAssignmentEvidenceStore.Stage(actual, recipe.Assignments);
+        var facts = PanelAssignmentEvidenceStore.Stage(actual, assignments);
         if (JsonSerializer.Serialize(facts) != JsonSerializer.Serialize(recipe.PanelProteinAssignments)
-            || PanelAssignmentEvidenceStore.Fingerprint(file, facts, recipe, SessionSource(file, recipe.SessionSearch), recipe.Assignments)
+            || PanelAssignmentEvidenceStore.Fingerprint(file, facts, recipe, SessionSource(file, recipe.SessionSearch), assignments)
                 != recipe.PanelProteinAssignmentsFingerprint)
             throw new ArgumentException("The saved per-target evidence facts do not reproduce the panel rule.", nameof(recipe));
     }

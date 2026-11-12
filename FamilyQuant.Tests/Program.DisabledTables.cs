@@ -28,6 +28,7 @@ internal static partial class Program
     {
         Section("Z12p5f7 disabled native tables retain theme surfaces and readable text");
         EnsureApplication();
+        using var dialogs = new ImportFixtureDialogs();
         string work = Path.Combine(Path.GetTempPath(), "fq-disabled-tables-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(work);
         string workbook = Path.Combine(work, "example.xlsx"); ExampleFamilyList.Write(workbook);
         var previousTheme = Themes.ThemeManager.Current;

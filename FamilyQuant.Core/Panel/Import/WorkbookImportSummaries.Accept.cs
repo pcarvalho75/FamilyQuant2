@@ -107,7 +107,8 @@ public static partial class WorkbookImportSummaries
                     Kind: rule.Kind ?? original.Rules.Single(value => value.RuleId == rule.RuleId).Kind)).ToArray();
                 bool sameRules = definition.Definition.RequiredPfam.ToHashSet(StringComparer.Ordinal).SetEquals(selectedRules.Where(rule => rule.Kind == PanelSubclassRuleKind.RequiredPfam).Select(rule => rule.Rule.Accession))
                     && definition.Definition.AbsentPfam.ToHashSet(StringComparer.Ordinal).SetEquals(selectedRules.Where(rule => rule.Kind == PanelSubclassRuleKind.AbsentPfam).Select(rule => rule.Rule.Accession))
-                    && definition.Definition.UniProtSubfamilies.Count == 0 && definition.Definition.ReportAsSubclassKey.Length == 0;
+                    && definition.Definition.UniProtSubfamilies.ToHashSet(StringComparer.Ordinal).SetEquals(original.UniProtSubfamilies)
+                    && definition.Definition.ReportAsSubclassKey.Length == 0;
                 if (!sameRules) { Problem(first, "The subclass builder returned rules outside the displayed selections.", true); continue; }
                 panel.Families.Single(family => family.Key == definition.FamilyKey).Subclasses.Add(Copy(definition.Definition));
             }

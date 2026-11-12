@@ -10,16 +10,34 @@ namespace FamilyQuant.Evidence;
 public enum PanelChecklistMatch { None = 0, UniProtFamily = 1, Pfam = 2, NameText = 4, HandChoice = 8, ProposedPlacement = 16, ConfirmedPhrase = 32, ConfirmedMatch = 64 }
 
 public sealed record PanelChecklistProtein(int ProteinIndex, string Identifier, PanelChecklistMatch Match,
-    bool? Reviewed, bool Placed, string Reason, IReadOnlyList<string>? ScopePhrases = null, bool IsLocked = false);
+    bool? Reviewed, bool Placed, string Reason, IReadOnlyList<string>? ScopePhrases = null, bool IsLocked = false, bool? HasScopeAnnotation = null, string ProposedFamily = "");
+
+public enum PanelChecklistState { WithProteins, NeedsChoice, NoPfamCode, NoDatabaseMatch, NoProteinInScope, AssignedElsewhere, NotPlaced }
 
 public sealed record PanelChecklistFamily(string Key, string Name, string Decision, string? TargetKey,
-    IReadOnlyList<PanelChecklistProtein> Proteins, int ExcludedContaminants = 0)
+    IReadOnlyList<PanelChecklistProtein> Proteins, int ExcludedContaminants = 0, bool HasPfamCode = true, bool NeedsLinkChoice = false)
 {
+    public PanelChecklistState State => Placed > 0 ? PanelChecklistState.WithProteins
+        : NeedsLinkChoice ? PanelChecklistState.NeedsChoice : !HasPfamCode ? PanelChecklistState.NoPfamCode
+        : Matches == 0 ? PanelChecklistState.NoDatabaseMatch : AssignedElsewhere > 0 ? PanelChecklistState.AssignedElsewhere
+        : Proteins.All(protein => protein.HasScopeAnnotation == false) ? PanelChecklistState.NoProteinInScope : PanelChecklistState.NotPlaced;
+    public string StateText => State switch
+    {
+        PanelChecklistState.WithProteins => "Has " + Placed.ToString("N0") + (Placed == 1 ? " protein" : " proteins"),
+        PanelChecklistState.NeedsChoice => "Waiting for a choice in Panel links",
+        PanelChecklistState.NoPfamCode => "Has no Pfam code",
+        PanelChecklistState.NoDatabaseMatch => "Matches no database protein",
+        PanelChecklistState.NoProteinInScope => "No protein in the scope (" + Matches.ToString("N0") + " in the database)",
+        PanelChecklistState.AssignedElsewhere => "Proteins went to another row",
+        _ => "No proteins placed",
+
+    };
     public int Matches => Proteins.Count;
     public int Reviewed => Proteins.Count(protein => protein.Reviewed == true);
     public int Placed => Proteins.Count(protein => protein.Placed);
     public int Outside => Matches - Placed;
     public bool HasOutside => Outside > 0;
+    public int AssignedElsewhere => Proteins.Count(protein => !protein.Placed && protein.ProposedFamily.Length > 0);
     public string ContaminantCount => "Contaminants excluded " + ExcludedContaminants.ToString("N0");
     public string ContaminantReason => ExcludedContaminants.ToString("N0")
         + (ExcludedContaminants == 1 ? " matching contaminant is excluded. " : " matching contaminants are excluded. ")
@@ -92,7 +110,7 @@ public static class PanelFamilyChecklist
                     reason = "Proposed in " + panel.Families.Single(item => item.Key == row.Family).DisplayName + ". " + reason;
                 var phrases = (protein.Evidence?.Keywords ?? new List<string>()).Concat(protein.Evidence?.TissueSpecificity ?? new List<string>())
                     .Where(phrase => !string.IsNullOrWhiteSpace(phrase)).Distinct(StringComparer.OrdinalIgnoreCase).OrderBy(phrase => phrase, StringComparer.Ordinal).ToArray();
-                matches.Add(new(row.ProteinIndex, row.Identifier, match, protein.Evidence?.Reviewed, placed, reason, phrases, file.LockedUserIds.Contains(protein.UserID)));
+                matches.Add(new(row.ProteinIndex, row.Identifier, match, protein.Evidence?.Reviewed, placed, reason, phrases, file.LockedUserIds.Contains(protein.UserID), row.HasScopeAnnotation, row.Family));
             }
             string decision = family.Decision switch
             {
@@ -101,7 +119,9 @@ public static class PanelFamilyChecklist
                     : "Merge into " + panel.Families.Single(item => item.Key == targetKey).DisplayName,
                 _ => "Quantify",
             };
-            return new PanelChecklistFamily(family.Key, string.IsNullOrWhiteSpace(family.DisplayName) ? family.Key : family.DisplayName, decision, targetKey, matches, excludedContaminants);
+            return new PanelChecklistFamily(family.Key, string.IsNullOrWhiteSpace(family.DisplayName) ? family.Key : family.DisplayName, decision, targetKey, matches, excludedContaminants,
+                domains.Count > 0, proposal.PanelContext.Links.Any(link => link.NeedsConfirmation
+                    && link.CandidateFamilyKeys.Contains(targetKey ?? family.Key, StringComparer.Ordinal)));
         }).ToArray();
     }
 }

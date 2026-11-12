@@ -88,7 +88,7 @@ internal static partial class Program
                 var confirm = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
                 confirm.Tick += (_, _) =>
                 {
-                    var dialog = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.Title == "Confirm family-world scope");
+                    var dialog = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.Title == "Confirm UniProt families scope");
                     if (dialog?.Content is not StackPanel panel) return;
                     confirm.Stop();
                     foreach (var text in panel.Children.OfType<TextBlock>()) Say("Scope dialog text: " + text.Text);

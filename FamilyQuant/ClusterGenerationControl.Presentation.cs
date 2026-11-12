@@ -140,7 +140,8 @@ public partial class ClusterGenerationControl
             // "Hide Reverse" was ticked and disagree with the console, which counts the whole file.
             LabelNumberOfGroups.Content = ReportView.FamilyCounter(
                 FamilyFilter.CountFamilies(finalResult),
-                FamilyFilter.CountFamilies(fcf.MyExtendedFastaItems));
+                FamilyFilter.CountFamilies(fcf.MyExtendedFastaItems), ViewModel.HideDecoys, ViewModel.HideContaminants,
+                !string.IsNullOrWhiteSpace(ViewModel.SearchText), ViewModel.OnlyQuantified);
 
             DataGridResultGrid.ItemsSource = ViewModel.SelectedFamilyProteins;
 

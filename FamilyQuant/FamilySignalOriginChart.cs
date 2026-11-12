@@ -13,7 +13,7 @@ namespace FamilyQuant;
 public sealed class FamilySignalOriginChart : ChartDrawingBase, IPalettedChart
 {
     private static readonly IReadOnlyList<string> sourceLabels = Array.AsReadOnly(new[]
-        { "Identified", "De novo in database", "De novo only in family world" });
+        { "Identified", "De novo in database", "De novo only in UniProt families" });
     private readonly bool invariantNumbers;
     public IReadOnlyList<string> SourceLabels => sourceLabels;
     public IReadOnlyList<FamilyWorldCompositionRow> Rows { get; }

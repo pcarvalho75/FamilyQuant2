@@ -27,6 +27,7 @@ public sealed class ImportColumnChoice : ScreenViewModel
         PanelImportFields.OtherName => "An optional column of other-language names, proposed from the headers; Not used keeps these as original source text only.",
         PanelImportFields.Notes => "An optional column of family notes, proposed from the headers; all original columns remain available as source text.",
         PanelImportFields.Pfam => "An optional column of Pfam codes or names, proposed from the headers; Not used adds no domain requirement.",
+        PanelImportFields.UniProtFamilies => "Exact UniProt family names separated by semicolons; empty means none. Not used keeps the values as source text only.",
         PanelImportFields.Decision => "An optional column telling what to do with each family; default Not used quantifies every family, while a chosen column requires you to confirm each label's action.",
         WorkbookImportSummaryFields.Subclasses => "An optional column of expected subclass names, proposed from the workbook structure; Not used leaves it as source text without expected subclass definitions.",
         _ => "An optional column whose cell fills become text categories; initially the workbook's proposal or Not used, with each category starting with its legend name when available, or its plain fill name."
@@ -37,6 +38,7 @@ public sealed class ImportColumnChoice : ScreenViewModel
 
 public sealed class ImportDecisionChoice : ScreenViewModel
 {
+    public bool IsProgramDecision { get; init; }
     private FamilyPanelDecision? decision;
     private string target = "";
     private bool confirmed;
@@ -121,6 +123,8 @@ public sealed record ImportMatchCoverage(int Proteins, int Reviewed, string Deta
 
 public sealed class ImportMatchFamily : ScreenViewModel
 {
+    public bool Automatic { get; init; }
+    public bool MissingPfam { get; init; }
     private string choice = "Needs a choice";
     private bool showAdditional;
     public string Key { get; init; } = "";
@@ -153,7 +157,8 @@ public sealed record ImportRowOption(string Label, FamilyPanelRowAction Value);
 public sealed record ImportSummaryFamily(string Key, string Name, string OtherName, string Decision, string Matches, string Notes, string Color);
 public sealed record ImportWizardStep(int Index, string Label, bool Done, bool Current, bool Enabled)
 {
-    public string Number => (Index + 1).ToString(CultureInfo.CurrentCulture);
+    public string Number => Label.IndexOf("   ", StringComparison.Ordinal) is var separator && separator > 0
+        ? Label[..separator] : (Index + 1).ToString(CultureInfo.CurrentCulture);
     public string Name => Label.StartsWith(Number + "   ", StringComparison.Ordinal) ? Label[(Number.Length + 3)..] : Label;
     public string AccessibleName => Done ? Label + " (Done)" : Label;
     public string ToolTip => !Enabled ? "This step is unavailable until you reach it, while a read is running, or after the list is imported; finish the current page to continue."

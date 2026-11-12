@@ -1,6 +1,7 @@
 using FamilyQuant.Panels;
 using FamilyQuant.Panels.Import;
 using FamilyQuant.Operations;
+using FamilyQuant.Evidence;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,6 +14,7 @@ namespace FamilyQuant;
 
 public sealed partial class FamilyListImportViewModel
 {
+    public IReadOnlyList<ImportMatchFamily> PfamQuestions => MatchFamilies.Where(family => !family.Automatic).ToArray();
     private ImportMatchFamily? selectedMatchFamily;
     public ImportMatchFamily? SelectedMatchFamily { get => selectedMatchFamily; set { if (Set(ref selectedMatchFamily, value)) { Changed(nameof(MatchStatus)); Changed(nameof(CanConfirmMatches)); Changed(nameof(SkipFamilyLabel)); } } }
     public bool CanConfirmMatches => !IsBusy && !Imported && SelectedMatchFamily?.Suggestions.Any(s => s.Use) == true;
@@ -69,22 +71,43 @@ public sealed partial class FamilyListImportViewModel
         finally { if (generation == readGeneration) IsBusy = false; }
     }
 
-    private static string MatchPanelFingerprint(FamilyPanel panel) => System.Text.Json.JsonSerializer.Serialize(
-        panel.Families.Select(f => new { f.Key, f.DisplayName, f.Names, f.Pfam, f.Decision, f.MergeTargetFamilyKey }));
+    private string MatchPanelFingerprint(FamilyPanel panel) => System.Text.Json.JsonSerializer.Serialize(new
+    {
+        PfamColumn = choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Pfam, ""),
+        Families = panel.Families.Select(f => new { f.Key, f.DisplayName, f.Names, f.Pfam, f.Decision, f.MergeTargetFamilyKey }),
+    });
 
     private void PublishMatches(FamilyPanel panel, IReadOnlyList<ImportMatchFamily> suggestions)
     {
         var previous = MatchFamilies.ToDictionary(f => f.Key, StringComparer.Ordinal);
+        var storedMatching = matcher is FamilyListStoredEvidenceMatches stored ? stored.WorkbookSnapshot : new PanelEvidenceMatching(transaction.Project);
+        var vocabulary = storedMatching.RecognizedPfamDomains();
+        var known = vocabulary.Select(domain => domain.Accession).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        string pfamHeader = choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Pfam, "");
         MatchFamilies.Clear();
         foreach (var family in panel.Families.Where(f => FamilyPanelValidation.ResolveFamilyKey(panel, f.Key) == f.Key))
         {
             var supplied = suggestions.FirstOrDefault(f => f.Key == family.Key);
-            string signature = System.Text.Json.JsonSerializer.Serialize(new { family.DisplayName, family.Names, family.Pfam });
+            string pfamText = family.TextFields.FirstOrDefault(field => field.Name == pfamHeader)?.Text ?? "";
+            bool missing = family.Pfam.Count == 0 && string.IsNullOrWhiteSpace(pfamText);
+            bool suppliedCodes = family.Pfam.Count > 0 && !FamilyPanelSpreadsheetImporter.NeedsPfamChoice(pfamText.Length > 0
+                ? pfamText : string.Join("; ", family.Pfam.Select(domain => domain.Accession)), known);
+            var proposed = (supplied?.Suggestions ?? Array.Empty<ImportEvidenceMatch>()).ToList();
+            foreach (var domain in vocabulary.Where(domain => domain.Name.Length > 0
+                && pfamText.Split(';', ',').Any(name => name.Trim().Equals(domain.Name, StringComparison.OrdinalIgnoreCase))))
+            {
+                var match = storedMatching.Coverage(PanelEvidenceMatchKind.Pfam, domain.Accession);
+                if (!proposed.Any(row => row.Key == match.Key))
+                    proposed.Add(new ImportEvidenceMatch { Key = match.Key, Text = match.Value, Type = "Pfam domain", Proteins = match.DatabaseTargets,
+                        Reviewed = match.ReviewedTargets, Details = domain.Name });
+            }
+            bool automatic = suppliedCodes || missing || supplied?.PreviouslyConfirmed == true;
+            string signature = System.Text.Json.JsonSerializer.Serialize(new { family.DisplayName, family.Names, family.Pfam, pfamText });
             var row = new ImportMatchFamily { Key = family.Key, Name = family.DisplayName, NamesSignature = signature,
-                Suggestions = supplied?.Suggestions ?? Array.Empty<ImportEvidenceMatch>(), PreviouslyConfirmed = supplied?.PreviouslyConfirmed == true,
+                Suggestions = proposed, PreviouslyConfirmed = supplied?.PreviouslyConfirmed == true, Automatic = automatic, MissingPfam = missing,
                 ShowAdditional = supplied?.ShowAdditional == true,
-                Choice = supplied?.PreviouslyConfirmed == true ? "Kept from previous panel" : "Needs a choice" };
-            if (!row.PreviouslyConfirmed) foreach (var suggestion in row.Suggestions) suggestion.Use = suggestion.IsFromSheet;
+                Choice = supplied?.PreviouslyConfirmed == true ? "Kept from previous panel" : automatic ? "Confirmed" : "Needs a choice" };
+            if (!row.PreviouslyConfirmed) foreach (var suggestion in row.Suggestions) suggestion.Use = !missing && suggestion.IsFromSheet;
             if (previous.TryGetValue(family.Key, out var retained) && retained.NamesSignature == signature)
             {
                 var retainedChoices = retained.Suggestions.ToDictionary(s => s.Key, StringComparer.Ordinal);
@@ -102,8 +125,8 @@ public sealed partial class FamilyListImportViewModel
             row.PropertyChanged += (_, _) => Refresh();
             MatchFamilies.Add(row);
         }
-        SelectedMatchFamily = MatchFamilies.FirstOrDefault();
-        Changed(nameof(MatchStatus)); Changed(nameof(MatchingChangeNotice)); Refresh();
+        SelectedMatchFamily = PfamQuestions.FirstOrDefault();
+        Changed(nameof(PfamQuestions)); Changed(nameof(MatchStatus)); Changed(nameof(MatchingChangeNotice)); Refresh();
     }
 
     public void ConfirmMatches(Func<string, bool>? confirmBroad = null)
@@ -137,7 +160,7 @@ public sealed partial class FamilyListImportViewModel
     public void SkipAllMatches()
     {
         if (IsBusy || Imported) return;
-        foreach (var family in MatchFamilies) RestoreOrSkip(family);
+        foreach (var family in PfamQuestions) RestoreOrSkip(family);
         Status = MatchFamilies.Any(f => f.PreviouslyConfirmed) ? "Previous confirmed matches kept; new matching skipped." : "Evidence matching skipped for this import; review it in Family checklist."; Refresh();
     }
 

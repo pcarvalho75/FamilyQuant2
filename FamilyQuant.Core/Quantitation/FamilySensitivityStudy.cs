@@ -14,7 +14,7 @@ namespace FamilyQuant;
 public static class FamilySensitivityStudy
 {
     public const string Method = "Stored computed variants; measured family envelope / measured peptide envelope. "
-        + "Shared policies use the same prepared peptides. Family-world-only credits are excluded; full counts overlap. "
+        + "Shared policies use the same prepared peptides. credits found only in UniProt families are excluded; full counts overlap. "
         + "Recorded inputs, grouping and extraction settings are checked; unrecorded settings cannot be compared.";
 
     public static FamilySensitivityResult Build(IReadOnlyList<QuantRow> rows, QuantManifest source, FamilyClusterFile curation,

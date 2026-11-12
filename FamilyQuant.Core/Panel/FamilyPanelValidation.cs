@@ -24,6 +24,8 @@ public static class FamilyPanelValidation
             if (!Enum.IsDefined(family.Decision)) throw new ArgumentException("Unknown panel decision.", nameof(panel));
             if (family.Pfam.Any(d => string.IsNullOrWhiteSpace(d.Accession)))
                 throw new ArgumentException("A panel domain needs an accession.", nameof(panel));
+            if (family.UniProtFamilies.Any(string.IsNullOrWhiteSpace))
+                throw new ArgumentException("A panel UniProt family name must not be empty.", nameof(panel));
             var subclasses = new Dictionary<string, FamilyPanelSubclass>(StringComparer.Ordinal);
             foreach (FamilyPanelSubclass part in family.Subclasses)
             {

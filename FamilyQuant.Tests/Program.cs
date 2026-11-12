@@ -40,6 +40,7 @@ namespace FamilyQuant.Tests
         [STAThread] // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            InstallTestShellMessagePresenter(typeof(MainWindow).Assembly);
             IsolateShellSessionState();
             if (TestCommandRegistry.TryRun(args, TestCommandPhase.Raw, string.Empty, out int rawExit))
                 return rawExit;
@@ -67,6 +68,7 @@ namespace FamilyQuant.Tests
             ApplicationPaths.LocalDataDirectoryOverride = Path.Combine(root, "app-data");
             void Isolate(Assembly assembly)
             {
+                InstallTestShellMessagePresenter(assembly);
                 var shell = assembly.GetType("FamilyQuant.MainWindow");
                 if (shell == null) return;
                 // Frozen comparison shells have their own statics. Isolate them before any window is constructed too.
@@ -89,6 +91,17 @@ namespace FamilyQuant.Tests
         private static SuiteTable DefaultSuite(string[] args, string workDir)
         {
             var suite = new SuiteTable();
+            suite.AddWithApplication(() => NoninteractivePromptTests());
+            suite.AddWithApplication(() => ReviewChecklistStateTests(Path.Combine(workDir, "review-checklist-states")));
+            suite.AddWithApplication(() => ReviewDestinationTests(Path.Combine(workDir, "review-destinations")));
+            suite.AddWithApplication(() => ReviewDetailsHeightTests(Path.Combine(workDir, "review-details-height")));
+            suite.AddWithApplication(() => ReviewAlignmentHeadingTests());
+            suite.Add(() => ReviewChecklistOutcomeTests());
+            suite.Add(() => ReviewNamedDestinationTests());
+            suite.Add(() => ImportSubclassTemplateTests(Path.Combine(workDir, "import-subclass-template")));
+            suite.AddWithApplication(() => ReviewTabGuideTests());
+            suite.Add(() => PanelLinkExampleTests());
+            suite.AddWithApplication(() => ReviewApplyWaitTests(Path.Combine(workDir, "review-apply-wait")));
             suite.Section("CSV export - locale and escaping");
             suite.Add(() => CommandRegistryTests());
             suite.Add(() => SuiteCommandCoverageTests(null));
@@ -213,6 +226,16 @@ namespace FamilyQuant.Tests
             suite.Add(() => ResultsMethodGateTests());
             suite.Add(() => DeNovoSwitchFallbackTests(Path.Combine(workDir, "denovo-switch-fallback")));
             suite.Add(() => DeNovoRunWarningTests());
+            suite.AddWithApplication(() => QuantifyWarningDispatcherTests());
+            suite.AddWithApplication(() => UiProgressAuditTests());
+            suite.AddWithApplication(() => BuildCurationHandoffTests());
+            suite.Add(() => PanelTieListTests());
+            suite.AddWithApplication(() => QuantifyScreenRunTests());
+            suite.AddWithApplication(() => FamilyListWalkTests());
+            suite.AddWithApplication(() => SubclassReportFlowTests());
+            suite.AddWithApplication(() => SubclassAssignmentReimportTests());
+            suite.AddWithApplication(() => SubclassUnchangedMembershipTests());
+            suite.Add(() => PanelTieListFreshImportTests());
             suite.AddWithApplication(() => QuantifyIsotopeDefaultTests(Path.Combine(workDir, "quantify-isotope-default")));
             suite.Add(() => StreamingProvenanceHashTests());
             suite.Section("Native fraction of TIC (Q3) - run _01 identified/envelope/DDA+de novo, envelope partition");
@@ -272,6 +295,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => LocaleTests(args.Length > 0 ? args[0] : null));
             suite.Section("What the numbers are called - status line, counter and column headings");
             suite.Add(() => ReportViewTests());
+            suite.AddWithApplication(() => FamilyCounterFilterTests());
             suite.Section("Embedded help - both pages answer the questions that were actually asked");
             suite.Add(() => HelpContentTests());
             suite.Add(() => DeNovoHelpContentTests());
@@ -322,6 +346,15 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelImportGracefulTests(Path.Combine(workDir, "panel-import-graceful")));
             suite.Add(() => PanelImportSeveralTests(Path.Combine(workDir, "panel-import-several")));
             suite.Add(() => PanelImportTemplateTests(Path.Combine(workDir, "panel-import-template")));
+            suite.Add(() => ImportTemplateWorkbookTests());
+            suite.Add(() => ImportUniProtColumnTests());
+            suite.Add(() => ImportSimpleTemplateTests());
+            suite.AddWithApplication(() => ImportEntryActionTests());
+            suite.AddWithApplication(() => ImportDecisionPageTests());
+            suite.AddWithApplication(() => ImportDirectPfamTests());
+            suite.AddWithApplication(() => ImportSaveHandoffTests());
+            suite.AddWithApplication(() => ImportConditionalPageTests());
+            suite.Add(() => PanelVisibleLinkTests());
             suite.Add(() => PanelImportExampleTests(Path.Combine(workDir, "panel-import-example")));
             suite.Add(() => PanelWorkbookMapTests(Path.Combine(workDir, "panel-workbook-map")));
             suite.AddWithApplication(() => PanelWorkbookNotesTests());
@@ -398,6 +431,9 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => GroupingDiscoverySafetyTests());
             suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => PanelMultiScopeAuditTests());
+            suite.Add(() => PanelCoverageTieTests(Path.Combine(workDir, "panel-coverage-ties")));
+            suite.Add(() => PanelLinkRoundtripTests(Path.Combine(workDir, "panel-link-roundtrip")));
+            suite.Add(() => PanelNamedFamilyTests(Path.Combine(workDir, "panel-named-families")));
             suite.AddWithApplication(() => PanelLinkNotesTests());
             suite.Add(() => EvidenceClassifierTests());
             suite.AddWithApplication(() => FamilyPanelSubclassTests());
