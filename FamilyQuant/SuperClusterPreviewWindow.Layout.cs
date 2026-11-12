@@ -38,7 +38,7 @@ public partial class SuperClusterPreviewWindow
                 if (Math.Abs(ChecklistLayout.MaxHeight - checklistHeight) > .5) ChecklistLayout.MaxHeight = checklistHeight;
                 double checklistRoom = Math.Max(0, checklistHeight - PanelChecklistHintText.ActualHeight
                     - PanelChecklistHintText.Margin.Top - PanelChecklistHintText.Margin.Bottom);
-                double checklistMinimum = Math.Min(218, Math.Max(0, checklistRoom - 40));
+                double checklistMinimum = Math.Min(218, Math.Max(0, checklistRoom - (model.HasScopeChangePreview ? 48 : 40)));
                 if (Math.Abs(ChecklistTableRow.MinHeight - checklistMinimum) > .5) ChecklistTableRow.MinHeight = checklistMinimum;
                 double toolsMaximum = Math.Max(0, checklistRoom - checklistMinimum);
                 if (Math.Abs(ChecklistToolsScroller.MaxHeight - toolsMaximum) > .5) ChecklistToolsScroller.MaxHeight = toolsMaximum;
