@@ -165,7 +165,8 @@ internal static partial class Program
     private static IReadOnlyList<PanelFamilyLinkProposal> PanelTieLinksBeforeCoverage(FamilyPanel panel,
         IReadOnlyList<NeighbourReference> references, EvidenceClassificationOptions options) =>
         (IReadOnlyList<PanelFamilyLinkProposal>)typeof(PanelEvidenceClassifier).GetMethod("BuildLinks", BindingFlags.NonPublic | BindingFlags.Static)!
-            .Invoke(null, new object[] { panel, references, options, false })!;
+            // Reflection passes every argument. Tie counts leave useNamedFamilyRules at its default, true.
+            .Invoke(null, new object[] { panel, references, options, false, true })!;
 
     private static void PanelTieListTests()
     {
