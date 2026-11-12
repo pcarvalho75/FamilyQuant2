@@ -5,53 +5,53 @@
   "runs": [
     {
       "id": "LK-style-roles",
-      "command": "D:\\FamilyQuant-wt\\release-2116\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --refresh-look-registers D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261111-184729-release-2116\\look-refresh \u00222026-11-11 18:47:40 -0800\u0022",
-      "executedAt": "2026-11-11 18:47:40 -0800",
-      "commit": "43ea4f7575d46643aa7f81de3bf63dc0631b43b6",
+      "command": "D:\\FamilyQuant-wt\\release-2116\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --refresh-look-registers D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261111-203811-release-2116\\look-refresh \u00222026-11-11 20:38:42 -0800\u0022",
+      "executedAt": "2026-11-11 20:38:42 -0800",
+      "commit": "e244733cb8ab55c7a804076d8751f04ebce9edde",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "sha256": "A8AE2A2BBC19E78EE7F984D8C8FCF3EE06B4DE147C42FB1294C9AE24A9A8FDC3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\resolved-styles.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\resolved-styles.json",
           "sha256": "81866C2965D6C8A58BE7AF2E631FE8D4968035E0E4D6250EFBBBB664AE7AD545"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant_DeNovoControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant_DeNovoControl.xaml",
           "sha256": "4A2289C28460667BED7DD10B94D714EE2CCF76DB5F38C4310547AF0A0B4213C6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant_Themes_ThemeManager.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant_Themes_ThemeManager.cs",
           "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant_Themes_Tokens.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant_Themes_Tokens.xaml",
           "sha256": "9A2C4D68A50492789FD4F3187C8E6E46133806AA54B521FE343CCDD2B32C6FE4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Tests_Program.LookStyleRoles.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Tests_Program.LookStyleRoles.cs",
           "sha256": "67729F9BBB5501B22BDDE5DDE9A8B3D26115F9ED37FDD50F604355322096514F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Tests_Program.Commands.LookLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Tests_Program.Commands.LookLedger.cs",
           "sha256": "720C18B4EFB51512A4DF2EEB3E25DFD58C9029105886C20E6072F27FD3396992"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\LOOK-STYLE-ROLES.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\LOOK-STYLE-ROLES.json",
           "sha256": "0ED17004A35DFA06BEB7846B9F8F78B1F06BAD9E4229BDA1711F8D570766AC2E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "9F550BFC0BE763324CE18393B2F3919260A5B43DF63B291708D0366A844DE2D0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "B3CBF99C352926D7D96A115A6FD9917800A772E24A8DD322EAD1B11F1D6B75F2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant2.dll",
-          "sha256": "0BD7B796AA47D3B40EBFED1C11A825A69C310354C722341E4E4723696A449110"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant2.dll",
+          "sha256": "A03C2AF94C4C99E257F137D805F4976B35C423421A6FA8C5F9D7ED06A333F1AD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Core.dll",
-          "sha256": "04266FD6CD19EE36BBDF6D75C73EB0E243C25CACE0CE483862317E2573B0F6E6"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Core.dll",
+          "sha256": "8CE684EDC8E1DCDA36017C27C9F15E3EA559D125CC19C7CD1502C9D965305F40"
         }
       ],
       "workingDirectory": "D:\\FamilyQuant-wt\\release-2116"
@@ -83,7 +83,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-8BC847EA8C1E / Dark: LayerBadge.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -91,7 +91,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-8BC847EA8C1E / Light: LayerBadge.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -124,7 +124,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-F8D72845D5F1 / Dark: LayerBadge.CornerRadius",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -132,7 +132,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-F8D72845D5F1 / Light: LayerBadge.CornerRadius",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -165,7 +165,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-3BAEF428C0E5 / Dark: LayerBadge.Padding",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -173,7 +173,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-3BAEF428C0E5 / Light: LayerBadge.Padding",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -206,7 +206,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-9A11B5EA2B79 / Dark: LayerBadge.Margin",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -214,7 +214,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-9A11B5EA2B79 / Light: LayerBadge.Margin",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -247,7 +247,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-861D29CD144B / Dark: LayerBadge.VerticalAlignment",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -255,7 +255,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-861D29CD144B / Light: LayerBadge.VerticalAlignment",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -288,7 +288,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-969B0A56C686 / Dark: LayerBadgeText.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -296,7 +296,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-969B0A56C686 / Light: LayerBadgeText.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -329,7 +329,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-36F91EE02CDC / Dark: LayerBadgeText.FontSize",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -337,7 +337,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-36F91EE02CDC / Light: LayerBadgeText.FontSize",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -370,7 +370,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-A81C965D49A9 / Dark: LayerBadgeText.FontWeight",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -378,7 +378,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-A81C965D49A9 / Light: LayerBadgeText.FontWeight",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -411,7 +411,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-53C091FC29DF / Dark: LayerBadgeText.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -419,7 +419,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-53C091FC29DF / Light: LayerBadgeText.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -452,7 +452,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-220D63CC3ECF / Dark: LayerTitle.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -460,7 +460,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-220D63CC3ECF / Light: LayerTitle.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -493,7 +493,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-06623D41A745 / Dark: LayerTitle.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -501,7 +501,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-06623D41A745 / Light: LayerTitle.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -534,7 +534,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-74C914EA14F2 / Dark: LayerTitle.FontWeight",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -542,7 +542,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-74C914EA14F2 / Light: LayerTitle.FontWeight",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -575,7 +575,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-616DB022B653 / Dark: LayerTitle.VerticalAlignment",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -583,7 +583,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-616DB022B653 / Light: LayerTitle.VerticalAlignment",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -616,7 +616,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-4246F074896F / Dark: ResultValue.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -624,7 +624,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-4246F074896F / Light: ResultValue.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -657,7 +657,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-5680CE8D113E / Dark: ResultValue.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -665,7 +665,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-5680CE8D113E / Light: ResultValue.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -698,7 +698,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-BDE150D37198 / Dark: ResultValue.FontWeight",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -706,7 +706,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-BDE150D37198 / Light: ResultValue.FontWeight",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -739,7 +739,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-298DB85DE10C / Dark: ResultValue.FontSize",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -747,7 +747,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-298DB85DE10C / Light: ResultValue.FontSize",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -780,7 +780,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-D549F0C6E7EA / Dark: ResultValue.VerticalAlignment",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -788,7 +788,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-D549F0C6E7EA / Light: ResultValue.VerticalAlignment",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -821,7 +821,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-F6C1061154A9 / Dark: ResultValue.Margin",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -829,7 +829,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-F6C1061154A9 / Light: ResultValue.Margin",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -862,7 +862,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-8E574C2E5D40 / Dark: Note.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -870,7 +870,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-8E574C2E5D40 / Light: Note.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -903,7 +903,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-5F2C1E449429 / Dark: Note.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -911,7 +911,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-5F2C1E449429 / Light: Note.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -944,7 +944,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-CA0B824CA99E / Dark: Note.FontSize",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -952,7 +952,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-CA0B824CA99E / Light: Note.FontSize",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -985,7 +985,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-B6FB542118DB / Dark: Note.TextWrapping",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -993,7 +993,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-B6FB542118DB / Light: Note.TextWrapping",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1026,7 +1026,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-B64AE83318C9 / Dark: Note.Margin",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -1034,7 +1034,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-B64AE83318C9 / Light: Note.Margin",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-184729-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-203811-release-2116\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],

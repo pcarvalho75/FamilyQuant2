@@ -8,7 +8,7 @@ in [the catalog](docs/INDEX.md). No historical version heading is changed by thi
 
 - **Review grouping fits a laptop screen.** "Where proteins go" opens to its three counts and their explanations and closes without leaving a gap; the two status lines under the scope stay readable; the Family checklist spans the window and shows its rows, with the reasons below. Projects, groupings and numbers are unchanged.
 
-**Feature ledger.** @LEDGER@
+**Feature ledger.** 1,958 checks proved for 2.1.17, as for 2.1.16; the 4 Families counter rows changed on purpose in 2.1.16 stay open to verify again, listed in [docs/LEDGER-REVERIFY-2.1.16.md](docs/LEDGER-REVERIFY-2.1.16.md).
 
 ## 2.1.16 (published 2026-11-11)
 
