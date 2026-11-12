@@ -93,30 +93,7 @@ public static partial class HtmlReportPayloadBuilder
                         });
                     }
             }
-            var parts = new List<HtmlFamilyPart>();
-            if (context.UsesPanel && !context.IsIdentity)
-            {
-                var frame = Workbook("export:effective_panel_parts.csv");
-                if (frame != null)
-                    foreach (int row in FamilyRows(frame, family.Id, true))
-                    {
-                        int name = Column(frame, "part"), kind = Column(frame, "part_kind");
-                        if (name < 0 || kind < 0) continue;
-                        string partKind = frame.Table.Rows[row][kind];
-                        if (excluded.Contains(partKind == "Subclass" ? "subclass-parts" : partKind == "Domain" ? "domain-parts" : "product-parts")) continue;
-                        parts.Add(new(partKind, Cell(frame, row, name), NativeCell(frame, row, "within_family_fraction", "%", 100), Unresolved(frame, row)));
-                    }
-            }
-            else
-                foreach (var source in new[] { (Id: "subclass-parts", Kind: "Subclass"), (Id: "domain-parts", Kind: "Domain"), (Id: "product-parts", Kind: "Product") })
-                {
-                    var frame = Workbook(source.Id); if (frame == null) continue;
-                    foreach (int row in FamilyRows(frame, family.Id))
-                    {
-                        int name = Column(frame, "part"); if (name < 0) continue;
-                        parts.Add(new(source.Kind, Cell(frame, row, name), NativeCell(frame, row, "within_family_pct", "%", fractionColumn: "within_family_fraction"), Unresolved(frame, row)));
-                    }
-                }
+            var parts = FamilyParts(family.Id, context.UsesPanel && !context.IsIdentity);
             string? peptides = null;
             var counts = context.UsesPanel && !context.IsIdentity ? Workbook("export:effective_panel_protein_counts.csv")
                 : Workbook("protein-counts", "export:family_protein_counts.csv");
@@ -132,6 +109,58 @@ public static partial class HtmlReportPayloadBuilder
                 ? context.CoverageProvider?.Invoke(family.Id, Add, selection) ?? Array.Empty<HtmlReportCoverage>()
                 : Array.Empty<HtmlReportCoverage>();
             return family with { Runs = runs, Parts = parts, Peptides = peptides, Cv = cv, Coverage = coverage };
+        }
+
+        private HtmlCoverageCatalog? CoverageParts(IReadOnlyList<HtmlReportFamily> families)
+        {
+            var catalog = context.CoverageCatalogProvider?.Invoke(selection);
+            if (catalog == null) return null;
+            return catalog with { Families = catalog.Families.Select(group =>
+            {
+                if (group.ReportFamilyId == "others") return group;
+                var ranked = families.FirstOrDefault(family => family.Id == group.ReportFamilyId);
+                if (ranked != null) return group with { Parts = ranked.Parts };
+                string? id = group.ReportFamilyId;
+                bool effective = context.UsesPanel && !context.IsIdentity;
+                if (id == null && group.Proteins.Count > 0)
+                {
+                    id = catalog.Proteins[group.Proteins[0]].FamilyUserId.ToString(CultureInfo.InvariantCulture);
+                    effective = false;
+                }
+                return id == null ? group : group with { Parts = FamilyParts(id, effective) };
+            }).ToArray() };
+        }
+
+        private IReadOnlyList<HtmlFamilyPart> FamilyParts(string id, bool effective)
+        {
+            var parts = new List<HtmlFamilyPart>();
+            if (effective)
+            {
+                var frame = Workbook("export:effective_panel_parts.csv");
+                if (frame != null)
+                    foreach (int row in FamilyRows(frame, id, true))
+                    {
+                        int name = Column(frame, "part"), kind = Column(frame, "part_kind");
+                        if (name < 0 || kind < 0) continue;
+                        string partKind = frame.Table.Rows[row][kind];
+                        if (excluded.Contains(partKind == "Subclass" ? "subclass-parts" : partKind == "Domain" ? "domain-parts" : "product-parts")) continue;
+                        parts.Add(new(partKind, Cell(frame, row, name), NativeCell(frame, row, "within_family_fraction", "%", 100), Unresolved(frame, row)));
+                    }
+            }
+            else
+                foreach (var source in new[] { (Id: "subclass-parts", File: "family_subclass_parts.csv", Kind: "Subclass"),
+                    (Id: "domain-parts", File: "family_domain_parts.csv", Kind: "Domain"), (Id: "product-parts", File: "family_product_parts.csv", Kind: "Product") })
+                {
+                    if (excluded.Contains(source.Id)) continue;
+                    // A printed table omits the native family id; the CSV keeps its stable join key.
+                    var frame = Workbook("export:" + source.File, source.Id); if (frame == null) continue;
+                    foreach (int row in FamilyRows(frame, id))
+                    {
+                        int name = Column(frame, "part"); if (name < 0) continue;
+                        parts.Add(new(source.Kind, Cell(frame, row, name), NativeCell(frame, row, "within_family_pct", "%", fractionColumn: "within_family_fraction"), Unresolved(frame, row)));
+                    }
+                }
+            return parts;
         }
 
         private static bool Unresolved(Frame frame, int row)

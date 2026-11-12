@@ -226,6 +226,12 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => QuantifyWarningDispatcherTests());
             suite.AddWithApplication(() => UiProgressAuditTests());
             suite.AddWithApplication(() => BuildCurationHandoffTests());
+            suite.Add(() => PanelTieListTests());
+            suite.AddWithApplication(() => QuantifyScreenRunTests());
+            suite.AddWithApplication(() => FamilyListWalkTests());
+            suite.AddWithApplication(() => SubclassReportFlowTests());
+            suite.AddWithApplication(() => SubclassAssignmentReimportTests());
+            suite.Add(() => PanelTieListFreshImportTests());
             suite.AddWithApplication(() => QuantifyIsotopeDefaultTests(Path.Combine(workDir, "quantify-isotope-default")));
             suite.Add(() => StreamingProvenanceHashTests());
             suite.Section("Native fraction of TIC (Q3) - run _01 identified/envelope/DDA+de novo, envelope partition");

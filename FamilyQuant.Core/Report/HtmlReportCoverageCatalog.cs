@@ -11,7 +11,10 @@ public sealed record HtmlCoverageCatalog
 }
 
 public sealed record HtmlCoverageCatalogFamily(string Id, string Name, string SelectorLabel,
-    IReadOnlyList<int> Proteins, string? ReportFamilyId = null);
+    IReadOnlyList<int> Proteins, string? ReportFamilyId = null)
+{
+    public IReadOnlyList<HtmlFamilyPart> Parts { get; init; } = Array.Empty<HtmlFamilyPart>();
+}
 public sealed record HtmlCoverageCatalogProtein(int FamilyUserId, string Protein, string SelectorLabel, int Length,
     int PeptideCount, double CreditedSignal, IReadOnlyList<HtmlCoverageCatalogSpan> Peptides,
     IReadOnlyList<HtmlCoverageCatalogSpan> Domains);

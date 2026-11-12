@@ -80,6 +80,7 @@ namespace FamilyQuant
             sb.AppendLine("the same stored readings as the program. Hover, focus or select a bar or value for");
             sb.AppendLine("its exact reading and reference total; All exact readings opens a printable table.");
             sb.AppendLine("These charts keep their named bases when Normalize to changes. Word keeps its pictures.");
+            sb.AppendLine("Selecting a family also shows its stored pooled subclass parts, including families below the report threshold.");
             sb.AppendLine("The Signal recovery guide defines a peptide feature, explains each TIC-based reading,");
             sb.AppendLine("and explains isotope, detector and TIC gaps without treating them as biological classes.");
             sb.AppendLine("Database gap also gives each part's share of its own family's displayed signal total;");
@@ -234,7 +235,7 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine("Use template includes an optional Subclasses sheet: copy a Family key from Families and write one Subclass per row.");
             sb.AppendLine("Each header has a one-line note on Instructions. A subclass matches an exact UniProt family or subfamily name");
-            sb.AppendLine("in the protein's stored hierarchy, or all required Pfam domains with none of the absent domains. Keep the full");
+            sb.AppendLine("from its stored family fields or hierarchy, or all required Pfam domains with none of the absent domains. Keep the full");
             sb.AppendLine("UniProt name, including family or subfamily. Absence needs a complete protein with domain evidence; missing or");
             sb.AppendLine("conflicting support stays Unknown. Review and accept imported subclasses before they become project rules.");
             sb.AppendLine();
