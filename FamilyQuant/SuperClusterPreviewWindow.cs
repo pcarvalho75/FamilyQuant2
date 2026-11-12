@@ -49,7 +49,13 @@ namespace FamilyQuant
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
             InitializeAdvancedTabGuides();
-            LayoutUpdated += (_, _) => ConstrainReviewLayout();
+            LayoutUpdated += (_, _) => ConstrainReviewTables();
+            Loaded += (_, _) => ConstrainReviewLayout();
+            EvidenceLayout.Loaded += (_, _) => ConstrainReviewLayout();
+            SizeChanged += (_, _) => ConstrainReviewLayout();
+            ReviewModeTabs.SizeChanged += (_, _) => ConstrainReviewLayout();
+            ReviewScopeHeader.SizeChanged += (_, _) => ConstrainReviewLayout();
+            MotifRow.SizeChanged += (_, _) => ConstrainReviewLayout();
             AppOperationHost.SetScope(this, Operations);
             BusyOverlay.AttachWindow(this, Operations);
             model.Keyword.Refreshing += (_, _) => sorts = grid.Items.SortDescriptions.ToList();
@@ -74,6 +80,8 @@ namespace FamilyQuant
         {
             if (model == null) return;
             bool full = ShowAllOptions;
+            if (full) ReviewModeTabs.ClearValue(TemplateProperty);
+            else ReviewModeTabs.Template = (ControlTemplate)FindResource("SimpleReviewTabs");
             if (!full && model.ModeIndex != 1) { model.ModeIndex = 1; return; }
             ReviewModeTabs.Items.OfType<TabItem>().First().Visibility = full ? Visibility.Visible : Visibility.Collapsed;
             foreach (var tab in evidenceTabs.Items.OfType<TabItem>().Skip(1))

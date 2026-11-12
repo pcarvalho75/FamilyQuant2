@@ -7,6 +7,9 @@ public sealed partial class EvidenceReviewViewModel
     public int ProteinsInList { get; }
     public int InScopeProteinsOutsideList { get; }
     public int ProteinsOutsideScope { get; }
+    public string DestinationSummaryText => "Where proteins go: " + ProteinsInList.ToString("N0", CultureInfo.CurrentCulture)
+        + " in your list; " + InScopeProteinsOutsideList.ToString("N0", CultureInfo.CurrentCulture)
+        + " in scope outside your list; " + ProteinsOutsideScope.ToString("N0", CultureInfo.CurrentCulture) + " outside scope";
     public string ListDestinationText => ProteinsInList.ToString("N0", CultureInfo.CurrentCulture)
         + (ProteinsInList == 1 ? " protein is proposed in a family of your list." : " proteins are proposed in a family of your list.");
     public string SequenceDestinationText => InScopeProteinsOutsideList.ToString("N0", CultureInfo.CurrentCulture)

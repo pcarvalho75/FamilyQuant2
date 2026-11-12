@@ -302,7 +302,7 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine("Group by evidence opens the Evidence tab of Review grouping. Confirm the scope,");
             sb.AppendLine("then review the families, flags, protein ticks and Selected protein details in Simple view.");
-            sb.AppendLine("Selected protein details grows up to ten lines as space allows, then scrolls so the scope and motif controls stay visible.");
+            sb.AppendLine("Simple view reserves eight protein rows; selected details grows up to ten lines as space allows, then scrolls to retain the scope and motif controls.");
             sb.AppendLine("Align selected counts the selected proteins and reviewed references included in its heading. References are");
             sb.AppendLine("stored nearest reviewed proteins and family representatives from the database or reference panel; alignment ticks change only the comparison.");
             sb.AppendLine("Show all options opens Keywords, all evidence tabs, full protein columns and extra tools;");
@@ -315,13 +315,13 @@ namespace FamilyQuant
             sb.AppendLine("If Apply grouping waits for Panel links, Review choices shows only links needing a choice;");
             sb.AppendLine("choose a family or Leave outside panel, then Use link choices to update the proposal.");
             sb.AppendLine("Each Panel links row shows an example database protein and its stored UniProt family to help you recognize it.");
-            sb.AppendLine("The destination panel counts target proteins proposed in your list, in scope outside your list, and outside scope.");
+            sb.AppendLine("Where proteins go shows compact counts for your list, in scope outside your list, and outside scope; expand it for the explanations.");
             sb.AppendLine("In-scope proteins in no family of the list keep their sequence family, named after its proteins,");
             sb.AppendLine("and are measured together in it. Outside-scope proteins keep their current family. These are proposal counts:");
             sb.AppendLine("locked or unticked proteins keep their current family; decoys and contaminants are excluded from the counts.");
             sb.AppendLine("Family checklist keeps every list row and counts rows with proposed proteins, pending Panel links choices,");
             sb.AppendLine("no Pfam code, no database match, no protein in scope, proteins in another row, or no placed proteins.");
-            sb.AppendLine("Only an unresolved Panel links choice is waiting; outside-scope matches and proteins assigned elsewhere are not.");
+            sb.AppendLine("Only unresolved Panel links choices are waiting. The checklist table stays visible while reasons and scope or matching actions scroll below.");
             sb.AppendLine("Save panel as spreadsheet writes named link choices in the UniProt family column.");
             sb.AppendLine("Importing that column restores exact family links among the supported rows without");
             sb.AppendLine("asking again. Separate several source family names with semicolons.");

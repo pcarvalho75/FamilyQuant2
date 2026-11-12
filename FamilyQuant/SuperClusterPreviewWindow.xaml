@@ -7,6 +7,9 @@
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="VisibleWhenTrue"/>
+        <ControlTemplate x:Key="SimpleReviewTabs" TargetType="{x:Type TabControl}">
+            <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent"/>
+        </ControlTemplate>
         <DataTemplate x:Key="KeywordTick">
             <CheckBox IsChecked="{Binding Join, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"
                       Click="KeywordTick_Click" ToolTip="Include this protein in the keyword grouping when Apply grouping is confirmed; unticking leaves its current family unchanged. This is a review choice until Apply grouping, after which Undo restores the preceding grouping."/>
@@ -16,9 +19,9 @@
                       ToolTip="{Binding SelectionHelp}" ToolTipService.ShowOnDisabled="True"/>
         </DataTemplate>
     </Window.Resources>
-    <Grid x:Name="ReviewRootGrid" Margin="16">
+    <Grid x:Name="ReviewRootGrid" Margin="12">
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-        <DockPanel Margin="0,0,0,12">
+        <DockPanel Margin="0,0,0,8">
             <CheckBox x:Name="ShowAllOptionsCheckBox" DockPanel.Dock="Right" Content="Show all options" VerticalAlignment="Center" Margin="12,0,0,0"
                       IsEnabled="{Binding EvidenceAvailable}" ToolTipService.ShowOnDisabled="True"
                       IsChecked="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Mode=TwoWay}"
@@ -91,12 +94,17 @@
                     <!-- The title and the Scope row stay outside the scroll area, so the tables' minimum height can never hide them (2.1.13). -->
                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition x:Name="ScopeDetailsRow" Height="2*" MaxHeight="200"/><RowDefinition x:Name="ReviewTablesRow" Height="3*" MinHeight="390"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                     <StackPanel x:Name="ReviewScopeHeader" Margin="0,0,0,8">
-                    <DockPanel Visibility="{Binding TaskDiscoveryAvailable, Converter={StaticResource VisibleWhenTrue}}" Margin="0,0,0,8">
-                        <Button DockPanel.Dock="Right" Content="Read database and scope" Click="DiscoverTask_Click" IsEnabled="{Binding CanDiscoverTask}" ToolTip="Read database taxonomy and reviewed keyword counts using UniProt, then suggest scope without changing the open project. Disabled while a review operation is running; wait for it to finish and review the scope before Update proposal."/>
-                        <TextBlock Text="Database and scope" Style="{StaticResource SectionTitle}" VerticalAlignment="Center"/>
-                    </DockPanel>
+                    <TextBlock Text="Database and scope" Margin="0,0,0,4">
+                        <TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource SectionTitle}"><Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding TaskDiscoveryAvailable}" Value="True"/>
+                                <Condition Binding="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}}" Value="True"/>
+                            </MultiDataTrigger.Conditions><Setter Property="Visibility" Value="Visible"/></MultiDataTrigger></Style.Triggers>
+                        </Style></TextBlock.Style>
+                    </TextBlock>
                     <DockPanel x:Name="TaskScopeRow">
                         <Button DockPanel.Dock="Right" Content="Update proposal" Click="UpdateProposal_Click" IsEnabled="{Binding CanUpdateProposal}" ToolTip="Rebuild the review from the edited scope and stored evidence without downloading or changing the open project; Apply grouping commits the choices. Disabled without scope words or during a review operation; enter scope words and wait for the operation to finish."/>
+                        <Button DockPanel.Dock="Right" Margin="8,0,0,0" Visibility="{Binding TaskDiscoveryAvailable, Converter={StaticResource VisibleWhenTrue}}" Content="Read database and scope" Click="DiscoverTask_Click" IsEnabled="{Binding CanDiscoverTask}" ToolTip="Read database taxonomy and reviewed keyword counts using UniProt, then suggest scope without changing the open project. Disabled while a review operation is running; wait for it to finish and review the scope before Update proposal."/>
                         <StackPanel DockPanel.Dock="Right" Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
                         <Button x:Name="FetchMissingPanelButton" Content="Fetch missing panel" Click="FetchMissingPanel_Click" Margin="0,0,8,0"
                                 Visibility="{Binding PanelFetchAvailable, Converter={StaticResource VisibleWhenTrue}}" IsEnabled="{Binding CanFetchMissingPanel}"
@@ -107,10 +115,15 @@
                     </DockPanel>
                     <StackPanel x:Name="ProteinDestinationsPanel" Margin="0,8,0,0" DataContext="{Binding Evidence}"
                                 Visibility="{Binding HasPanelRules, Converter={StaticResource VisibleWhenTrue}}" ToolTip="{x:Static local:EvidenceReviewViewModel.DestinationHelp}">
+                        <Expander x:Name="ProteinDestinationsExpander" Header="{Binding DestinationSummaryText}" IsExpanded="False"
+                                  ToolTip="Show how target proteins in the current proposal reach your list, their sequence families or stay outside scope. Opening this explanation changes only the view; locked or unticked proteins keep their current family.">
+                            <StackPanel Margin="16,4,0,0">
                         <TextBlock Text="{Binding ListDestinationText}" TextWrapping="Wrap"/>
                         <TextBlock Text="{Binding SequenceDestinationText}" TextWrapping="Wrap" Margin="0,2,0,0"/>
                         <TextBlock Text="{Binding OutsideScopeDestinationText}" TextWrapping="Wrap" Margin="0,2,0,0"/>
                         <TextBlock Text="Proposal counts; locked or unticked proteins keep their current family." Foreground="{DynamicResource MutedBrush}" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                            </StackPanel>
+                        </Expander>
                     </StackPanel>
                     </StackPanel>
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10"
@@ -368,8 +381,8 @@
                                 </DockPanel>
                             </TabItem>
                             <TabItem x:Name="PanelChecklistTab" Header="Family checklist" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Review database target matches to each panel family and why matching proteins remain outside the proposal. Opening this tab changes only the view; a name or domain match alone never assigns a family.">
-                                <Grid>
-                                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                                <Grid x:Name="ChecklistLayout">
+                                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition x:Name="ChecklistTableRow" Height="*" MinHeight="110"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                                     <TextBlock x:Name="PanelChecklistHintText" Text="{Binding PanelChecklistHint}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,8"/>
                                     <DataGrid x:Name="PanelChecklistGrid" Grid.Row="1" ItemsSource="{Binding Evidence.PanelChecklist}"
                                               SelectedItem="{Binding Evidence.SelectedChecklistFamily, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False"
@@ -395,20 +408,25 @@
                                             </DataGridTextColumn>
                                         </DataGrid.Columns>
                                     </DataGrid>
-                                    <TextBox x:Name="PanelChecklistDetail" Grid.Row="2" Text="{Binding Evidence.ChecklistDetail, Mode=OneWay}" IsReadOnly="True"
+                                    <ScrollViewer x:Name="ChecklistToolsScroller" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                                                  ToolTip="Read complete reasons and scroll to scope and matching actions for the selected family. Scrolling changes only the view; the actions keep their existing project and Undo behaviour.">
+                                        <StackPanel>
+                                    <TextBox x:Name="PanelChecklistDetail" Text="{Binding Evidence.ChecklistDetail, Mode=OneWay}" IsReadOnly="True"
                                              TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" MinHeight="100" MaxHeight="110" Margin="0,8,0,0" ToolTip="Read complete match-type counts and proposal reasons for database targets outside the selected panel family. Selecting and copying text changes no assignment or file."/>
-                                    <WrapPanel Grid.Row="3" Margin="0,8,0,0" Visibility="{Binding Evidence.SelectedChecklistFamily.HasOutside, Converter={StaticResource VisibleWhenTrue}}">
+                                    <WrapPanel Margin="0,8,0,0" Visibility="{Binding Evidence.SelectedChecklistFamily.HasOutside, Converter={StaticResource VisibleWhenTrue}}">
                                         <ComboBox x:Name="ChecklistScopePhraseBox" ItemsSource="{Binding Evidence.ChecklistPhrases}" SelectedItem="{Binding Evidence.SelectedChecklistPhrase, Mode=TwoWay}"
                                                   DisplayMemberPath="DisplayName" MinWidth="170" MaxWidth="270" Margin="0,0,8,0" ToolTip="Choose a stored keyword or tissue phrase from outside matches; initially the supplied selection, with only listed phrases allowed and no numeric unit. Selection prepares Add phrase to scope without changing scope or assignments."/>
                                         <Button x:Name="ChecklistAddScopeButton" Content="Add phrase to scope" Click="AddChecklistPhrase_Click" IsEnabled="{Binding CanAddChecklistPhrase}" Margin="0,0,8,0" ToolTip="Add the selected stored phrase to pending scope and preview matches; Update proposal is still required before Apply grouping. Disabled if no new valid phrase is selected or a review operation is running; choose an unused phrase and wait to enable it."/>
                                         <Button x:Name="ChecklistPlaceHandButton" Content="Place outside matches by hand..." Click="PlaceChecklistMatches_Click" IsEnabled="{Binding CanPlaceChecklistMatches}"
                                                 ToolTip="Opens a confirmation for adding this panel family's outside matches by hand, with the project changed only on Apply grouping and restored by Undo. Choose an included panel family with outside matches, update the proposal and unlock matching proteins to enable it."/>
                                     </WrapPanel>
-                                    <TextBox x:Name="ChecklistScopePreview" Grid.Row="4" Text="{Binding ChecklistScopePreviewText, Mode=OneWay}" IsReadOnly="True"
+                                    <TextBox x:Name="ChecklistScopePreview" Text="{Binding ChecklistScopePreviewText, Mode=OneWay}" IsReadOnly="True"
                                              Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}" TextWrapping="Wrap" MinHeight="48" MaxHeight="88"
                                              VerticalScrollBarVisibility="Auto" Margin="0,8,0,0" ToolTip="Read the same stored-evidence match counts and family names shown in the scope preview. This is read only; Update proposal rebuilds choices without applying them to the project."/>
-                                    <Button x:Name="MatchPanelNamesButton" Grid.Row="5" Content="Match stored names..." Click="MatchPanelNames_Click" IsEnabled="{Binding CanMatchPanelNames}"
+                                    <Button x:Name="MatchPanelNamesButton" Content="Match stored names..." Click="MatchPanelNames_Click" IsEnabled="{Binding CanMatchPanelNames}"
                                             HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="{Binding DataContext.MatchPanelNamesHint, RelativeSource={RelativeSource AncestorType={x:Type local:SuperClusterPreviewWindow}}, FallbackValue='Unavailable until a current panel proposal and selected family are ready. Update proposal, select a family and use pending panel-link choices before matching stored names.'}"/>
+                                        </StackPanel>
+                                    </ScrollViewer>
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Architecture" ToolTip="Inspect supplied domain combinations and choose which groups become separate named families, including placements by length and cysteines. Opening this tab changes only the view; Apply grouping commits split choices and Undo restores the preceding grouping."><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>
@@ -486,7 +504,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <DockPanel Grid.Row="3" Margin="0,12,0,0">
+        <DockPanel Grid.Row="3" Margin="0,8,0,0">
         <WrapPanel x:Name="PanelLinksWaitPanel" DockPanel.Dock="Top" Margin="0,0,0,6"
                    Visibility="{Binding IsWaitingForPanelLinks, Converter={StaticResource VisibleWhenTrue}}">
             <TextBlock Text="{Binding PanelLinksWaitText}" VerticalAlignment="Center" Margin="0,0,8,0"/>
