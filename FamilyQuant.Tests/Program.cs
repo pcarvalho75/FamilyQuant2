@@ -232,6 +232,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelTieListTests());
             suite.AddWithApplication(() => QuantifyScreenRunTests());
             suite.AddWithApplication(() => FamilyListWalkTests());
+            suite.AddWithApplication(() => DeckScreenTests());
             suite.AddWithApplication(() => SubclassReportFlowTests());
             suite.AddWithApplication(() => SubclassAssignmentReimportTests());
             suite.AddWithApplication(() => SubclassUnchangedMembershipTests());

@@ -63,7 +63,7 @@ internal static partial class Program
     }
 
     private static async Task<int> FamilyListWalkCoreAsync(MainWindow main, string project, string workbook, string output, string? scopeOverride, Action<string> print,
-        bool unlockAll = false)
+        bool unlockAll = false, FamilyListWalkCapture? capture = null)
     {
         string projectHash = FileFingerprint.Sha256(project), workbookHash = FileFingerprint.Sha256(workbook);
         ClusterGenerationControl? screen = null;
@@ -83,6 +83,7 @@ internal static partial class Program
             using var import = new FamilyListImportViewModel(transaction, matcher: new FamilyListStoredEvidenceMatches(file),
                 workbookSource: new FamilyListWorkbookCoreSource(), openWorkbookReview: true);
             import.PropertyChanged += (_, _) => grid.Children.Contains(screen);
+            capture?.OpenImport?.Invoke(main, import);
             await import.LoadAsync(workbook);
             var pages = new List<string>(); var notices = new HashSet<string>(StringComparer.Ordinal);
             void Once(string key, string text) { if (notices.Add(key)) print(text); }
@@ -90,6 +91,7 @@ internal static partial class Program
             {
                 string page = import.Page.ToString(CultureInfo.InvariantCulture) + ": " + import.Title;
                 if (pages.LastOrDefault() != page) { pages.Add(page); print("IMPORT PAGE " + page); }
+                if (capture?.ImportPage != null) await capture.ImportPage(main, import);
                 foreach (var family in import.MatchFamilies)
                     if (family.MissingPfam) Once("missing:" + family.Key, "IMPORT ROW " + family.Key + " (" + family.Name + "): no Pfam code");
                     else if (!family.Suggestions.Any(match => match.Use && match.Proteins > 0))
@@ -146,6 +148,7 @@ internal static partial class Program
                 var run = typeof(SuperClusterPreviewWindow).GetMethod("RunReviewAsync", BindingFlags.Instance | BindingFlags.NonPublic)!;
                 await (Task)run.Invoke(review, new object[] { "Update grouping proposal", (Func<Task>)model.UpdateProposalAsync, false })!;
                 var evidence = model.Evidence ?? throw new InvalidOperationException("Review grouping has no proposal: " + model.Status);
+                if (capture?.Review != null) await capture.Review(main, screen, review, model, session);
                 var pending = evidence.PanelLinks.Where(row => row.Source.NeedsConfirmation).OrderBy(row => row.Source.Key, StringComparer.Ordinal).ToArray();
                 print("PANEL LINKS NEEDING A CHOICE " + pending.Length.ToString(CultureInfo.InvariantCulture));
                 foreach (var row in pending) print("PANEL LINK " + row.SourceFamily + " | " + row.Architecture + " | rows: " + row.Candidates);
@@ -170,6 +173,7 @@ internal static partial class Program
                     await (Task)save.Invoke(main, new object[] { true })!;
                     saved = File.Exists(Path.Combine(output, "walked.fqproj"));
                     if (!saved) throw new IOException("The screen did not save walked.fqproj.");
+                    if (capture?.Applied != null) await capture.Applied(main, screen);
                 }
                 File.WriteAllText(Path.Combine(output, "walk.json"), JsonSerializer.Serialize(new
                 {
