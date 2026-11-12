@@ -9,15 +9,15 @@ public static partial class InstallerWindowPreview
         {
             PayloadVersion = "2.1.4.0", Existing = new(PreviewController.Folder, version, true, true)
         };
-        var older = Existing("2.1.15.0");
+        var older = Existing("2.1.16.0");
         var window = new InstallerWindow(older);
         Check(window.PageTitle.Text == "FamilyQuant is already installed"
-            && window.PageDescription.Text == "FamilyQuant 2.1.15 is already installed. This setup holds 2.1.4."
+            && window.PageDescription.Text == "FamilyQuant 2.1.16 is already installed. This setup holds 2.1.4."
             && window.PrimaryButton.Content.Equals("_Open FamilyQuant"), "older Setup shows both versions with Open as primary, never Upgrade");
         Click(window.PrimaryButton);
         Check(older.Launches == 1 && older.Installs == 0 && window.ExitCode == 0, "older Setup Open launches current app without installing");
 
-        older = Existing("2.1.15.0"); window = new InstallerWindow(older);
+        older = Existing("2.1.16.0"); window = new InstallerWindow(older);
         Click(window.ExistingActionButton);
         Check(window.PageTitle.Text == "Install this older version?" && older.Installs == 0 && older.Launches == 0,
             "older installation requires a separate confirmation");
