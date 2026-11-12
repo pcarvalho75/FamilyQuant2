@@ -216,13 +216,7 @@ Each comment on Ana's 34 slides and each request in her nine voice notes of 11-1
 
 ## Paulo's decisions
 
-| ID | Decision | Default if no answer | Needed by |
-|---|---|---|---|
-| D110 | Ledger rows dropped at Ana's request | "Try with the example", Colour categories, and the Decision column, Notes column and colour legend in the program's template. An old sheet that has them still imports | IM3 to IM5 |
-| D111 | Ties settled by how completely a protein covers each tied family's Pfam list | Yes. Only tied proteins change, and a user's choice wins | RG2 |
-| D112 | Tie choices written back into the sheet as a "UniProt family" column | Yes | RG4 |
-| D113 | BJ46a out of scope, if AP2 shows it | A row's own UniProt family brings its proteins into scope. The alternative is Ana adding a scope word such as "Metalloprotease inhibitor", which brings in every protein carrying that keyword | RG5 |
-| D114 | Names | "Use template", Ana's word, for "Save a template"; "Fetch UniProt families" for "Fetch family world" | IM2, RG8 |
+None open: D109 to D116 are taken (below). Still on Paulo's word: sending the message to Ana (AP4), the delivery into her Relatorio folder (AP5) and the website (RL3).
 
 ### Decisions in force
 
@@ -230,6 +224,11 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 
 | ID | Question | Taken |
 |---|---|---|
+| D110 | Remove "Try with the example", the colour categories, and the template Decision and Notes columns and colour legend? | Yes. Older sheets with them still import; no ledger row had to be dropped. Paulo, 11-11 ("defaults") |
+| D111 | Settle ties by how completely a protein covers each tied row's Pfam list? | Yes; only real ties are asked and a user's choice wins (on her project 16 questions became 4). Paulo, 11-11 ("defaults") |
+| D112 | Write tie choices back into the sheet as a "UniProt family" column? | Yes. Paulo, 11-11 ("defaults") |
+| D113 | A row's own UniProt family brings its proteins into scope (BJ46a and the fetuins into SVMPI)? | Yes, exactly that family's proteins. Paulo, 11-11 ("defaults") |
+| D114 | Names "Use template" and "Fetch UniProt families"? | Yes. Paulo, 11-11 ("defaults") |
 | D115 | The team? | Four Sol builders (FQDeNovo, FQImport, FQPanel, FQSimple) and FQRev (Grok) reviewing, launched 11-11 13:47 on Paulo's "im assuming you are already working on the new roadmap" |
 | D109 | One release or two? | One: 2.1.16 with every step, by early morning 11-12. Paulo, 11-11 13:50: "simplify execution as much as possible ... this should be ready by early morning" |
 | D116 | How much testing? | Lean gates: one focused test per step that changes behaviour; a screen render only for layout steps (IM8, RG1, RG6, RG7, SF2); the reviewer runs the step's own test; reviews and merges in batches (one build per lane tip, the batch's new tests only); the full suite once at RL1; the ledger refreshed only for touched rows. Paulo, 11-11 13:50: "only test when really necessary"; 13:56: "bundle reviewes and merges and dont do major tests for every step" |
