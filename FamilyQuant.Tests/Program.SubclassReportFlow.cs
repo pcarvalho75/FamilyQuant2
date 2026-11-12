@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Panels;
 using FamilyQuant.Panels.Import;
 using FamilyQuant.Report;
 using System;
@@ -19,9 +20,18 @@ internal static partial class Program
         SubclassReportFlowTests();
         Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         return failed == 0 ? 0 : 1;
+    }),
+    new("--test-subclass-assignment-reimport", 449, TestCommandPhase.Raw, a => a.Length > 0 && a[0] == "--test-subclass-assignment-reimport", (_, _) =>
+    {
+        SubclassAssignmentReimportTests();
+        Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+        return failed == 0 ? 0 : 1;
     })];
 
-    private static void SubclassReportFlowTests()
+    private static void SubclassReportFlowTests() => SubclassReportFlowProof(false);
+    private static void SubclassAssignmentReimportTests() => SubclassReportFlowProof(true);
+
+    private static void SubclassReportFlowProof(bool reimport)
     {
         EnsureApplication();
         string root = Path.Combine(Path.GetTempPath(), "subclass-report-flow", Guid.NewGuid().ToString("N")); Directory.CreateDirectory(root);
@@ -35,22 +45,51 @@ internal static partial class Program
                 SequenceIdentifier = "sp|P6400" + index + "|FIXTURE", Description = classes[index] + " synthetic protein", Sequence = sequences[index],
                 UserID = index + 1, USearchID = index + 1,
                 Evidence = new() { Accession = "P6400" + index, Reviewed = true, Family = classes[index] + " source family",
-                    FamilyAnnotation = classes[index] + " source family", Keywords = new() { "selected" },
+                    FamilyAnnotation = !reimport || index < 2 ? classes[index] + " source family" : "", Keywords = new() { "selected" },
                     Pfam = new() { new() { Accession = index < 2 ? "PF11111" : "PF22222" } } },
             }).ToList(),
             EvidenceRecipe = new() { Options = new() { ScopeTerms = new[] { "selected" } } },
         };
+        if (reimport)
+        {
+            file.MyExtendedFastaItems[4].Evidence!.Family = "";
+            file.MyExtendedFastaItems[4].Evidence!.FamilyMemberships = new() { new() { Family = classes[4] + " source family" } };
+        }
         string project = Path.Combine(root, "input.fqproj"); ProjectStore.WriteFqproj(project, file, Array.Empty<QuantRow>(), new QuantManifest());
         string workbook = Path.Combine(root, "families.xlsx"); PanelImportTemplate.Write(workbook);
         FillTemplate(workbook, new[] { (Key: "A", Name: "First parent family", Domain: "PF11111"), (Key: "B", Name: "Second parent family", Domain: "PF22222") }
             .Select(value => PanelImportTemplate.Columns.Select(column => column.Role switch
             { PanelImportFields.FamilyKey => value.Key, PanelImportFields.DisplayName => value.Name, PanelImportFields.Pfam => value.Domain, _ => "" }).ToArray()).ToArray());
+        if (reimport)
+        {
+            string grouped = Path.Combine(root, "already-grouped");
+            int groupedExit = FamilyListWalkCommand(new[] { "--family-list-walk", project, workbook, grouped });
+            Check("SF5b starts with the same families already grouped and no subclass definitions", groupedExit == 0
+                && File.Exists(Path.Combine(grouped, "walked.fqproj"))
+                && ProjectStore.ReadFqproj(Path.Combine(grouped, "walked.fqproj")).fcf.FamilyPanel!.Families.All(family => family.Subclasses.Count == 0));
+            if (groupedExit != 0) return;
+            var prior = ProjectStore.ReadFqproj(Path.Combine(grouped, "walked.fqproj"));
+            var priorModel = new CurationViewModel(prior.fcf);
+            priorModel.UnlockFamilies(prior.fcf.LockedUserIds.ToArray());
+            project = Path.Combine(root, "already-grouped-unlocked.fqproj");
+            ProjectStore.WriteFqproj(project, prior.fcf, prior.quant, prior.manifest);
+        }
         FillSubclassTemplate(workbook, classes.Select((name, index) => new[] { index < 2 ? "A" : "B", name, name + " source family", "", "" }).ToArray());
         string walk = Path.Combine(root, "walk");
         int walked = FamilyListWalkCommand(new[] { "--family-list-walk", project, workbook, walk });
         Check("SF5 synthetic IM9 workbook imports and applies two families with two and three subclasses", walked == 0
             && File.Exists(Path.Combine(walk, "walked.fqproj")));
         if (walked != 0 || !File.Exists(Path.Combine(walk, "walked.fqproj"))) return;
+        if (reimport)
+        {
+            var assigned = ProjectStore.ReadFqproj(Path.Combine(walk, "walked.fqproj")).fcf;
+            Check("SF5b Apply grouping recomputes subclasses from canonical family and membership names", SubclassAssignment.IsCurrent(assigned)
+                && assigned.ProteinSubclassLabels!.Count(label => label.Status == ProteinSubclassStatus.Assigned) == 5);
+            var parent = assigned.FamilyPanel!.Families.Single(family => family.Key == "B");
+            Check("SF5b conflicting canonical names and partial names stay unresolved",
+                SubclassAssignment.ClassifyDirect(parent, new() { Family = classes[2] + " source family", Subfamily = classes[3] + " source family" }).Status == ProteinSubclassStatus.Unknown
+                && SubclassAssignment.ClassifyDirect(parent, new() { Family = classes[2] + " source" }).Status == ProteinSubclassStatus.Unknown);
+        }
         string raw = Path.Combine(root, "raw"), source = Path.Combine(root, "source"), cache = Path.Combine(root, "cache");
         Directory.CreateDirectory(raw); Directory.CreateDirectory(source); Directory.CreateDirectory(cache);
         string acquisition = Path.Combine(raw, "run01.raw"); File.WriteAllText(acquisition, "Synthetic validated-cache placeholder, never an acquisition.");
@@ -80,6 +119,8 @@ internal static partial class Program
         var stored = result.manifest.FamilySubclassParts?.Families.SelectMany(family => family.Parts).ToArray() ?? Array.Empty<FamilySignalPart>();
         Check("SF5 computed subclass labels are stored with positive signal", result.fcf.FamilyPanel!.Families.Select(family => family.Subclasses.Count).Order().SequenceEqual(new[] { 2, 3 })
             && classes.All(name => stored.Any(part => part.Label == name && part.Signal > 0)));
+        if (reimport) Check("SF5b subclass allocation preserves all quantified rows and total credited signal", result.quant.Count == 5
+            && result.manifest.FamilySubclassParts!.Families.Sum(family => family.FamilySignal) == 185);
         string report = Path.Combine(root, "report.docx");
         var export = ReportProjectExporter.Build(result.quant, result.manifest, result.fcf, Path.Combine(root, "figures"));
         ReportProjectExporter.WriteHtml(export, report);

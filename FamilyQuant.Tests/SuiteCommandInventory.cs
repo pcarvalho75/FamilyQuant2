@@ -54,6 +54,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-quantify-screen-run", "FamilyQuant.Tests.Program.QuantifyScreenRunTests()"),
         SuiteCommandRule.Covered("--test-family-list-walk", "FamilyQuant.Tests.Program.FamilyListWalkTests()"),
         SuiteCommandRule.Covered("--test-subclass-report-flow", "FamilyQuant.Tests.Program.SubclassReportFlowTests()"),
+        SuiteCommandRule.Covered("--test-subclass-assignment-reimport", "FamilyQuant.Tests.Program.SubclassAssignmentReimportTests()"),
         SuiteCommandRule.Excluded("--family-list-walk", "Desk-only screen-path import and grouping walk over explicit project/workbook paths; --test-family-list-walk proves successful save and pending-choice refusal on synthetic inputs."),
         SuiteCommandRule.Covered("--test-panel-tie-list-fresh-import", "FamilyQuant.Tests.Program.PanelTieListFreshImportTests()"),
         SuiteCommandRule.Excluded("--quantify-screen-run", "Desk-only Quantify screen execution over explicit compute.json paths; --test-quantify-screen-run proves the real view model and worker engine with synthetic caches and a missing source run."),

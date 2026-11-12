@@ -230,7 +230,7 @@ public static partial class SubclassAssignment
         s.RequiredPfam.Count > 0 || s.AbsentPfam.Count > 0 || s.UniProtSubfamilies.Any(t => !string.IsNullOrWhiteSpace(t)));
 
     private static string SourceFingerprint(FamilyClusterFile file, EvidenceClassificationOptions options, string panelFingerprint) =>
-        HashJson(new { Algorithm = "Panel subclass assignment v1", NearestReviewed.Method, NearestReviewed.QueryCoverageMethod, NearestReviewed.ReferenceTieMethod,
+        HashJson(new { Algorithm = "Panel subclass assignment v2", NearestReviewed.Method, NearestReviewed.QueryCoverageMethod, NearestReviewed.ReferenceTieMethod,
             Panel = panelFingerprint, Proteins = EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems),
             file.PanelProteinAssignments, file.PanelProteinAssignmentsFingerprint, Options = options,
             ReferencePanel = file.EvidenceSource?.ReferencePanel });

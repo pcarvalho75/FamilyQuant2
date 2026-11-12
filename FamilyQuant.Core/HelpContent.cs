@@ -235,7 +235,7 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine("Use template includes an optional Subclasses sheet: copy a Family key from Families and write one Subclass per row.");
             sb.AppendLine("Each header has a one-line note on Instructions. A subclass matches an exact UniProt family or subfamily name");
-            sb.AppendLine("in the protein's stored hierarchy, or all required Pfam domains with none of the absent domains. Keep the full");
+            sb.AppendLine("from its stored family fields or hierarchy, or all required Pfam domains with none of the absent domains. Keep the full");
             sb.AppendLine("UniProt name, including family or subfamily. Absence needs a complete protein with domain evidence; missing or");
             sb.AppendLine("conflicting support stays Unknown. Review and accept imported subclasses before they become project rules.");
             sb.AppendLine();

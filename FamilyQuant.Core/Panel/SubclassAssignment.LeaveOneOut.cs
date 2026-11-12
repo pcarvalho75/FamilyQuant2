@@ -85,7 +85,7 @@ public static partial class SubclassAssignment
                 || baselineRows[assignment.ProteinIndex].PanelFamilyKey == null) continue;
             string? familyKey = FamilyPanelValidation.ResolveFamilyKey(panel, assignment.PanelFamilyKey);
             if (familyKey == null) continue;
-            var textOnly = new ProteinEvidence { Subfamily = evidence.Subfamily, FamilyAnnotation = evidence.FamilyAnnotation,
+            var textOnly = new ProteinEvidence { Family = evidence.Family, Subfamily = evidence.Subfamily, FamilyAnnotation = evidence.FamilyAnnotation,
                 FamilyMemberships = evidence.FamilyMemberships };
             var expected = ClassifyDirect(families[familyKey], textOnly);
             if (expected.Status == ProteinSubclassStatus.Assigned && expected.SubclassKey != null)
