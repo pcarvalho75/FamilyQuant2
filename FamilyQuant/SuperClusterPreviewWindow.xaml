@@ -16,7 +16,7 @@
                       ToolTip="{Binding SelectionHelp}" ToolTipService.ShowOnDisabled="True"/>
         </DataTemplate>
     </Window.Resources>
-    <Grid Margin="16">
+    <Grid x:Name="ReviewRootGrid" Margin="16">
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
         <DockPanel Margin="0,0,0,12">
             <CheckBox x:Name="ShowAllOptionsCheckBox" DockPanel.Dock="Right" Content="Show all options" VerticalAlignment="Center" Margin="12,0,0,0"
@@ -87,10 +87,10 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Evidence" IsEnabled="{Binding EvidenceAvailable}" ToolTip="Reviews supplied evidence assignments, reasons and flags, and is also available from Group by keywords. Its first opening reads UniProt over the internet through Read database and scope when counts are missing; only Apply grouping changes the project, with Undo available.">
-                <Grid Margin="8">
+                <Grid x:Name="EvidenceLayout" Margin="8">
                     <!-- The title and the Scope row stay outside the scroll area, so the tables' minimum height can never hide them (2.1.13). -->
                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition x:Name="ScopeDetailsRow" Height="2*" MaxHeight="200"/><RowDefinition x:Name="ReviewTablesRow" Height="3*" MinHeight="390"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                    <StackPanel Margin="0,0,0,8">
+                    <StackPanel x:Name="ReviewScopeHeader" Margin="0,0,0,8">
                     <DockPanel Visibility="{Binding TaskDiscoveryAvailable, Converter={StaticResource VisibleWhenTrue}}" Margin="0,0,0,8">
                         <Button DockPanel.Dock="Right" Content="Read database and scope" Click="DiscoverTask_Click" IsEnabled="{Binding CanDiscoverTask}" ToolTip="Read database taxonomy and reviewed keyword counts using UniProt, then suggest scope without changing the open project. Disabled while a review operation is running; wait for it to finish and review the scope before Update proposal."/>
                         <TextBlock Text="Database and scope" Style="{StaticResource SectionTitle}" VerticalAlignment="Center"/>
@@ -228,7 +228,7 @@
                                Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,8,0,0" TextWrapping="Wrap"/>
                     </StackPanel>
                     </ScrollViewer>
-                    <Grid Grid.Row="2">
+                    <Grid x:Name="ReviewTablesGrid" Grid.Row="2">
                         <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                         <Grid.ColumnDefinitions><ColumnDefinition x:Name="FamilyTableColumn" Width="2*" MinWidth="440"/><ColumnDefinition Width="10"/><ColumnDefinition Width="3*" MinWidth="280"/></Grid.ColumnDefinitions>
                         <TextBlock x:Name="familyTickLegend" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,6,0,0" FontSize="11"
@@ -280,7 +280,7 @@
                                         <Button x:Name="addFamilyButton" Content="Add to family" Click="AddManualFamily_Click" IsEnabled="{Binding DataContext.CanEditManual, RelativeSource={RelativeSource AncestorType=Window}}" ToolTip="Open hand placement for highlighted proteins in a proposed or new family; the project changes only on Apply grouping, with Undo available. Disabled without an editable current evidence proposal; Update proposal after scope edits and wait for active operations to finish."/>
                                         <Button x:Name="removeFamilyButton" Content="Remove from family" Click="RemoveManualFamily_Click" IsEnabled="{Binding DataContext.CanEditManual, RelativeSource={RelativeSource AncestorType=Window}}" ToolTip="Clear hand-added choices for highlighted proteins and restore their automatic proposals; the project changes only on Apply grouping, with Undo available. Disabled without an editable current evidence proposal; Update proposal after scope edits and wait for active operations to finish."/>
                                     </WrapPanel>
-                                    <Grid>
+                                    <Grid x:Name="ProteinLayout">
                                     <Grid.RowDefinitions><RowDefinition x:Name="ProteinTableRow" Height="2*" MinHeight="120"/><RowDefinition Height="8"/><RowDefinition x:Name="ProteinDetailsRow" Height="Auto"/></Grid.RowDefinitions>
                                     <DataGrid x:Name="evidenceGrid" ItemsSource="{Binding VisibleProteins}" SelectedItem="{Binding SelectedProtein, Mode=TwoWay}" AutoGenerateColumns="False" CanUserAddRows="False"
                                               CanUserDeleteRows="False" SelectionMode="Extended" ToolTip="Inspect the supplied family, reason, evidence source, reviewed relative and flags, or highlight rows for review actions. Ticks remain choices until Apply grouping, after which Undo restores the preceding grouping.">
@@ -313,7 +313,7 @@
                                                   ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="{DynamicResource EdgeBrush}"
                                                   Focusable="True" ToolTip="Drag, or focus and use the arrow keys, to resize the protein table and full details pane. Only the view changes."/>
                                     <DockPanel Grid.Row="2">
-                                        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,4">
+                                        <DockPanel x:Name="ProteinDetailsHeader" DockPanel.Dock="Top" Margin="0,0,0,4">
                                             <StackPanel DockPanel.Dock="Right" Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
                                             <Button x:Name="profileMembersButton" Content="Show members" IsEnabled="{Binding CanShowProfileMembers}"
                                                     Visibility="{Binding CanShowProfileMembers, Converter={StaticResource VisibleWhenTrue}}"
@@ -324,7 +324,7 @@
                                         </DockPanel>
                                         <TextBox x:Name="proteinDetails" Text="{Binding ProteinDetails, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True"
                                                  MinLines="3" MaxLines="10" VerticalContentAlignment="Top"
-                                                 TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" ToolTip="Read the selected protein's full evidence, scope match and tick consequence; the pane grows to ten lines, then scrolls. Selecting and copying text changes no ticks, assignments or files."/>
+                                                 TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" ToolTip="Read the selected protein's full evidence, scope match and tick consequence; the pane grows up to ten lines as space allows, then scrolls. Selecting and copying text changes no ticks, assignments or files."/>
                                     </DockPanel>
                                     </Grid>
                                 </DockPanel>
@@ -341,8 +341,8 @@
                                     <DataGrid x:Name="panelLinksGrid" ItemsSource="{Binding VisiblePanelLinks}" AutoGenerateColumns="False"
                                               CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" ToolTip="Inspect supplied link evidence and edit the candidate choice or optional note. These are review choices until Use link choices rebuilds the proposal and Apply grouping commits it, after which Undo restores the preceding grouping.">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Source family" Binding="{Binding SourceFamily}" IsReadOnly="True" Width="180" theme:TableAppearance.HeaderToolTip="Stored source-family context of the proposed panel link, or Domain combination when no source family is supplied."/>
-                                            <DataGridTemplateColumn Header="User choice" Width="200" SortMemberPath="Source.NeedsConfirmation" CanUserSort="True" theme:TableAppearance.HeaderToolTip="Chosen evidence-derived panel candidate or Leave outside panel, initially the confirmed or sole candidate when available. Use link choices stages the resulting proposal before Apply grouping changes the project.">
+                                            <DataGridTextColumn Header="Source family" Binding="{Binding SourceFamily}" IsReadOnly="True" Width="120" theme:TableAppearance.HeaderToolTip="Stored source-family context of the proposed panel link, or Domain combination when no source family is supplied."/>
+                                            <DataGridTemplateColumn Header="User choice" Width="170" SortMemberPath="Source.NeedsConfirmation" CanUserSort="True" theme:TableAppearance.HeaderToolTip="Chosen evidence-derived panel candidate or Leave outside panel, initially the confirmed or sole candidate when available. Use link choices stages the resulting proposal before Apply grouping changes the project.">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <ComboBox ItemsSource="{Binding Options}" DisplayMemberPath="DisplayName"
@@ -350,9 +350,9 @@
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
-                                            <DataGridTextColumn Header="Example protein" Binding="{Binding ExampleProtein}" IsReadOnly="True" Width="250" theme:TableAppearance.HeaderToolTip="One supporting protein found in the open database, preferring reviewed evidence and then more stored annotation fields, with accession breaking equal evidence ties. This example changes no proposed link."/>
-                                            <DataGridTextColumn Header="Example UniProt family" Binding="{Binding ExampleUniProtFamily}" IsReadOnly="True" Width="200" theme:TableAppearance.HeaderToolTip="The example protein's stored UniProt family memberships, or Not recorded when absent. Reading them changes no link choice or project data."/>
-                                            <DataGridTextColumn Header="Status" Binding="{Binding State}" IsReadOnly="True" Width="180" theme:TableAppearance.HeaderToolTip="Whether the link is confirmed, has one supported candidate, needs an explicit choice, has pending edits or needs a valid note. This is the supplied link and review-edit state."/>
+                                            <DataGridTextColumn Header="Status" Binding="{Binding State}" IsReadOnly="True" Width="100" theme:TableAppearance.HeaderToolTip="Whether the link is confirmed, has one supported candidate, needs an explicit choice, has pending edits or needs a valid note. This is the supplied link and review-edit state."/>
+                                            <DataGridTextColumn Header="Example protein" Binding="{Binding ExampleProtein}" IsReadOnly="True" Width="160" theme:TableAppearance.HeaderToolTip="One supporting protein found in the open database, preferring reviewed evidence and then more stored annotation fields, with accession breaking equal evidence ties. This example changes no proposed link."/>
+                                            <DataGridTextColumn Header="Example UniProt family" Binding="{Binding ExampleUniProtFamily}" IsReadOnly="True" Width="160" theme:TableAppearance.HeaderToolTip="The example protein's stored UniProt family memberships, or Not recorded when absent. Reading them changes no link choice or project data."/>
                                             <DataGridTextColumn Header="Domain combination" Binding="{Binding Architecture}" IsReadOnly="True" Width="180" theme:TableAppearance.HeaderToolTip="Observed domain context supplied for the link, or any observed combination when no specific context is required. Domain order is not inferred."/>
                                             <DataGridTextColumn Header="Candidate families" Binding="{Binding Candidates}" IsReadOnly="True" Width="180" theme:TableAppearance.HeaderToolTip="Panel families offered by the evidence-derived candidate list. The review does not invent additional candidates from names."/>
                                             <DataGridTextColumn Header="Reviewed accessions" Binding="{Binding SupportingAccessions}" IsReadOnly="True" Width="200" theme:TableAppearance.HeaderToolTip="Reviewed accessions supplied as support for the source-to-panel link. These are evidence identifiers rather than a confidence percentage."/>
@@ -478,7 +478,7 @@
                             </TabItem>
                         </TabControl>
                     </Grid>
-                    <DockPanel Grid.Row="3" Margin="0,10,0,0" Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
+                    <DockPanel x:Name="MotifRow" Grid.Row="3" Margin="0,10,0,0" Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
                         <Button DockPanel.Dock="Right" Content="Check motif" Click="Motif_Click" IsEnabled="{Binding CanCheckMotif}" ToolTip="Counts the entered motif across complete proposed family members, including unticked members, and keeps the checked pattern for Apply grouping. Disabled without a proposal or a pattern or during an operation; update the proposal, enter a pattern and wait to enable it; Check motif then reports a pattern it cannot use."/>
                         <TextBlock x:Name="MotifLabel" DockPanel.Dock="Left" Text="Motif (optional)" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox Text="{Binding MotifPattern, UpdateSourceTrigger=PropertyChanged}" ToolTip="Amino-acid regular expression, optionally prefixed with not, or a count expression such as count C &gt;= 8; default empty skips the check, with no numeric range for the pattern. Check motif validates it before Apply grouping retains the choice, after which Undo restores the preceding grouping."/>

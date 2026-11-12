@@ -49,6 +49,7 @@ namespace FamilyQuant
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
             InitializeAdvancedTabGuides();
+            LayoutUpdated += (_, _) => ConstrainReviewLayout();
             AppOperationHost.SetScope(this, Operations);
             BusyOverlay.AttachWindow(this, Operations);
             model.Keyword.Refreshing += (_, _) => sorts = grid.Items.SortDescriptions.ToList();
@@ -101,7 +102,7 @@ namespace FamilyQuant
             ProteinTableRow.Height = new GridLength(full ? 2 : 1, GridUnitType.Star);
             ProteinTableRow.MinHeight = 120;
             ProteinDetailsRow.Height = GridLength.Auto;
-            ReviewTablesRow.MinHeight = full ? 470 : 390;
+            ConstrainReviewLayout();
             OpenFamilyChecklistButton.Visibility = hasFamilyList || model.Evidence?.HasPanelRules == true ? Visibility.Visible : Visibility.Collapsed;
             UpdateApplyToolTip();
         }

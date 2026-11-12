@@ -302,7 +302,7 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine("Group by evidence opens the Evidence tab of Review grouping. Confirm the scope,");
             sb.AppendLine("then review the families, flags, protein ticks and Selected protein details in Simple view.");
-            sb.AppendLine("Selected protein details wraps and grows up to ten lines; longer text has a scrollbar.");
+            sb.AppendLine("Selected protein details grows up to ten lines as space allows, then scrolls so the scope and motif controls stay visible.");
             sb.AppendLine("Align selected counts the selected proteins and reviewed references included in its heading. References are");
             sb.AppendLine("stored nearest reviewed proteins and family representatives from the database or reference panel; alignment ticks change only the comparison.");
             sb.AppendLine("Show all options opens Keywords, all evidence tabs, full protein columns and extra tools;");
