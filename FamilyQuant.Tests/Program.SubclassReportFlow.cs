@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Evidence;
 using FamilyQuant.Panels;
 using FamilyQuant.Panels.Import;
 using FamilyQuant.Report;
@@ -31,12 +32,14 @@ internal static partial class Program
     private static void SubclassReportFlowTests() => SubclassReportFlowProof(false);
     private static void SubclassAssignmentReimportTests() => SubclassReportFlowProof(true);
 
-    private static void SubclassReportFlowProof(bool reimport)
+    private static void SubclassReportFlowProof(bool reimport, bool keepUnchangedLocks = false)
     {
         EnsureApplication();
         string root = Path.Combine(Path.GetTempPath(), "subclass-report-flow", Guid.NewGuid().ToString("N")); Directory.CreateDirectory(root);
         string[] classes = { "First class", "Second class", "Third class", "Fourth class", "Fifth class" };
         string[] sequences = { "ACDEFGHIK", "LMNPQRSTK", "WYACDEFGK", "HIKLMNPQK", "RSTVWYAAK" };
+        var retainedIds = new Dictionary<string, int>(StringComparer.Ordinal);
+        FamilyClusterFile? lockedSource = null;
         var file = new FamilyClusterFile
         {
             ReportThreshold = .9,
@@ -45,7 +48,8 @@ internal static partial class Program
                 SequenceIdentifier = "sp|P6400" + index + "|FIXTURE", Description = classes[index] + " synthetic protein", Sequence = sequences[index],
                 UserID = index + 1, USearchID = index + 1,
                 Evidence = new() { Accession = "P6400" + index, Reviewed = true, Family = classes[index] + " source family",
-                    FamilyAnnotation = !reimport || index < 2 ? classes[index] + " source family" : "", Keywords = new() { "selected" },
+                    FamilyAnnotation = !reimport || index < 2 ? classes[index] + " source family" : "",
+                    Keywords = keepUnchangedLocks && index == 1 ? new() : new() { "selected" },
                     Pfam = new() { new() { Accession = index < 2 ? "PF11111" : "PF22222" } } },
             }).ToList(),
             EvidenceRecipe = new() { Options = new() { ScopeTerms = new[] { "selected" } } },
@@ -57,7 +61,8 @@ internal static partial class Program
         }
         string project = Path.Combine(root, "input.fqproj"); ProjectStore.WriteFqproj(project, file, Array.Empty<QuantRow>(), new QuantManifest());
         string workbook = Path.Combine(root, "families.xlsx"); PanelImportTemplate.Write(workbook);
-        FillTemplate(workbook, new[] { (Key: "A", Name: "First parent family", Domain: "PF11111"), (Key: "B", Name: "Second parent family", Domain: "PF22222") }
+        FillTemplate(workbook, new[] { (Key: "A", Name: keepUnchangedLocks ? "Previous first parent" : "First parent family", Domain: "PF11111"),
+            (Key: "B", Name: keepUnchangedLocks ? "Previous second parent" : "Second parent family", Domain: "PF22222") }
             .Select(value => PanelImportTemplate.Columns.Select(column => column.Role switch
             { PanelImportFields.FamilyKey => value.Key, PanelImportFields.DisplayName => value.Name, PanelImportFields.Pfam => value.Domain, _ => "" }).ToArray()).ToArray());
         if (reimport)
@@ -70,9 +75,27 @@ internal static partial class Program
             if (groupedExit != 0) return;
             var prior = ProjectStore.ReadFqproj(Path.Combine(grouped, "walked.fqproj"));
             var priorModel = new CurationViewModel(prior.fcf);
-            priorModel.UnlockFamilies(prior.fcf.LockedUserIds.ToArray());
+            if (keepUnchangedLocks)
+            {
+                foreach (var protein in prior.fcf.MyExtendedFastaItems.Skip(2)) retainedIds.Add(protein.SequenceIdentifier, protein.UserID);
+                Check("SF5c starts with the unchanged row mapped and locked", retainedIds.Values.Distinct().Count() == 1
+                    && retainedIds.Values.All(prior.fcf.LockedUserIds.Contains)
+                    && PanelAssignmentEvidenceStore.Current(prior.fcf)!.Count(row => row.IsApplied && row.PanelFamilyKey == "B") == 3);
+                lockedSource = prior.fcf.DeepCopy();
+            }
+            else priorModel.UnlockFamilies(prior.fcf.LockedUserIds.ToArray());
             project = Path.Combine(root, "already-grouped-unlocked.fqproj");
             ProjectStore.WriteFqproj(project, prior.fcf, prior.quant, prior.manifest);
+        }
+        if (keepUnchangedLocks)
+        {
+            PanelImportTemplate.Write(workbook);
+            FillTemplate(workbook, new[] { (Key: "A", Name: "First parent family", Domain: "PF11111"), (Key: "B", Name: "Second parent family", Domain: "PF22222") }
+                .Select(value => PanelImportTemplate.Columns.Select(column => column.Role switch
+                {
+                    PanelImportFields.FamilyKey => value.Key, PanelImportFields.DisplayName => value.Name, PanelImportFields.Pfam => value.Domain,
+                    PanelImportFields.UniProtFamilies when value.Key == "A" => string.Join("; ", classes.Take(2).Select(name => name + " source family")), _ => "",
+                }).ToArray()).ToArray());
         }
         FillSubclassTemplate(workbook, classes.Select((name, index) => new[] { index < 2 ? "A" : "B", name, name + " source family", "", "" }).ToArray());
         string walk = Path.Combine(root, "walk");
@@ -86,6 +109,26 @@ internal static partial class Program
             Check("SF5b Apply grouping recomputes subclasses from canonical family and membership names", SubclassAssignment.IsCurrent(assigned)
                 && assigned.ProteinSubclassLabels!.Count(label => label.Status == ProteinSubclassStatus.Assigned) == 5);
             var parent = assigned.FamilyPanel!.Families.Single(family => family.Key == "B");
+            if (keepUnchangedLocks)
+            {
+                Check("SF5c unchanged locked members keep their IDs and receive the imported row name and subclasses", parent.UniProtFamilies.Count == 0
+                    && assigned.MyExtendedFastaItems.Skip(2).All(protein => protein.UserID == retainedIds[protein.SequenceIdentifier]
+                        && assigned.LockedUserIds.Contains(protein.UserID) && protein.UserAnnotation == "Second parent family")
+                    && PanelAssignmentEvidenceStore.Current(assigned)!.Count(row => row.IsApplied && row.PanelFamilyKey == "B") == 3,
+                    "Names: " + string.Join(", ", assigned.MyExtendedFastaItems.Skip(2).Select(protein => protein.UserAnnotation).Distinct()));
+                Check("SF5c metadata refresh stays separate from new user selections", assigned.EvidenceRecipe!.SelectedProteinIndices.Count == 1
+                    && assigned.EvidenceRecipe.Assignments.Count == 1 && assigned.EvidenceRecipe.RetainedPanelAssignments?.Count == 4);
+                lockedSource!.FamilyPanel = FamilyPanelValidation.Clone(assigned.FamilyPanel);
+                string beforeReplay = lockedSource.ToJsonText();
+                var replay = EvidenceApply.ApplyRecipe(lockedSource, assigned.EvidenceRecipe);
+                Check("SF5c saved recipe replays unchanged-family rules and names exactly", lockedSource.ToJsonText() == assigned.ToJsonText());
+                replay.Undo!.Restore(lockedSource);
+                Check("SF5c one Undo restores prior names locks and assignment provenance", lockedSource.ToJsonText() == beforeReplay);
+                var tampered = JsonSerializer.Deserialize<EvidenceRecipe>(JsonSerializer.Serialize(assigned.EvidenceRecipe))!;
+                tampered.RetainedPanelAssignments![0].FamilyId++;
+                Check("SF5c replay refuses a retained membership edit without a partial change", Throws<InvalidOperationException>(() => EvidenceApply.ApplyRecipe(lockedSource, tampered))
+                    && lockedSource.ToJsonText() == beforeReplay);
+            }
             Check("SF5b conflicting canonical names and partial names stay unresolved",
                 SubclassAssignment.ClassifyDirect(parent, new() { Family = classes[2] + " source family", Subfamily = classes[3] + " source family" }).Status == ProteinSubclassStatus.Unknown
                 && SubclassAssignment.ClassifyDirect(parent, new() { Family = classes[2] + " source" }).Status == ProteinSubclassStatus.Unknown);
@@ -125,6 +168,10 @@ internal static partial class Program
         var export = ReportProjectExporter.Build(result.quant, result.manifest, result.fcf, Path.Combine(root, "figures"));
         ReportProjectExporter.WriteHtml(export, report);
         var payload = ReadHtmlPayload(HtmlReportWriter.PathForReport(report));
+        if (keepUnchangedLocks)
+            Check("SF5c exported HTML uses the imported name for the unchanged family", payload.CoverageCatalog!.Families
+                .Any(family => family.Name.EndsWith(" - Second parent family", StringComparison.Ordinal))
+                && payload.CoverageCatalog.Families.All(family => !family.Name.Contains("Previous second parent", StringComparison.Ordinal)));
         string[] htmlLabels = payload.Composition.Families.SelectMany(family => family.Parts)
             .Concat(payload.CoverageCatalog?.Families.SelectMany(family => family.Parts) ?? Array.Empty<HtmlFamilyPart>()).Where(part => part.Kind == "Subclass")
             .Select(part => payload.Fields[part.Name].Text).ToArray();

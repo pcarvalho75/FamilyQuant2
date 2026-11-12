@@ -329,6 +329,9 @@ namespace FamilyQuant
             sb.AppendLine("Those proteins enter that row even without matching scope words. Rows sharing its");
             sb.AppendLine("domains without a family name take the other supported proteins under the existing");
             sb.AppendLine("scope rules. A neighbour cannot supply membership of a named UniProt family.");
+            sb.AppendLine("After re-importing a list, Apply grouping also refreshes names and subclass rules");
+            sb.AppendLine("for already grouped, locked members whose evidence still supports the same panel");
+            sb.AppendLine("row. Their family numbers and locks stay unchanged; Undo restores the prior state.");
             sb.AppendLine("If the project has no stored UniProt evidence, Download and continue runs Fetch evidence");
             sb.AppendLine("before opening the review; Cancel leaves the project unchanged. If no reviewed accession");
             sb.AppendLine("is counted, no scope can be suggested: fetch evidence first, or type a scope.");

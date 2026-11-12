@@ -260,6 +260,7 @@ namespace FamilyQuant.Evidence
                 SourceConfirmedMatchesFingerprint = file.FamilyPanel?.ConfirmedEvidenceMatches != null || familyPanel?.ConfirmedEvidenceMatches != null
                     ? Hash(file.FamilyPanel?.ConfirmedEvidenceMatches) : null,
                 PanelContext = proposal.PanelContext == null ? null : Clone(proposal.PanelContext),
+                RetainedPanelAssignments = RetainPanelAssignments(file, proposal, familyNames, existingFamilies),
             };
             recipe.FamilyIdentities = ProjectFamilyIdentities(file, recipe);
             foreach (var family in assignments.Where(a => !familyNames.ContainsKey(a.Family)).GroupBy(a => a.Family, StringComparer.Ordinal))
@@ -267,9 +268,10 @@ namespace FamilyQuant.Evidence
             if (proposal.PanelContext != null)
             {
                 recipe.PanelProteinAssignmentsPanelFingerprint = Panels.PanelDerivedDataCurrentness.FamilyFingerprint(familyPanel!);
-                recipe.PanelProteinAssignments = PanelAssignmentEvidenceStore.Stage(proposal, assignments);
+                var panelAssignments = assignments.Concat(recipe.RetainedPanelAssignments ?? Enumerable.Empty<EvidenceAssignment>()).ToArray();
+                recipe.PanelProteinAssignments = PanelAssignmentEvidenceStore.Stage(proposal, panelAssignments);
                 recipe.PanelProteinAssignmentsFingerprint = PanelAssignmentEvidenceStore.Fingerprint(file,
-                    recipe.PanelProteinAssignments, recipe, SessionSource(file, recipe.SessionSearch), assignments);
+                    recipe.PanelProteinAssignments, recipe, SessionSource(file, recipe.SessionSearch), panelAssignments);
             }
             if (initialState != StateFingerprint(file) || initialMotifs != Hash(file.Motifs)
                 || Hash(file.FamilyPanel) != initialPanel)
@@ -352,6 +354,8 @@ namespace FamilyQuant.Evidence
                     protein.UserAnnotation = assignment.Name;
                     file.LockedUserIds.Add(assignment.FamilyId);
                 }
+                foreach (var retained in stored.RetainedPanelAssignments ?? Enumerable.Empty<EvidenceAssignment>())
+                    file.MyExtendedFastaItems[retained.ProteinIndex].UserAnnotation = retained.Name;
                 file.EvidenceSource = source;
                 file.Motifs = motifs;
                 file.EvidenceRecipe = stored;
@@ -378,7 +382,7 @@ namespace FamilyQuant.Evidence
             var locks = new HashSet<int>(file.LockedUserIds);
             if (assignments != null)
             {
-                foreach (EvidenceAssignment assignment in assignments)
+                foreach (EvidenceAssignment assignment in assignments.Concat(session?.RetainedPanelAssignments ?? Enumerable.Empty<EvidenceAssignment>()))
                 {
                     FastaItemExtended source = rows[assignment.ProteinIndex];
                     rows[assignment.ProteinIndex] = new FastaItemExtended
@@ -403,6 +407,7 @@ namespace FamilyQuant.Evidence
             }) : curation;
             if (session?.ConfirmedTask != null) state = Hash(new { State = state, session.ConfirmedTask });
             if (session?.FamilyIdentities != null) state = Hash(new { State = state, session.FamilyIdentities });
+            if (session?.RetainedPanelAssignments != null) state = Hash(new { State = state, session.RetainedPanelAssignments });
             if (session?.SourceConfirmedMatchesFingerprint != null) state = Hash(new { State = state, session.FamilyPanel?.ConfirmedEvidenceMatches });
             return session?.FamilyPanel == null ? state : Hash(new
             {
