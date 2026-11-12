@@ -86,7 +86,7 @@ internal static partial class Program
         var labels = labelsProperty?.GetValue(chart) as IReadOnlyList<string>;
         Check("gap chart has its own three-source legend", labels != null && labels.SequenceEqual(new[]
         {
-            "Identified", "De novo in database", "De novo only in family world"
+            "Identified", "De novo in database", "De novo only in UniProt families"
         }));
         var pngMethod = typeof(FamilySignalOriginChart).GetMethod("RenderReportPng", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
         byte[]? reportPng = pngMethod?.Invoke(null, new object[] { model.ChartRows }) as byte[];
