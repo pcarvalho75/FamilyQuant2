@@ -434,7 +434,13 @@
                                             </DataGridTextColumn>
                                         </DataGrid.Columns>
                                     </DataGrid>
-                                    <ScrollViewer x:Name="ChecklistToolsScroller" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                                    <Grid Grid.Row="2">
+                                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition>
+                                            <ColumnDefinition.Style><Style TargetType="ColumnDefinition"><Setter Property="Width" Value="0"/>
+                                                <Style.Triggers><DataTrigger Binding="{Binding HasScopeChangePreview}" Value="True"><Setter Property="Width" Value="*"/></DataTrigger></Style.Triggers>
+                                            </Style></ColumnDefinition.Style>
+                                        </ColumnDefinition></Grid.ColumnDefinitions>
+                                    <ScrollViewer x:Name="ChecklistToolsScroller" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
                                                   ToolTip="Read complete reasons and scroll to scope and matching actions for the selected family. Scrolling changes only the view; the actions keep their existing project and Undo behaviour.">
                                         <StackPanel>
                                     <TextBox x:Name="PanelChecklistDetail" Text="{Binding Evidence.ChecklistDetail, Mode=OneWay}" IsReadOnly="True"
@@ -446,13 +452,14 @@
                                         <Button x:Name="ChecklistPlaceHandButton" Content="Place outside matches by hand..." Click="PlaceChecklistMatches_Click" IsEnabled="{Binding CanPlaceChecklistMatches}"
                                                 ToolTip="Opens a confirmation for adding this panel family's outside matches by hand, with the project changed only on Apply grouping and restored by Undo. Choose an included panel family with outside matches, update the proposal and unlock matching proteins to enable it."/>
                                     </WrapPanel>
-                                    <TextBox x:Name="ChecklistScopePreview" Text="{Binding ChecklistScopePreviewText, Mode=OneWay}" IsReadOnly="True"
-                                             Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}" TextWrapping="Wrap" MinHeight="48" MaxHeight="88"
-                                             VerticalScrollBarVisibility="Auto" Margin="0,8,0,0" ToolTip="Read the same stored-evidence match counts and family names shown in the scope preview. This is read only; Update proposal rebuilds choices without applying them to the project."/>
                                     <Button x:Name="MatchPanelNamesButton" Content="Match stored names..." Click="MatchPanelNames_Click" IsEnabled="{Binding CanMatchPanelNames}"
                                             HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="{Binding DataContext.MatchPanelNamesHint, RelativeSource={RelativeSource AncestorType={x:Type local:SuperClusterPreviewWindow}}, FallbackValue='Unavailable until a current panel proposal and selected family are ready. Update proposal, select a family and use pending panel-link choices before matching stored names.'}"/>
                                         </StackPanel>
                                     </ScrollViewer>
+                                    <TextBox x:Name="ChecklistScopePreview" Grid.Column="1" Text="{Binding ChecklistScopePreviewText, Mode=OneWay}" IsReadOnly="True"
+                                             Visibility="{Binding HasScopeChangePreview, Converter={StaticResource VisibleWhenTrue}}" TextWrapping="Wrap" Height="48" VerticalAlignment="Top"
+                                             VerticalScrollBarVisibility="Auto" Margin="8,0,0,0" ToolTip="Read the same stored-evidence match counts and family names shown in the scope preview. This is read only; Update proposal rebuilds choices without applying them to the project."/>
+                                    </Grid>
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Architecture" ToolTip="Inspect supplied domain combinations and choose which groups become separate named families, including placements by length and cysteines. Opening this tab changes only the view; Apply grouping commits split choices and Undo restores the preceding grouping."><local:ArchitectureReviewControl x:Name="architectureReview" DataContext="{Binding Evidence.SelectedArchitecture}"/></TabItem>

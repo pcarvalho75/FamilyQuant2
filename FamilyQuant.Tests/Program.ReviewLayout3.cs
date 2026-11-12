@@ -120,6 +120,7 @@ internal static partial class Program
         }
         finally { Themes.ThemeManager.Apply(previous); }
         Check("RG-layout3 changes no proposal data", before == JsonSerializer.Serialize(input));
+        ReviewChecklistPreviewLayoutTests(output);
     }
 
     private static bool ReviewLayout3Visible(FrameworkElement element, Window window)
