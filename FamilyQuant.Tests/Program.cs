@@ -93,6 +93,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ReviewDestinationTests(Path.Combine(workDir, "review-destinations")));
             suite.AddWithApplication(() => ReviewDetailsHeightTests(Path.Combine(workDir, "review-details-height")));
             suite.AddWithApplication(() => ReviewAlignmentHeadingTests());
+            suite.Add(() => ReviewChecklistOutcomeTests());
             suite.Add(() => ReviewNamedDestinationTests());
             suite.Add(() => ImportSubclassTemplateTests(Path.Combine(workDir, "import-subclass-template")));
             suite.AddWithApplication(() => ReviewTabGuideTests());
@@ -347,6 +348,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ImportDirectPfamTests());
             suite.AddWithApplication(() => ImportSaveHandoffTests());
             suite.AddWithApplication(() => ImportConditionalPageTests());
+            suite.Add(() => PanelVisibleLinkTests());
             suite.Add(() => PanelImportExampleTests(Path.Combine(workDir, "panel-import-example")));
             suite.Add(() => PanelWorkbookMapTests(Path.Combine(workDir, "panel-workbook-map")));
             suite.AddWithApplication(() => PanelWorkbookNotesTests());

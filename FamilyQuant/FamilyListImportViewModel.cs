@@ -99,7 +99,7 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     public string CloseLabel => Imported ? "Close" : "Cancel";
     public bool CanBack => !IsBusy && page > 1 && !reviewingWorkbook;
     public string BackToolTip => reviewingWorkbook ? "Use a section's Review button to change its proposal; Cancel leaves the project unchanged."
-        : reviewingSubclasses ? "Returns to Review your workbook and keeps your subclass draft choices; nothing changes in the project until Accept and import."
+        : reviewingSubclasses ? "Returns to Summary and keeps your subclass draft choices; nothing changes in the project until Accept and import."
         : !CanBack ? IsBusy ? "Wait for the current step to finish before returning; Cancel stops it without importing."
         : "This is the first step; choose Next to continue, or Cancel to leave without changes."
         : "Returns to the previous step and keeps your choices; going Back does not change the project or repeat an import.";

@@ -52,6 +52,7 @@ internal static partial class Program
     {
         Section("Z12p5f6 slow suggestion copies keep the wizard responsive and cancellation atomic");
         EnsureApplication();
+        using var dialogs = new ImportFixtureDialogs();
         string work = Path.Combine(Path.GetTempPath(), "fq-import-preparation-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(work); string workbook = Path.Combine(work, "example.xlsx"); ExampleFamilyList.Write(workbook);
         var previousTheme = Themes.ThemeManager.Current;

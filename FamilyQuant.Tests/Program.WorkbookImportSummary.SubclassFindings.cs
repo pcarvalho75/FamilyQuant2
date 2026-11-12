@@ -159,6 +159,7 @@ internal static partial class Program
 
     private static void WorkbookSubclassFindingUiTests(string root)
     {
+        using var dialogs = new ImportFixtureDialogs();
         string path = Path.Combine(root, "subclass-finding-ui.xlsx"); WriteSubclassFindingWorkbook(path);
         string hash = TestFileHash.Upper(path);
         var previous = Themes.ThemeManager.Current;
@@ -178,7 +179,7 @@ internal static partial class Program
                 try
                 {
                     window.Show(); model.ConfirmWorkbookSheetChange = _ => true;
-                    FinishReviewWork(() => model.LoadAsync(path));
+                    FinishReviewWork(() => model.LoadAsync(path)); model.ReturnToWorkbookReview();
                     FinishReviewWork(() => model.SelectWorkbookFamilySheetAsync("Data 9"));
                     // Model the explicit column choice independently of header inference.
                     model.Columns.Single(column => column.Role == WorkbookImportSummaryFields.Subclasses).Header = "h13";

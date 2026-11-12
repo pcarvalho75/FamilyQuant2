@@ -128,6 +128,9 @@ internal static partial class Program
 
     private static void FillTemplate(string path, string[][] rows)
     {
+        if (rows.Any(row => row.Length == 6) && new PanelSpreadsheetReader().ReadTable(path, "Families", 1).Headers
+            .SequenceEqual(PanelImportTemplate.Columns.Select(column => column.Header)))
+            SetImportHeaders(path, new[] { "Abbreviation", "Name", "Other-language name", "Notes", "Pfam domains", "Decision" });
         using var document = SpreadsheetDocument.Open(path, true);
         var workbook = document.WorkbookPart!;
         var part = (WorksheetPart)workbook.GetPartById(workbook.Workbook!.Sheets!.Elements<Sheet>().Single(s => s.Name == PanelImportTemplate.FamilySheet).Id!);

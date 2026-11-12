@@ -66,6 +66,7 @@ internal static partial class Program
 
     private static void FamilyListImportRankedMatchTests(string? output)
     {
+        using var dialogs = new ImportFixtureDialogs();
         var file = RankedEvidenceFile();
         var panel = FamilyPanelValidation.Clone(file.FamilyPanel!);
         foreach (var family in panel.Families)
@@ -106,7 +107,7 @@ internal static partial class Program
         string workbook = Path.Combine(work, "synthetic-ranking.xlsx");
         PanelImportTemplate.Write(workbook);
         FillTemplate(workbook, panel.Families.Select(family => new[]
-            { family.Key, family.DisplayName, "Shared catalogue tag", "", "", "Quantify" }).ToArray());
+            { family.Key, family.DisplayName, "Shared catalogue tag", "", "Unresolved domain", "Quantify" }).ToArray());
         var previousTheme = Themes.ThemeManager.Current;
         try
         {

@@ -8,6 +8,7 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-review-checklist-outcomes", "FamilyQuant.Tests.Program.ReviewChecklistOutcomeTests()"),
         SuiteCommandRule.Covered("--test-review-named-destinations", "FamilyQuant.Tests.Program.ReviewNamedDestinationTests()"),
         SuiteCommandRule.Covered("--test-import-subclass-template", "FamilyQuant.Tests.Program.ImportSubclassTemplateTests(System.String)"),
         SuiteCommandRule.Covered("--test-review-tab-guides", "FamilyQuant.Tests.Program.ReviewTabGuideTests()"),
@@ -17,6 +18,9 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-review-checklist-states", "FamilyQuant.Tests.Program.ReviewChecklistStateTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-link-examples", "FamilyQuant.Tests.Program.PanelLinkExampleTests()"),
         SuiteCommandRule.Covered("--test-review-apply-wait", "FamilyQuant.Tests.Program.ReviewApplyWaitTests(System.String)"),
+        SuiteCommandRule.Covered("--test-panel-visible-links", "FamilyQuant.Tests.Program.PanelVisibleLinkTests()"),
+        SuiteCommandRule.Covered("--test-import-conditional-pages", "FamilyQuant.Tests.Program.ImportConditionalPageTests(System.String)"),
+        SuiteCommandRule.Covered("--test-import-save-handoff", "FamilyQuant.Tests.Program.ImportSaveHandoffTests()"),
         SuiteCommandRule.Covered("--test-import-pfam-direct", "FamilyQuant.Tests.Program.ImportDirectPfamTests()"),
         SuiteCommandRule.Covered("--test-import-decision-pages", "FamilyQuant.Tests.Program.ImportDecisionPageTests()"),
         SuiteCommandRule.Covered("--test-import-entry-actions", "FamilyQuant.Tests.Program.ImportEntryActionTests()"),
@@ -29,8 +33,6 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-family-counter-filters", "FamilyQuant.Tests.Program.FamilyCounterFilterTests()"),
         SuiteCommandRule.Covered("--test-panel-coverage-ties", "FamilyQuant.Tests.Program.PanelCoverageTieTests(System.String)"),
         SuiteCommandRule.Excluded("--panel-tie-counts", "Read-only desk aggregate over a selected project. Prints only tie counts and counts per imported family row; synthetic proof is PanelCoverageTieTests in DefaultSuite."),
-        SuiteCommandRule.Covered("--test-import-conditional-pages", "FamilyQuant.Tests.Program.ImportConditionalPageTests(System.String)"),
-        SuiteCommandRule.Covered("--test-import-save-handoff", "FamilyQuant.Tests.Program.ImportSaveHandoffTests()"),
         SuiteCommandRule.Covered("--test-ledger-synthetic-mode", "FamilyQuant.Tests.Program.FeatureLedgerReceiptGuardTests(System.Boolean)"),
         SuiteCommandRule.Covered("--test-html-family-native", "FamilyQuant.Tests.Program.HtmlFamilyNativeTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-sensitivity-native", "FamilyQuant.Tests.Program.HtmlSensitivityNativeTests(System.String)"),

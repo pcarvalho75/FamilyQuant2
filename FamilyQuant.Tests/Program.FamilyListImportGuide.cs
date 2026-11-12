@@ -33,35 +33,33 @@ internal static partial class Program
         string text = FamilyListImportGuide.Text();
         Check("the guide uses the current import and checklist names", FamilyListImportGuide.Title == "Import family list"
             && !text.Contains("Import family panel", StringComparison.Ordinal) && !text.Contains("Panel checklist", StringComparison.Ordinal));
-        Check("the guide describes optional source categories and explicit default decisions", text.Contains("Colour categories (optional) opens by itself", StringComparison.Ordinal)
-            && text.Contains("Next asks once", StringComparison.Ordinal) && text.Contains(FamilyListImportHelp.DecisionsSummary, StringComparison.Ordinal));
-        Check("the guide retains the Done prerequisites and matching boundary", text.Contains(FamilyListImportHelp.DoneNext, StringComparison.Ordinal)
+        Check("the guide explains direct defaults and conditional choices", text.Contains("three pages", StringComparison.Ordinal)
+            && text.Contains("Without a Decision column, every family is quantified", StringComparison.Ordinal)
+            && !text.Contains("Colour categories (optional)", StringComparison.Ordinal) && text.Contains(FamilyListImportHelp.DecisionsSummary, StringComparison.Ordinal));
+        Check("the guide retains grouping prerequisites and the matching boundary", text.Contains(FamilyListImportHelp.DoneNext, StringComparison.Ordinal)
             && text.Contains(FamilyListImportHelp.MatchingEffect, StringComparison.Ordinal));
-        Check("one part for each of the seven wizard pages, in order", Enumerable.Range(1, 7).All(n => sections.Any(s => s.Title.StartsWith(n + ".", StringComparison.Ordinal)))
-            && sections.Where(s => char.IsDigit(s.Title[0])).Select(s => s.Title[0]).SequenceEqual(sections.Where(s => char.IsDigit(s.Title[0])).Select(s => s.Title[0]).OrderBy(c => c)));
-        Check("the Columns page has its decision review and Special rows its repeated abbreviation", sections.Any(s => s.Key == "decisions") && sections.Any(s => s.Key == "duplicate"));
-        // Z16a8 (W21, D81): a workbook with several sheets, read at once, with nothing set before her one press.
-        Check("the chapter covers a workbook with several sheets: Review your workbook, the map, colours, subclasses and the one press",
-            new[] { "workbook", "file", "preview", "colours", "subclasses", "accept" }.All(key => sections.Any(s => s.Key == key))
-            && text.Contains("it accepts everything the page shows, exactly as shown", StringComparison.Ordinal)
-            && text.Contains("that press is your confirmation, and nothing is set before it", StringComparison.Ordinal)
-            && text.Contains("it never guesses", StringComparison.Ordinal) && text.Contains("never by their names", StringComparison.Ordinal));
-        Check("the chapter keeps every workbook proposal her choice: legend meanings, her Pfam domains, subclass rules, notes",
-            text.Contains("each line is still your choice", StringComparison.Ordinal) && text.Contains("the action is left empty for you to choose", StringComparison.Ordinal)
-            && text.Contains("because they are your own statement", StringComparison.Ordinal) && text.Contains("Untick any you do not want", StringComparison.Ordinal)
-            && text.Contains("Nothing becomes a rule until you press Accept and import", StringComparison.Ordinal)
-            // Z16a12: polarity from the column headings, and her check of each rule still asked for.
-            && text.Contains("suggest whether a domain is required or absent", StringComparison.Ordinal)
-            && text.Contains("A polarity read only from a heading is an uncertain proposal", StringComparison.Ordinal)
-            && text.Contains("Still check each rule before accepting", StringComparison.Ordinal) && text.Contains("never read as families or as rules", StringComparison.Ordinal));
+        Check("the normal pages are numbered once in order", sections.Where(section => char.IsDigit(section.Title[0]))
+            .Select(section => section.Title[0]).SequenceEqual(new[] { '1', '2', '3' }));
+        Check("optional decisions, repeated rows, subclass proposals and findings remain documented",
+            new[] { "decisions", "duplicate", "special", "matches", "subclasses", "workbook", "accept" }.All(key => sections.Any(section => section.Key == key)));
+        Check("the guide explains direct PF codes, missing codes and explicit unresolved choices",
+            text.Contains("They do not ask for a second confirmation", StringComparison.Ordinal)
+            && text.Contains("gets no proteins until it has one", StringComparison.Ordinal)
+            && text.Contains("Continue without matches skips unresolved questions", StringComparison.Ordinal));
+        Check("source notes and publication boundaries remain explicit", text.Contains("Every original column stays source text", StringComparison.Ordinal)
+            && text.Contains("original field for a family", StringComparison.Ordinal) && text.Contains("one panel edit", StringComparison.Ordinal)
+            && text.Contains("Undo in the main window restores the previous panel", StringComparison.Ordinal)
+            && text.Contains("No grouping or quantitation runs", StringComparison.Ordinal));
         var pictured = FamilyListImportGuide.Pictured.ToList();
         var loaded = pictured.Select(s =>
         {
             try { var image = new BitmapImage(FamilyListImportGuide.ImageUri(s)); return (Section: s, image.PixelWidth, image.PixelHeight); }
             catch (Exception ex) when (ex is IOException or NotSupportedException) { return (Section: s, PixelWidth: 0, PixelHeight: 0); }
         }).ToList();
-        Check("every wizard page has its picture inside the program, at 1366 x 768", pictured.Count == 14
-            && loaded.All(p => p.PixelWidth == 1366 && p.PixelHeight == 768), string.Join(", ", loaded.Where(p => p.PixelWidth != 1366).Select(p => p.Section.Image)));
+        Check("the normal pages carry current 1366 x 820 native pictures and the unchanged subclass picture remains",
+            pictured.Count == 4 && new[] { "file", "columns", "summary" }.All(key => pictured.Any(section => section.Key == key))
+            && loaded.All(p => p.PixelWidth == 1366 && p.PixelHeight == (p.Section.Key == "subclasses" ? 768 : 820)),
+            string.Join(", ", loaded.Select(p => p.Section.Key + "=" + p.PixelWidth + "x" + p.PixelHeight)));
         Check("embedded guide pictures match the current native source captures", pictured.All(section =>
         {
             using var stream = Application.GetResourceStream(FamilyListImportGuide.ImageUri(section))?.Stream;
@@ -70,30 +68,13 @@ internal static partial class Program
         }));
         string[] labels =
         {
-            "Try with the example", "Save a template", "Edit current panel", "Browse", "Read this header row", "Cell details",
-            "Confirm these actions", "Back to columns", "Review decision values", "Quantify", "Report under others", "Not a family", "Merge into family",
-            "Original source row", "Use this row as", "Use this choice", "Needs a choice", "Keep as one family", "One family per name",
-            "One group reported under others", "Keep or rename this row", "Skip this row", "Skipped", "Use selected matches", "Skip this family",
-            "Continue without matches", "Kept from previous panel", "View source notes", "Import", "Family checklist", "Undo import", "Close",
-            "Use this decision column", "Match stored names", "Apply grouping", "Apply panel", "Review spreadsheet decisions",
-            "Colour categories (optional)", "Colour", "Group by evidence", "Read database and scope", "Update proposal", "Place outside matches by hand",
-            "Import family list",
-            // Z16a8 (Z16a3): the workbook map and the legend meanings.
-            "Workbook sheets", "Use as", "Kept as", "Why this role", "Review role", "Proposed", "Family list", "Colour legend", "Subclass table", "Notes",
-            "Use selected family sheet", "Read kept notes", "Kept notes preview", "Kept as source notes", "Sheet preview", "Source notes", "Meaning from legend",
-            "Use as (proposed)", "Merge into abbreviation", "Source colour", "Source rows", "Category name",
-            // Z16a8 (Z16a4): her Pfam domains on Evidence matches.
-            "Pfam domain", "from your sheet",
-            // Z16a8 (Z16a9, Z16a5): Review your workbook, its parts and the subclass review.
-            "Review your workbook", "Accept and import", "Review findings", "Back to workbook review", "Review workbook", "Family list and columns",
-            "Source categories", "Decision labels", "Family rows", "Pfam and evidence matches", "Subclass proposals", "All findings", "Could not place",
-            "Families", "Special rows", "Subclasses", "Review subclass proposals", "Include subclass", "Include rule", "Leave out", "Required Pfam",
-            "Absent Pfam", "Check choices", "Keep subclass choices", "Family key", "Subclass key", "Display name", "Pfam rules", "Column with coloured cells",
-            // Z16a8b (Z16a9c, Z16a9d, Z16a12b): the code-final subclass review.
-            "Not selected", "Uncertain proposal", "Proposal explanation", "Original rule cells",
+            "Use template", "Edit current panel", "Browse", "Read this header row", "Cell details", "Confirm these actions",
+            "Quantify", "Report under others", "Not a family", "Merge into family", "Use selected matches", "Skip this family",
+            "Continue without matches", "View source notes", "Accept and import", "Source details", "Include subclass", "Include rule",
+            "Required Pfam", "Absent Pfam", "Check choices", "Keep subclass choices",
         };
-        Check("the chapter names the wizard's controls and choices with the program's own words", labels.All(text.Contains) && text.Contains("File > Save", StringComparison.Ordinal),
-            string.Join(", ", labels.Where(l => !text.Contains(l))));
+        Check("the chapter uses the live controls' names and keeps the saving instruction", labels.All(text.Contains)
+            && text.Contains("File > Save", StringComparison.Ordinal), string.Join(", ", labels.Where(label => !text.Contains(label))));
         // Z12p2c1: each of those words is still a label of the program, a string of its own sources, so a renamed control fails here.
         string repository = GoldenNumbers.FindRepository();
         string program = string.Concat(new[] { "FamilyListImportWindow.xaml", "FamilyListImportViewModel.cs", "FamilyListImportViewModel.Rows.cs",
@@ -104,18 +85,14 @@ internal static partial class Program
         Check("every control the chapter names is a label in the program's sources", labels.All(l => program.Contains("\"" + l + "\"", StringComparison.Ordinal)
             || program.Contains("\"" + l + "...\"", StringComparison.Ordinal)),
             string.Join(", ", labels.Where(l => !program.Contains("\"" + l + "\"", StringComparison.Ordinal) && !program.Contains("\"" + l + "...\"", StringComparison.Ordinal))));
-        Check("the chapter quotes the wizard's own lines: decisions, the Quantify question and the Done page",
+        Check("the chapter keeps the next-step and matching boundary in the program's own words",
             text.Contains(FamilyListImportHelp.DecisionsSummary, StringComparison.Ordinal) && text.Contains(FamilyListImportHelp.DoneNext, StringComparison.Ordinal)
             && text.Contains(FamilyListImportHelp.MatchingEffect, StringComparison.Ordinal)
-            // The chapter's own sentences around the Done lines assume this wording (Z12p5g, 7b2cfc75): the read starts by
-            // itself, and proteins move only after a scope change or a hand placement plus Apply grouping.
             && FamilyListImportHelp.DoneNext.Contains("reads the database and scope by itself", StringComparison.Ordinal)
-            && FamilyListImportHelp.MatchingEffect.Contains("place them by hand, then Apply grouping", StringComparison.Ordinal)
-            && program.Contains("Quantify every family for this import?", StringComparison.Ordinal) && text.Contains("Quantify every family for this import?", StringComparison.Ordinal)
-            && program.Contains("\"Could \" + DecisionHint + \" hold the family actions?\"", StringComparison.Ordinal) && text.Contains("hold the family actions?", StringComparison.Ordinal));
-        Check("the chapter says there is no conditional action and that the program's own labels are confirmed at once",
-            text.Contains("There is no conditional action", StringComparison.Ordinal) && text.Contains("is confirmed at once", StringComparison.Ordinal)
-            && text.Contains("named for you with its plain name", StringComparison.Ordinal) && text.Contains("never hold up Next", StringComparison.Ordinal));
+            && FamilyListImportHelp.MatchingEffect.Contains("place them by hand, then Apply grouping", StringComparison.Ordinal));
+        Check("the chapter explains exact program labels and does not retain the removed Quantify prompt",
+            text.Contains("Exact program action names are accepted directly", StringComparison.Ordinal)
+            && !text.Contains("Quantify every family for this import?", StringComparison.Ordinal));
         Check("both later routes for saving matches are there, with and without grouping proteins",
             text.Contains("Apply grouping and File > Save keep the choices made in that review", StringComparison.Ordinal)
             && text.Contains("press Edit current panel, select the family, use Match stored names, then Apply panel and File > Save", StringComparison.Ordinal));
