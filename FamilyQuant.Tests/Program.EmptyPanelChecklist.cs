@@ -41,7 +41,7 @@ internal static partial class Program
                     var model = (GroupingReviewViewModel)window.DataContext; model.ScopeText = "Action alpha";
                     FinishReviewWork(model.UpdateProposalAsync); PumpDispatcher();
                     Check("Z12p5g " + theme + " explicit proposal replaces the empty instruction with the checklist count definition", updates == 1
-                        && model.Evidence!.PanelChecklist.Count > 0 && hint.Text.StartsWith("Matches are database targets", StringComparison.Ordinal) && file.ToJsonText() == before);
+                        && model.Evidence!.PanelChecklist.Count > 0 && hint.Text == "Your list: 1 families, 0 with proteins, 0 waiting for a choice in Panel links, 1 with no Pfam code, 0 matching no database protein, 0 with no protein in the scope, 0 with proteins in another row, 0 with no proteins placed." && file.ToJsonText() == before);
                 }
                 finally { window.Close(); PumpDispatcher(); }
             }

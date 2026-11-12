@@ -39,6 +39,13 @@ internal static partial class Program
                     && ReferenceEquals(panel.Children[0], line) && line!.IsVisible && line.Text == text
                     && DockPanel.GetDock(line) == Dock.Top && text.EndsWith(".", StringComparison.Ordinal)
                     && GroupingReviewHelp.ForMode(true, true).Contains(text, StringComparison.Ordinal));
+                if ((string)tab.Header == "Panel links")
+                {
+                    var links = (DataGrid)window.FindName("panelLinksGrid");
+                    Check("Panel links choices, status and both examples fit the first viewport", links.Columns.Take(5).Select(column => (string)column.Header)
+                        .SequenceEqual(new[] { "Source family", "User choice", "Status", "Example protein", "Example UniProt family" })
+                        && links.Columns.Take(5).Sum(column => column.ActualWidth) <= links.ActualWidth - 16);
+                }
             }
             Check("RG9 every revealed tab has a guide without moving actions or changing choices", tabs.Length == GroupingReviewHelp.AdvancedTabGuides.Count
                 && controls.All(pair => pair.Value != null && ReferenceEquals(pair.Value, window.FindName(pair.Key)))
