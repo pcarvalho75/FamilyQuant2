@@ -16,9 +16,12 @@ public partial class SuperClusterPreviewWindow
             - EvidenceLayout.TranslatePoint(new Point(), ReviewModeTabs).Y - EvidenceLayout.Margin.Bottom - 2);
         if (Math.Abs(EvidenceLayout.MaxHeight - height) > .5) EvidenceLayout.MaxHeight = height;
         double available = Math.Max(0, height - ReviewScopeHeader.ActualHeight - ReviewScopeHeader.Margin.Top - ReviewScopeHeader.Margin.Bottom
-            - (ShowAllOptions ? MotifRow.ActualHeight + MotifRow.Margin.Top + MotifRow.Margin.Bottom : 0));
+            - (ShowAllOptions ? ScopeStatusPanel.ActualHeight + ScopeStatusPanel.Margin.Top + ScopeStatusPanel.Margin.Bottom
+                + MotifRow.ActualHeight + MotifRow.Margin.Top + MotifRow.Margin.Bottom : 0));
         double minimum = Math.Min(ShowAllOptions ? 470 : 390, Math.Max(0, available - (ShowAllOptions ? Math.Min(48, available / 5) : 0)));
         if (Math.Abs(ReviewTablesRow.MinHeight - minimum) > .5) ReviewTablesRow.MinHeight = minimum;
+        double scopeMaximum = Math.Min(200, Math.Max(0, available - minimum));
+        if (Math.Abs(ScopeDetailsRow.MaxHeight - scopeMaximum) > .5) ScopeDetailsRow.MaxHeight = scopeMaximum;
         ConstrainReviewTables();
     }
 
@@ -35,13 +38,15 @@ public partial class SuperClusterPreviewWindow
                 if (Math.Abs(ChecklistLayout.MaxHeight - checklistHeight) > .5) ChecklistLayout.MaxHeight = checklistHeight;
                 double checklistRoom = Math.Max(0, checklistHeight - PanelChecklistHintText.ActualHeight
                     - PanelChecklistHintText.Margin.Top - PanelChecklistHintText.Margin.Bottom);
-                double checklistMinimum = Math.Min(110, checklistRoom * .55);
+                double checklistMinimum = Math.Min(218, Math.Max(0, checklistRoom - 40));
                 if (Math.Abs(ChecklistTableRow.MinHeight - checklistMinimum) > .5) ChecklistTableRow.MinHeight = checklistMinimum;
                 double toolsMaximum = Math.Max(0, checklistRoom - checklistMinimum);
                 if (Math.Abs(ChecklistToolsScroller.MaxHeight - toolsMaximum) > .5) ChecklistToolsScroller.MaxHeight = toolsMaximum;
             }
         }
         if (!ProteinLayout.IsVisible) return;
+        double toolsHeight = ShowAllOptions ? Math.Max(40, LayoutInformation.GetLayoutSlot(ProteinReviewPanel).Height - 196) : double.PositiveInfinity;
+        if (ProteinToolsScroller.MaxHeight != toolsHeight) ProteinToolsScroller.MaxHeight = toolsHeight;
         double proteinHeight = LayoutInformation.GetLayoutSlot(ProteinLayout).Height;
         if (proteinHeight <= 0) return;
         if (Math.Abs(ProteinLayout.MaxHeight - proteinHeight) > .5) ProteinLayout.MaxHeight = proteinHeight;
@@ -52,7 +57,7 @@ public partial class SuperClusterPreviewWindow
             double top = row.TranslatePoint(new Point(), evidenceGrid).Y;
             if (top >= 0) simpleProteinMinimum = Math.Max(296, top + 8 * row.ActualHeight + 2);
         }
-        double tableMinimum = ShowAllOptions ? Math.Min(120, room * .6) : Math.Min(simpleProteinMinimum, Math.Max(0, room - 75));
+        double tableMinimum = ShowAllOptions ? Math.Min(120, Math.Max(0, room - 30)) : Math.Min(simpleProteinMinimum, Math.Max(0, room - 75));
         if (Math.Abs(ProteinTableRow.MinHeight - tableMinimum) > .5) ProteinTableRow.MinHeight = tableMinimum;
         double detailsMaximum = Math.Max(0, room - tableMinimum);
         if (Math.Abs(proteinDetails.MaxHeight - detailsMaximum) > .5) proteinDetails.MaxHeight = detailsMaximum;

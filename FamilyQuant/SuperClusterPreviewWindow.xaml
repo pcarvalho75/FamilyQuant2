@@ -92,7 +92,7 @@
             <TabItem Header="Evidence" IsEnabled="{Binding EvidenceAvailable}" ToolTip="Reviews supplied evidence assignments, reasons and flags, and is also available from Group by keywords. Its first opening reads UniProt over the internet through Read database and scope when counts are missing; only Apply grouping changes the project, with Undo available.">
                 <Grid x:Name="EvidenceLayout" Margin="8">
                     <!-- The title and the Scope row stay outside the scroll area, so the tables' minimum height can never hide them (2.1.13). -->
-                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition x:Name="ScopeDetailsRow" Height="2*" MaxHeight="200"/><RowDefinition x:Name="ReviewTablesRow" Height="3*" MinHeight="390"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition x:Name="ScopeDetailsRow" Height="Auto" MaxHeight="200"/><RowDefinition Height="Auto"/><RowDefinition x:Name="ReviewTablesRow" Height="*" MinHeight="390"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                     <StackPanel x:Name="ReviewScopeHeader" Margin="0,0,0,8">
                     <TextBlock Text="Database and scope" Margin="0,0,0,4">
                         <TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource SectionTitle}"><Setter Property="Visibility" Value="Collapsed"/>
@@ -117,6 +117,19 @@
                                 Visibility="{Binding HasPanelRules, Converter={StaticResource VisibleWhenTrue}}" ToolTip="{x:Static local:EvidenceReviewViewModel.DestinationHelp}">
                         <Expander x:Name="ProteinDestinationsExpander" Header="{Binding DestinationSummaryText}" IsExpanded="False"
                                   ToolTip="Show how target proteins in the current proposal reach your list, their sequence families or stay outside scope. Opening this explanation changes only the view; locked or unticked proteins keep their current family.">
+                            <Expander.Template>
+                                <ControlTemplate TargetType="Expander">
+                                    <StackPanel>
+                                        <ToggleButton Content="{TemplateBinding Header}" HorizontalContentAlignment="Left"
+                                                      IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                      ToolTip="{TemplateBinding ToolTip}"/>
+                                        <ContentPresenter x:Name="DestinationExplanation" Visibility="Collapsed" ContentSource="Content"/>
+                                    </StackPanel>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsExpanded" Value="True"><Setter TargetName="DestinationExplanation" Property="Visibility" Value="Visible"/></Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Expander.Template>
                             <StackPanel Margin="16,4,0,0">
                         <TextBlock Text="{Binding ListDestinationText}" TextWrapping="Wrap"/>
                         <TextBlock Text="{Binding SequenceDestinationText}" TextWrapping="Wrap" Margin="0,2,0,0"/>
@@ -233,15 +246,18 @@
                             <TextBlock Text="{Binding ScopePreviewRelativeNote}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,6,0,0"/>
                         </StackPanel>
                     </Border>
-                    <TextBlock Text="{x:Static local:EvidenceTaskScopeInput.ScopeExpansionHint}" Foreground="{DynamicResource MutedBrush}" Margin="0,6,0,0"
-                               TextTrimming="CharacterEllipsis" ToolTip="Help explains keyword and tissue matching, manual family review, and quantitation of proteins outside the proposal."/>
-                    <TextBlock Text="{Binding Status}" Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
-                               TextWrapping="NoWrap" Margin="0,8,0,0" ToolTip="{Binding Status}"/>
                     <TextBlock x:Name="TextBlockQueryCoverageRule" Text="{x:Static local:EvidenceProposalPresentation.QueryCoverageSummary}" ToolTip="{x:Static local:EvidenceProposalPresentation.QueryCoverageRule}"
                                Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,8,0,0" TextWrapping="Wrap"/>
                     </StackPanel>
                     </ScrollViewer>
-                    <Grid x:Name="ReviewTablesGrid" Grid.Row="2">
+                    <StackPanel x:Name="ScopeStatusPanel" Grid.Row="2" Margin="0,0,0,8"
+                                Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
+                    <TextBlock Text="{x:Static local:EvidenceTaskScopeInput.ScopeExpansionHint}" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,0"
+                               TextWrapping="Wrap" ToolTip="Help explains keyword and tissue matching, manual family review, and quantitation of proteins outside the proposal."/>
+                    <TextBlock Text="{Binding Status}" Foreground="{DynamicResource MutedBrush}"
+                               TextWrapping="Wrap" Margin="0,4,0,0" ToolTip="{Binding Status}"/>
+                    </StackPanel>
+                    <Grid x:Name="ReviewTablesGrid" Grid.Row="3">
                         <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                         <Grid.ColumnDefinitions><ColumnDefinition x:Name="FamilyTableColumn" Width="2*" MinWidth="440"/><ColumnDefinition Width="10"/><ColumnDefinition Width="3*" MinWidth="280"/></Grid.ColumnDefinitions>
                         <TextBlock x:Name="familyTickLegend" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,6,0,0" FontSize="11"
@@ -249,9 +265,9 @@
                                    Foreground="{DynamicResource MutedBrush}" TextTrimming="CharacterEllipsis"
                                    Text="Full tick: all eligible proteins; dash: some; empty: none. Flagged start unticked; locked stay unticked."
                                    ToolTip="Initially, proteins with a proposed family and no warning flags are ticked unless locked; full tick means every eligible protein, dash some, empty none. A family tick can include flagged proteins when you choose it; locked proteins always stay unticked."/>
-                        <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Center" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext"
+                        <GridSplitter x:Name="FamilyTableSplitter" Grid.Column="1" Width="6" HorizontalAlignment="Center" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext"
                                       Focusable="True" ToolTip="Drag, or focus and use the arrow keys, to resize the family and protein tables. Only the view changes."/>
-                        <DockPanel>
+                        <DockPanel x:Name="ProposedFamiliesPanel">
                             <Button DockPanel.Dock="Top" Content="All proteins" Click="AllEvidenceProteins_Click" HorizontalAlignment="Left" Margin="0,0,0,6" ToolTip="Show all proposal proteins instead of only the selected family's members. Only this view changes; ticks and edited family names stay as chosen."/>
                         <DataGrid x:Name="familyGrid" ItemsSource="{Binding Evidence.Families}" SelectedItem="{Binding Evidence.SelectedFamily}"
                                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" HeadersVisibility="Column" ToolTip="Choose family ticks and output names, or select a family to inspect its proteins. These are review choices until Apply grouping, after which Undo restores the preceding grouping.">
@@ -274,7 +290,10 @@
                         </DockPanel>
                         <TabControl x:Name="evidenceTabs" Grid.Column="2">
                             <TabItem Header="Proteins" ToolTip="Inspect each proposed protein's reason, evidence source, reviewed relative and warning flags, and choose its tick. Opening this tab changes only the view; Apply grouping commits ticks and Undo restores the preceding grouping.">
-                                <DockPanel DataContext="{Binding Evidence}">
+                                <DockPanel x:Name="ProteinReviewPanel" DataContext="{Binding Evidence}">
+                                    <ScrollViewer x:Name="ProteinToolsScroller" DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                                                  ToolTip="Scroll to the protein search and tick or hand-placement actions when the window is short. Scrolling changes only the view; each action keeps its existing review and Apply grouping behaviour.">
+                                    <StackPanel>
                                     <TextBlock x:Name="proteinWarningLegend" DockPanel.Dock="Top" Margin="0,0,0,6"
                                                Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}"
                                                Text="Red italic rows carry a warning flag; hover over Flags for what to check."
@@ -293,6 +312,8 @@
                                         <Button x:Name="addFamilyButton" Content="Add to family" Click="AddManualFamily_Click" IsEnabled="{Binding DataContext.CanEditManual, RelativeSource={RelativeSource AncestorType=Window}}" ToolTip="Open hand placement for highlighted proteins in a proposed or new family; the project changes only on Apply grouping, with Undo available. Disabled without an editable current evidence proposal; Update proposal after scope edits and wait for active operations to finish."/>
                                         <Button x:Name="removeFamilyButton" Content="Remove from family" Click="RemoveManualFamily_Click" IsEnabled="{Binding DataContext.CanEditManual, RelativeSource={RelativeSource AncestorType=Window}}" ToolTip="Clear hand-added choices for highlighted proteins and restore their automatic proposals; the project changes only on Apply grouping, with Undo available. Disabled without an editable current evidence proposal; Update proposal after scope edits and wait for active operations to finish."/>
                                     </WrapPanel>
+                                    </StackPanel>
+                                    </ScrollViewer>
                                     <Grid x:Name="ProteinLayout">
                                     <Grid.RowDefinitions><RowDefinition x:Name="ProteinTableRow" Height="2*" MinHeight="120"/><RowDefinition Height="8"/><RowDefinition x:Name="ProteinDetailsRow" Height="Auto"/></Grid.RowDefinitions>
                                     <DataGrid x:Name="evidenceGrid" ItemsSource="{Binding VisibleProteins}" SelectedItem="{Binding SelectedProtein, Mode=TwoWay}" AutoGenerateColumns="False" CanUserAddRows="False"
@@ -386,17 +407,22 @@
                                     <TextBlock x:Name="PanelChecklistHintText" Text="{Binding PanelChecklistHint}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,8"/>
                                     <DataGrid x:Name="PanelChecklistGrid" Grid.Row="1" ItemsSource="{Binding Evidence.PanelChecklist}"
                                               SelectedItem="{Binding Evidence.SelectedChecklistFamily, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False"
-                                              CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" SelectionMode="Single" ToolTip="Select a panel family to inspect overlapping match types and the supplied reasons for outside matches. Selection and sorting change only the view and never assign proteins automatically.">
+                                              CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" SelectionMode="Single" RowHeight="28" ToolTip="Select a panel family to inspect overlapping match types and the supplied reasons for outside matches. Selection and sorting change only the view and never assign proteins automatically.">
                                         <DataGrid.Columns>
-                                            <DataGridTemplateColumn Header="Panel family" Width="170" theme:TableAppearance.HeaderToolTip="User panel display name and stable key, with the stored contaminant-count explanation when supplied. A matching label alone never assigns a protein.">
-                                                <DataGridTemplateColumn.CellTemplate><DataTemplate><StackPanel>
-                                                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}"/>
-                                                    <TextBlock Text="{Binding Key}" Foreground="{DynamicResource MutedBrush}" FontSize="10"/>
-                                                    <TextBlock Text="{Binding ContaminantCount}" Foreground="{DynamicResource MutedBrush}" FontSize="10" ToolTip="{Binding ContaminantReason}"/>
-                                                </StackPanel></DataTemplate></DataGridTemplateColumn.CellTemplate>
+                                            <DataGridTemplateColumn Header="Panel family" Width="170" theme:TableAppearance.HeaderToolTip="User panel display name, with its full name, stable key and excluded-contaminant count on hover. Select the row to read complete match and exclusion reasons below.">
+                                                <DataGridTemplateColumn.CellTemplate><DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis">
+                                                        <TextBlock.ToolTip><StackPanel>
+                                                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap"/>
+                                                            <TextBlock Text="{Binding Key}" TextWrapping="Wrap"/>
+                                                            <TextBlock Text="{Binding ContaminantCount}"/>
+                                                            <TextBlock Text="{Binding ContaminantReason}" TextWrapping="Wrap"/>
+                                                        </StackPanel></TextBlock.ToolTip>
+                                                    </TextBlock>
+                                                </DataTemplate></DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
                                             <DataGridTextColumn Header="State" Binding="{Binding StateText}" Width="190" MinWidth="190" theme:TableAppearance.HeaderToolTip="Whether this row has proposed proteins, a pending Panel links choice, no Pfam code, no database match, no protein in scope, proteins in another row, or no placed proteins. Counts describe the current proposal; locked or unticked proteins keep their current family on Apply grouping.">
-                                                <DataGridTextColumn.ElementStyle><Style TargetType="TextBlock"><Setter Property="TextWrapping" Value="Wrap"/></Style></DataGridTextColumn.ElementStyle>
+                                                <DataGridTextColumn.ElementStyle><Style TargetType="TextBlock"><Setter Property="TextTrimming" Value="CharacterEllipsis"/><Setter Property="ToolTip" Value="{Binding StateText}"/></Style></DataGridTextColumn.ElementStyle>
                                             </DataGridTextColumn>
                                             <DataGridTextColumn Header="Matches" Binding="{Binding Matches, StringFormat=N0}" Width="65" theme:TableAppearance.HeaderToolTip="Distinct target database entries matching this panel family by its supported match types. Different match types may overlap."/>
                                             <DataGridTextColumn Header="Reviewed" Binding="{Binding Reviewed, StringFormat=N0}" Width="75" theme:TableAppearance.HeaderToolTip="Matching database targets marked reviewed in stored evidence. These are part of Matches rather than an additional population."/>
@@ -496,7 +522,7 @@
                             </TabItem>
                         </TabControl>
                     </Grid>
-                    <DockPanel x:Name="MotifRow" Grid.Row="3" Margin="0,10,0,0" Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
+                    <DockPanel x:Name="MotifRow" Grid.Row="4" Margin="0,10,0,0" Visibility="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhenTrue}}">
                         <Button DockPanel.Dock="Right" Content="Check motif" Click="Motif_Click" IsEnabled="{Binding CanCheckMotif}" ToolTip="Counts the entered motif across complete proposed family members, including unticked members, and keeps the checked pattern for Apply grouping. Disabled without a proposal or a pattern or during an operation; update the proposal, enter a pattern and wait to enable it; Check motif then reports a pattern it cannot use."/>
                         <TextBlock x:Name="MotifLabel" DockPanel.Dock="Left" Text="Motif (optional)" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox Text="{Binding MotifPattern, UpdateSourceTrigger=PropertyChanged}" ToolTip="Amino-acid regular expression, optionally prefixed with not, or a count expression such as count C &gt;= 8; default empty skips the check, with no numeric range for the pattern. Check motif validates it before Apply grouping retains the choice, after which Undo restores the preceding grouping."/>

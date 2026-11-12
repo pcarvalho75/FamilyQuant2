@@ -103,7 +103,7 @@ internal static partial class Program
                             .Single(s => s.Content is StackPanel panel && panel.Children.OfType<Expander>().Any());
                         var layout = (Grid)scopeScroll.Parent;
                         int scopeRow = Grid.GetRow(scopeScroll);  // 2.1.13: a fixed title and Scope row sit above it
-                        var top = layout.RowDefinitions[scopeRow]; var review = layout.RowDefinitions[scopeRow + 1];
+                        var top = layout.RowDefinitions[scopeRow]; var review = (RowDefinition)window.FindName("ReviewTablesRow");
                         var topHeight = top.Height; double topMax = top.MaxHeight, reviewMin = review.MinHeight;
                         try
                         {
