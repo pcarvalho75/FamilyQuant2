@@ -159,6 +159,7 @@ Ana, slide 26: "fiquei confusa sobre como agir em relação a cada uma das diver
 | SF2 | The text under "Scope words found: yes" is no longer cut off (slide 27): the details panel wraps | L | 0.3 |  | RL1 | Screen renders at 1366x820 and 1024x768; reviewed | SM | FQSimple | 0 | 0 |  |
 | SF3 | The alignment says what it aligns (slide 28: 2 selected, 9 shown). Find why. Then either align the selection only, or title it "2 selected and 7 reviewed references" | L | 0.4 |  | RL1 | Test; reviewed | SM | FQSimple | 0 | 0 |  |
 | SF4 | The Families count names what is hidden (slide 4: "19,948 visible · 40,407 in file"). It becomes "19,948 shown; 20,459 decoy and contaminant families hidden (View)" | L | 0.2 |  | RL1 | Screen render; reviewed | PN | FQPanel | 0 | 0 |  |
+| SF5 | The HTML report shows the subclasses (found by the desk's AP6 walk on her data: the computed project and the supplement hold PLI alfa and gama, true lectins and snaclecs, but report.html shows no subclass) | M | 0.8 |  | RL2 | Test: the exported HTML holds every subclass label; reviewed | DN | FQDeNovo | 0 | 0 |  |
 
 ### W31 Release 2.1.16 (Orchestrator)
 
