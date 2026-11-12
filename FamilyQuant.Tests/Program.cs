@@ -40,6 +40,7 @@ namespace FamilyQuant.Tests
         [STAThread] // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            InstallTestShellMessagePresenter(typeof(MainWindow).Assembly);
             IsolateShellSessionState();
             if (TestCommandRegistry.TryRun(args, TestCommandPhase.Raw, string.Empty, out int rawExit))
                 return rawExit;
@@ -67,6 +68,7 @@ namespace FamilyQuant.Tests
             ApplicationPaths.LocalDataDirectoryOverride = Path.Combine(root, "app-data");
             void Isolate(Assembly assembly)
             {
+                InstallTestShellMessagePresenter(assembly);
                 var shell = assembly.GetType("FamilyQuant.MainWindow");
                 if (shell == null) return;
                 // Frozen comparison shells have their own statics. Isolate them before any window is constructed too.
@@ -89,6 +91,7 @@ namespace FamilyQuant.Tests
         private static SuiteTable DefaultSuite(string[] args, string workDir)
         {
             var suite = new SuiteTable();
+            suite.AddWithApplication(() => NoninteractivePromptTests());
             suite.AddWithApplication(() => ReviewChecklistStateTests(Path.Combine(workDir, "review-checklist-states")));
             suite.AddWithApplication(() => ReviewDestinationTests(Path.Combine(workDir, "review-destinations")));
             suite.AddWithApplication(() => ReviewDetailsHeightTests(Path.Combine(workDir, "review-details-height")));

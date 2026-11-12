@@ -103,6 +103,7 @@ internal static partial class Program
 
     private static void SheetPfamMatchUiTests(FamilyClusterFile source, string output)
     {
+        using var dialogs = new ImportFixtureDialogs();
         EnsureApplication(); var oldTheme = Themes.ThemeManager.Current;
         string workbook = Path.Combine(output, "synthetic-pfam-list.xlsx"); PanelImportTemplate.Write(workbook);
         FillTemplate(workbook, new[] { new[] { "sheet-family", "Invented sheet family", "", "", "First fold (PF90001); Other fold (PF90002)", "Quantify" } });
@@ -111,6 +112,7 @@ internal static partial class Program
             foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
             {
                 Themes.ThemeManager.Apply(theme); var file = FamilyClusterFile.FromJsonText(source.ToJsonText());
+                file.MyExtendedFastaItems[0].Evidence!.Pfam.Add(new() { Accession = "PF90002", Name = "Stored other fold" });
                 var model = new FamilyListImportViewModel(new FamilyListImportTransaction(new CurationViewModel(file)));
                 int prompts = 0;
                 var window = new FamilyListImportWindow(model) { ShowActivated = false, ShowInTaskbar = false,
@@ -119,20 +121,14 @@ internal static partial class Program
                 try
                 {
                     window.Show(); FinishReviewWork(() => model.LoadAsync(workbook));
-                    FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(); await model.NextAsync(); }); PumpDispatcher();
-                    var family = model.MatchFamilies.Single(); var primary = (DataGrid)window.FindName("MatchSuggestionsGrid");
-                    Check("Z16a4 " + theme + " native wizard marks and ticks sheet Pfam first", model.Page == 4
+                    FinishReviewWork(async () => { await model.NextAsync(); await model.NextAsync(); }); PumpDispatcher();
+                    var family = model.MatchFamilies.Single();
+                    Check("IM6 " + theme + " valid sheet codes reach Summary with no matching question", model.Page == 5 && model.PfamQuestions.Count == 0
+                        && family.Decided && prompts == 0
                         && family.PrimarySuggestions.Take(2).All(row => row.Use && row.IsFromSheet)
                         && family.PrimarySuggestions.Take(2).Select(row => row.Text).SequenceEqual(new[] { "PF90001", "PF90002" })
-                        && WalkTree(primary).OfType<TextBlock>().Count(block => block.Text == "from your sheet" && block.IsVisible) == 2);
+                        && file.ToJsonText() == before);
                     ScreenHarness.Save(window, Path.Combine(output, "sheet-pfam-wizard-" + theme + ".png"), 1366, 768);
-                    WalkTree(window).OfType<Button>().Single(button => Equals(button.Content, "Use selected matches")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                    Check("Z16a4 " + theme + " native wizard asks before accepting the broad preselection", prompts == 1 && !family.Decided);
-                    family.Suggestions.Single(row => row.Text == "PF90001").Use = false;
-                    WalkTree(window).OfType<Button>().Single(button => Equals(button.Content, "Use selected matches")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                    model.Back(); FinishReviewWork(async () => { await model.NextAsync(); });
-                    Check("Z16a4 " + theme + " Back and Next keep the explicit sheet untick", !model.MatchFamilies.Single().Suggestions.Single(row => row.Text == "PF90001").Use
-                        && model.MatchFamilies.Single().Suggestions.Single(row => row.Text == "PF90002").Use && file.ToJsonText() == before);
                     var panel = model.DraftPanel!; var evidence = new PanelEvidenceMatching(file);
                     var shared = new PanelEvidenceMatchViewModel(new(evidence, panel.Families.Single(), null, () => evidence.IsCurrent(file), panel));
                     var dialog = new PanelEvidenceMatchWindow(shared) { ShowActivated = false, ShowInTaskbar = false };
@@ -141,6 +137,14 @@ internal static partial class Program
                         dialog.Show(); PumpDispatcher(); var grid = (DataGrid)dialog.FindName("MatchLabelsGrid");
                         Check("Z16a4 " + theme + " native shared dialog shows checked source rows and supplied domain names", shared.Rows.Take(2).All(row => row.Selected && row.Reason == "from your sheet")
                             && shared.Rows[1].Name == "Other fold" && (grid.Columns[0].GetCellContent(shared.Rows[1]) as CheckBox)?.IsChecked == true);
+                        shared.Rows.Single(row => row.Value == "PF90001").Selected = false; PumpDispatcher();
+                        bool confirmed = shared.TryConfirm(out var saved);
+                        var edited = confirmed ? PanelEvidenceMatching.WithConfirmed(panel, family.Key, saved!) : panel;
+                        var reopened = new PanelEvidenceMatchViewModel(new(evidence, edited.Families.Single(),
+                            edited.ConfirmedEvidenceMatches?.GetValueOrDefault(family.Key), () => evidence.IsCurrent(file), edited));
+                        Check("Z16a4 " + theme + " the shared editor retains explicit source unticks without changing the project", confirmed
+                            && reopened.Rows.Single(row => row.Value == "PF90001").Selected == false
+                            && reopened.Rows.Single(row => row.Value == "PF90002").Selected && file.ToJsonText() == before);
                         ScreenHarness.Save(dialog, Path.Combine(output, "sheet-pfam-shared-" + theme + ".png"), 1180, 680);
                     }
                     finally { dialog.Close(); PumpDispatcher(); }
