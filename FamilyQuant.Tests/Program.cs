@@ -231,6 +231,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => FamilyListWalkTests());
             suite.AddWithApplication(() => SubclassReportFlowTests());
             suite.AddWithApplication(() => SubclassAssignmentReimportTests());
+            suite.AddWithApplication(() => SubclassUnchangedMembershipTests());
             suite.Add(() => PanelTieListFreshImportTests());
             suite.AddWithApplication(() => QuantifyIsotopeDefaultTests(Path.Combine(workDir, "quantify-isotope-default")));
             suite.Add(() => StreamingProvenanceHashTests());
