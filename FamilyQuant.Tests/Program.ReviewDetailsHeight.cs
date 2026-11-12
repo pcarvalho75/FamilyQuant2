@@ -52,7 +52,8 @@ internal static partial class Program
             }
             window.ShowAllOptions = true; window.Width = 1366; window.Height = 768; PumpDispatcher(); window.UpdateLayout();
             Check("SF2 full view keeps ten-line details and table inside the window", grid.ActualHeight >= 120
-                && details.TranslatePoint(new Point(0, details.ActualHeight), window).Y < window.ActualHeight - 40);
+                && details.TranslatePoint(new Point(0, details.ActualHeight), window).Y < window.ActualHeight - 40,
+                "table=" + grid.ActualHeight + "; details bottom=" + details.TranslatePoint(new Point(0, details.ActualHeight), window).Y + "; window=" + window.ActualHeight);
         }
         finally { window.Close(); PumpDispatcher(); }
     }
