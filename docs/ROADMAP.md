@@ -1,6 +1,6 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 21, 2026-11-12 17:50 (Pacific), release 2.1.18, ready by early morning 11-13 in Brazil. Theme: keep each of Ana's families together with the program's default clicks, and let her export the report. Two workers only (D118).
+Version 21, 2026-11-12 17:50 (Pacific), release 2.1.18, ready by early morning 11-13 in Brazil. Theme: keep each of Ana's families together with the program's default clicks, and let her export the report. Four workers since 11-12 18:05 (D118, D127).
 Finished rows leave this file and go to `docs/ROADMAP-archive.md`; the needle restarts at zero with each version.
 
 Version 20 delivered 40 of 41 steps, now in the archive: 2.1.16 (the Quantify crash, simpler Import family list, clearer Review grouping) and 2.1.17 (Review grouping layout). Its last open step, AP5, is carried here.
@@ -29,7 +29,7 @@ The bar for 2.1.18 (GA5 checks it on her data): with her revised sheet and only 
 3. **No function is lost.** The feature ledger is the contract: only Paulo can drop a row. A rename keeps the function; a ledger row that pins an old name is mapped in the ledger's "Added contracts after the frozen source" section, never edited to make a check pass.
 4. **Numbers stay equal unless a step says otherwise.** In this version no step changes a stored quantity. GA2 (D119), GA3 (D120) and GA4 change which family some proteins get, with the desk's before and after counts on Ana's data (GA5).
 5. **Deployable at every merge.** One step per commit, with its test; tests go into DefaultSuite. Builders run focused checks; the desk runs the whole suite once per release (D61 mode).
-6. **A step counts as done when the other worker approves it** (Paulo, 11-05 13:41: "many approvals and no green boxes?"). Each release still ships only after its own full suite (RL7 in this version) is green on the merged commit; a suite failure reopens the step it points to until the fix is approved.
+6. **A step counts as done when the reviewer approves it** (Paulo, 11-05 13:41: "many approvals and no green boxes?"). Each release still ships only after its own full suite (RL7 in this version) is green on the merged commit; a suite failure reopens the step it points to until the fix is approved.
 7. **A family panel is user data.** Ana's families, domains, subclasses and decisions live in her file and the project, never in code.
 8. **Never write inside `C:/Users/paulo/Desktop/AnaG`** except a delivery to `AnaG/Bjararaca/Relatorio` on Paulo's word.
 9. **The code repository stays private.** Releases go out as a Setup.exe and a zip on the public releases-only repository (D31, D32).
@@ -40,19 +40,22 @@ The bar for 2.1.18 (GA5 checks it on her data): with her revised sheet and only 
 
 ## The team
 
-Staffed on Paulo's word, 11-12 17:40 (D118).
+Staffed on Paulo's word, 11-12 17:40 (D118), widened 18:05 (D127).
 
 | Name | Engine | Role in version 21 | Worktree |
 |---|---|---|---|
 | Orchestrator | Claude, main session | Routes reviews, merges, runs the release, keeps this file and the board true. Runs the real-data walk (GA5), answers slide 7 (AQ1) and builds the deck for Ana (AQ2) | |
-| FQGroup (OJ) | Opus 5.5 xhigh, Juliana's account | GA1 to GA4 (her families together), EX1 and EX2 (export after curation); reviews FQDeNovo's steps | `D:/FamilyQuant-wt/group` |
-| FQDeNovo (DN) | Sol 6.1 xhigh | IM10, IM11 (import as written), PO1, PO2 (panel order), NM1 (names in the report), PI1, PI2 (pie chart), the package (RL8); reviews FQGroup's steps | `D:/FamilyQuant-wt/denovo` |
+| FQGroup (OJ) | Opus 5.5 xhigh, Juliana's account | GA1 to GA4 (her families together), EX1 and EX2 (export after curation), IM10b | `D:/FamilyQuant-wt/group` |
+| FQDeNovo (DN) | Sol 6.1 xhigh | IM10, IM11 (import as written), PO1, PO2 (panel order), the package (RL8) | `D:/FamilyQuant-wt/denovo` |
+| FQHtml (HT) | Sol 6.1 xhigh | NM1 (names in the report), PI1, PI2 (pie chart); it built the HTML report's native charts in 2.1.15 | `D:/FamilyQuant-wt/html-tabs` |
+| FQRev (RV) | Grok 4.7 xhigh | Reviews every READY in bundles and fixes small defects itself (D89, D91, D127) | `D:/FamilyQuant-wt/review` |
 
-FQGroup may read the desk's copies of Ana's data under `D:/FamilyQuant-data/out-desk` (D121); it posts counts, never rows, and commits none of her data. FQDeNovo sees code and synthetic data only. Nobody reads or writes `C:/Users/paulo/Desktop/AnaG`.
+FQGroup may read the desk's copies of Ana's data under `D:/FamilyQuant-data/out-desk` (D121); it posts counts, never rows, and commits none of her data. FQDeNovo, FQHtml and FQRev see code and synthetic data only. Nobody reads or writes `C:/Users/paulo/Desktop/AnaG`.
 
 File ownership, so the two never touch the same file:
 - OJ owns `FamilyQuant.Core/Evidence`, `FamilyQuant.Core/Panel` (Import excepted), `FamilyQuant.Core/Quantitation/PanelAuditCsv.cs`, `EvidenceReviewViewModel.cs`, `GroupingReviewViewModel*` and the protein edit paths of Curate families (Edit selected proteins, Group by keywords, Recluster by words, Undo).
-- DN owns `FamilyListImport*`, `FamilyListStoredEvidenceMatches.cs`, `FamilyQuant.Core/Panel/Import`, the Grouping panel of `ClusterGenerationControl` (order and labels only), the Results screen, the Export window and the HTML report.
+- DN owns `FamilyListImport*`, `FamilyListStoredEvidenceMatches.cs`, `FamilyQuant.Core/Panel/Import` and the Grouping panel of `ClusterGenerationControl` (order and labels only).
+- HT owns the Results screen, the Export window, the HTML report and the report writers' family labels.
 - A change one needs in the other's file goes through the desk.
 
 ## Design rules for the look (hard requirements)
@@ -67,7 +70,7 @@ File ownership, so the two never touch the same file:
 
 ## Workstreams
 
-Every row is a small step with its own done-check. A step is done when the other worker approves it (rule 6, D118). Ids never change; a step split here keeps its id as a prefix.
+Every row is a small step with its own done-check. A step is done when FQRev approves it (rule 6, D127). Ids never change; a step split here keeps its id as a prefix.
 
 ### W33 Her families stay together (FQGroup, Orchestrator)
 
@@ -107,11 +110,11 @@ Ana, slide 2: the import still asks her to confirm, family by family, the eviden
 | IM10b | The other half of IM10, in FQGroup's file (FQDeNovo's SEAM NEED, 11-12 17:54): a per-row "Un-confirm" action in Family checklist, also for rows accepted from sheet codes. It removes the family's confirmed evidence match in the review draft, updates its proposal through the existing guards and Undo, and is kept only on Apply grouping; the family's Pfam definitions stay | L | 0.4 | IM10 | RL6 | A synthetic test: un-confirm a sheet-code row, the proposal drops its matches, Undo restores, Cancel keeps nothing | OJ | FQGroup | 0 | 0 |  |
 | IM11 | The Columns page shows only what the sheet has. The rows for Notes, Decision and Subclass names appear only when the sheet has such a column; when Next is off, one line under the buttons says why (a required field without a column, or two fields on one column) | L | 0.5 | IM10 | RL6 | A test per reason; a render of the page with her template's columns | DN | FQDeNovo | 0 | 0 |  |
 
-### W36 Names in the report (FQDeNovo)
+### W36 Names in the report (FQHtml)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| NM1 | Ana, slide 1: "Eu quero gerar o report em inglês". The Export window gets one choice, "Family names: Name or Other-language name" (D125), stored in the project; the HTML, Word and workbook reports and the Results chart use it; a family without an other-language name keeps its Name. Her old workaround (the English column mapped as Family name) still imports | M | 1.0 | IM11 | RL6 | A test that exports with each choice; the report's family labels follow it | DN | FQDeNovo | 0 | 0 |  |
+| NM1 | Ana, slide 1: "Eu quero gerar o report em inglês". The Export window gets one choice, "Family names: Name or Other-language name" (D125), stored in the project; the HTML, Word and workbook reports and the Results chart use it; a family without an other-language name keeps its Name. Her old workaround (the English column mapped as Family name) still imports | M | 1.0 |  | RL6 | A test that exports with each choice; the report's family labels follow it | HT | FQHtml | 0 | 0 |  |
 
 ### W37 The Grouping panel in working order (FQDeNovo)
 
@@ -122,14 +125,14 @@ Ana's comment: "Word clustering" should come before quantification. Her slide 3 
 | PO1 | Quantify comes last (D123). The panel reads: a Group by evidence (Import family list, Fetch evidence, Group by evidence), b Group by words (optional), then Quantify on its own line under both. Labels and order only; every command keeps its function | L | 0.5 |  | GA5, RL6 | A render of the panel, and the ledger rows that name the steps still pass | DN | FQDeNovo | 0 | 0 |  |
 | PO2 | Fetch UniProt families in its right place, as GA1 measured (D123). If fetching it first changes the grouping, Fetch evidence also fetches it, and the separate button goes; if it does not, it moves under b as optional, with a tooltip saying what it downloads and that grouping does not need it | L | 0.5 | GA1, PO1 | RL6 | GA1's line quoted in the READY; a render of the panel | DN | FQDeNovo | 0 | 0 |  |
 
-### W38 A pie chart (FQDeNovo)
+### W38 A pie chart (FQHtml)
 
 Ana, slide 8: "O Calvete sempre mostra o gráfico em forma de pizza, seria bom ter esta opção também".
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| PI1 | The HTML report's family chart gets a "Pie" choice beside the bars (D124): one slice per family shown, then other families, shared between families and unattributed, the same numbers as the bars, summing to 100% of all peptide features; it follows Normalize to and the names choice (NM1) | M | 1.0 | NM1 | RL6 | A test that the slices sum to 100.0 and equal the bar values; a render | DN | FQDeNovo | 0 | 0 |  |
-| PI2 | The Results screen's "Family chart" list gets the same "Pie" view | M | 0.8 | PI1 | RL6 | The same test on the screen's data; a render | DN | FQDeNovo | 0 | 0 |  |
+| PI1 | The HTML report's family chart gets a "Pie" choice beside the bars (D124): one slice per family shown, then other families, shared between families and unattributed, the same numbers as the bars, summing to 100% of all peptide features; it follows Normalize to and the names choice (NM1) | M | 1.0 | NM1 | RL6 | A test that the slices sum to 100.0 and equal the bar values; a render | HT | FQHtml | 0 | 0 |  |
+| PI2 | The Results screen's "Family chart" list gets the same "Pie" view | M | 0.8 | PI1 | RL6 | The same test on the screen's data; a render | HT | FQHtml | 0 | 0 |  |
 
 ### W39 Answers for Ana (Orchestrator)
 
@@ -144,7 +147,7 @@ Ana, slide 8: "O Calvete sempre mostra o gráfico em forma de pizza, seria bom t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| RL6 | Reviews and merges in two batches (D116, D118): FQDeNovo reviews FQGroup's steps and FQGroup reviews FQDeNovo's, each fixing small defects itself (D89); the desk merges approved commits into `fq/v2118-release` | M | 1.0 | GA2, GA3, GA4, EX2, IM10, IM10b, IM11, NM1, PO1, PO2, PI1, PI2 | RL7 | Each batch's verdict file and merge commit in the LOG | Orchestrator | Orchestrator | 0 | 0 |  |
+| RL6 | Reviews and merges in bundles (D116, D127): FQRev reviews every READY and fixes small defects itself (D89, D91); the desk merges approved commits into `fq/v2118-release` | M | 1.0 | GA2, GA3, GA4, EX2, IM10, IM10b, IM11, NM1, PO1, PO2, PI1, PI2 | RL7 | Each batch's verdict file and merge commit in the LOG | Orchestrator | Orchestrator | 0 | 0 |  |
 | RL7 | The 2.1.18 candidate: version bump on the 31 lines, release notes, ledger refresh for the rows the steps touched, the full suite once | M | 1.0 | RL6 | RL8, GA5 | Suite line posted: 0 failed | Orchestrator | Orchestrator | 0 | 0 |  |
 | RL8 | Package (FQDeNovo), publish as Latest, README, merge into master and push | M | 0.8 | RL7, GA5 | AQ2 | Published; digests match; an installed 2.1.17 offers 2.1.18 | Orchestrator | Orchestrator | 0 | 0 |  |
 
@@ -168,9 +171,9 @@ Each point of Ana's 11-12 deck, voice note and comment, with its step. "Desk" me
 
 ## Critical path
 
-**Tonight, in parallel.** FQGroup: GA1, then GA2 and GA3, then EX1 and EX2, then GA4 if GA1 finds its class. FQDeNovo: IM10, IM11, PO1, NM1, then PO2 once GA1 posts, then PI1 and PI2. The desk answers slide 7 (AQ1) meanwhile.
+**Tonight, in parallel.** FQGroup: GA1, then GA2 and GA3, then EX1 and EX2, IM10b, then GA4 if GA1 finds its class. FQDeNovo: IM10, IM11, PO1, then PO2 once GA1 posts. FQHtml: NM1, PI1, PI2. FQRev reviews each bundle as it lands. The desk answers slide 7 (AQ1) meanwhile.
 
-**Reviews in two batches (RL6).** Batch 1 when GA2, GA3, IM10 and PO1 have landed; batch 2 with the rest. Each worker reviews the other's batch.
+**Reviews in bundles (RL6).** FQRev takes each lane's landed steps in one pass; batch 1 when GA2, GA3, IM10 and PO1 have landed.
 
 **By early morning 11-13 in Brazil.** RL7 (candidate and suite), GA5 (the walk on the candidate), RL8 (publish), then AQ2 and AQ3. About 16 hours of steps on two workers and the desk, about 8 hours of clock.
 
@@ -186,6 +189,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 
 | ID | Question | Taken |
 |---|---|---|
+| D127 | More hands? | One more Sol 6.1 (FQHtml, the report side: NM1, PI1, PI2) and Grok 4.7 back as the reviewer (FQRev); the builders no longer review each other. Paulo, 11-12 18:05: "add grok as a reviewer and one more sol worker" |
 | D118 | The team for 2.1.18? | One Sol 6.1 (FQDeNovo) and one Opus 5.5 xhigh on Juliana's account (FQGroup); each reviews the other's steps, cross-family. Paulo, 11-12 17:40: "only with 2 workers for this, 1 sol and one opus from the juliana account" |
 | D119 | Should her list win over the scope words? | Yes: a protein whose own evidence maps to exactly one row of her list joins it; the scope words decide only for proteins that map to no row (GA2). Desk default, 11-12 |
 | D120 | Domain ties by overlap both ways? | Yes: shared domains divided by all domains in either replaces D111's one-way coverage; a user's choice still wins (GA3). Desk default, 11-12 |
@@ -290,7 +294,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | GA2 pulls a non-venom relative into a family | A protein mapped to a row only by a shared Pfam set (for example a membrane-anchored relative with the same domains) | GA1 counts that class first; GA2 lets a Pfam-only match through the scope only when it is the protein's single row by D120's overlap; GA5 lists every new member's description class |
 | GA3 reverses a tie a user already settled | A stored choice | A stored choice wins (D111 kept that); GA3's test covers it |
 | EX2 hides a really stale project | A changed database or panel | The refusal stays for those; EX2's test covers both |
-| Sol sees her data | Any brief or review | FQDeNovo gets code and synthetic data only; FQGroup's READYs carry counts, never rows (D121) |
+| Sol or Grok sees her data | Any brief or review | FQDeNovo, FQHtml and FQRev get code and synthetic data only; FQGroup's READYs carry counts, never rows (D121) |
 | The Juliana account runs out | FQGroup stops on a usage limit | The desk resumes it when the window resets; GA5 and the release wait for GA2, GA3 and EX2, the rest can ship without GA4 |
 | The night runs long | No candidate by 01:00 Pacific | 2.1.18 ships with what is reviewed in batch 1 (GA2, GA3, EX2, IM10, PO1); PI2 and PO2 move to the next version |
 | A function is lost without Paulo's word | The ledger check fails at RL7 | No row is dropped in this version; renames are mapped in the ledger's Added contracts section |
