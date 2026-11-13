@@ -38,6 +38,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-panel-coverage-ties", "FamilyQuant.Tests.Program.PanelCoverageTieTests(System.String)"),
         SuiteCommandRule.Excluded("--panel-tie-counts", "Read-only desk aggregate over a selected project. Prints only tie counts and counts per imported family row; synthetic proof is PanelCoverageTieTests in DefaultSuite."),
         SuiteCommandRule.Covered("--test-panel-row-decode", "FamilyQuant.Tests.Program.PanelRowDecodeTests(System.String)"),
+        SuiteCommandRule.Covered("--test-panel-list-before-scope", "FamilyQuant.Tests.Program.PanelListBeforeScopeTests()"),
         SuiteCommandRule.Excluded("--panel-row-decode", "Read-only desk count over a selected project: where one list row's matches and the targets whose name matches a given pattern ended, with their evidence traits. Prints counts and row keys only; synthetic proof is PanelRowDecodeTests in DefaultSuite."),
         SuiteCommandRule.Covered("--test-ledger-synthetic-mode", "FamilyQuant.Tests.Program.FeatureLedgerReceiptGuardTests(System.Boolean)"),
         SuiteCommandRule.Covered("--test-html-family-native", "FamilyQuant.Tests.Program.HtmlFamilyNativeTests(System.String)"),
