@@ -99,6 +99,7 @@ Ana, slide 9: Export says "Family assignment evidence is missing or out of date"
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
 | EX1 | A failing test first: synthetic project, Apply grouping, then move one protein with Edit selected proteins, and separately run Group by keywords; Quantify; Export report. Today both end with the error | L | 0.3 |  | EX2 | The test fails on master ce442337 with that message | OJ | FQGroup | 0 | 0 |  |
 | EX2 | The fix. A family change after Apply grouping updates the assignment facts of the proteins it moved, with the reason "Moved by you" or "Regrouped by words", so the evidence stays current and the report exports; Undo restores both. A family whose proteins all keep one list row keeps its link; a mixed family is reported without one, as the report does today for conflicts. The refusal stays for a really stale project (a changed database or panel) | M | 1.0 | EX1 | GA5, RL6 | EX1 passes; the existing refusal tests still pass; the moved protein's reason shows in the protein audit | OJ | FQGroup | 0 | 0 |  |
+| EX2c | Edit selected proteins stays quick (desk, 11-12 19:50). EX2 checks the facts on every edit; on her project that took the edit from about 1.1 s to 6.6 s, and EX2b brought it to about 4.7 s. Keep the check's guarantee (a move made while the facts are already out of date leaves them untouched, and the report still refuses) without paying the whole check on every edit, for example by remembering that the facts were verified current and what has changed since | M | 0.8 | EX2 | GA5, RL6 | On a copy of her project, Edit selected proteins within about 1.5 s of the 2.1.17 time under the same load, measured before and after in the READY; export-after-curation and the refusal tests still pass | OJ | FQGroup | 0 | 0 |  |
 
 ### W35 Her sheet is taken as written (FQDeNovo)
 
@@ -147,7 +148,7 @@ Ana, slide 8: "O Calvete sempre mostra o gráfico em forma de pizza, seria bom t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| RL6 | Reviews and merges in bundles (D116, D127): FQRev reviews every READY and fixes small defects itself (D89, D91); the desk merges approved commits into `fq/v2118-release` | M | 1.0 | GA2, GA3, GA4, EX2, IM10, IM10b, IM11, NM1, PO1, PO2, PI1, PI2 | RL7 | Each batch's verdict file and merge commit in the LOG | Orchestrator | Orchestrator | 0 | 0 |  |
+| RL6 | Reviews and merges in bundles (D116, D127): FQRev reviews every READY and fixes small defects itself (D89, D91); the desk merges approved commits into `fq/v2118-release` | M | 1.0 | GA2, GA3, GA4, EX2, EX2c, IM10, IM10b, IM11, NM1, PO1, PO2, PI1, PI2 | RL7 | Each batch's verdict file and merge commit in the LOG | Orchestrator | Orchestrator | 0 | 0 |  |
 | RL7 | The 2.1.18 candidate: version bump on the 31 lines, release notes, ledger refresh for the rows the steps touched, the full suite once | M | 1.0 | RL6 | RL8, GA5 | Suite line posted: 0 failed | Orchestrator | Orchestrator | 0 | 0 |  |
 | RL8 | Package (FQDeNovo), publish as Latest, README, merge into master and push | M | 0.8 | RL7, GA5 | AQ2 | Published; digests match; an installed 2.1.17 offers 2.1.18 | Orchestrator | Orchestrator | 0 | 0 |  |
 
