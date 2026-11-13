@@ -120,7 +120,7 @@ public static class ReportPanelSections
         {
             int ordinal = sectionOffset + sections.Count + 1;
             operation?.Report("report-prepare-section", "Section " + ordinal.ToString(CultureInfo.InvariantCulture) + " of "
-                + total.ToString(CultureInfo.InvariantCulture) + ": " + family.DisplayName, ordinal, total);
+                + total.ToString(CultureInfo.InvariantCulture) + ": " + ReportFamilyNames.DisplayName(panel, family, curation.ReportFamilyNames), ordinal, total);
             string id = ReportSectionIds.FamilyPrefix + family.Key;
             string blockPrefix = "panel-block:" + Uri.EscapeDataString(family.Key) + ":";
             var rows = new List<IReadOnlyList<string>>
@@ -133,7 +133,7 @@ public static class ReportPanelSections
             {
                 if (!ManualFamilyChoices.IsGeneratedKey(family.MergeTargetFamilyKey)) rows.Add(new[] { "Merge target key", family.MergeTargetFamilyKey });
                 else if (panel.Families.FirstOrDefault(target => target.Key == family.MergeTargetFamilyKey) is { } target)
-                    rows.Add(new[] { "Merge target", target.DisplayName });
+                    rows.Add(new[] { "Merge target", ReportFamilyNames.DisplayName(panel, target, curation.ReportFamilyNames) });
             }
             rows.AddRange(family.Names.Select(n => (IReadOnlyList<string>)new[] { n.Name, n.Text }));
             rows.AddRange(family.TextFields.Select(n => (IReadOnlyList<string>)new[] { n.Name, n.Text }));
@@ -194,7 +194,7 @@ public static class ReportPanelSections
                     new ReportListColumn(3, "Absent domains", family.Subclasses.Select(s => (IReadOnlyList<string>)s.AbsentPfam.ToArray()).ToArray()),
                     new ReportListColumn(4, "Source subfamilies", family.Subclasses.Select(s => (IReadOnlyList<string>)s.UniProtSubfamilies.ToArray()).ToArray()),
                 } } : block).ToList();
-            sections.Add(new ReportSection(id, family.DisplayName, blocks));
+            sections.Add(new ReportSection(id, ReportFamilyNames.DisplayName(panel, family, curation.ReportFamilyNames), blocks));
         }
         return sections;
     }

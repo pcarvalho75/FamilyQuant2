@@ -234,7 +234,7 @@ public static partial class ReportStudyFigures
         foreach (var item in map.UserFamilies.Values)
         {
             if (item.PanelFamilyKey != null && panel.TryGetValue(item.PanelFamilyKey, out var family))
-                labels[item.FamilyUserId] = family.DisplayName + (map.UserFamilies.Values.Count(m => m.PanelFamilyKey == item.PanelFamilyKey) > 1
+                labels[item.FamilyUserId] = ReportFamilyNames.DisplayName(project.FamilyPanel, family, project.ReportFamilyNames) + (map.UserFamilies.Values.Count(m => m.PanelFamilyKey == item.PanelFamilyKey) > 1
                     ? " (group " + item.FamilyUserId.ToString(CultureInfo.InvariantCulture) + ")" : "");
             else if (item.HasConflict) labels[item.FamilyUserId] = "Family " + item.FamilyUserId.ToString(CultureInfo.InvariantCulture) + " (conflicting panel membership)";
         }

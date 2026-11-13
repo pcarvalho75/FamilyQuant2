@@ -147,7 +147,7 @@ public sealed class HtmlFamilyFigurePacket
                 var rows = scatter.Rows.Select(row =>
                 {
                     var value = FamilySignalShareChart.Value(row);
-                    return new Row(row.FamilyUserId.ToString(CultureInfo.InvariantCulture), plot.Text(FamilyFigureLabel.Format(row.FamilyUserId, row.Description, int.MaxValue)),
+                    return new Row(row.FamilyUserId.ToString(CultureInfo.InvariantCulture), plot.Text(FamilyFigureLabel.Format(row.FamilyUserId, scatter.FamilyLabels.GetValueOrDefault(row.FamilyUserId, row.Description), int.MaxValue)),
                         plot.Number(value.Signal, "area"), plot.Number(value.DeNovoShare * 100, "%"), null, null, "All runs pooled", Array.Empty<Part>());
                 }).ToArray();
                 plot.Views["fixed"] = ViewOf(rows, "Pooled family area; de novo percent of that family's area", "All runs pooled. Horizontal position is total attributed family envelope area; vertical position is de novo as a percent of that same family's area. This is a within-family evidence share, with no run-to-run whiskers. Changing Normalize to does not change either axis.", "Total attributed family envelope area", "De novo share of this family's area (%)", false, true);
@@ -155,7 +155,7 @@ public sealed class HtmlFamilyFigurePacket
             else if (native is ReportFamilySourceSequenceChart census)
             {
                 var rows = census.Rows.Select(row => new Row(row.FamilyUserId.ToString(CultureInfo.InvariantCulture),
-                    plot.Text(FamilyFigureLabel.Format(row.FamilyUserId, row.Description, int.MaxValue)), plot.Number(row.DeNovoUnionDistinctSequences, "sequences"),
+                    plot.Text(FamilyFigureLabel.Format(row.FamilyUserId, census.FamilyLabels.GetValueOrDefault(row.FamilyUserId, row.Description), int.MaxValue)), plot.Number(row.DeNovoUnionDistinctSequences, "sequences"),
                     plot.Number(row.SearchDistinctSequences, "search sequences"), null, null, "All runs pooled", new[]
                     {
                         new Part(plot.Text("PEAKS de novo only"), plot.Number(row.PeaksDeNovoOnlyExclusiveDistinctSequences, "sequences")!, false),

@@ -35,7 +35,7 @@ public partial class AnalyticsControl : UserControl
         ViewModel.PropertyChanged += (_, e) =>
         {
             TextBlockStatus.Text = ViewModel.Status;
-            if (e.PropertyName is nameof(ViewModel.FamilyTopN) or nameof(ViewModel.FamilyAsPercent)) DrawCharts();
+            if (e.PropertyName is nameof(ViewModel.FamilyTopN) or nameof(ViewModel.FamilyAsPercent) or nameof(ViewModel.FamilyLabels)) DrawCharts();
         };
         TextBlockStatus.Text = ViewModel.Status;
         ready = true;
@@ -56,7 +56,7 @@ public partial class AnalyticsControl : UserControl
             .Concat(ViewModel.BuildCompositionFigures()))
         {
             FrameworkElement plotted = figure.Chart is FamilyContributionChart
-                ? new FamilyContributionChart(Families, FamilyTopN, FamilyAsPercent, sharedPolicy: ViewModel.FamilySharedPolicy)
+                ? new FamilyContributionChart(Families, FamilyTopN, FamilyAsPercent, sharedPolicy: ViewModel.FamilySharedPolicy, familyLabels: ViewModel.FamilyLabels)
                 : figure.Chart;
             if (plotted is IPalettedChart chart) chart.Palette = ChartPalette.UiPalette;
             string text = CompositionChartCaptions.Build(figure, Data);

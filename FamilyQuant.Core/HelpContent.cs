@@ -90,6 +90,8 @@ namespace FamilyQuant
             sb.AppendLine("Share rows use compact percentages. The chart heading names their reference total.");
             sb.AppendLine("Hover or select a value for its exact reading and base, including rounded ring totals.");
             sb.AppendLine("Family labels stop before database header fields; tooltips and details retain the full name.");
+            sb.AppendLine("In File > Export, Family names chooses Name or Other-language name for report and Results labels.");
+            sb.AppendLine("A blank other-language name keeps Name. Export applies the choice, Save keeps it in the project, and Undo does not change it.");
             sb.AppendLine("The compare-measures plot's mean and SD follow Normalize to, with its base named on the axis.");
             sb.AppendLine("Coverage uses matching choosers, a residue ruler and List placements and annotations.");
             sb.AppendLine();

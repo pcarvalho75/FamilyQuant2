@@ -93,6 +93,10 @@ namespace FamilyQuant
         /// <summary>New output callers may format only the name field; the historical overload keeps its bytes.</summary>
         public static string BuildFamilyComposition(FamilyEnvelopeQuantResult result, SharedPeptidePolicy policy,
                                                     double denominator, string basis, System.Func<string?, string>? formatName)
+            => BuildFamilyComposition(result, policy, denominator, basis, formatName, null);
+
+        public static string BuildFamilyComposition(FamilyEnvelopeQuantResult result, SharedPeptidePolicy policy,
+            double denominator, string basis, System.Func<string?, string>? formatName, IReadOnlyDictionary<int, string>? familyLabels)
         {
             var csv = new StringBuilder();
             csv.AppendLine(string.Join(",", new[]
@@ -109,7 +113,8 @@ namespace FamilyQuant
                 .OrderByDescending(f => f.Signal(policy)).ThenBy(f => f.FamilyUserId))
             {
                 csv.AppendLine(string.Join(",", f.FamilyUserId.ToString(CultureInfo.InvariantCulture),
-                    Field(formatName == null ? f.Description : formatName(f.Description)), Num(f.Signal(policy)), Fraction(f.Signal(policy)), basisField));
+                    Field(formatName == null ? familyLabels?.GetValueOrDefault(f.FamilyUserId, f.Description) ?? f.Description
+                        : formatName(familyLabels?.GetValueOrDefault(f.FamilyUserId, f.Description) ?? f.Description)), Num(f.Signal(policy)), Fraction(f.Signal(policy)), basisField));
             }
 
             if (policy == SharedPeptidePolicy.FamilyUnique)

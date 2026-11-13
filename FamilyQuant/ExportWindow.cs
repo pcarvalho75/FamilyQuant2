@@ -13,11 +13,16 @@ public partial class ExportWindow : Window
 {
     public IReadOnlyList<ProjectExportOption> Options { get; }
     public ProjectExportKind? SelectedExport { get; private set; }
+    public ReportFamilyNameChoice FamilyNames => FamilyNameChoice.SelectedIndex == 1
+        ? ReportFamilyNameChoice.OtherLanguageName : ReportFamilyNameChoice.Name;
 
-    public ExportWindow(IReadOnlyList<ProjectExportOption> options)
+    public ExportWindow(IReadOnlyList<ProjectExportOption> options, ReportFamilyNameChoice familyNames = ReportFamilyNameChoice.Name, bool hasProject = true)
     {
         Options = options;
         InitializeComponent();
+        FamilyNameChoice.SelectedIndex = familyNames == ReportFamilyNameChoice.OtherLanguageName ? 1 : 0;
+        FamilyNameChoice.IsEnabled = hasProject;
+        if (!hasProject) FamilyNameChoice.ToolTip = "Open a project to choose its report and Results family labels. The choice is kept when you export and save the project.";
         var grouped = (CollectionViewSource)Resources["GroupedExports"];
         grouped.Source = options;
         ExportChoices.ItemsSource = grouped.View;

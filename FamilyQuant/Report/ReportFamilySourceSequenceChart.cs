@@ -11,11 +11,16 @@ public sealed class ReportFamilySourceSequenceChart : ReportPrintChart
 {
     public const int SelectionLimit = 8;
     public IReadOnlyList<FamilySourceSequenceRow> Rows { get; }
-    public ReportFamilySourceSequenceChart(IEnumerable<FamilySourceSequenceRow> rows) => Rows = rows.ToArray();
-
-    private static FormattedText NameLabel(FamilySourceSequenceRow row)
+    public IReadOnlyDictionary<int, string> FamilyLabels { get; }
+    public ReportFamilySourceSequenceChart(IEnumerable<FamilySourceSequenceRow> rows, IReadOnlyDictionary<int, string>? familyLabels = null)
     {
-        var name = Text(FamilyFigureLabel.Format(row.FamilyUserId, row.Description, int.MaxValue), ChartPalette.Light.Ink, 16, true);
+        Rows = rows.ToArray();
+        FamilyLabels = familyLabels ?? new Dictionary<int, string>();
+    }
+
+    private static FormattedText NameLabel(FamilySourceSequenceRow row, IReadOnlyDictionary<int, string>? familyLabels = null)
+    {
+        var name = Text(FamilyFigureLabel.Format(row.FamilyUserId, familyLabels?.GetValueOrDefault(row.FamilyUserId, row.Description) ?? row.Description, int.MaxValue), ChartPalette.Light.Ink, 16, true);
         name.MaxTextWidth = LayoutWidth - 40;
         if (name.Height <= 90) return name;
         // Pathological descriptions do not make a page unbounded. The supplement retains the full name.
@@ -24,17 +29,17 @@ public sealed class ReportFamilySourceSequenceChart : ReportPrintChart
         return name;
     }
 
-    public static double RequiredHeight(IReadOnlyList<FamilySourceSequenceRow> rows) =>
-        Math.Max(360, 112 + rows.Sum(row => NameLabel(row).Height + 74) + 84);
+    public static double RequiredHeight(IReadOnlyList<FamilySourceSequenceRow> rows, IReadOnlyDictionary<int, string>? familyLabels = null) =>
+        Math.Max(360, 112 + rows.Sum(row => NameLabel(row, familyLabels).Height + 74) + 84);
 
-    public static IReadOnlyList<IReadOnlyList<FamilySourceSequenceRow>> Pages(FamilySourceSequenceSummary summary)
+    public static IReadOnlyList<IReadOnlyList<FamilySourceSequenceRow>> Pages(FamilySourceSequenceSummary summary, IReadOnlyDictionary<int, string>? familyLabels = null)
     {
         var pages = new List<IReadOnlyList<FamilySourceSequenceRow>>();
         var page = new List<FamilySourceSequenceRow>();
         foreach (var row in summary.Families.Where(r => r.DeNovoUnionDistinctSequences > 0)
             .OrderByDescending(r => r.DeNovoUnionDistinctSequences).ThenBy(r => r.FamilyUserId).Take(SelectionLimit))
         {
-            if (page.Count > 0 && (page.Count == 3 || RequiredHeight(page.Append(row).ToArray()) > 560))
+            if (page.Count > 0 && (page.Count == 3 || RequiredHeight(page.Append(row).ToArray(), familyLabels) > 560))
             {
                 pages.Add(page.ToArray()); page.Clear();
             }
@@ -56,7 +61,7 @@ public sealed class ReportFamilySourceSequenceChart : ReportPrintChart
         double y = 112;
         foreach (var row in Rows)
         {
-            var name = NameLabel(row); name.SetForegroundBrush(palette.Ink);
+            var name = NameLabel(row, FamilyLabels); name.SetForegroundBrush(palette.Ink);
             dc.DrawText(name, new Point(20, y));
             y += name.Height + 8;
             double x = 20;

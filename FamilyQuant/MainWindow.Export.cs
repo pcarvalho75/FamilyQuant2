@@ -47,10 +47,12 @@ public partial class MainWindow
             new(ProjectExportKind.InterpretationInput, "Interpretation input (Markdown)", "Interpretation input", report && loadedManifest?.FamilyRunShares != null,
                 report && loadedManifest?.FamilyRunShares != null ? "Writes stored Results, panel and report details to Markdown for an assistant you choose. The project stays unchanged; Undo does not remove the file." : "Interpretation input needs stored Results with family run shares. Open a computed project or run Quantify to enable it.")
         };
-        var window = new ExportWindow(options);
+        var window = new ExportWindow(options, cgc?.fcf.ReportFamilyNames ?? ReportFamilyNameChoice.Name, project);
         if (ShellDialogs.IsDisplayed(this)) window.Owner = this;
         if (ExportPresenterOverride != null) ExportPresenterOverride(window);
         else window.ShowDialog();
+        if (window.SelectedExport != null && cgc?.ViewModel.ApplyReportFamilyNames(window.FamilyNames) == true)
+            analytics?.ViewModel.RefreshFamilyNames();
         switch (window.SelectedExport)
         {
             case ProjectExportKind.Report: MenuItemExportReport_Click(this, new RoutedEventArgs()); break;

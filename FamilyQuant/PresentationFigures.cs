@@ -2238,6 +2238,7 @@ namespace FamilyQuant
         private readonly HashSet<int> labelledFamilyIds;
         private IReadOnlyList<Rect> lastLabelBounds = Array.Empty<Rect>();
         public IReadOnlyList<FamilyEnvelopeQuantRow> Rows => rows; // U3c exact native scatter inputs.
+        public IReadOnlyDictionary<int, string> FamilyLabels { get; }
         public static (double Signal, double DeNovoShare) Value(FamilyEnvelopeQuantRow row) =>
             (Math.Max(0, row.TotalEnvelopeReferenceCalibrated), row.TotalEnvelopeReferenceCalibrated > 0
                 ? row.DeNovoEnvelopePrimary / row.TotalEnvelopeReferenceCalibrated : 0);
@@ -2249,10 +2250,11 @@ namespace FamilyQuant
         /// <summary>Number of labels whose most recent placement required a leader line.</summary>
         public int LastLabelLeaderCount { get; private set; }
 
-        public FamilySignalShareChart(FamilyEnvelopeQuantResult families, int labelTopN)
+        public FamilySignalShareChart(FamilyEnvelopeQuantResult families, int labelTopN, IReadOnlyDictionary<int, string>? familyLabels = null)
         {
             if (families == null) throw new ArgumentNullException(nameof(families));
             rows = families.Families.OrderBy(f => f.FamilyUserId).ToList();
+            FamilyLabels = familyLabels ?? new Dictionary<int, string>();
             labelledFamilyIds = rows.OrderByDescending(f => f.TotalEnvelopeReferenceCalibrated)
                 .ThenBy(f => f.FamilyUserId).Take(Math.Max(0, labelTopN))
                 .Select(f => f.FamilyUserId).ToHashSet();
@@ -2305,7 +2307,7 @@ namespace FamilyQuant
                 .ThenBy(r => r.FamilyUserId)
                 .Select(r => new FamilyLabelSpec(
                     positions[r.FamilyUserId],
-                    Text(ShortName(r.Description, r.FamilyUserId), Palette.Ink, 8.5, true)))
+                    Text(ShortName(FamilyLabels.GetValueOrDefault(r.FamilyUserId, r.Description), r.FamilyUserId), Palette.Ink, 8.5, true)))
                 .ToList();
             List<FamilyLabelPlacement> labels = PlaceLabels(labelSpecs, plot);
             lastLabelBounds = labels.Select(label => label.Bounds).ToArray();

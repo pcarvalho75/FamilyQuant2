@@ -26,6 +26,7 @@ public static class ReportMethods
         Add("Sample", details?.SampleDescription);
         Add("Workflow", details?.Workflow);
         Add("Database kind", details?.DatabaseKind);
+        Add("Report family names", curation.ReportFamilyNames == ReportFamilyNameChoice.OtherLanguageName ? "Other-language name, with Name fallback" : "Name");
         Add("Database input", facts?.DatabaseFileName);
         Add("Chosen database file SHA-256", facts?.DatabaseFileSha256);
         Add("SEPro input", facts?.SeproFileName);
@@ -95,7 +96,8 @@ public static class ReportMethods
             string Family(string? key)
             {
                 if (key == null) return "Leave outside panel";
-                string? name = panel.Families.FirstOrDefault(f => f.Key == key)?.DisplayName;
+                var family = panel.Families.FirstOrDefault(f => f.Key == key);
+                string? name = family == null ? null : ReportFamilyNames.DisplayName(panel, family, curation.ReportFamilyNames);
                 return string.IsNullOrWhiteSpace(name) ? key : name;
             }
             var links = panel.EvidenceLinks.OrderBy(link => link.SourceFamily, StringComparer.Ordinal)

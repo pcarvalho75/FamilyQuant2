@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Report;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -20,6 +21,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     private ResultsExportKind exportKind;
     public AnalyticsData? Data { get; }
     public FamilyEnvelopeQuantResult? Families { get; }
+    public IReadOnlyDictionary<int, string> FamilyLabels { get; private set; } = new Dictionary<int, string>();
     public DeNovoHomology? Homology { get; }
     public DatabaseGapViewModel DatabaseGap { get; }
     public FamilySensitivityViewModel Sensitivity { get; }
@@ -92,6 +94,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
                 : FamilyEnvelopeQuant.BuildFromCuration(rows, curation); }
             catch (Exception ex) { Status = "Family attribution is unavailable. " + ex.Message; }
         }
+        RefreshFamilyNames();
         Details = "The headline uses the measured envelope for identified and de novo peptides. The M+0 " +
             "reading below uses only the monoisotopic peak. The representative table is counted before cross-side " +
             "suppression; recovery counts are after suppression.\n\n" + SummaryLine(Data, Families, curation, manifest);
@@ -107,6 +110,12 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     }
 
     public void ShowStatus(string message) => Status = message;
+    public void RefreshFamilyNames()
+    {
+        FamilyLabels = curation == null ? new Dictionary<int, string>() : ReportFamilyNames.SourceLabels(curation,
+            Families?.Families.ToDictionary(family => family.FamilyUserId, family => family.Description));
+        Changed(nameof(FamilyLabels));
+    }
     public IReadOnlyList<AnalyticsFigure> BuildCompositionFigures(bool strict = false)
     {
         if (RequiresQuantify)
@@ -119,7 +128,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
         {
             if (curation != null) FamilyStudyMembership.RequireCurrent(curation, manifest);
             return StoredCompositionFigures.Build(manifest,
-                Families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description), project: curation);
+                FamilyLabels, project: curation);
         }
         catch (Exception error) when (!strict && error is ArgumentException or InvalidOperationException)
         {

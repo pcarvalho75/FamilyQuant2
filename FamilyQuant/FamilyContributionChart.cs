@@ -89,7 +89,7 @@ namespace FamilyQuant
         /// is what the interface's "all" choice asks for.
         /// </summary>
         public static List<FamilyContributionBar> Fold(FamilyEnvelopeQuantResult? result, int topN,
-            SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique)
+            SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique, IReadOnlyDictionary<int, string>? familyLabels = null)
         {
             var bars = new List<FamilyContributionBar>();
             if (result == null) return bars;
@@ -113,7 +113,7 @@ namespace FamilyQuant
                     Kind = FamilyContributionBarKind.Family,
                     FamilyUserId = f.FamilyUserId,
                     FamilyCount = 1,
-                    Label = FamilyFigureLabel.Format(f.FamilyUserId, f.Description, maximumNameLength: 34),
+                    Label = FamilyFigureLabel.Format(f.FamilyUserId, familyLabels?.GetValueOrDefault(f.FamilyUserId, f.Description) ?? f.Description, maximumNameLength: 34),
                     Description = string.Empty,
                     Identified = sharedPolicy == SharedPeptidePolicy.SplitEqually ? f.SplitIdentifiedEnvelope : f.UniqueIdentifiedEnvelope,
                     DeNovo = sharedPolicy == SharedPeptidePolicy.SplitEqually ? f.SplitDeNovoEnvelopePrimary : f.UniqueDeNovoEnvelopePrimary,
@@ -279,8 +279,9 @@ namespace FamilyQuant
                                        int topN = FamilyContributionPlot.DefaultTopN,
                                        bool asPercentOfTotal = false,
                                        ChartPalette? palette = null,
-                                       SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique)
-            : this(FamilyContributionPlot.Fold(result, topN, sharedPolicy), asPercentOfTotal,
+                                       SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique,
+                                       IReadOnlyDictionary<int, string>? familyLabels = null)
+            : this(FamilyContributionPlot.Fold(result, topN, sharedPolicy, familyLabels), asPercentOfTotal,
                    FamilyContributionPlot.MeasuredTotal(result),
                    result?.IdentityThreshold ?? 0, palette, sharedPolicy)
         {
