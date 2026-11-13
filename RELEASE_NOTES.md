@@ -4,6 +4,17 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.18 (published 2026-11-13)
+
+- **A family of your list keeps its members.** A row of your list that names a UniProt family (2.1.16) took only proteins whose own UniProt entry names that family, so unreviewed entries without a family annotation of their own stayed outside even when their domains and their reviewed neighbour put them in that row. Such a protein now joins the row when the row lists every one of its Pfam domains and is its best row; a protein whose own UniProt family is a different one is still kept out, and the scope words work as before. No question is added.
+- **The report exports after you curate.** Moving proteins after Apply grouping (Edit selected proteins, a typed User ID, Group by keywords or Recluster by words) no longer stops the report with "Family assignment evidence is missing or out of date". The moved proteins keep their evidence with the reason "Moved by you" or "Regrouped by words" in the protein audit, Undo restores both, and a project whose list, database or evidence really changed still asks you to group again.
+- **Your sheet is taken as written.** Pfam codes in your family list are accepted as you wrote them even before Fetch evidence; Import family list asks only about a cell that names a domain without its code. Any row can be un-confirmed later, in the import summary or in Family checklist (**Un-confirm matches**). The Columns page shows Notes, Decision and Subclass names only when your sheet has such a column, and says why Next is unavailable.
+- **The grouping steps in working order.** The Grouping panel reads a Group by evidence (Import family list, Fetch evidence, Group by evidence), b Group by words (optional), then **Fetch UniProt families (optional)** and **Quantify** last. Fetch evidence already brings each protein's own UniProt family; Fetch UniProt families downloads their reviewed relatives for the Database gap estimate, which grouping does not need.
+- **Family names in your language.** File > Export has **Family names**: Name or Other-language name. The HTML, Word and workbook reports and the Results chart use it; a family without an other-language name keeps its Name.
+- **A pie chart.** The HTML report's family chart and the Results screen's Family chart offer **Pie**: one numbered slice per family shown, then other families, shared between families and unattributed, on all measured peptide-feature signal, summing to 100%. The bars and the ring keep their values.
+
+**Feature ledger.** @LEDGER@
+
 ## 2.1.17 (published 2026-11-11)
 
 - **Review grouping fits a laptop screen.** "Where proteins go" opens to its three counts and their explanations and closes without leaving a gap; the two status lines under the scope stay readable; the Family checklist spans the window and shows its rows, with the reasons below. Projects, groupings and numbers are unchanged.
