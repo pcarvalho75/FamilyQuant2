@@ -67,6 +67,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-quantify-screen-run", "FamilyQuant.Tests.Program.QuantifyScreenRunTests()"),
         SuiteCommandRule.Covered("--test-family-list-walk", "FamilyQuant.Tests.Program.FamilyListWalkTests()"),
         SuiteCommandRule.Covered("--test-deck-screens", "FamilyQuant.Tests.Program.DeckScreenTests()"),
+        SuiteCommandRule.Excluded("--deck-screens-2118", "Desk-only 2.1.18 deck screen producer over explicit copies of a project, list, computed project and report; it drives the same walk as --deck-screens, whose synthetic proof is --test-deck-screens."),
         SuiteCommandRule.Excluded("--deck-screens", "Desk-only screen producer over explicit project/workbook copies; --test-deck-screens proves all named light-theme PNGs and unchanged synthetic inputs."),
         SuiteCommandRule.Covered("--test-subclass-report-flow", "FamilyQuant.Tests.Program.SubclassReportFlowTests()"),
         SuiteCommandRule.Covered("--test-subclass-assignment-reimport", "FamilyQuant.Tests.Program.SubclassAssignmentReimportTests()"),

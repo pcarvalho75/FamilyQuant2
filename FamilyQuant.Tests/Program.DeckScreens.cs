@@ -141,7 +141,7 @@ internal static partial class Program
                     plot.BringIntoView(); PumpDispatcher();
                     Save(owner, "11-results-family-chart.png", "Results native family contribution chart after Apply grouping, fitted to the viewport");
                 });
-            Task<int> walk = AppOperationHost.OnUi(main, () => FamilyListWalkCoreAsync(main, project, workbook, output, null, Print, capture));
+            Task<int> walk = AppOperationHost.OnUi(main, () => FamilyListWalkCoreAsync(main, project, workbook, output, null, Print, capture: capture));
             while (!walk.IsCompleted) { PumpDispatcher(); Thread.Sleep(5); }
             if (walk.GetAwaiter().GetResult() != 0 || screens.Count != 11) throw new InvalidOperationException("The walk did not reach all eleven requested screens.");
             if (projectHash != FileFingerprint.Sha256(args[1]) || workbookHash != FileFingerprint.Sha256(args[2])) throw new InvalidDataException("An input changed.");
