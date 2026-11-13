@@ -156,9 +156,10 @@ namespace FamilyQuant.Tests
                 string.Join(", ", analyticsControls.Select(Describe)));
 
             var topN = UiField<ComboBox>(analytics, "ComboBoxFamilyTopN")!;
-            Check("the family TopN list offers its five choices, each with a tooltip of its own",
-                topN.Items.Count == 5 && topN.Items.Cast<ComboBoxItem>().All(i => i.ToolTip != null),
-                topN.Items.Count.ToString(CultureInfo.CurrentCulture));
+            Check("the family TopN list offers its five Top N choices and Pie, each with a tooltip of its own",
+                topN.Items.Cast<ComboBoxItem>().Select(item => item.Tag as string).SequenceEqual(new[] { "10", "15", "20", "30", "0", "pie" })
+                && topN.Items.Cast<ComboBoxItem>().All(item => item.ToolTip != null),
+                string.Join(", ", topN.Items.Cast<ComboBoxItem>().Select(item => item.Tag as string)));
 
             MenuCommandPreservationTests(main);
 
