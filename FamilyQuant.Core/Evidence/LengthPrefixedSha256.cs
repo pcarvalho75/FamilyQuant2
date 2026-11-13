@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.IO;
 using System.Text.Json;
+using System.Linq;
 
 namespace FamilyQuant.Evidence;
 
@@ -20,23 +21,34 @@ internal sealed class LengthPrefixedSha256 : IDisposable
 
     // Preserve Append(JsonSerializer.Serialize(value)) exactly, including its byte-length prefix.
     // The input must remain unchanged/re-enumerable, as the enclosing currentness check requires.
-    internal void AppendJson<T>(T value)
+    internal void AppendJson<T>(T value) => AppendJson(new[] { this }, value);
+
+    // One value appended to several hashes, counted and streamed once for all of them. A known byte length spares the
+    // counting pass; the write checks it, and a wrong one returns -1 so the caller hashes again without it.
+    internal static int AppendJson<T>(LengthPrefixedSha256[] targets, T value, int? knownLength = null)
     {
-        using var count = new JsonHashStream(null);
-        JsonSerializer.Serialize(count, value);
-        hash.AppendData(BitConverter.GetBytes(count.Written));
-        using var output = new JsonHashStream(hash);
+        int length = knownLength ?? -1;
+        if (knownLength == null)
+        {
+            using var count = new JsonHashStream();
+            JsonSerializer.Serialize(count, value);
+            length = count.Written;
+        }
+        foreach (var target in targets) target.hash.AppendData(BitConverter.GetBytes(length));
+        using var output = new JsonHashStream(targets.Select(target => target.hash).ToArray());
         JsonSerializer.Serialize(output, value);
-        if (output.Written != count.Written) throw new InvalidDataException("Fingerprint input changed during serialization.");
+        if (output.Written == length) return length;
+        if (knownLength == null) throw new InvalidDataException("Fingerprint input changed during serialization.");
+        return -1;
     }
 
-    private sealed class JsonHashStream(IncrementalHash? destination) : Stream
+    private sealed class JsonHashStream(params IncrementalHash[] destinations) : Stream
     {
         internal int Written { get; private set; }
         public override void Write(ReadOnlySpan<byte> bytes)
         {
             Written = checked(Written + bytes.Length);
-            destination?.AppendData(bytes);
+            foreach (var destination in destinations) destination.AppendData(bytes);
         }
         public override void Write(byte[] bytes, int offset, int count) => Write(bytes.AsSpan(offset, count));
         public override bool CanRead => false;
