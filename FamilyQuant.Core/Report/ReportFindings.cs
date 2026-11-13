@@ -19,6 +19,7 @@ public sealed record ReportFindingsInput
     public IReadOnlyDictionary<int, string> Labels { get; init; } = new Dictionary<int, string>();
     /// <summary>Null without a panel; then no statement about panel families is made.</summary>
     public FamilyPanel? Panel { get; init; }
+    public ReportFamilyNameChoice FamilyNameChoice { get; init; }
     public IReadOnlyDictionary<int, string?> PanelKeyByUserId { get; init; } = new Dictionary<int, string?>();
     public IReadOnlyDictionary<string, int> MembersByPanelKey { get; init; } = new Dictionary<string, int>();
     public IReadOnlyList<string> ScopeTerms { get; init; } = Array.Empty<string>();
@@ -61,7 +62,7 @@ public static class ReportFindings
         return new ReportFindingsInput
         {
             Shares = manifest.FamilyRunShares, Grouping = grouping, Counts = manifest.FamilyProteinCounts, Subclasses = manifest.FamilySubclassParts,
-            Labels = labels, Panel = curation.FamilyPanel, PanelKeyByUserId = keys, MembersByPanelKey = members,
+            Labels = labels, Panel = curation.FamilyPanel, FamilyNameChoice = curation.ReportFamilyNames, PanelKeyByUserId = keys, MembersByPanelKey = members,
             ScopeTerms = curation.EvidenceRecipe?.Options.ScopeTerms ?? Array.Empty<string>(),
             Links = curation.FamilyPanel?.EvidenceLinks ?? new List<FamilyPanelEvidenceLink>(),
             DeNovoInputs = manifest.DeNovoInputs,
@@ -168,7 +169,7 @@ public static class ReportFindings
             if (unobserved.Count > 0)
             {
                 foreach (string key in unobserved)
-                    numbers.Add(new[] { "unobserved", panel.Families.Single(f => f.Key == key).DisplayName + " database members", Integer(input.MembersByPanelKey[key]) });
+                    numbers.Add(new[] { "unobserved", ReportFamilyNames.DisplayName(panel, panel.Families.Single(f => f.Key == key), input.FamilyNameChoice) + " database members", Integer(input.MembersByPanelKey[key]) });
                 Say("unobserved", Record("unobserved", "quantified panel families without an observed peptide", Integer(unobserved.Count))
                     + (unobserved.Count == 1 ? " quantified panel family has" : " quantified panel families have") + " database members and no peptide observed ("
                     + Record("unobserved", "their database members", Integer(unobserved.Sum(k => input.MembersByPanelKey[k]))) + " database members); the supplement names "

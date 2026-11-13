@@ -62,10 +62,12 @@ internal static partial class Program
                     }
                     CaptureFamilyListPage(window, output, theme, 1366, 768, "01-required-choices");
                     ResolveWorkbookUiDraft(model); PumpDispatcher();
-                    var optional = model.WorkbookSections.Single(section => section.Key == "matches");
-                    Check(theme + " nonblocking Pfam findings say optional while acceptance stays available", !optional.NeedsChoice && model.CanAcceptWorkbook,
-                        optional.Summary + "; " + string.Join("; ", model.WorkbookReviewProblems));
-                    Check(theme + " optional card does not use the required-choice token border", !Equals(Card("matches").BorderBrush, Application.Current.FindResource("AccentBrush")));
+                    var optional = model.WorkbookSections.SingleOrDefault(section => section.Key == "matches");
+                    Check(theme + " resolved Pfam findings keep acceptance available without an unnecessary matching card",
+                        model.CanAcceptWorkbook && optional?.NeedsChoice != true && (optional == null) == (model.PfamQuestions.Count == 0),
+                        (optional?.Summary ?? "No Pfam question") + "; " + string.Join("; ", model.WorkbookReviewProblems));
+                    Check(theme + " an optional matching card never uses the required-choice token border",
+                        optional == null || !Equals(Card("matches").BorderBrush, Application.Current.FindResource("AccentBrush")));
                     CaptureFamilyListPage(window, output, theme, 1366, 768, "02-optional-findings");
                     var subclass = model.SubclassChoices.First(); subclass.Family = "missing-family"; subclass.Use = true;
                     FinishReviewWork(() => model.ReviewWorkbookSectionAsync("subclasses")); PumpDispatcher();

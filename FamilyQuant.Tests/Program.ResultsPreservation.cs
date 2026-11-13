@@ -110,7 +110,7 @@ internal static partial class Program
             void Tooltip(string id, FrameworkElement element, string expected, string symbol) => Prove(id,
                 "retained tooltip: " + expected, element.ToolTip is string actual && actual == expected
                     && actual.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length >= 6, symbol);
-            Tooltip("FQ15-6E6228F56C09", top, "Choose the largest families as separate bars: 10, 15, 20, 30 or all families, with 15 as the default; the remainder shares one bar. This changes the chart and subsequent figure exports without editing project quantities; unavailable until quantitation exists.", "ComboBoxFamilyTopN.ToolTip");
+            Tooltip("FQ15-6E6228F56C09", top, "Choose bars for 10, 15 (default), 20, 30 or all families, or Pie using the current cutoff and the same pooled all-feature buckets. This changes the Results view without editing project quantities; run Quantify to enable it.", "ComboBoxFamilyTopN.ToolTip");
             Prove("FQ15-1F69AF99C92A", "family limit selector is displayed and defaults to fifteen", top.IsVisible && top.IsEnabled
                 && (string?)((ComboBoxItem)top.SelectedItem).Tag == "15", "ComboBoxFamilyTopN / ChartChoiceChanged");
             var options = new[] {

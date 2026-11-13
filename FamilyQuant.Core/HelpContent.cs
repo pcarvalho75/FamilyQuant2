@@ -20,11 +20,12 @@ namespace FamilyQuant
     public static class HelpContent
     {
         public const string GroupingOrder =
-            "0. Import family list (optional): use File > Import family list to choose your workbook or Use template to write an empty workbook to fill and import, with every family quantified. The normal pages are File and sheet, Columns, Summary; other pages appear only for a needed choice. Older sheets can still carry Notes and Decision columns. Only a Decision column with custom words needs label review; source colours remain in the workbook preview. Supplied Pfam codes found in stored evidence are accepted directly; names and codes not found need a choice. A row without a code gets no proteins until it has one. Accept imports the list and closes the window; File > Save keeps it, and Undo restores the previous list. Closing before acceptance discards only the import draft. UniProt family holds exact family names separated by semicolons; empty means none. Sheets without family columns are skipped and named in the summary; their source text is kept.\n" +
-            "1. Fetch evidence: download UniProt annotations for the project's proteins.\n" +
+            "0. Import family list (optional): use File > Import family list to choose your workbook or Use template to write an empty workbook to fill and import, with every family quantified. The normal pages are File and sheet, Columns, Summary; other pages appear only for a needed choice. Older sheets can still carry Notes and Decision columns. Columns shows Notes, Decision and Subclass names only when a source column is available. If Next is unavailable, the line below the buttons names the missing field or the column used twice. Only a Decision column with custom words needs label review; source colours remain in the workbook preview. Well-formed Pfam codes are confirmed as written, before or after Fetch evidence; only domain names without codes need a matching choice. Un-confirm in Summary removes a confirmation from the draft while keeping the source codes. A row without a code gets no proteins until it has one. Accept imports the list and closes the window; File > Save keeps it, and Undo restores the previous list. Closing before acceptance discards only the import draft. UniProt family holds exact family names separated by semicolons; empty means none. Sheets without family columns are skipped and named in the summary; their source text is kept.\n" +
+            "1. Fetch evidence: download UniProt annotations for the project's proteins, including each protein's own UniProt family.\n" +
             "2. Group by evidence: review the scope and proposal, then Apply grouping.\n" +
-            "3. Fetch UniProt families: find the families of in-scope database proteins and download their reviewed and database-clade entries.\n" +
-            "4. Quantify: measure peptide signal from the RAW files.\n";
+            "b Group by words (optional): group by keywords or Recluster by words before Quantify. Undo restores grouping edits.\n" +
+            "Fetch UniProt families (optional): download reviewed relatives of each UniProt family in scope and database-clade entries for the Database gap estimate. Grouping does not need this download; each protein's own family already comes with Fetch evidence.\n" +
+            "Quantify: measure peptide signal from the RAW files after any grouping choices.\n";
 
         /// <summary>
         /// <paramref name="profile"/> is null before a project is loaded; the text then explains what the
@@ -90,6 +91,13 @@ namespace FamilyQuant
             sb.AppendLine("Share rows use compact percentages. The chart heading names their reference total.");
             sb.AppendLine("Hover or select a value for its exact reading and base, including rounded ring totals.");
             sb.AppendLine("Family labels stop before database header fields; tooltips and details retain the full name.");
+            sb.AppendLine("In File > Export, Family names chooses Name or Other-language name for report and Results labels.");
+            sb.AppendLine("A blank other-language name keeps Name. Export applies the choice, Save keeps it in the project, and Undo does not change it.");
+            sb.AppendLine("In the HTML Family contribution chart, Pie uses the Results bars' pooled family buckets,");
+            sb.AppendLine("including other families, shared and unattributed signal. It always divides by all measured");
+            sb.AppendLine("peptide-feature signal and keeps that base when Normalize to changes; Bars keeps the run means.");
+            sb.AppendLine("On Results, Family chart also offers Pie with the current family cutoff and the same pooled");
+            sb.AppendLine("all-peptide-feature buckets as its bars. Choose a Top N entry to return to bars.");
             sb.AppendLine("The compare-measures plot's mean and SD follow Normalize to, with its base named on the axis.");
             sb.AppendLine("Coverage uses matching choosers, a residue ruler and List placements and annotations.");
             sb.AppendLine();
@@ -220,6 +228,11 @@ namespace FamilyQuant
             sb.AppendLine("Each committed name or checkbox edit is one Undo step. Edit selected proteins can");
             sb.AppendLine("join or split selected rows and set their annotation in one batch; destination and");
             sb.AppendLine("surviving source families are locked, while emptied source families are not.");
+            sb.AppendLine("After Apply grouping, a protein moved by Edit selected proteins, a typed User ID, Group");
+            sb.AppendLine("by keywords or Recluster by words keeps its list row, with the reason Moved by you or");
+            sb.AppendLine("Regrouped by words in the protein audit; one outside every row takes the row of the");
+            sb.AppendLine("family it joins. A family left with two rows is reported without a link. The report");
+            sb.AppendLine("still exports after Quantify, and Undo restores the move and its reason together.");
             sb.AppendLine();
             sb.AppendLine("A legacy PatternLab export can lack the recorded divisor and per-run totals.");
             sb.AppendLine("Re-exporting it from XQuant records the divisor and every run's totals, making");
@@ -290,9 +303,10 @@ namespace FamilyQuant
             sb.AppendLine("domains stays ticked if it carries a keyword; short proteins and fragments can have");
             sb.AppendLine("no Pfam call. Domains do not separate everything: different families can share them.");
             sb.AppendLine();
-            sb.AppendLine("Fetch UniProt families finds the UniProt families of the in-scope proteins of your");
-            sb.AppendLine("database, then downloads every reviewed UniProt entry of those families and their");
-            sb.AppendLine("entries from your database's own clade. It uses the confirmed database task and scope");
+            sb.AppendLine("Fetch UniProt families is optional, after Group by keywords and Recluster by words and before Quantify.");
+            sb.AppendLine("Grouping does not need this download; each protein's own UniProt family already comes with Fetch evidence.");
+            sb.AppendLine("It downloads every reviewed relative of the UniProt families in scope and their entries");
+            sb.AppendLine("from your database's own clade for the Database gap estimate. It uses the confirmed database task and scope");
             sb.AppendLine("from Group by evidence.");
             sb.AppendLine("Fetch evidence first to supply the database's family annotations.");
             sb.AppendLine("If no matching task and scope are confirmed, it offers to open Group by evidence first.");
@@ -324,6 +338,7 @@ namespace FamilyQuant
             sb.AppendLine("Family checklist keeps every list row and counts rows with proposed proteins, pending Panel links choices,");
             sb.AppendLine("no Pfam code, no database match, no protein in scope, proteins in another row, or no placed proteins.");
             sb.AppendLine("Only unresolved Panel links choices are waiting. The checklist table stays visible while reasons and scope or matching actions scroll below.");
+            sb.AppendLine("Un-confirm matches removes the selected family's confirmed matches, also those accepted from its sheet codes, from the review; its Pfam codes stay. Apply grouping keeps it and Undo restores it.");
             sb.AppendLine("Family checklist uses the full review width and one line per row; hover over Panel family for its full name, key and excluded-contaminant count.");
             sb.AppendLine("After adding a phrase to scope, its preview stays beside the scrolling reasons and actions until Update proposal.");
             sb.AppendLine("Save panel as spreadsheet writes named link choices in the UniProt family column.");
@@ -332,7 +347,10 @@ namespace FamilyQuant
             sb.AppendLine("A row naming a UniProt family takes only proteins with that complete family name.");
             sb.AppendLine("Those proteins enter that row even without matching scope words. Rows sharing its");
             sb.AppendLine("domains without a family name take the other supported proteins under the existing");
-            sb.AppendLine("scope rules. A neighbour cannot supply membership of a named UniProt family.");
+            sb.AppendLine("scope rules. A neighbour cannot supply membership of a named UniProt family to a protein");
+            sb.AppendLine("whose own family differs. A protein with no UniProt family of its own may join the named");
+            sb.AppendLine("row through a qualifying neighbour when the row lists every one of its Pfam domains and");
+            sb.AppendLine("is its best row (most shared domains, then the shorter list).");
             sb.AppendLine("After re-importing a list, Apply grouping also refreshes names and subclass rules");
             sb.AppendLine("for already grouped, locked members whose evidence still supports the same panel");
             sb.AppendLine("row. Their family numbers and locks stay unchanged; Undo restores the prior state.");

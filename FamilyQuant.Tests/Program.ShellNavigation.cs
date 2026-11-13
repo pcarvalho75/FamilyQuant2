@@ -101,12 +101,12 @@ internal static partial class Program
                 foreach (object child in LogicalTreeHelper.GetChildren(node))
                     if (child is DependencyObject next) foreach (var inner in InOrder(next)) yield return inner;
             }
-            string[] parts = { "TextBlockPartGroupByEvidence", "ButtonFetchDomains", "ButtonEvidenceGrouping", "ButtonFetchFamilyWorld",
-                "ButtonComputeFullXic", "TextBlockPartGroupByWords", "ButtonSuperCluster", "ButtonWordCluster" };
+            string[] parts = { "TextBlockPartGroupByEvidence", "ButtonFetchDomains", "ButtonEvidenceGrouping",
+                "TextBlockPartGroupByWords", "ButtonSuperCluster", "ButtonWordCluster", "ButtonFetchFamilyWorld", "ButtonComputeFullXic" };
             var order = InOrder(project).Select(element => element.Name).Where(parts.Contains).ToArray();
-            Check("part a and part b are labelled and the guided step order is unchanged",
+            Check("part a and optional part b precede the unchanged Quantify route",
                 ((TextBlock)project.FindName("TextBlockPartGroupByEvidence")).Text == "a " + WorkflowNames.GroupByEvidence
-                && ((TextBlock)project.FindName("TextBlockPartGroupByWords")).Text == "b " + WorkflowNames.GroupByWords
+                && ((TextBlock)project.FindName("TextBlockPartGroupByWords")).Text == "b " + WorkflowNames.GroupByWords + " (optional)"
                 && order.SequenceEqual(parts) && ((Button)project.FindName("ButtonComputeFullXic")).Content as string == WorkflowNames.Quantify,
                 string.Join(", ", order));
             Route(ShellDestination.Start);

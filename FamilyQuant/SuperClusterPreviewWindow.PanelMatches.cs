@@ -28,4 +28,10 @@ public partial class SuperClusterPreviewWindow
         }
         catch (Exception error) { Operations.LogFailure(error); model.ReportManualFailure(error.Message); }
     }
+    private void UnconfirmPanelMatches_Click(object sender, RoutedEventArgs e)
+    {
+        if (!model.CanUnconfirmPanelMatches) return;
+        try { model.UnconfirmPanelMatches(); }
+        catch (Exception error) { Operations.LogFailure(error); model.ReportManualFailure(error.Message); }
+    }
 }

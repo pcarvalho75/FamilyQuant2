@@ -22,8 +22,11 @@ public sealed partial class EvidenceGroupingSession
     {
         EnsureCurrent();
         if (reviewPanel == null || Proposal == null) throw new InvalidOperationException("Build a panel proposal before confirming evidence matches.");
-        var updatedBase = PanelEvidenceMatching.WithConfirmed(reviewPanel, familyKey, matches);
-        var updatedSelection = PanelEvidenceMatching.WithConfirmed(selectedReviewPanel ?? reviewPanel, familyKey, matches);
+        // IM10b: an unconfirmed record un-confirms the family in this review draft.
+        FamilyPanel Update(FamilyPanel panel) => matches.UserConfirmed ? PanelEvidenceMatching.WithConfirmed(panel, familyKey, matches)
+            : PanelEvidenceMatching.WithoutConfirmed(panel, familyKey);
+        var updatedBase = Update(reviewPanel);
+        var updatedSelection = Update(selectedReviewPanel ?? reviewPanel);
         var input = EvidenceProposalPresentation.Present(Proposal, file, coherenceProfiles, updatedSelection);
         EnsureCurrent();
         reviewPanel = updatedBase; selectedReviewPanel = updatedSelection;

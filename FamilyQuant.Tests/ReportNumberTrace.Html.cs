@@ -377,7 +377,7 @@ internal static partial class ReportNumberTrace
                     foreach (var part in row.Parts) ids.AddRange(new[] { part.Value.Exact, part.Value.Display });
                 }
             }
-        foreach (var figure in p.FamilyFigures.Figures)
+        foreach (var figure in p.FamilyFigures.Pie?.Figure is { } pieFigure ? p.FamilyFigures.Figures.Append(pieFigure) : p.FamilyFigures.Figures)
             foreach (var view in figure.Views.Values)
                 foreach (var row in view.Rows)
                 {

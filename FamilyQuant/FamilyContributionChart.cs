@@ -42,6 +42,7 @@ namespace FamilyQuant
 
         /// <summary>The bar's caption in the left gutter, already free of the description.</summary>
         public string Label { get; set; } = string.Empty;
+        public string FullLabel { get; set; } = string.Empty;
 
         /// <summary>The family's description, truncated only at draw time so the model stays the data.</summary>
         public string Description { get; set; } = string.Empty;
@@ -89,7 +90,7 @@ namespace FamilyQuant
         /// is what the interface's "all" choice asks for.
         /// </summary>
         public static List<FamilyContributionBar> Fold(FamilyEnvelopeQuantResult? result, int topN,
-            SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique)
+            SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique, IReadOnlyDictionary<int, string>? familyLabels = null)
         {
             var bars = new List<FamilyContributionBar>();
             if (result == null) return bars;
@@ -113,7 +114,8 @@ namespace FamilyQuant
                     Kind = FamilyContributionBarKind.Family,
                     FamilyUserId = f.FamilyUserId,
                     FamilyCount = 1,
-                    Label = FamilyFigureLabel.Format(f.FamilyUserId, f.Description, maximumNameLength: 34),
+                    Label = FamilyFigureLabel.Format(f.FamilyUserId, familyLabels?.GetValueOrDefault(f.FamilyUserId, f.Description) ?? f.Description, maximumNameLength: 34),
+                    FullLabel = FamilyFigureLabel.Format(f.FamilyUserId, familyLabels?.GetValueOrDefault(f.FamilyUserId, f.Description) ?? f.Description, maximumNameLength: int.MaxValue),
                     Description = string.Empty,
                     Identified = sharedPolicy == SharedPeptidePolicy.SplitEqually ? f.SplitIdentifiedEnvelope : f.UniqueIdentifiedEnvelope,
                     DeNovo = sharedPolicy == SharedPeptidePolicy.SplitEqually ? f.SplitDeNovoEnvelopePrimary : f.UniqueDeNovoEnvelopePrimary,
@@ -279,8 +281,9 @@ namespace FamilyQuant
                                        int topN = FamilyContributionPlot.DefaultTopN,
                                        bool asPercentOfTotal = false,
                                        ChartPalette? palette = null,
-                                       SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique)
-            : this(FamilyContributionPlot.Fold(result, topN, sharedPolicy), asPercentOfTotal,
+                                       SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique,
+                                       IReadOnlyDictionary<int, string>? familyLabels = null)
+            : this(FamilyContributionPlot.Fold(result, topN, sharedPolicy, familyLabels), asPercentOfTotal,
                    FamilyContributionPlot.MeasuredTotal(result),
                    result?.IdentityThreshold ?? 0, palette, sharedPolicy)
         {

@@ -30,7 +30,10 @@ internal static partial class Program
 
     private static int FamilyListWalkCommand(string[] args)
     {
-        if (args.Length is not (4 or 5)) { Console.WriteLine("Use --family-list-walk <project.fqproj> <family-list.xlsx> <new-output-directory> [scope]."); return 1; }
+        // --unlock-all starts as a fresh project does, with no locked family, through the program's Unlock action.
+        bool unlockAll = args.Contains("--unlock-all", StringComparer.Ordinal);
+        args = args.Where(arg => arg != "--unlock-all").ToArray();
+        if (args.Length is not (4 or 5)) { Console.WriteLine("Use --family-list-walk <project.fqproj> <family-list.xlsx> <new-output-directory> [scope] [--unlock-all]."); return 1; }
         string output = Path.GetFullPath(args[3]);
         if (Directory.Exists(output) || File.Exists(output)) { Console.WriteLine("Use a fresh output directory."); return 1; }
         Directory.CreateDirectory(output);
@@ -45,7 +48,7 @@ internal static partial class Program
             MainWindow.UnsavedProjectChoiceOverride = () => UnsavedProjectChoice.Discard;
             MainWindow.SelectSaveProjectPathOverride = () => Path.Combine(output, "walked.fqproj");
             main.Show(); PumpDispatcher();
-            Task<int> walk = AppOperationHost.OnUi(main, () => FamilyListWalkCoreAsync(main, args[1], args[2], output, args.Length == 5 ? args[4] : null, Print));
+            Task<int> walk = AppOperationHost.OnUi(main, () => FamilyListWalkCoreAsync(main, args[1], args[2], output, args.Length == 5 ? args[4] : null, Print, unlockAll));
             while (!walk.IsCompleted) { PumpDispatcher(); Thread.Sleep(5); }
             exit = walk.GetAwaiter().GetResult(); PumpDispatcher();
         }
@@ -59,7 +62,8 @@ internal static partial class Program
         return exit;
     }
 
-    private static async Task<int> FamilyListWalkCoreAsync(MainWindow main, string project, string workbook, string output, string? scopeOverride, Action<string> print)
+    private static async Task<int> FamilyListWalkCoreAsync(MainWindow main, string project, string workbook, string output, string? scopeOverride, Action<string> print,
+        bool unlockAll = false)
     {
         string projectHash = FileFingerprint.Sha256(project), workbookHash = FileFingerprint.Sha256(workbook);
         ClusterGenerationControl? screen = null;
@@ -69,6 +73,8 @@ internal static partial class Program
             var grid = (Grid)main.FindName("GridApp"); screen = grid.Children.OfType<ClusterGenerationControl>().Single();
             await screen.FullXicReady;
             var file = screen.fcf;
+            if (unlockAll)
+                print("UNLOCKED " + screen.ViewModel.UnlockFamilies(file.LockedUserIds.ToArray()).ToString(CultureInfo.InvariantCulture) + " families");
             string scope = scopeOverride ?? string.Join(", ", (file.EvidenceRecipe?.Options.ScopeTerms
                 ?? throw new InvalidOperationException("The project has no saved grouping scope. Supply scope as the final argument."))
                 .Select(term => "\"" + term.Replace('"', ' ') + "\""));
@@ -206,6 +212,7 @@ internal static partial class Program
                     Family = "Stored reference family", Keywords = new() { "selected" }, Pfam = new() { new() { Accession = "PF98765", Name = "Stored reference domain" } } } },
             } } },
             EvidenceRecipe = new() { Options = new() { ScopeTerms = new[] { "selected" } } },
+            LockedUserIds = new() { 1 },
         };
         string project = Path.Combine(root, "fixture.fqproj"); ProjectStore.WriteFqproj(project, file, Array.Empty<QuantRow>(), new QuantManifest());
         string projectHash = TestFileHash.Upper(project);
@@ -217,7 +224,7 @@ internal static partial class Program
             FillTemplate(workbook, values.Select(value => PanelImportTemplate.Columns.Select(column => column.Role switch
             { PanelImportFields.FamilyKey => value.Key, PanelImportFields.DisplayName => value.Name, PanelImportFields.Pfam => value.Pfam, _ => "" }).ToArray()).ToArray());
             string workbookHash = TestFileHash.Upper(workbook), output = Path.Combine(root, tied ? "tied" : "plain");
-            int exit = FamilyListWalkCommand(new[] { "--family-list-walk", project, workbook, output });
+            int exit = FamilyListWalkCommand(tied ? new[] { "--family-list-walk", project, workbook, output } : new[] { "--family-list-walk", project, workbook, output, "--unlock-all" });
             Check("AP6-tool " + (tied ? "pending" : "ready") + " walk follows real import and grouping view models", exit == 0);
             if (exit != 0) continue;
             using var summary = JsonDocument.Parse(File.ReadAllText(Path.Combine(output, "walk.json"))); var json = summary.RootElement;
@@ -233,6 +240,8 @@ internal static partial class Program
                 var walked = ProjectStore.ReadFqproj(Path.Combine(output, "walked.fqproj"));
                 Check("AP6-tool enabled Apply grouping and normal Save As produce the walked project", json.GetProperty("Applied").GetBoolean()
                     && json.GetProperty("Saved").GetBoolean() && walked.fcf.FamilyPanel?.Families.Count == 3 && walked.fcf.EvidenceRecipe!.Assignments.Count > 0);
+                Check("GA5-tool --unlock-all unlocks every family first, so the locked member is applied", log.Contains("UNLOCKED 1 families", StringComparison.Ordinal)
+                    && walked.fcf.EvidenceRecipe!.Assignments.Any(a => a.ProteinIndex == 0));
                 Check("AP6-tool prints checklist/destination states and names missing-Pfam and no-match rows once", json.GetProperty("ProteinsInList").GetInt32() == 1
                     && json.GetProperty("InScopeProteinsOutsideList").GetInt32() == 1 && json.GetProperty("ProteinsOutsideScope").GetInt32() == 1
                     && log.Split('\n').Count(line => line.StartsWith("IMPORT ROW B ", StringComparison.Ordinal)) == 1

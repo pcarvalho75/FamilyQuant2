@@ -352,6 +352,10 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ImportEntryActionTests());
             suite.AddWithApplication(() => ImportDecisionPageTests());
             suite.AddWithApplication(() => ImportDirectPfamTests());
+            suite.AddWithApplication(() => ImportCodesAsWrittenTests());
+            suite.AddWithApplication(() => ImportColumnsTests());
+            suite.AddWithApplication(() => GroupingPanelOrderTests());
+            suite.AddWithApplication(() => FamilyWorldOptionalTests());
             suite.AddWithApplication(() => ImportSaveHandoffTests());
             suite.AddWithApplication(() => ImportConditionalPageTests());
             suite.Add(() => PanelVisibleLinkTests());
@@ -433,6 +437,10 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => PanelMultiScopeAuditTests());
             suite.Add(() => PanelCoverageTieTests(Path.Combine(workDir, "panel-coverage-ties")));
+            suite.Add(() => PanelRowDecodeTests(Path.Combine(workDir, "panel-row-decode")));
+            suite.Add(() => PanelListBeforeScopeTests());
+            suite.AddWithApplication(() => ExportAfterCurationTests(Path.Combine(workDir, "export-after-curation")));
+            suite.AddWithApplication(() => ChecklistUnconfirmTests(Path.Combine(workDir, "checklist-unconfirm")));
             suite.Add(() => PanelLinkRoundtripTests(Path.Combine(workDir, "panel-link-roundtrip")));
             suite.Add(() => PanelNamedFamilyTests(Path.Combine(workDir, "panel-named-families")));
             suite.AddWithApplication(() => PanelLinkNotesTests());
@@ -546,6 +554,9 @@ namespace FamilyQuant.Tests
             suite.Add(() => HtmlRingBasesTests(Path.Combine(workDir, "html-ring-bases")));
             suite.AddWithApplication(() => MassRangeRecoveryTests(Path.Combine(workDir, "mass-range-recovery")));
             suite.AddWithApplication(() => HtmlReportWordsTests(Path.Combine(workDir, "html-report-words")));
+            suite.AddWithApplication(() => ReportFamilyNameTests(Path.Combine(workDir, "report-family-names")));
+            suite.AddWithApplication(() => HtmlFamilyPieTests(Path.Combine(workDir, "html-family-pie")));
+            suite.AddWithApplication(() => ResultsFamilyPieTests(Path.Combine(workDir, "results-family-pie")));
             suite.AddWithApplication(() => MassRangePolishTests(Path.Combine(workDir, "mass-range-polish")));
             suite.Add(() => DatabaseEntryCountTests(null));
             suite.Add(() => AssignmentPresenceCopyTests(null));

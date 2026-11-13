@@ -153,9 +153,9 @@ internal static partial class Program
         SetImportHeaders(path, new[] { "Abbreviation", "Name", "Pfam domains" });
         FillTemplate(path, new[] { new[] { "A", "First family", "First domain" }, new[] { "B", "Second family", "PF99999; PF88888" } });
         summary = WorkbookImportSummaries.Build(importer.ProposeWorkbook(path), matching);
-        Check("IM6 names and unknown codes require exactly one resolving choice per source row",
+        Check("IM6 only names without codes require a resolving choice",
             summary.HasBlockingItems && summary.Sections.SelectMany(s => s.Items).Count(i => i.Required
-                && i.State == WorkbookImportItemState.Uncertain && i.Page == WorkbookImportPage.EvidenceMatches) == 2);
+                && i.State == WorkbookImportItemState.Uncertain && i.Page == WorkbookImportPage.EvidenceMatches) == 1);
         path = Path.Combine(ImportSimpleWork("IM6"), "inactive-rows.xlsx");
         PanelImportTemplate.Write(path);
         SetImportHeaders(path, new[] { "Abbreviation", "Name", "Pfam domains", "Decision" });

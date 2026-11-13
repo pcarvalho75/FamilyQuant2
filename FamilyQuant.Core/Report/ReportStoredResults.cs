@@ -63,7 +63,8 @@ public static class ReportStoredResults
                     "Flagged User IDs span more than one panel family or mix panel and outside members. Their pooled signal remains outside every reported family and outside Others. The stored denominator is retained; no conflict signal is redistributed.",
                     new[] { "family_user_id", "current_label", "pooled_primary_signal", "panel_keys", "outside_members", "reason" },
                     new[] { "Conflicting User ID", "Current label", "Pooled primary signal", "Panel keys", "Outside members", "Reason" });
-                var panelNames = curation?.FamilyPanel?.Families.ToDictionary(family => family.Key, family => family.DisplayName, StringComparer.Ordinal);
+                var panelNames = curation?.FamilyPanel?.Families.ToDictionary(family => family.Key,
+                    family => ReportFamilyNames.DisplayName(curation.FamilyPanel, family, curation.ReportFamilyNames), StringComparer.Ordinal);
                 var displayKeys = grouping.ConflictFamilies.ToDictionary(family => family.Family.FamilyUserId.ToString(System.Globalization.CultureInfo.InvariantCulture),
                     family => string.Join("; ", family.PanelFamilyKeys.Select(key => ManualFamilyChoices.IsGeneratedKey(key)
                         ? panelNames?.GetValueOrDefault(key) ?? "" : key).Where(value => value.Length > 0)), StringComparer.Ordinal);

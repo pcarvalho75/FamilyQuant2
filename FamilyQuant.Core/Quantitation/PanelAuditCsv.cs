@@ -144,6 +144,8 @@ namespace FamilyQuant
             }
             if (Has(PanelAssignmentEvidenceKind.ConfirmedLink)) parts.Add("Confirmed panel link");
             if (Has(PanelAssignmentEvidenceKind.AddedByHand)) parts.Add("Added by hand");
+            if (Has(PanelAssignmentEvidenceKind.MovedByYou)) parts.Add(PanelMembershipEdit.MovedByYou);
+            if (Has(PanelAssignmentEvidenceKind.RegroupedByWords)) parts.Add(PanelMembershipEdit.RegroupedByWords);
             string evidence = string.Join(" | ", parts);
             if (!assignment.IsApplied && evidence.Length > 0) evidence = "Considered, not applied: " + evidence;
             return new PanelFamilyAuditEvidence { ProteinIndex = assignment.ProteinIndex, Identifier = assignment.Identifier,

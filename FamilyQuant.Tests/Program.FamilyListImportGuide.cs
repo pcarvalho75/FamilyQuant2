@@ -42,8 +42,11 @@ internal static partial class Program
             .Select(section => section.Title[0]).SequenceEqual(new[] { '1', '2', '3' }));
         Check("optional decisions, repeated rows, subclass proposals and findings remain documented",
             new[] { "decisions", "duplicate", "special", "matches", "subclasses", "workbook", "accept" }.All(key => sections.Any(section => section.Key == key)));
-        Check("the guide explains direct PF codes, missing codes and explicit unresolved choices",
-            text.Contains("They do not ask for a second confirmation", StringComparison.Ordinal)
+        Check("the guide explains codes confirmed directly, before or after Fetch evidence, Un-confirm, and a domain name without a code",
+            text.Contains("confirmed directly", StringComparison.Ordinal)
+            && text.Contains("before or after Fetch evidence", StringComparison.Ordinal)
+            && text.Contains("Un-confirm", StringComparison.Ordinal)
+            && text.Contains("a domain name without a code needs a choice", StringComparison.Ordinal)
             && text.Contains("gets no proteins until it has one", StringComparison.Ordinal)
             && text.Contains("Continue without matches skips unresolved questions", StringComparison.Ordinal));
         Check("source notes and publication boundaries remain explicit", text.Contains("Every original column stays source text", StringComparison.Ordinal)

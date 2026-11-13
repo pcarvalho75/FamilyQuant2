@@ -10,9 +10,17 @@
         </CollectionViewSource>
     </Window.Resources>
     <Grid Margin="16">
-        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
         <TextBlock Text="Export" Style="{DynamicResource SectionTitle}" Margin="0,0,0,12"/>
-        <ListBox x:Name="ExportChoices" Grid.Row="1"
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <Label Content="Family names" Target="{Binding ElementName=FamilyNameChoice}" VerticalAlignment="Center" Padding="0" Margin="0,0,12,0"/>
+            <ComboBox x:Name="FamilyNameChoice" Width="215" ToolTipService.ShowOnDisabled="True"
+                      ToolTip="Use Name (default) or Other-language name for report and Results labels, keeping Name when a translation is blank. Export applies this project choice and Save keeps it; Undo does not change it.">
+                <ComboBoxItem Content="Name" ToolTip="Use each family's Name in reports and the Results chart. Export applies the choice and Save keeps it; Undo does not change it."/>
+                <ComboBoxItem Content="Other-language name" ToolTip="Use each family's mapped Other-language name, falling back to Name when it is blank. Export applies the choice and Save keeps it; Undo does not change it."/>
+            </ComboBox>
+        </StackPanel>
+        <ListBox x:Name="ExportChoices" Grid.Row="2"
                  SelectionChanged="ExportChoice_Changed" HorizontalContentAlignment="Stretch"
                  ToolTip="Choose a report, table or other file from the open project's stored data. Export opens the existing file choices; the project stays open and Undo does not remove exported files.">
             <ListBox.GroupStyle><GroupStyle><GroupStyle.HeaderTemplate><DataTemplate>
@@ -26,7 +34,7 @@
             </Style></ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Label}" TextWrapping="Wrap"/></DataTemplate></ListBox.ItemTemplate>
         </ListBox>
-        <DockPanel Grid.Row="2" Margin="0,12,0,0">
+        <DockPanel Grid.Row="3" Margin="0,12,0,0">
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                 <Button x:Name="ExportButton" Content="Export" IsDefault="True" Style="{DynamicResource PrimaryButton}" Click="Export_Click"
                         ToolTipService.ShowOnDisabled="True" ToolTip="Continue with the selected file's existing export choices and save dialog. Choose an available entry to enable it; Undo does not remove exported files."/>
