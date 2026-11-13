@@ -108,6 +108,7 @@ namespace FamilyQuant
 
             fcf.WordSimilarity = wordSimilarity;
             fcf.IsKeywordSuperCluster = isKeywordSuperCluster;
+            RestoreMembershipFacts(fcf);
         }
     }
 }

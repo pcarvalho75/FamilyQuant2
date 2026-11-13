@@ -221,6 +221,11 @@ namespace FamilyQuant
             sb.AppendLine("Each committed name or checkbox edit is one Undo step. Edit selected proteins can");
             sb.AppendLine("join or split selected rows and set their annotation in one batch; destination and");
             sb.AppendLine("surviving source families are locked, while emptied source families are not.");
+            sb.AppendLine("After Apply grouping, a protein moved by Edit selected proteins, a typed User ID, Group");
+            sb.AppendLine("by keywords or Recluster by words keeps its list row, with the reason Moved by you or");
+            sb.AppendLine("Regrouped by words in the protein audit; one outside every row takes the row of the");
+            sb.AppendLine("family it joins. A family left with two rows is reported without a link. The report");
+            sb.AppendLine("still exports after Quantify, and Undo restores the move and its reason together.");
             sb.AppendLine();
             sb.AppendLine("A legacy PatternLab export can lack the recorded divisor and per-run totals.");
             sb.AppendLine("Re-exporting it from XQuant records the divisor and every run's totals, making");
@@ -326,6 +331,7 @@ namespace FamilyQuant
             sb.AppendLine("Family checklist keeps every list row and counts rows with proposed proteins, pending Panel links choices,");
             sb.AppendLine("no Pfam code, no database match, no protein in scope, proteins in another row, or no placed proteins.");
             sb.AppendLine("Only unresolved Panel links choices are waiting. The checklist table stays visible while reasons and scope or matching actions scroll below.");
+            sb.AppendLine("Un-confirm matches removes the selected family's confirmed matches, also those accepted from its sheet codes, from the review; its Pfam codes stay. Apply grouping keeps it and Undo restores it.");
             sb.AppendLine("Family checklist uses the full review width and one line per row; hover over Panel family for its full name, key and excluded-contaminant count.");
             sb.AppendLine("After adding a phrase to scope, its preview stays beside the scrolling reasons and actions until Update proposal.");
             sb.AppendLine("Save panel as spreadsheet writes named link choices in the UniProt family column.");

@@ -72,6 +72,11 @@ public static class PanelAssignmentEvidenceStore
         };
     }
 
+    /// <summary>EX2: call before a family change made in the program after Apply grouping. Null when the facts are not
+    /// current, so a project whose database, list or evidence changed keeps its refusal.</summary>
+    public static PanelMembershipEdit? BeginMembershipEdit(FamilyClusterFile file) =>
+        Current(file) == null ? null : new(file, file.MyExtendedFastaItems.Select(p => p.UserID).ToArray());
+
     public static IReadOnlyList<PanelProteinAssignment>? Current(FamilyClusterFile file)
     {
         if (HasMissingSequence(file)) return null;

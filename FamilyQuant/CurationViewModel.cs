@@ -28,6 +28,9 @@ public sealed partial class CurationViewModel : ScreenViewModel
         + (Document.LockedUserIds.Count == 1 ? " family locked" : " families locked");
     public bool CanUndo => UndoStack.Count > 0;
     public event EventHandler? DocumentChanged;
+    // EX2: begun before a family change, committed by NotifyDocumentChanged after it, so the moved proteins' facts follow.
+    private Evidence.PanelMembershipEdit? membershipEdit;
+    private string membershipReason = "";
     public CurationViewModel(FamilyClusterFile document)
     {
         Document = document ?? throw new ArgumentNullException(nameof(document));
@@ -69,10 +72,17 @@ public sealed partial class CurationViewModel : ScreenViewModel
     {
         if (family < 0) throw new ArgumentOutOfRangeException(nameof(family));
         if (protein.UserID == family) return;
-        PushUndo(); Document.LockedUserIds.Add(protein.UserID); Document.LockedUserIds.Add(family);
+        PushUndo(); BeginMembershipEdit(Evidence.PanelMembershipEdit.MovedByYou);
+        Document.LockedUserIds.Add(protein.UserID); Document.LockedUserIds.Add(family);
+    }
+    private void BeginMembershipEdit(string reason)
+    {
+        membershipEdit = Evidence.PanelAssignmentEvidenceStore.BeginMembershipEdit(Document); membershipReason = reason;
     }
     public void NotifyDocumentChanged()
     {
+        membershipEdit?.Commit(membershipReason, UndoStack.Count > 0 ? UndoStack[^1] : null);
+        membershipEdit = null;
         RefreshDocument();
         DocumentChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -88,9 +98,11 @@ public sealed partial class CurationViewModel : ScreenViewModel
         if (family == null && annotation.Length == 0) return (false, "Nothing was changed: type a User ID, an annotation, or both.");
         if (selected.Count == 0) return (false, "Nothing was changed: no row is selected. Next step: select rows in the table, then apply.");
         PushUndo(annotation.Length > 0 ? selected : Array.Empty<FastaItemExtended>());
+        if (family != null) BeginMembershipEdit(Evidence.PanelMembershipEdit.MovedByYou);
         var outcome = BatchCuration.Apply(Document, selected, family, annotation.Length > 0 ? annotation : null);
         if (outcome.Moved == 0 && outcome.Annotated == 0)
         {
+            membershipEdit = null;
             UndoStack.RemoveAt(UndoStack.Count - 1); Changed(nameof(CanUndo));
             return (false, "Nothing was changed: the " + selected.Count.ToString("N0", CultureInfo.CurrentCulture) + " selected row(s) already carry that User ID and annotation.");
         }
@@ -109,7 +121,7 @@ public sealed partial class CurationViewModel : ScreenViewModel
     }
     public void ApplyKeywordReview(SuperClusterPreview preview)
     {
-        PushUndo();
+        PushUndo(); BeginMembershipEdit(Evidence.PanelMembershipEdit.RegroupedByWords);
         var join = preview.Join(Document.MyExtendedFastaItems);
         Document.IsKeywordSuperCluster = true;
         WordCluster.SyncUnlockedIds(join.Moved, Document.LockedUserIds);
@@ -119,7 +131,7 @@ public sealed partial class CurationViewModel : ScreenViewModel
     }
     public void ApplyWordGrouping(IReadOnlyList<List<int>> groups, IReadOnlyCollection<FastaItemExtended>? scope, double threshold)
     {
-        PushUndo();
+        PushUndo(); BeginMembershipEdit(Evidence.PanelMembershipEdit.RegroupedByWords);
         var mapping = WordCluster.BuildStableMapping(groups.ToList());
         foreach (var protein in Document.MyExtendedFastaItems)
             if (mapping.TryGetValue(protein.UserID, out int family)) protein.UserID = family;

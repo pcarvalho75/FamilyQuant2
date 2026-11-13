@@ -196,6 +196,15 @@ public sealed partial class PanelEvidenceMatching
         return result;
     }
 
+    /// <summary>IM10b: removes one family's confirmed matches, also those accepted from its sheet codes; its Pfam list stays.</summary>
+    public static FamilyPanel WithoutConfirmed(FamilyPanel panel, string familyKey)
+    {
+        var result = FamilyPanelValidation.Clone(panel);
+        result.ConfirmedEvidenceMatches?.Remove(familyKey);
+        if (result.ConfirmedEvidenceMatches?.Count == 0) result.ConfirmedEvidenceMatches = null;
+        return result;
+    }
+
     public static void ValidateConfirmed(FamilyPanel panel)
     {
         foreach (var pair in panel.ConfirmedEvidenceMatches ?? new Dictionary<string, PanelConfirmedEvidenceMatches>())
