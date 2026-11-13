@@ -224,7 +224,8 @@ public sealed partial class FamilyListImportViewModel
     public IReadOnlyList<ImportSummaryFamily> SummaryFamilies => (committedPanel ?? check.Panel)?.Families.Select(f => new ImportSummaryFamily(f.Key, f.DisplayName,
         PanelImportFields.OtherNameText(committedPanel ?? check.Panel!, f), SummaryDecision(f),
         SummaryMatches(f), string.Join("\n", f.TextFields.Select(t => t.Name + ": " + t.Text)),
-        SourceColorCategory(committedPanel ?? check.Panel!, f))).ToArray()
+        SourceColorCategory(committedPanel ?? check.Panel!, f), !IsBusy && !Imported
+            && MatchFamilies.FirstOrDefault(row => row.Key == f.Key)?.Choice is "Confirmed" or "Kept from previous panel")).ToArray()
         ?? Array.Empty<ImportSummaryFamily>();
 
     private static string SourceColorCategory(FamilyPanel panel, FamilyPanelFamily family)

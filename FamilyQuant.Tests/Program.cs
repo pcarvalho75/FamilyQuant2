@@ -352,6 +352,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ImportEntryActionTests());
             suite.AddWithApplication(() => ImportDecisionPageTests());
             suite.AddWithApplication(() => ImportDirectPfamTests());
+            suite.AddWithApplication(() => ImportCodesAsWrittenTests());
             suite.AddWithApplication(() => ImportSaveHandoffTests());
             suite.AddWithApplication(() => ImportConditionalPageTests());
             suite.Add(() => PanelVisibleLinkTests());

@@ -188,6 +188,9 @@ public partial class FamilyListImportWindow : Window
         if (Model.CanEdit && Model.HasDecisionHint && Model.Columns.FirstOrDefault(c => c.Role == PanelImportFields.Decision) is { } column)
             column.Header = Model.DecisionHint;
     }
+    private void UnconfirmMatches_Click(object sender, RoutedEventArgs e)
+    { if (sender is FrameworkElement { DataContext: ImportSummaryFamily family }) Model.UnconfirmMatches(family.Key); }
+
     private void SourceNotes_Click(object sender, RoutedEventArgs e)
     { if (sender is FrameworkElement { DataContext: ImportSummaryFamily family }) TextReportWindow.Show("Source notes", family.Name + "\nAbbreviation: " + family.Key + "\n\n" + family.Notes, this, wrap: true); }
     private void UseRow_Click(object sender, RoutedEventArgs e) { CommitGridEdits(); Model.UseRowChoice(); }

@@ -5,13 +5,11 @@ namespace FamilyQuant.Panels.Import;
 
 public sealed partial class FamilyPanelSpreadsheetImporter
 {
-    public static bool NeedsPfamChoice(string text, IReadOnlySet<string> recognized)
+    public static bool NeedsPfamChoice(string text)
     {
         if (string.IsNullOrWhiteSpace(text)) return false;
         var codes = PfamAccession.Matches(text);
-        if (codes.Count == 0 || codes.Any(code => !recognized.Contains(code.Value))) return true;
-        string remainder = PfamAccession.Replace(NamedPfam.Replace(text, ""), "");
-        return remainder.Trim(' ', '\t', '\r', '\n', ';', ',').Length > 0;
+        return codes.Count == 0;
     }
 
     private static List<FamilyPanelDomain> ReadSheetPfam(string text)

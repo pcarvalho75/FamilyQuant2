@@ -9,7 +9,7 @@ namespace FamilyQuant.Panels.Import;
 
 public sealed partial class FamilyPanelSpreadsheetImporter : IFamilyPanelSpreadsheetImporter, IFamilyPanelWorkbookImporter
 {
-    private static readonly Regex PfamAccession = new(@"(?<![A-Za-z0-9])PF\d{5}(?!\d)", RegexOptions.CultureInvariant);
+    private static readonly Regex PfamAccession = new(@"(?<![A-Za-z0-9])PF\d{5}(?![A-Za-z0-9])", RegexOptions.CultureInvariant);
     private static readonly Regex NamedPfam = new(@"(?<name>[^;,\r\n()]+?)\s*\(\s*(?<accession>PF\d{5})(?:\.\d+)?\s*\)", RegexOptions.CultureInvariant);
     private static readonly Regex Bullet = new(@"^[•·*\-]\s+", RegexOptions.CultureInvariant);
     private static readonly Regex LeadingLabel = new(@"^(?<label>[^:()\[\]]+):\s*(?<rest>\S.*)$", RegexOptions.CultureInvariant | RegexOptions.Singleline);
