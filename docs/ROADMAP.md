@@ -104,6 +104,7 @@ Ana, slide 2: the import still asks her to confirm, family by family, the eviden
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
 | IM10 | Codes as written (D122). A well-formed Pfam accession from the sheet is accepted as written whether or not evidence is stored yet; Evidence matches appears only for a cell that names a domain without a code, and never blocks Next for a row with codes. Each row can be un-confirmed later, in the import's summary and in Family checklist. A failing test first: a project with no stored evidence imports the program's template with codes and today asks for every row | M | 1.0 |  | GA5, RL6 | The test fails on master and passes on the branch: no question, the matches page skipped | DN | FQDeNovo | 0 | 0 |  |
+| IM10b | The other half of IM10, in FQGroup's file (FQDeNovo's SEAM NEED, 11-12 17:54): a per-row "Un-confirm" action in Family checklist, also for rows accepted from sheet codes. It removes the family's confirmed evidence match in the review draft, updates its proposal through the existing guards and Undo, and is kept only on Apply grouping; the family's Pfam definitions stay | L | 0.4 | IM10 | RL6 | A synthetic test: un-confirm a sheet-code row, the proposal drops its matches, Undo restores, Cancel keeps nothing | OJ | FQGroup | 0 | 0 |  |
 | IM11 | The Columns page shows only what the sheet has. The rows for Notes, Decision and Subclass names appear only when the sheet has such a column; when Next is off, one line under the buttons says why (a required field without a column, or two fields on one column) | L | 0.5 | IM10 | RL6 | A test per reason; a render of the page with her template's columns | DN | FQDeNovo | 0 | 0 |  |
 
 ### W36 Names in the report (FQDeNovo)
@@ -143,7 +144,7 @@ Ana, slide 8: "O Calvete sempre mostra o gráfico em forma de pizza, seria bom t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| RL6 | Reviews and merges in two batches (D116, D118): FQDeNovo reviews FQGroup's steps and FQGroup reviews FQDeNovo's, each fixing small defects itself (D89); the desk merges approved commits into `fq/v2118-release` | M | 1.0 | GA2, GA3, GA4, EX2, IM10, IM11, NM1, PO1, PO2, PI1, PI2 | RL7 | Each batch's verdict file and merge commit in the LOG | Orchestrator | Orchestrator | 0 | 0 |  |
+| RL6 | Reviews and merges in two batches (D116, D118): FQDeNovo reviews FQGroup's steps and FQGroup reviews FQDeNovo's, each fixing small defects itself (D89); the desk merges approved commits into `fq/v2118-release` | M | 1.0 | GA2, GA3, GA4, EX2, IM10, IM10b, IM11, NM1, PO1, PO2, PI1, PI2 | RL7 | Each batch's verdict file and merge commit in the LOG | Orchestrator | Orchestrator | 0 | 0 |  |
 | RL7 | The 2.1.18 candidate: version bump on the 31 lines, release notes, ledger refresh for the rows the steps touched, the full suite once | M | 1.0 | RL6 | RL8, GA5 | Suite line posted: 0 failed | Orchestrator | Orchestrator | 0 | 0 |  |
 | RL8 | Package (FQDeNovo), publish as Latest, README, merge into master and push | M | 0.8 | RL7, GA5 | AQ2 | Published; digests match; an installed 2.1.17 offers 2.1.18 | Orchestrator | Orchestrator | 0 | 0 |  |
 
