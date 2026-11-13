@@ -21,10 +21,10 @@ namespace FamilyQuant
     {
         public const string GroupingOrder =
             "0. Import family list (optional): use File > Import family list to choose your workbook or Use template to write an empty workbook to fill and import, with every family quantified. The normal pages are File and sheet, Columns, Summary; other pages appear only for a needed choice. Older sheets can still carry Notes and Decision columns. Columns shows Notes, Decision and Subclass names only when a source column is available. If Next is unavailable, the line below the buttons names the missing field or the column used twice. Only a Decision column with custom words needs label review; source colours remain in the workbook preview. Well-formed Pfam codes are confirmed as written, before or after Fetch evidence; only domain names without codes need a matching choice. Un-confirm in Summary removes a confirmation from the draft while keeping the source codes. A row without a code gets no proteins until it has one. Accept imports the list and closes the window; File > Save keeps it, and Undo restores the previous list. Closing before acceptance discards only the import draft. UniProt family holds exact family names separated by semicolons; empty means none. Sheets without family columns are skipped and named in the summary; their source text is kept.\n" +
-            "1. Fetch evidence: download UniProt annotations for the project's proteins.\n" +
+            "1. Fetch evidence: download UniProt annotations for the project's proteins, including each protein's own UniProt family.\n" +
             "2. Group by evidence: review the scope and proposal, then Apply grouping.\n" +
-            "3. Fetch UniProt families: find the families of in-scope database proteins and download their reviewed and database-clade entries.\n" +
             "b Group by words (optional): group by keywords or Recluster by words before Quantify. Undo restores grouping edits.\n" +
+            "Fetch UniProt families (optional): download reviewed relatives of each UniProt family in scope and database-clade entries for the Database gap estimate. Grouping does not need this download; each protein's own family already comes with Fetch evidence.\n" +
             "Quantify: measure peptide signal from the RAW files after any grouping choices.\n";
 
         /// <summary>
@@ -291,9 +291,10 @@ namespace FamilyQuant
             sb.AppendLine("domains stays ticked if it carries a keyword; short proteins and fragments can have");
             sb.AppendLine("no Pfam call. Domains do not separate everything: different families can share them.");
             sb.AppendLine();
-            sb.AppendLine("Fetch UniProt families finds the UniProt families of the in-scope proteins of your");
-            sb.AppendLine("database, then downloads every reviewed UniProt entry of those families and their");
-            sb.AppendLine("entries from your database's own clade. It uses the confirmed database task and scope");
+            sb.AppendLine("Fetch UniProt families is optional, after Group by keywords and Recluster by words and before Quantify.");
+            sb.AppendLine("Grouping does not need this download; each protein's own UniProt family already comes with Fetch evidence.");
+            sb.AppendLine("It downloads every reviewed relative of the UniProt families in scope and their entries");
+            sb.AppendLine("from your database's own clade for the Database gap estimate. It uses the confirmed database task and scope");
             sb.AppendLine("from Group by evidence.");
             sb.AppendLine("Fetch evidence first to supply the database's family annotations.");
             sb.AppendLine("If no matching task and scope are confirmed, it offers to open Group by evidence first.");

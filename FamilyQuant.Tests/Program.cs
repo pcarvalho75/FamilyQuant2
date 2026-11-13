@@ -355,6 +355,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ImportCodesAsWrittenTests());
             suite.AddWithApplication(() => ImportColumnsTests());
             suite.AddWithApplication(() => GroupingPanelOrderTests());
+            suite.AddWithApplication(() => FamilyWorldOptionalTests());
             suite.AddWithApplication(() => ImportSaveHandoffTests());
             suite.AddWithApplication(() => ImportConditionalPageTests());
             suite.Add(() => PanelVisibleLinkTests());

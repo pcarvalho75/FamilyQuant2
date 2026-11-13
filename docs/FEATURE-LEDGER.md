@@ -5805,6 +5805,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1958**; OPEN r
 
 | FQ2-GROUPING-QUANTIFY-LAST | MAP | PO1 maps FQ2-NAMES-BUILD-FILE, FQ2-NAMES-CURATE and FQ2-GROUPING-OPTIONAL-FAMILY-LIST: ButtonComputeFullXic keeps its Quantify shell command and moves to its own line after Group by keywords and Recluster by words; part b is labelled optional. ButtonSuperCluster and ButtonWordCluster keep their handlers, settings and Undo behavior. Evidence, family downloads and all other curation actions remain available; no stored quantities change | test:GroupingPanelOrderTests; test:ShellNavigationTests; test:FamilyListStepTests |
 
+| FQ2-GROUPING-FAMILY-WORLD-OPTIONAL | MAP | PO2 maps FQ2-GROUPING-OPTIONAL-FAMILY-LIST and FQ2-NAMES-CURATE: ButtonFetchFamilyWorld is labelled optional and follows both word-grouping actions, before Quantify. Its original handler, confirmed task/scope prompt, download, state and save behavior remain. Its tooltip and Help distinguish the Database gap relatives from each protein's own UniProt family already supplied by Fetch evidence; grouping does not require this optional download | test:FamilyWorldOptionalTests; test:DesktopWorldChecks; test:ShellNavigationTests |
+
 These are additions, not replacements or drops of frozen FQ15 observations. The named DefaultSuite
 checks guard the contract and its presence. Executed native proof is recorded separately for review;
 adding this row does not change any frozen disposition, scan hash or receipt verification state.

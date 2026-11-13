@@ -101,8 +101,8 @@ internal static partial class Program
                 foreach (object child in LogicalTreeHelper.GetChildren(node))
                     if (child is DependencyObject next) foreach (var inner in InOrder(next)) yield return inner;
             }
-            string[] parts = { "TextBlockPartGroupByEvidence", "ButtonFetchDomains", "ButtonEvidenceGrouping", "ButtonFetchFamilyWorld",
-                "TextBlockPartGroupByWords", "ButtonSuperCluster", "ButtonWordCluster", "ButtonComputeFullXic" };
+            string[] parts = { "TextBlockPartGroupByEvidence", "ButtonFetchDomains", "ButtonEvidenceGrouping",
+                "TextBlockPartGroupByWords", "ButtonSuperCluster", "ButtonWordCluster", "ButtonFetchFamilyWorld", "ButtonComputeFullXic" };
             var order = InOrder(project).Select(element => element.Name).Where(parts.Contains).ToArray();
             Check("part a and optional part b precede the unchanged Quantify route",
                 ((TextBlock)project.FindName("TextBlockPartGroupByEvidence")).Text == "a " + WorkflowNames.GroupByEvidence
