@@ -1329,3 +1329,145 @@ Paulo, 11-09 evening, after opening the report: "i did not see all the proteins 
 | U4 | The desk's real-data check of the HTML report: Quantify the local copy of Ana's three-run project with the new build, export the report, open every tab and every Normalize to base, and list what does not work | M | 1.0 |  | U2 | Findings posted; each one fixed or recorded | Orchestrator |  | 0 | 0 |  |
 | U2 | Release 2.1.15 (after U1, U3a to U3d, U4, U5, U6, U8 and U9): merge, the full suite once (launched outside the desk sandbox), the ledger refreshed, the version bump, the package (FQCount), published as Latest with notes and README | M | 1.0 | U1 |  | Release live; hashes match | Orchestrator |  | 0 | 0 |  |
 
+## Version 20 (2026-11-11 12:00 to 2026-11-12 17:50), finished: 2.1.16 and 2.1.17 published
+
+Every row is a small step with its own done-check. A step is done when a reviewer other than its builder approves it (rule 6); each lane merges into master at T19. Ids never change; a step split here keeps its id as a prefix (T7 would become T7a and T7b).
+
+### W26 The Quantify crash, first in the release (FQDeNovo, FQRev, Orchestrator)
+
+Paulo, 11-11: "most importantly, we need to fix this bug".
+
+**The cause, found by the desk in the code (QX1 confirms it):**
+1. Since 2.1.14 (T5), Quantify warns when a RAW run has no de novo calls.
+2. The warning is reported from the computing thread (`FullXicInputStage.cs:108`). `AppOperationHost.Report` raises `ProgressReported` on that same thread (`AppOperationHost.cs:173`).
+3. The Quantify screen's handler sets `DeNovoRunWarning` there (`ComputeXicViewModel.cs:101-106`).
+4. The main window's PropertyChanged handler then calls `UpdateGuide()` (`MainWindow.Quantify.cs:27-33`), which reads `GridApp.Children` from the wrong thread (`MainWindow.Status.cs:70`).
+5. WPF throws, the engine stops, and the screen shows "The computation did not finish".
+
+Ana's `DeNovoPeaks_ALL` holds a CSV for run 01 only, so runs 02 and 03 raise the warning. Any project with a RAW run missing from the de novo source hits this. T5's test (`--test-denovo-run-warnings`) checks the engine alone, without the Quantify screen and the main window, so the suite never caught it.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| QX1 | A failing test first. The Quantify screen runs a compute that reports "denovo-run-warning" from a worker thread, with the main window's handler attached, as on Ana's runs 02 and 03. Today this ends with the cross-thread error | L | 0.3 |  | QX2 | The test fails on master 1b5083af with "The calling thread cannot access this object"; reviewed | DN | FQDeNovo | 0 | 0 |  |
+| QX2 | The fix at the source. When Report comes from another thread, AppOperationHost raises ProgressReported on the UI thread, as it already does for its own display (`AppOperationHost.cs:171-172`). The test subscribers that rely on event order are checked, including the ones that cancel on a progress item | M | 0.8 | QX1 | QX3, QX4 | QX1 passes. The ComputeProgress, HtmlReportExport.Native, GroupingDiscoverySafety and FamilyComposition tests are green; reviewed | DN | FQDeNovo | 0 | 0 |  |
+| QX3 | The same hazard elsewhere. List every progress event or PropertyChanged that a background task raises and a window handler hears, in Build, Fetch evidence, Fetch family world, Quantify and Export. Each is either marshalled or proved safe by a test that raises it from a worker thread | M | 0.8 | QX2 | RL1 | The list is in the step note, with one test per path; reviewed | DN | FQDeNovo | 0 | 0 |  |
+| QX4 | The desk's real run. Use a local copy of Ana's project and her three RAW files, with her settings from slide 33: her de novo source and ALC 90, isotope ceiling 6, at least 5 points per peak. Run Quantify from the screen: it finishes, and the warning names runs 02 and 03 | M | 0.5 | QX2 | RL1 | Run summary counts posted, no rows | Orchestrator | not staffed | 0 | 0 |  |
+
+### W27 Ana's answers on her panel (Orchestrator; her data, never code)
+
+Her 11-11 answers, against the desk's ten questions. She answered the Decision question first, so she counts it as her first answer. The numbers below are the docx's.
+
+| Question | Ana's answer | Where it goes |
+|---|---|---|
+| 6, Decision and Colour categories (slide 13) | Quantify every family; remove the colours, "só complica" | IM3, IM5, AP3 |
+| 1, the 19 ties (slides 9, 29) | Follow the consensus sheet; she agrees the desk builds the list | AP1, RG2, RG3 |
+| 2, SVMPI (slide 9) | BJ46a (Q9DGI0), the protein Richard isolated. It is a large metalloprotease inhibitor with a cystatin-like domain, not a canonical cystatin. Never join it with the tripeptides or with the cystatins. "não sei como fazer" | AP2, RG5 |
+| 3, svMP-i and pHpG (slide 9) | Agrees: svMP-i joins NP, pHpG is not a family. She asks what "measured in its own sequence family" means | AP3, RG7, AP4 |
+| 4, Other (rares) (slides 9, 15 to 21) | These will not show in jararaca, or will fall below the threshold and go to "Outras". Ignore AMP and endopeptidase; Pfam per name is optional | AP3 (the row goes) |
+| 5, subclasses (slide 14) | Only two matter: true lectins against snaclecs (CTL), and PLI alpha, beta and gamma. The other subclasses would split the families into crumbs | AP3, IM9 |
+| 7, 8, 9, 10 | Not answered yet. Her question in row 3 is really question 8, her list against the scope. Question 10's project file is no longer needed, since the cause is in the code | RG6, RG7, AP4 |
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| AP0 | The goals traced (Paulo, 11-11: "the goals need to be very clear based on the slides and all the requests ana did through audios"). Every comment on her 34 slides and every request in her nine voice notes is mapped to a step, or marked answered, or added as a new step. Every step's premise about today's program is checked in the code: the desk's own traces, the builders' P0 posts and the reviewer's R0 | M | 0.8 |  | AP1, AP3, AP4 | The trace table in this file, each line with its slide or voice note and its step; every P0 and R0 line answered | Orchestrator | WORKING | 0 | 0 |  |
+| AP7 | A deck for Ana, in Portuguese (Paulo, 11-11: "I was considering a powerpoint showing how we addressed each and every point raised by her"). One slide per point: her question or comment (with its slide number or voice note) and what was done about it, both in brief Portuguese text (Paulo, 11-11: "add screenshots and text in portugues (make it brief) the text stating anas question and what was fone about it"), with screenshots before (hers) and after (the 2.1.16 screen on her data); opening slides on the crash and her revised sheet; closing slides on her subclass results and what is left for Paulo's session (slide 25, questions 7 to 10). Screens from the final build; built by the desk only (her data); red-flag review before Paulo sees it. AP4 becomes a three-line cover note sent with it after RL2 | M | 2.0 | RL5 | AP5 | The .pptx staged for Paulo, every point of the AP0 trace on a slide | Orchestrator | not started | 0 | 0 |  |
+| AP1 | The 19 ties listed for Ana, as promised in question 1. Run Fetch evidence and Group by evidence on a copy of her Viperidae project with the template she imported (42 rows plus SVMPI). One row per tie: the UniProt family, the domains, the tied families, one example protein (accession and name), what the consensus sheet said, the desk's proposal, and whether RG2 would settle it | M | 0.8 |  | AP3, AP4 | A Portuguese xlsx in the desk's staging folder; counts posted | Orchestrator | not staffed | 0 | 0 |  |
+| AP2 | Where BJ46a lands. It is in her database as Q9DGI0 (FTE46_BOTJA). Its UniProt keywords say metalloprotease inhibitor and secreted, and its tissue is liver, with no scope word, so it is probably out of scope. On her project, check whether it is in scope and which family it gets today. Count the entries of her database that share its UniProt family (fetuin family) and its Pfam (Cystatin, PF00031). Snake cystatins belong to the cystatin family | L | 0.4 |  | AP3, RG5, D113 | Counts posted | Orchestrator | not staffed | 0 | 0 |  |
+| AP3 | Her panel sheet revised as she answered. Out: svMP-i, pHpG and Other (rares). Gal-CTL becomes the "true lectins" subclass of CTL beside "snaclecs". PLI gets its alpha, beta and gamma subclasses. SVMPI stays its own row. Decision column and colours out. The tie answers from AP1 go in | M | 0.6 | AP1, AP2 | AP4, AP6 | The sheet is staged, with a row diff against her template posted | Orchestrator | not staffed | 0 | 0 |  |
+| AP4 | The message to Ana in Portuguese, drafted in chat; Paulo sends it. It covers what changed in her sheet and why, and the tie list. It explains "measured in its own sequence family" with RG7's picture. It tells her the de novo folder has calls for run 01 only, so runs 02 and 03 are measured from identified peptides alone, and asks whether that was intended. Questions 7 to 10 shrink to one line each | L | 0.5 | AP1, AP3, RG7 | AP5 | The draft, in chat, for Paulo | Orchestrator | not staffed | 0 | 0 |  |
+| AP6 | The desk's walk on her data with the 2.1.16 candidate, before her session. Import the revised sheet. Every tie is explained or settled, Apply grouping is enabled, Quantify finishes and the report opens | M | 1.0 | AP3, RL1 | RL2 | Findings posted; each one fixed, or moved on Paulo's word | Orchestrator | not staffed | 0 | 0 |  |
+
+### W28 Import family list, simpler (FQImport, FQRev)
+
+Ana, slide 21: "o sistema ficou sofisiticado demais, para possibilitar o reconhecimento de diversos formatos e colunas ... acabou complicando para o usuário".
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| IM1 | The program's own template imports (slides 19, 20). Today the review stops on a workbook holding the Families sheet plus the Instructions sheet that Save a template writes (`PanelImportTemplate.InstructionsSheet`); Ana got through only by deleting Instructions. After the fix it goes through, and any sheet without family headers is ignored and named once | L | 0.5 |  | IM8, IM9, RG4 | A test imports the program's own template unchanged; reviewed | IM | FQImport | 0 | 0 |  |
+| IM2 | "Save a template" becomes "Use template", Ana's word (slide 7, D114). The tooltip says it writes an empty sheet to fill. The rename is mapped in the ledger | L | 0.2 |  | IM8 | Screen render and ledger mapping; reviewed | IM | FQImport | 0 | 0 |  |
+| IM3 | The template the program writes drops the Notes column, the Decision column and the colour legend (slide 7; Ana 11-11; D110). A sheet that still has those columns imports as before | L | 0.5 |  | IM8 | Test: an old sheet with Decision and Notes imports unchanged, and the new template has neither column; reviewed | IM | FQImport | 0 | 0 |  |
+| IM4 | "Try with the example" leaves the import window (slide 6, D110) | L | 0.2 |  | IM8 | Screen render, and the ledger row dropped on Paulo's word; reviewed | IM | FQImport | 0 | 0 |  |
+| IM5 | Colour categories leave the import window (slide 13, D110). The Decision labels page appears only when the sheet has a Decision column with words of its own | L | 0.5 |  | IM8 | A test each way, plus a screen render; reviewed | IM | FQImport | 0 | 0 |  |
+| IM6 | No second Pfam confirmation (slide 17). PF codes that exist are taken as given. Only cells written as names, or codes not found, ask, one line per row. A row with no Pfam code is named once: it gets no proteins until it has one. Use selected matches, Skip this family and Continue without matches are no longer asked | M | 1.0 |  | IM8 | A synthetic sheet with PF codes reaches the summary with no Pfam question; tests; reviewed | IM | FQImport | 0 | 0 |  |
+| IM7 | Saving right after the import (slide 21). Accept closes the window and puts the list in the project. The status line says File > Save keeps it, and the title marks the project modified. Closing before Accept says what is lost | L | 0.5 |  | IM8 | Test and screen render; reviewed | IM | FQImport | 0 | 0 |  |
+| IM8 | Fewer pages. A sheet with the program's headers goes through three pages: file, columns, summary. Other pages appear only when something needs a choice | M | 1.0 | IM1 to IM7 | RL1 | Screen renders before and after on a synthetic sheet; tests; reviewed | IM | FQImport | 0 | 0 |  |
+| IM9 | Subclasses get a visible home (slide 14). The template carries a Subclasses sheet with these columns: Family, Subclass, UniProt family or subfamily, Pfam required, Pfam absent, and a note per header. The Help says in general terms how a subclass is recognized, including that a subclass written as a UniProt family name (for example "serpin family") matches the proteins of that family | M | 0.8 | IM1 | AP3, RL1 | Test: a subclass written as a UniProt family name labels a protein of that family; screen render; reviewed | SM | FQSimple | 0 | 0 |  |
+
+### W29 Review grouping, clearer (FQPanel, FQSimple, FQRev)
+
+Ana, slide 26: "fiquei confusa sobre como agir em relação a cada uma das diversas opções ... acho que vou precisar fazer esta etapa com você".
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| RG1 | Apply grouping says why it waits (slide 29). Beside the disabled button, a line reads "Waiting for 19 choices in Panel links", with a button that opens Panel links on Needs a choice | L | 0.5 |  | RL1 | Test and screen render; reviewed | SM | FQSimple | 0 | 0 |  |
+| RG2 | Ties the domains already settle (D111). Among tied families, the one whose own Pfam list the protein covers most completely wins. For example, a Disintegrin-only protein covers all of a one-domain list but a third of a three-domain list. Only ties that stay equal are asked, and a choice the user already made wins | M | 1.0 |  | AP1, RL1 | A synthetic test, plus the desk's before and after on Ana's panel: ties asked and proteins per family, counts only; reviewed | PN | FQPanel | 0 | 0 |  |
+| RG3 | Each Panel links row shows one example protein (accession and name) and its UniProt family, so the user chooses for a protein they recognize (slide 26) | L | 0.5 |  | RL1 | Test and screen render; reviewed | SM | FQSimple | 0 | 0 |  |
+| RG4 | The choices travel with the list (D112). Saving the panel as a sheet writes each chosen link into a "UniProt family" column on the chosen row. Importing that sheet into a new project restores the choices with no question | M | 1.2 | IM1 | RG5, RL1 | Round-trip test: choose, save, import into a new project, and no tie is asked; reviewed | PN | FQPanel | 0 | 0 |  |
+| RG5 | Rows told apart by UniProt family when Pfam cannot (Ana on SVMPI). A row with Pfam Cystatin and UniProt family "fetuin family" takes those proteins; the other Cystatin row takes the rest. If AP2 shows them out of scope, D113 decides how they come in | M | 1.0 | AP2, RG4 | RL1 | A synthetic test with two rows sharing one Pfam code, plus the desk's count on Ana's project; reviewed | PN | FQPanel | 0 | 0 |  |
+| RG6 | The Family checklist answers "which wins, 23 or 42?" (slide 24). Every row of the user's list shows its state: has N proteins, waits for a choice, has no Pfam code, or matches no database protein. The top line reads "Your list: 42 families, 23 with proteins, ..." | L | 0.6 |  | RL1 | Screen render on a synthetic panel, plus a test; reviewed | SM | FQSimple | 0 | 0 |  |
+| RG7 | Where every protein goes (Ana 11-11). A short panel gives three counts, one sentence each: proteins in a family of the list; in-scope proteins in no family of the list, which keep their sequence family (named after its proteins) and are measured as one; and proteins outside the scope. Help shows the same picture in general terms (D21) | M | 0.8 |  | AP4, RL1 | Screen render and a Help test; reviewed | SM | FQSimple | 0 | 0 |  |
+| RG8 | "Fetch family world" gets a plain name (slide 32; Ana read it as "family word"; D114). The label and the Help say what it counts: the UniProt families of the in-scope proteins. The 42 in her project without a list is that count, not her list. The rename is mapped in the ledger | L | 0.4 |  | RL1 | Screen render and ledger mapping; reviewed | PN | FQPanel | 0 | 0 |  |
+| RG9 | "Show all options" says what each tab is for (slide 25: "continua difícil de entender"). Each tab it opens (Keywords, Architecture, Left out, Unassigned, Markers, Motif counts and the others) shows one line at its top: what the tab is for and when to use it; the Help page lists the same lines. No control moves or goes | L | 0.5 |  | RL1 | Test that every tab has its line; reviewed | SM | FQSimple | 0 | 0 |  |
+
+### W30 Small fixes from the deck (FQDeNovo, FQSimple, FQRev)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| SF1 | After Build writes the .fcf, Curate families opens on it (slide 3) | L | 0.4 | QX3 | RL1 | Test; reviewed | DN | FQDeNovo | 0 | 0 |  |
+| SF2 | The text under "Scope words found: yes" is no longer cut off (slide 27): the details panel wraps | L | 0.3 |  | RL1 | Screen renders at 1366x820 and 1024x768; reviewed | SM | FQSimple | 0 | 0 |  |
+| SF3 | The alignment says what it aligns (slide 28: 2 selected, 9 shown). Find why. Then either align the selection only, or title it "2 selected and 7 reviewed references" | L | 0.4 |  | RL1 | Test; reviewed | SM | FQSimple | 0 | 0 |  |
+| SF4 | The Families count names what is hidden (slide 4: "19,948 visible · 40,407 in file"). It becomes "19,948 shown; 20,459 decoy and contaminant families hidden (View)" | L | 0.2 |  | RL1 | Screen render; reviewed | PN | FQPanel | 0 | 0 |  |
+| SF5 | The HTML report shows the subclasses (found by the desk's AP6 walk on her data: the computed project and the supplement hold PLI alfa and gama, true lectins and snaclecs, but report.html shows no subclass) | M | 0.8 |  | RL2 | Test: the exported HTML holds every subclass label; reviewed | DN | FQDeNovo | 0 | 0 |  |
+
+### W31 Release 2.1.16 (Orchestrator)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| RL1 | The 2.1.16 candidate: the lanes merged, the full suite once, the ledger refreshed only for the rows the steps touched (D116), and the rows dropped under D110 named | M | 1.0 | QX3, QX4, IM8, IM9, RG1 to RG9, SF1 to SF4 | AP6 | Suite line and ledger line posted | Orchestrator | not staffed | 0 | 0 |  |
+| RL2 | Release 2.1.16 after AP6: version bump, package, notes, README, and the update check from 2.1.15 | M | 1.0 | AP6 | AP5, RL3 | Published as Latest; an installed 2.1.15 offers 2.1.16 | Orchestrator | not staffed | 0 | 0 |  |
+| RL3 | The website follows 2.1.16 (new import and Review grouping screens), on Paulo's word, as D105 | L | 0.5 | RL2, RL5 |  | Upload folder ready | SM | FQSimple | 0 | 0 |  |
+
+### W32 Release 2.1.17, layout polish (FQSimple, FQRev, FQDeNovo, Orchestrator)
+
+Found by the desk on the released 2.1.16, rendering the real Review grouping window on her project at 1366x820 for the deck (AP7). Paulo, 11-11: "yes i agree with a next version" (D117).
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| RG10 | Review grouping layout polish at 1366x820 with Show all options: no blank band under the collapsed "Where proteins go" line and all three sentences visible when expanded; the two status lines readable; the Family checklist table shows at least six whole rows | M | 0.8 |  | RL4 | One render check per defect; reviewed | SM | FQSimple | 0 | 0 |  |
+| RL4 | The 2.1.17 candidate: RG10 merged, version bump on the 31 lines, notes, ledger refresh, the full suite once | M | 0.8 | RG10, RL2 | RL5 | Suite line posted | Orchestrator | not started | 0 | 0 |  |
+| RL5 | Release 2.1.17: package (FQDeNovo), published as Latest, README | M | 0.8 | RL4 | RL3, AP7 | Published; an installed 2.1.16 offers 2.1.17 | Orchestrator | not started | 0 | 0 |  |
+
+### Every request of version 20, traced (AP0)
+
+Each comment on Ana's 34 slides and each request in her nine voice notes of 11-11, with its step. "Desk" means the desk traced the premise in the code; "P0" means the builder confirms it in the code before building and puts the line in its READY; FQRev's R0 checks every brief against the code.
+
+| Source | Ana's request, in short | Step | Premise checked |
+|---|---|---|---|
+| Slide 3 | After Build writes the .fcf, open it in Curate families | SF1 | P0 |
+| Slide 4 | "19,948 visible, 40,407 in file": what is hidden? | SF4 | P0 (slide 32 shows the same 20,459 hidden) |
+| Slide 6 | "Try with the example" confuses more than it helps | IM4 | P0 |
+| Slide 7 | The consensus sheet's extra columns pollute; Notes is optional, so drop it; say "Use Template"; simplify to the maximum | IM2, IM3, IM8 | P0 |
+| Slide 9 | The SVMPI row was added by hand; the rest is the consensus of 14 venomics papers | AP1, AP2, RG5 | Desk: BJ46a (Q9DGI0) is in her database; its Pfam is Cystatin, its UniProt family fetuin; the panel row has Pfam only (`FamilyPanel.cs`) |
+| Slide 13 | How the template's Decision relates to the window's options; are Colour categories needed? | IM3, IM5, AP3 | P0 |
+| Slide 14 | Where subclasses go in the sheet, and what the window's subclass options mean | IM9, AP3 | Desk: `SubclassAssignment.ClassifyDirect` matches subfamily names; `WithoutRankSuffix` strips only " subfamily" and " sub-subfamily" |
+| Slide 17 | Why confirm Pfam again when the sheet gives it; what "Continue without matches" does | IM6 | P0 |
+| Slides 19, 20 | The template with an Instructions sheet blocks the review; deleting that sheet works | IM1 | Desk: the program's own template writes the Instructions sheet (`PanelImportTemplate.InstructionsSheet`); why the review stops is P0 |
+| Slide 21 | Had to close without saving to reach File > Save; is it lost?; the import is too sophisticated ("menos é mais") | IM7, IM8 | P0 |
+| Slide 24 | The program proposes 23 families, her sheet has 42: which wins? | RG6, RG7 | P0 |
+| Slide 25 | "Show all options" is still hard to understand | RG9, and Paulo's session with Ana | P0 |
+| Slide 26 | Confused about how to act in Proteins, Panel links, Family checklist and Unassigned | RG1, RG3, RG6, RG7, and the session | P0 |
+| Slide 27 | The lines under "Scope words found: yes" cannot be read | SF2 | P0 |
+| Slide 28 | Selected 2 proteins, the alignment shows 9 | SF3 | P0 |
+| Slide 29 | Apply grouping stays disabled; the 19 pending choices; how they relate to her 42-row sheet | RG1, RG2, RG3, AP1 | P0 |
+| Slide 30 | Her workaround: reopened the .fcf without the import and grouped by evidence | No step; AP6 walks the import route | |
+| Slide 32 | A project without her sheet still shows 42 families for the "family word": how? | RG8 | Desk: the 42 is the count of distinct UniProt families among the in-scope proteins of her database (`FamilyWorldSnapshot.cs:70-73`, `CurationViewModel.FamilyWorld.cs:27`); 7,719 UniProt entries were fetched for them. It does not come from her sheet; the same number is a coincidence |
+| Slide 33 | Her Quantify settings | QX4 uses them | |
+| Slide 34 | Quantify fails: "The calling thread cannot access this object" | QX1, QX2, QX3, QX4 | Desk: traced to `AppOperationHost.cs:173` and `MainWindow.Status.cs:70` (W26) |
+| Voice note 11.38 | Decision and Colour categories were made up; quantify every family and drop the colours | IM3, IM5, AP3 | as slide 13 |
+| Voice note 11.38 | She is free from 11-12 afternoon | D109: ready by early morning | |
+| Voice note 11.40 | The ties: follow the consensus; the desk builds the list | AP1, RG2 | |
+| Voice note 11.42 | BJ46a must join neither the tripeptides nor the canonical cystatins; "não sei como fazer" | AP2, RG4, RG5, D113 | as slide 9 |
+| Voice notes 11.43, 11.45 | What "measured in its own sequence family" means; "para onde vai cada coisa" | RG7, AP4 | P0 |
+| Voice notes 11.46.01 and 11.46.36 | The rare families will not appear or fall under the threshold into "Outras"; Pfam per name is optional | AP3 (the row goes) | |
+| Voice note 11.47 | Ignore AMP and the endopeptidase inhibitor | AP3 | |
+| Voice note 11.48 | Subclasses: only true lectins against snaclecs, and PLI alpha, beta and gamma (different families, all phospholipase inhibitors); not SVMP P-I to P-III, PLA2 D49/K49 or short and long disintegrins | IM9, AP3 | IM9 proves both shapes: a split by UniProt family name and a split by Pfam |
