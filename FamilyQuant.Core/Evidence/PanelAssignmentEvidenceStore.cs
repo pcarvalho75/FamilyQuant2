@@ -74,10 +74,14 @@ public static class PanelAssignmentEvidenceStore
 
     /// <summary>EX2: call before a family change made in the program after Apply grouping. Null when the facts are not
     /// current, so a project whose database, list or evidence changed keeps its refusal.</summary>
-    public static PanelMembershipEdit? BeginMembershipEdit(FamilyClusterFile file) =>
-        Current(file) == null ? null : new(file, file.MyExtendedFastaItems.Select(p => p.UserID).ToArray());
+    public static PanelMembershipEdit? BeginMembershipEdit(FamilyClusterFile file) => CurrentShape(file) == null ? null
+        : new(file, file.MyExtendedFastaItems.Select(p => p.UserID).ToArray(), file.PanelProteinAssignmentsFingerprint!);
 
-    public static IReadOnlyList<PanelProteinAssignment>? Current(FamilyClusterFile file)
+    public static IReadOnlyList<PanelProteinAssignment>? Current(FamilyClusterFile file) => CurrentShape(file) is { } rows
+        && Fingerprint(file, rows, file.EvidenceRecipe!, file.EvidenceSource, null) == file.PanelProteinAssignmentsFingerprint ? rows : null;
+
+    // Every check of Current but the fingerprint, which EX2 recomputes in the pass that records the changed state.
+    private static List<PanelProteinAssignment>? CurrentShape(FamilyClusterFile file)
     {
         if (HasMissingSequence(file)) return null;
         var rows = file.PanelProteinAssignments;
@@ -96,7 +100,7 @@ public static class PanelAssignmentEvidenceStore
                 || row.IsApplied != (row.PanelFamilyKey != null)) return null;
         for (int index = 0; index < rows.Count; index++)
             if (JsonSerializer.Serialize(rows[index]) != JsonSerializer.Serialize(recipe.PanelProteinAssignments[index])) return null;
-        return Fingerprint(file, rows, recipe, file.EvidenceSource, null) == file.PanelProteinAssignmentsFingerprint ? rows : null;
+        return rows;
     }
 
     internal static List<PanelProteinAssignment> Stage(EvidenceProposal proposal, IReadOnlyList<EvidenceAssignment> applied)
@@ -125,27 +129,48 @@ public static class PanelAssignmentEvidenceStore
         EvidenceRecipe recipe, EvidenceProvenance? source, IReadOnlyList<EvidenceAssignment>? projected)
     {
         var changed = projected?.ToDictionary(a => a.ProteinIndex);
-        using var hash = new LengthPrefixedSha256();
-        hash.Append("Panel assignment facts v1");
-        hash.Append(file.SourceSha256); hash.Append(file.SourceSequenceCount.ToString(CultureInfo.InvariantCulture));
-        hash.Append(recipe.FamilyPanel == null ? "" : PanelDerivedDataCurrentness.FamilyFingerprint(recipe.FamilyPanel));
-        hash.Append(JsonSerializer.Serialize(recipe.FamilyPanel?.EvidenceLinks));
-        // On a stored file, use the current panel's definitions/links, not only its recipe snapshot.
-        var currentPanel = projected == null ? file.FamilyPanel : recipe.FamilyPanel;
-        hash.Append(currentPanel == null ? "" : PanelDerivedDataCurrentness.FamilyFingerprint(currentPanel));
-        hash.Append(JsonSerializer.Serialize(projected == null ? file.FamilyPanel?.EvidenceLinks : recipe.FamilyPanel?.EvidenceLinks));
-        for (int index = 0; index < file.MyExtendedFastaItems.Count; index++)
+        return Fingerprints(file, recipe, source, projected == null, (rows, index => changed != null && changed.TryGetValue(index, out var assignment)
+            ? assignment.FamilyId : file.MyExtendedFastaItems[index].UserID))[0];
+    }
+
+    /// <summary>Fingerprints of states of one file that differ only in family numbers and fact rows, in one pass over its
+    /// proteins and evidence: EX2 checks the state before a family change and records the state after it.</summary>
+    internal static string[] Fingerprints(FamilyClusterFile file, EvidenceRecipe recipe, EvidenceProvenance? source, bool stored,
+        params (IReadOnlyList<PanelProteinAssignment> Rows, Func<int, int> FamilyId)[] states)
+    {
+        var hashes = states.Select(_ => new LengthPrefixedSha256()).ToArray();
+        try
         {
-            var protein = file.MyExtendedFastaItems[index];
-            if (NearestReviewed.IsDecoy(protein)) continue;
-            hash.Append(index.ToString(CultureInfo.InvariantCulture)); hash.Append(protein.SequenceIdentifier ?? ""); hash.Append(protein.Sequence ?? "");
-            hash.Append((changed != null && changed.TryGetValue(index, out var assignment) ? assignment.FamilyId : protein.UserID).ToString(CultureInfo.InvariantCulture));
-            hash.Append(JsonSerializer.Serialize(protein.Evidence));
+            void Append(string value) { foreach (var hash in hashes) hash.Append(value); }
+            Append("Panel assignment facts v1");
+            Append(file.SourceSha256); Append(file.SourceSequenceCount.ToString(CultureInfo.InvariantCulture));
+            Append(recipe.FamilyPanel == null ? "" : PanelDerivedDataCurrentness.FamilyFingerprint(recipe.FamilyPanel));
+            Append(JsonSerializer.Serialize(recipe.FamilyPanel?.EvidenceLinks));
+            // On a stored file, use the current panel's definitions/links, not only its recipe snapshot.
+            var currentPanel = stored ? file.FamilyPanel : recipe.FamilyPanel;
+            Append(currentPanel == null ? "" : PanelDerivedDataCurrentness.FamilyFingerprint(currentPanel));
+            Append(JsonSerializer.Serialize(currentPanel?.EvidenceLinks));
+            for (int index = 0; index < file.MyExtendedFastaItems.Count; index++)
+            {
+                var protein = file.MyExtendedFastaItems[index];
+                if (NearestReviewed.IsDecoy(protein)) continue;
+                Append(index.ToString(CultureInfo.InvariantCulture)); Append(protein.SequenceIdentifier ?? ""); Append(protein.Sequence ?? "");
+                for (int state = 0; state < hashes.Length; state++) hashes[state].Append(states[state].FamilyId(index).ToString(CultureInfo.InvariantCulture));
+                Append(JsonSerializer.Serialize(protein.Evidence));
+            }
+            LengthPrefixedSha256.AppendJson(hashes, source); Append(JsonSerializer.Serialize(recipe.Options));
+            Append(JsonSerializer.Serialize(recipe.PanelContext)); Append(JsonSerializer.Serialize(recipe.Assignments));
+            if (recipe.RetainedPanelAssignments != null) Append(JsonSerializer.Serialize(recipe.RetainedPanelAssignments));
+            for (int position = 0; position < states[0].Rows.Count; position++)
+            {
+                // A row the states share is serialized once.
+                string first = JsonSerializer.Serialize(states[0].Rows[position]);
+                hashes[0].Append(first);
+                for (int state = 1; state < hashes.Length; state++)
+                    hashes[state].Append(ReferenceEquals(states[state].Rows[position], states[0].Rows[position]) ? first : JsonSerializer.Serialize(states[state].Rows[position]));
+            }
+            return hashes.Select(hash => hash.Finish()).ToArray();
         }
-        hash.AppendJson(source); hash.Append(JsonSerializer.Serialize(recipe.Options));
-        hash.Append(JsonSerializer.Serialize(recipe.PanelContext)); hash.Append(JsonSerializer.Serialize(recipe.Assignments));
-        if (recipe.RetainedPanelAssignments != null) hash.Append(JsonSerializer.Serialize(recipe.RetainedPanelAssignments));
-        foreach (var row in rows) hash.Append(JsonSerializer.Serialize(row));
-        return hash.Finish();
+        finally { foreach (var hash in hashes) hash.Dispose(); }
     }
 }

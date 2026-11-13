@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.IO;
 using System.Text.Json;
+using System.Linq;
 
 namespace FamilyQuant.Evidence;
 
@@ -20,23 +21,26 @@ internal sealed class LengthPrefixedSha256 : IDisposable
 
     // Preserve Append(JsonSerializer.Serialize(value)) exactly, including its byte-length prefix.
     // The input must remain unchanged/re-enumerable, as the enclosing currentness check requires.
-    internal void AppendJson<T>(T value)
+    internal void AppendJson<T>(T value) => AppendJson(new[] { this }, value);
+
+    // One value appended to several hashes, counted and streamed once for all of them.
+    internal static void AppendJson<T>(LengthPrefixedSha256[] targets, T value)
     {
-        using var count = new JsonHashStream(null);
+        using var count = new JsonHashStream();
         JsonSerializer.Serialize(count, value);
-        hash.AppendData(BitConverter.GetBytes(count.Written));
-        using var output = new JsonHashStream(hash);
+        foreach (var target in targets) target.hash.AppendData(BitConverter.GetBytes(count.Written));
+        using var output = new JsonHashStream(targets.Select(target => target.hash).ToArray());
         JsonSerializer.Serialize(output, value);
         if (output.Written != count.Written) throw new InvalidDataException("Fingerprint input changed during serialization.");
     }
 
-    private sealed class JsonHashStream(IncrementalHash? destination) : Stream
+    private sealed class JsonHashStream(params IncrementalHash[] destinations) : Stream
     {
         internal int Written { get; private set; }
         public override void Write(ReadOnlySpan<byte> bytes)
         {
             Written = checked(Written + bytes.Length);
-            destination?.AppendData(bytes);
+            foreach (var destination in destinations) destination.AppendData(bytes);
         }
         public override void Write(byte[] bytes, int offset, int count) => Write(bytes.AsSpan(offset, count));
         public override bool CanRead => false;

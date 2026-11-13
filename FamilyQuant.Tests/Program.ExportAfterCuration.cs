@@ -146,5 +146,10 @@ internal static partial class Program
         model.ApplyBatch(new[] { database.MyExtendedFastaItems[3] }, main.ToString(System.Globalization.CultureInfo.InvariantCulture), "");
         database.MyExtendedFastaItems[1].Evidence!.Pfam.Add(new() { Accession = "domain-b" });
         Check("EX2 changed database evidence still refuses the report", QuantifyAndExport(database) == PanelAssignmentEvidenceStore.RebuildMessage);
+        var stale = Grouped(); model = new CurationViewModel(stale);
+        stale.MyExtendedFastaItems[1].Evidence!.Pfam.Add(new() { Accession = "domain-b" }); string staleFacts = Facts(stale);
+        model.ApplyBatch(new[] { stale.MyExtendedFastaItems[3] }, main.ToString(System.Globalization.CultureInfo.InvariantCulture), "");
+        Check("EX2 a move does not refresh facts that were already out of date", Facts(stale) == staleFacts
+            && QuantifyAndExport(stale) == PanelAssignmentEvidenceStore.RebuildMessage);
     }
 }

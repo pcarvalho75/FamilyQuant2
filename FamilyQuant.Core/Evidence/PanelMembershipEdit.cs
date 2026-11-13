@@ -16,8 +16,12 @@ public sealed class PanelMembershipEdit
     public const string RegroupedByWords = "Regrouped by words";
     private readonly FamilyClusterFile file;
     private readonly int[] before;
+    private readonly string fingerprint;
 
-    internal PanelMembershipEdit(FamilyClusterFile file, int[] before) { this.file = file; this.before = before; }
+    internal PanelMembershipEdit(FamilyClusterFile file, int[] before, string fingerprint)
+    {
+        this.file = file; this.before = before; this.fingerprint = fingerprint;
+    }
 
     /// <summary>Call after the change, with the Undo step taken before it. Returns the number of moved proteins.</summary>
     public int Commit(string reason, GroupingSnapshot? undo)
@@ -25,18 +29,22 @@ public sealed class PanelMembershipEdit
         var rows = file.PanelProteinAssignments;
         var recipe = file.EvidenceRecipe;
         if (rows == null || recipe?.PanelProteinAssignments == null || recipe.PanelProteinAssignments.Count != rows.Count
-            || file.MyExtendedFastaItems.Count != before.Length) return 0;
+            || file.MyExtendedFastaItems.Count != before.Length || file.PanelProteinAssignmentsFingerprint != fingerprint) return 0;
         int[] moved = Enumerable.Range(0, rows.Count)
             .Where(i => file.MyExtendedFastaItems[rows[i].ProteinIndex].UserID != before[rows[i].ProteinIndex]).ToArray();
         if (moved.Length == 0) return 0;
-        undo?.KeepMembershipFacts(file, moved.ToDictionary(i => i, i => EvidenceApply.Clone(rows[i])));
-        foreach (int i in moved) rows[i].FamilyUserId = file.MyExtendedFastaItems[rows[i].ProteinIndex].UserID;
-        var held = rows.Where(r => r.IsApplied && r.PanelFamilyKey != null && r.FamilyUserId.HasValue).GroupBy(r => r.FamilyUserId!.Value)
+        var after = rows.ToList();
+        foreach (int i in moved)
+        {
+            after[i] = EvidenceApply.Clone(rows[i]);
+            after[i].FamilyUserId = file.MyExtendedFastaItems[rows[i].ProteinIndex].UserID;
+        }
+        var held = after.Where(r => r.IsApplied && r.PanelFamilyKey != null && r.FamilyUserId.HasValue).GroupBy(r => r.FamilyUserId!.Value)
             .ToDictionary(g => g.Key, g => g.Select(r => r.PanelFamilyKey!).Distinct(StringComparer.Ordinal).ToArray());
         var kind = reason == RegroupedByWords ? PanelAssignmentEvidenceKind.RegroupedByWords : PanelAssignmentEvidenceKind.MovedByYou;
         foreach (int i in moved)
         {
-            var row = rows[i];
+            var row = after[i];
             string previous = row.Reason;
             foreach (string prefix in new[] { MovedByYou + ". ", RegroupedByWords + ". " })
                 if (previous.StartsWith(prefix, StringComparison.Ordinal)) previous = previous[prefix.Length..];
@@ -46,10 +54,14 @@ public sealed class PanelMembershipEdit
                 row.Reason = reason + " into a family of this list row.";
             }
             else row.Reason = reason + ". " + previous;
-            recipe.PanelProteinAssignments[i] = EvidenceApply.Clone(row);
         }
-        file.PanelProteinAssignmentsFingerprint = recipe.PanelProteinAssignmentsFingerprint
-            = PanelAssignmentEvidenceStore.Fingerprint(file, rows, recipe, file.EvidenceSource, null);
+        // The state before the change must still be the recorded one; a stale project keeps its refusal.
+        string[] prints = PanelAssignmentEvidenceStore.Fingerprints(file, recipe, file.EvidenceSource, true,
+            (rows, index => before[index]), (after, index => file.MyExtendedFastaItems[index].UserID));
+        if (prints[0] != fingerprint) return 0;
+        undo?.KeepMembershipFacts(file, moved.ToDictionary(i => i, i => EvidenceApply.Clone(rows[i])));
+        foreach (int i in moved) { rows[i] = after[i]; recipe.PanelProteinAssignments[i] = EvidenceApply.Clone(after[i]); }
+        file.PanelProteinAssignmentsFingerprint = recipe.PanelProteinAssignmentsFingerprint = prints[1];
         return moved.Length;
     }
 }
