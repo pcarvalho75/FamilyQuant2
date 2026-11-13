@@ -435,6 +435,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelCoverageTieTests(Path.Combine(workDir, "panel-coverage-ties")));
             suite.Add(() => PanelRowDecodeTests(Path.Combine(workDir, "panel-row-decode")));
             suite.Add(() => PanelListBeforeScopeTests());
+            suite.AddWithApplication(() => ExportAfterCurationTests(Path.Combine(workDir, "export-after-curation")));
             suite.Add(() => PanelLinkRoundtripTests(Path.Combine(workDir, "panel-link-roundtrip")));
             suite.Add(() => PanelNamedFamilyTests(Path.Combine(workDir, "panel-named-families")));
             suite.AddWithApplication(() => PanelLinkNotesTests());
