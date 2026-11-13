@@ -32,12 +32,13 @@
     </Border>
   <WrapPanel x:Name="FamilyChartOptions" Margin="0,0,0,10">
    <TextBlock Text="Family chart" VerticalAlignment="Center" Margin="0,0,10,0"/>
-   <ComboBox x:Name="ComboBoxFamilyTopN" Width="160" SelectionChanged="ChartChoiceChanged" ToolTip="Choose the largest families as separate bars: 10, 15, 20, 30 or all families, with 15 as the default; the remainder shares one bar. This changes the chart and subsequent figure exports without editing project quantities; unavailable until quantitation exists.">
+   <ComboBox x:Name="ComboBoxFamilyTopN" Width="160" SelectionChanged="ChartChoiceChanged" ToolTip="Choose bars for 10, 15 (default), 20, 30 or all families, or Pie using the current cutoff and the same pooled all-feature buckets. This changes the Results view without editing project quantities; run Quantify to enable it.">
     <ComboBoxItem Content="Top 10 families" Tag="10" ToolTip="Show the ten largest families separately and combine all remaining families in one bar, suited to presentation slides. This changes chart layout and subsequent figure exports without editing quantities."/>
     <ComboBoxItem Content="Top 15 families" Tag="15" IsSelected="True" ToolTip="Show the fifteen largest families separately and combine all remaining families in one bar; this is the default. This changes chart layout and subsequent figure exports without editing quantities."/>
     <ComboBoxItem Content="Top 20 families" Tag="20" ToolTip="Show the twenty largest families separately and combine all remaining families in one bar, suited to a paper figure. This changes chart layout and subsequent figure exports without editing quantities."/>
     <ComboBoxItem Content="Top 30 families" Tag="30" ToolTip="Show the thirty largest families separately and combine all remaining families in one bar; labels need more screen space. This changes chart layout and subsequent figure exports without editing quantities."/>
     <ComboBoxItem Content="All families" Tag="0" ToolTip="Give every family its own chart bar, allowing scrolling when needed. This changes chart layout and subsequent figure exports without editing quantities."/>
+    <ComboBoxItem Content="Pie" Tag="pie" ToolTip="Show the current family cutoff as a pie, including other families, shared and unattributed signal on the all-peptide-feature base. This changes the Results view and uses the same pooled numbers as the bars."/>
    </ComboBox>
   </WrapPanel>
     <StackPanel x:Name="PanelFamilyChart"/>

@@ -42,6 +42,7 @@ public static class ReportFigureRenderer
     {
         reportGrouping ??= manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation);
         var visibleFamilies = families == null ? null : ReportFigureMembership.Visible(families, reportGrouping);
+        var familyLabels = ReportFamilyNames.SourceLabels(curation, families?.Families.ToDictionary(family => family.FamilyUserId, family => family.Description));
         var charts = new List<ReportChart>();
         var unavailable = new List<ReportFigureAvailability>();
         void Add(string section, string file, string title, string guidance, Func<FrameworkElement> factory,
@@ -98,7 +99,7 @@ public static class ReportFigureRenderer
         charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportPrintChart.LayoutHeight };
         if (visibleFamilies != null)
         {
-            var bars = FamilyContributionPlot.Fold(visibleFamilies, reportGrouping == null ? FamilyContributionPlot.DefaultTopN : 0);
+            var bars = FamilyContributionPlot.Fold(visibleFamilies, reportGrouping == null ? FamilyContributionPlot.DefaultTopN : 0, familyLabels: familyLabels);
             var pages = reportGrouping == null ? new[] { bars.ToArray() } : bars.Chunk(12).DefaultIfEmpty(Array.Empty<FamilyContributionBar>()).ToArray();
             for (int page = 0; page < pages.Length; page++)
             {
@@ -107,15 +108,15 @@ public static class ReportFigureRenderer
                     + "_" + (page + 1).ToString(CultureInfo.InvariantCulture) + ".png";
                 Add(ReportSectionIds.Results, file, "Family signal contributions" + (pages.Length > 1 ? " - page " + (page + 1).ToString(CultureInfo.InvariantCulture) : ""),
                     "Current curated family contributions on the chart's stated shared-peptide basis. Shared and unattributed signal remain explicit.",
-                    () => reportGrouping == null ? new FamilyContributionChart(visibleFamilies)
+                    () => reportGrouping == null ? new FamilyContributionChart(visibleFamilies, familyLabels: familyLabels)
                         : new FamilyContributionChart(pageBars, measuredEnvelope: visibleFamilies.MeasuredTotalEnvelopeReferenceCalibrated, identityThresholdFraction: visibleFamilies.IdentityThreshold));
                 if (reportGrouping != null) charts[^1] = charts[^1] with { Height = Math.Max(540, 240 + pageBars.Length * 50) };
             }
             Add(ReportSectionIds.Results, PresentationFigures.FamilySignalShareFile, "Family signal and de novo share",
-                "Family signal against its de novo contribution; these axes describe abundance and evidence source, not diversity.", () => new FamilySignalShareChart(visibleFamilies, 10),
+                "Family signal against its de novo contribution; these axes describe abundance and evidence source, not diversity.", () => new FamilySignalShareChart(visibleFamilies, 10, familyLabels),
                 new CaptionNumber("Family rows shown from the stored attribution", visibleFamilies.Families.Count, "families", "0"));
             var census = visibleFamilies.SourceSequenceSummary;
-            var sourcePages = ReportFamilySourceSequenceChart.Pages(census);
+            var sourcePages = ReportFamilySourceSequenceChart.Pages(census, familyLabels);
             int selected = sourcePages.Sum(page => page.Count);
             if (selected == 0)
                 Missing(ReportSectionIds.Results, "Family source sequence counts",
@@ -130,13 +131,13 @@ public static class ReportFigureRenderer
                 Add(ReportSectionIds.Results, file, "Family source sequence counts - page " + (page + 1).ToString(CultureInfo.InvariantCulture),
                     "The highest-count families with de novo sequences are selected by descending union count, ties by family id, and split across pages. "
                         + "Sequence counts are not gene or proteoform counts. The complete stored census and full names are retained in the companion workbook's Complete family source sequence census table; match by family id.",
-                    () => new ReportFamilySourceSequenceChart(pageRows),
+                    () => new ReportFamilySourceSequenceChart(pageRows, familyLabels),
                     new("Selected highest-count families across pages", selected, "families", "0"),
                     new("Family rows in the visible stored sequence census", census.Families.Count, "families", "0"),
                     new("Eligible families with de novo sequences", census.Families.Count(row => row.DeNovoUnionDistinctSequences > 0), "families", "0"),
                     new("Input identified distinct sequences", census.SearchInputDistinctSequences, "sequences", "0"),
                     new("Family rows on this page", pageRows.Count, "families", "0"));
-                charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportFamilySourceSequenceChart.RequiredHeight(pageRows) };
+                charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportFamilySourceSequenceChart.RequiredHeight(pageRows, familyLabels) };
             }
         }
         else Missing(ReportSectionIds.Results, "Family figures", "Family attribution is unavailable in this project.");

@@ -47,7 +47,8 @@ public sealed record ReportCompositionBasis(bool UsesPanel, bool IsIdentity, Qua
         if (!multiple)
         {
             foreach (var member in map.UserFamilies.Values.Where(f => !f.HasConflict && f.PanelFamilyKey != null))
-                labels[member.FamilyUserId] = project.FamilyPanel.Families.Single(f => f.Key == member.PanelFamilyKey).DisplayName;
+                labels[member.FamilyUserId] = ReportFamilyNames.DisplayName(project.FamilyPanel,
+                    project.FamilyPanel.Families.Single(f => f.Key == member.PanelFamilyKey), project.ReportFamilyNames);
             return new(true, true, source, map, labels,
                 source.FamilyRunShares == null ? null : FamilyReportThreshold.Build(source.FamilyRunShares, project, map), identity);
         }
@@ -79,7 +80,8 @@ public sealed record ReportCompositionBasis(bool UsesPanel, bool IsIdentity, Qua
                 PanelRowKey = r.PanelRowKey, EffectivePanelKey = r.EffectivePanelKey, Decision = r.Decision, MergeTargetFamilyKey = r.MergeTargetFamilyKey,
                 FamilyUserIds = effective.Families.Where(f => f.SourceUserIds.Any(r.FamilyUserIds.Contains)).Select(f => f.StudyFamilyId).Order().ToArray(),
             }).ToArray() };
-        return new(true, false, studies, collapsedMap, effective.Families.ToDictionary(f => f.StudyFamilyId, f => f.DisplayName),
+        return new(true, false, studies, collapsedMap, effective.Families.ToDictionary(f => f.StudyFamilyId, f => f.PanelFamilyKey is string key
+                ? ReportFamilyNames.DisplayName(project.FamilyPanel, project.FamilyPanel.Families.Single(family => family.Key == key), project.ReportFamilyNames) : f.DisplayName),
             FamilyReportThreshold.Build(effective.RunShares, project, collapsedMap),
             effective.Families.ToDictionary(f => f.StudyFamilyId, f => (IReadOnlyList<int>)f.SourceUserIds));
     }

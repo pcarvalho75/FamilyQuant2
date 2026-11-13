@@ -91,6 +91,13 @@ namespace FamilyQuant
             sb.AppendLine("Share rows use compact percentages. The chart heading names their reference total.");
             sb.AppendLine("Hover or select a value for its exact reading and base, including rounded ring totals.");
             sb.AppendLine("Family labels stop before database header fields; tooltips and details retain the full name.");
+            sb.AppendLine("In File > Export, Family names chooses Name or Other-language name for report and Results labels.");
+            sb.AppendLine("A blank other-language name keeps Name. Export applies the choice, Save keeps it in the project, and Undo does not change it.");
+            sb.AppendLine("In the HTML Family contribution chart, Pie uses the Results bars' pooled family buckets,");
+            sb.AppendLine("including other families, shared and unattributed signal. It always divides by all measured");
+            sb.AppendLine("peptide-feature signal and keeps that base when Normalize to changes; Bars keeps the run means.");
+            sb.AppendLine("On Results, Family chart also offers Pie with the current family cutoff and the same pooled");
+            sb.AppendLine("all-peptide-feature buckets as its bars. Choose a Top N entry to return to bars.");
             sb.AppendLine("The compare-measures plot's mean and SD follow Normalize to, with its base named on the axis.");
             sb.AppendLine("Coverage uses matching choosers, a residue ruler and List placements and annotations.");
             sb.AppendLine();

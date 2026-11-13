@@ -8,7 +8,10 @@ namespace FamilyQuant.Report;
 public sealed record HtmlFamilyFigures
 {
     public IReadOnlyList<HtmlFamilyFigure> Figures { get; init; } = Array.Empty<HtmlFamilyFigure>();
+    public HtmlFamilyPie? Pie { get; init; } // PI1 fixed-base pooled contribution view.
 }
+
+public sealed record HtmlFamilyPie(HtmlFamilyFigure? Figure, string? Unavailable);
 
 public sealed record HtmlFamilyFigure(string Id, string Kind, string Title, bool UsesNormalization,
     IReadOnlyDictionary<string, HtmlFamilyFigureView> Views);

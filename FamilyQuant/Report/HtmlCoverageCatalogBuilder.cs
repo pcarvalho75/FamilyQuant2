@@ -35,7 +35,7 @@ public static class HtmlCoverageCatalogBuilder
                 map.ProteinId + " (" + count.ToString(CultureInfo.InvariantCulture) + " distinct placed sequences)",
                 map.SequenceLength, count, map.RankingSignal, peptides, domains));
         }
-        var names = FamilyNaming.Names(project.MyExtendedFastaItems.Where(protein => !SequenceLabels.IsDecoy(protein.SequenceIdentifier)));
+        var names = ReportFamilyNames.SourceLabels(project);
         var families = new List<HtmlCoverageCatalogFamily>();
         foreach (var family in proteins.Select((protein, index) => (Protein: protein, Index: index)).GroupBy(row => row.Protein.FamilyUserId))
         {

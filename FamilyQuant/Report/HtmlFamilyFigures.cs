@@ -35,10 +35,12 @@ public sealed class HtmlFamilyFigurePacket
         }
     }
     private readonly IReadOnlyList<Plot> plots;
+    private readonly string? pieUnavailable;
     public IReadOnlyList<ReportSupplementSheet> Sheets { get; }
-    private HtmlFamilyFigurePacket(IReadOnlyList<Plot> plots)
+    private HtmlFamilyFigurePacket(IReadOnlyList<Plot> plots, string? pieUnavailable)
     {
         this.plots = plots;
+        this.pieUnavailable = pieUnavailable;
         Sheets = plots.Select(plot => new ReportSupplementSheet("html-families:" + plot.Id, plot.Section, plot.Sheet,
             new ReportTable("html-families:" + plot.Id, "Native HTML drawing values: " + plot.Title,
                 new[] { "Cell", "Text", "Value", "Unit" }, plot.Cells.Select(cell => (IReadOnlyList<string>)new[]
@@ -50,6 +52,7 @@ public sealed class HtmlFamilyFigurePacket
     {
         var excluded = new HashSet<string>(selection?.ExcludedIds ?? Array.Empty<string>(), StringComparer.Ordinal);
         var figures = new List<HtmlFamilyFigure>();
+        HtmlFamilyFigure? pie = null;
         foreach (var plot in plots)
         {
             if (excluded.Contains(plot.Section) || excluded.Contains(plot.Id) || excluded.Contains("html-families:" + plot.Id)) continue;
@@ -80,9 +83,12 @@ public sealed class HtmlFamilyFigurePacket
                         Number(row.Lower), Number(row.Upper), row.Runs,
                         row.Parts.Select(part => new HtmlFamilyFigurePart(Name(part.Name), Number(part.Value)!, part.Unresolved, Number(part.FamilyPercent))).ToArray())).ToArray());
             }, StringComparer.Ordinal);
-            figures.Add(new(plot.Id, plot.Kind, plot.Title, plot.Normalized, views));
+            var figure = new HtmlFamilyFigure(plot.Id, plot.Kind, plot.Title, plot.Normalized, views);
+            if (plot.Kind == "pie") pie = figure;
+            else figures.Add(figure);
         }
-        return new() { Figures = figures };
+        return new() { Figures = figures, Pie = new(pie, pie == null
+            ? pieUnavailable ?? "Include Family signal contributions in the report choices to enable Pie." : null) };
     }
 
     public static bool Owns(string id) => new[] { "family_composition", "family_signal_sources", "family_signal_vs_denovo_share",
@@ -90,7 +96,8 @@ public sealed class HtmlFamilyFigurePacket
         .Any(stem => id.StartsWith("figure:" + stem, StringComparison.Ordinal));
 
     public static HtmlFamilyFigurePacket Prepare(ReportStudyFigurePacket studies, ReportFigurePlan legacy,
-        ReportCompositionBasis basis, QuantManifest manifest)
+        ReportCompositionBasis basis, QuantManifest manifest, FamilyEnvelopeQuantResult? families = null,
+        IReadOnlyDictionary<int, string>? familyLabels = null)
     {
         var plots = new List<Plot>();
         foreach (var figure in studies.NativeFigures)
@@ -101,7 +108,19 @@ public sealed class HtmlFamilyFigurePacket
         }
         foreach (var figure in legacy.Charts.Where(figure => Owns("figure:" + figure.FileName)))
             Add("figure:" + figure.FileName, figure.SectionId, figure.Title, figure.CreateChart());
-        return new(plots);
+        var pie = FamilyPieData.Build(families, policy: manifest.FamilyRunShares?.Policy == SharedPeptidePolicy.SplitEqually
+            ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique, familyLabels: familyLabels);
+        if (pie.Unavailable == null)
+        {
+            var plot = new Plot("figure:" + AnalyticsFigures.FamilyContributionFile, "pie", "Family contribution, all runs pooled",
+                ReportSectionIds.Results, false, "Native family pie");
+            var rows = pie.Slices.Select(slice => new Row(slice.Key, plot.Text(slice.Label), plot.Number(slice.Percent, "%"), null, null, null,
+                "All runs pooled", new[] { new Part(plot.Text("Identified"), plot.Number(slice.IdentifiedPercent, "%")!, false),
+                    new Part(plot.Text("De novo"), plot.Number(slice.DeNovoPercent, "%")!, false) })).ToArray();
+            plot.Views["fixed"] = ViewOf(rows, FamilyPieData.Basis, FamilyPieData.Legend, "Share of all measured peptide-feature signal (%)", "Source parts on the same base", true);
+            plots.Add(plot);
+        }
+        return new(plots, pie.Unavailable);
 
         void Add(string id, string section, string title, System.Windows.FrameworkElement native)
         {
@@ -147,7 +166,7 @@ public sealed class HtmlFamilyFigurePacket
                 var rows = scatter.Rows.Select(row =>
                 {
                     var value = FamilySignalShareChart.Value(row);
-                    return new Row(row.FamilyUserId.ToString(CultureInfo.InvariantCulture), plot.Text(FamilyFigureLabel.Format(row.FamilyUserId, row.Description, int.MaxValue)),
+                    return new Row(row.FamilyUserId.ToString(CultureInfo.InvariantCulture), plot.Text(FamilyFigureLabel.Format(row.FamilyUserId, scatter.FamilyLabels.GetValueOrDefault(row.FamilyUserId, row.Description), int.MaxValue)),
                         plot.Number(value.Signal, "area"), plot.Number(value.DeNovoShare * 100, "%"), null, null, "All runs pooled", Array.Empty<Part>());
                 }).ToArray();
                 plot.Views["fixed"] = ViewOf(rows, "Pooled family area; de novo percent of that family's area", "All runs pooled. Horizontal position is total attributed family envelope area; vertical position is de novo as a percent of that same family's area. This is a within-family evidence share, with no run-to-run whiskers. Changing Normalize to does not change either axis.", "Total attributed family envelope area", "De novo share of this family's area (%)", false, true);
@@ -155,7 +174,7 @@ public sealed class HtmlFamilyFigurePacket
             else if (native is ReportFamilySourceSequenceChart census)
             {
                 var rows = census.Rows.Select(row => new Row(row.FamilyUserId.ToString(CultureInfo.InvariantCulture),
-                    plot.Text(FamilyFigureLabel.Format(row.FamilyUserId, row.Description, int.MaxValue)), plot.Number(row.DeNovoUnionDistinctSequences, "sequences"),
+                    plot.Text(FamilyFigureLabel.Format(row.FamilyUserId, census.FamilyLabels.GetValueOrDefault(row.FamilyUserId, row.Description), int.MaxValue)), plot.Number(row.DeNovoUnionDistinctSequences, "sequences"),
                     plot.Number(row.SearchDistinctSequences, "search sequences"), null, null, "All runs pooled", new[]
                     {
                         new Part(plot.Text("PEAKS de novo only"), plot.Number(row.PeaksDeNovoOnlyExclusiveDistinctSequences, "sequences")!, false),
