@@ -46,7 +46,10 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
     private FamilyPanel? committedPanel;
     public PanelSheetPreview? Preview { get; private set; }
     public ObservableCollection<ImportColumnChoice> Columns { get; } = new();
-    public IReadOnlyList<ImportColumnChoice> MainColumns => Columns.Where(c => c.Role != PanelImportFields.ColorCategory).ToArray();
+    private readonly HashSet<string> availableColumnRoles = new(StringComparer.Ordinal);
+    public IReadOnlyList<ImportColumnChoice> MainColumns => Columns.Where(c => c.Role != PanelImportFields.ColorCategory
+        && (c.Role is not (PanelImportFields.Notes or PanelImportFields.Decision or WorkbookImportSummaryFields.Subclasses)
+            || availableColumnRoles.Contains(c.Role))).ToArray();
     public ImportColumnChoice? ColorColumn => Columns.FirstOrDefault(c => c.Role == PanelImportFields.ColorCategory);
     public bool ReviewingDecisions { get => reviewingDecisions; set { if (Set(ref reviewingDecisions, value)) { Changed(nameof(Title)); Changed(nameof(Explanation));
         if (page == 2) Status = ColumnsStatus;
@@ -270,7 +273,8 @@ public sealed partial class FamilyListImportViewModel : ScreenViewModel, IDispos
 
     public string DisabledReason => IsBusy ? "Wait for the current step to finish, or cancel."
         : page == 1 ? "Choose a readable file, sheet and header row."
-        : page == 2 ? HasUnconfirmedColumnDecisions ? ReviewingDecisions ? ConfirmDecisionActions : DecisionReviewInstruction
+        : page == 2 ? ColumnMappingProblem.Length > 0 ? ColumnMappingProblem
+            : HasUnconfirmedColumnDecisions ? ReviewingDecisions ? ConfirmDecisionActions : DecisionReviewInstruction
             : "Choose the required columns and confirm each decision value."
         : page == 3 ? SpecialRows.FirstOrDefault(r => r.Blocking)?.Message ?? check.Problems.FirstOrDefault(p => p.Severity == PanelImportSeverity.Blocking)?.Message ?? "Review the special rows."
         : page == 4 ? "Confirm or skip each family's evidence matches."

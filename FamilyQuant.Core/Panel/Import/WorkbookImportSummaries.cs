@@ -25,7 +25,6 @@ public static partial class WorkbookImportSummaries
         var keys = Freeze(keyPreview.Rows.SelectMany(row => row.FamilyKeys).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal));
         var expected = ExpectedNames(source, choices, keyPreview, out var subclassNotes);
         var vocabulary = matching.RecognizedPfamDomains().Select(Copy).ToList();
-        var knownPfam = vocabulary.Select(domain => domain.Accession).ToHashSet(StringComparer.OrdinalIgnoreCase);
         var subclassProposals = PanelSubclassImport.Propose(source.SubclassTables, keys, vocabulary, expected).Proposals;
         var plan = new WorkbookImportPlan { Proposal = source, Choices = choices, Matching = matching,
             Subclasses = Copy(subclassProposals), ExpectedNames = expected, SubclassNotes = subclassNotes, Vocabulary = vocabulary,
@@ -124,11 +123,11 @@ public static partial class WorkbookImportSummaries
             string? key = keyPreview.Rows.FirstOrDefault(row => row.RowNumber == hint.RowNumber)?.FamilyKeys.SingleOrDefaultSafe();
             string text = hint.SourceText.Length > 0 ? hint.SourceText : string.Join("; ", hint.Domains.Select(domain => domain.Accession));
             bool active = key != null && (preview.Panel == null || FamilyPanelValidation.ResolveFamilyKey(preview.Panel, key) == key);
-            bool needsChoice = active && FamilyPanelSpreadsheetImporter.NeedsPfamChoice(text, knownPfam);
+            bool needsChoice = active && FamilyPanelSpreadsheetImporter.NeedsPfamChoice(text);
             bool reviewed = key != null && reviewedEvidence?.ContainsKey(key) == true;
             if (needsChoice && !reviewed)
                 Add(WorkbookImportSectionKind.Pfam, "Pfam for row " + hint.RowNumber + " (" + hint.FamilyKey + ")", text,
-                    "Resolve the Pfam names or codes not found in the stored domain list, or explicitly skip this row's matches.",
+                    "Resolve the Pfam name without a code, or explicitly skip this row's matches.",
                     WorkbookImportItemState.Uncertain, WorkbookImportPage.EvidenceMatches, true,
                     sources: new[] { At(new[] { hint.RowNumber }, new[] { hint.Column }) });
             if (text.Length == 0 && active)
@@ -137,7 +136,6 @@ public static partial class WorkbookImportSummaries
                     WorkbookImportPage.EvidenceMatches, sources: new[] { At(new[] { hint.RowNumber }, new[] { hint.Column }) });
             foreach (var domain in hint.Domains)
             {
-                if (!knownPfam.Contains(domain.Accession) && !reviewed && active) continue;
                 bool selected = choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Pfam, "").Length > 0;
                 bool valid = key != null && domain.Accession.Length > 0;
                 Add(WorkbookImportSectionKind.Pfam, "Source Pfam domain", domain.Accession + (domain.Name.Length == 0 ? "" : ": " + domain.Name),
@@ -166,7 +164,7 @@ public static partial class WorkbookImportSummaries
             {
                 bool valid = familyExists && (choice == null || Enum.IsDefined(choice.Kind) && !string.IsNullOrWhiteSpace(choice.Value) && !choice.Value.Any(char.IsControl));
                 var coverage = choice == null || !valid ? null : matching.Coverage(choice.Kind, choice.Value);
-                bool suppliedCode = choice?.Kind == PanelEvidenceMatchKind.Pfam && knownPfam.Contains(choice.Value)
+                bool suppliedCode = choice?.Kind == PanelEvidenceMatchKind.Pfam
                     && plan.Actions.Any(action => action.Value is WorkbookImportDomain domain && domain.FamilyKey == pair.Key
                         && domain.Domain.Accession.Equals(choice.Value, StringComparison.OrdinalIgnoreCase));
                 string warning = choice == null || !valid || suppliedCode ? "" : matching.ConfirmationWarning(new[] { choice });

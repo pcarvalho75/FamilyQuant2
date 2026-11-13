@@ -76,8 +76,8 @@ public static class FamilyListImportGuide
         }),
         new FamilyListImportGuideSection("matches", "Pfam choices when needed", "", "", new[]
         {
-            "PF codes found in stored evidence are taken directly from the sheet, including named codes such as Name (PF12345). They do not ask for a second confirmation.",
-            "Only a row written as a name or containing a code not found needs a choice. Select its stored match and press Use selected matches, or Skip this family. Continue without matches skips unresolved questions and keeps valid supplied codes.",
+            "Well-formed PF codes are confirmed directly from the sheet, including named codes such as Name (PF12345), before or after Fetch evidence. Un-confirm in Summary removes the confirmation from the draft while keeping the source codes.",
+            "Only a domain name without a code needs a choice. Select its stored match and press Use selected matches, or Skip this family. Continue without matches skips unresolved questions and keeps valid supplied codes.",
             "A row without a Pfam code is named once in Summary and gets no proteins until it has one. Counts are distinct database entries, can overlap and must not be added. No evidence is downloaded during import.",
         }),
         new FamilyListImportGuideSection("later", "Saving matches later", "", "", new[]

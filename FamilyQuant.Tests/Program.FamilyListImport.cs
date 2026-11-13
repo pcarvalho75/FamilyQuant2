@@ -171,7 +171,8 @@ internal static partial class Program
                         && model.PfamQuestions.Count > 0 && model.PfamQuestions.All(f => !f.Decided) && !model.CanNext
                         && model.MatchFamilies.All(f => f.Suggestions.All(s => s.Use == s.IsFromSheet)));
                     model.SelectedMatchFamily = model.PfamQuestions.FirstOrDefault(f => f.Suggestions.Count > 0) ?? model.SelectedMatchFamily;
-                    Check(label + " the stored example protein supplies visible real Core suggestions", model.SelectedMatchFamily?.Suggestions.Count > 0);
+                    Check(label + " supplied-code rows retain real Core suggestions without another question",
+                        model.MatchFamilies.Any(f => f.Automatic && f.Suggestions.Count > 0));
                     CaptureFamilyListPage(window, output, theme, size.Width, size.Height, "05-evidence-matches");
                     model.SkipAllMatches();
                     Check(label + " Continue without matches records an explicit choice and no project change", model.CanNext
@@ -202,7 +203,7 @@ internal static partial class Program
                         && mergedFamily.Matches == "Not needed"
                         && model.SummaryFamilies.Count(f => f.Decision == "Not a family") == 11
                         && model.SummaryFamilies.Where(f => f.Decision == "Not a family").All(f => f.Matches == "Not needed")
-                        && model.SummaryFamilies.Where(f => f.Decision == "Quantify").All(f => f.Matches == "Skipped" || f.Matches.StartsWith("No Pfam code", StringComparison.Ordinal)));
+                        && model.SummaryFamilies.Where(f => f.Decision == "Quantify").All(f => f.Matches is "Confirmed" or "Skipped" || f.Matches.StartsWith("No Pfam code", StringComparison.Ordinal)));
                     Check(label + " a single confirmed match uses family grammar", !model.Summary.Contains("1 families confirmed", StringComparison.Ordinal));
                     Check(label + " Summary omits categories and keeps complete original source fields", !((DataGrid)window.FindName("SummaryGrid")).Columns.Any(c => c.Header as string == "Colour")
                         && model.SummaryFamilies.All(f => f.Notes.Length > 0));

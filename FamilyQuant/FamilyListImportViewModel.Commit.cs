@@ -82,7 +82,6 @@ public sealed partial class FamilyListImportViewModel
         var previous = MatchFamilies.ToDictionary(f => f.Key, StringComparer.Ordinal);
         var storedMatching = matcher is FamilyListStoredEvidenceMatches stored ? stored.WorkbookSnapshot : new PanelEvidenceMatching(transaction.Project);
         var vocabulary = storedMatching.RecognizedPfamDomains();
-        var known = vocabulary.Select(domain => domain.Accession).ToHashSet(StringComparer.OrdinalIgnoreCase);
         string pfamHeader = choices.ColumnHeaders.GetValueOrDefault(PanelImportFields.Pfam, "");
         MatchFamilies.Clear();
         foreach (var family in panel.Families.Where(f => FamilyPanelValidation.ResolveFamilyKey(panel, f.Key) == f.Key))
@@ -91,7 +90,7 @@ public sealed partial class FamilyListImportViewModel
             string pfamText = family.TextFields.FirstOrDefault(field => field.Name == pfamHeader)?.Text ?? "";
             bool missing = family.Pfam.Count == 0 && string.IsNullOrWhiteSpace(pfamText);
             bool suppliedCodes = family.Pfam.Count > 0 && !FamilyPanelSpreadsheetImporter.NeedsPfamChoice(pfamText.Length > 0
-                ? pfamText : string.Join("; ", family.Pfam.Select(domain => domain.Accession)), known);
+                ? pfamText : string.Join("; ", family.Pfam.Select(domain => domain.Accession)));
             var proposed = (supplied?.Suggestions ?? Array.Empty<ImportEvidenceMatch>()).ToList();
             foreach (var domain in vocabulary.Where(domain => domain.Name.Length > 0
                 && pfamText.Split(';', ',').Any(name => name.Trim().Equals(domain.Name, StringComparison.OrdinalIgnoreCase))))
@@ -164,6 +163,25 @@ public sealed partial class FamilyListImportViewModel
         Status = MatchFamilies.Any(f => f.PreviouslyConfirmed) ? "Previous confirmed matches kept; new matching skipped." : "Evidence matching skipped for this import; review it in Family checklist."; Refresh();
     }
 
+    public void UnconfirmMatches(string familyKey)
+    {
+        if (IsBusy || Imported || page != 5) return;
+        var family = MatchFamilies.FirstOrDefault(row => row.Key == familyKey);
+        if (family?.Choice is not ("Confirmed" or "Kept from previous panel")) return;
+        foreach (var suggestion in family.Suggestions) suggestion.Use = false;
+        family.Choice = "Unconfirmed";
+        if (WorkbookReviewEnabled)
+        {
+            evidencePagePrepared = true;
+            reviewedEvidence = MatchFamilies.Where(row => row.Decided).ToDictionary(row => row.Key,
+                row => (IReadOnlyList<PanelEvidenceChoice>)row.Suggestions.Where(choice => choice.Use)
+                    .Select(choice => PanelEvidenceMatching.ChoiceFromKey(choice.Key) with { Value = choice.Text }).ToArray(), StringComparer.Ordinal);
+            RefreshWorkbookReview();
+        }
+        Status = "Matching unconfirmed for " + family.Name + ". The source codes stay in the list; Accept and import keeps this choice.";
+        Refresh();
+    }
+
     private static void RestoreOrSkip(ImportMatchFamily family)
     {
         foreach (var suggestion in family.Suggestions)
@@ -222,6 +240,8 @@ public sealed partial class FamilyListImportViewModel
                 if (matcher != null) panel = matcher.Accept(panel, MatchFamilies.ToArray());
                 panel.TextFields.Add(new FamilyPanelText { Name = "Import matching choices", Text = string.Join("\n", MatchFamilies.Select(f => f.Key + ": " + f.Choice)) });
             }
+            foreach (var family in MatchFamilies.Where(row => row.Choice == "Unconfirmed"))
+                panel.ConfirmedEvidenceMatches?.Remove(family.Key);
             FamilyPanelValidation.Validate(panel);
             if (!transaction.Import(panel, out string result)) { Status = result; return false; }
             committedPanel = FamilyPanelValidation.Clone(panel);
