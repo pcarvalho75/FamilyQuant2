@@ -324,6 +324,18 @@ public static partial class PanelEvidenceClassifier
             return candidates.Length > 0 && !candidates.Contains(family, StringComparer.Ordinal);
         }
 
+        /// <summary>D119: a row that names a UniProt family also takes a protein with no UniProt family of its own
+        /// when the row lists every one of its domains and is its best row by the tie rule (most shared domains,
+        /// then the shorter list). A protein whose own family differs is still refused.</summary>
+        internal bool FitsNamedRow(ProteinEvidence? evidence, string family)
+        {
+            var row = Panel.Families.Single(f => f.Key == family);
+            string[] observed = EvidenceDomains.Ordered(evidence);
+            return useNamedFamilyRules && row.UniProtFamilies.Count > 0 && SourceFamilies(evidence).Length == 0 && observed.Length > 0
+                && observed.All(domain => row.Pfam.Any(d => d.Accession == domain))
+                && Candidates(Panel, observed).Coverage.SequenceEqual(new[] { family }, StringComparer.Ordinal);
+        }
+
         internal bool Compatible(string[] observed, string family, ProteinEvidence? reference)
         {
             var expected = Panel.Families.Single(f => f.Key == family).Pfam.Select(d => d.Accession)
@@ -416,12 +428,15 @@ public static partial class PanelEvidenceClassifier
                 {
                     link = new(null, "neighbour_refused", "The equally close reference identities were not recorded. Run the search again.");
                 }
+                // A named row lists every domain of a protein without its own family, so no other row's domain conflicts.
+                bool fits = link.Family != null && !context.AllowsNamedFamily(protein.Evidence, link.Family, maskSourceLabel)
+                    && context.FitsNamedRow(protein.Evidence, link.Family);
                 if (link.Family == null) { reason = link.Reason; Flag(link.Code, link.Reason); }
-                else if (!context.AllowsNamedFamily(protein.Evidence, link.Family, maskSourceLabel))
+                else if (!fits && !context.AllowsNamedFamily(protein.Evidence, link.Family, maskSourceLabel))
                 { reason = "This panel row requires the protein's own exact UniProt family; a neighbour cannot supply that membership."; Flag("panel_source_family_required", reason); }
-                else if (context.Conflicts(EvidenceDomains.Ordered(protein.Evidence), link.Family))
+                else if (!fits && context.Conflicts(EvidenceDomains.Ordered(protein.Evidence), link.Family))
                 { reason = "Observed accompanying domains conflict with the neighbour's panel family."; Flag("panel_domain_conflict", reason); }
-                else if (!annotated && !context.Compatible(EvidenceDomains.Ordered(protein.Evidence), link.Family, reference.Evidence))
+                else if (!annotated && !fits && !context.Compatible(EvidenceDomains.Ordered(protein.Evidence), link.Family, reference.Evidence))
                 { reason = "The neighbour qualifies, but no compatible observed domains support an unannotated protein."; Flag("domain_compatibility", reason); }
                 else
                 {
@@ -429,7 +444,8 @@ public static partial class PanelEvidenceClassifier
                     tier = annotated ? EvidenceTier.ReviewedNeighbour : EvidenceTier.UnannotatedNeighbour;
                     reason = "Reviewed neighbour " + neighbour!.Accession + ": " + neighbour.IdentityPercent.ToString("0.##", CultureInfo.InvariantCulture)
                         + "% identity, " + neighbour.QueryCoveragePercent!.Value.ToString("0.##", CultureInfo.InvariantCulture)
-                        + "% of query residues aligned. " + link.Reason;
+                        + "% of query residues aligned. " + link.Reason
+                        + (fits ? " It has no UniProt family of its own, and this row lists every one of its Pfam domains." : "");
                 }
             }
         }

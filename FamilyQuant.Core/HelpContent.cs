@@ -334,7 +334,10 @@ namespace FamilyQuant
             sb.AppendLine("A row naming a UniProt family takes only proteins with that complete family name.");
             sb.AppendLine("Those proteins enter that row even without matching scope words. Rows sharing its");
             sb.AppendLine("domains without a family name take the other supported proteins under the existing");
-            sb.AppendLine("scope rules. A neighbour cannot supply membership of a named UniProt family.");
+            sb.AppendLine("scope rules. A neighbour cannot supply membership of a named UniProt family to a protein");
+            sb.AppendLine("whose own family differs. A protein with no UniProt family of its own may join the named");
+            sb.AppendLine("row through a qualifying neighbour when the row lists every one of its Pfam domains and");
+            sb.AppendLine("is its best row (most shared domains, then the shorter list).");
             sb.AppendLine("After re-importing a list, Apply grouping also refreshes names and subclass rules");
             sb.AppendLine("for already grouped, locked members whose evidence still supports the same panel");
             sb.AppendLine("row. Their family numbers and locks stay unchanged; Undo restores the prior state.");
