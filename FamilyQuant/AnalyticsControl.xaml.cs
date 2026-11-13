@@ -32,10 +32,13 @@ public partial class AnalyticsControl : UserControl
         TextBlockDetails.Text = ViewModel.Details;
         BorderEmpty.Visibility = Data == null && !ViewModel.DatabaseGap.HasStoredResult ? Visibility.Visible : Visibility.Collapsed;
         ComboBoxFamilyTopN.IsEnabled = ViewModel.HasData;
+        string familyChoice = ViewModel.FamilyPie ? "pie" : ViewModel.FamilyTopN.ToString(CultureInfo.InvariantCulture);
+        ComboBoxFamilyTopN.SelectedItem = ComboBoxFamilyTopN.Items.OfType<ComboBoxItem>().FirstOrDefault(item => item.Tag as string == familyChoice)
+            ?? ComboBoxFamilyTopN.Items.OfType<ComboBoxItem>().First(item => item.Tag as string == "15");
         ViewModel.PropertyChanged += (_, e) =>
         {
             TextBlockStatus.Text = ViewModel.Status;
-            if (e.PropertyName is nameof(ViewModel.FamilyTopN) or nameof(ViewModel.FamilyAsPercent) or nameof(ViewModel.FamilyLabels)) DrawCharts();
+            if (e.PropertyName is nameof(ViewModel.FamilyTopN) or nameof(ViewModel.FamilyAsPercent) or nameof(ViewModel.FamilyLabels) or nameof(ViewModel.FamilyPie)) DrawCharts();
         };
         TextBlockStatus.Text = ViewModel.Status;
         ready = true;
@@ -44,8 +47,10 @@ public partial class AnalyticsControl : UserControl
     private void ChartChoiceChanged(object sender, RoutedEventArgs e)
     {
         if (!ready) return;
-        ViewModel.FamilyTopN = int.TryParse((ComboBoxFamilyTopN.SelectedItem as ComboBoxItem)?.Tag as string,
-            NumberStyles.Integer, CultureInfo.InvariantCulture, out int top) ? top : FamilyContributionPlot.DefaultTopN;
+        string? choice = (ComboBoxFamilyTopN.SelectedItem as ComboBoxItem)?.Tag as string;
+        ViewModel.FamilyPie = choice == "pie";
+        if (!ViewModel.FamilyPie)
+            ViewModel.FamilyTopN = int.TryParse(choice, NumberStyles.Integer, CultureInfo.InvariantCulture, out int top) ? top : FamilyContributionPlot.DefaultTopN;
     }
     private void DrawCharts()
     {
@@ -55,11 +60,12 @@ public partial class AnalyticsControl : UserControl
         foreach (var figure in AnalyticsFigures.Build(Data, Families, FamilyTopN, FamilyAsPercent)
             .Concat(ViewModel.BuildCompositionFigures()))
         {
-            FrameworkElement plotted = figure.Chart is FamilyContributionChart
-                ? new FamilyContributionChart(Families, FamilyTopN, FamilyAsPercent, sharedPolicy: ViewModel.FamilySharedPolicy, familyLabels: ViewModel.FamilyLabels)
-                : figure.Chart;
+            FrameworkElement plotted = figure.Chart;
+            if (plotted is FamilyContributionChart)
+                plotted = ViewModel.FamilyPie ? new FamilyPieChart(FamilyPieData.Build(Families, FamilyTopN, ViewModel.FamilySharedPolicy, ViewModel.FamilyLabels))
+                    : new FamilyContributionChart(Families, FamilyTopN, FamilyAsPercent, sharedPolicy: ViewModel.FamilySharedPolicy, familyLabels: ViewModel.FamilyLabels);
             if (plotted is IPalettedChart chart) chart.Palette = ChartPalette.UiPalette;
-            string text = CompositionChartCaptions.Build(figure, Data);
+            string text = plotted is FamilyPieChart ? FamilyPieData.Caption : CompositionChartCaptions.Build(figure, Data);
             var caption = new TextBlock { Text = text,
                 ToolTip = "This line explains the chart and its recorded numbers. The complete explanation is included in the report.",
                 Tag = "figure-caption:" + figure.FileName,
@@ -67,9 +73,9 @@ public partial class AnalyticsControl : UserControl
                 FontSize = 12, Margin = new Thickness(0, 6, 0, 0) };
             caption.SetResourceReference(TextBlock.ForegroundProperty, "MutedBrush");
             var group = new StackPanel { Margin = new Thickness(0, 0, 0, 16) };
-            group.Children.Add(new Border { Height = figure.ScreenHeight, Child = plotted });
+            group.Children.Add(new Border { Height = plotted is FamilyPieChart pie ? FamilyPieChart.RecommendedHeight(pie.Data) : figure.ScreenHeight, Child = plotted });
             group.Children.Add(caption);
-            if (plotted is FamilyContributionChart) PanelFamilyChart.Children.Add(group);
+            if (plotted is FamilyContributionChart or FamilyPieChart) PanelFamilyChart.Children.Add(group);
             else PanelCharts.Children.Add(group);
         }
     }

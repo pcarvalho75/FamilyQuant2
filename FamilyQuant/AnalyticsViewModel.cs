@@ -17,6 +17,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     private readonly QuantManifest? manifest;
     private readonly FamilyClusterFile? curation;
     private int topN = FamilyContributionPlot.DefaultTopN;
+    private bool familyPie;
     private string status = "";
     private ResultsExportKind exportKind;
     public AnalyticsData? Data { get; }
@@ -43,6 +44,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
         + (HasHomology ? " The standalone homology snapshot can still be exported here." : "");
     public IReadOnlyList<ResultsSummaryCard> Cards { get; } = Array.Empty<ResultsSummaryCard>();
     public int FamilyTopN { get => topN; set => Set(ref topN, value); }
+    public bool FamilyPie { get => familyPie; set => Set(ref familyPie, value); }
     public SharedPeptidePolicy FamilySharedPolicy => manifest?.FamilyRunShares?.Policy == SharedPeptidePolicy.SplitEqually
         ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique;
     // Retained for callers of the former chart option. Results always uses all peptide features.
