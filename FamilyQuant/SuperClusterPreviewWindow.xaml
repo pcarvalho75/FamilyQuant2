@@ -452,8 +452,12 @@
                                         <Button x:Name="ChecklistPlaceHandButton" Content="Place outside matches by hand..." Click="PlaceChecklistMatches_Click" IsEnabled="{Binding CanPlaceChecklistMatches}"
                                                 ToolTip="Opens a confirmation for adding this panel family's outside matches by hand, with the project changed only on Apply grouping and restored by Undo. Choose an included panel family with outside matches, update the proposal and unlock matching proteins to enable it."/>
                                     </WrapPanel>
+                                    <WrapPanel Margin="0,8,0,0">
                                     <Button x:Name="MatchPanelNamesButton" Content="Match stored names..." Click="MatchPanelNames_Click" IsEnabled="{Binding CanMatchPanelNames}"
-                                            HorizontalAlignment="Left" Margin="0,8,0,0" ToolTip="{Binding DataContext.MatchPanelNamesHint, RelativeSource={RelativeSource AncestorType={x:Type local:SuperClusterPreviewWindow}}, FallbackValue='Unavailable until a current panel proposal and selected family are ready. Update proposal, select a family and use pending panel-link choices before matching stored names.'}"/>
+                                            HorizontalAlignment="Left" Margin="0,0,8,0" ToolTip="{Binding DataContext.MatchPanelNamesHint, RelativeSource={RelativeSource AncestorType={x:Type local:SuperClusterPreviewWindow}}, FallbackValue='Unavailable until a current panel proposal and selected family are ready. Update proposal, select a family and use pending panel-link choices before matching stored names.'}"/>
+                                    <Button x:Name="UnconfirmPanelMatchesButton" Content="Un-confirm matches" Click="UnconfirmPanelMatches_Click" IsEnabled="{Binding CanUnconfirmPanelMatches}"
+                                            HorizontalAlignment="Left" ToolTip="{Binding DataContext.UnconfirmPanelMatchesHint, RelativeSource={RelativeSource AncestorType={x:Type local:SuperClusterPreviewWindow}}, FallbackValue='Unavailable until a current panel proposal and a selected family with confirmed matches are ready. Update proposal, then select such a family.'}"/>
+                                    </WrapPanel>
                                         </StackPanel>
                                     </ScrollViewer>
                                     <TextBox x:Name="ChecklistScopePreview" Grid.Column="1" Text="{Binding ChecklistScopePreviewText, Mode=OneWay}" IsReadOnly="True"

@@ -40,6 +40,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-panel-row-decode", "FamilyQuant.Tests.Program.PanelRowDecodeTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-list-before-scope", "FamilyQuant.Tests.Program.PanelListBeforeScopeTests()"),
         SuiteCommandRule.Covered("--test-export-after-curation", "FamilyQuant.Tests.Program.ExportAfterCurationTests(System.String)"),
+        SuiteCommandRule.Covered("--test-checklist-unconfirm", "FamilyQuant.Tests.Program.ChecklistUnconfirmTests(System.String)"),
         SuiteCommandRule.Excluded("--panel-row-decode", "Read-only desk count over a selected project: where one list row's matches and the targets whose name matches a given pattern ended, with their evidence traits. Prints counts and row keys only; synthetic proof is PanelRowDecodeTests in DefaultSuite."),
         SuiteCommandRule.Covered("--test-ledger-synthetic-mode", "FamilyQuant.Tests.Program.FeatureLedgerReceiptGuardTests(System.Boolean)"),
         SuiteCommandRule.Covered("--test-html-family-native", "FamilyQuant.Tests.Program.HtmlFamilyNativeTests(System.String)"),

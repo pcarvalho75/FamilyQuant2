@@ -15,7 +15,8 @@ public sealed record PanelChecklistProtein(int ProteinIndex, string Identifier, 
 public enum PanelChecklistState { WithProteins, NeedsChoice, NoPfamCode, NoDatabaseMatch, NoProteinInScope, AssignedElsewhere, NotPlaced }
 
 public sealed record PanelChecklistFamily(string Key, string Name, string Decision, string? TargetKey,
-    IReadOnlyList<PanelChecklistProtein> Proteins, int ExcludedContaminants = 0, bool HasPfamCode = true, bool NeedsLinkChoice = false)
+    IReadOnlyList<PanelChecklistProtein> Proteins, int ExcludedContaminants = 0, bool HasPfamCode = true, bool NeedsLinkChoice = false,
+    bool HasConfirmedMatches = false)
 {
     public PanelChecklistState State => Placed > 0 ? PanelChecklistState.WithProteins
         : NeedsLinkChoice ? PanelChecklistState.NeedsChoice : !HasPfamCode ? PanelChecklistState.NoPfamCode
@@ -121,7 +122,7 @@ public static class PanelFamilyChecklist
             };
             return new PanelChecklistFamily(family.Key, string.IsNullOrWhiteSpace(family.DisplayName) ? family.Key : family.DisplayName, decision, targetKey, matches, excludedContaminants,
                 domains.Count > 0, proposal.PanelContext.Links.Any(link => link.NeedsConfirmation
-                    && link.CandidateFamilyKeys.Contains(targetKey ?? family.Key, StringComparer.Ordinal)));
+                    && link.CandidateFamilyKeys.Contains(targetKey ?? family.Key, StringComparer.Ordinal)), confirmed?.UserConfirmed == true);
         }).ToArray();
     }
 }

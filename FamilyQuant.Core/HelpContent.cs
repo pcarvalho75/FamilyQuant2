@@ -329,6 +329,7 @@ namespace FamilyQuant
             sb.AppendLine("Family checklist keeps every list row and counts rows with proposed proteins, pending Panel links choices,");
             sb.AppendLine("no Pfam code, no database match, no protein in scope, proteins in another row, or no placed proteins.");
             sb.AppendLine("Only unresolved Panel links choices are waiting. The checklist table stays visible while reasons and scope or matching actions scroll below.");
+            sb.AppendLine("Un-confirm matches removes the selected family's confirmed matches, also those accepted from its sheet codes, from the review; its Pfam codes stay. Apply grouping keeps it and Undo restores it.");
             sb.AppendLine("Family checklist uses the full review width and one line per row; hover over Panel family for its full name, key and excluded-contaminant count.");
             sb.AppendLine("After adding a phrase to scope, its preview stays beside the scrolling reasons and actions until Update proposal.");
             sb.AppendLine("Save panel as spreadsheet writes named link choices in the UniProt family column.");
