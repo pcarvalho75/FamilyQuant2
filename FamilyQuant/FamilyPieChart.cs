@@ -14,6 +14,12 @@ public sealed class FamilyPieChart : CompositionDrawingBase
     private int selected = -1;
     public FamilyPieData Data { get; }
 
+    /// <summary>Legend lines drawn for the current render, in slice order. Each starts with its position.</summary>
+    public IReadOnlyList<string> LegendLines { get; private set; } = [];
+
+    /// <summary>Positions whose slices were wide enough to carry that same number.</summary>
+    public IReadOnlyList<int> NumberedSlices { get; private set; } = [];
+
     public FamilyPieChart(FamilyPieData data)
     {
         Data = data ?? throw new ArgumentNullException(nameof(data));
@@ -36,6 +42,10 @@ public sealed class FamilyPieChart : CompositionDrawingBase
         base.OnRender(dc);
         Heading(dc, "Family contribution: Pie", "Percent of all measured peptide-feature signal; all runs pooled");
         targets.Clear();
+        var legend = new List<string>();
+        var numbered = new List<int>();
+        LegendLines = legend;
+        NumberedSlices = numbered;
         if (Data.Unavailable != null)
         {
             Label(dc, Data.Unavailable, 26, 110, ActualWidth - 52);
@@ -49,13 +59,25 @@ public sealed class FamilyPieChart : CompositionDrawingBase
         {
             var slice = Data.Slices[index];
             double sweep = slice.Percent * 3.6;
+            string number = (index + 1).ToString(CultureInfo.CurrentCulture);
+            string line = number + ". " + slice.Label + "  " + slice.Percent.ToString("G3", CultureInfo.CurrentCulture) + "%";
+            legend.Add(line);
             Geometry shape = sweep >= 360 ? new EllipseGeometry(center, radius, radius) : Wedge(center, radius, start, sweep);
             var fill = slice.Kind == FamilyContributionBarKind.Family ? Series(index) : palette.Remainder;
             if (sweep > 0) dc.DrawGeometry(fill, new Pen(selected == index ? palette.Ink : palette.Backdrop, selected == index ? 2.5 : 1.2), shape);
+            // The arc at the label radius has to be wider than the digits. Smaller slices stay in the legend.
+            var mark = Text(number, palette.SegmentLabel, 13, true);
+            double midRadius = radius * .62;
+            if (sweep > 0 && sweep * Math.PI / 180 * midRadius >= mark.Width + 4)
+            {
+                numbered.Add(index + 1);
+                double middle = (start + sweep / 2) * Math.PI / 180;
+                dc.DrawText(mark, new Point(center.X + midRadius * Math.Cos(middle) - mark.Width / 2,
+                    center.Y + midRadius * Math.Sin(middle) - mark.Height / 2));
+            }
             double top = 100 + index * 23;
             dc.DrawRectangle(fill, null, new Rect(legendLeft, top + 4, 10, 10));
-            Label(dc, slice.Label + "  " + slice.Percent.ToString("G3", CultureInfo.CurrentCulture) + "%",
-                legendLeft + 18, top, ActualWidth - legendLeft - 44, 12, selected == index);
+            Label(dc, line, legendLeft + 18, top, ActualWidth - legendLeft - 44, 12, selected == index);
             targets.Add((shape, new Rect(legendLeft, top, Math.Max(1, ActualWidth - legendLeft - 26), 23)));
             start += sweep;
         }

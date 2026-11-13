@@ -4962,6 +4962,7 @@
             let start = -90;
             for (const [index, row] of view.rows.entries()) {
               const percent = u3cNumber(row.x) || 0;
+              const number = String(index + 1);
               const colour = u3cPalette[index % u3cPalette.length];
               if (percent > 0) {
                 const attributes = { fill: colour, stroke: "var(--surface)", "stroke-width": 2, "data-pie-key": row.key, "data-pie-value": row.x.exact };
@@ -4969,10 +4970,17 @@
                   : svg("path", { ...attributes, d: u3cArc(170, 170, 0, 150, start, percent * 3.6) });
                 u3cTarget(mark, figure, view, row);
                 canvas.append(mark);
+                const arc = percent * 3.6 * Math.PI / 180 * 93;
+                if (arc >= 7 * number.length + 2) {
+                  const mid = (start + percent * 1.8) * Math.PI / 180;
+                  const digit = svg("text", { x: 170 + 93 * Math.cos(mid), y: 170 + 93 * Math.sin(mid), "text-anchor": "middle", "dominant-baseline": "middle", fill: "var(--accent-ink)", "font-size": "13", "font-weight": "700", "pointer-events": "none", "data-pie-number": number });
+                  digit.textContent = number;
+                  canvas.append(digit);
+                }
               }
               const item = node("li"), button = node("button"), swatch = node("i", "u3c-swatch");
               swatch.style.background = colour;
-              button.append(swatch, document.createTextNode(" " + u3cName(row) + " " + u3cDisplay(row.x) + "%"));
+              button.append(swatch, document.createTextNode(" " + number + ". " + u3cName(row) + " " + u3cDisplay(row.x) + "%"));
               u3cTarget(button, figure, view, row);
               item.append(button); list.append(item);
               start += percent * 3.6;

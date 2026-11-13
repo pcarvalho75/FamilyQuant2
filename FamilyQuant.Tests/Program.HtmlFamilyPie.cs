@@ -111,6 +111,13 @@ internal static partial class Program
             checks.choice=barView.hidden&&!pieView.hidden&&button.getAttribute('aria-pressed')==='true';
             checks.boundedFigure=pieView.querySelector('svg').getBoundingClientRect().width<=600;
             checks.slices=pieView.querySelectorAll('[data-pie-key]').length===rows.filter(row=>fields[row.x.exact].value>0).length;
+            checks.sliceNumbers=rows.every((row,index)=>{
+              const number=String(index+1), percent=fields[row.x.exact].value;
+              const buttonText=pieView.querySelectorAll('.u3c-ring-key button')[index].textContent.trim();
+              const mark=pieView.querySelector('[data-pie-number="'+number+'"]');
+              const arc=percent*3.6*Math.PI/180*93, holds=percent>0&&arc>=7*number.length+2;
+              return buttonText.startsWith(number+'. ')&&(holds?mark&&mark.textContent===number:!mark);
+            });
             checks.values=[...pieView.querySelectorAll('[data-pie-key]')].every(mark=>rows.some(row=>row.key===mark.dataset.pieKey&&row.x.exact===mark.dataset.pieValue));
             checks.legend=pieView.querySelector('.chart-legend').textContent.includes('all measured peptide-feature signal')&&pieView.textContent.includes('fixed base when Normalize to changes');
             checks.exactTable=pieView.querySelectorAll('details tbody tr').length===rows.length;

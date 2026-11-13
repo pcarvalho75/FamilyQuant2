@@ -1,6 +1,7 @@
 using FamilyQuant.Report;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -75,6 +76,14 @@ internal static partial class Program
                 {
                     window.Show(); PumpDispatcher();
                     ScreenHarness.Save(window, Path.Combine(output, "results-pie-" + theme + ".png"), 1366, 1000);
+                    var thin = pie.Data.Slices.Select((slice, index) => (slice, number: index + 1))
+                        .FirstOrDefault(pair => pair.slice.Kind == FamilyContributionBarKind.Family && pair.slice.Percent < 5);
+                    Check("PI2 slice numbers match legend order " + theme, pie.LegendLines.Count == pie.Data.Slices.Count
+                        && pie.LegendLines.Select((line, index) => line.StartsWith((index + 1).ToString(CultureInfo.CurrentCulture) + ". " + pie.Data.Slices[index].Label, StringComparison.Ordinal)).All(ok => ok)
+                        && pie.NumberedSlices.SequenceEqual(pie.NumberedSlices.OrderBy(number => number))
+                        && pie.NumberedSlices.All(number => number >= 1 && number <= pie.Data.Slices.Count));
+                    Check("PI2 a family slice under five percent carries its legend number " + theme,
+                        thin.number > 0 && pie.NumberedSlices.Contains(thin.number));
                     pie.Focus();
                     pie.RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, PresentationSource.FromVisual(pie), 0, Key.End) { RoutedEvent = Keyboard.KeyDownEvent });
                     Check("PI2 keyboard selection exposes exact details " + theme, pie.ToolTip.ToString()!.Contains(pie.Data.Slices[^1].Label, StringComparison.Ordinal));
