@@ -34,7 +34,7 @@ internal static partial class Program
             Evidence = new() { Accession = NearestReviewed.EntryAccession(id), Family = source, Reviewed = id.StartsWith("sp|", StringComparison.Ordinal),
                 Keywords = words ? new() { "selected" } : new() { "other" }, Pfam = domains.Select(d => new EvidenceDomain { Accession = d }).ToList() },
         };
-        FamilyClusterFile Grouped()
+        FamilyClusterFile Grouped(bool withSource = false)
         {
             var file = new FamilyClusterFile
             {
@@ -52,6 +52,7 @@ internal static partial class Program
                     Protein("tr|P54005|SYNTHETIC", "Loose kinase beta", "", false, "MMMMMMMKNNNNNNNK", 5),
                 },
             };
+            if (withSource) file.EvidenceSource = new() { UnresolvedAccessions = new() { "P00000" } };
             var options = new EvidenceClassificationOptions { ScopeTerms = new[] { "selected" } };
             var proposal = PanelEvidenceClassifier.Propose(file, options);
             EvidenceApply.Apply(file, proposal, new EvidenceApplySelection { SourceFingerprint = proposal.SourceFingerprint,
@@ -151,5 +152,31 @@ internal static partial class Program
         model.ApplyBatch(new[] { stale.MyExtendedFastaItems[3] }, main.ToString(System.Globalization.CultureInfo.InvariantCulture), "");
         Check("EX2 a move does not refresh facts that were already out of date", Facts(stale) == staleFacts
             && QuantifyAndExport(stale) == PanelAssignmentEvidenceStore.RebuildMessage);
+
+        // EX2c: after a family change the facts hash a digest of the evidence source, remembered while its parts are the same
+        // objects; the program replaces a part to change it, and any such change, of the same length or another, still counts.
+        var hinted = Grouped(withSource: true); model = new CurationViewModel(hinted);
+        string full = hinted.PanelProteinAssignmentsFingerprint!; bool verifiedFirst = PanelAssignmentEvidenceStore.Current(hinted) != null;
+        model.ApplyBatch(new[] { hinted.MyExtendedFastaItems[3] }, main.ToString(System.Globalization.CultureInfo.InvariantCulture), "");
+        Check("EX2c a family change writes facts in digest form that stay current", verifiedFirst && !full.StartsWith("2:", StringComparison.Ordinal)
+            && hinted.PanelProteinAssignmentsFingerprint!.StartsWith("2:", StringComparison.Ordinal) && PanelAssignmentEvidenceStore.Current(hinted) != null);
+        hinted.EvidenceSource!.UnresolvedAccessions = new() { "P00001" }; bool sameLength = PanelAssignmentEvidenceStore.Current(hinted) == null;
+        hinted.EvidenceSource.UnresolvedAccessions = new() { "P000001" }; bool otherLength = PanelAssignmentEvidenceStore.Current(hinted) == null;
+        hinted.EvidenceSource.UnresolvedAccessions = new() { "P00000" }; bool restored = PanelAssignmentEvidenceStore.Current(hinted) != null;
+        Check("EX2c a replaced part of the evidence source, of the same or another length, makes the facts out of date",
+            sameLength && otherLength && restored);
+        string saved = Path.Combine(output, "digest-" + Guid.NewGuid().ToString("N") + ".fqproj");
+        ProjectStore.WriteFqproj(saved, hinted, Array.Empty<QuantRow>(), new QuantManifest());
+        Check("EX2c digest-form facts stay current after saving and reopening", PanelAssignmentEvidenceStore.Current(ProjectStore.ReadFqproj(saved).fcf) != null);
+        hinted.EvidenceSource.UnresolvedAccessions = new() { "P00000", "P00002" }; staleFacts = Facts(hinted);
+        model.ApplyBatch(new[] { hinted.MyExtendedFastaItems[4] }, main.ToString(System.Globalization.CultureInfo.InvariantCulture), "");
+        Check("EX2c a move after such a change leaves the facts untouched and the report refuses", Facts(hinted) == staleFacts
+            && QuantifyAndExport(hinted) == PanelAssignmentEvidenceStore.RebuildMessage);
+        var twice = Grouped(); model = new CurationViewModel(twice);
+        model.ApplyBatch(new[] { twice.MyExtendedFastaItems[3] }, main.ToString(System.Globalization.CultureInfo.InvariantCulture), "");
+        twice.MyExtendedFastaItems[1].Evidence!.Pfam.Add(new() { Accession = "domain-b" }); staleFacts = Facts(twice);
+        model.ApplyBatch(new[] { twice.MyExtendedFastaItems[4] }, main.ToString(System.Globalization.CultureInfo.InvariantCulture), "");
+        Check("EX2c protein evidence edited in place after a change is still caught at the next change", Facts(twice) == staleFacts
+            && QuantifyAndExport(twice) == PanelAssignmentEvidenceStore.RebuildMessage);
     }
 }

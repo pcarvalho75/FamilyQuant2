@@ -301,8 +301,13 @@ namespace FamilyQuant
                     // snapshot: an unchanged commit above returns without reaching here.
                     ViewModel.RecordFamilyEdit(edited, typed);
                     UpdateUndoButton();
-                    Dispatcher.BeginInvoke(new Action(() => ViewModel.NotifyDocumentChanged()),
-                        System.Windows.Threading.DispatcherPriority.Background);
+                    // After Apply grouping the edit also checks and moves the assignment facts (EX2), about a second on a large project.
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        Mouse.OverrideCursor = Cursors.Wait;
+                        try { ViewModel.NotifyDocumentChanged(); }
+                        finally { Mouse.OverrideCursor = null; }
+                    }), System.Windows.Threading.DispatcherPriority.Background);
 
                     // Straight away, not through the Dispatcher below: the counter is the only thing on
                     // screen that says a lock was just recorded, and an edit that silently protects two
@@ -603,8 +608,15 @@ namespace FamilyQuant
         /// </summary>
         private void ButtonApplyToSelected_Click(object sender, RoutedEventArgs e)
         {
-            var outcome = ViewModel.ApplyBatch(DataGridResultGrid.SelectedItems.OfType<FastaItemExtended>().Distinct().ToList(),
-                TextBoxBatchUserId.Text ?? string.Empty, TextBoxBatchAnnotation.Text ?? string.Empty);
+            // After Apply grouping the edit also checks and moves the assignment facts (EX2), about a second on a large project.
+            Mouse.OverrideCursor = Cursors.Wait;
+            (bool Changed, string Status) outcome;
+            try
+            {
+                outcome = ViewModel.ApplyBatch(DataGridResultGrid.SelectedItems.OfType<FastaItemExtended>().Distinct().ToList(),
+                    TextBoxBatchUserId.Text ?? string.Empty, TextBoxBatchAnnotation.Text ?? string.Empty);
+            }
+            finally { Mouse.OverrideCursor = null; }
             TextBlockBatchStatus.Text = outcome.Status;
             if (outcome.Changed && CurrentPLP != null) RecalculateWithFeedback("The rows were changed, but the family shares could not be recalculated");
             UpdateGUI();
