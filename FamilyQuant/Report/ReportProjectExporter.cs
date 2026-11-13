@@ -159,7 +159,7 @@ public static class ReportProjectExporter
         if (sourceWorld != null && studies.Figures.Any(f => f.Figure.Id.StartsWith("figure:family_signal_sources", StringComparison.Ordinal)))
             exports.Add("family_sources_support.csv", ReportStudyExports.SourceSupport(sourceWorld));
         var layout = ReportSupplementLayout.Apply(document, exports);
-        var familyFigures = HtmlFamilyFigurePacket.Prepare(studies, plan, compositionBasis, manifest); // U3c exact native inputs.
+        var familyFigures = HtmlFamilyFigurePacket.Prepare(studies, plan, compositionBasis, manifest, families, labels); // Native drawing inputs, including pooled Pie.
         var sensitivityFigures = HtmlSensitivityFigurePacket.Prepare(plan); // U3d exact native inputs.
         exports.Add(FigureLayout.DetailFileName, studies.FigureDetailsCsv);
         var sheets = layout.Sheets.Concat(ReportStudyFigures.CombineFigureSupplements(studies.FigureDetailSheets,

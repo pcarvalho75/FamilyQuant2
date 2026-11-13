@@ -42,6 +42,7 @@ namespace FamilyQuant
 
         /// <summary>The bar's caption in the left gutter, already free of the description.</summary>
         public string Label { get; set; } = string.Empty;
+        public string FullLabel { get; set; } = string.Empty;
 
         /// <summary>The family's description, truncated only at draw time so the model stays the data.</summary>
         public string Description { get; set; } = string.Empty;
@@ -114,6 +115,7 @@ namespace FamilyQuant
                     FamilyUserId = f.FamilyUserId,
                     FamilyCount = 1,
                     Label = FamilyFigureLabel.Format(f.FamilyUserId, familyLabels?.GetValueOrDefault(f.FamilyUserId, f.Description) ?? f.Description, maximumNameLength: 34),
+                    FullLabel = FamilyFigureLabel.Format(f.FamilyUserId, familyLabels?.GetValueOrDefault(f.FamilyUserId, f.Description) ?? f.Description, maximumNameLength: int.MaxValue),
                     Description = string.Empty,
                     Identified = sharedPolicy == SharedPeptidePolicy.SplitEqually ? f.SplitIdentifiedEnvelope : f.UniqueIdentifiedEnvelope,
                     DeNovo = sharedPolicy == SharedPeptidePolicy.SplitEqually ? f.SplitDeNovoEnvelopePrimary : f.UniqueDeNovoEnvelopePrimary,
