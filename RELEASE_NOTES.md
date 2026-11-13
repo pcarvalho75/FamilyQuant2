@@ -13,7 +13,7 @@ in [the catalog](docs/INDEX.md). No historical version heading is changed by thi
 - **Family names in your language.** File > Export has **Family names**: Name or Other-language name. The HTML, Word and workbook reports and the Results chart use it; a family without an other-language name keeps its Name.
 - **A pie chart.** The HTML report's family chart and the Results screen's Family chart offer **Pie**: one numbered slice per family shown, then other families, shared between families and unattributed, on all measured peptide-feature signal, summing to 100%. The bars and the ring keep their values.
 
-**Feature ledger.** @LEDGER@
+**Feature ledger.** 1,958 checks proved for 2.1.18, as for 2.1.17; the 4 Families counter rows changed on purpose in 2.1.16 stay open to verify again, listed in [docs/LEDGER-REVERIFY-2.1.16.md](docs/LEDGER-REVERIFY-2.1.16.md).
 
 ## 2.1.17 (published 2026-11-11)
 
