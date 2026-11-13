@@ -25,11 +25,24 @@ public sealed partial class FamilyListImportViewModel
         + (Decisions.All(d => d.Confirmed) ? " confirmed" : " to review") : "Quantify every family";
     public string SpecialSummary => SpecialRows.Count(r => r.Blocking) is var count && count == 0 ? "Every special row has a choice"
         : count.ToString("N0", CultureInfo.CurrentCulture) + (count == 1 ? " row needs a choice" : " rows need a choice");
-    private bool MappingValid => table != null && Columns.Where(c => c.Required).All(c => c.HasChoice && table.Headers.Contains(c.Header, StringComparer.Ordinal))
-        && Columns.Where(c => c.HasChoice && c.Role != PanelImportFields.ColorCategory).GroupBy(c => c.Header, StringComparer.Ordinal).All(g => g.Count() == 1);
+    private bool MappingValid => ColumnMappingProblem.Length == 0;
+    private string ColumnMappingProblem
+    {
+        get
+        {
+            if (table == null) return "Choose a readable sheet before mapping its columns.";
+            var missing = Columns.FirstOrDefault(c => c.Required && (!c.HasChoice || !table.Headers.Contains(c.Header, StringComparer.Ordinal)));
+            if (missing != null) return "Choose a column for " + missing.Label + ".";
+            var duplicate = Columns.Where(c => c.HasChoice && c.Role != PanelImportFields.ColorCategory)
+                .GroupBy(c => c.Header, StringComparer.Ordinal).FirstOrDefault(group => group.Count() > 1);
+            return duplicate == null ? "" : "The column \"" + duplicate.Key + "\" is selected for "
+                + string.Join(" and ", duplicate.Select(c => c.Label)) + ". Choose a different column for each field.";
+        }
+    }
 
     private void BuildColumns(PanelSpreadsheetTable source)
     {
+        availableColumnRoles.Clear();
         var roles = new[] {
             (PanelImportFields.FamilyKey, "Abbreviation", true), (PanelImportFields.DisplayName, "Family name", true),
             (PanelImportFields.OtherName, "Other-language name (optional)", false), (PanelImportFields.Notes, "Notes (optional)", false),
@@ -40,9 +53,12 @@ public sealed partial class FamilyListImportViewModel
         {
             var column = new ImportColumnChoice(role, label, required, source.Headers, header => source.Rows.Select(r => r.Cells.GetValueOrDefault(header, ""))
                 .FirstOrDefault(text => text.Length > 0) ?? "") { Header = choices.ColumnHeaders.GetValueOrDefault(role, "") };
+            if (column.HasChoice || role == PanelImportFields.Decision && DecisionHint.Length > 0) availableColumnRoles.Add(role);
             column.PropertyChanged += (_, change) =>
             {
-                if (change.PropertyName != nameof(ImportColumnChoice.Header) || updating || Imported) return;
+                if (change.PropertyName != nameof(ImportColumnChoice.Header)) return;
+                if (column.HasChoice) availableColumnRoles.Add(role);
+                if (updating || Imported) return;
                 if (WorkbookReviewEnabled) reviewedWorkbookColumns.Add(role);
                 if (role is PanelImportFields.FamilyKey or PanelImportFields.DisplayName or PanelImportFields.OtherName)
                 { choices.RowChoices?.Clear(); matchesFingerprint = ""; }

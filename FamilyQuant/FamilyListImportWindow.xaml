@@ -420,6 +420,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="WizardFooter" Grid.Row="2" Margin="0,18,0,0">
+                <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                 <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
                 <StackPanel VerticalAlignment="Center" Margin="0,0,16,0"><TextBlock Text="{Binding Status}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"
                         ToolTip="{Binding Status}" AutomationProperties.LiveSetting="Polite"><TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource CaptionText}"><Style.Triggers><DataTrigger Binding="{Binding ReviewingSubclasses}" Value="True"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock>
@@ -434,6 +435,13 @@
                     <Button x:Name="ForwardButton" Content="{Binding ForwardLabel}" Click="Forward_Click" IsEnabled="{Binding CanNext}" ToolTip="{Binding ForwardToolTip}"
                             Style="{DynamicResource PrimaryButton}" MinWidth="86" IsDefault="True"/>
                 </StackPanel>
+                <TextBlock x:Name="NextDisabledReason" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0" Text="{Binding DisabledReason}"
+                           TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding ForwardToolTip}" AutomationProperties.Name="Why Next is unavailable">
+                    <TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource CaptionText}"><Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding Page}" Value="2"/><Condition Binding="{Binding CanNext}" Value="False"/></MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible"/></MultiDataTrigger></Style.Triggers>
+                    </Style></TextBlock.Style>
+                </TextBlock>
             </Grid>
         </Grid>
     </Grid></Border>

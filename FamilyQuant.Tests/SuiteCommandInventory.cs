@@ -27,6 +27,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-import-save-handoff", "FamilyQuant.Tests.Program.ImportSaveHandoffTests()"),
         SuiteCommandRule.Covered("--test-import-pfam-direct", "FamilyQuant.Tests.Program.ImportDirectPfamTests()"),
         SuiteCommandRule.Covered("--test-import-codes-as-written", "FamilyQuant.Tests.Program.ImportCodesAsWrittenTests()"),
+        SuiteCommandRule.Covered("--test-import-columns", "FamilyQuant.Tests.Program.ImportColumnsTests()"),
         SuiteCommandRule.Covered("--test-import-decision-pages", "FamilyQuant.Tests.Program.ImportDecisionPageTests()"),
         SuiteCommandRule.Covered("--test-import-entry-actions", "FamilyQuant.Tests.Program.ImportEntryActionTests()"),
         SuiteCommandRule.Covered("--test-import-simple-template", "FamilyQuant.Tests.Program.ImportSimpleTemplateTests()"),
