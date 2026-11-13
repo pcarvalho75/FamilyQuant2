@@ -24,7 +24,8 @@ namespace FamilyQuant
             "1. Fetch evidence: download UniProt annotations for the project's proteins.\n" +
             "2. Group by evidence: review the scope and proposal, then Apply grouping.\n" +
             "3. Fetch UniProt families: find the families of in-scope database proteins and download their reviewed and database-clade entries.\n" +
-            "4. Quantify: measure peptide signal from the RAW files.\n";
+            "b Group by words (optional): group by keywords or Recluster by words before Quantify. Undo restores grouping edits.\n" +
+            "Quantify: measure peptide signal from the RAW files after any grouping choices.\n";
 
         /// <summary>
         /// <paramref name="profile"/> is null before a project is loaded; the text then explains what the

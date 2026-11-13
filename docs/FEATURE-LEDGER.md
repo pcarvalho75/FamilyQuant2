@@ -5803,6 +5803,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1958**; OPEN r
 
 | FQ2-GROUPING-OPTIONAL-FAMILY-LIST | ADD | T17 adds optional Import family list as step 0 in Curate families, calling the existing File import wizard. Its name and family count refresh after import and Undo; Group by evidence names a missing list in its status. The four required grouping steps and their functions remain in order | test:FamilyListStepTests |
 
+| FQ2-GROUPING-QUANTIFY-LAST | MAP | PO1 maps FQ2-NAMES-BUILD-FILE, FQ2-NAMES-CURATE and FQ2-GROUPING-OPTIONAL-FAMILY-LIST: ButtonComputeFullXic keeps its Quantify shell command and moves to its own line after Group by keywords and Recluster by words; part b is labelled optional. ButtonSuperCluster and ButtonWordCluster keep their handlers, settings and Undo behavior. Evidence, family downloads and all other curation actions remain available; no stored quantities change | test:GroupingPanelOrderTests; test:ShellNavigationTests; test:FamilyListStepTests |
+
 These are additions, not replacements or drops of frozen FQ15 observations. The named DefaultSuite
 checks guard the contract and its presence. Executed native proof is recorded separately for review;
 adding this row does not change any frozen disposition, scan hash or receipt verification state.

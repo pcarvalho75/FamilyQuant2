@@ -115,7 +115,7 @@
                 <GroupBox Header="Grouping" Margin="0,0,0,10">
                     <StackPanel>
                         <TextBlock x:Name="TextBlockPartGroupByEvidence" Text="a Group by evidence" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="4,0,4,4"
-                                   ToolTip="Part a of Curate families: optionally import your family list, then follow the four numbered steps from UniProt evidence to Quantify."/>
+                                   ToolTip="Part a of Curate families: optionally import your family list, then fetch and group by evidence. Optional word grouping comes before Quantify."/>
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
                             <TextBlock Text="0" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
@@ -153,16 +153,8 @@
                                     ToolTip="Fetch UniProt families finds the UniProt families of the in-scope proteins of your database, then downloads every reviewed UniProt entry of those families and their entries from your database's own clade. Confirm the scope in Group by evidence and complete any incomplete reference panel first; File &gt; Save keeps the download."/>
                         </Grid>
                         <TextBlock x:Name="TextBlockFamilyWorldState" Text="{Binding FamilyWorldStepStatus}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
-                        <Grid>
-                            <Grid.ColumnDefinitions><ColumnDefinition Width="24"/><ColumnDefinition/></Grid.ColumnDefinitions>
-                            <TextBlock Text="4" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="4,0,4,0"/>
-                            <Button Grid.Column="1" x:Name="ButtonComputeFullXic" Content="Quantify"
-                                    Command="{x:Static local:MainWindow.NavigateShellCommand}" CommandParameter="{x:Static local:ShellDestination.Quantify}"
-                                    ToolTip="Opens Quantify to choose identification packages and RAW files for Full XIC. Opening the screen changes no stored quantitation."/>
-                        </Grid>
-                        <TextBlock Text="{Binding FullXicStepStatus}" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="28,0,4,8"/>
-                        <TextBlock x:Name="TextBlockPartGroupByWords" Text="b Group by words" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="4,12,4,4"
-                                   ToolTip="Part b of Curate families: group by a keyword list here, or by description words under Recluster by words."/>
+                        <TextBlock x:Name="TextBlockPartGroupByWords" Text="b Group by words (optional)" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="4,12,4,4"
+                                   ToolTip="Optional grouping by a keyword list or description similarity. Review and apply any desired grouping before Quantify; Undo restores grouping edits."/>
                         <Button x:Name="ButtonSuperCluster" Content="Group by keywords" Click="ButtonSuperCluster_Click"
                                 ToolTip="Enter keywords, exclusions and the match rule in the grouping review. Review the protein ticks before applying; Undo reverses the grouping."/>
                         <Button x:Name="ButtonAlignSelected" Content="Align selected" Click="ButtonAlignSelected_Click" IsEnabled="False"
@@ -194,6 +186,10 @@
                                 ToolTip="Merges unlocked families whose descriptions meet the chosen similarity, within the Search matches when a search is entered. The grouping changes the project; Undo restores the previous families."/>
                     </StackPanel>
                 </Expander>
+                <Button x:Name="ButtonComputeFullXic" Content="Quantify" Margin="0,4,0,0"
+                        Command="{x:Static local:MainWindow.NavigateShellCommand}" CommandParameter="{x:Static local:ShellDestination.Quantify}"
+                        ToolTip="Opens Quantify to choose identification packages and RAW files for Full XIC. Opening the screen changes no stored quantitation."/>
+                <TextBlock Text="{Binding FullXicStepStatus}" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="4,0,4,8"/>
                 <Expander x:Name="SelectedProteinActions" Header="Edit selected proteins" Margin="0,0,0,8" ToolTip="Shows inputs for changing the family number or annotation of selected protein rows. Nothing changes until Apply to selected rows; Undo restores that edit.">
                     <StackPanel Margin="8">
                         <Label Content="Family number" ToolTip="The family number to give every selected protein."/>
