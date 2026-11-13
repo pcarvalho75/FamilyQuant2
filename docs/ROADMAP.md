@@ -131,7 +131,7 @@ Ana, slide 8: "O Calvete sempre mostra o gráfico em forma de pizza, seria bom t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| PI1 | The HTML report's family chart gets a "Pie" choice beside the bars (D124): one slice per family shown, then other families, shared between families and unattributed, the same numbers as the bars, summing to 100% of all peptide features; it follows Normalize to and the names choice (NM1) | M | 1.0 | NM1 | RL6 | A test that the slices sum to 100.0 and equal the bar values; a render | HT | FQHtml | 0 | 0 |  |
+| PI1 | The HTML report's family chart gets a "Pie" choice beside the bars (D124): one slice per family shown, then other families, shared between families and unattributed, the same numbers as the bars, summing to 100% of all peptide features. It uses the pooled buckets of the Results bars (`FamilyContributionPlot.Fold`) on the fixed all-peptide-features base and says so in its caption; it does not follow Normalize to, since the other bases do not sum to 100% (D128). It follows the names choice (NM1) | M | 1.0 | NM1 | RL6 | A test that the slices sum to 100.0 and equal the bar values; a render | HT | FQHtml | 0 | 0 |  |
 | PI2 | The Results screen's "Family chart" list gets the same "Pie" view | M | 0.8 | PI1 | RL6 | The same test on the screen's data; a render | HT | FQHtml | 0 | 0 |  |
 
 ### W39 Answers for Ana (Orchestrator)
@@ -189,6 +189,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 
 | ID | Question | Taken |
 |---|---|---|
+| D128 | Which base does the pie use? | The pooled all-peptide-features base of the Results bars, with separate slices for other families, shared between families and unattributed, stated in the caption; it does not follow Normalize to (FQHtml's Q PI1, 11-12 18:06: the TIC and detector bases cannot sum to 100% without an invented remainder). Desk ruling, 11-12 |
 | D127 | More hands? | One more Sol 6.1 (FQHtml, the report side: NM1, PI1, PI2) and Grok 4.7 back as the reviewer (FQRev); the builders no longer review each other. Paulo, 11-12 18:05: "add grok as a reviewer and one more sol worker" |
 | D118 | The team for 2.1.18? | One Sol 6.1 (FQDeNovo) and one Opus 5.5 xhigh on Juliana's account (FQGroup); each reviews the other's steps, cross-family. Paulo, 11-12 17:40: "only with 2 workers for this, 1 sol and one opus from the juliana account" |
 | D119 | Should her list win over the scope words? | Yes: a protein whose own evidence maps to exactly one row of her list joins it; the scope words decide only for proteins that map to no row (GA2). Desk default, 11-12 |
