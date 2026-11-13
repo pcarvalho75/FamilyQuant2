@@ -13,6 +13,8 @@ namespace FamilyQuant.Panels
         DomainArchitecture = 4,
         ConfirmedLink = 8,
         AddedByHand = 16,
+        MovedByYou = 32,
+        RegroupedByWords = 64,
     }
 
     /// <summary>One target's family assignment and its own evidence, separate from subclass evidence.
