@@ -119,6 +119,20 @@ internal static partial class Program
         Check("XP2 a family change on such a project keeps the facts current", older.PanelProteinAssignmentsFingerprint!.StartsWith("2:", StringComparison.Ordinal)
             && PanelAssignmentEvidenceStore.Current(older) != null);
 
+        var legacyDigest = WorldGrouped(); FetchWorldForTest(legacyDigest);
+        string withoutWorldDigest = legacyDigest.PanelProteinAssignmentsFingerprint!;
+        var digestState = ((IReadOnlyList<PanelProteinAssignment>)legacyDigest.PanelProteinAssignments!,
+            (Func<int, int>)(index => legacyDigest.MyExtendedFastaItems[index].UserID), true);
+        string withWorldDigest = ((string[])fingerprints.Invoke(null, new object?[]
+            { legacyDigest, legacyDigest.EvidenceRecipe, legacyDigest.EvidenceSource, true, true, new[] { digestState } })!)[0];
+        legacyDigest.PanelProteinAssignmentsFingerprint = legacyDigest.EvidenceRecipe!.PanelProteinAssignmentsFingerprint = withWorldDigest;
+        Check("XP2 a legacy digest that hashed the stored world still verifies", withoutWorldDigest != withWorldDigest
+            && withWorldDigest.StartsWith("2:", StringComparison.Ordinal) && PanelAssignmentEvidenceStore.Current(legacyDigest) != null);
+        string legacyDigestSaved = Path.Combine(output, "legacy-digest-" + Guid.NewGuid().ToString("N") + ".fqproj");
+        ProjectStore.WriteFqproj(legacyDigestSaved, legacyDigest, Array.Empty<QuantRow>(), new QuantManifest());
+        var reopenedLegacyDigest = ProjectStore.ReadFqproj(legacyDigestSaved).fcf;
+        Check("XP2 a legacy digest still verifies and exports after save and reopen",
+            PanelAssignmentEvidenceStore.Current(reopenedLegacyDigest) != null && Export(reopenedLegacyDigest) == "");
         // XP3 (D131): facts already blocked, here by a world fetched again over one stored before Apply grouping in 2.1.18.
         var oldWorld = WorldGrouped(); FetchWorldForTest(oldWorld);
         var oldState = ((IReadOnlyList<PanelProteinAssignment>)oldWorld.PanelProteinAssignments!, (Func<int, int>)(index => oldWorld.MyExtendedFastaItems[index].UserID), false);
