@@ -42,8 +42,8 @@ Staffed on Paulo's word, 11-13 20:40 (D129). No worker runs on the desktop accou
 |---|---|---|---|
 | Orchestrator | Claude, main session | Routes reviews, merges, runs the release, keeps this file and the board true. Runs the real-data walk (XP4) and writes the message to Ana (AQ4) | |
 | FQGroup (OJ) | Opus 5.5 xhigh, Juliana's account | XP1 to XP3: the cause, the fix, projects already saved; it built EX2 and EX2c | `D:/FamilyQuant-wt/group` |
-| FQSimple (SM) | Sol 6.1 xhigh | RG11 (empty tabs), then SI1 to SI3: the website for 2.1.18 and 2.1.19 (it built the Review grouping tabs and made the 2.1.17 site folder) | `D:/FamilyQuant-wt/simple` |
-| FQDeNovo (DN) | Sol 6.1 xhigh | The package (RL10) | `D:/FamilyQuant-wt/denovo` |
+| FQSimple (SM) | Sol 6.1 xhigh | RG11 (empty tabs; it built the Review grouping tabs) | `D:/FamilyQuant-wt/simple` |
+| FQDeNovo (DN) | Sol 6.1 xhigh | SI1 to SI3 (the website, moved from FQSimple 11-13 20:58 so it runs beside RG11), then the package (RL10) | `D:/FamilyQuant-wt/denovo` |
 | FQRev (RV) | Grok 4.7 xhigh | Reviews every READY and fixes small defects itself (D89, D91) | `D:/FamilyQuant-wt/review` |
 
 FQGroup may read the desk's copies of Ana's data under `D:/FamilyQuant-data/out-desk` (D121); it posts counts, never rows. FQSimple, FQDeNovo and FQRev see code and synthetic data only.
@@ -86,15 +86,15 @@ Ana, voice note 11-13: "tem algumas daquelas abas onde tem arquitetura, não sei
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
 | RG11 | A Review grouping tab with no row for this project is hidden, and comes back as soon as it has one; the tabs that are always meaningful (Proteins, Panel links, Family checklist) stay. Show all options keeps its meaning. P0: list each tab and when it can be empty | L | 0.8 |  | SI2, RL9 | A synthetic test with an empty and a filled tab; a render before and after | SM | FQSimple | 0 | 0 |  |
 
-### W42 The website follows 2.1.18 and 2.1.19 (FQSimple, Orchestrator)
+### W42 The website follows 2.1.18 and 2.1.19 (FQDeNovo, Orchestrator)
 
 The desk's check of the live site on 11-13: downloads point to the latest release, but the version text says 2.1.17 (twice on the home page, once on the import page), the Curate families pictures show the old Grouping order (Fetch UniProt families as step 3 and Quantify as step 4, above Group by words), two sentences say Pfam codes need no second confirmation "when recognized", and nothing mentions Family names, the pie or exporting after curation.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| SI1 | The text: version 2.1.19 where the pages name the version; the Pfam sentences as 2.1.18 works (accepted as written, before or after Fetch evidence, Un-confirm); one short line each for Family names, the pie and exporting after curation; the Grouping order as the program shows it | L | 0.6 |  | SI3 | A diff of the pages; no em or en dash; no organism or sample named beyond what the site already shows (D92) | SM | FQSimple | 0 | 0 |  |
-| SI2 | The pictures, from synthetic data, light and dark, as the site's others: the Curate families screen in the new Grouping order, the Export window with Family names, the Results pie | L | 0.8 |  | SI3 | The new PNGs looked at by the desk | SM | FQSimple | 0 | 0 |  |
-| SI3 | The upload folder `C:/Users/paulo/Desktop/FamilyQuant-website/familyquant-2.1.19` with an UPLOAD-LIST of the changed files and the do-not-delete line; Paulo uploads | L | 0.3 | SI1, SI2, RL10 |  | Folder ready; the desk checks the list against the diff | SM | FQSimple | 0 | 0 |  |
+| SI1 | The text: version 2.1.19 where the pages name the version; the Pfam sentences as 2.1.18 works (accepted as written, before or after Fetch evidence, Un-confirm); one short line each for Family names, the pie and exporting after curation; the Grouping order as the program shows it | L | 0.6 |  | SI3 | A diff of the pages; no em or en dash; no organism or sample named beyond what the site already shows (D92) | DN | FQDeNovo | 0 | 0 |  |
+| SI2 | The pictures, from synthetic data, light and dark, as the site's others: the Curate families screen in the new Grouping order, the Export window with Family names, the Results pie | L | 0.8 |  | SI3 | The new PNGs looked at by the desk | DN | FQDeNovo | 0 | 0 |  |
+| SI3 | The upload folder `C:/Users/paulo/Desktop/FamilyQuant-website/familyquant-2.1.19` with an UPLOAD-LIST of the changed files and the do-not-delete line; Paulo uploads | L | 0.3 | SI1, SI2, RL10 |  | Folder ready; the desk checks the list against the diff | DN | FQDeNovo | 0 | 0 |  |
 
 ### W43 Release 2.1.19 and the answer (Orchestrator, FQDeNovo)
 
@@ -115,7 +115,7 @@ The desk's check of the live site on 11-13: downloads point to the latest releas
 
 ## Critical path
 
-**Tonight.** FQGroup: XP1, XP2, then XP3. FQSimple: RG11, then SI1 and SI2. FQRev reviews each as it lands.
+**Tonight.** FQGroup: XP1, XP2, then XP3. FQSimple: RG11. FQDeNovo: SI1 and SI2. FQRev reviews each as it lands.
 
 **By early morning 11-14 in Brazil.** RL9 (candidate and suite), XP4 (her order on her data), RL10 (publish), SI3 and AQ4.
 
