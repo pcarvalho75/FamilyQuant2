@@ -30,7 +30,7 @@ public static class ResultsCascade
                     "Every isotope envelope the program found in the RAW files, pooled over runs and divided by the TIC. The count is the pooled number of envelopes divided by the number of runs."));
             lines.Add(new("PSM and de novo", (pooled.HasDetectedPeptideLike ? P(measured / pooled.DetectedPeptideLikeArea) + " of the isotope envelopes (measured), " : "")
                 + P(pooled.RecoveredFractionEnvelope) + " of TIC (PSM " + P(pooled.IdentifiedFractionEnvelope) + " + de novo " + P(pooled.DeNovoFractionEnvelope) + ")",
-                "The measured isotope envelope of the identified (PSM) and de novo peptides, pooled over runs, divided by the isotope envelopes (measured) and by the TIC."));
+                "The measured isotope envelope of the identified (PSM) and de novo peptides, pooled over runs, divided by the isotope envelopes (measured) and by the TIC. The two areas are measured differently, so their ratio is not a subset fraction."));
             if (families is { MeasuredTotalEnvelope: > 0 })
             {
                 bool split = policy == SharedPeptidePolicy.SplitEqually;

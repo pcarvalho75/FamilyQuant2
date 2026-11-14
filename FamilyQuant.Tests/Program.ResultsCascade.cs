@@ -40,12 +40,15 @@ internal static partial class Program
             families.Families.Add(new() { FamilyUserId = 1, UniqueIdentifiedEnvelope = 400, UniqueDeNovoEnvelope = 40, SplitIdentifiedEnvelope = 410, SplitDeNovoEnvelope = 45 });
             families.Families.Add(new() { FamilyUserId = 2, UniqueIdentifiedEnvelope = 30, SplitIdentifiedEnvelope = 35 });
             families.Families.Add(new() { FamilyUserId = 3 });
-            var lines = ResultsCascade.Build(data, families, SharedPeptidePolicy.FamilyUnique).ToDictionary(line => line.Label, line => line.Value);
+            var built = ResultsCascade.Build(data, families, SharedPeptidePolicy.FamilyUnique);
+            var lines = built.ToDictionary(line => line.Label, line => line.Value);
             Check("RS1 TIC is the 100% base", lines["TIC"] == "100.0%");
             Check("RS1 isotope envelopes measured are the detector total over the TIC, with envelopes per injection",
                 lines["Isotope envelopes (measured)"] == "60.0% of TIC; about 1,000 envelopes per injection, not FDR-calibrated");
             Check("RS1 PSM and de novo are their measured envelopes over the measured isotope envelopes and over the TIC",
                 lines["PSM and de novo"] == "86.7% of the isotope envelopes (measured), 52.0% of TIC (PSM 45.0% + de novo 7.0%)");
+            Check("RS1 the measured-envelope ratio is not described as a subset fraction", built.Single(line => line.Label == "PSM and de novo")
+                .Source.Contains("not a subset fraction", StringComparison.Ordinal));
             Check("RS1 credited to families is the family-unique signal over PSM and de novo and over the TIC",
                 lines["Credited to families"] == "90.4% of PSM and de novo, 47.0% of TIC (PSM 95.6%, de novo 57.1%; peptides reaching several families are not credited)");
             Check("RS1 the counts are representatives, per injection, non-redundant and distinct sequences",
