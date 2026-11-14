@@ -118,6 +118,21 @@ internal static partial class Program
         Check("XP2 a family change on such a project keeps the facts current", older.PanelProteinAssignmentsFingerprint!.StartsWith("2:", StringComparison.Ordinal)
             && PanelAssignmentEvidenceStore.Current(older) != null);
 
+        var legacyDigest = WorldGrouped(); FetchWorldForTest(legacyDigest);
+        string withoutWorldDigest = legacyDigest.PanelProteinAssignmentsFingerprint!;
+        var digestState = ((IReadOnlyList<PanelProteinAssignment>)legacyDigest.PanelProteinAssignments!,
+            (Func<int, int>)(index => legacyDigest.MyExtendedFastaItems[index].UserID), true);
+        string withWorldDigest = ((string[])fingerprints.Invoke(null, new object?[]
+            { legacyDigest, legacyDigest.EvidenceRecipe, legacyDigest.EvidenceSource, true, true, new[] { digestState } })!)[0];
+        legacyDigest.PanelProteinAssignmentsFingerprint = legacyDigest.EvidenceRecipe!.PanelProteinAssignmentsFingerprint = withWorldDigest;
+        Check("XP2 a legacy digest that hashed the stored world still verifies", withoutWorldDigest != withWorldDigest
+            && withWorldDigest.StartsWith("2:", StringComparison.Ordinal) && PanelAssignmentEvidenceStore.Current(legacyDigest) != null);
+        string legacyDigestSaved = Path.Combine(output, "legacy-digest-" + Guid.NewGuid().ToString("N") + ".fqproj");
+        ProjectStore.WriteFqproj(legacyDigestSaved, legacyDigest, Array.Empty<QuantRow>(), new QuantManifest());
+        var reopenedLegacyDigest = ProjectStore.ReadFqproj(legacyDigestSaved).fcf;
+        Check("XP2 a legacy digest still verifies and exports after save and reopen",
+            PanelAssignmentEvidenceStore.Current(reopenedLegacyDigest) != null && Export(reopenedLegacyDigest) == "");
+
         var listed = WorldGrouped(); FetchWorldForTest(listed);
         listed.FamilyPanel!.Families[0].Pfam.Add(new() { Accession = "domain-z" });
         Check("XP1 a list row's changed Pfam codes still refuse the report", Export(listed) == PanelAssignmentEvidenceStore.RebuildMessage);
