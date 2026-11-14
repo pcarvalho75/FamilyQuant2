@@ -17,11 +17,14 @@ internal static partial class Program
     {
         EnsureApplication();
         var input = GroupingReviewScreens.Fixture(12) with { PanelLinks = Array.Empty<FamilyQuant.Evidence.PanelFamilyLinkProposal>() };
-        var window = new SuperClusterPreviewWindow(new SuperClusterPreview(new List<FastaItemExtended>(), null, "", "", KeywordMatch.All, null, null), input, null, evidenceMode: true)
+        var window = new SuperClusterPreviewWindow(new SuperClusterPreview(new List<FastaItemExtended>(), null, "", "", KeywordMatch.All, null, null), input, null,
+            motif: _ => "Supplied motif count row.", evidenceMode: true)
         { Width = 1366, Height = 820, Left = -30000, Top = -30000, ShowActivated = false, ShowInTaskbar = false };
         try
         {
             window.Show(); PumpDispatcher();
+            var model = (GroupingReviewViewModel)window.DataContext;
+            model.MotifPattern = "C"; FinishReviewWork(model.CheckMotifAsync); PumpDispatcher();
             var modes = (TabControl)window.FindName("ReviewModeTabs"); var evidence = (TabControl)window.FindName("evidenceTabs");
             var tabs = modes.Items.OfType<TabItem>().Take(1).Concat(evidence.Items.OfType<TabItem>().Skip(1)).ToArray();
             var controls = new[] { "grid", "familyGrid", "evidenceGrid", "panelLinksGrid", "PanelChecklistGrid", "architectureReview", "unassignedGrid", "leftOutGrid" }

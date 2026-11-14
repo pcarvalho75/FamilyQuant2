@@ -35,6 +35,8 @@ internal static partial class Program
             {
                 Themes.ThemeManager.Apply(theme);
                 var input = ReviewLayoutFixture() with { PanelLinks = Array.Empty<PanelFamilyLinkProposal>() };
+                input = input with { Proteins = input.Proteins.Append(input.Proteins[0] with { ProteinIndex = 32, Identifier = "fixture_unassigned",
+                    Family = "", Flags = Array.Empty<string>(), SuggestedSelected = false }).ToArray() };
                 var window = new SuperClusterPreviewWindow(new SuperClusterPreview(new List<FastaItemExtended>(), null,
                     "", "", KeywordMatch.All, null, null), input, _ => input, evidenceMode: true, hasFamilyList: true,
                     discoverTask: _ => Task.FromResult(new EvidenceTaskScopeInput("Fixture clade", Array.Empty<ReviewTaskTaxon>(),
@@ -76,8 +78,8 @@ internal static partial class Program
                         ScreenHarness.Save(window, Path.Combine(output, theme + "-" + size.Width + "x" + size.Height + "-simple.png"), size.Width, size.Height);
                     }
                     switchView.IsChecked = true; PumpDispatcher(); window.UpdateLayout();
-                    string[] advancedTabs = { "Family checklist", "Panel links", "Architecture", "Left out", "Unassigned", "Markers", "Motif counts" };
-                    Check(label + " Show all options restores every advanced tab and full columns", window.ShowAllOptions
+                    string[] advancedTabs = { "Family checklist", "Panel links", "Architecture", "Unassigned" };
+                    Check(label + " Show all options restores populated advanced tabs and full columns", window.ShowAllOptions
                         && grid.Columns.All(c => c.Visibility == Visibility.Visible)
                         && advancedTabs.All(header => tabs.Items.OfType<TabItem>().Any(t => t.Header as string == header && t.Visibility == Visibility.Visible))
                         && ((TabControl)window.FindName("ReviewModeTabs")).Items.OfType<TabItem>().First().Visibility == Visibility.Visible);
