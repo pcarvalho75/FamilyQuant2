@@ -42,7 +42,7 @@ Staffed on Paulo's word, 11-13 20:40 (D129). No worker runs on the desktop accou
 |---|---|---|---|
 | Orchestrator | Claude, main session | Routes reviews, merges, runs the release, keeps this file and the board true. Runs the real-data walk (XP4) and writes the message to Ana (AQ4) | |
 | FQGroup (OJ) | Opus 5.5 xhigh, Juliana's account | XP1 to XP3: the cause, the fix, projects already saved; it built EX2 and EX2c | `D:/FamilyQuant-wt/group` |
-| FQSimple (SM) | Sol 6.1 xhigh | SI1 to SI3: the website for 2.1.18 and 2.1.19 (it made the 2.1.17 site folder) | `D:/FamilyQuant-wt/simple` |
+| FQSimple (SM) | Sol 6.1 xhigh | RG11 (empty tabs), then SI1 to SI3: the website for 2.1.18 and 2.1.19 (it built the Review grouping tabs and made the 2.1.17 site folder) | `D:/FamilyQuant-wt/simple` |
 | FQDeNovo (DN) | Sol 6.1 xhigh | The package (RL10) | `D:/FamilyQuant-wt/denovo` |
 | FQRev (RV) | Grok 4.7 xhigh | Reviews every READY and fixes small defects itself (D89, D91) | `D:/FamilyQuant-wt/review` |
 
@@ -78,6 +78,14 @@ So fetching the world after Apply grouping makes the facts look out of date and 
 | XP3 | Projects already saved in that state (hers) export without grouping again (D131). When the facts look out of date, the program computes the proposal again from the current evidence; if every protein gets the family the facts record, the facts are refreshed and the report goes on; otherwise the refusal stays and says how many proteins would change. The time it takes on her project is measured | M | 1.2 | XP2 | XP4, RL9 | A synthetic test of both outcomes; on a desk copy of her project in her state, Export goes through and the time is in the READY | OJ | FQGroup | 0 | 0 |  |
 | XP4 | The desk's walk in her order on 2.1.18 and on the candidate: fresh copy, unlocked, import her sheet, Fetch evidence, Group by evidence, Apply, Fetch UniProt families, Quantify with her slide 33 settings, Export | M | 1.0 | XP2, XP3 | RL10, AQ4 | On 2.1.18 Export refuses (the cause shown on her data); on the candidate it writes HTML, Word and workbook; the family shares match 2.1.18's GA5 | Orchestrator | Orchestrator | 0 | 0 |  |
 
+### W44 Empty tabs leave Review grouping (FQSimple)
+
+Ana, voice note 11-13: "tem algumas daquelas abas onde tem arquitetura, não sei o que, que não aparece nada, então, se não vai entrar nada, talvez possa tirar". The tabs under Show all options (Architecture, Left out, Unassigned, Markers, Motif counts and the others) stay on screen even when they hold no row for her project.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| RG11 | A Review grouping tab with no row for this project is hidden, and comes back as soon as it has one; the tabs that are always meaningful (Proteins, Panel links, Family checklist) stay. Show all options keeps its meaning. P0: list each tab and when it can be empty | L | 0.8 |  | SI2, RL9 | A synthetic test with an empty and a filled tab; a render before and after | SM | FQSimple | 0 | 0 |  |
+
 ### W42 The website follows 2.1.18 and 2.1.19 (FQSimple, Orchestrator)
 
 The desk's check of the live site on 11-13: downloads point to the latest release, but the version text says 2.1.17 (twice on the home page, once on the import page), the Curate families pictures show the old Grouping order (Fetch UniProt families as step 3 and Quantify as step 4, above Group by words), two sentences say Pfam codes need no second confirmation "when recognized", and nothing mentions Family names, the pie or exporting after curation.
@@ -92,7 +100,7 @@ The desk's check of the live site on 11-13: downloads point to the latest releas
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| RL9 | The candidate: XP1 to XP3 merged after FQRev's approval, version bump on the 31 lines of the 2.1.18 bump (4a778019), notes, ledger refresh, the full suite once (shards that time out in the browser helper rerun alone) | M | 1.0 | XP2, XP3 | RL10, XP4 | Suite line: 0 failed | Orchestrator | Orchestrator | 0 | 0 |  |
+| RL9 | The candidate: XP1 to XP3 and RG11 merged after FQRev's approval, version bump on the 31 lines of the 2.1.18 bump (4a778019), notes, ledger refresh, the full suite once (shards that time out in the browser helper rerun alone) | M | 1.0 | XP2, XP3 | RL10, XP4 | Suite line: 0 failed | Orchestrator | Orchestrator | 0 | 0 |  |
 | RL10 | Package (FQDeNovo, P9), publish as Latest, README, merge into master and push | M | 0.8 | RL9, XP4 | SI3, AQ4 | Published; digests match; offline 2.1.18 -> 2.1.19 | Orchestrator | Orchestrator | 0 | 0 |  |
 | AQ4 | The answer to Ana in Portuguese (WhatsApp text): what caused it, that 2.1.19 fixes it, that her current project exports without grouping again; staged for Paulo | L | 0.3 | RL10, XP4 |  | Text in the pickup folder; Paulo sends | Orchestrator | Orchestrator | 0 | 0 |  |
 | AP5 | Carried from version 20. Delivery into `AnaG/Bjararaca/Relatorio`, on Paulo's word (rule 8): the revised sheet and the tie list | L | 0.2 |  |  | Her other files unchanged by hash | Orchestrator | Paulo | 0 | 0 |  |
@@ -102,12 +110,12 @@ The desk's check of the live site on 11-13: downloads point to the latest releas
 | Source | Request, in short | Step | Premise checked |
 |---|---|---|---|
 | Ana, 11-13 screenshot and message | Export HTML still refuses on 2.1.18 | XP1, XP2, XP3, XP4 | Desk: W41 points 1 to 4 |
-| Ana, 11-13 voice note | (transcribed by the desk; see the LOG) | XP4, AQ4 | |
+| Ana, 11-13 voice note | Only the HTML error remains; tabs that never show anything (Architecture and others) could go; the session on grouping tomorrow | XP1 to XP4, RG11, Paulo's session | P0 (RG11) |
 | Paulo, 11-12 | The website update in this iteration | SI1, SI2, SI3 | Desk: W42 |
 
 ## Critical path
 
-**Tonight.** FQGroup: XP1, XP2, then XP3. FQSimple: SI1 and SI2 in parallel. FQRev reviews each as it lands.
+**Tonight.** FQGroup: XP1, XP2, then XP3. FQSimple: RG11, then SI1 and SI2. FQRev reviews each as it lands.
 
 **By early morning 11-14 in Brazil.** RL9 (candidate and suite), XP4 (her order on her data), RL10 (publish), SI3 and AQ4.
 
