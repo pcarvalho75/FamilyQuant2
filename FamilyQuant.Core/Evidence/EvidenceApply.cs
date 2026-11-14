@@ -418,7 +418,7 @@ namespace FamilyQuant.Evidence
         }
 
         private static string GroupKey(params string[] parts) => JsonSerializer.Serialize(parts);
-        private static EvidenceProvenance? CurationSource(EvidenceProvenance? source)
+        internal static EvidenceProvenance? CurationSource(EvidenceProvenance? source)
         {
             if (source?.FamilyWorld == null) return source;
             var curation = ProvenanceView(source);

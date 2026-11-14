@@ -22,6 +22,32 @@ internal static partial class Program
         }),
     ];
 
+    /// <summary>Quantify's family studies, then Export report: the Word report, its workbook and the HTML page in one
+    /// commit. Returns the refusal, or empty when all three files were written.</summary>
+    private static string QuantifyAndExportReport(FamilyClusterFile file, IReadOnlyList<QuantRow> rows, string output)
+    {
+        try
+        {
+            var hits = FamilyEnvelopeQuant.SearchCuration(rows, file);
+            var assigned = FamilyEnvelopeQuant.AttributePeptides(FamilyEnvelopeQuant.PreparePeptides(rows), FamilyEnvelopeQuant.AttributeHits(hits, file));
+            var manifest = new QuantManifest { PerRunTic = new() { ["run_a.raw"] = 400, ["run_b.raw"] = 800 } };
+            FamilyCompositionStudy.StoreRunShares(manifest, assigned);
+            FamilyCompositionStudy.StoreProteinCounts(manifest, assigned, file.MyExtendedFastaItems);
+            FamilyCompositionStudy.StoreSubclassesFromCuration(manifest, assigned, hits, file);
+            FamilyCompositionStudy.StorePositionsFromCuration(manifest, assigned, hits, file);
+            FamilyUnobservedStudies.Store(file, manifest);
+            EffectivePanelFamilyStudy.StoreIfNeeded(manifest, assigned, hits, file);
+            string folder = Path.Combine(output, "export-" + Guid.NewGuid().ToString("N"));
+            var export = ReportProjectExporter.Build(rows.ToList(), manifest, file, Path.Combine(folder, "figures"),
+                familyResults: FamilyEnvelopeQuant.BuildFromAttributedPeptides(assigned));
+            string word = Path.Combine(folder, "report.docx");
+            ReportProjectExporter.Write(export, word);
+            return File.Exists(word) && File.Exists(ReportSupplementWorkbook.PathForReport(word)) && File.Exists(HtmlReportWriter.PathForReport(word))
+                ? "" : "The report files were not all written.";
+        }
+        catch (Exception error) { return error.Message; }
+    }
+
     /// <summary>EX1 and EX2: after Apply grouping, a protein moved with Edit selected proteins, a typed User ID, Group by
     /// keywords or Recluster by words still lets Quantify and the report (Word, workbook, HTML) run; Undo restores both
     /// the membership and its facts; a changed panel or database still refuses.</summary>
@@ -67,31 +93,7 @@ internal static partial class Program
             Qr("identified", "run_b", 5, 2, "AAAAAAAK", 20, 20), Qr("identified", "run_b", 6, 2, "DDDDDDDK", 20, 20),
             Qr("identified", "run_b", 7, 2, "EEEEEEEK", 40, 40), Qr("identified", "run_b", 8, 2, "MMMMMMMK", 5, 5),
         };
-        int exports = 0;
-        // Quantify's family studies, then Export report: the Word report, its workbook and the HTML page in one commit.
-        string QuantifyAndExport(FamilyClusterFile file)
-        {
-            try
-            {
-                var hits = FamilyEnvelopeQuant.SearchCuration(rows, file);
-                var assigned = FamilyEnvelopeQuant.AttributePeptides(FamilyEnvelopeQuant.PreparePeptides(rows), FamilyEnvelopeQuant.AttributeHits(hits, file));
-                var manifest = new QuantManifest { PerRunTic = new() { ["run_a.raw"] = 400, ["run_b.raw"] = 800 } };
-                FamilyCompositionStudy.StoreRunShares(manifest, assigned);
-                FamilyCompositionStudy.StoreProteinCounts(manifest, assigned, file.MyExtendedFastaItems);
-                FamilyCompositionStudy.StoreSubclassesFromCuration(manifest, assigned, hits, file);
-                FamilyCompositionStudy.StorePositionsFromCuration(manifest, assigned, hits, file);
-                FamilyUnobservedStudies.Store(file, manifest);
-                EffectivePanelFamilyStudy.StoreIfNeeded(manifest, assigned, hits, file);
-                string folder = Path.Combine(output, "export-" + (++exports).ToString(System.Globalization.CultureInfo.InvariantCulture) + "-" + Guid.NewGuid().ToString("N"));
-                var export = ReportProjectExporter.Build(rows, manifest, file, Path.Combine(folder, "figures"),
-                    familyResults: FamilyEnvelopeQuant.BuildFromAttributedPeptides(assigned));
-                string word = Path.Combine(folder, "report.docx");
-                ReportProjectExporter.Write(export, word);
-                return File.Exists(word) && File.Exists(ReportSupplementWorkbook.PathForReport(word)) && File.Exists(HtmlReportWriter.PathForReport(word))
-                    ? "" : "The report files were not all written.";
-            }
-            catch (Exception error) { return error.Message; }
-        }
+        string QuantifyAndExport(FamilyClusterFile file) => QuantifyAndExportReport(file, rows, output);
         string Audit(FamilyClusterFile file, int index) => PanelAuditCsv.BuildCsv(file).Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
             .Select(ParseCsvLine).ToArray()[index + 1] is var cells ? cells[2] + " | " + cells[5] : "";
         string Facts(FamilyClusterFile file) => JsonSerializer.Serialize(new { file.PanelProteinAssignments, file.PanelProteinAssignmentsFingerprint,

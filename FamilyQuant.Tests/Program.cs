@@ -440,6 +440,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelRowDecodeTests(Path.Combine(workDir, "panel-row-decode")));
             suite.Add(() => PanelListBeforeScopeTests());
             suite.AddWithApplication(() => ExportAfterCurationTests(Path.Combine(workDir, "export-after-curation")));
+            suite.AddWithApplication(() => ExportAfterWorldFetchTests(Path.Combine(workDir, "export-after-world-fetch")));
             suite.AddWithApplication(() => ChecklistUnconfirmTests(Path.Combine(workDir, "checklist-unconfirm")));
             suite.Add(() => PanelLinkRoundtripTests(Path.Combine(workDir, "panel-link-roundtrip")));
             suite.Add(() => PanelNamedFamilyTests(Path.Combine(workDir, "panel-named-families")));

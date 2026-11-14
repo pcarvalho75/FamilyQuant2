@@ -58,9 +58,12 @@ public sealed class PanelMembershipEdit
         // The state before the change must still be the recorded one; a stale project keeps its refusal. A full fingerprint
         // verified earlier is compared in its digest form, so the change hashes the evidence source's digest, not its JSON.
         string expected = PanelAssignmentEvidenceStore.VerifiedDigest(file) ?? fingerprint;
-        string[] prints = PanelAssignmentEvidenceStore.Fingerprints(file, recipe, file.EvidenceSource, true,
-            (rows, index => before[index], expected.StartsWith(PanelAssignmentEvidenceStore.DigestPrefix, StringComparison.Ordinal)),
-            (after, index => file.MyExtendedFastaItems[index].UserID, true));
+        bool digest = expected.StartsWith(PanelAssignmentEvidenceStore.DigestPrefix, StringComparison.Ordinal);
+        string[] prints = PanelAssignmentEvidenceStore.Fingerprints(file, recipe, file.EvidenceSource, true, false,
+            (rows, index => before[index], digest), (after, index => file.MyExtendedFastaItems[index].UserID, true));
+        // XP2: written before 2.1.19, a fingerprint also hashed the stored UniProt family world.
+        if (prints[0] != expected && file.EvidenceSource?.FamilyWorld != null)
+            prints[0] = PanelAssignmentEvidenceStore.Fingerprints(file, recipe, file.EvidenceSource, true, true, (rows, index => before[index], digest))[0];
         if (prints[0] != expected) return 0;
         undo?.KeepMembershipFacts(file, moved.ToDictionary(i => i, i => EvidenceApply.Clone(rows[i])));
         foreach (int i in moved) { rows[i] = after[i]; recipe.PanelProteinAssignments[i] = EvidenceApply.Clone(after[i]); }
