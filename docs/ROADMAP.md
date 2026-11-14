@@ -44,9 +44,10 @@ Staffed on Paulo's word, 11-13 20:40 (D129). No worker runs on the desktop accou
 | FQGroup (OJ) | Opus 5.5 xhigh, Juliana's account | XP1 to XP3: the cause, the fix, projects already saved; it built EX2 and EX2c | `D:/FamilyQuant-wt/group` |
 | FQSimple (SM) | Sol 6.1 xhigh | RG11 (empty tabs; it built the Review grouping tabs) | `D:/FamilyQuant-wt/simple` |
 | FQDeNovo (DN) | Sol 6.1 xhigh | SI1 to SI3 (the website, moved from FQSimple 11-13 20:58 so it runs beside RG11), then the package (RL10) | `D:/FamilyQuant-wt/denovo` |
-| FQRev (RV) | Grok 4.7 xhigh | Reviews every READY and fixes small defects itself (D89, D91) | `D:/FamilyQuant-wt/review` |
+| FQRev (RV) | Grok 4.7 xhigh | Reviews XP1, RG11 and SI1 to SI3, and fixes small defects itself (D89, D91) | `D:/FamilyQuant-wt/review` |
+| FQKimi (KM) | Kimi K3.1 Pro | Reviews XP2 and XP3, the export-facts fix, and fixes small defects itself (D132) | `D:/FamilyQuant-wt/review-kimi` |
 
-FQGroup may read the desk's copies of Ana's data under `D:/FamilyQuant-data/out-desk` (D121); it posts counts, never rows. FQSimple, FQDeNovo and FQRev see code and synthetic data only.
+FQGroup may read the desk's copies of Ana's data under `D:/FamilyQuant-data/out-desk` (D121); it posts counts, never rows. FQSimple, FQDeNovo, FQRev and FQKimi see code and synthetic data only.
 
 ## Design rules for the look (hard requirements)
 
@@ -60,7 +61,7 @@ FQGroup may read the desk's copies of Ana's data under `D:/FamilyQuant-data/out-
 
 ## Workstreams
 
-Every row is a small step with its own done-check. A step is done when FQRev approves it (rule 6, D127). Ids never change.
+Every row is a small step with its own done-check. A step is done when its reviewer approves it (rule 6; FQKimi for XP2 and XP3, FQRev for the rest, D132). Ids never change.
 
 ### W41 The report exports after Fetch UniProt families (FQGroup, Orchestrator)
 
@@ -129,6 +130,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 
 | ID | Question | Taken |
 |---|---|---|
+| D132 | Kimi on the team? | Yes, as the second reviewer: FQKimi reviews XP2 and XP3 (code and synthetic data only), FQRev the rest, so both review in parallel. Paulo, 11-13 21:00: "have kimi join the team as well as a reviewer" |
 | D129 | The team for 2.1.19? | FQGroup (Opus 5.5 xhigh on Juliana's account), FQSimple and FQDeNovo (Sol 6.1), FQRev (Grok 4.7) reviewing; no worker on the desktop account. Paulo, 11-13 20:40 |
 | D130 | What should the assignment facts depend on? | Only on what grouping reads; the stored UniProt family world is left out (XP2). Desk default, 11-13 |
 | D131 | A project already blocked by a later fetch? | Recompute the proposal at export; if nothing would move, refresh the facts and export, otherwise keep the refusal with the count (XP3). Desk default, 11-13 |
