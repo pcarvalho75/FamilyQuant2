@@ -233,6 +233,10 @@ namespace FamilyQuant
             sb.AppendLine("Regrouped by words in the protein audit; one outside every row takes the row of the");
             sb.AppendLine("family it joins. A family left with two rows is reported without a link. The report");
             sb.AppendLine("still exports after Quantify, and Undo restores the move and its reason together.");
+            sb.AppendLine("Fetch UniProt families does not affect the family assignments. If they look out of date at");
+            sb.AppendLine("Export report, it computes the grouping again from the current evidence: when no protein");
+            sb.AppendLine("would change family the report goes on (File > Save keeps the check); otherwise it says how");
+            sb.AppendLine("many would change, and Group by evidence then Apply grouping brings them up to date.");
             sb.AppendLine();
             sb.AppendLine("A legacy PatternLab export can lack the recorded divisor and per-run totals.");
             sb.AppendLine("Re-exporting it from XQuant records the divisor and every run's totals, making");
@@ -319,7 +323,8 @@ namespace FamilyQuant
             sb.AppendLine("Simple view reserves eight protein rows; selected details grows up to ten lines as space allows, then scrolls to retain the scope and motif controls.");
             sb.AppendLine("Align selected counts the selected proteins and reviewed references included in its heading. References are");
             sb.AppendLine("stored nearest reviewed proteins and family representatives from the database or reference panel; alignment ticks change only the comparison.");
-            sb.AppendLine("Show all options opens Keywords, all evidence tabs, full protein columns and extra tools;");
+            sb.AppendLine("Show all options opens Keywords, populated evidence tabs, full protein columns and extra tools;");
+            sb.AppendLine("Proteins, Panel links and Family checklist remain available. Other tabs hide when the project has no rows and return when rows or a checked motif report become available; search and the selected family do not hide project-wide content.");
             sb.AppendLine("each tab it reveals starts with a sentence saying what to use it for; Review grouping Help lists the same sentences.");
             sb.AppendLine("The scope hint and proposal status stay above the tables while database counts scroll in their own area.");
             sb.AppendLine("In a short full view, protein search and actions scroll above the protein table.");

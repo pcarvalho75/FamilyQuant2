@@ -79,7 +79,7 @@ namespace FamilyQuant
             {
                 if (args.PropertyName is nameof(GroupingReviewViewModel.CanConfirm) or nameof(GroupingReviewViewModel.ApplyHint))
                     UpdateApplyToolTip();
-                if (args.PropertyName is nameof(GroupingReviewViewModel.ModeIndex) or nameof(GroupingReviewViewModel.Evidence)) UpdateReviewView();
+                if (args.PropertyName is nameof(GroupingReviewViewModel.ModeIndex) or nameof(GroupingReviewViewModel.Evidence) or nameof(GroupingReviewViewModel.MotifReport)) UpdateReviewView();
             };
             model.Keyword.Refresh();
             UpdateApplyToolTip();
@@ -96,9 +96,19 @@ namespace FamilyQuant
             if (!full && model.ModeIndex != 1) { model.ModeIndex = 1; return; }
             ReviewModeTabs.Items.OfType<TabItem>().First().Visibility = full ? Visibility.Visible : Visibility.Collapsed;
             foreach (var tab in evidenceTabs.Items.OfType<TabItem>().Skip(1))
-                tab.Visibility = full && (tab != PanelChecklistTab && tab.Header as string != "Panel links" || model.Evidence?.HasPanelRules == true)
-                    ? Visibility.Visible : Visibility.Collapsed;
-            if (!full) evidenceTabs.SelectedIndex = 0;
+            {
+                bool hasRows = (tab.Header as string) switch
+                {
+                    "Architecture" => model.Evidence?.Architectures.Any(architecture => architecture.Groups.Count > 0 || architecture.Undetermined.Count > 0) == true,
+                    "Left out" => (model.Evidence?.LeftOut.Count ?? 0) > 0,
+                    "Unassigned" => (model.Evidence?.Unassigned.Count ?? 0) > 0,
+                    "Markers" => (model.Evidence?.Markers.Count ?? 0) > 0,
+                    "Motif counts" => model.MotifReport.Length > 0 && model.Evidence?.Families.Any(family => family.Members.Count > 0) == true,
+                    _ => true,
+                };
+                tab.Visibility = full && hasRows ? Visibility.Visible : Visibility.Collapsed;
+            }
+            if (!full || evidenceTabs.SelectedItem is TabItem selectedTab && selectedTab.Visibility != Visibility.Visible) evidenceTabs.SelectedIndex = 0;
             foreach (var button in new[] { alignSelectedButton, addFamilyButton, removeFamilyButton })
                 button.Visibility = full ? Visibility.Visible : Visibility.Collapsed;
             for (int index = 0; index < evidenceGrid.Columns.Count; index++)

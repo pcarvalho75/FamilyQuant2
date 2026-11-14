@@ -31,9 +31,9 @@ internal static partial class Program
     private static int FamilyListWalkCommand(string[] args)
     {
         // --unlock-all starts as a fresh project does, with no locked family, through the program's Unlock action.
-        bool unlockAll = args.Contains("--unlock-all", StringComparer.Ordinal);
-        args = args.Where(arg => arg != "--unlock-all").ToArray();
-        if (args.Length is not (4 or 5)) { Console.WriteLine("Use --family-list-walk <project.fqproj> <family-list.xlsx> <new-output-directory> [scope] [--unlock-all]."); return 1; }
+        bool unlockAll = args.Contains("--unlock-all", StringComparer.Ordinal), fetchFamilies = args.Contains("--fetch-uniprot-families", StringComparer.Ordinal);
+        args = args.Where(arg => arg is not ("--unlock-all" or "--fetch-uniprot-families")).ToArray();
+        if (args.Length is not (4 or 5)) { Console.WriteLine("Use --family-list-walk <project.fqproj> <family-list.xlsx> <new-output-directory> [scope] [--unlock-all] [--fetch-uniprot-families]."); return 1; }
         string output = Path.GetFullPath(args[3]);
         if (Directory.Exists(output) || File.Exists(output)) { Console.WriteLine("Use a fresh output directory."); return 1; }
         Directory.CreateDirectory(output);
@@ -48,7 +48,7 @@ internal static partial class Program
             MainWindow.UnsavedProjectChoiceOverride = () => UnsavedProjectChoice.Discard;
             MainWindow.SelectSaveProjectPathOverride = () => Path.Combine(output, "walked.fqproj");
             main.Show(); PumpDispatcher();
-            Task<int> walk = AppOperationHost.OnUi(main, () => FamilyListWalkCoreAsync(main, args[1], args[2], output, args.Length == 5 ? args[4] : null, Print, unlockAll));
+            Task<int> walk = AppOperationHost.OnUi(main, () => FamilyListWalkCoreAsync(main, args[1], args[2], output, args.Length == 5 ? args[4] : null, Print, unlockAll, fetchFamilies));
             while (!walk.IsCompleted) { PumpDispatcher(); Thread.Sleep(5); }
             exit = walk.GetAwaiter().GetResult(); PumpDispatcher();
         }
@@ -63,7 +63,7 @@ internal static partial class Program
     }
 
     private static async Task<int> FamilyListWalkCoreAsync(MainWindow main, string project, string workbook, string output, string? scopeOverride, Action<string> print,
-        bool unlockAll = false)
+        bool unlockAll = false, bool fetchFamilies = false)
     {
         string projectHash = FileFingerprint.Sha256(project), workbookHash = FileFingerprint.Sha256(workbook);
         ClusterGenerationControl? screen = null;
@@ -166,6 +166,21 @@ internal static partial class Program
                     if (screen.ShellStatusText.Contains("No grouping was applied:", StringComparison.Ordinal) || file.EvidenceRecipe == null)
                         throw new InvalidOperationException("Apply grouping did not complete.");
                     applied = true;
+                    if (fetchFamilies)
+                    {
+                        // XP4: Fetch UniProt families after Apply grouping, as the panel button does. A stored task older than UniProt's
+                        // release cannot fetch, so the walk then discovers the task again, as for a project without a stored world.
+                        screen.ConfirmFamilyWorldScopeOverride = proposal => EvidenceTaskDiscovery.Confirm(file, proposal, file.EvidenceRecipe!.Options.ScopeTerms);
+                        await screen.FetchFamilyWorldAsync();
+                        print("FETCH UNIPROT FAMILIES " + screen.ShellStatusText);
+                        if (screen.ShellStatusText.Contains("could not finish", StringComparison.Ordinal) && file.EvidenceSource?.FamilyWorld != null)
+                        {
+                            file.EvidenceSource.FamilyWorld = null;
+                            await screen.FetchFamilyWorldAsync();
+                            print("FETCH UNIPROT FAMILIES " + screen.ShellStatusText);
+                        }
+                        print("FAMILY ASSIGNMENTS CURRENT " + (PanelAssignmentEvidenceStore.Current(file) != null));
+                    }
                     var save = typeof(MainWindow).GetMethod("SaveProjectAsync", BindingFlags.Instance | BindingFlags.NonPublic)!;
                     await (Task)save.Invoke(main, new object[] { true })!;
                     saved = File.Exists(Path.Combine(output, "walked.fqproj"));

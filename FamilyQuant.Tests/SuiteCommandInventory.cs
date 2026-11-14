@@ -8,6 +8,7 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-review-nonempty-tabs", "FamilyQuant.Tests.Program.ReviewNonemptyTabTests(System.String)"),
         SuiteCommandRule.Covered("--test-review-layout3", "FamilyQuant.Tests.Program.ReviewLayout3Tests(System.String)"),
         SuiteCommandRule.Covered("--test-subclass-unchanged-membership", "FamilyQuant.Tests.Program.SubclassUnchangedMembershipTests()"),
         SuiteCommandRule.Covered("--test-noninteractive-prompts", "FamilyQuant.Tests.Program.NoninteractivePromptTests()"),
@@ -44,6 +45,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-panel-row-decode", "FamilyQuant.Tests.Program.PanelRowDecodeTests(System.String)"),
         SuiteCommandRule.Covered("--test-panel-list-before-scope", "FamilyQuant.Tests.Program.PanelListBeforeScopeTests()"),
         SuiteCommandRule.Covered("--test-export-after-curation", "FamilyQuant.Tests.Program.ExportAfterCurationTests(System.String)"),
+        SuiteCommandRule.Covered("--test-export-after-world-fetch", "FamilyQuant.Tests.Program.ExportAfterWorldFetchTests(System.String)"),
         SuiteCommandRule.Covered("--test-checklist-unconfirm", "FamilyQuant.Tests.Program.ChecklistUnconfirmTests(System.String)"),
         SuiteCommandRule.Excluded("--panel-row-decode", "Read-only desk count over a selected project: where one list row's matches and the targets whose name matches a given pattern ended, with their evidence traits. Prints counts and row keys only; synthetic proof is PanelRowDecodeTests in DefaultSuite."),
         SuiteCommandRule.Covered("--test-ledger-synthetic-mode", "FamilyQuant.Tests.Program.FeatureLedgerReceiptGuardTests(System.Boolean)"),
