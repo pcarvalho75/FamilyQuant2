@@ -33,11 +33,14 @@ What the desk found (11-14): family 14873 holds `contaminant_Q29463|TRY2_BOVIN`,
 | Name | Engine | Role in version 23 | Worktree |
 |---|---|---|---|
 | Orchestrator | Claude, main session | Routes the review, merges, runs the release, keeps this file and the board true; runs the real-data walk (CT2) and writes the message to Ana (AQ5) | |
-| FQHtml (HT) | Sol 6.1 xhigh | CT1 (it built the Fold buckets' pie in 2.1.18) | `D:/FamilyQuant-wt/html-tabs` |
-| FQRev (RV) | Grok 4.7 xhigh | Reviews CT1 and fixes small defects itself | `D:/FamilyQuant-wt/review` |
-| FQDeNovo (DN) | Sol 6.1 xhigh | The package (RL12) and the website folder's version line (SI4) | `D:/FamilyQuant-wt/denovo` |
+| FQHtml (HT) | Sol 6.1 xhigh | CT1, then LG1 (it built the Fold buckets' pie in 2.1.18) | `D:/FamilyQuant-wt/html-tabs` |
+| FQRev (RV) | Grok 4.7 xhigh | Reviews CT1, TM1, WD1 and LG1 and fixes small defects itself | `D:/FamilyQuant-wt/review` |
+| FQDeNovo (DN) | Sol 6.1 xhigh | FS1, the package (RL12) and the website folder's version line (SI4) | `D:/FamilyQuant-wt/denovo` |
+| FQGroup (OJ) | Opus 5.5 xhigh, Juliana's account | RS1, SC1 and the deck's screens on her data (D121) | `D:/FamilyQuant-wt/group` |
+| FQSimple (SM) | Sol 6.1 xhigh | TM1, WD1 | `D:/FamilyQuant-wt/simple` |
+| FQKimi (KM) | Kimi K3.1 Pro | Reviews RS1 and FS1 | `D:/FamilyQuant-wt/review-kimi` |
 
-FQHtml, FQRev and FQDeNovo see code and synthetic data only.
+FQGroup may read the desk's copies of Ana's data (D121); every other worker sees code and synthetic data only.
 
 ## Design rules for the look (hard requirements)
 
@@ -60,22 +63,42 @@ Every row is a small step with its own done-check. A step is done when FQRev app
 | CT1 | A family whose target members are all contaminants (`SequenceLabels.IsContaminant`) is not ranked as a family: its signal goes to one row "contaminants", beside "shared between families" and "unattributed", in the Results family chart (bars and Pie), the HTML report (bars, Pie, ring) and the Word and workbook family tables; the total still closes to 100% and no other family's value changes (D133). A family mixing contaminants and other proteins stays a family. Help says so in one sentence. A failing synthetic test first | M | 1.2 |  | CT2, RL11 | The test fails on master and passes on the branch; the contaminants row equals the sum of the contaminant-only families; every other row is unchanged | HT | FQHtml | 0 | 0 |  |
 | CT2 | The desk's check on her data: the 2.1.19 walk's project (v22/xp4) quantified and exported with the candidate | L | 0.5 | CT1 | RL12, AQ5 | The trypsin family is gone from the ranking; the contaminants row is 0.19%; the venom families' shares equal 2.1.19's | Orchestrator | Orchestrator | 0 | 0 |  |
 
+### W47 Ana's V19 deck (FQGroup, FQSimple, FQDeNovo, FQHtml, Orchestrator)
+
+Ana's deck `FamilyQuant_V19.pptx` (11-14, 10 slides on 2.1.19). Slide 3 is the trypsin (CT1). Paulo, 11-14: "there are some other stuff, can you pack it in this version and then prepare a reposnse to her like you always did with powerpoint".
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| FS1 | Slide 1: two saved files. File gets "Save families as (.fcf)...": the curated and grouped families with their evidence and her list, without any sample's quantitation, so the curated tool and the results project are separate files and Quantify never overwrites the curated one (D134). The .fqproj stays the results project. P0: what the existing Families (.fcf) export already writes | M | 1.0 |  | RL11, AQ6 | A synthetic test: the saved .fcf reopens with the same families and evidence and no quantitation; a render of the File menu | DN | FQDeNovo | 0 | 0 |  |
+| RS1 | Slides 4 and 5: the Results screen shows, from the program's own numbers, the cascade she built by hand: TIC 100%; isotope envelopes measured (% of TIC); PSM and de novo (% of measured envelopes and % of TIC, with the PSM and de novo parts); credited to families (% of PSM and de novo and % of TIC, with the PSM and de novo parts); and the counts (peptide representatives, per injection, non-redundant, families reached) (D138). P0: where each number comes from | M | 1.5 |  | RL11, AQ6 | A synthetic test that each line equals its source value; on her data (desk copy) the lines match her slide 5 (59.6, 51.4 = 44.6 + 6.8, 47.0, 86.3, 91.3) or the READY says why one differs | OJ | FQGroup | 0 | 0 |  |
+| TM1 | Slides 7, 8 and 9: one name per base everywhere (Normalize to, ring centre, captions, Signal recovery cards, Results, Help): "PSM only", "PSM and de novo", "Isotope envelopes (measured)" (was Detector envelopes, Detector isotope envelopes), "Isotope envelopes (measured and identified)" for the measured envelope of the PSM and de novo peptides, and "TIC"; "peptide-feature signal" is no longer used as a base name (D135). Labels only; no value changes | M | 1.0 |  | WD1, RL11 | A test that the old names are gone from the report and the screens and every base shows one name; renders | SM | FQSimple | 0 | 0 |  |
+| WD1 | Slide 6: under a base that holds signal that is not peptide signal (TIC, isotope envelopes measured), "Outside the shown families" splits into "other families, shared and unattributed" (peptide signal) and "not explained by PSM and de novo" (the rest of the base), both in the ring legend and its caption; under PSM only and PSM and de novo it keeps one line (D136) | M | 0.8 | TM1 | RL11 | A test of both splits summing to the old remainder; renders under TIC and PSM and de novo | SM | FQSimple | 0 | 0 |  |
+| LG1 | Slide 10: the "Abundance against database-protein diversity" chart uses log-log axes; points with a zero value sit on the axis floor with a mark and their value on hover (D137) | L | 0.6 | CT1 | RL11 | A test of the axis transform and the zero-value placement; a render | HT | FQHtml | 0 | 0 |  |
+| SC1 | Slide 2, an answer: where "Subclass not resolved" goes, and whether the lectin subclasses rest on UniProt annotation alone (no differential domain), so whether she can trust more snaclecs than true lectins. Decoded in the code and counted on her data (desk copy) | L | 0.5 |  | AQ6 | A RESULT with the code lines and the counts (how many CTL proteins carry a subclass family name, how many are unresolved, how much signal each holds) | OJ | FQGroup | 0 | 0 |  |
+| AQ6 | The deck for Ana in Portuguese, as before: one slide per point of her V19 deck, her words, what changed, her screen and the 2.1.20 screen on her data; screens rendered by FQGroup on the desk's copies | M | 1.5 | RL12, SC1 |  | The .pptx staged for Paulo with the WhatsApp text | Orchestrator | Orchestrator | 0 | 0 |  |
+
 ### W46 Release 2.1.20 and the answer (Orchestrator, FQDeNovo)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
-| RL11 | The candidate: CT1 merged after FQRev's approval, version bump on the 31 lines of the 2.1.19 bump (0d670131), notes, ledger refresh, the full suite once (shards that crash in the browser helper rerun alone) | M | 1.0 | CT1 | RL12 | Suite line: 0 failed | Orchestrator | Orchestrator | 0 | 0 |  |
+| RL11 | The candidate: CT1, FS1, RS1, TM1, WD1 and LG1 merged after their reviews, version bump on the 31 lines of the 2.1.19 bump (0d670131), notes, ledger refresh, the full suite once (shards that crash in the browser helper rerun alone) | M | 1.0 | CT1, FS1, RS1, TM1, WD1, LG1 | RL12 | Suite line: 0 failed | Orchestrator | Orchestrator | 0 | 0 |  |
 | RL12 | Package (FQDeNovo, P10), publish as Latest, README, merge into master and push | M | 0.8 | RL11, CT2 | AQ5, SI4 | Published; digests match; offline 2.1.19 -> 2.1.20 | Orchestrator | Orchestrator | 0 | 0 |  |
 | SI4 | The staged website folder (familyquant-2.1.19, not yet uploaded) names 2.1.20 and, in one line, the contaminants row; the upload list follows | L | 0.2 | RL12 |  | Folder and list checked by the desk | DN | FQDeNovo | 0 | 0 |  |
-| AQ5 | The answer to Ana in Portuguese (WhatsApp text), staged for Paulo | L | 0.2 | RL12, CT2 |  | Text in the pickup folder | Orchestrator | Orchestrator | 0 | 0 |  |
+| AQ5 | Folded into AQ6 (the deck answers the trypsin too) | L | 0.1 | AQ6 |  | AQ6 done | Orchestrator | Orchestrator | 0 | 0 |  |
 | AP5 | Carried. Delivery into `AnaG/Bjararaca/Relatorio`, on Paulo's word (rule 8) | L | 0.2 |  |  | Her other files unchanged by hash | Orchestrator | Paulo | 0 | 0 |  |
 
 ## Every request, traced (AP0)
 
 | Source | Request, in short | Step | Premise checked |
 |---|---|---|---|
-| Ana, 11-14 | Trypsin (bovine and porcine, contaminants) shows in the family summary | CT1, CT2 | Desk: see the goal section |
-| Paulo, 11-14 | Fix and release | RL11, RL12 | |
+| Ana, 11-14 (V19 slide 3) | Trypsin (bovine and porcine, contaminants) shows in the family summary | CT1, CT2 | Desk: see the goal section |
+| V19 slide 1 | Two saved files: curated tool and results | FS1 | P0 |
+| V19 slide 2 | Where "Subclass not resolved" goes; subclasses from UniProt annotation only? | SC1 | P0 |
+| V19 slides 4, 5 | Her TIC-to-families percentages on the Results screen | RS1 | P0 |
+| V19 slide 6 | "Outside the shown families 53%" under TIC confuses | WD1 | P0 |
+| V19 slides 7, 8, 9 | "Detector envelopes" and "peptide-feature signal" are unclear and not used consistently | TM1 | P0 |
+| V19 slide 10 | Log-log scale | LG1 | P0 |
+| Paulo, 11-14 | Fix and release; pack the V19 deck in this version and answer with a deck | RL11, RL12, AQ6 | |
 
 ## Critical path
 
@@ -93,6 +116,11 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 
 | ID | Question | Taken |
 |---|---|---|
+| D134 | Two saved files (her slide 1)? | Yes: File > Save families as (.fcf) writes the curated families without quantitation; the .fqproj is the results project (FS1). Desk default, 11-14 |
+| D135 | One name per base (her slides 7 to 9)? | PSM only; PSM and de novo; Isotope envelopes (measured); Isotope envelopes (measured and identified); TIC; "peptide-feature signal" no longer names a base (TM1). Her suggestion, 11-14 |
+| D136 | The remainder under TIC (her slide 6)? | Split into other families, shared and unattributed, and not explained by PSM and de novo (WD1). Desk default, 11-14 |
+| D137 | Log-log for abundance against diversity (her slide 10)? | Yes, zero values on the axis floor with a mark (LG1). Her request, 11-14 |
+| D138 | Her TIC-to-families numbers on the Results screen (her slides 4 and 5)? | Yes, from the program's own values (RS1). Her request, 11-14 |
 | D133 | Where does the signal of a contaminant-only family go? | One explicit "contaminants" row beside shared and unattributed; the total still closes to 100% and no other row changes; mixed families stay families (CT1). Desk default, 11-14; the alternative (removing it from the denominator) would move every percentage |
 | D132 | Kimi on the team? | Yes, as the second reviewer: FQKimi reviews XP2 and XP3 (code and synthetic data only), FQRev the rest, so both review in parallel. Paulo, 11-13 21:00: "have kimi join the team as well as a reviewer" |
 | D129 | The team for 2.1.19? | FQGroup (Opus 5.5 xhigh on Juliana's account), FQSimple and FQDeNovo (Sol 6.1), FQRev (Grok 4.7) reviewing; no worker on the desktop account. Paulo, 11-13 20:40 |
