@@ -43,7 +43,7 @@ public partial class MainWindow
             new(ProjectExportKind.SuggestedAdditions, "Suggested additions (FASTA)", "Suggested additions", gap.CanExportFasta,
                 gap.CanExportFasta ? "Writes exact recorded world-hit sequences to a suggested-additions FASTA for review. Your database stays unchanged; Undo does not remove the file." : "Suggested additions need credited world proteins and verified matching stored sequences. Open a project with that evidence and choose a computed tag length in Results to enable it."),
             new(ProjectExportKind.Families, "Families (.fcf)", "Families", project,
-                project ? "Writes the current families, annotations and curation evidence to a separate format-2 .fcf. This does not save the .fqproj or clear unsaved changes; Undo does not remove the file." : "Family export needs an open project. Open or build families to enable it."),
+                project ? "Writes the curated families, evidence and family list to a separate format-2 .fcf without quantitation. The .fqproj Save path and unsaved changes stay unchanged; Undo does not remove the file." : "Family export needs an open project. Open or build families to enable it."),
             new(ProjectExportKind.InterpretationInput, "Interpretation input (Markdown)", "Interpretation input", report && loadedManifest?.FamilyRunShares != null,
                 report && loadedManifest?.FamilyRunShares != null ? "Writes stored Results, panel and report details to Markdown for an assistant you choose. The project stays unchanged; Undo does not remove the file." : "Interpretation input needs stored Results with family run shares. Open a computed project or run Quantify to enable it.")
         };

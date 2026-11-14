@@ -77,16 +77,19 @@ public static class CurationFormat
     /// <summary>Writes the curation as format 2 with the given parts (the registered ones when null). Streaming:
     /// the parts' sections are prepared first, then the document is serialized straight into the destination.</summary>
     public static void Write(FamilyClusterFile file, Stream destination, IReadOnlyList<CurationFormatPart>? parts = null) =>
-        Write(file, destination, parts, MaxHeaderBytes);
+        Write(file, destination, parts, MaxHeaderBytes, familiesOnly: false);
 
     /// <summary>The writer with its header limit as a parameter, so a test can reach the limit with small sections.</summary>
-    internal static void Write(FamilyClusterFile file, Stream destination, IReadOnlyList<CurationFormatPart>? parts, int maxHeaderBytes)
+    internal static void Write(FamilyClusterFile file, Stream destination, IReadOnlyList<CurationFormatPart>? parts, int maxHeaderBytes) =>
+        Write(file, destination, parts, maxHeaderBytes, familiesOnly: false);
+
+    internal static void Write(FamilyClusterFile file, Stream destination, IReadOnlyList<CurationFormatPart>? parts, int maxHeaderBytes, bool familiesOnly)
     {
         ArgumentNullException.ThrowIfNull(file); ArgumentNullException.ThrowIfNull(destination);
         parts ??= CurationFormatRegistry.Parts;
         var context = new CurationFormatContext(Current, writing: true, parts.Select(p => p.Name));
         foreach (CurationFormatPart part in parts) part.PrepareWrite(file, context);
-        var options = CurationFormatRegistry.CreateOptions(context, parts);
+        var options = CurationFormatRegistry.CreateOptions(context, parts, familiesOnly);
         var document = new CurationDocument { Format = Current, Parts = parts.Select(p => p.Name).ToList(), Sections = context.Sections };
         // Checked before a byte is written: a header the reader would refuse must never reach a file.
         long headerBytes = JsonSerializer.SerializeToUtf8Bytes(new[] { document }, options).LongLength;

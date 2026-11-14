@@ -29,6 +29,8 @@
                           ToolTip="Writes the open families, panel, report details and stored results to a .fqproj file. Open a project and finish any save first; Undo does not revert files on disk."/>
                 <MenuItem x:Name="MenuItemSaveAs" Header="Save as" Command="SaveAs" InputGestureText="Ctrl+Shift+S" IsEnabled="False"
                           ToolTip="Writes the open project to a .fqproj file at a location you choose and makes it the current save path. Open a project and finish any save first; Undo does not revert files on disk."/>
+                <MenuItem x:Name="MenuItemSaveFamiliesAs" Header="Save families as (.fcf)..." Click="MenuItemSaveFCF_Click" IsEnabled="{Binding IsEnabled, ElementName=MenuItemFamilyPanel}"
+                          ToolTip="Writes the curated families, evidence and family list to a separate .fcf without quantitation. Open a project and finish the current operation first; the results project, its Save path and unsaved changes stay unchanged, and Undo does not remove the file."/>
                 <MenuItem x:Name="MenuItemExport" Header="Export" IsEnabled="False" Click="MenuItemExport_Click"
                           ToolTip="Opens the Export window for the report, CSV tables, suggested additions, families and interpretation input. Open a project or a standalone homology result and finish the current operation to enable it; Undo does not remove exported files."/>
                 <MenuItem x:Name="MenuItemReportDetails" Header="Report details" Click="MenuItemReportDetails_Click" IsEnabled="False"
