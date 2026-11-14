@@ -43,6 +43,9 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     public string EmptyMessage => (RequiresQuantify ? PreviousQuantitation : MissingQuantitation)
         + (HasHomology ? " The standalone homology snapshot can still be exported here." : "");
     public IReadOnlyList<ResultsSummaryCard> Cards { get; } = Array.Empty<ResultsSummaryCard>();
+    /// <summary>RS1: the cascade from TIC to families, each line with its source.</summary>
+    public IReadOnlyList<ResultsCascadeLine> Cascade { get; } = Array.Empty<ResultsCascadeLine>();
+    public bool HasCascade => Cascade.Count > 0;
     public int FamilyTopN { get => topN; set => Set(ref topN, value); }
     public bool FamilyPie { get => familyPie; set => Set(ref familyPie, value); }
     public SharedPeptidePolicy FamilySharedPolicy => manifest?.FamilyRunShares?.Policy == SharedPeptidePolicy.SplitEqually
@@ -109,6 +112,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
                 $"{Data.IdentifiedCount:N0} identified; {Data.DeNovoCount:N0} de novo. Collapsed table before cross-side suppression; one representative per run, side, peptidoform and charge."),
             new ResultsSummaryCard("Families reached", Families?.Families.Count.ToString("N0", CultureInfo.CurrentCulture) ?? "Unavailable",
                 curation == null ? "No Family Cluster File is open beside this quantitation." : "Current curated families reached by homology. Shared and unattributed signal remain explicit.") };
+        Cascade = ResultsCascade.Build(Data, Families, FamilySharedPolicy);
     }
 
     public void ShowStatus(string message) => Status = message;
