@@ -95,6 +95,42 @@ public static class PanelAssignmentEvidenceStore
         return rows;
     }
 
+    /// <summary>XP3 (D131): facts that look out of date, say after a later fetch, are checked against the proposal computed
+    /// again from the current evidence and the recorded choices. When every applied protein keeps its recorded family (a
+    /// protein the user moved later keeps the move), the facts and subclass labels are refreshed and 0 is returned;
+    /// otherwise nothing changes and the result is how many proteins would get another family, or -1 when the check cannot run.</summary>
+    public static int RefreshIfUnchanged(FamilyClusterFile file)
+    {
+        var recipe = file.EvidenceRecipe;
+        if (CurrentShape(file) is not { } rows || recipe?.PanelContext == null || recipe.FamilyPanel == null) return -1;
+        EvidenceProposal proposal;
+        try
+        {
+            proposal = ManualFamilyChoices.Overlay(PanelEvidenceClassifier.Propose(file, recipe.Options, recipe.SessionSearch, recipe.SessionReferences,
+                recipe.FamilyPanel), recipe.ManualChoices ?? new(), file);
+        }
+        catch (Exception error) when (error is InvalidOperationException or ArgumentException) { return -1; }
+        var moved = rows.Where(row => (row.EvidenceKind & (PanelAssignmentEvidenceKind.MovedByYou | PanelAssignmentEvidenceKind.RegroupedByWords)) != 0)
+            .Select(row => row.ProteinIndex).ToHashSet();
+        var proposed = proposal.Proteins.ToDictionary(row => row.ProteinIndex);
+        var applied = recipe.Assignments.Concat(recipe.RetainedPanelAssignments ?? Enumerable.Empty<EvidenceAssignment>())
+            .Where(assignment => !moved.Contains(assignment.ProteinIndex)).ToArray();
+        int changing = applied.Count(assignment => !proposed.TryGetValue(assignment.ProteinIndex, out var row)
+            || row.Family != assignment.Family || !row.SuggestedSelected);
+        if (changing > 0) return changing;
+        var refreshed = Stage(proposal, applied);
+        if (refreshed.Count != rows.Count || refreshed.Where((row, index) => row.ProteinIndex != rows[index].ProteinIndex).Any()) return -1;
+        for (int index = 0; index < rows.Count; index++)
+            if (moved.Contains(rows[index].ProteinIndex)) refreshed[index] = EvidenceApply.Clone(rows[index]);
+        string fingerprint = Fingerprints(file, recipe, file.EvidenceSource, true, false,
+            (refreshed, index => file.MyExtendedFastaItems[index].UserID, false))[0];
+        bool labels = file.ProteinSubclassLabels != null;
+        file.PanelProteinAssignments = refreshed; recipe.PanelProteinAssignments = EvidenceApply.Clone(refreshed);
+        file.PanelProteinAssignmentsFingerprint = recipe.PanelProteinAssignmentsFingerprint = fingerprint;
+        if (labels) SubclassAssignment.CommitCandidate(file, SubclassAssignment.ComputeCurrent(file));
+        return 0;
+    }
+
     /// <summary>EX2c: the digest form of a fingerprint verified in full, while the facts keep that fingerprint.</summary>
     internal static string? VerifiedDigest(FamilyClusterFile file) => verified.TryGetValue(file, out var pair)
         && pair.Full == file.PanelProteinAssignmentsFingerprint ? pair.Digest : null;

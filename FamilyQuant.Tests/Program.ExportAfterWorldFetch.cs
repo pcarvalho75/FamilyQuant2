@@ -83,6 +83,7 @@ internal static partial class Program
             Qr("identified", "run_b", 7, 2, "EEEEEEEK", 40, 40), Qr("identified", "run_b", 8, 2, "MMMMMMMK", 5, 5),
         };
         string Export(FamilyClusterFile file) => QuantifyAndExportReport(file, rows, output);
+        string Facts(FamilyClusterFile file) => System.Text.Json.JsonSerializer.Serialize(new { file.PanelProteinAssignments, file.PanelProteinAssignmentsFingerprint });
         var baseline = WorldGrouped();
         Check("XP1 the grouped project exports before any later action", baseline.EvidenceRecipe?.PanelContext != null && Export(baseline) == "");
 
@@ -117,6 +118,29 @@ internal static partial class Program
         model.ApplyBatch(new[] { older.MyExtendedFastaItems[3] }, older.MyExtendedFastaItems[0].UserID.ToString(CultureInfo.InvariantCulture), "");
         Check("XP2 a family change on such a project keeps the facts current", older.PanelProteinAssignmentsFingerprint!.StartsWith("2:", StringComparison.Ordinal)
             && PanelAssignmentEvidenceStore.Current(older) != null);
+
+        // XP3 (D131): facts already blocked, here by a world fetched again over one stored before Apply grouping in 2.1.18.
+        var oldWorld = WorldGrouped(); FetchWorldForTest(oldWorld);
+        var oldState = ((IReadOnlyList<PanelProteinAssignment>)oldWorld.PanelProteinAssignments!, (Func<int, int>)(index => oldWorld.MyExtendedFastaItems[index].UserID), false);
+        oldWorld.PanelProteinAssignmentsFingerprint = oldWorld.EvidenceRecipe!.PanelProteinAssignmentsFingerprint
+            = ((string[])fingerprints.Invoke(null, new object?[] { oldWorld, oldWorld.EvidenceRecipe, oldWorld.EvidenceSource, true, true, new[] { oldState } })!)[0];
+        FetchWorldForTest(oldWorld); var blocked = Facts(oldWorld);
+        bool refused = PanelAssignmentEvidenceStore.Current(oldWorld) == null && Export(oldWorld) == PanelAssignmentEvidenceStore.RebuildMessage;
+        Check("XP3 a project blocked by a later fetch, with nothing that would move, is refreshed and exports", refused
+            && PanelAssignmentEvidenceStore.RefreshIfUnchanged(oldWorld) == 0 && PanelAssignmentEvidenceStore.Current(oldWorld) != null
+            && Facts(oldWorld) != blocked && Export(oldWorld) == "");
+        var kept = WorldGrouped(); model = new CurationViewModel(kept);
+        model.ApplyBatch(new[] { kept.MyExtendedFastaItems[4] }, kept.MyExtendedFastaItems[0].UserID.ToString(CultureInfo.InvariantCulture), "");
+        kept.MyExtendedFastaItems[3].Evidence!.Keywords.Add("Unrelated");
+        Check("XP3 the refresh keeps a protein the user moved, with its reason", PanelAssignmentEvidenceStore.Current(kept) == null
+            && PanelAssignmentEvidenceStore.RefreshIfUnchanged(kept) == 0 && PanelAssignmentEvidenceStore.Current(kept) != null
+            && PanelAuditCsv.BuildCsv(kept).Contains("Moved by you", StringComparison.Ordinal) && kept.MyExtendedFastaItems[4].UserID == kept.MyExtendedFastaItems[0].UserID);
+        var moving = WorldGrouped(); moving.MyExtendedFastaItems[1].Evidence!.Pfam = new() { new() { Accession = "domain-b" } };
+        blocked = Facts(moving);
+        Check("XP3 when the current evidence would move proteins, nothing changes and the count is given", PanelAssignmentEvidenceStore.Current(moving) == null
+            && PanelAssignmentEvidenceStore.RefreshIfUnchanged(moving) == 1 && Facts(moving) == blocked);
+        var changedList = WorldGrouped(); changedList.FamilyPanel!.Families[1].Pfam.Add(new() { Accession = "domain-z" });
+        Check("XP3 a changed list cannot be refreshed", PanelAssignmentEvidenceStore.RefreshIfUnchanged(changedList) == -1);
 
         var listed = WorldGrouped(); FetchWorldForTest(listed);
         listed.FamilyPanel!.Families[0].Pfam.Add(new() { Accession = "domain-z" });

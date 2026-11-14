@@ -69,6 +69,20 @@ public partial class MainWindow
                 if (!ready.Completed) throw new InvalidOperationException("The project changed while its family attribution was being prepared.");
                 RequireSameProject();
                 operation.Context.Report("report-attribution", "Family attribution ready", 1, 1);
+                // XP3 (D131): facts that look out of date after a later fetch are checked against the current evidence.
+                if (curation.PanelProteinAssignments != null)
+                {
+                    operation.Context.Report("report-facts", "Checking the family assignments against the current evidence", 0, 1);
+                    string before = curation.PanelProteinAssignmentsFingerprint ?? "";
+                    int changing = await Task.Run(() => Evidence.PanelAssignmentEvidenceStore.Current(curation) != null ? 0
+                        : Evidence.PanelAssignmentEvidenceStore.RefreshIfUnchanged(curation), operation.Context.CancellationToken);
+                    RequireSameProject();
+                    if (changing != 0) throw new InvalidOperationException((changing > 0 ? "Computed again from the current evidence, "
+                        + changing.ToString("N0", System.Globalization.CultureInfo.CurrentCulture) + (changing == 1 ? " protein would" : " proteins would")
+                        + " get another family. " : "") + Evidence.PanelAssignmentEvidenceStore.RebuildMessage);
+                    if (curation.PanelProteinAssignmentsFingerprint != before) project.ViewModel.NotifyDocumentChanged();
+                    operation.Context.Report("report-facts", "Family assignments match the current evidence", 1, 1);
+                }
                 operation.Context.Report("report-snapshot", "Capturing the project and stored Results", 0, 1);
                 var captured = await Task.Run(() => (File: curation.DeepCopy(operation.Context), Rows: rows.ToArray()), operation.Context.CancellationToken);
                 snapshot = captured.File; capturedRows = captured.Rows;

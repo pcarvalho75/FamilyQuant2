@@ -233,6 +233,10 @@ namespace FamilyQuant
             sb.AppendLine("Regrouped by words in the protein audit; one outside every row takes the row of the");
             sb.AppendLine("family it joins. A family left with two rows is reported without a link. The report");
             sb.AppendLine("still exports after Quantify, and Undo restores the move and its reason together.");
+            sb.AppendLine("Fetch UniProt families does not affect the family assignments. If they look out of date at");
+            sb.AppendLine("Export report, it computes the grouping again from the current evidence: when no protein");
+            sb.AppendLine("would change family the report goes on (File > Save keeps the check); otherwise it says how");
+            sb.AppendLine("many would change, and Group by evidence then Apply grouping brings them up to date.");
             sb.AppendLine();
             sb.AppendLine("A legacy PatternLab export can lack the recorded divisor and per-run totals.");
             sb.AppendLine("Re-exporting it from XQuant records the divisor and every run's totals, making");
