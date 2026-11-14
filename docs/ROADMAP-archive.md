@@ -1572,3 +1572,57 @@ Each point of Ana's 11-12 deck, voice note and comment, with its step. "Desk" me
 | Slide 9 | Export HTML fails: "Family assignment evidence is missing or out of date" | EX1, EX2 | Desk: `PanelAssignmentEvidenceStore.cs:88-91` |
 | Voice note 11-12 | Earlier versions grouped metallo better with default clicks; the grouping screen has too much to know where to start | GA5 (default clicks only), and Paulo's session | |
 | Comment 11-12 | "Word clustering" should come before quantification | PO1 | Desk: her slide 3 screen |
+
+## Version 22 (2026-11-13 20:45 to 2026-11-14), finished: 2.1.19 published
+
+Every row is a small step with its own done-check. A step is done when its reviewer approves it (rule 6; FQKimi for XP2 and XP3, FQRev for the rest, D132). Ids never change.
+
+### W41 The report exports after Fetch UniProt families (FQGroup, Orchestrator)
+
+**What the desk found in the code before this roadmap (XP1 proves it):**
+1. Export refuses when the assignment facts are not current (`PanelAssignmentEvidenceStore.RequireCurrent`). Current compares a fingerprint taken at Apply grouping with one taken now.
+2. That fingerprint hashes the whole evidence source as JSON (`PanelAssignmentEvidenceStore.cs:164-200`), and the source carries the stored UniProt family world (`FamilyWorldSnapshot.cs:51`, `EvidenceProvenance.FamilyWorld`).
+3. Fetch UniProt families writes that world. Grouping never reads it (GA1, 11-12: fetching it changes 0 of 31,396 placements); only Quantify's Database gap does.
+4. 2.1.18 moved Fetch UniProt families under b, after grouping and before Quantify (PO2), which invites running it after Apply grouping. Her screen shows a Database gap section, which appears only after that fetch.
+So fetching the world after Apply grouping makes the facts look out of date and blocks the report, though nothing grouping uses has changed. EX2 (2.1.18) covered family moves, not this.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| XP1 | A failing test first and a census. Synthetic project: Apply grouping, then Fetch UniProt families (the fake download the desktop-world tests use), Quantify, Export report: today it refuses. Then every other action a user can take after Apply grouping that writes the evidence source or the panel (Fetch evidence again, Fetch missing panel, the reviewed-neighbour search, locks, a subclass import, save and reopen) is tried the same way, and each either keeps the report exportable or is listed with the reason it must not | M | 0.8 |  | XP2 | The test fails on master beafd1c1 with the refusal; the census table in the READY | OJ | FQGroup | 0 | 0 |  |
+| XP2 | The fix (D130). The facts depend only on what grouping reads: the stored UniProt family world (and any other part XP1 shows grouping does not read) is left out of their fingerprint, in both the full and the digest form. A fingerprint written by 2.1.18 or earlier still verifies as before. A change to anything grouping reads still refuses | M | 1.0 | XP1 | XP3, XP4, RL9 | XP1 passes; the refusal tests (a changed list, database or evidence used by grouping) still pass; old fingerprints verify | OJ | FQGroup | 0 | 0 |  |
+| XP3 | Projects already saved in that state (hers) export without grouping again (D131). When the facts look out of date, the program computes the proposal again from the current evidence; if every protein gets the family the facts record, the facts are refreshed and the report goes on; otherwise the refusal stays and says how many proteins would change. The time it takes on her project is measured | M | 1.2 | XP2 | XP4, RL9 | A synthetic test of both outcomes; on a desk copy of her project in her state, Export goes through and the time is in the READY | OJ | FQGroup | 0 | 0 |  |
+| XP4 | The desk's walk in her order on 2.1.18 and on the candidate: fresh copy, unlocked, import her sheet, Fetch evidence, Group by evidence, Apply, Fetch UniProt families, Quantify with her slide 33 settings, Export | M | 1.0 | XP2, XP3 | RL10, AQ4 | On 2.1.18 Export refuses (the cause shown on her data); on the candidate it writes HTML, Word and workbook; the family shares match 2.1.18's GA5 | Orchestrator | Orchestrator | 0 | 0 |  |
+
+### W44 Empty tabs leave Review grouping (FQSimple)
+
+Ana, voice note 11-13: "tem algumas daquelas abas onde tem arquitetura, não sei o que, que não aparece nada, então, se não vai entrar nada, talvez possa tirar". The tabs under Show all options (Architecture, Left out, Unassigned, Markers, Motif counts and the others) stay on screen even when they hold no row for her project.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| RG11 | A Review grouping tab with no row for this project is hidden, and comes back as soon as it has one; the tabs that are always meaningful (Proteins, Panel links, Family checklist) stay. Show all options keeps its meaning. P0: list each tab and when it can be empty | L | 0.8 |  | SI2, RL9 | A synthetic test with an empty and a filled tab; a render before and after | SM | FQSimple | 0 | 0 |  |
+
+### W42 The website follows 2.1.18 and 2.1.19 (FQDeNovo, Orchestrator)
+
+The desk's check of the live site on 11-13: downloads point to the latest release, but the version text says 2.1.17 (twice on the home page, once on the import page), the Curate families pictures show the old Grouping order (Fetch UniProt families as step 3 and Quantify as step 4, above Group by words), two sentences say Pfam codes need no second confirmation "when recognized", and nothing mentions Family names, the pie or exporting after curation.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| SI1 | The text: version 2.1.19 where the pages name the version; the Pfam sentences as 2.1.18 works (accepted as written, before or after Fetch evidence, Un-confirm); one short line each for Family names, the pie and exporting after curation; the Grouping order as the program shows it | L | 0.6 |  | SI3 | A diff of the pages; no em or en dash; no organism or sample named beyond what the site already shows (D92) | DN | FQDeNovo | 0 | 0 |  |
+| SI2 | The pictures, from synthetic data, light and dark, as the site's others: the Curate families screen in the new Grouping order, the Export window with Family names, the Results pie | L | 0.8 |  | SI3 | The new PNGs looked at by the desk | DN | FQDeNovo | 0 | 0 |  |
+| SI3 | The upload folder `C:/Users/paulo/Desktop/FamilyQuant-website/familyquant-2.1.19` with an UPLOAD-LIST of the changed files and the do-not-delete line; Paulo uploads | L | 0.3 | SI1, SI2, RL10 |  | Folder ready; the desk checks the list against the diff | DN | FQDeNovo | 0 | 0 |  |
+
+### W43 Release 2.1.19 and the answer (Orchestrator, FQDeNovo)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| RL9 | The candidate: XP1 to XP3 and RG11 merged after FQRev's approval, version bump on the 31 lines of the 2.1.18 bump (4a778019), notes, ledger refresh, the full suite once (shards that time out in the browser helper rerun alone) | M | 1.0 | XP2, XP3 | RL10, XP4 | Suite line: 0 failed | Orchestrator | Orchestrator | 0 | 0 |  |
+| RL10 | Package (FQDeNovo, P9), publish as Latest, README, merge into master and push | M | 0.8 | RL9, XP4 | SI3, AQ4 | Published; digests match; offline 2.1.18 -> 2.1.19 | Orchestrator | Orchestrator | 0 | 0 |  |
+| AQ4 | The answer to Ana in Portuguese (WhatsApp text): what caused it, that 2.1.19 fixes it, that her current project exports without grouping again; staged for Paulo | L | 0.3 | RL10, XP4 |  | Text in the pickup folder; Paulo sends | Orchestrator | Orchestrator | 0 | 0 |  |
+
+### Every request of version 22, traced (AP0)
+
+| Source | Request, in short | Step | Premise checked |
+|---|---|---|---|
+| Ana, 11-13 screenshot and message | Export HTML still refuses on 2.1.18 | XP1, XP2, XP3, XP4 | Desk: W41 points 1 to 4 |
+| Ana, 11-13 voice note | Only the HTML error remains; tabs that never show anything (Architecture and others) could go; the session on grouping tomorrow | XP1 to XP4, RG11, Paulo's session | P0 (RG11) |
+| Paulo, 11-12 | The website update in this iteration | SI1, SI2, SI3 | Desk: W42 |
