@@ -1471,3 +1471,104 @@ Each comment on Ana's 34 slides and each request in her nine voice notes of 11-1
 | Voice notes 11.46.01 and 11.46.36 | The rare families will not appear or fall under the threshold into "Outras"; Pfam per name is optional | AP3 (the row goes) | |
 | Voice note 11.47 | Ignore AMP and the endopeptidase inhibitor | AP3 | |
 | Voice note 11.48 | Subclasses: only true lectins against snaclecs, and PLI alpha, beta and gamma (different families, all phospholipase inhibitors); not SVMP P-I to P-III, PLA2 D49/K49 or short and long disintegrins | IM9, AP3 | IM9 proves both shapes: a split by UniProt family name and a split by Pfam |
+
+## Version 21 (2026-11-12 17:50 to 2026-11-13 20:45), finished: 2.1.18 published
+
+Every row is a small step with its own done-check. A step is done when FQRev approves it (rule 6, D127). Ids never change; a step split here keeps its id as a prefix.
+
+### W33 Her families stay together (FQGroup, Orchestrator)
+
+Ana, slides 4, 5 and 8 and her voice note: the SVMP row placed 232 of its 821 matches, many metalloproteinase families stayed apart, and the C-type lectin became the largest family in her chart.
+
+**What the desk found in the code before this roadmap (GA1 measures it):**
+1. Her Family checklist row "Metaloproteinase de veneno": 821 matches, 258 reviewed, 232 placed, 589 outside. Every "Why outside" reads "The protein's keywords and tissue annotations do not match the user scope phrases" (`PanelAuditCsv.cs:109-116`).
+2. The scope test reads each protein's own keywords and tissue (`EvidenceClassifier.cs:21-27`). GA1 (18:21) corrected the desk: the audit's "Why outside" names the scope, but for 471 of the 599 outside the deciding rule is RG5 (2.1.16): a row that names a UniProt family accepts only proteins with that exact family, and these unreviewed proteins have none of their own. Her revised sheet (AP3) names one in the SVMP row, so 2.1.16 brought this in; her earlier sheets did not.
+3. Ties: the desk's first note was wrong (FQRev R0, 18:09). `PanelEvidenceClassifier.Engine.cs:192-196` keeps the row with the most shared domains, then the shorter list, so a protein with three of the SVMP row's domains already goes there; the one-domain row wins only on equal shared counts. GA1 agrees: her 44 proteins in another row are disintegrin-only sets, rightly placed.
+4. The proteins of her database that match no row stay in their own sequence families: the five "Snake venom metalloproteinase" families in her top 15 (F20761, F491, F2410, F4159, F32981). Their peptides shared with the main SVMP family count as "shared between families" (25.8% + 2.0% of all peptide features in her chart).
+5. The desk's 2.1.17 walk on its copy of her project reproduces it: 231 placed, 821 matches, 590 outside.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| GA1 | Decode on her data (D121). On the desk's walked copy of her project (her revised sheet, scope "Toxin", "Venom gland", 2.1.17), sort the SVMP row's 821 matches, and every in-scope protein whose description names a metalloproteinase, into: placed in SVMP; outside by the scope words; placed in another row (and which); left in its own sequence family. For each class give reviewed or not, whether its own UniProt family is the one her row names, whether it has a Pfam set, and which scope fields it lacks. Also measure whether running Fetch UniProt families before Group by evidence changes any placement. Descriptions may be counted here; they never enter a rule (rule 2) | M | 1.0 |  | GA2, GA3, GA4, PO2 | The class table, with the command that makes it, in the READY; counts only | OJ | FQGroup | 0 | 0 |  |
+| GA2 | A row that names a UniProt family stops refusing proteins that have none (D119, revised after GA1). GA1 found the main cause: 471 of the 599 SVMP-row proteins left outside carry the scope words but have no UniProt family of their own, and RG5 (2.1.16, D113) lets a row that names a family accept only proteins with that exact family. New rule: a protein whose own UniProt family differs from the row's is still refused (SVMPI's purpose); a protein with no UniProt family of its own joins the row by its Pfam set when every domain it has is listed by the row and the row is its best by D120. The scope words stay as they are (GA1: relaxing them moves at most 128, among them 17 metalloproteinase-named proteins with an extra domain, the membrane-anchored relatives). A failing synthetic test first: a reviewed member with the row's family and an unreviewed protein with the same Pfam set and no family of its own; today the second is refused | M | 1.0 | GA1 | GA5, RL6 | The test fails on master 6e939242 and passes on the branch; on her project the SVMP row's placed count recounted with GA1's command, before and after, in the READY | OJ | FQGroup | 0 | 0 |  |
+| GA3 | Only if GA2's new Pfam route meets ties the current rule (most shared domains, then the shorter list) settles badly: then the overlap of both sets (D120). Otherwise the step closes with GA2's tie count, since FQRev's R0 and GA1 show today's rule already sends three-domain proteins to the four-domain row | M | 0.3 | GA1 | GA5, RL6 | The test fails on master and passes on the branch; the number of tie questions on her panel recounted (D111 gave 4, AP1 made it 0; still 0) | OJ | FQGroup | 0 | 0 |  |
+| GA4 | Only if GA1 finds the class: in-scope proteins with no Pfam set and no UniProt family (fragments) join the row of their nearest placed relative when the identity reaches the grouping identity (70% in her project); otherwise they keep their own family, as today | M | 1.0 | GA1 | GA5, RL6 | A synthetic test, and GA1's "own sequence family" class recounted; or GA1's table shows the class is empty and the step closes with that line | OJ | FQGroup | 0 | 0 |  |
+| GA5 | The desk's walk with default clicks only, as Ana works ("aceitando tudo que o programa trazia"). On a fresh copy of her project before grouping: Import family list (her revised sheet), Fetch evidence, Group by evidence, Apply grouping, Quantify with her slide 33 settings, Export HTML. Run it on 2.1.17 and on the 2.1.18 candidate | M | 1.0 | GA2, GA3, GA4, EX2, IM10, PO1 | RL8, AQ2 | Before and after in the LOG: import questions, SVMP placed and outside, the top 15 of the chart, the shared share, the HTML exported. Every metalloproteinase-described entry left outside has a stated reason | Orchestrator | Orchestrator | 0 | 0 |  |
+
+### W34 The report exports after any curation (FQGroup)
+
+Ana, slide 9: Export says "Family assignment evidence is missing or out of date". The check fails as soon as any protein's family differs from the one recorded at Apply grouping (`PanelAssignmentEvidenceStore.cs:88-91`, `row.FamilyUserId != target.Protein.UserID`). A protein moved with Edit selected proteins, a Group by keywords run or a Recluster by words run is enough, and her slide 4 shows Edit selected proteins open.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| EX1 | A failing test first: synthetic project, Apply grouping, then move one protein with Edit selected proteins, and separately run Group by keywords; Quantify; Export report. Today both end with the error | L | 0.3 |  | EX2 | The test fails on master ce442337 with that message | OJ | FQGroup | 0 | 0 |  |
+| EX2 | The fix. A family change after Apply grouping updates the assignment facts of the proteins it moved, with the reason "Moved by you" or "Regrouped by words", so the evidence stays current and the report exports; Undo restores both. A family whose proteins all keep one list row keeps its link; a mixed family is reported without one, as the report does today for conflicts. The refusal stays for a really stale project (a changed database or panel) | M | 1.0 | EX1 | GA5, RL6 | EX1 passes; the existing refusal tests still pass; the moved protein's reason shows in the protein audit | OJ | FQGroup | 0 | 0 |  |
+| EX2c | Edit selected proteins stays quick (desk, 11-12 19:50). EX2 checks the facts on every edit; on her project that took the edit from about 1.1 s to 6.6 s, and EX2b brought it to about 4.7 s. Keep the check's guarantee (a move made while the facts are already out of date leaves them untouched, and the report still refuses) without paying the whole check on every edit, for example by remembering that the facts were verified current and what has changed since | M | 0.8 | EX2 | GA5, RL6 | On a copy of her project, Edit selected proteins within about 1.5 s of the 2.1.17 time under the same load, measured before and after in the READY; export-after-curation and the refusal tests still pass | OJ | FQGroup | 0 | 0 |  |
+
+### W35 Her sheet is taken as written (FQDeNovo)
+
+Ana, slide 2: the import still asks her to confirm, family by family, the evidence she wrote in her own sheet; all 38 rows "need a matching choice" and Next stays off. The desk's cause: a code from the sheet counts as known only when stored evidence lists it (`FamilyListImportViewModel.Commit.cs:85, 93-104`). She imports the list first (step 0) and fetches evidence after (step 1), so nothing is stored yet and every row asks. The desk's AP6 walk used a project that already had evidence, which is why it saw no question. Ana, slide 1: she mapped "Family name" to the English column to get an English report, found the column choices confusing, and saw Next stay off for some choices.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| IM10 | Codes as written (D122). A well-formed Pfam accession from the sheet is accepted as written whether or not evidence is stored yet; Evidence matches appears only for a cell that names a domain without a code, and never blocks Next for a row with codes. Each row can be un-confirmed later, in the import's summary and in Family checklist. A failing test first: a project with no stored evidence imports the program's template with codes and today asks for every row | M | 1.0 |  | GA5, RL6 | The test fails on master and passes on the branch: no question, the matches page skipped | DN | FQDeNovo | 0 | 0 |  |
+| IM10b | The other half of IM10, in FQGroup's file (FQDeNovo's SEAM NEED, 11-12 17:54): a per-row "Un-confirm" action in Family checklist, also for rows accepted from sheet codes. It removes the family's confirmed evidence match in the review draft, updates its proposal through the existing guards and Undo, and is kept only on Apply grouping; the family's Pfam definitions stay | L | 0.4 | IM10 | RL6 | A synthetic test: un-confirm a sheet-code row, the proposal drops its matches, Undo restores, Cancel keeps nothing | OJ | FQGroup | 0 | 0 |  |
+| IM11 | The Columns page shows only what the sheet has. The rows for Notes, Decision and Subclass names appear only when the sheet has such a column; when Next is off, one line under the buttons says why (a required field without a column, or two fields on one column) | L | 0.5 | IM10 | RL6 | A test per reason; a render of the page with her template's columns | DN | FQDeNovo | 0 | 0 |  |
+
+### W36 Names in the report (FQHtml)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| NM1 | Ana, slide 1: "Eu quero gerar o report em inglês". The Export window gets one choice, "Family names: Name or Other-language name" (D125), stored in the project; the HTML, Word and workbook reports and the Results chart use it; a family without an other-language name keeps its Name. Her old workaround (the English column mapped as Family name) still imports | M | 1.0 |  | RL6 | A test that exports with each choice; the report's family labels follow it | HT | FQHtml | 0 | 0 |  |
+
+### W37 The Grouping panel in working order (FQDeNovo)
+
+Ana's comment: "Word clustering" should come before quantification. Her slide 3 screen shows the panel as "a Group by evidence: 0 Import family list, 1 Fetch evidence, 2 Group by evidence, 3 Fetch UniProt families, 4 Quantify", then "b Group by words". Ana, slide 3: "Por que as UniProt families não vieram no Fetch evidence?"
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| PO1 | Quantify comes last (D123). The panel reads: a Group by evidence (Import family list, Fetch evidence, Group by evidence), b Group by words (optional), then Quantify on its own line under both. Labels and order only; every command keeps its function | L | 0.5 |  | GA5, RL6 | A render of the panel, and the ledger rows that name the steps still pass | DN | FQDeNovo | 0 | 0 |  |
+| PO2 | Fetch UniProt families in its right place, as GA1 measured (D123). If fetching it first changes the grouping, Fetch evidence also fetches it, and the separate button goes; if it does not, it moves under b as optional, with a tooltip saying what it downloads and that grouping does not need it | L | 0.5 | GA1, PO1 | RL6 | GA1's line quoted in the READY; a render of the panel | DN | FQDeNovo | 0 | 0 |  |
+
+### W38 A pie chart (FQHtml)
+
+Ana, slide 8: "O Calvete sempre mostra o gráfico em forma de pizza, seria bom ter esta opção também".
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| PI1 | The HTML report's family chart gets a "Pie" choice beside the bars (D124): one slice per family shown, then other families, shared between families and unattributed, the same numbers as the bars, summing to 100% of all peptide features. It uses the pooled buckets of the Results bars (`FamilyContributionPlot.Fold`) on the fixed all-peptide-features base and says so in its caption; it does not follow Normalize to, since the other bases do not sum to 100% (D128). It follows the names choice (NM1) | M | 1.0 | NM1 | RL6 | A test that the slices sum to 100.0 and equal the bar values; a render | HT | FQHtml | 0 | 0 |  |
+| PI2 | The Results screen's "Family chart" list gets the same "Pie" view | M | 0.8 | PI1 | RL6 | The same test on the screen's data; a render | HT | FQHtml | 0 | 0 |  |
+
+### W39 Answers for Ana (Orchestrator)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| AQ1 | Ana, slides 6 and 7: is her reading of the TIC shares right? The desk checks in the code what the resolved isotope-series diagnostic counts (charges, isotope ceiling, points per peak, any origin) and writes the answer: what holds, and what to say instead | L | 0.5 |  | AQ2 | Each statement on her slide 7 marked right or corrected, with the code line behind it, in the desk's notes | Orchestrator | Orchestrator | 0 | 0 |  |
+| AQ2 | The deck for Ana in Portuguese, as AP7: one slide per point (her 9 slides, the voice note, the Word clustering comment), her words, what changed, her screen and the 2.1.18 screen on her data, and the before and after numbers of GA5 | M | 1.5 | GA5, AQ1, RL8 | AQ3 | The .pptx staged for Paulo; every row of the trace below on a slide; numbers traced to GA5's outputs | Orchestrator | Orchestrator | 0 | 0 |  |
+| AQ3 | The WhatsApp text and the attachments, staged in a pickup folder on the Desktop; Paulo sends | L | 0.2 | AQ2 |  | Folder and text in chat | Orchestrator | Orchestrator | 0 | 0 |  |
+
+### W40 Release 2.1.18 (Orchestrator, FQDeNovo)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---:|
+| RL6 | Reviews and merges in bundles (D116, D127): FQRev reviews every READY and fixes small defects itself (D89, D91); the desk merges approved commits into `fq/v2118-release` | M | 1.0 | GA2, GA3, GA4, EX2, EX2c, IM10, IM10b, IM11, NM1, PO1, PO2, PI1, PI2 | RL7 | Each batch's verdict file and merge commit in the LOG | Orchestrator | Orchestrator | 0 | 0 |  |
+| RL7 | The 2.1.18 candidate: version bump on the 31 lines, release notes, ledger refresh for the rows the steps touched, the full suite once | M | 1.0 | RL6 | RL8, GA5 | Suite line posted: 0 failed | Orchestrator | Orchestrator | 0 | 0 |  |
+| RL8 | Package (FQDeNovo), publish as Latest, README, merge into master and push | M | 0.8 | RL7, GA5 | AQ2 | Published; digests match; an installed 2.1.17 offers 2.1.18 | Orchestrator | Orchestrator | 0 | 0 |  |
+
+### Every request of version 21, traced (AP0)
+
+Each point of Ana's 11-12 deck, voice note and comment, with its step. "Desk" means the desk traced the premise in the code before this roadmap; "P0" means the builder confirms it first and puts the line in its READY.
+
+| Source | Ana's request, in short | Step | Premise checked |
+|---|---|---|---|
+| Slide 1 | A report in English: is mapping the English column as "Family name" the way? The column choices confuse; some choices leave Next off | NM1, IM11 | Desk: no report-names option exists; the other-language name is kept as text only (`PanelImportTemplate.cs:25, 71`); why Next is off is not shown on the page (P0) |
+| Slide 2 | Still asks her to confirm each family's evidence from her own sheet; default all confirmed, undo later | IM10 | Desk: `FamilyListImportViewModel.Commit.cs:85, 93-104`; nothing is stored before Fetch evidence |
+| Slide 3 | Why did the UniProt families not come with Fetch evidence? | PO2, GA1 | Desk: Fetch UniProt families is step 3, after Group by evidence, and asks for the grouping task first (`ClusterGenerationControl.FamilyWorld.cs:8-21`) |
+| Slide 4 | Many metallo families stay apart from #40430 (232 entries; the database has over 800) | GA1, GA2, GA3, GA4, GA5 | Desk: W33 points 1, 2 and 5 |
+| Slide 5 | The SVMP row: 821 matches, 232 placed, 589 outside; an entry "Proposed in Desintegrina" | GA2, GA3 | Desk: W33 points 1 to 3 |
+| Slides 6, 7 | Is her reading of the TIC shares right? | AQ1 | Desk: her numbers match her screen (44.61 + 6.83 = 51.44; diagnostic 59.52 to 59.72) |
+| Slide 8 | The metallo grouping does not match venom reality; earlier versions did better without words; still confused in Review grouping | GA1 to GA5, and Paulo's session | Desk: W33 point 4 (shared peptides) |
+| Slide 8 | A pie chart, as Calvete shows | PI1, PI2 | P0 |
+| Slide 9 | Export HTML fails: "Family assignment evidence is missing or out of date" | EX1, EX2 | Desk: `PanelAssignmentEvidenceStore.cs:88-91` |
+| Voice note 11-12 | Earlier versions grouped metallo better with default clicks; the grouping screen has too much to know where to start | GA5 (default clicks only), and Paulo's session | |
+| Comment 11-12 | "Word clustering" should come before quantification | PO1 | Desk: her slide 3 screen |
