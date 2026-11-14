@@ -35,16 +35,26 @@ public static class ReportStudyExports
         return text.ToString();
     }
 
-    public static string MeanShares(FamilyRunSharesResult result, IReadOnlyDictionary<int, string> labels) => Csv(
-        new[] { "family_user_id", "family", "available_runs", "mean_pct", "sample_sd_pct", "cv_pct", "mean_fraction", "sample_sd_fraction", "cv_ratio",
-            "mean_measured_pct", "sample_sd_measured_pct", "mean_tic_pct", "sample_sd_tic_pct", "mean_measured_fraction", "sample_sd_measured_fraction", "mean_tic_fraction", "sample_sd_tic_fraction" },
-        result.Families.OrderByDescending(f => f.MeanShare).ThenBy(f => f.FamilyUserId).Select(f => (IReadOnlyList<string>)new[]
+    public static string MeanShares(FamilyRunSharesResult result, IReadOnlyDictionary<int, string> labels, FamilyReportThresholdResult? grouping = null)
+    {
+        var bucket = grouping?.Contaminants;
+        var ids = bucket?.Families.Select(f => f.FamilyUserId).ToHashSet() ?? new();
+        var rows = result.Families.Where(f => !ids.Contains(f.FamilyUserId)).OrderByDescending(f => f.MeanShare).ThenBy(f => f.FamilyUserId).Select(f => (IReadOnlyList<string>)new[]
         {
             Integer(f.FamilyUserId), Label(f.FamilyUserId, labels), Integer(f.AvailableRunCount), Percent(f.MeanShare),
             Percent(f.StandardDeviation), Percent(f.CoefficientOfVariation), Optional(f.MeanShare), Optional(f.StandardDeviation), Optional(f.CoefficientOfVariation),
             Percent(f.MeanShareOfMeasuredSignal), Percent(f.StandardDeviationOfMeasuredSignal), Percent(f.MeanShareOfTic), Percent(f.StandardDeviationOfTic),
             Optional(f.MeanShareOfMeasuredSignal), Optional(f.StandardDeviationOfMeasuredSignal), Optional(f.MeanShareOfTic), Optional(f.StandardDeviationOfTic),
-        }));
+        }).ToList();
+        if (bucket?.Families.Count > 0)
+            rows.Add(new[] { "", "contaminants", Integer(bucket.AssignedStatistics.AvailableRunCount), Percent(bucket.AssignedStatistics.Mean),
+                Percent(bucket.AssignedStatistics.StandardDeviation), Percent(bucket.AssignedStatistics.CoefficientOfVariation), Optional(bucket.AssignedStatistics.Mean),
+                Optional(bucket.AssignedStatistics.StandardDeviation), Optional(bucket.AssignedStatistics.CoefficientOfVariation), Percent(bucket.MeasuredStatistics.Mean),
+                Percent(bucket.MeasuredStatistics.StandardDeviation), Percent(bucket.TicStatistics.Mean), Percent(bucket.TicStatistics.StandardDeviation),
+                Optional(bucket.MeasuredStatistics.Mean), Optional(bucket.MeasuredStatistics.StandardDeviation), Optional(bucket.TicStatistics.Mean), Optional(bucket.TicStatistics.StandardDeviation) });
+        return Csv(new[] { "family_user_id", "family", "available_runs", "mean_pct", "sample_sd_pct", "cv_pct", "mean_fraction", "sample_sd_fraction", "cv_ratio",
+            "mean_measured_pct", "sample_sd_measured_pct", "mean_tic_pct", "sample_sd_tic_pct", "mean_measured_fraction", "sample_sd_measured_fraction", "mean_tic_fraction", "sample_sd_tic_fraction" }, rows);
+    }
 
     public static string Headline(FamilyReportThresholdResult grouping, FamilyProteinCountsResult? counts, IReadOnlyDictionary<int, string> labels)
     {
@@ -68,6 +78,13 @@ public static class ReportStudyExports
                 Percent(grouping.OthersAssignedStatistics.Mean), Percent(grouping.OthersAssignedStatistics.StandardDeviation), Percent(grouping.OthersAssignedStatistics.CoefficientOfVariation),
                 Percent(grouping.OthersMeasuredStatistics.Mean), Percent(grouping.OthersMeasuredStatistics.StandardDeviation), "", "", "Member protein estimates are in the supplement",
                 Optional(grouping.OthersAssignedStatistics.Mean), Optional(grouping.OthersAssignedStatistics.StandardDeviation), Optional(grouping.OthersMeasuredStatistics.Mean), Optional(grouping.OthersMeasuredStatistics.StandardDeviation) });
+        var contaminants = grouping.Contaminants;
+        if (contaminants.Families.Count > 0)
+            rows.Add(new[] { "", "contaminants", "Contaminants", Integer(contaminants.AssignedStatistics.AvailableRunCount),
+                Percent(contaminants.AssignedStatistics.Mean), Percent(contaminants.AssignedStatistics.StandardDeviation), Percent(contaminants.AssignedStatistics.CoefficientOfVariation),
+                Percent(contaminants.MeasuredStatistics.Mean), Percent(contaminants.MeasuredStatistics.StandardDeviation), "", "", "Contains "
+                    + string.Join("; ", contaminants.Families.OrderBy(f => f.FamilyUserId).Select(f => "F" + Integer(f.FamilyUserId) + " " + Label(f.FamilyUserId, labels))) + ".",
+                Optional(contaminants.AssignedStatistics.Mean), Optional(contaminants.AssignedStatistics.StandardDeviation), Optional(contaminants.MeasuredStatistics.Mean), Optional(contaminants.MeasuredStatistics.StandardDeviation) });
         return Csv(new[] { "family_user_id", "family", "status", "available_runs", "mean_pct", "sample_sd_pct", "cv_pct", "mean_measured_pct", "sample_sd_measured_pct",
             "greedy_protein_estimate", "unique_peptide_proteins", "protein_explanation", "mean_fraction", "sample_sd_fraction", "mean_measured_fraction", "sample_sd_measured_fraction" }, rows);
     }
@@ -91,13 +108,21 @@ public static class ReportStudyExports
             Percent(c.Family.PooledShare), string.Join("; ", c.PanelFamilyKeys), c.HasOutsideMembers ? "Yes" : "No", c.Reason,
         }));
 
-    public static string RunShares(FamilyRunSharesResult result, IReadOnlyDictionary<int, string> labels) => Csv(
-        new[] { "family_user_id", "family", "run", "primary_signal", "assigned_signal_pct", "measured_peptide_signal_pct", "raw_tic_pct",
-            "assigned_signal_fraction", "measured_peptide_signal_fraction", "raw_tic_fraction" },
-        result.Families.OrderBy(f => f.FamilyUserId).SelectMany(f => f.Runs.OrderBy(r => r.Run, StringComparer.Ordinal)
+    public static string RunShares(FamilyRunSharesResult result, IReadOnlyDictionary<int, string> labels, FamilyReportThresholdResult? grouping = null)
+    {
+        var bucket = grouping?.Contaminants;
+        var ids = bucket?.Families.Select(f => f.FamilyUserId).ToHashSet() ?? new();
+        var rows = result.Families.Where(f => !ids.Contains(f.FamilyUserId)).OrderBy(f => f.FamilyUserId).SelectMany(f => f.Runs.OrderBy(r => r.Run, StringComparer.Ordinal)
             .Select(r => (IReadOnlyList<string>)new[] { Integer(f.FamilyUserId), Label(f.FamilyUserId, labels), r.Run, Number(r.Signal),
                 Percent(r.ShareOfAssignedSignal), Percent(r.ShareOfMeasuredSignal), Percent(r.ShareOfTic),
-                Optional(r.ShareOfAssignedSignal), Optional(r.ShareOfMeasuredSignal), Optional(r.ShareOfTic) })));
+                Optional(r.ShareOfAssignedSignal), Optional(r.ShareOfMeasuredSignal), Optional(r.ShareOfTic) })).ToList();
+        if (bucket?.Families.Count > 0)
+            rows.AddRange(bucket.Runs.Select(r => (IReadOnlyList<string>)new[] { "", "contaminants", r.Run, Number(r.Signal),
+                Percent(r.ShareOfAssignedSignal), Percent(r.ShareOfMeasuredSignal), Percent(r.ShareOfTic), Optional(r.ShareOfAssignedSignal),
+                Optional(r.ShareOfMeasuredSignal), Optional(r.ShareOfTic) }));
+        return Csv(new[] { "family_user_id", "family", "run", "primary_signal", "assigned_signal_pct", "measured_peptide_signal_pct", "raw_tic_pct",
+            "assigned_signal_fraction", "measured_peptide_signal_fraction", "raw_tic_fraction" }, rows);
+    }
 
     public static string RunTotals(FamilyRunSharesResult result) => Csv(
         new[] { "run", "assigned_family_signal", "measured_peptide_signal", "raw_tic" },
@@ -111,10 +136,21 @@ public static class ReportStudyExports
         new[] { (IReadOnlyList<string>)new[] { "Report family threshold", Number(grouping.Threshold),
             Number(100 * grouping.Threshold), Percent(grouping.Threshold) } });
 
-    public static string BasisComparison(FamilyRunSharesResult result, IReadOnlyDictionary<int, string> labels) => Csv(
-        new[] { "family_user_id", "family", "pooled_pct", "run_mean_pct", "pooled_minus_mean_percentage_points", "pooled_fraction", "run_mean_fraction", "pooled_minus_mean_fraction" },
-        result.Families.OrderBy(f => f.FamilyUserId).Select(f => (IReadOnlyList<string>)new[] { Integer(f.FamilyUserId), Label(f.FamilyUserId, labels),
-            Percent(f.PooledShare), Percent(f.MeanShare), Percent(f.PooledMinusMeanShare), Optional(f.PooledShare), Optional(f.MeanShare), Optional(f.PooledMinusMeanShare) }));
+    public static string BasisComparison(FamilyRunSharesResult result, IReadOnlyDictionary<int, string> labels, FamilyReportThresholdResult? grouping = null)
+    {
+        var bucket = grouping?.Contaminants;
+        var ids = bucket?.Families.Select(f => f.FamilyUserId).ToHashSet() ?? new();
+        var rows = result.Families.Where(f => !ids.Contains(f.FamilyUserId)).OrderBy(f => f.FamilyUserId).Select(f => (IReadOnlyList<string>)new[]
+            { Integer(f.FamilyUserId), Label(f.FamilyUserId, labels), Percent(f.PooledShare), Percent(f.MeanShare), Percent(f.PooledMinusMeanShare),
+                Optional(f.PooledShare), Optional(f.MeanShare), Optional(f.PooledMinusMeanShare) }).ToList();
+        if (bucket?.Families.Count > 0)
+        {
+            double? pooled = bucket.Families.All(f => f.PooledShare.HasValue) ? bucket.Families.Sum(f => f.PooledShare!.Value) : null;
+            double? mean = bucket.AssignedStatistics.Mean;
+            rows.Add(new[] { "", "contaminants", Percent(pooled), Percent(mean), Percent(pooled - mean), Optional(pooled), Optional(mean), Optional(pooled - mean) });
+        }
+        return Csv(new[] { "family_user_id", "family", "pooled_pct", "run_mean_pct", "pooled_minus_mean_percentage_points", "pooled_fraction", "run_mean_fraction", "pooled_minus_mean_fraction" }, rows);
+    }
 
     public static string ProteinCounts(FamilyProteinCountsResult result, IReadOnlyDictionary<int, string> labels) => Csv(
         new[] { "family_user_id", "family", "greedy_protein_estimate", "unique_peptide_proteins", "observed_peptides", "explained_peptides", "unexplained_peptides", "explanation", "selected_protein_identifiers", "unexplained_sequences" },

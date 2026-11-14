@@ -24,7 +24,7 @@ public static class FigureLayout
     {
         if (!forceLimit && data.Families.Sum(height) <= MaximumUncappedHeight - 190) return data.Families;
         var selected = new List<FamilyCompositionValue>(); double used = 190;
-        foreach (var row in data.Families.OrderByDescending(r => r.MeanPercent).ThenBy(r => r.Key, StringComparer.Ordinal))
+        foreach (var row in data.Families.OrderBy(r => r.Key == "contaminants").ThenByDescending(r => r.MeanPercent).ThenBy(r => r.Key, StringComparer.Ordinal))
         {
             double next = height(row);
             if (selected.Count > 0 && used + next > MaximumHeight) break;

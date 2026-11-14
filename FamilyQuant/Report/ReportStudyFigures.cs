@@ -77,6 +77,7 @@ public static partial class ReportStudyFigures
         if (composition.FamilyRunShares != null)
         {
             var stored = StoredCompositionChartData.FromRunShares(composition.FamilyRunShares, composition.FamilyProteinCounts, labels);
+            stored = StoredCompositionChartData.WithContaminants(stored, threshold!.Contaminants);
             means = CanonicalRows(stored, threshold!, composition.FamilyProteinCounts);
             if (means.Families.Count > 0)
             {

@@ -34,7 +34,8 @@ public sealed class FamilyPieChart : CompositionDrawingBase
         var slice = Data.Slices[index];
         string Percent(double value) => value.ToString("G17", CultureInfo.CurrentCulture) + "%";
         return slice.Label + ": " + Percent(slice.Percent) + " of all measured peptide-feature signal. Identified "
-            + Percent(slice.IdentifiedPercent) + ", de novo " + Percent(slice.DeNovoPercent) + "; all runs pooled.";
+            + Percent(slice.IdentifiedPercent) + ", de novo " + Percent(slice.DeNovoPercent) + "; all runs pooled."
+            + (slice.Description.Length > 0 ? " " + slice.Description : "");
     }
 
     protected override void OnRender(DrawingContext dc)

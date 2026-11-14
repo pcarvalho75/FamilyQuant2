@@ -69,6 +69,12 @@ public static partial class ReportStudyFigures
                 rows.Add(new(OthersKey, "Others", members.Sum(f => f.MeanPercent), null, 0, parts, null, null));
             }
         }
+        if (threshold.Contaminants.Families.Count > 0)
+        {
+            var contaminants = data.Families.SingleOrDefault(row => row.Key == "contaminants")
+                ?? StoredCompositionChartData.WithContaminants(data, threshold.Contaminants).Families.SingleOrDefault(row => row.Key == "contaminants");
+            if (contaminants != null) rows.Add(contaminants);
+        }
         return new(rows.OrderByDescending(r => r.MeanPercent).ThenBy(r => r.Key, StringComparer.Ordinal), basis,
             data.IsMeanOfRuns, unavailable);
     }

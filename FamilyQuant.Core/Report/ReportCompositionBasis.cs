@@ -24,6 +24,7 @@ public sealed record ReportCompositionBasis(bool UsesPanel, bool IsIdentity, Qua
         {
             Threshold = Grouping.Threshold, OtherFamilies = Expand(Grouping.OtherFamilies).ToList(),
             ExcludedFamilies = Expand(Grouping.ExcludedFamilies).ToList(),
+            Contaminants = new() { Families = Expand(Grouping.Contaminants.Families).ToList() },
             ConflictFamilies = Grouping.ConflictFamilies.SelectMany(c => SourceUserIds[c.Family.FamilyUserId].Select(id => new FamilyReportMappingConflict
                 { Family = new() { FamilyUserId = id }, PanelFamilyKeys = c.PanelFamilyKeys, HasOutsideMembers = c.HasOutsideMembers, Reason = c.Reason })).ToList(),
         };
@@ -80,10 +81,10 @@ public sealed record ReportCompositionBasis(bool UsesPanel, bool IsIdentity, Qua
                 PanelRowKey = r.PanelRowKey, EffectivePanelKey = r.EffectivePanelKey, Decision = r.Decision, MergeTargetFamilyKey = r.MergeTargetFamilyKey,
                 FamilyUserIds = effective.Families.Where(f => f.SourceUserIds.Any(r.FamilyUserIds.Contains)).Select(f => f.StudyFamilyId).Order().ToArray(),
             }).ToArray() };
+        var sourceUsers = effective.Families.ToDictionary(f => f.StudyFamilyId, f => (IReadOnlyList<int>)f.SourceUserIds);
         return new(true, false, studies, collapsedMap, effective.Families.ToDictionary(f => f.StudyFamilyId, f => f.PanelFamilyKey is string key
                 ? ReportFamilyNames.DisplayName(project.FamilyPanel, project.FamilyPanel.Families.Single(family => family.Key == key), project.ReportFamilyNames) : f.DisplayName),
-            FamilyReportThreshold.Build(effective.RunShares, project, collapsedMap),
-            effective.Families.ToDictionary(f => f.StudyFamilyId, f => (IReadOnlyList<int>)f.SourceUserIds));
+            FamilyReportThreshold.Build(effective.RunShares, project, collapsedMap, sourceUsers), sourceUsers);
     }
 
     public ReportResultPacket Apply(ReportResultPacket original)
@@ -92,8 +93,8 @@ public sealed record ReportCompositionBasis(bool UsesPanel, bool IsIdentity, Qua
         var exports = new Dictionary<string, string>(original.CsvExports, StringComparer.Ordinal);
         string csv = ReportStudyExports.Headline(Grouping, Studies.FamilyProteinCounts, Labels);
         exports.Add("panel_family_composition_headline.csv", csv);
-        exports.Add("panel_family_run_means.csv", ReportStudyExports.MeanShares(Studies.FamilyRunShares, Labels));
-        exports.Add("panel_family_run_shares.csv", ReportStudyExports.RunShares(Studies.FamilyRunShares, Labels));
+        exports.Add("panel_family_run_means.csv", ReportStudyExports.MeanShares(Studies.FamilyRunShares, Labels, Grouping));
+        exports.Add("panel_family_run_shares.csv", ReportStudyExports.RunShares(Studies.FamilyRunShares, Labels, Grouping));
         exports.Add("panel_family_run_totals.csv", ReportStudyExports.RunTotals(Studies.FamilyRunShares));
         exports.Add("panel_family_others_members.csv", ReportStudyExports.Others(Grouping, Labels));
         var headline = ReportCsvTable.Build("panel-family-run-means", "Headline panel-family composition: mean of per-run shares", csv,

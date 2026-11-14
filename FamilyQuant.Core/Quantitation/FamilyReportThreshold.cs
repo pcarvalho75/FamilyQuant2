@@ -30,7 +30,8 @@ namespace FamilyQuant
             {
                 if (project.PanelProteinAssignments != null)
                     throw new InvalidOperationException("The panel for stored family assignments is missing. Rebuild them before reporting.");
-                return Build(source, project.ReportThreshold ?? DefaultThreshold);
+                return BuildCore(source, project.ReportThreshold ?? DefaultThreshold, null, new Dictionary<int, IReadOnlyList<string>>(),
+                    new Dictionary<int, bool>(), FamilyContaminants.OnlyIds(project));
             }
             return Build(source, project, PanelAssignmentEvidenceStore.GetCurrentFamilyMap(project));
         }
@@ -38,7 +39,7 @@ namespace FamilyQuant
         /// <summary>For the verified map supplied by the assignment producer. Currentness and
         /// conflicting family membership are distinct; every conflict remains its own report row.</summary>
         public static FamilyReportThresholdResult Build(FamilyRunSharesResult source, FamilyClusterFile project,
-            PanelFamilyMap familyMap)
+            PanelFamilyMap familyMap, IReadOnlyDictionary<int, IReadOnlyList<int>>? sourceUserIds = null)
         {
             ArgumentNullException.ThrowIfNull(project);
             ArgumentNullException.ThrowIfNull(familyMap);
@@ -51,7 +52,8 @@ namespace FamilyQuant
             var conflicts = familyMap.UserFamilies.Where(pair => pair.Value.HasConflict
                     || (pair.Value.HasOutsideMembers && keys[pair.Key].Count > 0))
                 .ToDictionary(pair => pair.Key, pair => pair.Value.HasOutsideMembers);
-            return BuildCore(source, project.ReportThreshold ?? DefaultThreshold, project.FamilyPanel, keys, conflicts);
+            return BuildCore(source, project.ReportThreshold ?? DefaultThreshold, project.FamilyPanel, keys, conflicts,
+                FamilyContaminants.OnlyIds(project, sourceUserIds));
         }
 
         /// <summary>For an authoritative key mapping supplied by the assignment producer. Multiple
@@ -61,10 +63,12 @@ namespace FamilyQuant
         {
             ArgumentNullException.ThrowIfNull(project);
             ArgumentNullException.ThrowIfNull(familyPanelKeys);
-            return BuildCore(source, project.ReportThreshold ?? DefaultThreshold, project.FamilyPanel, familyPanelKeys, new Dictionary<int, bool>());
+            return BuildCore(source, project.ReportThreshold ?? DefaultThreshold, project.FamilyPanel, familyPanelKeys, new Dictionary<int, bool>(),
+                FamilyContaminants.OnlyIds(project));
         }
         private static FamilyReportThresholdResult BuildCore(FamilyRunSharesResult source, double threshold, FamilyPanel? panel,
-            IReadOnlyDictionary<int, IReadOnlyList<string>> familyPanelKeys, IReadOnlyDictionary<int, bool> mappingConflicts)
+            IReadOnlyDictionary<int, IReadOnlyList<string>> familyPanelKeys, IReadOnlyDictionary<int, bool> mappingConflicts,
+            IReadOnlySet<int>? contaminants = null)
         {
             ArgumentNullException.ThrowIfNull(source);
             if (!double.IsFinite(threshold) || threshold < 0 || threshold > 1)
@@ -80,6 +84,11 @@ namespace FamilyQuant
                 if (keys.Length > 0 && panel == null) throw new ArgumentException("Panel keys require a panel.", nameof(familyPanelKeys));
                 foreach (string key in keys)
                     if (panel!.Families.All(x => x.Key != key)) throw new ArgumentException("A family mapping refers to a missing panel key.", nameof(familyPanelKeys));
+                if (contaminants?.Contains(family.FamilyUserId) == true)
+                {
+                    result.Contaminants.Families.Add(family);
+                    continue;
+                }
                 bool mappedConflict = mappingConflicts.TryGetValue(family.FamilyUserId, out bool outside);
                 if (mappedConflict || keys.Length > 1)
                 {
@@ -112,25 +121,39 @@ namespace FamilyQuant
                 else result.ListedFamilies.Add(family);
             }
 
+            var others = Aggregate(source, result.OtherFamilies);
+            result.OthersRuns = others.Runs;
+            result.OthersAssignedStatistics = others.AssignedStatistics;
+            result.OthersMeasuredStatistics = others.MeasuredStatistics;
+            result.OthersMeanShare = result.OthersAssignedStatistics.Mean;
+            result.Contaminants = Aggregate(source, result.Contaminants.Families);
+            return result;
+        }
+
+        private static FamilyReportAggregate Aggregate(FamilyRunSharesResult source, List<FamilyRunShareSummary> families)
+        {
+            var result = new FamilyReportAggregate { Families = families };
             foreach (var run in source.Runs)
             {
-                var rows = result.OtherFamilies.Select(f => f.Runs.SingleOrDefault(r =>
+                var rows = families.Select(f => f.Runs.SingleOrDefault(r =>
                     string.Equals(r.Run, run.Run, StringComparison.OrdinalIgnoreCase))).ToList();
                 if (rows.Any(r => r == null))
                     throw new ArgumentException("Each family must have a row for every run.", nameof(source));
                 bool complete = run.AssignedSignal > 0 && rows.All(r => r!.ShareOfAssignedSignal != null);
-                result.OthersRuns.Add(new FamilyRunShare
+                result.Runs.Add(new FamilyRunShare
                 {
                     Run = run.Run,
                     Signal = rows.Sum(r => r!.Signal),
+                    IdentifiedSignal = rows.All(r => r!.IdentifiedSignal.HasValue) ? rows.Sum(r => r!.IdentifiedSignal!.Value) : null,
                     ShareOfAssignedSignal = complete ? rows.Sum(r => r!.ShareOfAssignedSignal!.Value) : null,
                     ShareOfMeasuredSignal = run.MeasuredSignal > 0 && rows.All(r => r!.ShareOfMeasuredSignal != null)
-                        ? rows.Sum(r => r!.ShareOfMeasuredSignal!.Value) : null
+                        ? rows.Sum(r => r!.ShareOfMeasuredSignal!.Value) : null,
+                    ShareOfTic = run.TotalIonCurrent > 0 && rows.All(r => r!.ShareOfTic.HasValue) ? rows.Sum(r => r!.ShareOfTic!.Value) : null
                 });
             }
-            result.OthersAssignedStatistics = Summarize(result.OthersRuns.Select(x => x.ShareOfAssignedSignal).ToArray(), requireAll: false);
-            result.OthersMeasuredStatistics = Summarize(result.OthersRuns.Select(x => x.ShareOfMeasuredSignal).ToArray(), requireAll: true);
-            result.OthersMeanShare = result.OthersAssignedStatistics.Mean;
+            result.AssignedStatistics = Summarize(result.Runs.Select(x => x.ShareOfAssignedSignal).ToArray(), requireAll: false);
+            result.MeasuredStatistics = Summarize(result.Runs.Select(x => x.ShareOfMeasuredSignal).ToArray(), requireAll: true);
+            result.TicStatistics = Summarize(result.Runs.Select(x => x.ShareOfTic).ToArray(), requireAll: true);
             return result;
         }
 

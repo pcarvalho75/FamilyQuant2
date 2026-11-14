@@ -14,6 +14,9 @@ public static partial class HtmlReportPayloadBuilder
             throw new ArgumentException("A family-ring source is required.");
         string[] property = source.Property.Split('/');
         if (property.Length != 2 || property[1] is not ("total" or "outside")) throw new InvalidDataException("Unknown ring statistic.");
+        if (property[0] is not ("IdentifiedOnly" or "IdentifiedAndDeNovo" or "DetectorEnvelopes" or "Tic"))
+            throw new InvalidDataException("Unknown ring base.");
+        if (source.Family.Length == 0) return property[1] == "total" ? 0 : 1;
         string[] families = source.Family.Split(';');
         if (families.Length == 0 || families.Any(string.IsNullOrEmpty) || families.Distinct(StringComparer.Ordinal).Count() != families.Length)
             throw new InvalidDataException("Ring families must be distinct and recorded.");
@@ -31,6 +34,9 @@ public static partial class HtmlReportPayloadBuilder
     {
         private IReadOnlyDictionary<string, HtmlRingBasis> RingBases(IReadOnlyList<HtmlReportFamily> families)
         {
+            var shown = families.Where(family => !family.IsContaminants).ToArray();
+            bool noShownFamilies = shown.Length == 0 && families.Any(family => family.IsContaminants);
+            families = noShownFamilies ? families : shown;
             var result = new Dictionary<string, HtmlRingBasis>(StringComparer.Ordinal);
             if (context.StoredStudies == null || families.Count == 0) return result;
             var labels = new[] { (Key: "identifiedOnly", Source: "IdentifiedOnly"), (Key: "identifiedAndDeNovo", Source: "IdentifiedAndDeNovo"),
@@ -49,7 +55,7 @@ public static partial class HtmlReportPayloadBuilder
                 }
                 var references = statistics.Select(statistic => fields[statistic.Mean!].Source).ToArray();
                 if (references.Any(reference => reference.Kind != "family-basis" || reference.Family == null)) continue;
-                var source = new HtmlReportReference { Kind = "family-ring", Family = string.Join(";", references.Select(reference => reference.Family)),
+                var source = new HtmlReportReference { Kind = "family-ring", Family = noShownFamilies ? "" : string.Join(";", references.Select(reference => reference.Family)),
                     Property = basis.Source + "/total", Study = references[0].Study, Scale = 100, Format = "G6" };
                 double? total = ReadRingShare(source, context.StoredStudies) * 100;
                 if (!total.HasValue) continue;
