@@ -176,7 +176,7 @@ internal static partial class Program
               &&[...d.querySelectorAll('.u3a-card.gap .u3a-run')].map(row=>row.dataset.nativeRun).join('|')===gapChart.rows.map(row=>row.name).join('|')
               : !d.querySelector('.u3a-card.gap');
             checks.gapPercent=d.getElementById('gap-panel').textContent.includes('25')&&!d.getElementById('gap-panel').textContent.includes('0.25')
-              &&d.getElementById('gap-panel').textContent.includes('measured peptide feature signal');
+              &&d.getElementById('gap-panel').textContent.includes('PSM and de novo');
             d.getElementById('tab-recovery').click();
             const first=d.querySelector('#panel-recovery .u3a-value'); first.focus();
             checks.focus=d.activeElement===first&&!d.getElementById('chart-hover').hidden;

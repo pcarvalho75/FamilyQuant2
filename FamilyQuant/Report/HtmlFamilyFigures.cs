@@ -117,7 +117,7 @@ public sealed class HtmlFamilyFigurePacket
             var rows = pie.Slices.Select(slice => new Row(slice.Key, plot.Text(slice.Label), plot.Number(slice.Percent, "%"), null, null, null,
                 "All runs pooled", new[] { new Part(plot.Text("Identified"), plot.Number(slice.IdentifiedPercent, "%")!, false),
                     new Part(plot.Text("De novo"), plot.Number(slice.DeNovoPercent, "%")!, false) })).ToArray();
-            plot.Views["fixed"] = ViewOf(rows, FamilyPieData.Basis, FamilyPieData.Legend, "Share of all measured peptide-feature signal (%)", "Source parts on the same base", true);
+            plot.Views["fixed"] = ViewOf(rows, FamilyPieData.Basis, FamilyPieData.Legend, "Share of PSM and de novo (%)", "Source parts on the same base", true);
             plots.Add(plot);
         }
         return new(plots, pie.Unavailable);
@@ -181,7 +181,7 @@ public sealed class HtmlFamilyFigurePacket
                         new Part(plot.Text("Shared exact sequence"), plot.Number(row.SharedPeaksDeepNovoDistinctSequences, "sequences")!, false),
                         new Part(plot.Text("DeepNovo only"), plot.Number(row.DeepNovoExclusiveDistinctSequences, "sequences")!, false),
                     })).ToArray();
-                plot.Views["fixed"] = ViewOf(rows, "Distinct normalized sequences, all runs pooled", "All runs pooled. Bars count distinct normalized de novo sequences, split into the two caller-only sets and their exact shared set. Database-search sequence counts are separate context. These are sequence counts, not peptide feature signal shares. Changing Normalize to does not change them.", "Distinct de novo sequences", "", false);
+                plot.Views["fixed"] = ViewOf(rows, "Distinct normalized sequences, all runs pooled", "All runs pooled. Bars count distinct normalized de novo sequences, split into the two caller-only sets and their exact shared set. Database-search sequence counts are separate context. These are sequence counts, not signal shares. Changing Normalize to does not change them.", "Distinct de novo sequences", "", false);
             }
         }
 
@@ -218,7 +218,7 @@ public sealed class HtmlFamilyFigurePacket
     }
 
     private static string SourceBasis(string key) => key switch { "identifiedOnly" => "IdentifiedOnly", "identifiedAndDeNovo" => "IdentifiedAndDeNovo", "detectorEnvelopes" => "DetectorEnvelopes", _ => "Tic" };
-    private static string BaseName(string key) => key switch { "identifiedOnly" => "all identified peptide feature signal", "identifiedAndDeNovo" => "all peptide feature signal, identified and de novo, each feature counted once", "detectorEnvelopes" => "the detector's all-charge isotope-envelope area", _ => "the recorded total ion current (TIC)" };
+    private static string BaseName(string key) => key switch { "identifiedOnly" => "PSM only", "identifiedAndDeNovo" => "PSM and de novo", "detectorEnvelopes" => "Isotope envelopes (measured)", _ => "TIC" };
     private static View ViewOf(IReadOnlyList<Row> rows, string basis, string legend, string xLabel, string yLabel, bool percent, bool scatter = false, bool integerY = false)
     {
         double minimum = Math.Min(0, Math.Floor(rows.Select(row => row.Lower?.Value ?? 0).DefaultIfEmpty(0).Min() / 10) * 10);

@@ -346,7 +346,7 @@ namespace FamilyQuant
             get
             {
                 string basis = PercentApplies
-                    ? "Family contribution: % of all peptide features"
+                    ? "Family contribution: % of PSM and de novo"
                     : "Family contribution: identified + de novo";
                 basis += sharedPolicy == SharedPeptidePolicy.SplitEqually ? " - split equally" : " - family-unique";
 
@@ -547,7 +547,7 @@ namespace FamilyQuant
             }
 
             string basis = measuredTotal > 0
-                ? "all peptide features, each peptide counted once: " +
+                ? "PSM and de novo, each peptide feature counted once: " +
                   measuredTotal.ToString("E2", CultureInfo.CurrentCulture)
                 : "no primary total was supplied with this table, so the values are raw areas and no " +
                   "share can be taken from them";

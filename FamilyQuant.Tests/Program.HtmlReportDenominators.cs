@@ -39,7 +39,7 @@ internal static partial class Program
             const checks = {}, p = JSON.parse(d.getElementById('fq-data').textContent);
             const fields = p.fields, families = p.composition.families;
             const bases = ['identifiedOnly', 'identifiedAndDeNovo', 'detectorEnvelopes', 'tic'];
-            const labels = ['PSM only', 'PSM and de novo', 'Detector envelopes', 'TIC'];
+            const labels = ['PSM only', 'PSM and de novo', 'Isotope envelopes (measured)', 'TIC'];
             const controls = [...d.querySelectorAll('input[name="normalization-basis"]')];
             const legacy = name === 'legacy-payload';
             const rows = () => [...d.querySelectorAll('#family-ranking .rank-row')];

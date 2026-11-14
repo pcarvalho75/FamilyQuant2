@@ -101,7 +101,7 @@ internal static partial class Program
             probe.remove();d.getElementById('tab-gap').click();
             const gap=p.signalCharts.find(chart=>chart.kind==='gap'),card=d.querySelector('.u3a-card.gap');
             checks.familyDenominator=card.textContent.includes("that family's displayed total")&&card.textContent.includes('50.0% of family total')
-              &&d.getElementById('gap-panel').textContent.includes('all measured peptide feature signal');
+              &&d.getElementById('gap-panel').textContent.includes('PSM and de novo');
             checks.areaFormatting=card.textContent.includes('1.2E+09 area;')&&card.textContent.includes('family share not available');
             const value=card.querySelector('.u3a-value[data-native-key="identified"]');value.focus();
             checks.familyHover=d.getElementById('chart-hover').textContent.includes(gap.rows[0].parts[0].familyShare.exact)

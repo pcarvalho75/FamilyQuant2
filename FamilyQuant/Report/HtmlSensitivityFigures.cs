@@ -148,7 +148,7 @@ public sealed class HtmlSensitivityFigurePacket
                     plot.Number(row.CombinedAssignedFractionOfTic * 100, "%"))).ToArray();
                 plot.Panels.Add(Bars("Assigned signal", "Share of the same pooled TIC, using one common observed search baseline", "Share of pooled TIC (%)", signalRows,
                     Math.Max(.01, effects.Rows.Max(row => row.CombinedAssignedFractionOfTic) * 1.12) * 100, true));
-                plot.Legend = "The first panel counts carried-forward distinct sequences; these counts are sequence diversity, not peptide feature signal. The second shows the same observed search baseline plus each condition's measured de novo envelope, divided by the same pooled TIC. All runs are pooled, without run means or whiskers. Both callers uses PEAKS de novo-only plus DeepNovo; the PEAKS-all union remains a separate variant. Changing Normalize to does not change either fixed base.";
+                plot.Legend = "The first panel counts carried-forward distinct sequences; these counts are sequence diversity, not signal. The second shows the same observed search baseline plus each condition's measured de novo envelope, divided by the same pooled TIC. All runs are pooled, without run means or whiskers. Both callers uses PEAKS de novo-only plus DeepNovo; the PEAKS-all union remains a separate variant. Changing Normalize to does not change either fixed base.";
             }
 
             Row LineRow(int identity, params Part[] parts) => new(plot.Text(identity.ToString(CultureInfo.InvariantCulture) + "% identity"), plot.Number(identity, "% identity"), parts);

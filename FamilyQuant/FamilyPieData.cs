@@ -10,9 +10,9 @@ public sealed record FamilyPieSlice(string Key, FamilyContributionBarKind Kind, 
 /// <summary>The Results bar buckets on their recorded pooled denominator, also used by the HTML pie.</summary>
 public sealed record FamilyPieData(IReadOnlyList<FamilyPieSlice> Slices, string? Unavailable)
 {
-    public const string Basis = "All measured peptide-feature signal, identified and de novo, counted once; all runs pooled";
+    public const string Basis = "PSM and de novo, each feature counted once; all runs pooled";
     public const string Caption = "Slices show pooled signal for the displayed families, other families, shared between families and unattributed signal. "
-        + "Each percentage uses all measured peptide-feature signal, identified and de novo, counted once, so the slices sum to 100%. "
+        + "Each percentage uses PSM and de novo, each feature counted once, so the slices sum to 100%. "
         + "All runs are pooled, with no run-to-run whiskers.";
     public const string Legend = Caption + " This pie keeps that fixed base when Normalize to changes.";
 

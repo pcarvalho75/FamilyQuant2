@@ -141,7 +141,7 @@ internal static partial class Program
         string caption = CompositionChartCaptions.Build(new AnalyticsFigure(AnalyticsFigures.PercentIonCurrentFile,
             new PercentIonCurrentChart(data.Peptides, recovery: recovery), 300), data);
         Check("U6 results and report caption describes detector recovery, not TIC-share bars",
-            caption.Contains("detector's isotope-envelope area", StringComparison.Ordinal)
+            caption.Contains("Isotope envelopes (measured)", StringComparison.Ordinal)
             && caption.Contains("not a share of TIC", StringComparison.Ordinal)
             && !caption.Contains("outlined bars", StringComparison.Ordinal)
             && !caption.Contains("Represented share of recorded total ion current", StringComparison.Ordinal));

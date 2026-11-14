@@ -51,7 +51,7 @@ internal static partial class Program
         var pieChoice = choices.Single(choice => choice.Tag as string == "pie");
         Check("PI2 existing cutoffs and default remain available", choices.Where(choice => choice != pieChoice).Select(choice => choice.Tag as string)
             .SequenceEqual(new[] { "10", "15", "20", "30", "0" }) && !model.FamilyPie && model.FamilyTopN == 15);
-        Check("PI2 Pie explains its fixed base", pieChoice.ToolTip.ToString()!.Contains("all-peptide-feature base", StringComparison.Ordinal));
+        Check("PI2 Pie explains its fixed base", pieChoice.ToolTip.ToString()!.Contains("PSM and de novo base", StringComparison.Ordinal));
         var bar = WalkTree(control).OfType<FamilyContributionChart>().Single();
         var before = bar.Bars.Select(bucket => (bucket.Kind, bucket.FamilyUserId, bucket.Identified, bucket.DeNovo)).ToArray();
         selector.SelectedItem = pieChoice;
@@ -63,7 +63,7 @@ internal static partial class Program
             pair.First.Kind == pair.Second.Kind && pair.First.Percent == 100 * (pair.Second.Identified + pair.Second.DeNovo) / FamilyContributionPlot.MeasuredTotal(model.Families)));
         Check("PI2 actual source data includes all residual kinds", pie.Data.Slices.Any(slice => slice.Kind == FamilyContributionBarKind.OtherFamilies)
             && pie.Data.Slices.Any(slice => slice.Kind == FamilyContributionBarKind.Shared) && pie.Data.Slices.Any(slice => slice.Kind == FamilyContributionBarKind.Unattributed));
-        Check("PI2 native exact details name the base and both source parts", pie.SliceDetails(0).Contains("all measured peptide-feature signal", StringComparison.Ordinal)
+        Check("PI2 native exact details name the base and both source parts", pie.SliceDetails(0).Contains("PSM and de novo", StringComparison.Ordinal)
             && pie.SliceDetails(0).Contains("Identified", StringComparison.Ordinal) && pie.SliceDetails(0).Contains("de novo", StringComparison.Ordinal));
         var previousTheme = Themes.ThemeManager.Current;
         try

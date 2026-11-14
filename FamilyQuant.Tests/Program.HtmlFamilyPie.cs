@@ -119,7 +119,7 @@ internal static partial class Program
               return buttonText.startsWith(number+'. ')&&(holds?mark&&mark.textContent===number:!mark);
             });
             checks.values=[...pieView.querySelectorAll('[data-pie-key]')].every(mark=>rows.some(row=>row.key===mark.dataset.pieKey&&row.x.exact===mark.dataset.pieValue));
-            checks.legend=pieView.querySelector('.chart-legend').textContent.includes('all measured peptide-feature signal')&&pieView.textContent.includes('fixed base when Normalize to changes');
+            checks.legend=pieView.querySelector('.chart-legend').textContent.includes('PSM and de novo')&&pieView.textContent.includes('fixed base when Normalize to changes');
             checks.exactTable=pieView.querySelectorAll('details tbody tr').length===rows.length;
             const mark=pieView.querySelector('[data-pie-key]');mark.focus();
             mark.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
@@ -130,7 +130,7 @@ internal static partial class Program
             for(const choice of d.querySelectorAll('input[name="normalization-basis"]')) {
               if(choice.disabled) continue;
               choice.click();
-              checks[choice.value+'Fixed']=!pieView.hidden&&snapshot()===original&&pieView.textContent.includes('all measured peptide-feature signal');
+              checks[choice.value+'Fixed']=!pieView.hidden&&snapshot()===original&&pieView.textContent.includes('PSM and de novo');
             }
             d.getElementById('contribution-bars').click();
             checks.barReturn=!barView.hidden&&pieView.hidden;

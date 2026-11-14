@@ -3270,11 +3270,11 @@
               <p>The first, monoisotopic peak of the identified and de novo peptide features, divided by the run's TIC. Heavier isotope peaks of those same features are left out of this reading.</p>
             </div>
             <div class="u5-definition" data-reading="measured">
-              <h4>Measured envelope of the peptide features</h4>
+              <h4>Isotope envelopes (measured and identified)</h4>
               <p>The measured isotope peaks of those same features, including M+0, divided by the run's TIC. The bar label gives the recorded isotope limit; an isotope without accepted measured signal receives no credit.</p>
             </div>
             <div class="u5-definition" data-reading="detector">
-              <h4>Detector isotope envelopes</h4>
+              <h4>Isotope envelopes (measured)</h4>
               <p>Isotope patterns found directly in the MS1 scans, with or without an accepted peptide sequence, divided by the run's TIC. This is an independent measurement with its own acceptance rules; it is not calibrated to a peptide false discovery rate (FDR).</p>
             </div>
             <div class="u5-definition" data-reading="tic">
@@ -3296,15 +3296,15 @@
         <section class="u5-guide" id="u5-gaps">
           <h3>How to read the gaps</h3>
           <div class="u5-gap" data-gap="isotopes">
-            <h4>From M+0 to the measured envelope</h4>
+            <h4>M+0 only against Isotope envelopes (measured and identified)</h4>
             <p>The increase comes from including the measured heavier isotope peaks of the same peptide features. It does not represent additional peptide identifications or newly found proteins.</p>
           </div>
           <div class="u5-gap" data-gap="detector">
-            <h4>Between peptide features and the detector</h4>
+            <h4>PSM and de novo against Isotope envelopes (measured)</h4>
             <p>The detector can find isotope patterns that did not become accepted identified or de novo peptide features. The two methods make independent selections, so subtracting their totals does not measure a validated pool of unidentified peptides.</p>
           </div>
           <div class="u5-gap" data-gap="tic">
-            <h4>Between the detector and TIC</h4>
+            <h4>Isotope envelopes (measured) against TIC</h4>
             <p>This is signal outside the detector's accepted isotope patterns. The chart alone cannot classify the whole gap as noise, non-peptide material or biological signal, and the readings are not a biological partition of TIC.</p>
           </div>
           <p>The readings need not form perfectly nested sets. If their order is unexpected, inspect the stored run and method; the chart preserves the recorded values. A missing TIC or detector result stays unavailable, rather than becoming a zero measurement.</p>
@@ -3539,8 +3539,8 @@
             ...(data.familyFigures?.figures || []).concat(data.familyFigures?.pie?.figure || []).flatMap(figure => Object.values(figure.views || {}).flatMap(view => (view.rows || []).map(row => row.name))),
           ]);
           const percentageBases = new Map();
-          const basisNames = { identifiedOnly: "identified peptide-feature signal", identifiedAndDeNovo: "peptide-feature signal",
-            detectorEnvelopes: "detector envelopes", tic: "TIC" };
+          const basisNames = { identifiedOnly: "PSM only", identifiedAndDeNovo: "PSM and de novo",
+            detectorEnvelopes: "Isotope envelopes (measured)", tic: "TIC" };
           function percentBase(id) {
             if (!exists(id) || fields[id].unit !== "%") return null;
             if (percentageBases.has(id)) return percentageBases.get(id);
@@ -3562,14 +3562,14 @@
           }
           for (const family of data.composition?.families || []) {
             rememberBase(family.mean, "credited family signal");
-            rememberBase(family.wholeMeasured, "peptide-feature signal");
+            rememberBase(family.wholeMeasured, "PSM and de novo");
             rememberBase(family.cv, "mean credited-family share (CV)");
-            for (const run of family.runs || []) { rememberBase(run.share, "credited family signal"); rememberBase(run.measured, "peptide-feature signal"); }
+            for (const run of family.runs || []) { rememberBase(run.share, "credited family signal"); rememberBase(run.measured, "PSM and de novo"); }
             for (const part of family.parts || []) rememberBase(part.share, "this family's pooled credited signal");
           }
           for (const highlight of data.highlights || []) rememberBase(highlight.value, "credited family signal");
-          for (const run of data.creditedRuns || []) rememberBase(run.share, "measured peptide-feature signal");
-          for (const row of data.databaseGap || []) rememberBase(row.percent, "measured peptide-feature signal");
+          for (const run of data.creditedRuns || []) rememberBase(run.share, "PSM and de novo");
+          for (const row of data.databaseGap || []) rememberBase(row.percent, "PSM and de novo");
           for (const figure of (data.familyFigures?.figures || []).concat(data.familyFigures?.pie?.figure || []))
             for (const view of Object.values(figure.views || {}))
               for (const row of view.rows || []) {
@@ -3581,9 +3581,9 @@
             for (const [name, description] of [
               ["TIC", "Total ion current (TIC) is the MS1 ion current recorded for a run. It includes current with and without assigned peptide features."],
               ["Peptide feature", "One peptide at one charge in one elution peak, counted once. Another charge or elution peak is a separate feature."],
-              ["PSM", "A peptide-spectrum match links a tandem mass spectrum to a peptide sequence. PSM only uses identified peptide-feature signal as the reference total."],
+              ["PSM", "A peptide-spectrum match links a tandem mass spectrum to a peptide sequence. PSM only uses PSM only as the reference total."],
               ["De novo", "A sequence proposed from a spectrum without requiring a match to the starting database. Its quantified feature uses the measured isotope envelope."],
-              ["Detector envelopes", "Isotope patterns measured directly in MS1, including patterns with no accepted sequence. Their area supplies an independent reference total."],
+              ["Isotope envelopes (measured)", "Isotope patterns measured directly in MS1, including patterns with no accepted sequence. Their area supplies an independent reference total."],
               ["Credited family signal", "Signal allocated to families under the saved shared-feature rule. Family-unique leaves shared features in a separate bucket, while split divides their credit between families."],
               ["Mean of runs and spread", "A mean of N runs averages the per-run shares equally. SD is one sample standard deviation across runs in percentage points, and the ranking capsule spans the lowest to highest run."],
             ]) definitions.append(node("dt", "", name), node("dd", "", description));
@@ -3675,21 +3675,21 @@
           const shareBases = [
             {
               key: "identifiedOnly", name: "PSM only",
-              description: "Show identified family signal as a percentage of all identified peptide-feature signal.",
-              reason: "PSM-only shares are unavailable for this project.",
+              description: "Show identified family signal as a percentage of PSM only.",
+              reason: "PSM only shares are unavailable for this project.",
               enable: "Run Quantify again with this version to store them.",
             },
             {
               key: "identifiedAndDeNovo", name: "PSM and de novo",
-              description: "Show family signal as a percentage of all measured peptide features, identified and de novo.",
-              reason: "Complete measured peptide-feature totals are unavailable.",
+              description: "Show family signal as a percentage of PSM and de novo, with each feature counted once.",
+              reason: "Totals for PSM and de novo are unavailable.",
               enable: "Run Quantify again to store matching totals for every run.",
             },
             {
-              key: "detectorEnvelopes", name: "Detector envelopes",
-              description: "Show family signal as a percentage of all stored MS1 detector envelope area, including envelopes without identifications.",
-              reason: "Complete detector envelope totals are unavailable.",
-              enable: "Run Quantify with MS1 detector totals to enable this base.",
+              key: "detectorEnvelopes", name: "Isotope envelopes (measured)",
+              description: "Show family signal as a percentage of Isotope envelopes (measured), including envelopes without identifications.",
+              reason: "Totals for Isotope envelopes (measured) are unavailable.",
+              enable: "Run Quantify with Isotope envelopes (measured) totals to enable this base.",
             },
             {
               key: "tic", name: "TIC",
@@ -4024,8 +4024,8 @@
               const total = metric(basis.total);
               $("ring-value").replaceChildren(total);
             } else $("ring-value").textContent = "Unavailable";
-            $("ring-name").textContent = ({ identifiedOnly: "of identified peptide-feature signal", identifiedAndDeNovo: "of peptide-feature signal",
-              detectorEnvelopes: "of detector envelopes", tic: "of the TIC" })[state.basis];
+            $("ring-name").textContent = ({ identifiedOnly: "of PSM only", identifiedAndDeNovo: "of PSM and de novo",
+              detectorEnvelopes: "of Isotope envelopes (measured)", tic: "of TIC" })[state.basis];
           }
           function renderRing() {
             const ring = $("composition-ring"),
@@ -4620,7 +4620,7 @@
                   );
                   if (exists(r.measured))
                     dl.append(
-                      node("dt", "", "Share of measured peptide-feature signal"),
+                      node("dt", "", "Share of PSM and de novo"),
                       field(r.measured, "dd"),
                     );
                   popup(field(r.name), [field(f.name, "p"), dl]);
@@ -4728,7 +4728,7 @@
               ["Mean share of credited family signal", f.mean],
               ["Run-to-run standard deviation", f.sd],
               ["Coefficient of variation", f.cv],
-              ["Share of measured peptide-feature signal", f.wholeMeasured],
+              ["Share of PSM and de novo", f.wholeMeasured],
               ["Protein groups", f.proteins],
               ["Family-unique protein groups", f.uniqueProteins],
               ["Distinct observed sequences", f.peptides],
@@ -4956,7 +4956,7 @@
             host.classList.toggle("u3c-figure", pie);
             if (!pie) return;
             const figure = model.figure, view = figure.views.fixed;
-            host.replaceChildren(node("p", "fine-print", "Percent of all measured peptide-feature signal (all runs pooled)"));
+            host.replaceChildren(node("p", "fine-print", "Percent of PSM and de novo (all runs pooled)"));
             const layout = node("div", "u3c-rings"), plot = node("div"), list = node("ol", "u3c-ring-key");
             const canvas = svg("svg", { class: "u3c-svg", viewBox: "0 0 340 340", role: "group", "aria-label": figure.title });
             let start = -90;
@@ -5002,7 +5002,7 @@
             if (/isotopes_credited/.test(id))
               return "Bars count peptide features by the number of isotopes with measured signal; colours separate mass bands. Counts pool the runs and have no percentage denominator or run-to-run whiskers. A missing isotope adds no credit.";
             if (/percent_ion_current_by_mass/.test(id))
-              return "Each bar divides measured peptide envelope signal by the detector's isotope-envelope area in the same 500 Da neutral-mass range, pooling run areas; this is not a share of TIC. The detector is not peptide-FDR calibrated, a missing range stays unavailable, and a ratio can exceed 100%. No whiskers are drawn.";
+              return "Each bar divides Isotope envelopes (measured and identified) by Isotope envelopes (measured) in the same 500 Da neutral-mass range, pooling run areas; this is not a share of TIC. The detector is not peptide-FDR calibrated, a missing range stays unavailable, and a ratio can exceed 100%. No whiskers are drawn.";
             if (/recovery|signal_by_run/.test(id))
               return "Bars compare the labelled peptide-signal readings with total ion current (TIC). Each run uses its own TIC, while an all-runs bar uses pooled signal divided by pooled TIC. The readings use the isotope bases printed on the figure; they are not uncertainty intervals or run-to-run whiskers.";
             if (/signal_uplift/.test(id))
@@ -5014,7 +5014,7 @@
             if (/family_subclasses/.test(id))
               return "Each stacked bar splits a family's contribution into its recorded subclasses. The parts use the pooled credited-family-signal denominator, so they add to the family's pooled share. Grey marks unresolved parts; no run-to-run whiskers are drawn.";
             if (/family_contribution/.test(id))
-              return "Each bar splits a family's pooled contribution into identified and de novo signal. Every percentage divides by all measured peptide-feature signal, with each feature counted once. Shared and unattributed signal have separate bars, with no run-to-run whiskers.";
+              return "Each bar splits a family's pooled contribution into identified and de novo signal. Every percentage divides by PSM and de novo, with each feature counted once. Shared and unattributed signal have separate bars, with no run-to-run whiskers.";
             if (/abundance_diversity/.test(id))
               return "Horizontal position gives the mean per-run share of credited family signal; vertical position gives the database proteins needed to explain the peptides. Each point is a family, with protein counts pooled across runs. These database-dependent estimates have no whiskers.";
             if (/family_signal_vs_denovo_share/.test(id))
@@ -5939,7 +5939,7 @@
               node("p", "chart-legend", "Each bar shows the family signal credited in one run. Its percentage uses that run's whole measured signal as the denominator; runs are shown separately, with no averaging or whiskers." + fixedBaseLegend),
             );
             const gap = $("gap-panel");
-            gap.append(node("h3", "", "Share of measured peptide feature signal"));
+            gap.append(node("h3", "", "Share of PSM and de novo"));
             const rows = (data.databaseGap || []).filter(
               (r) => exists(r.name) && val(r.fraction) !== null,
             );
@@ -5964,7 +5964,7 @@
               node(
                 "p",
                 "chart-legend",
-                "The reference total is all measured peptide feature signal, identified and de novo, each counted once. These percentages pool the recorded runs; they are not run means and have no whiskers." + fixedBaseLegend,
+                "The reference total is PSM and de novo, each feature counted once. These percentages pool the recorded runs; they are not run means and have no whiskers." + fixedBaseLegend,
               ),
             );
             if (rows.length) {
@@ -5973,7 +5973,7 @@
                 "quiet-button",
                 "Read the gap comparisons",
               );
-              b.title = "Show every stored gap comparison as a percentage of measured peptide feature signal. This opens details without changing the project.";
+              b.title = "Show every stored gap comparison as a percentage of PSM and de novo. This opens details without changing the project.";
               b.onclick = () => {
                 const dl = node("dl");
                 for (const r of rows)
@@ -5982,7 +5982,7 @@
                   node(
                     "p",
                     "",
-                    "Each percentage uses all measured peptide feature signal, identified and de novo, as its reference total.",
+                    "Each percentage uses PSM and de novo, as its reference total.",
                   ),
                   dl,
                 ]);
@@ -6378,7 +6378,7 @@
                 const details = node("details", "u3b-exact"), summary = node("summary", "", "Exact readings");
                 summary.title = "Show the stored numerator, detector denominator and exact ratio for each range. Opening this table changes no project values.";
                 const table = node("table"), head = node("tr");
-                ["Neutral mass range", "Peptide envelope", "Detector envelope", "Recovery / detector envelope"].forEach(text => head.append(node("th", "", text)));
+                ["Neutral mass range", "Isotope envelopes (measured and identified)", "Isotope envelopes (measured)", "Recovery / Isotope envelopes (measured)"].forEach(text => head.append(node("th", "", text)));
                 table.append(head);
                 recovery.bins.forEach(bin => { const row = node("tr"); [bin.label, bin.peptideText, bin.detectorText, bin.recoveryText].forEach(text => row.append(node("td", "", text))); table.append(row); });
                 details.append(summary, table); massHost.querySelector('[data-native-chart="percent_ion_current_by_mass.png"]').append(details);

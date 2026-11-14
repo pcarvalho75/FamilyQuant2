@@ -108,7 +108,7 @@ internal static partial class Program
                 const metric=d.querySelector('#ring-value [data-metric="'+ring.total+'"]'), short=fields[ring.total].short;
                 checks[key+'CompactCentre']=metric.textContent===fields[short].text+' %'&&metric.title.includes(fields[ring.total].text)&&w.getComputedStyle(metric).whiteSpace==='nowrap';
               }
-              checks[key+'Base'] = d.getElementById('ring-name').textContent.includes(key==='tic'?'TIC':key==='detectorEnvelopes'?'detector':key==='identifiedOnly'?'identified':'peptide-feature');
+              checks[key+'Base'] = d.getElementById('ring-name').textContent.includes(key==='tic'?'TIC':key==='detectorEnvelopes'?'Isotope envelopes (measured)':key==='identifiedOnly'?'PSM only':'PSM and de novo');
               if (!ring.canDraw) {
                 checks[key+'Unavailable'] = !d.getElementById('ring-unavailable').hidden && !d.querySelector('#composition-ring .ring-slice');
                 continue;

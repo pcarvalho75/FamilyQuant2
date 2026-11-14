@@ -97,12 +97,12 @@ public sealed class AnalyticsViewModel : ScreenViewModel
             catch (Exception ex) { Status = "Family attribution is unavailable. " + ex.Message; }
         }
         RefreshFamilyNames();
-        Details = "The headline uses the measured envelope for identified and de novo peptides. The M+0 " +
+        Details = "The headline uses Isotope envelopes (measured and identified). The M+0 " +
             "reading below uses only the monoisotopic peak. The representative table is counted before cross-side " +
             "suppression; recovery counts are after suppression.\n\n" + SummaryLine(Data, Families, curation, manifest);
         var grouped = Data.Grouped;
         Cards = new[] {
-            new ResultsSummaryCard("Measured envelope recovery", grouped is { Tic: > 0 }
+            new ResultsSummaryCard("Isotope envelopes (measured and identified) / TIC", grouped is { Tic: > 0 }
                 ? grouped.RecoveredFractionReferenceCalibrated.ToString("P2", CultureInfo.CurrentCulture) : "Unavailable",
                 "Identified observed envelope plus de novo measured envelope, divided by the recorded RAW TIC."),
             new ResultsSummaryCard("Peptide representatives", Data.Peptides.Count.ToString("N0", CultureInfo.CurrentCulture),
