@@ -4,6 +4,13 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.19 (published 2026-11-14)
+
+- **The report exports after Fetch UniProt families.** Fetching the UniProt families after Apply grouping no longer stops Export with "Family assignment evidence is missing or out of date": that download is used only by the Database gap estimate, and grouping never reads it. A project already saved in that state needs no new grouping: when the assignments look out of date, Export first computes the proposal again from the current evidence, and goes on when no protein would get another family; otherwise it says how many would.
+- **Review grouping shows only tabs with something in them.** A tab under Show all options that has no row for your project is hidden and comes back as soon as it has one; Proteins, Panel links and Family checklist always stay.
+
+**Feature ledger.** @LEDGER@
+
 ## 2.1.18 (published 2026-11-13)
 
 - **A family of your list keeps its members.** A row of your list that names a UniProt family (2.1.16) took only proteins whose own UniProt entry names that family, so unreviewed entries without a family annotation of their own stayed outside even when their domains and their reviewed neighbour put them in that row. Such a protein now joins the row when the row lists every one of its Pfam domains and is its best row; a protein whose own UniProt family is a different one is still kept out, and the scope words work as before. No question is added.
