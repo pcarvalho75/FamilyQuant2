@@ -428,6 +428,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => SimpleGroupingTests());
             suite.AddWithApplication(() => ReviewLayout3Tests());
             suite.AddWithApplication(() => ExportWindowTests(Path.Combine(workDir, "export-window")));
+            suite.AddWithApplication(() => SaveFamiliesTests(Path.Combine(workDir, "save-families")));
             suite.AddWithApplication(() => ScopeCountWordingTests());
             suite.AddWithApplication(() => ReviewedHeaderCountTests());
             suite.Add(() => OrganismEvidenceTests());

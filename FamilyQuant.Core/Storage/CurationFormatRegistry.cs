@@ -57,7 +57,7 @@ public static class CurationFormatRegistry
     /// <summary>Options for one format-2 write or read: the shared curation options (so indentation and every
     /// other choice follow <see cref="FamilyClusterFile.CurationJsonOptions"/>), plus the active parts' converters
     /// and type changes, bound to this operation's context.</summary>
-    internal static JsonSerializerOptions CreateOptions(CurationFormatContext context, IReadOnlyList<CurationFormatPart> active)
+    internal static JsonSerializerOptions CreateOptions(CurationFormatContext context, IReadOnlyList<CurationFormatPart> active, bool familiesOnly = false)
     {
         var options = new JsonSerializerOptions(FamilyClusterFile.CurationJsonOptions);
         var resolver = new DefaultJsonTypeInfoResolver();
@@ -66,6 +66,7 @@ public static class CurationFormatRegistry
             foreach (var converter in part.CreateConverters(context)) options.Converters.Add(converter);
             resolver.Modifiers.Add(info => part.ModifyType(info, context));
         }
+        if (familiesOnly) resolver.Modifiers.Add(FamiliesOnlyJson.ExcludeResults);
         options.TypeInfoResolver = resolver;
         return options;
     }

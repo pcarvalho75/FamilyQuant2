@@ -199,19 +199,20 @@ namespace FamilyQuant
             return loaded;
         }
 
-        public void Save(string fileName, OperationContext? operation = null)
+        public void Save(string fileName, OperationContext? operation = null, bool familiesOnly = false)
         {
             // Written to a temporary file and moved into place, so a process killed, a power loss or a
             // full disk mid-write leaves the previous .fcf intact rather than a truncated one that
             // FromJsonText would reject, losing all curation. Mirrors ProjectStore.WriteFqproj. The shared
-            // options keep a .fcf and a .fqproj's curation.json byte-identical for the same file.
+            // default options keep a .fcf and a .fqproj's curation.json byte-identical for the same file.
+            // The families-only view leaves results out without changing the open document.
             operation?.Report("save", "Preparing the family document");
             LastSaveCheck = null;
-            var expected = Evidence.SavedFileCheck.Capture(this);
+            var expected = Evidence.SavedFileCheck.Capture(this, familiesOnly);
             string temp = fileName + "." + Guid.NewGuid().ToString("N") + ".tmp";
             try
             {
-                using (var destination = File.Create(temp)) WriteCurationFile(destination);
+                using (var destination = File.Create(temp)) CurationFormat.Write(this, destination, null, CurationFormat.MaxHeaderBytes, familiesOnly);
                 LastSaveCheck = Evidence.SavedFileCheck.Verify(expected, temp, project: false, operation);
                 Evidence.SavedFileCheck.RequirePassed(LastSaveCheck);
                 operation?.Report("save", "Publishing the family document", 1, 1);
