@@ -9,7 +9,7 @@ in [the catalog](docs/INDEX.md). No historical version heading is changed by thi
 - **The report exports after Fetch UniProt families.** Fetching the UniProt families after Apply grouping no longer stops Export with "Family assignment evidence is missing or out of date": that download is used only by the Database gap estimate, and grouping never reads it. A project already saved in that state needs no new grouping: when the assignments look out of date, Export first computes the proposal again from the current evidence, and goes on when no protein would get another family; otherwise it says how many would.
 - **Review grouping shows only tabs with something in them.** A tab under Show all options that has no row for your project is hidden and comes back as soon as it has one; Proteins, Panel links and Family checklist always stay.
 
-**Feature ledger.** @LEDGER@
+**Feature ledger.** 1,958 checks proved for 2.1.19, as for 2.1.18; the 4 Families counter rows changed on purpose in 2.1.16 stay open to verify again, listed in [docs/LEDGER-REVERIFY-2.1.16.md](docs/LEDGER-REVERIFY-2.1.16.md).
 
 ## 2.1.18 (published 2026-11-13)
 
