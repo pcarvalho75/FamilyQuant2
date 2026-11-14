@@ -83,12 +83,15 @@ public static class PanelAssignmentEvidenceStore
         if (CurrentShape(file) is not { } rows) return null;
         string stored = file.PanelProteinAssignmentsFingerprint!;
         Func<int, int> family = index => file.MyExtendedFastaItems[index].UserID;
-        if (stored.StartsWith(DigestPrefix, StringComparison.Ordinal))
-            return Fingerprints(file, file.EvidenceRecipe!, file.EvidenceSource, true, (rows, family, true))[0] == stored ? rows : null;
+        bool digest = stored.StartsWith(DigestPrefix, StringComparison.Ordinal);
         // A full check also yields the same state in digest form, which a later family change can compare instead.
-        string[] prints = Fingerprints(file, file.EvidenceRecipe!, file.EvidenceSource, true, (rows, family, false), (rows, family, true));
+        string[] prints = digest ? Fingerprints(file, file.EvidenceRecipe!, file.EvidenceSource, true, false, (rows, family, true))
+            : Fingerprints(file, file.EvidenceRecipe!, file.EvidenceSource, true, false, (rows, family, false), (rows, family, true));
+        // XP2: written before 2.1.19, a fingerprint also hashed the stored UniProt family world.
+        if (prints[0] != stored && file.EvidenceSource?.FamilyWorld != null)
+            prints[0] = Fingerprints(file, file.EvidenceRecipe!, file.EvidenceSource, true, true, (rows, family, digest))[0];
         if (prints[0] != stored) return null;
-        verified.AddOrUpdate(file, new(stored, prints[1]));
+        if (!digest) verified.AddOrUpdate(file, new(stored, prints[1]));
         return rows;
     }
 
@@ -145,7 +148,7 @@ public static class PanelAssignmentEvidenceStore
         EvidenceRecipe recipe, EvidenceProvenance? source, IReadOnlyList<EvidenceAssignment>? projected)
     {
         var changed = projected?.ToDictionary(a => a.ProteinIndex);
-        return Fingerprints(file, recipe, source, projected == null, (rows, index => changed != null && changed.TryGetValue(index, out var assignment)
+        return Fingerprints(file, recipe, source, projected == null, false, (rows, index => changed != null && changed.TryGetValue(index, out var assignment)
             ? assignment.FamilyId : file.MyExtendedFastaItems[index].UserID, false))[0];
     }
 
@@ -155,17 +158,21 @@ public static class PanelAssignmentEvidenceStore
     internal const string DigestPrefix = "2:";
     private sealed record SourceDigest(object?[] Parts, string Hash, int Length);
     private sealed record VerifiedFingerprint(string Full, string Digest);
-    private static readonly System.Reflection.PropertyInfo[] sourceParts = typeof(EvidenceProvenance).GetProperties();
+    private static readonly System.Reflection.PropertyInfo[] sourceParts = typeof(EvidenceProvenance).GetProperties()
+        .Where(part => part.Name != nameof(EvidenceProvenance.FamilyWorld)).ToArray();
     private static readonly ConditionalWeakTable<EvidenceProvenance, SourceDigest> sourceDigests = new();
     private static readonly ConditionalWeakTable<FamilyClusterFile, VerifiedFingerprint> verified = new();
 
     /// <summary>Fingerprints of states of one file that differ only in family numbers and fact rows, in one pass over its
     /// proteins and evidence: EX2 checks the state before a family change and records the state after it.</summary>
-    internal static string[] Fingerprints(FamilyClusterFile file, EvidenceRecipe recipe, EvidenceProvenance? source, bool stored,
+    // XP2 (D130): the facts depend only on what grouping reads, so the source is hashed without the stored UniProt family
+    // world, which only Quantify's Database gap reads; world keeps it, to verify a fingerprint written before 2.1.19.
+    internal static string[] Fingerprints(FamilyClusterFile file, EvidenceRecipe recipe, EvidenceProvenance? source, bool stored, bool world,
         params (IReadOnlyList<PanelProteinAssignment> Rows, Func<int, int> FamilyId, bool Digest)[] states)
     {
+        var hashed = world ? source : EvidenceApply.CurationSource(source);
         object?[] parts = source == null ? Array.Empty<object?>() : sourceParts.Select(part => part.GetValue(source)).ToArray();
-        SourceDigest? known = source != null && sourceDigests.TryGetValue(source, out var cached) ? cached : null;
+        SourceDigest? known = !world && source != null && sourceDigests.TryGetValue(source, out var cached) ? cached : null;
         string? digest = known != null && known.Parts.Zip(parts).All(pair => ReferenceEquals(pair.First, pair.Second)
             || pair.First is string or ValueType && Equals(pair.First, pair.Second)) ? known.Hash : null;
         // A remembered length spares one serialization of the source; a wrong one costs a second pass, never a wrong fingerprint.
@@ -197,10 +204,10 @@ public static class PanelAssignmentEvidenceStore
                 {
                     // The source JSON goes once to every full-form state and to its own digest.
                     using var own = new LengthPrefixedSha256();
-                    int written = LengthPrefixedSha256.AppendJson(hashes.Where((_, state) => !states[state].Digest).Append(own).ToArray(), source, sourceLength);
+                    int written = LengthPrefixedSha256.AppendJson(hashes.Where((_, state) => !states[state].Digest).Append(own).ToArray(), hashed, sourceLength);
                     if (written < 0) return null;
                     digest = own.Finish();
-                    if (source != null) sourceDigests.AddOrUpdate(source, new(parts, digest, written));
+                    if (!world && source != null) sourceDigests.AddOrUpdate(source, new(parts, digest, written));
                 }
                 for (int state = 0; state < hashes.Length; state++) if (states[state].Digest) hashes[state].Append(digest);
                 Append(JsonSerializer.Serialize(recipe.Options));

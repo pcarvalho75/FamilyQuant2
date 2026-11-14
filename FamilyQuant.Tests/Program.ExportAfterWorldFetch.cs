@@ -104,6 +104,20 @@ internal static partial class Program
         subclass.FamilyPanel.Families[0].DisplayName = "Renamed group";
         Check("XP1 a subclass rule or a new display name in the list keeps the report exportable", Export(subclass) == "");
 
+        // XP2: a fingerprint written before 2.1.19 also hashed a world stored before Apply grouping; it still verifies.
+        var older = WorldGrouped(); FetchWorldForTest(older);
+        var fingerprints = typeof(PanelAssignmentEvidenceStore).GetMethod("Fingerprints", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)!;
+        var state = ((IReadOnlyList<PanelProteinAssignment>)older.PanelProteinAssignments!, (Func<int, int>)(index => older.MyExtendedFastaItems[index].UserID), false);
+        string withWorld = ((string[])fingerprints.Invoke(null, new object?[] { older, older.EvidenceRecipe, older.EvidenceSource, true, true, new[] { state } })!)[0];
+        bool differs = withWorld != older.PanelProteinAssignmentsFingerprint;
+        older.PanelProteinAssignmentsFingerprint = older.EvidenceRecipe!.PanelProteinAssignmentsFingerprint = withWorld;
+        Check("XP2 a fingerprint that also hashed the stored world still verifies and exports", differs
+            && PanelAssignmentEvidenceStore.Current(older) != null && Export(older) == "");
+        var model = new CurationViewModel(older);
+        model.ApplyBatch(new[] { older.MyExtendedFastaItems[3] }, older.MyExtendedFastaItems[0].UserID.ToString(CultureInfo.InvariantCulture), "");
+        Check("XP2 a family change on such a project keeps the facts current", older.PanelProteinAssignmentsFingerprint!.StartsWith("2:", StringComparison.Ordinal)
+            && PanelAssignmentEvidenceStore.Current(older) != null);
+
         var listed = WorldGrouped(); FetchWorldForTest(listed);
         listed.FamilyPanel!.Families[0].Pfam.Add(new() { Accession = "domain-z" });
         Check("XP1 a list row's changed Pfam codes still refuse the report", Export(listed) == PanelAssignmentEvidenceStore.RebuildMessage);
