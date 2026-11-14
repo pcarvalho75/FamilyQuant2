@@ -100,6 +100,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReviewNamedDestinationTests());
             suite.Add(() => ImportSubclassTemplateTests(Path.Combine(workDir, "import-subclass-template")));
             suite.AddWithApplication(() => ReviewTabGuideTests());
+            suite.AddWithApplication(() => ReviewNonemptyTabTests());
             suite.Add(() => PanelLinkExampleTests());
             suite.AddWithApplication(() => ReviewApplyWaitTests(Path.Combine(workDir, "review-apply-wait")));
             suite.Section("CSV export - locale and escaping");

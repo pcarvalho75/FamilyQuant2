@@ -25,7 +25,7 @@
             <CheckBox x:Name="ShowAllOptionsCheckBox" DockPanel.Dock="Right" Content="Show all options" VerticalAlignment="Center" Margin="12,0,0,0"
                       IsEnabled="{Binding EvidenceAvailable}" ToolTipService.ShowOnDisabled="True"
                       IsChecked="{Binding ShowAllOptions, RelativeSource={RelativeSource AncestorType=Window}, Mode=TwoWay}"
-                      ToolTip="Show the keyword review, evidence tabs, full protein columns and additional review tools. Switching views keeps pending choices and changes no project values; Simple view needs an evidence review and is unavailable for keyword-only review."/>
+                      ToolTip="Show the keyword review, populated evidence tabs, full protein columns and additional review tools; Proteins, Panel links and Family checklist stay available. Switching views keeps pending choices and changes no project values; Simple view needs an evidence review and is unavailable for keyword-only review."/>
             <Button x:Name="OpenFamilyChecklistButton" DockPanel.Dock="Right" Content="Family checklist" Click="OpenFamilyChecklist_Click" Margin="8,0,0,0"
                     Visibility="Collapsed" ToolTip="Show all options and open the imported family list's checklist in one click. Review which proteins match each family without changing the project until Apply grouping."/>
             <TextBlock x:Name="headline" Text="{Binding Summary}" Style="{StaticResource SectionTitle}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" VerticalAlignment="Center"/>
@@ -363,7 +363,7 @@
                                     </Grid>
                                 </DockPanel>
                             </TabItem>
-                            <TabItem Header="Panel links" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Review evidence-derived candidate links from source families or domain combinations to your panel and record explicit choices. Opening this tab changes only the view; Use link choices rebuilds the proposal before Apply grouping commits it.">
+                            <TabItem Header="Panel links" ToolTip="Review evidence-derived candidate links from source families or domain combinations to your panel and record explicit choices. Opening this tab changes only the view; Use link choices rebuilds the proposal before Apply grouping commits it.">
                                 <DockPanel>
                                     <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,8">
                                         <CheckBox x:Name="PanelLinksNeedsChoiceFilter" Content="{Binding PanelLinksChoiceFilterLabel}"
@@ -401,7 +401,7 @@
                                     </DataGrid>
                                 </DockPanel>
                             </TabItem>
-                            <TabItem x:Name="PanelChecklistTab" Header="Family checklist" Visibility="{Binding Evidence.HasPanelRules, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Review database target matches to each panel family and why matching proteins remain outside the proposal. Opening this tab changes only the view; a name or domain match alone never assigns a family.">
+                            <TabItem x:Name="PanelChecklistTab" Header="Family checklist" ToolTip="Review database target matches to each panel family and why matching proteins remain outside the proposal. Opening this tab changes only the view; a name or domain match alone never assigns a family.">
                                 <Grid x:Name="ChecklistLayout">
                                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition x:Name="ChecklistTableRow" Height="*" MinHeight="110"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                                     <TextBlock x:Name="PanelChecklistHintText" Text="{Binding PanelChecklistHint}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,8"/>
