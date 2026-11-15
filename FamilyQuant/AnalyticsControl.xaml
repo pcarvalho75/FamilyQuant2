@@ -42,6 +42,18 @@
    </ComboBox>
   </WrapPanel>
     <StackPanel x:Name="PanelFamilyChart"/>
+    <Border x:Name="BorderCascade" Background="{DynamicResource SurfaceBrush}" Padding="16" CornerRadius="6" Margin="0,12,10,12"
+            Visibility="{Binding HasCascade, Converter={StaticResource VisibleWhenTrue}}"
+            ToolTip="From the recorded TIC to the signal credited to families, each line from values the program already holds. Hover a line for its source; reading it changes nothing.">
+     <StackPanel>
+      <TextBlock Text="From TIC to families" FontWeight="SemiBold"/>
+      <ItemsControl x:Name="CascadeLines" ItemsSource="{Binding Cascade}" Margin="0,6,0,0">
+       <ItemsControl.ItemTemplate><DataTemplate>
+        <TextBlock TextWrapping="Wrap" Margin="0,2,0,0" ToolTip="{Binding Source}"><Run Text="{Binding Label, Mode=OneWay}" FontWeight="SemiBold"/><Run Text=": "/><Run Text="{Binding Value, Mode=OneWay}"/></TextBlock>
+       </DataTemplate></ItemsControl.ItemTemplate>
+      </ItemsControl>
+     </StackPanel>
+    </Border>
     <Expander Header="Numbers, provenance and method details" Visibility="{Binding HasData, Converter={StaticResource VisibleWhenTrue}}" ToolTip="Expand stored summary facts, denominators, source cutoffs and counting grains behind Results. Only this view changes.">
      <TextBlock x:Name="TextBlockDetails" TextWrapping="Wrap" Margin="12"/>
     </Expander>
