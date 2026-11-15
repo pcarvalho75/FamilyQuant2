@@ -89,6 +89,8 @@ public sealed record HtmlReportFamily
     public string? Peptides { get; init; }
     public string? DatabaseEntries { get; init; }
     public bool IsOthers { get; init; }
+    public bool IsContaminants { get; init; }
+    public string? ContaminantMembers { get; init; }
     public HtmlFamilyShareStatistics IdentifiedOnly { get; init; } = new();
     public HtmlFamilyMeanParts? IdentifiedOnlyParts { get; init; }
     public HtmlFamilyShareStatistics IdentifiedAndDeNovo { get; init; } = new();

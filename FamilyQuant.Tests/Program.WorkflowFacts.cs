@@ -39,7 +39,7 @@ internal static partial class Program
         Check("Y6 Quantify SEPro refusal names the file and the matching-runs next step",
             model.Status.Contains(model.SeproPackage, StringComparison.Ordinal) && model.Status.Contains("same runs", StringComparison.Ordinal));
         Facts("Files and navigation", general, "nothing is saved", "whole numbers with digit grouping", "names the written CSV path",
-            "status bar", "what to do next", "Tab and Shift+Tab", "full XIC result");
+            "status bar", "what to do next", "Tab and Shift+Tab", "without quantitation or analysis report facts");
         Facts("De novo", HelpContent.BuildDeNovo(), "one source or a union", "Quantify can combine sources", "per searched peptide",
             "family IDs, protein IDs and ambiguity", "reads peptides, not chromatograms", "use Quantify and Results");
         var sourceChoice = (System.Windows.Controls.ComboBox)new DeNovoControl().FindName("ComboBoxDeNovoSource");

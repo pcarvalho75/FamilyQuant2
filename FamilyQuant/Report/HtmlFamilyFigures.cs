@@ -14,7 +14,10 @@ public sealed class HtmlFamilyFigurePacket
     private sealed record Row(string Key, Cell Name, Cell? X, Cell? Y, Cell? Lower, Cell? Upper, string Runs, IReadOnlyList<Part> Parts);
     private sealed record View(string Basis, string Legend, string XLabel, string YLabel, double MinimumX,
         double MaximumX, double MaximumY, IReadOnlyList<HtmlFamilyFigureTick> XTicks,
-        IReadOnlyList<HtmlFamilyFigureTick> YTicks, IReadOnlyList<Row> Rows);
+        IReadOnlyList<HtmlFamilyFigureTick> YTicks, IReadOnlyList<Row> Rows)
+    {
+        public double MinimumY { get; init; }
+    }
     private sealed class Plot(string id, string kind, string title, string section, bool normalized, string sheet)
     {
         public string Id { get; } = id;
@@ -81,7 +84,8 @@ public sealed class HtmlFamilyFigurePacket
                     view.MinimumX, view.MaximumX, view.MaximumY, view.XTicks, view.YTicks,
                     view.Rows.Select(row => new HtmlFamilyFigureRow(row.Key, Name(row.Name), Number(row.X), Number(row.Y),
                         Number(row.Lower), Number(row.Upper), row.Runs,
-                        row.Parts.Select(part => new HtmlFamilyFigurePart(Name(part.Name), Number(part.Value)!, part.Unresolved, Number(part.FamilyPercent))).ToArray())).ToArray());
+                        row.Parts.Select(part => new HtmlFamilyFigurePart(Name(part.Name), Number(part.Value)!, part.Unresolved, Number(part.FamilyPercent))).ToArray())).ToArray())
+                    { MinimumY = view.MinimumY };
             }, StringComparer.Ordinal);
             var figure = new HtmlFamilyFigure(plot.Id, plot.Kind, plot.Title, plot.Normalized, views);
             if (plot.Kind == "pie") pie = figure;
@@ -97,7 +101,7 @@ public sealed class HtmlFamilyFigurePacket
 
     public static HtmlFamilyFigurePacket Prepare(ReportStudyFigurePacket studies, ReportFigurePlan legacy,
         ReportCompositionBasis basis, QuantManifest manifest, FamilyEnvelopeQuantResult? families = null,
-        IReadOnlyDictionary<int, string>? familyLabels = null)
+        IReadOnlyDictionary<int, string>? familyLabels = null, IReadOnlySet<int>? contaminantFamilyIds = null)
     {
         var plots = new List<Plot>();
         foreach (var figure in studies.NativeFigures)
@@ -109,15 +113,15 @@ public sealed class HtmlFamilyFigurePacket
         foreach (var figure in legacy.Charts.Where(figure => Owns("figure:" + figure.FileName)))
             Add("figure:" + figure.FileName, figure.SectionId, figure.Title, figure.CreateChart());
         var pie = FamilyPieData.Build(families, policy: manifest.FamilyRunShares?.Policy == SharedPeptidePolicy.SplitEqually
-            ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique, familyLabels: familyLabels);
+            ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique, familyLabels: familyLabels, contaminantFamilyIds: contaminantFamilyIds);
         if (pie.Unavailable == null)
         {
             var plot = new Plot("figure:" + AnalyticsFigures.FamilyContributionFile, "pie", "Family contribution, all runs pooled",
                 ReportSectionIds.Results, false, "Native family pie");
             var rows = pie.Slices.Select(slice => new Row(slice.Key, plot.Text(slice.Label), plot.Number(slice.Percent, "%"), null, null, null,
-                "All runs pooled", new[] { new Part(plot.Text("Identified"), plot.Number(slice.IdentifiedPercent, "%")!, false),
+                "All runs pooled" + (slice.Description.Length > 0 ? "; " + slice.Description : ""), new[] { new Part(plot.Text("Identified"), plot.Number(slice.IdentifiedPercent, "%")!, false),
                     new Part(plot.Text("De novo"), plot.Number(slice.DeNovoPercent, "%")!, false) })).ToArray();
-            plot.Views["fixed"] = ViewOf(rows, FamilyPieData.Basis, FamilyPieData.Legend, "Share of all measured peptide-feature signal (%)", "Source parts on the same base", true);
+            plot.Views["fixed"] = ViewOf(rows, FamilyPieData.Basis, FamilyPieData.Legend, "Share of PSM and de novo (%)", "Source parts on the same base", true);
             plots.Add(plot);
         }
         return new(plots, pie.Unavailable);
@@ -181,7 +185,7 @@ public sealed class HtmlFamilyFigurePacket
                         new Part(plot.Text("Shared exact sequence"), plot.Number(row.SharedPeaksDeepNovoDistinctSequences, "sequences")!, false),
                         new Part(plot.Text("DeepNovo only"), plot.Number(row.DeepNovoExclusiveDistinctSequences, "sequences")!, false),
                     })).ToArray();
-                plot.Views["fixed"] = ViewOf(rows, "Distinct normalized sequences, all runs pooled", "All runs pooled. Bars count distinct normalized de novo sequences, split into the two caller-only sets and their exact shared set. Database-search sequence counts are separate context. These are sequence counts, not peptide feature signal shares. Changing Normalize to does not change them.", "Distinct de novo sequences", "", false);
+                plot.Views["fixed"] = ViewOf(rows, "Distinct normalized sequences, all runs pooled", "All runs pooled. Bars count distinct normalized de novo sequences, split into the two caller-only sets and their exact shared set. Database-search sequence counts are separate context. These are sequence counts, not signal shares. Changing Normalize to does not change them.", "Distinct de novo sequences", "", false);
             }
         }
 
@@ -197,7 +201,8 @@ public sealed class HtmlFamilyFigurePacket
                     double? mean = row.MeanPercent, sd = row.SdPercent;
                     if (key != "credited")
                     {
-                        string sourceKey = row.Key == "others" ? "others:" + string.Join(",", basis.Grouping!.OtherFamilies.Select(f => f.FamilyUserId).Order()) : row.Key;
+                        string sourceKey = row.Key == "others" ? "others:" + string.Join(",", basis.Grouping!.OtherFamilies.Select(f => f.FamilyUserId).Order())
+                            : row.Key == "contaminants" ? "contaminants:" + string.Join(",", basis.Grouping!.Contaminants.Families.Select(f => f.FamilyUserId).Order()) : row.Key;
                         var source = new HtmlReportReference { Kind = "family-basis", Family = sourceKey,
                             Study = basis.UsesPanel && !basis.IsIdentity ? "effective" : "source", Property = SourceBasis(key) + "/mean" };
                         mean = HtmlReportPayloadBuilder.ReadFamilyShare(source, manifest) * 100;
@@ -210,7 +215,7 @@ public sealed class HtmlFamilyFigurePacket
                         !diversity && mean.HasValue && sd.HasValue ? plot.Number(mean.Value + sd.Value, "%") : null, runs, Array.Empty<Part>());
                 }).ToArray();
                 string legend = diversity
-                    ? "Horizontal position is the mean of each family's per-run shares of " + baseName + ". Vertical position counts stored database proteins needed to explain its peptides, pooled across runs. These database-dependent greedy estimates are not proteoform counts; no whiskers are drawn."
+                    ? "Horizontal position is the mean of each family's per-run shares of " + baseName + "; vertical position counts stored database proteins needed to explain its peptides, pooled across runs. Both axes are logarithmic, so equal distances mean equal fold changes; hollow diamonds mark zero values at the axis floor, with exact values on hover. These database-dependent greedy estimates are not proteoform counts; no whiskers are drawn."
                     : "Bars show the mean of per-run family shares of " + baseName + ". Each row states its run count. Whiskers extend one sample SD below and above the mean, including below zero when the spread reaches there; they describe run-to-run disagreement, not a confidence interval.";
                 return ViewOf(rows, baseName, legend, "Mean family share (%)", diversity ? "Database proteins needed (greedy estimate)" : "", true, diversity, diversity);
             }
@@ -218,25 +223,41 @@ public sealed class HtmlFamilyFigurePacket
     }
 
     private static string SourceBasis(string key) => key switch { "identifiedOnly" => "IdentifiedOnly", "identifiedAndDeNovo" => "IdentifiedAndDeNovo", "detectorEnvelopes" => "DetectorEnvelopes", _ => "Tic" };
-    private static string BaseName(string key) => key switch { "identifiedOnly" => "all identified peptide feature signal", "identifiedAndDeNovo" => "all peptide feature signal, identified and de novo, each feature counted once", "detectorEnvelopes" => "the detector's all-charge isotope-envelope area", _ => "the recorded total ion current (TIC)" };
-    private static View ViewOf(IReadOnlyList<Row> rows, string basis, string legend, string xLabel, string yLabel, bool percent, bool scatter = false, bool integerY = false)
+    private static string BaseName(string key) => key switch { "identifiedOnly" => "PSM only", "identifiedAndDeNovo" => "PSM and de novo", "detectorEnvelopes" => "Isotope envelopes (measured)", _ => "TIC" };
+    private static View ViewOf(IReadOnlyList<Row> rows, string basis, string legend, string xLabel, string yLabel, bool percent, bool scatter = false, bool logarithmic = false)
     {
+        if (logarithmic)
+        {
+            (double Min, double Max, HtmlFamilyFigureTick[] Ticks) Axis(IEnumerable<double?> values, bool pct)
+            {
+                var positive = values.Where(value => value > 0).Select(value => value!.Value).ToArray();
+                int lo = positive.Length == 0 ? 0 : (int)Math.Floor(Math.Log10(positive.Min()));
+                int hi = positive.Length == 0 ? 1 : Math.Max(lo + 1, (int)Math.Ceiling(Math.Log10(positive.Max())));
+                int step = Math.Max(1, (int)Math.Ceiling((hi - lo) / 5d));
+                var ticks = Enumerable.Range(0, (hi - lo) / step + 1).Select(index => lo + index * step).Append(hi).Distinct()
+                    .Select(power => Math.Pow(10, power)).Select(value => new HtmlFamilyFigureTick(value,
+                        value.ToString("0." + new string('#', 324), CultureInfo.InvariantCulture) + (pct ? "%" : ""))).ToArray();
+                return (Math.Pow(10, lo), Math.Pow(10, hi), ticks);
+            }
+            var x = Axis(rows.Select(row => row.X?.Value), true);
+            var y = Axis(rows.Select(row => row.Y?.Value), false);
+            return new(basis, legend, xLabel + " (log scale)", yLabel + " (log scale)", x.Min, x.Max, y.Max, x.Ticks, y.Ticks, rows)
+                { MinimumY = y.Min };
+        }
         double minimum = Math.Min(0, Math.Floor(rows.Select(row => row.Lower?.Value ?? 0).DefaultIfEmpty(0).Min() / 10) * 10);
         double maximum = rows.Select(row => Math.Max(row.X?.Value ?? 0, row.Upper?.Value ?? 0)).DefaultIfEmpty(0).Max();
         maximum = percent ? Math.Max(10, Math.Ceiling(maximum / 10) * 10) : NiceMaximum(maximum);
         double largestY = rows.Select(row => row.Y?.Value ?? 0).DefaultIfEmpty(0).Max();
-        double ymax = integerY ? Math.Max(1, Math.Ceiling(largestY * 1.15)) : scatter ? NiceMaximum(largestY) : 1;
+        double ymax = scatter ? NiceMaximum(largestY) : 1;
         IReadOnlyList<HtmlFamilyFigureTick> Ticks(double lo, double hi, bool pct)
         {
             double step = NiceMaximum((hi - lo) / 4);
             var values = Enumerable.Range(0, (int)Math.Floor((hi - Math.Ceiling(lo / step) * step) / step) + 1)
                 .Select(i => Math.Ceiling(lo / step) * step + i * step).Append(lo).Append(hi).Distinct().Order();
             return values.Select(value => new HtmlFamilyFigureTick(value,
-                value.ToString(pct || integerY ? "G3" : "G5", CultureInfo.InvariantCulture) + (pct ? "%" : ""))).ToArray();
+                value.ToString(pct ? "G3" : "G5", CultureInfo.InvariantCulture) + (pct ? "%" : ""))).ToArray();
         }
-        var yTicks = integerY ? Enumerable.Range(0, 5).Select(index => Math.Round(ymax * index / 4)).Distinct()
-            .Select(value => new HtmlFamilyFigureTick(value, value.ToString("0", CultureInfo.InvariantCulture))).ToArray()
-            : scatter ? Ticks(0, ymax, yLabel.Contains("(%)", StringComparison.Ordinal)) : Array.Empty<HtmlFamilyFigureTick>();
+        var yTicks = scatter ? Ticks(0, ymax, yLabel.Contains("(%)", StringComparison.Ordinal)) : Array.Empty<HtmlFamilyFigureTick>();
         return new(basis, legend, xLabel, yLabel, minimum, maximum, ymax, Ticks(minimum, maximum, percent), yTicks, rows);
     }
     private static double NiceMaximum(double value)

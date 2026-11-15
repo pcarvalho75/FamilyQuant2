@@ -159,14 +159,14 @@ internal static partial class Program
                 [ProjectExportKind.FamilyComposition] = Encoding.UTF8.GetPreamble().Concat(Encoding.UTF8.GetBytes(control.FullXicCompositionCsv()!)).ToArray(),
                 [ProjectExportKind.InterpretationInput] = Encoding.UTF8.GetBytes(ReportInterpretationInput.FromProject(control.fcf, manifest, AppVersionInfo.Current()))
             };
-            string expectedFcf = Path.Combine(output, "reference.fcf"); control.fcf.Save(expectedFcf);
+            string expectedFcf = Path.Combine(output, "reference.fcf"); control.fcf.Save(expectedFcf, familiesOnly: true);
             expected[ProjectExportKind.Families] = File.ReadAllBytes(expectedFcf);
             string expectedHomology = Path.Combine(output, "reference-homology.csv"); HomologyCsv.Write(expectedHomology, new DeNovoHomology());
             expected[ProjectExportKind.Homology] = File.ReadAllBytes(expectedHomology);
             string before = control.fcf.ToJsonText();
             foreach (var pair in expected)
             {
-                target = Path.Combine(output, pair.Key + ".out");
+                target = Path.Combine(output, pair.Key + (pair.Key == ProjectExportKind.Families ? ".fcf" : ".out"));
                 ChooseExport(shell, pair.Key); FinishBusyOperation(shell.Operations); FinishBusyOperation(control.Operations); PumpDispatcher();
                 Check(pair.Key + " writes the same bytes as its existing writer", File.Exists(target) && File.ReadAllBytes(target).SequenceEqual(pair.Value));
             }

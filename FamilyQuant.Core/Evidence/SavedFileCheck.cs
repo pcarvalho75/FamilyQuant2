@@ -18,16 +18,16 @@ namespace FamilyQuant.Evidence
             Operations.OperationContext? operation = null) => Verify(Capture(expected), path, project, operation);
 
         internal sealed record Snapshot(string Sequences, string Decoys, string Unassigned, string Locks,
-            string Source, string Curation, int[] DecoyIndices, int[] UnassignedIndices);
+            string Source, string Curation, int[] DecoyIndices, int[] UnassignedIndices, bool FamiliesOnly = false);
 
-        internal static Snapshot Capture(FamilyClusterFile file)
+        internal static Snapshot Capture(FamilyClusterFile file, bool familiesOnly = false)
         {
             ArgumentNullException.ThrowIfNull(file);
             var assigned = file.EvidenceRecipe?.Assignments.Select(a => a.ProteinIndex).ToHashSet() ?? new HashSet<int>();
             int[] decoys = Enumerable.Range(0, file.MyExtendedFastaItems.Count)
                 .Where(i => SequenceLabels.IsDecoy(file.MyExtendedFastaItems[i].SequenceIdentifier)).ToArray();
             int[] unassigned = Enumerable.Range(0, file.MyExtendedFastaItems.Count).Except(decoys).Where(i => !assigned.Contains(i)).ToArray();
-            return new Snapshot(Sequences(file), Rows(file, decoys), Rows(file, unassigned), Locks(file), Source(file), Curation(file), decoys, unassigned);
+            return new Snapshot(Sequences(file), Rows(file, decoys, familiesOnly), Rows(file, unassigned, familiesOnly), Locks(file), Source(file), Curation(file, familiesOnly), decoys, unassigned, familiesOnly);
         }
 
         internal static SavedFileCheckResult Verify(Snapshot expected, string path, bool? project = null,
@@ -50,12 +50,15 @@ namespace FamilyQuant.Evidence
                 var checks = new List<SavedFileCheckItem>
                 {
                     new("sequences", expected.Sequences == Sequences(actual)),
-                    new("decoys", expected.Decoys == Rows(actual, expected.DecoyIndices)),
-                    new("unassigned", expected.Unassigned == Rows(actual, expected.UnassignedIndices)),
+                    new("decoys", expected.Decoys == Rows(actual, expected.DecoyIndices, expected.FamiliesOnly)),
+                    new("unassigned", expected.Unassigned == Rows(actual, expected.UnassignedIndices, expected.FamiliesOnly)),
                     new("locks", expected.Locks == Locks(actual)),
                     new("source", expected.Source == Source(actual)),
-                    new("curation", expected.Curation == Curation(actual)),
+                    new("curation", expected.Curation == Curation(actual, expected.FamiliesOnly)),
                 };
+                if (expected.FamiliesOnly)
+                    checks.Add(new("families-only", actual.MyExtendedFastaItems.All(p => p.XICUser == 0)
+                        && actual.ReportDetails == null && actual.ReportInputProvenance == null));
                 bool passed = checks.All(c => c.Passed);
                 string message = passed ? "File check passed: sequences, decoys, unassigned proteins, locks and source hash."
                     : "File check failed: " + string.Join(", ", checks.Where(c => !c.Passed).Select(c => c.Code)) + ".";
@@ -75,18 +78,18 @@ namespace FamilyQuant.Evidence
         }
 
         private static string Sequences(FamilyClusterFile file) => Hash(file.MyExtendedFastaItems.Select(p => new { p.SequenceIdentifier, p.Sequence }));
-        private static string Rows(FamilyClusterFile file, IEnumerable<int> indices) => Hash(indices.Select(i => new
+        private static string Rows(FamilyClusterFile file, IEnumerable<int> indices, bool familiesOnly = false) => Hash(indices.Select(i => new
         {
             Index = i, Protein = i < file.MyExtendedFastaItems.Count ? file.MyExtendedFastaItems[i] : null,
-        }));
+        }), familiesOnly);
         private static string Locks(FamilyClusterFile file) => Hash(file.LockedUserIds.OrderBy(i => i));
         private static string Source(FamilyClusterFile file) => Hash(new { file.SourceSha256, file.SourceSequenceCount });
-        private static string Curation(FamilyClusterFile file) => file.JsonContentSha256();
-        private static string Hash<T>(T value)
+        private static string Curation(FamilyClusterFile file, bool familiesOnly = false) => familiesOnly ? Hash(file, true) : file.JsonContentSha256();
+        private static string Hash<T>(T value, bool familiesOnly = false)
         {
             using var hash = SHA256.Create();
             using var stream = new CryptoStream(Stream.Null, hash, CryptoStreamMode.Write);
-            JsonSerializer.Serialize(stream, value); stream.FlushFinalBlock();
+            JsonSerializer.Serialize(stream, value, familiesOnly ? FamiliesOnlyJson.Options : null); stream.FlushFinalBlock();
             return Convert.ToHexString(hash.Hash!);
         }
     }

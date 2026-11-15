@@ -377,7 +377,7 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
         if (!HasFullXic || fullXicResult == null) return null;
         double denominator = FullXicOverTic ? fullXicTic : fullXicResult.MeasuredTotalEnvelopeReferenceCalibrated;
         return CsvReport.BuildFamilyComposition(fullXicResult, SharedPolicy, denominator,
-            "fraction of " + FullXicBasisLabel + "; signal = " + FullXicQuantity);
+            "fraction of " + FullXicBasisLabel + "; signal = " + FullXicQuantity, null, null, FamilyContaminants.OnlyIds(Document));
     }
 
 }

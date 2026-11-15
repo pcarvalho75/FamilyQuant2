@@ -129,7 +129,7 @@ public partial class MainWindow
 
         public async void MenuItemSaveFCF_Click(object sender, RoutedEventArgs e)
         {
-            if (owner.Operations.IsBusy) return;
+            if (owner.Operations.IsBusy || owner.saveInProgress || owner.reportExportInProgress) return;
             // Use the control we created in MenuItemCluster_Click. Reading GridApp.Children[0] and casting
             // it threw an InvalidCastException whenever the USearch panel was the one on screen.
             if (owner.cgc == null || owner.cgc.fcf == null)
@@ -145,25 +145,27 @@ public partial class MainWindow
             SaveFileDialog sfd = new SaveFileDialog
             {
                 Filter = "FamilyClusterFile (*.fcf)|*.fcf",
-                Title = "Save the current families as a Family Cluster File"
+                Title = "Save families as (.fcf)", AddExtension = true, DefaultExt = ".fcf"
             };
 
             if (!ShellDialogs.ShowFile(owner, "families.export", sfd)) return;
+            if (!Path.GetExtension(sfd.FileName).Equals(".fcf", StringComparison.OrdinalIgnoreCase))
+            {
+                ShellMessages.Report(owner, "Choose a .fcf file to save families separately. File > Save keeps results in the .fqproj project.",
+                    "Choose a family file", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
             using var operation = owner.Operations.Begin("Export families");
 
             try
             {
                 var document = owner.cgc.fcf;
-                await Task.Run(() => document.Save(sfd.FileName, operation.Context));
+                await Task.Run(() => document.Save(sfd.FileName, operation.Context, familiesOnly: true));
                 operation.Dispose();
 
                 ShellMessages.Report(owner,
-                    "The families were saved to\n" + sfd.FileName + "\n\n" +
-                    "The file holds the grouping, your User IDs and your annotations. It does not hold the " +
-                    "quantitation: reopening it restores the families, and the percentages come back when " +
-                    "you load a PatternLab project again.\n\n" +
-                    "Next step: nothing. Carry on working, or open this file later to return to exactly " +
-                    "this grouping.",
+                    "Saved the curated families, evidence and family list without quantitation.\n" + sfd.FileName + "\n\n" +
+                    "The open results project, its save path and unsaved changes are unchanged.",
                     "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)

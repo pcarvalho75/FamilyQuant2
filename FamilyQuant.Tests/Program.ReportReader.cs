@@ -177,8 +177,11 @@ internal static partial class Program
         var recovery = Figure(AnalyticsFigures.RecoveryFile);
         Check("recovery caption carries the complete charge caveat and recorded split",
             recovery.Caption.Contains(Ms1EnvelopeDetector.SinglyChargedCaveat, StringComparison.Ordinal)
-            && recovery.CaptionInput!.Numbers.Any(n => n.Label.Contains("z >= 2", StringComparison.Ordinal) && n.Value == 20)
-            && recovery.CaptionInput.Numbers.Any(n => n.Label.Contains("z = 1", StringComparison.Ordinal) && n.Value == 10));
+            && recovery.Caption.Contains("z >= 2", StringComparison.Ordinal)
+            && recovery.Caption.Contains("z = 1", StringComparison.Ordinal)
+            && recovery.CaptionInput!.Numbers.Any(n => n.Label.Contains("charge 2 or higher", StringComparison.Ordinal)
+                && n.Label.Contains("TIC", StringComparison.Ordinal) && n.Value == 20)
+            && recovery.CaptionInput.Numbers.Any(n => n.Label.Contains("charge 1 / TIC", StringComparison.Ordinal) && n.Value == 10));
         var raw = Figure(PresentationFigures.DeNovoAgreementFile);
         Check("raw caller caption names imported population and observed source floors",
             raw.Caption.Contains("downstream quantitation filters are not applied", StringComparison.Ordinal)

@@ -57,6 +57,7 @@ public static partial class HtmlReportPayloadBuilder
         private HtmlReportFamily FamilyDetails(HtmlReportFamily family, FamilyRunShareSummary? summary)
         {
             if (family.IsOthers) return OtherFamilyShares(family);
+            if (family.IsContaminants) return OtherFamilyShares(family, contaminants: true);
             family = family with
             {
                 IdentifiedOnly = FamilyShareStatistics(family.Id, "IdentifiedOnly"),

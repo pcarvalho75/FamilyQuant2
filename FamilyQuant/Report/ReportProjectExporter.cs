@@ -56,7 +56,8 @@ public static class ReportProjectExporter
         Data(3, "Preparing current result tables");
         var grouping = manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation);
         var labels = ReportFamilyNames.SourceLabels(curation, families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description));
-        var result = ReportCurrentResults.Build(data, manifest, families, manifest.FamilyRunShares?.Policy ?? SharedPeptidePolicy.FamilyUnique, grouping, labels);
+        var contaminantFamilies = FamilyContaminants.OnlyIds(curation);
+        var result = ReportCurrentResults.Build(data, manifest, families, manifest.FamilyRunShares?.Policy ?? SharedPeptidePolicy.FamilyUnique, grouping, labels, contaminantFamilies);
         if (manifest.FamilySensitivity is { } sensitivity && (sensitivity.CurationFingerprint != FamilySensitivityStudy.CurationFingerprint(curation)
             || sensitivity.Variants.Count == 0 || sensitivity.Variants[0].SourceSha256 != FamilySensitivityStudy.CurrentFingerprint(rows, manifest, curation)))
             throw new InvalidDataException("Stored sensitivity results do not match this project's current quantitation and grouping. Recompute the sensitivity study before reporting it.");
@@ -159,7 +160,8 @@ public static class ReportProjectExporter
         if (sourceWorld != null && studies.Figures.Any(f => f.Figure.Id.StartsWith("figure:family_signal_sources", StringComparison.Ordinal)))
             exports.Add("family_sources_support.csv", ReportStudyExports.SourceSupport(sourceWorld));
         var layout = ReportSupplementLayout.Apply(document, exports);
-        var familyFigures = HtmlFamilyFigurePacket.Prepare(studies, plan, compositionBasis, manifest, families, labels); // Native drawing inputs, including pooled Pie.
+        var familyFigures = HtmlFamilyFigurePacket.Prepare(studies, plan, compositionBasis, manifest, families, labels,
+            contaminantFamilies); // Native drawing inputs, including pooled Pie.
         var sensitivityFigures = HtmlSensitivityFigurePacket.Prepare(plan); // U3d exact native inputs.
         exports.Add(FigureLayout.DetailFileName, studies.FigureDetailsCsv);
         var sheets = layout.Sheets.Concat(ReportStudyFigures.CombineFigureSupplements(studies.FigureDetailSheets,

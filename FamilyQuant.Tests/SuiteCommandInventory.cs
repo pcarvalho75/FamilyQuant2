@@ -8,6 +8,8 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-html-ring-remainder-display", "FamilyQuant.Tests.Program.HtmlRingRemainderDisplayTests(System.String)"),
+        SuiteCommandRule.Covered("--test-signal-base-names", "FamilyQuant.Tests.Program.SignalBaseNameTests(System.String)"),
         SuiteCommandRule.Covered("--test-review-nonempty-tabs", "FamilyQuant.Tests.Program.ReviewNonemptyTabTests(System.String)"),
         SuiteCommandRule.Covered("--test-review-layout3", "FamilyQuant.Tests.Program.ReviewLayout3Tests(System.String)"),
         SuiteCommandRule.Covered("--test-subclass-unchanged-membership", "FamilyQuant.Tests.Program.SubclassUnchangedMembershipTests()"),
@@ -56,6 +58,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-ledger-drops-2114", "FamilyQuant.Tests.Program.LedgerDrops2114Tests()", "FamilyQuant.Tests.Program.FeatureLedgerBaseTests(System.Boolean)", "FamilyQuant.Tests.Program.FeatureLedgerMutationTest(System.Int32,System.Boolean)"),
         SuiteCommandRule.Covered("--test-family-count-once", "FamilyQuant.Tests.Program.FamilyCountOnceTests(System.String)", "FamilyQuant.Tests.Program.FamilyContributionChartTests(System.String)"),
         SuiteCommandRule.Covered("--test-results-percent-only", "FamilyQuant.Tests.Program.ResultsPercentOnlyTests(System.String)"),
+        SuiteCommandRule.Covered("--test-results-cascade", "FamilyQuant.Tests.Program.ResultsCascadeTests()"),
         SuiteCommandRule.Covered("--test-results-topn-placement", "FamilyQuant.Tests.Program.ResultsTopNPlacementTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-share-bases", "FamilyQuant.Tests.Program.HtmlShareBasesTests()"),
         SuiteCommandRule.Covered("--test-shared-policy-choices", "FamilyQuant.Tests.Program.SharedPolicyChoiceTests(System.String)"),
@@ -394,6 +397,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-family-list-step", "FamilyQuant.Tests.Program.FamilyListStepTests(System.String)"),
         SuiteCommandRule.Covered("--test-simple-grouping", "FamilyQuant.Tests.Program.SimpleGroupingTests(System.String)"),
         SuiteCommandRule.Covered("--test-export-window", "FamilyQuant.Tests.Program.ExportWindowTests(System.String)"),
+        SuiteCommandRule.Covered("--test-save-families", "FamilyQuant.Tests.Program.SaveFamiliesTests(System.String)"),
         SuiteCommandRule.Covered("--test-scope-count-wording", "FamilyQuant.Tests.Program.ScopeCountWordingTests()"),
         SuiteCommandRule.Covered("--test-reviewed-header-counts", "FamilyQuant.Tests.Program.ReviewedHeaderCountTests()"),
         SuiteCommandRule.Covered("--test-organism-evidence", "FamilyQuant.Tests.Program.OrganismEvidenceTests()"),
@@ -502,10 +506,13 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-html-mass-quality", "FamilyQuant.Tests.Program.HtmlMassQualityTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-recovery-explanations", "FamilyQuant.Tests.Program.HtmlRecoveryExplanationTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-ring-bases", "FamilyQuant.Tests.Program.HtmlRingBasesTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-ring-remainder", "FamilyQuant.Tests.Program.HtmlRingRemainderTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-diversity-log", "FamilyQuant.Tests.Program.HtmlDiversityLogTests(System.String)"),
         SuiteCommandRule.Covered("--test-mass-range-recovery", "FamilyQuant.Tests.Program.MassRangeRecoveryTests(System.String)", "FamilyQuant.Tests.Program.HtmlMassQualityTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-report-words", "FamilyQuant.Tests.Program.HtmlReportWordsTests(System.String)"),
         SuiteCommandRule.Covered("--test-report-family-names", "FamilyQuant.Tests.Program.ReportFamilyNameTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-family-pie", "FamilyQuant.Tests.Program.HtmlFamilyPieTests(System.String)"),
+        SuiteCommandRule.Covered("--test-contaminant-family-shares", "FamilyQuant.Tests.Program.ContaminantFamilyShareTests(System.String)"),
         SuiteCommandRule.Covered("--test-results-family-pie", "FamilyQuant.Tests.Program.ResultsFamilyPieTests(System.String)"),
         SuiteCommandRule.Covered("--test-mass-range-polish", "FamilyQuant.Tests.Program.MassRangePolishTests(System.String)"),
         SuiteCommandRule.Covered("--test-database-entry-counts", "FamilyQuant.Tests.Program.DatabaseEntryCountTests(System.String)"),

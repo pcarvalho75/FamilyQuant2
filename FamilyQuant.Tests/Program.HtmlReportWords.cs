@@ -57,7 +57,7 @@ internal static partial class Program
         HtmlReportBrowserChecks(Path.Combine(output, "browser"), new[] { ("phone", payload, 390), ("desktop", payload, 1366), ("no-families", empty, 390) }, """
             const checks={}, p=JSON.parse(d.getElementById('fq-data').textContent), fields=p.fields;
             const help=d.getElementById('numbers-help'); help.click();
-            checks.definitions=['TIC','Peptide feature','PSM','De novo','Detector envelopes','Credited family signal'].every(word=>d.getElementById('dialog-body').textContent.includes(word));
+            checks.definitions=['TIC','Peptide feature','PSM','De novo','Isotope envelopes (measured)','Credited family signal'].every(word=>d.getElementById('dialog-body').textContent.includes(word));
             checks.featureUnit=d.getElementById('dialog-body').textContent.includes('One peptide at one charge in one elution peak, counted once.');
             d.getElementById('dialog-close').click();
             if(name==='no-families') {
@@ -79,8 +79,8 @@ internal static partial class Program
             const paths=new Set();
             for(const [index,key] of bases.entries()) {
               d.querySelector('input[name="normalization-basis"][value="'+key+'"]').click();
-              const baseNames={identifiedOnly:'identified peptide-feature signal',identifiedAndDeNovo:'peptide-feature signal',detectorEnvelopes:'detector envelopes',tic:'TIC'};
-              const captions={identifiedOnly:'Percent of identified peptide-feature signal (PSM only)',identifiedAndDeNovo:'Percent of peptide-feature signal (PSM and de novo)',detectorEnvelopes:'Percent of Detector envelopes',tic:'Percent of TIC'};
+              const baseNames={identifiedOnly:'PSM only',identifiedAndDeNovo:'PSM and de novo',detectorEnvelopes:'Isotope envelopes (measured)',tic:'TIC'};
+              const captions={identifiedOnly:'Percent of PSM only',identifiedAndDeNovo:'Percent of PSM and de novo',detectorEnvelopes:'Percent of Isotope envelopes (measured)',tic:'Percent of TIC'};
               for(const [chart,caption] of [['family-ranking','ranking-note'],['family-contribution-chart','contribution-base-caption']]) {
                 const heading=d.getElementById(caption);
                 checks[key+chart+'BaseHeading']=heading.textContent===captions[key]&&heading.getBoundingClientRect().top<d.getElementById(chart).getBoundingClientRect().top;

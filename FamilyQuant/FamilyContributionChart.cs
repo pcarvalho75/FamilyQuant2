@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Input;
 
 namespace FamilyQuant
 {
@@ -24,6 +25,7 @@ namespace FamilyQuant
         /// <summary>Signal that reached no family at all. Drawn apart, because it is a residual and not
         /// a biological group.</summary>
         Unattributed,
+        Contaminants,
     }
 
     /// <summary>
@@ -90,15 +92,31 @@ namespace FamilyQuant
         /// is what the interface's "all" choice asks for.
         /// </summary>
         public static List<FamilyContributionBar> Fold(FamilyEnvelopeQuantResult? result, int topN,
-            SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique, IReadOnlyDictionary<int, string>? familyLabels = null)
+            SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique, IReadOnlyDictionary<int, string>? familyLabels = null,
+            IReadOnlySet<int>? contaminantFamilyIds = null)
         {
             var bars = new List<FamilyContributionBar>();
             if (result == null) return bars;
 
             // Re-sorted here rather than trusted: FamilyEnvelopeQuant.Build already orders this way, but
             // a caller may hand in a result it assembled itself and the fold has to be the same either way.
-            List<FamilyEnvelopeQuantRow> ordered = result.Families
-                .Where(f => f != null)
+            var ordered = new List<FamilyEnvelopeQuantRow>();
+            var contaminants = new FamilyContributionBar { Kind = FamilyContributionBarKind.Contaminants, Label = "contaminants", FullLabel = "contaminants" };
+            var members = new List<string>();
+            foreach (var family in result.Families)
+            {
+                if (family == null) continue;
+                if (contaminantFamilyIds?.Contains(family.FamilyUserId) == true)
+                {
+                    contaminants.Identified += sharedPolicy == SharedPeptidePolicy.SplitEqually ? family.SplitIdentifiedEnvelope : family.UniqueIdentifiedEnvelope;
+                    contaminants.DeNovo += sharedPolicy == SharedPeptidePolicy.SplitEqually ? family.SplitDeNovoEnvelopePrimary : family.UniqueDeNovoEnvelopePrimary;
+                    contaminants.FamilyCount++;
+                    members.Add(FamilyFigureLabel.Format(family.FamilyUserId,
+                        familyLabels?.GetValueOrDefault(family.FamilyUserId, family.Description) ?? family.Description, int.MaxValue));
+                }
+                else ordered.Add(family);
+            }
+            ordered = ordered
                 .OrderByDescending(f => f.Signal(sharedPolicy == SharedPeptidePolicy.SplitEqually
                     ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique))
                 .ThenBy(f => f.FamilyUserId)
@@ -137,6 +155,12 @@ namespace FamilyQuant
                 });
             }
 
+            if (contaminants.FamilyCount > 0)
+            {
+                members.Sort(StringComparer.Ordinal);
+                contaminants.Description = "Contains " + string.Join("; ", members) + ".";
+                bars.Add(contaminants);
+            }
             if (sharedPolicy != SharedPeptidePolicy.SplitEqually && result.SharedTotalEnvelopeReferenceCalibrated > 0)
                 bars.Add(new FamilyContributionBar
                 {
@@ -215,7 +239,7 @@ namespace FamilyQuant
             List<FamilyContributionBar> others =
                 source.Where(b => b.Kind == FamilyContributionBarKind.OtherFamilies).ToList();
             List<FamilyContributionBar> residual =
-                source.Where(b => b.Kind is FamilyContributionBarKind.Shared or FamilyContributionBarKind.Unattributed).ToList();
+                source.Where(b => b.Kind is FamilyContributionBarKind.Shared or FamilyContributionBarKind.Unattributed or FamilyContributionBarKind.Contaminants).ToList();
 
             // One bar of the budget goes to the fold itself, and the residual keeps its own bars: it is
             // the number a reader takes as "what we still cannot explain" and it is never merged away.
@@ -262,6 +286,8 @@ namespace FamilyQuant
     /// </summary>
     public class FamilyContributionChart : ChartDrawingBase, IPalettedChart
     {
+        private readonly List<(Rect Bounds, FamilyContributionBar Bar)> rowTargets = new();
+        private object? ordinaryToolTip;
         private readonly List<FamilyContributionBar> bars;
         private readonly bool asPercent;
         private readonly double measuredTotal;
@@ -282,8 +308,8 @@ namespace FamilyQuant
                                        bool asPercentOfTotal = false,
                                        ChartPalette? palette = null,
                                        SharedPeptidePolicy sharedPolicy = SharedPeptidePolicy.FamilyUnique,
-                                       IReadOnlyDictionary<int, string>? familyLabels = null)
-            : this(FamilyContributionPlot.Fold(result, topN, sharedPolicy, familyLabels), asPercentOfTotal,
+                                       IReadOnlyDictionary<int, string>? familyLabels = null, IReadOnlySet<int>? contaminantFamilyIds = null)
+            : this(FamilyContributionPlot.Fold(result, topN, sharedPolicy, familyLabels, contaminantFamilyIds), asPercentOfTotal,
                    FamilyContributionPlot.MeasuredTotal(result),
                    result?.IdentityThreshold ?? 0, palette, sharedPolicy)
         {
@@ -346,7 +372,7 @@ namespace FamilyQuant
             get
             {
                 string basis = PercentApplies
-                    ? "Family contribution: % of all peptide features"
+                    ? "Family contribution: % of PSM and de novo"
                     : "Family contribution: identified + de novo";
                 basis += sharedPolicy == SharedPeptidePolicy.SplitEqually ? " - split equally" : " - family-unique";
 
@@ -400,6 +426,7 @@ namespace FamilyQuant
 
         protected override void OnRender(DrawingContext dc)
         {
+            rowTargets.Clear();
             base.OnRender(dc);
 
             ChartPalette pal = palette;
@@ -453,10 +480,21 @@ namespace FamilyQuant
             foreach (FamilyContributionBar bar in drawn)
             {
                 DrawBar(dc, bar, new Rect(barLeft, y, barWidth, barH), maxTotal);
+                rowTargets.Add((new Rect(0, y, ActualWidth, step), bar));
                 y += step;
             }
 
             DrawLegend(dc, new Point(14, ActualHeight - legendBand + 6), drawn);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            ordinaryToolTip ??= ToolTip;
+            var target = rowTargets.FirstOrDefault(target => target.Bounds.Contains(e.GetPosition(this)));
+            if (target.Bar?.Kind == FamilyContributionBarKind.Contaminants)
+                ToolTip = "contaminants: " + target.Bar.Description + " Read this grouped signal without changing the project.";
+            else ToolTip = ordinaryToolTip;
         }
 
         private void DrawBar(DrawingContext dc, FamilyContributionBar bar, Rect slot, double maxTotal)
@@ -474,7 +512,7 @@ namespace FamilyQuant
             dc.DrawText(name, new Point(4, slot.Top + (slot.Height - name.Height) / 2));
 
             double descLeft = 4 + name.Width + 8;
-            if (bar.Description.Length > 0 && slot.Left - 10 - descLeft > 30 && slot.Height >= 11)
+            if (bar.Kind != FamilyContributionBarKind.Contaminants && bar.Description.Length > 0 && slot.Left - 10 - descLeft > 30 && slot.Height >= 11)
             {
                 var desc = Clipped(bar.Description, Muted, 10, slot.Left - 10 - descLeft);
                 dc.DrawText(desc, new Point(descLeft, slot.Top + (slot.Height - desc.Height) / 2));
@@ -542,12 +580,12 @@ namespace FamilyQuant
             if (anyFolded)
             {
                 dc.DrawRectangle(null, new Pen(NotAFamily, 1.4), new Rect(x, at.Y + 2, 12, 12));
-                var t = Text("other families, shared or unattributed", Muted, 11);
+                var t = Text("other families, contaminants, shared or unattributed", Muted, 11);
                 if (x + 16 + t.Width < ActualWidth - 8) dc.DrawText(t, new Point(x + 16, at.Y));
             }
 
             string basis = measuredTotal > 0
-                ? "all peptide features, each peptide counted once: " +
+                ? "PSM and de novo, each peptide feature counted once: " +
                   measuredTotal.ToString("E2", CultureInfo.CurrentCulture)
                 : "no primary total was supplied with this table, so the values are raw areas and no " +
                   "share can be taken from them";

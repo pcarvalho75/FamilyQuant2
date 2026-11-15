@@ -39,7 +39,7 @@ public static class HtmlReportAxisTicks
             string? name = path[1] switch
             {
                 "identifiedOnly" => "PSM only", "identifiedAndDeNovo" => "PSM and de novo",
-                "detectorEnvelopes" => "detector envelopes", "tic" => "TIC", _ => null,
+                "detectorEnvelopes" => "Isotope envelopes (measured)", "tic" => "TIC", _ => null,
             };
             if (name == null) return false;
             field = new(path[0] == "mean" ? "Mean share of " + name + " (%)" : "Run SD of " + name + " (pp)", null, "", source);

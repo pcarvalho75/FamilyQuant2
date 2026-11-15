@@ -259,6 +259,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => HtmlShareBasesTests());
             suite.Add(() => HtmlSharePartsTests(workDir));
             suite.AddWithApplication(() => HtmlFamilyNativeTests(Path.Combine(workDir, "html-family-native")));
+            suite.AddWithApplication(() => HtmlDiversityLogTests(Path.Combine(workDir, "html-diversity-log")));
             suite.AddWithApplication(() => HtmlSensitivityNativeTests(Path.Combine(workDir, "html-sensitivity-native")));
             suite.AddWithApplication(() => SharedPolicyChoiceTests(workDir));
             suite.Section("Recovery chart geometry - per-row normalisation and labels that tell the runs apart");
@@ -428,6 +429,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => SimpleGroupingTests());
             suite.AddWithApplication(() => ReviewLayout3Tests());
             suite.AddWithApplication(() => ExportWindowTests(Path.Combine(workDir, "export-window")));
+            suite.AddWithApplication(() => SaveFamiliesTests(Path.Combine(workDir, "save-families")));
             suite.AddWithApplication(() => ScopeCountWordingTests());
             suite.AddWithApplication(() => ReviewedHeaderCountTests());
             suite.Add(() => OrganismEvidenceTests());
@@ -442,6 +444,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelListBeforeScopeTests());
             suite.AddWithApplication(() => ExportAfterCurationTests(Path.Combine(workDir, "export-after-curation")));
             suite.AddWithApplication(() => ExportAfterWorldFetchTests(Path.Combine(workDir, "export-after-world-fetch")));
+            suite.Add(() => ResultsCascadeTests());
             suite.AddWithApplication(() => ChecklistUnconfirmTests(Path.Combine(workDir, "checklist-unconfirm")));
             suite.Add(() => PanelLinkRoundtripTests(Path.Combine(workDir, "panel-link-roundtrip")));
             suite.Add(() => PanelNamedFamilyTests(Path.Combine(workDir, "panel-named-families")));
@@ -551,13 +554,17 @@ namespace FamilyQuant.Tests
             suite.Add(() => HtmlReportNormalizationTests(Path.Combine(workDir, "html-report-normalization")));
             suite.AddWithApplication(() => HtmlCoverageCatalogTests(Path.Combine(workDir, "html-coverage-catalog")));
             suite.AddWithApplication(() => HtmlSignalRecoveryTests(Path.Combine(workDir, "html-signal-recovery")));
+            suite.AddWithApplication(() => SignalBaseNameTests());
             suite.AddWithApplication(() => HtmlMassQualityTests(Path.Combine(workDir, "html-mass-quality")));
             suite.AddWithApplication(() => HtmlRecoveryExplanationTests(Path.Combine(workDir, "html-recovery-explanations")));
             suite.Add(() => HtmlRingBasesTests(Path.Combine(workDir, "html-ring-bases")));
+            suite.Add(() => HtmlRingRemainderTests(Path.Combine(workDir, "html-ring-remainder")));
+            suite.Add(() => HtmlRingRemainderDisplayTests());
             suite.AddWithApplication(() => MassRangeRecoveryTests(Path.Combine(workDir, "mass-range-recovery")));
             suite.AddWithApplication(() => HtmlReportWordsTests(Path.Combine(workDir, "html-report-words")));
             suite.AddWithApplication(() => ReportFamilyNameTests(Path.Combine(workDir, "report-family-names")));
             suite.AddWithApplication(() => HtmlFamilyPieTests(Path.Combine(workDir, "html-family-pie")));
+            suite.AddWithApplication(() => ContaminantFamilyShareTests(Path.Combine(workDir, "contaminant-family-shares")));
             suite.AddWithApplication(() => ResultsFamilyPieTests(Path.Combine(workDir, "results-family-pie")));
             suite.AddWithApplication(() => MassRangePolishTests(Path.Combine(workDir, "mass-range-polish")));
             suite.Add(() => DatabaseEntryCountTests(null));

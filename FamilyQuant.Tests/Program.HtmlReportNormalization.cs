@@ -61,7 +61,7 @@ internal static partial class Program
             const checks = {}, p = JSON.parse(d.getElementById('fq-data').textContent);
             const fields = p.fields, sourceRows = p.composition.contributionRows;
             const bases = ['identifiedOnly', 'identifiedAndDeNovo', 'detectorEnvelopes', 'tic'];
-            const labels = ['PSM only', 'PSM and de novo', 'Detector envelopes', 'TIC'];
+            const labels = ['PSM only', 'PSM and de novo', 'Isotope envelopes (measured)', 'TIC'];
             const choices = [...d.querySelectorAll('input[name="normalization-basis"]')];
             const valid = id => !!id && fields[id] && Number.isFinite(fields[id].value);
             const rows = () => [...d.querySelectorAll('#family-contribution-chart .contribution-row')];

@@ -5,270 +5,206 @@
   "runs": [
     {
       "id": "native",
-      "command": "D:\\FamilyQuant-wt\\release-2116\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-build-workflow D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261111-171018-release-2116\\as-build-workflow \u00222026-11-11 17:11:36 -0800\u0022",
-      "executedAt": "2026-11-11 17:11:36 -0800",
-      "commit": "c5408faf801ad2cbc1291679b28bff0f46a2ac01",
+      "command": "D:\\FamilyQuant-wt\\release23\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-build-workflow D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261114-164535-release23\\as-build-workflow \u00222026-11-14 16:46:52 -0800\u0022",
+      "executedAt": "2026-11-14 16:46:52 -0800",
+      "commit": "5b3894e83fe4ccb6bd289b0bf90e207256c73196",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\proofs.log",
-          "sha256": "E0B44D4AC0FED279F083A8F60ACCDC244DC898B417237AB8061745FB8030B6BD"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\proofs.log",
+          "sha256": "DEF97C5A6AE040428F80936CCE67E0093B46BE2E525F6F00F79F73DA80B5C773"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\actual-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\actual-values.json",
           "sha256": "DC54423F75A4B81E6C2594941147C330C3F3CC635DE5042E3210E52500C4E98B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Core/FamilyQuantFile.cs",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Core/FamilyQuantFile.cs",
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Core/RedundancyTools.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Core/RedundancyTools.cs",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Core/USearchTools.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Core/USearchTools.cs",
           "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayBuildOutputSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayBuildOutputSnapshot.cs",
           "sha256": "57CC2BAE2FF17F0EAD6B5571BD47EA34F49D037AC2067146DA3935AE6787233A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayBuildWorkflowComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayBuildWorkflowComparison.cs",
           "sha256": "EEBF877F4BE8A0FE7C51D6F3339D51DA8C412BAE0D6685BCE81F4E24E0A5909E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
           "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
           "sha256": "157C955F947789AA5BA5759EA3B37D762EA6A5E693AB49345BDE540C420CC036"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayViewSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayViewSnapshot.cs",
           "sha256": "CC9596D8D5DFE89A459BF6D4E44CDEF3D690528063C87F47461DA4724083DDC7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
           "sha256": "F471C5570F9E6004927F2C1D296738E023E01CFCE2D8BCBAE4D87F9E1C64558B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "7FFE973E1D4F66812812B051DAB78C93169902380838CFA92C011F86B1C3A02D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayBuildWorkflow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayBuildWorkflow.cs",
           "sha256": "EA69D4403315627CD4D216B193D0A4FA2BF24599625468784EC3430DC0FF7BF0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayBuildWorkflowLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayBuildWorkflowLedger.cs",
           "sha256": "24ABF234700F95A876F817A3DB74DCBF2945AF86767C3423EB99F02591AFB822"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
           "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
           "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
           "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant/AppOperationHost.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant/AppOperationHost.cs",
           "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant/ShellDialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant/ShellDialogs.cs",
           "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant/USearch.Actions.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant/USearch.Actions.cs",
           "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant/USearch.Presentation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant/USearch.Presentation.cs",
           "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant/USearch.Report.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant/USearch.Report.cs",
           "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant/USearch.ViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant/USearch.ViewModel.cs",
           "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant/USearch.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant/USearch.xaml",
           "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant/USearch.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant/USearch.xaml.cs",
           "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\frozen\\FamilyQuant/USearch.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\frozen\\FamilyQuant/USearch.xaml",
           "sha256": "9AFFA6E1E8BEBD1BA44EABD784C6FF91EA769B79514143C4125B7D32143C7AE3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\frozen\\FamilyQuant/USearch.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\frozen\\FamilyQuant/USearch.xaml.cs",
           "sha256": "693D5B1F505751D5C552AB1F902C8FC6F0186B2D8B8E53E53C446B327F8A5597"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "787633870F9FEF44FF043132BA05D5FBA9EEB26ADFD4757A2270B0259F413763"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "5304F7E03F893582A86C0D3D4AC8D72AA1E5CA1CEF3796F605DD8B0FBA6E2C81"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.Core.dll",
-          "sha256": "98DDF60C616F0FA13A1F318505760588B491DA883559074D5FAED9478C42B9D7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.Core.dll",
+          "sha256": "488FD15C352C82924953A2835A9E6CCAE551219C051997081891E4EBDA90CEC5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\executed\\FamilyQuant.dll",
-          "sha256": "78A93233C910C8E8570436EC500A7DDA59856573914A3C562167004A2220075F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\executed\\FamilyQuant.dll",
+          "sha256": "6FA73867106D880DB74CA678BCD64926CF20FDDDC32B479FE880A04E45872158"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\frozen-ReferenceGoldenHost.dll",
-          "sha256": "9F4293C2F37FE7531DB8102CF938CA73A5B56FB955836A9D50C3EF71C2E702C8"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "5827522E0A7FF5D6BA491ABE6171DF11F033F69D13163D1FA99ADAC3AB1AA6FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\frozen-ReferenceGoldenHost.exe",
-          "sha256": "25563C6FC2973D05C5226F48B5C3EC79840406BC8E88FE793030EDCE8CF1239A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "D44AEB2727FA70FFFA0850E3670C23917B3CA6863BA9211753A6B5038D2E42F7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\frozen-native.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\frozen-native.log",
           "sha256": "8F7A6D041E150E0A68FE2C1A5C544E1E063165C582AE4346022869C0FE9A018A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\workflow-anchors.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\workflow-anchors.json",
           "sha256": "79601963DF9D00ADF7D1EAC52ABB5F61F5847C5A1FAC671959D0ADCBFAD25ABB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\current-native\\fixture.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\current-native\\fixture.fasta",
           "sha256": "697D8C44990CBE641D82AB135C3F44E8C2F6553E99F03C24CDD4D8F7B2E4C763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\current-native\\fixture_NO_REDUNDANCY.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\current-native\\fixture_NO_REDUNDANCY.fasta",
           "sha256": "B4FB282F81C1037452C245A6C028419B4E148B5A312DD8AFC367950E7610A9C8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\current-native\\native-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\current-native\\native-values.json",
           "sha256": "595093461DD8A6E5CEC80B2ABEB3BB839F5E7D7A10983B7CE3E5F02FDD243A2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\frozen-native\\fixture.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\frozen-native\\fixture.fasta",
           "sha256": "697D8C44990CBE641D82AB135C3F44E8C2F6553E99F03C24CDD4D8F7B2E4C763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\frozen-native\\fixture_NO_REDUNDANCY.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\frozen-native\\fixture_NO_REDUNDANCY.fasta",
           "sha256": "B4FB282F81C1037452C245A6C028419B4E148B5A312DD8AFC367950E7610A9C8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\frozen-native\\native-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\frozen-native\\native-values.json",
           "sha256": "595093461DD8A6E5CEC80B2ABEB3BB839F5E7D7A10983B7CE3E5F02FDD243A2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\workflow\\duplicate.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\workflow\\duplicate.fasta",
           "sha256": "3F457EA73863923CD09074D2E9C805E196D5CDDBE2EB8A65455419A47B202368"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\workflow\\fixture.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\workflow\\fixture.fasta",
           "sha256": "697D8C44990CBE641D82AB135C3F44E8C2F6553E99F03C24CDD4D8F7B2E4C763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\workflow\\fixture.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\workflow\\fixture.fcf",
           "sha256": "490DFF8E5404AB8BC1B9633B5F9D79FD3341E1D6568F480B8CFDE4C1779AEA67"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\workflow\\fixture_NO_REDUNDANCY.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\workflow\\fixture_NO_REDUNDANCY.fasta",
           "sha256": "B4FB282F81C1037452C245A6C028419B4E148B5A312DD8AFC367950E7610A9C8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\workflow\\workflow-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\workflow\\workflow-values.json",
           "sha256": "4A44662B817788325D3FA93B59B4CD830982B622980CE49F4B9D2D7AE8C3E461"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\release-2116"
+      "workingDirectory": "D:\\FamilyQuant-wt\\release23"
     }
   ],
   "rows": [
-    {
-      "observationId": "FQ15-00014F7B5211",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
     {
       "observationId": "FQ15-032C14B46507",
       "implementation": [
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -332,7 +268,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -396,7 +332,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -460,7 +396,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -524,7 +460,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -588,7 +524,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -652,7 +588,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -716,7 +652,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -780,7 +716,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -844,7 +780,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -908,7 +844,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -972,7 +908,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1036,7 +972,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1100,7 +1036,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1164,7 +1100,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1228,7 +1164,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1292,7 +1228,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1356,7 +1292,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1420,7 +1356,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1484,7 +1420,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1548,7 +1484,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1612,7 +1548,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1676,7 +1612,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1740,7 +1676,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1804,7 +1740,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1868,7 +1804,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1932,7 +1868,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -1996,7 +1932,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -2060,7 +1996,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -2124,7 +2060,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -2188,7 +2124,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -2252,71 +2188,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-21F35F2A9566",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -2380,7 +2252,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -2444,7 +2316,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -2508,71 +2380,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-23F4B3B559C2",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -2636,7 +2444,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -2700,71 +2508,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-25C42617BBA4",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -2828,7 +2572,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -2892,71 +2636,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-2751E8205ED5",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3020,7 +2700,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3084,7 +2764,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3148,7 +2828,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3212,7 +2892,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3276,7 +2956,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3340,7 +3020,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3404,7 +3084,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3468,7 +3148,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3532,7 +3212,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3596,7 +3276,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3660,7 +3340,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3724,7 +3404,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3788,7 +3468,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3852,7 +3532,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3916,7 +3596,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -3980,7 +3660,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4044,7 +3724,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4108,7 +3788,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4172,7 +3852,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4236,7 +3916,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4300,7 +3980,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4364,7 +4044,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4428,7 +4108,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4492,7 +4172,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4556,7 +4236,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4620,7 +4300,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4684,7 +4364,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4748,7 +4428,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4812,7 +4492,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4876,7 +4556,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -4940,7 +4620,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5004,7 +4684,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5068,7 +4748,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5132,7 +4812,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5196,7 +4876,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5260,7 +4940,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5324,7 +5004,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5388,7 +5068,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5452,7 +5132,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5516,7 +5196,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5580,7 +5260,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5644,7 +5324,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5708,7 +5388,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5772,7 +5452,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5836,71 +5516,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-6065665A6950",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -5964,7 +5580,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6028,7 +5644,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6092,7 +5708,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6156,7 +5772,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6220,7 +5836,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6284,7 +5900,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6348,7 +5964,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6412,7 +6028,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6476,7 +6092,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6540,7 +6156,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6604,7 +6220,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6668,7 +6284,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6732,7 +6348,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6796,7 +6412,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6860,7 +6476,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6924,7 +6540,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -6988,7 +6604,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7052,7 +6668,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7116,7 +6732,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7180,7 +6796,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7244,7 +6860,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7308,7 +6924,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7372,7 +6988,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7436,7 +7052,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7500,7 +7116,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7564,7 +7180,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7628,7 +7244,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7692,7 +7308,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7756,7 +7372,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7820,7 +7436,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7884,7 +7500,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -7948,7 +7564,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8012,7 +7628,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8076,7 +7692,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8140,7 +7756,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8204,7 +7820,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8268,7 +7884,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8332,7 +7948,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8396,7 +8012,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8460,7 +8076,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8524,7 +8140,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8588,7 +8204,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8652,7 +8268,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8716,7 +8332,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8780,71 +8396,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-9010A5C31951",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8908,7 +8460,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -8972,7 +8524,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9036,7 +8588,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9100,7 +8652,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9164,7 +8716,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9228,7 +8780,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9292,7 +8844,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9356,7 +8908,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9420,7 +8972,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9484,71 +9036,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-961F39A7C9EB",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9612,7 +9100,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9676,7 +9164,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9740,71 +9228,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-9EA401129802",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9868,7 +9292,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9932,7 +9356,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -9996,7 +9420,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10060,7 +9484,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10124,7 +9548,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10188,7 +9612,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10252,7 +9676,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10316,7 +9740,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10380,7 +9804,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10444,71 +9868,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-A9056D654142",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10572,7 +9932,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10636,7 +9996,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10700,7 +10060,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10764,7 +10124,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10828,7 +10188,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10892,7 +10252,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -10956,7 +10316,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11020,7 +10380,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11084,7 +10444,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11148,7 +10508,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11212,7 +10572,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11276,7 +10636,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11340,7 +10700,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11404,7 +10764,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11468,7 +10828,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11532,71 +10892,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-BB5437376059",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11660,7 +10956,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11724,71 +11020,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "903A9C7FA1A7C6CCD4F556C9148274AC906B84812F551E9D7AD03D544393E54A"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BD33D411BA7F169F679FC9E173184DFEA32985F2ABCE5E006D12981D9B8ABA19"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "2075A19F30D307EC7972239767E931E4AB7A45805506CE6054EB43E01A245828"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "AC50B686FAEBEE47CAD2319A8D38B16D1D11F15A3C516409BB22A719862F1D01"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "124F12D7C21859904980A7ED65756C0A42CD9CAA605942749A2E0D5A605D76CC"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-C1BFB140777A",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11852,7 +11084,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11916,7 +11148,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -11980,7 +11212,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12044,7 +11276,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12108,7 +11340,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12172,7 +11404,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12236,7 +11468,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12300,7 +11532,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12364,7 +11596,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12428,7 +11660,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12492,7 +11724,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12556,7 +11788,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12620,7 +11852,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12684,7 +11916,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12748,7 +11980,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12812,7 +12044,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12876,7 +12108,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -12940,7 +12172,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13004,7 +12236,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13068,7 +12300,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13132,7 +12364,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13196,7 +12428,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13260,7 +12492,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13324,7 +12556,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13388,7 +12620,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13452,7 +12684,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13516,7 +12748,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13580,7 +12812,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13644,7 +12876,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13708,7 +12940,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13772,7 +13004,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13836,7 +13068,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13900,7 +13132,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -13964,7 +13196,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -14028,7 +13260,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -14092,7 +13324,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -14156,7 +13388,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -14220,7 +13452,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -14284,7 +13516,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -14348,7 +13580,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -14412,7 +13644,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -14476,7 +13708,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "060F6B5D45C5D843E2C0E19A41AB3CE32E7055E1CF3A1F70B595C9B46B7F1FEB"
+          "sha256": "BC899C639F6BD1C9E4133AA7E98C4C2D82CD52AD75508F7A7CDC9C0A4F4852EF"
         },
         {
           "path": "FamilyQuant.Core/RedundancyTools.cs",
@@ -14545,7 +13777,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-build-workflow kind format/export: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -14559,7 +13791,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-build-workflow kind handler: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -14573,7 +13805,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-build-workflow kind handler definition: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261111-171018-release-2116\\as-build-workflow\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261114-164535-release23\\as-build-workflow\\proofs.log",
           "inspectedBy": ""
         }
       ]

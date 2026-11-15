@@ -4,6 +4,16 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.20 (published 2026-11-14)
+
+- **Contaminants get their own row.** A family made only of contaminants (every target member marked with the contaminant_ prefix, such as bovine and porcine trypsin or keratins) is no longer ranked as a family: its signal goes to one "contaminants" row beside shared between families and unattributed, in the Results chart and pie, the HTML report (its diversity chart included) and the Word and workbook tables. A family that also holds other proteins stays a family, and no other value changes.
+- **Save the curated families on their own.** File > Save families as (.fcf) writes the curated and grouped families, their evidence and your family list without any sample's quantitation, so the curated tool and the results project are separate files. File > Save keeps saving the results project (.fqproj).
+- **From TIC to families on the Results screen.** A panel follows the recorded TIC down to the isotope envelopes measured, the PSM and de novo signal and the signal credited to families, with the PSM and de novo parts and the peptide and family counts; each line names its source.
+- **One name per base.** The bases are now called PSM only, PSM and de novo, Isotope envelopes (measured), Isotope envelopes (measured and identified) and TIC, the same in Normalize to, the charts, the Signal recovery cards, Results and Help. Under TIC, the part outside the shown families is split into peptide signal outside them and signal not explained by PSM and de novo.
+- **Log-log diversity chart.** The HTML report's abundance against database-protein diversity chart uses logarithmic axes; zero values sit on the axis floor with their own mark.
+
+**Feature ledger.** 1,950 checks proved for 2.1.20. The 8 rows that pinned the old Export > Families save message, replaced on purpose by Save families as (.fcf), stay open to verify again, listed in [docs/LEDGER-REVERIFY-2.1.20.md](docs/LEDGER-REVERIFY-2.1.20.md); the 4 Families counter rows changed on purpose in 2.1.16 stay open as before.
+
 ## 2.1.19 (published 2026-11-14)
 
 - **The report exports after Fetch UniProt families.** Fetching the UniProt families after Apply grouping no longer stops Export with "Family assignment evidence is missing or out of date": that download is used only by the Database gap estimate, and grouping never reads it. A project already saved in that state needs no new grouping: when the assignments look out of date, Export first computes the proposal again from the current evidence, and goes on when no protein would get another family; otherwise it says how many would.

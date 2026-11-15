@@ -158,22 +158,22 @@ public static class CompositionChartCaptions
             var recovery = chart.Data;
             var numbers = new List<CaptionNumber> { new("Runs pooled", recovery.RunCount, "runs", "0") };
             return new("Recovery by neutral-mass range", recovery.Available
-                ? "Each bar divides measured peptide envelope signal by the detector's isotope-envelope area in the same 500 Da neutral-mass range, pooling run areas. This is not a share of TIC or a mean of run percentages. The detector is not peptide-FDR calibrated, and a ratio can exceed 100%."
+                ? "Each bar divides Isotope envelopes (measured and identified) by Isotope envelopes (measured) in the same 500 Da neutral-mass range, pooling run areas. This is not a share of TIC or a mean of run percentages. The detector is not peptide-FDR calibrated, and a ratio can exceed 100%."
                 : recovery.Message, numbers);
         }
         if (figure.Chart is RecoveryChart)
         {
             var numbers = new List<CaptionNumber> { new("Acquisition runs", data.Fractions.Count, "runs", "0") };
-            if (data.Grouped is { Tic: > 0 } grouped) numbers.Add(new("Pooled measured envelope recovery", grouped.RecoveredFractionReferenceCalibrated * 100, "%", "0.0"));
+            if (data.Grouped is { Tic: > 0 } grouped) numbers.Add(new("Isotope envelopes (measured and identified) / TIC, pooled", grouped.RecoveredFractionReferenceCalibrated * 100, "%", "0.0"));
             var reference = data.Fractions.Concat(data.Grouped == null ? Array.Empty<NativeRunFraction>() : new[] { data.Grouped })
                 .LastOrDefault(row => row.HasDetectedChargeSplit && row.Tic > 0);
             if (reference != null)
             {
                 string scope = reference.IsGrouped ? "all runs pooled" : reference.Run;
-                numbers.Add(new("Detector z >= 2 share of TIC, " + scope, reference.DetectedFractionMultiplyCharged * 100, "%"));
-                numbers.Add(new("Detector z = 1 share of TIC, " + scope, reference.DetectedFractionSinglyCharged * 100, "%"));
+                numbers.Add(new("Isotope envelopes (measured), charge 2 or higher / TIC, " + scope, reference.DetectedFractionMultiplyCharged * 100, "%"));
+                numbers.Add(new("Isotope envelopes (measured), charge 1 / TIC, " + scope, reference.DetectedFractionSinglyCharged * 100, "%"));
             }
-            return new("Recovery relative to each run's recorded total ion current", "The top compares M+0 only and the measured envelope; these are different readings, not confidence limits. The lower levels are independent comparisons, not a biological partition", numbers,
+            return new("Recovery relative to each run's recorded total ion current", "The top compares M+0 only and Isotope envelopes (measured and identified); these are different readings, not confidence limits. The lower levels are independent comparisons, not a biological partition", numbers,
                 new[] { "Independent MS1 detector: z >= 2: " + Ms1EnvelopeDetector.StrongEvidenceLabel + "; z = 1: " + Ms1EnvelopeDetector.WeakEvidenceLabel,
                     Ms1EnvelopeDetector.SinglyChargedCaveat });
         }

@@ -32,7 +32,7 @@ public static class ReportStoredResults
             sections[ReportSectionIds.Summary].Add(new ReportParagraph("summary-composition",
                 "Headline family composition uses the arithmetic mean of available per-run shares, with sample SD and CV. Pooled composition and within-family parts are labelled separately. Per-run whole measured peptide signal and RAW TIC shares retain their own denominators. Signal found only in UniProt families remains separate."));
             Remove("family-runs-unavailable");
-            exports.Add("family_run_means.csv", ReportStudyExports.MeanShares(runs, familyLabels));
+            exports.Add("family_run_means.csv", ReportStudyExports.MeanShares(runs, familyLabels, grouping));
             string headlineCsv = ReportStudyExports.Headline(grouping, manifest.FamilyProteinCounts, familyLabels);
             exports.Add("report_settings.csv", ReportStudyExports.ReportSettings(grouping));
             results.Insert(0, Table("family-run-means", "Headline family composition: mean of per-run shares", "family_composition_headline.csv",
@@ -77,7 +77,7 @@ public static class ReportStoredResults
                 conflicts = new ReportSection(ReportSectionIds.AssignmentConflicts, "Assignment conflicts", new ReportBlock[] { table });
                 sections[ReportSectionIds.Summary].Insert(0, new ReportParagraph("summary-conflicts", "Assignment conflicts are flagged in their own section. Their signal is excluded from reported families and Others, with its original amount and reason retained."));
             }
-            results.Add(Table("family-run-shares", "Per-run family shares", "family_run_shares.csv", ReportStudyExports.RunShares(runs, familyLabels),
+            results.Add(Table("family-run-shares", "Per-run family shares", "family_run_shares.csv", ReportStudyExports.RunShares(runs, familyLabels, grouping),
                 "Shares of credited family signal, whole measured peptide signal and RAW TIC have distinct, explicit denominators." + displayed,
                 new[] { "family", "run", "assigned_signal_pct", "measured_peptide_signal_pct", "raw_tic_pct" },
                 new[] { "Family", "Run", "Credited signal (%)", "Measured peptide signal (%)", "RAW TIC (%)" }));
@@ -85,14 +85,14 @@ public static class ReportStoredResults
                 "Credited family signal, measured peptide signal and recorded RAW TIC are separate quantities. Missing TIC is unavailable.",
                 new[] { "run", "assigned_family_signal", "measured_peptide_signal", "raw_tic" },
                 new[] { "Run", "Credited family signal", "Measured peptide signal", "RAW TIC" }));
-            sensitivity.Insert(0, Table("pooled-minus-mean", "Pooled-minus-mean diagnostic", "family_pooled_minus_mean.csv", ReportStudyExports.BasisComparison(runs, familyLabels),
+            sensitivity.Insert(0, Table("pooled-minus-mean", "Pooled-minus-mean diagnostic", "family_pooled_minus_mean.csv", ReportStudyExports.BasisComparison(runs, familyLabels, grouping),
                 "Signed difference: all-runs-pooled family share minus the arithmetic mean of per-run shares, in percentage points. This diagnostic does not rescale a pooled subclass or domain part by the run mean." + displayed,
                 new[] { "family", "pooled_minus_mean_percentage_points" }, new[] { "Family", "Pooled minus mean (percentage points)" }));
         }
         if (manifest.FamilyProteinCounts is { } counts)
         {
             Remove("protein-counts-unavailable");
-            string csv = ReportStudyExports.ProteinCounts(counts, familyLabels);
+            string csv = ReportStudyExports.ProteinCounts(counts, familyLabels, grouping);
             results.Add(Table("protein-counts", "Proteins needed to explain the peptides (greedy estimate)", "family_protein_counts.csv", csv,
                 "Database-protein diversity across all assigned peptides. Greedy set cover is an approximation; proteins with a peptide of their own use database-wide uniqueness. A partial explanation retains its unexplained peptides. These are not gene or proteoform counts.",
                 new[] { "family", "greedy_protein_estimate", "unique_peptide_proteins", "unexplained_peptides", "explanation" },

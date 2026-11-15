@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FamilyQuant;
 
@@ -22,8 +23,13 @@ public static class StoredCompositionFigures
             throw new ArgumentException("Stored run shares and subclass parts use different shared-peptide policies.", nameof(manifest));
         if (grouping == null && pooled != null && manifest.FamilyRunShares != null && project != null)
             grouping = FamilyRingGrouping.FromReportThreshold(FamilyReportThreshold.Build(manifest.FamilyRunShares, project));
-        var figures = FamilyCompositionFigures.Build(means, pooled);
-        if (manifest.FamilyRunShares != null) figures.Add(FamilyCompositionFigures.BuildAbundanceDiversity(means));
+        var partition = project != null && manifest.FamilyRunShares != null ? FamilyReportThreshold.Build(manifest.FamilyRunShares, project) : null;
+        if (partition != null) means = StoredCompositionChartData.WithContaminants(means, partition.Contaminants);
+        var displayedPooled = pooled != null && partition != null ? StoredCompositionChartData.WithContaminants(pooled, partition.Contaminants) : pooled;
+        var figures = FamilyCompositionFigures.Build(means, displayedPooled);
+        if (manifest.FamilyRunShares != null)
+            figures.Add(FamilyCompositionFigures.BuildAbundanceDiversity(new(means.Families.Where(row => row.Key != "contaminants"),
+                means.Basis, means.IsMeanOfRuns, means.UnavailableFamilies)));
         if (pooled != null && grouping != null) figures.Add(FamilyCompositionFigures.BuildRing(pooled, grouping));
         if (manifest.FamilyPeptideLocalization != null && project != null)
             figures.AddRange(ProteinCoverageFigures.FromStored(manifest.FamilyPeptideLocalization, project));

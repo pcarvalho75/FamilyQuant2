@@ -102,12 +102,15 @@ internal static partial class ReportNumberTrace
         var bindings = new Dictionary<string, HtmlBound>(StringComparer.Ordinal);
         var errors = new Dictionary<string, string>(StringComparer.Ordinal);
         var databaseEntries = new DatabaseEntryBindings(project, manifest);
+        var shortFields = payload.Fields.Values.Select(field => field.Short).OfType<string>().ToHashSet(StringComparer.Ordinal);
         foreach (var pair in payload.Fields)
         {
             try
             {
                 var source = pair.Value.Source ?? throw new InvalidDataException("Missing binding.");
                 var bound = Resolve(source, pair.Value);
+                if (source.Format == "G3" && shortFields.Contains(pair.Key) && bound.Number.HasValue && N(pair.Value.Text) != bound.Text)
+                    bound = bound with { Text = N(HtmlReportPayloadBuilder.FormatShortNumber(bound.Number.Value)) };
                 if (N(pair.Value.Text) != bound.Text) throw new InvalidDataException("Display differs from exact source/program format.");
                 bindings.Add(pair.Key, bound);
             }
@@ -398,7 +401,7 @@ internal static partial class ReportNumberTrace
             foreach (var basis in new[] { row.IdentifiedOnly, row.IdentifiedAndDeNovo, row.DetectorEnvelopes, row.Tic })
                 if (basis != null) ids.AddRange(new[] { basis.Total, basis.Identified, basis.DeNovo });
         }
-        foreach (var ring in p.Composition.RingBases.Values) ids.AddRange(new[] { ring.Total, ring.Outside });
+        foreach (var ring in p.Composition.RingBases.Values) ids.AddRange(new[] { ring.Total, ring.Outside, ring.OutsidePeptide, ring.OutsideRest });
         foreach (var f in p.Composition.Families)
         {
             ids.AddRange(new[] { f.Name, f.Mean, f.Sd, f.Cv, f.WholeMeasured, f.Proteins, f.UniqueProteins, f.Peptides, f.DatabaseEntries });

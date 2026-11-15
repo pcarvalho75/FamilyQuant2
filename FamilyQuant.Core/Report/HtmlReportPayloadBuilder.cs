@@ -16,6 +16,21 @@ public static partial class HtmlReportPayloadBuilder
         ReportSelection? selection = null, HtmlReportContext? context = null, string wordFileName = "report.docx")
         => new Builder(document, sheets, selection, context ?? new(), wordFileName).Build();
 
+    /// <summary>Three significant display digits in plain decimal, retaining the native G3 rounding.</summary>
+    public static string FormatShortNumber(double value)
+    {
+        string compact = value.ToString("G3", CultureInfo.InvariantCulture);
+        int exponent = compact.IndexOf('E');
+        if (exponent < 0) return compact;
+        int point = 1 + int.Parse(compact[(exponent + 1)..], CultureInfo.InvariantCulture);
+        string digits = compact[..exponent].Replace(".", "", StringComparison.Ordinal);
+        bool negative = digits[0] == '-';
+        if (negative) digits = digits[1..];
+        string plain = point <= 0 ? "0." + new string('0', -point) + digits
+            : point >= digits.Length ? digits + new string('0', point - digits.Length) : digits.Insert(point, ".");
+        return negative ? "-" + plain : plain;
+    }
+
     private sealed partial class Builder
     {
         private sealed record Frame(ReportTable Table, string Owner, int? WordTable, string? Sheet)
@@ -151,7 +166,7 @@ public static partial class HtmlReportPayloadBuilder
 
         private void AddShort(string exact, double nativeValue, HtmlReportReference nativeSource, string? unit = null)
         {
-            string shortId = Add(nativeValue.ToString("G3", CultureInfo.InvariantCulture), nativeSource with { Format = "G3" }, unit ?? fields[exact].Unit, nativeValue);
+            string shortId = Add(FormatShortNumber(nativeValue), nativeSource with { Format = "G3" }, unit ?? fields[exact].Unit, nativeValue);
             fields[exact] = fields[exact] with { Short = shortId };
         }
 
@@ -204,26 +219,31 @@ public static partial class HtmlReportPayloadBuilder
             var native = Native(headline);
             int nativeId = native.Columns.ToList().IndexOf("family_user_id");
             int nativeName = native.Columns.ToList().IndexOf("family");
+            int nativeStatus = native.Columns.ToList().IndexOf("status");
+            int nativeExplanation = native.Columns.ToList().IndexOf("protein_explanation");
             var stored = context.StoredStudies?.FamilyRunShares?.Families.ToDictionary(f => f.FamilyUserId.ToString(CultureInfo.InvariantCulture), StringComparer.Ordinal);
             var result = new List<HtmlReportFamily>();
             for (int row = 0; row < headline.Table.Rows.Count; row++)
             {
                 string key = "row:" + row.ToString(CultureInfo.InvariantCulture);
-                bool others = false;
+                bool others = false, contaminants = false;
                 if (nativeId >= 0 && row < native.Rows.Count)
                 {
                     if (nativeName >= 0 && native.Rows[row][nativeName] != headline.Table.Rows[row][nameColumn])
                         throw new InvalidDataException("The prepared HTML headline and its native row identity differ.");
                     key = native.Rows[row][nativeId];
-                    others = key.Length == 0;
+                    contaminants = key.Length == 0 && nativeStatus >= 0 && native.Rows[row][nativeStatus] == "Contaminants";
+                    others = key.Length == 0 && !contaminants;
                     if (others) key = "others";
+                    if (contaminants) key = "contaminants";
                 }
                 FamilyRunShareSummary? summary = null;
                 if (stored != null) stored.TryGetValue(key, out summary);
                 // Preserve native row order and canonical Others. Never introduce a second fold or a top-N rule.
                 var family = new HtmlReportFamily
                 {
-                    Id = key, IsOthers = others, Name = Cell(headline, row, nameColumn),
+                    Id = key, IsOthers = others, IsContaminants = contaminants, Name = Cell(headline, row, nameColumn),
+                    ContaminantMembers = contaminants && nativeExplanation >= 0 ? native.Rows[row][nativeExplanation] : null,
                     Mean = ShareCell(headline, row, "%", summary?.MeanShare * 100, key, "mean", "Mean share (%)", "mean_pct"),
                     Sd = ShareCell(headline, row, "pp", summary?.StandardDeviation * 100, key, "sd", "Sample SD (pp)", "sample_sd_pct"),
                     WholeMeasured = ShareCell(headline, row, "%", summary?.MeanShareOfMeasuredSignal * 100, key, "whole", "Whole measured (%)", "mean_measured_pct"),

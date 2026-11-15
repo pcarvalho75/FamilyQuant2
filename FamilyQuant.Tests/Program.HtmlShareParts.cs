@@ -65,6 +65,7 @@ internal static partial class Program
     private static void HtmlSharePartsTests(string output)
     {
         Directory.CreateDirectory(output);
+        HtmlPlainPercentLabelTests(output);
         var fixture = HtmlSharePartsFixture();
         var manifest = fixture.Context.StoredStudies!;
         HtmlReportPayload Build(HtmlReportContext? context = null) => HtmlReportPayloadBuilder.Build(fixture.Document, fixture.Sheets, context: context ?? fixture.Context);
@@ -174,6 +175,47 @@ internal static partial class Program
         Check("T11b legacy contribution retains a known total without inventing its parts",
             missingIdentifiedPayload.Composition.ContributionRows[0].Tic is { Total: not null, Identified: null, DeNovo: null }
             && missingIdentifiedPayload.Composition.ContributionRows[0].IdentifiedOnly == null);
+    }
+
+    private static void HtmlPlainPercentLabelTests(string output)
+    {
+        var fixture = HtmlSharePartsFixture();
+        var manifest = fixture.Context.StoredStudies!;
+        foreach (var run in manifest.FamilyRunShares!.Families.Single(family => family.FamilyUserId == 7).Runs)
+            run.IdentifiedSignal = run.Signal - 9.76e-8 * manifest.FamilyRunShares.Runs.Single(total => total.Run == run.Run).MeasuredSignal;
+        string before = JsonSerializer.Serialize(new { fixture.Document, manifest });
+        var payload = HtmlReportPayloadBuilder.Build(fixture.Document, fixture.Sheets, context: fixture.Context);
+        var family = payload.Composition.Families.Single(family => family.Id == "7");
+        var part = payload.Fields[family.IdentifiedAndDeNovoParts!.DeNovo];
+        Check("CT4 tiny family percent parts print three significant plain decimal digits", payload.Fields[part.Short!].Text == "0.00000976");
+        Check("CT4 exact numeric part and G6 text stay unchanged", part.Text == "9.76E-06"
+            && part.Value == HtmlReportPayloadBuilder.ReadFamilyShare(part.Source, manifest) * 100
+            && payload.Fields[part.Short!].Value == part.Value);
+        Check("CT4 true-zero family parts keep their existing display", payload.Fields[payload.Fields[family.IdentifiedOnlyParts!.DeNovo].Short!].Text == "0");
+        Check("CT4 formatting preserves source tables and stored quantities", before == JsonSerializer.Serialize(new { fixture.Document, manifest }));
+        string word = Path.Combine(output, "plain-percent.docx"), workbook = ReportSupplementWorkbook.PathForReport(word);
+        WordReportWriter.Write(word, fixture.Document); ReportSupplementWorkbook.Write(workbook, fixture.Document, fixture.Sheets);
+        Check("CT4 plain percent labels trace to their unchanged native quantity", ReportNumberTrace.RunHtmlBindings(payload, word, workbook, new(), manifest,
+            Path.Combine(output, "plain-percent-trace.csv")) == 0);
+        var fields = payload.Fields.ToDictionary(pair => pair.Key, pair => pair.Value);
+        fields[part.Short!] = fields[part.Short!] with { Text = part.Value!.Value.ToString("G3", CultureInfo.InvariantCulture) };
+        Check("CT4 trace still accepts legacy G3 labels", ReportNumberTrace.RunHtmlBindings(payload with { Fields = fields }, word, workbook, new(), manifest,
+            Path.Combine(output, "legacy-percent-trace.csv")) == 0);
+        fields[part.Short!] = fields[part.Short!] with { Text = "0.00000977" };
+        Check("CT4 trace rejects an incorrect plain decimal label", ReportNumberTrace.RunHtmlBindings(payload with { Fields = fields }, word, workbook, new(), manifest,
+            Path.Combine(output, "forged-percent-trace.csv")) == 1);
+        foreach (var (value, expected) in new[] { (9.764e-6, "0.00000976"), (9.766e-6, "0.00000977"),
+            (-9.76e-6, "-0.00000976"), (1.23456e8, "123000000"), (.000153, "0.000153"), (0d, "0") })
+            Check("CT4 plain short format " + expected, HtmlReportPayloadBuilder.FormatShortNumber(value) == expected);
+        HtmlReportBrowserChecks(Path.Combine(output, "plain-percent-browser"), new[] { ("phone", payload, 390), ("desktop", payload, 1366) }, """
+            const checks={},row=d.querySelector('#family-contribution-chart [data-row="7"]');
+            const label=row.querySelector('.contribution-values').textContent.replace(/\s+/g,' ');
+            checks.plainPercent=label.includes('De novo 0.00000976 %')&&!/[eE][+-]?\d/.test(label);
+            d.querySelector('input[name="normalization-basis"][value="identifiedOnly"]').click();
+            checks.zero=d.querySelector('#family-contribution-chart [data-row="7"] .contribution-values').textContent.replace(/\s+/g,' ').includes('De novo 0 %');
+            checks.noOverflow=d.documentElement.scrollWidth<=w.innerWidth+1;
+            return checks;
+            """);
     }
 
     private static HtmlReportPayload HtmlContributionAllRowsFixture()
