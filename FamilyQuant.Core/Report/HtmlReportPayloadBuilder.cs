@@ -16,6 +16,21 @@ public static partial class HtmlReportPayloadBuilder
         ReportSelection? selection = null, HtmlReportContext? context = null, string wordFileName = "report.docx")
         => new Builder(document, sheets, selection, context ?? new(), wordFileName).Build();
 
+    /// <summary>Three significant display digits in plain decimal, retaining the native G3 rounding.</summary>
+    public static string FormatShortNumber(double value)
+    {
+        string compact = value.ToString("G3", CultureInfo.InvariantCulture);
+        int exponent = compact.IndexOf('E');
+        if (exponent < 0) return compact;
+        int point = 1 + int.Parse(compact[(exponent + 1)..], CultureInfo.InvariantCulture);
+        string digits = compact[..exponent].Replace(".", "", StringComparison.Ordinal);
+        bool negative = digits[0] == '-';
+        if (negative) digits = digits[1..];
+        string plain = point <= 0 ? "0." + new string('0', -point) + digits
+            : point >= digits.Length ? digits + new string('0', point - digits.Length) : digits.Insert(point, ".");
+        return negative ? "-" + plain : plain;
+    }
+
     private sealed partial class Builder
     {
         private sealed record Frame(ReportTable Table, string Owner, int? WordTable, string? Sheet)
@@ -151,7 +166,7 @@ public static partial class HtmlReportPayloadBuilder
 
         private void AddShort(string exact, double nativeValue, HtmlReportReference nativeSource, string? unit = null)
         {
-            string shortId = Add(nativeValue.ToString("G3", CultureInfo.InvariantCulture), nativeSource with { Format = "G3" }, unit ?? fields[exact].Unit, nativeValue);
+            string shortId = Add(FormatShortNumber(nativeValue), nativeSource with { Format = "G3" }, unit ?? fields[exact].Unit, nativeValue);
             fields[exact] = fields[exact] with { Short = shortId };
         }
 
