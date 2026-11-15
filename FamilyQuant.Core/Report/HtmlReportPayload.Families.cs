@@ -18,7 +18,10 @@ public sealed record HtmlFamilyFigure(string Id, string Kind, string Title, bool
 public sealed record HtmlFamilyFigureView(string Basis, string Legend, string XLabel, string YLabel,
     double MinimumX, double MaximumX, double MaximumY,
     IReadOnlyList<HtmlFamilyFigureTick> XTicks, IReadOnlyList<HtmlFamilyFigureTick> YTicks,
-    IReadOnlyList<HtmlFamilyFigureRow> Rows);
+    IReadOnlyList<HtmlFamilyFigureRow> Rows)
+{
+    public double MinimumY { get; init; }
+}
 public sealed record HtmlFamilyFigureNumber(string Exact, string Display);
 public sealed record HtmlFamilyFigureTick(double Position, string Label);
 public sealed record HtmlFamilyFigurePart(string Name, HtmlFamilyFigureNumber Value, bool Unresolved,
