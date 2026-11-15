@@ -58,6 +58,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-ledger-drops-2114", "FamilyQuant.Tests.Program.LedgerDrops2114Tests()", "FamilyQuant.Tests.Program.FeatureLedgerBaseTests(System.Boolean)", "FamilyQuant.Tests.Program.FeatureLedgerMutationTest(System.Int32,System.Boolean)"),
         SuiteCommandRule.Covered("--test-family-count-once", "FamilyQuant.Tests.Program.FamilyCountOnceTests(System.String)", "FamilyQuant.Tests.Program.FamilyContributionChartTests(System.String)"),
         SuiteCommandRule.Covered("--test-results-percent-only", "FamilyQuant.Tests.Program.ResultsPercentOnlyTests(System.String)"),
+        SuiteCommandRule.Excluded("--deck-screens-2120", "Desk-only 2.1.20 deck screen producer over explicit copies of a computed project and its exported report; it reads Results, File and the report as they are and writes only screens and a families file in a fresh output folder."),
         SuiteCommandRule.Covered("--test-results-cascade", "FamilyQuant.Tests.Program.ResultsCascadeTests()"),
         SuiteCommandRule.Covered("--test-results-topn-placement", "FamilyQuant.Tests.Program.ResultsTopNPlacementTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-share-bases", "FamilyQuant.Tests.Program.HtmlShareBasesTests()"),
