@@ -43,6 +43,7 @@ public static class ReportFigureRenderer
         reportGrouping ??= manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation);
         var visibleFamilies = families == null ? null : ReportFigureMembership.Visible(families, reportGrouping);
         var familyLabels = ReportFamilyNames.SourceLabels(curation, families?.Families.ToDictionary(family => family.FamilyUserId, family => family.Description));
+        var contaminants = FamilyContaminants.OnlyIds(curation);
         var charts = new List<ReportChart>();
         var unavailable = new List<ReportFigureAvailability>();
         void Add(string section, string file, string title, string guidance, Func<FrameworkElement> factory,
@@ -99,7 +100,8 @@ public static class ReportFigureRenderer
         charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportPrintChart.LayoutHeight };
         if (visibleFamilies != null)
         {
-            var bars = FamilyContributionPlot.Fold(visibleFamilies, reportGrouping == null ? FamilyContributionPlot.DefaultTopN : 0, familyLabels: familyLabels);
+            var bars = FamilyContributionPlot.Fold(visibleFamilies, reportGrouping == null ? FamilyContributionPlot.DefaultTopN : 0, familyLabels: familyLabels,
+                contaminantFamilyIds: contaminants);
             var pages = reportGrouping == null ? new[] { bars.ToArray() } : bars.Chunk(12).DefaultIfEmpty(Array.Empty<FamilyContributionBar>()).ToArray();
             for (int page = 0; page < pages.Length; page++)
             {
@@ -108,12 +110,12 @@ public static class ReportFigureRenderer
                     + "_" + (page + 1).ToString(CultureInfo.InvariantCulture) + ".png";
                 Add(ReportSectionIds.Results, file, "Family signal contributions" + (pages.Length > 1 ? " - page " + (page + 1).ToString(CultureInfo.InvariantCulture) : ""),
                     "Current curated family contributions on the chart's stated shared-peptide basis. Shared and unattributed signal remain explicit.",
-                    () => reportGrouping == null ? new FamilyContributionChart(visibleFamilies, familyLabels: familyLabels)
+                    () => reportGrouping == null ? new FamilyContributionChart(visibleFamilies, familyLabels: familyLabels, contaminantFamilyIds: contaminants)
                         : new FamilyContributionChart(pageBars, measuredEnvelope: visibleFamilies.MeasuredTotalEnvelopeReferenceCalibrated, identityThresholdFraction: visibleFamilies.IdentityThreshold));
                 if (reportGrouping != null) charts[^1] = charts[^1] with { Height = Math.Max(540, 240 + pageBars.Length * 50) };
             }
             Add(ReportSectionIds.Results, PresentationFigures.FamilySignalShareFile, "Family signal and de novo share",
-                "Family signal against its de novo contribution; these axes describe abundance and evidence source, not diversity.", () => new FamilySignalShareChart(visibleFamilies, 10, familyLabels),
+                "Family signal against its de novo contribution; these axes describe abundance and evidence source, not diversity.", () => new FamilySignalShareChart(visibleFamilies, 10, familyLabels, contaminants),
                 new CaptionNumber("Family rows shown from the stored attribution", visibleFamilies.Families.Count, "families", "0"));
             var census = visibleFamilies.SourceSequenceSummary;
             var sourcePages = ReportFamilySourceSequenceChart.Pages(census, familyLabels);

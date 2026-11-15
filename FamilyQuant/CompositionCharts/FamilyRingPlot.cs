@@ -17,24 +17,28 @@ public sealed class FamilyRingGrouping
     public IReadOnlyList<string> OthersFamilyKeys { get; }
     public IReadOnlyList<string> ConflictingFamilyKeys { get; }
     public IReadOnlyList<string> ExcludedFamilyKeys { get; }
+    public IReadOnlyList<string> ContaminantFamilyKeys { get; }
     public double? ThresholdPercent { get; }
     public static FamilyRingGrouping FromReportThreshold(FamilyReportThresholdResult result) => new(
         result.OtherFamilies.Select(f => Key(f.FamilyUserId)), result.Threshold * 100,
-        result.ConflictFamilies.Select(f => Key(f.Family.FamilyUserId)), result.ExcludedFamilies.Select(f => Key(f.FamilyUserId)));
+        result.ConflictFamilies.Select(f => Key(f.Family.FamilyUserId)), result.ExcludedFamilies.Select(f => Key(f.FamilyUserId)),
+        result.Contaminants.Families.Select(f => Key(f.FamilyUserId)));
     private static string Key(int id) => id.ToString(CultureInfo.InvariantCulture);
     public FamilyRingGrouping(IEnumerable<string> othersFamilyKeys, double? thresholdPercent = null,
-        IEnumerable<string>? conflictingFamilyKeys = null, IEnumerable<string>? excludedFamilyKeys = null)
+        IEnumerable<string>? conflictingFamilyKeys = null, IEnumerable<string>? excludedFamilyKeys = null, IEnumerable<string>? contaminantFamilyKeys = null)
     {
         var keys = othersFamilyKeys.ToArray();
         var conflicts = (conflictingFamilyKeys ?? Array.Empty<string>()).ToArray();
         var excluded = (excludedFamilyKeys ?? Array.Empty<string>()).ToArray();
-        var all = keys.Concat(conflicts).Concat(excluded).ToArray();
+        var contaminants = (contaminantFamilyKeys ?? Array.Empty<string>()).ToArray();
+        var all = keys.Concat(conflicts).Concat(excluded).Concat(contaminants).ToArray();
         if (all.Any(string.IsNullOrWhiteSpace) || all.Distinct(StringComparer.Ordinal).Count() != all.Length)
             throw new ArgumentException("Ring membership keys must be distinct, disjoint and nonempty.", nameof(othersFamilyKeys));
         if (thresholdPercent is double threshold && (!double.IsFinite(threshold) || threshold < 0 || threshold > 100))
             throw new ArgumentOutOfRangeException(nameof(thresholdPercent));
         OthersFamilyKeys = Array.AsReadOnly(keys); ThresholdPercent = thresholdPercent;
         ConflictingFamilyKeys = Array.AsReadOnly(conflicts); ExcludedFamilyKeys = Array.AsReadOnly(excluded);
+        ContaminantFamilyKeys = Array.AsReadOnly(contaminants);
     }
 }
 
@@ -48,7 +52,8 @@ internal static class FamilyRingPlot
         var othersKeys = grouping.OthersFamilyKeys.ToHashSet(StringComparer.Ordinal);
         var conflicts = grouping.ConflictingFamilyKeys.ToHashSet(StringComparer.Ordinal);
         var excluded = grouping.ExcludedFamilyKeys.ToHashSet(StringComparer.Ordinal);
-        if (othersKeys.Concat(conflicts).Concat(excluded).Except(data.Families.Select(f => f.Key), StringComparer.Ordinal).Any())
+        var contaminants = grouping.ContaminantFamilyKeys.ToHashSet(StringComparer.Ordinal);
+        if (othersKeys.Concat(conflicts).Concat(excluded).Concat(contaminants).Except(data.Families.Select(f => f.Key), StringComparer.Ordinal).Any())
             throw new ArgumentException("A canonical ring member is absent from the pooled data.", nameof(grouping));
         if (data.Families.Count == 0) return Array.Empty<FamilyRingGroup>();
         if (Math.Abs(data.Families.Sum(f => f.MeanPercent) - 100) > 1e-8)
@@ -62,11 +67,11 @@ internal static class FamilyRingPlot
                 .ToArray();
             return new FamilyRingGroup(label, rows.Sum(r => r.MeanPercent), others, Array.AsReadOnly(rows.ToArray()), Array.AsReadOnly(parts), unassigned);
         }
-        foreach (var row in data.Families.Where(r => !othersKeys.Contains(r.Key) && !conflicts.Contains(r.Key) && !excluded.Contains(r.Key)))
+        foreach (var row in data.Families.Where(r => !othersKeys.Contains(r.Key) && !conflicts.Contains(r.Key) && !excluded.Contains(r.Key) && !contaminants.Contains(r.Key)))
             groups.Add(Group(row.Label, new[] { row }, false));
         var small = data.Families.Where(r => othersKeys.Contains(r.Key)).ToArray();
         if (small.Length > 0) groups.Add(Group("Others (" + small.Length + (small.Length == 1 ? " family)" : " families)"), small, true));
-        foreach (var (label, membership) in new[] { ("Conflicting families", conflicts), ("Not a panel family", excluded) })
+        foreach (var (label, membership) in new[] { ("contaminants", contaminants), ("Conflicting families", conflicts), ("Not a panel family", excluded) })
         {
             var rows = data.Families.Where(r => membership.Contains(r.Key)).ToArray();
             if (rows.Length > 0) groups.Add(Group(label, rows, false, true));

@@ -61,4 +61,29 @@ public static class StoredCompositionChartData
     private static string Name(int id, IReadOnlyDictionary<int, string>? labels) =>
         labels != null && labels.TryGetValue(id, out string? value) && !string.IsNullOrWhiteSpace(value)
             ? value : "Family " + id.ToString(CultureInfo.InvariantCulture);
+
+    public static FamilyCompositionData WithContaminants(FamilyCompositionData data, FamilyReportAggregate bucket)
+    {
+        if (bucket.Families.Count == 0) return data;
+        var ids = bucket.Families.Select(f => f.FamilyUserId.ToString(CultureInfo.InvariantCulture)).ToHashSet(StringComparer.Ordinal);
+        var rows = new List<FamilyCompositionValue>();
+        var members = new List<FamilyCompositionValue>();
+        foreach (var row in data.Families)
+            if (ids.Contains(row.Key)) members.Add(row);
+            else rows.Add(row);
+        if (data.IsMeanOfRuns)
+        {
+            var statistics = bucket.AssignedStatistics;
+            if (statistics.Mean is double mean)
+                rows.Add(new("contaminants", "contaminants", 100 * mean, 100 * statistics.StandardDeviation,
+                    statistics.AvailableRunCount, Array.Empty<FamilySubclassValue>(), null, null));
+        }
+        else
+        {
+            var parts = members.SelectMany(row => row.Subclasses.Select(part => new FamilySubclassValue(row.Key + ":" + part.Key,
+                row.Label + ": " + part.Label, part.Percent))).ToArray();
+            rows.Add(new("contaminants", "contaminants", members.Sum(row => row.MeanPercent), null, 0, parts, null, null));
+        }
+        return new(rows, data.Basis, data.IsMeanOfRuns, data.UnavailableFamilies);
+    }
 }

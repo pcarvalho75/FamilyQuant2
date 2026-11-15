@@ -555,10 +555,12 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => HtmlMassQualityTests(Path.Combine(workDir, "html-mass-quality")));
             suite.AddWithApplication(() => HtmlRecoveryExplanationTests(Path.Combine(workDir, "html-recovery-explanations")));
             suite.Add(() => HtmlRingBasesTests(Path.Combine(workDir, "html-ring-bases")));
+            suite.Add(() => HtmlRingRemainderTests(Path.Combine(workDir, "html-ring-remainder")));
             suite.AddWithApplication(() => MassRangeRecoveryTests(Path.Combine(workDir, "mass-range-recovery")));
             suite.AddWithApplication(() => HtmlReportWordsTests(Path.Combine(workDir, "html-report-words")));
             suite.AddWithApplication(() => ReportFamilyNameTests(Path.Combine(workDir, "report-family-names")));
             suite.AddWithApplication(() => HtmlFamilyPieTests(Path.Combine(workDir, "html-family-pie")));
+            suite.AddWithApplication(() => ContaminantFamilyShareTests(Path.Combine(workDir, "contaminant-family-shares")));
             suite.AddWithApplication(() => ResultsFamilyPieTests(Path.Combine(workDir, "results-family-pie")));
             suite.AddWithApplication(() => MassRangePolishTests(Path.Combine(workDir, "mass-range-polish")));
             suite.Add(() => DatabaseEntryCountTests(null));

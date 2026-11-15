@@ -97,7 +97,7 @@ public sealed class HtmlFamilyFigurePacket
 
     public static HtmlFamilyFigurePacket Prepare(ReportStudyFigurePacket studies, ReportFigurePlan legacy,
         ReportCompositionBasis basis, QuantManifest manifest, FamilyEnvelopeQuantResult? families = null,
-        IReadOnlyDictionary<int, string>? familyLabels = null)
+        IReadOnlyDictionary<int, string>? familyLabels = null, IReadOnlySet<int>? contaminantFamilyIds = null)
     {
         var plots = new List<Plot>();
         foreach (var figure in studies.NativeFigures)
@@ -109,13 +109,13 @@ public sealed class HtmlFamilyFigurePacket
         foreach (var figure in legacy.Charts.Where(figure => Owns("figure:" + figure.FileName)))
             Add("figure:" + figure.FileName, figure.SectionId, figure.Title, figure.CreateChart());
         var pie = FamilyPieData.Build(families, policy: manifest.FamilyRunShares?.Policy == SharedPeptidePolicy.SplitEqually
-            ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique, familyLabels: familyLabels);
+            ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique, familyLabels: familyLabels, contaminantFamilyIds: contaminantFamilyIds);
         if (pie.Unavailable == null)
         {
             var plot = new Plot("figure:" + AnalyticsFigures.FamilyContributionFile, "pie", "Family contribution, all runs pooled",
                 ReportSectionIds.Results, false, "Native family pie");
             var rows = pie.Slices.Select(slice => new Row(slice.Key, plot.Text(slice.Label), plot.Number(slice.Percent, "%"), null, null, null,
-                "All runs pooled", new[] { new Part(plot.Text("Identified"), plot.Number(slice.IdentifiedPercent, "%")!, false),
+                "All runs pooled" + (slice.Description.Length > 0 ? "; " + slice.Description : ""), new[] { new Part(plot.Text("Identified"), plot.Number(slice.IdentifiedPercent, "%")!, false),
                     new Part(plot.Text("De novo"), plot.Number(slice.DeNovoPercent, "%")!, false) })).ToArray();
             plot.Views["fixed"] = ViewOf(rows, FamilyPieData.Basis, FamilyPieData.Legend, "Share of PSM and de novo (%)", "Source parts on the same base", true);
             plots.Add(plot);
@@ -197,7 +197,8 @@ public sealed class HtmlFamilyFigurePacket
                     double? mean = row.MeanPercent, sd = row.SdPercent;
                     if (key != "credited")
                     {
-                        string sourceKey = row.Key == "others" ? "others:" + string.Join(",", basis.Grouping!.OtherFamilies.Select(f => f.FamilyUserId).Order()) : row.Key;
+                        string sourceKey = row.Key == "others" ? "others:" + string.Join(",", basis.Grouping!.OtherFamilies.Select(f => f.FamilyUserId).Order())
+                            : row.Key == "contaminants" ? "contaminants:" + string.Join(",", basis.Grouping!.Contaminants.Families.Select(f => f.FamilyUserId).Order()) : row.Key;
                         var source = new HtmlReportReference { Kind = "family-basis", Family = sourceKey,
                             Study = basis.UsesPanel && !basis.IsIdentity ? "effective" : "source", Property = SourceBasis(key) + "/mean" };
                         mean = HtmlReportPayloadBuilder.ReadFamilyShare(source, manifest) * 100;

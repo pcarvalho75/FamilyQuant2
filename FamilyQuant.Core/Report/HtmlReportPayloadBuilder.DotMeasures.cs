@@ -22,7 +22,7 @@ public static partial class HtmlReportPayloadBuilder
             {
                 if ((measure.Id == "databaseEntries") != databaseOnly) continue;
                 var values = new SortedDictionary<string, string>(StringComparer.Ordinal);
-                foreach (var family in families.Where(f => !f.IsOthers))
+                foreach (var family in families.Where(f => !f.IsOthers && !f.IsContaminants))
                 {
                     string? id = measure.Field(family);
                     if (id != null && fields.TryGetValue(id, out var field) && field.Value is double value
@@ -37,7 +37,7 @@ public static partial class HtmlReportPayloadBuilder
                     foreach (string basis in new[] { "identifiedOnly", "identifiedAndDeNovo", "detectorEnvelopes", "tic" })
                     {
                         var sourceValues = new SortedDictionary<string, string>(StringComparer.Ordinal);
-                        foreach (var family in families.Where(family => !family.IsOthers))
+                        foreach (var family in families.Where(family => !family.IsOthers && !family.IsContaminants))
                         {
                             var statistics = basis switch
                             {

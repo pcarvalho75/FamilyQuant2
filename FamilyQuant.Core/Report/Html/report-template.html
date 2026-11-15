@@ -3669,7 +3669,7 @@
               (a, b) => (val(b.mean) ?? -Infinity) - (val(a.mean) ?? -Infinity),
             );
           const familyColor = (f) =>
-            f.isOthers
+            f.isOthers || f.isContaminants
               ? "var(--s6)"
               : colors[Math.max(0, ordered.indexOf(f)) % colors.length];
           const shareBases = [
@@ -3704,7 +3704,7 @@
             val(f[base.key]?.mean) !== null || (f.runs || []).some(run => val(run[base.key]) !== null)))
             || contributionRows.some(row => shareBases.some(base => val(row[base.key]?.total) !== null));
           const state = {
-            selected: ordered.find((f) => !f.isOthers) || ordered[0],
+            selected: ordered.find((f) => !f.isOthers && !f.isContaminants) || ordered[0],
             drill: false,
             all: false,
             query: "",
@@ -3817,6 +3817,8 @@
               element.dataset.basis = state.basis;
               const label = field(row.name, "div");
               label.className = "contribution-label";
+              const grouped = families.find(family => family.id === row.id && family.isContaminants);
+              if (grouped) label.title = grouped.contaminantMembers;
               const plot = node("div"), track = node("div", "contribution-track");
               track.setAttribute("aria-hidden", "true");
               const available = [parts.total, parts.identified, parts.deNovo].every(id => val(id) !== null);
@@ -4112,7 +4114,7 @@
                 large = end - start > Math.PI ? 1 : 0;
               return `M${a} A${outside},${outside} 0 ${large} 1 ${b} L${c} A${inside},${inside} 0 ${large} 0 ${d} Z`;
             };
-            const whole = ordered.filter((x) => (val(ringMean(x)) ?? 0) > 0),
+            const whole = ordered.filter((x) => !x.isContaminants && (val(ringMean(x)) ?? 0) > 0),
               wholeSum = basis ? 100 : whole.reduce((sum, x) => sum + val(ringMean(x)), 0);
             const parentIndex = whole.indexOf(f),
               parentStart =
@@ -4296,6 +4298,15 @@
               angle = end;
             });
             if (selectedPath) ring.append(selectedPath);
+            const contaminants = ordered.find(family => family.isContaminants);
+            if (basis && contaminants && exists(rankingStatistics(contaminants).mean)) {
+              const key = node("button", "quiet-button ring-contaminants-key");
+              key.append(field(contaminants.name), document.createTextNode(" "), displayField(rankingStatistics(contaminants).mean),
+                node("small", "", "Included in Outside the shown families"));
+              key.title = contaminants.contaminantMembers + " Inspect the grouped share included in the remainder.";
+              key.onclick = () => familyDialog(contaminants);
+              $("composition-legend").append(key);
+            }
             if (selectedArc) ring.append(selectedArc);
             if (!state.drill)
               motion(
@@ -4466,8 +4477,9 @@
             const ranked = ordered.slice().sort((a, b) =>
               (val(rankingStatistics(b)[sortField]) ?? -Infinity) - (val(rankingStatistics(a)[sortField]) ?? -Infinity));
             const rankedWithOthersLast = [
-              ...ranked.filter((f) => !f.isOthers),
+              ...ranked.filter((f) => !f.isOthers && !f.isContaminants),
               ...ranked.filter((f) => f.isOthers),
+              ...ranked.filter((f) => f.isContaminants),
             ];
             const matches = rankedWithOthersLast.filter((f) =>
               text(f.name)
@@ -4478,8 +4490,9 @@
               state.all || state.query
                 ? matches
                 : [
-                    ...matches.filter((f) => !f.isOthers).slice(0, limit),
+                    ...matches.filter((f) => !f.isOthers && !f.isContaminants).slice(0, limit),
                     ...matches.filter((f) => f.isOthers),
+                    ...matches.filter((f) => f.isContaminants),
                   ];
             host.classList.toggle(
               "can-expand",
@@ -4498,7 +4511,7 @@
               const row = node("div", "rank-row");
               row.dataset.family = f.id;
               row.style.setProperty("--family-color", familyColor(f));
-              row.classList.toggle("is-others", f.isOthers);
+              row.classList.toggle("is-others", f.isOthers || f.isContaminants);
               row.onpointermove = (event) => {
                 if (
                   event.pointerType === "mouse" &&
@@ -4529,6 +4542,7 @@
               const runCountLabel = val(mean) === null ? "mean unavailable" : count ? "mean of " + runLabel : "run count unavailable";
               name.append(node("span", "rank-run-count", runCountLabel));
               name.title = "Select this family to explore its stored values. This changes only the view of this report.";
+              if (f.isContaminants) name.title = f.contaminantMembers + " Inspect the grouped contaminants without changing the project.";
               name.setAttribute("aria-pressed", String(f === state.selected));
               name.onclick = () => select(f);
               name.onfocus = () => {
@@ -4723,6 +4737,7 @@
           }
           function familyDialog(f) {
             const content = [node("p", "full-family-header", familyLabel(f.name, true))];
+            if (f.contaminantMembers) content.push(node("p", "", f.contaminantMembers));
             const dl = node("dl");
             for (const [label, id] of [
               ["Mean share of credited family signal", f.mean],
@@ -5323,7 +5338,7 @@
               ["log", "linear"].includes(measure.scale) &&
               ordered.some(
                 (f) =>
-                  !f.isOthers &&
+                  !f.isOthers && !f.isContaminants &&
                   exists(measure.values?.[f.id]) &&
                   val(measure.values[f.id]) !== null,
               ),
@@ -5526,7 +5541,7 @@
               right = width - margin.right,
               top = margin.top,
               bottom = height - margin.bottom;
-            const eligible = ordered.filter((f) => !f.isOthers);
+            const eligible = ordered.filter((f) => !f.isOthers && !f.isContaminants);
             function axis(measure) {
               const ticks = (measure.ticks || []).filter(
                 (id) =>

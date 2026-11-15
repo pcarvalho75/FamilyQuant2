@@ -14,7 +14,7 @@ public static partial class HtmlReportPayloadBuilder
                 ? null : new(statistics.Mean, parts?.Identified, parts?.DeNovo);
             var rows = new List<HtmlContributionRow>();
             foreach (var family in families)
-                rows.Add(new(family.Id, family.IsOthers ? "others" : "family", family.Name)
+                rows.Add(new(family.Id, family.IsContaminants ? "contaminants" : family.IsOthers ? "others" : "family", family.Name)
                 {
                     IdentifiedOnly = Shares(family.IdentifiedOnly, family.IdentifiedOnlyParts),
                     IdentifiedAndDeNovo = Shares(family.IdentifiedAndDeNovo, family.IdentifiedAndDeNovoParts),

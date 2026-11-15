@@ -62,10 +62,12 @@ public partial class AnalyticsControl : UserControl
         {
             FrameworkElement plotted = figure.Chart;
             if (plotted is FamilyContributionChart)
-                plotted = ViewModel.FamilyPie ? new FamilyPieChart(FamilyPieData.Build(Families, FamilyTopN, ViewModel.FamilySharedPolicy, ViewModel.FamilyLabels))
-                    : new FamilyContributionChart(Families, FamilyTopN, FamilyAsPercent, sharedPolicy: ViewModel.FamilySharedPolicy, familyLabels: ViewModel.FamilyLabels);
+                plotted = ViewModel.FamilyPie ? new FamilyPieChart(FamilyPieData.Build(Families, FamilyTopN, ViewModel.FamilySharedPolicy, ViewModel.FamilyLabels, ViewModel.ContaminantFamilies))
+                    : new FamilyContributionChart(Families, FamilyTopN, FamilyAsPercent, sharedPolicy: ViewModel.FamilySharedPolicy, familyLabels: ViewModel.FamilyLabels,
+                        contaminantFamilyIds: ViewModel.ContaminantFamilies);
             if (plotted is IPalettedChart chart) chart.Palette = ChartPalette.UiPalette;
-            string text = plotted is FamilyPieChart ? FamilyPieData.Caption : CompositionChartCaptions.Build(figure, Data);
+            string text = plotted is FamilyPieChart ? FamilyPieData.Caption
+                : CompositionChartCaptions.Build(plotted is FamilyContributionChart ? new AnalyticsFigure(figure.FileName, plotted, figure.ScreenHeight) : figure, Data);
             var caption = new TextBlock { Text = text,
                 ToolTip = "This line explains the chart and its recorded numbers. The complete explanation is included in the report.",
                 Tag = "figure-caption:" + figure.FileName,
