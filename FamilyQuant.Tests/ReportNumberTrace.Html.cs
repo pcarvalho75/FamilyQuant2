@@ -398,7 +398,7 @@ internal static partial class ReportNumberTrace
             foreach (var basis in new[] { row.IdentifiedOnly, row.IdentifiedAndDeNovo, row.DetectorEnvelopes, row.Tic })
                 if (basis != null) ids.AddRange(new[] { basis.Total, basis.Identified, basis.DeNovo });
         }
-        foreach (var ring in p.Composition.RingBases.Values) ids.AddRange(new[] { ring.Total, ring.Outside });
+        foreach (var ring in p.Composition.RingBases.Values) ids.AddRange(new[] { ring.Total, ring.Outside, ring.OutsidePeptide, ring.OutsideRest });
         foreach (var f in p.Composition.Families)
         {
             ids.AddRange(new[] { f.Name, f.Mean, f.Sd, f.Cv, f.WholeMeasured, f.Proteins, f.UniqueProteins, f.Peptides, f.DatabaseEntries });

@@ -96,7 +96,8 @@ namespace FamilyQuant
             => BuildFamilyComposition(result, policy, denominator, basis, formatName, null);
 
         public static string BuildFamilyComposition(FamilyEnvelopeQuantResult result, SharedPeptidePolicy policy,
-            double denominator, string basis, System.Func<string?, string>? formatName, IReadOnlyDictionary<int, string>? familyLabels)
+            double denominator, string basis, System.Func<string?, string>? formatName, IReadOnlyDictionary<int, string>? familyLabels,
+            IReadOnlySet<int>? contaminantFamilyIds = null)
         {
             var csv = new StringBuilder();
             csv.AppendLine(string.Join(",", new[]
@@ -109,13 +110,24 @@ namespace FamilyQuant
             string basisField = Field(basis + "; " + policy.ShortName() +
                 (policy == SharedPeptidePolicy.FamilyUnique ? ", shared ones in their own row" : string.Empty));
 
+            double contaminants = 0;
+            int contaminantCount = 0;
             foreach (FamilyEnvelopeQuantRow f in result.Families
                 .OrderByDescending(f => f.Signal(policy)).ThenBy(f => f.FamilyUserId))
             {
+                if (contaminantFamilyIds?.Contains(f.FamilyUserId) == true)
+                {
+                    contaminants += f.Signal(policy);
+                    contaminantCount++;
+                    continue;
+                }
                 csv.AppendLine(string.Join(",", f.FamilyUserId.ToString(CultureInfo.InvariantCulture),
                     Field(formatName == null ? familyLabels?.GetValueOrDefault(f.FamilyUserId, f.Description) ?? f.Description
                         : formatName(familyLabels?.GetValueOrDefault(f.FamilyUserId, f.Description) ?? f.Description)), Num(f.Signal(policy)), Fraction(f.Signal(policy)), basisField));
             }
+
+            if (contaminantCount > 0)
+                csv.AppendLine(string.Join(",", string.Empty, Field("contaminants"), Num(contaminants), Fraction(contaminants), basisField));
 
             if (policy == SharedPeptidePolicy.FamilyUnique)
                 csv.AppendLine(string.Join(",", string.Empty, Field("shared between families"),

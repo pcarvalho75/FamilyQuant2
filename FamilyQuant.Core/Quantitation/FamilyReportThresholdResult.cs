@@ -29,6 +29,15 @@ namespace FamilyQuant
         public double? CoefficientOfVariation { get; set; }
     }
 
+    public sealed class FamilyReportAggregate
+    {
+        public List<FamilyRunShareSummary> Families { get; set; } = new();
+        public List<FamilyRunShare> Runs { get; set; } = new();
+        public FamilyReportShareStatistics AssignedStatistics { get; set; } = new();
+        public FamilyReportShareStatistics MeasuredStatistics { get; set; } = new();
+        public FamilyReportShareStatistics TicStatistics { get; set; } = new();
+    }
+
     /// <summary>Canonical report partition. Shares and threshold are fractions. OtherFamilies keeps
     /// source rows for the supplement. Unavailable and conflicting families remain separate.</summary>
     public sealed class FamilyReportThresholdResult
@@ -40,6 +49,7 @@ namespace FamilyQuant
         public List<FamilyRunShareSummary> UnavailableFamilies { get; set; } = new();
         public List<FamilyRunShareSummary> ExcludedFamilies { get; set; } = new();
         public List<FamilyReportMappingConflict> ConflictFamilies { get; set; } = new();
+        public FamilyReportAggregate Contaminants { get; set; } = new();
         public List<FamilyRunShare> OthersRuns { get; set; } = new();
         public double? OthersMeanShare { get; set; }
         public FamilyReportShareStatistics OthersAssignedStatistics { get; set; } = new();

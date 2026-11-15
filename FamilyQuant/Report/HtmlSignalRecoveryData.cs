@@ -60,7 +60,7 @@ public static class HtmlSignalRecoveryData
             {
                 Share("m0", "M+0 only", row, row.RecoveredFractionM0, row.IdentifiedAreaM0 + row.DeNovoAreaM0),
                 Share("measured", chart.EnvelopeLabel, row, row.RecoveredFractionEnvelope, row.IdentifiedEnvelope + row.DeNovoEnvelope),
-                Share("detector", "Detector isotope envelopes", row, row.DetectedFractionPeptideLike, row.DetectedPeptideLikeArea,
+                Share("detector", "Isotope envelopes (measured)", row, row.DetectedFractionPeptideLike, row.DetectedPeptideLikeArea,
                     row.HasDetectedPeptideLike ? null : "A detector total is not recorded for this run; this is not a zero measurement."),
                 Share("tic", "TIC", row, 1, row.Tic),
             },
@@ -68,9 +68,9 @@ public static class HtmlSignalRecoveryData
             {
                 Share("identified", "Identified measured envelope", row, row.IdentifiedFractionEnvelope, row.IdentifiedEnvelope),
                 Share("denovo", "De novo measured envelope", row, row.DeNovoFractionEnvelope, row.DeNovoEnvelope),
-                Share("detector-multi", "Detector envelopes, charge 2 or higher", row, row.DetectedFractionMultiplyCharged,
+                Share("detector-multi", "Isotope envelopes (measured), charge 2 or higher", row, row.DetectedFractionMultiplyCharged,
                     row.DetectedAreaMultiplyCharged, row.HasDetectedChargeSplit ? null : "The detector charge split is not recorded for this run."),
-                Share("detector-single", "Detector envelopes, charge 1", row, row.DetectedFractionSinglyCharged,
+                Share("detector-single", "Isotope envelopes (measured), charge 1", row, row.DetectedFractionSinglyCharged,
                     row.DetectedAreaSinglyCharged, row.HasDetectedChargeSplit ? null : "The detector charge split is not recorded for this run."),
             },
         }).ToArray();
@@ -89,7 +89,7 @@ public static class HtmlSignalRecoveryData
                 Share("identified", "Identified envelope", row, row.IdentifiedFractionEnvelope, row.IdentifiedEnvelope),
                 Share("denovo", "De novo measured envelope", row, row.DeNovoFractionReferenceCalibrated, row.DeNovoEnvelope),
             },
-            Total = Share("total", "Total measured envelope", row, row.RecoveredFractionReferenceCalibrated,
+            Total = Share("total", "Isotope envelopes (measured and identified)", row, row.RecoveredFractionReferenceCalibrated,
                 row.IdentifiedEnvelope + row.DeNovoEnvelope),
         }).ToArray();
         return new() { Id = id, Kind = "by-run", Title = title, Rows = rows, Maximum = Maximum(rows, 100),
@@ -105,7 +105,7 @@ public static class HtmlSignalRecoveryData
         var values = new[]
         {
             Share("identified", "Identified envelope", row, row.IdentifiedFractionEnvelope, row.IdentifiedEnvelope),
-            Share("combined", "Identified + de novo measured envelope", row, row.RecoveredFractionReferenceCalibrated,
+            Share("combined", "Isotope envelopes (measured and identified)", row, row.RecoveredFractionReferenceCalibrated,
                 row.IdentifiedEnvelope + row.DeNovoEnvelope),
         };
         var rows = new[] { new HtmlSignalRow { Name = "All runs pooled", IsPooled = true, Parts = values } };

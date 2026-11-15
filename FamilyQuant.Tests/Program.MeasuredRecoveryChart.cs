@@ -57,12 +57,12 @@ internal static partial class Program
                     Math.Abs(rectangles[i * 2].Width / rectangles[i * 2 + 1].Width - .3) < 1e-10));
             Check("T4 " + variant + " legend gives each reading its own plain line and keeps the detector caveat",
                 chart.LegendLines[0].StartsWith("M+0 only:", StringComparison.Ordinal)
-                && chart.LegendLines[1].StartsWith("Measured envelope (M+0 to M+5):", StringComparison.Ordinal)
+                && chart.LegendLines[1].StartsWith("Isotope envelopes (measured and identified) (M+0 to M+5):", StringComparison.Ordinal)
                 && chart.LegendLines.Count == 4 && chart.ToolTip.ToString()!.Contains("not peptide-FDR calibrated", StringComparison.Ordinal));
         }
         Check("T4 the ceiling label describes the recorded window rather than the number of nonzero peaks",
-            new RecoveryChart(fractions, isotopeCeiling: 3).EnvelopeLabel == "Measured envelope (M+0 to M+2)"
-            && new RecoveryChart(fractions, isotopeCeiling: 1).EnvelopeLabel == "Measured envelope (M+0)"
+            new RecoveryChart(fractions, isotopeCeiling: 3).EnvelopeLabel == "Isotope envelopes (measured and identified) (M+0 to M+2)"
+            && new RecoveryChart(fractions, isotopeCeiling: 1).EnvelopeLabel == "Isotope envelopes (measured and identified) (M+0)"
             && new RecoveryChart(fractions).EnvelopeLabel.Contains("not recorded", StringComparison.Ordinal));
 
         var rows = new[] { new QuantRow { Run = "run01", Side = "identified", Scan = 1, Sequence = "PEPTIDEK",

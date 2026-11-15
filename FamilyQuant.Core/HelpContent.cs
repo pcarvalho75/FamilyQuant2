@@ -85,19 +85,20 @@ namespace FamilyQuant
             sb.AppendLine("The Signal recovery guide defines a peptide feature, explains each TIC-based reading,");
             sb.AppendLine("and explains isotope, detector and TIC gaps without treating them as biological classes.");
             sb.AppendLine("Database gap also gives each part's share of its own family's displayed signal total;");
-            sb.AppendLine("the separate comparison panel keeps all measured peptide feature signal as its base.");
+            sb.AppendLine("the separate comparison panel keeps PSM and de novo as its base.");
             sb.AppendLine("Signal sources by family lists families by pooled total signal, largest first.");
             sb.AppendLine("What the numbers mean at the top defines the reference totals and peptide features.");
             sb.AppendLine("Share rows use compact percentages. The chart heading names their reference total.");
             sb.AppendLine("Hover or select a value for its exact reading and base, including rounded ring totals.");
+            sb.AppendLine("The ring remainder under TIC or Isotope envelopes (measured) separates other families, shared and unattributed from the base not explained by PSM and de novo, in both legend and caption. The two parts keep the original remainder total; PSM bases keep one Outside the shown families line, as does an independent measured base that is smaller than the PSM and de novo signal.");
             sb.AppendLine("Family labels stop before database header fields; tooltips and details retain the full name.");
             sb.AppendLine("In File > Export, Family names chooses Name or Other-language name for report and Results labels.");
             sb.AppendLine("A blank other-language name keeps Name. Export applies the choice, Save keeps it in the project, and Undo does not change it.");
             sb.AppendLine("In the HTML Family contribution chart, Pie uses the Results bars' pooled family buckets,");
-            sb.AppendLine("including other families, shared and unattributed signal. It always divides by all measured");
-            sb.AppendLine("peptide-feature signal and keeps that base when Normalize to changes; Bars keeps the run means.");
+            sb.AppendLine("including other families, shared and unattributed signal. It always divides by");
+            sb.AppendLine("PSM and de novo and keeps that base when Normalize to changes; Bars keeps the run means.");
             sb.AppendLine("On Results, Family chart also offers Pie with the current family cutoff and the same pooled");
-            sb.AppendLine("all-peptide-feature buckets as its bars. Choose a Top N entry to return to bars.");
+            sb.AppendLine("PSM and de novo buckets as its bars. Choose a Top N entry to return to bars.");
             sb.AppendLine("The compare-measures plot's mean and SD follow Normalize to, with its base named on the axis.");
             sb.AppendLine("Coverage uses matching choosers, a residue ruler and List placements and annotations.");
             sb.AppendLine();
@@ -454,7 +455,7 @@ namespace FamilyQuant
             sb.AppendLine("language is. That is on purpose: the file is meant to be read by a program.");
 
             sb.AppendLine();
-            sb.AppendLine("Recovery by mass range divides measured peptide envelope signal by the detector's isotope-envelope area in the same 500 Da neutral-mass range, pooling run areas. Identified-equivalent de novo features are excluded. The view spans the first through last range with detector signal; blank ranges have no detector signal. It is not a share of TIC or a mean of run percentages; the independent detector is not peptide-FDR calibrated and ratios can exceed 100%. Older projects need Quantify again to record the detector ranges for this view.");
+            sb.AppendLine("Recovery by mass range divides Isotope envelopes (measured and identified) by Isotope envelopes (measured) in the same 500 Da neutral-mass range, pooling run areas. Identified-equivalent de novo features are excluded. The view spans the first through last range with detector signal; blank ranges have no detector signal. It is not a share of TIC or a mean of run percentages; the independent detector is not peptide-FDR calibrated and ratios can exceed 100%. Older projects need Quantify again to record the detector ranges for this view.");
             sb.AppendLine();
             sb.AppendLine(HelpWorkflowFacts.FilesAndNavigation);
             sb.AppendLine(HelpWorkflowFacts.Families);

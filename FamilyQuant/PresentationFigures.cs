@@ -2250,10 +2250,11 @@ namespace FamilyQuant
         /// <summary>Number of labels whose most recent placement required a leader line.</summary>
         public int LastLabelLeaderCount { get; private set; }
 
-        public FamilySignalShareChart(FamilyEnvelopeQuantResult families, int labelTopN, IReadOnlyDictionary<int, string>? familyLabels = null)
+        public FamilySignalShareChart(FamilyEnvelopeQuantResult families, int labelTopN, IReadOnlyDictionary<int, string>? familyLabels = null,
+            IReadOnlySet<int>? contaminantFamilyIds = null)
         {
             if (families == null) throw new ArgumentNullException(nameof(families));
-            rows = families.Families.OrderBy(f => f.FamilyUserId).ToList();
+            rows = families.Families.Where(f => contaminantFamilyIds?.Contains(f.FamilyUserId) != true).OrderBy(f => f.FamilyUserId).ToList();
             FamilyLabels = familyLabels ?? new Dictionary<int, string>();
             labelledFamilyIds = rows.OrderByDescending(f => f.TotalEnvelopeReferenceCalibrated)
                 .ThenBy(f => f.FamilyUserId).Take(Math.Max(0, labelTopN))

@@ -19,10 +19,11 @@ public static partial class HtmlReportPayloadBuilder
         var study = source.Study == "effective" ? manifest.EffectivePanelFamilies?.RunShares : manifest.FamilyRunShares;
         if (study == null || study.Policy is not (SharedPeptidePolicy.FamilyUnique or SharedPeptidePolicy.SplitEqually)) return null;
         FamilyRunShareSummary? family;
-        if (source.Family.StartsWith("others:", StringComparison.Ordinal))
+        if (source.Family.StartsWith("others:", StringComparison.Ordinal) || source.Family.StartsWith("contaminants:", StringComparison.Ordinal))
         {
-            int[] ids = source.Family[7..].Length == 0 ? Array.Empty<int>()
-                : source.Family[7..].Split(',').Select(id => int.Parse(id, CultureInfo.InvariantCulture)).ToArray();
+            string membership = source.Family[(source.Family.IndexOf(':') + 1)..];
+            int[] ids = membership.Length == 0 ? Array.Empty<int>()
+                : membership.Split(',').Select(id => int.Parse(id, CultureInfo.InvariantCulture)).ToArray();
             if (ids.Distinct().Count() != ids.Length) throw new InvalidDataException("Duplicate canonical Others member.");
             var members = ids.Select(id => study.Families.SingleOrDefault(f => f.FamilyUserId == id)).ToArray();
             if (members.Any(f => f == null)) return null;
@@ -107,18 +108,19 @@ public static partial class HtmlReportPayloadBuilder
 
     private sealed partial class Builder
     {
-        private HtmlReportFamily OtherFamilyShares(HtmlReportFamily family)
+        private HtmlReportFamily OtherFamilyShares(HtmlReportFamily family, bool contaminants = false)
         {
             var study = context.StoredStudies?.FamilyRunShares;
             if (study == null || context.SourceGrouping == null) return family;
-            var sourceIds = context.SourceGrouping.OtherFamilies.Select(f => f.FamilyUserId).ToHashSet();
+            var sourceIds = (contaminants ? context.SourceGrouping.Contaminants.Families : context.SourceGrouping.OtherFamilies)
+                .Select(f => f.FamilyUserId).ToHashSet();
             var ids = study.Families.Where(f => context.UsesPanel && !context.IsIdentity
                 ? context.SourceUserIds.TryGetValue(f.FamilyUserId, out var members) && members.Count > 0 && members.All(sourceIds.Contains)
                 : sourceIds.Contains(f.FamilyUserId)).Select(f => f.FamilyUserId).Order().ToArray();
             var represented = context.UsesPanel && !context.IsIdentity
                 ? ids.SelectMany(id => context.SourceUserIds[id]).ToHashSet() : ids.ToHashSet();
             if (!sourceIds.SetEquals(represented)) throw new InvalidDataException("Canonical Others membership does not match the stored family study.");
-            string key = "others:" + string.Join(",", ids.Select(id => id.ToString(CultureInfo.InvariantCulture)));
+            string key = (contaminants ? "contaminants:" : "others:") + string.Join(",", ids.Select(id => id.ToString(CultureInfo.InvariantCulture)));
             var runs = new System.Collections.Generic.List<HtmlFamilyRun>();
             if (!excluded.Contains("family-run-shares"))
                 for (int i = 0; i < study.Runs.Count; i++)

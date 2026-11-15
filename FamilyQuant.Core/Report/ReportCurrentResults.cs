@@ -13,7 +13,7 @@ public static class ReportCurrentResults
 {
     public static ReportResultPacket Build(AnalyticsData data, QuantManifest manifest, FamilyEnvelopeQuantResult? families,
         SharedPeptidePolicy policy = SharedPeptidePolicy.FamilyUnique, FamilyReportThresholdResult? grouping = null,
-        IReadOnlyDictionary<int, string>? familyLabels = null)
+        IReadOnlyDictionary<int, string>? familyLabels = null, IReadOnlySet<int>? contaminantFamilyIds = null)
     {
         var exports = new SortedDictionary<string, string>(StringComparer.Ordinal);
         var results = new List<ReportBlock>(); var quality = new List<ReportBlock>();
@@ -32,20 +32,20 @@ public static class ReportCurrentResults
             double assigned = families.Families.Sum(f => f.Signal(policy));
             var measured = Export("composition-measured", "Family shares of the whole measured signal, all runs pooled", "family_composition_measured.csv",
                 CsvReport.BuildFamilyComposition(families, policy, families.MeasuredTotalEnvelopeReferenceCalibrated,
-                    "fraction of whole measured peptide signal; " + basis, ProteinNameFormatting.ForNewOutput, familyLabels),
+                    "fraction of whole measured peptide signal; " + basis, ProteinNameFormatting.ForNewOutput, familyLabels, contaminantFamilyIds),
                 "Fractions use the whole measured peptide signal, not RAW TIC. Shared and unattributed rows retain the program's selected allocation policy.",
                 "family_user_id", "description", "signal_primary_estimate", "fraction");
             results.Add(measured with { Columns = new[] { "Family ID", "Family", "Primary signal", "Fraction of measured signal" } });
             if (policy != SharedPeptidePolicy.CountInEveryFamily)
             {
                 var composition = Export("composition-assigned", "Database-family composition diagnostic, all runs pooled", "family_composition_credited.csv",
-                    CsvReport.BuildFamilyComposition(families, policy, assigned, "fraction of signal credited to database families; " + basis, ProteinNameFormatting.ForNewOutput, familyLabels),
+                    CsvReport.BuildFamilyComposition(families, policy, assigned, "fraction of signal credited to database families; " + basis, ProteinNameFormatting.ForNewOutput, familyLabels, contaminantFamilyIds),
                     "All runs pooled. Family rows sum to 1 when credited signal is available. Signal found only in UniProt families is excluded. The mean-of-per-run composition is a separate result. These are signal shares, not a direct measurement of sample mass.",
                     "family_user_id", "description", "signal_primary_estimate", "fraction");
                 results.Insert(0, composition with
                 {
                     Columns = new[] { "Family ID", "Family", "Primary signal", "Fraction of credited signal" },
-                    Rows = composition.Rows.Where(r => r[0].Length > 0).ToArray(),
+                    Rows = composition.Rows.Where(r => r[0].Length > 0 || r[1] == "contaminants").ToArray(),
                 });
             }
             else results.Insert(0, new ReportParagraph("composition-overlap-warning", "Count in every family produces overlapping contributions. They cannot be summed or normalized as sample composition."));

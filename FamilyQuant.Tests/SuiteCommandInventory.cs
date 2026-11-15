@@ -8,6 +8,8 @@ internal static class SuiteCommandInventory
 {
     internal static IReadOnlyList<SuiteCommandRule> Entries { get; } =
     [
+        SuiteCommandRule.Covered("--test-html-ring-remainder-display", "FamilyQuant.Tests.Program.HtmlRingRemainderDisplayTests(System.String)"),
+        SuiteCommandRule.Covered("--test-signal-base-names", "FamilyQuant.Tests.Program.SignalBaseNameTests(System.String)"),
         SuiteCommandRule.Covered("--test-review-nonempty-tabs", "FamilyQuant.Tests.Program.ReviewNonemptyTabTests(System.String)"),
         SuiteCommandRule.Covered("--test-review-layout3", "FamilyQuant.Tests.Program.ReviewLayout3Tests(System.String)"),
         SuiteCommandRule.Covered("--test-subclass-unchanged-membership", "FamilyQuant.Tests.Program.SubclassUnchangedMembershipTests()"),
@@ -504,10 +506,12 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-html-mass-quality", "FamilyQuant.Tests.Program.HtmlMassQualityTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-recovery-explanations", "FamilyQuant.Tests.Program.HtmlRecoveryExplanationTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-ring-bases", "FamilyQuant.Tests.Program.HtmlRingBasesTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-ring-remainder", "FamilyQuant.Tests.Program.HtmlRingRemainderTests(System.String)"),
         SuiteCommandRule.Covered("--test-mass-range-recovery", "FamilyQuant.Tests.Program.MassRangeRecoveryTests(System.String)", "FamilyQuant.Tests.Program.HtmlMassQualityTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-report-words", "FamilyQuant.Tests.Program.HtmlReportWordsTests(System.String)"),
         SuiteCommandRule.Covered("--test-report-family-names", "FamilyQuant.Tests.Program.ReportFamilyNameTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-family-pie", "FamilyQuant.Tests.Program.HtmlFamilyPieTests(System.String)"),
+        SuiteCommandRule.Covered("--test-contaminant-family-shares", "FamilyQuant.Tests.Program.ContaminantFamilyShareTests(System.String)"),
         SuiteCommandRule.Covered("--test-results-family-pie", "FamilyQuant.Tests.Program.ResultsFamilyPieTests(System.String)"),
         SuiteCommandRule.Covered("--test-mass-range-polish", "FamilyQuant.Tests.Program.MassRangePolishTests(System.String)"),
         SuiteCommandRule.Covered("--test-database-entry-counts", "FamilyQuant.Tests.Program.DatabaseEntryCountTests(System.String)"),

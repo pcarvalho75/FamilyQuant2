@@ -108,7 +108,7 @@ internal static partial class Program
                 const metric=d.querySelector('#ring-value [data-metric="'+ring.total+'"]'), short=fields[ring.total].short;
                 checks[key+'CompactCentre']=metric.textContent===fields[short].text+' %'&&metric.title.includes(fields[ring.total].text)&&w.getComputedStyle(metric).whiteSpace==='nowrap';
               }
-              checks[key+'Base'] = d.getElementById('ring-name').textContent.includes(key==='tic'?'TIC':key==='detectorEnvelopes'?'detector':key==='identifiedOnly'?'identified':'peptide-feature');
+              checks[key+'Base'] = d.getElementById('ring-name').textContent.includes(key==='tic'?'TIC':key==='detectorEnvelopes'?'Isotope envelopes (measured)':key==='identifiedOnly'?'PSM only':'PSM and de novo');
               if (!ring.canDraw) {
                 checks[key+'Unavailable'] = !d.getElementById('ring-unavailable').hidden && !d.querySelector('#composition-ring .ring-slice');
                 continue;
@@ -118,10 +118,11 @@ internal static partial class Program
                 return path.dataset.share===family[key].mean;
               });
               const outside=d.querySelector('.ring-outside-key');
-              checks[key+'Outside'] = !!outside&&outside.textContent.includes('Outside the shown families')&&outside.getClientRects().length>0;
-              checks[key+'CompactOutside']=outside.textContent.includes(fields[fields[ring.outside].short].text+' %')&&outside.title.includes(fields[ring.outside].text);
+              const outsideId=ring.outsidePeptide&&ring.outsideRest?ring.outsidePeptide:ring.outside;
+              checks[key+'Outside'] = !!outside&&outside.textContent.includes(outsideId===ring.outside?'Outside the shown families':'other families, shared and unattributed')&&outside.getClientRects().length>0;
+              checks[key+'CompactOutside']=outside.textContent.includes(fields[fields[outsideId].short].text+' %')&&outside.title.includes(fields[outsideId].text);
               outside.focus();outside.click();
-              checks[key+'OutsideValue'] = !!d.querySelector('#dialog-body [data-fq-field="'+ring.outside+'"]');
+              checks[key+'OutsideValue'] = !!d.querySelector('#dialog-body [data-fq-field="'+outsideId+'"]');
               d.getElementById('dialog-close').click();
               paths.add([...d.querySelectorAll('#composition-ring .ring-slice')].map(path=>path.getAttribute('d')).join('|'));
               const selected=p.composition.families.find(f=>!f.isOthers);

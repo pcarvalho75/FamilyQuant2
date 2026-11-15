@@ -19,8 +19,8 @@ namespace FamilyQuant
         public IReadOnlyList<NativeRunFraction> Rows => rows;
         public int? IsotopeCeiling { get; }
         public string EnvelopeLabel => IsotopeCeiling.HasValue
-            ? "Measured envelope (M+0" + (IsotopeCeiling == 1 ? ")" : " to M+" + (IsotopeCeiling.Value - 1).ToString(CultureInfo.InvariantCulture) + ")")
-            : "Measured envelope (isotope ceiling not recorded)";
+            ? "Isotope envelopes (measured and identified) (M+0" + (IsotopeCeiling == 1 ? ")" : " to M+" + (IsotopeCeiling.Value - 1).ToString(CultureInfo.InvariantCulture) + ")")
+            : "Isotope envelopes (measured and identified) (isotope ceiling not recorded)";
         public IReadOnlyList<string> LegendLines
         {
             get
@@ -29,11 +29,11 @@ namespace FamilyQuant
                 {
                     "M+0 only: identified and de novo monoisotopic signal divided by this run's TIC.",
                     EnvelopeLabel + ": all credited isotopes / run TIC; lower bar: identified then de novo.",
-                    "MS1 total ion current: all measured signal in this run, shown as 100%.",
+                    "TIC: all measured signal in this run, shown as 100%.",
                 };
                 if (rows.Any(r => r.HasDetectedPeptideLike))
                     lines.Add(AnyChargeSplit ? ChargeSplitLegendText()
-                        : "Resolved isotope-series diagnostic: independent MS1 estimate, not peptide-FDR calibrated.");
+                        : "Isotope envelopes (measured): independent MS1 measurement, not peptide-FDR calibrated.");
                 return lines;
             }
         }
@@ -332,9 +332,9 @@ namespace FamilyQuant
             bool split = AnyChargeSplit;
             var caption = Text(anyDetected
                     ? (split
-                        ? "MS1 TIC, resolved isotope-series diagnostic (z >= 2 then z = 1), and measured envelope recovery"
-                        : "MS1 TIC, resolved isotope-series diagnostic, and measured envelope recovery")
-                    : "MS1 TIC vs measured envelope recovery",
+                        ? "TIC, Isotope envelopes (measured), z >= 2 then z = 1, and Isotope envelopes (measured and identified)"
+                        : "TIC, Isotope envelopes (measured), and Isotope envelopes (measured and identified)")
+                    : "TIC against Isotope envelopes (measured and identified)",
                 Muted, 11, bold: true);
             dc.DrawText(caption, new Point(area.Left - nameGutter + 4, area.Top - 16));
 
@@ -451,10 +451,10 @@ namespace FamilyQuant
             string numbers = reference == null || !(reference.Tic > 0)
                 ? string.Empty
                 : "  " + Pct(reference.DetectedFractionMultiplyCharged) + " and " +
-                  Pct(reference.DetectedFractionSinglyCharged) + " of the TIC" +
+                  Pct(reference.DetectedFractionSinglyCharged) + " of TIC" +
                   (reference.IsGrouped ? " over the runs together" : " on " + reference.Run) + ".";
 
-            return "Resolved series: z >= 2 stronger evidence; z = 1 weaker evidence, which can include peptides." + numbers;
+            return "Isotope envelopes (measured): z >= 2 stronger evidence; z = 1 weaker evidence, which can include peptides." + numbers;
 
         }
 

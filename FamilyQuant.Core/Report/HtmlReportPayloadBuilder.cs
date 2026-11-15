@@ -204,26 +204,31 @@ public static partial class HtmlReportPayloadBuilder
             var native = Native(headline);
             int nativeId = native.Columns.ToList().IndexOf("family_user_id");
             int nativeName = native.Columns.ToList().IndexOf("family");
+            int nativeStatus = native.Columns.ToList().IndexOf("status");
+            int nativeExplanation = native.Columns.ToList().IndexOf("protein_explanation");
             var stored = context.StoredStudies?.FamilyRunShares?.Families.ToDictionary(f => f.FamilyUserId.ToString(CultureInfo.InvariantCulture), StringComparer.Ordinal);
             var result = new List<HtmlReportFamily>();
             for (int row = 0; row < headline.Table.Rows.Count; row++)
             {
                 string key = "row:" + row.ToString(CultureInfo.InvariantCulture);
-                bool others = false;
+                bool others = false, contaminants = false;
                 if (nativeId >= 0 && row < native.Rows.Count)
                 {
                     if (nativeName >= 0 && native.Rows[row][nativeName] != headline.Table.Rows[row][nameColumn])
                         throw new InvalidDataException("The prepared HTML headline and its native row identity differ.");
                     key = native.Rows[row][nativeId];
-                    others = key.Length == 0;
+                    contaminants = key.Length == 0 && nativeStatus >= 0 && native.Rows[row][nativeStatus] == "Contaminants";
+                    others = key.Length == 0 && !contaminants;
                     if (others) key = "others";
+                    if (contaminants) key = "contaminants";
                 }
                 FamilyRunShareSummary? summary = null;
                 if (stored != null) stored.TryGetValue(key, out summary);
                 // Preserve native row order and canonical Others. Never introduce a second fold or a top-N rule.
                 var family = new HtmlReportFamily
                 {
-                    Id = key, IsOthers = others, Name = Cell(headline, row, nameColumn),
+                    Id = key, IsOthers = others, IsContaminants = contaminants, Name = Cell(headline, row, nameColumn),
+                    ContaminantMembers = contaminants && nativeExplanation >= 0 ? native.Rows[row][nativeExplanation] : null,
                     Mean = ShareCell(headline, row, "%", summary?.MeanShare * 100, key, "mean", "Mean share (%)", "mean_pct"),
                     Sd = ShareCell(headline, row, "pp", summary?.StandardDeviation * 100, key, "sd", "Sample SD (pp)", "sample_sd_pct"),
                     WholeMeasured = ShareCell(headline, row, "%", summary?.MeanShareOfMeasuredSignal * 100, key, "whole", "Whole measured (%)", "mean_measured_pct"),

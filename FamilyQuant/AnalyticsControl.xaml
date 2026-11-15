@@ -38,7 +38,7 @@
     <ComboBoxItem Content="Top 20 families" Tag="20" ToolTip="Show the twenty largest families separately and combine all remaining families in one bar, suited to a paper figure. This changes chart layout and subsequent figure exports without editing quantities."/>
     <ComboBoxItem Content="Top 30 families" Tag="30" ToolTip="Show the thirty largest families separately and combine all remaining families in one bar; labels need more screen space. This changes chart layout and subsequent figure exports without editing quantities."/>
     <ComboBoxItem Content="All families" Tag="0" ToolTip="Give every family its own chart bar, allowing scrolling when needed. This changes chart layout and subsequent figure exports without editing quantities."/>
-    <ComboBoxItem Content="Pie" Tag="pie" ToolTip="Show the current family cutoff as a pie, including other families, shared and unattributed signal on the all-peptide-feature base. This changes the Results view and uses the same pooled numbers as the bars."/>
+    <ComboBoxItem Content="Pie" Tag="pie" ToolTip="Show the current family cutoff as a pie, including other families, shared and unattributed signal on the PSM and de novo base. This changes the Results view and uses the same pooled numbers as the bars."/>
    </ComboBox>
   </WrapPanel>
     <StackPanel x:Name="PanelFamilyChart"/>

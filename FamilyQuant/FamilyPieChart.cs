@@ -24,7 +24,7 @@ public sealed class FamilyPieChart : CompositionDrawingBase
     {
         Data = data ?? throw new ArgumentNullException(nameof(data));
         Focusable = true;
-        ToolTip = data.Unavailable ?? "Read family, other-family, shared and unattributed shares of all measured peptide features, with all runs pooled. Hover a slice or use the arrow keys to inspect exact values; this changes only the view.";
+        ToolTip = data.Unavailable ?? "Read family, other-family, shared and unattributed shares of PSM and de novo, with all runs pooled. Hover a slice or use the arrow keys to inspect exact values; this changes only the view.";
     }
 
     public static double RecommendedHeight(FamilyPieData data) => Math.Max(420, 160 + data.Slices.Count * 23);
@@ -33,14 +33,15 @@ public sealed class FamilyPieChart : CompositionDrawingBase
     {
         var slice = Data.Slices[index];
         string Percent(double value) => value.ToString("G17", CultureInfo.CurrentCulture) + "%";
-        return slice.Label + ": " + Percent(slice.Percent) + " of all measured peptide-feature signal. Identified "
-            + Percent(slice.IdentifiedPercent) + ", de novo " + Percent(slice.DeNovoPercent) + "; all runs pooled.";
+        return slice.Label + ": " + Percent(slice.Percent) + " of PSM and de novo. Identified "
+            + Percent(slice.IdentifiedPercent) + ", de novo " + Percent(slice.DeNovoPercent) + "; all runs pooled."
+            + (slice.Description.Length > 0 ? " " + slice.Description : "");
     }
 
     protected override void OnRender(DrawingContext dc)
     {
         base.OnRender(dc);
-        Heading(dc, "Family contribution: Pie", "Percent of all measured peptide-feature signal; all runs pooled");
+        Heading(dc, "Family contribution: Pie", "Percent of PSM and de novo; all runs pooled");
         targets.Clear();
         var legend = new List<string>();
         var numbered = new List<int>();

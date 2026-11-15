@@ -97,7 +97,7 @@ public sealed class HtmlFamilyFigurePacket
 
     public static HtmlFamilyFigurePacket Prepare(ReportStudyFigurePacket studies, ReportFigurePlan legacy,
         ReportCompositionBasis basis, QuantManifest manifest, FamilyEnvelopeQuantResult? families = null,
-        IReadOnlyDictionary<int, string>? familyLabels = null)
+        IReadOnlyDictionary<int, string>? familyLabels = null, IReadOnlySet<int>? contaminantFamilyIds = null)
     {
         var plots = new List<Plot>();
         foreach (var figure in studies.NativeFigures)
@@ -109,15 +109,15 @@ public sealed class HtmlFamilyFigurePacket
         foreach (var figure in legacy.Charts.Where(figure => Owns("figure:" + figure.FileName)))
             Add("figure:" + figure.FileName, figure.SectionId, figure.Title, figure.CreateChart());
         var pie = FamilyPieData.Build(families, policy: manifest.FamilyRunShares?.Policy == SharedPeptidePolicy.SplitEqually
-            ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique, familyLabels: familyLabels);
+            ? SharedPeptidePolicy.SplitEqually : SharedPeptidePolicy.FamilyUnique, familyLabels: familyLabels, contaminantFamilyIds: contaminantFamilyIds);
         if (pie.Unavailable == null)
         {
             var plot = new Plot("figure:" + AnalyticsFigures.FamilyContributionFile, "pie", "Family contribution, all runs pooled",
                 ReportSectionIds.Results, false, "Native family pie");
             var rows = pie.Slices.Select(slice => new Row(slice.Key, plot.Text(slice.Label), plot.Number(slice.Percent, "%"), null, null, null,
-                "All runs pooled", new[] { new Part(plot.Text("Identified"), plot.Number(slice.IdentifiedPercent, "%")!, false),
+                "All runs pooled" + (slice.Description.Length > 0 ? "; " + slice.Description : ""), new[] { new Part(plot.Text("Identified"), plot.Number(slice.IdentifiedPercent, "%")!, false),
                     new Part(plot.Text("De novo"), plot.Number(slice.DeNovoPercent, "%")!, false) })).ToArray();
-            plot.Views["fixed"] = ViewOf(rows, FamilyPieData.Basis, FamilyPieData.Legend, "Share of all measured peptide-feature signal (%)", "Source parts on the same base", true);
+            plot.Views["fixed"] = ViewOf(rows, FamilyPieData.Basis, FamilyPieData.Legend, "Share of PSM and de novo (%)", "Source parts on the same base", true);
             plots.Add(plot);
         }
         return new(plots, pie.Unavailable);
@@ -181,7 +181,7 @@ public sealed class HtmlFamilyFigurePacket
                         new Part(plot.Text("Shared exact sequence"), plot.Number(row.SharedPeaksDeepNovoDistinctSequences, "sequences")!, false),
                         new Part(plot.Text("DeepNovo only"), plot.Number(row.DeepNovoExclusiveDistinctSequences, "sequences")!, false),
                     })).ToArray();
-                plot.Views["fixed"] = ViewOf(rows, "Distinct normalized sequences, all runs pooled", "All runs pooled. Bars count distinct normalized de novo sequences, split into the two caller-only sets and their exact shared set. Database-search sequence counts are separate context. These are sequence counts, not peptide feature signal shares. Changing Normalize to does not change them.", "Distinct de novo sequences", "", false);
+                plot.Views["fixed"] = ViewOf(rows, "Distinct normalized sequences, all runs pooled", "All runs pooled. Bars count distinct normalized de novo sequences, split into the two caller-only sets and their exact shared set. Database-search sequence counts are separate context. These are sequence counts, not signal shares. Changing Normalize to does not change them.", "Distinct de novo sequences", "", false);
             }
         }
 
@@ -197,7 +197,8 @@ public sealed class HtmlFamilyFigurePacket
                     double? mean = row.MeanPercent, sd = row.SdPercent;
                     if (key != "credited")
                     {
-                        string sourceKey = row.Key == "others" ? "others:" + string.Join(",", basis.Grouping!.OtherFamilies.Select(f => f.FamilyUserId).Order()) : row.Key;
+                        string sourceKey = row.Key == "others" ? "others:" + string.Join(",", basis.Grouping!.OtherFamilies.Select(f => f.FamilyUserId).Order())
+                            : row.Key == "contaminants" ? "contaminants:" + string.Join(",", basis.Grouping!.Contaminants.Families.Select(f => f.FamilyUserId).Order()) : row.Key;
                         var source = new HtmlReportReference { Kind = "family-basis", Family = sourceKey,
                             Study = basis.UsesPanel && !basis.IsIdentity ? "effective" : "source", Property = SourceBasis(key) + "/mean" };
                         mean = HtmlReportPayloadBuilder.ReadFamilyShare(source, manifest) * 100;
@@ -218,7 +219,7 @@ public sealed class HtmlFamilyFigurePacket
     }
 
     private static string SourceBasis(string key) => key switch { "identifiedOnly" => "IdentifiedOnly", "identifiedAndDeNovo" => "IdentifiedAndDeNovo", "detectorEnvelopes" => "DetectorEnvelopes", _ => "Tic" };
-    private static string BaseName(string key) => key switch { "identifiedOnly" => "all identified peptide feature signal", "identifiedAndDeNovo" => "all peptide feature signal, identified and de novo, each feature counted once", "detectorEnvelopes" => "the detector's all-charge isotope-envelope area", _ => "the recorded total ion current (TIC)" };
+    private static string BaseName(string key) => key switch { "identifiedOnly" => "PSM only", "identifiedAndDeNovo" => "PSM and de novo", "detectorEnvelopes" => "Isotope envelopes (measured)", _ => "TIC" };
     private static View ViewOf(IReadOnlyList<Row> rows, string basis, string legend, string xLabel, string yLabel, bool percent, bool scatter = false, bool integerY = false)
     {
         double minimum = Math.Min(0, Math.Floor(rows.Select(row => row.Lower?.Value ?? 0).DefaultIfEmpty(0).Min() / 10) * 10);
