@@ -118,10 +118,11 @@ internal static partial class Program
                 return path.dataset.share===family[key].mean;
               });
               const outside=d.querySelector('.ring-outside-key');
-              checks[key+'Outside'] = !!outside&&outside.textContent.includes('Outside the shown families')&&outside.getClientRects().length>0;
-              checks[key+'CompactOutside']=outside.textContent.includes(fields[fields[ring.outside].short].text+' %')&&outside.title.includes(fields[ring.outside].text);
+              const outsideId=ring.outsidePeptide&&ring.outsideRest?ring.outsidePeptide:ring.outside;
+              checks[key+'Outside'] = !!outside&&outside.textContent.includes(outsideId===ring.outside?'Outside the shown families':'other families, shared and unattributed')&&outside.getClientRects().length>0;
+              checks[key+'CompactOutside']=outside.textContent.includes(fields[fields[outsideId].short].text+' %')&&outside.title.includes(fields[outsideId].text);
               outside.focus();outside.click();
-              checks[key+'OutsideValue'] = !!d.querySelector('#dialog-body [data-fq-field="'+ring.outside+'"]');
+              checks[key+'OutsideValue'] = !!d.querySelector('#dialog-body [data-fq-field="'+outsideId+'"]');
               d.getElementById('dialog-close').click();
               paths.add([...d.querySelectorAll('#composition-ring .ring-slice')].map(path=>path.getAttribute('d')).join('|'));
               const selected=p.composition.families.find(f=>!f.isOthers);

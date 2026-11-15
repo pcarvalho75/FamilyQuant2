@@ -556,6 +556,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => HtmlRecoveryExplanationTests(Path.Combine(workDir, "html-recovery-explanations")));
             suite.Add(() => HtmlRingBasesTests(Path.Combine(workDir, "html-ring-bases")));
             suite.Add(() => HtmlRingRemainderTests(Path.Combine(workDir, "html-ring-remainder")));
+            suite.Add(() => HtmlRingRemainderDisplayTests());
             suite.AddWithApplication(() => MassRangeRecoveryTests(Path.Combine(workDir, "mass-range-recovery")));
             suite.AddWithApplication(() => HtmlReportWordsTests(Path.Combine(workDir, "html-report-words")));
             suite.AddWithApplication(() => ReportFamilyNameTests(Path.Combine(workDir, "report-family-names")));

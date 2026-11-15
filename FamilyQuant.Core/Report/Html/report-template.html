@@ -2935,7 +2935,8 @@
     </style>
     <style>
       /* U8 begin */
-      .ring-outside-key { text-align: left; padding: 6px 0; flex-wrap: wrap; }
+      .ring-outside-key { text-align: left; padding: 6px 0; flex-wrap: wrap; flex-basis: 100%; }
+      .ring-remainder-line { display: block; }
       #composition-legend:has(.ring-outside-key) { display: flex; }
       #ring-unavailable { margin-top: 12px; }
       /* U8 end */
@@ -4039,6 +4040,9 @@
             const f = state.selected,
               groups = f ? plotParts(f) : new Map();
             const basis = activeRingBasis();
+            const outsideParts = basis && val(basis.outsidePeptide) !== null && val(basis.outsideRest) !== null
+              ? [{ label: "other families, shared and unattributed", share: basis.outsidePeptide },
+                 { label: "not explained by PSM and de novo", share: basis.outsideRest }] : null;
             $("ring-unavailable").hidden = !basis || basis.canDraw;
             $("ring-unavailable").textContent = basis?.unavailable || "";
             refreshRingCentre(f);
@@ -4051,8 +4055,15 @@
             }
             $("composition-plain-legend").textContent = state.drill
               ? "Each slice shows a part of the selected family's pooled signal. The denominator is that family's credited signal across all runs; this ring has no whiskers." + fixedBaseLegend
-              : basis ? "Each arc shows the mean of " + basis.runCount + (basis.runCount === 1 ? " run" : " runs") + " as a percent of " + rankingBaseName() + ". The hatched arc shows the share outside the shown families, on the same base. Select an arc for its stored value, with no whiskers on this ring."
+              : basis ? "Each arc shows the mean of " + basis.runCount + (basis.runCount === 1 ? " run" : " runs") + " as a percent of " + rankingBaseName() + ". "
+                + (outsideParts ? "The hatched arc combines the two parts below. " : "The hatched arc shows the share outside the shown families, on the same base. ")
+                + "Select an arc for its stored value, with no whiskers on this ring."
                 : "Each slice compares a family's mean share across the available runs. The denominator is the credited family signal in each run; select a family to explore its pooled parts, with no whiskers on this ring." + fixedBaseLegend;
+            if (!state.drill && outsideParts) for (const part of outsideParts) {
+              const line = node("span", "ring-remainder-line", part.label + " ");
+              line.append(displayField(part.share));
+              $("composition-plain-legend").append(line);
+            }
             if (!f || !ordered.some((item) => val(ringMean(item)) !== null)) {
               document.querySelector(
                 'section[aria-labelledby="composition-title"]',
@@ -4176,7 +4187,8 @@
                 family,
               }));
               if (basis && exists(basis.outside)) items.push({
-                label: "Outside the shown families", share: basis.outside, fill: "url(#fq-outside)", outside: true,
+                label: outsideParts ? "Remainder of " + rankingBaseName() : "Outside the shown families",
+                share: basis.outside, fill: "url(#fq-outside)", outside: true,
               });
               $("composition-basis").textContent = basis
                 ? "Mean of " + basis.runCount + (basis.runCount === 1 ? " run" : " runs") + ". Percent of " + rankingBaseName() + "."
@@ -4199,12 +4211,14 @@
             items.forEach((item, i) => {
               const share = val(item.share) ?? 0;
               if (item.outside) {
-                const key = node("button", "quiet-button ring-outside-key");
-                key.append(node("span", "swatch"), node("span", "", item.label + " "), displayField(item.share));
-                key.querySelector(".swatch").style.background = "repeating-linear-gradient(135deg,var(--subtle) 0,var(--subtle) 3px,var(--muted) 3px,var(--muted) 4px)";
-                key.title = text(item.share) + " % of " + percentBase(item.share) + ". Open the exact share outside the shown families.";
-                key.onclick = () => popup(item.label, [node("p", "", "Percent of " + rankingBaseName()), field(item.share, "p")]);
-                $("composition-legend").append(key);
+                for (const part of outsideParts || [item]) {
+                  const key = node("button", "quiet-button ring-outside-key");
+                  key.append(node("span", "swatch"), node("span", "", part.label + " "), displayField(part.share));
+                  key.querySelector(".swatch").style.background = "repeating-linear-gradient(135deg,var(--subtle) 0,var(--subtle) 3px,var(--muted) 3px,var(--muted) 4px)";
+                  key.title = text(part.share) + " % of " + percentBase(part.share) + ". Open this exact remainder value; this changes only the report view.";
+                  key.onclick = () => popup(part.label, [node("p", "", "Percent of " + rankingBaseName()), field(part.share, "p")]);
+                  $("composition-legend").append(key);
+                }
               }
               if (!(share > 0) || !(total > 0)) return;
               const end = angle + (share / total) * Math.PI * 2,
@@ -4261,7 +4275,9 @@
               }
               const action = () => {
                 if (item.outside) {
-                  popup(item.label, [node("p", "", "Percent of " + rankingBaseName()), field(item.share, "p")]);
+                  const readings = [node("p", "", "Percent of " + rankingBaseName()), field(item.share, "p")];
+                  if (outsideParts) for (const part of outsideParts) readings.push(node("h4", "", part.label), field(part.share, "p"));
+                  popup(item.label, readings);
                   return;
                 }
                 if (item.part) {

@@ -90,6 +90,7 @@ namespace FamilyQuant
             sb.AppendLine("What the numbers mean at the top defines the reference totals and peptide features.");
             sb.AppendLine("Share rows use compact percentages. The chart heading names their reference total.");
             sb.AppendLine("Hover or select a value for its exact reading and base, including rounded ring totals.");
+            sb.AppendLine("The ring remainder under TIC or Isotope envelopes (measured) separates other families, shared and unattributed from the base not explained by PSM and de novo, in both legend and caption. The two parts keep the original remainder total; PSM bases keep one Outside the shown families line, as does an independent measured base that is smaller than the PSM and de novo signal.");
             sb.AppendLine("Family labels stop before database header fields; tooltips and details retain the full name.");
             sb.AppendLine("In File > Export, Family names chooses Name or Other-language name for report and Results labels.");
             sb.AppendLine("A blank other-language name keeps Name. Export applies the choice, Save keeps it in the project, and Undo does not change it.");
