@@ -18,7 +18,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` requires current VERIFIED receipts or authorized APPROVED_DROP decisions. Under D90, only for 2.1.11, an OPEN row is accepted only with the exact D88 reason and its ID listed in `docs/LEDGER-REVERIFY-2.1.11.md`. Listed rows remain OPEN and require verification after release. The normal quick suite permits OPEN rows during development. Preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1958**; OPEN retained rows: **3392**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1950**; OPEN retained rows: **3400**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -4040,14 +4040,14 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1958**; OPEN r
 | FQ15-2074AE04D745 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:458 | "one from a database with Run USearch." | render:01-home | OPEN | not re-proved for 2.1.11; receipts lost after 2.1.10; verify again after release |
 | FQ15-E1E6DB0BA001 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:459 | "Nothing to save" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-E1E6DB0BA001 |
 | FQ15-891E975B730E | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:465 | "FamilyClusterFile (*.fcf)&#124;*.fcf" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-891E975B730E |
-| FQ15-896FD56FF1F3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:466 | "Save the current families as a Family Cluster File" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-896FD56FF1F3 |
-| FQ15-29EB32BD76B6 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:476 | "The families were saved to\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-29EB32BD76B6 |
-| FQ15-8D6A1F9ED763 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:476 | "\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-8D6A1F9ED763 |
-| FQ15-91DF62AD5796 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:477 | "The file holds the grouping, your User IDs and your annotations. It does not hold the " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-91DF62AD5796 |
-| FQ15-1DA6DACF8438 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:478 | "quantitation: reopening it restores the families, and the percentages come back when " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-1DA6DACF8438 |
-| FQ15-63177F1FB3F4 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:479 | "you load a PatternLab project again.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-63177F1FB3F4 |
-| FQ15-4EF7F04BBFA8 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:480 | "Next step: nothing. Carry on working, or open this file later to return to exactly " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-4EF7F04BBFA8 |
-| FQ15-5165C52E6F76 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:481 | "this grouping." | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-5165C52E6F76 |
+| FQ15-896FD56FF1F3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:466 | "Save the current families as a Family Cluster File" | test:ShellMainMessageProbe | OPEN | pending: execution evidence missing or stale |
+| FQ15-29EB32BD76B6 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:476 | "The families were saved to\n" | test:ShellMainMessageProbe | OPEN | pending: execution evidence missing or stale |
+| FQ15-8D6A1F9ED763 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:476 | "\n\n" | test:ShellMainMessageProbe | OPEN | pending: execution evidence missing or stale |
+| FQ15-91DF62AD5796 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:477 | "The file holds the grouping, your User IDs and your annotations. It does not hold the " | test:ShellMainMessageProbe | OPEN | pending: execution evidence missing or stale |
+| FQ15-1DA6DACF8438 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:478 | "quantitation: reopening it restores the families, and the percentages come back when " | test:ShellMainMessageProbe | OPEN | pending: execution evidence missing or stale |
+| FQ15-63177F1FB3F4 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:479 | "you load a PatternLab project again.\n\n" | test:ShellMainMessageProbe | OPEN | pending: execution evidence missing or stale |
+| FQ15-4EF7F04BBFA8 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:480 | "Next step: nothing. Carry on working, or open this file later to return to exactly " | test:ShellMainMessageProbe | OPEN | pending: execution evidence missing or stale |
+| FQ15-5165C52E6F76 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:481 | "this grouping." | test:ShellMainMessageProbe | OPEN | pending: execution evidence missing or stale |
 | FQ15-003CB3619980 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:482 | "Saved" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-003CB3619980 |
 | FQ15-823926A0CCF5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:487 | "The file could not be written, so nothing was saved.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-823926A0CCF5 |
 | FQ15-92991B8F6A93 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:488 | "Reason given by the program: " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-92991B8F6A93 |

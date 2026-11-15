@@ -12,7 +12,7 @@ in [the catalog](docs/INDEX.md). No historical version heading is changed by thi
 - **One name per base.** The bases are now called PSM only, PSM and de novo, Isotope envelopes (measured), Isotope envelopes (measured and identified) and TIC, the same in Normalize to, the charts, the Signal recovery cards, Results and Help. Under TIC, the part outside the shown families is split into peptide signal outside them and signal not explained by PSM and de novo.
 - **Log-log diversity chart.** The HTML report's abundance against database-protein diversity chart uses logarithmic axes; zero values sit on the axis floor with their own mark.
 
-**Feature ledger.** @LEDGER@
+**Feature ledger.** 1,950 checks proved for 2.1.20. The 8 rows that pinned the old Export > Families save message, replaced on purpose by Save families as (.fcf), stay open to verify again, listed in [docs/LEDGER-REVERIFY-2.1.20.md](docs/LEDGER-REVERIFY-2.1.20.md); the 4 Families counter rows changed on purpose in 2.1.16 stay open as before.
 
 ## 2.1.19 (published 2026-11-14)
 
