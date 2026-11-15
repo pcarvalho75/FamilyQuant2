@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FamilyQuant;
 
@@ -26,7 +27,9 @@ public static class StoredCompositionFigures
         if (partition != null) means = StoredCompositionChartData.WithContaminants(means, partition.Contaminants);
         var displayedPooled = pooled != null && partition != null ? StoredCompositionChartData.WithContaminants(pooled, partition.Contaminants) : pooled;
         var figures = FamilyCompositionFigures.Build(means, displayedPooled);
-        if (manifest.FamilyRunShares != null) figures.Add(FamilyCompositionFigures.BuildAbundanceDiversity(means));
+        if (manifest.FamilyRunShares != null)
+            figures.Add(FamilyCompositionFigures.BuildAbundanceDiversity(new(means.Families.Where(row => row.Key != "contaminants"),
+                means.Basis, means.IsMeanOfRuns, means.UnavailableFamilies)));
         if (pooled != null && grouping != null) figures.Add(FamilyCompositionFigures.BuildRing(pooled, grouping));
         if (manifest.FamilyPeptideLocalization != null && project != null)
             figures.AddRange(ProteinCoverageFigures.FromStored(manifest.FamilyPeptideLocalization, project));

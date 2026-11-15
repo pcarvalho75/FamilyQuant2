@@ -92,7 +92,7 @@ public static class ReportStoredResults
         if (manifest.FamilyProteinCounts is { } counts)
         {
             Remove("protein-counts-unavailable");
-            string csv = ReportStudyExports.ProteinCounts(counts, familyLabels);
+            string csv = ReportStudyExports.ProteinCounts(counts, familyLabels, grouping);
             results.Add(Table("protein-counts", "Proteins needed to explain the peptides (greedy estimate)", "family_protein_counts.csv", csv,
                 "Database-protein diversity across all assigned peptides. Greedy set cover is an approximation; proteins with a peptide of their own use database-wide uniqueness. A partial explanation retains its unexplained peptides. These are not gene or proteoform counts.",
                 new[] { "family", "greedy_protein_estimate", "unique_peptide_proteins", "unexplained_peptides", "explanation" },

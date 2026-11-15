@@ -119,6 +119,31 @@ internal static partial class Program
             Check("CT1 family share table contains only the grouped contaminant signal " + csv, projected.Rows.All(item => item[ids] is not ("1" or "2"))
                 && projected.Rows.Count(item => item[names] == "contaminants") == (csv == "family_run_shares.csv" ? 2 : 1));
         }
+        var listed = FamilyReportThreshold.Build(manifest.FamilyRunShares!, file).ListedFamilies
+            .Select(family => family.FamilyUserId.ToString(CultureInfo.InvariantCulture)).ToHashSet(StringComparer.Ordinal);
+        var countTable = ReportCsvTable.Build("ct-counts", "Counts", export.CsvExports["family_protein_counts.csv"], "");
+        Check("CT3 protein-count CSV contains exactly the ranked families including the mixed family",
+            listed.SetEquals(countTable.Rows.Select(item => item[0])) && listed.Contains("3"));
+        var originalCounts = ReportCsvTable.Build("ct-original-counts", "Counts", ReportStudyExports.ProteinCounts(manifest.FamilyProteinCounts!, labels), "");
+        Check("CT3 every kept protein-count CSV row is unchanged", countTable.Rows.Where(item => listed.Contains(item[0]))
+            .All(item => item.SequenceEqual(originalCounts.Rows.Single(original => original[0] == item[0]))));
+        var wordCounts = export.Document.Sections.SelectMany(section => section.Blocks).OfType<ReportTable>().Single(item => item.Id == "protein-counts");
+        Check("CT3 Word diversity table contains exactly ranked family names", wordCounts.Rows.Select(item => item[0]).ToHashSet(StringComparer.Ordinal)
+            .SetEquals(listed.Select(id => labels[int.Parse(id, CultureInfo.InvariantCulture)])));
+        Check("CT3 workbook diversity table contains exactly ranked families", export.SupplementSheets.Single(sheet => sheet.Id == "protein-counts")
+            .Table.Rows.Select(item => item[0]).ToHashSet(StringComparer.Ordinal).SetEquals(listed.Select(id => labels[int.Parse(id, CultureInfo.InvariantCulture)])));
+        var diversity = payload.FamilyFigures.Figures.Single(figure => figure.Kind == "diversity");
+        Check("CT3 every HTML diversity base contains exactly ranked families", diversity.Views.Values.All(view => listed.SetEquals(view.Rows.Select(item => item.Key))));
+        var reportDiversity = ReportStudyFigures.Plan(manifest, file).Figures.Select(figure => figure.Plot.Chart).OfType<FamilyAbundanceDiversityChart>().Single();
+        Check("CT3 Word figure diversity contains exactly ranked families", listed.SetEquals(reportDiversity.Data.Families.Select(item => item.Key))
+            && listed.SetEquals(reportDiversity.Points.Select(item => item.Key)));
+        var resultsDiversity = model.BuildCompositionFigures(strict: true).Select(figure => figure.Chart).OfType<FamilyAbundanceDiversityChart>().Single();
+        Check("CT3 Results diversity contains exactly ranked families", listed.SetEquals(resultsDiversity.Data.Families.Select(item => item.Key))
+            && listed.SetEquals(resultsDiversity.Points.Select(item => item.Key)));
+        Check("CT3 kept diversity means and protein counts are unchanged", resultsDiversity.Points.Concat(reportDiversity.Points).All(point =>
+            point.SharePercent == manifest.FamilyRunShares.Families.Single(family => family.FamilyUserId.ToString(CultureInfo.InvariantCulture) == point.Key).MeanShare * 100
+            && point.ProteinCount == manifest.FamilyProteinCounts!.Families.Single(family => family.FamilyUserId.ToString(CultureInfo.InvariantCulture) == point.Key).GreedyProteinCount));
+        ContaminantDiversityProjectionCases(file, manifest, labels);
         Check("CT1 grouping does not mutate stored quantitation", source == JsonSerializer.Serialize(manifest) && quant == JsonSerializer.Serialize(rows));
         Check("CT1 HTML values trace to the emitted Word and workbook", ReportNumberTrace.RunHtmlBindings(payload, word,
             ReportSupplementWorkbook.PathForReport(word), file, manifest, Path.Combine(output, "trace.csv")) == 0);
@@ -151,5 +176,44 @@ internal static partial class Program
         }
         finally { Themes.ThemeManager.Apply(previousTheme); }
         CaptureHtmlReportScreens(Path.Combine(output, "screens"), payload, "families");
+    }
+
+    private static void ContaminantDiversityProjectionCases(FamilyClusterFile file, QuantManifest manifest, IReadOnlyDictionary<int, string> labels)
+    {
+        file.ReportThreshold = .3;
+        try
+        {
+            var grouping = FamilyReportThreshold.Build(manifest.FamilyRunShares!, file);
+            var othersIds = grouping.OtherFamilies.Select(family => family.FamilyUserId).ToHashSet();
+            var counts = manifest.FamilyProteinCounts!.Families.Where(family => othersIds.Contains(family.FamilyUserId)).ToArray();
+            var diversity = ReportStudyFigures.Plan(manifest, file).Figures.Select(figure => figure.Plot.Chart).OfType<FamilyAbundanceDiversityChart>().Single();
+            var others = diversity.Points.SingleOrDefault(point => point.Key == "others");
+            Check("CT3 canonical Others retains its existing combined share and union greedy count", othersIds.SetEquals(new[] { 3, 5 })
+                && others?.ProteinCount == counts.SelectMany(family => family.SelectedProteinIdentifiers).Distinct(StringComparer.Ordinal).Count()
+                && others.SharePercent == grouping.OthersAssignedStatistics.Mean * 100
+                && diversity.Points.Select(point => point.Key).ToHashSet(StringComparer.Ordinal).SetEquals(new[] { "4", "others" }));
+            var csv = ReportCsvTable.Build("ct-threshold-counts", "Counts", ReportStudyExports.ProteinCounts(manifest.FamilyProteinCounts, labels, grouping), "");
+            Check("CT3 native count CSV retains its old non-contaminant Others-member rows", csv.Rows.Select(row => row[0]).ToHashSet(StringComparer.Ordinal)
+                .SetEquals(new[] { "3", "4", "5" }));
+        }
+        finally { file.ReportThreshold = null; }
+
+        var panel = EffectivePanelFixture();
+        var contaminant = panel.File.MyExtendedFastaItems.Single(protein => protein.UserID == 33);
+        contaminant.SequenceIdentifier = "contaminant_" + contaminant.SequenceIdentifier;
+        panel.File.PanelProteinAssignments!.Single(assignment => assignment.FamilyUserId == 33).Identifier = contaminant.SequenceIdentifier;
+        panel = PrepareEffectivePanelFixture(panel.File, panel.Rows);
+        EffectivePanelFamilyStudy.Store(panel.Manifest, panel.Assigned, panel.Hits, panel.File);
+        var basis = ReportCompositionBasis.Select(panel.File, panel.Manifest);
+        string stored = JsonSerializer.Serialize(panel.Manifest);
+        var effective = ReportStudyFigures.PlanForBasis(panel.Manifest, panel.File, basis).Figures.Select(figure => figure.Plot.Chart)
+            .OfType<FamilyAbundanceDiversityChart>().Single();
+        var expected = basis.Grouping!.ListedFamilies.Select(family => family.FamilyUserId.ToString(CultureInfo.InvariantCulture)).ToHashSet(StringComparer.Ordinal);
+        Check("CT3 effective panel diversity omits the contaminant-only collapsed family", !basis.IsIdentity
+            && basis.Grouping.Contaminants.Families.Count == 1 && expected.SetEquals(effective.Data.Families.Select(row => row.Key)));
+        Check("CT3 effective panel diversity keeps every stored count and mean", effective.Points.All(point =>
+            point.ProteinCount == basis.Studies.FamilyProteinCounts!.Families.Single(count => count.FamilyUserId.ToString(CultureInfo.InvariantCulture) == point.Key).GreedyProteinCount
+            && point.SharePercent == basis.Studies.FamilyRunShares!.Families.Single(family => family.FamilyUserId.ToString(CultureInfo.InvariantCulture) == point.Key).MeanShare * 100)
+            && stored == JsonSerializer.Serialize(panel.Manifest));
     }
 }

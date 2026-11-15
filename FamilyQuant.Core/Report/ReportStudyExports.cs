@@ -152,14 +152,19 @@ public static class ReportStudyExports
         return Csv(new[] { "family_user_id", "family", "pooled_pct", "run_mean_pct", "pooled_minus_mean_percentage_points", "pooled_fraction", "run_mean_fraction", "pooled_minus_mean_fraction" }, rows);
     }
 
-    public static string ProteinCounts(FamilyProteinCountsResult result, IReadOnlyDictionary<int, string> labels) => Csv(
-        new[] { "family_user_id", "family", "greedy_protein_estimate", "unique_peptide_proteins", "observed_peptides", "explained_peptides", "unexplained_peptides", "explanation", "selected_protein_identifiers", "unexplained_sequences" },
-        result.Families.OrderBy(f => f.FamilyUserId).Select(f => (IReadOnlyList<string>)new[]
-        {
-            Integer(f.FamilyUserId), Label(f.FamilyUserId, labels), Integer(f.GreedyProteinCount), Integer(f.UniquePeptideProteinCount),
-            Integer(f.ObservedPeptideCount), Integer(f.ExplainedPeptideCount), Integer(f.UnexplainedPeptides.Count),
-            f.ExplainsAllObservedPeptides ? "Complete" : "Partial", string.Join("; ", f.SelectedProteinIdentifiers), string.Join("; ", f.UnexplainedPeptides),
-        }));
+    public static string ProteinCounts(FamilyProteinCountsResult result, IReadOnlyDictionary<int, string> labels,
+        FamilyReportThresholdResult? grouping = null)
+    {
+        var contaminants = grouping?.Contaminants.Families.Select(f => f.FamilyUserId).ToHashSet();
+        return Csv(
+            new[] { "family_user_id", "family", "greedy_protein_estimate", "unique_peptide_proteins", "observed_peptides", "explained_peptides", "unexplained_peptides", "explanation", "selected_protein_identifiers", "unexplained_sequences" },
+            result.Families.Where(f => contaminants?.Contains(f.FamilyUserId) != true).OrderBy(f => f.FamilyUserId).Select(f => (IReadOnlyList<string>)new[]
+            {
+                Integer(f.FamilyUserId), Label(f.FamilyUserId, labels), Integer(f.GreedyProteinCount), Integer(f.UniquePeptideProteinCount),
+                Integer(f.ObservedPeptideCount), Integer(f.ExplainedPeptideCount), Integer(f.UnexplainedPeptides.Count),
+                f.ExplainsAllObservedPeptides ? "Complete" : "Partial", string.Join("; ", f.SelectedProteinIdentifiers), string.Join("; ", f.UnexplainedPeptides),
+            }));
+    }
 
     public static string Parts(IEnumerable<FamilySignalBreakdown> families, IReadOnlyDictionary<int, string> labels) => Csv(
         new[] { "family_user_id", "family", "part_key", "part", "unresolved", "pooled_family_signal", "pooled_part_signal", "within_family_pct", "within_family_fraction" },
