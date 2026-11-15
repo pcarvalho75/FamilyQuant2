@@ -20,8 +20,8 @@ internal static partial class Program
             && model.Details.Contains("PTM-aware peptidoform and charge") && model.Details.Contains("NOT quantified")
             && model.Details.Contains("No Family Cluster File is open") && model.Details.Contains("before cross-side suppression"));
         Check("the headline explicitly labels measured-envelope recovery and its RAW TIC denominator",
-            model.Cards[0].Title == "Measured envelope recovery" && model.Cards[0].Detail.Contains("measured envelope")
-            && model.Cards[0].Detail.Contains("RAW TIC"));
+            model.Cards[0].Title == "Isotope envelopes (measured and identified) / TIC"
+            && model.Cards[0].Detail.Contains("measured envelope") && model.Cards[0].Detail.Contains("RAW TIC"));
         Check("Results keeps its original exports and adds the two evidence-dependent Database gap choices", model.CanExport
             && Enum.GetValues<ResultsExportKind>().Length == 7
             && new[] { ResultsExportKind.Summary, ResultsExportKind.Peptides, ResultsExportKind.Figures, ResultsExportKind.EvidencePack,
