@@ -83,8 +83,8 @@ Ana's deck `FamilyQuant_V19.pptx` (11-14, 10 slides on 2.1.19). Slide 3 is the t
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---|---:|---|---|---|---|---|---:|---:|---:|
 | RL11 | The candidate: CT1, CT3, FS1, RS1, TM1, WD1 and LG1 merged after their reviews, version bump on the 31 lines of the 2.1.19 bump (0d670131), notes, ledger refresh, the full suite once (shards that crash in the browser helper rerun alone) | M | 1.0 | CT1, CT3, FS1, RS1, TM1, WD1, LG1 | RL12 | Suite line: 0 failed | Orchestrator | Orchestrator | 0 | 0 |  |
-| RL12 | Package (FQDeNovo, P10), publish as Latest, README, merge into master and push | M | 0.8 | RL11, CT2 | AQ5, SI4 | Published; digests match; offline 2.1.19 -> 2.1.20 | Orchestrator | Orchestrator | 0 | 0 |  |
-| SI4 | The staged website folder (familyquant-2.1.19, not yet uploaded) names 2.1.20 and, in one line, the contaminants row; the upload list follows | L | 0.2 | RL12 |  | Folder and list checked by the desk | DN | FQDeNovo | 0 | 0 |  |
+| RL12 | Package (FQDeNovo, P10), publish as Latest, README, merge into master and push | M | 0.8 | RL11, CT2 | AQ5 | Published; digests match; offline 2.1.19 -> 2.1.20 | Orchestrator | Orchestrator | 0 | 0 |  |
+| SI4 | The staged website folder (familyquant-2.1.19, not yet uploaded) names 2.1.20 and, in one line, the contaminants row; the upload list follows | L | 0.2 | CT1, TM1 |  | Folder and list checked by the desk | SM | FQSimple | 0 | 0 |  |
 | AQ5 | Folded into AQ6 (the deck answers the trypsin too) | L | 0.1 | AQ6 |  | AQ6 done | Orchestrator | Orchestrator | 0 | 0 |  |
 | AP5 | Carried. Delivery into `AnaG/Bjararaca/Relatorio`, on Paulo's word (rule 8) | L | 0.2 |  |  | Her other files unchanged by hash | Orchestrator | Paulo | 0 | 0 |  |
 
