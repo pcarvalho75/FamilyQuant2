@@ -123,7 +123,8 @@ public static partial class ReportStudyFigures
             Add(FamilyCompositionFigures.BuildRing(ringData, FamilyRingGrouping.FromReportThreshold(threshold)), "Family and subclass ring, all runs pooled");
         else Missing("Family and subclass ring", "Stored pooled subclass parts and mean per-run shares are required for the ring and Others membership.");
         if (means is { Families.Count: > 0 } && composition.FamilyProteinCounts != null)
-            Add(FamilyCompositionFigures.BuildAbundanceDiversity(means), "Abundance against database-protein diversity");
+            Add(FamilyCompositionFigures.BuildAbundanceDiversity(Copy(means, means.Families.Where(row => row.Key != "contaminants"))),
+                "Abundance against database-protein diversity");
         else Missing("Abundance against diversity", "Stored per-run family shares and database-protein counts are required.");
 
         var world = manifest.FamilyWorldResult?.ForLength(manifest.DatabaseGapMinimumTagLength ?? FamilyWorldOptions.DefaultMinimumTagLength);
