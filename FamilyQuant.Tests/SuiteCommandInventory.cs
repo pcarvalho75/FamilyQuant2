@@ -503,6 +503,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-html-recovery-explanations", "FamilyQuant.Tests.Program.HtmlRecoveryExplanationTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-ring-bases", "FamilyQuant.Tests.Program.HtmlRingBasesTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-ring-remainder", "FamilyQuant.Tests.Program.HtmlRingRemainderTests(System.String)"),
+        SuiteCommandRule.Covered("--test-html-diversity-log", "FamilyQuant.Tests.Program.HtmlDiversityLogTests(System.String)"),
         SuiteCommandRule.Covered("--test-mass-range-recovery", "FamilyQuant.Tests.Program.MassRangeRecoveryTests(System.String)", "FamilyQuant.Tests.Program.HtmlMassQualityTests(System.String)"),
         SuiteCommandRule.Covered("--test-html-report-words", "FamilyQuant.Tests.Program.HtmlReportWordsTests(System.String)"),
         SuiteCommandRule.Covered("--test-report-family-names", "FamilyQuant.Tests.Program.ReportFamilyNameTests(System.String)"),
